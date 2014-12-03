@@ -1,0 +1,1 @@
+/home/leviathan/git/minemonics/Minemonics/src/build/CMakeFiles/OgreApp.dir
