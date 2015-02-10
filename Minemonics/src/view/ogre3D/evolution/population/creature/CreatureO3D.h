@@ -8,6 +8,8 @@
 #ifndef CREATUREO3D_H_
 #define CREATUREO3D_H_
 
+#include <model/evolution/population/creature/Creature.h>
+
 class CreatureO3D: public Creature {
 public:
 	CreatureO3D();
