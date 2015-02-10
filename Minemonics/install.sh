@@ -48,7 +48,7 @@ sudo ldconfig
 
 cd ..
 
-#ogrebullet 
+# ogrebullet 
 echo "This part is currently not working..."
 exit
 cd ogrebullet-r2988
