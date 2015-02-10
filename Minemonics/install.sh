@@ -33,8 +33,24 @@ sudo ldconfig
 
 cd ..
 
+# Shark Machine Learning for Evolutionary Algorithms
+# According to: http://shark-project.sourceforge.net/GettingStarted.html
+sudo apt-get install libboost-all-dev # from http://ubuntuforums.org/showthread.php?t=1725216
+mkdir Shark
+cd Shark
+svn co https://svn.code.sf.net/p/shark-project/code/
+mkdir cmake
+cd cmake
+cmake ..
+make -j4 # because I have 4 cores for parallel compilation
+sudo make install
+sudo ldconfig
+
+cd ..
+
 #ogrebullet 
-cd --not working
+echo "This part is currently not working..."
+exit
 cd ogrebullet-r2988
 
 #patch some files
