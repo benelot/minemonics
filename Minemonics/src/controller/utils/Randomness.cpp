@@ -15,7 +15,7 @@
 
 Randomness::Randomness() {
 	/* initialize random seed: */
-	srand (time(NULL));
+	srand(time(NULL));
 
 }
 
@@ -23,31 +23,21 @@ Randomness::~Randomness() {
 	// TODO Auto-generated destructor stub
 }
 
-/*
- * This method returns a random double between and including the limits.
- *
- * @param lowerLimit
- * @param upperLimit
- * @return
+/**
+ * Get a random double which is limited by a lower and an upper limit. This is done by taking a random number
+ *  between 0 and 1 and by multiplying it with the difference between upper and lower limit.
+ *  Then we add the lower limit to it and get a number between the limits.
  */
-double Randomness::nextDouble(double lowerLimit, double upperLimit)
-{
-	return lowerLimit + (((double)rand())/((double)RAND_MAX)*(upperLimit - lowerLimit));
+double Randomness::nextDouble(double lowerLimit, double upperLimit) {
+	return lowerLimit
+			+ (((double) rand()) / ((double) RAND_MAX)
+					* (upperLimit - lowerLimit));
 }
 
-/**
- * This method returns a random integer between and including the limits.
-*
-* @param lowerLimit
-* @param upperLimit
-* @return
-*/
-int Randomness::nextPosInt(int lowerLimit, int upperLimit)
-{
-	if (upperLimit == 0)
-	{
+int Randomness::nextPosInt(int lowerLimit, int upperLimit) {
+	if (upperLimit == 0) {
 		return 0;
 	}
 	// 1+ is necessary for the upperlimit to be reached
-	return lowerLimit + floor(rand()%(1 + upperLimit - lowerLimit));
+	return lowerLimit + floor(rand() % (1 + upperLimit - lowerLimit));
 }
