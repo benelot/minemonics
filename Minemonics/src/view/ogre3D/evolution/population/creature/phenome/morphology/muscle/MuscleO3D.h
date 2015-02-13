@@ -8,7 +8,7 @@
 #ifndef MUSCLEO3D_H_
 #define MUSCLEO3D_H_
 
-#include <model/evolution/population/creature/phenome/morphology/muscle/Muscle.h>
+#include "model/evolution/population/creature/phenome/morphology/muscle/Muscle.h"
 
 class MuscleO3D: public Muscle {
 public:

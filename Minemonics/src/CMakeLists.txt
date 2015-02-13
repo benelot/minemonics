@@ -39,6 +39,7 @@ if(UNIX)
 	else ()
 	  message(SEND_ERROR "Failed to find module path.")
 	endif(EXISTS "/usr/local/lib/OGRE")
+	set(PROJECT_HOME .)
 endif(UNIX)
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
@@ -52,6 +53,20 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
  
 find_package(OGRE REQUIRED)
+
+# USERADDED for terrain usage
+# Add OgreTerrain.{so,dll,etc.} to our linked libraries
+#   These variables are defined in FindOGRE.cmake, mine is
+#   found at /usr/local/lib/OGRE/cmake/
+if (OGRE_Terrain_FOUND)
+# pretty sure the following include is unneeded
+  # include_directories(${OGRE_Terrain_INCLUDE_DIRS})
+# append OgreTerrain to the end of the OGRE_LIBRARIES variable
+  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Terrain_LIBRARIES})  
+  message(STATUS "Found OGRE_Terrain: ${OGRE_Terrain_LIBRARIES}")
+else (OGRE_Terrain_FOUND)
+  message(SEND_ERROR "OgreTerrain Library not found.")
+endif(OGRE_Terrain_FOUND)
  
 #if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
 #  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
@@ -93,21 +108,31 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	add_definitions(-DBOOST_ALL_NO_LIB)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
- 
+
+#DEVELOPMENT INPUT
+# Append header files here
 set(HDRS
 	./BaseApplication.h
-	./TutorialApplication.h
+	./MinemonicsApplication.h
+	./view/ogre3D/evolution/environments/HillsO3D.h
+	./view/general/evolution/environments/Hills.h
+	./view/general/evolution/environments/Environment.h
 )
- 
+
+# Append source files here
 set(SRCS
 	./BaseApplication.cpp
-	./TutorialApplication.cpp
+	./MinemonicsApplication.cpp
+	./view/ogre3D/evolution/environments/HillsO3D.cpp
+	./view/general/evolution/environments/Hills.cpp
+	./view/general/evolution/environments/Environment.cpp
 )
  
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 	${OGRE_Overlay_INCLUDE_DIRS}
+	${PROJECT_HOME}
 )
  
 add_executable(OgreApp WIN32 ${HDRS} ${SRCS})

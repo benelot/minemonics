@@ -1,0 +1,82 @@
+
+/* Cel shading vertex program for single-pass rendering
+   In this program, we want to calculate the diffuse and specular
+   ramp components, and the edge factor (for doing simple outlining)
+   For the outlining to look good, we need a pretty well curved model.
+*/
+void main_vp(float4 position	: POSITION,
+			 float3 normal		: NORMAL,
+			 // outputs
+			 out float4 oPosition : POSITION,
+			 out float  diffuse		 : TEXCOORD0,
+			 out float  specular	 : TEXCOORD1,
+			 out float  edge		 : TEXCOORD2,
+			 // parameters
+			 uniform float3 lightPosition, // object space
+			 uniform float3 eyePosition,   // object space
+			 uniform float4  shininess,
+			 uniform float4x4 worldViewProj)
+{
+	// calculate output position
+	oPosition = mul(worldViewProj, position);
+
+	// calculate light vector
+	float3 N = normalize(normal);
+	float3 L = normalize(lightPosition - position.xyz);
+	
+	// Calculate diffuse component
+	diffuse = max(dot(N, L) , 0);
+
+	// Calculate specular component
+	float3 E = normalize(eyePosition - position.xyz);
+	float3 H = normalize(L + E);
+	specular = pow(max(dot(N, H), 0), shininess);
+	// Mask off specular if diffuse is 0
+	if (diffuse == 0) specular = 0;
+
+	// Edge detection, dot eye and normal vectors
+	edge = max(dot(N, E), 0);
+}
+
+void main_fp( float4 position	: POSITION,
+			 float diffuseIn 	: TEXCOORD0,
+			 float specularIn	: TEXCOORD1,
+			 float edge		: TEXCOORD2,
+			 
+			 out float4 colour	: COLOR,
+			 
+			 uniform float4 diffuse,
+			 uniform float4 specular,
+			 
+// It`s not enough to compile this shader for HLSL SM4 using compatibility mode as sampler1D declares Texture2D reference.
+// Explicit declaration of Texture1D is required to avoid mismatching between declared and actual texture type.
+#if HLSL_SM4
+			 uniform Texture1D diffuseRamp,
+			 uniform SamplerState diffuseRampSS,
+			 uniform Texture1D specularRamp,
+			 uniform SamplerState specularRampSS,
+			 uniform Texture1D edgeRamp,
+			 uniform SamplerState edgeRampSS
+#else
+			 uniform sampler1D diffuseRamp,
+			 uniform sampler1D specularRamp,
+			 uniform sampler1D edgeRamp
+#endif
+)
+{
+	// Step functions from textures
+#if HLSL_SM4
+	diffuseIn = diffuseRamp.Sample(diffuseRampSS, diffuseIn).x;
+	specularIn = specularRamp.Sample(specularRampSS, specularIn).x;
+	edge = edgeRamp.Sample(edgeRampSS, edge).x;
+#else
+	diffuseIn = tex1D(diffuseRamp, diffuseIn).x;
+	specularIn = tex1D(specularRamp, specularIn).x;
+	edge = tex1D(edgeRamp, edge).x;
+#endif
+
+	colour = edge * ((diffuse * diffuseIn) + 
+					(specular * specularIn));
+}
+			 
+			 

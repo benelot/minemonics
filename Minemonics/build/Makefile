@@ -179,29 +179,101 @@ BaseApplication.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/BaseApplication.cpp.s
 .PHONY : BaseApplication.cpp.s
 
-TutorialApplication.o: TutorialApplication.cpp.o
-.PHONY : TutorialApplication.o
+MinemonicsApplication.o: MinemonicsApplication.cpp.o
+.PHONY : MinemonicsApplication.o
 
 # target to build an object file
-TutorialApplication.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o
-.PHONY : TutorialApplication.cpp.o
+MinemonicsApplication.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/MinemonicsApplication.cpp.o
+.PHONY : MinemonicsApplication.cpp.o
 
-TutorialApplication.i: TutorialApplication.cpp.i
-.PHONY : TutorialApplication.i
+MinemonicsApplication.i: MinemonicsApplication.cpp.i
+.PHONY : MinemonicsApplication.i
 
 # target to preprocess a source file
-TutorialApplication.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/TutorialApplication.cpp.i
-.PHONY : TutorialApplication.cpp.i
+MinemonicsApplication.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/MinemonicsApplication.cpp.i
+.PHONY : MinemonicsApplication.cpp.i
 
-TutorialApplication.s: TutorialApplication.cpp.s
-.PHONY : TutorialApplication.s
+MinemonicsApplication.s: MinemonicsApplication.cpp.s
+.PHONY : MinemonicsApplication.s
 
 # target to generate assembly for a file
-TutorialApplication.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/TutorialApplication.cpp.s
-.PHONY : TutorialApplication.cpp.s
+MinemonicsApplication.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/MinemonicsApplication.cpp.s
+.PHONY : MinemonicsApplication.cpp.s
+
+view/general/evolution/environments/Environment.o: view/general/evolution/environments/Environment.cpp.o
+.PHONY : view/general/evolution/environments/Environment.o
+
+# target to build an object file
+view/general/evolution/environments/Environment.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Environment.cpp.o
+.PHONY : view/general/evolution/environments/Environment.cpp.o
+
+view/general/evolution/environments/Environment.i: view/general/evolution/environments/Environment.cpp.i
+.PHONY : view/general/evolution/environments/Environment.i
+
+# target to preprocess a source file
+view/general/evolution/environments/Environment.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Environment.cpp.i
+.PHONY : view/general/evolution/environments/Environment.cpp.i
+
+view/general/evolution/environments/Environment.s: view/general/evolution/environments/Environment.cpp.s
+.PHONY : view/general/evolution/environments/Environment.s
+
+# target to generate assembly for a file
+view/general/evolution/environments/Environment.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Environment.cpp.s
+.PHONY : view/general/evolution/environments/Environment.cpp.s
+
+view/general/evolution/environments/Hills.o: view/general/evolution/environments/Hills.cpp.o
+.PHONY : view/general/evolution/environments/Hills.o
+
+# target to build an object file
+view/general/evolution/environments/Hills.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Hills.cpp.o
+.PHONY : view/general/evolution/environments/Hills.cpp.o
+
+view/general/evolution/environments/Hills.i: view/general/evolution/environments/Hills.cpp.i
+.PHONY : view/general/evolution/environments/Hills.i
+
+# target to preprocess a source file
+view/general/evolution/environments/Hills.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Hills.cpp.i
+.PHONY : view/general/evolution/environments/Hills.cpp.i
+
+view/general/evolution/environments/Hills.s: view/general/evolution/environments/Hills.cpp.s
+.PHONY : view/general/evolution/environments/Hills.s
+
+# target to generate assembly for a file
+view/general/evolution/environments/Hills.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Hills.cpp.s
+.PHONY : view/general/evolution/environments/Hills.cpp.s
+
+view/ogre3D/evolution/environments/HillsO3D.o: view/ogre3D/evolution/environments/HillsO3D.cpp.o
+.PHONY : view/ogre3D/evolution/environments/HillsO3D.o
+
+# target to build an object file
+view/ogre3D/evolution/environments/HillsO3D.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/HillsO3D.cpp.o
+.PHONY : view/ogre3D/evolution/environments/HillsO3D.cpp.o
+
+view/ogre3D/evolution/environments/HillsO3D.i: view/ogre3D/evolution/environments/HillsO3D.cpp.i
+.PHONY : view/ogre3D/evolution/environments/HillsO3D.i
+
+# target to preprocess a source file
+view/ogre3D/evolution/environments/HillsO3D.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/HillsO3D.cpp.i
+.PHONY : view/ogre3D/evolution/environments/HillsO3D.cpp.i
+
+view/ogre3D/evolution/environments/HillsO3D.s: view/ogre3D/evolution/environments/HillsO3D.cpp.s
+.PHONY : view/ogre3D/evolution/environments/HillsO3D.s
+
+# target to generate assembly for a file
+view/ogre3D/evolution/environments/HillsO3D.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/HillsO3D.cpp.s
+.PHONY : view/ogre3D/evolution/environments/HillsO3D.cpp.s
 
 # Help Target
 help:
@@ -219,9 +291,18 @@ help:
 	@echo "... BaseApplication.o"
 	@echo "... BaseApplication.i"
 	@echo "... BaseApplication.s"
-	@echo "... TutorialApplication.o"
-	@echo "... TutorialApplication.i"
-	@echo "... TutorialApplication.s"
+	@echo "... MinemonicsApplication.o"
+	@echo "... MinemonicsApplication.i"
+	@echo "... MinemonicsApplication.s"
+	@echo "... view/general/evolution/environments/Environment.o"
+	@echo "... view/general/evolution/environments/Environment.i"
+	@echo "... view/general/evolution/environments/Environment.s"
+	@echo "... view/general/evolution/environments/Hills.o"
+	@echo "... view/general/evolution/environments/Hills.i"
+	@echo "... view/general/evolution/environments/Hills.s"
+	@echo "... view/ogre3D/evolution/environments/HillsO3D.o"
+	@echo "... view/ogre3D/evolution/environments/HillsO3D.i"
+	@echo "... view/ogre3D/evolution/environments/HillsO3D.s"
 .PHONY : help
 
 
