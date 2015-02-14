@@ -113,19 +113,52 @@ endif()
 # Append header files here
 set(HDRS
 	./BaseApplication.h
-	./MinemonicsApplication.h
+	./SimulationManager.h
+	./view/ogre3D/evolution/environments/OpenSeaO3D.h
+	./view/ogre3D/evolution/environments/PlaneO3D.h
 	./view/ogre3D/evolution/environments/HillsO3D.h
-	./view/general/evolution/environments/Hills.h
 	./view/general/evolution/environments/Environment.h
+	./view/general/evolution/environments/OpenSea.h
+	./view/general/evolution/environments/Hills.h
+	./view/general/evolution/environments/Plane.h
+	./configuration/ApplicationConfiguration.h
+	./configuration/CameraConfiguration.h
+	./configuration/PhysicsConfiguration.h
+	./configuration/NeuronalNetworkConfiguration.h
+	./configuration/CreatureConfiguration.h
+	./configuration/GeneticsConfiguration.h
+	./configuration/FitnessConfiguration.h
+	./configuration/EnvironmentConfiguration.h
+	./configuration/EvolutionConfiguration.h
+	./controller/camera/CameraHandler.h
+	./controller/input/MouseHandler.h
+	./controller/input/KeyboardHandler.h
+	./model/settings/GeneticAlgorithmSettings.h
+	./model/settings/PhysicsSettings.h
+	./model/settings/EnvironmentSettings.h
+	./model/settings/MorphologySettings.h
+	./model/settings/ControlSettings.h
 )
 
 # Append source files here
 set(SRCS
 	./BaseApplication.cpp
-	./MinemonicsApplication.cpp
+	./SimulationManager.cpp
 	./view/ogre3D/evolution/environments/HillsO3D.cpp
-	./view/general/evolution/environments/Hills.cpp
+	./view/ogre3D/evolution/environments/PlaneO3D.cpp
+	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
+	./view/general/evolution/environments/Plane.cpp
 	./view/general/evolution/environments/Environment.cpp
+	./view/general/evolution/environments/Hills.cpp
+	./view/general/evolution/environments/OpenSea.cpp
+	./controller/camera/CameraHandler.cpp
+	./controller/input/MouseHandler.cpp
+	./controller/input/KeyboardHandler.cpp
+	./model/settings/ControlSettings.cpp
+	./model/settings/MorphologySettings.cpp
+	./model/settings/GeneticAlgorithmSettings.cpp
+	./model/settings/EnvironmentSettings.cpp
+	./model/settings/PhysicsSettings.cpp
 )
  
 include_directories( ${OIS_INCLUDE_DIRS}

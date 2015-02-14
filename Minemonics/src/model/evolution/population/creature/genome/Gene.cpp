@@ -25,3 +25,7 @@ Gene::~Gene() {
 	// TODO Auto-generated destructor stub
 }
 
+void Gene::print(){
+	//I am a gene.
+}
+

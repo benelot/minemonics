@@ -149,9 +149,9 @@
 			<location>/home/leviathan/git/minemonics/Minemonics/src/BaseApplication.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] OgreApp/Source Files/MinemonicsApplication.cpp</name>
+			<name>[Targets]/[exe] OgreApp/Source Files/SimulationManager.cpp</name>
 			<type>1</type>
-			<location>/home/leviathan/git/minemonics/Minemonics/src/MinemonicsApplication.cpp</location>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/SimulationManager.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/HillsO3D.cpp</name>
@@ -159,14 +159,74 @@
 			<location>/home/leviathan/git/minemonics/Minemonics/src/view/ogre3D/evolution/environments/HillsO3D.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] OgreApp/Source Files/Hills.cpp</name>
+			<name>[Targets]/[exe] OgreApp/Source Files/PlaneO3D.cpp</name>
 			<type>1</type>
-			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Hills.cpp</location>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/ogre3D/evolution/environments/PlaneO3D.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/OpenSeaO3D.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/ogre3D/evolution/environments/OpenSeaO3D.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/Plane.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Plane.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/Environment.cpp</name>
 			<type>1</type>
 			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Environment.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/Hills.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Hills.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/OpenSea.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/OpenSea.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/CameraHandler.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/controller/camera/CameraHandler.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/MouseHandler.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/controller/input/MouseHandler.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/KeyboardHandler.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/controller/input/KeyboardHandler.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/ControlSettings.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/ControlSettings.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/MorphologySettings.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/MorphologySettings.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/GeneticAlgorithmSettings.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/GeneticAlgorithmSettings.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/EnvironmentSettings.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/EnvironmentSettings.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/PhysicsSettings.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/PhysicsSettings.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files</name>
@@ -179,9 +239,19 @@
 			<location>/home/leviathan/git/minemonics/Minemonics/src/BaseApplication.h</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] OgreApp/Header Files/MinemonicsApplication.h</name>
+			<name>[Targets]/[exe] OgreApp/Header Files/SimulationManager.h</name>
 			<type>1</type>
-			<location>/home/leviathan/git/minemonics/Minemonics/src/MinemonicsApplication.h</location>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/SimulationManager.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/OpenSeaO3D.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/ogre3D/evolution/environments/OpenSeaO3D.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/PlaneO3D.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/ogre3D/evolution/environments/PlaneO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/HillsO3D.h</name>
@@ -189,14 +259,109 @@
 			<location>/home/leviathan/git/minemonics/Minemonics/src/view/ogre3D/evolution/environments/HillsO3D.h</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/Environment.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Environment.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/OpenSea.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/OpenSea.h</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/Hills.h</name>
 			<type>1</type>
 			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Hills.h</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] OgreApp/Header Files/Environment.h</name>
+			<name>[Targets]/[exe] OgreApp/Header Files/Plane.h</name>
 			<type>1</type>
-			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Environment.h</location>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/view/general/evolution/environments/Plane.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/ApplicationConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/ApplicationConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/CameraConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/CameraConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/PhysicsConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/PhysicsConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/NeuronalNetworkConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/NeuronalNetworkConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/CreatureConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/CreatureConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/GeneticsConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/GeneticsConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/FitnessConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/FitnessConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/EnvironmentConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/EnvironmentConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/EvolutionConfiguration.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/configuration/EvolutionConfiguration.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/CameraHandler.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/controller/camera/CameraHandler.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/MouseHandler.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/controller/input/MouseHandler.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/KeyboardHandler.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/controller/input/KeyboardHandler.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/GeneticAlgorithmSettings.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/GeneticAlgorithmSettings.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/PhysicsSettings.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/PhysicsSettings.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/EnvironmentSettings.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/EnvironmentSettings.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/MorphologySettings.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/MorphologySettings.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/ControlSettings.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/ControlSettings.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/CMake Rules</name>

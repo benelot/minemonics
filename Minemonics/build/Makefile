@@ -179,29 +179,221 @@ BaseApplication.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/BaseApplication.cpp.s
 .PHONY : BaseApplication.cpp.s
 
-MinemonicsApplication.o: MinemonicsApplication.cpp.o
-.PHONY : MinemonicsApplication.o
+SimulationManager.o: SimulationManager.cpp.o
+.PHONY : SimulationManager.o
 
 # target to build an object file
-MinemonicsApplication.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/MinemonicsApplication.cpp.o
-.PHONY : MinemonicsApplication.cpp.o
+SimulationManager.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.o
+.PHONY : SimulationManager.cpp.o
 
-MinemonicsApplication.i: MinemonicsApplication.cpp.i
-.PHONY : MinemonicsApplication.i
+SimulationManager.i: SimulationManager.cpp.i
+.PHONY : SimulationManager.i
 
 # target to preprocess a source file
-MinemonicsApplication.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/MinemonicsApplication.cpp.i
-.PHONY : MinemonicsApplication.cpp.i
+SimulationManager.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.i
+.PHONY : SimulationManager.cpp.i
 
-MinemonicsApplication.s: MinemonicsApplication.cpp.s
-.PHONY : MinemonicsApplication.s
+SimulationManager.s: SimulationManager.cpp.s
+.PHONY : SimulationManager.s
 
 # target to generate assembly for a file
-MinemonicsApplication.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/MinemonicsApplication.cpp.s
-.PHONY : MinemonicsApplication.cpp.s
+SimulationManager.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.s
+.PHONY : SimulationManager.cpp.s
+
+controller/camera/CameraHandler.o: controller/camera/CameraHandler.cpp.o
+.PHONY : controller/camera/CameraHandler.o
+
+# target to build an object file
+controller/camera/CameraHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.o
+.PHONY : controller/camera/CameraHandler.cpp.o
+
+controller/camera/CameraHandler.i: controller/camera/CameraHandler.cpp.i
+.PHONY : controller/camera/CameraHandler.i
+
+# target to preprocess a source file
+controller/camera/CameraHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.i
+.PHONY : controller/camera/CameraHandler.cpp.i
+
+controller/camera/CameraHandler.s: controller/camera/CameraHandler.cpp.s
+.PHONY : controller/camera/CameraHandler.s
+
+# target to generate assembly for a file
+controller/camera/CameraHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.s
+.PHONY : controller/camera/CameraHandler.cpp.s
+
+controller/input/KeyboardHandler.o: controller/input/KeyboardHandler.cpp.o
+.PHONY : controller/input/KeyboardHandler.o
+
+# target to build an object file
+controller/input/KeyboardHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/KeyboardHandler.cpp.o
+.PHONY : controller/input/KeyboardHandler.cpp.o
+
+controller/input/KeyboardHandler.i: controller/input/KeyboardHandler.cpp.i
+.PHONY : controller/input/KeyboardHandler.i
+
+# target to preprocess a source file
+controller/input/KeyboardHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/KeyboardHandler.cpp.i
+.PHONY : controller/input/KeyboardHandler.cpp.i
+
+controller/input/KeyboardHandler.s: controller/input/KeyboardHandler.cpp.s
+.PHONY : controller/input/KeyboardHandler.s
+
+# target to generate assembly for a file
+controller/input/KeyboardHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/KeyboardHandler.cpp.s
+.PHONY : controller/input/KeyboardHandler.cpp.s
+
+controller/input/MouseHandler.o: controller/input/MouseHandler.cpp.o
+.PHONY : controller/input/MouseHandler.o
+
+# target to build an object file
+controller/input/MouseHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/MouseHandler.cpp.o
+.PHONY : controller/input/MouseHandler.cpp.o
+
+controller/input/MouseHandler.i: controller/input/MouseHandler.cpp.i
+.PHONY : controller/input/MouseHandler.i
+
+# target to preprocess a source file
+controller/input/MouseHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/MouseHandler.cpp.i
+.PHONY : controller/input/MouseHandler.cpp.i
+
+controller/input/MouseHandler.s: controller/input/MouseHandler.cpp.s
+.PHONY : controller/input/MouseHandler.s
+
+# target to generate assembly for a file
+controller/input/MouseHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/MouseHandler.cpp.s
+.PHONY : controller/input/MouseHandler.cpp.s
+
+model/settings/ControlSettings.o: model/settings/ControlSettings.cpp.o
+.PHONY : model/settings/ControlSettings.o
+
+# target to build an object file
+model/settings/ControlSettings.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/ControlSettings.cpp.o
+.PHONY : model/settings/ControlSettings.cpp.o
+
+model/settings/ControlSettings.i: model/settings/ControlSettings.cpp.i
+.PHONY : model/settings/ControlSettings.i
+
+# target to preprocess a source file
+model/settings/ControlSettings.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/ControlSettings.cpp.i
+.PHONY : model/settings/ControlSettings.cpp.i
+
+model/settings/ControlSettings.s: model/settings/ControlSettings.cpp.s
+.PHONY : model/settings/ControlSettings.s
+
+# target to generate assembly for a file
+model/settings/ControlSettings.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/ControlSettings.cpp.s
+.PHONY : model/settings/ControlSettings.cpp.s
+
+model/settings/EnvironmentSettings.o: model/settings/EnvironmentSettings.cpp.o
+.PHONY : model/settings/EnvironmentSettings.o
+
+# target to build an object file
+model/settings/EnvironmentSettings.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/EnvironmentSettings.cpp.o
+.PHONY : model/settings/EnvironmentSettings.cpp.o
+
+model/settings/EnvironmentSettings.i: model/settings/EnvironmentSettings.cpp.i
+.PHONY : model/settings/EnvironmentSettings.i
+
+# target to preprocess a source file
+model/settings/EnvironmentSettings.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/EnvironmentSettings.cpp.i
+.PHONY : model/settings/EnvironmentSettings.cpp.i
+
+model/settings/EnvironmentSettings.s: model/settings/EnvironmentSettings.cpp.s
+.PHONY : model/settings/EnvironmentSettings.s
+
+# target to generate assembly for a file
+model/settings/EnvironmentSettings.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/EnvironmentSettings.cpp.s
+.PHONY : model/settings/EnvironmentSettings.cpp.s
+
+model/settings/GeneticAlgorithmSettings.o: model/settings/GeneticAlgorithmSettings.cpp.o
+.PHONY : model/settings/GeneticAlgorithmSettings.o
+
+# target to build an object file
+model/settings/GeneticAlgorithmSettings.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/GeneticAlgorithmSettings.cpp.o
+.PHONY : model/settings/GeneticAlgorithmSettings.cpp.o
+
+model/settings/GeneticAlgorithmSettings.i: model/settings/GeneticAlgorithmSettings.cpp.i
+.PHONY : model/settings/GeneticAlgorithmSettings.i
+
+# target to preprocess a source file
+model/settings/GeneticAlgorithmSettings.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/GeneticAlgorithmSettings.cpp.i
+.PHONY : model/settings/GeneticAlgorithmSettings.cpp.i
+
+model/settings/GeneticAlgorithmSettings.s: model/settings/GeneticAlgorithmSettings.cpp.s
+.PHONY : model/settings/GeneticAlgorithmSettings.s
+
+# target to generate assembly for a file
+model/settings/GeneticAlgorithmSettings.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/GeneticAlgorithmSettings.cpp.s
+.PHONY : model/settings/GeneticAlgorithmSettings.cpp.s
+
+model/settings/MorphologySettings.o: model/settings/MorphologySettings.cpp.o
+.PHONY : model/settings/MorphologySettings.o
+
+# target to build an object file
+model/settings/MorphologySettings.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/MorphologySettings.cpp.o
+.PHONY : model/settings/MorphologySettings.cpp.o
+
+model/settings/MorphologySettings.i: model/settings/MorphologySettings.cpp.i
+.PHONY : model/settings/MorphologySettings.i
+
+# target to preprocess a source file
+model/settings/MorphologySettings.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/MorphologySettings.cpp.i
+.PHONY : model/settings/MorphologySettings.cpp.i
+
+model/settings/MorphologySettings.s: model/settings/MorphologySettings.cpp.s
+.PHONY : model/settings/MorphologySettings.s
+
+# target to generate assembly for a file
+model/settings/MorphologySettings.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/MorphologySettings.cpp.s
+.PHONY : model/settings/MorphologySettings.cpp.s
+
+model/settings/PhysicsSettings.o: model/settings/PhysicsSettings.cpp.o
+.PHONY : model/settings/PhysicsSettings.o
+
+# target to build an object file
+model/settings/PhysicsSettings.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/PhysicsSettings.cpp.o
+.PHONY : model/settings/PhysicsSettings.cpp.o
+
+model/settings/PhysicsSettings.i: model/settings/PhysicsSettings.cpp.i
+.PHONY : model/settings/PhysicsSettings.i
+
+# target to preprocess a source file
+model/settings/PhysicsSettings.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/PhysicsSettings.cpp.i
+.PHONY : model/settings/PhysicsSettings.cpp.i
+
+model/settings/PhysicsSettings.s: model/settings/PhysicsSettings.cpp.s
+.PHONY : model/settings/PhysicsSettings.s
+
+# target to generate assembly for a file
+model/settings/PhysicsSettings.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/PhysicsSettings.cpp.s
+.PHONY : model/settings/PhysicsSettings.cpp.s
 
 view/general/evolution/environments/Environment.o: view/general/evolution/environments/Environment.cpp.o
 .PHONY : view/general/evolution/environments/Environment.o
@@ -251,6 +443,54 @@ view/general/evolution/environments/Hills.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Hills.cpp.s
 .PHONY : view/general/evolution/environments/Hills.cpp.s
 
+view/general/evolution/environments/OpenSea.o: view/general/evolution/environments/OpenSea.cpp.o
+.PHONY : view/general/evolution/environments/OpenSea.o
+
+# target to build an object file
+view/general/evolution/environments/OpenSea.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/OpenSea.cpp.o
+.PHONY : view/general/evolution/environments/OpenSea.cpp.o
+
+view/general/evolution/environments/OpenSea.i: view/general/evolution/environments/OpenSea.cpp.i
+.PHONY : view/general/evolution/environments/OpenSea.i
+
+# target to preprocess a source file
+view/general/evolution/environments/OpenSea.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/OpenSea.cpp.i
+.PHONY : view/general/evolution/environments/OpenSea.cpp.i
+
+view/general/evolution/environments/OpenSea.s: view/general/evolution/environments/OpenSea.cpp.s
+.PHONY : view/general/evolution/environments/OpenSea.s
+
+# target to generate assembly for a file
+view/general/evolution/environments/OpenSea.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/OpenSea.cpp.s
+.PHONY : view/general/evolution/environments/OpenSea.cpp.s
+
+view/general/evolution/environments/Plane.o: view/general/evolution/environments/Plane.cpp.o
+.PHONY : view/general/evolution/environments/Plane.o
+
+# target to build an object file
+view/general/evolution/environments/Plane.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Plane.cpp.o
+.PHONY : view/general/evolution/environments/Plane.cpp.o
+
+view/general/evolution/environments/Plane.i: view/general/evolution/environments/Plane.cpp.i
+.PHONY : view/general/evolution/environments/Plane.i
+
+# target to preprocess a source file
+view/general/evolution/environments/Plane.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Plane.cpp.i
+.PHONY : view/general/evolution/environments/Plane.cpp.i
+
+view/general/evolution/environments/Plane.s: view/general/evolution/environments/Plane.cpp.s
+.PHONY : view/general/evolution/environments/Plane.s
+
+# target to generate assembly for a file
+view/general/evolution/environments/Plane.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/general/evolution/environments/Plane.cpp.s
+.PHONY : view/general/evolution/environments/Plane.cpp.s
+
 view/ogre3D/evolution/environments/HillsO3D.o: view/ogre3D/evolution/environments/HillsO3D.cpp.o
 .PHONY : view/ogre3D/evolution/environments/HillsO3D.o
 
@@ -275,6 +515,54 @@ view/ogre3D/evolution/environments/HillsO3D.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/HillsO3D.cpp.s
 .PHONY : view/ogre3D/evolution/environments/HillsO3D.cpp.s
 
+view/ogre3D/evolution/environments/OpenSeaO3D.o: view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o
+.PHONY : view/ogre3D/evolution/environments/OpenSeaO3D.o
+
+# target to build an object file
+view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o
+.PHONY : view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o
+
+view/ogre3D/evolution/environments/OpenSeaO3D.i: view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i
+.PHONY : view/ogre3D/evolution/environments/OpenSeaO3D.i
+
+# target to preprocess a source file
+view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i
+.PHONY : view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i
+
+view/ogre3D/evolution/environments/OpenSeaO3D.s: view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s
+.PHONY : view/ogre3D/evolution/environments/OpenSeaO3D.s
+
+# target to generate assembly for a file
+view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s
+.PHONY : view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s
+
+view/ogre3D/evolution/environments/PlaneO3D.o: view/ogre3D/evolution/environments/PlaneO3D.cpp.o
+.PHONY : view/ogre3D/evolution/environments/PlaneO3D.o
+
+# target to build an object file
+view/ogre3D/evolution/environments/PlaneO3D.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/PlaneO3D.cpp.o
+.PHONY : view/ogre3D/evolution/environments/PlaneO3D.cpp.o
+
+view/ogre3D/evolution/environments/PlaneO3D.i: view/ogre3D/evolution/environments/PlaneO3D.cpp.i
+.PHONY : view/ogre3D/evolution/environments/PlaneO3D.i
+
+# target to preprocess a source file
+view/ogre3D/evolution/environments/PlaneO3D.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/PlaneO3D.cpp.i
+.PHONY : view/ogre3D/evolution/environments/PlaneO3D.cpp.i
+
+view/ogre3D/evolution/environments/PlaneO3D.s: view/ogre3D/evolution/environments/PlaneO3D.cpp.s
+.PHONY : view/ogre3D/evolution/environments/PlaneO3D.s
+
+# target to generate assembly for a file
+view/ogre3D/evolution/environments/PlaneO3D.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/environments/PlaneO3D.cpp.s
+.PHONY : view/ogre3D/evolution/environments/PlaneO3D.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -291,18 +579,54 @@ help:
 	@echo "... BaseApplication.o"
 	@echo "... BaseApplication.i"
 	@echo "... BaseApplication.s"
-	@echo "... MinemonicsApplication.o"
-	@echo "... MinemonicsApplication.i"
-	@echo "... MinemonicsApplication.s"
+	@echo "... SimulationManager.o"
+	@echo "... SimulationManager.i"
+	@echo "... SimulationManager.s"
+	@echo "... controller/camera/CameraHandler.o"
+	@echo "... controller/camera/CameraHandler.i"
+	@echo "... controller/camera/CameraHandler.s"
+	@echo "... controller/input/KeyboardHandler.o"
+	@echo "... controller/input/KeyboardHandler.i"
+	@echo "... controller/input/KeyboardHandler.s"
+	@echo "... controller/input/MouseHandler.o"
+	@echo "... controller/input/MouseHandler.i"
+	@echo "... controller/input/MouseHandler.s"
+	@echo "... model/settings/ControlSettings.o"
+	@echo "... model/settings/ControlSettings.i"
+	@echo "... model/settings/ControlSettings.s"
+	@echo "... model/settings/EnvironmentSettings.o"
+	@echo "... model/settings/EnvironmentSettings.i"
+	@echo "... model/settings/EnvironmentSettings.s"
+	@echo "... model/settings/GeneticAlgorithmSettings.o"
+	@echo "... model/settings/GeneticAlgorithmSettings.i"
+	@echo "... model/settings/GeneticAlgorithmSettings.s"
+	@echo "... model/settings/MorphologySettings.o"
+	@echo "... model/settings/MorphologySettings.i"
+	@echo "... model/settings/MorphologySettings.s"
+	@echo "... model/settings/PhysicsSettings.o"
+	@echo "... model/settings/PhysicsSettings.i"
+	@echo "... model/settings/PhysicsSettings.s"
 	@echo "... view/general/evolution/environments/Environment.o"
 	@echo "... view/general/evolution/environments/Environment.i"
 	@echo "... view/general/evolution/environments/Environment.s"
 	@echo "... view/general/evolution/environments/Hills.o"
 	@echo "... view/general/evolution/environments/Hills.i"
 	@echo "... view/general/evolution/environments/Hills.s"
+	@echo "... view/general/evolution/environments/OpenSea.o"
+	@echo "... view/general/evolution/environments/OpenSea.i"
+	@echo "... view/general/evolution/environments/OpenSea.s"
+	@echo "... view/general/evolution/environments/Plane.o"
+	@echo "... view/general/evolution/environments/Plane.i"
+	@echo "... view/general/evolution/environments/Plane.s"
 	@echo "... view/ogre3D/evolution/environments/HillsO3D.o"
 	@echo "... view/ogre3D/evolution/environments/HillsO3D.i"
 	@echo "... view/ogre3D/evolution/environments/HillsO3D.s"
+	@echo "... view/ogre3D/evolution/environments/OpenSeaO3D.o"
+	@echo "... view/ogre3D/evolution/environments/OpenSeaO3D.i"
+	@echo "... view/ogre3D/evolution/environments/OpenSeaO3D.s"
+	@echo "... view/ogre3D/evolution/environments/PlaneO3D.o"
+	@echo "... view/ogre3D/evolution/environments/PlaneO3D.i"
+	@echo "... view/ogre3D/evolution/environments/PlaneO3D.s"
 .PHONY : help
 
 

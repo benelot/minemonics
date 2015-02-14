@@ -9,6 +9,7 @@
 #define GENOME_H_
 
 #include <vector>
+#include "Gene.h"
 
 class Genome {
 public:
