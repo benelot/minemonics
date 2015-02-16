@@ -26,6 +26,9 @@ public:
 	void reposition(float timeSinceLastFrame);
 	void rotate(int pitch, int yaw, int roll);
 	void move(double x,double y,double z);
+	void moveX(double x);
+	void moveY(double y);
+	void moveZ(double z);
 	const Ogre::SceneNode* getCamNode() const;
 	void setCamNode(Ogre::SceneNode* camNode);
 };

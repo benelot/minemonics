@@ -10,7 +10,7 @@
 #include "SimulationManager.h"
 
 CameraHandler::CameraHandler(SimulationManager* simulationMgr) :
-		mCamNode(NULL),mSimulationMgr(simulationMgr) {
+		mCamNode(NULL), mSimulationMgr(simulationMgr) {
 	// set the rotation and move speed
 	mMove = CameraConfiguration::CAMERA_MOVEMENT_SPEED;
 	mRotate = CameraConfiguration::CAMERA_ROTATION_SPEED;
@@ -28,10 +28,8 @@ void CameraHandler::reposition(float timeSinceLastFrame) {
 }
 
 void CameraHandler::rotate(int pitch, int yaw, int roll) {
-	mCamNode->yaw(Ogre::Degree(-mRotate * yaw),
-			Ogre::Node::TS_WORLD);
-	mCamNode->pitch(Ogre::Degree(-mRotate * pitch),
-			Ogre::Node::TS_LOCAL);
+	mCamNode->yaw(Ogre::Degree(-mRotate * yaw), Ogre::Node::TS_WORLD);
+	mCamNode->pitch(Ogre::Degree(-mRotate * pitch), Ogre::Node::TS_LOCAL);
 }
 
 const Ogre::SceneNode* CameraHandler::getCamNode() const {
@@ -42,9 +40,21 @@ void CameraHandler::setCamNode(Ogre::SceneNode* camNode) {
 	mCamNode = camNode;
 }
 
-void CameraHandler::move(double x,double y, double z) {
-	mDirection.x = mMove*x;
-	mDirection.y = mMove*y;
-	mDirection.z = mMove*z;
+void CameraHandler::move(double x, double y, double z) {
+	moveX(x);
+	moveY(y);
+	moveZ(z);
+}
+
+void CameraHandler::moveX(double x) {
+	mDirection.x = mMove * x;
+}
+
+void CameraHandler::moveY(double y) {
+	mDirection.y = mMove * y;
+}
+
+void CameraHandler::moveZ(double z) {
+	mDirection.z = mMove * z;
 }
 
