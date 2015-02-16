@@ -82,16 +82,6 @@ install/local: preinstall
 install/local/fast: install/local
 .PHONY : install/local/fast
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-.PHONY : install/strip/fast
-
 # Special rule for the target list_install_components
 list_install_components:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
@@ -154,6 +144,11 @@ OgreApp: cmake_check_build_system
 OgreApp/fast:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/build
 .PHONY : OgreApp/fast
+
+# Manual pre-install relink rule for target.
+OgreApp/preinstall:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/preinstall
+.PHONY : OgreApp/preinstall
 
 BaseApplication.o: BaseApplication.cpp.o
 .PHONY : BaseApplication.o
@@ -395,6 +390,30 @@ model/settings/PhysicsSettings.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/settings/PhysicsSettings.cpp.s
 .PHONY : model/settings/PhysicsSettings.cpp.s
 
+utils/logging/Logger.o: utils/logging/Logger.cpp.o
+.PHONY : utils/logging/Logger.o
+
+# target to build an object file
+utils/logging/Logger.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.o
+.PHONY : utils/logging/Logger.cpp.o
+
+utils/logging/Logger.i: utils/logging/Logger.cpp.i
+.PHONY : utils/logging/Logger.i
+
+# target to preprocess a source file
+utils/logging/Logger.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.i
+.PHONY : utils/logging/Logger.cpp.i
+
+utils/logging/Logger.s: utils/logging/Logger.cpp.s
+.PHONY : utils/logging/Logger.s
+
+# target to generate assembly for a file
+utils/logging/Logger.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.s
+.PHONY : utils/logging/Logger.cpp.s
+
 view/general/evolution/environments/Environment.o: view/general/evolution/environments/Environment.cpp.o
 .PHONY : view/general/evolution/environments/Environment.o
 
@@ -573,7 +592,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
-	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... BaseApplication.o"
@@ -606,6 +624,9 @@ help:
 	@echo "... model/settings/PhysicsSettings.o"
 	@echo "... model/settings/PhysicsSettings.i"
 	@echo "... model/settings/PhysicsSettings.s"
+	@echo "... utils/logging/Logger.o"
+	@echo "... utils/logging/Logger.i"
+	@echo "... utils/logging/Logger.s"
 	@echo "... view/general/evolution/environments/Environment.o"
 	@echo "... view/general/evolution/environments/Environment.i"
 	@echo "... view/general/evolution/environments/Environment.s"

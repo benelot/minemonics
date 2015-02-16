@@ -10,13 +10,15 @@
 sudo apt-get install build-essential automake libtool # compiler and configuration tools
 sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev libxaw7-dev freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev nvidia-cg-dev # required dependencies
 sudo apt-get install libois-dev # install OIS
+sudo apt-get install libboost-all-dev # because I need a lot of boost libraries
 mkdir ogre1.9
 cd ogre1.9
 hg clone https://bitbucket.org/sinbad/ogre/ -u v1-9
 mkdir build
 cd build
 sudo ln -s /usr/include/freetype2/ /usr/include/freetype # FIX: because cmake can not find freetype2 because it searches for freetype
-cmake .. # configure make files with cmake
+# configure make files with cmake
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ..
 make -j4 # because I have 4 cores for parallel compilation
 sudo make install
 sudo ldconfig
@@ -25,8 +27,10 @@ cd ../..
 # Bullet
 tar xvzf bullet-2.82-r2704.tgz
 cd bullet-2.82-r2704
+mkdir build
+cd build
 # configure make files with cmake
-cmake . -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RelWithDebugInfo -DBUILD_EXTRAS=ON -DINSTALL_EXTRA_LIBS=ON
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RelWithDebugInfo -DBUILD_EXTRAS=ON -DINSTALL_EXTRA_LIBS=ON ..
 make -j4 # because I have 4 cores for parallel compilation
 sudo make install
 sudo ldconfig
@@ -39,14 +43,26 @@ sudo apt-get install libboost-all-dev # from http://ubuntuforums.org/showthread.
 mkdir Shark
 cd Shark
 svn co https://svn.code.sf.net/p/shark-project/code/
-mkdir cmake
-cd cmake
-cmake ..
+mkdir build
+cd build
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release .
 make -j4 # because I have 4 cores for parallel compilation
 sudo make install
 sudo ldconfig
 
 cd ..
+
+# CeGUI for a nice Graphical User Interface
+# According to: http://cegui.org.uk/wiki/Building_CEGUI_for_Ogre_/_OgreRenderer#CEGUI_0.8.x
+mkdir CeGUI
+cd CeGUI
+hg clone https://underworldguardian@bitbucket.org/cegui/cegui
+mkdir build
+cd build
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ..
+make -j4 # because I have 4 cores for parallel compilation
+sudo make install
+sudo ldconfig
 
 # ogrebullet 
 echo "This part is currently not working..."
