@@ -28,8 +28,8 @@ class HillsO3D;
 #include <utils/logging/Logger.h>
 
 
-//#include <CEGUI/CEGUI.h>
-//#include <Ogre/Renderer.h> //before 0.8 it's just  CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/Ogre/Renderer.h>
 
 class SimulationManager: public BaseApplication {
 private:
@@ -77,7 +77,7 @@ protected:
     virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
     virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
 
-    //bool quit(const CEGUI::EventArgs &e);
+    bool quit(const CEGUI::EventArgs &e);
 };
 
 #endif // #ifndef __SimulationManager_h_
