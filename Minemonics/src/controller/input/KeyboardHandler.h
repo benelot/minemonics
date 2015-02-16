@@ -10,10 +10,20 @@
 
 class SimulationManager;
 #include <OISKeyboard.h>
+#include <utils/logging/Logger.h>
 
 class KeyboardHandler {
 private:
 	SimulationManager* mSimulationMgr;
+
+	static BoostLogger logger;
+
+	static class _Init {
+	public:
+		_Init() {
+			logger.add_attribute("ClassName",boost::log::attributes::constant < std::string > ("KeyboardHandler"));
+		}
+	} _initializer;
 
 public:
 	KeyboardHandler(SimulationManager* simulationMgr);

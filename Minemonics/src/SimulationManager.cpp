@@ -22,11 +22,12 @@
 #include "controller/input/MouseHandler.h"
 #include "controller/camera/CameraHandler.h"
 
+//logger
+#include "utils/logging/Logger.h"
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-		mInfoLabel(0), mCameraHandler(this),
-		mKeyboardHandler(this),
-		mMouseHandler(this) {
+		mInfoLabel(0), mCameraHandler(this), mKeyboardHandler(this), mMouseHandler(
+				this) {
 	mTerrain = NULL;
 
 }
@@ -120,9 +121,11 @@ bool SimulationManager::mouseReleased(const OIS::MouseEvent &arg,
  */
 void SimulationManager::createScene(void) {
 
+	// Initialize the logger
+	Logger::init("minemonics.log");
+	Logger::initTermSink();
+
 	// We create a test scene for testing ois and bullet
-	//mCamera->setPosition(Ogre::Vector3(1683, 50, 2116));
-	//mCamera->lookAt(Ogre::Vector3(1963, 50, 1660));
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(50000);
 

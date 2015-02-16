@@ -229,6 +229,11 @@
 			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/PhysicsSettings.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/Logger.cpp</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/utils/logging/Logger.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -362,6 +367,11 @@
 			<name>[Targets]/[exe] OgreApp/Header Files/ControlSettings.h</name>
 			<type>1</type>
 			<location>/home/leviathan/git/minemonics/Minemonics/src/model/settings/ControlSettings.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/Logger.h</name>
+			<type>1</type>
+			<location>/home/leviathan/git/minemonics/Minemonics/src/utils/logging/Logger.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/CMake Rules</name>
