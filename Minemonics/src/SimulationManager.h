@@ -23,6 +23,11 @@ class HillsO3D;
 #include "controller/camera/CameraHandler.h"
 
 #include "BaseApplication.h"
+
+// Logger
+#include <utils/logging/Logger.h>
+
+
 //#include <CEGUI/CEGUI.h>
 //#include <Ogre/Renderer.h> //before 0.8 it's just  CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h
 
@@ -35,6 +40,16 @@ private:
 	KeyboardHandler mKeyboardHandler;
 	MouseHandler mMouseHandler;
 	CameraHandler mCameraHandler;
+
+	// Static logger
+	static BoostLogger logger;
+
+	static class _Init {
+	public:
+		_Init() {
+			logger.add_attribute("ClassName",boost::log::attributes::constant < std::string > ("SimulationManager"));
+		}
+	} _initializer;
 public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);

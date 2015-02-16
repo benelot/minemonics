@@ -16,6 +16,7 @@ class KeyboardHandler {
 private:
 	SimulationManager* mSimulationMgr;
 
+	// Static logger
 	static BoostLogger logger;
 
 	static class _Init {

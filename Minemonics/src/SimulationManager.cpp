@@ -24,6 +24,9 @@
 
 //logger
 #include "utils/logging/Logger.h"
+
+BoostLogger SimulationManager::logger;                     // initialize the static variables
+SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mInfoLabel(0), mCameraHandler(this), mKeyboardHandler(this), mMouseHandler(
@@ -126,6 +129,7 @@ void SimulationManager::createScene(void) {
 	Logger::initTermSink();
 
 	// We create a test scene for testing ois and bullet
+	BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Creating test environment for basic setups...";
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(50000);
 
@@ -204,6 +208,8 @@ void SimulationManager::createScene(void) {
 	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode2",
 			Ogre::Vector3(0, 200, 400));
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode2");
+
+	BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Creating test environment for basic setups...done.";
 }
 
 CameraHandler& SimulationManager::getCameraHandler() {

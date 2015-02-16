@@ -17,45 +17,20 @@
 #include <boost/log/support/date_time.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/phoenix/bind.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/log/core.hpp>
-#include <boost/log/expressions.hpp>
 #include <boost/log/attributes.hpp>
-#include <boost/log/sources/basic_logger.hpp>
-#include <boost/log/sources/severity_logger.hpp>
-#include <boost/log/sources/severity_channel_logger.hpp>
-#include <boost/log/sources/record_ostream.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/sinks/text_ostream_backend.hpp>
 #include <boost/log/attributes/scoped_attribute.hpp>
 #include <boost/log/utility/value_ref.hpp>
-#include <boost/log/utility/setup/common_attributes.hpp>
 #include <boost/log/utility/empty_deleter.hpp>
-#include <cmath>
-#include <iostream>
-#include <string>
-#include <boost/lexical_cast.hpp>
-#include <boost/log/sources/global_logger_storage.hpp>
-#include <boost/log/sources/severity_logger.hpp>
-#include <boost/log/trivial.hpp>
-#include <boost/log/sources/severity_channel_logger.hpp>
-#include <boost/log/common.hpp>
-#include <boost/log/expressions.hpp>
-#include <boost/log/sinks.hpp>
-#include <boost/log/utility/setup/common_attributes.hpp>
-#include <boost/log/utility/setup/console.hpp>
-#include <boost/log/support/date_time.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
+
 
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace sinks = boost::log::sinks;
 namespace expr = boost::log::expressions;
 namespace keywords = boost::log::keywords;
-
-typedef sinks::synchronous_sink<sinks::text_ostream_backend> text_sink;
 
 Logger::Logger() {
 	// TODO Auto-generated constructor stub
