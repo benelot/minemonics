@@ -66,7 +66,6 @@ void SimulationManager::destroyScene(void) {
 
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
-	//BaseApplication::createFrameListener();
 
 	/// INPUT HANDLER
 
@@ -124,7 +123,6 @@ void SimulationManager::createFrameListener(void) {
 
 //-------------------------------------------------------------------------------------
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
-	//bool ret = BaseApplication::frameRenderingQueued(evt);
 
 	if (mTerrain->mTerrainGroup->isDerivedDataUpdateInProgress()) {
 		//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
@@ -149,9 +147,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//Need to capture/update each device
 	mKeyboard->capture();
 	mMouse->capture();
-
-	// OgreBites : remove if CEGUI is satisfying
-	//mTrayMgr->frameRenderingQueued(evt);
 
 	//Need to inject timestamps to CEGUI System.
 	//CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);

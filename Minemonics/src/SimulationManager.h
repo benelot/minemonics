@@ -38,8 +38,6 @@ class CEGUIInputHandler;
 
 class SimulationManager: public BaseApplication {
 private:
-	//OgreBites: remove if CEGUI works
-	//OgreBites::Label* mInfoLabel;
 	HillsO3D* mTerrain;
 
 	// Game component handlers
