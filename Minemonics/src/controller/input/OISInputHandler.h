@@ -17,10 +17,12 @@ namespace OIS {
 
 #include <utils/logging/Logger.h>
 
-class OISInputHandler {
+class OISInputHandler: public OIS::KeyListener, public OIS::MouseListener {
 public:
 	OISInputHandler(SimulationManager* simulationMgr);
 	virtual ~OISInputHandler();
+
+	void capture();
 
 	// OIS::KeyListener
 	virtual bool keyPressed(const OIS::KeyEvent &arg);
@@ -34,6 +36,10 @@ public:
 			OIS::MouseButtonID id);
 protected:
 	SimulationManager* mSimulationMgr;
+
+    OIS::InputManager* mInputManager;
+	OIS::Mouse *mMouse;
+	OIS::Keyboard *mKeyboard;
 
 	// Static logger
 	static BoostLogger logger;

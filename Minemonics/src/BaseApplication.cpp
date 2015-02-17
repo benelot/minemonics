@@ -28,10 +28,7 @@ BaseApplication::BaseApplication(void)
     mCameraMan(0),
     mDetailsPanel(0),
     mCursorWasVisible(false),
-    mShutDown(false),
-    mInputManager(0),
-    mMouse(0),
-    mKeyboard(0)
+    mShutDown(false)
 {
 }
 
@@ -100,13 +97,14 @@ void BaseApplication::createFrameListener(void)
     windowHndStr << windowHnd;
     pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
 
-    mInputManager = OIS::InputManager::createInputSystem( pl );
+    //TODO: Cleanup after successful input transformation
+    //mInputManager = OIS::InputManager::createInputSystem( pl );
 
-    mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject( OIS::OISKeyboard, true ));
-    mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject( OIS::OISMouse, true ));
+    //mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject( OIS::OISKeyboard, true ));
+    //mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject( OIS::OISMouse, true ));
 
-    mMouse->setEventCallback(this);
-    mKeyboard->setEventCallback(this);
+    //mMouse->setEventCallback(this);
+    //mKeyboard->setEventCallback(this);
 
     //Set initial mouse clipping size
     windowResized(mWindow);
@@ -114,32 +112,33 @@ void BaseApplication::createFrameListener(void)
     //Register as a Window listener
     Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 
-	OgreBites::InputContext inputContext;
-	inputContext.mMouse = mMouse; 
-	inputContext.mKeyboard = mKeyboard;
-    mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, inputContext, this);
-    mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-    mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-    mTrayMgr->hideCursor();
+    //TODO: Cleanup after input transformation
+	//OgreBites::InputContext inputContext;
+	//inputContext.mMouse = mMouse;
+	//inputContext.mKeyboard = mKeyboard;
+    //mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, inputContext, this);
+    //mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
+    //mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
+    //mTrayMgr->hideCursor();
 
     // create a params panel for displaying sample details
-    Ogre::StringVector items;
-    items.push_back("cam.pX");
-    items.push_back("cam.pY");
-    items.push_back("cam.pZ");
-    items.push_back("");
-    items.push_back("cam.oW");
-    items.push_back("cam.oX");
-    items.push_back("cam.oY");
-    items.push_back("cam.oZ");
-    items.push_back("");
-    items.push_back("Filtering");
-    items.push_back("Poly Mode");
+//    Ogre::StringVector items;
+//    items.push_back("cam.pX");
+//    items.push_back("cam.pY");
+//    items.push_back("cam.pZ");
+//    items.push_back("");
+//    items.push_back("cam.oW");
+//    items.push_back("cam.oX");
+//    items.push_back("cam.oY");
+//    items.push_back("cam.oZ");
+//    items.push_back("");
+//    items.push_back("Filtering");
+//    items.push_back("Poly Mode");
 
-    mDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_NONE, "DetailsPanel", 200, items);
-    mDetailsPanel->setParamValue(9, "Bilinear");
-    mDetailsPanel->setParamValue(10, "Solid");
-    mDetailsPanel->hide();
+    //mDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_NONE, "DetailsPanel", 200, items);
+    //mDetailsPanel->setParamValue(9, "Bilinear");
+    //mDetailsPanel->setParamValue(10, "Solid");
+    //mDetailsPanel->hide();
 
     mRoot->addFrameListener(this);
 }
@@ -251,8 +250,8 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
         return false;
 
     //Need to capture/update each device
-    mKeyboard->capture();
-    mMouse->capture();
+    //mKeyboard->capture();
+    //mMouse->capture();
 
     mTrayMgr->frameRenderingQueued(evt);
 
@@ -402,24 +401,26 @@ void BaseApplication::windowResized(Ogre::RenderWindow* rw)
     int left, top;
     rw->getMetrics(width, height, depth, left, top);
 
-    const OIS::MouseState &ms = mMouse->getMouseState();
-    ms.width = width;
-    ms.height = height;
+    //TODO: How to fix mouse clipping area?
+    //const OIS::MouseState &ms = mMouse->getMouseState();
+    //ms.width = width;
+    //ms.height = height;
 }
 
+//TODO: Clean up this method after successful input transformation.
 //Unattach OIS before window shutdown (very important under Linux)
 void BaseApplication::windowClosed(Ogre::RenderWindow* rw)
 {
     //Only close for window that created OIS (the main window in these demos)
-    if( rw == mWindow )
-    {
-        if( mInputManager )
-        {
-            mInputManager->destroyInputObject( mMouse );
-            mInputManager->destroyInputObject( mKeyboard );
-
-            OIS::InputManager::destroyInputSystem(mInputManager);
-            mInputManager = 0;
-        }
-    }
+//    if( rw == mWindow )
+//    {
+//        if( mInputManager )
+//        {
+//            mInputManager->destroyInputObject( mMouse );
+//            mInputManager->destroyInputObject( mKeyboard );
+//
+//            OIS::InputManager::destroyInputSystem(mInputManager);
+//            mInputManager = 0;
+//        }
+//    }
 }

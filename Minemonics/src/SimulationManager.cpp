@@ -16,6 +16,7 @@
  */
 #include "SimulationManager.h"
 #include "view/ogre3D/evolution/environments/HillsO3D.h"
+#include "view/CEGUI/GUISheetHandler.h"
 
 //Game component includes
 #include "controller/input/OISInputHandler.h"
@@ -67,21 +68,15 @@ void SimulationManager::destroyScene(void) {
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
 
+
 	/// INPUT HANDLER
 
 	// this next bit is for the sake of the input handler
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-	OIS::ParamList pl;
 	size_t windowHnd = 0;
-	std::ostringstream windowHndStr;
 
 	mWindow->getCustomAttribute("WINDOW", &windowHnd);
-	windowHndStr << windowHnd;
-	pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
 
-	// For debug, in case something goes wrong the mouse can go out.
-	pl.insert(OIS::ParamList::value_type("x11_keyboard_grab", "false"));
-	pl.insert(OIS::ParamList::value_type("x11_mouse_grab", "false"));
 
 
 	// set up the input handlers
@@ -94,17 +89,7 @@ void SimulationManager::createFrameListener(void) {
 	mStateHandler->requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
-	GUISheetHandler* pDlg = new GUISheetHandler(pSystem, pLayout, mStateHandler);
-
-	mInputManager = OIS::InputManager::createInputSystem(pl);
-
-	mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(
-			OIS::OISKeyboard, true));
-	mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(
-			OIS::OISMouse, true));
-
-	mMouse->setEventCallback(this);
-	mKeyboard->setEventCallback(this);
+	mGUISheetHandler = new GUISheetHandler(pSystem, pLayout, mStateHandler);
 
 	//Set initial mouse clipping size
 	windowResized(mWindow);
@@ -113,9 +98,6 @@ void SimulationManager::createFrameListener(void) {
 	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 
 	mRoot->addFrameListener(this);
-
-	// OgreBites : remove if CEGUI is satisfying
-	//mInfoLabel = mTrayMgr->createLabel(OgreBites::TL_TOP, "TInfo", "", 350);
 
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
@@ -145,11 +127,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 
 	//Need to capture/update each device
-	mKeyboard->capture();
-	mMouse->capture();
-
-	//Need to inject timestamps to CEGUI System.
-	//CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+	mCEGUIInputHandler->capture();
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 	return true;

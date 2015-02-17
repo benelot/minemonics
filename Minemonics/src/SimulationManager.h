@@ -19,6 +19,7 @@
 
 class HillsO3D;
 class CEGUIInputHandler;
+class GUISheetHandler;
 
 // base
 #include "BaseApplication.h"
@@ -49,6 +50,9 @@ private:
 
 	// StateHandler
 	StateHandler* mStateHandler;
+
+	//SheetHandler
+	GUISheetHandler* mGUISheetHandler;
 
 	// Static logger
 	static BoostLogger logger;

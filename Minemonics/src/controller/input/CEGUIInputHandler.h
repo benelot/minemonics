@@ -17,10 +17,7 @@ class StateHandler;
 
 class CEGUIInputHandler: public OISInputHandler {
 private:
-//	OIS::InputManager *m_ois;
-//	OIS::Mouse *mMouse;
-//	OIS::Keyboard *mKeyboard;
-//	unsigned long mhWnd;
+	unsigned long mhWnd;
 	StateHandler *mStateHandler;
 public:
 	CEGUIInputHandler(StateHandler* stateHandler, unsigned long hWnd,

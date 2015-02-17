@@ -30,35 +30,29 @@
 CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 		unsigned long hWnd, SimulationManager* simulationMgr) :
 		OISInputHandler(simulationMgr) {
-//	OIS::ParamList pl;
-//	pl.insert(
-//			OIS::ParamList::value_type("WINDOW",
-//					Ogre::StringConverter::toString(hWnd)));
+	OIS::ParamList pl;
+	pl.insert(
+			OIS::ParamList::value_type("WINDOW",
+					Ogre::StringConverter::toString(hWnd)));
 
 	// For debug, in case something goes wrong the mouse can go out.
-	/*
-	 pl.insert(OIS::ParamList::value_type("x11_keyboard_grab", "false"));
-	 pl.insert(OIS::ParamList::value_type("x11_mouse_grab", "false"));
-	 */
+	pl.insert(OIS::ParamList::value_type("x11_keyboard_grab", "false"));
+	pl.insert(OIS::ParamList::value_type("x11_mouse_grab", "false"));
 
-//	mhWnd = hWnd;
-//	m_ois = OIS::InputManager::createInputSystem(pl);
-//	mMouse = static_cast<OIS::Mouse*>(m_ois->createInputObject(OIS::OISMouse,
-//			true));
-//	mKeyboard = static_cast<OIS::Keyboard*>(m_ois->createInputObject(
-//			OIS::OISKeyboard, true));
-//	mMouse->setEventCallback(this);
-//	mKeyboard->setEventCallback(this);
+	mhWnd = hWnd;
+	mInputManager = OIS::InputManager::createInputSystem(pl);
+	mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse,
+			true));
+	mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(
+			OIS::OISKeyboard, true));
+	mMouse->setEventCallback(this);
+	mKeyboard->setEventCallback(this);
 
 	mStateHandler = stateHandler;
 }
 
 CEGUIInputHandler::~CEGUIInputHandler() {
-//	if (m_pMouse)
-//		m_ois->destroyInputObject(m_pMouse);
-//	if (m_pKeyboard)
-//		m_ois->destroyInputObject(m_pKeyboard);
-//	OIS::InputManager::destroyInputSystem(m_ois);
+	//OISInputHandler is called automatically
 }
 
 //-------------------------------------------------------------------------------------
