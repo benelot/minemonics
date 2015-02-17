@@ -16,10 +16,9 @@ typedef boost::log::sources::severity_logger<boost::log::trivial::severity_level
 
 class Logger {
 public:
-	Logger();
-	virtual ~Logger();
 	static void init(std::string fileName);
 	static void initTermSink();
+	static void initLogger(BoostLogger logger, std::string className);
 };
 
 #endif /* LOGGER_H_ */

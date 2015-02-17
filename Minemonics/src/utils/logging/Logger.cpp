@@ -25,23 +25,13 @@
 #include <boost/log/utility/value_ref.hpp>
 #include <boost/log/utility/empty_deleter.hpp>
 
-
-namespace logging = boost::log;
-namespace src = boost::log::sources;
-namespace sinks = boost::log::sinks;
-namespace expr = boost::log::expressions;
-namespace keywords = boost::log::keywords;
-
-Logger::Logger() {
-	// TODO Auto-generated constructor stub
-
-}
-
-Logger::~Logger() {
-	// TODO Auto-generated destructor stub
-}
-
 void Logger::init(std::string fileName) {
+	namespace logging = boost::log;
+	namespace src = boost::log::sources;
+	namespace sinks = boost::log::sinks;
+	namespace expr = boost::log::expressions;
+	namespace keywords = boost::log::keywords;
+
 	// Set up our sink and formatting
 	logging::add_file_log(keywords::file_name = fileName,
 			keywords::rotation_size = 10 * 1024 * 1024,
@@ -62,19 +52,29 @@ void Logger::init(std::string fileName) {
 }
 
 void Logger::initTermSink() {
-	namespace bl = boost::log;
-	typedef bl::sinks::synchronous_sink<bl::sinks::text_ostream_backend> text_sink;
+	namespace logging = boost::log;
+	namespace src = boost::log::sources;
+	namespace sinks = boost::log::sinks;
+	namespace expr = boost::log::expressions;
+	namespace keywords = boost::log::keywords;
+	typedef logging::sinks::synchronous_sink<logging::sinks::text_ostream_backend> text_sink;
 
 	boost::shared_ptr<text_sink> sink = boost::make_shared<text_sink>();
 	sink->locked_backend()->add_stream(
 			boost::shared_ptr<std::ostream>(&std::cout,
-					boost::log::empty_deleter()));
+					logging::empty_deleter()));
 
 	sink->locked_backend()->auto_flush(true);
 
-	sink->set_formatter(bl::expressions::stream << bl::expressions::message);
+	sink->set_formatter(logging::expressions::stream << logging::expressions::message);
 
-	bl::core::get()->add_sink(sink);
-	bl::add_common_attributes();
+	logging::core::get()->add_sink(sink);
+	logging::add_common_attributes();
+}
+
+void Logger::initLogger(BoostLogger logger, std::string className){
+	logger.add_attribute("ClassName",
+			boost::log::attributes::constant<std::string>(
+					className));
 }
 

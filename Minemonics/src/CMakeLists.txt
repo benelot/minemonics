@@ -38,7 +38,7 @@ if(UNIX)
 
 	else ()
 	  message(SEND_ERROR "Failed to find module path.")
-	endif(EXISTS "/usr/local/lib/OGRE")
+	endif(EXISTS "/usr/local/lib/OGRE/cmake")
 	set(PROJECT_HOME .)
 endif(UNIX)
  
@@ -818,7 +818,6 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_LIBRARIES})
 include_directories(${CEGUI_OgreRenderer_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
 
-
 ######################################################################
 # COMPILATION
 ######################################################################
@@ -826,8 +825,18 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
 #DEVELOPMENT INPUT
 # Append header files here
 set(HDRS
+    # base
 	./BaseApplication.h
 	./SimulationManager.h
+	
+	# model
+    ./model/settings/GeneticAlgorithmSettings.h
+	./model/settings/PhysicsSettings.h
+	./model/settings/EnvironmentSettings.h
+	./model/settings/MorphologySettings.h
+	./model/settings/ControlSettings.h
+	
+	# view
 	./view/ogre3D/evolution/environments/OpenSeaO3D.h
 	./view/ogre3D/evolution/environments/PlaneO3D.h
 	./view/ogre3D/evolution/environments/HillsO3D.h
@@ -835,6 +844,16 @@ set(HDRS
 	./view/general/evolution/environments/OpenSea.h
 	./view/general/evolution/environments/Hills.h
 	./view/general/evolution/environments/Plane.h
+	## CEGUI
+	./view/CEGUI/GUISheetHandler.h
+	
+	# controller
+	./controller/camera/CameraHandler.h
+	./controller/input/OISInputHandler.h
+	./controller/input/CEGUIInputHandler.h
+	./controller/StateHandler.h
+	
+	# configuration
 	./configuration/ApplicationConfiguration.h
 	./configuration/CameraConfiguration.h
 	./configuration/PhysicsConfiguration.h
@@ -844,36 +863,39 @@ set(HDRS
 	./configuration/FitnessConfiguration.h
 	./configuration/EnvironmentConfiguration.h
 	./configuration/EvolutionConfiguration.h
-	./controller/camera/CameraHandler.h
-	./controller/input/MouseHandler.h
-	./controller/input/KeyboardHandler.h
-	./model/settings/GeneticAlgorithmSettings.h
-	./model/settings/PhysicsSettings.h
-	./model/settings/EnvironmentSettings.h
-	./model/settings/MorphologySettings.h
-	./model/settings/ControlSettings.h
+	
+	# logger
 	./utils/logging/Logger.h
 )
 
 # Append source files here
 set(SRCS
+    # base
 	./BaseApplication.cpp
 	./SimulationManager.cpp
-	./view/ogre3D/evolution/environments/HillsO3D.cpp
-	./view/ogre3D/evolution/environments/PlaneO3D.cpp
-	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
-	./view/general/evolution/environments/Plane.cpp
-	./view/general/evolution/environments/Environment.cpp
-	./view/general/evolution/environments/Hills.cpp
-	./view/general/evolution/environments/OpenSea.cpp
-	./controller/camera/CameraHandler.cpp
-	./controller/input/MouseHandler.cpp
-	./controller/input/KeyboardHandler.cpp
+	
+    # model
+	## settings
 	./model/settings/ControlSettings.cpp
 	./model/settings/MorphologySettings.cpp
 	./model/settings/GeneticAlgorithmSettings.cpp
 	./model/settings/EnvironmentSettings.cpp
 	./model/settings/PhysicsSettings.cpp
+	
+	# view
+	./view/ogre3D/evolution/environments/HillsO3D.cpp
+	./view/general/evolution/environments/Environment.cpp
+	./view/general/evolution/environments/Hills.cpp
+	## CEGUI
+	./view/CEGUI/GUISheetHandler.cpp
+	
+	# controller
+	./controller/camera/CameraHandler.cpp
+	./controller/input/OISInputHandler.cpp
+	./controller/input/CEGUIInputHandler.cpp
+	./controller/StateHandler.cpp
+	
+	# logger
 	./utils/logging/Logger.cpp
 )
  

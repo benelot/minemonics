@@ -5,22 +5,28 @@
  *      Author: leviathan
  */
 
-#include "KeyboardHandler.h"
+#include <OISKeyboard.h>
+#include <OISMouse.h>
+
+#include "OISInputHandler.h"
+
 #include "SimulationManager.h"
 
-BoostLogger KeyboardHandler::logger;                     // initialize the static variables
-KeyboardHandler::_Init KeyboardHandler::_initializer;
+#include <utils/logging/Logger.h>
 
-KeyboardHandler::KeyboardHandler(SimulationManager* simulationMgr):mSimulationMgr(simulationMgr) {
+BoostLogger OISInputHandler::logger;                     // initialize the static variables
+//Logger::initLogger(logger,"OISInputHandler");
+
+OISInputHandler::OISInputHandler(SimulationManager* simulationMgr):mSimulationMgr(simulationMgr) {
 
 }
 
-KeyboardHandler::~KeyboardHandler() {
-	// TODO Auto-generated destructor stub
+OISInputHandler::~OISInputHandler() {
+	// No tear down necessary
 }
 
 //-------------------------------------------------------------------------------------
-bool KeyboardHandler::keyPressed(const OIS::KeyEvent &arg) {
+bool OISInputHandler::keyPressed(const OIS::KeyEvent &arg) {
 	switch (arg.key) {
 	case OIS::KC_UP:
 	case OIS::KC_W:
@@ -60,7 +66,7 @@ bool KeyboardHandler::keyPressed(const OIS::KeyEvent &arg) {
 
 	case OIS::KC_ESCAPE:
 		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Shutdown application!";
-		mSimulationMgr->enableShutdown();
+		mSimulationMgr->getStateHandler()->requestStateChange(SHUTDOWN);
 		break;
 	default:
 		break;
@@ -68,7 +74,7 @@ bool KeyboardHandler::keyPressed(const OIS::KeyEvent &arg) {
 	return true;
 }
 //-------------------------------------------------------------------------------------
-bool KeyboardHandler::keyReleased(const OIS::KeyEvent &arg) {
+bool OISInputHandler::keyReleased(const OIS::KeyEvent &arg) {
 	switch (arg.key) {
 	case OIS::KC_UP:
 	case OIS::KC_W:
@@ -94,6 +100,32 @@ bool KeyboardHandler::keyReleased(const OIS::KeyEvent &arg) {
 	default:
 		break;
 	}
+	return true;
+}
+
+// OIS::MouseListener
+bool OISInputHandler::mouseMoved(const OIS::MouseEvent &arg) {
+	if (arg.state.buttonDown(OIS::MB_Right)) {
+		mSimulationMgr->getCameraHandler().rotate(arg.state.Y.rel,arg.state.X.rel,0);
+	}
+	return true;
+}
+bool OISInputHandler::mousePressed(const OIS::MouseEvent &arg,
+		OIS::MouseButtonID id) {
+	switch (id) {
+	case OIS::MB_Left:
+		Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
+		break;
+	case OIS::MB_Right:
+		Ogre::LogManager::getSingleton().logMessage("Mouse right-click");
+		break;
+	default:
+		break;
+	}
+	return true;
+}
+bool OISInputHandler::mouseReleased(const OIS::MouseEvent &arg,
+		OIS::MouseButtonID id) {
 	return true;
 }
 

@@ -18,28 +18,39 @@
 #define __SimulationManager_h_
 
 class HillsO3D;
-#include "controller/input/KeyboardHandler.h"
-#include "controller/input/MouseHandler.h"
-#include "controller/camera/CameraHandler.h"
+class CEGUIInputHandler;
 
+// base
 #include "BaseApplication.h"
 
-// Logger
-#include <utils/logging/Logger.h>
+// model
 
-
+// view
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
+#include "controller/StateHandler.h"
+
+// controller
+#include "controller/camera/CameraHandler.h"
+
+//utils
+#include <utils/logging/Logger.h>
 
 class SimulationManager: public BaseApplication {
 private:
-	OgreBites::Label* mInfoLabel;
+	//OgreBites: remove if CEGUI works
+	//OgreBites::Label* mInfoLabel;
 	HillsO3D* mTerrain;
 
 	// Game component handlers
-	KeyboardHandler mKeyboardHandler;
-	MouseHandler mMouseHandler;
+	CEGUIInputHandler* mCEGUIInputHandler;
 	CameraHandler mCameraHandler;
+
+	CEGUI::System* pSystem;
+	CEGUI::Window* pLayout;
+
+	// StateHandler
+	StateHandler* mStateHandler;
 
 	// Static logger
 	static BoostLogger logger;
@@ -56,13 +67,13 @@ public:
 
 	// Accessor methods
 	CameraHandler& getCameraHandler();
-	KeyboardHandler& getKeyboardHandler();
-	MouseHandler& getMouseHandler();
-	void enableShutdown();
+	CEGUIInputHandler* getInputHandler();
+	StateHandler* getStateHandler();
+
 	Ogre::Camera* getCamera();
 
 protected:
-    //CEGUI::OgreRenderer* mRenderer;
+    CEGUI::OgreRenderer* mRenderer;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);
