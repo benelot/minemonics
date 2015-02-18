@@ -333,7 +333,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 
 	//quit item
 	CEGUI::Window *quitApplicationItem = win.createWindow("Ogremonics/MenuItem",
-			"quitApplicationItem");
+			"cmdQuitApplication");
 	quitApplicationItem->setText("Quit [Q]");
 	fileMenu->addChild(quitApplicationItem);
 
@@ -349,7 +349,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 
 	// new evolution item
 	CEGUI::Window *newEvolutionItem = win.createWindow("Ogremonics/MenuItem",
-			"newEvolutionItem");
+			"cmdNewEvolution");
 	newEvolutionItem->setText("New Evolution");
 	evolutionMenu->addChild(newEvolutionItem);
 
@@ -414,7 +414,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	// Opensea
 	CEGUI::Window *openSeaItem = win.createWindow("Ogremonics/MenuItem",
 			"openSeaItem");
-	openSeaItem->setText("Open sea");
+	openSeaItem->setText("Open Sea");
 	environmentMenu->addChild(openSeaItem);
 
 	// Plane
@@ -494,7 +494,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	// Record frames
 	CEGUI::Window *recordFramesItem = win.createWindow("Ogremonics/MenuItem",
 			"recordFramesItem");
-	recordFramesItem->setText("Record frames [CTRL+R]");
+	recordFramesItem->setText("Record Frames [CTRL+R]");
 	creatureMenu->addChild(recordFramesItem);
 
 	//#####################
@@ -572,14 +572,14 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	// Population size
 	CEGUI::Window *populationSizeItem = win.createWindow("Ogremonics/MenuItem",
 			"populationSizeItem");
-	populationSizeItem->setText("Population size...");
+	populationSizeItem->setText("Population Size...");
 	populationSettingsMenu->addChild(populationSizeItem);
 
 	// Selection style
 	CEGUI::Window *selectionStyleItem = win.createWindow("Ogremonics/MenuItem",
-			"populationSizeItem");
-	populationSizeItem->setText("Selection style...");
-	populationSettingsMenu->addChild(populationSizeItem);
+			"selectionStyleItem");
+	selectionStyleItem->setText("Selection Style...");
+	populationSettingsMenu->addChild(selectionStyleItem);
 
 	// Creature
 	CEGUI::Window *creatureSettingsTopItem = win.createWindow(
@@ -733,13 +733,13 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	// Tune for speed
 	CEGUI::Window *tuneForSpeedItem = win.createWindow("Ogremonics/MenuItem",
 			"tuneForSpeedItem");
-	tuneForSpeedItem->setText("Tune for speed [Keypad -]");
+	tuneForSpeedItem->setText("Tune for Speed [Keypad -]");
 	renderingMenu->addChild(tuneForSpeedItem);
 
 	// Tune for quality
 	CEGUI::Window *tuneForQualityItem = win.createWindow("Ogremonics/MenuItem",
 			"tuneForQualityItem");
-	tuneForQualityItem->setText("Tune for quality [Keypad +]");
+	tuneForQualityItem->setText("Tune for Quality [Keypad +]");
 	renderingMenu->addChild(tuneForQualityItem);
 
 	// Movement
