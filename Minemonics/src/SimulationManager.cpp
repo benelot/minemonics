@@ -448,7 +448,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	// Save population as...
 	CEGUI::Window *savePopulationAsItem = win.createWindow(
 			"Ogremonics/MenuItem", "savePopulationAsItem");
-	savePopulationAsItem->setText("Save Population as");
+	savePopulationAsItem->setText("Save Population as...");
 	populationMenu->addChild(savePopulationAsItem);
 
 	// Close population
@@ -470,7 +470,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	// New random creature
 	CEGUI::Window *newCreatureItem = win.createWindow("Ogremonics/MenuItem",
 			"newCreatureItem");
-	newCreatureItem->setText("New random Creature [F5]");
+	newCreatureItem->setText("New Random Creature [F5]");
 	creatureMenu->addChild(newCreatureItem);
 
 	// Open creature...
@@ -551,14 +551,23 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 			"settingsMenu");
 	settingsTopItem->addChild(settingsMenu);
 
+	// Evolution menu
+	CEGUI::Window *evolutionSettingsTopItem = win.createWindow(
+			"Ogremonics/MenuItem", "evolutionSettingsTopItem");
+	evolutionSettingsTopItem->setText("Evolution");
+	settingsMenu->addChild(evolutionSettingsTopItem);
+	CEGUI::Window *evolutionSettingsMenu = win.createWindow(
+			"Ogremonics/PopupMenu", "evolutionSettingsMenu");
+	evolutionSettingsTopItem->addChild(evolutionSettingsMenu);
+
 	//Population menu
-	CEGUI::Window *populationSettingsTopItem = win.createWindow("Ogremonics/MenuItem",
-			"populationSettingsTopItem");
+	CEGUI::Window *populationSettingsTopItem = win.createWindow(
+			"Ogremonics/MenuItem", "populationSettingsTopItem");
 	populationSettingsTopItem->setText("Population");
 	settingsMenu->addChild(populationSettingsTopItem);
-	CEGUI::Window *populationSettingsMenu = win.createWindow("Ogremonics/PopupMenu",
-			"populationSettingsMenu");
-	fileTopItem->addChild(populationSettingsMenu);
+	CEGUI::Window *populationSettingsMenu = win.createWindow(
+			"Ogremonics/PopupMenu", "populationSettingsMenu");
+	populationSettingsTopItem->addChild(populationSettingsMenu);
 
 	// Population size
 	CEGUI::Window *populationSizeItem = win.createWindow("Ogremonics/MenuItem",
@@ -572,11 +581,14 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	populationSizeItem->setText("Selection style...");
 	populationSettingsMenu->addChild(populationSizeItem);
 
-	// Evolution and Creatures...
-	CEGUI::Window *evolutionCreaturesItem = win.createWindow("Ogremonics/MenuItem",
-			"evolutionCreaturesItem");
-	evolutionCreaturesItem->setText("Evolution and Creatures...");
-	settingsMenu->addChild(evolutionCreaturesItem);
+	// Creature
+	CEGUI::Window *creatureSettingsTopItem = win.createWindow(
+			"Ogremonics/MenuItem", "creatureSettingsTopItem");
+	creatureSettingsTopItem->setText("Creature");
+	settingsMenu->addChild(creatureSettingsTopItem);
+	CEGUI::Window *creatureSettingsMenu = win.createWindow(
+			"Ogremonics/PopupMenu", "creatureSettingsMenu");
+	creatureSettingsTopItem->addChild(creatureSettingsMenu);
 
 	// Rendering
 	CEGUI::Window *renderingTopItem = win.createWindow("Ogremonics/MenuItem",
@@ -596,8 +608,7 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	renderingMenu->addChild(shadowsItem);
 
 	// Fog on/off
-	CEGUI::Window *fogItem = win.createWindow("Ogremonics/MenuItem",
-			"fogItem");
+	CEGUI::Window *fogItem = win.createWindow("Ogremonics/MenuItem", "fogItem");
 	fogItem->setText("Fog on/off [F]");
 	renderingMenu->addChild(fogItem);
 
@@ -849,8 +860,8 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	gravityMenu->addChild(moonGravityItem);
 
 	// Mars/Mercury gravity 0.377/0.378
-	CEGUI::Window *marsMercuryGravityItem = win.createWindow("Ogremonics/MenuItem",
-			"marsMercuryGravityItem");
+	CEGUI::Window *marsMercuryGravityItem = win.createWindow(
+			"Ogremonics/MenuItem", "marsMercuryGravityItem");
 	marsMercuryGravityItem->setText("Mars/Mercury Gravity 0.377 g");
 	gravityMenu->addChild(marsMercuryGravityItem);
 
@@ -861,8 +872,8 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	gravityMenu->addChild(uranusGravityItem);
 
 	// Venus/Saturn gravity 0.907/0.916
-	CEGUI::Window *venusSaturnGravityItem = win.createWindow("Ogremonics/MenuItem",
-			"venusSaturnGravityItem");
+	CEGUI::Window *venusSaturnGravityItem = win.createWindow(
+			"Ogremonics/MenuItem", "venusSaturnGravityItem");
 	venusSaturnGravityItem->setText("Venus/Saturn Gravity 0.91 g");
 	gravityMenu->addChild(venusSaturnGravityItem);
 
