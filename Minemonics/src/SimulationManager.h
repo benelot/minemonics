@@ -20,6 +20,7 @@
 class HillsO3D;
 class CEGUIInputHandler;
 class GUISheetHandler;
+class Logger;
 
 // base
 #include "BaseApplication.h"
@@ -45,8 +46,8 @@ private:
 	CEGUIInputHandler* mCEGUIInputHandler;
 	CameraHandler mCameraHandler;
 
-	CEGUI::System* pSystem;
-	CEGUI::Window* pLayout;
+	CEGUI::System* mSystem;
+	CEGUI::Window* mLayout;
 
 	// StateHandler
 	StateHandler* mStateHandler;
@@ -54,15 +55,17 @@ private:
 	//SheetHandler
 	GUISheetHandler* mGUISheetHandler;
 
-	// Static logger
-	static BoostLogger logger;
+	// Logger
+	static BoostLogger mBoostLogger;
 
 	static class _Init {
 	public:
 		_Init() {
-			logger.add_attribute("ClassName",boost::log::attributes::constant < std::string > ("SimulationManager"));
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>("SimulationManager"));
 		}
 	} _initializer;
+
 public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);
@@ -75,22 +78,15 @@ public:
 	Ogre::Camera* getCamera();
 
 protected:
-    CEGUI::OgreRenderer* mRenderer;
+	CEGUI::OgreRenderer* mRenderer;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);
 	virtual void destroyScene(void);
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	virtual void windowResized(Ogre::RenderWindow* rw);
 
-    // OIS::KeyListener
-    virtual bool keyPressed( const OIS::KeyEvent &arg );
-    virtual bool keyReleased( const OIS::KeyEvent &arg );
-    // OIS::MouseListener
-    virtual bool mouseMoved( const OIS::MouseEvent &arg );
-    virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
-    virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
-
-    bool quit(const CEGUI::EventArgs &e);
+	bool quit(const CEGUI::EventArgs &e);
 };
 
 #endif // #ifndef __SimulationManager_h_

@@ -23,9 +23,6 @@
 #include "controller/input/CEGUIInputHandler.h"
 #include "controller/camera/CameraHandler.h"
 
-//logger
-#include "utils/logging/Logger.h"
-
 #include <OgreWindowEventUtilities.h>
 
 // needed to be able to create the CEGUI renderer interface
@@ -47,14 +44,14 @@
 
 //#define _DEBUGGUI
 
-BoostLogger SimulationManager::logger;        // initialize the static variables
+BoostLogger SimulationManager::mBoostLogger;                     // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
-		mCameraHandler(this), mRenderer(0),pLayout(NULL),pSystem(NULL),mCEGUIInputHandler(NULL) {
+		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mCEGUIInputHandler(
+				NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
 	mTerrain = NULL;
-
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
@@ -68,7 +65,6 @@ void SimulationManager::destroyScene(void) {
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
 
-
 	/// INPUT HANDLER
 
 	// this next bit is for the sake of the input handler
@@ -77,19 +73,16 @@ void SimulationManager::createFrameListener(void) {
 
 	mWindow->getCustomAttribute("WINDOW", &windowHnd);
 
-
-
 	// set up the input handlers
 	mStateHandler = new StateHandler();
 
 	// since the input handler deals with pushing input to CEGUI, we need to give it a pointer
 	// to the CEGUI System instance to use
-	mCEGUIInputHandler = new CEGUIInputHandler(mStateHandler, windowHnd,
-			this);
+	mCEGUIInputHandler = new CEGUIInputHandler(mStateHandler, windowHnd, this);
 	mStateHandler->requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
-	mGUISheetHandler = new GUISheetHandler(pSystem, pLayout, mStateHandler);
+	mGUISheetHandler = new GUISheetHandler(mSystem, mLayout, mStateHandler);
 
 	//Set initial mouse clipping size
 	windowResized(mWindow);
@@ -129,32 +122,21 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//Need to capture/update each device
 	mCEGUIInputHandler->capture();
 
+	// Align CEGUI mouse with OIS mouse
+	const OIS::MouseState state =
+			getInputHandler()->getMouse()->getMouseState();
+	CEGUI::Vector2f mousePos =
+			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
+			state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
+
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
+
+	// Inject time elapsed
+	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 	return true;
 }
 
-//-------------------------------------------------------------------------------------
-bool SimulationManager::keyPressed(const OIS::KeyEvent &arg) {
-	return getInputHandler()->keyPressed(arg);
-}
-//-------------------------------------------------------------------------------------
-bool SimulationManager::keyReleased(const OIS::KeyEvent &arg) {
-	return getInputHandler()->keyReleased(arg);
-}
-//-------------------------------------------------------------------------------------
-bool SimulationManager::mouseMoved(const OIS::MouseEvent &arg) {
-	return getInputHandler()->mouseMoved(arg);
-}
-//-------------------------------------------------------------------------------------
-bool SimulationManager::mousePressed(const OIS::MouseEvent &arg,
-		OIS::MouseButtonID id) {
-	return getInputHandler()->mousePressed(arg, id);
-}
-//-------------------------------------------------------------------------------------
-bool SimulationManager::mouseReleased(const OIS::MouseEvent &arg,
-		OIS::MouseButtonID id) {
-	return getInputHandler()->mouseReleased(arg, id);
-}
 //-------------------------------------------------------------------------------------
 bool SimulationManager::quit(const CEGUI::EventArgs &args) {
 	mShutDown = true;
@@ -181,7 +163,7 @@ void SimulationManager::createScene(void) {
 	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
 
 	// This pointer is valid only locally
-	pSystem = &CEGUI::System::getSingleton();
+	mSystem = &CEGUI::System::getSingleton();
 
 	// tell us a lot about what is going on (see CEGUI.log in the working directory)
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
@@ -191,41 +173,27 @@ void SimulationManager::createScene(void) {
 			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
 
 	// show the CEGUI mouse cursor (defined in the look-n-feel)
-	pSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(
-			(CEGUI::utf8*) "TaharezLook/MouseArrow");
+	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
 
 	// use this font for text in the UI
 	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
 			(CEGUI::utf8*) "GUI");
-	pSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
+	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
 
 	// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
 	// put it in the GUI resource group
-	pLayout = CEGUI::WindowManager::getSingleton().loadLayoutFromFile(
+	mLayout = CEGUI::WindowManager::getSingleton().loadLayoutFromFile(
 			(CEGUI::utf8*) "katana.layout", (CEGUI::utf8*) "GUI");
 
 	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
-	pSystem->getDefaultGUIContext().setRootWindow(pLayout);
-
-//	CEGUI::PushButton* pQuitButton =
-//			(CEGUI::PushButton *) pLayout->getChildRecursive("cmdQuit");
-//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-//			CEGUI::Event::Subscriber(&SimulationManager::quit, this));
-
-//	while (mStateHandler->getCurrentState() != SHUTDOWN) {
-//		handler->capture();
-//
-//		// run the message pump (Eihort)
-//		Ogre::WindowEventUtilities::messagePump();
-//		ogre->renderOneFrame();
-//	}
+	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 	// ###################
 	// We create a test scene for testing ois and bullet
 	// ###################
-	BOOST_LOG_SEV(logger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creating test environment for basic setups...";
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(50000);
 
@@ -305,7 +273,7 @@ void SimulationManager::createScene(void) {
 			Ogre::Vector3(0, 200, 400));
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode2");
 
-	BOOST_LOG_SEV(logger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
 }
 
 // Accessor methods
@@ -323,6 +291,21 @@ StateHandler* SimulationManager::getStateHandler() {
 
 Ogre::Camera* SimulationManager::getCamera() {
 	return mCamera;
+}
+
+//Adjust mouse clipping area
+void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Repositioning OIS pointer...";
+	unsigned int width, height, depth;
+	int left, top;
+	rw->getMetrics(width, height, depth, left, top);
+
+	const OIS::MouseState &ms = mCEGUIInputHandler->getMouse()->getMouseState();
+	ms.width = width;
+	ms.height = height;
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
+	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

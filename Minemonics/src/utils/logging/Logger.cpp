@@ -25,6 +25,14 @@
 #include <boost/log/utility/value_ref.hpp>
 #include <boost/log/utility/empty_deleter.hpp>
 
+Logger::Logger(){
+
+}
+
+Logger::~Logger(){
+
+}
+
 void Logger::init(std::string fileName) {
 	namespace logging = boost::log;
 	namespace src = boost::log::sources;
@@ -40,10 +48,8 @@ void Logger::init(std::string fileName) {
 			keywords::format = (expr::stream
 					<< expr::format_date_time<boost::posix_time::ptime>(
 							"TimeStamp", "%Y-%m-%d %H:%M:%S") << ": ["
-					<< expr::attr<std::string>("ClassName") << "/"
-					<< expr::attr<std::string>("File") << "]("
-					<< expr::attr<int>("Line") << ") <"
-					<< logging::trivial::severity << ">" << expr::smessage));
+					<< expr::attr<std::string>("ClassName") << "] <"
+					<< logging::trivial::severity << "> " << expr::smessage));
 
 	logging::add_common_attributes();
 
@@ -72,9 +78,13 @@ void Logger::initTermSink() {
 	logging::add_common_attributes();
 }
 
-void Logger::initLogger(BoostLogger logger, std::string className){
-	logger.add_attribute("ClassName",
-			boost::log::attributes::constant<std::string>(
-					className));
-}
+//void Logger::setClass(std::string className){
+//	logger.add_attribute("ClassName",
+//			boost::log::attributes::constant<std::string>(
+//					className));
+//}
+//
+//void Logger::log(boost::log::v2_mt_posix::trivial::severity_level severityLevel,std::string message){
+//	BOOST_LOG_SEV(logger, severityLevel)<< message;
+//}
 

@@ -12,14 +12,11 @@
 
 #include "SimulationManager.h"
 
-#include <utils/logging/Logger.h>
-
-BoostLogger OISInputHandler::logger;          // initialize the static variables
-//Logger::initLogger(logger,"OISInputHandler");
-
+BoostLogger OISInputHandler::mBoostLogger;                     // initialize the static variables
+OISInputHandler::_Init OISInputHandler::_initializer;
 OISInputHandler::OISInputHandler(SimulationManager* simulationMgr) :
-		mSimulationMgr(simulationMgr),mMouse(NULL),mKeyboard(NULL),mInputManager(NULL) {
-
+		mSimulationMgr(simulationMgr), mMouse(NULL), mKeyboard(NULL), mInputManager(
+		NULL) {
 }
 
 OISInputHandler::~OISInputHandler() {
@@ -42,42 +39,42 @@ bool OISInputHandler::keyPressed(const OIS::KeyEvent &arg) {
 	switch (arg.key) {
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info)<< "Key::Camera move forward!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move forward!";
 		mSimulationMgr->getCameraHandler().moveZ(-1);
 		break;
 
 		case OIS::KC_DOWN:
 		case OIS::KC_S:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Camera move backward!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Key::Camera move backward!";
 		mSimulationMgr->getCameraHandler().moveZ(1);
 		break;
 
 		case OIS::KC_LEFT:
 		case OIS::KC_A:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Camera move left!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Key::Camera move left!";
 		mSimulationMgr->getCameraHandler().moveX(-1);
 		break;
 
 		case OIS::KC_RIGHT:
 		case OIS::KC_D:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Camera move right!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Key::Camera move right!";
 		mSimulationMgr->getCameraHandler().moveX(1);
 		break;
 
 		case OIS::KC_PGDOWN:
 		case OIS::KC_E:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Camera move down!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Key::Camera move down!";
 		mSimulationMgr->getCameraHandler().moveY(-1);
 		break;
 
 		case OIS::KC_PGUP:
 		case OIS::KC_Q:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Camera move up!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Key::Camera move up!";
 		mSimulationMgr->getCameraHandler().moveY(1);
 		break;
 
 		case OIS::KC_ESCAPE:
-		BOOST_LOG_SEV(logger, boost::log::trivial::info) << "Key::Shutdown application!";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Key::Shutdown application!";
 		mSimulationMgr->getStateHandler()->requestStateChange(SHUTDOWN);
 		break;
 		default:
@@ -142,3 +139,10 @@ bool OISInputHandler::mouseReleased(const OIS::MouseEvent &arg,
 	return true;
 }
 
+OIS::Keyboard*& OISInputHandler::getKeyboard() {
+	return mKeyboard;
+}
+
+OIS::Mouse*& OISInputHandler::getMouse() {
+	return mMouse;
+}

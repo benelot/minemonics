@@ -394,33 +394,8 @@ bool BaseApplication::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButto
     return true;
 }
 
-//Adjust mouse clipping area
-void BaseApplication::windowResized(Ogre::RenderWindow* rw)
-{
-    unsigned int width, height, depth;
-    int left, top;
-    rw->getMetrics(width, height, depth, left, top);
 
-    //TODO: How to fix mouse clipping area?
-    //const OIS::MouseState &ms = mMouse->getMouseState();
-    //ms.width = width;
-    //ms.height = height;
-}
-
-//TODO: Clean up this method after successful input transformation.
 //Unattach OIS before window shutdown (very important under Linux)
 void BaseApplication::windowClosed(Ogre::RenderWindow* rw)
 {
-    //Only close for window that created OIS (the main window in these demos)
-//    if( rw == mWindow )
-//    {
-//        if( mInputManager )
-//        {
-//            mInputManager->destroyInputObject( mMouse );
-//            mInputManager->destroyInputObject( mKeyboard );
-//
-//            OIS::InputManager::destroyInputSystem(mInputManager);
-//            mInputManager = 0;
-//        }
-//    }
 }

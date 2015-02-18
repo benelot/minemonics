@@ -38,11 +38,29 @@ CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 	// For debug, in case something goes wrong the mouse can go out.
 	pl.insert(OIS::ParamList::value_type("x11_keyboard_grab", "false"));
 	pl.insert(OIS::ParamList::value_type("x11_mouse_grab", "false"));
+#if defined OIS_WIN32_PLATFORM
+	pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
+	pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+	pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+	pl.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
+#elif defined OIS_LINUX_PLATFORM
+	pl.insert(
+			std::make_pair(std::string("x11_mouse_grab"),
+					std::string("false")));
+	pl.insert(
+			std::make_pair(std::string("x11_mouse_hide"),
+					std::string("false")));
+	pl.insert(
+			std::make_pair(std::string("x11_keyboard_grab"),
+					std::string("false")));
+	pl.insert(
+			std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
+#endif
 
 	mhWnd = hWnd;
 	mInputManager = OIS::InputManager::createInputSystem(pl);
-	mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse,
-			true));
+	mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(
+			OIS::OISMouse, true));
 	mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(
 			OIS::OISKeyboard, true));
 	mMouse->setEventCallback(this);
