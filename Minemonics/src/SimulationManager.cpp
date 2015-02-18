@@ -170,7 +170,7 @@ void SimulationManager::createScene(void) {
 
 	// use this CEGUI scheme definition (see CEGUI docs for more)
 	CEGUI::SchemeManager::getSingleton().createFromFile(
-			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
+			(CEGUI::utf8*) "OgreTray.scheme", (CEGUI::utf8*) "GUI");
 
 	// show the CEGUI mouse cursor (defined in the look-n-feel)
 	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
@@ -313,63 +313,63 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 		CEGUI::WindowManager& win) {
 	//Barre de menu
-	CEGUI::Window *menu = win.createWindow("TaharezLook/Menubar", "menu");
+	CEGUI::Window *menu = win.createWindow("OgreTray/Menubar", "menu");
 	menu->setSize(CEGUI::USize(CEGUI::UDim(1, 0), CEGUI::UDim(0.05, 0)));
 	menu->setPosition(CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
 
 	//Menu fichier
-	CEGUI::Window *fichier = win.createWindow("TaharezLook/MenuItem",
+	CEGUI::Window *fichier = win.createWindow("OgreTray/MenuItem",
 			"fichier");
 	fichier->setText("Fichier");
 	menu->addChild(fichier);
-	CEGUI::Window *fichierpop = win.createWindow("TaharezLook/PopupMenu",
+	CEGUI::Window *fichierpop = win.createWindow("OgreTray/PopupMenu",
 			"fichierpop");
 	fichier->addChild(fichierpop);
 	//Bouton quitter
-	CEGUI::Window *quitter = win.createWindow("TaharezLook/MenuItem",
+	CEGUI::Window *quitter = win.createWindow("OgreTray/MenuItem",
 			"quitter");
 	quitter->setText("Quitter");
 	fichierpop->addChild(quitter);
 
 	//Menu affichage
-	CEGUI::Window *affichage = win.createWindow("TaharezLook/MenuItem",
+	CEGUI::Window *affichage = win.createWindow("OgreTray/MenuItem",
 			"affichage");
 	affichage->setText("Affichage");
 	menu->addChild(affichage);
-	CEGUI::Window *affpop = win.createWindow("TaharezLook/PopupMenu", "affpop");
+	CEGUI::Window *affpop = win.createWindow("OgreTray/PopupMenu", "affpop");
 	affichage->addChild(affpop);
 	// Bouton vue outil
-	CEGUI::Window *outil = win.createWindow("TaharezLook/MenuItem", "outil");
+	CEGUI::Window *outil = win.createWindow("OgreTray/MenuItem", "outil");
 	outil->setText("Vue outil                                      'O'");
 	affpop->addChild(outil);
 	//Bouton vue de cÃ´tÃ©
-	CEGUI::Window *cote = win.createWindow("TaharezLook/MenuItem", "cote");
+	CEGUI::Window *cote = win.createWindow("OgreTray/MenuItem", "cote");
 	cote->setText("Vue laterale                                  'L'");
 	affpop->addChild(cote);
 	//Bouton vues multiples
-	CEGUI::Window *multi = win.createWindow("TaharezLook/MenuItem", "multiple");
+	CEGUI::Window *multi = win.createWindow("OgreTray/MenuItem", "multiple");
 	multi->setText("Vues multiples                              'M'");
 	affpop->addChild(multi);
 	//Bouton positions outil
-	CEGUI::Window *posOutil = win.createWindow("TaharezLook/MenuItem",
+	CEGUI::Window *posOutil = win.createWindow("OgreTray/MenuItem",
 			"posOutil");
 	posOutil->setText("Afficher/Masquer les positions outil   'P'");
 	affpop->addChild(posOutil);
 
 	//Menu aide
-	CEGUI::Window *aidemenu = win.createWindow("TaharezLook/MenuItem",
+	CEGUI::Window *aidemenu = win.createWindow("OgreTray/MenuItem",
 			"aidemenu");
 	aidemenu->setText("?");
 	menu->addChild(aidemenu);
-	CEGUI::Window *aidepop = win.createWindow("TaharezLook/PopupMenu",
+	CEGUI::Window *aidepop = win.createWindow("OgreTray/PopupMenu",
 			"aidepop");
 	aidemenu->addChild(aidepop);
 	// Bouton aide
-	CEGUI::Window *aide = win.createWindow("TaharezLook/MenuItem", "aide");
+	CEGUI::Window *aide = win.createWindow("OgreTray/MenuItem", "aide");
 	aide->setText("Aide                      'F1'");
 	aidepop->addChild(aide);
 	// Bouton Ã  propos
-	CEGUI::Window *apropos = win.createWindow("TaharezLook/MenuItem",
+	CEGUI::Window *apropos = win.createWindow("OgreTray/MenuItem",
 			"apropos");
 	apropos->setText("A propos de ce logiciel");
 	aidepop->addChild(apropos);
