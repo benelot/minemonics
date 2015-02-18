@@ -11,15 +11,15 @@ GUISheetHandler::GUISheetHandler(CEGUI::System* system, CEGUI::Window* sheet, St
 	mWindow = sheet;
 	mStateHandler = stateHandler;
 
-	// hook up the event handlers to the window elements
-	CEGUI::PushButton* pLaunchButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdInstantAction");
-	pLaunchButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::launchButtonClicked, this));
-
-	CEGUI::PushButton* pOptionsButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdOptions");
-	pOptionsButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::optionsButtonClicked, this));
-
-	CEGUI::PushButton* pQuitButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdQuit");
-	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
+//	// hook up the event handlers to the window elements
+//	CEGUI::PushButton* pLaunchButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdInstantAction");
+//	pLaunchButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::launchButtonClicked, this));
+//
+//	CEGUI::PushButton* pOptionsButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdOptions");
+//	pOptionsButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::optionsButtonClicked, this));
+//
+//	CEGUI::PushButton* pQuitButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdQuit");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
 
 }
 

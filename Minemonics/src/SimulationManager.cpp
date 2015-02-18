@@ -44,13 +44,13 @@
 
 //#define _DEBUGGUI
 
-BoostLogger SimulationManager::mBoostLogger;                     // initialize the static variables
+BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mCEGUIInputHandler(
-				NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
+		NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
 	mTerrain = NULL;
 }
 //-------------------------------------------------------------------------------------
@@ -182,8 +182,10 @@ void SimulationManager::createScene(void) {
 
 	// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
 	// put it in the GUI resource group
-	mLayout = CEGUI::WindowManager::getSingleton().loadLayoutFromFile(
-			(CEGUI::utf8*) "katana.layout", (CEGUI::utf8*) "GUI");
+	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
+			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
+
+	createMenu(mLayout, CEGUI::WindowManager::getSingleton());
 
 	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
@@ -193,7 +195,7 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We create a test scene for testing ois and bullet
 	// ###################
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creating test environment for basic setups...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(50000);
 
@@ -306,6 +308,74 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
+}
+
+CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
+		CEGUI::WindowManager& win) {
+	//Barre de menu
+	CEGUI::Window *menu = win.createWindow("TaharezLook/Menubar", "menu");
+	menu->setSize(CEGUI::USize(CEGUI::UDim(1, 0), CEGUI::UDim(0.05, 0)));
+	menu->setPosition(CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
+
+	//Menu fichier
+	CEGUI::Window *fichier = win.createWindow("TaharezLook/MenuItem",
+			"fichier");
+	fichier->setText("Fichier");
+	menu->addChild(fichier);
+	CEGUI::Window *fichierpop = win.createWindow("TaharezLook/PopupMenu",
+			"fichierpop");
+	fichier->addChild(fichierpop);
+	//Bouton quitter
+	CEGUI::Window *quitter = win.createWindow("TaharezLook/MenuItem",
+			"quitter");
+	quitter->setText("Quitter");
+	fichierpop->addChild(quitter);
+
+	//Menu affichage
+	CEGUI::Window *affichage = win.createWindow("TaharezLook/MenuItem",
+			"affichage");
+	affichage->setText("Affichage");
+	menu->addChild(affichage);
+	CEGUI::Window *affpop = win.createWindow("TaharezLook/PopupMenu", "affpop");
+	affichage->addChild(affpop);
+	// Bouton vue outil
+	CEGUI::Window *outil = win.createWindow("TaharezLook/MenuItem", "outil");
+	outil->setText("Vue outil                                      'O'");
+	affpop->addChild(outil);
+	//Bouton vue de cÃ´tÃ©
+	CEGUI::Window *cote = win.createWindow("TaharezLook/MenuItem", "cote");
+	cote->setText("Vue laterale                                  'L'");
+	affpop->addChild(cote);
+	//Bouton vues multiples
+	CEGUI::Window *multi = win.createWindow("TaharezLook/MenuItem", "multiple");
+	multi->setText("Vues multiples                              'M'");
+	affpop->addChild(multi);
+	//Bouton positions outil
+	CEGUI::Window *posOutil = win.createWindow("TaharezLook/MenuItem",
+			"posOutil");
+	posOutil->setText("Afficher/Masquer les positions outil   'P'");
+	affpop->addChild(posOutil);
+
+	//Menu aide
+	CEGUI::Window *aidemenu = win.createWindow("TaharezLook/MenuItem",
+			"aidemenu");
+	aidemenu->setText("?");
+	menu->addChild(aidemenu);
+	CEGUI::Window *aidepop = win.createWindow("TaharezLook/PopupMenu",
+			"aidepop");
+	aidemenu->addChild(aidepop);
+	// Bouton aide
+	CEGUI::Window *aide = win.createWindow("TaharezLook/MenuItem", "aide");
+	aide->setText("Aide                      'F1'");
+	aidepop->addChild(aide);
+	// Bouton Ã  propos
+	CEGUI::Window *apropos = win.createWindow("TaharezLook/MenuItem",
+			"apropos");
+	apropos->setText("A propos de ce logiciel");
+	aidepop->addChild(apropos);
+
+	sheet->addChild(menu);
+	return sheet;
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

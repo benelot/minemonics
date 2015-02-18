@@ -85,6 +85,7 @@ protected:
 	virtual void destroyScene(void);
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	virtual void windowResized(Ogre::RenderWindow* rw);
+	CEGUI::Window* createMenu(CEGUI::Window* sheet, CEGUI::WindowManager& win);
 
 	bool quit(const CEGUI::EventArgs &e);
 };
