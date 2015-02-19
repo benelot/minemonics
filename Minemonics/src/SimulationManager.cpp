@@ -35,7 +35,6 @@
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
-//#include "CEGUI/widgets/FrameWindow.h"
 
 #include "CEGUI/widgets/PushButton.h"
 
@@ -132,13 +131,68 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
+	//mCameraMan->frameRenderingQueued(evt); // if dialog isn't up, then update the camera
+	if (mFpsPanel != NULL) {
+		if (mFpsPanel->isVisible()) // if fps panel is visible, then update its contents
+		{
+			if (mFpsPanel->size() == 1)
+				mFpsPanel->setParamValue(0,
+						Ogre::StringConverter::toString(mWindow->getLastFPS()),
+						true);
+			else {
+				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
+				mFpsPanel->setParamValue(0,
+						Ogre::StringConverter::toString(fs.lastFPS), false);
+				mFpsPanel->setParamValue(1,
+						Ogre::StringConverter::toString(fs.avgFPS), false);
+				mFpsPanel->setParamValue(2,
+						Ogre::StringConverter::toString(fs.bestFPS), false);
+				mFpsPanel->setParamValue(3,
+						Ogre::StringConverter::toString(fs.worstFPS), false);
+				mFpsPanel->setParamValue(4,
+						Ogre::StringConverter::toString(fs.triangleCount),
+						false);
+				mFpsPanel->setParamValue(5,
+						Ogre::StringConverter::toString(fs.batchCount), true);
+			}
+		}
+	}
+	if (mDetailsPanel != NULL) {
+		if (mDetailsPanel->isVisible()) // if details panel is visible, then update its contents
+		{
+			mDetailsPanel->setParamValue(0,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedPosition().x), false);
+			mDetailsPanel->setParamValue(1,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedPosition().y), false);
+			mDetailsPanel->setParamValue(2,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedPosition().z), false);
+			mDetailsPanel->setParamValue(4,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().w), false);
+			mDetailsPanel->setParamValue(5,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().x), false);
+			mDetailsPanel->setParamValue(6,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().y), false);
+			mDetailsPanel->setParamValue(7,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().z), true);
+		}
+	}
+
+	return true;
+
 	// Inject time elapsed
 	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 	return true;
 }
 
 //-------------------------------------------------------------------------------------
-bool SimulationManager::quit(const CEGUI::EventArgs &args) {
+bool SimulationManager::quit() {
 	mShutDown = true;
 	return true;
 }
@@ -153,7 +207,7 @@ void SimulationManager::createScene(void) {
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
-	/// CEGUI
+	// CEGUI
 
 	// with a scene manager and window, we can create a the GUI renderer
 
@@ -190,6 +244,7 @@ void SimulationManager::createScene(void) {
 			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
 
 	createMenu(mLayout, CEGUI::WindowManager::getSingleton());
+	createDebugPanels();
 
 	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
@@ -927,6 +982,35 @@ CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
 	return sheet;
 }
 
+void SimulationManager::createDebugPanels() {
+	ParamsPanel::VectorStringPairs items;
+
+	items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
+	mFpsPanel = ParamsPanel::createParamsPanel(CEGUI_INFOPANEL_BORDER,
+			(int) mWindow->getHeight()
+					- (3 * CEGUI_INFOPANEL_BORDER + CEGUI_INFOPANEL_CAPTION
+							+ CEGUI_INFOPANEL_TEXT * items.size()), "FPS", 150,
+			items, mLayout);
+
+	items.clear();
+	items.push_back(ParamsPanel::PairString("cam.pX", "0"));		// 0
+	items.push_back(ParamsPanel::PairString("cam.pY", "0"));		// 1
+	items.push_back(ParamsPanel::PairString("cam.pZ", "0"));		// 2
+	items.push_back(ParamsPanel::PairString("", ""));				// 3
+	items.push_back(ParamsPanel::PairString("cam.oW", "0"));		// 4
+	items.push_back(ParamsPanel::PairString("cam.oX", "0"));		// 5
+	items.push_back(ParamsPanel::PairString("cam.oY", "0"));		// 6
+	items.push_back(ParamsPanel::PairString("cam.oZ", "0"));		// 7
+	items.push_back(ParamsPanel::PairString("", ""));				// 8
+	items.push_back(ParamsPanel::PairString("Filtering", "None"));	// 9
+	items.push_back(ParamsPanel::PairString("Poly Mode", "Solid"));	// 10
+	mDetailsPanel = ParamsPanel::createParamsPanel(
+			(int) mWindow->getWidth() - 200 - CEGUI_INFOPANEL_BORDER,
+			CEGUI_INFOPANEL_BORDER*4, "Debug", 200, items, mLayout);
+	mDetailsPanel->hide();
+
+}
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
@@ -961,4 +1045,25 @@ int main(int argc, char *argv[])
 
 #ifdef __cplusplus
 }
+
+ParamsPanel*& SimulationManager::getDetailsPanel() {
+	return mDetailsPanel;
+}
+
+ParamsPanel*& SimulationManager::getFpsPanel() {
+	return mFpsPanel;
+}
+
+void SimulationManager::setDetailsPanel(ParamsPanel*& detailsPanel) {
+	mDetailsPanel = detailsPanel;
+}
+
+void SimulationManager::setFpsPanel(ParamsPanel* fpsPanel) {
+	mFpsPanel = fpsPanel;
+}
+
+CEGUI::Window*& SimulationManager::getLayout() {
+	return mLayout;
+}
+
 #endif

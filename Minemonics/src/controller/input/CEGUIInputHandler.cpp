@@ -34,10 +34,7 @@ CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 	pl.insert(
 			OIS::ParamList::value_type("WINDOW",
 					Ogre::StringConverter::toString(hWnd)));
-
-	// For debug, in case something goes wrong the mouse can go out.
-	pl.insert(OIS::ParamList::value_type("x11_keyboard_grab", "false"));
-	pl.insert(OIS::ParamList::value_type("x11_mouse_grab", "false"));
+//The mouse should never be bound to the window
 #if defined OIS_WIN32_PLATFORM
 	pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
 	pl.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
@@ -75,18 +72,132 @@ CEGUIInputHandler::~CEGUIInputHandler() {
 
 //-------------------------------------------------------------------------------------
 bool CEGUIInputHandler::keyPressed(const OIS::KeyEvent &arg) {
+
+	//if CEGUI used the input, then return
 	if (CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(
 			(CEGUI::Key::Scan) arg.key))
 		return true;
 
+	if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
+			{
+		if (mSimulationMgr->getFpsPanel() == NULL) {
+			ParamsPanel::VectorStringPairs items;
+			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
+			mSimulationMgr->setFpsPanel(
+					ParamsPanel::createParamsPanel(CEGUI_INFOPANEL_BORDER,
+							mSimulationMgr->getWindow()->getHeight()
+									- (3 * CEGUI_INFOPANEL_BORDER
+											+ CEGUI_INFOPANEL_CAPTION
+											+ CEGUI_INFOPANEL_TEXT
+													* items.size()), "FPS", 150,
+							items, mSimulationMgr->getLayout()));
+		} else {
+			bool simple = mSimulationMgr->getFpsPanel()->size() == 1;
+			ParamsPanel::destroyParamsPanel(mSimulationMgr->getFpsPanel());
+			mSimulationMgr->setFpsPanel(NULL);
+			if (simple) {
+				ParamsPanel::VectorStringPairs items;
+				items.push_back(ParamsPanel::PairString("Last FPS", "0"));	// 0
+				items.push_back(ParamsPanel::PairString("Average FPS", "0"));// 1
+				items.push_back(ParamsPanel::PairString("Best FPS", "0"));	// 2
+				items.push_back(ParamsPanel::PairString("Worst FPS", "0"));	// 3
+				items.push_back(ParamsPanel::PairString("Triangles", "0"));	// 4
+				items.push_back(ParamsPanel::PairString("Batches", "0"));	// 5
+				mSimulationMgr->setFpsPanel(
+						ParamsPanel::createParamsPanel(
+						CEGUI_INFOPANEL_BORDER,
+								mSimulationMgr->getWindow()->getHeight()
+										- (3 * CEGUI_INFOPANEL_BORDER
+												+ CEGUI_INFOPANEL_CAPTION
+												+ CEGUI_INFOPANEL_TEXT
+														* items.size()),
+								"Adv. FPS", 200, items,
+								mSimulationMgr->getLayout()));
+			}
+		}
+	} else if (arg.key == OIS::KC_G) // toggle visibility of even rarer debugging details
+			{
+		if (mSimulationMgr->getDetailsPanel()->isVisible())
+			mSimulationMgr->getDetailsPanel()->hide();
+		else
+			mSimulationMgr->getDetailsPanel()->show();
+	} else if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
+			{
+		Ogre::String newVal;
+		Ogre::TextureFilterOptions tfo;
+		unsigned int aniso;
+
+		switch (mSimulationMgr->getDetailsPanel()->getParamValue(9)[0]) {
+		case 'B':
+			newVal = "Trilinear";
+			tfo = Ogre::TFO_TRILINEAR;
+			aniso = 1;
+			break;
+		case 'T':
+			newVal = "Anisotropic";
+			tfo = Ogre::TFO_ANISOTROPIC;
+			aniso = 8;
+			break;
+		case 'A':
+			newVal = "None";
+			tfo = Ogre::TFO_NONE;
+			aniso = 1;
+			break;
+		default:
+			newVal = "Bilinear";
+			tfo = Ogre::TFO_BILINEAR;
+			aniso = 1;
+		}
+
+		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
+		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
+		mSimulationMgr->getDetailsPanel()->setParamValue(9, newVal);
+	} else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
+			{
+		Ogre::String newVal;
+		Ogre::PolygonMode pm;
+
+		switch (mSimulationMgr->getCamera()->getPolygonMode()) {
+		case Ogre::PM_SOLID:
+			newVal = "Wireframe";
+			pm = Ogre::PM_WIREFRAME;
+			break;
+		case Ogre::PM_WIREFRAME:
+			newVal = "Points";
+			pm = Ogre::PM_POINTS;
+			break;
+		default:
+			newVal = "Solid";
+			pm = Ogre::PM_SOLID;
+		}
+
+		mSimulationMgr->getCamera()->setPolygonMode(pm);
+		mSimulationMgr->getDetailsPanel()->setParamValue(10, newVal);
+	} else if (arg.key == OIS::KC_F5)   // refresh all textures
+			{
+		Ogre::TextureManager::getSingleton().reloadAll();
+	} else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+			{
+		//TODO: Find way to print screeen
+		//mSimulationMgr->getLayout()->writeContentsToTimestampedFile("screenshot", ".jpg");
+	} else if (arg.key == OIS::KC_ESCAPE) {
+		mSimulationMgr->quit();
+	}
+
+	//mSimulationMgr->getCameraMan()->injectKeyDown(arg);
+
+	//hand value down to OIS
 	return OISInputHandler::keyPressed(arg);
 }
 //-------------------------------------------------------------------------------------
 bool CEGUIInputHandler::keyReleased(const OIS::KeyEvent &arg) {
+
+	//If CEGUI used the input, then return
 	if (CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(
 			(CEGUI::Key::Scan) arg.key))
 		return true;
 
+	//hand value down to OIS
 	return OISInputHandler::keyReleased(arg);
 }
 

@@ -31,16 +31,20 @@ This source file is part of the
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
-#include <SdkTrays.h>
 #include <SdkCameraMan.h>
 
-class BaseApplication : public Ogre::FrameListener, public Ogre::WindowEventListener, OgreBites::SdkTrayListener
+#include "view/CEGUI/ParamsPanel.h"
+
+class BaseApplication : public Ogre::FrameListener, public Ogre::WindowEventListener
 {
 public:
     BaseApplication(void);
     virtual ~BaseApplication(void);
 
     virtual void go(void);
+	Ogre::RenderWindow*& getWindow();
+	void setWindow(Ogre::RenderWindow*& window);
+	OgreBites::SdkCameraMan*& getCameraMan();
 
 protected:
     virtual bool setup();
@@ -58,14 +62,6 @@ protected:
     // Ogre::FrameListener
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
-    // OIS::KeyListener
-    virtual bool keyPressed( const OIS::KeyEvent &arg );
-    virtual bool keyReleased( const OIS::KeyEvent &arg );
-    // OIS::MouseListener
-    virtual bool mouseMoved( const OIS::MouseEvent &arg );
-    virtual bool mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
-    virtual bool mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id );
-
     // Ogre::WindowEventListener
     //Adjust mouse clipping area
     virtual void windowResized(Ogre::RenderWindow* rw) = 0;
@@ -78,12 +74,9 @@ protected:
     Ogre::RenderWindow* mWindow;
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
-	Ogre::OverlaySystem *mOverlaySystem;
 
     // OgreBites
-    OgreBites::SdkTrayManager* mTrayMgr;
     OgreBites::SdkCameraMan* mCameraMan;       // basic camera controller
-    OgreBites::ParamsPanel* mDetailsPanel;     // sample details panel
     bool mCursorWasVisible;                    // was cursor visible before dialog appeared
     bool mShutDown;
 };

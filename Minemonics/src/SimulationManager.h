@@ -55,6 +55,10 @@ private:
 	//SheetHandler
 	GUISheetHandler* mGUISheetHandler;
 
+	//CEGUI
+	ParamsPanel* mFpsPanel;
+	ParamsPanel* mDetailsPanel;
+
 	// Logger
 	static BoostLogger mBoostLogger;
 
@@ -76,6 +80,13 @@ public:
 	StateHandler* getStateHandler();
 
 	Ogre::Camera* getCamera();
+	ParamsPanel*& getDetailsPanel();
+	ParamsPanel*& getFpsPanel();
+	void setDetailsPanel(ParamsPanel*& detailsPanel);
+	void setFpsPanel(ParamsPanel* fpsPanel);
+	CEGUI::Window*& getLayout();
+
+	bool quit();
 
 protected:
 	CEGUI::OgreRenderer* mRenderer;
@@ -86,8 +97,7 @@ protected:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	virtual void windowResized(Ogre::RenderWindow* rw);
 	CEGUI::Window* createMenu(CEGUI::Window* sheet, CEGUI::WindowManager& win);
-
-	bool quit(const CEGUI::EventArgs &e);
+	void createDebugPanels();
 };
 
 #endif // #ifndef __SimulationManager_h_
