@@ -59,7 +59,7 @@ cd CeGUI
 hg clone https://underworldguardian@bitbucket.org/cegui/cegui
 mkdir build
 cd build
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ..
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=off ..
 make -j4 # because I have 4 cores for parallel compilation
 sudo make install
 sudo ldconfig
