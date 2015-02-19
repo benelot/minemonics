@@ -1,8 +1,0 @@
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/.//media/materials/scripts/Ogre.material
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/.//media/materials/textures/spheremap.png
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/.//media/materials/textures/tusk.jpg
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/.//media/materials/textures/GreenSkin.jpg
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/.//media/models/ogrehead.mesh
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/.//media/packs/SdkTrays.zip
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/bin/plugins.cfg
-/home/leviathan/git/minemonics/Minemonics/src/prototype/BulletOgre/build/dist/bin/resources.cfg

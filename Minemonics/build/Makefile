@@ -462,6 +462,30 @@ view/CEGUI/GUISheetHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/GUISheetHandler.cpp.s
 .PHONY : view/CEGUI/GUISheetHandler.cpp.s
 
+view/CEGUI/ParamsPanel.o: view/CEGUI/ParamsPanel.cpp.o
+.PHONY : view/CEGUI/ParamsPanel.o
+
+# target to build an object file
+view/CEGUI/ParamsPanel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.o
+.PHONY : view/CEGUI/ParamsPanel.cpp.o
+
+view/CEGUI/ParamsPanel.i: view/CEGUI/ParamsPanel.cpp.i
+.PHONY : view/CEGUI/ParamsPanel.i
+
+# target to preprocess a source file
+view/CEGUI/ParamsPanel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.i
+.PHONY : view/CEGUI/ParamsPanel.cpp.i
+
+view/CEGUI/ParamsPanel.s: view/CEGUI/ParamsPanel.cpp.s
+.PHONY : view/CEGUI/ParamsPanel.s
+
+# target to generate assembly for a file
+view/CEGUI/ParamsPanel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.s
+.PHONY : view/CEGUI/ParamsPanel.cpp.s
+
 view/general/evolution/environments/Environment.o: view/general/evolution/environments/Environment.cpp.o
 .PHONY : view/general/evolution/environments/Environment.o
 
@@ -585,6 +609,9 @@ help:
 	@echo "... view/CEGUI/GUISheetHandler.o"
 	@echo "... view/CEGUI/GUISheetHandler.i"
 	@echo "... view/CEGUI/GUISheetHandler.s"
+	@echo "... view/CEGUI/ParamsPanel.o"
+	@echo "... view/CEGUI/ParamsPanel.i"
+	@echo "... view/CEGUI/ParamsPanel.s"
 	@echo "... view/general/evolution/environments/Environment.o"
 	@echo "... view/general/evolution/environments/Environment.i"
 	@echo "... view/general/evolution/environments/Environment.s"

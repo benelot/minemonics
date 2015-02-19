@@ -846,6 +846,7 @@ set(HDRS
 	./view/general/evolution/environments/Plane.h
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.h
+	./view/CEGUI/ParamsPanel.h
 	
 	# controller
 	./controller/camera/CameraHandler.h
@@ -888,6 +889,7 @@ set(SRCS
 	./view/general/evolution/environments/Hills.cpp
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp
+	./view/CEGUI/ParamsPanel.cpp
 	
 	# controller
 	./controller/camera/CameraHandler.cpp
