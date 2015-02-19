@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<GUIScheme version="5" name="OgreTray">
+    <Imageset filename="Ogremonics.imageset" />
+    <Font filename="DejaVuSans-12.font" />
+    <LookNFeel filename="Ogremonics.looknfeel" />
+    <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+
+    <FalagardMapping windowType="Ogremonics/Label"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/Label" />
+    <FalagardMapping windowType="Ogremonics/Button"               targetType="CEGUI/PushButton"       renderer="Core/Button"              lookNFeel="Ogremonics/PushButton" />
+    <FalagardMapping windowType="Ogremonics/Titlebar"             targetType="CEGUI/Titlebar"         renderer="Core/Titlebar"            lookNFeel="Ogremonics/Titlebar" />
+    <FalagardMapping windowType="Ogremonics/FrameWindow"          targetType="CEGUI/FrameWindow"      renderer="Core/FrameWindow"         lookNFeel="Ogremonics/FrameWindow" />
+    <FalagardMapping windowType="Ogremonics/Thumb"                targetType="CEGUI/Thumb"            renderer="Core/Button"              lookNFeel="Ogremonics/Thumb" />
+    <FalagardMapping windowType="Ogremonics/VerticalScrollbar"    targetType="CEGUI/Scrollbar"        renderer="Core/Scrollbar"           lookNFeel="Ogremonics/VerticalScrollbar" />
+    <FalagardMapping windowType="Ogremonics/HorizontalScrollbar"  targetType="CEGUI/Scrollbar"        renderer="Core/Scrollbar"           lookNFeel="Ogremonics/HorizontalScrollbar" />
+    <FalagardMapping windowType="Ogremonics/StaticText"           targetType="DefaultWindow"          renderer="Core/StaticText"          lookNFeel="Ogremonics/StaticText" />
+    <FalagardMapping windowType="Ogremonics/Title"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/MiniTray" />
+    <FalagardMapping windowType="Ogremonics/CaptionedStaticText"  targetType="DefaultWindow"          renderer="Core/StaticText"          lookNFeel="Ogremonics/CaptionedStaticText" />
+    <FalagardMapping windowType="Ogremonics/ProgressBar"          targetType="CEGUI/ProgressBar"      renderer="Core/ProgressBar"         lookNFeel="Ogremonics/ProgressBar" />
+    <FalagardMapping windowType="Ogremonics/Editbox"              targetType="CEGUI/Editbox"          renderer="Core/Editbox"             lookNFeel="Ogremonics/Editbox" />
+    <FalagardMapping windowType="Ogremonics/MultiLineEditbox"     targetType="CEGUI/MultiLineEditbox" renderer="Core/MultiLineEditbox"    lookNFeel="Ogremonics/MultiLineEditbox" />
+    <FalagardMapping windowType="Ogremonics/Listbox"              targetType="CEGUI/Listbox"          renderer="Core/Listbox"             lookNFeel="Ogremonics/Listbox" />
+    <FalagardMapping windowType="Ogremonics/ComboDropList"        targetType="CEGUI/ComboDropList"    renderer="Core/Listbox"             lookNFeel="Ogremonics/Listbox" />
+    <FalagardMapping windowType="Ogremonics/Combobox"             targetType="CEGUI/Combobox"         renderer="Core/Default"             lookNFeel="Ogremonics/Combobox" />
+    <FalagardMapping windowType="Ogremonics/DropDownMenu"         targetType="CEGUI/Combobox"         renderer="Core/Default"             lookNFeel="Ogremonics/DropDownMenu" />
+    <FalagardMapping windowType="Ogremonics/Group"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/Group" />
+    <FalagardMapping windowType="Ogremonics/Checkbox"             targetType="CEGUI/ToggleButton"     renderer="Core/ToggleButton"        lookNFeel="Ogremonics/Checkbox" />
+    <FalagardMapping windowType="Ogremonics/RadioButton"          targetType="CEGUI/RadioButton"      renderer="Core/ToggleButton"        lookNFeel="Ogremonics/RadioButton" />
+    <FalagardMapping windowType="Ogremonics/Slider"               targetType="CEGUI/Slider"           renderer="Core/Slider"              lookNFeel="Ogremonics/Slider" />
+    <FalagardMapping windowType="Ogremonics/StaticImage"          targetType="DefaultWindow"          renderer="Core/StaticImage"         lookNFeel="Ogremonics/StaticImage" />
+    <FalagardMapping windowType="Ogremonics/AltStaticImage"       targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/AltStaticImage" />
+    <FalagardMapping windowType="Ogremonics/Tooltip"              targetType="CEGUI/Tooltip"          renderer="Core/Tooltip"             lookNFeel="Ogremonics/Tooltip" />
+    <FalagardMapping windowType="Ogremonics/ItemListbox"          targetType="CEGUI/ItemListbox"      renderer="Core/ItemListbox"         lookNFeel="Ogremonics/ItemListbox" />
+    <FalagardMapping windowType="Ogremonics/ListboxItem"          targetType="CEGUI/ItemEntry"        renderer="Core/ItemEntry"           lookNFeel="Ogremonics/ListboxItem" />
+    <FalagardMapping windowType="Ogremonics/Spinner"              targetType="CEGUI/Spinner"          renderer="Core/Default"             lookNFeel="Ogremonics/Spinner" /> 
+    <FalagardMapping windowType="Ogremonics/ScrollablePane"       targetType="CEGUI/ScrollablePane"   renderer="Core/ScrollablePane"      lookNFeel="Ogremonics/ScrollablePane" />  
+    <FalagardMapping windowType="Ogremonics/ListHeaderSegment"    targetType="CEGUI/ListHeaderSegment" renderer="Core/ListHeaderSegment"  lookNFeel="Ogremonics/ListHeaderSegment" />
+    <FalagardMapping windowType="Ogremonics/ListHeader"           targetType="CEGUI/ListHeader"       renderer="Core/ListHeader"          lookNFeel="Ogremonics/ListHeader" />
+    <FalagardMapping windowType="Ogremonics/MultiColumnList"      targetType="CEGUI/MultiColumnList"  renderer="Core/MultiColumnList"     lookNFeel="Ogremonics/MultiColumnList" />
+    <FalagardMapping windowType="Ogremonics/MenuItem"             targetType="CEGUI/MenuItem"         renderer="Core/MenuItem"            lookNFeel="Ogremonics/MenuItem" />
+    <FalagardMapping windowType="Ogremonics/Menubar"              targetType="CEGUI/Menubar"          renderer="Core/Menubar"             lookNFeel="Ogremonics/Menubar" />
+    <FalagardMapping windowType="Ogremonics/PopupMenu"            targetType="CEGUI/PopupMenu"        renderer="Core/PopupMenu"           lookNFeel="Ogremonics/PopupMenu" />
+    <FalagardMapping windowType="Ogremonics/TabButton"            targetType="CEGUI/TabButton"        renderer="Core/TabButton"           lookNFeel="Ogremonics/TabButton" />
+    <FalagardMapping windowType="Ogremonics/TabButtonPane"        targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/TabButtonPane" />
+    <FalagardMapping windowType="Ogremonics/TabContentPane"       targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/TabContentPane" />
+    <FalagardMapping windowType="Ogremonics/TabControl"           targetType="CEGUI/TabControl"       renderer="Core/TabControl"          lookNFeel="Ogremonics/TabControl" />
+
+    <FalagardMapping windowType="Ogremonics/BG" targetType="DefaultWindow" renderer="Core/Default" lookNFeel="Ogremonics/BGTest" />
+</GUIScheme>
+
