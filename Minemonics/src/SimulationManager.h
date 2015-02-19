@@ -62,6 +62,10 @@ private:
 	// Logger
 	static BoostLogger mBoostLogger;
 
+	boost::posix_time::ptime mStart;
+	boost::posix_time::ptime mNow;
+	boost::posix_time::time_duration mRuntime;
+
 	static class _Init {
 	public:
 		_Init() {

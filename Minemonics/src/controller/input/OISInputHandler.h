@@ -19,8 +19,6 @@ class MouseEvent;
 
 class OISInputHandler: public OIS::KeyListener, public OIS::MouseListener {
 private:
-	// Logger
-	static BoostLogger mBoostLogger;
 
 	static class _Init {
 	public:
@@ -57,6 +55,9 @@ protected:
 	OIS::InputManager* mInputManager;
 	OIS::Mouse *mMouse;
 	OIS::Keyboard *mKeyboard;
+
+	// Logger
+	static BoostLogger mBoostLogger;
 };
 
 #endif /* OISINPUTHANDLER_H_ */

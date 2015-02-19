@@ -51,6 +51,10 @@ SimulationManager::SimulationManager(void) :
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mCEGUIInputHandler(
 		NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
 	mTerrain = NULL;
+
+	mStart = boost::posix_time::second_clock::local_time();
+	mNow = boost::posix_time::second_clock::local_time();
+	mRuntime = mNow - mStart;
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
@@ -93,10 +97,22 @@ void SimulationManager::createFrameListener(void) {
 
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
+
+	// Align CEGUI mouse with OIS mouse
+	const OIS::MouseState state =
+			getInputHandler()->getMouse()->getMouseState();
+	CEGUI::Vector2f mousePos =
+			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
+			state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
 }
 
 //-------------------------------------------------------------------------------------
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
+
+	//update timer
+	mNow = boost::posix_time::second_clock::local_time();
+	boost::posix_time::time_duration mRuntime = mNow -mStart;
 
 	if (mTerrain->mTerrainGroup->isDerivedDataUpdateInProgress()) {
 		//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
@@ -121,25 +137,18 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//Need to capture/update each device
 	mCEGUIInputHandler->capture();
 
-	// Align CEGUI mouse with OIS mouse
-	const OIS::MouseState state =
-			getInputHandler()->getMouse()->getMouseState();
-	CEGUI::Vector2f mousePos =
-			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
-	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-			state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
-
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
-	//mCameraMan->frameRenderingQueued(evt); // if dialog isn't up, then update the camera
 	if (mFpsPanel != NULL) {
 		if (mFpsPanel->isVisible()) // if fps panel is visible, then update its contents
 		{
-			if (mFpsPanel->size() == 1)
+			if (mFpsPanel->size() == 2) {
 				mFpsPanel->setParamValue(0,
 						Ogre::StringConverter::toString(mWindow->getLastFPS()),
 						true);
-			else {
+				mFpsPanel->setParamValue(1,
+						Ogre::StringConverter::toString(mRuntime.total_milliseconds()), true);
+			} else {
 				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
 				mFpsPanel->setParamValue(0,
 						Ogre::StringConverter::toString(fs.lastFPS), false);
@@ -186,7 +195,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	return true;
 
-	// Inject time elapsed
+// Inject time elapsed
 	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 	return true;
 }
@@ -203,26 +212,26 @@ bool SimulationManager::quit() {
  */
 void SimulationManager::createScene(void) {
 
-	// Initialize the logger
+// Initialize the logger
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
-	// CEGUI
+// CEGUI
 
-	// with a scene manager and window, we can create a the GUI renderer
+// with a scene manager and window, we can create a the GUI renderer
 
-	// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
-	//Ogre::RenderTarget *mRenderTarget = window;
-	//CEGUI::OgreRenderer::bootstrapSystem(*mRenderTarget);
+// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
+//Ogre::RenderTarget *mRenderTarget = window;
+//CEGUI::OgreRenderer::bootstrapSystem(*mRenderTarget);
 	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
 
-	// This pointer is valid only locally
+// This pointer is valid only locally
 	mSystem = &CEGUI::System::getSingleton();
 
-	// tell us a lot about what is going on (see CEGUI.log in the working directory)
+// tell us a lot about what is going on (see CEGUI.log in the working directory)
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 
-	// use this CEGUI scheme definition (see CEGUI docs for more)
+// use this CEGUI scheme definition (see CEGUI docs for more)
 	CEGUI::SchemeManager::getSingleton().createFromFile(
 			(CEGUI::utf8*) "Ogremonics.scheme", (CEGUI::utf8*) "GUI");
 //	CEGUI::SchemeManager::getSingleton().createFromFile(
@@ -230,30 +239,30 @@ void SimulationManager::createScene(void) {
 //	CEGUI::SchemeManager::getSingleton().createFromFile(
 //			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
 
-	// show the CEGUI mouse cursor (defined in the look-n-feel)
+// show the CEGUI mouse cursor (defined in the look-n-feel)
 	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
 
-	// use this font for text in the UI
+// use this font for text in the UI
 	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
 			(CEGUI::utf8*) "GUI");
 	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
 
-	// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
-	// put it in the GUI resource group
+// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
+// put it in the GUI resource group
 	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
 			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
 
 	createMenu(mLayout, CEGUI::WindowManager::getSingleton());
 	createDebugPanels();
 
-	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
-	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
-	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
+// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
+// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
+// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
-	// ###################
-	// We create a test scene for testing ois and bullet
-	// ###################
+// ###################
+// We create a test scene for testing ois and bullet
+// ###################
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(50000);
@@ -263,10 +272,10 @@ void SimulationManager::createScene(void) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 
-	// Play with startup Texture Filtering options
-	// Note: Pressing T on runtime will discard those settings
-	//  Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(Ogre::TFO_ANISOTROPIC);
-	//  Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(7);
+// Play with startup Texture Filtering options
+// Note: Pressing T on runtime will discard those settings
+//  Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(Ogre::TFO_ANISOTROPIC);
+//  Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(7);
 
 	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
 	lightdir.normalise();
@@ -277,7 +286,7 @@ void SimulationManager::createScene(void) {
 	light->setDiffuseColour(Ogre::ColourValue::White);
 	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
 
-	// create the light
+// create the light
 	Ogre::Light *light2 = mSceneMgr->createLight("Light1");
 	light2->setType(Ogre::Light::LT_POINT);
 	light2->setPosition(Ogre::Vector3(250, 150, 250));
@@ -286,7 +295,7 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	// Create terrain
+// Create terrain
 	mTerrain = new HillsO3D(mSceneMgr);
 	mTerrain->configureTerrainDefaults(light);
 	mTerrain->buildTerrain();
@@ -295,41 +304,41 @@ void SimulationManager::createScene(void) {
 	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0.0, 10, 1200);
 	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
 
-	// Create skyplane
+// Create skyplane
 	Ogre::Plane plane;
 	plane.d = 100;
 	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
 
-	//mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
+//mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
 	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
 			0.5, 150, 150);
 
-	// Ogrehead
+// Ogrehead
 	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
 	Ogre::SceneNode* headNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
 	headNode->attachObject(ogreHead);
 	headNode->translate(Ogre::Vector3(1963, 50, 1660));
 
-	// add the ninja
+// add the ninja
 	Ogre::Entity *ninja = mSceneMgr->createEntity("Ninja", "ninja.mesh");
 	Ogre::SceneNode *ninjaNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode");
 	ninjaNode->attachObject(ninja);
 	ninjaNode->translate(Ogre::Vector3(1963, 50, 1660));
 
-	// Create the scene node
+// Create the scene node
 	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
 			Ogre::Vector3(-400, 200, 400));
 
-	// Make it look towards the ninja
+// Make it look towards the ninja
 	ninjaNode->yaw(Ogre::Degree(-45));
 
-	// Create the pitch node
+// Create the pitch node
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode1");
 	ninjaNode->attachObject(mCamera);
 
-	// create the second camera node/pitch node
+// create the second camera node/pitch node
 	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode2",
 			Ogre::Vector3(0, 200, 400));
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode2");
@@ -338,19 +347,19 @@ void SimulationManager::createScene(void) {
 }
 
 // Accessor methods
-CameraHandler& SimulationManager::getCameraHandler() {
+CameraHandler & SimulationManager::getCameraHandler() {
 	return mCameraHandler;
 }
 
-CEGUIInputHandler* SimulationManager::getInputHandler() {
+CEGUIInputHandler * SimulationManager::getInputHandler() {
 	return mCEGUIInputHandler;
 }
 
-StateHandler* SimulationManager::getStateHandler() {
+StateHandler * SimulationManager::getStateHandler() {
 	return mStateHandler;
 }
 
-Ogre::Camera* SimulationManager::getCamera() {
+Ogre::Camera * SimulationManager::getCamera() {
 	return mCamera;
 }
 
@@ -369,8 +378,8 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
 }
 
-CEGUI::Window* SimulationManager::createMenu(CEGUI::Window* sheet,
-		CEGUI::WindowManager& win) {
+CEGUI::Window * SimulationManager::createMenu(CEGUI::Window * sheet,
+		CEGUI::WindowManager & win) {
 	//Menu bar
 	CEGUI::Window *menuBar = win.createWindow("Ogremonics/Menubar", "menu");
 	menuBar->setSize(CEGUI::USize(CEGUI::UDim(1, 0), CEGUI::UDim(0.037, 0)));
@@ -986,6 +995,7 @@ void SimulationManager::createDebugPanels() {
 	ParamsPanel::VectorStringPairs items;
 
 	items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
+	items.push_back(ParamsPanel::PairString("Run time", "0"));		// 0
 	mFpsPanel = ParamsPanel::createParamsPanel(CEGUI_INFOPANEL_BORDER,
 			(int) mWindow->getHeight()
 					- (3 * CEGUI_INFOPANEL_BORDER + CEGUI_INFOPANEL_CAPTION
@@ -996,17 +1006,17 @@ void SimulationManager::createDebugPanels() {
 	items.push_back(ParamsPanel::PairString("cam.pX", "0"));		// 0
 	items.push_back(ParamsPanel::PairString("cam.pY", "0"));		// 1
 	items.push_back(ParamsPanel::PairString("cam.pZ", "0"));		// 2
-	items.push_back(ParamsPanel::PairString("", ""));				// 3
+	items.push_back(ParamsPanel::PairString("", ""));		// 3
 	items.push_back(ParamsPanel::PairString("cam.oW", "0"));		// 4
 	items.push_back(ParamsPanel::PairString("cam.oX", "0"));		// 5
 	items.push_back(ParamsPanel::PairString("cam.oY", "0"));		// 6
 	items.push_back(ParamsPanel::PairString("cam.oZ", "0"));		// 7
-	items.push_back(ParamsPanel::PairString("", ""));				// 8
-	items.push_back(ParamsPanel::PairString("Filtering", "None"));	// 9
-	items.push_back(ParamsPanel::PairString("Poly Mode", "Solid"));	// 10
+	items.push_back(ParamsPanel::PairString("", ""));		// 8
+	items.push_back(ParamsPanel::PairString("Filtering", "None"));		// 9
+	items.push_back(ParamsPanel::PairString("Poly Mode", "Solid"));		// 10
 	mDetailsPanel = ParamsPanel::createParamsPanel(
 			(int) mWindow->getWidth() - 200 - CEGUI_INFOPANEL_BORDER,
-			CEGUI_INFOPANEL_BORDER*4, "Debug", 200, items, mLayout);
+			CEGUI_INFOPANEL_BORDER * 4, "Debug", 200, items, mLayout);
 	mDetailsPanel->hide();
 
 }
@@ -1046,11 +1056,11 @@ int main(int argc, char *argv[])
 #ifdef __cplusplus
 }
 
-ParamsPanel*& SimulationManager::getDetailsPanel() {
+ParamsPanel * &SimulationManager::getDetailsPanel() {
 	return mDetailsPanel;
 }
 
-ParamsPanel*& SimulationManager::getFpsPanel() {
+ParamsPanel * &SimulationManager::getFpsPanel() {
 	return mFpsPanel;
 }
 
@@ -1062,7 +1072,7 @@ void SimulationManager::setFpsPanel(ParamsPanel* fpsPanel) {
 	mFpsPanel = fpsPanel;
 }
 
-CEGUI::Window*& SimulationManager::getLayout() {
+CEGUI::Window * &SimulationManager::getLayout() {
 	return mLayout;
 }
 

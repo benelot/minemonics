@@ -73,10 +73,12 @@ CEGUIInputHandler::~CEGUIInputHandler() {
 //-------------------------------------------------------------------------------------
 bool CEGUIInputHandler::keyPressed(const OIS::KeyEvent &arg) {
 
-	//if CEGUI used the input, then return
-	if (CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(
-			(CEGUI::Key::Scan) arg.key))
-		return true;
+	CEGUI::GUIContext& context =
+			CEGUI::System::getSingleton().getDefaultGUIContext();
+	context.injectKeyDown((CEGUI::Key::Scan) arg.key);
+	context.injectChar(arg.text);
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "RawKey::" << arg.text;
 
 	if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
 			{
@@ -210,8 +212,7 @@ bool CEGUIInputHandler::mouseMoved(const OIS::MouseEvent &arg) {
 	if (arg.state.Z.rel)
 		context.injectMouseWheelChange(arg.state.Z.rel / 120.0f);
 
-	if (context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel))
-		return true;
+	context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
 
 	return OISInputHandler::mouseMoved(arg);
 }
