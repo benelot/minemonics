@@ -48,9 +48,6 @@ CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 			std::make_pair(std::string("x11_mouse_hide"),
 					std::string("false")));
 	pl.insert(
-			std::make_pair(std::string("x11_keyboard_grab"),
-					std::string("false")));
-	pl.insert(
 			std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
 #endif
 
