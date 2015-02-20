@@ -43,7 +43,7 @@ private:
 	HillsO3D* mTerrain;
 
 	// Game component handlers
-	CEGUIInputHandler* mCEGUIInputHandler;
+	CEGUIInputHandler* mInputHandler;
 	CameraHandler mCameraHandler;
 
 	CEGUI::System* mSystem;

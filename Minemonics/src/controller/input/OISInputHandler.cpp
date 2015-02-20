@@ -12,7 +12,7 @@
 
 #include "SimulationManager.h"
 
-BoostLogger OISInputHandler::mBoostLogger;                     // initialize the static variables
+BoostLogger OISInputHandler::mBoostLogger;    // initialize the static variables
 OISInputHandler::_Init OISInputHandler::_initializer;
 OISInputHandler::OISInputHandler(SimulationManager* simulationMgr) :
 		mSimulationMgr(simulationMgr), mMouse(NULL), mKeyboard(NULL), mInputManager(
@@ -30,8 +30,11 @@ OISInputHandler::~OISInputHandler() {
 }
 
 void OISInputHandler::capture() {
-	mMouse->capture();
-	mKeyboard->capture();
+	if (mInputManager) {
+		//part of the workaround for keyboard grab
+		mMouse->capture();
+		mKeyboard->capture();
+	}
 }
 
 //-------------------------------------------------------------------------------------

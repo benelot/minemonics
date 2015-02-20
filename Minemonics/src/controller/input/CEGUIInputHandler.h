@@ -19,6 +19,7 @@ class CEGUIInputHandler: public OISInputHandler {
 private:
 	unsigned long mhWnd;
 	StateHandler *mStateHandler;
+	OIS::ParamList pl;
 public:
 	CEGUIInputHandler(StateHandler* stateHandler, unsigned long hWnd,
 			SimulationManager* simulationMgr);
@@ -26,6 +27,8 @@ public:
 	// OIS::KeyListener
 	virtual bool keyPressed(const OIS::KeyEvent &arg);
 	virtual bool keyReleased(const OIS::KeyEvent &arg);
+	virtual void initializeInputHandler();
+	virtual void destroyInputHandler();
 
 	// OIS::MouseListener
 	virtual bool mouseMoved(const OIS::MouseEvent &arg);

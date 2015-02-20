@@ -48,7 +48,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
-		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mCEGUIInputHandler(
+		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mInputHandler(
 		NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
 	mTerrain = NULL;
 
@@ -81,7 +81,7 @@ void SimulationManager::createFrameListener(void) {
 
 	// since the input handler deals with pushing input to CEGUI, we need to give it a pointer
 	// to the CEGUI System instance to use
-	mCEGUIInputHandler = new CEGUIInputHandler(mStateHandler, windowHnd, this);
+	mInputHandler = new CEGUIInputHandler(mStateHandler, windowHnd, this);
 	mStateHandler->requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
@@ -112,7 +112,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	//update timer
 	mNow = boost::posix_time::second_clock::local_time();
-	boost::posix_time::time_duration mRuntime = mNow -mStart;
+	boost::posix_time::time_duration mRuntime = mNow - mStart;
+
 
 	if (mTerrain->mTerrainGroup->isDerivedDataUpdateInProgress()) {
 		//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
@@ -135,7 +136,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 
 	//Need to capture/update each device
-	mCEGUIInputHandler->capture();
+	mInputHandler->capture();
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
@@ -147,7 +148,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 						Ogre::StringConverter::toString(mWindow->getLastFPS()),
 						true);
 				mFpsPanel->setParamValue(1,
-						Ogre::StringConverter::toString(mRuntime.total_milliseconds()), true);
+						Ogre::StringConverter::toString(
+								mRuntime.total_milliseconds()), true);
 			} else {
 				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
 				mFpsPanel->setParamValue(0,
@@ -352,7 +354,7 @@ CameraHandler & SimulationManager::getCameraHandler() {
 }
 
 CEGUIInputHandler * SimulationManager::getInputHandler() {
-	return mCEGUIInputHandler;
+	return mInputHandler;
 }
 
 StateHandler * SimulationManager::getStateHandler() {
@@ -370,7 +372,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
 
-	const OIS::MouseState &ms = mCEGUIInputHandler->getMouse()->getMouseState();
+	const OIS::MouseState &ms = mInputHandler->getMouse()->getMouseState();
 	ms.width = width;
 	ms.height = height;
 
@@ -378,11 +380,23 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
 }
 
-
-void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw)
-{
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has gained focus...";
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
+void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
+	if (rw->isVisible()) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
+		mInputHandler->initializeInputHandler();
+		// Align CEGUI mouse with OIS mouse
+		const OIS::MouseState state =
+				getInputHandler()->getMouse()->getMouseState();
+		CEGUI::Vector2f mousePos =
+				mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
+				state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
+	}
+	else
+	{
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
+		mInputHandler->destroyInputHandler();
+	}
 }
 
 CEGUI::Window * SimulationManager::createMenu(CEGUI::Window * sheet,

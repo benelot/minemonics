@@ -30,7 +30,6 @@
 CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 		unsigned long hWnd, SimulationManager* simulationMgr) :
 		OISInputHandler(simulationMgr) {
-	OIS::ParamList pl;
 	pl.insert(
 			OIS::ParamList::value_type("WINDOW",
 					Ogre::StringConverter::toString(hWnd)));
@@ -52,13 +51,8 @@ CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 #endif
 
 	mhWnd = hWnd;
-	mInputManager = OIS::InputManager::createInputSystem(pl);
-	mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(
-			OIS::OISMouse, true));
-	mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(
-			OIS::OISKeyboard, true));
-	mMouse->setEventCallback(this);
-	mKeyboard->setEventCallback(this);
+
+	initializeInputHandler();
 
 	mStateHandler = stateHandler;
 }
@@ -75,7 +69,7 @@ bool CEGUIInputHandler::keyPressed(const OIS::KeyEvent &arg) {
 	context.injectKeyDown((CEGUI::Key::Scan) arg.key);
 	context.injectChar(arg.text);
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "RawKey::" << arg.text;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey::" << arg.text;
 
 	if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
 			{
@@ -183,8 +177,6 @@ bool CEGUIInputHandler::keyPressed(const OIS::KeyEvent &arg) {
 		mSimulationMgr->quit();
 	}
 
-	//mSimulationMgr->getCameraMan()->injectKeyDown(arg);
-
 	//hand value down to OIS
 	return OISInputHandler::keyPressed(arg);
 }
@@ -198,6 +190,33 @@ bool CEGUIInputHandler::keyReleased(const OIS::KeyEvent &arg) {
 
 	//hand value down to OIS
 	return OISInputHandler::keyReleased(arg);
+}
+
+void CEGUIInputHandler::initializeInputHandler() {
+	if (mInputManager == NULL) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "initializing OIS input handler...";
+		mInputManager = OIS::InputManager::createInputSystem(pl);
+		mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(
+						OIS::OISMouse, true));
+		mKeyboard = static_cast<OIS::Keyboard*>(mInputManager->createInputObject(
+						OIS::OISKeyboard, true));
+		mMouse->setEventCallback(this);
+		mKeyboard->setEventCallback(this);
+	}
+}
+
+void CEGUIInputHandler::destroyInputHandler() {
+
+	if (mInputManager != NULL) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "destroying OIS input handler...";
+		mInputManager->destroyInputObject(mKeyboard);
+		mInputManager->destroyInputObject(mMouse);
+		mKeyboard = NULL;
+		mMouse = NULL;
+
+		OIS::InputManager::destroyInputSystem(mInputManager);
+		mInputManager = NULL;
+	}
 }
 
 // OIS::MouseListener
@@ -215,6 +234,7 @@ bool CEGUIInputHandler::mouseMoved(const OIS::MouseEvent &arg) {
 }
 bool CEGUIInputHandler::mousePressed(const OIS::MouseEvent &arg,
 		OIS::MouseButtonID id) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button " << id << " pressed";
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
 
