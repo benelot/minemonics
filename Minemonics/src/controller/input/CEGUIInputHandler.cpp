@@ -46,6 +46,9 @@ CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
 	pl.insert(
 			std::make_pair(std::string("x11_mouse_hide"),
 					std::string("false")));
+
+	//TODO: Fix keyboard grab problem
+//	pl.insert(std::make_pair(std::string("x11_keyboard_grab"),std::string("false")));
 	pl.insert(
 			std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
 #endif
@@ -203,6 +206,8 @@ void CEGUIInputHandler::initializeInputHandler() {
 		mMouse->setEventCallback(this);
 		mKeyboard->setEventCallback(this);
 	}
+	Ogre::LogManager::getSingletonPtr()->logMessage("Clearing movements");
+	mSimulationMgr->getCameraHandler().move(0,0,0);
 }
 
 void CEGUIInputHandler::destroyInputHandler() {

@@ -114,6 +114,18 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mNow = boost::posix_time::second_clock::local_time();
 	boost::posix_time::time_duration mRuntime = mNow - mStart;
 
+	//TODO: Fix keyboard grab problem
+//	if(mRuntime.total_seconds() % 10 == 0)
+//	{
+//		mInputHandler->destroyInputHandler();
+//		mInputHandler->initializeInputHandler();
+//		mInputHandlerReset = true;
+//
+//	}
+//	else
+//	{
+//		mInputHandlerReset = false;
+//	}
 
 	if (mTerrain->mTerrainGroup->isDerivedDataUpdateInProgress()) {
 		//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
@@ -386,9 +398,9 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 		mInputHandler->initializeInputHandler();
 		// Align CEGUI mouse with OIS mouse
 		const OIS::MouseState state =
-				getInputHandler()->getMouse()->getMouseState();
+		getInputHandler()->getMouse()->getMouseState();
 		CEGUI::Vector2f mousePos =
-				mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+		mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 				state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
 	}
