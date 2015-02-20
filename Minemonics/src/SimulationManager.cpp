@@ -378,6 +378,13 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
 }
 
+
+void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw)
+{
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has gained focus...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
+}
+
 CEGUI::Window * SimulationManager::createMenu(CEGUI::Window * sheet,
 		CEGUI::WindowManager & win) {
 	//Menu bar

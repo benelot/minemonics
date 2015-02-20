@@ -100,6 +100,7 @@ protected:
 	virtual void destroyScene(void);
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	virtual void windowResized(Ogre::RenderWindow* rw);
+	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 	CEGUI::Window* createMenu(CEGUI::Window* sheet, CEGUI::WindowManager& win);
 	void createDebugPanels();
 };
