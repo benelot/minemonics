@@ -15,7 +15,14 @@
  -----------------------------------------------------------------------------
  */
 #include "SimulationManager.h"
+
+//configuration
+#include "configuration/EnvironmentConfiguration.h"
+
+// view
+#include "view/general/evolution/environments/Environment.h"
 #include "view/ogre3D/evolution/environments/HillsO3D.h"
+#include "view/ogre3D/evolution/environments/PlaneO3D.h"
 #include "view/CEGUI/GUISheetHandler.h"
 
 //Game component includes
@@ -62,7 +69,9 @@ SimulationManager::~SimulationManager(void) {
 }
 
 void SimulationManager::destroyScene(void) {
-	mTerrain->destroy();
+	if (mTerrain->environmentType == Environment::HILLS)
+		((HillsO3D*)mTerrain)->destroy();
+
 }
 
 //-------------------------------------------------------------------------------------
@@ -127,20 +136,23 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 //		mInputHandlerReset = false;
 //	}
 
-	if (mTerrain->mTerrainGroup->isDerivedDataUpdateInProgress()) {
-		//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
-		//mInfoLabel->show();
-		if (mTerrain->mTerrainsImported) {
-			//mInfoLabel->setCaption("Building terrain, please wait...");
+	//TODO: Only if hills
+	if (mTerrain->environmentType == Environment::HILLS) {
+		if (((HillsO3D*)mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
+			//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
+			//mInfoLabel->show();
+			if (((HillsO3D*)mTerrain)->mTerrainsImported) {
+				//mInfoLabel->setCaption("Building terrain, please wait...");
+			} else {
+				//mInfoLabel->setCaption("Updating textures, patience...");
+			}
 		} else {
-			//mInfoLabel->setCaption("Updating textures, patience...");
-		}
-	} else {
-		//mTrayMgr->removeWidgetFromTray(mInfoLabel);
-		//mInfoLabel->hide();
-		if (mTerrain->mTerrainsImported) {
-			mTerrain->mTerrainGroup->saveAllTerrains(true);
-			mTerrain->mTerrainsImported = false;
+			//mTrayMgr->removeWidgetFromTray(mInfoLabel);
+			//mInfoLabel->hide();
+			if(((HillsO3D*)mTerrain)->mTerrainsImported) {
+				((HillsO3D*)mTerrain)->mTerrainGroup->saveAllTerrains(true);
+				((HillsO3D*)mTerrain)->mTerrainsImported = false;
+			}
 		}
 	}
 
@@ -309,14 +321,22 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-// Create terrain
-	mTerrain = new HillsO3D(mSceneMgr);
-	mTerrain->configureTerrainDefaults(light);
-	mTerrain->buildTerrain();
-
-	Ogre::ColourValue fadeColour(0.9, 0.9, 0.9);
-	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0.0, 10, 1200);
-	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
+	switch (EnvironmentConfiguration::environmentType) {
+	case Environment::HILLS:
+		// Create hills
+		mTerrain = new HillsO3D(mSceneMgr);
+		((HillsO3D*) mTerrain)->configureTerrainDefaults(light);
+		((HillsO3D*) mTerrain)->buildTerrain();
+		break;
+	case Environment::PLANE:
+		//create plane
+		mTerrain = new PlaneO3D(mSceneMgr);
+		((PlaneO3D*) mTerrain)->configureTerrainDefaults(light);
+		((PlaneO3D*) mTerrain)->buildTerrain();
+		break;
+	case Environment::OPENSEA:
+		break;
+	}
 
 // Create skyplane
 	Ogre::Plane plane;

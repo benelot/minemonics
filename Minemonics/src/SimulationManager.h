@@ -17,7 +17,7 @@
 #ifndef __SimulationManager_h_
 #define __SimulationManager_h_
 
-class HillsO3D;
+class Environment;
 class CEGUIInputHandler;
 class GUISheetHandler;
 class Logger;
@@ -32,6 +32,7 @@ class Logger;
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include "controller/StateHandler.h"
 
+
 // controller
 #include "controller/camera/CameraHandler.h"
 
@@ -40,7 +41,7 @@ class Logger;
 
 class SimulationManager: public BaseApplication {
 private:
-	HillsO3D* mTerrain;
+	Environment* mTerrain;
 
 	// Game component handlers
 	CEGUIInputHandler* mInputHandler;

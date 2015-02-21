@@ -7,8 +7,8 @@
 
 #include "Environment.h"
 
-Environment::Environment() {
-	// TODO Auto-generated constructor stub
+Environment::Environment(EnvironmentType environmentType) {
+	this->environmentType = environmentType;
 
 }
 

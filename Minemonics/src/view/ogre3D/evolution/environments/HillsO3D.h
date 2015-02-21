@@ -11,26 +11,11 @@
 #include <Terrain/OgreTerrain.h>
 #include <Terrain/OgreTerrainGroup.h>
 
-#include <OgreCamera.h>
-#include <OgreEntity.h>
-#include <OgreLogManager.h>
-#include <OgreRoot.h>
-#include <OgreViewport.h>
-#include <OgreSceneManager.h>
-#include <OgreRenderWindow.h>
-#include <OgreConfigFile.h>
-
-#include <OISEvents.h>
-#include <OISInputManager.h>
-#include <OISKeyboard.h>
-#include <OISMouse.h>
-
-#include <SdkTrays.h>
-#include <SdkCameraMan.h>
-
 #include "view/general/evolution/environments/Hills.h"
 
-class HillsO3D: public Hills {
+#include "view/ogre3D/evolution/environments/EnvironmentO3D.h"
+
+class HillsO3D: public Hills, public EnvironmentO3D {
 public:
 	HillsO3D(Ogre::SceneManager* mSceneMgr);
 	virtual ~HillsO3D();
@@ -45,7 +30,6 @@ public:
 	Ogre::TerrainGlobalOptions* mTerrainGlobals;
 	Ogre::TerrainGroup* mTerrainGroup;
 	bool mTerrainsImported;
-	Ogre::SceneManager* mSceneMgr;
 };
 
 #endif /* HILLSO3D_H_ */

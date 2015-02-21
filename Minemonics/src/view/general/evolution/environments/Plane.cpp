@@ -7,8 +7,7 @@
 
 #include "Plane.h"
 
-Plane::Plane() {
-	// TODO Auto-generated constructor stub
+Plane::Plane():	Environment(Environment::PLANE) {
 
 }
 

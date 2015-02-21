@@ -7,8 +7,7 @@
 
 #include "OpenSea.h"
 
-OpenSea::OpenSea() {
-	// TODO Auto-generated constructor stub
+OpenSea::OpenSea():	Environment(Environment::OPENSEA) {
 
 }
 

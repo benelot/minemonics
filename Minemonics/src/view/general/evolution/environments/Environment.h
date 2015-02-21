@@ -10,8 +10,17 @@
 
 class Environment {
 public:
-	Environment();
+	enum EnvironmentType{
+			HILLS = 1,
+			PLANE = 2,
+			OPENSEA =3
+		};
+
+	EnvironmentType environmentType;
+
+	Environment(EnvironmentType environmentType);
 	virtual ~Environment();
+
 };
 
 #endif /* ENVIRONMENT_H_ */

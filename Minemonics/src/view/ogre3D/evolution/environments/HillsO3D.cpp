@@ -8,9 +8,8 @@
 #include "HillsO3D.h"
 
 HillsO3D::HillsO3D(Ogre::SceneManager* mSceneMgr) :
-		mTerrainGlobals(0), mTerrainGroup(0), mTerrainsImported(false), mSceneMgr(
-				mSceneMgr) {
-
+		mTerrainGlobals(0), mTerrainGroup(0), mTerrainsImported(false) {
+	this->mSceneMgr = mSceneMgr;
 }
 
 HillsO3D::~HillsO3D() {
@@ -24,7 +23,7 @@ void HillsO3D::configureTerrainDefaults(Ogre::Light* light) {
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(mSceneMgr,
 			Ogre::Terrain::ALIGN_X_Z, 513, 12000.0f);
 	mTerrainGroup->setFilenameConvention(
-			Ogre::String("MinemonicsApplicationTerrain"), Ogre::String("dat"));
+			Ogre::String("HillsO3D"), Ogre::String("dat"));
 	mTerrainGroup->setOrigin(Ogre::Vector3::ZERO);
 
 	// Configure global

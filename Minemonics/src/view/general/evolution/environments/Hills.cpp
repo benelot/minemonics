@@ -7,8 +7,7 @@
 
 #include "Hills.h"
 
-Hills::Hills() {
-	// TODO Auto-generated constructor stub
+Hills::Hills():	Environment(Environment::HILLS) {
 
 }
 

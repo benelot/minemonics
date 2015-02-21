@@ -8,10 +8,15 @@
 #ifndef ENVIRONMENTCONFIGURATION_H_
 #define ENVIRONMENTCONFIGURATION_H_
 
+#include<view/general/evolution/environments/Environment.h>
+
 class EnvironmentConfiguration {
 public:
 	EnvironmentConfiguration();
 	virtual ~EnvironmentConfiguration();
+
+
+	static const Environment::EnvironmentType environmentType = Environment::PLANE;
 };
 
 #endif /* ENVIRONMENTCONFIGURATION_H_ */

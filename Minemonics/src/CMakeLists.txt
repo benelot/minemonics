@@ -837,13 +837,14 @@ set(HDRS
 	./model/settings/ControlSettings.h
 	
 	# view
-	./view/ogre3D/evolution/environments/OpenSeaO3D.h
-	./view/ogre3D/evolution/environments/PlaneO3D.h
-	./view/ogre3D/evolution/environments/HillsO3D.h
 	./view/general/evolution/environments/Environment.h
 	./view/general/evolution/environments/OpenSea.h
 	./view/general/evolution/environments/Hills.h
 	./view/general/evolution/environments/Plane.h
+	./view/ogre3D/evolution/environments/EnvironmentO3D.h
+	./view/ogre3D/evolution/environments/OpenSeaO3D.h
+	./view/ogre3D/evolution/environments/PlaneO3D.h
+	./view/ogre3D/evolution/environments/HillsO3D.h
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.h
 	./view/CEGUI/ParamsPanel.h
@@ -884,9 +885,14 @@ set(SRCS
 	./model/settings/PhysicsSettings.cpp
 	
 	# view
-	./view/ogre3D/evolution/environments/HillsO3D.cpp
 	./view/general/evolution/environments/Environment.cpp
 	./view/general/evolution/environments/Hills.cpp
+	./view/general/evolution/environments/OpenSea.cpp
+    ./view/general/evolution/environments/Plane.cpp
+	./view/ogre3D/evolution/environments/EnvironmentO3D.cpp
+	./view/ogre3D/evolution/environments/HillsO3D.cpp
+	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
+	./view/ogre3D/evolution/environments/PlaneO3D.cpp
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp
 	./view/CEGUI/ParamsPanel.cpp
