@@ -21,7 +21,7 @@ void PlaneO3D::configureTerrainDefaults(Ogre::Light* light) {
 	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
 
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(mSceneMgr,
-			Ogre::Terrain::ALIGN_X_Z, 2049, 12000.0f);
+			Ogre::Terrain::ALIGN_X_Z, 513, 12000.0f);
 	mTerrainGroup->setFilenameConvention(
 			Ogre::String("PlaneO3D"), Ogre::String("dat"));
 	mTerrainGroup->setOrigin(Ogre::Vector3::ZERO);
