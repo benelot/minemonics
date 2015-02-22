@@ -181,6 +181,15 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_LIBRARIES})
 include_directories(${CEGUI_OgreRenderer_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
 
+######################################################################
+# MathGL
+######################################################################
+
+find_package(MathGL2 REQUIRED)
+
+include_directories(${MATHGL2_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
+
 
 ######################################################################
 # COMPILATION
