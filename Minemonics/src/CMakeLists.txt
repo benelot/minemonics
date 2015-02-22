@@ -76,6 +76,19 @@ else (OGRE_Terrain_FOUND)
   message(SEND_ERROR "OgreTerrain Library not found.")
 endif(OGRE_Terrain_FOUND)
  
+#if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
+#  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
+#endif()
+
+######################################################################
+# OIS
+######################################################################
+ 
+find_package(OIS REQUIRED)
+ 
+if(NOT OIS_FOUND)
+	message(SEND_ERROR "Failed to find OIS.")
+endif()
 
 ######################################################################
 # BOOST
@@ -149,16 +162,6 @@ add_definitions(-DBOOST_LOG_DYN_LINK)
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 
 ######################################################################
-# OIS
-######################################################################
- 
-find_package(OIS REQUIRED)
- 
-if(NOT OIS_FOUND)
-	message(SEND_ERROR "Failed to find OIS.")
-endif()
-
-######################################################################
 # SDL2 / Prepared for later
 ######################################################################
 
@@ -177,6 +180,7 @@ include_directories(${CEGUI_INCLUDE_DIR})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_LIBRARIES})
 include_directories(${CEGUI_OgreRenderer_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
+
 
 ######################################################################
 # COMPILATION
@@ -282,7 +286,7 @@ set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 # LINKING
 ######################################################################
  
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${SDL2_LIBRARY} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
