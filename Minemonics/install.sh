@@ -9,6 +9,7 @@
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Prerequisites&refresh=1&tikiversion=Linux
 sudo apt-get install build-essential automake libtool # compiler and configuration tools
 sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev libxaw7-dev freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev nvidia-cg-dev # required dependencies
+# sudo apt-get install libsdl2-dev # install sdl2 for the input system / prepared for later
 sudo apt-get install libois-dev # install OIS
 sudo apt-get install libboost-all-dev # because I need a lot of boost libraries
 mkdir ogre1.9
@@ -63,6 +64,15 @@ cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUI
 make -j4 # because I have 4 cores for parallel compilation
 sudo make install
 sudo ldconfig
+
+cd ..
+wget http://downloads.sourceforge.net/project/mathgl/mathgl/mathgl%202.3.2/mathgl-2.3.2.tar.gz
+tar xvzf mathgl-2.3.2.tar.gz
+mkdir build
+cd build
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=off ..
+
+
 
 # ogrebullet 
 echo "This part is currently not working..."
