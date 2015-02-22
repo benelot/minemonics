@@ -66,11 +66,17 @@ sudo make install
 sudo ldconfig
 
 cd ..
+#MathGL
+sudo apt-get install swig liboctave-dev libgif-dev
 wget http://downloads.sourceforge.net/project/mathgl/mathgl/mathgl%202.3.2/mathgl-2.3.2.tar.gz
 tar xvzf mathgl-2.3.2.tar.gz
+cd mathgl-2.3.2
 mkdir build
 cd build
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=off ..
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D enable-jpeg=on -D enable-gif=on -D enable-hdf5=on -D enable-octave=on ..
+make
+sudo make install
+sudo ldconfig
 
 
 
