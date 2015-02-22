@@ -206,8 +206,6 @@ void CEGUIInputHandler::initializeInputHandler() {
 		mMouse->setEventCallback(this);
 		mKeyboard->setEventCallback(this);
 	}
-	Ogre::LogManager::getSingletonPtr()->logMessage("Clearing movements");
-	mSimulationMgr->getCameraHandler().move(0,0,0);
 }
 
 void CEGUIInputHandler::destroyInputHandler() {
