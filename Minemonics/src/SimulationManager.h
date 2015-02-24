@@ -91,6 +91,7 @@ public:
 	void setDetailsPanel(ParamsPanel*& detailsPanel);
 	void setFpsPanel(ParamsPanel* fpsPanel);
 	CEGUI::Window*& getLayout();
+    Ogre::SceneManager* getSceneManager();
 
 	bool quit();
 

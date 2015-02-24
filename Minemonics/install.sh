@@ -40,13 +40,14 @@ cd ..
 
 # Shark Machine Learning for Evolutionary Algorithms
 # According to: http://shark-project.sourceforge.net/GettingStarted.html
-sudo apt-get install libboost-all-dev # from http://ubuntuforums.org/showthread.php?t=1725216
+sudo apt-get install cmake cmake-curses-gui libatlas-base-dev libboost-all-dev # from http://image.diku.dk/shark/sphinx_pages/build/html/rest_sources/getting_started/installation.html
 mkdir Shark
 cd Shark
 svn co https://svn.code.sf.net/p/shark-project/code/
 mkdir build
 cd build
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release .
+# cmake -G"Eclipse CDT4 - Unix Makefiles" -D OPT_ENABLE_ATLAS=ON -D OPT_ENABLE_OPENMP=ON -D CMAKE_BUILD_TYPE=Release .. # I could not make it to work with Atlas LAPACK undefined reference to "clapack_dpotrf"
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D OPT_ENABLE_OPENMP=ON -D CMAKE_BUILD_TYPE=Release ..
 make -j4 # because I have 4 cores for parallel compilation
 sudo make install
 sudo ldconfig

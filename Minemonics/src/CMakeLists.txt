@@ -52,7 +52,7 @@ set(CMAKE_DEBUG_POSTFIX "_d")
  
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Modules/")
 
 
 ######################################################################
@@ -189,6 +189,24 @@ find_package(MathGL2 REQUIRED)
 
 include_directories(${MATHGL2_INCLUDE_DIR})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
+
+######################################################################
+# Shark
+######################################################################
+
+find_package(Shark REQUIRED)
+
+include_directories(${Shark_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark_LIBRARIES})
+
+######################################################################
+# Bullet physics
+######################################################################
+
+find_package(Bullet REQUIRED)
+
+include_directories(${BULLET_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 
 
 ######################################################################
