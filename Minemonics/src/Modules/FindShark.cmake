@@ -171,17 +171,19 @@ pkg_message(Shark "Looking for Shark...")
 
 #Find the Include directory
 find_path(Shark_INCLUDE_DIR 
-  NAMES Shark.h
+  NAMES KMeans.h Shark.h
   HINTS
   $ENV{SHARKDIR}
   PATH_SUFFIXES Core
-  PATHS
+ Unsupervised
+   PATHS
   ${Shark_PKGCONF_INCLUDE_DIRS}
   ~/Library/Frameworks
   /Library/Frameworks
   /usr/local/include/shark
   /usr/include/shark
 )
+get_filename_component(Shark_INCLUDE_DIR ${Shark_INCLUDE_DIR} DIRECTORY)
 #MESSAGE("Shark_INCLUDE_DIR is ${Shark_INCLUDE_DIR}")
 
 # Find the Library
