@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    OgreTray.looknfeel by Paul D. Turner
+    Ogremonics.looknfeel by Paul D. Turner
 
     This looknfeel specifies a set of WidgetLook definitions that are intended
     to recreate the overall look of Ogre's new SDK tray system within CEGUI.
@@ -70,7 +70,7 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/BandsFull"/>
+                <Image name="OgremonicsImages/BandsFull"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
             </ImageryComponent>
@@ -113,9 +113,9 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="LeftEdge" name="OgreTrayImages/CaptionL"/>
-                <Image component="RightEdge" name="OgreTrayImages/CaptionR"/>
-                <Image component="Background" name="OgreTrayImages/CaptionM"/>
+                <Image component="LeftEdge" name="OgremonicsImages/CaptionL"/>
+                <Image component="RightEdge" name="OgremonicsImages/CaptionR"/>
+                <Image component="Background" name="OgremonicsImages/CaptionM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="caption">
@@ -164,17 +164,17 @@
     <WidgetLook name="Ogremonics/FrameWindow">
         <PropertyLinkDefinition targetProperty="CaptionColour" widget="__auto_titlebar__" initialValue="FFe5ffb2" type="ColourRect" name="CaptionColour"/>
         <PropertyLinkDefinition targetProperty="Font" widget="__auto_titlebar__" type="Font" name="CaptionFont"/>
-        <Property name="NSSizingCursorImage" value="OgreTrayImages/MouseArrow"/>
-        <Property name="EWSizingCursorImage" value="OgreTrayImages/MouseArrow"/>
-        <Property name="NWSESizingCursorImage" value="OgreTrayImages/MouseArrow"/>
-        <Property name="NESWSizingCursorImage" value="OgreTrayImages/MouseArrow"/>
+        <Property name="NSSizingCursorImage" value="OgremonicsImages/MouseArrow"/>
+        <Property name="EWSizingCursorImage" value="OgremonicsImages/MouseArrow"/>
+        <Property name="NWSESizingCursorImage" value="OgremonicsImages/MouseArrow"/>
+        <Property name="NESWSizingCursorImage" value="OgremonicsImages/MouseArrow"/>
         <Property name="AutoRenderingSurface" value="true"/>
         <Property name="Size" value="{{0.3, 0}, {0.3, 0}}" />
         <NamedArea name="ClientWithTitleWithFrame">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/TrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TrayL" dimension="Width"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
@@ -182,7 +182,7 @@
                     <OperatorDim op="Add">
                         <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge"/>
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/TrayT" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TrayT" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -191,7 +191,7 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="RightEdge"/>
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/TrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TrayR" dimension="Width"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -200,7 +200,7 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/TrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TrayB" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -227,13 +227,13 @@
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/TrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TrayL" dimension="Width"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/TrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TrayT" dimension="Height"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
@@ -241,7 +241,7 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="RightEdge"/>
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/TrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TrayR" dimension="Width"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -250,7 +250,7 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/TrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TrayB" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -273,24 +273,24 @@
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_titlebar__" type="OgreTray/Titlebar">
+        <Child nameSuffix="__auto_titlebar__" type="Ogremonics/Titlebar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/TrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TrayL" dimension="Width"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/TrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TrayT" dimension="Height"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Width">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
-                        <ImageDim name="OgreTrayImages/TrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TrayL" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
@@ -333,15 +333,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/TrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/TrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/TrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/TrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/TrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/TrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/TrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/TrayB"/>
-                <Image component="Background" name="OgreTrayImages/TrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/TrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/TrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/TrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/TrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/TrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/TrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/TrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/TrayB"/>
+                <Image component="Background" name="OgremonicsImages/TrayM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="noframe">
@@ -360,7 +360,7 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/TrayM"/>
+                <Image name="OgremonicsImages/TrayM"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
             </ImageryComponent>
@@ -448,7 +448,7 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/Handle"/>
+                <Image name="OgremonicsImages/Handle"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
             </ImageryComponent>
@@ -526,7 +526,7 @@
             </Area>
             <Property name="Visible" value="false"/>
         </Child>
-        <Child nameSuffix="__auto_thumb__" type="OgreTray/Thumb">
+        <Child nameSuffix="__auto_thumb__" type="Ogremonics/Thumb">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -562,9 +562,9 @@
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image component="TopEdge" name="OgreTrayImages/VertTrackT"/>
-                <Image component="BottomEdge" name="OgreTrayImages/VertTrackB"/>
-                <Image component="Background" name="OgreTrayImages/VertTrackM"/>
+                <Image component="TopEdge" name="OgremonicsImages/VertTrackT"/>
+                <Image component="BottomEdge" name="OgremonicsImages/VertTrackB"/>
+                <Image component="Background" name="OgremonicsImages/VertTrackM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -635,7 +635,7 @@
             </Area>
             <Property name="Visible" value="false"/>
         </Child>
-        <Child nameSuffix="__auto_thumb__" type="OgreTray/Thumb">
+        <Child nameSuffix="__auto_thumb__" type="Ogremonics/Thumb">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -671,9 +671,9 @@
                         <UnifiedDim scale="0.78" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="LeftEdge" name="OgreTrayImages/HorzTrackL"/>
-                <Image component="RightEdge" name="OgreTrayImages/HorzTrackR"/>
-                <Image component="Background" name="OgreTrayImages/HorzTrackM"/>
+                <Image component="LeftEdge" name="OgremonicsImages/HorzTrackL"/>
+                <Image component="RightEdge" name="OgremonicsImages/HorzTrackR"/>
+                <Image component="Background" name="OgremonicsImages/HorzTrackM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -707,39 +707,39 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/TextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/TextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/TextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/TextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/TextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/TextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/TextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/TextBoxB"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/TextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/TextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/TextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/TextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/TextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/TextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/TextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/TextBoxB"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="with_frame_background">
             <ImageryComponent>
                 <Area>
                     <Dim type="LeftEdge">
-                        <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                     </Dim>
                     <Dim type="TopEdge">
-                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                     </Dim>
                     <Dim type="RightEdge">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="RightEdge"/>
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="BottomEdge">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="BottomEdge"/>
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                         </OperatorDim>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/TextBoxM"/>
+                <Image name="OgremonicsImages/TextBoxM"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
             </ImageryComponent>
@@ -760,7 +760,7 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/TextBoxM"/>
+                <Image name="OgremonicsImages/TextBoxM"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
             </ImageryComponent>
@@ -784,21 +784,21 @@
         <NamedArea name="WithFrameTextRenderArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -806,23 +806,23 @@
         <NamedArea name="WithFrameTextRenderAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -831,24 +831,24 @@
         <NamedArea name="WithFrameTextRenderAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -856,17 +856,17 @@
         <NamedArea name="WithFrameTextRenderAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -874,8 +874,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -912,8 +912,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -931,8 +931,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -953,8 +953,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -962,58 +962,58 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -1024,32 +1024,32 @@
         <StateImagery name="Disabled"/>
         <StateImagery name="EnabledFrame">
             <Layer>
-                <Section section="frame" look="OgreTray/StaticShared"/>
+                <Section section="frame" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="DisabledFrame">
             <Layer>
-                <Section section="frame" look="OgreTray/StaticShared"/>
+                <Section section="frame" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameEnabledBackground">
             <Layer>
-                <Section section="with_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="with_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameDisabledBackground">
             <Layer>
-                <Section section="with_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="with_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameEnabledBackground">
             <Layer>
-                <Section section="no_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="no_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameDisabledBackground">
             <Layer>
-                <Section section="no_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="no_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
     </WidgetLook>
@@ -1071,7 +1071,7 @@
         <NamedArea name="WithFrameTextRenderArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_caption__" dimension="BottomEdge"/>
@@ -1079,13 +1079,13 @@
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -1093,7 +1093,7 @@
         <NamedArea name="WithFrameTextRenderAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_caption__" dimension="BottomEdge"/>
@@ -1101,15 +1101,15 @@
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1118,7 +1118,7 @@
         <NamedArea name="WithFrameTextRenderAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_caption__" dimension="BottomEdge"/>
@@ -1127,15 +1127,15 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -1143,7 +1143,7 @@
         <NamedArea name="WithFrameTextRenderAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_caption__" dimension="BottomEdge"/>
@@ -1152,8 +1152,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1161,8 +1161,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1199,8 +1199,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1218,8 +1218,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1240,8 +1240,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1249,24 +1249,24 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_caption__" type="OgreTray/Title">
+        <Child nameSuffix="__auto_caption__" type="Ogremonics/Title">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Multiply">
-                        <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                         <AbsoluteDim value="0.25"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Multiply">
-                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                         <AbsoluteDim value="0.25"/>
                     </OperatorDim>
                 </Dim>
@@ -1274,68 +1274,68 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Multiply">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                             <AbsoluteDim value="0.25"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
                     <OperatorDim op="Add">
-                        <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                         <FontDim padding="0" widget="__auto_caption__" type="LineSpacing"/>
                     </OperatorDim>
                 </Dim>
             </Area>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Add">
-                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                         <WidgetDim widget="__auto_caption__" dimension="BottomEdge"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -1346,32 +1346,32 @@
         <StateImagery name="Disabled"/>
         <StateImagery name="EnabledFrame">
             <Layer>
-                <Section section="frame" look="OgreTray/StaticShared"/>
+                <Section section="frame" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="DisabledFrame">
             <Layer>
-                <Section section="frame" look="OgreTray/StaticShared"/>
+                <Section section="frame" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameEnabledBackground">
             <Layer>
-                <Section section="with_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="with_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameDisabledBackground">
             <Layer>
-                <Section section="with_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="with_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameEnabledBackground">
             <Layer>
-                <Section section="no_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="no_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameDisabledBackground">
             <Layer>
-                <Section section="no_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="no_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
     </WidgetLook>
@@ -1398,15 +1398,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="label">
@@ -1491,15 +1491,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/ButtonUpTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/ButtonUpTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/ButtonUpBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/ButtonUpBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/ButtonUpL"/>
-                <Image component="TopEdge" name="OgreTrayImages/ButtonUpT"/>
-                <Image component="RightEdge" name="OgreTrayImages/ButtonUpR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/ButtonUpB"/>
-                <Image component="Background" name="OgreTrayImages/ButtonUpM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/ButtonUpTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/ButtonUpTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/ButtonUpBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/ButtonUpBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/ButtonUpL"/>
+                <Image component="TopEdge" name="OgremonicsImages/ButtonUpT"/>
+                <Image component="RightEdge" name="OgremonicsImages/ButtonUpR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/ButtonUpB"/>
+                <Image component="Background" name="OgremonicsImages/ButtonUpM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="hover">
@@ -1518,15 +1518,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/ButtonOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/ButtonOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/ButtonOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/ButtonOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/ButtonOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/ButtonOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/ButtonOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/ButtonOverB"/>
-                <Image component="Background" name="OgreTrayImages/ButtonOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/ButtonOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/ButtonOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/ButtonOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/ButtonOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/ButtonOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/ButtonOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/ButtonOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/ButtonOverB"/>
+                <Image component="Background" name="OgremonicsImages/ButtonOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="pushed">
@@ -1545,15 +1545,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/ButtonDownTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/ButtonDownTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/ButtonDownBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/ButtonDownBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/ButtonDownL"/>
-                <Image component="TopEdge" name="OgreTrayImages/ButtonDownT"/>
-                <Image component="RightEdge" name="OgreTrayImages/ButtonDownR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/ButtonDownB"/>
-                <Image component="Background" name="OgreTrayImages/ButtonDownM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/ButtonDownTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/ButtonDownTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/ButtonDownBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/ButtonDownBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/ButtonDownL"/>
+                <Image component="TopEdge" name="OgremonicsImages/ButtonDownT"/>
+                <Image component="RightEdge" name="OgremonicsImages/ButtonDownR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/ButtonDownB"/>
+                <Image component="Background" name="OgremonicsImages/ButtonDownM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Normal">
@@ -1634,15 +1634,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="progress">
@@ -1664,15 +1664,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -1707,13 +1707,13 @@
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Multiply">
-                        <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                         <AbsoluteDim value="0.25"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Multiply">
-                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                         <AbsoluteDim value="0.25"/>
                     </OperatorDim>
                 </Dim>
@@ -1721,7 +1721,7 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Multiply">
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                             <AbsoluteDim value="0.25"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -1730,7 +1730,7 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Height"/>
                         <OperatorDim op="Multiply">
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                             <AbsoluteDim value="0.25"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -1753,15 +1753,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="selection">
@@ -1780,15 +1780,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="Caret">
@@ -1807,7 +1807,7 @@
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/GenericBrush"/>
+                <Image name="OgremonicsImages/GenericBrush"/>
                 <Colours topLeft="FF22AA33" bottomLeft="FF22AA33" topRight="FF22AA33" bottomRight="FF22AA33"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
@@ -1848,26 +1848,26 @@
         <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="ColourRect" name="SelectedTextColour"/>
         <PropertyDefinition redrawOnWrite="true" initialValue="FFFFFFFF" type="ColourRect" name="ActiveSelectionColour"/>
         <PropertyDefinition redrawOnWrite="true" initialValue="FFFFFFFF" type="ColourRect" name="InactiveSelectionColour"/>
-        <Property name="SelectionBrushImage" value="OgreTrayImages/MiniTextBoxOverM"/>
+        <Property name="SelectionBrushImage" value="OgremonicsImages/MiniTextBoxOverM"/>
         <Property name="Size" value="{{0, 256}, {0, 256}}" />
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -1875,23 +1875,23 @@
         <NamedArea name="TextAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1900,24 +1900,24 @@
         <NamedArea name="TextAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -1925,17 +1925,17 @@
         <NamedArea name="TextAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -1943,58 +1943,58 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -2017,15 +2017,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="Caret">
@@ -2044,7 +2044,7 @@
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image name="OgreTrayImages/GenericBrush"/>
+                <Image name="OgremonicsImages/GenericBrush"/>
                 <Colours topLeft="FF22AA33" bottomLeft="FF22AA33" topRight="FF22AA33" bottomRight="FF22AA33"/>
                 <VertFormat type="Stretched"/>
                 <HorzFormat type="Stretched"/>
@@ -2074,21 +2074,21 @@
         <NamedArea name="ItemRenderingArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -2096,23 +2096,23 @@
         <NamedArea name="ItemRenderingAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -2121,24 +2121,24 @@
         <NamedArea name="ItemRenderingAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -2146,17 +2146,17 @@
         <NamedArea name="ItemRenderingAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -2164,59 +2164,59 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="Size" value="{{1, 0}, {0, 32}}" />
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -2239,15 +2239,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -2268,7 +2268,7 @@
         <PropertyLinkDefinition targetProperty="NormalTextColour" widget="__auto_editbox__" initialValue="FF000000" type="ColourRect" name="NormalEditTextColour"/>
         <PropertyLinkDefinition targetProperty="SelectedTextColour" widget="__auto_editbox__" initialValue="FF000000" type="ColourRect" name="SelectedEditTextColour"/>
         <Property name="Size" value="{{0, 256}, {0, 256}}" />
-        <Child nameSuffix="__auto_editbox__" type="OgreTray/Editbox">
+        <Child nameSuffix="__auto_editbox__" type="Ogremonics/Editbox">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2287,7 +2287,7 @@
                 </Dim>
             </Area>
         </Child>
-        <Child nameSuffix="__auto_droplist__" type="OgreTray/ComboDropList">
+        <Child nameSuffix="__auto_droplist__" type="Ogremonics/ComboDropList">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2304,7 +2304,7 @@
             </Area>
             <Property name="ClippedByParent" value="false"/>
         </Child>
-        <Child nameSuffix="__auto_button__" type="OgreTray/Button">
+        <Child nameSuffix="__auto_button__" type="Ogremonics/Button">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2334,7 +2334,7 @@
         <Property name="ReadOnly" value="true"/>
         <Property name="SingleClickMode" value="true"/>
         <Property name="Size" value="{{0, 256}, {0, 256}}" />
-        <Child nameSuffix="__auto_editbox__" type="OgreTray/Editbox">
+        <Child nameSuffix="__auto_editbox__" type="Ogremonics/Editbox">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2350,7 +2350,7 @@
                 </Dim>
             </Area>
         </Child>
-        <Child nameSuffix="__auto_droplist__" type="OgreTray/ComboDropList">
+        <Child nameSuffix="__auto_droplist__" type="Ogremonics/ComboDropList">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2367,7 +2367,7 @@
             </Area>
             <Property name="ClippedByParent" value="false"/>
         </Child>
-        <Child nameSuffix="__auto_button__" type="OgreTray/Button">
+        <Child nameSuffix="__auto_button__" type="Ogremonics/Button">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2398,24 +2398,24 @@
         <NamedArea name="inner_rect">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Add">
-                        <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                         <FontDim type="LineSpacing"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -2436,39 +2436,39 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="label">
             <TextComponent>
                 <Area>
                     <Dim type="LeftEdge">
-                        <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                     </Dim>
                     <Dim type="TopEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="RightEdge">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="RightEdge"/>
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="BottomEdge">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="BottomEdge"/>
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                         </OperatorDim>
                     </Dim>
                 </Area>
@@ -2541,15 +2541,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="hover">
@@ -2571,15 +2571,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="select_mark">
@@ -2691,15 +2691,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="hover">
@@ -2721,15 +2721,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="select_mark">
@@ -2850,7 +2850,7 @@
             </Area>
             <Property name="Visible" value="false"/>
         </Child>
-        <Child nameSuffix="__auto_thumb__" type="OgreTray/Thumb">
+        <Child nameSuffix="__auto_thumb__" type="Ogremonics/Thumb">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -2886,9 +2886,9 @@
                         <UnifiedDim scale="0.78" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="LeftEdge" name="OgreTrayImages/HorzTrackL"/>
-                <Image component="RightEdge" name="OgreTrayImages/HorzTrackR"/>
-                <Image component="Background" name="OgreTrayImages/HorzTrackM"/>
+                <Image component="LeftEdge" name="OgremonicsImages/HorzTrackL"/>
+                <Image component="RightEdge" name="OgremonicsImages/HorzTrackR"/>
+                <Image component="Background" name="OgremonicsImages/HorzTrackM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -2916,21 +2916,21 @@
             <ImageryComponent>
                 <Area>
                     <Dim type="LeftEdge">
-                        <ImageDim name="OgreTrayImages/TextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/TextBoxL" dimension="Width"/>
                     </Dim>
                     <Dim type="TopEdge">
-                        <ImageDim name="OgreTrayImages/TextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/TextBoxT" dimension="Height"/>
                     </Dim>
                     <Dim type="RightEdge">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="RightEdge"/>
-                            <ImageDim name="OgreTrayImages/TextBoxR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/TextBoxR" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="BottomEdge">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="BottomEdge"/>
-                            <ImageDim name="OgreTrayImages/TextBoxB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/TextBoxB" dimension="Height"/>
                         </OperatorDim>
                     </Dim>
                 </Area>
@@ -2966,32 +2966,32 @@
         <StateImagery name="Disabled"/>
         <StateImagery name="EnabledFrame">
             <Layer>
-                <Section section="frame" look="OgreTray/StaticShared"/>
+                <Section section="frame" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="DisabledFrame">
             <Layer>
-                <Section section="frame" look="OgreTray/StaticShared"/>
+                <Section section="frame" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameEnabledBackground">
             <Layer>
-                <Section section="with_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="with_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameDisabledBackground">
             <Layer>
-                <Section section="with_frame_background" look="OgreTray/StaticShared"/>
+                <Section section="with_frame_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameEnabledBackground">
             <Layer>
-                <Section section="noframe_background" look="OgreTray/StaticShared"/>
+                <Section section="noframe_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="NoFrameDisabledBackground">
             <Layer>
-                <Section section="noframe_background" look="OgreTray/StaticShared"/>
+                <Section section="noframe_background" look="Ogremonics/StaticShared"/>
             </Layer>
         </StateImagery>
         <StateImagery name="WithFrameImage">
@@ -3053,15 +3053,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/FrameTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/FrameTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/FrameBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/FrameBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/FrameL"/>
-                <Image component="TopEdge" name="OgreTrayImages/FrameT"/>
-                <Image component="RightEdge" name="OgreTrayImages/FrameR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/FrameB"/>
-                <Image component="Background" name="OgreTrayImages/FrameM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/FrameTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/FrameTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/FrameBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/FrameBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/FrameL"/>
+                <Image component="TopEdge" name="OgremonicsImages/FrameT"/>
+                <Image component="RightEdge" name="OgremonicsImages/FrameR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/FrameB"/>
+                <Image component="Background" name="OgremonicsImages/FrameM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -3086,21 +3086,21 @@
         <NamedArea name="TextArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3121,15 +3121,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
                 <Colours topLeft="E2FFFFFF" bottomLeft="E2FFFFFF" topRight="E2FFFFFF" bottomRight="E2FFFFFF"/>
             </FrameComponent>
         </ImagerySection>
@@ -3193,21 +3193,21 @@
         <NamedArea name="ItemRenderArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3215,23 +3215,23 @@
         <NamedArea name="ItemRenderAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -3240,24 +3240,24 @@
         <NamedArea name="ItemRenderAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3265,17 +3265,17 @@
         <NamedArea name="ItemRenderAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -3283,58 +3283,58 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3357,15 +3357,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -3397,13 +3397,13 @@
                 <Dim type="Width">
                     <OperatorDim op="Add">
                         <FontDim type="HorzExtent"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
                     <OperatorDim op="Add">
                         <FontDim type="LineSpacing"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3424,15 +3424,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="selection">
@@ -3451,15 +3451,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="label">
@@ -3467,26 +3467,26 @@
                 <Area>
                     <Dim type="TopEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="LeftEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="Width">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Width"/>
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="Height">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Height"/>
-                            <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                 </Area>
@@ -3530,7 +3530,7 @@
 -->
     <WidgetLook name="Ogremonics/Spinner">
         <Property name="Size" value="{{0, 128}, {0, 32}}" />
-        <Child nameSuffix="__auto_decbtn__" type="OgreTray/Button">
+        <Child nameSuffix="__auto_decbtn__" type="Ogremonics/Button">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -3547,7 +3547,7 @@
             </Area>
             <Property name="Text" value="-"/>
         </Child>
-        <Child nameSuffix="__auto_incbtn__" type="OgreTray/Button">
+        <Child nameSuffix="__auto_incbtn__" type="Ogremonics/Button">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -3565,7 +3565,7 @@
             <HorzAlignment type="RightAligned"/>
             <Property name="Text" value="+"/>
         </Child>
-        <Child nameSuffix="__auto_editbox__" type="OgreTray/Editbox">
+        <Child nameSuffix="__auto_editbox__" type="Ogremonics/Editbox">
             <Area>
                 <Dim type="LeftEdge">
                     <UnifiedDim scale="1" type="Height"/>
@@ -3595,21 +3595,21 @@
         <NamedArea name="ViewableArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3617,23 +3617,23 @@
         <NamedArea name="ViewableAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -3642,24 +3642,24 @@
         <NamedArea name="ViewableAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3667,17 +3667,17 @@
         <NamedArea name="ViewableAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -3685,58 +3685,58 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3750,8 +3750,8 @@
 :::: List header segment (used for MCL)
 -->
     <WidgetLook name="Ogremonics/ListHeaderSegment">
-        <Property name="SizingCursorImage" value="OgreTrayImages/MouseArrow"/>
-        <Property name="MovingCursorImage" value="OgreTrayImages/MouseArrow"/>
+        <Property name="SizingCursorImage" value="OgremonicsImages/MouseArrow"/>
+        <Property name="MovingCursorImage" value="OgremonicsImages/MouseArrow"/>
         <ImagerySection name="segment">
             <FrameComponent>
                 <Area>
@@ -3768,15 +3768,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="segment_hover">
@@ -3795,15 +3795,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="ascend_icon">
@@ -3819,7 +3819,7 @@
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="RightEdge"/>
                             <OperatorDim op="Divide">
-                                <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                                <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                                 <AbsoluteDim value="2"/>
                             </OperatorDim>
                         </OperatorDim>
@@ -3846,7 +3846,7 @@
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="RightEdge"/>
                             <OperatorDim op="Divide">
-                                <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                                <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                                 <AbsoluteDim value="2"/>
                             </OperatorDim>
                         </OperatorDim>
@@ -3867,7 +3867,7 @@
                         <OperatorDim op="Add">
                             <AbsoluteDim value="0"/>
                             <OperatorDim op="Divide">
-                                <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                                <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                                 <AbsoluteDim value="2"/>
                             </OperatorDim>
                         </OperatorDim>
@@ -3879,7 +3879,7 @@
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1.0" type="RightEdge"/>
                             <OperatorDim op="Divide">
-                                <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                                <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                                 <AbsoluteDim value="2"/>
                             </OperatorDim>
                         </OperatorDim>
@@ -3950,7 +3950,7 @@
 :::: List Header (used for MCL)
 -->
     <WidgetLook name="Ogremonics/ListHeader">
-        <Property name="SegmentWidgetType" value="OgreTray/ListHeaderSegment"/>
+        <Property name="SegmentWidgetType" value="Ogremonics/ListHeaderSegment"/>
         <StateImagery name="Enabled"/>
         <StateImagery name="Disabled"/>
     </WidgetLook>
@@ -3962,7 +3962,7 @@
         <NamedArea name="ItemRenderingArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_listheader__" dimension="BottomEdge"/>
@@ -3970,13 +3970,13 @@
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -3984,7 +3984,7 @@
         <NamedArea name="ItemRenderingAreaHScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_listheader__" dimension="BottomEdge"/>
@@ -3992,15 +3992,15 @@
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -4009,7 +4009,7 @@
         <NamedArea name="ItemRenderingAreaVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_listheader__" dimension="BottomEdge"/>
@@ -4018,15 +4018,15 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4034,7 +4034,7 @@
         <NamedArea name="ItemRenderingAreaHVScroll">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <WidgetDim widget="__auto_listheader__" dimension="BottomEdge"/>
@@ -4043,8 +4043,8 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="RightEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
@@ -4052,80 +4052,80 @@
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1.0" type="BottomEdge"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
             </Area>
         </NamedArea>
-        <Child nameSuffix="__auto_listheader__" type="OgreTray/ListHeader">
+        <Child nameSuffix="__auto_listheader__" type="Ogremonics/ListHeader">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="RightEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
                     <OperatorDim op="Add">
                         <FontDim type="LineSpacing"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
         </Child>
-        <Child nameSuffix="__auto_hscrollbar__" type="OgreTray/HorizontalScrollbar">
+        <Child nameSuffix="__auto_hscrollbar__" type="Ogremonics/HorizontalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
-                            <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Height"/>
                 </Dim>
             </Area>
             <VertAlignment type="BottomAligned"/>
             <Property name="NonClient" value="true"/>
         </Child>
-        <Child nameSuffix="__auto_vscrollbar__" type="OgreTray/VerticalScrollbar">
+        <Child nameSuffix="__auto_vscrollbar__" type="Ogremonics/VerticalScrollbar">
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Subtract">
                         <AbsoluteDim value="0"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="Width">
-                    <ImageDim name="OgreTrayImages/Handle" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/Handle" dimension="Width"/>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="BottomEdge"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4148,15 +4148,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -4189,13 +4189,13 @@
                 <Dim type="Width">
                     <OperatorDim op="Add">
                         <FontDim type="HorzExtent"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
                     <OperatorDim op="Add">
                         <FontDim type="LineSpacing"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4216,15 +4216,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="selection">
@@ -4243,15 +4243,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="label">
@@ -4259,26 +4259,26 @@
                 <Area>
                     <Dim type="TopEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="LeftEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="Width">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Width"/>
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="Height">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Height"/>
-                            <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                 </Area>
@@ -4336,13 +4336,13 @@
                 <Dim type="Width">
                     <OperatorDim op="Add">
                         <FontDim type="HorzExtent"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
                     <OperatorDim op="Add">
                         <FontDim type="LineSpacing"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4359,7 +4359,7 @@
                     <OperatorDim op="Add">
                         <FontDim type="HorzExtent"/>
                         <OperatorDim op="Add">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                             <FontDim type="HorzExtent" string=" &gt;"/>
                         </OperatorDim>
                     </OperatorDim>
@@ -4367,7 +4367,7 @@
                 <Dim type="Height">
                     <OperatorDim op="Add">
                         <FontDim type="LineSpacing"/>
-                        <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4377,26 +4377,26 @@
                 <Area>
                     <Dim type="TopEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Height"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Height"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="LeftEdge">
                         <OperatorDim op="Divide">
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                             <AbsoluteDim value="2"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="Width">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Width"/>
-                            <ImageDim name="OgreTrayImages/MiniTextBoxL" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxL" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                     <Dim type="Height">
                         <OperatorDim op="Subtract">
                             <UnifiedDim scale="1" type="Height"/>
-                            <ImageDim name="OgreTrayImages/MiniTextBoxT" dimension="Width"/>
+                            <ImageDim name="OgremonicsImages/MiniTextBoxT" dimension="Width"/>
                         </OperatorDim>
                     </Dim>
                 </Area>
@@ -4421,15 +4421,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <!--<Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>-->
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <!--<Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>-->
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="selected">
@@ -4448,15 +4448,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="popup_arrow_right">
@@ -4592,26 +4592,26 @@
             <Area>
                 <Dim type="LeftEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="TopEdge">
                     <OperatorDim op="Divide">
-                        <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                         <AbsoluteDim value="2"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Width">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="Height">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Height"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4632,15 +4632,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <!--<Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>-->
-                <!--<Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>-->
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <!--<Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>-->
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <!--<Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>-->
+                <!--<Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>-->
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <!--<Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>-->
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -4661,21 +4661,21 @@
         <NamedArea name="ItemRenderArea">
             <Area>
                 <Dim type="LeftEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayL" dimension="Width"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayL" dimension="Width"/>
                 </Dim>
                 <Dim type="TopEdge">
-                    <ImageDim name="OgreTrayImages/MiniTrayT" dimension="Height"/>
+                    <ImageDim name="OgremonicsImages/MiniTrayT" dimension="Height"/>
                 </Dim>
                 <Dim type="RightEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Width"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayR" dimension="Width"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayR" dimension="Width"/>
                     </OperatorDim>
                 </Dim>
                 <Dim type="BottomEdge">
                     <OperatorDim op="Subtract">
                         <UnifiedDim scale="1" type="Height"/>
-                        <ImageDim name="OgreTrayImages/MiniTrayB" dimension="Height"/>
+                        <ImageDim name="OgremonicsImages/MiniTrayB" dimension="Height"/>
                     </OperatorDim>
                 </Dim>
             </Area>
@@ -4696,15 +4696,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -4759,15 +4759,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxM"/>
             </FrameComponent>
         </ImagerySection>
         <ImagerySection name="hover">
@@ -4786,15 +4786,15 @@
                         <UnifiedDim scale="1" type="Height"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTextBoxOverTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTextBoxOverTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTextBoxOverBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTextBoxOverBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTextBoxOverL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTextBoxOverT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTextBoxOverR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTextBoxOverB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTextBoxOverM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTextBoxOverTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTextBoxOverTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTextBoxOverBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTextBoxOverBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTextBoxOverL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTextBoxOverT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTextBoxOverR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTextBoxOverB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTextBoxOverM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="TopNormal">
@@ -4881,15 +4881,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -4926,15 +4926,15 @@
                         <UnifiedDim scale="1" type="BottomEdge"/>
                     </Dim>
                 </Area>
-                <Image component="TopLeftCorner" name="OgreTrayImages/MiniTrayTL"/>
-                <Image component="TopRightCorner" name="OgreTrayImages/MiniTrayTR"/>
-                <Image component="BottomLeftCorner" name="OgreTrayImages/MiniTrayBL"/>
-                <Image component="BottomRightCorner" name="OgreTrayImages/MiniTrayBR"/>
-                <Image component="LeftEdge" name="OgreTrayImages/MiniTrayL"/>
-                <Image component="TopEdge" name="OgreTrayImages/MiniTrayT"/>
-                <Image component="RightEdge" name="OgreTrayImages/MiniTrayR"/>
-                <Image component="BottomEdge" name="OgreTrayImages/MiniTrayB"/>
-                <Image component="Background" name="OgreTrayImages/MiniTrayM"/>
+                <Image component="TopLeftCorner" name="OgremonicsImages/MiniTrayTL"/>
+                <Image component="TopRightCorner" name="OgremonicsImages/MiniTrayTR"/>
+                <Image component="BottomLeftCorner" name="OgremonicsImages/MiniTrayBL"/>
+                <Image component="BottomRightCorner" name="OgremonicsImages/MiniTrayBR"/>
+                <Image component="LeftEdge" name="OgremonicsImages/MiniTrayL"/>
+                <Image component="TopEdge" name="OgremonicsImages/MiniTrayT"/>
+                <Image component="RightEdge" name="OgremonicsImages/MiniTrayR"/>
+                <Image component="BottomEdge" name="OgremonicsImages/MiniTrayB"/>
+                <Image component="Background" name="OgremonicsImages/MiniTrayM"/>
             </FrameComponent>
         </ImagerySection>
         <StateImagery name="Enabled">
@@ -4952,9 +4952,9 @@
 :::: Tab control
 -->
     <WidgetLook name="Ogremonics/TabControl">
-        <Property name="TabButtonType" value="OgreTray/TabButton"/>
+        <Property name="TabButtonType" value="Ogremonics/TabButton"/>
         <Property name="TabTextPadding" value="{0,6}"/>
-        <Child nameSuffix="__auto_TabPane__" type="OgreTray/TabContentPane">
+        <Child nameSuffix="__auto_TabPane__" type="Ogremonics/TabContentPane">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -4976,7 +4976,7 @@
                 </Dim>
             </Area>
         </Child>
-        <Child nameSuffix="__auto_TabPane__Buttons" type="OgreTray/TabButtonPane">
+        <Child nameSuffix="__auto_TabPane__Buttons" type="Ogremonics/TabButtonPane">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -4998,7 +4998,7 @@
                 </Dim>
             </Area>
         </Child>
-        <Child nameSuffix="__auto_TabPane__ScrollLeft" type="OgreTray/Button">
+        <Child nameSuffix="__auto_TabPane__ScrollLeft" type="Ogremonics/Button">
             <Area>
                 <Dim type="LeftEdge">
                     <AbsoluteDim value="0"/>
@@ -5022,7 +5022,7 @@
             <Property name="AlwaysOnTop" value="true"/>
             <Property name="Text" value="&lt;&lt;"/>
         </Child>
-        <Child nameSuffix="__auto_TabPane__ScrollRight" type="OgreTray/Button">
+        <Child nameSuffix="__auto_TabPane__ScrollRight" type="Ogremonics/Button">
             <Area>
                 <Dim type="Width">
                     <OperatorDim op="Multiply">

@@ -102,7 +102,7 @@ public:
 protected:
 	CEGUI::OgreRenderer* mRenderer;
 
-	//MathGLObject testObject;
+	MathGLObject* testObject;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);

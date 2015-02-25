@@ -63,7 +63,7 @@ MathGLObject::MathGLObject(SimulationManager* simulationMgr, int textureWidth,
 	// We create a BasicImage and set the Texture
 	CEGUI::BasicImage* image =
 			static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create(
-					"RTTImage", "MyImageGroup/MyImageName"));
+					"BasicImage","RTTImage"));
 	image->setTexture(static_cast<CEGUI::Texture*>(&rendererTexture));
 
 	CEGUI::Rectf imageArea;
@@ -77,10 +77,10 @@ MathGLObject::MathGLObject(SimulationManager* simulationMgr, int textureWidth,
 	image->setArea(imageArea);
 	image->setAutoScaled(CEGUI::ASM_Disabled);
 
-	// add the image to the image manager
-	CEGUI::ImageManager::getSingleton().addImageType<CEGUI::BasicImage>(
-			"RTTImageset");
-	CEGUI::ImageManager::getSingleton().create("RTTImageset", "RTTImage");
+//	// add the image to the image manager
+//	CEGUI::ImageManager::getSingleton().addImageType<CEGUI::BasicImage>(
+//			"RTTImageset");
+//	CEGUI::ImageManager::getSingleton().create("RTTImageset", "RTTImage");
 
 	mMathGLWindow = CEGUI::WindowManager::getSingleton().createWindow(
 			"Ogremonics/StaticImage", "RTTWindow");

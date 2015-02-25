@@ -54,7 +54,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mInputHandler(
-		NULL), mStateHandler(NULL), mGUISheetHandler(NULL)/*,testObject(this,100,100)*/ {
+		NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
 	mTerrain = NULL;
 
 	mStart = boost::posix_time::second_clock::local_time();
@@ -216,7 +216,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		}
 	}
 
-	//testObject.update(evt.timeSinceLastFrame);
+	testObject->update(evt.timeSinceLastFrame);
 
 	return true;
 
@@ -282,7 +282,8 @@ void SimulationManager::createScene(void) {
 	setDetailsPanel(ceguiBuilder.createDetailsPanel());
 	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
 
-	//mLayout->addChild(testObject.getMathGlWindow());
+	testObject = new MathGLObject(this,100,100);
+	mLayout->addChild(testObject->getMathGlWindow());
 
 // you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
