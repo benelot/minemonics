@@ -1,9 +1,9 @@
 #include "GUISheetHandler.h"
 #include "controller/StateHandler.h"
-#include "CEGUI/System.h"
-#include "CEGUI/Window.h"
-#include "CEGUI/WindowManager.h"
-#include "CEGUI/widgets/PushButton.h"
+#include <CEGUI/System.h>
+#include <CEGUI/Window.h>
+#include <CEGUI/WindowManager.h>
+#include <CEGUI/widgets/PushButton.h>
 
 GUISheetHandler::GUISheetHandler(CEGUI::System* system, CEGUI::Window* sheet, StateHandler* stateHandler)
 {

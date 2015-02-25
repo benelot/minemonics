@@ -1,8 +1,7 @@
 #include "ParamsPanel.h"
 
-ParamsPanel::ParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items, CEGUI::Window* myRootGui)
-	: mRootGui(myRootGui),
-	  mWidgetPanel(NULL),
+ParamsPanel::ParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items)
+	:mWidgetPanel(NULL),
 	  mTextBoxLabel(NULL),
 	  mTextBoxValues(NULL)
 {
@@ -10,7 +9,6 @@ ParamsPanel::ParamsPanel(int left, int top, std::string name, int width, VectorS
 
 	// Panel
 	mWidgetPanel = static_cast<CEGUI::FrameWindow*>(wmgr.createWindow("Ogremonics/Group", name + "_Panel"));
-	mRootGui->addChild(mWidgetPanel);
 	mWidgetPanel->setPosition(CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
 	mWidgetPanel->setSize(CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, CEGUI_INFOPANEL_CAPTION + CEGUI_INFOPANEL_BORDER + CEGUI_INFOPANEL_TEXT * items.size() + CEGUI_INFOPANEL_BORDER)));
 	mWidgetPanel->setText(name);
@@ -56,8 +54,6 @@ void ParamsPanel::_destroy()
 	mTextBoxValues = NULL;
 	if(mTextBoxLabel != NULL && mWidgetPanel != NULL) mWidgetPanel->destroyChild(mTextBoxLabel);
 	mTextBoxLabel = NULL;
-	if(mWidgetPanel != NULL) mRootGui->destroyChild(mWidgetPanel);
-	mWidgetPanel = NULL;
 }
 
 void ParamsPanel::setParamValue(int index, std::string value, bool autoUpdate)
@@ -116,10 +112,14 @@ bool ParamsPanel::isVisible()
 	return (mWidgetPanel != NULL) ? mWidgetPanel->isVisible() : false;
 }
 
-ParamsPanel* ParamsPanel::createParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items, CEGUI::Window* myRootGui)
+ParamsPanel* ParamsPanel::createParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items)
 {
-	ParamsPanel* ppp = new ParamsPanel(left, top, name, width, items, myRootGui);
+	ParamsPanel* ppp = new ParamsPanel(left, top, name, width, items);
 	return ppp;
+}
+
+CEGUI::FrameWindow*& ParamsPanel::getWidgetPanel() {
+	return mWidgetPanel;
 }
 
 void ParamsPanel::destroyParamsPanel(ParamsPanel* panel)

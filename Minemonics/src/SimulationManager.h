@@ -31,6 +31,7 @@ class Logger;
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include "controller/StateHandler.h"
+#include "view/MathGL/MathGLObject.h"
 
 
 // controller
@@ -88,15 +89,20 @@ public:
 	Ogre::Camera* getCamera();
 	ParamsPanel*& getDetailsPanel();
 	ParamsPanel*& getFpsPanel();
-	void setDetailsPanel(ParamsPanel*& detailsPanel);
+	void setDetailsPanel(ParamsPanel* detailsPanel);
 	void setFpsPanel(ParamsPanel* fpsPanel);
 	CEGUI::Window*& getLayout();
-    Ogre::SceneManager* getSceneManager();
+    Ogre::SceneManager*& getSceneManager();
+    CEGUI::OgreRenderer*& getRenderer();
+    Ogre::Root*& getRoot();
 
 	bool quit();
+	CEGUI::System*& getCEGUISystem();
 
 protected:
 	CEGUI::OgreRenderer* mRenderer;
+
+	//MathGLObject testObject;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);
@@ -104,8 +110,6 @@ protected:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	virtual void windowResized(Ogre::RenderWindow* rw);
 	virtual void windowFocusChange(Ogre::RenderWindow* rw);
-	CEGUI::Window* createMenu(CEGUI::Window* sheet, CEGUI::WindowManager& win);
-	void createDebugPanels();
 };
 
 #endif // #ifndef __SimulationManager_h_

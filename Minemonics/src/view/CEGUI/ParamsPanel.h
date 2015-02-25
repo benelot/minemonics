@@ -22,7 +22,7 @@ protected:
 	CEGUI::Window* mTextBoxValues;
 	VectorString mParams;
 
-	ParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items, CEGUI::Window* myRootGui);
+	ParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items);
 	void _destroy();
 public:
 	~ParamsPanel(void);
@@ -37,6 +37,7 @@ public:
 	void show();
 	bool isVisible();
 
-	static ParamsPanel* createParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items, CEGUI::Window* myRootGui);
+	static ParamsPanel* createParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items);
 	static void destroyParamsPanel(ParamsPanel* panel);
+	CEGUI::FrameWindow*& getWidgetPanel();
 };

@@ -438,6 +438,30 @@ utils/logging/Logger.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.s
 .PHONY : utils/logging/Logger.cpp.s
 
+view/CEGUI/CEGUIBuilder.o: view/CEGUI/CEGUIBuilder.cpp.o
+.PHONY : view/CEGUI/CEGUIBuilder.o
+
+# target to build an object file
+view/CEGUI/CEGUIBuilder.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/CEGUIBuilder.cpp.o
+.PHONY : view/CEGUI/CEGUIBuilder.cpp.o
+
+view/CEGUI/CEGUIBuilder.i: view/CEGUI/CEGUIBuilder.cpp.i
+.PHONY : view/CEGUI/CEGUIBuilder.i
+
+# target to preprocess a source file
+view/CEGUI/CEGUIBuilder.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/CEGUIBuilder.cpp.i
+.PHONY : view/CEGUI/CEGUIBuilder.cpp.i
+
+view/CEGUI/CEGUIBuilder.s: view/CEGUI/CEGUIBuilder.cpp.s
+.PHONY : view/CEGUI/CEGUIBuilder.s
+
+# target to generate assembly for a file
+view/CEGUI/CEGUIBuilder.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/CEGUIBuilder.cpp.s
+.PHONY : view/CEGUI/CEGUIBuilder.cpp.s
+
 view/CEGUI/GUISheetHandler.o: view/CEGUI/GUISheetHandler.cpp.o
 .PHONY : view/CEGUI/GUISheetHandler.o
 
@@ -485,6 +509,30 @@ view/CEGUI/ParamsPanel.s: view/CEGUI/ParamsPanel.cpp.s
 view/CEGUI/ParamsPanel.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.s
 .PHONY : view/CEGUI/ParamsPanel.cpp.s
+
+view/MathGL/MathGLObject.o: view/MathGL/MathGLObject.cpp.o
+.PHONY : view/MathGL/MathGLObject.o
+
+# target to build an object file
+view/MathGL/MathGLObject.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLObject.cpp.o
+.PHONY : view/MathGL/MathGLObject.cpp.o
+
+view/MathGL/MathGLObject.i: view/MathGL/MathGLObject.cpp.i
+.PHONY : view/MathGL/MathGLObject.i
+
+# target to preprocess a source file
+view/MathGL/MathGLObject.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLObject.cpp.i
+.PHONY : view/MathGL/MathGLObject.cpp.i
+
+view/MathGL/MathGLObject.s: view/MathGL/MathGLObject.cpp.s
+.PHONY : view/MathGL/MathGLObject.s
+
+# target to generate assembly for a file
+view/MathGL/MathGLObject.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLObject.cpp.s
+.PHONY : view/MathGL/MathGLObject.cpp.s
 
 view/general/evolution/environments/Environment.o: view/general/evolution/environments/Environment.cpp.o
 .PHONY : view/general/evolution/environments/Environment.o
@@ -726,12 +774,18 @@ help:
 	@echo "... utils/logging/Logger.o"
 	@echo "... utils/logging/Logger.i"
 	@echo "... utils/logging/Logger.s"
+	@echo "... view/CEGUI/CEGUIBuilder.o"
+	@echo "... view/CEGUI/CEGUIBuilder.i"
+	@echo "... view/CEGUI/CEGUIBuilder.s"
 	@echo "... view/CEGUI/GUISheetHandler.o"
 	@echo "... view/CEGUI/GUISheetHandler.i"
 	@echo "... view/CEGUI/GUISheetHandler.s"
 	@echo "... view/CEGUI/ParamsPanel.o"
 	@echo "... view/CEGUI/ParamsPanel.i"
 	@echo "... view/CEGUI/ParamsPanel.s"
+	@echo "... view/MathGL/MathGLObject.o"
+	@echo "... view/MathGL/MathGLObject.i"
+	@echo "... view/MathGL/MathGLObject.s"
 	@echo "... view/general/evolution/environments/Environment.o"
 	@echo "... view/general/evolution/environments/Environment.i"
 	@echo "... view/general/evolution/environments/Environment.s"

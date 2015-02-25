@@ -76,40 +76,13 @@ bool CEGUIInputHandler::keyPressed(const OIS::KeyEvent &arg) {
 
 	if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
 			{
-		if (mSimulationMgr->getFpsPanel() == NULL) {
+		if (!mSimulationMgr->getFpsPanel()->getWidgetPanel()->isVisible()) {
 			ParamsPanel::VectorStringPairs items;
 			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
-			mSimulationMgr->setFpsPanel(
-					ParamsPanel::createParamsPanel(CEGUI_INFOPANEL_BORDER,
-							mSimulationMgr->getWindow()->getHeight()
-									- (3 * CEGUI_INFOPANEL_BORDER
-											+ CEGUI_INFOPANEL_CAPTION
-											+ CEGUI_INFOPANEL_TEXT
-													* items.size()), "FPS", 150,
-							items, mSimulationMgr->getLayout()));
+			mSimulationMgr->getFpsPanel()->getWidgetPanel()->setVisible(false);
 		} else {
 			bool simple = mSimulationMgr->getFpsPanel()->size() == 1;
-			ParamsPanel::destroyParamsPanel(mSimulationMgr->getFpsPanel());
-			mSimulationMgr->setFpsPanel(NULL);
-			if (simple) {
-				ParamsPanel::VectorStringPairs items;
-				items.push_back(ParamsPanel::PairString("Last FPS", "0"));	// 0
-				items.push_back(ParamsPanel::PairString("Average FPS", "0"));// 1
-				items.push_back(ParamsPanel::PairString("Best FPS", "0"));	// 2
-				items.push_back(ParamsPanel::PairString("Worst FPS", "0"));	// 3
-				items.push_back(ParamsPanel::PairString("Triangles", "0"));	// 4
-				items.push_back(ParamsPanel::PairString("Batches", "0"));	// 5
-				mSimulationMgr->setFpsPanel(
-						ParamsPanel::createParamsPanel(
-						CEGUI_INFOPANEL_BORDER,
-								mSimulationMgr->getWindow()->getHeight()
-										- (3 * CEGUI_INFOPANEL_BORDER
-												+ CEGUI_INFOPANEL_CAPTION
-												+ CEGUI_INFOPANEL_TEXT
-														* items.size()),
-								"Adv. FPS", 200, items,
-								mSimulationMgr->getLayout()));
-			}
+			mSimulationMgr->getFpsPanel()->getWidgetPanel()->setVisible(true);
 		}
 	} else if (arg.key == OIS::KC_G) // toggle visibility of even rarer debugging details
 			{

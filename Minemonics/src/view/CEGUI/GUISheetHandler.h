@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CEGUI/Window.h"
+#include <CEGUI/Window.h>
 
 namespace CEGUI {
 class System;
