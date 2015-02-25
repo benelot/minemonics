@@ -282,9 +282,9 @@ void SimulationManager::createScene(void) {
 	setDetailsPanel(ceguiBuilder.createDetailsPanel());
 	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
 
-	testObject = new MathGLObject(this,100,100);
+	testObject = new MathGLWindow(this,400,400,CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)));
 	mLayout->addChild(testObject->getMathGlWindow());
-
+	testObject->getMathGlWindow()->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.3f, 0)));
 // you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 // a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.

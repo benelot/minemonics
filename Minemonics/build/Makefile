@@ -510,29 +510,29 @@ view/CEGUI/ParamsPanel.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.s
 .PHONY : view/CEGUI/ParamsPanel.cpp.s
 
-view/MathGL/MathGLObject.o: view/MathGL/MathGLObject.cpp.o
-.PHONY : view/MathGL/MathGLObject.o
+view/MathGL/MathGLWindow.o: view/MathGL/MathGLWindow.cpp.o
+.PHONY : view/MathGL/MathGLWindow.o
 
 # target to build an object file
-view/MathGL/MathGLObject.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLObject.cpp.o
-.PHONY : view/MathGL/MathGLObject.cpp.o
+view/MathGL/MathGLWindow.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLWindow.cpp.o
+.PHONY : view/MathGL/MathGLWindow.cpp.o
 
-view/MathGL/MathGLObject.i: view/MathGL/MathGLObject.cpp.i
-.PHONY : view/MathGL/MathGLObject.i
+view/MathGL/MathGLWindow.i: view/MathGL/MathGLWindow.cpp.i
+.PHONY : view/MathGL/MathGLWindow.i
 
 # target to preprocess a source file
-view/MathGL/MathGLObject.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLObject.cpp.i
-.PHONY : view/MathGL/MathGLObject.cpp.i
+view/MathGL/MathGLWindow.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLWindow.cpp.i
+.PHONY : view/MathGL/MathGLWindow.cpp.i
 
-view/MathGL/MathGLObject.s: view/MathGL/MathGLObject.cpp.s
-.PHONY : view/MathGL/MathGLObject.s
+view/MathGL/MathGLWindow.s: view/MathGL/MathGLWindow.cpp.s
+.PHONY : view/MathGL/MathGLWindow.s
 
 # target to generate assembly for a file
-view/MathGL/MathGLObject.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLObject.cpp.s
-.PHONY : view/MathGL/MathGLObject.cpp.s
+view/MathGL/MathGLWindow.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/MathGL/MathGLWindow.cpp.s
+.PHONY : view/MathGL/MathGLWindow.cpp.s
 
 view/general/evolution/environments/Environment.o: view/general/evolution/environments/Environment.cpp.o
 .PHONY : view/general/evolution/environments/Environment.o
@@ -783,9 +783,9 @@ help:
 	@echo "... view/CEGUI/ParamsPanel.o"
 	@echo "... view/CEGUI/ParamsPanel.i"
 	@echo "... view/CEGUI/ParamsPanel.s"
-	@echo "... view/MathGL/MathGLObject.o"
-	@echo "... view/MathGL/MathGLObject.i"
-	@echo "... view/MathGL/MathGLObject.s"
+	@echo "... view/MathGL/MathGLWindow.o"
+	@echo "... view/MathGL/MathGLWindow.i"
+	@echo "... view/MathGL/MathGLWindow.s"
 	@echo "... view/general/evolution/environments/Environment.o"
 	@echo "... view/general/evolution/environments/Environment.i"
 	@echo "... view/general/evolution/environments/Environment.s"

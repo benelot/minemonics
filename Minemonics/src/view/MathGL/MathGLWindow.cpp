@@ -1,11 +1,11 @@
 /*
- * MathGLObject.cpp
+ * MathGLWindow.cpp
  *
  *  Created on: Feb 24, 2015
  *      Author: leviathan
  */
 
-#include "MathGLObject.h"
+#include "MathGLWindow.h"
 
 #include <CEGUI/System.h>
 #include <CEGUI/Window.h>
@@ -19,8 +19,8 @@
 //At this position it somehow does not.
 #include <mgl2/mgl.h>
 
-MathGLObject::MathGLObject(SimulationManager* simulationMgr, int textureWidth,
-		int textureHeight):mTime(0) {
+MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
+		int textureHeight,CEGUI::USize windowSize):mTime(0) {
 
 	mSimulationMgr = simulationMgr;
 
@@ -34,18 +34,8 @@ MathGLObject::MathGLObject(SimulationManager* simulationMgr, int textureWidth,
 
 	mTexture = mSimulationMgr->getRoot()->getTextureManager()->createManual(
 			"RTT", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-			Ogre::TEX_TYPE_2D, 512, 512, 0, Ogre::PF_R8G8B8,
+			Ogre::TEX_TYPE_2D, textureWidth, textureHeight, 0, Ogre::PF_R8G8B8,
 			Ogre::TU_RENDERTARGET);
-
-//TODO: Delete if mathgl rendering works
-//	  // Create the texture
-//	   mTexture = Ogre::TextureManager::getSingleton().createManual("DynamicTexture",
-//	      Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-//	      Ogre::TEX_TYPE_2D,
-//	      256, 256,
-//	      0,
-//	      Ogre::PF_BYTE_BGRA,
-//	      Ogre::TU_DYNAMIC_WRITE_ONLY_DISCARDABLE);
 
 	Ogre::RenderTexture *rtex = mTexture->getBuffer()->getRenderTarget();
 
@@ -77,14 +67,9 @@ MathGLObject::MathGLObject(SimulationManager* simulationMgr, int textureWidth,
 	image->setArea(imageArea);
 	image->setAutoScaled(CEGUI::ASM_Disabled);
 
-//	// add the image to the image manager
-//	CEGUI::ImageManager::getSingleton().addImageType<CEGUI::BasicImage>(
-//			"RTTImageset");
-//	CEGUI::ImageManager::getSingleton().create("RTTImageset", "RTTImage");
-
 	mMathGLWindow = CEGUI::WindowManager::getSingleton().createWindow(
 			"Ogremonics/StaticImage", "RTTWindow");
-	mMathGLWindow->setSize(CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)));
+	mMathGLWindow->setSize(windowSize);
 	mMathGLWindow->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.0f, 0)));
 
@@ -113,11 +98,11 @@ MathGLObject::MathGLObject(SimulationManager* simulationMgr, int textureWidth,
 	pixelBuffer->unlock();
 }
 
-MathGLObject::~MathGLObject() {
+MathGLWindow::~MathGLWindow() {
 	// TODO Auto-generated destructor stub
 }
 
-void MathGLObject::update(int timeSinceLastFrame) {
+void MathGLWindow::update(double timeSinceLastFrame) {
 
 	mTime += timeSinceLastFrame;
 
@@ -156,6 +141,6 @@ void MathGLObject::update(int timeSinceLastFrame) {
 	mMathGLWindow->invalidate(); // CEGUI::Window*
 }
 
-CEGUI::Window*& MathGLObject::getMathGlWindow() {
+CEGUI::Window*& MathGLWindow::getMathGlWindow() {
 	return mMathGLWindow;
 }

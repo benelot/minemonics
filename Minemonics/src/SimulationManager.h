@@ -31,7 +31,7 @@ class Logger;
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include "controller/StateHandler.h"
-#include "view/MathGL/MathGLObject.h"
+#include "view/MathGL/MathGLWindow.h"
 
 
 // controller
@@ -102,7 +102,7 @@ public:
 protected:
 	CEGUI::OgreRenderer* mRenderer;
 
-	MathGLObject* testObject;
+	MathGLWindow* testObject;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);
