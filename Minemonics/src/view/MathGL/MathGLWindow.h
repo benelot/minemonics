@@ -1,5 +1,5 @@
 /*
- * MathGLObject.h
+ * MathGLWindow.h
  *
  *  Created on: Feb 24, 2015
  *      Author: leviathan
@@ -20,12 +20,12 @@ class TextureTarget;
 #include <CEGUI/Image.h>
 #include <OgreTexture.h>
 
-class MathGLObject {
+class MathGLWindow {
 public:
-	MathGLObject(SimulationManager* simulationMgr,int textureWidth,
-			int textureHeight);
-	virtual ~MathGLObject();
-	void update(int timeSinceLastFrame);
+	MathGLWindow(SimulationManager* simulationMgr,int textureWidth,
+			int textureHeight,CEGUI::USize windowSize);
+	virtual ~MathGLWindow();
+	void update(double timeSinceLastFrame);
 	CEGUI::Window*& getMathGlWindow();
 
 private:

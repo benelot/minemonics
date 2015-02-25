@@ -242,7 +242,7 @@ set(HDRS
 	./view/CEGUI/CEGUIBuilder.h
 	
 	## MathGL
-    ./view/MathGL/MathGLObject.h
+    ./view/MathGL/MathGLWindow.h
 	
 	# controller
 	./controller/camera/CameraHandler.h
@@ -294,7 +294,7 @@ set(SRCS
 	./view/CEGUI/CEGUIBuilder.cpp
 	
 	## MathGL
-	./view/MathGL/MathGLObject.cpp
+	./view/MathGL/MathGLWindow.cpp
 	
 	# controller
 	./controller/camera/CameraHandler.cpp
