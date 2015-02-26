@@ -179,9 +179,16 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	mTestObject->update(evt.timeSinceLastFrame);
 
+	//TODO: Use for creature evolution, but clean up afterwards
+	// updateEvolution();
+
 // Inject time elapsed
 	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+	return true;
+}
 
+//TODO: Use for creature evolution, but clean up afterwards
+void SimulationManager::updateEvolution() {
 	//
 	// recombine by crossing over two parents
 	//
@@ -216,7 +223,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//
 	std::cout<< "Generation " << t << "s best individual has fitness value " << "\t" << parents.best().fitnessValue() << std::endl;
 
-	return true;
 }
 
 void SimulationManager::updatePanels() {

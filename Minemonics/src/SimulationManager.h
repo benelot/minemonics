@@ -124,6 +124,7 @@ protected:
 	virtual void destroyScene(void);
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	void updatePanels();
+	void updateEvolution();
 	virtual void windowResized(Ogre::RenderWindow* rw);
 	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 };
