@@ -44,9 +44,6 @@
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
 
-// Shark EA
-//#include <PopulationT.h>
-
 #include "CEGUI/widgets/PushButton.h"
 
 //#define _DEBUGGUI
@@ -58,7 +55,9 @@ SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mInputHandler(
 		NULL), mStateHandler(NULL), mGUISheetHandler(NULL), mTerrain(NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mTestObject(NULL) {
+		NULL), mFpsPanel(NULL), mTestObject(NULL),parents(EvolutionConfiguration::PopSize,
+				ChromosomeT<bool>(EvolutionConfiguration::Dimension)),offsprings(EvolutionConfiguration::PopSize,
+				ChromosomeT<bool>(EvolutionConfiguration::Dimension)),jury(1),t(0) {
 
 	// main frame timer initialization
 	mStart = boost::posix_time::second_clock::local_time();
@@ -119,73 +118,33 @@ void SimulationManager::createFrameListener(void) {
 
 	unsigned i, t;
 
-//	//
-//	// initialize random number generator
-//	//
-//	Rng::seed(argc > 1 ? atoi(argv[1]) : 1234);
-//
-//	//
-//	// define populations
-//	//
-//	PopulationT parents(PopSize, ChromosomeT (Dimension));
-//	PopulationT offsprings(PopSize, ChromosomeT (Dimension));
-//
-//	//
-//	// scaling window
-//	//
-//	vector<double> window(Omega);
-//
-//	//
-//	// maximization task
-//	//
-//	parents.setMaximize();
-//	offsprings.setMaximize();
-//
-//	//
-//	// initialize all chromosomes of parent population
-//	//
-//	for (i = 0; i < parents.size(); ++i)
-//		parents[i][0].initialize();
-//
-//	//
-//	// evaluate parents (only needed for elitist strategy)
-//	//
-//	if (NElitists > 0)
-//		for (i = 0; i < parents.size(); ++i)
-//			parents[i].setFitness(ones(parents[i][0]));
-//
-//	//
-//	// iterate
-//	//
-//	for (t = 0; t < Iterations; ++t) {
-//		//
-//		// recombine by crossing over two parents
-//		//
-//		offsprings = parents;
-//		for (i = 0; i < offsprings.size() - 1; i += 2)
-//			if (Rng::coinToss (CrossProb))
-//				offsprings[i][0].crossover(offsprings[i + 1][0], CrossPoints);
-//		//
-//		// mutate by flipping bits
-//		//
-//		for (i = 0; i < offsprings.size(); ++i)
-//			offsprings[i][0].flip(FlipProb);
-//		//
-//		// evaluate objective function
-//		//
-//		for (i = 0; i < offsprings.size(); ++i)
-//			offsprings[i].setFitness(ones(offsprings[i][0]));
-//		//
-//		// scale fitness values and use proportional selection
-//		//
-//		offsprings.linearDynamicScaling(window, t);
-//		parents.selectProportional(offsprings, NElitists);
-//
-//		//
-//		// print out best value found so far
-//		//
-//		cout << t << "\t" << parents.best().fitnessValue() << endl;
-//	}
+	//
+	// initialize random number generator
+	//
+	boost::posix_time::time_duration duration(mNow.time_of_day());
+	Rng::seed(duration.total_milliseconds());
+
+	//
+	// maximization task
+	//
+	parents.setMaximize();
+	offsprings.setMaximize();
+
+	//
+	// initialize all chromosomes of parent population
+	//
+	for (i = 0; i < parents.size(); ++i)
+		parents[i][0].initialize();
+
+	//
+	// evaluate parents (only needed for elitist strategy)
+	//
+	if (EvolutionConfiguration::NElitists > 0)
+		for (i = 0; i < parents.size(); ++i) {
+			jury.setEvaluationSubject(parents[i][0]);
+			jury.evaluateFitness();
+			parents[i].setFitness(jury.getFitness());
+		}
 }
 
 //-------------------------------------------------------------------------------------
@@ -220,10 +179,43 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	mTestObject->update(evt.timeSinceLastFrame);
 
-	return true;
-
 // Inject time elapsed
 	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+
+	//
+	// recombine by crossing over two parents
+	//
+	offsprings = parents;
+	int i = 0;
+	for (i = 0; i < offsprings.size() - 1; i += 2)
+		if (Rng::coinToss(EvolutionConfiguration::CrossProb))
+			offsprings[i][0].crossover(offsprings[i + 1][0],
+					EvolutionConfiguration::CrossPoints);
+	//
+	// mutate by flipping bits
+	//
+	for (i = 0; i < offsprings.size(); ++i)
+		offsprings[i][0].flip(EvolutionConfiguration::FlipProb);
+	//
+	// evaluate objective function
+	//
+	for (i = 0; i < offsprings.size(); ++i) {
+		jury.setEvaluationSubject((offsprings[i][0]));
+		jury.evaluateFitness();
+		offsprings[i].setFitness(jury.getFitness());
+	}
+	//
+	// scale fitness values and use proportional selection
+	//
+	//offsprings.linearDynamicScaling(window, t);
+	parents.selectProportional(offsprings, EvolutionConfiguration::NElitists);
+
+	t++;
+	//
+	// print out best value found so far
+	//
+	std::cout<< "Generation " << t << "s best individual has fitness value " << "\t" << parents.best().fitnessValue() << std::endl;
+
 	return true;
 }
 

@@ -25,7 +25,14 @@ class Logger;
 // base
 #include "BaseApplication.h"
 
+// configuration
+#include "configuration/EvolutionConfiguration.h"
+
 // model
+#include "model/evolution/juries/Ones.h"
+
+// Shark EA
+#include <EALib/PopulationT.h>
 
 // view
 #include <CEGUI/CEGUI.h>
@@ -97,6 +104,15 @@ public:
 
 	bool quit();
 	CEGUI::System*& getCEGUISystem();
+
+	int t;
+	PopulationT<bool> parents;
+	PopulationT<bool> offsprings;
+	Ones jury;
+	//
+	// scaling window
+	//
+	std::vector<double> window;
 
 protected:
 	CEGUI::OgreRenderer* mRenderer;
