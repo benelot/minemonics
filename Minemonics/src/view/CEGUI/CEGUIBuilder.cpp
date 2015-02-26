@@ -643,7 +643,8 @@ ParamsPanel* CEGUIBuilder::createFpsPanel() {
 	ParamsPanel::VectorStringPairs items;
 
 	items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
-	items.push_back(ParamsPanel::PairString("Run time", "0"));		// 0
+	items.push_back(ParamsPanel::PairString("Run time", "0"));		// 1
+	items.push_back(ParamsPanel::PairString("Info","Idle."));		// 2
 	ParamsPanel* fpsPanel = ParamsPanel::createParamsPanel(CEGUI_INFOPANEL_BORDER,
 			(int) mSimulationMgr->getWindow()->getHeight()
 					- (3 * CEGUI_INFOPANEL_BORDER + CEGUI_INFOPANEL_CAPTION

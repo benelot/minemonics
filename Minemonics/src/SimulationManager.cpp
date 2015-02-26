@@ -54,9 +54,10 @@ SimulationManager::_Init SimulationManager::_initializer;
 SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mInputHandler(
-		NULL), mStateHandler(NULL), mGUISheetHandler(NULL) {
-	mTerrain = NULL;
+		NULL), mStateHandler(NULL), mGUISheetHandler(NULL), mTerrain(NULL), mDetailsPanel(
+		NULL), mFpsPanel(NULL), mTestObject(NULL) {
 
+	// main frame timer initialization
 	mStart = boost::posix_time::second_clock::local_time();
 	mNow = boost::posix_time::second_clock::local_time();
 	mRuntime = mNow - mStart;
@@ -68,7 +69,7 @@ SimulationManager::~SimulationManager(void) {
 
 void SimulationManager::destroyScene(void) {
 	if (mTerrain->environmentType == Environment::HILLS)
-		((HillsO3D*)mTerrain)->destroy();
+		((HillsO3D*) mTerrain)->destroy();
 
 }
 
@@ -117,7 +118,7 @@ void SimulationManager::createFrameListener(void) {
 //-------------------------------------------------------------------------------------
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
-	//update timer
+	//update main frame timer
 	mNow = boost::posix_time::second_clock::local_time();
 	boost::posix_time::time_duration mRuntime = mNow - mStart;
 
@@ -133,25 +134,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 //	{
 //		mInputHandlerReset = false;
 //	}
-
-	if (mTerrain->environmentType == Environment::HILLS) {
-		if (((HillsO3D*)mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
-			//mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
-			//mInfoLabel->show();
-			if (((HillsO3D*)mTerrain)->mTerrainsImported) {
-				//mInfoLabel->setCaption("Building terrain, please wait...");
-			} else {
-				//mInfoLabel->setCaption("Updating textures, patience...");
-			}
-		} else {
-			//mTrayMgr->removeWidgetFromTray(mInfoLabel);
-			//mInfoLabel->hide();
-			if(((HillsO3D*)mTerrain)->mTerrainsImported) {
-				((HillsO3D*)mTerrain)->mTerrainGroup->saveAllTerrains(true);
-				((HillsO3D*)mTerrain)->mTerrainsImported = false;
-			}
-		}
-	}
 
 	if (mWindow->isClosed() || mStateHandler->getCurrentState() == SHUTDOWN)
 		return false;
@@ -171,6 +153,26 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 				mFpsPanel->setParamValue(1,
 						Ogre::StringConverter::toString(
 								mRuntime.total_milliseconds()), true);
+
+				if (mTerrain->environmentType == Environment::HILLS) {
+					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
+						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
+							mFpsPanel->setParamValue(2,
+									"Building terrain, please wait...", true);
+						} else {
+							mFpsPanel->setParamValue(2,
+									"Updating textures, patience...", true);
+						}
+					} else {
+						mFpsPanel->setParamValue(2,
+								"Idle.", true);
+						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
+							((HillsO3D*) mTerrain)->mTerrainGroup->saveAllTerrains(
+									true);
+							((HillsO3D*) mTerrain)->mTerrainsImported = false;
+						}
+					}
+				}
 			} else {
 				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
 				mFpsPanel->setParamValue(0,
@@ -216,7 +218,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		}
 	}
 
-	testObject->update(evt.timeSinceLastFrame);
+	mTestObject->update(evt.timeSinceLastFrame);
 
 	return true;
 
@@ -282,9 +284,11 @@ void SimulationManager::createScene(void) {
 	setDetailsPanel(ceguiBuilder.createDetailsPanel());
 	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
 
-	testObject = new MathGLWindow(this,400,400,CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)));
-	mLayout->addChild(testObject->getMathGlWindow());
-	testObject->getMathGlWindow()->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.3f, 0)));
+	mTestObject = new MathGLWindow(this, 400, 400,
+			CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)));
+	mLayout->addChild(mTestObject->getMathGlWindow());
+	mTestObject->getMathGlWindow()->setPosition(
+			CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.3f, 0)));
 // you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 // a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
@@ -499,10 +503,10 @@ Ogre::SceneManager* &SimulationManager::getSceneManager() {
 }
 
 CEGUI::OgreRenderer* & SimulationManager::getRenderer() {
-return mRenderer;
+	return mRenderer;
 }
 
-Ogre::Root*& SimulationManager::getRoot(){
+Ogre::Root*& SimulationManager::getRoot() {
 	return mRoot;
 }
 

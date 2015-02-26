@@ -67,7 +67,6 @@ private:
 	boost::posix_time::ptime mStart;
 	boost::posix_time::ptime mNow;
 	boost::posix_time::time_duration mRuntime;
-	bool mInputHandlerReset;
 
 	static class _Init {
 	public:
@@ -102,7 +101,7 @@ public:
 protected:
 	CEGUI::OgreRenderer* mRenderer;
 
-	MathGLWindow* testObject;
+	MathGLWindow* mTestObject;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);
