@@ -44,6 +44,9 @@
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
 
+// Shark EA
+//#include <PopulationT.h>
+
 #include "CEGUI/widgets/PushButton.h"
 
 //#define _DEBUGGUI
@@ -113,13 +116,83 @@ void SimulationManager::createFrameListener(void) {
 			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 			state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
+
+	unsigned i, t;
+
+//	//
+//	// initialize random number generator
+//	//
+//	Rng::seed(argc > 1 ? atoi(argv[1]) : 1234);
+//
+//	//
+//	// define populations
+//	//
+//	PopulationT parents(PopSize, ChromosomeT (Dimension));
+//	PopulationT offsprings(PopSize, ChromosomeT (Dimension));
+//
+//	//
+//	// scaling window
+//	//
+//	vector<double> window(Omega);
+//
+//	//
+//	// maximization task
+//	//
+//	parents.setMaximize();
+//	offsprings.setMaximize();
+//
+//	//
+//	// initialize all chromosomes of parent population
+//	//
+//	for (i = 0; i < parents.size(); ++i)
+//		parents[i][0].initialize();
+//
+//	//
+//	// evaluate parents (only needed for elitist strategy)
+//	//
+//	if (NElitists > 0)
+//		for (i = 0; i < parents.size(); ++i)
+//			parents[i].setFitness(ones(parents[i][0]));
+//
+//	//
+//	// iterate
+//	//
+//	for (t = 0; t < Iterations; ++t) {
+//		//
+//		// recombine by crossing over two parents
+//		//
+//		offsprings = parents;
+//		for (i = 0; i < offsprings.size() - 1; i += 2)
+//			if (Rng::coinToss (CrossProb))
+//				offsprings[i][0].crossover(offsprings[i + 1][0], CrossPoints);
+//		//
+//		// mutate by flipping bits
+//		//
+//		for (i = 0; i < offsprings.size(); ++i)
+//			offsprings[i][0].flip(FlipProb);
+//		//
+//		// evaluate objective function
+//		//
+//		for (i = 0; i < offsprings.size(); ++i)
+//			offsprings[i].setFitness(ones(offsprings[i][0]));
+//		//
+//		// scale fitness values and use proportional selection
+//		//
+//		offsprings.linearDynamicScaling(window, t);
+//		parents.selectProportional(offsprings, NElitists);
+//
+//		//
+//		// print out best value found so far
+//		//
+//		cout << t << "\t" << parents.best().fitnessValue() << endl;
+//	}
 }
 
 //-------------------------------------------------------------------------------------
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
-	//update main frame timer
-	mNow = boost::posix_time::second_clock::local_time();
+	// update main frame timer
+	mNow = boost::posix_time::microsec_clock::local_time();
 	boost::posix_time::time_duration mRuntime = mNow - mStart;
 
 	//TODO: Fix keyboard grab problem
@@ -143,10 +216,22 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
+	updatePanels();
+
+	mTestObject->update(evt.timeSinceLastFrame);
+
+	return true;
+
+// Inject time elapsed
+	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+	return true;
+}
+
+void SimulationManager::updatePanels() {
 	if (mFpsPanel != NULL) {
 		if (mFpsPanel->isVisible()) // if fps panel is visible, then update its contents
 		{
-			if (mFpsPanel->size() == 2) {
+			if (mFpsPanel->size() == 3) {
 				mFpsPanel->setParamValue(0,
 						Ogre::StringConverter::toString(mWindow->getLastFPS()),
 						true);
@@ -164,8 +249,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 									"Updating textures, patience...", true);
 						}
 					} else {
-						mFpsPanel->setParamValue(2,
-								"Idle.", true);
+						mFpsPanel->setParamValue(2, "Idle.", true);
 						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
 							((HillsO3D*) mTerrain)->mTerrainGroup->saveAllTerrains(
 									true);
@@ -217,14 +301,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 							mCamera->getDerivedOrientation().z), true);
 		}
 	}
-
-	mTestObject->update(evt.timeSinceLastFrame);
-
-	return true;
-
-// Inject time elapsed
-	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
-	return true;
 }
 
 //-------------------------------------------------------------------------------------
@@ -320,7 +396,7 @@ void SimulationManager::createScene(void) {
 	light->setDiffuseColour(Ogre::ColourValue::White);
 	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
 
-// create the light
+	// create the light
 	Ogre::Light *light2 = mSceneMgr->createLight("Light1");
 	light2->setType(Ogre::Light::LT_POINT);
 	light2->setPosition(Ogre::Vector3(250, 150, 250));

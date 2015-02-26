@@ -107,6 +107,7 @@ protected:
 	virtual void createFrameListener(void);
 	virtual void destroyScene(void);
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	void updatePanels();
 	virtual void windowResized(Ogre::RenderWindow* rw);
 	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 };

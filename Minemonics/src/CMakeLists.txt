@@ -191,13 +191,13 @@ include_directories(${MATHGL2_INCLUDE_DIR})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
 
 ######################################################################
-# Shark
+# Shark 2
 ######################################################################
 
-find_package(Shark REQUIRED)
+find_package(Shark2 REQUIRED)
 
-include_directories(${Shark_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark_LIBRARIES})
+include_directories(${Shark2_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
 
 ######################################################################
 # Bullet physics

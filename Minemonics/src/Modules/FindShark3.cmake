@@ -1,17 +1,17 @@
 # - FindShark.cmake
-# This module can be used to find Shark.
+# This module can be used to find Shark 3.
 #
 # The following variables will be defined for your use:
 #
-#  Shark_FOUND           = Shark found
-#  Shark_INCLUDE_DIRS    = The Shark include directories
-#  Shark_LIBRARIES       = The libraries to link against to use Shark
+#  Shark3_FOUND           = Shark 3 found
+#  Shark3_INCLUDE_DIRS    = The Shark 3 include directories
+#  Shark3_LIBRARIES       = The libraries to link against to use Shark 3
 #
 # Typical usage could be something like this:
-#   find_package(Shark REQUIRED)
-#   include_directories(${Shark_INCLUDE_DIRS})
+#   find_package(Shark3 REQUIRED)
+#   include_directories(${Shark3_INCLUDE_DIRS})
 #   add_executable(myexe main.cpp)
-#   target_link_libraries(myexe ${Shark_LIBRARIES})
+#   target_link_libraries(myexe ${Shark3_LIBRARIES})
 #
 #=============================================================================
 # Copyright (c) 2014 Benjamin Ellenberger <be.ellenberger@gmail.com>
@@ -141,7 +141,7 @@ endmacro(pkg_message)
 # Main
 ############
 
-pkg_message(Shark "Looking for Shark dependencies...")
+pkg_message(Shark3 "Looking for Shark 3 dependencies...")
 
 #map default build type to release
 IF(NOT CMAKE_BUILD_TYPE)
@@ -159,18 +159,18 @@ SET(Boost_USE_MULTITHREADED ON)
 ADD_DEFINITIONS( -DBOOST_PARAMETER_MAX_ARITY=15 -DBOOST_FILESYSTEM_VERSION=3 )
 
 # Dependencies of Shark
-libfind_package(Shark Boost 1.48.0 COMPONENTS system date_time filesystem 
+libfind_package(Shark3 Boost 1.48.0 COMPONENTS system date_time filesystem 
 program_options serialization thread unit_test_framework)
 
 
 # Use pkg-config to get hints about paths
-MESSAGE("Trying to hints about where to locate Shark from pkg-config...")
-libfind_pkg_check_modules(Shark_PKGCONF Shark)
+MESSAGE("Trying to hints about where to locate Shark 3 from pkg-config...")
+libfind_pkg_check_modules(Shark3_PKGCONF Shark)
 
-pkg_message(Shark "Looking for Shark...")
+pkg_message(Shark3 "Looking for Shark 3...")
 
 #Find the Include directory
-find_path(Shark_INCLUDE_DIR 
+find_path(Shark3_INCLUDE_DIR 
   NAMES KMeans.h Shark.h
   HINTS
   $ENV{SHARKDIR}
@@ -183,11 +183,11 @@ find_path(Shark_INCLUDE_DIR
   /usr/local/include/shark
   /usr/include/shark
 )
-get_filename_component(Shark_INCLUDE_DIR ${Shark_INCLUDE_DIR} DIRECTORY)
-#MESSAGE("Shark_INCLUDE_DIR is ${Shark_INCLUDE_DIR}")
+get_filename_component(Shark3_INCLUDE_DIR ${Shark3_INCLUDE_DIR} DIRECTORY)
+#MESSAGE("Shark3_INCLUDE_DIR is ${Shark3_INCLUDE_DIR}")
 
 # Find the Library
-FIND_LIBRARY(Shark_LIBRARY
+FIND_LIBRARY(Shark3_LIBRARY
   NAMES shark
   HINTS
   $ENV{SharkDIR}
@@ -196,11 +196,11 @@ FIND_LIBRARY(Shark_LIBRARY
   ${Shark_PKGCONF_LIBRARY_DIRS}
   /usr/local/lib
 )
-#MESSAGE("Shark_LIBRARY is ${Shark_LIBRARY}")
+#MESSAGE("Shark3_LIBRARY is ${Shark3_LIBRARY}")
 
 # Set the include dir variables and the libraries and let libfind_process do the rest.
 # NOTE: Singular variables for this library, plural for librarires this lib dependes on.
-set(Shark_PROCESS_INCLUDES Shark_INCLUDE_DIR Boost_INCLUDE_DIRS)
-set(Shark_PROCESS_LIBS Shark_LIBRARY Boost_LIBRARIES)
+set(Shark3_PROCESS_INCLUDES Shark_INCLUDE_DIR Boost_INCLUDE_DIRS)
+set(Shark3_PROCESS_LIBS Shark_LIBRARY Boost_LIBRARIES)
 
-libfind_process(Shark)
+libfind_process(Shark3)
