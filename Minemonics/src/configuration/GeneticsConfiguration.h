@@ -10,8 +10,7 @@
 
 class GeneticsConfiguration {
 public:
-	GeneticsConfiguration();
-	virtual ~GeneticsConfiguration();
+
 };
 
 #endif /* GENETICSCONFIGURATION_H_ */

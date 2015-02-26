@@ -10,8 +10,7 @@
 
 class ApplicationConfiguration {
 public:
-	ApplicationConfiguration();
-	virtual ~ApplicationConfiguration();
+
 };
 
 #endif /* APPLICATIONCONFIGURATION_H_ */

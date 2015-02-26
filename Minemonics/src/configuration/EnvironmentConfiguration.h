@@ -12,10 +12,6 @@
 
 class EnvironmentConfiguration {
 public:
-	EnvironmentConfiguration();
-	virtual ~EnvironmentConfiguration();
-
-
 	static const Environment::EnvironmentType environmentType = Environment::PLANE;
 };
 

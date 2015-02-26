@@ -10,8 +10,7 @@
 
 class PhysicsConfiguration {
 public:
-	PhysicsConfiguration();
-	virtual ~PhysicsConfiguration();
+
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

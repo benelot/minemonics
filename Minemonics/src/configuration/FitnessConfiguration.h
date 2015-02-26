@@ -10,8 +10,7 @@
 
 class FitnessConfiguration {
 public:
-	FitnessConfiguration();
-	virtual ~FitnessConfiguration();
+
 };
 
 #endif /* FITNESSCONFIGURATION_H_ */

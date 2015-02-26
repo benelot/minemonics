@@ -10,8 +10,7 @@
 
 class NeuronalNetworkConfiguration {
 public:
-	NeuronalNetworkConfiguration();
-	virtual ~NeuronalNetworkConfiguration();
+
 };
 
 #endif /* NEURONALNETWORKCONFIGURATION_H_ */

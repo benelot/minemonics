@@ -10,8 +10,7 @@
 
 class CreatureConfiguration {
 public:
-	CreatureConfiguration();
-	virtual ~CreatureConfiguration();
+
 };
 
 #endif /* CREATURECONFIGURATION_H_ */
