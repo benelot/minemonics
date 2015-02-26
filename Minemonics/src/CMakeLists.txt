@@ -221,11 +221,9 @@ set(HDRS
 	./SimulationManager.h
 	
 	# model
-    ./model/settings/GeneticAlgorithmSettings.h
-	./model/settings/PhysicsSettings.h
-	./model/settings/EnvironmentSettings.h
-	./model/settings/MorphologySettings.h
-	./model/settings/ControlSettings.h
+	./model/evolution/juries/Jury.h
+	./model/evolution/juries/Ones.h
+	./model/evolution/juries/Velocity.h
 	
 	# view
 	./view/general/evolution/environments/Environment.h
@@ -253,9 +251,10 @@ set(HDRS
 	# configuration
 	./configuration/ApplicationConfiguration.h
 	./configuration/CameraConfiguration.h
+	./configuration/ControlConfiguration.h
 	./configuration/PhysicsConfiguration.h
 	./configuration/NeuronalNetworkConfiguration.h
-	./configuration/CreatureConfiguration.h
+	./configuration/MorphologyConfiguration.h
 	./configuration/GeneticsConfiguration.h
 	./configuration/FitnessConfiguration.h
 	./configuration/EnvironmentConfiguration.h
@@ -271,13 +270,10 @@ set(SRCS
 	./BaseApplication.cpp
 	./SimulationManager.cpp
 	
-    # model
-	## settings
-	./model/settings/ControlSettings.cpp
-	./model/settings/MorphologySettings.cpp
-	./model/settings/GeneticAlgorithmSettings.cpp
-	./model/settings/EnvironmentSettings.cpp
-	./model/settings/PhysicsSettings.cpp
+	# model
+	./model/evolution/juries/Jury.cpp
+	./model/evolution/juries/Ones.cpp
+	./model/evolution/juries/Velocity.cpp
 	
 	# view
 	./view/general/evolution/environments/Environment.cpp
