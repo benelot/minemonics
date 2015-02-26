@@ -1,18 +1,18 @@
 /*
- * Moving.cpp
+ * Velocity.cpp
  *
- *  Created on: Dec 7, 2014
+ *  Created on: Feb 26, 2015
  *      Author: leviathan
  */
 
-#include "Moving.h"
+#include "Velocity.h"
 
-Moving::Moving() {
+Velocity::Velocity() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Moving::~Moving() {
+Velocity::~Velocity() {
 	// TODO Auto-generated destructor stub
 }
 
