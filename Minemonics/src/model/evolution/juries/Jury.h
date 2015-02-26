@@ -35,7 +35,7 @@ public:
 	 * Calculates the fitness value at the end of the evaluation.
 	 * Therefore it should be called when the evaluation ends.
 	 */
-	void evaluateFitness();
+	virtual void evaluateFitness() = 0;
 private:
 	JuryType mJuryType;
 protected:

@@ -7,8 +7,7 @@
 
 #include "Velocity.h"
 
-Velocity::Velocity() {
-	// TODO Auto-generated constructor stub
+Velocity::Velocity(double weight):Jury(Jury::VELOCITY,weight) {
 
 }
 

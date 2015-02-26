@@ -12,7 +12,7 @@
 
 class Velocity: public Jury {
 public:
-	Velocity();
+	Velocity(double weight);
 	virtual ~Velocity();
 };
 
