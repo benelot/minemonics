@@ -32,7 +32,7 @@ void SDL2InputHandler::initializeInputHandler() {
 			SDL_WINDOWPOS_UNDEFINED,//    initial y position
 			640,//    width, in pixels
 			480,//    height, in pixels
-			SDL_WINDOW_FULLSCREEN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
+			SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
 
 	if (window == NULL) {
 		/* The screen could not be created */
