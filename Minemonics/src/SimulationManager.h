@@ -18,7 +18,7 @@
 #define __SimulationManager_h_
 
 class Environment;
-class CEGUIInputHandler;
+class SDL2InputHandler;
 class GUISheetHandler;
 class Logger;
 
@@ -52,7 +52,7 @@ private:
 	Environment* mTerrain;
 
 	// Game component handlers
-	CEGUIInputHandler* mInputHandler;
+	SDL2InputHandler* mInputHandler;
 	CameraHandler mCameraHandler;
 
 	CEGUI::System* mSystem;
@@ -89,7 +89,7 @@ public:
 
 	// Accessor methods
 	CameraHandler& getCameraHandler();
-	CEGUIInputHandler* getInputHandler();
+	SDL2InputHandler* getInputHandler();
 	StateHandler* getStateHandler();
 
 	Ogre::Camera* getCamera();

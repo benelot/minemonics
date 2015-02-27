@@ -84,11 +84,11 @@ endif(OGRE_Terrain_FOUND)
 # OIS
 ######################################################################
  
-find_package(OIS REQUIRED)
+#find_package(OIS REQUIRED)
  
-if(NOT OIS_FOUND)
-	message(SEND_ERROR "Failed to find OIS.")
-endif()
+#if(NOT OIS_FOUND)
+#	message(SEND_ERROR "Failed to find OIS.")
+#endif()
 
 ######################################################################
 # BOOST
@@ -162,13 +162,14 @@ add_definitions(-DBOOST_LOG_DYN_LINK)
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 
 ######################################################################
-# SDL2 / Prepared for later
+# SDL2
 ######################################################################
 
-#find_package(SDL2 REQUIRED)
+find_package(SDL2 REQUIRED)
 
-#include_directories(${SDL2_INCLUDE_DIR})
-#set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${SDL2_LIBRARIES})
+include_directories(${SDL2_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${SDL2_LIBRARY})
+
 
 ######################################################################
 # CEGUI
@@ -244,8 +245,12 @@ set(HDRS
 	
 	# controller
 	./controller/camera/CameraHandler.h
-	./controller/input/OISInputHandler.h
+	./controller/input/ApplicationScancode.h
+	./controller/input/ApplicationKeycode.h
+	./controller/input/ApplicationMousecode.h
+	./controller/input/SDL2InputHandler.h
 	./controller/input/CEGUIInputHandler.h
+	./controller/input/OgreInputHandler.h
 	./controller/StateHandler.h
 	
 	# configuration
@@ -294,8 +299,9 @@ set(SRCS
 	
 	# controller
 	./controller/camera/CameraHandler.cpp
-	./controller/input/OISInputHandler.cpp
+	./controller/input/SDL2InputHandler.cpp
 	./controller/input/CEGUIInputHandler.cpp
+	./controller/input/OgreInputHandler.cpp
 	./controller/StateHandler.cpp
 	
 	# logger

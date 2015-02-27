@@ -27,8 +27,7 @@
 #include "view/CEGUI/CEGUIBuilder.h"
 
 //Game component includes
-#include "controller/input/OISInputHandler.h"
-#include "controller/input/CEGUIInputHandler.h"
+#include "controller/input/SDL2InputHandler.h"
 #include "controller/camera/CameraHandler.h"
 
 #include <OgreWindowEventUtilities.h>
@@ -55,9 +54,12 @@ SimulationManager::SimulationManager(void) :
 //		mInfoLabel(0),
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mInputHandler(
 		NULL), mStateHandler(NULL), mGUISheetHandler(NULL), mTerrain(NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mTestObject(NULL),parents(EvolutionConfiguration::PopSize,
-				ChromosomeT<bool>(EvolutionConfiguration::Dimension)),offsprings(EvolutionConfiguration::PopSize,
-				ChromosomeT<bool>(EvolutionConfiguration::Dimension)),jury(1),t(0) {
+		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
+				EvolutionConfiguration::PopSize,
+				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), offsprings(
+				EvolutionConfiguration::PopSize,
+				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), jury(1), t(
+				0) {
 
 	// main frame timer initialization
 	mStart = boost::posix_time::second_clock::local_time();
@@ -81,7 +83,8 @@ void SimulationManager::createFrameListener(void) {
 	/// INPUT HANDLER
 
 	// this next bit is for the sake of the input handler
-	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
+	Ogre::LogManager::getSingletonPtr()->logMessage(
+			"*** Initializing SDL2 ***");
 	size_t windowHnd = 0;
 
 	mWindow->getCustomAttribute("WINDOW", &windowHnd);
@@ -91,7 +94,7 @@ void SimulationManager::createFrameListener(void) {
 
 	// since the input handler deals with pushing input to CEGUI, we need to give it a pointer
 	// to the CEGUI System instance to use
-	mInputHandler = new CEGUIInputHandler(mStateHandler, windowHnd, this);
+	mInputHandler = new SDL2InputHandler(mStateHandler, windowHnd, this);
 	mStateHandler->requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
@@ -108,13 +111,11 @@ void SimulationManager::createFrameListener(void) {
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
 
-	// Align CEGUI mouse with OIS mouse
-	const OIS::MouseState state =
-			getInputHandler()->getMouse()->getMouseState();
+	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
 			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-			state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
+			mInputHandler->getMousePositionX() - mousePos.d_x, mInputHandler->getMousePositionY()- mousePos.d_y);
 
 	unsigned i, t;
 
@@ -170,8 +171,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	if (mWindow->isClosed() || mStateHandler->getCurrentState() == SHUTDOWN)
 		return false;
 
-	//Need to capture/update each device
-	mInputHandler->capture();
+	// Inject input into handlers;
+	mInputHandler->injectInput();
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
@@ -221,7 +222,8 @@ void SimulationManager::updateEvolution() {
 	//
 	// print out best value found so far
 	//
-	std::cout<< "Generation " << t << "s best individual has fitness value " << "\t" << parents.best().fitnessValue() << std::endl;
+	std::cout << "Generation " << t << "s best individual has fitness value "
+			<< "\t" << parents.best().fitnessValue() << std::endl;
 
 }
 
@@ -467,7 +469,7 @@ CameraHandler & SimulationManager::getCameraHandler() {
 	return mCameraHandler;
 }
 
-CEGUIInputHandler * SimulationManager::getInputHandler() {
+SDL2InputHandler * SimulationManager::getInputHandler() {
 	return mInputHandler;
 }
 
@@ -486,9 +488,9 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
 
-	const OIS::MouseState &ms = mInputHandler->getMouse()->getMouseState();
-	ms.width = width;
-	ms.height = height;
+//	const OIS::MouseState &ms = mInputHandler->getMouse()->getMouseState();
+//	ms.width = width;
+//	ms.height = height;
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
@@ -499,12 +501,11 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
 		mInputHandler->initializeInputHandler();
 		// Align CEGUI mouse with OIS mouse
-		const OIS::MouseState state =
-		getInputHandler()->getMouse()->getMouseState();
+
 		CEGUI::Vector2f mousePos =
 		mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-				state.X.abs - mousePos.d_x, state.Y.abs - mousePos.d_y);
+				mInputHandler->getMousePositionX() - mousePos.d_x, mInputHandler->getMousePositionY() - mousePos.d_y);
 	}
 	else
 	{

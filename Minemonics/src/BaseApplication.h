@@ -26,12 +26,7 @@ This source file is part of the
 #include <OgreRenderWindow.h>
 #include <OgreConfigFile.h>
 
-#include <OISEvents.h>
-#include <OISInputManager.h>
-#include <OISKeyboard.h>
-#include <OISMouse.h>
-
-#include <SdkCameraMan.h>
+#include <OgreWindowEventUtilities.h>
 
 #include "view/CEGUI/ParamsPanel.h"
 
@@ -44,7 +39,6 @@ public:
     virtual void go(void);
 	Ogre::RenderWindow*& getWindow();
 	void setWindow(Ogre::RenderWindow*& window);
-	OgreBites::SdkCameraMan*& getCameraMan();
 
 protected:
     virtual bool setup();
@@ -75,8 +69,6 @@ protected:
     Ogre::String mResourcesCfg;
     Ogre::String mPluginsCfg;
 
-    // OgreBites
-    OgreBites::SdkCameraMan* mCameraMan;       // basic camera controller
     bool mCursorWasVisible;                    // was cursor visible before dialog appeared
     bool mShutDown;
 };

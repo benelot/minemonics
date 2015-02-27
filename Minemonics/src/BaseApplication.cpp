@@ -24,7 +24,6 @@ BaseApplication::BaseApplication(void)
     mWindow(0),
     mResourcesCfg(Ogre::StringUtil::BLANK),
     mPluginsCfg(Ogre::StringUtil::BLANK),
-    mCameraMan(0),
     mCursorWasVisible(false),
     mShutDown(false)
 {
@@ -33,10 +32,6 @@ BaseApplication::BaseApplication(void)
 //-------------------------------------------------------------------------------------
 BaseApplication::~BaseApplication(void)
 {
-    if (mCameraMan) delete mCameraMan;
-
-    //Remove ourself as a Window listener
-    Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
     windowClosed(mWindow);
     delete mRoot;
 }
@@ -77,54 +72,22 @@ void BaseApplication::createCamera(void)
     // Look back along -Z
     mCamera->lookAt(Ogre::Vector3(0,0,-300));
     mCamera->setNearClipDistance(5);
-
-    mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controller
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createFrameListener(void)
 {
     Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-    OIS::ParamList pl;
+
     size_t windowHnd = 0;
     std::ostringstream windowHndStr;
 
     mWindow->getCustomAttribute("WINDOW", &windowHnd);
     windowHndStr << windowHnd;
-    pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+
 
     //Set initial mouse clipping size
     windowResized(mWindow);
 
-    //Register as a Window listener
-    Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
-
-    //TODO: Cleanup after CEGUI implementation
-	//OgreBites::InputContext inputContext;
-	//inputContext.mMouse = mMouse;
-	//inputContext.mKeyboard = mKeyboard;
-    //mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, inputContext, this);
-    //mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-    //mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-    //mTrayMgr->hideCursor();
-
-    // create a params panel for displaying sample details
-//    Ogre::StringVector items;
-//    items.push_back("cam.pX");
-//    items.push_back("cam.pY");
-//    items.push_back("cam.pZ");
-//    items.push_back("");
-//    items.push_back("cam.oW");
-//    items.push_back("cam.oX");
-//    items.push_back("cam.oY");
-//    items.push_back("cam.oZ");
-//    items.push_back("");
-//    items.push_back("Filtering");
-//    items.push_back("Poly Mode");
-
-    //mDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_NONE, "DetailsPanel", 200, items);
-    //mDetailsPanel->setParamValue(9, "Bilinear");
-    //mDetailsPanel->setParamValue(10, "Solid");
-    //mDetailsPanel->hide();
 
     mRoot->addFrameListener(this);
 }
@@ -235,24 +198,6 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
     if(mShutDown)
         return false;
 
-    //TODO: Cleanup after CEGUI implementation
-//    mTrayMgr->frameRenderingQueued(evt);
-//
-//    if (!mTrayMgr->isDialogVisible())
-//    {
-//        mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
-//        if (mDetailsPanel->isVisible())   // if details panel is visible, then update its contents
-//        {
-//            mDetailsPanel->setParamValue(0, Ogre::StringConverter::toString(mCamera->getDerivedPosition().x));
-//            mDetailsPanel->setParamValue(1, Ogre::StringConverter::toString(mCamera->getDerivedPosition().y));
-//            mDetailsPanel->setParamValue(2, Ogre::StringConverter::toString(mCamera->getDerivedPosition().z));
-//            mDetailsPanel->setParamValue(4, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().w));
-//            mDetailsPanel->setParamValue(5, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().x));
-//            mDetailsPanel->setParamValue(6, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().y));
-//            mDetailsPanel->setParamValue(7, Ogre::StringConverter::toString(mCamera->getDerivedOrientation().z));
-//        }
-//    }
-
     return true;
 }
 
@@ -267,8 +212,4 @@ Ogre::RenderWindow*& BaseApplication::getWindow() {
 
 void BaseApplication::setWindow(Ogre::RenderWindow*& window) {
 	mWindow = window;
-}
-
-OgreBites::SdkCameraMan*& BaseApplication::getCameraMan() {
-	return mCameraMan;
 }

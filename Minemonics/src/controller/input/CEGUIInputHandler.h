@@ -13,30 +13,50 @@ class StateHandler;
 
 #include <CEGUI/CEGUI.h>
 
-#include "OISInputHandler.h"
+#include "OgreInputHandler.h"
 
-class CEGUIInputHandler: public OISInputHandler {
+#include <utils/logging/Logger.h>
+
+#include "controller/input/ApplicationKeycode.h"
+#include "controller/input/ApplicationMousecode.h"
+
+class CEGUIInputHandler: public OgreInputHandler {
 private:
 	unsigned long mhWnd;
 	StateHandler *mStateHandler;
-	OIS::ParamList pl;
+
+	// Logger
+	static BoostLogger mBoostLogger;
+
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"CEGUIInputHandler"));
+		}
+	} _initializer;
+
+	double mCEGUIlastTick;
 public:
 	CEGUIInputHandler(StateHandler* stateHandler, unsigned long hWnd,
 			SimulationManager* simulationMgr);
 	virtual ~CEGUIInputHandler();
-	// OIS::KeyListener
-	virtual bool keyPressed(const OIS::KeyEvent &arg);
-	virtual bool keyReleased(const OIS::KeyEvent &arg);
-	virtual void initializeInputHandler();
-	virtual void destroyInputHandler();
+	// CEGUI::KeyListener
+	bool keyPressed(ApplicationKeycode::Keycode key);
+	bool keyReleased(ApplicationKeycode::Keycode key);
+	void injectTimeImpulse(double tick);
 
-	// OIS::MouseListener
-	virtual bool mouseMoved(const OIS::MouseEvent &arg);
-	virtual bool mousePressed(const OIS::MouseEvent &arg,
-			OIS::MouseButtonID id);
-	virtual bool mouseReleased(const OIS::MouseEvent &arg,
-			OIS::MouseButtonID id);
-	static CEGUI::MouseButton convertButton(OIS::MouseButtonID buttonID);
+	// CEGUI::MouseListener
+	bool mouseMoved(float x,float y);
+	bool mouseWheelMoved(float rel);
+	bool mousePressed(ApplicationMouseCode::MouseButton button);
+	bool mouseReleased(ApplicationMouseCode::MouseButton button);
+	void windowResized(int width,int height);
+	static CEGUI::MouseButton convertMouseOgretoCEGUI(
+			ApplicationMouseCode::MouseButton button);
+	static CEGUI::Key::Scan convertKeyOgretoCEGUI(ApplicationKeycode::Keycode key);
+	void initializeKeyMap();
 };
 
 #endif /* CEGUIINPUTHANDLER_H_ */

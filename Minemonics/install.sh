@@ -9,8 +9,8 @@
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Prerequisites&refresh=1&tikiversion=Linux
 sudo apt-get install build-essential automake libtool # compiler and configuration tools
 sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev libxaw7-dev freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev nvidia-cg-dev # required dependencies
-# sudo apt-get install libsdl2-dev # install sdl2 for the input system / prepared for later
-sudo apt-get install libois-dev # install OIS
+sudo apt-get install libsdl2-dev # install sdl2 for the input system
+#sudo apt-get install libois-dev # install OIS
 sudo apt-get install libboost-all-dev # because I need a lot of boost libraries
 mkdir ogre1.9
 cd ogre1.9

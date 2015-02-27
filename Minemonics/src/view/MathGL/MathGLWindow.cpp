@@ -10,6 +10,7 @@
 #include <CEGUI/System.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/Image.h>
+#include <Ogre.h>
 #include <CEGUI/RendererModules/Ogre/Texture.h>
 #include <stdio.h>
 
