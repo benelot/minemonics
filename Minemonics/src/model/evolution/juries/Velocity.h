@@ -14,6 +14,17 @@ class Velocity: public Jury {
 public:
 	Velocity(double weight);
 	virtual ~Velocity();
+
+	void calculateAvgVelocity(double x2, double y2, double z2, float diffTime);
+	void evaluateFitness();
+
+private:
+	double mAvgVelocity;
+
+	double mX, mY, mZ;
+	float mTimestamp;
+	int mSampleQty;
+	bool mIsFirstTime;
 };
 
 #endif /* VELOCITY_H_ */
