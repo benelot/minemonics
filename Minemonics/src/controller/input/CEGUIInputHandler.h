@@ -56,6 +56,9 @@ public:
 			ApplicationMouseCode::MouseButton button);
 	static CEGUI::Key::Scan convertKeyOgretoCEGUI(ApplicationKeycode::Keycode key);
 	void initializeKeyMap();
+
+protected:
+	void injectMousePosition(float x,float y);
 };
 
 #endif /* CEGUIINPUTHANDLER_H_ */

@@ -1188,3 +1188,13 @@ CEGUI::Key::Scan CEGUIInputHandler::convertKeyOgretoCEGUI(
 	return CEGUI::Key::Unlabeled;
 
 }
+
+void CEGUIInputHandler::injectMousePosition(float x,float y){
+	// Align CEGUI mouse with SDL2 mouse
+	CEGUI::Vector2f mousePos =
+			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
+			x - mousePos.d_x, y- mousePos.d_y);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position SDL:" << x << "," << y;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position CEGUI:" << mousePos.d_x << "," << mousePos.d_y;
+}

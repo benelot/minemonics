@@ -47,12 +47,15 @@ class Logger;
 //utils
 #include <utils/logging/Logger.h>
 
+#include <SDL_syswm.h>
+
 class SimulationManager: public BaseApplication {
 private:
 	Environment* mTerrain;
 
 	// Game component handlers
 	SDL2InputHandler* mInputHandler;
+	SDL_Window *mSdlWindow;
 	CameraHandler mCameraHandler;
 
 	CEGUI::System* mSystem;
@@ -105,6 +108,7 @@ public:
 
 	bool quit();
 	CEGUI::System*& getCEGUISystem();
+	virtual void windowResized(Ogre::RenderWindow* rw);
 
 	int t;
 	PopulationT<bool> parents;
@@ -126,7 +130,6 @@ protected:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	void updatePanels();
 	void updateEvolution();
-	virtual void windowResized(Ogre::RenderWindow* rw);
 	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 };
 

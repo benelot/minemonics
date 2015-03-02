@@ -11,7 +11,8 @@
 
 BoostLogger SDL2InputHandler::mBoostLogger;  // initialize the static variables
 SDL2InputHandler::_Init SDL2InputHandler::_initializer;
-SDL2InputHandler::SDL2InputHandler(StateHandler* stateHandler, SimulationManager* simulationMgr) :
+SDL2InputHandler::SDL2InputHandler(StateHandler* stateHandler,
+		SimulationManager* simulationMgr) :
 		CEGUIInputHandler(stateHandler, simulationMgr) {
 	initializeInputHandler();
 }
@@ -68,8 +69,12 @@ void SDL2InputHandler::injectInput() {
 		/* mouse motion handler */
 		case SDL_MOUSEMOTION:
 			/* we inject the mouse position directly. */
-			CEGUIInputHandler::mouseMoved(static_cast<float>(e.motion.x)-mouseX,
-					static_cast<float>(e.motion.y)-mouseY);
+			CEGUIInputHandler::mouseMoved(
+					static_cast<float>(e.motion.x) - mouseX,
+					static_cast<float>(e.motion.y) - mouseY);
+			CEGUIInputHandler::injectMousePosition(
+					static_cast<float>(e.motion.x),
+					static_cast<float>(e.motion.y));
 			mouseX = static_cast<float>(e.motion.x);
 			mouseY = static_cast<float>(e.motion.y);
 			break;
@@ -83,56 +88,54 @@ void SDL2InputHandler::injectInput() {
 			break;
 
 			/* mouse up handler */
-		case SDL_MOUSEBUTTONUP:
+			case SDL_MOUSEBUTTONUP:
 			/* let a special function handle the mouse button up event */
 			CEGUIInputHandler::mouseReleased(
 					convertMouseSDL2toOgre(e.button.button));
 			break;
 
 			/* key down */
-		case SDL_KEYDOWN:
+			case SDL_KEYDOWN:
 			CEGUIInputHandler::keyPressed(
 					convertKeySDL2toOgre(e.key.keysym.sym));
 			break;
 			/* key up */
-		case SDL_KEYUP:
+			case SDL_KEYUP:
 			CEGUIInputHandler::keyReleased(
 					convertKeySDL2toOgre(e.key.keysym.sym));
 			break;
-		case SDL_MOUSEWHEEL:
+			case SDL_MOUSEWHEEL:
 			CEGUIInputHandler::mouseWheelMoved(e.wheel.y);
 			break;
 			/* WM quit event occured */
-		case SDL_QUIT:
+			case SDL_QUIT:
 			mSimulationMgr->quit();
 			break;
-		case SDL_WINDOWEVENT_RESIZED:
-				CEGUIInputHandler::windowResized(e.window.data1, e.window.data2);
+			case SDL_WINDOWEVENT:
+			mSimulationMgr->windowResized(mSimulationMgr->getWindow());
+			//CEGUIInputHandler::windowResized(e.window.data1, e.window.data2);
 			break;
 		}
 	}
 }
-void SDL2InputHandler::injectTimePulse(){
+void SDL2InputHandler::injectTimePulse() {
 	/* get current "run-time" in seconds */
 	double t = 0.001 * SDL_GetTicks();
 	CEGUIInputHandler::injectTimeImpulse(t);
 
 }
 
-
-int SDL2InputHandler::getMousePositionX(){
+int SDL2InputHandler::getMousePositionX() {
 	int x, y;
-	SDL_GetMouseState(&x,&y);
-	return  x;
+	SDL_GetMouseState(&x, &y);
+	return x;
 }
 
-int SDL2InputHandler::getMousePositionY(){
-	int x,y;
-	SDL_GetMouseState(&x,&y);
+int SDL2InputHandler::getMousePositionY() {
+	int x, y;
+	SDL_GetMouseState(&x, &y);
 	return y;
 }
-
-
 
 ApplicationMouseCode::MouseButton SDL2InputHandler::convertMouseSDL2toOgre(
 		Uint8 button) {
