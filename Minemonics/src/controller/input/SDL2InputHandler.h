@@ -19,10 +19,10 @@
 
 class SDL2InputHandler: public CEGUIInputHandler  {
 public:
-	SDL2InputHandler(StateHandler* stateHandler, SimulationManager* simulationMgr);
+	SDL2InputHandler();
 	virtual ~SDL2InputHandler();
-	void initializeInputHandler();
-	void destroyInputHandler();
+	void initialize(StateHandler* stateHandler, SimulationManager* simulationMgr);
+	void destroy();
 	void injectInput();
 	void injectTimePulse();
 

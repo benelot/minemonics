@@ -21,8 +21,9 @@ class SimulationManager;
 
 class OgreInputHandler {
 public:
-	OgreInputHandler(SimulationManager* simulationMgr);
+	OgreInputHandler();
 	virtual ~OgreInputHandler();
+	void initialize(SimulationManager* simulationMgr);
 	bool keyPressed(ApplicationKeycode::Keycode key);
 	bool keyReleased(ApplicationKeycode::Keycode key);
 	bool mouseMoved(float x,float y);

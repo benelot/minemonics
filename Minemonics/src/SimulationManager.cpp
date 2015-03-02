@@ -45,7 +45,9 @@
 
 #include "CEGUI/widgets/PushButton.h"
 
-#include "utils/misc/OgreSystemConfigStrings.h"
+#include "configuration/OgreSystemConfigStrings.h"
+
+#include "configuration/ApplicationConfiguration.h"
 
 //#define _DEBUGGUI
 
@@ -53,9 +55,8 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-//		mInfoLabel(0),
-		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mInputHandler(
-		NULL), mStateHandler(NULL), mGUISheetHandler(NULL), mTerrain(NULL), mDetailsPanel(
+		mGraphicsSystem(),mStateHandler(),mGUISheetHandler(),mInputHandler(),
+		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
 				EvolutionConfiguration::PopSize,
 				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), offsprings(
@@ -89,14 +90,13 @@ void SimulationManager::createFrameListener(void) {
 			"*** Initializing SDL2 ***");
 
 	// set up the input handlers
-	mStateHandler = new StateHandler();
 
 	// since the input handler deals with pushing input to CEGUI, we need to give it a pointer
 	// to the CEGUI System instance to use
-	mStateHandler->requestStateChange(GUI);
+	mStateHandler.requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
-	mGUISheetHandler = new GUISheetHandler(mSystem, mLayout, mStateHandler);
+	mGUISheetHandler.initialize(mSystem, mLayout, &mStateHandler);
 
 	//Set initial mouse clipping size
 	windowResized(mWindow);
@@ -147,11 +147,11 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mNow = boost::posix_time::microsec_clock::local_time();
 	boost::posix_time::time_duration mRuntime = mNow - mStart;
 
-	if (mWindow->isClosed() || mStateHandler->getCurrentState() == SHUTDOWN)
+	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN)
 		return false;
 
 	// Inject input into handlers;
-	mInputHandler->injectInput();
+	mInputHandler.injectInput();
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
@@ -282,7 +282,7 @@ void SimulationManager::updatePanels() {
 
 //-------------------------------------------------------------------------------------
 bool SimulationManager::quit() {
-	mStateHandler->requestStateChange(SHUTDOWN);
+	mStateHandler.requestStateChange(SHUTDOWN);
 	mShutDown = true;
 	return true;
 }
@@ -299,7 +299,7 @@ void SimulationManager::createScene(void) {
 
 	std::cout << "past this!";
 
-	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget("Minemonics");
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(ApplicationConfiguration::APPLICATION_TITLE);
 
 // CEGUI
 // with a scene manager and window, we can create a the GUI renderer
@@ -368,11 +368,6 @@ void SimulationManager::createScene(void) {
 			Ogre::RSC_INFINITE_FAR_PLANE)) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
-
-// Play with startup Texture Filtering options
-// Note: Pressing T on runtime will discard those settings
-//  Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(Ogre::TFO_ANISOTROPIC);
-//  Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(7);
 
 	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
 	lightdir.normalise();
@@ -451,22 +446,6 @@ void SimulationManager::createScene(void) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
 }
 
-// Accessor methods
-CameraHandler & SimulationManager::getCameraHandler() {
-	return mCameraHandler;
-}
-
-SDL2InputHandler * SimulationManager::getInputHandler() {
-	return mInputHandler;
-}
-
-StateHandler * SimulationManager::getStateHandler() {
-	return mStateHandler;
-}
-
-Ogre::Camera * SimulationManager::getCamera() {
-	return mCamera;
-}
 
 //Adjust mouse clipping area
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
@@ -503,18 +482,16 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
-//		mInputHandler->initializeInputHandler();
-		// Align CEGUI mouse with OIS mouse
 
+		// Align CEGUI mouse with SDL mouse
 		CEGUI::Vector2f mousePos =
 		mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-				mInputHandler->getMousePositionX() - mousePos.d_x, mInputHandler->getMousePositionY() - mousePos.d_y);
+				mInputHandler.getMousePositionX() - mousePos.d_x, mInputHandler.getMousePositionY() - mousePos.d_y);
 	}
 	else
 	{
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
-//		mInputHandler->destroyInputHandler();
 	}
 }
 
@@ -524,68 +501,55 @@ CEGUI::System*& SimulationManager::getCEGUISystem() {
 
 bool SimulationManager::configure(void) {
 
-	mInputHandler = new SDL2InputHandler(mStateHandler, this);
+	//mGraphicsSystem.initialize(ApplicationConfiguration::APPLICATION_TITLE,this);
 
-	std::string windowTitle = "Minemonics";
+	mInputHandler.initialize(&mStateHandler, this);
+
 	if (SDL_Init( SDL_INIT_EVERYTHING) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
 				"Cannot initialize SDL2!", "GraphicsSystem::initialize");
 	}
-
-	Ogre::String pluginsPath;
-	// only use plugins.cfg if not static
-#ifndef OGRE_STATIC_LIB
-#if OGRE_DEBUG_MODE
-	pluginsPath = "plugins_d.cfg";
-#else
-	pluginsPath = "plugins.cfg";
-#endif
-#endif
 
 	// Show the configuration dialog and initialize the system
 	// You can skip this and use root.restoreConfig() to load configuration
 	// settings if you were sure there are valid ones saved in ogre.cfg
 	if (!mRoot->restoreConfig()) {
 		if (!mRoot->showConfigDialog()) {
-//					mQuit = true;
-//					return;
-			assert(false);
+			mStateHandler.requestStateChange(SHUTDOWN);
 		}
 	}
+
+	Ogre::ConfigOptionMap& cfgOpts =
+			mRoot->getRenderSystem()->getConfigOptions();
 
 	mRoot->getRenderSystem()->setConfigOption("sRGB Gamma Conversion", "Yes");
 	mRoot->initialise(false);
 
-	Ogre::ConfigOption videoMode =
-			mRoot->getRenderSystem()->getConfigOptions()[OgreConf::VIDEO_MODE];
-	Ogre::ConfigOption opfullScreen =
-			mRoot->getRenderSystem()->getConfigOptions()[OgreConf::FULL_SCREEN];
-
+	//split resolution string
 	std::vector<std::string> elems;
-	std::stringstream ss(videoMode.currentValue);
+	std::stringstream ss(cfgOpts[OgreConf::VIDEO_MODE].currentValue);
 	std::string item;
 	while (std::getline(ss, item, 'x')) {
 		elems.push_back(item);
 	}
 
+	//parse numbers
 	char* end;
 	int width = strtol(elems.at(0).c_str(), &end, 10);
 	int height = strtol(elems.at(1).c_str(), &end, 10);
-
-	std::cout << width;
 
 	int screen = 0;
 	int posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 	int posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 
-	bool fullscreen = (opfullScreen.currentValue == OgreConf::YES);
+	bool fullscreen = (cfgOpts[OgreConf::FULL_SCREEN].currentValue == OgreConf::YES);
 	if (fullscreen) {
 		posX = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 		posY = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 	}
 
 	mSdlWindow = SDL_CreateWindow(
-			windowTitle.c_str(),    // window title
+			ApplicationConfiguration::APPLICATION_TITLE.c_str(),    // window title
 			posX,               // initial x position
 			posY,               // initial y position
 			width,              // width, in pixels
@@ -602,8 +566,6 @@ bool SimulationManager::configure(void) {
 				"Couldn't get WM Info! (SDL2)", "GraphicsSystem::initialize");
 	}
 
-	Ogre::ConfigOptionMap& cfgOpts =
-			mRoot->getRenderSystem()->getConfigOptions();
 	Ogre::String winHandle;
 	Ogre::NameValuePairList params;
 
@@ -633,7 +595,7 @@ bool SimulationManager::configure(void) {
 		break;
 	}
 
-	params.insert(std::make_pair("title", windowTitle));
+	params.insert(std::make_pair("title", ApplicationConfiguration::APPLICATION_TITLE));
 	params.insert(std::make_pair("gamma", "true"));
 	params.insert(std::make_pair("FSAA", cfgOpts["FSAA"].currentValue));
 	params.insert(std::make_pair("vsync", cfgOpts["VSync"].currentValue));
@@ -644,7 +606,7 @@ bool SimulationManager::configure(void) {
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 #endif
 
-	mWindow = Ogre::Root::getSingleton().createRenderWindow(windowTitle, width,
+	mWindow = Ogre::Root::getSingleton().createRenderWindow(ApplicationConfiguration::APPLICATION_TITLE, width,
 			height, fullscreen, &params);
 	return true;
 }

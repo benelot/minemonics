@@ -38,9 +38,10 @@ private:
 
 	double mCEGUIlastTick;
 public:
-	CEGUIInputHandler(StateHandler* stateHandler,
-			SimulationManager* simulationMgr);
+	CEGUIInputHandler();
 	virtual ~CEGUIInputHandler();
+	void initialize(StateHandler* stateHandler,
+			SimulationManager* simulationMgr);
 	// CEGUI::KeyListener
 	bool keyPressed(ApplicationKeycode::Keycode key);
 	bool keyReleased(ApplicationKeycode::Keycode key);

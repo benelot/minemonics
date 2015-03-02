@@ -28,14 +28,18 @@
 
 BoostLogger CEGUIInputHandler::mBoostLogger;  // initialize the static variables
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
-CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler, SimulationManager* simulationMgr) :
-		OgreInputHandler(simulationMgr) {
+CEGUIInputHandler::CEGUIInputHandler() :
+		OgreInputHandler() {
 
-	mStateHandler = stateHandler;
+
 }
 
 CEGUIInputHandler::~CEGUIInputHandler() {
 	//OgreInputHandler is called automatically
+}
+
+void CEGUIInputHandler::initialize(StateHandler* stateHandler, SimulationManager* simulationMgr){
+	mStateHandler = stateHandler;
 }
 
 //-------------------------------------------------------------------------------------

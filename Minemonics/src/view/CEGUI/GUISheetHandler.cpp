@@ -5,23 +5,26 @@
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/widgets/PushButton.h>
 
-GUISheetHandler::GUISheetHandler(CEGUI::System* system, CEGUI::Window* sheet, StateHandler* stateHandler)
+GUISheetHandler::GUISheetHandler():mSystem(NULL),mStateHandler(NULL),mWindow(NULL)
 {
-	mSystem = system;
-	mWindow = sheet;
-	mStateHandler = stateHandler;
-
-	// hook up the event handlers to the window elements
-
-	//File->Quit
-	CEGUI::PushButton* pQuitButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdQuitApplication");
-	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
 
 
 }
 
 GUISheetHandler::~GUISheetHandler()
 {
+}
+
+void GUISheetHandler::initialize(CEGUI::System* system, CEGUI::Window* sheet, StateHandler* stateHandler){
+		mSystem = system;
+		mWindow = sheet;
+		mStateHandler = stateHandler;
+
+		// hook up the event handlers to the window elements
+
+		//File->Quit
+		CEGUI::PushButton* pQuitButton = (CEGUI::PushButton *)mWindow->getChildRecursive("cmdQuitApplication");
+		pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
 }
 
 //File->Quit

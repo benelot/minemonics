@@ -18,8 +18,6 @@
 #define __SimulationManager_h_
 
 class Environment;
-class SDL2InputHandler;
-class GUISheetHandler;
 class Logger;
 
 // base
@@ -49,23 +47,33 @@ class Logger;
 
 #include <SDL_syswm.h>
 
+#include "view/GraphicsSystem.h"
+
+#include "view/CEGUI/GUISheetHandler.h"
+#include "controller/input/SDL2InputHandler.h"
+
 class SimulationManager: public BaseApplication {
 private:
+
+	GraphicsSystem mGraphicsSystem;
+
+	// StateHandler
+	StateHandler mStateHandler;
+
 	Environment* mTerrain;
 
 	// Game component handlers
-	SDL2InputHandler* mInputHandler;
+	SDL2InputHandler mInputHandler;
 	SDL_Window *mSdlWindow;
 	CameraHandler mCameraHandler;
 
 	CEGUI::System* mSystem;
 	CEGUI::Window* mLayout;
 
-	// StateHandler
-	StateHandler* mStateHandler;
+
 
 	//SheetHandler
-	GUISheetHandler* mGUISheetHandler;
+	GUISheetHandler mGUISheetHandler;
 
 	//CEGUI
 	ParamsPanel* mFpsPanel;
@@ -91,11 +99,23 @@ public:
 	virtual ~SimulationManager(void);
 
 	// Accessor methods
-	CameraHandler& getCameraHandler();
-	SDL2InputHandler* getInputHandler();
-	StateHandler* getStateHandler();
+	// Accessor methods
+	CameraHandler & getCameraHandler() {
+		return mCameraHandler;
+	}
 
-	Ogre::Camera* getCamera();
+	SDL2InputHandler getInputHandler() {
+		return mInputHandler;
+	}
+
+	StateHandler getStateHandler() {
+		return mStateHandler;
+	}
+
+	Ogre::Camera * getCamera() {
+		return mCamera;
+	}
+
 	ParamsPanel*& getDetailsPanel();
 	ParamsPanel*& getFpsPanel();
 	void setDetailsPanel(ParamsPanel* detailsPanel);

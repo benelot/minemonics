@@ -10,7 +10,9 @@
 
 class ApplicationConfiguration {
 public:
-
+	static const std::string APPLICATION_TITLE;
 };
+
+const std::string ApplicationConfiguration::APPLICATION_TITLE = "Minemonics - The Origin of Creatures";
 
 #endif /* APPLICATIONCONFIGURATION_H_ */

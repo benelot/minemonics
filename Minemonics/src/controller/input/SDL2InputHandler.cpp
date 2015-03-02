@@ -11,18 +11,18 @@
 
 BoostLogger SDL2InputHandler::mBoostLogger;  // initialize the static variables
 SDL2InputHandler::_Init SDL2InputHandler::_initializer;
-SDL2InputHandler::SDL2InputHandler(StateHandler* stateHandler,
-		SimulationManager* simulationMgr) :
-		CEGUIInputHandler(stateHandler, simulationMgr) {
-	initializeInputHandler();
+SDL2InputHandler::SDL2InputHandler() :
+		CEGUIInputHandler() {
 }
 
 SDL2InputHandler::~SDL2InputHandler() {
-	destroyInputHandler();
+	destroy();
 }
 
-void SDL2InputHandler::initializeInputHandler() {
+void SDL2InputHandler::initialize(StateHandler* stateHandler,
+		SimulationManager* simulationMgr) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "initializing SDL2 input handler...";
+	mSimulationMgr = simulationMgr;
 //	SDL_Window * window;
 //	atexit(SDL_Quit);
 //	SDL_Init (SDL_INIT_VIDEO);
@@ -44,7 +44,7 @@ void SDL2InputHandler::initializeInputHandler() {
 	SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
-void SDL2InputHandler::destroyInputHandler() {
+void SDL2InputHandler::destroy() {
 
 //	if (mInputManager != NULL) {
 //		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "destroying OIS input handler...";
