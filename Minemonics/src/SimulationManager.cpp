@@ -155,19 +155,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mNow = boost::posix_time::microsec_clock::local_time();
 	boost::posix_time::time_duration mRuntime = mNow - mStart;
 
-	//TODO: Fix keyboard grab problem
-//	if(mRuntime.total_seconds() % 10 == 0)
-//	{
-//		mInputHandler->destroyInputHandler();
-//		mInputHandler->initializeInputHandler();
-//		mInputHandlerReset = true;
-//
-//	}
-//	else
-//	{
-//		mInputHandlerReset = false;
-//	}
-
 	if (mWindow->isClosed() || mStateHandler->getCurrentState() == SHUTDOWN)
 		return false;
 
