@@ -11,9 +11,8 @@
 
 BoostLogger SDL2InputHandler::mBoostLogger;  // initialize the static variables
 SDL2InputHandler::_Init SDL2InputHandler::_initializer;
-SDL2InputHandler::SDL2InputHandler(StateHandler* stateHandler,
-		unsigned long hWnd, SimulationManager* simulationMgr) :
-		CEGUIInputHandler(stateHandler, hWnd, simulationMgr) {
+SDL2InputHandler::SDL2InputHandler(StateHandler* stateHandler, SimulationManager* simulationMgr) :
+		CEGUIInputHandler(stateHandler, simulationMgr) {
 	initializeInputHandler();
 }
 

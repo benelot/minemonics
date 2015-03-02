@@ -45,6 +45,10 @@
 
 #include "CEGUI/widgets/PushButton.h"
 
+#include "utils/misc/OgreSystemConfigStrings.h"
+
+#include <SDL_syswm.h>
+
 //#define _DEBUGGUI
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
@@ -85,16 +89,12 @@ void SimulationManager::createFrameListener(void) {
 	// this next bit is for the sake of the input handler
 	Ogre::LogManager::getSingletonPtr()->logMessage(
 			"*** Initializing SDL2 ***");
-	size_t windowHnd = 0;
-
-	mWindow->getCustomAttribute("WINDOW", &windowHnd);
 
 	// set up the input handlers
 	mStateHandler = new StateHandler();
 
 	// since the input handler deals with pushing input to CEGUI, we need to give it a pointer
 	// to the CEGUI System instance to use
-	mInputHandler = new SDL2InputHandler(mStateHandler, windowHnd, this);
 	mStateHandler->requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
@@ -172,7 +172,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 
 	// Inject input into handlers;
-	mInputHandler->injectInput();
+//	mInputHandler->injectInput();
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
@@ -319,11 +319,15 @@ void SimulationManager::createScene(void) {
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
+    std::cout << "past this!";
+
+    Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget("Minemonics");
+
 // CEGUI
 // with a scene manager and window, we can create a the GUI renderer
 
 // new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
-	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
 
 // This pointer is valid only locally
 	mSystem = &CEGUI::System::getSingleton();
@@ -368,6 +372,9 @@ void SimulationManager::createScene(void) {
 // you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 // a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
+
+    CEGUI::GUIContext& guiContext = CEGUI::System::getSingleton().createGUIContext(mRenderer->getDefaultRenderTarget());
+    //guiContext.setRootWindow(mLayout);
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 // ###################
@@ -499,7 +506,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
-		mInputHandler->initializeInputHandler();
+//		mInputHandler->initializeInputHandler();
 		// Align CEGUI mouse with OIS mouse
 
 		CEGUI::Vector2f mousePos =
@@ -510,12 +517,156 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	else
 	{
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
-		mInputHandler->destroyInputHandler();
+//		mInputHandler->destroyInputHandler();
 	}
 }
 
 CEGUI::System*& SimulationManager::getCEGUISystem() {
 	return mSystem;
+}
+
+bool SimulationManager::configure(void)
+{
+
+//	mInputHandler = new SDL2InputHandler(mStateHandler, this);
+
+//    // Show the configuration dialog and initialise the system
+//    // You can skip this and use root.restoreConfig() to load configuration
+//    // settings if you were sure there are valid ones saved in ogre.cfg
+//    if(mRoot->showConfigDialog())
+//    {
+//        // If returned true, user clicked OK so initialise
+//        // Here we choose to let the system create a default rendering window by passing 'true'
+//        mWindow = mRoot->initialise(true, "TutorialApplication Render Window");
+//
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
+
+	std::string windowTitle = "Minemonics";
+	if (SDL_Init( SDL_INIT_EVERYTHING) != 0) {
+			OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+					"Cannot initialize SDL2!", "GraphicsSystem::initialize");
+		}
+
+		Ogre::String pluginsPath;
+		// only use plugins.cfg if not static
+	#ifndef OGRE_STATIC_LIB
+	#if OGRE_DEBUG_MODE
+		pluginsPath =  "plugins_d.cfg";
+	#else
+		pluginsPath =  "plugins.cfg";
+	#endif
+	#endif
+
+		// Show the configuration dialog and initialize the system
+		// You can skip this and use root.restoreConfig() to load configuration
+		// settings if you were sure there are valid ones saved in ogre.cfg
+		if (!mRoot->restoreConfig()) {
+			if (!mRoot->showConfigDialog()) {
+//					mQuit = true;
+//					return;
+				assert(false);
+			}
+		}
+
+		mRoot->getRenderSystem()->setConfigOption("sRGB Gamma Conversion", "Yes");
+		mRoot->initialise(false);
+
+		Ogre::ConfigOption videoMode =
+				mRoot->getRenderSystem()->getConfigOptions()[OgreConf::VIDEO_MODE];
+		Ogre::ConfigOption opfullScreen = mRoot->getRenderSystem()->getConfigOptions()[
+				OgreConf::FULL_SCREEN];
+
+		std::vector<std::string> elems;
+		std::stringstream ss(videoMode.currentValue);
+		std::string item;
+		while (std::getline(ss, item, 'x')) {
+			elems.push_back(item);
+		}
+
+		char* end;
+		int width = strtol(elems.at(0).c_str(),&end,10);
+		int height = strtol(elems.at(1).c_str(),&end,10);
+
+		std::cout << width;
+
+		int screen = 0;
+		int posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
+		int posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
+
+		bool fullscreen = (opfullScreen.currentValue == OgreConf::YES);
+		if (fullscreen) {
+			posX = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
+			posY = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
+		}
+
+		SDL_Window *mSdlWindow = SDL_CreateWindow(
+				windowTitle.c_str(),    // window title
+				posX,               // initial x position
+				posY,               // initial y position
+				width,              // width, in pixels
+				height,             // height, in pixels
+				SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)
+						| SDL_WINDOW_RESIZABLE);
+
+		//Get the native whnd
+		SDL_SysWMinfo wmInfo;
+		SDL_VERSION(&wmInfo.version);
+
+		if (SDL_GetWindowWMInfo(mSdlWindow, &wmInfo) == SDL_FALSE) {
+			OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+					"Couldn't get WM Info! (SDL2)", "GraphicsSystem::initialize");
+		}
+
+		Ogre::ConfigOptionMap& cfgOpts =
+				mRoot->getRenderSystem()->getConfigOptions();
+		Ogre::String winHandle;
+		Ogre::NameValuePairList params;
+
+		switch (wmInfo.subsystem) {
+	#ifdef WIN32
+		case SDL_SYSWM_WINDOWS:
+		// Windows code
+		winHandle = Ogre::StringConverter::toString( (unsigned long)wmInfo.info.win.window );
+		break;
+	#elif __MACOSX__
+		case SDL_SYSWM_COCOA:
+		//required to make OGRE play nice with our window
+		params.insert( std::make_pair("macAPI", "cocoa") );
+		params.insert( std::make_pair("macAPICocoaUseNSView", "true") );
+
+		winHandle = Ogre::StringConverter::toString(WindowContentViewHandle(wmInfo));
+		break;
+	#else
+		case SDL_SYSWM_X11:
+			winHandle = Ogre::StringConverter::toString(
+					(unsigned long) wmInfo.info.x11.window);
+			break;
+	#endif
+		default:
+			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
+					"Unexpected WM! (SDL2)", "GraphicsSystem::initialize");
+			break;
+		}
+
+		params.insert(std::make_pair("title", windowTitle));
+		params.insert(std::make_pair("gamma", "true"));
+		params.insert(std::make_pair("FSAA", cfgOpts["FSAA"].currentValue));
+		params.insert(std::make_pair("vsync", cfgOpts["VSync"].currentValue));
+
+	#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		params.insert( std::make_pair("externalWindowHandle", winHandle) );
+	#else
+		params.insert(std::make_pair("parentWindowHandle", winHandle));
+	#endif
+
+		mWindow = Ogre::Root::getSingleton().createRenderWindow(windowTitle,
+				width, height, fullscreen, &params);
+		return true;
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

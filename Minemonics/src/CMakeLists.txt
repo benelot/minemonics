@@ -235,6 +235,12 @@ set(HDRS
 	./view/ogre3D/evolution/environments/OpenSeaO3D.h
 	./view/ogre3D/evolution/environments/PlaneO3D.h
 	./view/ogre3D/evolution/environments/HillsO3D.h
+	./view/ogre3D/GameState.h
+	./view/ogre3D/InputListeners.h
+#	./view/ogre3D/GraphicsSystem.h
+	./view/ogre3D/BaseSystem.h
+	./view/ogre3D/SdlInputHandler.h
+	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.h
 	./view/CEGUI/ParamsPanel.h
@@ -267,6 +273,9 @@ set(HDRS
 	
 	# logger
 	./utils/logging/Logger.h
+	
+	# Ogre system
+	./utils/misc/OgreSystemConfigStrings.h
 )
 
 # Append source files here
@@ -289,6 +298,10 @@ set(SRCS
 	./view/ogre3D/evolution/environments/HillsO3D.cpp
 	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
 	./view/ogre3D/evolution/environments/PlaneO3D.cpp
+#	./view/ogre3D/GraphicsSystem.cpp
+	./view/ogre3D/BaseSystem.cpp
+	./view/ogre3D/SdlInputHandler.cpp
+	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp
 	./view/CEGUI/ParamsPanel.cpp

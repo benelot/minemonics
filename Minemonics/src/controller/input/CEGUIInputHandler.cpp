@@ -28,11 +28,8 @@
 
 BoostLogger CEGUIInputHandler::mBoostLogger;  // initialize the static variables
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
-CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler,
-		unsigned long hWnd, SimulationManager* simulationMgr) :
+CEGUIInputHandler::CEGUIInputHandler(StateHandler* stateHandler, SimulationManager* simulationMgr) :
 		OgreInputHandler(simulationMgr) {
-
-	mhWnd = hWnd;
 
 	mStateHandler = stateHandler;
 }
@@ -788,7 +785,7 @@ bool CEGUIInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 
 void CEGUIInputHandler::injectTimeImpulse(double tick) {
 	/* inject the time that passed since the last call */
-	CEGUI::System::getSingleton().injectTimePulse(float(tick - mCEGUIlastTick));
+//	CEGUI::System::getSingleton().injectTimePulse(float(tick - mCEGUIlastTick));
 }
 
 // CEGUI::MouseListener

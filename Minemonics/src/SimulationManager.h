@@ -101,6 +101,7 @@ public:
     Ogre::SceneManager*& getSceneManager();
     CEGUI::OgreRenderer*& getRenderer();
     Ogre::Root*& getRoot();
+    bool configure(void);
 
 	bool quit();
 	CEGUI::System*& getCEGUISystem();

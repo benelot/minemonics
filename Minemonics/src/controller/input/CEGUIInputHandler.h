@@ -22,7 +22,6 @@ class StateHandler;
 
 class CEGUIInputHandler: public OgreInputHandler {
 private:
-	unsigned long mhWnd;
 	StateHandler *mStateHandler;
 
 	// Logger
@@ -39,7 +38,7 @@ private:
 
 	double mCEGUIlastTick;
 public:
-	CEGUIInputHandler(StateHandler* stateHandler, unsigned long hWnd,
+	CEGUIInputHandler(StateHandler* stateHandler,
 			SimulationManager* simulationMgr);
 	virtual ~CEGUIInputHandler();
 	// CEGUI::KeyListener

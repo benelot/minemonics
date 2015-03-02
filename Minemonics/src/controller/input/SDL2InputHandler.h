@@ -19,8 +19,7 @@
 
 class SDL2InputHandler: public CEGUIInputHandler  {
 public:
-	SDL2InputHandler(StateHandler* stateHandler,
-			unsigned long hWnd, SimulationManager* simulationMgr);
+	SDL2InputHandler(StateHandler* stateHandler, SimulationManager* simulationMgr);
 	virtual ~SDL2InputHandler();
 	void initializeInputHandler();
 	void destroyInputHandler();
