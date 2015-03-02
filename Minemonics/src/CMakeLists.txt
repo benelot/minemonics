@@ -76,20 +76,6 @@ else (OGRE_Terrain_FOUND)
   message(SEND_ERROR "OgreTerrain Library not found.")
 endif(OGRE_Terrain_FOUND)
  
-#if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
-#  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
-#endif()
-
-######################################################################
-# OIS
-######################################################################
- 
-#find_package(OIS REQUIRED)
- 
-#if(NOT OIS_FOUND)
-#	message(SEND_ERROR "Failed to find OIS.")
-#endif()
-
 ######################################################################
 # BOOST
 ######################################################################

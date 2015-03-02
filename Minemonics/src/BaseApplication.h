@@ -18,7 +18,7 @@
 #define __BaseApplication_h_
 
 //# corresponding header
-#include "OpenSea.h"
+#include "BaseApplication.h"
 
 //# forward declarations
 
@@ -49,7 +49,7 @@
 //## model headers
 
 //## view headers
-#include "view/CEGUI/ParamsPanel.h"
+
 //## utils headers
 
 class BaseApplication: public Ogre::FrameListener,

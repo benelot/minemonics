@@ -18,7 +18,7 @@
 #define __SimulationManager_h_
 
 //# corresponding header
-#include "OpenSea.h"
+#include "SimulationManager.h"
 
 //# forward declarations
 class Environment;
@@ -53,6 +53,7 @@ class Logger;
 //## view headers
 #include "view/MathGL/MathGLWindow.h"
 #include "view/CEGUI/GUISheetHandler.h"
+#include "view/CEGUI/ParamsPanel.h"
 
 //## utils headers
 #include <utils/logging/Logger.h>
