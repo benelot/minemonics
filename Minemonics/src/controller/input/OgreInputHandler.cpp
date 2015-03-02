@@ -88,7 +88,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 				moveCameraLeft();
 			break;
 			case ApplicationKeycode::APPK_s:
-				moveCameraDown();
+				moveCameraBackward();
 			break;
 			case ApplicationKeycode::APPK_d:
 				moveCameraRight();
@@ -513,7 +513,7 @@ bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 		break;
 
 		case ApplicationKeycode::APPK_ESCAPE:
-		// return CEGUI::Key::Escape;
+			mSimulationMgr->quit();
 		break;
 		case ApplicationKeycode::APPK_PAUSE:
 		// return CEGUI::Key::Pause;
@@ -689,7 +689,7 @@ bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 
 // CEGUI::MouseListener
 bool OgreInputHandler::mouseMoved(float x, float y) {
-
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse moved by " << x << "," << y;
 	if(mRightMousePressed)
 	{
 		mSimulationMgr->getCameraHandler().rotate(y,
@@ -701,11 +701,12 @@ bool OgreInputHandler::mouseMoved(float x, float y) {
 
 // CEGUI:MouseWheelListener
 bool OgreInputHandler::mouseWheelMoved(float rel) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse wheel moved by " << rel;
 	return true;
 }
 
 bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button " << button << " pressed";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " pressed";
 
 	switch (button) {
 		case ApplicationMouseCode::LeftButton:
@@ -723,7 +724,7 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 
 bool OgreInputHandler::mouseReleased(
 		ApplicationMouseCode::MouseButton button) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button " << button << " released";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " released";
 
 	switch (button) {
 		case ApplicationMouseCode::LeftButton:

@@ -42,6 +42,9 @@ private:
 		}
 	} _initializer;
 
+	int mouseX;
+	int mouseY;
+
 	ApplicationMouseCode::MouseButton convertMouseSDL2toOgre(Uint8 button);
 	ApplicationKeycode::Keycode convertKeySDL2toOgre(SDL_Keycode key);
 };

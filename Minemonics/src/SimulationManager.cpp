@@ -159,7 +159,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 
 	// Inject input into handlers;
-//	mInputHandler->injectInput();
+	mInputHandler->injectInput();
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
@@ -170,8 +170,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//TODO: Use for creature evolution, but clean up afterwards
 	// updateEvolution();
 
-// Inject time elapsed
-	CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 	return true;
 }
 
@@ -292,6 +290,7 @@ void SimulationManager::updatePanels() {
 
 //-------------------------------------------------------------------------------------
 bool SimulationManager::quit() {
+	mStateHandler->requestStateChange(SHUTDOWN);
 	mShutDown = true;
 	return true;
 }
@@ -486,6 +485,8 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 //	ms.width = width;
 //	ms.height = height;
 
+//	SDL_GetMouseState(int* x,int* y);
+
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
 }
@@ -515,23 +516,7 @@ CEGUI::System*& SimulationManager::getCEGUISystem() {
 bool SimulationManager::configure(void)
 {
 
-//	mInputHandler = new SDL2InputHandler(mStateHandler, this);
-
-//    // Show the configuration dialog and initialise the system
-//    // You can skip this and use root.restoreConfig() to load configuration
-//    // settings if you were sure there are valid ones saved in ogre.cfg
-//    if(mRoot->showConfigDialog())
-//    {
-//        // If returned true, user clicked OK so initialise
-//        // Here we choose to let the system create a default rendering window by passing 'true'
-//        mWindow = mRoot->initialise(true, "TutorialApplication Render Window");
-//
-//        return true;
-//    }
-//    else
-//    {
-//        return false;
-//    }
+	mInputHandler = new SDL2InputHandler(mStateHandler, this);
 
 	std::string windowTitle = "Minemonics";
 	if (SDL_Init( SDL_INIT_EVERYTHING) != 0) {

@@ -785,7 +785,8 @@ bool CEGUIInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 
 void CEGUIInputHandler::injectTimeImpulse(double tick) {
 	/* inject the time that passed since the last call */
-//	CEGUI::System::getSingleton().injectTimePulse(float(tick - mCEGUIlastTick));
+	CEGUI::System::getSingleton().injectTimePulse(float(tick - mCEGUIlastTick));
+	mCEGUIlastTick = tick;
 }
 
 // CEGUI::MouseListener
@@ -808,12 +809,11 @@ bool CEGUIInputHandler::mouseWheelMoved(float rel) {
 }
 
 bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "MOUSE BUTTON PRESSED" << button;
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
 
-	if (context.injectMouseButtonDown(convertMouseOgretoCEGUI(button))) {
-		return true;
-	}
+	context.injectMouseButtonDown(convertMouseOgretoCEGUI(button));
 	return OgreInputHandler::mousePressed(button);
 
 }
@@ -821,9 +821,7 @@ bool CEGUIInputHandler::mouseReleased(
 		ApplicationMouseCode::MouseButton button) {
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
-	if (context.injectMouseButtonUp(convertMouseOgretoCEGUI(button))) {
-		return true;
-	}
+	context.injectMouseButtonUp(convertMouseOgretoCEGUI(button));
 	return OgreInputHandler::mouseReleased(button);
 }
 

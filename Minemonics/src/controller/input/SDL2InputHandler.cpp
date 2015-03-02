@@ -22,22 +22,22 @@ SDL2InputHandler::~SDL2InputHandler() {
 
 void SDL2InputHandler::initializeInputHandler() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "initializing SDL2 input handler...";
-	SDL_Window * window;
-	atexit(SDL_Quit);
-	SDL_Init (SDL_INIT_VIDEO);
-
-	window = SDL_CreateWindow("Minemonics",		//    window title
-			SDL_WINDOWPOS_UNDEFINED,//    initial x position
-			SDL_WINDOWPOS_UNDEFINED,//    initial y position
-			640,//    width, in pixels
-			480,//    height, in pixels
-			SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
-
-	if (window == NULL) {
-		/* The screen could not be created */
-		fprintf(stderr, "Impossible to create a screen: %s\n", SDL_GetError());
-		exit(1);
-	}
+//	SDL_Window * window;
+//	atexit(SDL_Quit);
+//	SDL_Init (SDL_INIT_VIDEO);
+//
+//	window = SDL_CreateWindow("Minemonics",		//    window title
+//			SDL_WINDOWPOS_UNDEFINED,//    initial x position
+//			SDL_WINDOWPOS_UNDEFINED,//    initial y position
+//			640,//    width, in pixels
+//			480,//    height, in pixels
+//			SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
+//
+//	if (window == NULL) {
+//		/* The screen could not be created */
+//		fprintf(stderr, "Impossible to create a screen: %s\n", SDL_GetError());
+//		exit(1);
+//	}
 
 	SDL_ShowCursor (SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
@@ -68,13 +68,16 @@ void SDL2InputHandler::injectInput() {
 		/* mouse motion handler */
 		case SDL_MOUSEMOTION:
 			/* we inject the mouse position directly. */
-			CEGUIInputHandler::mouseMoved(static_cast<float>(e.motion.x),
-					static_cast<float>(e.motion.y));
+			CEGUIInputHandler::mouseMoved(static_cast<float>(e.motion.x)-mouseX,
+					static_cast<float>(e.motion.y)-mouseY);
+			mouseX = static_cast<float>(e.motion.x);
+			mouseY = static_cast<float>(e.motion.y);
 			break;
 
 			/* mouse down handler */
 		case SDL_MOUSEBUTTONDOWN:
 			/* let a special function handle the mouse button down event */
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button pressed" << e.button.button;
 			CEGUIInputHandler::mousePressed(
 					convertMouseSDL2toOgre(e.button.button));
 			break;
