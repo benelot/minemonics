@@ -14,49 +14,56 @@
  http://www.ogre3d.org/tikiwiki/
  -----------------------------------------------------------------------------
  */
+//# corresponding header
 #include "SimulationManager.h"
 
-//configuration
-#include "configuration/EnvironmentConfiguration.h"
+//# forward declarations
 
-// view
-#include "view/general/evolution/environments/Environment.h"
-#include "view/ogre3D/evolution/environments/HillsO3D.h"
-#include "view/ogre3D/evolution/environments/PlaneO3D.h"
-#include "view/CEGUI/GUISheetHandler.h"
-#include "view/CEGUI/CEGUIBuilder.h"
+//# system headers
+//## controller headers
 
-//Game component includes
-#include "controller/input/SDL2InputHandler.h"
-#include "controller/camera/CameraHandler.h"
+//## model headers
 
+//## view headers
 #include <OgreWindowEventUtilities.h>
-
-// needed to be able to create the CEGUI renderer interface
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
-
-// CEGUI includes
 #include <CEGUI/System.h>
 #include <CEGUI/InputEvent.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
+#include <CEGUI/RendererModules/Ogre/Renderer.h>
 
-#include "CEGUI/widgets/PushButton.h"
+//# custom headers
+//## base headers
 
+//## configuration headers
+#include "configuration/EnvironmentConfiguration.h"
 #include "configuration/OgreSystemConfigStrings.h"
-
 #include "configuration/ApplicationConfiguration.h"
 
-//#define _DEBUGGUI
+//## controller headers
+#include "controller/input/SDL2InputHandler.h"
+#include "controller/camera/CameraHandler.h"
+
+//## model headers
+
+//## view headers
+#include "view/general/evolution/environments/Environment.h"
+#include "view/ogre3D/evolution/environments/HillsO3D.h"
+#include "view/ogre3D/evolution/environments/PlaneO3D.h"
+#include "view/CEGUI/GUISheetHandler.h"
+#include "view/CEGUI/CEGUIBuilder.h"
+
+//## utils headers
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-		mStateHandler(),mGUISheetHandler(),mInputHandler(),
-		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(NULL), mDetailsPanel(
+		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
+				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
+				NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
 				EvolutionConfiguration::PopSize,
 				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), offsprings(
@@ -299,7 +306,8 @@ void SimulationManager::createScene(void) {
 
 	std::cout << "past this!";
 
-	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(ApplicationConfiguration::APPLICATION_TITLE);
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
+			ApplicationConfiguration::APPLICATION_TITLE);
 
 // CEGUI
 // with a scene manager and window, we can create a the GUI renderer
@@ -446,7 +454,6 @@ void SimulationManager::createScene(void) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
 }
 
-
 //Adjust mouse clipping area
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Repositioning CEGUI pointer...";
@@ -463,12 +470,12 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 			x - mousePos.d_x, y- mousePos.d_y);
 	int w, h;
-			SDL_GetWindowSize(mSdlWindow, &w, &h);
-	#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-			mWindow->resize(w, h);
-	#else
-			mWindow->windowMovedOrResized();
-	#endif
+	SDL_GetWindowSize(mSdlWindow, &w, &h);
+#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+	mWindow->resize(w, h);
+#else
+	mWindow->windowMovedOrResized();
+#endif
 //#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
 //	mWindow->resize(width, height);
 //#else
@@ -542,14 +549,15 @@ bool SimulationManager::configure(void) {
 	int posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 	int posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 
-	bool fullscreen = (cfgOpts[OgreConf::FULL_SCREEN].currentValue == OgreConf::YES);
+	bool fullscreen = (cfgOpts[OgreConf::FULL_SCREEN].currentValue
+			== OgreConf::YES);
 	if (fullscreen) {
 		posX = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 		posY = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 	}
 
 	mSdlWindow = SDL_CreateWindow(
-			ApplicationConfiguration::APPLICATION_TITLE.c_str(),    // window title
+			ApplicationConfiguration::APPLICATION_TITLE.c_str(), // window title
 			posX,               // initial x position
 			posY,               // initial y position
 			width,              // width, in pixels
@@ -595,7 +603,9 @@ bool SimulationManager::configure(void) {
 		break;
 	}
 
-	params.insert(std::make_pair("title", ApplicationConfiguration::APPLICATION_TITLE));
+	params.insert(
+			std::make_pair("title",
+					ApplicationConfiguration::APPLICATION_TITLE));
 	params.insert(std::make_pair("gamma", "true"));
 	params.insert(std::make_pair("FSAA", cfgOpts["FSAA"].currentValue));
 	params.insert(std::make_pair("vsync", cfgOpts["VSync"].currentValue));
@@ -606,8 +616,9 @@ bool SimulationManager::configure(void) {
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 #endif
 
-	mWindow = Ogre::Root::getSingleton().createRenderWindow(ApplicationConfiguration::APPLICATION_TITLE, width,
-			height, fullscreen, &params);
+	mWindow = Ogre::Root::getSingleton().createRenderWindow(
+			ApplicationConfiguration::APPLICATION_TITLE, width, height,
+			fullscreen, &params);
 	return true;
 }
 

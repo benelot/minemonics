@@ -17,38 +17,45 @@
 #ifndef __SimulationManager_h_
 #define __SimulationManager_h_
 
+//# corresponding header
+#include "OpenSea.h"
+
+//# forward declarations
 class Environment;
 class Logger;
 
-// base
-#include "BaseApplication.h"
+//# system headers
+//## controller headers
 
-// configuration
-#include "configuration/EvolutionConfiguration.h"
-
-// model
-#include "model/evolution/juries/Ones.h"
-
-// Shark EA
+//## model headers
 #include <EALib/PopulationT.h>
 
-// view
+//## view headers
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include "controller/StateHandler.h"
-#include "view/MathGL/MathGLWindow.h"
-
-
-// controller
-#include "controller/camera/CameraHandler.h"
-
-//utils
-#include <utils/logging/Logger.h>
-
 #include <SDL_syswm.h>
 
-#include "view/CEGUI/GUISheetHandler.h"
+//# custom headers
+//## base headers
+#include "BaseApplication.h"
+
+//## configuration headers
+#include "configuration/EvolutionConfiguration.h"
+
+//## controller headers
+#include "controller/StateHandler.h"
+#include "controller/camera/CameraHandler.h"
 #include "controller/input/SDL2InputHandler.h"
+
+//## model headers
+#include "model/evolution/juries/Ones.h"
+
+//## view headers
+#include "view/MathGL/MathGLWindow.h"
+#include "view/CEGUI/GUISheetHandler.h"
+
+//## utils headers
+#include <utils/logging/Logger.h>
 
 class SimulationManager: public BaseApplication {
 private:
