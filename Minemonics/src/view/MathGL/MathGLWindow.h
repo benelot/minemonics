@@ -8,6 +8,9 @@
 #ifndef MATHGLOBJECT_H_
 #define MATHGLOBJECT_H_
 
+//# corresponding header
+
+//# forward declarations
 class SimulationManager;
 
 namespace CEGUI {
@@ -15,10 +18,27 @@ class Window;
 class TextureTarget;
 }
 
-#include <CEGUI/System.h>
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include <CEGUI/Window.h>
-#include <CEGUI/Image.h>
 #include <OgreTexture.h>
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 class MathGLWindow {
 public:

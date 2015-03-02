@@ -5,7 +5,19 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "Logger.h"
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 #include <boost/log/core.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/log/trivial.hpp>
@@ -25,11 +37,24 @@
 #include <boost/log/utility/value_ref.hpp>
 #include <boost/log/utility/empty_deleter.hpp>
 
-Logger::Logger(){
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+Logger::Logger() {
 
 }
 
-Logger::~Logger(){
+Logger::~Logger() {
 
 }
 
@@ -63,7 +88,8 @@ void Logger::initTermSink() {
 	namespace sinks = boost::log::sinks;
 	namespace expr = boost::log::expressions;
 	namespace keywords = boost::log::keywords;
-	typedef logging::sinks::synchronous_sink<logging::sinks::text_ostream_backend> text_sink;
+	typedef logging::sinks::synchronous_sink<
+			logging::sinks::text_ostream_backend> text_sink;
 
 	boost::shared_ptr<text_sink> sink = boost::make_shared<text_sink>();
 	sink->locked_backend()->add_stream(
@@ -72,7 +98,8 @@ void Logger::initTermSink() {
 
 	sink->locked_backend()->auto_flush(true);
 
-	sink->set_formatter(logging::expressions::stream << logging::expressions::message);
+	sink->set_formatter(
+			logging::expressions::stream << logging::expressions::message);
 
 	logging::core::get()->add_sink(sink);
 	logging::add_common_attributes();

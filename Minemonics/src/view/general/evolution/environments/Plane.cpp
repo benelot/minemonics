@@ -5,9 +5,33 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "Plane.h"
 
-Plane::Plane():	Environment(Environment::PLANE) {
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+Plane::Plane() :
+		Environment(Environment::PLANE) {
 
 }
 

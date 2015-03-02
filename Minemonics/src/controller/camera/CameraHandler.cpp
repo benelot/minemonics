@@ -5,9 +5,32 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "CameraHandler.h"
-#include "configuration/CameraConfiguration.h"
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
 #include "SimulationManager.h"
+
+//## configuration headers
+#include "configuration/CameraConfiguration.h"
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 CameraHandler::CameraHandler(SimulationManager* simulationMgr) :
 		mCamNode(NULL), mSimulationMgr(simulationMgr) {

@@ -8,8 +8,31 @@
 #ifndef HILLSO3D_H_
 #define HILLSO3D_H_
 
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include <Terrain/OgreTerrain.h>
 #include <Terrain/OgreTerrainGroup.h>
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 #include "view/general/evolution/environments/Hills.h"
 

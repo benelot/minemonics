@@ -55,7 +55,7 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-		mGraphicsSystem(),mStateHandler(),mGUISheetHandler(),mInputHandler(),
+		mStateHandler(),mGUISheetHandler(),mInputHandler(),
 		mCameraHandler(this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
 				EvolutionConfiguration::PopSize,

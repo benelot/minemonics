@@ -5,9 +5,33 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "OpenSea.h"
 
-OpenSea::OpenSea():	Environment(Environment::OPENSEA) {
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+OpenSea::OpenSea() :
+		Environment(Environment::OPENSEA) {
 
 }
 

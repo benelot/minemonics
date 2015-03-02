@@ -8,16 +8,33 @@
 #ifndef OGREINPUTHANDLER_H_
 #define OGREINPUTHANDLER_H_
 
-#include <stdio.h>
-#include <stdlib.h>
+//# corresponding header
 
-#include <utils/logging/Logger.h>
+//# forward declarations
+class SimulationManager;
 
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
 #include "ApplicationMousecode.h"
 #include "ApplicationKeycode.h"
 
-class SimulationManager;
+//## model headers
 
+//## view headers
+
+//## utils headers
+#include <utils/logging/Logger.h>
 
 class OgreInputHandler {
 public:
@@ -26,7 +43,7 @@ public:
 	void initialize(SimulationManager* simulationMgr);
 	bool keyPressed(ApplicationKeycode::Keycode key);
 	bool keyReleased(ApplicationKeycode::Keycode key);
-	bool mouseMoved(float x,float y);
+	bool mouseMoved(float x, float y);
 	bool mouseWheelMoved(float rel);
 	bool mousePressed(ApplicationMouseCode::MouseButton button);
 	bool mouseReleased(ApplicationMouseCode::MouseButton button);

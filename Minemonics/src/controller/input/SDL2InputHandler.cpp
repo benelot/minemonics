@@ -5,14 +5,37 @@
  *      Author: leviathan
  */
 
-#include "controller/input/SDL2InputHandler.h"
+//# corresponding header
+#include "SDL2InputHandler.h"
 
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
 #include "SimulationManager.h"
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 BoostLogger SDL2InputHandler::mBoostLogger;  // initialize the static variables
 SDL2InputHandler::_Init SDL2InputHandler::_initializer;
 SDL2InputHandler::SDL2InputHandler() :
-		CEGUIInputHandler() {
+		CEGUIInputHandler(), mLastMouseX(0), mLastMouseY(
+				0) {
 }
 
 SDL2InputHandler::~SDL2InputHandler() {
@@ -70,13 +93,16 @@ void SDL2InputHandler::injectInput() {
 		case SDL_MOUSEMOTION:
 			/* we inject the mouse position directly. */
 			CEGUIInputHandler::mouseMoved(
-					static_cast<float>(e.motion.x) - mouseX,
-					static_cast<float>(e.motion.y) - mouseY);
+					static_cast<float>(e.motion.x) - mLastMouseX,
+					static_cast<float>(e.motion.y) - mLastMouseY);
+
 			CEGUIInputHandler::injectMousePosition(
 					static_cast<float>(e.motion.x),
 					static_cast<float>(e.motion.y));
-			mouseX = static_cast<float>(e.motion.x);
-			mouseY = static_cast<float>(e.motion.y);
+
+			// keep last mouse position
+			mLastMouseX = static_cast<float>(e.motion.x);
+			mLastMouseY = static_cast<float>(e.motion.y);
 			break;
 
 			/* mouse down handler */

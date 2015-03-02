@@ -8,20 +8,41 @@
 #ifndef SDL2INPUTHANDLER_H_
 #define SDL2INPUTHANDLER_H_
 
-#include "CEGUIInputHandler.h"
+//# corresponding header
 
-#include "ApplicationMousecode.h"
-#include "ApplicationKeycode.h"
+//# forward declarations
 
-#include <utils/logging/Logger.h>
-
+//# system headers
+//## controller headers
 #include <SDL.h>
 
-class SDL2InputHandler: public CEGUIInputHandler  {
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+#include "ApplicationMousecode.h"
+#include "ApplicationKeycode.h"
+#include "CEGUIInputHandler.h"
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+#include <utils/logging/Logger.h>
+
+class SDL2InputHandler: public CEGUIInputHandler {
 public:
 	SDL2InputHandler();
 	virtual ~SDL2InputHandler();
-	void initialize(StateHandler* stateHandler, SimulationManager* simulationMgr);
+	void initialize(StateHandler* stateHandler,
+			SimulationManager* simulationMgr);
 	void destroy();
 	void injectInput();
 	void injectTimePulse();
@@ -42,8 +63,8 @@ private:
 		}
 	} _initializer;
 
-	int mouseX;
-	int mouseY;
+	int mLastMouseX;
+	int mLastMouseY;
 
 	ApplicationMouseCode::MouseButton convertMouseSDL2toOgre(Uint8 button);
 	ApplicationKeycode::Keycode convertKeySDL2toOgre(SDL_Keycode key);

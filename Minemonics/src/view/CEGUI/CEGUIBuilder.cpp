@@ -5,18 +5,41 @@
  *      Author: leviathan
  */
 
-#include "view/CEGUI/CEGUIBuilder.h"
+//# corresponding header
+#include "CEGUIBuilder.h"
 
-// CEGUI includes
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include <CEGUI/System.h>
 #include <CEGUI/InputEvent.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
+
+//# custom headers
+//## base headers
+#include "SimulationManager.h"
+
+//## configuration headers
+#include "configuration/CEGUIConfiguration.h"
+
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include "view/CEGUI/ParamsPanel.h"
 
-#include "SimulationManager.h"
+//## utils headers
+
+// CEGUI includes
 
 CEGUIBuilder::CEGUIBuilder(SimulationManager* simulationMgr) {
 	mSimulationMgr = simulationMgr;
@@ -45,8 +68,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	fileTopItem->addChild(fileMenu);
 
 	//quit item
-	CEGUI::Window *quitApplicationItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdQuitApplication");
+	CEGUI::Window *quitApplicationItem = wmgr.createWindow(
+			"Ogremonics/MenuItem", "cmdQuitApplication");
 	quitApplicationItem->setText("Quit [Q]");
 	fileMenu->addChild(quitApplicationItem);
 
@@ -73,8 +96,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	evolutionMenu->addChild(openEvolutionItem);
 
 	// save evolution as...
-	CEGUI::Window *saveEvolutionAsItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"saveEvolutionAsItem");
+	CEGUI::Window *saveEvolutionAsItem = wmgr.createWindow(
+			"Ogremonics/MenuItem", "saveEvolutionAsItem");
 	saveEvolutionAsItem->setText("Save Evolution as...");
 	evolutionMenu->addChild(saveEvolutionAsItem);
 
@@ -165,8 +188,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	populationMenu->addChild(savePopulationAsItem);
 
 	// Close population
-	CEGUI::Window *closePopulationItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"closePopulationItem");
+	CEGUI::Window *closePopulationItem = wmgr.createWindow(
+			"Ogremonics/MenuItem", "closePopulationItem");
 	closePopulationItem->setText("Close Population");
 	populationMenu->addChild(closePopulationItem);
 
@@ -321,7 +344,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	renderingMenu->addChild(shadowsItem);
 
 	// Fog on/off
-	CEGUI::Window *fogItem = wmgr.createWindow("Ogremonics/MenuItem", "fogItem");
+	CEGUI::Window *fogItem = wmgr.createWindow("Ogremonics/MenuItem",
+			"fogItem");
 	fogItem->setText("Fog on/off [F]");
 	renderingMenu->addChild(fogItem);
 
@@ -367,8 +391,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	polygonModeMenu->addChild(wireframeModeItem);
 
 	// Ambient light
-	CEGUI::Window *ambientLightTopItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLightTopItem");
+	CEGUI::Window *ambientLightTopItem = wmgr.createWindow(
+			"Ogremonics/MenuItem", "ambientLightTopItem");
 	ambientLightTopItem->setText("Ambient light");
 	renderingMenu->addChild(ambientLightTopItem);
 
@@ -438,8 +462,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	ambientLightMenu->addChild(ambientLight90Item);
 
 	// 100 %
-	CEGUI::Window *ambientLight100Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight100Item");
+	CEGUI::Window *ambientLight100Item = wmgr.createWindow(
+			"Ogremonics/MenuItem", "ambientLight100Item");
 	ambientLight100Item->setText("100 %");
 	ambientLightMenu->addChild(ambientLight100Item);
 
@@ -538,8 +562,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	physicsTopItem->addChild(physicsMenu);
 
 	// Pause simulation
-	CEGUI::Window *pauseSimulationItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"pauseSimulationItem");
+	CEGUI::Window *pauseSimulationItem = wmgr.createWindow(
+			"Ogremonics/MenuItem", "pauseSimulationItem");
 	pauseSimulationItem->setText("Pause Simulation");
 	physicsMenu->addChild(pauseSimulationItem);
 
@@ -644,11 +668,12 @@ ParamsPanel* CEGUIBuilder::createFpsPanel() {
 
 	items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
 	items.push_back(ParamsPanel::PairString("Run time", "0"));		// 1
-	items.push_back(ParamsPanel::PairString("Info","Idle."));		// 2
-	ParamsPanel* fpsPanel = ParamsPanel::createParamsPanel(CEGUI_INFOPANEL_BORDER,
+	items.push_back(ParamsPanel::PairString("Info", "Idle."));		// 2
+	ParamsPanel* fpsPanel = ParamsPanel::createParamsPanel(
+			CEGUIConfiguration::INFOPANEL_BORDER,
 			(int) mSimulationMgr->getWindow()->getHeight()
-					- (3 * CEGUI_INFOPANEL_BORDER + CEGUI_INFOPANEL_CAPTION
-							+ CEGUI_INFOPANEL_TEXT * items.size()), "FPS", 150,
+					- (3 * CEGUIConfiguration::INFOPANEL_BORDER + CEGUIConfiguration::INFOPANEL_CAPTION
+							+ CEGUIConfiguration::INFOPANEL_TEXT * items.size()), "FPS", 150,
 			items);
 	return fpsPanel;
 }
@@ -667,9 +692,10 @@ ParamsPanel*CEGUIBuilder::createDetailsPanel() {
 	items.push_back(ParamsPanel::PairString("", ""));		// 8
 	items.push_back(ParamsPanel::PairString("Filtering", "None"));		// 9
 	items.push_back(ParamsPanel::PairString("Poly Mode", "Solid"));		// 10
-	ParamsPanel* detailsPanel = ParamsPanel::createParamsPanel(
-			(int) mSimulationMgr->getWindow()->getWidth() - 200 - CEGUI_INFOPANEL_BORDER,
-			CEGUI_INFOPANEL_BORDER * 4, "Debug", 200, items);
+	ParamsPanel* detailsPanel =
+			ParamsPanel::createParamsPanel(
+					(int) mSimulationMgr->getWindow()->getWidth() - 200 - CEGUIConfiguration::INFOPANEL_BORDER,
+					CEGUIConfiguration::INFOPANEL_BORDER * 4, "Debug", 200, items);
 	detailsPanel->hide();
 	return detailsPanel;
 }

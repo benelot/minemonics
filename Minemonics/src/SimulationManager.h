@@ -55,8 +55,6 @@ class Logger;
 class SimulationManager: public BaseApplication {
 private:
 
-	GraphicsSystem mGraphicsSystem;
-
 	// StateHandler
 	StateHandler mStateHandler;
 

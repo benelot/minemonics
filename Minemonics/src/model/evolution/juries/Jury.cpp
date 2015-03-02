@@ -5,6 +5,31 @@
  *      Author: leviathan
  */
 
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
 #include "Jury.h"
 
 Jury::Jury(JuryType juryType,int weight):mJuryType(juryType),mFitness(0),mWeight(weight) {

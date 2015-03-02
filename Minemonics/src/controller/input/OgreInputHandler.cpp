@@ -5,20 +5,36 @@
  *      Author: leviathan
  */
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+#include "SimulationManager.h"
+
+//## configuration headers
+
+//## controller headers
 #include "OgreInputHandler.h"
 
-#include "SimulationManager.h"
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 BoostLogger OgreInputHandler::mBoostLogger;  // initialize the static variables
 OgreInputHandler::_Init OgreInputHandler::_initializer;
 OgreInputHandler::OgreInputHandler() :
 		mSimulationMgr(NULL), mRightMousePressed(false) {
-	// TODO Auto-generated constructor stub
 
 }
 
 OgreInputHandler::~OgreInputHandler() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void OgreInputHandler::initialize(SimulationManager* simulationMgr) {
@@ -194,9 +210,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_POWER:
 		// return CEGUI::Key::Power;
 		break;
-
-		//case ApplicationKeycode::APPK_NUMLOCK:
-		// return CEGUI::Key::NumLock;
+		//case ApplicationKeycode::APPK_NUMLOCK: return CEGUI::Key::NumLock;
 		break;
 		case ApplicationKeycode::APPK_SCROLLLOCK:
 		// return CEGUI::Key::ScrollLock;

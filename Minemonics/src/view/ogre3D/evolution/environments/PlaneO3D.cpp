@@ -5,7 +5,22 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "PlaneO3D.h"
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 PlaneO3D::PlaneO3D(Ogre::SceneManager* mSceneMgr) :
 		mTerrainGlobals(0), mTerrainGroup(0), mTerrainsImported(false) {
@@ -22,8 +37,8 @@ void PlaneO3D::configureTerrainDefaults(Ogre::Light* light) {
 
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(mSceneMgr,
 			Ogre::Terrain::ALIGN_X_Z, 513, 12000.0f);
-	mTerrainGroup->setFilenameConvention(
-			Ogre::String("PlaneO3D"), Ogre::String("dat"));
+	mTerrainGroup->setFilenameConvention(Ogre::String("PlaneO3D"),
+			Ogre::String("dat"));
 	mTerrainGroup->setOrigin(Ogre::Vector3::ZERO);
 
 	// Configure global

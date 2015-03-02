@@ -5,33 +5,55 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "MathGLWindow.h"
 
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+#include <Ogre.h>
 #include <CEGUI/System.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/Image.h>
-#include <Ogre.h>
 #include <CEGUI/RendererModules/Ogre/Texture.h>
-#include <stdio.h>
 
-#include "SimulationManager.h"
-
-//This include seems to be problematic, as it carries over errors to other external libraries
-//At this position it somehow does not.
 #include <mgl2/mgl.h>
 
+//# custom headers
+//## base headers
+#include "SimulationManager.h"
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+
+
 MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
-		int textureHeight,CEGUI::USize windowSize):mTime(0) {
+		int textureHeight, CEGUI::USize windowSize) :
+		mTime(0) {
 
 	mSimulationMgr = simulationMgr;
 
-	CEGUI::Sizef size(static_cast<float>(textureWidth), static_cast<float>(textureHeight));
+	CEGUI::Sizef size(static_cast<float>(textureWidth),
+			static_cast<float>(textureHeight));
 
 	// We create a CEGUI texture target and create a GUIContext that will use it.
-	renderTextureTarget =
-			mSimulationMgr->getRenderer()->createTextureTarget();
+	renderTextureTarget = mSimulationMgr->getRenderer()->createTextureTarget();
 	renderTextureTarget->declareRenderSize(size);
-	renderGuiContext = &mSimulationMgr->getCEGUISystem()->createGUIContext(static_cast<CEGUI::RenderTarget&>(*renderTextureTarget) );
+	renderGuiContext = &mSimulationMgr->getCEGUISystem()->createGUIContext(
+			static_cast<CEGUI::RenderTarget&>(*renderTextureTarget));
 
 	mTexture = mSimulationMgr->getRoot()->getTextureManager()->createManual(
 			"RTT", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -54,7 +76,7 @@ MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
 	// We create a BasicImage and set the Texture
 	CEGUI::BasicImage* image =
 			static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create(
-					"BasicImage","RTTImage"));
+					"BasicImage", "RTTImage"));
 	image->setTexture(static_cast<CEGUI::Texture*>(&rendererTexture));
 
 	CEGUI::Rectf imageArea;
@@ -130,13 +152,13 @@ void MathGLWindow::update(double timeSinceLastFrame) {
 	// Unlock the pixel buffer
 	pixelBuffer->unlock();
 
-    CEGUI::Renderer* gui_renderer(mSimulationMgr->getRenderer());
-    gui_renderer->beginRendering();
+	CEGUI::Renderer* gui_renderer(mSimulationMgr->getRenderer());
+	gui_renderer->beginRendering();
 
-    renderTextureTarget->clear();
-    renderGuiContext->draw();
+	renderTextureTarget->clear();
+	renderGuiContext->draw();
 
-    gui_renderer->endRendering();
+	gui_renderer->endRendering();
 
 	//notify window of the texture to update
 	mMathGLWindow->invalidate(); // CEGUI::Window*

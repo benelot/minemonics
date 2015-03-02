@@ -8,17 +8,36 @@
 #ifndef CEGUIINPUTHANDLER_H_
 #define CEGUIINPUTHANDLER_H_
 
+//# corresponding header
+
+//# forward declarations
 class SimulationManager;
 class StateHandler;
 
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include <CEGUI/CEGUI.h>
 
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+#include "ApplicationKeycode.h"
+#include "ApplicationMousecode.h"
 #include "OgreInputHandler.h"
 
-#include <utils/logging/Logger.h>
+//## model headers
 
-#include "controller/input/ApplicationKeycode.h"
-#include "controller/input/ApplicationMousecode.h"
+//## view headers
+
+//## utils headers
+#include <utils/logging/Logger.h>
 
 class CEGUIInputHandler: public OgreInputHandler {
 private:
@@ -48,18 +67,19 @@ public:
 	void injectTimeImpulse(double tick);
 
 	// CEGUI::MouseListener
-	bool mouseMoved(float x,float y);
+	bool mouseMoved(float x, float y);
 	bool mouseWheelMoved(float rel);
 	bool mousePressed(ApplicationMouseCode::MouseButton button);
 	bool mouseReleased(ApplicationMouseCode::MouseButton button);
-	void windowResized(int width,int height);
+	void windowResized(int width, int height);
 	static CEGUI::MouseButton convertMouseOgretoCEGUI(
 			ApplicationMouseCode::MouseButton button);
-	static CEGUI::Key::Scan convertKeyOgretoCEGUI(ApplicationKeycode::Keycode key);
+	static CEGUI::Key::Scan convertKeyOgretoCEGUI(
+			ApplicationKeycode::Keycode key);
 	void initializeKeyMap();
 
 protected:
-	void injectMousePosition(float x,float y);
+	void injectMousePosition(float x, float y);
 };
 
 #endif /* CEGUIINPUTHANDLER_H_ */

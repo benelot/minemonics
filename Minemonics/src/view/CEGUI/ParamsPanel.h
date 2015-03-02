@@ -1,15 +1,31 @@
 #pragma once
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 
-#define CEGUI_INFOPANEL_CAPTION 15
-#define CEGUI_INFOPANEL_TEXT 30
-#define CEGUI_INFOPANEL_BORDER 10
-#define CEGUI_INFOPANEL_COL1 0.5f
-#define CEGUI_INFOPANEL_COL2 0.5f
+//# custom headers
+//## base headers
 
-class ParamsPanel
-{
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+class ParamsPanel {
 public:
 	typedef std::vector<std::string> VectorString;
 	typedef std::pair<std::string, std::string> PairString;
@@ -22,7 +38,8 @@ protected:
 	CEGUI::Window* mTextBoxValues;
 	VectorString mParams;
 
-	ParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items);
+	ParamsPanel(int left, int top, std::string name, int width,
+			VectorStringPairs items);
 	void _destroy();
 public:
 	~ParamsPanel(void);
@@ -37,7 +54,8 @@ public:
 	void show();
 	bool isVisible();
 
-	static ParamsPanel* createParamsPanel(int left, int top, std::string name, int width, VectorStringPairs items);
+	static ParamsPanel* createParamsPanel(int left, int top, std::string name,
+			int width, VectorStringPairs items);
 	static void destroyParamsPanel(ParamsPanel* panel);
 	CEGUI::FrameWindow*& getWidgetPanel();
 };

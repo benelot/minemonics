@@ -5,6 +5,54 @@
  *      Author: leviathan
  */
 
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 #include "Ones.h"
 
 Ones::Ones(double weight):Jury(Jury::ONES, weight),mEvaluationSubject(0){

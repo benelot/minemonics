@@ -1,13 +1,42 @@
-#include "StateHandler.h"
-#include "OgreStringConverter.h"
+/*
+ * StateHandler.cpp
+ *
+ *  Created on: Nov 17, 2014
+ *      Author: leviathan
+ */
 
-StateHandler::StateHandler():mFrameTime(0),mLocked(0),mState(STARTUP) {
+//# corresponding header
+#include "StateHandler.h"
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+#include <OgreStringConverter.h>
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+StateHandler::StateHandler() :
+		mFrameTime(0), mLocked(0), mState(STARTUP) {
 
 }
 
 StateHandler::~StateHandler() {
 }
-
 
 ApplicationState StateHandler::getCurrentState() {
 	return mState;
@@ -21,8 +50,7 @@ bool StateHandler::lockState() {
 
 		mLocked = true;
 		return true;
-	}
-	else
+	} else
 		return false;
 }
 
@@ -30,8 +58,7 @@ bool StateHandler::unlockState() {
 	if (mLocked == true) {
 		mLocked = false;
 		return true;
-	}
-	else
+	} else
 		return false;
 }
 
@@ -48,17 +75,16 @@ bool StateHandler::requestStateChange(ApplicationState newState) {
 		return false;
 	}
 
-	if ((mState == GUI || mState == SIMULATION || mState == LOADING || mState == CANCEL_LOADING) && 
-			(newState != STARTUP) && (newState != mState)) {
+	if ((mState == GUI || mState == SIMULATION || mState == LOADING
+			|| mState == CANCEL_LOADING) && (newState != STARTUP)
+			&& (newState != mState)) {
 		mState = newState;
 		return true;
-	}
-	else
+	} else
 		return false;
 }
 
 void StateHandler::setFrameTime(float ms) {
 	mFrameTime = ms;
 }
-
 

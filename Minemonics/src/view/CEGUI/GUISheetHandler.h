@@ -1,7 +1,7 @@
 #pragma once
+//# corresponding header
 
-#include <CEGUI/Window.h>
-
+//# forward declarations
 namespace CEGUI {
 class System;
 class Window;
@@ -9,12 +9,34 @@ class Window;
 
 class StateHandler;
 
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+#include <CEGUI/Window.h>
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
 class GUISheetHandler {
 public:
 	GUISheetHandler();
 	~GUISheetHandler();
 
-	void initialize(CEGUI::System* system, CEGUI::Window* sheet, StateHandler* stateHandler);
+	void initialize(CEGUI::System* system, CEGUI::Window* sheet,
+			StateHandler* stateHandler);
 
 	// CEGUI event handlers. You can name these whatever you like, so long as they have the proper 
 	// signature: bool <method name>(const CEGUI::EventArgs &args)

@@ -8,12 +8,33 @@
 #ifndef PLANEO3D_H_
 #define PLANEO3D_H_
 
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
 #include <Terrain/OgreTerrain.h>
 #include <Terrain/OgreTerrainGroup.h>
 
-#include "view/general/evolution/environments/Hills.h"
+//# custom headers
+//## base headers
 
-#include "view/ogre3D/evolution/environments/EnvironmentO3D.h"
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+#include "view/general/evolution/environments/Hills.h"
+#include "EnvironmentO3D.h"
+
+//## utils headers
 
 class PlaneO3D: public Hills, public EnvironmentO3D {
 public:

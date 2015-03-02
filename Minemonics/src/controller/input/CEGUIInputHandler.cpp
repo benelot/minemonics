@@ -5,25 +5,37 @@
  *      Author: leviathan
  */
 
-// view
+//# corresponding header
+#include "CEGUIInputHandler.h"
+//# forward declarations
+
+//# system headers
+//## controller headers
+#include <SDL.h>
+
+//## model headers
+
+//## view headers
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/System.h>
 #include <CEGUI/GUIContext.h>
 
-// controller
-#include <SDL.h>
-
-// view
 #include <OgreStringConverter.h>
 
-// base
+//# custom headers
+//## base headers
 #include "SimulationManager.h"
 
-// controller
-#include "controller/input/CEGUIInputHandler.h"
+//## configuration headers
+
+//## controller headers
 #include "controller/StateHandler.h"
 
-// logging
+//## model headers
+
+//## view headers
+
+//## utils headers
 #include "utils/logging/Logger.h"
 
 BoostLogger CEGUIInputHandler::mBoostLogger;  // initialize the static variables
@@ -31,14 +43,14 @@ CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
 CEGUIInputHandler::CEGUIInputHandler() :
 		OgreInputHandler() {
 
-
 }
 
 CEGUIInputHandler::~CEGUIInputHandler() {
 	//OgreInputHandler is called automatically
 }
 
-void CEGUIInputHandler::initialize(StateHandler* stateHandler, SimulationManager* simulationMgr){
+void CEGUIInputHandler::initialize(StateHandler* stateHandler,
+		SimulationManager* simulationMgr) {
 	mStateHandler = stateHandler;
 }
 
@@ -786,7 +798,6 @@ bool CEGUIInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 	return OgreInputHandler::keyReleased(key);
 }
 
-
 void CEGUIInputHandler::injectTimeImpulse(double tick) {
 	/* inject the time that passed since the last call */
 	CEGUI::System::getSingleton().injectTimePulse(float(tick - mCEGUIlastTick));
@@ -815,7 +826,7 @@ bool CEGUIInputHandler::mouseWheelMoved(float rel) {
 bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "MOUSE BUTTON PRESSED" << button;
 	CEGUI::GUIContext& context =
-			CEGUI::System::getSingleton().getDefaultGUIContext();
+	CEGUI::System::getSingleton().getDefaultGUIContext();
 
 	context.injectMouseButtonDown(convertMouseOgretoCEGUI(button));
 	return OgreInputHandler::mousePressed(button);
@@ -1193,12 +1204,12 @@ CEGUI::Key::Scan CEGUIInputHandler::convertKeyOgretoCEGUI(
 
 }
 
-void CEGUIInputHandler::injectMousePosition(float x,float y){
+void CEGUIInputHandler::injectMousePosition(float x, float y) {
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
 			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-			x - mousePos.d_x, y- mousePos.d_y);
+			x - mousePos.d_x, y - mousePos.d_y);
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position SDL:" << x << "," << y;
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position CEGUI:" << mousePos.d_x << "," << mousePos.d_y;
 }

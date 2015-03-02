@@ -237,7 +237,7 @@ set(HDRS
 	./view/ogre3D/evolution/environments/HillsO3D.h
 	./view/ogre3D/GameState.h
 	./view/ogre3D/InputListeners.h
-	./view/GraphicsSystem.h
+#	./view/GraphicsSystem.h
 #	./view/ogre3D/BaseSystem.h
 #	./view/ogre3D/SdlInputHandler.h
 	
@@ -296,7 +296,7 @@ set(SRCS
 	./view/ogre3D/evolution/environments/HillsO3D.cpp
 	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
 	./view/ogre3D/evolution/environments/PlaneO3D.cpp
-	./view/GraphicsSystem.cpp
+#	./view/GraphicsSystem.cpp
 #	./view/ogre3D/BaseSystem.cpp
 #	./view/ogre3D/SdlInputHandler.cpp
 	

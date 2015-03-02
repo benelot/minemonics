@@ -8,6 +8,31 @@
 #ifndef VELOCITY_H_
 #define VELOCITY_H_
 
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
 #include "Jury.h"
 
 class Velocity: public Jury {

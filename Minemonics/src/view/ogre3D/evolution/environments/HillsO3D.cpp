@@ -5,7 +5,33 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "HillsO3D.h"
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+
 
 HillsO3D::HillsO3D(Ogre::SceneManager* mSceneMgr) :
 		mTerrainGlobals(0), mTerrainGroup(0), mTerrainsImported(false) {

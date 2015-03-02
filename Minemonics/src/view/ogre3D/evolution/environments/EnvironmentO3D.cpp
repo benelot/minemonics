@@ -5,9 +5,33 @@
  *      Author: leviathan
  */
 
-#include "view/ogre3D/evolution/environments/EnvironmentO3D.h"
+//# corresponding header
+#include "EnvironmentO3D.h"
 
-EnvironmentO3D::EnvironmentO3D():mSceneMgr(NULL) {
+//# forward declarations
+
+//# system headers
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+EnvironmentO3D::EnvironmentO3D() :
+		mSceneMgr(NULL) {
 	// TODO Auto-generated constructor stub
 
 }
