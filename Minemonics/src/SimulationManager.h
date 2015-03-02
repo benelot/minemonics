@@ -47,8 +47,6 @@ class Logger;
 
 #include <SDL_syswm.h>
 
-#include "view/GraphicsSystem.h"
-
 #include "view/CEGUI/GUISheetHandler.h"
 #include "controller/input/SDL2InputHandler.h"
 
