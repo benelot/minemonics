@@ -16,7 +16,7 @@
  *
  */
 
-Gene::Gene() {
+Gene::Gene():mActive(false) {
 	// TODO Auto-generated constructor stub
 
 }

@@ -46,9 +46,11 @@
 //## controller headers
 #include "controller/input/SDL2InputHandler.h"
 #include "controller/camera/CameraHandler.h"
-
+#include "controller/SaveController.h"
 //## model headers
-
+#include "model/evolution/population/creature/Creature.h"
+#include "model/evolution/population/creature/genome/Genome.h"
+#include "model/evolution/population/creature/genome/Gene.h"
 //## view headers
 #include "view/general/evolution/environments/Environment.h"
 #include "view/ogre3D/evolution/environments/HillsO3D.h"
@@ -143,8 +145,6 @@ void SimulationManager::createFrameListener(void) {
 		ent->setMaterialName("Test/Cube");
 		cubes.push_back(entNode);
 	}
-
-
 
 	//
 	// maximization task
@@ -353,11 +353,43 @@ bool SimulationManager::quit() {
  */
 void SimulationManager::createScene(void) {
 
+	SaveController saveController;
+	Creature originalCreature("Hubby");
+	Gene gene1;
+	Gene gene2;
+	gene2.setActive(true);
+	originalCreature.getGenotype().addGene(gene1);
+	originalCreature.getGenotype().addGene(gene2);
+
+	// display the complete schedule
+	std::cout << "Original creature\n";
+	std::cout << originalCreature;
+
+	std::string filename(boost::archive::tmpdir());
+	filename += "/demofile.txt";
+
+	// save the creature
+	saveController.saveCreature(originalCreature, filename.c_str());
+
+	// ... some time later
+	// make  a new creature
+	Creature newCreature("NoName");
+
+	saveController.restoreCreature(newCreature, filename.c_str());
+
+	// and display
+	std::cout << "\nrestored creature\n";
+	std::cout << newCreature;
+
+	std::cout << "\n";
+	std::cout << originalCreature.getGenotype();
+	std::cout << "\n";
+	std::cout << newCreature.getGenotype();
+	// should be the same as the old one. (except for the pointer values)
 // Initialize the logger
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
-	std::cout << "past this!";
 
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);

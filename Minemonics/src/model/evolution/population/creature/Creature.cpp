@@ -5,11 +5,34 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "Creature.h"
 
-Creature::Creature() {
-	// TODO Auto-generated constructor stub
+//# forward declarations
 
+//# system headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
+
+Creature::Creature(std::string name):mDeveloped(false) {
+	mName = name;
 }
 
 Creature::~Creature() {

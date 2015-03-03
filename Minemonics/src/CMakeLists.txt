@@ -211,6 +211,9 @@ set(HDRS
 	./model/evolution/juries/Jury.h
 	./model/evolution/juries/Ones.h
 	./model/evolution/juries/Velocity.h
+	./model/evolution/population/creature/Creature.h
+	./model/evolution/population/creature/genome/Genome.h
+	./model/evolution/population/creature/genome/Gene.h
 	
 	# view
 	./view/general/evolution/environments/Environment.h
@@ -242,6 +245,7 @@ set(HDRS
 	./controller/input/OgreInputHandler.h
 	./controller/StateHandler.h
     ./controller/physics/PhysicsController.h
+    ./controller/SaveController.h
 	
 	# configuration
 	./configuration/ApplicationConfiguration.h
@@ -270,6 +274,9 @@ set(SRCS
 	./model/evolution/juries/Jury.cpp
 	./model/evolution/juries/Ones.cpp
 	./model/evolution/juries/Velocity.cpp
+	./model/evolution/population/creature/Creature.cpp
+	./model/evolution/population/creature/genome/Genome.cpp
+	./model/evolution/population/creature/genome/Gene.cpp
 	
 	# view
 	./view/general/evolution/environments/Environment.cpp
@@ -296,6 +303,7 @@ set(SRCS
 	./controller/input/OgreInputHandler.cpp
 	./controller/StateHandler.cpp
 	./controller/physics/PhysicsController.cpp
+	./controller/SaveController.cpp
 	
 	# logger
 	./utils/logging/Logger.cpp
