@@ -223,9 +223,6 @@ set(HDRS
 	./view/ogre3D/evolution/environments/HillsO3D.h
 	./view/ogre3D/GameState.h
 	./view/ogre3D/InputListeners.h
-#	./view/GraphicsSystem.h
-#	./view/ogre3D/BaseSystem.h
-#	./view/ogre3D/SdlInputHandler.h
 	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.h
@@ -244,6 +241,7 @@ set(HDRS
 	./controller/input/CEGUIInputHandler.h
 	./controller/input/OgreInputHandler.h
 	./controller/StateHandler.h
+    ./controller/physics/PhysicsController.h
 	
 	# configuration
 	./configuration/ApplicationConfiguration.h
@@ -282,9 +280,6 @@ set(SRCS
 	./view/ogre3D/evolution/environments/HillsO3D.cpp
 	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
 	./view/ogre3D/evolution/environments/PlaneO3D.cpp
-#	./view/GraphicsSystem.cpp
-#	./view/ogre3D/BaseSystem.cpp
-#	./view/ogre3D/SdlInputHandler.cpp
 	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp
@@ -300,6 +295,7 @@ set(SRCS
 	./controller/input/CEGUIInputHandler.cpp
 	./controller/input/OgreInputHandler.cpp
 	./controller/StateHandler.cpp
+	./controller/physics/PhysicsController.cpp
 	
 	# logger
 	./utils/logging/Logger.cpp

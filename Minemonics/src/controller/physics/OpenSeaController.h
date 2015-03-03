@@ -25,7 +25,7 @@
 //## configuration headers
 
 //## controller headers
-#include "LocomotionController.h"
+#include "MotionController.h"
 
 //## model headers
 
@@ -33,7 +33,7 @@
 
 //## utils headers
 
-class OpenSeaController: public LocomotionController {
+class OpenSeaController: public MotionController {
 public:
 	OpenSeaController();
 	virtual ~OpenSeaController();

@@ -21,6 +21,7 @@
 
 //# system headers
 //## controller headers
+#include <btBulletDynamicsCommon.h>
 
 //## model headers
 
@@ -63,7 +64,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
-				NULL), mDetailsPanel(
+		NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
 				EvolutionConfiguration::PopSize,
 				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), offsprings(
@@ -84,6 +85,7 @@ SimulationManager::~SimulationManager(void) {
 void SimulationManager::destroyScene(void) {
 	if (mTerrain->environmentType == Environment::HILLS)
 		((HillsO3D*) mTerrain)->destroy();
+	mPhysicsController.exitBulletPhysics();
 
 }
 
@@ -124,6 +126,26 @@ void SimulationManager::createFrameListener(void) {
 	boost::posix_time::time_duration duration(mNow.time_of_day());
 	Rng::seed(duration.total_milliseconds());
 
+	mPhysicsController.initBulletPhysics();
+
+	const int numObjects =
+			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
+
+	for (int i = 0; i < numObjects; i++) {
+		Ogre::Entity* ent = mSceneMgr->createEntity(
+				"cube" + Ogre::StringConverter::toString(i),
+				Ogre::SceneManager::PT_CUBE);
+
+		Ogre::SceneNode* entNode =
+				mSceneMgr->getRootSceneNode()->createChildSceneNode(
+						"entNode" + Ogre::StringConverter::toString(i));
+		entNode->attachObject(ent);
+		ent->setMaterialName("Test/Cube");
+		cubes.push_back(entNode);
+	}
+
+
+
 	//
 	// maximization task
 	//
@@ -162,6 +184,9 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
+	mPhysicsController.stepBulletPhysics(evt.timeSinceLastFrame);
+	updatePhysics();
+
 	updatePanels();
 
 	mTestObject->update(evt.timeSinceLastFrame);
@@ -170,6 +195,34 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// updateEvolution();
 
 	return true;
+}
+
+void SimulationManager::updatePhysics() {
+	const int numObjects =
+			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
+
+	for (int i = 0; i < numObjects; i++) {
+		btCollisionObject* colObj =
+				mPhysicsController.getDynamicsWorld()->getCollisionObjectArray()[i];
+		btRigidBody* body = btRigidBody::upcast(colObj);
+
+		if (body) {
+
+			btVector3 Point = body->getCenterOfMassPosition();
+			cubes.at(i)->setPosition(
+					Ogre::Vector3((float) Point[0], (float) Point[1],
+							(float) Point[2]));
+
+			// Get the Orientation of the rigidbody as a bullet Quaternion
+			// Convert it to an Ogre quaternion
+			btQuaternion btq = body->getOrientation();
+			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
+					btq.z());
+
+			// Set the orientation of the rendered Object
+			cubes.at(i)->setOrientation(quart);
+		}
+	}
 }
 
 //TODO: Use for creature evolution, but clean up afterwards

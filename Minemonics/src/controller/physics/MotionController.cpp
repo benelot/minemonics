@@ -1,12 +1,12 @@
 /*
- * LocomotionController.h
+ * MotionController.cpp
  *
- *  Created on: Nov 17, 2014
+ *  Created on: Mar 3, 2015
  *      Author: leviathan
  */
 
-#ifndef LOCOMOTIONCONTROLLER_H_
-#define LOCOMOTIONCONTROLLER_H_
+//# corresponding header
+#include "MotionController.h"
 
 //# forward declarations
 
@@ -29,11 +29,12 @@
 //## view headers
 
 //## utils headers
+MotionController::MotionController() {
+	// TODO Auto-generated constructor stub
 
-class LocomotionController {
-public:
-	LocomotionController();
-	virtual ~LocomotionController();
-};
+}
 
-#endif /* LOCOMOTIONCONTROLLER_H_ */
+MotionController::~MotionController() {
+	// TODO Auto-generated destructor stub
+}
+

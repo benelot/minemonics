@@ -21,7 +21,7 @@
 //## base headers
 
 //## configuration headers
-#include "LocomotionController.h"
+#include "MotionController.h"
 //## controller headers
 
 //## model headers
@@ -30,7 +30,7 @@
 
 //## utils headers
 
-class GroundController: public LocomotionController {
+class GroundController: public MotionController {
 public:
 	GroundController();
 	virtual ~GroundController();

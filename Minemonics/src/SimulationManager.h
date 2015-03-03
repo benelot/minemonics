@@ -46,6 +46,7 @@ class Logger;
 #include "controller/StateHandler.h"
 #include "controller/camera/CameraHandler.h"
 #include "controller/input/SDL2InputHandler.h"
+#include "controller/physics/PhysicsController.h"
 
 //## model headers
 #include "model/evolution/juries/Ones.h"
@@ -66,6 +67,8 @@ private:
 
 	Environment* mTerrain;
 
+	PhysicsController mPhysicsController;
+
 	// Game component handlers
 	SDL2InputHandler mInputHandler;
 	SDL_Window *mSdlWindow;
@@ -73,7 +76,6 @@ private:
 
 	CEGUI::System* mSystem;
 	CEGUI::Window* mLayout;
-
 
 
 	//SheetHandler
@@ -98,6 +100,8 @@ private:
 		}
 	} _initializer;
 
+	std::vector<Ogre::SceneNode*> cubes;
+	void updatePhysics();
 public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);
