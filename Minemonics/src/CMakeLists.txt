@@ -202,11 +202,8 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 
 #DEVELOPMENT INPUT
 # Append header files here
-set(HDRS
-    # base
-	./BaseApplication.h
-	./SimulationManager.h
-	
+
+set(MODELHDRS
 	# model
 	./model/evolution/juries/Jury.h
 	./model/evolution/juries/Ones.h
@@ -214,27 +211,17 @@ set(HDRS
 	./model/evolution/population/creature/Creature.h
 	./model/evolution/population/creature/genome/Genome.h
 	./model/evolution/population/creature/genome/Gene.h
-	
-	# view
-	./view/general/evolution/environments/Environment.h
-	./view/general/evolution/environments/OpenSea.h
-	./view/general/evolution/environments/Hills.h
-	./view/general/evolution/environments/Plane.h
-	./view/ogre3D/evolution/environments/EnvironmentO3D.h
-	./view/ogre3D/evolution/environments/OpenSeaO3D.h
-	./view/ogre3D/evolution/environments/PlaneO3D.h
-	./view/ogre3D/evolution/environments/HillsO3D.h
-	./view/ogre3D/GameState.h
-	./view/ogre3D/InputListeners.h
-	
-	## CEGUI
-	./view/CEGUI/GUISheetHandler.h
-	./view/CEGUI/ParamsPanel.h
-	./view/CEGUI/CEGUIBuilder.h
-	
-	## MathGL
-    ./view/MathGL/MathGLWindow.h
-	
+)
+set(MODELSRCS
+    # model
+	./model/evolution/juries/Jury.cpp
+	./model/evolution/juries/Ones.cpp
+	./model/evolution/juries/Velocity.cpp
+	./model/evolution/population/creature/Creature.cpp
+	./model/evolution/population/creature/genome/Genome.cpp
+	./model/evolution/population/creature/genome/Gene.cpp
+)
+set(CONTROLLERHDRS
 	# controller
 	./controller/camera/CameraHandler.h
 	./controller/input/ApplicationScancode.h
@@ -246,38 +233,37 @@ set(HDRS
 	./controller/StateHandler.h
     ./controller/physics/PhysicsController.h
     ./controller/SaveController.h
-	
-	# configuration
-	./configuration/ApplicationConfiguration.h
-	./configuration/CameraConfiguration.h
-	./configuration/ControlConfiguration.h
-	./configuration/PhysicsConfiguration.h
-	./configuration/NeuronalNetworkConfiguration.h
-	./configuration/MorphologyConfiguration.h
-	./configuration/GeneticsConfiguration.h
-	./configuration/FitnessConfiguration.h
-	./configuration/EnvironmentConfiguration.h
-	./configuration/EvolutionConfiguration.h
-	./configuration/OgreSystemConfigStrings.h
-	
-	# logger
-	./utils/logging/Logger.h
 )
-
-# Append source files here
-set(SRCS
-    # base
-	./BaseApplication.cpp
-	./SimulationManager.cpp
-	
-	# model
-	./model/evolution/juries/Jury.cpp
-	./model/evolution/juries/Ones.cpp
-	./model/evolution/juries/Velocity.cpp
-	./model/evolution/population/creature/Creature.cpp
-	./model/evolution/population/creature/genome/Genome.cpp
-	./model/evolution/population/creature/genome/Gene.cpp
-	
+set(CONTROLLERSRCS
+	# controller
+	./controller/camera/CameraHandler.cpp
+	./controller/input/SDL2InputHandler.cpp
+	./controller/input/CEGUIInputHandler.cpp
+	./controller/input/OgreInputHandler.cpp
+	./controller/StateHandler.cpp
+	./controller/physics/PhysicsController.cpp
+	./controller/SaveController.cpp
+)
+set(VIEWHDRS
+	# view
+	./view/general/evolution/environments/Environment.h
+	./view/general/evolution/environments/OpenSea.h
+	./view/general/evolution/environments/Hills.h
+	./view/general/evolution/environments/Plane.h
+	./view/ogre3D/evolution/environments/EnvironmentO3D.h
+	./view/ogre3D/evolution/environments/OpenSeaO3D.h
+	./view/ogre3D/evolution/environments/PlaneO3D.h
+	./view/ogre3D/evolution/environments/HillsO3D.h
+	./view/ogre3D/GameState.h
+	./view/ogre3D/InputListeners.h
+    ## CEGUI
+	./view/CEGUI/GUISheetHandler.h
+	./view/CEGUI/ParamsPanel.h
+	./view/CEGUI/CEGUIBuilder.h
+	## MathGL
+    ./view/MathGL/MathGLWindow.h
+)
+set(VIEWSRCS
 	# view
 	./view/general/evolution/environments/Environment.cpp
 	./view/general/evolution/environments/Hills.cpp
@@ -295,21 +281,70 @@ set(SRCS
 	
 	## MathGL
 	./view/MathGL/MathGLWindow.cpp
+)
+set(MISCHDRS
+	# configuration
+	./configuration/ApplicationConfiguration.h
+	./configuration/CameraConfiguration.h
+	./configuration/ControlConfiguration.h
+	./configuration/PhysicsConfiguration.h
+	./configuration/NeuronalNetworkConfiguration.h
+	./configuration/MorphologyConfiguration.h
+	./configuration/GeneticsConfiguration.h
+	./configuration/FitnessConfiguration.h
+	./configuration/EnvironmentConfiguration.h
+	./configuration/EvolutionConfiguration.h
+	./configuration/OgreSystemConfigStrings.h
 	
-	# controller
-	./controller/camera/CameraHandler.cpp
-	./controller/input/SDL2InputHandler.cpp
-	./controller/input/CEGUIInputHandler.cpp
-	./controller/input/OgreInputHandler.cpp
-	./controller/StateHandler.cpp
-	./controller/physics/PhysicsController.cpp
-	./controller/SaveController.cpp
-	
+	# logger
+	./utils/logging/Logger.h
+)
+set(MISCSRCS
 	# logger
 	./utils/logging/Logger.cpp
 )
+
+set(TESTHDRS
+    ${MODELHDRS}
+    #${VIEWHDRS}
+    #${CONTROLLERHDRS}
+    ${MISCHDRS}
+)
+set(TESTSRCS
+    ${MODELSRCS}
+    #${VIEWSRCS}
+    #${CONTROLLERSRCS}
+    ${MISCSRCS}
+    ./model/evolution/juries/VelocityTestCase.cpp
+    ./model/evolution/juries/OnesTestCase.cpp
+    
+    #test runner
+    ./test/TestRunner.cpp
+)
+set(HDRS
+    ${MODELHDRS}
+    ${VIEWHDRS}
+    ${CONTROLLERHDRS}
+    ${MISCHDRS}
+    
+    # base
+	./BaseApplication.h
+	./SimulationManager.h
+)
+
+# Append source files here
+set(SRCS
+    ${MODELSRCS}
+    ${VIEWSRCS}
+    ${CONTROLLERSRCS}
+    ${MISCSRCS}
+    
+    # base
+	./BaseApplication.cpp
+	./SimulationManager.cpp	
+)
  
-include_directories( ${OIS_INCLUDE_DIRS}
+include_directories(
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 	${OGRE_Overlay_INCLUDE_DIRS}
@@ -324,7 +359,7 @@ set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 # LINKING
 ######################################################################
  
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
@@ -420,4 +455,23 @@ if(UNIX)
 	)
  
 endif(UNIX)
+
+# Setup testing
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIR})
+
+# Add test cpp file
+add_executable(runUnitTests
+    ${TESTHDRS}
+    ${TESTSRCS}
+)
+
+# Link test executable against gtest & gtest_main
+target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+
+add_test(
+    NAME runUnitTests
+    COMMAND runUnitTests
+)
  
