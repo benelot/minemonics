@@ -19,7 +19,6 @@
 
 //## view headers
 
-
 //# custom headers
 //## base headers
 
@@ -28,12 +27,11 @@
 //## controller headers
 
 //## model headers
+#include "Jury.h"
 
 //## view headers
 
 //## utils headers
-
-#include "Jury.h"
 
 class Velocity: public Jury {
 public:

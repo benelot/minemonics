@@ -5,7 +5,6 @@
  *      Author: leviathan
  */
 #include "model/evolution/juries/Ones.h"
-#include <iostream>
 
 #include <gtest/gtest.h>
 
@@ -26,7 +25,7 @@ protected:
 
 	virtual void TearDown() {
 		delete ones;
-		ones =0;
+		ones = 0;
 	}
 	Ones* ones;
 };
