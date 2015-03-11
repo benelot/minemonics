@@ -34,6 +34,7 @@
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
+#include <model/evolution/population/creature/genome/MorphoGene.h>
 
 //# custom headers
 //## base headers
@@ -50,8 +51,6 @@
 //## model headers
 #include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
-#include "model/evolution/population/creature/genome/Gene.h"
-//## view headers
 #include "view/general/evolution/environments/Environment.h"
 #include "view/ogre3D/evolution/environments/HillsO3D.h"
 #include "view/ogre3D/evolution/environments/PlaneO3D.h"
@@ -68,10 +67,10 @@ SimulationManager::SimulationManager(void) :
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
-				EvolutionConfiguration::PopSize,
-				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), offsprings(
-				EvolutionConfiguration::PopSize,
-				ChromosomeT<bool>(EvolutionConfiguration::Dimension)), jury(1), t(
+				EvolutionConfiguration::POPULATIONSIZE,
+				ChromosomeT<bool>(EvolutionConfiguration::DIMENSIONS)), offsprings(
+				EvolutionConfiguration::POPULATIONSIZE,
+				ChromosomeT<bool>(EvolutionConfiguration::DIMENSIONS)), jury(1), t(
 				0) {
 
 	// main frame timer initialization
@@ -161,7 +160,7 @@ void SimulationManager::createFrameListener(void) {
 	//
 	// evaluate parents (only needed for elitist strategy)
 	//
-	if (EvolutionConfiguration::NElitists > 0)
+	if (EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY > 0)
 		for (i = 0; i < parents.size(); ++i) {
 			jury.setEvaluationSubject(parents[i][0]);
 			jury.evaluateFitness();
@@ -253,7 +252,7 @@ void SimulationManager::updateEvolution() {
 	// scale fitness values and use proportional selection
 	//
 	//offsprings.linearDynamicScaling(window, t);
-	parents.selectProportional(offsprings, EvolutionConfiguration::NElitists);
+	parents.selectProportional(offsprings, EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY);
 
 	t++;
 	//
@@ -353,11 +352,10 @@ bool SimulationManager::quit() {
  */
 void SimulationManager::createScene(void) {
 
-	SaveController saveController;
-	Creature originalCreature("Hubby");
-	Gene gene1;
-	Gene gene2;
-	gene2.setActive(true);
+	SaveController<Creature> saveController;
+	Creature originalCreature(1);
+	MorphoGene gene1;
+	MorphoGene gene2;
 	originalCreature.getGenotype().addGene(gene1);
 	originalCreature.getGenotype().addGene(gene2);
 
@@ -369,13 +367,13 @@ void SimulationManager::createScene(void) {
 	filename += "/demofile.txt";
 
 	// save the creature
-	saveController.saveCreature(originalCreature, filename.c_str());
+	saveController.save(originalCreature, filename.c_str());
 
 	// ... some time later
 	// make  a new creature
-	Creature newCreature("NoName");
+	Creature newCreature(1);
 
-	saveController.restoreCreature(newCreature, filename.c_str());
+	saveController.restore(newCreature, filename.c_str());
 
 	// and display
 	std::cout << "\nrestored creature\n";
@@ -480,7 +478,7 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	switch (EnvironmentConfiguration::environmentType) {
+	switch (EnvironmentConfiguration::ENVIRONMENTTYPE) {
 	case Environment::HILLS:
 		// Create hills
 		mTerrain = new HillsO3D(mSceneMgr);

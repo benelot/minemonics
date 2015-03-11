@@ -13,9 +13,16 @@
 //# forward declarations
 
 //# system headers
+#include <fstream>
 //## controller headers
 
 //## model headers
+// include headers that implement a archive in xml format
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/version.hpp>
+#include <boost/serialization/base_object.hpp>
 
 //## view headers
 
@@ -27,32 +34,36 @@
 //## controller headers
 
 //## model headers
-#include "model/evolution/population/creature/Creature.h"
+
 //## view headers
 
 //## utils headers
 
-class SaveController {
+template <class T> class SaveController {
 public:
-	virtual ~SaveController();
-	SaveController();
+	SaveController(){
 
-	void saveCreature(const Creature &creature, const char* filename) {
-		// make an archive from the creature
+	}
+	virtual ~SaveController(){
+
+	}
+
+	void save(const T & object,const char* filename){
+		// make an archive from the object
 		std::ofstream ofs(filename);
 		assert(ofs.good());
 		boost::archive::xml_oarchive oa(ofs);
-		oa << BOOST_SERIALIZATION_NVP(creature);
+		oa << BOOST_SERIALIZATION_NVP(object);
 	}
 
-	void restoreCreature(Creature &creature, const char* filename) {
+	void restore(T &object, const char* filename){
 		// open the archive
 		std::ifstream ifs(filename);
 		assert(ifs.good());
 		boost::archive::xml_iarchive ia(ifs);
 
-		// restore the creature from the archive
-		ia >> BOOST_SERIALIZATION_NVP(creature);
+		// restore the object from the archive
+		ia >> BOOST_SERIALIZATION_NVP(object);
 	}
 };
 
