@@ -8,8 +8,31 @@
 #ifndef RANDOMNESS_H_
 #define RANDOMNESS_H_
 
+//# corresponding header
+
+//# forward declarations
+
+//# system headers
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/normal_distribution.hpp>
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 /**
  * The randomness class abstracts the randomness used in this program, making it easier to change it if necessary.

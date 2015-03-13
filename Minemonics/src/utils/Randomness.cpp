@@ -5,14 +5,42 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "Randomness.h"
 
+//# forward declarations
+
+//# system headers
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include <boost/math/special_functions/round.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//# custom headers
+//## base headers
+
+//## configuration headers
+
+//## controller headers
+
+//## model headers
+
+//## view headers
+
+//## utils headers
 
 Randomness::Randomness() {
+	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970,1,1));
+	boost::posix_time::ptime now = boost::posix_time::microsec_clock::local_time();
+	boost::posix_time::time_duration diff = now - time_t_epoch;
 
+	rng.seed(diff.total_milliseconds());
 }
 
 Randomness::~Randomness() {
@@ -59,70 +87,63 @@ int Randomness::nextPosInt(int lowerLimit, int upperLimit) {
  */
 double Randomness::nextBiasedLog(double lowerLimit, double upperLimit) {
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
-			pow(10,lowerLimit), pow(10,upperLimit));
+			pow(10, lowerLimit), pow(10, upperLimit));
 
 	//draw m and n
 	double tenpowm = unifDoubleDistribution(rng);
 	double tenpown = unifDoubleDistribution(rng);
 
 	//return m or n whichever is higher
-	return (tenpowm>tenpown)?log(tenpowm):log(tenpown);
+	return (tenpowm > tenpown) ? log(tenpowm) : log(tenpown);
 }
 
-bool Randomness::nextBoolean(){
+bool Randomness::nextBoolean() {
 	//create a uniform integer distribution
-	boost::random::uniform_int_distribution<> unifIntDistribution(0,
-			1);
+	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1);
 
 	// return true if 1 else false
-	return (unifIntDistribution(rng))?true:false;
+	return (unifIntDistribution(rng)) ? true : false;
 }
 
-int Randomness::nextNormalInt(double mean,double twovariances){
+int Randomness::nextNormalInt(double mean, double twovariances) {
 	//create a uniform integer distribution
-	boost::random::normal_distribution<> normalIntDistribution(mean,(twovariances/2.0f));
+	boost::random::normal_distribution<> normalIntDistribution(mean,
+			(twovariances / 2.0f));
 
 	double number = normalIntDistribution(rng);
 	int integer = round(number);
 
 	//99.9% lie in between mean +- twovariances
-	if(integer > mean + twovariances)
-	{
+	if (integer > mean + twovariances) {
 		integer = mean + twovariances;
-	}
-	else if(integer < mean - twovariances)
-	{
+	} else if (integer < mean - twovariances) {
 		integer = mean - twovariances;
 	}
 	return integer;
 }
 
-double Randomness::nextNormalDouble(double mean, double variance){
+double Randomness::nextNormalDouble(double mean, double variance) {
 	//create a uniform integer distribution
-	boost::random::normal_distribution<> normalDoubleDistribution(mean,variance);
+	boost::random::normal_distribution<> normalDoubleDistribution(mean,
+			variance);
 
 	return normalDoubleDistribution(rng);
 }
 
-bool Randomness::nextNormalBoolean(double mean, double variance){
+bool Randomness::nextNormalBoolean(double mean, double variance) {
 	//create a uniform integer distribution
-	boost::random::normal_distribution<> normalBooleanDistribution(mean,variance);
+	boost::random::normal_distribution<> normalBooleanDistribution(mean,
+			variance);
 
 	double number = normalBooleanDistribution(rng);
 	bool result = false;
-	if(number > 1)
-	{
+	if (number > 1) {
 		result = true;
-	}
-	else if(number < 0)
-	{
+	} else if (number < 0) {
 		result = false;
+	} else {
+		result = ((int) round(number)) ? true : false;
 	}
-	else
-	{
-		result = ((int)round(number))?true:false;
-	}
-
 
 	return result;
 }
