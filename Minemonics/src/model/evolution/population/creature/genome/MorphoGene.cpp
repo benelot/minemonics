@@ -43,7 +43,11 @@
  *
  */
 
-MorphoGene::MorphoGene() {
+MorphoGene::MorphoGene() :
+		mColorR(0), mColorG(0), mColorB(0), mControllerGene(NULL), mFollowUpGene(
+		NULL), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(
+				0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(0), mRepetitionLimit(
+				0), mX(0), mY(0), mZ(0) {
 
 }
 
@@ -51,8 +55,7 @@ MorphoGene::~MorphoGene() {
 // TODO Auto-generated destructor stub
 }
 
-void MorphoGene::initialize(double bushiness)
-{
+void MorphoGene::initialize(double bushiness) {
 	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions
 	mX = randomness.nextBiasedLog(MorphologyConfiguration::BODY_CUBOID_MIN_SIZE,
@@ -92,16 +95,15 @@ void MorphoGene::initialize(double bushiness)
 	mColorB = randomness.nextDouble(0, 255);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
-	mRepetitionLimit = randomness.nextPosInt(0,MorphologyConfiguration::BODY_SEGMENT_INITIAL_TYPE_REPEATS);
+	mRepetitionLimit = randomness.nextPosInt(0,
+			MorphologyConfiguration::BODY_SEGMENT_INITIAL_TYPE_REPEATS);
 
 	//The follow up gene follows instead if this gene's repetition limit is reached.
 	mFollowUpGene = NULL;
 
+	int branchQty = randomness.nextPosInt(0, bushiness);
 
-	int branchQty = randomness.nextPosInt(0,bushiness);
-
-	for(int i = 0; i < branchQty;i++)
-	{
+	for (int i = 0; i < branchQty; i++) {
 		MorphoGeneBranch branch;
 		mGeneBranches.push_back(branch);
 	}
@@ -112,5 +114,95 @@ void MorphoGene::initialize(double bushiness)
 
 void MorphoGene::print() {
 //I am a gene.
+}
+
+bool MorphoGene::equals(const MorphoGene & morphoGene) const {
+
+	if (mColorR != morphoGene.mColorR) {
+		return false;
+	}
+
+	if (mColorG != morphoGene.mColorG) {
+		return false;
+	}
+
+	if (mColorB != morphoGene.mColorB) {
+		return false;
+	}
+
+	if (mControllerGene != NULL && morphoGene.mControllerGene != NULL && mControllerGene->equals(*morphoGene.mControllerGene)) {
+		switch (mControllerGene->getControllerGeneType()) {
+			case ControllerGene::SineControllerGene:
+				if(((SineControllerGene*)mControllerGene)->equals(((SineControllerGene&)(*morphoGene.mControllerGene))))
+				{
+					return true;
+				}
+				break;
+			default:
+				break;
+		}
+		return false;
+	}
+
+	if (mFollowUpGene != NULL && morphoGene.mFollowUpGene != 0
+			&& mFollowUpGene->equals(*morphoGene.mFollowUpGene)) {
+		return false;
+	}
+
+	std::vector<MorphoGeneBranch>::const_iterator it = mGeneBranches.begin();
+	std::vector<MorphoGeneBranch>::const_iterator it2 =
+			morphoGene.mGeneBranches.begin();
+	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
+			it++, it2++) {
+		if (!it->equals(*(it2))) {
+			return false;
+		}
+	}
+
+	if (mJointAnchorX != morphoGene.mJointAnchorX) {
+		return false;
+	}
+
+	if (mJointAnchorY != morphoGene.mJointAnchorY) {
+		return false;
+	}
+
+	if (mJointAnchorZ != morphoGene.mJointAnchorZ) {
+		return false;
+	}
+
+	if (mJointPitch != morphoGene.mJointPitch) {
+		return false;
+	}
+
+	if (mJointYaw != morphoGene.mJointYaw) {
+		return false;
+	}
+
+	if (mJointRoll != morphoGene.mJointRoll) {
+		return false;
+	}
+
+	if (mRepetitionLimit != morphoGene.mRepetitionLimit) {
+		return false;
+	}
+
+	if (mSegmentShrinkFactor != morphoGene.mSegmentShrinkFactor) {
+		return false;
+	}
+
+	if (mX != morphoGene.mX) {
+		return false;
+	}
+
+	if (mY != morphoGene.mY) {
+		return false;
+	}
+
+	if (mZ != morphoGene.mZ) {
+		return false;
+	}
+
+	return true;
 }
 

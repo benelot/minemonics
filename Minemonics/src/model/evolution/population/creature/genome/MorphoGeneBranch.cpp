@@ -28,7 +28,10 @@
 //## model headers
 #include "utils/Randomness.h"
 
-MorphoGeneBranch::MorphoGeneBranch() {
+MorphoGeneBranch::MorphoGeneBranch() :
+		mActive(false), mBranchGeneType(NULL), mFlipped(false), mJointAnchorX(
+				0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(
+				0), mJointRoll(0), mMirrored(0) {
 
 }
 
@@ -70,36 +73,37 @@ MorphoGeneBranch::~MorphoGeneBranch() {
 	// TODO Auto-generated destructor stub
 }
 
-bool MorphoGeneBranch::equals(const MorphoGeneBranch& geneBranch) {
+bool MorphoGeneBranch::equals(const MorphoGeneBranch& geneBranch) const {
+
 	if (mActive != geneBranch.mActive) {
 		return false;
 	}
 
-	if(mBranchGeneType != geneBranch.mBranchGeneType)
+	if (mBranchGeneType != geneBranch.mBranchGeneType)
 		return false;
 
-	if(mFlipped != geneBranch.mFlipped)
+	if (mFlipped != geneBranch.mFlipped)
 		return false;
 
-	if(mJointAnchorX != geneBranch.mJointAnchorX)
+	if (mJointAnchorX != geneBranch.mJointAnchorX)
 		return false;
 
-	if(mJointAnchorY != geneBranch.mJointAnchorY)
+	if (mJointAnchorY != geneBranch.mJointAnchorY)
 		return false;
 
-	if(mJointAnchorZ != geneBranch.mJointAnchorZ)
+	if (mJointAnchorZ != geneBranch.mJointAnchorZ)
 		return false;
 
-	if(mJointPitch != geneBranch.mJointPitch)
+	if (mJointPitch != geneBranch.mJointPitch)
 		return false;
 
-	if(mJointYaw != geneBranch.mJointYaw)
+	if (mJointYaw != geneBranch.mJointYaw)
 		return false;
 
-	if(mJointRoll != geneBranch.mJointRoll)
+	if (mJointRoll != geneBranch.mJointRoll)
 		return false;
 
-	if(mMirrored != geneBranch.mMirrored)
+	if (mMirrored != geneBranch.mMirrored)
 		return false;
 
 	return true;

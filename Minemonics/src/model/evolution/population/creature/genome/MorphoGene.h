@@ -29,6 +29,7 @@
 #include <boost/archive/tmpdir.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/version.hpp>
 //## view headers
 
@@ -39,6 +40,7 @@
 
 //## controller headers
 #include "model/evolution/population/creature/genome/controller/ControllerGene.h"
+#include "model/evolution/population/creature/genome/controller/SineControllerGene.h"
 
 //## model headers
 #include "model/evolution/population/creature/genome/MorphoGeneBranch.h"
@@ -52,6 +54,8 @@ public:
 	MorphoGene();
 	virtual ~MorphoGene();
 	void initialize(double bushiness);
+
+	bool equals(const MorphoGene& morphoGene) const;
 
 	/**
 	 * Give access to boost serialization
@@ -91,6 +95,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar.register_type(static_cast<SineControllerGene*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mX)& BOOST_SERIALIZATION_NVP(mY)
 		& BOOST_SERIALIZATION_NVP(mZ)
 		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor)

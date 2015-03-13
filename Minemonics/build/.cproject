@@ -774,7 +774,6 @@
 		<pathentry include="/usr/local/include/cegui-0" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/SDL2" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/local/include/mgl2/" kind="inc" path="" system="true"/>
-		<pathentry include="/usr/local/include/shark" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/local/include/bullet" kind="inc" path="" system="true"/>
 		<pathentry kind="src" path="[Source directory]"/>
 		<pathentry excluding="[Source directory]/|**/CMakeFiles/" kind="out" path=""/>

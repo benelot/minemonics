@@ -57,8 +57,8 @@ protected:
 		geneBranch2 = new MorphoGeneBranch();
 
 		SaveController<MorphoGeneBranch> geneBranchSaveController;
-		geneBranchSaveController.save(*geneBranch,"GeneBranch.branch");
-		geneBranchSaveController.restore(*geneBranch2,"GeneBranch.branch");
+		geneBranchSaveController.save(*geneBranch,"GeneBranch.test");
+		geneBranchSaveController.restore(*geneBranch2,"GeneBranch.test");
 
 	}
 

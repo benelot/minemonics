@@ -45,7 +45,7 @@ public:
 
 	void initialize();
 
-	bool equals(const MorphoGeneBranch& geneBranch);
+	bool equals(const MorphoGeneBranch& geneBranch) const;
 
 	/**
 	 * Give access to boost serialization
@@ -204,5 +204,6 @@ private:
 	 */
 	int mBranchGeneType;
 };
+BOOST_CLASS_VERSION(MorphoGeneBranch, 1)
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENEBRANCH_H_ */

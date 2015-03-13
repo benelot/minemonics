@@ -53,7 +53,9 @@ void SineControllerGene::initialize() {
 			ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
 }
 
-bool SineControllerGene::equals(const SineControllerGene& sineControllerGene) {
+bool SineControllerGene::equals(
+		const SineControllerGene& sineControllerGene) const {
+
 	ControllerGene::equals((ControllerGene&) sineControllerGene);
 
 	if (mInitialValue != sineControllerGene.mInitialValue)

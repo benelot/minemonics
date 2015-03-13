@@ -41,10 +41,11 @@ public:
 
 	virtual void initialize() = 0;
 
-	bool equals (const ControllerGene& controllerGene);
+	bool equals (const ControllerGene& controllerGene) const;
 
 	enum ControllerGeneType {
 		SineControllerGene,
+		GenericControllerGene
 	};
 
 	/**
@@ -84,5 +85,7 @@ public:
 protected:
 	ControllerGeneType mControllerGeneType;
 };
+BOOST_CLASS_VERSION(ControllerGene, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControllerGene)
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_CONTROLLERGENE_H_ */

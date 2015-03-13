@@ -32,7 +32,7 @@
 //## controller headers
 
 //## model headers
-#include "Gene.h"
+#include <model/evolution/population/creature/genome/MorphoGene.h>
 
 //## view headers
 
@@ -43,11 +43,26 @@ public:
 	Genome();
 	virtual ~Genome();
 
+	void createRandomGenome(double bushiness);
+
+	bool equals(const Genome & genome);
+
+	/**
+	 * Give access to boost serialization
+	 */
 	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the genome to a string.
+	 * @param os The ostream.
+	 * @param genome The genome we want to serialize.
+	 * @return A string containing all information about the genome.
+	 */
 	friend std::ostream & operator<<(std::ostream &os, const Genome &genome) {
-		std::vector<Gene>::const_iterator it;
+		std::vector<MorphoGene>::const_iterator it;
 		for (it = genome.mGenes.begin(); it != genome.mGenes.end(); it++) {
 			os << (*it);
+			os << "//";
 		}
 		return os;
 	}
@@ -57,12 +72,18 @@ public:
 		ar & BOOST_SERIALIZATION_NVP(mGenes);
 	}
 
-	void addGene(Gene gene) {
+	void addGene(MorphoGene gene) {
 		mGenes.push_back(gene);
 	}
 
+	std::vector<MorphoGene>& getGenes() {
+		return mGenes;
+	}
+
 private:
-	std::vector<Gene> mGenes;
+
+
+	std::vector<MorphoGene> mGenes;
 
 };
 BOOST_CLASS_VERSION(Genome, 1)

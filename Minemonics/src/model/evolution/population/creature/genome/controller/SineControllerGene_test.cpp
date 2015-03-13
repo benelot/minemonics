@@ -58,9 +58,9 @@ protected:
 
 		SaveController<SineControllerGene> saveController;
 
-		saveController.save(*sineControllerGene,"Controller.test");
+		saveController.save(*sineControllerGene,"SineController.test");
 
-		saveController.restore(*sineControllerGene2,"Controller.test");
+		saveController.restore(*sineControllerGene2,"SineController.test");
 	}
 
 	virtual void TearDown() {

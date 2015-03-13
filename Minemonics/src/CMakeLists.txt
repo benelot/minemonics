@@ -210,7 +210,10 @@ set(MODELHDRS
 	./model/evolution/juries/Velocity.h
 	./model/evolution/population/creature/Creature.h
 	./model/evolution/population/creature/genome/Genome.h
-	./model/evolution/population/creature/genome/Gene.h
+	./model/evolution/population/creature/genome/MorphoGene.h
+    ./model/evolution/population/creature/genome/MorphoGeneBranch.h
+    ./model/evolution/population/creature/genome/controller/ControllerGene.h
+	./model/evolution/population/creature/genome/controller/SineControllerGene.h
 )
 set(MODELSRCS
     # model
@@ -219,7 +222,10 @@ set(MODELSRCS
 	./model/evolution/juries/Velocity.cpp
 	./model/evolution/population/creature/Creature.cpp
 	./model/evolution/population/creature/genome/Genome.cpp
-	./model/evolution/population/creature/genome/Gene.cpp
+	./model/evolution/population/creature/genome/MorphoGene.cpp
+	./model/evolution/population/creature/genome/MorphoGeneBranch.cpp
+	./model/evolution/population/creature/genome/controller/ControllerGene.cpp
+	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -242,7 +248,7 @@ set(CONTROLLERSRCS
 	./controller/input/OgreInputHandler.cpp
 	./controller/StateHandler.cpp
 	./controller/physics/PhysicsController.cpp
-	./controller/SaveController.cpp
+	#./controller/SaveController.cpp
 )
 set(VIEWHDRS
 	# view
@@ -294,14 +300,17 @@ set(MISCHDRS
 	./configuration/FitnessConfiguration.h
 	./configuration/EnvironmentConfiguration.h
 	./configuration/EvolutionConfiguration.h
+	./configuration/PopulationConfiguration.h
 	./configuration/OgreSystemConfigStrings.h
 	
 	# logger
 	./utils/logging/Logger.h
+	./utils/Randomness.h
 )
 set(MISCSRCS
 	# logger
 	./utils/logging/Logger.cpp
+	./utils/Randomness.cpp
 )
 
 set(TESTHDRS
@@ -315,8 +324,12 @@ set(TESTSRCS
     #${VIEWSRCS}
     #${CONTROLLERSRCS}
     ${MISCSRCS}
-    ./model/evolution/juries/VelocityTestCase.cpp
-    ./model/evolution/juries/OnesTestCase.cpp
+    ./model/evolution/juries/Velocity_test.cpp
+    ./model/evolution/juries/Ones_test.cpp
+    ./model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
+    ./model/evolution/population/creature/genome/MorphoGeneBranch_test.cpp
+    ./model/evolution/population/creature/genome/MorphoGene_test.cpp
+    ./model/evolution/population/creature/genome/Genome_test.cpp
     
     #test runner
     ./test/TestRunner.cpp

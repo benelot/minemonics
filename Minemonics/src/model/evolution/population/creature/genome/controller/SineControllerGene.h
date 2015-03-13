@@ -42,7 +42,7 @@ public:
 
 	void initialize();
 
-	bool equals(const SineControllerGene& sineControllerGene);
+	bool equals(const SineControllerGene& sineControllerGene) const;
 
 	/**
 	 * Give access to boost serialization
@@ -111,5 +111,6 @@ private:
 	double mFrequency;
 
 };
+BOOST_CLASS_VERSION(SineControllerGene, 1)
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_SINECONTROLLERGENE_H_ */
