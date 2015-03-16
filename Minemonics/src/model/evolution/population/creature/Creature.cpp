@@ -57,23 +57,23 @@ void Creature::initialize(double bushiness) {
 }
 
 Creature::~Creature() {
-	// TODO Auto-generated destructor stub
+	while (!mJuries.empty()) {
+		Jury* f = mJuries.back();
+		mJuries.pop_back();
+		delete f;
+	}
 }
 
-bool Creature::equals(const Creature & creature) const
-{
-	if(mName != creature.mName)
-	{
+bool Creature::equals(const Creature & creature) const {
+	if (mName != creature.mName) {
 		return false;
 	}
 
-	if(mDeveloped != creature.mDeveloped)
-	{
+	if (mDeveloped != creature.mDeveloped) {
 		return false;
 	}
 
-	if(!mGenotype.equals(creature.mGenotype))
-	{
+	if (!mGenotype.equals(creature.mGenotype)) {
 		return false;
 	}
 
@@ -82,19 +82,17 @@ bool Creature::equals(const Creature & creature) const
 //			creature.mJuries.begin();
 //	for (; it != mJuries.end(), it2 != creature.mJuries.end();
 //			it++, it2++) {
-		//TODO:: Add equals for juries
+	//TODO:: Add equals for juries
 //		if (!it->equals(*(it2))) {
 //			return false;
 //		}
 //	}
 
-	if(mSegmentsDepthLimit != creature.mSegmentsDepthLimit)
-	{
+	if (mSegmentsDepthLimit != creature.mSegmentsDepthLimit) {
 		return false;
 	}
 
-	if(mTotalSegmentQtyLimit != creature.mTotalSegmentQtyLimit)
-	{
+	if (mTotalSegmentQtyLimit != creature.mTotalSegmentQtyLimit) {
 		return false;
 	}
 

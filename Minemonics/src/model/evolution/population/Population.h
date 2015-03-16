@@ -65,10 +65,23 @@ public:
 	Population();
 	virtual ~Population();
 
+	/**
+	 * Initializes the population and adds creatures up to the creatureQty.
+	 * @param creatureQty The number of creatures that the population will consist of in every generation.
+	 */
 	void initialize(int creatureQty);
 
+	/**
+	 * Adds a new creature to the population with the bushiness as a input.
+	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
+	 */
 	void addNewCreature(double bushiness);
 
+	/**
+	 * Tests if a population is equal to another population.
+	 * @param population The population to test for equality.
+	 * @return If this population and the other are equal.
+	 */
 	bool equals(const Population & population) const;
 
 	/**
@@ -85,10 +98,10 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 			const Population &population) {
 		os << population.mCreatureQty;
-		std::vector<Creature>::const_iterator it;
+		std::vector<Creature*>::const_iterator it;
 		for (it = population.mCreatures.begin();
 				it != population.mCreatures.end(); it++) {
-			os << (*it);
+			os << (**it);
 		}
 		return os;
 
@@ -106,8 +119,14 @@ public:
 	}
 
 private:
-	std::vector<Creature> mCreatures;
+	/**
+	 * The creatures living in this population. All creatures in one population can mate together.
+	 */
+	std::vector<Creature*> mCreatures;
 
+	/**
+	 * The number of creatures that the population will consist of in every generation.
+	 */
 	int mCreatureQty;
 };
 

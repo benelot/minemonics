@@ -53,6 +53,7 @@ protected:
 
 TEST_F(NameGeneratorTest,namesAreUnique) {
 	for (int i = 0; i < 100; i++) {
+		//std::cout << names.at(i) << std::endl;
 		for (int j = 0; j < 100; j++) {
 			if (i != j) {
 				ASSERT_TRUE(names.at(i) != names.at(j));

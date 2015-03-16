@@ -41,7 +41,7 @@ NameGenerator::~NameGenerator() {
 	// TODO Auto-generated destructor stub
 }
 
-void NameGenerator::initialize(){
+void NameGenerator::initialize() {
 	//Here I will create an array of prefixes to help generate names.
 	// I am banking on multiplication to ensure a large number of names
 	// by using 7 prefixes and 20 stems, and 16 suffixes I should be able to
@@ -78,10 +78,11 @@ void NameGenerator::initialize(){
 			//hobbits
 			"Ever", "Ferd", "Isen", "Dino" };
 
-	mNamePrefix.assign(namePrefix, namePrefix + sizeof(namePrefix)/sizeof(namePrefix[0]));
+	mNamePrefix.assign(namePrefix,
+			namePrefix + sizeof(namePrefix) / sizeof(namePrefix[0]));
 
-	std::string nameSuffix[] = { "", "us", "ix", "ox", "ith", "ath",
-			"um", "ator", "or", "axia", "imus", "ais", "itur", "orex", "o", "y",
+	std::string nameSuffix[] = { "", "us", "ix", "ox", "ith", "ath", "um",
+			"ator", "or", "axia", "imus", "ais", "itur", "orex", "o", "y",
 			//dwarfish
 			"aim", "a", "ain", "ala", "ak", "ana", "ar", "ip", "i", "ia", "ur",
 			"ona", "im", "ila", "in", "ina", "or", "ola", "o", "on",
@@ -121,22 +122,28 @@ void NameGenerator::initialize(){
 			//hobbits
 			"acar", "gard", "fast", "wise", "mond" };
 
-	mNameSuffix.assign(nameSuffix, nameSuffix + sizeof(nameSuffix)/sizeof(nameSuffix[0]));
+	mNameSuffix.assign(nameSuffix,
+			nameSuffix + sizeof(nameSuffix) / sizeof(nameSuffix[0]));
 
 	std::string nameStems[] = { "", "adur", "aes", "anim", "apoll", "imac",
 			"educ", "equis", "extr", "guius", "hann", "equi", "amora", "hum",
 			"iace", "ille", "inept", "iuv", "obe", "ocul", "orbis" };
 
-	mNameStems.assign(nameStems, nameStems + sizeof(nameStems)/sizeof(nameStems[0]));
+	mNameStems.assign(nameStems,
+			nameStems + sizeof(nameStems) / sizeof(nameStems[0]));
 }
 
 std::string NameGenerator::generateName() {
 	std::string newName;
 	newName.append(
-			mNamePrefix.at(mRandomness.nextPosInt(0, mNamePrefix.size()-1)));
-	newName.append(mNameStems.at(abs(mRandomness.nextNormalInt(0, mNameStems.size()-1))));
+			mNamePrefix.at(mRandomness.nextPosInt(0, mNamePrefix.size() - 1)));
+	if (mRandomness.nextPosInt(0, 1)) {
+		newName.append(
+				mNameStems.at(
+						mRandomness.nextPosInt(0, mNameStems.size() - 1)));
+	}
 	newName.append(
-			mNameSuffix.at(mRandomness.nextPosInt(0, mNameSuffix.size()-1)));
+			mNameSuffix.at(mRandomness.nextPosInt(0, mNameSuffix.size() - 1)));
 
 	//Make the first letter capital...
 	newName[0] = toupper(newName.at(0));

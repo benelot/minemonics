@@ -48,7 +48,11 @@ Genome::Genome() {
 }
 
 Genome::~Genome() {
-
+	while (!mGenes.empty()) {
+		MorphoGene* f = mGenes.back();
+		mGenes.pop_back();
+		delete f;
+	}
 }
 
 void Genome::createRandomGenome(double bushiness) {
@@ -72,10 +76,11 @@ void Genome::linkRandomGenes() {
 	Randomness randomness;
 	std::vector<MorphoGene*>::iterator geneIt = mGenes.begin();
 	for (; geneIt != mGenes.end(); geneIt++) {
-		std::vector<MorphoGeneBranch*>::iterator branchIt = (*geneIt)->getGeneBranches().begin();
-		for(;branchIt != (*geneIt)->getGeneBranches().end();branchIt++)
-		{
-			(*branchIt)->setBranchGeneType(randomness.nextPosInt(0,mGenes.size()));
+		std::vector<MorphoGeneBranch*>::iterator branchIt =
+				(*geneIt)->getGeneBranches().begin();
+		for (; branchIt != (*geneIt)->getGeneBranches().end(); branchIt++) {
+			(*branchIt)->setBranchGeneType(
+					randomness.nextPosInt(0, mGenes.size()));
 		}
 	}
 }
@@ -85,7 +90,7 @@ bool Genome::equals(const Genome & genome) const {
 	std::vector<MorphoGene*>::const_iterator it = mGenes.begin();
 	std::vector<MorphoGene*>::const_iterator it2 = genome.mGenes.begin();
 	for (; it != mGenes.end(), it2 != genome.mGenes.end(); it++, it2++) {
-		if (!(*it)->equals(**(it2))) {
+		if (!(*it)->equals(**it2)) {
 			return false;
 		}
 	}

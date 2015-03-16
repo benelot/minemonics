@@ -36,7 +36,7 @@
 
 /**
  * A gene is part of the complete genome of a creature. It encodes for a certain
- * part of it, be it a certain body part, sensor type, an actuator or a neuronal
+ * part of it, be it a certain body part, sensor type, an actuator or a neural
  * network connection.
  *
  * @author leviathan
@@ -55,6 +55,12 @@ MorphoGene::~MorphoGene() {
 	if (mControllerGene != NULL) {
 		delete mControllerGene;
 		mControllerGene = NULL;
+	}
+
+	while (!mGeneBranches.empty()) {
+		MorphoGeneBranch* f = mGeneBranches.back();
+		mGeneBranches.pop_back();
+		delete f;
 	}
 }
 
@@ -160,7 +166,7 @@ bool MorphoGene::equals(const MorphoGene & morphoGene) const {
 			morphoGene.mGeneBranches.begin();
 	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
 			it++, it2++) {
-		if (!(*it)->equals((**it2))) {
+		if (!(*it)->equals(**it2)) {
 			return false;
 		}
 	}

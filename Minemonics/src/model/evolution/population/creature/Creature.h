@@ -43,6 +43,11 @@ class Creature {
 public:
 	Creature();
 	virtual ~Creature();
+
+	/**
+	 * Initializes a creature with random values for its genome, name, total segments quantity and segments path limit.
+	 * @param bushiness
+	 */
 	void initialize(double bushiness);
 
 	/**
