@@ -80,10 +80,10 @@ public:
 				<< "/Joint Rotation:(" << gene.mJointPitch << ","
 				<< gene.mJointYaw << "," << gene.mJointRoll
 				<< ")/Gene Branches:";
-		std::vector<MorphoGeneBranch>::const_iterator it;
+		std::vector<MorphoGeneBranch*>::const_iterator it;
 		for (it = gene.mGeneBranches.begin(); it != gene.mGeneBranches.end();
 				it++) {
-			os << (*it);
+			os << (**it);
 		}
 		return os;
 	}
@@ -150,20 +150,16 @@ public:
 		mControllerGene = controllerGene;
 	}
 
-	const MorphoGene* getFollowUpGene() {
+	const int getFollowUpGene() {
 		return mFollowUpGene;
 	}
 
-	void setFollowUpGene(MorphoGene*& followUpGene) {
+	void setFollowUpGene(int followUpGene) {
 		mFollowUpGene = followUpGene;
 	}
 
-	const std::vector<MorphoGeneBranch>& getGeneBranches() {
+	std::vector<MorphoGeneBranch*>& getGeneBranches() {
 		return mGeneBranches;
-	}
-
-	void setGeneBranches(const std::vector<MorphoGeneBranch>& geneBranches) {
-		mGeneBranches = geneBranches;
 	}
 
 	double getJointAnchorX() const {
@@ -268,7 +264,7 @@ private:
 	 * chosen to continue when repeats are exhausted has already had its own type's repeats
 	 * exhausted, this will also terminate growth.
 	 */
-	MorphoGene* mFollowUpGene;
+	int mFollowUpGene;
 
 	/**
 	 * Dimensions of the segment.
@@ -294,7 +290,7 @@ private:
 	/**
 	 * A vector of genetic branches
 	 */
-	std::vector<MorphoGeneBranch> mGeneBranches;
+	std::vector<MorphoGeneBranch*> mGeneBranches;
 
 	/**
 	 * Colors red, green, blue

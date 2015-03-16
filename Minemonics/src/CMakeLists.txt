@@ -208,6 +208,7 @@ set(MODELHDRS
 	./model/evolution/juries/Jury.h
 	./model/evolution/juries/Ones.h
 	./model/evolution/juries/Velocity.h
+	./model/evolution/population/Population.h
 	./model/evolution/population/creature/Creature.h
 	./model/evolution/population/creature/genome/Genome.h
 	./model/evolution/population/creature/genome/MorphoGene.h
@@ -220,6 +221,7 @@ set(MODELSRCS
 	./model/evolution/juries/Jury.cpp
 	./model/evolution/juries/Ones.cpp
 	./model/evolution/juries/Velocity.cpp
+	./model/evolution/population/Population.cpp
 	./model/evolution/population/creature/Creature.cpp
 	./model/evolution/population/creature/genome/Genome.cpp
 	./model/evolution/population/creature/genome/MorphoGene.cpp
@@ -306,11 +308,13 @@ set(MISCHDRS
 	# logger
 	./utils/logging/Logger.h
 	./utils/Randomness.h
+	./utils/NameGenerator.h
 )
 set(MISCSRCS
 	# logger
 	./utils/logging/Logger.cpp
 	./utils/Randomness.cpp
+	./utils/NameGenerator.cpp
 )
 
 set(TESTHDRS
@@ -330,6 +334,9 @@ set(TESTSRCS
     ./model/evolution/population/creature/genome/MorphoGeneBranch_test.cpp
     ./model/evolution/population/creature/genome/MorphoGene_test.cpp
     ./model/evolution/population/creature/genome/Genome_test.cpp
+    ./model/evolution/population/creature/Creature_test.cpp
+    ./model/evolution/population/Population_test.cpp
+    ./utils/NameGenerator_test.cpp
     
     #test runner
     ./test/TestRunner.cpp

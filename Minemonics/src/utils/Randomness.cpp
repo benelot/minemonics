@@ -44,7 +44,7 @@ Randomness::Randomness() {
 }
 
 Randomness::~Randomness() {
-	// TODO Auto-generated destructor stub
+
 }
 
 /**

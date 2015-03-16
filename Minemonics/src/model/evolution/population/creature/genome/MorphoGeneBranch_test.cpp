@@ -64,10 +64,10 @@ protected:
 
 	virtual void TearDown() {
 		delete geneBranch;
-		geneBranch = 0;
+		geneBranch = NULL;
 
 		delete geneBranch2;
-		geneBranch2 = 0;
+		geneBranch2 = NULL;
 	}
 	MorphoGeneBranch* geneBranch;
 

@@ -45,7 +45,7 @@ protected:
 
 	virtual void TearDown() {
 		delete gene;
-		gene = 0;
+		gene = NULL;
 	}
 	MorphoGene* gene;
 };

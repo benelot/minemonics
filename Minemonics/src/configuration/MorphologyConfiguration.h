@@ -66,9 +66,30 @@ public:
 	static const double BODY_SEGMENT_INITIAL_TYPE_REPEATS = 12;
 
 	/**
-	 * The initial max branch number
+	 * The initial mean branch number
 	 */
-	static const double BODY_BRANCH_INITIAL_MAX = 5;
+	static const double BODY_BRANCH_INITIAL_MEAN = 5;
+	static const double BODY_BRANCH_INITIAL_VAR = 5;
+
+	/**
+	 * Initial segments depth mean
+	 */
+	static const double BODY_SEGMENTS_DEPTH_INITIAL_MEAN = 5;
+
+	/**
+	 * Initial segments depth variance
+	 */
+	static const double BODY_SEGMENTS_DEPTH_INITIAL_VAR = 5;
+
+	/**
+	 * Initial total segments mean
+	 */
+	static const double BODY_SEGMENTS_TOTAL_INITIAL_MEAN = 20;
+
+	/**
+	 * Initial total segment variance
+	 */
+	static const double BODY_SEGMENTS_TOTAL_INITIAL_VAR = 10;
 };
 
 #endif /* MORPHOLOGYCONFIGURATION_H_ */

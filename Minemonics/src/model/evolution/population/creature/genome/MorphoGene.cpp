@@ -45,14 +45,17 @@
 
 MorphoGene::MorphoGene() :
 		mColorR(0), mColorG(0), mColorB(0), mControllerGene(NULL), mFollowUpGene(
-		NULL), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(
+				-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(
 				0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(0), mRepetitionLimit(
 				0), mX(0), mY(0), mZ(0) {
 
 }
 
 MorphoGene::~MorphoGene() {
-// TODO Auto-generated destructor stub
+	if (mControllerGene != NULL) {
+		delete mControllerGene;
+		mControllerGene = NULL;
+	}
 }
 
 void MorphoGene::initialize(double bushiness) {
@@ -99,12 +102,13 @@ void MorphoGene::initialize(double bushiness) {
 			MorphologyConfiguration::BODY_SEGMENT_INITIAL_TYPE_REPEATS);
 
 	//The follow up gene follows instead if this gene's repetition limit is reached.
-	mFollowUpGene = NULL;
+	mFollowUpGene = -1;
 
 	int branchQty = randomness.nextPosInt(0, bushiness);
 
 	for (int i = 0; i < branchQty; i++) {
-		MorphoGeneBranch branch;
+		MorphoGeneBranch* branch = new MorphoGeneBranch();
+		branch->initialize();
 		mGeneBranches.push_back(branch);
 	}
 
@@ -130,31 +134,33 @@ bool MorphoGene::equals(const MorphoGene & morphoGene) const {
 		return false;
 	}
 
-	if (mControllerGene != NULL && morphoGene.mControllerGene != NULL && mControllerGene->equals(*morphoGene.mControllerGene)) {
+	if ((mControllerGene == NULL && morphoGene.mControllerGene != NULL)
+			|| (mControllerGene != NULL && morphoGene.mControllerGene == NULL)) {
+		return false;
+	} else if (mControllerGene != NULL && morphoGene.mControllerGene != NULL
+			&& mControllerGene->equals(*morphoGene.mControllerGene)) {
 		switch (mControllerGene->getControllerGeneType()) {
-			case ControllerGene::SineControllerGene:
-				if(((SineControllerGene*)mControllerGene)->equals(((SineControllerGene&)(*morphoGene.mControllerGene))))
-				{
-					return true;
-				}
-				break;
-			default:
-				break;
+		case ControllerGene::SineControllerGene:
+			if (!((SineControllerGene*) mControllerGene)->equals(
+					((SineControllerGene&) (*morphoGene.mControllerGene)))) {
+				return false;
+			}
+			break;
+		default:
+			break;
 		}
+	}
+
+	if (mFollowUpGene != morphoGene.mFollowUpGene) {
 		return false;
 	}
 
-	if (mFollowUpGene != NULL && morphoGene.mFollowUpGene != 0
-			&& mFollowUpGene->equals(*morphoGene.mFollowUpGene)) {
-		return false;
-	}
-
-	std::vector<MorphoGeneBranch>::const_iterator it = mGeneBranches.begin();
-	std::vector<MorphoGeneBranch>::const_iterator it2 =
+	std::vector<MorphoGeneBranch*>::const_iterator it = mGeneBranches.begin();
+	std::vector<MorphoGeneBranch*>::const_iterator it2 =
 			morphoGene.mGeneBranches.begin();
 	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
 			it++, it2++) {
-		if (!it->equals(*(it2))) {
+		if (!(*it)->equals((**it2))) {
 			return false;
 		}
 	}

@@ -29,7 +29,7 @@
 #include "utils/Randomness.h"
 
 MorphoGeneBranch::MorphoGeneBranch() :
-		mActive(false), mBranchGeneType(NULL), mFlipped(false), mJointAnchorX(
+		mActive(false), mBranchGeneType(-1), mFlipped(false), mJointAnchorX(
 				0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(
 				0), mJointRoll(0), mMirrored(0) {
 
@@ -70,7 +70,8 @@ void MorphoGeneBranch::initialize() {
 }
 
 MorphoGeneBranch::~MorphoGeneBranch() {
-	// TODO Auto-generated destructor stub
+	//TODO:Remove test action
+	mActive = false;
 }
 
 bool MorphoGeneBranch::equals(const MorphoGeneBranch& geneBranch) const {
