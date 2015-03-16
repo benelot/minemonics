@@ -66,12 +66,7 @@ SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mTestObject(NULL), parents(
-				EvolutionConfiguration::POPULATIONSIZE,
-				ChromosomeT<bool>(EvolutionConfiguration::DIMENSIONS)), offsprings(
-				EvolutionConfiguration::POPULATIONSIZE,
-				ChromosomeT<bool>(EvolutionConfiguration::DIMENSIONS)), jury(1), t(
-				0) {
+		NULL), mFpsPanel(NULL), mTestObject(NULL), jury(1), t(0) {
 
 	// main frame timer initialization
 	mStart = boost::posix_time::second_clock::local_time();
@@ -145,27 +140,6 @@ void SimulationManager::createFrameListener(void) {
 		cubes.push_back(entNode);
 	}
 
-	//
-	// maximization task
-	//
-	parents.setMaximize();
-	offsprings.setMaximize();
-
-	//
-	// initialize all chromosomes of parent population
-	//
-	for (i = 0; i < parents.size(); ++i)
-		parents[i][0].initialize();
-
-	//
-	// evaluate parents (only needed for elitist strategy)
-	//
-	if (EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY > 0)
-		for (i = 0; i < parents.size(); ++i) {
-			jury.setEvaluationSubject(parents[i][0]);
-			jury.evaluateFitness();
-			parents[i].setFitness(jury.getFitness());
-		}
 }
 
 //-------------------------------------------------------------------------------------
@@ -226,40 +200,64 @@ void SimulationManager::updatePhysics() {
 
 //TODO: Use for creature evolution, but clean up afterwards
 void SimulationManager::updateEvolution() {
-	//
-	// recombine by crossing over two parents
-	//
-	offsprings = parents;
-	int i = 0;
-	for (i = 0; i < offsprings.size() - 1; i += 2)
-		if (Rng::coinToss(EvolutionConfiguration::CrossProb))
-			offsprings[i][0].crossover(offsprings[i + 1][0],
-					EvolutionConfiguration::CrossPoints);
-	//
-	// mutate by flipping bits
-	//
-	for (i = 0; i < offsprings.size(); ++i)
-		offsprings[i][0].flip(EvolutionConfiguration::FlipProb);
-	//
-	// evaluate objective function
-	//
-	for (i = 0; i < offsprings.size(); ++i) {
-		jury.setEvaluationSubject((offsprings[i][0]));
-		jury.evaluateFitness();
-		offsprings[i].setFitness(jury.getFitness());
-	}
-	//
-	// scale fitness values and use proportional selection
-	//
-	//offsprings.linearDynamicScaling(window, t);
-	parents.selectProportional(offsprings, EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY);
-
-	t++;
-	//
-	// print out best value found so far
-	//
-	std::cout << "Generation " << t << "s best individual has fitness value "
-			<< "\t" << parents.best().fitnessValue() << std::endl;
+//
+//	//
+//	// maximization task
+//	//
+//	int i = 0;
+//	parents.setMaximize();
+//	offsprings.setMaximize();
+//
+//	//
+//	// initialize all chromosomes of parent population
+//	//
+//	for (i = 0; i < parents.size(); ++i)
+//		parents[i][0].initialize();
+//
+//	//
+//	// evaluate parents (only needed for elitist strategy)
+//	//
+//	if (EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY > 0)
+//		for (i = 0; i < parents.size(); ++i) {
+//			jury.setEvaluationSubject(parents[i][0]);
+//			jury.evaluateFitness();
+//			parents[i].setFitness(jury.getFitness());
+//		}
+//
+//	//
+//	// recombine by crossing over two parents
+//	//
+//	offsprings = parents;
+//	for (i = 0; i < offsprings.size() - 1; i += 2)
+//		if (Rng::coinToss(EvolutionConfiguration::CrossProb))
+//			offsprings[i][0].crossover(offsprings[i + 1][0],
+//					EvolutionConfiguration::CrossPoints);
+//	//
+//	// mutate by flipping bits
+//	//
+//	for (i = 0; i < offsprings.size(); ++i)
+//		offsprings[i][0].flip(EvolutionConfiguration::FlipProb);
+//	//
+//	// evaluate objective function
+//	//
+//	for (i = 0; i < offsprings.size(); ++i) {
+//		jury.setEvaluationSubject((offsprings[i][0]));
+//		jury.evaluateFitness();
+//		offsprings[i].setFitness(jury.getFitness());
+//	}
+//	//
+//	// scale fitness values and use proportional selection
+//	//
+//	//offsprings.linearDynamicScaling(window, t);
+//	parents.selectProportional(offsprings,
+//			EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY);
+//
+//	t++;
+//	//
+//	// print out best value found so far
+//	//
+//	std::cout << "Generation " << t << "s best individual has fitness value "
+//			<< "\t" << parents.best().fitnessValue() << std::endl;
 
 }
 
@@ -352,42 +350,9 @@ bool SimulationManager::quit() {
  */
 void SimulationManager::createScene(void) {
 
-	SaveController<Creature> saveController;
-	Creature originalCreature(1);
-	MorphoGene gene1;
-	MorphoGene gene2;
-	originalCreature.getGenotype().addGene(gene1);
-	originalCreature.getGenotype().addGene(gene2);
-
-	// display the complete schedule
-	std::cout << "Original creature\n";
-	std::cout << originalCreature;
-
-	std::string filename(boost::archive::tmpdir());
-	filename += "/demofile.txt";
-
-	// save the creature
-	saveController.save(originalCreature, filename.c_str());
-
-	// ... some time later
-	// make  a new creature
-	Creature newCreature(1);
-
-	saveController.restore(newCreature, filename.c_str());
-
-	// and display
-	std::cout << "\nrestored creature\n";
-	std::cout << newCreature;
-
-	std::cout << "\n";
-	std::cout << originalCreature.getGenotype();
-	std::cout << "\n";
-	std::cout << newCreature.getGenotype();
-	// should be the same as the old one. (except for the pointer values)
 // Initialize the logger
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
-
 
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);

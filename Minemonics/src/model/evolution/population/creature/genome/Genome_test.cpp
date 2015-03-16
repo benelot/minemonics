@@ -39,6 +39,7 @@ protected:
 		// Set up an object of the class you want to test
 		genome = new Genome();
 		genome->createRandomGenome(30);
+		genome->linkRandomGenes();
 	}
 
 	virtual void TearDown() {
@@ -48,7 +49,6 @@ protected:
 	}
 	Genome* genome;
 };
-
 
 class GenomeSerializationTest: public ::testing::Test {
 protected:
@@ -60,30 +60,44 @@ protected:
 
 		SaveController<Genome> saveController;
 
-		saveController.save(*genome,"Genome.test");
+		saveController.save(*genome, "Genome.test");
 
-		saveController.restore(*genome2,"Genome.test");
+		saveController.restore(*genome2, "Genome.test");
 	}
 
 	virtual void TearDown() {
 		delete genome;
-		genome = 0;
+		genome = NULL;
 		delete genome2;
-		genome2 = 0;
+		genome2 = NULL;
 	}
 	Genome* genome;
 
 	Genome* genome2;
 };
 
+TEST_F(GenomeTest,hasNormalGenes) {
+	ASSERT_TRUE(
+			PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
+					- PopulationConfiguration::POPULATION_GENES_INITIAL_VAR
+					<= genome->getGenes().size()
+					<= PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
+							+ PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
+}
 
-TEST_F(GenomeTest,DummyTest) {
-	ASSERT_TRUE(PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN - PopulationConfiguration::POPULATION_GENES_INITIAL_VAR <= genome->getGenes().size() <= PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN + PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
+TEST_F(GenomeTest,areAllBranchesSet) {
+	std::vector<MorphoGene*>::iterator geneIt = genome->getGenes().begin();
+	for (; geneIt != genome->getGenes().end(); geneIt++) {
+		std::vector<MorphoGeneBranch*>::iterator branchIt =
+				(*geneIt)->getGeneBranches().begin();
+		for (; branchIt != (*geneIt)->getGeneBranches().end(); branchIt++) {
+			ASSERT_TRUE((*branchIt)->getBranchGeneType() != -1);
+		}
+	}
 }
 
 TEST_F(GenomeSerializationTest,isEqualAfterSerialization) {
 	ASSERT_TRUE(genome != genome2);
 	ASSERT_TRUE(genome->equals(*genome2));
 }
-
 
