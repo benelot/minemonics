@@ -12,7 +12,7 @@
 
 class EnvironmentConfiguration {
 public:
-	static const Environment::EnvironmentType ENVIRONMENTTYPE = Environment::PLANE;
+	static const Environment::EnvironmentType ENVIRONMENTTYPE = Environment::HILLS;
 };
 
 #endif /* ENVIRONMENTCONFIGURATION_H_ */

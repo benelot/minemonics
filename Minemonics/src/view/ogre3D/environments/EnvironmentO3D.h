@@ -53,11 +53,25 @@ public:
 
 	void update();
 
-	class SimpleTerrainDefiner: public TerrainPagedWorldSection::TerrainDefiner {
+	class ImageTerrainDefiner: public TerrainPagedWorldSection::TerrainDefiner {
 	public:
 		virtual void define(TerrainGroup* terrainGroup, long x, long y) {
 			Image img;
 			img.load("terrain.png",
+					ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+			if (x % 2)
+				img.flipAroundY();
+			if (y % 2)
+				img.flipAroundX();
+			terrainGroup->defineTerrain(x, y, &img);
+		}
+	};
+
+	class PlaneTerrainDefiner: public TerrainPagedWorldSection::TerrainDefiner {
+	public:
+		virtual void define(TerrainGroup* terrainGroup, long x, long y) {
+			Image img;
+			img.load("plane.png",
 					ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 			if (x % 2)
 				img.flipAroundY();
@@ -106,6 +120,9 @@ public:
 	}
 
 protected:
+
+	void initBlendMaps(Ogre::Terrain* terrain);
+
 	SimulationManager* mSimulationMgr;
 
 	TerrainGlobalOptions* mTerrainGlobals;
