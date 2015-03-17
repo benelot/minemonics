@@ -9,25 +9,18 @@
 #include "OpenSeaO3D.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
+#include "SimulationManager.h"
 
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 OpenSeaO3D::OpenSeaO3D() {

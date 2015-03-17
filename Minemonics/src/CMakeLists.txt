@@ -113,7 +113,7 @@ if (MINGW)
 	# search names with "lib". This is the workaround.
 	set(CMAKE_FIND_LIBRARY_PREFIXES ${CMAKE_FIND_LIBRARY_PREFIXES} "")
 endif ()
-
+#include <OgreSceneManager.h>
   
 set(MINEMONICS_BOOST_COMPONENTS log)
 find_package(Boost COMPONENTS ${MINEMONICS_BOOST_COMPONENTS} REQUIRED)
@@ -220,9 +220,15 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 
 set(MODELHDRS
 	# model
+	./model/environments/EnvironmentPhysics.h
+	./model/environments/bullet/EnvironmentBt.h
+	./model/environments/bullet/HillsBt.h
+	./model/environments/bullet/PlaneBt.h
+	
 	./model/evolution/juries/Jury.h
 	./model/evolution/juries/Ones.h
 	./model/evolution/juries/Velocity.h
+	
 	./model/evolution/population/Population.h
 	./model/evolution/population/creature/Creature.h
 	./model/evolution/population/creature/genome/Genome.h
@@ -233,9 +239,15 @@ set(MODELHDRS
 )
 set(MODELSRCS
     # model
+    ./model/environments/EnvironmentPhysics.cpp
+	./model/environments/bullet/EnvironmentBt.cpp
+	./model/environments/bullet/HillsBt.cpp
+	./model/environments/bullet/PlaneBt.cpp
+   
 	./model/evolution/juries/Jury.cpp
 	./model/evolution/juries/Ones.cpp
 	./model/evolution/juries/Velocity.cpp
+	
 	./model/evolution/population/Population.cpp
 	./model/evolution/population/creature/Creature.cpp
 	./model/evolution/population/creature/genome/Genome.cpp
@@ -265,32 +277,29 @@ set(CONTROLLERSRCS
 	./controller/input/OgreInputHandler.cpp
 	./controller/StateHandler.cpp
 	./controller/physics/PhysicsController.cpp
-	#./controller/SaveController.cpp
 )
 set(VIEWHDRS
 	# view
-	./view/general/environments/Environment.h
-	./view/general/environments/OpenSea.h
-	./view/general/environments/Hills.h
-	./view/general/environments/Plane.h
+	./view/environments/EnvironmentGraphics.h
+	./view/environments/Environment.h
 	./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h
 	./view/ogre3D/environments/EnvironmentO3D.h
 	./view/ogre3D/environments/OpenSeaO3D.h
 	./view/ogre3D/environments/PlaneO3D.h
 	./view/ogre3D/environments/HillsO3D.h
+	
     ## CEGUI
 	./view/CEGUI/GUISheetHandler.h
 	./view/CEGUI/ParamsPanel.h
 	./view/CEGUI/CEGUIBuilder.h
+	
 	## MathGL
     ./view/MathGL/MathGLWindow.h
 )
 set(VIEWSRCS
 	# view
-	./view/general/environments/Environment.cpp
-	./view/general/environments/Hills.cpp
-	./view/general/environments/OpenSea.cpp
-    ./view/general/environments/Plane.cpp
+	./view/environments/EnvironmentGraphics.cpp
+    ./view/environments/Environment.cpp
     ./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
 	./view/ogre3D/environments/EnvironmentO3D.cpp
 	./view/ogre3D/environments/HillsO3D.cpp

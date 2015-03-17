@@ -51,9 +51,7 @@
 //## model headers
 #include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
-#include "view/general/environments/Environment.h"
-#include "view/ogre3D/environments/HillsO3D.h"
-#include "view/ogre3D/environments/PlaneO3D.h"
+#include "view/environments/Environment.h"
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/CEGUIBuilder.h"
 
@@ -66,7 +64,8 @@ SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mTestObject(NULL), jury(1), t(0) {
+		NULL), mFpsPanel(NULL), mTestObject(NULL), jury(1), t(0), mSdlWindow(
+				NULL) {
 
 	// main frame timer initialization
 	mStart = boost::posix_time::second_clock::local_time();
@@ -121,6 +120,7 @@ void SimulationManager::createFrameListener(void) {
 	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
+	mPhysicsController.addBody(mTerrain->getBody());
 
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
@@ -405,10 +405,6 @@ void SimulationManager::createScene(void) {
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 // a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
 
-	CEGUI::GUIContext& guiContext =
-			CEGUI::System::getSingleton().createGUIContext(
-					mRenderer->getDefaultRenderTarget());
-	//guiContext.setRootWindow(mLayout);
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 // ###################
@@ -441,56 +437,44 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	switch (EnvironmentConfiguration::ENVIRONMENTTYPE) {
-	case Environment::HILLS:
-		// Create hills
-		mTerrain = new HillsO3D(this);
-		((HillsO3D*) mTerrain)->initialize(light);
-		break;
-	case Environment::PLANE:
-		//create plane
-		mTerrain = new PlaneO3D(this);
-		((PlaneO3D*) mTerrain)->initialize(light);
-		break;
-	case Environment::OPENSEA:
-		break;
-	}
+	mTerrain = new Environment(this, EnvironmentConfiguration::ENVIRONMENTTYPE);
+	mTerrain->initialize(light);
 
-// Create skyplane
+	// Create skyplane
 	Ogre::Plane plane;
 	plane.d = 100;
 	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
 
-//mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
+	//mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
 	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
 			0.5, 150, 150);
 
-// Ogrehead
+	// Ogrehead
 	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
 	Ogre::SceneNode* headNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
 	headNode->attachObject(ogreHead);
 	headNode->translate(Ogre::Vector3(1963, 50, 1660));
 
-// add the ninja
+	// add the ninja
 	Ogre::Entity *ninja = mSceneMgr->createEntity("Ninja", "ninja.mesh");
 	Ogre::SceneNode *ninjaNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode");
 	ninjaNode->attachObject(ninja);
 	ninjaNode->translate(Ogre::Vector3(1963, 50, 1660));
 
-// Create the scene node
+	// Create the scene node
 	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
 			Ogre::Vector3(-400, 200, 400));
 
-// Make it look towards the ninja
+	// Make it look towards the ninja
 	ninjaNode->yaw(Ogre::Degree(-45));
 
-// Create the pitch node
+	// Create the pitch node
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode1");
 	ninjaNode->attachObject(mCamera);
 
-// create the second camera node/pitch node
+	// create the second camera node/pitch node
 	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode2",
 			Ogre::Vector3(0, 200, 400));
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode2");

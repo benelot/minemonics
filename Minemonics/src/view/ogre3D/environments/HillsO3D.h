@@ -11,13 +11,14 @@
 //# corresponding header
 
 //# forward declarations
-
+class SimulationManager;
 //# system headers
 //## controller headers
 
 //## model headers
 
 //## view headers
+#include <OgreLight.h>
 #include <Terrain/OgreTerrain.h>
 #include <Terrain/OgreTerrainGroup.h>
 
@@ -29,21 +30,17 @@
 //## controller headers
 
 //## model headers
-
 //## view headers
+#include "view/ogre3D/environments/EnvironmentO3D.h"
 
 //## utils headers
 
-#include "view/general/environments/Hills.h"
-
-#include "view/ogre3D/environments/EnvironmentO3D.h"
-
-class HillsO3D: public Hills, public EnvironmentO3D {
+class HillsO3D: public EnvironmentO3D {
 public:
 	HillsO3D(SimulationManager* simulationMgr);
 	virtual ~HillsO3D();
 
-	void initialize(Light* l);
+	void initialize(Ogre::Light* l);
 	void update();
 
 	bool mTerrainsImported;

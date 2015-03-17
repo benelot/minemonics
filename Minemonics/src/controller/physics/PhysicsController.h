@@ -48,6 +48,8 @@ public:
 	void exitBulletPhysics();
 	void stepBulletPhysics(double timeStep);
 
+	void addBody(btRigidBody* body);
+
 	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}

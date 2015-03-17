@@ -44,7 +44,7 @@ void PhysicsController::initBulletPhysics() {
 		//btCollisionShape* groundShape = new btBoxShape(btVector3(50,50,50));
 		btCollisionShape* groundShape = new btStaticPlaneShape(
 				btVector3(0, 1, 0), 50);
-		mCollisionShapes.push_back(groundShape);
+
 
 		btScalar mass = 0; //rigidbody is static if mass is zero, otherwise dynamic
 		btVector3 localInertia(0, 0, 0);
@@ -127,4 +127,10 @@ void PhysicsController::exitBulletPhysics() {
 void PhysicsController::stepBulletPhysics(double timeStep) {
 	if (mDynamicsWorld) //step the simulation
 		mDynamicsWorld->stepSimulation(timeStep); //1.0f/60.0f);
+}
+
+void PhysicsController::addBody(btRigidBody* body)
+{
+	mCollisionShapes.push_back(body->getCollisionShape());
+	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
 }

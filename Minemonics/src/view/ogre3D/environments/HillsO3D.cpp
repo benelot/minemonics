@@ -38,7 +38,7 @@ HillsO3D::~HillsO3D() {
 	// TODO Auto-generated destructor stub
 }
 
-void HillsO3D::initialize(Light* l) {
+void HillsO3D::initialize(Ogre::Light* l) {
 	EnvironmentO3D::initialize("HillsO3D",l);
 	mPerlinNoiseTerrainGenerator = OGRE_NEW PerlinNoiseTerrainGenerator;
 			mTerrainPagedWorldSection->setDefiner(mPerlinNoiseTerrainGenerator);

@@ -16,6 +16,8 @@
 
 //# custom headers
 //## base headers
+#include "SimulationManager.h"
+
 //## configuration headers
 //## controller headers
 //## model headers
@@ -31,7 +33,7 @@ PlaneO3D::~PlaneO3D() {
 	// TODO Auto-generated destructor stub
 }
 
-void PlaneO3D::initialize(Light* l) {
+void PlaneO3D::initialize(Ogre::Light* l) {
 	EnvironmentO3D::initialize("PlaneO3D",l);
 	mTerrainPagedWorldSection->setDefiner(OGRE_NEW PlaneTerrainDefiner);
 }

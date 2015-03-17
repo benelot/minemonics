@@ -9,26 +9,18 @@
 #include "EnvironmentO3D.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
 #include "SimulationManager.h"
 
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 // max range for a int16
@@ -60,27 +52,27 @@ EnvironmentO3D::~EnvironmentO3D() {
 		OGRE_DELETE mTerrainGlobals;
 }
 
-void EnvironmentO3D::initialize(std::string fileName,Light* l) {
-	mTerrainGlobals = OGRE_NEW TerrainGlobalOptions();
+void EnvironmentO3D::initialize(std::string fileName,Ogre::Light* l) {
+	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
 
-	mTerrainGroup = OGRE_NEW TerrainGroup(mSimulationMgr->getSceneManager(), Terrain::ALIGN_X_Z,
+	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(mSimulationMgr->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
 	TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 	mTerrainGroup->setFilenameConvention(Ogre::String(),
 			Ogre::String("terrain"));
 	mTerrainGroup->setOrigin(mTerrainPos);
 	mTerrainGroup->setAutoUpdateLod(
-			TerrainAutoUpdateLodFactory::getAutoUpdateLod(BY_DISTANCE));
+			Ogre::TerrainAutoUpdateLodFactory::getAutoUpdateLod(Ogre::BY_DISTANCE));
 
 	configureTerrainDefaults (l);
 
 	// Paging setup
-	mPageManager = OGRE_NEW PageManager();
+	mPageManager = OGRE_NEW Ogre::PageManager();
 	// Since we're not loading any pages from .page files, we need a way just
 	// to say we've loaded them without them actually being loaded
 	mPageManager->setPageProvider(&mDummyPageProvider);
 	mPageManager->addCamera(mSimulationMgr->getCamera());
 	mPageManager->setDebugDisplayLevel(0);
-	mTerrainPaging = OGRE_NEW TerrainPaging(mPageManager);
+	mTerrainPaging = OGRE_NEW Ogre::TerrainPaging(mPageManager);
 	mPagedWorld = mPageManager->createWorld();
 	mTerrainPagedWorldSection = mTerrainPaging->createWorldSection(mPagedWorld,
 			mTerrainGroup, 400, 500, ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
@@ -89,7 +81,7 @@ void EnvironmentO3D::initialize(std::string fileName,Light* l) {
 	mTerrainGroup->freeTemporaryResources();
 }
 
-void EnvironmentO3D::configureTerrainDefaults(Light* l) {
+void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
 	// Configure global
 	mTerrainGlobals->setMaxPixelError(8);
 	// testing composite map
@@ -102,7 +94,7 @@ void EnvironmentO3D::configureTerrainDefaults(Light* l) {
 	mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
 
 	// Configure default import settings for if we use imported image
-	Terrain::ImportData& defaultimp = mTerrainGroup->getDefaultImportSettings();
+	Ogre::Terrain::ImportData& defaultimp = mTerrainGroup->getDefaultImportSettings();
 	defaultimp.terrainSize = TERRAIN_SIZE;
 	defaultimp.worldSize = TERRAIN_WORLD_SIZE;
 	defaultimp.inputScale = 600;
@@ -171,6 +163,6 @@ void EnvironmentO3D::initBlendMaps(Ogre::Terrain* terrain) {
 }
 
 void EnvironmentO3D::update() {
-	mTerrainGroup->autoUpdateLodAll(false, Any(Real(HOLD_LOD_DISTANCE)));
+	mTerrainGroup->autoUpdateLodAll(false, Ogre::Any(Ogre::Real(HOLD_LOD_DISTANCE)));
 }
 

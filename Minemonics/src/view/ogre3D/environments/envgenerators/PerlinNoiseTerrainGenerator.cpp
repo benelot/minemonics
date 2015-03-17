@@ -1,7 +1,23 @@
+//# corresponding header
+#include "PerlinNoiseTerrainGenerator.h"
+
+//# forward declarations
+//# system headers
 #include <stdlib.h>
 #include <math.h>
 #include <OgreMath.h>
-#include "PerlinNoiseTerrainGenerator.h"
+
+//## controller headers
+//## model headers
+//## view headers
+#include <OgreTerrainPagedWorldSection.h>
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
 
 using namespace Ogre;
 
