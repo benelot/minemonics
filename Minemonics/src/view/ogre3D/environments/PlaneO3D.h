@@ -31,15 +31,17 @@
 //## model headers
 
 //## view headers
-#include "view/general/evolution/environments/Hills.h"
+#include "view/general/environments/Hills.h"
 #include "EnvironmentO3D.h"
 
 //## utils headers
 
 class PlaneO3D: public Hills, public EnvironmentO3D {
 public:
-	PlaneO3D(Ogre::SceneManager* mSceneMgr);
+	PlaneO3D(SimulationManager* simulationMgr);
 	virtual ~PlaneO3D();
+
+	void initialize(Light* l);
 
 	void defineTerrain(long x, long y);
 	void initBlendMaps(Ogre::Terrain* terrain);
@@ -47,9 +49,8 @@ public:
 	void getTerrainImage(bool flipX, bool flipY, Ogre::Image& img);
 	void buildTerrain();
 	void destroy();
+	void update();
 
-	Ogre::TerrainGlobalOptions* mTerrainGlobals;
-	Ogre::TerrainGroup* mTerrainGroup;
 	bool mTerrainsImported;
 };
 

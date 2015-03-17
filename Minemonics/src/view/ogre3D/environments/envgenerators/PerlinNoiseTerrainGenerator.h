@@ -1,8 +1,8 @@
 #pragma once
 
-#include "OgreTerrainPagedWorldSection.h"
+#include <OgreTerrainPagedWorldSection.h>
 
-#define B 0x100
+#define PERLIN_B 0x100
 using namespace Ogre;
 
 ///Use PerlinNoise algorithm to generate terrain height map
@@ -48,8 +48,8 @@ private:
 	Real mHeightScale;
 	Vector2 mOriginPoint;
 
-	int p[B + B + 2];
-	Vector3 g3[B + B + 2];
-	Vector2 g2[B + B + 2];
-	Real g1[B + B + 2];
+	int p[PERLIN_B + PERLIN_B + 2];
+	Vector3 g3[PERLIN_B + PERLIN_B + 2];
+	Vector2 g2[PERLIN_B + PERLIN_B + 2];
+	Real g1[PERLIN_B + PERLIN_B + 2];
 };

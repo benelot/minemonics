@@ -758,23 +758,24 @@
 		<pathentry kind="mac" name="__GXX_RTTI" path="" value="1"/>
 		<pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
 		<pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
-		<pathentry include="/usr/include/ois" kind="inc" path="" system="true"/>
-		<pathentry include="/usr/local/include/OGRE" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/local/share/OGRE/samples/Common/include" kind="inc" path="" system="true"/>
-		<pathentry include="/usr/local/include/OGRE/Overlay" kind="inc" path="" system="true"/>
 		<pathentry include="/home/leviathan/git/minemonics/Minemonics/src" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/x86_64-linux-gnu" kind="inc" path="" system="true"/>
-		<pathentry include="/usr/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/c++/4.8" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/x86_64-linux-gnu/c++/4.8" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/c++/4.8/backward" kind="inc" path="" system="true"/>
-		<pathentry include="/usr/local/include/cegui-0" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/local/include/OGRE" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/local/include/OGRE/Overlay" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/local/include/OGRE/Terrain" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/local/include/OGRE/Paging" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/SDL2" kind="inc" path="" system="true"/>
-		<pathentry include="/usr/local/include/mgl2/" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/local/include/cegui-0" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/local/include/bullet" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/local/include/mgl2/" kind="inc" path="" system="true"/>
 		<pathentry kind="src" path="[Source directory]"/>
 		<pathentry excluding="[Source directory]/|**/CMakeFiles/" kind="out" path=""/>
 	</storageModule>

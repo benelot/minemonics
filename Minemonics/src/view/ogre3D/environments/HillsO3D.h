@@ -34,14 +34,16 @@
 
 //## utils headers
 
-#include "view/general/evolution/environments/Hills.h"
+#include "view/general/environments/Hills.h"
 
-#include "view/ogre3D/evolution/environments/EnvironmentO3D.h"
+#include "view/ogre3D/environments/EnvironmentO3D.h"
 
 class HillsO3D: public Hills, public EnvironmentO3D {
 public:
-	HillsO3D(Ogre::SceneManager* mSceneMgr);
+	HillsO3D(SimulationManager* simulationMgr);
 	virtual ~HillsO3D();
+
+	void initialize(Light* l);
 
 	void defineTerrain(long x, long y);
 	void initBlendMaps(Ogre::Terrain* terrain);
@@ -49,9 +51,8 @@ public:
 	void getTerrainImage(bool flipX, bool flipY, Ogre::Image& img);
 	void buildTerrain();
 	void destroy();
+	void update();
 
-	Ogre::TerrainGlobalOptions* mTerrainGlobals;
-	Ogre::TerrainGroup* mTerrainGroup;
 	bool mTerrainsImported;
 };
 

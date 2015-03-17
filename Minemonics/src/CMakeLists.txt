@@ -67,14 +67,29 @@ find_package(OGRE REQUIRED)
 #   These variables are defined in FindOGRE.cmake, mine is
 #   found at /usr/local/lib/OGRE/cmake/
 if (OGRE_Terrain_FOUND)
-# pretty sure the following include is unneeded
-  # include_directories(${OGRE_Terrain_INCLUDE_DIRS})
 # append OgreTerrain to the end of the OGRE_LIBRARIES variable
   set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Terrain_LIBRARIES})  
   message(STATUS "Found OGRE_Terrain: ${OGRE_Terrain_LIBRARIES}")
 else (OGRE_Terrain_FOUND)
   message(SEND_ERROR "OgreTerrain Library not found.")
 endif(OGRE_Terrain_FOUND)
+
+
+if (OGRE_Paging_FOUND)
+# append OgrePaging to the end of the OGRE_LIBRARIES variable
+  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Paging_LIBRARIES})  
+  message(STATUS "Found OGRE_Paging: ${OGRE_Paging_LIBRARIES}")
+else (OGRE_Paging_FOUND)
+  message(SEND_ERROR "OgrePaging Library not found.")
+endif(OGRE_Paging_FOUND)
+
+if (OGRE_Overlay_FOUND)
+# append OgreOverlay to the end of the OGRE_LIBRARIES variable
+  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})  
+  message(STATUS "Found OGRE_Overlay: ${OGRE_Overlay_LIBRARIES}")
+else (OGRE_Overlay_FOUND)
+  message(SEND_ERROR "OgreOverlay Library not found.")
+endif(OGRE_Overlay_FOUND)
  
 ######################################################################
 # BOOST
@@ -254,16 +269,15 @@ set(CONTROLLERSRCS
 )
 set(VIEWHDRS
 	# view
-	./view/general/evolution/environments/Environment.h
-	./view/general/evolution/environments/OpenSea.h
-	./view/general/evolution/environments/Hills.h
-	./view/general/evolution/environments/Plane.h
-	./view/ogre3D/evolution/environments/EnvironmentO3D.h
-	./view/ogre3D/evolution/environments/OpenSeaO3D.h
-	./view/ogre3D/evolution/environments/PlaneO3D.h
-	./view/ogre3D/evolution/environments/HillsO3D.h
-	./view/ogre3D/GameState.h
-	./view/ogre3D/InputListeners.h
+	./view/general/environments/Environment.h
+	./view/general/environments/OpenSea.h
+	./view/general/environments/Hills.h
+	./view/general/environments/Plane.h
+	./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h
+	./view/ogre3D/environments/EnvironmentO3D.h
+	./view/ogre3D/environments/OpenSeaO3D.h
+	./view/ogre3D/environments/PlaneO3D.h
+	./view/ogre3D/environments/HillsO3D.h
     ## CEGUI
 	./view/CEGUI/GUISheetHandler.h
 	./view/CEGUI/ParamsPanel.h
@@ -273,14 +287,15 @@ set(VIEWHDRS
 )
 set(VIEWSRCS
 	# view
-	./view/general/evolution/environments/Environment.cpp
-	./view/general/evolution/environments/Hills.cpp
-	./view/general/evolution/environments/OpenSea.cpp
-    ./view/general/evolution/environments/Plane.cpp
-	./view/ogre3D/evolution/environments/EnvironmentO3D.cpp
-	./view/ogre3D/evolution/environments/HillsO3D.cpp
-	./view/ogre3D/evolution/environments/OpenSeaO3D.cpp
-	./view/ogre3D/evolution/environments/PlaneO3D.cpp
+	./view/general/environments/Environment.cpp
+	./view/general/environments/Hills.cpp
+	./view/general/environments/OpenSea.cpp
+    ./view/general/environments/Plane.cpp
+    ./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
+	./view/ogre3D/environments/EnvironmentO3D.cpp
+	./view/ogre3D/environments/HillsO3D.cpp
+	./view/ogre3D/environments/OpenSeaO3D.cpp
+	./view/ogre3D/environments/PlaneO3D.cpp
 	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp
@@ -367,6 +382,8 @@ set(SRCS
 include_directories(
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
+	${OGRE_Terrain_INCLUDE_DIRS}
+	${OGRE_Paging_INCLUDE_DIRS}
 	${OGRE_Overlay_INCLUDE_DIRS}
 	${PROJECT_HOME}
 )

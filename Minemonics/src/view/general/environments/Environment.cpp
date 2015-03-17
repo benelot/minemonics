@@ -1,12 +1,12 @@
 /*
- * EnvironmentO3D.cpp
+ * Environment.cpp
  *
- *  Created on: Feb 21, 2015
+ *  Created on: Nov 17, 2014
  *      Author: leviathan
  */
 
 //# corresponding header
-#include "EnvironmentO3D.h"
+#include "Environment.h"
 
 //# forward declarations
 
@@ -30,13 +30,12 @@
 
 //## utils headers
 
-EnvironmentO3D::EnvironmentO3D() :
-		mSceneMgr(NULL) {
-	// TODO Auto-generated constructor stub
+Environment::Environment(EnvironmentType environmentType) {
+	this->mEnvironmentType = environmentType;
 
 }
 
-EnvironmentO3D::~EnvironmentO3D() {
+Environment::~Environment() {
 	// TODO Auto-generated destructor stub
 }
 

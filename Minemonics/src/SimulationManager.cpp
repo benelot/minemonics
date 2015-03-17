@@ -51,9 +51,9 @@
 //## model headers
 #include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
-#include "view/general/evolution/environments/Environment.h"
-#include "view/ogre3D/evolution/environments/HillsO3D.h"
-#include "view/ogre3D/evolution/environments/PlaneO3D.h"
+#include "view/general/environments/Environment.h"
+#include "view/ogre3D/environments/HillsO3D.h"
+#include "view/ogre3D/environments/PlaneO3D.h"
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/CEGUIBuilder.h"
 
@@ -79,8 +79,6 @@ SimulationManager::~SimulationManager(void) {
 }
 
 void SimulationManager::destroyScene(void) {
-	if (mTerrain->environmentType == Environment::HILLS)
-		((HillsO3D*) mTerrain)->destroy();
 	mPhysicsController.exitBulletPhysics();
 
 }
@@ -273,23 +271,23 @@ void SimulationManager::updatePanels() {
 						Ogre::StringConverter::toString(
 								mRuntime.total_milliseconds()), true);
 
-				if (mTerrain->environmentType == Environment::HILLS) {
-					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
-						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
-							mFpsPanel->setParamValue(2,
-									"Building terrain, please wait...", true);
-						} else {
-							mFpsPanel->setParamValue(2,
-									"Updating textures, patience...", true);
-						}
-					} else {
-						mFpsPanel->setParamValue(2, "Idle.", true);
-						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
-							((HillsO3D*) mTerrain)->mTerrainGroup->saveAllTerrains(
-									true);
-							((HillsO3D*) mTerrain)->mTerrainsImported = false;
-						}
-					}
+				if (mTerrain->mEnvironmentType == Environment::HILLS) {
+//					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
+//						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
+//							mFpsPanel->setParamValue(2,
+//									"Building terrain, please wait...", true);
+//						} else {
+//							mFpsPanel->setParamValue(2,
+//									"Updating textures, patience...", true);
+//						}
+//					} else {
+//						mFpsPanel->setParamValue(2, "Idle.", true);
+//						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
+//							((HillsO3D*) mTerrain)->mTerrainGroup->saveAllTerrains(
+//									true);
+//							((HillsO3D*) mTerrain)->mTerrainsImported = false;
+//						}
+//					}
 				}
 			} else {
 				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
@@ -446,15 +444,13 @@ void SimulationManager::createScene(void) {
 	switch (EnvironmentConfiguration::ENVIRONMENTTYPE) {
 	case Environment::HILLS:
 		// Create hills
-		mTerrain = new HillsO3D(mSceneMgr);
-		((HillsO3D*) mTerrain)->configureTerrainDefaults(light);
-		((HillsO3D*) mTerrain)->buildTerrain();
+		mTerrain = new HillsO3D(this);
+		((HillsO3D*) mTerrain)->initialize(light);
 		break;
 	case Environment::PLANE:
 		//create plane
-		mTerrain = new PlaneO3D(mSceneMgr);
-		((PlaneO3D*) mTerrain)->configureTerrainDefaults(light);
-		((PlaneO3D*) mTerrain)->buildTerrain();
+		mTerrain = new PlaneO3D(this);
+		((PlaneO3D*) mTerrain)->initialize(light);
 		break;
 	case Environment::OPENSEA:
 		break;

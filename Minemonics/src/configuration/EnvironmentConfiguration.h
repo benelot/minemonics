@@ -8,7 +8,7 @@
 #ifndef ENVIRONMENTCONFIGURATION_H_
 #define ENVIRONMENTCONFIGURATION_H_
 
-#include<view/general/evolution/environments/Environment.h>
+#include "view/general/environments/Environment.h"
 
 class EnvironmentConfiguration {
 public:

@@ -38,7 +38,7 @@ public:
 		HILLS = 1, PLANE = 2, OPENSEA = 3
 	};
 
-	EnvironmentType environmentType;
+	EnvironmentType mEnvironmentType;
 
 	Environment(EnvironmentType environmentType);
 	virtual ~Environment();

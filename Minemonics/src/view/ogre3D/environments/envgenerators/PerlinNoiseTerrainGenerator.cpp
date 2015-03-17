@@ -1,14 +1,14 @@
 #include <stdlib.h>
 #include <math.h>
-#include "OgreMath.h"
+#include <OgreMath.h>
 #include "PerlinNoiseTerrainGenerator.h"
 
 using namespace Ogre;
 
-#define BM 0xff
-#define N 0x1000
-#define NP 12   /* 2^N */
-#define NM 0xfff
+#define PERLIN_BM 0xff
+#define PERLIN_N 0x1000
+#define PERLIN_NP 12   /* 2^N */
+#define PERLIN_NM 0xfff
 
 PerlinNoiseTerrainGenerator::PerlinNoiseTerrainGenerator(const Real& alpha, const Real& beta, int iterationNum, const Real& cycle, const Real& heightScale)
 	: mAlpha(alpha)
@@ -18,7 +18,7 @@ PerlinNoiseTerrainGenerator::PerlinNoiseTerrainGenerator(const Real& alpha, cons
 	, mHeightScale(heightScale)
 	, mOriginPoint(0.f)
 {
-	for (int i = 0 ; i < B ; i++) {
+	for (int i = 0 ; i < PERLIN_B ; i++) {
 		p[i] = i;
 		g1[i] = Math::SymmetricRandom();
 
@@ -29,19 +29,19 @@ PerlinNoiseTerrainGenerator::PerlinNoiseTerrainGenerator(const Real& alpha, cons
 		g3[i].normalise();
 	}
 
-	for (int i = 0 ; i < B ; i++) {
-		int j = (int) Math::RangeRandom (0,B);
+	for (int i = 0 ; i < PERLIN_B ; i++) {
+		int j = (int) Math::RangeRandom (0,PERLIN_B);
 
 		int k = p[i];
 		p[i] = p[j];
 		p[j] = k;
 	}
 
-	for (int i = 0 ; i < B + 2 ; i++) {
-		p[B + i] = p[i];
-		g1[B + i] = g1[i];
-		g2[B + i] = g2[i];
-		g3[B + i] = g3[i];
+	for (int i = 0 ; i < PERLIN_B + 2 ; i++) {
+		p[PERLIN_B + i] = p[i];
+		g1[PERLIN_B + i] = g1[i];
+		g2[PERLIN_B + i] = g2[i];
+		g3[PERLIN_B + i] = g3[i];
 	}
 }
 
@@ -111,9 +111,9 @@ Real PerlinNoiseTerrainGenerator::noise(const Vector2& vec2)
 
 void PerlinNoiseTerrainGenerator::setup( const Real& target, int& b0, int& b1, Real& r0, Real& r1)
 {
-	Real t = target + N;
-	b0 = ((int)t) & BM;
-	b1 = (b0+1) & BM;
+	Real t = target + PERLIN_N;
+	b0 = ((int)t) & PERLIN_BM;
+	b1 = (b0+1) & PERLIN_BM;
 	r0 = t - (int)t;
 	r1 = r0 - 1;
 }
