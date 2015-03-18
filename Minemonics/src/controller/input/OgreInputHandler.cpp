@@ -16,6 +16,7 @@
 #include "SimulationManager.h"
 
 //## configuration headers
+#include "configuration/CameraConfiguration.h"
 
 //## controller headers
 #include "OgreInputHandler.h"
@@ -203,9 +204,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		break;
 		case ApplicationKeycode::APPK_SYSREQ:
 		// take a screenshot
-
-		//TODO: Find way to print screeen
-		//mSimulationMgr->getLayout()->writeContentsToTimestampedFile("screenshot", ".jpg");
+		mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
 		break;
 		case ApplicationKeycode::APPK_POWER:
 		// return CEGUI::Key::Power;
@@ -269,7 +268,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::LeftAlt;
 		break;
 		case ApplicationKeycode::APPK_LSHIFT:
-		// return CEGUI::Key::LeftShift;
+			mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED * CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 		break;
 		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
 		break;
@@ -277,7 +276,8 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::RightControl;
 		break;
 		case ApplicationKeycode::APPK_RALT:
-		// return CEGUI::Key::RightAlt;
+			//take screen shot
+			mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
 		break;
 		case ApplicationKeycode::APPK_RSHIFT:
 		// return CEGUI::Key::RightShift;
@@ -601,7 +601,7 @@ bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::LeftAlt;
 		break;
 		case ApplicationKeycode::APPK_LSHIFT:
-		// return CEGUI::Key::LeftShift;
+			mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED);
 		break;
 		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
 		break;

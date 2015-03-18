@@ -55,6 +55,14 @@ public:
 	void moveZ(double z);
 	const Ogre::SceneNode* getCamNode() const;
 	void setCamNode(Ogre::SceneNode* camNode);
+
+	Ogre::Real getMove() const {
+		return mMove;
+	}
+
+	void setMove(Ogre::Real move) {
+		mMove = move;
+	}
 };
 
 #endif /* CAMERAHANDLER_H_ */

@@ -10,7 +10,8 @@
 
 class CameraConfiguration {
 public:
-	static const double CAMERA_MOVEMENT_SPEED = 250;
+	static const double CAMERA_MOVEMENT_SPEED = 500;
+	static const double CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR = 8;
 	static const double CAMERA_ROTATION_SPEED = 0.13;
 
 };
