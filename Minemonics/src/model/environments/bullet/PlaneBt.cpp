@@ -38,5 +38,8 @@ void PlaneBt::initialize() {
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mGroundMotionState,
 			mGroundShape, localInertia);
 	mGroundBody = new btRigidBody(rbInfo);
+
+	// disable debug visualization
+	mGroundBody->setCollisionFlags(mGroundBody->getCollisionFlags() | btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
 }
 

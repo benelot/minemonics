@@ -288,6 +288,9 @@ set(VIEWHDRS
 	./view/ogre3D/environments/PlaneO3D.h
 	./view/ogre3D/environments/HillsO3D.h
 	
+	./view/ogre3D/bullet/OgreDebugDrawer.h
+	./view/ogre3D/bullet/OgreBulletUtils.h
+	
     ## CEGUI
 	./view/CEGUI/GUISheetHandler.h
 	./view/CEGUI/ParamsPanel.h
@@ -305,6 +308,8 @@ set(VIEWSRCS
 	./view/ogre3D/environments/HillsO3D.cpp
 	./view/ogre3D/environments/OpenSeaO3D.cpp
 	./view/ogre3D/environments/PlaneO3D.cpp
+	
+	./view/ogre3D/bullet/OgreDebugDrawer.cpp
 	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp

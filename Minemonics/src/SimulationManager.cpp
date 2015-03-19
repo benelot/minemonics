@@ -64,7 +64,8 @@ SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mDragContainer(NULL),jury(1), t(0), mSdlWindow(
+		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDrawBulletDebug(false), mDebugDrawer(
+				NULL), jury(1), t(0), mSdlWindow(
 		NULL) {
 
 	// main frame timer initialization
@@ -120,6 +121,10 @@ void SimulationManager::createFrameListener(void) {
 	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
+	mDebugDrawer = new OgreDebugDrawer(mSceneMgr,false);
+	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
+
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
@@ -158,13 +163,15 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
 	mPhysicsController.stepBulletPhysics(evt.timeSinceLastFrame);
+	if (mDrawBulletDebug) {
+		mPhysicsController.getDynamicsWorld()->debugDrawWorld();
+	}
 	updatePhysics();
 
 	updatePanels();
 
 	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
-	for(;it != mGraphWindows.end();it++)
-	{
+	for (; it != mGraphWindows.end(); it++) {
 		(*it)->update(evt.timeSinceLastFrame);
 	}
 
@@ -416,8 +423,7 @@ void SimulationManager::createScene(void) {
 					CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.5f, 0))));
 
 	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
-	for(;it != mGraphWindows.end();it++)
-	{
+	for (; it != mGraphWindows.end(); it++) {
 		mDragContainer->addChild((*it)->getMathGlWindow());
 	}
 //	mTestObject->getMathGlWindow()->setPosition(

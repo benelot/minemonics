@@ -56,6 +56,8 @@ class Logger;
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/ParamsPanel.h"
 
+#include "view/ogre3D/bullet/OgreDebugDrawer.h"
+
 //## utils headers
 #include <utils/logging/Logger.h>
 
@@ -142,6 +144,14 @@ public:
 		return mGraphWindows;
 	}
 
+	bool isDrawBulletDebug() const {
+		return mDrawBulletDebug;
+	}
+
+	void setDrawBulletDebug(bool drawBulletDebug) {
+		mDrawBulletDebug = drawBulletDebug;
+	}
+
 	int t;
 	PopulationT<bool> parents;
 	PopulationT<bool> offsprings;
@@ -154,6 +164,10 @@ public:
 protected:
 	CEGUI::OgreRenderer* mRenderer;
 	CEGUI::Window* mDragContainer;
+
+	OgreDebugDrawer* mDebugDrawer;
+
+	bool mDrawBulletDebug;
 
 	std::vector<MathGLWindow*> mGraphWindows;
 

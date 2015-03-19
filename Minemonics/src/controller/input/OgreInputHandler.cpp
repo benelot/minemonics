@@ -156,7 +156,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Period;
 		break;
 		case ApplicationKeycode::APPK_SLASH:
-		// return CEGUI::Key::Slash;
+		mSimulationMgr->setDrawBulletDebug(!mSimulationMgr->isDrawBulletDebug());
 		break;
 		case ApplicationKeycode::APPK_BACKSLASH:
 		// return CEGUI::Key::Backslash;
@@ -268,7 +268,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::LeftAlt;
 		break;
 		case ApplicationKeycode::APPK_LSHIFT:
-			mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED * CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED * CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 		break;
 		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
 		break;
@@ -276,8 +276,8 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::RightControl;
 		break;
 		case ApplicationKeycode::APPK_RALT:
-			//take screen shot
-			mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
+		//take screen shot
+		mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
 		break;
 		case ApplicationKeycode::APPK_RSHIFT:
 		// return CEGUI::Key::RightShift;
@@ -601,7 +601,7 @@ bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::LeftAlt;
 		break;
 		case ApplicationKeycode::APPK_LSHIFT:
-			mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED);
+		mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED);
 		break;
 		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
 		break;
