@@ -64,8 +64,8 @@ SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mTestObject(NULL), jury(1), t(0), mSdlWindow(
-				NULL) {
+		NULL), mFpsPanel(NULL), mDragContainer(NULL),jury(1), t(0), mSdlWindow(
+		NULL) {
 
 	// main frame timer initialization
 	mStart = boost::posix_time::second_clock::local_time();
@@ -120,7 +120,9 @@ void SimulationManager::createFrameListener(void) {
 	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
-	mPhysicsController.addBody(mTerrain->getBody());
+	if (mTerrain->mEnvironmentType == Environment::PLANE) {
+		mPhysicsController.addBody(mTerrain->getBody());
+	}
 
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
@@ -160,7 +162,11 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	updatePanels();
 
-	mTestObject->update(evt.timeSinceLastFrame);
+	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
+	for(;it != mGraphWindows.end();it++)
+	{
+		(*it)->update(evt.timeSinceLastFrame);
+	}
 
 	//TODO: Use for creature evolution, but clean up afterwards
 	// updateEvolution();
@@ -391,16 +397,31 @@ void SimulationManager::createScene(void) {
 	CEGUIBuilder ceguiBuilder(this);
 	CEGUI::Window* menu = ceguiBuilder.createMenu();
 	mLayout->addChild(menu);
-	setFpsPanel(ceguiBuilder.createFpsPanel());
-	mLayout->addChild(getFpsPanel()->getWidgetPanel());
-	setDetailsPanel(ceguiBuilder.createDetailsPanel());
-	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
+	//make dragcontainer
+	mDragContainer = CEGUI::WindowManager::getSingleton().createWindow(
+			"DragContainer", "dragContainer");
+	mDragContainer->setSize(CEGUI::USize(CEGUI::UDim(1, 0), CEGUI::UDim(1, 0)));
+	mDragContainer->setPosition(
+			CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
+	mLayout->addChild(mDragContainer);
 
-	mTestObject = new MathGLWindow(this, 400, 400,
-			CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)));
-	mLayout->addChild(mTestObject->getMathGlWindow());
-	mTestObject->getMathGlWindow()->setPosition(
-			CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.3f, 0)));
+	setFpsPanel(ceguiBuilder.createFpsPanel());
+	mDragContainer->addChild(getFpsPanel()->getWidgetPanel());
+	setDetailsPanel(ceguiBuilder.createDetailsPanel());
+	mDragContainer->addChild(getDetailsPanel()->getWidgetPanel());
+
+	mGraphWindows.push_back(
+			new MathGLWindow(this, 400, 400,
+					CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)),
+					CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.5f, 0))));
+
+	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
+	for(;it != mGraphWindows.end();it++)
+	{
+		mDragContainer->addChild((*it)->getMathGlWindow());
+	}
+//	mTestObject->getMathGlWindow()->setPosition(
+//			CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.3f, 0)));
 // you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 // a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.

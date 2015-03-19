@@ -11,6 +11,9 @@
 //# forward declarations
 
 //# system headers
+#include <string>
+#include <boost/lexical_cast.hpp>
+
 //## controller headers
 
 //## model headers
@@ -38,11 +41,9 @@
 
 //## utils headers
 
-
-
 MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
-		int textureHeight, CEGUI::USize windowSize) :
-		mTime(0) {
+		int textureHeight, CEGUI::USize windowSize,CEGUI::USize windowPosition) :
+		mTime(0),mMakePrint(false) {
 
 	mSimulationMgr = simulationMgr;
 
@@ -90,13 +91,23 @@ MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
 	image->setArea(imageArea);
 	image->setAutoScaled(CEGUI::ASM_Disabled);
 
-	mMathGLWindow = CEGUI::WindowManager::getSingleton().createWindow(
-			"Ogremonics/StaticImage", "RTTWindow");
+	CEGUI::Window* staticImage =
+			CEGUI::WindowManager::getSingleton().createWindow(
+					"Ogremonics/StaticImage", "MathGLRTTWindow");
+	staticImage->setSize(
+			CEGUI::USize(CEGUI::UDim(1.0f, 0), CEGUI::UDim(1.0f, 0)));
+	staticImage->setProperty("Image", "RTTImage");
+
+	mMathGLWindow =
+			CEGUI::WindowManager::getSingleton().createWindow(
+					"Ogremonics/FrameWindow", "MathGLWindow");
 	mMathGLWindow->setSize(windowSize);
 	mMathGLWindow->setPosition(
-			CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.0f, 0)));
-
-	mMathGLWindow->setProperty("Image", "RTTImage");
+			CEGUI::UVector2(
+					CEGUI::UDim(windowPosition.d_width.d_scale - windowSize.d_width.d_scale / 2.0f, 0),
+					CEGUI::UDim(windowPosition.d_height.d_scale - windowSize.d_height.d_scale / 2.0f,
+							0)));
+	mMathGLWindow->addChild(staticImage);
 
 	// Get the pixel buffer
 	Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer();
@@ -152,6 +163,16 @@ void MathGLWindow::update(double timeSinceLastFrame) {
 	// Unlock the pixel buffer
 	pixelBuffer->unlock();
 
+	if(mMakePrint)
+	{
+		std::string fileName;
+		fileName.append("Graph");
+		fileName.append(boost::lexical_cast<std::string>(mTime));
+		fileName.append(".png");
+		graph.WritePNG(fileName.c_str());
+		mMakePrint = false;
+	}
+
 	CEGUI::Renderer* gui_renderer(mSimulationMgr->getRenderer());
 	gui_renderer->beginRendering();
 
@@ -161,7 +182,8 @@ void MathGLWindow::update(double timeSinceLastFrame) {
 	gui_renderer->endRendering();
 
 	//notify window of the texture to update
-	mMathGLWindow->invalidate(); // CEGUI::Window*
+
+	mMathGLWindow->invalidate(true); // CEGUI::Window*
 }
 
 CEGUI::Window*& MathGLWindow::getMathGlWindow() {

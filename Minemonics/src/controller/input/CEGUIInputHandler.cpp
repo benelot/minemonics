@@ -828,6 +828,20 @@ bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	CEGUI::GUIContext& context =
 	CEGUI::System::getSingleton().getDefaultGUIContext();
 
+	// Saving a mathgl graph to a file on right click
+	CEGUI::Window* window = context.getWindowContainingMouse();
+	if(window != NULL && (window->getName() == "MathGLWindow" || window->getName() == "MathGLRTTWindow") && button == ApplicationMouseCode::RightButton)
+	{
+		std::vector<MathGLWindow*>::iterator it = mSimulationMgr->getGraphWindows().begin();
+		for(;it != mSimulationMgr->getGraphWindows().end();it++)
+		{
+			if((*it)->getMathGlWindow() == window || (*it)->getMathGlWindow()->getChild("MathGLRTTWindow") == window)
+			{
+				(*it)->makePrint();
+			}
+		}
+	}
+
 	context.injectMouseButtonDown(convertMouseOgretoCEGUI(button));
 	return OgreInputHandler::mousePressed(button);
 

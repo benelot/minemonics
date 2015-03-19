@@ -138,6 +138,10 @@ public:
 	CEGUI::System*& getCEGUISystem();
 	virtual void windowResized(Ogre::RenderWindow* rw);
 
+	std::vector<MathGLWindow*>& getGraphWindows() {
+		return mGraphWindows;
+	}
+
 	int t;
 	PopulationT<bool> parents;
 	PopulationT<bool> offsprings;
@@ -149,8 +153,9 @@ public:
 
 protected:
 	CEGUI::OgreRenderer* mRenderer;
+	CEGUI::Window* mDragContainer;
 
-	MathGLWindow* mTestObject;
+	std::vector<MathGLWindow*> mGraphWindows;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);

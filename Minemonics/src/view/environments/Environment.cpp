@@ -45,7 +45,11 @@ void Environment::initialize(Ogre::Light* l) {
 		mEnvironmentGraphics = new HillsO3D(mSimulationMgr);
 		((HillsO3D*) mEnvironmentGraphics)->initialize(l);
 		mEnvironmentPhysics = new HillsBt();
-		//((HillsBt*) mEnvironmentPhysics)
+
+//		Ogre::TerrainGroup * pGroup = ((HillsO3D*) mEnvironmentGraphics)->getTerrainGroup();
+//		Ogre::Terrain * terrain = pGroup->getTerrain(0, 0);
+
+		//((HillsBt*) mEnvironmentPhysics)->initialize(((HillsO3D*) mEnvironmentGraphics)->getTerrainGroup()->getTerrain(0, 0));
 		break;
 	case Environment::PLANE:
 		mEnvironmentGraphics = new PlaneO3D(mSimulationMgr);
@@ -61,8 +65,7 @@ void Environment::initialize(Ogre::Light* l) {
 	}
 }
 
-btRigidBody*& Environment::getBody()
-{
-	return ((EnvironmentBt*)mEnvironmentPhysics)->getBody();
+btRigidBody*& Environment::getBody() {
+	return ((EnvironmentBt*) mEnvironmentPhysics)->getBody();
 }
 

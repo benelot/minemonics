@@ -104,6 +104,10 @@ public:
 		}
 	}
 
+	Ogre::TerrainGroup*& getTerrainGroup() {
+		return mTerrainGroup;
+	}
+
 protected:
 
 	void initBlendMaps(Ogre::Terrain* terrain);

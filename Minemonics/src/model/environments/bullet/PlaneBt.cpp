@@ -17,6 +17,12 @@ PlaneBt::~PlaneBt() {
 }
 
 void PlaneBt::initialize() {
+	/* Another primitive collision shape, an infinite plane.
+	 To create a plane you have to pass both the plane's
+	 normal vector (Vec3(nx, ny, nz)) and the plane constant
+	 (d, which is the distance of the plane's origin.
+	 Planes can only be used for static objects.
+	 */
 	mGroundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 50);
 
 	btScalar mass = 0; //rigidbody is static if mass is zero, otherwise dynamic

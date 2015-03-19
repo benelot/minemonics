@@ -43,10 +43,15 @@ class TextureTarget;
 class MathGLWindow {
 public:
 	MathGLWindow(SimulationManager* simulationMgr,int textureWidth,
-			int textureHeight,CEGUI::USize windowSize);
+			int textureHeight,CEGUI::USize windowSize,CEGUI::USize windowPosition);
 	virtual ~MathGLWindow();
 	void update(double timeSinceLastFrame);
 	CEGUI::Window*& getMathGlWindow();
+
+	void makePrint()
+	{
+		mMakePrint = true;
+	}
 
 private:
 	SimulationManager* mSimulationMgr;
@@ -55,6 +60,7 @@ private:
 	double mTime;
 	CEGUI::GUIContext* renderGuiContext;
 	CEGUI::TextureTarget* renderTextureTarget;
+	bool mMakePrint;
 };
 
 #endif /* MATHGLOBJECT_H_ */

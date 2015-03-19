@@ -328,6 +328,7 @@ set(MISCHDRS
 	./configuration/EvolutionConfiguration.h
 	./configuration/PopulationConfiguration.h
 	./configuration/OgreSystemConfigStrings.h
+	./configuration/CEGUIConfiguration.h
 	
 	# logger
 	./utils/logging/Logger.h

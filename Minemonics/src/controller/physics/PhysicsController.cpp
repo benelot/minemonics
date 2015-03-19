@@ -39,31 +39,6 @@ void PhysicsController::initBulletPhysics() {
 			mSolver, mCollisionConfiguration);
 	mDynamicsWorld->setGravity(btVector3(0, -1000, 0));
 
-	//Creating a static shape which will act as ground
-	{
-		//btCollisionShape* groundShape = new btBoxShape(btVector3(50,50,50));
-		btCollisionShape* groundShape = new btStaticPlaneShape(
-				btVector3(0, 1, 0), 50);
-
-
-		btScalar mass = 0; //rigidbody is static if mass is zero, otherwise dynamic
-		btVector3 localInertia(0, 0, 0);
-
-		groundShape->calculateLocalInertia(mass, localInertia);
-
-		btTransform groundTransform;
-		groundTransform.setIdentity();
-		groundTransform.setOrigin(btVector3(0, -50, 0));
-
-		btDefaultMotionState* myMotionState = new btDefaultMotionState(
-				groundTransform); //motionstate provides interpolation capabilities, and only synchronizes 'active' objects
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState,
-				groundShape, localInertia);
-		btRigidBody* body = new btRigidBody(rbInfo);
-
-		mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
-	}
-
 	//Creating some dynamic boxes
 	{
 		btVector3 ogreBoxSize(96.9, 96.9, 96.9);
