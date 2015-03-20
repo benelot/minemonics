@@ -85,7 +85,9 @@ void InfoOverlay::update() {
 
 		mInfoOverlayContainer->addChild(l);
 		mStatusLabelList.push_back(l);
+		delete *it;
 	}
+
 	mOverlayData.clear();
 }
 
