@@ -34,6 +34,7 @@ class Logger;
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <SDL_syswm.h>
+#include <OgreOverlaySystem.h>
 
 //# custom headers
 //## base headers
@@ -55,11 +56,11 @@ class Logger;
 #include "view/MathGL/MathGLWindow.h"
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/ParamsPanel.h"
-
 #include "view/ogre3D/bullet/OgreDebugDrawer.h"
+#include "view/ogre3D/overlay/InfoOverlay.h"
 
 //## utils headers
-#include <utils/logging/Logger.h>
+#include "utils/logging/Logger.h"
 
 class SimulationManager: public BaseApplication {
 private:
@@ -166,10 +167,11 @@ protected:
 	CEGUI::Window* mDragContainer;
 
 	OgreDebugDrawer* mDebugDrawer;
-
 	bool mDrawBulletDebug;
 
 	std::vector<MathGLWindow*> mGraphWindows;
+
+	InfoOverlay mInfoOverlay;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);

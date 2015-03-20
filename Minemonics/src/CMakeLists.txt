@@ -290,6 +290,8 @@ set(VIEWHDRS
 	
 	./view/ogre3D/bullet/OgreDebugDrawer.h
 	./view/ogre3D/bullet/OgreBulletUtils.h
+	./view/ogre3D/overlay/InfoOverlay.h
+	./view/ogre3D/overlay/InfoOverlayData.h
 	
     ## CEGUI
 	./view/CEGUI/GUISheetHandler.h
@@ -310,6 +312,8 @@ set(VIEWSRCS
 	./view/ogre3D/environments/PlaneO3D.cpp
 	
 	./view/ogre3D/bullet/OgreDebugDrawer.cpp
+	./view/ogre3D/overlay/InfoOverlay.cpp
+	./view/ogre3D/overlay/InfoOverlayData.cpp
 	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp

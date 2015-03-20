@@ -10,12 +10,11 @@
  / \_// (_| | | |  __/  \  /\  /| |   <| |
  \___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
  |___/
- Tutorial Framework
- http://www.ogre3d.org/tikiwiki/
+ Tutorial Framework (for Ogre 1.9)
+ http://www.ogre3d.org/wiki/
  -----------------------------------------------------------------------------
  */
 
-//# corresponding header
 #include "BaseApplication.h"
 
 //# forward declarations
@@ -40,27 +39,41 @@
 
 //## utils headers
 
-//-------------------------------------------------------------------------------------
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+#include <macUtils.h>
+#endif
+
+//---------------------------------------------------------------------------
 BaseApplication::BaseApplication(void) :
 		mRoot(0), mCamera(0), mSceneMgr(0), mWindow(0), mResourcesCfg(
 				Ogre::StringUtil::BLANK), mPluginsCfg(Ogre::StringUtil::BLANK), mCursorWasVisible(
-				false), mShutDown(false) {
+				false), mShutDown(false), mOverlaySystem(0) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+	m_ResourcePath = Ogre::macBundlePath() + "/Contents/Resources/";
+#else
+	m_ResourcePath = "";
+#endif
 }
 
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 BaseApplication::~BaseApplication(void) {
+	if (mOverlaySystem)
+		delete mOverlaySystem;
+
+	// Remove ourself as a Window listener
+	Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
 	windowClosed(mWindow);
 	delete mRoot;
 }
 
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 bool BaseApplication::configure(void) {
-	// Show the configuration dialog and initialise the system
+	// Show the configuration dialog and initialise the system.
 	// You can skip this and use root.restoreConfig() to load configuration
-	// settings if you were sure there are valid ones saved in ogre.cfg
+	// settings if you were sure there are valid ones saved in ogre.cfg.
 	if (mRoot->showConfigDialog()) {
-		// If returned true, user clicked OK so initialise
-		// Here we choose to let the system create a default rendering window by passing 'true'
+		// If returned true, user clicked OK so initialise.
+		// Here we choose to let the system create a default rendering window by passing 'true'.
 		mWindow = mRoot->initialise(true, "TutorialApplication Render Window");
 
 		return true;
@@ -68,12 +81,16 @@ bool BaseApplication::configure(void) {
 		return false;
 	}
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::chooseSceneManager(void) {
 	// Get the SceneManager, in this case a generic one
 	mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC);
+
+	// Initialize the OverlaySystem (changed for Ogre 1.9)
+	mOverlaySystem = new Ogre::OverlaySystem();
+	mSceneMgr->addRenderQueueListener(mOverlaySystem);
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::createCamera(void) {
 	// Create the camera
 	mCamera = mSceneMgr->createCamera("PlayerCam");
@@ -84,25 +101,27 @@ void BaseApplication::createCamera(void) {
 	mCamera->lookAt(Ogre::Vector3(0, 0, -300));
 	mCamera->setNearClipDistance(5);
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::createFrameListener(void) {
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-
 	size_t windowHnd = 0;
 	std::ostringstream windowHndStr;
 
 	mWindow->getCustomAttribute("WINDOW", &windowHnd);
 	windowHndStr << windowHnd;
 
-	//Set initial mouse clipping size
+	mWindow->getCustomAttribute("WINDOW", &windowHnd);
+	windowHndStr << windowHnd;
+
+	// Set initial mouse clipping size
 	windowResized(mWindow);
 
 	mRoot->addFrameListener(this);
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::destroyScene(void) {
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::createViewports(void) {
 	// Create one viewport, entire window
 	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
@@ -113,7 +132,7 @@ void BaseApplication::createViewports(void) {
 			Ogre::Real(vp->getActualWidth())
 					/ Ogre::Real(vp->getActualHeight()));
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::setupResources(void) {
 	// Load resource paths from config file
 	Ogre::ConfigFile cf;
@@ -130,6 +149,15 @@ void BaseApplication::setupResources(void) {
 		for (i = settings->begin(); i != settings->end(); ++i) {
 			typeName = i->first;
 			archName = i->second;
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
+			// OS X does not set the working directory relative to the app.
+			// In order to make things portable on OS X we need to provide
+			// the loading with it's own bundle path location.
+			if (!Ogre::StringUtil::startsWith(archName, "/", false))// only adjust relative directories
+			archName = Ogre::String(Ogre::macBundlePath() + "/" + archName);
+#endif
+
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
 					archName, typeName, secName);
 		}
@@ -143,14 +171,24 @@ void BaseApplication::createResourceListener(void) {
 void BaseApplication::loadResources(void) {
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 void BaseApplication::go(void) {
 #ifdef _DEBUG
+#ifndef OGRE_STATIC_LIB
+	mResourcesCfg = m_ResourcePath + "resources_d.cfg";
+	mPluginsCfg = m_ResourcePath + "plugins_d.cfg";
+#else
 	mResourcesCfg = "resources_d.cfg";
 	mPluginsCfg = "plugins_d.cfg";
+#endif
+#else
+#ifndef OGRE_STATIC_LIB
+	mResourcesCfg = m_ResourcePath + "resources.cfg";
+	mPluginsCfg = m_ResourcePath + "plugins.cfg";
 #else
 	mResourcesCfg = "resources.cfg";
 	mPluginsCfg = "plugins.cfg";
+#endif
 #endif
 
 	if (!setup())
@@ -158,10 +196,10 @@ void BaseApplication::go(void) {
 
 	mRoot->startRendering();
 
-	// clean up
+	// Clean up
 	destroyScene();
 }
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 bool BaseApplication::setup(void) {
 	mRoot = new Ogre::Root(mPluginsCfg);
 
@@ -191,7 +229,7 @@ bool BaseApplication::setup(void) {
 	return true;
 }
 ;
-//-------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	if (mWindow->isClosed())
 		return false;
@@ -202,8 +240,10 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	return true;
 }
 
-//Unattach OIS before window shutdown (very important under Linux)
+//---------------------------------------------------------------------------
+// Unattach OIS before window shutdown (very important under Linux)
 void BaseApplication::windowClosed(Ogre::RenderWindow* rw) {
+
 }
 
 Ogre::RenderWindow*& BaseApplication::getWindow() {
@@ -213,3 +253,4 @@ Ogre::RenderWindow*& BaseApplication::getWindow() {
 void BaseApplication::setWindow(Ogre::RenderWindow*& window) {
 	mWindow = window;
 }
+//---------------------------------------------------------------------------

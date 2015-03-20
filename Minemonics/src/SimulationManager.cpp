@@ -18,13 +18,11 @@
 #include "SimulationManager.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
 #include <btBulletDynamicsCommon.h>
 
 //## model headers
-
 //## view headers
 #include <OgreWindowEventUtilities.h>
 #include <CEGUI/System.h>
@@ -34,11 +32,10 @@
 #include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include <model/evolution/population/creature/genome/MorphoGene.h>
+#include <boost/lexical_cast.hpp>
 
 //# custom headers
 //## base headers
-
 //## configuration headers
 #include "configuration/EnvironmentConfiguration.h"
 #include "configuration/OgreSystemConfigStrings.h"
@@ -49,6 +46,9 @@
 #include "controller/camera/CameraHandler.h"
 #include "controller/SaveController.h"
 //## model headers
+#include "model/evolution/population/creature/genome/MorphoGene.h"
+
+//## view headers
 #include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
 #include "view/environments/Environment.h"
@@ -65,7 +65,7 @@ SimulationManager::SimulationManager(void) :
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDrawBulletDebug(false), mDebugDrawer(
-				NULL), jury(1), t(0), mSdlWindow(
+		NULL), jury(1), t(0), mSdlWindow(
 		NULL) {
 
 	// main frame timer initialization
@@ -121,7 +121,7 @@ void SimulationManager::createFrameListener(void) {
 	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
-	mDebugDrawer = new OgreDebugDrawer(mSceneMgr,false);
+	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
 	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
@@ -144,7 +144,6 @@ void SimulationManager::createFrameListener(void) {
 		ent->setMaterialName("Test/Cube");
 		cubes.push_back(entNode);
 	}
-
 }
 
 //-------------------------------------------------------------------------------------
@@ -167,6 +166,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		mPhysicsController.getDynamicsWorld()->debugDrawWorld();
 	}
 	updatePhysics();
+
+	mInfoOverlay.update();
 
 	updatePanels();
 
@@ -196,6 +197,20 @@ void SimulationManager::updatePhysics() {
 			cubes.at(i)->setPosition(
 					Ogre::Vector3((float) Point[0], (float) Point[1],
 							(float) Point[2]));
+
+			std::string text;
+			text.append("Box coordinate: ");
+			text.append(boost::lexical_cast<std::string>(Point[0]));
+			text.append(",");
+			text.append(boost::lexical_cast<std::string>(Point[1]));
+			text.append(",");
+			text.append(boost::lexical_cast<std::string>(Point[2]));
+			text.append(",\n");
+			text.append("---------");
+			InfoOverlayData* data = new InfoOverlayData(
+					Ogre::Vector3((float) Point[0], (float) Point[1],
+							(float) Point[2]), text);
+			mInfoOverlay.addInfo(data);
 
 			// Get the Orientation of the rigidbody as a bullet Quaternion
 			// Convert it to an Ogre quaternion
@@ -507,6 +522,8 @@ void SimulationManager::createScene(void) {
 	ninjaNode = ninjaNode->createChildSceneNode("PitchNode2");
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
+
+	mInfoOverlay.initialize(mCamera);
 }
 
 //Adjust mouse clipping area
