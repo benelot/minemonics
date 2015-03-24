@@ -23,7 +23,6 @@
 #include <vector>
 
 //## controller headers
-
 //## model headers
 // include headers that implement a archive in xml format
 #include <boost/archive/tmpdir.hpp>
@@ -31,25 +30,23 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/version.hpp>
-//## view headers
 
+//## view headers
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
 #include "model/evolution/population/creature/genome/controller/ControllerGene.h"
 #include "model/evolution/population/creature/genome/controller/SineControllerGene.h"
 
 //## model headers
+#include "model/evolution/population/creature/genome/Gene.h"
 #include "model/evolution/population/creature/genome/MorphoGeneBranch.h"
 
 //## view headers
-
 //## utils headers
 
-class MorphoGene {
+class MorphoGene: public Gene {
 public:
 	MorphoGene();
 	virtual ~MorphoGene();

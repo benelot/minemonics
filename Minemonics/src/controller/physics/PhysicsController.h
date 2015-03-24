@@ -55,8 +55,6 @@ public:
 
 	void addBody(btRigidBody* body);
 
-	void createBox(double length, double width, double height, btScalar mass);
-
 	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}

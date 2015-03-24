@@ -53,8 +53,6 @@ void PhysicsController::initBulletPhysics() {
 					-PhysicsConfiguration::EARTH_GRAVITY
 							* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
 					0));
-
-	createBox(1, 1, 1, 1);
 }
 
 void PhysicsController::exitBulletPhysics() {
@@ -101,36 +99,4 @@ void PhysicsController::stepBulletPhysics(double timeStep) {
 void PhysicsController::addBody(btRigidBody* body) {
 	mCollisionShapes.push_back(body->getCollisionShape());
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
-}
-
-void PhysicsController::createBox(double length, double width, double height,
-		btScalar mass) {
-	btVector3 bulletBoxSize(
-			width * PhysicsConfiguration::OGRE_BULLET_BOX_SCALING_FACTOR,
-			height * PhysicsConfiguration::OGRE_BULLET_BOX_SCALING_FACTOR,
-			length * PhysicsConfiguration::OGRE_BULLET_BOX_SCALING_FACTOR);
-	btVector3 HalfExtents(bulletBoxSize.x() * 0.5f, bulletBoxSize.y() * 0.5f,
-			bulletBoxSize.z() * 0.5f);
-	btCollisionShape* boxShape = new btBoxShape(HalfExtents);
-	mCollisionShapes.push_back(boxShape);
-
-	btVector3 localInertia(0, 0, 0);
-
-	boxShape->calculateLocalInertia(mass, localInertia);
-
-	btTransform startTransform;
-	startTransform.setIdentity();
-	startTransform.setOrigin(btVector3(5, 20, 0));
-
-	for (int j = 0; j < 100; j++) {
-		startTransform.setOrigin(btVector3(0, (j * 20) + 10, j * 10));
-
-		btDefaultMotionState* myMotionState = new btDefaultMotionState(
-				startTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState,
-				boxShape, localInertia);
-		btRigidBody* body = new btRigidBody(rbInfo);
-
-		mDynamicsWorld->addRigidBody(body);
-	}
 }

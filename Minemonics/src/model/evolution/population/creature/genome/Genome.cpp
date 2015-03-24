@@ -30,6 +30,7 @@
 
 //## utils headers
 #include "configuration/PopulationConfiguration.h"
+#include "configuration/MorphologyConfiguration.h"
 #include "utils/Randomness.h"
 /*
  * The genetic representation of this morphology is a directed graph of
@@ -43,7 +44,7 @@
  * structures. They can also connect to the same child multiple times to
  * make duplicate instances of the same appendage.
  */
-Genome::Genome() {
+Genome::Genome():mSegmentsDepthLimit(0), mTotalSegmentQtyLimit(0) {
 
 }
 
@@ -66,6 +67,16 @@ void Genome::createRandomGenome(double bushiness) {
 		gene->initialize(bushiness);
 		mGenes.push_back(gene);
 	}
+
+	mSegmentsDepthLimit = abs(
+			randomness.nextNormalInt(
+					MorphologyConfiguration::BODY_SEGMENTS_DEPTH_INITIAL_MEAN,
+					MorphologyConfiguration::BODY_SEGMENTS_DEPTH_INITIAL_VAR));
+
+	mTotalSegmentQtyLimit = abs(
+			randomness.nextNormalInt(
+					MorphologyConfiguration::BODY_SEGMENTS_TOTAL_INITIAL_MEAN,
+					MorphologyConfiguration::BODY_SEGMENTS_TOTAL_INITIAL_VAR));
 }
 
 void Genome::addGene(MorphoGene* gene) {
