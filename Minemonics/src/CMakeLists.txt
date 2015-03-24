@@ -232,10 +232,15 @@ set(MODELHDRS
 	./model/evolution/population/Population.h
 	./model/evolution/population/creature/Creature.h
 	./model/evolution/population/creature/genome/Genome.h
+	./model/evolution/population/creature/genome/Gene.h
 	./model/evolution/population/creature/genome/MorphoGene.h
     ./model/evolution/population/creature/genome/MorphoGeneBranch.h
     ./model/evolution/population/creature/genome/controller/ControllerGene.h
 	./model/evolution/population/creature/genome/controller/SineControllerGene.h
+	
+	./model/evolution/population/creature/phenome/Phenome.h
+	./model/evolution/population/creature/phenome/PhenotypeGenerator.h
+	./model/evolution/population/creature/phenome/Component.h
 )
 set(MODELSRCS
     # model
@@ -251,10 +256,15 @@ set(MODELSRCS
 	./model/evolution/population/Population.cpp
 	./model/evolution/population/creature/Creature.cpp
 	./model/evolution/population/creature/genome/Genome.cpp
+	./model/evolution/population/creature/genome/Gene.cpp
 	./model/evolution/population/creature/genome/MorphoGene.cpp
 	./model/evolution/population/creature/genome/MorphoGeneBranch.cpp
 	./model/evolution/population/creature/genome/controller/ControllerGene.cpp
 	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
+	
+	./model/evolution/population/creature/phenome/Phenome.cpp
+	./model/evolution/population/creature/phenome/PhenotypeGenerator.cpp
+	./model/evolution/population/creature/phenome/Component.cpp
 )
 set(CONTROLLERHDRS
 	# controller

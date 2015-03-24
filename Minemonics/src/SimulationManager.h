@@ -153,6 +153,10 @@ public:
 		mDrawBulletDebug = drawBulletDebug;
 	}
 
+	const PhysicsController& getPhysicsController() const {
+		return mPhysicsController;
+	}
+
 	int t;
 	PopulationT<bool> parents;
 	PopulationT<bool> offsprings;

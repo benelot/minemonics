@@ -99,7 +99,7 @@ void SimulationManager::createFrameListener(void) {
 	mStateHandler.requestStateChange(GUI);
 
 	// make an instance of our GUI sheet handler class
-	mGUISheetHandler.initialize(mSystem, mLayout, &mStateHandler);
+	mGUISheetHandler.initialize(this, mSystem, mLayout, &mStateHandler);
 
 	//Set initial mouse clipping size
 	windowResized(mWindow);
@@ -141,7 +141,7 @@ void SimulationManager::createFrameListener(void) {
 				mSceneMgr->getRootSceneNode()->createChildSceneNode(
 						"entNode" + Ogre::StringConverter::toString(i));
 		entNode->attachObject(ent);
-		ent->setMaterialName("Test/Cube");
+		ent->setMaterialName("honeycomb");
 		cubes.push_back(entNode);
 	}
 }
@@ -418,31 +418,23 @@ void SimulationManager::createScene(void) {
 
 	CEGUIBuilder ceguiBuilder(this);
 	CEGUI::Window* menu = ceguiBuilder.createMenu();
+	menu->setAlwaysOnTop(true);
 	mLayout->addChild(menu);
-	//make dragcontainer
-	mDragContainer = CEGUI::WindowManager::getSingleton().createWindow(
-			"DragContainer", "dragContainer");
-	mDragContainer->setSize(CEGUI::USize(CEGUI::UDim(1, 0), CEGUI::UDim(1, 0)));
-	mDragContainer->setPosition(
-			CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
-	mLayout->addChild(mDragContainer);
 
 	setFpsPanel(ceguiBuilder.createFpsPanel());
-	mDragContainer->addChild(getFpsPanel()->getWidgetPanel());
+	mLayout->addChild(getFpsPanel()->getWidgetPanel());
 	setDetailsPanel(ceguiBuilder.createDetailsPanel());
-	mDragContainer->addChild(getDetailsPanel()->getWidgetPanel());
+	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
 
 	mGraphWindows.push_back(
 			new MathGLWindow(this, 400, 400,
-					CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.4f, 0)),
-					CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.5f, 0))));
+					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
+					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
 
 	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
 	for (; it != mGraphWindows.end(); it++) {
-		mDragContainer->addChild((*it)->getMathGlWindow());
+		mLayout->addChild((*it)->getMathGlWindow());
 	}
-//	mTestObject->getMathGlWindow()->setPosition(
-//			CEGUI::UVector2(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.3f, 0)));
 // you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 // another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 // a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
