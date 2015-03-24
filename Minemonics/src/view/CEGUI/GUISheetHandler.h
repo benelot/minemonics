@@ -2,6 +2,8 @@
 //# corresponding header
 
 //# forward declarations
+class SimulationManager;
+
 namespace CEGUI {
 class System;
 class Window;
@@ -35,10 +37,10 @@ public:
 	GUISheetHandler();
 	~GUISheetHandler();
 
-	void initialize(CEGUI::System* system, CEGUI::Window* sheet,
+	void initialize(SimulationManager* simulationmgr, CEGUI::System* system, CEGUI::Window* sheet,
 			StateHandler* stateHandler);
 
-	// CEGUI event handlers. You can name these whatever you like, so long as they have the proper 
+	// CEGUI event handlers. You can name these whatever you like, as long as they have the proper
 	// signature: bool <method name>(const CEGUI::EventArgs &args)
 	//File->Quit
 	bool quitButtonClicked(const CEGUI::EventArgs &args);
@@ -248,6 +250,7 @@ public:
 	bool helpButtonClicked(const CEGUI::EventArgs &args);
 
 private:
+	SimulationManager* mSimulationMgr;
 	CEGUI::System* mSystem;	// pointer to the CEGUI System instance
 	CEGUI::Window* mWindow;	// pointer to the layout sheet window
 	StateHandler* mStateHandler;	// pointer to the Simulation controller

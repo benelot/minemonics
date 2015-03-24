@@ -48,6 +48,7 @@ class Logger;
 #include "controller/camera/CameraHandler.h"
 #include "controller/input/SDL2InputHandler.h"
 #include "controller/physics/PhysicsController.h"
+#include "controller/physics/RagDoll.h"
 
 //## model headers
 #include "model/evolution/juries/Ones.h"
@@ -104,6 +105,8 @@ private:
 	} _initializer;
 
 	std::vector<Ogre::SceneNode*> cubes;
+
+	RagDoll* mRagdoll;
 	void updatePhysics();
 public:
 	SimulationManager(void);

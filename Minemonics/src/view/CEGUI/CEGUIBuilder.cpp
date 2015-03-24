@@ -91,43 +91,43 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// open evolution item
 	CEGUI::Window *openEvolutionItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"openEvolutionItem");
+			"cmdOpenEvolution");
 	openEvolutionItem->setText("Open Evolution...");
 	evolutionMenu->addChild(openEvolutionItem);
 
 	// save evolution as...
 	CEGUI::Window *saveEvolutionAsItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "saveEvolutionAsItem");
+			"Ogremonics/MenuItem", "cmdSaveEvolutionAs");
 	saveEvolutionAsItem->setText("Save Evolution as...");
 	evolutionMenu->addChild(saveEvolutionAsItem);
 
 	// close evolution
 	CEGUI::Window *closeEvolutionItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"closeEvolutionItem");
+			"cmdCloseEvolution");
 	closeEvolutionItem->setText("Close Evolution");
 	evolutionMenu->addChild(closeEvolutionItem);
 
 	// Run evolution
 	CEGUI::Window *runEvolutionItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"runEvolutionItem");
+			"cmdRunEvolution");
 	runEvolutionItem->setText("Run Evolution");
 	evolutionMenu->addChild(runEvolutionItem);
 
 	// Pause evolution
 	CEGUI::Window *pauseEvolutionItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"pauseEvolutionItem");
+			"cmdPauseEvolution");
 	pauseEvolutionItem->setText("Pause Evolution");
 	evolutionMenu->addChild(pauseEvolutionItem);
 
 	// Stop evolution
 	CEGUI::Window *stopEvolutionItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"stopEvolutionItem");
+			"cmdStopEvolution");
 	stopEvolutionItem->setText("Stop Evolution");
 	evolutionMenu->addChild(stopEvolutionItem);
 
 	// Browse history
 	CEGUI::Window *browseHistoryItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"browseHistoryItem");
+			"cmdBrowseHistory");
 	browseHistoryItem->setText("Browse History");
 	evolutionMenu->addChild(browseHistoryItem);
 
@@ -143,19 +143,19 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// Hills...
 	CEGUI::Window *hillsItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"hillsItem");
+			"cmdHills");
 	hillsItem->setText("Hills...");
 	environmentMenu->addChild(hillsItem);
 
 	// Opensea
 	CEGUI::Window *openSeaItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"openSeaItem");
+			"cmdOpenSea");
 	openSeaItem->setText("Open Sea");
 	environmentMenu->addChild(openSeaItem);
 
 	// Plane
 	CEGUI::Window *planeItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"planeItem");
+			"cmdPlane");
 	planeItem->setText("Plane");
 	environmentMenu->addChild(planeItem);
 
@@ -171,25 +171,25 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// New Population
 	CEGUI::Window *newPopulationItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"newPopulationItem");
+			"cmdNewPopulation");
 	newPopulationItem->setText("New Population");
 	populationMenu->addChild(newPopulationItem);
 
 	// Open Population...
 	CEGUI::Window *openPopulationItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"openPopulationItem");
+			"cmdOpenPopulation");
 	openPopulationItem->setText("Open Population");
 	populationMenu->addChild(openPopulationItem);
 
 	// Save population as...
 	CEGUI::Window *savePopulationAsItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "savePopulationAsItem");
+			"Ogremonics/MenuItem", "cmdSavePopulationAs");
 	savePopulationAsItem->setText("Save Population as...");
 	populationMenu->addChild(savePopulationAsItem);
 
 	// Close population
 	CEGUI::Window *closePopulationItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "closePopulationItem");
+			"Ogremonics/MenuItem", "cmdClosePopulation");
 	closePopulationItem->setText("Close Population");
 	populationMenu->addChild(closePopulationItem);
 
@@ -205,31 +205,31 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// New random creature
 	CEGUI::Window *newCreatureItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"newCreatureItem");
+			"cmdNewCreature");
 	newCreatureItem->setText("New Random Creature [F5]");
 	creatureMenu->addChild(newCreatureItem);
 
 	// Open creature...
 	CEGUI::Window *openCreatureItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"openCreatureItem");
+			"cmdOpenCreature");
 	openCreatureItem->setText("Open Creature...");
 	creatureMenu->addChild(openCreatureItem);
 
 	// Save creature as...
 	CEGUI::Window *saveCreatureAsItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"saveCreatureAsItem");
+			"cmdSaveCreatureAs");
 	saveCreatureAsItem->setText("Save Creature As...");
 	creatureMenu->addChild(saveCreatureAsItem);
 
 	// Close creature
 	CEGUI::Window *closeCreatureItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"closeCreatureItem");
+			"cmdCloseCreature");
 	closeCreatureItem->setText("Close Creature");
 	creatureMenu->addChild(closeCreatureItem);
 
 	// Record frames
 	CEGUI::Window *recordFramesItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"recordFramesItem");
+			"cmdRecordFrames");
 	recordFramesItem->setText("Record Frames [CTRL+R]");
 	creatureMenu->addChild(recordFramesItem);
 
@@ -245,19 +245,19 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// spawn Box
 	CEGUI::Window *spawnBoxItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"quitItem");
+			"cmdSpawnBox");
 	spawnBoxItem->setText("Box [2]");
 	spawnMenu->addChild(spawnBoxItem);
 
 	// spawn Sphere
 	CEGUI::Window *spawnSphereItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"spawnSphereItem");
+			"cmdSpawnSphere");
 	spawnSphereItem->setText("Sphere [3]");
 	spawnMenu->addChild(spawnSphereItem);
 
 	// spawn Capsule
 	CEGUI::Window *spawnCapsuleItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"spawnCapsuleItem");
+			"cmdSpawnCapsule");
 	spawnCapsuleItem->setText("Capsule [6]");
 	spawnMenu->addChild(spawnCapsuleItem);
 
@@ -268,12 +268,12 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 	actionTopItem->setText("Action");
 	menuBar->addChild(actionTopItem);
 	CEGUI::Window *actionMenu = wmgr.createWindow("Ogremonics/PopupMenu",
-			"fileMenu");
+			"actionMenu");
 	actionTopItem->addChild(actionMenu);
 
 	// Return to origin
 	CEGUI::Window *returnToOriginItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"returnToOriginItem");
+			"cmdReturnToOrigin");
 	returnToOriginItem->setText("Return to Origin [K]");
 	actionMenu->addChild(returnToOriginItem);
 
@@ -307,13 +307,13 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// Population size
 	CEGUI::Window *populationSizeItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"populationSizeItem");
+			"cmdPopulationSize");
 	populationSizeItem->setText("Population Size...");
 	populationSettingsMenu->addChild(populationSizeItem);
 
 	// Selection style
 	CEGUI::Window *selectionStyleItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"selectionStyleItem");
+			"cmdSelectionStyle");
 	selectionStyleItem->setText("Selection Style...");
 	populationSettingsMenu->addChild(selectionStyleItem);
 
@@ -339,31 +339,30 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// Shadows on/off
 	CEGUI::Window *shadowsItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"shadowsItem");
+			"cmdShadows");
 	shadowsItem->setText("Shadows on/off [H]");
 	renderingMenu->addChild(shadowsItem);
 
 	// Fog on/off
-	CEGUI::Window *fogItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"fogItem");
+	CEGUI::Window *fogItem = wmgr.createWindow("Ogremonics/MenuItem", "cmdFog");
 	fogItem->setText("Fog on/off [F]");
 	renderingMenu->addChild(fogItem);
 
 	// Skybox on/off
 	CEGUI::Window *skyboxItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"skyboxItem");
+			"cmdSkybox");
 	skyboxItem->setText("Skybox on/off [B]");
 	renderingMenu->addChild(skyboxItem);
 
 	// Greenscreen on/off
 	CEGUI::Window *greenscreenItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"greenscreenItem");
+			"cmdGreenscreen");
 	greenscreenItem->setText("Greenscreen on/off");
 	renderingMenu->addChild(greenscreenItem);
 
 	// Status on/off
 	CEGUI::Window *statusItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"statusItem");
+			"cmdStatus");
 	statusItem->setText("Status on/off");
 	renderingMenu->addChild(statusItem);
 
@@ -380,13 +379,13 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// Solid
 	CEGUI::Window *solidModeItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"solidModeItem");
+			"cmdSolidMode");
 	solidModeItem->setText("Solid mode");
 	polygonModeMenu->addChild(solidModeItem);
 
 	// Wireframe
 	CEGUI::Window *wireframeModeItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"wireframeModeItem");
+			"cmdWireframeMode");
 	wireframeModeItem->setText("Wireframe mode");
 	polygonModeMenu->addChild(wireframeModeItem);
 
@@ -403,79 +402,79 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// 0 %
 	CEGUI::Window *ambientLight0Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight0Item");
+			"cmdAmbientLight0");
 	ambientLight0Item->setText("0 %");
 	ambientLightMenu->addChild(ambientLight0Item);
 
 	// 10 %
 	CEGUI::Window *ambientLight10Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight10Item");
+			"cmdAmbientLight10");
 	ambientLight10Item->setText("10 %");
 	ambientLightMenu->addChild(ambientLight10Item);
 
 	// 20 %
 	CEGUI::Window *ambientLight20Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight20Item");
+			"cmdAmbientLight20");
 	ambientLight20Item->setText("20 %");
 	ambientLightMenu->addChild(ambientLight20Item);
 
 	// 30 %
 	CEGUI::Window *ambientLight30Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight30Item");
+			"cmdAmbientLight30");
 	ambientLight30Item->setText("30 %");
 	ambientLightMenu->addChild(ambientLight30Item);
 
 	// 40 %
 	CEGUI::Window *ambientLight40Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight40Item");
+			"cmdAmbientLight40");
 	ambientLight40Item->setText("40 %");
 	ambientLightMenu->addChild(ambientLight40Item);
 
 	// 50 %
 	CEGUI::Window *ambientLight50Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight50Item");
+			"cmdAmbientLight50");
 	ambientLight50Item->setText("50 %");
 	ambientLightMenu->addChild(ambientLight50Item);
 
 	// 60 %
 	CEGUI::Window *ambientLight60Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight60Item");
+			"cmdAmbientLight60");
 	ambientLight60Item->setText("60 %");
 	ambientLightMenu->addChild(ambientLight60Item);
 
 	// 70 %
 	CEGUI::Window *ambientLight70Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight70Item");
+			"cmdAmbientLight70");
 	ambientLight70Item->setText("70 %");
 	ambientLightMenu->addChild(ambientLight70Item);
 
 	// 80 %
 	CEGUI::Window *ambientLight80Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight80Item");
+			"cmdAmbientLight80");
 	ambientLight80Item->setText("80 %");
 	ambientLightMenu->addChild(ambientLight80Item);
 
 	// 90 %
 	CEGUI::Window *ambientLight90Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"ambientLight90Item");
+			"cmdAmbientLight90");
 	ambientLight90Item->setText("90 %");
 	ambientLightMenu->addChild(ambientLight90Item);
 
 	// 100 %
 	CEGUI::Window *ambientLight100Item = wmgr.createWindow(
-			"Ogremonics/MenuItem", "ambientLight100Item");
+			"Ogremonics/MenuItem", "cmdAmbientLight100");
 	ambientLight100Item->setText("100 %");
 	ambientLightMenu->addChild(ambientLight100Item);
 
 	// Tune for speed
 	CEGUI::Window *tuneForSpeedItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"tuneForSpeedItem");
+			"cmdTuneForSpeed");
 	tuneForSpeedItem->setText("Tune for Speed [Keypad -]");
 	renderingMenu->addChild(tuneForSpeedItem);
 
 	// Tune for quality
 	CEGUI::Window *tuneForQualityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"tuneForQualityItem");
+			"cmdTuneForQuality");
 	tuneForQualityItem->setText("Tune for Quality [Keypad +]");
 	renderingMenu->addChild(tuneForQualityItem);
 
@@ -492,61 +491,61 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// Speed 1
 	CEGUI::Window *speed1Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed1Item");
+			"cmdSpeed1");
 	speed1Item->setText("Speed 1 [ALT-1]");
 	movementMenu->addChild(speed1Item);
 
 	// Speed 2
 	CEGUI::Window *speed2Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed2Item");
+			"cmdSpeed2");
 	speed2Item->setText("Speed 2 [ALT-2]");
 	movementMenu->addChild(speed2Item);
 
 	// Speed 3
 	CEGUI::Window *speed3Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed3Item");
+			"cmdSpeed3");
 	speed3Item->setText("Speed 3 [ALT-3]");
 	movementMenu->addChild(speed3Item);
 
 	// Speed 4
 	CEGUI::Window *speed4Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed4Item");
+			"cmdSpeed4");
 	speed4Item->setText("Speed 4 [ALT-4]");
 	movementMenu->addChild(speed4Item);
 
 	// Speed 5
 	CEGUI::Window *speed5Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed5Item");
+			"cmdSpeed5");
 	speed5Item->setText("Speed 5 [ALT-5]");
 	movementMenu->addChild(speed5Item);
 
 	// Speed 6
 	CEGUI::Window *speed6Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed6Item");
+			"cmdSpeed6");
 	speed6Item->setText("Speed 6 [ALT-6]");
 	movementMenu->addChild(speed6Item);
 
 	// Speed 7
 	CEGUI::Window *speed7Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed7Item");
+			"cmdSpeed7");
 	speed7Item->setText("Speed 7 [ALT-7]");
 	movementMenu->addChild(speed7Item);
 
 	// Speed 8
 	CEGUI::Window *speed8Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed8Item");
+			"cmdSpeed8");
 	speed8Item->setText("Speed 8 [ALT-8]");
 	movementMenu->addChild(speed8Item);
 
 	// Speed 9
 	CEGUI::Window *speed9Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed9Item");
+			"cmdSpeed9");
 	speed9Item->setText("Speed 9 [ALT-9]");
 	movementMenu->addChild(speed9Item);
 
 	// Speed 10
 	CEGUI::Window *speed10Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"speed10Item");
+			"cmdSpeed10");
 	speed10Item->setText("Speed 10 [ALT-10]");
 	movementMenu->addChild(speed10Item);
 
@@ -563,7 +562,7 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// Pause simulation
 	CEGUI::Window *pauseSimulationItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "pauseSimulationItem");
+			"Ogremonics/MenuItem", "cmdPauseSimulation");
 	pauseSimulationItem->setText("Pause Simulation");
 	physicsMenu->addChild(pauseSimulationItem);
 
@@ -580,67 +579,67 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// No gravity
 	CEGUI::Window *noGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"noGravityItem");
+			"cmdNoGravity");
 	noGravityItem->setText("No Gravity");
 	gravityMenu->addChild(noGravityItem);
 
 	// Pluto gravity 0.059
 	CEGUI::Window *plutoGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"plutoGravityItem");
+			"cmdPlutoGravity");
 	plutoGravityItem->setText("Pluto Gravity 0.059 g");
 	gravityMenu->addChild(plutoGravityItem);
 
 	// Moon gravity 0.166
 	CEGUI::Window *moonGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"moonGravityItem");
+			"cmdMoonGravity");
 	moonGravityItem->setText("Moon Gravity 0.166 g");
 	gravityMenu->addChild(moonGravityItem);
 
 	// Mars/Mercury gravity 0.377/0.378
 	CEGUI::Window *marsMercuryGravityItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "marsMercuryGravityItem");
+			"Ogremonics/MenuItem", "cmdMarsMercuryGravity");
 	marsMercuryGravityItem->setText("Mars/Mercury Gravity 0.377 g");
 	gravityMenu->addChild(marsMercuryGravityItem);
 
 	// Uranus gravity 0.889
 	CEGUI::Window *uranusGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"uranusGravityItem");
+			"cmdUranusGravity");
 	uranusGravityItem->setText("Uranus Gravity 0.899 g");
 	gravityMenu->addChild(uranusGravityItem);
 
 	// Venus/Saturn gravity 0.907/0.916
 	CEGUI::Window *venusSaturnGravityItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "venusSaturnGravityItem");
+			"Ogremonics/MenuItem", "cmdVenusSaturnGravity");
 	venusSaturnGravityItem->setText("Venus/Saturn Gravity 0.91 g");
 	gravityMenu->addChild(venusSaturnGravityItem);
 
 	// Earth gravity 1
 	CEGUI::Window *earthGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"earthGravityItem");
+			"cmdEarthGravity");
 	earthGravityItem->setText("Earth Gravity 1 g");
 	gravityMenu->addChild(earthGravityItem);
 
 	// Neptune gravity 1.12
 	CEGUI::Window *neptuneGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"neptuneGravityItem");
+			"cmdNeptuneGravity");
 	neptuneGravityItem->setText("Neptune Gravity 1.12 g");
 	gravityMenu->addChild(neptuneGravityItem);
 
 	// Jupiter gravity 2.36
 	CEGUI::Window *jupiterGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"jupiterGravityItem");
+			"cmdJupiterGravity");
 	jupiterGravityItem->setText("Jupiter Gravity 2.36 g");
 	gravityMenu->addChild(jupiterGravityItem);
 
 	// Sun gravity 27.930682977
 	CEGUI::Window *sunGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"sunGravityItem");
+			"cmdSunGravity");
 	sunGravityItem->setText("Sun Gravity 27.9 g");
 	gravityMenu->addChild(sunGravityItem);
 
 	// Custom gravity...
 	CEGUI::Window *customGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"customGravityItem");
+			"cmdCustomGravity");
 	customGravityItem->setText("Custom Gravity");
 	gravityMenu->addChild(customGravityItem);
 
@@ -656,7 +655,7 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// About
 	CEGUI::Window *aboutItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"aboutItem");
+			"cmdAbout");
 	aboutItem->setText("About");
 	helpMenu->addChild(aboutItem);
 
@@ -669,12 +668,13 @@ ParamsPanel* CEGUIBuilder::createFpsPanel() {
 	items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
 	items.push_back(ParamsPanel::PairString("Run time", "0"));		// 1
 	items.push_back(ParamsPanel::PairString("Info", "Idle."));		// 2
-	ParamsPanel* fpsPanel = ParamsPanel::createParamsPanel(
-			CEGUIConfiguration::INFOPANEL_BORDER,
-			(int) mSimulationMgr->getWindow()->getHeight()
-					- (3 * CEGUIConfiguration::INFOPANEL_BORDER + CEGUIConfiguration::INFOPANEL_CAPTION
-							+ CEGUIConfiguration::INFOPANEL_TEXT * items.size()), "FPS", 150,
-			items);
+	ParamsPanel* fpsPanel =
+			ParamsPanel::createParamsPanel(CEGUIConfiguration::INFOPANEL_BORDER,
+					(int) mSimulationMgr->getWindow()->getHeight()
+							- (3 * CEGUIConfiguration::INFOPANEL_BORDER
+									+ CEGUIConfiguration::INFOPANEL_CAPTION
+									+ CEGUIConfiguration::INFOPANEL_TEXT
+											* items.size()), "FPS", 150, items);
 	return fpsPanel;
 }
 
@@ -692,10 +692,10 @@ ParamsPanel*CEGUIBuilder::createDetailsPanel() {
 	items.push_back(ParamsPanel::PairString("", ""));		// 8
 	items.push_back(ParamsPanel::PairString("Filtering", "None"));		// 9
 	items.push_back(ParamsPanel::PairString("Poly Mode", "Solid"));		// 10
-	ParamsPanel* detailsPanel =
-			ParamsPanel::createParamsPanel(
-					(int) mSimulationMgr->getWindow()->getWidth() - 200 - CEGUIConfiguration::INFOPANEL_BORDER,
-					CEGUIConfiguration::INFOPANEL_BORDER * 4, "Debug", 200, items);
+	ParamsPanel* detailsPanel = ParamsPanel::createParamsPanel(
+			(int) mSimulationMgr->getWindow()->getWidth() - 200
+					- CEGUIConfiguration::INFOPANEL_BORDER,
+			CEGUIConfiguration::INFOPANEL_BORDER * 4, "Debug", 200, items);
 	detailsPanel->hide();
 	return detailsPanel;
 }

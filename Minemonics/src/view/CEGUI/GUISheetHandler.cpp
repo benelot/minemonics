@@ -16,6 +16,7 @@
 
 //# custom headers
 //## base headers
+#include "SimulationManager.h"
 
 //## configuration headers
 
@@ -29,15 +30,18 @@
 //## utils headers
 
 GUISheetHandler::GUISheetHandler() :
-		mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
+		mSimulationMgr(NULL), mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
 
 }
 
 GUISheetHandler::~GUISheetHandler() {
 }
 
-void GUISheetHandler::initialize(CEGUI::System* system, CEGUI::Window* sheet,
+void GUISheetHandler::initialize(SimulationManager* simulationMgr,
+		CEGUI::System* system, CEGUI::Window* sheet,
 		StateHandler* stateHandler) {
+
+	mSimulationMgr = simulationMgr;
 	mSystem = system;
 	mWindow = sheet;
 	mStateHandler = stateHandler;
@@ -50,6 +54,81 @@ void GUISheetHandler::initialize(CEGUI::System* system, CEGUI::Window* sheet,
 					"cmdQuitApplication");
 	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+					this));
+
+	//Settings->Physics->Gravity->No Gravity
+	CEGUI::PushButton* pNoGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive("cmdNoGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&GUISheetHandler::noGravityButtonClicked,
+					this));
+
+	//Settings->Physics->Gravity->Pluto Gravity
+	CEGUI::PushButton* pPlutoGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive("cmdPlutoGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::plutoGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Moon Gravity
+	CEGUI::PushButton* pMoonGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive("cmdMoonGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&GUISheetHandler::moonGravityButtonClicked,
+					this));
+
+	//Settings->Physics->Gravity->Mars Gravity
+	CEGUI::PushButton* pMarsMercuryGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive(
+					"cmdMarsMercuryGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::marsMercuryGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Uranus Gravity
+	CEGUI::PushButton* pUranusGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive(
+					"cmdUranusGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::uranusGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Venus/Saturn Gravity
+	CEGUI::PushButton* pVenusSaturnGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive(
+					"cmdVenusSaturnGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::venusSaturnGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Earth Gravity
+	CEGUI::PushButton* pButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive("cmdEarthGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::earthGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Neptune Gravity
+	CEGUI::PushButton* pNeptuneGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive(
+					"cmdNeptuneGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::neptuneGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Jupiter Gravity
+	CEGUI::PushButton* pJupiterGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive(
+					"cmdJupiterGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+					&GUISheetHandler::jupiterGravityButtonClicked, this));
+
+	//Settings->Physics->Gravity->Sun Gravity
+	CEGUI::PushButton* pSunGravityButton =
+			(CEGUI::PushButton *) mWindow->getChildRecursive("cmdsunGravity");
+	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&GUISheetHandler::sunGravityButtonClicked,
 					this));
 }
 
@@ -362,55 +441,75 @@ bool GUISheetHandler::pauseSimulationButtonClicked(
 
 //Settings->Physics->Gravity->No Gravity
 bool GUISheetHandler::noGravityButtonClicked(const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::NO_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Pluto Gravity
 bool GUISheetHandler::plutoGravityButtonClicked(const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::PLUTO_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Moon Gravity
 bool GUISheetHandler::moonGravityButtonClicked(const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::MOON_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Mars/Mercury Gravity
 bool GUISheetHandler::marsMercuryGravityButtonClicked(
 		const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::MARS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Uranus Gravity
 bool GUISheetHandler::uranusGravityButtonClicked(const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::URANUS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Venus/Saturn Gravity
 bool GUISheetHandler::venusSaturnGravityButtonClicked(
 		const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::VENUS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Earth Gravity
 bool GUISheetHandler::earthGravityButtonClicked(const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::EARTH_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Neptune Gravity
 bool GUISheetHandler::neptuneGravityButtonClicked(
 		const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::NEPTUNE_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Jupiter Gravity
 bool GUISheetHandler::jupiterGravityButtonClicked(
 		const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::JUPITER_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Sun Gravity
 bool GUISheetHandler::sunGravityButtonClicked(const CEGUI::EventArgs &args) {
+	mSimulationMgr->getPhysicsController().setGravity(
+			PhysicsConfiguration::SUN_GRAVITY);
 	return true;
 }
 

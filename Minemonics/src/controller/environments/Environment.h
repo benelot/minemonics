@@ -20,8 +20,6 @@ class EnvironmentPhysics;
 #include <btBulletDynamicsCommon.h>
 
 //## view headers
-#include <OgreLight.h>
-
 //# custom headers
 //## base headers
 //## configuration headers
@@ -33,19 +31,19 @@ class EnvironmentPhysics;
 class Environment {
 public:
 	enum EnvironmentType {
-		HILLS = 1, PLANE = 2, OPENSEA = 3
+		UNKNOWN_ENVIRONMENT_TYPE = 0, HILLS = 1, PLANE = 2, OPENSEA = 3
 	};
 
 	EnvironmentType mEnvironmentType;
 
-	Environment(SimulationManager* simulationMgr,
-			EnvironmentType environmentType);
+	Environment();
 	virtual ~Environment();
-	void initialize(Ogre::Light* l);
+	void initialize(SimulationManager* simulationMgr,
+			EnvironmentType environmentType);
 
 	btRigidBody*& getBody();
 
-private:
+protected:
 	SimulationManager* mSimulationMgr;
 	EnvironmentPhysics* mEnvironmentPhysics;
 	EnvironmentGraphics* mEnvironmentGraphics;

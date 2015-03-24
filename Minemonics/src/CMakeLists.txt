@@ -240,7 +240,6 @@ set(MODELHDRS
 	
 	./model/evolution/population/creature/phenome/Phenome.h
 	./model/evolution/population/creature/phenome/PhenotypeGenerator.h
-	./model/evolution/population/creature/phenome/Component.h
 )
 set(MODELSRCS
     # model
@@ -261,10 +260,8 @@ set(MODELSRCS
 	./model/evolution/population/creature/genome/MorphoGeneBranch.cpp
 	./model/evolution/population/creature/genome/controller/ControllerGene.cpp
 	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
-	
 	./model/evolution/population/creature/phenome/Phenome.cpp
 	./model/evolution/population/creature/phenome/PhenotypeGenerator.cpp
-	./model/evolution/population/creature/phenome/Component.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -278,6 +275,15 @@ set(CONTROLLERHDRS
 	./controller/StateHandler.h
     ./controller/physics/PhysicsController.h
     ./controller/SaveController.h
+
+    
+    #model-view facades to control objects at both sides
+    ./controller/environments/Environment.h
+    ./controller/environments/Plane.h
+        
+    ./controller/evolution/population/creature/phenome/Component.h
+    ./controller/evolution/population/creature/phenome/morphology/Limb.h
+    ./controller/physics/RagDoll.h
 )
 set(CONTROLLERSRCS
 	# controller
@@ -287,11 +293,20 @@ set(CONTROLLERSRCS
 	./controller/input/OgreInputHandler.cpp
 	./controller/StateHandler.cpp
 	./controller/physics/PhysicsController.cpp
+	
+	./controller/physics/RagDoll.cpp
+	
+	#model-view facades to control objects at both sides
+    ./controller/environments/Environment.cpp
+    ./controller/environments/Plane.cpp
+    
+    ./controller/evolution/population/creature/phenome/Component.cpp
+    ./controller/evolution/population/creature/phenome/morphology/Limb.cpp
+    ./controller/physics/RagDoll.cpp
 )
 set(VIEWHDRS
 	# view
 	./view/environments/EnvironmentGraphics.h
-	./view/environments/Environment.h
 	./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h
 	./view/ogre3D/environments/EnvironmentO3D.h
 	./view/ogre3D/environments/OpenSeaO3D.h
@@ -314,7 +329,6 @@ set(VIEWHDRS
 set(VIEWSRCS
 	# view
 	./view/environments/EnvironmentGraphics.cpp
-    ./view/environments/Environment.cpp
     ./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
 	./view/ogre3D/environments/EnvironmentO3D.cpp
 	./view/ogre3D/environments/HillsO3D.cpp

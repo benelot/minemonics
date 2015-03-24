@@ -32,6 +32,7 @@
 //## view headers
 
 //## utils headers
+#include "configuration/PhysicsConfiguration.h"
 
 class PhysicsController {
 private:
@@ -44,15 +45,60 @@ private:
 	btDynamicsWorld* mDynamicsWorld; //this is the most important class
 
 public:
+
+	PhysicsController();
+	~PhysicsController();
+
 	void initBulletPhysics();
 	void exitBulletPhysics();
 	void stepBulletPhysics(double timeStep);
 
 	void addBody(btRigidBody* body);
 
+	void createBox(double length, double width, double height, btScalar mass);
+
 	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}
+
+	/**
+	 * Set the gravity used in the physics engine
+	 * @param gravity The gravity used in the physics simulator.
+	 */
+	void setGravity(const double gravity) const {
+		mDynamicsWorld->setGravity(
+				btVector3(0,
+						-gravity
+								* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
+						0));
+	}
+
+	/**
+	 * Get the gravitational force of the physics engine.
+	 * @return The gravitational force of the physics engine.
+	 */
+	double getGravity() {
+		return -mDynamicsWorld->getGravity().getY()
+				/ PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR;
+	}
+
+	bool isPhysicsPaused() const {
+		return mPhysicsPaused;
+	}
+
+	void setPhysicsPaused(bool physicsPaused) {
+		mPhysicsPaused = physicsPaused;
+	}
+
+	/**
+	 * Is the physics simulation paused or not?
+	 */
+	bool mPhysicsPaused;
+
+	/**
+	 * Is the physics simulation triggered stepwise?
+	 */
+	bool mPhysicsStepped;
 };
 
 #endif /* PHYSICSCONTROLLER_H_ */

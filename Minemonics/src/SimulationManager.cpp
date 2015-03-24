@@ -45,13 +45,17 @@
 #include "controller/input/SDL2InputHandler.h"
 #include "controller/camera/CameraHandler.h"
 #include "controller/SaveController.h"
+
+#include "controller/environments/Environment.h"
+#include "controller/environments/Hills.h"
+#include "controller/environments/Plane.h"
+
 //## model headers
 #include "model/evolution/population/creature/genome/MorphoGene.h"
 
 //## view headers
 #include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
-#include "view/environments/Environment.h"
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/CEGUIBuilder.h"
 
@@ -64,7 +68,7 @@ SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDrawBulletDebug(false), mDebugDrawer(
+		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDrawBulletDebug(true), mDebugDrawer(
 		NULL), jury(1), t(0), mSdlWindow(
 		NULL) {
 
@@ -129,6 +133,9 @@ void SimulationManager::createFrameListener(void) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
+	mRagdoll = new RagDoll(mPhysicsController.getDynamicsWorld(),
+			btVector3(1, 0.5, 0));
+
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
 
@@ -136,12 +143,13 @@ void SimulationManager::createFrameListener(void) {
 		Ogre::Entity* ent = mSceneMgr->createEntity(
 				"cube" + Ogre::StringConverter::toString(i),
 				Ogre::SceneManager::PT_CUBE);
-
+		ent->setMaterialName("honeycomb");
 		Ogre::SceneNode* entNode =
 				mSceneMgr->getRootSceneNode()->createChildSceneNode(
 						"entNode" + Ogre::StringConverter::toString(i));
 		entNode->attachObject(ent);
-		ent->setMaterialName("honeycomb");
+
+		entNode->scale(2, 1, 0.5);
 		cubes.push_back(entNode);
 	}
 }
@@ -210,7 +218,7 @@ void SimulationManager::updatePhysics() {
 			InfoOverlayData* data = new InfoOverlayData(
 					Ogre::Vector3((float) Point[0], (float) Point[1],
 							(float) Point[2]), text);
-			mInfoOverlay.addInfo(data);
+			//mInfoOverlay.addInfo(data);
 
 			// Get the Orientation of the rigidbody as a bullet Quaternion
 			// Convert it to an Ogre quaternion
@@ -471,8 +479,18 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	mTerrain = new Environment(this, EnvironmentConfiguration::ENVIRONMENTTYPE);
-	mTerrain->initialize(light);
+	switch (EnvironmentConfiguration::ENVIRONMENTTYPE) {
+	case Environment::HILLS: {
+		mTerrain = new Hills();
+		((Hills*) mTerrain)->initialize(this, light);
+		break;
+	}
+	case Environment::PLANE: {
+		mTerrain = new Plane();
+		((Plane*) mTerrain)->initialize(this, light);
+		break;
+	}
+	}
 
 	// Create skyplane
 	Ogre::Plane plane;
