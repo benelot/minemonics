@@ -36,12 +36,17 @@ private:
     };
     DebugDrawModes               mDebugModes;
     Ogre::ManualObject          *mLines;
+    Ogre::ManualObject			*mLines2;
+    Ogre::ManualObject			*mLinesSwap;
     Ogre::ManualObject          *mTriangles;
+    Ogre::ManualObject			*mTriangles2;
+    Ogre::ManualObject			*mTrianglesSwap;
     std::vector< ContactPoint > *mContactPoints;
     std::vector< ContactPoint >  mContactPoints1;
     std::vector< ContactPoint >  mContactPoints2;
 
     bool mDrawTrajectory;
+    int mClear;
 
     const char* getMatName()
     {

@@ -12,28 +12,37 @@
 #include <OgreManualObject.h>
 
 #include <OgreSceneManager.h>
-#include<OgreRoot.h>
+#include <OgreRoot.h>
 
 using namespace Ogre;
 
 OgreDebugDrawer::OgreDebugDrawer(SceneManager *scm, bool drawTrajectory) :
-		mDrawTrajectory(drawTrajectory) {
+		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(drawTrajectory), mClear(
+				0) {
+	mDrawTrajectory = drawTrajectory;
 	mContactPoints = &mContactPoints1;
-	mLines = new ManualObject("physics lines");
+	mLines = new ManualObject("BulletPhysicsLines1");
+	mLines2 = new ManualObject("BulletPhysicsLines2");
 	//ASSERT( mLines );
-	mTriangles = new ManualObject("physics triangles");
+	mTriangles = new ManualObject("BulletPhysicsTriangles1");
+	mTriangles2 = new ManualObject("BulletPhysicsTriangles2");
 	//ASSERT( mTriangles );
 	mLines->setDynamic(true);
+	mLines2->setDynamic(true);
 	mTriangles->setDynamic(true);
+	mTriangles2->setDynamic(true);
 	//mLines->estimateVertexCount( 100000 );
 	//mLines->estimateIndexCount( 0 );
 
 	scm->getRootSceneNode()->attachObject(mLines);
+	scm->getRootSceneNode()->attachObject(mLines2);
 	scm->getRootSceneNode()->attachObject(mTriangles);
+	scm->getRootSceneNode()->attachObject(mTriangles2);
 
+	static const char * matName = "OgreBulletCollisionsDebugDefault";
 	MaterialPtr mtl =
 			MaterialManager::getSingleton().getDefaultSettings()->clone(
-					getMatName());
+					matName);
 	mtl->setReceiveShadows(false);
 	mtl->setSceneBlending(SBT_TRANSPARENT_ALPHA);
 	mtl->setDepthBias(0.1, 0);
@@ -43,22 +52,6 @@ OgreDebugDrawer::OgreDebugDrawer(SceneManager *scm, bool drawTrajectory) :
 	tu->setColourOperationEx(LBX_SOURCE1, LBS_DIFFUSE);
 	mtl->getTechnique(0)->setLightingEnabled(false);
 	//mtl->getTechnique(0)->setSelfIllumination( ColourValue::White );
-
-	mLines->begin(getMatName(), RenderOperation::OT_LINE_LIST);
-	mLines->position(Vector3::ZERO);
-	mLines->colour(ColourValue::Blue);
-	mLines->position(Vector3::ZERO);
-	mLines->colour(ColourValue::Blue);
-	mLines->end();
-
-	mTriangles->begin(getMatName(), RenderOperation::OT_TRIANGLE_LIST);
-	mTriangles->position(Vector3::ZERO);
-	mTriangles->colour(ColourValue::Blue);
-	mTriangles->position(Vector3::ZERO);
-	mTriangles->colour(ColourValue::Blue);
-	mTriangles->position(Vector3::ZERO);
-	mTriangles->colour(ColourValue::Blue);
-	mTriangles->end();
 
 	mDebugModes = (DebugDrawModes) DBG_DrawWireframe;
 	Root::getSingleton().addFrameListener(this);
@@ -74,26 +67,22 @@ void OgreDebugDrawer::drawLine(const btVector3 &from, const btVector3 &to,
 		const btVector3 &color) {
 	ColourValue c(color.getX(), color.getY(), color.getZ());
 	c.saturate();
-	mLines->begin(getMatName(), RenderOperation::OT_LINE_LIST);
 	mLines->position(cvt(from));
 	mLines->colour(c);
 	mLines->position(cvt(to));
 	mLines->colour(c);
-	mLines->end();
 }
 
 void OgreDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
 		const btVector3 &v2, const btVector3 &color, btScalar alpha) {
 	ColourValue c(color.getX(), color.getY(), color.getZ(), alpha);
 	c.saturate();
-	mTriangles->begin(getMatName(), RenderOperation::OT_LINE_LIST);
 	mTriangles->position(cvt(v0));
 	mTriangles->colour(c);
 	mTriangles->position(cvt(v1));
 	mTriangles->colour(c);
 	mTriangles->position(cvt(v2));
 	mTriangles->colour(c);
-	mTriangles->end();
 }
 
 void OgreDebugDrawer::drawContactPoint(const btVector3 &PointOnB,
@@ -110,11 +99,35 @@ void OgreDebugDrawer::drawContactPoint(const btVector3 &PointOnB,
 }
 
 bool OgreDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
+
+	mLinesSwap = mLines;
+	mLines = mLines2;
+	mLines2 = mLinesSwap;
+
+	mTrianglesSwap = mTriangles;
+	mTriangles = mTriangles2;
+	mTriangles2 = mTrianglesSwap;
+
+	static const char * matName = "OgreBulletCollisionsDebugDefault";
+
+	mLines->begin(matName, RenderOperation::OT_LINE_LIST);
+	mLines->position(Vector3::ZERO);
+	mLines->colour(ColourValue::Blue);
+	mLines->position(Vector3::ZERO);
+	mLines->colour(ColourValue::Blue);
+
+	mTriangles->begin(matName, RenderOperation::OT_TRIANGLE_LIST);
+	mTriangles->position(Vector3::ZERO);
+	mTriangles->colour(ColourValue::Blue);
+	mTriangles->position(Vector3::ZERO);
+	mTriangles->colour(ColourValue::Blue);
+	mTriangles->position(Vector3::ZERO);
+	mTriangles->colour(ColourValue::Blue);
+
 	size_t now = Root::getSingleton().getTimer()->getMilliseconds();
 	std::vector<ContactPoint> *newCP =
 			mContactPoints == &mContactPoints1 ?
 					&mContactPoints2 : &mContactPoints1;
-	mLines->begin(getMatName(), RenderOperation::OT_POINT_LIST);
 	for (std::vector<ContactPoint>::iterator i = mContactPoints->begin();
 			i < mContactPoints->end(); i++) {
 		ContactPoint &cp = *i;
@@ -127,18 +140,19 @@ bool OgreDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	mContactPoints->clear();
 	mContactPoints = newCP;
 
-	mLines->end();
-	//mTriangles->end();
-
 	return true;
 }
 
 bool OgreDebugDrawer::frameEnded(const Ogre::FrameEvent& evt) {
-	//this will not clear the old lines drawing a proper trajectory into the air
+
+	mLines->end();
+	mTriangles->end();
+
 	if (!mDrawTrajectory) {
-		mLines->clear();
-		mTriangles->clear();
+		mLines2->clear();
+		mTriangles2->clear();
 	}
+
 	return true;
 }
 
