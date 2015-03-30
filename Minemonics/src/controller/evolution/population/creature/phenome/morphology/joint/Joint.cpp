@@ -1,13 +1,13 @@
 /*
- * MotionController.cpp
+ * Joint.cpp
  *
- *  Created on: Mar 3, 2015
+ *  Created on: Nov 17, 2014
  *      Author: leviathan
  */
 
-//# corresponding header
-#include "MotionController.h"
+#include "Joint.h"
 
+//# corresponding header
 //# forward declarations
 //# system headers
 //## controller headers
@@ -20,12 +20,13 @@
 //## model headers
 //## view headers
 //## utils headers
-MotionController::MotionController() {
+
+Joint::Joint() {
 	// TODO Auto-generated constructor stub
 
 }
 
-MotionController::~MotionController() {
+Joint::~Joint() {
 	// TODO Auto-generated destructor stub
 }
 

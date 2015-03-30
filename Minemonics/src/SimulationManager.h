@@ -106,7 +106,7 @@ private:
 
 	std::vector<Ogre::SceneNode*> cubes;
 
-	RagDoll* mRagdoll;
+	std::vector<RagDoll*> mRagdolls;
 	void updatePhysics();
 public:
 	SimulationManager(void);
@@ -156,7 +156,7 @@ public:
 		mDrawBulletDebug = drawBulletDebug;
 	}
 
-	const PhysicsController& getPhysicsController() const {
+	PhysicsController& getPhysicsController() {
 		return mPhysicsController;
 	}
 

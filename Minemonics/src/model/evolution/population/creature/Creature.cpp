@@ -31,10 +31,9 @@
 
 //## utils headers
 #include "utils/NameGenerator.h"
-#include "configuration/MorphologyConfiguration.h"
 
 Creature::Creature() :
-		mDeveloped(false), mSegmentsDepthLimit(0), mTotalSegmentQtyLimit(0) {
+		mDeveloped(false) {
 
 }
 
@@ -45,15 +44,6 @@ void Creature::initialize(double bushiness) {
 	mGenotype.createRandomGenome(bushiness);
 	//genotype.expand();
 	mGenotype.linkRandomGenes();
-	mSegmentsDepthLimit = abs(
-			randomness.nextNormalInt(
-					MorphologyConfiguration::BODY_SEGMENTS_DEPTH_INITIAL_MEAN,
-					MorphologyConfiguration::BODY_SEGMENTS_DEPTH_INITIAL_VAR));
-
-	mTotalSegmentQtyLimit = abs(
-			randomness.nextNormalInt(
-					MorphologyConfiguration::BODY_SEGMENTS_TOTAL_INITIAL_MEAN,
-					MorphologyConfiguration::BODY_SEGMENTS_TOTAL_INITIAL_VAR));
 }
 
 Creature::~Creature() {
@@ -88,13 +78,13 @@ bool Creature::equals(const Creature & creature) const {
 //		}
 //	}
 
-	if (mSegmentsDepthLimit != creature.mSegmentsDepthLimit) {
-		return false;
-	}
-
-	if (mTotalSegmentQtyLimit != creature.mTotalSegmentQtyLimit) {
-		return false;
-	}
+//	if (mSegmentsDepthLimit != creature.mSegmentsDepthLimit) {
+//		return false;
+//	}
+//
+//	if (mTotalSegmentQtyLimit != creature.mTotalSegmentQtyLimit) {
+//		return false;
+//	}
 
 	return true;
 }

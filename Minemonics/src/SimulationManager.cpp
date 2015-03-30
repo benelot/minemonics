@@ -50,6 +50,8 @@
 #include "controller/environments/Hills.h"
 #include "controller/environments/Plane.h"
 
+#include "controller/physics/RagDoll.h"
+
 //## model headers
 #include "model/evolution/population/creature/genome/MorphoGene.h"
 
@@ -60,6 +62,7 @@
 #include "view/CEGUI/CEGUIBuilder.h"
 
 //## utils headers
+#include "utils/Randomness.h"
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
@@ -126,31 +129,18 @@ void SimulationManager::createFrameListener(void) {
 
 	mPhysicsController.initBulletPhysics();
 	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
-	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe+btIDebugDraw::DBG_DrawConstraints+btIDebugDraw::DBG_DrawConstraintLimits);
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
-	mRagdoll = new RagDoll(mPhysicsController.getDynamicsWorld(),
-			btVector3(1, 0.5, 0));
-
-	const int numObjects =
-			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
-
-	for (int i = 0; i < numObjects; i++) {
-		Ogre::Entity* ent = mSceneMgr->createEntity(
-				"cube" + Ogre::StringConverter::toString(i),
-				Ogre::SceneManager::PT_CUBE);
-		ent->setMaterialName("honeycomb");
-		Ogre::SceneNode* entNode =
-				mSceneMgr->getRootSceneNode()->createChildSceneNode(
-						"entNode" + Ogre::StringConverter::toString(i));
-		entNode->attachObject(ent);
-
-		entNode->scale(2, 1, 0.5);
-		cubes.push_back(entNode);
+	Randomness randomness;
+	for(int i = 0;i < 100;i++)
+	{
+		mRagdolls.push_back(new RagDoll(this,randomness.nextDouble(10,100),
+				btVector3(randomness.nextDouble(10,10000), randomness.nextDouble(10,10000), randomness.nextDouble(10,10000))));
 	}
 }
 
@@ -191,6 +181,13 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 }
 
 void SimulationManager::updatePhysics() {
+
+	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
+	for(;it != mRagdolls.end();it++)
+	{
+		(*it)->update();
+	}
+
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
 
@@ -202,9 +199,6 @@ void SimulationManager::updatePhysics() {
 		if (body) {
 
 			btVector3 Point = body->getCenterOfMassPosition();
-			cubes.at(i)->setPosition(
-					Ogre::Vector3((float) Point[0], (float) Point[1],
-							(float) Point[2]));
 
 			std::string text;
 			text.append("Box coordinate: ");
@@ -225,9 +219,6 @@ void SimulationManager::updatePhysics() {
 			btQuaternion btq = body->getOrientation();
 			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
 					btq.z());
-
-			// Set the orientation of the rendered Object
-			cubes.at(i)->setOrientation(quart);
 		}
 	}
 }
