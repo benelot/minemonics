@@ -20,6 +20,8 @@
 #include "SimulationManager.h"
 
 //## configuration headers
+#include "configuration/MorphologyConfiguration.h"
+
 //## controller headers
 #include "controller/evolution/population/creature/phenome/morphology/Limb.h"
 #include "controller/evolution/population/creature/phenome/morphology/joint/Joint.h"
@@ -47,15 +49,15 @@
 
 RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 		const btVector3& positionOffset) :
-		m_ownerWorld(
-				simulationManager->getPhysicsController().getDynamicsWorld()) {
+		mWorld(simulationManager->getPhysicsController().getDynamicsWorld()) {
 	btTransform transform;
 	btTransform localA, localB;
 
 	btTransform offset;
 	offset.setOrigin(positionOffset);
 
-	Limb::PrimitiveType type = Limb::CAPSULE;
+	MorphologyConfiguration::PrimitiveType type =
+			MorphologyConfiguration::CAPSULE;
 // Setup the geometry
 // BODYPART_PELVIS
 //	btTransform transform;
@@ -255,7 +257,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 		(*it)->getLimbPhysics()->getRigidBody()->setDeactivationTime(0.8);
 		(*it)->getLimbPhysics()->getRigidBody()->setSleepingThresholds(1.6,
 				2.5);
-		m_ownerWorld->addRigidBody((*it)->getLimbPhysics()->getRigidBody());
+		mWorld->addRigidBody((*it)->getLimbPhysics()->getRigidBody());
 	}
 
 ////	 Now setup the constraints
@@ -278,11 +280,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	joint->initialize(mLimbs[BODYPART_PELVIS]->getLimbPhysics()->getRigidBody(),
 			mLimbs[BODYPART_SPINE]->getLimbPhysics()->getRigidBody(), localA,
 			localB);
-	joint->setAngularLimits(btVector3(-0.2*M_PI,-M_PI_2, -0.1*M_PI), btVector3(0.2*M_PI,M_PI_2, M_PI_2));
+	joint->setAngularLimits(btVector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
+			btVector3(0.2 * M_PI, M_PI_2, M_PI_2));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -303,8 +305,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_4, M_PI_4, M_PI_2));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -325,8 +326,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_4, M_PI_4, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -347,8 +347,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(0, M_PI_2, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -369,8 +368,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_4, M_PI_4, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -391,8 +389,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(0, M_PI_2, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -413,8 +410,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_2, M_PI_2, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -435,8 +431,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(M_PI_2, 0, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -457,8 +452,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_2, M_PI_2, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -479,8 +473,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(M_PI_2, 0, 0));
 	mJoints.push_back(joint);
 
-	m_ownerWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(),
-			true);
+	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 }
 
 RagDoll::~RagDoll() {
@@ -488,7 +481,7 @@ RagDoll::~RagDoll() {
 
 	// Remove all constraints
 	for (i = 0; i < JOINT_COUNT; ++i) {
-		m_ownerWorld->removeConstraint(
+		mWorld->removeConstraint(
 				(btTypedConstraint*) mJoints[i]->getG6DofJoint());
 		delete mJoints[i];
 	}
@@ -497,8 +490,7 @@ RagDoll::~RagDoll() {
 
 	// Remove all bodies and shapes
 	for (i = 0; i < BODYPART_COUNT; ++i) {
-		m_ownerWorld->removeRigidBody(
-				mLimbs[i]->getLimbPhysics()->getRigidBody());
+		mWorld->removeRigidBody(mLimbs[i]->getLimbPhysics()->getRigidBody());
 
 		delete mLimbs[i];
 	}

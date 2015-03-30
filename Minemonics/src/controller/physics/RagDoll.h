@@ -66,11 +66,7 @@ class RagDoll {
 	std::vector<Limb*> mLimbs;
 	std::vector<JointBt*> mJoints;
 
-	btDynamicsWorld* m_ownerWorld;
-
-	btCollisionShape* m_shapes[BODYPART_COUNT];
-	btRigidBody* m_bodies[BODYPART_COUNT];
-	btTypedConstraint* m_joints[JOINT_COUNT];
+	btDynamicsWorld* mWorld;
 
 public:
 	RagDoll(SimulationManager* simulationManager,double size, const btVector3& positionOffset);
@@ -92,7 +88,7 @@ public:
 		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,shape,localInertia);
 		btRigidBody* body = new btRigidBody(rbInfo);
 
-		m_ownerWorld->addRigidBody(body);
+		mWorld->addRigidBody(body);
 
 		return body;
 	}
