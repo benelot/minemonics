@@ -187,7 +187,6 @@ void SimulationManager::updatePhysics() {
 	{
 		(*it)->update();
 	}
-
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
 

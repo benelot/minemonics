@@ -7,6 +7,20 @@
 
 #include "Emitter.h"
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
 Emitter::Emitter() {
 	// TODO Auto-generated constructor stub
 

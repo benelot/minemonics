@@ -7,6 +7,20 @@
 
 #include "StubGrower.h"
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
 StubGrower::StubGrower() {
 	// TODO Auto-generated constructor stub
 

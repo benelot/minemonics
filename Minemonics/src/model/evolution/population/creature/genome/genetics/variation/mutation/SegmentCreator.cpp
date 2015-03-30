@@ -7,6 +7,20 @@
 
 #include "SegmentCreator.h"
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
 SegmentCreator::SegmentCreator() {
 	// TODO Auto-generated constructor stub
 
