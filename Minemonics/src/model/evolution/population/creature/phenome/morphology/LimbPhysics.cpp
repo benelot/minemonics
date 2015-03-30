@@ -1,12 +1,12 @@
 /*
- * MotionController.cpp
+ * LimbPhysics.cpp
  *
- *  Created on: Mar 3, 2015
+ *  Created on: Mar 24, 2015
  *      Author: leviathan
  */
 
 //# corresponding header
-#include "MotionController.h"
+#include "LimbPhysics.h"
 
 //# forward declarations
 //# system headers
@@ -20,12 +20,13 @@
 //## model headers
 //## view headers
 //## utils headers
-MotionController::MotionController() {
+
+LimbPhysics::LimbPhysics() {
 	// TODO Auto-generated constructor stub
 
 }
 
-MotionController::~MotionController() {
+LimbPhysics::~LimbPhysics() {
 	// TODO Auto-generated destructor stub
 }
 

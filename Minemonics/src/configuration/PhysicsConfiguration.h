@@ -59,7 +59,17 @@ public:
 	/**
 	 * A box of unit size in ogre has the size of 96.9 in bullet
 	 */
-	static const double OGRE_BULLET_BOX_SCALING_FACTOR = 96.9;
+	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.013;
+
+	/**
+	 * Bullet box to capsule scaling factor
+	 */
+	static const double BULLET_CAPSULE_BOX_SCALING_FACTOR = 0.015;
+
+	/**
+	 * Bullet capsule to Ogre Procedural capsule scaling factor
+	 */
+	static const double OGRE_PROC_SCALING_FACTOR = 1.0f;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

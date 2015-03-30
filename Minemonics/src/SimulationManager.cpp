@@ -50,6 +50,8 @@
 #include "controller/environments/Hills.h"
 #include "controller/environments/Plane.h"
 
+#include "controller/physics/RagDoll.h"
+
 //## model headers
 #include "model/evolution/population/creature/genome/MorphoGene.h"
 
@@ -126,32 +128,15 @@ void SimulationManager::createFrameListener(void) {
 
 	mPhysicsController.initBulletPhysics();
 	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
-	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe);
+	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe+btIDebugDraw::DBG_DrawConstraints+btIDebugDraw::DBG_DrawConstraintLimits);
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
-	mRagdoll = new RagDoll(mPhysicsController.getDynamicsWorld(),
-			btVector3(1, 0.5, 0));
-
-	const int numObjects =
-			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
-
-	for (int i = 0; i < numObjects; i++) {
-		Ogre::Entity* ent = mSceneMgr->createEntity(
-				"cube" + Ogre::StringConverter::toString(i),
-				Ogre::SceneManager::PT_CUBE);
-		ent->setMaterialName("honeycomb");
-		Ogre::SceneNode* entNode =
-				mSceneMgr->getRootSceneNode()->createChildSceneNode(
-						"entNode" + Ogre::StringConverter::toString(i));
-		entNode->attachObject(ent);
-
-		entNode->scale(2, 1, 0.5);
-		cubes.push_back(entNode);
-	}
+	mRagdoll = new RagDoll(this,200,
+			btVector3(1, 100, 0));
 }
 
 //-------------------------------------------------------------------------------------
@@ -191,6 +176,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 }
 
 void SimulationManager::updatePhysics() {
+
+	mRagdoll->update();
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
 
@@ -202,9 +189,6 @@ void SimulationManager::updatePhysics() {
 		if (body) {
 
 			btVector3 Point = body->getCenterOfMassPosition();
-			cubes.at(i)->setPosition(
-					Ogre::Vector3((float) Point[0], (float) Point[1],
-							(float) Point[2]));
 
 			std::string text;
 			text.append("Box coordinate: ");
@@ -225,9 +209,6 @@ void SimulationManager::updatePhysics() {
 			btQuaternion btq = body->getOrientation();
 			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
 					btq.z());
-
-			// Set the orientation of the rendered Object
-			cubes.at(i)->setOrientation(quart);
 		}
 	}
 }

@@ -1,12 +1,12 @@
 /*
- * MotionController.cpp
+ * LimbGraphics.cpp
  *
- *  Created on: Mar 3, 2015
+ *  Created on: Mar 24, 2015
  *      Author: leviathan
  */
 
 //# corresponding header
-#include "MotionController.h"
+#include "LimbGraphics.h"
 
 //# forward declarations
 //# system headers
@@ -20,12 +20,13 @@
 //## model headers
 //## view headers
 //## utils headers
-MotionController::MotionController() {
+
+LimbGraphics::LimbGraphics() {
 	// TODO Auto-generated constructor stub
 
 }
 
-MotionController::~MotionController() {
+LimbGraphics::~LimbGraphics() {
 	// TODO Auto-generated destructor stub
 }
 

@@ -88,7 +88,7 @@ void PhysicsController::stepBulletPhysics(double timeStep) {
 			{
 		mDynamicsWorld->stepSimulation(timeStep); //1.0f/60.0f);
 
-		//if step trigger is pressed, we pause the simulation and it steps forward everytime we press the step trigger
+		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
 		if (mPhysicsStepped) {
 			mPhysicsStepped = false;
 			mPhysicsPaused = true;

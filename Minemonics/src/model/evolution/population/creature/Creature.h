@@ -12,6 +12,7 @@
 
 //# system headers
 #include <fstream>
+#include <vector>
 //## controller headers
 
 //## model headers
@@ -34,6 +35,7 @@
 //## model headers
 #include "model/evolution/juries/Jury.h"
 #include "model/evolution/population/creature/genome/Genome.h"
+#include "model/evolution/population/creature/phenome/Phenome.h"
 
 //## view headers
 
@@ -101,7 +103,7 @@ public:
 		ar
 				& BOOST_SERIALIZATION_NVP(
 						mName) & BOOST_SERIALIZATION_NVP(
-								mDeveloped) & BOOST_SERIALIZATION_NVP(mGenotype) & BOOST_SERIALIZATION_NVP(mJuries) & BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit) & BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit);
+								mDeveloped) & BOOST_SERIALIZATION_NVP(mGenotype) & BOOST_SERIALIZATION_NVP(mJuries);
 	}
 
 	bool equals(const Creature & creature) const;
@@ -123,47 +125,29 @@ public:
 		return mName;
 	}
 
-	int getSegmentsDepthLimit() const {
-		return mSegmentsDepthLimit;
-	}
-
-	void setSegmentsDepthLimit(int segmentsDepthLimit) {
-		mSegmentsDepthLimit = segmentsDepthLimit;
-	}
-
-	int getTotalSegmentQtyLimit() const {
-		return mTotalSegmentQtyLimit;
-	}
-
-	void setTotalSegmentQtyLimit(int totalSegmentQtyLimit) {
-		mTotalSegmentQtyLimit = totalSegmentQtyLimit;
-	}
-
 private:
 
+	/**
+	 * The name of the creature.
+	 */
 	std::string mName;
 
-	bool mDeveloped;
-
+	/**
+	 * The genotype (genomic individual) of the creature.
+	 */
 	Genome mGenotype;
 
+	/**
+	 * Is the phenotype developed?
+	 */
+	bool mDeveloped;
+
+	/**
+	 * The phenotype of the creature.
+	 */
+	Phenome mPhenotype;
+
 	std::vector<Jury*> mJuries;
-
-	/**
-	 * A hard limit on the total number of body segments allowed.
-	 */
-	int mTotalSegmentQtyLimit;
-
-	/**
-	 * A bound on the depth of the body's tree structure (the number of segments along any root-to-leaf path).
-	 * This bound is iteratively adjusted until both it and the segment quantity limit are satisfied.
-	 * First, the creature is instantiated using the depth bound provided
-	 * in the evolution configuration. If, during that process, the total number of body
-	 * segments exceeds the segment count limit, the body is deleted, the depth bound is
-	 * decreased, and the body is constructed again. This process will repeat, decreasing the
-	 * depth bound each time, until the segment count falls within the specific limit.
-	 */
-	int mSegmentsDepthLimit;
 
 };
 BOOST_CLASS_VERSION(Creature, 1)

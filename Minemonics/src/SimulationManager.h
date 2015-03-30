@@ -156,7 +156,7 @@ public:
 		mDrawBulletDebug = drawBulletDebug;
 	}
 
-	const PhysicsController& getPhysicsController() const {
+	PhysicsController& getPhysicsController() {
 		return mPhysicsController;
 	}
 

@@ -29,16 +29,18 @@
 #include "utils/Randomness.h"
 
 MorphoGeneBranch::MorphoGeneBranch() :
-		mActive(false), mBranchGeneType(-1), mFlipped(false), mJointAnchorX(
-				0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(
-				0), mJointRoll(0), mMirrored(0) {
+		mActive(false), mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(
+				0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(
+				0), mActuated(false), mJointPitchMinAngle(0), mJointPitchMaxAngle(
+				0), mJointYawMinAngle(0), mJointYawMaxAngle(0), mJointRollMinAngle(
+				0), mJointRollMaxAngle(0), mMirrored(0) {
 
 }
 
 void MorphoGeneBranch::initialize() {
 	Randomness randomness;
 
-	/* Set joint anchor X, Y and Z, where the anchor lies in the center of mass
+	/** Set joint anchor X, Y and Z, where the anchor lies in the center of mass
 	 and the X, y and Z form a vector, pointing to the point on the surface where
 	 the joint will be attached.*/
 	do {
@@ -47,7 +49,7 @@ void MorphoGeneBranch::initialize() {
 		mJointAnchorZ = randomness.nextDouble(0, 1);
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
-	/*
+	/**
 	 * The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	 */
 	mJointYaw = randomness.nextDouble(0,
@@ -57,7 +59,23 @@ void MorphoGeneBranch::initialize() {
 	mJointRoll = randomness.nextDouble(0,
 			2 * boost::math::constants::pi<double>());
 
-	/*
+	/**
+	 * The joint limits in each direction (pitch,yaw, roll)
+	 */
+	mJointPitchMinAngle = randomness.nextDouble(0,
+			2 * boost::math::constants::pi<double>());
+	mJointPitchMaxAngle = randomness.nextDouble(0,
+			2 * boost::math::constants::pi<double>());
+	mJointYawMinAngle = randomness.nextDouble(0,
+			2 * boost::math::constants::pi<double>());
+	mJointYawMaxAngle = randomness.nextDouble(0,
+			2 * boost::math::constants::pi<double>());
+	mJointRollMinAngle = randomness.nextDouble(0,
+			2 * boost::math::constants::pi<double>());
+	mJointRollMaxAngle = randomness.nextDouble(0,
+			2 * boost::math::constants::pi<double>());
+
+	/**
 	 * Set if the branch should be mirrored or flipped to the other side.
 	 */
 	mMirrored = randomness.nextBoolean();
@@ -65,6 +83,8 @@ void MorphoGeneBranch::initialize() {
 	mFlipped = randomness.nextBoolean();
 
 	mActive = randomness.nextBoolean();
+
+	mActuated = randomness.nextBoolean();
 
 	mBranchGeneType = -1;
 }

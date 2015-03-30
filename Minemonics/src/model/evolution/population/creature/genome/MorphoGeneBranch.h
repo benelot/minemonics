@@ -61,14 +61,19 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 			const MorphoGeneBranch &geneBranch) {
 		return os << "GeneBranch: isActive=" << geneBranch.mActive
-				<< "/GeneType=" << geneBranch.mBranchGeneType
-				<< "/isFlipped=" << geneBranch.mFlipped << "/isMirrored="
-				<< geneBranch.mMirrored << "/Joint Anchor:("
-				<< geneBranch.mJointAnchorX << ","
-				<< geneBranch.mJointAnchorY << ","
-				<< geneBranch.mJointAnchorZ << ")" << "/Joint Rotation:("
-				<< geneBranch.mJointPitch << "," << geneBranch.mJointYaw
-				<< "," << geneBranch.mJointRoll << ")";
+				<< "/GeneType=" << geneBranch.mBranchGeneType << "/isFlipped="
+				<< geneBranch.mFlipped << "/isMirrored=" << geneBranch.mMirrored
+				<< "/Joint Anchor:(" << geneBranch.mJointAnchorX << ","
+				<< geneBranch.mJointAnchorY << "," << geneBranch.mJointAnchorZ
+				<< ")" << "/Joint Rotation:(" << geneBranch.mJointPitch << ","
+				<< geneBranch.mJointYaw << "," << geneBranch.mJointRoll << ")"
+				<< "/Joint Limits (Min/Max)[Pitch:"
+				<< geneBranch.mJointPitchMinAngle << "/"
+				<< geneBranch.mJointPitchMaxAngle << "][Yaw:"
+				<< geneBranch.mJointYawMinAngle << "/"
+				<< geneBranch.mJointYawMaxAngle << "][Roll:"
+				<< geneBranch.mJointRollMinAngle << "/"
+				<< geneBranch.mJointRollMaxAngle;
 	}
 
 	/**
@@ -88,7 +93,14 @@ public:
 						& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
 						& BOOST_SERIALIZATION_NVP(mJointPitch)
 						& BOOST_SERIALIZATION_NVP(mJointYaw)
-						& BOOST_SERIALIZATION_NVP(mJointRoll);
+						& BOOST_SERIALIZATION_NVP(mJointRoll)
+						& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle)
+						& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
+						& BOOST_SERIALIZATION_NVP(mJointYawMinAngle)
+						& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
+						& BOOST_SERIALIZATION_NVP(mJointRollMinAngle)
+						& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle)
+						& BOOST_SERIALIZATION_NVP(mActuated);
 	}
 
 	// Accessor methods
@@ -188,6 +200,17 @@ private:
 	 * Direction of joint anchoring on the surface of the segment
 	 */
 	double mJointPitch, mJointYaw, mJointRoll;
+
+	/**
+	 * Joint limits for each degree of freedom
+	 */
+	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle;
+	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
+
+	/**
+	 * Actuated joint?
+	 */
+	bool mActuated;
 
 	/**
 	 * Determines if this branch is mirrored through the center of mass of its segment.

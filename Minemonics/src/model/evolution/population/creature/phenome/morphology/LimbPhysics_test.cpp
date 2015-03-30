@@ -1,13 +1,13 @@
 /*
- * MotionController.cpp
+ * LimbPhysics_test.cpp
  *
- *  Created on: Mar 3, 2015
+ *  Created on: Mar 24, 2015
  *      Author: leviathan
  */
 
-//# corresponding header
-#include "MotionController.h"
+#include <model/evolution/population/creature/phenome/morphology/LimbPhysics.h>
 
+//# corresponding header
 //# forward declarations
 //# system headers
 //## controller headers
@@ -20,12 +20,4 @@
 //## model headers
 //## view headers
 //## utils headers
-MotionController::MotionController() {
-	// TODO Auto-generated constructor stub
-
-}
-
-MotionController::~MotionController() {
-	// TODO Auto-generated destructor stub
-}
 
