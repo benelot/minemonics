@@ -22,9 +22,9 @@ class SimulationManager;
 //# custom headers
 //## base headers
 //## configuration headers
-//## controller headers
-#include "controller/evolution/population/creature/phenome/morphology/Limb.h"
+#include "configuration/MorphologyConfiguration.h"
 
+//## controller headers
 //## model headers
 //## view headers
 #include "view/evolution/population/creature/phenome/morphology/LimbGraphics.h"
@@ -36,7 +36,8 @@ public:
 	LimbO3D();
 	virtual ~LimbO3D();
 
-	void initialize(SimulationManager* simulationManager, Limb::PrimitiveType type, Ogre::Vector3 scale);
+	void initialize(SimulationManager* simulationManager,
+			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale);
 
 	virtual void update();
 

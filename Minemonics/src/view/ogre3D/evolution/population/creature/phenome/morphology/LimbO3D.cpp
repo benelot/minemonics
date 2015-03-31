@@ -15,8 +15,6 @@
 //## controller headers
 //## model headers
 //## view headers
-#include "utils/procedural/ProceduralCapsuleGenerator.h"
-
 //# custom headers
 //## base headers
 #include "SimulationManager.h"
@@ -27,6 +25,8 @@
 
 //## model headers
 //## view headers
+#include "view/procedural/ProceduralCapsuleGenerator.h"
+
 //## utils headers
 
 #ifndef NULL
@@ -44,11 +44,11 @@ LimbO3D::~LimbO3D() {
 }
 
 void LimbO3D::initialize(SimulationManager* simulationManager,
-		Limb::PrimitiveType type, Ogre::Vector3 scale) {
+		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale) {
 	mSimulationManager = simulationManager;
 
 	switch (type) {
-	case Limb::BLOCK:
+	case MorphologyConfiguration::BLOCK:
 		mEntity = mSimulationManager->getSceneManager()->createEntity(
 				Ogre::SceneManager::PT_CUBE);
 		mEntity->setMaterialName("honeycomb");
@@ -61,13 +61,13 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 				scale.y * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
 				scale.z * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR);
 		break;
-	case Limb::CAPSULE:
+	case MorphologyConfiguration::CAPSULE:
 		Ogre::String name = boost::lexical_cast<std::string>(this) + "/"
-						+ "Limb";
+				+ "Limb";
 
 		//because we can only scale bullet capsule that way, we do not scale this object differently
-		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(0.5f*scale.z).setHeight(scale.y).realizeMesh(
-				name);
+		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
+				0.5f * scale.z).setHeight(scale.y).realizeMesh(name);
 		mEntity = mSimulationManager->getSceneManager()->createEntity(name);
 		mEntity->setMaterialName("honeycomb");
 		mEntityNode =

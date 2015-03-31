@@ -292,9 +292,11 @@ set(CONTROLLERHDRS
 
     
     #model-view facades to control objects at both sides
+    ## environments
     ./controller/environments/Environment.h
     ./controller/environments/Plane.h
         
+    ## phenome
     ./controller/evolution/population/creature/phenome/PhenotypeGenerator.h
     ./controller/evolution/population/creature/phenome/Phenome.h
     ./controller/evolution/population/creature/phenome/Component.h
@@ -310,10 +312,12 @@ set(CONTROLLERSRCS
 	./controller/StateHandler.cpp
 	./controller/physics/PhysicsController.cpp
 	
-	#model-view facades to sync objects on both sides
+	# model-view facades to sync objects on both sides
+	## environments
     ./controller/environments/Environment.cpp
     ./controller/environments/Plane.cpp
     
+    ## phenome
     ./controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp
     ./controller/evolution/population/creature/phenome/Phenome.cpp
     ./controller/evolution/population/creature/phenome/Component.cpp
@@ -322,6 +326,8 @@ set(CONTROLLERSRCS
 )
 set(VIEWHDRS
 	# view
+	
+	## environments
 	./view/environments/EnvironmentGraphics.h
 	./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h
 	./view/ogre3D/environments/EnvironmentO3D.h
@@ -332,8 +338,11 @@ set(VIEWHDRS
     ./view/evolution/population/creature/phenome/morphology/LimbGraphics.h
 	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h
 	
+	## physics debug drawing
 	./view/ogre3D/bullet/OgreDebugDrawer.h
 	./view/ogre3D/bullet/OgreBulletUtils.h
+	
+	## information overlay
 	./view/ogre3D/overlay/InfoOverlay.h
 	./view/ogre3D/overlay/InfoOverlayData.h
 	
@@ -344,9 +353,42 @@ set(VIEWHDRS
 	
 	## MathGL
     ./view/MathGL/MathGLWindow.h
+    
+    # procedural
+	./view/procedural/ProceduralPlatform.h
+	./view/procedural/Procedural.h
+	./view/procedural/ProceduralMeshGenerator.h
+	./view/procedural/ProceduralBoxGenerator.h
+	./view/procedural/ProceduralCapsuleGenerator.h
+	./view/procedural/ProceduralConeGenerator.h
+	./view/procedural/ProceduralCylinderGenerator.h
+	./view/procedural/ProceduralIcoSphereGenerator.h
+	./view/procedural/ProceduralPlaneGenerator.h
+	./view/procedural/ProceduralSphereGenerator.h
+	./view/procedural/ProceduralRoot.h
+	./view/procedural/ProceduralRoundedBoxGenerator.h
+	./view/procedural/ProceduralTorusGenerator.h
+	./view/procedural/ProceduralTorusKnotGenerator.h
+	./view/procedural/ProceduralTubeGenerator.h
+	./view/procedural/ProceduralUtils.h
+	./view/procedural/ProceduralExtruder.h
+	./view/procedural/ProceduralLathe.h
+	./view/procedural/ProceduralShape.h	
+	./view/procedural/ProceduralShapeGenerators.h
+	./view/procedural/ProceduralPath.h
+	./view/procedural/ProceduralPathGenerators.h
+	./view/procedural/ProceduralTrack.h
+	./view/procedural/ProceduralSplines.h
+	./view/procedural/ProceduralTriangulator.h
+	./view/procedural/ProceduralTriangleBuffer.h
+	./view/procedural/ProceduralStableHeaders.h
+	./view/procedural/ProceduralMultiShape.h	
+	./view/procedural/ProceduralGeometryHelpers.h
 )
 set(VIEWSRCS
 	# view
+	
+	## environments
 	./view/environments/EnvironmentGraphics.cpp
     ./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
 	./view/ogre3D/environments/EnvironmentO3D.cpp
@@ -357,7 +399,10 @@ set(VIEWSRCS
 	./view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp
 	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp
 	
+	## physics debug drawing
 	./view/ogre3D/bullet/OgreDebugDrawer.cpp
+	
+	## information overlay
 	./view/ogre3D/overlay/InfoOverlay.cpp
 	./view/ogre3D/overlay/InfoOverlayData.cpp
 	
@@ -368,6 +413,32 @@ set(VIEWSRCS
 	
 	## MathGL
 	./view/MathGL/MathGLWindow.cpp
+	
+	# procedural
+	./view/procedural/ProceduralBoxGenerator.cpp
+	./view/procedural/ProceduralCapsuleGenerator.cpp
+	./view/procedural/ProceduralConeGenerator.cpp
+	./view/procedural/ProceduralCylinderGenerator.cpp
+	./view/procedural/ProceduralIcoSphereGenerator.cpp
+	./view/procedural/ProceduralPlaneGenerator.cpp
+	./view/procedural/ProceduralRoot.cpp
+	./view/procedural/ProceduralRoundedBoxGenerator.cpp
+	./view/procedural/ProceduralSphereGenerator.cpp
+	./view/procedural/ProceduralTorusGenerator.cpp
+	./view/procedural/ProceduralTorusKnotGenerator.cpp
+	./view/procedural/ProceduralTubeGenerator.cpp		
+	./view/procedural/ProceduralUtils.cpp
+	./view/procedural/ProceduralShape.cpp		
+	./view/procedural/ProceduralShapeGenerators.cpp
+	./view/procedural/ProceduralPath.cpp
+	./view/procedural/ProceduralPathGenerators.cpp
+	./view/procedural/ProceduralTrack.cpp
+	./view/procedural/ProceduralExtruder.cpp
+	./view/procedural/ProceduralLathe.cpp
+	./view/procedural/ProceduralTriangulator.cpp
+	./view/procedural/ProceduralPrecompiledHeaders.cpp
+	./view/procedural/ProceduralMultiShape.cpp
+	./view/procedural/ProceduralGeometryHelpers.cpp
 )
 set(MISCHDRS
 	# configuration
@@ -389,70 +460,12 @@ set(MISCHDRS
 	./utils/logging/Logger.h
 	./utils/Randomness.h
 	./utils/NameGenerator.h
-	
-	
-	#procedural
-	./utils/procedural/ProceduralPlatform.h
-	./utils/procedural/Procedural.h
-	./utils/procedural/ProceduralMeshGenerator.h
-	./utils/procedural/ProceduralBoxGenerator.h
-	./utils/procedural/ProceduralCapsuleGenerator.h
-	./utils/procedural/ProceduralConeGenerator.h
-	./utils/procedural/ProceduralCylinderGenerator.h
-	./utils/procedural/ProceduralIcoSphereGenerator.h
-	./utils/procedural/ProceduralPlaneGenerator.h
-	./utils/procedural/ProceduralSphereGenerator.h
-	./utils/procedural/ProceduralRoot.h
-	./utils/procedural/ProceduralRoundedBoxGenerator.h
-	./utils/procedural/ProceduralTorusGenerator.h
-	./utils/procedural/ProceduralTorusKnotGenerator.h
-	./utils/procedural/ProceduralTubeGenerator.h
-	./utils/procedural/ProceduralUtils.h
-	./utils/procedural/ProceduralExtruder.h
-	./utils/procedural/ProceduralLathe.h
-	./utils/procedural/ProceduralShape.h	
-	./utils/procedural/ProceduralShapeGenerators.h
-	./utils/procedural/ProceduralPath.h
-	./utils/procedural/ProceduralPathGenerators.h
-	./utils/procedural/ProceduralTrack.h
-	./utils/procedural/ProceduralSplines.h
-	./utils/procedural/ProceduralTriangulator.h
-	./utils/procedural/ProceduralTriangleBuffer.h
-	./utils/procedural/ProceduralStableHeaders.h
-	./utils/procedural/ProceduralMultiShape.h	
-	./utils/procedural/ProceduralGeometryHelpers.h
 )
 set(MISCSRCS
 	# logger
 	./utils/logging/Logger.cpp
 	./utils/Randomness.cpp
 	./utils/NameGenerator.cpp
-	
-	#procedural
-	./utils/procedural/ProceduralBoxGenerator.cpp
-	./utils/procedural/ProceduralCapsuleGenerator.cpp
-	./utils/procedural/ProceduralConeGenerator.cpp
-	./utils/procedural/ProceduralCylinderGenerator.cpp
-	./utils/procedural/ProceduralIcoSphereGenerator.cpp
-	./utils/procedural/ProceduralPlaneGenerator.cpp
-	./utils/procedural/ProceduralRoot.cpp
-	./utils/procedural/ProceduralRoundedBoxGenerator.cpp
-	./utils/procedural/ProceduralSphereGenerator.cpp
-	./utils/procedural/ProceduralTorusGenerator.cpp
-	./utils/procedural/ProceduralTorusKnotGenerator.cpp
-	./utils/procedural/ProceduralTubeGenerator.cpp		
-	./utils/procedural/ProceduralUtils.cpp
-	./utils/procedural/ProceduralShape.cpp		
-	./utils/procedural/ProceduralShapeGenerators.cpp
-	./utils/procedural/ProceduralPath.cpp
-	./utils/procedural/ProceduralPathGenerators.cpp
-	./utils/procedural/ProceduralTrack.cpp
-	./utils/procedural/ProceduralExtruder.cpp
-	./utils/procedural/ProceduralLathe.cpp
-	./utils/procedural/ProceduralTriangulator.cpp
-	./utils/procedural/ProceduralPrecompiledHeaders.cpp
-	./utils/procedural/ProceduralMultiShape.cpp
-	./utils/procedural/ProceduralGeometryHelpers.cpp
 )
 
 set(TESTHDRS
@@ -466,6 +479,8 @@ set(TESTSRCS
     #${VIEWSRCS}
     #${CONTROLLERSRCS}
     ${MISCSRCS}
+    
+    ## unit test cases
     ./model/evolution/juries/Velocity_test.cpp
     ./model/evolution/juries/Ones_test.cpp
     ./model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp

@@ -90,6 +90,14 @@ public:
 	 * Initial total segment variance
 	 */
 	static const double BODY_SEGMENTS_TOTAL_INITIAL_VAR = 10;
+
+	/**
+	 * Primitive type
+	 */
+	enum PrimitiveType {
+		BLOCK = 2, CAPSULE = 1, UNKNOWN = 0
+	};
+	static const int PRIMITIVE_QTY = 2;
 };
 
 #endif /* MORPHOLOGYCONFIGURATION_H_ */
