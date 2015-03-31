@@ -9,41 +9,24 @@
 #define CAMERAHANDLER_H_
 
 //# corresponding header
-
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <OgreRoot.h>
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class SimulationManager;
 
 class CameraHandler {
-private:
-	SimulationManager* mSimulationMgr;
-
-	Ogre::Real mRotate;          // The rotate constant
-	Ogre::Real mMove;            // The movement constant
-	Ogre::SceneNode *mCamNode; // The SceneNode the camera is currently attached to
-	Ogre::Vector3 mDirection;    // Value to move in the correct direction
-
 public:
 	CameraHandler(SimulationManager* simulationMgr);
 	virtual ~CameraHandler();
@@ -63,6 +46,28 @@ public:
 	void setMove(Ogre::Real move) {
 		mMove = move;
 	}
+
+private:
+	SimulationManager* mSimulationMgr;
+
+	/**
+	 * The rotate constant
+	 */
+	Ogre::Real mRotate;
+	/**
+	 * The movement constant
+	 */
+	Ogre::Real mMove;
+
+	/**
+	 * The SceneNode the camera is currently attached to
+	 */
+	Ogre::SceneNode *mCamNode;
+
+	/**
+	 *  Value to move in the correct direction
+	 */
+	Ogre::Vector3 mDirection;
 };
 
 #endif /* CAMERAHANDLER_H_ */

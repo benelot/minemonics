@@ -9,35 +9,28 @@
 #define CEGUIINPUTHANDLER_H_
 
 //# corresponding header
-
 //# forward declarations
 class SimulationManager;
 class StateHandler;
 
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <CEGUI/CEGUI.h>
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
 #include "ApplicationKeycode.h"
 #include "ApplicationMousecode.h"
 #include "OgreInputHandler.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include <utils/logging/Logger.h>
+#include "utils/logging/Logger.h"
 
 class CEGUIInputHandler: public OgreInputHandler {
 private:

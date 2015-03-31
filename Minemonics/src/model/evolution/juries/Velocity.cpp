@@ -6,32 +6,22 @@
  */
 
 //# corresponding header
+#include "Velocity.h"
 
 //# forward declarations
-
 //# system headers
+#include <math.h>
+
 //## controller headers
-
 //## model headers
-
 //## view headers
-
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
-
-#include "Velocity.h"
-#include <math.h>
 
 Velocity::Velocity(double weight) :
 		Jury(Jury::VELOCITY, weight), mIsFirstTime(true), mAvgVelocity(0), mX(

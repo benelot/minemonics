@@ -5,9 +5,9 @@
  *      Author: leviathan
  */
 
-#include <model/evolution/population/creature/phenome/morphology/LimbPhysics.h>
-
 //# corresponding header
+#include "LimbPhysics.h"
+
 //# forward declarations
 //# system headers
 //## controller headers

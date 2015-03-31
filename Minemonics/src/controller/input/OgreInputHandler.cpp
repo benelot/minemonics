@@ -22,9 +22,7 @@
 #include "OgreInputHandler.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 BoostLogger OgreInputHandler::mBoostLogger;  // initialize the static variables

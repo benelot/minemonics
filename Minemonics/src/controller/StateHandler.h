@@ -5,30 +5,22 @@
  *      Author: leviathan
  */
 #pragma once
+
 //# corresponding header
-
 //# forward declarations
-
 //# system headers
 #include <vector>
 #include <map>
+
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 typedef enum {

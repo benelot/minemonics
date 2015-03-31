@@ -8,29 +8,20 @@
 #ifndef VELOCITY_H_
 #define VELOCITY_H_
 
-//# corresponding header
+//# corresponding headers
+#include "model/evolution/juries/Jury.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-#include "Jury.h"
-
 //## view headers
-
 //## utils headers
 
 class Velocity: public Jury {

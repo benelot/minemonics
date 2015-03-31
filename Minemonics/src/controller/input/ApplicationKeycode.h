@@ -11,7 +11,21 @@
 #ifndef APPLICATIONKEYCODE_H_
 #define APPLICATIONKEYCODE_H_
 
+//# corresponding header
 #include "ApplicationScancode.h"
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 /**
  *  \brief The APP virtual key representation.

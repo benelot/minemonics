@@ -10,28 +10,21 @@
 
 //# forward declarations
 //# system headers
-
 //## controller headers
-
 //## model headers
 // include headers that implement a archive in xml format
 #include <boost/archive/tmpdir.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/version.hpp>
-//## view headers
 
+//## view headers
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class ControllerGene {

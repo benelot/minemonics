@@ -9,29 +9,25 @@
 #include "SineControllerGene.h"
 
 //# forward declarations
-
 //# system headers
 #include <gtest/gtest.h>
-//## controller headers
 
+//## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-//## view headers
 
+//## view headers
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
 #include "controller/SaveController.h"
 
-//## model headers
-
-//## view headers
-
-//## utils headers
 #include "configuration/ControlConfiguration.h"
+
+//## model headers
+//## view headers
+//## utils headers
 
 class SineControllerGeneTest: public ::testing::Test {
 protected:

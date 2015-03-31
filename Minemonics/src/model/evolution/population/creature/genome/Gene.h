@@ -55,7 +55,7 @@ public:
 	 * @return A string containing all information about the gene.
 	 */
 	friend std::ostream & operator<<(std::ostream &os, const Gene &gene) {
-		os << "Gene: Active" << gene.mActive << gene.mGeneType;
+		os << "Gene: Active=" << gene.mActive  << "/Gene type="<< gene.mGeneType;
 		return os;
 	}
 

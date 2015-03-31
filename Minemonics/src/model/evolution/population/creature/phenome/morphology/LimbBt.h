@@ -19,9 +19,9 @@
 //# custom headers
 //## base headers
 //## configuration headers
-//## controller headers
-#include "controller/evolution/population/creature/phenome/morphology/Limb.h"
+#include "configuration/MorphologyConfiguration.h"
 
+//## controller headers
 //## model headers
 #include "model/evolution/population/creature/phenome/morphology/LimbPhysics.h"
 
@@ -33,7 +33,7 @@ public:
 	LimbBt();
 	virtual ~LimbBt();
 
-	void initialize(Limb::PrimitiveType type, btVector3 position, btQuaternion orientation,
+	void initialize(MorphologyConfiguration::PrimitiveType type, btVector3 position, btQuaternion orientation,
 			btVector3 size, btScalar mass);
 
 	btVector3 getPosition() {

@@ -9,32 +9,22 @@
 #define ONES_H_
 
 //# corresponding header
+#include "model/evolution/juries/Jury.h"
 
 //# forward declarations
-
 //# system headers
+#include <vector>
+
 //## controller headers
-
 //## model headers
-
 //## view headers
-
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
-
-#include <vector>
-#include "Jury.h"
 
 class Ones: public Jury {
 public:

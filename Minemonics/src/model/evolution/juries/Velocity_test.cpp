@@ -4,10 +4,25 @@
  *  Created on: Feb 26, 2015
  *      Author: leviathan
  */
-#include "model/evolution/juries/Velocity.h"
+
+//# corresponding header
+#include "Velocity.h"
+
+//# forward declarations
+//# system headers
+#include <gtest/gtest.h>
 #include <iostream>
 
-#include <gtest/gtest.h>
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 class VelocityTest: public ::testing::Test {
 protected:

@@ -8,9 +8,23 @@
 #ifndef MODEL_BULLET_ENVIRONMENTS_ENVIRONMENTBT_H_
 #define MODEL_BULLET_ENVIRONMENTS_ENVIRONMENTBT_H_
 
+//# corresponding header
+#include "model/environments/EnvironmentPhysics.h"
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <btBulletDynamicsCommon.h>
 
-#include "model/environments/EnvironmentPhysics.h"
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 class EnvironmentBt: public EnvironmentPhysics {
 public:

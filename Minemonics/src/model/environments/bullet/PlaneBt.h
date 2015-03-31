@@ -8,9 +8,23 @@
 #ifndef MODEL_ENVIRONMENT_PLANEBT_H_
 #define MODEL_ENVIRONMENT_PLANEBT_H_
 
+//# corresponding header
+#include "model/environments/bullet/EnvironmentBt.h"
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <btBulletDynamicsCommon.h>
 
-#include "EnvironmentBt.h"
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 class PlaneBt : public EnvironmentBt {
 public:

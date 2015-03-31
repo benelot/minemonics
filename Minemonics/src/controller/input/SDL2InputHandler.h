@@ -9,33 +9,25 @@
 #define SDL2INPUTHANDLER_H_
 
 //# corresponding header
-
 //# forward declarations
-
 //# system headers
 //## controller headers
 #include <SDL.h>
 
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
 #include "ApplicationMousecode.h"
 #include "ApplicationKeycode.h"
 #include "CEGUIInputHandler.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include <utils/logging/Logger.h>
+#include "utils/logging/Logger.h"
 
 class SDL2InputHandler: public CEGUIInputHandler {
 public:

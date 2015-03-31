@@ -156,7 +156,7 @@ else ()
 	message(SEND_ERROR "Failed to find Boost.")
 endif(Boost_FOUND)
  
-	# Set up referencing of Boost
+# Set up referencing of Boost
 include_directories(${Boost_INCLUDE_DIRS})
 add_definitions(-DBOOST_ALL_NO_LIB)
 add_definitions(-DBOOST_LOG_DYN_LINK)
@@ -193,7 +193,7 @@ include_directories(${MATHGL2_INCLUDE_DIR})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
 
 ######################################################################
-# Shark 2
+# Shark 2 (Is not a required library anymore)
 ######################################################################
 
 find_package(Shark2 REQUIRED)
@@ -220,7 +220,7 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 
 set(MODELHDRS
 	# model
-	## enviroments
+	## enviroment
 	./model/environments/EnvironmentPhysics.h
 	./model/environments/bullet/EnvironmentBt.h
 	./model/environments/bullet/HillsBt.h
@@ -231,15 +231,18 @@ set(MODELHDRS
 	./model/evolution/juries/Ones.h
 	./model/evolution/juries/Velocity.h
 	
+	## population
 	./model/evolution/population/Population.h
+	
+	## creature
 	./model/evolution/population/creature/Creature.h
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.h
 	./model/evolution/population/creature/genome/Gene.h
 	./model/evolution/population/creature/genome/GeneBranch.h
-	./model/evolution/population/creature/genome/morphology/MorphoGene.h
-    ./model/evolution/population/creature/genome/morphology/MorphoGeneBranch.h
+	./model/evolution/population/creature/genome/morphology/Morphogene.h
+    ./model/evolution/population/creature/genome/morphology/MorphogeneBranch.h
     ./model/evolution/population/creature/genome/controller/ControllerGene.h
 	./model/evolution/population/creature/genome/controller/SineControllerGene.h
 	
@@ -267,8 +270,8 @@ set(MODELSRCS
 	./model/evolution/population/creature/genome/Genome.cpp
 	./model/evolution/population/creature/genome/Gene.cpp
 	./model/evolution/population/creature/genome/GeneBranch.cpp
-	./model/evolution/population/creature/genome/morphology/MorphoGene.cpp
-	./model/evolution/population/creature/genome/morphology/MorphoGeneBranch.cpp
+	./model/evolution/population/creature/genome/morphology/Morphogene.cpp
+	./model/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp
 	./model/evolution/population/creature/genome/controller/ControllerGene.cpp
 	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
 	
@@ -280,16 +283,23 @@ set(MODELSRCS
 set(CONTROLLERHDRS
 	# controller
 	./controller/camera/CameraHandler.h
+	# input handlers
 	./controller/input/ApplicationScancode.h
 	./controller/input/ApplicationKeycode.h
 	./controller/input/ApplicationMousecode.h
 	./controller/input/SDL2InputHandler.h
 	./controller/input/CEGUIInputHandler.h
 	./controller/input/OgreInputHandler.h
+	
+	## object save controller
+	./controller/SaveController.h
+	
+	## application state handler
 	./controller/StateHandler.h
+	
+	## bullet physics controller
     ./controller/physics/PhysicsController.h
-    ./controller/SaveController.h
-
+    ./controller/physics/RagDoll.h
     
     #model-view facades to control objects at both sides
     ## environments
@@ -301,16 +311,23 @@ set(CONTROLLERHDRS
     ./controller/evolution/population/creature/phenome/Phenome.h
     ./controller/evolution/population/creature/phenome/Component.h
     ./controller/evolution/population/creature/phenome/morphology/Limb.h
-    ./controller/physics/RagDoll.h
 )
 set(CONTROLLERSRCS
 	# controller
-	./controller/camera/CameraHandler.cpp
+	## Input handlers
 	./controller/input/SDL2InputHandler.cpp
 	./controller/input/CEGUIInputHandler.cpp
 	./controller/input/OgreInputHandler.cpp
+	
+	## camera handler
+	./controller/camera/CameraHandler.cpp
+	
+	## application state handler
 	./controller/StateHandler.cpp
+	
+	## bullet physics controller
 	./controller/physics/PhysicsController.cpp
+	./controller/physics/RagDoll.cpp
 	
 	# model-view facades to sync objects on both sides
 	## environments
@@ -322,11 +339,9 @@ set(CONTROLLERSRCS
     ./controller/evolution/population/creature/phenome/Phenome.cpp
     ./controller/evolution/population/creature/phenome/Component.cpp
     ./controller/evolution/population/creature/phenome/morphology/Limb.cpp
-    ./controller/physics/RagDoll.cpp
 )
 set(VIEWHDRS
 	# view
-	
 	## environments
 	./view/environments/EnvironmentGraphics.h
 	./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h
@@ -335,6 +350,7 @@ set(VIEWHDRS
 	./view/ogre3D/environments/PlaneO3D.h
 	./view/ogre3D/environments/HillsO3D.h
 	
+	## creature
     ./view/evolution/population/creature/phenome/morphology/LimbGraphics.h
 	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h
 	
@@ -387,7 +403,6 @@ set(VIEWHDRS
 )
 set(VIEWSRCS
 	# view
-	
 	## environments
 	./view/environments/EnvironmentGraphics.cpp
     ./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
@@ -396,6 +411,7 @@ set(VIEWSRCS
 	./view/ogre3D/environments/OpenSeaO3D.cpp
 	./view/ogre3D/environments/PlaneO3D.cpp
 	
+	## creatures
 	./view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp
 	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp
 	
@@ -446,7 +462,7 @@ set(MISCHDRS
 	./configuration/CameraConfiguration.h
 	./configuration/ControlConfiguration.h
 	./configuration/PhysicsConfiguration.h
-	./configuration/NeuronalNetworkConfiguration.h
+	./configuration/NeuralNetworkConfiguration.h
 	./configuration/MorphologyConfiguration.h
 	./configuration/GeneticsConfiguration.h
 	./configuration/FitnessConfiguration.h
@@ -481,11 +497,12 @@ set(TESTSRCS
     ${MISCSRCS}
     
     ## unit test cases
+    ## (unit tests usually only test the model)
     ./model/evolution/juries/Velocity_test.cpp
     ./model/evolution/juries/Ones_test.cpp
     ./model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
-    ./model/evolution/population/creature/genome/morphology/MorphoGeneBranch_test.cpp
-    ./model/evolution/population/creature/genome/morphology/MorphoGene_test.cpp
+    ./model/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
+    ./model/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     ./model/evolution/population/creature/genome/Genome_test.cpp
     ./model/evolution/population/creature/Creature_test.cpp
     ./model/evolution/population/Population_test.cpp

@@ -9,13 +9,11 @@
 #define SAVECONTROLLER_H_
 
 //# corresponding header
-
 //# forward declarations
-
 //# system headers
 #include <fstream>
-//## controller headers
 
+//## controller headers
 //## model headers
 // include headers that implement a archive in xml format
 #include <boost/archive/tmpdir.hpp>
@@ -25,18 +23,12 @@
 #include <boost/serialization/base_object.hpp>
 
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 template <class T> class SaveController {

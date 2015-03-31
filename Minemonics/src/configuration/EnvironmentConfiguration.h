@@ -12,7 +12,11 @@
 
 class EnvironmentConfiguration {
 public:
-	static const Environment::EnvironmentType ENVIRONMENTTYPE = Environment::PLANE;
+	/**
+	 * The environment type used in the simulator
+	 */
+	// TODO: Make the environment type changeable from within the simulator.
+	static const Environment::EnvironmentType ENVIRONMENT_TYPE = Environment::PLANE;
 };
 
 #endif /* ENVIRONMENTCONFIGURATION_H_ */

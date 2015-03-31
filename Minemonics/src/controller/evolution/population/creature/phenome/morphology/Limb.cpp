@@ -20,6 +20,9 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include "configuration/PhysicsConfiguration.h"
+#include "configuration/MorphologyConfiguration.h"
+
 //## controller headers
 //## model headers
 #include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
@@ -28,7 +31,6 @@
 #include "view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h"
 
 //## utils headers
-#include "configuration/PhysicsConfiguration.h"
 
 #ifndef NULL
 #define NULL 0
@@ -45,7 +47,7 @@ Limb::~Limb() {
 }
 
 void Limb::initialize(SimulationManager* simulationManager,
-		Limb::PrimitiveType type, Ogre::Vector3 position,
+		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass) {
 	Component::initialize(Component::Limb);
 	mLimbGraphics = new LimbO3D();

@@ -19,8 +19,6 @@ class LimbO3D;
 #include <string>
 
 //## controller headers
-#include "controller/evolution/population/creature/phenome/Component.h"
-
 //## model headers
 #include <OgreVector3.h>
 #include <btBulletDynamicsCommon.h>
@@ -29,7 +27,11 @@ class LimbO3D;
 //# custom headers
 //## base headers
 //## configuration headers
+#include "configuration/MorphologyConfiguration.h"
+
 //## controller headers
+#include "controller/evolution/population/creature/phenome/Component.h"
+
 //## model headers
 #include "model/evolution/population/creature/phenome/morphology/LimbPhysics.h"
 
@@ -43,11 +45,7 @@ public:
 	Limb();
 	virtual ~Limb();
 
-	enum PrimitiveType {
-		BLOCK, CAPSULE
-	};
-
-	void initialize(SimulationManager* simulationManager, PrimitiveType type,
+	void initialize(SimulationManager* simulationManager, MorphologyConfiguration::PrimitiveType type,
 			Ogre::Vector3 position, Ogre::Quaternion orientation,
 			Ogre::Vector3 size, double mass);
 

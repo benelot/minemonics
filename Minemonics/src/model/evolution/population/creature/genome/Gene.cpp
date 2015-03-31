@@ -20,6 +20,7 @@
 //## model headers
 //## view headers
 //## utils headers
+
 Gene::Gene() :
 		mActive(false),mGeneType(UnknownGene) {
 	// TODO Auto-generated constructor stub

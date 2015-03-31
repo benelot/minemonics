@@ -9,29 +9,24 @@
 #include "Genome.h"
 
 //# forward declarations
-
 //# system headers
 #include <gtest/gtest.h>
 //## controller headers
-
 //## model headers
 #include <boost/math/constants/constants.hpp>
-//## view headers
 
+//## view headers
 //# custom headers
 //## base headers
-
 //## configuration headers
+#include "configuration/PopulationConfiguration.h"
 
 //## controller headers
 #include "controller/SaveController.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include "configuration/PopulationConfiguration.h"
 
 class GenomeTest: public ::testing::Test {
 protected:
@@ -86,9 +81,9 @@ TEST_F(GenomeTest,hasNormalGenes) {
 }
 
 TEST_F(GenomeTest,areAllBranchesSet) {
-	std::vector<MorphoGene*>::iterator geneIt = genome->getGenes().begin();
+	std::vector<Morphogene*>::iterator geneIt = genome->getGenes().begin();
 	for (; geneIt != genome->getGenes().end(); geneIt++) {
-		std::vector<MorphoGeneBranch*>::iterator branchIt =
+		std::vector<MorphogeneBranch*>::iterator branchIt =
 				(*geneIt)->getGeneBranches().begin();
 		for (; branchIt != (*geneIt)->getGeneBranches().end(); branchIt++) {
 			ASSERT_TRUE((*branchIt)->getBranchGeneType() != -1);

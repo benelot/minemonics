@@ -8,11 +8,12 @@
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_SINECONTROLLERGENE_H_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_SINECONTROLLERGENE_H_
 
+//# corresponding header
+#include "model/evolution/population/creature/genome/controller/ControllerGene.h"
+
 //# forward declarations
 //# system headers
-
 //## controller headers
-
 //## model headers
 // include headers that implement a archive in xml format
 #include <boost/archive/tmpdir.hpp>
@@ -20,19 +21,14 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/serialization/base_object.hpp>
-//## view headers
 
+//## view headers
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-#include <model/evolution/population/creature/genome/controller/ControllerGene.h>
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class SineControllerGene: public ControllerGene {

@@ -9,32 +9,24 @@
 #define OGREINPUTHANDLER_H_
 
 //# corresponding header
-
 //# forward declarations
 class SimulationManager;
 
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
 #include "ApplicationMousecode.h"
 #include "ApplicationKeycode.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include <utils/logging/Logger.h>
+#include "utils/logging/Logger.h"
 
 class OgreInputHandler {
 public:

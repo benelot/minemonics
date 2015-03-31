@@ -8,29 +8,18 @@
 #ifndef JURY_H_
 #define JURY_H_
 
-//# corresponding header
-
+//# corresponding headers
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class Jury {

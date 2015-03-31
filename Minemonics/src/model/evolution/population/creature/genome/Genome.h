@@ -8,13 +8,13 @@
 #ifndef GENOME_H_
 #define GENOME_H_
 
+//# corresponding header
 //# forward declarations
-
 //# system headers
 #include <fstream>
 #include <vector>
-//## controller headers
 
+//## controller headers
 //## model headers
 // include headers that implement a archive in xml format
 #include <boost/archive/tmpdir.hpp>
@@ -24,19 +24,14 @@
 #include <boost/serialization/version.hpp>
 
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-#include "model/evolution/population/creature/genome/MorphoGene.h"
+#include "model/evolution/population/creature/genome/morphology/Morphogene.h"
 
 //## view headers
-
 //## utils headers
 
 /**
@@ -53,7 +48,7 @@ public:
 
 	void createRandomGenome(double bushiness);
 
-	void addGene(MorphoGene* gene);
+	void addGene(Morphogene* gene);
 
 	void linkRandomGenes();
 
@@ -71,7 +66,7 @@ public:
 	 * @return A string containing all information about the genome.
 	 */
 	friend std::ostream & operator<<(std::ostream &os, const Genome &genome) {
-		std::vector<MorphoGene*>::const_iterator it;
+		std::vector<Morphogene*>::const_iterator it;
 		for (it = genome.mGenes.begin(); it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "//";
@@ -84,7 +79,7 @@ public:
 		ar & BOOST_SERIALIZATION_NVP(mGenes) & BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit) & BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit);
 	}
 
-	std::vector<MorphoGene*>& getGenes() {
+	std::vector<Morphogene*>& getGenes() {
 		return mGenes;
 	}
 
@@ -107,7 +102,7 @@ public:
 private:
 
 
-	std::vector<MorphoGene*> mGenes;
+	std::vector<Morphogene*> mGenes;
 
 	/**
 	 * A hard limit on the total number of body segments allowed.

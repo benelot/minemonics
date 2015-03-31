@@ -21,7 +21,8 @@
 //## view headers
 //## utils headers
 
-JointBt::JointBt() {
+JointBt::JointBt() :
+		mG6DofJoint(NULL) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -37,7 +38,7 @@ void JointBt::initialize(btRigidBody* bodyA, btRigidBody* bodyB,
 	tframeInB = btTransform::getIdentity();
 	tframeInA.setOrigin(frameInA);
 	tframeInB.setOrigin(frameInB);
-	initialize(bodyA,bodyB,tframeInA,tframeInB);
+	initialize(bodyA, bodyB, tframeInA, tframeInB);
 }
 
 void JointBt::initialize(btRigidBody* bodyA, btRigidBody* bodyB,

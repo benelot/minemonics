@@ -4,9 +4,24 @@
  *  Created on: Feb 26, 2015
  *      Author: leviathan
  */
-#include "model/evolution/juries/Ones.h"
 
+//# corresponding header
+#include "Ones.h"
+
+//# forward declarations
+//# system headers
 #include <gtest/gtest.h>
+
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 class OnesTest: public ::testing::Test {
 protected:

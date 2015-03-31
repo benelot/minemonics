@@ -32,8 +32,6 @@ class Joint;
 //## view headers
 //## utils headers
 
-
-
 class RagDoll {
 	enum {
 		BODYPART_PELVIS = 0, BODYPART_SPINE, BODYPART_HEAD,

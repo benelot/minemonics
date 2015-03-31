@@ -10,8 +10,14 @@
 
 class ControlConfiguration {
 public:
-	// for the sine CPG
+	/**
+	 * The initial maximum amplitude of the sine wave controller
+	 */
 	static const double CPG_SINE_INITIAL_MAX_AMPLITUDE = 10;
+
+	/**
+	 * The initial maximum frequency of the sine wave controller
+	 */
 	static const double CPG_SINE_INITIAL_MAX_FREQUENCY = 1; // Hz
 };
 

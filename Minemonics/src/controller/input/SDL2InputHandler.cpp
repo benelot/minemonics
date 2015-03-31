@@ -9,26 +9,18 @@
 #include "SDL2InputHandler.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
 #include "SimulationManager.h"
 
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 BoostLogger SDL2InputHandler::mBoostLogger;  // initialize the static variables

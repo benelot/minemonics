@@ -5,9 +5,23 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "HillsBt.h"
 
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
 #include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 HillsBt::HillsBt() :
 		mGroundBody(NULL), mGroundMotionState(NULL), mGroundShape(NULL) {

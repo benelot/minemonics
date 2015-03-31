@@ -20,6 +20,21 @@
  *  The values in this enumeration are based on the USB usage page standard:
  *  http://www.usb.org/developers/devclass_docs/Hut1_12v2.pdf
  */
+
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
 typedef enum
 {
     APP_SCANCODE_UNKNOWN = 0,

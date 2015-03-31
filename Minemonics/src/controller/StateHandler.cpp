@@ -7,27 +7,20 @@
 
 //# corresponding header
 #include "StateHandler.h"
-//# forward declarations
 
+//# forward declarations
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <OgreStringConverter.h>
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 StateHandler::StateHandler() :

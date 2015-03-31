@@ -14,7 +14,8 @@
  http://www.ogre3d.org/tikiwiki/
  -----------------------------------------------------------------------------
  */
-//# corresponding header
+
+//# corresponding headers
 #include "SimulationManager.h"
 
 //# forward declarations
@@ -23,6 +24,8 @@
 #include <btBulletDynamicsCommon.h>
 
 //## model headers
+#include <Rng/GlobalRng.h>
+
 //## view headers
 #include <OgreWindowEventUtilities.h>
 #include <CEGUI/System.h>
@@ -53,11 +56,10 @@
 #include "controller/physics/RagDoll.h"
 
 //## model headers
-#include "model/evolution/population/creature/genome/MorphoGene.h"
-
-//## view headers
 #include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
+
+//## view headers
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/CEGUIBuilder.h"
 
@@ -119,8 +121,6 @@ void SimulationManager::createFrameListener(void) {
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
 
-	unsigned i, t;
-
 	//
 	// initialize random number generator
 	//
@@ -129,19 +129,21 @@ void SimulationManager::createFrameListener(void) {
 
 	mPhysicsController.initBulletPhysics();
 	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
-	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe+btIDebugDraw::DBG_DrawConstraints+btIDebugDraw::DBG_DrawConstraintLimits);
+	mDebugDrawer->setDebugMode(
+			btIDebugDraw::DBG_DrawWireframe + btIDebugDraw::DBG_DrawConstraints
+					+ btIDebugDraw::DBG_DrawConstraintLimits);
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
-	Randomness randomness;
-	for(int i = 0;i < 100;i++)
-	{
-		mRagdolls.push_back(new RagDoll(this,randomness.nextDouble(10,100),
-				btVector3(randomness.nextDouble(10,10000), randomness.nextDouble(10,10000), randomness.nextDouble(10,10000))));
-	}
+//	Randomness randomness;
+//	for(int i = 0;i < 100;i++)
+//	{
+//		mRagdolls.push_back(new RagDoll(this,randomness.nextDouble(10,100),
+//				btVector3(randomness.nextDouble(10,10000), randomness.nextDouble(10,10000), randomness.nextDouble(10,10000))));
+//	}
 }
 
 //-------------------------------------------------------------------------------------
@@ -183,8 +185,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 void SimulationManager::updatePhysics() {
 
 	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
-	for(;it != mRagdolls.end();it++)
-	{
+	for (; it != mRagdolls.end(); it++) {
 		(*it)->update();
 	}
 	const int numObjects =
@@ -469,7 +470,7 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	switch (EnvironmentConfiguration::ENVIRONMENTTYPE) {
+	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
 	case Environment::HILLS: {
 		mTerrain = new Hills();
 		((Hills*) mTerrain)->initialize(this, light);

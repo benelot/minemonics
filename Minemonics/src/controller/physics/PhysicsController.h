@@ -9,30 +9,22 @@
 #define PHYSICSCONTROLLER_H_
 
 //# corresponding header
-
 //# forward declarations
-
 //# system headers
 //## controller headers
 #include <btBulletDynamicsCommon.h>
 
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
+#include "configuration/PhysicsConfiguration.h"
 
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include "configuration/PhysicsConfiguration.h"
 
 class PhysicsController {
 private:

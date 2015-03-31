@@ -8,10 +8,25 @@
 #ifndef MODEL_ENVIRONMENT_HILLSBT_H_
 #define MODEL_ENVIRONMENT_HILLSBT_H_
 
+//# corresponding header
+#include "model/environments/bullet/EnvironmentBt.h"
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <btBulletDynamicsCommon.h>
+
+//## view headers
 #include <Terrain/OgreTerrain.h>
 
-#include "EnvironmentBt.h"
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 class HillsBt : public EnvironmentBt {
 public:

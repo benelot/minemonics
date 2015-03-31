@@ -10,20 +10,22 @@
 
 class EvolutionConfiguration {
 public:
-	//
-	// constants
-	//
 	/**
-	 * The size of the population. This is one more than the number of new individuals created in each generation, since
-	 * the first individual in a generation is not new, but a copy of the best individual from
-	 * the previous generation.
+	 * The size of the population.
 	 */
-	static const unsigned POPULATIONSIZE = 20;
+	//TODO: Make the population size changeable from within the simulator.
+	static const unsigned EVOLUTION_POPULATION_SIZE = 20;
+
+	/**
+	 * The dimensions of the genome
+	 */
+	//TODO: Remove after the implementation of the evolutionary algorithm
 	static const unsigned DIMENSIONS = 200;
 
 	/**
 	 * The number of generations before the evolution terminates
 	 */
+	//TODO: Remove after the implementation of the evolutionary algorithm
 	static const unsigned EVOLUTION_GENERATIONS = 1000;
 
 	/**
@@ -38,6 +40,8 @@ public:
 	 The trade-off is one of noise reduction vs. computation time.
 	 */
 	static const unsigned EVOLUTION_EVALUATION_RUNS = 1;
+
+	//TODO: Look if they are still necessary after the implementation of the evolutionary algorithm.
 	static const unsigned Omega = 5;
 	static const unsigned CrossPoints = 2;
 	static const double CrossProb = 0.6;

@@ -9,14 +9,10 @@
 #include "CameraHandler.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
 #include "SimulationManager.h"
@@ -25,11 +21,8 @@
 #include "configuration/CameraConfiguration.h"
 
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 CameraHandler::CameraHandler(SimulationManager* simulationMgr) :

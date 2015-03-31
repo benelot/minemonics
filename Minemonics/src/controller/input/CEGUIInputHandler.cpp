@@ -7,14 +7,13 @@
 
 //# corresponding header
 #include "CEGUIInputHandler.h"
-//# forward declarations
 
+//# forward declarations
 //# system headers
 //## controller headers
 #include <SDL.h>
 
 //## model headers
-
 //## view headers
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/System.h>
@@ -27,14 +26,11 @@
 #include "SimulationManager.h"
 
 //## configuration headers
-
 //## controller headers
 #include "controller/StateHandler.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
 #include "utils/logging/Logger.h"
 
