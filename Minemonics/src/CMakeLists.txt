@@ -220,26 +220,30 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 
 set(MODELHDRS
 	# model
+	## enviroments
 	./model/environments/EnvironmentPhysics.h
 	./model/environments/bullet/EnvironmentBt.h
 	./model/environments/bullet/HillsBt.h
 	./model/environments/bullet/PlaneBt.h
 	
+	## juries
 	./model/evolution/juries/Jury.h
 	./model/evolution/juries/Ones.h
 	./model/evolution/juries/Velocity.h
 	
 	./model/evolution/population/Population.h
 	./model/evolution/population/creature/Creature.h
+	
+	## genome
 	./model/evolution/population/creature/genome/Genome.h
 	./model/evolution/population/creature/genome/Gene.h
-	./model/evolution/population/creature/genome/MorphoGene.h
-    ./model/evolution/population/creature/genome/MorphoGeneBranch.h
+	./model/evolution/population/creature/genome/GeneBranch.h
+	./model/evolution/population/creature/genome/morphology/MorphoGene.h
+    ./model/evolution/population/creature/genome/morphology/MorphoGeneBranch.h
     ./model/evolution/population/creature/genome/controller/ControllerGene.h
 	./model/evolution/population/creature/genome/controller/SineControllerGene.h
 	
-	./model/evolution/population/creature/phenome/Phenome.h
-	./model/evolution/population/creature/phenome/PhenotypeGenerator.h
+	## phenome
 	./model/evolution/population/creature/phenome/morphology/LimbPhysics.h
 	./model/evolution/population/creature/phenome/morphology/LimbBt.h
 	./model/evolution/population/creature/phenome/morphology/joint/JointBt.h
@@ -251,21 +255,24 @@ set(MODELSRCS
 	./model/environments/bullet/HillsBt.cpp
 	./model/environments/bullet/PlaneBt.cpp
    
+   ## juries
 	./model/evolution/juries/Jury.cpp
 	./model/evolution/juries/Ones.cpp
 	./model/evolution/juries/Velocity.cpp
 	
 	./model/evolution/population/Population.cpp
 	./model/evolution/population/creature/Creature.cpp
+	
+	## genome
 	./model/evolution/population/creature/genome/Genome.cpp
 	./model/evolution/population/creature/genome/Gene.cpp
-	./model/evolution/population/creature/genome/MorphoGene.cpp
-	./model/evolution/population/creature/genome/MorphoGeneBranch.cpp
+	./model/evolution/population/creature/genome/GeneBranch.cpp
+	./model/evolution/population/creature/genome/morphology/MorphoGene.cpp
+	./model/evolution/population/creature/genome/morphology/MorphoGeneBranch.cpp
 	./model/evolution/population/creature/genome/controller/ControllerGene.cpp
 	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
 	
-	./model/evolution/population/creature/phenome/Phenome.cpp
-	./model/evolution/population/creature/phenome/PhenotypeGenerator.cpp
+	## phenome
 	./model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp
 	./model/evolution/population/creature/phenome/morphology/LimbBt.cpp
 	./model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
@@ -288,6 +295,8 @@ set(CONTROLLERHDRS
     ./controller/environments/Environment.h
     ./controller/environments/Plane.h
         
+    ./controller/evolution/population/creature/phenome/PhenotypeGenerator.h
+    ./controller/evolution/population/creature/phenome/Phenome.h
     ./controller/evolution/population/creature/phenome/Component.h
     ./controller/evolution/population/creature/phenome/morphology/Limb.h
     ./controller/physics/RagDoll.h
@@ -301,10 +310,12 @@ set(CONTROLLERSRCS
 	./controller/StateHandler.cpp
 	./controller/physics/PhysicsController.cpp
 	
-	#model-view facades to control objects at both sides
+	#model-view facades to sync objects on both sides
     ./controller/environments/Environment.cpp
     ./controller/environments/Plane.cpp
     
+    ./controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp
+    ./controller/evolution/population/creature/phenome/Phenome.cpp
     ./controller/evolution/population/creature/phenome/Component.cpp
     ./controller/evolution/population/creature/phenome/morphology/Limb.cpp
     ./controller/physics/RagDoll.cpp
@@ -458,8 +469,8 @@ set(TESTSRCS
     ./model/evolution/juries/Velocity_test.cpp
     ./model/evolution/juries/Ones_test.cpp
     ./model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
-    ./model/evolution/population/creature/genome/MorphoGeneBranch_test.cpp
-    ./model/evolution/population/creature/genome/MorphoGene_test.cpp
+    ./model/evolution/population/creature/genome/morphology/MorphoGeneBranch_test.cpp
+    ./model/evolution/population/creature/genome/morphology/MorphoGene_test.cpp
     ./model/evolution/population/creature/genome/Genome_test.cpp
     ./model/evolution/population/creature/Creature_test.cpp
     ./model/evolution/population/Population_test.cpp
