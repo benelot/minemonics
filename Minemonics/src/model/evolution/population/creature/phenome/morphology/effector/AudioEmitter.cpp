@@ -5,9 +5,9 @@
  *      Author: leviathan
  */
 
+//# corresponding header
 #include "AudioEmitter.h"
 
-//# corresponding header
 //# forward declarations
 //# system headers
 //## controller headers

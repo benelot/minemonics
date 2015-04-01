@@ -8,9 +8,9 @@
 #ifndef AUDIOEMITTER_H_
 #define AUDIOEMITTER_H_
 
-#include "Emitter.h"
-
 //# corresponding header
+#include "model/evolution/population/creature/phenome/morphology/effector/Emitter.h"
+
 //# forward declarations
 //# system headers
 //## controller headers

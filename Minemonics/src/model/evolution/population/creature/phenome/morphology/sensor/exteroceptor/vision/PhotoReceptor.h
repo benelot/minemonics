@@ -9,6 +9,8 @@
 #define PHOTORECEPTOR_H_
 
 //# corresponding header
+#include "model/evolution/population/creature/phenome/morphology/sensor/Sensor.h"
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -22,7 +24,7 @@
 //## view headers
 //## utils headers
 
-class PhotoReceptor {
+class PhotoReceptor: public Sensor {
 public:
 	PhotoReceptor();
 	virtual ~PhotoReceptor();

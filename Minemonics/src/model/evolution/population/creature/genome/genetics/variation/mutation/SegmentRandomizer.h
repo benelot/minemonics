@@ -8,7 +8,6 @@
 #ifndef SEGMENTRANDOMIZER_H_
 #define SEGMENTRANDOMIZER_H_
 
-
 //# corresponding header
 //# forward declarations
 //# system headers
