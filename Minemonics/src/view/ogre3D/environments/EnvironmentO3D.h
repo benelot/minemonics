@@ -42,7 +42,7 @@ public:
 	EnvironmentO3D(SimulationManager* simulationMgr);
 	virtual ~EnvironmentO3D();
 
-	void initialize(std::string fileName,Ogre::Light* l);
+	void initialize(std::string fileName, Ogre::Light* l);
 
 	void configureTerrainDefaults(Ogre::Light* l);
 
@@ -79,16 +79,20 @@ public:
 	/// This class just pretends to provide procedural page content to avoid page loading
 	class DummyPageProvider: public Ogre::PageProvider {
 	public:
-		bool prepareProceduralPage(Ogre::Page* page, Ogre::PagedWorldSection* section) {
+		bool prepareProceduralPage(Ogre::Page* page,
+				Ogre::PagedWorldSection* section) {
 			return true;
 		}
-		bool loadProceduralPage(Ogre::Page* page, Ogre::PagedWorldSection* section) {
+		bool loadProceduralPage(Ogre::Page* page,
+				Ogre::PagedWorldSection* section) {
 			return true;
 		}
-		bool unloadProceduralPage(Ogre::Page* page, Ogre::PagedWorldSection* section) {
+		bool unloadProceduralPage(Ogre::Page* page,
+				Ogre::PagedWorldSection* section) {
 			return true;
 		}
-		bool unprepareProceduralPage(Ogre::Page* page, Ogre::PagedWorldSection* section) {
+		bool unprepareProceduralPage(Ogre::Page* page,
+				Ogre::PagedWorldSection* section) {
 			return true;
 		}
 	};
@@ -106,6 +110,19 @@ public:
 
 	Ogre::TerrainGroup*& getTerrainGroup() {
 		return mTerrainGroup;
+	}
+
+	double getTerrainHeight(double x, double z) {
+		Ogre::Ray ray;
+		ray.setOrigin(Ogre::Vector3(x, mTerrainPos.y + 10000, z));
+		ray.setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y);
+
+		Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects(
+				ray);
+		if (rayResult.hit) {
+			return rayResult.position.y;
+		}
+		return 0;
 	}
 
 protected:
