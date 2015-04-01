@@ -9,25 +9,18 @@
 #define GROUNDCONTROLLER_H_
 
 //# forward declarations
+#include "controller/physics/MotionController.h"
 
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-#include "MotionController.h"
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class GroundController: public MotionController {

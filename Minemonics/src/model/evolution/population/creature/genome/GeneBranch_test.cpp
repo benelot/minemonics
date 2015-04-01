@@ -1,15 +1,12 @@
 /*
- * OpenSeaController.h
+ * GeneBranch_test.cpp
  *
- *  Created on: Nov 17, 2014
+ *  Created on: Mar 31, 2015
  *      Author: leviathan
  */
 
-#ifndef OPENSEACONTROLLER_H_
-#define OPENSEACONTROLLER_H_
-
 //# corresponding header
-#include "controller/physics/MotionController.h"
+#include "GeneBranch.h"
 
 //# forward declarations
 //# system headers
@@ -24,10 +21,3 @@
 //## view headers
 //## utils headers
 
-class OpenSeaController: public MotionController {
-public:
-	OpenSeaController();
-	virtual ~OpenSeaController();
-};
-
-#endif /* OPENSEACONTROLLER_H_ */
