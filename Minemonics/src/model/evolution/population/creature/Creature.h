@@ -13,8 +13,8 @@
 //# system headers
 #include <fstream>
 #include <vector>
-//## controller headers
 
+//## controller headers
 //## model headers
 // include headers that implement a archive in xmlformat
 #include <boost/archive/tmpdir.hpp>
@@ -23,22 +23,19 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
-//## view headers
 
+//## view headers
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
+//#include <controller/evolution/population/creature/phenome/Phenome.h>
 
 //## model headers
 #include "model/evolution/juries/Jury.h"
 #include "model/evolution/population/creature/genome/Genome.h"
-#include "model/evolution/population/creature/phenome/Phenome.h"
 
 //## view headers
-
 //## utils headers
 
 class Creature {
@@ -67,7 +64,7 @@ public:
 	 * @return The total volume of the whole creature body.
 	 */
 	double getCreatureVolume() {
-		std::vector<MorphoGene*>::const_iterator it;
+		std::vector<Morphogene*>::const_iterator it;
 		double totalVolume = 0;
 		for (it = mGenotype.getGenes().begin();
 				it != mGenotype.getGenes().end(); it++) {
@@ -145,7 +142,7 @@ private:
 	/**
 	 * The phenotype of the creature.
 	 */
-	Phenome mPhenotype;
+	//Phenome mPhenotype;
 
 	std::vector<Jury*> mJuries;
 

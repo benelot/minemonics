@@ -9,29 +9,23 @@
 #include "Creature.h"
 
 //# forward declarations
-
 //# system headers
 #include <gtest/gtest.h>
+
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
+#include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
 #include "controller/SaveController.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include "configuration/MorphologyConfiguration.h"
 
 class CreatureTest: public ::testing::Test {
 protected:
