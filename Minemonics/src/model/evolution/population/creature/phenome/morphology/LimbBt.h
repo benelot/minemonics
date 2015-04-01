@@ -33,7 +33,7 @@ public:
 	LimbBt();
 	virtual ~LimbBt();
 
-	void initialize(MorphologyConfiguration::PrimitiveType type, btVector3 position, btQuaternion orientation,
+	void initialize(btDynamicsWorld* world, MorphologyConfiguration::PrimitiveType type, btVector3 position, btQuaternion orientation,
 			btVector3 size, btScalar mass);
 
 	btVector3 getPosition() {
@@ -48,7 +48,12 @@ public:
 		return mBody;
 	}
 
+	void addToWorld();
+
+	void removeFromWorld();
+
 private:
+	btDynamicsWorld* mWorld;
 	btCollisionShape* mCollisionShape;
 	btDefaultMotionState* mMotionState;
 	btRigidBody* mBody;

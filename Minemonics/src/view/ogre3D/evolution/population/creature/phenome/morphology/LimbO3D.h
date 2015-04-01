@@ -49,6 +49,12 @@ public:
 		return mEntityNode;
 	}
 
+	void addToWorld();
+
+	void removeFromWorld();
+
+	Ogre::Vector3 getIntersection(Ogre::Vector3 origin,Ogre::Vector3 direction);
+
 private:
 	SimulationManager* mSimulationManager;
 	Ogre::Entity* mEntity;

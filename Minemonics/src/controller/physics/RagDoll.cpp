@@ -60,9 +60,10 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 
 	MorphologyConfiguration::PrimitiveType type =
 			MorphologyConfiguration::CAPSULE;
-// Setup the geometry
-// BODYPART_PELVIS
-//	btTransform transform;
+
+	// Setup the geometry
+	// BODYPART_PELVIS
+	//	btTransform transform;
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.),
@@ -79,7 +80,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.3, size * 0.2, size * 0.3), 1);
 	mLimbs.push_back(limb);
 
-// BODYPART_SPINE
+	// BODYPART_SPINE
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.2),
@@ -96,7 +97,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.3, size * 0.28, size * 0.3), 1);
 	mLimbs.push_back(limb);
 
-//	BODYPART_HEAD
+	//BODYPART_HEAD
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.6),
@@ -113,7 +114,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2), 1);
 	mLimbs.push_back(limb);
 
-//BODYPART_LEFT_UPPER_LEG
+	//BODYPART_LEFT_UPPER_LEG
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.18), btScalar(size * 0.65),
@@ -130,7 +131,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
 	mLimbs.push_back(limb);
 
-//	BODYPART_LEFT_LOWER_LEG
+	//	BODYPART_LEFT_LOWER_LEG
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.18), btScalar(size * 0.2),
@@ -147,7 +148,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
-//BODYPART_RIGHT_UPPER_LEG
+	//BODYPART_RIGHT_UPPER_LEG
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.18), btScalar(size * 0.65),
@@ -164,7 +165,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
 	mLimbs.push_back(limb);
 
-// BODYPART_RIGHT_LOWER_LEG
+	// BODYPART_RIGHT_LOWER_LEG
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.18), btScalar(size * 0.2),
@@ -181,7 +182,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
-// BODYPART_LEFT_UPPER_ARM
+	// BODYPART_LEFT_UPPER_ARM
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.35), btScalar(size * 1.45),
@@ -199,7 +200,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
-//BODYPART_LEFT_LOWER_ARM
+	//BODYPART_LEFT_LOWER_ARM
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.7), btScalar(size * 1.45),
@@ -217,7 +218,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08), 1);
 	mLimbs.push_back(limb);
 
-//BODYPART_RIGHT_UPPER_ARM
+	//BODYPART_RIGHT_UPPER_ARM
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.35), btScalar(size * 1.45),
@@ -235,7 +236,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
-// BODYPART_RIGHT_LOWER_ARM
+	// BODYPART_RIGHT_LOWER_ARM
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.7), btScalar(size * 1.45),
@@ -259,13 +260,10 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 		(*it)->getLimbPhysics()->getRigidBody()->setDeactivationTime(0.8);
 		(*it)->getLimbPhysics()->getRigidBody()->setSleepingThresholds(1.6,
 				2.5);
-		mWorld->addRigidBody((*it)->getLimbPhysics()->getRigidBody());
 	}
 
 ////	 Now setup the constraints
 	JointBt* joint;
-
-//	btTransform localA, localB;
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -286,8 +284,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(0.2 * M_PI, M_PI_2, M_PI_2));
 	mJoints.push_back(joint);
 
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
-
 	localA.setIdentity();
 	localB.setIdentity();
 	localA.getBasis().setEulerZYX(0, 0, M_PI_2);
@@ -306,8 +302,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	joint->setAngularLimits(btVector3(-M_PI_4, -M_PI_4, -M_PI_2),
 			btVector3(M_PI_4, M_PI_4, M_PI_2));
 	mJoints.push_back(joint);
-
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -328,8 +322,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_4, M_PI_4, 0));
 	mJoints.push_back(joint);
 
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
-
 	localA.setIdentity();
 	localB.setIdentity();
 	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
@@ -348,8 +340,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			localA, localB);
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(0, M_PI_2, 0));
 	mJoints.push_back(joint);
-
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -370,8 +360,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_4, M_PI_4, 0));
 	mJoints.push_back(joint);
 
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
-
 	localA.setIdentity();
 	localB.setIdentity();
 	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
@@ -390,8 +378,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			localA, localB);
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(0, M_PI_2, 0));
 	mJoints.push_back(joint);
-
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -412,8 +398,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_2, M_PI_2, 0));
 	mJoints.push_back(joint);
 
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
-
 	localA.setIdentity();
 	localB.setIdentity();
 	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
@@ -432,8 +416,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			localA, localB);
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(M_PI_2, 0, 0));
 	mJoints.push_back(joint);
-
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -454,8 +436,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(M_PI_2, M_PI_2, 0));
 	mJoints.push_back(joint);
 
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
-
 	localA.setIdentity();
 	localB.setIdentity();
 	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
@@ -474,8 +454,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			localA, localB);
 	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(M_PI_2, 0, 0));
 	mJoints.push_back(joint);
-
-	mWorld->addConstraint((btTypedConstraint*) joint->getG6DofJoint(), true);
 }
 
 RagDoll::~RagDoll() {
@@ -502,6 +480,33 @@ void RagDoll::update() {
 	std::vector<Limb*>::iterator it = mLimbs.begin();
 	for (; it != mLimbs.end(); it++) {
 		(*it)->update();
+	}
+}
+
+void RagDoll::addToWorld() {
+	std::vector<Limb*>::iterator it = mLimbs.begin();
+	for (; it != mLimbs.end(); it++) {
+		(*it)->addToWorld();
+	}
+
+	// Add all constraints
+	for (int i = 0; i < JOINT_COUNT; ++i) {
+		mWorld->addConstraint((btTypedConstraint*) mJoints[i]->getG6DofJoint(),
+				true);
+	}
+}
+
+void RagDoll::removeFromWorld() {
+	// Remove all constraints
+	for (int i = 0; i < JOINT_COUNT; ++i) {
+		mWorld->removeConstraint(
+				(btTypedConstraint*) mJoints[i]->getG6DofJoint());
+	}
+
+	// Remove all bodies and shapes
+	std::vector<Limb*>::iterator it = mLimbs.begin();
+	for (; it != mLimbs.end(); it++) {
+		(*it)->removeFromWorld();
 	}
 }
 

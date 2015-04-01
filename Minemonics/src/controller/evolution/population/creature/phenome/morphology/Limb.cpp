@@ -19,6 +19,8 @@
 
 //# custom headers
 //## base headers
+#include "SimulationManager.h"
+
 //## configuration headers
 #include "configuration/PhysicsConfiguration.h"
 #include "configuration/MorphologyConfiguration.h"
@@ -51,15 +53,14 @@ void Limb::initialize(SimulationManager* simulationManager,
 		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass) {
 	Component::initialize(Component::Limb);
 	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type,
-			size);
+	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size);
 
 	mLimbPhysics = new LimbBt();
-	((LimbBt*) mLimbPhysics)->initialize(type,
+	((LimbBt*) mLimbPhysics)->initialize(
+			simulationManager->getPhysicsController().getDynamicsWorld(), type,
 			btVector3(position.x, position.y, position.z),
 			btQuaternion(orientation.x, orientation.y, orientation.z,
-					orientation.w),
-			btVector3(size.x, size.y, size.z),
+					orientation.w), btVector3(size.x, size.y, size.z),
 			btScalar(mass));
 
 	update();
@@ -112,5 +113,20 @@ LimbO3D* Limb::getLimbGraphics() {
 
 LimbBt* Limb::getLimbPhysics() {
 	return ((LimbBt*) mLimbPhysics);
+}
+
+void Limb::addToWorld() {
+	mLimbGraphics->addToWorld();
+	mLimbPhysics->addToWorld();
+}
+
+void Limb::removeFromWorld() {
+	mLimbGraphics->removeFromWorld();
+	mLimbPhysics->removeFromWorld();
+}
+
+Ogre::Vector3 Limb::getIntersection(Ogre::Vector3 origin,
+		Ogre::Vector3 direction) {
+	return mLimbGraphics->getIntersection(origin, direction);
 }
 

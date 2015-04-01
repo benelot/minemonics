@@ -46,7 +46,13 @@ public:
 		mOrientation = orientation;
 	}
 
+	virtual void addToWorld() = 0;
+
+	virtual void removeFromWorld() = 0;
+
 	virtual void update() = 0;
+
+	virtual Ogre::Vector3 getIntersection(Ogre::Vector3 origin,Ogre::Vector3 direction) = 0;
 
 protected:
 	Ogre::Vector3 mPosition;

@@ -15,6 +15,8 @@
 //## controller headers
 //## model headers
 //## view headers
+#include <OgreSceneNode.h>
+
 //# custom headers
 //## base headers
 #include "SimulationManager.h"
@@ -70,8 +72,7 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 				0.5f * scale.z).setHeight(scale.y).realizeMesh(name);
 		mEntity = mSimulationManager->getSceneManager()->createEntity(name);
 		mEntity->setMaterialName("honeycomb");
-		mEntityNode =
-				mSimulationManager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+		mEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
 		mEntityNode->attachObject(mEntity);
 		break;
 	}
@@ -82,3 +83,37 @@ void LimbO3D::update() {
 	mEntityNode->setOrientation(mOrientation);
 }
 
+void LimbO3D::addToWorld() {
+	mSimulationManager->getSceneManager()->getRootSceneNode()->addChild(
+			mEntityNode);
+}
+
+void LimbO3D::removeFromWorld() {
+	mSimulationManager->getSceneManager()->getRootSceneNode()->removeChild(
+			mEntityNode);
+}
+
+Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
+		Ogre::Vector3 direction) {
+	Ogre::Ray ray;
+	ray.setOrigin(origin);
+	ray.setDirection(direction);
+
+	Ogre::RaySceneQuery* mRayScnQuery =
+			mSimulationManager->getSceneManager()->createRayQuery(Ogre::Ray());
+	mRayScnQuery->setSortByDistance(true);
+	mRayScnQuery->setRay(ray);
+
+	Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
+	Ogre::RaySceneQueryResult::iterator it = result.begin();
+
+	//Ogre::SceneNode* curObject;
+	double distance = 0;
+	if (it != result.end()) {
+		distance = it->distance;
+		//curObject = it->movable->getParentSceneNode();
+	}
+	mSimulationManager->getSceneManager()->destroyQuery(mRayScnQuery);
+
+	return origin + direction * distance / direction.length();
+}

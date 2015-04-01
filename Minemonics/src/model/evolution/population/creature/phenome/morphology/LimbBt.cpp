@@ -25,7 +25,7 @@
 //## utils headers
 
 LimbBt::LimbBt() :
-		mBody(NULL), mCollisionShape(NULL), mMotionState(NULL) {
+		mBody(NULL), mCollisionShape(NULL), mMotionState(NULL),mWorld(NULL) {
 
 }
 
@@ -33,9 +33,10 @@ LimbBt::~LimbBt() {
 	// TODO Auto-generated destructor stub
 }
 
-void LimbBt::initialize(MorphologyConfiguration::PrimitiveType type,
+void LimbBt::initialize(btDynamicsWorld* world,MorphologyConfiguration::PrimitiveType type,
 		btVector3 position, btQuaternion orientation, btVector3 size,
 		btScalar mass) {
+	mWorld = world;
 	btVector3 HalfExtents(size.x() * 0.5f, size.y() * 0.5f, size.z() * 0.5f);
 	switch (type) {
 	case MorphologyConfiguration::BLOCK:
@@ -60,5 +61,14 @@ void LimbBt::initialize(MorphologyConfiguration::PrimitiveType type,
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
 			mCollisionShape, localInertia);
 	mBody = new btRigidBody(rbInfo);
+}
+
+void LimbBt::addToWorld(){
+	mWorld->addRigidBody(mBody);
+}
+
+void LimbBt::removeFromWorld()
+{
+	mWorld->removeRigidBody(mBody);
 }
 

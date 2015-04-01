@@ -29,6 +29,10 @@ class LimbPhysics {
 public:
 	LimbPhysics();
 	virtual ~LimbPhysics();
+
+	virtual void addToWorld() = 0;
+
+	virtual void removeFromWorld() = 0;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMBPHYSICS_H_ */

@@ -84,6 +84,13 @@ SimulationManager::SimulationManager(void) :
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
+
+	for(int i = 0;i < 100;i++)
+	{
+		mRagdolls[i]->removeFromWorld();
+	}
+
+	destroyScene();
 	CEGUI::OgreRenderer::destroySystem();
 }
 
@@ -138,12 +145,14 @@ void SimulationManager::createFrameListener(void) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
-//	Randomness randomness;
-//	for(int i = 0;i < 100;i++)
-//	{
-//		mRagdolls.push_back(new RagDoll(this,randomness.nextDouble(10,100),
-//				btVector3(randomness.nextDouble(10,10000), randomness.nextDouble(10,10000), randomness.nextDouble(10,10000))));
-//	}
+	Randomness randomness;
+	for(int i = 0;i < 100;i++)
+	{
+		RagDoll* ragdoll = new RagDoll(this,randomness.nextDouble(10,100),
+				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,10000), randomness.nextDouble(-5000,5000)));
+		mRagdolls.push_back(ragdoll);
+		ragdoll->addToWorld();
+	}
 }
 
 //-------------------------------------------------------------------------------------

@@ -73,23 +73,9 @@ public:
 
 	void update();
 
-	btRigidBody* localCreateRigidBody (btScalar mass, const btTransform& startTransform, btCollisionShape* shape)
-	{
-		bool isDynamic = (mass != 0.f);
+	void addToWorld();
 
-		btVector3 localInertia(0,0,0);
-		if (isDynamic)
-			shape->calculateLocalInertia(mass,localInertia);
-
-		btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,shape,localInertia);
-		btRigidBody* body = new btRigidBody(rbInfo);
-
-		mWorld->addRigidBody(body);
-
-		return body;
-	}
+	void removeFromWorld();
 };
 
 #endif /* CONTROLLER_PHYSICS_RAGDOLL_H_ */
