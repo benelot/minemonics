@@ -54,8 +54,7 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 		mEntity = mSimulationManager->getSceneManager()->createEntity(
 				Ogre::SceneManager::PT_CUBE);
 		mEntity->setMaterialName("honeycomb");
-		mEntityNode =
-				mSimulationManager->getSceneManager()->getRootSceneNode()->createChildSceneNode();
+		mEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
 		mEntityNode->attachObject(mEntity);
 
 		mEntityNode->scale(
@@ -109,9 +108,11 @@ Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
 
 	//Ogre::SceneNode* curObject;
 	double distance = 0;
-	if (it != result.end()) {
-		distance = it->distance;
-		//curObject = it->movable->getParentSceneNode();
+	for (; it != result.end(); it++) {
+		if (it->movable->getName() == mEntity->getName()) {
+			distance = it->distance;
+			//curObject = it->movable->getParentSceneNode();
+		}
 	}
 	mSimulationManager->getSceneManager()->destroyQuery(mRayScnQuery);
 

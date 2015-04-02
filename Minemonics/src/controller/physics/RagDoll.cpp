@@ -55,9 +55,6 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	btTransform transform;
 	btTransform localA, localB;
 
-	btTransform offset;
-	offset.setOrigin(positionOffset);
-
 	MorphologyConfiguration::PrimitiveType type =
 			MorphologyConfiguration::CAPSULE;
 
@@ -68,12 +65,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	Limb* limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -85,12 +82,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.2),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -102,12 +99,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.6),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -119,12 +116,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.18), btScalar(size * 0.65),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -136,12 +133,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.18), btScalar(size * 0.2),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -153,12 +150,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.18), btScalar(size * 0.65),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -170,12 +167,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.18), btScalar(size * 0.2),
 					btScalar(size * 0.)));
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -188,12 +185,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * -0.35), btScalar(size * 1.45),
 					btScalar(size * 0.)));
 	transform.getBasis().setEulerZYX(0, 0, M_PI_2);
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -206,12 +203,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * -0.7), btScalar(size * 1.45),
 					btScalar(size * 0.)));
 	transform.getBasis().setEulerZYX(0, 0, M_PI_2);
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -224,12 +221,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.35), btScalar(size * 1.45),
 					btScalar(size * 0.)));
 	transform.getBasis().setEulerZYX(0, 0, -M_PI_2);
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),
@@ -242,12 +239,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.7), btScalar(size * 1.45),
 					btScalar(size * 0.)));
 	transform.getBasis().setEulerZYX(0, 0, -M_PI_2);
-	transform = transform * offset;
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(transform.getOrigin().x(), transform.getOrigin().y(),
-					transform.getOrigin().z()),
+			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
+					positionOffset.y() + transform.getOrigin().y(),
+					positionOffset.z() + transform.getOrigin().z()),
 			Ogre::Quaternion(transform.getRotation().w(),
 					transform.getRotation().x(), transform.getRotation().y(),
 					transform.getRotation().z()),

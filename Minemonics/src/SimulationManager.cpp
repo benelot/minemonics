@@ -85,8 +85,7 @@ SimulationManager::SimulationManager(void) :
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
 
-	for(int i = 0;i < 100;i++)
-	{
+	for (int i = 0; i < 100; i++) {
 		mRagdolls[i]->removeFromWorld();
 	}
 
@@ -128,9 +127,7 @@ void SimulationManager::createFrameListener(void) {
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
 
-	//
 	// initialize random number generator
-	//
 	boost::posix_time::time_duration duration(mNow.time_of_day());
 	Rng::seed(duration.total_milliseconds());
 
@@ -146,10 +143,10 @@ void SimulationManager::createFrameListener(void) {
 	}
 
 	Randomness randomness;
-	for(int i = 0;i < 100;i++)
-	{
-		RagDoll* ragdoll = new RagDoll(this,randomness.nextDouble(10,100),
-				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,10000), randomness.nextDouble(-5000,5000)));
+	for (int i = 0; i < 100; i++) {
+		//TODO:: Randomness in x and y direction makes ragdoll drawn together by constraint
+		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
+				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(0,5000), randomness.nextDouble(-5000,5000)));
 		mRagdolls.push_back(ragdoll);
 		ragdoll->addToWorld();
 	}
