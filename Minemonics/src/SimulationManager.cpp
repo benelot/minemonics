@@ -142,11 +142,11 @@ void SimulationManager::createFrameListener(void) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
+	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
 	for (int i = 0; i < 100; i++) {
-		//TODO:: Randomness in x and y direction makes ragdoll drawn together by constraint
 		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
-				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(0,5000), randomness.nextDouble(-5000,5000)));
+				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
 		mRagdolls.push_back(ragdoll);
 		ragdoll->addToWorld();
 	}
