@@ -118,3 +118,30 @@ Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
 
 	return origin + direction * distance / direction.length();
 }
+
+Ogre::Vector3 LimbO3D::getLocalIntersection(Ogre::Vector3 origin,
+		Ogre::Vector3 direction) {
+	Ogre::Ray ray;
+	ray.setOrigin(origin);
+	ray.setDirection(direction);
+
+	Ogre::RaySceneQuery* mRayScnQuery =
+			mSimulationManager->getSceneManager()->createRayQuery(Ogre::Ray());
+	mRayScnQuery->setSortByDistance(true);
+	mRayScnQuery->setRay(ray);
+
+	Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
+	Ogre::RaySceneQueryResult::iterator it = result.begin();
+
+	//Ogre::SceneNode* curObject;
+	double distance = 0;
+	for (; it != result.end(); it++) {
+		if (it->movable->getName() == mEntity->getName()) {
+			distance = it->distance;
+			//curObject = it->movable->getParentSceneNode();
+		}
+	}
+	mSimulationManager->getSceneManager()->destroyQuery(mRayScnQuery);
+
+	return direction * distance / direction.length();
+}

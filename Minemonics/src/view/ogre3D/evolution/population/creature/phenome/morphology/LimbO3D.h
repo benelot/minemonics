@@ -53,7 +53,11 @@ public:
 
 	void removeFromWorld();
 
-	Ogre::Vector3 getIntersection(Ogre::Vector3 origin,Ogre::Vector3 direction);
+	Ogre::Vector3 getIntersection(Ogre::Vector3 origin,
+			Ogre::Vector3 direction);
+
+	Ogre::Vector3 getLocalIntersection(Ogre::Vector3 origin,
+			Ogre::Vector3 direction);
 
 private:
 	SimulationManager* mSimulationManager;
