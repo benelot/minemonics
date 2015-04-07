@@ -13,6 +13,6 @@ public:
 	static const std::string APPLICATION_TITLE;
 };
 
-const std::string ApplicationConfiguration::APPLICATION_TITLE = "Minemonics - The Origin of Creatures v.0.2.0";
+const std::string ApplicationConfiguration::APPLICATION_TITLE = "Minemonics - The Origin of Creatures v.0.2.123";
 
 #endif /* APPLICATIONCONFIGURATION_H_ */
