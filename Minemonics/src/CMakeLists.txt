@@ -462,10 +462,10 @@ set(MISCHDRS
 	./configuration/CameraConfiguration.h
 	./configuration/ControlConfiguration.h
 	./configuration/PhysicsConfiguration.h
-	./configuration/NeuralNetworkConfiguration.h
+	#./configuration/NeuralNetworkConfiguration.h
 	./configuration/MorphologyConfiguration.h
 	./configuration/GeneticsConfiguration.h
-	./configuration/FitnessConfiguration.h
+	#./configuration/FitnessConfiguration.h
 	./configuration/EnvironmentConfiguration.h
 	./configuration/EvolutionConfiguration.h
 	./configuration/PopulationConfiguration.h
@@ -476,6 +476,8 @@ set(MISCHDRS
 	./utils/logging/Logger.h
 	./utils/Randomness.h
 	./utils/NameGenerator.h
+	
+	./utils/ogre3D/Euler.h
 )
 set(MISCSRCS
 	# logger
