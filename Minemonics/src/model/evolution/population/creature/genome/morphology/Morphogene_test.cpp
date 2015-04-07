@@ -70,14 +70,14 @@ protected:
 
 TEST_F(MorphoGeneTest,hasSizeWithinBounds) {
 	ASSERT_TRUE(
-			MorphologyConfiguration::BODY_LIMB_MIN_SIZE <= gene->getX()
-					<= MorphologyConfiguration::BODY_LIMB_MAX_SIZE);
+			MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getX()
+					<= MorphologyConfiguration::LIMB_MAX_SIZE);
 	ASSERT_TRUE(
-			MorphologyConfiguration::BODY_LIMB_MIN_SIZE <= gene->getY()
-					<= MorphologyConfiguration::BODY_LIMB_MAX_SIZE);
+			MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getY()
+					<= MorphologyConfiguration::LIMB_MAX_SIZE);
 	ASSERT_TRUE(
-			MorphologyConfiguration::BODY_LIMB_MIN_SIZE <= gene->getZ()
-					<= MorphologyConfiguration::BODY_LIMB_MAX_SIZE);
+			MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getZ()
+					<= MorphologyConfiguration::LIMB_MAX_SIZE);
 }
 
 TEST_F(MorphoGeneTest,hasValidJointAnchor) {
@@ -118,14 +118,14 @@ TEST_F(MorphoGeneTest,hasAccurateBranchQty) {
 TEST_F(MorphoGeneTest,testMisc) {
 	//test segment shrink factor is in range
 	ASSERT_TRUE(
-			1 - MorphologyConfiguration::BODY_LIMB_SCALE_MAX
+			1 - MorphologyConfiguration::LIMB_SCALE_MAX
 					<= gene->getSegmentShrinkFactor()
-					<= 1 + MorphologyConfiguration::BODY_LIMB_SCALE_MAX);
+					<= 1 + MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	// test repetition limit
 	ASSERT_TRUE(
 			0 <= gene->getRepetitionLimit()
-					<= MorphologyConfiguration::BODY_LIMB_INITIAL_TYPE_REPEATS);
+					<= MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
 	// follow up gene can not be valid at this time
 

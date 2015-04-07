@@ -67,21 +67,24 @@ public:
 	 * @param morphogene The morphogene we want to serialize.
 	 * @return A string containing all information about the morphogene.
 	 */
-	friend std::ostream & operator<<(std::ostream &os, const Morphogene &morphogene) {
-		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << "," << morphogene.mZ
-				<< ")/ShrinkFactor=" << morphogene.mSegmentShrinkFactor
-				<< "/RepetitionLimit" << morphogene.mRepetitionLimit
-				<< "/FollowUpGene=" << morphogene.mFollowUpGene << "/Color("
-				<< morphogene.mColorR << "," << morphogene.mColorG << "," << morphogene.mColorB
-				<< "/PrimitiveType" << morphogene.mPrimitiveType << "/ControllerGene="
-				<< morphogene.mControllerGene << "/Joint Anchor:("
-				<< morphogene.mJointAnchorX << "," << morphogene.mJointAnchorY << ","
-				<< morphogene.mJointAnchorZ << ")" << "/Joint Rotation:("
-				<< morphogene.mJointPitch << "," << morphogene.mJointYaw << ","
-				<< morphogene.mJointRoll << ")/Gene Branches=";
+	friend std::ostream & operator<<(std::ostream &os,
+			const Morphogene &morphogene) {
+		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << ","
+				<< morphogene.mZ << ")/ShrinkFactor="
+				<< morphogene.mSegmentShrinkFactor << "/RepetitionLimit"
+				<< morphogene.mRepetitionLimit << "/FollowUpGene="
+				<< morphogene.mFollowUpGene << "/Color(" << morphogene.mColorR
+				<< "," << morphogene.mColorG << "," << morphogene.mColorB
+				<< "/PrimitiveType" << morphogene.mPrimitiveType
+				<< "/ControllerGene=" << morphogene.mControllerGene
+				<< "/Joint Anchor:(" << morphogene.mJointAnchorX << ","
+				<< morphogene.mJointAnchorY << "," << morphogene.mJointAnchorZ
+				<< ")" << "/Joint Rotation:(" << morphogene.mJointPitch << ","
+				<< morphogene.mJointYaw << "," << morphogene.mJointRoll
+				<< ")/Gene Branches=";
 		std::vector<MorphogeneBranch*>::const_iterator it;
-		for (it = morphogene.mGeneBranches.begin(); it != morphogene.mGeneBranches.end();
-				it++) {
+		for (it = morphogene.mGeneBranches.begin();
+				it != morphogene.mGeneBranches.end(); it++) {
 			os << (**it);
 		}
 		return os;

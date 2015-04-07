@@ -62,17 +62,17 @@ Morphogene::~Morphogene() {
 void Morphogene::initialize(double bushiness) {
 	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions
-	mX = randomness.nextBiasedLog(MorphologyConfiguration::BODY_LIMB_MIN_SIZE,
-			MorphologyConfiguration::BODY_LIMB_MAX_SIZE);
-	mY = randomness.nextBiasedLog(MorphologyConfiguration::BODY_LIMB_MIN_SIZE,
-			MorphologyConfiguration::BODY_LIMB_MAX_SIZE);
-	mZ = randomness.nextBiasedLog(MorphologyConfiguration::BODY_LIMB_MIN_SIZE,
-			MorphologyConfiguration::BODY_LIMB_MAX_SIZE);
+	mX = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+			MorphologyConfiguration::LIMB_MAX_SIZE);
+	mY = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+			MorphologyConfiguration::LIMB_MAX_SIZE);
+	mZ = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+			MorphologyConfiguration::LIMB_MAX_SIZE);
 
 	mSegmentShrinkFactor = 1.0
 			+ randomness.nextDouble(
-					MorphologyConfiguration::BODY_LIMB_SCALE_MIN,
-					MorphologyConfiguration::BODY_LIMB_SCALE_MAX);
+					MorphologyConfiguration::LIMB_SCALE_MIN,
+					MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	/* Set joint anchor X, Y and Z, where the anchor lies in the center of mass
 	 and the X, y and Z form a vector, pointing to the point on the surface where
@@ -113,7 +113,7 @@ void Morphogene::initialize(double bushiness) {
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
 	mRepetitionLimit = randomness.nextPosInt(0,
-			MorphologyConfiguration::BODY_LIMB_INITIAL_TYPE_REPEATS);
+			MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
 	//The follow up gene follows instead if this gene's repetition limit is reached.
 	mFollowUpGene = -1;

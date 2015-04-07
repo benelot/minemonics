@@ -180,6 +180,62 @@ public:
 		mMirrored = mirrored;
 	}
 
+	bool isActuated() const {
+		return mActuated;
+	}
+
+	void setActuated(bool actuated) {
+		mActuated = actuated;
+	}
+
+	double getJointPitchMaxAngle() const {
+		return mJointPitchMaxAngle;
+	}
+
+	void setJointPitchMaxAngle(double jointPitchMaxAngle) {
+		mJointPitchMaxAngle = jointPitchMaxAngle;
+	}
+
+	double getJointPitchMinAngle() const {
+		return mJointPitchMinAngle;
+	}
+
+	void setJointPitchMinAngle(double jointPitchMinAngle) {
+		mJointPitchMinAngle = jointPitchMinAngle;
+	}
+
+	double getJointRollMaxAngle() const {
+		return mJointRollMaxAngle;
+	}
+
+	void setJointRollMaxAngle(double jointRollMaxAngle) {
+		mJointRollMaxAngle = jointRollMaxAngle;
+	}
+
+	double getJointRollMinAngle() const {
+		return mJointRollMinAngle;
+	}
+
+	void setJointRollMinAngle(double jointRollMinAngle) {
+		mJointRollMinAngle = jointRollMinAngle;
+	}
+
+	double getJointYawMaxAngle() const {
+		return mJointYawMaxAngle;
+	}
+
+	void setJointYawMaxAngle(double jointYawMaxAngle) {
+		mJointYawMaxAngle = jointYawMaxAngle;
+	}
+
+	double getJointYawMinAngle() const {
+		return mJointYawMinAngle;
+	}
+
+	void setJointYawMinAngle(double jointYawMinAngle) {
+		mJointYawMinAngle = jointYawMinAngle;
+	}
+
 private:
 	/**
 	 * Determines if this branch is active.

@@ -63,13 +63,13 @@ void Genome::createRandomGenome(double bushiness) {
 
 	mSegmentsDepthLimit = abs(
 			randomness.nextNormalInt(
-					MorphologyConfiguration::BODY_LIMB_DEPTH_INITIAL_MEAN,
-					MorphologyConfiguration::BODY_LIMB_DEPTH_INITIAL_VAR));
+					MorphologyConfiguration::LIMB_DEPTH_INITIAL_MEAN,
+					MorphologyConfiguration::LIMB_DEPTH_INITIAL_VAR));
 
 	mTotalSegmentQtyLimit = abs(
 			randomness.nextNormalInt(
-					MorphologyConfiguration::BODY_LIMB_TOTAL_INITIAL_MEAN,
-					MorphologyConfiguration::BODY_LIMB_TOTAL_INITIAL_VAR));
+					MorphologyConfiguration::LIMB_TOTAL_INITIAL_MEAN,
+					MorphologyConfiguration::LIMB_TOTAL_INITIAL_VAR));
 }
 
 void Genome::addGene(Morphogene* gene) {
