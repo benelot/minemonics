@@ -481,6 +481,7 @@ void RagDoll::update() {
 }
 
 void RagDoll::addToWorld() {
+	// Add all limbs
 	std::vector<Limb*>::iterator it = mLimbs.begin();
 	for (; it != mLimbs.end(); it++) {
 		(*it)->addToWorld();
