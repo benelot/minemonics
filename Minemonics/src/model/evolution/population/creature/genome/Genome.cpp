@@ -52,9 +52,9 @@ Genome::~Genome() {
 void Genome::createRandomGenome(double bushiness) {
 	Randomness randomness;
 
-	int geneQty = randomness.nextNormalInt(
+	int geneQty = 1+ abs(randomness.nextNormalInt(
 			PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN,
-			PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
+			PopulationConfiguration::POPULATION_GENES_INITIAL_VAR));
 	for (int i = 0; i < geneQty; i++) {
 		Morphogene* gene = new Morphogene();
 		gene->initialize(bushiness);

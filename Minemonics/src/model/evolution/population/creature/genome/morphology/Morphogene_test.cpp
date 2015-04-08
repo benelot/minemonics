@@ -116,6 +116,9 @@ TEST_F(MorphoGeneTest,hasAccurateBranchQty) {
 }
 
 TEST_F(MorphoGeneTest,testMisc) {
+	//test genetype is morphogene
+	ASSERT_TRUE(gene->getGeneType() == Gene::MorphoGene);
+
 	//test segment shrink factor is in range
 	ASSERT_TRUE(
 			1 - MorphologyConfiguration::LIMB_SCALE_MAX

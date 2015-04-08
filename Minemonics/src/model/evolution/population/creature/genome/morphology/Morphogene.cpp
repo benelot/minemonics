@@ -60,6 +60,9 @@ Morphogene::~Morphogene() {
 }
 
 void Morphogene::initialize(double bushiness) {
+	mGeneType = Gene::MorphoGene;
+	mActive = true;
+
 	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions
 	mX = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,

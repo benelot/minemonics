@@ -85,7 +85,7 @@ public:
 		ar & BOOST_SERIALIZATION_NVP(mActive) & BOOST_SERIALIZATION_NVP(mGeneType);
 	}
 
-private:
+protected:
 	bool mActive;
 
 	GeneType mGeneType;
