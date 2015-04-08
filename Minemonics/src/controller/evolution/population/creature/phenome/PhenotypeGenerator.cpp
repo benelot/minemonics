@@ -26,17 +26,22 @@
 //## utils headers
 
 PhenotypeGenerator::PhenotypeGenerator() :
-		mGene(0), mRoot2LeafPath(0), mTotalQty(0), mParentComponent(0) {
+		mGene(0), mRoot2LeafPath(0), mParentComponent(0), mCurrentShrinkageFactor(
+				1), mGeneBranch(0) {
 	// TODO Auto-generated constructor stub
 
 }
 
-void PhenotypeGenerator::initialize(std::vector<int>& repetitionList,
-		Ogre::Vector3 position, Ogre::Quaternion orientation, Component* parentComponent,GeneBranch* geneBranch) {
+void PhenotypeGenerator::initialize(std::map<int,int>& repetitionList,
+		Ogre::Vector3 position, Ogre::Quaternion orientation,
+		Component* parentComponent, GeneBranch* geneBranch,
+		double currentShrinkageFactor) {
 	mRepetitionList = repetitionList;
 	mPosition = position;
 	mOrientation = orientation;
 	mParentComponent = parentComponent;
+	mGeneBranch = geneBranch;
+	mCurrentShrinkageFactor = currentShrinkageFactor;
 }
 
 PhenotypeGenerator::~PhenotypeGenerator() {

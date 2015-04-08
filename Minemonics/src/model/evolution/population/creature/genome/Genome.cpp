@@ -52,9 +52,12 @@ Genome::~Genome() {
 void Genome::createRandomGenome(double bushiness) {
 	Randomness randomness;
 
-	int geneQty = 1+ abs(randomness.nextNormalInt(
-			PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN,
-			PopulationConfiguration::POPULATION_GENES_INITIAL_VAR));
+	int geneQty =
+			1
+					+ abs(
+							randomness.nextNormalInt(
+									PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN,
+									PopulationConfiguration::POPULATION_GENES_INITIAL_VAR));
 	for (int i = 0; i < geneQty; i++) {
 		Morphogene* gene = new Morphogene();
 		gene->initialize(bushiness);
@@ -78,13 +81,26 @@ void Genome::addGene(Morphogene* gene) {
 
 void Genome::linkRandomGenes() {
 	Randomness randomness;
-	std::vector<Morphogene*>::iterator geneIt = mGenes.begin();
-	for (; geneIt != mGenes.end(); geneIt++) {
+	for (int geneIt = 0; geneIt < mGenes.size(); geneIt++) {
+
+		// randomly choose a follow up gene until you get one different from its own type
+		do {
+			mGenes[geneIt]->setFollowUpGene(
+					randomness.nextPosInt(0, mGenes.size() - 1));
+		} while (mGenes[geneIt]->getFollowUpGene() != geneIt);
+
 		std::vector<MorphogeneBranch*>::iterator branchIt =
-				(*geneIt)->getGeneBranches().begin();
-		for (; branchIt != (*geneIt)->getGeneBranches().end(); branchIt++) {
-			(*branchIt)->setBranchGeneType(
-					randomness.nextPosInt(0, mGenes.size()));
+				mGenes[geneIt]->getGeneBranches().begin();
+		for (; branchIt != mGenes[geneIt]->getGeneBranches().end(); branchIt++) {
+
+			//randomly choose a branch gene type until you get one distinct from the follow up gene
+			do {
+				(*branchIt)->setBranchGeneType(
+						randomness.nextPosInt(0, mGenes.size() - 1));
+			} while (mGenes.size() > 1
+					&& (*branchIt)->getBranchGeneType()
+							== mGenes[geneIt]->getFollowUpGene());
+
 		}
 	}
 }

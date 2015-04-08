@@ -11,6 +11,7 @@
 //# forward declarations
 //# system headers
 #include <vector>
+#include <map>
 
 //## controller headers
 //## model headers
@@ -28,14 +29,17 @@
 #include "controller/evolution/population/creature/phenome/morphology/joint/Joint.h"
 
 //## model headers
-#include <model/evolution/population/creature/genome/morphology/Morphogene.h>
-#include <model/evolution/population/creature/genome/morphology/MorphogeneBranch.h>
+#include "model/evolution/population/creature/genome/morphology/Morphogene.h"
+#include "model/evolution/population/creature/genome/morphology/MorphogeneBranch.h"
 #include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
 #include "model/evolution/population/creature/phenome/morphology/joint/JointBt.h"
 #include "model/evolution/population/creature/genome/Gene.h"
 
 //## view headers
+#include "view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h"
+
 //## utils headers
+#include "utils/ogre3D/Euler.h"
 
 Phenome::Phenome() :
 		mSimulationManager(NULL), mWorld(NULL) {
@@ -52,225 +56,295 @@ void Phenome::initialize(SimulationManager* simulationManager) {
 }
 
 /**
- * Performs the embryogenesis of a genome.
- * @param genome The genome we perform embryogenesis.
+ * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
+ * @param genome The genome we perform embryogenesis with.
  */
-void Phenome::performEmbryogenesis(Genome* genome) {
+void Phenome::performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition) {
 	std::list<PhenotypeGenerator*> generatorList;
 	int totalSegmentCounter = 0;
 
+	// get the first gene from the genome
 	Gene* gene = genome->getGenes().front();
-	PhenotypeGenerator* generator = new PhenotypeGenerator();
-	std::vector<int> repList;
-	generator->initialize(repList, Ogre::Vector3(0, 100, 0),
-			Ogre::Quaternion().IDENTITY, NULL, NULL);
-	generator->setGene(gene);
-	generator->setTotalQty(totalSegmentCounter);
-	generator->setRoot2LeafPath(0);
 
-	generatorList.push_back(generator);
-	// find correct root-to-leaf path length
-	while (!generatorList.empty()
-			&& totalSegmentCounter <= genome->getTotalSegmentQtyLimit()) {
+	//create a phenotype generator and initialize it with the starting point of the creation of the creature
+	PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
+	std::map<int, int> repList;
+	rootGenerator->initialize(repList, rootPosition,
+			Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
+	rootGenerator->setGene(gene);
+	rootGenerator->setRoot2LeafPath(0);
+	generatorList.push_back(rootGenerator);
+
+	// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
+	while (!generatorList.empty()) {
+
+		std::cout << "Phenome generator qty:" << generatorList.size() << std::endl;
+
 		PhenotypeGenerator* generator = generatorList.front();
 		generatorList.pop_front();
 
-		//if the current root to leaf path is shorter or equal to the maximal segments depth
-		if (generator->getRoot2LeafPath() <= genome->getSegmentsDepthLimit()) {
-			switch (generator->getGene()->getGeneType()) {
-			case Gene::MorphoGene: {
-				Morphogene* morphoParent = ((Morphogene*) generator->getGene());
+		// what is the next gene type
+		switch (generator->getGene()->getGeneType()) {
+		case Gene::MorphoGene: {
+			// if the current root to leaf path is equal to the maximal segments depth, break
+			if (generator->getRoot2LeafPath()
+					== genome->getSegmentsDepthLimit()) {
+				break;
+			}
+			//if the total segment counter reached the total segment quantity, break
+			if (totalSegmentCounter == genome->getTotalSegmentQtyLimit()) {
+				break;
+			}
 
-				//build the limb out of the morphogene
-				Limb* limb = new Limb();
-				limb->initialize(mSimulationManager,
-						morphoParent->getPrimitiveType(),
-						generator->getPosition(), generator->getOrientation(),
-						Ogre::Vector3(morphoParent->getX(),
-								morphoParent->getY(), morphoParent->getZ()),
-						morphoParent->getX() * morphoParent->getY()
-								* morphoParent->getZ());
-				limb->addToWorld();
-				mLimbs.push_back(limb);
+			totalSegmentCounter++;
+
+			// get the morphogene and start creating the limb and its joint to its parent
+			Morphogene* morphogene = ((Morphogene*) generator->getGene());
+
+			Ogre::Vector3 localJointOA;
+			Ogre::Vector3 localJointOB;
+
+			if (generator->getParentComponent() != NULL) {
+
+				// find the joint anchor position of the limb A
+				LimbGraphics* limbA =
+						((Limb*) generator->getParentComponent())->getLimbGraphics();
+
+				//get anchor direction of limb A
+				Ogre::Vector3 anchorDirOA(
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+
+				//get local surface point of limb A
+				Ogre::Vector3 localAnchorOA(
+				/*get the surface point of limb A in the local reference frame of A*/
+				limbA->getLocalIntersection(
+				/*origin of limb A*/
+				Ogre::Vector3(limbA->getPosition()),
+				/*direction of anchor of limb A*/
+				anchorDirOA));
+
+				//get local joint rotation point in A
+				Ogre::Euler euler1(
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointYaw(),
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointPitch(),
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointRoll());
+				localJointOA = localAnchorOA
+						+ euler1 * anchorDirOA.UNIT_SCALE
+								* MorphologyConfiguration::JOINT_LENGTH;
+
+				//get anchor direction of limb B
+				Ogre::Vector3 anchorDirOB(morphogene->getJointAnchorX(),
+						morphogene->getJointAnchorY(),
+						morphogene->getJointAnchorZ());
+
+				//get local surface anchor point of B in A
+				Ogre::Euler euler2(morphogene->getJointYaw(),
+						morphogene->getJointPitch(),
+						morphogene->getJointRoll());
+				Ogre::Vector3 localAnchorOBinA(
+						localJointOA
+								- euler2 * anchorDirOB.UNIT_SCALE
+										* MorphologyConfiguration::JOINT_LENGTH);
+
+				// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
+				LimbO3D* limbOB = new LimbO3D();
+				limbOB->initialize(mSimulationManager,
+						morphogene->getPrimitiveType(),
+						/*size*/
+						Ogre::Vector3(
+								generator->getCurrentShrinkageFactor()
+										* morphogene->getX(),
+								generator->getCurrentShrinkageFactor()
+										* morphogene->getY(),
+								generator->getCurrentShrinkageFactor()
+										* morphogene->getZ()));
+				limbOB->setPosition(generator->getPosition());
+
+				limbOB->addToWorld();
+
+				//get the surface point of limb B in the local reference frame of B
+				Ogre::Vector3 localAnchorOB(
+						limbOB->getLocalIntersection(
+						/*origin of limb B*/
+						limbOB->getPosition(),
+								/*direction of anchor of limb B*/
+								Ogre::Vector3(morphogene->getJointAnchorX(),
+										morphogene->getJointAnchorY(),
+										morphogene->getJointAnchorZ())));
+
+				limbOB->removeFromWorld();
+				delete limbOB;
+				limbOB = 0;
+
+				// global center of mass of limb B
+				Ogre::Vector3 globalCOMOB(
+						limbA->getPosition() + localAnchorOBinA
+								- localAnchorOB);
+
+				// set global center of mass of limb B as the new generation point
+				generator->setPosition(globalCOMOB);
+
+				// get local joint rotation point in the local reference frame of B
+				Ogre::Euler euler3(morphogene->getJointYaw(),
+						morphogene->getJointPitch(),
+						morphogene->getJointRoll());
+
+				localJointOB = localAnchorOB
+						+ euler3 * anchorDirOB.UNIT_SCALE
+								* MorphologyConfiguration::JOINT_LENGTH;
+			}
+
+			//build the limb out of the morphogene
+			Limb* limb = new Limb();
+			limb->initialize(mSimulationManager, morphogene->getPrimitiveType(),
+					generator->getPosition(), generator->getOrientation(),
+					/*size*/
+					Ogre::Vector3(
+							generator->getCurrentShrinkageFactor()
+									* morphogene->getX(),
+							generator->getCurrentShrinkageFactor()
+									* morphogene->getY(),
+							generator->getCurrentShrinkageFactor()
+									* morphogene->getZ()),
+					generator->getCurrentShrinkageFactor()
+					/*mass*/
+					* morphogene->getX()
+							* generator->getCurrentShrinkageFactor()
+							* morphogene->getY()
+							* generator->getCurrentShrinkageFactor()
+							* morphogene->getZ());
+			//limb->addToWorld();
+			mLimbs.push_back(limb);
+
+			if (generator->getParentComponent() != NULL) {
+
+				btVector3 localbtA(localJointOA.x, localJointOA.y,
+						localJointOA.z);
 
 				//define joint
-				//TODO: Remove this again
-				double size = 1;
-
 				btTransform transform;
 				btTransform localA, localB;
 				localA.setIdentity();
 				localB.setIdentity();
-				localA.getBasis().setEulerZYX(0, M_PI_2, 0);
-				localA.setOrigin(
-						btVector3(btScalar(size * 0.), btScalar(size * -0.225),
-								btScalar(size * 0.)));
-				localB.getBasis().setEulerZYX(0, M_PI_2, 0);
-				localB.setOrigin(
-						btVector3(btScalar(size * 0.), btScalar(size * 0.185),
-								btScalar(size * 0.)));
+
+				localA.setOrigin(localbtA);
+				localA.getBasis().setEulerZYX(
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointPitch(),
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointYaw(),
+						((MorphogeneBranch*) generator->getGeneBranch())->getJointRoll());
+
+				//set the joint of the morphogene
+				btVector3 localbtB(localJointOB.x, localJointOB.y,
+						localJointOB.z);
+				localB.setOrigin(localbtB);
+				localA.getBasis().setEulerZYX(morphogene->getJointPitch(),
+						morphogene->getJointYaw(), morphogene->getJointRoll());
 
 				JointBt* joint = new JointBt();
 				joint->initialize(
-						((Limb*)generator->getParentComponent())->getLimbPhysics()->getRigidBody(),
-						limb->getLimbPhysics()->getRigidBody(),
-						localA, localB);
-				joint->setAngularLimits(btVector3(0, 0, 0),
-						btVector3(0, M_PI_2, 0));
+						((Limb*) generator->getParentComponent())->getLimbPhysics()->getRigidBody(),
+						limb->getLimbPhysics()->getRigidBody(), localA, localB);
+				joint->setAngularLimits(
+						btVector3(
+								((MorphogeneBranch*) generator->getGeneBranch())->getJointPitchMinAngle(),
+								((MorphogeneBranch*) generator->getGeneBranch())->getJointYawMinAngle(),
+								((MorphogeneBranch*) generator->getGeneBranch())->getJointRollMinAngle()),
+						btVector3(
+								((MorphogeneBranch*) generator->getGeneBranch())->getJointPitchMaxAngle(),
+								((MorphogeneBranch*) generator->getGeneBranch())->getJointYawMaxAngle(),
+								((MorphogeneBranch*) generator->getGeneBranch())->getJointRollMaxAngle()));
 				mJoints.push_back(joint);
+			}
 
-				//iterate over all morphogene branches
-				std::vector<MorphogeneBranch*>::iterator branchIt =
-						morphoParent->getGeneBranches().begin();
-				for (; branchIt != morphoParent->getGeneBranches().end();
-						branchIt++) {
-					totalSegmentCounter++;
-					Morphogene* offspring =
-							genome->getGenes()[(*branchIt)->getBranchGeneType()];
+			//iterate over all morphogene branches
+			std::vector<MorphogeneBranch*>::iterator branchIt =
+					morphogene->getGeneBranches().begin();
+			for (; branchIt != morphogene->getGeneBranches().end();
+					branchIt++) {
 
-					PhenotypeGenerator* generatorFromBranch =
-							new PhenotypeGenerator();
+				Morphogene* offspring =
+						genome->getGenes()[(*branchIt)->getBranchGeneType()];
 
-					//TODO move generator
-					generatorFromBranch->initialize(
-							generator->getRepetitionList(),
-							generator->getPosition(),
-							generator->getOrientation(), limb,
-							(*branchIt.base()));
+				PhenotypeGenerator* generatorFromBranch =
+						new PhenotypeGenerator();
 
-					//If repetition limit not exceeded
-					if (generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-							<= offspring->getRepetitionLimit()) {
+				//TODO move generator
+				generatorFromBranch->initialize(generator->getRepetitionList(),
+						generator->getPosition(), generator->getOrientation(),
+						limb, (*branchIt.base()),
+						morphogene->getSegmentShrinkFactor()
+								* generator->getCurrentShrinkageFactor());
 
-						//add another of this offspring type
-						generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-						generatorFromBranch->setGene(offspring);
-					} else {
+				//If repetition limit not exceeded (if it does not find the key OR if the repetition limit is not exceeded)
+				if (generatorFromBranch->getRepetitionList().find(
+						(*branchIt)->getBranchGeneType())
+						== generatorFromBranch->getRepetitionList().end()
+						|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+								<= offspring->getRepetitionLimit()) {
 
-						//add the offspring follower
-						generatorFromBranch->setGene(
-								genome->getGenes()[offspring->getFollowUpGene()]);
-					}
+					//add another of this offspring type
+					generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
+					generatorFromBranch->setGene(offspring);
+				} else {
 
-					//set new total quantity and root to leaf path
-					generatorFromBranch->setTotalQty(totalSegmentCounter);
-					generatorFromBranch->setRoot2LeafPath(
-							generator->getRoot2LeafPath() + 1);
-					generatorList.push_back(generatorFromBranch);
-					delete generator;
+					//add the offspring follower
+					generatorFromBranch->setGene(
+							genome->getGenes()[offspring->getFollowUpGene()]);
 				}
-				break;
+
+				//set new root to leaf path
+				generatorFromBranch->setRoot2LeafPath(
+						generator->getRoot2LeafPath() + 1);
+				generatorList.push_back(generatorFromBranch);
 			}
-			default:
-				break;
-			}
+			break;
 		}
+		default:
+			break;
+		}
+		// delete the generator of this gene
+		delete generator;
 	}
 }
 
-//void Phenome::transcribeGene(Gene* gene) {
-//
-//}
+void Phenome::transcribeGene(Gene* gene) {
+	//TODO: Implement transcribeGene method
+}
 
-//void Phenotype::createBox(int index, double x, double y, double z,
-//		double length, double width, double height) {
-////...
-////body[index] = ...
-////...
-////geom[index] = ...
-////...
-////m_dynamicsWorld->addRigidBody(body[index]);
-//}
-//
-//void Phenotype::createCylinder(int index, double x, double y, double z,
-//	double length, double width, double height) {
-//
-////...
-////body[index] = ...
-////...
-////geom[index] = ...
-////...
-////m_dynamicsWorld->addRigidBody(body[index]);
-//}
-//
-//void Phenotype::addToWorld() {
-//
-//}
-//
-//void Phenotype::removeFromWorld() {
-//m_dynamicsWorld->removeRigidBody(body[index]);
-//}
-//
-//
-//void Phenotype::addConstraint()
-//{
-//	// Add to simulation
-//	m_dynamicsWorld->addConstraint( joints[index] , true );
-//}
-//
-//void Phenotype::removeConstraint()
-//{
-//	// Remove from simulation
-//	m_dynamicsWorld->removeConstraint( joints[index] );
-//}
-//
-//void Phenotype::createHinge(int index, int body1, int body2, double x, double y,
-//double z, double ax, double ay, double az) {
-//	 btVector3 p(x, y, z);
-//	  btVector3 a(ax, ay, az);
-////	  btVector3 p1 = PointWorldToLocal(body1, p);
-////	  btVector3 p2 = PointWorldToLocal(body2, p);
-////	  btVector3 a1 = AxisWorldToLocal(body1, a);
-////	  btVector3 a2 = AxisWorldToLocal(body2, a);
-//
-//	  btVector3 p1 = PointWorldToLocal(body1, flipZY(p));
-//	  btVector3 p2 = PointWorldToLocal(body2, flipZY(p));
-//	  btVector3 a1 = AxisWorldToLocal(body1, flipZY(a));
-//	  btVector3 a2 = AxisWorldToLocal(body2, flipZY(a));
-//	  // create
-//	    joints[index] = new btHingeConstraint(*body[body1], *body[body2],
-//	                                                     p1, p2,
-//	                                                     a1, a2, false);
-//}
-//
-//void Phenotype::destroyHinge(int index)
-//{
-//
-//}
-//
-//btVector3 Phenotype::flipZY(btVector3 input) {
-//  btScalar temp;
-//  temp = input[1];
-//  input[1] = input[2];
-//  input[2] = temp;
-//  return input;
-//}
-//
-//btVector3 Phenotype::PointWorldToLocal(int index, btVector3 &p) {
-//	  btTransform local1 = body[index]->getCenterOfMassTransform().inverse();
-//	  return local1 * p;
-//	}
-//
-//btVector3 Phenotype::AxisWorldToLocal(int index, btVector3 &a) {
-//	  btTransform local1 = body[index]->getCenterOfMassTransform().inverse();
-//	  btVector3 zero(0,0,0);
-//	  local1.setOrigin(zero);
-//	  return local1 * a;
-//	}
-//
-//
-//addJointLimit(){
-//	joints[index]->setLimit(-45.*3.14159/180., 45.*3.14159/180.);
-////
-////	  if ( index==0 ):
-////	      joints[index]->setLimit( (-45. + 90.)*3.14159/180., (45. + 90.)*3.14159/180.);
-////	  else if ( index==1 ):
-////	      joints[index]->setLimit( (-45. - 90.)*3.14159/180., (45. - 90.)*3.14159/180.);
-////	  else:
-////	      joints[index]->setLimit( (-45. + 0.)*3.14159/180., (45. + 0.)*3.14159/180.);
-//}
-//
-//void actuateJoint(int jointIndex, double desiredAngle,
-//                  double jointOffset, double timeStep) {
-//    ...
-//}
+void Phenome::update() {
+	std::vector<Limb*>::iterator it = mLimbs.begin();
+	for (; it != mLimbs.end(); it++) {
+		(*it)->update();
+	}
+}
+
+void Phenome::addToWorld() {
+	// Add all limbs
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->addToWorld();
+	}
+
+	// Add all constraints
+	std::vector<JointBt*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		mWorld->addConstraint((btTypedConstraint*) (*jit)->getG6DofJoint(),
+				true);
+	}
+}
+
+void Phenome::removeFromWorld() {
+	// Remove all constraints
+	std::vector<JointBt*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		mWorld->removeConstraint((btTypedConstraint*) (*jit)->getG6DofJoint());
+	}
+
+	// Remove all bodies and shapes
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->removeFromWorld();
+	}
+}
