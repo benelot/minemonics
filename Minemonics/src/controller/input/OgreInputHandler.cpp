@@ -42,119 +42,120 @@ void OgreInputHandler::initialize(SimulationManager* simulationMgr) {
 
 //-------------------------------------------------------------------------------------
 bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey pressed::" << key;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey pressed::" << key;
 
 	switch (key) {
-		case ApplicationKeycode::APPK_1:
+	case ApplicationKeycode::APPK_1:
 		// return CEGUI::Key::One;
 		break;
-		case ApplicationKeycode::APPK_2:
+	case ApplicationKeycode::APPK_2:
 		// return CEGUI::Key::Two;
 		break;
-		case ApplicationKeycode::APPK_3:
+	case ApplicationKeycode::APPK_3:
 		// return CEGUI::Key::Three;
 		break;
-		case ApplicationKeycode::APPK_4:
+	case ApplicationKeycode::APPK_4:
 		// return CEGUI::Key::Four;
 		break;
-		case ApplicationKeycode::APPK_5:
+	case ApplicationKeycode::APPK_5:
 		// return CEGUI::Key::Five;
 		break;
-		case ApplicationKeycode::APPK_6:
+	case ApplicationKeycode::APPK_6:
 		// return CEGUI::Key::Six;
 		break;
-		case ApplicationKeycode::APPK_7:
+	case ApplicationKeycode::APPK_7:
 		// return CEGUI::Key::Seven;
 		break;
-		case ApplicationKeycode::APPK_8:
+	case ApplicationKeycode::APPK_8:
 		// return CEGUI::Key::Eight;
 		break;
-		case ApplicationKeycode::APPK_9:
+	case ApplicationKeycode::APPK_9:
 		// return CEGUI::Key::Nine;
 		break;
-		case ApplicationKeycode::APPK_0:
+	case ApplicationKeycode::APPK_0:
 		// return CEGUI::Key::Zero;
 		break;
 
-		case ApplicationKeycode::APPK_q:
+	case ApplicationKeycode::APPK_q:
 		moveCameraUp();
 		break;
-		case ApplicationKeycode::APPK_w:
+	case ApplicationKeycode::APPK_w:
 		moveCameraForward();
 		break;
-		case ApplicationKeycode::APPK_e:
+	case ApplicationKeycode::APPK_e:
 		moveCameraDown();
 		break;
-		case ApplicationKeycode::APPK_r:
+	case ApplicationKeycode::APPK_r:
 		break;
-		case ApplicationKeycode::APPK_y:
+	case ApplicationKeycode::APPK_y:
 		// return CEGUI::Key::Y;
 		break;
-		case ApplicationKeycode::APPK_u:
+	case ApplicationKeycode::APPK_u:
 		// return CEGUI::Key::U;
 		break;
-		case ApplicationKeycode::APPK_i:
+	case ApplicationKeycode::APPK_i:
 		// return CEGUI::Key::I;
 		break;
-		case ApplicationKeycode::APPK_o:
+	case ApplicationKeycode::APPK_o:
 		// return CEGUI::Key::O;
 		break;
-		case ApplicationKeycode::APPK_p:
+	case ApplicationKeycode::APPK_p:
 		// return CEGUI::Key::P;
 		break;
-		case ApplicationKeycode::APPK_a:
+	case ApplicationKeycode::APPK_a:
 		moveCameraLeft();
 		break;
-		case ApplicationKeycode::APPK_s:
+	case ApplicationKeycode::APPK_s:
 		moveCameraBackward();
 		break;
-		case ApplicationKeycode::APPK_d:
+	case ApplicationKeycode::APPK_d:
 		moveCameraRight();
 		break;
-		case ApplicationKeycode::APPK_f:
+	case ApplicationKeycode::APPK_f:
 		break;
-		case ApplicationKeycode::APPK_h:
+	case ApplicationKeycode::APPK_h:
 		// return CEGUI::Key::H;
 		break;
-		case ApplicationKeycode::APPK_j:
+	case ApplicationKeycode::APPK_j:
 		// return CEGUI::Key::J;
 		break;
-		case ApplicationKeycode::APPK_k:
+	case ApplicationKeycode::APPK_k:
 		// return CEGUI::Key::K;
 		break;
-		case ApplicationKeycode::APPK_l:
+	case ApplicationKeycode::APPK_l:
 		// return CEGUI::Key::L;
 		break;
-		case ApplicationKeycode::APPK_z:
+	case ApplicationKeycode::APPK_z:
 		// return CEGUI::Key::Z;
 		break;
-		case ApplicationKeycode::APPK_x:
+	case ApplicationKeycode::APPK_x:
 		// return CEGUI::Key::X;
 		break;
-		case ApplicationKeycode::APPK_c:
+	case ApplicationKeycode::APPK_c:
 		// return CEGUI::Key::C;
 		break;
-		case ApplicationKeycode::APPK_v:
+	case ApplicationKeycode::APPK_v:
 		// return CEGUI::Key::V;
 		break;
-		case ApplicationKeycode::APPK_b:
+	case ApplicationKeycode::APPK_b:
 		// return CEGUI::Key::B;
 		break;
-		case ApplicationKeycode::APPK_n:
+	case ApplicationKeycode::APPK_n:
 		// return CEGUI::Key::N;
 		break;
-		case ApplicationKeycode::APPK_m:
+	case ApplicationKeycode::APPK_m:
 		// return CEGUI::Key::M;
 		break;
 
-		case ApplicationKeycode::APPK_COMMA:
+	case ApplicationKeycode::APPK_COMMA:
 		// return CEGUI::Key::Comma;
 		break;
-		case ApplicationKeycode::APPK_PERIOD:
+	case ApplicationKeycode::APPK_PERIOD:
 		// return CEGUI::Key::Period;
 		break;
-		case ApplicationKeycode::APPK_SLASH:
+	case ApplicationKeycode::APPK_SLASH:
 		mSimulationMgr->setDrawBulletDebug(!mSimulationMgr->isDrawBulletDebug());
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->isDrawBulletDebug())?"true":"false";
 		break;
 		case ApplicationKeycode::APPK_BACKSLASH:
 		// return CEGUI::Key::Backslash;
@@ -202,6 +203,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		break;
 		case ApplicationKeycode::APPK_SYSREQ:
 		// take a screenshot
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Smile! Screenshot taken!";
 		mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
 		break;
 		case ApplicationKeycode::APPK_POWER:
@@ -275,6 +277,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		break;
 		case ApplicationKeycode::APPK_RALT:
 		//take screen shot
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Smile! Screenshot taken!";
 		mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
 		break;
 		case ApplicationKeycode::APPK_RSHIFT:
@@ -374,7 +377,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 //-------------------------------------------------------------------------------------
 bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey released::" << key;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey released::" << key;
 	Ogre::String newVal;
 
 	switch (key) {
@@ -704,7 +707,7 @@ bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 
 // CEGUI::MouseListener
 bool OgreInputHandler::mouseMoved(float x, float y) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse moved by " << x << "," << y;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse moved by " << x << "," << y;
 	if(mRightMousePressed)
 	{
 		mSimulationMgr->getCameraHandler().rotate(y,
@@ -716,12 +719,12 @@ bool OgreInputHandler::mouseMoved(float x, float y) {
 
 // CEGUI:MouseWheelListener
 bool OgreInputHandler::mouseWheelMoved(float rel) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse wheel moved by " << rel;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse wheel moved by " << rel;
 	return true;
 }
 
 bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " pressed";
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " pressed";
 
 	switch (button) {
 		case ApplicationMouseCode::LeftButton:
@@ -738,7 +741,7 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 }
 
 bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " released";
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " released";
 
 	switch (button) {
 		case ApplicationMouseCode::LeftButton:

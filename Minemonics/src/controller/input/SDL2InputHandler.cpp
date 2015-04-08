@@ -100,7 +100,7 @@ void SDL2InputHandler::injectInput() {
 			/* mouse down handler */
 		case SDL_MOUSEBUTTONDOWN:
 			/* let a special function handle the mouse button down event */
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button pressed" << e.button.button;
+			//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button pressed" << e.button.button;
 			CEGUIInputHandler::mousePressed(
 					convertMouseSDL2toOgre(e.button.button));
 			break;

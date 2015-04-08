@@ -53,7 +53,7 @@ void CEGUIInputHandler::initialize(StateHandler* stateHandler,
 //-------------------------------------------------------------------------------------
 bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey::" << key;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey::" << key;
 
 	//If CEGUI used the input, then return
 	if (CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(
@@ -820,7 +820,7 @@ bool CEGUIInputHandler::mouseWheelMoved(float rel) {
 }
 
 bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "MOUSE BUTTON PRESSED" << button;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "MOUSE BUTTON PRESSED" << button;
 	CEGUI::GUIContext& context =
 	CEGUI::System::getSingleton().getDefaultGUIContext();
 
@@ -1220,6 +1220,6 @@ void CEGUIInputHandler::injectMousePosition(float x, float y) {
 			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 			x - mousePos.d_x, y - mousePos.d_y);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position SDL:" << x << "," << y;
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position CEGUI:" << mousePos.d_x << "," << mousePos.d_y;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position SDL:" << x << "," << y;
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position CEGUI:" << mousePos.d_x << "," << mousePos.d_y;
 }
