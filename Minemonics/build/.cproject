@@ -18,472 +18,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="OgreApp.null.1" name="OgreApp"/>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
-		<buildTargets>
-			<target name="[exe] OgreApp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>OgreApp</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[exe] OgreApp/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>OgreApp/fast</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="Build" path="[Targets]/[exe] OgreApp" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-C "/home/leviathan/git/minemonics/Minemonics/build" -j8</buildArguments>
-				<buildTarget>OgreApp</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="Clean" path="[Targets]/[exe] OgreApp" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/cmake</buildCommand>
-				<buildArguments>-E chdir "/home/leviathan/git/minemonics/Minemonics/build" "/usr/bin/cmake" -P "CMakeFiles/OgreApp.dir/cmake_clean.cmake"</buildArguments>
-				<buildTarget/>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": edit_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>edit_cache</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": install" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>install</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": install/local" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>install/local</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": install/strip" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>install/strip</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": list_install_components" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>list_install_components</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": rebuild_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>rebuild_cache</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>all</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name=": clean" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>clean</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] BaseApplication.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>BaseApplication.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] BaseApplication.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>BaseApplication.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] BaseApplication.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>BaseApplication.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] SimulationManager.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>SimulationManager.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] SimulationManager.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>SimulationManager.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] SimulationManager.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>SimulationManager.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] controller/camera/CameraHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/camera/CameraHandler.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] controller/camera/CameraHandler.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/camera/CameraHandler.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] controller/camera/CameraHandler.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/camera/CameraHandler.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] controller/input/KeyboardHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/input/KeyboardHandler.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] controller/input/KeyboardHandler.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/input/KeyboardHandler.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] controller/input/KeyboardHandler.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/input/KeyboardHandler.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] controller/input/MouseHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/input/MouseHandler.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] controller/input/MouseHandler.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/input/MouseHandler.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] controller/input/MouseHandler.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>controller/input/MouseHandler.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] model/settings/ControlSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/ControlSettings.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] model/settings/ControlSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/ControlSettings.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] model/settings/ControlSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/ControlSettings.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] model/settings/EnvironmentSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/EnvironmentSettings.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] model/settings/EnvironmentSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/EnvironmentSettings.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] model/settings/EnvironmentSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/EnvironmentSettings.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] model/settings/GeneticAlgorithmSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/GeneticAlgorithmSettings.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] model/settings/GeneticAlgorithmSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/GeneticAlgorithmSettings.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] model/settings/GeneticAlgorithmSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/GeneticAlgorithmSettings.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] model/settings/MorphologySettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/MorphologySettings.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] model/settings/MorphologySettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/MorphologySettings.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] model/settings/MorphologySettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/MorphologySettings.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] model/settings/PhysicsSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/PhysicsSettings.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] model/settings/PhysicsSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/PhysicsSettings.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] model/settings/PhysicsSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>model/settings/PhysicsSettings.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] utils/logging/Logger.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>utils/logging/Logger.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] utils/logging/Logger.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>utils/logging/Logger.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] utils/logging/Logger.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>utils/logging/Logger.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/general/evolution/environments/Environment.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Environment.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/general/evolution/environments/Environment.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Environment.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/general/evolution/environments/Environment.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Environment.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/general/evolution/environments/Hills.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Hills.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/general/evolution/environments/Hills.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Hills.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/general/evolution/environments/Hills.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Hills.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/general/evolution/environments/OpenSea.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/OpenSea.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/general/evolution/environments/OpenSea.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/OpenSea.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/general/evolution/environments/OpenSea.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/OpenSea.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/general/evolution/environments/Plane.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Plane.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/general/evolution/environments/Plane.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Plane.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/general/evolution/environments/Plane.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/general/evolution/environments/Plane.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/ogre3D/evolution/environments/HillsO3D.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/HillsO3D.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/ogre3D/evolution/environments/HillsO3D.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/HillsO3D.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/ogre3D/evolution/environments/HillsO3D.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/HillsO3D.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[obj] view/ogre3D/evolution/environments/PlaneO3D.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/PlaneO3D.cpp.o</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[pre] view/ogre3D/evolution/environments/PlaneO3D.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/PlaneO3D.cpp.i</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-			<target name="[to asm] view/ogre3D/evolution/environments/PlaneO3D.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-				<buildCommand>/usr/bin/make</buildCommand>
-				<buildArguments>-j8</buildArguments>
-				<buildTarget>view/ogre3D/evolution/environments/PlaneO3D.cpp.s</buildTarget>
-				<stopOnError>true</stopOnError>
-				<useDefaultCommand>false</useDefaultCommand>
-			</target>
-		</buildTargets>
-	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
 		<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -778,5 +312,536 @@
 		<pathentry include="/usr/local/include/mgl2/" kind="inc" path="" system="true"/>
 		<pathentry kind="src" path="[Source directory]"/>
 		<pathentry excluding="[Source directory]/|**/CMakeFiles/" kind="out" path=""/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+		<buildTargets>
+			<target name="Build" path="[Targets]/[exe] OgreApp" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-C "/home/leviathan/git/minemonics/Minemonics/build" -j8</buildArguments>
+				<buildTarget>OgreApp</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="Clean" path="[Targets]/[exe] OgreApp" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/cmake</buildCommand>
+				<buildArguments>-E chdir "/home/leviathan/git/minemonics/Minemonics/build" "/usr/bin/cmake" -P "CMakeFiles/OgreApp.dir/cmake_clean.cmake"</buildArguments>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[exe] OgreApp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>OgreApp</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[exe] OgreApp/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>OgreApp/fast</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": edit_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>edit_cache</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": install" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>install</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": install/local" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>install/local</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": install/strip" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>install/strip</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": list_install_components" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>list_install_components</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": rebuild_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>rebuild_cache</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>all</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name=": clean" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>clean</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] BaseApplication.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>BaseApplication.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] BaseApplication.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>BaseApplication.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] BaseApplication.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>BaseApplication.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] SimulationManager.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>SimulationManager.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] SimulationManager.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>SimulationManager.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] SimulationManager.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>SimulationManager.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] controller/camera/CameraHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/camera/CameraHandler.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] controller/camera/CameraHandler.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/camera/CameraHandler.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] controller/camera/CameraHandler.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/camera/CameraHandler.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] controller/input/KeyboardHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/input/KeyboardHandler.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] controller/input/KeyboardHandler.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/input/KeyboardHandler.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] controller/input/KeyboardHandler.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/input/KeyboardHandler.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] controller/input/MouseHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/input/MouseHandler.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] controller/input/MouseHandler.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/input/MouseHandler.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] controller/input/MouseHandler.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>controller/input/MouseHandler.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] model/settings/ControlSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/ControlSettings.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] model/settings/ControlSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/ControlSettings.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] model/settings/ControlSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/ControlSettings.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] model/settings/EnvironmentSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/EnvironmentSettings.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] model/settings/EnvironmentSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/EnvironmentSettings.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] model/settings/EnvironmentSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/EnvironmentSettings.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] model/settings/GeneticAlgorithmSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/GeneticAlgorithmSettings.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] model/settings/GeneticAlgorithmSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/GeneticAlgorithmSettings.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] model/settings/GeneticAlgorithmSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/GeneticAlgorithmSettings.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] model/settings/MorphologySettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/MorphologySettings.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] model/settings/MorphologySettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/MorphologySettings.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] model/settings/MorphologySettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/MorphologySettings.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] model/settings/PhysicsSettings.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/PhysicsSettings.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] model/settings/PhysicsSettings.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/PhysicsSettings.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] model/settings/PhysicsSettings.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>model/settings/PhysicsSettings.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] utils/logging/Logger.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>utils/logging/Logger.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] utils/logging/Logger.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>utils/logging/Logger.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] utils/logging/Logger.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>utils/logging/Logger.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/general/evolution/environments/Environment.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Environment.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/general/evolution/environments/Environment.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Environment.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/general/evolution/environments/Environment.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Environment.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/general/evolution/environments/Hills.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Hills.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/general/evolution/environments/Hills.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Hills.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/general/evolution/environments/Hills.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Hills.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/general/evolution/environments/OpenSea.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/OpenSea.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/general/evolution/environments/OpenSea.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/OpenSea.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/general/evolution/environments/OpenSea.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/OpenSea.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/general/evolution/environments/Plane.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Plane.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/general/evolution/environments/Plane.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Plane.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/general/evolution/environments/Plane.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/general/evolution/environments/Plane.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/ogre3D/evolution/environments/HillsO3D.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/HillsO3D.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/ogre3D/evolution/environments/HillsO3D.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/HillsO3D.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/ogre3D/evolution/environments/HillsO3D.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/HillsO3D.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/OpenSeaO3D.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/OpenSeaO3D.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/OpenSeaO3D.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[obj] view/ogre3D/evolution/environments/PlaneO3D.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/PlaneO3D.cpp.o</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[pre] view/ogre3D/evolution/environments/PlaneO3D.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/PlaneO3D.cpp.i</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="[to asm] view/ogre3D/evolution/environments/PlaneO3D.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+				<buildCommand>/usr/bin/make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>view/ogre3D/evolution/environments/PlaneO3D.cpp.s</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>false</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+		</buildTargets>
 	</storageModule>
 </cproject>

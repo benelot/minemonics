@@ -17,6 +17,8 @@
 cmake_minimum_required(VERSION 2.6)
  
 project(OgreApp)
+
+message(STATUS "Compiler version:${CMAKE_CXX_COMPILER_VERSION}")
  
 if(WIN32)
 	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
@@ -41,6 +43,8 @@ if(UNIX)
 	endif(EXISTS "/usr/local/lib/OGRE/cmake")
 	set(PROJECT_HOME .)
 endif(UNIX)
+
+set(CMAKE_BUILD_TYPE "Debug")
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
@@ -235,7 +239,7 @@ set(MODELHDRS
 	./model/evolution/population/Population.h
 	
 	## creature
-	./model/evolution/population/creature/Creature.h
+	./model/evolution/population/creature/CreatureM.h
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.h
@@ -264,7 +268,7 @@ set(MODELSRCS
 	./model/evolution/juries/Velocity.cpp
 	
 	./model/evolution/population/Population.cpp
-	./model/evolution/population/creature/Creature.cpp
+	./model/evolution/population/creature/CreatureM.cpp
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.cpp
@@ -307,6 +311,7 @@ set(CONTROLLERHDRS
     ./controller/environments/Plane.h
         
     ## phenome
+    ./controller/evolution/population/creature/Creature.h
     ./controller/evolution/population/creature/phenome/PhenotypeGenerator.h
     ./controller/evolution/population/creature/phenome/Phenome.h
     ./controller/evolution/population/creature/phenome/Component.h
@@ -335,6 +340,7 @@ set(CONTROLLERSRCS
     ./controller/environments/Plane.cpp
     
     ## phenome
+    ./controller/evolution/population/creature/Creature.cpp
     ./controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp
     ./controller/evolution/population/creature/phenome/Phenome.cpp
     ./controller/evolution/population/creature/phenome/Component.cpp
@@ -506,7 +512,7 @@ set(TESTSRCS
     ./model/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
     ./model/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     ./model/evolution/population/creature/genome/Genome_test.cpp
-    ./model/evolution/population/creature/Creature_test.cpp
+    ./model/evolution/population/creature/CreatureM_test.cpp
     ./model/evolution/population/Population_test.cpp
     ./utils/NameGenerator_test.cpp
     
