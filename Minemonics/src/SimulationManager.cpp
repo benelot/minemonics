@@ -25,6 +25,7 @@
 
 //## model headers
 #include <Rng/GlobalRng.h>
+#include <OgreVector3.h>
 
 //## view headers
 #include <OgreWindowEventUtilities.h>
@@ -36,6 +37,7 @@
 #include <CEGUI/FontManager.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <boost/lexical_cast.hpp>
+#include <model/evolution/population/creature/CreatureM.h>
 
 //# custom headers
 //## base headers
@@ -56,7 +58,6 @@
 #include "controller/physics/RagDoll.h"
 
 //## model headers
-#include "model/evolution/population/creature/Creature.h"
 #include "model/evolution/population/creature/genome/Genome.h"
 
 //## view headers
@@ -85,8 +86,14 @@ SimulationManager::SimulationManager(void) :
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
 
-	for (int i = 0; i < 100; i++) {
-		mRagdolls[i]->removeFromWorld();
+	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
+	for (; it != mRagdolls.end(); it++) {
+		(*it)->removeFromWorld();
+	}
+
+	std::vector<Creature*>::iterator cit = mCreatures.begin();
+	for (; cit != mCreatures.end(); cit++) {
+		(*cit)->removeFromWorld();
 	}
 
 	destroyScene();
@@ -144,11 +151,22 @@ void SimulationManager::createFrameListener(void) {
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
-	for (int i = 0; i < 100; i++) {
-		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
-				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
-		mRagdolls.push_back(ragdoll);
-		ragdoll->addToWorld();
+	for (int i = 0; i < 10; i++) {
+//		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
+//				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
+//		mRagdolls.push_back(ragdoll);
+//		ragdoll->addToWorld();
+
+		Creature* creature = new Creature();
+
+		creature->initialize(this,
+				Ogre::Vector3(randomness.nextDouble(-5000, 5000),
+						randomness.nextDouble(10, 5000),
+						randomness.nextDouble(-5000, 5000)),
+				randomness.nextDouble(0, 30));
+		creature->performEmbryogenesis();
+		mCreatures.push_back(creature);
+		creature->addToWorld();
 	}
 }
 
@@ -194,6 +212,12 @@ void SimulationManager::updatePhysics() {
 	for (; it != mRagdolls.end(); it++) {
 		(*it)->update();
 	}
+
+	std::vector<Creature*>::iterator cit = mCreatures.begin();
+	for (; cit != mCreatures.end(); cit++) {
+		(*cit)->update();
+	}
+
 	const int numObjects =
 			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
 

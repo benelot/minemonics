@@ -14,7 +14,7 @@ class GeneBranch;
 class Component;
 
 //# system headers
-#include <vector>
+#include <map>
 
 //## controller headers
 //## model headers
@@ -37,8 +37,9 @@ public:
 	PhenotypeGenerator();
 	virtual ~PhenotypeGenerator();
 
-	void initialize(std::vector<int>& repetitionList, Ogre::Vector3 position,
-			Ogre::Quaternion orientation,Component* parentComponent,GeneBranch* geneBranch);
+	void initialize(std::map<int,int>& repetitionList, Ogre::Vector3 position,
+			Ogre::Quaternion orientation, Component* parentComponent,
+			GeneBranch* geneBranch, double currentShrinkageFactor);
 
 	Gene* getGene() {
 		return mGene;
@@ -56,15 +57,7 @@ public:
 		mRoot2LeafPath = root2LeafPath;
 	}
 
-	int getTotalQty() const {
-		return mTotalQty;
-	}
-
-	void setTotalQty(int totalQty) {
-		mTotalQty = totalQty;
-	}
-
-	std::vector<int>& getRepetitionList() {
+	std::map<int,int>& getRepetitionList() {
 		return mRepetitionList;
 	}
 
@@ -92,15 +85,33 @@ public:
 		mOrientation = orientation;
 	}
 
+	GeneBranch*& getGeneBranch() {
+		return mGeneBranch;
+	}
+
+	void setGeneBranch(GeneBranch*& geneBranch) {
+		mGeneBranch = geneBranch;
+	}
+
+	double getCurrentShrinkageFactor() const {
+		return mCurrentShrinkageFactor;
+	}
+
+	void setCurrentShrinkageFactor(double currentShrinkageFactor) {
+		mCurrentShrinkageFactor = currentShrinkageFactor;
+	}
+
 private:
 	Gene* mGene;
 	int mRoot2LeafPath;
-	int mTotalQty;
-	std::vector<int> mRepetitionList;
+	std::map<int,int> mRepetitionList;
 	Component* mParentComponent;
+	GeneBranch* mGeneBranch;
 
 	Ogre::Vector3 mPosition;
 	Ogre::Quaternion mOrientation;
+
+	double mCurrentShrinkageFactor;
 
 	/**
 	 * If a gene asks for a reference component, it gets the first out of the vector to connect to.

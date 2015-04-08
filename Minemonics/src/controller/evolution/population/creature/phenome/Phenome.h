@@ -25,6 +25,7 @@ class JointBt;
 //## controller headers
 //## model headers
 #include <bullet/BulletDynamics/ConstraintSolver/btHingeConstraint.h>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -36,6 +37,7 @@ class JointBt;
 #include "controller/evolution/population/creature/phenome/Component.h"
 //## model headers
 #include "model/evolution/population/creature/genome/Genome.h"
+#include "model/evolution/population/creature/genome/Gene.h"
 
 //## view headers
 //## utils headers
@@ -47,9 +49,17 @@ public:
 
 	void initialize(SimulationManager* simulationManager);
 
-	void performEmbryogenesis(Genome* genome);
+	void performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition);
 
-	const std::vector<Component*>& getComponents() const {
+	void transcribeGene(Gene* gene);
+
+	void update();
+
+	void addToWorld();
+
+	void removeFromWorld();
+
+	std::vector<Component*>& getComponents() {
 		return mComponents;
 	}
 

@@ -50,6 +50,8 @@ class Logger;
 #include "controller/physics/PhysicsController.h"
 #include "controller/physics/RagDoll.h"
 
+#include "controller/evolution/population/creature/Creature.h"
+
 //## model headers
 #include "model/evolution/juries/Ones.h"
 
@@ -107,6 +109,8 @@ private:
 	std::vector<Ogre::SceneNode*> cubes;
 
 	std::vector<RagDoll*> mRagdolls;
+
+	std::vector<Creature*> mCreatures;
 	void updatePhysics();
 public:
 	SimulationManager(void);
