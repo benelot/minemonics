@@ -5,35 +5,27 @@
  *      Author: leviathan
  */
 
-#include <model/evolution/population/Population.h>
-
 //# corresponding header
 #include "Population.h"
 
 //# forward declarations
-
 //# system headers
 #include <gtest/gtest.h>
+
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
+#include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
 #include "controller/SaveController.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
-#include "configuration/MorphologyConfiguration.h"
 
 class PopulationTest: public ::testing::Test {
 protected:
@@ -61,9 +53,9 @@ protected:
 
 		SaveController<Population> saveController;
 
-		saveController.save(*population, "Creature.test");
+		saveController.save(*population, "Population.test");
 
-		saveController.restore(*population2, "Creature.test");
+		saveController.restore(*population2, "Population.test");
 	}
 
 	virtual void TearDown() {

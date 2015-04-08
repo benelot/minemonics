@@ -9,29 +9,20 @@
 #include "Population.h"
 
 //# forward declarations
-
 //# system headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
+#include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 #include "utils/Randomness.h"
-#include "configuration/MorphologyConfiguration.h"
 
 Population::Population() :
 		mCreatureQty(0) {
@@ -40,7 +31,7 @@ Population::Population() :
 
 Population::~Population() {
 	while (!mCreatures.empty()) {
-		Creature* f = mCreatures.back();
+		CreatureM* f = mCreatures.back();
 		mCreatures.pop_back();
 		delete f;
 	}
@@ -58,8 +49,8 @@ void Population::initialize(int creatureQty) {
 		bushiness = randomness.nextNormalDouble(
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		Creature* creature = new Creature();
-		creature->initialize(bushiness);
+		CreatureM* creature = new CreatureM();
+		//creature->initialize(bushiness);
 		mCreatures.push_back(creature);
 	}
 }
@@ -71,8 +62,8 @@ void Population::initialize(int creatureQty) {
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
 void Population::addNewCreature(double bushiness) {
-	Creature* creature = new Creature();
-	creature->initialize(bushiness);
+	CreatureM* creature = new CreatureM();
+	//creature->initialize(bushiness);
 	mCreatures.push_back(creature);
 
 }
@@ -87,8 +78,8 @@ bool Population::equals(const Population & population) const {
 		return false;
 	}
 
-	std::vector<Creature*>::const_iterator it = mCreatures.begin();
-	std::vector<Creature*>::const_iterator it2 = population.mCreatures.begin();
+	std::vector<CreatureM*>::const_iterator it = mCreatures.begin();
+	std::vector<CreatureM*>::const_iterator it2 = population.mCreatures.begin();
 	for (; it != mCreatures.end(), it2 != population.mCreatures.end();
 			it++, it2++) {
 		if (!(*it)->equals(**it2)) {

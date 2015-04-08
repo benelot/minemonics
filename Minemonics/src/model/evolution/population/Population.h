@@ -54,7 +54,7 @@
 //## controller headers
 
 //## model headers
-#include "model/evolution/population/creature/Creature.h"
+#include <model/evolution/population/creature/CreatureM.h>
 
 //## view headers
 
@@ -98,7 +98,7 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 			const Population &population) {
 		os << population.mCreatureQty;
-		std::vector<Creature*>::const_iterator it;
+		std::vector<CreatureM*>::const_iterator it;
 		for (it = population.mCreatures.begin();
 				it != population.mCreatures.end(); it++) {
 			os << (**it);
@@ -122,7 +122,7 @@ private:
 	/**
 	 * The creatures living in this population. All creatures in one population can mate together.
 	 */
-	std::vector<Creature*> mCreatures;
+	std::vector<CreatureM*> mCreatures;
 
 	/**
 	 * The number of creatures that the population will consist of in every generation.
