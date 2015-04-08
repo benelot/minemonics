@@ -1,31 +1,16 @@
-17:26:17 **** Build of project Minemonics ****
-/usr/bin/make -j8 all 
-/usr/bin/cmake -H/home/leviathan/git/minemonics/Minemonics/src -B/home/leviathan/git/minemonics/Minemonics/build --check-build-system CMakeFiles/Makefile.cmake 0
-/usr/bin/cmake -E cmake_progress_start /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles/progress.marks
-/usr/bin/make -f CMakeFiles/Makefile2 all
+18:36:49 **** Build of project Minemonics ****
+/usr/bin/make -j8 clean 
+/usr/bin/make -f CMakeFiles/Makefile2 clean
 make[1]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/make -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/depend
-/usr/bin/make -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/depend
+/usr/bin/make -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/clean
+/usr/bin/make -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/clean
 make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-cd /home/leviathan/git/minemonics/Minemonics/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/leviathan/git/minemonics/Minemonics/src /home/leviathan/git/minemonics/Minemonics/src /home/leviathan/git/minemonics/Minemonics/build /home/leviathan/git/minemonics/Minemonics/build /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles/runUnitTests.dir/DependInfo.cmake --color=
+/usr/bin/cmake -P CMakeFiles/runUnitTests.dir/cmake_clean.cmake
 make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/make -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/build
 make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-cd /home/leviathan/git/minemonics/Minemonics/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/leviathan/git/minemonics/Minemonics/src /home/leviathan/git/minemonics/Minemonics/src /home/leviathan/git/minemonics/Minemonics/build /home/leviathan/git/minemonics/Minemonics/build /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles/OgreApp.dir/DependInfo.cmake --color=
-make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-make[2]: Nothing to be done for `CMakeFiles/runUnitTests.dir/build'.
+/usr/bin/cmake -P CMakeFiles/OgreApp.dir/cmake_clean.cmake
 make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/cmake -E cmake_progress_report /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles  71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
-[ 30%] Built target runUnitTests
-make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/make -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/build
-make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-make[2]: Nothing to be done for `CMakeFiles/OgreApp.dir/build'.
-make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/cmake -E cmake_progress_report /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
-[100%] Built target OgreApp
 make[1]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/cmake -E cmake_progress_start /home/leviathan/git/minemonics/Minemonics/build/CMakeFiles 0
 
-17:26:17 Build Finished (took 511ms)
+18:36:49 Build Finished (took 160ms)
 

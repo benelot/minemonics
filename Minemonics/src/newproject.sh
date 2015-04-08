@@ -18,7 +18,6 @@ cd $2/$1
 # make a build folder parallel to the src folder
 mkdir build
 cd build
-# cmake -G"Eclipse CDT4 - Unix Makefiles" -DECLIPSE_CDT4_GENERATE_SOURCE_PROJECT=TRUE ../src/ is somehow proposed
 # to use cmake projects with version control
 cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ../src
 make -j4
