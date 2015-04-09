@@ -200,10 +200,10 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
 # FFmpeg (for video capabilities)
 ######################################################################
 
-find_package(FFmpeg REQUIRED)
+find_package(FFMPEG REQUIRED)
 
-include_directories(${LIBAVCODEC_INCLUDE_DIR} ${LIBAVFORMAT_INCLUDE_DIR} ${LIBSWSCALE_INCLUDE_DIR} ${LIBAVUTIL_INCLUDE_DIR})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${LIBAVCODEC_LIBRARY} ${LIBAVFORMAT_LIBRARY} ${LIBSWSCALE_LIBRARY} ${LIBAVUTIL_LIBRARY})
+include_directories(${FFMPEG_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
 
 ######################################################################
 # Shark 2 (Is not a required library anymore)
