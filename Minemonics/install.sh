@@ -82,6 +82,8 @@ make
 sudo make install
 sudo ldconfig
 
+sudo apt-get install libavcodec-dev libavformat-dev
+
 
 
 # ogrebullet 

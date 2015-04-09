@@ -188,13 +188,22 @@ include_directories(${CEGUI_OgreRenderer_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
 
 ######################################################################
-# MathGL
+# MathGL (for graph drawing capabilities)
 ######################################################################
 
 find_package(MathGL2 REQUIRED)
 
 include_directories(${MATHGL2_INCLUDE_DIR})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
+
+######################################################################
+# FFmpeg (for video capabilities)
+######################################################################
+
+find_package(FFmpeg REQUIRED)
+
+include_directories(${LIBAVCODEC_INCLUDE_DIR} ${LIBAVFORMAT_INCLUDE_DIR} ${LIBSWSCALE_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${LIBAVCODEC_LIBRARY} ${LIBAVFORMAT_LIBRARY} ${LIBSWSCALE_LIBRARY})
 
 ######################################################################
 # Shark 2 (Is not a required library anymore)
