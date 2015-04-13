@@ -8,6 +8,8 @@
 //# corresponding header
 //# forward declarations
 //# system headers
+#include <boost/date_time/posix_time/posix_time.hpp>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -172,7 +174,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 			{
 				std::string videoName;
 				videoName.append("Minemonics-");
-				videoName.append(boost::lexical_cast<std::string>(mSimulationMgr->getRuntime().total_milliseconds()));
+				videoName.append(boost::posix_time::to_iso_string(mSimulationMgr->getNow()));
 				videoName.append(".mp4");
 				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video started.";
 				//TODO What to do if screen gets resized?

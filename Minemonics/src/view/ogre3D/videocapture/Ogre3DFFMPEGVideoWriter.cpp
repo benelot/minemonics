@@ -61,7 +61,8 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 	renderTexture->getViewport(0)->setClearEveryFrame(true);
 	renderTexture->getViewport(0)->setBackgroundColour(
 			Ogre::ColourValue::Black);
-	renderTexture->getViewport(0)->setOverlaysEnabled(false);
+	//TODO:: The overlays are not shown here, should they be there and how to achieve this?
+	renderTexture->getViewport(0)->setOverlaysEnabled(true);
 	renderTexture->addListener(this);
 	renderTexture->setAutoUpdated(true);
 

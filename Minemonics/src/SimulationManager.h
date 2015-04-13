@@ -26,9 +26,8 @@ class Logger;
 
 //# system headers
 //## controller headers
-
 //## model headers
-#include <EALib/PopulationT.h>
+//#include <EALib/PopulationT.h>
 
 //## view headers
 #include <CEGUI/CEGUI.h>
@@ -173,14 +172,17 @@ public:
 		return mRuntime;
 	}
 
-	int t;
-	PopulationT<bool> parents;
-	PopulationT<bool> offsprings;
-	Ones jury;
+	boost::posix_time::ptime& getNow() {
+		return mNow;
+	}
+
+	//int t;
+	//PopulationT<bool> parents;
+	//PopulationT<bool> offsprings;
+	//Ones jury;
 	//
 	// scaling window
-	//
-	std::vector<double> window;
+	//std::vector<double> window;
 
 protected:
 	CEGUI::OgreRenderer* mRenderer;

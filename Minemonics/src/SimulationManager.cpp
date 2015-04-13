@@ -75,7 +75,7 @@ SimulationManager::SimulationManager(void) :
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDrawBulletDebug(true), mDebugDrawer(
-		NULL), jury(1), t(0), mSdlWindow(
+		NULL), mSdlWindow(
 		NULL) {
 
 	// main frame timer initialization
