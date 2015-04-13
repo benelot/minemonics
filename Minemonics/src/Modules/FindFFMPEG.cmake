@@ -118,12 +118,15 @@ IF   (FFMPEG_LIBAVFORMAT_FOUND AND
     SET(FFMPEG_INCLUDE_DIRS ${FFMPEG_LIBAVFORMAT_INCLUDE_DIRS})
  
     SET(FFMPEG_LIBRARY_DIRS ${FFMPEG_LIBAVFORMAT_LIBRARY_DIRS})
- 
+ # added swresample, m and z
+ # "It's because libavcodec includes some math and zlib headers, so you must link to the respective libraries as well" Sales Mar 25 2014
+ #http://stackoverflow.com/questions/27366433/linking-libavcodec-and-libavformat-undefined-references
     SET(FFMPEG_LIBRARIES
         ${FFMPEG_LIBAVFORMAT_LIBS}
         ${FFMPEG_LIBAVDEVICE_LIBS}
         ${FFMPEG_LIBAVCODEC_LIBS}
         ${FFMPEG_LIBAVUTIL_LIBS}
+        swresample m z
 	${FFMPEG_LIBSWSCALE_LIBS}
 	)
  

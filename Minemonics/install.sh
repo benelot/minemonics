@@ -84,11 +84,15 @@ sudo ldconfig
 
 
 # FFMpeg
+# According to: http://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 cd ..
-sudo apt-get install yasm
+sudo apt-get -y --force-yes install autoconf automake build-essential libass-dev libfreetype6-dev libgpac-dev \
+  libsdl1.2-dev libtheora-dev libtool libva-dev libvdpau-dev libvorbis-dev libxcb1-dev libxcb-shm0-dev \
+  libxcb-xfixes0-dev pkg-config texi2html zlib1g-dev
+sudo apt-get install yasm libx264-dev libopus-dev libmp3lame-dev
 git clone https://github.com/FFmpeg/FFmpeg.git
 cd FFmpeg
-./configure
-make
+PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure   --prefix="$HOME/ffmpeg_build"   --extra-cflags="-I$HOME/ffmpeg_build/include"   --extra-ldflags="-L$HOME/ffmpeg_build/lib"   --bindir="$HOME/bin"   --enable-gpl   --enable-libass --enable-libfreetype   --enable-libmp3lame   --enable-libopus   --enable-libtheora   --enable-libvorbis   --enable-libx264   --enable-nonfree
+PATH="$HOME/bin:$PATH" make
 sudo make install
 sudo ldconfig
