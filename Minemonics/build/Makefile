@@ -1756,6 +1756,30 @@ view/ogre3D/overlay/InfoOverlayData.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/overlay/InfoOverlayData.cpp.s
 .PHONY : view/ogre3D/overlay/InfoOverlayData.cpp.s
 
+view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.o: view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
+.PHONY : view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.o
+
+# target to build an object file
+view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
+.PHONY : view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
+
+view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.i: view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
+.PHONY : view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.i
+
+# target to preprocess a source file
+view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
+.PHONY : view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
+
+view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.s: view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
+.PHONY : view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.s
+
+# target to generate assembly for a file
+view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
+.PHONY : view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
+
 view/procedural/ProceduralBoxGenerator.o: view/procedural/ProceduralBoxGenerator.cpp.o
 .PHONY : view/procedural/ProceduralBoxGenerator.o
 
@@ -2536,6 +2560,9 @@ help:
 	@echo "... view/ogre3D/overlay/InfoOverlayData.o"
 	@echo "... view/ogre3D/overlay/InfoOverlayData.i"
 	@echo "... view/ogre3D/overlay/InfoOverlayData.s"
+	@echo "... view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.o"
+	@echo "... view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.i"
+	@echo "... view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.s"
 	@echo "... view/procedural/ProceduralBoxGenerator.o"
 	@echo "... view/procedural/ProceduralBoxGenerator.i"
 	@echo "... view/procedural/ProceduralBoxGenerator.s"

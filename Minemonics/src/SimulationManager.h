@@ -61,6 +61,7 @@ class Logger;
 #include "view/CEGUI/ParamsPanel.h"
 #include "view/ogre3D/bullet/OgreDebugDrawer.h"
 #include "view/ogre3D/overlay/InfoOverlay.h"
+#include "view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h"
 
 //## utils headers
 #include "utils/logging/Logger.h"
@@ -183,6 +184,8 @@ protected:
 	std::vector<MathGLWindow*> mGraphWindows;
 
 	InfoOverlay mInfoOverlay;
+
+	Ogre3DFFMPEGVideoWriter videoWriter;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);

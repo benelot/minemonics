@@ -314,6 +314,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/MathGL/MathGLWindow.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/Ogre3DFFMPEGVideoWriter.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/ProceduralBoxGenerator.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/procedural/ProceduralBoxGenerator.cpp</location>
@@ -707,6 +712,11 @@
 			<name>[Targets]/[exe] OgreApp/Header Files/MathGLWindow.h</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/MathGL/MathGLWindow.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/Ogre3DFFMPEGVideoWriter.h</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/ProceduralPlatform.h</name>

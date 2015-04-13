@@ -1,113 +1,6 @@
-14:27:24 **** Build of project Minemonics ****
+16:34:28 **** Build of project Minemonics ****
 /usr/bin/make -j8 all 
 /usr/bin/cmake -H/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src -B/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build --check-build-system CMakeFiles/Makefile.cmake 0
--- Could not determine Eclipse version, assuming at least 3.6 (Helios). Adjust CMAKE_ECLIPSE_VERSION if this is wrong.
--- Compiler version:4.8.2
--- Looking for OGRE...
--- Found Ogre Ghadamon (1.9.0)
--- Found OGRE: optimized;/usr/local/lib/libOgreMain.so;debug;/usr/local/lib/libOgreMain.so
--- Looking for OGRE_Paging...
--- Found OGRE_Paging: optimized;/usr/local/lib/libOgrePaging.so;debug;/usr/local/lib/libOgrePaging.so
--- Looking for OGRE_Terrain...
--- Found OGRE_Terrain: optimized;/usr/local/lib/libOgreTerrain.so;debug;/usr/local/lib/libOgreTerrain.so
--- Looking for OGRE_Property...
--- Found OGRE_Property: optimized;/usr/local/lib/libOgreProperty.so;debug;/usr/local/lib/libOgreProperty.so
--- Looking for OGRE_RTShaderSystem...
--- Found OGRE_RTShaderSystem: optimized;/usr/local/lib/libOgreRTShaderSystem.so;debug;/usr/local/lib/libOgreRTShaderSystem.so
--- Looking for OGRE_Volume...
--- Found OGRE_Volume: optimized;/usr/local/lib/libOgreVolume.so;debug;/usr/local/lib/libOgreVolume.so
--- Looking for OGRE_Overlay...
--- Found OGRE_Overlay: optimized;/usr/local/lib/libOgreOverlay.so;debug;/usr/local/lib/libOgreOverlay.so
--- Found OGRE_Terrain: optimized;/usr/local/lib/libOgreTerrain.so;debug;/usr/local/lib/libOgreTerrain.so
--- Found OGRE_Paging: optimized;/usr/local/lib/libOgrePaging.so;debug;/usr/local/lib/libOgrePaging.so
--- Found OGRE_Overlay: optimized;/usr/local/lib/libOgreOverlay.so;debug;/usr/local/lib/libOgreOverlay.so
--- Boost version: 1.54.0
--- Found the following Boost libraries:
---   log
--- Found Boost log: /usr/lib/x86_64-linux-gnu/libboost_log.so
--- Boost version: 1.54.0
--- Found the following Boost libraries:
---   thread
---   date_time
--- Boost version: 1.54.0
--- Found Boost: 
-SDL2_LIBRARY_TEMP is /usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
--- Looking for CEGUI...
--- Found CEGUI  (0.9999.0)
--- Found CEGUI: optimized;/usr/local/lib/libCEGUIBase-0.so;debug;/usr/local/lib/libCEGUIBase-0.so
--- Looking for CEGUI_CommonDialogs...
--- Found CEGUI_CommonDialogs: optimized;/usr/local/lib/libCEGUICommonDialogs-0.so;debug;/usr/local/lib/libCEGUICommonDialogs-0.so
--- Looking for CEGUI_CoreWindowRendererSet...
--- Found CEGUI_CoreWindowRendererSet: optimized;/usr/local/lib/cegui-0.9999/libCEGUICoreWindowRendererSet.so;debug;/usr/local/lib/cegui-0.9999/libCEGUICoreWindowRendererSet.so
--- Looking for CEGUI_Direct3D9Renderer...
--- Could not locate CEGUI_Direct3D9Renderer
--- Looking for CEGUI_Direct3D10Renderer...
--- Could not locate CEGUI_Direct3D10Renderer
--- Looking for CEGUI_Direct3D11Renderer...
--- Could not locate CEGUI_Direct3D11Renderer
--- Looking for CEGUI_DirectFBRenderer...
--- Could not locate CEGUI_DirectFBRenderer
--- Looking for CEGUI_IrrlichtRenderer...
--- Could not locate CEGUI_IrrlichtRenderer
--- Looking for CEGUI_NullRenderer...
--- Could not locate CEGUI_NullRenderer
--- Looking for CEGUI_OgreRenderer...
--- Found CEGUI_OgreRenderer: optimized;/usr/local/lib/libCEGUIOgreRenderer-0.so;debug;/usr/local/lib/libCEGUIOgreRenderer-0.so
--- Looking for CEGUI_OpenGLRenderer...
--- Could not locate CEGUI_OpenGLRenderer
--- Looking for CEGUI_OpenGL3Renderer...
--- Could not locate CEGUI_OpenGL3Renderer
--- Looking for CEGUI_OpenGLESRenderer...
--- Could not locate CEGUI_OpenGLESRenderer
--- Looking for CEGUI_CoronaImageCodec...
--- Could not locate CEGUI_CoronaImageCodec
--- Looking for CEGUI_DevILImageCodec...
--- Could not locate CEGUI_DevILImageCodec
--- Looking for CEGUI_FreeImageImageCodec...
--- Found CEGUI_FreeImageImageCodec: optimized;/usr/local/lib/cegui-0.9999/libCEGUIFreeImageImageCodec.so;debug;/usr/local/lib/cegui-0.9999/libCEGUIFreeImageImageCodec.so
--- Looking for CEGUI_SILLYImageCodec...
--- Could not locate CEGUI_SILLYImageCodec
--- Looking for CEGUI_STBImageCodec...
--- Could not locate CEGUI_STBImageCodec
--- Looking for CEGUI_TGAImageCodec...
--- Could not locate CEGUI_TGAImageCodec
--- Looking for CEGUI_PVRImageCodec...
--- Could not locate CEGUI_PVRImageCodec
--- Looking for CEGUI_ExpatParser...
--- Found CEGUI_ExpatParser: optimized;/usr/local/lib/cegui-0.9999/libCEGUIExpatParser.so;debug;/usr/local/lib/cegui-0.9999/libCEGUIExpatParser.so
--- Looking for CEGUI_LibXMLParser...
--- Found CEGUI_LibXMLParser: optimized;/usr/local/lib/cegui-0.9999/libCEGUILibXMLParser.so;debug;/usr/local/lib/cegui-0.9999/libCEGUILibXMLParser.so
--- Looking for CEGUI_RapidXMLParser...
--- Could not locate CEGUI_RapidXMLParser
--- Looking for CEGUI_TinyXMLParser...
--- Could not locate CEGUI_TinyXMLParser
--- Looking for CEGUI_XercesParser...
--- Could not locate CEGUI_XercesParser
--- Looking for CEGUI_LuaScriptModule...
--- Could not locate CEGUI_LuaScriptModule
--- 	libavcodec: /usr/include, /usr/lib/x86_64-linux-gnu/libavcodec.so
--- 	libavformat: /usr/include, /usr/lib/x86_64-linux-gnu/libavformat.so
--- 	libavformat: /usr/include, /usr/lib/x86_64-linux-gnu/libswscale.so
--- 	libavformat: /usr/include, /usr/lib/x86_64-linux-gnu/libavutil.so
--- Looking for Shark 2.* dependencies...
--- Boost version: 1.54.0
--- Found the following Boost libraries:
---   system
---   date_time
---   filesystem
---   program_options
---   serialization
---   thread
---   unit_test_framework
-Trying to hints about where to locate Shark 2.* from pkg-config...
--- checking for module 'Shark2'
---   package 'Shark2' not found
--- Looking for Shark 2.*...
-Shark2_LIBRARY is /usr/lib/libshark.so
--- Found Shark2 : /usr/lib/libshark.so;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_program_options.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;/usr/lib/x86_64-linux-gnu/libboost_unit_test_framework.so;/usr/lib/x86_64-linux-gnu/libpthread.so
--- Configuring done
--- Generating done
--- Build files have been written to: /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build
 /usr/bin/cmake -E cmake_progress_start /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles/progress.marks
 /usr/bin/make -f CMakeFiles/Makefile2 all
 make[1]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
@@ -118,25 +11,46 @@ cd /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build
 make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
 /usr/bin/make -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/build
 make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-cd /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles/OgreApp.dir/DependInfo.cmake --color=
-make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-Linking CXX executable dist/bin/runUnitTests
-/usr/bin/cmake -E cmake_link_script CMakeFiles/runUnitTests.dir/link.txt --verbose=1
-/usr/bin/c++   -g    CMakeFiles/runUnitTests.dir/model/environments/EnvironmentPhysics.cpp.o CMakeFiles/runUnitTests.dir/model/environments/bullet/EnvironmentBt.cpp.o CMakeFiles/runUnitTests.dir/model/environments/bullet/HillsBt.cpp.o CMakeFiles/runUnitTests.dir/model/environments/bullet/PlaneBt.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/juries/Jury.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/juries/Ones.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/juries/Velocity.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/Population.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/Genome.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/Gene.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/GeneBranch.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/morphology/Morphogene.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/controller/ControllerGene.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/controller/SineControllerGene.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/LimbBt.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o CMakeFiles/runUnitTests.dir/utils/logging/Logger.cpp.o CMakeFiles/runUnitTests.dir/utils/Randomness.cpp.o CMakeFiles/runUnitTests.dir/utils/NameGenerator.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/juries/Velocity_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/juries/Ones_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/morphology/Morphogene_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/Genome_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM_test.cpp.o CMakeFiles/runUnitTests.dir/model/evolution/population/Population_test.cpp.o CMakeFiles/runUnitTests.dir/utils/NameGenerator_test.cpp.o CMakeFiles/runUnitTests.dir/test/TestRunner.cpp.o  -o dist/bin/runUnitTests -rdynamic -Wl,-Bstatic -lgtest -lgtest_main -Wl,-Bdynamic /usr/local/lib/libOgreMain.so -lboost_thread -lboost_date_time -lboost_system -lboost_atomic -lboost_chrono -lpthread /usr/local/lib/libOgreTerrain.so /usr/local/lib/libOgrePaging.so /usr/local/lib/libOgreOverlay.so -lboost_log -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread /usr/local/lib/libCEGUIBase-0.so /usr/local/lib/libCEGUIOgreRenderer-0.so /usr/local/lib/libmgl.so -lavcodec -lavformat -lswscale -lavutil -lshark -lboost_system -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_serialization -lboost_thread -lboost_unit_test_framework -lpthread /usr/local/lib/libBulletDynamics.so /usr/local/lib/libBulletCollision.so /usr/local/lib/libLinearMath.so /usr/local/lib/libBulletSoftBody.so /usr/local/lib/libOgreOverlay.so -lboost_thread -lboost_date_time -lboost_system -lboost_atomic -lboost_chrono -lpthread /usr/local/lib/libOgreTerrain.so /usr/local/lib/libOgrePaging.so -lboost_log -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread /usr/local/lib/libCEGUIBase-0.so /usr/local/lib/libCEGUIOgreRenderer-0.so /usr/local/lib/libmgl.so -lavcodec -lavformat -lswscale -lavutil -lshark -lboost_filesystem -lboost_program_options -lboost_serialization -lboost_unit_test_framework /usr/local/lib/libBulletDynamics.so /usr/local/lib/libBulletCollision.so /usr/local/lib/libLinearMath.so /usr/local/lib/libBulletSoftBody.so -Wl,-rpath,/usr/local/lib 
-make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-/usr/bin/make -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/build
-make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
-Linking CXX executable dist/bin/OgreApp_d
-/usr/bin/cmake -E cmake_link_script CMakeFiles/OgreApp.dir/link.txt --verbose=1
-/usr/bin/c++   -g    CMakeFiles/OgreApp.dir/model/environments/EnvironmentPhysics.cpp.o CMakeFiles/OgreApp.dir/model/environments/bullet/EnvironmentBt.cpp.o CMakeFiles/OgreApp.dir/model/environments/bullet/HillsBt.cpp.o CMakeFiles/OgreApp.dir/model/environments/bullet/PlaneBt.cpp.o CMakeFiles/OgreApp.dir/model/evolution/juries/Jury.cpp.o CMakeFiles/OgreApp.dir/model/evolution/juries/Ones.cpp.o CMakeFiles/OgreApp.dir/model/evolution/juries/Velocity.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/Population.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureM.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/Genome.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/Gene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/GeneBranch.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/morphology/Morphogene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/controller/ControllerGene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/controller/SineControllerGene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/LimbBt.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o CMakeFiles/OgreApp.dir/view/environments/EnvironmentGraphics.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/EnvironmentO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/HillsO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/OpenSeaO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/PlaneO3D.cpp.o CMakeFiles/OgreApp.dir/view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/bullet/OgreDebugDrawer.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/overlay/InfoOverlay.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/overlay/InfoOverlayData.cpp.o CMakeFiles/OgreApp.dir/view/CEGUI/GUISheetHandler.cpp.o CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.o CMakeFiles/OgreApp.dir/view/CEGUI/CEGUIBuilder.cpp.o CMakeFiles/OgreApp.dir/view/MathGL/MathGLWindow.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralBoxGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralCapsuleGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralConeGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralCylinderGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralIcoSphereGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPlaneGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralRoot.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralRoundedBoxGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralSphereGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTorusGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTorusKnotGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTubeGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralUtils.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralShape.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralShapeGenerators.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPath.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPathGenerators.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTrack.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralExtruder.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralLathe.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTriangulator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPrecompiledHeaders.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralMultiShape.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralGeometryHelpers.cpp.o CMakeFiles/OgreApp.dir/controller/input/SDL2InputHandler.cpp.o CMakeFiles/OgreApp.dir/controller/input/CEGUIInputHandler.cpp.o CMakeFiles/OgreApp.dir/controller/input/OgreInputHandler.cpp.o CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.o CMakeFiles/OgreApp.dir/controller/StateHandler.cpp.o CMakeFiles/OgreApp.dir/controller/physics/PhysicsController.cpp.o CMakeFiles/OgreApp.dir/controller/physics/RagDoll.cpp.o CMakeFiles/OgreApp.dir/controller/environments/Environment.cpp.o CMakeFiles/OgreApp.dir/controller/environments/Plane.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/Creature.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/Phenome.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/Component.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/morphology/Limb.cpp.o CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.o CMakeFiles/OgreApp.dir/utils/Randomness.cpp.o CMakeFiles/OgreApp.dir/utils/NameGenerator.cpp.o CMakeFiles/OgreApp.dir/BaseApplication.cpp.o CMakeFiles/OgreApp.dir/SimulationManager.cpp.o  -o dist/bin/OgreApp_d -rdynamic /usr/local/lib/libOgreMain.so -lboost_thread -lboost_date_time -lboost_system -lboost_atomic -lboost_chrono -lpthread /usr/local/lib/libOgreTerrain.so /usr/local/lib/libOgrePaging.so /usr/local/lib/libOgreOverlay.so -lboost_log -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread /usr/local/lib/libCEGUIBase-0.so /usr/local/lib/libCEGUIOgreRenderer-0.so /usr/local/lib/libmgl.so -lavcodec -lavformat -lswscale -lavutil -lshark -lboost_system -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_serialization -lboost_thread -lboost_unit_test_framework -lpthread /usr/local/lib/libBulletDynamics.so /usr/local/lib/libBulletCollision.so /usr/local/lib/libLinearMath.so /usr/local/lib/libBulletSoftBody.so /usr/local/lib/libOgreOverlay.so -lboost_thread -lboost_date_time -lboost_system -lboost_atomic -lboost_chrono -lpthread /usr/local/lib/libOgreTerrain.so /usr/local/lib/libOgrePaging.so -lboost_log -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread /usr/local/lib/libCEGUIBase-0.so /usr/local/lib/libCEGUIOgreRenderer-0.so /usr/local/lib/libmgl.so -lavcodec -lavformat -lswscale -lavutil -lshark -lboost_filesystem -lboost_program_options -lboost_serialization -lboost_unit_test_framework /usr/local/lib/libBulletDynamics.so /usr/local/lib/libBulletCollision.so /usr/local/lib/libLinearMath.so /usr/local/lib/libBulletSoftBody.so -Wl,-rpath,/usr/local/lib: 
+make[2]: Nothing to be done for `CMakeFiles/runUnitTests.dir/build'.
 make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
 /usr/bin/cmake -E cmake_progress_report /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles  71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
 [ 30%] Built target runUnitTests
+make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
+cd /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles/OgreApp.dir/DependInfo.cmake --color=
+Scanning dependencies of target OgreApp
+make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
+/usr/bin/make -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/build
+make[2]: Entering directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
+/usr/bin/cmake -E cmake_progress_report /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles 31
+[ 31%] Building CXX object CMakeFiles/OgreApp.dir/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
+/usr/bin/c++   -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_VERSION=3 -DBOOST_LOG_DYN_LINK -DBOOST_PARAMETER_MAX_ARITY=15 -g -I/usr/include/SDL2 -I/usr/local/include/cegui-0 -I/usr/local/include/cegui-0/CEGUI/RendererModules/Ogre -I/usr/local/include -I/usr/local/include/bullet -I/usr/local/include/OGRE -I/usr/local/share/OGRE/samples/Common/include -I/usr/local/include/OGRE/Terrain -I/usr/local/include/OGRE/Paging -I/usr/local/include/OGRE/Overlay -I/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/.    -o CMakeFiles/OgreApp.dir/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o -c /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp: In member function ‘void Ogre3DFFMPEGVideoWriter::setup(SimulationManager*, const char*, int, int, int, int)’:
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp:130:13: warning: ‘AVFrame* avcodec_alloc_frame()’ is deprecated (declared at /usr/local/include/libavcodec/avcodec.h:3629) [-Wdeprecated-declarations]
+   picture = avcodec_alloc_frame();
+             ^
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp:130:33: warning: ‘AVFrame* avcodec_alloc_frame()’ is deprecated (declared at /usr/local/include/libavcodec/avcodec.h:3629) [-Wdeprecated-declarations]
+   picture = avcodec_alloc_frame();
+                                 ^
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp:181:40: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
+      (unsigned int)picture->linesize[3]);
+                                        ^
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp:184:19: warning: ‘AVFrame* avcodec_alloc_frame()’ is deprecated (declared at /usr/local/include/libavcodec/avcodec.h:3629) [-Wdeprecated-declarations]
+   picture_rgb24 = avcodec_alloc_frame();
+                   ^
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp:184:39: warning: ‘AVFrame* avcodec_alloc_frame()’ is deprecated (declared at /usr/local/include/libavcodec/avcodec.h:3629) [-Wdeprecated-declarations]
+   picture_rgb24 = avcodec_alloc_frame();
+                                       ^
+/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp:197:46: warning: format ‘%x’ expects argument of type ‘unsigned int’, but argument 3 has type ‘uint8_t* {aka unsigned char*}’ [-Wformat=]
+      (unsigned int)picture_rgb24->linesize[3]);
+                                              ^
+Linking CXX executable dist/bin/OgreApp_d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/OgreApp.dir/link.txt --verbose=1
+/usr/bin/c++   -g    CMakeFiles/OgreApp.dir/model/environments/EnvironmentPhysics.cpp.o CMakeFiles/OgreApp.dir/model/environments/bullet/EnvironmentBt.cpp.o CMakeFiles/OgreApp.dir/model/environments/bullet/HillsBt.cpp.o CMakeFiles/OgreApp.dir/model/environments/bullet/PlaneBt.cpp.o CMakeFiles/OgreApp.dir/model/evolution/juries/Jury.cpp.o CMakeFiles/OgreApp.dir/model/evolution/juries/Ones.cpp.o CMakeFiles/OgreApp.dir/model/evolution/juries/Velocity.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/Population.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureM.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/Genome.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/Gene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/GeneBranch.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/morphology/Morphogene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/controller/ControllerGene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/genome/controller/SineControllerGene.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/LimbBt.cpp.o CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o CMakeFiles/OgreApp.dir/view/environments/EnvironmentGraphics.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/EnvironmentO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/HillsO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/OpenSeaO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/environments/PlaneO3D.cpp.o CMakeFiles/OgreApp.dir/view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/bullet/OgreDebugDrawer.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/overlay/InfoOverlay.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/overlay/InfoOverlayData.cpp.o CMakeFiles/OgreApp.dir/view/CEGUI/GUISheetHandler.cpp.o CMakeFiles/OgreApp.dir/view/CEGUI/ParamsPanel.cpp.o CMakeFiles/OgreApp.dir/view/CEGUI/CEGUIBuilder.cpp.o CMakeFiles/OgreApp.dir/view/MathGL/MathGLWindow.cpp.o CMakeFiles/OgreApp.dir/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralBoxGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralCapsuleGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralConeGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralCylinderGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralIcoSphereGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPlaneGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralRoot.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralRoundedBoxGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralSphereGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTorusGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTorusKnotGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTubeGenerator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralUtils.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralShape.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralShapeGenerators.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPath.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPathGenerators.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTrack.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralExtruder.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralLathe.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralTriangulator.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralPrecompiledHeaders.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralMultiShape.cpp.o CMakeFiles/OgreApp.dir/view/procedural/ProceduralGeometryHelpers.cpp.o CMakeFiles/OgreApp.dir/controller/input/SDL2InputHandler.cpp.o CMakeFiles/OgreApp.dir/controller/input/CEGUIInputHandler.cpp.o CMakeFiles/OgreApp.dir/controller/input/OgreInputHandler.cpp.o CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.o CMakeFiles/OgreApp.dir/controller/StateHandler.cpp.o CMakeFiles/OgreApp.dir/controller/physics/PhysicsController.cpp.o CMakeFiles/OgreApp.dir/controller/physics/RagDoll.cpp.o CMakeFiles/OgreApp.dir/controller/environments/Environment.cpp.o CMakeFiles/OgreApp.dir/controller/environments/Plane.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/Creature.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/Phenome.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/Component.cpp.o CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/morphology/Limb.cpp.o CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.o CMakeFiles/OgreApp.dir/utils/Randomness.cpp.o CMakeFiles/OgreApp.dir/utils/NameGenerator.cpp.o CMakeFiles/OgreApp.dir/BaseApplication.cpp.o CMakeFiles/OgreApp.dir/SimulationManager.cpp.o  -o dist/bin/OgreApp_d -rdynamic /usr/local/lib/libOgreMain.so -lboost_thread -lboost_date_time -lboost_system -lboost_atomic -lboost_chrono -lpthread /usr/local/lib/libOgreTerrain.so /usr/local/lib/libOgrePaging.so /usr/local/lib/libOgreOverlay.so -lboost_log -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread /usr/local/lib/libCEGUIBase-0.so /usr/local/lib/libCEGUIOgreRenderer-0.so /usr/local/lib/libmgl.so /usr/local/lib/libavformat.a /usr/local/lib/libavdevice.a /usr/local/lib/libavcodec.a /usr/local/lib/libavutil.a -lswresample -lm -lz /usr/local/lib/libswscale.a -lshark -lboost_system -lboost_date_time -lboost_filesystem -lboost_program_options -lboost_serialization -lboost_thread -lboost_unit_test_framework -lpthread /usr/local/lib/libBulletDynamics.so /usr/local/lib/libBulletCollision.so /usr/local/lib/libLinearMath.so /usr/local/lib/libBulletSoftBody.so /usr/local/lib/libOgreOverlay.so -lboost_thread -lboost_date_time -lboost_system -lboost_atomic -lboost_chrono -lpthread /usr/local/lib/libOgreTerrain.so /usr/local/lib/libOgrePaging.so -lboost_log -Wl,-Bstatic -lSDL2main -Wl,-Bdynamic -lSDL2 -lpthread /usr/local/lib/libCEGUIBase-0.so /usr/local/lib/libCEGUIOgreRenderer-0.so /usr/local/lib/libmgl.so /usr/local/lib/libavformat.a /usr/local/lib/libavdevice.a /usr/local/lib/libavcodec.a /usr/local/lib/libavutil.a -lswresample -lm -lz /usr/local/lib/libswscale.a -lshark -lboost_filesystem -lboost_program_options -lboost_serialization -lboost_unit_test_framework /usr/local/lib/libBulletDynamics.so /usr/local/lib/libBulletCollision.so /usr/local/lib/libLinearMath.so /usr/local/lib/libBulletSoftBody.so -Wl,-rpath,/usr/local/lib: 
 make[2]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
 /usr/bin/cmake -E cmake_progress_report /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70
 [100%] Built target OgreApp
 make[1]: Leaving directory `/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build'
 /usr/bin/cmake -E cmake_progress_start /media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build/CMakeFiles 0
 
-14:27:27 Build Finished (took 2s.963ms)
+16:34:38 Build Finished (took 10s.479ms)
 

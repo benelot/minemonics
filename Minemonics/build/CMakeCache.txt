@@ -511,6 +511,36 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Path to a file.
+FFMPEG_INCLUDE_DIR1:PATH=/usr/local/include/libavformat
+
+//Path to a file.
+FFMPEG_INCLUDE_DIR2:PATH=/usr/local/include/libavutil
+
+//Path to a file.
+FFMPEG_INCLUDE_DIR3:PATH=/usr/local/include/libavcodec
+
+//Path to a file.
+FFMPEG_INCLUDE_DIR4:PATH=/usr/local/include/libswscale
+
+//Path to a file.
+FFMPEG_INCLUDE_DIR5:PATH=/usr/local/include/libavdevice
+
+//Path to a library.
+FFMPEG_avcodec_LIBRARY:FILEPATH=/usr/local/lib/libavcodec.a
+
+//Path to a library.
+FFMPEG_avdevice_LIBRARY:FILEPATH=/usr/local/lib/libavdevice.a
+
+//Path to a library.
+FFMPEG_avformat_LIBRARY:FILEPATH=/usr/local/lib/libavformat.a
+
+//Path to a library.
+FFMPEG_avutil_LIBRARY:FILEPATH=/usr/local/lib/libavutil.a
+
+//Path to a library.
+FFMPEG_swscale_LIBRARY:FILEPATH=/usr/local/lib/libswscale.a
+
+//Path to a file.
 GTEST_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a library.
@@ -529,10 +559,22 @@ GTEST_MAIN_LIBRARY_DEBUG:FILEPATH=GTEST_MAIN_LIBRARY_DEBUG-NOTFOUND
 LIBAVCODEC_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a library.
+LIBAVCODEC_LIBRARIES:FILEPATH=/usr/local/lib/libavcodec.a
+
+//Path to a library.
 LIBAVCODEC_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavcodec.so
 
 //Path to a file.
+LIBAVDEVICE_INCLUDE_DIR:PATH=/usr/local/include
+
+//Path to a library.
+LIBAVDEVICE_LIBRARIES:FILEPATH=/usr/local/lib/libavdevice.a
+
+//Path to a file.
 LIBAVFORMAT_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+LIBAVFORMAT_LIBRARIES:FILEPATH=/usr/local/lib/libavformat.a
 
 //Path to a library.
 LIBAVFORMAT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavformat.so
@@ -541,10 +583,16 @@ LIBAVFORMAT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavformat.so
 LIBAVUTIL_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a library.
+LIBAVUTIL_LIBRARIES:FILEPATH=/usr/local/lib/libavutil.a
+
+//Path to a library.
 LIBAVUTIL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavutil.so
 
 //Path to a file.
 LIBSWSCALE_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+LIBSWSCALE_LIBRARIES:FILEPATH=/usr/local/lib/libswscale.a
 
 //Path to a library.
 LIBSWSCALE_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libswscale.so
@@ -821,6 +869,9 @@ Shark2_INCLUDE_DIR:PATH=/usr/include/EALib
 
 //Path to a library.
 Shark2_LIBRARY:FILEPATH=/usr/lib/libshark.so
+
+//Path to a library.
+_FFMPEG_z_LIBRARY_:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
 
 
 ########################
@@ -1396,8 +1447,30 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_INCLUDE_DIR1
+FFMPEG_INCLUDE_DIR1-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_INCLUDE_DIR2
+FFMPEG_INCLUDE_DIR2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_INCLUDE_DIR3
+FFMPEG_INCLUDE_DIR3-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_INCLUDE_DIR4
+FFMPEG_INCLUDE_DIR4-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_INCLUDE_DIR5
+FFMPEG_INCLUDE_DIR5-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_avcodec_LIBRARY
+FFMPEG_avcodec_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_avdevice_LIBRARY
+FFMPEG_avdevice_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_avformat_LIBRARY
+FFMPEG_avformat_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_avutil_LIBRARY
+FFMPEG_avutil_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FFMPEG_swscale_LIBRARY
+FFMPEG_swscale_LIBRARY-ADVANCED:INTERNAL=1
 //Details about finding Bullet
 FIND_PACKAGE_MESSAGE_DETAILS_Bullet:INTERNAL=[/usr/local/lib/libBulletDynamics.so][/usr/local/lib/libBulletCollision.so][/usr/local/lib/libLinearMath.so][/usr/local/lib/libBulletSoftBody.so][/usr/local/include/bullet][v()]
+//Details about finding FFMPEG
+FIND_PACKAGE_MESSAGE_DETAILS_FFMPEG:INTERNAL=[/usr/local/lib/libavformat.a;/usr/local/lib/libavdevice.a;/usr/local/lib/libavcodec.a;/usr/local/lib/libavutil.a;swresample;m;z;/usr/local/lib/libswscale.a][/usr/include][v()]
 //Details about finding FFmpeg
 FIND_PACKAGE_MESSAGE_DETAILS_FFmpeg:INTERNAL=[/usr/include][/usr/lib/x86_64-linux-gnu/libavcodec.so][/usr/include][/usr/lib/x86_64-linux-gnu/libavformat.so][/usr/include][/usr/lib/x86_64-linux-gnu/libswscale.so][/usr/include][/usr/lib/x86_64-linux-gnu/libavutil.so][v()]
 //Details about finding GTest
@@ -1658,6 +1731,44 @@ PC_LIBAVCODEC_libavcodec_INCLUDEDIR:INTERNAL=
 PC_LIBAVCODEC_libavcodec_LIBDIR:INTERNAL=
 PC_LIBAVCODEC_libavcodec_PREFIX:INTERNAL=
 PC_LIBAVCODEC_libavcodec_VERSION:INTERNAL=
+PC_LIBAVDEVICE_CFLAGS:INTERNAL=-I/usr/local/include
+PC_LIBAVDEVICE_CFLAGS_I:INTERNAL=
+PC_LIBAVDEVICE_CFLAGS_OTHER:INTERNAL=
+PC_LIBAVDEVICE_FOUND:INTERNAL=1
+PC_LIBAVDEVICE_INCLUDEDIR:INTERNAL=/usr/local/include
+PC_LIBAVDEVICE_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVDEVICE_LDFLAGS:INTERNAL=-pthread;-L/usr/local/lib;-lavdevice;-lavfilter;-lswscale;-lavformat;-lavcodec;-lXv;-lXext;-lxcb-xfixes;-lxcb-render;-lxcb-shape;-lxcb;-lX11;-lasound;-lz;-lswresample;-lavutil;-lm
+PC_LIBAVDEVICE_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_LIBAVDEVICE_LIBDIR:INTERNAL=/usr/local/lib
+PC_LIBAVDEVICE_LIBRARIES:INTERNAL=avdevice;avfilter;swscale;avformat;avcodec;Xv;Xext;xcb-xfixes;xcb-render;xcb-shape;xcb;X11;asound;z;swresample;avutil;m
+PC_LIBAVDEVICE_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+PC_LIBAVDEVICE_LIBS:INTERNAL=
+PC_LIBAVDEVICE_LIBS_L:INTERNAL=
+PC_LIBAVDEVICE_LIBS_OTHER:INTERNAL=
+PC_LIBAVDEVICE_LIBS_PATHS:INTERNAL=
+PC_LIBAVDEVICE_PREFIX:INTERNAL=/usr/local
+PC_LIBAVDEVICE_STATIC_CFLAGS:INTERNAL=-I/usr/local/include
+PC_LIBAVDEVICE_STATIC_CFLAGS_I:INTERNAL=
+PC_LIBAVDEVICE_STATIC_CFLAGS_OTHER:INTERNAL=
+PC_LIBAVDEVICE_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVDEVICE_STATIC_LDFLAGS:INTERNAL=-pthread;-L/usr/local/lib;-lavdevice;-lavfilter;-lswscale;-lavformat;-lavcodec;-lXv;-lXext;-lxcb-xfixes;-lxcb-render;-lxcb-shape;-lxcb;-lX11;-lasound;-lz;-lswresample;-lavutil;-lm
+PC_LIBAVDEVICE_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_LIBAVDEVICE_STATIC_LIBDIR:INTERNAL=
+PC_LIBAVDEVICE_STATIC_LIBRARIES:INTERNAL=avdevice;avfilter;swscale;avformat;avcodec;Xv;Xext;xcb-xfixes;xcb-render;xcb-shape;xcb;X11;asound;z;swresample;avutil;m
+PC_LIBAVDEVICE_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
+PC_LIBAVDEVICE_STATIC_LIBS:INTERNAL=
+PC_LIBAVDEVICE_STATIC_LIBS_L:INTERNAL=
+PC_LIBAVDEVICE_STATIC_LIBS_OTHER:INTERNAL=
+PC_LIBAVDEVICE_STATIC_LIBS_PATHS:INTERNAL=
+PC_LIBAVDEVICE_VERSION:INTERNAL=56.4.100
+PC_LIBAVDEVICE_avdevice_INCLUDEDIR:INTERNAL=
+PC_LIBAVDEVICE_avdevice_LIBDIR:INTERNAL=
+PC_LIBAVDEVICE_avdevice_PREFIX:INTERNAL=
+PC_LIBAVDEVICE_avdevice_VERSION:INTERNAL=
+PC_LIBAVDEVICE_libavdevice_INCLUDEDIR:INTERNAL=
+PC_LIBAVDEVICE_libavdevice_LIBDIR:INTERNAL=
+PC_LIBAVDEVICE_libavdevice_PREFIX:INTERNAL=
+PC_LIBAVDEVICE_libavdevice_VERSION:INTERNAL=
 PC_LIBAVFORMAT_CFLAGS:INTERNAL=
 PC_LIBAVFORMAT_CFLAGS_I:INTERNAL=
 PC_LIBAVFORMAT_CFLAGS_OTHER:INTERNAL=
@@ -1766,7 +1877,7 @@ PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
-SDL2_LIBRARY_TEMP:INTERNAL=/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
+SDL2_LIBRARY_TEMP:INTERNAL=/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
 //ADVANCED property for variable: Shark2_INCLUDE_DIR
 Shark2_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Shark2_LIBRARY
@@ -1807,6 +1918,8 @@ _Boost_LIBRARY_DIR_LAST:INTERNAL=/usr/lib/x86_64-linux-gnu
 _Boost_USE_MULTITHREADED_LAST:INTERNAL=ON
 //Last used Boost_USE_STATIC_LIBS value.
 _Boost_USE_STATIC_LIBS_LAST:INTERNAL=OFF
+//ADVANCED property for variable: _FFMPEG_z_LIBRARY_
+_FFMPEG_z_LIBRARY_-ADVANCED:INTERNAL=1
 __pkg_config_checked_CEGUI_IrrlichtRenderer_PKGC:INTERNAL=1
 __pkg_config_checked_CEGUI_LuaScriptModule_PKGC:INTERNAL=1
 __pkg_config_checked_CEGUI_NullRenderer_PKGC:INTERNAL=1
@@ -1816,6 +1929,7 @@ __pkg_config_checked_CEGUI_OpenGLRenderer_PKGC:INTERNAL=1
 __pkg_config_checked_CEGUI_PKGC:INTERNAL=1
 __pkg_config_checked_OGRE_PKGC:INTERNAL=1
 __pkg_config_checked_PC_LIBAVCODEC:INTERNAL=1
+__pkg_config_checked_PC_LIBAVDEVICE:INTERNAL=1
 __pkg_config_checked_PC_LIBAVFORMAT:INTERNAL=1
 __pkg_config_checked_PC_LIBAVUTIL:INTERNAL=1
 __pkg_config_checked_PC_LIBSWSCALE:INTERNAL=1

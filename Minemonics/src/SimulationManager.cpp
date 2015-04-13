@@ -37,7 +37,6 @@
 #include <CEGUI/FontManager.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <boost/lexical_cast.hpp>
-#include <model/evolution/population/creature/CreatureM.h>
 
 //# custom headers
 //## base headers
@@ -59,6 +58,7 @@
 
 //## model headers
 #include "model/evolution/population/creature/genome/Genome.h"
+#include "model/evolution/population/creature/CreatureM.h"
 
 //## view headers
 #include "view/CEGUI/GUISheetHandler.h"
@@ -175,10 +175,15 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	// update main frame timer
 	mNow = boost::posix_time::microsec_clock::local_time();
-	boost::posix_time::time_duration mRuntime = mNow - mStart;
+	mRuntime = mNow - mStart;
+
+	//videoWriter.addFrame(mRuntime.total_seconds());
 
 	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN)
+	{
+		videoWriter.close();
 		return false;
+	}
 
 	// Inject input into handlers;
 	mInputHandler.injectInput();
@@ -464,9 +469,13 @@ void SimulationManager::createScene(void) {
 	for (; it != mGraphWindows.end(); it++) {
 		mLayout->addChild((*it)->getMathGlWindow());
 	}
-// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
-// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
-// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
+
+	//TODO What to do if screen gets resized?
+	videoWriter.setup(this,"video.mp4",mWindow->getWidth(),mWindow->getHeight());
+
+	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
+	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
+	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
 
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 

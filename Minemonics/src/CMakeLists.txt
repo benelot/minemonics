@@ -202,7 +202,7 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
 
 find_package(FFMPEG REQUIRED)
 
-include_directories(${FFMPEG_INCLUDE_DIR})
+include_directories(${FFMPEG_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
 
 ######################################################################
@@ -385,6 +385,9 @@ set(VIEWHDRS
 	## MathGL
     ./view/MathGL/MathGLWindow.h
     
+    ## Videocapture
+	./view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h
+    
     # procedural
 	./view/procedural/ProceduralPlatform.h
 	./view/procedural/Procedural.h
@@ -444,6 +447,9 @@ set(VIEWSRCS
 	
 	## MathGL
 	./view/MathGL/MathGLWindow.cpp
+	
+	## Videocapture
+	./view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp
 	
 	# procedural
 	./view/procedural/ProceduralBoxGenerator.cpp
