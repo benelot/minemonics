@@ -82,17 +82,13 @@ make
 sudo make install
 sudo ldconfig
 
-sudo apt-get install libavcodec-dev libavformat-dev libavutil-dev
 
-
-
-# ogrebullet 
-echo "This part is currently not working..."
-exit
-cd ogrebullet-r2988
-
-#patch some files
-#https://docs.google.com/file/d/0B_6mnQttjwGuZDExMjdmNmItZDAxOC00MTM5LWFiZmUtMjIzZjgwNjhjNTcz/edit?ddrp=1&hl=en#
-patch -p0 < ../linux_demo.patch
-chmod 755 autogen.sh
-./autogen.sh
+# FFMpeg
+cd ..
+sudo apt-get install yasm
+git clone https://github.com/FFmpeg/FFmpeg.git
+cd FFmpeg
+./configure
+make
+sudo make install
+sudo ldconfig

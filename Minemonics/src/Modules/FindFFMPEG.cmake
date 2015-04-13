@@ -1,221 +1,144 @@
-# FindFFMPEG
-# ----------
+# - Try to find FFMPEG
+# Once done this will define
+#  FFMPEG_FOUND - System has FFMPEG
+#  FFMPEG_INCLUDE_DIRS - The FFMPEG include directories
+#  FFMPEG_LIBRARIES - The libraries needed to use FFMPEG
+#  FFMPEG_LIBRARY_DIRS - The directory to find FFMPEG libraries
 #
-# Find the native FFMPEG includes and library
+# written by Roy Shilkrot 2013 http://www.morethantechnical.com/
 #
-# This module defines::
-#
-#  FFMPEG_INCLUDE_DIR, where to find avcodec.h, avformat.h ...
-#  FFMPEG_LIBRARIES, the libraries to link against to use FFMPEG.
-#  FFMPEG_FOUND, If false, do not try to use FFMPEG.
-#
-# also defined, but not for general use are::
-#
-#   FFMPEG_avformat_LIBRARY, where to find the FFMPEG avformat library.
-#   FFMPEG_avcodec_LIBRARY, where to find the FFMPEG avcodec library.
-#
-# This is useful to do it this way so that we can always add more libraries
-# if needed to ``FFMPEG_LIBRARIES`` if ffmpeg ever changes...
-
-#=============================================================================
-# Copyright: 1993-2008 Ken Martin, Will Schroeder, Bill Lorensen
-#
-# Distributed under the OSI-approved BSD License (the "License");
-# see accompanying file Copyright.txt for details.
-#
-# This software is distributed WITHOUT ANY WARRANTY; without even the
-# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the License for more information.
-#=============================================================================
-# (To distribute this file outside of YCM, substitute the full
-#  License text for the above reference.)
-
-# Originally from VTK project
-
-
-find_path(FFMPEG_INCLUDE_DIR1 avformat.h
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/ffmpeg
-  $ENV{FFMPEG_DIR}/libavformat
-  $ENV{FFMPEG_DIR}/include/libavformat
-  $ENV{FFMPEG_DIR}/include/ffmpeg
-  /usr/local/include/ffmpeg
-  /usr/include/ffmpeg
-  /usr/include/libavformat
-  /usr/include/ffmpeg/libavformat
-  /usr/local/include/libavformat
-)
-
-find_path(FFMPEG_INCLUDE_DIR2 avutil.h
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/ffmpeg
-  $ENV{FFMPEG_DIR}/libavutil
-  $ENV{FFMPEG_DIR}/include/libavutil
-  $ENV{FFMPEG_DIR}/include/ffmpeg
-  /usr/local/include/ffmpeg
-  /usr/include/ffmpeg
-  /usr/include/libavutil
-  /usr/include/ffmpeg/libavutil
-  /usr/local/include/libavutil
-)
-
-find_path(FFMPEG_INCLUDE_DIR3 avcodec.h
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/ffmpeg
-  $ENV{FFMPEG_DIR}/libavcodec
-  $ENV{FFMPEG_DIR}/include/libavcodec
-  $ENV{FFMPEG_DIR}/include/ffmpeg
-  /usr/local/include/ffmpeg
-  /usr/include/ffmpeg
-  /usr/include/libavcodec
-  /usr/include/ffmpeg/libavcodec
-  /usr/local/include/libavcodec
-)
-
-find_path(FFMPEG_INCLUDE_DIR4 swscale.h
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/ffmpeg
-  $ENV{FFMPEG_DIR}/libswscale
-  $ENV{FFMPEG_DIR}/include/libswscale
-  $ENV{FFMPEG_DIR}/include/ffmpeg
-  /usr/local/include/ffmpeg
-  /usr/include/ffmpeg
-  /usr/include/libswscale
-  /usr/include/ffmpeg/libswscale
-  /usr/local/include/libswscale
-)
-
-find_path(FFMPEG_INCLUDE_DIR5 avdevice.h
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/ffmpeg
-  $ENV{FFMPEG_DIR}/libavdevice
-  $ENV{FFMPEG_DIR}/include/libavdevice
-  $ENV{FFMPEG_DIR}/include/ffmpeg
-  /usr/local/include/ffmpeg
-  /usr/include/ffmpeg
-  /usr/include/libavdevice
-  /usr/include/ffmpeg/libavdevice
-  /usr/local/include/libavdevice
-)
-
-if(FFMPEG_INCLUDE_DIR1)
-  if(FFMPEG_INCLUDE_DIR2)
-    if(FFMPEG_INCLUDE_DIR3)
-      set(FFMPEG_INCLUDE_DIR ${FFMPEG_INCLUDE_DIR1}
-                             ${FFMPEG_INCLUDE_DIR2}
-                             ${FFMPEG_INCLUDE_DIR3})
-    endif()
-  endif()
-endif()
-
-if(FFMPEG_INCLUDE_DIR4)
-  set(FFMPEG_INCLUDE_DIR ${FFMPEG_INCLUDE_DIR}
-                         ${FFMPEG_INCLUDE_DIR4})
-endif()
-
-if(FFMPEG_INCLUDE_DIR5)
-  set(FFMPEG_INCLUDE_DIR ${FFMPEG_INCLUDE_DIR}
-                         ${FFMPEG_INCLUDE_DIR5}
-                         ${FFMPEG_INCLUDE_DIR5}/..)
-endif()
-
-find_library(FFMPEG_avformat_LIBRARY avformat
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/lib
-  $ENV{FFMPEG_DIR}/libavformat
-  /usr/local/lib
-  /usr/lib
-)
-
-find_library(FFMPEG_avcodec_LIBRARY avcodec
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/lib
-  $ENV{FFMPEG_DIR}/libavcodec
-  /usr/local/lib
-  /usr/lib
-)
-
-find_library(FFMPEG_avutil_LIBRARY avutil
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/lib
-  $ENV{FFMPEG_DIR}/libavutil
-  /usr/local/lib
-  /usr/lib
-)
-
-if(NOT DISABLE_SWSCALE)
-  find_library(FFMPEG_swscale_LIBRARY swscale
-    $ENV{FFMPEG_DIR}
-    $ENV{FFMPEG_DIR}/lib
-    $ENV{FFMPEG_DIR}/libswscale
-    /usr/local/lib
-    /usr/lib
-  )
-endif(NOT DISABLE_SWSCALE)
-
-find_library(FFMPEG_avdevice_LIBRARY avdevice
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/lib
-  $ENV{FFMPEG_DIR}/libavdevice
-  /usr/local/lib
-  /usr/lib
-)
-
-find_library(_FFMPEG_z_LIBRARY_ z
-  $ENV{FFMPEG_DIR}
-  $ENV{FFMPEG_DIR}/lib
-  /usr/local/lib
-  /usr/lib
-)
-
-
-
-if(FFMPEG_INCLUDE_DIR)
-  if(FFMPEG_avformat_LIBRARY)
-    if(FFMPEG_avcodec_LIBRARY)
-      if(FFMPEG_avutil_LIBRARY)
-        set(FFMPEG_FOUND "YES")
-        set(FFMPEG_LIBRARIES ${FFMPEG_avformat_LIBRARY}
-                             ${FFMPEG_avcodec_LIBRARY}
-                             ${FFMPEG_avutil_LIBRARY}
-          )
-        if(FFMPEG_swscale_LIBRARY)
-          set(FFMPEG_LIBRARIES ${FFMPEG_LIBRARIES}
-                               ${FFMPEG_swscale_LIBRARY}
-          )
-        endif()
-        if(FFMPEG_avdevice_LIBRARY)
-          set(FFMPEG_LIBRARIES ${FFMPEG_LIBRARIES}
-                               ${FFMPEG_avdevice_LIBRARY}
-          )
-        endif()
-        if(_FFMPEG_z_LIBRARY_)
-          set( FFMPEG_LIBRARIES ${FFMPEG_LIBRARIES}
-                                ${_FFMPEG_z_LIBRARY_}
-          )
-        endif()
-      endif()
-    endif()
-  endif()
-endif()
-
-mark_as_advanced(
-  FFMPEG_INCLUDE_DIR
-  FFMPEG_INCLUDE_DIR1
-  FFMPEG_INCLUDE_DIR2
-  FFMPEG_INCLUDE_DIR3
-  FFMPEG_INCLUDE_DIR4
-  FFMPEG_INCLUDE_DIR5
-  FFMPEG_avformat_LIBRARY
-  FFMPEG_avcodec_LIBRARY
-  FFMPEG_avutil_LIBRARY
-  FFMPEG_swscale_LIBRARY
-  FFMPEG_avdevice_LIBRARY
-  _FFMPEG_z_LIBRARY_
-  )
-
-# Set package properties if FeatureSummary was included
-if(COMMAND set_package_properties)
-  set_package_properties(FFMPEG PROPERTIES DESCRIPTION "A complete, cross-platform solution to record, convert and stream audio and video")
-  set_package_properties(FFMPEG PROPERTIES URL "http://ffmpeg.org/")
-endif()
+ 
+find_package(PkgConfig)
+ 
+ 
+MACRO(FFMPEG_FIND varname shortname headername)
+ 
+  IF(NOT WIN32)
+		PKG_CHECK_MODULES(PC_${varname} ${shortname})
+ 
+		FIND_PATH(${varname}_INCLUDE_DIR "${shortname}/${headername}" 
+			HINTS ${PC_${varname}_INCLUDEDIR} ${PC_${varname}_INCLUDE_DIRS}
+			NO_DEFAULT_PATH
+			)
+	ELSE()
+		FIND_PATH(${varname}_INCLUDE_DIR "${shortname}/${headername}")
+	ENDIF()
+		
+	IF(${varname}_INCLUDE_DIR STREQUAL "${varname}_INCLUDE_DIR-NOTFOUND")
+		message(STATUS "look for newer strcture")
+		IF(NOT WIN32)
+			PKG_CHECK_MODULES(PC_${varname} "lib${shortname}")
+ 
+			FIND_PATH(${varname}_INCLUDE_DIR "lib${shortname}/${headername}"
+				HINTS ${PC_${varname}_INCLUDEDIR} ${PC_${varname}_INCLUDE_DIRS}
+				NO_DEFAULT_PATH
+				)
+		ELSE()
+			FIND_PATH(${varname}_INCLUDE_DIR "lib${shortname}/${headername}")
+			IF(${${varname}_INCLUDE_DIR} STREQUAL "${varname}_INCLUDE_DIR-NOTFOUND")
+				#Desperate times call for desperate measures
+				MESSAGE(STATUS "globbing...")
+				FILE(GLOB_RECURSE ${varname}_INCLUDE_DIR "/ffmpeg*/${headername}")
+				MESSAGE(STATUS "found: ${${varname}_INCLUDE_DIR}")
+				IF(${varname}_INCLUDE_DIR)
+					GET_FILENAME_COMPONENT(${varname}_INCLUDE_DIR "${${varname}_INCLUDE_DIR}" PATH)
+					GET_FILENAME_COMPONENT(${varname}_INCLUDE_DIR "${${varname}_INCLUDE_DIR}" PATH)
+				ELSE()
+					SET(${varname}_INCLUDE_DIR "${varname}_INCLUDE_DIR-NOTFOUND")
+				ENDIF()
+			ENDIF()
+		ENDIF()
+	ENDIF()
+ 
+ 
+	IF(${${varname}_INCLUDE_DIR} STREQUAL "${varname}_INCLUDE_DIR-NOTFOUND")
+		MESSAGE(STATUS "Can't find includes for ${shortname}...")
+	ELSE()
+		MESSAGE(STATUS "Found ${shortname} include dirs: ${${varname}_INCLUDE_DIR}")
+ 
+#		GET_DIRECTORY_PROPERTY(FFMPEG_PARENT DIRECTORY ${${varname}_INCLUDE_DIR} PARENT_DIRECTORY)
+		GET_FILENAME_COMPONENT(FFMPEG_PARENT ${${varname}_INCLUDE_DIR} PATH)
+		MESSAGE(STATUS "Using FFMpeg dir parent as hint: ${FFMPEG_PARENT}")
+ 
+		IF(NOT WIN32)
+			FIND_LIBRARY(${varname}_LIBRARIES NAMES ${shortname}
+				HINTS ${PC_${varname}_LIBDIR} ${PC_${varname}_LIBRARY_DIR} ${FFMPEG_PARENT})
+		ELSE()
+#			FIND_PATH(${varname}_LIBRARIES "${shortname}.dll.a" HINTS ${FFMPEG_PARENT})
+			FILE(GLOB_RECURSE ${varname}_LIBRARIES "${FFMPEG_PARENT}/*${shortname}.lib") 
+			# GLOBing is very bad... but windows sux, this is the only thing that works
+		ENDIF()
+ 
+		IF(${varname}_LIBRARIES STREQUAL "${varname}_LIBRARIES-NOTFOUND")
+			MESSAGE(STATUS "look for newer structure for library")
+			FIND_LIBRARY(${varname}_LIBRARIES NAMES lib${shortname}
+				HINTS ${PC_${varname}_LIBDIR} ${PC_${varname}_LIBRARY_DIR} ${FFMPEG_PARENT})
+		ENDIF()
+ 
+ 
+		IF(${varname}_LIBRARIES STREQUAL "${varname}_LIBRARIES-NOTFOUND")
+			MESSAGE(STATUS "Can't find lib for ${shortname}...")
+		ELSE()
+			MESSAGE(STATUS "Found ${shortname} libs: ${${varname}_LIBRARIES}")
+		ENDIF()
+ 
+ 
+		IF(NOT ${varname}_INCLUDE_DIR STREQUAL "${varname}_INCLUDE_DIR-NOTFOUND"
+			AND NOT ${varname}_LIBRARIES STREQUAL ${varname}_LIBRARIES-NOTFOUND)
+ 
+			MESSAGE(STATUS "found ${shortname}: include ${${varname}_INCLUDE_DIR} lib ${${varname}_LIBRARIES}")
+			SET(FFMPEG_${varname}_FOUND 1)
+			SET(FFMPEG_${varname}_INCLUDE_DIRS ${${varname}_INCLUDE_DIR})
+			SET(FFMPEG_${varname}_LIBS ${${varname}_LIBRARIES})
+		ELSE()
+			MESSAGE(STATUS "Can't find ${shortname}")
+		ENDIF()
+ 
+	ENDIF()
+ 
+ENDMACRO(FFMPEG_FIND)
+ 
+FFMPEG_FIND(LIBAVFORMAT avformat avformat.h)
+FFMPEG_FIND(LIBAVDEVICE avdevice avdevice.h)
+FFMPEG_FIND(LIBAVCODEC  avcodec  avcodec.h)
+FFMPEG_FIND(LIBAVUTIL   avutil   avutil.h)
+FFMPEG_FIND(LIBSWSCALE  swscale  swscale.h)
+ 
+SET(FFMPEG_FOUND "NO")
+IF   (FFMPEG_LIBAVFORMAT_FOUND AND 
+	FFMPEG_LIBAVDEVICE_FOUND AND 
+	FFMPEG_LIBAVCODEC_FOUND AND 
+	FFMPEG_LIBAVUTIL_FOUND AND
+	FFMPEG_LIBSWSCALE_FOUND
+	)
+ 
+ 
+    SET(FFMPEG_FOUND "YES")
+ 
+    SET(FFMPEG_INCLUDE_DIRS ${FFMPEG_LIBAVFORMAT_INCLUDE_DIRS})
+ 
+    SET(FFMPEG_LIBRARY_DIRS ${FFMPEG_LIBAVFORMAT_LIBRARY_DIRS})
+ 
+    SET(FFMPEG_LIBRARIES
+        ${FFMPEG_LIBAVFORMAT_LIBS}
+        ${FFMPEG_LIBAVDEVICE_LIBS}
+        ${FFMPEG_LIBAVCODEC_LIBS}
+        ${FFMPEG_LIBAVUTIL_LIBS}
+	${FFMPEG_LIBSWSCALE_LIBS}
+	)
+ 
+ELSE ()
+ 
+   MESSAGE(STATUS "Could not find FFMPEG")
+ 
+ENDIF()
+ 
+message(STATUS ${FFMPEG_LIBRARIES} ${FFMPEG_LIBAVFORMAT_LIBRARIES})
+ 
+include(FindPackageHandleStandardArgs)
+# handle the QUIETLY and REQUIRED arguments and set FFMPEG_FOUND to TRUE
+# if all listed variables are TRUE
+find_package_handle_standard_args(FFMPEG DEFAULT_MSG
+                                  FFMPEG_LIBRARIES FFMPEG_INCLUDE_DIRS)
+ 
+mark_as_advanced(FFMPEG_INCLUDE_DIRS FFMPEG_LIBRARY_DIRS FFMPEG_LIBRARIES)
