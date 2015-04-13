@@ -78,7 +78,7 @@ public:
      * @param the bitrate
      * @param the framerate
      **/
-    void setup(SimulationManager* simulationManager, const char* filename, int width, int height, int bitrate = 400000, int framerate = 12);
+    void setup(SimulationManager* simulationManager, const char* filename, int width, int height, int bitrate = 10000000);
     /**
      * add a frame to the video file
      * @param pixels the pixels packed in RGB (24-bit RGBRGBRGB...)

@@ -41,12 +41,11 @@ extern "C" {
 #include "Ogre3DFFMPEGVideoWriter.h"
 
 void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
-		const char* filename, int width, int height, int bitrate,
-		int framerate) {
+		const char* filename, int width, int height, int bitrate) {
 
 	// main frame timer initialization
-	mStart = boost::posix_time::second_clock::local_time();
-	mNow = boost::posix_time::second_clock::local_time();
+	mStart = boost::posix_time::microsec_clock::local_time();
+	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
 
 	videoTexture =
@@ -138,7 +137,7 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 		c->width = width;
 		c->height = height;
 		// frames per second
-		video_st->time_base = (AVRational ) { 1, framerate };
+		video_st->time_base = (AVRational ) { 1, 1000 };
 		c->time_base = video_st->time_base;
 		c->pix_fmt = supported_pix_fmt;
 //        c->gop_size = 10; // emit one intra frame every ten frames
@@ -257,7 +256,7 @@ void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest, long int timestamp) {
 			pkt.data = picture->data[0];
 			pkt.size = sizeof(AVPicture);
 			//pkt.dts = c->time_base;
-			pkt.pts = timestamp;
+			//pkt.pts = timestamp;
 			ret = av_interleaved_write_frame(oc, &pkt);
 		} else {
 			AVPacket pkt = { 0 };
@@ -279,8 +278,13 @@ void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest, long int timestamp) {
 				ret = 0;
 			}
 		}
-		picture->pts += av_rescale_q(1, video_st->codec->time_base,
-				video_st->time_base);
+		if (timestamp == 0) {
+			picture->pts += av_rescale_q(1, video_st->codec->time_base,
+					video_st->time_base);
+		} else {
+			picture->pts += av_rescale_q(timestamp, video_st->codec->time_base,
+					video_st->time_base);
+		}
 		frame_count++;
 	}
 }
@@ -315,7 +319,7 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 
 	if (initialized) {
 		// main frame timer update
-		mNow = boost::posix_time::second_clock::local_time();
+		mNow = boost::posix_time::microsec_clock::local_time();
 		mRuntime = mNow - mStart;
 
 		Ogre::RenderTexture *pRenderTex =
@@ -329,7 +333,9 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 
 		//TODO: If video colors are wrong in the video, check the value of
 		// pb.format in OgrePixelFormat.h and set picture_rgb24->format in setup accordingly
-		addFrame(pDest, mRuntime.total_seconds());
+		//std::cout << "mRuntime::" << mRuntime.total_milliseconds() << std::endl;
+		addFrame(pDest, mRuntime.total_milliseconds());
+		mStart = boost::posix_time::microsec_clock::local_time();
 
 		buffer->unlock();
 	}

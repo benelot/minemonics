@@ -79,8 +79,8 @@ SimulationManager::SimulationManager(void) :
 		NULL) {
 
 	// main frame timer initialization
-	mStart = boost::posix_time::second_clock::local_time();
-	mNow = boost::posix_time::second_clock::local_time();
+	mStart = boost::posix_time::microsec_clock::local_time();
+	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
 }
 //-------------------------------------------------------------------------------------
