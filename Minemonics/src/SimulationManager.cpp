@@ -177,11 +177,10 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
 
-	//videoWriter.addFrame(mRuntime.total_seconds());
-
-	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN)
-	{
-		videoWriter.close();
+	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN) {
+		if (videoWriter.isInitialized()) {
+			videoWriter.close();
+		}
 		return false;
 	}
 
@@ -469,9 +468,6 @@ void SimulationManager::createScene(void) {
 	for (; it != mGraphWindows.end(); it++) {
 		mLayout->addChild((*it)->getMathGlWindow());
 	}
-
-	//TODO What to do if screen gets resized?
-	videoWriter.setup(this,"video.mp4",mWindow->getWidth(),mWindow->getHeight());
 
 	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes

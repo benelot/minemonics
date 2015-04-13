@@ -178,7 +178,7 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 					"allocated picture of size %d (ptr %x), linesize %d %d %d %d\n",
 					ret, picture->data[0], picture->linesize[0],
 					picture->linesize[1], picture->linesize[2],
-					(unsigned int)picture->linesize[3]);
+					(unsigned int) picture->linesize[3]);
 		}
 
 		picture_rgb24 = avcodec_alloc_frame();
@@ -194,7 +194,7 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 					"allocated picture of size %d (ptr %x), linesize %d %d %d %d\n",
 					ret, picture_rgb24->data[0], picture_rgb24->linesize[0],
 					picture_rgb24->linesize[1], picture_rgb24->linesize[2],
-					(unsigned int)picture_rgb24->linesize[3]);
+					(unsigned int) picture_rgb24->linesize[3]);
 
 		size = ret;
 	}
@@ -231,55 +231,57 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 }
 
 /* add a frame to the video file, RGB 24bpp format */
-void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest,long int timestamp) {
+void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest, long int timestamp) {
 
-	/* copy the buffer */
-	memcpy(picture_rgb24->data[0], pDest, size);
-	picture_rgb24->width = c->width;
-	picture_rgb24->height = c->height;
+	if (initialized) {
+		/* copy the buffer */
+		memcpy(picture_rgb24->data[0], pDest, size);
+		picture_rgb24->width = c->width;
+		picture_rgb24->height = c->height;
 
-	/* convert RGB24 to YUV420 */
-	sws_scale(sws_ctx, picture_rgb24->data, picture_rgb24->linesize, 0,
-			c->height, picture->data, picture->linesize);
+		/* convert RGB24 to YUV420 */
+		sws_scale(sws_ctx, picture_rgb24->data, picture_rgb24->linesize, 0,
+				c->height, picture->data, picture->linesize);
 
-	picture->width = c->width;
-	picture->height = c->height;
+		picture->width = c->width;
+		picture->height = c->height;
 
-	int ret = -1;
-	if (oc->oformat->flags & AVFMT_RAWPICTURE) {
-		/* Raw video case - directly store the picture in the packet */
-		AVPacket pkt;
-		av_init_packet(&pkt);
-		pkt.flags |= AV_PKT_FLAG_KEY;
-		pkt.stream_index = video_st->index;
-		pkt.data = picture->data[0];
-		pkt.size = sizeof(AVPicture);
-		//pkt.dts = c->time_base;
-		pkt.pts = timestamp;
-		ret = av_interleaved_write_frame(oc, &pkt);
-	} else {
-		AVPacket pkt = { 0 };
-		int got_packet;
-		av_init_packet(&pkt);
-		/* encode the image */
-		ret = avcodec_encode_video2(c, &pkt, picture, &got_packet);
-		if (ret < 0) {
-			fprintf(stderr, "Error encoding video frame: %s\n",
-					av_err2str(ret));
-			exit(1);
-		}
-		/* If size is zero, it means the image was buffered. */
-		if (!ret && got_packet && pkt.size) {
+		int ret = -1;
+		if (oc->oformat->flags & AVFMT_RAWPICTURE) {
+			/* Raw video case - directly store the picture in the packet */
+			AVPacket pkt;
+			av_init_packet(&pkt);
+			pkt.flags |= AV_PKT_FLAG_KEY;
 			pkt.stream_index = video_st->index;
-			/* Write the compressed frame to the media file. */
+			pkt.data = picture->data[0];
+			pkt.size = sizeof(AVPicture);
+			//pkt.dts = c->time_base;
+			pkt.pts = timestamp;
 			ret = av_interleaved_write_frame(oc, &pkt);
 		} else {
-			ret = 0;
+			AVPacket pkt = { 0 };
+			int got_packet;
+			av_init_packet(&pkt);
+			/* encode the image */
+			ret = avcodec_encode_video2(c, &pkt, picture, &got_packet);
+			if (ret < 0) {
+				fprintf(stderr, "Error encoding video frame: %s\n",
+						av_err2str(ret));
+				exit(1);
+			}
+			/* If size is zero, it means the image was buffered. */
+			if (!ret && got_packet && pkt.size) {
+				pkt.stream_index = video_st->index;
+				/* Write the compressed frame to the media file. */
+				ret = av_interleaved_write_frame(oc, &pkt);
+			} else {
+				ret = 0;
+			}
 		}
+		picture->pts += av_rescale_q(1, video_st->codec->time_base,
+				video_st->time_base);
+		frame_count++;
 	}
-	picture->pts += av_rescale_q(1, video_st->codec->time_base,
-			video_st->time_base);
-	frame_count++;
 }
 
 void Ogre3DFFMPEGVideoWriter::close() {
@@ -310,22 +312,24 @@ void Ogre3DFFMPEGVideoWriter::close() {
 void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 		const Ogre::RenderTargetEvent &evt) {
 
-	// main frame timer update
-	mNow = boost::posix_time::second_clock::local_time();
-	mRuntime = mNow - mStart;
+	if (initialized) {
+		// main frame timer update
+		mNow = boost::posix_time::second_clock::local_time();
+		mRuntime = mNow - mStart;
 
-	Ogre::RenderTexture *pRenderTex =
-			videoTexture->getBuffer()->getRenderTarget();
-	Ogre::HardwarePixelBufferSharedPtr buffer = videoTexture->getBuffer();
+		Ogre::RenderTexture *pRenderTex =
+				videoTexture->getBuffer()->getRenderTarget();
+		Ogre::HardwarePixelBufferSharedPtr buffer = videoTexture->getBuffer();
 
-	buffer->lock(Ogre::HardwareBuffer::HBL_READ_ONLY);
+		buffer->lock(Ogre::HardwareBuffer::HBL_READ_ONLY);
 
-	const Ogre::PixelBox &pb = buffer->getCurrentLock();
-	Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pb.data);
+		const Ogre::PixelBox &pb = buffer->getCurrentLock();
+		Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pb.data);
 
-	//TODO: If video colors are wrong in the video, check the value of
-	// pb.format in OgrePixelFormat.h and set picture_rgb24->format in setup accordingly
-	addFrame(pDest,mRuntime.total_seconds());
+		//TODO: If video colors are wrong in the video, check the value of
+		// pb.format in OgrePixelFormat.h and set picture_rgb24->format in setup accordingly
+		addFrame(pDest, mRuntime.total_seconds());
 
-	buffer->unlock();
+		buffer->unlock();
+	}
 }

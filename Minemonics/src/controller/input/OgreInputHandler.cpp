@@ -11,6 +11,8 @@
 //## controller headers
 //## model headers
 //## view headers
+#include <boost/lexical_cast.hpp>
+
 //# custom headers
 //## base headers
 #include "SimulationManager.h"
@@ -161,7 +163,21 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Backslash;
 		break;
 		case ApplicationKeycode::APPK_MINUS:
-		// return CEGUI::Key::Minus;
+			if(mSimulationMgr->getVideoWriter().isInitialized())
+			{
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video stopped.";
+				mSimulationMgr->getVideoWriter().close();
+			}
+			else
+			{
+				std::string videoName;
+				videoName.append("Minemonics-");
+				videoName.append(boost::lexical_cast<std::string>(mSimulationMgr->getRuntime().total_milliseconds()));
+				videoName.append(".mp4");
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video started.";
+				//TODO What to do if screen gets resized?
+				mSimulationMgr->getVideoWriter().setup(mSimulationMgr,videoName.c_str(),mSimulationMgr->getWindow()->getWidth(),mSimulationMgr->getWindow()->getHeight());
+			}
 		break;
 		case ApplicationKeycode::APPK_EQUALS:
 		// return CEGUI::Key::Equals;

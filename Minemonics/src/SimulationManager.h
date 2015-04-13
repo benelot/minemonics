@@ -165,6 +165,14 @@ public:
 		return mPhysicsController;
 	}
 
+	Ogre3DFFMPEGVideoWriter& getVideoWriter() {
+		return videoWriter;
+	}
+
+	boost::posix_time::time_duration& getRuntime() {
+		return mRuntime;
+	}
+
 	int t;
 	PopulationT<bool> parents;
 	PopulationT<bool> offsprings;
