@@ -9,7 +9,6 @@
 #define MATHGLOBJECT_H_
 
 //# corresponding header
-
 //# forward declarations
 class SimulationManager;
 
@@ -20,7 +19,6 @@ class TextureTarget;
 
 //# system headers
 //## controller headers
-
 //## model headers
 
 //## view headers
@@ -29,15 +27,10 @@ class TextureTarget;
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class MathGLWindow {

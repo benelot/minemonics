@@ -9,15 +9,12 @@
 #include "MathGLWindow.h"
 
 //# forward declarations
-
 //# system headers
 #include <string>
 #include <boost/lexical_cast.hpp>
 
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <Ogre.h>
 #include <CEGUI/System.h>
@@ -32,13 +29,9 @@
 #include "SimulationManager.h"
 
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
