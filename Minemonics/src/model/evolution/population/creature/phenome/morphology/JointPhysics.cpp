@@ -1,12 +1,12 @@
 /*
- * LimbPhysics_test.cpp
+ * JointPhysics.cpp
  *
- *  Created on: Mar 24, 2015
+ *  Created on: Apr 14, 2015
  *      Author: leviathan
  */
 
 //# corresponding header
-#include "LimbPhysics.h"
+#include "JointPhysics.h"
 
 //# forward declarations
 //# system headers
@@ -20,4 +20,13 @@
 //## model headers
 //## view headers
 //## utils headers
+
+JointPhysics::JointPhysics() {
+	// TODO Auto-generated constructor stub
+
+}
+
+JointPhysics::~JointPhysics() {
+	// TODO Auto-generated destructor stub
+}
 

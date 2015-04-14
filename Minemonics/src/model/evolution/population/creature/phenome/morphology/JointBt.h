@@ -8,12 +8,12 @@
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_H_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_H_
 
-
 //# corresponding header
 //# forward declarations
 //# system headers
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
 #include <btBulletDynamicsCommon.h>
 
 //## view headers
@@ -22,25 +22,40 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include "model/evolution/population/creature/phenome/morphology/JointPhysics.h"
+
 //## view headers
 //## utils headers
 
-class JointBt {
+class JointBt: public JointPhysics {
 public:
 	JointBt();
 	virtual ~JointBt();
 
-	void initialize(btRigidBody* bodyA, btRigidBody* bodyB, btVector3 frameInA,
+	void initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB, btVector3 frameInA,
 			btVector3 frameInB);
 
-	void initialize(btRigidBody* bodyA, btRigidBody* bodyB,
+	void initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
 			btTransform& tframeInA, btTransform& tframeInB);
+
+	void addToWorld();
+
+	void removeFromWorld();
 
 	void setLinearLimits(btVector3 linearLowerLimit,
 			btVector3 linearUpperLimit) {
 		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
 		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
 
+	}
+
+	void setAngularLimits(Ogre::Vector3 angularLowerLimit,
+			Ogre::Vector3 angularUpperLimit) {
+		setAngularLimits(
+				btVector3(angularLowerLimit.x, angularLowerLimit.y,
+						angularLowerLimit.z),
+				btVector3(angularUpperLimit.x, angularUpperLimit.y,
+						angularUpperLimit.z));
 	}
 
 	void setAngularLimits(btVector3 angularLowerLimit,
@@ -98,6 +113,7 @@ public:
 
 private:
 	btGeneric6DofSpringConstraint* mG6DofJoint;
+	btDynamicsWorld* mWorld;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_H_ */

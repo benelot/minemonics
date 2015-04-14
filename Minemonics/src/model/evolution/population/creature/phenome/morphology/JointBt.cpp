@@ -31,19 +31,20 @@ JointBt::~JointBt() {
 	// TODO Auto-generated destructor stub
 }
 
-void JointBt::initialize(btRigidBody* bodyA, btRigidBody* bodyB,
+void JointBt::initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
 		btVector3 frameInA, btVector3 frameInB) {
+	mWorld = world;
 	btTransform tframeInA, tframeInB;
 	tframeInA = btTransform::getIdentity();
 	tframeInB = btTransform::getIdentity();
 	tframeInA.setOrigin(frameInA);
 	tframeInB.setOrigin(frameInB);
-	initialize(bodyA, bodyB, tframeInA, tframeInB);
+	initialize(world, bodyA, bodyB, tframeInA, tframeInB);
 }
 
-void JointBt::initialize(btRigidBody* bodyA, btRigidBody* bodyB,
+void JointBt::initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
 		btTransform& tframeInA, btTransform& tframeInB) {
-
+	mWorld = world;
 	mG6DofJoint = new btGeneric6DofSpringConstraint(*bodyA, *bodyB, tframeInA,
 			tframeInB, true/*use fixed frame A for linear limits*/);
 	mG6DofJoint->setLinearLowerLimit(btVector3(0, 0, 0));
@@ -56,4 +57,12 @@ void JointBt::initialize(btRigidBody* bodyA, btRigidBody* bodyB,
 
 	//debug drawing
 	mG6DofJoint->setDbgDrawSize(btScalar(5.f));
+}
+
+void JointBt::addToWorld() {
+	mWorld->addConstraint((btTypedConstraint*) mG6DofJoint, true);
+}
+
+void JointBt::removeFromWorld() {
+	mWorld->removeConstraint((btTypedConstraint*) mG6DofJoint);
 }

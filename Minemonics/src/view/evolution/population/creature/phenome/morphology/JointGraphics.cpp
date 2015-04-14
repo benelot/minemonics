@@ -1,14 +1,13 @@
 /*
- * Joint.h
+ * JointGraphics.cpp
  *
- *  Created on: Nov 17, 2014
+ *  Created on: Apr 14, 2015
  *      Author: leviathan
  */
 
-#ifndef JOINT_H_
-#define JOINT_H_
-
 //# corresponding header
+#include "JointGraphics.h"
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -22,10 +21,12 @@
 //## view headers
 //## utils headers
 
-class Joint {
-public:
-	Joint();
-	virtual ~Joint();
-};
+JointGraphics::JointGraphics() {
+	// TODO Auto-generated constructor stub
 
-#endif /* JOINT_H_ */
+}
+
+JointGraphics::~JointGraphics() {
+	// TODO Auto-generated destructor stub
+}
+
