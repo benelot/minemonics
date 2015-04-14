@@ -40,21 +40,24 @@
 
 Limb::Limb() :
 		mLimbGraphics(NULL), mLimbPhysics(NULL) {
-	// TODO Auto-generated constructor stub
-
 }
 
 Limb::~Limb() {
-	// TODO Auto-generated destructor stub
+	delete mLimbGraphics;
+	delete mLimbPhysics;
 }
 
 void Limb::initialize(SimulationManager* simulationManager,
 		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass) {
-	Component::initialize(Component::Limb);
+	// Define the new component as a limb
+	Component::initialize(Component::LimbComponent);
+
+	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
 	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size);
 
+	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
 	((LimbBt*) mLimbPhysics)->initialize(
 			simulationManager->getPhysicsController().getDynamicsWorld(), type,
@@ -63,27 +66,33 @@ void Limb::initialize(SimulationManager* simulationManager,
 					orientation.w), btVector3(size.x, size.y, size.z),
 			btScalar(mass));
 
+	// Update the state of the limb.
 	update();
-
 }
 
+/**
+ * Update the state of the limb.
+ */
 void Limb::update() {
+	// get the rigid body of the limb
 	btRigidBody* body = ((LimbBt*) mLimbPhysics)->getRigidBody();
 
+	// if the limb's rigid body is existing
 	if (body) {
 
+		// update the position of the limb graphics
 		btVector3 Point = body->getCenterOfMassPosition();
 		mLimbGraphics->setPosition(
 				Ogre::Vector3((float) Point[0], (float) Point[1],
 						(float) Point[2]));
 
-		// Get the Orientation of the rigidbody as a bullet Quaternion
+		// Get the Orientation of the rigid body as a bullet Quaternion
 		// Convert it to an Ogre quaternion
 		btQuaternion btq = body->getOrientation();
 		Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
 				btq.z());
 
-		// Set the orientation of the rendered Object
+		// update the orientation of the limb graphics
 		mLimbGraphics->setOrientation(quart);
 	}
 
@@ -106,25 +115,40 @@ std::string Limb::getInfo() {
 	return text;
 }
 
+/**
+ * Get the Graphics part of the limb.
+ */
 LimbO3D* Limb::getLimbGraphics() {
 	return ((LimbO3D*) mLimbGraphics);
 
 }
 
+/**
+ * Get the Physics part of the limb.
+ */
 LimbBt* Limb::getLimbPhysics() {
 	return ((LimbBt*) mLimbPhysics);
 }
 
+/**
+ * Add the limb to the world.
+ */
 void Limb::addToWorld() {
-	mLimbGraphics->addToWorld();
+	//mLimbGraphics->addToWorld();
 	mLimbPhysics->addToWorld();
 }
 
+/**
+ * Remove the limb from the world.
+ */
 void Limb::removeFromWorld() {
-	mLimbGraphics->removeFromWorld();
+	//mLimbGraphics->removeFromWorld();
 	mLimbPhysics->removeFromWorld();
 }
 
+/**
+ * Get intersection point with the limb graphics given a straight line defined by origin and direction.
+ */
 Ogre::Vector3 Limb::getIntersection(Ogre::Vector3 origin,
 		Ogre::Vector3 direction) {
 	return mLimbGraphics->getIntersection(origin, direction);

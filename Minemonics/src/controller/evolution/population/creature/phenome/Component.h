@@ -27,9 +27,8 @@ public:
 	Component();
 	virtual ~Component();
 
-	enum ComponentType{
-		UnknownComponent,
-		Limb
+	enum ComponentType {
+		UnknownComponent, LimbComponent, JointComponent
 	};
 
 	void initialize(ComponentType componentType);

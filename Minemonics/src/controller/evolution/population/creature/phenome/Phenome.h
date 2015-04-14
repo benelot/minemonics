@@ -19,7 +19,7 @@
 //# forward declarations
 class SimulationManager;
 class Limb;
-class JointBt;
+class Joint;
 
 //# system headers
 //## controller headers
@@ -69,7 +69,7 @@ private:
 	std::vector<Component*> mComponents;
 
 	std::vector<Limb*> mLimbs;
-	std::vector<JointBt*> mJoints;
+	std::vector<Joint*> mJoints;
 
 	btDynamicsWorld* mWorld;
 };

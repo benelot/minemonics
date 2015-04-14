@@ -13,8 +13,8 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <OgreQuaternion.h>
 #include <OgreVector3.h>
+#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers

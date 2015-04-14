@@ -26,13 +26,13 @@
 //## controller headers
 #include "controller/evolution/population/creature/phenome/PhenotypeGenerator.h"
 #include "controller/evolution/population/creature/phenome/morphology/Limb.h"
-#include "controller/evolution/population/creature/phenome/morphology/joint/Joint.h"
+#include "controller/evolution/population/creature/phenome/morphology/Joint.h"
 
 //## model headers
 #include "model/evolution/population/creature/genome/morphology/Morphogene.h"
 #include "model/evolution/population/creature/genome/morphology/MorphogeneBranch.h"
 #include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
-#include "model/evolution/population/creature/phenome/morphology/joint/JointBt.h"
+#include "model/evolution/population/creature/phenome/morphology/JointBt.h"
 #include "model/evolution/population/creature/genome/Gene.h"
 
 //## view headers
@@ -47,7 +47,6 @@ Phenome::Phenome() :
 }
 
 Phenome::~Phenome() {
-	// TODO Auto-generated destructor stub
 }
 
 void Phenome::initialize(SimulationManager* simulationManager) {
@@ -59,7 +58,7 @@ void Phenome::initialize(SimulationManager* simulationManager) {
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
  * @param genome The genome we perform embryogenesis with.
  */
-void Phenome::performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition) {
+void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 	std::list<PhenotypeGenerator*> generatorList;
 	int totalSegmentCounter = 0;
 
@@ -78,7 +77,8 @@ void Phenome::performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition) {
 	// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 	while (!generatorList.empty()) {
 
-		std::cout << "Phenome generator qty:" << generatorList.size() << std::endl;
+		std::cout << "Phenome generator qty:" << generatorList.size()
+				<< std::endl;
 
 		PhenotypeGenerator* generator = generatorList.front();
 		generatorList.pop_front();
@@ -242,16 +242,16 @@ void Phenome::performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition) {
 				localA.getBasis().setEulerZYX(morphogene->getJointPitch(),
 						morphogene->getJointYaw(), morphogene->getJointRoll());
 
-				JointBt* joint = new JointBt();
-				joint->initialize(
-						((Limb*) generator->getParentComponent())->getLimbPhysics()->getRigidBody(),
-						limb->getLimbPhysics()->getRigidBody(), localA, localB);
+				Joint* joint = new Joint();
+				joint->initialize(mSimulationManager,
+						((Limb*) generator->getParentComponent()), limb, localA,
+						localB);
 				joint->setAngularLimits(
-						btVector3(
+						Ogre::Vector3(
 								((MorphogeneBranch*) generator->getGeneBranch())->getJointPitchMinAngle(),
 								((MorphogeneBranch*) generator->getGeneBranch())->getJointYawMinAngle(),
 								((MorphogeneBranch*) generator->getGeneBranch())->getJointRollMinAngle()),
-						btVector3(
+						Ogre::Vector3(
 								((MorphogeneBranch*) generator->getGeneBranch())->getJointPitchMaxAngle(),
 								((MorphogeneBranch*) generator->getGeneBranch())->getJointYawMaxAngle(),
 								((MorphogeneBranch*) generator->getGeneBranch())->getJointRollMaxAngle()));
@@ -328,21 +328,20 @@ void Phenome::addToWorld() {
 	}
 
 	// Add all constraints
-	std::vector<JointBt*>::iterator jit = mJoints.begin();
+	std::vector<Joint*>::iterator jit = mJoints.begin();
 	for (; jit != mJoints.end(); jit++) {
-		mWorld->addConstraint((btTypedConstraint*) (*jit)->getG6DofJoint(),
-				true);
+		(*jit)->addToWorld();
 	}
 }
 
 void Phenome::removeFromWorld() {
 	// Remove all constraints
-	std::vector<JointBt*>::iterator jit = mJoints.begin();
+	std::vector<Joint*>::iterator jit = mJoints.begin();
 	for (; jit != mJoints.end(); jit++) {
-		mWorld->removeConstraint((btTypedConstraint*) (*jit)->getG6DofJoint());
+		(*jit)->removeFromWorld();
 	}
 
-	// Remove all bodies and shapes
+	// Remove all limbs
 	std::vector<Limb*>::iterator lit = mLimbs.begin();
 	for (; lit != mLimbs.end(); lit++) {
 		(*lit)->removeFromWorld();

@@ -8,7 +8,9 @@
 #ifndef LIMBO3D_H_
 #define LIMBO3D_H_
 
-//# corresponding header
+//# corresponding headers
+#include "view/evolution/population/creature/phenome/morphology/LimbGraphics.h"
+
 //# forward declarations
 class SimulationManager;
 
@@ -27,8 +29,6 @@ class SimulationManager;
 //## controller headers
 //## model headers
 //## view headers
-#include "view/evolution/population/creature/phenome/morphology/LimbGraphics.h"
-
 //## utils headers
 
 class LimbO3D: public LimbGraphics {

@@ -8,7 +8,9 @@
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMBBT_H_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMBBT_H_
 
-//# corresponding header
+//# corresponding headers
+#include "model/evolution/population/creature/phenome/morphology/LimbPhysics.h"
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -23,8 +25,6 @@
 
 //## controller headers
 //## model headers
-#include "model/evolution/population/creature/phenome/morphology/LimbPhysics.h"
-
 //## view headers
 //## utils headers
 

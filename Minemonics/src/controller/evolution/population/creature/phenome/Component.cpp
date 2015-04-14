@@ -23,12 +23,9 @@
 
 Component::Component() :
 		mComponentType(UnknownComponent) {
-	// TODO Auto-generated constructor stub
-
 }
 
 Component::~Component() {
-	// TODO Auto-generated destructor stub
 }
 
 void Component::initialize(ComponentType componentType) {

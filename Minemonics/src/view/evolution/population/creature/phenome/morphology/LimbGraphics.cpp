@@ -22,10 +22,7 @@
 //## utils headers
 
 LimbGraphics::LimbGraphics() {
-	// TODO Auto-generated constructor stub
-
 }
 
 LimbGraphics::~LimbGraphics() {
-	// TODO Auto-generated destructor stub
 }

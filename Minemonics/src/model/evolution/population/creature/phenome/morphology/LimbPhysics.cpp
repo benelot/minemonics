@@ -22,11 +22,8 @@
 //## utils headers
 
 LimbPhysics::LimbPhysics() {
-	// TODO Auto-generated constructor stub
-
 }
 
 LimbPhysics::~LimbPhysics() {
-	// TODO Auto-generated destructor stub
 }
 

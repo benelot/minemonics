@@ -6,14 +6,19 @@
  *
  */
 
-#ifndef LIMB_H_
-#define LIMB_H_
+#ifndef CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_H_
+#define CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_H_
 
-//# corresponding header
+//# corresponding headers
+#include "controller/evolution/population/creature/phenome/Component.h"
+
 //# forward declarations
 class SimulationManager;
-class LimbBt;
+
 class LimbO3D;
+
+class LimbPhysics;
+class LimbBt;
 
 //# system headers
 #include <string>
@@ -30,11 +35,7 @@ class LimbO3D;
 #include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
-#include "controller/evolution/population/creature/phenome/Component.h"
-
 //## model headers
-#include "model/evolution/population/creature/phenome/morphology/LimbPhysics.h"
-
 //## view headers
 #include "view/evolution/population/creature/phenome/morphology/LimbGraphics.h"
 
@@ -75,4 +76,4 @@ private:
 	LimbGraphics* mLimbGraphics;
 };
 
-#endif /* LIMB_H_ */
+#endif /* CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_H_ */
