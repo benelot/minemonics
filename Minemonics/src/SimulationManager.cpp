@@ -157,16 +157,16 @@ void SimulationManager::createFrameListener(void) {
 //		mRagdolls.push_back(ragdoll);
 //		ragdoll->addToWorld();
 
-		Creature* creature = new Creature();
-
-		creature->initialize(this,
-				Ogre::Vector3(randomness.nextDouble(-5000, 5000),
-						randomness.nextDouble(10, 5000),
-						randomness.nextDouble(-5000, 5000)),
-				randomness.nextDouble(0, 30));
-		creature->performEmbryogenesis();
-		mCreatures.push_back(creature);
-		creature->addToWorld();
+//		Creature* creature = new Creature();
+//
+//		creature->initialize(this,
+//				Ogre::Vector3(randomness.nextDouble(-5000, 5000),
+//						randomness.nextDouble(10, 5000),
+//						randomness.nextDouble(-5000, 5000)),
+//				randomness.nextDouble(0, 30));
+//		creature->performEmbryogenesis();
+//		mCreatures.push_back(creature);
+//		creature->addToWorld();
 	}
 }
 

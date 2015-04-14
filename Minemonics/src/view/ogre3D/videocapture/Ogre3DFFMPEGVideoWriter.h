@@ -78,7 +78,7 @@ public:
      * @param the bitrate
      * @param the framerate
      **/
-    void setup(SimulationManager* simulationManager, const char* filename, int width, int height, int bitrate = 10000000);
+    void setup(SimulationManager* simulationManager, const char* filename, int width, int height, int bitrate = 800000,float timebasefactor=200);
     /**
      * add a frame to the video file
      * @param pixels the pixels packed in RGB (24-bit RGBRGBRGB...)
@@ -101,6 +101,7 @@ private:
 	boost::posix_time::ptime mStart;
 	boost::posix_time::ptime mNow;
 	boost::posix_time::time_duration mRuntime;
+	float mTimebasefactor;
 };
 
 #endif /* defined(__ofxFFMPEGVideoWriter__) */

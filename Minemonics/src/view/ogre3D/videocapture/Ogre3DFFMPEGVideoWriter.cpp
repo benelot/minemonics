@@ -41,8 +41,9 @@ extern "C" {
 #include "Ogre3DFFMPEGVideoWriter.h"
 
 void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
-		const char* filename, int width, int height, int bitrate) {
+		const char* filename, int width, int height, int bitrate,float timebasefactor) {
 
+	mTimebasefactor = timebasefactor;
 	// main frame timer initialization
 	mStart = boost::posix_time::microsec_clock::local_time();
 	mNow = boost::posix_time::microsec_clock::local_time();
@@ -137,7 +138,7 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 		c->width = width;
 		c->height = height;
 		// frames per second
-		video_st->time_base = (AVRational ) { 1, 1000 };
+		video_st->time_base = (AVRational ) { 1, timebasefactor };
 		c->time_base = video_st->time_base;
 		c->pix_fmt = supported_pix_fmt;
 //        c->gop_size = 10; // emit one intra frame every ten frames
@@ -282,6 +283,8 @@ void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest, long int timestamp) {
 			picture->pts += av_rescale_q(1, video_st->codec->time_base,
 					video_st->time_base);
 		} else {
+			std::cout << "pts::" << picture->pts << "/avrescale::" << av_rescale_q(timestamp, video_st->codec->time_base,
+					video_st->time_base) << std::endl;
 			picture->pts += av_rescale_q(timestamp, video_st->codec->time_base,
 					video_st->time_base);
 		}
@@ -333,8 +336,8 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 
 		//TODO: If video colors are wrong in the video, check the value of
 		// pb.format in OgrePixelFormat.h and set picture_rgb24->format in setup accordingly
-		//std::cout << "mRuntime::" << mRuntime.total_milliseconds() << std::endl;
-		addFrame(pDest, mRuntime.total_milliseconds());
+		std::cout << "diff::" << mRuntime.total_milliseconds()/(0.5f*1000.0f/mTimebasefactor) << std::endl;
+		addFrame(pDest, mRuntime.total_milliseconds()/(0.5f*1000.0f/mTimebasefactor));
 		mStart = boost::posix_time::microsec_clock::local_time();
 
 		buffer->unlock();
