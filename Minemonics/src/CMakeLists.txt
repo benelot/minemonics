@@ -262,7 +262,8 @@ set(MODELHDRS
 	## phenome
 	./model/evolution/population/creature/phenome/morphology/LimbPhysics.h
 	./model/evolution/population/creature/phenome/morphology/LimbBt.h
-	./model/evolution/population/creature/phenome/morphology/joint/JointBt.h
+	./model/evolution/population/creature/phenome/morphology/JointPhysics.h
+	./model/evolution/population/creature/phenome/morphology/JointBt.h
 )
 set(MODELSRCS
     # model
@@ -291,7 +292,8 @@ set(MODELSRCS
 	## phenome
 	./model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp
 	./model/evolution/population/creature/phenome/morphology/LimbBt.cpp
-	./model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
+    ./model/evolution/population/creature/phenome/morphology/JointPhysics.cpp
+	./model/evolution/population/creature/phenome/morphology/JointBt.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -325,6 +327,7 @@ set(CONTROLLERHDRS
     ./controller/evolution/population/creature/phenome/Phenome.h
     ./controller/evolution/population/creature/phenome/Component.h
     ./controller/evolution/population/creature/phenome/morphology/Limb.h
+    ./controller/evolution/population/creature/phenome/morphology/Joint.h
 )
 set(CONTROLLERSRCS
 	# controller
@@ -354,6 +357,7 @@ set(CONTROLLERSRCS
     ./controller/evolution/population/creature/phenome/Phenome.cpp
     ./controller/evolution/population/creature/phenome/Component.cpp
     ./controller/evolution/population/creature/phenome/morphology/Limb.cpp
+    ./controller/evolution/population/creature/phenome/morphology/Joint.cpp
 )
 set(VIEWHDRS
 	# view
@@ -368,6 +372,8 @@ set(VIEWHDRS
 	## creature
     ./view/evolution/population/creature/phenome/morphology/LimbGraphics.h
 	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h
+	./view/evolution/population/creature/phenome/morphology/JointGraphics.h
+	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.h
 	
 	## physics debug drawing
 	./view/ogre3D/bullet/OgreDebugDrawer.h
@@ -432,6 +438,8 @@ set(VIEWSRCS
 	## creatures
 	./view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp
 	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp
+	./view/evolution/population/creature/phenome/morphology/JointGraphics.cpp
+	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp
 	
 	## physics debug drawing
 	./view/ogre3D/bullet/OgreDebugDrawer.cpp
@@ -483,10 +491,8 @@ set(MISCHDRS
 	./configuration/CameraConfiguration.h
 	./configuration/ControlConfiguration.h
 	./configuration/PhysicsConfiguration.h
-	#./configuration/NeuralNetworkConfiguration.h
 	./configuration/MorphologyConfiguration.h
 	./configuration/GeneticsConfiguration.h
-	#./configuration/FitnessConfiguration.h
 	./configuration/EnvironmentConfiguration.h
 	./configuration/EvolutionConfiguration.h
 	./configuration/PopulationConfiguration.h
@@ -521,6 +527,7 @@ set(TESTSRCS
     
     ## unit test cases
     ## (unit tests usually only test the model)
+    ## therefore it should never be necessary to include the srcs from view and controller above
     ./model/evolution/juries/Velocity_test.cpp
     ./model/evolution/juries/Ones_test.cpp
     ./model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp

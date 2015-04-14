@@ -165,7 +165,7 @@ public:
 	}
 
 	Ogre3DFFMPEGVideoWriter& getVideoWriter() {
-		return videoWriter;
+		return mVideoWriter;
 	}
 
 	boost::posix_time::time_duration& getRuntime() {
@@ -195,7 +195,7 @@ protected:
 
 	InfoOverlay mInfoOverlay;
 
-	Ogre3DFFMPEGVideoWriter videoWriter;
+	Ogre3DFFMPEGVideoWriter mVideoWriter;
 
 	virtual void createScene(void);
 	virtual void createFrameListener(void);

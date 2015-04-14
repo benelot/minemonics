@@ -142,7 +142,7 @@ void SimulationManager::createFrameListener(void) {
 	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
 	mDebugDrawer->setDebugMode(
 			btIDebugDraw::DBG_DrawWireframe + btIDebugDraw::DBG_DrawConstraints
-					+ btIDebugDraw::DBG_DrawConstraintLimits);
+					+ btIDebugDraw::DBG_DrawConstraintLimits + btIDebugDraw::DBG_DrawContactPoints + btIDebugDraw::DBG_DrawNormals);
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
@@ -157,16 +157,16 @@ void SimulationManager::createFrameListener(void) {
 //		mRagdolls.push_back(ragdoll);
 //		ragdoll->addToWorld();
 
-//		Creature* creature = new Creature();
-//
-//		creature->initialize(this,
-//				Ogre::Vector3(randomness.nextDouble(-5000, 5000),
-//						randomness.nextDouble(10, 5000),
-//						randomness.nextDouble(-5000, 5000)),
-//				randomness.nextDouble(0, 30));
-//		creature->performEmbryogenesis();
-//		mCreatures.push_back(creature);
-//		creature->addToWorld();
+		Creature* creature = new Creature();
+
+		creature->initialize(this,
+				Ogre::Vector3(randomness.nextDouble(-5000, 5000),
+						randomness.nextDouble(10, 5000),
+						randomness.nextDouble(-5000, 5000)),
+				randomness.nextDouble(0, 30));
+		creature->performEmbryogenesis();
+		mCreatures.push_back(creature);
+		creature->addToWorld();
 	}
 }
 
@@ -178,8 +178,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mRuntime = mNow - mStart;
 
 	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN) {
-		if (videoWriter.isInitialized()) {
-			videoWriter.close();
+		if (mVideoWriter.isInitialized()) {
+			mVideoWriter.close();
 		}
 		return false;
 	}
@@ -472,7 +472,6 @@ void SimulationManager::createScene(void) {
 	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
 	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
-
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 // ###################
@@ -584,11 +583,6 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 #else
 	mWindow->windowMovedOrResized();
 #endif
-//#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-//	mWindow->resize(width, height);
-//#else
-//	mWindow->windowMovedOrResized();
-//#endif
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
@@ -615,8 +609,6 @@ CEGUI::System*& SimulationManager::getCEGUISystem() {
 }
 
 bool SimulationManager::configure(void) {
-
-	//mGraphicsSystem.initialize(ApplicationConfiguration::APPLICATION_TITLE,this);
 
 	mInputHandler.initialize(&mStateHandler, this);
 

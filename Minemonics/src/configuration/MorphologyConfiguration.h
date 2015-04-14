@@ -118,7 +118,7 @@ public:
 	/**
 	 * The length of a joint from the anchor point to the joint rotation point.
 	 */
-	static const double JOINT_LENGTH = 100;
+	static const double JOINT_LENGTH = 10;
 
 	/**
 	 * The initial branch number mean

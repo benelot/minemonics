@@ -24,11 +24,10 @@
 
 //## controller headers
 #include "controller/evolution/population/creature/phenome/morphology/Limb.h"
-#include "controller/evolution/population/creature/phenome/morphology/joint/Joint.h"
+#include "controller/evolution/population/creature/phenome/morphology/Joint.h"
 
 //## model headers
 #include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
-#include "model/evolution/population/creature/phenome/morphology/joint/JointBt.h"
 
 //## view headers
 //## utils headers
@@ -260,7 +259,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	}
 
 ////	 Now setup the constraints
-	JointBt* joint;
+	Joint* joint;
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -273,12 +272,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.15),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(mLimbs[BODYPART_PELVIS]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_SPINE]->getLimbPhysics()->getRigidBody(), localA,
-			localB);
-	joint->setAngularLimits(btVector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
-			btVector3(0.2 * M_PI, M_PI_2, M_PI_2));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_PELVIS],
+			mLimbs[BODYPART_SPINE], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
+			Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -292,12 +290,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.14),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(mLimbs[BODYPART_SPINE]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_HEAD]->getLimbPhysics()->getRigidBody(), localA,
-			localB);
-	joint->setAngularLimits(btVector3(-M_PI_4, -M_PI_4, -M_PI_2),
-			btVector3(M_PI_4, M_PI_4, M_PI_2));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_SPINE],
+			mLimbs[BODYPART_HEAD], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, -M_PI_2),
+			Ogre::Vector3(M_PI_4, M_PI_4, M_PI_2));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -311,12 +308,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.225),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(mLimbs[BODYPART_PELVIS]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_LEFT_UPPER_LEG]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(-M_PI_4, -M_PI_4, 0),
-			btVector3(M_PI_4, M_PI_4, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_PELVIS],
+			mLimbs[BODYPART_LEFT_UPPER_LEG], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
+			Ogre::Vector3(M_PI_4, M_PI_4, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -330,12 +326,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.185),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(
-			mLimbs[BODYPART_LEFT_UPPER_LEG]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_LEFT_LOWER_LEG]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(0, M_PI_2, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_LEFT_UPPER_LEG],
+			mLimbs[BODYPART_LEFT_LOWER_LEG], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(0, M_PI_2, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -349,12 +344,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.225),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(mLimbs[BODYPART_PELVIS]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_RIGHT_UPPER_LEG]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(-M_PI_4, -M_PI_4, 0),
-			btVector3(M_PI_4, M_PI_4, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_PELVIS],
+			mLimbs[BODYPART_RIGHT_UPPER_LEG], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
+			Ogre::Vector3(M_PI_4, M_PI_4, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -368,12 +362,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.185),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(
-			mLimbs[BODYPART_RIGHT_UPPER_LEG]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_RIGHT_LOWER_LEG]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(0, M_PI_2, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_RIGHT_UPPER_LEG],
+			mLimbs[BODYPART_RIGHT_LOWER_LEG], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(0, M_PI_2, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -387,12 +380,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.18),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(mLimbs[BODYPART_SPINE]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_LEFT_UPPER_ARM]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(-M_PI_2, -M_PI_2, 0),
-			btVector3(M_PI_2, M_PI_2, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_SPINE],
+			mLimbs[BODYPART_LEFT_UPPER_ARM], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, 0),
+			Ogre::Vector3(M_PI_2, M_PI_2, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -406,12 +398,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.14),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(
-			mLimbs[BODYPART_LEFT_UPPER_ARM]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_LEFT_LOWER_ARM]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(M_PI_2, 0, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_LEFT_UPPER_ARM],
+			mLimbs[BODYPART_LEFT_LOWER_ARM], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(M_PI_2, 0, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -425,12 +416,11 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.18),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(mLimbs[BODYPART_SPINE]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_RIGHT_UPPER_ARM]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(-M_PI_2, -M_PI_2, 0),
-			btVector3(M_PI_2, M_PI_2, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_SPINE],
+			mLimbs[BODYPART_RIGHT_UPPER_ARM], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, 0),
+			Ogre::Vector3(M_PI_2, M_PI_2, 0));
 	mJoints.push_back(joint);
 
 	localA.setIdentity();
@@ -444,33 +434,32 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.14),
 					btScalar(size * 0.)));
 
-	joint = new JointBt();
-	joint->initialize(
-			mLimbs[BODYPART_RIGHT_UPPER_ARM]->getLimbPhysics()->getRigidBody(),
-			mLimbs[BODYPART_RIGHT_LOWER_ARM]->getLimbPhysics()->getRigidBody(),
-			localA, localB);
-	joint->setAngularLimits(btVector3(0, 0, 0), btVector3(M_PI_2, 0, 0));
+	joint = new Joint();
+	joint->initialize(simulationManager, mLimbs[BODYPART_RIGHT_UPPER_ARM],
+			mLimbs[BODYPART_RIGHT_LOWER_ARM], localA, localB);
+	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(M_PI_2, 0, 0));
 	mJoints.push_back(joint);
 }
 
 RagDoll::~RagDoll() {
-	int i;
 
-	// Remove all constraints
-	for (i = 0; i < JOINT_COUNT; ++i) {
-		mWorld->removeConstraint(
-				(btTypedConstraint*) mJoints[i]->getG6DofJoint());
+	// remove all constraints, bodies and shapes from world
+	removeFromWorld();
+
+	// delete all constraints
+	for (int i = 0; i < JOINT_COUNT; ++i) {
 		delete mJoints[i];
 	}
 
 	mJoints.clear();
 
-	// Remove all bodies and shapes
-	for (i = 0; i < BODYPART_COUNT; ++i) {
-		mWorld->removeRigidBody(mLimbs[i]->getLimbPhysics()->getRigidBody());
-
+	// delete all bodies and shapes
+	for (int i = 0; i < BODYPART_COUNT; ++i) {
 		delete mLimbs[i];
 	}
+
+	mLimbs.clear();
 }
 
 void RagDoll::update() {
@@ -482,29 +471,29 @@ void RagDoll::update() {
 
 void RagDoll::addToWorld() {
 	// Add all limbs
-	std::vector<Limb*>::iterator it = mLimbs.begin();
-	for (; it != mLimbs.end(); it++) {
-		(*it)->addToWorld();
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->addToWorld();
 	}
 
 	// Add all constraints
-	for (int i = 0; i < JOINT_COUNT; ++i) {
-		mWorld->addConstraint((btTypedConstraint*) mJoints[i]->getG6DofJoint(),
-				true);
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->addToWorld();
 	}
 }
 
 void RagDoll::removeFromWorld() {
 	// Remove all constraints
-	for (int i = 0; i < JOINT_COUNT; ++i) {
-		mWorld->removeConstraint(
-				(btTypedConstraint*) mJoints[i]->getG6DofJoint());
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->removeFromWorld();
 	}
 
-	// Remove all bodies and shapes
-	std::vector<Limb*>::iterator it = mLimbs.begin();
-	for (; it != mLimbs.end(); it++) {
-		(*it)->removeFromWorld();
+	// Remove all limbs
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->removeFromWorld();
 	}
 }
 

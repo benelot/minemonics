@@ -418,6 +418,30 @@ controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp.s
 .PHONY : controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp.s
 
+controller/evolution/population/creature/phenome/morphology/Joint.o: controller/evolution/population/creature/phenome/morphology/Joint.cpp.o
+.PHONY : controller/evolution/population/creature/phenome/morphology/Joint.o
+
+# target to build an object file
+controller/evolution/population/creature/phenome/morphology/Joint.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/morphology/Joint.cpp.o
+.PHONY : controller/evolution/population/creature/phenome/morphology/Joint.cpp.o
+
+controller/evolution/population/creature/phenome/morphology/Joint.i: controller/evolution/population/creature/phenome/morphology/Joint.cpp.i
+.PHONY : controller/evolution/population/creature/phenome/morphology/Joint.i
+
+# target to preprocess a source file
+controller/evolution/population/creature/phenome/morphology/Joint.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/morphology/Joint.cpp.i
+.PHONY : controller/evolution/population/creature/phenome/morphology/Joint.cpp.i
+
+controller/evolution/population/creature/phenome/morphology/Joint.s: controller/evolution/population/creature/phenome/morphology/Joint.cpp.s
+.PHONY : controller/evolution/population/creature/phenome/morphology/Joint.s
+
+# target to generate assembly for a file
+controller/evolution/population/creature/phenome/morphology/Joint.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/evolution/population/creature/phenome/morphology/Joint.cpp.s
+.PHONY : controller/evolution/population/creature/phenome/morphology/Joint.cpp.s
+
 controller/evolution/population/creature/phenome/morphology/Limb.o: controller/evolution/population/creature/phenome/morphology/Limb.cpp.o
 .PHONY : controller/evolution/population/creature/phenome/morphology/Limb.o
 
@@ -1186,6 +1210,60 @@ model/evolution/population/creature/genome/morphology/Morphogene_test.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/genome/morphology/Morphogene_test.cpp.s
 .PHONY : model/evolution/population/creature/genome/morphology/Morphogene_test.cpp.s
 
+model/evolution/population/creature/phenome/morphology/JointBt.o: model/evolution/population/creature/phenome/morphology/JointBt.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/JointBt.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/morphology/JointBt.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/JointBt.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/JointBt.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/JointBt.cpp.o
+
+model/evolution/population/creature/phenome/morphology/JointBt.i: model/evolution/population/creature/phenome/morphology/JointBt.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/JointBt.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/morphology/JointBt.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/JointBt.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/JointBt.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/JointBt.cpp.i
+
+model/evolution/population/creature/phenome/morphology/JointBt.s: model/evolution/population/creature/phenome/morphology/JointBt.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/JointBt.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/morphology/JointBt.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/JointBt.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/JointBt.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/JointBt.cpp.s
+
+model/evolution/population/creature/phenome/morphology/JointPhysics.o: model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/JointPhysics.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.o
+
+model/evolution/population/creature/phenome/morphology/JointPhysics.i: model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/JointPhysics.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.i
+
+model/evolution/population/creature/phenome/morphology/JointPhysics.s: model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/JointPhysics.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/JointPhysics.cpp.s
+
 model/evolution/population/creature/phenome/morphology/LimbBt.o: model/evolution/population/creature/phenome/morphology/LimbBt.cpp.o
 .PHONY : model/evolution/population/creature/phenome/morphology/LimbBt.o
 
@@ -1239,33 +1317,6 @@ model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.s
 .PHONY : model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp.s
-
-model/evolution/population/creature/phenome/morphology/joint/JointBt.o: model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
-.PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.o
-
-# target to build an object file
-model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
-.PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
-
-model/evolution/population/creature/phenome/morphology/joint/JointBt.i: model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
-.PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.i
-
-# target to preprocess a source file
-model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
-.PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
-
-model/evolution/population/creature/phenome/morphology/joint/JointBt.s: model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
-.PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.s
-
-# target to generate assembly for a file
-model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
-.PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
 
 test/TestRunner.o: test/TestRunner.cpp.o
 .PHONY : test/TestRunner.o
@@ -1516,6 +1567,30 @@ view/environments/EnvironmentGraphics.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/environments/EnvironmentGraphics.cpp.s
 .PHONY : view/environments/EnvironmentGraphics.cpp.s
 
+view/evolution/population/creature/phenome/morphology/JointGraphics.o: view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.o
+.PHONY : view/evolution/population/creature/phenome/morphology/JointGraphics.o
+
+# target to build an object file
+view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.o
+.PHONY : view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.o
+
+view/evolution/population/creature/phenome/morphology/JointGraphics.i: view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.i
+.PHONY : view/evolution/population/creature/phenome/morphology/JointGraphics.i
+
+# target to preprocess a source file
+view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.i
+.PHONY : view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.i
+
+view/evolution/population/creature/phenome/morphology/JointGraphics.s: view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.s
+.PHONY : view/evolution/population/creature/phenome/morphology/JointGraphics.s
+
+# target to generate assembly for a file
+view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.s
+.PHONY : view/evolution/population/creature/phenome/morphology/JointGraphics.cpp.s
+
 view/evolution/population/creature/phenome/morphology/LimbGraphics.o: view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp.o
 .PHONY : view/evolution/population/creature/phenome/morphology/LimbGraphics.o
 
@@ -1683,6 +1758,30 @@ view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.s: view/ogre3
 view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s
 .PHONY : view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s
+
+view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.o: view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.o
+.PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.o
+
+# target to build an object file
+view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.o
+.PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.o
+
+view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.i: view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.i
+.PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.i
+
+# target to preprocess a source file
+view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.i
+.PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.i
+
+view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.s: view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.s
+.PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.s
+
+# target to generate assembly for a file
+view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.s
+.PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp.s
 
 view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.o: view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp.o
 .PHONY : view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.o
@@ -2401,6 +2500,9 @@ help:
 	@echo "... controller/evolution/population/creature/phenome/PhenotypeGenerator.o"
 	@echo "... controller/evolution/population/creature/phenome/PhenotypeGenerator.i"
 	@echo "... controller/evolution/population/creature/phenome/PhenotypeGenerator.s"
+	@echo "... controller/evolution/population/creature/phenome/morphology/Joint.o"
+	@echo "... controller/evolution/population/creature/phenome/morphology/Joint.i"
+	@echo "... controller/evolution/population/creature/phenome/morphology/Joint.s"
 	@echo "... controller/evolution/population/creature/phenome/morphology/Limb.o"
 	@echo "... controller/evolution/population/creature/phenome/morphology/Limb.i"
 	@echo "... controller/evolution/population/creature/phenome/morphology/Limb.s"
@@ -2491,15 +2593,18 @@ help:
 	@echo "... model/evolution/population/creature/genome/morphology/Morphogene_test.o"
 	@echo "... model/evolution/population/creature/genome/morphology/Morphogene_test.i"
 	@echo "... model/evolution/population/creature/genome/morphology/Morphogene_test.s"
+	@echo "... model/evolution/population/creature/phenome/morphology/JointBt.o"
+	@echo "... model/evolution/population/creature/phenome/morphology/JointBt.i"
+	@echo "... model/evolution/population/creature/phenome/morphology/JointBt.s"
+	@echo "... model/evolution/population/creature/phenome/morphology/JointPhysics.o"
+	@echo "... model/evolution/population/creature/phenome/morphology/JointPhysics.i"
+	@echo "... model/evolution/population/creature/phenome/morphology/JointPhysics.s"
 	@echo "... model/evolution/population/creature/phenome/morphology/LimbBt.o"
 	@echo "... model/evolution/population/creature/phenome/morphology/LimbBt.i"
 	@echo "... model/evolution/population/creature/phenome/morphology/LimbBt.s"
 	@echo "... model/evolution/population/creature/phenome/morphology/LimbPhysics.o"
 	@echo "... model/evolution/population/creature/phenome/morphology/LimbPhysics.i"
 	@echo "... model/evolution/population/creature/phenome/morphology/LimbPhysics.s"
-	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.o"
-	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.i"
-	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.s"
 	@echo "... test/TestRunner.o"
 	@echo "... test/TestRunner.i"
 	@echo "... test/TestRunner.s"
@@ -2530,6 +2635,9 @@ help:
 	@echo "... view/environments/EnvironmentGraphics.o"
 	@echo "... view/environments/EnvironmentGraphics.i"
 	@echo "... view/environments/EnvironmentGraphics.s"
+	@echo "... view/evolution/population/creature/phenome/morphology/JointGraphics.o"
+	@echo "... view/evolution/population/creature/phenome/morphology/JointGraphics.i"
+	@echo "... view/evolution/population/creature/phenome/morphology/JointGraphics.s"
 	@echo "... view/evolution/population/creature/phenome/morphology/LimbGraphics.o"
 	@echo "... view/evolution/population/creature/phenome/morphology/LimbGraphics.i"
 	@echo "... view/evolution/population/creature/phenome/morphology/LimbGraphics.s"
@@ -2551,6 +2659,9 @@ help:
 	@echo "... view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.o"
 	@echo "... view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.i"
 	@echo "... view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.s"
+	@echo "... view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.o"
+	@echo "... view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.i"
+	@echo "... view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.s"
 	@echo "... view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.o"
 	@echo "... view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.i"
 	@echo "... view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.s"

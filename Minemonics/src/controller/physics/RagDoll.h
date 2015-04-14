@@ -27,8 +27,6 @@ class Joint;
 //## configuration headers
 //## controller headers
 //## model headers
-#include "model/evolution/population/creature/phenome/morphology/joint/JointBt.h"
-
 //## view headers
 //## utils headers
 
@@ -62,7 +60,7 @@ class RagDoll {
 	};
 
 	std::vector<Limb*> mLimbs;
-	std::vector<JointBt*> mJoints;
+	std::vector<Joint*> mJoints;
 
 	btDynamicsWorld* mWorld;
 
