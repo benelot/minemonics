@@ -215,7 +215,7 @@ include_directories(${Shark2_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
 
 ######################################################################
-# Bullet physics
+# Bullet 3 physics libary
 ######################################################################
 
 find_package(Bullet REQUIRED)

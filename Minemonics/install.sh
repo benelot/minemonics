@@ -10,7 +10,6 @@
 sudo apt-get install build-essential automake libtool # compiler and configuration tools
 sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev libxaw7-dev freeglut3-dev libgl1-mesa-dev libglu1-mesa-dev nvidia-cg-dev # required dependencies
 sudo apt-get install libsdl2-dev # install sdl2 for the input system
-#sudo apt-get install libois-dev # install OIS
 sudo apt-get install libboost-all-dev # because I need a lot of boost libraries
 mkdir ogre1.9
 cd ogre1.9
@@ -20,19 +19,19 @@ cd build
 sudo ln -s /usr/include/freetype2/ /usr/include/freetype # FIX: because cmake can not find freetype2 because it searches for freetype
 # configure make files with cmake
 cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ..
-make -j4 # because I have 4 cores for parallel compilation
+make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
 cd ../..
 
-# Bullet
-tar xvzf bullet-2.82-r2704.tgz
-cd bullet-2.82-r2704
+# Bullet Physics 3
+git clone https://github.com/bulletphysics/bullet3.git
+cd bullet3
 mkdir build
 cd build
 # configure make files with cmake
-cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RelWithDebugInfo -DBUILD_EXTRAS=ON -DINSTALL_EXTRA_LIBS=ON ..
-make -j4 # because I have 4 cores for parallel compilation
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET2_DEMOS=ON -DBUILD_BULLET3=ON -DBUILD_EXTRAS=ON -DINSTALL_EXTRA_LIBS=ON ..
+make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
 
@@ -51,7 +50,7 @@ cd build
 # cmake -G"Eclipse CDT4 - Unix Makefiles" -D OPT_ENABLE_ATLAS=ON -D OPT_ENABLE_OPENMP=ON -D CMAKE_BUILD_TYPE=Release .. # I could not make it to work with Atlas LAPACK undefined reference to "clapack_dpotrf"
 #cmake -G"Eclipse CDT4 - Unix Makefiles" -D OPT_ENABLE_OPENMP=ON -D CMAKE_BUILD_TYPE=Release ..
 cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ..
-make -j4 # because I have 4 cores for parallel compilation
+make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
 
@@ -65,7 +64,7 @@ hg clone https://underworldguardian@bitbucket.org/cegui/cegui
 mkdir build
 cd build
 cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=off ..
-make -j4 # because I have 4 cores for parallel compilation
+make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
 
