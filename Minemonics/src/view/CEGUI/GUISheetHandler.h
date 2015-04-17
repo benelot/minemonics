@@ -1,6 +1,5 @@
 #pragma once
 //# corresponding header
-
 //# forward declarations
 class SimulationManager;
 
@@ -13,23 +12,16 @@ class StateHandler;
 
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <CEGUI/Window.h>
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 class GUISheetHandler {

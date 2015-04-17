@@ -2,26 +2,18 @@
 #include "ParamsPanel.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
 #include "configuration/CEGUIConfiguration.h"
 
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 ParamsPanel::ParamsPanel(int left, int top, std::string name, int width,

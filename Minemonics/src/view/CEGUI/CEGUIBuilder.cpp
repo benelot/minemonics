@@ -9,12 +9,9 @@
 #include "CEGUIBuilder.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <CEGUI/System.h>
 #include <CEGUI/InputEvent.h>
@@ -31,14 +28,11 @@
 #include "configuration/CEGUIConfiguration.h"
 
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include "view/CEGUI/ParamsPanel.h"
 
 //## utils headers
-
 // CEGUI includes
 
 CEGUIBuilder::CEGUIBuilder(SimulationManager* simulationMgr) {

@@ -1601,24 +1601,24 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/ogre3D/bullet/OgreDebugDrawer.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/ogre3D/bullet/OgreBtDebugDrawer.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/ogre3D/bullet/OgreDebugDrawer.cpp.o</buildTarget>
+<buildTarget>view/ogre3D/bullet/OgreBtDebugDrawer.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/ogre3D/bullet/OgreDebugDrawer.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/ogre3D/bullet/OgreBtDebugDrawer.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/ogre3D/bullet/OgreDebugDrawer.cpp.i</buildTarget>
+<buildTarget>view/ogre3D/bullet/OgreBtDebugDrawer.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/ogre3D/bullet/OgreDebugDrawer.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/ogre3D/bullet/OgreBtDebugDrawer.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/ogre3D/bullet/OgreDebugDrawer.cpp.s</buildTarget>
+<buildTarget>view/ogre3D/bullet/OgreBtDebugDrawer.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>

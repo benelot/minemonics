@@ -2,12 +2,9 @@
 #include "GUISheetHandler.h"
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <CEGUI/System.h>
 #include <CEGUI/Window.h>
@@ -19,14 +16,11 @@
 #include "SimulationManager.h"
 
 //## configuration headers
-
 //## controller headers
 #include "controller/StateHandler.h"
 
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 GUISheetHandler::GUISheetHandler() :

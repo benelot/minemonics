@@ -294,9 +294,9 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] OgreApp/Source Files/OgreDebugDrawer.cpp</name>
+			<name>[Targets]/[exe] OgreApp/Source Files/OgreBtDebugDrawer.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreDebugDrawer.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreBtDebugDrawer.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/InfoOverlay.cpp</name>
@@ -709,14 +709,14 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.h</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] OgreApp/Header Files/OgreDebugDrawer.h</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreDebugDrawer.h</location>
-		</link>
-		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/OgreBulletUtils.h</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreBulletUtils.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/OgreBtDebugDrawer.h</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreBtDebugDrawer.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/InfoOverlay.h</name>
