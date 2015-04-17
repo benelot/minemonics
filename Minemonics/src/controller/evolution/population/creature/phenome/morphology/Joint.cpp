@@ -50,7 +50,8 @@ void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 
 	// initialize the graphics part of the joint
 	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize(simulationManager);
+	((JointO3D*) mJointGraphics)->initialize(simulationManager, limbA, limbB,
+			localA, localB);
 
 	// initialize the physics model of the joint
 	mJointPhysics = new JointBt();
@@ -64,7 +65,7 @@ void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 }
 
 void Joint::update() {
-
+	mJointGraphics->update();
 }
 
 /**

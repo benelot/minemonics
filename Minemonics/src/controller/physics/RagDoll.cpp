@@ -463,9 +463,14 @@ RagDoll::~RagDoll() {
 }
 
 void RagDoll::update() {
-	std::vector<Limb*>::iterator it = mLimbs.begin();
-	for (; it != mLimbs.end(); it++) {
-		(*it)->update();
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->update();
+	}
+
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->update();
 	}
 }
 

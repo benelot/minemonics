@@ -77,8 +77,8 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 	// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 	while (!generatorList.empty()) {
 
-		std::cout << "Phenome generator qty:" << generatorList.size()
-				<< std::endl;
+//		std::cout << "Phenome generator qty:" << generatorList.size()
+//				<< std::endl;
 
 		PhenotypeGenerator* generator = generatorList.front();
 		generatorList.pop_front();
@@ -215,7 +215,6 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 							* morphogene->getY()
 							* generator->getCurrentShrinkageFactor()
 							* morphogene->getZ());
-			//limb->addToWorld();
 			mLimbs.push_back(limb);
 
 			if (generator->getParentComponent() != NULL) {
@@ -314,9 +313,16 @@ void Phenome::transcribeGene(Gene* gene) {
 }
 
 void Phenome::update() {
-	std::vector<Limb*>::iterator it = mLimbs.begin();
-	for (; it != mLimbs.end(); it++) {
-		(*it)->update();
+	// Add all limbs
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->update();
+	}
+
+	// Add all constraints
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->update();
 	}
 }
 
