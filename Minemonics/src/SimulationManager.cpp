@@ -138,11 +138,19 @@ void SimulationManager::createFrameListener(void) {
 	boost::posix_time::time_duration duration(mNow.time_of_day());
 	Rng::seed(duration.total_milliseconds());
 
+	//TODO: DebugDrawer
 	mPhysicsController.initBulletPhysics();
-	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
-	mDebugDrawer->setDebugMode(
-			btIDebugDraw::DBG_DrawWireframe + btIDebugDraw::DBG_DrawConstraints
-					+ btIDebugDraw::DBG_DrawConstraintLimits + btIDebugDraw::DBG_DrawContactPoints + btIDebugDraw::DBG_DrawNormals);
+//	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
+	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr,false);
+	mDebugDrawer->setDrawWireframe(true);
+	mDebugDrawer->setDrawConstraints(true);
+	mDebugDrawer->setDrawConstraintLimits(true);
+	mDebugDrawer->setDrawContactPoints(true);
+	mDebugDrawer->setDrawNormals(true);
+//	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe + btIDebugDraw::DBG_DrawConstraints
+//					+ btIDebugDraw::DBG_DrawConstraintLimits
+//					+ btIDebugDraw::DBG_DrawContactPoints
+//					+ btIDebugDraw::DBG_DrawNormals);
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
@@ -190,10 +198,12 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
 	mPhysicsController.stepBulletPhysics(evt.timeSinceLastFrame);
+
+	updatePhysics();
+
 	if (mDrawBulletDebug) {
 		mPhysicsController.getDynamicsWorld()->debugDrawWorld();
 	}
-	updatePhysics();
 
 	mInfoOverlay.update();
 
@@ -234,19 +244,19 @@ void SimulationManager::updatePhysics() {
 
 			btVector3 Point = body->getCenterOfMassPosition();
 
-			std::string text;
-			text.append("Box coordinate: ");
-			text.append(boost::lexical_cast<std::string>(Point[0]));
-			text.append(",");
-			text.append(boost::lexical_cast<std::string>(Point[1]));
-			text.append(",");
-			text.append(boost::lexical_cast<std::string>(Point[2]));
-			text.append(",\n");
-			text.append("---------");
-			InfoOverlayData* data = new InfoOverlayData(
-					Ogre::Vector3((float) Point[0], (float) Point[1],
-							(float) Point[2]), text);
-			//mInfoOverlay.addInfo(data);
+//			std::string text;
+//			text.append("O: ");
+////			text.append(boost::lexical_cast<std::string>((int)Point[0]));
+////			text.append(",");
+////			text.append(boost::lexical_cast<std::string>((int)Point[1]));
+////			text.append(",");
+////			text.append(boost::lexical_cast<std::string>((int)Point[2]));
+////			text.append(",\n");
+////			text.append("------");
+//			InfoOverlayData* data = new InfoOverlayData(
+//					Ogre::Vector3((float) Point[0], (float) Point[1],
+//							(float) Point[2]), text);
+//			mInfoOverlay.addInfo(data);
 
 			// Get the Orientation of the rigidbody as a bullet Quaternion
 			// Convert it to an Ogre quaternion

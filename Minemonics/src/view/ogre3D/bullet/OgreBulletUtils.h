@@ -8,24 +8,31 @@
 #ifndef MODEL_BULLET_OGREBULLETUTILS_H_
 #define MODEL_BULLET_OGREBULLETUTILS_H_
 
-inline btVector3 cvt(const Ogre::Vector3 &V){
-    return btVector3(V.x, V.y, V.z);
-}
+#include <LinearMath/btQuadWord.h>
+#include <LinearMath/btQuaternion.h>
+#include <LinearMath/btVector3.h>
+#include <OgreQuaternion.h>
+#include <OgreVector3.h>
 
-inline Ogre::Vector3 cvt(const btVector3&V){
-    return Ogre::Vector3(V.x(), V.y(), V.z());
-}
+class OgreBulletUtils {
+public:
+	static btVector3 convert(const Ogre::Vector3 &V) {
+		return btVector3(V.x, V.y, V.z);
+	}
 
-inline btQuaternion cvt(const Ogre::Quaternion &Q)
-{
-    return btQuaternion(Q.x, Q.y, Q.z, Q.w);
+	static Ogre::Vector3 convert(const btVector3&V) {
+		return Ogre::Vector3(V.x(), V.y(), V.z());
+	}
+
+	static btQuaternion convert(const Ogre::Quaternion &Q) {
+		return btQuaternion(Q.x, Q.y, Q.z, Q.w);
+	}
+	;
+
+	static Ogre::Quaternion convert(const btQuaternion &Q) {
+		return Ogre::Quaternion(Q.w(), Q.x(), Q.y(), Q.z());
+	}
+	;
 };
-
-inline Ogre::Quaternion cvt(const btQuaternion &Q)
-{
-    return Ogre::Quaternion(Q.w(), Q.x(), Q.y(), Q.z());
-};
-
-
 
 #endif /* MODEL_BULLET_OGREBULLETUTILS_H_ */

@@ -376,8 +376,10 @@ set(VIEWHDRS
 	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.h
 	
 	## physics debug drawing
-	./view/ogre3D/bullet/OgreDebugDrawer.h
+	#./view/ogre3D/bullet/OgreDebugDrawer.h
 	./view/ogre3D/bullet/OgreBulletUtils.h
+	
+	./view/ogre3D/bullet/OgreBtDebugDrawer.h
 	
 	## information overlay
 	./view/ogre3D/overlay/InfoOverlay.h
@@ -442,7 +444,10 @@ set(VIEWSRCS
 	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp
 	
 	## physics debug drawing
-	./view/ogre3D/bullet/OgreDebugDrawer.cpp
+	#./view/ogre3D/bullet/OgreDebugDrawer.cpp
+	
+	./view/ogre3D/bullet/OgreBtDebugDrawer.cpp
+	
 	
 	## information overlay
 	./view/ogre3D/overlay/InfoOverlay.cpp

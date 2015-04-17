@@ -58,7 +58,7 @@ class Logger;
 #include "view/MathGL/MathGLWindow.h"
 #include "view/CEGUI/GUISheetHandler.h"
 #include "view/CEGUI/ParamsPanel.h"
-#include "view/ogre3D/bullet/OgreDebugDrawer.h"
+#include <view/ogre3D/bullet/OgreBtDebugDrawer.h>
 #include "view/ogre3D/overlay/InfoOverlay.h"
 #include "view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h"
 
@@ -176,6 +176,14 @@ public:
 		return mNow;
 	}
 
+	OgreBtDebugDrawer*& getDebugDrawer() {
+		return mDebugDrawer;
+	}
+
+	InfoOverlay& getInfoOverlay() {
+		return mInfoOverlay;
+	}
+
 	//int t;
 	//PopulationT<bool> parents;
 	//PopulationT<bool> offsprings;
@@ -188,7 +196,7 @@ protected:
 	CEGUI::OgreRenderer* mRenderer;
 	CEGUI::Window* mDragContainer;
 
-	OgreDebugDrawer* mDebugDrawer;
+	OgreBtDebugDrawer* mDebugDrawer;
 	bool mDrawBulletDebug;
 
 	std::vector<MathGLWindow*> mGraphWindows;
