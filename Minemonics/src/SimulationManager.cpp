@@ -138,19 +138,14 @@ void SimulationManager::createFrameListener(void) {
 	boost::posix_time::time_duration duration(mNow.time_of_day());
 	Rng::seed(duration.total_milliseconds());
 
-	//TODO: DebugDrawer
 	mPhysicsController.initBulletPhysics();
-//	mDebugDrawer = new OgreDebugDrawer(mSceneMgr, false);
 	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr,false);
 	mDebugDrawer->setDrawWireframe(true);
 	mDebugDrawer->setDrawConstraints(true);
 	mDebugDrawer->setDrawConstraintLimits(true);
 	mDebugDrawer->setDrawContactPoints(true);
 	mDebugDrawer->setDrawNormals(true);
-//	mDebugDrawer->setDebugMode(btIDebugDraw::DBG_DrawWireframe + btIDebugDraw::DBG_DrawConstraints
-//					+ btIDebugDraw::DBG_DrawConstraintLimits
-//					+ btIDebugDraw::DBG_DrawContactPoints
-//					+ btIDebugDraw::DBG_DrawNormals);
+
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
