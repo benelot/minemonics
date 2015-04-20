@@ -72,6 +72,8 @@ void Morphogene::initialize(double bushiness) {
 	mZ = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
 
+
+
 	mSegmentShrinkFactor = 1.0
 			+ randomness.nextDouble(
 					MorphologyConfiguration::LIMB_SCALE_MIN,
@@ -97,9 +99,9 @@ void Morphogene::initialize(double bushiness) {
 			2 * boost::math::constants::pi<double>());
 
 	// A random color
-	mColorR = randomness.nextDouble(0, 255);
-	mColorG = randomness.nextDouble(0, 255);
-	mColorB = randomness.nextDouble(0, 255);
+	mColorR = randomness.nextDouble(0, 1);
+	mColorG = randomness.nextDouble(0, 1);
+	mColorB = randomness.nextDouble(0, 1);
 
 	switch ((MorphologyConfiguration::PrimitiveType) randomness.nextPosInt(1,
 			MorphologyConfiguration::PRIMITIVE_QTY)) {

@@ -70,7 +70,10 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 			const Morphogene &morphogene) {
 		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << ","
-				<< morphogene.mZ << ")/ShrinkFactor="
+				<< morphogene.mZ << ")/Orientation=("
+				<< morphogene.mOrientationX << "," << morphogene.mOrientationY
+				<< "," << morphogene.mOrientationZ << ","
+				<< morphogene.mOrientationW << ")/ShrinkFactor="
 				<< morphogene.mSegmentShrinkFactor << "/RepetitionLimit"
 				<< morphogene.mRepetitionLimit << "/FollowUpGene="
 				<< morphogene.mFollowUpGene << "/Color(" << morphogene.mColorR
@@ -100,6 +103,10 @@ public:
 		ar.register_type(static_cast<SineControllerGene*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mX)& BOOST_SERIALIZATION_NVP(mY)
 		& BOOST_SERIALIZATION_NVP(mZ)
+		& BOOST_SERIALIZATION_NVP(mOrientationX)
+		& BOOST_SERIALIZATION_NVP(mOrientationY)
+		& BOOST_SERIALIZATION_NVP(mOrientationZ)
+		& BOOST_SERIALIZATION_NVP(mOrientationW)
 		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor)
 		& BOOST_SERIALIZATION_NVP(mRepetitionLimit)
 		& BOOST_SERIALIZATION_NVP(mFollowUpGene)
@@ -262,6 +269,38 @@ public:
 		mPrimitiveType = primitiveType;
 	}
 
+	double getOrientationW() const {
+		return mOrientationW;
+	}
+
+	void setOrientationW(double orientationW) {
+		mOrientationW = orientationW;
+	}
+
+	double getOrientationX() const {
+		return mOrientationX;
+	}
+
+	void setOrientationX(double orientationX) {
+		mOrientationX = orientationX;
+	}
+
+	double getOrientationY() const {
+		return mOrientationY;
+	}
+
+	void setOrientationY(double orientationY) {
+		mOrientationY = orientationY;
+	}
+
+	double getOrientationZ() const {
+		return mOrientationZ;
+	}
+
+	void setOrientationZ(double orientationZ) {
+		mOrientationZ = orientationZ;
+	}
+
 private:
 
 	/**
@@ -282,6 +321,11 @@ private:
 	 * Dimensions of the segment.
 	 */
 	double mX, mY, mZ;
+
+	/**
+	 * Orientation of the segment.
+	 */
+	double mOrientationX, mOrientationY, mOrientationZ, mOrientationW;
 
 	/**
 	 * Spherical coordinates around the origin of the segment at the center of mass.
