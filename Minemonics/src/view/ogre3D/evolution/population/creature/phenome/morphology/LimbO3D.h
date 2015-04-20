@@ -37,7 +37,7 @@ public:
 	virtual ~LimbO3D();
 
 	void initialize(SimulationManager* simulationManager,
-			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale);
+			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale,Ogre::ColourValue color);
 
 	virtual void update();
 
@@ -57,6 +57,9 @@ public:
 			Ogre::Vector3 direction);
 
 	Ogre::Vector3 getLocalIntersection(Ogre::Vector3 origin,
+			Ogre::Vector3 direction);
+
+	Ogre::Vector3 getLocalPreciseIntersection(Ogre::Vector3 origin,
 			Ogre::Vector3 direction);
 
 private:
