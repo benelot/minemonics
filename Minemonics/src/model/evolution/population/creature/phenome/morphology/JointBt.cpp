@@ -22,7 +22,7 @@
 //## utils headers
 
 JointBt::JointBt() :
-		mG6DofJoint(NULL) {
+		mG6DofJoint(NULL),mWorld(NULL) {
 	// TODO Auto-generated constructor stub
 
 }
