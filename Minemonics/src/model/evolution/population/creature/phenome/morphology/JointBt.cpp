@@ -32,17 +32,6 @@ JointBt::~JointBt() {
 }
 
 void JointBt::initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
-		btVector3 frameInA, btVector3 frameInB) {
-	mWorld = world;
-	btTransform tframeInA, tframeInB;
-	tframeInA = btTransform::getIdentity();
-	tframeInB = btTransform::getIdentity();
-	tframeInA.setOrigin(frameInA);
-	tframeInB.setOrigin(frameInB);
-	initialize(world, bodyA, bodyB, tframeInA, tframeInB);
-}
-
-void JointBt::initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
 		btTransform& tframeInA, btTransform& tframeInB) {
 	mWorld = world;
 	mG6DofJoint = new btGeneric6DofSpringConstraint(*bodyA, *bodyB, tframeInA,

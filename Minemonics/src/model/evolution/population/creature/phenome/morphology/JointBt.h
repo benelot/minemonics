@@ -32,9 +32,6 @@ public:
 	JointBt();
 	virtual ~JointBt();
 
-	void initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB, btVector3 frameInA,
-			btVector3 frameInB);
-
 	void initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
 			btTransform& tframeInA, btTransform& tframeInB);
 
