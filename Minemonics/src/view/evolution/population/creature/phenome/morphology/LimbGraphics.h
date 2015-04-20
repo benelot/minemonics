@@ -57,6 +57,8 @@ public:
 
 	virtual Ogre::Vector3 getLocalIntersection(Ogre::Vector3 origin,
 			Ogre::Vector3 direction) = 0;
+	virtual Ogre::Vector3 getLocalPreciseIntersection(Ogre::Vector3 origin,
+			Ogre::Vector3 direction) = 0;
 
 protected:
 	Ogre::Vector3 mPosition;

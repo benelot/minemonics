@@ -334,6 +334,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/OgreMeshRay.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/picking/OgreMeshRay.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/ProceduralBoxGenerator.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/procedural/ProceduralBoxGenerator.cpp</location>
@@ -506,7 +511,7 @@
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/PhenotypeGenerator.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/evolution/genetics/PhenotypeGenerator.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/Phenome.cpp</name>
@@ -754,6 +759,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/OgreMeshRay.h</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/picking/OgreMeshRay.h</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/ProceduralPlatform.h</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/procedural/ProceduralPlatform.h</location>
@@ -971,7 +981,7 @@
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/PhenotypeGenerator.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/evolution/population/creature/phenome/PhenotypeGenerator.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/evolution/genetics/PhenotypeGenerator.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/Phenome.h</name>

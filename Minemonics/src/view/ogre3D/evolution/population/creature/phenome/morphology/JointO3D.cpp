@@ -21,10 +21,13 @@
 //## controller headers
 //## model headers
 //## view headers
+#include "view/ogre3D/bullet/OgreBulletUtils.h"
+
 //## utils headers
+#include "utils/ogre3D/Euler.h"
 
 JointO3D::JointO3D() :
-		mSimulationManager(NULL),mLimbA(NULL),mLimbB(NULL) {
+		mSimulationManager(NULL), mLimbA(NULL), mLimbB(NULL) {
 
 }
 
@@ -42,16 +45,23 @@ void JointO3D::initialize(SimulationManager* simulationManager, Limb* limbA,
 }
 
 void JointO3D::update() {
-	btVector3 limbACOM(mLimbA->getPosition().x, mLimbA->getPosition().y,
-			mLimbA->getPosition().z);
-	btVector3 limbAJoint(limbACOM + mLocalA.getOrigin());
-	btVector3 limbBCOM(mLimbB->getPosition().x, mLimbB->getPosition().y,
-			mLimbB->getPosition().z);
-	btVector3 limbBJoint(limbBCOM + mLocalB.getOrigin());
-	mSimulationManager->getDebugDrawer()->drawLine(limbACOM, limbAJoint,
-			btVector3(255, 0, 0));
-	mSimulationManager->getDebugDrawer()->drawLine(limbBCOM, limbBJoint,
-			btVector3(255, 0, 0));
+	//TODO:: Fix local to global frame rotation
+	Ogre::Vector3 limbACOM(mLimbA->getPosition());
+	Ogre::Euler euler(OgreBulletUtils::convert(mLocalA.getRotation()));
+	Ogre::Vector3 limbAJoint(
+			limbACOM + /*euler */OgreBulletUtils::convert(mLocalA.getOrigin()));
+	Ogre::Vector3 limbBCOM(mLimbB->getPosition());
+	Ogre::Euler euler2(OgreBulletUtils::convert(mLocalB.getRotation()));
+	Ogre::Vector3 limbBJoint(
+			limbBCOM
+					+ /*euler2 */OgreBulletUtils::convert(mLocalB.getOrigin()));
+//	mSimulationManager->getDebugDrawer()->drawLine(limbACOM, limbAJoint,
+//			Ogre::ColourValue(255, 0, 0));
+//	mSimulationManager->getDebugDrawer()->drawLine(limbBCOM, limbBJoint,
+//			Ogre::ColourValue(255, 0, 0));
+	mSimulationManager->getDebugDrawer()->drawLine(limbACOM, limbBCOM,
+			Ogre::ColourValue(255, 0, 0));
+
 //	std::string text;
 //	text.append("+");
 //	InfoOverlayData* data = new InfoOverlayData(

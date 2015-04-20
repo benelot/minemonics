@@ -51,8 +51,6 @@ public:
 
 	void performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition);
 
-	void transcribeGene(Gene* gene);
-
 	void update();
 
 	void addToWorld();

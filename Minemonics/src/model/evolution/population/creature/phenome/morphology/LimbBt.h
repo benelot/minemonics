@@ -48,6 +48,12 @@ public:
 		return mBody;
 	}
 
+	btVector3 getLocalIntersection(btVector3 origin,
+			btVector3 direction);
+
+	btVector3 getLocalPreciseIntersection(btVector3 origin,
+			btVector3 direction);
+
 	void addToWorld();
 
 	void removeFromWorld();

@@ -62,6 +62,30 @@ void LimbBt::initialize(btDynamicsWorld* world,
 	mBody = new btRigidBody(rbInfo);
 }
 
+btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
+	return getLocalPreciseIntersection(origin,direction);
+}
+
+btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin, btVector3 direction) {
+	direction = direction * 1000.0f;
+
+	btVector3 hitPosition;
+
+	btCollisionWorld::ClosestRayResultCallback RayCallback(
+			origin,
+			direction);
+	mWorld->rayTest(btVector3(origin),
+			btVector3(direction),
+			RayCallback);
+
+	if (RayCallback.hasHit()) {
+		hitPosition = RayCallback.m_hitPointWorld;
+		//Normal = RayCallback.m_hitNormalWorld;
+	}
+	return hitPosition;
+
+}
+
 void LimbBt::addToWorld() {
 	mWorld->addRigidBody(mBody);
 }

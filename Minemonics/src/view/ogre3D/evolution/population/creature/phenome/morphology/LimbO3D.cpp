@@ -61,9 +61,8 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 
 	Ogre::Pass *pass = material->getTechnique(0)->getPass(0);
 	pass->setLightingEnabled(true);
-	pass->setAmbient(color);
+	//pass->setAmbient(color);
 	pass->setDiffuse(color);
-	//pass->setSpecular(color);
 	pass->setEmissive(color);
 	pass->setDepthCheckEnabled(true);
 	pass->setDepthWriteEnabled(false);

@@ -323,7 +323,7 @@ set(CONTROLLERHDRS
         
     ## phenome
     ./controller/evolution/population/creature/Creature.h
-    ./controller/evolution/population/creature/phenome/PhenotypeGenerator.h
+    ./controller/evolution/genetics/PhenotypeGenerator.h
     ./controller/evolution/population/creature/phenome/Phenome.h
     ./controller/evolution/population/creature/phenome/Component.h
     ./controller/evolution/population/creature/phenome/morphology/Limb.h
@@ -353,7 +353,7 @@ set(CONTROLLERSRCS
     
     ## phenome
     ./controller/evolution/population/creature/Creature.cpp
-    ./controller/evolution/population/creature/phenome/PhenotypeGenerator.cpp
+    ./controller/evolution/genetics/PhenotypeGenerator.cpp
     ./controller/evolution/population/creature/phenome/Phenome.cpp
     ./controller/evolution/population/creature/phenome/Component.cpp
     ./controller/evolution/population/creature/phenome/morphology/Limb.cpp
@@ -395,6 +395,9 @@ set(VIEWHDRS
     
     ## Videocapture
 	./view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h
+	
+	## picking
+	./view/ogre3D/picking/OgreMeshRay.h
     
     # procedural
 	./view/procedural/ProceduralPlatform.h
@@ -463,6 +466,9 @@ set(VIEWSRCS
 	
 	## Videocapture
 	./view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp
+	
+	## picking
+	./view/ogre3D/picking/OgreMeshRay.cpp
 	
 	# procedural
 	./view/procedural/ProceduralBoxGenerator.cpp

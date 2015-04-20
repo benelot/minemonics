@@ -49,13 +49,13 @@ Limb::~Limb() {
 
 void Limb::initialize(SimulationManager* simulationManager,
 		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass) {
+		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,Ogre::ColourValue color) {
 	// Define the new component as a limb
 	Component::initialize(Component::LimbComponent);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size);
+	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size,color);
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
@@ -81,10 +81,9 @@ void Limb::update() {
 	if (body) {
 
 		// update the position of the limb graphics
-		btVector3 Point = body->getCenterOfMassPosition();
+		btVector3 point = body->getCenterOfMassPosition();
 		mLimbGraphics->setPosition(
-				Ogre::Vector3((float) Point[0], (float) Point[1],
-						(float) Point[2]));
+				Ogre::Vector3(point.x(), point.y(), point.z()));
 
 		// Get the Orientation of the rigid body as a bullet Quaternion
 		// Convert it to an Ogre quaternion
@@ -134,7 +133,7 @@ LimbBt* Limb::getLimbPhysics() {
  * Add the limb to the world.
  */
 void Limb::addToWorld() {
-	//mLimbGraphics->addToWorld();
+//	mLimbGraphics->addToWorld();
 	mLimbPhysics->addToWorld();
 }
 
@@ -142,7 +141,7 @@ void Limb::addToWorld() {
  * Remove the limb from the world.
  */
 void Limb::removeFromWorld() {
-	//mLimbGraphics->removeFromWorld();
+//	mLimbGraphics->removeFromWorld();
 	mLimbPhysics->removeFromWorld();
 }
 

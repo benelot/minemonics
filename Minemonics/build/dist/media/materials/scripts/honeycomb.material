@@ -1,0 +1,13 @@
+material honeycomb
+{
+    technique
+    {
+        pass
+        {
+		    texture_unit
+			{
+			    texture honeycomb.png
+			}
+        }
+    }
+}

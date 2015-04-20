@@ -29,6 +29,8 @@ class LimbBt;
 #include <btBulletDynamicsCommon.h>
 
 //## view headers
+#include <OgreColourValue.h>
+
 //# custom headers
 //## base headers
 //## configuration headers
@@ -48,7 +50,7 @@ public:
 
 	void initialize(SimulationManager* simulationManager, MorphologyConfiguration::PrimitiveType type,
 			Ogre::Vector3 position, Ogre::Quaternion orientation,
-			Ogre::Vector3 size, double mass);
+			Ogre::Vector3 size, double mass,Ogre::ColourValue color = Ogre::ColourValue(1,1,1));
 
 	void update();
 

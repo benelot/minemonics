@@ -104,7 +104,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::O;
 		break;
 	case ApplicationKeycode::APPK_p:
-		// return CEGUI::Key::P;
+		mSimulationMgr->getPhysicsController().setPhysicsPaused(!mSimulationMgr->getPhysicsController().isPhysicsPaused());
 		break;
 	case ApplicationKeycode::APPK_a:
 		moveCameraLeft();

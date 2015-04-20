@@ -13,6 +13,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <bullet/LinearMath/btVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -30,6 +32,11 @@ public:
 	virtual void addToWorld() = 0;
 
 	virtual void removeFromWorld() = 0;
+
+	virtual btVector3 getLocalIntersection(btVector3 origin,
+			btVector3 direction) = 0;
+	virtual btVector3 getLocalPreciseIntersection(btVector3 origin,
+			btVector3 direction) = 0;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMBPHYSICS_H_ */

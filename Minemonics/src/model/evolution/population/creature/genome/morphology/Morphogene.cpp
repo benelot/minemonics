@@ -99,9 +99,9 @@ void Morphogene::initialize(double bushiness) {
 			2 * boost::math::constants::pi<double>());
 
 	// A random color
-	mColorR = randomness.nextDouble(0, 1);
-	mColorG = randomness.nextDouble(0, 1);
-	mColorB = randomness.nextDouble(0, 1);
+	mColorR = randomness.nextDouble(0.0f, 255.0f)/255.0f;
+	mColorG = randomness.nextDouble(0.0f, 255.0f)/255.0f;
+	mColorB = randomness.nextDouble(0.0f, 255.0f)/255.0f;
 
 	switch ((MorphologyConfiguration::PrimitiveType) randomness.nextPosInt(1,
 			MorphologyConfiguration::PRIMITIVE_QTY)) {
