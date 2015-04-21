@@ -88,7 +88,7 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 
 //		Embryogenesis::transcribeGene(generator);
 
-		// what is the next gene type
+// what is the next gene type
 		switch (generator->getGene()->getGeneType()) {
 		case Gene::MorphoGene: {
 			// if the current root to leaf path is equal to the maximal segments depth, break
@@ -115,26 +115,37 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 			// if there exists a parent component, then we connect the new limb to it
 			if (generator->getParentComponent() != NULL) {
 
-				// find the joint anchor position of the limb A
+				// get parent limb A
 				LimbPhysics* limbA =
 						((Limb*) generator->getParentComponent())->getLimbPhysics();
 
-				Ogre::Vector3 limbAPosition =
+				//get the limb A COM
+				Ogre::Vector3 limbACOM =
 						((Limb*) generator->getParentComponent())->getPosition();
 
-				//get anchor direction of limb A
-				Ogre::Vector3 anchorDirOA(
+				//get anchor direction of limb A in reference frame of A
+				Ogre::Vector3 localAnchorDirOA(
 						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
 						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
 						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
 
-				//get local surface point of limb A
-				//more precise than the limb->getLocalIntersection because the latter only tests for AABB frames
+				//get surface point of limb A in reference frame of A
 				Ogre::Vector3 localAnchorOA(limbA->getLocalIntersection(
 				/*origin of limb A*/
-				OgreBulletUtils::convert(limbAPosition),
+				OgreBulletUtils::convert(limbACOM),
 				/*direction of anchor of limb A*/
-				OgreBulletUtils::convert(anchorDirOA)));
+				OgreBulletUtils::convert(localAnchorDirOA)));
+
+				// draw line from limbA along ray test
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(limbACOM,
+						limbACOM + 1000.0f * localAnchorDirOA,
+						Ogre::ColourValue(1, 0, 0));
+
+				// draw line from limbA to anchor point of A
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(limbACOM,
+						limbACOM + localAnchorOA, Ogre::ColourValue(0, 1, 0));
 
 				// joint direction of joint part of A
 				Ogre::Euler eulerA(
@@ -144,11 +155,17 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 
 				//get local joint rotation point in reference frame A
 				localJointOA = localAnchorOA
-						+ eulerA * anchorDirOA.normalisedCopy()
+						+ eulerA * localAnchorDirOA.normalisedCopy()
 								* MorphologyConfiguration::JOINT_LENGTH;
 
+
+				// draw line from anchor point of A to joint rotation point
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(limbACOM + localAnchorOA,
+						limbACOM + localJointOA, Ogre::ColourValue(0, 0, 1));
+
 				//get anchor direction of limb B
-				Ogre::Vector3 anchorDirOB(morphogene->getJointAnchorX(),
+				Ogre::Vector3 localAnchorDirOB(morphogene->getJointAnchorX(),
 						morphogene->getJointAnchorY(),
 						morphogene->getJointAnchorZ());
 
@@ -160,8 +177,13 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 				//get local surface anchor point of B in reference frame A
 				Ogre::Vector3 localAnchorOBinA(
 						localJointOA
-								- eulerB * anchorDirOB.normalisedCopy()
+								- eulerB * localAnchorDirOB.normalisedCopy()
 										* MorphologyConfiguration::JOINT_LENGTH);
+
+				// draw line from anchor point of A to joint rotation point
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(limbACOM + localJointOA,
+							limbACOM + localAnchorOBinA, Ogre::ColourValue(0, 0, 1));
 
 				// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
 				LimbBt* limbBBt = new LimbBt();
@@ -191,27 +213,38 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 				limbBBt->addToWorld();
 
 				//get the surface point of limb B in the local reference frame of B
-				//more precise than the limb->getLocalIntersection because the latter only tests for AABB frames
 				Ogre::Vector3 localAnchorOB(
-						OgreBulletUtils::convert(
-								limbBBt->getLocalPreciseIntersection(
-										/*origin of limb B*/
-										OgreBulletUtils::convert(
-												generator->getPosition()),
-										/*direction of anchor of limb B*/
-										OgreBulletUtils::convert(
-												anchorDirOB))));
+						OgreBulletUtils::convert(limbBBt->getLocalIntersection(
+						/*origin of limb B*/
+						OgreBulletUtils::convert(generator->getPosition()),
+						/*direction of anchor of limb B*/
+						OgreBulletUtils::convert(localAnchorDirOB))));
+
+
+				// draw line from anchor point of B to joint rotation point
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(generator->getPosition(),
+						generator->getPosition() + localAnchorOB, Ogre::ColourValue(0, 0, 1));
 
 				limbBBt->removeFromWorld();
 				delete limbBBt;
 				limbBBt = 0;
 
+				// draw line from anchor point of A to joint rotation point
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(localAnchorOA,
+						localJointOA, Ogre::ColourValue(0, 0, 1));
+
 				// global center of mass of limb B
-				Ogre::Vector3 globalCOMOB(
-						limbAPosition
-								+ localAnchorOBinA - localAnchorOB);
+				Ogre::Vector3 limbBCOM(
+						limbACOM + localAnchorOBinA - localAnchorOB);
 				// set global center of mass of limb B as the new generation point
-				generator->setPosition(globalCOMOB);
+				generator->setPosition(limbBCOM);
+				generator->setOrientation(
+						Ogre::Quaternion(morphogene->getOrientationW(),
+								morphogene->getOrientationX(),
+								morphogene->getOrientationY(),
+								morphogene->getOrientationZ()));
 
 				// get local joint rotation point in the local reference frame of B
 				Ogre::Euler euler3(morphogene->getJointYaw(),
@@ -219,8 +252,19 @@ void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
 						morphogene->getJointRoll());
 
 				localJointOB = localAnchorOB
-						+ euler3 * anchorDirOB.normalisedCopy()
+						+ euler3 * localAnchorDirOB.normalisedCopy()
 								* MorphologyConfiguration::JOINT_LENGTH;
+
+				// draw line from limbA along ray test
+				//TODO: Debug lines
+				mSimulationManager->getDebugDrawer()->drawLine(limbBCOM,
+						limbBCOM + 1000.0f * localAnchorDirOB,
+						Ogre::ColourValue(1, 0, 0));
+
+				// draw line from limbA to limbB
+				mSimulationManager->getDebugDrawer()->drawLine(limbBCOM,
+							limbACOM,
+							Ogre::ColourValue(1, 0.5, 0.5));
 			}
 
 			//build the limb out of the morphogene

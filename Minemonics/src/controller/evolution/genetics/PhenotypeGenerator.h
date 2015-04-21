@@ -75,7 +75,7 @@ public:
 		return mPosition;
 	}
 
-	void setPosition(Ogre::Vector3& position) {
+	void setPosition(Ogre::Vector3 position) {
 		mPosition = position;
 	}
 
@@ -83,7 +83,7 @@ public:
 		return mOrientation;
 	}
 
-	void setOrientation(Ogre::Quaternion& orientation) {
+	void setOrientation(Ogre::Quaternion orientation) {
 		mOrientation = orientation;
 	}
 

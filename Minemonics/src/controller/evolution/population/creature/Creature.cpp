@@ -26,7 +26,7 @@ class SimulationManager;
 //## utils headers
 
 Creature::Creature() :
-		mCreature(0), mPhenotype(0){
+		mCreature(0), mPhenotype(0) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -36,16 +36,16 @@ Creature::~Creature() {
 }
 
 void Creature::initialize(SimulationManager* simulationManager,
-		Ogre::Vector3 position,
-		double bushiness) {
+		Ogre::Vector3 position, double bushiness) {
 	mCreature = new CreatureM();
-	mCreature->initialize(position,bushiness);
+	mCreature->initialize(position, bushiness);
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager);
 }
 
 void Creature::performEmbryogenesis() {
-	mPhenotype->performEmbryogenesis(&mCreature->getGenotype(),mCreature->getPosition());
+	mPhenotype->performEmbryogenesis(&mCreature->getGenotype(),
+			mCreature->getPosition());
 }
 
 void Creature::update() {

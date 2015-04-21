@@ -33,8 +33,9 @@ public:
 	LimbBt();
 	virtual ~LimbBt();
 
-	void initialize(btDynamicsWorld* world, MorphologyConfiguration::PrimitiveType type, btVector3 position, btQuaternion orientation,
-			btVector3 size, btScalar mass);
+	void initialize(btDynamicsWorld* world,
+			MorphologyConfiguration::PrimitiveType type, btVector3 position,
+			btQuaternion orientation, btVector3 size, btScalar mass);
 
 	btVector3 getPosition() {
 		return mBody->getCenterOfMassPosition();
@@ -48,9 +49,32 @@ public:
 		return mBody;
 	}
 
-	btVector3 getLocalIntersection(btVector3 origin,
-			btVector3 direction);
+	/**
+	 * Get the intersection in the global reference frame.
+	 * @param origin: The origin the intersection starts from.
+	 * @param direction: The direction of the intersection testing ray.
+	 */
+	btVector3 getIntersection(btVector3 origin, btVector3 direction);
 
+	/**
+	 * Get the precise intersection in the global reference frame.
+	 * @param origin The origin the intersection starts from.
+	 * @param direction: The direction of the intersection testing ray.
+	 */
+	btVector3 getPreciseIntersection(btVector3 origin, btVector3 direction);
+
+	/**
+	 * Get the intersection in the local reference frame of the indicated origin.
+	 * @param origin: The origin the intersection starts from and in whose reference frame the intersection is shown.
+	 * @param direction: The direction of the intersection testing ray.
+	 */
+	btVector3 getLocalIntersection(btVector3 origin, btVector3 direction);
+
+	/**
+	 * Get the precise intersection in the local reference frame of the indicated origin.
+	 * @param origin The origin the intersection starts from and in whose reference frame the intersection is shown.
+	 * @param direction: The direction of the intersection testing ray.
+	 */
 	btVector3 getLocalPreciseIntersection(btVector3 origin,
 			btVector3 direction);
 

@@ -133,7 +133,7 @@ LimbBt* Limb::getLimbPhysics() {
  * Add the limb to the world.
  */
 void Limb::addToWorld() {
-//	mLimbGraphics->addToWorld();
+	mLimbGraphics->addToWorld();
 	mLimbPhysics->addToWorld();
 }
 
@@ -141,7 +141,7 @@ void Limb::addToWorld() {
  * Remove the limb from the world.
  */
 void Limb::removeFromWorld() {
-//	mLimbGraphics->removeFromWorld();
+	mLimbGraphics->removeFromWorld();
 	mLimbPhysics->removeFromWorld();
 }
 

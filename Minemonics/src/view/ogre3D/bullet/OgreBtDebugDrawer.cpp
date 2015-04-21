@@ -27,18 +27,18 @@
 
 //## utils headers
 
-
-OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm, bool drawTrajectory) :
+OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm,
+		bool drawTrajectory) :
 		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(drawTrajectory), mClear(
-				0), mDebugMode(0),mDrawable(false) {
+				0), mDebugMode(0), mDrawable(false) {
 	mDrawTrajectory = drawTrajectory;
 	mContactPoints = &mContactPoints1;
 	mLines = new Ogre::ManualObject("BulletPhysicsLines1");
 	mLines2 = new Ogre::ManualObject("BulletPhysicsLines2");
-	//ASSERT( mLines );
+
 	mTriangles = new Ogre::ManualObject("BulletPhysicsTriangles1");
 	mTriangles2 = new Ogre::ManualObject("BulletPhysicsTriangles2");
-	//ASSERT( mTriangles );
+
 	mLines->setDynamic(true);
 	mLines2->setDynamic(true);
 	mTriangles->setDynamic(true);
@@ -60,7 +60,7 @@ OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm, bool drawTrajector
 	mtl->setDepthBias(0.1, 0);
 	Ogre::TextureUnitState * tu =
 			mtl->getTechnique(0)->getPass(0)->createTextureUnitState();
-	//ASSERT( tu );
+
 	tu->setColourOperationEx(Ogre::LBX_SOURCE1, Ogre::LBS_DIFFUSE);
 	mtl->getTechnique(0)->setLightingEnabled(false);
 	//mtl->getTechnique(0)->setSelfIllumination( ColourValue::White );
@@ -91,14 +91,15 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 			mLines->colour(color);
 			draw();
 		} else {
-			mExtLines.resize(mExtLines.size() + 1);
-			Line triangle = mExtLines.back();
+			//mExtLines.resize(mExtLines.size() + 1);
+			Line line;
 
 			color.saturate();
-			triangle.color = color;
-			triangle.from = from;
-			triangle.to = to;
-			triangle.drawn = false;
+			line.color = color;
+			line.from = from;
+			line.to = to;
+			line.drawn = false;
+			mExtLines.push_back(line);
 		}
 	}
 }
@@ -234,6 +235,9 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	}
 	mContactPoints->clear();
 	mContactPoints = newCP;
+
+	//draw remaining objects from last frame
+	draw();
 
 	mDrawable = true;
 

@@ -22,7 +22,7 @@
 
 PhysicsController::PhysicsController() :
 		mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
-				NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(
+				NULL), mPhysicsPaused(true), mPhysicsStepped(false), mSolver(
 				NULL) {
 
 }

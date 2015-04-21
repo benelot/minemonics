@@ -33,6 +33,8 @@ public:
 
 	virtual void removeFromWorld() = 0;
 
+	virtual btVector3 getIntersection(btVector3 origin,
+			btVector3 direction) = 0;
 	virtual btVector3 getLocalIntersection(btVector3 origin,
 			btVector3 direction) = 0;
 	virtual btVector3 getLocalPreciseIntersection(btVector3 origin,
