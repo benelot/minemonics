@@ -14,13 +14,13 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 0.4;
-	//TODO: Optimize with bullet physics engine
+	static const double LIMB_MIN_SIZE = 5;
+	//Still pretty tiny, but a visible size
 
 	/**
 	 * The limb maximum dimension size
 	 */
-	static const double LIMB_MAX_SIZE = 10;
+	static const double LIMB_MAX_SIZE = 100;
 	//TODO: Optimize with bullet physics engine
 
 
@@ -118,7 +118,7 @@ public:
 	/**
 	 * The length of a joint from the anchor point to the joint rotation point.
 	 */
-	static const double JOINT_LENGTH = 10;
+	static const double JOINT_LENGTH = 100;
 
 	/**
 	 * The initial branch number mean
