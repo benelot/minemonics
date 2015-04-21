@@ -30,6 +30,8 @@
 #include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
 
 //## view headers
+#include "view/ogre3D/bullet/OgreBulletUtils.h"
+
 //## utils headers
 
 #ifndef M_PI
@@ -64,15 +66,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	Limb* limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.3, size * 0.2, size * 0.3), 1);
 	mLimbs.push_back(limb);
 
@@ -81,15 +80,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.2),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.3, size * 0.28, size * 0.3), 1);
 	mLimbs.push_back(limb);
 
@@ -98,15 +94,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.), btScalar(size * 1.6),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2), 1);
 	mLimbs.push_back(limb);
 
@@ -115,15 +108,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.18), btScalar(size * 0.65),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
 	mLimbs.push_back(limb);
 
@@ -132,15 +122,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.18), btScalar(size * 0.2),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
@@ -149,15 +136,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.18), btScalar(size * 0.65),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
 	mLimbs.push_back(limb);
 
@@ -166,15 +150,12 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.18), btScalar(size * 0.2),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
@@ -183,16 +164,13 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.35), btScalar(size * 1.45),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 	transform.getBasis().setEulerZYX(0, 0, M_PI_2);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
@@ -201,16 +179,13 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * -0.7), btScalar(size * 1.45),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 	transform.getBasis().setEulerZYX(0, 0, M_PI_2);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08), 1);
 	mLimbs.push_back(limb);
 
@@ -219,16 +194,13 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.35), btScalar(size * 1.45),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 	transform.getBasis().setEulerZYX(0, 0, -M_PI_2);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1), 1);
 	mLimbs.push_back(limb);
 
@@ -237,16 +209,13 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(
 			btVector3(btScalar(size * 0.7), btScalar(size * 1.45),
 					btScalar(size * 0.)));
+	transform.setOrigin(transform.getOrigin()+positionOffset);
 	transform.getBasis().setEulerZYX(0, 0, -M_PI_2);
 
 	limb = new Limb();
 	limb->initialize(simulationManager, type,
-			Ogre::Vector3(positionOffset.x() + transform.getOrigin().x(),
-					positionOffset.y() + transform.getOrigin().y(),
-					positionOffset.z() + transform.getOrigin().z()),
-			Ogre::Quaternion(transform.getRotation().w(),
-					transform.getRotation().x(), transform.getRotation().y(),
-					transform.getRotation().z()),
+			OgreBulletUtils::convert(transform.getOrigin()),
+					OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08), 1);
 	mLimbs.push_back(limb);
 
