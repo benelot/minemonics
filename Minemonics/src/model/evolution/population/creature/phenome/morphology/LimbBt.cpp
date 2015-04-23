@@ -10,6 +10,8 @@
 
 //# forward declarations
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -62,26 +64,26 @@ void LimbBt::initialize(btDynamicsWorld* world,
 	mBody = new btRigidBody(rbInfo);
 }
 
-btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction){
-	return getPreciseIntersection(origin,direction);
+btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
+	return getPreciseIntersection(origin, direction);
 }
 
-btVector3 LimbBt::getPreciseIntersection(btVector3 origin, btVector3 direction){
-	direction = direction * 1000.0f;
+btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
+		btVector3 direction) {
+	direction.normalize();
+	direction *= 10000.f;
+	btVector3 rayEnd = origin + direction;
 
-	btVector3 hitPosition(0,0,0);
+	btVector3 hitPosition(0, 0, 0);
 
-	btCollisionWorld::ClosestRayResultCallback rayCallback(
-			origin,
-			origin+direction);
-	mWorld->rayTest(origin,
-			origin+direction,
-			rayCallback);
+	btCollisionWorld::ClosestRayResultCallback rayCallback(origin, rayEnd);
+	mWorld->rayTest(origin, rayEnd, rayCallback);
 
 	if (rayCallback.hasHit()) {
 		hitPosition = rayCallback.m_hitPointWorld;
 		//Normal = RayCallback.m_hitNormalWorld;
-
+		std::cout
+				<< "#################################################################\nhit an object!\n############################################################";
 		//return hit
 		return hitPosition;
 	}
@@ -91,11 +93,12 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin, btVector3 direction){
 }
 
 btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
-	return getLocalPreciseIntersection(origin,direction);
+	return getLocalPreciseIntersection(origin, direction);
 }
 
-btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin, btVector3 direction) {
-	return getPreciseIntersection(origin,direction) - origin;
+btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin,
+		btVector3 direction) {
+	return getPreciseIntersection(origin, direction) - origin;
 
 }
 
