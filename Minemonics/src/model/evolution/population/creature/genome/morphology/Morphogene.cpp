@@ -42,7 +42,8 @@ Morphogene::Morphogene() :
 				MorphologyConfiguration::UNKNOWN), mControllerGene(NULL), mFollowUpGene(
 				-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(
 				0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(0), mRepetitionLimit(
-				0), mX(0), mY(0), mZ(0) {
+				0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(0), mOrientationY(
+				0), mOrientationZ(0) {
 
 }
 
@@ -65,27 +66,32 @@ void Morphogene::initialize(double bushiness) {
 
 	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions
-	mX = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+	//TODO: Fix biased log
+//	mX = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+//			MorphologyConfiguration::LIMB_MAX_SIZE);
+//	mY = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+//			MorphologyConfiguration::LIMB_MAX_SIZE);
+//	mZ = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+//			MorphologyConfiguration::LIMB_MAX_SIZE);
+	mX = randomness.nextDouble(MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
-	mY = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+	mY = randomness.nextDouble(MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
-	mZ = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+	mZ = randomness.nextDouble(MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
-
-
 
 	mSegmentShrinkFactor = 1.0
-			+ randomness.nextDouble(
-					MorphologyConfiguration::LIMB_SCALE_MIN,
+			+ randomness.nextDouble(MorphologyConfiguration::LIMB_SCALE_MIN,
 					MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	/* Set joint anchor X, Y and Z, where the anchor lies in the center of mass
-	 and the X, y and Z form a vector, pointing to the point on the surface where
-	 the joint will be attached.*/
+	 and the X, Y and Z form a vector, pointing to the point on the surface where
+	 the joint will be attached. The vector contains three values between -1 and 1.
+	 */
 	do {
-		mJointAnchorX = randomness.nextDouble(0, 1);
-		mJointAnchorY = randomness.nextDouble(0, 1);
-		mJointAnchorZ = randomness.nextDouble(0, 1);
+		mJointAnchorX = randomness.nextDouble(-1, 1);
+		mJointAnchorY = randomness.nextDouble(-1, 1);
+		mJointAnchorZ = randomness.nextDouble(-1, 1);
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
 	/*
@@ -98,22 +104,22 @@ void Morphogene::initialize(double bushiness) {
 	mJointRoll = randomness.nextDouble(0,
 			2 * boost::math::constants::pi<double>());
 
-	// A random color
-	mColorR = randomness.nextDouble(0.0f, 255.0f)/255.0f;
-	mColorG = randomness.nextDouble(0.0f, 255.0f)/255.0f;
-	mColorB = randomness.nextDouble(0.0f, 255.0f)/255.0f;
+	// A random color RGB values between 0 and 1
+	mColorR = randomness.nextDouble(0.0f, 1.0f);
+	mColorG = randomness.nextDouble(0.0f, 1.0f);
+	mColorB = randomness.nextDouble(0.0f, 1.0f);
 
 	switch ((MorphologyConfiguration::PrimitiveType) randomness.nextPosInt(1,
 			MorphologyConfiguration::PRIMITIVE_QTY)) {
 	case MorphologyConfiguration::BLOCK: {
 		//Randomly choose a segment primitive
 		mPrimitiveType = MorphologyConfiguration::BLOCK;
-	}
 		break;
+	}
 	case MorphologyConfiguration::CAPSULE: {
 		mPrimitiveType = MorphologyConfiguration::CAPSULE;
-	}
 		break;
+	}
 	}
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
@@ -225,6 +231,22 @@ bool Morphogene::equals(const Morphogene & morphoGene) const {
 	}
 
 	if (mZ != morphoGene.mZ) {
+		return false;
+	}
+
+	if (mOrientationW != morphoGene.mOrientationW) {
+		return false;
+	}
+
+	if (mOrientationX != morphoGene.mOrientationX) {
+		return false;
+	}
+
+	if (mOrientationY != morphoGene.mOrientationY) {
+		return false;
+	}
+
+	if (mOrientationZ != morphoGene.mOrientationZ) {
 		return false;
 	}
 
