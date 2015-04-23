@@ -91,9 +91,7 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 			mLines->colour(color);
 			draw();
 		} else {
-			//mExtLines.resize(mExtLines.size() + 1);
 			Line line;
-
 			color.saturate();
 			line.color = color;
 			line.from = from;
@@ -125,8 +123,7 @@ void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 			mTriangles->colour(color);
 			draw();
 		} else {
-			mExtTriangles.resize(mExtTriangles.size() + 1);
-			Triangle triangle = mExtTriangles.back();
+			Triangle triangle;
 
 			color.saturate();
 			triangle.color = color;
@@ -134,6 +131,7 @@ void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 			triangle.v1 = v1;
 			triangle.v2 = v2;
 			triangle.drawn = false;
+			mExtTriangles.push_back(triangle);
 		}
 	}
 }
@@ -150,13 +148,13 @@ void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
 		const Ogre::Vector3& normalOnB, Ogre::Real distance, int lifeTime,
 		const Ogre::ColourValue& color) {
 	if (mDebugMode & btIDebugDraw::DBG_DrawContactPoints) {
-		mContactPoints->resize(mContactPoints->size() + 1);
-		ContactPoint p = mContactPoints->back();
+		ContactPoint p;
 		p.from = PointOnB;
 		p.to = p.from + normalOnB * distance;
 		p.dieTime = Ogre::Root::getSingleton().getTimer()->getMilliseconds()
 				+ lifeTime;
 		p.color = color;
+		mContactPoints->push_back(p);
 	}
 }
 
