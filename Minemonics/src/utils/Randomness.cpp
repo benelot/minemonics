@@ -80,7 +80,7 @@ int Randomness::nextPosInt(int lowerLimit, int upperLimit) {
 /**
  * Is a function which generates two values,
  1O^m and 10^n, both between 10^lowerLimit and 10^upperLimit with exponents m and n chosen uniformly at random from the
- range [10^lowerLimit..10^upperLimit],and returning whichever of the two values is closer to upperLimit .
+ range [10^lowerLimit..10^upperLimit],and returning whichever of the two values is closer to upperLimit.
  * @param lowerLimit The lower limit we want to draw from.
  * @param upperLimit The upper limit we want to draw from.
  * @return The double which is nearer to
@@ -94,7 +94,7 @@ double Randomness::nextBiasedLog(double lowerLimit, double upperLimit) {
 	double tenpown = unifDoubleDistribution(rng);
 
 	//return m or n whichever is higher
-	return (tenpowm > tenpown) ? log(tenpowm) : log(tenpown);
+	return (tenpowm > tenpown) ? log10(tenpowm) : log10(tenpown);
 }
 
 bool Randomness::nextBoolean() {

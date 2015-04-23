@@ -548,6 +548,7 @@ set(TESTSRCS
     ./model/evolution/population/creature/CreatureM_test.cpp
     ./model/evolution/population/Population_test.cpp
     ./utils/NameGenerator_test.cpp
+    ./utils/Randomness_test.cpp
     
     #test runner
     ./test/TestRunner.cpp
