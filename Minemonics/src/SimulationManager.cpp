@@ -139,7 +139,7 @@ void SimulationManager::createFrameListener(void) {
 	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
-	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr,true);
+	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr,false);
 	mDebugDrawer->setDrawWireframe(true);
 	mDebugDrawer->setDrawConstraints(true);
 	mDebugDrawer->setDrawConstraintLimits(true);
@@ -147,6 +147,7 @@ void SimulationManager::createFrameListener(void) {
 	mDebugDrawer->setDrawNormals(true);
 
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
+	mPhysicsController.setPhysicsPaused(true);
 
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
 		mPhysicsController.addBody(mTerrain->getBody());
@@ -154,7 +155,7 @@ void SimulationManager::createFrameListener(void) {
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < 10; i++) {
 //		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
 //				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
 //		mRagdolls.push_back(ragdoll);
@@ -163,8 +164,8 @@ void SimulationManager::createFrameListener(void) {
 		Creature* creature = new Creature();
 
 		creature->initialize(this,
-				Ogre::Vector3(100,100,100),
-				30);
+				Ogre::Vector3(randomness.nextDouble(0,1000),500,randomness.nextDouble(0,1000)),
+				randomness.nextDouble(25,30));
 		creature->performEmbryogenesis();
 		mCreatures.push_back(creature);
 		creature->addToWorld();

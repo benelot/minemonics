@@ -62,6 +62,8 @@ void LimbBt::initialize(btDynamicsWorld* world,
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
 			mCollisionShape, localInertia);
 	mBody = new btRigidBody(rbInfo);
+	//TODO: Set user pointer for proper return of creature/limb information etc..
+	//mBody->setUserPointer(NULL);
 }
 
 btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
