@@ -162,7 +162,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->isDrawBulletDebug())?"true":"false";
 		break;
 		case ApplicationKeycode::APPK_BACKSLASH:
-		// return CEGUI::Key::Backslash;
+			mSimulationMgr->getDebugDrawer()->setDrawTrajectory(!mSimulationMgr->getDebugDrawer()->isDrawTrajectory());
 		break;
 		case ApplicationKeycode::APPK_MINUS:
 			if(mSimulationMgr->getVideoWriter().isInitialized())

@@ -81,6 +81,14 @@ public:
 	bool doesEnableSatComparison() const;
 	bool doesDisableBulletLCP() const;
 	bool doesEnableCCD() const;
+
+	bool isDrawTrajectory() const {
+		return mDrawTrajectory;
+	}
+
+	void setDrawTrajectory(bool drawTrajectory) {
+		mDrawTrajectory = drawTrajectory;
+	}
 protected:
 	bool frameStarted(const Ogre::FrameEvent& evt);
 	bool frameEnded(const Ogre::FrameEvent& evt);
