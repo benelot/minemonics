@@ -277,7 +277,6 @@
 <pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include/bullet" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include/OGRE" kind="inc" path="" system="true"/>
-<pathentry include="/usr/local/share/OGRE/samples/Common/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include/OGRE/Terrain" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include/OGRE/Paging" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include/OGRE/Overlay" kind="inc" path="" system="true"/>
