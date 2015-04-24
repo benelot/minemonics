@@ -56,7 +56,7 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 					+ "Limb";
 
 	// add the true as the last parameter to make it a manual material
-	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, true
+	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false
 	);
 
 	Ogre::Pass *pass = material->getTechnique(0)->getPass(0);

@@ -85,11 +85,23 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 		hitPosition = rayCallback.m_hitPointWorld;
 		//Normal = RayCallback.m_hitNormalWorld;
 		std::cout
-				<< "#################################################################\nhit an object!\n############################################################";
+				<< "############################################################\n"
+				<< "hit an object!\n" << origin.x() << ",\t" << origin.y() << ",\t"
+				<< origin.z() << "\t::Origin\n" << hitPosition.x() << ",\t"
+				<< hitPosition.y() << ",\t" << hitPosition.z() << "\t::hit\n"
+				<< rayEnd.x() << ",\t" << rayEnd.y() << ",\t" << rayEnd.z()
+				<< "\t::rayEnd\n"
+				<< "############################################################\n\n";
+
 		//return hit
 		return hitPosition;
 	}
-
+	std::cout
+			<< "############################################################\n"
+			<< "no hit!\n" << origin.x() << ",\t" << origin.y() << ",\t"
+			<< origin.z() << "\t::Origin\n" << rayEnd.x() << ",\t"
+			<< rayEnd.y() << ",\t" << rayEnd.z() << "\t::rayEnd\n"
+			<< "############################################################\n\n";
 	//no hit
 	return origin;
 }
