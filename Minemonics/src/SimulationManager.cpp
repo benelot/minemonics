@@ -131,6 +131,13 @@ void SimulationManager::createFrameListener(void) {
 
 	mRoot->addFrameListener(this);
 
+	// Create the scene node
+	Ogre::SceneNode *camNode =
+			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
+					Ogre::Vector3(-400, 200, 400));
+
+	camNode->attachObject(mCamera);
+
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
 
@@ -139,7 +146,7 @@ void SimulationManager::createFrameListener(void) {
 	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
-	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr,true);
+	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr, true);
 	mDebugDrawer->setDrawWireframe(true);
 	mDebugDrawer->setDrawConstraints(true);
 	mDebugDrawer->setDrawConstraintLimits(true);
@@ -164,8 +171,10 @@ void SimulationManager::createFrameListener(void) {
 		Creature* creature = new Creature();
 
 		creature->initialize(this,
-				Ogre::Vector3(randomness.nextDouble(0,10000),randomness.nextDouble(300,1000),randomness.nextDouble(0,10000)),
-				randomness.nextDouble(1,50));
+				Ogre::Vector3(randomness.nextDouble(0, 10000),
+						randomness.nextDouble(300, 1000),
+						randomness.nextDouble(0, 10000)),
+				randomness.nextDouble(1, 50));
 		creature->performEmbryogenesis();
 		mCreatures.push_back(creature);
 		creature->addToWorld();
@@ -179,7 +188,10 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
 
+	//shutdown the application if the application has initiated shutdown
 	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN) {
+
+		//shutdown the video writer if it is still running
 		if (mVideoWriter.isInitialized()) {
 			mVideoWriter.close();
 		}
@@ -189,24 +201,27 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// Inject input into handlers;
 	mInputHandler.injectInput();
 
+	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
+	// step forward bullet physics
 	mPhysicsController.stepBulletPhysics(evt.timeSinceLastFrame);
 
+	//update all physical objects
 	updatePhysics();
 
+
+	//draw the debug world if it is enabled
 	if (mDrawBulletDebug) {
 		mPhysicsController.getDynamicsWorld()->debugDrawWorld();
 	}
 
+	// update the information overlay
 	mInfoOverlay.update();
 
-	updatePanels();
 
-	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
-	for (; it != mGraphWindows.end(); it++) {
-		(*it)->update(evt.timeSinceLastFrame);
-	}
+	// update the information panels on the screen
+	updatePanels(evt.timeSinceLastFrame);
 
 	//TODO: Use for creature evolution, but clean up afterwards
 	// updateEvolution();
@@ -226,39 +241,39 @@ void SimulationManager::updatePhysics() {
 		(*cit)->update();
 	}
 
-	const int numObjects =
-			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
-
-	for (int i = 0; i < numObjects; i++) {
-		btCollisionObject* colObj =
-				mPhysicsController.getDynamicsWorld()->getCollisionObjectArray()[i];
-		btRigidBody* body = btRigidBody::upcast(colObj);
-
-		if (body) {
-
-			btVector3 Point = body->getCenterOfMassPosition();
-
-//			std::string text;
-//			text.append("O: ");
-////			text.append(boost::lexical_cast<std::string>((int)Point[0]));
-////			text.append(",");
-////			text.append(boost::lexical_cast<std::string>((int)Point[1]));
-////			text.append(",");
-////			text.append(boost::lexical_cast<std::string>((int)Point[2]));
-////			text.append(",\n");
-////			text.append("------");
-//			InfoOverlayData* data = new InfoOverlayData(
-//					Ogre::Vector3((float) Point[0], (float) Point[1],
-//							(float) Point[2]), text);
-//			mInfoOverlay.addInfo(data);
-
-			// Get the Orientation of the rigidbody as a bullet Quaternion
-			// Convert it to an Ogre quaternion
-			btQuaternion btq = body->getOrientation();
-			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
-					btq.z());
-		}
-	}
+//	const int numObjects =
+//			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
+//
+//	for (int i = 0; i < numObjects; i++) {
+//		btCollisionObject* colObj =
+//				mPhysicsController.getDynamicsWorld()->getCollisionObjectArray()[i];
+//		btRigidBody* body = btRigidBody::upcast(colObj);
+//
+//		if (body) {
+//
+////			btVector3 Point = body->getCenterOfMassPosition();
+//
+////			std::string text;
+////			text.append("O: ");
+//////			text.append(boost::lexical_cast<std::string>((int)Point[0]));
+//////			text.append(",");
+//////			text.append(boost::lexical_cast<std::string>((int)Point[1]));
+//////			text.append(",");
+//////			text.append(boost::lexical_cast<std::string>((int)Point[2]));
+//////			text.append(",\n");
+//////			text.append("------");
+////			InfoOverlayData* data = new InfoOverlayData(
+////					Ogre::Vector3((float) Point[0], (float) Point[1],
+////							(float) Point[2]), text);
+////			mInfoOverlay.addInfo(data);
+//
+//			// Get the Orientation of the rigidbody as a bullet Quaternion
+//			// Convert it to an Ogre quaternion
+////			btQuaternion btq = body->getOrientation();
+////			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
+////					btq.z());
+//		}
+//	}
 }
 
 //TODO: Use for creature evolution, but clean up afterwards
@@ -324,7 +339,13 @@ void SimulationManager::updateEvolution() {
 
 }
 
-void SimulationManager::updatePanels() {
+void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
+
+	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
+	for (; it != mGraphWindows.end(); it++) {
+		(*it)->update(timeSinceLastFrame);
+	}
+
 	if (mFpsPanel != NULL) {
 		if (mFpsPanel->isVisible()) // if fps panel is visible, then update its contents
 		{
@@ -526,39 +547,10 @@ void SimulationManager::createScene(void) {
 	plane.d = 100;
 	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
 
-	//mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
-	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
-			0.5, 150, 150);
-
-	// Ogrehead
-	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-	Ogre::SceneNode* headNode =
-			mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
-	headNode->attachObject(ogreHead);
-	headNode->translate(Ogre::Vector3(1963, 50, 1660));
-
-	// add the ninja
-	Ogre::Entity *ninja = mSceneMgr->createEntity("Ninja", "ninja.mesh");
-	Ogre::SceneNode *ninjaNode =
-			mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode");
-	ninjaNode->attachObject(ninja);
-	ninjaNode->translate(Ogre::Vector3(1963, 50, 1660));
-
-	// Create the scene node
-	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
-			Ogre::Vector3(-400, 200, 400));
-
-	// Make it look towards the ninja
-	ninjaNode->yaw(Ogre::Degree(-45));
-
-	// Create the pitch node
-	ninjaNode = ninjaNode->createChildSceneNode("PitchNode1");
-	ninjaNode->attachObject(mCamera);
-
-	// create the second camera node/pitch node
-	ninjaNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode2",
-			Ogre::Vector3(0, 200, 400));
-	ninjaNode = ninjaNode->createChildSceneNode("PitchNode2");
+	//either create a skydome or a skyplane
+	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
+//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
+//			0.5, 150, 150);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
 
@@ -608,10 +600,9 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	}
 }
 
-CEGUI::System*& SimulationManager::getCEGUISystem() {
-	return mSystem;
-}
-
+/**
+ * Configure and set up the window and the render window for the simulator
+ */
 bool SimulationManager::configure(void) {
 
 	mInputHandler.initialize(&mStateHandler, this);
@@ -644,22 +635,34 @@ bool SimulationManager::configure(void) {
 		elems.push_back(item);
 	}
 
-	//parse numbers
+	//parse video resolution out of the configuration
 	char* end;
 	int width = strtol(elems.at(0).c_str(), &end, 10);
 	int height = strtol(elems.at(1).c_str(), &end, 10);
 
+	//find the position of the window
 	int screen = 0;
-	int posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
-	int posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
+	int posX = 0;
+	int posY = 0;
 
+	//is the configuration in full screen?
 	bool fullscreen = (cfgOpts[OgreConf::FULL_SCREEN].currentValue
 			== OgreConf::YES);
+
+	//if full screen
 	if (fullscreen) {
+		// set the window position to full screen
 		posX = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 		posY = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 	}
+	else
+	{
+		//center the window on the screen
+		posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
+		posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
+	}
 
+	// create the SDL window
 	mSdlWindow = SDL_CreateWindow(
 			ApplicationConfiguration::APPLICATION_TITLE.c_str(), // window title
 			posX,               // initial x position
@@ -669,7 +672,7 @@ bool SimulationManager::configure(void) {
 			SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)
 					| SDL_WINDOW_RESIZABLE);
 
-	//Get the native whnd
+	//Get the native window handle
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 
@@ -684,12 +687,12 @@ bool SimulationManager::configure(void) {
 	switch (wmInfo.subsystem) {
 #ifdef WIN32
 	case SDL_SYSWM_WINDOWS:
-	// Windows code
+	// required to make OGRE work on Windows
 	winHandle = Ogre::StringConverter::toString( (unsigned long)wmInfo.info.win.window );
 	break;
 #elif __MACOSX__
 	case SDL_SYSWM_COCOA:
-	//required to make OGRE play nice with our window
+	//required to make OGRE work on MAX OSX
 	params.insert( std::make_pair("macAPI", "cocoa") );
 	params.insert( std::make_pair("macAPICocoaUseNSView", "true") );
 
@@ -697,16 +700,19 @@ bool SimulationManager::configure(void) {
 	break;
 #else
 	case SDL_SYSWM_X11:
+	//required to make OGRE work on Linux
 		winHandle = Ogre::StringConverter::toString(
 				(unsigned long) wmInfo.info.x11.window);
 		break;
 #endif
 	default:
+		// in case it can not recognize the windowing system
 		OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
 				"Unexpected WM! (SDL2)", "GraphicsSystem::initialize");
 		break;
 	}
 
+	//put together the parameter list for the OGRE render window
 	params.insert(
 			std::make_pair("title",
 					ApplicationConfiguration::APPLICATION_TITLE));
@@ -720,12 +726,16 @@ bool SimulationManager::configure(void) {
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 #endif
 
+	// create the OGRE render window
 	mWindow = Ogre::Root::getSingleton().createRenderWindow(
 			ApplicationConfiguration::APPLICATION_TITLE, width, height,
 			fullscreen, &params);
 	return true;
 }
 
+/**
+ * The main function of the simulator.
+ */
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
@@ -759,38 +769,6 @@ int main(int argc, char *argv[])
 }
 
 #ifdef __cplusplus
-}
-
-ParamsPanel * &SimulationManager::getDetailsPanel() {
-	return mDetailsPanel;
-}
-
-ParamsPanel * &SimulationManager::getFpsPanel() {
-	return mFpsPanel;
-}
-
-void SimulationManager::setDetailsPanel(ParamsPanel* detailsPanel) {
-	mDetailsPanel = detailsPanel;
-}
-
-void SimulationManager::setFpsPanel(ParamsPanel* fpsPanel) {
-	mFpsPanel = fpsPanel;
-}
-
-CEGUI::Window * &SimulationManager::getLayout() {
-	return mLayout;
-}
-
-Ogre::SceneManager* &SimulationManager::getSceneManager() {
-	return mSceneMgr;
-}
-
-CEGUI::OgreRenderer* & SimulationManager::getRenderer() {
-	return mRenderer;
-}
-
-Ogre::Root*& SimulationManager::getRoot() {
-	return mRoot;
 }
 
 #endif

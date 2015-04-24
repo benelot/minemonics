@@ -68,35 +68,70 @@ class Logger;
 class SimulationManager: public BaseApplication {
 private:
 
-	// StateHandler
+	void updatePhysics();
+
+	void updateEvolution();
+
+	//## controller components
+
+	// State handler
 	StateHandler mStateHandler;
-
-	Environment* mTerrain;
-
-	PhysicsController mPhysicsController;
 
 	// Game component handlers
 	SDL2InputHandler mInputHandler;
 	SDL_Window *mSdlWindow;
 	CameraHandler mCameraHandler;
 
-	CEGUI::System* mSystem;
-	CEGUI::Window* mLayout;
-
-
 	//SheetHandler
 	GUISheetHandler mGUISheetHandler;
+
+	// Physics controller
+	PhysicsController mPhysicsController;
+
+	// timing component
+	boost::posix_time::ptime mStart;
+	boost::posix_time::ptime mNow;
+	boost::posix_time::time_duration mRuntime;
+
+	//## model components
+	//	int t;
+	//	PopulationT<bool> parents;
+	//	PopulationT<bool> offsprings;
+	//	Ones jury;
+	//
+	//	 //scaling window
+	//	std::vector<double> window;
+
+	//## view components
+
+	Environment* mTerrain;
+
+	std::vector<RagDoll*> mRagdolls;
+	std::vector<Creature*> mCreatures;
+
+
+	// CEGUI components
+	CEGUI::System* mSystem;
+	CEGUI::Window* mLayout;
 
 	//CEGUI
 	ParamsPanel* mFpsPanel;
 	ParamsPanel* mDetailsPanel;
+	CEGUI::OgreRenderer* mRenderer;
+	CEGUI::Window* mDragContainer;
 
+	// Visualization components
+	std::vector<MathGLWindow*> mGraphWindows;
+	InfoOverlay mInfoOverlay;
+
+	Ogre3DFFMPEGVideoWriter mVideoWriter;
+
+	//## Debug components
 	// Logger
 	static BoostLogger mBoostLogger;
 
-	boost::posix_time::ptime mStart;
-	boost::posix_time::ptime mNow;
-	boost::posix_time::time_duration mRuntime;
+	OgreBtDebugDrawer* mDebugDrawer;
+	bool mDrawBulletDebug;
 
 	static class _Init {
 	public:
@@ -106,18 +141,27 @@ private:
 		}
 	} _initializer;
 
-	std::vector<Ogre::SceneNode*> cubes;
+protected:
+    bool configure(void);
+	virtual void createScene(void);
+	virtual void createFrameListener(void);
+	virtual void destroyScene(void);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	void updatePanels(Ogre::Real timeSinceLastFrame);
+	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 
-	std::vector<RagDoll*> mRagdolls;
-
-	std::vector<Creature*> mCreatures;
-	void updatePhysics();
 public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);
 
+	bool quit();
+	virtual void windowResized(Ogre::RenderWindow* rw);
+
 	// Accessor methods
-	// Accessor methods
+	CEGUI::System*& getCEGUISystem() {
+		return mSystem;
+	}
+
 	CameraHandler & getCameraHandler() {
 		return mCameraHandler;
 	}
@@ -134,19 +178,37 @@ public:
 		return mCamera;
 	}
 
-	ParamsPanel*& getDetailsPanel();
-	ParamsPanel*& getFpsPanel();
-	void setDetailsPanel(ParamsPanel* detailsPanel);
-	void setFpsPanel(ParamsPanel* fpsPanel);
-	CEGUI::Window*& getLayout();
-    Ogre::SceneManager*& getSceneManager();
-    CEGUI::OgreRenderer*& getRenderer();
-    Ogre::Root*& getRoot();
-    bool configure(void);
+	ParamsPanel * &getDetailsPanel() {
+		return mDetailsPanel;
+	}
 
-	bool quit();
-	CEGUI::System*& getCEGUISystem();
-	virtual void windowResized(Ogre::RenderWindow* rw);
+	ParamsPanel * &getFpsPanel() {
+		return mFpsPanel;
+	}
+
+	void setDetailsPanel(ParamsPanel* detailsPanel) {
+		mDetailsPanel = detailsPanel;
+	}
+
+	void setFpsPanel(ParamsPanel* fpsPanel) {
+		mFpsPanel = fpsPanel;
+	}
+
+	CEGUI::Window * &getLayout() {
+		return mLayout;
+	}
+
+	Ogre::SceneManager* &getSceneManager() {
+		return mSceneMgr;
+	}
+
+	CEGUI::OgreRenderer* & getRenderer() {
+		return mRenderer;
+	}
+
+	Ogre::Root*& getRoot() {
+		return mRoot;
+	}
 
 	std::vector<MathGLWindow*>& getGraphWindows() {
 		return mGraphWindows;
@@ -183,35 +245,6 @@ public:
 	InfoOverlay& getInfoOverlay() {
 		return mInfoOverlay;
 	}
-
-	//int t;
-	//PopulationT<bool> parents;
-	//PopulationT<bool> offsprings;
-	//Ones jury;
-	//
-	// scaling window
-	//std::vector<double> window;
-
-protected:
-	CEGUI::OgreRenderer* mRenderer;
-	CEGUI::Window* mDragContainer;
-
-	OgreBtDebugDrawer* mDebugDrawer;
-	bool mDrawBulletDebug;
-
-	std::vector<MathGLWindow*> mGraphWindows;
-
-	InfoOverlay mInfoOverlay;
-
-	Ogre3DFFMPEGVideoWriter mVideoWriter;
-
-	virtual void createScene(void);
-	virtual void createFrameListener(void);
-	virtual void destroyScene(void);
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-	void updatePanels();
-	void updateEvolution();
-	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 };
 
 #endif // #ifndef __SimulationManager_h_
