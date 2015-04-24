@@ -14,11 +14,12 @@ Several aspects are taken with reference from Karl Sims (http://www.karlsims.com
 To evolve creatures in a population and alter them with the aid of evolutionary algorithms, it is necessary to have an encoding of the brain and body of the creature. The chosen genomic structure used in this project uses an indirect encoding. This means that the genome contains the structure of a creature in a compressed form and can only be transcribed by following the rules defined in the genome. 
 
 
-
-
 **Milestone 2: Environments**
 
 ***
+The evolved creatures are preforming their tasks in a so called physics engine. The name is a bit misleading, as the framework does not simulate all physics that is going on but is built to simulate Newtonian Physics i.e. the classical mechanics of how rigid and softbodies interact and react to external forces. The interaction is reduced to the most important components that are usually necessary to keep the simulation runnable in real-time. For this simulation, several environments are implemented to observe the locomotion of creatures in different environments.
+
+The first two basic environments are a plane which is entirely flat and a hills environment which automatically generates a hilly infinite environment that gets generated as creatures reach it.
 
 **Milestone 3: Body model**
 ***
