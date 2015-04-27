@@ -63,6 +63,9 @@ public:
 	 */
 	btVector3 getPreciseIntersection(btVector3 origin, btVector3 direction);
 
+
+	btVector3 getLocalFakeIntersection(btVector3 origin, btVector3 direction);
+
 	/**
 	 * Get the intersection in the local reference frame of the indicated origin.
 	 * @param origin: The origin the intersection starts from and in whose reference frame the intersection is shown.
@@ -87,6 +90,7 @@ private:
 	btCollisionShape* mCollisionShape;
 	btDefaultMotionState* mMotionState;
 	btRigidBody* mBody;
+	btVector3 mSize;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMBBT_H_ */

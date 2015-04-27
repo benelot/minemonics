@@ -252,6 +252,9 @@ set(MODELHDRS
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.h
+	./model/evolution/population/creature/genome/DirectGenome.h
+	./model/evolution/population/creature/genome/IndirectGenome.h
+	./model/evolution/population/creature/genome/MixedGenome.h
 	./model/evolution/population/creature/genome/Gene.h
 	./model/evolution/population/creature/genome/GeneBranch.h
 	./model/evolution/population/creature/genome/morphology/Morphogene.h
@@ -282,6 +285,9 @@ set(MODELSRCS
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.cpp
+	./model/evolution/population/creature/genome/DirectGenome.cpp
+	./model/evolution/population/creature/genome/IndirectGenome.cpp
+	./model/evolution/population/creature/genome/MixedGenome.cpp
 	./model/evolution/population/creature/genome/Gene.cpp
 	./model/evolution/population/creature/genome/GeneBranch.cpp
 	./model/evolution/population/creature/genome/morphology/Morphogene.cpp

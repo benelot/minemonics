@@ -61,7 +61,7 @@ void Phenome::initialize(SimulationManager* simulationManager) {
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
  * @param genome The genome we perform embryogenesis with.
  */
-void Phenome::performEmbryogenesis(Genome* genome, Ogre::Vector3 rootPosition) {
+void Phenome::performEmbryogenesis(MixedGenome* genome, Ogre::Vector3 rootPosition) {
 	std::list<PhenotypeGenerator*> generatorList;
 	int totalSegmentCounter = 0;
 

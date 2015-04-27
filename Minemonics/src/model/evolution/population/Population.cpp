@@ -61,7 +61,7 @@ void Population::initialize(int creatureQty) {
  * Adds a new creature to the population with the bushiness as a input.
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
-void Population::addNewCreature(double bushiness) {
+void Population::addNewMember(double bushiness) {
 	CreatureM* creature = new CreatureM();
 	//creature->initialize(bushiness);
 	mCreatures.push_back(creature);

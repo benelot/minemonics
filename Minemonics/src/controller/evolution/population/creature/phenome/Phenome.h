@@ -36,7 +36,7 @@ class Joint;
 
 #include "controller/evolution/population/creature/phenome/Component.h"
 //## model headers
-#include "model/evolution/population/creature/genome/Genome.h"
+#include <model/evolution/population/creature/genome/MixedGenome.h>
 #include "model/evolution/population/creature/genome/Gene.h"
 
 //## view headers
@@ -49,7 +49,7 @@ public:
 
 	void initialize(SimulationManager* simulationManager);
 
-	void performEmbryogenesis(Genome* genome,Ogre::Vector3 rootPosition);
+	void performEmbryogenesis(MixedGenome* genome,Ogre::Vector3 rootPosition);
 
 	void update();
 

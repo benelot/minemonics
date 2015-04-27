@@ -1,126 +1,67 @@
 /*
  * Genome.h
  *
- *  Created on: Nov 17, 2014
+ *  Created on: Apr 27, 2015
  *      Author: leviathan
  */
 
-#ifndef GENOME_H_
-#define GENOME_H_
+#ifndef MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENOME_H_
+#define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENOME_H_
 
-//# corresponding header
-//# forward declarations
-//# system headers
-#include <fstream>
-#include <vector>
-
-//## controller headers
-//## model headers
-// include headers that implement a archive in xml format
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/version.hpp>
-
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-//## model headers
-#include "model/evolution/population/creature/genome/morphology/Morphogene.h"
-
-//## view headers
-//## utils headers
-
-/**
- * A creature's genotype dictates a potentially-recursive (both indirectly and directly recursive)
- * branching pattern. The genome encodes properties for a fixed number of segment types, and associated
- * with each type is a fixed number of branch specifications that dictate the way in which a segment of
- * a given type sprouts branches of other segment types. The encoded information also specifies the scaling,
- * positioning, and other aspects of the branching.
- */
 class Genome {
 public:
 	Genome();
 	virtual ~Genome();
 
-	void createRandomGenome(double bushiness);
+	// variational genetics
+	//# mutations
+	void integrateRandomGene();
 
-	void addGene(Morphogene* gene);
+	void integrateGene();
 
-	void linkRandomGenes();
+	void duplicateRandomGene();
 
-	bool equals(const Genome & genome) const;
+	void duplicateGene();
+
+	void splitRandomGene();
+
+	void splitGene();
+
+	void growRandomStub();
+
+	void growStub();
+
+	void mutateRandomGene();
+
+	void mutateGene();
+
+	void mutateRandomBranch();
+
+	void mutateBranch();
+
+	//# crossover
+
+	void crossover();
 
 	/**
-	 * Give access to boost serialization
+	 * Grafting copies a feature of the donator over to the receiver beginning
+	 * at the indicated gene by copying the gene and its directed subgraph over,
+	 * by following the links up to the maximum link depth and by copying all
+	 * the genes that are met on the way. Then the newly added feature is
+	 * connected randomly to the other genes to integrate it.
+	 *
+	 * @param receiver
+	 *            receives the new feature donated by the donator
+	 * @param donator
+	 *            donates the new feature
+	 * @param maxLinkDepth
+	 *            the maximum link depth to follow
+	 * @return returns the receiver genotype with the new feature added.
 	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the genome to a string.
-	 * @param os The ostream.
-	 * @param genome The genome we want to serialize.
-	 * @return A string containing all information about the genome.
-	 */
-	friend std::ostream & operator<<(std::ostream &os, const Genome &genome) {
-		std::vector<Morphogene*>::const_iterator it;
-		for (it = genome.mGenes.begin(); it != genome.mGenes.end(); it++) {
-			os << (**it);
-			os << "//";
-		}
-		return os;
-	}
-
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mGenes) & BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit) & BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit);
-	}
-
-	std::vector<Morphogene*>& getGenes() {
-		return mGenes;
-	}
-
-	int getSegmentsDepthLimit() const {
-		return mSegmentsDepthLimit;
-	}
-
-	void setSegmentsDepthLimit(int segmentsDepthLimit) {
-		mSegmentsDepthLimit = segmentsDepthLimit;
-	}
-
-	int getTotalSegmentQtyLimit() const {
-		return mTotalSegmentQtyLimit;
-	}
-
-	void setTotalSegmentQtyLimit(int totalSegmentQtyLimit) {
-		mTotalSegmentQtyLimit = totalSegmentQtyLimit;
-	}
+	void graft();
 
 private:
-
-
-	std::vector<Morphogene*> mGenes;
-
-	/**
-	 * A hard limit on the total number of body segments allowed.
-	 */
-	int mTotalSegmentQtyLimit;
-
-	/**
-	 * A bound on the depth of the body's tree structure (the number of segments along any root-to-leaf path).
-	 * This bound is iteratively adjusted until both it and the segment quantity limit are satisfied.
-	 * First, the creature is instantiated using the depth bound provided
-	 * in the evolution configuration. If, during that process, the total number of body
-	 * segments exceeds the segment count limit, the body is deleted, the depth bound is
-	 * decreased, and the body is constructed again. This process will repeat, decreasing the
-	 * depth bound each time, until the segment count falls within the specific limit.
-	 */
-	int mSegmentsDepthLimit;
-
+	int length;
 };
-BOOST_CLASS_VERSION(Genome, 1)
 
-#endif /* GENOME_H_ */
+#endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENOME_H_ */

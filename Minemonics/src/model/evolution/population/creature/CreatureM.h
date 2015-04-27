@@ -23,6 +23,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
+#include <model/evolution/population/creature/genome/MixedGenome.h>
 
 #include <OgreVector3.h>
 
@@ -33,7 +34,6 @@
 //## controller headers
 //## model headers
 #include "model/evolution/juries/Jury.h"
-#include "model/evolution/population/creature/genome/Genome.h"
 
 //## view headers
 //## utils headers
@@ -106,7 +106,7 @@ public:
 	bool equals(const CreatureM & creature) const;
 
 	//Accessor methods
-	Genome& getGenotype() {
+	MixedGenome& getGenotype() {
 		return mGenotype;
 	}
 
@@ -140,7 +140,7 @@ private:
 	/**
 	 * The genotype (genomic individual) of the creature.
 	 */
-	Genome mGenotype;
+	MixedGenome mGenotype;
 
 	/**
 	 * Is the phenotype developed?

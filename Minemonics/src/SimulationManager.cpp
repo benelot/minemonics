@@ -37,6 +37,7 @@
 #include <CEGUI/FontManager.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <boost/lexical_cast.hpp>
+#include <model/evolution/population/creature/genome/MixedGenome.h>
 
 //# custom headers
 //## base headers
@@ -57,7 +58,6 @@
 #include "controller/physics/RagDoll.h"
 
 //## model headers
-#include "model/evolution/population/creature/genome/Genome.h"
 #include "model/evolution/population/creature/CreatureM.h"
 
 //## view headers
@@ -511,6 +511,7 @@ void SimulationManager::createScene(void) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 
+	// set up lighting
 	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
 	lightdir.normalise();
 
@@ -529,6 +530,7 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
+	// set up environment
 	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
 	case Environment::HILLS: {
 		mTerrain = new Hills();
@@ -542,13 +544,13 @@ void SimulationManager::createScene(void) {
 	}
 	}
 
-	// Create skyplane
-	Ogre::Plane plane;
-	plane.d = 100;
-	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
-
 	//either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
+
+//	// Create skyplane
+//	Ogre::Plane plane;
+//	plane.d = 100;
+//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
 //	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
 //			0.5, 150, 150);
 

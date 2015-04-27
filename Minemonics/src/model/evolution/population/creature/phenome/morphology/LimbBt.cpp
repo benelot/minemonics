@@ -38,6 +38,7 @@ void LimbBt::initialize(btDynamicsWorld* world,
 		MorphologyConfiguration::PrimitiveType type, btVector3 position,
 		btQuaternion orientation, btVector3 size, btScalar mass) {
 	mWorld = world;
+	mSize = size;
 	btVector3 HalfExtents(size.x() * 0.5f, size.y() * 0.5f, size.z() * 0.5f);
 	switch (type) {
 	case MorphologyConfiguration::BLOCK:
@@ -72,6 +73,7 @@ btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 
 btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 		btVector3 direction) {
+	//TODO: Fix raytesting with bullet to get the precise intersection point
 	direction.normalize();
 	direction *= 10000.f;
 	btVector3 rayEnd = origin + direction;
@@ -106,8 +108,14 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 	return origin;
 }
 
+btVector3 LimbBt::getLocalFakeIntersection(btVector3 origin, btVector3 direction) {
+	return mSize.length()/2.0f*direction.normalized();
+}
+
 btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
-	return getLocalPreciseIntersection(origin, direction);
+	// for the moment we fake the local intersection point until the real intersection can be calculated
+	return getLocalFakeIntersection(origin, direction) ;
+	//return getLocalPreciseIntersection(origin, direction);
 }
 
 btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin,

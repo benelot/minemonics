@@ -75,7 +75,7 @@ public:
 	 * Adds a new creature to the population with the bushiness as a input.
 	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
 	 */
-	void addNewCreature(double bushiness);
+	void addNewMember(double bushiness);
 
 	/**
 	 * Tests if a population is equal to another population.
