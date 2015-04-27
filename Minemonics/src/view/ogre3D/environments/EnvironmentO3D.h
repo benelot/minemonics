@@ -37,6 +37,12 @@ class SimulationManager;
 
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class EnvironmentO3D: public EnvironmentGraphics {
 public:
 	EnvironmentO3D(SimulationManager* simulationMgr);

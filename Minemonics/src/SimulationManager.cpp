@@ -24,7 +24,7 @@
 #include <btBulletDynamicsCommon.h>
 
 //## model headers
-#include <Rng/GlobalRng.h>
+//#include <Rng/GlobalRng.h>
 #include <OgreVector3.h>
 
 //## view headers

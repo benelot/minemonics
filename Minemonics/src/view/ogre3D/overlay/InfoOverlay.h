@@ -8,13 +8,30 @@
 #ifndef VIEW_OGRE3D_OGREOVERLAY_H_
 #define VIEW_OGRE3D_OGREOVERLAY_H_
 
-#include "InfoOverlayData.h"
+//# corresponding header
+//# forward declarations
+//# system headers
 #include <vector>
-#include <OgreOverlayManager.h>
-#include <OgreOverlayContainer.h>
-#include <OgreCamera.h>
 
+//## controller headers
+//## model headers
+//## view headers
+#include <OgreOverlayElement.h>
 
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+#include <view/ogre3D/overlay/InfoOverlayData.h>
+
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-03-17
+ * @author		Benjamin Ellenberger
+ */
 class InfoOverlay {
 public:
 	InfoOverlay();

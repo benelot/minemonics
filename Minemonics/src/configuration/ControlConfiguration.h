@@ -1,13 +1,25 @@
-/*
- * ControlConfiguration.h
- *
- *  Created on: Feb 26, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLCONFIGURATION_H_
 #define CONTROLCONFIGURATION_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		The configuration for the controllers of the creatures.
+ * @details		Details
+ * @date		2015-02-26
+ * @author		Benjamin Ellenberger
+ */
 class ControlConfiguration {
 public:
 	/**

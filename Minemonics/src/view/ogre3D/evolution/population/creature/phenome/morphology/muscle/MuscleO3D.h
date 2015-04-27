@@ -10,6 +10,12 @@
 
 #include "model/evolution/population/creature/phenome/morphology/effector/muscle/Muscle.h"
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class MuscleO3D: public Muscle {
 public:
 	MuscleO3D();

@@ -8,6 +8,12 @@
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENOME_H_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENOME_H_
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class Genome {
 public:
 	Genome();

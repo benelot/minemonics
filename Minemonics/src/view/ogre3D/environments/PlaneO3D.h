@@ -29,6 +29,12 @@
 
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class PlaneO3D: public EnvironmentO3D {
 public:
 	PlaneO3D(SimulationManager* simulationMgr);

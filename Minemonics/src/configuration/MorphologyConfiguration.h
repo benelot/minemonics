@@ -1,13 +1,26 @@
-/*
- * MorphologyConfiguration.h
- *
- *  Created on: Feb 26, 2015
- *      Author: leviathan
- */
-
 #ifndef MORPHOLOGYCONFIGURATION_H_
 #define MORPHOLOGYCONFIGURATION_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		The configuration of the creature morphology.
+ * It defines limits of size and weight that are usually given by nature.
+ * @details		Details
+ * @date		2015-02-26
+ * @author		Benjamin Ellenberger
+ */
 class MorphologyConfiguration {
 public:
 
@@ -22,7 +35,6 @@ public:
 	 */
 	static const double LIMB_MAX_SIZE = 100;
 	//TODO: Optimize with bullet physics engine
-
 
 	/**
 	 * The limb minimum density

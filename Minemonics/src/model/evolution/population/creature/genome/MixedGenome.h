@@ -43,6 +43,13 @@
  * a given type sprouts branches of other segment types. The encoded information also specifies the scaling,
  * positioning, and other aspects of the branching.
  */
+
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class MixedGenome: public IndirectGenome {
 public:
 	MixedGenome();

@@ -32,6 +32,12 @@ class StateHandler;
 //## utils headers
 #include "utils/logging/Logger.h"
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class CEGUIInputHandler: public OgreInputHandler {
 private:
 	StateHandler *mStateHandler;

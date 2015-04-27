@@ -16,6 +16,12 @@
 //## view headers
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class ParamsPanel {
 public:
 	typedef std::vector<std::string> VectorString;

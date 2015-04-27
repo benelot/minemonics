@@ -1,43 +1,40 @@
-/*
- -----------------------------------------------------------------------------
- Filename:    BaseApplication.cpp
- -----------------------------------------------------------------------------
-
- This source file is part of the
- ___                 __    __ _ _    _
- /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
- //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
- / \_// (_| | | |  __/  \  /\  /| |   <| |
- \___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
- |___/
- Tutorial Framework (for Ogre 1.9)
- http://www.ogre3d.org/wiki/
- -----------------------------------------------------------------------------
- */
-
-#include "BaseApplication.h"
+//# corresponding header
+#include <BaseApplication.h>
 
 //# forward declarations
-
 //# system headers
+#include <stddef.h>
+#include <iostream>
+#include <map>
+#include <string>
+#include <utility>
+
 //## controller headers
-
 //## model headers
-
 //## view headers
+#include <OgreCamera.h>
+#include <OgreColourValue.h>
+#include <OgreConfigFile.h>
+#include <OgreIteratorWrapper.h>
+#include <OgreLogManager.h>
+#include <OgreOverlaySystem.h>
+#include <OgrePlatform.h>
+#include <OgreRenderWindow.h>
+#include <OgreResourceGroupManager.h>
+#include <OgreRoot.h>
+#include <OgreSceneManager.h>
+#include <OgreSingleton.h>
+#include <OgreString.h>
+#include <OgreTextureManager.h>
+#include <OgreVector3.h>
+#include <OgreViewport.h>
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
-//## utils headers
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 #include <macUtils.h>

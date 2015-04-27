@@ -244,10 +244,10 @@ set(MODELHDRS
 	./model/evolution/juries/Ones.h
 	./model/evolution/juries/Velocity.h
 	
-	## population
+	## evolution
+	./model/evolution/Evolution.h
+	./model/evolution/Reaper.h
 	./model/evolution/population/Population.h
-	
-	## creature
 	./model/evolution/population/creature/CreatureM.h
 	
 	## genome
@@ -280,6 +280,10 @@ set(MODELSRCS
 	./model/evolution/juries/Ones.cpp
 	./model/evolution/juries/Velocity.cpp
 	
+	
+	## evolution
+	./model/evolution/Evolution.cpp
+	./model/evolution/Reaper.cpp
 	./model/evolution/population/Population.cpp
 	./model/evolution/population/creature/CreatureM.cpp
 	

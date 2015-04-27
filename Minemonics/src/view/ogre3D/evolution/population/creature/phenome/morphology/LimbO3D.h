@@ -31,6 +31,12 @@ class SimulationManager;
 //## view headers
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class LimbO3D: public LimbGraphics {
 public:
 	LimbO3D();
