@@ -6,19 +6,24 @@
  */
 
 //# corresponding header
-#include "CameraHandler.h"
+#include <controller/camera/CameraHandler.h>
 
 //# forward declarations
 //# system headers
+#include <stddef.h>
+
 //## controller headers
 //## model headers
 //## view headers
+#include <OgreMath.h>
+#include <OgreNode.h>
+#include <OgreSceneNode.h>
+#include <OgreVector3.h>
+
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
-
 //## configuration headers
-#include "configuration/CameraConfiguration.h"
+#include <configuration/CameraConfiguration.h>
 
 //## controller headers
 //## model headers

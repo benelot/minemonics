@@ -1,15 +1,29 @@
-/*
- * OgreOverlayInfo.h
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
-
 #ifndef VIEW_OGRE3D_OGREOVERLAYINFO_H_
 #define VIEW_OGRE3D_OGREOVERLAYINFO_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+#include <string>
+
+//## controller headers
+//## model headers
+//## view headers
 #include <OgreVector3.h>
 
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		A datastructure to holds a string of information overlay data together with a position on the screen.
+ * @details		Details
+ * @date		2015-03-17
+ * @author		Benjamin Ellenberger
+ */
 class InfoOverlayData {
 public:
 	InfoOverlayData(Ogre::Vector3 position, std::string text);

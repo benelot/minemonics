@@ -1,71 +1,89 @@
-/*
- -----------------------------------------------------------------------------
- Filename:    SimulationManager.cpp
- -----------------------------------------------------------------------------
-
- based on the source file which is part of the
- ___                 __    __ _ _    _
- /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
- //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
- / \_// (_| | | |  __/  \  /\  /| |   <| |
- \___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
- |___/
- Tutorial Framework
- http://www.ogre3d.org/tikiwiki/
- -----------------------------------------------------------------------------
- */
-
-//# corresponding headers
-#include "SimulationManager.h"
-
+//# corresponding header
 //# forward declarations
 //# system headers
+#include <cstdlib>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <utility>
+
 //## controller headers
-#include <btBulletDynamicsCommon.h>
+#include <SDL.h>
+#include <SDL_mouse.h>
+#include <SDL_stdinc.h>
+#include <SDL_version.h>
+#include <SDL_video.h>
 
 //## model headers
-#include <Rng/GlobalRng.h>
-#include <OgreVector3.h>
+#include <boost/date_time/microsec_time_clock.hpp>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/date_time/time.hpp>
+#include <boost/date_time/time_duration.hpp>
+#include <boost/log/core/record.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/sources/severity_feature.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/utility/formatting_ostream.hpp>
+#include <boost/parameter/keyword.hpp>
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 
 //## view headers
-#include <OgreWindowEventUtilities.h>
-#include <CEGUI/System.h>
-#include <CEGUI/InputEvent.h>
-#include <CEGUI/Window.h>
-#include <CEGUI/WindowManager.h>
-#include <CEGUI/SchemeManager.h>
 #include <CEGUI/FontManager.h>
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include <boost/lexical_cast.hpp>
-#include <model/evolution/population/creature/genome/MixedGenome.h>
+#include <CEGUI/GUIContext.h>
+#include <CEGUI/Logger.h>
+#include <CEGUI/MouseCursor.h>
+#include <CEGUI/NamedXMLResourceManager.h>
+#include <CEGUI/SchemeManager.h>
+#include <CEGUI/Singleton.h>
+#include <CEGUI/Size.h>
+#include <CEGUI/String.h>
+#include <CEGUI/System.h>
+#include <CEGUI/UDim.h>
+#include <CEGUI/Vector.h>
+#include <CEGUI/widgets/FrameWindow.h>
+#include <CEGUI/WindowManager.h>
+#include <OgreCamera.h>
+#include <OgreColourValue.h>
+#include <OgreCommon.h>
+#include <OgreConfigOptionMap.h>
+#include <OgreException.h>
+#include <OgreFrameListener.h>
+#include <OgreLight.h>
+#include <OgreLogManager.h>
+#include <OgrePlatform.h>
+#include <OgreQuaternion.h>
+#include <OgreRenderSystem.h>
+#include <OgreRenderSystemCapabilities.h>
+#include <OgreRenderTarget.h>
+#include <OgreRenderWindow.h>
+#include <OgreRoot.h>
+#include <OgreSceneManager.h>
+#include <OgreSceneNode.h>
+#include <OgreStringConverter.h>
+#include <OgreUTFString.h>
+#include <OgreVector3.h>
+#include <OgreWindowEventUtilities.h>
 
 //# custom headers
 //## base headers
+#include <SimulationManager.h>
+
 //## configuration headers
-#include "configuration/EnvironmentConfiguration.h"
-#include "configuration/OgreSystemConfigStrings.h"
-#include "configuration/ApplicationConfiguration.h"
+#include <configuration/ApplicationConfiguration.h>
+#include <configuration/EnvironmentConfiguration.h>
+#include <configuration/OgreSystemConfigStrings.h>
 
 //## controller headers
-#include "controller/input/SDL2InputHandler.h"
-#include "controller/camera/CameraHandler.h"
-#include "controller/SaveController.h"
-
-#include "controller/environments/Environment.h"
-#include "controller/environments/Hills.h"
-#include "controller/environments/Plane.h"
-
-#include "controller/physics/RagDoll.h"
+#include <controller/environments/Hills.h>
+#include <controller/environments/Plane.h>
 
 //## model headers
-#include "model/evolution/population/creature/CreatureM.h"
-
 //## view headers
-#include "view/CEGUI/GUISheetHandler.h"
-#include "view/CEGUI/CEGUIBuilder.h"
+#include <view/CEGUI/CEGUIBuilder.h>
 
 //## utils headers
-#include "utils/Randomness.h"
+#include <utils/Randomness.h>
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
@@ -143,7 +161,7 @@ void SimulationManager::createFrameListener(void) {
 
 	// initialize random number generator
 	boost::posix_time::time_duration duration(mNow.time_of_day());
-	Rng::seed(duration.total_milliseconds());
+	//Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
 	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr, true);

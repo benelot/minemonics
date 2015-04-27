@@ -33,6 +33,12 @@ class Limb;
 
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class Joint: public Component {
 public:
 	Joint();

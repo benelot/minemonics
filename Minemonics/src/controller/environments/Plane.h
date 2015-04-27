@@ -25,6 +25,13 @@
 //## model headers
 //## view headers
 
+
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class Plane: public Environment {
 public:
 	Plane();

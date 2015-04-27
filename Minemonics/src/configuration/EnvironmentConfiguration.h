@@ -1,22 +1,35 @@
-/*
- * EnvironmentConfiguration.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef ENVIRONMENTCONFIGURATION_H_
 #define ENVIRONMENTCONFIGURATION_H_
 
-#include "controller/environments/Environment.h"
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+#include <controller/environments/Environment.h>
 
+//## model headers
+//## view headers
+
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2014-11-17
+ * @author		Benjamin Ellenberger
+ */
 class EnvironmentConfiguration {
 public:
 	/**
 	 * The environment type used in the simulator
 	 */
 	// TODO: Make the environment type changeable from within the simulator.
-	static const Environment::EnvironmentType ENVIRONMENT_TYPE = Environment::PLANE;
+	static const Environment::EnvironmentType ENVIRONMENT_TYPE =
+			Environment::PLANE;
 };
 
 #endif /* ENVIRONMENTCONFIGURATION_H_ */

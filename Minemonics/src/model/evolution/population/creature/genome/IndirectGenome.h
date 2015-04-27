@@ -10,6 +10,12 @@
 
 #include "model/evolution/population/creature/genome/Genome.h"
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class IndirectGenome: public Genome {
 public:
 	IndirectGenome();

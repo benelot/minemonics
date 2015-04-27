@@ -9,34 +9,29 @@
 #define UTILS_NAMEGENERATOR_H_
 
 //# corresponding header
-
 //# forward declarations
-
 //# system headers
 #include <string>
 #include <vector>
 
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 #include "utils/Randomness.h"
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class NameGenerator {
 public:
 	NameGenerator();

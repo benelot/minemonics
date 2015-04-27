@@ -1,15 +1,27 @@
-/*
- * PhysicsConfiguration.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef PHYSICSCONFIGURATION_H_
 #define PHYSICSCONFIGURATION_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
 #define CONST_EARTH_GRAVITY 9.81
 
+/**
+ * @brief		The configuration of the physics environment used in the simulator.
+ * @details		Details
+ * @date		2014-11-17
+ * @author		Benjamin Ellenberger
+ */
 class PhysicsConfiguration {
 public:
 

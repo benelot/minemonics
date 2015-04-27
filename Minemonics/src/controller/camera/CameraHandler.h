@@ -1,20 +1,17 @@
-/*
- * CameraHandler.h
- *
- *  Created on: Feb 13, 2015
- *      Author: leviathan
- */
-
 #ifndef CAMERAHANDLER_H_
 #define CAMERAHANDLER_H_
 
 //# corresponding header
 //# forward declarations
+class SimulationManager;
+
 //# system headers
 //## controller headers
 //## model headers
 //## view headers
 #include <OgreRoot.h>
+#include <OgrePrerequisites.h>
+#include <OgreVector3.h>
 
 //# custom headers
 //## base headers
@@ -24,8 +21,13 @@
 //## view headers
 //## utils headers
 
-class SimulationManager;
-
+/**
+ * @brief		The handler of the Ogre3D camera. Helps to position it in the graphics space
+ *  so that creatures are depicted appropriately.
+ * @details		Details
+ * @date		2015-02-13
+ * @author		Benjamin Ellenberger
+ */
 class CameraHandler {
 public:
 	CameraHandler(SimulationManager* simulationMgr);

@@ -1,32 +1,50 @@
-/*
- * OgreInputHandler.cpp
- *
- *  Created on: Feb 27, 2015
- *      Author: leviathan
- */
+//## model headers
+//## view headers
+//## utils headers
 
 //# corresponding header
+#include <controller/input/OgreInputHandler.h>
+
 //# forward declarations
 //# system headers
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <string>
 
 //## controller headers
 //## model headers
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
+#include <boost/date_time/posix_time/time_formatters.hpp>
+#include <boost/log/core/record.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/sources/severity_feature.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/utility/formatting_ostream.hpp>
+#include <boost/parameter/keyword.hpp>
+
+
 //## view headers
 #include <boost/lexical_cast.hpp>
+#include <OgreLogManager.h>
+#include <OgreRenderWindow.h>
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
+#include <SimulationManager.h>
 
 //## configuration headers
-#include "configuration/CameraConfiguration.h"
+#include <configuration/CameraConfiguration.h>
 
 //## controller headers
-#include "OgreInputHandler.h"
+#include <controller/camera/CameraHandler.h>
+#include <controller/physics/PhysicsController.h>
+#include <controller/StateHandler.h>
 
 //## model headers
 //## view headers
+#include <view/ogre3D/bullet/OgreBtDebugDrawer.h>
+#include <view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h>
+
 //## utils headers
 
 BoostLogger OgreInputHandler::mBoostLogger;  // initialize the static variables

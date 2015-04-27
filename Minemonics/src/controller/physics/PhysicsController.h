@@ -26,6 +26,12 @@
 //## view headers
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class PhysicsController {
 private:
 	//variables for to bullet physics API

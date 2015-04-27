@@ -1,16 +1,8 @@
-/*
- * StateHandler.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
 #pragma once
 
 //# corresponding header
 //# forward declarations
 //# system headers
-#include <vector>
-#include <map>
 
 //## controller headers
 //## model headers
@@ -23,10 +15,16 @@
 //## view headers
 //## utils headers
 
-typedef enum {
+enum ApplicationState{
 	STARTUP, GUI, LOADING, CANCEL_LOADING, SIMULATION, SHUTDOWN
-} ApplicationState;
+};
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class StateHandler {
 
 public:

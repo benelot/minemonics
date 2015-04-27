@@ -1,13 +1,25 @@
-/*
- * EvolutionConfiguration.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef EVOLUTIONCONFIGURATION_H_
 #define EVOLUTIONCONFIGURATION_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		The configuration of the evolutionary algorithms.
+ * @details		Details
+ * @date		2014-11-17
+ * @author		Benjamin Ellenberger
+ */
 class EvolutionConfiguration {
 public:
 	/**

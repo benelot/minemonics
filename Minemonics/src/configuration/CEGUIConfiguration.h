@@ -1,13 +1,25 @@
-/*
- * CEGUIConfiguration.h
- *
- *  Created on: Mar 2, 2015
- *      Author: leviathan
- */
-
 #ifndef CEGUICONFIGURATION_H_
 #define CEGUICONFIGURATION_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		The configuration of the CEGUI panels. It defines sizes of columns and text etc.
+ * @details		The configuration of the CEGUI panels. It defines sizes of columns and text etc.
+ * @date		2015-03-02
+ * @author		Benjamin Ellenberger
+ */
 class CEGUIConfiguration {
 public:
 	/**

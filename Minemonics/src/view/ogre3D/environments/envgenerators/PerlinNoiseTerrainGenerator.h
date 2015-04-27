@@ -19,6 +19,13 @@
 #define PERLIN_B 0x100
 
 ///Use PerlinNoise algorithm to generate terrain height map
+
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class PerlinNoiseTerrainGenerator: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
 public:
 	/** Constructor of PerlinNoiseTerrainGenerator

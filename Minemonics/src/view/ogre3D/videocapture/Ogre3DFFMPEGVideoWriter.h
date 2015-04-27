@@ -12,6 +12,7 @@
 //# corresponding header
 //# forward declarations
 class SimulationManager;
+
 //# system headers
 #include <iostream>
 

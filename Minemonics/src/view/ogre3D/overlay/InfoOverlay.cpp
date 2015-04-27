@@ -1,15 +1,30 @@
-/*
- * OgreOverlay.cpp
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
+//# corresponding header
+#include <view/ogre3D/overlay/InfoOverlay.h>
 
-#include "InfoOverlay.h"
-
+//# forward declarations
+//# system headers
+#include <iterator>
+#include <string>
+//## controller headers
+//## model headers
+//## view headers
+#include <OgreCamera.h>
+#include <OgreColourValue.h>
+#include <OgreMatrix4.h>
+#include <OgreOverlay.h>
+#include <OgreOverlayContainer.h>
+#include <OgreOverlayManager.h>
+#include <OgrePrerequisites.h>
+#include <OgreSingleton.h>
 #include <OgreVector3.h>
-#include <OgreStringConverter.h>
 #include <boost/lexical_cast.hpp>
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
 
 InfoOverlay::InfoOverlay() :
 		mCamera(NULL), mInfoOverlay(NULL), mInfoOverlayContainer(NULL) {

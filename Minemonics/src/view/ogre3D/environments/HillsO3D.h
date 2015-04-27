@@ -35,6 +35,12 @@ class SimulationManager;
 
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class HillsO3D: public EnvironmentO3D {
 public:
 	HillsO3D(SimulationManager* simulationMgr);

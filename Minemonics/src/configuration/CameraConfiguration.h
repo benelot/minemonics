@@ -1,13 +1,25 @@
-/*
- * CameraConfiguration.h
- *
- *  Created on: Feb 13, 2015
- *      Author: leviathan
- */
-
 #ifndef CAMERACONFIGURATION_H_
 #define CAMERACONFIGURATION_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		The configuration of the camera movement.
+ * @details		The configuration of the camera movement.
+ * @date		2015-02-13
+ * @author		Benjamin Ellenberger
+ */
 class CameraConfiguration {
 public:
 	/**

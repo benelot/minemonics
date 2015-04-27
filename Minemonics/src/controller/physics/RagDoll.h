@@ -30,6 +30,12 @@ class Joint;
 //## view headers
 //## utils headers
 
+/**
+ * @brief		Brief
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class RagDoll {
 	enum {
 		BODYPART_PELVIS = 0, BODYPART_SPINE, BODYPART_HEAD,
@@ -65,7 +71,8 @@ class RagDoll {
 	btDynamicsWorld* mWorld;
 
 public:
-	RagDoll(SimulationManager* simulationManager,double size, const btVector3& positionOffset);
+	RagDoll(SimulationManager* simulationManager, double size,
+			const btVector3& positionOffset);
 
 	virtual ~RagDoll();
 

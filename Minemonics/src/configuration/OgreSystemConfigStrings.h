@@ -1,15 +1,28 @@
-/*
- * OgreSystemConfigStrings.h
- *
- *  Created on: Mar 2, 2015
- *      Author: leviathan
- */
-
 #ifndef OGRESYSTEMCONFIGSTRINGS_H_
 #define OGRESYSTEMCONFIGSTRINGS_H_
 
-#include "OgreUTFString.h"
 
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+#include <OgreUTFString.h>
+
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+
+/**
+ * @brief		The configuration of the Ogre Graphics System.
+ * @details		Details
+ * @date		2015-02-02
+ * @author		Benjamin Ellenberger
+ */
 class OgreConf {
 public:
 	static const Ogre::UTFString VIDEO_MODE;

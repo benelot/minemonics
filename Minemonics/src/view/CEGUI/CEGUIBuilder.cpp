@@ -1,36 +1,36 @@
-/*
- * CEGUIBuilder.cpp
- *
- *  Created on: Feb 25, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include "CEGUIBuilder.h"
 
 //# forward declarations
 //# system headers
+#include <utility>
+#include <vector>
+
 //## controller headers
 //## model headers
 //## view headers
-#include <CEGUI/System.h>
-#include <CEGUI/InputEvent.h>
+#include <CEGUI/Element.h>
+#include <CEGUI/Singleton.h>
+#include <CEGUI/Size.h>
+#include <CEGUI/UDim.h>
+#include <CEGUI/Vector.h>
 #include <CEGUI/Window.h>
-#include <CEGUI/WindowManager.h>
-#include <CEGUI/SchemeManager.h>
-#include <CEGUI/FontManager.h>
+#include <OgreRenderWindow.h>
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
+#include <SimulationManager.h>
 
 //## configuration headers
 #include "configuration/CEGUIConfiguration.h"
 
 //## controller headers
+#include <configuration/CEGUIConfiguration.h>
+
 //## model headers
 //## view headers
-#include "view/CEGUI/ParamsPanel.h"
+#include <view/CEGUI/CEGUIBuilder.h>
+#include <view/CEGUI/ParamsPanel.h>
 
 //## utils headers
 // CEGUI includes
