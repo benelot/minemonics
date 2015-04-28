@@ -1,21 +1,4 @@
-//# corresponding header
-//# forward declarations
-//# system headers
-#include <cstdlib>
-#include <iostream>
-#include <iterator>
-#include <map>
-#include <utility>
-
-//## controller headers
-#include <SDL.h>
-#include <SDL_mouse.h>
-#include <SDL_stdinc.h>
-#include <SDL_version.h>
-#include <SDL_video.h>
-
-//## model headers
-<<<<<<< HEAD
+//# corresponding headers
 #include <boost/date_time/microsec_time_clock.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/date_time/time.hpp>
@@ -28,12 +11,11 @@
 #include <boost/parameter/keyword.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-=======
-//#include <Rng/GlobalRng.h>
-#include <OgreVector3.h>
->>>>>>> branch 'master' of https://github.com/benelot/minemonics.git
-
-//## view headers
+#include <configuration/ApplicationConfiguration.h>
+#include <configuration/EnvironmentConfiguration.h>
+#include <configuration/OgreSystemConfigStrings.h>
+#include <controller/environments/Hills.h>
+#include <controller/environments/Plane.h>
 #include <CEGUI/FontManager.h>
 #include <CEGUI/GUIContext.h>
 #include <CEGUI/Logger.h>
@@ -69,26 +51,20 @@
 #include <OgreUTFString.h>
 #include <OgreVector3.h>
 #include <OgreWindowEventUtilities.h>
-
-//# custom headers
-//## base headers
+#include <Rng/GlobalRng.h>
+#include <SDL.h>
+#include <SDL_mouse.h>
+#include <SDL_stdinc.h>
+#include <SDL_version.h>
+#include <SDL_video.h>
 #include <SimulationManager.h>
-
-//## configuration headers
-#include <configuration/ApplicationConfiguration.h>
-#include <configuration/EnvironmentConfiguration.h>
-#include <configuration/OgreSystemConfigStrings.h>
-
-//## controller headers
-#include <controller/environments/Hills.h>
-#include <controller/environments/Plane.h>
-
-//## model headers
-//## view headers
-#include <view/CEGUI/CEGUIBuilder.h>
-
-//## utils headers
 #include <utils/Randomness.h>
+#include <view/CEGUI/CEGUIBuilder.h>
+#include <cstdlib>
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <utility>
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
@@ -166,7 +142,7 @@ void SimulationManager::createFrameListener(void) {
 
 	// initialize random number generator
 	boost::posix_time::time_duration duration(mNow.time_of_day());
-	//Rng::seed(duration.total_milliseconds());
+	Rng::seed(duration.total_milliseconds());
 
 	mPhysicsController.initBulletPhysics();
 	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr, true);

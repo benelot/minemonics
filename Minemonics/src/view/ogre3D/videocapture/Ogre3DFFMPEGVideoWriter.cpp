@@ -1,36 +1,23 @@
-//## configuration headers
-#include <view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h>
-
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
+//
+//  ofxFFMPEGVideoWriter.cpp
+//  ShapeDeform
+//
+//  Created by roy_shilkrot on 4/7/13.
+//
+//
+// taken from ffmpeg's examples code: http://ffmpeg.org/doxygen/trunk/api-example_8c-source.html
+// http://ffmpeg.org/doxygen/trunk/doc_2examples_2decoding_encoding_8c-example.html#a33
+// http://ffmpeg.org/doxygen/trunk/doc_2examples_2muxing_8c-example.html#a75
+//
 
 //# corresponding header
 //# forward declarations
 //# system headers
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-
 //## controller headers
 //## model headers
-#include <boost/date_time/microsec_time_clock.hpp>
-#include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <boost/date_time/time.hpp>
-#include <boost/date_time/time_duration.hpp>
-
 //## view headers
-#include <OgreColourValue.h>
-#include <OgreHardwareBuffer.h>
+#include <Ogre.h>
 #include <OgreHardwarePixelBuffer.h>
-#include <OgrePixelFormat.h>
-#include <OgreResourceGroupManager.h>
-#include <OgreRoot.h>
-#include <OgreSharedPtr.h>
-#include <OgreTexture.h>
-#include <OgreTextureManager.h>
-#include <OgreViewport.h>
 #ifdef __cplusplus
 extern "C" {
 #include <libavutil/mathematics.h>
@@ -38,11 +25,6 @@ extern "C" {
 #include <libswscale/swscale.h>
 #include <libavutil/pixdesc.h>
 #include <libavformat/avformat.h>
-#include <libavformat/avio.h>
-#include <libavutil/dict.h>
-#include <libavutil/frame.h>
-#include <libavutil/mem.h>
-#include <libavutil/pixfmt.h>
 }
 #endif
 
@@ -55,6 +37,8 @@ extern "C" {
 //## model headers
 //## view headers
 //## utils headers
+
+#include "Ogre3DFFMPEGVideoWriter.h"
 
 void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 		const char* filename, int width, int height, int bitrate,float timebasefactor) {
