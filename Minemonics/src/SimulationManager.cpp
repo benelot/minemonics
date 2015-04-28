@@ -15,6 +15,7 @@
 #include <SDL_video.h>
 
 //## model headers
+<<<<<<< HEAD
 #include <boost/date_time/microsec_time_clock.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/date_time/time.hpp>
@@ -27,6 +28,10 @@
 #include <boost/parameter/keyword.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+=======
+//#include <Rng/GlobalRng.h>
+#include <OgreVector3.h>
+>>>>>>> branch 'master' of https://github.com/benelot/minemonics.git
 
 //## view headers
 #include <CEGUI/FontManager.h>

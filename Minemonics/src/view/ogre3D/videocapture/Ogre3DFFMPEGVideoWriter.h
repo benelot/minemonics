@@ -1,11 +1,3 @@
-//
-//  ofxFFMPEGVideoWriter.h
-//  ShapeDeform
-//
-//  Created by roy_shilkrot on 4/7/13.
-//
-//
-
 #ifndef __ofxFFMPEGVideoWriter__
 #define __ofxFFMPEGVideoWriter__
 
@@ -13,12 +5,26 @@
 //# forward declarations
 class SimulationManager;
 
+class AVCodec;
+class AVCodecContext;
+class AVFormatContext;
+class AVFrame;
+class AVOutputFormat;
+class AVStream;
+class SwsContext;
+
 //# system headers
 #include <iostream>
+#include <string>
 
 //## controller headers
 //## model headers
+#include <boost/date_time/posix_time/posix_time_config.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
+
 //## view headers
+#include <OgrePlatform.h>
+#include <Renderer.h>
 #include <OgreRenderTexture.h>
 #include <OgreRenderTarget.h>
 #include <OgreRenderTargetListener.h>
@@ -27,6 +33,7 @@ class SimulationManager;
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
+#include <libavutil/error.h>
 }
 #endif
 
@@ -51,11 +58,22 @@ static const std::string av_make_error_string(int errnum) {
 
 #endif // __cplusplus
 
+/**
+ * @brief		An adaptive framerate video capturer for OGRE3D.
+ * @details		An adaptive framerate video capturer for OGRE3D.
+ * Adapted from ofxFFMPEGVideoWriter.cpp created by roy_shilkrot on 4/7/13.
+ * taken from ffmpeg's examples code: http://ffmpeg.org/doxygen/trunk/api-example_8c-source.html
+ * http://ffmpeg.org/doxygen/trunk/doc_2examples_2decoding_encoding_8c-example.html#a33
+ * http://ffmpeg.org/doxygen/trunk/doc_2examples_2muxing_8c-example.html#a75
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class Ogre3DFFMPEGVideoWriter: public Ogre::RenderTargetListener {
 public:
 	Ogre3DFFMPEGVideoWriter() :
-			mAvFormatContext(NULL), mAVCodec(NULL), mWriterInitialized(false), frame_count(1), mAVCodecContext(NULL), size(
-					0), mAVOutputFormat(NULL), mSwsContext(NULL), mAVFrame(NULL), mPictureRGB24(
+			mAvFormatContext(NULL), mAVCodec(NULL), mWriterInitialized(false), frame_count(
+					1), mAVCodecContext(NULL), size(0), mAVOutputFormat(NULL), mSwsContext(
+			NULL), mAVFrame(NULL), mPictureRGB24(
 			NULL), mTimebasefactor(0), mAVStream(NULL), mRenderTexture(NULL) {
 	}
 
