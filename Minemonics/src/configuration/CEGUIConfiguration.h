@@ -1,7 +1,7 @@
 #ifndef CEGUICONFIGURATION_H_
 #define CEGUICONFIGURATION_H_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 //# system headers
 //## controller headers
@@ -13,6 +13,7 @@
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
 
 /**
  * @brief		The configuration of the CEGUI panels. It defines sizes of columns and text etc.

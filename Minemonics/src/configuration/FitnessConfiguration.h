@@ -1,7 +1,7 @@
 #ifndef FITNESSCONFIGURATION_H_
 #define FITNESSCONFIGURATION_H_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 //# system headers
 //## controller headers
@@ -13,6 +13,7 @@
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
 
 /**
  * @brief		The configuration of fitness functions.

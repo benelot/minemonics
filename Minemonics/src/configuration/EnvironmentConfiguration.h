@@ -1,7 +1,7 @@
 #ifndef ENVIRONMENTCONFIGURATION_H_
 #define ENVIRONMENTCONFIGURATION_H_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 //# system headers
 //## controller headers
@@ -15,6 +15,7 @@
 
 //## model headers
 //## view headers
+//## utils headers
 
 /**
  * @brief		Brief

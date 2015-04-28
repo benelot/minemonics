@@ -1,7 +1,7 @@
 #ifndef APPLICATIONCONFIGURATION_H_
 #define APPLICATIONCONFIGURATION_H_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 //# system headers
 //## controller headers
@@ -13,6 +13,7 @@
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
 
 /**
  * @brief		Basic configuration of the simulation application.

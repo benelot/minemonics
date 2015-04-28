@@ -2,7 +2,7 @@
 #define OGRESYSTEMCONFIGSTRINGS_H_
 
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 //# system headers
 //## controller headers
@@ -16,6 +16,7 @@
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
 
 /**
  * @brief		The configuration of the Ogre Graphics System.
