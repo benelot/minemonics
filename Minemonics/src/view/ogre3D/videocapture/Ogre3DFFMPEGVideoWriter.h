@@ -1,11 +1,3 @@
-//
-//  ofxFFMPEGVideoWriter.h
-//  ShapeDeform
-//
-//  Created by roy_shilkrot on 4/7/13.
-//
-//
-
 #ifndef __ofxFFMPEGVideoWriter__
 #define __ofxFFMPEGVideoWriter__
 
@@ -50,6 +42,16 @@ static const std::string av_make_error_string(int errnum) {
 
 #endif // __cplusplus
 
+/**
+ * @brief		An adaptive framerate video capturer for OGRE3D.
+ * @details		An adaptive framerate video capturer for OGRE3D.
+ * Adapted from ofxFFMPEGVideoWriter.cpp created by roy_shilkrot on 4/7/13.
+ * taken from ffmpeg's examples code: http://ffmpeg.org/doxygen/trunk/api-example_8c-source.html
+ * http://ffmpeg.org/doxygen/trunk/doc_2examples_2decoding_encoding_8c-example.html#a33
+ * http://ffmpeg.org/doxygen/trunk/doc_2examples_2muxing_8c-example.html#a75
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
 class Ogre3DFFMPEGVideoWriter: public Ogre::RenderTargetListener {
 public:
 	Ogre3DFFMPEGVideoWriter() :

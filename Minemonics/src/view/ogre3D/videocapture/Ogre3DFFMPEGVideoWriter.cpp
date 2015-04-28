@@ -1,15 +1,3 @@
-//
-//  ofxFFMPEGVideoWriter.cpp
-//  ShapeDeform
-//
-//  Created by roy_shilkrot on 4/7/13.
-//
-//
-// taken from ffmpeg's examples code: http://ffmpeg.org/doxygen/trunk/api-example_8c-source.html
-// http://ffmpeg.org/doxygen/trunk/doc_2examples_2decoding_encoding_8c-example.html#a33
-// http://ffmpeg.org/doxygen/trunk/doc_2examples_2muxing_8c-example.html#a75
-//
-
 //# corresponding header
 //# forward declarations
 //# system headers
