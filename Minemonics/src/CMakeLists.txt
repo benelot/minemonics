@@ -245,7 +245,7 @@ set(MODELHDRS
 	./model/evolution/juries/Velocity.h
 	
 	## evolution
-	./model/evolution/Evolution.h
+	./model/evolution/EvolutionM.h
 	./model/evolution/Reaper.h
 	./model/evolution/population/Population.h
 	./model/evolution/population/creature/CreatureM.h
@@ -282,7 +282,7 @@ set(MODELSRCS
 	
 	
 	## evolution
-	./model/evolution/Evolution.cpp
+	./model/evolution/EvolutionM.cpp
 	./model/evolution/Reaper.cpp
 	./model/evolution/population/Population.cpp
 	./model/evolution/population/creature/CreatureM.cpp
@@ -307,7 +307,6 @@ set(MODELSRCS
 )
 set(CONTROLLERHDRS
 	# controller
-	./controller/camera/CameraHandler.h
 	# input handlers
 	./controller/input/ApplicationScancode.h
 	./controller/input/ApplicationKeycode.h
@@ -315,6 +314,9 @@ set(CONTROLLERHDRS
 	./controller/input/SDL2InputHandler.h
 	./controller/input/CEGUIInputHandler.h
 	./controller/input/OgreInputHandler.h
+	
+	## camera handler
+	./controller/camera/CameraHandler.h
 	
 	## object save controller
 	./controller/SaveController.h
@@ -362,6 +364,7 @@ set(CONTROLLERSRCS
     ./controller/environments/Plane.cpp
     
     ## phenome
+    ./controller/evolution/Evolution.cpp
     ./controller/evolution/population/creature/Creature.cpp
     ./controller/evolution/genetics/PhenotypeGenerator.cpp
     ./controller/evolution/population/creature/phenome/Phenome.cpp
@@ -457,8 +460,6 @@ set(VIEWSRCS
 	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp
 	
 	## physics debug drawing
-	#./view/ogre3D/bullet/OgreDebugDrawer.cpp
-	
 	./view/ogre3D/bullet/OgreBtDebugDrawer.cpp
 	
 	

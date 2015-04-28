@@ -55,7 +55,7 @@ public:
 	MixedGenome();
 	virtual ~MixedGenome();
 
-	void createRandomGenome(double bushiness);
+	void createRandomGenome(double branchiness);
 
 	void addGene(Morphogene* gene);
 

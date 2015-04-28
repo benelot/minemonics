@@ -45,7 +45,7 @@
 #include "utils/ogre3D/Euler.h"
 
 Phenome::Phenome() :
-		mSimulationManager(NULL), mWorld(NULL) {
+		mSimulationManager(NULL), mWorld(NULL), inWorld(false) {
 
 }
 
@@ -61,7 +61,8 @@ void Phenome::initialize(SimulationManager* simulationManager) {
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
  * @param genome The genome we perform embryogenesis with.
  */
-void Phenome::performEmbryogenesis(MixedGenome* genome, Ogre::Vector3 rootPosition) {
+void Phenome::performEmbryogenesis(MixedGenome* genome,
+		Ogre::Vector3 rootPosition) {
 	std::list<PhenotypeGenerator*> generatorList;
 	int totalSegmentCounter = 0;
 
@@ -235,8 +236,8 @@ void Phenome::performEmbryogenesis(MixedGenome* genome, Ogre::Vector3 rootPositi
 //						limbBCOM + 10000.0f * localAnchorDirOB,
 //						Ogre::ColourValue(1, 0, 0));
 
-				// draw line from limb A to surface anchor point of A (GREEN LINE)
-				//TODO: Debug lines
+// draw line from limb A to surface anchor point of A (GREEN LINE)
+//TODO: Debug lines
 				mSimulationManager->getDebugDrawer()->drawLine(limbACOM,
 						limbACOM + localAnchorOA, Ogre::ColourValue(0, 1, 0));
 
@@ -394,29 +395,35 @@ void Phenome::update() {
 }
 
 void Phenome::addToWorld() {
-	// Add all limbs
-	std::vector<Limb*>::iterator lit = mLimbs.begin();
-	for (; lit != mLimbs.end(); lit++) {
-		(*lit)->addToWorld();
-	}
+	if (!isInWorld()) {
+		// Add all limbs
+		std::vector<Limb*>::iterator lit = mLimbs.begin();
+		for (; lit != mLimbs.end(); lit++) {
+			(*lit)->addToWorld();
+		}
 
-	// Add all constraints
-	std::vector<Joint*>::iterator jit = mJoints.begin();
-	for (; jit != mJoints.end(); jit++) {
-		(*jit)->addToWorld();
+		// Add all constraints
+		std::vector<Joint*>::iterator jit = mJoints.begin();
+		for (; jit != mJoints.end(); jit++) {
+			(*jit)->addToWorld();
+		}
+		setInWorld(true);
 	}
 }
 
 void Phenome::removeFromWorld() {
-	// Remove all constraints
-	std::vector<Joint*>::iterator jit = mJoints.begin();
-	for (; jit != mJoints.end(); jit++) {
-		(*jit)->removeFromWorld();
-	}
+	if (isInWorld()) {
+		// Remove all constraints
+		std::vector<Joint*>::iterator jit = mJoints.begin();
+		for (; jit != mJoints.end(); jit++) {
+			(*jit)->removeFromWorld();
+		}
 
-	// Remove all limbs
-	std::vector<Limb*>::iterator lit = mLimbs.begin();
-	for (; lit != mLimbs.end(); lit++) {
-		(*lit)->removeFromWorld();
+		// Remove all limbs
+		std::vector<Limb*>::iterator lit = mLimbs.begin();
+		for (; lit != mLimbs.end(); lit++) {
+			(*lit)->removeFromWorld();
+		}
+		setInWorld(false);
 	}
 }

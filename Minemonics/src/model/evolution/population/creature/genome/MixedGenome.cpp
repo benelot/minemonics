@@ -40,7 +40,7 @@ MixedGenome::~MixedGenome() {
 	}
 }
 
-void MixedGenome::createRandomGenome(double bushiness) {
+void MixedGenome::createRandomGenome(double branchiness) {
 	Randomness randomness;
 
 	int geneQty =
@@ -51,7 +51,7 @@ void MixedGenome::createRandomGenome(double bushiness) {
 									PopulationConfiguration::POPULATION_GENES_INITIAL_VAR));
 	for (int i = 0; i < geneQty; i++) {
 		Morphogene* gene = new Morphogene();
-		gene->initialize(bushiness);
+		gene->initialize(branchiness);
 		mGenes.push_back(gene);
 	}
 

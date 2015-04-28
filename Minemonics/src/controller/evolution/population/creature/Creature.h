@@ -1,10 +1,3 @@
-/*
- * Creature.h
- *
- *  Created on: Apr 7, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_EVOLUTION_POPULATION_CREATURE_CREATURE_H_
 #define CONTROLLER_EVOLUTION_POPULATION_CREATURE_CREATURE_H_
 //# forward declarations
@@ -29,7 +22,7 @@ class SimulationManager;
 /**
  * @brief		Brief
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-04-07
  * @author		Benjamin Ellenberger
  */
 class Creature {

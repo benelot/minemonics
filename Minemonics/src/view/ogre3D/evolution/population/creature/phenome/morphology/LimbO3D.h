@@ -43,35 +43,77 @@ public:
 	virtual ~LimbO3D();
 
 	void initialize(SimulationManager* simulationManager,
-			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale,Ogre::ColourValue color);
+			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale,
+			Ogre::ColourValue color);
 
+	/**
+	 * Update the graphical representation of the limb with the physical representation.
+	 */
 	virtual void update();
 
-	Ogre::Entity*& getEntity() {
-		return mEntity;
-	}
-
-	Ogre::SceneNode*& getEntityNode() {
-		return mEntityNode;
-	}
-
+	/**
+	 * Add the limb to the graphical world.
+	 */
 	void addToWorld();
 
+	/**
+	 * Add the limb to the graphical world.
+	 */
 	void removeFromWorld();
 
+	/**
+	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
+	 * @param origin The origin of the ray in the global reference frame.
+	 * @param direction The direction of the ray.
+	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
+	 */
 	Ogre::Vector3 getIntersection(Ogre::Vector3 origin,
 			Ogre::Vector3 direction);
 
+	/**
+	 * Get the intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally less expensive than the precise version.
+	 * @param origin The origin of the ray in the global reference frame.
+	 * @param direction The direction of the ray.
+	 * @return The intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
+	 */
 	Ogre::Vector3 getLocalIntersection(Ogre::Vector3 origin,
 			Ogre::Vector3 direction);
 
+	/**
+	 * Get the precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally more expensive than the non-precise version.
+	 * @param origin The origin of the ray in the global reference frame.
+	 * @param direction The direction of the ray.
+	 * @return The precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
+	 */
 	Ogre::Vector3 getLocalPreciseIntersection(Ogre::Vector3 origin,
 			Ogre::Vector3 direction);
 
+	//Accessor methods
+
+	Ogre::Entity*& getEntity() {
+		return mLimbEntity;
+	}
+
+	Ogre::SceneNode*& getEntityNode() {
+		return mLimbEntityNode;
+	}
+
 private:
+
+	/**
+	 * The simulationmanager handle
+	 */
 	SimulationManager* mSimulationManager;
-	Ogre::Entity* mEntity;
-	Ogre::SceneNode* mEntityNode;
+
+	/**
+	 * The limb object in the graphical world.
+	 */
+	Ogre::Entity* mLimbEntity;
+
+	/**
+	 * The entity node of the limb to perform rotations and translations with.
+	 */
+	Ogre::SceneNode* mLimbEntityNode;
 
 };
 

@@ -27,12 +27,12 @@ CreatureM::CreatureM() :
 
 }
 
-void CreatureM::initialize(Ogre::Vector3 position,double bushiness) {
+void CreatureM::initialize(Ogre::Vector3 position,double branchiness) {
 	mPosition = position;
 	Randomness randomness;
 	NameGenerator nameGenerator;
 	mName = nameGenerator.generateName();
-	mGenotype.createRandomGenome(bushiness);
+	mGenotype.createRandomGenome(branchiness);
 	//genotype.expand();
 	mGenotype.linkRandomGenes();
 }

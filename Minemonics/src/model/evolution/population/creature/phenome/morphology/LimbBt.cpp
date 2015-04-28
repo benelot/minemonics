@@ -1,26 +1,24 @@
-/*
- * LimbBt.cpp
- *
- *  Created on: Mar 24, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
-#include "LimbBt.h"
+#include <model/evolution/population/creature/phenome/morphology/LimbBt.h>
 
 //# forward declarations
 //# system headers
+#include <stddef.h>
 #include <iostream>
 
 //## controller headers
 //## model headers
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
+#include <BulletCollision/CollisionShapes/btBoxShape.h>
+#include <BulletCollision/CollisionShapes/btCapsuleShape.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <LinearMath/btDefaultMotionState.h>
+#include <LinearMath/btTransform.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/PhysicsConfiguration.h"
-#include "configuration/MorphologyConfiguration.h"
-
 //## controller headers
 //## model headers
 //## view headers
@@ -88,11 +86,11 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 		//Normal = RayCallback.m_hitNormalWorld;
 		std::cout
 				<< "############################################################\n"
-				<< "hit an object!\n" << origin.x() << ",\t" << origin.y() << ",\t"
-				<< origin.z() << "\t::Origin\n" << hitPosition.x() << ",\t"
-				<< hitPosition.y() << ",\t" << hitPosition.z() << "\t::hit\n"
-				<< rayEnd.x() << ",\t" << rayEnd.y() << ",\t" << rayEnd.z()
-				<< "\t::rayEnd\n"
+				<< "hit an object!\n" << origin.x() << ",\t" << origin.y()
+				<< ",\t" << origin.z() << "\t::Origin\n" << hitPosition.x()
+				<< ",\t" << hitPosition.y() << ",\t" << hitPosition.z()
+				<< "\t::hit\n" << rayEnd.x() << ",\t" << rayEnd.y() << ",\t"
+				<< rayEnd.z() << "\t::rayEnd\n"
 				<< "############################################################\n\n";
 
 		//return hit
@@ -101,20 +99,21 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 	std::cout
 			<< "############################################################\n"
 			<< "no hit!\n" << origin.x() << ",\t" << origin.y() << ",\t"
-			<< origin.z() << "\t::Origin\n" << rayEnd.x() << ",\t"
-			<< rayEnd.y() << ",\t" << rayEnd.z() << "\t::rayEnd\n"
+			<< origin.z() << "\t::Origin\n" << rayEnd.x() << ",\t" << rayEnd.y()
+			<< ",\t" << rayEnd.z() << "\t::rayEnd\n"
 			<< "############################################################\n\n";
 	//no hit
 	return origin;
 }
 
-btVector3 LimbBt::getLocalFakeIntersection(btVector3 origin, btVector3 direction) {
-	return mSize.length()/2.0f*direction.normalized();
+btVector3 LimbBt::getLocalFakeIntersection(btVector3 origin,
+		btVector3 direction) {
+	return mSize.length() / 2.0f * direction.normalized();
 }
 
 btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
 	// for the moment we fake the local intersection point until the real intersection can be calculated
-	return getLocalFakeIntersection(origin, direction) ;
+	return getLocalFakeIntersection(origin, direction);
 	//return getLocalPreciseIntersection(origin, direction);
 }
 
@@ -125,10 +124,16 @@ btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin,
 }
 
 void LimbBt::addToWorld() {
-	mWorld->addRigidBody(mBody);
+	if (!isInWorld()) {
+		mWorld->addRigidBody(mBody);
+		setInWorld(true);
+	}
 }
 
 void LimbBt::removeFromWorld() {
-	mWorld->removeRigidBody(mBody);
+	if (isInWorld()) {
+		mWorld->removeRigidBody(mBody);
+		setInWorld(false);
+	}
 }
 

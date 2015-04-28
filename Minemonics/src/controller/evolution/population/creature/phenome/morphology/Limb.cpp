@@ -1,32 +1,35 @@
-/*
- * Limb.cpp
- *
- *  Created on: Dec 19, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
 #include "Limb.h"
 
 //# forward declarations
 //# system headers
 //## controller headers
-#include <btBulletDynamicsCommon.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 
 //## model headers
+#include <boost/lexical_cast.hpp>
+#include <LinearMath/btQuadWord.h>
+#include <LinearMath/btQuaternion.h>
+#include <LinearMath/btScalar.h>
+#include <LinearMath/btVector3.h>
+
 //## view headers
 #include <boost/lexical_cast.hpp>
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
+#include <SimulationManager.h>
 
 //## configuration headers
 #include "configuration/PhysicsConfiguration.h"
 #include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
+#include <controller/evolution/population/creature/phenome/morphology/Limb.h>
+#include <controller/physics/PhysicsController.h>
+
 //## model headers
+
 #include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
 
 //## view headers
@@ -115,25 +118,10 @@ std::string Limb::getInfo() {
 }
 
 /**
- * Get the Graphics part of the limb.
- */
-LimbO3D* Limb::getLimbGraphics() {
-	return ((LimbO3D*) mLimbGraphics);
-
-}
-
-/**
- * Get the Physics part of the limb.
- */
-LimbBt* Limb::getLimbPhysics() {
-	return ((LimbBt*) mLimbPhysics);
-}
-
-/**
  * Add the limb to the world.
  */
 void Limb::addToWorld() {
-	//mLimbGraphics->addToWorld();
+	mLimbGraphics->addToWorld();
 	mLimbPhysics->addToWorld();
 }
 
@@ -141,7 +129,7 @@ void Limb::addToWorld() {
  * Remove the limb from the world.
  */
 void Limb::removeFromWorld() {
-	//mLimbGraphics->removeFromWorld();
+	mLimbGraphics->removeFromWorld();
 	mLimbPhysics->removeFromWorld();
 }
 

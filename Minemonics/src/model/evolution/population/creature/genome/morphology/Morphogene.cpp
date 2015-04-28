@@ -60,7 +60,7 @@ Morphogene::~Morphogene() {
 	}
 }
 
-void Morphogene::initialize(double bushiness) {
+void Morphogene::initialize(double branchiness) {
 	mGeneType = Gene::MorphoGene;
 	mActive = true;
 
@@ -129,7 +129,7 @@ void Morphogene::initialize(double bushiness) {
 	//The follow up gene follows instead if this gene's repetition limit is reached.
 	mFollowUpGene = -1;
 
-	int branchQty = randomness.nextPosInt(0, bushiness);
+	int branchQty = randomness.nextPosInt(0, branchiness);
 
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();

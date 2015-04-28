@@ -37,27 +37,28 @@
 #endif
 
 LimbO3D::LimbO3D() :
-		mEntity(NULL), mEntityNode(NULL), mSimulationManager(NULL) {
+		mLimbEntity(NULL), mLimbEntityNode(NULL), mSimulationManager(NULL) {
 
 }
 
 LimbO3D::~LimbO3D() {
-	delete mEntityNode;
-	delete mEntity;
+	delete mLimbEntityNode;
+	delete mLimbEntity;
 }
 
 void LimbO3D::initialize(SimulationManager* simulationManager,
-		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale,Ogre::ColourValue color) {
+		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale,
+		Ogre::ColourValue color) {
 	mSimulationManager = simulationManager;
 
-	Ogre::String name = boost::lexical_cast<std::string>(this) + "/"
-					+ "Limb";
+	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	Ogre::String materialName = boost::lexical_cast<std::string>(this) + "/"
-					+ "Limb";
+			+ "Limb";
 
 	// add the true as the last parameter to make it a manual material
-	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false
-	);
+	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
+			materialName,
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false);
 
 	Ogre::Pass *pass = material->getTechnique(0)->getPass(0);
 	pass->setLightingEnabled(false);
@@ -76,15 +77,16 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 	switch (type) {
 	case MorphologyConfiguration::BLOCK:
 
-		tex->setTextureScale(4,4);
+		tex->setTextureScale(4, 4);
 		material->load();
-		mEntity = mSimulationManager->getSceneManager()->createEntity(
+		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(
 				Ogre::SceneManager::PT_CUBE);
-		mEntity->setMaterialName(materialName);
-		mEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
-		mEntityNode->attachObject(mEntity);
+		mLimbEntity->setMaterialName(materialName);
+		mLimbEntityNode =
+				mSimulationManager->getSceneManager()->createSceneNode();
+		mLimbEntityNode->attachObject(mLimbEntity);
 
-		mEntityNode->scale(
+		mLimbEntityNode->scale(
 				scale.x * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
 				scale.y * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
 				scale.z * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR);
@@ -95,27 +97,34 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 		//because we can only scale bullet capsule that way, we do not scale this object differently
 		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
 				0.5f * scale.z).setHeight(scale.y).realizeMesh(name);
-		mEntity = mSimulationManager->getSceneManager()->createEntity(name);
-		mEntity->setMaterialName(materialName);
-		mEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
-		mEntityNode->attachObject(mEntity);
+		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(name);
+		mLimbEntity->setMaterialName(materialName);
+		mLimbEntityNode =
+				mSimulationManager->getSceneManager()->createSceneNode();
+		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
 	}
 }
 
 void LimbO3D::update() {
-	mEntityNode->setPosition(mPosition);
-	mEntityNode->setOrientation(mOrientation);
+	mLimbEntityNode->setPosition(mPosition);
+	mLimbEntityNode->setOrientation(mOrientation);
 }
 
 void LimbO3D::addToWorld() {
-	mSimulationManager->getSceneManager()->getRootSceneNode()->addChild(
-			mEntityNode);
+	if (!isInWorld()) {
+		mSimulationManager->getSceneManager()->getRootSceneNode()->addChild(
+				mLimbEntityNode);
+		setInWorld(true);
+	}
 }
 
 void LimbO3D::removeFromWorld() {
-	mSimulationManager->getSceneManager()->getRootSceneNode()->removeChild(
-			mEntityNode);
+	if (isInWorld()) {
+		mSimulationManager->getSceneManager()->getRootSceneNode()->removeChild(
+				mLimbEntityNode);
+		setInWorld(false);
+	}
 }
 
 Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
@@ -136,7 +145,7 @@ Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
 	double distance = 0;
 	for (; it != result.end(); it++) {
 		std::cout << "Collision name:" << it->movable->getName() << std::endl;
-		if (it->movable->getName() == mEntity->getName()) {
+		if (it->movable->getName() == mLimbEntity->getName()) {
 			distance = it->distance;
 			std::cout << "Distance from center" << distance << std::endl;
 			//curObject = it->movable->getParentSceneNode();
@@ -164,7 +173,7 @@ Ogre::Vector3 LimbO3D::getLocalIntersection(Ogre::Vector3 origin,
 	//Ogre::SceneNode* curObject;
 	double distance = 0;
 	for (; it != result.end(); it++) {
-		if (it->movable->getName() == mEntity->getName()) {
+		if (it->movable->getName() == mLimbEntity->getName()) {
 			distance = it->distance;
 			//curObject = it->movable->getParentSceneNode();
 		}
@@ -178,7 +187,7 @@ Ogre::Vector3 LimbO3D::getLocalPreciseIntersection(Ogre::Vector3 origin,
 		Ogre::Vector3 direction) {
 	OgreMeshRay ray(mSimulationManager->getSceneManager());
 	Ogre::Vector3 result;
-	ray.raycastFromPoint(origin, direction, result, mEntity->getName());
+	ray.raycastFromPoint(origin, direction, result, mLimbEntity->getName());
 
 	return result;
 }

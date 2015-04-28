@@ -58,7 +58,7 @@ class Morphogene: public Gene {
 public:
 	Morphogene();
 	virtual ~Morphogene();
-	void initialize(double bushiness);
+	void initialize(double branchiness);
 
 	bool equals(const Morphogene& morphoGene) const;
 

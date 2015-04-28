@@ -10,8 +10,16 @@
 
 //# corresponding header
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
 #include <fstream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -21,10 +29,9 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/vector.hpp>
-#include <boost/serialization/version.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
-#include <model/evolution/population/creature/genome/MixedGenome.h>
-
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -33,13 +40,15 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include "model/evolution/juries/Jury.h"
+#include <model/evolution/juries/Jury.h>
+#include <model/evolution/population/creature/genome/morphology/Morphogene.h>
+#include <model/evolution/population/creature/genome/MixedGenome.h>
 
 //## view headers
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The model of the creature holds the important information about the creature.
  * @details		Details
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
@@ -51,9 +60,9 @@ public:
 
 	/**
 	 * Initializes a creature with random values for its genome, name, total segments quantity and segments path limit.
-	 * @param bushiness
+	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(Ogre::Vector3 position, double bushiness);
+	void initialize(Ogre::Vector3 position, double branchiness);
 
 	/**
 	 * Provides a creature size to scale certain values in compensation for the overall size
@@ -153,6 +162,9 @@ private:
 	 */
 	bool mDeveloped;
 
+	/**
+	 * The juries that rate the creature according to their fitness function.
+	 */
 	std::vector<Jury*> mJuries;
 
 	/**
