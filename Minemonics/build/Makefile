@@ -718,32 +718,32 @@ model/environments/bullet/PlaneBt.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/environments/bullet/PlaneBt.cpp.s
 .PHONY : model/environments/bullet/PlaneBt.cpp.s
 
-model/evolution/EvolutionM.o: model/evolution/EvolutionM.cpp.o
-.PHONY : model/evolution/EvolutionM.o
+model/evolution/EvolutionModel.o: model/evolution/EvolutionModel.cpp.o
+.PHONY : model/evolution/EvolutionModel.o
 
 # target to build an object file
-model/evolution/EvolutionM.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/EvolutionM.cpp.o
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/EvolutionM.cpp.o
-.PHONY : model/evolution/EvolutionM.cpp.o
+model/evolution/EvolutionModel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/EvolutionModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/EvolutionModel.cpp.o
+.PHONY : model/evolution/EvolutionModel.cpp.o
 
-model/evolution/EvolutionM.i: model/evolution/EvolutionM.cpp.i
-.PHONY : model/evolution/EvolutionM.i
+model/evolution/EvolutionModel.i: model/evolution/EvolutionModel.cpp.i
+.PHONY : model/evolution/EvolutionModel.i
 
 # target to preprocess a source file
-model/evolution/EvolutionM.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/EvolutionM.cpp.i
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/EvolutionM.cpp.i
-.PHONY : model/evolution/EvolutionM.cpp.i
+model/evolution/EvolutionModel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/EvolutionModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/EvolutionModel.cpp.i
+.PHONY : model/evolution/EvolutionModel.cpp.i
 
-model/evolution/EvolutionM.s: model/evolution/EvolutionM.cpp.s
-.PHONY : model/evolution/EvolutionM.s
+model/evolution/EvolutionModel.s: model/evolution/EvolutionModel.cpp.s
+.PHONY : model/evolution/EvolutionModel.s
 
 # target to generate assembly for a file
-model/evolution/EvolutionM.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/EvolutionM.cpp.s
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/EvolutionM.cpp.s
-.PHONY : model/evolution/EvolutionM.cpp.s
+model/evolution/EvolutionModel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/EvolutionModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/EvolutionModel.cpp.s
+.PHONY : model/evolution/EvolutionModel.cpp.s
 
 model/evolution/Reaper.o: model/evolution/Reaper.cpp.o
 .PHONY : model/evolution/Reaper.o
@@ -901,107 +901,107 @@ model/evolution/juries/Velocity_test.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/juries/Velocity_test.cpp.s
 .PHONY : model/evolution/juries/Velocity_test.cpp.s
 
-model/evolution/population/Population.o: model/evolution/population/Population.cpp.o
-.PHONY : model/evolution/population/Population.o
+model/evolution/population/PopulationModel.o: model/evolution/population/PopulationModel.cpp.o
+.PHONY : model/evolution/population/PopulationModel.o
 
 # target to build an object file
-model/evolution/population/Population.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/Population.cpp.o
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/Population.cpp.o
-.PHONY : model/evolution/population/Population.cpp.o
+model/evolution/population/PopulationModel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/PopulationModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/PopulationModel.cpp.o
+.PHONY : model/evolution/population/PopulationModel.cpp.o
 
-model/evolution/population/Population.i: model/evolution/population/Population.cpp.i
-.PHONY : model/evolution/population/Population.i
+model/evolution/population/PopulationModel.i: model/evolution/population/PopulationModel.cpp.i
+.PHONY : model/evolution/population/PopulationModel.i
 
 # target to preprocess a source file
-model/evolution/population/Population.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/Population.cpp.i
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/Population.cpp.i
-.PHONY : model/evolution/population/Population.cpp.i
+model/evolution/population/PopulationModel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/PopulationModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/PopulationModel.cpp.i
+.PHONY : model/evolution/population/PopulationModel.cpp.i
 
-model/evolution/population/Population.s: model/evolution/population/Population.cpp.s
-.PHONY : model/evolution/population/Population.s
+model/evolution/population/PopulationModel.s: model/evolution/population/PopulationModel.cpp.s
+.PHONY : model/evolution/population/PopulationModel.s
 
 # target to generate assembly for a file
-model/evolution/population/Population.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/Population.cpp.s
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/Population.cpp.s
-.PHONY : model/evolution/population/Population.cpp.s
+model/evolution/population/PopulationModel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/PopulationModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/PopulationModel.cpp.s
+.PHONY : model/evolution/population/PopulationModel.cpp.s
 
-model/evolution/population/Population_test.o: model/evolution/population/Population_test.cpp.o
-.PHONY : model/evolution/population/Population_test.o
+model/evolution/population/PopulationModel_test.o: model/evolution/population/PopulationModel_test.cpp.o
+.PHONY : model/evolution/population/PopulationModel_test.o
 
 # target to build an object file
-model/evolution/population/Population_test.cpp.o:
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/Population_test.cpp.o
-.PHONY : model/evolution/population/Population_test.cpp.o
+model/evolution/population/PopulationModel_test.cpp.o:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/PopulationModel_test.cpp.o
+.PHONY : model/evolution/population/PopulationModel_test.cpp.o
 
-model/evolution/population/Population_test.i: model/evolution/population/Population_test.cpp.i
-.PHONY : model/evolution/population/Population_test.i
+model/evolution/population/PopulationModel_test.i: model/evolution/population/PopulationModel_test.cpp.i
+.PHONY : model/evolution/population/PopulationModel_test.i
 
 # target to preprocess a source file
-model/evolution/population/Population_test.cpp.i:
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/Population_test.cpp.i
-.PHONY : model/evolution/population/Population_test.cpp.i
+model/evolution/population/PopulationModel_test.cpp.i:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/PopulationModel_test.cpp.i
+.PHONY : model/evolution/population/PopulationModel_test.cpp.i
 
-model/evolution/population/Population_test.s: model/evolution/population/Population_test.cpp.s
-.PHONY : model/evolution/population/Population_test.s
+model/evolution/population/PopulationModel_test.s: model/evolution/population/PopulationModel_test.cpp.s
+.PHONY : model/evolution/population/PopulationModel_test.s
 
 # target to generate assembly for a file
-model/evolution/population/Population_test.cpp.s:
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/Population_test.cpp.s
-.PHONY : model/evolution/population/Population_test.cpp.s
+model/evolution/population/PopulationModel_test.cpp.s:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/PopulationModel_test.cpp.s
+.PHONY : model/evolution/population/PopulationModel_test.cpp.s
 
-model/evolution/population/creature/CreatureM.o: model/evolution/population/creature/CreatureM.cpp.o
-.PHONY : model/evolution/population/creature/CreatureM.o
+model/evolution/population/creature/CreatureModel.o: model/evolution/population/creature/CreatureModel.cpp.o
+.PHONY : model/evolution/population/creature/CreatureModel.o
 
 # target to build an object file
-model/evolution/population/creature/CreatureM.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureM.cpp.o
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM.cpp.o
-.PHONY : model/evolution/population/creature/CreatureM.cpp.o
+model/evolution/population/creature/CreatureModel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureModel.cpp.o
+.PHONY : model/evolution/population/creature/CreatureModel.cpp.o
 
-model/evolution/population/creature/CreatureM.i: model/evolution/population/creature/CreatureM.cpp.i
-.PHONY : model/evolution/population/creature/CreatureM.i
+model/evolution/population/creature/CreatureModel.i: model/evolution/population/creature/CreatureModel.cpp.i
+.PHONY : model/evolution/population/creature/CreatureModel.i
 
 # target to preprocess a source file
-model/evolution/population/creature/CreatureM.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureM.cpp.i
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM.cpp.i
-.PHONY : model/evolution/population/creature/CreatureM.cpp.i
+model/evolution/population/creature/CreatureModel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureModel.cpp.i
+.PHONY : model/evolution/population/creature/CreatureModel.cpp.i
 
-model/evolution/population/creature/CreatureM.s: model/evolution/population/creature/CreatureM.cpp.s
-.PHONY : model/evolution/population/creature/CreatureM.s
+model/evolution/population/creature/CreatureModel.s: model/evolution/population/creature/CreatureModel.cpp.s
+.PHONY : model/evolution/population/creature/CreatureModel.s
 
 # target to generate assembly for a file
-model/evolution/population/creature/CreatureM.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureM.cpp.s
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM.cpp.s
-.PHONY : model/evolution/population/creature/CreatureM.cpp.s
+model/evolution/population/creature/CreatureModel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/CreatureModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureModel.cpp.s
+.PHONY : model/evolution/population/creature/CreatureModel.cpp.s
 
-model/evolution/population/creature/CreatureM_test.o: model/evolution/population/creature/CreatureM_test.cpp.o
-.PHONY : model/evolution/population/creature/CreatureM_test.o
+model/evolution/population/creature/CreatureModel_test.o: model/evolution/population/creature/CreatureModel_test.cpp.o
+.PHONY : model/evolution/population/creature/CreatureModel_test.o
 
 # target to build an object file
-model/evolution/population/creature/CreatureM_test.cpp.o:
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM_test.cpp.o
-.PHONY : model/evolution/population/creature/CreatureM_test.cpp.o
+model/evolution/population/creature/CreatureModel_test.cpp.o:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureModel_test.cpp.o
+.PHONY : model/evolution/population/creature/CreatureModel_test.cpp.o
 
-model/evolution/population/creature/CreatureM_test.i: model/evolution/population/creature/CreatureM_test.cpp.i
-.PHONY : model/evolution/population/creature/CreatureM_test.i
+model/evolution/population/creature/CreatureModel_test.i: model/evolution/population/creature/CreatureModel_test.cpp.i
+.PHONY : model/evolution/population/creature/CreatureModel_test.i
 
 # target to preprocess a source file
-model/evolution/population/creature/CreatureM_test.cpp.i:
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM_test.cpp.i
-.PHONY : model/evolution/population/creature/CreatureM_test.cpp.i
+model/evolution/population/creature/CreatureModel_test.cpp.i:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureModel_test.cpp.i
+.PHONY : model/evolution/population/creature/CreatureModel_test.cpp.i
 
-model/evolution/population/creature/CreatureM_test.s: model/evolution/population/creature/CreatureM_test.cpp.s
-.PHONY : model/evolution/population/creature/CreatureM_test.s
+model/evolution/population/creature/CreatureModel_test.s: model/evolution/population/creature/CreatureModel_test.cpp.s
+.PHONY : model/evolution/population/creature/CreatureModel_test.s
 
 # target to generate assembly for a file
-model/evolution/population/creature/CreatureM_test.cpp.s:
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureM_test.cpp.s
-.PHONY : model/evolution/population/creature/CreatureM_test.cpp.s
+model/evolution/population/creature/CreatureModel_test.cpp.s:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/CreatureModel_test.cpp.s
+.PHONY : model/evolution/population/creature/CreatureModel_test.cpp.s
 
 model/evolution/population/creature/genome/DirectGenome.o: model/evolution/population/creature/genome/DirectGenome.cpp.o
 .PHONY : model/evolution/population/creature/genome/DirectGenome.o
@@ -2743,9 +2743,9 @@ help:
 	@echo "... model/environments/bullet/PlaneBt.o"
 	@echo "... model/environments/bullet/PlaneBt.i"
 	@echo "... model/environments/bullet/PlaneBt.s"
-	@echo "... model/evolution/EvolutionM.o"
-	@echo "... model/evolution/EvolutionM.i"
-	@echo "... model/evolution/EvolutionM.s"
+	@echo "... model/evolution/EvolutionModel.o"
+	@echo "... model/evolution/EvolutionModel.i"
+	@echo "... model/evolution/EvolutionModel.s"
 	@echo "... model/evolution/Reaper.o"
 	@echo "... model/evolution/Reaper.i"
 	@echo "... model/evolution/Reaper.s"
@@ -2764,18 +2764,18 @@ help:
 	@echo "... model/evolution/juries/Velocity_test.o"
 	@echo "... model/evolution/juries/Velocity_test.i"
 	@echo "... model/evolution/juries/Velocity_test.s"
-	@echo "... model/evolution/population/Population.o"
-	@echo "... model/evolution/population/Population.i"
-	@echo "... model/evolution/population/Population.s"
-	@echo "... model/evolution/population/Population_test.o"
-	@echo "... model/evolution/population/Population_test.i"
-	@echo "... model/evolution/population/Population_test.s"
-	@echo "... model/evolution/population/creature/CreatureM.o"
-	@echo "... model/evolution/population/creature/CreatureM.i"
-	@echo "... model/evolution/population/creature/CreatureM.s"
-	@echo "... model/evolution/population/creature/CreatureM_test.o"
-	@echo "... model/evolution/population/creature/CreatureM_test.i"
-	@echo "... model/evolution/population/creature/CreatureM_test.s"
+	@echo "... model/evolution/population/PopulationModel.o"
+	@echo "... model/evolution/population/PopulationModel.i"
+	@echo "... model/evolution/population/PopulationModel.s"
+	@echo "... model/evolution/population/PopulationModel_test.o"
+	@echo "... model/evolution/population/PopulationModel_test.i"
+	@echo "... model/evolution/population/PopulationModel_test.s"
+	@echo "... model/evolution/population/creature/CreatureModel.o"
+	@echo "... model/evolution/population/creature/CreatureModel.i"
+	@echo "... model/evolution/population/creature/CreatureModel.s"
+	@echo "... model/evolution/population/creature/CreatureModel_test.o"
+	@echo "... model/evolution/population/creature/CreatureModel_test.i"
+	@echo "... model/evolution/population/creature/CreatureModel_test.s"
 	@echo "... model/evolution/population/creature/genome/DirectGenome.o"
 	@echo "... model/evolution/population/creature/genome/DirectGenome.i"
 	@echo "... model/evolution/population/creature/genome/DirectGenome.s"

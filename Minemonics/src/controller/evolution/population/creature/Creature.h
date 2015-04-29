@@ -1,5 +1,7 @@
 #ifndef CONTROLLER_EVOLUTION_POPULATION_CREATURE_CREATURE_H_
 #define CONTROLLER_EVOLUTION_POPULATION_CREATURE_CREATURE_H_
+
+//# corresponding header
 //# forward declarations
 class SimulationManager;
 
@@ -14,7 +16,7 @@ class SimulationManager;
 #include "controller/evolution/population/creature/phenome/Phenome.h"
 
 //## model headers
-#include "model/evolution/population/creature/CreatureM.h"
+#include <model/evolution/population/creature/CreatureModel.h>
 
 //## view headers
 //## utils headers
@@ -44,7 +46,7 @@ public:
 	/**
 	 * The model of the creature
 	 */
-	CreatureM* mCreature;
+	CreatureModel* mCreature;
 
 	/**
 	 * The phenotype of the creature.

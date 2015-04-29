@@ -245,10 +245,10 @@ set(MODELHDRS
 	./model/evolution/juries/Velocity.h
 	
 	## evolution
-	./model/evolution/EvolutionM.h
+	./model/evolution/EvolutionModel.h
 	./model/evolution/Reaper.h
-	./model/evolution/population/Population.h
-	./model/evolution/population/creature/CreatureM.h
+	./model/evolution/population/PopulationModel.h
+	./model/evolution/population/creature/CreatureModel.h
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.h
@@ -282,10 +282,10 @@ set(MODELSRCS
 	
 	
 	## evolution
-	./model/evolution/EvolutionM.cpp
+	./model/evolution/EvolutionModel.cpp
 	./model/evolution/Reaper.cpp
-	./model/evolution/population/Population.cpp
-	./model/evolution/population/creature/CreatureM.cpp
+	./model/evolution/population/PopulationModel.cpp
+	./model/evolution/population/creature/CreatureModel.cpp
 	
 	## genome
 	./model/evolution/population/creature/genome/Genome.cpp
@@ -556,8 +556,8 @@ set(TESTSRCS
     ./model/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
     ./model/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     ./model/evolution/population/creature/genome/Genome_test.cpp
-    ./model/evolution/population/creature/CreatureM_test.cpp
-    ./model/evolution/population/Population_test.cpp
+    ./model/evolution/population/creature/CreatureModel_test.cpp
+    ./model/evolution/population/PopulationModel_test.cpp
     ./utils/NameGenerator_test.cpp
     ./utils/Randomness_test.cpp
     

@@ -1,8 +1,6 @@
 #ifndef CONTROLLER_EVOLUTION_EVOLUTION_H_
 #define CONTROLLER_EVOLUTION_EVOLUTION_H_
 
-
-
 //# forward declarations
 //# system headers
 //## controller headers
@@ -16,13 +14,24 @@
 #include <controller/evolution/population/creature/Creature.h>
 
 //## model headers
-#include <model/evolution/EvolutionM.h>
+#include <model/evolution/EvolutionModel.h>
 
 //## view headers
 //## utils headers
+#include <utils/TimerManager.h>
+
 /**
  * @brief		Brief
- * @details		Details
+ * @details		 A particular experimental setup is referred to as an "evolution".
+ *      Evolutions consist of one or more independent GA runs, where each
+ *      run is identical in terms of settings like population size,
+ *      tournament size, mutation rates, and so on.
+ *
+ *      All creatures in the first generation of any run are produced from randomly-initialized genomes.
+ *      Creatures in generations other than the first are produced either by mutation or
+ *      crossover of parents selected by tournament from the previous generation. The sole
+ *      exception is the first creature in such generations, which is always a copy of the best (or
+ *      elite) creature from the previous generation. (Graham Lee Thesis)
  * @date		2015-04-28
  * @author		Benjamin Ellenberger
  */
@@ -31,8 +40,20 @@ public:
 	Evolution();
 	virtual ~Evolution();
 
-	void initialize();
+	/**
+	 * Initialize the evolution.
+	 */
+	void initialize(Environment* environment);
 
+	/**
+	 * Proceed with the next creature of the currently tested population or
+	 * proceed with reaping and sowing. This method is called by the
+	 * EvaluationTimer after the predefined evaluation interval.
+	 */
+	void proceedEvaluation();
+
+
+	//Accessor methods
 
 	Environment* getEnvironment() {
 		return mEnvironment;
@@ -44,11 +65,22 @@ public:
 
 private:
 
-	EvolutionM mEvolutionM;
+	/**
+	 * The model of the evolution
+	 */
+	EvolutionModel mEvolutionM;
 
+	/**
+	 * The creature that is currently evaluated.
+	 */
 	Creature* mCurrentCreature;
 
+	/**
+	 * The environment the evolution is running in.
+	 */
 	Environment* mEnvironment;
+
+	TimerManager<Evolution> mEvaluationManager;
 };
 
 #endif /* CONTROLLER_EVOLUTION_EVOLUTION_H_ */

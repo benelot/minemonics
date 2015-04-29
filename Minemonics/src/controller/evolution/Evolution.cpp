@@ -7,7 +7,7 @@
 
 #include <controller/evolution/Evolution.h>
 
-Evolution::Evolution() {
+Evolution::Evolution():mCurrentCreature(NULL),mEnvironment(NULL) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -16,3 +16,6 @@ Evolution::~Evolution() {
 	// TODO Auto-generated destructor stub
 }
 
+void Evolution::initialize(Environment* environment) {
+	mEnvironment = environment;
+}

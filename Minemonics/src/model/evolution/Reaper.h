@@ -7,7 +7,7 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <model/evolution/population/Population.h>
+#include <model/evolution/population/PopulationModel.h>
 
 //## view headers
 //# custom headers
@@ -45,13 +45,13 @@ public:
 	 * Reap the less fit creatures from the population.
 	 * @param population The population that should be reaped from.
 	 */
-	void reap(Population population);
+	void reap(PopulationModel population);
 
 	/**
 	 * Sow new creatures into the population.
 	 * @param population The population that should be sowed into.
 	 */
-	void sow(Population population);
+	void sow(PopulationModel population);
 };
 
 #endif /* REAPER_H_ */
@@ -100,13 +100,13 @@ public:
 	 * Reap the less fit creatures from the population.
 	 * @param population The population that should be reaped from.
 	 */
-	void reap(Population population);
+	void reap(PopulationModel population);
 
 	/**
 	 * Sow new creatures into the population.
 	 * @param population The population that should be sowed into.
 	 */
-	void sow(Population population);
+	void sow(PopulationModel population);
 };
 
 #endif /* REAPER_H_ */

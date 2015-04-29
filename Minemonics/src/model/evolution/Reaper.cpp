@@ -7,6 +7,7 @@
 
 
 //# corresponding header
+#include <model/evolution/population/PopulationModel.h>
 #include <model/evolution/Reaper.h>
 
 //# forward declarations
@@ -19,7 +20,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/evolution/population/Population.h>
 
 //## view headers
 //## utils headers
@@ -33,8 +33,8 @@ Reaper::~Reaper() {
 	// TODO Auto-generated destructor stub
 }
 
-void Reaper::reap(Population population) {
+void Reaper::reap(PopulationModel population) {
 }
 
-void Reaper::sow(Population population) {
+void Reaper::sow(PopulationModel population) {
 }

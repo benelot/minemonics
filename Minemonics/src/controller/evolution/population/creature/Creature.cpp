@@ -20,7 +20,7 @@ class SimulationManager;
 #include "controller/evolution/population/creature/phenome/Phenome.h"
 
 //## model headers
-#include "model/evolution/population/creature/CreatureM.h"
+#include <model/evolution/population/creature/CreatureModel.h>
 
 //## view headers
 //## utils headers
@@ -37,7 +37,7 @@ Creature::~Creature() {
 
 void Creature::initialize(SimulationManager* simulationManager,
 		Ogre::Vector3 position, double bushiness) {
-	mCreature = new CreatureM();
+	mCreature = new CreatureModel();
 	mCreature->initialize(position, bushiness);
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager);
