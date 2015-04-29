@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">2</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">82fcdddd-665c-4822-8640-568de1070cbd</dc:identifier>
+        <dc:title>Optimal chaos control with simple limiters</dc:title>
+        <dc:creator opf:file-as="C. Wagner, R. Stoop" opf:role="aut">C. Wagner, R. Stoop</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (1.25.0) [http://calibre-ebook.com]</dc:contributor>
+        <dc:date>2000-12-11T09:51:38+00:00</dc:date>
+        <dc:language>en</dc:language>
+        <meta content="{&quot;C. Wagner, R. Stoop&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2015-04-29T07:48:29.051080+00:00" name="calibre:timestamp"/>
+        <meta content="Optimal chaos control with simple limiters" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>

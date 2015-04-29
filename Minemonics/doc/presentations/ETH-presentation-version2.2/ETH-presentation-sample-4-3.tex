@@ -1,0 +1,140 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = IsoLatin
+
+%% Version 4x3 und 16x9  2.2 02.01.2014
+
+% ==== wrapper class ==========================================================
+\documentclass[% wrapper-class ETHpres option inspite of aspectratio for beamer-classe
+    fourtothree=true, % true (default) -- 4:3-format, false -- 16:9-format
+    DepLogo=true      % true -- use deplogo_13.pdf, false (default) 
+                      %         do not use deplogo_13.pdf for footer
+    ]{ETHpres}
+
+% ==== misc: you may use or not ===============================================
+%\usepackage{graphicx}   % for including figures
+%%\graphicspath{{pictures/}}
+%\usepackage{tabularx}   % for special table environment (tabularx-table)
+%\usepackage{booktabs}   % for table layout
+%\usepackage{natbib}     % for bibliography with astron-style
+%\bibliographystyle{astron}
+%\usepackage{siunitx}    % to use for international units in the real world
+%\usepackage[
+%    colorlinks=true, linkcolor=white, urlcolor=white, % this is special for this presentation here to get the toc in white
+%    hypertexnames=false,% for correct links (duplicate-error solution)
+%	setpagesize=false,  % necessary in order to not change text-/paperformat for the document
+%	pdfborder={0 0 0},  % removes border around links
+%	pdfpagemode=FullScreen,% open pdf in full screen mode
+%    pdfstartview=Fit    % fit page to pdf viewer
+%]{hyperref}% all links stay black and are thus invisible
+
+% ==== language ================================================================
+\usepackage[latin1]{inputenc}
+%\usepackage[utf8]{inputenc}
+% English
+\usepackage[english]{babel}
+\AtBeginDocument{\renewcaptionname{english}{\contentsname}{\large Outline}}% toc-name
+%% Deutsch
+%\usepackage[ngerman]{babel}
+%\AtBeginDocument{\renewcaptionname{ngerman}{\contentsname}{\large Übersicht}}% toc-name
+
+% ==== choose the basic color for your presentation ===========================
+% colorbar-color
+\colorlet{firstcolor}{ETHi} % see pages 2  and 3 of this sample presentation
+% bachground color titlepage
+\colorlet{secondcolor}{ETHh} % see pages 2  and 3 of this sample presentation
+
+% === fill in first information for the presentation ==========================
+\newcommand*{\ETHtitle}{ETH-Presentation\\ with a second title-line}
+\newcommand*{\ETHauthor}{D. Hennig}
+\newcommand*{\ETHdate}{29.9.2013}
+\begin{document}
+% =========== begin of titlepage ============
+\ETHtitelbild\textcolor{white}{\large\textbf{\ETHtitle}}\\~\newline\hspace{6mm}\normalsize%
+%%
+% ==== start here with the text on the titlepage
+%%
+\textcolor{white}{This is the beginning (titlepage) of the example-presentation of a ETH staff member. In the following I show the new colors. Please take a look to the next slides.}
+\clearpage
+% =========== begin of the standard page ============
+\ETHslide%
+% ==== start here with the text
+%\tableofcontents	
+\textbf{New colors and their names\\}
+Here we show the different colors you can use. From left to right, this are the colors ETH1, ETH2, \ldots , ETH9.
+\newcommand{\quadrat}{(0,0mm)--(0mm,5mm)--(5mm,5mm)--(5mm,0mm)--(0mm,0mm);}
+\begin{center}
+	\hspace{-8mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHa,fill=ETHa] \quadrat}\label{ETH1}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHb,fill=ETHb]\quadrat}\label{ETH2}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHc,fill=ETHc]\quadrat}\label{ETH3}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHd,fill=ETHd] \quadrat}\label{ETH4}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHe,fill=ETHe] \quadrat}\label{ETH5}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHf,fill=ETHf] \quadrat}\label{ETH6}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHg,fill=ETHg] \quadrat}\label{ETH7}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHh,fill=ETHh] \quadrat}\label{ETH8}
+	\end{tikzpicture}
+	\hspace{10mm}
+	\begin{tikzpicture}[overlay]
+		{\draw[ETHi,fill=ETHi] \quadrat}\label{ETH9}
+	\end{tikzpicture}
+\end{center}
+\clearpage
+% =========== begin of the standard page ============
+\ETHminimal%
+% ==== start here with the text
+Please use no more then two of them in your presentation. The first two (counted from the left hand side) are reserved for the administration chapter of the ETHZ (first one for external presentation, second for internal), all others you can freely choose.
+
+Please do not forget, fill into your text like in a normal \LaTeX{}-article with the exception that you have to add some additional newline-commands into.
+
+On the following page some example for special commands. And be aware of this minimal ETHZ-page-sample here.
+\clearpage
+% =========== begin of the standard page ============
+\ETHslide%
+% ==== start here with the text
+\textbf{Some mathematical specialities\\}
+\ETHbox{0.8\textwidth}{% define the ETHbox
+  \begin{theorem}[Murphy (1949)]\label{murphy}
+    Anything that can go wrong, will go wrong.
+  \end{theorem}
+}
+
+\begin{proof}
+  A special case of Theorem \ref{murphy} is proven in %\citet{matthews1995}.
+\end{proof}
+
+\ETHitem \quad ETHitem\\
+
+\begin{remark}
+Do not confuse \ETHblue{Murphy's Law} with \ETHbrown{Muphry's Law} by \textit{John Bangsund} which says that ``if you write anything criticizing editing or proofreading, there will be a fault of some kind in what you have written.''
+\end{remark}
+\clearpage
+% =========== begin of inverseseite (inverse page) ============
+\ETHinverseseite\textcolor{white}{\large\textbf{Conclusion}}\\~\newline\hspace{6mm}\normalsize%
+%%
+% ==== start here with the text on the titlepage
+%%
+\textcolor{white}{This is the example inverse page. And we showed, that you can use \LaTeX{} to prepare a presentation very easily.}
+\clearpage
+\end{document}

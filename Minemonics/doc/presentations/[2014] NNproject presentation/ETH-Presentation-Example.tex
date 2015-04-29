@@ -1,0 +1,200 @@
+%  Example for the ETH Beamer template
+%  Copyright 2014 by 
+%  Dr. Antonios Garas,
+%  Chair of Systems Design, ETH Zurich
+%  Weinbergstrasse 56/58 CH-8092 Zurich
+%
+\documentclass[
+%aspectratio=169,
+first,
+%handout,
+%compress,
+%Helv,
+ETH1,
+navigation
+]{ETHbeamerclass} 
+
+% Options for beamer:
+% 
+% compress: navigation bar becomes smaller
+% t       : place contents of frames on top (alternative: b,c)
+% handout : handoutversion
+% notes   : show notes
+% notes=onlyslideswithnotes
+%
+\setbeamertemplate{note page}{\ \\[.3cm]
+\textbf{\color{colorSG}Notes:}\\%[0.1cm]
+{\footnotesize %\tiny
+\insertnote}}
+
+\setbeameroption{hide notes}
+%\setbeameroption{show notes}
+
+\setbeamertemplate{navigation symbols}{} % suppresses all navigation symbols:
+% \setbeamertemplate{navigation symbols}[horizontal] % Organizes the navigation symbols horizontally.
+% \setbeamertemplate{navigation symbols}[vertical] % Organizes the navigation symbols vertically.
+% \setbeamertemplate{navigation symbols}[only frame symbol] % Shows only the navigational symbol for navigating frames.
+
+\usepackage{amsmath, amssymb}
+%\usepackage{tikz, tkz-graph}
+\usepackage{pifont}
+%\usepackage{subfig}
+%\usepackage{natbib}
+\usepackage{multimedia}
+
+%--------------------------------------------------------------------------------------------------------
+%--- Some custom definitions...
+
+\definecolor{cbf}{RGB}{199,100,95}%{163,15,0}
+\newcommand{\cbf}{\color{cbf}}
+
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+%--------------------------------------------------------------------------------------------------------
+%--- Inputs for the title page...
+
+\title{Title of the talk\\
+And a much larger title spanning two lines
+}
+\newcommand{\shorttitle}{Shorter title}
+
+\author{Author's Name}
+\date{\today}
+\institute{Chair of Systems Design}
+
+\newcommand{\collaborators}{Collaborators: A list of names..}
+\newcommand{\event}{Event Name}
+\newcommand{\place}{Place of Event}
+
+\newcommand{\Prob}{\mathrm{Pr}}
+\newcommand{\sign}{\mathrm{sign}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\nbin}[1]{\mathrm{nb}_\mathrm{in}(#1)}
+\newcommand{\nbout}[1]{\mathrm{nb}_\mathrm{out}(#1)}
+\newcommand{\one}{\mathbb{\bf 1}}
+
+\newcommand{\sref}[1]{SLIDE \ref{#1}}
+
+%--------------------------------------------------------------------------------------------------------
+%--- Here begins the presentation...
+
+\begin{document}
+
+\frame{
+\maketitle
+}
+\note{}
+
+
+\section{This is section one}
+
+\frame{
+
+  \frametitle{Contents}
+    \tableofcontents[currentsection]
+}
+\note{}
+
+
+\frame{
+
+  \frametitle{This is the title of the first frame}
+
+  In this frame we use a block:
+  \begin{block}{Title of the block}
+  Contents of the block...\\
+  In one or more lines
+    \begin{itemize}
+    \item It can also include environments...
+     \begin{itemize}
+      \item It can also include environments...
+     \end{itemize}
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{}
+  Contents of the block...\\
+  In one or more lines
+    \begin{enumerate}
+     \item It can also include environments...
+    \end{enumerate}
+  \end{block}
+
+  
+}
+\note{}
+
+\frame{
+
+  \frametitle{This is the title of the first frame}
+
+  In one or more lines
+    \begin{itemize}
+    \item It can also include environments...
+     \begin{itemize}
+      \item It can also include environments...
+     \end{itemize}
+%    \end{itemize}
+
+%    \begin{itemize}
+    \item It can also include environments...
+     \begin{itemize}
+      \item It can also include environments...
+     \end{itemize}
+    \end{itemize}
+
+    \begin{enumerate}
+     \item It can also include environments...
+    \end{enumerate}
+
+  
+}
+\note{}
+
+\section{This is section two}
+
+\frame{
+
+  \frametitle{Let's try to use a long frame title that will be
+    displayed in two (or more) lines... This is not a good practice, but it may happen :-)}
+  
+  \begin{columns}
+   \column{0.45\textwidth}
+   Now lets split the presentation using columns..
+
+  \column{0.45\textwidth}
+    In this frame we use a block:
+    \begin{block}{Title of the block}
+    Contents of the block...\\
+    In one or more lines
+    \begin{itemize}
+    \item It can also include environments...
+     \begin{itemize}
+      \item It can also include environments...
+      \end{itemize}
+     \end{itemize}
+    \end{block}   
+  \end{columns}
+}
+\note{}
+
+\frame{
+
+  \frametitle{Contents}
+    \tableofcontents[currentsection]
+}
+\note{}
+
+
+\frame{
+
+  \frametitle{Summary..}
+
+  
+  }
+\note{}
+
+
+\end{document}

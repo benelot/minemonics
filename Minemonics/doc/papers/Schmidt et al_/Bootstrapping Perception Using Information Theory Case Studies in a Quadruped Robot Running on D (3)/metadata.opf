@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">3</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">62dd69c3-70d4-48b1-9901-ded92c6007ec</dc:identifier>
+        <dc:title>Bootstrapping Perception Using Information Theory Case Studies in a Quadruped Robot Running on Different Grounds</dc:title>
+        <dc:creator opf:file-as="Schmidt" opf:role="aut">Schmidt et al.</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (1.25.0) [http://calibre-ebook.com]</dc:contributor>
+        <dc:date>2011-12-31T23:00:00+00:00</dc:date>
+        <dc:language>en</dc:language>
+        <meta content="{&quot;Schmidt et al.&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2015-04-29T07:48:29.485485+00:00" name="calibre:timestamp"/>
+        <meta content="Bootstrapping Perception Using Information Theory Case Studies in a Quadruped Robot Running on Different Grounds" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>

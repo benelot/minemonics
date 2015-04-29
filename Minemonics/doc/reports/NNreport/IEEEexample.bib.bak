@@ -1,0 +1,831 @@
+
+@book{Alexander2003,
+ author = {R. M. Alexander},
+ title = {Principles of Animal Locomotion},
+ year = {2002},
+ isbn = {9780691126340},
+ publisher = {Princeton University Press},
+ address = {},
+}
+@INPROCEEDINGS{zhao2012Robio,
+  title={The function of the spine and its morphological effect in quadruped robot locomotion},
+  author={Zhao, Q. and Sumioka,H. and Nakajima, K.  and Yu, X. and Pfeifer,R. },
+  booktitle={2012 IEEE International conference on Robotics and Biomimetics},
+  volume={},
+  pages={66-71},
+  issn={},
+  month={Dec 11-14},
+  year={2012},
+  organization={}
+}
+@article{Deng2012,
+title = "Quasi passive bounding of a quadruped model with articulated spine",
+journal = "Mechanism and Machine Theory",
+volume = "52",
+number = "0",
+pages = "232 - 242",
+year = "2012",
+note = "",
+issn = "0094-114X",
+doi = "",
+url = "",
+author = "Qi Deng and Shigang Wang and Wei Xu and Jinqiu Mo and Qinghua Liang",
+keywords = "Quasi passive bounding",
+keywords = "Planar model",
+keywords = "Articulated spine",
+keywords = "Elastic joint",
+abstract = "The motion of spine in passive quadrupedal bounding and its effect on leg behavior were presented in this paper. First, a simplified sagittal plane model of quadruped mammals was introduced. The model's body contained one articulated spine joint. Next, a control method was developed to obtain symmetrical bounding of the model. In this method, the spine joint was locked when the spine reached its maximum bend. It was held until vertical velocity became opposite in value. These actions resulted in a specific type of bounding, which was defined as quasi passive bounding. Despite its simplicity, this system captures properties of real animals. Plenty of bounding conditions were considered in the analysis of system kinetics. Passive bounding of the model with stiff spine was also analyzed. A comparison of the maximum leg compression between the two models suggests the use of spine joint for legged systems at a high speed. Moreover, to obtain realistic motion of quadruped mammals, evolution of the spine joint angle shows that trunk stiffness in extension is greater than that in flexion."
+}
+@book{Gracovetskybook1989,
+ author = {Serge Gracovetsky},
+ title = {The Spinal Engine},
+ year = {1989},
+ isbn = {9780387820309},
+ publisher = {Springer, cop},
+ address = {},
+}
+@INPROCEEDINGS{TakumaPassiveOscillation,
+author={Takuma, T. and Ikeda, M. and Masuda, T.},
+booktitle={Intelligent Robots and Systems (IROS), 2010 IEEE/RSJ International Conference on},
+title={Facilitating multi-modal locomotion in a quadruped robot utilizing passive oscillation of the spine structure},
+year={2010},
+pages={4940-4945},
+keywords={legged locomotion;viscoelasticity;energy-efficient locomotion;gait pattern;legged locomotors;multimodal locomotion;multiple joints;passive mechanical properties;passive oscillation;quadruped robot;spine structure;variable viscoelasticity},
+doi={10.1109/IROS.2010.5649134},
+ISSN={2153-0858},}
+
+@INPROCEEDINGS{TsujitaTrunkStiffness,
+author={Tsujita, K. and Miki, K.},
+booktitle={Advanced Robotics (ICAR), 2011 15th International Conference on},
+title={A study on trunk stiffness and gait stability in quadrupedal locomotion using musculoskeletal robot},
+year={2011},
+pages={316-321},
+keywords={elastic constants;elasticity;legged locomotion;motion control;stability;body mechanism;changeable body stiffness;changeable elasticity;gait pattern stability;gait stability;hardware experiment;musculoskeletal robot;pace pattern;periodic leg motion;pneumatic actuator;quadrupedal locomotion;rhyhmic motion;robot motion muscle tone;trunk stiffness;Actuators;Dynamics;Generators;Joints;Legged locomotion;Pneumatic systems},
+doi={10.1109/ICAR.2011.6088641},}
+
+@INPROCEEDINGS{Raibert1986,
+author={M. H. Raibert},
+booktitle={Communications of the ACM},
+title={Legged robots},
+year={1986},
+month={},
+volume={29},
+number={6},
+pages={499-514},
+ISSN={},}
+
+@article{Gracovetsky1985,
+title = {},
+volume = {7},
+number = {3},
+pages = {205-216},
+year = {1985},
+note = {},
+issn = {0141-5425},
+doi = {},
+url = {},
+author = {S. Gracovetsky},
+keywords = {Musculoskeletal system},
+keywords = {locomotion},
+keywords = {spine},
+abstract = {Locomotion was first achieved by the motion of the spine. The limbs came after, as an improvement, not as a substitute; and yet, analysis of bipedal gait concentrates almost exclusively on the motion of the limbs. The requirements for land locomotion are examined from a general point of view and the evolution of the vertebrate spine is presented as a mechanism designed to move the animal. The necessary spinal movements are also analysed; the role of the musculoskeletal system is discussed and it is shown that the lumbar spine is a key structure in land locomotion, the pelvis being driven by the spine. The optimum control of motion demands that the stress at all the intervertebral joints should be minimized and equalized. This theory of locomotion requires the central nervous system to control the torque at those intervertebral joints and suggests that a breakdown of the control system would result in torsional failure of the spine. The theory is supported by EMG, force and torque data collected from several sources.},
+journal = {Journal of Biomedical Engineering},
+}
+
+@article{Tomoki2006,
+title = {},
+volume = {2006},
+number = {},
+pages = {2A1-E34},
+year = {2006},
+note = {},
+doi = {},
+url = {},
+author = {Sato Tomoki, Owaki Dai, Ishiguro Akio },
+journal = {Nippon Kikai Gakkai Robotikusu, Mekatoronikusu Koenkai Koen Ronbunshu },
+}
+
+@article{Hilderbrand1959,
+title = {Motions of the Running Cheetah and Horse},
+volume = {40},
+number = {4},
+pages = {481-495},
+year = {1959},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {Milton Hildebrand},
+keywords = {cheetah},
+keywords = {locomotion},
+keywords = {spine},
+abstract = {The horse is perhaps the most efficient running machine ever evolved; probablyno other vertebratehas so many structuraladaptationsfor rapid and untiringprogresson the ground. The cheetah is conceded to be the fastest of all animals for a short dash, but lacks the endurance of the horse. This paper will analyze and contrastthe runningmotions of these champions,and will reveal some of the secrets of the cheetah's superlative speed. Severalauthorshave noted cursorialadaptationsof the cheetah (e.g., Pocock, 1927;Hopwood,1947) but to my knowledgenone has contrastedits mode of runningwith that of other cursorialquadrupeds. Morphologicaladaptations of the horse have been described by Howell (1944), Eaton (1944), Smith and Savage (1956) and many others. Those referencesemphasizedstructure; this paper stresses function. The classical study by Muybridge (1899) has remainedthe most importantanalysis of the motion of the horse. A paper by Grogan (1951) provides a concise review of the sequence of footfalls and combinationsof supportingmembers.},
+journal = {Journal of Mammalogy},
+}
+@MISC{SpineAnatomy,
+  title = {Normal Spinal Anatomy},
+  author = {R.Pashman and T.Kim},
+  year = {2012},
+  url = {http://www.espine.com/anatomy-normal.htm}
+}
+
+@article{Gerritsen1995,
+title = {Direct dynamics simulation of the impact phase in heel-toe running},
+volume = {28},
+number = {6},
+pages = {661-668},
+year = {1995},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {Karin G.M. Gerritsen and Anton J. van den Bogert and Benno M. Nigg},
+keywords = {cheetah},
+keywords = {locomotion},
+keywords = {spine},
+abstract = {The horse is perhaps the most efficient running machine ever evolved; probablyno other vertebratehas so many structuraladaptationsfor rapid and untiringprogresson the ground. The cheetah is conceded to be the fastest of all animals for a short dash, but lacks the endurance of the horse. This paper will analyze and contrastthe runningmotions of these champions,and will reveal some of the secrets of the cheetah's superlative speed. Severalauthorshave noted cursorialadaptationsof the cheetah (e.g., Pocock, 1927;Hopwood,1947) but to my knowledgenone has contrastedits mode of runningwith that of other cursorialquadrupeds. Morphologicaladaptations of the horse have been described by Howell (1944), Eaton (1944), Smith and Savage (1956) and many others. Those referencesemphasizedstructure; this paper stresses function. The classical study by Muybridge (1899) has remainedthe most importantanalysis of the motion of the horse. A paper by Grogan (1951) provides a concise review of the sequence of footfalls and combinationsof supportingmembers.},
+journal = {Journal of biomechanics},
+}
+
+@InProceedings{Rutishauser2008,
+   abstract    = {We present a new quadruped robot, âCheetahâ, featuring
+                 three-segment pantographic legs with passive compliant
+                 knee joints. Each leg has two degrees of freedom - knee
+                 and hip joint can be actuated using proximal mounted RC
+                 servo motors, force transmission to the knee is achieved
+                 by means of a bowden cable mechanism. Simple electronics
+                 to command the actuators from a desktop computer have
+                 been designed in order to test the robot. A Central
+                 Pattern Generator (CPG) network has been implemented to
+                 generate different gaits. A parameter space search was
+                 performed and tested on the robot to optimize forward
+                 velocity},
+   address     = { },
+   affiliation = {EPFL},
+   author      = {Rutishauser, Simon and Sproewitz, Alexander and
+                 Righetti, Ludovic and Ijspeert, Auke Jan},
+   booktitle   = {2008 {IEEE} {I}nternational {C}onference on {B}iomedical
+                 {R}obotics and {B}iomechatronics},
+   details     = {http://infoscience.epfl.ch/record/130727},
+   documenturl = {http://infoscience.epfl.ch/record/130727/files/sRutishauser08.pdf},
+   extra-id    = {000270540400133},
+   location    = {Scottsdale},
+   oai-id      = {oai:infoscience.epfl.ch:130727},
+   oai-set     = {conf; fulltext-public; fulltext},
+   publisher   = { },
+   review      = {REVIEWED},
+   series      = { },
+   status      = {PUBLISHED},
+   title       = {Passive compliant quadruped robot using central pattern
+                 generators for locomotion control},
+   unit        = {BIOROB},
+   url         = { },
+   year        = 2008
+}
+
+@article{Rummel2008,
+ author = {Rummel, Juergen and Seyfarth, Andre},
+ title = {Stable Running with Segmented Legs},
+ journal = {Int. J. Rob. Res.},
+ issue_date = {August    2008},
+ volume = {27},
+ number = {8},
+ month = aug,
+ year = {2008},
+ issn = {0278-3649},
+ pages = {919-934},
+ numpages = {16},
+ url = {},
+ doi = {},
+ acmid = {1391364},
+ publisher = {Sage Publications, Inc.},
+ address = {Thousand Oaks, CA, USA},
+ keywords = {SLIP, knee joint stiffness, nonlinear stiffness, running, self-stability, spring-mass model, two-segment leg},
+}
+
+@INPROCEEDINGS{Hackert_Witte_Fischer_2006,
+author={Hackert, Remi and Witte, Hartmut and Fischer, Martin S },
+booktitle={Adaptive Motion of Animals and Machines},
+title={Interactions between motions of the trunk and the angle of attack of the forelimbs in synchronous gaits of the pika (Ochotona rufescens)},
+year={2006},
+month={},
+volume={},
+number={},
+pages={69-77},
+keywords={},
+doi={},
+ISSN={},
+}
+
+
+@MISC{Arduino,
+  author = {Arduino team},
+  title = {Arduino},
+  year = {2012},
+  url = {www.arduino.cc}
+}
+
+@article{Long97locomotordesign,
+    author = {Long, J. H.},
+    citeulike-article-id = {3790528},
+    journal = {Journal of Experimental Biology},
+    number = {1},
+    pages = {65--81},
+    posted-at = {2008-12-16 00:04:08},
+    priority = {2},
+    title = {{Locomotor design of dolphin vertebral columns: bending mechanics and morphology of Delphinus delphis}},
+    volume = {200},
+    year = {1997}
+}
+
+@article{Wilson2012Locomotoin,
+    author = {Wilson, A. M. and Lowe, J. C. and Roskilly, K. and Hudson, P. E. and Golabek, K. A. and McNutt, J. W. },
+    journal = {Nature},
+    pages = {185--189},
+    title = {Locomotion dynamics of hunting in wild cheetahs},
+    volume = {498},
+    }
+
+
+@MISC{lumbarSpine,
+  author = {Billy},
+  title = {Spinal Coord Injury Resource Center},
+  year = {2012},
+  url = {http://www.spinalinjury.net/index.html}
+}
+
+@MISC{thoracicSpine,
+  author = {Lauren Warnecke},
+  title = {The Stem of Aplomb¨CPart Two: The Thoracic Spine},
+  year = {2012},
+  url = {http://danceadvantage.net/2011/03/09/thoracic-spine/}
+}
+
+
+@article{Iida2006,
+title = {Sensing through body dynamics},
+volume = {54},
+number = {8},
+pages = {631-640},
+year = {2006},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {Fumiya. Iida and  Rolf. Pfeifer},
+keywords = {},
+journal = {Robotics and Autonomous Systems},
+}
+
+@misc{
+    c.elmohamed,
+    author = "Saleh Elmohamed",
+    title = "Examples in {H}igh {P}erformance {F}ortran",
+    howpublished = "Website",
+    year = {1996},
+    note = {\url{http://www.npac.syr.edu/projects/
+                    cpsedu/summer98summary/ examples/hpf/hpf.html}}
+}
+
+@INPROCEEDINGS{Akio2007,
+author={Sakai Yoshiyuki and Sato Tomoki and Owaki Dai and Ishiguro Akio },
+booktitle={In Proceedings on the Robotics and Mechatronics Conference (ROBOMEC 2007)},
+title={Realization of Stable Quadruped Gait Transition by Changing Body Stiffness},
+year={2007},
+month={},
+volume={},
+number={},
+pages={2A1-A10},
+keywords={},
+doi={},
+ISSN={},
+}
+
+@ARTICLE{Daerden2000,
+    author = {Frank Daerden and Dirk Lefeber},
+    title = {Pneumatic artificial muscles: actuators for robotics and automation},
+    journal = {European journal of Mechanical and Environmental Engineering},
+    year = {2000},
+    volume = {47},
+    pages = {10--21}
+}
+
+
+@INPROCEEDINGS{Andrikopoulos2011,
+author={Andrikopoulos, G. and Nikolakopoulos, G. and Manesis, S.},
+booktitle={Control Automation (MED), 2011 19th Mediterranean Conference on},
+title={A Survey on applications of Pneumatic Artificial Muscles},
+year={2011},
+pages={1439-1446},
+keywords={muscle;nonlinear control systems;pipes;pneumatic actuators;PAM;interval pressure;nonlinear pneumatic actuators;pneumatic artificial muscles;Actuators;Humans;Leg;Legged locomotion;Muscles;Pneumatic systems},
+doi={10.1109/MED.2011.5982983},}
+
+
+@INPROCEEDINGS{Klute99mckibbenartificial,
+    author = {Glenn K. Klute and Joseph M. Czerniecki and Blake Hannaford},
+    title = {McKibben Artificial Muscles: Pneumatic Actuators with Biomechanical Intelligence},
+    booktitle = {PROC. IEEE/ASME 1999 INT’L CONF. ON ADV. INTELL. MECHATRONICS (AIM '99},
+    year = {1999},
+    publisher = {}
+}
+
+
+@incollection {Byl2009,
+   author = {Byl, Katie and Shkolnik, Alec and Prentice, Sam and Roy, Nick and Tedrake, Russ},
+   affiliation = {MIT Computer Science and Artificial Intelligence Lab Cambridge MA 02139},
+   title = {Reliable Dynamic Motions for a Stiff Quadruped},
+   booktitle = {Experimental Robotics},
+   series = {Springer Tracts in Advanced Robotics},
+   editor = {Khatib, Oussama and Kumar, Vijay and Pappas, George},
+   publisher = {Springer Berlin / Heidelberg},
+   isbn = {},
+   keyword = {Engineering},
+   pages = {319-328},
+   volume = {54},
+   url = {},
+   note = {},
+   abstract = {We present a kinodynamic planning methodology for a high-impedance quadruped robot to negotiate a wide variety of terrain types with high reliability. We achieve motion types ranging from dynamic, double-support lunges for efficient locomotion over extreme obstacles to careful, deliberate foothold and body pose selections which allow for precise foothold placement on rough or intermittent terrain.},
+   year = {2009}
+}
+@article{Lee1998,
+title = {Determinants of the center of mass trajectory in human walking and running},
+volume = {},
+number = {},
+pages = {2935-2944},
+year = {1998},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {Cynthia R. Lee and Claire T. Farley},
+keywords = {},
+journal = {J Exp Biol},
+}
+
+
+@article{Fischer2007,
+title = {Legs evolved only at the end},
+volume = {365 },
+number = {1850},
+pages = {185-198},
+year = {2007},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {    Martin S. Fischer and Hartmut. Witte
+},
+keywords = {},
+journal = {Phil. Trans. R. Soc. A},
+}
+
+@article{Farley1993,
+title = {Running springs: speed and animal size},
+volume = { },
+number = {185},
+pages = {71-86},
+year = {1993},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {Farley CT and Glasheen J and McMahon TA.
+},
+keywords = {},
+journal = {J Exp Biol},
+}
+
+@article{He1991,
+title = {Mechanics of running under simulated low gravity},
+volume = {71 },
+number = {3},
+pages = {863-870},
+year = {1991},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {  J. P. He and R. Kram and T. A. McMahon},
+keywords = {},
+journal = {Journal of Applied Physiology},
+}
+
+@article{Schilling2010,
+title = {Function of the epaxial muscles in walking, trotting and galloping dogs: implications for the evolution of epaxial muscle function in tetrapods},
+volume = { },
+number = {},
+pages = {1490-1502},
+year = {2010},
+note = {},
+issn = {},
+doi = {},
+url = {},
+author = {Schilling, N and Carrier, DR},
+keywords = {},
+journal = {J Exp Biol},
+}
+@ARTICLE{Chou1996,
+author={Ching-Ping Chou and Hannaford, B.},
+journal={Robotics and Automation, IEEE Transactions on},
+title={Measurement and modeling of McKibben pneumatic artificial muscles},
+year={1996},
+volume={12},
+number={1},
+pages={90-102},
+keywords={actuators;pneumatic control equipment;McKibben pneumatic artificial muscles;actuator;biologically based robot arms;braided cords;dynamic length-tension testing;expanding tube;linearized model;mechanical testing;static length-tension testing;Biological system modeling;Bladder;Circuits;Fitting;Humans;Muscles;Pneumatic actuators;Robots;Testing;Yarn},
+doi={10.1109/70.481753},
+ISSN={1042-296X},}
+
+@article{Gracovetsky1987,
+title ={Energy transfers in the spinal engine},
+journal = "Journal of Biomedical Engineering",
+volume = "9",
+number = "2",
+pages = "99-114",
+year = "1987",
+note = "",
+issn = "0141-5425",
+doi = "",
+url = "",
+author = "S.A. Gracovetsky and S. Iacono",
+keywords = "Musculoskeletal system",
+keywords = "spine",
+keywords = "biomechanics",
+abstract = "Locomotion is generally perceived as being the function of the legs. The trunk is considered to be carried along in a more or less passive way. This popular hypothesis appears to have been accepted with little substantiation. In light of the numerous observations contradicting this view, we have proposed an alternative hypothesis in which the spine and its surrounding tissues comprise the basic engine of locomotion. This theory is consistent with available experimental data which suggest that the motion of the spine precedes that of the legs. Indeed, the variations in the power delivered to the pelvis by the spine are strikingly similar to, but slightly ahead of, the variation in power at the hip."
+}
+
+@INPROCEEDINGS{Takuma2010,
+author={Takuma, T.and Ikeda, M. and Masuda, T. },
+booktitle={2010 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+title={Facilitating multi-modal locomotion in a quadruped robot utilizing passive oscillation of the spine structure},
+year={2010},
+month={oct.},
+volume={},
+number={},
+pages={4940-4945},
+keywords={energy-efficient locomotion;gait pattern;legged locomotors;multimodal locomotion;multiple joints;passive mechanical properties;passive oscillation;quadruped robot;spine structure;variable viscoelasticity;legged locomotion;viscoelasticity;},
+doi={10.1109/IROS.2010.5649134},
+ISSN={2153-0858},}
+
+@INPROCEEDINGS{Tsujita2008,
+author={Tsujita, K. and Kobayashi, T. and Inoura, T. and Masuda, T.},
+booktitle={2008 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+title={Gait transition by tuning muscle tones using pneumatic actuators in quadruped locomotion},
+year={2008},
+month={Sept.},
+volume={},
+number={},
+pages={2453-2458},
+abstract={The development of an oscillator controller for a quadruped robot with antagonistic pairs of pneumatic actuators is reported. Periodic motions of the legs switch between the swinging and supporting stages based on the phase of the oscillators. The oscillators receive touch sensor signals at the end of the legs as feedback when the leg touches the ground and compose a steady limit cycle of the total periodic dynamics of quadruped locomotion. And also muscle tone is adaptively controlled according to the dynamic state of the main body. This system can generate gait transition from one to another by changing locomotion speed and muscle tone. The effectiveness and performance of the proposed controller were evaluated with numerical simulations and experiments with the hardware.},
+keywords={gait transition;limit cycle;muscle tones;oscillator controller;periodic dynamics;pneumatic actuators;quadruped locomotion;touch sensor signals;legged locomotion;limit cycles;pneumatic actuators;tactile sensors;},
+doi={10.1109/IROS.2008.4651230},
+ISSN={},}
+
+
+
+
+@article{Poulakakis2005,
+ author = {I. Poulakakis and J. A Smith and M. Buehler},
+ title = {Modeling and Experiments of Untethered Quadrupedal Running with a Bounding Gait: The {S}cout {II} Robot},
+ journal = {Int. J. Rob. Res.},
+ volume = {24},
+ issue = {4},
+ month = {April},
+ year = {2005},
+ issn = {0278-3649},
+ pages = {239-256},
+ numpages = {18},
+ url = {},
+ doi = {},
+ acmid = {1057174},
+ publisher = {Sage Publications, Inc.},
+ address = {Thousand Oaks, CA, USA},
+ keywords = {bounding gait, dynamic running, dynamic stability, legged locomotion, modeling, quadrupedal robot},
+}
+
+@Article{Buchli2008,
+   abstract    = {},
+   affiliation = {EPFL},
+   author      = {J. Buchli and  A. J. Ijspeert},
+   details     = {http://infoscience.epfl.ch/record/128663},
+   documenturl = {http://infoscience.epfl.ch/record/128663/files/buchli08b.pdf},
+   doi         = {},
+   extra-id    = {},
+   journal     = {Autonomous {R}obots},
+   keywords    = {Compliant robot; Adaptive controller; Self-organized movement},
+   number      = {4},
+   oai-id      = {oai:infoscience.epfl.ch:128663},
+   oai-set     = {article},
+   pages       = {331-347},
+   review      = {REVIEWED},
+   status      = {PUBLISHED},
+   title       = {Self-organized adaptive legged locomotion in a compliant quadruped robot},
+   unit        = {BIOROB},
+   url         = {},
+   volume      = {25},
+   year        = {2008},
+}
+
+@article{Fukuoka2010,
+ author = {Y. Fukuoka and H. Katabuchi and H. Kimura},
+ title = {Dynamic Locomotion of Quadrupeds {T}ekken 3\&4 Using Simple Navigation},
+ journal = {Int. J. Rob. Res.},
+ volume = {24},
+ issue = {4},
+ month = {April},
+ year = {2005},
+ issn = {0278-3649},
+ pages = {239-256},
+ numpages = {18},
+ url = {},
+ doi = {},
+ acmid = {1057174},
+ publisher = {Sage Publications, Inc.},
+ address = {Thousand Oaks, CA, USA},
+ keywords = {bounding gait, dynamic running, dynamic stability, legged locomotion, modeling, quadrupedal robot},
+}
+
+@INPROCEEDINGS{Littledog,
+author={Byl, Katie and Tedrake, Russ},
+booktitle={2009 IEEE International Conference on Robotics and Automation (ICRA)},
+title={Dynamically diverse legged locomotion for rough terrain},
+year={2009},
+month={May},
+volume={},
+number={},
+pages={1607-1608},
+keywords={},
+doi={},
+ISSN={1050-4729},}
+
+@article {Boszczyk2001,
+author = {B. M. Boszczyk and A. A. Boszczyk and P. Reinhard},
+title = {Comparative and functional anatomy of the mammalian lumbar spine},
+journal = {The Anatomical Record},
+volume = {264},
+number = {2},
+publisher = {John Wiley & Sons, Inc.},
+issn = {1097-0185},
+url = {},
+doi = {},
+pages = {157-168},
+keywords = {lumbar spine, zygapophyseal joints, comparative anatomy, mammalian, human, locomotion, bipedalism, gait},
+year = {2001},
+}
+
+@INPROCEEDINGS{Culha2011,
+author={U. Culha and U. Saranli},
+booktitle={2011 IEEE International Conference on Robotics and Automation (ICRA)},
+title={Quadrupedal bounding with an actuated spinal joint},
+year={2011},
+month={May},
+volume={},
+number={},
+pages={1392-1397},
+abstract={Most legged vertebrates use flexible spines and supporting muscles to provide auxiliary power and dexterity for dynamic behaviors, resulting in higher speeds and additional maneuverability during locomotion. However, most existing legged robots capable of dynamic locomotion incorporate only a single rigid trunk with actuation limited to legs and associated joints. In this paper, we investigate how quadrupedal bounding can be achieved in the presence of an actuated spinal joint and characterize associated performance improvements compared to bounding with a rigid robot body. In the context of both a new controller structure for bounding with a body joint and existing bounding controllers for the rigid trunk, we use optimization methods to identify the highest performance gait parameters and establish that the spinal joint allows increased forward speeds and hopping heights.},
+keywords={actuated spinal joint;actuation;controller structure;dynamic locomotion;gait parameter;legged robot;legged vertebrate;optimization method;quadrupedal bounding;rigid robot body;rigid trunk;legged locomotion;motion control;optimal control;},
+doi={10.1109/ICRA.2011.5980176},
+ISSN={1050-4729},}
+
+@article {Lewis1996,
+   author = {Lewis, M. Anthony and Bekey, George A.},
+   title = {Gait Adaptation in a Quadruped Robot},
+   journal = {Autonomous Robots},
+   publisher = {Springer Netherlands},
+   issn = {0929-5593},
+   keyword = {Computer Science},
+   pages = {301-312},
+   volume = {12},
+   issue = {3},
+   url = {},
+   note = {},
+   abstract = {A newborn foal can learn to walk soon after birth through a process of rapid adaptation acting on its locomotor controller. It is proposed here that this kind of adaptation can be modeled as a distributed system of adaptive modules (AMs) acting on a distributed system of adaptive oscillators called Adaptive Ring Rules (ARRs), augmented with appropriate and simple reflexes. It is shown that such a system can self-program through interaction with the environment. The adaptation emerges spontaneously as several discrete stages: Body twisting, short quick steps, and finally longer, coordinated stepping.},
+   year = {2002}
+}
+
+@INPROCEEDINGS{Kani2011,
+author = {Mohammad Hasan Haj Kani and Mostafa Derafshian and Hamed Jalaly Bidgoly and Majid Nili Ahmadabadi},
+booktitle={2011 IEEE International Conference on Robotics and Biomimetics (Robio)},
+title={Effect of Flexible Spine on Stability of a Passive Quadruped Robot: Experimental Results},
+year={2011},
+month={Dec.},
+volume={},
+number={},
+pages={2793-2797},
+abstract={},
+keywords={},
+doi={},
+ISSN={},}
+}
+
+@INPROCEEDINGS{Nakajima2011,
+author = {K. Nakajima and T. Li and H. Sumioka and M. Cianchetti and R. Pfeifer},
+booktitle={2011 IEEE International Conference on Robotics and Biomimetics (Robio)},
+title={Information theoretic analysis on a soft robotic arm inspired by the octopus},
+year={2011},
+month={Dec.},
+volume={},
+number={},
+pages={110-117},
+abstract={},
+keywords={},
+ISSN={},}
+
+@INPROCEEDINGS{Zhao2011AMAR,
+author = {Qian Zhao and Hidenobu Sumioka and Rolf Pfeifer},
+booktitle={The 5th International Symposium on Adaptive Motion of Animals and Machines (AMAM2011)},
+title={The effect of morphology on the spinal engine driven locomotion in a quadruped robot},
+year={2011},
+month={Oct.},
+volume={},
+number={},
+pages={51-52},
+abstract={},
+keywords={},
+ISSN={},}
+
+@INPROCEEDINGS{Zhao2011ICMC,
+author =  {Qian Zhao and Hidenobu Sumioka},
+booktitle={International Conference on Morphological Computation},
+title={The effect of robot morphology on locomotion from the perspective of spinal engine in a quadruped robot},
+year={2011},
+month={Sep.},
+volume={},
+number={},
+pages={130-132},
+abstract={},
+keywords={},
+ISSN={},}
+
+@INPROCEEDINGS{zhao2012IROS,
+  title={Embodiment Enables the Spinal Engine on Quadruped Robot Locomotion},
+  author={Zhao, Q. and Nakajima, K. and Sumioka,H. and Yu, X. and Pfeifer,R. },
+  booktitle={2012 IEEE/RSJ Internattional Conference on Intelligent Robots and Systems},
+  volume={},
+  pages={2449-2456},
+  issn={},
+  month={Oct.},
+  year={2012},
+  organization={}
+}
+
+@article{Pfeifer2007,
+author = {Rolf Pfeifer and Max Lungarella and Fumiya Iida},
+title = {Self-Organization, Embodiment, and Biologically Inspired Robotics},
+volume = {318},
+number = {5853},
+pages = {1088-1093},
+year = {2007},
+doi = {},
+abstract ={Robotics researchers increasingly agree that ideas from biology and self-organization can strongly benefit the design of autonomous robots. Biological organisms have evolved to perform and survive in a world characterized by rapid changes, high uncertainty, indefinite richness, and limited availability of information. Industrial robots, in contrast, operate in highly controlled environments with no or very little uncertainty. Although many challenges remain, concepts from biologically inspired (bio-inspired) robotics will eventually enable researchers to engineer machines for the real world that possess at least some of the desirable properties of biological organisms, such as adaptivity, robustness, versatility, and agility.},
+URL = {},
+eprint = {http://www.sciencemag.org/content/318/5853/1088.full.pdf},
+journal = {Science}
+}
+
+
+@mastersthesis{Leeser1996,
+  author        = "K. F. Leeser",
+  title         = "Locomtotion experiments on a planar quadruped robot with articulated back spine",
+  school        = "Massachusetts Institute of Technology",
+  address       = "",
+  year          = "1996"
+}
+% . first name in front; , faminly name in front
+@ARTICLE{Sumioka2010,
+author={Sumioka, H. and Yoshikawa, Y. and Asada, M.},
+journal={Autonomous Mental Development, IEEE Transactions on},
+title={Reproducing Interaction Contingency Toward Open-Ended Development of Social Actions: Case Study on Joint Attention},
+year={2010},
+month={March},
+volume={2},
+number={1},
+pages={40-50},
+abstract={How can human infants gradually socialize through interaction with their caregivers? This paper presents a learning mechanism that incrementally acquires social actions by finding and reproducing the contingency in interaction with a caregiver. A contingency measure based on transfer entropy is used to select the appropriate pairs of variables to be associated to acquire social actions from the set of all possible pairs. Joint attention behavior is tested to examine the development of social actions caused by responding to changes in caregiver behavior due to reproducing the found contingency. The results of computer simulations of human-robot interaction indicate that a robot acquires a series of actions related to joint attention such as gaze following and alternation in an order that almost matches the infant development of joint attention found in developmental psychology. The difference in the order between them is discussed based on the analysis of robot behavior, and then future issues are given.},
+keywords={human robot interaction;joint attention behavior;learning mechanism;open ended development;reproducing interaction contingency;robot behavior;social actions;transfer entropy;behavioural sciences;human-robot interaction;},
+doi={10.1109/TAMD.2010.2042167},
+ISSN={1943-0604},}
+
+@INPROCEEDINGS{Yamada2011,
+author={Yasunori. Yamada and Satoshi. Nishikawa and Kazuya. Shida and Ryuma. Niiyama and Yasuo. Kuniyoshi},
+booktitle={2011 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+title={Neural-body coupling for emergent locomotion: A musculoskeletal quadruped robot with spinobulbar model},
+year={2011},
+month={Sept.},
+volume={},
+number={},
+pages={1499-1506},
+abstract={To gain a synthetic understanding of how the body and nervous system co-create animal locomotion, we propose an investigation into a quadruped musculoskeletal robot with biologically realistic morphology and a nervous system. The muscle configuration and sensory feedback of our robot are compatible with the mono- and bi-articular muscles of a quadruped animal and with its muscle spindles and Golgi tendon organs. The nervous system is designed with a biologically plausible model of the spinobulbar system with no pre-defined gait patterns such that mutual entrainment is dynamically created by exploiting the physics of the body. In computer simulations, we found that designing the body and the nervous system of the robot with the characteristics of biological systems increases information regularities in sensorimotor flows by generating complex and coordinated motor patterns. Furthermore, we found similar results in robot experiments with the generation of various coordinated locomotion patterns created in a self-organized manner. Our results demonstrate that the dynamical interaction between the physics of the body with the neural dynamics can shape behavioral patterns for adaptive locomotion in an autonomous fashion.},
+keywords={},
+doi={10.1109/IROS.2011.6094752},
+ISSN={2153-0858},}
+
+
+% BibTeX Entries
+@article{Amigo2,
+ author               = {J. M. Amigo and M. B. Kennel and L. Kocarev},
+ journal              = {Physica D},
+ pages                = {77-95},
+ title                = {The permutation rate equals the metric entropy rate for ergodic information sources and ergodic dynamical systems},
+ volume               = {2010},
+ year                 = {2005},
+ }
+
+@article{Bandt1,
+ author               = {C. Bandt and B. Pompe},
+ journal              = {Physical Review Letters},
+ pages                = {174102},
+ title                = {Permutation entropy: a natural complexity measure for time series},
+ volume               = {88},
+ year                 = {2002},
+ }
+
+@article{Bandt2,
+ author               = {C. Bandt and G. Keller and B. Pompe},
+ journal              = {Nonlinearity},
+ pages                = {1595-1602},
+ title                = {Entropy of interval maps via permutations},
+ volume               = {15},
+ year                 = {2002},
+ }
+
+@book{Cover,
+ address              = {New York},
+ author               = {T. M. Cover and J. A. Thomas},
+ journal              = {},
+ publisher            = {John Wiley Sons},
+ title                = {Elements of Information Theory},
+ year                 = {1991},
+ }
+
+@article{Kohei1,
+ author               = {Taichi Haruna and Kohei Nakajima},
+ doi                  = {10.1016/j.physd.2011.05.019},
+ journal              = {Physica D},
+ pages                = {1370-1377},
+ title                = {Permutation complexity via duality between values and orderings},
+ volume               = {240},
+ year                 = {2011},
+ }
+
+@article{Max2,
+ author               = {Max Lungarella and Olaf Sporns},
+ journal              = {PLoS Computational Biology},
+ pages                = {1301-1312},
+ title                = {Mapping Information Flow in Sensorimotor Networks},
+ volume               = {2 (10)},
+ year                 = {2006},
+ }
+
+@article{Max3,
+ author               = {Max Lungarella and Teresa Pegors and Daniel Bulwinkle and Olaf Sporns},
+ journal              = {Neuroinformatics},
+ pages                = {243-262},
+ title                = {Methods for Quantifying the Informational Structure of Sensory and Motor Data},
+ volume               = {3},
+ year                 = {2005},
+ }
+
+@book{RolfHow,
+ author               = {Rolf Pfeifer and Josh Bongard},
+ journal              = {},
+ publisher            = {The MIT Press},
+ title                = {How the Body Shapes the Way We Think: A New View of Intelligence},
+ year                 = {2006},
+ }
+
+
+
+@article{Schreiber,
+ author               = {T. Schreiber},
+ journal              = {Physical Review Letters},
+ pages                = {461-464},
+ title                = {Measuring information transfer},
+ volume               = {85},
+ year                 = {2000},
+ }
+
+@article{Symbolic,
+ author               = {Matthaus Staniek and Klaus Lehnertz},
+ journal              = {Physical Review Letters},
+ pages                = {158101(4)},
+ title                = {Symbolic Transfer Entropy},
+ volume               = {100},
+ year                 = {2008},
+ }
+
+
+
+@article {Alexander1981,
+author = {Alexander, R. Mcn. and Jayes, A. S.},
+title = {Estimates of the bending moments exerted by the lumbar and abdominal muscles of some mammals},
+journal = {Journal of Zoology},
+volume = {194},
+number = {3},
+publisher = {Blackwell Publishing Ltd},
+issn = {1469-7998},
+url = {},
+doi = {},
+pages = {291-304},
+year = {1981},
+}

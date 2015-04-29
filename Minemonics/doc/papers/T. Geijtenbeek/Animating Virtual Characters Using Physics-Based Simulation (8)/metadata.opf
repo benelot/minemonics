@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">8</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">339d05ca-4bcc-4c7f-9ef0-e1afecd22eda</dc:identifier>
+        <dc:title>Animating Virtual Characters Using Physics-Based Simulation</dc:title>
+        <dc:creator opf:file-as="Geijtenbeek, T." opf:role="aut">T. Geijtenbeek</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (1.25.0) [http://calibre-ebook.com]</dc:contributor>
+        <dc:date>2013-11-18T13:32:06+00:00</dc:date>
+        <dc:language>en</dc:language>
+        <meta content="{&quot;T. Geijtenbeek&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2015-04-29T07:48:31.913653+00:00" name="calibre:timestamp"/>
+        <meta content="Animating Virtual Characters Using Physics-Based Simulation" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>
