@@ -6,6 +6,7 @@
  */
 
 //# corresponding header
+#include <view/environments/HillsO3D.h>
 #include "Hills.h"
 
 //# forward declarations
@@ -21,7 +22,6 @@
 #include "model/environments/bullet/HillsBt.h"
 
 //## view headers
-#include "view/ogre3D/environments/HillsO3D.h"
 
 Hills::Hills() {
 	// TODO Auto-generated constructor stub

@@ -52,9 +52,9 @@ class ParamsPanel;
 #include <view/MathGL/MathGLWindow.h>
 #include <view/CEGUI/GUISheetHandler.h>
 #include <view/CEGUI/ParamsPanel.h>
-#include <view/ogre3D/bullet/OgreBtDebugDrawer.h>
-#include <view/ogre3D/overlay/InfoOverlay.h>
-#include <view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h>
+#include <view/bullet/OgreBtDebugDrawer.h>
+#include <view/overlay/InfoOverlay.h>
+#include <view/videocapture/Ogre3DFFMPEGVideoWriter.h>
 
 //## utils headers
 #include <utils/logging/Logger.h>

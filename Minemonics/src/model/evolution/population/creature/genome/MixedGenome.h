@@ -37,16 +37,12 @@
 //## utils headers
 
 /**
- * A creature's genotype dictates a potentially-recursive (both indirectly and directly recursive)
+ * @brief		The mixed genome is an genome type that encodes the morphology and the neural network in a compact/indirect encoding.
+ * @details		 A creature's genotype dictates a potentially-recursive (both indirectly and directly recursive)
  * branching pattern. The genome encodes properties for a fixed number of segment types, and associated
  * with each type is a fixed number of branch specifications that dictate the way in which a segment of
  * a given type sprouts branches of other segment types. The encoded information also specifies the scaling,
  * positioning, and other aspects of the branching.
- */
-
-/**
- * @brief		Brief
- * @details		Details
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
  */

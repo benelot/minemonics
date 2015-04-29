@@ -27,13 +27,11 @@
 //## controller headers
 #include <controller/evolution/population/creature/phenome/morphology/Limb.h>
 #include <controller/physics/PhysicsController.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
 
 //## model headers
 
-#include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
-
-//## view headers
-#include "view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h"
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h>
 
 //## utils headers
 

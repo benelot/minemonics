@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include <controller/evolution/Evolution.h>
+#include <controller/evolution/Evolution.hpp>
 
 Evolution::Evolution():mCurrentCreature(NULL),mEnvironment(NULL) {
 	// TODO Auto-generated constructor stub

@@ -6,6 +6,7 @@
  */
 
 //# corresponding header
+#include <view/environments/PlaneO3D.h>
 #include "Plane.h"
 
 //# forward declarations
@@ -21,7 +22,6 @@
 #include "model/environments/bullet/PlaneBt.h"
 
 //## view headers
-#include "view/ogre3D/environments/PlaneO3D.h"
 
 Plane::Plane() {
 	// TODO Auto-generated constructor stub

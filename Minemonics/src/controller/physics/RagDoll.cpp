@@ -6,6 +6,8 @@
  */
 
 //# corresponding header
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
+#include <view/bullet/OgreBulletUtils.h>
 #include "RagDoll.h"
 
 //# forward declarations
@@ -27,10 +29,6 @@
 #include "controller/evolution/population/creature/phenome/morphology/Joint.h"
 
 //## model headers
-#include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
-
-//## view headers
-#include "view/ogre3D/bullet/OgreBulletUtils.h"
 
 //## utils headers
 
