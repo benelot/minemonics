@@ -249,24 +249,29 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/genome/controller/SineControllerGene.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/PhenomeModel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/PhenomeModel.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/LimbPhysics.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/LimbBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/JointPhysics.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/JointBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/EnvironmentGraphics.cpp</name>
@@ -276,62 +281,62 @@
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/PerlinNoiseTerrainGenerator.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/EnvironmentO3D.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/EnvironmentO3D.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/EnvironmentO3D.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/HillsO3D.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/HillsO3D.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/HillsO3D.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/OpenSeaO3D.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/OpenSeaO3D.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/OpenSeaO3D.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/PlaneO3D.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/PlaneO3D.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/PlaneO3D.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/LimbGraphics.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/LimbO3D.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/JointGraphics.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/JointGraphics.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/JointO3D.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/OgreBtDebugDrawer.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreBtDebugDrawer.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/bullet/OgreBtDebugDrawer.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/InfoOverlay.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/overlay/InfoOverlay.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/overlay/InfoOverlay.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/InfoOverlayData.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/overlay/InfoOverlayData.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/overlay/InfoOverlayData.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/GUISheetHandler.cpp</name>
@@ -356,12 +361,12 @@
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/Ogre3DFFMPEGVideoWriter.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/OgreMeshRay.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/picking/OgreMeshRay.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/OgreMeshRay.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/ProceduralBoxGenerator.cpp</name>
@@ -699,24 +704,29 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/genome/controller/SineControllerGene.h</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/PhenomeModel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/PhenomeModel.hpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/LimbPhysics.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbPhysics.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/LimbBt.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbBt.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbBt.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/JointPhysics.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointPhysics.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointPhysics.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/JointBt.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointBt.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/EnvironmentGraphics.h</name>
@@ -726,67 +736,67 @@
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/PerlinNoiseTerrainGenerator.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/envgenerators/PerlinNoiseTerrainGenerator.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/EnvironmentO3D.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/EnvironmentO3D.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/EnvironmentO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/OpenSeaO3D.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/OpenSeaO3D.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/OpenSeaO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/PlaneO3D.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/PlaneO3D.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/PlaneO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/HillsO3D.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/environments/HillsO3D.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/environments/HillsO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/LimbGraphics.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/LimbGraphics.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/LimbO3D.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/JointGraphics.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/JointGraphics.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/joint/JointGraphics.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/JointO3D.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.h</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] OgreApp/Header Files/OgreBulletUtils.h</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreBulletUtils.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/evolution/population/creature/phenome/morphology/joint/JointO3D.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/OgreBtDebugDrawer.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/bullet/OgreBtDebugDrawer.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/bullet/OgreBtDebugDrawer.h</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/OgreBulletUtils.h</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/bullet/OgreBulletUtils.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/InfoOverlay.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/overlay/InfoOverlay.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/overlay/InfoOverlay.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/InfoOverlayData.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/overlay/InfoOverlayData.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/overlay/InfoOverlayData.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/GUISheetHandler.h</name>
@@ -811,12 +821,12 @@
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/Ogre3DFFMPEGVideoWriter.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/videocapture/Ogre3DFFMPEGVideoWriter.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/OgreMeshRay.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/ogre3D/picking/OgreMeshRay.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/OgreMeshRay.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/ProceduralPlatform.h</name>
@@ -1279,24 +1289,29 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/genome/controller/SineControllerGene.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/PhenomeModel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/PhenomeModel.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/LimbPhysics.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/LimbBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointPhysics.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointPhysics.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Logger.cpp</name>
@@ -1479,24 +1494,29 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/genome/controller/SineControllerGene.h</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/PhenomeModel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/PhenomeModel.hpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/LimbPhysics.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbPhysics.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/LimbBt.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/LimbBt.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/limb/LimbBt.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointPhysics.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointPhysics.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointPhysics.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointBt.h</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/JointBt.h</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/ApplicationConfiguration.h</name>

@@ -26,10 +26,10 @@ class Limb;
 //## configuration headers
 //## controller headers
 //## model headers
-#include "model/evolution/population/creature/phenome/morphology/JointPhysics.h"
+#include <model/evolution/population/creature/phenome/morphology/joint/JointPhysics.h>
 
 //## view headers
-#include "view/evolution/population/creature/phenome/morphology/JointGraphics.h"
+#include <view/evolution/population/creature/phenome/morphology/joint/JointGraphics.h>
 
 //## utils headers
 

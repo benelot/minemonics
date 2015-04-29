@@ -6,6 +6,9 @@
  */
 
 //# corresponding header
+#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
+#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.h>
 #include "Joint.h"
 
 //# forward declarations
@@ -22,11 +25,6 @@
 #include "controller/evolution/population/creature/phenome/morphology/Limb.h"
 
 //## model headers
-#include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
-#include "model/evolution/population/creature/phenome/morphology/JointBt.h"
-
-//## view headers
-#include "view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.h"
 
 //## utils headers
 

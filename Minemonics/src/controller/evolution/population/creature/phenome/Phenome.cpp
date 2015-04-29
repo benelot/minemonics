@@ -7,6 +7,11 @@
 //TODO: Separate Phenome into model and controller classes
 //# corresponding header
 #include <controller/evolution/genetics/PhenotypeGenerator.h>
+#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
+#include <view/bullet/OgreBulletUtils.h>
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h>
+#include <view/picking/OgreMeshRay.h>
 #include "Phenome.h"
 
 //# forward declarations
@@ -32,20 +37,13 @@
 //## model headers
 #include "model/evolution/population/creature/genome/morphology/Morphogene.h"
 #include "model/evolution/population/creature/genome/morphology/MorphogeneBranch.h"
-#include "model/evolution/population/creature/phenome/morphology/LimbBt.h"
-#include "model/evolution/population/creature/phenome/morphology/JointBt.h"
 #include "model/evolution/population/creature/genome/Gene.h"
 
 //## view headers
-#include "view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h"
-#include "view/ogre3D/picking/OgreMeshRay.h"
-#include "view/ogre3D/bullet/OgreBulletUtils.h"
-
-//## utils headers
 #include "utils/ogre3D/Euler.h"
 
 Phenome::Phenome() :
-		mSimulationManager(NULL), mWorld(NULL), inWorld(false) {
+		mSimulationManager(NULL), mWorld(NULL) {
 
 }
 

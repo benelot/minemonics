@@ -68,7 +68,7 @@ private:
 	/**
 	 * The model of the evolution
 	 */
-	EvolutionModel mEvolutionM;
+	EvolutionModel mEvolutionModel;
 
 	/**
 	 * The creature that is currently evaluated.

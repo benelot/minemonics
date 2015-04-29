@@ -26,12 +26,12 @@ class SimulationManager;
 
 //## controller headers
 //## model headers
-#include <model/evolution/population/creature/phenome/morphology/LimbPhysics.h>
-#include <model/evolution/population/creature/phenome/morphology/LimbBt.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
 
 //## view headers
-#include <view/evolution/population/creature/phenome/morphology/LimbGraphics.h>
-#include <view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h>
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.h>
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h>
 
 //## utils headers
 

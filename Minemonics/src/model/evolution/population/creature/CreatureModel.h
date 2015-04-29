@@ -43,6 +43,7 @@ class access;
 #include <model/evolution/juries/Jury.h>
 #include <model/evolution/population/creature/genome/morphology/Morphogene.h>
 #include <model/evolution/population/creature/genome/MixedGenome.h>
+#include <model/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -161,6 +162,11 @@ private:
 	 * Is the phenotype developed?
 	 */
 	bool mDeveloped;
+
+	/**
+	 * The phenotype (morphological individual) of the creature.
+	 */
+	PhenomeModel mPhenotype;
 
 	/**
 	 * The juries that rate the creature according to their fitness function.

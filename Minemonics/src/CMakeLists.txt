@@ -263,10 +263,11 @@ set(MODELHDRS
 	./model/evolution/population/creature/genome/controller/SineControllerGene.h
 	
 	## phenome
-	./model/evolution/population/creature/phenome/morphology/LimbPhysics.h
-	./model/evolution/population/creature/phenome/morphology/LimbBt.h
-	./model/evolution/population/creature/phenome/morphology/JointPhysics.h
-	./model/evolution/population/creature/phenome/morphology/JointBt.h
+	./model/evolution/population/creature/phenome/PhenomeModel.hpp
+	./model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.h
+	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.h
+	./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.h
+	./model/evolution/population/creature/phenome/morphology/joint/JointBt.h
 )
 set(MODELSRCS
     # model
@@ -300,10 +301,11 @@ set(MODELSRCS
 	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
 	
 	## phenome
-	./model/evolution/population/creature/phenome/morphology/LimbPhysics.cpp
-	./model/evolution/population/creature/phenome/morphology/LimbBt.cpp
-    ./model/evolution/population/creature/phenome/morphology/JointPhysics.cpp
-	./model/evolution/population/creature/phenome/morphology/JointBt.cpp
+	./model/evolution/population/creature/phenome/PhenomeModel.cpp
+	./model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
+	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
+    ./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
+	./model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -328,10 +330,14 @@ set(CONTROLLERHDRS
     ./controller/physics/PhysicsController.h
     ./controller/physics/RagDoll.h
     
-    #model-view facades to control objects at both sides
+    # entity controllers/model-view facades to control objects at both sides
     ## environments
     ./controller/environments/Environment.h
     ./controller/environments/Plane.h
+    
+    ## evolution
+    ./controller/evolution/Evolution.hpp
+    ./controller/evolution/population/Population.hpp
         
     ## phenome
     ./controller/evolution/population/creature/Creature.h
@@ -358,13 +364,16 @@ set(CONTROLLERSRCS
 	./controller/physics/PhysicsController.cpp
 	./controller/physics/RagDoll.cpp
 	
-	# model-view facades to sync objects on both sides
+	# entity controllers/model-view facades to control objects at both sides
 	## environments
     ./controller/environments/Environment.cpp
     ./controller/environments/Plane.cpp
     
-    ## phenome
+    ## evolution
     ./controller/evolution/Evolution.cpp
+    ./controller/evolution/population/Population.cpp
+    
+    ## creature
     ./controller/evolution/population/creature/Creature.cpp
     ./controller/evolution/genetics/PhenotypeGenerator.cpp
     ./controller/evolution/population/creature/phenome/Phenome.cpp
@@ -376,27 +385,25 @@ set(VIEWHDRS
 	# view
 	## environments
 	./view/environments/EnvironmentGraphics.h
-	./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.h
-	./view/ogre3D/environments/EnvironmentO3D.h
-	./view/ogre3D/environments/OpenSeaO3D.h
-	./view/ogre3D/environments/PlaneO3D.h
-	./view/ogre3D/environments/HillsO3D.h
+	./view/environments/envgenerators/PerlinNoiseTerrainGenerator.h
+	./view/environments/EnvironmentO3D.h
+	./view/environments/OpenSeaO3D.h
+	./view/environments/PlaneO3D.h
+	./view/environments/HillsO3D.h
 	
 	## creature
-    ./view/evolution/population/creature/phenome/morphology/LimbGraphics.h
-	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.h
-	./view/evolution/population/creature/phenome/morphology/JointGraphics.h
-	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.h
+    ./view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.h
+	./view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h
+	./view/evolution/population/creature/phenome/morphology/joint/JointGraphics.h
+	./view/evolution/population/creature/phenome/morphology/joint/JointO3D.h
 	
 	## physics debug drawing
-	#./view/ogre3D/bullet/OgreDebugDrawer.h
-	./view/ogre3D/bullet/OgreBulletUtils.h
-	
-	./view/ogre3D/bullet/OgreBtDebugDrawer.h
+	./view/bullet/OgreBtDebugDrawer.h
+	./view/bullet/OgreBulletUtils.h
 	
 	## information overlay
-	./view/ogre3D/overlay/InfoOverlay.h
-	./view/ogre3D/overlay/InfoOverlayData.h
+	./view/overlay/InfoOverlay.h
+	./view/overlay/InfoOverlayData.h
 	
     ## CEGUI
 	./view/CEGUI/GUISheetHandler.h
@@ -407,10 +414,10 @@ set(VIEWHDRS
     ./view/MathGL/MathGLWindow.h
     
     ## Videocapture
-	./view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h
+	./view/videocapture/Ogre3DFFMPEGVideoWriter.h
 	
 	## picking
-	./view/ogre3D/picking/OgreMeshRay.h
+	./view/picking/OgreMeshRay.h
     
     # procedural
 	./view/procedural/ProceduralPlatform.h
@@ -447,25 +454,25 @@ set(VIEWSRCS
 	# view
 	## environments
 	./view/environments/EnvironmentGraphics.cpp
-    ./view/ogre3D/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
-	./view/ogre3D/environments/EnvironmentO3D.cpp
-	./view/ogre3D/environments/HillsO3D.cpp
-	./view/ogre3D/environments/OpenSeaO3D.cpp
-	./view/ogre3D/environments/PlaneO3D.cpp
+    ./view/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
+	./view/environments/EnvironmentO3D.cpp
+	./view/environments/HillsO3D.cpp
+	./view/environments/OpenSeaO3D.cpp
+	./view/environments/PlaneO3D.cpp
 	
 	## creatures
-	./view/evolution/population/creature/phenome/morphology/LimbGraphics.cpp
-	./view/ogre3D/evolution/population/creature/phenome/morphology/LimbO3D.cpp
-	./view/evolution/population/creature/phenome/morphology/JointGraphics.cpp
-	./view/ogre3D/evolution/population/creature/phenome/morphology/JointO3D.cpp
+	./view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp
+	./view/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp
+	./view/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp
+	./view/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp
 	
 	## physics debug drawing
-	./view/ogre3D/bullet/OgreBtDebugDrawer.cpp
+	./view/bullet/OgreBtDebugDrawer.cpp
 	
 	
 	## information overlay
-	./view/ogre3D/overlay/InfoOverlay.cpp
-	./view/ogre3D/overlay/InfoOverlayData.cpp
+	./view/overlay/InfoOverlay.cpp
+	./view/overlay/InfoOverlayData.cpp
 	
 	## CEGUI
 	./view/CEGUI/GUISheetHandler.cpp
@@ -476,10 +483,10 @@ set(VIEWSRCS
 	./view/MathGL/MathGLWindow.cpp
 	
 	## Videocapture
-	./view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.cpp
+	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp
 	
 	## picking
-	./view/ogre3D/picking/OgreMeshRay.cpp
+	./view/picking/OgreMeshRay.cpp
 	
 	# procedural
 	./view/procedural/ProceduralBoxGenerator.cpp

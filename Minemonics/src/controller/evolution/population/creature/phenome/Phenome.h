@@ -41,6 +41,7 @@ class MixedGenome;
 //## model headers
 #include <model/evolution/population/creature/genome/MixedGenome.h>
 #include <model/evolution/population/creature/genome/Gene.h>
+#include <model/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -101,7 +102,7 @@ public:
 	 * @return
 	 */
 	bool isInWorld() const {
-		return inWorld;
+		return mPhenomeModel.isInWorld();
 	}
 
 	/**
@@ -109,10 +110,14 @@ public:
 	 * @param inWorld Whether the phenotype is in the world or not.
 	 */
 	void setInWorld(bool inWorld) {
-		this->inWorld = inWorld;
+		mPhenomeModel.setInWorld(inWorld);
 	}
 
 private:
+	/**
+	 * The phenome model representation.
+	 */
+	PhenomeModel mPhenomeModel;
 
 	/**
 	 * The simulation manager handle
@@ -139,10 +144,7 @@ private:
 	 */
 	std::vector<Joint*> mJoints;
 
-	/**
-	 * Is the phenotype in the world or not?
-	 */
-	bool inWorld;
+
 };
 
 #endif /* CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_H_ */

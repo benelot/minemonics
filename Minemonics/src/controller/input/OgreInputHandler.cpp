@@ -39,11 +39,11 @@
 #include <controller/camera/CameraHandler.h>
 #include <controller/physics/PhysicsController.h>
 #include <controller/StateHandler.h>
+#include <view/bullet/OgreBtDebugDrawer.h>
 
 //## model headers
 //## view headers
-#include <view/ogre3D/bullet/OgreBtDebugDrawer.h>
-#include <view/ogre3D/videocapture/Ogre3DFFMPEGVideoWriter.h>
+#include <view/videocapture/Ogre3DFFMPEGVideoWriter.h>
 
 //## utils headers
 

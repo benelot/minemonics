@@ -1,13 +1,13 @@
 /*
- * PhenomeM.cpp
+ * PhenomeModel.cpp
  *
- *  Created on: Apr 7, 2015
+ *  Created on: Apr 29, 2015
  *      Author: leviathan
  */
 
-#include <model/evolution/population/creature/phenome/PhenomeModel.h>
+#include <model/evolution/population/creature/phenome/PhenomeModel.hpp>
 
-PhenomeModel::PhenomeModel() {
+PhenomeModel::PhenomeModel():inWorld(false) {
 	// TODO Auto-generated constructor stub
 
 }
