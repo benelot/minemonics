@@ -8,8 +8,11 @@
 #ifndef CONTROLLER_EVOLUTION_POPULATION_POPULATION_HPP_
 #define CONTROLLER_EVOLUTION_POPULATION_POPULATION_HPP_
 
+<<<<<<< HEAD
 #include <model/evolution/population/PopulationModel.h>
 
+=======
+>>>>>>> branch 'master' of https://github.com/benelot/minemonics.git
 /*
  *
  */
