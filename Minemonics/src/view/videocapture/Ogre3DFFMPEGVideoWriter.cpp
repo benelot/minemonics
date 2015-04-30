@@ -6,6 +6,8 @@
 //## view headers
 #include <Ogre.h>
 #include <OgreHardwarePixelBuffer.h>
+
+#define FF_API_PIX_FMT 0 // fix collision between Ogre::PixelFormat and the Macro PixelFormat AVPixelFormat in pixfmt.h of FFmpeg
 #ifdef __cplusplus
 extern "C" {
 #include <libavutil/mathematics.h>
@@ -18,7 +20,7 @@ extern "C" {
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
+#include <SimulationManager.hpp>
 
 //## configuration headers
 //## controller headers
@@ -26,7 +28,7 @@ extern "C" {
 //## view headers
 //## utils headers
 
-#include <view/videocapture/Ogre3DFFMPEGVideoWriter.h>
+#include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 
 void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 		const char* filename, int width, int height, int bitrate,float timebasefactor) {

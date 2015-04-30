@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "AudioEmitter.h"
+#include <model/evolution/population/creature/phenome/morphology/effector/AudioEmitter.hpp>
 
 //# forward declarations
 //# system headers

@@ -6,24 +6,21 @@
  */
 
 //# corresponding header
-#include "MorphogeneBranch.h"
-
-//# forward declarations
-//# system headers
 #include <gtest/gtest.h>
 
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
+#include <controller/SaveController.hpp>
+#include <model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
-#include "controller/SaveController.h"
 
 //## model headers
 //## view headers

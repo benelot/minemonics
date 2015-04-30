@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include <model/evolution/population/creature/genome/Genome.h>
+#include <model/evolution/population/creature/genome/Genome.hpp>
 
 Genome::Genome() {
 	// TODO Auto-generated constructor stub

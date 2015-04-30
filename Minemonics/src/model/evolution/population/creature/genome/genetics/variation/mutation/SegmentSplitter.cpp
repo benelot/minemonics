@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "SegmentSplitter.h"
+#include <model/evolution/population/creature/genome/genetics/variation/mutation/SegmentSplitter.hpp>
 
 //# forward declarations
 //# system headers

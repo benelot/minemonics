@@ -6,15 +6,15 @@
  */
 
 //# corresponding header
-#include <view/bullet/OgreBulletUtils.h>
-#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.h>
-#include "SimulationManager.h"
+#include <SimulationManager.hpp>
+#include <utils/ogre3D/Euler.hpp>
+#include <view/bullet/OgreBulletUtils.hpp>
+#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## configuration headers
 //## controller headers
 //## model headers
 //## view headers
-#include "utils/ogre3D/Euler.h"
 
 JointO3D::JointO3D() :
 		mSimulationManager(NULL), mLimbA(NULL), mLimbB(NULL) {

@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "Component.h"
+#include <controller/evolution/population/creature/phenome/Component.hpp>
 
 //# forward declarations
 //# system headers

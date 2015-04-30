@@ -1,0 +1,42 @@
+/*
+ * Controller.cpp
+ *
+ *  Created on: Mar 9, 2015
+ *      Author: leviathan
+ */
+
+//# corresponding headers
+#include <model/evolution/population/creature/phenome/controller/Controller.hpp>
+
+//# forward declarations
+//# system headers
+#include <vector>
+
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
+Controller::Controller(ControllerType controllerType) :
+		mControllerType(controllerType) {
+
+}
+
+Controller::~Controller() {
+}
+
+
+void Controller::distributeOutput(double output) {
+	std::vector<ControlInput*>::iterator controlOutputIterator =
+			mControlOutputs.begin();
+	for (; controlOutputIterator != mControlOutputs.end();
+			controlOutputIterator++) {
+		(*controlOutputIterator)->setValue(output);
+	}
+}

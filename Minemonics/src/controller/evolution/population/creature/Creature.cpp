@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include "Creature.h"
+#include <controller/evolution/population/creature/Creature.hpp>
 //# forward declarations
 class SimulationManager;
 
@@ -17,10 +17,10 @@ class SimulationManager;
 //## base headers
 //## configuration headers
 //## controller headers
-#include "controller/evolution/population/creature/phenome/Phenome.h"
+#include <controller/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
-#include <model/evolution/population/creature/CreatureModel.h>
+#include <model/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
 //## utils headers

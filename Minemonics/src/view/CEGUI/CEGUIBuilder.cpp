@@ -1,8 +1,6 @@
 //# corresponding header
-#include "CEGUIBuilder.h"
-
-//# forward declarations
-//# system headers
+#include <configuration/CEGUIConfiguration.hpp>
+#include <configuration/CEGUIConfiguration.hpp>
 #include <utility>
 #include <vector>
 
@@ -16,21 +14,15 @@
 #include <CEGUI/Vector.h>
 #include <CEGUI/Window.h>
 #include <OgreRenderWindow.h>
+#include <SimulationManager.hpp>
 
 //# custom headers
 //## base headers
-#include <SimulationManager.h>
+#include <view/CEGUI/CEGUIBuilder.hpp>
+#include <view/CEGUI/CEGUIBuilder.hpp>
 
 //## configuration headers
-#include "configuration/CEGUIConfiguration.h"
-
-//## controller headers
-#include <configuration/CEGUIConfiguration.h>
-
-//## model headers
-//## view headers
-#include <view/CEGUI/CEGUIBuilder.h>
-#include <view/CEGUI/ParamsPanel.h>
+#include <view/CEGUI/ParamsPanel.hpp>
 
 //## utils headers
 // CEGUI includes

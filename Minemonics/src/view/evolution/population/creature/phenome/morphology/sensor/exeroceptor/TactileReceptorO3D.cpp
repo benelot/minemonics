@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include "TactileReceptorO3D.h"
+#include <view/evolution/population/creature/phenome/morphology/sensor/exeroceptor/TactileReceptorO3D.hpp>
 
 TactileReceptorO3D::TactileReceptorO3D() {
 	// TODO Auto-generated constructor stub

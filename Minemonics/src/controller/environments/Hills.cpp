@@ -6,20 +6,9 @@
  */
 
 //# corresponding header
-#include <view/environments/HillsO3D.h>
-#include "Hills.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-//## model headers
-#include "model/environments/bullet/HillsBt.h"
+#include <controller/environments/Hills.hpp>
+#include <model/environments/bullet/HillsBt.hpp>
+#include <view/environments/HillsO3D.hpp>
 
 //## view headers
 

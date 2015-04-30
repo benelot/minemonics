@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include <view/environments/HillsO3D.h>
+#include <view/environments/HillsO3D.hpp>
 
 //# forward declarations
 

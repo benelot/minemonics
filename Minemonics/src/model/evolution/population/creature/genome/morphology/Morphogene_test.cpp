@@ -11,18 +11,14 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
+#include <controller/SaveController.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
-
-//## controller headers
-#include "controller/SaveController.h"
-
-//## model headers
-#include "model/evolution/population/creature/genome/morphology/Morphogene.h"
+#include <model/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //## utils headers

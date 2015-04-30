@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "SegmentRandomizer.h"
+#include <model/evolution/population/creature/genome/genetics/variation/mutation/SegmentRandomizer.hpp>
 
 //# forward declarations
 //# system headers

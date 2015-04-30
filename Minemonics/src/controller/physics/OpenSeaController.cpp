@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "OpenSeaController.h"
+#include <controller/physics/OpenSeaController.hpp>
 
 //# forward declarations
 //# system headers

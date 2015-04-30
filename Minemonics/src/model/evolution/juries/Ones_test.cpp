@@ -6,11 +6,8 @@
  */
 
 //# corresponding header
-#include "Ones.h"
-
-//# forward declarations
-//# system headers
 #include <gtest/gtest.h>
+#include <model/evolution/juries/Ones.hpp>
 
 //## controller headers
 //## model headers

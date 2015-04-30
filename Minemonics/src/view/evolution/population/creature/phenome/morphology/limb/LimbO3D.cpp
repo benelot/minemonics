@@ -7,25 +7,19 @@
 
 //# corresponding header
 #include <boost/lexical_cast.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## controller headers
 //## model headers
 //## view headers
 #include <OgreSceneNode.h>
-#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h>
-#include <view/picking/OgreMeshRay.h>
-
-//# custom headers
-//## base headers
-#include "SimulationManager.h"
+#include <SimulationManager.hpp>
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
+#include <view/picking/OgreMeshRay.hpp>
+#include <view/procedural/ProceduralCapsuleGenerator.h>
 
 //## configuration headers
 //## controller headers
-#include "controller/evolution/population/creature/phenome/morphology/Limb.h"
-
-//## model headers
-//## view headers
-#include "view/procedural/ProceduralCapsuleGenerator.h"
 
 //## utils headers
 

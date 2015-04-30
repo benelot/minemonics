@@ -6,8 +6,8 @@
  */
 
 //# corresponding header
-#include <view/environments/OpenSeaO3D.h>
-#include "SimulationManager.h"
+#include <SimulationManager.hpp>
+#include <view/environments/OpenSeaO3D.hpp>
 
 //## configuration headers
 //## controller headers

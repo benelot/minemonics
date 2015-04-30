@@ -511,36 +511,6 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Path to a file.
-FFMPEG_INCLUDE_DIR1:PATH=/usr/local/include/libavformat
-
-//Path to a file.
-FFMPEG_INCLUDE_DIR2:PATH=/usr/local/include/libavutil
-
-//Path to a file.
-FFMPEG_INCLUDE_DIR3:PATH=/usr/local/include/libavcodec
-
-//Path to a file.
-FFMPEG_INCLUDE_DIR4:PATH=/usr/local/include/libswscale
-
-//Path to a file.
-FFMPEG_INCLUDE_DIR5:PATH=/usr/local/include/libavdevice
-
-//Path to a library.
-FFMPEG_avcodec_LIBRARY:FILEPATH=/usr/local/lib/libavcodec.a
-
-//Path to a library.
-FFMPEG_avdevice_LIBRARY:FILEPATH=/usr/local/lib/libavdevice.a
-
-//Path to a library.
-FFMPEG_avformat_LIBRARY:FILEPATH=/usr/local/lib/libavformat.a
-
-//Path to a library.
-FFMPEG_avutil_LIBRARY:FILEPATH=/usr/local/lib/libavutil.a
-
-//Path to a library.
-FFMPEG_swscale_LIBRARY:FILEPATH=/usr/local/lib/libswscale.a
-
-//Path to a file.
 GTEST_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a library.
@@ -556,13 +526,10 @@ GTEST_MAIN_LIBRARY:FILEPATH=/usr/lib/libgtest_main.a
 GTEST_MAIN_LIBRARY_DEBUG:FILEPATH=GTEST_MAIN_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a file.
-LIBAVCODEC_INCLUDE_DIR:PATH=/usr/include
+LIBAVCODEC_INCLUDE_DIR:PATH=/usr/local/include
 
 //Path to a library.
 LIBAVCODEC_LIBRARIES:FILEPATH=/usr/local/lib/libavcodec.a
-
-//Path to a library.
-LIBAVCODEC_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavcodec.so
 
 //Path to a file.
 LIBAVDEVICE_INCLUDE_DIR:PATH=/usr/local/include
@@ -571,31 +538,22 @@ LIBAVDEVICE_INCLUDE_DIR:PATH=/usr/local/include
 LIBAVDEVICE_LIBRARIES:FILEPATH=/usr/local/lib/libavdevice.a
 
 //Path to a file.
-LIBAVFORMAT_INCLUDE_DIR:PATH=/usr/include
+LIBAVFORMAT_INCLUDE_DIR:PATH=/usr/local/include
 
 //Path to a library.
 LIBAVFORMAT_LIBRARIES:FILEPATH=/usr/local/lib/libavformat.a
 
-//Path to a library.
-LIBAVFORMAT_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavformat.so
-
 //Path to a file.
-LIBAVUTIL_INCLUDE_DIR:PATH=/usr/include
+LIBAVUTIL_INCLUDE_DIR:PATH=/usr/local/include
 
 //Path to a library.
 LIBAVUTIL_LIBRARIES:FILEPATH=/usr/local/lib/libavutil.a
 
-//Path to a library.
-LIBAVUTIL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libavutil.so
-
 //Path to a file.
-LIBSWSCALE_INCLUDE_DIR:PATH=/usr/include
+LIBSWSCALE_INCLUDE_DIR:PATH=/usr/local/include
 
 //Path to a library.
 LIBSWSCALE_LIBRARIES:FILEPATH=/usr/local/lib/libswscale.a
-
-//Path to a library.
-LIBSWSCALE_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libswscale.so
 
 //The MathGL2 v.2.* include directory
 MATHGL2_INCLUDE_DIR:PATH=/usr/local/include
@@ -869,9 +827,6 @@ Shark2_INCLUDE_DIR:PATH=/usr/include/EALib
 
 //Path to a library.
 Shark2_LIBRARY:FILEPATH=/usr/lib/libshark.so
-
-//Path to a library.
-_FFMPEG_z_LIBRARY_:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
 
 
 ########################
@@ -1447,32 +1402,10 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_INCLUDE_DIR1
-FFMPEG_INCLUDE_DIR1-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_INCLUDE_DIR2
-FFMPEG_INCLUDE_DIR2-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_INCLUDE_DIR3
-FFMPEG_INCLUDE_DIR3-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_INCLUDE_DIR4
-FFMPEG_INCLUDE_DIR4-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_INCLUDE_DIR5
-FFMPEG_INCLUDE_DIR5-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_avcodec_LIBRARY
-FFMPEG_avcodec_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_avdevice_LIBRARY
-FFMPEG_avdevice_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_avformat_LIBRARY
-FFMPEG_avformat_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_avutil_LIBRARY
-FFMPEG_avutil_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: FFMPEG_swscale_LIBRARY
-FFMPEG_swscale_LIBRARY-ADVANCED:INTERNAL=1
 //Details about finding Bullet
 FIND_PACKAGE_MESSAGE_DETAILS_Bullet:INTERNAL=[/usr/local/lib/libBulletDynamics.so][/usr/local/lib/libBulletCollision.so][/usr/local/lib/libLinearMath.so][/usr/local/lib/libBulletSoftBody.so][/usr/local/include/bullet][v()]
 //Details about finding FFMPEG
-FIND_PACKAGE_MESSAGE_DETAILS_FFMPEG:INTERNAL=[/usr/local/lib/libavformat.a;/usr/local/lib/libavdevice.a;/usr/local/lib/libavcodec.a;/usr/local/lib/libavutil.a;swresample;m;z;/usr/local/lib/libswscale.a][/usr/include][v()]
-//Details about finding FFmpeg
-FIND_PACKAGE_MESSAGE_DETAILS_FFmpeg:INTERNAL=[/usr/include][/usr/lib/x86_64-linux-gnu/libavcodec.so][/usr/include][/usr/lib/x86_64-linux-gnu/libavformat.so][/usr/include][/usr/lib/x86_64-linux-gnu/libswscale.so][/usr/include][/usr/lib/x86_64-linux-gnu/libavutil.so][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_FFMPEG:INTERNAL=[/usr/local/lib/libavformat.a;/usr/local/lib/libavdevice.a;/usr/local/lib/libavcodec.a;/usr/local/lib/libavutil.a;swresample;m;z;/usr/local/lib/libswscale.a][/usr/local/include][v()]
 //Details about finding GTest
 FIND_PACKAGE_MESSAGE_DETAILS_GTest:INTERNAL=[/usr/lib/libgtest.a][/usr/include][/usr/lib/libgtest_main.a][v()]
 //Details about finding MathGL2
@@ -1493,14 +1426,6 @@ GTEST_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 GTEST_MAIN_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GTEST_MAIN_LIBRARY_DEBUG
 GTEST_MAIN_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: LIBAVCODEC_LIBRARY
-LIBAVCODEC_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: LIBAVFORMAT_LIBRARY
-LIBAVFORMAT_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: LIBAVUTIL_LIBRARY
-LIBAVUTIL_LIBRARY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: LIBSWSCALE_LIBRARY
-LIBSWSCALE_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: MATHGL2_INCLUDE_DIR
 MATHGL2_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: MATHGL2_LIBRARY
@@ -1697,36 +1622,40 @@ OGRE_Volume_LIBRARY_DBG-ADVANCED:INTERNAL=1
 OGRE_Volume_LIBRARY_FWK-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OGRE_Volume_LIBRARY_REL
 OGRE_Volume_LIBRARY_REL-ADVANCED:INTERNAL=1
-PC_LIBAVCODEC_CFLAGS:INTERNAL=
+PC_LIBAVCODEC_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBAVCODEC_CFLAGS_I:INTERNAL=
 PC_LIBAVCODEC_CFLAGS_OTHER:INTERNAL=
 PC_LIBAVCODEC_FOUND:INTERNAL=1
-PC_LIBAVCODEC_INCLUDEDIR:INTERNAL=/usr/include
-PC_LIBAVCODEC_INCLUDE_DIRS:INTERNAL=
-PC_LIBAVCODEC_LDFLAGS:INTERNAL=-lavcodec
-PC_LIBAVCODEC_LDFLAGS_OTHER:INTERNAL=
-PC_LIBAVCODEC_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
-PC_LIBAVCODEC_LIBRARIES:INTERNAL=avcodec
-PC_LIBAVCODEC_LIBRARY_DIRS:INTERNAL=
+PC_LIBAVCODEC_INCLUDEDIR:INTERNAL=/usr/local/include
+PC_LIBAVCODEC_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVCODEC_LDFLAGS:INTERNAL=-pthread;-L/usr/local/lib;-lavcodec;-lXv;-lXext;-lxcb-xfixes;-lxcb-render;-lxcb-shape;-lxcb;-lX11;-lasound;-lz;-lswresample;-lavutil;-lm
+PC_LIBAVCODEC_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_LIBAVCODEC_LIBDIR:INTERNAL=/usr/local/lib
+PC_LIBAVCODEC_LIBRARIES:INTERNAL=avcodec;Xv;Xext;xcb-xfixes;xcb-render;xcb-shape;xcb;X11;asound;z;swresample;avutil;m
+PC_LIBAVCODEC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBAVCODEC_LIBS:INTERNAL=
 PC_LIBAVCODEC_LIBS_L:INTERNAL=
 PC_LIBAVCODEC_LIBS_OTHER:INTERNAL=
 PC_LIBAVCODEC_LIBS_PATHS:INTERNAL=
-PC_LIBAVCODEC_PREFIX:INTERNAL=/usr
-PC_LIBAVCODEC_STATIC_CFLAGS:INTERNAL=
+PC_LIBAVCODEC_PREFIX:INTERNAL=/usr/local
+PC_LIBAVCODEC_STATIC_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBAVCODEC_STATIC_CFLAGS_I:INTERNAL=
 PC_LIBAVCODEC_STATIC_CFLAGS_OTHER:INTERNAL=
-PC_LIBAVCODEC_STATIC_INCLUDE_DIRS:INTERNAL=
-PC_LIBAVCODEC_STATIC_LDFLAGS:INTERNAL=-pthread;-lavcodec;-ldl;-lXfixes;-lXext;-lX11;-lcdio_paranoia;-lcdio_cdda;-lcdio;-ljack;-lasound;-ldc1394;-lraw1394;-lgcrypt;-lxvidcore;-lx264;-lvpx;-lvorbisenc;-lvorbis;-ltheoraenc;-ltheoradec;-logg;-lspeex;-lschroedinger-1.0;-lrtmp;-lpulse-simple;-lpulse;-lopus;-lopenjpeg;-lmp3lame;-lgsm;-lfreetype;-lgnutls;-lva;-lbz2;-lz;-lavutil;-lm
+PC_LIBAVCODEC_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVCODEC_STATIC_LDFLAGS:INTERNAL=-pthread;-L/usr/local/lib;-lavcodec;-lXv;-lXext;-lxcb-xfixes;-lxcb-render;-lxcb-shape;-lxcb;-lX11;-lasound;-lz;-lswresample;-lavutil;-lm
 PC_LIBAVCODEC_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
 PC_LIBAVCODEC_STATIC_LIBDIR:INTERNAL=
-PC_LIBAVCODEC_STATIC_LIBRARIES:INTERNAL=avcodec;dl;Xfixes;Xext;X11;cdio_paranoia;cdio_cdda;cdio;jack;asound;dc1394;raw1394;gcrypt;xvidcore;x264;vpx;vorbisenc;vorbis;theoraenc;theoradec;ogg;speex;schroedinger-1.0;rtmp;pulse-simple;pulse;opus;openjpeg;mp3lame;gsm;freetype;gnutls;va;bz2;z;avutil;m
-PC_LIBAVCODEC_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_LIBAVCODEC_STATIC_LIBRARIES:INTERNAL=avcodec;Xv;Xext;xcb-xfixes;xcb-render;xcb-shape;xcb;X11;asound;z;swresample;avutil;m
+PC_LIBAVCODEC_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBAVCODEC_STATIC_LIBS:INTERNAL=
 PC_LIBAVCODEC_STATIC_LIBS_L:INTERNAL=
 PC_LIBAVCODEC_STATIC_LIBS_OTHER:INTERNAL=
 PC_LIBAVCODEC_STATIC_LIBS_PATHS:INTERNAL=
-PC_LIBAVCODEC_VERSION:INTERNAL=54.35.0
+PC_LIBAVCODEC_VERSION:INTERNAL=56.34.100
+PC_LIBAVCODEC_avcodec_INCLUDEDIR:INTERNAL=
+PC_LIBAVCODEC_avcodec_LIBDIR:INTERNAL=
+PC_LIBAVCODEC_avcodec_PREFIX:INTERNAL=
+PC_LIBAVCODEC_avcodec_VERSION:INTERNAL=
 PC_LIBAVCODEC_libavcodec_INCLUDEDIR:INTERNAL=
 PC_LIBAVCODEC_libavcodec_LIBDIR:INTERNAL=
 PC_LIBAVCODEC_libavcodec_PREFIX:INTERNAL=
@@ -1769,119 +1698,127 @@ PC_LIBAVDEVICE_libavdevice_INCLUDEDIR:INTERNAL=
 PC_LIBAVDEVICE_libavdevice_LIBDIR:INTERNAL=
 PC_LIBAVDEVICE_libavdevice_PREFIX:INTERNAL=
 PC_LIBAVDEVICE_libavdevice_VERSION:INTERNAL=
-PC_LIBAVFORMAT_CFLAGS:INTERNAL=
+PC_LIBAVFORMAT_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBAVFORMAT_CFLAGS_I:INTERNAL=
 PC_LIBAVFORMAT_CFLAGS_OTHER:INTERNAL=
 PC_LIBAVFORMAT_FOUND:INTERNAL=1
-PC_LIBAVFORMAT_INCLUDEDIR:INTERNAL=/usr/include
-PC_LIBAVFORMAT_INCLUDE_DIRS:INTERNAL=
-PC_LIBAVFORMAT_LDFLAGS:INTERNAL=-lavformat
-PC_LIBAVFORMAT_LDFLAGS_OTHER:INTERNAL=
-PC_LIBAVFORMAT_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
-PC_LIBAVFORMAT_LIBRARIES:INTERNAL=avformat
-PC_LIBAVFORMAT_LIBRARY_DIRS:INTERNAL=
+PC_LIBAVFORMAT_INCLUDEDIR:INTERNAL=/usr/local/include
+PC_LIBAVFORMAT_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVFORMAT_LDFLAGS:INTERNAL=-pthread;-L/usr/local/lib;-lavformat;-lavcodec;-lXv;-lXext;-lxcb-xfixes;-lxcb-render;-lxcb-shape;-lxcb;-lX11;-lasound;-lz;-lswresample;-lavutil;-lm
+PC_LIBAVFORMAT_LDFLAGS_OTHER:INTERNAL=-pthread
+PC_LIBAVFORMAT_LIBDIR:INTERNAL=/usr/local/lib
+PC_LIBAVFORMAT_LIBRARIES:INTERNAL=avformat;avcodec;Xv;Xext;xcb-xfixes;xcb-render;xcb-shape;xcb;X11;asound;z;swresample;avutil;m
+PC_LIBAVFORMAT_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBAVFORMAT_LIBS:INTERNAL=
 PC_LIBAVFORMAT_LIBS_L:INTERNAL=
 PC_LIBAVFORMAT_LIBS_OTHER:INTERNAL=
 PC_LIBAVFORMAT_LIBS_PATHS:INTERNAL=
-PC_LIBAVFORMAT_PREFIX:INTERNAL=/usr
-PC_LIBAVFORMAT_STATIC_CFLAGS:INTERNAL=
+PC_LIBAVFORMAT_PREFIX:INTERNAL=/usr/local
+PC_LIBAVFORMAT_STATIC_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBAVFORMAT_STATIC_CFLAGS_I:INTERNAL=
 PC_LIBAVFORMAT_STATIC_CFLAGS_OTHER:INTERNAL=
-PC_LIBAVFORMAT_STATIC_INCLUDE_DIRS:INTERNAL=
-PC_LIBAVFORMAT_STATIC_LDFLAGS:INTERNAL=-pthread;-lavformat;-lavcodec;-ldl;-lXfixes;-lXext;-lX11;-lcdio_paranoia;-lcdio_cdda;-lcdio;-ljack;-lasound;-ldc1394;-lraw1394;-lgcrypt;-lxvidcore;-lx264;-lvpx;-lvorbisenc;-lvorbis;-ltheoraenc;-ltheoradec;-logg;-lspeex;-lschroedinger-1.0;-lrtmp;-lpulse-simple;-lpulse;-lopus;-lopenjpeg;-lmp3lame;-lgsm;-lfreetype;-lgnutls;-lva;-lbz2;-lz;-lavutil;-lm
+PC_LIBAVFORMAT_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVFORMAT_STATIC_LDFLAGS:INTERNAL=-pthread;-L/usr/local/lib;-lavformat;-lavcodec;-lXv;-lXext;-lxcb-xfixes;-lxcb-render;-lxcb-shape;-lxcb;-lX11;-lasound;-lz;-lswresample;-lavutil;-lm
 PC_LIBAVFORMAT_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
 PC_LIBAVFORMAT_STATIC_LIBDIR:INTERNAL=
-PC_LIBAVFORMAT_STATIC_LIBRARIES:INTERNAL=avformat;avcodec;dl;Xfixes;Xext;X11;cdio_paranoia;cdio_cdda;cdio;jack;asound;dc1394;raw1394;gcrypt;xvidcore;x264;vpx;vorbisenc;vorbis;theoraenc;theoradec;ogg;speex;schroedinger-1.0;rtmp;pulse-simple;pulse;opus;openjpeg;mp3lame;gsm;freetype;gnutls;va;bz2;z;avutil;m
-PC_LIBAVFORMAT_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_LIBAVFORMAT_STATIC_LIBRARIES:INTERNAL=avformat;avcodec;Xv;Xext;xcb-xfixes;xcb-render;xcb-shape;xcb;X11;asound;z;swresample;avutil;m
+PC_LIBAVFORMAT_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBAVFORMAT_STATIC_LIBS:INTERNAL=
 PC_LIBAVFORMAT_STATIC_LIBS_L:INTERNAL=
 PC_LIBAVFORMAT_STATIC_LIBS_OTHER:INTERNAL=
 PC_LIBAVFORMAT_STATIC_LIBS_PATHS:INTERNAL=
-PC_LIBAVFORMAT_VERSION:INTERNAL=54.20.4
+PC_LIBAVFORMAT_VERSION:INTERNAL=56.30.100
+PC_LIBAVFORMAT_avformat_INCLUDEDIR:INTERNAL=
+PC_LIBAVFORMAT_avformat_LIBDIR:INTERNAL=
+PC_LIBAVFORMAT_avformat_PREFIX:INTERNAL=
+PC_LIBAVFORMAT_avformat_VERSION:INTERNAL=
 PC_LIBAVFORMAT_libavformat_INCLUDEDIR:INTERNAL=
 PC_LIBAVFORMAT_libavformat_LIBDIR:INTERNAL=
 PC_LIBAVFORMAT_libavformat_PREFIX:INTERNAL=
 PC_LIBAVFORMAT_libavformat_VERSION:INTERNAL=
-PC_LIBAVUTIL_CFLAGS:INTERNAL=
+PC_LIBAVUTIL_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBAVUTIL_CFLAGS_I:INTERNAL=
 PC_LIBAVUTIL_CFLAGS_OTHER:INTERNAL=
 PC_LIBAVUTIL_FOUND:INTERNAL=1
-PC_LIBAVUTIL_INCLUDEDIR:INTERNAL=/usr/include
-PC_LIBAVUTIL_INCLUDE_DIRS:INTERNAL=
-PC_LIBAVUTIL_LDFLAGS:INTERNAL=-lavutil
+PC_LIBAVUTIL_INCLUDEDIR:INTERNAL=/usr/local/include
+PC_LIBAVUTIL_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVUTIL_LDFLAGS:INTERNAL=-L/usr/local/lib;-lavutil;-lm
 PC_LIBAVUTIL_LDFLAGS_OTHER:INTERNAL=
-PC_LIBAVUTIL_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
-PC_LIBAVUTIL_LIBRARIES:INTERNAL=avutil
-PC_LIBAVUTIL_LIBRARY_DIRS:INTERNAL=
+PC_LIBAVUTIL_LIBDIR:INTERNAL=/usr/local/lib
+PC_LIBAVUTIL_LIBRARIES:INTERNAL=avutil;m
+PC_LIBAVUTIL_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBAVUTIL_LIBS:INTERNAL=
 PC_LIBAVUTIL_LIBS_L:INTERNAL=
 PC_LIBAVUTIL_LIBS_OTHER:INTERNAL=
 PC_LIBAVUTIL_LIBS_PATHS:INTERNAL=
-PC_LIBAVUTIL_PREFIX:INTERNAL=/usr
-PC_LIBAVUTIL_STATIC_CFLAGS:INTERNAL=
+PC_LIBAVUTIL_PREFIX:INTERNAL=/usr/local
+PC_LIBAVUTIL_STATIC_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBAVUTIL_STATIC_CFLAGS_I:INTERNAL=
 PC_LIBAVUTIL_STATIC_CFLAGS_OTHER:INTERNAL=
-PC_LIBAVUTIL_STATIC_INCLUDE_DIRS:INTERNAL=
-PC_LIBAVUTIL_STATIC_LDFLAGS:INTERNAL=-lavutil;-lm
+PC_LIBAVUTIL_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBAVUTIL_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lavutil;-lm
 PC_LIBAVUTIL_STATIC_LDFLAGS_OTHER:INTERNAL=
 PC_LIBAVUTIL_STATIC_LIBDIR:INTERNAL=
 PC_LIBAVUTIL_STATIC_LIBRARIES:INTERNAL=avutil;m
-PC_LIBAVUTIL_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_LIBAVUTIL_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBAVUTIL_STATIC_LIBS:INTERNAL=
 PC_LIBAVUTIL_STATIC_LIBS_L:INTERNAL=
 PC_LIBAVUTIL_STATIC_LIBS_OTHER:INTERNAL=
 PC_LIBAVUTIL_STATIC_LIBS_PATHS:INTERNAL=
-PC_LIBAVUTIL_VERSION:INTERNAL=52.3.0
+PC_LIBAVUTIL_VERSION:INTERNAL=54.22.101
+PC_LIBAVUTIL_avutil_INCLUDEDIR:INTERNAL=
+PC_LIBAVUTIL_avutil_LIBDIR:INTERNAL=
+PC_LIBAVUTIL_avutil_PREFIX:INTERNAL=
+PC_LIBAVUTIL_avutil_VERSION:INTERNAL=
 PC_LIBAVUTIL_libavutil_INCLUDEDIR:INTERNAL=
 PC_LIBAVUTIL_libavutil_LIBDIR:INTERNAL=
 PC_LIBAVUTIL_libavutil_PREFIX:INTERNAL=
 PC_LIBAVUTIL_libavutil_VERSION:INTERNAL=
-PC_LIBSWSCALE_CFLAGS:INTERNAL=
+PC_LIBSWSCALE_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBSWSCALE_CFLAGS_I:INTERNAL=
 PC_LIBSWSCALE_CFLAGS_OTHER:INTERNAL=
 PC_LIBSWSCALE_FOUND:INTERNAL=1
-PC_LIBSWSCALE_INCLUDEDIR:INTERNAL=/usr/include
-PC_LIBSWSCALE_INCLUDE_DIRS:INTERNAL=
-PC_LIBSWSCALE_LDFLAGS:INTERNAL=-lswscale
+PC_LIBSWSCALE_INCLUDEDIR:INTERNAL=/usr/local/include
+PC_LIBSWSCALE_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBSWSCALE_LDFLAGS:INTERNAL=-L/usr/local/lib;-lswscale;-lavutil;-lm
 PC_LIBSWSCALE_LDFLAGS_OTHER:INTERNAL=
-PC_LIBSWSCALE_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
-PC_LIBSWSCALE_LIBRARIES:INTERNAL=swscale
-PC_LIBSWSCALE_LIBRARY_DIRS:INTERNAL=
+PC_LIBSWSCALE_LIBDIR:INTERNAL=/usr/local/lib
+PC_LIBSWSCALE_LIBRARIES:INTERNAL=swscale;avutil;m
+PC_LIBSWSCALE_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBSWSCALE_LIBS:INTERNAL=
 PC_LIBSWSCALE_LIBS_L:INTERNAL=
 PC_LIBSWSCALE_LIBS_OTHER:INTERNAL=
 PC_LIBSWSCALE_LIBS_PATHS:INTERNAL=
-PC_LIBSWSCALE_PREFIX:INTERNAL=/usr
-PC_LIBSWSCALE_STATIC_CFLAGS:INTERNAL=
+PC_LIBSWSCALE_PREFIX:INTERNAL=/usr/local
+PC_LIBSWSCALE_STATIC_CFLAGS:INTERNAL=-I/usr/local/include
 PC_LIBSWSCALE_STATIC_CFLAGS_I:INTERNAL=
 PC_LIBSWSCALE_STATIC_CFLAGS_OTHER:INTERNAL=
-PC_LIBSWSCALE_STATIC_INCLUDE_DIRS:INTERNAL=
-PC_LIBSWSCALE_STATIC_LDFLAGS:INTERNAL=-lswscale;-lavutil;-lm
+PC_LIBSWSCALE_STATIC_INCLUDE_DIRS:INTERNAL=/usr/local/include
+PC_LIBSWSCALE_STATIC_LDFLAGS:INTERNAL=-L/usr/local/lib;-lswscale;-lavutil;-lm
 PC_LIBSWSCALE_STATIC_LDFLAGS_OTHER:INTERNAL=
 PC_LIBSWSCALE_STATIC_LIBDIR:INTERNAL=
 PC_LIBSWSCALE_STATIC_LIBRARIES:INTERNAL=swscale;avutil;m
-PC_LIBSWSCALE_STATIC_LIBRARY_DIRS:INTERNAL=
+PC_LIBSWSCALE_STATIC_LIBRARY_DIRS:INTERNAL=/usr/local/lib
 PC_LIBSWSCALE_STATIC_LIBS:INTERNAL=
 PC_LIBSWSCALE_STATIC_LIBS_L:INTERNAL=
 PC_LIBSWSCALE_STATIC_LIBS_OTHER:INTERNAL=
 PC_LIBSWSCALE_STATIC_LIBS_PATHS:INTERNAL=
-PC_LIBSWSCALE_VERSION:INTERNAL=2.1.1
+PC_LIBSWSCALE_VERSION:INTERNAL=3.1.101
 PC_LIBSWSCALE_libswscale_INCLUDEDIR:INTERNAL=
 PC_LIBSWSCALE_libswscale_LIBDIR:INTERNAL=
 PC_LIBSWSCALE_libswscale_PREFIX:INTERNAL=
 PC_LIBSWSCALE_libswscale_VERSION:INTERNAL=
+PC_LIBSWSCALE_swscale_INCLUDEDIR:INTERNAL=
+PC_LIBSWSCALE_swscale_LIBDIR:INTERNAL=
+PC_LIBSWSCALE_swscale_PREFIX:INTERNAL=
+PC_LIBSWSCALE_swscale_VERSION:INTERNAL=
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_getconf
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
-<<<<<<< HEAD
-SDL2_LIBRARY_TEMP:INTERNAL=/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
-=======
-SDL2_LIBRARY_TEMP:INTERNAL=/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread;-lpthread
->>>>>>> branch 'master' of https://github.com/benelot/minemonics.git
+SDL2_LIBRARY_TEMP:INTERNAL=/usr/lib/x86_64-linux-gnu/libSDL2main.a;/usr/lib/x86_64-linux-gnu/libSDL2.so;-lpthread
 //ADVANCED property for variable: Shark2_INCLUDE_DIR
 Shark2_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: Shark2_LIBRARY
@@ -1922,8 +1859,6 @@ _Boost_LIBRARY_DIR_LAST:INTERNAL=/usr/lib/x86_64-linux-gnu
 _Boost_USE_MULTITHREADED_LAST:INTERNAL=ON
 //Last used Boost_USE_STATIC_LIBS value.
 _Boost_USE_STATIC_LIBS_LAST:INTERNAL=OFF
-//ADVANCED property for variable: _FFMPEG_z_LIBRARY_
-_FFMPEG_z_LIBRARY_-ADVANCED:INTERNAL=1
 __pkg_config_checked_CEGUI_IrrlichtRenderer_PKGC:INTERNAL=1
 __pkg_config_checked_CEGUI_LuaScriptModule_PKGC:INTERNAL=1
 __pkg_config_checked_CEGUI_NullRenderer_PKGC:INTERNAL=1

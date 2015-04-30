@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "PhysicsController.h"
+#include <controller/physics/PhysicsController.hpp>
 //# forward declarations
 //# system headers
 //## controller headers

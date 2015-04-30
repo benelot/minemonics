@@ -6,25 +6,15 @@
  */
 
 //# corresponding header
-#include "SineControllerGene.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
 #include <boost/math/constants/constants.hpp>
+#include <configuration/ControlConfiguration.hpp>
+#include <model/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/ControlConfiguration.h"
-
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
-#include "utils/Randomness.h"
+#include <utils/Randomness.hpp>
 
 SineControllerGene::SineControllerGene() :
 		mInitialValue(0), mAmplitude(0), mFrequency(0) {

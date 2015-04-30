@@ -1420,6 +1420,114 @@ model/evolution/population/creature/phenome/PhenomeModel.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/PhenomeModel.cpp.s
 .PHONY : model/evolution/population/creature/phenome/PhenomeModel.cpp.s
 
+model/evolution/population/creature/phenome/controller/ControlInput.o: model/evolution/population/creature/phenome/controller/ControlInput.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/ControlInput.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/controller/ControlInput.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/ControlInput.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/ControlInput.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/ControlInput.cpp.o
+
+model/evolution/population/creature/phenome/controller/ControlInput.i: model/evolution/population/creature/phenome/controller/ControlInput.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/ControlInput.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/controller/ControlInput.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/ControlInput.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/ControlInput.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/ControlInput.cpp.i
+
+model/evolution/population/creature/phenome/controller/ControlInput.s: model/evolution/population/creature/phenome/controller/ControlInput.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/ControlInput.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/controller/ControlInput.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/ControlInput.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/ControlInput.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/ControlInput.cpp.s
+
+model/evolution/population/creature/phenome/controller/ControlOutput.o: model/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/ControlOutput.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/controller/ControlOutput.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
+
+model/evolution/population/creature/phenome/controller/ControlOutput.i: model/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/ControlOutput.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/controller/ControlOutput.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
+
+model/evolution/population/creature/phenome/controller/ControlOutput.s: model/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/ControlOutput.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/controller/ControlOutput.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
+
+model/evolution/population/creature/phenome/controller/Controller.o: model/evolution/population/creature/phenome/controller/Controller.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/Controller.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/controller/Controller.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/Controller.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/Controller.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/Controller.cpp.o
+
+model/evolution/population/creature/phenome/controller/Controller.i: model/evolution/population/creature/phenome/controller/Controller.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/Controller.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/controller/Controller.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/Controller.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/Controller.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/Controller.cpp.i
+
+model/evolution/population/creature/phenome/controller/Controller.s: model/evolution/population/creature/phenome/controller/Controller.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/Controller.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/controller/Controller.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/Controller.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/Controller.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/Controller.cpp.s
+
+model/evolution/population/creature/phenome/controller/sine/SineController.o: model/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/controller/sine/SineController.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
+.PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
+
+model/evolution/population/creature/phenome/controller/sine/SineController.i: model/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/controller/sine/SineController.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
+.PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
+
+model/evolution/population/creature/phenome/controller/sine/SineController.s: model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
+.PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
+
 model/evolution/population/creature/phenome/morphology/joint/JointBt.o: model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
 .PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.o
 
@@ -2875,6 +2983,18 @@ help:
 	@echo "... model/evolution/population/creature/phenome/PhenomeModel.o"
 	@echo "... model/evolution/population/creature/phenome/PhenomeModel.i"
 	@echo "... model/evolution/population/creature/phenome/PhenomeModel.s"
+	@echo "... model/evolution/population/creature/phenome/controller/ControlInput.o"
+	@echo "... model/evolution/population/creature/phenome/controller/ControlInput.i"
+	@echo "... model/evolution/population/creature/phenome/controller/ControlInput.s"
+	@echo "... model/evolution/population/creature/phenome/controller/ControlOutput.o"
+	@echo "... model/evolution/population/creature/phenome/controller/ControlOutput.i"
+	@echo "... model/evolution/population/creature/phenome/controller/ControlOutput.s"
+	@echo "... model/evolution/population/creature/phenome/controller/Controller.o"
+	@echo "... model/evolution/population/creature/phenome/controller/Controller.i"
+	@echo "... model/evolution/population/creature/phenome/controller/Controller.s"
+	@echo "... model/evolution/population/creature/phenome/controller/sine/SineController.o"
+	@echo "... model/evolution/population/creature/phenome/controller/sine/SineController.i"
+	@echo "... model/evolution/population/creature/phenome/controller/sine/SineController.s"
 	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.o"
 	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.i"
 	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.s"

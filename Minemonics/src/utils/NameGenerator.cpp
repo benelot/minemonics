@@ -6,11 +6,7 @@
  */
 
 //# corresponding header
-#include <utils/NameGenerator.h>
-
-//# forward declarations
-
-//# system headers
+#include <utils/NameGenerator.hpp>
 #include <string>
 
 //## controller headers

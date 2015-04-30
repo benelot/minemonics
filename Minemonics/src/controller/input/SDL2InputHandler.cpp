@@ -6,16 +6,8 @@
  */
 
 //# corresponding header
-#include "SDL2InputHandler.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-#include "SimulationManager.h"
+#include <controller/input/SDL2InputHandler.hpp>
+#include <SimulationManager.hpp>
 
 //## configuration headers
 //## controller headers

@@ -6,20 +6,9 @@
  */
 
 //# corresponding header
-#include <view/environments/PlaneO3D.h>
-#include "Plane.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-//## model headers
-#include "model/environments/bullet/PlaneBt.h"
+#include <controller/environments/Plane.hpp>
+#include <model/environments/bullet/PlaneBt.hpp>
+#include <view/environments/PlaneO3D.hpp>
 
 //## view headers
 

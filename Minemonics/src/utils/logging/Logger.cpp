@@ -6,18 +6,6 @@
  */
 
 //# corresponding header
-#include "Logger.h"
-
-//# forward declarations
-
-//# system headers
-//## controller headers
-
-//## model headers
-
-//## view headers
-
-//## utils headers
 #include <boost/log/core.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/log/trivial.hpp>
@@ -36,6 +24,7 @@
 #include <boost/log/attributes/scoped_attribute.hpp>
 #include <boost/log/utility/value_ref.hpp>
 #include <boost/log/utility/empty_deleter.hpp>
+#include <utils/logging/Logger.hpp>
 
 //# custom headers
 //## base headers

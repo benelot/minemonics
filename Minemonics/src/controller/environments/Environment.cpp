@@ -6,23 +6,10 @@
  */
 
 //# corresponding header
-#include "Environment.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-//## model headers
-#include "model/environments/EnvironmentPhysics.h"
-#include "model/environments/bullet/EnvironmentBt.h"
-
-//## view headers
-#include "view/environments/EnvironmentGraphics.h"
+#include <controller/environments/Environment.hpp>
+#include <model/environments/bullet/EnvironmentBt.hpp>
+#include <model/environments/EnvironmentPhysics.hpp>
+#include <view/environments/EnvironmentGraphics.hpp>
 
 //## utils headers
 

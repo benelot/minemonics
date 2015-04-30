@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include "EnvironmentGraphics.h"
+#include <view/environments/EnvironmentGraphics.hpp>
 
 EnvironmentGraphics::EnvironmentGraphics() {
 	// TODO Auto-generated constructor stub

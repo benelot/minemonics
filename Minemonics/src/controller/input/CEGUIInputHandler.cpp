@@ -6,11 +6,8 @@
  */
 
 //# corresponding header
-#include "CEGUIInputHandler.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
+#include <controller/input/CEGUIInputHandler.hpp>
+#include <controller/StateHandler.hpp>
 #include <SDL.h>
 
 //## model headers
@@ -20,19 +17,14 @@
 #include <CEGUI/GUIContext.h>
 
 #include <OgreStringConverter.h>
+#include <SimulationManager.hpp>
+#include <utils/logging/Logger.hpp>
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
 
 //## configuration headers
 //## controller headers
-#include "controller/StateHandler.h"
-
-//## model headers
-//## view headers
-//## utils headers
-#include "utils/logging/Logger.h"
 
 BoostLogger CEGUIInputHandler::mBoostLogger;  // initialize the static variables
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;

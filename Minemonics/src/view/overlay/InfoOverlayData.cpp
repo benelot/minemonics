@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include <view/overlay/InfoOverlayData.h>
+#include <view/overlay/InfoOverlayData.hpp>
 
 InfoOverlayData::InfoOverlayData(Ogre::Vector3 position, std::string text) :
 		mPosition(position), mText(text) {

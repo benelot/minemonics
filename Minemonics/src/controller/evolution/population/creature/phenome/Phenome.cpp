@@ -1,19 +1,5 @@
-/*
- * Phenome.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
 //TODO: Separate Phenome into model and controller classes
 //# corresponding header
-#include <controller/evolution/genetics/PhenotypeGenerator.h>
-#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.h>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
-#include <view/bullet/OgreBulletUtils.h>
-#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h>
-#include <view/picking/OgreMeshRay.h>
-#include "Phenome.h"
-
 //# forward declarations
 //# system headers
 #include <vector>
@@ -24,23 +10,32 @@
 //## view headers
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
+#include <SimulationManager.hpp>
 
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
-#include "configuration/PhysicsConfiguration.h"
+#include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
-#include "controller/evolution/population/creature/phenome/morphology/Limb.h"
-#include "controller/evolution/population/creature/phenome/morphology/Joint.h"
+#include <controller/evolution/genetics/PhenotypeGenerator.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
-#include "model/evolution/population/creature/genome/morphology/Morphogene.h"
-#include "model/evolution/population/creature/genome/morphology/MorphogeneBranch.h"
-#include "model/evolution/population/creature/genome/Gene.h"
+#include <model/evolution/population/creature/genome/Gene.hpp>
+#include <model/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
+#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //## view headers
-#include "utils/ogre3D/Euler.h"
+#include <view/bullet/OgreBulletUtils.hpp>
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
+#include <view/picking/OgreMeshRay.hpp>
+
+//## utils headers
+#include <utils/ogre3D/Euler.hpp>
 
 Phenome::Phenome() :
 		mSimulationManager(NULL), mWorld(NULL) {
@@ -123,10 +118,30 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 						((Limb*) generator->getParentComponent())->getPosition();
 
 				//get anchor direction of limb A in reference frame of A
-				Ogre::Vector3 localAnchorDirOA(
-						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
-						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
-						((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+				Ogre::Vector3 localAnchorDirOA;
+
+				if (generator->isMirrored()) {
+					localAnchorDirOA = (
+							-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
+							-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
+							-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+				} else if (generator->isFlipped()) {
+					localAnchorDirOA =(
+							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
+							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
+							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+					//get direction vector of object
+					Ogre::Vector3 n(1,0,0);
+					n = ((Limb*) generator->getParentComponent())->getOrientation()* n;
+
+					//reflect on the direction vector
+					localAnchorDirOA = -localAnchorDirOA-2*((-localAnchorDirOA).dotProduct(n))*n;
+				} else {
+					localAnchorDirOA = (
+							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
+							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
+							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+				}
 
 				//get surface point of limb A in reference frame of A
 				Ogre::Vector3 localAnchorOA(limbA->getLocalIntersection(
@@ -151,7 +166,7 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 						morphogene->getJointAnchorY(),
 						morphogene->getJointAnchorZ());
 
-				// joint direction of joint part of B
+				// get local joint rotation point in the local reference frame of B
 				Ogre::Euler eulerB(morphogene->getJointYaw(),
 						morphogene->getJointPitch(),
 						morphogene->getJointRoll());
@@ -213,13 +228,9 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 								morphogene->getOrientationY(),
 								morphogene->getOrientationZ()));
 
-				// get local joint rotation point in the local reference frame of B
-				Ogre::Euler euler3(morphogene->getJointYaw(),
-						morphogene->getJointPitch(),
-						morphogene->getJointRoll());
 
 				localJointOB = localAnchorOB
-						+ euler3 * localAnchorDirOB.normalisedCopy()
+						+ eulerB * localAnchorDirOB.normalisedCopy()
 								* MorphologyConfiguration::JOINT_LENGTH;
 
 //				// draw line from limb A along test ray (RED LINE)
@@ -331,42 +342,123 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 			for (; branchIt != morphogene->getGeneBranches().end();
 					branchIt++) {
 
-				// get the branch gene type defined by the branch
-				Morphogene* offspring =
-						genome->getGenes()[(*branchIt)->getBranchGeneType()];
+				// only add new generator if the branch is active
+				if ((*branchIt)->isActive()) {
+					// get the branch gene type defined by the branch
+					Morphogene* offspring =
+							genome->getGenes()[(*branchIt)->getBranchGeneType()];
 
-				// create the new generator
-				PhenotypeGenerator* generatorFromBranch =
-						new PhenotypeGenerator();
-				generatorFromBranch->initialize(generator->getRepetitionList(),
-						generator->getPosition(), generator->getOrientation(),
-						limbB, (*branchIt.base()),
-						morphogene->getSegmentShrinkFactor()
-								* generator->getCurrentShrinkageFactor());
+					// create the new generator
+					PhenotypeGenerator* generatorFromBranch =
+							new PhenotypeGenerator();
+					generatorFromBranch->initialize(
+							generator->getRepetitionList(),
+							generator->getPosition(),
+							generator->getOrientation(), limbB,
+							(*branchIt.base()),
+							morphogene->getSegmentShrinkFactor()
+									* generator->getCurrentShrinkageFactor());
 
-				//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
-				if (generatorFromBranch->getRepetitionList().find(
-						(*branchIt)->getBranchGeneType())
-						== generatorFromBranch->getRepetitionList().end()
-						|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-								<= offspring->getRepetitionLimit()) {
+					//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
+					if (generatorFromBranch->getRepetitionList().find(
+							(*branchIt)->getBranchGeneType())
+							== generatorFromBranch->getRepetitionList().end()
+							|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+									<= offspring->getRepetitionLimit()) {
 
-					//add another of this offspring type
-					generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-					generatorFromBranch->setGene(offspring);
-				} else {
+						//add another of this offspring type
+						generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
+						generatorFromBranch->setGene(offspring);
+					} else {
 
-					//add the offspring's follower because the repetition limit of the offspring is exceeded
-					generatorFromBranch->setGene(
-							genome->getGenes()[offspring->getFollowUpGene()]);
+						//add the offspring's follower because the repetition limit of the offspring is exceeded
+						generatorFromBranch->setGene(
+								genome->getGenes()[offspring->getFollowUpGene()]);
+					}
+
+					//set new root to leaf path length
+					generatorFromBranch->setRoot2LeafPath(
+							generator->getRoot2LeafPath() + 1);
+
+					//add generator to the list
+					generatorList.push_back(generatorFromBranch);
+
+					if ((*branchIt)->isFlipped()) {
+						// create the new generator
+						PhenotypeGenerator* flippedGeneratorFromBranch =
+								new PhenotypeGenerator();
+						flippedGeneratorFromBranch->initialize(
+								generator->getRepetitionList(),
+								generator->getPosition(),
+								generator->getOrientation(), limbB,
+								(*branchIt.base()),
+								morphogene->getSegmentShrinkFactor()
+										* generator->getCurrentShrinkageFactor(),
+								true/*Flipped*/, false);
+
+						//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
+						if (flippedGeneratorFromBranch->getRepetitionList().find(
+								(*branchIt)->getBranchGeneType())
+								== flippedGeneratorFromBranch->getRepetitionList().end()
+								|| flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+										<= offspring->getRepetitionLimit()) {
+
+							//add another of this offspring type
+							flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
+							flippedGeneratorFromBranch->setGene(offspring);
+						} else {
+
+							//add the offspring's follower because the repetition limit of the offspring is exceeded
+							flippedGeneratorFromBranch->setGene(
+									genome->getGenes()[offspring->getFollowUpGene()]);
+						}
+
+						//set new root to leaf path length
+						flippedGeneratorFromBranch->setRoot2LeafPath(
+								generator->getRoot2LeafPath() + 1);
+
+						//add generator to the list
+						generatorList.push_back(flippedGeneratorFromBranch);
+					}
+
+					if ((*branchIt)->isMirrored()) {
+						// create the new generator
+						PhenotypeGenerator* mirroredGeneratorFromBranch =
+								new PhenotypeGenerator();
+						mirroredGeneratorFromBranch->initialize(
+								generator->getRepetitionList(),
+								generator->getPosition(),
+								generator->getOrientation(), limbB,
+								(*branchIt.base()),
+								morphogene->getSegmentShrinkFactor()
+										* generator->getCurrentShrinkageFactor(),
+								false, true/*Mirrored*/);
+
+						//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
+						if (mirroredGeneratorFromBranch->getRepetitionList().find(
+								(*branchIt)->getBranchGeneType())
+								== mirroredGeneratorFromBranch->getRepetitionList().end()
+								|| mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+										<= offspring->getRepetitionLimit()) {
+
+							//add another of this offspring type
+							mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
+							mirroredGeneratorFromBranch->setGene(offspring);
+						} else {
+
+							//add the offspring's follower because the repetition limit of the offspring is exceeded
+							mirroredGeneratorFromBranch->setGene(
+									genome->getGenes()[offspring->getFollowUpGene()]);
+						}
+
+						//set new root to leaf path length
+						mirroredGeneratorFromBranch->setRoot2LeafPath(
+								generator->getRoot2LeafPath() + 1);
+
+						//add generator to the list
+						generatorList.push_back(mirroredGeneratorFromBranch);
+					}
 				}
-
-				//set new root to leaf path length
-				generatorFromBranch->setRoot2LeafPath(
-						generator->getRoot2LeafPath() + 1);
-
-				//add generator to the list
-				generatorList.push_back(generatorFromBranch);
 			}
 			break;
 		}

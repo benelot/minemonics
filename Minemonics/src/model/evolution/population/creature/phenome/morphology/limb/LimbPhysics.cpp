@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations
 //# system headers

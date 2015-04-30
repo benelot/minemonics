@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "MotionController.h"
+#include <controller/physics/MotionController.hpp>
 
 //# forward declarations
 //# system headers

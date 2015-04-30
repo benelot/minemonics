@@ -5,28 +5,16 @@
  *      Author: leviathan
  */
 //# corresponding header
-#include "Morphogene.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## controller headers
-//## model headers
 #include <boost/math/constants/constants.hpp>
+#include <configuration/ControlConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
+#include <model/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
-#include "configuration/ControlConfiguration.h"
-
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
-#include "utils/Randomness.h"
+#include <utils/Randomness.hpp>
 
 /**
  * A gene is part of the complete genome of a creature. It encodes for a certain
@@ -62,7 +50,6 @@ Morphogene::~Morphogene() {
 
 void Morphogene::initialize(double branchiness) {
 	mGeneType = Gene::MorphoGene;
-	mActive = true;
 
 	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions

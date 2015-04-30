@@ -6,11 +6,8 @@
  */
 
 //# corresponding header
-#include "Velocity.h"
-
-//# forward declarations
-//# system headers
 #include <gtest/gtest.h>
+#include <model/evolution/juries/Velocity.hpp>
 #include <iostream>
 
 //## controller headers

@@ -6,8 +6,8 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/creature/CreatureModel.h>
-#include "utils/NameGenerator.h"
+#include <model/evolution/population/creature/CreatureModel.hpp>
+#include <utils/NameGenerator.hpp>
 
 CreatureModel::CreatureModel() :
 		mDeveloped(false) {

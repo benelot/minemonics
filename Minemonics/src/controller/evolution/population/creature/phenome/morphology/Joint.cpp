@@ -6,23 +6,15 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.h>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
-#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.h>
-#include "Joint.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-#include "SimulationManager.h"
+#include <controller/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <SimulationManager.hpp>
+#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## configuration headers
 //## controller headers
-#include "controller/evolution/population/creature/phenome/morphology/Limb.h"
 
 //## model headers
 

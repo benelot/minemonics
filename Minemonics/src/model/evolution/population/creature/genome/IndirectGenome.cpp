@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include <model/evolution/population/creature/genome/IndirectGenome.h>
+#include <model/evolution/population/creature/genome/IndirectGenome.hpp>
 
 IndirectGenome::IndirectGenome() {
 	// TODO Auto-generated constructor stub

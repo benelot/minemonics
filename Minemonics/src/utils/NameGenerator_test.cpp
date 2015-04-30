@@ -6,11 +6,8 @@
  */
 
 //# corresponding header
-#include "NameGenerator.h"
-
-//# forward declarations
-//# system headers
 #include <gtest/gtest.h>
+#include <utils/NameGenerator.hpp>
 
 //## controller headers
 //## model headers

@@ -6,14 +6,9 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/PopulationModel.h>
-#include "configuration/MorphologyConfiguration.h"
-
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
-#include "utils/Randomness.h"
+#include <configuration/MorphologyConfiguration.hpp>
+#include <model/evolution/population/PopulationModel.hpp>
+#include <utils/Randomness.hpp>
 
 PopulationModel::PopulationModel() :
 		mCreatureQty(0) {

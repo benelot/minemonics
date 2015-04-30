@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "SegmentDuplicator.h"
+#include <model/evolution/population/creature/genome/genetics/variation/mutation/SegmentDuplicator.hpp>
 
 //# forward declarations
 //# system headers

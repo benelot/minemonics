@@ -1,9 +1,4 @@
 //# corresponding header
-#include "Limb.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 
 //## model headers
@@ -15,23 +10,20 @@
 
 //## view headers
 #include <boost/lexical_cast.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/physics/PhysicsController.hpp>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //# custom headers
 //## base headers
-#include <SimulationManager.h>
-
-//## configuration headers
-#include "configuration/PhysicsConfiguration.h"
-#include "configuration/MorphologyConfiguration.h"
-
-//## controller headers
-#include <controller/evolution/population/creature/phenome/morphology/Limb.h>
-#include <controller/physics/PhysicsController.h>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
+#include <SimulationManager.hpp>
 
 //## model headers
 
-#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h>
+#include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
 

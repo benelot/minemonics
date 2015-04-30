@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "EnvironmentPhysics.h"
+#include <model/environments/EnvironmentPhysics.hpp>
 
 //# forward declarations
 //# system headers

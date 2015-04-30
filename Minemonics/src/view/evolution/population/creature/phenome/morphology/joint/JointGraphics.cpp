@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include <view/evolution/population/creature/phenome/morphology/joint/JointGraphics.h>
+#include <view/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //# forward declarations
 //# system headers

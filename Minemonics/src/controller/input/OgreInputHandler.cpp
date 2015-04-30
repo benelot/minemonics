@@ -3,10 +3,6 @@
 //## utils headers
 
 //# corresponding header
-#include <controller/input/OgreInputHandler.h>
-
-//# forward declarations
-//# system headers
 #include <string>
 
 //## controller headers
@@ -25,25 +21,21 @@
 
 //## view headers
 #include <boost/lexical_cast.hpp>
+#include <configuration/CameraConfiguration.hpp>
+#include <controller/camera/CameraHandler.hpp>
+#include <controller/input/OgreInputHandler.hpp>
+#include <controller/physics/PhysicsController.hpp>
+#include <controller/StateHandler.hpp>
 #include <OgreLogManager.h>
 #include <OgreRenderWindow.h>
+#include <SimulationManager.hpp>
 
 //# custom headers
 //## base headers
-#include <SimulationManager.h>
+#include <view/bullet/OgreBtDebugDrawer.hpp>
 
 //## configuration headers
-#include <configuration/CameraConfiguration.h>
-
-//## controller headers
-#include <controller/camera/CameraHandler.h>
-#include <controller/physics/PhysicsController.h>
-#include <controller/StateHandler.h>
-#include <view/bullet/OgreBtDebugDrawer.h>
-
-//## model headers
-//## view headers
-#include <view/videocapture/Ogre3DFFMPEGVideoWriter.h>
+#include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 
 //## utils headers
 

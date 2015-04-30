@@ -9,6 +9,7 @@
 #include <OgreManualObject.h>
 #include <OgreSceneManager.h>
 #include <OgreRoot.h>
+#include <view/bullet/OgreBtDebugDrawer.hpp>
 
 //# custom headers
 //## base headers
@@ -16,8 +17,7 @@
 //## controller headers
 //## model headers
 //## view headers
-#include <view/bullet/OgreBtDebugDrawer.h>
-#include <view/bullet/OgreBulletUtils.h>
+#include <view/bullet/OgreBulletUtils.hpp>
 
 //## utils headers
 

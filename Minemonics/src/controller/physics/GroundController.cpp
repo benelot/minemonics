@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "GroundController.h"
+#include <controller/physics/GroundController.hpp>
 
 //# forward declarations
 //# system headers

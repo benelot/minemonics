@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "Gene.h"
+#include <model/evolution/population/creature/genome/Gene.hpp>
 
 //# forward declarations
 //# system headers
@@ -22,7 +22,7 @@
 //## utils headers
 
 Gene::Gene() :
-		mActive(false),mGeneType(UnknownGene) {
+		mGeneType(UnknownGene) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -36,7 +36,7 @@ Gene::~Gene() {
 }
 
 bool Gene::equals(const Gene& gene) const {
-	if (mActive == gene.mActive) {
+	if (mGeneType != gene.mGeneType) {
 		return false;
 	}
 

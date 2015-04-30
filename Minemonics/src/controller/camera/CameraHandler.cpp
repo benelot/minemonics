@@ -6,10 +6,8 @@
  */
 
 //# corresponding header
-#include <controller/camera/CameraHandler.h>
-
-//# forward declarations
-//# system headers
+#include <configuration/CameraConfiguration.hpp>
+#include <controller/camera/CameraHandler.hpp>
 #include <stddef.h>
 
 //## controller headers
@@ -23,7 +21,6 @@
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/CameraConfiguration.h>
 
 //## controller headers
 //## model headers

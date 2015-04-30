@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "StubGrower.h"
+#include <model/evolution/population/creature/genome/genetics/variation/mutation/StubGrower.hpp>
 
 //# forward declarations
 //# system headers

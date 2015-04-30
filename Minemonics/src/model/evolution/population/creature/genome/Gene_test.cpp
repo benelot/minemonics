@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "Gene.h"
+#include <model/evolution/population/creature/genome/Gene.hpp>
 
 //# forward declarations
 //# system headers

@@ -1,8 +1,5 @@
 //# corresponding header
-#include <BaseApplication.h>
-
-//# forward declarations
-//# system headers
+#include <BaseApplication.hpp>
 #include <stddef.h>
 #include <iostream>
 #include <map>

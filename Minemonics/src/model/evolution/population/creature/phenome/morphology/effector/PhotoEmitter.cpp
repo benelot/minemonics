@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "PhotoEmitter.h"
+#include <model/evolution/population/creature/phenome/morphology/effector/PhotoEmitter.hpp>
 
 //# forward declarations
 //# system headers

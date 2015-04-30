@@ -27,6 +27,11 @@
 #include <boost/parameter/keyword.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <configuration/ApplicationConfiguration.hpp>
+#include <configuration/EnvironmentConfiguration.hpp>
+#include <configuration/OgreSystemConfigStrings.hpp>
+#include <controller/environments/Hills.hpp>
+#include <controller/environments/Plane.hpp>
 
 //## view headers
 #include <CEGUI/FontManager.h>
@@ -64,26 +69,16 @@
 #include <OgreUTFString.h>
 #include <OgreVector3.h>
 #include <OgreWindowEventUtilities.h>
+#include <SimulationManager.hpp>
 
 //# custom headers
 //## base headers
-#include <SimulationManager.h>
+#include <utils/Randomness.hpp>
 
 //## configuration headers
-#include <configuration/ApplicationConfiguration.h>
-#include <configuration/EnvironmentConfiguration.h>
-#include <configuration/OgreSystemConfigStrings.h>
-
-//## controller headers
-#include <controller/environments/Hills.h>
-#include <controller/environments/Plane.h>
-
-//## model headers
-//## view headers
-#include <view/CEGUI/CEGUIBuilder.h>
+#include <view/CEGUI/CEGUIBuilder.hpp>
 
 //## utils headers
-#include <utils/Randomness.h>
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;

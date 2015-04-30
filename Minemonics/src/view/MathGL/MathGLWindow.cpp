@@ -6,10 +6,6 @@
  */
 
 //# corresponding header
-#include "MathGLWindow.h"
-
-//# forward declarations
-//# system headers
 #include <string>
 #include <boost/lexical_cast.hpp>
 
@@ -23,10 +19,11 @@
 #include <CEGUI/RendererModules/Ogre/Texture.h>
 
 #include <mgl2/mgl.h>
+#include <SimulationManager.hpp>
+#include <view/MathGL/MathGLWindow.hpp>
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
 
 //## configuration headers
 //## controller headers

@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/creature/phenome/morphology/joint/JointPhysics.h>
+#include <model/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //# forward declarations
 //# system headers

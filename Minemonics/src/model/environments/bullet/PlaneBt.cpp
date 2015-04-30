@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "PlaneBt.h"
+#include <model/environments/bullet/PlaneBt.hpp>
 
 //# forward declarations
 //# system headers

@@ -10,7 +10,7 @@
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btTransform.h>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //## view headers
 //# custom headers

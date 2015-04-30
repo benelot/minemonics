@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "Ones.h"
+#include <model/evolution/juries/Ones.hpp>
 
 //# forward declarations
 //# system headers

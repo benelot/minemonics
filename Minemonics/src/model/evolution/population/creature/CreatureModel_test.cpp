@@ -6,21 +6,18 @@
  */
 
 //# corresponding header
+#include <configuration/MorphologyConfiguration.hpp>
+#include <controller/SaveController.hpp>
 #include <gtest/gtest.h>
-#include <model/evolution/population/creature/CreatureModel.h>
-
-//## controller headers
-//## model headers
+#include <model/evolution/population/creature/CreatureModel.hpp>
 #include <OgreVector3.h>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
-#include "controller/SaveController.h"
 
 //## model headers
 //## view headers

@@ -6,13 +6,11 @@
  */
 
 //# corresponding header
-#include "Randomness.h"
-
-//# forward declarations
 #include <math.h>
 
 //# system headers
 #include <gtest/gtest.h>
+#include <utils/Randomness.hpp>
 
 //## controller headers
 //## model headers

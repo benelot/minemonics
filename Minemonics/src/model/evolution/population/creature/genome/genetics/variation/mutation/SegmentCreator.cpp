@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "SegmentCreator.h"
+#include <model/evolution/population/creature/genome/genetics/variation/mutation/SegmentCreator.hpp>
 
 //# forward declarations
 //# system headers

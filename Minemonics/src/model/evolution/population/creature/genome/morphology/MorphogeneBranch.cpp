@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "MorphogeneBranch.h"
+#include <model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 
 //# forward declarations
 class Morphogene;
@@ -22,19 +22,18 @@ class Morphogene;
 //## configuration headers
 //## controller headers
 //## model headers
-#include "model/evolution/population/creature/genome/morphology/Morphogene.h"
+#include <model/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //## utils headers
-#include "utils/Randomness.h"
+#include <utils/Randomness.hpp>
 
-MorphogeneBranch::MorphogeneBranch() :
-		mActive(false), mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(
+MorphogeneBranch::MorphogeneBranch() : mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(
 				0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(
 				0), mActuated(false), mJointPitchMinAngle(0), mJointPitchMaxAngle(
 				0), mJointYawMinAngle(0), mJointYawMaxAngle(0), mJointRollMinAngle(
-				0), mJointRollMaxAngle(0), mMirrored(0) {
-
+				0), mJointRollMaxAngle(0), mMirrored(0), mSpringDampingCoefficient(
+				0), mJointStiffness(0) {
 }
 
 void MorphogeneBranch::initialize() {
@@ -43,12 +42,12 @@ void MorphogeneBranch::initialize() {
 	Randomness randomness;
 
 	/** Set joint anchor X, Y and Z, where the anchor lies in the center of mass
-	 and the X, y and Z form a vector, pointing to the point on the surface where
+	 and the X, Y and Z form a vector, pointing to the point on the surface where
 	 the joint will be attached.*/
 	do {
-		mJointAnchorX = randomness.nextDouble(0, 1);
-		mJointAnchorY = randomness.nextDouble(0, 1);
-		mJointAnchorZ = randomness.nextDouble(0, 1);
+		mJointAnchorX = randomness.nextDouble(-1.0f, 1.0f);
+		mJointAnchorY = randomness.nextDouble(-1.0f, 1.0f);
+		mJointAnchorZ = randomness.nextDouble(-1.0f, 1.0f);
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
 	/**
@@ -78,7 +77,7 @@ void MorphogeneBranch::initialize() {
 			2 * boost::math::constants::pi<double>());
 
 	/**
-	 * Set if the branch should be mirrored or flipped to the other side.
+	 * Set whether the branch should be mirrored or flipped to the other side.
 	 */
 	mMirrored = randomness.nextBoolean();
 
@@ -86,14 +85,29 @@ void MorphogeneBranch::initialize() {
 
 	mActive = randomness.nextBoolean();
 
+	/**
+	 * Set whether the joint should be actuated.
+	 */
 	mActuated = randomness.nextBoolean();
 
 	mBranchGeneType = -1;
+
+	/**
+	 * The spring damping coefficient
+	 */
+	mSpringDampingCoefficient = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
+			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
+
+	/**
+	 * The joint stiffness
+	 */
+	mJointStiffness = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
+			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
 }
 
 MorphogeneBranch::~MorphogeneBranch() {
-	//TODO:Remove test action
-	mActive = false;
 }
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
@@ -102,32 +116,77 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mBranchGeneType != geneBranch.mBranchGeneType)
+	if (mBranchGeneType != geneBranch.mBranchGeneType) {
 		return false;
+	}
 
-	if (mFlipped != geneBranch.mFlipped)
+	if (mFlipped != geneBranch.mFlipped) {
 		return false;
+	}
 
-	if (mJointAnchorX != geneBranch.mJointAnchorX)
+	if (mJointAnchorX != geneBranch.mJointAnchorX) {
 		return false;
+	}
 
-	if (mJointAnchorY != geneBranch.mJointAnchorY)
+	if (mJointAnchorY != geneBranch.mJointAnchorY) {
 		return false;
+	}
 
-	if (mJointAnchorZ != geneBranch.mJointAnchorZ)
+	if (mJointAnchorZ != geneBranch.mJointAnchorZ) {
 		return false;
+	}
 
-	if (mJointPitch != geneBranch.mJointPitch)
+	if (mJointPitch != geneBranch.mJointPitch) {
 		return false;
+	}
 
-	if (mJointYaw != geneBranch.mJointYaw)
+	if (mJointPitchMinAngle != geneBranch.mJointPitchMinAngle) {
 		return false;
+	}
 
-	if (mJointRoll != geneBranch.mJointRoll)
+	if (mJointPitchMaxAngle != geneBranch.mJointPitchMaxAngle) {
 		return false;
+	}
 
-	if (mMirrored != geneBranch.mMirrored)
+	if (mJointYaw != geneBranch.mJointYaw) {
 		return false;
+	}
+
+	if (mJointYawMinAngle != geneBranch.mJointYawMinAngle) {
+		return false;
+	}
+
+	if (mJointYawMaxAngle != geneBranch.mJointYawMaxAngle) {
+		return false;
+	}
+
+	if (mJointRoll != geneBranch.mJointRoll) {
+		return false;
+	}
+
+	if (mJointRollMinAngle != geneBranch.mJointRollMinAngle) {
+		return false;
+	}
+
+	if (mJointRollMaxAngle != geneBranch.mJointRollMaxAngle) {
+		return false;
+	}
+
+	if (mMirrored != geneBranch.mMirrored) {
+		return false;
+	}
+
+	if (mActuated != geneBranch.mActuated) {
+		return false;
+	}
+
+	if (mSpringDampingCoefficient != geneBranch.mSpringDampingCoefficient) {
+		return false;
+	}
+
+	if (mJointStiffness != geneBranch.mJointStiffness) {
+		return false;
+	}
 
 	return true;
 }

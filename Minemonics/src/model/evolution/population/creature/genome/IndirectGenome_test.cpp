@@ -5,5 +5,5 @@
  *      Author: leviathan
  */
 
-#include <model/evolution/population/creature/genome/IndirectGenome.h>
+#include <model/evolution/population/creature/genome/IndirectGenome.hpp>
 

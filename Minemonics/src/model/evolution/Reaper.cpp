@@ -7,8 +7,8 @@
 
 
 //# corresponding header
-#include <model/evolution/population/PopulationModel.h>
-#include <model/evolution/Reaper.h>
+#include <model/evolution/population/PopulationModel.hpp>
+#include <model/evolution/Reaper.hpp>
 
 //# forward declarations
 //# system headers

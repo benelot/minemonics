@@ -22,7 +22,7 @@
 #include <OgreSubMesh.h>
 #include <OgreVector3.h>
 #include <OgreVertexIndexData.h>
-#include <view/picking/OgreMeshRay.h>
+#include <view/picking/OgreMeshRay.hpp>
 #include <cstdio>
 #include <string>
 #include <utility>

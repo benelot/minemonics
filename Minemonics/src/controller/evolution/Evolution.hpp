@@ -10,15 +10,10 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/environments/Environment.h>
-#include <controller/evolution/population/creature/Creature.h>
-
-//## model headers
-#include <model/evolution/EvolutionModel.h>
-
-//## view headers
-//## utils headers
-#include <utils/TimerManager.h>
+#include <controller/environments/Environment.hpp>
+#include <controller/evolution/population/creature/Creature.hpp>
+#include <model/evolution/EvolutionModel.hpp>
+#include <utils/TimerManager.hpp>
 
 /**
  * @brief		Brief

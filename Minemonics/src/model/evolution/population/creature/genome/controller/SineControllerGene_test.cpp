@@ -6,24 +6,20 @@
  */
 
 //# corresponding header
-#include "SineControllerGene.h"
-
-//# forward declarations
-//# system headers
 #include <gtest/gtest.h>
 
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
+#include <configuration/ControlConfiguration.hpp>
+#include <controller/SaveController.hpp>
+#include <model/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
-#include "controller/SaveController.h"
-
-#include "configuration/ControlConfiguration.h"
 
 //## model headers
 //## view headers

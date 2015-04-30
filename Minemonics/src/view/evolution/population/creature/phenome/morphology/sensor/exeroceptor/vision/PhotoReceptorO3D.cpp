@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include "PhotoReceptorO3D.h"
+#include <view/evolution/population/creature/phenome/morphology/sensor/exeroceptor/vision/PhotoReceptorO3D.hpp>
 
 PhotoReceptorO3D::PhotoReceptorO3D() {
 	// TODO Auto-generated constructor stub

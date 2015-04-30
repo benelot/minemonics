@@ -17,15 +17,10 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/creature/genome/MixedGenome.h>
-#include "configuration/PopulationConfiguration.h"
-#include "configuration/MorphologyConfiguration.h"
-
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
-#include "utils/Randomness.h"
+#include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/PopulationConfiguration.hpp>
+#include <model/evolution/population/creature/genome/MixedGenome.hpp>
+#include <utils/Randomness.hpp>
 
 MixedGenome::MixedGenome() :
 		mSegmentsDepthLimit(0), mTotalSegmentQtyLimit(0) {

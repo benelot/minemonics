@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "Emitter.h"
+#include <model/evolution/population/creature/phenome/morphology/effector/Emitter.hpp>
 
 //# forward declarations
 //# system headers

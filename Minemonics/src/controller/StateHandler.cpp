@@ -6,13 +6,7 @@
  */
 
 //# corresponding header
-#include "StateHandler.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
+#include <controller/StateHandler.hpp>
 #include <OgreStringConverter.h>
 
 //# custom headers

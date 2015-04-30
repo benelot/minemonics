@@ -10,16 +10,16 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-#include <model/evolution/population/creature/genome/MixedGenome.h>
+#include <configuration/PopulationConfiguration.hpp>
+#include <controller/SaveController.hpp>
+#include <model/evolution/population/creature/genome/MixedGenome.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/PopulationConfiguration.h"
 
 //## controller headers
-#include "controller/SaveController.h"
 
 //## model headers
 //## view headers

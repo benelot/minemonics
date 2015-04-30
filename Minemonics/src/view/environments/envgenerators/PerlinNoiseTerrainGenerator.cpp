@@ -7,7 +7,7 @@
 //## model headers
 //## view headers
 #include <OgreTerrainPagedWorldSection.h>
-#include <view/environments/envgenerators/PerlinNoiseTerrainGenerator.h>
+#include <view/environments/envgenerators/PerlinNoiseTerrainGenerator.hpp>
 
 //# custom headers
 //## base headers

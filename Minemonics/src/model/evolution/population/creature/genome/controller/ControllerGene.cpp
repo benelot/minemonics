@@ -6,7 +6,7 @@
  */
 
 //# corresponding headers
-#include "ControllerGene.h"
+#include <model/evolution/population/creature/genome/controller/ControllerGene.hpp>
 
 //# forward declarations
 //# system headers

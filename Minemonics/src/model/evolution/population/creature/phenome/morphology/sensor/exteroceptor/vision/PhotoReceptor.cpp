@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "PhotoReceptor.h"
+#include <model/evolution/population/creature/phenome/morphology/sensor/exteroceptor/vision/PhotoReceptor.hpp>
 
 //# forward declarations
 //# system headers

@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "Reproduction.h"
+#include <model/evolution/population/creature/genome/genetics/Reproduction.hpp>
 
 //# forward declarations
 //# system headers

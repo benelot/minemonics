@@ -14,7 +14,7 @@
 #include <OgreSingleton.h>
 #include <OgreVector3.h>
 #include <boost/lexical_cast.hpp>
-#include <view/overlay/InfoOverlay.h>
+#include <view/overlay/InfoOverlay.hpp>
 
 //# custom headers
 //## base headers

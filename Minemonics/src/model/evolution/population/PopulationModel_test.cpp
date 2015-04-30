@@ -6,8 +6,10 @@
  */
 
 //# corresponding header
+#include <configuration/MorphologyConfiguration.hpp>
+#include <controller/SaveController.hpp>
 #include <gtest/gtest.h>
-#include <model/evolution/population/PopulationModel.h>
+#include <model/evolution/population/PopulationModel.hpp>
 
 //## controller headers
 //## model headers
@@ -15,10 +17,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
 
 //## controller headers
-#include "controller/SaveController.h"
 
 //## model headers
 //## view headers

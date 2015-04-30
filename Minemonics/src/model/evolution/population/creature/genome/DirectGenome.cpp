@@ -5,7 +5,7 @@
  *      Author: leviathan
  */
 
-#include <model/evolution/population/creature/genome/DirectGenome.h>
+#include <model/evolution/population/creature/genome/DirectGenome.hpp>
 
 DirectGenome::DirectGenome() {
 	// TODO Auto-generated constructor stub

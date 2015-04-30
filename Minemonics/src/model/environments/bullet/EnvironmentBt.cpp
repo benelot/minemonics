@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include "EnvironmentBt.h"
+#include <model/environments/bullet/EnvironmentBt.hpp>
 
 //# forward declarations
 //# system headers

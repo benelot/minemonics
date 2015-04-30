@@ -6,7 +6,7 @@
  */
 
 //# corresponding headers
-#include "Jury.h"
+#include <model/evolution/juries/Jury.hpp>
 
 //# forward declarations
 //# system headers

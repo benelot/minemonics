@@ -234,40 +234,46 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 set(MODELHDRS
 	# model
 	## enviroment
-	./model/environments/EnvironmentPhysics.h
-	./model/environments/bullet/EnvironmentBt.h
-	./model/environments/bullet/HillsBt.h
-	./model/environments/bullet/PlaneBt.h
+	./model/environments/EnvironmentPhysics.hpp
+	./model/environments/bullet/EnvironmentBt.hpp
+	./model/environments/bullet/HillsBt.hpp
+	./model/environments/bullet/PlaneBt.hpp
 	
 	## juries
-	./model/evolution/juries/Jury.h
-	./model/evolution/juries/Ones.h
-	./model/evolution/juries/Velocity.h
+	./model/evolution/juries/Jury.hpp
+	./model/evolution/juries/Ones.hpp
+	./model/evolution/juries/Velocity.hpp
 	
 	## evolution
-	./model/evolution/EvolutionModel.h
-	./model/evolution/Reaper.h
-	./model/evolution/population/PopulationModel.h
-	./model/evolution/population/creature/CreatureModel.h
+	./model/evolution/EvolutionModel.hpp
+	./model/evolution/Reaper.hpp
+	./model/evolution/population/PopulationModel.hpp
+	./model/evolution/population/creature/CreatureModel.hpp
 	
 	## genome
-	./model/evolution/population/creature/genome/Genome.h
-	./model/evolution/population/creature/genome/DirectGenome.h
-	./model/evolution/population/creature/genome/IndirectGenome.h
-	./model/evolution/population/creature/genome/MixedGenome.h
-	./model/evolution/population/creature/genome/Gene.h
-	./model/evolution/population/creature/genome/GeneBranch.h
-	./model/evolution/population/creature/genome/morphology/Morphogene.h
-    ./model/evolution/population/creature/genome/morphology/MorphogeneBranch.h
-    ./model/evolution/population/creature/genome/controller/ControllerGene.h
-	./model/evolution/population/creature/genome/controller/SineControllerGene.h
+	./model/evolution/population/creature/genome/Genome.hpp
+	./model/evolution/population/creature/genome/DirectGenome.hpp
+	./model/evolution/population/creature/genome/IndirectGenome.hpp
+	./model/evolution/population/creature/genome/MixedGenome.hpp
+	./model/evolution/population/creature/genome/Gene.hpp
+	./model/evolution/population/creature/genome/GeneBranch.hpp
+	./model/evolution/population/creature/genome/morphology/Morphogene.hpp
+    ./model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp
+    ./model/evolution/population/creature/genome/controller/ControllerGene.hpp
+	./model/evolution/population/creature/genome/controller/SineControllerGene.hpp
 	
 	## phenome
 	./model/evolution/population/creature/phenome/PhenomeModel.hpp
-	./model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.h
-	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.h
-	./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.h
-	./model/evolution/population/creature/phenome/morphology/joint/JointBt.h
+	./model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
+	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
+	./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
+	./model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp
+	
+	## controller
+	./model/evolution/population/creature/phenome/controller/Controller.hpp
+	./model/evolution/population/creature/phenome/controller/ControlInput.hpp
+	./model/evolution/population/creature/phenome/controller/ControlOutput.hpp
+	./model/evolution/population/creature/phenome/controller/sine/SineController.hpp
 )
 set(MODELSRCS
     # model
@@ -306,46 +312,52 @@ set(MODELSRCS
 	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
     ./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
 	./model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
+	
+	## controller
+    ./model/evolution/population/creature/phenome/controller/Controller.cpp
+	./model/evolution/population/creature/phenome/controller/ControlInput.cpp
+	./model/evolution/population/creature/phenome/controller/ControlOutput.cpp
+	./model/evolution/population/creature/phenome/controller/sine/SineController.cpp
 )
 set(CONTROLLERHDRS
 	# controller
 	# input handlers
-	./controller/input/ApplicationScancode.h
-	./controller/input/ApplicationKeycode.h
-	./controller/input/ApplicationMousecode.h
-	./controller/input/SDL2InputHandler.h
-	./controller/input/CEGUIInputHandler.h
-	./controller/input/OgreInputHandler.h
+	./controller/input/ApplicationScancode.hpp
+	./controller/input/ApplicationKeycode.hpp
+	./controller/input/ApplicationMousecode.hpp
+	./controller/input/SDL2InputHandler.hpp
+	./controller/input/CEGUIInputHandler.hpp
+	./controller/input/OgreInputHandler.hpp
 	
 	## camera handler
-	./controller/camera/CameraHandler.h
+	./controller/camera/CameraHandler.hpp
 	
 	## object save controller
-	./controller/SaveController.h
+	./controller/SaveController.hpp
 	
 	## application state handler
-	./controller/StateHandler.h
+	./controller/StateHandler.hpp
 	
 	## bullet physics controller
-    ./controller/physics/PhysicsController.h
-    ./controller/physics/RagDoll.h
+    ./controller/physics/PhysicsController.hpp
+    ./controller/physics/RagDoll.hpp
     
     # entity controllers/model-view facades to control objects at both sides
     ## environments
-    ./controller/environments/Environment.h
-    ./controller/environments/Plane.h
+    ./controller/environments/Environment.hpp
+    ./controller/environments/Plane.hpp
     
     ## evolution
     ./controller/evolution/Evolution.hpp
     ./controller/evolution/population/Population.hpp
         
     ## phenome
-    ./controller/evolution/population/creature/Creature.h
-    ./controller/evolution/genetics/PhenotypeGenerator.h
-    ./controller/evolution/population/creature/phenome/Phenome.h
-    ./controller/evolution/population/creature/phenome/Component.h
-    ./controller/evolution/population/creature/phenome/morphology/Limb.h
-    ./controller/evolution/population/creature/phenome/morphology/Joint.h
+    ./controller/evolution/population/creature/Creature.hpp
+    ./controller/evolution/genetics/PhenotypeGenerator.hpp
+    ./controller/evolution/population/creature/phenome/Phenome.hpp
+    ./controller/evolution/population/creature/phenome/Component.hpp
+    ./controller/evolution/population/creature/phenome/morphology/Limb.hpp
+    ./controller/evolution/population/creature/phenome/morphology/Joint.hpp
 )
 set(CONTROLLERSRCS
 	# controller
@@ -384,40 +396,40 @@ set(CONTROLLERSRCS
 set(VIEWHDRS
 	# view
 	## environments
-	./view/environments/EnvironmentGraphics.h
-	./view/environments/envgenerators/PerlinNoiseTerrainGenerator.h
-	./view/environments/EnvironmentO3D.h
-	./view/environments/OpenSeaO3D.h
-	./view/environments/PlaneO3D.h
-	./view/environments/HillsO3D.h
+	./view/environments/EnvironmentGraphics.hpp
+	./view/environments/envgenerators/PerlinNoiseTerrainGenerator.hpp
+	./view/environments/EnvironmentO3D.hpp
+	./view/environments/OpenSeaO3D.hpp
+	./view/environments/PlaneO3D.hpp
+	./view/environments/HillsO3D.hpp
 	
 	## creature
-    ./view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.h
-	./view/evolution/population/creature/phenome/morphology/limb/LimbO3D.h
-	./view/evolution/population/creature/phenome/morphology/joint/JointGraphics.h
-	./view/evolution/population/creature/phenome/morphology/joint/JointO3D.h
+    ./view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp
+	./view/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp
+	./view/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp
+	./view/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp
 	
 	## physics debug drawing
-	./view/bullet/OgreBtDebugDrawer.h
-	./view/bullet/OgreBulletUtils.h
+	./view/bullet/OgreBtDebugDrawer.hpp
+	./view/bullet/OgreBulletUtils.hpp
 	
 	## information overlay
-	./view/overlay/InfoOverlay.h
-	./view/overlay/InfoOverlayData.h
+	./view/overlay/InfoOverlay.hpp
+	./view/overlay/InfoOverlayData.hpp
 	
     ## CEGUI
-	./view/CEGUI/GUISheetHandler.h
-	./view/CEGUI/ParamsPanel.h
-	./view/CEGUI/CEGUIBuilder.h
+	./view/CEGUI/GUISheetHandler.hpp
+	./view/CEGUI/ParamsPanel.hpp
+	./view/CEGUI/CEGUIBuilder.hpp
 	
 	## MathGL
-    ./view/MathGL/MathGLWindow.h
+    ./view/MathGL/MathGLWindow.hpp
     
     ## Videocapture
-	./view/videocapture/Ogre3DFFMPEGVideoWriter.h
+	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
 	
 	## picking
-	./view/picking/OgreMeshRay.h
+	./view/picking/OgreMeshRay.hpp
     
     # procedural
 	./view/procedural/ProceduralPlatform.h
@@ -438,7 +450,7 @@ set(VIEWHDRS
 	./view/procedural/ProceduralUtils.h
 	./view/procedural/ProceduralExtruder.h
 	./view/procedural/ProceduralLathe.h
-	./view/procedural/ProceduralShape.h	
+	./view/procedural/ProceduralShape.h
 	./view/procedural/ProceduralShapeGenerators.h
 	./view/procedural/ProceduralPath.h
 	./view/procedural/ProceduralPathGenerators.h
@@ -447,7 +459,7 @@ set(VIEWHDRS
 	./view/procedural/ProceduralTriangulator.h
 	./view/procedural/ProceduralTriangleBuffer.h
 	./view/procedural/ProceduralStableHeaders.h
-	./view/procedural/ProceduralMultiShape.h	
+	./view/procedural/ProceduralMultiShape.h
 	./view/procedural/ProceduralGeometryHelpers.h
 )
 set(VIEWSRCS
@@ -516,24 +528,24 @@ set(VIEWSRCS
 )
 set(MISCHDRS
 	# configuration
-	./configuration/ApplicationConfiguration.h
-	./configuration/CameraConfiguration.h
-	./configuration/ControlConfiguration.h
-	./configuration/PhysicsConfiguration.h
-	./configuration/MorphologyConfiguration.h
-	./configuration/GeneticsConfiguration.h
-	./configuration/EnvironmentConfiguration.h
-	./configuration/EvolutionConfiguration.h
-	./configuration/PopulationConfiguration.h
-	./configuration/OgreSystemConfigStrings.h
-	./configuration/CEGUIConfiguration.h
+	./configuration/ApplicationConfiguration.hpp
+	./configuration/CameraConfiguration.hpp
+	./configuration/ControlConfiguration.hpp
+	./configuration/PhysicsConfiguration.hpp
+	./configuration/MorphologyConfiguration.hpp
+	./configuration/GeneticsConfiguration.hpp
+	./configuration/EnvironmentConfiguration.hpp
+	./configuration/EvolutionConfiguration.hpp
+	./configuration/PopulationConfiguration.hpp
+	./configuration/OgreSystemConfigStrings.hpp
+	./configuration/CEGUIConfiguration.hpp
 	
 	# logger
-	./utils/logging/Logger.h
-	./utils/Randomness.h
-	./utils/NameGenerator.h
+	./utils/logging/Logger.hpp
+	./utils/Randomness.hpp
+	./utils/NameGenerator.hpp
 	
-	./utils/ogre3D/Euler.h
+	./utils/ogre3D/Euler.hpp
 )
 set(MISCSRCS
 	# logger
@@ -578,8 +590,8 @@ set(HDRS
     ${MISCHDRS}
     
     # base
-	./BaseApplication.h
-	./SimulationManager.h
+	./BaseApplication.hpp
+	./SimulationManager.hpp
 )
 
 # Append source files here

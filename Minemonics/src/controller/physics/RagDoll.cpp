@@ -6,12 +6,13 @@
  */
 
 //# corresponding header
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.h>
-#include <view/bullet/OgreBulletUtils.h>
-#include "RagDoll.h"
-
-//# forward declarations
-//# system headers
+#include <configuration/MorphologyConfiguration.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/physics/RagDoll.hpp>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <SimulationManager.hpp>
+#include <view/bullet/OgreBulletUtils.hpp>
 #include <vector>
 
 //## controller headers
@@ -19,14 +20,8 @@
 //## view headers
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
 
 //## configuration headers
-#include "configuration/MorphologyConfiguration.h"
-
-//## controller headers
-#include "controller/evolution/population/creature/phenome/morphology/Limb.h"
-#include "controller/evolution/population/creature/phenome/morphology/Joint.h"
 
 //## model headers
 

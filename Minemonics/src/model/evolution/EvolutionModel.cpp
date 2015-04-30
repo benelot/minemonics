@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/evolution/EvolutionModel.h>
+#include <model/evolution/EvolutionModel.hpp>
 
 //# forward declarations
 //# system headers

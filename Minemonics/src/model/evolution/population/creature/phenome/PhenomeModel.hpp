@@ -1,15 +1,15 @@
-/*
- * PhenomeModel.hpp
- *
- *  Created on: Apr 29, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_
 
-/*
- *
+#include <model/evolution/population/creature/phenome/controller/Controller.hpp>
+#include <model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <vector>
+
+/**
+ * @brief		The phenome model holds all the state information of the phenome independent of other models.
+ * @details		Details
+ * @date		2015-04-29
+ * @author		Benjamin Ellenberger
  */
 class PhenomeModel {
 public:
@@ -37,6 +37,10 @@ private:
 	 * Whether the phenome is in the world or not.
 	 */
 	bool inWorld;
+
+	//std::vector<Sensor*> mSensors;
+
+	std::vector<Controller*> mControllers;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

@@ -6,8 +6,8 @@
  */
 
 //# corresponding header
-#include <view/environments/PlaneO3D.h>
-#include "SimulationManager.h"
+#include <SimulationManager.hpp>
+#include <view/environments/PlaneO3D.hpp>
 
 //## configuration headers
 //## controller headers

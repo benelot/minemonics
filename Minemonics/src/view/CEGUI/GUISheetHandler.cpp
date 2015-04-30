@@ -1,23 +1,17 @@
 //# corresponding header
-#include "GUISheetHandler.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
+#include <controller/StateHandler.hpp>
 #include <CEGUI/System.h>
 #include <CEGUI/Window.h>
 #include <CEGUI/WindowManager.h>
 #include <CEGUI/widgets/PushButton.h>
+#include <SimulationManager.hpp>
+#include <view/CEGUI/GUISheetHandler.hpp>
 
 //# custom headers
 //## base headers
-#include "SimulationManager.h"
 
 //## configuration headers
 //## controller headers
-#include "controller/StateHandler.h"
 
 //## model headers
 //## view headers

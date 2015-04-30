@@ -6,14 +6,8 @@
  */
 
 //# corresponding header
-#include "HillsBt.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
 #include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+#include <model/environments/bullet/HillsBt.hpp>
 
 //# custom headers
 //## base headers

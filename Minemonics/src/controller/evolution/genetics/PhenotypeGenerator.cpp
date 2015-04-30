@@ -6,28 +6,16 @@
  */
 
 //# corresponding headers
-#include "PhenotypeGenerator.h"
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-#include "controller/evolution/population/creature/phenome/Component.h"
-
-//## model headers
-#include "model/evolution/population/creature/genome/GeneBranch.h"
+#include <controller/evolution/genetics/PhenotypeGenerator.hpp>
+#include <controller/evolution/population/creature/phenome/Component.hpp>
+#include <model/evolution/population/creature/genome/GeneBranch.hpp>
 
 //## view headers
 //## utils headers
 
 PhenotypeGenerator::PhenotypeGenerator() :
 		mGene(0), mRoot2LeafPath(0), mParentComponent(0), mCurrentShrinkageFactor(
-				1), mGeneBranch(0) {
+				1), mGeneBranch(0),mFlipped(false),mMirrored(false) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -35,13 +23,15 @@ PhenotypeGenerator::PhenotypeGenerator() :
 void PhenotypeGenerator::initialize(std::map<int,int>& repetitionList,
 		Ogre::Vector3 position, Ogre::Quaternion orientation,
 		Component* parentComponent, GeneBranch* geneBranch,
-		double currentShrinkageFactor) {
+		double currentShrinkageFactor,bool flipped,bool mirrored) {
 	mRepetitionList = repetitionList;
 	mPosition = position;
 	mOrientation = orientation;
 	mParentComponent = parentComponent;
 	mGeneBranch = geneBranch;
 	mCurrentShrinkageFactor = currentShrinkageFactor;
+	mFlipped = flipped;
+	mMirrored = mirrored;
 }
 
 PhenotypeGenerator::~PhenotypeGenerator() {

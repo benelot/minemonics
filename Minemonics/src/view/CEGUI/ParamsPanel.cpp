@@ -1,5 +1,6 @@
 //# corresponding header
-#include "ParamsPanel.h"
+#include <configuration/CEGUIConfiguration.hpp>
+#include <view/CEGUI/ParamsPanel.hpp>
 
 //# forward declarations
 //# system headers
@@ -9,7 +10,6 @@
 //# custom headers
 //## base headers
 //## configuration headers
-#include "configuration/CEGUIConfiguration.h"
 
 //## controller headers
 //## model headers
