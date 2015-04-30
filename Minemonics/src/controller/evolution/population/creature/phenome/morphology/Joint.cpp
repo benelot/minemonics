@@ -78,3 +78,16 @@ void Joint::setAngularLimits(Ogre::Vector3 angularLowerLimit,
 		Ogre::Vector3 angularUpperLimit) {
 	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);
 }
+
+void Joint::setAngularStiffness(double jointPitchStiffness,
+		double jointYawStiffness, double jointRollStiffness) {
+	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
+			jointRollStiffness);
+}
+
+void Joint::setAngularDamping(double springPitchDampingCoefficient,
+		double springYawDampingCoefficient,
+		double springRollDampingCoefficient) {
+	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
+			springYawDampingCoefficient, springRollDampingCoefficient);
+}

@@ -1,10 +1,3 @@
-/*
- * Joint.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_HPP_
 #define CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_HPP_
 
@@ -34,9 +27,9 @@ class Limb;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The joint controller synchronizes the joint graphical representation with the joint model.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
 class Joint: public Component {
@@ -55,6 +48,10 @@ public:
 
 	void setAngularLimits(Ogre::Vector3 angularLowerLimit,
 			Ogre::Vector3 angularUpperLimit);
+
+	void setAngularStiffness(double jointPitchStiffness,double jointYawStiffness,double jointRollStiffness);
+
+	void setAngularDamping(double springPitchDampingCoefficient,double springYawDampingCoefficient,double springRollDampingCoefficient);
 
 	JointGraphics*& getJointGraphics() {
 		return mJointGraphics;

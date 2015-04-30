@@ -36,7 +36,7 @@ class SimulationManager;
 //## utils headers
 
 /**
- * @brief		The limb controller synchronizes the state of the graphical representation with the physical model
+ * @brief		The limb controller synchronizes the limb graphical representation with the limb model.
  * @details		Details
  * @date		2014-12-19
  * @author		Benjamin Ellenberger

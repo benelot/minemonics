@@ -18,6 +18,8 @@
 #include <model/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //## view headers
+#include <view/bullet/OgreBulletUtils.hpp>
+
 //## utils headers
 
 /**
@@ -31,8 +33,8 @@ public:
 	JointBt();
 	virtual ~JointBt();
 
-	void initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,
-			btTransform& tframeInA, btTransform& tframeInB);
+	void initialize(btDynamicsWorld* world, btRigidBody* bodyA,
+			btRigidBody* bodyB, btTransform& tframeInA, btTransform& tframeInB);
 
 	void addToWorld();
 
@@ -47,11 +49,8 @@ public:
 
 	void setAngularLimits(Ogre::Vector3 angularLowerLimit,
 			Ogre::Vector3 angularUpperLimit) {
-		setAngularLimits(
-				btVector3(angularLowerLimit.x, angularLowerLimit.y,
-						angularLowerLimit.z),
-				btVector3(angularUpperLimit.x, angularUpperLimit.y,
-						angularUpperLimit.z));
+		setAngularLimits(OgreBulletUtils::convert(angularLowerLimit),
+				OgreBulletUtils::convert(angularUpperLimit));
 	}
 
 	void setAngularLimits(btVector3 angularLowerLimit,
@@ -59,6 +58,21 @@ public:
 
 		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
 		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
+	}
+
+	void setAngularStiffness(double jointPitchStiffness,
+			double jointYawStiffness, double jointRollStiffness){
+		setJointStiffness(0,jointPitchStiffness);
+		setJointStiffness(1,jointYawStiffness);
+		setJointStiffness(2,jointRollStiffness);
+	}
+
+	void setAngularDamping(double springPitchDampingCoefficient,
+			double springYawDampingCoefficient,
+			double springRollDampingCoefficient){
+		setSpringDampingCoefficient(0,springPitchDampingCoefficient);
+		setSpringDampingCoefficient(1,springYawDampingCoefficient);
+		setSpringDampingCoefficient(2,springRollDampingCoefficient);
 	}
 
 	void setBreakingThreshold(double breakingThreshold) {
@@ -73,7 +87,7 @@ public:
 		mG6DofJoint->enableSpring(index, enable);
 	}
 
-	void setSpringDampingConstant(int index, double damping) {
+	void setSpringDampingCoefficient(int index, double damping) {
 		mG6DofJoint->setDamping(index, damping);
 	}
 

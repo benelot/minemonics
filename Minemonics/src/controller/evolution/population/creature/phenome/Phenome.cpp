@@ -121,26 +121,23 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 				Ogre::Vector3 localAnchorDirOA;
 
 				if (generator->isMirrored()) {
-					localAnchorDirOA = (
-							-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
-							-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
-							-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+					localAnchorDirOA =
+							(-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), -((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), -((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
 				} else if (generator->isFlipped()) {
-					localAnchorDirOA =(
-							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
-							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
-							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+					localAnchorDirOA =
+							(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
 					//get direction vector of object
-					Ogre::Vector3 n(1,0,0);
-					n = ((Limb*) generator->getParentComponent())->getOrientation()* n;
+					Ogre::Vector3 n(1, 0, 0);
+					n =
+							((Limb*) generator->getParentComponent())->getOrientation()
+									* n;
 
 					//reflect on the direction vector
-					localAnchorDirOA = -localAnchorDirOA-2*((-localAnchorDirOA).dotProduct(n))*n;
+					localAnchorDirOA = -localAnchorDirOA
+							- 2 * ((-localAnchorDirOA).dotProduct(n)) * n;
 				} else {
-					localAnchorDirOA = (
-							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(),
-							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(),
-							((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+					localAnchorDirOA =
+							(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
 				}
 
 				//get surface point of limb A in reference frame of A
@@ -228,7 +225,6 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 								morphogene->getOrientationY(),
 								morphogene->getOrientationZ()));
 
-
 				localJointOB = localAnchorOB
 						+ eulerB * localAnchorDirOB.normalisedCopy()
 								* MorphologyConfiguration::JOINT_LENGTH;
@@ -302,12 +298,14 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 				localA.setIdentity();
 				localB.setIdentity();
 
+				MorphogeneBranch* morphogeneBranch =
+						((MorphogeneBranch*) generator->getGeneBranch());
+
 				// define the position and direction of the joint in the reference frame of A
 				localA.setOrigin(OgreBulletUtils::convert(localJointOA));
-				localA.getBasis().setEulerZYX(
-						((MorphogeneBranch*) generator->getGeneBranch())->getJointRoll(),
-						((MorphogeneBranch*) generator->getGeneBranch())->getJointYaw(),
-						((MorphogeneBranch*) generator->getGeneBranch())->getJointPitch());
+				localA.getBasis().setEulerZYX(morphogeneBranch->getJointRoll(),
+						morphogeneBranch->getJointYaw(),
+						morphogeneBranch->getJointPitch());
 
 				// define the position and direction of the joint in the reference frame of B
 				localB.setOrigin(OgreBulletUtils::convert(localJointOB));
@@ -323,14 +321,24 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 
 				//set the angular limits of the joint
 				joint->setAngularLimits(
-						Ogre::Vector3(
-								((MorphogeneBranch*) generator->getGeneBranch())->getJointPitchMinAngle(),
-								((MorphogeneBranch*) generator->getGeneBranch())->getJointYawMinAngle(),
-								((MorphogeneBranch*) generator->getGeneBranch())->getJointRollMinAngle()),
-						Ogre::Vector3(
-								((MorphogeneBranch*) generator->getGeneBranch())->getJointPitchMaxAngle(),
-								((MorphogeneBranch*) generator->getGeneBranch())->getJointYawMaxAngle(),
-								((MorphogeneBranch*) generator->getGeneBranch())->getJointRollMaxAngle()));
+						Ogre::Vector3(morphogeneBranch->getJointPitchMinAngle(),
+								morphogeneBranch->getJointYawMinAngle(),
+								morphogeneBranch->getJointRollMinAngle()),
+						Ogre::Vector3(morphogeneBranch->getJointPitchMaxAngle(),
+								morphogeneBranch->getJointYawMaxAngle(),
+								morphogeneBranch->getJointRollMaxAngle()));
+
+				//set the angular stiffness of the joint
+				joint->setAngularStiffness(
+						morphogeneBranch->getJointPitchStiffness(),
+						morphogeneBranch->getJointYawStiffness(),
+						morphogeneBranch->getJointRollStiffness());
+
+				//set the angular spring damping coefficients of the joint
+				joint->setAngularDamping(
+						morphogeneBranch->getSpringPitchDampingCoefficient(),
+						morphogeneBranch->getSpringYawDampingCoefficient(),
+						morphogeneBranch->getSpringRollDampingCoefficient());
 
 				// add the joint to the phenotype joints
 				mJoints.push_back(joint);

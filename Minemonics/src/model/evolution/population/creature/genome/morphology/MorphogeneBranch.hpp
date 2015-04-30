@@ -70,8 +70,12 @@ public:
 				<< morphogeneBranch.mJointRollMinAngle << "/"
 				<< morphogeneBranch.mJointRollMaxAngle
 				<< "/Actuated" << morphogeneBranch.mActuated
-				<< "/SpringDamping" << morphogeneBranch.mSpringDampingCoefficient
-				<< "/JointStiffness" << morphogeneBranch.mJointStiffness;
+				<< "/SpringPitchDamping" << morphogeneBranch.mSpringPitchDampingCoefficient
+				<< "/SpringYawDamping" << morphogeneBranch.mSpringYawDampingCoefficient
+				<< "/SpringRollDamping" << morphogeneBranch.mSpringRollDampingCoefficient
+				<< "/JointPitchStiffness" << morphogeneBranch.mJointPitchStiffness
+				<< "/JointYawStiffness" << morphogeneBranch.mJointYawStiffness
+				<< "/JointRollStiffness" << morphogeneBranch.mJointRollStiffness;
 	}
 
 	/**
@@ -100,8 +104,12 @@ public:
 						& BOOST_SERIALIZATION_NVP(mJointRollMinAngle)
 						& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle)
 						& BOOST_SERIALIZATION_NVP(mActuated)
-						& BOOST_SERIALIZATION_NVP(mSpringDampingCoefficient)
-						& BOOST_SERIALIZATION_NVP(mJointStiffness);
+						& BOOST_SERIALIZATION_NVP(mSpringPitchDampingCoefficient)
+						& BOOST_SERIALIZATION_NVP(mSpringYawDampingCoefficient)
+						& BOOST_SERIALIZATION_NVP(mSpringRollDampingCoefficient)
+						& BOOST_SERIALIZATION_NVP(mJointPitchStiffness)
+						& BOOST_SERIALIZATION_NVP(mJointYawStiffness)
+						& BOOST_SERIALIZATION_NVP(mJointRollStiffness);
 	}
 
 	// Accessor methods
@@ -233,20 +241,53 @@ public:
 		mJointYawMinAngle = jointYawMinAngle;
 	}
 
-	double getJointStiffness() const {
-		return mJointStiffness;
+	double getJointPitchStiffness() const {
+		return mJointPitchStiffness;
 	}
 
-	void setJointStiffness(double jointStiffness) {
-		mJointStiffness = jointStiffness;
+	void setJointPitchStiffness(double jointPitchStiffness) {
+		mJointPitchStiffness = jointPitchStiffness;
 	}
 
-	double getSpringDampingCoefficient() const {
-		return mSpringDampingCoefficient;
+	double getJointRollStiffness() const {
+		return mJointRollStiffness;
 	}
 
-	void setSpringDampingCoefficient(double springDampingCoefficient) {
-		mSpringDampingCoefficient = springDampingCoefficient;
+	void setJointRollStiffness(double jointRollStiffness) {
+		mJointRollStiffness = jointRollStiffness;
+	}
+
+	double getJointYawStiffness() const {
+		return mJointYawStiffness;
+	}
+
+	void setJointYawStiffness(double jointYawStiffness) {
+		mJointYawStiffness = jointYawStiffness;
+	}
+
+	double getSpringPitchDampingCoefficient() const {
+		return mSpringPitchDampingCoefficient;
+	}
+
+	void setSpringPitchDampingCoefficient(
+			double springPitchDampingCoefficient) {
+		mSpringPitchDampingCoefficient = springPitchDampingCoefficient;
+	}
+
+	double getSpringRollDampingCoefficient() const {
+		return mSpringRollDampingCoefficient;
+	}
+
+	void setSpringRollDampingCoefficient(double springRollDampingCoefficient) {
+		mSpringRollDampingCoefficient = springRollDampingCoefficient;
+	}
+
+	double getSpringYawDampingCoefficient() const {
+		return mSpringYawDampingCoefficient;
+	}
+
+	void setSpringYawDampingCoefficient(double springYawDampingCoefficient) {
+		mSpringYawDampingCoefficient = springYawDampingCoefficient;
 	}
 
 private:
@@ -275,25 +316,21 @@ private:
 	/**
 	 * The spring damping coefficient of the joint springs
 	 */
-	//TODO::Check if considered in embryogenesis
-	double mSpringDampingCoefficient;
+	double mSpringPitchDampingCoefficient,mSpringYawDampingCoefficient,mSpringRollDampingCoefficient;
 
 	/**
 	 * The stiffness of the joint
 	 */
-	//TODO::Check if considered in embryogenesis
-	double mJointStiffness;
+	double mJointPitchStiffness,mJointYawStiffness,mJointRollStiffness;
 
 	/**
 	 * Determines if this branch is mirrored through the center of mass of its segment.
 	 */
-	//TODO::Check if considered in embryogenesis
 	bool mMirrored;
 
 	/**
 	 * Determines if this branch is mirrored along the axis defined by the parent gene branch of this branch.
 	 */
-	//TODO::Check if considered in embryogenesis
 	bool mFlipped;
 
 	/**

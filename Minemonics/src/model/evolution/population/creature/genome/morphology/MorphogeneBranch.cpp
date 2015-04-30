@@ -32,8 +32,10 @@ MorphogeneBranch::MorphogeneBranch() : mBranchGeneType(-1), mFlipped(false), mJo
 				0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(
 				0), mActuated(false), mJointPitchMinAngle(0), mJointPitchMaxAngle(
 				0), mJointYawMinAngle(0), mJointYawMaxAngle(0), mJointRollMinAngle(
-				0), mJointRollMaxAngle(0), mMirrored(0), mSpringDampingCoefficient(
-				0), mJointStiffness(0) {
+				0), mJointRollMaxAngle(0), mMirrored(0), mSpringPitchDampingCoefficient(
+				0), mJointPitchStiffness(0),mSpringYawDampingCoefficient(
+						0), mJointYawStiffness(0),mSpringRollDampingCoefficient(
+								0), mJointRollStiffness(0) {
 }
 
 void MorphogeneBranch::initialize() {
@@ -95,14 +97,26 @@ void MorphogeneBranch::initialize() {
 	/**
 	 * The spring damping coefficient
 	 */
-	mSpringDampingCoefficient = randomness.nextDouble(
+	mSpringPitchDampingCoefficient = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
+			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
+	mSpringYawDampingCoefficient = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
+			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
+	mSpringRollDampingCoefficient = randomness.nextDouble(
 			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
 			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
 
 	/**
 	 * The joint stiffness
 	 */
-	mJointStiffness = randomness.nextDouble(
+	mJointPitchStiffness = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
+			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
+	mJointYawStiffness = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
+			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
+	mJointRollStiffness = randomness.nextDouble(
 			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
 			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
 }
@@ -180,11 +194,27 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mSpringDampingCoefficient != geneBranch.mSpringDampingCoefficient) {
+	if (mSpringPitchDampingCoefficient != geneBranch.mSpringPitchDampingCoefficient) {
 		return false;
 	}
 
-	if (mJointStiffness != geneBranch.mJointStiffness) {
+	if (mJointPitchStiffness != geneBranch.mJointPitchStiffness) {
+		return false;
+	}
+
+	if (mSpringYawDampingCoefficient != geneBranch.mSpringYawDampingCoefficient) {
+		return false;
+	}
+
+	if (mJointYawStiffness != geneBranch.mJointYawStiffness) {
+		return false;
+	}
+
+	if (mSpringRollDampingCoefficient != geneBranch.mSpringRollDampingCoefficient) {
+		return false;
+	}
+
+	if (mJointRollStiffness != geneBranch.mJointRollStiffness) {
 		return false;
 	}
 

@@ -1,10 +1,3 @@
-/*
- * JointPhysics.h
- *
- *  Created on: Apr 14, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_
 
@@ -25,9 +18,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The joint physics interface defines the methods defining a joint independent of the implementation.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-04-14
  * @author		Benjamin Ellenberger
  */
 class JointPhysics {
@@ -41,6 +34,13 @@ public:
 
 	virtual void setAngularLimits(Ogre::Vector3 angularLowerLimit,
 			Ogre::Vector3 angularUpperLimit) = 0;
+
+	virtual void setAngularStiffness(double jointPitchStiffness,
+			double jointYawStiffness, double jointRollStiffness) = 0;
+
+	virtual void setAngularDamping(double springPitchDampingCoefficient,
+			double springYawDampingCoefficient,
+			double springRollDampingCoefficient) = 0;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */
