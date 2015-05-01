@@ -1,13 +1,6 @@
-/*
- * CameraHandler.cpp
- *
- *  Created on: Feb 13, 2015
- *      Author: leviathan
- */
-
-//# corresponding header
-#include <configuration/CameraConfiguration.hpp>
-#include <controller/camera/CameraHandler.hpp>
+//# corresponding headers
+//# forward declarations
+//# system headers
 #include <stddef.h>
 
 //## controller headers
@@ -21,24 +14,27 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/CameraConfiguration.hpp>
 
 //## controller headers
+#include <controller/camera/CameraHandler.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
 
 CameraHandler::CameraHandler(SimulationManager* simulationMgr) :
-		mCamNode(NULL), mSimulationMgr(simulationMgr) {
-	// set the rotation and move speed
-	mMove = CameraConfiguration::CAMERA_MOVEMENT_SPEED;
-	mRotate = CameraConfiguration::CAMERA_ROTATION_SPEED;
-
-	mDirection = Ogre::Vector3::ZERO;
-
+		mCamNode(NULL), mSimulationMgr(simulationMgr), mMove(
+				CameraConfiguration::CAMERA_MOVEMENT_SPEED), mRotate(
+				CameraConfiguration::CAMERA_ROTATION_SPEED), mDirection(
+				Ogre::Vector3::ZERO) {
 }
 
 CameraHandler::~CameraHandler() {
-	// TODO Auto-generated destructor stub
+	delete mCamNode;
+	mCamNode = NULL;
+
+	mSimulationMgr = NULL;
 }
 
 void CameraHandler::reposition(float timeSinceLastFrame) {

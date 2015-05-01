@@ -67,7 +67,7 @@ public:
 	void graft();
 
 private:
-	int length;
+	int mLength;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_GENOME_HPP_ */

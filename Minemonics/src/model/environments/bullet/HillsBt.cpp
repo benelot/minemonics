@@ -1,14 +1,13 @@
-/*
- * HillsBt.cpp
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
-
-//# corresponding header
-#include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+//# corresponding headers
 #include <model/environments/bullet/HillsBt.hpp>
 
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+#include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+
+//## view headers
 //# custom headers
 //## base headers
 //## configuration headers
@@ -19,12 +18,17 @@
 
 HillsBt::HillsBt() :
 		mGroundBody(NULL), mGroundMotionState(NULL), mGroundShape(NULL) {
-	// TODO Auto-generated constructor stub
-
 }
 
 HillsBt::~HillsBt() {
-	// TODO Auto-generated destructor stub
+	delete mGroundBody;
+	mGroundBody = 0;
+
+	delete mGroundMotionState;
+	mGroundMotionState = 0;
+
+	delete mGroundShape;
+	mGroundShape = 0;
 }
 
 void HillsBt::initialize(Ogre::Terrain* terrain) {

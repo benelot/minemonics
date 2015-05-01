@@ -7,12 +7,9 @@
 
 #include <model/evolution/population/creature/genome/Genome.hpp>
 
-Genome::Genome() {
-	// TODO Auto-generated constructor stub
-
+Genome::Genome():mLength(0) {
 }
 
 Genome::~Genome() {
-	// TODO Auto-generated destructor stub
 }
 

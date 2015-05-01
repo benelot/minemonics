@@ -74,7 +74,7 @@ public:
 	 * @return Whether the limb is in the physical world or not.
 	 */
 	bool isInWorld() const {
-		return inWorld;
+		return mInWorld;
 	}
 
 	/**
@@ -91,14 +91,14 @@ public:
 
 protected:
 	void setInWorld(bool inWorld) {
-		this->inWorld = inWorld;
+		mInWorld = inWorld;
 	}
 
 private:
 	/**
 	 * Whether the limb is in the world or not.
 	 */
-	bool inWorld;
+	bool mInWorld;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBPHYSICS_HPP_ */

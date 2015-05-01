@@ -9,11 +9,8 @@
 
 ControlInput::ControlInput() :
 		mReceivedInput(false), mValue(0) {
-	// TODO Auto-generated constructor stub
-
 }
 
 ControlInput::~ControlInput() {
-	// TODO Auto-generated destructor stub
 }
 

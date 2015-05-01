@@ -1,10 +1,3 @@
-/*
- * Gene.cpp
- *
- *  Created on: Mar 20, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/evolution/population/creature/genome/Gene.hpp>
 
@@ -23,16 +16,13 @@
 
 Gene::Gene() :
 		mGeneType(UnknownGene) {
-	// TODO Auto-generated constructor stub
-
-}
-
-void Gene::initialize(GeneType geneType) {
-
 }
 
 Gene::~Gene() {
-	// TODO Auto-generated destructor stub
+}
+
+void Gene::initialize(GeneType geneType) {
+	mGeneType = geneType;
 }
 
 bool Gene::equals(const Gene& gene) const {

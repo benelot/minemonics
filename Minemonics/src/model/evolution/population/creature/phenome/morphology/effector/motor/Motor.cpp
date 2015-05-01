@@ -21,7 +21,7 @@
 //## view headers
 //## utils headers
 
-Motor::Motor()
+Motor::Motor():mMaxForce(0),mMaxSpeed(0),mPositionControlled(true)
 {
 
 }

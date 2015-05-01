@@ -13,8 +13,6 @@
 //## view headers
 
 Hills::Hills() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Hills::~Hills() {

@@ -1,10 +1,3 @@
-/*
- * JointBt.cpp
- *
- *  Created on: Mar 25, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 
@@ -23,12 +16,13 @@
 
 JointBt::JointBt() :
 		mG6DofJoint(NULL),mWorld(NULL) {
-	// TODO Auto-generated constructor stub
-
 }
 
 JointBt::~JointBt() {
-	// TODO Auto-generated destructor stub
+	removeFromWorld();
+	delete mG6DofJoint;
+	mG6DofJoint = NULL;
+	mWorld = NULL;
 }
 
 void JointBt::initialize(btDynamicsWorld* world,btRigidBody* bodyA, btRigidBody* bodyB,

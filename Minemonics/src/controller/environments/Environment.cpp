@@ -1,14 +1,20 @@
-/*
- * Environment.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
-//# corresponding header
+//# corresponding headers
 #include <controller/environments/Environment.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
 #include <model/environments/bullet/EnvironmentBt.hpp>
 #include <model/environments/EnvironmentPhysics.hpp>
+
+//## view headers
 #include <view/environments/EnvironmentGraphics.hpp>
 
 //## utils headers
@@ -19,7 +25,13 @@ Environment::Environment() :
 }
 
 Environment::~Environment() {
-	// TODO Auto-generated destructor stub
+	mSimulationMgr = NULL;
+
+	delete mEnvironmentGraphics;
+	mEnvironmentGraphics = NULL;
+
+	delete mEnvironmentPhysics;
+	mEnvironmentPhysics = NULL;
 }
 
 void Environment::initialize(SimulationManager* simulationMgr,

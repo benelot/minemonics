@@ -35,7 +35,6 @@ HillsO3D::HillsO3D(SimulationManager* simulationMgr) :
 }
 
 HillsO3D::~HillsO3D() {
-	// TODO Auto-generated destructor stub
 }
 
 void HillsO3D::initialize(Ogre::Light* l) {

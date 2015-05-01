@@ -1,19 +1,27 @@
-/*
- * Evolution.cpp
- *
- *  Created on: Apr 28, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
 #include <controller/evolution/Evolution.hpp>
 
-Evolution::Evolution():mCurrentCreature(NULL),mEnvironment(NULL) {
-	// TODO Auto-generated constructor stub
+//## model headers
+//## view headers
+//## utils headers
 
+
+Evolution::Evolution():mCurrentCreature(NULL),mEnvironment(NULL) {
 }
 
 Evolution::~Evolution() {
-	// TODO Auto-generated destructor stub
+	mCurrentCreature = NULL;
+	delete mEnvironment;
+	mEnvironment = NULL;
 }
 
 void Evolution::initialize(Environment* environment) {

@@ -1,14 +1,11 @@
-/*
- * Ones.cpp
- *
- *  Created on: Feb 25, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/evolution/juries/Ones.hpp>
 
 //# forward declarations
+#ifndef NULL
+#define NULL 0
+#endif
+
 //# system headers
 //## controller headers
 //## model headers
@@ -22,12 +19,12 @@
 //## utils headers
 
 Ones::Ones(double weight) :
-		Jury(Jury::ONES, weight), mEvaluationSubject(0) {
+		Jury(Jury::ONES, weight), mEvaluationSubject(NULL) {
 
 }
 
 Ones::~Ones() {
-	// TODO Auto-generated destructor stub
+	mEvaluationSubject = NULL;
 }
 
 void Ones::setEvaluationSubject(const std::vector<bool>& x) {

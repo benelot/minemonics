@@ -21,7 +21,7 @@
 //## view headers
 //## utils headers
 
-LimbPhysics::LimbPhysics() {
+LimbPhysics::LimbPhysics():mInWorld(false) {
 }
 
 LimbPhysics::~LimbPhysics() {

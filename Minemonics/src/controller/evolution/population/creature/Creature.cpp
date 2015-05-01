@@ -26,13 +26,16 @@ class SimulationManager;
 //## utils headers
 
 Creature::Creature() :
-		mCreature(0), mPhenotype(0) {
-	// TODO Auto-generated constructor stub
+		mCreature(NULL), mPhenotype(NULL) {
 
 }
 
 Creature::~Creature() {
-	// TODO Auto-generated destructor stub
+	delete mCreature;
+	mCreature = NULL;
+
+	delete mPhenotype;
+	mPhenotype = NULL;
 }
 
 void Creature::initialize(SimulationManager* simulationManager,

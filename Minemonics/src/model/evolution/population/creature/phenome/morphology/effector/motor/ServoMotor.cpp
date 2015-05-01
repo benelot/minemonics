@@ -1,10 +1,3 @@
-/*
- * ServoMotor.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
@@ -27,11 +20,11 @@
 
 ServoMotor::ServoMotor() :
 		mJointMotorIndex(-1), mMotorBt(NULL) {
-	// TODO Auto-generated destructor stub
 }
 
 ServoMotor::~ServoMotor() {
-	// TODO Auto-generated constructor stub
+	mJointMotorIndex = -1;
+	mMotorBt = 0;
 }
 
 void ServoMotor::initialize(int jointMotorIndex,

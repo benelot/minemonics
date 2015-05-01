@@ -25,8 +25,6 @@
 
 InfoOverlay::InfoOverlay() :
 		mCamera(NULL), mInfoOverlay(NULL), mInfoOverlayContainer(NULL) {
-	// TODO Auto-generated constructor stub
-
 }
 
 InfoOverlay::~InfoOverlay() {

@@ -33,7 +33,7 @@ CEGUIBuilder::CEGUIBuilder(SimulationManager* simulationMgr) {
 }
 
 CEGUIBuilder::~CEGUIBuilder() {
-	// TODO Auto-generated destructor stub
+	mSimulationMgr = NULL;
 }
 
 CEGUI::Window* CEGUIBuilder::createMenu() {

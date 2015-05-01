@@ -26,7 +26,6 @@ ControllerGene::ControllerGene():mControllerGeneType(GenericControllerGene) {
 }
 
 ControllerGene::~ControllerGene() {
-	// TODO Auto-generated destructor stub
 }
 
 bool ControllerGene::equals(const ControllerGene& controllerGene) const {
