@@ -1,4 +1,5 @@
 //TODO: Separate Phenome into model and controller classes
+
 //# corresponding header
 //# forward declarations
 //# system headers
@@ -43,6 +44,8 @@ Phenome::Phenome() :
 }
 
 Phenome::~Phenome() {
+	mSimulationManager = NULL;
+	mWorld = NULL;
 }
 
 void Phenome::initialize(SimulationManager* simulationManager) {
@@ -339,6 +342,12 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 						morphogeneBranch->getSpringPitchDampingCoefficient(),
 						morphogeneBranch->getSpringYawDampingCoefficient(),
 						morphogeneBranch->getSpringRollDampingCoefficient());
+
+				//set if the angular motor is enabled
+				joint->setAngularMotorEnabled(
+						morphogeneBranch->isJointPitchMotorEnabled(),
+						morphogeneBranch->isJointYawMotorEnabled(),
+						morphogeneBranch->isJointRollMotorEnabled());
 
 				// add the joint to the phenotype joints
 				mJoints.push_back(joint);

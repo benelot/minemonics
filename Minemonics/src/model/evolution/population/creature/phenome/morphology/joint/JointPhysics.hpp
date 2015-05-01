@@ -41,6 +41,8 @@ public:
 	virtual void setAngularDamping(double springPitchDampingCoefficient,
 			double springYawDampingCoefficient,
 			double springRollDampingCoefficient) = 0;
+
+	virtual void setRotationalLimitMotorEnabled(int index, bool enable) = 0;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */

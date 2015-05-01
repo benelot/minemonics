@@ -9,8 +9,6 @@
 #include <model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 
 //# forward declarations
-class Morphogene;
-
 //# system headers
 //## controller headers
 //## model headers
@@ -28,14 +26,16 @@ class Morphogene;
 //## utils headers
 #include <utils/Randomness.hpp>
 
-MorphogeneBranch::MorphogeneBranch() : mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(
+MorphogeneBranch::MorphogeneBranch() :
+		mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(
 				0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(
-				0), mActuated(false), mJointPitchMinAngle(0), mJointPitchMaxAngle(
+				0), mJointPitchMinAngle(0), mJointPitchMaxAngle(
 				0), mJointYawMinAngle(0), mJointYawMaxAngle(0), mJointRollMinAngle(
 				0), mJointRollMaxAngle(0), mMirrored(0), mSpringPitchDampingCoefficient(
-				0), mJointPitchStiffness(0),mSpringYawDampingCoefficient(
-						0), mJointYawStiffness(0),mSpringRollDampingCoefficient(
-								0), mJointRollStiffness(0) {
+				0), mJointPitchStiffness(0), mSpringYawDampingCoefficient(0), mJointYawStiffness(
+				0), mSpringRollDampingCoefficient(0), mJointRollStiffness(0), mJointPitchMotorEnabled(
+				false), mJointYawMotorEnabled(false), mJointRollMotorEnabled(
+				false) {
 }
 
 void MorphogeneBranch::initialize() {
@@ -87,11 +87,6 @@ void MorphogeneBranch::initialize() {
 
 	mActive = randomness.nextBoolean();
 
-	/**
-	 * Set whether the joint should be actuated.
-	 */
-	mActuated = randomness.nextBoolean();
-
 	mBranchGeneType = -1;
 
 	/**
@@ -119,6 +114,13 @@ void MorphogeneBranch::initialize() {
 	mJointRollStiffness = randomness.nextDouble(
 			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
 			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
+
+	/**
+	 * Whether the joint motors are enabled or not.
+	 */
+	mJointPitchMotorEnabled = randomness.nextBoolean();
+	mJointYawMotorEnabled = randomness.nextBoolean();
+	mJointRollMotorEnabled = randomness.nextBoolean();
 }
 
 MorphogeneBranch::~MorphogeneBranch() {
@@ -190,11 +192,8 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mActuated != geneBranch.mActuated) {
-		return false;
-	}
-
-	if (mSpringPitchDampingCoefficient != geneBranch.mSpringPitchDampingCoefficient) {
+	if (mSpringPitchDampingCoefficient
+			!= geneBranch.mSpringPitchDampingCoefficient) {
 		return false;
 	}
 
@@ -202,7 +201,8 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mSpringYawDampingCoefficient != geneBranch.mSpringYawDampingCoefficient) {
+	if (mSpringYawDampingCoefficient
+			!= geneBranch.mSpringYawDampingCoefficient) {
 		return false;
 	}
 
@@ -210,11 +210,24 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mSpringRollDampingCoefficient != geneBranch.mSpringRollDampingCoefficient) {
+	if (mSpringRollDampingCoefficient
+			!= geneBranch.mSpringRollDampingCoefficient) {
 		return false;
 	}
 
 	if (mJointRollStiffness != geneBranch.mJointRollStiffness) {
+		return false;
+	}
+
+	if (mJointPitchMotorEnabled != geneBranch.mJointPitchMotorEnabled) {
+		return false;
+	}
+
+	if (mJointYawMotorEnabled != geneBranch.mJointYawMotorEnabled) {
+		return false;
+	}
+
+	if (mJointRollMotorEnabled != geneBranch.mJointRollMotorEnabled) {
 		return false;
 	}
 

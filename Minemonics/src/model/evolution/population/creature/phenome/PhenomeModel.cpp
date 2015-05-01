@@ -1,18 +1,22 @@
-/*
- * PhenomeModel.cpp
- *
- *  Created on: Apr 29, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
 #include <model/evolution/population/creature/phenome/PhenomeModel.hpp>
 
-PhenomeModel::PhenomeModel():inWorld(false) {
-	// TODO Auto-generated constructor stub
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
+PhenomeModel::PhenomeModel():inWorld(false) {
 }
 
 PhenomeModel::~PhenomeModel() {
-	// TODO Auto-generated destructor stub
 }
 

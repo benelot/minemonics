@@ -91,3 +91,10 @@ void Joint::setAngularDamping(double springPitchDampingCoefficient,
 	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
 			springYawDampingCoefficient, springRollDampingCoefficient);
 }
+
+void Joint::setAngularMotorEnabled(bool pitchEnable, bool yawEnable,
+		bool rollEnable) {
+	mJointPhysics->setRotationalLimitMotorEnabled(0, pitchEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(1, yawEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(2, rollEnable);
+}

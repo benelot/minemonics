@@ -57,8 +57,8 @@ private:
 	Ogre::TexturePtr mTexture;
 	CEGUI::Window* mMathGLWindow;
 	double mTime;
-	CEGUI::GUIContext* renderGuiContext;
-	CEGUI::TextureTarget* renderTextureTarget;
+	CEGUI::GUIContext* mRenderGuiContext;
+	CEGUI::TextureTarget* mRenderTextureTarget;
 	bool mMakePrint;
 };
 

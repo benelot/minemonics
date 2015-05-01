@@ -53,6 +53,8 @@ public:
 
 	void setAngularDamping(double springPitchDampingCoefficient,double springYawDampingCoefficient,double springRollDampingCoefficient);
 
+	void setAngularMotorEnabled(bool pitchEnable,bool yawEnable,bool rollEnable);
+
 	JointGraphics*& getJointGraphics() {
 		return mJointGraphics;
 	}

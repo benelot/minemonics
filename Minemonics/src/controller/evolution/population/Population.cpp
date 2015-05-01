@@ -1,18 +1,22 @@
-/*
- * Population.cpp
- *
- *  Created on: Apr 29, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
 #include <controller/evolution/population/Population.hpp>
 
-Population::Population() {
-	// TODO Auto-generated constructor stub
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
+Population::Population() {
 }
 
 Population::~Population() {
-	// TODO Auto-generated destructor stub
 }
 

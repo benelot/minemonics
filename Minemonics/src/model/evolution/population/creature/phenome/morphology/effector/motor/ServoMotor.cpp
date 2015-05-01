@@ -28,7 +28,17 @@ ServoMotor::~ServoMotor() {
 }
 
 void ServoMotor::initialize(int jointMotorIndex,
-		btRotationalLimitMotor* motorBt) {
+		btRotationalLimitMotor* motorBt,double maxForce,double maxSpeed) {
 	mJointMotorIndex = jointMotorIndex;
 	mMotorBt = motorBt;
+	mMaxForce = maxForce;
+	mMaxSpeed = maxSpeed;
+	mMotorBt->m_maxMotorForce = mMaxForce;
+	//TODO:: Check if this is the right velocity
+	mMotorBt->m_targetVelocity = mMaxSpeed;
+}
+
+void ServoMotor::apply()
+{
+	mMotorBt->m_currentPosition = getValue();
 }

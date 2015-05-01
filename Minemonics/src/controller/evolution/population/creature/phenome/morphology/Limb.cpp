@@ -1,35 +1,42 @@
-//# corresponding header
-#include <BulletDynamics/Dynamics/btRigidBody.h>
+//# corresponding headers
+//# forward declarations
+#ifndef NULL
+#define NULL 0
+#endif
 
+//# system headers
+//## controller headers
 //## model headers
-#include <boost/lexical_cast.hpp>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
 
-//## view headers
 #include <boost/lexical_cast.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
-#include <configuration/PhysicsConfiguration.hpp>
-#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/physics/PhysicsController.hpp>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
+//## view headers
 //# custom headers
 //## base headers
 #include <SimulationManager.hpp>
 
-//## model headers
+//## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
 
+//## controller headers
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/physics/PhysicsController.hpp>
+
+//## model headers
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+
+//## view headers
 #include <view/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
+#include <view/bullet/OgreBulletUtils.hpp>
 
 //## utils headers
-
-#ifndef NULL
-#define NULL 0
-#endif
 
 Limb::Limb() :
 		mLimbGraphics(NULL), mLimbPhysics(NULL) {
@@ -37,27 +44,31 @@ Limb::Limb() :
 
 Limb::~Limb() {
 	delete mLimbGraphics;
+	mLimbGraphics = NULL;
+
 	delete mLimbPhysics;
+	mLimbPhysics = NULL;
 }
 
 void Limb::initialize(SimulationManager* simulationManager,
 		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,Ogre::ColourValue color) {
+		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
+		Ogre::ColourValue color) {
 	// Define the new component as a limb
 	Component::initialize(Component::LimbComponent);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size,color);
+	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size,
+			color);
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
 	((LimbBt*) mLimbPhysics)->initialize(
 			simulationManager->getPhysicsController().getDynamicsWorld(), type,
-			btVector3(position.x, position.y, position.z),
-			btQuaternion(orientation.x, orientation.y, orientation.z,
-					orientation.w), btVector3(size.x, size.y, size.z),
-			btScalar(mass));
+			OgreBulletUtils::convert(position),
+			OgreBulletUtils::convert(orientation),
+			OgreBulletUtils::convert(size), btScalar(mass));
 
 	// Update the state of the limb.
 	update();

@@ -19,12 +19,11 @@
 //## utils headers
 
 Ones::Ones(double weight) :
-		Jury(Jury::ONES, weight), mEvaluationSubject(NULL) {
+		Jury(Jury::ONES, weight) {
 
 }
 
 Ones::~Ones() {
-	mEvaluationSubject = NULL;
 }
 
 void Ones::setEvaluationSubject(const std::vector<bool>& x) {

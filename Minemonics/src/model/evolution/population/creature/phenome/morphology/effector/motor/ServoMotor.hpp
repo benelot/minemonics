@@ -40,7 +40,12 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(int jointMotorIndex, btRotationalLimitMotor* motorBt);
+	void initialize(int jointMotorIndex, btRotationalLimitMotor* motorBt,
+			double maxForce, double maxSpeed);
+
+	void apply();
+
+	//Accessor methods
 
 	int getJointMotorIndex() const {
 		return mJointMotorIndex;

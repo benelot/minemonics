@@ -54,7 +54,7 @@ public:
 		mPositionControlled = positionControlled;
 	}
 
-private:
+protected:
 
 	/**
 	 * Direction or position?

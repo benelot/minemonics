@@ -1,12 +1,3 @@
-/*
- * SineController.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- *
- *      This controller returns nothing else than a sine wave output to control a joint position or torque.
- */
-
 //# corresponding headers
 #include <model/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 

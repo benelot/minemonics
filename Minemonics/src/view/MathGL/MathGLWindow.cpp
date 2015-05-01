@@ -33,18 +33,16 @@
 
 MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
 		int textureHeight, CEGUI::USize windowSize,CEGUI::USize windowPosition) :
-		mTime(0),mMakePrint(false) {
-
-	mSimulationMgr = simulationMgr;
+		mSimulationMgr(simulationMgr),mTime(0),mMakePrint(false) {
 
 	CEGUI::Sizef size(static_cast<float>(textureWidth),
 			static_cast<float>(textureHeight));
 
 	// We create a CEGUI texture target and create a GUIContext that will use it.
-	renderTextureTarget = mSimulationMgr->getRenderer()->createTextureTarget();
-	renderTextureTarget->declareRenderSize(size);
-	renderGuiContext = &mSimulationMgr->getCEGUISystem()->createGUIContext(
-			static_cast<CEGUI::RenderTarget&>(*renderTextureTarget));
+	mRenderTextureTarget = mSimulationMgr->getRenderer()->createTextureTarget();
+	mRenderTextureTarget->declareRenderSize(size);
+	mRenderGuiContext = &mSimulationMgr->getCEGUISystem()->createGUIContext(
+			static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
 
 	mTexture = mSimulationMgr->getRoot()->getTextureManager()->createManual(
 			"RTT", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -73,7 +71,7 @@ MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
 	CEGUI::Rectf imageArea;
 
 	//Flipping is necessary due to differences between renderers regarding top or bottom being the origin
-	if (renderTextureTarget->isRenderingInverted())
+	if (mRenderTextureTarget->isRenderingInverted())
 		imageArea = CEGUI::Rectf(0.0f, textureHeight, textureWidth, 0.0f);
 	else
 		imageArea = CEGUI::Rectf(0.0f, 0.0f, textureWidth, textureHeight);
@@ -123,7 +121,16 @@ MathGLWindow::MathGLWindow(SimulationManager* simulationMgr, int textureWidth,
 }
 
 MathGLWindow::~MathGLWindow() {
-	// TODO Auto-generated destructor stub
+	mSimulationMgr = NULL;
+
+	delete mMathGLWindow;
+	mMathGLWindow = NULL;
+
+	delete mRenderGuiContext;
+	mRenderGuiContext = NULL;
+
+	delete mRenderTextureTarget;
+	mRenderTextureTarget = NULL;
 }
 
 void MathGLWindow::update(double timeSinceLastFrame) {
@@ -166,8 +173,8 @@ void MathGLWindow::update(double timeSinceLastFrame) {
 	CEGUI::Renderer* gui_renderer(mSimulationMgr->getRenderer());
 	gui_renderer->beginRendering();
 
-	renderTextureTarget->clear();
-	renderGuiContext->draw();
+	mRenderTextureTarget->clear();
+	mRenderGuiContext->draw();
 
 	gui_renderer->endRendering();
 

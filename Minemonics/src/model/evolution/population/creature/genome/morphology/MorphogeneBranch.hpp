@@ -69,13 +69,18 @@ public:
 				<< morphogeneBranch.mJointYawMaxAngle << "][Roll:"
 				<< morphogeneBranch.mJointRollMinAngle << "/"
 				<< morphogeneBranch.mJointRollMaxAngle
-				<< "/Actuated" << morphogeneBranch.mActuated
-				<< "/SpringPitchDamping" << morphogeneBranch.mSpringPitchDampingCoefficient
-				<< "/SpringYawDamping" << morphogeneBranch.mSpringYawDampingCoefficient
-				<< "/SpringRollDamping" << morphogeneBranch.mSpringRollDampingCoefficient
-				<< "/JointPitchStiffness" << morphogeneBranch.mJointPitchStiffness
-				<< "/JointYawStiffness" << morphogeneBranch.mJointYawStiffness
-				<< "/JointRollStiffness" << morphogeneBranch.mJointRollStiffness;
+				<< "/SpringDamping: [Pitch:"
+				<< morphogeneBranch.mSpringPitchDampingCoefficient << "][Yaw:"
+				<< morphogeneBranch.mSpringYawDampingCoefficient << "][Roll:"
+				<< morphogeneBranch.mSpringRollDampingCoefficient
+				<< "/JointStiffness: [Pitch:"
+				<< morphogeneBranch.mJointPitchStiffness << "][Yaw:"
+				<< morphogeneBranch.mJointYawStiffness << "][Roll:"
+				<< morphogeneBranch.mJointRollStiffness
+				<< "/JointMotorEnabled: [Pitch:"
+				<< morphogeneBranch.mJointPitchMotorEnabled << "][Yaw:"
+				<< morphogeneBranch.mJointYawMotorEnabled << "][Roll:"
+				<< morphogeneBranch.mJointRollMotorEnabled;
 	}
 
 	/**
@@ -103,13 +108,15 @@ public:
 						& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
 						& BOOST_SERIALIZATION_NVP(mJointRollMinAngle)
 						& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle)
-						& BOOST_SERIALIZATION_NVP(mActuated)
 						& BOOST_SERIALIZATION_NVP(mSpringPitchDampingCoefficient)
 						& BOOST_SERIALIZATION_NVP(mSpringYawDampingCoefficient)
 						& BOOST_SERIALIZATION_NVP(mSpringRollDampingCoefficient)
 						& BOOST_SERIALIZATION_NVP(mJointPitchStiffness)
 						& BOOST_SERIALIZATION_NVP(mJointYawStiffness)
-						& BOOST_SERIALIZATION_NVP(mJointRollStiffness);
+						& BOOST_SERIALIZATION_NVP(mJointRollStiffness)
+						& BOOST_SERIALIZATION_NVP(mJointPitchMotorEnabled)
+						& BOOST_SERIALIZATION_NVP(mJointYawMotorEnabled)
+						& BOOST_SERIALIZATION_NVP(mJointRollMotorEnabled);
 	}
 
 	// Accessor methods
@@ -183,14 +190,6 @@ public:
 
 	void setMirrored(bool mirrored) {
 		mMirrored = mirrored;
-	}
-
-	bool isActuated() const {
-		return mActuated;
-	}
-
-	void setActuated(bool actuated) {
-		mActuated = actuated;
 	}
 
 	double getJointPitchMaxAngle() const {
@@ -290,6 +289,30 @@ public:
 		mSpringYawDampingCoefficient = springYawDampingCoefficient;
 	}
 
+	bool isJointPitchMotorEnabled() const {
+		return mJointPitchMotorEnabled;
+	}
+
+	void setJointPitchMotorEnabled(bool jointPitchMotorEnabled) {
+		mJointPitchMotorEnabled = jointPitchMotorEnabled;
+	}
+
+	bool isJointRollMotorEnabled() const {
+		return mJointRollMotorEnabled;
+	}
+
+	void setJointRollMotorEnabled(bool jointRollMotorEnabled) {
+		mJointRollMotorEnabled = jointRollMotorEnabled;
+	}
+
+	bool isJointYawMotorEnabled() const {
+		return mJointYawMotorEnabled;
+	}
+
+	void setJointYawMotorEnabled(bool jointYawMotorEnabled) {
+		mJointYawMotorEnabled = jointYawMotorEnabled;
+	}
+
 private:
 	/**
 	 * Spherical coordinates around the origin of the segment at the center of mass.
@@ -308,20 +331,20 @@ private:
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 
 	/**
-	 * Actuated joint?
+	 * The spring damping coefficient of the joint springs.
 	 */
-	//TODO::Check if considered in embryogenesis
-	bool mActuated;
+	double mSpringPitchDampingCoefficient, mSpringYawDampingCoefficient,
+			mSpringRollDampingCoefficient;
 
 	/**
-	 * The spring damping coefficient of the joint springs
+	 * The stiffness of the joint.
 	 */
-	double mSpringPitchDampingCoefficient,mSpringYawDampingCoefficient,mSpringRollDampingCoefficient;
+	double mJointPitchStiffness, mJointYawStiffness, mJointRollStiffness;
 
 	/**
-	 * The stiffness of the joint
+	 * If the angular motor is enabled.
 	 */
-	double mJointPitchStiffness,mJointYawStiffness,mJointRollStiffness;
+	bool mJointPitchMotorEnabled, mJointYawMotorEnabled, mJointRollMotorEnabled;
 
 	/**
 	 * Determines if this branch is mirrored through the center of mass of its segment.
