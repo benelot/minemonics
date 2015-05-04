@@ -1,34 +1,33 @@
-/*
- * SDL2InputHandler.h
- *
- *  Created on: Feb 27, 2015
- *      Author: leviathan
- */
-
 #ifndef SDL2INPUTHANDLER_H_
 #define SDL2INPUTHANDLER_H_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 //# system headers
-//## controller headers
-#include <controller/input/ApplicationKeycode.hpp>
-#include <controller/input/ApplicationMousecode.hpp>
-#include <controller/input/CEGUIInputHandler.hpp>
-#include <SDL.h>
+#include <string>
 
+//## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/input/CEGUIInputHandler.hpp>
+
+//## model headers
+//## view headers
+//## utils headers
 #include <utils/logging/Logger.hpp>
 
+
 /**
- * @brief		Brief
+ * @brief		The SDL2 input handler handles the input coming directly from the hardware layer SDL2 manages and hands the inputs up to its connecting input handlers.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-27
  * @author		Benjamin Ellenberger
  */
 class SDL2InputHandler: public CEGUIInputHandler {
@@ -59,9 +58,6 @@ private:
 
 	int mLastMouseX;
 	int mLastMouseY;
-
-	ApplicationMouseCode::MouseButton convertMouseSDL2toOgre(Uint8 button);
-	ApplicationKeycode::Keycode convertKeySDL2toOgre(SDL_Keycode key);
 };
 
 #endif /* SDL2INPUTHANDLER_H_ */
