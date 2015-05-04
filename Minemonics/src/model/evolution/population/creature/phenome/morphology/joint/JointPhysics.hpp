@@ -14,6 +14,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+
 //## view headers
 //## utils headers
 
@@ -28,9 +30,13 @@ public:
 	JointPhysics();
 	virtual ~JointPhysics();
 
+	virtual void update() = 0;
+
 	virtual void addToWorld() = 0;
 
 	virtual void removeFromWorld() = 0;
+
+	virtual std::vector<Motor*> getMotors() = 0;
 
 	virtual void setAngularLimits(Ogre::Vector3 angularLowerLimit,
 			Ogre::Vector3 angularUpperLimit) = 0;

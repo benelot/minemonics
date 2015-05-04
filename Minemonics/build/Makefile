@@ -1528,6 +1528,60 @@ model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
 .PHONY : model/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
 
+model/evolution/population/creature/phenome/morphology/effector/motor/Motor.o: model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/Motor.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
+
+model/evolution/population/creature/phenome/morphology/effector/motor/Motor.i: model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/Motor.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
+
+model/evolution/population/creature/phenome/morphology/effector/motor/Motor.s: model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/Motor.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
+
+model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.o: model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.o
+
+# target to build an object file
+model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
+
+model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.i: model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.i
+
+# target to preprocess a source file
+model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
+
+model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.s: model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.s
+
+# target to generate assembly for a file
+model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
+.PHONY : model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
+
 model/evolution/population/creature/phenome/morphology/joint/JointBt.o: model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
 .PHONY : model/evolution/population/creature/phenome/morphology/joint/JointBt.o
 
@@ -2995,6 +3049,12 @@ help:
 	@echo "... model/evolution/population/creature/phenome/controller/sine/SineController.o"
 	@echo "... model/evolution/population/creature/phenome/controller/sine/SineController.i"
 	@echo "... model/evolution/population/creature/phenome/controller/sine/SineController.s"
+	@echo "... model/evolution/population/creature/phenome/morphology/effector/motor/Motor.o"
+	@echo "... model/evolution/population/creature/phenome/morphology/effector/motor/Motor.i"
+	@echo "... model/evolution/population/creature/phenome/morphology/effector/motor/Motor.s"
+	@echo "... model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.o"
+	@echo "... model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.i"
+	@echo "... model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.s"
 	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.o"
 	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.i"
 	@echo "... model/evolution/population/creature/phenome/morphology/joint/JointBt.s"

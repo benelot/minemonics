@@ -23,7 +23,7 @@
 //## utils headers
 
 SineController::SineController() :
-		Controller(SINE_CONTROLLER), mAmplitude(0), mFrequency(0), mShift(0), mTime(
+		Controller(SINE_CONTROLLER), mAmplitude(0.5f), mFrequency(1), mXShift(0), mYShift(1), mTime(
 				0) {
 }
 
@@ -31,9 +31,11 @@ SineController::~SineController() {
 }
 
 void SineController::initialize(double amplitude, double frequency,
-		double shift) {
+		double xShift,double yShift) {
 	mAmplitude = amplitude;
 	mFrequency = frequency;
+	mXShift = xShift;
+	mYShift = yShift;
 }
 
 void SineController::perform(double time) {
@@ -44,7 +46,9 @@ void SineController::perform(double time) {
 	} else {
 		input = time;
 	}
-	double output = mAmplitude * sin(mFrequency * input);
+	double output = mAmplitude * sin(mFrequency * input + mXShift) + mYShift;
+	//clamp output to [0;1]
+	output = (output > 1)?1:(output < 0)?0:output;
 
 	// distribute the output to the adjacent controllers or endpoints
 	distributeOutput(output);

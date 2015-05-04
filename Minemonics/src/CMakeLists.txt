@@ -268,7 +268,9 @@ set(MODELHDRS
 	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
 	./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
 	./model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp
-	
+	./model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp
+	./model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp
+		
 	## controller
 	./model/evolution/population/creature/phenome/controller/Controller.hpp
 	./model/evolution/population/creature/phenome/controller/ControlInput.hpp
@@ -312,6 +314,8 @@ set(MODELSRCS
 	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
     ./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
 	./model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
+	./model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp
+	./model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp
 	
 	## controller
     ./model/evolution/population/creature/phenome/controller/Controller.cpp

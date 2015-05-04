@@ -184,10 +184,10 @@ void SimulationManager::createFrameListener(void) {
 		Creature* creature = new Creature();
 
 		creature->initialize(this,
-				Ogre::Vector3(randomness.nextDouble(0, 10000),
+				Ogre::Vector3(randomness.nextDouble(-1000, 1000),
 						randomness.nextDouble(300, 1000),
-						randomness.nextDouble(0, 10000)),
-				randomness.nextDouble(1, 50));
+						randomness.nextDouble(-1000, 1000)),
+				randomness.nextDouble(40, 50));
 		creature->performEmbryogenesis();
 		mCreatures.push_back(creature);
 		creature->addToWorld();

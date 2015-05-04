@@ -154,6 +154,26 @@ public:
 	static const double JOINT_MAX_SPRING_COEFFICIENT = 10;
 
 	/**
+	 * The smallest max strength of a joint motor
+	 */
+	static const double JOINT_MIN_FORCE = 1;
+
+	/**
+	 * The highest max strength of a joint motor
+	 */
+	static const double JOINT_MAX_FORCE = 10;
+
+	/**
+	 * The smallest max speed of a joint motor
+	 */
+	static const double JOINT_MIN_SPEED = 1;
+
+	/**
+	 * The highest max speed of a joint motor
+	 */
+	static const double JOINT_MAX_SPEED = 10;
+
+	/**
 	 * The initial branch number mean
 	 */
 	static const double BODY_BRANCH_INITIAL_MEAN = 5;

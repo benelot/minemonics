@@ -32,8 +32,10 @@ public:
 	 * Initialize the sine controller with a certain amplitude and frequency for the sine wave and the motor it controls.
 	 * @param amplitude The amplitude of the sine wave.
 	 * @param frequency The frequency of the sine wave.
+	 * @param xShift shift in x direction.
+	 * @param yShift shift in y direction.
 	 */
-	void initialize(double amplitude, double frequency, double shift);
+	void initialize(double amplitude, double frequency, double xShift,double yShift);
 
 	void perform(double time);
 
@@ -51,9 +53,14 @@ private:
 	double mFrequency;
 
 	/**
+	 * The shift in the x axis of the sine wave.
+	 */
+	double mXShift;
+
+	/**
 	 * The shift in the y axis of the sine wave.
 	 */
-	double mShift;
+	double mYShift;
 
 	/**
 	 * The timer of of sine wave.

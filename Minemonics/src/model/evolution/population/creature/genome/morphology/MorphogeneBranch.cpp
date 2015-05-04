@@ -29,13 +29,12 @@
 MorphogeneBranch::MorphogeneBranch() :
 		mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(
 				0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(
-				0), mJointPitchMinAngle(0), mJointPitchMaxAngle(
-				0), mJointYawMinAngle(0), mJointYawMaxAngle(0), mJointRollMinAngle(
-				0), mJointRollMaxAngle(0), mMirrored(0), mSpringPitchDampingCoefficient(
-				0), mJointPitchStiffness(0), mSpringYawDampingCoefficient(0), mJointYawStiffness(
-				0), mSpringRollDampingCoefficient(0), mJointRollStiffness(0), mJointPitchMotorEnabled(
-				false), mJointYawMotorEnabled(false), mJointRollMotorEnabled(
-				false) {
+				0), mJointPitchMinAngle(0), mJointPitchMaxAngle(0), mJointYawMinAngle(
+				0), mJointYawMaxAngle(0), mJointRollMinAngle(0), mJointRollMaxAngle(
+				0), mMirrored(0), mSpringPitchDampingCoefficient(0), mJointPitchStiffness(
+				0), mSpringYawDampingCoefficient(0), mJointYawStiffness(0), mSpringRollDampingCoefficient(
+				0), mJointRollStiffness(0), mJointPitchMotorEnabled(false), mJointYawMotorEnabled(
+				false), mJointRollMotorEnabled(false) {
 }
 
 void MorphogeneBranch::initialize() {
@@ -121,6 +120,32 @@ void MorphogeneBranch::initialize() {
 	mJointPitchMotorEnabled = randomness.nextBoolean();
 	mJointYawMotorEnabled = randomness.nextBoolean();
 	mJointRollMotorEnabled = randomness.nextBoolean();
+
+	/**
+	 * The maximum joint force
+	 */
+	mJointMaxPitchForce = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_FORCE,
+			MorphologyConfiguration::JOINT_MAX_FORCE);
+	mJointMaxYawForce = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_FORCE,
+			MorphologyConfiguration::JOINT_MAX_FORCE);
+	mJointMaxRollForce = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_FORCE,
+			MorphologyConfiguration::JOINT_MAX_FORCE);
+
+	/**
+	 * The maximum joint speed
+	 */
+	mJointMaxPitchSpeed = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_SPEED,
+			MorphologyConfiguration::JOINT_MAX_SPEED);
+	mJointMaxYawSpeed = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_SPEED,
+			MorphologyConfiguration::JOINT_MAX_SPEED);
+	mJointMaxRollSpeed = randomness.nextDouble(
+			MorphologyConfiguration::JOINT_MIN_SPEED,
+			MorphologyConfiguration::JOINT_MAX_SPEED);
 }
 
 MorphogeneBranch::~MorphogeneBranch() {
@@ -228,6 +253,36 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 	}
 
 	if (mJointRollMotorEnabled != geneBranch.mJointRollMotorEnabled) {
+		return false;
+	}
+
+	if(mJointMaxPitchForce != geneBranch.mJointMaxPitchForce)
+	{
+		return false;
+	}
+
+	if(mJointMaxYawForce != geneBranch.mJointMaxYawForce)
+	{
+		return false;
+	}
+
+	if(mJointMaxRollForce != geneBranch.mJointMaxRollForce)
+	{
+		return false;
+	}
+
+	if(mJointMaxPitchSpeed != geneBranch.mJointMaxPitchSpeed)
+	{
+		return false;
+	}
+
+	if(mJointMaxYawSpeed != geneBranch.mJointMaxYawSpeed)
+	{
+		return false;
+	}
+
+	if(mJointMaxRollSpeed != geneBranch.mJointMaxRollSpeed)
+	{
 		return false;
 	}
 

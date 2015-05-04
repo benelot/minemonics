@@ -1,17 +1,3 @@
-/*
- * Phenome.h
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- *
- *     From Lee Graham Thesis:
- *      Each creature's body is composed of a number of cuboids called "body segments". The
- * segments are arranged in a tree structure with each segment connected to its parent by a
- * type of physical constraint known as a universal joint. Segments are divided into groups
- * called types, with the properties of each type encoded in the genotype. Each
- * cuboid is a rigid solid with uniform density. The density value is a variable.
- */
-
 #ifndef CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_HPP_
 #define CONTROLLER_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_HPP_
 
@@ -49,8 +35,12 @@ class MixedGenome;
 /**
  * @brief		The phenome controller synchronizes the graphical representation of the creature with the physical model in the physics engine.
  * @details		The phenome controller synchronizes the graphical representation of the creature with the physical model in the physics engine.
- * It also acts as a facade for methods of the physical and graphical models.
- * @date		2015-04-27
+ * It also acts as a facade for methods of the physical and graphical models. Each creature's body is composed of a number of cuboids called "body segments". The
+ * segments are arranged in a tree structure with each segment connected to its parent by a
+ * type of physical constraint known as a universal joint. Segments are divided into groups
+ * called types, with the properties of each type encoded in the genotype. Each
+ * cuboid is a rigid solid with uniform density. The density value is a variable. Source: Lee Graham
+ * @date		2015-03-09
  * @author		Benjamin Ellenberger
  */
 class Phenome {
@@ -144,6 +134,10 @@ private:
 	 */
 	std::vector<Joint*> mJoints;
 
+	/**
+	 * The controllers of the phenotype
+	 */
+	std::vector<Controller*> mControllers;
 
 };
 

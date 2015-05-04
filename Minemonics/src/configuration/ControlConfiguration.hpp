@@ -26,7 +26,7 @@ public:
 	/**
 	 * The initial maximum amplitude of the sine wave controller
 	 */
-	static const double CPG_SINE_INITIAL_MAX_AMPLITUDE = 10;
+	static const double CPG_SINE_INITIAL_MAX_AMPLITUDE = 1;
 
 	/**
 	 * The initial maximum frequency of the sine wave controller

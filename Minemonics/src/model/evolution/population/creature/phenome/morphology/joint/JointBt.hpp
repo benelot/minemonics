@@ -3,6 +3,8 @@
 
 //# corresponding header
 //# forward declarations
+class Motor;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -36,6 +38,11 @@ public:
 	void initialize(btDynamicsWorld* world, btRigidBody* bodyA,
 			btRigidBody* bodyB, btTransform& tframeInA, btTransform& tframeInB);
 
+	void initializeRotationalLimitMotors(btVector3 maxForces,
+			btVector3 maxSpeeds);
+
+	void update();
+
 	void addToWorld();
 
 	void removeFromWorld();
@@ -61,18 +68,18 @@ public:
 	}
 
 	void setAngularStiffness(double jointPitchStiffness,
-			double jointYawStiffness, double jointRollStiffness){
-		setJointStiffness(0,jointPitchStiffness);
-		setJointStiffness(1,jointYawStiffness);
-		setJointStiffness(2,jointRollStiffness);
+			double jointYawStiffness, double jointRollStiffness) {
+		setJointStiffness(0, jointPitchStiffness);
+		setJointStiffness(1, jointYawStiffness);
+		setJointStiffness(2, jointRollStiffness);
 	}
 
 	void setAngularDamping(double springPitchDampingCoefficient,
 			double springYawDampingCoefficient,
-			double springRollDampingCoefficient){
-		setSpringDampingCoefficient(0,springPitchDampingCoefficient);
-		setSpringDampingCoefficient(1,springYawDampingCoefficient);
-		setSpringDampingCoefficient(2,springRollDampingCoefficient);
+			double springRollDampingCoefficient) {
+		setSpringDampingCoefficient(0, springPitchDampingCoefficient);
+		setSpringDampingCoefficient(1, springYawDampingCoefficient);
+		setSpringDampingCoefficient(2, springRollDampingCoefficient);
 	}
 
 	void setBreakingThreshold(double breakingThreshold) {
@@ -91,9 +98,7 @@ public:
 		mG6DofJoint->setDamping(index, damping);
 	}
 
-	void setRotationalLimitMotorEnabled(int index, bool enable) {
-		mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor = enable;
-	}
+	void setRotationalLimitMotorEnabled(int index, bool enable);
 
 	bool isRotationalLimitMotorEnabled(int index) {
 		return mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor;
@@ -121,9 +126,15 @@ public:
 		return mG6DofJoint;
 	}
 
+	std::vector<Motor*> getMotors() {
+		return mMotors;
+	}
+
 private:
 	btGeneric6DofSpringConstraint* mG6DofJoint;
 	btDynamicsWorld* mWorld;
+
+	std::vector<Motor*> mMotors;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

@@ -80,7 +80,15 @@ public:
 				<< "/JointMotorEnabled: [Pitch:"
 				<< morphogeneBranch.mJointPitchMotorEnabled << "][Yaw:"
 				<< morphogeneBranch.mJointYawMotorEnabled << "][Roll:"
-				<< morphogeneBranch.mJointRollMotorEnabled;
+				<< morphogeneBranch.mJointRollMotorEnabled
+				<< "/JointMaxForce: [Pitch:"
+				<< morphogeneBranch.mJointMaxPitchForce << "][Yaw:"
+				<< morphogeneBranch.mJointMaxYawForce << "][Roll:"
+				<< morphogeneBranch.mJointMaxRollForce
+				<< "/JointMaxSpeed: [Pitch:"
+				<< morphogeneBranch.mJointMaxPitchSpeed << "][Yaw:"
+				<< morphogeneBranch.mJointMaxYawSpeed << "][Roll:"
+				<< morphogeneBranch.mJointMaxRollSpeed;
 	}
 
 	/**
@@ -116,7 +124,13 @@ public:
 						& BOOST_SERIALIZATION_NVP(mJointRollStiffness)
 						& BOOST_SERIALIZATION_NVP(mJointPitchMotorEnabled)
 						& BOOST_SERIALIZATION_NVP(mJointYawMotorEnabled)
-						& BOOST_SERIALIZATION_NVP(mJointRollMotorEnabled);
+						& BOOST_SERIALIZATION_NVP(mJointRollMotorEnabled)
+						& BOOST_SERIALIZATION_NVP(mJointMaxPitchForce)
+						& BOOST_SERIALIZATION_NVP(mJointMaxYawForce)
+						& BOOST_SERIALIZATION_NVP(mJointMaxRollForce)
+						& BOOST_SERIALIZATION_NVP(mJointMaxPitchSpeed)
+						& BOOST_SERIALIZATION_NVP(mJointMaxYawSpeed)
+						& BOOST_SERIALIZATION_NVP(mJointMaxRollSpeed);
 	}
 
 	// Accessor methods
@@ -313,6 +327,54 @@ public:
 		mJointYawMotorEnabled = jointYawMotorEnabled;
 	}
 
+	double getJointMaxPitchForce() const {
+		return mJointMaxPitchForce;
+	}
+
+	void setJointMaxPitchForce(double jointMaxPitchForce) {
+		mJointMaxPitchForce = jointMaxPitchForce;
+	}
+
+	double getJointMaxPitchSpeed() const {
+		return mJointMaxPitchSpeed;
+	}
+
+	void setJointMaxPitchSpeed(double jointMaxPitchSpeed) {
+		mJointMaxPitchSpeed = jointMaxPitchSpeed;
+	}
+
+	double getJointMaxRollForce() const {
+		return mJointMaxRollForce;
+	}
+
+	void setJointMaxRollForce(double jointMaxRollForce) {
+		mJointMaxRollForce = jointMaxRollForce;
+	}
+
+	double getJointMaxRollSpeed() const {
+		return mJointMaxRollSpeed;
+	}
+
+	void setJointMaxRollSpeed(double jointMaxRollSpeed) {
+		mJointMaxRollSpeed = jointMaxRollSpeed;
+	}
+
+	double getJointMaxYawForce() const {
+		return mJointMaxYawForce;
+	}
+
+	void setJointMaxYawForce(double jointMaxYawForce) {
+		mJointMaxYawForce = jointMaxYawForce;
+	}
+
+	double getJointMaxYawSpeed() const {
+		return mJointMaxYawSpeed;
+	}
+
+	void setJointMaxYawSpeed(double jointMaxYawSpeed) {
+		mJointMaxYawSpeed = jointMaxYawSpeed;
+	}
+
 private:
 	/**
 	 * Spherical coordinates around the origin of the segment at the center of mass.
@@ -345,6 +407,16 @@ private:
 	 * If the angular motor is enabled.
 	 */
 	bool mJointPitchMotorEnabled, mJointYawMotorEnabled, mJointRollMotorEnabled;
+
+	/**
+	 * The maximum force of the joint
+	 */
+	double mJointMaxPitchForce, mJointMaxYawForce, mJointMaxRollForce;
+
+	/**
+	 * The maximum speed of the joint
+	 */
+	double mJointMaxPitchSpeed, mJointMaxYawSpeed, mJointMaxRollSpeed;
 
 	/**
 	 * Determines if this branch is mirrored through the center of mass of its segment.

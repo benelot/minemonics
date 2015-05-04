@@ -1,22 +1,30 @@
-/*
- * Joint.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
-#include <controller/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+//# forward declarations
+//# system headers
+#include <stddef.h>
+
+//## controller headers
+//## model headers
+#include <LinearMath/btVector3.h>
+#include <OgreVector3.h>
+
+//## view headers
+//# custom headers
+//## base headers
 #include <SimulationManager.hpp>
-#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## configuration headers
 //## controller headers
+#include <controller/physics/PhysicsController.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
+#include <model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+
+//## view headers
+#include <view/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## utils headers
 
@@ -54,7 +62,14 @@ void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 	update();
 }
 
+void Joint::initializeRotationalLimitMotors(btVector3 maxForces,
+		btVector3 maxSpeeds) {
+	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(maxForces,
+			maxSpeeds);
+}
+
 void Joint::update() {
+	mJointPhysics->update();
 	mJointGraphics->update();
 }
 
@@ -92,7 +107,7 @@ void Joint::setAngularDamping(double springPitchDampingCoefficient,
 			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
-void Joint::setAngularMotorEnabled(bool pitchEnable, bool yawEnable,
+void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
 	mJointPhysics->setRotationalLimitMotorEnabled(0, pitchEnable);
 	mJointPhysics->setRotationalLimitMotorEnabled(1, yawEnable);

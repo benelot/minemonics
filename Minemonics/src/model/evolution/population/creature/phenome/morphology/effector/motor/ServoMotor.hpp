@@ -9,9 +9,12 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_
 
 //# corresponding header
+
 #include <model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
+class btRotationalLimitMotor;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -51,7 +54,7 @@ public:
 		return mJointMotorIndex;
 	}
 
-	const btRotationalLimitMotor*& getMotorBt() const {
+	btRotationalLimitMotor* getMotorBt() {
 		return mMotorBt;
 	}
 

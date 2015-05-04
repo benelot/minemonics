@@ -8,6 +8,9 @@
 
 //## controller headers
 //## model headers
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -29,6 +32,7 @@
 #include <model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 #include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 
 //## view headers
 #include <view/bullet/OgreBulletUtils.hpp>
@@ -322,6 +326,15 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 				((Limb*) generator->getParentComponent()), limbB, localA,
 						localB);
 
+				//initialize rotational limit motors
+				joint->initializeRotationalLimitMotors(
+						btVector3(morphogeneBranch->getJointMaxPitchForce(),
+								morphogeneBranch->getJointMaxYawForce(),
+								morphogeneBranch->getJointMaxRollForce()),
+						btVector3(morphogeneBranch->getJointMaxPitchForce(),
+								morphogeneBranch->getJointMaxYawForce(),
+								morphogeneBranch->getJointMaxRollForce()));
+
 				//set the angular limits of the joint
 				joint->setAngularLimits(
 						Ogre::Vector3(morphogeneBranch->getJointPitchMinAngle(),
@@ -344,13 +357,25 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 						morphogeneBranch->getSpringRollDampingCoefficient());
 
 				//set if the angular motor is enabled
-				joint->setAngularMotorEnabled(
+				joint->enableAngularMotor(
 						morphogeneBranch->isJointPitchMotorEnabled(),
 						morphogeneBranch->isJointYawMotorEnabled(),
 						morphogeneBranch->isJointRollMotorEnabled());
 
 				// add the joint to the phenotype joints
 				mJoints.push_back(joint);
+
+				//TODO: Quick controller hack
+				std::vector<Motor*>::iterator motorIterator =
+						joint->getMotors().begin();
+
+				for (; motorIterator != joint->getMotors().end();
+						motorIterator++) {
+					SineController* controller = new SineController();
+					controller->initialize(0.5, 1, 0, 0);
+					controller->addControlOutput((*motorIterator));
+					mControllers.push_back(controller);
+				}
 			}
 
 			//iterate over all morphogene branches
@@ -488,13 +513,24 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 }
 
 void Phenome::update() {
-	// Add all limbs
+	//update all controllers
+	//TODO: Hacks to make it run, make nicer
+	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970,1,1));
+	boost::posix_time::ptime now = boost::posix_time::microsec_clock::local_time();
+	boost::posix_time::time_duration diff = now - time_t_epoch;
+
+	std::vector<Controller*>::iterator cit = mControllers.begin();
+	for (; cit != mControllers.end(); cit++) {
+		(*cit)->perform(diff.total_milliseconds());
+	}
+
+	// Update all limbs
 	std::vector<Limb*>::iterator lit = mLimbs.begin();
 	for (; lit != mLimbs.end(); lit++) {
 		(*lit)->update();
 	}
 
-	// Add all constraints
+	// Update all constraints
 	std::vector<Joint*>::iterator jit = mJoints.begin();
 	for (; jit != mJoints.end(); jit++) {
 		(*jit)->update();

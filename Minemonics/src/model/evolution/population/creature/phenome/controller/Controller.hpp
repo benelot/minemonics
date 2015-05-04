@@ -40,11 +40,19 @@ public:
 
 	virtual void collectInputs() = 0;
 
+	virtual void perform(double time) = 0;
+
 	/**
 	 * Distribute the output among the adjacent controllers or endpoints
 	 * @param output
 	 */
 	virtual void distributeOutput(double output);
+
+	void addControlInput(ControlOutput* controlOutput);
+
+	void addControlOutput(ControlInput* controlInput);
+
+
 
 protected:
 

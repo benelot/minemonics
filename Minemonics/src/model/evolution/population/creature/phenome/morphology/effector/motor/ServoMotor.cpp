@@ -9,6 +9,9 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
+#include <model/evolution/population/creature/phenome/controller/ControlOutput.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -19,7 +22,7 @@
 //## utils headers
 
 ServoMotor::ServoMotor() :
-		mJointMotorIndex(-1), mMotorBt(NULL) {
+		Motor(SERVO_MOTOR), mJointMotorIndex(-1), mMotorBt(NULL) {
 }
 
 ServoMotor::~ServoMotor() {
@@ -28,7 +31,7 @@ ServoMotor::~ServoMotor() {
 }
 
 void ServoMotor::initialize(int jointMotorIndex,
-		btRotationalLimitMotor* motorBt,double maxForce,double maxSpeed) {
+		btRotationalLimitMotor* motorBt, double maxForce, double maxSpeed) {
 	mJointMotorIndex = jointMotorIndex;
 	mMotorBt = motorBt;
 	mMaxForce = maxForce;
@@ -38,7 +41,6 @@ void ServoMotor::initialize(int jointMotorIndex,
 	mMotorBt->m_targetVelocity = mMaxSpeed;
 }
 
-void ServoMotor::apply()
-{
-	mMotorBt->m_currentPosition = getValue();
+void ServoMotor::apply() {
+	mMotorBt->m_currentPosition = mMotorBt->m_loLimit + getValue()*(mMotorBt->m_hiLimit-mMotorBt->m_loLimit);
 }

@@ -274,6 +274,16 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/Motor.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/ServoMotor.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/Controller.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/controller/Controller.cpp</location>
@@ -752,6 +762,16 @@
 			<name>[Targets]/[exe] OgreApp/Header Files/JointBt.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/Motor.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/ServoMotor.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/Controller.hpp</name>
@@ -1369,6 +1389,16 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/Motor.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/ServoMotor.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Controller.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/controller/Controller.cpp</location>
@@ -1592,6 +1622,16 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointBt.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/Motor.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/ServoMotor.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Controller.hpp</name>

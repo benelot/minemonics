@@ -1,10 +1,3 @@
-/*
- * Motor.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
@@ -21,12 +14,10 @@
 //## view headers
 //## utils headers
 
-Motor::Motor():mMaxForce(0),mMaxSpeed(0),mPositionControlled(true)
-{
-
+Motor::Motor(MotorType motorType) :
+		mMotorType(motorType), mMaxForce(0), mMaxSpeed(0), mPositionControlled(
+				true), mIndex(-1), mEnabled(false) {
 }
 
-Motor::~Motor()
-{
-
+Motor::~Motor() {
 }

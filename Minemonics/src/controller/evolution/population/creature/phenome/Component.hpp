@@ -1,10 +1,3 @@
-/*
- * Component.h
- *
- *  Created on: Mar 23, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENT_H_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENT_H_
 
@@ -23,9 +16,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The component is a base class for all elements in the phenome representation.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-23
  * @author		Benjamin Ellenberger
  */
 class Component {

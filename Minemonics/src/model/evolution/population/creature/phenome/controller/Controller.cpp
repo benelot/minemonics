@@ -1,10 +1,3 @@
-/*
- * Controller.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
 #include <model/evolution/population/creature/phenome/controller/Controller.hpp>
 
@@ -39,4 +32,16 @@ void Controller::distributeOutput(double output) {
 			controlOutputIterator++) {
 		(*controlOutputIterator)->setValue(output);
 	}
+}
+
+
+
+void Controller::addControlInput(ControlOutput* controlOutput)
+{
+		mControlInputs.push_back(controlOutput);
+}
+
+void Controller::addControlOutput(ControlInput* controlInput)
+{
+		mControlOutputs.push_back(controlInput);
 }
