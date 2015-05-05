@@ -1069,6 +1069,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/OgreInputHandler.hpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/InputUtils.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/InputUtils.hpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/CameraHandler.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/camera/CameraHandler.hpp</location>

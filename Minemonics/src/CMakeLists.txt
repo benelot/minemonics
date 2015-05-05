@@ -332,6 +332,7 @@ set(CONTROLLERHDRS
 	./controller/input/SDL2InputHandler.hpp
 	./controller/input/CEGUIInputHandler.hpp
 	./controller/input/OgreInputHandler.hpp
+	./controller/input/InputUtils.hpp
 	
 	## camera handler
 	./controller/camera/CameraHandler.hpp

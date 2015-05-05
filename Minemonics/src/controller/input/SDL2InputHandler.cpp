@@ -22,8 +22,8 @@
 
 //## configuration headers
 //## controller headers
+#include <controller/input/InputUtils.hpp>
 #include <controller/input/SDL2InputHandler.hpp>
-#include <controller/input/SDL2OgreUtils.hpp>
 
 //## model headers
 //## view headers
@@ -81,25 +81,25 @@ void SDL2InputHandler::injectInput() {
 			/* let a special function handle the mouse button down event */
 			//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mouse button pressed" << e.button.button;
 			CEGUIInputHandler::mousePressed(
-					SDL2OgreUtils::convert(e.button.button));
+					InputUtils::convertToOgre3D(e.button.button));
 			break;
 
 			/* mouse up handler */
 		case SDL_MOUSEBUTTONUP:
 			/* let a special function handle the mouse button up event */
 			CEGUIInputHandler::mouseReleased(
-					SDL2OgreUtils::convert(e.button.button));
+					InputUtils::convertToOgre3D(e.button.button));
 			break;
 
 			/* key down */
 		case SDL_KEYDOWN:
 			CEGUIInputHandler::keyPressed(
-					SDL2OgreUtils::convert(e.key.keysym.sym));
+					InputUtils::convertToOgre3D(e.key.keysym.sym));
 			break;
 			/* key up */
 		case SDL_KEYUP:
 			CEGUIInputHandler::keyReleased(
-					SDL2OgreUtils::convert(e.key.keysym.sym));
+					InputUtils::convertToOgre3D(e.key.keysym.sym));
 			break;
 		case SDL_MOUSEWHEEL:
 			CEGUIInputHandler::mouseWheelMoved(e.wheel.y);

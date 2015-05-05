@@ -1,10 +1,3 @@
-/*
- * CEGUIInputHandler.h
- *
- *  Created on: Feb 17, 2015
- *      Author: leviathan
- */
-
 #ifndef CEGUIINPUTHANDLER_H_
 #define CEGUIINPUTHANDLER_H_
 
@@ -14,10 +7,16 @@ class SimulationManager;
 class StateHandler;
 
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 #include <CEGUI/CEGUI.h>
+#include <CEGUI/InputEvent.h>
 
 //# custom headers
 //## base headers
@@ -32,10 +31,12 @@ class StateHandler;
 //## utils headers
 #include <utils/logging/Logger.hpp>
 
+
+
 /**
- * @brief		Brief
+ * @brief		The CEGUI Input handler handles the input coming from the lower hardware input layer and handles it in the context of the CEGUI.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-17
  * @author		Benjamin Ellenberger
  */
 class CEGUIInputHandler: public OgreInputHandler {
@@ -71,10 +72,6 @@ public:
 	bool mousePressed(ApplicationMouseCode::MouseButton button);
 	bool mouseReleased(ApplicationMouseCode::MouseButton button);
 	void windowResized(int width, int height);
-	static CEGUI::MouseButton convertMouseOgretoCEGUI(
-			ApplicationMouseCode::MouseButton button);
-	static CEGUI::Key::Scan convertKeyOgretoCEGUI(
-			ApplicationKeycode::Keycode key);
 	void initializeKeyMap();
 
 protected:
