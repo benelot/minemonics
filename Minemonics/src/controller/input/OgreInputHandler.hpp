@@ -1,10 +1,3 @@
-/*
- * OgreInputHandler.h
- *
- *  Created on: Feb 27, 2015
- *      Author: leviathan
- */
-
 #ifndef OGREINPUTHANDLER_H_
 #define OGREINPUTHANDLER_H_
 
@@ -13,8 +6,13 @@
 class SimulationManager;
 
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -29,9 +27,9 @@ class SimulationManager;
 #include <utils/logging/Logger.hpp>
 
 /**
- * @brief		Brief
+ * @brief		The Ogre Input handler handles the input coming from the lower hardware input layer and handles it in the context of Ogre3D.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-27
  * @author		Benjamin Ellenberger
  */
 class OgreInputHandler {

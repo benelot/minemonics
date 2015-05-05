@@ -574,7 +574,7 @@ void SimulationManager::createScene(void) {
 
 //Adjust mouse clipping area
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Repositioning CEGUI pointer...";
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Repositioning CEGUI pointer...";
 	unsigned int width, height, depth;
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
@@ -595,13 +595,13 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mWindow->windowMovedOrResized();
 #endif
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
 }
 
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
+		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
 
 		// Align CEGUI mouse with SDL mouse
 		CEGUI::Vector2f mousePos =
@@ -611,7 +611,7 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	}
 	else
 	{
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
+		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
 	}
 }
 
