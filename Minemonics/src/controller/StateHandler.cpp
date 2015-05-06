@@ -1,10 +1,3 @@
-/*
- * StateHandler.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <controller/StateHandler.hpp>
 #include <OgreStringConverter.h>

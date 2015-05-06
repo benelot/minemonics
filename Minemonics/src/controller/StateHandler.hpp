@@ -3,7 +3,6 @@
 //# corresponding header
 //# forward declarations
 //# system headers
-
 //## controller headers
 //## model headers
 //## view headers
@@ -22,7 +21,7 @@ enum ApplicationState{
 /**
  * @brief		Brief
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-11-17
  * @author		Benjamin Ellenberger
  */
 class StateHandler {

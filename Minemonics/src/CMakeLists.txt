@@ -244,6 +244,9 @@ set(MODELHDRS
 	./model/universe/evolution/juries/Ones.hpp
 	./model/universe/evolution/juries/Velocity.hpp
 	
+	## universe
+	./model/universe/UniverseModel.hpp
+	./model/universe/PlanetModel.hpp
 	## evolution
 	./model/universe/evolution/EvolutionModel.hpp
 	./model/universe/evolution/Reaper.hpp
@@ -284,11 +287,14 @@ set(MODELSRCS
 	./model/universe/environments/bullet/HillsBt.cpp
 	./model/universe/environments/bullet/PlaneBt.cpp
    
-   ## juries
+    ## juries
 	./model/universe/evolution/juries/Jury.cpp
 	./model/universe/evolution/juries/Ones.cpp
 	./model/universe/evolution/juries/Velocity.cpp
 	
+	## universe
+	./model/universe/UniverseModel.cpp
+	./model/universe/PlanetModel.cpp
 	
 	## evolution
 	./model/universe/evolution/EvolutionModel.cpp
@@ -347,6 +353,10 @@ set(CONTROLLERHDRS
     ./controller/physics/PhysicsController.hpp
     ./controller/physics/RagDoll.hpp
     
+    ## universe
+    ./controller/universe/Universe.hpp
+    ./controller/universe/Planet.hpp
+    
     # entity controllers/model-view facades to control objects at both sides
     ## environments
     ./controller/universe/environments/Environment.hpp
@@ -381,6 +391,10 @@ set(CONTROLLERSRCS
 	./controller/physics/PhysicsController.cpp
 	./controller/physics/RagDoll.cpp
 	
+	## universe
+    ./controller/universe/Universe.cpp
+    ./controller/universe/Planet.cpp
+    
 	# entity controllers/model-view facades to control objects at both sides
 	## environments
     ./controller/universe/environments/Environment.cpp
@@ -574,6 +588,8 @@ set(TESTSRCS
     ## unit test cases
     ## (unit tests usually only test the model)
     ## therefore it should never be necessary to include the srcs from view and controller above
+    ./model/universe/UniverseModel_test.cpp
+    ./model/universe/PlanetModel_test.cpp
     ./model/universe/evolution/juries/Velocity_test.cpp
     ./model/universe/evolution/juries/Ones_test.cpp
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp

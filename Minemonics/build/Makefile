@@ -394,6 +394,54 @@ controller/physics/RagDoll.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/RagDoll.cpp.s
 .PHONY : controller/physics/RagDoll.cpp.s
 
+controller/universe/Planet.o: controller/universe/Planet.cpp.o
+.PHONY : controller/universe/Planet.o
+
+# target to build an object file
+controller/universe/Planet.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Planet.cpp.o
+.PHONY : controller/universe/Planet.cpp.o
+
+controller/universe/Planet.i: controller/universe/Planet.cpp.i
+.PHONY : controller/universe/Planet.i
+
+# target to preprocess a source file
+controller/universe/Planet.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Planet.cpp.i
+.PHONY : controller/universe/Planet.cpp.i
+
+controller/universe/Planet.s: controller/universe/Planet.cpp.s
+.PHONY : controller/universe/Planet.s
+
+# target to generate assembly for a file
+controller/universe/Planet.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Planet.cpp.s
+.PHONY : controller/universe/Planet.cpp.s
+
+controller/universe/Universe.o: controller/universe/Universe.cpp.o
+.PHONY : controller/universe/Universe.o
+
+# target to build an object file
+controller/universe/Universe.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Universe.cpp.o
+.PHONY : controller/universe/Universe.cpp.o
+
+controller/universe/Universe.i: controller/universe/Universe.cpp.i
+.PHONY : controller/universe/Universe.i
+
+# target to preprocess a source file
+controller/universe/Universe.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Universe.cpp.i
+.PHONY : controller/universe/Universe.cpp.i
+
+controller/universe/Universe.s: controller/universe/Universe.cpp.s
+.PHONY : controller/universe/Universe.s
+
+# target to generate assembly for a file
+controller/universe/Universe.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Universe.cpp.s
+.PHONY : controller/universe/Universe.cpp.s
+
 controller/universe/environments/Environment.o: controller/universe/environments/Environment.cpp.o
 .PHONY : controller/universe/environments/Environment.o
 
@@ -633,6 +681,108 @@ controller/universe/evolution/population/creature/phenome/morphology/Limb.s: con
 controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
+
+model/universe/PlanetModel.o: model/universe/PlanetModel.cpp.o
+.PHONY : model/universe/PlanetModel.o
+
+# target to build an object file
+model/universe/PlanetModel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/PlanetModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel.cpp.o
+.PHONY : model/universe/PlanetModel.cpp.o
+
+model/universe/PlanetModel.i: model/universe/PlanetModel.cpp.i
+.PHONY : model/universe/PlanetModel.i
+
+# target to preprocess a source file
+model/universe/PlanetModel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/PlanetModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel.cpp.i
+.PHONY : model/universe/PlanetModel.cpp.i
+
+model/universe/PlanetModel.s: model/universe/PlanetModel.cpp.s
+.PHONY : model/universe/PlanetModel.s
+
+# target to generate assembly for a file
+model/universe/PlanetModel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/PlanetModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel.cpp.s
+.PHONY : model/universe/PlanetModel.cpp.s
+
+model/universe/PlanetModel_test.o: model/universe/PlanetModel_test.cpp.o
+.PHONY : model/universe/PlanetModel_test.o
+
+# target to build an object file
+model/universe/PlanetModel_test.cpp.o:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel_test.cpp.o
+.PHONY : model/universe/PlanetModel_test.cpp.o
+
+model/universe/PlanetModel_test.i: model/universe/PlanetModel_test.cpp.i
+.PHONY : model/universe/PlanetModel_test.i
+
+# target to preprocess a source file
+model/universe/PlanetModel_test.cpp.i:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel_test.cpp.i
+.PHONY : model/universe/PlanetModel_test.cpp.i
+
+model/universe/PlanetModel_test.s: model/universe/PlanetModel_test.cpp.s
+.PHONY : model/universe/PlanetModel_test.s
+
+# target to generate assembly for a file
+model/universe/PlanetModel_test.cpp.s:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel_test.cpp.s
+.PHONY : model/universe/PlanetModel_test.cpp.s
+
+model/universe/UniverseModel.o: model/universe/UniverseModel.cpp.o
+.PHONY : model/universe/UniverseModel.o
+
+# target to build an object file
+model/universe/UniverseModel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/UniverseModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel.cpp.o
+.PHONY : model/universe/UniverseModel.cpp.o
+
+model/universe/UniverseModel.i: model/universe/UniverseModel.cpp.i
+.PHONY : model/universe/UniverseModel.i
+
+# target to preprocess a source file
+model/universe/UniverseModel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/UniverseModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel.cpp.i
+.PHONY : model/universe/UniverseModel.cpp.i
+
+model/universe/UniverseModel.s: model/universe/UniverseModel.cpp.s
+.PHONY : model/universe/UniverseModel.s
+
+# target to generate assembly for a file
+model/universe/UniverseModel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/UniverseModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel.cpp.s
+.PHONY : model/universe/UniverseModel.cpp.s
+
+model/universe/UniverseModel_test.o: model/universe/UniverseModel_test.cpp.o
+.PHONY : model/universe/UniverseModel_test.o
+
+# target to build an object file
+model/universe/UniverseModel_test.cpp.o:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel_test.cpp.o
+.PHONY : model/universe/UniverseModel_test.cpp.o
+
+model/universe/UniverseModel_test.i: model/universe/UniverseModel_test.cpp.i
+.PHONY : model/universe/UniverseModel_test.i
+
+# target to preprocess a source file
+model/universe/UniverseModel_test.cpp.i:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel_test.cpp.i
+.PHONY : model/universe/UniverseModel_test.cpp.i
+
+model/universe/UniverseModel_test.s: model/universe/UniverseModel_test.cpp.s
+.PHONY : model/universe/UniverseModel_test.s
+
+# target to generate assembly for a file
+model/universe/UniverseModel_test.cpp.s:
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel_test.cpp.s
+.PHONY : model/universe/UniverseModel_test.cpp.s
 
 model/universe/environments/EnvironmentPhysics.o: model/universe/environments/EnvironmentPhysics.cpp.o
 .PHONY : model/universe/environments/EnvironmentPhysics.o
@@ -2917,6 +3067,12 @@ help:
 	@echo "... controller/physics/RagDoll.o"
 	@echo "... controller/physics/RagDoll.i"
 	@echo "... controller/physics/RagDoll.s"
+	@echo "... controller/universe/Planet.o"
+	@echo "... controller/universe/Planet.i"
+	@echo "... controller/universe/Planet.s"
+	@echo "... controller/universe/Universe.o"
+	@echo "... controller/universe/Universe.i"
+	@echo "... controller/universe/Universe.s"
 	@echo "... controller/universe/environments/Environment.o"
 	@echo "... controller/universe/environments/Environment.i"
 	@echo "... controller/universe/environments/Environment.s"
@@ -2947,6 +3103,18 @@ help:
 	@echo "... controller/universe/evolution/population/creature/phenome/morphology/Limb.o"
 	@echo "... controller/universe/evolution/population/creature/phenome/morphology/Limb.i"
 	@echo "... controller/universe/evolution/population/creature/phenome/morphology/Limb.s"
+	@echo "... model/universe/PlanetModel.o"
+	@echo "... model/universe/PlanetModel.i"
+	@echo "... model/universe/PlanetModel.s"
+	@echo "... model/universe/PlanetModel_test.o"
+	@echo "... model/universe/PlanetModel_test.i"
+	@echo "... model/universe/PlanetModel_test.s"
+	@echo "... model/universe/UniverseModel.o"
+	@echo "... model/universe/UniverseModel.i"
+	@echo "... model/universe/UniverseModel.s"
+	@echo "... model/universe/UniverseModel_test.o"
+	@echo "... model/universe/UniverseModel_test.i"
+	@echo "... model/universe/UniverseModel_test.s"
 	@echo "... model/universe/environments/EnvironmentPhysics.o"
 	@echo "... model/universe/environments/EnvironmentPhysics.i"
 	@echo "... model/universe/environments/EnvironmentPhysics.s"
