@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <SimulationManager.hpp>
+
 //# forward declarations
 //# system headers
 #include <cstdlib>
@@ -27,11 +29,6 @@
 #include <boost/parameter/keyword.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <configuration/ApplicationConfiguration.hpp>
-#include <configuration/EnvironmentConfiguration.hpp>
-#include <configuration/OgreSystemConfigStrings.hpp>
-#include <controller/environments/Hills.hpp>
-#include <controller/environments/Plane.hpp>
 
 //## view headers
 #include <CEGUI/FontManager.h>
@@ -69,16 +66,25 @@
 #include <OgreUTFString.h>
 #include <OgreVector3.h>
 #include <OgreWindowEventUtilities.h>
-#include <SimulationManager.hpp>
 
 //# custom headers
 //## base headers
-#include <utils/Randomness.hpp>
-
 //## configuration headers
+#include <configuration/ApplicationConfiguration.hpp>
+#include <configuration/EnvironmentConfiguration.hpp>
+#include <configuration/OgreSystemConfigStrings.hpp>
+
+//## controller headers
+#include <controller/environments/Hills.hpp>
+#include <controller/environments/Plane.hpp>
+#include <controller/evolution/population/Population.hpp>
+
+//## model headers
+//## view headers
 #include <view/CEGUI/CEGUIBuilder.hpp>
 
 //## utils headers
+#include <utils/Randomness.hpp>
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
@@ -172,6 +178,9 @@ void SimulationManager::createFrameListener(void) {
 	if (mTerrain->mEnvironmentType == Environment::PLANE) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
+
+	Population population;
+	population.initialize(this,100);
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;

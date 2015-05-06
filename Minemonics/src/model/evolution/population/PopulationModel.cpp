@@ -16,9 +16,9 @@ PopulationModel::PopulationModel() :
 }
 
 PopulationModel::~PopulationModel() {
-	while (!mCreatures.empty()) {
-		CreatureModel* f = mCreatures.back();
-		mCreatures.pop_back();
+	while (!mCreatureModels.empty()) {
+		CreatureModel* f = mCreatureModels.back();
+		mCreatureModels.pop_back();
 		delete f;
 	}
 }
@@ -29,28 +29,15 @@ PopulationModel::~PopulationModel() {
  */
 void PopulationModel::initialize(int creatureQty) {
 	mCreatureQty = creatureQty;
-	Randomness randomness;
-	double bushiness = 0;
-	for (int i = 0; i < mCreatureQty; i++) {
-		bushiness = randomness.nextNormalDouble(
-				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
-				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		CreatureModel* creature = new CreatureModel();
-		//creature->initialize(bushiness);
-		mCreatures.push_back(creature);
-	}
 }
-
-
 
 /**
  * Adds a new creature to the population with the bushiness as a input.
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
-void PopulationModel::addNewMember(double bushiness) {
-	CreatureModel* creature = new CreatureModel();
-	//creature->initialize(bushiness);
-	mCreatures.push_back(creature);
+void PopulationModel::addNewMember(CreatureModel* creatureModel) {
+	mCreatureModels.push_back(creatureModel);
+	mCreatureQty++;
 
 }
 
@@ -64,10 +51,12 @@ bool PopulationModel::equals(const PopulationModel & population) const {
 		return false;
 	}
 
-	std::vector<CreatureModel*>::const_iterator it = mCreatures.begin();
-	std::vector<CreatureModel*>::const_iterator it2 = population.mCreatures.begin();
-	for (; it != mCreatures.end(), it2 != population.mCreatures.end();
-			it++, it2++) {
+	std::vector<CreatureModel*>::const_iterator it = mCreatureModels.begin();
+	std::vector<CreatureModel*>::const_iterator it2 =
+			population.getCreatureModels().begin();
+	for (;
+			it != mCreatureModels.end(), it2
+					!= population.getCreatureModels().end(); it++, it2++) {
 		if (!(*it)->equals(**it2)) {
 			return false;
 		}
