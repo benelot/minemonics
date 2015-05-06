@@ -7,12 +7,12 @@
 
 //# corresponding header
 #include <configuration/MorphologyConfiguration.hpp>
-#include <controller/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <controller/physics/RagDoll.hpp>
-#include <model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <SimulationManager.hpp>
-#include <view/bullet/OgreBulletUtils.hpp>
+#include <view/visualization/bulletphysics/OgreBulletUtils.hpp>
 #include <vector>
 
 //## controller headers

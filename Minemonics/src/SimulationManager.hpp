@@ -43,17 +43,17 @@ class ParamsPanel;
 #include <controller/physics/PhysicsController.hpp>
 #include <controller/physics/RagDoll.hpp>
 
-#include <controller/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
-#include <model/evolution/juries/Ones.hpp>
+#include <model/universe/evolution/juries/Ones.hpp>
 
 //## view headers
-#include <view/MathGL/MathGLWindow.hpp>
-#include <view/CEGUI/GUISheetHandler.hpp>
-#include <view/CEGUI/ParamsPanel.hpp>
-#include <view/bullet/OgreBtDebugDrawer.hpp>
-#include <view/overlay/InfoOverlay.hpp>
+#include <view/visualization/MathGL/MathGLWindow.hpp>
+#include <view/visualization/CEGUI/GUISheetHandler.hpp>
+#include <view/visualization/CEGUI/ParamsPanel.hpp>
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+#include <view/visualization/overlay/InfoOverlay.hpp>
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 
 //## utils headers

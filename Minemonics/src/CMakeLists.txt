@@ -234,94 +234,94 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
 set(MODELHDRS
 	# model
 	## enviroment
-	./model/environments/EnvironmentPhysics.hpp
-	./model/environments/bullet/EnvironmentBt.hpp
-	./model/environments/bullet/HillsBt.hpp
-	./model/environments/bullet/PlaneBt.hpp
+	./model/universe/environments/EnvironmentPhysics.hpp
+	./model/universe/environments/bullet/EnvironmentBt.hpp
+	./model/universe/environments/bullet/HillsBt.hpp
+	./model/universe/environments/bullet/PlaneBt.hpp
 	
 	## juries
-	./model/evolution/juries/Jury.hpp
-	./model/evolution/juries/Ones.hpp
-	./model/evolution/juries/Velocity.hpp
+	./model/universe/evolution/juries/Jury.hpp
+	./model/universe/evolution/juries/Ones.hpp
+	./model/universe/evolution/juries/Velocity.hpp
 	
 	## evolution
-	./model/evolution/EvolutionModel.hpp
-	./model/evolution/Reaper.hpp
-	./model/evolution/population/PopulationModel.hpp
-	./model/evolution/population/creature/CreatureModel.hpp
+	./model/universe/evolution/EvolutionModel.hpp
+	./model/universe/evolution/Reaper.hpp
+	./model/universe/evolution/population/PopulationModel.hpp
+	./model/universe/evolution/population/creature/CreatureModel.hpp
 	
 	## genome
-	./model/evolution/population/creature/genome/Genome.hpp
-	./model/evolution/population/creature/genome/DirectGenome.hpp
-	./model/evolution/population/creature/genome/IndirectGenome.hpp
-	./model/evolution/population/creature/genome/MixedGenome.hpp
-	./model/evolution/population/creature/genome/Gene.hpp
-	./model/evolution/population/creature/genome/GeneBranch.hpp
-	./model/evolution/population/creature/genome/morphology/Morphogene.hpp
-    ./model/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp
-    ./model/evolution/population/creature/genome/controller/ControllerGene.hpp
-	./model/evolution/population/creature/genome/controller/SineControllerGene.hpp
+	./model/universe/evolution/population/creature/genome/Genome.hpp
+	./model/universe/evolution/population/creature/genome/DirectGenome.hpp
+	./model/universe/evolution/population/creature/genome/IndirectGenome.hpp
+	./model/universe/evolution/population/creature/genome/MixedGenome.hpp
+	./model/universe/evolution/population/creature/genome/Gene.hpp
+	./model/universe/evolution/population/creature/genome/GeneBranch.hpp
+	./model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp
+    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp
+    ./model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp
+	./model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp
 	
 	## phenome
-	./model/evolution/population/creature/phenome/PhenomeModel.hpp
-	./model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
-	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
-	./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
-	./model/evolution/population/creature/phenome/morphology/joint/JointBt.hpp
-	./model/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp
-	./model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp
+	./model/universe/evolution/population/creature/phenome/PhenomeModel.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp
 		
 	## controller
-	./model/evolution/population/creature/phenome/controller/Controller.hpp
-	./model/evolution/population/creature/phenome/controller/ControlInput.hpp
-	./model/evolution/population/creature/phenome/controller/ControlOutput.hpp
-	./model/evolution/population/creature/phenome/controller/sine/SineController.hpp
+	./model/universe/evolution/population/creature/phenome/controller/Controller.hpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp
+	./model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp
 )
 set(MODELSRCS
     # model
-    ./model/environments/EnvironmentPhysics.cpp
-	./model/environments/bullet/EnvironmentBt.cpp
-	./model/environments/bullet/HillsBt.cpp
-	./model/environments/bullet/PlaneBt.cpp
+    ./model/universe/environments/EnvironmentPhysics.cpp
+	./model/universe/environments/bullet/EnvironmentBt.cpp
+	./model/universe/environments/bullet/HillsBt.cpp
+	./model/universe/environments/bullet/PlaneBt.cpp
    
    ## juries
-	./model/evolution/juries/Jury.cpp
-	./model/evolution/juries/Ones.cpp
-	./model/evolution/juries/Velocity.cpp
+	./model/universe/evolution/juries/Jury.cpp
+	./model/universe/evolution/juries/Ones.cpp
+	./model/universe/evolution/juries/Velocity.cpp
 	
 	
 	## evolution
-	./model/evolution/EvolutionModel.cpp
-	./model/evolution/Reaper.cpp
-	./model/evolution/population/PopulationModel.cpp
-	./model/evolution/population/creature/CreatureModel.cpp
+	./model/universe/evolution/EvolutionModel.cpp
+	./model/universe/evolution/Reaper.cpp
+	./model/universe/evolution/population/PopulationModel.cpp
+	./model/universe/evolution/population/creature/CreatureModel.cpp
 	
 	## genome
-	./model/evolution/population/creature/genome/Genome.cpp
-	./model/evolution/population/creature/genome/DirectGenome.cpp
-	./model/evolution/population/creature/genome/IndirectGenome.cpp
-	./model/evolution/population/creature/genome/MixedGenome.cpp
-	./model/evolution/population/creature/genome/Gene.cpp
-	./model/evolution/population/creature/genome/GeneBranch.cpp
-	./model/evolution/population/creature/genome/morphology/Morphogene.cpp
-	./model/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp
-	./model/evolution/population/creature/genome/controller/ControllerGene.cpp
-	./model/evolution/population/creature/genome/controller/SineControllerGene.cpp
+	./model/universe/evolution/population/creature/genome/Genome.cpp
+	./model/universe/evolution/population/creature/genome/DirectGenome.cpp
+	./model/universe/evolution/population/creature/genome/IndirectGenome.cpp
+	./model/universe/evolution/population/creature/genome/MixedGenome.cpp
+	./model/universe/evolution/population/creature/genome/Gene.cpp
+	./model/universe/evolution/population/creature/genome/GeneBranch.cpp
+	./model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp
+	./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp
+	./model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp
+	./model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp
 	
 	## phenome
-	./model/evolution/population/creature/phenome/PhenomeModel.cpp
-	./model/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
-	./model/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
-    ./model/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
-	./model/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
-	./model/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp
-	./model/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp
+	./model/universe/evolution/population/creature/phenome/PhenomeModel.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
+    ./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp
 	
 	## controller
-    ./model/evolution/population/creature/phenome/controller/Controller.cpp
-	./model/evolution/population/creature/phenome/controller/ControlInput.cpp
-	./model/evolution/population/creature/phenome/controller/ControlOutput.cpp
-	./model/evolution/population/creature/phenome/controller/sine/SineController.cpp
+    ./model/universe/evolution/population/creature/phenome/controller/Controller.cpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp
+	./model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -349,20 +349,20 @@ set(CONTROLLERHDRS
     
     # entity controllers/model-view facades to control objects at both sides
     ## environments
-    ./controller/environments/Environment.hpp
-    ./controller/environments/Plane.hpp
+    ./controller/universe/environments/Environment.hpp
+    ./controller/universe/environments/Plane.hpp
     
     ## evolution
-    ./controller/evolution/Evolution.hpp
-    ./controller/evolution/population/Population.hpp
+    ./controller/universe/evolution/Evolution.hpp
+    ./controller/universe/evolution/population/Population.hpp
         
     ## phenome
-    ./controller/evolution/population/creature/Creature.hpp
-    ./controller/evolution/genetics/PhenotypeGenerator.hpp
-    ./controller/evolution/population/creature/phenome/Phenome.hpp
-    ./controller/evolution/population/creature/phenome/Component.hpp
-    ./controller/evolution/population/creature/phenome/morphology/Limb.hpp
-    ./controller/evolution/population/creature/phenome/morphology/Joint.hpp
+    ./controller/universe/evolution/population/creature/Creature.hpp
+    ./controller/universe/evolution/genetics/PhenotypeGenerator.hpp
+    ./controller/universe/evolution/population/creature/phenome/Phenome.hpp
+    ./controller/universe/evolution/population/creature/phenome/Component.hpp
+    ./controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp
+    ./controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp
 )
 set(CONTROLLERSRCS
 	# controller
@@ -383,52 +383,52 @@ set(CONTROLLERSRCS
 	
 	# entity controllers/model-view facades to control objects at both sides
 	## environments
-    ./controller/environments/Environment.cpp
-    ./controller/environments/Plane.cpp
+    ./controller/universe/environments/Environment.cpp
+    ./controller/universe/environments/Plane.cpp
     
     ## evolution
-    ./controller/evolution/Evolution.cpp
-    ./controller/evolution/population/Population.cpp
+    ./controller/universe/evolution/Evolution.cpp
+    ./controller/universe/evolution/population/Population.cpp
     
     ## creature
-    ./controller/evolution/population/creature/Creature.cpp
-    ./controller/evolution/genetics/PhenotypeGenerator.cpp
-    ./controller/evolution/population/creature/phenome/Phenome.cpp
-    ./controller/evolution/population/creature/phenome/Component.cpp
-    ./controller/evolution/population/creature/phenome/morphology/Limb.cpp
-    ./controller/evolution/population/creature/phenome/morphology/Joint.cpp
+    ./controller/universe/evolution/population/creature/Creature.cpp
+    ./controller/universe/evolution/genetics/PhenotypeGenerator.cpp
+    ./controller/universe/evolution/population/creature/phenome/Phenome.cpp
+    ./controller/universe/evolution/population/creature/phenome/Component.cpp
+    ./controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp
+    ./controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp
 )
 set(VIEWHDRS
 	# view
 	## environments
-	./view/environments/EnvironmentGraphics.hpp
-	./view/environments/envgenerators/PerlinNoiseTerrainGenerator.hpp
-	./view/environments/EnvironmentO3D.hpp
-	./view/environments/OpenSeaO3D.hpp
-	./view/environments/PlaneO3D.hpp
-	./view/environments/HillsO3D.hpp
+	./view/universe/environments/EnvironmentGraphics.hpp
+	./view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.hpp
+	./view/universe/environments/EnvironmentO3D.hpp
+	./view/universe/environments/OpenSeaO3D.hpp
+	./view/universe/environments/PlaneO3D.hpp
+	./view/universe/environments/HillsO3D.hpp
 	
 	## creature
-    ./view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp
-	./view/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp
-	./view/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp
-	./view/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp
+    ./view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp
+	./view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp
+	./view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp
+	./view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp
 	
 	## physics debug drawing
-	./view/bullet/OgreBtDebugDrawer.hpp
-	./view/bullet/OgreBulletUtils.hpp
+	./view/visualization/bulletphysics/OgreBtDebugDrawer.hpp
+	./view/visualization/bulletphysics/OgreBulletUtils.hpp
 	
 	## information overlay
-	./view/overlay/InfoOverlay.hpp
-	./view/overlay/InfoOverlayData.hpp
+	./view/visualization/overlay/InfoOverlay.hpp
+	./view/visualization/overlay/InfoOverlayData.hpp
 	
     ## CEGUI
-	./view/CEGUI/GUISheetHandler.hpp
-	./view/CEGUI/ParamsPanel.hpp
-	./view/CEGUI/CEGUIBuilder.hpp
+	./view/visualization/CEGUI/GUISheetHandler.hpp
+	./view/visualization/CEGUI/ParamsPanel.hpp
+	./view/visualization/CEGUI/CEGUIBuilder.hpp
 	
 	## MathGL
-    ./view/MathGL/MathGLWindow.hpp
+    ./view/visualization/MathGL/MathGLWindow.hpp
     
     ## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
@@ -437,67 +437,67 @@ set(VIEWHDRS
 	./view/picking/OgreMeshRay.hpp
     
     # procedural
-	./view/procedural/ProceduralPlatform.h
-	./view/procedural/Procedural.h
-	./view/procedural/ProceduralMeshGenerator.h
-	./view/procedural/ProceduralBoxGenerator.h
-	./view/procedural/ProceduralCapsuleGenerator.h
-	./view/procedural/ProceduralConeGenerator.h
-	./view/procedural/ProceduralCylinderGenerator.h
-	./view/procedural/ProceduralIcoSphereGenerator.h
-	./view/procedural/ProceduralPlaneGenerator.h
-	./view/procedural/ProceduralSphereGenerator.h
-	./view/procedural/ProceduralRoot.h
-	./view/procedural/ProceduralRoundedBoxGenerator.h
-	./view/procedural/ProceduralTorusGenerator.h
-	./view/procedural/ProceduralTorusKnotGenerator.h
-	./view/procedural/ProceduralTubeGenerator.h
-	./view/procedural/ProceduralUtils.h
-	./view/procedural/ProceduralExtruder.h
-	./view/procedural/ProceduralLathe.h
-	./view/procedural/ProceduralShape.h
-	./view/procedural/ProceduralShapeGenerators.h
-	./view/procedural/ProceduralPath.h
-	./view/procedural/ProceduralPathGenerators.h
-	./view/procedural/ProceduralTrack.h
-	./view/procedural/ProceduralSplines.h
-	./view/procedural/ProceduralTriangulator.h
-	./view/procedural/ProceduralTriangleBuffer.h
-	./view/procedural/ProceduralStableHeaders.h
-	./view/procedural/ProceduralMultiShape.h
-	./view/procedural/ProceduralGeometryHelpers.h
+	./view/visualization/procedural/ProceduralPlatform.h
+	./view/visualization/procedural/Procedural.h
+	./view/visualization/procedural/ProceduralMeshGenerator.h
+	./view/visualization/procedural/ProceduralBoxGenerator.h
+	./view/visualization/procedural/ProceduralCapsuleGenerator.h
+	./view/visualization/procedural/ProceduralConeGenerator.h
+	./view/visualization/procedural/ProceduralCylinderGenerator.h
+	./view/visualization/procedural/ProceduralIcoSphereGenerator.h
+	./view/visualization/procedural/ProceduralPlaneGenerator.h
+	./view/visualization/procedural/ProceduralSphereGenerator.h
+	./view/visualization/procedural/ProceduralRoot.h
+	./view/visualization/procedural/ProceduralRoundedBoxGenerator.h
+	./view/visualization/procedural/ProceduralTorusGenerator.h
+	./view/visualization/procedural/ProceduralTorusKnotGenerator.h
+	./view/visualization/procedural/ProceduralTubeGenerator.h
+	./view/visualization/procedural/ProceduralUtils.h
+	./view/visualization/procedural/ProceduralExtruder.h
+	./view/visualization/procedural/ProceduralLathe.h
+	./view/visualization/procedural/ProceduralShape.h
+	./view/visualization/procedural/ProceduralShapeGenerators.h
+	./view/visualization/procedural/ProceduralPath.h
+	./view/visualization/procedural/ProceduralPathGenerators.h
+	./view/visualization/procedural/ProceduralTrack.h
+	./view/visualization/procedural/ProceduralSplines.h
+	./view/visualization/procedural/ProceduralTriangulator.h
+	./view/visualization/procedural/ProceduralTriangleBuffer.h
+	./view/visualization/procedural/ProceduralStableHeaders.h
+	./view/visualization/procedural/ProceduralMultiShape.h
+	./view/visualization/procedural/ProceduralGeometryHelpers.h
 )
 set(VIEWSRCS
 	# view
 	## environments
-	./view/environments/EnvironmentGraphics.cpp
-    ./view/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
-	./view/environments/EnvironmentO3D.cpp
-	./view/environments/HillsO3D.cpp
-	./view/environments/OpenSeaO3D.cpp
-	./view/environments/PlaneO3D.cpp
+	./view/universe/environments/EnvironmentGraphics.cpp
+    ./view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp
+	./view/universe/environments/EnvironmentO3D.cpp
+	./view/universe/environments/HillsO3D.cpp
+	./view/universe/environments/OpenSeaO3D.cpp
+	./view/universe/environments/PlaneO3D.cpp
 	
 	## creatures
-	./view/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp
-	./view/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp
-	./view/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp
-	./view/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp
+	./view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp
+	./view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp
+	./view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp
+	./view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp
 	
 	## physics debug drawing
-	./view/bullet/OgreBtDebugDrawer.cpp
+	./view/visualization/bulletphysics/OgreBtDebugDrawer.cpp
 	
 	
 	## information overlay
-	./view/overlay/InfoOverlay.cpp
-	./view/overlay/InfoOverlayData.cpp
+	./view/visualization/overlay/InfoOverlay.cpp
+	./view/visualization/overlay/InfoOverlayData.cpp
 	
 	## CEGUI
-	./view/CEGUI/GUISheetHandler.cpp
-	./view/CEGUI/ParamsPanel.cpp
-	./view/CEGUI/CEGUIBuilder.cpp
+	./view/visualization/CEGUI/GUISheetHandler.cpp
+	./view/visualization/CEGUI/ParamsPanel.cpp
+	./view/visualization/CEGUI/CEGUIBuilder.cpp
 	
 	## MathGL
-	./view/MathGL/MathGLWindow.cpp
+	./view/visualization/MathGL/MathGLWindow.cpp
 	
 	## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp
@@ -506,30 +506,30 @@ set(VIEWSRCS
 	./view/picking/OgreMeshRay.cpp
 	
 	# procedural
-	./view/procedural/ProceduralBoxGenerator.cpp
-	./view/procedural/ProceduralCapsuleGenerator.cpp
-	./view/procedural/ProceduralConeGenerator.cpp
-	./view/procedural/ProceduralCylinderGenerator.cpp
-	./view/procedural/ProceduralIcoSphereGenerator.cpp
-	./view/procedural/ProceduralPlaneGenerator.cpp
-	./view/procedural/ProceduralRoot.cpp
-	./view/procedural/ProceduralRoundedBoxGenerator.cpp
-	./view/procedural/ProceduralSphereGenerator.cpp
-	./view/procedural/ProceduralTorusGenerator.cpp
-	./view/procedural/ProceduralTorusKnotGenerator.cpp
-	./view/procedural/ProceduralTubeGenerator.cpp		
-	./view/procedural/ProceduralUtils.cpp
-	./view/procedural/ProceduralShape.cpp		
-	./view/procedural/ProceduralShapeGenerators.cpp
-	./view/procedural/ProceduralPath.cpp
-	./view/procedural/ProceduralPathGenerators.cpp
-	./view/procedural/ProceduralTrack.cpp
-	./view/procedural/ProceduralExtruder.cpp
-	./view/procedural/ProceduralLathe.cpp
-	./view/procedural/ProceduralTriangulator.cpp
-	./view/procedural/ProceduralPrecompiledHeaders.cpp
-	./view/procedural/ProceduralMultiShape.cpp
-	./view/procedural/ProceduralGeometryHelpers.cpp
+	./view/visualization/procedural/ProceduralBoxGenerator.cpp
+	./view/visualization/procedural/ProceduralCapsuleGenerator.cpp
+	./view/visualization/procedural/ProceduralConeGenerator.cpp
+	./view/visualization/procedural/ProceduralCylinderGenerator.cpp
+	./view/visualization/procedural/ProceduralIcoSphereGenerator.cpp
+	./view/visualization/procedural/ProceduralPlaneGenerator.cpp
+	./view/visualization/procedural/ProceduralRoot.cpp
+	./view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp
+	./view/visualization/procedural/ProceduralSphereGenerator.cpp
+	./view/visualization/procedural/ProceduralTorusGenerator.cpp
+	./view/visualization/procedural/ProceduralTorusKnotGenerator.cpp
+	./view/visualization/procedural/ProceduralTubeGenerator.cpp		
+	./view/visualization/procedural/ProceduralUtils.cpp
+	./view/visualization/procedural/ProceduralShape.cpp		
+	./view/visualization/procedural/ProceduralShapeGenerators.cpp
+	./view/visualization/procedural/ProceduralPath.cpp
+	./view/visualization/procedural/ProceduralPathGenerators.cpp
+	./view/visualization/procedural/ProceduralTrack.cpp
+	./view/visualization/procedural/ProceduralExtruder.cpp
+	./view/visualization/procedural/ProceduralLathe.cpp
+	./view/visualization/procedural/ProceduralTriangulator.cpp
+	./view/visualization/procedural/ProceduralPrecompiledHeaders.cpp
+	./view/visualization/procedural/ProceduralMultiShape.cpp
+	./view/visualization/procedural/ProceduralGeometryHelpers.cpp
 )
 set(MISCHDRS
 	# configuration
@@ -574,14 +574,14 @@ set(TESTSRCS
     ## unit test cases
     ## (unit tests usually only test the model)
     ## therefore it should never be necessary to include the srcs from view and controller above
-    ./model/evolution/juries/Velocity_test.cpp
-    ./model/evolution/juries/Ones_test.cpp
-    ./model/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
-    ./model/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
-    ./model/evolution/population/creature/genome/morphology/Morphogene_test.cpp
-    ./model/evolution/population/creature/genome/Genome_test.cpp
-    ./model/evolution/population/creature/CreatureModel_test.cpp
-    ./model/evolution/population/PopulationModel_test.cpp
+    ./model/universe/evolution/juries/Velocity_test.cpp
+    ./model/universe/evolution/juries/Ones_test.cpp
+    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
+    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
+    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
+    ./model/universe/evolution/population/creature/genome/Genome_test.cpp
+    ./model/universe/evolution/population/creature/CreatureModel_test.cpp
+    ./model/universe/evolution/population/PopulationModel_test.cpp
     ./utils/NameGenerator_test.cpp
     ./utils/Randomness_test.cpp
     

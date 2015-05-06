@@ -31,10 +31,8 @@
 
 //# custom headers
 //## base headers
-#include <view/bullet/OgreBtDebugDrawer.hpp>
-
-//## configuration headers
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
 //## utils headers
 

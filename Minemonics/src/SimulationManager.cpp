@@ -75,16 +75,14 @@
 #include <configuration/OgreSystemConfigStrings.hpp>
 
 //## controller headers
-#include <controller/environments/Hills.hpp>
-#include <controller/environments/Plane.hpp>
-#include <controller/evolution/population/Population.hpp>
+#include <controller/universe/environments/Hills.hpp>
+#include <controller/universe/environments/Plane.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
 
 //## model headers
 //## view headers
-#include <view/CEGUI/CEGUIBuilder.hpp>
-
-//## utils headers
 #include <utils/Randomness.hpp>
+#include <view/visualization/CEGUI/CEGUIBuilder.hpp>
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;

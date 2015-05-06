@@ -32,11 +32,11 @@
 //## controller headers
 #include <controller/input/InputUtils.hpp>
 #include <controller/input/CEGUIInputHandler.hpp>
+#include <view/visualization/CEGUI/ParamsPanel.hpp>
 
 //## model headers
 //## view headers
-#include <view/CEGUI/ParamsPanel.hpp>
-#include <view/MathGL/MathGLWindow.hpp>
+#include <view/visualization/MathGL/MathGLWindow.hpp>
 
 //## utils headers
 

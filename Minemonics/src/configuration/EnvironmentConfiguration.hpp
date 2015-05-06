@@ -11,7 +11,7 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/environments/Environment.hpp>
+#include <controller/universe/environments/Environment.hpp>
 
 //## model headers
 //## view headers
