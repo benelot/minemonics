@@ -12,6 +12,7 @@
 //# forward declarations
 struct btDefaultMotionState;
 class btDynamicsWorld;
+class Limb;
 
 //# system headers
 //## controller headers
@@ -43,9 +44,19 @@ public:
 	LimbBt();
 	virtual ~LimbBt();
 
-	void initialize(btDynamicsWorld* world,
+	/**
+	 * Initialize the bullet limb with the following parameters:
+	 * @param world The dynamics world of the bullet engine to add and remove the limb.
+	 * @param limb The handle of the limb that we want to get back if we raycast for it.
+	 * @param type The primitive type of the limb that should be set as a collision shape.
+	 * @param position The position of the limb.
+	 * @param orientation The orientation of the limb.
+	 * @param dimensions The dimensions of the limb.
+	 * @param mass The mass of the limb.
+	 */
+	void initialize(btDynamicsWorld* world, Limb* limb,
 			MorphologyConfiguration::PrimitiveType type, btVector3 position,
-			btQuaternion orientation, btVector3 size, btScalar mass);
+			btQuaternion orientation, btVector3 dimensions, btScalar mass);
 
 	/**
 	 * Add the limb to the physical world.
@@ -117,7 +128,7 @@ private:
 	btCollisionShape* mCollisionShape;
 	btDefaultMotionState* mMotionState;
 	btRigidBody* mBody;
-	btVector3 mSize;
+	btVector3 mDimensions;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

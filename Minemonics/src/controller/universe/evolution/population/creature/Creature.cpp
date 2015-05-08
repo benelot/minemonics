@@ -47,7 +47,7 @@ void Creature::initialize(SimulationManager* simulationManager,
 }
 
 void Creature::performEmbryogenesis() {
-	mPhenotype->performEmbryogenesis(&mCreature->getGenotype(),
+	mPhenotype->performEmbryogenesis(this,&mCreature->getGenotype(),
 			mCreature->getPosition());
 }
 

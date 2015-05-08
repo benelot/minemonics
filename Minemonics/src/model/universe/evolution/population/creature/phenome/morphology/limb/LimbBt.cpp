@@ -29,25 +29,28 @@ LimbBt::~LimbBt() {
 	delete mBody;
 }
 
-void LimbBt::initialize(btDynamicsWorld* world,
+void LimbBt::initialize(btDynamicsWorld* world,Limb* limb,
 		MorphologyConfiguration::PrimitiveType type, btVector3 position,
-		btQuaternion orientation, btVector3 size, btScalar mass) {
+		btQuaternion orientation, btVector3 dimensions, btScalar mass) {
 	mWorld = world;
-	mSize = size;
-	btVector3 HalfExtents(size.x() * 0.5f, size.y() * 0.5f, size.z() * 0.5f);
+	mDimensions = dimensions;
+	btVector3 HalfExtents(dimensions.x() * 0.5f, dimensions.y() * 0.5f, dimensions.z() * 0.5f);
 	switch (type) {
 	case MorphologyConfiguration::BLOCK:
 		mCollisionShape = new btBoxShape(HalfExtents);
 		break;
 	case MorphologyConfiguration::CAPSULE:
-		mCollisionShape = new btCapsuleShape(btScalar(size.x() * 0.5f),
-				btScalar(size.y()));
+		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x() * 0.5f),
+				btScalar(dimensions.y()));
 		break;
 	}
 
 	btVector3 localInertia(0, 0, 0);
 
 	mCollisionShape->calculateLocalInertia(mass, localInertia);
+
+	//add the limb pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limb);
 
 	btTransform startTransform;
 	startTransform.setIdentity();
@@ -105,7 +108,7 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 
 btVector3 LimbBt::getLocalFakeIntersection(btVector3 origin,
 		btVector3 direction) {
-	return mSize.length() / 2.0f * direction.normalized();
+	return mDimensions.length() / 2.0f * direction.normalized();
 }
 
 btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {

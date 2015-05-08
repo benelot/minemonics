@@ -55,9 +55,11 @@ void Phenome::initialize(SimulationManager* simulationManager) {
 
 /**
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
+ * @param creature the handle to the creature will want to get back from the physics engine when we pick a creature.
  * @param genome The genome we perform embryogenesis with.
+ * @param rootPosition The position the creature should be generated at.
  */
-void Phenome::performEmbryogenesis(MixedGenome* genome,
+void Phenome::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		Ogre::Vector3 rootPosition) {
 	std::list<PhenotypeGenerator*> generatorList;
 	int totalSegmentCounter = 0;
@@ -181,6 +183,7 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 				LimbBt* limbBBt = new LimbBt();
 				limbBBt->initialize(
 						mSimulationManager->getPhysicsController().getDynamicsWorld(),
+						NULL,
 						morphogene->getPrimitiveType(),
 						OgreBulletUtils::convert(generator->getPosition()),
 						btQuaternion(morphogene->getOrientationX(),
@@ -273,7 +276,7 @@ void Phenome::performEmbryogenesis(MixedGenome* genome,
 
 			//build the limb out of the morphogene
 			Limb* limbB = new Limb();
-			limbB->initialize(mSimulationManager,
+			limbB->initialize(mSimulationManager,creature,
 					morphogene->getPrimitiveType(), generator->getPosition(),
 					generator->getOrientation(),
 					/*size*/

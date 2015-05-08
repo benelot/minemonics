@@ -50,10 +50,12 @@ Limb::~Limb() {
 	mLimbPhysics = NULL;
 }
 
-void Limb::initialize(SimulationManager* simulationManager,
+void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
 		Ogre::ColourValue color) {
+	mCreature = creature;
+
 	// Define the new component as a limb
 	Component::initialize(Component::LimbComponent);
 
@@ -65,8 +67,8 @@ void Limb::initialize(SimulationManager* simulationManager,
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
 	((LimbBt*) mLimbPhysics)->initialize(
-			simulationManager->getPhysicsController().getDynamicsWorld(), type,
-			OgreBulletUtils::convert(position),
+			simulationManager->getPhysicsController().getDynamicsWorld(), this,
+			type, OgreBulletUtils::convert(position),
 			OgreBulletUtils::convert(orientation),
 			OgreBulletUtils::convert(size), btScalar(mass));
 

@@ -6,6 +6,7 @@
 
 //# forward declarations
 class SimulationManager;
+class Creature;
 
 //# system headers
 #include <string>
@@ -46,7 +47,7 @@ public:
 	Limb();
 	virtual ~Limb();
 
-	void initialize(SimulationManager* simulationManager,
+	void initialize(SimulationManager* simulationManager,Creature* creature,
 			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
 			Ogre::ColourValue color = Ogre::ColourValue(1, 1, 1));
@@ -108,6 +109,11 @@ public:
 private:
 	LimbGraphics* mLimbGraphics;
 	LimbPhysics* mLimbPhysics;
+
+	/**
+	 * The creature the limb belongs to.
+	 */
+	Creature* mCreature;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_HPP_ */
