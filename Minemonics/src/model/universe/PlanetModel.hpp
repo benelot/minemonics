@@ -31,6 +31,10 @@ public:
 
 	void initialize();
 
+	void proceedEvaluation();
+
+	//Accesssor methods
+
 	EnvironmentModel*& getEnvironmentModel() {
 		return mEnvironmentModel;
 	}
@@ -57,6 +61,10 @@ private:
 	 * The environment model of this planet.
 	 */
 	EnvironmentModel* mEnvironmentModel;
+
+	/**
+	 *
+	 */
 };
 
 #endif /* MODEL_UNIVERSE_PLANETMODEL_HPP_ */

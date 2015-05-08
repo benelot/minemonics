@@ -32,11 +32,32 @@ public:
 
 	void initialize();
 
+	void proceedEvaluation();
+
+	//Accessor methods
+
+	int getCurrentEvaluationPlanetIndex() const {
+		return mCurrentEvaluationPlanetIndex;
+	}
+
+	void setCurrentEvaluationPlanetIndex(int currentEvaluationPlanetIndex) {
+		mCurrentEvaluationPlanetIndex = currentEvaluationPlanetIndex;
+	}
+
+	const std::vector<PlanetModel*>& getPlanetModels() const {
+		return mPlanetModels;
+	}
+
 private:
 	/**
 	 * The models of the planets in this universe.
 	 */
 	std::vector<PlanetModel*> mPlanetModels;
+
+	/**
+	 * Planet being currently evaluated.
+	 */
+	int mCurrentEvaluationPlanetIndex;
 };
 
 #endif /* MODEL_UNIVERSE_UNIVERSEMODEL_HPP_ */

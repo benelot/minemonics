@@ -567,6 +567,10 @@ set(MISCHDRS
 	./utils/ogre3D/Euler.hpp
 )
 set(MISCSRCS
+
+    # configuration
+    ./configuration/EvolutionConfiguration.cpp
+    
 	# logger
 	./utils/logging/Logger.cpp
 	./utils/Randomness.cpp

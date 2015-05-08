@@ -29,3 +29,7 @@ PlanetModel::~PlanetModel() {
 
 void PlanetModel::initialize() {
 }
+
+void PlanetModel::proceedEvaluation() {
+
+}

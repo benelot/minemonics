@@ -226,6 +226,33 @@ SimulationManager.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.s
 .PHONY : SimulationManager.cpp.s
 
+configuration/EvolutionConfiguration.o: configuration/EvolutionConfiguration.cpp.o
+.PHONY : configuration/EvolutionConfiguration.o
+
+# target to build an object file
+configuration/EvolutionConfiguration.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/configuration/EvolutionConfiguration.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.o
+.PHONY : configuration/EvolutionConfiguration.cpp.o
+
+configuration/EvolutionConfiguration.i: configuration/EvolutionConfiguration.cpp.i
+.PHONY : configuration/EvolutionConfiguration.i
+
+# target to preprocess a source file
+configuration/EvolutionConfiguration.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/configuration/EvolutionConfiguration.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.i
+.PHONY : configuration/EvolutionConfiguration.cpp.i
+
+configuration/EvolutionConfiguration.s: configuration/EvolutionConfiguration.cpp.s
+.PHONY : configuration/EvolutionConfiguration.s
+
+# target to generate assembly for a file
+configuration/EvolutionConfiguration.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/configuration/EvolutionConfiguration.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.s
+.PHONY : configuration/EvolutionConfiguration.cpp.s
+
 controller/StateHandler.o: controller/StateHandler.cpp.o
 .PHONY : controller/StateHandler.o
 
@@ -3046,6 +3073,9 @@ help:
 	@echo "... SimulationManager.o"
 	@echo "... SimulationManager.i"
 	@echo "... SimulationManager.s"
+	@echo "... configuration/EvolutionConfiguration.o"
+	@echo "... configuration/EvolutionConfiguration.i"
+	@echo "... configuration/EvolutionConfiguration.s"
 	@echo "... controller/StateHandler.o"
 	@echo "... controller/StateHandler.i"
 	@echo "... controller/StateHandler.s"

@@ -79,6 +79,28 @@ public:
 	 * This is the mutation rate used in mutation operators affecting the genome.
 	 */
 	static const double EVOLUTION_CREATURE_MUTATION_RATE = 0.1;
+
+	// Generation variables
+	/**
+	 * Ratios to which the reaper sows offspring as descendants from the best performing creatures.
+	 * The best performing creature takes part in <ratio> of all cross-overs etc.
+	 */
+	static const double REAPER_SOW_OFFSPRING[]; // Initialization in EvolutionConfiguration.cpp
+	static const int REAPER_GENE_MUTATION_QTY = 3;
+	static const int REAPER_ATTRIBUTE_MUTATION_QTY = 5;
+	static const int REAPER_LINK_MUTATION_QTY = 6;
+
+	static const double REAPER_REAP_PERCENTAGE = 0.1;
+	static const double REAPER_CROSSOVER_PERCENTAGE = 0.5;
+	static const double REAPER_GENE_MUTATION_PERCENTAGE = 0.2;
+	static const double REAPER_ATTRIBUTE_MUTATION_PERCENTAGE = 0.2;
+
+	/**
+	 * How many creatures should be sown randomly.
+	 * = 1.0 - REAPER_ATTRIBUTE_MUTATION_PERCENTAGE - REAPER_CROSSOVER_PERCENTAGE - EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE
+	 */
+	static const double REAPER_SOW_FRESH_PERCENTAGE; // Initialization in EvolutionConfiguration.cpp
+
 };
 
 #endif /* EVOLUTIONCONFIGURATION_H_ */

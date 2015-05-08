@@ -25,46 +25,81 @@ class Environment;
  */
 class EvolutionModel {
 public:
+
+	// Evolution states
+		enum EvolutionState {
+			EVALUATION, GENERATION, PROCESSING
+		};
+
+		/**
+		 * The type evaluation
+		 */
+		enum EvaluationType {
+			INDIVIDUAL_EVALUATION /**< Every individual gets separately evaluated.*/,
+			N_TOURNAMENT_EVALUATION /**< Individual get evaluated in groups of n (Individuals Tournament).*/,
+			POPULATION_EVALUATION /**< Each population gets evaluated as a whole.*/,
+			N_POPULATION_EVALUATION /**< A group of n individuals from each population get evaluated.*/,
+			N_POPULATIONS_EVALUATION /**< N populations are evaluated together (Populations Tournament).*/,
+			POPULATIONS_EVALUATION/**< All populations are evaluated together.*/
+		};
+
 	EvolutionModel();
 	~EvolutionModel();
 
-	void proceed();
+	void initialize(double evaluationTime);
+
+	bool evaluate();
+
+	bool selectAndReap();
+
+	bool evolve();
 
 	//accessor methods
 	const Reaper& getReaper() const {
 		return mReaper;
 	}
 
-	void setReaper(const Reaper& reaper) {
-		mReaper = reaper;
+	EvolutionState getState() const {
+		return mState;
 	}
 
-protected:
+	EvaluationType getType() const {
+		return mType;
+	}
+
+	const std::vector<PopulationModel>& getPopulationModels() const {
+		return populationModels;
+	}
+
+	double getEvaluationTime() const {
+		return mEvaluationTime;
+	}
+
+private:
 	/**
 	 * The vector of populations that are evaluated.
 	 */
 	std::vector<PopulationModel> populationModels;
-private:
-	Reaper mReaper;
-
-	// Evolution states
-	enum EvolutionState
-	{
-		EVALUATION, GENERATION, PROCESSING
-	};
-
-	EvolutionState mState;
-
 
 	/**
-	 * The type evaluation
+	 * The reaper of this evolution model.
 	 */
-	enum EvaluationType
-	{
-		INDIVIDUAL_EVALUATION,N_EVALUATION,POPULATION_EVALUATION
-	};
+	Reaper mReaper;
 
+	/**
+	 * The state this evolution is in.
+	 */
+	EvolutionState mState;
+
+	/**
+	 * The type of evolution model.
+	 */
 	EvaluationType mType;
+
+	/**
+	 * Evaluation time
+	 */
+	double mEvaluationTime;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_EVOLUTIONMODEL_HPP_ */
