@@ -40,7 +40,7 @@ Joint::~Joint() {
 void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 		Limb* limbB, btTransform localA, btTransform localB) {
 	// Define the new component as a limb
-	Component::initialize(Component::JointComponent);
+	Component::initialize(ComponentModel::JointComponent);
 
 	// initialize the graphics part of the joint
 	mJointGraphics = new JointO3D();

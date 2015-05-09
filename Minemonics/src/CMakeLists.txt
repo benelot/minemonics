@@ -18,216 +18,6 @@ cmake_minimum_required(VERSION 2.6)
  
 project(OgreApp)
 
-message(STATUS "Compiler version:${CMAKE_CXX_COMPILER_VERSION}")
- 
-if(WIN32)
-	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
-	set(OGRE_SAMPLES_INCLUDEPATH
-		$ENV{OGRE_HOME}/Samples/include
-	)
-endif(WIN32)
- 
-if(UNIX)
-	if(EXISTS "/usr/local/lib/OGRE/cmake")
-
-	  set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-	  #set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
-
-	elseif(EXISTS "/usr/lib/OGRE/cmake")
-
-	  set(CMAKE_MODULE_PATH "/usr/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-	  #set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
-
-	else ()
-	  message(SEND_ERROR "Failed to find module path.")
-	endif(EXISTS "/usr/local/lib/OGRE/cmake")
-	set(PROJECT_HOME .)
-endif(UNIX)
-
-set(CMAKE_BUILD_TYPE "Debug")
- 
-if (CMAKE_BUILD_TYPE STREQUAL "")
-  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
-  # differentiation between debug and release builds.
-  set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
-endif ()
- 
-set(CMAKE_DEBUG_POSTFIX "_d")
- 
-set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules/")
-
-
-######################################################################
-# OGRE, OGRE Terrain
-######################################################################
-
- 
-find_package(OGRE REQUIRED)
-
-# USERADDED for terrain usage
-# Add OgreTerrain.{so,dll,etc.} to our linked libraries
-#   These variables are defined in FindOGRE.cmake, mine is
-#   found at /usr/local/lib/OGRE/cmake/
-if (OGRE_Terrain_FOUND)
-# append OgreTerrain to the end of the OGRE_LIBRARIES variable
-  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Terrain_LIBRARIES})  
-  message(STATUS "Found OGRE_Terrain: ${OGRE_Terrain_LIBRARIES}")
-else (OGRE_Terrain_FOUND)
-  message(SEND_ERROR "OgreTerrain Library not found.")
-endif(OGRE_Terrain_FOUND)
-
-
-if (OGRE_Paging_FOUND)
-# append OgrePaging to the end of the OGRE_LIBRARIES variable
-  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Paging_LIBRARIES})  
-  message(STATUS "Found OGRE_Paging: ${OGRE_Paging_LIBRARIES}")
-else (OGRE_Paging_FOUND)
-  message(SEND_ERROR "OgrePaging Library not found.")
-endif(OGRE_Paging_FOUND)
-
-if (OGRE_Overlay_FOUND)
-# append OgreOverlay to the end of the OGRE_LIBRARIES variable
-  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})  
-  message(STATUS "Found OGRE_Overlay: ${OGRE_Overlay_LIBRARIES}")
-else (OGRE_Overlay_FOUND)
-  message(SEND_ERROR "OgreOverlay Library not found.")
-endif(OGRE_Overlay_FOUND)
- 
-######################################################################
-# BOOST
-######################################################################
- 
-# Find Boost
-if (WIN32 OR APPLE OR OGRE_STATIC)
-	set(Boost_USE_STATIC_LIBS ON)
-else ()
-	# Statically linking boost to a dynamic Ogre build doesn't work on Linux 64bit
-	set(Boost_USE_STATIC_LIBS OFF)
-endif ()
-if(OGRE_STATIC AND OGRE_BUILD_PLATFORM_APPLE_IOS)
-        set(Boost_USE_MULTITHREADED OFF)
-endif()
-	
-	
-if (MINGW)
-	# this is probably a bug in CMake: the boost find module tries to look for
-	# boost libraries with name libboost_*, but CMake already prefixes library
-	# search names with "lib". This is the workaround.
-	set(CMAKE_FIND_LIBRARY_PREFIXES ${CMAKE_FIND_LIBRARY_PREFIXES} "")
-endif ()
-#include <OgreSceneManager.h>
-  
-set(MINEMONICS_BOOST_COMPONENTS log)
-find_package(Boost COMPONENTS ${MINEMONICS_BOOST_COMPONENTS} REQUIRED)
-
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
-set(OGRE_INCLUDE_DIRS ${OGRE_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-
-if(Boost_FOUND)
-	message(STATUS "Found Boost log: ${Boost_LIBRARIES}")
-else ()
-	message(SEND_ERROR "Failed to find Boost.")
-endif(Boost_FOUND)
-
-## OGRE dependencies
-
-set(Boost_ADDITIONAL_VERSIONS "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
-# Components that need linking (NB does not include header-only components like bind)
-## DEVELOPMENT: Minemonics needs log
-set(OGRE_BOOST_COMPONENTS thread date_time)
-find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} REQUIRED)
-if (NOT Boost_FOUND)
-	# Try again with the other type of libs
-	set(Boost_USE_STATIC_LIBS NOT ${Boost_USE_STATIC_LIBS})
-	find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} REQUIRED)
-endif()
-if (Boost_FOUND AND WIN32)
-    if(Boost_VERSION GREATER 104700)
-        set(OGRE_BOOST_COMPONENTS thread date_time regex system)
-    endif(Boost_VERSION GREATER 104700)
-    if(Boost_VERSION GREATER 104900)
-        set(OGRE_BOOST_COMPONENTS thread date_time regex system chrono)
-    endif(Boost_VERSION GREATER 104900)
-    find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} REQUIRED)
-endif(Boost_FOUND AND WIN32)
-find_package(Boost REQUIRED)
-
-if(Boost_FOUND)
-	message(STATUS "Found Boost: ${Boost_LIBRARIES}")
-else ()
-	message(SEND_ERROR "Failed to find Boost.")
-endif(Boost_FOUND)
- 
-# Set up referencing of Boost
-include_directories(${Boost_INCLUDE_DIRS})
-add_definitions(-DBOOST_ALL_NO_LIB)
-add_definitions(-DBOOST_LOG_DYN_LINK)
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
-
-######################################################################
-# SDL2
-######################################################################
-
-find_package(SDL2 REQUIRED)
-
-include_directories(${SDL2_INCLUDE_DIR})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${SDL2_LIBRARY})
-
-
-######################################################################
-# CEGUI
-######################################################################
-
-find_package(CEGUI REQUIRED)
-
-include_directories(${CEGUI_INCLUDE_DIR})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_LIBRARIES})
-include_directories(${CEGUI_OgreRenderer_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
-
-######################################################################
-# MathGL (for graph drawing capabilities)
-######################################################################
-
-find_package(MathGL2 REQUIRED)
-
-include_directories(${MATHGL2_INCLUDE_DIR})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
-
-######################################################################
-# FFmpeg (for video capabilities)
-######################################################################
-
-find_package(FFMPEG REQUIRED)
-
-include_directories(${FFMPEG_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
-
-######################################################################
-# Shark 2 (Is not a required library anymore)
-######################################################################
-
-find_package(Shark2 REQUIRED)
-
-include_directories(${Shark2_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
-
-######################################################################
-# Bullet 3 physics libary
-######################################################################
-
-find_package(Bullet REQUIRED)
-
-include_directories(${BULLET_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
-
-
-######################################################################
-# COMPILATION
-######################################################################
-
 #DEVELOPMENT INPUT
 # Append header files here
 
@@ -267,6 +57,7 @@ set(MODELHDRS
 	
 	## phenome
 	./model/universe/evolution/population/creature/phenome/PhenomeModel.hpp
+    ./model/universe/evolution/population/creature/phenome/ComponentModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
@@ -318,6 +109,7 @@ set(MODELSRCS
 	
 	## phenome
 	./model/universe/evolution/population/creature/phenome/PhenomeModel.cpp
+	./model/universe/evolution/population/creature/phenome/ComponentModel.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
@@ -636,6 +428,218 @@ set(SRCS
 	./BaseApplication.cpp
 	./SimulationManager.cpp	
 )
+
+message(STATUS "Compiler version:${CMAKE_CXX_COMPILER_VERSION}")
+ 
+if(WIN32)
+	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
+	set(OGRE_SAMPLES_INCLUDEPATH
+		$ENV{OGRE_HOME}/Samples/include
+	)
+endif(WIN32)
+ 
+if(UNIX)
+	if(EXISTS "/usr/local/lib/OGRE/cmake")
+
+	  set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+	  #set(OGRE_SAMPLES_INCLUDEPATH "/usr/local/share/OGRE/samples/Common/include/") # We could just *assume* that developers uses this basepath : /usr/local
+
+	elseif(EXISTS "/usr/lib/OGRE/cmake")
+
+	  set(CMAKE_MODULE_PATH "/usr/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+	  #set(OGRE_SAMPLES_INCLUDEPATH "/usr/share/OGRE/samples/Common/include/") # Otherwise, this one
+
+	else ()
+	  message(SEND_ERROR "Failed to find module path.")
+	endif(EXISTS "/usr/local/lib/OGRE/cmake")
+	set(PROJECT_HOME .)
+endif(UNIX)
+
+set(CMAKE_BUILD_TYPE "Debug")
+ 
+if (CMAKE_BUILD_TYPE STREQUAL "")
+  # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
+  # differentiation between debug and release builds.
+  set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING "Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel." FORCE)
+endif ()
+ 
+set(CMAKE_DEBUG_POSTFIX "_d")
+ 
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules/")
+
+
+######################################################################
+# OGRE, OGRE Terrain
+######################################################################
+
+ 
+find_package(OGRE REQUIRED)
+
+# USERADDED for terrain usage
+# Add OgreTerrain.{so,dll,etc.} to our linked libraries
+#   These variables are defined in FindOGRE.cmake, mine is
+#   found at /usr/local/lib/OGRE/cmake/
+if (OGRE_Terrain_FOUND)
+# append OgreTerrain to the end of the OGRE_LIBRARIES variable
+  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Terrain_LIBRARIES})  
+  message(STATUS "Found OGRE_Terrain: ${OGRE_Terrain_LIBRARIES}")
+else (OGRE_Terrain_FOUND)
+  message(SEND_ERROR "OgreTerrain Library not found.")
+endif(OGRE_Terrain_FOUND)
+
+
+if (OGRE_Paging_FOUND)
+# append OgrePaging to the end of the OGRE_LIBRARIES variable
+  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Paging_LIBRARIES})  
+  message(STATUS "Found OGRE_Paging: ${OGRE_Paging_LIBRARIES}")
+else (OGRE_Paging_FOUND)
+  message(SEND_ERROR "OgrePaging Library not found.")
+endif(OGRE_Paging_FOUND)
+
+if (OGRE_Overlay_FOUND)
+# append OgreOverlay to the end of the OGRE_LIBRARIES variable
+  set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})  
+  message(STATUS "Found OGRE_Overlay: ${OGRE_Overlay_LIBRARIES}")
+else (OGRE_Overlay_FOUND)
+  message(SEND_ERROR "OgreOverlay Library not found.")
+endif(OGRE_Overlay_FOUND)
+ 
+######################################################################
+# BOOST
+######################################################################
+ 
+# Find Boost
+if (WIN32 OR APPLE OR OGRE_STATIC)
+	set(Boost_USE_STATIC_LIBS ON)
+else ()
+	# Statically linking boost to a dynamic Ogre build doesn't work on Linux 64bit
+	set(Boost_USE_STATIC_LIBS OFF)
+endif ()
+if(OGRE_STATIC AND OGRE_BUILD_PLATFORM_APPLE_IOS)
+        set(Boost_USE_MULTITHREADED OFF)
+endif()
+	
+	
+if (MINGW)
+	# this is probably a bug in CMake: the boost find module tries to look for
+	# boost libraries with name libboost_*, but CMake already prefixes library
+	# search names with "lib". This is the workaround.
+	set(CMAKE_FIND_LIBRARY_PREFIXES ${CMAKE_FIND_LIBRARY_PREFIXES} "")
+endif ()
+#include <OgreSceneManager.h>
+  
+set(MINEMONICS_BOOST_COMPONENTS log)
+find_package(Boost COMPONENTS ${MINEMONICS_BOOST_COMPONENTS} REQUIRED)
+
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
+set(OGRE_INCLUDE_DIRS ${OGRE_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+
+if(Boost_FOUND)
+	message(STATUS "Found Boost log: ${Boost_LIBRARIES}")
+else ()
+	message(SEND_ERROR "Failed to find Boost.")
+endif(Boost_FOUND)
+
+## OGRE dependencies
+
+set(Boost_ADDITIONAL_VERSIONS "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
+# Components that need linking (NB does not include header-only components like bind)
+## DEVELOPMENT: Minemonics needs log
+set(OGRE_BOOST_COMPONENTS thread date_time)
+find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} REQUIRED)
+if (NOT Boost_FOUND)
+	# Try again with the other type of libs
+	set(Boost_USE_STATIC_LIBS NOT ${Boost_USE_STATIC_LIBS})
+	find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} REQUIRED)
+endif()
+if (Boost_FOUND AND WIN32)
+    if(Boost_VERSION GREATER 104700)
+        set(OGRE_BOOST_COMPONENTS thread date_time regex system)
+    endif(Boost_VERSION GREATER 104700)
+    if(Boost_VERSION GREATER 104900)
+        set(OGRE_BOOST_COMPONENTS thread date_time regex system chrono)
+    endif(Boost_VERSION GREATER 104900)
+    find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} REQUIRED)
+endif(Boost_FOUND AND WIN32)
+find_package(Boost REQUIRED)
+
+if(Boost_FOUND)
+	message(STATUS "Found Boost: ${Boost_LIBRARIES}")
+else ()
+	message(SEND_ERROR "Failed to find Boost.")
+endif(Boost_FOUND)
+ 
+# Set up referencing of Boost
+include_directories(${Boost_INCLUDE_DIRS})
+add_definitions(-DBOOST_ALL_NO_LIB)
+add_definitions(-DBOOST_LOG_DYN_LINK)
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
+
+######################################################################
+# SDL2
+######################################################################
+
+find_package(SDL2 REQUIRED)
+
+include_directories(${SDL2_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${SDL2_LIBRARY})
+
+
+######################################################################
+# CEGUI
+######################################################################
+
+find_package(CEGUI REQUIRED)
+
+include_directories(${CEGUI_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_LIBRARIES})
+include_directories(${CEGUI_OgreRenderer_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
+
+######################################################################
+# MathGL (for graph drawing capabilities)
+######################################################################
+
+find_package(MathGL2 REQUIRED)
+
+include_directories(${MATHGL2_INCLUDE_DIR})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
+
+######################################################################
+# FFmpeg (for video capabilities)
+######################################################################
+
+find_package(FFMPEG REQUIRED)
+
+include_directories(${FFMPEG_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
+
+######################################################################
+# Shark 2 (Is not a required library anymore)
+######################################################################
+
+find_package(Shark2 REQUIRED)
+
+include_directories(${Shark2_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
+
+######################################################################
+# Bullet 3 physics libary
+######################################################################
+
+find_package(Bullet REQUIRED)
+
+include_directories(${BULLET_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
+
+
+######################################################################
+# COMPILATION
+######################################################################
+
+## headers and source definitions above
  
 include_directories(
 	${OGRE_INCLUDE_DIRS}

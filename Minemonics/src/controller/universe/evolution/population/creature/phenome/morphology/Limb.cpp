@@ -60,7 +60,7 @@ void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 	mCreature = creature;
 
 	// Define the new component as a limb
-	Component::initialize(Component::LimbComponent);
+	Component::initialize(ComponentModel::LimbComponent);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();

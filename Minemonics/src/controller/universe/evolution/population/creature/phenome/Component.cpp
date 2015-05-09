@@ -21,14 +21,13 @@
 //## view headers
 //## utils headers
 
-Component::Component() :
-		mComponentType(UnknownComponent) {
+Component::Component() {
 }
 
 Component::~Component() {
 }
 
-void Component::initialize(ComponentType componentType) {
-	mComponentType = componentType;
+void Component::initialize(ComponentModel::ComponentType componentType) {
+	mComponentModel.initialize(componentType);
 }
 

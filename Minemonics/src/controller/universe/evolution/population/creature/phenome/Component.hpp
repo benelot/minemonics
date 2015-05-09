@@ -12,6 +12,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -26,13 +28,9 @@ public:
 	Component();
 	virtual ~Component();
 
-	enum ComponentType {
-		UnknownComponent, LimbComponent, JointComponent
-	};
-
-	void initialize(ComponentType componentType);
+	void initialize(ComponentModel::ComponentType componentType);
 private:
-	ComponentType mComponentType;
+	ComponentModel mComponentModel;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENT_H_ */

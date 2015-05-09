@@ -1570,6 +1570,33 @@ model/universe/evolution/population/creature/genome/morphology/Morphogene_test.c
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp.s
 
+model/universe/evolution/population/creature/phenome/ComponentModel.o: model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
+.PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.o
+
+# target to build an object file
+model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
+.PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
+
+model/universe/evolution/population/creature/phenome/ComponentModel.i: model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
+.PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.i
+
+# target to preprocess a source file
+model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
+.PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
+
+model/universe/evolution/population/creature/phenome/ComponentModel.s: model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
+.PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.s
+
+# target to generate assembly for a file
+model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
+.PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
+
 model/universe/evolution/population/creature/phenome/PhenomeModel.o: model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/PhenomeModel.o
 
@@ -3286,6 +3313,9 @@ help:
 	@echo "... model/universe/evolution/population/creature/genome/morphology/Morphogene_test.o"
 	@echo "... model/universe/evolution/population/creature/genome/morphology/Morphogene_test.i"
 	@echo "... model/universe/evolution/population/creature/genome/morphology/Morphogene_test.s"
+	@echo "... model/universe/evolution/population/creature/phenome/ComponentModel.o"
+	@echo "... model/universe/evolution/population/creature/phenome/ComponentModel.i"
+	@echo "... model/universe/evolution/population/creature/phenome/ComponentModel.s"
 	@echo "... model/universe/evolution/population/creature/phenome/PhenomeModel.o"
 	@echo "... model/universe/evolution/population/creature/phenome/PhenomeModel.i"
 	@echo "... model/universe/evolution/population/creature/phenome/PhenomeModel.s"
