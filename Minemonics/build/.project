@@ -279,6 +279,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] OgreApp/Source Files/JointModel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] OgreApp/Source Files/JointPhysics.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp</location>
@@ -797,6 +802,11 @@
 			<name>[Targets]/[exe] OgreApp/Header Files/LimbBt.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] OgreApp/Header Files/JointModel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] OgreApp/Header Files/JointPhysics.hpp</name>
@@ -1454,6 +1464,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/JointModel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointPhysics.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp</location>
@@ -1717,6 +1732,11 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/LimbBt.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/JointModel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointPhysics.hpp</name>

@@ -40,6 +40,9 @@ public:
 			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation,Ogre::Vector3 dimensions, double mass);
 
+
+	//TODO: Implement serialization methods for LimbModel.
+
 	//Accessor methods
 	/**
 	 * The the limb physics model of the limb.

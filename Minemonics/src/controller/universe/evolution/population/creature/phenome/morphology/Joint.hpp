@@ -23,6 +23,7 @@ class JointGraphics;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
@@ -110,7 +111,7 @@ public:
 	 * @return The motors of this joint.
 	 */
 	std::vector<Motor*> getMotors(){
-		return mJointPhysics->getMotors();
+		return mJointModel->getJointPhysics()->getMotors();
 	}
 
 
@@ -120,8 +121,8 @@ public:
 		return mJointGraphics;
 	}
 
-	JointPhysics*& getJointPhysics() {
-		return mJointPhysics;
+	JointPhysics* getJointPhysics() {
+		return mJointModel->getJointPhysics();
 	}
 
 private:
@@ -131,9 +132,9 @@ private:
 	JointGraphics* mJointGraphics;
 
 	/**
-	 * Physics model representation of the joint.
+	 * Model representation of the joint.
 	 */
-	JointPhysics* mJointPhysics;
+	JointModel* mJointModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_HPP_ */

@@ -270,6 +270,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp
@@ -320,6 +321,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp
     ./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp

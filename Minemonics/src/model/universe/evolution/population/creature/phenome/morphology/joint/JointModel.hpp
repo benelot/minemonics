@@ -3,6 +3,9 @@
 
 //# corresponding headers
 //# forward declarations
+class btDynamicsWorld;
+class btRigidBody;
+class btTransform;
 class JointPhysics;
 
 //# system headers
@@ -31,14 +34,16 @@ public:
 	JointModel();
 	virtual ~JointModel();
 
+	void initialize(btDynamicsWorld* world, btRigidBody* limbA,
+			btRigidBody* limbB, btTransform localA, btTransform localB);
 
 	//Accessor methods
 
-	const JointPhysics*& getJointPhysics() const {
+	JointPhysics* getJointPhysics() {
 		return mJointPhysics;
 	}
 
-	void setJointPhysics(const JointPhysics*& jointPhysics) {
+	void setJointPhysics(JointPhysics* jointPhysics) {
 		mJointPhysics = jointPhysics;
 	}
 

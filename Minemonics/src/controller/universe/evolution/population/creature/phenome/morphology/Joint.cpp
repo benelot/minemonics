@@ -29,12 +29,12 @@
 #endif
 
 Joint::Joint() :
-		mJointGraphics(NULL), mJointPhysics(NULL) {
+		mJointGraphics(NULL), mJointModel(NULL) {
 }
 
 Joint::~Joint() {
 	delete mJointGraphics;
-	delete mJointPhysics;
+	delete mJointModel;
 }
 
 void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
@@ -48,8 +48,8 @@ void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 			localA, localB);
 
 	// initialize the physics model of the joint
-	mJointPhysics = new JointBt();
-	((JointBt*) mJointPhysics)->initialize(
+	mJointModel = new JointModel();
+	mJointModel->initialize(
 			simulationManager->getPhysicsController().getDynamicsWorld(),
 			limbA->getLimbPhysics()->getRigidBody(),
 			limbB->getLimbPhysics()->getRigidBody(), localA, localB);
@@ -60,12 +60,12 @@ void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 
 void Joint::initializeRotationalLimitMotors(btVector3 maxForces,
 		btVector3 maxSpeeds) {
-	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(maxForces,
-			maxSpeeds);
+	((JointBt*) mJointModel->getJointPhysics())->initializeRotationalLimitMotors(
+			maxForces, maxSpeeds);
 }
 
 void Joint::update() {
-	mJointPhysics->update();
+	mJointModel->getJointPhysics()->update();
 	mJointGraphics->update();
 }
 
@@ -74,7 +74,7 @@ void Joint::update() {
  */
 void Joint::addToWorld() {
 	mJointGraphics->addToWorld();
-	mJointPhysics->addToWorld();
+	mJointModel->getJointPhysics()->addToWorld();
 }
 
 /**
@@ -82,30 +82,35 @@ void Joint::addToWorld() {
  */
 void Joint::removeFromWorld() {
 	mJointGraphics->removeFromWorld();
-	mJointPhysics->removeFromWorld();
+	mJointModel->getJointPhysics()->removeFromWorld();
 }
 
 void Joint::setAngularLimits(Ogre::Vector3 angularLowerLimit,
 		Ogre::Vector3 angularUpperLimit) {
-	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);
+	mJointModel->getJointPhysics()->setAngularLimits(angularLowerLimit,
+			angularUpperLimit);
 }
 
 void Joint::setAngularStiffness(double jointPitchStiffness,
 		double jointYawStiffness, double jointRollStiffness) {
-	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-			jointRollStiffness);
+	mJointModel->getJointPhysics()->setAngularStiffness(jointPitchStiffness,
+			jointYawStiffness, jointRollStiffness);
 }
 
 void Joint::setAngularDamping(double springPitchDampingCoefficient,
 		double springYawDampingCoefficient,
 		double springRollDampingCoefficient) {
-	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-			springYawDampingCoefficient, springRollDampingCoefficient);
+	mJointModel->getJointPhysics()->setAngularDamping(
+			springPitchDampingCoefficient, springYawDampingCoefficient,
+			springRollDampingCoefficient);
 }
 
 void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(0, pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(1, yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(2, rollEnable);
+	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(0,
+			pitchEnable);
+	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(1,
+			yawEnable);
+	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(2,
+			rollEnable);
 }
