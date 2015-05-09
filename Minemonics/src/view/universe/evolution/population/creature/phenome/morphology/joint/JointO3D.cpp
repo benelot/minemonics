@@ -8,8 +8,8 @@
 //# corresponding header
 #include <SimulationManager.hpp>
 #include <utils/ogre3D/Euler.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
-#include <view/visualization/bulletphysics/OgreBulletUtils.hpp>
 
 //## configuration headers
 //## controller headers

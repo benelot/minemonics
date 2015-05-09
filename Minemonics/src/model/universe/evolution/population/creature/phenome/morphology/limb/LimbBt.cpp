@@ -29,7 +29,7 @@ LimbBt::~LimbBt() {
 	delete mBody;
 }
 
-void LimbBt::initialize(btDynamicsWorld* world,Limb* limb,
+void LimbBt::initialize(btDynamicsWorld* world,void* limb,
 		MorphologyConfiguration::PrimitiveType type, btVector3 position,
 		btQuaternion orientation, btVector3 dimensions, btScalar mass) {
 	mWorld = world;
@@ -49,8 +49,6 @@ void LimbBt::initialize(btDynamicsWorld* world,Limb* limb,
 
 	mCollisionShape->calculateLocalInertia(mass, localInertia);
 
-	//add the limb pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limb);
 
 	btTransform startTransform;
 	startTransform.setIdentity();
@@ -61,8 +59,11 @@ void LimbBt::initialize(btDynamicsWorld* world,Limb* limb,
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
 			mCollisionShape, localInertia);
 	mBody = new btRigidBody(rbInfo);
-	//TODO: Set user pointer for proper return of creature/limb information etc..
-	//mBody->setUserPointer(NULL);
+
+	//Set user pointer for proper return of creature/limb information etc..
+	mBody->setUserPointer(limb);
+	//add the limb pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limb);
 }
 
 btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {

@@ -54,7 +54,7 @@ public:
 	 * @param dimensions The dimensions of the limb.
 	 * @param mass The mass of the limb.
 	 */
-	void initialize(btDynamicsWorld* world, Limb* limb,
+	void initialize(btDynamicsWorld* world, void* limb,
 			MorphologyConfiguration::PrimitiveType type, btVector3 position,
 			btQuaternion orientation, btVector3 dimensions, btScalar mass);
 

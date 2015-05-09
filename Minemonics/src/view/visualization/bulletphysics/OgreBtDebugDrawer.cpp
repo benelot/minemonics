@@ -9,8 +9,8 @@
 #include <OgreManualObject.h>
 #include <OgreSceneManager.h>
 #include <OgreRoot.h>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
-#include <view/visualization/bulletphysics/OgreBulletUtils.hpp>
 
 //## utils headers
 

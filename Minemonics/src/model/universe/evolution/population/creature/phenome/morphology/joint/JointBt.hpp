@@ -20,7 +20,7 @@ class Motor;
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //## view headers
-#include <view/visualization/bulletphysics/OgreBulletUtils.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 //## utils headers
 

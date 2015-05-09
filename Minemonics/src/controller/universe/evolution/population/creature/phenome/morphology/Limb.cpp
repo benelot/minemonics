@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+
 //# forward declarations
 #ifndef NULL
 #define NULL 0
@@ -25,34 +27,35 @@
 #include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <controller/physics/PhysicsController.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
-#include <view/visualization/bulletphysics/OgreBulletUtils.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 //## utils headers
 
 Limb::Limb() :
-		mLimbGraphics(NULL), mLimbPhysics(NULL) {
+		mLimbGraphics(NULL), mLimbModel(NULL), mCreature(NULL) {
 }
 
 Limb::~Limb() {
 	delete mLimbGraphics;
 	mLimbGraphics = NULL;
 
-	delete mLimbPhysics;
-	mLimbPhysics = NULL;
+	delete mLimbModel;
+	mLimbModel = NULL;
+
+	mCreature = NULL;
 }
 
 void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
+		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
 		Ogre::ColourValue color) {
 	mCreature = creature;
 
@@ -61,16 +64,14 @@ void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, size,
+	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, dimensions,
 			color);
 
-	// initialize the physics model of the limb
-	mLimbPhysics = new LimbBt();
-	((LimbBt*) mLimbPhysics)->initialize(
+	//initialize the model of the limb
+	mLimbModel = new LimbModel();
+	mLimbModel->initialize(
 			simulationManager->getPhysicsController().getDynamicsWorld(), this,
-			type, OgreBulletUtils::convert(position),
-			OgreBulletUtils::convert(orientation),
-			OgreBulletUtils::convert(size), btScalar(mass));
+			type, position, orientation, dimensions, mass);
 
 	// Update the state of the limb.
 	update();
@@ -81,7 +82,8 @@ void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
  */
 void Limb::update() {
 	// get the rigid body of the limb
-	btRigidBody* body = ((LimbBt*) mLimbPhysics)->getRigidBody();
+	btRigidBody* body =
+			((LimbBt*) mLimbModel->getLimbPhysics())->getRigidBody();
 
 	// if the limb's rigid body is existing
 	if (body) {
@@ -125,7 +127,7 @@ std::string Limb::getInfo() {
  */
 void Limb::addToWorld() {
 	mLimbGraphics->addToWorld();
-	mLimbPhysics->addToWorld();
+	mLimbModel->getLimbPhysics()->addToWorld();
 }
 
 /**
@@ -133,7 +135,7 @@ void Limb::addToWorld() {
  */
 void Limb::removeFromWorld() {
 	mLimbGraphics->removeFromWorld();
-	mLimbPhysics->removeFromWorld();
+	mLimbModel->getLimbPhysics()->removeFromWorld();
 }
 
 /**

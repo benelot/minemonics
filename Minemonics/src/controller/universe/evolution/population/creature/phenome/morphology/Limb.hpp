@@ -27,6 +27,7 @@ class Creature;
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
@@ -103,12 +104,13 @@ public:
 	 * Get the Physics part of the limb.
 	 */
 	LimbBt* getLimbPhysics() {
-		return ((LimbBt*) mLimbPhysics);
+		return ((LimbBt*) mLimbModel->getLimbPhysics());
 	}
 
 private:
 	LimbGraphics* mLimbGraphics;
-	LimbPhysics* mLimbPhysics;
+
+	LimbModel* mLimbModel;
 
 	/**
 	 * The creature the limb belongs to.

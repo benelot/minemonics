@@ -267,6 +267,7 @@ set(MODELHDRS
 	
 	## phenome
 	./model/universe/evolution/population/creature/phenome/PhenomeModel.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
@@ -316,6 +317,7 @@ set(MODELSRCS
 	
 	## phenome
 	./model/universe/evolution/population/creature/phenome/PhenomeModel.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp
     ./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
@@ -430,7 +432,6 @@ set(VIEWHDRS
 	
 	## physics debug drawing
 	./view/visualization/bulletphysics/OgreBtDebugDrawer.hpp
-	./view/visualization/bulletphysics/OgreBulletUtils.hpp
 	
 	## information overlay
 	./view/visualization/overlay/InfoOverlay.hpp
@@ -565,6 +566,9 @@ set(MISCHDRS
 	./utils/NameGenerator.hpp
 	
 	./utils/ogre3D/Euler.hpp
+	
+	# conversion utils
+    ./utils/ogre3D/OgreBulletUtils.hpp
 )
 set(MISCSRCS
 

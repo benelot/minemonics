@@ -35,8 +35,8 @@
 
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
-#include <view/visualization/bulletphysics/OgreBulletUtils.hpp>
 
 Phenome::Phenome() :
 		mSimulationManager(NULL), mWorld(NULL) {
