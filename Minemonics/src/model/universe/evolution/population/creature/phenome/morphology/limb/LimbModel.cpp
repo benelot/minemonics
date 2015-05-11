@@ -22,7 +22,7 @@
 //## utils headers
 
 LimbModel::LimbModel() :
-		mLimbPhysics(NULL) {
+		mLimbPhysics(NULL), mColor(0, 0, 0), mLimbType(UNKNOWN) {
 }
 
 LimbModel::~LimbModel() {
@@ -31,8 +31,10 @@ LimbModel::~LimbModel() {
 }
 
 void LimbModel::initialize(btDynamicsWorld* world, void* limb,
-		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation,Ogre::Vector3 dimensions, double mass) {
+		PrimitiveType type, Ogre::Vector3 position,
+		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
+		Ogre::ColourValue color) {
+	ComponentModel::initialize(ComponentModel::LimbComponent);
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
@@ -40,4 +42,8 @@ void LimbModel::initialize(btDynamicsWorld* world, void* limb,
 			OgreBulletUtils::convert(position),
 			OgreBulletUtils::convert(orientation),
 			OgreBulletUtils::convert(dimensions), btScalar(mass));
+
+	mDimensions = dimensions;
+	mLimbType = type;
+	mColor = color;
 }

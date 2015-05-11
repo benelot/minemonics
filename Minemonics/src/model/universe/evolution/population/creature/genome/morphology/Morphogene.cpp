@@ -1,28 +1,29 @@
-/*
- * MorphoGene.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-//# corresponding header
-#include <boost/math/constants/constants.hpp>
-#include <configuration/ControlConfiguration.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
+//# corresponding headers
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
-#include <utils/Randomness.hpp>
 
-/**
- * A gene is part of the complete genome of a creature. It encodes for a certain
- * part of it, be it a certain body part, sensor type, an actuator or a neural
- * network connection.
- *
- * @author leviathan
- *
- */
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+#include <boost/math/constants/constants.hpp>
+
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
+//## controller headers
+//## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
+//## view headers
+//## utils headers
+#include <utils/Randomness.hpp>
 
 Morphogene::Morphogene() :
 		mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
-				MorphologyConfiguration::UNKNOWN), mControllerGene(NULL), mFollowUpGene(
+				LimbModel::UNKNOWN), mControllerGene(NULL), mFollowUpGene(
 				-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(
 				0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(0), mRepetitionLimit(
 				0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(0), mOrientationY(
@@ -91,15 +92,15 @@ void Morphogene::initialize(double branchiness) {
 	mColorG = randomness.nextDouble(0.0f, 1.0f);
 	mColorB = randomness.nextDouble(0.0f, 1.0f);
 
-	switch ((MorphologyConfiguration::PrimitiveType) randomness.nextPosInt(1,
-			MorphologyConfiguration::PRIMITIVE_QTY)) {
-	case MorphologyConfiguration::BLOCK: {
+	switch ((LimbModel::PrimitiveType) randomness.nextPosInt(1,
+			LimbModel::PRIMITIVE_QTY)) {
+	case LimbModel::BLOCK: {
 		//Randomly choose a segment primitive
-		mPrimitiveType = MorphologyConfiguration::BLOCK;
+		mPrimitiveType = LimbModel::BLOCK;
 		break;
 	}
-	case MorphologyConfiguration::CAPSULE: {
-		mPrimitiveType = MorphologyConfiguration::CAPSULE;
+	case LimbModel::CAPSULE: {
+		mPrimitiveType = LimbModel::CAPSULE;
 		break;
 	}
 	}

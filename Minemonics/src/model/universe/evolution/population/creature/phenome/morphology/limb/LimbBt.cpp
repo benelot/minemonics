@@ -30,19 +30,22 @@ LimbBt::~LimbBt() {
 }
 
 void LimbBt::initialize(btDynamicsWorld* world,void* limb,
-		MorphologyConfiguration::PrimitiveType type, btVector3 position,
+		LimbModel::PrimitiveType type, btVector3 position,
 		btQuaternion orientation, btVector3 dimensions, btScalar mass) {
 	mWorld = world;
 	mDimensions = dimensions;
 	btVector3 HalfExtents(dimensions.x() * 0.5f, dimensions.y() * 0.5f, dimensions.z() * 0.5f);
 	switch (type) {
-	case MorphologyConfiguration::BLOCK:
+	case LimbModel::BLOCK:
 		mCollisionShape = new btBoxShape(HalfExtents);
 		break;
-	case MorphologyConfiguration::CAPSULE:
+	case LimbModel::CAPSULE:
 		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x() * 0.5f),
 				btScalar(dimensions.y()));
 		break;
+	case LimbModel::UNKNOWN:
+		std::cout << "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
+		exit(-1);
 	}
 
 	btVector3 localInertia(0, 0, 0);

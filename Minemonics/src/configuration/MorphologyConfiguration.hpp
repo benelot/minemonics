@@ -182,14 +182,6 @@ public:
 	 * The initial branch number variance
 	 */
 	static const double BODY_BRANCH_INITIAL_VAR = 5;
-
-	/**
-	 * Primitive type of a limb
-	 */
-	enum PrimitiveType {
-		BLOCK = 2, CAPSULE = 1, UNKNOWN = 0
-	};
-	static const int PRIMITIVE_QTY = 2;
 };
 
 #endif /* MORPHOLOGYCONFIGURATION_H_ */

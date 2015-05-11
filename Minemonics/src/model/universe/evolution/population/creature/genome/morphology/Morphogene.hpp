@@ -1,37 +1,41 @@
 #ifndef MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_MORPHOGENE_H_
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_MORPHOGENE_H_
 
-/**
- * A gene is part of the complete genome of a creature. It encodes for a certain
- * part of it, be it a certain body part, sensor type, an actuator or a neural
- * network connection.
- *
- * @author leviathan
- *
- */
-//# corresponding header
-#include <fstream>
+//# corresponding headers
+//# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
+//# system headers
+#include <stddef.h>
+#include <iostream>
+#include <iterator>
 #include <vector>
 
 //## controller headers
 //## model headers
-// include headers that implement a archive in xml format
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/version.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
 #include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		Brief A gene is part of the complete genome of a creature. It encodes for a certain
+ * part of it, be it a certain body part, sensor type, an actuator or a neural
+ * network connection.
  * @details		Details
  * @date		2014-11-17
  * @author		Benjamin Ellenberger
@@ -248,12 +252,12 @@ public:
 		mZ = z;
 	}
 
-	MorphologyConfiguration::PrimitiveType getPrimitiveType() const {
+	LimbModel::PrimitiveType getPrimitiveType() const {
 		return mPrimitiveType;
 	}
 
 	void setPrimitiveType(
-			MorphologyConfiguration::PrimitiveType primitiveType) {
+			LimbModel::PrimitiveType primitiveType) {
 		mPrimitiveType = primitiveType;
 	}
 
@@ -334,7 +338,7 @@ private:
 	/**
 	 * Segment type
 	 */
-	MorphologyConfiguration::PrimitiveType mPrimitiveType;
+	LimbModel::PrimitiveType mPrimitiveType;
 
 	/**
 	 * A vector of genetic branches

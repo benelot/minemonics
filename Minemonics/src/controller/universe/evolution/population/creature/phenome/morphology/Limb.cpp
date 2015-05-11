@@ -54,27 +54,17 @@ Limb::~Limb() {
 }
 
 void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
-		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
+		LimbModel::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
 		Ogre::ColourValue color) {
-	mCreature = creature;
-
-	// Define the new component as a limb
-	Component::initialize(ComponentModel::LimbComponent);
-
-	// initialize the graphics part of the limb
-	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager, type, dimensions,
-			color);
 
 	//initialize the model of the limb
 	mLimbModel = new LimbModel();
 	mLimbModel->initialize(
 			simulationManager->getPhysicsController().getDynamicsWorld(), this,
-			type, position, orientation, dimensions, mass);
+			type, position, orientation, dimensions, mass, color);
 
-	// Update the state of the limb.
-	update();
+	buildFrom(simulationManager, creature, mLimbModel);
 }
 
 /**
@@ -146,3 +136,23 @@ Ogre::Vector3 Limb::getIntersection(Ogre::Vector3 origin,
 	return mLimbGraphics->getIntersection(origin, direction);
 }
 
+void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
+		LimbModel* limbModel) {
+	mCreature = creature;
+
+	// Define the new component as a limb
+	Component::initialize(ComponentModel::LimbComponent);
+
+	// initialize the graphics part of the limb
+	mLimbGraphics = new LimbO3D();
+	((LimbO3D*) mLimbGraphics)->initialize(simulationManager,
+			limbModel->getLimbType(), limbModel->getDimensions(),
+			limbModel->getColor());
+
+	if (mLimbModel == NULL) {
+		mLimbModel = limbModel;
+	}
+
+	// Update the state of the limb.
+	update();
+}

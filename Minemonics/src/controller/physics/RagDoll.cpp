@@ -5,27 +5,43 @@
  *      Author: leviathan
  */
 
-//# corresponding header
-#include <configuration/MorphologyConfiguration.hpp>
-#include <controller/physics/RagDoll.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
-#include <SimulationManager.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <vector>
+//# corresponding headers
+//# forward declarations
+//# system headers
+#include <stddef.h>
+#include <cmath>
+#include <iterator>
 
 //## controller headers
 //## model headers
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <LinearMath/btMatrix3x3.h>
+#include <LinearMath/btScalar.h>
+#include <LinearMath/btTransform.h>
+#include <LinearMath/btVector3.h>
+#include <OgreQuaternion.h>
+#include <OgreVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
 
 //## configuration headers
+//## controller headers
+#include <controller/physics/PhysicsController.hpp>
+#include <controller/physics/RagDoll.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
+//## view headers
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 #ifndef M_PI
 #define M_PI       3.14159265358979323846
@@ -49,8 +65,8 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	btTransform transform;
 	btTransform localA, localB;
 
-	MorphologyConfiguration::PrimitiveType type =
-			MorphologyConfiguration::CAPSULE;
+	LimbModel::PrimitiveType type =
+			LimbModel::CAPSULE;
 
 	// Setup the geometry
 	// BODYPART_PELVIS

@@ -76,7 +76,7 @@ public:
 	 * @details Details
 	 * @param simulationManager The handle of the simulation manager.
 	 */
-	void initialize(SimulationManager* simulationManager);
+	void initialize(SimulationManager* simulationManager,Creature* creature);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -128,6 +128,9 @@ public:
 	}
 
 private:
+
+	Creature* mCreature;
+
 	/**
 	 * The phenome model representation.
 	 */
@@ -137,11 +140,6 @@ private:
 	 * The simulation manager handle
 	 */
 	SimulationManager* mSimulationManager;
-
-	/**
-	 * The physics world of the physics engine.
-	 */
-	btDynamicsWorld* mWorld;
 
 	/**
 	 * The vector of phenotype components

@@ -25,13 +25,13 @@ JointO3D::~JointO3D() {
 
 }
 
-void JointO3D::initialize(SimulationManager* simulationManager, Limb* limbA,
-		Limb* limbB, btTransform localA, btTransform localB) {
+void JointO3D::initialize(SimulationManager* simulationManager /*, Limb* limbA,
+		Limb* limbB/*, btTransform localA, btTransform localB*/) {
 	mSimulationManager = simulationManager;
-	mLimbA = limbA;
-	mLimbB = limbB;
-	mLocalA = localA;
-	mLocalB = localB;
+//	mLimbA = limbA;
+//	mLimbB = limbB;
+	//mLocalA = localA;
+	//mLocalB = localB;
 }
 
 void JointO3D::update() {
@@ -54,16 +54,16 @@ void JointO3D::update() {
 //	mSimulationManager->getDebugDrawer()->drawLine(limbACOM, limbBCOM,
 //			Ogre::ColourValue(1, 1, 1));
 
-	std::string text;
-	text.append("+");
-	InfoOverlayData* data = new InfoOverlayData(
-			mLimbA->getPosition(), text);
-	mSimulationManager->getInfoOverlay().addInfo(data);
-	text.clear();
-	text.append("x");
-	data = new InfoOverlayData(
-			mLimbB->getPosition(), text);
-	mSimulationManager->getInfoOverlay().addInfo(data);
+//	std::string text;
+//	text.append("+");
+//	InfoOverlayData* data = new InfoOverlayData(
+//			mLimbA->getPosition(), text);
+//	mSimulationManager->getInfoOverlay().addInfo(data);
+//	text.clear();
+//	text.append("x");
+//	data = new InfoOverlayData(
+//			mLimbB->getPosition(), text);
+//	mSimulationManager->getInfoOverlay().addInfo(data);
 
 }
 

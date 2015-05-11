@@ -1,23 +1,23 @@
-/*
- * OgreDebugDrawer.h
- *
- *  Created on: Mar 19, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_BULLET_OGREDEBUGDRAWER_H_
 #define MODEL_BULLET_OGREDEBUGDRAWER_H_
 
 //# corresponding header
 //# forward declarations
 //# system headers
+#include <stddef.h>
+#include <vector>
+
 //## controller headers
 //## model headers
+#include <LinearMath/btIDebugDraw.h>
+#include <LinearMath/btScalar.h>
+
 //## view headers
 #include <bullet/LinearMath/btIDebugDraw.h>
-#include <OgreVector3.h>
 #include <OgreColourValue.h>
 #include <OgreFrameListener.h>
+#include <OgrePrerequisites.h>
+#include <OgreVector3.h>
 
 //# custom headers
 //## base headers
@@ -28,9 +28,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The Ogre Bullet debug drawer draws the bullet physics object visualizations with Ogre means.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-19
  * @author		Benjamin Ellenberger
  */
 class OgreBtDebugDrawer: public btIDebugDraw, public Ogre::FrameListener {

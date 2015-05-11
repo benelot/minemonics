@@ -2,18 +2,19 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_
 
 //# corresponding headers
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+
 //# forward declarations
 class btDynamicsWorld;
 class btRigidBody;
 class btTransform;
-class JointPhysics;
 
 //# system headers
 #include <vector>
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -21,6 +22,9 @@ class JointPhysics;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+
 //## view headers
 //## utils headers
 /**
@@ -29,7 +33,7 @@ class JointPhysics;
  * @date		2015-04-29
  * @author		Benjamin Ellenberger
  */
-class JointModel {
+class JointModel: public ComponentModel {
 public:
 	JointModel();
 	virtual ~JointModel();
@@ -47,21 +51,56 @@ public:
 		mJointPhysics = jointPhysics;
 	}
 
-	const std::vector<Motor*>& getMotors() const {
-		return mMotors;
-	}
+	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
+			Ogre::Vector3 maxSpeeds);
 
-	void setMotors(const std::vector<Motor*>& motors) {
-		mMotors = motors;
+	/**
+	 * Set the angular limits for pitch, yaw and roll.
+	 * @param angularLowerLimit Lower angular limits.
+	 * @param angularUpperLimit Upper angular limits.
+	 */
+	void setAngularLimits(Ogre::Vector3 angularLowerLimit,
+			Ogre::Vector3 angularUpperLimit);
+
+	/**
+	 * Set angular joint stiffness.
+	 * @param jointPitchStiffness Joint stiffness in pitch direction.
+	 * @param jointYawStiffness Joint stiffness in yaw direction.
+	 * @param jointRollStiffness Joint stiffness in roll direction.
+	 */
+	void setAngularStiffness(double jointPitchStiffness,
+			double jointYawStiffness, double jointRollStiffness);
+
+	/**
+	 * Set the spring damping coefficients.
+	 * @param springPitchDampingCoefficient Damping coefficient of the spring in pitch direction.
+	 * @param springYawDampingCoefficient Damping coefficient of the spring in yaw direction.
+	 * @param springRollDampingCoefficient Damping coefficient of the spring in roll direction.
+	 */
+	void setAngularDamping(double springPitchDampingCoefficient,
+			double springYawDampingCoefficient,
+			double springRollDampingCoefficient);
+
+	/**
+	 * Enable angular motors.
+	 * @param pitchEnable Enable pitch motor.
+	 * @param yawEnable Enable yaw motor.
+	 * @param rollEnable Enable roll motor.
+	 */
+	void enableAngularMotor(bool pitchEnable, bool yawEnable, bool rollEnable);
+
+	/**
+	 * Get the motors of this joint.
+	 * @return The motors of this joint.
+	 */
+	const std::vector<Motor*> getMotors(){
+		return mJointPhysics->getMotors();
 	}
 
 private:
 	JointPhysics* mJointPhysics;
 
-	/**
-	 * The motors of the joints. Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
-	 */
-	std::vector<Motor*> mMotors;
+
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_ */

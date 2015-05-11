@@ -34,7 +34,7 @@ LimbO3D::~LimbO3D() {
 }
 
 void LimbO3D::initialize(SimulationManager* simulationManager,
-		MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 scale,
+		LimbModel::PrimitiveType type, Ogre::Vector3 scale,
 		Ogre::ColourValue color) {
 	mSimulationManager = simulationManager;
 
@@ -62,7 +62,7 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 	tex->setTextureAnisotropy(8);
 
 	switch (type) {
-	case MorphologyConfiguration::BLOCK:
+	case LimbModel::BLOCK:
 
 		tex->setTextureScale(4, 4);
 		material->load();
@@ -78,7 +78,7 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 				scale.y * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
 				scale.z * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR);
 		break;
-	case MorphologyConfiguration::CAPSULE:
+	case LimbModel::CAPSULE:
 
 		material->load();
 		//because we can only scale bullet capsule that way, we do not scale this object differently

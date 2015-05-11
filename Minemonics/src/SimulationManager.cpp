@@ -102,7 +102,11 @@ SimulationManager::SimulationManager(void) :
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
+	destroyScene();
+	CEGUI::OgreRenderer::destroySystem();
+}
 
+void SimulationManager::destroyScene(void) {
 	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
 	for (; it != mRagdolls.end(); it++) {
 		(*it)->removeFromWorld();
@@ -113,11 +117,6 @@ SimulationManager::~SimulationManager(void) {
 		(*cit)->removeFromWorld();
 	}
 
-	destroyScene();
-	CEGUI::OgreRenderer::destroySystem();
-}
-
-void SimulationManager::destroyScene(void) {
 	mPhysicsController.exitBulletPhysics();
 
 }
@@ -178,7 +177,7 @@ void SimulationManager::createFrameListener(void) {
 	}
 
 	Population population;
-	population.initialize(this,100);
+	population.initialize(this, 100);
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
@@ -230,7 +229,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//update all physical objects
 	updatePhysics();
 
-
 	//draw the debug world if it is enabled
 	if (mDrawBulletDebug) {
 		mPhysicsController.getDynamicsWorld()->debugDrawWorld();
@@ -238,7 +236,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	// update the information overlay
 	mInfoOverlay.update();
-
 
 	// update the information panels on the screen
 	updatePanels(evt.timeSinceLastFrame);
@@ -586,14 +583,14 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
 
-	int x,y;
-	SDL_GetMouseState(&x,&y);
+	int x, y;
+	SDL_GetMouseState(&x, &y);
 
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-			x - mousePos.d_x, y- mousePos.d_y);
+			x - mousePos.d_x, y - mousePos.d_y);
 	int w, h;
 	SDL_GetWindowSize(mSdlWindow, &w, &h);
 #if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
@@ -603,7 +600,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 #endif
 
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
-	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width,height));
+	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
 }
 
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
@@ -612,12 +609,11 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 
 		// Align CEGUI mouse with SDL mouse
 		CEGUI::Vector2f mousePos =
-		mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+				mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-				mInputHandler.getMousePositionX() - mousePos.d_x, mInputHandler.getMousePositionY() - mousePos.d_y);
-	}
-	else
-	{
+				mInputHandler.getMousePositionX() - mousePos.d_x,
+				mInputHandler.getMousePositionY() - mousePos.d_y);
+	} else {
 		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
 	}
 }
@@ -676,9 +672,7 @@ bool SimulationManager::configure(void) {
 		// set the window position to full screen
 		posX = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
 		posY = SDL_WINDOWPOS_UNDEFINED_DISPLAY(screen);
-	}
-	else
-	{
+	} else {
 		//center the window on the screen
 		posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 		posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
@@ -722,7 +716,7 @@ bool SimulationManager::configure(void) {
 	break;
 #else
 	case SDL_SYSWM_X11:
-	//required to make OGRE work on Linux
+		//required to make OGRE work on Linux
 		winHandle = Ogre::StringConverter::toString(
 				(unsigned long) wmInfo.info.x11.window);
 		break;

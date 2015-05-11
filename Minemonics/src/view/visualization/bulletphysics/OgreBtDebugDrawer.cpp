@@ -1,18 +1,41 @@
-/*
- * OgreBtDebugDrawer.cpp
- *
- *  Created on: Mar 19, 2015
- *      Author: leviathan
- */
-
-//# corresponding header
-#include <OgreManualObject.h>
-#include <OgreSceneManager.h>
-#include <OgreRoot.h>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
+//# corresponding headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
+//# forward declarations
+//# system headers
+#include <vector>
+
+//## controller headers
+//## model headers
+#include <GLX/OgreTimerImp.h>
+#include <LinearMath/btScalar.h>
+#include <LinearMath/btVector3.h>
+
+//## view headers
+#include <OgreBlendMode.h>
+#include <OgreLog.h>
+#include <OgreLogManager.h>
+#include <OgreManualObject.h>
+#include <OgreMaterial.h>
+#include <OgreMaterialManager.h>
+#include <OgrePass.h>
+#include <OgrePrerequisites.h>
+#include <OgreRenderOperation.h>
+#include <OgreRoot.h>
+#include <OgreSceneManager.h>
+#include <OgreSceneNode.h>
+#include <OgreSingleton.h>
+#include <OgreTechnique.h>
+#include <OgreTextureUnitState.h>
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm,
 		bool drawTrajectory) :

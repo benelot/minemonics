@@ -15,13 +15,13 @@
 //## utils headers
 
 ComponentModel::ComponentModel() :
-		mType(UnknownComponent) {
+		mComponentType(UnknownComponent) {
 }
 
 ComponentModel::~ComponentModel() {
 }
 
 void ComponentModel::initialize(ComponentType type) {
-	mType = type;
+	mComponentType = type;
 }
 

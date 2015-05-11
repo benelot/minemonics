@@ -54,7 +54,14 @@ public:
 	void initialize(SimulationManager* simulationManager, Limb* limbA,
 			Limb* limbB, btTransform localA, btTransform localB);
 
-	void initializeRotationalLimitMotors(btVector3 maxForces, btVector3 maxSpeeds);
+	/**
+	 * Build a joint from the joint model.
+	 * @param simulationManager The handle of the simulation manager.
+	 * @param jointModel The model of the joint.
+	 */
+	void buildFrom(SimulationManager* simulationManager,/*Limb* limbA, Limb* limbB,*/JointModel* jointModel);
+
+	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces, Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Updates the joint position and orientation.

@@ -68,10 +68,15 @@ void PhysicsController::exitBulletPhysics() {
 
 	mCollisionShapes.clear();
 	delete mDynamicsWorld;
+	mDynamicsWorld = 0;
 	delete mSolver;
+	mSolver = 0;
 	delete mBroadphase;
+	mBroadphase = 0;
 	delete mDispatcher;
+	mDispatcher = 0;
 	delete mCollisionConfiguration;
+	mCollisionConfiguration = 0;
 }
 
 void PhysicsController::stepBulletPhysics(double timeStep) {

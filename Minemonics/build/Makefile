@@ -153,17 +153,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named OgreApp
+# Target rules for targets named Minemonics
 
 # Build rule for target.
-OgreApp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 OgreApp
-.PHONY : OgreApp
+Minemonics: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Minemonics
+.PHONY : Minemonics
 
 # fast build rule for target.
-OgreApp/fast:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/build
-.PHONY : OgreApp/fast
+Minemonics/fast:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/build
+.PHONY : Minemonics/fast
 
 #=============================================================================
 # Target rules for targets named runUnitTests
@@ -183,7 +183,7 @@ BaseApplication.o: BaseApplication.cpp.o
 
 # target to build an object file
 BaseApplication.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/BaseApplication.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/BaseApplication.cpp.o
 .PHONY : BaseApplication.cpp.o
 
 BaseApplication.i: BaseApplication.cpp.i
@@ -191,7 +191,7 @@ BaseApplication.i: BaseApplication.cpp.i
 
 # target to preprocess a source file
 BaseApplication.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/BaseApplication.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/BaseApplication.cpp.i
 .PHONY : BaseApplication.cpp.i
 
 BaseApplication.s: BaseApplication.cpp.s
@@ -199,7 +199,7 @@ BaseApplication.s: BaseApplication.cpp.s
 
 # target to generate assembly for a file
 BaseApplication.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/BaseApplication.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/BaseApplication.cpp.s
 .PHONY : BaseApplication.cpp.s
 
 SimulationManager.o: SimulationManager.cpp.o
@@ -207,7 +207,7 @@ SimulationManager.o: SimulationManager.cpp.o
 
 # target to build an object file
 SimulationManager.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/SimulationManager.cpp.o
 .PHONY : SimulationManager.cpp.o
 
 SimulationManager.i: SimulationManager.cpp.i
@@ -215,7 +215,7 @@ SimulationManager.i: SimulationManager.cpp.i
 
 # target to preprocess a source file
 SimulationManager.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/SimulationManager.cpp.i
 .PHONY : SimulationManager.cpp.i
 
 SimulationManager.s: SimulationManager.cpp.s
@@ -223,7 +223,7 @@ SimulationManager.s: SimulationManager.cpp.s
 
 # target to generate assembly for a file
 SimulationManager.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/SimulationManager.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/SimulationManager.cpp.s
 .PHONY : SimulationManager.cpp.s
 
 configuration/EvolutionConfiguration.o: configuration/EvolutionConfiguration.cpp.o
@@ -231,7 +231,7 @@ configuration/EvolutionConfiguration.o: configuration/EvolutionConfiguration.cpp
 
 # target to build an object file
 configuration/EvolutionConfiguration.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/configuration/EvolutionConfiguration.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/EvolutionConfiguration.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.o
 .PHONY : configuration/EvolutionConfiguration.cpp.o
 
@@ -240,7 +240,7 @@ configuration/EvolutionConfiguration.i: configuration/EvolutionConfiguration.cpp
 
 # target to preprocess a source file
 configuration/EvolutionConfiguration.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/configuration/EvolutionConfiguration.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/EvolutionConfiguration.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.i
 .PHONY : configuration/EvolutionConfiguration.cpp.i
 
@@ -249,7 +249,7 @@ configuration/EvolutionConfiguration.s: configuration/EvolutionConfiguration.cpp
 
 # target to generate assembly for a file
 configuration/EvolutionConfiguration.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/configuration/EvolutionConfiguration.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/EvolutionConfiguration.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.s
 .PHONY : configuration/EvolutionConfiguration.cpp.s
 
@@ -258,7 +258,7 @@ controller/StateHandler.o: controller/StateHandler.cpp.o
 
 # target to build an object file
 controller/StateHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/StateHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/StateHandler.cpp.o
 .PHONY : controller/StateHandler.cpp.o
 
 controller/StateHandler.i: controller/StateHandler.cpp.i
@@ -266,7 +266,7 @@ controller/StateHandler.i: controller/StateHandler.cpp.i
 
 # target to preprocess a source file
 controller/StateHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/StateHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/StateHandler.cpp.i
 .PHONY : controller/StateHandler.cpp.i
 
 controller/StateHandler.s: controller/StateHandler.cpp.s
@@ -274,7 +274,7 @@ controller/StateHandler.s: controller/StateHandler.cpp.s
 
 # target to generate assembly for a file
 controller/StateHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/StateHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/StateHandler.cpp.s
 .PHONY : controller/StateHandler.cpp.s
 
 controller/camera/CameraHandler.o: controller/camera/CameraHandler.cpp.o
@@ -282,7 +282,7 @@ controller/camera/CameraHandler.o: controller/camera/CameraHandler.cpp.o
 
 # target to build an object file
 controller/camera/CameraHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/camera/CameraHandler.cpp.o
 .PHONY : controller/camera/CameraHandler.cpp.o
 
 controller/camera/CameraHandler.i: controller/camera/CameraHandler.cpp.i
@@ -290,7 +290,7 @@ controller/camera/CameraHandler.i: controller/camera/CameraHandler.cpp.i
 
 # target to preprocess a source file
 controller/camera/CameraHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/camera/CameraHandler.cpp.i
 .PHONY : controller/camera/CameraHandler.cpp.i
 
 controller/camera/CameraHandler.s: controller/camera/CameraHandler.cpp.s
@@ -298,7 +298,7 @@ controller/camera/CameraHandler.s: controller/camera/CameraHandler.cpp.s
 
 # target to generate assembly for a file
 controller/camera/CameraHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/camera/CameraHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/camera/CameraHandler.cpp.s
 .PHONY : controller/camera/CameraHandler.cpp.s
 
 controller/input/CEGUIInputHandler.o: controller/input/CEGUIInputHandler.cpp.o
@@ -306,7 +306,7 @@ controller/input/CEGUIInputHandler.o: controller/input/CEGUIInputHandler.cpp.o
 
 # target to build an object file
 controller/input/CEGUIInputHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/CEGUIInputHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/CEGUIInputHandler.cpp.o
 .PHONY : controller/input/CEGUIInputHandler.cpp.o
 
 controller/input/CEGUIInputHandler.i: controller/input/CEGUIInputHandler.cpp.i
@@ -314,7 +314,7 @@ controller/input/CEGUIInputHandler.i: controller/input/CEGUIInputHandler.cpp.i
 
 # target to preprocess a source file
 controller/input/CEGUIInputHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/CEGUIInputHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/CEGUIInputHandler.cpp.i
 .PHONY : controller/input/CEGUIInputHandler.cpp.i
 
 controller/input/CEGUIInputHandler.s: controller/input/CEGUIInputHandler.cpp.s
@@ -322,7 +322,7 @@ controller/input/CEGUIInputHandler.s: controller/input/CEGUIInputHandler.cpp.s
 
 # target to generate assembly for a file
 controller/input/CEGUIInputHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/CEGUIInputHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/CEGUIInputHandler.cpp.s
 .PHONY : controller/input/CEGUIInputHandler.cpp.s
 
 controller/input/OgreInputHandler.o: controller/input/OgreInputHandler.cpp.o
@@ -330,7 +330,7 @@ controller/input/OgreInputHandler.o: controller/input/OgreInputHandler.cpp.o
 
 # target to build an object file
 controller/input/OgreInputHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/OgreInputHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/OgreInputHandler.cpp.o
 .PHONY : controller/input/OgreInputHandler.cpp.o
 
 controller/input/OgreInputHandler.i: controller/input/OgreInputHandler.cpp.i
@@ -338,7 +338,7 @@ controller/input/OgreInputHandler.i: controller/input/OgreInputHandler.cpp.i
 
 # target to preprocess a source file
 controller/input/OgreInputHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/OgreInputHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/OgreInputHandler.cpp.i
 .PHONY : controller/input/OgreInputHandler.cpp.i
 
 controller/input/OgreInputHandler.s: controller/input/OgreInputHandler.cpp.s
@@ -346,7 +346,7 @@ controller/input/OgreInputHandler.s: controller/input/OgreInputHandler.cpp.s
 
 # target to generate assembly for a file
 controller/input/OgreInputHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/OgreInputHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/OgreInputHandler.cpp.s
 .PHONY : controller/input/OgreInputHandler.cpp.s
 
 controller/input/SDL2InputHandler.o: controller/input/SDL2InputHandler.cpp.o
@@ -354,7 +354,7 @@ controller/input/SDL2InputHandler.o: controller/input/SDL2InputHandler.cpp.o
 
 # target to build an object file
 controller/input/SDL2InputHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/SDL2InputHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/SDL2InputHandler.cpp.o
 .PHONY : controller/input/SDL2InputHandler.cpp.o
 
 controller/input/SDL2InputHandler.i: controller/input/SDL2InputHandler.cpp.i
@@ -362,7 +362,7 @@ controller/input/SDL2InputHandler.i: controller/input/SDL2InputHandler.cpp.i
 
 # target to preprocess a source file
 controller/input/SDL2InputHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/SDL2InputHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/SDL2InputHandler.cpp.i
 .PHONY : controller/input/SDL2InputHandler.cpp.i
 
 controller/input/SDL2InputHandler.s: controller/input/SDL2InputHandler.cpp.s
@@ -370,7 +370,7 @@ controller/input/SDL2InputHandler.s: controller/input/SDL2InputHandler.cpp.s
 
 # target to generate assembly for a file
 controller/input/SDL2InputHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/input/SDL2InputHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/SDL2InputHandler.cpp.s
 .PHONY : controller/input/SDL2InputHandler.cpp.s
 
 controller/physics/PhysicsController.o: controller/physics/PhysicsController.cpp.o
@@ -378,7 +378,7 @@ controller/physics/PhysicsController.o: controller/physics/PhysicsController.cpp
 
 # target to build an object file
 controller/physics/PhysicsController.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/PhysicsController.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/PhysicsController.cpp.o
 .PHONY : controller/physics/PhysicsController.cpp.o
 
 controller/physics/PhysicsController.i: controller/physics/PhysicsController.cpp.i
@@ -386,7 +386,7 @@ controller/physics/PhysicsController.i: controller/physics/PhysicsController.cpp
 
 # target to preprocess a source file
 controller/physics/PhysicsController.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/PhysicsController.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/PhysicsController.cpp.i
 .PHONY : controller/physics/PhysicsController.cpp.i
 
 controller/physics/PhysicsController.s: controller/physics/PhysicsController.cpp.s
@@ -394,7 +394,7 @@ controller/physics/PhysicsController.s: controller/physics/PhysicsController.cpp
 
 # target to generate assembly for a file
 controller/physics/PhysicsController.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/PhysicsController.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/PhysicsController.cpp.s
 .PHONY : controller/physics/PhysicsController.cpp.s
 
 controller/physics/RagDoll.o: controller/physics/RagDoll.cpp.o
@@ -402,7 +402,7 @@ controller/physics/RagDoll.o: controller/physics/RagDoll.cpp.o
 
 # target to build an object file
 controller/physics/RagDoll.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/RagDoll.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/RagDoll.cpp.o
 .PHONY : controller/physics/RagDoll.cpp.o
 
 controller/physics/RagDoll.i: controller/physics/RagDoll.cpp.i
@@ -410,7 +410,7 @@ controller/physics/RagDoll.i: controller/physics/RagDoll.cpp.i
 
 # target to preprocess a source file
 controller/physics/RagDoll.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/RagDoll.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/RagDoll.cpp.i
 .PHONY : controller/physics/RagDoll.cpp.i
 
 controller/physics/RagDoll.s: controller/physics/RagDoll.cpp.s
@@ -418,7 +418,7 @@ controller/physics/RagDoll.s: controller/physics/RagDoll.cpp.s
 
 # target to generate assembly for a file
 controller/physics/RagDoll.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/physics/RagDoll.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/RagDoll.cpp.s
 .PHONY : controller/physics/RagDoll.cpp.s
 
 controller/universe/Planet.o: controller/universe/Planet.cpp.o
@@ -426,7 +426,7 @@ controller/universe/Planet.o: controller/universe/Planet.cpp.o
 
 # target to build an object file
 controller/universe/Planet.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Planet.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/Planet.cpp.o
 .PHONY : controller/universe/Planet.cpp.o
 
 controller/universe/Planet.i: controller/universe/Planet.cpp.i
@@ -434,7 +434,7 @@ controller/universe/Planet.i: controller/universe/Planet.cpp.i
 
 # target to preprocess a source file
 controller/universe/Planet.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Planet.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/Planet.cpp.i
 .PHONY : controller/universe/Planet.cpp.i
 
 controller/universe/Planet.s: controller/universe/Planet.cpp.s
@@ -442,7 +442,7 @@ controller/universe/Planet.s: controller/universe/Planet.cpp.s
 
 # target to generate assembly for a file
 controller/universe/Planet.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Planet.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/Planet.cpp.s
 .PHONY : controller/universe/Planet.cpp.s
 
 controller/universe/Universe.o: controller/universe/Universe.cpp.o
@@ -450,7 +450,7 @@ controller/universe/Universe.o: controller/universe/Universe.cpp.o
 
 # target to build an object file
 controller/universe/Universe.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Universe.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/Universe.cpp.o
 .PHONY : controller/universe/Universe.cpp.o
 
 controller/universe/Universe.i: controller/universe/Universe.cpp.i
@@ -458,7 +458,7 @@ controller/universe/Universe.i: controller/universe/Universe.cpp.i
 
 # target to preprocess a source file
 controller/universe/Universe.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Universe.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/Universe.cpp.i
 .PHONY : controller/universe/Universe.cpp.i
 
 controller/universe/Universe.s: controller/universe/Universe.cpp.s
@@ -466,7 +466,7 @@ controller/universe/Universe.s: controller/universe/Universe.cpp.s
 
 # target to generate assembly for a file
 controller/universe/Universe.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/Universe.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/Universe.cpp.s
 .PHONY : controller/universe/Universe.cpp.s
 
 controller/universe/environments/Environment.o: controller/universe/environments/Environment.cpp.o
@@ -474,7 +474,7 @@ controller/universe/environments/Environment.o: controller/universe/environments
 
 # target to build an object file
 controller/universe/environments/Environment.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/environments/Environment.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Environment.cpp.o
 .PHONY : controller/universe/environments/Environment.cpp.o
 
 controller/universe/environments/Environment.i: controller/universe/environments/Environment.cpp.i
@@ -482,7 +482,7 @@ controller/universe/environments/Environment.i: controller/universe/environments
 
 # target to preprocess a source file
 controller/universe/environments/Environment.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/environments/Environment.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Environment.cpp.i
 .PHONY : controller/universe/environments/Environment.cpp.i
 
 controller/universe/environments/Environment.s: controller/universe/environments/Environment.cpp.s
@@ -490,7 +490,7 @@ controller/universe/environments/Environment.s: controller/universe/environments
 
 # target to generate assembly for a file
 controller/universe/environments/Environment.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/environments/Environment.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Environment.cpp.s
 .PHONY : controller/universe/environments/Environment.cpp.s
 
 controller/universe/environments/Plane.o: controller/universe/environments/Plane.cpp.o
@@ -498,7 +498,7 @@ controller/universe/environments/Plane.o: controller/universe/environments/Plane
 
 # target to build an object file
 controller/universe/environments/Plane.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/environments/Plane.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Plane.cpp.o
 .PHONY : controller/universe/environments/Plane.cpp.o
 
 controller/universe/environments/Plane.i: controller/universe/environments/Plane.cpp.i
@@ -506,7 +506,7 @@ controller/universe/environments/Plane.i: controller/universe/environments/Plane
 
 # target to preprocess a source file
 controller/universe/environments/Plane.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/environments/Plane.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Plane.cpp.i
 .PHONY : controller/universe/environments/Plane.cpp.i
 
 controller/universe/environments/Plane.s: controller/universe/environments/Plane.cpp.s
@@ -514,7 +514,7 @@ controller/universe/environments/Plane.s: controller/universe/environments/Plane
 
 # target to generate assembly for a file
 controller/universe/environments/Plane.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/environments/Plane.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Plane.cpp.s
 .PHONY : controller/universe/environments/Plane.cpp.s
 
 controller/universe/evolution/Evolution.o: controller/universe/evolution/Evolution.cpp.o
@@ -522,7 +522,7 @@ controller/universe/evolution/Evolution.o: controller/universe/evolution/Evoluti
 
 # target to build an object file
 controller/universe/evolution/Evolution.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/Evolution.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evolution.cpp.o
 .PHONY : controller/universe/evolution/Evolution.cpp.o
 
 controller/universe/evolution/Evolution.i: controller/universe/evolution/Evolution.cpp.i
@@ -530,7 +530,7 @@ controller/universe/evolution/Evolution.i: controller/universe/evolution/Evoluti
 
 # target to preprocess a source file
 controller/universe/evolution/Evolution.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/Evolution.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evolution.cpp.i
 .PHONY : controller/universe/evolution/Evolution.cpp.i
 
 controller/universe/evolution/Evolution.s: controller/universe/evolution/Evolution.cpp.s
@@ -538,39 +538,15 @@ controller/universe/evolution/Evolution.s: controller/universe/evolution/Evoluti
 
 # target to generate assembly for a file
 controller/universe/evolution/Evolution.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/Evolution.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evolution.cpp.s
 .PHONY : controller/universe/evolution/Evolution.cpp.s
-
-controller/universe/evolution/genetics/PhenotypeGenerator.o: controller/universe/evolution/genetics/PhenotypeGenerator.cpp.o
-.PHONY : controller/universe/evolution/genetics/PhenotypeGenerator.o
-
-# target to build an object file
-controller/universe/evolution/genetics/PhenotypeGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/genetics/PhenotypeGenerator.cpp.o
-.PHONY : controller/universe/evolution/genetics/PhenotypeGenerator.cpp.o
-
-controller/universe/evolution/genetics/PhenotypeGenerator.i: controller/universe/evolution/genetics/PhenotypeGenerator.cpp.i
-.PHONY : controller/universe/evolution/genetics/PhenotypeGenerator.i
-
-# target to preprocess a source file
-controller/universe/evolution/genetics/PhenotypeGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/genetics/PhenotypeGenerator.cpp.i
-.PHONY : controller/universe/evolution/genetics/PhenotypeGenerator.cpp.i
-
-controller/universe/evolution/genetics/PhenotypeGenerator.s: controller/universe/evolution/genetics/PhenotypeGenerator.cpp.s
-.PHONY : controller/universe/evolution/genetics/PhenotypeGenerator.s
-
-# target to generate assembly for a file
-controller/universe/evolution/genetics/PhenotypeGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/genetics/PhenotypeGenerator.cpp.s
-.PHONY : controller/universe/evolution/genetics/PhenotypeGenerator.cpp.s
 
 controller/universe/evolution/population/Population.o: controller/universe/evolution/population/Population.cpp.o
 .PHONY : controller/universe/evolution/population/Population.o
 
 # target to build an object file
 controller/universe/evolution/population/Population.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/Population.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/Population.cpp.o
 .PHONY : controller/universe/evolution/population/Population.cpp.o
 
 controller/universe/evolution/population/Population.i: controller/universe/evolution/population/Population.cpp.i
@@ -578,7 +554,7 @@ controller/universe/evolution/population/Population.i: controller/universe/evolu
 
 # target to preprocess a source file
 controller/universe/evolution/population/Population.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/Population.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/Population.cpp.i
 .PHONY : controller/universe/evolution/population/Population.cpp.i
 
 controller/universe/evolution/population/Population.s: controller/universe/evolution/population/Population.cpp.s
@@ -586,7 +562,7 @@ controller/universe/evolution/population/Population.s: controller/universe/evolu
 
 # target to generate assembly for a file
 controller/universe/evolution/population/Population.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/Population.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/Population.cpp.s
 .PHONY : controller/universe/evolution/population/Population.cpp.s
 
 controller/universe/evolution/population/creature/Creature.o: controller/universe/evolution/population/creature/Creature.cpp.o
@@ -594,7 +570,7 @@ controller/universe/evolution/population/creature/Creature.o: controller/univers
 
 # target to build an object file
 controller/universe/evolution/population/creature/Creature.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/Creature.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/Creature.cpp.o
 .PHONY : controller/universe/evolution/population/creature/Creature.cpp.o
 
 controller/universe/evolution/population/creature/Creature.i: controller/universe/evolution/population/creature/Creature.cpp.i
@@ -602,7 +578,7 @@ controller/universe/evolution/population/creature/Creature.i: controller/univers
 
 # target to preprocess a source file
 controller/universe/evolution/population/creature/Creature.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/Creature.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/Creature.cpp.i
 .PHONY : controller/universe/evolution/population/creature/Creature.cpp.i
 
 controller/universe/evolution/population/creature/Creature.s: controller/universe/evolution/population/creature/Creature.cpp.s
@@ -610,7 +586,7 @@ controller/universe/evolution/population/creature/Creature.s: controller/univers
 
 # target to generate assembly for a file
 controller/universe/evolution/population/creature/Creature.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/Creature.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/Creature.cpp.s
 .PHONY : controller/universe/evolution/population/creature/Creature.cpp.s
 
 controller/universe/evolution/population/creature/phenome/Component.o: controller/universe/evolution/population/creature/phenome/Component.cpp.o
@@ -618,7 +594,7 @@ controller/universe/evolution/population/creature/phenome/Component.o: controlle
 
 # target to build an object file
 controller/universe/evolution/population/creature/phenome/Component.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/Component.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/Component.cpp.o
 .PHONY : controller/universe/evolution/population/creature/phenome/Component.cpp.o
 
 controller/universe/evolution/population/creature/phenome/Component.i: controller/universe/evolution/population/creature/phenome/Component.cpp.i
@@ -626,7 +602,7 @@ controller/universe/evolution/population/creature/phenome/Component.i: controlle
 
 # target to preprocess a source file
 controller/universe/evolution/population/creature/phenome/Component.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/Component.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/Component.cpp.i
 .PHONY : controller/universe/evolution/population/creature/phenome/Component.cpp.i
 
 controller/universe/evolution/population/creature/phenome/Component.s: controller/universe/evolution/population/creature/phenome/Component.cpp.s
@@ -634,7 +610,7 @@ controller/universe/evolution/population/creature/phenome/Component.s: controlle
 
 # target to generate assembly for a file
 controller/universe/evolution/population/creature/phenome/Component.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/Component.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/Component.cpp.s
 .PHONY : controller/universe/evolution/population/creature/phenome/Component.cpp.s
 
 controller/universe/evolution/population/creature/phenome/Phenome.o: controller/universe/evolution/population/creature/phenome/Phenome.cpp.o
@@ -642,7 +618,7 @@ controller/universe/evolution/population/creature/phenome/Phenome.o: controller/
 
 # target to build an object file
 controller/universe/evolution/population/creature/phenome/Phenome.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/Phenome.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/Phenome.cpp.o
 .PHONY : controller/universe/evolution/population/creature/phenome/Phenome.cpp.o
 
 controller/universe/evolution/population/creature/phenome/Phenome.i: controller/universe/evolution/population/creature/phenome/Phenome.cpp.i
@@ -650,7 +626,7 @@ controller/universe/evolution/population/creature/phenome/Phenome.i: controller/
 
 # target to preprocess a source file
 controller/universe/evolution/population/creature/phenome/Phenome.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/Phenome.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/Phenome.cpp.i
 .PHONY : controller/universe/evolution/population/creature/phenome/Phenome.cpp.i
 
 controller/universe/evolution/population/creature/phenome/Phenome.s: controller/universe/evolution/population/creature/phenome/Phenome.cpp.s
@@ -658,7 +634,7 @@ controller/universe/evolution/population/creature/phenome/Phenome.s: controller/
 
 # target to generate assembly for a file
 controller/universe/evolution/population/creature/phenome/Phenome.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/Phenome.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/Phenome.cpp.s
 .PHONY : controller/universe/evolution/population/creature/phenome/Phenome.cpp.s
 
 controller/universe/evolution/population/creature/phenome/morphology/Joint.o: controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.o
@@ -666,7 +642,7 @@ controller/universe/evolution/population/creature/phenome/morphology/Joint.o: co
 
 # target to build an object file
 controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.o
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.o
 
 controller/universe/evolution/population/creature/phenome/morphology/Joint.i: controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.i
@@ -674,7 +650,7 @@ controller/universe/evolution/population/creature/phenome/morphology/Joint.i: co
 
 # target to preprocess a source file
 controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.i
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.i
 
 controller/universe/evolution/population/creature/phenome/morphology/Joint.s: controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.s
@@ -682,7 +658,7 @@ controller/universe/evolution/population/creature/phenome/morphology/Joint.s: co
 
 # target to generate assembly for a file
 controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.s
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp.s
 
 controller/universe/evolution/population/creature/phenome/morphology/Limb.o: controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.o
@@ -690,7 +666,7 @@ controller/universe/evolution/population/creature/phenome/morphology/Limb.o: con
 
 # target to build an object file
 controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.o
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.o
 
 controller/universe/evolution/population/creature/phenome/morphology/Limb.i: controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.i
@@ -698,7 +674,7 @@ controller/universe/evolution/population/creature/phenome/morphology/Limb.i: con
 
 # target to preprocess a source file
 controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.i
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.i
 
 controller/universe/evolution/population/creature/phenome/morphology/Limb.s: controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
@@ -706,7 +682,7 @@ controller/universe/evolution/population/creature/phenome/morphology/Limb.s: con
 
 # target to generate assembly for a file
 controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
 
 model/universe/PlanetModel.o: model/universe/PlanetModel.cpp.o
@@ -714,7 +690,7 @@ model/universe/PlanetModel.o: model/universe/PlanetModel.cpp.o
 
 # target to build an object file
 model/universe/PlanetModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/PlanetModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/PlanetModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel.cpp.o
 .PHONY : model/universe/PlanetModel.cpp.o
 
@@ -723,7 +699,7 @@ model/universe/PlanetModel.i: model/universe/PlanetModel.cpp.i
 
 # target to preprocess a source file
 model/universe/PlanetModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/PlanetModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/PlanetModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel.cpp.i
 .PHONY : model/universe/PlanetModel.cpp.i
 
@@ -732,7 +708,7 @@ model/universe/PlanetModel.s: model/universe/PlanetModel.cpp.s
 
 # target to generate assembly for a file
 model/universe/PlanetModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/PlanetModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/PlanetModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/PlanetModel.cpp.s
 .PHONY : model/universe/PlanetModel.cpp.s
 
@@ -765,7 +741,7 @@ model/universe/UniverseModel.o: model/universe/UniverseModel.cpp.o
 
 # target to build an object file
 model/universe/UniverseModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/UniverseModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/UniverseModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel.cpp.o
 .PHONY : model/universe/UniverseModel.cpp.o
 
@@ -774,7 +750,7 @@ model/universe/UniverseModel.i: model/universe/UniverseModel.cpp.i
 
 # target to preprocess a source file
 model/universe/UniverseModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/UniverseModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/UniverseModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel.cpp.i
 .PHONY : model/universe/UniverseModel.cpp.i
 
@@ -783,7 +759,7 @@ model/universe/UniverseModel.s: model/universe/UniverseModel.cpp.s
 
 # target to generate assembly for a file
 model/universe/UniverseModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/UniverseModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/UniverseModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel.cpp.s
 .PHONY : model/universe/UniverseModel.cpp.s
 
@@ -816,7 +792,7 @@ model/universe/environments/EnvironmentPhysics.o: model/universe/environments/En
 
 # target to build an object file
 model/universe/environments/EnvironmentPhysics.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/EnvironmentPhysics.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/EnvironmentPhysics.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentPhysics.cpp.o
 .PHONY : model/universe/environments/EnvironmentPhysics.cpp.o
 
@@ -825,7 +801,7 @@ model/universe/environments/EnvironmentPhysics.i: model/universe/environments/En
 
 # target to preprocess a source file
 model/universe/environments/EnvironmentPhysics.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/EnvironmentPhysics.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/EnvironmentPhysics.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentPhysics.cpp.i
 .PHONY : model/universe/environments/EnvironmentPhysics.cpp.i
 
@@ -834,7 +810,7 @@ model/universe/environments/EnvironmentPhysics.s: model/universe/environments/En
 
 # target to generate assembly for a file
 model/universe/environments/EnvironmentPhysics.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/EnvironmentPhysics.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/EnvironmentPhysics.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentPhysics.cpp.s
 .PHONY : model/universe/environments/EnvironmentPhysics.cpp.s
 
@@ -843,7 +819,7 @@ model/universe/environments/bullet/EnvironmentBt.o: model/universe/environments/
 
 # target to build an object file
 model/universe/environments/bullet/EnvironmentBt.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/EnvironmentBt.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/EnvironmentBt.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/EnvironmentBt.cpp.o
 .PHONY : model/universe/environments/bullet/EnvironmentBt.cpp.o
 
@@ -852,7 +828,7 @@ model/universe/environments/bullet/EnvironmentBt.i: model/universe/environments/
 
 # target to preprocess a source file
 model/universe/environments/bullet/EnvironmentBt.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/EnvironmentBt.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/EnvironmentBt.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/EnvironmentBt.cpp.i
 .PHONY : model/universe/environments/bullet/EnvironmentBt.cpp.i
 
@@ -861,7 +837,7 @@ model/universe/environments/bullet/EnvironmentBt.s: model/universe/environments/
 
 # target to generate assembly for a file
 model/universe/environments/bullet/EnvironmentBt.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/EnvironmentBt.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/EnvironmentBt.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/EnvironmentBt.cpp.s
 .PHONY : model/universe/environments/bullet/EnvironmentBt.cpp.s
 
@@ -870,7 +846,7 @@ model/universe/environments/bullet/HillsBt.o: model/universe/environments/bullet
 
 # target to build an object file
 model/universe/environments/bullet/HillsBt.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/HillsBt.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/HillsBt.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/HillsBt.cpp.o
 .PHONY : model/universe/environments/bullet/HillsBt.cpp.o
 
@@ -879,7 +855,7 @@ model/universe/environments/bullet/HillsBt.i: model/universe/environments/bullet
 
 # target to preprocess a source file
 model/universe/environments/bullet/HillsBt.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/HillsBt.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/HillsBt.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/HillsBt.cpp.i
 .PHONY : model/universe/environments/bullet/HillsBt.cpp.i
 
@@ -888,7 +864,7 @@ model/universe/environments/bullet/HillsBt.s: model/universe/environments/bullet
 
 # target to generate assembly for a file
 model/universe/environments/bullet/HillsBt.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/HillsBt.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/HillsBt.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/HillsBt.cpp.s
 .PHONY : model/universe/environments/bullet/HillsBt.cpp.s
 
@@ -897,7 +873,7 @@ model/universe/environments/bullet/PlaneBt.o: model/universe/environments/bullet
 
 # target to build an object file
 model/universe/environments/bullet/PlaneBt.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/PlaneBt.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/PlaneBt.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/PlaneBt.cpp.o
 .PHONY : model/universe/environments/bullet/PlaneBt.cpp.o
 
@@ -906,7 +882,7 @@ model/universe/environments/bullet/PlaneBt.i: model/universe/environments/bullet
 
 # target to preprocess a source file
 model/universe/environments/bullet/PlaneBt.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/PlaneBt.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/PlaneBt.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/PlaneBt.cpp.i
 .PHONY : model/universe/environments/bullet/PlaneBt.cpp.i
 
@@ -915,7 +891,7 @@ model/universe/environments/bullet/PlaneBt.s: model/universe/environments/bullet
 
 # target to generate assembly for a file
 model/universe/environments/bullet/PlaneBt.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/environments/bullet/PlaneBt.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/PlaneBt.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/PlaneBt.cpp.s
 .PHONY : model/universe/environments/bullet/PlaneBt.cpp.s
 
@@ -924,7 +900,7 @@ model/universe/evolution/EvolutionModel.o: model/universe/evolution/EvolutionMod
 
 # target to build an object file
 model/universe/evolution/EvolutionModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/EvolutionModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvolutionModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvolutionModel.cpp.o
 .PHONY : model/universe/evolution/EvolutionModel.cpp.o
 
@@ -933,7 +909,7 @@ model/universe/evolution/EvolutionModel.i: model/universe/evolution/EvolutionMod
 
 # target to preprocess a source file
 model/universe/evolution/EvolutionModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/EvolutionModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvolutionModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvolutionModel.cpp.i
 .PHONY : model/universe/evolution/EvolutionModel.cpp.i
 
@@ -942,7 +918,7 @@ model/universe/evolution/EvolutionModel.s: model/universe/evolution/EvolutionMod
 
 # target to generate assembly for a file
 model/universe/evolution/EvolutionModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/EvolutionModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvolutionModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvolutionModel.cpp.s
 .PHONY : model/universe/evolution/EvolutionModel.cpp.s
 
@@ -951,7 +927,7 @@ model/universe/evolution/Reaper.o: model/universe/evolution/Reaper.cpp.o
 
 # target to build an object file
 model/universe/evolution/Reaper.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/Reaper.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/Reaper.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/Reaper.cpp.o
 .PHONY : model/universe/evolution/Reaper.cpp.o
 
@@ -960,7 +936,7 @@ model/universe/evolution/Reaper.i: model/universe/evolution/Reaper.cpp.i
 
 # target to preprocess a source file
 model/universe/evolution/Reaper.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/Reaper.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/Reaper.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/Reaper.cpp.i
 .PHONY : model/universe/evolution/Reaper.cpp.i
 
@@ -969,7 +945,7 @@ model/universe/evolution/Reaper.s: model/universe/evolution/Reaper.cpp.s
 
 # target to generate assembly for a file
 model/universe/evolution/Reaper.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/Reaper.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/Reaper.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/Reaper.cpp.s
 .PHONY : model/universe/evolution/Reaper.cpp.s
 
@@ -978,7 +954,7 @@ model/universe/evolution/juries/Jury.o: model/universe/evolution/juries/Jury.cpp
 
 # target to build an object file
 model/universe/evolution/juries/Jury.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Jury.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Jury.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Jury.cpp.o
 .PHONY : model/universe/evolution/juries/Jury.cpp.o
 
@@ -987,7 +963,7 @@ model/universe/evolution/juries/Jury.i: model/universe/evolution/juries/Jury.cpp
 
 # target to preprocess a source file
 model/universe/evolution/juries/Jury.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Jury.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Jury.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Jury.cpp.i
 .PHONY : model/universe/evolution/juries/Jury.cpp.i
 
@@ -996,7 +972,7 @@ model/universe/evolution/juries/Jury.s: model/universe/evolution/juries/Jury.cpp
 
 # target to generate assembly for a file
 model/universe/evolution/juries/Jury.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Jury.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Jury.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Jury.cpp.s
 .PHONY : model/universe/evolution/juries/Jury.cpp.s
 
@@ -1005,7 +981,7 @@ model/universe/evolution/juries/Ones.o: model/universe/evolution/juries/Ones.cpp
 
 # target to build an object file
 model/universe/evolution/juries/Ones.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Ones.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Ones.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Ones.cpp.o
 .PHONY : model/universe/evolution/juries/Ones.cpp.o
 
@@ -1014,7 +990,7 @@ model/universe/evolution/juries/Ones.i: model/universe/evolution/juries/Ones.cpp
 
 # target to preprocess a source file
 model/universe/evolution/juries/Ones.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Ones.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Ones.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Ones.cpp.i
 .PHONY : model/universe/evolution/juries/Ones.cpp.i
 
@@ -1023,7 +999,7 @@ model/universe/evolution/juries/Ones.s: model/universe/evolution/juries/Ones.cpp
 
 # target to generate assembly for a file
 model/universe/evolution/juries/Ones.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Ones.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Ones.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Ones.cpp.s
 .PHONY : model/universe/evolution/juries/Ones.cpp.s
 
@@ -1056,7 +1032,7 @@ model/universe/evolution/juries/Velocity.o: model/universe/evolution/juries/Velo
 
 # target to build an object file
 model/universe/evolution/juries/Velocity.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Velocity.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Velocity.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Velocity.cpp.o
 .PHONY : model/universe/evolution/juries/Velocity.cpp.o
 
@@ -1065,7 +1041,7 @@ model/universe/evolution/juries/Velocity.i: model/universe/evolution/juries/Velo
 
 # target to preprocess a source file
 model/universe/evolution/juries/Velocity.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Velocity.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Velocity.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Velocity.cpp.i
 .PHONY : model/universe/evolution/juries/Velocity.cpp.i
 
@@ -1074,7 +1050,7 @@ model/universe/evolution/juries/Velocity.s: model/universe/evolution/juries/Velo
 
 # target to generate assembly for a file
 model/universe/evolution/juries/Velocity.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/juries/Velocity.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Velocity.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/juries/Velocity.cpp.s
 .PHONY : model/universe/evolution/juries/Velocity.cpp.s
 
@@ -1107,7 +1083,7 @@ model/universe/evolution/population/PopulationModel.o: model/universe/evolution/
 
 # target to build an object file
 model/universe/evolution/population/PopulationModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/PopulationModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/PopulationModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/PopulationModel.cpp.o
 .PHONY : model/universe/evolution/population/PopulationModel.cpp.o
 
@@ -1116,7 +1092,7 @@ model/universe/evolution/population/PopulationModel.i: model/universe/evolution/
 
 # target to preprocess a source file
 model/universe/evolution/population/PopulationModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/PopulationModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/PopulationModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/PopulationModel.cpp.i
 .PHONY : model/universe/evolution/population/PopulationModel.cpp.i
 
@@ -1125,7 +1101,7 @@ model/universe/evolution/population/PopulationModel.s: model/universe/evolution/
 
 # target to generate assembly for a file
 model/universe/evolution/population/PopulationModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/PopulationModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/PopulationModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/PopulationModel.cpp.s
 .PHONY : model/universe/evolution/population/PopulationModel.cpp.s
 
@@ -1158,7 +1134,7 @@ model/universe/evolution/population/creature/CreatureModel.o: model/universe/evo
 
 # target to build an object file
 model/universe/evolution/population/creature/CreatureModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/CreatureModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/CreatureModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/CreatureModel.cpp.o
 .PHONY : model/universe/evolution/population/creature/CreatureModel.cpp.o
 
@@ -1167,7 +1143,7 @@ model/universe/evolution/population/creature/CreatureModel.i: model/universe/evo
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/CreatureModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/CreatureModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/CreatureModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/CreatureModel.cpp.i
 .PHONY : model/universe/evolution/population/creature/CreatureModel.cpp.i
 
@@ -1176,7 +1152,7 @@ model/universe/evolution/population/creature/CreatureModel.s: model/universe/evo
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/CreatureModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/CreatureModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/CreatureModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/CreatureModel.cpp.s
 .PHONY : model/universe/evolution/population/creature/CreatureModel.cpp.s
 
@@ -1209,7 +1185,7 @@ model/universe/evolution/population/creature/genome/DirectGenome.o: model/univer
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/DirectGenome.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/DirectGenome.cpp.o
 
@@ -1218,7 +1194,7 @@ model/universe/evolution/population/creature/genome/DirectGenome.i: model/univer
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/DirectGenome.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/DirectGenome.cpp.i
 
@@ -1227,7 +1203,7 @@ model/universe/evolution/population/creature/genome/DirectGenome.s: model/univer
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/DirectGenome.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/DirectGenome.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/DirectGenome.cpp.s
 
@@ -1236,7 +1212,7 @@ model/universe/evolution/population/creature/genome/Gene.o: model/universe/evolu
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/Gene.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/Gene.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/Gene.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/Gene.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/Gene.cpp.o
 
@@ -1245,7 +1221,7 @@ model/universe/evolution/population/creature/genome/Gene.i: model/universe/evolu
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/Gene.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/Gene.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/Gene.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/Gene.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/Gene.cpp.i
 
@@ -1254,7 +1230,7 @@ model/universe/evolution/population/creature/genome/Gene.s: model/universe/evolu
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/Gene.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/Gene.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/Gene.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/Gene.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/Gene.cpp.s
 
@@ -1263,7 +1239,7 @@ model/universe/evolution/population/creature/genome/GeneBranch.o: model/universe
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/GeneBranch.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/GeneBranch.cpp.o
 
@@ -1272,7 +1248,7 @@ model/universe/evolution/population/creature/genome/GeneBranch.i: model/universe
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/GeneBranch.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/GeneBranch.cpp.i
 
@@ -1281,7 +1257,7 @@ model/universe/evolution/population/creature/genome/GeneBranch.s: model/universe
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/GeneBranch.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/GeneBranch.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/GeneBranch.cpp.s
 
@@ -1290,7 +1266,7 @@ model/universe/evolution/population/creature/genome/Genome.o: model/universe/evo
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/Genome.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/Genome.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/Genome.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/Genome.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/Genome.cpp.o
 
@@ -1299,7 +1275,7 @@ model/universe/evolution/population/creature/genome/Genome.i: model/universe/evo
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/Genome.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/Genome.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/Genome.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/Genome.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/Genome.cpp.i
 
@@ -1308,7 +1284,7 @@ model/universe/evolution/population/creature/genome/Genome.s: model/universe/evo
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/Genome.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/Genome.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/Genome.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/Genome.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/Genome.cpp.s
 
@@ -1341,7 +1317,7 @@ model/universe/evolution/population/creature/genome/IndirectGenome.o: model/univ
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/IndirectGenome.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/IndirectGenome.cpp.o
 
@@ -1350,7 +1326,7 @@ model/universe/evolution/population/creature/genome/IndirectGenome.i: model/univ
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/IndirectGenome.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/IndirectGenome.cpp.i
 
@@ -1359,7 +1335,7 @@ model/universe/evolution/population/creature/genome/IndirectGenome.s: model/univ
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/IndirectGenome.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/IndirectGenome.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/IndirectGenome.cpp.s
 
@@ -1368,7 +1344,7 @@ model/universe/evolution/population/creature/genome/MixedGenome.o: model/univers
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/MixedGenome.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/MixedGenome.cpp.o
 
@@ -1377,7 +1353,7 @@ model/universe/evolution/population/creature/genome/MixedGenome.i: model/univers
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/MixedGenome.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/MixedGenome.cpp.i
 
@@ -1386,7 +1362,7 @@ model/universe/evolution/population/creature/genome/MixedGenome.s: model/univers
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/MixedGenome.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/MixedGenome.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/MixedGenome.cpp.s
 
@@ -1395,7 +1371,7 @@ model/universe/evolution/population/creature/genome/controller/ControllerGene.o:
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.o
 
@@ -1404,7 +1380,7 @@ model/universe/evolution/population/creature/genome/controller/ControllerGene.i:
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.i
 
@@ -1413,7 +1389,7 @@ model/universe/evolution/population/creature/genome/controller/ControllerGene.s:
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp.s
 
@@ -1422,7 +1398,7 @@ model/universe/evolution/population/creature/genome/controller/SineControllerGen
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.o
 
@@ -1431,7 +1407,7 @@ model/universe/evolution/population/creature/genome/controller/SineControllerGen
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.i
 
@@ -1440,7 +1416,7 @@ model/universe/evolution/population/creature/genome/controller/SineControllerGen
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp.s
 
@@ -1468,12 +1444,66 @@ model/universe/evolution/population/creature/genome/controller/SineControllerGen
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp.s
 
+model/universe/evolution/population/creature/genome/genetics/BaseGenerator.o: model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o
+.PHONY : model/universe/evolution/population/creature/genome/genetics/BaseGenerator.o
+
+# target to build an object file
+model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o
+.PHONY : model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o
+
+model/universe/evolution/population/creature/genome/genetics/BaseGenerator.i: model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i
+.PHONY : model/universe/evolution/population/creature/genome/genetics/BaseGenerator.i
+
+# target to preprocess a source file
+model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i
+.PHONY : model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i
+
+model/universe/evolution/population/creature/genome/genetics/BaseGenerator.s: model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s
+.PHONY : model/universe/evolution/population/creature/genome/genetics/BaseGenerator.s
+
+# target to generate assembly for a file
+model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s
+.PHONY : model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s
+
+model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.o: model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o
+.PHONY : model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.o
+
+# target to build an object file
+model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o
+.PHONY : model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o
+
+model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.i: model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i
+.PHONY : model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.i
+
+# target to preprocess a source file
+model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i
+.PHONY : model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i
+
+model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.s: model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s
+.PHONY : model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.s
+
+# target to generate assembly for a file
+model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s
+.PHONY : model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s
+
 model/universe/evolution/population/creature/genome/morphology/Morphogene.o: model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/morphology/Morphogene.o
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.o
 
@@ -1482,7 +1512,7 @@ model/universe/evolution/population/creature/genome/morphology/Morphogene.i: mod
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.i
 
@@ -1491,7 +1521,7 @@ model/universe/evolution/population/creature/genome/morphology/Morphogene.s: mod
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp.s
 
@@ -1500,7 +1530,7 @@ model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.
 
 # target to build an object file
 model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o
 .PHONY : model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.o
 
@@ -1509,7 +1539,7 @@ model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.i
 .PHONY : model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.i
 
@@ -1518,7 +1548,7 @@ model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.s
 .PHONY : model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp.s
 
@@ -1575,7 +1605,7 @@ model/universe/evolution/population/creature/phenome/ComponentModel.o: model/uni
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.cpp.o
 
@@ -1584,7 +1614,7 @@ model/universe/evolution/population/creature/phenome/ComponentModel.i: model/uni
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.cpp.i
 
@@ -1593,7 +1623,7 @@ model/universe/evolution/population/creature/phenome/ComponentModel.s: model/uni
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s
 
@@ -1602,7 +1632,7 @@ model/universe/evolution/population/creature/phenome/PhenomeModel.o: model/unive
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o
 
@@ -1611,7 +1641,7 @@ model/universe/evolution/population/creature/phenome/PhenomeModel.i: model/unive
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i
 
@@ -1620,7 +1650,7 @@ model/universe/evolution/population/creature/phenome/PhenomeModel.s: model/unive
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s
 
@@ -1629,7 +1659,7 @@ model/universe/evolution/population/creature/phenome/controller/ControlInput.o: 
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o
 
@@ -1638,7 +1668,7 @@ model/universe/evolution/population/creature/phenome/controller/ControlInput.i: 
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i
 
@@ -1647,7 +1677,7 @@ model/universe/evolution/population/creature/phenome/controller/ControlInput.s: 
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s
 
@@ -1656,7 +1686,7 @@ model/universe/evolution/population/creature/phenome/controller/ControlOutput.o:
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o
 
@@ -1665,7 +1695,7 @@ model/universe/evolution/population/creature/phenome/controller/ControlOutput.i:
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i
 
@@ -1674,7 +1704,7 @@ model/universe/evolution/population/creature/phenome/controller/ControlOutput.s:
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s
 
@@ -1683,7 +1713,7 @@ model/universe/evolution/population/creature/phenome/controller/Controller.o: mo
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o
 
@@ -1692,7 +1722,7 @@ model/universe/evolution/population/creature/phenome/controller/Controller.i: mo
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i
 
@@ -1701,7 +1731,7 @@ model/universe/evolution/population/creature/phenome/controller/Controller.s: mo
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s
 
@@ -1710,7 +1740,7 @@ model/universe/evolution/population/creature/phenome/controller/sine/SineControl
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o
 
@@ -1719,7 +1749,7 @@ model/universe/evolution/population/creature/phenome/controller/sine/SineControl
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i
 
@@ -1728,7 +1758,7 @@ model/universe/evolution/population/creature/phenome/controller/sine/SineControl
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s
 
@@ -1737,7 +1767,7 @@ model/universe/evolution/population/creature/phenome/morphology/effector/motor/M
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o
 
@@ -1746,7 +1776,7 @@ model/universe/evolution/population/creature/phenome/morphology/effector/motor/M
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i
 
@@ -1755,7 +1785,7 @@ model/universe/evolution/population/creature/phenome/morphology/effector/motor/M
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s
 
@@ -1764,7 +1794,7 @@ model/universe/evolution/population/creature/phenome/morphology/effector/motor/S
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o
 
@@ -1773,7 +1803,7 @@ model/universe/evolution/population/creature/phenome/morphology/effector/motor/S
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i
 
@@ -1782,7 +1812,7 @@ model/universe/evolution/population/creature/phenome/morphology/effector/motor/S
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s
 
@@ -1791,7 +1821,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.o:
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.o
 
@@ -1800,7 +1830,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.i:
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.i
 
@@ -1809,7 +1839,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.s:
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.cpp.s
 
@@ -1818,7 +1848,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointModel
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o
 
@@ -1827,7 +1857,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointModel
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i
 
@@ -1836,7 +1866,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointModel
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s
 
@@ -1845,7 +1875,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysi
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o
 
@@ -1854,7 +1884,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysi
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i
 
@@ -1863,7 +1893,7 @@ model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysi
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s
 
@@ -1872,7 +1902,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.o: m
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.o
 
@@ -1881,7 +1911,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.i: m
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.i
 
@@ -1890,7 +1920,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.s: m
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.cpp.s
 
@@ -1899,7 +1929,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.o
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o
 
@@ -1908,7 +1938,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.i
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i
 
@@ -1917,7 +1947,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.s
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s
 
@@ -1926,7 +1956,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics
 
 # target to build an object file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o
 
@@ -1935,7 +1965,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics
 
 # target to preprocess a source file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i
 
@@ -1944,7 +1974,7 @@ model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics
 
 # target to generate assembly for a file
 model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s
 .PHONY : model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s
 
@@ -1977,7 +2007,7 @@ utils/NameGenerator.o: utils/NameGenerator.cpp.o
 
 # target to build an object file
 utils/NameGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/NameGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/NameGenerator.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/NameGenerator.cpp.o
 .PHONY : utils/NameGenerator.cpp.o
 
@@ -1986,7 +2016,7 @@ utils/NameGenerator.i: utils/NameGenerator.cpp.i
 
 # target to preprocess a source file
 utils/NameGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/NameGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/NameGenerator.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/NameGenerator.cpp.i
 .PHONY : utils/NameGenerator.cpp.i
 
@@ -1995,7 +2025,7 @@ utils/NameGenerator.s: utils/NameGenerator.cpp.s
 
 # target to generate assembly for a file
 utils/NameGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/NameGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/NameGenerator.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/NameGenerator.cpp.s
 .PHONY : utils/NameGenerator.cpp.s
 
@@ -2028,7 +2058,7 @@ utils/Randomness.o: utils/Randomness.cpp.o
 
 # target to build an object file
 utils/Randomness.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/Randomness.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/Randomness.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Randomness.cpp.o
 .PHONY : utils/Randomness.cpp.o
 
@@ -2037,7 +2067,7 @@ utils/Randomness.i: utils/Randomness.cpp.i
 
 # target to preprocess a source file
 utils/Randomness.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/Randomness.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/Randomness.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Randomness.cpp.i
 .PHONY : utils/Randomness.cpp.i
 
@@ -2046,7 +2076,7 @@ utils/Randomness.s: utils/Randomness.cpp.s
 
 # target to generate assembly for a file
 utils/Randomness.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/Randomness.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/Randomness.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Randomness.cpp.s
 .PHONY : utils/Randomness.cpp.s
 
@@ -2079,7 +2109,7 @@ utils/logging/Logger.o: utils/logging/Logger.cpp.o
 
 # target to build an object file
 utils/logging/Logger.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/logging/Logger.cpp.o
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/logging/Logger.cpp.o
 .PHONY : utils/logging/Logger.cpp.o
 
@@ -2088,7 +2118,7 @@ utils/logging/Logger.i: utils/logging/Logger.cpp.i
 
 # target to preprocess a source file
 utils/logging/Logger.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/logging/Logger.cpp.i
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/logging/Logger.cpp.i
 .PHONY : utils/logging/Logger.cpp.i
 
@@ -2097,7 +2127,7 @@ utils/logging/Logger.s: utils/logging/Logger.cpp.s
 
 # target to generate assembly for a file
 utils/logging/Logger.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/utils/logging/Logger.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/logging/Logger.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/logging/Logger.cpp.s
 .PHONY : utils/logging/Logger.cpp.s
 
@@ -2106,7 +2136,7 @@ view/picking/OgreMeshRay.o: view/picking/OgreMeshRay.cpp.o
 
 # target to build an object file
 view/picking/OgreMeshRay.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/picking/OgreMeshRay.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/OgreMeshRay.cpp.o
 .PHONY : view/picking/OgreMeshRay.cpp.o
 
 view/picking/OgreMeshRay.i: view/picking/OgreMeshRay.cpp.i
@@ -2114,7 +2144,7 @@ view/picking/OgreMeshRay.i: view/picking/OgreMeshRay.cpp.i
 
 # target to preprocess a source file
 view/picking/OgreMeshRay.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/picking/OgreMeshRay.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/OgreMeshRay.cpp.i
 .PHONY : view/picking/OgreMeshRay.cpp.i
 
 view/picking/OgreMeshRay.s: view/picking/OgreMeshRay.cpp.s
@@ -2122,7 +2152,7 @@ view/picking/OgreMeshRay.s: view/picking/OgreMeshRay.cpp.s
 
 # target to generate assembly for a file
 view/picking/OgreMeshRay.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/picking/OgreMeshRay.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/OgreMeshRay.cpp.s
 .PHONY : view/picking/OgreMeshRay.cpp.s
 
 view/universe/environments/EnvironmentGraphics.o: view/universe/environments/EnvironmentGraphics.cpp.o
@@ -2130,7 +2160,7 @@ view/universe/environments/EnvironmentGraphics.o: view/universe/environments/Env
 
 # target to build an object file
 view/universe/environments/EnvironmentGraphics.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/EnvironmentGraphics.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/EnvironmentGraphics.cpp.o
 .PHONY : view/universe/environments/EnvironmentGraphics.cpp.o
 
 view/universe/environments/EnvironmentGraphics.i: view/universe/environments/EnvironmentGraphics.cpp.i
@@ -2138,7 +2168,7 @@ view/universe/environments/EnvironmentGraphics.i: view/universe/environments/Env
 
 # target to preprocess a source file
 view/universe/environments/EnvironmentGraphics.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/EnvironmentGraphics.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/EnvironmentGraphics.cpp.i
 .PHONY : view/universe/environments/EnvironmentGraphics.cpp.i
 
 view/universe/environments/EnvironmentGraphics.s: view/universe/environments/EnvironmentGraphics.cpp.s
@@ -2146,7 +2176,7 @@ view/universe/environments/EnvironmentGraphics.s: view/universe/environments/Env
 
 # target to generate assembly for a file
 view/universe/environments/EnvironmentGraphics.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/EnvironmentGraphics.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/EnvironmentGraphics.cpp.s
 .PHONY : view/universe/environments/EnvironmentGraphics.cpp.s
 
 view/universe/environments/EnvironmentO3D.o: view/universe/environments/EnvironmentO3D.cpp.o
@@ -2154,7 +2184,7 @@ view/universe/environments/EnvironmentO3D.o: view/universe/environments/Environm
 
 # target to build an object file
 view/universe/environments/EnvironmentO3D.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/EnvironmentO3D.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/EnvironmentO3D.cpp.o
 .PHONY : view/universe/environments/EnvironmentO3D.cpp.o
 
 view/universe/environments/EnvironmentO3D.i: view/universe/environments/EnvironmentO3D.cpp.i
@@ -2162,7 +2192,7 @@ view/universe/environments/EnvironmentO3D.i: view/universe/environments/Environm
 
 # target to preprocess a source file
 view/universe/environments/EnvironmentO3D.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/EnvironmentO3D.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/EnvironmentO3D.cpp.i
 .PHONY : view/universe/environments/EnvironmentO3D.cpp.i
 
 view/universe/environments/EnvironmentO3D.s: view/universe/environments/EnvironmentO3D.cpp.s
@@ -2170,7 +2200,7 @@ view/universe/environments/EnvironmentO3D.s: view/universe/environments/Environm
 
 # target to generate assembly for a file
 view/universe/environments/EnvironmentO3D.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/EnvironmentO3D.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/EnvironmentO3D.cpp.s
 .PHONY : view/universe/environments/EnvironmentO3D.cpp.s
 
 view/universe/environments/HillsO3D.o: view/universe/environments/HillsO3D.cpp.o
@@ -2178,7 +2208,7 @@ view/universe/environments/HillsO3D.o: view/universe/environments/HillsO3D.cpp.o
 
 # target to build an object file
 view/universe/environments/HillsO3D.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/HillsO3D.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/HillsO3D.cpp.o
 .PHONY : view/universe/environments/HillsO3D.cpp.o
 
 view/universe/environments/HillsO3D.i: view/universe/environments/HillsO3D.cpp.i
@@ -2186,7 +2216,7 @@ view/universe/environments/HillsO3D.i: view/universe/environments/HillsO3D.cpp.i
 
 # target to preprocess a source file
 view/universe/environments/HillsO3D.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/HillsO3D.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/HillsO3D.cpp.i
 .PHONY : view/universe/environments/HillsO3D.cpp.i
 
 view/universe/environments/HillsO3D.s: view/universe/environments/HillsO3D.cpp.s
@@ -2194,7 +2224,7 @@ view/universe/environments/HillsO3D.s: view/universe/environments/HillsO3D.cpp.s
 
 # target to generate assembly for a file
 view/universe/environments/HillsO3D.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/HillsO3D.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/HillsO3D.cpp.s
 .PHONY : view/universe/environments/HillsO3D.cpp.s
 
 view/universe/environments/OpenSeaO3D.o: view/universe/environments/OpenSeaO3D.cpp.o
@@ -2202,7 +2232,7 @@ view/universe/environments/OpenSeaO3D.o: view/universe/environments/OpenSeaO3D.c
 
 # target to build an object file
 view/universe/environments/OpenSeaO3D.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/OpenSeaO3D.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/OpenSeaO3D.cpp.o
 .PHONY : view/universe/environments/OpenSeaO3D.cpp.o
 
 view/universe/environments/OpenSeaO3D.i: view/universe/environments/OpenSeaO3D.cpp.i
@@ -2210,7 +2240,7 @@ view/universe/environments/OpenSeaO3D.i: view/universe/environments/OpenSeaO3D.c
 
 # target to preprocess a source file
 view/universe/environments/OpenSeaO3D.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/OpenSeaO3D.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/OpenSeaO3D.cpp.i
 .PHONY : view/universe/environments/OpenSeaO3D.cpp.i
 
 view/universe/environments/OpenSeaO3D.s: view/universe/environments/OpenSeaO3D.cpp.s
@@ -2218,7 +2248,7 @@ view/universe/environments/OpenSeaO3D.s: view/universe/environments/OpenSeaO3D.c
 
 # target to generate assembly for a file
 view/universe/environments/OpenSeaO3D.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/OpenSeaO3D.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/OpenSeaO3D.cpp.s
 .PHONY : view/universe/environments/OpenSeaO3D.cpp.s
 
 view/universe/environments/PlaneO3D.o: view/universe/environments/PlaneO3D.cpp.o
@@ -2226,7 +2256,7 @@ view/universe/environments/PlaneO3D.o: view/universe/environments/PlaneO3D.cpp.o
 
 # target to build an object file
 view/universe/environments/PlaneO3D.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/PlaneO3D.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/PlaneO3D.cpp.o
 .PHONY : view/universe/environments/PlaneO3D.cpp.o
 
 view/universe/environments/PlaneO3D.i: view/universe/environments/PlaneO3D.cpp.i
@@ -2234,7 +2264,7 @@ view/universe/environments/PlaneO3D.i: view/universe/environments/PlaneO3D.cpp.i
 
 # target to preprocess a source file
 view/universe/environments/PlaneO3D.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/PlaneO3D.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/PlaneO3D.cpp.i
 .PHONY : view/universe/environments/PlaneO3D.cpp.i
 
 view/universe/environments/PlaneO3D.s: view/universe/environments/PlaneO3D.cpp.s
@@ -2242,7 +2272,7 @@ view/universe/environments/PlaneO3D.s: view/universe/environments/PlaneO3D.cpp.s
 
 # target to generate assembly for a file
 view/universe/environments/PlaneO3D.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/PlaneO3D.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/PlaneO3D.cpp.s
 .PHONY : view/universe/environments/PlaneO3D.cpp.s
 
 view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.o: view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o
@@ -2250,7 +2280,7 @@ view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.o: view/uni
 
 # target to build an object file
 view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o
 .PHONY : view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.o
 
 view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.i: view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.i
@@ -2258,7 +2288,7 @@ view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.i: view/uni
 
 # target to preprocess a source file
 view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.i
 .PHONY : view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.i
 
 view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.s: view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s
@@ -2266,7 +2296,7 @@ view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.s: view/uni
 
 # target to generate assembly for a file
 view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s
 .PHONY : view/universe/environments/envgenerators/PerlinNoiseTerrainGenerator.cpp.s
 
 view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.o: view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.o
@@ -2274,7 +2304,7 @@ view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphi
 
 # target to build an object file
 view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.o
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.o
 
 view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.i: view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.i
@@ -2282,7 +2312,7 @@ view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphi
 
 # target to preprocess a source file
 view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.i
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.i
 
 view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.s: view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.s
@@ -2290,7 +2320,7 @@ view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphi
 
 # target to generate assembly for a file
 view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.s
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.cpp.s
 
 view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.o: view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.o
@@ -2298,7 +2328,7 @@ view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.o:
 
 # target to build an object file
 view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.o
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.o
 
 view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.i: view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.i
@@ -2306,7 +2336,7 @@ view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.i:
 
 # target to preprocess a source file
 view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.i
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.i
 
 view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.s: view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.s
@@ -2314,7 +2344,7 @@ view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.s:
 
 # target to generate assembly for a file
 view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.s
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.cpp.s
 
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.o: view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.o
@@ -2322,7 +2352,7 @@ view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics
 
 # target to build an object file
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.o
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.o
 
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.i: view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.i
@@ -2330,7 +2360,7 @@ view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics
 
 # target to preprocess a source file
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.i
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.i
 
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.s: view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.s
@@ -2338,7 +2368,7 @@ view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics
 
 # target to generate assembly for a file
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.s
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.cpp.s
 
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.o: view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.o
@@ -2346,7 +2376,7 @@ view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.o: v
 
 # target to build an object file
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.o
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.o
 
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.i: view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.i
@@ -2354,7 +2384,7 @@ view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.i: v
 
 # target to preprocess a source file
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.i
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.i
 
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.s: view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.s
@@ -2362,7 +2392,7 @@ view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.s: v
 
 # target to generate assembly for a file
 view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.s
 .PHONY : view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.cpp.s
 
 view/videocapture/Ogre3DFFMPEGVideoWriter.o: view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
@@ -2370,7 +2400,7 @@ view/videocapture/Ogre3DFFMPEGVideoWriter.o: view/videocapture/Ogre3DFFMPEGVideo
 
 # target to build an object file
 view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
 .PHONY : view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.o
 
 view/videocapture/Ogre3DFFMPEGVideoWriter.i: view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
@@ -2378,7 +2408,7 @@ view/videocapture/Ogre3DFFMPEGVideoWriter.i: view/videocapture/Ogre3DFFMPEGVideo
 
 # target to preprocess a source file
 view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
 .PHONY : view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.i
 
 view/videocapture/Ogre3DFFMPEGVideoWriter.s: view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
@@ -2386,7 +2416,7 @@ view/videocapture/Ogre3DFFMPEGVideoWriter.s: view/videocapture/Ogre3DFFMPEGVideo
 
 # target to generate assembly for a file
 view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
 .PHONY : view/videocapture/Ogre3DFFMPEGVideoWriter.cpp.s
 
 view/visualization/CEGUI/CEGUIBuilder.o: view/visualization/CEGUI/CEGUIBuilder.cpp.o
@@ -2394,7 +2424,7 @@ view/visualization/CEGUI/CEGUIBuilder.o: view/visualization/CEGUI/CEGUIBuilder.c
 
 # target to build an object file
 view/visualization/CEGUI/CEGUIBuilder.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/CEGUIBuilder.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/CEGUIBuilder.cpp.o
 .PHONY : view/visualization/CEGUI/CEGUIBuilder.cpp.o
 
 view/visualization/CEGUI/CEGUIBuilder.i: view/visualization/CEGUI/CEGUIBuilder.cpp.i
@@ -2402,7 +2432,7 @@ view/visualization/CEGUI/CEGUIBuilder.i: view/visualization/CEGUI/CEGUIBuilder.c
 
 # target to preprocess a source file
 view/visualization/CEGUI/CEGUIBuilder.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/CEGUIBuilder.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/CEGUIBuilder.cpp.i
 .PHONY : view/visualization/CEGUI/CEGUIBuilder.cpp.i
 
 view/visualization/CEGUI/CEGUIBuilder.s: view/visualization/CEGUI/CEGUIBuilder.cpp.s
@@ -2410,7 +2440,7 @@ view/visualization/CEGUI/CEGUIBuilder.s: view/visualization/CEGUI/CEGUIBuilder.c
 
 # target to generate assembly for a file
 view/visualization/CEGUI/CEGUIBuilder.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/CEGUIBuilder.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/CEGUIBuilder.cpp.s
 .PHONY : view/visualization/CEGUI/CEGUIBuilder.cpp.s
 
 view/visualization/CEGUI/GUISheetHandler.o: view/visualization/CEGUI/GUISheetHandler.cpp.o
@@ -2418,7 +2448,7 @@ view/visualization/CEGUI/GUISheetHandler.o: view/visualization/CEGUI/GUISheetHan
 
 # target to build an object file
 view/visualization/CEGUI/GUISheetHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/GUISheetHandler.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/GUISheetHandler.cpp.o
 .PHONY : view/visualization/CEGUI/GUISheetHandler.cpp.o
 
 view/visualization/CEGUI/GUISheetHandler.i: view/visualization/CEGUI/GUISheetHandler.cpp.i
@@ -2426,7 +2456,7 @@ view/visualization/CEGUI/GUISheetHandler.i: view/visualization/CEGUI/GUISheetHan
 
 # target to preprocess a source file
 view/visualization/CEGUI/GUISheetHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/GUISheetHandler.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/GUISheetHandler.cpp.i
 .PHONY : view/visualization/CEGUI/GUISheetHandler.cpp.i
 
 view/visualization/CEGUI/GUISheetHandler.s: view/visualization/CEGUI/GUISheetHandler.cpp.s
@@ -2434,7 +2464,7 @@ view/visualization/CEGUI/GUISheetHandler.s: view/visualization/CEGUI/GUISheetHan
 
 # target to generate assembly for a file
 view/visualization/CEGUI/GUISheetHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/GUISheetHandler.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/GUISheetHandler.cpp.s
 .PHONY : view/visualization/CEGUI/GUISheetHandler.cpp.s
 
 view/visualization/CEGUI/ParamsPanel.o: view/visualization/CEGUI/ParamsPanel.cpp.o
@@ -2442,7 +2472,7 @@ view/visualization/CEGUI/ParamsPanel.o: view/visualization/CEGUI/ParamsPanel.cpp
 
 # target to build an object file
 view/visualization/CEGUI/ParamsPanel.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/ParamsPanel.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/ParamsPanel.cpp.o
 .PHONY : view/visualization/CEGUI/ParamsPanel.cpp.o
 
 view/visualization/CEGUI/ParamsPanel.i: view/visualization/CEGUI/ParamsPanel.cpp.i
@@ -2450,7 +2480,7 @@ view/visualization/CEGUI/ParamsPanel.i: view/visualization/CEGUI/ParamsPanel.cpp
 
 # target to preprocess a source file
 view/visualization/CEGUI/ParamsPanel.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/ParamsPanel.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/ParamsPanel.cpp.i
 .PHONY : view/visualization/CEGUI/ParamsPanel.cpp.i
 
 view/visualization/CEGUI/ParamsPanel.s: view/visualization/CEGUI/ParamsPanel.cpp.s
@@ -2458,7 +2488,7 @@ view/visualization/CEGUI/ParamsPanel.s: view/visualization/CEGUI/ParamsPanel.cpp
 
 # target to generate assembly for a file
 view/visualization/CEGUI/ParamsPanel.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/CEGUI/ParamsPanel.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/ParamsPanel.cpp.s
 .PHONY : view/visualization/CEGUI/ParamsPanel.cpp.s
 
 view/visualization/MathGL/MathGLWindow.o: view/visualization/MathGL/MathGLWindow.cpp.o
@@ -2466,7 +2496,7 @@ view/visualization/MathGL/MathGLWindow.o: view/visualization/MathGL/MathGLWindow
 
 # target to build an object file
 view/visualization/MathGL/MathGLWindow.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/MathGL/MathGLWindow.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/MathGL/MathGLWindow.cpp.o
 .PHONY : view/visualization/MathGL/MathGLWindow.cpp.o
 
 view/visualization/MathGL/MathGLWindow.i: view/visualization/MathGL/MathGLWindow.cpp.i
@@ -2474,7 +2504,7 @@ view/visualization/MathGL/MathGLWindow.i: view/visualization/MathGL/MathGLWindow
 
 # target to preprocess a source file
 view/visualization/MathGL/MathGLWindow.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/MathGL/MathGLWindow.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/MathGL/MathGLWindow.cpp.i
 .PHONY : view/visualization/MathGL/MathGLWindow.cpp.i
 
 view/visualization/MathGL/MathGLWindow.s: view/visualization/MathGL/MathGLWindow.cpp.s
@@ -2482,7 +2512,7 @@ view/visualization/MathGL/MathGLWindow.s: view/visualization/MathGL/MathGLWindow
 
 # target to generate assembly for a file
 view/visualization/MathGL/MathGLWindow.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/MathGL/MathGLWindow.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/MathGL/MathGLWindow.cpp.s
 .PHONY : view/visualization/MathGL/MathGLWindow.cpp.s
 
 view/visualization/bulletphysics/OgreBtDebugDrawer.o: view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.o
@@ -2490,7 +2520,7 @@ view/visualization/bulletphysics/OgreBtDebugDrawer.o: view/visualization/bulletp
 
 # target to build an object file
 view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.o
 .PHONY : view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.o
 
 view/visualization/bulletphysics/OgreBtDebugDrawer.i: view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.i
@@ -2498,7 +2528,7 @@ view/visualization/bulletphysics/OgreBtDebugDrawer.i: view/visualization/bulletp
 
 # target to preprocess a source file
 view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.i
 .PHONY : view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.i
 
 view/visualization/bulletphysics/OgreBtDebugDrawer.s: view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.s
@@ -2506,7 +2536,7 @@ view/visualization/bulletphysics/OgreBtDebugDrawer.s: view/visualization/bulletp
 
 # target to generate assembly for a file
 view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.s
 .PHONY : view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.s
 
 view/visualization/overlay/InfoOverlay.o: view/visualization/overlay/InfoOverlay.cpp.o
@@ -2514,7 +2544,7 @@ view/visualization/overlay/InfoOverlay.o: view/visualization/overlay/InfoOverlay
 
 # target to build an object file
 view/visualization/overlay/InfoOverlay.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/overlay/InfoOverlay.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlay.cpp.o
 .PHONY : view/visualization/overlay/InfoOverlay.cpp.o
 
 view/visualization/overlay/InfoOverlay.i: view/visualization/overlay/InfoOverlay.cpp.i
@@ -2522,7 +2552,7 @@ view/visualization/overlay/InfoOverlay.i: view/visualization/overlay/InfoOverlay
 
 # target to preprocess a source file
 view/visualization/overlay/InfoOverlay.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/overlay/InfoOverlay.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlay.cpp.i
 .PHONY : view/visualization/overlay/InfoOverlay.cpp.i
 
 view/visualization/overlay/InfoOverlay.s: view/visualization/overlay/InfoOverlay.cpp.s
@@ -2530,7 +2560,7 @@ view/visualization/overlay/InfoOverlay.s: view/visualization/overlay/InfoOverlay
 
 # target to generate assembly for a file
 view/visualization/overlay/InfoOverlay.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/overlay/InfoOverlay.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlay.cpp.s
 .PHONY : view/visualization/overlay/InfoOverlay.cpp.s
 
 view/visualization/overlay/InfoOverlayData.o: view/visualization/overlay/InfoOverlayData.cpp.o
@@ -2538,7 +2568,7 @@ view/visualization/overlay/InfoOverlayData.o: view/visualization/overlay/InfoOve
 
 # target to build an object file
 view/visualization/overlay/InfoOverlayData.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/overlay/InfoOverlayData.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlayData.cpp.o
 .PHONY : view/visualization/overlay/InfoOverlayData.cpp.o
 
 view/visualization/overlay/InfoOverlayData.i: view/visualization/overlay/InfoOverlayData.cpp.i
@@ -2546,7 +2576,7 @@ view/visualization/overlay/InfoOverlayData.i: view/visualization/overlay/InfoOve
 
 # target to preprocess a source file
 view/visualization/overlay/InfoOverlayData.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/overlay/InfoOverlayData.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlayData.cpp.i
 .PHONY : view/visualization/overlay/InfoOverlayData.cpp.i
 
 view/visualization/overlay/InfoOverlayData.s: view/visualization/overlay/InfoOverlayData.cpp.s
@@ -2554,7 +2584,7 @@ view/visualization/overlay/InfoOverlayData.s: view/visualization/overlay/InfoOve
 
 # target to generate assembly for a file
 view/visualization/overlay/InfoOverlayData.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/overlay/InfoOverlayData.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlayData.cpp.s
 .PHONY : view/visualization/overlay/InfoOverlayData.cpp.s
 
 view/visualization/procedural/ProceduralBoxGenerator.o: view/visualization/procedural/ProceduralBoxGenerator.cpp.o
@@ -2562,7 +2592,7 @@ view/visualization/procedural/ProceduralBoxGenerator.o: view/visualization/proce
 
 # target to build an object file
 view/visualization/procedural/ProceduralBoxGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralBoxGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralBoxGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralBoxGenerator.cpp.o
 
 view/visualization/procedural/ProceduralBoxGenerator.i: view/visualization/procedural/ProceduralBoxGenerator.cpp.i
@@ -2570,7 +2600,7 @@ view/visualization/procedural/ProceduralBoxGenerator.i: view/visualization/proce
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralBoxGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralBoxGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralBoxGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralBoxGenerator.cpp.i
 
 view/visualization/procedural/ProceduralBoxGenerator.s: view/visualization/procedural/ProceduralBoxGenerator.cpp.s
@@ -2578,7 +2608,7 @@ view/visualization/procedural/ProceduralBoxGenerator.s: view/visualization/proce
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralBoxGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralBoxGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralBoxGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralBoxGenerator.cpp.s
 
 view/visualization/procedural/ProceduralCapsuleGenerator.o: view/visualization/procedural/ProceduralCapsuleGenerator.cpp.o
@@ -2586,7 +2616,7 @@ view/visualization/procedural/ProceduralCapsuleGenerator.o: view/visualization/p
 
 # target to build an object file
 view/visualization/procedural/ProceduralCapsuleGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralCapsuleGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralCapsuleGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralCapsuleGenerator.cpp.o
 
 view/visualization/procedural/ProceduralCapsuleGenerator.i: view/visualization/procedural/ProceduralCapsuleGenerator.cpp.i
@@ -2594,7 +2624,7 @@ view/visualization/procedural/ProceduralCapsuleGenerator.i: view/visualization/p
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralCapsuleGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralCapsuleGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralCapsuleGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralCapsuleGenerator.cpp.i
 
 view/visualization/procedural/ProceduralCapsuleGenerator.s: view/visualization/procedural/ProceduralCapsuleGenerator.cpp.s
@@ -2602,7 +2632,7 @@ view/visualization/procedural/ProceduralCapsuleGenerator.s: view/visualization/p
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralCapsuleGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralCapsuleGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralCapsuleGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralCapsuleGenerator.cpp.s
 
 view/visualization/procedural/ProceduralConeGenerator.o: view/visualization/procedural/ProceduralConeGenerator.cpp.o
@@ -2610,7 +2640,7 @@ view/visualization/procedural/ProceduralConeGenerator.o: view/visualization/proc
 
 # target to build an object file
 view/visualization/procedural/ProceduralConeGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralConeGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralConeGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralConeGenerator.cpp.o
 
 view/visualization/procedural/ProceduralConeGenerator.i: view/visualization/procedural/ProceduralConeGenerator.cpp.i
@@ -2618,7 +2648,7 @@ view/visualization/procedural/ProceduralConeGenerator.i: view/visualization/proc
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralConeGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralConeGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralConeGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralConeGenerator.cpp.i
 
 view/visualization/procedural/ProceduralConeGenerator.s: view/visualization/procedural/ProceduralConeGenerator.cpp.s
@@ -2626,7 +2656,7 @@ view/visualization/procedural/ProceduralConeGenerator.s: view/visualization/proc
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralConeGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralConeGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralConeGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralConeGenerator.cpp.s
 
 view/visualization/procedural/ProceduralCylinderGenerator.o: view/visualization/procedural/ProceduralCylinderGenerator.cpp.o
@@ -2634,7 +2664,7 @@ view/visualization/procedural/ProceduralCylinderGenerator.o: view/visualization/
 
 # target to build an object file
 view/visualization/procedural/ProceduralCylinderGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralCylinderGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralCylinderGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralCylinderGenerator.cpp.o
 
 view/visualization/procedural/ProceduralCylinderGenerator.i: view/visualization/procedural/ProceduralCylinderGenerator.cpp.i
@@ -2642,7 +2672,7 @@ view/visualization/procedural/ProceduralCylinderGenerator.i: view/visualization/
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralCylinderGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralCylinderGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralCylinderGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralCylinderGenerator.cpp.i
 
 view/visualization/procedural/ProceduralCylinderGenerator.s: view/visualization/procedural/ProceduralCylinderGenerator.cpp.s
@@ -2650,7 +2680,7 @@ view/visualization/procedural/ProceduralCylinderGenerator.s: view/visualization/
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralCylinderGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralCylinderGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralCylinderGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralCylinderGenerator.cpp.s
 
 view/visualization/procedural/ProceduralExtruder.o: view/visualization/procedural/ProceduralExtruder.cpp.o
@@ -2658,7 +2688,7 @@ view/visualization/procedural/ProceduralExtruder.o: view/visualization/procedura
 
 # target to build an object file
 view/visualization/procedural/ProceduralExtruder.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralExtruder.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralExtruder.cpp.o
 .PHONY : view/visualization/procedural/ProceduralExtruder.cpp.o
 
 view/visualization/procedural/ProceduralExtruder.i: view/visualization/procedural/ProceduralExtruder.cpp.i
@@ -2666,7 +2696,7 @@ view/visualization/procedural/ProceduralExtruder.i: view/visualization/procedura
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralExtruder.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralExtruder.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralExtruder.cpp.i
 .PHONY : view/visualization/procedural/ProceduralExtruder.cpp.i
 
 view/visualization/procedural/ProceduralExtruder.s: view/visualization/procedural/ProceduralExtruder.cpp.s
@@ -2674,7 +2704,7 @@ view/visualization/procedural/ProceduralExtruder.s: view/visualization/procedura
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralExtruder.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralExtruder.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralExtruder.cpp.s
 .PHONY : view/visualization/procedural/ProceduralExtruder.cpp.s
 
 view/visualization/procedural/ProceduralGeometryHelpers.o: view/visualization/procedural/ProceduralGeometryHelpers.cpp.o
@@ -2682,7 +2712,7 @@ view/visualization/procedural/ProceduralGeometryHelpers.o: view/visualization/pr
 
 # target to build an object file
 view/visualization/procedural/ProceduralGeometryHelpers.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralGeometryHelpers.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralGeometryHelpers.cpp.o
 .PHONY : view/visualization/procedural/ProceduralGeometryHelpers.cpp.o
 
 view/visualization/procedural/ProceduralGeometryHelpers.i: view/visualization/procedural/ProceduralGeometryHelpers.cpp.i
@@ -2690,7 +2720,7 @@ view/visualization/procedural/ProceduralGeometryHelpers.i: view/visualization/pr
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralGeometryHelpers.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralGeometryHelpers.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralGeometryHelpers.cpp.i
 .PHONY : view/visualization/procedural/ProceduralGeometryHelpers.cpp.i
 
 view/visualization/procedural/ProceduralGeometryHelpers.s: view/visualization/procedural/ProceduralGeometryHelpers.cpp.s
@@ -2698,7 +2728,7 @@ view/visualization/procedural/ProceduralGeometryHelpers.s: view/visualization/pr
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralGeometryHelpers.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralGeometryHelpers.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralGeometryHelpers.cpp.s
 .PHONY : view/visualization/procedural/ProceduralGeometryHelpers.cpp.s
 
 view/visualization/procedural/ProceduralIcoSphereGenerator.o: view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.o
@@ -2706,7 +2736,7 @@ view/visualization/procedural/ProceduralIcoSphereGenerator.o: view/visualization
 
 # target to build an object file
 view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.o
 
 view/visualization/procedural/ProceduralIcoSphereGenerator.i: view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.i
@@ -2714,7 +2744,7 @@ view/visualization/procedural/ProceduralIcoSphereGenerator.i: view/visualization
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.i
 
 view/visualization/procedural/ProceduralIcoSphereGenerator.s: view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.s
@@ -2722,7 +2752,7 @@ view/visualization/procedural/ProceduralIcoSphereGenerator.s: view/visualization
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralIcoSphereGenerator.cpp.s
 
 view/visualization/procedural/ProceduralLathe.o: view/visualization/procedural/ProceduralLathe.cpp.o
@@ -2730,7 +2760,7 @@ view/visualization/procedural/ProceduralLathe.o: view/visualization/procedural/P
 
 # target to build an object file
 view/visualization/procedural/ProceduralLathe.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralLathe.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralLathe.cpp.o
 .PHONY : view/visualization/procedural/ProceduralLathe.cpp.o
 
 view/visualization/procedural/ProceduralLathe.i: view/visualization/procedural/ProceduralLathe.cpp.i
@@ -2738,7 +2768,7 @@ view/visualization/procedural/ProceduralLathe.i: view/visualization/procedural/P
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralLathe.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralLathe.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralLathe.cpp.i
 .PHONY : view/visualization/procedural/ProceduralLathe.cpp.i
 
 view/visualization/procedural/ProceduralLathe.s: view/visualization/procedural/ProceduralLathe.cpp.s
@@ -2746,7 +2776,7 @@ view/visualization/procedural/ProceduralLathe.s: view/visualization/procedural/P
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralLathe.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralLathe.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralLathe.cpp.s
 .PHONY : view/visualization/procedural/ProceduralLathe.cpp.s
 
 view/visualization/procedural/ProceduralMultiShape.o: view/visualization/procedural/ProceduralMultiShape.cpp.o
@@ -2754,7 +2784,7 @@ view/visualization/procedural/ProceduralMultiShape.o: view/visualization/procedu
 
 # target to build an object file
 view/visualization/procedural/ProceduralMultiShape.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralMultiShape.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralMultiShape.cpp.o
 .PHONY : view/visualization/procedural/ProceduralMultiShape.cpp.o
 
 view/visualization/procedural/ProceduralMultiShape.i: view/visualization/procedural/ProceduralMultiShape.cpp.i
@@ -2762,7 +2792,7 @@ view/visualization/procedural/ProceduralMultiShape.i: view/visualization/procedu
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralMultiShape.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralMultiShape.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralMultiShape.cpp.i
 .PHONY : view/visualization/procedural/ProceduralMultiShape.cpp.i
 
 view/visualization/procedural/ProceduralMultiShape.s: view/visualization/procedural/ProceduralMultiShape.cpp.s
@@ -2770,7 +2800,7 @@ view/visualization/procedural/ProceduralMultiShape.s: view/visualization/procedu
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralMultiShape.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralMultiShape.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralMultiShape.cpp.s
 .PHONY : view/visualization/procedural/ProceduralMultiShape.cpp.s
 
 view/visualization/procedural/ProceduralPath.o: view/visualization/procedural/ProceduralPath.cpp.o
@@ -2778,7 +2808,7 @@ view/visualization/procedural/ProceduralPath.o: view/visualization/procedural/Pr
 
 # target to build an object file
 view/visualization/procedural/ProceduralPath.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPath.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPath.cpp.o
 .PHONY : view/visualization/procedural/ProceduralPath.cpp.o
 
 view/visualization/procedural/ProceduralPath.i: view/visualization/procedural/ProceduralPath.cpp.i
@@ -2786,7 +2816,7 @@ view/visualization/procedural/ProceduralPath.i: view/visualization/procedural/Pr
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralPath.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPath.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPath.cpp.i
 .PHONY : view/visualization/procedural/ProceduralPath.cpp.i
 
 view/visualization/procedural/ProceduralPath.s: view/visualization/procedural/ProceduralPath.cpp.s
@@ -2794,7 +2824,7 @@ view/visualization/procedural/ProceduralPath.s: view/visualization/procedural/Pr
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralPath.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPath.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPath.cpp.s
 .PHONY : view/visualization/procedural/ProceduralPath.cpp.s
 
 view/visualization/procedural/ProceduralPathGenerators.o: view/visualization/procedural/ProceduralPathGenerators.cpp.o
@@ -2802,7 +2832,7 @@ view/visualization/procedural/ProceduralPathGenerators.o: view/visualization/pro
 
 # target to build an object file
 view/visualization/procedural/ProceduralPathGenerators.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPathGenerators.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPathGenerators.cpp.o
 .PHONY : view/visualization/procedural/ProceduralPathGenerators.cpp.o
 
 view/visualization/procedural/ProceduralPathGenerators.i: view/visualization/procedural/ProceduralPathGenerators.cpp.i
@@ -2810,7 +2840,7 @@ view/visualization/procedural/ProceduralPathGenerators.i: view/visualization/pro
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralPathGenerators.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPathGenerators.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPathGenerators.cpp.i
 .PHONY : view/visualization/procedural/ProceduralPathGenerators.cpp.i
 
 view/visualization/procedural/ProceduralPathGenerators.s: view/visualization/procedural/ProceduralPathGenerators.cpp.s
@@ -2818,7 +2848,7 @@ view/visualization/procedural/ProceduralPathGenerators.s: view/visualization/pro
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralPathGenerators.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPathGenerators.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPathGenerators.cpp.s
 .PHONY : view/visualization/procedural/ProceduralPathGenerators.cpp.s
 
 view/visualization/procedural/ProceduralPlaneGenerator.o: view/visualization/procedural/ProceduralPlaneGenerator.cpp.o
@@ -2826,7 +2856,7 @@ view/visualization/procedural/ProceduralPlaneGenerator.o: view/visualization/pro
 
 # target to build an object file
 view/visualization/procedural/ProceduralPlaneGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPlaneGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPlaneGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralPlaneGenerator.cpp.o
 
 view/visualization/procedural/ProceduralPlaneGenerator.i: view/visualization/procedural/ProceduralPlaneGenerator.cpp.i
@@ -2834,7 +2864,7 @@ view/visualization/procedural/ProceduralPlaneGenerator.i: view/visualization/pro
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralPlaneGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPlaneGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPlaneGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralPlaneGenerator.cpp.i
 
 view/visualization/procedural/ProceduralPlaneGenerator.s: view/visualization/procedural/ProceduralPlaneGenerator.cpp.s
@@ -2842,7 +2872,7 @@ view/visualization/procedural/ProceduralPlaneGenerator.s: view/visualization/pro
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralPlaneGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPlaneGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPlaneGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralPlaneGenerator.cpp.s
 
 view/visualization/procedural/ProceduralPrecompiledHeaders.o: view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.o
@@ -2850,7 +2880,7 @@ view/visualization/procedural/ProceduralPrecompiledHeaders.o: view/visualization
 
 # target to build an object file
 view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.o
 .PHONY : view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.o
 
 view/visualization/procedural/ProceduralPrecompiledHeaders.i: view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.i
@@ -2858,7 +2888,7 @@ view/visualization/procedural/ProceduralPrecompiledHeaders.i: view/visualization
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.i
 .PHONY : view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.i
 
 view/visualization/procedural/ProceduralPrecompiledHeaders.s: view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.s
@@ -2866,7 +2896,7 @@ view/visualization/procedural/ProceduralPrecompiledHeaders.s: view/visualization
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.s
 .PHONY : view/visualization/procedural/ProceduralPrecompiledHeaders.cpp.s
 
 view/visualization/procedural/ProceduralRoot.o: view/visualization/procedural/ProceduralRoot.cpp.o
@@ -2874,7 +2904,7 @@ view/visualization/procedural/ProceduralRoot.o: view/visualization/procedural/Pr
 
 # target to build an object file
 view/visualization/procedural/ProceduralRoot.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralRoot.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralRoot.cpp.o
 .PHONY : view/visualization/procedural/ProceduralRoot.cpp.o
 
 view/visualization/procedural/ProceduralRoot.i: view/visualization/procedural/ProceduralRoot.cpp.i
@@ -2882,7 +2912,7 @@ view/visualization/procedural/ProceduralRoot.i: view/visualization/procedural/Pr
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralRoot.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralRoot.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralRoot.cpp.i
 .PHONY : view/visualization/procedural/ProceduralRoot.cpp.i
 
 view/visualization/procedural/ProceduralRoot.s: view/visualization/procedural/ProceduralRoot.cpp.s
@@ -2890,7 +2920,7 @@ view/visualization/procedural/ProceduralRoot.s: view/visualization/procedural/Pr
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralRoot.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralRoot.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralRoot.cpp.s
 .PHONY : view/visualization/procedural/ProceduralRoot.cpp.s
 
 view/visualization/procedural/ProceduralRoundedBoxGenerator.o: view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.o
@@ -2898,7 +2928,7 @@ view/visualization/procedural/ProceduralRoundedBoxGenerator.o: view/visualizatio
 
 # target to build an object file
 view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.o
 
 view/visualization/procedural/ProceduralRoundedBoxGenerator.i: view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.i
@@ -2906,7 +2936,7 @@ view/visualization/procedural/ProceduralRoundedBoxGenerator.i: view/visualizatio
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.i
 
 view/visualization/procedural/ProceduralRoundedBoxGenerator.s: view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.s
@@ -2914,7 +2944,7 @@ view/visualization/procedural/ProceduralRoundedBoxGenerator.s: view/visualizatio
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralRoundedBoxGenerator.cpp.s
 
 view/visualization/procedural/ProceduralShape.o: view/visualization/procedural/ProceduralShape.cpp.o
@@ -2922,7 +2952,7 @@ view/visualization/procedural/ProceduralShape.o: view/visualization/procedural/P
 
 # target to build an object file
 view/visualization/procedural/ProceduralShape.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralShape.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralShape.cpp.o
 .PHONY : view/visualization/procedural/ProceduralShape.cpp.o
 
 view/visualization/procedural/ProceduralShape.i: view/visualization/procedural/ProceduralShape.cpp.i
@@ -2930,7 +2960,7 @@ view/visualization/procedural/ProceduralShape.i: view/visualization/procedural/P
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralShape.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralShape.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralShape.cpp.i
 .PHONY : view/visualization/procedural/ProceduralShape.cpp.i
 
 view/visualization/procedural/ProceduralShape.s: view/visualization/procedural/ProceduralShape.cpp.s
@@ -2938,7 +2968,7 @@ view/visualization/procedural/ProceduralShape.s: view/visualization/procedural/P
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralShape.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralShape.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralShape.cpp.s
 .PHONY : view/visualization/procedural/ProceduralShape.cpp.s
 
 view/visualization/procedural/ProceduralShapeGenerators.o: view/visualization/procedural/ProceduralShapeGenerators.cpp.o
@@ -2946,7 +2976,7 @@ view/visualization/procedural/ProceduralShapeGenerators.o: view/visualization/pr
 
 # target to build an object file
 view/visualization/procedural/ProceduralShapeGenerators.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralShapeGenerators.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralShapeGenerators.cpp.o
 .PHONY : view/visualization/procedural/ProceduralShapeGenerators.cpp.o
 
 view/visualization/procedural/ProceduralShapeGenerators.i: view/visualization/procedural/ProceduralShapeGenerators.cpp.i
@@ -2954,7 +2984,7 @@ view/visualization/procedural/ProceduralShapeGenerators.i: view/visualization/pr
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralShapeGenerators.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralShapeGenerators.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralShapeGenerators.cpp.i
 .PHONY : view/visualization/procedural/ProceduralShapeGenerators.cpp.i
 
 view/visualization/procedural/ProceduralShapeGenerators.s: view/visualization/procedural/ProceduralShapeGenerators.cpp.s
@@ -2962,7 +2992,7 @@ view/visualization/procedural/ProceduralShapeGenerators.s: view/visualization/pr
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralShapeGenerators.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralShapeGenerators.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralShapeGenerators.cpp.s
 .PHONY : view/visualization/procedural/ProceduralShapeGenerators.cpp.s
 
 view/visualization/procedural/ProceduralSphereGenerator.o: view/visualization/procedural/ProceduralSphereGenerator.cpp.o
@@ -2970,7 +3000,7 @@ view/visualization/procedural/ProceduralSphereGenerator.o: view/visualization/pr
 
 # target to build an object file
 view/visualization/procedural/ProceduralSphereGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralSphereGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralSphereGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralSphereGenerator.cpp.o
 
 view/visualization/procedural/ProceduralSphereGenerator.i: view/visualization/procedural/ProceduralSphereGenerator.cpp.i
@@ -2978,7 +3008,7 @@ view/visualization/procedural/ProceduralSphereGenerator.i: view/visualization/pr
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralSphereGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralSphereGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralSphereGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralSphereGenerator.cpp.i
 
 view/visualization/procedural/ProceduralSphereGenerator.s: view/visualization/procedural/ProceduralSphereGenerator.cpp.s
@@ -2986,7 +3016,7 @@ view/visualization/procedural/ProceduralSphereGenerator.s: view/visualization/pr
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralSphereGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralSphereGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralSphereGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralSphereGenerator.cpp.s
 
 view/visualization/procedural/ProceduralTorusGenerator.o: view/visualization/procedural/ProceduralTorusGenerator.cpp.o
@@ -2994,7 +3024,7 @@ view/visualization/procedural/ProceduralTorusGenerator.o: view/visualization/pro
 
 # target to build an object file
 view/visualization/procedural/ProceduralTorusGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTorusGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTorusGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralTorusGenerator.cpp.o
 
 view/visualization/procedural/ProceduralTorusGenerator.i: view/visualization/procedural/ProceduralTorusGenerator.cpp.i
@@ -3002,7 +3032,7 @@ view/visualization/procedural/ProceduralTorusGenerator.i: view/visualization/pro
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralTorusGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTorusGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTorusGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralTorusGenerator.cpp.i
 
 view/visualization/procedural/ProceduralTorusGenerator.s: view/visualization/procedural/ProceduralTorusGenerator.cpp.s
@@ -3010,7 +3040,7 @@ view/visualization/procedural/ProceduralTorusGenerator.s: view/visualization/pro
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralTorusGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTorusGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTorusGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralTorusGenerator.cpp.s
 
 view/visualization/procedural/ProceduralTorusKnotGenerator.o: view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.o
@@ -3018,7 +3048,7 @@ view/visualization/procedural/ProceduralTorusKnotGenerator.o: view/visualization
 
 # target to build an object file
 view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.o
 
 view/visualization/procedural/ProceduralTorusKnotGenerator.i: view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.i
@@ -3026,7 +3056,7 @@ view/visualization/procedural/ProceduralTorusKnotGenerator.i: view/visualization
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.i
 
 view/visualization/procedural/ProceduralTorusKnotGenerator.s: view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.s
@@ -3034,7 +3064,7 @@ view/visualization/procedural/ProceduralTorusKnotGenerator.s: view/visualization
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralTorusKnotGenerator.cpp.s
 
 view/visualization/procedural/ProceduralTrack.o: view/visualization/procedural/ProceduralTrack.cpp.o
@@ -3042,7 +3072,7 @@ view/visualization/procedural/ProceduralTrack.o: view/visualization/procedural/P
 
 # target to build an object file
 view/visualization/procedural/ProceduralTrack.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTrack.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTrack.cpp.o
 .PHONY : view/visualization/procedural/ProceduralTrack.cpp.o
 
 view/visualization/procedural/ProceduralTrack.i: view/visualization/procedural/ProceduralTrack.cpp.i
@@ -3050,7 +3080,7 @@ view/visualization/procedural/ProceduralTrack.i: view/visualization/procedural/P
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralTrack.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTrack.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTrack.cpp.i
 .PHONY : view/visualization/procedural/ProceduralTrack.cpp.i
 
 view/visualization/procedural/ProceduralTrack.s: view/visualization/procedural/ProceduralTrack.cpp.s
@@ -3058,7 +3088,7 @@ view/visualization/procedural/ProceduralTrack.s: view/visualization/procedural/P
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralTrack.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTrack.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTrack.cpp.s
 .PHONY : view/visualization/procedural/ProceduralTrack.cpp.s
 
 view/visualization/procedural/ProceduralTriangulator.o: view/visualization/procedural/ProceduralTriangulator.cpp.o
@@ -3066,7 +3096,7 @@ view/visualization/procedural/ProceduralTriangulator.o: view/visualization/proce
 
 # target to build an object file
 view/visualization/procedural/ProceduralTriangulator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTriangulator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTriangulator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralTriangulator.cpp.o
 
 view/visualization/procedural/ProceduralTriangulator.i: view/visualization/procedural/ProceduralTriangulator.cpp.i
@@ -3074,7 +3104,7 @@ view/visualization/procedural/ProceduralTriangulator.i: view/visualization/proce
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralTriangulator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTriangulator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTriangulator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralTriangulator.cpp.i
 
 view/visualization/procedural/ProceduralTriangulator.s: view/visualization/procedural/ProceduralTriangulator.cpp.s
@@ -3082,7 +3112,7 @@ view/visualization/procedural/ProceduralTriangulator.s: view/visualization/proce
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralTriangulator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTriangulator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTriangulator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralTriangulator.cpp.s
 
 view/visualization/procedural/ProceduralTubeGenerator.o: view/visualization/procedural/ProceduralTubeGenerator.cpp.o
@@ -3090,7 +3120,7 @@ view/visualization/procedural/ProceduralTubeGenerator.o: view/visualization/proc
 
 # target to build an object file
 view/visualization/procedural/ProceduralTubeGenerator.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTubeGenerator.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTubeGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralTubeGenerator.cpp.o
 
 view/visualization/procedural/ProceduralTubeGenerator.i: view/visualization/procedural/ProceduralTubeGenerator.cpp.i
@@ -3098,7 +3128,7 @@ view/visualization/procedural/ProceduralTubeGenerator.i: view/visualization/proc
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralTubeGenerator.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTubeGenerator.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTubeGenerator.cpp.i
 .PHONY : view/visualization/procedural/ProceduralTubeGenerator.cpp.i
 
 view/visualization/procedural/ProceduralTubeGenerator.s: view/visualization/procedural/ProceduralTubeGenerator.cpp.s
@@ -3106,7 +3136,7 @@ view/visualization/procedural/ProceduralTubeGenerator.s: view/visualization/proc
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralTubeGenerator.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralTubeGenerator.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralTubeGenerator.cpp.s
 .PHONY : view/visualization/procedural/ProceduralTubeGenerator.cpp.s
 
 view/visualization/procedural/ProceduralUtils.o: view/visualization/procedural/ProceduralUtils.cpp.o
@@ -3114,7 +3144,7 @@ view/visualization/procedural/ProceduralUtils.o: view/visualization/procedural/P
 
 # target to build an object file
 view/visualization/procedural/ProceduralUtils.cpp.o:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralUtils.cpp.o
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralUtils.cpp.o
 .PHONY : view/visualization/procedural/ProceduralUtils.cpp.o
 
 view/visualization/procedural/ProceduralUtils.i: view/visualization/procedural/ProceduralUtils.cpp.i
@@ -3122,7 +3152,7 @@ view/visualization/procedural/ProceduralUtils.i: view/visualization/procedural/P
 
 # target to preprocess a source file
 view/visualization/procedural/ProceduralUtils.cpp.i:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralUtils.cpp.i
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralUtils.cpp.i
 .PHONY : view/visualization/procedural/ProceduralUtils.cpp.i
 
 view/visualization/procedural/ProceduralUtils.s: view/visualization/procedural/ProceduralUtils.cpp.s
@@ -3130,7 +3160,7 @@ view/visualization/procedural/ProceduralUtils.s: view/visualization/procedural/P
 
 # target to generate assembly for a file
 view/visualization/procedural/ProceduralUtils.cpp.s:
-	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/view/visualization/procedural/ProceduralUtils.cpp.s
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/procedural/ProceduralUtils.cpp.s
 .PHONY : view/visualization/procedural/ProceduralUtils.cpp.s
 
 # Help Target
@@ -3139,7 +3169,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... OgreApp"
+	@echo "... Minemonics"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
@@ -3193,9 +3223,6 @@ help:
 	@echo "... controller/universe/evolution/Evolution.o"
 	@echo "... controller/universe/evolution/Evolution.i"
 	@echo "... controller/universe/evolution/Evolution.s"
-	@echo "... controller/universe/evolution/genetics/PhenotypeGenerator.o"
-	@echo "... controller/universe/evolution/genetics/PhenotypeGenerator.i"
-	@echo "... controller/universe/evolution/genetics/PhenotypeGenerator.s"
 	@echo "... controller/universe/evolution/population/Population.o"
 	@echo "... controller/universe/evolution/population/Population.i"
 	@echo "... controller/universe/evolution/population/Population.s"
@@ -3301,6 +3328,12 @@ help:
 	@echo "... model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.o"
 	@echo "... model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.i"
 	@echo "... model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.s"
+	@echo "... model/universe/evolution/population/creature/genome/genetics/BaseGenerator.o"
+	@echo "... model/universe/evolution/population/creature/genome/genetics/BaseGenerator.i"
+	@echo "... model/universe/evolution/population/creature/genome/genetics/BaseGenerator.s"
+	@echo "... model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.o"
+	@echo "... model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.i"
+	@echo "... model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.s"
 	@echo "... model/universe/evolution/population/creature/genome/morphology/Morphogene.o"
 	@echo "... model/universe/evolution/population/creature/genome/morphology/Morphogene.i"
 	@echo "... model/universe/evolution/population/creature/genome/morphology/Morphogene.s"

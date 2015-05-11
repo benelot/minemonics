@@ -16,7 +16,7 @@
 #*/
 cmake_minimum_required(VERSION 2.6)
  
-project(OgreApp)
+project(Minemonics)
 
 #DEVELOPMENT INPUT
 # Append header files here
@@ -48,6 +48,8 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/genome/DirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.hpp
+	./model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp
+	./model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp
 	./model/universe/evolution/population/creature/genome/Gene.hpp
 	./model/universe/evolution/population/creature/genome/GeneBranch.hpp
 	./model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp
@@ -57,6 +59,7 @@ set(MODELHDRS
 	
 	## phenome
 	./model/universe/evolution/population/creature/phenome/PhenomeModel.hpp
+
     ./model/universe/evolution/population/creature/phenome/ComponentModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
@@ -100,6 +103,8 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/genome/DirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.cpp
+	./model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp
+	./model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp
 	./model/universe/evolution/population/creature/genome/Gene.cpp
 	./model/universe/evolution/population/creature/genome/GeneBranch.cpp
 	./model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp
@@ -164,7 +169,6 @@ set(CONTROLLERHDRS
         
     ## phenome
     ./controller/universe/evolution/population/creature/Creature.hpp
-    ./controller/universe/evolution/genetics/PhenotypeGenerator.hpp
     ./controller/universe/evolution/population/creature/phenome/Phenome.hpp
     ./controller/universe/evolution/population/creature/phenome/Component.hpp
     ./controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp
@@ -202,7 +206,6 @@ set(CONTROLLERSRCS
     
     ## creature
     ./controller/universe/evolution/population/creature/Creature.cpp
-    ./controller/universe/evolution/genetics/PhenotypeGenerator.cpp
     ./controller/universe/evolution/population/creature/phenome/Phenome.cpp
     ./controller/universe/evolution/population/creature/phenome/Component.cpp
     ./controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp
@@ -650,15 +653,15 @@ include_directories(
 	${PROJECT_HOME}
 )
 
-add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
+add_executable(Minemonics WIN32 ${HDRS} ${SRCS})
  
-set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
+set_target_properties(Minemonics PROPERTIES DEBUG_POSTFIX _d)
 
 ######################################################################
 # LINKING
 ######################################################################
  
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(Minemonics ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
@@ -670,9 +673,9 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
 
 # post-build copy for win32
 if(WIN32 AND NOT MINGW)
-	add_custom_command( TARGET OgreApp PRE_BUILD
+	add_custom_command( TARGET Minemonics PRE_BUILD
 		COMMAND if not exist .\\dist\\bin mkdir .\\dist\\bin )
-	add_custom_command( TARGET OgreApp POST_BUILD
+	add_custom_command( TARGET Minemonics POST_BUILD
 		COMMAND copy \"$(TargetPath)\" .\\dist\\bin )
 endif(WIN32 AND NOT MINGW)
 
@@ -682,7 +685,7 @@ endif(MINGW OR UNIX)
  
 if(WIN32)
  
-	install(TARGETS OgreApp
+	install(TARGETS Minemonics
 		RUNTIME DESTINATION bin
 		CONFIGURATIONS All)
  
@@ -738,7 +741,7 @@ endif(WIN32)
 
 if(UNIX)
  
-	install(TARGETS OgreApp
+	install(TARGETS Minemonics
 		RUNTIME DESTINATION bin
 		CONFIGURATIONS All)
  

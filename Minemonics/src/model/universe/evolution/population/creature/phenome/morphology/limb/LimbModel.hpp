@@ -2,12 +2,15 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_
 
 //# corresponding header
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+
 //# forward declarations
 class btDynamicsWorld;
 
 //# system headers
 //## controller headers
 //## model headers
+#include <OgreColourValue.h>
 #include <OgreQuaternion.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btVector3.h>
@@ -24,6 +27,7 @@ class btDynamicsWorld;
 
 //## view headers
 //## utils headers
+#include<utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  *@brief The limb model holds all the information of the limb state.
@@ -31,14 +35,24 @@ class btDynamicsWorld;
  *@date 2015-04-29
  *@author Benjamin Ellenberger
  */
-class LimbModel {
+class LimbModel: public ComponentModel {
 public:
+
+	/**
+	 * Primitive type of a limb
+	 */
+	enum PrimitiveType {
+		BLOCK = 2, CAPSULE = 1, UNKNOWN = 0
+	};
+
+	static const int PRIMITIVE_QTY = 2;
+
 	LimbModel();
 	virtual ~LimbModel();
 
 	void initialize(btDynamicsWorld* world, void* limb,
-			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
-			Ogre::Quaternion orientation,Ogre::Vector3 dimensions, double mass);
+			PrimitiveType type, Ogre::Vector3 position,
+			Ogre::Quaternion orientation,Ogre::Vector3 dimensions, double mass,Ogre::ColourValue color);
 
 
 	//TODO: Implement serialization methods for LimbModel.
@@ -56,16 +70,28 @@ public:
 	 * Get the position of the limb in the physical world.
 	 * @return The position of the limb in the physical world.
 	 */
-	btVector3 getPosition(){
-		return mLimbPhysics->getPosition();
+	Ogre::Vector3 getPosition(){
+		return OgreBulletUtils::convert(mLimbPhysics->getPosition());
 	}
 
 	/**
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.
 	 */
-	btQuaternion getOrientation(){
-		return mLimbPhysics->getOrientation();
+	Ogre::Quaternion getOrientation(){
+		return OgreBulletUtils::convert(mLimbPhysics->getOrientation());
+	}
+
+	const Ogre::ColourValue& getColor() const {
+		return mColor;
+	}
+
+	PrimitiveType getLimbType() const {
+		return mLimbType;
+	}
+
+	const Ogre::Vector3& getDimensions() const {
+		return mDimensions;
 	}
 
 private:
@@ -73,6 +99,12 @@ private:
 	 * The physics model of the limb.
 	 */
 	LimbPhysics* mLimbPhysics;
+
+	Ogre::ColourValue mColor;
+
+	PrimitiveType mLimbType;
+
+	Ogre::Vector3 mDimensions;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */

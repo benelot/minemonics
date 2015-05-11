@@ -39,13 +39,6 @@ Joint::~Joint() {
 
 void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 		Limb* limbB, btTransform localA, btTransform localB) {
-	// Define the new component as a limb
-	Component::initialize(ComponentModel::JointComponent);
-
-	// initialize the graphics part of the joint
-	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize(simulationManager, limbA, limbB,
-			localA, localB);
 
 	// initialize the physics model of the joint
 	mJointModel = new JointModel();
@@ -54,14 +47,12 @@ void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
 			limbA->getLimbPhysics()->getRigidBody(),
 			limbB->getLimbPhysics()->getRigidBody(), localA, localB);
 
-	// Update the state of the joint.
-	update();
+	buildFrom(simulationManager, mJointModel);
 }
 
-void Joint::initializeRotationalLimitMotors(btVector3 maxForces,
-		btVector3 maxSpeeds) {
-	((JointBt*) mJointModel->getJointPhysics())->initializeRotationalLimitMotors(
-			maxForces, maxSpeeds);
+void Joint::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
+		Ogre::Vector3 maxSpeeds) {
+	mJointModel->initializeRotationalLimitMotors(maxForces, maxSpeeds);
 }
 
 void Joint::update() {
@@ -87,22 +78,20 @@ void Joint::removeFromWorld() {
 
 void Joint::setAngularLimits(Ogre::Vector3 angularLowerLimit,
 		Ogre::Vector3 angularUpperLimit) {
-	mJointModel->getJointPhysics()->setAngularLimits(angularLowerLimit,
-			angularUpperLimit);
+	mJointModel->setAngularLimits(angularLowerLimit, angularUpperLimit);
 }
 
 void Joint::setAngularStiffness(double jointPitchStiffness,
 		double jointYawStiffness, double jointRollStiffness) {
-	mJointModel->getJointPhysics()->setAngularStiffness(jointPitchStiffness,
-			jointYawStiffness, jointRollStiffness);
+	mJointModel->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
+			jointRollStiffness);
 }
 
 void Joint::setAngularDamping(double springPitchDampingCoefficient,
 		double springYawDampingCoefficient,
 		double springRollDampingCoefficient) {
-	mJointModel->getJointPhysics()->setAngularDamping(
-			springPitchDampingCoefficient, springYawDampingCoefficient,
-			springRollDampingCoefficient);
+	mJointModel->setAngularDamping(springPitchDampingCoefficient,
+			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
@@ -113,4 +102,20 @@ void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 			yawEnable);
 	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(2,
 			rollEnable);
+}
+
+void Joint::buildFrom(SimulationManager* simulationManager,/* Limb* limbA,
+ Limb* limbB,*/JointModel* jointModel) {
+	// Define the new component as a limb
+	Component::initialize(ComponentModel::JointComponent);
+
+	// initialize the graphics part of the joint
+	mJointGraphics = new JointO3D();
+	((JointO3D*) mJointGraphics)->initialize(simulationManager);
+
+	if (mJointModel == NULL) {
+		mJointModel = jointModel;
+	}
+	// Update the state of the joint.
+	update();
 }

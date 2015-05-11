@@ -40,11 +40,15 @@ public:
 
 	void initialize(ComponentType type);
 
+	ComponentType getComponentType() const {
+		return mComponentType;
+	}
+
 private:
 	/**
 	 * Component type of the compoment.
 	 */
-	ComponentType mType;
+	ComponentType mComponentType;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENTMODEL_HPP_ */

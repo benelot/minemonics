@@ -30,6 +30,8 @@ class Limb;
 
 //## controller headers
 //## model headers
+#include<model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -55,7 +57,7 @@ public:
 	 * @param mass The mass of the limb.
 	 */
 	void initialize(btDynamicsWorld* world, void* limb,
-			MorphologyConfiguration::PrimitiveType type, btVector3 position,
+			LimbModel::PrimitiveType type, btVector3 position,
 			btQuaternion orientation, btVector3 dimensions, btScalar mass);
 
 	/**

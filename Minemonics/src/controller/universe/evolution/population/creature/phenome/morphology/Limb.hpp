@@ -23,8 +23,6 @@ class Creature;
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
-
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -49,9 +47,17 @@ public:
 	virtual ~Limb();
 
 	void initialize(SimulationManager* simulationManager,Creature* creature,
-			MorphologyConfiguration::PrimitiveType type, Ogre::Vector3 position,
+			LimbModel::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
 			Ogre::ColourValue color = Ogre::ColourValue(1, 1, 1));
+
+	/**
+	 * Build a limb from the limb model.
+	 * @param simulationManager The handle of the simulationManager.
+	 * @param creature The handle of the creature.
+	 * @param limbModel The model of the limb.
+	 */
+	void buildFrom(SimulationManager* simulationManager,Creature* creature, LimbModel* limbModel);
 
 	/**
 	 * Update the graphical representation of the limb with the physical representation.
@@ -97,7 +103,6 @@ public:
 	 */
 	LimbO3D* getLimbGraphics() {
 		return ((LimbO3D*) mLimbGraphics);
-
 	}
 
 	/**
@@ -108,6 +113,7 @@ public:
 	}
 
 private:
+
 	LimbGraphics* mLimbGraphics;
 
 	LimbModel* mLimbModel;

@@ -28,7 +28,7 @@ public:
 
 	// Evolution states
 		enum EvolutionState {
-			EVALUATION, GENERATION, PROCESSING
+			VARIATION, EVALUATION, PROCESSING,REAP_AND_SOW
 		};
 
 		/**
@@ -48,11 +48,15 @@ public:
 
 	void initialize(double evaluationTime);
 
+	bool run();
+
 	bool evaluate();
+
+	bool process();
 
 	bool selectAndReap();
 
-	bool evolve();
+	bool variate();
 
 	//accessor methods
 	const Reaper& getReaper() const {

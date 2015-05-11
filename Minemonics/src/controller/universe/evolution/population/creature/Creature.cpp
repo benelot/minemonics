@@ -43,7 +43,7 @@ void Creature::initialize(SimulationManager* simulationManager,
 	mCreature = new CreatureModel();
 	mCreature->initialize(position, bushiness);
 	mPhenotype = new Phenome();
-	mPhenotype->initialize(simulationManager);
+	mPhenotype->initialize(simulationManager,this);
 }
 
 void Creature::performEmbryogenesis() {

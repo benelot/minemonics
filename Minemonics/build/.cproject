@@ -291,30 +291,30 @@
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 <buildTargets>
-<target name="[exe] OgreApp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[exe] Minemonics" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>OgreApp</buildTarget>
+<buildTarget>Minemonics</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[exe] OgreApp/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[exe] Minemonics/fast" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>OgreApp/fast</buildTarget>
+<buildTarget>Minemonics/fast</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="Build" path="[Targets]/[exe] OgreApp" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="Build" path="[Targets]/[exe] Minemonics" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-C "/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build" -j8</buildArguments>
-<buildTarget>OgreApp</buildTarget>
+<buildTarget>Minemonics</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="Clean" path="[Targets]/[exe] OgreApp" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="Clean" path="[Targets]/[exe] Minemonics" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build" "/usr/bin/cmake" -P "CMakeFiles/OgreApp.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/build" "/usr/bin/cmake" -P "CMakeFiles/Minemonics.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -715,27 +715,6 @@
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
 <buildTarget>controller/universe/evolution/Evolution.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] controller/universe/evolution/genetics/PhenotypeGenerator.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>controller/universe/evolution/genetics/PhenotypeGenerator.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] controller/universe/evolution/genetics/PhenotypeGenerator.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>controller/universe/evolution/genetics/PhenotypeGenerator.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] controller/universe/evolution/genetics/PhenotypeGenerator.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>controller/universe/evolution/genetics/PhenotypeGenerator.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
@@ -1471,6 +1450,48 @@
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
 <buildTarget>model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
@@ -2909,6 +2930,6 @@
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<project id="OgreApp.null.1" name="OgreApp"/>
+<project id="Minemonics.null.1" name="Minemonics"/>
 </storageModule>
 </cproject>
