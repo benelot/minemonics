@@ -88,9 +88,9 @@ void Morphogene::initialize(double branchiness) {
 			2 * boost::math::constants::pi<double>());
 
 	// A random color RGB values between 0 and 1
-	mColorR = randomness.nextDouble(0.0f, 1.0f);
-	mColorG = randomness.nextDouble(0.0f, 1.0f);
-	mColorB = randomness.nextDouble(0.0f, 1.0f);
+	mColorR = randomness.nextDouble(0.0f,1.0f);
+	mColorG = randomness.nextDouble(0.0f,1.0f);
+	mColorB = randomness.nextDouble(0.0f,1.0f);
 
 	switch ((LimbModel::PrimitiveType) randomness.nextPosInt(1,
 			LimbModel::PRIMITIVE_QTY)) {
