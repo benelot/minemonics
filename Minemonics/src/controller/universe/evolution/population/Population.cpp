@@ -41,14 +41,38 @@ void Population::initialize(SimulationManager* simulationManager,
  * Adds a new creature to the population with the bushiness as a input.
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
-void Population::addNewMember(double bushiness) {
+void Population::addNewMember(double bushiness,Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
-		creature->initialize(mSimulationManager, Ogre::Vector3::ZERO,
+		creature->initialize(mSimulationManager, rootPosition,
 				bushiness);
 		mCreatures.push_back(creature);
 		//hand model down to the population model
-		mPopulationModel.addNewMember(creature->mCreature);
+		mPopulationModel.addNewMember(creature->mCreatureModel);
 	}
 
+}
+
+void Population::update() {
+	std::vector<Creature*>::iterator cit = mCreatures.begin();
+	for(;cit != mCreatures.end();cit++)
+	{
+		(*cit)->update();
+	}
+}
+
+void Population::addToWorld() {
+	std::vector<Creature*>::iterator cit = mCreatures.begin();
+	for(;cit != mCreatures.end();cit++)
+	{
+		(*cit)->addToWorld();
+	}
+}
+
+void Population::removeFromWorld() {
+	std::vector<Creature*>::iterator cit = mCreatures.begin();
+	for(;cit != mCreatures.end();cit++)
+	{
+		(*cit)->removeFromWorld();
+	}
 }

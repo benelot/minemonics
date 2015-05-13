@@ -43,10 +43,14 @@ public:
 
 	void removeFromWorld();
 
+	void setPosition(Ogre::Vector3 position){
+		mCreatureModel->setPosition(position);
+	}
+
 	/**
 	 * The model of the creature
 	 */
-	CreatureModel* mCreature;
+	CreatureModel* mCreatureModel;
 
 	/**
 	 * The phenotype of the creature.

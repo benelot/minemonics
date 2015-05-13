@@ -42,8 +42,8 @@ class ParamsPanel;
 #include <controller/input/SDL2InputHandler.hpp>
 #include <controller/physics/PhysicsController.hpp>
 #include <controller/physics/RagDoll.hpp>
-
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
 
 //## model headers
 #include <model/universe/evolution/juries/Ones.hpp>
@@ -117,7 +117,7 @@ private:
 	Environment* mTerrain;
 
 	std::vector<RagDoll*> mRagdolls;
-	std::vector<Creature*> mCreatures;
+	Population population;
 
 	// CEGUI components
 	CEGUI::System* mSystem;

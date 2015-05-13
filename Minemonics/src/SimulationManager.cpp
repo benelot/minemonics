@@ -112,10 +112,7 @@ void SimulationManager::destroyScene(void) {
 		(*it)->removeFromWorld();
 	}
 
-	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for (; cit != mCreatures.end(); cit++) {
-		(*cit)->removeFromWorld();
-	}
+	population.removeFromWorld();
 
 	mPhysicsController.exitBulletPhysics();
 
@@ -176,28 +173,27 @@ void SimulationManager::createFrameListener(void) {
 		mPhysicsController.addBody(mTerrain->getBody());
 	}
 
-	Population population;
 	population.initialize(this, 100);
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
-	for (int i = 0; i < 50; i++) {
+	std::vector<Creature*>::iterator cit = population.getCreatures().begin();
+	for (; cit != population.getCreatures().end(); cit++) {
+		(*cit)->setPosition(
+				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
+						randomness.nextDouble(300, 10000),
+						randomness.nextDouble(-1000, 10000)));
+		(*cit)->performEmbryogenesis();
+	}
+
+	population.addToWorld();
+
+//	for (int i = 0; i < 50; i++) {
 //		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
 //				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
 //		mRagdolls.push_back(ragdoll);
 //		ragdoll->addToWorld();
-
-		Creature* creature = new Creature();
-
-		creature->initialize(this,
-				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
-						randomness.nextDouble(300, 10000),
-						randomness.nextDouble(-1000, 10000)),
-				randomness.nextDouble(40, 50));
-		creature->performEmbryogenesis();
-		mCreatures.push_back(creature);
-		creature->addToWorld();
-	}
+//	}
 }
 
 //-------------------------------------------------------------------------------------
@@ -253,10 +249,7 @@ void SimulationManager::updatePhysics() {
 		(*it)->update();
 	}
 
-	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for (; cit != mCreatures.end(); cit++) {
-		(*cit)->update();
-	}
+	population.update();
 
 //	const int numObjects =
 //			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();

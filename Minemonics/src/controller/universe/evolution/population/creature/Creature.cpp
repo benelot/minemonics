@@ -26,13 +26,13 @@ class SimulationManager;
 //## utils headers
 
 Creature::Creature() :
-		mCreature(NULL), mPhenotype(NULL) {
+		mCreatureModel(NULL), mPhenotype(NULL) {
 
 }
 
 Creature::~Creature() {
-	delete mCreature;
-	mCreature = NULL;
+	delete mCreatureModel;
+	mCreatureModel = NULL;
 
 	delete mPhenotype;
 	mPhenotype = NULL;
@@ -40,15 +40,15 @@ Creature::~Creature() {
 
 void Creature::initialize(SimulationManager* simulationManager,
 		Ogre::Vector3 position, double bushiness) {
-	mCreature = new CreatureModel();
-	mCreature->initialize(position, bushiness);
+	mCreatureModel = new CreatureModel();
+	mCreatureModel->initialize(position, bushiness);
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager,this);
 }
 
 void Creature::performEmbryogenesis() {
-	mPhenotype->performEmbryogenesis(this,&mCreature->getGenotype(),
-			mCreature->getPosition());
+	mPhenotype->performEmbryogenesis(this,&mCreatureModel->getGenotype(),
+			mCreatureModel->getPosition());
 }
 
 void Creature::update() {

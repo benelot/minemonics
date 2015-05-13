@@ -42,7 +42,17 @@ public:
 	 * Adds a new creature to the population with the bushiness as a input.
 	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
 	 */
-	void addNewMember(double bushiness);
+	void addNewMember(double bushiness,Ogre::Vector3 rootPosition=Ogre::Vector3::ZERO);
+
+	void update();
+
+	void addToWorld();
+
+	void removeFromWorld();
+
+	std::vector<Creature*>& getCreatures() {
+		return mCreatures;
+	}
 
 private:
 
