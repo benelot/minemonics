@@ -181,7 +181,7 @@ void SimulationManager::createFrameListener(void) {
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
-	for (int i = 0; i < 1; i++) {
+	for (int i = 0; i < 50; i++) {
 //		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
 //				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
 //		mRagdolls.push_back(ragdoll);
@@ -190,9 +190,9 @@ void SimulationManager::createFrameListener(void) {
 		Creature* creature = new Creature();
 
 		creature->initialize(this,
-				Ogre::Vector3(randomness.nextDouble(-1000, 1000),
-						randomness.nextDouble(300, 1000),
-						randomness.nextDouble(-1000, 1000)),
+				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
+						randomness.nextDouble(300, 10000),
+						randomness.nextDouble(-1000, 10000)),
 				randomness.nextDouble(40, 50));
 		creature->performEmbryogenesis();
 		mCreatures.push_back(creature);
