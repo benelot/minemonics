@@ -1,0 +1,327 @@
+%==============================================================================
+%
+% Created by Karl Wuest
+% ETHbeamer 1.0.5
+% 2014-11-02
+% ETH corporate design
+% Based on LaTex ETH Presentation Template by Dieter Hennig
+%
+%==============================================================================
+
+
+% === optional department logo ================================================
+
+\newif\ifdeplogo    
+\deplogotrue 				% Department-Logo for leftside footer
+
+% === font ====================================================================
+\usepackage[T1]{fontenc}% for correct hyphenation and T1 encoding
+
+\linespread{1.12}           % enlarge line space
+\usepackage{lmodern}        % latin modern font
+\usepackage[scaled=.95]{helvet}% helvetica as the origin of arial
+\usepackage[helvet]{sfmath}    % for the mathematical enviroments
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{microtype}         % for character protrusion and font expansion
+
+% === math packages ===========================================================
+\usepackage{amsthm}     % theorem environments
+\newcommand{\hmmax}{0}
+\newcommand{\bmmax}{3}
+\usepackage{bm}         % for bold math symbols
+
+% === colors ==================================================================
+\usepackage{xcolor}            % color package; load before tocstyle
+
+\usepackage{tikz, datetime, textpos}
+\usepackage{calc}
+
+% ====  new colours  ===========================================================
+
+\definecolor{ETHa}{RGB}{31,64,122}      % ETH1
+\definecolor{ETHb}{RGB}{72,90,44}       % ETH2
+\definecolor{ETHc}{RGB}{18,105,176}     % ETH3
+\definecolor{ETHd}{RGB}{114,121,28}     % ETH4
+\definecolor{ETHe}{RGB}{145,5,106}      % ETH5
+\definecolor{ETHf}{RGB}{111,111,100}    % ETH6
+\definecolor{ETHg}{RGB}{168,50,45}      % ETH7
+\definecolor{ETHh}{RGB}{0,122,150}      % ETH8
+\definecolor{ETHi}{RGB}{149,96,19}      % ETH9
+\newcommand*{\colorETHa}[1]{\textcolor{ETHa}{#1}}
+\newcommand*{\colorETHb}[1]{\textcolor{ETHb}{#1}}
+\newcommand*{\colorETHc}[1]{\textcolor{ETHc}{#1}}
+\newcommand*{\colorETHd}[1]{\textcolor{ETHd}{#1}}
+\newcommand*{\colorETHe}[1]{\textcolor{ETHe}{#1}}
+\newcommand*{\colorETHf}[1]{\textcolor{ETHf}{#1}}
+\newcommand*{\colorETHg}[1]{\textcolor{ETHg}{#1}}
+\newcommand*{\colorETHh}[1]{\textcolor{ETHh}{#1}}
+\newcommand*{\colorETHi}[1]{\textcolor{ETHi}{#1}}
+
+% ==== old colors =============================================================
+\definecolor{ETHblue}{RGB}{51,89,148}               % for Department-Logo (#335994)
+\definecolor{ETHlightblue}{RGB}{100,149,224}
+\definecolor{ETHbrown}{RGB}{148,116,51}
+\definecolor{ETHred}{RGB}{161,82,71}
+\definecolor{ETHdarkgray}{rgb}{0.282,0.322,0.361}    % for box (#48525c)
+\newcommand*{\ETHblue}[1]{\textcolor{ETHblue}{#1}}
+\newcommand*{\ETHlightblue}[1]{\textcolor{ETHlightblue}{#1}}
+\newcommand*{\ETHbrown}[1]{\textcolor{ETHbrown}{#1}}
+\newcommand*{\ETHred}[1]{\textcolor{ETHred}{#1}}
+\newcommand*{\ETHdarkgray}[1]{\textcolor{ETHdarkgray}{#1}}
+
+\colorlet{ETHcolor1}{ETHc}
+\colorlet{ETHcolor2}{ETHc}
+
+%\setbeamercolor*{title page header}{fg=white}
+%\setbeamercolor*{title}{fg=white}
+\setbeamercolor*{author}{fg=white}
+\setbeamercolor*{date}{fg=white}
+\setbeamercolor*{item}{fg=black}
+\setbeamercolor*{frametitle}{fg=black}
+\setbeamercolor*{block title}{fg=black}
+\setbeamercolor*{block title example}{fg=black}
+\setbeamercolor*{section in toc}{fg=black}
+\setbeamercolor*{section page}{fg=black}
+
+\setbeamerfont{section page}{size=\LARGE}
+\setbeamerfont{title}{size=\Large,series=\bfseries}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\Large}
+
+\newenvironment{xplainframe}{\bgroup\begin{frame}[plain]}{\end{frame}\egroup}
+
+% === coloured Bar setting =======================
+
+\newcommand*{\eth@barbreit}{\paperwidth-4mm}	% Breite
+\newcommand*{\eth@barhoch}{8.75mm}	% Hoehe		
+\newcommand*{\eth@baruhh}{2.5mm}	    % untere Hoehe
+\newcommand*{\eth@baruhb}{2.5mm}	    % untere Breite
+\newcommand*{\eth@shiftx}{9.5mm-\paperwidth}%118.5mm}   % x shift
+\newcommand*{\eth@shifty}{5.5mm-\paperheight}%90.5mm}    % y shift
+\newcommand*{\anchorheight}{\the\paperheight-\eth@barhoch-2mm}
+\newcommand*{\titleanchorheight}{7.5mm}
+
+\newcommand*{\eth@hintergrundbreite}{\paperwidth-9mm}	% Breite
+\newcommand*{\eth@hintergrundhoehe}{0.5\paperheight-8mm}%40mm}	    % Hoehe
+
+
+% === default background ============================================================
+
+\defbeamertemplate*{background}{xplainframe}{%
+    \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	    \hspace{2mm}\draw[ETHcolor1,fill=ETHcolor1] (0,\eth@barhoch + \anchorheight)--   %
+      (\eth@barbreit,\eth@barhoch + \anchorheight)--(\eth@barbreit, \anchorheight)-- %
+      (\eth@barbreit-\eth@baruhb, \anchorheight)-- (\eth@barbreit-\eth@baruhb,\eth@baruhh + \anchorheight) -- %
+      (\eth@baruhb,\eth@baruhh + \anchorheight)--(\eth@baruhb, \anchorheight)-- (0, \anchorheight) -- %
+      (0,\eth@barhoch + \anchorheight); %
+      \node [shift={(\eth@shiftx,\eth@shifty + \anchorheight)}]  at (current page.north east){\includegraphics[width=12.8mm]{eth_logo_kurz_neg_13.pdf}};%
+  \end{tikzpicture}
+}
+
+
+\newcommand{\setdefaultbg}{
+\setbeamertemplate{background}[xplainframe]
+}
+
+% === title frame background =========================================================
+
+\newcommand{\settitlebg}{
+\setbeamercolor*{title page header}{fg=white}
+\setbeamercolor*{title}{fg=white}
+\setbeamertemplate{background}
+{
+    \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+
+\node [shift={(-0.5\paperwidth,-\paperheight-19mm + \anchorheight)}]  at (current page.north east)
+        %% backside of the ETH dome
+        {\includegraphics[width=\the\paperwidth-9mm,trim={0mm 75mm 0mm 58mm},clip]{title.jpg}};  
+  
+   \hspace{2mm}\draw[ETHcolor1,fill=ETHcolor1] (0,\eth@barhoch + \anchorheight)--   %
+      (\eth@barbreit,\eth@barhoch + \anchorheight)--(\eth@barbreit, \anchorheight)-- %
+      (\eth@barbreit-\eth@baruhb, \anchorheight)-- (\eth@barbreit-\eth@baruhb,\eth@baruhh + \anchorheight) -- %
+      (\eth@baruhb,\eth@baruhh + \anchorheight)--(\eth@baruhb, \anchorheight)-- (0, \anchorheight) -- %
+      (0,\eth@barhoch + \anchorheight); %
+      \node [shift={(\eth@shiftx,\eth@shifty + \anchorheight)}]  at (current page.north east){\includegraphics[width=12.8mm]{eth_logo_kurz_neg_13.pdf}};%
+  	
+	  \hspace{2.5mm}\draw[ETHcolor2,fill=ETHcolor2]%
+	  (0,\eth@hintergrundhoehe+\titleanchorheight)--(\eth@hintergrundbreite,\eth@hintergrundhoehe+\titleanchorheight)%
+	  --(\eth@hintergrundbreite,\titleanchorheight)--(0,\titleanchorheight)--(0,\eth@hintergrundhoehe+\titleanchorheight); 
+  \end{tikzpicture}
+}
+}
+
+
+\newcommand{\titleframe}{
+  \settitlebg
+  \frame{\maketitle}
+  \setdefaultbg  
+}
+
+
+\newenvironment{titlestyleframe}{
+\setbeamercolor*{frametitle}{fg=white}
+\setbeamercolor*{item}{fg=white}
+\setbeamertemplate{frametitle}{
+	\vspace{5cm}
+	\begin{beamercolorbox}{frametitle}
+		\insertframetitle
+	\end{beamercolorbox}
+}
+\settitlebg
+\begin{frame}
+\color{white}
+}
+{
+\end{frame}
+\setdefaultbg
+}
+
+
+% === minimal slide =========================================================
+
+\newcommand{\setminimalbg}{
+\setbeamertemplate{background}{%
+    \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	    \hspace{2mm}\draw[white,fill=white] (0,\eth@barhoch + \anchorheight)--   %
+      (\eth@barbreit,\eth@barhoch + \anchorheight)--(\eth@barbreit, \anchorheight)-- %
+      (\eth@barbreit-\eth@baruhb, \anchorheight)-- (\eth@barbreit-\eth@baruhb,\eth@baruhh + \anchorheight) -- %
+      (\eth@baruhb,\eth@baruhh + \anchorheight)--(\eth@baruhb, \anchorheight)-- (0, \anchorheight) -- %
+      (0,\eth@barhoch + \anchorheight); %
+      \node [shift={(\eth@shiftx,\eth@shifty + \anchorheight)}]  at (current page.north east){\includegraphics[width=12.8mm]{eth_logo_kurz_pos_13.pdf}};%
+  \end{tikzpicture}
+}
+}
+
+\newenvironment{minimalframe}{
+\setminimalbg
+\begin{frame}
+}
+{
+\end{frame}
+\setdefaultbg
+}
+
+
+% === inverse slide =======================================================
+
+\newcommand*{\eth@inverserhintergrundhoehe}{\paperheight-15.85mm}%80.15mm}
+
+\newcommand{\setinvertedbg}{
+\setbeamertemplate{background}{%
+    \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+	    \hspace{2mm}\draw[ETHcolor1,fill=ETHcolor1] (0,\eth@barhoch + \anchorheight)--   %
+      (\eth@barbreit,\eth@barhoch + \anchorheight)--(\eth@barbreit, \anchorheight)-- %
+      (\eth@barbreit-\eth@baruhb, \anchorheight)-- (\eth@barbreit-\eth@baruhb,\eth@baruhh + \anchorheight) -- %
+      (\eth@baruhb,\eth@baruhh + \anchorheight)--(\eth@baruhb, \anchorheight)-- (0, \anchorheight) -- %
+      (0,\eth@barhoch + \anchorheight); %
+      \node [shift={(\eth@shiftx,\eth@shifty + \anchorheight)}]  at (current page.north east){\includegraphics[width=12.8mm]{eth_logo_kurz_neg_13.pdf}};%
+      
+      \draw[ETHcolor2,fill=ETHcolor2]%
+(\eth@baruhb,\eth@inverserhintergrundhoehe + \titleanchorheight)--(\eth@hintergrundbreite+\eth@baruhb,\eth@inverserhintergrundhoehe + \titleanchorheight)%
+--(\eth@hintergrundbreite+\eth@baruhb,\titleanchorheight)--(\eth@baruhb,\titleanchorheight)--(\eth@baruhb,\eth@inverserhintergrundhoehe+\titleanchorheight);
+  \end{tikzpicture}
+}
+}
+
+
+\newcommand{\fgcolor}{black}
+\setbeamercolor{normal text}{fg=\fgcolor}
+
+\newenvironment{inverseframe}{
+\setinvertedbg
+\setbeamercolor*{frametitle}{fg=white}
+\setbeamercolor*{item}{fg=white}
+\begin{frame}
+\color{white}
+}
+{
+\end{frame}
+\setdefaultbg
+}
+
+
+
+% === title page layout ==============================================================
+
+\setbeamertemplate{title page}{
+\setbeamertemplate{background}[title page]
+\begin{textblock*}{\textwidth}(-0.3cm,1.8cm)
+    \begin{beamercolorbox}{title page header}
+      \usebeamerfont{title}\usebeamercolor{title}\inserttitle%
+    \end{beamercolorbox}%
+    
+\vspace{0.2cm}
+	    \begin{beamercolorbox}{author}
+	      \usebeamerfont{author}\insertauthor%
+    	\end{beamercolorbox}
+\end{textblock*}
+}
+
+% === frametitle ======================================================================
+
+\setbeamertemplate{frametitle}{
+	\vspace{1cm}
+	\begin{beamercolorbox}{frametitle}
+		\insertframetitle
+	\end{beamercolorbox}
+}
+
+% === footer ===========================================================================
+
+\newcommand{\deplogo}{Deplogo}
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=3ex,left]{fg=black,bg=white}%
+  \ifdeplogo
+    \hspace*{4.5mm}\includegraphics[height=1.8ex]{\deplogo}
+  \fi
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=2ex,right]{fg=black,bg=white}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+    \hspace*{3mm}\insertdate \hspace*{3mm} \insertframenumber{}\hspace*{4.5mm}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% === Remove spacing in toc ============================================================
+%\makeatletter
+%\patchcmd{\beamer@sectionintoc}
+%  {\vfill}
+%  {\vskip\itemsep}
+%  {}
+%  {}
+%\makeatother  
+
+% === items ============================================================================
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}{\bf --}
+\setbeamertemplate{itemize subsubitem}[triangle]
+
+% ==== commands ================================================================
+% === decoration
+\usetikzlibrary{decorations.pathmorphing,shadows}
+% === box
+\newcommand*{\ETHbox}[2]{
+	\vspace{1em}
+	\begin{tikzpicture}[ETHnodestyle/.style={rectangle,rounded
+            corners,draw=ETHdarkgray!40!white,
+            thick,inner sep=2mm,text justified,top color=ETHcolor2!30!white, bottom color=ETHcolor2,above}]%
+		    \node[ETHnodestyle,at={(0.5*#1+2mm+0.4pt,0)}]{%
+			\begin{minipage}[t]{#1}
+				#2
+			\end{minipage}%
+		    };
+	\end{tikzpicture}%	
+}
+% === labels
+\newcommand*{\ETHitem}{\raisebox{1pt}{\tikz\fill[sharp
+    corners](0,0)rectangle+(3.4pt,3.4pt);}}  
+
+
