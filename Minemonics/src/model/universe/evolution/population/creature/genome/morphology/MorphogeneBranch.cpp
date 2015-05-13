@@ -26,7 +26,9 @@ MorphogeneBranch::MorphogeneBranch() :
 				0), mMirrored(0), mSpringPitchDampingCoefficient(0), mJointPitchStiffness(
 				0), mSpringYawDampingCoefficient(0), mJointYawStiffness(0), mSpringRollDampingCoefficient(
 				0), mJointRollStiffness(0), mJointPitchMotorEnabled(false), mJointYawMotorEnabled(
-				false), mJointRollMotorEnabled(false) {
+				false), mJointRollMotorEnabled(false), mJointMaxPitchForce(0), mJointMaxPitchSpeed(
+				0), mJointMaxYawForce(0), mJointMaxYawSpeed(0), mJointMaxRollForce(
+				0), mJointMaxRollSpeed(0) {
 }
 
 void MorphogeneBranch::initialize() {
@@ -248,33 +250,27 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if(mJointMaxPitchForce != geneBranch.mJointMaxPitchForce)
-	{
+	if (mJointMaxPitchForce != geneBranch.mJointMaxPitchForce) {
 		return false;
 	}
 
-	if(mJointMaxYawForce != geneBranch.mJointMaxYawForce)
-	{
+	if (mJointMaxYawForce != geneBranch.mJointMaxYawForce) {
 		return false;
 	}
 
-	if(mJointMaxRollForce != geneBranch.mJointMaxRollForce)
-	{
+	if (mJointMaxRollForce != geneBranch.mJointMaxRollForce) {
 		return false;
 	}
 
-	if(mJointMaxPitchSpeed != geneBranch.mJointMaxPitchSpeed)
-	{
+	if (mJointMaxPitchSpeed != geneBranch.mJointMaxPitchSpeed) {
 		return false;
 	}
 
-	if(mJointMaxYawSpeed != geneBranch.mJointMaxYawSpeed)
-	{
+	if (mJointMaxYawSpeed != geneBranch.mJointMaxYawSpeed) {
 		return false;
 	}
 
-	if(mJointMaxRollSpeed != geneBranch.mJointMaxRollSpeed)
-	{
+	if (mJointMaxRollSpeed != geneBranch.mJointMaxRollSpeed) {
 		return false;
 	}
 
