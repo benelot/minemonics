@@ -2,6 +2,7 @@
 % use this instead for 16:9 aspect ratio:
 %\documentclass[aspectratio=169]{beamer}
 \usepackage{etex}
+\usepackage{verbatim}
 \reserveinserts{28}
 \usetheme{ETHbeamer}
 
@@ -15,6 +16,9 @@
 
 \date{2015-05-13}
 
+%%TODO: Add todo feature
+%%TODO: Optimize with presentation tips
+
 % uncomment if you do not want to use a department logo
 %\deplogofalse
 
@@ -25,93 +29,152 @@
 
 \section{Are we alone in the universe?}
 
+%\begin{frame}
+
+%  \frametitle{Contents}
+%  \tableofcontents[currentsection]
+%\end{frame}
+
+% Are we alone in the universe?
+\begin{minimalframe}
+	\hspace*{-1.1cm}
+	\vspace*{1cm}
+	\includegraphics[width=1.4\textwidth,clip]{figs/Planets_everywhere.jpg}
+	
+\end{minimalframe}
+
+% Life as it is vs. life as it could be
+\begin{frame}
+
+	\frametitle{Life as it is vs. life as it could be}
+	\begin{center}
+	\includegraphics[width=0.8\textwidth,clip]{figs/tree_of_life_cut.png}\\\vspace{1em}
+	\includegraphics[width=0.75\textwidth,clip]{figs/art_tree_of_life_cut.png}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}
+
+		  \begin{columns}
+   \column{0.5\textwidth}
+   
+   \frametitle{Goals}
+	\begin{itemize}
+ 	 \visible<1->{
+	\item Build robots that are not only capable but also more adaptive (Engineering goal)
+	 }
+	 \visible<2>{
+	\item Structures and strategies that always tend to evolve (Academic goal)
+	}
+	\end{itemize}
+     \visible<1->{
+     \column{0.5\textwidth}
+      \includegraphics[width=2in, clip] {figs/goals.jpg}
+      }
+  \end{columns}
+\end{frame}
+
+\section{Simple limiters theory}
+
 \begin{frame}
 
   \frametitle{Contents}
   \tableofcontents[currentsection]
 \end{frame}
 
-% Life as it is vs. life as it could be
-\begin{frame}
-
-	\frametitle{Life as it is vs. life as it could be}
-
-\end{frame}
-
-
-
-\begin{frame}
-
-	\frametitle{Applications}
-	\begin{itemize}
-	\item Build robots that are not only capable but also more adaptive (Engineering goal)
-	\item Structures and strategies that always tend to evolve (Academic goal)
-	\end{itemize}
-\end{frame}
-
-\section{Simple limiters theory}
-
 % Simple limiter theory
 \begin{frame}
 	\frametitle{Simple limiters}
+	  \begin{columns}
+   \column{0.5\textwidth}
+ \begin{itemize}
+ 	 \visible<1->{
+	    \item Generally the chaos controller is more complex than the system it controls
+	 }
+	 \visible<2>{
+    		\item Not true for the simple limiter
+    	}
+
+    	\visible<1->{
+    	\vspace*{2.9em}
+    	\includegraphics[width=1.9in, clip] {figs/chaotic-driven-pendulum-pcmap.jpeg}
+    	}
+     \end{itemize}
+     \visible<1->{
+     \column{0.5\textwidth}
+      \includegraphics[width=1.5in, clip] {figs/chaotic-driven-pendulum.png}\\
+      \includegraphics[width=1.65in, clip] {figs/chaotic-driven-pendulum-bifurcationmap.jpeg}
+      }
+  \end{columns}
 \end{frame}
 
 %% Types of simple limiters in nature
 \begin{frame}
 	\frametitle{Simple limiters in nature}
-	
-	\begin{minipage}{.5\textwidth}
+	\begin{columns}
+	\column{.6\textwidth}
 	\begin{itemize}
+	\visible<2->{
 	\item Muscle length \& joint limits
+	}
+	
+	\visible<3->{
 	\item The weight of the limbs
-	\item The relative position of limbs connected by joints (Direction of force applied to joints)
+	}
+	
+	\visible<4->{
+	\item The relative position of limbs connected by joints\\ (Direction of force applied to joints)
+	}
+	
+	\visible<5>{
+	\item The fact that physical objects can not interpenetrate each other
+	}
+	
 	\end{itemize}
-\end{minipage}% This must go next to `\end{minipage}`
-\begin{minipage}{.5\textwidth}
+\column{.45\textwidth}
+     \visible<1->{
 		%http://jonbarron.org/article/physiology-muscles
 	\includegraphics[width=1\textwidth]{figs/natural-limiter-arm-muscle.jpg}
-\end{minipage}
-
+	}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{Simple limiters cont.}
-\includegraphics[width=0.2\textwidth]{figs/limiters/1.png}
-\includegraphics[width=0.2\textwidth]{figs/limiters/2.png}
-\includegraphics[width=0.2\textwidth]{figs/limiters/3.png}
-\includegraphics[width=0.2\textwidth]{figs/limiters/4.png}
-\includegraphics[width=0.2\textwidth]{figs/limiters/5.png}
+
+%%TODO: Add videolinks for their walks
+\href{run:figs/videos/normal-dude.mp4}{\includegraphics[width=0.19\textwidth]{figs/limiters/1.png}}
+\href{run:figs/videos/tiny-dude.mp4}{\includegraphics[width=0.19\textwidth]{figs/limiters/2.png}} 
+\href{run:figs/videos/tall-dude.mp4}{\includegraphics[width=0.19\textwidth]{figs/limiters/3.png}} 
+\href{run:figs/videos/super-wide-dude.mp4}{\includegraphics[width=0.19\textwidth]{figs/limiters/4.png}} 
+\href{run:figs/videos/super-neck-dude.mp4}{\includegraphics[width=0.19\textwidth]{figs/limiters/5.png}} 
+\tiny{Source: Geijtenbeek et al. (Vol. 32, Nr. 6 SIGGRAPH 2013)}
 \end{frame}
 
 %% Will simple limiters be used if they do not need to be used
 \begin{frame}
-	\frametitle{In silico\footnote{In silico = in simulation}: Will they be used?}
+	\frametitle{In silico\footnote{In silico = in simulation}: Will the simple limiters be used?}
+	\begin{columns}
+	\column{0.6\textwidth}
 	\begin{itemize}
-	\item 
-	\item 
+	\visible<2->{
+	\item Hypothesis 1: Simple limiters are an omnipresent feature used to reduce the control complexity and to control chaotic movement
+	}
+	\visible<3->{
+	\item Hypothesis 2: If the world is flat then less simple limiters are used, if the world is dynamic and bumpy then more simple limiters are used.
+	}
+	\visible<4->{
+	\item Question remains: Can you live limitless?
+	}
 	\end{itemize}
+	\column{0.5\textwidth}
+	\visible<1->{
+	\includegraphics[width=0.8\textwidth]{figs/Sims.png}\\
+	\includegraphics[width=0.8\textwidth]{figs/MarsMadness.png}
+	}
+	\end{columns}
 \end{frame}
-
-
-\frame{
-
-  \frametitle{Evolving Virtual Creatures}
-  
-  \begin{columns}
-   \column{0.3\textwidth}
- \begin{itemize}
-	     \item a
-    	\item b
-    	\item c
-     \end{itemize}
-     
-     \column{0.6\textwidth}
-      \includegraphics[width=2in, clip] {figs/creatures.jpg} 
-  \end{columns}
-  }
-\note{}
-
-
 
 
 \section{Methods}
@@ -123,12 +186,41 @@
 }
 \note{}
 
+\subsection{Evolution}
+
+\frame{
+
+  \frametitle{Evolving Virtual Creatures}
+  
+  \begin{columns}
+   \column{0.5\textwidth}
+ \begin{itemize}
+  	\visible<2->{
+	     \item Creatures are built from 3D Primitives and Joints
+	}
+	
+	\visible<3->{
+    	\item Sensors, Controller and Effectors make it move
+    	}
+    	
+ 	\visible<4->{
+    	\item Body and controller co-evolved
+ 	}
+     \end{itemize}
+     
+     \column{0.5\textwidth}
+      \visible<1->{
+      \includegraphics[width=2in, clip] {figs/creatures.jpg} 
+      }
+  \end{columns}
+  }
+\note{}
+
 \subsection{Genetic language}
 \frame{
 
-  \frametitle{Genetic language}
-  
-Genotype:
+  \frametitle{Genetic language: Genotype}
+
 \begin{tikzpicture}
    \foreach \c/\i/\t [count=\n] in  
         {blue!20/RootLimb/2,green!20/Limb1/1,orange!20/Limb2/0.8,red!20/Limb3/0.5} 
@@ -148,8 +240,7 @@ Genotype:
 \note{}
 
 \frame{
- \frametitle{Genetic language}
-Phenotype:
+ \frametitle{Genetic language: Phenotype}
 
 % Set the overall layout of the tree
 \tikzstyle{level 1}=[level distance=1cm, sibling distance=6cm]
@@ -197,14 +288,24 @@ Phenotype:
   }
 \note{}
 
+\frame{
 
+  \frametitle{Genetic language: Phenotype cont.}
+  \begin{center}
+\includegraphics[width=0.8\textwidth, clip] {figs/Sims_Evolve.png}
+  \end{center}
+  }
+\note{}
 
 \frame{
 
   \frametitle{Execution of creatures}
-\includegraphics[width=2.3in, clip] {figs/brain-body-cycle.png}
-\includegraphics[width=2.5in, clip] {figs/execution.png}
-  
+  \begin{columns}
+  \column{0.45\textwidth}
+\includegraphics[width=1\textwidth, clip] {figs/brain-body-cycle.png}
+ \column{0.55\textwidth}
+\includegraphics[width=1\textwidth, clip] {figs/execution.png}
+  \end{columns}
   }
 \note{}
 
@@ -216,9 +317,23 @@ Phenotype:
 \begin{itemize}
 \item Fitness evaluation framework
 \item A creature is simulated for a certain evaluation time during which the fitness function measures the fitness of the creature
-\item Evaluates multiple fitness functions at the same time and combines them linearly
+\item Could evaluate multiple fitness functions at the same time
 \end{itemize}
 
+  
+  }
+\note{}
+
+\frame{
+
+  \frametitle{Velocity as the fitness function}
+
+\begin{itemize}
+\item Sampling of position over time and average over all limbs
+\item Moved distance in a certain time interval
+\item Continuous average
+\item Expectations: Some really moving creatures and some finding an exploit to the fitness function
+\end{itemize}
   
   }
 \note{}
@@ -229,14 +344,8 @@ Phenotype:
   \frametitle{Evolution}
 
 \begin{itemize}
-\item Selection
-\begin{itemize}
-\item Only a certain percentage of creatures are selected for new generation
-\end{itemize}
-\item Cross-over
-\begin{itemize}
-\item Only certain percentage of creatures are allowed to breed
-\end{itemize}
+\item Selection: Only a certain percentage of creatures are selected for new generation
+\item Cross-over: Only certain percentage of creatures are allowed to breed
 \item Mutation
 \begin{itemize}
 \item Other creatures are subject to mutation
@@ -244,15 +353,40 @@ Phenotype:
 \item Mutation of gene attributes
 \item Mutation of gene branches
 \end{itemize}
-\item Successful creatures stay in the population and the population is refilled with new bred and mutated ones
+\item Successful creatures stay in the population and the population is refilled with newly bred and mutated ones
 \end{itemize}
   
   }
 \note{}
 
+\subsection{Controller}
+\frame{
 
+  \frametitle{Controller}
+  \begin{columns}
+  \column{0.5\textwidth}
+  \begin{itemize}
+  \item Sine-wave controller taking frequency, amplitude, X-shift,Y-shift as input which are determined evolutionarily.
+  \end{itemize}
+  \column{0.5\textwidth}
+  \includegraphics[width=2in, clip] {figs/osc-symbol.png}
+  \end{columns}
+}
+\note{}
 
-\section{Simulations}
+\subsection{Why Periodicity?}
+\frame{
+
+  \frametitle{Why Periodicity?}
+
+\begin{center}
+  \href{run:figs/videos/dynamic-gait.mp4}{\includegraphics[width=0.8\textwidth, clip] {figs/dynamic-gait.png}}
+  \end{center}
+
+}
+\note{}
+
+\section{Meet \& Greet with the Creatures}
 
 \frame{
 
@@ -260,23 +394,6 @@ Phenotype:
     \tableofcontents[currentsection]
 }
 \note{}
-
-\subsection{Velocity as the fitness function}
-\frame{
-
-  \frametitle{Velocity as the fitness function}
-
-\begin{itemize}
-\item Sampling of position over time
-\item Moved distance in a certain time interval
-\item Continuous average
-\item Expectations: Some really moving creatures and some finding the exploit that only the main body has to move. \\(main body = first limb in phenotype)
-\end{itemize}
-  
-  }
-\note{}
-
-\section{Meet \& Greet with the Creatures}
 
 \frame{
 
@@ -298,15 +415,6 @@ Phenotype:
   }
 \note{}
 
-\frame{
-
-  \frametitle{Creatures}
-  \begin{figure}[tp]
-    \centering
-    \includegraphics[width=3in, clip] {figs/creatures/Minemonics-05112015_190654779.jpg}
-\end{figure}
-  }
-\note{}
 
 \frame{
 
@@ -323,27 +431,8 @@ Phenotype:
   \frametitle{Creatures}
   \begin{figure}[tp]
     \centering
-    \includegraphics[width=3in, clip] {figs/creatures/Minemonics-05112015_190855124.jpg}
-\end{figure}
-  }
-\note{}
-
-\frame{
-
-  \frametitle{Creatures}
-  \begin{figure}[tp]
-    \centering
     \includegraphics[width=3in, clip] {figs/creatures/Minemonics-05112015_190947481.jpg}
-\end{figure}
-  }
-\note{}
-
-\frame{
-
-  \frametitle{Creatures}
-  \begin{figure}[tp]
-    \centering
-    \includegraphics[width=3in, clip] {figs/creatures/Minemonics-05112015_190956720.jpg}
+    \caption{Simulate 50 creatures at the same time}
 \end{figure}
   }
 \note{}
@@ -354,9 +443,23 @@ Phenotype:
   \begin{figure}[tp]
     \centering
     \includegraphics[width=3in, clip] {figs/creatures/Minemonics-05112015_191706383.jpg}
+    \caption{Simulate 1000 creatures at the same time}
 \end{figure}
   }
 \note{}
+
+\frame{
+
+  \frametitle{Creatures}
+  \begin{figure}[tp]
+    \centering
+     \href{run:figs/videos/Movement.mp4}{\includegraphics[width=0.7\textwidth, clip] {figs/kerfuffle.png}}
+    \caption{Short video}
+\end{figure}
+  }
+\note{}
+
+
 
 \section{Outlook}
 
@@ -367,94 +470,51 @@ Phenotype:
 }
 \note{}
 
-\subsection{Optimization \& Extension}
+\subsection{Extensions: Evolutionary Algorithm}
 \frame{
 
-  \frametitle{Optimization \& Extension}
+  \frametitle{Extensions: Evolutionary Algorithm}
   
   \begin{itemize}
-  \item The framework was written in a quick \& dirty manner
-  \item Several components need to be reimplemented properly to provide a more scalable environment
+  \item Different types of evolutionary selection and evaluation
   \item The system does not use any parallelization
   \item The phenotype could be more natural
-  \item The genotype to phenotype transcription does not include any additional developmental parts (no embryogenesis)
-  \item More sensor types
-  \item More logging for data analysis
+  \item Sensor and actuator types
+  \item More logging for data analysis (different live-views)
   \end{itemize}
 }
 \note{}
-\subsection{Other settings \& fitness functions}
+
+\subsection{Extensions: Controllers}
 \frame{
 
-  \frametitle{Other settings \& fitness functions}
+  \frametitle{Extensions: Controllers}
+  \begin{columns}
+  \column{0.5\textwidth}
   \begin{itemize}
-  \item Island genetic algorithm
+  \item Different types of controllers taking sensors as inputs
+  \item Deep Neural Networks especially the LSTM neural network
+  \item Other ideas I have until then
+  \end{itemize}
+  \column{0.5\textwidth}
+  \includegraphics[width=1.5in, clip] {figs/NN.png} 
+  \end{columns}
+}
+\note{}
+
+\subsection{Other settings}
+\frame{
+
+  \frametitle{Other settings}
+  \begin{itemize}
+  \item Island genetic algorithm (Possible via planets)
   \item Competitions of individuals
   \item Implicit fitness functions (survival of the fittest in a virtual world)
-  \item Information theoretic measures such as the transfer entropy
+  \item Information theoretic measures such as the transfer entropy for neural networks
   \end{itemize}
   
-  \includegraphics[width=1.5in, clip] {figs/NN.png} 
 }
 \note{}
-
-
-\frame{
-
-  \frametitle{References}
-  \begin{itemize}
-  \item Sims K. - Evolving Virtual Creatures (1994)
-  \item Sims K. - Evolving 3D Morphology and Behavior by Competition (1994)
-  \item Krcah P. - Evolving Virtual Creatures Revisited (2007)
-  \item Schmidt N. - Bootstrapping perception using information theory: case studies in a quadruped running robot running on different grounds (2013)
-  \item Hill, A.V. The heat of shortening and dynamics constants of muscles  (1938)
-  \item Stoop R. - Theory and Simulation of Neural Networks (2014)
-  \end{itemize}
-}
-\note{}
-
-
-
-% Example slides
-\begin{frame}
-\textbf{Some mathematical specialities}
-
-\ETHbox{0.8\textwidth}{% define the ETHbox
-  \begin{theorem}[Murphy (1949)]\label{murphy}
-    Anything that can go wrong, will go wrong.
-  \end{theorem}
-}
-
-\begin{proof}
-  A special case of Theorem \ref{murphy} is proven in %\citet{matthews1995}.
-\end{proof}
-\end{frame}
-
-\begin{titlestyleframe}
-\frametitle{Title Page}
-
-\color{white} The title page is created using the \texttt{\textbackslash titleframe} command.
-
-The title page background can also be used on other frames (or for a customised title frame) using the \texttt{titlestyleframe} environment.
-\end{titlestyleframe}
-
-\begin{frame}
-\frametitle{Normal Frame}
-The normal frame looks like this. It is created using the \texttt{frame} environment.
-\end{frame}
-\begin{inverseframe}
-  \frametitle{Inverse Slides}
-  %\color{white}
-The inverted frame looks like this. It is created using the \texttt{inverseframe} environment.
-
- 
-\end{inverseframe}
-
-\begin{minimalframe}
-  \frametitle{Minimal Frame}
-The minimal frame looks like this. It is created using the \texttt{minimalframe} environment.
-  
-\end{minimalframe}
 
 \begin{frame}
 
@@ -497,7 +557,76 @@ The minimal frame looks like this. It is created using the \texttt{minimalframe}
 		{\draw[ETHi,fill=ETHi] \quadrat}\label{ETH9}
 	\end{tikzpicture}
 \end{center}
+\vspace*{3em}
+\begin{itemize}
+\item Any questions?
+\item What experiments would you have in mind?
+\item What else would you change, extend, enhance, improve etc.?
+\item If you have any ideas later, email me: be.ellenberger@gmail.com
+\item You can look at my progress: https://github.com/benelot/minemonics
+\end{itemize}
 
 \end{frame}
+
+
+\frame{
+
+  \frametitle{References}
+  \begin{itemize}
+  \item Sims K. - Evolving Virtual Creatures (1994)
+  \item Sims K. - Evolving 3D Morphology and Behavior by Competition (1994)
+  \item Krcah P. - Evolving Virtual Creatures Revisited (2007)
+  \item Corron N. et al. - Controlling Chaos with Simple Limiters (2000)
+  \item Schmidt N. - Bootstrapping perception using information theory: case studies in a quadruped running robot running on different grounds (2013)
+  \item Geijtenbeek T. - Flexible Muscle-Based Locomotion for Bipedal Creatures (2013)
+  \item Stoop R. - Theory and Simulation of Neural Networks (2014)
+  \end{itemize}
+}
+\note{}
+
+\begin{comment}
+
+% Example slides
+\begin{frame}
+\textbf{Some mathematical specialities}
+
+\ETHbox{0.8\textwidth}{% define the ETHbox
+  \begin{theorem}[Murphy (1949)]\label{murphy}
+    Anything that can go wrong, will go wrong.
+  \end{theorem}
+}
+
+\begin{proof}
+  A special case of Theorem \ref{murphy} is proven in %\citet{matthews1995}.
+\end{proof}
+\end{frame}
+
+\begin{titlestyleframe}
+\frametitle{Title Page}
+
+\color{white} The title page is created using the \texttt{\textbackslash titleframe} command.
+
+The title page background can also be used on other frames (or for a customised title frame) using the \texttt{titlestyleframe} environment.
+\end{titlestyleframe}
+
+\begin{frame}
+\frametitle{Normal Frame}
+The normal frame looks like this. It is created using the \texttt{frame} environment.
+\end{frame}
+\begin{inverseframe}
+  \frametitle{Inverse Slides}
+  %\color{white}
+The inverted frame looks like this. It is created using the \texttt{inverseframe} environment.
+
+ 
+\end{inverseframe}
+
+\begin{minimalframe}
+  \frametitle{Minimal Frame}
+The minimal frame looks like this. It is created using the \texttt{minimalframe} environment.
+  
+\end{minimalframe}
+
+\end{comment}
 
 \end{document}
