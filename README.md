@@ -30,6 +30,30 @@ The body model is created from general primitives such as cubes and capsules, wh
 
 The genome of the creatures must have a certain scheme that can be modified via variability operators. The variability operators, as the name suggests, increase the variability within the population of creatures by generating new genomes. A simple variability operator is the mutator that simply changes a certain gene in the genome by changing some of the features randomly. The mutation can obviously render a gene useless by for instance decoupling it from the developmental process, so that it is never actually expressed. On the other hand, this can also improve the components encoded in the gene so that the resulting creature can perform better according to the measure of the fitness function.
 
+## 2015-05-13 First presentation of the simulator at the Auditory Informatics Seminar
+The presentation shows a the context the simulator works in, describes some of its features and shows some visuals of it. The feedback was generally very good, people were very interested in the project. Ruedi Stoop proposed that we would meet for the project in about two weeks to discuss the possibilities of it in the long run. The only reminder was that I should cite the pictures properly which is done but not with numbers at every pictures to make the slides very cluttered. But it will be done for the next presentation, maybe master's apero.
+
+Topics covered in the talk:
+
+* Are we alone in the universe?
+* Simple limiter theory
+* Methods
+    * Evolving 3D creatures
+    * Genetic language
+    * Fitness evaluation
+    * Evolution
+    * Controller
+    * Why is periodicity important?
+* Meet \& Greet with the Creatures
+* Outlook
+    * Extensions: Evolutionary Algorithm
+    * Extensions: Controllers
+    * Other settings
+
+Here is a link to the presentation: [Emergent gait periodicity in artificially evolved creatures on unknown terrains](http://github.com/benelot/minemonics/Minemonics/doc/presentations/[2015] Auditory Informatics/Minemonics-AuditoryInformatics.pdf)
+
+(You need to download the figs folder as well, because otherwise you can not find the videos that are linked in the presentation)
+
 
 ## Milestone 5: Graphs and Data Logging
 
