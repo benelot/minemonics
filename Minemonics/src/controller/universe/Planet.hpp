@@ -1,10 +1,3 @@
-/*
- * Planet.hpp
- *
- *  Created on: May 6, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_UNIVERSE_PLANET_HPP_
 #define CONTROLLER_UNIVERSE_PLANET_HPP_
 
@@ -27,6 +20,12 @@ class Evolution;
 //## view headers
 //## utils headers
 
+/**
+ * @brief		The planet controller holds an evolution together with a certain environment in which it is evaluated.
+ * @details		Details
+ * @date		2015-05-06
+ * @author		Benjamin Ellenberger
+ */
 class Planet {
 public:
 	Planet();

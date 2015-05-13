@@ -20,10 +20,11 @@ class Creature;
 //## view headers
 //## utils headers
 
-
-
-/*
- *
+/**
+ * @brief		The population controller holds a certain amount of creatures together from which a we cull after evaluation.
+ * @details		Details
+ * @date		2015-03-09
+ * @author		Benjamin Ellenberger
  */
 class Population {
 public:
