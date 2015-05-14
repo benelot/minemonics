@@ -54,6 +54,10 @@ public:
 		return mCreatures;
 	}
 
+	PopulationModel* getPopulationModel() {
+		return mPopulationModel;
+	}
+
 private:
 
 	/**
@@ -69,7 +73,7 @@ private:
 	/**
 	 * The state model of the population
 	 */
-	PopulationModel mPopulationModel;
+	PopulationModel* mPopulationModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_ */

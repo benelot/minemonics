@@ -1,12 +1,12 @@
 /*
- * OpenSeaController.cpp
+ * DeepSeaController.cpp
  *
  *  Created on: Nov 17, 2014
  *      Author: leviathan
  */
 
 //# corresponding header
-#include <controller/physics/OpenSeaController.hpp>
+#include <controller/physics/DeepSeaController.hpp>
 
 //# forward declarations
 //# system headers
@@ -21,12 +21,12 @@
 //## view headers
 //## utils headers
 
-OpenSeaController::OpenSeaController() {
+DeepSeaController::DeepSeaController() {
 	// TODO Auto-generated constructor stub
 
 }
 
-OpenSeaController::~OpenSeaController() {
+DeepSeaController::~DeepSeaController() {
 	// TODO Auto-generated destructor stub
 }
 

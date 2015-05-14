@@ -19,7 +19,7 @@
 //## utils headers
 
 Planet::Planet() :
-		mEnvironment(NULL), mEvolution(NULL) {
+		mEnvironment(NULL), mEvolution(NULL),mPhysicsController(NULL) {
 }
 
 Planet::~Planet() {
@@ -27,7 +27,24 @@ Planet::~Planet() {
 	mEvolution = NULL;
 }
 
-void Planet::initialize(Evolution* evolution, Environment* environment) {
+void Planet::initialize(Evolution* evolution, Environment* environment,PhysicsController::PhysicsControllerType type) {
+	PhysicsController* physicsController;
+
+	switch (type) {
+		case PhysicsController::GroundController:
+
+			break;
+		case PhysicsController::DeepSeaController:
+
+			break;
+		default:
+			break;
+	}
+	initialize(evolution,environment,physicsController);
+}
+
+void Planet::initialize(Evolution* evolution, Environment* environment,PhysicsController* physicsController) {
 	mEvolution = evolution;
 	mEnvironment = environment;
+	mPhysicsController = physicsController;
 }

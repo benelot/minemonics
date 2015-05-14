@@ -48,6 +48,8 @@ public:
 
 	void initialize(double evaluationTime);
 
+	void addNewPopulation(PopulationModel* populationModel);
+
 	bool run();
 
 	bool evaluate();
@@ -71,8 +73,8 @@ public:
 		return mType;
 	}
 
-	const std::vector<PopulationModel>& getPopulationModels() const {
-		return populationModels;
+	std::vector<PopulationModel*>& getPopulationModels() {
+		return mPopulationModels;
 	}
 
 	double getEvaluationTime() const {
@@ -83,7 +85,12 @@ private:
 	/**
 	 * The vector of populations that are evaluated.
 	 */
-	std::vector<PopulationModel> populationModels;
+	std::vector<PopulationModel*> mPopulationModels;
+
+	/**
+	 * Amount of populations in this evolution.
+	 */
+	int mPopulationQty;
 
 	/**
 	 * The reaper of this evolution model.

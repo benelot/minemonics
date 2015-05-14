@@ -10,12 +10,13 @@
 #include <utils/Randomness.hpp>
 
 Population::Population() :
-		mSimulationManager(NULL) {
+		mSimulationManager(NULL),mPopulationModel(NULL) {
 }
 
 Population::~Population() {
 	//Clear the handle.
 	mSimulationManager = NULL;
+	delete mPopulationModel;
 }
 
 /**
@@ -26,7 +27,8 @@ Population::~Population() {
 void Population::initialize(SimulationManager* simulationManager,
 		int creatureQty) {
 	mSimulationManager = simulationManager;
-	mPopulationModel.setCreatureQty(creatureQty);
+	mPopulationModel = new PopulationModel();
+	mPopulationModel->setCreatureQty(creatureQty);
 	Randomness randomness;
 	double bushiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
@@ -48,7 +50,7 @@ void Population::addNewMember(double bushiness,Ogre::Vector3 rootPosition) {
 				bushiness);
 		mCreatures.push_back(creature);
 		//hand model down to the population model
-		mPopulationModel.addNewMember(creature->mCreatureModel);
+		mPopulationModel->addNewMember(creature->mCreatureModel);
 	}
 
 }

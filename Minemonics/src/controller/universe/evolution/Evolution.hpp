@@ -10,10 +10,11 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/environments/Environment.hpp>
-#include <controller/universe/evolution/population/creature/Creature.hpp>
+
+#include <controller/universe/evolution/population/Population.hpp>
 #include <model/universe/evolution/EvolutionModel.hpp>
 #include <utils/TimerManager.hpp>
+#include <vector>
 
 /**
  * @brief		Brief
@@ -40,6 +41,8 @@ public:
 	 */
 	void initialize(Environment* environment);
 
+	void addNewPopulation(Population* population);
+
 	/**
 	 * Proceed with the next creature of the currently tested population or
 	 * proceed with reaping and sowing. This method is called by the
@@ -59,6 +62,11 @@ public:
 	}
 
 private:
+
+	/**
+	 * Vector of populations
+	 */
+	std::vector<Population*> mPopulations;
 
 	/**
 	 * The model of the evolution

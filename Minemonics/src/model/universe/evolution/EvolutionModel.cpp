@@ -71,6 +71,11 @@ bool EvolutionModel::selectAndReap(){
 	return true;
 }
 
+void EvolutionModel::addNewPopulation(PopulationModel* populationModel) {
+	mPopulationModels.push_back(populationModel);
+	mPopulationQty++;
+}
+
 bool EvolutionModel::variate() {
 	//VARIATION
 	mState = VARIATION;

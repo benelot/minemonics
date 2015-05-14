@@ -22,8 +22,8 @@
 
 PhysicsController::PhysicsController() :
 		mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
-				NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(
-				NULL) {
+		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(
+		NULL) {
 
 }
 
@@ -80,8 +80,8 @@ void PhysicsController::exitBulletPhysics() {
 }
 
 void PhysicsController::stepBulletPhysics(double timeStep) {
-	if (mDynamicsWorld && (!mPhysicsPaused || (mPhysicsStepped))) //step the simulation
-			{
+	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) //step the simulation
+	{
 		mDynamicsWorld->stepSimulation(timeStep); //1.0f/60.0f);
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger

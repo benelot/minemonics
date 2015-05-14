@@ -106,6 +106,10 @@ SimulationManager::~SimulationManager(void) {
 	CEGUI::OgreRenderer::destroySystem();
 }
 
+
+
+
+
 void SimulationManager::destroyScene(void) {
 	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
 	for (; it != mRagdolls.end(); it++) {

@@ -43,8 +43,7 @@ public:
 	void initialize(int creatureQty);
 
 	/**
-	 * Adds a new creature to the population with the bushiness as a input.
-	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
+	 * Adds a new creature to the population.
 	 */
 	void addNewMember(CreatureModel* creatureModel);
 

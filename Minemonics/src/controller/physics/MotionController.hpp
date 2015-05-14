@@ -9,6 +9,8 @@
 #define MOTIONCONTROLLER_H_
 
 //# corresponding header
+#include <controller/physics/PhysicsController.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -28,7 +30,7 @@
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
  */
-class MotionController {
+class MotionController: public PhysicsController {
 public:
 	MotionController();
 	virtual ~MotionController();

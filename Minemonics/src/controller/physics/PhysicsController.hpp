@@ -27,7 +27,7 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The physics controller holds the bullet physics ressources of a certain planet.
  * @details		Details
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
@@ -43,6 +43,11 @@ private:
 	btDynamicsWorld* mDynamicsWorld; //this is the most important class
 
 public:
+
+	enum PhysicsControllerType{
+		GroundController,DeepSeaController
+	};
+
 
 	PhysicsController();
 	~PhysicsController();

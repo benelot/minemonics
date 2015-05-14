@@ -8,6 +8,8 @@ class Evolution;
 
 //# system headers
 //## controller headers
+#include <controller/physics/PhysicsController.hpp>
+
 //## model headers
 //## view headers
 //# custom headers
@@ -31,7 +33,9 @@ public:
 	Planet();
 	virtual ~Planet();
 
-	void initialize(Evolution* evolution, Environment* environment);
+	void initialize(Evolution* evolution, Environment* environment,PhysicsController::PhysicsControllerType type);
+
+	void initialize(Evolution* evolution, Environment* environment,PhysicsController* physicsController);
 
 	//Accessor methods
 	Environment*& getEnvironment() {
@@ -66,6 +70,11 @@ private:
 	 * The environment of this planet.
 	 */
 	Environment* mEnvironment;
+
+	/**
+	 * The physics controller of this planet
+	 */
+	PhysicsController* mPhysicsController;
 };
 
 #endif /* CONTROLLER_UNIVERSE_PLANET_HPP_ */

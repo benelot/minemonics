@@ -44,6 +44,7 @@ class ParamsPanel;
 #include <controller/physics/RagDoll.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/Universe.hpp>
 
 //## model headers
 #include <model/universe/evolution/juries/Ones.hpp>
@@ -94,6 +95,9 @@ private:
 
 	//SheetHandler
 	GUISheetHandler mGUISheetHandler;
+
+	//The universe and everything
+	Universe mUniverse;
 
 	// Physics controller
 	PhysicsController mPhysicsController;
