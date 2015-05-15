@@ -253,6 +253,33 @@ configuration/EvolutionConfiguration.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/EvolutionConfiguration.cpp.s
 .PHONY : configuration/EvolutionConfiguration.cpp.s
 
+configuration/GUIConfiguration.o: configuration/GUIConfiguration.cpp.o
+.PHONY : configuration/GUIConfiguration.o
+
+# target to build an object file
+configuration/GUIConfiguration.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/GUIConfiguration.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/GUIConfiguration.cpp.o
+.PHONY : configuration/GUIConfiguration.cpp.o
+
+configuration/GUIConfiguration.i: configuration/GUIConfiguration.cpp.i
+.PHONY : configuration/GUIConfiguration.i
+
+# target to preprocess a source file
+configuration/GUIConfiguration.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/GUIConfiguration.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/GUIConfiguration.cpp.i
+.PHONY : configuration/GUIConfiguration.cpp.i
+
+configuration/GUIConfiguration.s: configuration/GUIConfiguration.cpp.s
+.PHONY : configuration/GUIConfiguration.s
+
+# target to generate assembly for a file
+configuration/GUIConfiguration.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/GUIConfiguration.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/GUIConfiguration.cpp.s
+.PHONY : configuration/GUIConfiguration.cpp.s
+
 controller/StateHandler.o: controller/StateHandler.cpp.o
 .PHONY : controller/StateHandler.o
 
@@ -3187,6 +3214,9 @@ help:
 	@echo "... configuration/EvolutionConfiguration.o"
 	@echo "... configuration/EvolutionConfiguration.i"
 	@echo "... configuration/EvolutionConfiguration.s"
+	@echo "... configuration/GUIConfiguration.o"
+	@echo "... configuration/GUIConfiguration.i"
+	@echo "... configuration/GUIConfiguration.s"
 	@echo "... controller/StateHandler.o"
 	@echo "... controller/StateHandler.i"
 	@echo "... controller/StateHandler.s"

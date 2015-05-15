@@ -190,43 +190,42 @@ void SimulationManager::createFrameListener(void) {
  */
 void SimulationManager::createScene(void) {
 
-// Initialize the logger
+	// Initialize the logger
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);
 
-// CEGUI
-// with a scene manager and window, we can create a the GUI renderer
-
-// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
+	// CEGUI
+	// with a scene manager and window, we can create a the GUI renderer
+	// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
 	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
 
-// This pointer is valid only locally
+	// This pointer is valid only locally
 	mSystem = &CEGUI::System::getSingleton();
 
-// tell us a lot about what is going on (see CEGUI.log in the working directory)
+	// tell us a lot about what is going on (see CEGUI.log in the working directory)
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 
-// use this CEGUI scheme definition (see CEGUI docs for more)
+	// use this CEGUI scheme definition (see CEGUI docs for more)
 	CEGUI::SchemeManager::getSingleton().createFromFile(
 			(CEGUI::utf8*) "Ogremonics.scheme", (CEGUI::utf8*) "GUI");
-//	CEGUI::SchemeManager::getSingleton().createFromFile(
-//			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
-//	CEGUI::SchemeManager::getSingleton().createFromFile(
-//			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
+	//	CEGUI::SchemeManager::getSingleton().createFromFile(
+	//			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
+	//	CEGUI::SchemeManager::getSingleton().createFromFile(
+	//			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
 
-// hide the CEGUI mouse cursor (defined in the look-n-feel)
+	// hide the CEGUI mouse cursor (defined in the look-n-feel)
 	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
 
-// use this font for text in the UI
+	// use this font for text in the UI
 	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
 			(CEGUI::utf8*) "GUI");
 	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
 
-// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
-// put it in the GUI resource group
+	// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
+	// put it in the GUI resource group
 	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
 			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
 
@@ -255,9 +254,9 @@ void SimulationManager::createScene(void) {
 	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
-// ###################
-// We create a test scene for testing SDL and bullet
-// ###################
+	// ###################
+	// We create a test scene for testing SDL and bullet
+	// ###################
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(50000);
@@ -625,7 +624,6 @@ bool SimulationManager::quit() {
 	mShutDown = true;
 	return true;
 }
-
 
 /**
  * Configure and set up the window and the render window for the simulator

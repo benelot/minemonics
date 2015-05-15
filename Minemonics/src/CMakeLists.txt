@@ -356,6 +356,7 @@ set(MISCHDRS
 	./configuration/PopulationConfiguration.hpp
 	./configuration/OgreSystemConfigStrings.hpp
 	./configuration/CEGUIConfiguration.hpp
+	./configuration/GUIConfiguration.hpp
 	
 	# logger
 	./utils/logging/Logger.hpp
@@ -371,6 +372,7 @@ set(MISCSRCS
 
     # configuration
     ./configuration/EvolutionConfiguration.cpp
+    ./configuration/GUIConfiguration.cpp
     
 	# logger
 	./utils/logging/Logger.cpp

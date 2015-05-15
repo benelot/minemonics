@@ -22,8 +22,13 @@
 #include <view/visualization/CEGUI/CEGUIBuilder.hpp>
 #include <view/visualization/CEGUI/ParamsPanel.hpp>
 
+//## configuration headers
+#include <configuration/GUIConfiguration.hpp>
+
+//## controller headers
+//## model headers
+//## view headers
 //## utils headers
-// CEGUI includes
 
 CEGUIBuilder::CEGUIBuilder(SimulationManager* simulationMgr) {
 	mSimulationMgr = simulationMgr;
@@ -53,8 +58,8 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	//quit item
 	CEGUI::Window *quitApplicationItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "cmdQuitApplication");
-	quitApplicationItem->setText("Quit [Q]");
+			"Ogremonics/MenuItem", GUIConfiguration::quitApplicationCmd);
+	quitApplicationItem->setText(GUIConfiguration::quitApplicationName);
 	fileMenu->addChild(quitApplicationItem);
 
 	//#####################
@@ -386,68 +391,68 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// 0 %
 	CEGUI::Window *ambientLight0Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight0");
-	ambientLight0Item->setText("0 %");
+			GUIConfiguration::ambientLight0Cmd);
+	ambientLight0Item->setText(GUIConfiguration::ambientLight0Name);
 	ambientLightMenu->addChild(ambientLight0Item);
 
 	// 10 %
 	CEGUI::Window *ambientLight10Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight10");
-	ambientLight10Item->setText("10 %");
+			GUIConfiguration::ambientLight10Cmd);
+	ambientLight10Item->setText(GUIConfiguration::ambientLight10Name);
 	ambientLightMenu->addChild(ambientLight10Item);
 
 	// 20 %
 	CEGUI::Window *ambientLight20Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight20");
-	ambientLight20Item->setText("20 %");
+			GUIConfiguration::ambientLight20Cmd);
+	ambientLight20Item->setText(GUIConfiguration::ambientLight20Name);
 	ambientLightMenu->addChild(ambientLight20Item);
 
 	// 30 %
 	CEGUI::Window *ambientLight30Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight30");
-	ambientLight30Item->setText("30 %");
+			GUIConfiguration::ambientLight30Cmd);
+	ambientLight30Item->setText(GUIConfiguration::ambientLight30Name);
 	ambientLightMenu->addChild(ambientLight30Item);
 
 	// 40 %
 	CEGUI::Window *ambientLight40Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight40");
-	ambientLight40Item->setText("40 %");
+			GUIConfiguration::ambientLight40Cmd);
+	ambientLight40Item->setText(GUIConfiguration::ambientLight40Name);
 	ambientLightMenu->addChild(ambientLight40Item);
 
 	// 50 %
 	CEGUI::Window *ambientLight50Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight50");
-	ambientLight50Item->setText("50 %");
+			GUIConfiguration::ambientLight50Cmd);
+	ambientLight50Item->setText(GUIConfiguration::ambientLight50Name);
 	ambientLightMenu->addChild(ambientLight50Item);
 
 	// 60 %
 	CEGUI::Window *ambientLight60Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight60");
-	ambientLight60Item->setText("60 %");
+			GUIConfiguration::ambientLight60Cmd);
+	ambientLight60Item->setText(GUIConfiguration::ambientLight60Name);
 	ambientLightMenu->addChild(ambientLight60Item);
 
 	// 70 %
 	CEGUI::Window *ambientLight70Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight70");
-	ambientLight70Item->setText("70 %");
+			GUIConfiguration::ambientLight70Cmd);
+	ambientLight70Item->setText(GUIConfiguration::ambientLight70Name);
 	ambientLightMenu->addChild(ambientLight70Item);
 
 	// 80 %
 	CEGUI::Window *ambientLight80Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight80");
-	ambientLight80Item->setText("80 %");
+			GUIConfiguration::ambientLight80Cmd);
+	ambientLight80Item->setText(GUIConfiguration::ambientLight80Name);
 	ambientLightMenu->addChild(ambientLight80Item);
 
 	// 90 %
 	CEGUI::Window *ambientLight90Item = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdAmbientLight90");
-	ambientLight90Item->setText("90 %");
+			GUIConfiguration::ambientLight90Cmd);
+	ambientLight90Item->setText(GUIConfiguration::ambientLight90Name);
 	ambientLightMenu->addChild(ambientLight90Item);
 
 	// 100 %
 	CEGUI::Window *ambientLight100Item = wmgr.createWindow(
-			"Ogremonics/MenuItem", "cmdAmbientLight100");
-	ambientLight100Item->setText("100 %");
+			"Ogremonics/MenuItem", GUIConfiguration::ambientLight100Cmd);
+	ambientLight100Item->setText(GUIConfiguration::ambientLight100Name);
 	ambientLightMenu->addChild(ambientLight100Item);
 
 	// Tune for speed
@@ -563,62 +568,62 @@ CEGUI::Window* CEGUIBuilder::createMenu() {
 
 	// No gravity
 	CEGUI::Window *noGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdNoGravity");
-	noGravityItem->setText("No Gravity");
+			GUIConfiguration::noGravityCmd);
+	noGravityItem->setText(GUIConfiguration::noGravityName);
 	gravityMenu->addChild(noGravityItem);
 
 	// Pluto gravity 0.059
 	CEGUI::Window *plutoGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdPlutoGravity");
-	plutoGravityItem->setText("Pluto Gravity 0.059 g");
+			GUIConfiguration::plutoGravityCmd);
+	plutoGravityItem->setText(GUIConfiguration::plutoGravityName);
 	gravityMenu->addChild(plutoGravityItem);
 
 	// Moon gravity 0.166
 	CEGUI::Window *moonGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdMoonGravity");
-	moonGravityItem->setText("Moon Gravity 0.166 g");
+			GUIConfiguration::moonGravityCmd);
+	moonGravityItem->setText(GUIConfiguration::moonGravityName);
 	gravityMenu->addChild(moonGravityItem);
 
 	// Mars/Mercury gravity 0.377/0.378
 	CEGUI::Window *marsMercuryGravityItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "cmdMarsMercuryGravity");
-	marsMercuryGravityItem->setText("Mars/Mercury Gravity 0.377 g");
+			"Ogremonics/MenuItem", GUIConfiguration::marsMercuryGravityCmd);
+	marsMercuryGravityItem->setText(GUIConfiguration::marsMercuryGravityName);
 	gravityMenu->addChild(marsMercuryGravityItem);
 
 	// Uranus gravity 0.889
 	CEGUI::Window *uranusGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdUranusGravity");
-	uranusGravityItem->setText("Uranus Gravity 0.899 g");
+			GUIConfiguration::uranusGravityCmd);
+	uranusGravityItem->setText(GUIConfiguration::uranusGravityName);
 	gravityMenu->addChild(uranusGravityItem);
 
 	// Venus/Saturn gravity 0.907/0.916
 	CEGUI::Window *venusSaturnGravityItem = wmgr.createWindow(
-			"Ogremonics/MenuItem", "cmdVenusSaturnGravity");
-	venusSaturnGravityItem->setText("Venus/Saturn Gravity 0.91 g");
+			"Ogremonics/MenuItem", GUIConfiguration::venusSaturnGravityCmd);
+	venusSaturnGravityItem->setText(GUIConfiguration::venusSaturnGravityName);
 	gravityMenu->addChild(venusSaturnGravityItem);
 
 	// Earth gravity 1
 	CEGUI::Window *earthGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdEarthGravity");
-	earthGravityItem->setText("Earth Gravity 1 g");
+			GUIConfiguration::earthGravityCmd);
+	earthGravityItem->setText(GUIConfiguration::earthGravityName);
 	gravityMenu->addChild(earthGravityItem);
 
 	// Neptune gravity 1.12
 	CEGUI::Window *neptuneGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdNeptuneGravity");
-	neptuneGravityItem->setText("Neptune Gravity 1.12 g");
+			GUIConfiguration::neptuneGravityCmd);
+	neptuneGravityItem->setText(GUIConfiguration::neptuneGravityName);
 	gravityMenu->addChild(neptuneGravityItem);
 
 	// Jupiter gravity 2.36
 	CEGUI::Window *jupiterGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdJupiterGravity");
-	jupiterGravityItem->setText("Jupiter Gravity 2.36 g");
+			GUIConfiguration::jupiterGravityCmd);
+	jupiterGravityItem->setText(GUIConfiguration::jupiterGravityName);
 	gravityMenu->addChild(jupiterGravityItem);
 
 	// Sun gravity 27.930682977
 	CEGUI::Window *sunGravityItem = wmgr.createWindow("Ogremonics/MenuItem",
-			"cmdSunGravity");
-	sunGravityItem->setText("Sun Gravity 27.9 g");
+			GUIConfiguration::sunGravityCmd);
+	sunGravityItem->setText(GUIConfiguration::sunGravityName);
 	gravityMenu->addChild(sunGravityItem);
 
 	// Custom gravity...
