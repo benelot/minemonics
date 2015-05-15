@@ -24,7 +24,16 @@ The first two basic environments are a plane which is entirely flat and a hills 
 
 The body model is created from general primitives such as cubes and capsules, which are connected together via joints. The joints in fact are motion constraints defined in the physics engine that restrict the motion of the primitive bodies in ways similar to classical mechanical joints. The joint defines which degrees of freedom are either fully locked or restricted to move only within a certain range of angle in case of angular joint movement or within a distance range in the case of linear joint movement. The body model defined in the physics engine is then graphically rendered into a visual model of the body to represent the creature's movements in the environment.
 
+![Some of the first generation creatures](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics/figs/creatures/Minemonics-05112015_184631057.jpg?raw=true "Some of the first generation creatures")
 
+![Some of the first generation creatures](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics/figs/creatures/Minemonics-05112015_190654362.jpg?raw=true "Some of the first generation creatures")
+
+![Some of the first generation creatures](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics/figs/creatures/Minemonics-05112015_190853660.jpg?raw=true "Some of the first generation creatures")
+
+![Some of the first generation creatures](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics/figs/creatures/Minemonics-05112015_190947481.jpg?raw=true "Some of the first generation creatures")
+
+
+![Some of the first generation creatures](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics/figs/creatures/Minemonics-05112015_191706383.jpg?raw=true "Some of the first generation creatures")
 
 ## Milestone 4: Evolutionary Algorithm
 
@@ -50,7 +59,7 @@ Topics covered in the talk:
     * Extensions: Controllers
     * Other settings
 
-Here is a link to the presentation: [Emergent gait periodicity in artificially evolved creatures on unknown terrains](http://github.com/benelot/minemonics/Minemonics/doc/presentations/[2015] Auditory Informatics/Minemonics-AuditoryInformatics.pdf)
+Here is a link to the presentation: [Emergent gait periodicity in artificially evolved creatures on unknown terrains](Minemonics/doc/presentations/[2015] Auditory Informatics/Minemonics-AuditoryInformatics.pdf?raw=true)
 
 (You need to download the figs folder as well, because otherwise you can not find the videos that are linked in the presentation)
 
