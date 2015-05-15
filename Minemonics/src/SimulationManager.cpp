@@ -106,22 +106,6 @@ SimulationManager::~SimulationManager(void) {
 	CEGUI::OgreRenderer::destroySystem();
 }
 
-
-
-
-
-void SimulationManager::destroyScene(void) {
-	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
-	for (; it != mRagdolls.end(); it++) {
-		(*it)->removeFromWorld();
-	}
-
-	population.removeFromWorld();
-
-	mPhysicsController.exitBulletPhysics();
-
-}
-
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
 
@@ -198,6 +182,137 @@ void SimulationManager::createFrameListener(void) {
 //		mRagdolls.push_back(ragdoll);
 //		ragdoll->addToWorld();
 //	}
+}
+
+//-------------------------------------------------------------------------------------
+/**
+ * Creates the scene of the application.
+ */
+void SimulationManager::createScene(void) {
+
+// Initialize the logger
+	Logger::init("minemonics.log");
+	Logger::initTermSink();
+
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
+			ApplicationConfiguration::APPLICATION_TITLE);
+
+// CEGUI
+// with a scene manager and window, we can create a the GUI renderer
+
+// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
+	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
+
+// This pointer is valid only locally
+	mSystem = &CEGUI::System::getSingleton();
+
+// tell us a lot about what is going on (see CEGUI.log in the working directory)
+	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+
+// use this CEGUI scheme definition (see CEGUI docs for more)
+	CEGUI::SchemeManager::getSingleton().createFromFile(
+			(CEGUI::utf8*) "Ogremonics.scheme", (CEGUI::utf8*) "GUI");
+//	CEGUI::SchemeManager::getSingleton().createFromFile(
+//			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
+//	CEGUI::SchemeManager::getSingleton().createFromFile(
+//			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
+
+// hide the CEGUI mouse cursor (defined in the look-n-feel)
+	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
+
+// use this font for text in the UI
+	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
+			(CEGUI::utf8*) "GUI");
+	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
+
+// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
+// put it in the GUI resource group
+	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
+			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
+
+	CEGUIBuilder ceguiBuilder(this);
+	CEGUI::Window* menu = ceguiBuilder.createMenu();
+	menu->setAlwaysOnTop(true);
+	mLayout->addChild(menu);
+
+	setFpsPanel(ceguiBuilder.createFpsPanel());
+	mLayout->addChild(getFpsPanel()->getWidgetPanel());
+	setDetailsPanel(ceguiBuilder.createDetailsPanel());
+	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
+
+	mGraphWindows.push_back(
+			new MathGLWindow(this, 400, 400,
+					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
+					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
+
+	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
+	for (; it != mGraphWindows.end(); it++) {
+		mLayout->addChild((*it)->getMathGlWindow());
+	}
+
+	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
+	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
+	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
+	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
+
+// ###################
+// We create a test scene for testing SDL and bullet
+// ###################
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
+	mCamera->setNearClipDistance(0.1);
+	mCamera->setFarClipDistance(50000);
+
+	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
+			Ogre::RSC_INFINITE_FAR_PLANE)) {
+		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
+	}
+
+	// set up lighting
+	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
+	lightdir.normalise();
+
+	Ogre::Light* light = mSceneMgr->createLight("tstLight");
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
+	light->setDirection(lightdir);
+	light->setDiffuseColour(Ogre::ColourValue::White);
+	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
+
+	// create the light
+	Ogre::Light *light2 = mSceneMgr->createLight("Light1");
+	light2->setType(Ogre::Light::LT_POINT);
+	light2->setPosition(Ogre::Vector3(250, 150, 250));
+	light2->setDiffuseColour(Ogre::ColourValue::White);
+	light2->setSpecularColour(Ogre::ColourValue::White);
+
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
+
+	// set up environment
+	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
+	case Environment::HILLS: {
+		mTerrain = new Hills();
+		((Hills*) mTerrain)->initialize(this, light);
+		break;
+	}
+	case Environment::PLANE: {
+		mTerrain = new Plane();
+		((Plane*) mTerrain)->initialize(this, light);
+		break;
+	}
+	}
+
+	//either create a skydome or a skyplane
+	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
+
+//	// Create skyplane
+//	Ogre::Plane plane;
+//	plane.d = 100;
+//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
+//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
+//			0.5, 150, 150);
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
+
+	mInfoOverlay.initialize(mCamera);
 }
 
 //-------------------------------------------------------------------------------------
@@ -435,145 +550,10 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 	}
 }
 
-//-------------------------------------------------------------------------------------
-bool SimulationManager::quit() {
-	mStateHandler.requestStateChange(SHUTDOWN);
-	mShutDown = true;
-	return true;
-}
-
-//-------------------------------------------------------------------------------------
 /**
- * Creates the scene of the application.
+ * What to do if the window is resized.
+ * @param rw The handle of the render window that was resized.
  */
-void SimulationManager::createScene(void) {
-
-// Initialize the logger
-	Logger::init("minemonics.log");
-	Logger::initTermSink();
-
-	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
-			ApplicationConfiguration::APPLICATION_TITLE);
-
-// CEGUI
-// with a scene manager and window, we can create a the GUI renderer
-
-// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
-	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
-
-// This pointer is valid only locally
-	mSystem = &CEGUI::System::getSingleton();
-
-// tell us a lot about what is going on (see CEGUI.log in the working directory)
-	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-
-// use this CEGUI scheme definition (see CEGUI docs for more)
-	CEGUI::SchemeManager::getSingleton().createFromFile(
-			(CEGUI::utf8*) "Ogremonics.scheme", (CEGUI::utf8*) "GUI");
-//	CEGUI::SchemeManager::getSingleton().createFromFile(
-//			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
-//	CEGUI::SchemeManager::getSingleton().createFromFile(
-//			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
-
-// hide the CEGUI mouse cursor (defined in the look-n-feel)
-	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
-
-// use this font for text in the UI
-	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
-			(CEGUI::utf8*) "GUI");
-	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
-
-// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
-// put it in the GUI resource group
-	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
-			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
-
-	CEGUIBuilder ceguiBuilder(this);
-	CEGUI::Window* menu = ceguiBuilder.createMenu();
-	menu->setAlwaysOnTop(true);
-	mLayout->addChild(menu);
-
-	setFpsPanel(ceguiBuilder.createFpsPanel());
-	mLayout->addChild(getFpsPanel()->getWidgetPanel());
-	setDetailsPanel(ceguiBuilder.createDetailsPanel());
-	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
-
-	mGraphWindows.push_back(
-			new MathGLWindow(this, 400, 400,
-					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
-					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
-
-	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
-	for (; it != mGraphWindows.end(); it++) {
-		mLayout->addChild((*it)->getMathGlWindow());
-	}
-
-	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
-	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
-	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
-	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
-
-// ###################
-// We create a test scene for testing SDL and bullet
-// ###################
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
-	mCamera->setNearClipDistance(0.1);
-	mCamera->setFarClipDistance(50000);
-
-	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
-			Ogre::RSC_INFINITE_FAR_PLANE)) {
-		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
-	}
-
-	// set up lighting
-	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
-	lightdir.normalise();
-
-	Ogre::Light* light = mSceneMgr->createLight("tstLight");
-	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDirection(lightdir);
-	light->setDiffuseColour(Ogre::ColourValue::White);
-	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
-
-	// create the light
-	Ogre::Light *light2 = mSceneMgr->createLight("Light1");
-	light2->setType(Ogre::Light::LT_POINT);
-	light2->setPosition(Ogre::Vector3(250, 150, 250));
-	light2->setDiffuseColour(Ogre::ColourValue::White);
-	light2->setSpecularColour(Ogre::ColourValue::White);
-
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
-
-	// set up environment
-	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
-	case Environment::HILLS: {
-		mTerrain = new Hills();
-		((Hills*) mTerrain)->initialize(this, light);
-		break;
-	}
-	case Environment::PLANE: {
-		mTerrain = new Plane();
-		((Plane*) mTerrain)->initialize(this, light);
-		break;
-	}
-	}
-
-	//either create a skydome or a skyplane
-	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
-
-//	// Create skyplane
-//	Ogre::Plane plane;
-//	plane.d = 100;
-//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
-//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
-//			0.5, 150, 150);
-
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
-
-	mInfoOverlay.initialize(mCamera);
-}
-
-//Adjust mouse clipping area
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Repositioning CEGUI pointer...";
 	unsigned int width, height, depth;
@@ -600,6 +580,10 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
 }
 
+/**
+ * What to do if the window focus has changed.
+ * @param rw The handle of the render window whose focus has changed.
+ */
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
 		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
@@ -614,6 +598,34 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
 	}
 }
+//-------------------------------------------------------------------------------------
+
+/**
+ * Destroy the scene if the application is quit.
+ */
+void SimulationManager::destroyScene(void) {
+	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
+	for (; it != mRagdolls.end(); it++) {
+		(*it)->removeFromWorld();
+	}
+
+	population.removeFromWorld();
+
+	mPhysicsController.exitBulletPhysics();
+
+}
+//-------------------------------------------------------------------------------------
+
+/**
+ * Quit the application.
+ * @return Returns true if the application could be closed normally.
+ */
+bool SimulationManager::quit() {
+	mStateHandler.requestStateChange(SHUTDOWN);
+	mShutDown = true;
+	return true;
+}
+
 
 /**
  * Configure and set up the window and the render window for the simulator
