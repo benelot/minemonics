@@ -59,7 +59,7 @@ Topics covered in the talk:
     * Extensions: Controllers
     * Other settings
 
-Here is a link to the presentation: [Emergent gait periodicity in artificially evolved creatures on unknown terrains](http://github.com/benelot/minemonics/Minemonics/doc/presentations/[2015] Auditory Informatics/Minemonics-AuditoryInformatics.pdf)
+Here is a link to the presentation: [Emergent gait periodicity in artificially evolved creatures on unknown terrains](Minemonics/doc/presentations/[2015] Auditory Informatics/Minemonics-AuditoryInformatics.pdf?raw=true)
 
 (You need to download the figs folder as well, because otherwise you can not find the videos that are linked in the presentation)
 
