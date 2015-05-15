@@ -3,6 +3,11 @@
 
 //# corresponding header
 //# forward declarations
+namespace Ogre {
+class OverlaySystem;
+} /* namespace Ogre */
+
+
 //# system headers
 //## controller headers
 //## model headers
@@ -11,16 +16,13 @@
 #include <OgrePrerequisites.h>
 #include <OgreWindowEventUtilities.h>
 
-namespace Ogre {
-class OverlaySystem;
-} /* namespace Ogre */
-
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
 
 #ifdef OGRE_STATIC_LIB
 #  define OGRE_STATIC_GL

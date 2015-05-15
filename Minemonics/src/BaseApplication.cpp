@@ -1,5 +1,7 @@
 //# corresponding header
 #include <BaseApplication.hpp>
+//# forward declarations
+//# system headers
 #include <stddef.h>
 #include <iostream>
 #include <map>
@@ -32,6 +34,7 @@
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 #include <macUtils.h>
