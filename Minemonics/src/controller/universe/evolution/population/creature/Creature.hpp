@@ -22,7 +22,7 @@ class SimulationManager;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The creature controller synchronizes the model with the view.
  * @details		Details
  * @date		2015-04-07
  * @author		Benjamin Ellenberger
@@ -33,7 +33,7 @@ public:
 	virtual ~Creature();
 
 	void initialize(SimulationManager* simulationManager,
-			Ogre::Vector3 position, double bushiness);
+			Ogre::Vector3 position, double branchiness);
 
 	void performEmbryogenesis();
 

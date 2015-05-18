@@ -1,39 +1,26 @@
-/*
- * Randomness.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
+//## controller headers
+//## model headers
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 #include <boost/math/special_functions/round.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <utils/Randomness.hpp>
-//## controller headers
-
-//## model headers
 
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
+#include <utils/Randomness.hpp>
 
 Randomness::Randomness() {
-	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970,1,1));
-	boost::posix_time::ptime now = boost::posix_time::microsec_clock::local_time();
+	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970, 1, 1));
+	boost::posix_time::ptime now =
+			boost::posix_time::microsec_clock::local_time();
 	boost::posix_time::time_duration diff = now - time_t_epoch;
 
 	rng.seed(diff.total_milliseconds());
@@ -53,6 +40,7 @@ Randomness::~Randomness() {
 double Randomness::nextDouble(double lowerLimit, double upperLimit) {
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
 			lowerLimit, upperLimit);
+
 	return unifDoubleDistribution(rng);
 }
 /**
@@ -71,6 +59,7 @@ int Randomness::nextPosInt(int lowerLimit, int upperLimit) {
 			upperLimit);
 
 	//draw from it via the mersenne twister
+
 	return unifIntDistribution(rng);
 }
 /**
@@ -86,6 +75,7 @@ double Randomness::nextBiasedLog(double lowerLimit, double upperLimit) {
 			pow(10, lowerLimit), pow(10, upperLimit));
 
 	//draw m and n
+
 	double tenpowm = unifDoubleDistribution(rng);
 	double tenpown = unifDoubleDistribution(rng);
 
@@ -98,6 +88,7 @@ bool Randomness::nextBoolean() {
 	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1);
 
 	// return true if 1 else false
+
 	return (unifIntDistribution(rng)) ? true : false;
 }
 
@@ -105,6 +96,7 @@ int Randomness::nextNormalInt(double mean, double twovariances) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalIntDistribution(mean,
 			(twovariances / 2.0f));
+
 
 	double number = normalIntDistribution(rng);
 	int integer = round(number);
@@ -123,6 +115,7 @@ double Randomness::nextNormalDouble(double mean, double variance) {
 	boost::random::normal_distribution<> normalDoubleDistribution(mean,
 			variance);
 
+
 	return normalDoubleDistribution(rng);
 }
 
@@ -130,6 +123,7 @@ bool Randomness::nextNormalBoolean(double mean, double variance) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalBooleanDistribution(mean,
 			variance);
+
 
 	double number = normalBooleanDistribution(rng);
 	bool result = false;

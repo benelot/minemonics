@@ -15,7 +15,8 @@
 //## utils headers
 
 EvolutionModel::EvolutionModel() :
-		mState(VARIATION), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0) {
+		mState(VARIATION), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0), mPopulationQty(
+				0),mCurrentPopulation(NULL) {
 
 }
 
@@ -29,10 +30,7 @@ void EvolutionModel::initialize(double evaluationTime) {
 	//GENERATION
 }
 
-bool EvolutionModel::run()
-{
-	//EVALUATION
-	evaluate();
+bool EvolutionModel::proceed() {
 
 	//PROCESSING
 	process();
@@ -60,13 +58,15 @@ bool EvolutionModel::process() {
 	return true;
 }
 
-bool EvolutionModel::selectAndReap(){
+bool EvolutionModel::selectAndReap() {
 	//REAP_AND_SOW
 	mState = REAP_AND_SOW;
 
 	//call the reaper to reap
+	mReaper.reap(mCurrentPopulation);
 
 	//call the reaper to sow
+	mReaper.sow(mCurrentPopulation);
 
 	return true;
 }

@@ -3,9 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class Creature;
-class Environment;
-
 //# system headers
 #include <vector>
 
@@ -50,7 +47,7 @@ public:
 
 	void addNewPopulation(PopulationModel* populationModel);
 
-	bool run();
+	bool proceed();
 
 	bool evaluate();
 
@@ -86,6 +83,11 @@ private:
 	 * The vector of populations that are evaluated.
 	 */
 	std::vector<PopulationModel*> mPopulationModels;
+
+	/**
+	 * The currently evaluated population.
+	 */
+	PopulationModel* mCurrentPopulation;
 
 	/**
 	 * Amount of populations in this evolution.

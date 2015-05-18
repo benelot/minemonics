@@ -14,8 +14,8 @@
 //## view headers
 //## utils headers
 
-
-Evolution::Evolution():mCurrentCreature(NULL),mEnvironment(NULL) {
+Evolution::Evolution() :
+		mCurrentCreature(NULL), mEnvironment(NULL) {
 }
 
 Evolution::~Evolution() {

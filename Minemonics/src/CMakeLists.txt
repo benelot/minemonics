@@ -3,15 +3,8 @@
 #Filename:    CMakeLists.txt
 #-----------------------------------------------------------------------------
 #
-#This source file is part of the
-#   ___                 __    __ _ _    _ 
-#  /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
-# //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
-#/ \_// (_| | | |  __/  \  /\  /| |   <| |
-#\___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
-#      |___/                              
-#      Tutorial Framework
-#      http://www.ogre3d.org/tikiwiki/
+#This source file is part of the Minemonics 3D Virtual Creatures simulator
+#
 #-----------------------------------------------------------------------------
 #*/
 cmake_minimum_required(VERSION 2.6)
@@ -48,8 +41,8 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/genome/DirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.hpp
-	./model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp
-	./model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp
+	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp
+	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp
 	./model/universe/evolution/population/creature/genome/Gene.hpp
 	./model/universe/evolution/population/creature/genome/GeneBranch.hpp
 	./model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp
@@ -103,8 +96,8 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/genome/DirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.cpp
-	./model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp
-	./model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp
+	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.cpp
+	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.cpp
 	./model/universe/evolution/population/creature/genome/Gene.cpp
 	./model/universe/evolution/population/creature/genome/GeneBranch.cpp
 	./model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp

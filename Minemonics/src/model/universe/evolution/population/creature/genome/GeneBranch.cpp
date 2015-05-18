@@ -1,10 +1,3 @@
-/*
- * GeneBranch.cpp
- *
- *  Created on: Mar 31, 2015
- *      Author: leviathan
- */
-
 //# forward declarations
 #include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
 
@@ -21,7 +14,7 @@
 //## utils headers
 
 GeneBranch::GeneBranch() :
-		mGeneBranchType(UNKNOWN_GENE_BRANCH) {
+		mGeneBranchType(UNKNOWN_GENE_BRANCH), mActive(false) {
 
 }
 

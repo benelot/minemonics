@@ -31,7 +31,7 @@
 class ComponentModel {
 public:
 	enum ComponentType {
-		UnknownComponent, LimbComponent, JointComponent
+		UnknownComponent, LimbComponent, JointComponent,NUM_COMPONENTS
 	};
 
 

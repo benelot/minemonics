@@ -24,13 +24,13 @@
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 
 //## controller headers
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 
 //## view headers
 #include <view/picking/OgreMeshRay.hpp>

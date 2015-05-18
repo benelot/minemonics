@@ -1,8 +1,14 @@
 #ifndef CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_
 #define CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_
 
+//# corresponding headers
 //# forward declarations
+class Creature;
+class Environment;
+
 //# system headers
+#include <vector>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -10,11 +16,15 @@
 //## base headers
 //## configuration headers
 //## controller headers
-
 #include <controller/universe/evolution/population/Population.hpp>
+
+//## model headers
 #include <model/universe/evolution/EvolutionModel.hpp>
+
+//## view headers
+//## utils headers
 #include <utils/TimerManager.hpp>
-#include <vector>
+
 
 /**
  * @brief		Brief

@@ -80,11 +80,13 @@ public:
 	 * @return The total volume of the whole creature body.
 	 */
 	double getCreatureVolume() {
-		std::vector<Morphogene*>::const_iterator it;
+		std::vector<Gene*>::const_iterator it;
 		double totalVolume = 0;
 		for (it = mGenotype.getGenes().begin();
 				it != mGenotype.getGenes().end(); it++) {
-			totalVolume += (*it)->getX() * (*it)->getY() * (*it)->getZ();
+			if ((*it)->getGeneType() == Gene::MorphoGene) {
+				totalVolume += ((Morphogene*)*it)->getX() * ((Morphogene*)*it)->getY() * ((Morphogene*)*it)->getZ();
+			}
 		}
 		return totalVolume;
 	}

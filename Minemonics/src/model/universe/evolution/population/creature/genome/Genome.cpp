@@ -1,15 +1,26 @@
-/*
- * Genome.cpp
- *
- *  Created on: Apr 27, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 
-Genome::Genome():mLength(0) {
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
+Genome::Genome(GenomeType type) :
+		mLength(0), mGenomeType(type),mBranchiness(0) {
 }
 
 Genome::~Genome() {
 }
 
+void Genome::addGene(Gene* gene) {
+	mGenes.push_back(gene);
+}

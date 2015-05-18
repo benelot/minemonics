@@ -1,11 +1,6 @@
-/*
- * Creature.cpp
- *
- *  Created on: Apr 7, 2015
- *      Author: leviathan
- */
-
+//# corresponding header
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //# forward declarations
 class SimulationManager;
 
@@ -39,9 +34,9 @@ Creature::~Creature() {
 }
 
 void Creature::initialize(SimulationManager* simulationManager,
-		Ogre::Vector3 position, double bushiness) {
+		Ogre::Vector3 position, double branchiness) {
 	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(position, bushiness);
+	mCreatureModel->initialize(position, branchiness);
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager,this);
 }

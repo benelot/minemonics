@@ -5,8 +5,11 @@
 //# forward declarations
 class EnvironmentModel;
 class EvolutionModel;
+class Epoch;
 
 //# system headers
+#include <vector>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -63,8 +66,9 @@ private:
 	EnvironmentModel* mEnvironmentModel;
 
 	/**
-	 *
+	 * The epochs of the planet.
 	 */
+	std::vector<Epoch*> mEpochs;
 };
 
 #endif /* MODEL_UNIVERSE_PLANETMODEL_HPP_ */

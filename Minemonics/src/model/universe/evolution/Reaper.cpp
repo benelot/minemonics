@@ -5,7 +5,6 @@
  *      Author: leviathan
  */
 
-
 //# corresponding header
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/Reaper.hpp>
@@ -24,17 +23,31 @@
 //## view headers
 //## utils headers
 
-Reaper::Reaper() {
-	// TODO Auto-generated constructor stub
-
+Reaper::Reaper() :
+		mAttributeMutationPercentage(0), mBranchAttributeMutationPercentage(0), mBranchMutationPercentage(
+				0), mCrossOverPercentage(0), mGeneMutationPercentage(
+				0), mReapPercentage(0), mSowFreshPercentage(0) {
 }
 
 Reaper::~Reaper() {
 	// TODO Auto-generated destructor stub
 }
 
-void Reaper::reap(PopulationModel population) {
+void Reaper::initialize(double reapPercentage, double crossOverPercentage,
+		double geneMutationPercentage, double attributeMutationPercentage,
+		double branchMutationPercentage,
+		double branchAttributeMutationPercentage, double sowFreshPercentage) {
+	mReapPercentage = reapPercentage;
+	mCrossOverPercentage = crossOverPercentage;
+	mGeneMutationPercentage = geneMutationPercentage;
+	mAttributeMutationPercentage = attributeMutationPercentage;
+	mBranchMutationPercentage = branchMutationPercentage;
+	mBranchAttributeMutationPercentage = branchAttributeMutationPercentage;
+	mSowFreshPercentage = sowFreshPercentage;
 }
 
-void Reaper::sow(PopulationModel population) {
+void Reaper::reap(PopulationModel* population) {
+}
+
+void Reaper::sow(PopulationModel* population) {
 }

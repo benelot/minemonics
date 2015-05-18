@@ -38,7 +38,8 @@ public:
 	 */
 	enum GeneType{
 		UnknownGene,//!< UnknownGene
-		MorphoGene  //!< MorphoGene
+		MorphoGene,  //!< MorphoGene
+		NUM_GENES
 	};
 
 	void initialize(GeneType geneType);

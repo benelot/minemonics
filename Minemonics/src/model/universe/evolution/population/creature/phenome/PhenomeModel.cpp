@@ -28,9 +28,9 @@
 
 //## controller headers
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
@@ -392,7 +392,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 				if ((*branchIt)->isActive()) {
 					// get the branch gene type defined by the branch
 					Morphogene* offspring =
-							genome->getGenes()[(*branchIt)->getBranchGeneType()];
+							(Morphogene*)genome->getGenes()[(*branchIt)->getBranchGeneType()];
 
 					// create the new generator
 					PhenotypeGenerator* generatorFromBranch =
