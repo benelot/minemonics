@@ -76,6 +76,7 @@ bool MixedGenome::equals(const MixedGenome & genome) const {
 }
 
 void MixedGenome::addRandomGenes() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::addRandomGene() {
@@ -132,71 +133,94 @@ void MixedGenome::integrateRandomGenes() {
 }
 
 void MixedGenome::integrateRandomGene() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::integrateGene(int geneIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::replaceRandomGenesWithRandomGenes() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::replaceRandomGeneWithRandomGene() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::replaceGeneWith(int geneIndex, int replacementIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::duplicateRandomGenes() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::duplicateRandomGene() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::duplicateGene(int geneIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::splitRandomGenes() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::splitRandomGene() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::splitGene(int geneIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::growRandomStubs() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::growRandomStub() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::growStub(int geneIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::mutateRandomGenes() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::mutateRandomGene() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::mutateGene(int geneIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::mutateRandomBranches() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::mutateRandomBranch() {
+	//TODO: Implement method.
 }
 
 void MixedGenome::mutateBranch(int geneIndex, int branchIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::crossoverRandomly(Genome* genome) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::crossover(Genome* genome, int fatherSegmentIndex,
 		int motherSegmentIndex) {
+	//TODO: Implement method.
 }
 
 void MixedGenome::graftFrom(Genome* donator, int maxLinkDepth) {
+	//TODO: Implement method.
 }
