@@ -1,10 +1,3 @@
-/*
- * ControllerGene.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
 #include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
 

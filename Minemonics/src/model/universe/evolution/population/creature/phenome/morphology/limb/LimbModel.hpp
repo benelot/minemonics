@@ -42,18 +42,15 @@ public:
 	 * Primitive type of a limb
 	 */
 	enum PrimitiveType {
-		BLOCK = 2, CAPSULE = 1, UNKNOWN = 0
+		UNKNOWN = 0, BLOCK = 2, CAPSULE = 1, NUM_PRIMITIVES
 	};
-
-	static const int PRIMITIVE_QTY = 2;
 
 	LimbModel();
 	virtual ~LimbModel();
 
-	void initialize(btDynamicsWorld* world, void* limb,
-			PrimitiveType type, Ogre::Vector3 position,
-			Ogre::Quaternion orientation,Ogre::Vector3 dimensions, double mass,Ogre::ColourValue color);
-
+	void initialize(btDynamicsWorld* world, void* limb, PrimitiveType type,
+			Ogre::Vector3 position, Ogre::Quaternion orientation,
+			Ogre::Vector3 dimensions, double mass, Ogre::ColourValue color);
 
 	//TODO: Implement serialization methods for LimbModel.
 
@@ -70,7 +67,7 @@ public:
 	 * Get the position of the limb in the physical world.
 	 * @return The position of the limb in the physical world.
 	 */
-	Ogre::Vector3 getPosition(){
+	Ogre::Vector3 getPosition() {
 		return OgreBulletUtils::convert(mLimbPhysics->getPosition());
 	}
 
@@ -78,7 +75,7 @@ public:
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.
 	 */
-	Ogre::Quaternion getOrientation(){
+	Ogre::Quaternion getOrientation() {
 		return OgreBulletUtils::convert(mLimbPhysics->getOrientation());
 	}
 

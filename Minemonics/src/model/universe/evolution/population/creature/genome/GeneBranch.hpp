@@ -90,13 +90,10 @@ protected:
 	 */
 	bool mActive;
 
-private:
-
 	/**
 	 * The type of gene branch.
 	 */
 	GeneBranchType mGeneBranchType;
-
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENEBRANCH_HPP_ */

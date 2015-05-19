@@ -46,6 +46,12 @@ public:
 	virtual ~Morphogene();
 	void initialize(double branchiness);
 
+	virtual void mutate();
+
+	virtual void grow(int branchiness);
+
+	virtual Morphogene* clone();
+
 	bool equals(const Morphogene& morphoGene) const;
 
 	/**
@@ -148,7 +154,7 @@ public:
 		return mControllerGene;
 	}
 
-	void setControllerGene(ControllerGene*& controllerGene) {
+	void setControllerGene(ControllerGene* controllerGene) {
 		mControllerGene = controllerGene;
 	}
 

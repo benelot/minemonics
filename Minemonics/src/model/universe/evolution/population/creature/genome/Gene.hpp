@@ -46,6 +46,12 @@ public:
 
 	bool equals(const Gene& gene) const;
 
+	virtual Gene* clone() = 0;
+
+	virtual void mutate() = 0;
+
+	virtual void grow(int branchiness) = 0;
+
 	/**
 	 * Give access to boost serialization
 	 */

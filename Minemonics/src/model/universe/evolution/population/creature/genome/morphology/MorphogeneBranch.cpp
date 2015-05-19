@@ -277,3 +277,44 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 	return true;
 }
 
+MorphogeneBranch* MorphogeneBranch::clone() {
+	MorphogeneBranch* morphoGeneBranch = new MorphogeneBranch();
+	morphoGeneBranch->setActive(mActive);
+	morphoGeneBranch->setBranchGeneType(mBranchGeneType);
+	morphoGeneBranch->setFlipped(mFlipped);
+	morphoGeneBranch->setGeneBranchType(mGeneBranchType);
+	morphoGeneBranch->setJointAnchorX(mJointAnchorX);
+	morphoGeneBranch->setJointAnchorY(mJointAnchorY);
+	morphoGeneBranch->setJointAnchorZ(mJointAnchorZ);
+	morphoGeneBranch->setJointMaxPitchForce(mJointMaxPitchForce);
+	morphoGeneBranch->setJointMaxPitchSpeed(mJointMaxPitchSpeed);
+	morphoGeneBranch->setJointMaxRollForce(mJointMaxRollForce);
+	morphoGeneBranch->setJointMaxRollSpeed(mJointMaxRollSpeed);
+	morphoGeneBranch->setJointMaxYawForce(mJointMaxYawForce);
+	morphoGeneBranch->setJointMaxYawSpeed(mJointMaxYawSpeed);
+	morphoGeneBranch->setJointPitch(mJointPitch);
+	morphoGeneBranch->setJointPitchMaxAngle(mJointPitchMaxAngle);
+	morphoGeneBranch->setJointPitchMinAngle(mJointPitchMinAngle);
+	morphoGeneBranch->setJointPitchMotorEnabled(mJointPitchMotorEnabled);
+	morphoGeneBranch->setJointYaw(mJointYaw);
+	morphoGeneBranch->setJointYawMaxAngle(mJointYawMaxAngle);
+	morphoGeneBranch->setJointYawMinAngle(mJointYawMinAngle);
+	morphoGeneBranch->setJointYawMotorEnabled(mJointYawMotorEnabled);
+	morphoGeneBranch->setJointRoll(mJointRoll);
+	morphoGeneBranch->setJointRollMaxAngle(mJointRollMaxAngle);
+	morphoGeneBranch->setJointRollMinAngle(mJointRollMinAngle);
+	morphoGeneBranch->setJointRollMotorEnabled(mJointRollMotorEnabled);
+	morphoGeneBranch->setMirrored(mMirrored);
+	morphoGeneBranch->setSpringPitchDampingCoefficient(mSpringPitchDampingCoefficient);
+	morphoGeneBranch->setSpringYawDampingCoefficient(mSpringYawDampingCoefficient);
+	morphoGeneBranch->setSpringRollDampingCoefficient(mSpringRollDampingCoefficient);
+
+	return morphoGeneBranch;
+}
+
+void MorphogeneBranch::mutate() {
+
+	//no clean up necessary
+
+	initialize();
+}

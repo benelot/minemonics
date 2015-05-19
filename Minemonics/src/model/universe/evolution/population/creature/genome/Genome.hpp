@@ -27,8 +27,8 @@
  */
 class Genome {
 public:
-	enum GenomeType{
-		UnknownGenome,MixedGenome,NUM_GENOMETYPES
+	enum GenomeType {
+		UnknownGenome, MixedGenome, NUM_GENOMETYPES
 	};
 
 	Genome(GenomeType type);
@@ -52,20 +52,22 @@ public:
 	 * Mutations include changes in the genome involving only one genome.
 	 */
 
-	virtual void addRandomGenes() = 0;
+	virtual void addRandomGenes(double percentage) = 0;
 
 	/**
 	 *  Add a new, randomly generated gene to the genome.
 	 */
 	virtual void addRandomGene() = 0;
 
-	virtual void integrateRandomGenes() = 0;
+	virtual void repairGenes() = 0;
+
+	virtual void integrateRandomGenes(double percentage) = 0;
 
 	virtual void integrateRandomGene() = 0;
 
 	virtual void integrateGene(int geneIndex) = 0;
 
-	virtual void replaceRandomGenesWithRandomGenes() = 0;
+	virtual void replaceRandomGenesWithRandomGenes(double percentage) = 0;
 
 	virtual void replaceRandomGeneWithRandomGene() = 0;
 
@@ -95,15 +97,15 @@ public:
 	 *
 	 * A self-loop arises when branch specifications dictate that segments of a particular type should have child segments of the same type. The segment copying mutation preserves this direct recursion in the tree structure when copying a segment specification from one index in the segment specification vector to another.
 	 */
-	virtual void replaceGeneWith(int geneIndex,int replacementIndex) = 0;
+	virtual void replaceGeneWith(int geneIndex, int replacementIndex) = 0;
 
-	virtual void duplicateRandomGenes() = 0;
+	virtual void duplicateRandomGenes(double percentage) = 0;
 
 	virtual void duplicateRandomGene() = 0;
 
 	virtual void duplicateGene(int geneIndex) = 0;
 
-	virtual void splitRandomGenes() = 0;
+	virtual void splitRandomGenes(double percentage) = 0;
 
 	virtual void splitRandomGene() = 0;
 
@@ -150,7 +152,7 @@ public:
 	 */
 	virtual void splitGene(int geneIndex) = 0;
 
-	virtual void growRandomStubs() = 0;
+	virtual void growRandomStubs(double percentage) = 0;
 
 	virtual void growRandomStub() = 0;
 
@@ -188,9 +190,9 @@ public:
 	 *
 	 * The check for the 'stub' growing mutation is the final step in mutating a creature's segment specifications.
 	 */
-	virtual void growStub(int geneIndex) = 0;
+	virtual void growStub(int geneIndex,int branchiness) = 0;
 
-	virtual void mutateRandomGenes() = 0;
+	virtual void mutateRandomGenes(double percentage) = 0;
 
 	/**
 	 * @brief		The segment randomization mutation simply deletes a segment specification and replaces it with a randomly-generated one.
@@ -248,7 +250,9 @@ public:
 
 	virtual void mutateGene(int geneIndex) = 0;
 
-	virtual void mutateRandomBranches() = 0;
+	virtual void mutateRandomBranches(double percentage) = 0;
+
+	virtual void mutateRandomBranchOfGene(int geneIndex) = 0;
 
 	virtual void mutateRandomBranch() = 0;
 
@@ -257,7 +261,7 @@ public:
 	 * @param geneIndex
 	 * @param branchIndex
 	 */
-	virtual void mutateBranch(int geneIndex,int branchIndex) = 0;
+	virtual void mutateBranch(int geneIndex, int branchIndex) = 0;
 
 	/**
 	 * # Crossover
@@ -266,18 +270,23 @@ public:
 	 */
 
 	/**
-	 * Crossover randomly with other genome.
-	 * @param genome
-	 */
-	virtual void crossoverRandomly(Genome* genome) = 0;
+		 * Crossover randomly with father genome.
+		 * @param fatherGenome
+		 */
+		virtual void crossoverRandomly(Genome* fatherGenome) = 0;
+
 
 	/**
 	 * Crossover with other genome starting after fatherSegmentIndex copying over starting from motherSegmentIndex.
-	 * @param genome
-	 * @param fatherSegmentIndex
-	 * @param motherSegmentIndex
+	 * @param fatherGenome
+	 * @param motherStartSegmentIndex
+	 * @param motherEndSegmentIndex
+	 * @param fatherStartSegmentIndex
+	 * @param fatherEndSegmentIndex
 	 */
-	virtual void crossover(Genome* genome,int fatherSegmentIndex,int motherSegmentIndex) = 0;
+	virtual void crossover(Genome* fathergenome,
+			int motherSegmentStartIndex, int motherSegmentEndIndex,
+			int fatherSegmentStartIndex, int fatherSegmentEndIndex) = 0;
 
 	/**
 	 * Grafting copies a feature of the donator over to the receiver beginning
@@ -291,7 +300,7 @@ public:
 	 * @param maxLinkDepth
 	 *            the maximum link depth to follow
 	 */
-	virtual void graftFrom(Genome* donator,int maxLinkDepth) = 0;
+	virtual void graftFrom(Genome* donator, int maxLinkDepth) = 0;
 
 	std::vector<Gene*>& getGenes() {
 		return mGenes;

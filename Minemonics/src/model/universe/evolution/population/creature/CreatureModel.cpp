@@ -21,7 +21,6 @@ void CreatureModel::initialize(Ogre::Vector3 position,double branchiness) {
 	mName = nameGenerator.generateName();
 	mGenotype.createRandomGenome(branchiness);
 	//genotype.expand();
-	mGenotype.integrateRandomGenes();
 }
 
 CreatureModel::~CreatureModel() {

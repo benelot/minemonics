@@ -113,20 +113,22 @@ public:
 		 * Mutations include changes in the genome involving only one genome.
 		 */
 
-		virtual void addRandomGenes();
+		virtual void addRandomGenes(double percentage);
 
 		/**
 		 * Add a new, randomly generated gene to the genome.
 		 */
 		virtual void addRandomGene();
 
-		virtual void integrateRandomGenes();
+		virtual void repairGenes();
+
+		virtual void integrateRandomGenes(double percentage);
 
 		virtual void integrateRandomGene();
 
 		virtual void integrateGene(int geneIndex);
 
-		virtual void replaceRandomGenesWithRandomGenes();
+		virtual void replaceRandomGenesWithRandomGenes(double percentage);
 
 		virtual void replaceRandomGeneWithRandomGene();
 
@@ -141,13 +143,7 @@ public:
 		 * // The destination specification is the self object whose
 		 * // become_special_copy() member is called
 		 * // become_special_copy (SS, d, s)
-		 *	copy all real-valued parameters from SS to self
-		 *	copy all integer-valued parameters from SS to self
-		 *	copy all Boolean-valued parameters from SS to self
-		 *	copy desired joint angle GP tree from SS to self
-		 *	copy max servo torque GP tree from SS to self
-		 *	copy output GP tree from SS to self
-		 *	copy state GP tree from SS to self vector vector
+		 *	copy all parameters from SS to self
 		 * // Source segment self-referencing branches should become
 		 * // destination segment self-referencing branches
 		 * for b = 1 to max_branches do
@@ -158,13 +154,13 @@ public:
 		 */
 		virtual void replaceGeneWith(int geneIndex,int replacementIndex);
 
-		virtual void duplicateRandomGenes();
+		virtual void duplicateRandomGenes(double percentage);
 
 		virtual void duplicateRandomGene();
 
 		virtual void duplicateGene(int geneIndex);
 
-		virtual void splitRandomGenes();
+		virtual void splitRandomGenes(double percentage);
 
 		virtual void splitRandomGene();
 
@@ -211,7 +207,7 @@ public:
 		 */
 		virtual void splitGene(int geneIndex);
 
-		virtual void growRandomStubs();
+		virtual void growRandomStubs(double percentage);
 
 		virtual void growRandomStub();
 
@@ -220,22 +216,22 @@ public:
 		 * @details		The 'stub' growing mutation method causes a segment to sprout a new branch which itself has no branches. Many mutations that result in new branches often produced large
 		 complicated structures that, should they appear on a creature already fairly evolved, are almost always extremely detrimental. This mutation was created as a means of providing a more subtle mutation that adds complexity to a creature's morphology with what is intended to be a reduced impact on fitness. The method proceeds as follows.
 		 * // Input:int i
-		 * //i is the index of the segment specificationto be mutated
-		 * // Let:ss[] be the vectorof segment specifications
+		 * //i is the index of the segment specification to be mutated
+		 * // Let:ss[] be the vector of segment specifications
 		 *
 		 * //stub-growth(i)
-		 * // A segment specification other than i will also be modifiedin
-		 * //this mutation, j is its index and is chosen uniformlyat
+		 * // A segment specification other than i will also be modified in
+		 * //this mutation, j is its index and is chosen uniformly at
 		 * // random
 		 * int j = a randomly chosen segment index other than i
 		 * // Since ss[j] we be a ´stub' its max repeats will be set to one.
-		 * // Since no segments should followthe repeats, the type to
-		 * // to followrepeats will be set to itself
+		 * // Since no segments should follow the repeats, the type to
+		 * // to follow repeats will be set to itself
 		 *
 		 * max repeats for ss[j] = 1
 		 * type to follow repeats for ss[j] = j
 		 *
-		 * // Disable all branches extendingfrom segments of type j
+		 * // Disable all branches extending from segments of type j
 		 * for bs = 1 to the number of branch specifications(5) do
 		 * 	clearthe enable flagof ss[j]'sbranch specification #bs
 		 * // Pick a branch index in ss[i] to pointto ss[j](uniform random)
@@ -249,9 +245,9 @@ public:
 		 *
 		 * The check for the 'stub' growing mutation is the final step in mutating a creature's segment specifications.
 		 */
-		virtual void growStub(int geneIndex);
+		virtual void growStub(int geneIndex,int branchiness);
 
-		virtual void mutateRandomGenes();
+		virtual void mutateRandomGenes(double percentage);
 
 		/**
 		 * @brief		The segment randomization mutation simply deletes a segment specification and replaces it with a randomly-generated one.
@@ -259,7 +255,7 @@ public:
 		 * The new segment specification is created by calling a segment specification constructor and passing it a bushiness parameter between 0.1 and 0.9, chosen uniformly at random. The bushiness parameter is used directly as the probability probability that any given branch specification in the segment specification will have its enable flag set to true instead of false. A high bushiness parameter is more likely to produce a segment with many branches.
 		 *				The random segment specification constructor is shown by the following pseudocode:
 		 *
-		 *	// Input: EvolutionSettings s, real b
+		 * // Input: EvolutionSettings s, real b
 		 * // s is an object containing important evolution parameters
 		 * // b is the bushiness parameter
 		 * // Let: biased_log(i,j) be a function which generates two
@@ -279,7 +275,7 @@ public:
 		 * 	z = biased_log(min_cuboid_dimension,max_cuboid_dimension)
 		 * 	// scale_variability is a fixed constant (0.5)
 		 *
-		 * 	scaling factor = 1.0 + rand(-l.0,+l.0) *  scale_varlability
+		 * 	scaling factor = 1.0 + rand(-l.0,+l.0) *  scale_variability
 		 * 	 joint anchor offset x = rand(-1.0,+l.0)
 		 * 	joint anchor offset y = rand(-1. 0,+1.0)
 		 * 	colour = colour chosen uniformly at random from available colours
@@ -295,7 +291,7 @@ public:
 		 * 		 branch bs's mirror and flip flags = true or false
 		 *
 		 * 		// The enable flag is set to true with a probability equal
-		 * 		// to b, the bumpiness parameter passed to the constructor
+		 * 		// to b, the bumpyness parameter passed to the constructor
 		 * 		// and is set to false the rest of the time
 		 * 		branch bs's enable flag = true or false
 		 *
@@ -303,13 +299,14 @@ public:
 		 * 	// specification's sine wave generator
 		 * 	start value = a random value between 0.0 and 2*pi
 		 * 	scale = a random value between -/+max_wave_scale (fixed at 10)
-		 * 	angle, torque, output, and state GP trees are generated as described below B.6.2.5.
 		 */
 		virtual void mutateRandomGene();
 
 		virtual void mutateGene(int geneIndex);
 
-		virtual void mutateRandomBranches();
+		virtual void mutateRandomBranches(double percentage);
+
+		virtual void mutateRandomBranchOfGene(int geneIndex);
 
 		virtual void mutateRandomBranch();
 
@@ -327,18 +324,22 @@ public:
 		 */
 
 		/**
-		 * Crossover randomly with other genome.
-		 * @param genome
+		 * Crossover randomly with father genome.
+		 * @param fatherGenome
 		 */
-		virtual void crossoverRandomly(Genome* genome);
+		virtual void crossoverRandomly(Genome* fatherGenome);
 
 		/**
-		 * Crossover with other genome starting after fatherSegmentIndex copying over starting from motherSegmentIndex.
-		 * @param genome
-		 * @param fatherSegmentIndex
-		 * @param motherSegmentIndex
-		 */
-		virtual void crossover(Genome* genome,int fatherSegmentIndex,int motherSegmentIndex);
+			 * Crossover with other genome starting after fatherSegmentIndex copying over starting from motherSegmentIndex.
+			 * @param fatherGenome
+			 * @param motherStartSegmentIndex
+			 * @param motherEndSegmentIndex
+			 * @param fatherStartSegmentIndex
+			 * @param fatherEndSegmentIndex
+			 */
+			virtual void crossover( Genome* fathergenome,
+					int motherSegmentStartIndex, int motherSegmentEndIndex,
+					int fatherSegmentStartIndex, int fatherSegmentEndIndex);
 
 		/**
 		 * Grafting copies a feature of the donator over to the receiver beginning

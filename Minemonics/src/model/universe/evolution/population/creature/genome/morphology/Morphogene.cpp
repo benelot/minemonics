@@ -3,6 +3,8 @@
 
 //# forward declarations
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
@@ -22,12 +24,11 @@
 #include <utils/Randomness.hpp>
 
 Morphogene::Morphogene() :
-		mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
-				LimbModel::UNKNOWN), mControllerGene(NULL), mFollowUpGene(
-				-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(0), mJointPitch(
-				0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(0), mRepetitionLimit(
-				0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(0), mOrientationY(
-				0), mOrientationZ(0) {
+		mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(LimbModel::UNKNOWN), mControllerGene(
+		NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
+				0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
+				0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
+				0), mOrientationY(0), mOrientationZ(0) {
 
 }
 
@@ -88,12 +89,12 @@ void Morphogene::initialize(double branchiness) {
 			2 * boost::math::constants::pi<double>());
 
 	// A random color RGB values between 0 and 1
-	mColorR = randomness.nextDouble(0.0f,1.0f);
-	mColorG = randomness.nextDouble(0.0f,1.0f);
-	mColorB = randomness.nextDouble(0.0f,1.0f);
+	mColorR = randomness.nextDouble(0.0f, 1.0f);
+	mColorG = randomness.nextDouble(0.0f, 1.0f);
+	mColorB = randomness.nextDouble(0.0f, 1.0f);
 
 	switch ((LimbModel::PrimitiveType) randomness.nextPosInt(1,
-			LimbModel::PRIMITIVE_QTY)) {
+			LimbModel::NUM_PRIMITIVES)) {
 	case LimbModel::BLOCK: {
 		//Randomly choose a segment primitive
 		mPrimitiveType = LimbModel::BLOCK;
@@ -124,8 +125,75 @@ void Morphogene::initialize(double branchiness) {
 	mControllerGene->initialize();
 }
 
+Morphogene* Morphogene::clone() {
+	Morphogene* morphoGene = new Morphogene();
+	morphoGene->setColorB(mColorB);
+	morphoGene->setColorG(mColorG);
+	morphoGene->setColorR(mColorR);
+
+	morphoGene->setControllerGene(mControllerGene->clone());
+	morphoGene->setFollowUpGene(mFollowUpGene);
+	morphoGene->setGeneType(mGeneType);
+	morphoGene->setJointAnchorX(mJointAnchorX);
+	morphoGene->setJointAnchorY(mJointAnchorY);
+	morphoGene->setJointAnchorZ(mJointAnchorZ);
+	morphoGene->setJointPitch(mJointPitch);
+	morphoGene->setJointRoll(mJointRoll);
+	morphoGene->setJointYaw(mJointYaw);
+	morphoGene->setOrientationW(mOrientationW);
+	morphoGene->setOrientationX(mOrientationX);
+	morphoGene->setOrientationY(mOrientationY);
+	morphoGene->setOrientationZ(mOrientationZ);
+	morphoGene->setPrimitiveType(mPrimitiveType);
+	morphoGene->setRepetitionLimit(mRepetitionLimit);
+	morphoGene->setSegmentShrinkFactor(mSegmentShrinkFactor);
+	morphoGene->setX(mX);
+	morphoGene->setY(mY);
+	morphoGene->setZ(mZ);
+
+	std::vector<MorphogeneBranch*>::iterator mgbit = mGeneBranches.begin();
+	for (; mgbit != mGeneBranches.end(); mgbit++) {
+		morphoGene->getGeneBranches().push_back((*mgbit)->clone());
+	}
+
+	return morphoGene;
+
+}
+
+void Morphogene::mutate() {
+	//clean up necessary
+	if (mControllerGene != NULL) {
+		delete mControllerGene;
+		mControllerGene = NULL;
+	}
+
+	while (!mGeneBranches.empty()) {
+		MorphogeneBranch* f = mGeneBranches.back();
+		mGeneBranches.pop_back();
+		delete f;
+	}
+
+	Randomness randomness;
+	//TODO: Add useful numbers
+	initialize(randomness.nextDouble(10, 30));
+}
+
+void Morphogene::grow(int branchiness) {
+	Randomness randomness;
+
+	int branchQty =
+			(branchiness != 0) ? randomness.nextPosInt(0, branchiness) : 0;
+
+	for (int i = 0; i < branchQty; i++) {
+		MorphogeneBranch* branch = new MorphogeneBranch();
+		branch->initialize();
+		mGeneBranches.push_back(branch);
+	}
+}
+
 void Morphogene::print() {
 //I am a gene.
+	std::cout << this;
 }
 
 bool Morphogene::equals(const Morphogene & morphoGene) const {

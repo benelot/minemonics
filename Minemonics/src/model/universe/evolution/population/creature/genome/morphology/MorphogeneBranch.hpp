@@ -37,6 +37,10 @@ public:
 
 	void initialize();
 
+	virtual void mutate();
+
+	virtual MorphogeneBranch* clone();
+
 	bool equals(const MorphogeneBranch& geneBranch) const;
 
 	/**

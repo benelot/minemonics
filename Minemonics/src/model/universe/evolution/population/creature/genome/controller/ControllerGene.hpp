@@ -1,10 +1,3 @@
-/*
- * ControllerGene.h
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_CONTROLLERGENE_HPP_
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_CONTROLLERGENE_HPP_
 
@@ -28,9 +21,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The controller gene is the base class for all genes encoding different controllers.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-09
  * @author		Benjamin Ellenberger
  */
 class ControllerGene {
@@ -39,6 +32,8 @@ public:
 	virtual ~ControllerGene();
 
 	virtual void initialize() = 0;
+
+	virtual ControllerGene* clone() = 0;
 
 	bool equals (const ControllerGene& controllerGene) const;
 
