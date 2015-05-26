@@ -38,6 +38,10 @@ UniverseModel::~UniverseModel() {
 void UniverseModel::initialize() {
 }
 
+void UniverseModel::addPlanetModel(PlanetModel* planetModel) {
+	mPlanetModels.push_back(planetModel);
+}
+
 void UniverseModel::proceedEvaluation() {
 	if (mPlanetModels.size() != 0) {
 		if (mCurrentEvaluationPlanetIndex < mPlanetModels.size()) {

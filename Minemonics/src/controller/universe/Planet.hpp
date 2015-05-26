@@ -37,6 +37,8 @@ public:
 
 	void initialize(Evolution* evolution, Environment* environment,PhysicsController* physicsController);
 
+	void update();
+
 	//Accessor methods
 	Environment*& getEnvironment() {
 		return mEnvironment;
@@ -52,6 +54,10 @@ public:
 
 	void setEvolution(Evolution*& evolution) {
 		mEvolution = evolution;
+	}
+
+	PlanetModel& getPlanetModel() {
+		return mPlanetModel;
 	}
 
 private:

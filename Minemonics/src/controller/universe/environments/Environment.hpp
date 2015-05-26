@@ -49,6 +49,8 @@ public:
 
 	btRigidBody*& getBody();
 
+	void update();
+
 protected:
 	SimulationManager* mSimulationMgr;
 	EnvironmentPhysics* mEnvironmentPhysics;

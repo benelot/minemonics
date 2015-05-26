@@ -32,6 +32,8 @@ public:
 
 	void initialize();
 
+	void addPlanetModel(PlanetModel* planetModel);
+
 	void proceedEvaluation();
 
 	//Accessor methods

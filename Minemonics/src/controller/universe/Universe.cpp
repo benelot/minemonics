@@ -40,8 +40,18 @@ void Universe::initialize() {
 
 void Universe::addPlanet(Planet* planet) {
 	mPlanets.push_back(planet);
+	mUniverseModel.addPlanetModel(&planet->getPlanetModel());
 }
 
 void Universe::proceedEvaluation() {
+	mUniverseModel.proceedEvaluation();
+}
 
+void Universe::update()
+{
+	std::vector<Planet*>::iterator pit = mPlanets.begin();
+	for(;pit != mPlanets.end();pit++)
+	{
+		(*pit)->update();
+	}
 }

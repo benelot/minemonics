@@ -60,6 +60,8 @@ public:
 	 */
 	void proceedEvaluation();
 
+	void update();
+
 
 	//Accessor methods
 

@@ -1,4 +1,6 @@
 //# corresponding header
+#include <controller/universe/Planet.hpp>
+
 //# forward declarations
 #ifndef NULL
 #define NULL 0
@@ -12,14 +14,15 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/Planet.hpp>
+#include <controller/universe/evolution/Evolution.hpp>
+#include <controller/universe/environments/Environment.hpp>
 
 //## model headers
 //## view headers
 //## utils headers
 
 Planet::Planet() :
-		mEnvironment(NULL), mEvolution(NULL),mPhysicsController(NULL) {
+		mEnvironment(NULL), mEvolution(NULL), mPhysicsController(NULL) {
 }
 
 Planet::~Planet() {
@@ -27,24 +30,32 @@ Planet::~Planet() {
 	mEvolution = NULL;
 }
 
-void Planet::initialize(Evolution* evolution, Environment* environment,PhysicsController::PhysicsControllerType type) {
+void Planet::initialize(Evolution* evolution, Environment* environment,
+		PhysicsController::PhysicsControllerType type) {
 	PhysicsController* physicsController;
 
 	switch (type) {
-		case PhysicsController::GroundController:
+	case PhysicsController::GroundController:
 
-			break;
-		case PhysicsController::DeepSeaController:
+		break;
+	case PhysicsController::DeepSeaController:
 
-			break;
-		default:
-			break;
+		break;
+	default:
+		break;
 	}
-	initialize(evolution,environment,physicsController);
+	initialize(evolution, environment, physicsController);
 }
 
-void Planet::initialize(Evolution* evolution, Environment* environment,PhysicsController* physicsController) {
+void Planet::initialize(Evolution* evolution, Environment* environment,
+		PhysicsController* physicsController) {
 	mEvolution = evolution;
 	mEnvironment = environment;
 	mPhysicsController = physicsController;
+}
+
+void Planet::update()
+{
+	mEvolution->update();
+	mEnvironment->update();
 }

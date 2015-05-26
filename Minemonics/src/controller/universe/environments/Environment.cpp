@@ -31,3 +31,8 @@ btRigidBody*& Environment::getBody() {
 	return ((EnvironmentBt*) mEnvironmentPhysics)->getBody();
 }
 
+void Environment::update()
+{
+
+}
+
