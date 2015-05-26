@@ -3,6 +3,7 @@
 //# system headers
 #include <cstdlib>
 #include <iterator>
+#include <math.h>
 
 //## controller headers
 //## model headers
@@ -104,7 +105,7 @@ void MixedGenome::addRandomGene() {
 	}
 }
 
-void MixedGenome::repairGenes(){
+void MixedGenome::repairGenes() {
 	integrateRandomGenes(1);
 }
 
@@ -202,7 +203,7 @@ void MixedGenome::splitRandomGenes(double percentage) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
 		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
-			splitGene(i);
+			splitGene(i, (SplitAxis) randomness.nextPosInt(1, 3));
 		}
 	}
 }
@@ -210,11 +211,61 @@ void MixedGenome::splitRandomGenes(double percentage) {
 void MixedGenome::splitRandomGene() {
 	Randomness randomness;
 
-	splitGene(randomness.nextPosInt(0, mGenes.size() - 1));
+	splitGene(randomness.nextPosInt(0, mGenes.size() - 1),
+			(SplitAxis) randomness.nextPosInt(1, 3));
 }
 
-void MixedGenome::splitGene(int geneIndex) {
-	//TODO: Implement method.
+void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
+	if (mGenes[geneIndex]->getGeneType() == Gene::MorphoGene) {
+		Morphogene* originalGene = ((Morphogene*) mGenes[geneIndex]);
+		Morphogene* gene = originalGene->clone();
+		mGenes.push_back(gene);
+
+		MorphogeneBranch* branch = new MorphogeneBranch();
+		branch->initialize();
+		branch->setActive(true);
+
+		//set the joint anchor to ZERO and then modify it depending on split axis.
+		branch->setJointAnchorX(0);
+		branch->setJointAnchorY(0);
+		branch->setJointAnchorZ(0);
+
+		// let the joint point straight outward from the original joint anchor
+		branch->setJointPitch(0);
+		branch->setJointYaw(0);
+		branch->setJointRoll(0);
+		branch->setBranchGeneType(mGenes.size() - 1);
+
+
+		double limbMinSize = MorphologyConfiguration::LIMB_MIN_SIZE;
+		switch (axis) {
+		default:
+		case X_AXIS:
+			originalGene->setX(
+					std::max(originalGene->getX() / 2.0f,
+							limbMinSize));
+			gene->setX(originalGene->getX());
+			branch->setJointAnchorX(1);
+			break;
+
+		case Y_AXIS:
+			originalGene->setY(
+					std::max(originalGene->getY() / 2.0f,limbMinSize));
+			gene->setY(originalGene->getY());
+			branch->setJointAnchorY(1);
+			break;
+
+		case Z_AXIS:
+			originalGene->setZ(
+					std::max(originalGene->getZ() / 2.0f,limbMinSize));
+			gene->setZ(originalGene->getZ());
+			branch->setJointAnchorZ(1);
+			break;
+		}
+		originalGene->getGeneBranches().clear();
+
+		originalGene->getGeneBranches().push_back(branch);
+	}
 }
 
 void MixedGenome::growRandomStubs(double percentage) {
@@ -272,7 +323,8 @@ void MixedGenome::mutateRandomBranch() {
 	int geneIndex;
 	Randomness randomness;
 
-	//TODO: This can freeze up in case of certain genomes
+	//TODO: This can freeze up in case of certain genomes without any morphogenes (these are corrupt anyway, but that would break the code)
+	//Better search for indices containing the right type and then choose from that array.
 	do {
 		geneIndex = randomness.nextPosInt(0, mGenes.size() - 1);
 	} while (mGenes[geneIndex]->getGeneType() != Gene::MorphoGene);
@@ -328,6 +380,72 @@ void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
 	}
 }
 
-void MixedGenome::graftFrom(Genome* donator, int maxLinkDepth) {
-	//TODO: Implement method.
+void MixedGenome::graftRandomlyFrom(Genome* donator) {
+	int attachmentIndex;
+	int geneIndex;
+	int maxLinkDepth;
+
+	Randomness randomness;
+
+	attachmentIndex = randomness.nextPosInt(0, mGenes.size() - 1);
+
+	//TODO: This can freeze up in case of certain genomes without any morphogenes (these are corrupt anyway, but that would break the code)
+	//Better search for indices containing the right type and then choose from that array.
+	do {
+		geneIndex = randomness.nextPosInt(0, donator->getGenes().size() - 1);
+	} while (donator->getGenes()[geneIndex]->getGeneType()
+			!= mGenes[attachmentIndex]->getGeneType());
+
+	//TODO: Add reasonable numbers
+	maxLinkDepth = randomness.nextNormalInt(10, 10);
+
+	graftFrom(donator, attachmentIndex, geneIndex, maxLinkDepth);
+}
+
+void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
+		int geneQty) {
+	//TODO: Make working for controller as well.
+	if (mGenes[attachmentIndex]->getGeneType() == Gene::MorphoGene) {
+
+		MorphogeneBranch* branch = new MorphogeneBranch();
+		branch->initialize();
+		branch->setActive(true);
+		((Morphogene*) mGenes[attachmentIndex])->getGeneBranches().push_back(
+				branch);
+
+		Morphogene* donorGene = ((Morphogene*) donor->getGenes()[geneIndex]);
+		Morphogene* donorGeneCopy = donorGene->clone();
+		mGenes.push_back(donorGeneCopy);
+		branch->setBranchGeneType(mGenes.size() - 1);
+		//int newGeneIndex = mGenes.size() - 1;
+
+		std::vector<Morphogene*> visitGenes;
+		visitGenes.push_back(donorGeneCopy);
+
+		Morphogene* currentGene;
+
+		int genesCopied = 0;
+
+		while (!visitGenes.empty()) {
+			currentGene = (*visitGenes.end());
+			visitGenes.pop_back();
+
+			std::vector<MorphogeneBranch*>::iterator gbit =
+					currentGene->getGeneBranches().begin();
+			for (; gbit != currentGene->getGeneBranches().end(); gbit++) {
+				Morphogene* nextGeneCopy = ((Morphogene*)donor->getGenes()[(*gbit)->getBranchGeneType()])->clone();
+				if (genesCopied < geneQty) {
+					visitGenes.push_back(nextGeneCopy);
+					genesCopied++;
+				}
+
+				mGenes.push_back(nextGeneCopy);
+				(*gbit)->setBranchGeneType(mGenes.size() - 1);
+			}
+		}
+
+	} else {
+		return;
+	}
+
 }

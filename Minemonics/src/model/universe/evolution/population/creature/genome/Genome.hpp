@@ -31,6 +31,10 @@ public:
 		UnknownGenome, MixedGenome, NUM_GENOMETYPES
 	};
 
+	enum SplitAxis {
+		X_AXIS, Y_AXIS, Z_AXIS
+	};
+
 	Genome(GenomeType type);
 	virtual ~Genome();
 
@@ -150,7 +154,7 @@ public:
 	 *
 	 *The effect of the segment splitting mutation method is to keep the creature morphology more or less the same, though this is by no means always the outcome, while splitting all segments of the chosen type into segments of half the original length. The split occurs half of the way along the segments' local z-axes, between the face upon which they have a joint anchor point joining them to their parent segments, and the opposite face
 	 */
-	virtual void splitGene(int geneIndex) = 0;
+	virtual void splitGene(int geneIndex, SplitAxis axis) = 0;
 
 	virtual void growRandomStubs(double percentage) = 0;
 
@@ -190,7 +194,7 @@ public:
 	 *
 	 * The check for the 'stub' growing mutation is the final step in mutating a creature's segment specifications.
 	 */
-	virtual void growStub(int geneIndex,int branchiness) = 0;
+	virtual void growStub(int geneIndex, int branchiness) = 0;
 
 	virtual void mutateRandomGenes(double percentage) = 0;
 
@@ -270,11 +274,10 @@ public:
 	 */
 
 	/**
-		 * Crossover randomly with father genome.
-		 * @param fatherGenome
-		 */
-		virtual void crossoverRandomly(Genome* fatherGenome) = 0;
-
+	 * Crossover randomly with father genome.
+	 * @param fatherGenome
+	 */
+	virtual void crossoverRandomly(Genome* fatherGenome) = 0;
 
 	/**
 	 * Crossover with other genome starting after fatherSegmentIndex copying over starting from motherSegmentIndex.
@@ -284,23 +287,30 @@ public:
 	 * @param fatherStartSegmentIndex
 	 * @param fatherEndSegmentIndex
 	 */
-	virtual void crossover(Genome* fathergenome,
-			int motherSegmentStartIndex, int motherSegmentEndIndex,
-			int fatherSegmentStartIndex, int fatherSegmentEndIndex) = 0;
+	virtual void crossover(Genome* fathergenome, int motherSegmentStartIndex,
+			int motherSegmentEndIndex, int fatherSegmentStartIndex,
+			int fatherSegmentEndIndex) = 0;
+
+	virtual void graftRandomlyFrom(Genome* donator) = 0;
 
 	/**
-	 * Grafting copies a feature of the donator over to the receiver beginning
+	 * Grafting copies a feature of the donor over to the receiver beginning
 	 * at the indicated gene by copying the gene and its directed subgraph over,
 	 * by following the links up to the maximum link depth and by copying all
 	 * the genes that are met on the way. Then the newly added feature is
 	 * connected randomly to the other genes to integrate it.
 	 *
-	 * @param donator
-	 *            donates the new feature
-	 * @param maxLinkDepth
-	 *            the maximum link depth to follow
+	 * @param donor
+	 *            Donates the new feature
+	 * @param attachmentIndex
+	 * 			 The gene at which the graft should be attached.
+	 * @param geneIndex
+	 * 			 The indicated gene where to start grafting
+	 * @param geneQty
+	 *            The number of genes to copy
 	 */
-	virtual void graftFrom(Genome* donator, int maxLinkDepth) = 0;
+	virtual void graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
+			int geneQty) = 0;
 
 	std::vector<Gene*>& getGenes() {
 		return mGenes;
