@@ -15,10 +15,14 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/EvolutionModel.hpp>
+
 //## view headers
 //## utils headers
 
-PlanetModel::PlanetModel():mEnvironmentModel(NULL),mEvolutionModel(NULL) {
+PlanetModel::PlanetModel() :
+		mEnvironmentModel(NULL), mEvolutionModel(NULL) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -31,7 +35,15 @@ void PlanetModel::initialize() {
 }
 
 bool PlanetModel::proceedEvaluation() {
-	//mEnvironmentModel->addToWorld();
+	if (!mEnvironmentModel->isInWorld()) {
+		mEnvironmentModel->addToWorld();
+	}
+
+	if(!mEvolutionModel->proceedEvaluation())
+	{
+		mEnvironmentModel->removeFromWorld();
+		return false;
+	}
 	return true;
 
 }

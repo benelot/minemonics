@@ -1,10 +1,3 @@
-/*
- * Environment.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef ENVIRONMENT_H_
 #define ENVIRONMENT_H_
 
@@ -13,6 +6,7 @@
 class SimulationManager;
 class EnvironmentGraphics;
 class EnvironmentPhysics;
+class EnvironmentModel;
 
 //# system headers
 //## controller headers
@@ -29,9 +23,9 @@ class EnvironmentPhysics;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The environment controller is the base class for all environments.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
 class Environment {
@@ -47,14 +41,16 @@ public:
 	void initialize(SimulationManager* simulationMgr,
 			EnvironmentType environmentType);
 
+	virtual EnvironmentModel* getEnvironmentModel() = 0;
+
 	btRigidBody*& getBody();
 
 	void update();
 
 protected:
 	SimulationManager* mSimulationMgr;
-	EnvironmentPhysics* mEnvironmentPhysics;
 	EnvironmentGraphics* mEnvironmentGraphics;
+	EnvironmentModel* mEnvironmentModel;
 
 };
 

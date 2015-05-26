@@ -73,6 +73,10 @@ public:
 		mEnvironment = environment;
 	}
 
+	EvolutionModel& getEvolutionModel() {
+		return mEvolutionModel;
+	}
+
 private:
 
 	/**

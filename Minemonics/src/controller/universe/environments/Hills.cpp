@@ -33,3 +33,7 @@ void Hills::initialize(SimulationManager* simulationMgr, Ogre::Light* l) {
 
 }
 
+EnvironmentModel* Hills::getEnvironmentModel() {
+	//TODO Implement Hills
+	return NULL;
+}

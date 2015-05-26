@@ -10,6 +10,8 @@
 
 //# corresponding header
 //# forward declarations
+class EnvironmentModel;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -38,6 +40,8 @@ public:
 	virtual ~Plane();
 
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l);
+
+	EnvironmentModel* getEnvironmentModel();
 };
 
 #endif /* CONTROLLER_UNIVERSE_ENVIRONMENTS_PLANE_HPP_ */

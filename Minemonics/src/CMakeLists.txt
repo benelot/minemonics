@@ -16,7 +16,8 @@ project(Minemonics)
 
 set(MODELHDRS
 	# model
-	## enviroment
+	## environment
+    ./model/universe/environments/EnvironmentModel.hpp
 	./model/universe/environments/EnvironmentPhysics.hpp
 	./model/universe/environments/bullet/EnvironmentBt.hpp
 	./model/universe/environments/bullet/HillsBt.hpp
@@ -71,6 +72,7 @@ set(MODELHDRS
 )
 set(MODELSRCS
     # model
+    ./model/universe/environments/EnvironmentModel.cpp
     ./model/universe/environments/EnvironmentPhysics.cpp
 	./model/universe/environments/bullet/EnvironmentBt.cpp
 	./model/universe/environments/bullet/HillsBt.cpp

@@ -814,6 +814,33 @@ model/universe/UniverseModel_test.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/UniverseModel_test.cpp.s
 .PHONY : model/universe/UniverseModel_test.cpp.s
 
+model/universe/environments/EnvironmentModel.o: model/universe/environments/EnvironmentModel.cpp.o
+.PHONY : model/universe/environments/EnvironmentModel.o
+
+# target to build an object file
+model/universe/environments/EnvironmentModel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/EnvironmentModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentModel.cpp.o
+.PHONY : model/universe/environments/EnvironmentModel.cpp.o
+
+model/universe/environments/EnvironmentModel.i: model/universe/environments/EnvironmentModel.cpp.i
+.PHONY : model/universe/environments/EnvironmentModel.i
+
+# target to preprocess a source file
+model/universe/environments/EnvironmentModel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/EnvironmentModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentModel.cpp.i
+.PHONY : model/universe/environments/EnvironmentModel.cpp.i
+
+model/universe/environments/EnvironmentModel.s: model/universe/environments/EnvironmentModel.cpp.s
+.PHONY : model/universe/environments/EnvironmentModel.s
+
+# target to generate assembly for a file
+model/universe/environments/EnvironmentModel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/EnvironmentModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentModel.cpp.s
+.PHONY : model/universe/environments/EnvironmentModel.cpp.s
+
 model/universe/environments/EnvironmentPhysics.o: model/universe/environments/EnvironmentPhysics.cpp.o
 .PHONY : model/universe/environments/EnvironmentPhysics.o
 
@@ -3307,6 +3334,9 @@ help:
 	@echo "... model/universe/UniverseModel_test.o"
 	@echo "... model/universe/UniverseModel_test.i"
 	@echo "... model/universe/UniverseModel_test.s"
+	@echo "... model/universe/environments/EnvironmentModel.o"
+	@echo "... model/universe/environments/EnvironmentModel.i"
+	@echo "... model/universe/environments/EnvironmentModel.s"
 	@echo "... model/universe/environments/EnvironmentPhysics.o"
 	@echo "... model/universe/environments/EnvironmentPhysics.i"
 	@echo "... model/universe/environments/EnvironmentPhysics.s"

@@ -36,6 +36,7 @@ void Evolution::addNewPopulation(Population* population) {
 }
 
 void Evolution::proceedEvaluation() {
+	mEvolutionModel.proceedEvaluation();
 }
 
 void Evolution::update() {

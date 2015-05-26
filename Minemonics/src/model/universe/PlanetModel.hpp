@@ -42,7 +42,7 @@ public:
 		return mEnvironmentModel;
 	}
 
-	void setEnvironmentModel(EnvironmentModel*& environmentModel) {
+	void setEnvironmentModel(EnvironmentModel* environmentModel) {
 		mEnvironmentModel = environmentModel;
 	}
 
@@ -50,7 +50,7 @@ public:
 		return mEvolutionModel;
 	}
 
-	void setEvolutionModel(EvolutionModel*& evolutionModel) {
+	void setEvolutionModel(EvolutionModel* evolutionModel) {
 		mEvolutionModel = evolutionModel;
 	}
 

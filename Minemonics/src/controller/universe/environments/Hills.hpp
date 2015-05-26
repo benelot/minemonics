@@ -27,6 +27,8 @@ public:
 	virtual ~Hills();
 
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l);
+
+	EnvironmentModel* getEnvironmentModel();
 };
 
 #endif /* CONTROLLER_UNIVERSE_ENVIRONMENTS_HILLS_HPP_ */

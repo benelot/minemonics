@@ -47,6 +47,8 @@ public:
 	 */
 	void addNewMember(CreatureModel* creatureModel);
 
+	bool proceedEvaluation();
+
 	/**
 	 * Tests if a population is equal to another population.
 	 * @param population The population to test for equality.
@@ -111,6 +113,11 @@ private:
 	 * The creatures living in this population. All creatures in one population can mate together.
 	 */
 	std::vector<CreatureModel*> mCreatureModels;
+
+	/**
+	 * The index of the creature that is currently evaluated.
+	 */
+	int mCurrentCreatureIndex;
 
 	/**
 	 * The number of creatures that the population will consist of in every generation.

@@ -39,6 +39,8 @@ public:
 
 	void update();
 
+	bool proceedEvaluation();
+
 	//Accessor methods
 	Environment*& getEnvironment() {
 		return mEnvironment;

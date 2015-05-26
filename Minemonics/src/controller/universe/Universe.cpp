@@ -47,11 +47,9 @@ void Universe::proceedEvaluation() {
 	mUniverseModel.proceedEvaluation();
 }
 
-void Universe::update()
-{
+void Universe::update() {
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for(;pit != mPlanets.end();pit++)
-	{
+	for (; pit != mPlanets.end(); pit++) {
 		(*pit)->update();
 	}
 }

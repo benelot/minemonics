@@ -66,3 +66,5 @@ bool CreatureModel::equals(const CreatureModel & creature) const {
 	return true;
 }
 
+void CreatureModel::evaluate() {
+}

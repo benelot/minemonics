@@ -52,10 +52,17 @@ void Planet::initialize(Evolution* evolution, Environment* environment,
 	mEvolution = evolution;
 	mEnvironment = environment;
 	mPhysicsController = physicsController;
+	mPlanetModel.setEvolutionModel(&evolution->getEvolutionModel());
+	mPlanetModel.setEnvironmentModel(environment->getEnvironmentModel());
 }
 
 void Planet::update()
 {
 	mEvolution->update();
 	mEnvironment->update();
+}
+
+bool Planet::proceedEvaluation() {
+	mPlanetModel.proceedEvaluation();
+	return true;
 }

@@ -32,6 +32,8 @@ class EnvironmentPhysics {
 public:
 	EnvironmentPhysics();
 	virtual ~EnvironmentPhysics();
+
+	virtual void initialize() = 0;
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_ENVIRONMENTPHYSICS_HPP_ */

@@ -47,7 +47,7 @@ public:
 
 	void addNewPopulation(PopulationModel* populationModel);
 
-	bool proceed();
+	bool proceedEvaluation();
 
 	bool evaluate();
 
@@ -87,12 +87,7 @@ private:
 	/**
 	 * The currently evaluated population.
 	 */
-	PopulationModel* mCurrentPopulation;
-
-	/**
-	 * Amount of populations in this evolution.
-	 */
-	int mPopulationQty;
+	int mCurrentPopulationIndex;
 
 	/**
 	 * The reaper of this evolution model.

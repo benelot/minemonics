@@ -15,8 +15,8 @@
 //## utils headers
 
 EvolutionModel::EvolutionModel() :
-		mState(VARIATION), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0), mPopulationQty(
-				0),mCurrentPopulation(NULL) {
+		mState(VARIATION), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0), mCurrentPopulationIndex(
+				0) {
 
 }
 
@@ -30,7 +30,24 @@ void EvolutionModel::initialize(double evaluationTime) {
 	//GENERATION
 }
 
-bool EvolutionModel::proceed() {
+bool EvolutionModel::proceedEvaluation() {
+
+	if (mPopulationModels.size() != 0) {
+		if (mCurrentPopulationIndex < mPopulationModels.size()) {
+			if (!mPopulationModels[mCurrentPopulationIndex]->proceedEvaluation()) {
+				mCurrentPopulationIndex =
+						(mCurrentPopulationIndex < mPopulationModels.size()) ?
+								mCurrentPopulationIndex + 1 : 0;
+				if(mCurrentPopulationIndex != 0)
+				{
+					return true;
+				}
+			}
+			else{
+				return true;
+			}
+		}
+	}
 
 	//PROCESSING
 	process();
@@ -39,7 +56,7 @@ bool EvolutionModel::proceed() {
 	selectAndReap();
 	variate();
 
-	return true;
+	return false;
 }
 
 bool EvolutionModel::evaluate() {
@@ -63,17 +80,16 @@ bool EvolutionModel::selectAndReap() {
 	mState = REAP_AND_SOW;
 
 	//call the reaper to reap
-	mReaper.reap(mCurrentPopulation);
+	mReaper.reap(mPopulationModels[mCurrentPopulationIndex]);
 
 	//call the reaper to sow
-	mReaper.sow(mCurrentPopulation);
+	mReaper.sow(mPopulationModels[mCurrentPopulationIndex]);
 
 	return true;
 }
 
 void EvolutionModel::addNewPopulation(PopulationModel* populationModel) {
 	mPopulationModels.push_back(populationModel);
-	mPopulationQty++;
 }
 
 bool EvolutionModel::variate() {

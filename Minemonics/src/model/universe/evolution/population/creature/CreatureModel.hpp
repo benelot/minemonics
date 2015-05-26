@@ -65,6 +65,8 @@ public:
 	 */
 	void initialize(Ogre::Vector3 position, double branchiness);
 
+	void evaluate();
+
 	/**
 	 * Provides a creature size to scale certain values in compensation for the overall size
 	 * of a creature's body. We do this by summing all creature volumes of all cuboids and
