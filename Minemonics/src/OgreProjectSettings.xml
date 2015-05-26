@@ -2,7 +2,6 @@
 <cdtprojectproperties>
 <section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
 <language name="C++ Source File">
-<includepath>/usr/include/OIS</includepath>
 <includepath>/usr/include/Cg</includepath>
 <includepath>/usr/include/OGRE</includepath>
 <includepath workspace_path="true">/ogre1.9/Samples/Common/include</includepath>
