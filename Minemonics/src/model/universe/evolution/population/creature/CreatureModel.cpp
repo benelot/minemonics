@@ -67,4 +67,6 @@ bool CreatureModel::equals(const CreatureModel & creature) const {
 }
 
 void CreatureModel::evaluate() {
+	//TODO: Add creature to world
+	//TODO: Add it somewhere so that it updates the creature
 }

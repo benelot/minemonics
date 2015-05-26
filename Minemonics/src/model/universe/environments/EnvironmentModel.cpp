@@ -1,13 +1,24 @@
-/*
- * EnvironmentModel.cpp
- *
- *  Created on: May 6, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 
-EnvironmentModel::EnvironmentModel():mEnvironmentPhysics(0) {
+//# forward declarations
+#ifndef NULL
+#define NULL 0
+#endif
+
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
+EnvironmentModel::EnvironmentModel():mEnvironmentPhysics(NULL) {
 	// TODO Auto-generated constructor stub
 
 }

@@ -38,5 +38,5 @@ void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l) {
 
 EnvironmentModel* Plane::getEnvironmentModel() {
 	//TODO: Implement environmentmodel
-	return NULL;
+	return mEnvironmentModel;
 }

@@ -1,10 +1,3 @@
-/*
- * UniverseModel.cpp
- *
- *  Created on: May 6, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
 #include <model/universe/UniverseModel.hpp>
 
