@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#TODO: This script still needs to be written in a more general way. Check with Luca how to do this.
+
+# Install NVIDIA CUDA by hand to use caffe with CUDA. In case you want to use cuda and you change graphics drivers to NVIDIA proprietary drivers you need to install the following
+#sudo apt-get install nvidia-cg-toolkit
+
 #OGRE3D environment 1.9
 #built after the tutorials:
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Building+Ogre
