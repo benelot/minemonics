@@ -20,10 +20,8 @@
 //## base headers
 #include <view/visualization/CEGUI/CEGUIBuilder.hpp>
 #include <view/visualization/CEGUI/CEGUIBuilder.hpp>
-#include <view/visualization/CEGUI/ParamsPanel.hpp>
-
-//## configuration headers
 #include <configuration/GUIConfiguration.hpp>
+#include <view/visualization/panels/ParamsPanel.hpp>
 
 //## controller headers
 //## model headers

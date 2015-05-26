@@ -229,11 +229,12 @@ set(VIEWHDRS
 	
     ## CEGUI
 	./view/visualization/CEGUI/GUISheetHandler.hpp
-	./view/visualization/CEGUI/ParamsPanel.hpp
 	./view/visualization/CEGUI/CEGUIBuilder.hpp
 	
-	## MathGL
-    ./view/visualization/MathGL/MathGLWindow.hpp
+	## panels
+    ./view/visualization/panels/InfoPanel.hpp
+    ./view/visualization/panels/ParamsPanel.hpp
+    ./view/visualization/panels/MathGLPanel.hpp
     
     ## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
@@ -298,11 +299,12 @@ set(VIEWSRCS
 	
 	## CEGUI
 	./view/visualization/CEGUI/GUISheetHandler.cpp
-	./view/visualization/CEGUI/ParamsPanel.cpp
 	./view/visualization/CEGUI/CEGUIBuilder.cpp
 	
 	## MathGL
-	./view/visualization/MathGL/MathGLWindow.cpp
+	./view/visualization/panels/InfoPanel.cpp
+	./view/visualization/panels/ParamsPanel.cpp
+    ./view/visualization/panels/MathGLPanel.cpp
 	
 	## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp

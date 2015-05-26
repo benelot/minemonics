@@ -50,9 +50,9 @@ class ParamsPanel;
 #include <model/universe/evolution/juries/Ones.hpp>
 
 //## view headers
-#include <view/visualization/MathGL/MathGLWindow.hpp>
+#include <view/visualization/panels/MathGLPanel.hpp>
 #include <view/visualization/CEGUI/GUISheetHandler.hpp>
-#include <view/visualization/CEGUI/ParamsPanel.hpp>
+#include <view/visualization/panels/ParamsPanel.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 #include <view/visualization/overlay/InfoOverlay.hpp>
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
@@ -134,7 +134,7 @@ private:
 	CEGUI::Window* mDragContainer;
 
 	// Visualization components
-	std::vector<MathGLWindow*> mGraphWindows;
+	std::vector<MathGLPanel*> mGraphWindows;
 	InfoOverlay mInfoOverlay;
 
 	Ogre3DFFMPEGVideoWriter mVideoWriter;
@@ -144,7 +144,6 @@ private:
 	static BoostLogger mBoostLogger;
 
 	OgreBtDebugDrawer* mDebugDrawer;
-	bool mDrawBulletDebug;
 
 	static class _Init {
 	public:
@@ -224,16 +223,8 @@ public:
 		return mRoot;
 	}
 
-	std::vector<MathGLWindow*>& getGraphWindows() {
+	std::vector<MathGLPanel*>& getGraphWindows() {
 		return mGraphWindows;
-	}
-
-	bool isDrawBulletDebug() const {
-		return mDrawBulletDebug;
-	}
-
-	void setDrawBulletDebug(bool drawBulletDebug) {
-		mDrawBulletDebug = drawBulletDebug;
 	}
 
 	PhysicsController& getPhysicsController() {

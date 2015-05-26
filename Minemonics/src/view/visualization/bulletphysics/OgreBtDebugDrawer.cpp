@@ -40,7 +40,7 @@
 OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm,
 		bool drawTrajectory) :
 		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(drawTrajectory), mClear(
-				0), mDebugMode(0), mDrawable(false) {
+				0), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true) {
 	mDrawTrajectory = drawTrajectory;
 	mContactPoints = &mContactPoints1;
 	mLines = new Ogre::ManualObject("BulletPhysicsLines1");
@@ -92,7 +92,7 @@ void OgreBtDebugDrawer::drawLine(const btVector3 &from, const btVector3 &to,
 
 void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 		const Ogre::Vector3& to, Ogre::ColourValue color) {
-	if (mDebugMode > 0) {
+	if (mDebugMode > 0 && mDebugDrawingEnabled) {
 		if (mDrawable) {
 			color.saturate();
 			mLines->position(from);
@@ -123,7 +123,7 @@ void OgreBtDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
 void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 		const Ogre::Vector3& v1, const Ogre::Vector3& v2,
 		Ogre::ColourValue color, Ogre::Real alpha) {
-	if (mDebugMode > 0) {
+	if (mDebugMode > 0 && mDebugDrawingEnabled) {
 		if (mDrawable) {
 			mTriangles->position(v0);
 			mTriangles->colour(color);
@@ -157,7 +157,8 @@ void OgreBtDebugDrawer::drawContactPoint(const btVector3 &PointOnB,
 void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
 		const Ogre::Vector3& normalOnB, Ogre::Real distance, int lifeTime,
 		const Ogre::ColourValue& color) {
-	if (mDebugMode & btIDebugDraw::DBG_DrawContactPoints) {
+	if ((mDebugMode & btIDebugDraw::DBG_DrawContactPoints)
+			&& mDebugDrawingEnabled) {
 		ContactPoint p;
 		p.from = PointOnB;
 		p.to = p.from + normalOnB * distance;
@@ -169,36 +170,39 @@ void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
 }
 
 void OgreBtDebugDrawer::draw() {
-	for (std::vector<Line>::iterator i = mExtLines.begin(); i < mExtLines.end();
-			i++) {
-		Line &l = *i;
-		if (l.drawn == true && !mDrawTrajectory) {
-			//mLines.erase(i--);
-		} else {
-			mLines->position(l.from);
-			mLines->colour(l.color);
-			mLines->position(l.to);
-			mLines->colour(l.color);
-			l.drawn = true;
+	if (mDebugDrawingEnabled) {
+		for (std::vector<Line>::iterator i = mExtLines.begin();
+				i < mExtLines.end(); i++) {
+			Line &l = *i;
+			if (l.drawn == true && !mDrawTrajectory) {
+				//mLines.erase(i--);
+			} else {
+				mLines->position(l.from);
+				mLines->colour(l.color);
+				mLines->position(l.to);
+				mLines->colour(l.color);
+				l.drawn = true;
+			}
 		}
-	}
-	mExtLines.clear();
 
-	for (std::vector<Triangle>::iterator i = mExtTriangles.begin();
-			i < mExtTriangles.end(); i++) {
-		Triangle &t = *i;
-		if (t.drawn == true && !mDrawTrajectory) {
-			//mTriangles.erase(i--);
-		} else {
-			mLines->position(t.v0);
-			mLines->colour(t.color);
-			mLines->position(t.v1);
-			mLines->colour(t.color);
-			mLines->position(t.v2);
-			mLines->colour(t.color);
-			t.drawn = true;
+		for (std::vector<Triangle>::iterator i = mExtTriangles.begin();
+				i < mExtTriangles.end(); i++) {
+			Triangle &t = *i;
+			if (t.drawn == true && !mDrawTrajectory) {
+				//mTriangles.erase(i--);
+			} else {
+				mLines->position(t.v0);
+				mLines->colour(t.color);
+				mLines->position(t.v1);
+				mLines->colour(t.color);
+				mLines->position(t.v2);
+				mLines->colour(t.color);
+				t.drawn = true;
+			}
 		}
 	}
+
+	mExtLines.clear();
 	mExtTriangles.clear();
 }
 

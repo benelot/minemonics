@@ -34,7 +34,7 @@ public:
 
 	void initialize();
 
-	void proceedEvaluation();
+	bool proceedEvaluation();
 
 	//Accesssor methods
 

@@ -91,7 +91,7 @@ SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
 				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
 		NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDrawBulletDebug(true), mDebugDrawer(
+		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDebugDrawer(
 		NULL), mSdlWindow(
 		NULL) {
 
@@ -108,8 +108,6 @@ SimulationManager::~SimulationManager(void) {
 
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
-
-	/// INPUT HANDLER
 
 	// this next bit is for the sake of the input handler
 	Ogre::LogManager::getSingletonPtr()->logMessage(
@@ -132,6 +130,8 @@ void SimulationManager::createFrameListener(void) {
 
 	mRoot->addFrameListener(this);
 
+	//################################################################
+	//TODO: Camera must be handled within camera handler #############
 	// Create the scene node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
@@ -141,6 +141,7 @@ void SimulationManager::createFrameListener(void) {
 
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
+	//################################################################
 
 	// initialize random number generator
 	boost::posix_time::time_duration duration(mNow.time_of_day());
@@ -239,12 +240,13 @@ void SimulationManager::createScene(void) {
 	setDetailsPanel(ceguiBuilder.createDetailsPanel());
 	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
 
-	mGraphWindows.push_back(
-			new MathGLWindow(this, 400, 400,
-					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
-					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
+// TODO: Add graphwindows again when used
+//	mGraphWindows.push_back(
+//			new MathGLPanel(this, 400, 400,
+//					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
+//					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
 
-	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
+	std::vector<MathGLPanel*>::iterator it = mGraphWindows.begin();
 	for (; it != mGraphWindows.end(); it++) {
 		mLayout->addChild((*it)->getMathGlWindow());
 	}
@@ -255,7 +257,7 @@ void SimulationManager::createScene(void) {
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 	// ###################
-	// We create a test scene for testing SDL and bullet
+	// We create the evaluation scene defined by the planet to be evaluated
 	// ###################
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
 	mCamera->setNearClipDistance(0.1);
@@ -266,6 +268,7 @@ void SimulationManager::createScene(void) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 
+	//TODO: Check if lighting is necessary except ambient light
 	// set up lighting
 	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
 	lightdir.normalise();
@@ -285,6 +288,7 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
+
 	// set up environment
 	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
 	case Environment::HILLS: {
@@ -302,7 +306,7 @@ void SimulationManager::createScene(void) {
 	//either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
 
-//	// Create skyplane
+//  Create skyplane
 //	Ogre::Plane plane;
 //	plane.d = 100;
 //	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
@@ -344,9 +348,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	updatePhysics();
 
 	//draw the debug world if it is enabled
-	if (mDrawBulletDebug) {
-		mPhysicsController.getDynamicsWorld()->debugDrawWorld();
-	}
+	mPhysicsController.getDynamicsWorld()->debugDrawWorld();
 
 	// update the information overlay
 	mInfoOverlay.update();
@@ -469,7 +471,7 @@ void SimulationManager::updateEvolution() {
 
 void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
-	std::vector<MathGLWindow*>::iterator it = mGraphWindows.begin();
+	std::vector<MathGLPanel*>::iterator it = mGraphWindows.begin();
 	for (; it != mGraphWindows.end(); it++) {
 		(*it)->update(timeSinceLastFrame);
 	}

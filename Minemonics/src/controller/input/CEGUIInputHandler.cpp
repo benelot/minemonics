@@ -32,11 +32,8 @@
 //## controller headers
 #include <controller/input/InputUtils.hpp>
 #include <controller/input/CEGUIInputHandler.hpp>
-#include <view/visualization/CEGUI/ParamsPanel.hpp>
-
-//## model headers
-//## view headers
-#include <view/visualization/MathGL/MathGLWindow.hpp>
+#include <view/visualization/panels/MathGLPanel.hpp>
+#include <view/visualization/panels/ParamsPanel.hpp>
 
 //## utils headers
 
@@ -833,7 +830,7 @@ bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 			&& (window->getName() == "MathGLWindow"
 					|| window->getName() == "MathGLRTTWindow")
 			&& button == ApplicationMouseCode::RightButton) {
-		std::vector<MathGLWindow*>::iterator it =
+		std::vector<MathGLPanel*>::iterator it =
 				mSimulationMgr->getGraphWindows().begin();
 		for (; it != mSimulationMgr->getGraphWindows().end(); it++) {
 			if ((*it)->getMathGlWindow() == window

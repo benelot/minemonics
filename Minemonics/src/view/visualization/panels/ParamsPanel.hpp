@@ -1,0 +1,65 @@
+//# corresponding header
+#include <view/visualization/panels/InfoPanel.hpp>
+
+//# forward declarations
+#pragma once
+namespace CEGUI {
+class FrameWindow;
+class Window;
+} /* namespace CEGUI */
+
+//# system headers
+#include <string>
+#include <vector>
+
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
+/**
+ * @brief		A panel to display name value pairs.
+ * @details		Details
+ * @date		2015-04-27
+ * @author		Benjamin Ellenberger
+ */
+class ParamsPanel: public InfoPanel {
+public:
+	typedef std::vector<std::string> VectorString;
+	typedef std::pair<std::string, std::string> PairString;
+	typedef std::vector<PairString> VectorStringPairs;
+
+protected:
+	CEGUI::Window* mRootGui;
+	CEGUI::FrameWindow* mWidgetPanel;
+	CEGUI::Window* mTextBoxLabel;
+	CEGUI::Window* mTextBoxValues;
+	VectorString mParams;
+
+	ParamsPanel(int left, int top, std::string name, int width,
+			VectorStringPairs items);
+	void _destroy();
+public:
+	~ParamsPanel(void);
+
+	void setParamValue(int index, std::string value, bool autoUpdate = true);
+	std::string getParamValue(int index);
+	void update();
+	size_t size();
+	int getWidth();
+	int getHeight();
+	void hide();
+	void show();
+	bool isVisible();
+
+	static ParamsPanel* createParamsPanel(int left, int top, std::string name,
+			int width, VectorStringPairs items);
+	static void destroyParamsPanel(ParamsPanel* panel);
+	CEGUI::FrameWindow*& getWidgetPanel();
+};

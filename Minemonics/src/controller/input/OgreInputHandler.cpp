@@ -166,9 +166,9 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Period;
 		break;
 	case ApplicationKeycode::APPK_SLASH:
-		mSimulationMgr->setDrawBulletDebug(
-				!mSimulationMgr->isDrawBulletDebug());
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->isDrawBulletDebug())?"true":"false";
+		mSimulationMgr->getDebugDrawer()->setDebugDrawingEnabled(
+				!mSimulationMgr->getDebugDrawer()->isDebugDrawingEnabled());
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->getDebugDrawer()->isDebugDrawingEnabled())?"true":"false";
 		break;
 		case ApplicationKeycode::APPK_BACKSLASH:
 		mSimulationMgr->getDebugDrawer()->setDrawTrajectory(!mSimulationMgr->getDebugDrawer()->isDrawTrajectory());

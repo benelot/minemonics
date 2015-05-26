@@ -2494,54 +2494,6 @@ view/visualization/CEGUI/GUISheetHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/GUISheetHandler.cpp.s
 .PHONY : view/visualization/CEGUI/GUISheetHandler.cpp.s
 
-view/visualization/CEGUI/ParamsPanel.o: view/visualization/CEGUI/ParamsPanel.cpp.o
-.PHONY : view/visualization/CEGUI/ParamsPanel.o
-
-# target to build an object file
-view/visualization/CEGUI/ParamsPanel.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/ParamsPanel.cpp.o
-.PHONY : view/visualization/CEGUI/ParamsPanel.cpp.o
-
-view/visualization/CEGUI/ParamsPanel.i: view/visualization/CEGUI/ParamsPanel.cpp.i
-.PHONY : view/visualization/CEGUI/ParamsPanel.i
-
-# target to preprocess a source file
-view/visualization/CEGUI/ParamsPanel.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/ParamsPanel.cpp.i
-.PHONY : view/visualization/CEGUI/ParamsPanel.cpp.i
-
-view/visualization/CEGUI/ParamsPanel.s: view/visualization/CEGUI/ParamsPanel.cpp.s
-.PHONY : view/visualization/CEGUI/ParamsPanel.s
-
-# target to generate assembly for a file
-view/visualization/CEGUI/ParamsPanel.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/CEGUI/ParamsPanel.cpp.s
-.PHONY : view/visualization/CEGUI/ParamsPanel.cpp.s
-
-view/visualization/MathGL/MathGLWindow.o: view/visualization/MathGL/MathGLWindow.cpp.o
-.PHONY : view/visualization/MathGL/MathGLWindow.o
-
-# target to build an object file
-view/visualization/MathGL/MathGLWindow.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/MathGL/MathGLWindow.cpp.o
-.PHONY : view/visualization/MathGL/MathGLWindow.cpp.o
-
-view/visualization/MathGL/MathGLWindow.i: view/visualization/MathGL/MathGLWindow.cpp.i
-.PHONY : view/visualization/MathGL/MathGLWindow.i
-
-# target to preprocess a source file
-view/visualization/MathGL/MathGLWindow.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/MathGL/MathGLWindow.cpp.i
-.PHONY : view/visualization/MathGL/MathGLWindow.cpp.i
-
-view/visualization/MathGL/MathGLWindow.s: view/visualization/MathGL/MathGLWindow.cpp.s
-.PHONY : view/visualization/MathGL/MathGLWindow.s
-
-# target to generate assembly for a file
-view/visualization/MathGL/MathGLWindow.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/MathGL/MathGLWindow.cpp.s
-.PHONY : view/visualization/MathGL/MathGLWindow.cpp.s
-
 view/visualization/bulletphysics/OgreBtDebugDrawer.o: view/visualization/bulletphysics/OgreBtDebugDrawer.cpp.o
 .PHONY : view/visualization/bulletphysics/OgreBtDebugDrawer.o
 
@@ -2613,6 +2565,78 @@ view/visualization/overlay/InfoOverlayData.s: view/visualization/overlay/InfoOve
 view/visualization/overlay/InfoOverlayData.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/overlay/InfoOverlayData.cpp.s
 .PHONY : view/visualization/overlay/InfoOverlayData.cpp.s
+
+view/visualization/panels/InfoPanel.o: view/visualization/panels/InfoPanel.cpp.o
+.PHONY : view/visualization/panels/InfoPanel.o
+
+# target to build an object file
+view/visualization/panels/InfoPanel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/InfoPanel.cpp.o
+.PHONY : view/visualization/panels/InfoPanel.cpp.o
+
+view/visualization/panels/InfoPanel.i: view/visualization/panels/InfoPanel.cpp.i
+.PHONY : view/visualization/panels/InfoPanel.i
+
+# target to preprocess a source file
+view/visualization/panels/InfoPanel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/InfoPanel.cpp.i
+.PHONY : view/visualization/panels/InfoPanel.cpp.i
+
+view/visualization/panels/InfoPanel.s: view/visualization/panels/InfoPanel.cpp.s
+.PHONY : view/visualization/panels/InfoPanel.s
+
+# target to generate assembly for a file
+view/visualization/panels/InfoPanel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/InfoPanel.cpp.s
+.PHONY : view/visualization/panels/InfoPanel.cpp.s
+
+view/visualization/panels/MathGLPanel.o: view/visualization/panels/MathGLPanel.cpp.o
+.PHONY : view/visualization/panels/MathGLPanel.o
+
+# target to build an object file
+view/visualization/panels/MathGLPanel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/MathGLPanel.cpp.o
+.PHONY : view/visualization/panels/MathGLPanel.cpp.o
+
+view/visualization/panels/MathGLPanel.i: view/visualization/panels/MathGLPanel.cpp.i
+.PHONY : view/visualization/panels/MathGLPanel.i
+
+# target to preprocess a source file
+view/visualization/panels/MathGLPanel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/MathGLPanel.cpp.i
+.PHONY : view/visualization/panels/MathGLPanel.cpp.i
+
+view/visualization/panels/MathGLPanel.s: view/visualization/panels/MathGLPanel.cpp.s
+.PHONY : view/visualization/panels/MathGLPanel.s
+
+# target to generate assembly for a file
+view/visualization/panels/MathGLPanel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/MathGLPanel.cpp.s
+.PHONY : view/visualization/panels/MathGLPanel.cpp.s
+
+view/visualization/panels/ParamsPanel.o: view/visualization/panels/ParamsPanel.cpp.o
+.PHONY : view/visualization/panels/ParamsPanel.o
+
+# target to build an object file
+view/visualization/panels/ParamsPanel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/ParamsPanel.cpp.o
+.PHONY : view/visualization/panels/ParamsPanel.cpp.o
+
+view/visualization/panels/ParamsPanel.i: view/visualization/panels/ParamsPanel.cpp.i
+.PHONY : view/visualization/panels/ParamsPanel.i
+
+# target to preprocess a source file
+view/visualization/panels/ParamsPanel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/ParamsPanel.cpp.i
+.PHONY : view/visualization/panels/ParamsPanel.cpp.i
+
+view/visualization/panels/ParamsPanel.s: view/visualization/panels/ParamsPanel.cpp.s
+.PHONY : view/visualization/panels/ParamsPanel.s
+
+# target to generate assembly for a file
+view/visualization/panels/ParamsPanel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/visualization/panels/ParamsPanel.cpp.s
+.PHONY : view/visualization/panels/ParamsPanel.cpp.s
 
 view/visualization/procedural/ProceduralBoxGenerator.o: view/visualization/procedural/ProceduralBoxGenerator.cpp.o
 .PHONY : view/visualization/procedural/ProceduralBoxGenerator.o
@@ -3478,12 +3502,6 @@ help:
 	@echo "... view/visualization/CEGUI/GUISheetHandler.o"
 	@echo "... view/visualization/CEGUI/GUISheetHandler.i"
 	@echo "... view/visualization/CEGUI/GUISheetHandler.s"
-	@echo "... view/visualization/CEGUI/ParamsPanel.o"
-	@echo "... view/visualization/CEGUI/ParamsPanel.i"
-	@echo "... view/visualization/CEGUI/ParamsPanel.s"
-	@echo "... view/visualization/MathGL/MathGLWindow.o"
-	@echo "... view/visualization/MathGL/MathGLWindow.i"
-	@echo "... view/visualization/MathGL/MathGLWindow.s"
 	@echo "... view/visualization/bulletphysics/OgreBtDebugDrawer.o"
 	@echo "... view/visualization/bulletphysics/OgreBtDebugDrawer.i"
 	@echo "... view/visualization/bulletphysics/OgreBtDebugDrawer.s"
@@ -3493,6 +3511,15 @@ help:
 	@echo "... view/visualization/overlay/InfoOverlayData.o"
 	@echo "... view/visualization/overlay/InfoOverlayData.i"
 	@echo "... view/visualization/overlay/InfoOverlayData.s"
+	@echo "... view/visualization/panels/InfoPanel.o"
+	@echo "... view/visualization/panels/InfoPanel.i"
+	@echo "... view/visualization/panels/InfoPanel.s"
+	@echo "... view/visualization/panels/MathGLPanel.o"
+	@echo "... view/visualization/panels/MathGLPanel.i"
+	@echo "... view/visualization/panels/MathGLPanel.s"
+	@echo "... view/visualization/panels/ParamsPanel.o"
+	@echo "... view/visualization/panels/ParamsPanel.i"
+	@echo "... view/visualization/panels/ParamsPanel.s"
 	@echo "... view/visualization/procedural/ProceduralBoxGenerator.o"
 	@echo "... view/visualization/procedural/ProceduralBoxGenerator.i"
 	@echo "... view/visualization/procedural/ProceduralBoxGenerator.s"

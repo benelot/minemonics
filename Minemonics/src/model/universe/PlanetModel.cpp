@@ -30,6 +30,8 @@ PlanetModel::~PlanetModel() {
 void PlanetModel::initialize() {
 }
 
-void PlanetModel::proceedEvaluation() {
+bool PlanetModel::proceedEvaluation() {
+	//mEnvironmentModel->addToWorld();
+	return true;
 
 }

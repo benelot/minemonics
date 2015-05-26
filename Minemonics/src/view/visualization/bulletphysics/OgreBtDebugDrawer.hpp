@@ -95,6 +95,14 @@ public:
 	void setDrawTrajectory(bool drawTrajectory) {
 		mDrawTrajectory = drawTrajectory;
 	}
+
+	bool isDebugDrawingEnabled() const {
+		return mDebugDrawingEnabled;
+	}
+
+	void setDebugDrawingEnabled(bool debugDrawingEnabled) {
+		mDebugDrawingEnabled = debugDrawingEnabled;
+	}
 protected:
 	bool frameStarted(const Ogre::FrameEvent& evt);
 	bool frameEnded(const Ogre::FrameEvent& evt);
@@ -139,6 +147,8 @@ private:
 	bool mDrawTrajectory;
 	int mClear;
 	bool mDrawable;
+
+	bool mDebugDrawingEnabled;
 
 	const char* getMatName() {
 		return "OgreBulletCollisionsDebugDefault";
