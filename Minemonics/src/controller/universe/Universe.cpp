@@ -42,6 +42,6 @@ void Universe::addPlanet(Planet* planet) {
 	mPlanets.push_back(planet);
 }
 
-void Universe::proceed() {
+void Universe::proceedEvaluation() {
 
 }

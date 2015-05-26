@@ -37,7 +37,7 @@ public:
 
 	void addPlanet(Planet* planet);
 
-	void proceed();
+	void proceedEvaluation();
 
 	//Accessor methods
 

@@ -1,15 +1,10 @@
-//## model headers
-//## view headers
-//## utils headers
+//# corresponding headers
+#include <controller/input/OgreInputHandler.hpp>
 
-//# corresponding header
-#include <string>
-
+//# forward declarations
+//# system headers
 //## controller headers
 //## model headers
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/date_time/posix_time/ptime.hpp>
-#include <boost/date_time/posix_time/time_formatters.hpp>
 #include <boost/log/core/record.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 #include <boost/log/sources/record_ostream.hpp>
@@ -17,20 +12,30 @@
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/formatting_ostream.hpp>
 #include <boost/parameter/keyword.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
+#include <boost/date_time/posix_time/time_formatters.hpp>
+#include <OgreLogManager.h>
+#include <boost/lexical_cast.hpp>
 
 //## view headers
-#include <boost/lexical_cast.hpp>
-#include <configuration/CameraConfiguration.hpp>
-#include <controller/camera/CameraHandler.hpp>
-#include <controller/input/OgreInputHandler.hpp>
-#include <controller/physics/PhysicsController.hpp>
-#include <controller/StateHandler.hpp>
-#include <OgreLogManager.h>
 #include <OgreRenderWindow.h>
-#include <SimulationManager.hpp>
 
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
+//## configuration headers
+#include <configuration/CameraConfiguration.hpp>
+
+//## controller headers
+#include <controller/camera/CameraHandler.hpp>
+#include <controller/physics/PhysicsController.hpp>
+#include <controller/StateHandler.hpp>
+#include <controller/universe/Universe.hpp>
+
+//## model headers
+//## view headers
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
@@ -213,7 +218,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Return;
 		break;
 		case ApplicationKeycode::APPK_SPACE:
-		// return CEGUI::Key::Space;
+		 mSimulationMgr->getUniverse().proceedEvaluation();
 		break;
 		case ApplicationKeycode::APPK_BACKSPACE:
 		// return CEGUI::Key::Backspace;

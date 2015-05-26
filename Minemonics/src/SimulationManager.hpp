@@ -64,15 +64,6 @@ class ParamsPanel;
  * @brief		The Simulation manager holds the whole application together.
  * @details		The Simulation manager holds the whole application together.
  * It helps to set up the evolutionary runs.
- * It is based on the source file which is part of the
- *    ___                 __    __ _ _    _
- *   /___\__ _ _ __ ___  / / /\ \ (_) | _(_)
- *  //  // _` | '__/ _ \ \ \/  \/ / | |/ / |
- * / \_// (_| | | |  __/  \  /\  /| |   <| |
- * \___/ \__, |_|  \___|   \/  \/ |_|_|\_\_|
- *       |___/
- *       Tutorial Framework
- *       http://www.ogre3d.org/tikiwiki/
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
  */
@@ -249,6 +240,10 @@ public:
 
 	InfoOverlay& getInfoOverlay() {
 		return mInfoOverlay;
+	}
+
+	Universe& getUniverse() {
+		return mUniverse;
 	}
 };
 
