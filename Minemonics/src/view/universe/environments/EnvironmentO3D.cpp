@@ -26,7 +26,8 @@
 #define HOLD_LOD_DISTANCE 3000.0
 
 EnvironmentO3D::EnvironmentO3D(SimulationManager* simulationMgr) :
-		mSimulationMgr(simulationMgr), mTerrainGlobals(NULL), mTerrainGroup(NULL), mTerrainPaging(
+		mSimulationMgr(simulationMgr), mTerrainGlobals(NULL), mTerrainGroup(
+				NULL), mTerrainPaging(
 		NULL), mPageManager(NULL), mPagedWorld(NULL), mTerrainPagedWorldSection(
 		NULL), mPerlinNoiseTerrainGenerator(NULL), mLodStatus(false), mAutoLod(
 				true), mFallVelocity(0), mTerrainPos(0, 0, 0) {
@@ -44,18 +45,20 @@ EnvironmentO3D::~EnvironmentO3D() {
 		OGRE_DELETE mTerrainGlobals;
 }
 
-void EnvironmentO3D::initialize(std::string fileName,Ogre::Light* l) {
+void EnvironmentO3D::initialize(std::string fileName, Ogre::Light* l) {
 	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
 
-	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(mSimulationMgr->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
-	TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
+	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(
+			mSimulationMgr->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
+			TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 	mTerrainGroup->setFilenameConvention(Ogre::String(),
 			Ogre::String("terrain"));
 	mTerrainGroup->setOrigin(mTerrainPos);
 	mTerrainGroup->setAutoUpdateLod(
-			Ogre::TerrainAutoUpdateLodFactory::getAutoUpdateLod(Ogre::BY_DISTANCE));
+			Ogre::TerrainAutoUpdateLodFactory::getAutoUpdateLod(
+					Ogre::BY_DISTANCE));
 
-	configureTerrainDefaults (l);
+	configureTerrainDefaults(l);
 
 	// Paging setup
 	mPageManager = OGRE_NEW Ogre::PageManager();
@@ -81,12 +84,17 @@ void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
 
 	mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(false);
 
-	mTerrainGlobals->setCompositeMapAmbient(mSimulationMgr->getSceneManager()->getAmbientLight());
-	mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
-	mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
+	mTerrainGlobals->setCompositeMapAmbient(
+			mSimulationMgr->getSceneManager()->getAmbientLight());
+
+	if (l != NULL) {
+		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
+		mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
+	}
 
 	// Configure default import settings for if we use imported image
-	Ogre::Terrain::ImportData& defaultimp = mTerrainGroup->getDefaultImportSettings();
+	Ogre::Terrain::ImportData& defaultimp =
+			mTerrainGroup->getDefaultImportSettings();
 	defaultimp.terrainSize = TERRAIN_SIZE;
 	defaultimp.worldSize = TERRAIN_WORLD_SIZE;
 	defaultimp.inputScale = 600;
@@ -101,10 +109,8 @@ void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
 //			"grid_illusion.png");
 
 	defaultimp.layerList[0].worldSize = 1000;
-	defaultimp.layerList[0].textureNames.push_back(
-			"honeycomb.png");
-	defaultimp.layerList[0].textureNames.push_back(
-			"honeycomb.png");
+	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
+	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
 
 //	defaultimp.layerList[0].worldSize = 100;
 //	defaultimp.layerList[0].textureNames.push_back(
@@ -155,6 +161,7 @@ void EnvironmentO3D::initBlendMaps(Ogre::Terrain* terrain) {
 }
 
 void EnvironmentO3D::update() {
-	mTerrainGroup->autoUpdateLodAll(false, Ogre::Any(Ogre::Real(HOLD_LOD_DISTANCE)));
+	mTerrainGroup->autoUpdateLodAll(false,
+			Ogre::Any(Ogre::Real(HOLD_LOD_DISTANCE)));
 }
 

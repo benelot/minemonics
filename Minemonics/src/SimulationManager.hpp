@@ -109,10 +109,7 @@ private:
 
 	//## view components
 
-	Environment* mTerrain;
-
 	std::vector<RagDoll*> mRagdolls;
-	Population population;
 
 	// CEGUI components
 	CEGUI::System* mSystem;

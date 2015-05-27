@@ -42,16 +42,6 @@ public:
 	void update();
 
 	//Accessor methods
-
-	Planet*& getCurrentEvaluationPlanet() {
-		return mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()];
-	}
-
-	void setCurrentEvaluationPlanet(const Planet*& currentEvaluationPlanet) {
-		mUniverseModel.setCurrentEvaluationPlanetIndex(0);
-		//mCurrentEvaluationPlanet = currentEvaluationPlanet;
-	}
-
 	const std::vector<Planet*>& getPlanets() const {
 		return mPlanets;
 	}

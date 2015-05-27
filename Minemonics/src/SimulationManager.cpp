@@ -78,6 +78,8 @@
 #include <controller/universe/environments/Hills.hpp>
 #include <controller/universe/environments/Plane.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/evolution/Evolution.hpp>
+#include <controller/universe/Planet.hpp>
 
 //## model headers
 //## view headers
@@ -89,8 +91,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
-				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mTerrain(
-		NULL), mDetailsPanel(
+				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mDetailsPanel(
 		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDebugDrawer(
 		NULL), mSdlWindow(
 		NULL) {
@@ -158,24 +159,43 @@ void SimulationManager::createFrameListener(void) {
 	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
 	mPhysicsController.setPhysicsPaused(true);
 
-	if (mTerrain->mEnvironmentType == Environment::PLANE) {
-		mPhysicsController.addBody(mTerrain->getBody());
+	//create the earth terrain
+	Environment* earthGround = new Plane();
+	((Plane*) earthGround)->initialize(this, NULL);
+
+	if (earthGround->mEnvironmentType == Environment::PLANE) {
+		mPhysicsController.addBody(earthGround->getBody());
 	}
 
-	population.initialize(this, 100);
+	// initialize the universe
+	mUniverse.initialize();
+
+
+	//create a population
+	Population* earthPopulation = new Population();
+	earthPopulation->initialize(this,100);
+
+	//create earth evolution and add earth population to it
+	Evolution* earthEvolution = new Evolution();
+	earthEvolution->initialize(earthGround);
+	earthEvolution->addNewPopulation(earthPopulation);
+
+	Planet* earth = new Planet();
+	earth->initialize(earthEvolution,earthGround,&mPhysicsController);
+
+	mUniverse.addPlanet(earth);
 
 	//mPhysicsController.setPhysicsPaused(true);
 	Randomness randomness;
-	std::vector<Creature*>::iterator cit = population.getCreatures().begin();
-	for (; cit != population.getCreatures().end(); cit++) {
+	std::vector<Creature*>::iterator cit = earthPopulation->getCreatures().begin();
+	for (; cit != earthPopulation->getCreatures().end(); cit++) {
 		(*cit)->setPosition(
 				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
 						randomness.nextDouble(300, 10000),
 						randomness.nextDouble(-1000, 10000)));
 		(*cit)->performEmbryogenesis();
 	}
-
-	population.addToWorld();
+	earthPopulation->addToWorld();
 
 //	for (int i = 0; i < 50; i++) {
 //		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
@@ -289,19 +309,19 @@ void SimulationManager::createScene(void) {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 
-	// set up environment
-	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
-	case Environment::HILLS: {
-		mTerrain = new Hills();
-		((Hills*) mTerrain)->initialize(this, light);
-		break;
-	}
-	case Environment::PLANE: {
-		mTerrain = new Plane();
-		((Plane*) mTerrain)->initialize(this, light);
-		break;
-	}
-	}
+//	// set up environment
+//	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
+//	case Environment::HILLS: {
+//		mTerrain = new Hills();
+//		((Hills*) mTerrain)->initialize(this, light);
+//		break;
+//	}
+//	case Environment::PLANE: {
+//		mTerrain = new Plane();
+//		((Plane*) mTerrain)->initialize(this, light);
+//		break;
+//	}
+//	}
 
 	//either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
@@ -369,7 +389,7 @@ void SimulationManager::updatePhysics() {
 		(*it)->update();
 	}
 
-	population.update();
+	mUniverse.update();
 
 //	const int numObjects =
 //			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
@@ -487,7 +507,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 						Ogre::StringConverter::toString(
 								mRuntime.total_milliseconds()), true);
 
-				if (mTerrain->mEnvironmentType == Environment::HILLS) {
+//				if (mTerrain->mEnvironmentType == Environment::HILLS) {
 //					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
 //						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
 //							mFpsPanel->setParamValue(2,
@@ -504,7 +524,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 //							((HillsO3D*) mTerrain)->mTerrainsImported = false;
 //						}
 //					}
-				}
+//				}
 			} else {
 				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
 				mFpsPanel->setParamValue(0,
@@ -610,7 +630,7 @@ void SimulationManager::destroyScene(void) {
 		(*it)->removeFromWorld();
 	}
 
-	population.removeFromWorld();
+	//mUniverse.removeFromWorld();
 
 	mPhysicsController.exitBulletPhysics();
 
