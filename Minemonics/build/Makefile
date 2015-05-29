@@ -868,6 +868,33 @@ model/universe/environments/EnvironmentPhysics.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/EnvironmentPhysics.cpp.s
 .PHONY : model/universe/environments/EnvironmentPhysics.cpp.s
 
+model/universe/environments/PlaneModel.o: model/universe/environments/PlaneModel.cpp.o
+.PHONY : model/universe/environments/PlaneModel.o
+
+# target to build an object file
+model/universe/environments/PlaneModel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/PlaneModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/PlaneModel.cpp.o
+.PHONY : model/universe/environments/PlaneModel.cpp.o
+
+model/universe/environments/PlaneModel.i: model/universe/environments/PlaneModel.cpp.i
+.PHONY : model/universe/environments/PlaneModel.i
+
+# target to preprocess a source file
+model/universe/environments/PlaneModel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/PlaneModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/PlaneModel.cpp.i
+.PHONY : model/universe/environments/PlaneModel.cpp.i
+
+model/universe/environments/PlaneModel.s: model/universe/environments/PlaneModel.cpp.s
+.PHONY : model/universe/environments/PlaneModel.s
+
+# target to generate assembly for a file
+model/universe/environments/PlaneModel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/PlaneModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/PlaneModel.cpp.s
+.PHONY : model/universe/environments/PlaneModel.cpp.s
+
 model/universe/environments/bullet/EnvironmentBt.o: model/universe/environments/bullet/EnvironmentBt.cpp.o
 .PHONY : model/universe/environments/bullet/EnvironmentBt.o
 
@@ -3367,6 +3394,9 @@ help:
 	@echo "... model/universe/environments/EnvironmentPhysics.o"
 	@echo "... model/universe/environments/EnvironmentPhysics.i"
 	@echo "... model/universe/environments/EnvironmentPhysics.s"
+	@echo "... model/universe/environments/PlaneModel.o"
+	@echo "... model/universe/environments/PlaneModel.i"
+	@echo "... model/universe/environments/PlaneModel.s"
 	@echo "... model/universe/environments/bullet/EnvironmentBt.o"
 	@echo "... model/universe/environments/bullet/EnvironmentBt.i"
 	@echo "... model/universe/environments/bullet/EnvironmentBt.s"

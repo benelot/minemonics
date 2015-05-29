@@ -17,6 +17,7 @@
 
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/PlaneModel.hpp>
 #include <model/universe/environments/bullet/PlaneBt.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 
@@ -36,20 +37,14 @@ void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDe
 	Environment::initialize(Environment::PLANE);
 	mEnvironmentGraphics = new PlaneO3D(simulationMgr);
 	((PlaneO3D*) mEnvironmentGraphics)->initialize(l);
-	mEnvironmentModel = new EnvironmentModel();
+	mEnvironmentModel = new PlaneModel();
+	((PlaneModel*) mEnvironmentModel)->initialize();
 	mEnvironmentModel->setPhysicsController(new PhysicsController());
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
-	//TODO:Encapsulate debug drawer
-	mEnvironmentModel->getPhysicsController()->getDynamicsWorld()->setDebugDrawer(debugDrawer);
+	mEnvironmentModel->getPhysicsController()->setDebugDrawer(debugDrawer);
 	mEnvironmentModel->getPhysicsController()->setPhysicsPaused(true);
-	//TODO: Fix the way the planeBt is added
-	mEnvironmentModel->setEnvironmentPhysics(new PlaneBt());
-	((PlaneBt*)mEnvironmentModel->getEnvironmentPhysics())->initialize();
 	//TODO:Refactor getbody
 	mEnvironmentModel->getPhysicsController()->addBody(getBody());
-
-
-
 
 }
 

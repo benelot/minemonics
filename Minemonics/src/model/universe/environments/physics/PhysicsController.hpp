@@ -24,6 +24,8 @@
 //## controller headers
 //## model headers
 //## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
 
 /**
@@ -89,6 +91,10 @@ public:
 
 	void setPhysicsPaused(bool physicsPaused) {
 		mPhysicsPaused = physicsPaused;
+	}
+
+	void setDebugDrawer(OgreBtDebugDrawer* debugDrawer){
+		mDynamicsWorld->setDebugDrawer(debugDrawer);
 	}
 
 	/**

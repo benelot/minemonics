@@ -33,6 +33,8 @@ public:
 	void addToWorld();
 	void removeFromWorld();
 
+	//TODO: Add serialization to EnvironmentModel
+
 	EnvironmentPhysics*& getEnvironmentPhysics() {
 		return mEnvironmentPhysics;
 	}
@@ -49,7 +51,7 @@ public:
 		mPhysicsController = physicsController;
 	}
 
-private:
+protected:
 
 	PhysicsController* mPhysicsController;
 	EnvironmentPhysics* mEnvironmentPhysics;

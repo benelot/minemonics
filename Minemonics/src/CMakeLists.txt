@@ -18,6 +18,7 @@ set(MODELHDRS
 	# model
 	## environment
     ./model/universe/environments/EnvironmentModel.hpp
+    ./model/universe/environments/PlaneModel.hpp
 	./model/universe/environments/EnvironmentPhysics.hpp
 	./model/universe/environments/bullet/EnvironmentBt.hpp
 	./model/universe/environments/bullet/HillsBt.hpp
@@ -77,6 +78,7 @@ set(MODELSRCS
     # model
     ## environment
     ./model/universe/environments/EnvironmentModel.cpp
+    ./model/universe/environments/PlaneModel.cpp
     ./model/universe/environments/EnvironmentPhysics.cpp
 	./model/universe/environments/bullet/EnvironmentBt.cpp
 	./model/universe/environments/bullet/HillsBt.cpp
