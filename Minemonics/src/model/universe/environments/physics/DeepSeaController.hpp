@@ -1,15 +1,15 @@
 /*
- * MotionController.h
+ * OpenSeaController.h
  *
- *  Created on: Mar 3, 2015
+ *  Created on: Nov 17, 2014
  *      Author: leviathan
  */
 
-#ifndef MOTIONCONTROLLER_H_
-#define MOTIONCONTROLLER_H_
+#ifndef DEEPSEACONTROLLER_H_
+#define DEEPSEACONTROLLER_H_
 
 //# corresponding header
-#include <controller/physics/PhysicsController.hpp>
+#include <model/universe/environments/physics/MotionController.hpp>
 
 //# forward declarations
 //# system headers
@@ -25,15 +25,15 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The deep sea controller simulates physical motion similar to an underwater world.
  * @details		Details
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
  */
-class MotionController: public PhysicsController {
+class DeepSeaController: public MotionController {
 public:
-	MotionController();
-	virtual ~MotionController();
+	DeepSeaController();
+	virtual ~DeepSeaController();
 };
 
-#endif /* MOTIONCONTROLLER_H_ */
+#endif /* DEEPSEACONTROLLER_H_ */

@@ -1,17 +1,23 @@
-/*
- * Population.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
+//# corresponding headers
+//# forward declarations
+//# system headers
+#include <stddef.h>
 
-//# corresponding header
-#include <configuration/MorphologyConfiguration.hpp>
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
 #include <model/universe/evolution/population/PopulationModel.hpp>
-#include <utils/Randomness.hpp>
+
+//## view headers
+//## utils headers
 
 PopulationModel::PopulationModel() :
-		mCreatureQty(0) {
+		mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL) {
 
 }
 
@@ -27,7 +33,8 @@ PopulationModel::~PopulationModel() {
  * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void PopulationModel::initialize(int creatureQty) {
+void PopulationModel::initialize(PlanetModel* planetModel, int creatureQty) {
+	mPlanetModel = planetModel;
 	mCreatureQty = creatureQty;
 }
 
@@ -35,7 +42,7 @@ void PopulationModel::initialize(int creatureQty) {
  * Adds a new creature to the population with the bushiness as a input.
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
-void PopulationModel::addNewMember(CreatureModel* creatureModel) {
+void PopulationModel::addMember(CreatureModel* creatureModel) {
 	mCreatureModels.push_back(creatureModel);
 	mCreatureQty++;
 

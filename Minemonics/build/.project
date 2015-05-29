@@ -169,6 +169,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/bullet/PlaneBt.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/PhysicsController.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/physics/PhysicsController.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Jury.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/juries/Jury.cpp</location>
@@ -579,9 +584,14 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/OgreInputHandler.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/ViewController.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/viewcontroller/ViewController.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/CameraHandler.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/camera/CameraHandler.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/viewcontroller/camera/CameraHandler.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/StateHandler.cpp</name>
@@ -589,14 +599,9 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/StateHandler.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/PhysicsController.cpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/physics/PhysicsController.cpp</location>
-		</link>
-		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/RagDoll.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/physics/RagDoll.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/ragdoll/RagDoll.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Universe.cpp</name>
@@ -717,6 +722,11 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/PlaneBt.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/bullet/PlaneBt.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/PhysicsController.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/physics/PhysicsController.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Jury.hpp</name>
@@ -1174,9 +1184,14 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/InputUtils.hpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/ViewController.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/viewcontroller/ViewController.hpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/CameraHandler.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/camera/CameraHandler.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/viewcontroller/camera/CameraHandler.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SaveController.hpp</name>
@@ -1189,14 +1204,9 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/StateHandler.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/PhysicsController.hpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/physics/PhysicsController.hpp</location>
-		</link>
-		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/RagDoll.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/physics/RagDoll.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/ragdoll/RagDoll.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Universe.hpp</name>
@@ -1402,6 +1412,11 @@
 			<name>[Targets]/[exe] runUnitTests/Source Files/PlaneBt.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/bullet/PlaneBt.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/PhysicsController.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/physics/PhysicsController.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Jury.cpp</name>
@@ -1697,6 +1712,11 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/PlaneBt.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/bullet/PlaneBt.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/PhysicsController.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/environments/physics/PhysicsController.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Jury.hpp</name>

@@ -29,10 +29,10 @@
 #include <configuration/CameraConfiguration.hpp>
 
 //## controller headers
-#include <controller/camera/CameraHandler.hpp>
-#include <controller/physics/PhysicsController.hpp>
 #include <controller/StateHandler.hpp>
 #include <controller/universe/Universe.hpp>
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## model headers
 //## view headers
@@ -116,8 +116,9 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::O;
 		break;
 	case ApplicationKeycode::APPK_p:
-		mSimulationMgr->getPhysicsController().setPhysicsPaused(
-				!mSimulationMgr->getPhysicsController().isPhysicsPaused());
+//	TODO: Add currently observed planet to simulation manager
+//		mSimulationMgr->getPhysicsController().setPhysicsPaused(
+//				!mSimulationMgr->getPhysicsController().isPhysicsPaused());
 		break;
 	case ApplicationKeycode::APPK_a:
 		moveCameraLeft();

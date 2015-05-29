@@ -1,12 +1,12 @@
 /*
- * GroundController.cpp
+ * DeepSeaController.cpp
  *
  *  Created on: Nov 17, 2014
  *      Author: leviathan
  */
 
 //# corresponding header
-#include <controller/physics/GroundController.hpp>
+#include <model/universe/environments/physics/DeepSeaController.hpp>
 
 //# forward declarations
 //# system headers
@@ -21,12 +21,12 @@
 //## view headers
 //## utils headers
 
-GroundController::GroundController() {
+DeepSeaController::DeepSeaController() {
 	// TODO Auto-generated constructor stub
 
 }
 
-GroundController::~GroundController() {
+DeepSeaController::~DeepSeaController() {
 	// TODO Auto-generated destructor stub
 }
 

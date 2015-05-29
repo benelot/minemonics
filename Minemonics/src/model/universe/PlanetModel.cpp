@@ -39,8 +39,7 @@ bool PlanetModel::proceedEvaluation() {
 		mEnvironmentModel->addToWorld();
 	}
 
-	if(!mEvolutionModel->proceedEvaluation())
-	{
+	if (!mEvolutionModel->proceedEvaluation()) {
 		mEnvironmentModel->removeFromWorld();
 		return false;
 	}

@@ -9,7 +9,7 @@
 #define GROUNDCONTROLLER_H_
 
 //# forward declarations
-#include <controller/physics/MotionController.hpp>
+#include <model/universe/environments/physics/MotionController.hpp>
 
 //# system headers
 //## controller headers

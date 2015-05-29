@@ -47,6 +47,20 @@ void Universe::proceedEvaluation() {
 	mUniverseModel.proceedEvaluation();
 }
 
+void Universe::stepPhysics(double timeSinceLastFrame) {
+	std::vector<Planet*>::iterator pit = mPlanets.begin();
+	for (; pit != mPlanets.end(); pit++) {
+		(*pit)->stepPhysics(timeSinceLastFrame);
+	}
+}
+
+void Universe::drawDebugWorld() {
+	std::vector<Planet*>::iterator pit = mPlanets.begin();
+	for (; pit != mPlanets.end(); pit++) {
+		(*pit)->drawDebugWorld();
+	}
+}
+
 void Universe::update() {
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end(); pit++) {

@@ -6,7 +6,7 @@
  */
 
 //# corresponding header
-#include <controller/physics/PhysicsController.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 //# forward declarations
 //# system headers
 //## controller headers

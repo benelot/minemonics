@@ -22,12 +22,11 @@
 //## utils headers
 
 Environment::Environment() :
-		mSimulationMgr(NULL), mEnvironmentType(UNKNOWN_ENVIRONMENT_TYPE), mEnvironmentGraphics(
+		mEnvironmentType(UNKNOWN_ENVIRONMENT_TYPE), mEnvironmentGraphics(
 		NULL), mEnvironmentModel(NULL) {
 }
 
 Environment::~Environment() {
-	mSimulationMgr = NULL;
 
 	delete mEnvironmentGraphics;
 	mEnvironmentGraphics = NULL;
@@ -36,9 +35,7 @@ Environment::~Environment() {
 	mEnvironmentModel = NULL;
 }
 
-void Environment::initialize(SimulationManager* simulationMgr,
-		EnvironmentType environmentType) {
-	mSimulationMgr = simulationMgr;
+void Environment::initialize(EnvironmentType environmentType) {
 	mEnvironmentType = environmentType;
 }
 
@@ -46,8 +43,7 @@ btRigidBody*& Environment::getBody() {
 	return ((EnvironmentBt*) mEnvironmentModel->getEnvironmentPhysics())->getBody();
 }
 
-void Environment::update()
-{
+void Environment::update() {
 
 }
 

@@ -24,6 +24,7 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/PlanetModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
@@ -40,12 +41,12 @@ public:
 	PopulationModel();
 	virtual ~PopulationModel();
 
-	void initialize(int creatureQty);
+	void initialize(PlanetModel* planetModel,int creatureQty);
 
 	/**
 	 * Adds a new creature to the population.
 	 */
-	void addNewMember(CreatureModel* creatureModel);
+	void addMember(CreatureModel* creatureModel);
 
 	bool proceedEvaluation();
 
@@ -104,8 +105,12 @@ public:
 		return mCreatureModels;
 	}
 
-	void setCreatureModels(const std::vector<CreatureModel*>& creatureModels) {
-		mCreatureModels = creatureModels;
+	PlanetModel* getPlanetModel() {
+		return mPlanetModel;
+	}
+
+	void setPlanetModel(PlanetModel* planetModel) {
+		mPlanetModel = planetModel;
 	}
 
 private:
@@ -123,6 +128,11 @@ private:
 	 * The number of creatures that the population will consist of in every generation.
 	 */
 	int mCreatureQty;
+
+	/**
+	 * The planet the population lives on.
+	 */
+	PlanetModel* mPlanetModel;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_POPULATIONMODEL_HPP_ */

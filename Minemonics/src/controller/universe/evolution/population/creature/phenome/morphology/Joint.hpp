@@ -45,13 +45,13 @@ public:
 
 	/**
 	 * Initialize the joint by adding the joining limbs and the rotation point of the joint in both their local reference frames.
-	 * @param simulationManager The simulation manager of this application.
+	 * @param creature The creature the joint belongs to.
 	 * @param limbA Limb A
 	 * @param limbB Limb B
 	 * @param localA Local reference frame of limb A.
 	 * @param localB Local reference frame of limb B.
 	 */
-	void initialize(SimulationManager* simulationManager, Limb* limbA,
+	void initialize(Creature* creature, Limb* limbA,
 			Limb* limbB, btTransform localA, btTransform localB);
 
 	/**
@@ -59,7 +59,7 @@ public:
 	 * @param simulationManager The handle of the simulation manager.
 	 * @param jointModel The model of the joint.
 	 */
-	void buildFrom(SimulationManager* simulationManager,/*Limb* limbA, Limb* limbB,*/JointModel* jointModel);
+	void buildFrom(/*SimulationManager* simulationManager,Limb* limbA, Limb* limbB,*/JointModel* jointModel);
 
 	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces, Ogre::Vector3 maxSpeeds);
 

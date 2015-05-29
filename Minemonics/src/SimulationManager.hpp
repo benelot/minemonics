@@ -38,15 +38,16 @@ class ParamsPanel;
 
 //## controller headers
 #include <controller/StateHandler.hpp>
-#include <controller/camera/CameraHandler.hpp>
+#include <controller/viewcontroller/ViewController.hpp>
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
 #include <controller/input/SDL2InputHandler.hpp>
-#include <controller/physics/PhysicsController.hpp>
-#include <controller/physics/RagDoll.hpp>
+#include <controller/ragdoll/RagDoll.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
 #include <controller/universe/Universe.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/juries/Ones.hpp>
 
 //## view headers
@@ -70,7 +71,7 @@ class ParamsPanel;
 class SimulationManager: public BaseApplication {
 private:
 
-	void updatePhysics();
+	void updatePhysics(double timeSinceLastFrame);
 
 	void updateEvolution();
 
@@ -84,14 +85,8 @@ private:
 	SDL_Window *mSdlWindow;
 	CameraHandler mCameraHandler;
 
-	//SheetHandler
-	GUISheetHandler mGUISheetHandler;
-
 	//The universe and everything
 	Universe mUniverse;
-
-	// Physics controller
-	PhysicsController mPhysicsController;
 
 	// timing component
 	boost::posix_time::ptime mStart;
@@ -109,21 +104,9 @@ private:
 
 	//## view components
 
-	std::vector<RagDoll*> mRagdolls;
+//	std::vector<RagDoll*> mRagdolls;
 
-	// CEGUI components
-	CEGUI::System* mSystem;
-	CEGUI::Window* mLayout;
-
-	//CEGUI
-	ParamsPanel* mFpsPanel;
-	ParamsPanel* mDetailsPanel;
-	CEGUI::OgreRenderer* mRenderer;
-	CEGUI::Window* mDragContainer;
-
-	// Visualization components
-	std::vector<MathGLPanel*> mGraphWindows;
-	InfoOverlay mInfoOverlay;
+	ViewController mViewController;
 
 	Ogre3DFFMPEGVideoWriter mVideoWriter;
 
@@ -158,10 +141,7 @@ public:
 	bool quit();
 	virtual void windowResized(Ogre::RenderWindow* rw);
 
-	// Accessor methods
-	CEGUI::System*& getCEGUISystem() {
-		return mSystem;
-	}
+
 
 	CameraHandler & getCameraHandler() {
 		return mCameraHandler;
@@ -179,44 +159,14 @@ public:
 		return mCamera;
 	}
 
-	ParamsPanel * &getDetailsPanel() {
-		return mDetailsPanel;
-	}
-
-	ParamsPanel * &getFpsPanel() {
-		return mFpsPanel;
-	}
-
-	void setDetailsPanel(ParamsPanel* detailsPanel) {
-		mDetailsPanel = detailsPanel;
-	}
-
-	void setFpsPanel(ParamsPanel* fpsPanel) {
-		mFpsPanel = fpsPanel;
-	}
-
-	CEGUI::Window * &getLayout() {
-		return mLayout;
-	}
 
 	Ogre::SceneManager* &getSceneManager() {
 		return mSceneMgr;
 	}
 
-	CEGUI::OgreRenderer* & getRenderer() {
-		return mRenderer;
-	}
 
 	Ogre::Root*& getRoot() {
 		return mRoot;
-	}
-
-	std::vector<MathGLPanel*>& getGraphWindows() {
-		return mGraphWindows;
-	}
-
-	PhysicsController& getPhysicsController() {
-		return mPhysicsController;
 	}
 
 	Ogre3DFFMPEGVideoWriter& getVideoWriter() {
@@ -235,12 +185,12 @@ public:
 		return mDebugDrawer;
 	}
 
-	InfoOverlay& getInfoOverlay() {
-		return mInfoOverlay;
-	}
-
 	Universe& getUniverse() {
 		return mUniverse;
+	}
+
+	ViewController& getViewController() {
+		return mViewController;
 	}
 };
 

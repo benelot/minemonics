@@ -23,6 +23,9 @@ set(MODELHDRS
 	./model/universe/environments/bullet/HillsBt.hpp
 	./model/universe/environments/bullet/PlaneBt.hpp
 	
+    ## bullet physics controller
+    ./model/universe/environments/physics/PhysicsController.hpp
+	
 	## juries
 	./model/universe/evolution/juries/Jury.hpp
 	./model/universe/evolution/juries/Ones.hpp
@@ -72,11 +75,15 @@ set(MODELHDRS
 )
 set(MODELSRCS
     # model
+    ## environment
     ./model/universe/environments/EnvironmentModel.cpp
     ./model/universe/environments/EnvironmentPhysics.cpp
 	./model/universe/environments/bullet/EnvironmentBt.cpp
 	./model/universe/environments/bullet/HillsBt.cpp
 	./model/universe/environments/bullet/PlaneBt.cpp
+	
+	## bullet physics controller
+	./model/universe/environments/physics/PhysicsController.cpp
    
     ## juries
 	./model/universe/evolution/juries/Jury.cpp
@@ -136,8 +143,9 @@ set(CONTROLLERHDRS
 	./controller/input/OgreInputHandler.hpp
 	./controller/input/InputUtils.hpp
 	
-	## camera handler
-	./controller/camera/CameraHandler.hpp
+	## view controller
+	./controller/viewcontroller/ViewController.hpp
+	./controller/viewcontroller/camera/CameraHandler.hpp
 	
 	## object save controller
 	./controller/SaveController.hpp
@@ -145,9 +153,8 @@ set(CONTROLLERHDRS
 	## application state handler
 	./controller/StateHandler.hpp
 	
-	## bullet physics controller
-    ./controller/physics/PhysicsController.hpp
-    ./controller/physics/RagDoll.hpp
+	## ragdoll
+    ./controller/ragdoll/RagDoll.hpp
     
     ## universe
     ./controller/universe/Universe.hpp
@@ -176,15 +183,15 @@ set(CONTROLLERSRCS
 	./controller/input/CEGUIInputHandler.cpp
 	./controller/input/OgreInputHandler.cpp
 	
-	## camera handler
-	./controller/camera/CameraHandler.cpp
+	## view controller
+	./controller/viewcontroller/ViewController.cpp
+	./controller/viewcontroller/camera/CameraHandler.cpp
 	
 	## application state handler
 	./controller/StateHandler.cpp
 	
-	## bullet physics controller
-	./controller/physics/PhysicsController.cpp
-	./controller/physics/RagDoll.cpp
+	## ragdoll
+	./controller/ragdoll/RagDoll.cpp
 	
 	## universe
     ./controller/universe/Universe.cpp

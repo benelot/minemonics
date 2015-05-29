@@ -4,6 +4,7 @@
 //# corresponding header
 //# forward declarations
 class SimulationManager;
+class Population;
 
 //# system headers
 //## controller headers
@@ -16,6 +17,7 @@ class SimulationManager;
 #include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
@@ -32,7 +34,7 @@ public:
 	Creature();
 	virtual ~Creature();
 
-	void initialize(SimulationManager* simulationManager,
+	void initialize(SimulationManager* simulationManager,Population* population,
 			Ogre::Vector3 position, double branchiness);
 
 	void performEmbryogenesis();
@@ -45,6 +47,15 @@ public:
 
 	void setPosition(Ogre::Vector3 position){
 		mCreatureModel->setPosition(position);
+	}
+
+	PlanetModel* getPlanet(){
+		return mCreatureModel->getPopulationModel()->getPlanetModel();
+	}
+
+	void setPlanet(PlanetModel* planetModel)
+	{
+		mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
 	}
 
 	/**

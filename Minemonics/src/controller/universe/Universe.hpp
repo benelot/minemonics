@@ -39,6 +39,10 @@ public:
 
 	void proceedEvaluation();
 
+	void drawDebugWorld();
+
+	void stepPhysics(double timeSinceLastFrame);
+
 	void update();
 
 	//Accessor methods

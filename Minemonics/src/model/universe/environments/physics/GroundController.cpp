@@ -1,12 +1,12 @@
 /*
- * MotionController.cpp
+ * GroundController.cpp
  *
- *  Created on: Mar 3, 2015
+ *  Created on: Nov 17, 2014
  *      Author: leviathan
  */
 
 //# corresponding header
-#include <controller/physics/MotionController.hpp>
+#include <model/universe/environments/physics/GroundController.hpp>
 
 //# forward declarations
 //# system headers
@@ -20,12 +20,13 @@
 //## model headers
 //## view headers
 //## utils headers
-MotionController::MotionController() {
+
+GroundController::GroundController() {
 	// TODO Auto-generated constructor stub
 
 }
 
-MotionController::~MotionController() {
+GroundController::~GroundController() {
 	// TODO Auto-generated destructor stub
 }
 

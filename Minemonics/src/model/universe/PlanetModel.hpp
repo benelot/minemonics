@@ -18,6 +18,8 @@ class Epoch;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 //## utils headers
 
@@ -36,7 +38,7 @@ public:
 
 	bool proceedEvaluation();
 
-	//Accesssor methods
+	//Accessor methods
 
 	EnvironmentModel*& getEnvironmentModel() {
 		return mEnvironmentModel;

@@ -7,6 +7,7 @@
 //# forward declarations
 class SimulationManager;
 class Creature;
+class Planet;
 
 //# system headers
 //## controller headers
@@ -36,13 +37,15 @@ public:
 	 * @param simulationManager The simulation manager handle
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
-	void initialize(SimulationManager* simulationManager,int creatureQty);
+	void initialize(Planet* planet, SimulationManager* simulationManager,
+			int creatureQty);
 
 	/**
 	 * Adds a new creature to the population with the bushiness as a input.
 	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
 	 */
-	void addNewMember(double bushiness,Ogre::Vector3 rootPosition=Ogre::Vector3::ZERO);
+	void addNewMember(double bushiness, Ogre::Vector3 rootPosition =
+			Ogre::Vector3::ZERO);
 
 	void update();
 
@@ -74,6 +77,11 @@ private:
 	 * The state model of the population
 	 */
 	PopulationModel* mPopulationModel;
+
+	/**
+	 * The planet the population lives on.
+	 */
+	Planet* mPlanet;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_ */

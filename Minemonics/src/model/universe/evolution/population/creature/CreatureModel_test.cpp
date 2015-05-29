@@ -28,7 +28,7 @@ protected:
 	virtual void SetUp() {
 		// Set up an object of the class you want to test
 		creature = new CreatureModel();
-		creature->initialize(Ogre::Vector3(0,0,0),30);
+		creature->initialize(NULL,Ogre::Vector3(0,0,0),30);
 	}
 
 	virtual void TearDown() {
@@ -43,7 +43,7 @@ class CreatureSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		creature = new CreatureModel();
-		creature->initialize(Ogre::Vector3(0,0,0),30);
+		creature->initialize(NULL,Ogre::Vector3(0,0,0),30);
 
 		creature2 = new CreatureModel();
 

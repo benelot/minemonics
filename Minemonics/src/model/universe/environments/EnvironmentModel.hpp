@@ -13,6 +13,7 @@
 //## controller headers
 //## model headers
 #include <model/universe/environments/EnvironmentPhysics.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
 //## utils headers
@@ -40,7 +41,17 @@ public:
 		mEnvironmentPhysics = environmentPhysics;
 	}
 
+	PhysicsController* getPhysicsController() {
+		return mPhysicsController;
+	}
+
+	void setPhysicsController(PhysicsController* physicsController){
+		mPhysicsController = physicsController;
+	}
+
 private:
+
+	PhysicsController* mPhysicsController;
 	EnvironmentPhysics* mEnvironmentPhysics;
 };
 

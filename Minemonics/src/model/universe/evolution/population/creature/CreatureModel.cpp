@@ -1,20 +1,30 @@
-/*
- * Creature.cpp
- *
- *  Created on: Dec 2, 2014
- *      Author: leviathan
- */
-
-//# corresponding header
+//# corresponding headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
+
+//## view headers
+//## utils headers
 #include <utils/NameGenerator.hpp>
+#include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mDeveloped(false) {
+		mDeveloped(false),mPopulationModel(NULL) {
 
 }
 
-void CreatureModel::initialize(Ogre::Vector3 position,double branchiness) {
+void CreatureModel::initialize(PopulationModel* populationModel,Ogre::Vector3 position,double branchiness) {
+	mPopulationModel = populationModel;
 	mPosition = position;
 	Randomness randomness;
 	NameGenerator nameGenerator;

@@ -304,30 +304,6 @@ controller/StateHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/StateHandler.cpp.s
 .PHONY : controller/StateHandler.cpp.s
 
-controller/camera/CameraHandler.o: controller/camera/CameraHandler.cpp.o
-.PHONY : controller/camera/CameraHandler.o
-
-# target to build an object file
-controller/camera/CameraHandler.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/camera/CameraHandler.cpp.o
-.PHONY : controller/camera/CameraHandler.cpp.o
-
-controller/camera/CameraHandler.i: controller/camera/CameraHandler.cpp.i
-.PHONY : controller/camera/CameraHandler.i
-
-# target to preprocess a source file
-controller/camera/CameraHandler.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/camera/CameraHandler.cpp.i
-.PHONY : controller/camera/CameraHandler.cpp.i
-
-controller/camera/CameraHandler.s: controller/camera/CameraHandler.cpp.s
-.PHONY : controller/camera/CameraHandler.s
-
-# target to generate assembly for a file
-controller/camera/CameraHandler.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/camera/CameraHandler.cpp.s
-.PHONY : controller/camera/CameraHandler.cpp.s
-
 controller/input/CEGUIInputHandler.o: controller/input/CEGUIInputHandler.cpp.o
 .PHONY : controller/input/CEGUIInputHandler.o
 
@@ -400,53 +376,29 @@ controller/input/SDL2InputHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/SDL2InputHandler.cpp.s
 .PHONY : controller/input/SDL2InputHandler.cpp.s
 
-controller/physics/PhysicsController.o: controller/physics/PhysicsController.cpp.o
-.PHONY : controller/physics/PhysicsController.o
+controller/ragdoll/RagDoll.o: controller/ragdoll/RagDoll.cpp.o
+.PHONY : controller/ragdoll/RagDoll.o
 
 # target to build an object file
-controller/physics/PhysicsController.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/PhysicsController.cpp.o
-.PHONY : controller/physics/PhysicsController.cpp.o
+controller/ragdoll/RagDoll.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/ragdoll/RagDoll.cpp.o
+.PHONY : controller/ragdoll/RagDoll.cpp.o
 
-controller/physics/PhysicsController.i: controller/physics/PhysicsController.cpp.i
-.PHONY : controller/physics/PhysicsController.i
-
-# target to preprocess a source file
-controller/physics/PhysicsController.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/PhysicsController.cpp.i
-.PHONY : controller/physics/PhysicsController.cpp.i
-
-controller/physics/PhysicsController.s: controller/physics/PhysicsController.cpp.s
-.PHONY : controller/physics/PhysicsController.s
-
-# target to generate assembly for a file
-controller/physics/PhysicsController.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/PhysicsController.cpp.s
-.PHONY : controller/physics/PhysicsController.cpp.s
-
-controller/physics/RagDoll.o: controller/physics/RagDoll.cpp.o
-.PHONY : controller/physics/RagDoll.o
-
-# target to build an object file
-controller/physics/RagDoll.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/RagDoll.cpp.o
-.PHONY : controller/physics/RagDoll.cpp.o
-
-controller/physics/RagDoll.i: controller/physics/RagDoll.cpp.i
-.PHONY : controller/physics/RagDoll.i
+controller/ragdoll/RagDoll.i: controller/ragdoll/RagDoll.cpp.i
+.PHONY : controller/ragdoll/RagDoll.i
 
 # target to preprocess a source file
-controller/physics/RagDoll.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/RagDoll.cpp.i
-.PHONY : controller/physics/RagDoll.cpp.i
+controller/ragdoll/RagDoll.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/ragdoll/RagDoll.cpp.i
+.PHONY : controller/ragdoll/RagDoll.cpp.i
 
-controller/physics/RagDoll.s: controller/physics/RagDoll.cpp.s
-.PHONY : controller/physics/RagDoll.s
+controller/ragdoll/RagDoll.s: controller/ragdoll/RagDoll.cpp.s
+.PHONY : controller/ragdoll/RagDoll.s
 
 # target to generate assembly for a file
-controller/physics/RagDoll.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/physics/RagDoll.cpp.s
-.PHONY : controller/physics/RagDoll.cpp.s
+controller/ragdoll/RagDoll.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/ragdoll/RagDoll.cpp.s
+.PHONY : controller/ragdoll/RagDoll.cpp.s
 
 controller/universe/Planet.o: controller/universe/Planet.cpp.o
 .PHONY : controller/universe/Planet.o
@@ -712,6 +664,54 @@ controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
 .PHONY : controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp.s
 
+controller/viewcontroller/ViewController.o: controller/viewcontroller/ViewController.cpp.o
+.PHONY : controller/viewcontroller/ViewController.o
+
+# target to build an object file
+controller/viewcontroller/ViewController.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/ViewController.cpp.o
+.PHONY : controller/viewcontroller/ViewController.cpp.o
+
+controller/viewcontroller/ViewController.i: controller/viewcontroller/ViewController.cpp.i
+.PHONY : controller/viewcontroller/ViewController.i
+
+# target to preprocess a source file
+controller/viewcontroller/ViewController.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/ViewController.cpp.i
+.PHONY : controller/viewcontroller/ViewController.cpp.i
+
+controller/viewcontroller/ViewController.s: controller/viewcontroller/ViewController.cpp.s
+.PHONY : controller/viewcontroller/ViewController.s
+
+# target to generate assembly for a file
+controller/viewcontroller/ViewController.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/ViewController.cpp.s
+.PHONY : controller/viewcontroller/ViewController.cpp.s
+
+controller/viewcontroller/camera/CameraHandler.o: controller/viewcontroller/camera/CameraHandler.cpp.o
+.PHONY : controller/viewcontroller/camera/CameraHandler.o
+
+# target to build an object file
+controller/viewcontroller/camera/CameraHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/camera/CameraHandler.cpp.o
+.PHONY : controller/viewcontroller/camera/CameraHandler.cpp.o
+
+controller/viewcontroller/camera/CameraHandler.i: controller/viewcontroller/camera/CameraHandler.cpp.i
+.PHONY : controller/viewcontroller/camera/CameraHandler.i
+
+# target to preprocess a source file
+controller/viewcontroller/camera/CameraHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/camera/CameraHandler.cpp.i
+.PHONY : controller/viewcontroller/camera/CameraHandler.cpp.i
+
+controller/viewcontroller/camera/CameraHandler.s: controller/viewcontroller/camera/CameraHandler.cpp.s
+.PHONY : controller/viewcontroller/camera/CameraHandler.s
+
+# target to generate assembly for a file
+controller/viewcontroller/camera/CameraHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/camera/CameraHandler.cpp.s
+.PHONY : controller/viewcontroller/camera/CameraHandler.cpp.s
+
 model/universe/PlanetModel.o: model/universe/PlanetModel.cpp.o
 .PHONY : model/universe/PlanetModel.o
 
@@ -948,6 +948,33 @@ model/universe/environments/bullet/PlaneBt.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/bullet/PlaneBt.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/bullet/PlaneBt.cpp.s
 .PHONY : model/universe/environments/bullet/PlaneBt.cpp.s
+
+model/universe/environments/physics/PhysicsController.o: model/universe/environments/physics/PhysicsController.cpp.o
+.PHONY : model/universe/environments/physics/PhysicsController.o
+
+# target to build an object file
+model/universe/environments/physics/PhysicsController.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/physics/PhysicsController.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/physics/PhysicsController.cpp.o
+.PHONY : model/universe/environments/physics/PhysicsController.cpp.o
+
+model/universe/environments/physics/PhysicsController.i: model/universe/environments/physics/PhysicsController.cpp.i
+.PHONY : model/universe/environments/physics/PhysicsController.i
+
+# target to preprocess a source file
+model/universe/environments/physics/PhysicsController.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/physics/PhysicsController.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/physics/PhysicsController.cpp.i
+.PHONY : model/universe/environments/physics/PhysicsController.cpp.i
+
+model/universe/environments/physics/PhysicsController.s: model/universe/environments/physics/PhysicsController.cpp.s
+.PHONY : model/universe/environments/physics/PhysicsController.s
+
+# target to generate assembly for a file
+model/universe/environments/physics/PhysicsController.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/physics/PhysicsController.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/physics/PhysicsController.cpp.s
+.PHONY : model/universe/environments/physics/PhysicsController.cpp.s
 
 model/universe/evolution/EvolutionModel.o: model/universe/evolution/EvolutionModel.cpp.o
 .PHONY : model/universe/evolution/EvolutionModel.o
@@ -3271,9 +3298,6 @@ help:
 	@echo "... controller/StateHandler.o"
 	@echo "... controller/StateHandler.i"
 	@echo "... controller/StateHandler.s"
-	@echo "... controller/camera/CameraHandler.o"
-	@echo "... controller/camera/CameraHandler.i"
-	@echo "... controller/camera/CameraHandler.s"
 	@echo "... controller/input/CEGUIInputHandler.o"
 	@echo "... controller/input/CEGUIInputHandler.i"
 	@echo "... controller/input/CEGUIInputHandler.s"
@@ -3283,12 +3307,9 @@ help:
 	@echo "... controller/input/SDL2InputHandler.o"
 	@echo "... controller/input/SDL2InputHandler.i"
 	@echo "... controller/input/SDL2InputHandler.s"
-	@echo "... controller/physics/PhysicsController.o"
-	@echo "... controller/physics/PhysicsController.i"
-	@echo "... controller/physics/PhysicsController.s"
-	@echo "... controller/physics/RagDoll.o"
-	@echo "... controller/physics/RagDoll.i"
-	@echo "... controller/physics/RagDoll.s"
+	@echo "... controller/ragdoll/RagDoll.o"
+	@echo "... controller/ragdoll/RagDoll.i"
+	@echo "... controller/ragdoll/RagDoll.s"
 	@echo "... controller/universe/Planet.o"
 	@echo "... controller/universe/Planet.i"
 	@echo "... controller/universe/Planet.s"
@@ -3322,6 +3343,12 @@ help:
 	@echo "... controller/universe/evolution/population/creature/phenome/morphology/Limb.o"
 	@echo "... controller/universe/evolution/population/creature/phenome/morphology/Limb.i"
 	@echo "... controller/universe/evolution/population/creature/phenome/morphology/Limb.s"
+	@echo "... controller/viewcontroller/ViewController.o"
+	@echo "... controller/viewcontroller/ViewController.i"
+	@echo "... controller/viewcontroller/ViewController.s"
+	@echo "... controller/viewcontroller/camera/CameraHandler.o"
+	@echo "... controller/viewcontroller/camera/CameraHandler.i"
+	@echo "... controller/viewcontroller/camera/CameraHandler.s"
 	@echo "... model/universe/PlanetModel.o"
 	@echo "... model/universe/PlanetModel.i"
 	@echo "... model/universe/PlanetModel.s"
@@ -3349,6 +3376,9 @@ help:
 	@echo "... model/universe/environments/bullet/PlaneBt.o"
 	@echo "... model/universe/environments/bullet/PlaneBt.i"
 	@echo "... model/universe/environments/bullet/PlaneBt.s"
+	@echo "... model/universe/environments/physics/PhysicsController.o"
+	@echo "... model/universe/environments/physics/PhysicsController.i"
+	@echo "... model/universe/environments/physics/PhysicsController.s"
 	@echo "... model/universe/evolution/EvolutionModel.o"
 	@echo "... model/universe/evolution/EvolutionModel.i"
 	@echo "... model/universe/evolution/EvolutionModel.s"

@@ -18,8 +18,8 @@
 //## view headers
 //## utils headers
 
-EnvironmentModel::EnvironmentModel():mEnvironmentPhysics(NULL) {
-	// TODO Auto-generated constructor stub
+EnvironmentModel::EnvironmentModel() :
+		mEnvironmentPhysics(NULL), mPhysicsController(NULL) {
 
 }
 

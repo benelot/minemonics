@@ -13,6 +13,7 @@ class SimulationManager;
 //## configuration headers
 //## controller headers
 #include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
 
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
@@ -33,10 +34,10 @@ Creature::~Creature() {
 	mPhenotype = NULL;
 }
 
-void Creature::initialize(SimulationManager* simulationManager,
+void Creature::initialize(SimulationManager* simulationManager,Population* population,
 		Ogre::Vector3 position, double branchiness) {
 	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(position, branchiness);
+	mCreatureModel->initialize(population->getPopulationModel(),position, branchiness);
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager,this);
 }

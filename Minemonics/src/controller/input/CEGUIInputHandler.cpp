@@ -126,14 +126,14 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		}
 
 		mSimulationMgr->getCamera()->setPolygonMode(pm);
-		mSimulationMgr->getDetailsPanel()->setParamValue(10, newVal);
+		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(10, newVal);
 		break;
 	case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
 
 		Ogre::TextureFilterOptions tfo;
 		unsigned int aniso;
 
-		switch (mSimulationMgr->getDetailsPanel()->getParamValue(9)[0]) {
+		switch (mSimulationMgr->getViewController().getDetailsPanel()->getParamValue(9)[0]) {
 		case 'B':
 			newVal = "Trilinear";
 			tfo = Ogre::TFO_TRILINEAR;
@@ -157,7 +157,7 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 
 		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
 		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-		mSimulationMgr->getDetailsPanel()->setParamValue(9, newVal);
+		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(9, newVal);
 		break;
 	case ApplicationKeycode::APPK_y:
 		// return CEGUI::Key::Y;
@@ -184,21 +184,21 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::D;
 		break;
 	case ApplicationKeycode::APPK_f: // toggle visibility of advanced frame stats
-		if (!mSimulationMgr->getFpsPanel()->getWidgetPanel()->isVisible()) {
+		if (!mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->isVisible()) {
 			ParamsPanel::VectorStringPairs items;
 			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
-			mSimulationMgr->getFpsPanel()->getWidgetPanel()->setVisible(false);
+			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(false);
 		} else {
-			bool simple = mSimulationMgr->getFpsPanel()->size() == 1;
-			mSimulationMgr->getFpsPanel()->getWidgetPanel()->setVisible(true);
+			bool simple = mSimulationMgr->getViewController().getFpsPanel()->size() == 1;
+			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(true);
 		}
 		break;
 	case ApplicationKeycode::APPK_g: // toggle visibility of even rarer debugging details
 
-		if (mSimulationMgr->getDetailsPanel()->isVisible()) {
-			mSimulationMgr->getDetailsPanel()->hide();
+		if (mSimulationMgr->getViewController().getDetailsPanel()->isVisible()) {
+			mSimulationMgr->getViewController().getDetailsPanel()->hide();
 		} else {
-			mSimulationMgr->getDetailsPanel()->show();
+			mSimulationMgr->getViewController().getDetailsPanel()->show();
 		}
 		break;
 	case ApplicationKeycode::APPK_h:
@@ -831,8 +831,8 @@ bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 					|| window->getName() == "MathGLRTTWindow")
 			&& button == ApplicationMouseCode::RightButton) {
 		std::vector<MathGLPanel*>::iterator it =
-				mSimulationMgr->getGraphWindows().begin();
-		for (; it != mSimulationMgr->getGraphWindows().end(); it++) {
+				mSimulationMgr->getViewController().getGraphWindows().begin();
+		for (; it !=mSimulationMgr->getViewController().getGraphWindows().end(); it++) {
 			if ((*it)->getMathGlWindow() == window
 					|| (*it)->getMathGlWindow()->getChild("MathGLRTTWindow")
 							== window) {

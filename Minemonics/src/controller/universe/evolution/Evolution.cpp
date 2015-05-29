@@ -16,21 +16,18 @@
 //## utils headers
 
 Evolution::Evolution() :
-		mCurrentCreature(NULL), mEnvironment(NULL) {
+		mCurrentCreature(NULL) {
 }
 
 Evolution::~Evolution() {
 	mCurrentCreature = NULL;
 
-	delete mEnvironment;
-	mEnvironment = NULL;
 }
 
-void Evolution::initialize(Environment* environment) {
-	mEnvironment = environment;
+void Evolution::initialize() {
 }
 
-void Evolution::addNewPopulation(Population* population) {
+void Evolution::addPopulation(Population* population) {
 	mPopulations.push_back(population);
 	mEvolutionModel.addNewPopulation(population->getPopulationModel());
 }

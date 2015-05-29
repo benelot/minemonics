@@ -20,7 +20,7 @@ class Creature;
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/physics/PhysicsController.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>

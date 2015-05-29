@@ -1,37 +1,32 @@
-/*
- * Plane.h
- *
- *  Created on: Mar 24, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_UNIVERSE_ENVIRONMENTS_PLANE_HPP_
 #define CONTROLLER_UNIVERSE_ENVIRONMENTS_PLANE_HPP_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
 class EnvironmentModel;
+class OgreBtDebugDrawer;
+namespace Ogre {
+class Light;
+} /* namespace Ogre */
 
 //# system headers
 //## controller headers
 //## model headers
 //## view headers
 #include <controller/universe/environments/Environment.hpp>
-#include <OgreLight.h>
 
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
-
 //## model headers
 //## view headers
-
+//## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The plane environment simulates an environment that is a geometric plane.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-24
  * @author		Benjamin Ellenberger
  */
 class Plane: public Environment {
@@ -39,7 +34,7 @@ public:
 	Plane();
 	virtual ~Plane();
 
-	void initialize(SimulationManager* simulationMgr, Ogre::Light* l);
+	void initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer);
 
 	EnvironmentModel* getEnvironmentModel();
 };

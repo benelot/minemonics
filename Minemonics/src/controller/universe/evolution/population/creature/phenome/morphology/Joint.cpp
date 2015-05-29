@@ -15,11 +15,16 @@
 
 //## configuration headers
 //## controller headers
-#include <controller/physics/PhysicsController.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+
+//## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
+
+//##view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## utils headers
@@ -37,17 +42,17 @@ Joint::~Joint() {
 	delete mJointModel;
 }
 
-void Joint::initialize(SimulationManager* simulationManager, Limb* limbA,
+void Joint::initialize(Creature* creature, Limb* limbA,
 		Limb* limbB, btTransform localA, btTransform localB) {
 
 	// initialize the physics model of the joint
 	mJointModel = new JointModel();
 	mJointModel->initialize(
-			simulationManager->getPhysicsController().getDynamicsWorld(),
+			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			limbA->getLimbPhysics()->getRigidBody(),
 			limbB->getLimbPhysics()->getRigidBody(), localA, localB);
 
-	buildFrom(simulationManager, mJointModel);
+	buildFrom( mJointModel);
 }
 
 void Joint::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
@@ -104,14 +109,14 @@ void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 			rollEnable);
 }
 
-void Joint::buildFrom(SimulationManager* simulationManager,/* Limb* limbA,
+void Joint::buildFrom(/*SimulationManager* simulationManager, Limb* limbA,
  Limb* limbB,*/JointModel* jointModel) {
 	// Define the new component as a limb
 	Component::initialize(ComponentModel::JointComponent);
 
 	// initialize the graphics part of the joint
 	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize(simulationManager);
+	((JointO3D*) mJointGraphics)->initialize();
 
 	if (mJointModel == NULL) {
 		mJointModel = jointModel;

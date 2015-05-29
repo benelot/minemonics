@@ -27,11 +27,13 @@
 #include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
-#include <controller/physics/PhysicsController.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
@@ -61,7 +63,7 @@ void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 	//initialize the model of the limb
 	mLimbModel = new LimbModel();
 	mLimbModel->initialize(
-			simulationManager->getPhysicsController().getDynamicsWorld(), this,
+			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(), this,
 			type, position, orientation, dimensions, mass, color);
 
 	buildFrom(simulationManager, creature, mLimbModel);

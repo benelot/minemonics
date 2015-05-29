@@ -7,6 +7,7 @@ class SimulationManager;
 class EnvironmentGraphics;
 class EnvironmentPhysics;
 class EnvironmentModel;
+class PhysicsController;
 
 //# system headers
 //## controller headers
@@ -38,8 +39,7 @@ public:
 
 	Environment();
 	virtual ~Environment();
-	void initialize(SimulationManager* simulationMgr,
-			EnvironmentType environmentType);
+	void initialize(EnvironmentType environmentType);
 
 	virtual EnvironmentModel* getEnvironmentModel() = 0;
 
@@ -48,7 +48,6 @@ public:
 	void update();
 
 protected:
-	SimulationManager* mSimulationMgr;
 	EnvironmentGraphics* mEnvironmentGraphics;
 	EnvironmentModel* mEnvironmentModel;
 

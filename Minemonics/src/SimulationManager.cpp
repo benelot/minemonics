@@ -90,9 +90,7 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-		mStateHandler(), mGUISheetHandler(), mInputHandler(), mCameraHandler(
-				this), mRenderer(0), mLayout(NULL), mSystem(NULL), mDetailsPanel(
-		NULL), mFpsPanel(NULL), mDragContainer(NULL), mDebugDrawer(
+		mStateHandler(), mInputHandler(), mCameraHandler(this), mDebugDrawer(
 		NULL), mSdlWindow(
 		NULL) {
 
@@ -120,9 +118,6 @@ void SimulationManager::createFrameListener(void) {
 	// to the CEGUI System instance to use
 	mStateHandler.requestStateChange(GUI);
 
-	// make an instance of our GUI sheet handler class
-	mGUISheetHandler.initialize(this, mSystem, mLayout, &mStateHandler);
-
 	//Set initial mouse clipping size
 	windowResized(mWindow);
 
@@ -132,7 +127,7 @@ void SimulationManager::createFrameListener(void) {
 	mRoot->addFrameListener(this);
 
 	//################################################################
-	//TODO: Camera must be handled within camera handler #############
+	//TODO: Camera must be handled within view controller #############
 	// Create the scene node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
@@ -142,13 +137,14 @@ void SimulationManager::createFrameListener(void) {
 
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
+
 	//################################################################
 
 	// initialize random number generator
 	boost::posix_time::time_duration duration(mNow.time_of_day());
 	//Rng::seed(duration.total_milliseconds());
 
-	mPhysicsController.initBulletPhysics();
+	// initialize the simulation's debug drawer
 	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr, true);
 	mDebugDrawer->setDrawWireframe(true);
 	mDebugDrawer->setDrawConstraints(true);
@@ -156,38 +152,24 @@ void SimulationManager::createFrameListener(void) {
 	mDebugDrawer->setDrawContactPoints(true);
 	mDebugDrawer->setDrawNormals(true);
 
-	mPhysicsController.getDynamicsWorld()->setDebugDrawer(mDebugDrawer);
-	mPhysicsController.setPhysicsPaused(true);
-
-	//create the earth terrain
-	Environment* earthGround = new Plane();
-	((Plane*) earthGround)->initialize(this, NULL);
-
-	if (earthGround->mEnvironmentType == Environment::PLANE) {
-		mPhysicsController.addBody(earthGround->getBody());
-	}
-
 	// initialize the universe
 	mUniverse.initialize();
 
-
-	//create a population
-	Population* earthPopulation = new Population();
-	earthPopulation->initialize(this,100);
-
-	//create earth evolution and add earth population to it
-	Evolution* earthEvolution = new Evolution();
-	earthEvolution->initialize(earthGround);
-	earthEvolution->addNewPopulation(earthPopulation);
-
+	// create a planet called earth
 	Planet* earth = new Planet();
-	earth->initialize(earthEvolution,earthGround,&mPhysicsController);
+	earth->initialize(this, Environment::PLANE, mDebugDrawer);
 
 	mUniverse.addPlanet(earth);
 
-	//mPhysicsController.setPhysicsPaused(true);
+	//create a population
+	Population* earthPopulation = new Population();
+	earthPopulation->initialize(earth, this, 100);
+
+	earth->addPopulation(earthPopulation);
+
 	Randomness randomness;
-	std::vector<Creature*>::iterator cit = earthPopulation->getCreatures().begin();
+	std::vector<Creature*>::iterator cit =
+			earthPopulation->getCreatures().begin();
 	for (; cit != earthPopulation->getCreatures().end(); cit++) {
 		(*cit)->setPosition(
 				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
@@ -218,63 +200,8 @@ void SimulationManager::createScene(void) {
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);
 
-	// CEGUI
-	// with a scene manager and window, we can create a the GUI renderer
-	// new way to instantiate a CEGUIOgreRenderer (Ogre 1.9)
-	mRenderer = &CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
-
-	// This pointer is valid only locally
-	mSystem = &CEGUI::System::getSingleton();
-
-	// tell us a lot about what is going on (see CEGUI.log in the working directory)
-	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-
-	// use this CEGUI scheme definition (see CEGUI docs for more)
-	CEGUI::SchemeManager::getSingleton().createFromFile(
-			(CEGUI::utf8*) "Ogremonics.scheme", (CEGUI::utf8*) "GUI");
-	//	CEGUI::SchemeManager::getSingleton().createFromFile(
-	//			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
-	//	CEGUI::SchemeManager::getSingleton().createFromFile(
-	//			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
-
-	// hide the CEGUI mouse cursor (defined in the look-n-feel)
-	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
-
-	// use this font for text in the UI
-	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
-			(CEGUI::utf8*) "GUI");
-	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
-
-	// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
-	// put it in the GUI resource group
-	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
-			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
-
-	CEGUIBuilder ceguiBuilder(this);
-	CEGUI::Window* menu = ceguiBuilder.createMenu();
-	menu->setAlwaysOnTop(true);
-	mLayout->addChild(menu);
-
-	setFpsPanel(ceguiBuilder.createFpsPanel());
-	mLayout->addChild(getFpsPanel()->getWidgetPanel());
-	setDetailsPanel(ceguiBuilder.createDetailsPanel());
-	mLayout->addChild(getDetailsPanel()->getWidgetPanel());
-
-// TODO: Add graphwindows again when used
-//	mGraphWindows.push_back(
-//			new MathGLPanel(this, 400, 400,
-//					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
-//					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
-
-	std::vector<MathGLPanel*>::iterator it = mGraphWindows.begin();
-	for (; it != mGraphWindows.end(); it++) {
-		mLayout->addChild((*it)->getMathGlWindow());
-	}
-
-	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
-	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes
-	// a CEGUI::Window instance -- you can use anything (any widget) that serves as a root window.
-	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
+	//initialize GUI and views
+	mViewController.initialize(this, renderTarget, &mStateHandler);
 
 	// ###################
 	// We create the evaluation scene defined by the planet to be evaluated
@@ -308,21 +235,6 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-
-//	// set up environment
-//	switch (EnvironmentConfiguration::ENVIRONMENT_TYPE) {
-//	case Environment::HILLS: {
-//		mTerrain = new Hills();
-//		((Hills*) mTerrain)->initialize(this, light);
-//		break;
-//	}
-//	case Environment::PLANE: {
-//		mTerrain = new Plane();
-//		((Plane*) mTerrain)->initialize(this, light);
-//		break;
-//	}
-//	}
-
 	//either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
 
@@ -334,8 +246,6 @@ void SimulationManager::createScene(void) {
 //			0.5, 150, 150);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
-
-	mInfoOverlay.initialize(mCamera);
 }
 
 //-------------------------------------------------------------------------------------
@@ -361,20 +271,14 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
-	// step forward bullet physics
-	mPhysicsController.stepBulletPhysics(evt.timeSinceLastFrame);
-
 	//update all physical objects
-	updatePhysics();
+	updatePhysics(evt.timeSinceLastFrame);
 
-	//draw the debug world if it is enabled
-	mPhysicsController.getDynamicsWorld()->debugDrawWorld();
-
-	// update the information overlay
-	mInfoOverlay.update();
-
-	// update the information panels on the screen
+	// update the information in the panels on screen
 	updatePanels(evt.timeSinceLastFrame);
+
+	//update view
+	mViewController.update(evt.timeSinceLastFrame);
 
 	//TODO: Use for creature evolution, but clean up afterwards
 	// updateEvolution();
@@ -382,13 +286,98 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	return true;
 }
 
-void SimulationManager::updatePhysics() {
+void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
-	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
-	for (; it != mRagdolls.end(); it++) {
-		(*it)->update();
+	std::vector<MathGLPanel*>::iterator it =
+			mViewController.getGraphWindows().begin();
+	for (; it != mViewController.getGraphWindows().end(); it++) {
+		(*it)->update(timeSinceLastFrame);
 	}
 
+	if (mViewController.getFpsPanel() != NULL) {
+		if (mViewController.getFpsPanel()->isVisible()) // if fps panel is visible, then update its contents
+		{
+			if (mViewController.getFpsPanel()->size() == 3) {
+				mViewController.getFpsPanel()->setParamValue(0,
+						Ogre::StringConverter::toString(mWindow->getLastFPS()),
+						true);
+				mViewController.getFpsPanel()->setParamValue(1,
+						Ogre::StringConverter::toString(
+								mRuntime.total_milliseconds()), true);
+
+//				if (mTerrain->mEnvironmentType == Environment::HILLS) {
+//					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
+//						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
+//							mFpsPanel->setParamValue(2,
+//									"Building terrain, please wait...", true);
+//						} else {
+//							mFpsPanel->setParamValue(2,
+//									"Updating textures, patience...", true);
+//						}
+//					} else {
+//						mFpsPanel->setParamValue(2, "Idle.", true);
+//						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
+//							((HillsO3D*) mTerrain)->mTerrainGroup->saveAllTerrains(
+//									true);
+//							((HillsO3D*) mTerrain)->mTerrainsImported = false;
+//						}
+//					}
+//				}
+			} else {
+				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
+				mViewController.getFpsPanel()->setParamValue(0,
+						Ogre::StringConverter::toString(fs.lastFPS), false);
+				mViewController.getFpsPanel()->setParamValue(1,
+						Ogre::StringConverter::toString(fs.avgFPS), false);
+				mViewController.getFpsPanel()->setParamValue(2,
+						Ogre::StringConverter::toString(fs.bestFPS), false);
+				mViewController.getFpsPanel()->setParamValue(3,
+						Ogre::StringConverter::toString(fs.worstFPS), false);
+				mViewController.getFpsPanel()->setParamValue(4,
+						Ogre::StringConverter::toString(fs.triangleCount),
+						false);
+				mViewController.getFpsPanel()->setParamValue(5,
+						Ogre::StringConverter::toString(fs.batchCount), true);
+			}
+		}
+	}
+	if (mViewController.getDetailsPanel() != NULL) {
+		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
+		{
+			mViewController.getDetailsPanel()->setParamValue(0,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedPosition().x), false);
+			mViewController.getDetailsPanel()->setParamValue(1,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedPosition().y), false);
+			mViewController.getDetailsPanel()->setParamValue(2,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedPosition().z), false);
+			mViewController.getDetailsPanel()->setParamValue(4,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().w), false);
+			mViewController.getDetailsPanel()->setParamValue(5,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().x), false);
+			mViewController.getDetailsPanel()->setParamValue(6,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().y), false);
+			mViewController.getDetailsPanel()->setParamValue(7,
+					Ogre::StringConverter::toString(
+							mCamera->getDerivedOrientation().z), true);
+		}
+	}
+}
+
+void SimulationManager::updatePhysics(double timeSinceLastFrame) {
+
+//	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
+//	for (; it != mRagdolls.end(); it++) {
+//		(*it)->update();
+//	}
+
+	mUniverse.drawDebugWorld();
+	mUniverse.stepPhysics(timeSinceLastFrame);
 	mUniverse.update();
 
 //	const int numObjects =
@@ -489,88 +478,6 @@ void SimulationManager::updateEvolution() {
 
 }
 
-void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
-
-	std::vector<MathGLPanel*>::iterator it = mGraphWindows.begin();
-	for (; it != mGraphWindows.end(); it++) {
-		(*it)->update(timeSinceLastFrame);
-	}
-
-	if (mFpsPanel != NULL) {
-		if (mFpsPanel->isVisible()) // if fps panel is visible, then update its contents
-		{
-			if (mFpsPanel->size() == 3) {
-				mFpsPanel->setParamValue(0,
-						Ogre::StringConverter::toString(mWindow->getLastFPS()),
-						true);
-				mFpsPanel->setParamValue(1,
-						Ogre::StringConverter::toString(
-								mRuntime.total_milliseconds()), true);
-
-//				if (mTerrain->mEnvironmentType == Environment::HILLS) {
-//					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
-//						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
-//							mFpsPanel->setParamValue(2,
-//									"Building terrain, please wait...", true);
-//						} else {
-//							mFpsPanel->setParamValue(2,
-//									"Updating textures, patience...", true);
-//						}
-//					} else {
-//						mFpsPanel->setParamValue(2, "Idle.", true);
-//						if (((HillsO3D*) mTerrain)->mTerrainsImported) {
-//							((HillsO3D*) mTerrain)->mTerrainGroup->saveAllTerrains(
-//									true);
-//							((HillsO3D*) mTerrain)->mTerrainsImported = false;
-//						}
-//					}
-//				}
-			} else {
-				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
-				mFpsPanel->setParamValue(0,
-						Ogre::StringConverter::toString(fs.lastFPS), false);
-				mFpsPanel->setParamValue(1,
-						Ogre::StringConverter::toString(fs.avgFPS), false);
-				mFpsPanel->setParamValue(2,
-						Ogre::StringConverter::toString(fs.bestFPS), false);
-				mFpsPanel->setParamValue(3,
-						Ogre::StringConverter::toString(fs.worstFPS), false);
-				mFpsPanel->setParamValue(4,
-						Ogre::StringConverter::toString(fs.triangleCount),
-						false);
-				mFpsPanel->setParamValue(5,
-						Ogre::StringConverter::toString(fs.batchCount), true);
-			}
-		}
-	}
-	if (mDetailsPanel != NULL) {
-		if (mDetailsPanel->isVisible()) // if details panel is visible, then update its contents
-		{
-			mDetailsPanel->setParamValue(0,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedPosition().x), false);
-			mDetailsPanel->setParamValue(1,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedPosition().y), false);
-			mDetailsPanel->setParamValue(2,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedPosition().z), false);
-			mDetailsPanel->setParamValue(4,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().w), false);
-			mDetailsPanel->setParamValue(5,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().x), false);
-			mDetailsPanel->setParamValue(6,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().y), false);
-			mDetailsPanel->setParamValue(7,
-					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().z), true);
-		}
-	}
-}
-
 /**
  * What to do if the window is resized.
  * @param rw The handle of the render window that was resized.
@@ -598,7 +505,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 #endif
 
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
-	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
+	mViewController.notifyDisplaySizeChanged(width, height);
 }
 
 /**
@@ -610,11 +517,8 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
 
 		// Align CEGUI mouse with SDL mouse
-		CEGUI::Vector2f mousePos =
-				mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-				mInputHandler.getMousePositionX() - mousePos.d_x,
-				mInputHandler.getMousePositionY() - mousePos.d_y);
+		mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
+				mInputHandler.getMousePositionY());
 	} else {
 		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
 	}
@@ -625,14 +529,15 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
  * Destroy the scene if the application is quit.
  */
 void SimulationManager::destroyScene(void) {
-	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
-	for (; it != mRagdolls.end(); it++) {
-		(*it)->removeFromWorld();
-	}
+//	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
+//	for (; it != mRagdolls.end(); it++) {
+//		(*it)->removeFromWorld();
+//	}
 
 	//mUniverse.removeFromWorld();
 
-	mPhysicsController.exitBulletPhysics();
+//TODO: Clean up universe properly
+//	mPhysicsController.exitBulletPhysics();
 
 }
 //-------------------------------------------------------------------------------------

@@ -1,16 +1,33 @@
 //# corresponding headers
 #include <controller/universe/evolution/population/Population.hpp>
-#include <SimulationManager.hpp>
 
-//## configuration headers
+//# forward declarations
+//# system headers
+#include <stddef.h>
+#include <iterator>
+#include <vector>
+
 //## controller headers
+//## model headers
+//## view headers
+#include <OgreVector3.h>
+
+//# custom headers
+//## base headers
+//## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
+//## controller headers
+#include <controller/universe/Planet.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
 
 Population::Population() :
-		mSimulationManager(NULL),mPopulationModel(NULL) {
+		mSimulationManager(NULL), mPopulationModel(NULL) {
 }
 
 Population::~Population() {
@@ -24,11 +41,10 @@ Population::~Population() {
  * @param simulationManager The simulation manager handle
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void Population::initialize(SimulationManager* simulationManager,
-		int creatureQty) {
+void Population::initialize(Planet* planet,SimulationManager* simulationManager, int creatureQty) {
 	mSimulationManager = simulationManager;
 	mPopulationModel = new PopulationModel();
-	mPopulationModel->setCreatureQty(creatureQty);
+	mPopulationModel->initialize(&planet->getPlanetModel(),creatureQty);
 	Randomness randomness;
 	double bushiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
@@ -37,44 +53,42 @@ void Population::initialize(SimulationManager* simulationManager,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		addNewMember(bushiness);
 	}
+	mPlanet = planet;
 }
 
 /**
  * Adds a new creature to the population with the bushiness as a input.
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
-void Population::addNewMember(double bushiness,Ogre::Vector3 rootPosition) {
+void Population::addNewMember(double bushiness, Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
-		creature->initialize(mSimulationManager, rootPosition,
-				bushiness);
+		//TODO:Include planet into initializer
+		creature->initialize(mSimulationManager,this, rootPosition, bushiness);
 		mCreatures.push_back(creature);
 		//hand model down to the population model
-		mPopulationModel->addNewMember(creature->mCreatureModel);
+		mPopulationModel->addMember(creature->mCreatureModel);
 	}
 
 }
 
 void Population::update() {
 	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for(;cit != mCreatures.end();cit++)
-	{
+	for (; cit != mCreatures.end(); cit++) {
 		(*cit)->update();
 	}
 }
 
 void Population::addToWorld() {
 	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for(;cit != mCreatures.end();cit++)
-	{
+	for (; cit != mCreatures.end(); cit++) {
 		(*cit)->addToWorld();
 	}
 }
 
 void Population::removeFromWorld() {
 	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for(;cit != mCreatures.end();cit++)
-	{
+	for (; cit != mCreatures.end(); cit++) {
 		(*cit)->removeFromWorld();
 	}
 }

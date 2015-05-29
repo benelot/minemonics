@@ -5,8 +5,8 @@
  *      Author: leviathan
  */
 
-#ifndef CONTROLLER_PHYSICS_RAGDOLL_HPP_
-#define CONTROLLER_PHYSICS_RAGDOLL_HPP_
+#ifndef CONTROLLER_RAGDOLL_RAGDOLL_HPP_
+#define CONTROLLER_RAGDOLL_RAGDOLL_HPP_
 
 //# corresponding header
 //# forward declarations
@@ -18,6 +18,8 @@ class Joint;
 #include <vector>
 
 //## controller headers
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
 #include <btBulletDynamicsCommon.h>
 
@@ -36,7 +38,7 @@ class Joint;
  * @date		2015-04-27
  * @author		Benjamin Ellenberger
  */
-class RagDoll {
+class RagDoll: public Creature {
 	enum {
 		BODYPART_PELVIS = 0, BODYPART_SPINE, BODYPART_HEAD,
 
@@ -83,4 +85,4 @@ public:
 	void removeFromWorld();
 };
 
-#endif /* CONTROLLER_PHYSICS_RAGDOLL_HPP_ */
+#endif /* CONTROLLER_RAGDOLL_RAGDOLL_HPP_ */

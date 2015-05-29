@@ -16,13 +16,16 @@
 //## controller headers
 #include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/environments/Environment.hpp>
+#include <controller/universe/environments/Plane.hpp>
 
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+
 //## view headers
 //## utils headers
 
 Planet::Planet() :
-		mEnvironment(NULL), mEvolution(NULL), mPhysicsController(NULL) {
+		mEnvironment(NULL), mEvolution(NULL) {
 }
 
 Planet::~Planet() {
@@ -30,34 +33,40 @@ Planet::~Planet() {
 	mEvolution = NULL;
 }
 
-void Planet::initialize(Evolution* evolution, Environment* environment,
-		PhysicsController::PhysicsControllerType type) {
-	PhysicsController* physicsController;
+void Planet::initialize(SimulationManager* simulationManager,Environment::EnvironmentType type,
+		OgreBtDebugDrawer* debugDrawer) {
+	//create earth evolution
+	mEvolution = new Evolution();
+	mEvolution->initialize();
 
+	// set up environment
 	switch (type) {
-	case PhysicsController::GroundController:
-
-		break;
-	case PhysicsController::DeepSeaController:
-
-		break;
-	default:
+	case Environment::HILLS: {
+//		mEnvironment = new Hills();
+//		((Hills*) mEnvironment)->initialize(this, NULL,debugDrawer);
 		break;
 	}
-	initialize(evolution, environment, physicsController);
+	case Environment::PLANE: {
+		//create the terrain
+		mEnvironment = new Plane();
+		((Plane*) mEnvironment)->initialize(simulationManager, NULL, debugDrawer);
+		break;
+	}
+	}
+	mPlanetModel.initialize();
+	mPlanetModel.setEvolutionModel(&mEvolution->getEvolutionModel());
+	mPlanetModel.setEnvironmentModel(mEnvironment->getEnvironmentModel());
 }
 
-void Planet::initialize(Evolution* evolution, Environment* environment,
-		PhysicsController* physicsController) {
-	mEvolution = evolution;
-	mEnvironment = environment;
-	mPhysicsController = physicsController;
-	mPlanetModel.setEvolutionModel(&evolution->getEvolutionModel());
-	mPlanetModel.setEnvironmentModel(environment->getEnvironmentModel());
+void Planet::addPopulation(Population* population) {
+	mEvolution->addPopulation(population);
 }
 
-void Planet::update()
-{
+void Planet::stepPhysics(double timeSinceLastFrame) {
+	mPlanetModel.getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(timeSinceLastFrame);
+}
+
+void Planet::update() {
 	mEvolution->update();
 	mEnvironment->update();
 }
@@ -65,4 +74,10 @@ void Planet::update()
 bool Planet::proceedEvaluation() {
 	mPlanetModel.proceedEvaluation();
 	return true;
+}
+
+void Planet::drawDebugWorld() {
+	//draws the debug world if it is enabled
+	mPlanetModel.getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld();
+
 }

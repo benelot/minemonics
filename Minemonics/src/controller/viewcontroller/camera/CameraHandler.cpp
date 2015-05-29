@@ -17,7 +17,7 @@
 #include <configuration/CameraConfiguration.hpp>
 
 //## controller headers
-#include <controller/camera/CameraHandler.hpp>
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
 
 //## model headers
 //## view headers

@@ -41,8 +41,8 @@ public:
 	JointO3D();
 	virtual ~JointO3D();
 
-	void initialize(SimulationManager* simulationManager /*, Limb* limbA,
-			Limb* limbB /*, btTransform localA, btTransform localB*/);
+	void initialize(/*SimulationManager* simulationManager , Limb* limbA,
+			Limb* limbB , btTransform localA, btTransform localB*/);
 
 	void update();
 

@@ -1,15 +1,9 @@
-/*
- * Creature.h
- *
- *  Created on: Dec 2, 2014
- *      Author: leviathan
- */
-
 #ifndef CREATUREM_H_
 #define CREATUREM_H_
 
 //# corresponding header
 //# forward declarations
+class PopulationModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -40,6 +34,7 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/PlanetModel.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
@@ -51,7 +46,7 @@ class access;
 /**
  * @brief		The model of the creature holds the important information about the creature.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-12-02
  * @author		Benjamin Ellenberger
  */
 class CreatureModel {
@@ -63,7 +58,7 @@ public:
 	 * Initializes a creature with random values for its genome, name, total segments quantity and segments path limit.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(Ogre::Vector3 position, double branchiness);
+	void initialize(PopulationModel* populationModel, Ogre::Vector3 position, double branchiness);
 
 	void evaluate();
 
@@ -150,6 +145,10 @@ public:
 		mPosition = position;
 	}
 
+	PopulationModel* getPopulationModel() {
+		return mPopulationModel;
+	}
+
 private:
 
 	/**
@@ -181,6 +180,11 @@ private:
 	 * The position of the creature.
 	 */
 	Ogre::Vector3 mPosition;
+
+	/**
+	 * The population the creature lives in.
+	 */
+	PopulationModel* mPopulationModel;
 
 };
 BOOST_CLASS_VERSION(CreatureModel, 1)

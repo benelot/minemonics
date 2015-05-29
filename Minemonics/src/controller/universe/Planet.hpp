@@ -8,16 +8,20 @@ class Evolution;
 
 //# system headers
 //## controller headers
-#include <controller/physics/PhysicsController.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/environments/Environment.hpp>
 
 //## model headers
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 //## model headers
 #include <model/universe/PlanetModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
 //## utils headers
@@ -33,9 +37,14 @@ public:
 	Planet();
 	virtual ~Planet();
 
-	void initialize(Evolution* evolution, Environment* environment,PhysicsController::PhysicsControllerType type);
+	void initialize(SimulationManager* simulationManager,
+			Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer);
 
-	void initialize(Evolution* evolution, Environment* environment,PhysicsController* physicsController);
+	void addPopulation(Population* population);
+
+	void drawDebugWorld();
+
+	void stepPhysics(double timeSinceLastFrame);
 
 	void update();
 
@@ -78,11 +87,6 @@ private:
 	 * The environment of this planet.
 	 */
 	Environment* mEnvironment;
-
-	/**
-	 * The physics controller of this planet
-	 */
-	PhysicsController* mPhysicsController;
 };
 
 #endif /* CONTROLLER_UNIVERSE_PLANET_HPP_ */

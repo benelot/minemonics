@@ -1,4 +1,6 @@
 //# corresponding headers
+//# forward declarations
+//# system headers
 #include <cstdio>
 #include <string>
 #include <stddef.h>
@@ -43,20 +45,20 @@
 //## view headers
 //## utils headers
 
-MathGLPanel::MathGLPanel(SimulationManager* simulationMgr, int textureWidth,
+MathGLPanel::MathGLPanel(ViewController* viewController,Ogre::Root* root, int textureWidth,
 		int textureHeight, CEGUI::USize windowSize,CEGUI::USize windowPosition) :
-		mSimulationMgr(simulationMgr),mTime(0),mMakePrint(false) {
+		mViewController(viewController),mTime(0),mMakePrint(false) {
 
 	CEGUI::Sizef size(static_cast<float>(textureWidth),
 			static_cast<float>(textureHeight));
 
 	// We create a CEGUI texture target and create a GUIContext that will use it.
-	mRenderTextureTarget = mSimulationMgr->getRenderer()->createTextureTarget();
+	mRenderTextureTarget = mViewController->getRenderer()->createTextureTarget();
 	mRenderTextureTarget->declareRenderSize(size);
-	mRenderGuiContext = &mSimulationMgr->getCEGUISystem()->createGUIContext(
+	mRenderGuiContext = &mViewController->getSystem()->createGUIContext(
 			static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
 
-	mTexture = mSimulationMgr->getRoot()->getTextureManager()->createManual(
+	mTexture = root->getTextureManager()->createManual(
 			"RTT", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 			Ogre::TEX_TYPE_2D, textureWidth, textureHeight, 0, Ogre::PF_R8G8B8,
 			Ogre::TU_RENDERTARGET);
@@ -64,7 +66,7 @@ MathGLPanel::MathGLPanel(SimulationManager* simulationMgr, int textureWidth,
 	Ogre::RenderTexture *rtex = mTexture->getBuffer()->getRenderTarget();
 
 	// We create a CEGUI Texture using the renderer you use:
-	CEGUI::Texture& texture = simulationMgr->getRenderer()->createTexture(
+	CEGUI::Texture& texture = mViewController->getRenderer()->createTexture(
 			"MathGLTexture", mTexture);
 
 	// Now we need to cast it to the CEGUI::Texture superclass which matches your Renderer. This can be CEGUI::OgreTexture or CEGUI::OpenGLTexture, depending on the renderer you use in your application
@@ -133,7 +135,7 @@ MathGLPanel::MathGLPanel(SimulationManager* simulationMgr, int textureWidth,
 }
 
 MathGLPanel::~MathGLPanel() {
-	mSimulationMgr = NULL;
+	mViewController = NULL;
 
 	delete mMathGLWindow;
 	mMathGLWindow = NULL;
@@ -182,13 +184,13 @@ void MathGLPanel::update(double timeSinceLastFrame) {
 		mMakePrint = false;
 	}
 
-	CEGUI::Renderer* gui_renderer(mSimulationMgr->getRenderer());
-	gui_renderer->beginRendering();
+	CEGUI::Renderer* guiRenderer(mViewController->getRenderer());
+	guiRenderer->beginRendering();
 
 	mRenderTextureTarget->clear();
 	mRenderGuiContext->draw();
 
-	gui_renderer->endRendering();
+	guiRenderer->endRendering();
 
 	//notify window of the texture to update
 

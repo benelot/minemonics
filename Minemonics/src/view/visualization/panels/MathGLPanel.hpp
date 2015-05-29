@@ -1,11 +1,12 @@
 #ifndef MATHGLPANEL_H_
 #define MATHGLPANEL_H_
 
+
 //# corresponding headers
 #include <view/visualization/panels/InfoPanel.hpp>
 
 //# forward declarations
-class SimulationManager;
+class ViewController;
 
 namespace CEGUI {
 class Window;
@@ -20,6 +21,9 @@ class TextureTarget;
 #include <CEGUI/Window.h>
 #include <OgrePrerequisites.h>
 #include <OgreTexture.h>
+#include <OgreRoot.h>
+#include <Renderer.h>
+
 //# custom headers
 //## base headers
 //## configuration headers
@@ -36,7 +40,7 @@ class TextureTarget;
  */
 class MathGLPanel: public InfoPanel {
 public:
-	MathGLPanel(SimulationManager* simulationMgr,int textureWidth,
+	MathGLPanel(ViewController* viewController,Ogre::Root* root, int textureWidth,
 			int textureHeight,CEGUI::USize windowSize,CEGUI::USize windowPosition);
 	virtual ~MathGLPanel();
 	void update(double timeSinceLastFrame);
@@ -48,7 +52,7 @@ public:
 	}
 
 private:
-	SimulationManager* mSimulationMgr;
+	ViewController* mViewController;
 	Ogre::TexturePtr mTexture;
 	CEGUI::Window* mMathGLWindow;
 	double mTime;

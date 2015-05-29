@@ -1,12 +1,12 @@
 /*
- * DeepSeaController.cpp
+ * MotionController.cpp
  *
- *  Created on: Nov 17, 2014
+ *  Created on: Mar 3, 2015
  *      Author: leviathan
  */
 
 //# corresponding header
-#include <controller/physics/DeepSeaController.hpp>
+#include <model/universe/environments/physics/MotionController.hpp>
 
 //# forward declarations
 //# system headers
@@ -20,13 +20,12 @@
 //## model headers
 //## view headers
 //## utils headers
-
-DeepSeaController::DeepSeaController() {
+MotionController::MotionController() {
 	// TODO Auto-generated constructor stub
 
 }
 
-DeepSeaController::~DeepSeaController() {
+MotionController::~MotionController() {
 	// TODO Auto-generated destructor stub
 }
 

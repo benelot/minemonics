@@ -49,9 +49,9 @@ public:
 	/**
 	 * Initialize the evolution.
 	 */
-	void initialize(Environment* environment);
+	void initialize();
 
-	void addNewPopulation(Population* population);
+	void addPopulation(Population* population);
 
 	/**
 	 * Proceed with the next creature of the currently tested population or
@@ -64,14 +64,6 @@ public:
 
 
 	//Accessor methods
-
-	Environment* getEnvironment() {
-		return mEnvironment;
-	}
-
-	void setEnvironment(Environment*& environment) {
-		mEnvironment = environment;
-	}
 
 	EvolutionModel& getEvolutionModel() {
 		return mEvolutionModel;
@@ -94,10 +86,6 @@ private:
 	 */
 	Creature* mCurrentCreature;
 
-	/**
-	 * The environment the evolution is running in.
-	 */
-	Environment* mEnvironment;
 
 	TimerManager<Evolution> mEvaluationManager;
 };

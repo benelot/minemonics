@@ -29,7 +29,7 @@ protected:
 	virtual void SetUp() {
 		// Set up an object of the class you want to test
 		population = new PopulationModel();
-		population->initialize(30);
+		population->initialize(NULL, 30);
 	}
 
 	virtual void TearDown() {
@@ -44,7 +44,7 @@ class PopulationSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		population = new PopulationModel();
-		population->initialize(30);
+		population->initialize(NULL, 30);
 
 		population2 = new PopulationModel();
 
@@ -75,5 +75,4 @@ TEST_F(PopulationSerializationTest,isEqualAfterSerialization) {
 	ASSERT_TRUE(population != population2);
 	ASSERT_TRUE(population->equals(*population2));
 }
-
 

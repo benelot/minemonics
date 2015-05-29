@@ -25,9 +25,9 @@ JointO3D::~JointO3D() {
 
 }
 
-void JointO3D::initialize(SimulationManager* simulationManager /*, Limb* limbA,
+void JointO3D::initialize(/*SimulationManager* simulationManager , Limb* limbA,
 		Limb* limbB/*, btTransform localA, btTransform localB*/) {
-	mSimulationManager = simulationManager;
+//	mSimulationManager = simulationManager;
 //	mLimbA = limbA;
 //	mLimbB = limbB;
 	//mLocalA = localA;
