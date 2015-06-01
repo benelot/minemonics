@@ -496,6 +496,30 @@ controller/universe/environments/Plane.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Plane.cpp.s
 .PHONY : controller/universe/environments/Plane.cpp.s
 
+controller/universe/evolution/Evaluation.o: controller/universe/evolution/Evaluation.cpp.o
+.PHONY : controller/universe/evolution/Evaluation.o
+
+# target to build an object file
+controller/universe/evolution/Evaluation.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evaluation.cpp.o
+.PHONY : controller/universe/evolution/Evaluation.cpp.o
+
+controller/universe/evolution/Evaluation.i: controller/universe/evolution/Evaluation.cpp.i
+.PHONY : controller/universe/evolution/Evaluation.i
+
+# target to preprocess a source file
+controller/universe/evolution/Evaluation.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evaluation.cpp.i
+.PHONY : controller/universe/evolution/Evaluation.cpp.i
+
+controller/universe/evolution/Evaluation.s: controller/universe/evolution/Evaluation.cpp.s
+.PHONY : controller/universe/evolution/Evaluation.s
+
+# target to generate assembly for a file
+controller/universe/evolution/Evaluation.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evaluation.cpp.s
+.PHONY : controller/universe/evolution/Evaluation.cpp.s
+
 controller/universe/evolution/Evolution.o: controller/universe/evolution/Evolution.cpp.o
 .PHONY : controller/universe/evolution/Evolution.o
 
@@ -1002,6 +1026,33 @@ model/universe/environments/physics/PhysicsController.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/physics/PhysicsController.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/physics/PhysicsController.cpp.s
 .PHONY : model/universe/environments/physics/PhysicsController.cpp.s
+
+model/universe/evolution/EvaluationModel.o: model/universe/evolution/EvaluationModel.cpp.o
+.PHONY : model/universe/evolution/EvaluationModel.o
+
+# target to build an object file
+model/universe/evolution/EvaluationModel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvaluationModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvaluationModel.cpp.o
+.PHONY : model/universe/evolution/EvaluationModel.cpp.o
+
+model/universe/evolution/EvaluationModel.i: model/universe/evolution/EvaluationModel.cpp.i
+.PHONY : model/universe/evolution/EvaluationModel.i
+
+# target to preprocess a source file
+model/universe/evolution/EvaluationModel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvaluationModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvaluationModel.cpp.i
+.PHONY : model/universe/evolution/EvaluationModel.cpp.i
+
+model/universe/evolution/EvaluationModel.s: model/universe/evolution/EvaluationModel.cpp.s
+.PHONY : model/universe/evolution/EvaluationModel.s
+
+# target to generate assembly for a file
+model/universe/evolution/EvaluationModel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvaluationModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvaluationModel.cpp.s
+.PHONY : model/universe/evolution/EvaluationModel.cpp.s
 
 model/universe/evolution/EvolutionModel.o: model/universe/evolution/EvolutionModel.cpp.o
 .PHONY : model/universe/evolution/EvolutionModel.o
@@ -3349,6 +3400,9 @@ help:
 	@echo "... controller/universe/environments/Plane.o"
 	@echo "... controller/universe/environments/Plane.i"
 	@echo "... controller/universe/environments/Plane.s"
+	@echo "... controller/universe/evolution/Evaluation.o"
+	@echo "... controller/universe/evolution/Evaluation.i"
+	@echo "... controller/universe/evolution/Evaluation.s"
 	@echo "... controller/universe/evolution/Evolution.o"
 	@echo "... controller/universe/evolution/Evolution.i"
 	@echo "... controller/universe/evolution/Evolution.s"
@@ -3409,6 +3463,9 @@ help:
 	@echo "... model/universe/environments/physics/PhysicsController.o"
 	@echo "... model/universe/environments/physics/PhysicsController.i"
 	@echo "... model/universe/environments/physics/PhysicsController.s"
+	@echo "... model/universe/evolution/EvaluationModel.o"
+	@echo "... model/universe/evolution/EvaluationModel.i"
+	@echo "... model/universe/evolution/EvaluationModel.s"
 	@echo "... model/universe/evolution/EvolutionModel.o"
 	@echo "... model/universe/evolution/EvolutionModel.i"
 	@echo "... model/universe/evolution/EvolutionModel.s"

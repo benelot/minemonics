@@ -215,24 +215,6 @@ void SimulationManager::createScene(void) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 
-	//TODO: Check if lighting is necessary except ambient light
-	// set up lighting
-	Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
-	lightdir.normalise();
-
-	Ogre::Light* light = mSceneMgr->createLight("tstLight");
-	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDirection(lightdir);
-	light->setDiffuseColour(Ogre::ColourValue::White);
-	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
-
-	// create the light
-	Ogre::Light *light2 = mSceneMgr->createLight("Light1");
-	light2->setType(Ogre::Light::LT_POINT);
-	light2->setPosition(Ogre::Vector3(250, 150, 250));
-	light2->setDiffuseColour(Ogre::ColourValue::White);
-	light2->setSpecularColour(Ogre::ColourValue::White);
-
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 	//either create a skydome or a skyplane

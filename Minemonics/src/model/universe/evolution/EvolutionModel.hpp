@@ -3,6 +3,8 @@
 
 //# corresponding header
 //# forward declarations
+class EvaluationModel;
+
 //# system headers
 #include <vector>
 
@@ -83,6 +85,11 @@ private:
 	 * The vector of populations that are evaluated.
 	 */
 	std::vector<PopulationModel*> mPopulationModels;
+
+	/**
+	 * Vector of evaluation models
+	 */
+	std::vector<EvaluationModel*> mEvaluationModels;
 
 	/**
 	 * The currently evaluated population.

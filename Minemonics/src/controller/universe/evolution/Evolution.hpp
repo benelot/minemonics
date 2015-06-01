@@ -5,6 +5,7 @@
 //# forward declarations
 class Creature;
 class Environment;
+class Evaluation;
 
 //# system headers
 #include <vector>
@@ -75,6 +76,11 @@ private:
 	 * Vector of populations
 	 */
 	std::vector<Population*> mPopulations;
+
+	/**
+	 * Vector of evaluations
+	 */
+	std::vector<Evaluation*> mEvaluations;
 
 	/**
 	 * The model of the evolution
