@@ -58,7 +58,9 @@ public:
 	 * Initializes a creature with random values for its genome, name, total segments quantity and segments path limit.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(PopulationModel* populationModel, Ogre::Vector3 position, double branchiness);
+	void initialize(PopulationModel* populationModel,
+			PhenomeModel* phenomeModel, Ogre::Vector3 position,
+			double branchiness);
 
 	void evaluate();
 
@@ -82,7 +84,9 @@ public:
 		for (it = mGenotype.getGenes().begin();
 				it != mGenotype.getGenes().end(); it++) {
 			if ((*it)->getGeneType() == Gene::MorphoGene) {
-				totalVolume += ((Morphogene*)*it)->getX() * ((Morphogene*)*it)->getY() * ((Morphogene*)*it)->getZ();
+				totalVolume += ((Morphogene*) *it)->getX()
+						* ((Morphogene*) *it)->getY()
+						* ((Morphogene*) *it)->getZ();
 			}
 		}
 		return totalVolume;
@@ -149,6 +153,10 @@ public:
 		return mPopulationModel;
 	}
 
+	void setPhenotypeModel(PhenomeModel* phenotypeModel) {
+		mPhenotypeModel = phenotypeModel;
+	}
+
 private:
 
 	/**
@@ -169,7 +177,7 @@ private:
 	/**
 	 * The phenotype (morphological individual) of the creature.
 	 */
-	PhenomeModel mPhenotype;
+	PhenomeModel* mPhenotypeModel;
 
 	/**
 	 * The juries that rate the creature according to their fitness function.

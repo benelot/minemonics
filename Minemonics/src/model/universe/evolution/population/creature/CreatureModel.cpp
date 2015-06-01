@@ -19,18 +19,20 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mDeveloped(false),mPopulationModel(NULL) {
+		mDeveloped(false), mPopulationModel(NULL), mPhenotypeModel(NULL) {
 
 }
 
-void CreatureModel::initialize(PopulationModel* populationModel,Ogre::Vector3 position,double branchiness) {
+void CreatureModel::initialize(PopulationModel* populationModel,
+		PhenomeModel* phenomeModel, Ogre::Vector3 position,
+		double branchiness) {
 	mPopulationModel = populationModel;
+	mPhenotypeModel = phenomeModel;
 	mPosition = position;
 	Randomness randomness;
 	NameGenerator nameGenerator;
 	mName = nameGenerator.generateName();
 	mGenotype.createRandomGenome(branchiness);
-	//genotype.expand();
 }
 
 CreatureModel::~CreatureModel() {

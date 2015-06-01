@@ -37,9 +37,13 @@ Creature::~Creature() {
 void Creature::initialize(SimulationManager* simulationManager,Population* population,
 		Ogre::Vector3 position, double branchiness) {
 	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(population->getPopulationModel(),position, branchiness);
+	mCreatureModel->initialize(population->getPopulationModel(),NULL,position, branchiness);
+
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager,this);
+
+	mCreatureModel->setPhenotypeModel(&mPhenotype->getPhenomeModel());
+
 }
 
 void Creature::performEmbryogenesis() {
@@ -52,6 +56,12 @@ void Creature::update() {
 }
 
 void Creature::addToWorld() {
+	// develop creature if it is not developed yet.
+	if(!isDeveloped())
+	{
+		performEmbryogenesis();
+	}
+
 	// Add phenotype to world
 	mPhenotype->addToWorld();
 }

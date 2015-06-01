@@ -15,12 +15,10 @@
 //## view headers
 //## utils headers
 
-Evolution::Evolution() :
-		mCurrentCreature(NULL) {
+Evolution::Evolution() {
 }
 
 Evolution::~Evolution() {
-	mCurrentCreature = NULL;
 
 }
 

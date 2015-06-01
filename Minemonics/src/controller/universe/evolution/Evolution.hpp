@@ -87,11 +87,6 @@ private:
 	 */
 	EvolutionModel mEvolutionModel;
 
-	/**
-	 * The creature that is currently evaluated.
-	 */
-	Creature* mCurrentCreature;
-
 
 	TimerManager<Evolution> mEvaluationManager;
 };

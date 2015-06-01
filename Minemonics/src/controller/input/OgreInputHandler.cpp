@@ -15,8 +15,8 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/date_time/posix_time/time_formatters.hpp>
-#include <OgreLogManager.h>
 #include <boost/lexical_cast.hpp>
+#include <OgreLogManager.h>
 
 //## view headers
 #include <OgreRenderWindow.h>
@@ -32,9 +32,10 @@
 #include <controller/StateHandler.hpp>
 #include <controller/universe/Universe.hpp>
 #include <controller/viewcontroller/camera/CameraHandler.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
@@ -187,12 +188,15 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		}
 		else
 		{
+			// create video file name
 			std::string videoName;
 			videoName.append("Minemonics-");
 			videoName.append(boost::posix_time::to_iso_string(mSimulationMgr->getNow()));
 			videoName.append(".mp4");
+
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video started.";
-			//TODO What to do if screen gets resized?
+
+			//This even works on if the screen gets resized
 			mSimulationMgr->getVideoWriter().setup(mSimulationMgr,videoName.c_str(),mSimulationMgr->getWindow()->getWidth(),mSimulationMgr->getWindow()->getHeight());
 		}
 		break;

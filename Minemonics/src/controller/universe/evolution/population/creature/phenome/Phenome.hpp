@@ -127,19 +127,23 @@ public:
 		mPhenomeModel.setInWorld(inWorld);
 	}
 
+	PhenomeModel& getPhenomeModel() {
+		return mPhenomeModel;
+	}
+
 private:
 
+	// PARENT
+	/**
+	 * The creature this phenome belongs to.
+	 */
 	Creature* mCreature;
 
+	// COMPONENTS
 	/**
 	 * The phenome model representation.
 	 */
 	PhenomeModel mPhenomeModel;
-
-	/**
-	 * The simulation manager handle
-	 */
-	SimulationManager* mSimulationManager;
 
 	/**
 	 * The vector of phenotype components
@@ -155,6 +159,12 @@ private:
 	 * The vector of the phenotype's joints between the limbs.
 	 */
 	std::vector<Joint*> mJoints;
+
+	// HANDLES
+	/**
+	 * The simulation manager handle.
+	 */
+	SimulationManager* mSimulationManager;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_HPP_ */

@@ -45,6 +45,8 @@ public:
 
 	void removeFromWorld();
 
+
+	//Facade
 	void setPosition(Ogre::Vector3 position){
 		mCreatureModel->setPosition(position);
 	}
@@ -56,6 +58,11 @@ public:
 	void setPlanet(PlanetModel* planetModel)
 	{
 		mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
+	}
+
+	bool isDeveloped()
+	{
+		return mCreatureModel->isDeveloped();
 	}
 
 	/**

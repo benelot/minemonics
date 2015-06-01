@@ -83,8 +83,11 @@
 
 //## model headers
 //## view headers
-#include <utils/Randomness.hpp>
 #include <view/visualization/CEGUI/CEGUIBuilder.hpp>
+
+//## utils headers
+#include <utils/Randomness.hpp>
+
 
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
@@ -131,8 +134,9 @@ void SimulationManager::createFrameListener(void) {
 	// Create the scene node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
-					Ogre::Vector3(-400, 200, 400));
+					Ogre::Vector3(-400, 500, 400));
 
+	mCamera->setPosition(-400, 500, 400);
 	camNode->attachObject(mCamera);
 
 	// Populate the camera container
@@ -159,14 +163,17 @@ void SimulationManager::createFrameListener(void) {
 	Planet* earth = new Planet();
 	earth->initialize(this, Environment::PLANE, mDebugDrawer);
 
+	//add earth to universe
 	mUniverse.addPlanet(earth);
 
 	//create a population
 	Population* earthPopulation = new Population();
 	earthPopulation->initialize(earth, this, 100);
 
+	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
+	// position
 	Randomness randomness;
 	std::vector<Creature*>::iterator cit =
 			earthPopulation->getCreatures().begin();
@@ -177,7 +184,7 @@ void SimulationManager::createFrameListener(void) {
 						randomness.nextDouble(-1000, 10000)));
 		(*cit)->performEmbryogenesis();
 	}
-	earthPopulation->addToWorld();
+//	earthPopulation->addToWorld();
 
 //	for (int i = 0; i < 50; i++) {
 //		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
@@ -253,17 +260,20 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
-	//update all physical objects
-	updatePhysics(evt.timeSinceLastFrame);
+	// draw the debug output if enabled
+	mUniverse.drawDebugWorld();
+
+	// step the physics forward
+	mUniverse.stepPhysics(evt.timeSinceLastFrame);
+
+	// update the universe model
+	mUniverse.update();
 
 	// update the information in the panels on screen
 	updatePanels(evt.timeSinceLastFrame);
 
 	//update view
 	mViewController.update(evt.timeSinceLastFrame);
-
-	//TODO: Use for creature evolution, but clean up afterwards
-	// updateEvolution();
 
 	return true;
 }
@@ -357,10 +367,6 @@ void SimulationManager::updatePhysics(double timeSinceLastFrame) {
 //	for (; it != mRagdolls.end(); it++) {
 //		(*it)->update();
 //	}
-
-	mUniverse.drawDebugWorld();
-	mUniverse.stepPhysics(timeSinceLastFrame);
-	mUniverse.update();
 
 //	const int numObjects =
 //			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
