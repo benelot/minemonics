@@ -8,6 +8,7 @@ class EnvironmentGraphics;
 class EnvironmentPhysics;
 class EnvironmentModel;
 class PhysicsController;
+class EnvironmentO3D;
 
 //# system headers
 //## controller headers
@@ -39,13 +40,22 @@ public:
 
 	Environment();
 	virtual ~Environment();
+
 	void initialize(EnvironmentType environmentType);
 
-	virtual EnvironmentModel* getEnvironmentModel() = 0;
+	bool isInWorld();
+	void addToWorld();
+	void removeFromWorld();
 
-	btRigidBody*& getBody();
+	EnvironmentO3D* getEnvironmentO3D() {
+		return (EnvironmentO3D*) mEnvironmentGraphics;
+	}
 
-	void update();
+	virtual EnvironmentModel* getEnvironmentModel() {
+		return mEnvironmentModel;
+	}
+
+	virtual void update() = 0;
 
 protected:
 	EnvironmentGraphics* mEnvironmentGraphics;

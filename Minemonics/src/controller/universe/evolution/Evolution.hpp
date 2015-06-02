@@ -3,9 +3,7 @@
 
 //# corresponding headers
 //# forward declarations
-class Creature;
-class Environment;
-class Evaluation;
+class EvaluationController;
 
 //# system headers
 #include <vector>
@@ -27,8 +25,9 @@ class Evaluation;
 #include <utils/TimerManager.hpp>
 
 
+
 /**
- * @brief		Brief
+ * @brief		The evolution runs evaluations depending on type.
  * @details		 A particular experimental setup is referred to as an "evolution".
  *      Evolutions consist of one or more independent GA runs, where each
  *      run is identical in terms of settings like population size,
@@ -50,7 +49,8 @@ public:
 	/**
 	 * Initialize the evolution.
 	 */
-	void initialize();
+	void initialize(EvaluationController* evaluationController,
+			Planet* planet);
 
 	void addPopulation(Population* population);
 
@@ -59,7 +59,7 @@ public:
 	 * proceed with reaping and sowing. This method is called by the
 	 * EvaluationTimer after the predefined evaluation interval.
 	 */
-	void proceedEvaluation();
+	bool proceedEvaluation();
 
 	void update();
 
@@ -72,15 +72,14 @@ public:
 
 private:
 
+	Planet* mPlanet;
+
+	EvaluationController* mEvaluationController;
+
 	/**
 	 * Vector of populations
 	 */
 	std::vector<Population*> mPopulations;
-
-	/**
-	 * Vector of evaluations
-	 */
-	std::vector<Evaluation*> mEvaluations;
 
 	/**
 	 * The model of the evolution

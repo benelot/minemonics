@@ -37,7 +37,7 @@ void Planet::initialize(SimulationManager* simulationManager,Environment::Enviro
 		OgreBtDebugDrawer* debugDrawer) {
 	//create earth evolution
 	mEvolution = new Evolution();
-	mEvolution->initialize();
+	mEvolution->initialize(&simulationManager->getEvaluationController(),this);
 
 	// set up environment
 	switch (type) {
@@ -53,9 +53,7 @@ void Planet::initialize(SimulationManager* simulationManager,Environment::Enviro
 		break;
 	}
 	}
-	mPlanetModel.initialize();
-	mPlanetModel.setEvolutionModel(&mEvolution->getEvolutionModel());
-	mPlanetModel.setEnvironmentModel(mEnvironment->getEnvironmentModel());
+	mPlanetModel.initialize(&mEvolution->getEvolutionModel(),mEnvironment->getEnvironmentModel());
 }
 
 void Planet::addPopulation(Population* population) {
@@ -72,6 +70,16 @@ void Planet::update() {
 }
 
 bool Planet::proceedEvaluation() {
+	// add the environment model to the world if it is not yet added.
+	if (!mEnvironment->isInWorld()) {
+		mEnvironment->addToWorld();
+	}
+
+	//if the evolution can no proceed, then remove the environment model from the world.
+	if (!mEvolution->proceedEvaluation()) {
+		mEnvironment->removeFromWorld();
+		return false;
+	}
 	mPlanetModel.proceedEvaluation();
 	return true;
 }

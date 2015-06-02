@@ -34,6 +34,7 @@ public:
 
 	/**
 	 * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
+	 * @param planet The planet the population lives on.
 	 * @param simulationManager The simulation manager handle
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
@@ -41,11 +42,23 @@ public:
 			int creatureQty);
 
 	/**
+	 * Initializes the population without adding creatures up to the creatureQty.
+	 * @param planet The planet the population lives on.
+	 * @param creatureQty The number of creatures that the population will consist of in every generation.
+	 */
+	void initialize(Planet* planet,int creatureQty);
+
+	/**
 	 * Adds a new creature to the population with the bushiness as a input.
 	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
 	 */
 	void addNewMember(double bushiness, Ogre::Vector3 rootPosition =
 			Ogre::Vector3::ZERO);
+
+	/**
+	 * Adds a creature to the population.
+	 */
+	void addMember(Creature* creature);
 
 	void update();
 

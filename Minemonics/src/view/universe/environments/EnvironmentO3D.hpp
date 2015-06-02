@@ -1,10 +1,3 @@
-/*
- * EnvironmentO3D.h
- *
- *  Created on: Feb 21, 2015
- *      Author: leviathan
- */
-
 #ifndef ENVIRONMENTO3D_H_
 #define ENVIRONMENTO3D_H_
 
@@ -38,9 +31,9 @@ class SimulationManager;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The environmentO3D is the base view class for all environments having a ground terrain.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-21
  * @author		Benjamin Ellenberger
  */
 class EnvironmentO3D: public EnvironmentGraphics {
@@ -49,6 +42,12 @@ public:
 	virtual ~EnvironmentO3D();
 
 	void initialize(std::string fileName, Ogre::Light* l);
+
+	virtual bool isInWorld();
+
+	virtual void addToWorld();
+
+	virtual void removeFromWorld();
 
 	void configureTerrainDefaults(Ogre::Light* l);
 
@@ -110,7 +109,7 @@ public:
 			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
 					"Your graphics card does not support vertex or fragment shaders, "
 							"so you cannot run this sample. Sorry!",
-					"Sample_EndlessWorld::testCapabilities");
+					"EnvironmentO3D::testCapabilities");
 		}
 	}
 
@@ -131,6 +130,18 @@ public:
 		return 0;
 	}
 
+	Ogre::TerrainPagedWorldSection*& getTerrainPagedWorldSection() {
+		return mTerrainPagedWorldSection;
+	}
+
+	std::vector<Ogre::Terrain*> getAllDefinedTerrains() {
+//		Ogre::TerrainIterator tit = mTerrainGroup->getTerrainIterator();
+//		for(;tit != mTerrainGroup->getTerrainIterator().end();tit++)
+//		{
+//
+//		}
+	}
+
 protected:
 
 	void initBlendMaps(Ogre::Terrain* terrain);
@@ -145,11 +156,12 @@ protected:
 	Ogre::TerrainPagedWorldSection* mTerrainPagedWorldSection;
 	PerlinNoiseTerrainGenerator* mPerlinNoiseTerrainGenerator;
 
-	Ogre::Real mFallVelocity;
 	Ogre::Vector3 mTerrainPos;
 
-	bool mLodStatus;
-	bool mAutoLod;
+	bool mLODStatus;
+	bool mAutoLOD;
+
+	bool mInWorld;
 };
 
 #endif /* ENVIRONMENTO3D_H_ */

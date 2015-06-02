@@ -16,12 +16,8 @@
 //## view headers
 //## utils headers
 
-
-
 UniverseModel::UniverseModel() :
 		mCurrentEvaluationPlanetIndex(0) {
-	// TODO Auto-generated constructor stub
-
 }
 
 UniverseModel::~UniverseModel() {
@@ -36,13 +32,5 @@ void UniverseModel::addPlanetModel(PlanetModel* planetModel) {
 }
 
 void UniverseModel::proceedEvaluation() {
-	if (mPlanetModels.size() != 0) {
-		if (mCurrentEvaluationPlanetIndex < mPlanetModels.size()) {
-			if (!mPlanetModels[mCurrentEvaluationPlanetIndex]->proceedEvaluation()) {
-				mCurrentEvaluationPlanetIndex =
-						(mCurrentEvaluationPlanetIndex < mPlanetModels.size()) ?
-								mCurrentEvaluationPlanetIndex + 1 : 0;
-			}
-		}
-	}
+
 }

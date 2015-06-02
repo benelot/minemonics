@@ -60,6 +60,8 @@ public:
 
 	void addBody(btRigidBody* body);
 
+	void removeBody(btRigidBody* body);
+
 	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}

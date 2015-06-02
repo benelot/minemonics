@@ -5,6 +5,8 @@
 //# forward declarations
 class EnvironmentModel;
 class OgreBtDebugDrawer;
+class PlaneO3D;
+class PlaneModel;
 namespace Ogre {
 class Light;
 } /* namespace Ogre */
@@ -36,7 +38,15 @@ public:
 
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer);
 
-	EnvironmentModel* getEnvironmentModel();
+	virtual void update();
+
+	PlaneO3D* getPlaneView() {
+		return (PlaneO3D*) mEnvironmentGraphics;
+	}
+
+	PlaneModel* getPlaneModel() {
+		return (PlaneModel*)mEnvironmentModel;
+	}
 };
 
 #endif /* CONTROLLER_UNIVERSE_ENVIRONMENTS_PLANE_HPP_ */

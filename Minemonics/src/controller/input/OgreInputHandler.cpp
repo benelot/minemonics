@@ -173,12 +173,12 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Period;
 		break;
 	case ApplicationKeycode::APPK_SLASH:
-		mSimulationMgr->getDebugDrawer()->setDebugDrawingEnabled(
-				!mSimulationMgr->getDebugDrawer()->isDebugDrawingEnabled());
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->getDebugDrawer()->isDebugDrawingEnabled())?"true":"false";
+		mSimulationMgr->getDebugDrawer().setDebugDrawingEnabled(
+				!mSimulationMgr->getDebugDrawer().isDebugDrawingEnabled());
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->getDebugDrawer().isDebugDrawingEnabled())?"true":"false";
 		break;
 		case ApplicationKeycode::APPK_BACKSLASH:
-		mSimulationMgr->getDebugDrawer()->setDrawTrajectory(!mSimulationMgr->getDebugDrawer()->isDrawTrajectory());
+		mSimulationMgr->getDebugDrawer().setDrawTrajectory(!mSimulationMgr->getDebugDrawer().isDrawTrajectory());
 		break;
 		case ApplicationKeycode::APPK_MINUS:
 		if(mSimulationMgr->getVideoWriter().isInitialized())

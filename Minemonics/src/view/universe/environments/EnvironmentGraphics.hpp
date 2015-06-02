@@ -12,6 +12,10 @@ public:
 	EnvironmentGraphics();
 	virtual ~EnvironmentGraphics();
 
+	virtual bool isInWorld() = 0;
+	virtual void addToWorld() = 0;
+	virtual void removeFromWorld() = 0;
+
 	//virtual void initialize() = 0;
 };
 

@@ -4,6 +4,7 @@
 //# corresponding header
 //# forward declarations
 class PlanetModel;
+class EvaluationModel;
 
 //# system headers
 #include <vector>
@@ -51,6 +52,12 @@ public:
 	}
 
 private:
+
+	/**
+	 * Vector of evaluation models
+	 */
+	std::vector<EvaluationModel*> mEvaluationModels;
+
 	/**
 	 * The models of the planets in this universe.
 	 */

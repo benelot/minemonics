@@ -280,6 +280,54 @@ configuration/GUIConfiguration.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/GUIConfiguration.cpp.s
 .PHONY : configuration/GUIConfiguration.cpp.s
 
+controller/Evaluation.o: controller/Evaluation.cpp.o
+.PHONY : controller/Evaluation.o
+
+# target to build an object file
+controller/Evaluation.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/Evaluation.cpp.o
+.PHONY : controller/Evaluation.cpp.o
+
+controller/Evaluation.i: controller/Evaluation.cpp.i
+.PHONY : controller/Evaluation.i
+
+# target to preprocess a source file
+controller/Evaluation.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/Evaluation.cpp.i
+.PHONY : controller/Evaluation.cpp.i
+
+controller/Evaluation.s: controller/Evaluation.cpp.s
+.PHONY : controller/Evaluation.s
+
+# target to generate assembly for a file
+controller/Evaluation.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/Evaluation.cpp.s
+.PHONY : controller/Evaluation.cpp.s
+
+controller/EvaluationController.o: controller/EvaluationController.cpp.o
+.PHONY : controller/EvaluationController.o
+
+# target to build an object file
+controller/EvaluationController.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/EvaluationController.cpp.o
+.PHONY : controller/EvaluationController.cpp.o
+
+controller/EvaluationController.i: controller/EvaluationController.cpp.i
+.PHONY : controller/EvaluationController.i
+
+# target to preprocess a source file
+controller/EvaluationController.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/EvaluationController.cpp.i
+.PHONY : controller/EvaluationController.cpp.i
+
+controller/EvaluationController.s: controller/EvaluationController.cpp.s
+.PHONY : controller/EvaluationController.s
+
+# target to generate assembly for a file
+controller/EvaluationController.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/EvaluationController.cpp.s
+.PHONY : controller/EvaluationController.cpp.s
+
 controller/StateHandler.o: controller/StateHandler.cpp.o
 .PHONY : controller/StateHandler.o
 
@@ -496,30 +544,6 @@ controller/universe/environments/Plane.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/environments/Plane.cpp.s
 .PHONY : controller/universe/environments/Plane.cpp.s
 
-controller/universe/evolution/Evaluation.o: controller/universe/evolution/Evaluation.cpp.o
-.PHONY : controller/universe/evolution/Evaluation.o
-
-# target to build an object file
-controller/universe/evolution/Evaluation.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evaluation.cpp.o
-.PHONY : controller/universe/evolution/Evaluation.cpp.o
-
-controller/universe/evolution/Evaluation.i: controller/universe/evolution/Evaluation.cpp.i
-.PHONY : controller/universe/evolution/Evaluation.i
-
-# target to preprocess a source file
-controller/universe/evolution/Evaluation.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evaluation.cpp.i
-.PHONY : controller/universe/evolution/Evaluation.cpp.i
-
-controller/universe/evolution/Evaluation.s: controller/universe/evolution/Evaluation.cpp.s
-.PHONY : controller/universe/evolution/Evaluation.s
-
-# target to generate assembly for a file
-controller/universe/evolution/Evaluation.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/universe/evolution/Evaluation.cpp.s
-.PHONY : controller/universe/evolution/Evaluation.cpp.s
-
 controller/universe/evolution/Evolution.o: controller/universe/evolution/Evolution.cpp.o
 .PHONY : controller/universe/evolution/Evolution.o
 
@@ -735,6 +759,33 @@ controller/viewcontroller/camera/CameraHandler.s: controller/viewcontroller/came
 controller/viewcontroller/camera/CameraHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/camera/CameraHandler.cpp.s
 .PHONY : controller/viewcontroller/camera/CameraHandler.cpp.s
+
+model/universe/EvaluationModel.o: model/universe/EvaluationModel.cpp.o
+.PHONY : model/universe/EvaluationModel.o
+
+# target to build an object file
+model/universe/EvaluationModel.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/EvaluationModel.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/EvaluationModel.cpp.o
+.PHONY : model/universe/EvaluationModel.cpp.o
+
+model/universe/EvaluationModel.i: model/universe/EvaluationModel.cpp.i
+.PHONY : model/universe/EvaluationModel.i
+
+# target to preprocess a source file
+model/universe/EvaluationModel.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/EvaluationModel.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/EvaluationModel.cpp.i
+.PHONY : model/universe/EvaluationModel.cpp.i
+
+model/universe/EvaluationModel.s: model/universe/EvaluationModel.cpp.s
+.PHONY : model/universe/EvaluationModel.s
+
+# target to generate assembly for a file
+model/universe/EvaluationModel.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/EvaluationModel.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/EvaluationModel.cpp.s
+.PHONY : model/universe/EvaluationModel.cpp.s
 
 model/universe/PlanetModel.o: model/universe/PlanetModel.cpp.o
 .PHONY : model/universe/PlanetModel.o
@@ -1026,33 +1077,6 @@ model/universe/environments/physics/PhysicsController.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/environments/physics/PhysicsController.cpp.s
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/environments/physics/PhysicsController.cpp.s
 .PHONY : model/universe/environments/physics/PhysicsController.cpp.s
-
-model/universe/evolution/EvaluationModel.o: model/universe/evolution/EvaluationModel.cpp.o
-.PHONY : model/universe/evolution/EvaluationModel.o
-
-# target to build an object file
-model/universe/evolution/EvaluationModel.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvaluationModel.cpp.o
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvaluationModel.cpp.o
-.PHONY : model/universe/evolution/EvaluationModel.cpp.o
-
-model/universe/evolution/EvaluationModel.i: model/universe/evolution/EvaluationModel.cpp.i
-.PHONY : model/universe/evolution/EvaluationModel.i
-
-# target to preprocess a source file
-model/universe/evolution/EvaluationModel.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvaluationModel.cpp.i
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvaluationModel.cpp.i
-.PHONY : model/universe/evolution/EvaluationModel.cpp.i
-
-model/universe/evolution/EvaluationModel.s: model/universe/evolution/EvaluationModel.cpp.s
-.PHONY : model/universe/evolution/EvaluationModel.s
-
-# target to generate assembly for a file
-model/universe/evolution/EvaluationModel.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/EvaluationModel.cpp.s
-	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/model/universe/evolution/EvaluationModel.cpp.s
-.PHONY : model/universe/evolution/EvaluationModel.cpp.s
 
 model/universe/evolution/EvolutionModel.o: model/universe/evolution/EvolutionModel.cpp.o
 .PHONY : model/universe/evolution/EvolutionModel.o
@@ -3373,6 +3397,12 @@ help:
 	@echo "... configuration/GUIConfiguration.o"
 	@echo "... configuration/GUIConfiguration.i"
 	@echo "... configuration/GUIConfiguration.s"
+	@echo "... controller/Evaluation.o"
+	@echo "... controller/Evaluation.i"
+	@echo "... controller/Evaluation.s"
+	@echo "... controller/EvaluationController.o"
+	@echo "... controller/EvaluationController.i"
+	@echo "... controller/EvaluationController.s"
 	@echo "... controller/StateHandler.o"
 	@echo "... controller/StateHandler.i"
 	@echo "... controller/StateHandler.s"
@@ -3400,9 +3430,6 @@ help:
 	@echo "... controller/universe/environments/Plane.o"
 	@echo "... controller/universe/environments/Plane.i"
 	@echo "... controller/universe/environments/Plane.s"
-	@echo "... controller/universe/evolution/Evaluation.o"
-	@echo "... controller/universe/evolution/Evaluation.i"
-	@echo "... controller/universe/evolution/Evaluation.s"
 	@echo "... controller/universe/evolution/Evolution.o"
 	@echo "... controller/universe/evolution/Evolution.i"
 	@echo "... controller/universe/evolution/Evolution.s"
@@ -3430,6 +3457,9 @@ help:
 	@echo "... controller/viewcontroller/camera/CameraHandler.o"
 	@echo "... controller/viewcontroller/camera/CameraHandler.i"
 	@echo "... controller/viewcontroller/camera/CameraHandler.s"
+	@echo "... model/universe/EvaluationModel.o"
+	@echo "... model/universe/EvaluationModel.i"
+	@echo "... model/universe/EvaluationModel.s"
 	@echo "... model/universe/PlanetModel.o"
 	@echo "... model/universe/PlanetModel.i"
 	@echo "... model/universe/PlanetModel.s"
@@ -3463,9 +3493,6 @@ help:
 	@echo "... model/universe/environments/physics/PhysicsController.o"
 	@echo "... model/universe/environments/physics/PhysicsController.i"
 	@echo "... model/universe/environments/physics/PhysicsController.s"
-	@echo "... model/universe/evolution/EvaluationModel.o"
-	@echo "... model/universe/evolution/EvaluationModel.i"
-	@echo "... model/universe/evolution/EvaluationModel.s"
 	@echo "... model/universe/evolution/EvolutionModel.o"
 	@echo "... model/universe/evolution/EvolutionModel.i"
 	@echo "... model/universe/evolution/EvolutionModel.s"

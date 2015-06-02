@@ -25,12 +25,15 @@
 #define TERRAIN_SIZE 513
 #define HOLD_LOD_DISTANCE 3000.0
 
+#define TERRAIN_LOAD_RADIUS 1500
+#define TERRAIN_HOLD_RADIUS 3000
+
 EnvironmentO3D::EnvironmentO3D(SimulationManager* simulationMgr) :
 		mSimulationMgr(simulationMgr), mTerrainGlobals(NULL), mTerrainGroup(
-				NULL), mTerrainPaging(
+		NULL), mTerrainPaging(
 		NULL), mPageManager(NULL), mPagedWorld(NULL), mTerrainPagedWorldSection(
-		NULL), mPerlinNoiseTerrainGenerator(NULL), mLodStatus(false), mAutoLod(
-				true), mFallVelocity(0), mTerrainPos(0, 0, 0) {
+		NULL), mPerlinNoiseTerrainGenerator(NULL), mLODStatus(false), mAutoLOD(
+				true), mTerrainPos(0, 0, 0), mInWorld(false) {
 
 }
 
@@ -51,9 +54,15 @@ void EnvironmentO3D::initialize(std::string fileName, Ogre::Light* l) {
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(
 			mSimulationMgr->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
 			TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
+
+	//TODO: The terrain does not need to be saved, it is always randomly created.
+	//set how the terrain should be named for faster loading
 	mTerrainGroup->setFilenameConvention(Ogre::String(),
 			Ogre::String("terrain"));
+
+	//set origin of the terrain
 	mTerrainGroup->setOrigin(mTerrainPos);
+
 	mTerrainGroup->setAutoUpdateLod(
 			Ogre::TerrainAutoUpdateLodFactory::getAutoUpdateLod(
 					Ogre::BY_DISTANCE));
@@ -67,13 +76,16 @@ void EnvironmentO3D::initialize(std::string fileName, Ogre::Light* l) {
 	mPageManager->setPageProvider(&mDummyPageProvider);
 	mPageManager->addCamera(mSimulationMgr->getCamera());
 	mPageManager->setDebugDisplayLevel(0);
+
 	mTerrainPaging = OGRE_NEW Ogre::TerrainPaging(mPageManager);
 	mPagedWorld = mPageManager->createWorld();
 	mTerrainPagedWorldSection = mTerrainPaging->createWorldSection(mPagedWorld,
-			mTerrainGroup, 400, 500, ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
+			mTerrainGroup, TERRAIN_LOAD_RADIUS, TERRAIN_HOLD_RADIUS, ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
 			ENDLESS_PAGE_MAX_X, ENDLESS_PAGE_MAX_Y);
-
 	mTerrainGroup->freeTemporaryResources();
+
+	mTerrainGroup->loadAllTerrains(true);
+	//removeFromWorld();
 }
 
 void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
@@ -100,6 +112,7 @@ void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
 	defaultimp.inputScale = 600;
 	defaultimp.minBatchSize = 33;
 	defaultimp.maxBatchSize = 65;
+
 	// textures
 	defaultimp.layerList.resize(1);
 //	defaultimp.layerList[0].worldSize = 1000;
@@ -127,6 +140,21 @@ void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
 //			"growth_weirdfungus-03_diffusespecular.dds");
 //	defaultimp.layerList[2].textureNames.push_back(
 //			"growth_weirdfungus-03_normalheight.dds");
+}
+
+bool EnvironmentO3D::isInWorld() {
+	return mInWorld;
+}
+
+void EnvironmentO3D::addToWorld() {
+	mInWorld = true;
+	mTerrainGroup->setOrigin(mTerrainPos);
+}
+
+void EnvironmentO3D::removeFromWorld() {
+	mInWorld = false;
+	//TODO: There must be another way to hide a terrain.
+	mTerrainGroup->setOrigin(Ogre::Vector3(0,1000000,0));
 }
 
 //-------------------------------------------------------------------------------------

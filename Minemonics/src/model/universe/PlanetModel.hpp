@@ -34,9 +34,11 @@ public:
 	PlanetModel();
 	virtual ~PlanetModel();
 
-	void initialize();
+	void initialize(EvolutionModel* evolutionModel, EnvironmentModel* environmentModel);
 
 	bool proceedEvaluation();
+
+	void update();
 
 	//Accessor methods
 

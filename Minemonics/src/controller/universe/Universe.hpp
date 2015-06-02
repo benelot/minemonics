@@ -4,6 +4,7 @@
 //# corresponding header
 //# forward declarations
 class Planet;
+class Evaluation;
 
 //# system headers
 #include <vector>
@@ -33,23 +34,51 @@ public:
 	Universe();
 	virtual ~Universe();
 
+	/**
+	 * Initializes the universe.
+	 */
 	void initialize();
 
+	/**
+	 * Add a planet to the universe.
+	 * @param planet The planet to add to the universe.
+	 */
 	void addPlanet(Planet* planet);
 
+	/**
+	 * Proceed with the evaluation. In in serial mode, this just goes on to the next evaluation, in parallel, this schedules one more evaluation.
+	 */
 	void proceedEvaluation();
 
+	/**
+	 * Draw the debug world if debug drawing is enabled.
+	 */
 	void drawDebugWorld();
 
+	/**
+	 * Step the universe physics forward.
+	 * @param timeSinceLastFrame The size of the time step.
+	 */
 	void stepPhysics(double timeSinceLastFrame);
 
+	/**
+	 * Update the model of the universe.
+	 */
 	void update();
 
 	//Accessor methods
+	/**
+	 * Get the planets of the universe.
+	 * @return The planets of the universe.
+	 */
 	const std::vector<Planet*>& getPlanets() const {
 		return mPlanets;
 	}
 
+	/**
+	 * Get the model of the universe.
+	 * @return The model of the universe.
+	 */
 	const UniverseModel& getUniverseModel() const {
 		return mUniverseModel;
 	}
@@ -57,12 +86,17 @@ public:
 private:
 
 	/**
-	 * The model of the universe
+	 * Vector of evaluation
+	 */
+	std::vector<Evaluation*> mEvaluations;
+
+	/**
+	 * The model of the universe.
 	 */
 	UniverseModel mUniverseModel;
 
 	/**
-	 * The planets in this universe
+	 * The planets of the universe.
 	 */
 	std::vector<Planet*> mPlanets;
 };

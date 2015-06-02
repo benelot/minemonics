@@ -44,6 +44,18 @@ void Universe::addPlanet(Planet* planet) {
 }
 
 void Universe::proceedEvaluation() {
+	// if there are planets in the universe
+	if (mPlanets.size() != 0) {
+		// if the evaluation of the certain planet goes into the next generation, we go to the next planet.
+		if (!mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->proceedEvaluation()) {
+			mUniverseModel.setCurrentEvaluationPlanetIndex(
+					(mUniverseModel.getCurrentEvaluationPlanetIndex()
+							< mPlanets.size()) ?
+							mUniverseModel.getCurrentEvaluationPlanetIndex()
+									+ 1 :
+							0);
+		}
+	}
 	mUniverseModel.proceedEvaluation();
 }
 

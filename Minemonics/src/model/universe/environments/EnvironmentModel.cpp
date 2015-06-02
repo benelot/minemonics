@@ -2,10 +2,6 @@
 #include <model/universe/environments/EnvironmentModel.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
-
 //# system headers
 //## controller headers
 //## model headers
@@ -15,11 +11,13 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/bullet/EnvironmentBt.hpp>
+
 //## view headers
 //## utils headers
 
 EnvironmentModel::EnvironmentModel() :
-		mEnvironmentPhysics(NULL), mPhysicsController(NULL) {
+		mEnvironmentPhysics(NULL), mPhysicsController(NULL), mInWorld(false) {
 
 }
 
@@ -28,11 +26,17 @@ EnvironmentModel::~EnvironmentModel() {
 }
 
 bool EnvironmentModel::isInWorld() {
-	return false;
+	return mInWorld;
 }
 
 void EnvironmentModel::addToWorld() {
+	mPhysicsController->addBody(
+			((EnvironmentBt*) mEnvironmentPhysics)->getBody());
+	mInWorld = true;
 }
 
 void EnvironmentModel::removeFromWorld() {
+	mPhysicsController->removeBody(
+			((EnvironmentBt*) mEnvironmentPhysics)->getBody());
+	mInWorld = false;
 }

@@ -96,3 +96,8 @@ void PhysicsController::addBody(btRigidBody* body) {
 	mCollisionShapes.push_back(body->getCollisionShape());
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
 }
+
+void PhysicsController::removeBody(btRigidBody* body){
+		mCollisionShapes.remove(body->getCollisionShape());
+		mDynamicsWorld->removeRigidBody(body); //remove the body to the dynamics world
+}

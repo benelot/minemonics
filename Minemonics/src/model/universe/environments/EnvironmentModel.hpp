@@ -29,6 +29,8 @@ public:
 	EnvironmentModel();
 	virtual ~EnvironmentModel();
 
+	virtual void update() = 0;
+
 	bool isInWorld();
 	void addToWorld();
 	void removeFromWorld();
@@ -43,15 +45,23 @@ public:
 		mEnvironmentPhysics = environmentPhysics;
 	}
 
+	void createTerrainData(Ogre::SceneNode* sceneNode, float w, float h,
+			float* data, float minH, float maxH, Ogre::Vector3& pos,
+			float scale, float heightScale){
+		mEnvironmentPhysics->createTerrainData(sceneNode,w,h,data,minH,maxH,pos,scale,heightScale);
+	}
+
 	PhysicsController* getPhysicsController() {
 		return mPhysicsController;
 	}
 
-	void setPhysicsController(PhysicsController* physicsController){
+	void setPhysicsController(PhysicsController* physicsController) {
 		mPhysicsController = physicsController;
 	}
 
 protected:
+
+	bool mInWorld;
 
 	PhysicsController* mPhysicsController;
 	EnvironmentPhysics* mEnvironmentPhysics;

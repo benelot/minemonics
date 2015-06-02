@@ -39,11 +39,56 @@ void Environment::initialize(EnvironmentType environmentType) {
 	mEnvironmentType = environmentType;
 }
 
-btRigidBody*& Environment::getBody() {
-	return ((EnvironmentBt*) mEnvironmentModel->getEnvironmentPhysics())->getBody();
+bool Environment::isInWorld() {
+	return (mEnvironmentGraphics->isInWorld() == mEnvironmentModel->isInWorld());
+}
+
+void Environment::addToWorld() {
+	if(!mEnvironmentModel->isInWorld())
+	{
+		mEnvironmentModel->addToWorld();
+	}
+
+	if(!mEnvironmentGraphics->isInWorld())
+	{
+		mEnvironmentGraphics->addToWorld();
+	}
+}
+
+void Environment::removeFromWorld() {
+	if(mEnvironmentModel->isInWorld())
+	{
+		mEnvironmentModel->removeFromWorld();
+	}
+
+	if(mEnvironmentGraphics->isInWorld())
+	{
+		mEnvironmentGraphics->removeFromWorld();
+	}
 }
 
 void Environment::update() {
-
+//	std::vector<Ogre::Terrain*> terrains = getEnvironmentO3D()->getAllDefinedTerrains();
+//	Ogre::TerrainIterator tit = getEnvironmentO3D()->getTerrainGroup()->getTerrainIterator();
+////	Ogre::TerrainGroup * pGroup =
+////			((Ogre::TerrainPagedWorldSection *) getEnvironmentO3D()->getTerrainPagedWorldSection())->getTerrainGroup();
+////	long x, y;
+////	pGroup->unpackIndex(page->getID(), &x, &y);
+//	Ogre::Terrain * pTerrain = pGroup->getTerrain(x, y);
+//	float * data = pTerrain->getHeightData();
+//	Ogre::Vector3 tpos = pTerrain->getPosition();
+//	btVector3 pos(tpos.x, tpos.y, tpos.z);
+//
+//	float * pDataConvert = new float[pTerrain->getSize() * pTerrain->getSize()];
+//	for (int i = 0; i < pTerrain->getSize(); i++)
+//		memcpy(pDataConvert + pTerrain->getSize() * i,
+//				data + pTerrain->getSize() * (pTerrain->getSize() - i - 1),
+//				sizeof(float) * (pTerrain->getSize()));
+//
+//	mEnvironmentModel->putTerrainData(pTerrain->getSize(), pTerrain->getSize(),
+//			pDataConvert, pTerrain->getMinHeight(), pTerrain->getMaxHeight(),
+//			pos, pTerrain->getWorldSize() / (pTerrain->getSize() - 1));
+//
+//	delete[] pDataConvert;
 }
 

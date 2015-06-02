@@ -37,10 +37,15 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm,
-		bool drawTrajectory) :
-		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(drawTrajectory), mClear(
-				0), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true) {
+OgreBtDebugDrawer::OgreBtDebugDrawer() :
+		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(false), mClear(
+				0), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
+				NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
+				NULL) {
+}
+
+void OgreBtDebugDrawer::initialize(Ogre::SceneManager *scm,
+		bool drawTrajectory) {
 	mDrawTrajectory = drawTrajectory;
 	mContactPoints = &mContactPoints1;
 	mLines = new Ogre::ManualObject("BulletPhysicsLines1");
@@ -76,6 +81,7 @@ OgreBtDebugDrawer::OgreBtDebugDrawer(Ogre::SceneManager *scm,
 	//mtl->getTechnique(0)->setSelfIllumination( ColourValue::White );
 
 	Ogre::Root::getSingleton().addFrameListener(this);
+
 }
 
 OgreBtDebugDrawer::~OgreBtDebugDrawer() {

@@ -3,7 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class EvaluationModel;
 
 //# system headers
 #include <vector>
@@ -25,27 +24,29 @@ class EvaluationModel;
 class EvolutionModel {
 public:
 
-	// Evolution states
-		enum EvolutionState {
-			VARIATION, EVALUATION, PROCESSING,REAP_AND_SOW
-		};
+	// Evolution phase
+	enum EvolutionPhase {
+		VARIATION_PHASE, EVALUATION_PHASE, PROCESSING_PHASE, CULLING_PHASE
+	};
 
-		/**
-		 * The type evaluation
-		 */
-		enum EvaluationType {
-			INDIVIDUAL_EVALUATION /**< Every individual gets separately evaluated.*/,
-			N_TOURNAMENT_EVALUATION /**< Individual get evaluated in groups of n (Individuals Tournament).*/,
-			POPULATION_EVALUATION /**< Each population gets evaluated as a whole.*/,
-			N_POPULATION_EVALUATION /**< A group of n individuals from each population get evaluated.*/,
-			N_POPULATIONS_EVALUATION /**< N populations are evaluated together (Populations Tournament).*/,
-			POPULATIONS_EVALUATION/**< All populations are evaluated together.*/
-		};
+	/**
+	 * The type evaluation
+	 */
+	enum EvaluationType {
+		INDIVIDUAL_EVALUATION /**< Every individual gets separately evaluated.*/,
+		N_INDIVIDUALS_TOURNAMENT_EVALUATION /**< Individual get evaluated in groups of n (Individuals Tournament).*/,
+		POPULATION_EVALUATION /**< Each population gets evaluated as a whole.*/,
+//		N_POPULATION_EVALUATION /**< A group of n individuals from each population get evaluated.*/,
+		N_POPULATIONS_TOURNAMENT_EVALUATION /**< N populations are evaluated together (Populations Tournament).*/,
+		POPULATIONS_EVALUATION/**< All populations are evaluated together.*/
+	};
 
 	EvolutionModel();
 	~EvolutionModel();
 
-	void initialize(double evaluationTime);
+	void initialize(EvaluationType type, double evaluationTime);
+
+	void update();
 
 	void addNewPopulation(PopulationModel* populationModel);
 
@@ -55,7 +56,7 @@ public:
 
 	bool process();
 
-	bool selectAndReap();
+	bool cull();
 
 	bool variate();
 
@@ -64,8 +65,8 @@ public:
 		return mReaper;
 	}
 
-	EvolutionState getState() const {
-		return mState;
+	EvolutionPhase getPhase() const {
+		return mPhase;
 	}
 
 	EvaluationType getType() const {
@@ -80,6 +81,22 @@ public:
 		return mEvaluationTime;
 	}
 
+	int getCurrentCreatureIndex() const {
+		return mCurrentCreatureIndex;
+	}
+
+	void setCurrentCreatureIndex(int currentCreatureIndex) {
+		mCurrentCreatureIndex = currentCreatureIndex;
+	}
+
+	int getCurrentPopulationIndex() const {
+		return mCurrentPopulationIndex;
+	}
+
+	void setCurrentPopulationIndex(int currentPopulationIndex) {
+		mCurrentPopulationIndex = currentPopulationIndex;
+	}
+
 private:
 	/**
 	 * The vector of populations that are evaluated.
@@ -87,14 +104,14 @@ private:
 	std::vector<PopulationModel*> mPopulationModels;
 
 	/**
-	 * Vector of evaluation models
-	 */
-	std::vector<EvaluationModel*> mEvaluationModels;
-
-	/**
 	 * The currently evaluated population.
 	 */
 	int mCurrentPopulationIndex;
+
+	/**
+	 * The currently evaluated creature.
+	 */
+	int mCurrentCreatureIndex;
 
 	/**
 	 * The reaper of this evolution model.
@@ -102,9 +119,9 @@ private:
 	Reaper mReaper;
 
 	/**
-	 * The state this evolution is in.
+	 * The phase this evolution is in.
 	 */
-	EvolutionState mState;
+	EvolutionPhase mPhase;
 
 	/**
 	 * The type of evolution model.

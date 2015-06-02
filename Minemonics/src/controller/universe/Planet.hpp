@@ -37,24 +37,56 @@ public:
 	Planet();
 	virtual ~Planet();
 
+	/**
+	 * Initialize the planet.
+	 * @param simulationManager The simulation manager.
+	 * @param type The type of the environment.
+	 * @param debugDrawer The debug drawer of this simulation.
+	 */
 	void initialize(SimulationManager* simulationManager,
 			Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer);
 
+	/**
+	 * Add a population to the planet.
+	 * @param population The population to be added to the planet.
+	 */
 	void addPopulation(Population* population);
 
+	/**
+	 * Draw the debug world if debug drawing is enabled.
+	 */
 	void drawDebugWorld();
 
+	/**
+	 * Step the universe physics forward.
+	 * @param timeSinceLastFrame The size of the time step.
+	 */
 	void stepPhysics(double timeSinceLastFrame);
 
+	/**
+	 * Update the model of the planet.
+	 */
 	void update();
 
+	/**
+	 * Proceed with the evaluation. In in serial mode, this just goes on to the next evaluation, in parallel, this schedules one more evaluation.
+	 * @return If true then this means it proceeded successfully, if false this means that the generation is over and evaluated.
+	 */
 	bool proceedEvaluation();
 
 	//Accessor methods
+	/**
+	 * Get the environment of the planet.
+	 * @return The environment of the planet.
+	 */
 	Environment*& getEnvironment() {
 		return mEnvironment;
 	}
 
+	/**
+	 * Set the environment of the planet.
+	 * @param environment The environment of the planet.
+	 */
 	void setEnvironment(Environment*& environment) {
 		mEnvironment = environment;
 	}

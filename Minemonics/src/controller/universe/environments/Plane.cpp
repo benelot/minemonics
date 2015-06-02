@@ -35,20 +35,23 @@ Plane::~Plane() {
 
 void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer) {
 	Environment::initialize(Environment::PLANE);
+
+	// setup the plane view
 	mEnvironmentGraphics = new PlaneO3D(simulationMgr);
-	((PlaneO3D*) mEnvironmentGraphics)->initialize(l);
+	getPlaneView()->initialize(l);
+
+	// setup the planet model
 	mEnvironmentModel = new PlaneModel();
-	((PlaneModel*) mEnvironmentModel)->initialize();
+	getPlaneModel()->initialize();
+
+	// set up the physics controller
 	mEnvironmentModel->setPhysicsController(new PhysicsController());
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(debugDrawer);
 	mEnvironmentModel->getPhysicsController()->setPhysicsPaused(true);
-	//TODO:Refactor getbody
-	mEnvironmentModel->getPhysicsController()->addBody(getBody());
-
 }
 
-EnvironmentModel* Plane::getEnvironmentModel() {
-	//TODO: Implement environmentmodel
-	return mEnvironmentModel;
+void Plane::update(){
+	getPlaneModel()->update();
+	getPlaneView()->update();
 }

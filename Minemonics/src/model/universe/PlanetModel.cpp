@@ -23,7 +23,6 @@
 
 PlanetModel::PlanetModel() :
 		mEnvironmentModel(NULL), mEvolutionModel(NULL) {
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -31,18 +30,16 @@ PlanetModel::~PlanetModel() {
 	// TODO Auto-generated destructor stub
 }
 
-void PlanetModel::initialize() {
+void PlanetModel::initialize(EvolutionModel* evolutionModel, EnvironmentModel* environmentModel) {
+	mEvolutionModel = evolutionModel;
+	mEnvironmentModel = environmentModel;
 }
 
 bool PlanetModel::proceedEvaluation() {
-	if (!mEnvironmentModel->isInWorld()) {
-		mEnvironmentModel->addToWorld();
-	}
-
-	if (!mEvolutionModel->proceedEvaluation()) {
-		mEnvironmentModel->removeFromWorld();
-		return false;
-	}
 	return true;
+}
 
+void PlanetModel::update(){
+	mEnvironmentModel->update();
+	mEvolutionModel->update();
 }

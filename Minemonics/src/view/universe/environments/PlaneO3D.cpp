@@ -29,4 +29,7 @@ void PlaneO3D::initialize(Ogre::Light* l) {
 	mTerrainPagedWorldSection->setDefiner(OGRE_NEW PlaneTerrainDefiner);
 }
 
+void PlaneO3D::update(){
+	EnvironmentO3D::update();
+}
 

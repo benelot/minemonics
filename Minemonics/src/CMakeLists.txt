@@ -33,11 +33,11 @@ set(MODELHDRS
 	./model/universe/evolution/juries/Velocity.hpp
 	
 	## universe
+	./model/universe/EvaluationModel.hpp
 	./model/universe/UniverseModel.hpp
 	./model/universe/PlanetModel.hpp
 	
 	## evolution
-	./model/universe/evolution/EvaluationModel.hpp
 	./model/universe/evolution/EvolutionModel.hpp
 	./model/universe/evolution/Reaper.hpp
 	./model/universe/evolution/population/PopulationModel.hpp
@@ -95,11 +95,11 @@ set(MODELSRCS
 	./model/universe/evolution/juries/Velocity.cpp
 	
 	## universe
+	./model/universe/EvaluationModel.cpp
 	./model/universe/UniverseModel.cpp
 	./model/universe/PlanetModel.cpp
 	
 	## evolution
-	./model/universe/evolution/EvaluationModel.cpp
 	./model/universe/evolution/EvolutionModel.cpp
 	./model/universe/evolution/Reaper.cpp
 	./model/universe/evolution/population/PopulationModel.cpp
@@ -158,6 +158,10 @@ set(CONTROLLERHDRS
 	## application state handler
 	./controller/StateHandler.hpp
 	
+	## evaluation controller
+	./controller/EvaluationController.hpp
+	./controller/Evaluation.hpp
+	
 	## ragdoll
     ./controller/ragdoll/RagDoll.hpp
     
@@ -171,7 +175,6 @@ set(CONTROLLERHDRS
     ./controller/universe/environments/Plane.hpp
     
     ## evolution
-    ./controller/universe/evolution/Evaluation.hpp
     ./controller/universe/evolution/Evolution.hpp
     ./controller/universe/evolution/population/Population.hpp
         
@@ -196,6 +199,10 @@ set(CONTROLLERSRCS
 	## application state handler
 	./controller/StateHandler.cpp
 	
+	## evaluation controller
+	./controller/EvaluationController.cpp
+	./controller/Evaluation.cpp
+	
 	## ragdoll
 	./controller/ragdoll/RagDoll.cpp
 	
@@ -209,7 +216,6 @@ set(CONTROLLERSRCS
     ./controller/universe/environments/Plane.cpp
     
     ## evolution
-    ./controller/universe/evolution/Evaluation.cpp
     ./controller/universe/evolution/Evolution.cpp
     ./controller/universe/evolution/population/Population.cpp
     

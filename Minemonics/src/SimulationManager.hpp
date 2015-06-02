@@ -37,6 +37,7 @@ class ParamsPanel;
 #include <configuration/EvolutionConfiguration.hpp>
 
 //## controller headers
+#include <controller/EvaluationController.hpp>
 #include <controller/StateHandler.hpp>
 #include <controller/viewcontroller/ViewController.hpp>
 #include <controller/viewcontroller/camera/CameraHandler.hpp>
@@ -85,13 +86,10 @@ private:
 	SDL_Window *mSdlWindow;
 	CameraHandler mCameraHandler;
 
+	EvaluationController mEvaluationController;
+
 	//The universe and everything
 	Universe mUniverse;
-
-	// timing component
-	boost::posix_time::ptime mStart;
-	boost::posix_time::ptime mNow;
-	boost::posix_time::time_duration mRuntime;
 
 	//## model components
 	//	int t;
@@ -102,19 +100,24 @@ private:
 	//	 //scaling window
 	//	std::vector<double> window;
 
+	//	std::vector<RagDoll*> mRagdolls;
+
 	//## view components
 
-//	std::vector<RagDoll*> mRagdolls;
+	// timing component
+	boost::posix_time::ptime mStart;
+	boost::posix_time::ptime mNow;
+	boost::posix_time::time_duration mRuntime;
 
 	ViewController mViewController;
 
 	Ogre3DFFMPEGVideoWriter mVideoWriter;
 
+	OgreBtDebugDrawer mDebugDrawer;
+
 	//## Debug components
 	// Logger
 	static BoostLogger mBoostLogger;
-
-	OgreBtDebugDrawer* mDebugDrawer;
 
 	static class _Init {
 	public:
@@ -181,7 +184,7 @@ public:
 		return mNow;
 	}
 
-	OgreBtDebugDrawer*& getDebugDrawer() {
+	OgreBtDebugDrawer& getDebugDrawer() {
 		return mDebugDrawer;
 	}
 
@@ -191,6 +194,10 @@ public:
 
 	ViewController& getViewController() {
 		return mViewController;
+	}
+
+	EvaluationController& getEvaluationController() {
+		return mEvaluationController;
 	}
 };
 

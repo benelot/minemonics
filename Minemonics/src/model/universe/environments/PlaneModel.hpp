@@ -5,6 +5,8 @@
 #include <model/universe/environments/EnvironmentModel.hpp>
 
 //# forward declarations
+class PlaneBt;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -29,6 +31,13 @@ public:
 	virtual ~PlaneModel();
 
 	virtual void initialize();
+
+	virtual void update();
+
+	PlaneBt* getPlaneBt()
+	{
+		return (PlaneBt*) mEnvironmentPhysics;
+	}
 
 	//TODO: Add serialization to plane model
 };

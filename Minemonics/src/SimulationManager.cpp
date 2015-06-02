@@ -88,13 +88,11 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-		mStateHandler(), mInputHandler(), mCameraHandler(this), mDebugDrawer(
-		NULL), mSdlWindow(
+		mStateHandler(), mInputHandler(), mCameraHandler(this), mSdlWindow(
 		NULL) {
 
 	// main frame timer initialization
@@ -149,19 +147,70 @@ void SimulationManager::createFrameListener(void) {
 	//Rng::seed(duration.total_milliseconds());
 
 	// initialize the simulation's debug drawer
-	mDebugDrawer = new OgreBtDebugDrawer(mSceneMgr, true);
-	mDebugDrawer->setDrawWireframe(true);
-	mDebugDrawer->setDrawConstraints(true);
-	mDebugDrawer->setDrawConstraintLimits(true);
-	mDebugDrawer->setDrawContactPoints(true);
-	mDebugDrawer->setDrawNormals(true);
+	mDebugDrawer.initialize(mSceneMgr, true);
+	mDebugDrawer.setDrawWireframe(true);
+	mDebugDrawer.setDrawConstraints(true);
+	mDebugDrawer.setDrawConstraintLimits(true);
+	mDebugDrawer.setDrawContactPoints(true);
+	mDebugDrawer.setDrawNormals(true);
+}
+
+//-------------------------------------------------------------------------------------
+/**
+ * Creates the scene of the application.
+ */
+void SimulationManager::createScene(void) {
+
+	// Initialize the logger
+	Logger::init("minemonics.log");
+	Logger::initTermSink();
+
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
+			ApplicationConfiguration::APPLICATION_TITLE);
+
+	//initialize GUI and views
+	mViewController.initialize(this, renderTarget, &mStateHandler);
+
+	// ###################
+	// We create the evaluation scene defined by the planet to be evaluated
+	// ###################
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...";
+
+	mCamera->setNearClipDistance(0.1);
+	mCamera->setFarClipDistance(12000);
+
+	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
+			Ogre::RSC_INFINITE_FAR_PLANE)) {
+		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
+	}
+
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.4, 0.4, 0.35));
+
+	//either create a skydome or a skyplane
+	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
+
+//  Create skyplane
+//	Ogre::Plane plane;
+//	plane.d = 100;
+//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
+//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
+//			0.5, 150, 150);
+
+	Ogre::ColourValue fadeColour(0, 0, 0);
+//	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
+	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 17000, 30000);
+//
+//	mSceneMgr->setFog(Ogre::FOG_EXP, fadeColour, 0.002);
+//
+//	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
 	// initialize the universe
 	mUniverse.initialize();
 
 	// create a planet called earth
 	Planet* earth = new Planet();
-	earth->initialize(this, Environment::PLANE, mDebugDrawer);
+	earth->initialize(this, Environment::PLANE, &mDebugDrawer);
 
 	//add earth to universe
 	mUniverse.addPlanet(earth);
@@ -192,47 +241,6 @@ void SimulationManager::createFrameListener(void) {
 //		mRagdolls.push_back(ragdoll);
 //		ragdoll->addToWorld();
 //	}
-}
-
-//-------------------------------------------------------------------------------------
-/**
- * Creates the scene of the application.
- */
-void SimulationManager::createScene(void) {
-
-	// Initialize the logger
-	Logger::init("minemonics.log");
-	Logger::initTermSink();
-
-	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
-			ApplicationConfiguration::APPLICATION_TITLE);
-
-	//initialize GUI and views
-	mViewController.initialize(this, renderTarget, &mStateHandler);
-
-	// ###################
-	// We create the evaluation scene defined by the planet to be evaluated
-	// ###################
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...";
-	mCamera->setNearClipDistance(0.1);
-	mCamera->setFarClipDistance(50000);
-
-	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
-			Ogre::RSC_INFINITE_FAR_PLANE)) {
-		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
-	}
-
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
-
-	//either create a skydome or a skyplane
-	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 500);
-
-//  Create skyplane
-//	Ogre::Plane plane;
-//	plane.d = 100;
-//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
-//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
-//			0.5, 150, 150);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
 }

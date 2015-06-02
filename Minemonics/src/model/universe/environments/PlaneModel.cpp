@@ -28,5 +28,10 @@ PlaneModel::~PlaneModel() {
 
 void PlaneModel::initialize() {
 	mEnvironmentPhysics = new PlaneBt();
-	((PlaneBt*) mEnvironmentPhysics)->initialize();
+	getPlaneBt()->initialize();
+}
+
+void PlaneModel::update()
+{
+	mEnvironmentPhysics->update();
 }

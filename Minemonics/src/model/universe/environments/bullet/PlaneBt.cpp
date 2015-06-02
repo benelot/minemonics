@@ -21,8 +21,7 @@
 //## view headers
 //## utils headers
 
-PlaneBt::PlaneBt() :
-		mGroundBody(NULL), mGroundMotionState(NULL), mGroundShape(NULL) {
+PlaneBt::PlaneBt() {
 
 }
 
@@ -54,6 +53,10 @@ void PlaneBt::initialize() {
 	mGroundBody = new btRigidBody(rbInfo);
 
 	// disable debug visualization
-	mGroundBody->setCollisionFlags(mGroundBody->getCollisionFlags() | btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
+	mGroundBody->setCollisionFlags(
+			mGroundBody->getCollisionFlags()
+					| btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
 }
 
+void PlaneBt::update() {
+}

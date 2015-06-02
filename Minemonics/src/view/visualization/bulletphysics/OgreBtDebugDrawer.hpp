@@ -35,8 +35,9 @@
  */
 class OgreBtDebugDrawer: public btIDebugDraw, public Ogre::FrameListener {
 public:
-	OgreBtDebugDrawer(Ogre::SceneManager *scm, bool drawTrajectory);
+	OgreBtDebugDrawer();
 	~OgreBtDebugDrawer();
+	void initialize(Ogre::SceneManager *scm, bool drawTrajectory);
 	virtual void drawLine(const btVector3 &from, const btVector3 &to,
 			const btVector3 &color);
 	void drawLine(const Ogre::Vector3& from, const Ogre::Vector3& to,

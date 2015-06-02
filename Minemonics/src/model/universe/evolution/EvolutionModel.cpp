@@ -15,8 +15,8 @@
 //## utils headers
 
 EvolutionModel::EvolutionModel() :
-		mState(VARIATION), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0), mCurrentPopulationIndex(
-				0) {
+		mPhase(VARIATION_PHASE), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(
+				0), mCurrentPopulationIndex(0),mCurrentCreatureIndex(0) {
 
 }
 
@@ -24,66 +24,41 @@ EvolutionModel::~EvolutionModel() {
 
 }
 
-void EvolutionModel::initialize(double evaluationTime) {
+void EvolutionModel::initialize(EvaluationType type, double evaluationTime) {
+	mType = type;
 	mEvaluationTime = evaluationTime;
+	//Get reasonable numbers
+	mReaper.initialize(0.1,0.1,0.1,0.1,0.1,0.2,0.3);
 
 	//GENERATION
 }
 
 bool EvolutionModel::proceedEvaluation() {
-
-	if (mPopulationModels.size() != 0) {
-		if (mCurrentPopulationIndex < mPopulationModels.size()) {
-			if (!mPopulationModels[mCurrentPopulationIndex]->proceedEvaluation()) {
-				mCurrentPopulationIndex =
-						(mCurrentPopulationIndex < mPopulationModels.size()) ?
-								mCurrentPopulationIndex + 1 : 0;
-				if(mCurrentPopulationIndex != 0)
-				{
-					return true;
-				}
-			}
-			else{
-				return true;
-			}
-		}
-	}
-
-	//PROCESSING
-	process();
-
-	//REAP AND SOW
-	selectAndReap();
-	variate();
-
-	return false;
+	return true;
 }
 
 bool EvolutionModel::evaluate() {
-	//EVALUATION
-	mState = EVALUATION;
+//EVALUATION
+	mPhase = EVALUATION_PHASE;
 
-	// run creature evaluation according to the evolution type and then return true
+// run creature evaluation according to the evolution type and then return true
 
 	return true;
 }
 
 bool EvolutionModel::process() {
-	//PROCESSING
-	mState = PROCESSING;
+//PROCESSING
+	mPhase = PROCESSING_PHASE;
 
 	return true;
 }
 
-bool EvolutionModel::selectAndReap() {
-	//REAP_AND_SOW
-	mState = REAP_AND_SOW;
+bool EvolutionModel::cull() {
+//REAP_AND_SOW
+	mPhase = CULLING_PHASE;
 
-	//call the reaper to reap
+//call the reaper to reap
 	mReaper.reap(mPopulationModels[mCurrentPopulationIndex]);
-
-	//call the reaper to sow
-	mReaper.sow(mPopulationModels[mCurrentPopulationIndex]);
 
 	return true;
 }
@@ -94,10 +69,13 @@ void EvolutionModel::addNewPopulation(PopulationModel* populationModel) {
 
 bool EvolutionModel::variate() {
 	//VARIATION
-	mState = VARIATION;
+	mPhase = VARIATION_PHASE;
 
-	//mutate creatures
-	//cross over creatures
-
+	//call the reaper to sow
+	mReaper.sow(mPopulationModels[mCurrentPopulationIndex]);
 	return true;
+}
+
+void EvolutionModel::update() {
+
 }

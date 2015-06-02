@@ -34,14 +34,11 @@ public:
 
 	void initialize();
 
+	virtual void update();
+
 	btRigidBody*& getBody() {
 		return mGroundBody;
 	}
-
-private:
-	btCollisionShape* mGroundShape;
-	btDefaultMotionState* mGroundMotionState;
-	btRigidBody* mGroundBody;
 };
 
 #endif /* MODEL_ENVIRONMENT_PLANEBT_H_ */
