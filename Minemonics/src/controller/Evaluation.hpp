@@ -32,9 +32,11 @@ public:
 	Evaluation();
 	virtual ~Evaluation();
 
-	void initialize(Planet* planet);
+	void initialize(Planet* planet,double evaluationTime);
 
 	void addPopulation(Population* population);
+
+	void runEvaluation();
 
 private:
 	EvaluationModel mEvaluationModel;

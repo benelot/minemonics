@@ -1,5 +1,3 @@
-
-
 //# corresponding headers
 //# forward declarations
 //# system headers
@@ -19,7 +17,6 @@
 //## view headers
 //## utils headers
 
-
 Evolution::Evolution() :
 		mEvaluationController(NULL), mPlanet(NULL) {
 }
@@ -29,9 +26,11 @@ Evolution::~Evolution() {
 }
 
 void Evolution::initialize(EvaluationController* evaluationController,
-		Planet* planet) {
+		Planet* planet, EvolutionModel::EvaluationType type,
+		double evaluationTime, int tournamentSize) {
 	mEvaluationController = evaluationController;
 	mPlanet = planet;
+	mEvolutionModel.initialize(type, evaluationTime, tournamentSize);
 }
 
 void Evolution::addPopulation(Population* population) {
@@ -45,10 +44,12 @@ bool Evolution::proceedEvaluation() {
 		switch (mEvolutionModel.getType()) {
 		case EvolutionModel::INDIVIDUAL_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet);
+			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+
 			Population* population = new Population();
-			population->initialize(mPlanet,1);
-			population->addMember(mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+			population->initialize(mPlanet, 1);
+			population->addMember(
+					mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
 
 			evaluation->addPopulation(population);
 
@@ -57,26 +58,108 @@ bool Evolution::proceedEvaluation() {
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet);
+			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+
+			Population* population;
+			for (int i = 0; i < mEvolutionModel.getTournamentSize(); i++) {
+				population = new Population();
+				population->initialize(mPlanet, 1);
+				population->addMember(
+						mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+
+				evaluation->addPopulation(population);
+
+				//break if there are no more creatures
+				if (!mEvolutionModel.setCurrentCreatureIndex(
+						mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+					break;
+				}
+			}
 
 			mEvaluationController->addEvaluation(evaluation);
 			break;
 		}
 		case EvolutionModel::POPULATION_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet);
+			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+
+			Population* population;
+			for (int i = 0;
+					i
+							< mEvolutionModel.getPopulationModels()[mEvolutionModel.getCurrentCreatureIndex()]->getCreatureModels().size();
+					i++) {
+				population = new Population();
+				population->initialize(mPlanet, 1);
+				population->addMember(
+						mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+
+				evaluation->addPopulation(population);
+
+				//break if there are no more creatures
+				if (!mEvolutionModel.setCurrentCreatureIndex(
+						mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+					break;
+				}
+			}
 
 			mEvaluationController->addEvaluation(evaluation);
 			break;
 		}
 		case EvolutionModel::N_POPULATIONS_TOURNAMENT_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
+			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+
+			Population* population;
+			for (int i = 0; i < mEvolutionModel.getTournamentSize(); i++) {
+				population = new Population();
+				population->initialize(mPlanet,
+						mEvolutionModel.getPopulationModels()[mEvolutionModel.getCurrentCreatureIndex()]->getCreatureModels().size());
+				for (int j = 0;
+						j
+								< mEvolutionModel.getPopulationModels()[mEvolutionModel.getCurrentCreatureIndex()]->getCreatureModels().size();
+						j++) {
+					population->addMember(
+							mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+
+					evaluation->addPopulation(population);
+
+					//break if there are no more creatures
+					if (!mEvolutionModel.setCurrentCreatureIndex(
+							mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+						break;
+					}
+				}
+			}
+
 			mEvaluationController->addEvaluation(evaluation);
 			break;
 		}
 		case EvolutionModel::POPULATIONS_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet);
+			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+
+			Population* population;
+			for (int i = 0; i < mEvolutionModel.getPopulationModels().size();
+					i++) {
+				population = new Population();
+				population->initialize(mPlanet,
+						mEvolutionModel.getPopulationModels()[mEvolutionModel.getCurrentCreatureIndex()]->getCreatureModels().size());
+				for (int j = 0;
+						j
+								< mEvolutionModel.getPopulationModels()[mEvolutionModel.getCurrentCreatureIndex()]->getCreatureModels().size();
+						j++) {
+					population->addMember(
+							mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+
+					evaluation->addPopulation(population);
+
+					//break if there are no more creatures
+					if (!mEvolutionModel.setCurrentCreatureIndex(
+							mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+						break;
+					}
+				}
+			}
 
 			mEvaluationController->addEvaluation(evaluation);
 			break;

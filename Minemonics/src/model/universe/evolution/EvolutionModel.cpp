@@ -16,7 +16,7 @@
 
 EvolutionModel::EvolutionModel() :
 		mPhase(VARIATION_PHASE), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(
-				0), mCurrentPopulationIndex(0),mCurrentCreatureIndex(0) {
+				0), mCurrentPopulationIndex(0),mCurrentCreatureIndex(0),mTournamentSize(1) {
 
 }
 
@@ -24,10 +24,11 @@ EvolutionModel::~EvolutionModel() {
 
 }
 
-void EvolutionModel::initialize(EvaluationType type, double evaluationTime) {
+void EvolutionModel::initialize(EvaluationType type, double evaluationTime,int tournamentSize) {
 	mType = type;
 	mEvaluationTime = evaluationTime;
-	//Get reasonable numbers
+	mTournamentSize = tournamentSize;
+	//TODO:Get reasonable numbers
 	mReaper.initialize(0.1,0.1,0.1,0.1,0.1,0.2,0.3);
 
 	//GENERATION

@@ -15,7 +15,7 @@
 //## view headers
 //## utils headers
 
-EvaluationModel::EvaluationModel():mPlanetModel(NULL) {
+EvaluationModel::EvaluationModel():mPlanetModel(NULL),mEvaluationTime(0) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -24,8 +24,9 @@ EvaluationModel::~EvaluationModel() {
 	// TODO Auto-generated destructor stub
 }
 
-void EvaluationModel::initialize(PlanetModel* planetModel) {
+void EvaluationModel::initialize(PlanetModel* planetModel,double evaluationTime) {
 	mPlanetModel = planetModel;
+	mEvaluationTime = evaluationTime;
 }
 
 void EvaluationModel::addPopulationModel(PopulationModel* populationModel) {

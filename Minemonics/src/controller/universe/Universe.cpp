@@ -57,6 +57,7 @@ void Universe::proceedEvaluation() {
 		}
 	}
 	mUniverseModel.proceedEvaluation();
+	mEvaluationController.evaluate();
 }
 
 void Universe::stepPhysics(double timeSinceLastFrame) {

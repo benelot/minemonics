@@ -33,11 +33,12 @@ Planet::~Planet() {
 	mEvolution = NULL;
 }
 
-void Planet::initialize(SimulationManager* simulationManager,Environment::EnvironmentType type,
-		OgreBtDebugDrawer* debugDrawer) {
+void Planet::initialize(SimulationManager* simulationManager,
+		Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer) {
 	//create earth evolution
 	mEvolution = new Evolution();
-	mEvolution->initialize(&simulationManager->getEvaluationController(),this);
+	mEvolution->initialize(
+			&simulationManager->getUniverse().getEvaluationController(), this);
 
 	// set up environment
 	switch (type) {
@@ -49,11 +50,13 @@ void Planet::initialize(SimulationManager* simulationManager,Environment::Enviro
 	case Environment::PLANE: {
 		//create the terrain
 		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(simulationManager, NULL, debugDrawer);
+		((Plane*) mEnvironment)->initialize(simulationManager, NULL,
+				debugDrawer);
 		break;
 	}
 	}
-	mPlanetModel.initialize(&mEvolution->getEvolutionModel(),mEnvironment->getEnvironmentModel());
+	mPlanetModel.initialize(&mEvolution->getEvolutionModel(),
+			mEnvironment->getEnvironmentModel());
 }
 
 void Planet::addPopulation(Population* population) {
@@ -61,7 +64,8 @@ void Planet::addPopulation(Population* population) {
 }
 
 void Planet::stepPhysics(double timeSinceLastFrame) {
-	mPlanetModel.getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(timeSinceLastFrame);
+	mPlanetModel.getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(
+			timeSinceLastFrame);
 }
 
 void Planet::update() {

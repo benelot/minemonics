@@ -37,7 +37,6 @@ class ParamsPanel;
 #include <configuration/EvolutionConfiguration.hpp>
 
 //## controller headers
-#include <controller/EvaluationController.hpp>
 #include <controller/StateHandler.hpp>
 #include <controller/viewcontroller/ViewController.hpp>
 #include <controller/viewcontroller/camera/CameraHandler.hpp>
@@ -85,8 +84,6 @@ private:
 	SDL2InputHandler mInputHandler;
 	SDL_Window *mSdlWindow;
 	CameraHandler mCameraHandler;
-
-	EvaluationController mEvaluationController;
 
 	//The universe and everything
 	Universe mUniverse;
@@ -194,10 +191,6 @@ public:
 
 	ViewController& getViewController() {
 		return mViewController;
-	}
-
-	EvaluationController& getEvaluationController() {
-		return mEvaluationController;
 	}
 };
 

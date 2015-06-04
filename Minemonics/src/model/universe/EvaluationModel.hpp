@@ -20,7 +20,7 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The evaluation model holds the information about the evaluation.
  * @details		 Details
  * @date		2015-06-01
  * @author		Benjamin Ellenberger
@@ -30,7 +30,7 @@ public:
 	EvaluationModel();
 	virtual ~EvaluationModel();
 
-	void initialize(PlanetModel* planetModel);
+	void initialize(PlanetModel* planetModel,double evaluationTime);
 
 	PlanetModel* getPlanetModel() {
 		return mPlanetModel;
@@ -45,6 +45,8 @@ public:
 private:
 	PlanetModel* mPlanetModel;
 	std::vector<PopulationModel*> mPopulationModels;
+
+	double mEvaluationTime;
 };
 
 #endif /* MODEL_UNIVERSE_EVALUATIONMODEL_HPP_ */

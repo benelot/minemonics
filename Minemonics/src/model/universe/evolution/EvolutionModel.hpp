@@ -44,7 +44,8 @@ public:
 	EvolutionModel();
 	~EvolutionModel();
 
-	void initialize(EvaluationType type, double evaluationTime);
+	void initialize(EvaluationType type = INDIVIDUAL_EVALUATION,
+			double evaluationTime = 10, int tournamentSize = 1);
 
 	void update();
 
@@ -85,8 +86,14 @@ public:
 		return mCurrentCreatureIndex;
 	}
 
-	void setCurrentCreatureIndex(int currentCreatureIndex) {
-		mCurrentCreatureIndex = currentCreatureIndex;
+	bool setCurrentCreatureIndex(int currentCreatureIndex) {
+		if (currentCreatureIndex
+				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
+			mCurrentCreatureIndex = currentCreatureIndex;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	int getCurrentPopulationIndex() const {
@@ -95,6 +102,10 @@ public:
 
 	void setCurrentPopulationIndex(int currentPopulationIndex) {
 		mCurrentPopulationIndex = currentPopulationIndex;
+	}
+
+	int getTournamentSize() const {
+		return mTournamentSize;
 	}
 
 private:
@@ -132,6 +143,11 @@ private:
 	 * Evaluation time
 	 */
 	double mEvaluationTime;
+
+	/**
+	 * Tournament size
+	 */
+	int mTournamentSize;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_EVOLUTIONMODEL_HPP_ */

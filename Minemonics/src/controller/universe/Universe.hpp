@@ -11,14 +11,16 @@ class Evaluation;
 
 //## controller headers
 //## model headers
-#include <model/universe/UniverseModel.hpp>
-
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/EvaluationController.hpp>
+
 //## model headers
+#include <model/universe/UniverseModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -83,12 +85,13 @@ public:
 		return mUniverseModel;
 	}
 
+	EvaluationController& getEvaluationController() {
+		return mEvaluationController;
+	}
+
 private:
 
-	/**
-	 * Vector of evaluation
-	 */
-	std::vector<Evaluation*> mEvaluations;
+	EvaluationController mEvaluationController;
 
 	/**
 	 * The model of the universe.

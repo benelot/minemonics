@@ -24,8 +24,6 @@ class EvaluationController;
 //## utils headers
 #include <utils/TimerManager.hpp>
 
-
-
 /**
  * @brief		The evolution runs evaluations depending on type.
  * @details		 A particular experimental setup is referred to as an "evolution".
@@ -49,8 +47,10 @@ public:
 	/**
 	 * Initialize the evolution.
 	 */
-	void initialize(EvaluationController* evaluationController,
-			Planet* planet);
+	void initialize(EvaluationController* evaluationController, Planet* planet,
+			EvolutionModel::EvaluationType type =
+					EvolutionModel::INDIVIDUAL_EVALUATION,
+			double evaluationTime = 10, int tournamentSize = 1);
 
 	void addPopulation(Population* population);
 
@@ -62,7 +62,6 @@ public:
 	bool proceedEvaluation();
 
 	void update();
-
 
 	//Accessor methods
 
@@ -85,7 +84,6 @@ private:
 	 * The model of the evolution
 	 */
 	EvolutionModel mEvolutionModel;
-
 
 	TimerManager<Evolution> mEvaluationManager;
 };
