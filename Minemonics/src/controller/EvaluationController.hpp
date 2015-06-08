@@ -1,10 +1,3 @@
-/*
- * EvaluationController.hpp
- *
- *  Created on: Jun 2, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_EVALUATIONCONTROLLER_HPP_
 #define CONTROLLER_EVALUATIONCONTROLLER_HPP_
 
@@ -26,8 +19,11 @@
 //## view headers
 //## utils headers
 
-/*
- *
+/**
+ * @brief		The evaluation controller schedules the evaluations for serial or parallel evaluation.
+ * @details		Details
+ * @date		2015-06-02
+ * @author		Benjamin Ellenberger
  */
 class EvaluationController {
 public:
@@ -36,7 +32,9 @@ public:
 
 	void addEvaluation(Evaluation* evaluation);
 
-	void evaluate();
+	void scheduleEvaluations();
+
+	void update(double timeSinceLastFrame);
 
 private:
 	std::vector<Evaluation*> mEvaluations;

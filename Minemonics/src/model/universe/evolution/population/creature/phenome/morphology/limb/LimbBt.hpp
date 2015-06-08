@@ -58,7 +58,8 @@ public:
 	 */
 	void initialize(btDynamicsWorld* world, void* limb,
 			LimbModel::PrimitiveType type, btVector3 position,
-			btQuaternion orientation, btVector3 dimensions, btScalar mass);
+			btQuaternion orientation, btVector3 dimensions, btScalar mass,
+			btScalar restitution, btScalar friction);
 
 	/**
 	 * Add the limb to the physical world.

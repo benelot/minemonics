@@ -66,7 +66,7 @@ public:
 	/**
 	 * Update the model of the universe.
 	 */
-	void update();
+	void update(double timeSinceLastFrame);
 
 	//Accessor methods
 	/**

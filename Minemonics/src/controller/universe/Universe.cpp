@@ -57,7 +57,7 @@ void Universe::proceedEvaluation() {
 		}
 	}
 	mUniverseModel.proceedEvaluation();
-	mEvaluationController.evaluate();
+	mEvaluationController.scheduleEvaluations();
 }
 
 void Universe::stepPhysics(double timeSinceLastFrame) {
@@ -74,9 +74,6 @@ void Universe::drawDebugWorld() {
 	}
 }
 
-void Universe::update() {
-	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
-		(*pit)->update();
-	}
+void Universe::update(double timeSinceLastFrame) {
+	mEvaluationController.update(timeSinceLastFrame);
 }

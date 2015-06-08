@@ -1,4 +1,3 @@
-
 //# corresponding headers
 #include <model/universe/EvaluationModel.hpp>
 
@@ -15,7 +14,9 @@
 //## view headers
 //## utils headers
 
-EvaluationModel::EvaluationModel():mPlanetModel(NULL),mEvaluationTime(0) {
+EvaluationModel::EvaluationModel() :
+		mPlanetModel(NULL), mEvaluationTime(0), mTimePassed(0), mEvaluating(
+				false), mTornDown(false) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -24,7 +25,8 @@ EvaluationModel::~EvaluationModel() {
 	// TODO Auto-generated destructor stub
 }
 
-void EvaluationModel::initialize(PlanetModel* planetModel,double evaluationTime) {
+void EvaluationModel::initialize(PlanetModel* planetModel,
+		double evaluationTime) {
 	mPlanetModel = planetModel;
 	mEvaluationTime = evaluationTime;
 }

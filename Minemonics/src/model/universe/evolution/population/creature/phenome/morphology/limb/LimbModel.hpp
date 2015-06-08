@@ -50,7 +50,7 @@ public:
 
 	void initialize(btDynamicsWorld* world, void* limb, PrimitiveType type,
 			Ogre::Vector3 position, Ogre::Quaternion orientation,
-			Ogre::Vector3 dimensions, double mass, Ogre::ColourValue color);
+			Ogre::Vector3 dimensions, double mass,double restitution,double friction, Ogre::ColourValue color);
 
 	//TODO: Implement serialization methods for LimbModel.
 

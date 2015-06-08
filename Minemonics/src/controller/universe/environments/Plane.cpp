@@ -48,7 +48,7 @@ void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDe
 	mEnvironmentModel->setPhysicsController(new PhysicsController());
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(debugDrawer);
-	mEnvironmentModel->getPhysicsController()->setPhysicsPaused(true);
+//	mEnvironmentModel->getPhysicsController()->setPhysicsPaused(true);
 }
 
 void Plane::update(){

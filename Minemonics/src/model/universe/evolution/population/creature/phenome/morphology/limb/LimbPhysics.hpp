@@ -99,6 +99,16 @@ private:
 	 * Whether the limb is in the world or not.
 	 */
 	bool mInWorld;
+
+	/**
+	 * Restitution is the amount of force that is reflected in a collision. It is similar to elasticity.
+	 */
+	double mRestitution;
+
+	/**
+	 * The friction of this segment.
+	 */
+	double mFriction;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBPHYSICS_HPP_ */

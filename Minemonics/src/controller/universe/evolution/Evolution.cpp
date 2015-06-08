@@ -39,6 +39,8 @@ void Evolution::addPopulation(Population* population) {
 }
 
 bool Evolution::proceedEvaluation() {
+	mEvolutionModel.proceedEvaluation();
+
 	if (mPopulations.size() != 0) {
 
 		switch (mEvolutionModel.getType()) {
@@ -54,6 +56,7 @@ bool Evolution::proceedEvaluation() {
 			evaluation->addPopulation(population);
 
 			mEvaluationController->addEvaluation(evaluation);
+			return true;
 			break;
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
@@ -77,6 +80,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			return true;
 			break;
 		}
 		case EvolutionModel::POPULATION_EVALUATION: {
@@ -103,6 +107,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			return true;
 			break;
 		}
 		case EvolutionModel::N_POPULATIONS_TOURNAMENT_EVALUATION: {
@@ -162,15 +167,15 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			return true;
 			break;
 		}
 		default:
+			return false;
 			break;
 		}
 	}
 	return false;
-
-	mEvolutionModel.proceedEvaluation();
 }
 
 void Evolution::update() {

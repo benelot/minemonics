@@ -21,7 +21,7 @@
 //## view headers
 //## utils headers
 
-LimbPhysics::LimbPhysics():mInWorld(false) {
+LimbPhysics::LimbPhysics():mInWorld(false),mRestitution(0.5),mFriction(0.8) {
 }
 
 LimbPhysics::~LimbPhysics() {

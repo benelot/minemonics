@@ -36,7 +36,22 @@ public:
 
 	void addPopulation(Population* population);
 
-	void runEvaluation();
+	void setup();
+
+	void process();
+
+	void teardown();
+
+	void update(double timeSinceLastFrame);
+
+	//Accessor methods
+	bool isEvaluating() const {
+		return mEvaluationModel.isEvaluating();
+	}
+
+	bool isTornDown() const {
+		return mEvaluationModel.isTornDown();
+	}
 
 private:
 	EvaluationModel mEvaluationModel;

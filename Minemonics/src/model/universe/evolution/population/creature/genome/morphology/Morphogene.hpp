@@ -299,6 +299,22 @@ public:
 		mOrientationZ = orientationZ;
 	}
 
+	double getRestitution() const {
+		return mRestitution;
+	}
+
+	void setRestitution(double restitution) {
+		mRestitution = restitution;
+	}
+
+	double getFriction() const {
+		return mFriction;
+	}
+
+	void setFriction(double friction) {
+		mFriction = friction;
+	}
+
 private:
 
 	/**
@@ -355,6 +371,16 @@ private:
 	 * Colors red, green, blue
 	 */
 	double mColorR, mColorG, mColorB;
+
+	/**
+	 * Restitution is the amount of force that is reflected in a collision. It is similar to elasticity.
+	 */
+	double mRestitution;
+
+	/**
+	 * The friction of this segment.
+	 */
+	double mFriction;
 
 	/**
 	 * The controller of this gene

@@ -144,10 +144,9 @@ void SimulationManager::createFrameListener(void) {
 
 	// initialize random number generator
 	boost::posix_time::time_duration duration(mNow.time_of_day());
-	//Rng::seed(duration.total_milliseconds());
 
 	// initialize the simulation's debug drawer
-	mDebugDrawer.initialize(mSceneMgr, true);
+	mDebugDrawer.initialize(mSceneMgr, false);
 	mDebugDrawer.setDrawWireframe(true);
 	mDebugDrawer.setDrawConstraints(true);
 	mDebugDrawer.setDrawConstraintLimits(true);
@@ -268,14 +267,14 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
-	// draw the debug output if enabled
-	mUniverse.drawDebugWorld();
-
 	// step the physics forward
 	mUniverse.stepPhysics(evt.timeSinceLastFrame);
 
-	// update the universe model
-	mUniverse.update();
+	// update the universe
+	mUniverse.update(evt.timeSinceLastFrame);
+
+	// draw the debug output if enabled
+	mUniverse.drawDebugWorld();
 
 	// update the information in the panels on screen
 	updatePanels(evt.timeSinceLastFrame);
@@ -369,7 +368,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 	}
 }
 
-void SimulationManager::updatePhysics(double timeSinceLastFrame) {
+//void SimulationManager::updatePhysics(double timeSinceLastFrame) {
 
 //	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
 //	for (; it != mRagdolls.end(); it++) {
@@ -409,10 +408,10 @@ void SimulationManager::updatePhysics(double timeSinceLastFrame) {
 ////					btq.z());
 //		}
 //	}
-}
+//}
 
 //TODO: Use for creature evolution, but clean up afterwards
-void SimulationManager::updateEvolution() {
+//void SimulationManager::updateEvolution() {
 //
 //	//
 //	// maximization task
@@ -471,8 +470,8 @@ void SimulationManager::updateEvolution() {
 //	//
 //	std::cout << "Generation " << t << "s best individual has fitness value "
 //			<< "\t" << parents.best().fitnessValue() << std::endl;
-
-}
+//
+//}
 
 /**
  * What to do if the window is resized.

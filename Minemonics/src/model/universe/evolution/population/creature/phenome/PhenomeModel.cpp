@@ -208,7 +208,9 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 										* generator->getCurrentShrinkageFactor()
 										* morphogene->getY()
 										* generator->getCurrentShrinkageFactor()
-										* morphogene->getZ()));
+										* morphogene->getZ()),
+						morphogene->getRestitution(),
+						morphogene->getFriction());
 				limbBBt->addToWorld();
 
 				//get the surface point of limb B in the local reference frame of B
@@ -294,7 +296,8 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 							* generator->getCurrentShrinkageFactor()
 							* morphogene->getY()
 							* generator->getCurrentShrinkageFactor()
-							* morphogene->getZ(),
+							* morphogene->getZ(), morphogene->getRestitution(),
+					morphogene->getFriction(),
 					Ogre::ColourValue(morphogene->getColorR(),
 							morphogene->getColorB(), morphogene->getColorB()));
 			mLimbModels.push_back(limbB);
@@ -392,7 +395,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 				if ((*branchIt)->isActive()) {
 					// get the branch gene type defined by the branch
 					Morphogene* offspring =
-							(Morphogene*)genome->getGenes()[(*branchIt)->getBranchGeneType()];
+							(Morphogene*) genome->getGenes()[(*branchIt)->getBranchGeneType()];
 
 					// create the new generator
 					PhenotypeGenerator* generatorFromBranch =

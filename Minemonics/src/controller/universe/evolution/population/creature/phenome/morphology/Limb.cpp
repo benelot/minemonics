@@ -58,13 +58,14 @@ Limb::~Limb() {
 void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 		LimbModel::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
-		Ogre::ColourValue color) {
+		double restitution, double friction, Ogre::ColourValue color) {
 
 	//initialize the model of the limb
 	mLimbModel = new LimbModel();
 	mLimbModel->initialize(
-			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(), this,
-			type, position, orientation, dimensions, mass, color);
+			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+			this, type, position, orientation, dimensions, mass, restitution,
+			friction, color);
 
 	buildFrom(simulationManager, creature, mLimbModel);
 }

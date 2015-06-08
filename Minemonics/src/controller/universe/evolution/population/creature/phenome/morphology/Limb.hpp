@@ -46,10 +46,11 @@ public:
 	Limb();
 	virtual ~Limb();
 
-	void initialize(SimulationManager* simulationManager,Creature* creature,
+	void initialize(SimulationManager* simulationManager, Creature* creature,
 			LimbModel::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
-			Ogre::ColourValue color = Ogre::ColourValue(1, 1, 1));
+			double restitution = 1.0, double friction = 0.8, Ogre::ColourValue color =
+					Ogre::ColourValue(1, 1, 1));
 
 	/**
 	 * Build a limb from the limb model.
@@ -57,7 +58,8 @@ public:
 	 * @param creature The handle of the creature.
 	 * @param limbModel The model of the limb.
 	 */
-	void buildFrom(SimulationManager* simulationManager,Creature* creature, LimbModel* limbModel);
+	void buildFrom(SimulationManager* simulationManager, Creature* creature,
+			LimbModel* limbModel);
 
 	/**
 	 * Update the graphical representation of the limb with the physical representation.

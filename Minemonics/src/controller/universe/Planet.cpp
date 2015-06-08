@@ -69,7 +69,8 @@ void Planet::stepPhysics(double timeSinceLastFrame) {
 }
 
 void Planet::update() {
-	mEvolution->update();
+	//TODO: This would update the creatures on the planet several times. Find out if this is good in the long run to comment this.
+	//mEvolution->update();
 	mEnvironment->update();
 }
 

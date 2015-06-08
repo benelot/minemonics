@@ -29,12 +29,14 @@ LimbBt::~LimbBt() {
 	delete mBody;
 }
 
-void LimbBt::initialize(btDynamicsWorld* world,void* limb,
+void LimbBt::initialize(btDynamicsWorld* world, void* limb,
 		LimbModel::PrimitiveType type, btVector3 position,
-		btQuaternion orientation, btVector3 dimensions, btScalar mass) {
+		btQuaternion orientation, btVector3 dimensions, btScalar mass,
+		btScalar restitution, btScalar friction) {
 	mWorld = world;
 	mDimensions = dimensions;
-	btVector3 HalfExtents(dimensions.x() * 0.5f, dimensions.y() * 0.5f, dimensions.z() * 0.5f);
+	btVector3 HalfExtents(dimensions.x() * 0.5f, dimensions.y() * 0.5f,
+			dimensions.z() * 0.5f);
 	switch (type) {
 	case LimbModel::BLOCK:
 		mCollisionShape = new btBoxShape(HalfExtents);
@@ -44,14 +46,14 @@ void LimbBt::initialize(btDynamicsWorld* world,void* limb,
 				btScalar(dimensions.y()));
 		break;
 	case LimbModel::UNKNOWN:
-		std::cout << "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
+		std::cout
+				<< "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
 		exit(-1);
 	}
 
 	btVector3 localInertia(0, 0, 0);
 
 	mCollisionShape->calculateLocalInertia(mass, localInertia);
-
 
 	btTransform startTransform;
 	startTransform.setIdentity();
@@ -62,6 +64,10 @@ void LimbBt::initialize(btDynamicsWorld* world,void* limb,
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
 			mCollisionShape, localInertia);
 	mBody = new btRigidBody(rbInfo);
+
+	//Set the friction and restitution/elasticity of the rigid body
+	mBody->setFriction(friction);
+	mBody->setRestitution(restitution);
 
 	//Set user pointer for proper return of creature/limb information etc..
 	mBody->setUserPointer(limb);
