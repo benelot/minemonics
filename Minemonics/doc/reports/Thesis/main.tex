@@ -1,0 +1,445 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thesis 
+% LaTeX Template
+% Version 1.3 (21/12/12)
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original authors:
+% Steven Gunn 
+% http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/
+% and
+% Sunil Patel
+% http://www.sunilpatel.co.uk/thesis-template/
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Note:
+% Make sure to edit document variables in the Thesis.cls file
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt, a4paper, oneside]{Thesis} % Paper size, default font size and one-sided paper
+
+\graphicspath{{./Pictures/}} % Specifies the directory where pictures are stored
+
+\hypersetup{linkcolor=black} 
+
+\usepackage{subfiles}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{chngpage}
+\usepackage[hypcap=true]{subcaption}
+\usepackage{listings}
+
+%\begin{comment}
+\usepackage[hyperref=true,
+            url=true,
+            isbn=false,
+            backend=biber,
+            backref=true,
+            bibencoding=utf8,
+            style=custom-numeric-comp,
+            citereset=chapter,
+            maxcitenames=3,
+            maxbibnames=100,
+            block=none]{biblatex}
+
+
+% the followings activate 'custom-english-ordinal-sscript.lbx'
+% in order to print ordinal 'edition' suffixes as superscripts,
+% and adjusts (reduces) spacing between suffix and following "ed."
+\DeclareLanguageMapping{english}{custom-english-ordinal-sscript}
+\DeclareFieldFormat{edition}%
+                   {\ifinteger{#1}%
+                    {\mkbibordedition{#1}\addthinspace{}ed.}%
+                    {#1\isdot}}
+
+
+% back reference text preceding the page number ("see p.")
+\DefineBibliographyStrings{english}{%
+    backrefpage  = {see p.}, % for single page number
+    backrefpages = {see pp.} % for multiple page numbers
+}
+
+% removes period at the very end of bibliographic record
+\renewcommand{\finentrypunct}{}
+
+% removes period after DOI and suppresses capitalization
+% of the word following DOI ("See p. xx" -> "see p. xx")
+\renewcommand{\newunitpunct}{\addspace\midsentence}
+
+\DeclareFieldFormat{journaltitle}{\mkbibemph{#1},} % italic journal title with comma
+\DeclareFieldFormat[inbook,thesis]{title}{\mkbibemph{#1}\addperiod} % italic title with period
+\DeclareFieldFormat[article]{title}{#1} % title of journal article is printed as normal text
+\DeclareFieldFormat[article]{volume}{\textbf{#1}\addcolon\space} % makes volume of journal bold and adds colon
+\DeclareFieldFormat{pages}{#1} % removes pagination (p./pp.) before page numbers
+
+%%%%%%%%%
+% the command \sjcitep defined below prints footnote citation above punctuation
+\newlength{\spc} % declare a variable to save spacing value
+\newcommand{\sjcitep}[2][]{% new command with two arguments: optional (#1) and mandatory (#2)
+        \settowidth{\spc}{#1}% set value of \spc variable to the width of #1 argument
+        \addtolength{\spc}{-1.8\spc}% subtract from \spc about two (1.8) of its values making its magnitude negative
+        #1% print the optional argument
+        \hspace*{\spc}% print an additional negative spacing stored in \spc after #1
+        \supershortnotecite{#2}}% print (cite) the mandatory argument
+%%%%%%%%%
+\addbibresource{Bibliography.bib} % The references (bibliography) information are stored in the file named "Bibliography.bib"
+%\end{comment}
+
+%\usepackage[square, numbers, comma, compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers'
+\hypersetup{urlcolor=black, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+\title{\ttitle} % Defines the thesis title - don't touch this
+
+\usepackage{multirow}
+
+\begin{document}
+
+\frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
+
+\setstretch{1.3} % Line spacing of 1.3
+
+% Define the page headers using the FancyHdr package and set up for one-sided printing
+\fancyhead{} % Clears all page headers and footers
+\rhead{\thepage} % Sets the right side header to show the page number
+\lhead{} % Clears the left side page header
+
+\pagestyle{fancy} % Finally, use the "fancy" page style to implement the FancyHdr headers
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % New command to make the lines in the title page
+
+% PDF meta-data
+\hypersetup{pdftitle={\ttitle}}
+\hypersetup{pdfsubject=\subjectname}
+\hypersetup{pdfauthor=\authornames}
+\hypersetup{pdfkeywords=\keywordnames}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+\begin{center}
+
+\textsc{\LARGE \univname}\\[1.5cm] % University name
+\textsc{\Large Bachelor Thesis}\\[0.5cm] % Thesis type
+
+\HRule \\[0.4cm] % Horizontal line
+{\huge \bfseries \ttitle}\\[0.4cm] % Thesis title
+\HRule \\[1.5cm] % Horizontal line
+ 
+\begin{minipage}{0.45\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+\href{http://www.sleepy-robots.org}{\authornames \\ Arni AG \\ 09--919--622} % Author name - remove the \href bracket to remove the link
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+\href{http://www.ailab.ifi.uzh.ch}{\supname} % Supervisor name - remove the \href bracket to remove the link  
+\end{flushright}
+\end{minipage}\\[3cm]
+ 
+\large \textit{A thesis submitted in fulfilment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
+\textit{in the}\\[0.4cm]
+\groupname\\\deptname\\[2cm] % Research group name and department name
+ 
+{\large Oct 30, 2013}\\[2.5cm] % Date
+\includegraphics{uzh_logo_e_pos} % University/department logo - uncomment to place it
+ 
+\vfill
+\end{center}
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	DECLARATION PAGE
+%	Your institution may give you a different text to place here
+%----------------------------------------------------------------------------------------
+
+\Declaration{
+
+\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+I, \authornames, declare that this thesis titled, '\ttitle' and the work presented in it are my own. I confirm that:
+
+\begin{itemize} 
+\item[\tiny{$\blacksquare$}] This work was done wholly or mainly while in candidature for a research degree at this University.
+\item[\tiny{$\blacksquare$}] Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
+\item[\tiny{$\blacksquare$}] Where I have consulted the published work of others, this is always clearly attributed.
+\item[\tiny{$\blacksquare$}] Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
+\item[\tiny{$\blacksquare$}] I have acknowledged all main sources of help.
+\item[\tiny{$\blacksquare$}] Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
+\end{itemize}
+ 
+Signed:\\
+\rule[1em]{25em}{0.5pt} % This prints a line for the signature
+ 
+Date:\\
+\rule[1em]{25em}{0.5pt} % This prints a line to write the date
+}
+
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	QUOTATION PAGE
+%----------------------------------------------------------------------------------------
+
+\pagestyle{empty} % No headers or footers for the following pages
+
+\null\vfill % Add some space to move the quote down the page a bit
+
+\textit{''Where the spirit does not work with the hand, there is no art.''}
+
+\begin{flushright}
+Leonardo da Vinci
+\end{flushright}
+
+\vfill\vfill\vfill\vfill\vfill\vfill\null % Add some space at the bottom to position the quote just right
+
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT PAGE
+%----------------------------------------------------------------------------------------
+
+\addtotoc{Abstract} % Add the "Abstract" page entry to the Contents
+
+\abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+The present thesis documents ...
+
+}
+
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
+
+\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+This thesis has gone a long way with me and took a lot of effort from the first day until the last day of work.
+Luckily, I had many companions on my way, who at this point I would like to thank for their dedication to my work, the hundreds of advices and ideas which took it further or also just the discussions that gave me some new insights. 
+
+
+}
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancy} % The page style headers have been "empty" all this time, now use the "fancy" headers as defined before to bring them back
+
+\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\tableofcontents % Write out the Table of Contents
+
+\lhead{\emph{List of Figures}} % Set the left side page header to "List of Figures"
+\listoffigures % Write out the List of Figures
+
+\lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
+\listoftables % Write out the List of Tables
+
+%----------------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%----------------------------------------------------------------------------------------
+
+\clearpage % Start a new page
+
+\setstretch{1.5} % Set the line spacing to 1.5, this makes the following tables easier to read
+
+\lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
+\listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
+{
+\textbf{i.e.} & \textbf{I}n \textbf{E}xplicit \\
+
+& \\
+
+Prosthetic:\\
+\textbf{ADL} & \textbf{A}ctivities of \textbf{D}aily \textbf{L}iving \\
+
+& \\
+
+Control:\\
+\textbf{PWM} & \textbf{P}ulse \textbf{W}idth \textbf{M}odulation \\
+
+& \\
+
+Medical:\\
+\textbf{ICP} & \textbf{I}nter\textbf{C}arpo\textbf{P}halangeal Joint \\
+\textbf{PIP} & \textbf{P}roximal \textbf{I}nter\textbf{P}halangeal Joint \\
+\textbf{DIP} & \textbf{D}istal \textbf{I}nter\textbf{P}halangeal Joint \\
+\textbf{MCP} & \textbf{M}eta\textbf{C}arpo\textbf{P}halangeal Joint\\
+\textbf{DoF} & \textbf{D}egree \textbf{O}f \textbf{F}reedom \\
+\textbf{DoA} & \textbf{D}egree \textbf{O}f \textbf{A}ctuation \\
+
+& \\
+
+Pneumatic Muscles:\\
+\textbf{PAM} & \textbf{P}neumatic \textbf{A}rtificial \textbf{M}uscle\\
+\textbf{PUR} & \textbf{P}oly\textbf{UR}ethane\\
+%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
+}
+
+\begin{comment}
+%----------------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+\clearpage % Start a new page
+
+\lhead{\emph{Physical Constants}} % Set the left side page header to "Physical Constants"
+
+\listofconstants{lrcl} % Include a list of Physical Constants (a four column table)
+{
+Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
+% Constant Name & Symbol & = & Constant Value (with units) \\
+}
+
+%----------------------------------------------------------------------------------------
+%	SYMBOLS
+%----------------------------------------------------------------------------------------
+
+\clearpage % Start a new page
+
+\lhead{\emph{Symbols}} % Set the left side page header to "Symbols"
+
+\listofnomenclature{lll} % Include a list of Symbols (a three column table)
+{
+$a$ & distance & m \\
+$P$ & power & W (Js$^{-1}$) \\
+% Symbol & Name & Unit \\
+
+& & \\ % Gap to separate the Roman symbols from the Greek
+
+$\omega$ & angular frequency & rads$^{-1}$ \\
+% Symbol & Name & Unit \\
+}
+\end{comment}
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+\setstretch{1.3} % Return the line spacing back to 1.3
+
+\pagestyle{empty} % Page style needs to be empty for this page
+
+\dedicatory{Dedicated to science and great minds helping to lead this world to a better tomorrow.} % Dedication text
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{fancy} % Return the page headers back to the "fancy" style
+
+%\begin{comment}
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+%Introduction
+% Background
+% Anatomical description (intrinsic/ extrinsic muscles/types of muscles)
+% Motivation
+% Approach
+% Outline
+\subfile{./Chapter1}
+
+%Prosthetics - An Overview of the last 50 years
+% Presentation of different types of prostheses
+% Discussion of prosthesis abandonment
+\subfile{./Chapter2} 
+
+%Prosthetic Requirements & Constraints Definition
+% Dexterity of the hand system
+%  Grip patterns necessary to ADLs
+% Representation of different muscles in the prosthesis
+% Discussion of the constraints(weight, size,noise)
+\subfile{./Chapter3}
+
+%Hand design
+% Pressure Generation
+%  Determination of the accumulator
+%  Determination of the compressor & tank system
+%  Calculation of the tank size
+% Pressure Distribution
+%  Choice of the valve(comparison of valves)
+%  Valve labor testing(Lee products)
+% Pressure Transformation
+%  Creation of pneumatic actuators
+%  Ratio between inner and outer tube
+%  Muscle diameter decision
+%  Muscle length determination
+%  Muscle strength diagrams
+%  Muscle volume calculation
+% Force Distribution
+%  Formula for the tendon length
+% Control system
+%  Choice of the micro controller
+%  Control using a PID
+%  PID & sensory-motor coupling with neurons
+\subfile{./Chapter4} 
+
+%Comparison
+% Fingerspeed/strength test
+% Comparison of the system properties with other systems
+% Discussion of energy consumption
+\subfile{./Chapter5} 
+
+%Conclusion
+\subfile{./Chapter6}
+
+%----------------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%----------------------------------------------------------------------------------------
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices folder
+% Uncomment the lines as you write the Appendices
+
+% How to make pneumatic artificial muscles
+\subfile{./AppendixA}
+
+%Listing of robotic hands and their properties
+\subfile{./AppendixB}
+
+%Listing of human hand muscles
+\subfile{./AppendixC}
+%\end{comment}
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\backmatter
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\label{Bibliography}
+
+\lhead{\emph{Bibliography}} % Change the page header to say "Bibliography"
+
+%\bibliographystyle{unsrtnat} % Use the "unsrtnat" BibTeX style for formatting the Bibliography
+
+%\bibliography{Bibliography} % The references (bibliography) information are stored in the file named "Bibliography.bib"
+
+\printbibliography
+
+\end{document}

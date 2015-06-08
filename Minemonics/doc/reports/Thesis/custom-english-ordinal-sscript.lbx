@@ -1,0 +1,24 @@
+\ProvidesFile{custom-english-ordinal-sscript.lbx}
+
+
+% This file redefines '\mkbibordinal' command, and contains
+% its standard definition (from english.lbx) with the only 
+% difference in one line with '\mkbibsuperscript{...}'
+
+
+\InheritBibliographyExtras{english}
+\DeclareBibliographyExtras{%
+  \protected\def\mkbibordinal#1{%
+    \begingroup%
+    \@tempcnta0#1\relax\number\@tempcnta%
+    \@whilenum\@tempcnta>100\do{\advance\@tempcnta-100\relax}%
+    \ifnum\@tempcnta>20%
+      \@whilenum\@tempcnta>9\do{\advance\@tempcnta-10\relax}%
+    \fi%
+    \mkbibsuperscript{\ifcase\@tempcnta th\or st\or nd\or rd\else th\fi}%
+    \endgroup}%
+  \protected\def\mkbibmascord{\mkbibordinal}%
+  \protected\def\mkbibfemord{\mkbibordinal}%
+}
+
+\endinput

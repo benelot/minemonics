@@ -1,0 +1,113 @@
+\ProvidesFile{custom-numeric-comp.cbx}
+
+% Modified version of the script originally taken from
+% http://www.texdev.net/2010/03/08/biblatex-numbered-citations-as-footnotes/
+
+\RequireCitationStyle{numeric-comp}
+
+\ExecuteBibliographyOptions{citetracker,sorting=none}
+
+%==========================================================%
+% \DeclareCiteCommand below creates a citation with the 
+% normal-sized citation index (in brackets - \mkbibbrackets)
+% and full citation info is printed as a footnote
+%==========================================================% 
+\DeclareCiteCommand{\notefullcite}[\mkbibbrackets]% 
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{notefullcite}%
+   \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}%
+   \usebibmacro{postnote}}
+
+\newbibmacro*{notefullcite}{%
+  \ifciteseen
+    {}
+    {\footnotetext[\thefield{labelnumber}]{%
+       \usedriver{}{\thefield{entrytype}}.}}}
+
+%==========================================================%
+% \DeclareCiteCommand below creates a citation with the  
+% script-sized citation index and full citation info printed
+% as a footnote
+%==========================================================%
+\DeclareCiteCommand{\superfullcite}[\cbx@superscript]%
+  {\usebibmacro{cite:init}%
+   \let\multicitedelim=\supercitedelim%
+   \iffieldundef{prenote}%
+     {}%
+     {\BibliographyWarning{Ignoring prenote argument}}%
+   \iffieldundef{postnote}%
+     {}%
+     {\BibliographyWarning{Ignoring postnote argument}}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{superfullcite}%
+   \usebibmacro{cite:comp}}%
+  {}%
+  {\usebibmacro{cite:dump}}%
+
+\newbibmacro*{superfullcite}{%
+  \ifciteseen%
+    {}%
+    {\xappto\cbx@citehook{%
+       \noexpand\footnotetext[\thefield{labelnumber}]{%
+         \fullcite{\thefield{entrykey}}\usebibmacro{finentry}}}}}%
+
+%\newbibmacro*{noteshortcite}{%
+%  \ifciteseen%
+%    {}%
+%    {\footnotetext[\thefield{labelnumber}]{%
+%       \entrydata{\thefield{entrykey}}{\usebibmacro{author/translator+others}\addperiod\addspace\mkbibemph{\printfield{shortjournal}},%
+%       \addspace\printfield{volume}\printfield{pages},\addspace\printfield{year}\addperiod}}}}%
+
+%==========================================================%
+% \DeclareCiteCommand below creates a citation with the  
+% script-sized citation index and short citation info for 
+% "article" reference type (full for all other types) is 
+% printed as a footnote; full citation info is printed in 
+% the bibliography for all entry types.
+%==========================================================%
+\DeclareCiteCommand{\supershortnotecite}[\cbx@superscript]%
+  {\usebibmacro{cite:init}%
+   \let\multicitedelim=\supercitedelim%
+   \iffieldundef{prenote}%
+     {}%
+     {\BibliographyWarning{Ignoring prenote argument}}%
+   \iffieldundef{postnote}%
+     {}%
+     {\BibliographyWarning{Ignoring postnote argument}}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{supershortnotecite}%
+   \usebibmacro{cite:comp}}%
+  {}%
+  {\usebibmacro{cite:dump}}%
+
+\newbibmacro*{supershortnotecite}{%
+  \ifciteseen%
+    {}%
+    {\iffieldequalstr{entrytype}{article}% here we check if the reference type is "article",
+                                         % and if true, the fields+punctuation will are 
+                                         % printed as specified below; if false, default  
+                                         % biblatex citation scheme is used
+      {%
+        \xappto\cbx@citehook{%
+          \noexpand\footnotetext[\thefield{labelnumber}]{%
+            \entrydata{\thefield{entrykey}}{%
+            \usebibmacro{author/translator+others}\addperiod\addspace%
+            \mkbibemph{\printfield{shortjournal}},\addspace%
+            \printfield{volume}%
+            \printfield{pages},\addspace%
+            \printfield{year}\addperiod}}}%
+      }%
+      {\usebibmacro{superfullcite}}}}%
+
+%==========================================================%
+\newrobustcmd{\cbx@superscript}[1]{%
+  \mkbibsuperscript{#1}%
+  \cbx@citehook
+  \global\let\cbx@citehook=\empty}
+\let\cbx@citehook=\empty
+
+\endinput

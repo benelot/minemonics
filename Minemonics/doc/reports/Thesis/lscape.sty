@@ -1,0 +1,157 @@
+%%% ====================================================================
+%%%  @LaTeX-style-file{
+%%%     filename        = "lscape.sty",
+%%%     version         = "2.00",
+%%%     date            = "18 November 1992",
+%%%     time            = "16:20:59 GMT",
+%%%     author          = "David Carlisle",
+%%%     address         = "Computer Science Department
+%%%                        Manchester University
+%%%                        Oxford Road
+%%%                        Manchester
+%%%                        England
+%%%                        M13 9PL",
+%%%     telephone       = "+44 61 275 6139",
+%%%     FAX             = "+44 61 275 6236",
+%%%     email           = "carlisle@cs.man.ac.uk (Internet)",
+%%%     checksum        = "62053 157 600 5234",
+%%%     codetable       = "ISO/ASCII",
+%%%     keywords        = "LaTeX, landscape, rotation",
+%%%     supported       = "yes",
+%%%     docstring       = "
+%%%
+%%%     lscape.sty
+%%%
+%%%     All text within
+%%%        \begin{landscape}   \end{landscape}
+%%%     Will be rotated through 90 degrees. The page head and foot will
+%%%     not be rotated, but will be positioned as normal. The landscape
+%%%     environment always starts a new page, but may span several
+%%%     pages.
+%%%
+%%%     This style requires Rokicki's dvips, and the rotate.sty
+%%%     distributed with that driver.
+%%%
+%%%     The checksum field above was produced by
+%%%     Robert Solovay's checksum utility.",
+%%%  }
+%%% ====================================================================
+%
+% * Version 1.00 28 April 1992
+% * Version 2.00 18 November 1992   Support for footnotes and floats.
+%                Special thanks to Sarah J. McQuay (S.J.McQuay@ed.ac.uk)
+%                for testing preliminary versions of this release.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%<*x>
+% This file may be used without modification as a style (.sty) file.
+%
+% If you have Mittelbach's doc.sty, this file may be formatted with a
+% command like:
+%                latex lscape.sty
+%
+% If you have the Mittelbach/Duchier/Braams docstrip utility, you may
+% produce a faster loading .sty file. Rename this file to: lscape.doc
+% Then run this file through *plain* TeX:
+%                tex lscape.doc
+% This should produce the file lscape.sty.
+% If you do not have plain TeX on your system, you can trick LaTeX into
+% doing the work as follows:
+%                latex \def\fmtname{plain} \input lscape.doc
+% Note that you may need to quote the arguments here to stop your
+% operating system treating the \ characters incorrectly.
+%
+%                latex lscape.doc
+% Will produce a typeset version of the documentation, as above.
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\plain{plain}\ifx\fmtname\plain\csname fi\endcsname
+     \def\batchfile{lscape.doc}
+     \input docstrip
+     \preamble
+
+     Do not distribute the stripped version of this file.
+     The checksum in the header refers to the documented version.
+
+     \endpreamble
+     \generateFile{lscape.sty}{t}{\from{lscape.doc}{}}
+     \endinput
+\fi
+%
+\ifcat a\noexpand @\let\next\relax\else\def\next{%
+    \documentstyle[lscape,doc]{article}\MakePercentIgnore}\fi\next
+%
+%\def\eatmodule<#1>{}\eatmodule
+%</x>
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \CodelineIndex     ^^A Code lines numbered.
+% \DisableCrossrefs  ^^A No Cross references.
+% \MakeShortVerb{\"} ^^A "\foo" acts like \verb+\foo+
+%
+% \makeatletter
+% \@ifundefined{reset@font}{}{}
+% \def\@oddfoot{\reset@font\rm\dotfill Page \thepage\dotfill}
+% \def\@oddhead{\dotfill{\reset@font\tt lscape.sty}\dotfill}
+% \def\ps@titlepage{}
+% \makeatother
+%
+% \title{lscape.sty}
+% \author{D. P. Carlisle}
+% \date{18 November 1992}
+% \begin{document}
+% \begin{landscape}
+% \maketitle
+%
+% All text, within the {\tt landscape} environment is rotated through
+% 90 degrees. The environment may span several pages. It works well
+% with, and was originally created for, use with {\tt longtable.sty} to
+% produce long wide tables.
+%
+% All the work is done by {\tt rotate.sty}, the trick is to call it at
+% the right place in the output routine to rotate the current page
+% before the page head and foot are added.
+%
+%    \begin{macrocode}
+\@ifundefined{LS@makecol}{}{\endinput}
+\@ifundefined{@rotl}{\input{rotate.sty}}{}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\let\LS@makecol=\@makecol
+\let\LS@makefcolumn=\@makefcolumn
+\def\LS@rot{\setbox\@outputbox=\vbox{\@rotl\@outputbox}}
+%    \end{macrocode}
+%
+% First set up the page size for landscape.
+%    \begin{macrocode}
+\def\landscape{%
+  \clearpage
+  \begingroup
+  \vsize=\textwidth
+  \hsize=\textheight
+  \linewidth=\hsize
+  \columnwidth=\hsize
+  \@colroom=\vsize
+  \textheight=\vsize
+  \@colht=\vsize
+%    \end{macrocode}
+% Rotate the page body (text and float pages).
+%    \begin{macrocode}
+  \def\@makecol{\LS@makecol\LS@rot}%
+  \def\@makefcolumn##1{\LS@makefcolumn{##1}\LS@rot}}
+%    \end{macrocode}
+%
+% Restore everything.
+%    \begin{macrocode}
+\def\endlandscape{%
+  \clearpage
+  \endgroup
+  \global\@colht=\textheight
+  \global\vsize=\textheight
+  \global\@colroom=\textheight}
+%    \end{macrocode}
+%
+% \end{landscape}
+% \end{document}
+%
+\endinput

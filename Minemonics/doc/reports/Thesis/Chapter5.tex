@@ -1,0 +1,390 @@
+% Chapter 5
+\documentclass[main]{subfiles}
+\setcounter{chapter}{4}
+\begin{document}
+\chapter{Experiments and Comparison} % Main chapter title
+
+\label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+\lhead{Chapter 5. \emph{Experiments and Comparison}} % This is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%Comparision
+% Fingerspeed/strength test
+% Comparison of the system properties with other systems
+% Discussion of energy consumption
+
+%----------------------------------------------------------------------------------------
+
+\section{Finger speed experiments}
+The finger flexion speed experiment was run on the pneumatic finger platform described in chapter \ref{Chapter4}. Two different configurations without any load were tested. The first configuration uses two triarticulate muscles and makes the finger fully flex and extend meaning that it actuates the metacarpophalangeal (MCP) (flexion angle $45^\circ$), the proximal (PIP) (flexion angle $47^\circ$) and the distal interphalangeal (DIP) (flexion angle $40^\circ$) joint.
+
+ This configuration is intended to show the maximum actuation speed of one muscle. The finger's flexion speed is thresholded by the flow of the valves filling and emptying the muscle. The higher their flow, the faster their state of contraction can be changed which in turn determines the position of the finger. 
+
+The finger configuration performing a full flexion using high flow FESTO MPYE valves reached a flexion rate of 195 flexions in 12 seconds which requires a flexion frequency of 16 Hz.
+
+
+\begin{figure}[H]
+\centering
+\subcaptionbox{\label{fig:full-flexion-e}}{\includegraphics[width=0.4\linewidth]{Pneumatic-finger-platform/full-flexion-e}}\hspace{0.15\textwidth}
+\subcaptionbox{\label{fig:full-flexion-f}}{\includegraphics[width=0.4\linewidth]{Pneumatic-finger-platform/full-flexion-f}}
+\caption[Full finger flexion at 16 Hz]{The finger flexing at 16 Hz performing a full flexion by fully contracting and expanding the muscle.}
+\label{full-flexion}
+\end{figure}
+
+The second configuration uses the same morphology but only makes the finger's distal interphalangeal joint flex (flexion angle $40^\circ$). This is done by performing only a small actuation of the muscles so that the tendon only moves minimally. It is meant to show the initial actuation speed of the muscles which would apply in the case of using monoarticulate muscles for each joint. Further it shows the actuation speed if the maximum flexion of the finger is not achieved by a full contraction of the muscle.
+
+The second finger configuration reached a speed of 303 flexions in 32 seconds which equals to a flexion frequency of about 9.5Hz. The lower speed can be explained by the fact that the muscles only have a mechanical threshold of movement at the extremes, therefore the finger is stopped first by the force of the muscles, which slows down the speed.
+
+\begin{figure}[H]
+\centering
+\subcaptionbox{\label{fig:distal-flexion1}}{\includegraphics[width=0.3\textwidth]{Pneumatic-finger-platform/distal-flexion-1}}\hspace{0.01\textwidth}
+\subcaptionbox{\label{fig:distal-flexion2}}{\includegraphics[width=0.3\textwidth]{Pneumatic-finger-platform/distal-flexion-2}}
+\hspace{0.01\textwidth}
+\subcaptionbox{\label{fig:distal-flexion3}}{\includegraphics[width=0.3\textwidth]{Pneumatic-finger-platform/distal-flexion-3}}
+\caption[Distal finger flexion at 9.5 Hz]{The finger flexing at 9.5 Hz performing a distal flexion by not completely contracting the muscle.}
+\label{distal-flexion}
+\end{figure}
+
+The same experiments were run with the smaller, low-flow SMC s070 valves, suggesting that the speed of actuation of the pneumatic muscles is highly dependent on the flow of the valves. The full flexion with the low-flow valves reached 19 flexions in 21 seconds which amounts to a frequency of 1 Hz, the distal flexion reached a 27 flexions in 35 seconds which equals to 0.9 Hz.
+
+Comparing the speed of the pneumatic finger to that of the human hand as it is described in the speed requirement in chapter \ref{Chapter3}, the pneumatic finger is definitely faster than all the human hand movement. The flexion frequency of the finger is therefore more than sufficient and the movement could be improved by adding more muscles to control its movement as well as by a more bio-inspired tendon configuration. Moreover the precision of the hand must be improved to control this speed of movement in a secure manner, otherwise the finger could easily overshoot its desired position and harm either the user or its environment.
+%----------------------------------------------------------------------------------------
+
+\section{First finger force experiments}
+
+For the finger force experiments, two fingers were used to test the finger platform with different robotic fingers. A finger from the inMoov Project (www.inmoov.blogspot.ch) robot as well as a bare bone finger built by Dana D. Damian and Konstantinos Dermitzakis \cite{costas-hand} were printed in ABS plastic.
+
+Then the bare bone finger as well as the inMoov finger were actuated by two antagonistic triarticulate muscles using the pneumatic finger platform. For both fingers, a pressure of 4 bar was used for the muscles, which is near to the optimum pressure for their muscle morphology. Exceptionally in the beginning, the muscle was pressurized by 2.5 bar which is at the threshold of the muscle, below which the muscle does not properly contract anymore. Before the load was attached to the finger, the finger performed a hook grip to hook the weight into it.
+
+\begin{figure}[H]
+\centering
+\subcaptionbox*{\label{fig:inmoov-hand}}{\includegraphics[width=0.4\linewidth]{Finger/inMoov-Hand}}\hspace{0.15\textwidth}
+\subcaptionbox*{\label{fig:inmoov-finger}}{\includegraphics[width=0.4\linewidth]{Weight-experiment/second/inMoov-finger}}\\
+\subcaptionbox*{\label{fig:finger-extended}}{\includegraphics[width=0.4\linewidth]{Weight-experiment/second/inMoov-finger-extended}}\hspace{0.15\textwidth}
+\subcaptionbox*{\label{fig:finger-flexed}}{\includegraphics[width=0.4\linewidth]{Weight-experiment/second/inMoov-finger-flexed}}\\
+
+\caption[inMoov hand and finger]{The inMoov finger from the inMoov robot project (www.inmoov.blogspot.ch). The finger is used as a very robust finger to compare it with the bare bone finger. The inMoov finger is a bigger finger mimicking the outer morphology of a hand, but is not especially bio-inspired.}
+\label{inMoov-finger}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{Finger/Original-finger}
+
+\caption[Bare bone finger]{The bare bone finger built by Dana D. Damian and Konstantinos Dermitzakis \cite{costas-hand}. The finger is similar to the skeleton of the human hand and can therefore easily be extended by adding compliance or stronger tendon sheaths depending on the application. Further the cable holders are easily replaceable in case of breakage. The bare bone finger's morphology optimizes the weight distribution when a load is applied by being built from of bended bones. }
+\label{barebone-finger}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.7\textwidth]{Muscles/Making/other-muscle}
+\includegraphics[width=0.7\textwidth]{Muscles/Making/other-muscle-preload}
+\includegraphics[width=0.7\textwidth]{Muscles/Making/other-muscle-preload2}
+\caption[First version of muscles]{One of the two antagonistic muscles that were initially used. They were good for the first prototype but did not exert enough force for the prosthesis.}
+\label{other-muscle}
+\end{figure}
+
+The bare bone finger could did not drop the weight up to 25 N with 2.5 bar and up to 40 N with 4 bar before the tendon holder gave in and broke so that the finger extended. If the cable holder was made stronger, it is expected that the finger could also withstand higher loads.
+
+The inMoov finger could hold up to 45 N with 4 bar before the weight dropped because the finger extended too much caused by the load.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Force/Finger/bb25.png}
+\caption[Bare bone finger force plot at 2.5 bar]{The Bare bone finger running at 2.5 bar holds up to 25 N.}
+\label{bb25}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Force/Finger/imbb4.png}
+\caption[Finger force comparison in inMoov and Bare bone finger]{The inMoov finger is initially bested by the Bare bone finger, but then the cable holders break at 40N so that the Bare bone finger extends and can not hook the load anymore. The inMoov finger can only slightly top the other finger as its tendon holders are internal.}
+\label{imbb4}
+\end{figure}
+
+The experiments show that it is possible to lift a weight of 45 Newton with one finger, which means that it is possible to exert a force up to 180 N with the hook grip performed with four fingers at the same time. In the bare bone finger case, the major problem was the strength of the tendon holders. The weight mostly slipped distally on the bone towards the joints that are nearer to the fingernails and in turn the lever arm of the weight was increased, so that the muscle expanded and the finger loosened its hook. With more friction or some compliance on the inside, the finger would prevent the weight from slipping and increasing the lever arm. What has to be noticed in the plot is that the Bare bone finger did only fail because of the cable holders, but its morphology reduced the load of the muscles as they did not contract as much as the inMoov finger did at the same load. All in all, the force of the pneumatic artificial muscle was not sufficient to compete with commercial prosthetic hands, therefore a stronger muscle had to be fabricated.
+
+
+\subsection{Creation of a stronger tendon sheath to support higher forces with the finger}
+From the results of the first set of finger strength experiments, it was inevitable to improve the strength of the finger's cable holders. The first tentative was to create bigger cable holders so that they would not break. This idea was not successful as the cable holders broke at nearly the same weight.
+
+A second tentative was to create cable holders that were directly attached to the finger, but in turn could be made the same width as the phalangeal bones themselves could be attached along the bone similar to tendon sheaths and therefore would be stronger. 
+ 
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.5\textwidth]{Finger/Improved-finger2}
+\caption[Finger with stronger tendon holders]{The finger which features stronger cable holders that can not be replaced. Unfortunately the holders were still not strong enough.}
+\label{big-holders-finger}
+\end{figure}
+
+The last tentative was inspired by a tendon holder system that Konstantinos Dermitzakis built earlier which resulted in the creation of the Blue finger. 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.5\textwidth]{Finger/Improved-finger3}
+\caption[Inspiring finger model]{The finger built by Konstantinos Dermitzakis that led to the inspiration for the new finger.}
+\label{konstantinos-finger}
+\end{figure}
+
+Biologically inspired by the structure of a tendon sheath, the new structure contains one sheath for each tendon that are fabricated from a short piece of Teflon tube to reduce the friction inside of the sheath. To hold the Teflon sheath in place, heat shrinkable tube was used to cover the tubes one by one. Such artificial tendon sheaths were prepared for each phalanx of the finger and then attached to it by using a bigger heat shrinkable tube so that the sheaths were staying in place. The problem about heat shrinkable tube was that it is not able to withstand higher tendon forces and breaks as soon as a weight is hooked to the finger. The crucial improvement in this finger tendon sheath system was to wrap cord around each phalanx to form a tightly wound coil around the heat shrinkable tube. This resulted in the tendon sheath system as shown below.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.5\textwidth]{Finger/Improved-finger}
+\caption[The Blue finger]{The finger with improved tendon sheaths to withstand higher forces when flexed.}
+\label{blue-finger}
+\end{figure}
+
+After the tendon was inserted into the tendon sheath, the finger could be used for a second finger strength experiment.
+
+\subsection{Creation of stronger muscles for the prosthesis and the pneumatic finger platform}
+
+Since the muscles created for the first experiment turned out to be strong enough to break the cable holders of the finger, but not strong enough to be competitive with other actuators for prosthetic hands, the muscles were also improved to suit the requirements of the prosthesis. Further this was a good opportunity to improve the morphology of the muscle and integrate a pressure sensor directly into the pneumatic muscle instead of connecting it to the polyurethane (PUR) tube and the valves.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.5\textwidth]{Muscles/Artificial/muscle-with-ps}
+\includegraphics[width=0.5\textwidth]{Muscles/Artificial/muscle-with-ps2}
+\caption[Pneumatic artificial muscle]{One of the two antagonistic muscles that were used in the pneumatic finger platform.}
+\label{improved-muscle}
+\end{figure}
+
+A complete guide on how to build the new type of muscles can be found in the Appendix A at the end of the thesis.
+
+The new pair of stronger muscles feature a higher diameter and length to increase the strength by the diameter, the travel distance of the contraction by the length and the compliance by the volume of the muscle. 
+
+To validate the exchange of the old muscle, the output force of the new muscle was compared to the old muscle. The results of it are shown in the Fig. \ref{muscle-force}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Pictures/Experiments/Force/Muscle/pam4.png}
+\caption[Muscle force comparison]{The newer pneumatic artificial muscle (PAM) and its predecessor.}
+\label{muscle-force}
+\end{figure}
+
+The first PAM with a diameter of 0.8 cm has a force-to-weight ratio of 3111:1 (140 N/4.5g). The second PAM with a diameter of 1.2 cm increased the force-to-weight ratio to 3361:1 (320 N/9.5g). The force of the muscle therefore highly depends on the diameter of the muscle as it does in the pneumatic cylinder according to the law $F = P \cdot A$ as the radial area A of the muscle is determined by its diameter. The force that is applied by the muscle is even higher than the tendon cables can withstand.  The tendon, being made form a strong type of fishing line, was torn apart when the tendon was used to attach the weight to the muscle.
+
+\subsection{Second finger strength experiments}
+
+The second finger strength experiment was first conducted with the inMoov finger again because the inMoov finger is a lot easier to repair than the newly created Blue finger, especially the tendon cables are easier to replace. The inMoov finger was further improved by adding some compliance to the phalanges by adding latex bands. The compliance will increase the contact area of the finger on the handle of the weight and thereby increase the friction and distribute the load. This prevents the slipping of the weight as it occurred in the first experiment and also reduces the force needed on the hand to hold the weight. Then the experiment was conducted with the Blue finger featuring stronger tendon sheaths. The Blue finger is expected to perform similar to the inMoov finger in strength, but probably will still have a problem with weight slippage because it does not supply an increased contact area to carry the weight.
+
+The second experiment was conducted with the new pair of muscles to test if they would meet the force requirements of the prosthesis. The results are presented below in Fig. \ref{im2bf4}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Force/Finger/im2bf4.png}
+\caption[inMoov and Blue finger force comparison]{The plot compares the inMoov finger and the Blue finger using the same muscle pair for actuation. The Blue finger begins worse than the inMoov finger explained by the longer finger bones which increase the lever arm and make the finger extend. Then the finger outperforms the inMoov finger due to its load distributing morphology but finally fails because of a lack of compliance. The inMoov finger was added compliance by adding rubber which reduces the slippage of the weight and also optimizes load distribution. }
+\label{im2bf4}
+\end{figure}
+
+The plot above suggests that the force output of the finger highly increased to 130 N with a pressure of 4 bar. The result as such as such shows that pneumatic muscles can exert a very high force compared to an electric motor. The indirect force to weight ratio of this pneumatic artificial muscle is about 1444:1 with a weight of 9g. 
+%----------------------------------------------------------------------------------------
+
+\subsection{Comparison}
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Force/Finger/bbfimim2.png}
+\caption[Overview of finger force]{The Bare bone finger, Blue finger and inMoov finger in one plot. The Blue finger and stronger inMoov finger were both using a stronger muscle and therefore their force output improved significantly. The Bare bone finger's curve starts similar to them.}
+\label{bbfimim2}
+\end{figure}
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Force/Finger/im4.png}
+\caption[Finger force difference of inMoov fingers]{Force difference of the inMoov finger using two different muscles. The bigger muscle pair greatly improves the force of the finger by 225\%.}
+\label{im4}
+\end{figure}
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Force/Finger/bbf4.png}
+\caption[Bare bone and Blue finger force comparison]{The Bare bone and the Blue finger running on 4 bar. Especially mentioned can be that their curve is similar due to their similar morphology even though they do not use the same pair of PAM. The Blue finger's uses a tendon sheath that is strong enough and did not break while the Bare bone finger's cable holders broke at 40 N.}
+\label{bbf4}
+\end{figure}
+
+\section{Finger control}
+
+As the Finger speed experiment suggests, the finger's actuator system can definitely reach a high speed. Further the force experiment shows that the hand would have a high amount of force. But if the speed and force can not be properly controlled, the hand can be very harmful to the user or its surroundings. Therefore, the PID controlled finger was set up with the integrated s070 valves to a control input of a sinusoid wave and a square wave with the frequencies 0.25 Hz, 0.5 Hz, 1 Hz and 2 Hz. The input and output was then measured continuously over a time of 20 seconds each. A segment from second 1 to second 15 was selected and the frequency spectrum was created. The question for each plot is if the original frequency is contained in the spectrum of both and what is the gain of the amplitudes. Therefore, a plot at the end visualizes the drop of gain when the frequency increases. The results for each experiment are shown below.
+
+\subsection{Sinusoid wave signal}
+
+The results using a sinusoidal signal are shown first. They reveal several effects that inhibit the actuator system from precisely following the input signal. 
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/inout250mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/AmpSpectrum250mHz}
+\end{subfigure}
+\end{adjustwidth}
+\caption[Sinusoid control signal at 250mHz]{From this sinusoidal signal at a very low frequency it is visible in A that the signal is thresholded at the extremes. This is caused by a morphological problem either from the muscle or the displacement sensor. In B, it is visible that the performance of the muscle is still acceptably well in terms of the frequency response. The plot shows that the output signal contains nearly the same amplitude of the target frequency as the input signal.}
+\label{sin-250mHz}
+\end{figure}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/inout500mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/AmpSpectrum500mHz}
+\end{subfigure}
+\end{adjustwidth}
+\caption[Sinusoid control signal at 500mHz]{The same threshold effect as in \ref{sin-250mHz}. In B, it can be seen that the main frequency is still the target frequency with a slightly worse gain, the secondary frequencies being caused by the threshold show up.}
+\label{sin-500mHz}
+\end{figure}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/inout1000mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/AmpSpectrum1000mHz}
+\end{subfigure}
+\end{adjustwidth}
+
+\caption[Sinusoid control signal at 1Hz]{In A, the threshold effect is only visible around position 0 because the muscle can not reach position 1024 in time, because the flow of the valves thresholds the speed of the actuator. This causes a typical low pass filtered signal plot. In B, the gain dropped significantly, but also the secondary frequencies disappear, as the threshold effect is reduced.}
+\label{sin-1000mHz}
+\end{figure}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/inout2000mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Sinusoid/AmpSpectrum2000mHz}
+\end{subfigure}
+\end{adjustwidth}
+\caption[Sinusoid control signal at 2 Hz]{The threshold effect has nearly disappeared, the valve flow dependent low pass filtering effect is dominant. In B, all secondary frequencies have disappeared, but also the target frequency is does not have a dominant character in the output signal anymore.}
+\label{sin-2000mHz}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Control/Sinusoid/Gain}
+\caption[Gain drop in frequency response of sinusoidal signals]{The figure suggests the gain drop of the frequency response of the sinusoidal signals. Up to 500mHz, the gain drop is not yet significant and is probably only because of the threshold effect. At 1Hz and above, the gain drops significantly, uncovering the the speed limit of the actuator system with the integrated valves.}
+\label{sin-gain}
+\end{figure}
+
+\newpage
+\subsection{Square wave signal}
+
+The square wave signal helps to show the reaction of the actuator system to abrupt changes of the input. The main question to be answered here is not if the actuator can follow the signal exactly, as the signal switches from one extreme to the other, but if it is able to adapt to the situation in an acceptable manner.
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/inout250mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/AmpSpectrum250mHz}
+\end{subfigure}
+\end{adjustwidth}
+\caption[Square wave control signal at 250mHz]{The square wave signal seen in A is matched well by the actuator position with a delay of around 0.3 s. In B, the main frequency of the output signal is the same as the input signal within a high gain.}
+\label{sq-250mHz}
+\end{figure}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/inout500mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/AmpSpectrum500mHz}
+\end{subfigure}
+\end{adjustwidth}
+
+\caption[Square wave control signal at 500mHz]{The slope of the uprising output signal is similar to the slope of the signal in the previous diagram. The first derivative of the signal is the speed of the actuator. It can be seen that the speed's limit is reached at this frequency as the slope is nearly constant between the extremes. Further, the lower extreme is not reached anymore after the first oscillation, which shows the occurrence low pass filter effect already at a frequency of 500mHz.}
+\label{sq-500mHz}
+\end{figure}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/inout1000mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/AmpSpectrum1000mHz}
+\end{subfigure}
+\end{adjustwidth}
+
+\caption[Square wave control signal at 1 Hz]{At a frequency of 1 Hz, the output signal can not keep up with the input signal anymore. In most cases, it nearly reaches either the upper or lower extreme, but the square wave frequency is too high for the actuator because of its valve flow dependent speed limit. In B, the gain between input and output signal dropped again and frequencies near to 1 Hz arise in the spectrum.}
+\label{sq-1000mHz}
+\end{figure}
+
+\begin{figure}[H]
+\begin{adjustwidth}{-8em}{-3em}
+\begin{subfigure}[t]{0.665\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/inout2000mHz}
+\end{subfigure}\hspace{0.05\textwidth}
+\begin{subfigure}[t]{0.6\textwidth}
+\includegraphics[width=1\textwidth]{Experiments/Control/Square/AmpSpectrum2000mHz}
+\end{subfigure}
+\end{adjustwidth}
+
+
+\caption[Square wave control signal at 2 Hz]{The output is not able anymore to reach both extremes at all. In some cases, it does reach none of them at all, being trapped in the middle of them. In B, the gain of the main frequency is very low. The frequencies near to 2 Hz reach a similar amplitude as the target frequency.}
+\label{sq-2000mHz}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Experiments/Control/Square/Gain}
+\caption[Gain drop in frequency response of square wave signals]{For this second experiment, the gain was measured in two type of gains. The first is the gain between the amplitude of the target frequency in the input and output signal (Amplitude Gain). The second is the position range, that the actuator reaches while following the input signal (Position Range Gain). It can be seen that the Amplitude Gain starts lower because actuator output reaches the input with delay. The gain initially drops only slightly, then the drop gets significant suggesting that the actuator reaches its threshold and finally can not keep up with the input signal.}
+\label{sq-gain}
+\end{figure}
+
+\subsection{Discussion}
+
+The actuators speed and precision have been shown in the experiments above. The maximum speed of the actuator's contraction lies at around 1 Hz. Higher frequencies can not be dealt with, as the valve's flow limits the speed of the actuator. The speed could therefore be increased by using valves with a higher flow. Furthermore, the precision of the actuator is dependent of the position feedback to the controller, which was provided by a potentiometer, which could be slightly not linear as well. An improvement of the feedback to the controller could therefore also lead to an improvement of control. In general, it is a challenging task to control PAMs accurately. Fortunately, they provide a controllable compliance which can help to cancel out a certain amount of error in control. 
+
+\section{Discussion of energy and air consumption}
+
+To give a rough overview of the energy consumption of the current system, several experiments were conducted to measure the energy. First of all, the energy consumption of several states of the prosthetic prototype was measured in W. The prosthesis has three different states that use different amounts of energy. If the muscles are not moving and therefore no pressurized air is used, only the controller consumes energy, which in case of the arduino running with a 9V power supply it uses 26mA. The power consumption is therefore $9 V \cdot 0.026A = 0.234 W$. This state of the device does not need more energy as the pneumatic valves do not draw current when they are closed. As the muscles do not change the position or force, this is a state of very little power consumption.
+The second state using more power is when the tank is still supplying a constant amount of pressure and does not need to be refilled, but the fingers are moving and therefore use pressurized air. To keep the muscle moving, it has been measured for one pair of muscles that this draws a current of 0.029 A at a voltage of 24V which equals to a power consumption of $24V \cdot 0.029A = 0.696 W$. Additionally, the controller is still running which results in an overall power consumption of 0.93 W.
+The third state using the highest amount of power is when the air pressure drops below the defined threshold of 3 bar. The controller tries to supply the muscles with a approximately constant pressure. This is achieved by thresholding the pressure and start the compressor when the pressure drops below 3 bar and stops it when it exceeds 4 bar. The compressor shown already in chapter \ref{Chapter4} unfortunately supplies a low air flow when supplying 4 bar of air pressure. This makes it difficult to run it only for short times to refill the tank. When the compressor runs, the prosthetic device draws an additional current of 0.26 A at 24 V and therefore $0.26A \cdot 24V = 6.24 W$. Moreover the device still needs power for the controller and the valves, therefore the overall power consumption of this state is 7.17 W.
+
+The air consumption of the system was checked first by measuring the number of flexions and extensions achievable with one tank of $ V_{full} =  5L$ filled with air pressurized at $ P_{full} = 4 bar$ until the muscle was not able to contract anymore. Then time to refill the tank from 3 bar being the refill threshold to 4 bar.
+
+An amount of $n = 186$ flexions and extensions were possible with one tank. By calculating the volume of one muscle, it is now possible to calculate the muscle contraction threshold.
+The volume of the muscle was found to be 8ml based on a cylindrical shape ( $l \cdot r^2 * \pi = 10.7318 mm \cdot (0.5 cm)^2 \cdot \pi = 8.429 ml$ ). Two muscles it this case have a volume of 16 ml which is then the volume of air needed of a full flexion and extension. 
+
+\[
+V_{useful} = V_0 \cdot n = 16ml \cdot 186 = 2976 ml = 2.976 l
+\]
+
+\[
+V_{threshold} = V_full - V_{useful} = 2024 ml.\\
+\frac{P_{threshold}}{P_{full}} = \frac{V_{threshold}}{V_{full}}
+\]
+\[
+P_{threshold} = \frac{V_{threshold}}{V_{full}} \cdot P_{full} = \frac{2024ml}{5000ml} \cdot 4 bar = 1.62 bar\\
+\]
+
+The threshold pressure of the muscle is therefore 1.62 bar, below this threshold, the muscle can not contract anymore.
+
+To refill the tank from 1.62 bar to 4 bar with the small compressor, it took 10.7 minutes. 
+
+According to Bullock et al. (2013), a healthy human performs 4700 grasps in a time range of 7.45 hours \cite{Bullock2013}. Assuming that the grasps performed by the pneumatic artificial muscles in the prosthetic hand are sufficient to perform activities of daily living, $\frac{\frac{4700}{2}}{186} = 12.63$ tank fillings are needed (assuming that both hands do an equal amount of grasps), making the compressor run for $12.63 \cdot 10.7 minutes = 135.19 minutes = 2.25 hours$. The compressor would therefore run during 30 \% of the time which equals to a very high energy consumption. This is a very unfortunate result, showing that the compressor can not be turned off for longer periods as the compressor can not refill the tank fast enough. This is an open problem, to which a solution will have to be found for a complete system.
+
+\section{Comparison of the system properties with other systems}
+
+Since the created device could not be extended to a complete hand controlled by several muscles, the aeromanus hand's specification has to be extrapolated from the experiments based on one finger. For the comparison, the names of the other devices are referring to their name in the Appendix \ref{AppendixB}.
+
+As the finger force experiments above suggest, the force of at the tip of one finger is 130 N. Extrapolated to the whole hand, the prosthesis can achieve an output force of 650 N. If we used four muscles for each finger muscles for each finger similar to the human hand, the whole hand would have a force of 1300 N.  From the devices in the listing in Appendix \ref{AppendixB}, only the Bebionic v.2 achieves a higher output force (900 N) compared to the triarticulate fingers. Other devices such as the Smarthand (100 N) or the iLimb Pulse (136 N) exert a force that is far below. The average output force of the listed prostheses lies at 139 N, the median lies at 60 N, because the set is strongly skewed by the Bebionic v.2 hand (11 devices were inspected). Using a more bio-inspired design for the hand could help to reduce the force to grasp and lift heavy objects.
+
+From the speed of finger flexion experiments, a flexion frequency of 16 Hz was measured. The actuator itself is therefore obviously able to actuate the finger in a very fast manner. As mentioned before, the valves of the device determine the speed of actuation. As shown in the results of frequency response using the small valves integrated in the prototype, the frequency response drops at 1 Hz, which suggests that the prosthesis can respond to a 1Hz signal, therefore the flexion frequency with the integrated valves is 1 Hz. Compared to other systems, only the Bebionic v.2 (1.11 Hz) and the Blackfingers (1.42 Hz) achieve a higher speed whereas the the Fluidhand III achieves the same result (1Hz). The average of the reviewed prosthetic hands lies at 0.784 Hz, with a median at 0.833 Hz (8 devices were reviewed).
+
+In a comparison of the weight the prototype would have with a similar functionality as commercial hands, its weight of 465.8g competes well to that of other hands. Competing average weight of 473g and with the median of 420g among 13 prostheses, the weight of the prosthetic prototype as a prosthesis would have a similar weight. 
+
+Further properties are difficult to compare either because of lack of data for a comparison or because the prototype does not yet generate comparable data.
+%----------------------------------------------------------------------------------------
+
+\end{document}
