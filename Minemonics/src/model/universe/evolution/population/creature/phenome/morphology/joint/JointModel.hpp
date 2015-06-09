@@ -14,6 +14,8 @@ class btTransform;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -40,6 +42,43 @@ public:
 
 	void initialize(btDynamicsWorld* world, btRigidBody* limbA,
 			btRigidBody* limbB, btTransform localA, btTransform localB);
+
+	/**
+	 * Compare the joint model to another joint model.
+	 * @param jointModel Another joint model.
+	 * @return If the joint model is equal to the other joint model.
+	 */
+	bool equals(const JointModel & jointModel) const;
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the joint model to a string.
+	 * @param os The ostream.
+	 * @param jointModel The joint model we want to serialize.
+	 * @return A string containing all information about the joint model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const JointModel &jointModel) {
+		return os;
+//		/**The physics component of the joint model*/
+//		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The physics component of the joint model*/
+		& BOOST_SERIALIZATION_NVP(mJointPhysics);
+	}
 
 	//Accessor methods
 
@@ -93,13 +132,12 @@ public:
 	 * Get the motors of this joint.
 	 * @return The motors of this joint.
 	 */
-	const std::vector<Motor*> getMotors(){
+	const std::vector<Motor*> getMotors() {
 		return mJointPhysics->getMotors();
 	}
 
 private:
 	JointPhysics* mJointPhysics;
-
 
 };
 

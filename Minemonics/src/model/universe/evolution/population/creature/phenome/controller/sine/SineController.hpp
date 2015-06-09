@@ -37,7 +37,7 @@ public:
 	 */
 	void initialize(double amplitude, double frequency, double xShift,double yShift);
 
-	void perform(double time);
+	void perform(double timeSinceLastFrame);
 
 	void collectInputs();
 

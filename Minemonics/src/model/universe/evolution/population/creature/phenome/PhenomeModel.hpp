@@ -12,6 +12,8 @@ class MixedGenome;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
 #include <btBulletDynamicsCommon.h>
 
@@ -39,7 +41,8 @@ public:
 	PhenomeModel();
 	virtual ~PhenomeModel();
 
-	void initialize(SimulationManager* simulationManager,btDynamicsWorld* world);
+	void initialize(SimulationManager* simulationManager,
+			btDynamicsWorld* world);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -48,10 +51,83 @@ public:
 	 * @param genome The genome of the creature to be built.
 	 * @param rootPosition The position of origin where the creature starts to be generated in the physical space.
 	 */
-	void performEmbryogenesis(Creature* creature,MixedGenome* genome, Ogre::Vector3 rootPosition);
+	void performEmbryogenesis(Creature* creature, MixedGenome* genome,
+			Ogre::Vector3 rootPosition);
 
+	/**
+	 * Update the phenome model.
+	 * @param timeSinceLastFrame
+	 */
+	void update(double timeSinceLastFrame);
 
-	void update(double totalMilliseconds);
+	/**
+	 * Compare the phenome model to another phenome model.
+	 * @param phenomeModel Another phenome model.
+	 * @return If the phenome model is equal to the other phenome model.
+	 */
+	bool equals(const PhenomeModel & phenomeModel) const;
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the phemone model to a string.
+	 * @param os The ostream.
+	 * @param phenomeModel The phemone model we want to serialize.
+	 * @return A string containing all information about the phemone model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const PhenomeModel &phenomeModel) {
+		os
+		/**if the phenome is in the world*/
+		<< "PhenomeModel: isInWorld=" << phenomeModel.mInWorld;
+
+		/**The vector of limb models.*/
+		std::vector<LimbModel*>::const_iterator it;
+		for (it = phenomeModel.mLimbModels.begin(); it != phenomeModel.mLimbModels.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+
+		/**The vector of joint models.*/
+		std::vector<JointModel*>::const_iterator it2;
+		for (it2 = phenomeModel.mJointModels.begin(); it2 != phenomeModel.mJointModels.end(); it2++) {
+			os << (**it2);
+			os << "||";
+		}
+
+		/**The vector of controllers.*/
+		std::vector<Controller*>::const_iterator it3;
+		for (it3 = phenomeModel.mControllers.begin(); it3 != phenomeModel.mControllers.end(); it3++) {
+			os << (**it3);
+			os << "||";
+		}
+
+		return os;
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**if the phenome is in the world*/
+		& BOOST_SERIALIZATION_NVP(mInWorld)
+
+		/**The vector of limb models.*/
+		& BOOST_SERIALIZATION_NVP(mLimbModels)
+
+		/**The vector of joint models.*/
+		& BOOST_SERIALIZATION_NVP(mJointModels)
+
+		/**The vector of controllers.*/
+		& BOOST_SERIALIZATION_NVP(mControllers);
+	}
 
 	//Accessor methods
 	/**
@@ -59,7 +135,7 @@ public:
 	 * @return
 	 */
 	bool isInWorld() const {
-		return inWorld;
+		return mInWorld;
 	}
 
 	/**
@@ -67,7 +143,7 @@ public:
 	 * @param inWorld Whether the phenotype is in the world or not.
 	 */
 	void setInWorld(bool inWorld) {
-		this->inWorld = inWorld;
+		this->mInWorld = inWorld;
 	}
 
 	std::vector<Controller*>& getControllers() {
@@ -97,7 +173,7 @@ private:
 	/**
 	 * Whether the phenome is in the world or not.
 	 */
-	bool inWorld;
+	bool mInWorld;
 
 	/**
 	 * The vector of phenotype component models.

@@ -1,18 +1,22 @@
-/*
- * Jury.h
- *
- *  Created on: Dec 7, 2014
- *      Author: leviathan
- */
-
-#ifndef JURY_H_
-#define JURY_H_
+#ifndef MODEL_UNIVERSE_EVOLUTION_JURIES_JURY_HPP_
+#define MODEL_UNIVERSE_EVOLUTION_JURIES_JURY_HPP_
 
 //# corresponding headers
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -23,9 +27,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The jury class is the base class for all juries (fitness functions).
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-12-07
  * @author		Benjamin Ellenberger
  */
 class Jury {
@@ -37,6 +41,55 @@ public:
 	Jury(JuryType juryType, int weight);
 	virtual ~Jury();
 
+	/**
+	 * Compare a jury to another jury.
+	 * @param jury Another jury
+	 * @return If the jury is equal to the other jury.
+	 */
+	bool equals(const Jury & jury) const;
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the jury to a string.
+	 * @param os The ostream.
+	 * @param jury The jury we want to serialize.
+	 * @return A string containing all information about the jury.
+	 */
+	friend std::ostream & operator<<(std::ostream &os, const Jury &jury) {
+		return os
+		/**The type of jury*/
+		<< "Jury: Type=" << jury.mJuryType
+
+		/**The weight of the jury*/
+		<< "/Weight=" << jury.mWeight
+
+		/**The fitness score of the jury.*/
+		<< "Fitness=" << jury.mFitness;
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The type of jury*/
+		& BOOST_SERIALIZATION_NVP(mJuryType)
+
+		/**The weight of the jury*/
+		& BOOST_SERIALIZATION_NVP(mWeight)
+
+		/**The fitness score of the jury.*/
+		& BOOST_SERIALIZATION_NVP(mFitness);
+	}
+
+	//Accessor methods
 	/**
 	 * Returns the weight associated with this jury component.
 	 * @return the weight
@@ -63,4 +116,4 @@ protected:
 	double mFitness;
 };
 
-#endif /* JURY_H_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_JURY_HPP_ */

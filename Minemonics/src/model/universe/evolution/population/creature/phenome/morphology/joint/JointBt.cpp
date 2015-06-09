@@ -1,4 +1,8 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+
+//# forward declarations
+//# system headers
 #include <stddef.h>
 #include <iterator>
 #include <vector>
@@ -21,7 +25,6 @@
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 
 //## view headers
 //## utils headers
@@ -85,24 +88,40 @@ void JointBt::initializeRotationalLimitMotors(btVector3 maxForces,
 		btVector3 maxSpeeds) {
 	//add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(0, mG6DofJoint->getRotationalLimitMotor(0),
-			maxForces.getX(), maxSpeeds.getX());
+	servoMotor->initialize(JointPhysics::DOF_PITCH,
+			mG6DofJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+			maxSpeeds.getX());
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(1, mG6DofJoint->getRotationalLimitMotor(1),
+	servoMotor->initialize(JointPhysics::DOF_YAW,
+			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_YAW),
 			maxForces.getY(), maxSpeeds.getY());
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(2, mG6DofJoint->getRotationalLimitMotor(2),
+	servoMotor->initialize(JointPhysics::DOF_ROLL,
+			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
 			maxForces.getZ(), maxSpeeds.getZ());
 	mMotors.push_back(servoMotor);
 }
 
-void JointBt::setRotationalLimitMotorEnabled(int index, bool enable) {
+bool JointBt::equals(const JointBt& jointBt) const {
+	std::vector<Motor*>::const_iterator it = mMotors.begin();
+	std::vector<Motor*>::const_iterator it2 = jointBt.mMotors.begin();
+	for (; it != mMotors.end(), it2 != jointBt.mMotors.end(); it++, it2++) {
+		if (!(*it)->equals(**(it2))) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void JointBt::setRotationalLimitMotorEnabled(
+		JointPhysics::RotationalDegreeOfFreedom index, bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 	for (; motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->getIndex() == index) {

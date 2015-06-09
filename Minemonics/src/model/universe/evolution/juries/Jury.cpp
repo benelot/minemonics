@@ -1,10 +1,3 @@
-/*
- * Jury.cpp
- *
- *  Created on: Dec 7, 2014
- *      Author: leviathan
- */
-
 //# corresponding headers
 #include <model/universe/evolution/juries/Jury.hpp>
 
@@ -50,3 +43,19 @@ Jury::JuryType Jury::getJuryType() {
 	return mJuryType;
 }
 
+bool Jury::equals(const Jury& jury) const {
+	if(mJuryType != jury.mJuryType)
+	{
+		return false;
+	}
+
+	if(mWeight != jury.mWeight){
+		return false;
+	}
+
+	if(mFitness != jury.mFitness){
+		return false;
+	}
+
+	return true;
+}

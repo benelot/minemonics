@@ -56,24 +56,21 @@ bool CreatureModel::equals(const CreatureModel & creature) const {
 		return false;
 	}
 
-//	std::vector<Jury>::const_iterator it = mJuries.begin();
-//	std::vector<Jury>::const_iterator it2 =
-//			creature.mJuries.begin();
-//	for (; it != mJuries.end(), it2 != creature.mJuries.end();
-//			it++, it2++) {
-	//TODO:: Add equals for juries
-//		if (!it->equals(*(it2))) {
-//			return false;
-//		}
-//	}
+	std::vector<Jury*>::const_iterator it = mJuries.begin();
+	std::vector<Jury*>::const_iterator it2 = creature.mJuries.begin();
+	for (; it != mJuries.end(), it2 != creature.mJuries.end(); it++, it2++) {
+		if (!(*it)->equals(**(it2))) {
+			return false;
+		}
+	}
 
-//	if (mSegmentsDepthLimit != creature.mSegmentsDepthLimit) {
-//		return false;
-//	}
-//
-//	if (mTotalSegmentQtyLimit != creature.mTotalSegmentQtyLimit) {
-//		return false;
-//	}
+	if (mPhenotypeModel->equals(*creature.mPhenotypeModel)) {
+		return false;
+	}
+
+	if (mPopulationModel != mPopulationModel) {
+		return false;
+	}
 
 	return true;
 }

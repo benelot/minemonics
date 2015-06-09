@@ -42,8 +42,8 @@ Joint::~Joint() {
 	delete mJointModel;
 }
 
-void Joint::initialize(Creature* creature, Limb* limbA,
-		Limb* limbB, btTransform localA, btTransform localB) {
+void Joint::initialize(Creature* creature, Limb* limbA, Limb* limbB,
+		btTransform localA, btTransform localB) {
 
 	// initialize the physics model of the joint
 	mJointModel = new JointModel();
@@ -52,7 +52,7 @@ void Joint::initialize(Creature* creature, Limb* limbA,
 			limbA->getLimbPhysics()->getRigidBody(),
 			limbB->getLimbPhysics()->getRigidBody(), localA, localB);
 
-	buildFrom( mJointModel);
+	buildFrom(mJointModel);
 }
 
 void Joint::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
@@ -101,12 +101,12 @@ void Joint::setAngularDamping(double springPitchDampingCoefficient,
 
 void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
-	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(0,
-			pitchEnable);
-	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(1,
-			yawEnable);
-	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(2,
-			rollEnable);
+	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(
+			JointPhysics::RDOF_PITCH, pitchEnable);
+	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(
+			JointPhysics::RDOF_YAW, yawEnable);
+	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(
+			JointPhysics::RDOF_ROLL, rollEnable);
 }
 
 void Joint::buildFrom(/*SimulationManager* simulationManager, Limb* limbA,

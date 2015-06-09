@@ -1,11 +1,6 @@
 #ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_
 
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
-
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 

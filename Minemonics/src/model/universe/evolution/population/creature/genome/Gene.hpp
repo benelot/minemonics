@@ -88,10 +88,9 @@ public:
 	 * @return A string containing all information about the gene.
 	 */
 	friend std::ostream & operator<<(std::ostream &os, const Gene &gene) {
-		os
+		return os
 		/**The type of gene*/
 		<< "Gene: type="<< gene.mType;
-		return os;
 	}
 
 	/**

@@ -22,7 +22,7 @@
 //## utils headers
 
 LimbModel::LimbModel() :
-		mLimbPhysics(NULL), mColor(0, 0, 0), mLimbType(UNKNOWN) {
+		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN) {
 }
 
 LimbModel::~LimbModel() {
@@ -45,6 +45,27 @@ void LimbModel::initialize(btDynamicsWorld* world, void* limb,
 			btScalar(restitution), btScalar(friction));
 
 	mDimensions = dimensions;
-	mLimbType = type;
+	mPrimitiveType = type;
 	mColor = color;
+}
+
+bool LimbModel::equals(const LimbModel& limbModel) const {
+	if (mPrimitiveType != limbModel.mPrimitiveType) {
+		return false;
+	}
+
+	if (mColor != limbModel.mColor) {
+		return false;
+	}
+
+	if (mDimensions != limbModel.mDimensions) {
+		return false;
+	}
+
+	if(!mLimbPhysics->equals(*limbModel.mLimbPhysics))
+	{
+		return false;
+	}
+
+	return true;
 }

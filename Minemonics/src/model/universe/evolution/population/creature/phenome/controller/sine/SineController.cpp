@@ -38,15 +38,15 @@ void SineController::initialize(double amplitude, double frequency,
 	mYShift = yShift;
 }
 
-void SineController::perform(double time) {
+void SineController::perform(double timeSinceLastFrame) {
 	double input = 0;
 	if (mControlInputs.size() != 0) {
 		std::cout << "Why is there sine control input?";
 		//input = mControlInput->getControlInput();
 	} else {
-		input = time;
+		mTime += timeSinceLastFrame;
 	}
-	double output = mAmplitude * sin(mFrequency * input + mXShift) + mYShift;
+	double output = mAmplitude * sin(mFrequency * mTime + mXShift) + mYShift;
 	//clamp output to [0;1]
 	output = (output > 1)?1:(output < 0)?0:output;
 

@@ -3,12 +3,22 @@
 
 //# corresponding header
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 class btQuaternion;
 class btVector3;
 
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -39,7 +49,6 @@ public:
 	 */
 	virtual void removeFromWorld() = 0;
 
-
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 * @param origin The origin of the ray in the global reference frame.
@@ -67,7 +76,38 @@ public:
 	virtual btVector3 getLocalPreciseIntersection(btVector3 origin,
 			btVector3 direction) = 0;
 
-	//accessor methods
+	/**
+	 * Compare the limb physics model to another limb physics  model.
+	 * @param limbPhysics Another limb physics  model.
+	 * @return If the limb physics  model is equal to the other limb physics  model.
+	 */
+	bool equals(const LimbPhysics & limbPhysics) const;
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the limb physics model to a string.
+	 * @param os The ostream.
+	 * @param limbPhysics The limb physics model we want to serialize.
+	 * @return A string containing all information about the limb physics model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const LimbPhysics &limbPhysics) {
+		return os
+		/**If the limb physics is in the world*/
+		<< "LimbPhysics: isInWorld=" << limbPhysics.mInWorld
+
+		/**The restitution of the limb*/
+		<< "/Restitution=" << limbPhysics.mRestitution
+
+		/**The friction of the limb*/
+		<< "/Friction=" << limbPhysics.mFriction;
+	}
+
+	//Accessor methods
 
 	/**
 	 * Is the limb in the physical world?

@@ -14,3 +14,14 @@ ControlInput::ControlInput() :
 ControlInput::~ControlInput() {
 }
 
+bool ControlInput::equals(const ControlInput& controlInput) const {
+	if (mReceivedInput != controlInput.mReceivedInput) {
+		return false;
+	}
+
+	if (mValue != controlInput.mValue) {
+		return false;
+	}
+
+	return true;
+}

@@ -58,11 +58,20 @@ void JointModel::setAngularDamping(double springPitchDampingCoefficient,
 			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
+bool JointModel::equals(const JointModel& jointModel) const {
+//	if(mJointPhysics->equals(*jointModel.mJointPhysics))
+//	{
+//		return false;
+//	}
+
+	return true;
+}
+
 void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(0, pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(1, yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(2, rollEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH, pitchEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW, yawEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL, rollEnable);
 }
 
 void JointModel::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,

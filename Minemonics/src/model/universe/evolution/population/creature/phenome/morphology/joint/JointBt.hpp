@@ -8,6 +8,8 @@ class Motor;
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
 #include <btBulletDynamicsCommon.h>
 
@@ -35,17 +37,82 @@ public:
 	JointBt();
 	virtual ~JointBt();
 
+	/**
+	 * Initialize the joint bullet physics model.
+	 * @param world A handle to the bullet dynamics world.
+	 * @param bodyA The rigidbody A to be connected.
+	 * @param bodyB The rigidbody B to be connected.
+	 * @param tframeInA The joint position in reference frame A.
+	 * @param tframeInB The joint position in reference frame B.
+	 */
 	void initialize(btDynamicsWorld* world, btRigidBody* bodyA,
 			btRigidBody* bodyB, btTransform& tframeInA, btTransform& tframeInB);
 
+	/**
+	 * Initialize the rotational limit motors.
+	 * @param maxForces The maximum forces of the joint.
+	 * @param maxSpeeds The maximum speeds of the joint.
+	 */
 	void initializeRotationalLimitMotors(btVector3 maxForces,
 			btVector3 maxSpeeds);
 
+	/**
+	 * Update the joint bullet physics model.
+	 */
 	void update();
 
+	/**
+	 * Add the joint bullet physics model to the world.
+	 */
 	void addToWorld();
 
+	/**
+	 * Remove the joint bullet physics models from the world.
+	 */
 	void removeFromWorld();
+
+	/**
+	 * Compare the joint bullet physics to another joint bullet physics.
+	 * @param jointBt Another joint bullet physics model.
+	 * @return If the joint bullet physics is equal to the other joint bullet physics.
+	 */
+	bool equals(const JointBt & jointBt) const;
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the joint bullet physics to a string.
+	 * @param os The ostream.
+	 * @param jointModel The joint bullet physics we want to serialize.
+	 * @return A string containing all information about the joint bullet physics.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const JointBt & jointBt) {
+		/**The vector of motors.*/
+		std::vector<Motor*>::const_iterator it;
+		for (it = jointBt.mMotors.begin(); it != jointBt.mMotors.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+		return os;
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The motors of the joint bullet physics model*/
+		& BOOST_SERIALIZATION_NVP(mMotors);
+	}
+
+	//Accessor methods
 
 	void setLinearLimits(btVector3 linearLowerLimit,
 			btVector3 linearUpperLimit) {
@@ -69,56 +136,68 @@ public:
 
 	void setAngularStiffness(double jointPitchStiffness,
 			double jointYawStiffness, double jointRollStiffness) {
-		setJointStiffness(0, jointPitchStiffness);
-		setJointStiffness(1, jointYawStiffness);
-		setJointStiffness(2, jointRollStiffness);
+		setJointStiffness(JointPhysics::DOF_PITCH, jointPitchStiffness);
+		setJointStiffness(JointPhysics::DOF_YAW, jointYawStiffness);
+		setJointStiffness(JointPhysics::DOF_ROLL, jointRollStiffness);
 	}
 
 	void setAngularDamping(double springPitchDampingCoefficient,
 			double springYawDampingCoefficient,
 			double springRollDampingCoefficient) {
-		setSpringDampingCoefficient(0, springPitchDampingCoefficient);
-		setSpringDampingCoefficient(1, springYawDampingCoefficient);
-		setSpringDampingCoefficient(2, springRollDampingCoefficient);
+		setSpringDampingCoefficient(JointPhysics::DOF_PITCH,
+				springPitchDampingCoefficient);
+		setSpringDampingCoefficient(JointPhysics::DOF_YAW,
+				springYawDampingCoefficient);
+		setSpringDampingCoefficient(JointPhysics::DOF_ROLL,
+				springRollDampingCoefficient);
 	}
 
 	void setBreakingThreshold(double breakingThreshold) {
 		mG6DofJoint->setBreakingImpulseThreshold(breakingThreshold);
 	}
 
-	void setJointStiffness(int index, double stiffness) {
+	void setJointStiffness(JointPhysics::DegreeOfFreedom index,
+			double stiffness) {
 		mG6DofJoint->setStiffness(index, stiffness);
 	}
 
-	void enableSpring(int index, bool enable) {
+	void enableSpring(JointPhysics::DegreeOfFreedom index, bool enable) {
 		mG6DofJoint->enableSpring(index, enable);
 	}
 
-	void setSpringDampingCoefficient(int index, double damping) {
+	void setSpringDampingCoefficient(JointPhysics::DegreeOfFreedom index,
+			double damping) {
 		mG6DofJoint->setDamping(index, damping);
 	}
 
-	void setRotationalLimitMotorEnabled(int index, bool enable);
+	void setRotationalLimitMotorEnabled(
+			JointPhysics::RotationalDegreeOfFreedom index, bool enable);
 
-	bool isRotationalLimitMotorEnabled(int index) {
+	bool isRotationalLimitMotorEnabled(
+			JointPhysics::RotationalDegreeOfFreedom index) {
 		return mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
-	void setTargetRotationalVelocity(int index, double targetVelocity) {
+	void setTargetRotationalVelocity(
+			JointPhysics::RotationalDegreeOfFreedom index,
+			double targetVelocity) {
 		mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity =
 				targetVelocity;
 	}
 
-	double getTargetRotationalVelocity(int index) {
+	double getTargetRotationalVelocity(
+			JointPhysics::RotationalDegreeOfFreedom index) {
 		return mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
-	void setMaxRotationalForce(int index, double maxMotorForce) {
+	void setMaxRotationalForce(JointPhysics::RotationalDegreeOfFreedom index,
+			double maxMotorForce) {
 		mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce =
 				maxMotorForce;
 	}
 
-	double getMaxRotationalForce(int index) {
+	double getMaxRotationalForce(
+			JointPhysics::RotationalDegreeOfFreedom index) {
 		return mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 

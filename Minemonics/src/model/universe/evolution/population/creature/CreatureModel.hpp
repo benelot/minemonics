@@ -93,20 +93,45 @@ public:
 	}
 
 	/**
+	 * Compare the creature model to another creature model.
+	 * @param creature Another creature model.
+	 * @return If the creature model is equal to the other creature model.
+	 */
+	bool equals(const CreatureModel & creature) const;
+
+	/**
 	 * Give access to boost serialization
 	 */
 	friend class boost::serialization::access;
 
 	/**
-	 * Serializes the creature to a string.
+	 * Serializes the creature model to a string.
 	 * @param os The ostream.
 	 * @param creature The creature we want to serialize.
 	 * @return A string containing all information about the creature.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 			const CreatureModel &creature) {
-		return os << creature.mName << ": " << creature.mDeveloped << ':'
-				<< creature.mGenotype << ' ';
+		os
+		/**The name of the creature*/
+		<< "CreatureModel: Name=" << creature.mName
+
+		/**If the creature is developed*/
+		<< "/isDeveloped=" << creature.mDeveloped
+
+		/**The genome of the creature*/
+		<< "/Genotype=" << creature.mGenotype;
+
+		/**The juries of the creature model*/
+		std::vector<Jury*>::const_iterator it;
+		for (it = creature.mJuries.begin(); it != creature.mJuries.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+
+		/**The position of the creature model*/
+		return os << "/Position=(" << creature.mPosition.x << ","
+				<< creature.mPosition.y << "," << creature.mPosition.z << ")";
 	}
 
 	/**
@@ -117,12 +142,24 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
-				& BOOST_SERIALIZATION_NVP(
-						mName) & BOOST_SERIALIZATION_NVP(
-								mDeveloped) & BOOST_SERIALIZATION_NVP(mGenotype) & BOOST_SERIALIZATION_NVP(mJuries) & BOOST_SERIALIZATION_NVP(mPosition.x) & BOOST_SERIALIZATION_NVP(mPosition.y) & BOOST_SERIALIZATION_NVP(mPosition.z);
-	}
+		/**The name of the creature*/
+		& BOOST_SERIALIZATION_NVP(mName)
 
-	bool equals(const CreatureModel & creature) const;
+		/**if the creature is developed already*/
+		& BOOST_SERIALIZATION_NVP(
+				mDeveloped)
+
+		/**The genome of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mGenotype)
+
+		/**The juries of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mJuries)
+
+		/**The position of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mPosition.x)
+		& BOOST_SERIALIZATION_NVP(mPosition.y)
+		& BOOST_SERIALIZATION_NVP(mPosition.z);
+	}
 
 	//Accessor methods
 	MixedGenome& getGenotype() {

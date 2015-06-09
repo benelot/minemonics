@@ -43,7 +43,7 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 PhenomeModel::PhenomeModel() :
-		mSimulationManager(NULL), mWorld(NULL), inWorld(false) {
+		mSimulationManager(NULL), mWorld(NULL), mInWorld(false) {
 	mControllers.clear();
 }
 
@@ -57,10 +57,11 @@ void PhenomeModel::initialize(SimulationManager* simulationManager,
 	mWorld = world;
 }
 
-void PhenomeModel::update(double totalMilliseconds) {
+void PhenomeModel::update(double timeSinceLastFrame) {
+	// let the controller perform
 	std::vector<Controller*>::iterator cit = mControllers.begin();
 	for (; cit != mControllers.end(); cit++) {
-		(*cit)->perform(totalMilliseconds);
+		(*cit)->perform(timeSinceLastFrame);
 	}
 }
 
@@ -93,7 +94,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		//		Embryogenesis::transcribeGene(generator);
 
 		// what is the next gene type
-		switch (generator->getGene()->getGeneType()) {
+		switch (generator->getGene()->getType()) {
 		case Gene::MorphoGene: {
 			// if the current root to leaf path is equal to the maximal segments depth, break
 			if (generator->getRoot2LeafPath()
@@ -517,4 +518,43 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		// delete the generator of this gene
 		delete generator;
 	}
+}
+
+bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
+	if (mInWorld != phenomeModel.mInWorld) {
+		return false;
+	}
+
+	/**The vector of limb models.*/
+	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+	std::vector<LimbModel*>::const_iterator it2 =
+			phenomeModel.mLimbModels.begin();
+	for (; it != mLimbModels.end(), it2 != phenomeModel.mLimbModels.end();
+			it++, it2++) {
+		if (!(*it)->equals(**(it2))) {
+			return false;
+		}
+	}
+
+	/**The vector of joint models.*/
+	std::vector<JointModel*>::const_iterator it3 = mJointModels.begin();
+	std::vector<JointModel*>::const_iterator it4 =
+			phenomeModel.mJointModels.begin();
+	for (; it3 != mJointModels.end(), it4 != phenomeModel.mJointModels.end();
+			it3++, it4++) {
+		if (!(*it3)->equals(**(it4))) {
+			return false;
+		}
+	}
+
+	/**The vector of controllers.*/
+	std::vector<Controller*>::const_iterator it5 = mControllers.begin();
+	std::vector<Controller*>::const_iterator it6 = phenomeModel.mControllers.begin();
+	for (; it5 != mControllers.end(), it6 != phenomeModel.mControllers.end();
+			it5++, it6++) {
+		if (!(*it5)->equals(**(it6))) {
+			return false;
+		}
+	}
+	return true;
 }

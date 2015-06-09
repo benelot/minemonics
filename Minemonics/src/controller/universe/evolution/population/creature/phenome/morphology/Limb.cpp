@@ -149,7 +149,7 @@ void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
 	((LimbO3D*) mLimbGraphics)->initialize(simulationManager,
-			limbModel->getLimbType(), limbModel->getDimensions(),
+			limbModel->getPrimitiveType(), limbModel->getDimensions(),
 			limbModel->getColor());
 
 	if (mLimbModel == NULL) {
