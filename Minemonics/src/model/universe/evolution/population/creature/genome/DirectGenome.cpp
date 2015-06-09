@@ -24,3 +24,6 @@ DirectGenome::~DirectGenome() {
 	// TODO Auto-generated destructor stub
 }
 
+bool DirectGenome::equals(const DirectGenome& genome) const {
+	Genome::equals(genome);
+}

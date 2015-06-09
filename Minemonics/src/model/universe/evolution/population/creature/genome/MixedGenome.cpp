@@ -66,14 +66,17 @@ void MixedGenome::createRandomGenome(double branchiness) {
 }
 
 bool MixedGenome::equals(const MixedGenome & genome) const {
+	IndirectGenome::equals(genome);
 
-	std::vector<Gene*>::const_iterator it = mGenes.begin();
-	std::vector<Gene*>::const_iterator it2 = genome.getConstGenes().begin();
-	for (; it != mGenes.end(), it2 != genome.getConstGenes().end();
-			it++, it2++) {
-		if (!(*it)->equals(**it2)) {
-			return false;
-		}
+	/**Compare the total segment quantity limit*/
+	if(mTotalSegmentQtyLimit != genome.mTotalSegmentQtyLimit)
+	{
+		return false;
+	}
+
+	/**Compare the segments depth limit*/
+	if(mSegmentsDepthLimit != genome.mSegmentsDepthLimit){
+		return false;
 	}
 
 	return true;
@@ -109,10 +112,10 @@ void MixedGenome::repairGenes() {
 	integrateRandomGenes(1);
 }
 
-void MixedGenome::integrateRandomGenes(double percentage) {
+void MixedGenome::integrateRandomGenes(double integrationProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= integrationProbability) {
 			integrateGene(i);
 		}
 	}
@@ -126,7 +129,7 @@ void MixedGenome::integrateRandomGene() {
 void MixedGenome::integrateGene(int geneIndex) {
 	//TODO:: Only links morphology and not controller, might break with a controller
 	Randomness randomness;
-	switch (mGenes[geneIndex]->getGeneType()) {
+	switch (mGenes[geneIndex]->getType()) {
 	case Gene::MorphoGene: {
 		// randomly choose a follow up gene until you get one different from its own type
 		do {
@@ -158,10 +161,10 @@ void MixedGenome::integrateGene(int geneIndex) {
 	}
 }
 
-void MixedGenome::replaceRandomGenesWithRandomGenes(double percentage) {
+void MixedGenome::replaceRandomGenesWithRandomGenes(double replacementProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= replacementProbability) {
 			int replacementIndex = randomness.nextPosInt(0, mGenes.size() - 1);
 			replaceGeneWith(i, replacementIndex);
 		}
@@ -181,10 +184,10 @@ void MixedGenome::replaceGeneWith(int geneIndex, int replacementIndex) {
 	delete gene;
 }
 
-void MixedGenome::duplicateRandomGenes(double percentage) {
+void MixedGenome::duplicateRandomGenes(double duplicateProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= duplicateProbability) {
 			duplicateGene(i);
 		}
 	}
@@ -199,10 +202,10 @@ void MixedGenome::duplicateGene(int geneIndex) {
 	mGenes.push_back(mGenes[geneIndex]->clone());
 }
 
-void MixedGenome::splitRandomGenes(double percentage) {
+void MixedGenome::splitRandomGenes(double splitProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= splitProbability) {
 			splitGene(i, (SplitAxis) randomness.nextPosInt(1, 3));
 		}
 	}
@@ -216,7 +219,7 @@ void MixedGenome::splitRandomGene() {
 }
 
 void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
-	if (mGenes[geneIndex]->getGeneType() == Gene::MorphoGene) {
+	if (mGenes[geneIndex]->getType() == Gene::MorphoGene) {
 		Morphogene* originalGene = ((Morphogene*) mGenes[geneIndex]);
 		Morphogene* gene = originalGene->clone();
 		mGenes.push_back(gene);
@@ -268,10 +271,10 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 	}
 }
 
-void MixedGenome::growRandomStubs(double percentage) {
+void MixedGenome::growRandomStubs(double growProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= growProbability) {
 			//TODO: Replace with reasonable number
 			int branchiness = randomness.nextDouble(0, 3);
 			growStub(i, branchiness);
@@ -310,10 +313,10 @@ void MixedGenome::mutateGene(int geneIndex) {
 	mGenes[geneIndex]->mutate();
 }
 
-void MixedGenome::mutateRandomBranches(double percentage) {
+void MixedGenome::mutateRandomBranches(double mutationProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= mutationProbability) {
 			mutateRandomBranchOfGene(i);
 		}
 	}
@@ -327,21 +330,21 @@ void MixedGenome::mutateRandomBranch() {
 	//Better search for indices containing the right type and then choose from that array.
 	do {
 		geneIndex = randomness.nextPosInt(0, mGenes.size() - 1);
-	} while (mGenes[geneIndex]->getGeneType() != Gene::MorphoGene);
+	} while (mGenes[geneIndex]->getType() != Gene::MorphoGene);
 
 	mutateBranch(geneIndex,
 			((Morphogene*) mGenes[geneIndex])->getGeneBranches().size());
 }
 
 void MixedGenome::mutateRandomBranchOfGene(int geneIndex) {
-	if (mGenes[geneIndex]->getGeneType() == Gene::MorphoGene) {
+	if (mGenes[geneIndex]->getType() == Gene::MorphoGene) {
 		mutateBranch(geneIndex,
 				((Morphogene*) mGenes[geneIndex])->getGeneBranches().size());
 	}
 }
 
 void MixedGenome::mutateBranch(int geneIndex, int branchIndex) {
-	if (mGenes[geneIndex]->getGeneType() == Gene::MorphoGene) {
+	if (mGenes[geneIndex]->getType() == Gene::MorphoGene) {
 		((Morphogene*) mGenes[geneIndex])->getGeneBranches()[branchIndex]->mutate();
 	}
 }
@@ -393,8 +396,8 @@ void MixedGenome::graftRandomlyFrom(Genome* donator) {
 	//Better search for indices containing the right type and then choose from that array.
 	do {
 		geneIndex = randomness.nextPosInt(0, donator->getGenes().size() - 1);
-	} while (donator->getGenes()[geneIndex]->getGeneType()
-			!= mGenes[attachmentIndex]->getGeneType());
+	} while (donator->getGenes()[geneIndex]->getType()
+			!= mGenes[attachmentIndex]->getType());
 
 	//TODO: Add reasonable numbers
 	maxLinkDepth = randomness.nextNormalInt(10, 10);
@@ -405,7 +408,7 @@ void MixedGenome::graftRandomlyFrom(Genome* donator) {
 void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 		int geneQty) {
 	//TODO: Make working for controller as well.
-	if (mGenes[attachmentIndex]->getGeneType() == Gene::MorphoGene) {
+	if (mGenes[attachmentIndex]->getType() == Gene::MorphoGene) {
 
 		MorphogeneBranch* branch = new MorphogeneBranch();
 		branch->initialize();

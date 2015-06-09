@@ -28,7 +28,8 @@ Morphogene::Morphogene() :
 		NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 				0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
 				0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
-				0), mOrientationY(0), mOrientationZ(0) {
+				0), mOrientationY(0), mOrientationZ(0), mRestitution(1), mFriction(
+				0.8) {
 
 }
 
@@ -46,7 +47,7 @@ Morphogene::~Morphogene() {
 }
 
 void Morphogene::initialize(double branchiness) {
-	mGeneType = Gene::MorphoGene;
+	mType = Gene::MorphoGene;
 
 	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions
@@ -133,7 +134,7 @@ Morphogene* Morphogene::clone() {
 
 	morphoGene->setControllerGene(mControllerGene->clone());
 	morphoGene->setFollowUpGene(mFollowUpGene);
-	morphoGene->setGeneType(mGeneType);
+	morphoGene->setType(mType);
 	morphoGene->setJointAnchorX(mJointAnchorX);
 	morphoGene->setJointAnchorY(mJointAnchorY);
 	morphoGene->setJointAnchorZ(mJointAnchorZ);
@@ -174,7 +175,7 @@ void Morphogene::mutate() {
 	}
 
 	Randomness randomness;
-	//TODO: Add useful numbers
+	//TODO: Add reasonable numbers
 	initialize(randomness.nextDouble(10, 30));
 }
 
@@ -192,7 +193,7 @@ void Morphogene::grow(int branchiness) {
 }
 
 void Morphogene::print() {
-//I am a gene.
+	// print the gene to the standard output
 	std::cout << this;
 }
 

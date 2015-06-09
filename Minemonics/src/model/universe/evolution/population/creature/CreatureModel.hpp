@@ -83,7 +83,7 @@ public:
 		double totalVolume = 0;
 		for (it = mGenotype.getGenes().begin();
 				it != mGenotype.getGenes().end(); it++) {
-			if ((*it)->getGeneType() == Gene::MorphoGene) {
+			if ((*it)->getType() == Gene::MorphoGene) {
 				totalVolume += ((Morphogene*) *it)->getX()
 						* ((Morphogene*) *it)->getY()
 						* ((Morphogene*) *it)->getZ();
@@ -119,7 +119,7 @@ public:
 		ar
 				& BOOST_SERIALIZATION_NVP(
 						mName) & BOOST_SERIALIZATION_NVP(
-								mDeveloped) & BOOST_SERIALIZATION_NVP(mGenotype) & BOOST_SERIALIZATION_NVP(mJuries);
+								mDeveloped) & BOOST_SERIALIZATION_NVP(mGenotype) & BOOST_SERIALIZATION_NVP(mJuries) & BOOST_SERIALIZATION_NVP(mPosition.x) & BOOST_SERIALIZATION_NVP(mPosition.y) & BOOST_SERIALIZATION_NVP(mPosition.z);
 	}
 
 	bool equals(const CreatureModel & creature) const;

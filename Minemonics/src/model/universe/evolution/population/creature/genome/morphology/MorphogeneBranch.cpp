@@ -282,7 +282,7 @@ MorphogeneBranch* MorphogeneBranch::clone() {
 	morphoGeneBranch->setActive(mActive);
 	morphoGeneBranch->setBranchGeneType(mBranchGeneType);
 	morphoGeneBranch->setFlipped(mFlipped);
-	morphoGeneBranch->setGeneBranchType(mGeneBranchType);
+	morphoGeneBranch->setType(mType);
 	morphoGeneBranch->setJointAnchorX(mJointAnchorX);
 	morphoGeneBranch->setJointAnchorY(mJointAnchorY);
 	morphoGeneBranch->setJointAnchorZ(mJointAnchorZ);

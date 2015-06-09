@@ -36,9 +36,20 @@ public:
 	GeneBranch();
 	virtual ~GeneBranch();
 
+	/**
+	 * Initialize the genebranch with
+	 * @param geneBranchType its gene branch type.
+	 */
 	void initialize(GeneBranchType geneBranchType);
 
+	/**
+	 * Compare the gene branch to
+	 * @param geneBranch another gene branch
+	 * @return If the gene branch is equal to the other gene branch.
+	 */
 	bool equals(const GeneBranch& geneBranch) const;
+
+	//Serialization
 
 	/**
 	 * Give access to boost serialization
@@ -53,23 +64,12 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 			const GeneBranch &geneBranch) {
-		return os << "GeneBranch: Type" << geneBranch.mGeneBranchType;
-	}
+		return os
+		/**If the gene branch is active or not*/
+		<< "GeneBranch: Active:" << geneBranch.mActive
 
-	GeneBranchType getGeneBranchType() const {
-		return mGeneBranchType;
-	}
-
-	void setGeneBranchType(GeneBranchType geneBranchType) {
-		mGeneBranchType = geneBranchType;
-	}
-
-	bool isActive() const {
-		return mActive;
-	}
-
-	void setActive(bool active) {
-		mActive = active;
+		/**The type of gene branch*/
+		<< "/Type" << geneBranch.mType;
 	}
 
 	/**
@@ -80,8 +80,29 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
-				& BOOST_SERIALIZATION_NVP(
-						mActive) & BOOST_SERIALIZATION_NVP(mGeneBranchType);
+		/**If the gene branch is active or not*/
+		& BOOST_SERIALIZATION_NVP(mActive)
+
+		/**The type of gene branch*/
+		& BOOST_SERIALIZATION_NVP(mType);
+	}
+
+	//Accessor methods
+
+	GeneBranchType getType() const {
+		return mType;
+	}
+
+	void setType(GeneBranchType geneBranchType) {
+		mType = geneBranchType;
+	}
+
+	bool isActive() const {
+		return mActive;
+	}
+
+	void setActive(bool active) {
+		mActive = active;
 	}
 
 protected:
@@ -93,7 +114,8 @@ protected:
 	/**
 	 * The type of gene branch.
 	 */
-	GeneBranchType mGeneBranchType;
+	GeneBranchType mType;
 };
-
+BOOST_CLASS_VERSION(GeneBranch, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(GeneBranch)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENEBRANCH_HPP_ */

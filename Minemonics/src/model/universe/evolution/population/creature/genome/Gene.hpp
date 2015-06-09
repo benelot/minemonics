@@ -42,15 +42,39 @@ public:
 		NUM_GENES
 	};
 
+	/**
+	 * Initializes the gene with a gene type.
+	 * @param geneType
+	 *				A gene type.
+	 */
 	void initialize(GeneType geneType);
 
+	/**
+	 * Compare gene with another gene.
+	 * @param gene
+	 * 			Another gene.
+	 * @return if the gene is equal to the other gene.
+	 */
 	bool equals(const Gene& gene) const;
 
+	/**
+	 * Clone the gene.
+	 * @return The cloned gene.
+	 */
 	virtual Gene* clone() = 0;
 
+	/**
+	 * Mutate the gene.
+	 */
 	virtual void mutate() = 0;
 
+	/**
+	 * Grow some branches to the gene.
+	 * @param branchiness
+	 */
 	virtual void grow(int branchiness) = 0;
+
+	//Serialization
 
 	/**
 	 * Give access to boost serialization
@@ -64,17 +88,10 @@ public:
 	 * @return A string containing all information about the gene.
 	 */
 	friend std::ostream & operator<<(std::ostream &os, const Gene &gene) {
-		os << "Gene: type="<< gene.mGeneType;
+		os
+		/**The type of gene*/
+		<< "Gene: type="<< gene.mType;
 		return os;
-	}
-
-
-	GeneType getGeneType() const {
-		return mGeneType;
-	}
-
-	void setGeneType(GeneType geneType) {
-		mGeneType = geneType;
 	}
 
 	/**
@@ -84,7 +101,19 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mGeneType);
+		ar
+		/**The type of gene*/
+		& BOOST_SERIALIZATION_NVP(mType);
+	}
+
+	//Accessor methods
+
+	GeneType getType() const {
+		return mType;
+	}
+
+	void setType(GeneType geneType) {
+		mType = geneType;
 	}
 
 protected:
@@ -92,7 +121,8 @@ protected:
 	/**
 	 * The type of the gene.
 	 */
-	GeneType mGeneType;
+	GeneType mType;
 };
-
+BOOST_CLASS_VERSION(Gene, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Gene)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENE_HPP_ */

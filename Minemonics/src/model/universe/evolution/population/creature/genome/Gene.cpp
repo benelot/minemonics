@@ -15,18 +15,20 @@
 //## utils headers
 
 Gene::Gene() :
-		mGeneType(UnknownGene) {
+		mType(UnknownGene) {
 }
 
 Gene::~Gene() {
 }
 
 void Gene::initialize(GeneType geneType) {
-	mGeneType = geneType;
+	mType = geneType;
 }
 
 bool Gene::equals(const Gene& gene) const {
-	if (mGeneType != gene.mGeneType) {
+
+	/**Compare the type of gene*/
+	if (mType != gene.mType) {
 		return false;
 	}
 

@@ -41,10 +41,22 @@ public:
 	SineControllerGene();
 	virtual ~SineControllerGene();
 
+	/**
+	 * Initialize the sine controller gene.
+	 */
 	void initialize();
 
+	/**
+	 * Clone the sine controller gene.
+	 * @return The cloned sinecontroller.
+	 */
 	virtual SineControllerGene* clone();
 
+	/**
+	 * Compare the sine controller gene to another sine controller gene.
+	 * @param sineControllerGene Another sine controller gene.
+	 * @return If the sine controller gene is equal to the other controller gene.
+	 */
 	bool equals(const SineControllerGene& sineControllerGene) const;
 
 	/**
@@ -60,10 +72,25 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 			const SineControllerGene &sineControllerGene) {
-		return os << "SineControllerGene: XOffset = "
-				<< sineControllerGene.mXOffset << "/YOffset = "
-				<< sineControllerGene.mYOffset << "/Amplitude="
-				<< sineControllerGene.mAmplitude << "/Frequency="
+		return os
+				/**The type of controller*/
+				<< "SineControllerGene: Controllertype "
+				<< sineControllerGene.mControllerGeneType
+
+				/**The x offset of the sine wave of the controller*/
+				<< "/XOffset = "
+				<< sineControllerGene.mXOffset
+
+				/**The y offset of the sine wave of the controller*/
+				<< "/YOffset = "
+				<< sineControllerGene.mYOffset
+
+				/**The amplitude of the sine wave of the controller*/
+				<< "/Amplitude="
+				<< sineControllerGene.mAmplitude
+
+				/**The frequency of the sine wave of the controller*/
+				<< "/Frequency="
 				<< sineControllerGene.mFrequency;
 
 	}
@@ -76,9 +103,25 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
+		/** Serialize the base object */
 				& BOOST_SERIALIZATION_BASE_OBJECT_NVP(
-						ControllerGene) & BOOST_SERIALIZATION_NVP(mXOffset) & BOOST_SERIALIZATION_NVP(mYOffset) & BOOST_SERIALIZATION_NVP(mAmplitude) & BOOST_SERIALIZATION_NVP(mFrequency);
+						ControllerGene)
+
+		/**The x offset of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mXOffset)
+
+		/**The y offset of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mYOffset)
+
+		/**The amplitude of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mAmplitude)
+
+		/**The frequency of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mFrequency);
 	}
+
+
+	//Accessor methods
 
 	double getAmplitude() const {
 		return mAmplitude;
