@@ -147,6 +147,7 @@ void SimulationManager::createFrameListener(void) {
 
 	// initialize the simulation's debug drawer
 	mDebugDrawer.initialize(mSceneMgr, false);
+	mDebugDrawer.setDebugDrawingEnabled(false);
 	mDebugDrawer.setDrawWireframe(true);
 	mDebugDrawer.setDrawConstraints(true);
 	mDebugDrawer.setDrawConstraintLimits(true);

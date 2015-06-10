@@ -28,8 +28,8 @@ Morphogene::Morphogene() :
 		NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 				0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
 				0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
-				0), mOrientationY(0), mOrientationZ(0), mRestitution(1), mFriction(
-				0.8) {
+				0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(
+				1) {
 
 }
 
@@ -68,6 +68,10 @@ void Morphogene::initialize(double branchiness) {
 	mSegmentShrinkFactor = 1.0
 			+ randomness.nextDouble(MorphologyConfiguration::LIMB_SCALE_MIN,
 					MorphologyConfiguration::LIMB_SCALE_MAX);
+
+	//set restitution and friction
+	mRestitution = MorphologyConfiguration::LIMB_INITIAL_RESTITUTION;
+	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION;
 
 	/* Set joint anchor X, Y and Z, where the anchor lies in the center of mass
 	 and the X, Y and Z form a vector, pointing to the point on the surface where

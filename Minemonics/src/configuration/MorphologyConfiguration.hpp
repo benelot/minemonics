@@ -50,6 +50,16 @@ public:
 	//TODO: Optimize with bullet physics engine
 
 	/**
+	 * The limb initial restitution/elasticity.
+	 */
+	static const double LIMB_INITIAL_RESTITUTION = 0.2;
+
+	/**
+	 * The limb initial friction
+	 */
+	static const double LIMB_INITIAL_FRICTION = 0.8;
+
+	/**
 	 * This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.
 	 */
 	static const double LIMB_MAX_VELOCITY = 80000;

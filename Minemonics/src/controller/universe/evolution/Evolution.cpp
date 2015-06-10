@@ -39,7 +39,6 @@ void Evolution::addPopulation(Population* population) {
 }
 
 bool Evolution::proceedEvaluation() {
-	mEvolutionModel.proceedEvaluation();
 
 	if (mPopulations.size() != 0) {
 
@@ -53,7 +52,12 @@ bool Evolution::proceedEvaluation() {
 			population->addMember(
 					mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
 
+
 			evaluation->addPopulation(population);
+
+			if(!mEvolutionModel.proceedEvaluation()){
+				return false;
+			}
 
 			mEvaluationController->addEvaluation(evaluation);
 			return true;
@@ -69,12 +73,12 @@ bool Evolution::proceedEvaluation() {
 				population->initialize(mPlanet, 1);
 				population->addMember(
 						mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+				;
 
 				evaluation->addPopulation(population);
 
 				//break if there are no more creatures
-				if (!mEvolutionModel.setCurrentCreatureIndex(
-						mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+				if (!mEvolutionModel.proceedEvaluation()) {
 					break;
 				}
 			}
@@ -100,8 +104,7 @@ bool Evolution::proceedEvaluation() {
 				evaluation->addPopulation(population);
 
 				//break if there are no more creatures
-				if (!mEvolutionModel.setCurrentCreatureIndex(
-						mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+				if (!mEvolutionModel.proceedEvaluation()) {
 					break;
 				}
 			}
@@ -126,11 +129,11 @@ bool Evolution::proceedEvaluation() {
 					population->addMember(
 							mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
 
+
 					evaluation->addPopulation(population);
 
 					//break if there are no more creatures
-					if (!mEvolutionModel.setCurrentCreatureIndex(
-							mEvolutionModel.getCurrentCreatureIndex() + 1)) {
+					if (!mEvolutionModel.proceedEvaluation()) {
 						break;
 					}
 				}
@@ -155,6 +158,7 @@ bool Evolution::proceedEvaluation() {
 						j++) {
 					population->addMember(
 							mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+					mEvolutionModel.proceedEvaluation();
 
 					evaluation->addPopulation(population);
 

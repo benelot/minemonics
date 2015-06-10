@@ -12,6 +12,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EvaluationConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/PopulationModel.hpp>
@@ -30,7 +32,8 @@ public:
 	EvaluationModel();
 	virtual ~EvaluationModel();
 
-	void initialize(PlanetModel* planetModel, double evaluationTime);
+	void initialize(PlanetModel* planetModel, double evaluationTime =
+			EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
 
 	void addPopulationModel(PopulationModel* populationModel);
 

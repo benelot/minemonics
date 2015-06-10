@@ -369,6 +369,7 @@ set(MISCHDRS
 	./configuration/MorphologyConfiguration.hpp
 	./configuration/GeneticsConfiguration.hpp
 	./configuration/EnvironmentConfiguration.hpp
+	./configuration/EvaluationConfiguration.hpp
 	./configuration/EvolutionConfiguration.hpp
 	./configuration/PopulationConfiguration.hpp
 	./configuration/OgreSystemConfigStrings.hpp

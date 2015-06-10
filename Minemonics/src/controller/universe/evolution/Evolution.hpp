@@ -14,6 +14,8 @@ class EvaluationController;
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EvaluationConfiguration.hpp>
+
 //## controller headers
 #include <controller/universe/evolution/population/Population.hpp>
 
@@ -50,7 +52,7 @@ public:
 	void initialize(EvaluationController* evaluationController, Planet* planet,
 			EvolutionModel::EvaluationType type =
 					EvolutionModel::INDIVIDUAL_EVALUATION,
-			double evaluationTime = 10, int tournamentSize = 1);
+			double evaluationTime = EvaluationConfiguration::DEFAULT_EVALUATION_TIME, int tournamentSize = 1);
 
 	void addPopulation(Population* population);
 
