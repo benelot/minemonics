@@ -17,6 +17,7 @@
 #include <SDL_video.h>
 
 //## model headers
+//### Boost headers
 #include <boost/date_time/microsec_time_clock.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/date_time/time.hpp>
@@ -27,10 +28,13 @@
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/formatting_ostream.hpp>
 #include <boost/parameter/keyword.hpp>
+
+//## Bullet headers
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 
 //## view headers
+//### CeGUI headers
 #include <CEGUI/FontManager.h>
 #include <CEGUI/GUIContext.h>
 #include <CEGUI/Logger.h>
@@ -45,6 +49,8 @@
 #include <CEGUI/Vector.h>
 #include <CEGUI/widgets/FrameWindow.h>
 #include <CEGUI/WindowManager.h>
+
+//### Ogre headers
 #include <OgreCamera.h>
 #include <OgreColourValue.h>
 #include <OgreCommon.h>
@@ -102,30 +108,33 @@ SimulationManager::SimulationManager(void) :
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
+
+	// tear down the scene
 	destroyScene();
+
+	// destroy the ogre renderer system
 	CEGUI::OgreRenderer::destroySystem();
 }
 
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
 
-	// this next bit is for the sake of the input handler
-	Ogre::LogManager::getSingletonPtr()->logMessage(
-			"*** Initializing SDL2 ***");
-
-	// set up the input handlers
-
-	// since the input handler deals with pushing input to CEGUI, we need to give it a pointer
-	// to the CEGUI System instance to use
+	//request a state change saying that the GUI is shown
 	mStateHandler.requestStateChange(GUI);
 
 	//Set initial mouse clipping size
 	windowResized(mWindow);
 
-	//Register as a Window listener
+	//Register as a Window and Frame listener
 	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
-
 	mRoot->addFrameListener(this);
+}
+
+//-------------------------------------------------------------------------------------
+/**
+ * Creates the scene of the application.
+ */
+void SimulationManager::createScene(void) {
 
 	//################################################################
 	//TODO: Camera must be handled within view controller #############
@@ -153,18 +162,12 @@ void SimulationManager::createFrameListener(void) {
 	mDebugDrawer.setDrawConstraintLimits(true);
 	mDebugDrawer.setDrawContactPoints(true);
 	mDebugDrawer.setDrawNormals(true);
-}
-
-//-------------------------------------------------------------------------------------
-/**
- * Creates the scene of the application.
- */
-void SimulationManager::createScene(void) {
 
 	// Initialize the logger
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
+	//Set render target with the current application name
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);
 
@@ -185,7 +188,11 @@ void SimulationManager::createScene(void) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 
-	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.4, 0.4, 0.35));
+	//Set default ambient light
+	mSceneMgr->setAmbientLight(
+			Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
+					EnvironmentConfiguration::AMBIENT_G,
+					EnvironmentConfiguration::AMBIENT_B));
 
 	//either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
@@ -197,6 +204,7 @@ void SimulationManager::createScene(void) {
 //	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
 //			0.5, 150, 150);
 
+	//Set fog color and fading function
 	Ogre::ColourValue fadeColour(0, 0, 0);
 //	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
 	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 17000, 30000);
@@ -206,11 +214,11 @@ void SimulationManager::createScene(void) {
 //	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
 	// initialize the universe
-	mUniverse.initialize();
+	mUniverse.initialize(1);
 
 	// create a planet called earth
 	Planet* earth = new Planet();
-	earth->initialize(this, Environment::PLANE, &mDebugDrawer);
+	earth->initialize(this, Environment::PLANE, &mDebugDrawer, 100);
 
 	//add earth to universe
 	mUniverse.addPlanet(earth);
@@ -222,14 +230,14 @@ void SimulationManager::createScene(void) {
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
-	// position
+	// set position of the creatures
 	Randomness randomness;
 	std::vector<Creature*>::iterator cit =
 			earthPopulation->getCreatures().begin();
 	for (; cit != earthPopulation->getCreatures().end(); cit++) {
 		(*cit)->setPosition(
 				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
-						randomness.nextDouble(300, 10000),
+						randomness.nextDouble(300, 1000),
 						randomness.nextDouble(-1000, 10000)));
 		(*cit)->performEmbryogenesis();
 	}
@@ -242,10 +250,28 @@ void SimulationManager::createScene(void) {
 //		ragdoll->addToWorld();
 //	}
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creating test environment for basic setups...done.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";
 }
 
-//-------------------------------------------------------------------------------------
+/**
+ * Called after all render targets have had their rendering commands
+ * issued, but before render windows have been asked to flip their
+ * buffers over.
+ * @param evt
+ * 		Information about the frame rendering.
+ * @remarks
+ * 		The usefulness of this event comes from the fact that rendering
+ * commands are queued for the GPU to process. These can take a little
+ * while to finish, and so while that is happening the CPU can be doing
+ * useful things. Once the request to 'flip buffers' happens, the thread
+ * requesting it will block until the GPU is ready, which can waste CPU
+ * cycles. Therefore, it is often a good idea to use this callback to
+ * perform per-frame processing. Of course because the frame's rendering
+ * commands have already been issued, any changes you make will only
+ * take effect from the next frame, but in most cases that's not noticeable.
+ * @return
+ * 		True to continue rendering, false to drop out of the rendering loop.
+ */
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	// update main frame timer
@@ -262,7 +288,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 	}
 
-	// Inject input into handlers;
+	// Inject input into handlers
 	mInputHandler.injectInput();
 
 	// reposition the camera

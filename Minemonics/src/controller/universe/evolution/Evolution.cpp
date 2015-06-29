@@ -26,8 +26,8 @@ Evolution::~Evolution() {
 }
 
 void Evolution::initialize(EvaluationController* evaluationController,
-		Planet* planet, EvolutionModel::EvaluationType type,
-		double evaluationTime, int tournamentSize) {
+		Planet* planet, double evaluationTime,
+		EvolutionModel::EvaluationType type, int tournamentSize) {
 	mEvaluationController = evaluationController;
 	mPlanet = planet;
 	mEvolutionModel.initialize(type, evaluationTime, tournamentSize);
@@ -45,17 +45,17 @@ bool Evolution::proceedEvaluation() {
 		switch (mEvolutionModel.getType()) {
 		case EvolutionModel::INDIVIDUAL_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+			evaluation->initialize(mPlanet,
+					mEvolutionModel.getEvaluationTime());
 
 			Population* population = new Population();
 			population->initialize(mPlanet, 1);
 			population->addMember(
 					mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
 
-
 			evaluation->addPopulation(population);
 
-			if(!mEvolutionModel.proceedEvaluation()){
+			if (!mEvolutionModel.proceedEvaluation()) {
 				return false;
 			}
 
@@ -65,7 +65,8 @@ bool Evolution::proceedEvaluation() {
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+			evaluation->initialize(mPlanet,
+					mEvolutionModel.getEvaluationTime());
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel.getTournamentSize(); i++) {
@@ -89,7 +90,8 @@ bool Evolution::proceedEvaluation() {
 		}
 		case EvolutionModel::POPULATION_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+			evaluation->initialize(mPlanet,
+					mEvolutionModel.getEvaluationTime());
 
 			Population* population;
 			for (int i = 0;
@@ -115,7 +117,8 @@ bool Evolution::proceedEvaluation() {
 		}
 		case EvolutionModel::N_POPULATIONS_TOURNAMENT_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+			evaluation->initialize(mPlanet,
+					mEvolutionModel.getEvaluationTime());
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel.getTournamentSize(); i++) {
@@ -128,7 +131,6 @@ bool Evolution::proceedEvaluation() {
 						j++) {
 					population->addMember(
 							mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
-
 
 					evaluation->addPopulation(population);
 
@@ -144,7 +146,8 @@ bool Evolution::proceedEvaluation() {
 		}
 		case EvolutionModel::POPULATIONS_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,mEvolutionModel.getEvaluationTime());
+			evaluation->initialize(mPlanet,
+					mEvolutionModel.getEvaluationTime());
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel.getPopulationModels().size();

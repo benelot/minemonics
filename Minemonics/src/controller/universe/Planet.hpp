@@ -44,7 +44,7 @@ public:
 	 * @param debugDrawer The debug drawer of this simulation.
 	 */
 	void initialize(SimulationManager* simulationManager,
-			Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer);
+			Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer,int evaluationTime);
 
 	/**
 	 * Add a population to the planet.

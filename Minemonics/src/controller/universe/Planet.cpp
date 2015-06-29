@@ -34,11 +34,13 @@ Planet::~Planet() {
 }
 
 void Planet::initialize(SimulationManager* simulationManager,
-		Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer) {
+		Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer,
+		int evaluationTime) {
 	//create earth evolution
 	mEvolution = new Evolution();
 	mEvolution->initialize(
-			&simulationManager->getUniverse().getEvaluationController(), this);
+			&simulationManager->getUniverse().getEvaluationController(), this,
+			evaluationTime);
 
 	// set up environment
 	switch (type) {

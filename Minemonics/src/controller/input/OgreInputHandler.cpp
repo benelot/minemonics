@@ -117,9 +117,8 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::O;
 		break;
 	case ApplicationKeycode::APPK_p:
-//	TODO: Add currently observed planet to simulation manager
-//		mSimulationMgr->getPhysicsController().setPhysicsPaused(
-//				!mSimulationMgr->getPhysicsController().isPhysicsPaused());
+		mSimulationMgr->getUniverse().getEvaluationController().setPaused(
+				!mSimulationMgr->getUniverse().getEvaluationController().isPaused());
 		break;
 	case ApplicationKeycode::APPK_a:
 		moveCameraLeft();
@@ -223,7 +222,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Return;
 		break;
 		case ApplicationKeycode::APPK_SPACE:
-		 mSimulationMgr->getUniverse().proceedEvaluation();
+		mSimulationMgr->getUniverse().proceedEvaluation();
 		break;
 		case ApplicationKeycode::APPK_BACKSPACE:
 		// return CEGUI::Key::Backspace;

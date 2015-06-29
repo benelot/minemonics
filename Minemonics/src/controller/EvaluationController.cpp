@@ -14,7 +14,8 @@
 //## view headers
 //## utils headers
 
-EvaluationController::EvaluationController() {
+EvaluationController::EvaluationController() :
+		mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -23,32 +24,43 @@ EvaluationController::~EvaluationController() {
 	// TODO Auto-generated destructor stub
 }
 
+void EvaluationController::initialize(int parallelEvaluationsQty) {
+	mParallelEvaluationsQty = parallelEvaluationsQty;
+}
+
 void EvaluationController::addEvaluation(Evaluation* evaluation) {
 	mEvaluations.push_back(evaluation);
 }
 
 void EvaluationController::scheduleEvaluations() {
-	std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-	for (; eit != mEvaluations.end(); eit++) {
+	std::vector<Evaluation*>::iterator eit;
+	for (eit = mEvaluations.begin(); eit != mEvaluations.end(); eit++) {
 
 		// erase torn down evaluations
-		if((*eit)->isTornDown())
-		{
+		if ((*eit)->isTornDown()) {
+			mCurrentlyRunningEvaluationsQty--;
 			eit = mEvaluations.erase(eit);
 		}
+	}
+
+	for (eit = mEvaluations.begin(); eit != mEvaluations.end(); eit++) {
 
 		//if the evaluation is newly scheduled, then set it up for evaluation
-		if (!(*eit)->isEvaluating()) {
+		if (!(*eit)->isEvaluating()
+				&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
+			mCurrentlyRunningEvaluationsQty++;
 			(*eit)->setup();
 		}
 	}
 }
 
 void EvaluationController::update(double timeSinceLastFrame) {
-	std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-	for (; eit != mEvaluations.end(); eit++) {
-		if ((*eit)->isEvaluating()) {
-			(*eit)->update(timeSinceLastFrame);
+	if (!mPaused) {
+		std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
+		for (; eit != mEvaluations.end(); eit++) {
+			if ((*eit)->isEvaluating()) {
+				(*eit)->update(timeSinceLastFrame);
+			}
 		}
 	}
 }

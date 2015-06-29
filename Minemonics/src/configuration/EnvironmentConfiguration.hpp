@@ -25,7 +25,9 @@
  */
 class EnvironmentConfiguration {
 public:
-
+ static const float AMBIENT_R = 0.4;
+ static const float AMBIENT_G = 0.4;
+ static const float AMBIENT_B = 0.35;
 };
 
 #endif /* ENVIRONMENTCONFIGURATION_H_ */

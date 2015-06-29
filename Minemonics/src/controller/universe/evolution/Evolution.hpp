@@ -50,9 +50,11 @@ public:
 	 * Initialize the evolution.
 	 */
 	void initialize(EvaluationController* evaluationController, Planet* planet,
+			double evaluationTime =
+					EvaluationConfiguration::DEFAULT_EVALUATION_TIME,
 			EvolutionModel::EvaluationType type =
-					EvolutionModel::INDIVIDUAL_EVALUATION,
-			double evaluationTime = EvaluationConfiguration::DEFAULT_EVALUATION_TIME, int tournamentSize = 1);
+					EvolutionModel::INDIVIDUAL_EVALUATION, int tournamentSize =
+					1);
 
 	void addPopulation(Population* population);
 

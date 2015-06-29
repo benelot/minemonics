@@ -35,7 +35,8 @@ Universe::~Universe() {
 	}
 }
 
-void Universe::initialize() {
+void Universe::initialize(int parallelEvaluationsQty) {
+	mEvaluationController.initialize(parallelEvaluationsQty);
 }
 
 void Universe::addPlanet(Planet* planet) {
