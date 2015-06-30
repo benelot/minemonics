@@ -23,6 +23,7 @@
  */
 class EvaluationConfiguration {
 public:
+	static const unsigned DEFAULT_PARALLEL_EVALUATION = 1;
 	static const double DEFAULT_EVALUATION_TIME = 100;
 };
 

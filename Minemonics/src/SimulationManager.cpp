@@ -79,6 +79,7 @@
 #include <configuration/ApplicationConfiguration.hpp>
 #include <configuration/EnvironmentConfiguration.hpp>
 #include <configuration/OgreSystemConfigStrings.hpp>
+#include <configuration/PopulationConfiguration.hpp>
 
 //## controller headers
 #include <controller/universe/environments/Hills.hpp>
@@ -136,6 +137,17 @@ void SimulationManager::createFrameListener(void) {
  */
 void SimulationManager::createScene(void) {
 
+	// Initialize the logger
+	Logger::init("minemonics.log");
+	Logger::initTermSink();
+
+	// initialize random number generator
+	boost::posix_time::time_duration duration(mNow.time_of_day());
+
+	// Set render target with the current application name
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
+			ApplicationConfiguration::APPLICATION_TITLE);
+
 	//################################################################
 	//TODO: Camera must be handled within view controller #############
 	// Create the scene node
@@ -146,13 +158,22 @@ void SimulationManager::createScene(void) {
 	mCamera->setPosition(-400, 500, 400);
 	camNode->attachObject(mCamera);
 
+	// camera settings
+	mCamera->setNearClipDistance(0.1);
+	mCamera->setFarClipDistance(12000);
+
+	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
+			Ogre::RSC_INFINITE_FAR_PLANE)) {
+		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
+	}
+
 	// Populate the camera container
 	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
 
-	//################################################################
+	// initialize GUI and views
+	mViewController.initialize(this, renderTarget, &mStateHandler);
 
-	// initialize random number generator
-	boost::posix_time::time_duration duration(mNow.time_of_day());
+	//################################################################
 
 	// initialize the simulation's debug drawer
 	mDebugDrawer.initialize(mSceneMgr, false);
@@ -163,30 +184,10 @@ void SimulationManager::createScene(void) {
 	mDebugDrawer.setDrawContactPoints(true);
 	mDebugDrawer.setDrawNormals(true);
 
-	// Initialize the logger
-	Logger::init("minemonics.log");
-	Logger::initTermSink();
-
-	// Set render target with the current application name
-	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
-			ApplicationConfiguration::APPLICATION_TITLE);
-
-	// initialize GUI and views
-	mViewController.initialize(this, renderTarget, &mStateHandler);
-
 	// ###################
 	// We create the evaluation scene defined by the planet to be evaluated
 	// ###################
-
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...";
-
-	mCamera->setNearClipDistance(0.1);
-	mCamera->setFarClipDistance(12000);
-
-	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
-			Ogre::RSC_INFINITE_FAR_PLANE)) {
-		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
-	}
 
 	// Set default ambient light
 	mSceneMgr->setAmbientLight(
@@ -206,7 +207,7 @@ void SimulationManager::createScene(void) {
 
 	//Set fog color and fading function
 	Ogre::ColourValue fadeColour(0, 0, 0);
-//	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
+	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
 	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 17000, 30000);
 //
 //	mSceneMgr->setFog(Ogre::FOG_EXP, fadeColour, 0.002);
@@ -214,18 +215,20 @@ void SimulationManager::createScene(void) {
 //	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
 	// initialize the universe
-	mUniverse.initialize(1);
+	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
 	Planet* earth = new Planet();
-	earth->initialize(this, Environment::PLANE, &mDebugDrawer, 100);
+	earth->initialize(this, Environment::PLANE, &mDebugDrawer,
+			EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, this, 100);
+	earthPopulation->initialize(earth, this,
+			PopulationConfiguration::DEFAULT_POPULATION_SIZE);
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);

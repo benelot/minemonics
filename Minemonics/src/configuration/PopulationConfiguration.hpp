@@ -24,6 +24,8 @@
 class PopulationConfiguration {
 public:
 
+	static const unsigned DEFAULT_POPULATION_SIZE = 100;
+
 	/**
 	 * Initial mean number of genes in a genome.
 	 */
