@@ -120,6 +120,12 @@ bool JointBt::equals(const JointBt& jointBt) const {
 	return true;
 }
 
+void JointBt::reset(Ogre::Vector3 position) {
+}
+
+void JointBt::reposition(Ogre::Vector3 position) {
+}
+
 void JointBt::setRotationalLimitMotorEnabled(
 		JointPhysics::RotationalDegreeOfFreedom index, bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();

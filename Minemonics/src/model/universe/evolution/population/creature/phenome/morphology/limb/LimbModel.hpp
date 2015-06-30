@@ -69,6 +69,16 @@ public:
 			double friction, Ogre::ColourValue color);
 
 	/**
+	 * Reset the limb to the place when the creature was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the limb without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
+
+	/**
 	 * Compare the limb model to another limb model.
 	 * @param limbModel Another limb model.
 	 * @return If the limb model is equal to the other limb model.

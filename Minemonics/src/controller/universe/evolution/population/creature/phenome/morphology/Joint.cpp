@@ -124,3 +124,11 @@ void Joint::buildFrom(/*SimulationManager* simulationManager, Limb* limbA,
 	// Update the state of the joint.
 	update();
 }
+
+void Joint::reset(Ogre::Vector3 position) {
+	mJointModel->reset(position);
+}
+
+void Joint::reposition(Ogre::Vector3 position) {
+	mJointModel->reposition(position);
+}

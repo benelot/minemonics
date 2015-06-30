@@ -27,7 +27,7 @@
 #include <utils/Randomness.hpp>
 
 Population::Population() :
-		mSimulationManager(NULL), mPopulationModel(NULL) {
+		mSimulationManager(NULL), mPopulationModel(NULL), mPlanet(NULL) {
 }
 
 Population::~Population() {
@@ -41,10 +41,11 @@ Population::~Population() {
  * @param simulationManager The simulation manager handle
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void Population::initialize(Planet* planet,SimulationManager* simulationManager, int creatureQty) {
+void Population::initialize(Planet* planet,
+		SimulationManager* simulationManager, int creatureQty) {
 	mSimulationManager = simulationManager;
 	mPopulationModel = new PopulationModel();
-	mPopulationModel->initialize(&planet->getPlanetModel(),creatureQty);
+	mPopulationModel->initialize(&planet->getPlanetModel(), creatureQty);
 	Randomness randomness;
 	double bushiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
@@ -56,9 +57,9 @@ void Population::initialize(Planet* planet,SimulationManager* simulationManager,
 	mPlanet = planet;
 }
 
-void Population::initialize(Planet* planet,int creatureQty){
+void Population::initialize(Planet* planet, int creatureQty) {
 	mPopulationModel = new PopulationModel();
-	mPopulationModel->initialize(&planet->getPlanetModel(),creatureQty);
+	mPopulationModel->initialize(&planet->getPlanetModel(), creatureQty);
 	mPlanet = planet;
 }
 
@@ -70,16 +71,16 @@ void Population::addNewMember(double bushiness, Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
 		//TODO:Include planet into initializer
-		creature->initialize(mSimulationManager,this, rootPosition, bushiness);
+		creature->initialize(mSimulationManager, this, rootPosition, bushiness);
 		addMember(creature);
 	}
 
 }
 
-void Population::addMember(Creature* creature){
+void Population::addMember(Creature* creature) {
 	mCreatures.push_back(creature);
 	//hand model down to the population model
-	mPopulationModel->addMember(creature->mCreatureModel);
+	mPopulationModel->addMember(creature->getCreatureModel());
 }
 
 void Population::update() {

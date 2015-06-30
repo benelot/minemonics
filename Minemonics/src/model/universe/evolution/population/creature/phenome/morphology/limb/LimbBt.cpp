@@ -127,10 +127,39 @@ btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
 	//return getLocalPreciseIntersection(origin, direction);
 }
 
+void LimbBt::reset(Ogre::Vector3 position) {
+	btTransform initialTransform;
+	initialTransform.setIdentity();
+
+	btVector3 initialRelativePosition;
+	initialRelativePosition.setValue(getInitialRelativeXPosition(),getInitialRelativeYPosition(),getInitialRelativeZPosition());
+
+	btQuaternion initialOrientation;
+	initialOrientation.setValue(getInitialXOrientation(),
+			getInitialYOrientation(), getInitialZOrientation(),
+			getInitialWOrientation());
+
+	initialTransform.setOrigin(OgreBulletUtils::convert(position) + initialRelativePosition);
+	initialTransform.setRotation(initialOrientation);
+
+	mMotionState->setWorldTransform(initialTransform);
+}
+
+void LimbBt::reposition(Ogre::Vector3 position) {
+	//TODO: Implement repositioning limbs.
+//	btTransform tf;
+//	btQuaternion qu;
+//	qu.setValue(getInitialRelativeXOrientation(),
+//			getInitialRelativeYOrientation(), getInitialRelativeZOrientation(),
+//			getInitialRelativeWOrientation());
+//	tf.setOrigin(OgreBulletUtils::convert(position) + initialRelativePosition);
+//	tf.setRotation(qu);
+//	mMotionState->setWorldTransform(tf);
+}
+
 btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin,
 		btVector3 direction) {
 	return getPreciseIntersection(origin, direction) - origin;
-
 }
 
 void LimbBt::addToWorld() {

@@ -61,6 +61,21 @@ public:
 	 */
 	void buildFrom(/*SimulationManager* simulationManager,Limb* limbA, Limb* limbB,*/JointModel* jointModel);
 
+	/**
+	 * Reset the creature to the way it was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the creature without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
+
+	/**
+	 * Initialize the rotational limit motors of the joint.
+	 * @param maxForces The maximum forces along the axes.
+	 * @param maxSpeeds The maximum speeds along the axes.
+	 */
 	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces, Ogre::Vector3 maxSpeeds);
 
 	/**

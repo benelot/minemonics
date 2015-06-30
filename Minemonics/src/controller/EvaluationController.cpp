@@ -15,7 +15,8 @@
 //## utils headers
 
 EvaluationController::EvaluationController() :
-		mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0) {
+		mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0), mPaused(
+				false) {
 	// TODO Auto-generated constructor stub
 
 }

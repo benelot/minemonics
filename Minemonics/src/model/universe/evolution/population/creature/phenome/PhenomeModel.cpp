@@ -520,6 +520,24 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 	}
 }
 
+void PhenomeModel::reset(Ogre::Vector3 position) {
+	/**The vector of limb models.*/
+	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+	for (; it != mLimbModels.end(); it++) {
+		(*it)->reset(position);
+
+	}
+}
+
+void PhenomeModel::reposition(Ogre::Vector3 position) {
+	/**The vector of limb models.*/
+	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+	for (; it != mLimbModels.end(); it++) {
+		(*it)->reposition(position);
+
+	}
+}
+
 bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	if (mInWorld != phenomeModel.mInWorld) {
 		return false;
@@ -549,7 +567,8 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 
 	/**The vector of controllers.*/
 	std::vector<Controller*>::const_iterator it5 = mControllers.begin();
-	std::vector<Controller*>::const_iterator it6 = phenomeModel.mControllers.begin();
+	std::vector<Controller*>::const_iterator it6 =
+			phenomeModel.mControllers.begin();
 	for (; it5 != mControllers.end(), it6 != phenomeModel.mControllers.end();
 			it5++, it6++) {
 		if (!(*it5)->equals(**(it6))) {

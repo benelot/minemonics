@@ -34,11 +34,14 @@ class Creature;
 //## utils headers
 
 /**
- * @brief		The phenome controller synchronizes the graphical representation of the creature with the physical model in the physics engine.
- * @details		The phenome controller synchronizes the graphical representation of the creature with the physical model in the physics engine.
- * It also acts as a facade for methods of the physical and graphical models. Each creature's
- * body is composed of a number of cuboids called "body segments". The
- * segments are arranged in a tree structure with each segment connected to its parent by a
+ * @brief
+ * 		The phenome controller synchronizes the graphical representation of the creature with
+ * the physical model in the physics engine.
+ * @details
+ * 		The phenome controller synchronizes the graphical representation of the creature with
+ * the physical model in the physics engine. It also acts as a facade for methods of the physical
+ *  and graphical models. Each creature's body is composed of a number of cuboids called "body segments".
+ * The segments are arranged in a tree structure with each segment connected to its parent by a
  * type of physical constraint known as a universal joint. Segments are divided into groups
  * called types, with the properties of each type encoded in the genotype. Each
  * cuboid is a rigid solid with uniform density. The density value is a variable.
@@ -59,7 +62,7 @@ class Creature;
  * bilaterally-symmetric creatures or their limbs.
  *
  * The final creature body produced during embryogenesis is guaranteed to be free of
- * segment intersections, except those between segments directly connect by a join. It
+ * segment intersections, except those between segments directly connect by a joint. It
  * should be noted that in such cases the physics engine will not generate repulsion forces to
  * resolve the intersection. Segments connected by a common joint are permitted by the
  * physics engine to pass unimpeded through one another.
@@ -86,6 +89,16 @@ public:
 	 * @param rootPosition The position of origin where the creature starts to be generated in the physical space.
 	 */
 	void performEmbryogenesis(Creature* creature,MixedGenome* genome, Ogre::Vector3 rootPosition);
+
+	/**
+	 * Reset the creature to the way it was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the creature without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
 
 	/**
 	 * Update the graphical representation of the creature with its physical representation.

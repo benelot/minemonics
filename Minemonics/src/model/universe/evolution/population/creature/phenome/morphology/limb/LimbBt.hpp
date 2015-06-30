@@ -57,6 +57,16 @@ public:
 			btScalar restitution, btScalar friction);
 
 	/**
+	 * Reset the joint to the place when the creature was born.
+	 */
+	virtual void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the joint without resetting it.
+	 */
+	virtual void reposition(Ogre::Vector3 position);
+
+	/**
 	 * Add the limb to the physical world.
 	 */
 	void addToWorld();

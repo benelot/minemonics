@@ -62,6 +62,16 @@ public:
 			LimbModel* limbModel);
 
 	/**
+	 * Reset the creature to the way it was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the creature without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
+
+	/**
 	 * Update the graphical representation of the limb with the physical representation.
 	 */
 	void update();

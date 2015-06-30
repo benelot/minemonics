@@ -62,6 +62,19 @@ public:
 			PhenomeModel* phenomeModel, Ogre::Vector3 position,
 			double branchiness);
 
+	/**
+	 * Reset the creature to the way it was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the creature without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
+
+	/**
+	 * Evaluate the creature model.
+	 */
 	void evaluate();
 
 	/**
@@ -124,7 +137,8 @@ public:
 
 		/**The juries of the creature model*/
 		std::vector<Jury*>::const_iterator it;
-		for (it = creature.mJuries.begin(); it != creature.mJuries.end(); it++) {
+		for (it = creature.mJuries.begin(); it != creature.mJuries.end();
+				it++) {
 			os << (**it);
 			os << "||";
 		}

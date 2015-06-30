@@ -9,13 +9,15 @@
 //# system headers
 //## controller headers
 //## model headers
+//### boost headers
+#include <boost/lexical_cast.hpp>
+
+//### bullet headers
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
-
-#include <boost/lexical_cast.hpp>
 
 //## view headers
 //# custom headers
@@ -37,9 +39,9 @@
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 Limb::Limb() :
 		mLimbGraphics(NULL), mLimbModel(NULL), mCreature(NULL) {
@@ -70,6 +72,27 @@ void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 	buildFrom(simulationManager, creature, mLimbModel);
 }
 
+void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
+		LimbModel* limbModel) {
+	mCreature = creature;
+
+	// Define the new component as a limb
+	Component::initialize(ComponentModel::LimbComponent);
+
+	// initialize the graphics part of the limb
+	mLimbGraphics = new LimbO3D();
+	((LimbO3D*) mLimbGraphics)->initialize(simulationManager,
+			limbModel->getPrimitiveType(), limbModel->getDimensions(),
+			limbModel->getColor());
+
+	if (mLimbModel == NULL) {
+		mLimbModel = limbModel;
+	}
+
+	// Update the state of the limb.
+	update();
+}
+
 /**
  * Update the state of the limb.
  */
@@ -97,6 +120,14 @@ void Limb::update() {
 	}
 
 	mLimbGraphics->update();
+}
+
+void Limb::reset(Ogre::Vector3 position) {
+	mLimbModel->reset(position);
+}
+
+void Limb::reposition(Ogre::Vector3 position) {
+	mLimbModel->reposition(position);
 }
 
 std::string Limb::getInfo() {
@@ -137,25 +168,4 @@ void Limb::removeFromWorld() {
 Ogre::Vector3 Limb::getIntersection(Ogre::Vector3 origin,
 		Ogre::Vector3 direction) {
 	return mLimbGraphics->getIntersection(origin, direction);
-}
-
-void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
-		LimbModel* limbModel) {
-	mCreature = creature;
-
-	// Define the new component as a limb
-	Component::initialize(ComponentModel::LimbComponent);
-
-	// initialize the graphics part of the limb
-	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager,
-			limbModel->getPrimitiveType(), limbModel->getDimensions(),
-			limbModel->getColor());
-
-	if (mLimbModel == NULL) {
-		mLimbModel = limbModel;
-	}
-
-	// Update the state of the limb.
-	update();
 }

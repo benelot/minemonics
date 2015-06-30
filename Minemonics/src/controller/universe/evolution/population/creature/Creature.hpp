@@ -34,37 +34,68 @@ public:
 	Creature();
 	virtual ~Creature();
 
-	void initialize(SimulationManager* simulationManager,Population* population,
-			Ogre::Vector3 position, double branchiness);
+	/**
+	 * Initialize the creature.
+	 * @param simulationManager The simulation manager
+	 * @param population The population the creature belongs to.
+	 * @param position The position the creature should be created in.
+	 * @param branchiness The branchiness factor of the creature.
+	 */
+	void initialize(SimulationManager* simulationManager,
+			Population* population, Ogre::Vector3 position, double branchiness);
 
+	/**
+	 * Perform embryogenesis on the creature to build his phenotype from the genotype.
+	 */
 	void performEmbryogenesis();
 
+	/**
+	 * Reset the creature to the way it was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the creature without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
+
+	/**
+	 * Update the creature as it moves.
+	 */
 	void update();
 
+	/**
+	 * Add the creature to the world.
+	 */
 	void addToWorld();
 
+	/**
+	 * Remove the creature from the world.
+	 */
 	void removeFromWorld();
 
-
-	//Facade
-	void setPosition(Ogre::Vector3 position){
+	// Facade methods
+	void setPosition(Ogre::Vector3 position) {
 		mCreatureModel->setPosition(position);
 	}
 
-	PlanetModel* getPlanet(){
+	PlanetModel* getPlanet() {
 		return mCreatureModel->getPopulationModel()->getPlanetModel();
 	}
 
-	void setPlanet(PlanetModel* planetModel)
-	{
+	void setPlanet(PlanetModel* planetModel) {
 		mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
 	}
 
-	bool isDeveloped()
-	{
+	bool isDeveloped() {
 		return mCreatureModel->isDeveloped();
 	}
 
+	CreatureModel* getCreatureModel() {
+		return mCreatureModel;
+	}
+
+private:
 	/**
 	 * The model of the creature
 	 */

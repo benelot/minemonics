@@ -119,13 +119,13 @@ SimulationManager::~SimulationManager(void) {
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
 
-	//request a state change saying that the GUI is shown
+	// request a state change saying that the GUI is shown
 	mStateHandler.requestStateChange(GUI);
 
-	//Set initial mouse clipping size
+	// Set initial mouse clipping size
 	windowResized(mWindow);
 
-	//Register as a Window and Frame listener
+	// Register as a Window and Frame listener
 	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 	mRoot->addFrameListener(this);
 }
@@ -167,11 +167,11 @@ void SimulationManager::createScene(void) {
 	Logger::init("minemonics.log");
 	Logger::initTermSink();
 
-	//Set render target with the current application name
+	// Set render target with the current application name
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);
 
-	//initialize GUI and views
+	// initialize GUI and views
 	mViewController.initialize(this, renderTarget, &mStateHandler);
 
 	// ###################
@@ -188,13 +188,13 @@ void SimulationManager::createScene(void) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 
-	//Set default ambient light
+	// Set default ambient light
 	mSceneMgr->setAmbientLight(
 			Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
 					EnvironmentConfiguration::AMBIENT_G,
 					EnvironmentConfiguration::AMBIENT_B));
 
-	//either create a skydome or a skyplane
+	// either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
 
 //  Create skyplane
@@ -220,10 +220,10 @@ void SimulationManager::createScene(void) {
 	Planet* earth = new Planet();
 	earth->initialize(this, Environment::PLANE, &mDebugDrawer, 100);
 
-	//add earth to universe
+	// add earth to universe
 	mUniverse.addPlanet(earth);
 
-	//create a population
+	// create a population
 	Population* earthPopulation = new Population();
 	earthPopulation->initialize(earth, this, 100);
 
@@ -278,7 +278,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
 
-	//shutdown the application if the application has initiated shutdown
+	// shutdown the application if the application has initiated shutdown
 	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN) {
 
 		//shutdown the video writer if it is still running
@@ -306,7 +306,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// update the information in the panels on screen
 	updatePanels(evt.timeSinceLastFrame);
 
-	//update view
+	// update view
 	mViewController.update(evt.timeSinceLastFrame);
 
 	return true;

@@ -64,13 +64,15 @@ void Phenome::initialize(SimulationManager* simulationManager,Creature* creature
  */
 void Phenome::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		Ogre::Vector3 rootPosition) {
-	//perform the emryogenesis in the model
+	//perform the embryogenesis in the model
 	mPhenomeModel.performEmbryogenesis(creature, genome, rootPosition);
 
+	// iterate over all the component models
 	std::vector<ComponentModel*>::const_iterator cmit =
 			mPhenomeModel.getComponentModels().begin();
 
 	for (; cmit != mPhenomeModel.getComponentModels().end(); cmit++) {
+
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
 			Limb* limb = new Limb();
@@ -149,5 +151,37 @@ void Phenome::removeFromWorld() {
 			(*lit)->removeFromWorld();
 		}
 		setInWorld(false);
+	}
+}
+
+void Phenome::reset(Ogre::Vector3 position) {
+	mPhenomeModel.reset(position);
+
+	// reset all constraints
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->reset(position);
+	}
+
+	// reset all limbs
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->reset(position);
+	}
+}
+
+void Phenome::reposition(Ogre::Vector3 position) {
+	mPhenomeModel.reposition(position);
+
+	// reset all constraints
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->reposition(position);
+	}
+
+	// reset all limbs
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->reposition(position);
 	}
 }

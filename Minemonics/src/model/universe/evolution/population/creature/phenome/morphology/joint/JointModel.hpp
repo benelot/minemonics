@@ -29,6 +29,7 @@ class btTransform;
 
 //## view headers
 //## utils headers
+
 /**
  * @brief		The joint model holds all the state information of the joint.
  * @details		Details
@@ -42,6 +43,16 @@ public:
 
 	void initialize(btDynamicsWorld* world, btRigidBody* limbA,
 			btRigidBody* limbB, btTransform localA, btTransform localB);
+
+	/**
+	 * Reset the joint to the place when the creature was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the joint without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
 
 	/**
 	 * Compare the joint model to another joint model.

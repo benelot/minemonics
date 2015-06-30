@@ -59,12 +59,21 @@ void JointModel::setAngularDamping(double springPitchDampingCoefficient,
 }
 
 bool JointModel::equals(const JointModel& jointModel) const {
+	//TODO: Implement joint model equals
 //	if(mJointPhysics->equals(*jointModel.mJointPhysics))
 //	{
 //		return false;
 //	}
 
 	return true;
+}
+
+void JointModel::reset(Ogre::Vector3 position) {
+	mJointPhysics->reset(position);
+}
+
+void JointModel::reposition(Ogre::Vector3 position) {
+	mJointPhysics->reposition(position);
 }
 
 void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,

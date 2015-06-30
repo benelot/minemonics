@@ -43,6 +43,14 @@ CreatureModel::~CreatureModel() {
 	}
 }
 
+void CreatureModel::reset(Ogre::Vector3 position) {
+	mPosition = position;
+}
+
+void CreatureModel::reposition(Ogre::Vector3 position) {
+	mPosition = position;
+}
+
 bool CreatureModel::equals(const CreatureModel & creature) const {
 	if (mName != creature.mName) {
 		return false;

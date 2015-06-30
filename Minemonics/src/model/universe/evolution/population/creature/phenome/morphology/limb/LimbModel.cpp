@@ -17,9 +17,8 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //## view headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
-
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbModel::LimbModel() :
 		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN) {
@@ -49,6 +48,14 @@ void LimbModel::initialize(btDynamicsWorld* world, void* limb,
 	mColor = color;
 }
 
+void LimbModel::reset(Ogre::Vector3 position) {
+	mLimbPhysics->reset(position);
+}
+
+void LimbModel::reposition(Ogre::Vector3 position) {
+	mLimbPhysics->reposition(position);
+}
+
 bool LimbModel::equals(const LimbModel& limbModel) const {
 	if (mPrimitiveType != limbModel.mPrimitiveType) {
 		return false;
@@ -62,8 +69,7 @@ bool LimbModel::equals(const LimbModel& limbModel) const {
 		return false;
 	}
 
-	if(!mLimbPhysics->equals(*limbModel.mLimbPhysics))
-	{
+	if (!mLimbPhysics->equals(*limbModel.mLimbPhysics)) {
 		return false;
 	}
 

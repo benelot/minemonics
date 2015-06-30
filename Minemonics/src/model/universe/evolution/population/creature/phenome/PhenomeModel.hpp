@@ -55,6 +55,16 @@ public:
 			Ogre::Vector3 rootPosition);
 
 	/**
+	 * Reset the creature to the way it was born.
+	 */
+	void reset(Ogre::Vector3 position);
+
+	/**
+	 * Reposition the creature without resetting it.
+	 */
+	void reposition(Ogre::Vector3 position);
+
+	/**
 	 * Update the phenome model.
 	 * @param timeSinceLastFrame
 	 */

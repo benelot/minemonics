@@ -56,6 +56,16 @@ public:
 	virtual ~JointPhysics();
 
 	/**
+	 * Reset the joint to the place when the creature was born.
+	 */
+	virtual void reset(Ogre::Vector3 position) = 0;
+
+	/**
+	 * Reposition the joint without resetting it.
+	 */
+	virtual void reposition(Ogre::Vector3 position) = 0;
+
+	/**
 	 * Update the joint physics model
 	 */
 	virtual void update() = 0;

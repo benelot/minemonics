@@ -12,8 +12,8 @@ class SimulationManager;
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
@@ -36,13 +36,16 @@ Creature::~Creature() {
 
 void Creature::initialize(SimulationManager* simulationManager,
 		Population* population, Ogre::Vector3 position, double branchiness) {
+	// set up the creature model
 	mCreatureModel = new CreatureModel();
 	mCreatureModel->initialize(population->getPopulationModel(), NULL, position,
 			branchiness);
 
+	// set up the phenotype
 	mPhenotype = new Phenome();
 	mPhenotype->initialize(simulationManager, this);
 
+	// hand down the phenome model to the creature model
 	mCreatureModel->setPhenotypeModel(&mPhenotype->getPhenomeModel());
 
 }
@@ -52,7 +55,18 @@ void Creature::performEmbryogenesis() {
 			mCreatureModel->getPosition());
 }
 
+void Creature::reset(Ogre::Vector3 position) {
+	mCreatureModel->reset(position);
+	mPhenotype->reset(position);
+}
+
+void Creature::reposition(Ogre::Vector3 position) {
+	mCreatureModel->reposition(position);
+	mPhenotype->reposition(position);
+}
+
 void Creature::update() {
+	// Update the phenotype of the creature if it is in the world.
 	if (mPhenotype->isInWorld()) {
 		mPhenotype->update();
 	}

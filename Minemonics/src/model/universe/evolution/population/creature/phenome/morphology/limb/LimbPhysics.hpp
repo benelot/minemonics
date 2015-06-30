@@ -18,6 +18,7 @@ class btVector3;
 //## model headers
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -38,6 +39,16 @@ class LimbPhysics {
 public:
 	LimbPhysics();
 	virtual ~LimbPhysics();
+
+	/**
+	 * Reset the limb to the place when the creature was born.
+	 */
+	virtual void reset(Ogre::Vector3 position) = 0;
+
+	/**
+	 * Reposition the limb without resetting it.
+	 */
+	virtual void reposition(Ogre::Vector3 position) = 0;
 
 	/**
 	 * Add the limb to the physical world.
@@ -129,16 +140,57 @@ public:
 	 */
 	virtual btQuaternion getOrientation() = 0;
 
+	double getInitialRelativeXPosition() const {
+		return mInitialRelativeXPosition;
+	}
+
+	double getInitialRelativeYPosition() const {
+		return mInitialRelativeYPosition;
+	}
+
+	double getInitialRelativeZPosition() const {
+		return mInitialRelativeZPosition;
+	}
+
+	double getInitialWOrientation() const {
+		return mInitialWOrientation;
+	}
+
+	double getInitialXOrientation() const {
+		return mInitialXOrientation;
+	}
+
+	double getInitialYOrientation() const {
+		return mInitialYOrientation;
+	}
+
+	double getInitialZOrientation() const {
+		return mInitialZOrientation;
+	}
+
 protected:
 	void setInWorld(bool inWorld) {
 		mInWorld = inWorld;
 	}
 
-private:
 	/**
 	 * Whether the limb is in the world or not.
 	 */
 	bool mInWorld;
+
+private:
+
+	/**
+	 * Initial position at birth relative to the root node
+	 */
+	double mInitialRelativeXPosition, mInitialRelativeYPosition,
+			mInitialRelativeZPosition;
+
+	/**
+	 * Initial orientation at birth
+	 */
+	double mInitialXOrientation, mInitialYOrientation, mInitialZOrientation,
+			mInitialWOrientation;
 
 	/**
 	 * Restitution is the amount of force that is reflected in a collision. It is similar to elasticity.
