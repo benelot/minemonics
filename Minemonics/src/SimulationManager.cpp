@@ -156,7 +156,7 @@ void SimulationManager::createScene(void) {
 					Ogre::Vector3(0, 500, 400));
 
 	mCamera->setPosition(0, 500, 400);
-	camNode->lookAt(Ogre::Vector3(0,300,-4000),Ogre::Node::TS_WORLD);
+	camNode->lookAt(Ogre::Vector3(0, 300, -4000), Ogre::Node::TS_WORLD);
 	camNode->attachObject(mCamera);
 
 	// camera settings
@@ -221,19 +221,24 @@ void SimulationManager::createScene(void) {
 
 	// create a planet called earth
 	Planet* earth = new Planet();
-	earth->initialize(this, Environment::PLANE, &mDebugDrawer,
-			10);
+	earth->initialize(this, Environment::PLANE, &mDebugDrawer, 10);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, this,
-			2);
+	earthPopulation->initialize(earth, this, 2);
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
+
+	// create a population
+	Population* earth2Population = new Population();
+	earth2Population->initialize(earth, this, 2);
+
+	// add earth population to earth
+	earth->addPopulation(earth2Population);
 
 	// set position of the creatures
 	Randomness randomness;
@@ -245,10 +250,48 @@ void SimulationManager::createScene(void) {
 //						randomness.nextDouble(300, 1000),
 //						randomness.nextDouble(-1000, 10000)));
 
-		(*cit)->setPosition(
-				Ogre::Vector3(0,300,-4000));
+		(*cit)->setPosition(Ogre::Vector3(0, 300, -4000));
 		(*cit)->performEmbryogenesis();
 	}
+
+	// set position of the creatures
+	cit = earth2Population->getCreatures().begin();
+	for (; cit != earth2Population->getCreatures().end(); cit++) {
+//		(*cit)->setPosition(
+//				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
+//						randomness.nextDouble(300, 1000),
+//						randomness.nextDouble(-1000, 10000)));
+
+		(*cit)->setPosition(Ogre::Vector3(200, 300, -4000));
+		(*cit)->performEmbryogenesis();
+	}
+
+	//TODO::Make it work with multiple planets
+//	// create a planet called mars
+//	Planet* mars = new Planet();
+//	mars->initialize(this, Environment::PLANE, &mDebugDrawer, 10);
+//
+//	// add mars to universe
+//	mUniverse.addPlanet(mars);
+//
+//	// create a population
+//	Population* marsPopulation = new Population();
+//	marsPopulation->initialize(mars, this, 3);
+//
+//	// add earth population to earth
+//	mars->addPopulation(marsPopulation);
+//
+//	// set position of the creatures
+//	cit = marsPopulation->getCreatures().begin();
+//	for (; cit != marsPopulation->getCreatures().end(); cit++) {
+////		(*cit)->setPosition(
+////				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
+////						randomness.nextDouble(300, 1000),
+////						randomness.nextDouble(-1000, 10000)));
+//
+//		(*cit)->setPosition(Ogre::Vector3(-200, 300, -4000));
+//		(*cit)->performEmbryogenesis();
+//	}
 //	earthPopulation->addToWorld();
 
 //	for (int i = 0; i < 50; i++) {

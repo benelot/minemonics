@@ -50,7 +50,7 @@ void Universe::proceedEvaluation() {
 		// if the evaluation of the certain planet goes into the next generation, we go to the next planet.
 		if (!mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->proceedEvaluation()) {
 			mUniverseModel.setCurrentEvaluationPlanetIndex(
-					(mUniverseModel.getCurrentEvaluationPlanetIndex()
+					(mUniverseModel.getCurrentEvaluationPlanetIndex() + 1
 							< mPlanets.size()) ?
 							mUniverseModel.getCurrentEvaluationPlanetIndex()
 									+ 1 :

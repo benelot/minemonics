@@ -46,23 +46,25 @@ bool Evolution::proceedEvaluation() {
 
 		switch (mEvolutionModel.getType()) {
 		case EvolutionModel::INDIVIDUAL_EVALUATION: {
-			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,
-					mEvolutionModel.getEvaluationTime());
 
-			Population* population = new Population();
-			population->initialize(mPlanet, 1);
-			population->addMember(
-					mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+			if (mEvolutionModel.getCurrentCreatureIndex()
+					< mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures().size()) {
 
-			evaluation->addPopulation(population);
+				Evaluation* evaluation = new Evaluation();
+				evaluation->initialize(mPlanet,
+						mEvolutionModel.getEvaluationTime());
 
-			if (!mEvolutionModel.proceedEvaluation()) {
-				return false;
+				Population* population = new Population();
+				population->initialize(mPlanet, 1);
+				population->addMember(
+						mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
+
+				evaluation->addPopulation(population);
+
+				mEvaluationController->addEvaluation(evaluation);
 			}
 
-			mEvaluationController->addEvaluation(evaluation);
-			return true;
+			return mEvolutionModel.proceedEvaluation();
 			break;
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {

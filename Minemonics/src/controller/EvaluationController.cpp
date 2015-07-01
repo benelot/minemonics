@@ -27,6 +27,7 @@ EvaluationController::~EvaluationController() {
 
 void EvaluationController::initialize(int parallelEvaluationsQty) {
 	mParallelEvaluationsQty = parallelEvaluationsQty;
+	mEvaluations.clear();
 }
 
 void EvaluationController::addEvaluation(Evaluation* evaluation) {
@@ -35,12 +36,15 @@ void EvaluationController::addEvaluation(Evaluation* evaluation) {
 
 void EvaluationController::scheduleEvaluations() {
 	std::vector<Evaluation*>::iterator eit;
-	for (eit = mEvaluations.begin(); eit != mEvaluations.end(); eit++) {
+	for (eit = mEvaluations.begin(); eit != mEvaluations.end();) {
 
 		// erase torn down evaluations
 		if ((*eit)->isTornDown()) {
 			mCurrentlyRunningEvaluationsQty--;
 			eit = mEvaluations.erase(eit);
+		}
+		else{
+			eit++;
 		}
 	}
 

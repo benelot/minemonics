@@ -39,16 +39,19 @@ void EvolutionModel::initialize(EvaluationType type, double evaluationTime,
 bool EvolutionModel::proceedEvaluation() {
 	if (mCurrentPopulationIndex < mPopulationModels.size()) {
 
-		if (mCurrentCreatureIndex < mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
+		if (mCurrentCreatureIndex
+				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex++;
+		} else if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
+			mCurrentPopulationIndex++;
+			mCurrentCreatureIndex = 0;
 		}
 		else{
-			mCurrentPopulationIndex++;
+			mCurrentPopulationIndex = 0;
 			mCurrentCreatureIndex = 0;
 			return false;
 		}
-	}
-	else{
+	} else {
 		return false;
 	}
 	return true;
