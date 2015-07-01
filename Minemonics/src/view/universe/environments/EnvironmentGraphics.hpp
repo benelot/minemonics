@@ -1,5 +1,5 @@
-#ifndef VIEW_OGRE3D_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
-#define VIEW_OGRE3D_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
+#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
+#define VIEW_UNIVSERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
 
 /**
  * @brief		The environment graphics is the base class for all environment views.
@@ -15,8 +15,6 @@ public:
 	virtual bool isInWorld() = 0;
 	virtual void addToWorld() = 0;
 	virtual void removeFromWorld() = 0;
-
-	//virtual void initialize() = 0;
 };
 
-#endif /* VIEW_OGRE3D_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_ */
+#endif /* VIEW_UNIVSERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_ */

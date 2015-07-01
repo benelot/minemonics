@@ -45,6 +45,7 @@ bool EvolutionModel::proceedEvaluation() {
 		else{
 			mCurrentPopulationIndex++;
 			mCurrentCreatureIndex = 0;
+			return false;
 		}
 	}
 	else{

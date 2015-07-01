@@ -1,12 +1,5 @@
-/*
- * CEGUIBuilder.h
- *
- *  Created on: Feb 25, 2015
- *      Author: leviathan
- */
-
-#ifndef CEGUIBUILDER_H_
-#define CEGUIBUILDER_H_
+#ifndef VIEW_VISUALIZATION_CEGUI_CEGUIBUILDER_H_
+#define VIEW_VISUALIZATION_CEGUI_CEGUIBUILDER_H_
 
 //# corresponding header
 //# forward declarations
@@ -32,9 +25,9 @@ class Window;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The CEGUI Builder creates CEGUI panels for the GUI interface.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-25
  * @author		Benjamin Ellenberger
  */
 class CEGUIBuilder {
@@ -49,4 +42,4 @@ private:
 	SimulationManager* mSimulationMgr;
 };
 
-#endif /* CEGUIBUILDER_H_ */
+#endif /* VIEW_VISUALIZATION_CEGUI_CEGUIBUILDER_H_ */

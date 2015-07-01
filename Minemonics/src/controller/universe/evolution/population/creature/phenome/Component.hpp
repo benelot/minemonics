@@ -28,8 +28,17 @@ public:
 	Component();
 	virtual ~Component();
 
+	/**
+	 * Initialize the component.
+	 * @param componentType The type of component.
+	 */
 	void initialize(ComponentModel::ComponentType componentType);
+
 private:
+
+	/**
+	 * The model representation of the component.
+	 */
 	ComponentModel mComponentModel;
 };
 

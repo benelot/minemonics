@@ -23,7 +23,7 @@
 
 /**
  * @brief		The evaluation model holds the information about the evaluation.
- * @details		 Details
+ * @details		Details
  * @date		2015-06-01
  * @author		Benjamin Ellenberger
  */
@@ -74,6 +74,9 @@ public:
 	void setTornDown(bool tornDown) {
 		mTornDown = tornDown;
 	}
+
+	//Serialization
+	//TODO: Add serialization to the evaluation model.
 
 private:
 

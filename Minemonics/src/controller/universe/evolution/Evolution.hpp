@@ -75,8 +75,15 @@ public:
 
 private:
 
+	//PARENT
+	/**
+	 * The planet the evolution takes place on.
+	 */
 	Planet* mPlanet;
 
+	/**
+	 * The evaluation controller of the universe.
+	 */
 	EvaluationController* mEvaluationController;
 
 	/**
@@ -88,8 +95,6 @@ private:
 	 * The model of the evolution
 	 */
 	EvolutionModel mEvolutionModel;
-
-	TimerManager<Evolution> mEvaluationManager;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_ */

@@ -1,18 +1,14 @@
-/*
- * HillsBt.h
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_ENVIRONMENT_HILLSBT_H_
 #define MODEL_ENVIRONMENT_HILLSBT_H_
 
 //# corresponding header
-#include <btBulletDynamicsCommon.h>
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
-#include <Terrain/OgreTerrain.h>
+//# forward declarations
+namespace Ogre {
+class Terrain;
+} /* namespace Ogre */
 
+//# system headers
 //# custom headers
 //## base headers
 //## configuration headers
@@ -22,9 +18,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The bullet physics model implementation of the hills environment.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-17
  * @author		Benjamin Ellenberger
  */
 class HillsBt : public EnvironmentBt {

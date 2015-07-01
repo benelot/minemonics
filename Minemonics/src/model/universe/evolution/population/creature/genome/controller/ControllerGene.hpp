@@ -35,13 +35,23 @@ public:
 
 	virtual ControllerGene* clone() = 0;
 
-	bool equals (const ControllerGene& controllerGene) const;
+	bool equals(const ControllerGene& controllerGene) const;
 
 	enum ControllerGeneType {
-		SineControllerGene,
-		GenericControllerGene
+		SineControllerGene, GenericControllerGene
 	};
 
+	//Accessor methods
+	ControllerGeneType getControllerGeneType() const {
+		return mControllerGeneType;
+	}
+
+	void setControllerGeneType(ControllerGeneType controllerGeneType) {
+		mControllerGeneType = controllerGeneType;
+	}
+
+
+	//Serialization
 	/**
 	 * Give access to boost serialization
 	 */
@@ -53,17 +63,10 @@ public:
 	 * @param controllerGene The controller gene we want to serialize.
 	 * @return A string containing all information about the controller gene.
 	 */
-	friend std::ostream & operator<<(std::ostream &os, const ControllerGene &controllerGene) {
+	friend std::ostream & operator<<(std::ostream &os,
+			const ControllerGene &controllerGene) {
 		return os << "ControllerGene:" << controllerGene.mControllerGeneType;
 
-	}
-
-	ControllerGeneType getControllerGeneType() const {
-		return mControllerGeneType;
-	}
-
-	void setControllerGeneType(ControllerGeneType controllerGeneType) {
-		mControllerGeneType = controllerGeneType;
 	}
 
 	/**

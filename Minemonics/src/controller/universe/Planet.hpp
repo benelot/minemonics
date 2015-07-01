@@ -106,7 +106,7 @@ public:
 private:
 
 	/**
-	 * The model of this planet.
+	 * The model representation of this planet.
 	 */
 	PlanetModel mPlanetModel;
 

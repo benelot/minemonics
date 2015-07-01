@@ -38,10 +38,12 @@ public:
 	PhenotypeGenerator();
 	virtual ~PhenotypeGenerator();
 
-	void initialize(std::map<int,int>& repetitionList, Ogre::Vector3 position,
+	void initialize(std::map<int, int>& repetitionList, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, ComponentModel* parentComponentModel,
-			GeneBranch* geneBranch, double currentShrinkageFactor,bool flipped=false,bool mirrored=false);
+			GeneBranch* geneBranch, double currentShrinkageFactor,
+			bool flipped = false, bool mirrored = false);
 
+	//Accessor methods
 	Gene* getGene() {
 		return mGene;
 	}
@@ -58,7 +60,7 @@ public:
 		mRoot2LeafPath = root2LeafPath;
 	}
 
-	std::map<int,int>& getRepetitionList() {
+	std::map<int, int>& getRepetitionList() {
 		return mRepetitionList;
 	}
 
@@ -112,17 +114,22 @@ public:
 
 private:
 	Gene* mGene;
+
 	int mRoot2LeafPath;
-	std::map<int,int> mRepetitionList;
+
+	std::map<int, int> mRepetitionList;
+
 	ComponentModel* mParentComponentModel;
+
 	GeneBranch* mGeneBranch;
 
 	Ogre::Vector3 mPosition;
+
 	Ogre::Quaternion mOrientation;
 
 	double mCurrentShrinkageFactor;
 
-	bool mFlipped,mMirrored;
+	bool mFlipped, mMirrored;
 
 	/**
 	 * If a gene asks for a reference component, it gets the first out of the vector to connect to.

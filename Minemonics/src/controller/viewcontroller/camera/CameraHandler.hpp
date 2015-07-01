@@ -53,9 +53,10 @@ private:
 	SimulationManager* mSimulationMgr;
 
 	/**
-	 * The rotate constant
+	 * The rotation constant
 	 */
 	Ogre::Real mRotate;
+
 	/**
 	 * The movement constant
 	 */

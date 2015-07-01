@@ -32,19 +32,41 @@ public:
 	Evaluation();
 	virtual ~Evaluation();
 
+	/**
+	 * Initialize the evaluation.
+	 * @param planet The planet on which the evaluation takes place.
+	 * @param evaluationTime The evaluation time in this evaluation
+	 */
 	void initialize(Planet* planet,double evaluationTime);
 
+	/**
+	 * Add a population to the evaluation
+	 * @param population The population to be added to the evaluation.
+	 */
 	void addPopulation(Population* population);
 
+	/**
+	 * Setup the evaluation.
+	 */
 	void setup();
 
+	/**
+	 * Process the evaluated individuals.
+	 */
 	void process();
 
+	/**
+	 * Tear the evaluation down.
+	 */
 	void teardown();
 
+	/**
+	 * Update the evaluation.
+	 * @param timeSinceLastFrame The time since the last graphics frame.
+	 */
 	void update(double timeSinceLastFrame);
 
-	//Accessor methods
+	// Facade accessor methods
 	bool isEvaluating() const {
 		return mEvaluationModel.isEvaluating();
 	}

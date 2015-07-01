@@ -128,6 +128,8 @@ public:
 	 */
 	void enableAngularMotor(bool pitchEnable, bool yawEnable, bool rollEnable);
 
+	// Accessor methods
+
 	/**
 	 * Get the motors of this joint.
 	 * @return The motors of this joint.
@@ -135,9 +137,6 @@ public:
 	std::vector<Motor*> getMotors(){
 		return mJointModel->getJointPhysics()->getMotors();
 	}
-
-
-	// Accessor methods
 
 	JointGraphics*& getJointGraphics() {
 		return mJointGraphics;

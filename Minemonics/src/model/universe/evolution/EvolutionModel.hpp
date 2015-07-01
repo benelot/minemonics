@@ -24,44 +24,84 @@
 class EvolutionModel {
 public:
 
-	// Evolution phase
+	/**
+	 *  Evolution phase
+	 */
 	enum EvolutionPhase {
-		VARIATION_PHASE, EVALUATION_PHASE, PROCESSING_PHASE, CULLING_PHASE
+		VARIATION_PHASE, //!< Phase in which the genomes are varied
+		EVALUATION_PHASE, //!< Phase in which the phenotypes are evaluated
+		PROCESSING_PHASE, //!< Phase in which the phenotype's scores are processed
+		CULLING_PHASE, //!< Phase in which the bad phenotypes are culled
+		NUM_EVOLUTION_PHASES //!< NUM_EVOLUTION_PHASES
 	};
 
 	/**
 	 * The type evaluation
 	 */
 	enum EvaluationType {
-		INDIVIDUAL_EVALUATION /**< Every individual gets separately evaluated.*/,
-		N_INDIVIDUALS_TOURNAMENT_EVALUATION /**< Individual get evaluated in groups of n (Individuals Tournament).*/,
-		POPULATION_EVALUATION /**< Each population gets evaluated as a whole.*/,
-//		N_POPULATION_EVALUATION /**< A group of n individuals from each population get evaluated.*/,
-		N_POPULATIONS_TOURNAMENT_EVALUATION /**< N populations are evaluated together (Populations Tournament).*/,
-		POPULATIONS_EVALUATION/**< All populations are evaluated together.*/
+		INDIVIDUAL_EVALUATION, //!< Every individual gets separately evaluated.
+		N_INDIVIDUALS_TOURNAMENT_EVALUATION, //!< Individual get evaluated in groups of n (Individuals Tournament).
+		POPULATION_EVALUATION, //!< Each population gets evaluated as a whole.
+		N_POPULATION_EVALUATION, //!< A group of n individuals from each population get evaluated.
+		N_POPULATIONS_TOURNAMENT_EVALUATION, //!< N populations are evaluated together (Populations Tournament).
+		POPULATIONS_EVALUATION, //!< All populations are evaluated together.
+		NUM_EVALUATION_TYPES
 	};
 
 	EvolutionModel();
 	~EvolutionModel();
 
+	/**
+	 * Initialize the evolution model.
+	 * @param type The evaluation type.
+	 * @param evaluationTime The evaluation time in this evolution model
+	 * @param tournamentSize The size of the tournament for simultaneous evaluation
+	 */
 	void initialize(EvaluationType type = INDIVIDUAL_EVALUATION,
 			double evaluationTime = 10, int tournamentSize = 1);
 
+	/**
+	 * Update the evolution model.
+	 */
 	void update();
 
+	/**
+	 * Add a new population to the evolution model.
+	 * @param populationModel The population to be added.
+	 */
 	void addNewPopulation(PopulationModel* populationModel);
 
+	/**
+	 * Proceed the evaluation.
+	 * @return If the evaluation could be proceeded.
+	 */
 	bool proceedEvaluation();
 
+	/**
+	 * Evaluate the evolution.
+	 * @return If the evolution could be evaluated.
+	 */
 	bool evaluate();
 
+	/**
+	 * Process the evaluated individuals.
+	 * @return If the individuals could be processed.
+	 */
 	bool process();
 
+	/**
+	 * Cull the bad individuals.
+	 * @return If the individuals could be culled.
+	 */
 	bool cull();
 
+	/**
+	 * Variate the individuals.
+	 * @return If the individuals could be variated.
+	 */
 	bool variate();
 
-	//accessor methods
+	//Accessor methods
 	const Reaper& getReaper() const {
 		return mReaper;
 	}
@@ -82,11 +122,12 @@ public:
 		return mEvaluationTime;
 	}
 
-	int getCurrentCreatureIndex() const {
+	std::vector<CreatureModel*>::size_type getCurrentCreatureIndex() const {
 		return mCurrentCreatureIndex;
 	}
 
-	bool setCurrentCreatureIndex(int currentCreatureIndex) {
+	bool setCurrentCreatureIndex(
+			std::vector<CreatureModel*>::size_type currentCreatureIndex) {
 		if (currentCreatureIndex
 				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex = currentCreatureIndex;
@@ -96,15 +137,16 @@ public:
 		}
 	}
 
-	int getCurrentPopulationIndex() const {
+	std::vector<PopulationModel*>::size_type getCurrentPopulationIndex() const {
 		return mCurrentPopulationIndex;
 	}
 
-	void setCurrentPopulationIndex(int currentPopulationIndex) {
+	void setCurrentPopulationIndex(
+			std::vector<PopulationModel*>::size_type currentPopulationIndex) {
 		mCurrentPopulationIndex = currentPopulationIndex;
 	}
 
-	int getTournamentSize() const {
+	unsigned long getTournamentSize() const {
 		return mTournamentSize;
 	}
 
@@ -117,12 +159,12 @@ private:
 	/**
 	 * The currently evaluated population.
 	 */
-	int mCurrentPopulationIndex;
+	std::vector<PopulationModel*>::size_type mCurrentPopulationIndex;
 
 	/**
 	 * The currently evaluated creature.
 	 */
-	int mCurrentCreatureIndex;
+	std::vector<CreatureModel*>::size_type mCurrentCreatureIndex;
 
 	/**
 	 * The reaper of this evolution model.
@@ -147,7 +189,7 @@ private:
 	/**
 	 * Tournament size
 	 */
-	int mTournamentSize;
+	unsigned long mTournamentSize;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_EVOLUTIONMODEL_HPP_ */

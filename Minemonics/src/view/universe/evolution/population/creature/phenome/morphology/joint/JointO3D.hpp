@@ -1,10 +1,3 @@
-/*
- * JointO3D.h
- *
- *  Created on: Apr 14, 2015
- *      Author: leviathan
- */
-
 #ifndef VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTO3D_HPP_
 #define VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTO3D_HPP_
 
@@ -31,9 +24,9 @@ class SimulationManager;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The graphical representation of the joint in Ogre3D.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-04-14
  * @author		Benjamin Ellenberger
  */
 class JointO3D: public JointGraphics {
@@ -41,8 +34,7 @@ public:
 	JointO3D();
 	virtual ~JointO3D();
 
-	void initialize(/*SimulationManager* simulationManager , Limb* limbA,
-			Limb* limbB , btTransform localA, btTransform localB*/);
+	void initialize();
 
 	void update();
 
@@ -52,9 +44,13 @@ public:
 
 private:
 	SimulationManager* mSimulationManager;
+
 	Limb* mLimbA;
+
 	Limb* mLimbB;
+
 	btTransform mLocalA;
+
 	btTransform mLocalB;
 };
 

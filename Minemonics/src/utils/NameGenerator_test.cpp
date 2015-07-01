@@ -26,7 +26,7 @@ protected:
 		nameGenerator = new NameGenerator();
 
 		for (int i = 0; i < 100; i++) {
-			names.push_back(nameGenerator->generateName());
+			names.push_back(nameGenerator->generateFirstName());
 		}
 
 	}

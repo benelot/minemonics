@@ -41,6 +41,11 @@ public:
 	PopulationModel();
 	virtual ~PopulationModel();
 
+	/**
+	 * Initialize the population model
+	 * @param planetModel The planet the population lives on.
+	 * @param creatureQty The number of creatures living in the population.
+	 */
 	void initialize(PlanetModel* planetModel,int creatureQty);
 
 	/**
@@ -48,6 +53,10 @@ public:
 	 */
 	void addMember(CreatureModel* creatureModel);
 
+	/**
+	 * Proceed with the evaluation.
+	 * @return If the evaluation could be proceeded.
+	 */
 	bool proceedEvaluation();
 
 	/**

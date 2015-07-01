@@ -1,13 +1,30 @@
-//# corresponding headers
+//# corresponding header
+//# forward declarations
+//# system headers
+#include <cstring>
+
+//## controller headers
+//## model headers
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include <BulletCollision/CollisionShapes/btConcaveShape.h>
 #include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
-#include <model/universe/environments/bullet/HillsBt.hpp>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <LinearMath/btDefaultMotionState.h>
+#include <LinearMath/btQuaternion.h>
+#include <LinearMath/btVector3.h>
 
 //## view headers
+#include <OgreQuaternion.h>
+#include <OgreTerrain.h>
+#include <OgreVector3.h>
+
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/bullet/HillsBt.hpp>
+
 //## view headers
 //## utils headers
 

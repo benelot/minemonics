@@ -1,5 +1,5 @@
-#ifndef REAPER_H_
-#define REAPER_H_
+#ifndef MODEL_UNIVERSE_EVOLUTION_REAPER_H_
+#define MODEL_UNIVERSE_EVOLUTION_REAPER_H_
 
 //# corresponding header
 //# forward declarations
@@ -73,4 +73,4 @@ private:
 	double mSowFreshPercentage;
 };
 
-#endif /* REAPER_H_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_REAPER_H_ */

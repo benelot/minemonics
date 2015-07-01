@@ -1,12 +1,5 @@
-/*
- * OpenSeaO3D.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
-#ifndef OPENSEAO3D_H_
-#define OPENSEAO3D_H_
+#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_OPENSEAO3D_H_
+#define VIEW_UNIVSERSE_ENVIRONMENTS_OPENSEAO3D_H_
 
 //# corresponding header
 //# forward declarations
@@ -23,9 +16,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The open sea graphical representation in Ogre 3D.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
 class OpenSeaO3D {

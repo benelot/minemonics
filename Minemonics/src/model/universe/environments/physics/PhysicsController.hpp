@@ -1,10 +1,3 @@
-/*
- * PhysicsController.h
- *
- *  Created on: Mar 3, 2015
- *      Author: leviathan
- */
-
 #ifndef PHYSICSCONTROLLER_H_
 #define PHYSICSCONTROLLER_H_
 
@@ -29,9 +22,9 @@
 //## utils headers
 
 /**
- * @brief		The physics controller holds the bullet physics ressources of a certain planet.
+ * @brief		The physics controller holds the bullet physics resources of a certain planet.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-03
  * @author		Benjamin Ellenberger
  */
 class PhysicsController {
@@ -46,10 +39,9 @@ private:
 
 public:
 
-	enum PhysicsControllerType{
-		GroundController,DeepSeaController
+	enum PhysicsControllerType {
+		GroundController, DeepSeaController
 	};
-
 
 	PhysicsController();
 	~PhysicsController();
@@ -95,7 +87,7 @@ public:
 		mPhysicsPaused = physicsPaused;
 	}
 
-	void setDebugDrawer(OgreBtDebugDrawer* debugDrawer){
+	void setDebugDrawer(OgreBtDebugDrawer* debugDrawer) {
 		mDynamicsWorld->setDebugDrawer(debugDrawer);
 	}
 

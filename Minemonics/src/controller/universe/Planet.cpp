@@ -82,12 +82,13 @@ bool Planet::proceedEvaluation() {
 		mEnvironment->addToWorld();
 	}
 
+	mPlanetModel.proceedEvaluation();
+
 	//if the evolution can no proceed, then remove the environment model from the world.
 	if (!mEvolution->proceedEvaluation()) {
 		mEnvironment->removeFromWorld();
 		return false;
 	}
-	mPlanetModel.proceedEvaluation();
 	return true;
 }
 

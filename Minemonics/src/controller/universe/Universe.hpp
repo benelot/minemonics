@@ -91,10 +91,13 @@ public:
 
 private:
 
+	/**
+	 * The evaluation controller of this universe.
+	 */
 	EvaluationController mEvaluationController;
 
 	/**
-	 * The model of the universe.
+	 * The model representation of the universe.
 	 */
 	UniverseModel mUniverseModel;
 

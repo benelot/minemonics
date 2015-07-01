@@ -845,6 +845,7 @@ bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	return OgreInputHandler::mousePressed(button);
 
 }
+
 bool CEGUIInputHandler::mouseReleased(
 		ApplicationMouseCode::MouseButton button) {
 	CEGUI::GUIContext& context =

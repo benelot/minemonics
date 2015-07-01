@@ -59,22 +59,80 @@ private:
 public:
 	CEGUIInputHandler();
 	virtual ~CEGUIInputHandler();
-	void initialize(StateHandler* stateHandler,
-			SimulationManager* simulationMgr);
-	// CEGUI::KeyListener
-	bool keyPressed(ApplicationKeycode::Keycode key);
-	bool keyReleased(ApplicationKeycode::Keycode key);
-	void injectTimeImpulse(double tick);
-
-	// CEGUI::MouseListener
-	bool mouseMoved(float x, float y);
-	bool mouseWheelMoved(float rel);
-	bool mousePressed(ApplicationMouseCode::MouseButton button);
-	bool mouseReleased(ApplicationMouseCode::MouseButton button);
-	void windowResized(int width, int height);
-	void initializeKeyMap();
 
 protected:
+	/**
+	 * Initialize the CEGUIInputHandler
+	 * @param stateHandler The statehandler of the application
+	 * @param simulationMgr The simulation manager of the application.
+	 */
+	void initialize(StateHandler* stateHandler,
+			SimulationManager* simulationMgr);
+
+	/**
+	 * Inject time impulse to give the input layer a notion of time.
+	 * @param tick Number of ticks that passed.
+	 */
+	void injectTimeImpulse(double tick);
+
+	// CEGUI::KeyListener
+	/**
+	 * Is triggered if a key is pressed.
+	 * @param key The key code of the key
+	 * @return If the key event has been used by the handler.
+	 */
+	bool keyPressed(ApplicationKeycode::Keycode key);
+
+	/**
+	 * Is triggered if a key is released.
+	 * @param key The key code of the key.
+	 * @return If the key event has been used by the handler.
+	 */
+	bool keyReleased(ApplicationKeycode::Keycode key);
+
+	// CEGUI::MouseListener
+
+	/**
+	 * Is triggered if the mouse is moved.
+	 * @param x How much the mouse moved in x direction.
+	 * @param y How much the mouse moved in y direction.
+	 * @return If the mouse move event has been used by the handler.
+	 */
+	bool mouseMoved(float x, float y);
+
+	/**
+	 * Is triggered if the mouse wheel is moved.
+	 * @param rel The movement of the mouse wheel.
+	 * @return If the mouse wheel movement event has been used by the handler.
+	 */
+	bool mouseWheelMoved(float rel);
+
+	/**
+	 * Is triggered if a mouse button is pressed.
+	 * @param button The mouse button code.
+	 * @return If the mouse button event has been used by the handler.
+	 */
+	bool mousePressed(ApplicationMouseCode::MouseButton button);
+
+	/**
+	 * Is triggered if a mouse button is released.
+	 * @param button The mouse button code.
+	 * @return If the mouse button event has been used by the handler.
+	 */
+	bool mouseReleased(ApplicationMouseCode::MouseButton button);
+
+	/**
+	 * Is triggered if the window has been resized.
+	 * @param width The new width of the window.
+	 * @param height The new height of the window.
+	 */
+	void windowResized(int width, int height);
+
+	/**
+	 * Inject the mouse absolute position.
+	 * @param x The absolute x position of the mouse.
+	 * @param y The absolute y position of the mouse.
+	 */
 	void injectMousePosition(float x, float y);
 };
 

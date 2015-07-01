@@ -38,13 +38,13 @@ SineControllerGene::~SineControllerGene() {
 void SineControllerGene::initialize() {
 
 	Randomness randomness;
-	mXOffset = randomness.nextDouble(0,
+	mXOffset = randomness.nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
 
-	mYOffset = randomness.nextDouble(-1, 1);
-	mAmplitude = randomness.nextDouble(0,
+	mYOffset = randomness.nextUnifDouble(-1, 1);
+	mAmplitude = randomness.nextUnifDouble(0,
 			ControlConfiguration::CPG_SINE_INITIAL_MAX_AMPLITUDE);
-	mFrequency = randomness.nextDouble(0,
+	mFrequency = randomness.nextUnifDouble(0,
 			ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
 }
 

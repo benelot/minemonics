@@ -1,3 +1,6 @@
+#ifndef VIEW_VISUALIZATION_PANELS_PARAMSPANEL_H_
+#define VIEW_VISUALIZATION_PANELS_PARAMSPANEL_H_
+
 //# corresponding header
 #include <view/visualization/panels/InfoPanel.hpp>
 
@@ -63,3 +66,6 @@ public:
 	static void destroyParamsPanel(ParamsPanel* panel);
 	CEGUI::FrameWindow*& getWidgetPanel();
 };
+
+#endif /* VIEW_VISUALIZATION_PANELS_PARAMSPANEL_H_ */
+

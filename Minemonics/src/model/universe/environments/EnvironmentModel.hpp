@@ -35,7 +35,7 @@ public:
 	void addToWorld();
 	void removeFromWorld();
 
-	//TODO: Add serialization to EnvironmentModel
+	//Accessor methods
 
 	EnvironmentPhysics*& getEnvironmentPhysics() {
 		return mEnvironmentPhysics;
@@ -59,11 +59,24 @@ public:
 		mPhysicsController = physicsController;
 	}
 
+	//Serialization
+	//TODO: Add serialization to EnvironmentModel
+
 protected:
 
+	/**
+	 * Is the environment in the world?
+	 */
 	bool mInWorld;
 
+	/**
+	 * The physics controller of the environment.
+	 */
 	PhysicsController* mPhysicsController;
+
+	/**
+	 * The physical model representation of the environment.
+	 */
 	EnvironmentPhysics* mEnvironmentPhysics;
 };
 

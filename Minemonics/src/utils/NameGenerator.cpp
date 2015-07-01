@@ -129,17 +129,17 @@ void NameGenerator::initialize() {
 			nameStems + sizeof(nameStems) / sizeof(nameStems[0]));
 }
 
-std::string NameGenerator::generateName() {
+std::string NameGenerator::generateFirstName() {
 	std::string newName;
 	newName.append(
-			mNamePrefix.at(mRandomness.nextPosInt(0, mNamePrefix.size() - 1)));
-	if (mRandomness.nextPosInt(0, 1)) {
+			mNamePrefix.at(mRandomness.nextUnifPosInt(0, mNamePrefix.size() - 1)));
+	if (mRandomness.nextUnifPosInt(0, 1)) {
 		newName.append(
 				mNameStems.at(
-						mRandomness.nextPosInt(0, mNameStems.size() - 1)));
+						mRandomness.nextUnifPosInt(0, mNameStems.size() - 1)));
 	}
 	newName.append(
-			mNameSuffix.at(mRandomness.nextPosInt(0, mNameSuffix.size() - 1)));
+			mNameSuffix.at(mRandomness.nextUnifPosInt(0, mNameSuffix.size() - 1)));
 
 	//Make the first letter capital...
 	newName[0] = toupper(newName.at(0));

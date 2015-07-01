@@ -31,25 +31,25 @@ Randomness::~Randomness() {
 }
 
 /**
- * Get a random double which is limited by a lower and an upper limit.
+ * Get a uniformly distributed random double which is limited by a lower and an upper limit.
  *
  * @param lowerLimit The lower limit we want to draw from.
  * @param upperLimit The upper limit we want to draw from.
  * @return A random double which is limited by a lower and an upper limit.
  */
-double Randomness::nextDouble(double lowerLimit, double upperLimit) {
+double Randomness::nextUnifDouble(double lowerLimit, double upperLimit) {
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
 			lowerLimit, upperLimit);
 
 	return unifDoubleDistribution(rng);
 }
 /**
- * Get a non-negative integer number to draw random array elements.
+ * Get a non-negative uniformly distributed random integer number to draw random array elements.
  * @param lowerLimit The lower limit we want to draw from.
  * @param upperLimit The upper limit we want to draw from.
  * @return A non-negative integer number.
  */
-int Randomness::nextPosInt(int lowerLimit, int upperLimit) {
+int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
 	if (upperLimit <= 0) {
 		return 0;
 	}
@@ -70,7 +70,7 @@ int Randomness::nextPosInt(int lowerLimit, int upperLimit) {
  * @param upperLimit The upper limit we want to draw from.
  * @return The double which is nearer to
  */
-double Randomness::nextBiasedLog(double lowerLimit, double upperLimit) {
+double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
 			pow(10, lowerLimit), pow(10, upperLimit));
 
@@ -83,7 +83,7 @@ double Randomness::nextBiasedLog(double lowerLimit, double upperLimit) {
 	return (tenpowm > tenpown) ? log10(tenpowm) : log10(tenpown);
 }
 
-bool Randomness::nextBoolean() {
+bool Randomness::nextUnifBoolean() {
 	//create a uniform integer distribution
 	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1);
 
@@ -92,38 +92,49 @@ bool Randomness::nextBoolean() {
 	return (unifIntDistribution(rng)) ? true : false;
 }
 
-int Randomness::nextNormalInt(double mean, double twovariances) {
+int Randomness::nextNormalInt(double mean, double variance, double limit) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalIntDistribution(mean,
-			(twovariances / 2.0f));
-
+			(variance));
 
 	double number = normalIntDistribution(rng);
 	int integer = round(number);
 
-	//99.9% lie in between mean +- twovariances
-	if (integer > mean + twovariances) {
-		integer = mean + twovariances;
-	} else if (integer < mean - twovariances) {
-		integer = mean - twovariances;
+	if (limit > 0) {
+		//99.9% lie in between mean +- variance*2.0f
+		if (integer > mean + variance * limit) {
+			integer = mean + variance * limit;
+		} else if (integer < mean - variance * limit) {
+			integer = mean - variance * limit;
+		}
 	}
 	return integer;
 }
 
-double Randomness::nextNormalDouble(double mean, double variance) {
+double Randomness::nextNormalDouble(double mean, double variance,
+		double limit) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalDoubleDistribution(mean,
 			variance);
 
+	double number = normalDoubleDistribution(rng);
 
-	return normalDoubleDistribution(rng);
+	if (limit > 0) {
+		//99.9% lie in between mean +- variance*2.0f
+		if (number > mean + variance * limit) {
+			number = mean + variance * limit;
+		} else if (number < mean - variance * limit) {
+			number = mean - variance * limit;
+		}
+	}
+
+	return number;
 }
 
 bool Randomness::nextNormalBoolean(double mean, double variance) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalBooleanDistribution(mean,
 			variance);
-
 
 	double number = normalBooleanDistribution(rng);
 	bool result = false;

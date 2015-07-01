@@ -34,11 +34,14 @@ public:
 
 	virtual void update();
 
+	//Accessor methods
+
 	PlaneBt* getPlaneBt()
 	{
 		return (PlaneBt*) mEnvironmentPhysics;
 	}
 
+	//Serialization
 	//TODO: Add serialization to plane model
 };
 

@@ -41,6 +41,10 @@ public:
 	ComponentModel();
 	virtual ~ComponentModel();
 
+	/**
+	 * Initialize the component model.
+	 * @param type The type of component.
+	 */
 	void initialize(ComponentType type);
 
 	/**

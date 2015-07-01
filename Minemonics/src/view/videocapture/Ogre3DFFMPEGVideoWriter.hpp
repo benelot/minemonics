@@ -1,5 +1,5 @@
-#ifndef __ofxFFMPEGVideoWriter__
-#define __ofxFFMPEGVideoWriter__
+#ifndef VIEW_VIDEOCAPTURE_OGRE3DFFMPEGVIDEOWRITER
+#define VIEW_VIDEOCAPTURE_OGRE3DFFMPEGVIDEOWRITER
 
 //# corresponding header
 //# forward declarations
@@ -114,4 +114,4 @@ private:
 	Ogre::TexturePtr mVideoTexture;
 };
 
-#endif /* defined(__ofxFFMPEGVideoWriter__) */
+#endif /* VIEW_VIDEOCAPTURE_OGRE3DFFMPEGVIDEOWRITER */

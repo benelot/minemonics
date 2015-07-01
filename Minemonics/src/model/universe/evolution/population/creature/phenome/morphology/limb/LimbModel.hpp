@@ -33,7 +33,7 @@ class btDynamicsWorld;
 
 /**
  *@brief The limb model holds all the information of the limb state.
- *@details
+ *@details Details
  *@date 2015-04-29
  *@author Benjamin Ellenberger
  */
@@ -103,14 +103,13 @@ public:
 		<< "LimbModel: Type=" << limbModel.mPrimitiveType
 
 		/**The dimensions of the limb*/
-		<< "/Dimensions=("
-		<< limbModel.mDimensions.x << ","
-		<< limbModel.mDimensions.y << ","
-		<< limbModel.mDimensions.z << ")"
+		<< "/Dimensions=(" << limbModel.mDimensions.x << ","
+				<< limbModel.mDimensions.y << "," << limbModel.mDimensions.z
+				<< ")"
 
-		/**The color of the limb*/
-		<< "/Color=(" << limbModel.mColor.r << "," << limbModel.mColor.b
-		<< "," << limbModel.mColor.g << ")";
+				/**The color of the limb*/
+				<< "/Color=(" << limbModel.mColor.r << "," << limbModel.mColor.b
+				<< "," << limbModel.mColor.g << ")";
 	}
 
 	/**

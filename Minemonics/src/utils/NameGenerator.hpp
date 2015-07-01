@@ -1,17 +1,9 @@
-/*
- * NameGenerator.h
- *
- *  Created on: Mar 13, 2015
- *      Author: leviathan
- */
-
 #ifndef UTILS_NAMEGENERATOR_HPP_
 #define UTILS_NAMEGENERATOR_HPP_
 
 //# corresponding header
 //# forward declarations
 //# system headers
-#include <utils/Randomness.hpp>
 #include <string>
 #include <vector>
 
@@ -25,27 +17,36 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
 /**
- * @brief		Brief
+ * @brief		The name generator generates names (first and second names) for the creatures to be used as their identifiers.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-13
  * @author		Benjamin Ellenberger
  */
 class NameGenerator {
 public:
 	NameGenerator();
-	void initialize();
 	virtual ~NameGenerator();
-	std::string generateName();
 
+	/**
+	 * Initialize the name generator.
+	 */
+	void initialize();
+
+	/**
+	 * Generate a first name.
+	 * @return The first name.
+	 */
+	std::string generateFirstName();
+
+private:
 	std::vector<std::string> mNamePrefix;
 	std::vector<std::string> mNameStems;
 	std::vector<std::string> mNameSuffix;
 
 	Randomness mRandomness;
-
-
 };
 
 #endif /* UTILS_NAMEGENERATOR_HPP_ */

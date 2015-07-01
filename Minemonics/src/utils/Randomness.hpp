@@ -1,5 +1,5 @@
-#ifndef RANDOMNESS_H_
-#define RANDOMNESS_H_
+#ifndef UTILS_RANDOMNESS_H_
+#define UTILS_RANDOMNESS_H_
 
 //# corresponding header
 //# forward declarations
@@ -36,7 +36,7 @@ public:
 	 * @param upperLimit The upper inclusive limit of the random double.
 	 * @return a random double between and including the limits
 	 */
-	double nextDouble(double lowerLimit, double upperLimit);
+	double nextUnifDouble(double lowerLimit, double upperLimit);
 
 	/**
 	 * @brief nextPosInt returns a random integer between and including the limits.
@@ -45,16 +45,44 @@ public:
 	 * @param upperLimit The upper inclusive limit of the random double.
 	 * @return a random double between and including the limits
 	 */
-	int nextPosInt(int lowerLimit, int upperLimit);
+	int nextUnifPosInt(int lowerLimit, int upperLimit);
 
-	double nextBiasedLog(double lowerLimit, double upperLimit);
+	/**
+	 * Returns a random double between the lower limit and the upper limit according to a biased log.
+	 * @param lowerLimit The lower limit of the random double.
+	 * @param upperLimit The upper limit of the random double.
+	 * @return
+	 */
+	double nextBiasedLogDouble(double lowerLimit, double upperLimit);
 
-	bool nextBoolean();
+	/**
+	 * Return a random boolean.
+	 * @return The random boolean.
+	 */
+	bool nextUnifBoolean();
 
-	int nextNormalInt(double mean, double variance);
+	/**
+	 * Return a normally distributed integer. The integer however can not be outside of limit* variances to cut off extremely high and low numbers.
+	 * @param mean The mean of the normal distribution.
+	 * @param variance The variance of the normal distribution.
+	 * @return The normally distributed integer.
+	 */
+	int nextNormalInt(double mean, double variance, double limit = 2);
 
-	double nextNormalDouble(double mean, double variance);
+	/**
+	 * Return a normally distributed double. The double however can not be outside of limit* variances to cut off extremely high and low numbers.
+	 * @param mean The mean of the normal distribution.
+	 * @param variance The variance of the normal distribution.
+	 * @return The normally distributed double.
+	 */
+	double nextNormalDouble(double mean, double variance, double limit = 2);
 
+	/**
+	 * Return a normally distributed boolean.
+	 * @param mean The mean of the normal distribution.
+	 * @param variance The variance of the normal distribution.
+	 * @return The normally distributed boolean.
+	 */
 	bool nextNormalBoolean(double mean, double variance);
 
 private:
@@ -63,4 +91,4 @@ private:
 	boost::random::mt19937 rng;
 };
 
-#endif /* RANDOMNESS_H_ */
+#endif /* UTILS_RANDOMNESS_H_ */

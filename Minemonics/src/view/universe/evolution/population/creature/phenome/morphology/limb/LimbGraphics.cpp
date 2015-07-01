@@ -1,10 +1,3 @@
-/*
- * LimbGraphics.cpp
- *
- *  Created on: Mar 24, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
 
@@ -21,7 +14,8 @@
 //## view headers
 //## utils headers
 
-LimbGraphics::LimbGraphics() {
+LimbGraphics::LimbGraphics() :
+		mInWorld(false) {
 }
 
 LimbGraphics::~LimbGraphics() {

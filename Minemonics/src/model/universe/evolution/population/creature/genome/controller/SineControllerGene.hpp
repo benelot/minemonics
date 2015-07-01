@@ -26,7 +26,6 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
-
 //## view headers
 //## utils headers
 
@@ -58,68 +57,6 @@ public:
 	 * @return If the sine controller gene is equal to the other controller gene.
 	 */
 	bool equals(const SineControllerGene& sineControllerGene) const;
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the sine controller gene to a string.
-	 * @param os The ostream.
-	 * @param sineControllerGene The sine controller gene we want to serialize.
-	 * @return A string containing all information about the sine controller gene.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const SineControllerGene &sineControllerGene) {
-		return os
-				/**The type of controller*/
-				<< "SineControllerGene: Controllertype "
-				<< sineControllerGene.mControllerGeneType
-
-				/**The x offset of the sine wave of the controller*/
-				<< "/XOffset = "
-				<< sineControllerGene.mXOffset
-
-				/**The y offset of the sine wave of the controller*/
-				<< "/YOffset = "
-				<< sineControllerGene.mYOffset
-
-				/**The amplitude of the sine wave of the controller*/
-				<< "/Amplitude="
-				<< sineControllerGene.mAmplitude
-
-				/**The frequency of the sine wave of the controller*/
-				<< "/Frequency="
-				<< sineControllerGene.mFrequency;
-
-	}
-
-	/**
-	 * Serializes the sine controller gene to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/** Serialize the base object */
-				& BOOST_SERIALIZATION_BASE_OBJECT_NVP(
-						ControllerGene)
-
-		/**The x offset of the sine wave of the controller*/
-		& BOOST_SERIALIZATION_NVP(mXOffset)
-
-		/**The y offset of the sine wave of the controller*/
-		& BOOST_SERIALIZATION_NVP(mYOffset)
-
-		/**The amplitude of the sine wave of the controller*/
-		& BOOST_SERIALIZATION_NVP(mAmplitude)
-
-		/**The frequency of the sine wave of the controller*/
-		& BOOST_SERIALIZATION_NVP(mFrequency);
-	}
-
 
 	//Accessor methods
 
@@ -153,6 +90,63 @@ public:
 
 	void setYOffset(double yOffset) {
 		mYOffset = yOffset;
+	}
+
+	//Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the sine controller gene to a string.
+	 * @param os The ostream.
+	 * @param sineControllerGene The sine controller gene we want to serialize.
+	 * @return A string containing all information about the sine controller gene.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const SineControllerGene &sineControllerGene) {
+		return os
+		/**The type of controller*/
+		<< "SineControllerGene: Controllertype "
+				<< sineControllerGene.mControllerGeneType
+
+				/**The x offset of the sine wave of the controller*/
+				<< "/XOffset = " << sineControllerGene.mXOffset
+
+				/**The y offset of the sine wave of the controller*/
+				<< "/YOffset = " << sineControllerGene.mYOffset
+
+				/**The amplitude of the sine wave of the controller*/
+				<< "/Amplitude=" << sineControllerGene.mAmplitude
+
+				/**The frequency of the sine wave of the controller*/
+				<< "/Frequency=" << sineControllerGene.mFrequency;
+
+	}
+
+	/**
+	 * Serializes the sine controller gene to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/** Serialize the base object */
+		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ControllerGene)
+
+		/**The x offset of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mXOffset)
+
+		/**The y offset of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mYOffset)
+
+		/**The amplitude of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mAmplitude)
+
+		/**The frequency of the sine wave of the controller*/
+		& BOOST_SERIALIZATION_NVP(mFrequency);
 	}
 
 private:

@@ -18,6 +18,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/TimerManager.hpp>
 
 /**
  * @brief		The evaluation controller schedules the evaluations for serial or parallel evaluation.
@@ -54,7 +55,7 @@ public:
 	void update(double timeSinceLastFrame);
 
 
-	//Accesssor methods
+	//Accessor methods
 
 	void setPaused(bool paused) {
 		mPaused = paused;
@@ -81,6 +82,9 @@ private:
 	 * If the evaluation is paused or not.
 	 */
 	bool mPaused;
+
+	//TODO: Use the timer manager to trigger proceeding.
+	TimerManager<EvaluationController> mEvaluationManager;
 };
 
 #endif /* CONTROLLER_EVALUATIONCONTROLLER_HPP_ */

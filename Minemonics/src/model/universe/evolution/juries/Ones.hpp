@@ -1,12 +1,5 @@
-/*
- * Ones.h
- *
- *  Created on: Feb 25, 2015
- *      Author: leviathan
- */
-
-#ifndef ONES_H_
-#define ONES_H_
+#ifndef MODEL_UNIVERSE_EVOLUTION_JURIES_ONES_H_
+#define MODEL_UNIVERSE_EVOLUTION_JURIES_ONES_H_
 
 //# corresponding header
 #include <model/universe/evolution/juries/Jury.hpp>
@@ -24,9 +17,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The ones jury is for illustration purposes of a jury.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-25
  * @author		Benjamin Ellenberger
  */
 class Ones: public Jury {
@@ -40,4 +33,4 @@ private:
 	std::vector< bool > mEvaluationSubject;
 };
 
-#endif /* ONES_H_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_ONES_H_ */

@@ -1,5 +1,5 @@
-#ifndef VIEW_OGRE3D_OGREOVERLAYINFO_H_
-#define VIEW_OGRE3D_OGREOVERLAYINFO_H_
+#ifndef VIEW_VISUALIZATION_OVERLAY_OGREOVERLAYINFO_H_
+#define VIEW_VISUALIZATION_OVERLAY_OGREOVERLAYINFO_H_
 
 //# corresponding header
 //# forward declarations
@@ -19,7 +19,7 @@
 //## view headers
 
 /**
- * @brief		A datastructure to holds a string of information overlay data together with a position on the screen.
+ * @brief		A data structure to holds a string of information overlay data together with a position on the screen.
  * @details		Details
  * @date		2015-03-17
  * @author		Benjamin Ellenberger
@@ -42,4 +42,4 @@ private:
 	std::string mText;
 };
 
-#endif /* VIEW_OGRE3D_OGREOVERLAYINFO_H_ */
+#endif /* VIEW_VISUALIZATION_OVERLAY_OGREOVERLAYINFO_H_ */

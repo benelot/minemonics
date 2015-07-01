@@ -178,8 +178,6 @@ protected:
 	 */
 	bool mInWorld;
 
-private:
-
 	/**
 	 * Initial position at birth relative to the root node
 	 */

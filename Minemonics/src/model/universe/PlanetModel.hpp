@@ -34,10 +34,22 @@ public:
 	PlanetModel();
 	virtual ~PlanetModel();
 
+	/**
+	 * Initialize the planet model.
+	 * @param evolutionModel Its evolution model.
+	 * @param environmentModel Its environment model.
+	 */
 	void initialize(EvolutionModel* evolutionModel, EnvironmentModel* environmentModel);
 
+	/**
+	 * Proceed with the evaluation.
+	 * @return If the evaluation could proceed.
+	 */
 	bool proceedEvaluation();
 
+	/**
+	 * Update the planet.
+	 */
 	void update();
 
 	//Accessor methods
@@ -57,6 +69,9 @@ public:
 	void setEvolutionModel(EvolutionModel* evolutionModel) {
 		mEvolutionModel = evolutionModel;
 	}
+
+	//Serialization
+	//TODO: Add serialization to the planet model.
 
 private:
 	/**

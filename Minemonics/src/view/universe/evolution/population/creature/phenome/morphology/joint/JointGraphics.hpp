@@ -1,10 +1,3 @@
-/*
- * JointGraphics.h
- *
- *  Created on: Apr 14, 2015
- *      Author: leviathan
- */
-
 #ifndef VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTGRAPHICS_HPP_
 #define VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTGRAPHICS_HPP_
 
@@ -23,9 +16,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The generic graphical representation of the joint.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-04-14
  * @author		Benjamin Ellenberger
  */
 class JointGraphics {

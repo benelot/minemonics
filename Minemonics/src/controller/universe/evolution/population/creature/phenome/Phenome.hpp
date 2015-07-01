@@ -79,7 +79,7 @@ public:
 	 * @details Details
 	 * @param simulationManager The handle of the simulation manager.
 	 */
-	void initialize(SimulationManager* simulationManager,Creature* creature);
+	void initialize(SimulationManager* simulationManager, Creature* creature);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -88,15 +88,18 @@ public:
 	 * @param genome The genome of the creature to be built.
 	 * @param rootPosition The position of origin where the creature starts to be generated in the physical space.
 	 */
-	void performEmbryogenesis(Creature* creature,MixedGenome* genome, Ogre::Vector3 rootPosition);
+	void performEmbryogenesis(Creature* creature, MixedGenome* genome,
+			Ogre::Vector3 rootPosition);
 
 	/**
 	 * Reset the creature to the way it was born.
+	 * @param position The position of the creature.
 	 */
 	void reset(Ogre::Vector3 position);
 
 	/**
 	 * Reposition the creature without resetting it.
+	 * @param position The position of the creature.
 	 */
 	void reposition(Ogre::Vector3 position);
 

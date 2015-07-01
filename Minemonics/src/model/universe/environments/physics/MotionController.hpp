@@ -1,10 +1,3 @@
-/*
- * MotionController.h
- *
- *  Created on: Mar 3, 2015
- *      Author: leviathan
- */
-
 #ifndef MOTIONCONTROLLER_H_
 #define MOTIONCONTROLLER_H_
 
@@ -25,9 +18,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The motion controller is the base class to all controller for special environments.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-03
  * @author		Benjamin Ellenberger
  */
 class MotionController: public PhysicsController {

@@ -1,6 +1,5 @@
-#ifndef MATHGLPANEL_H_
-#define MATHGLPANEL_H_
-
+#ifndef VIEW_VISUALIZATION_PANELS_MATHGLPANEL_H_
+#define VIEW_VISUALIZATION_PANELS_MATHGLPANEL_H_
 
 //# corresponding headers
 #include <view/visualization/panels/InfoPanel.hpp>
@@ -33,7 +32,7 @@ class TextureTarget;
 //## utils headers
 
 /**
- * @brief		The MathGL Panel displays functions in a scalable panel.
+ * @brief		The MathGL Panel displays mathematical functions in a scalable panel.
  * @details		Details
  * @date		2015-02-24
  * @author		Benjamin Ellenberger
@@ -43,7 +42,9 @@ public:
 	MathGLPanel(ViewController* viewController,Ogre::Root* root, int textureWidth,
 			int textureHeight,CEGUI::USize windowSize,CEGUI::USize windowPosition);
 	virtual ~MathGLPanel();
+
 	void update(double timeSinceLastFrame);
+
 	CEGUI::Window*& getMathGlWindow();
 
 	void makePrint()
@@ -53,11 +54,17 @@ public:
 
 private:
 	ViewController* mViewController;
+
 	Ogre::TexturePtr mTexture;
+
 	CEGUI::Window* mMathGLWindow;
+
 	double mTime;
+
 	CEGUI::GUIContext* mRenderGuiContext;
+
 	CEGUI::TextureTarget* mRenderTextureTarget;
+
 	bool mMakePrint;
 };
 

@@ -86,7 +86,7 @@ void MixedGenome::addRandomGenes(double percentage) {
 	Randomness randomness;
 	//TODO:Add reasonable number
 	for (int i = 0; i < 10; i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= percentage) {
 			addRandomGene();
 		}
 	}
@@ -94,7 +94,7 @@ void MixedGenome::addRandomGenes(double percentage) {
 
 void MixedGenome::addRandomGene() {
 	Randomness randomness;
-	Gene::GeneType type = (Gene::GeneType) randomness.nextPosInt(0,
+	Gene::GeneType type = (Gene::GeneType) randomness.nextUnifPosInt(0,
 			Gene::NUM_GENES);
 	Gene* gene;
 	switch (type) {
@@ -115,7 +115,7 @@ void MixedGenome::repairGenes() {
 void MixedGenome::integrateRandomGenes(double integrationProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= integrationProbability) {
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= integrationProbability) {
 			integrateGene(i);
 		}
 	}
@@ -123,7 +123,7 @@ void MixedGenome::integrateRandomGenes(double integrationProbability) {
 
 void MixedGenome::integrateRandomGene() {
 	Randomness randomness;
-	integrateGene(randomness.nextPosInt(0, mGenes.size() - 1));
+	integrateGene(randomness.nextUnifPosInt(0, mGenes.size() - 1));
 }
 
 void MixedGenome::integrateGene(int geneIndex) {
@@ -134,7 +134,7 @@ void MixedGenome::integrateGene(int geneIndex) {
 		// randomly choose a follow up gene until you get one different from its own type
 		do {
 			((Morphogene*) mGenes[geneIndex])->setFollowUpGene(
-					randomness.nextPosInt(0, mGenes.size() - 1));
+					randomness.nextUnifPosInt(0, mGenes.size() - 1));
 		} while (((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
 				!= geneIndex);
 
@@ -148,7 +148,7 @@ void MixedGenome::integrateGene(int geneIndex) {
 			//randomly choose a branch gene type until you get one distinct from the follow up gene
 			do {
 				(*branchIt)->setBranchGeneType(
-						randomness.nextPosInt(0, mGenes.size() - 1));
+						randomness.nextUnifPosInt(0, mGenes.size() - 1));
 			} while (mGenes.size() > 1
 					&& (*branchIt)->getBranchGeneType()
 							== ((Morphogene*) mGenes[geneIndex])->getFollowUpGene());
@@ -164,8 +164,8 @@ void MixedGenome::integrateGene(int geneIndex) {
 void MixedGenome::replaceRandomGenesWithRandomGenes(double replacementProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= replacementProbability) {
-			int replacementIndex = randomness.nextPosInt(0, mGenes.size() - 1);
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= replacementProbability) {
+			int replacementIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
 			replaceGeneWith(i, replacementIndex);
 		}
 	}
@@ -173,8 +173,8 @@ void MixedGenome::replaceRandomGenesWithRandomGenes(double replacementProbabilit
 
 void MixedGenome::replaceRandomGeneWithRandomGene() {
 	Randomness randomness;
-	int geneIndex = randomness.nextPosInt(0, mGenes.size() - 1);
-	int replacementIndex = randomness.nextPosInt(0, mGenes.size() - 1);
+	int geneIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
+	int replacementIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
 	replaceGeneWith(geneIndex, replacementIndex);
 }
 
@@ -187,7 +187,7 @@ void MixedGenome::replaceGeneWith(int geneIndex, int replacementIndex) {
 void MixedGenome::duplicateRandomGenes(double duplicateProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= duplicateProbability) {
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= duplicateProbability) {
 			duplicateGene(i);
 		}
 	}
@@ -195,7 +195,7 @@ void MixedGenome::duplicateRandomGenes(double duplicateProbability) {
 
 void MixedGenome::duplicateRandomGene() {
 	Randomness randomness;
-	duplicateGene(randomness.nextPosInt(0, mGenes.size() - 1));
+	duplicateGene(randomness.nextUnifPosInt(0, mGenes.size() - 1));
 }
 
 void MixedGenome::duplicateGene(int geneIndex) {
@@ -205,8 +205,8 @@ void MixedGenome::duplicateGene(int geneIndex) {
 void MixedGenome::splitRandomGenes(double splitProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= splitProbability) {
-			splitGene(i, (SplitAxis) randomness.nextPosInt(1, 3));
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= splitProbability) {
+			splitGene(i, (SplitAxis) randomness.nextUnifPosInt(1, 3));
 		}
 	}
 }
@@ -214,8 +214,8 @@ void MixedGenome::splitRandomGenes(double splitProbability) {
 void MixedGenome::splitRandomGene() {
 	Randomness randomness;
 
-	splitGene(randomness.nextPosInt(0, mGenes.size() - 1),
-			(SplitAxis) randomness.nextPosInt(1, 3));
+	splitGene(randomness.nextUnifPosInt(0, mGenes.size() - 1),
+			(SplitAxis) randomness.nextUnifPosInt(1, 3));
 }
 
 void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
@@ -274,9 +274,9 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 void MixedGenome::growRandomStubs(double growProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= growProbability) {
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= growProbability) {
 			//TODO: Replace with reasonable number
-			int branchiness = randomness.nextDouble(0, 3);
+			int branchiness = randomness.nextUnifDouble(0, 3);
 			growStub(i, branchiness);
 		}
 	}
@@ -284,9 +284,9 @@ void MixedGenome::growRandomStubs(double growProbability) {
 
 void MixedGenome::growRandomStub() {
 	Randomness randomness;
-	int geneIndex = randomness.nextPosInt(0, mGenes.size() - 1);
+	int geneIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
 	//TODO: Replace with reasonable number
-	int branchiness = randomness.nextDouble(0, 3);
+	int branchiness = randomness.nextUnifDouble(0, 3);
 	growStub(geneIndex, branchiness);
 }
 
@@ -297,7 +297,7 @@ void MixedGenome::growStub(int geneIndex, int branchiness) {
 void MixedGenome::mutateRandomGenes(double percentage) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= percentage) {
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= percentage) {
 			mutateGene(i);
 		}
 	}
@@ -306,7 +306,7 @@ void MixedGenome::mutateRandomGenes(double percentage) {
 void MixedGenome::mutateRandomGene() {
 	Randomness randomness;
 
-	mutateGene(randomness.nextPosInt(0, mGenes.size() - 1));
+	mutateGene(randomness.nextUnifPosInt(0, mGenes.size() - 1));
 }
 
 void MixedGenome::mutateGene(int geneIndex) {
@@ -316,7 +316,7 @@ void MixedGenome::mutateGene(int geneIndex) {
 void MixedGenome::mutateRandomBranches(double mutationProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (randomness.nextPosInt(0, 1000.0f) / 1000.0f <= mutationProbability) {
+		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= mutationProbability) {
 			mutateRandomBranchOfGene(i);
 		}
 	}
@@ -329,7 +329,7 @@ void MixedGenome::mutateRandomBranch() {
 	//TODO: This can freeze up in case of certain genomes without any morphogenes (these are corrupt anyway, but that would break the code)
 	//Better search for indices containing the right type and then choose from that array.
 	do {
-		geneIndex = randomness.nextPosInt(0, mGenes.size() - 1);
+		geneIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
 	} while (mGenes[geneIndex]->getType() != Gene::MorphoGene);
 
 	mutateBranch(geneIndex,
@@ -351,13 +351,13 @@ void MixedGenome::mutateBranch(int geneIndex, int branchIndex) {
 
 void MixedGenome::crossoverRandomly(Genome* genome) {
 	Randomness randomness;
-	int motherStartSegmentIndex = randomness.nextPosInt(0, mGenes.size() - 1);
-	int motherEndSegmentIndex = randomness.nextPosInt(motherStartSegmentIndex,
+	int motherStartSegmentIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
+	int motherEndSegmentIndex = randomness.nextUnifPosInt(motherStartSegmentIndex,
 			mGenes.size() - 1);
 
-	int fatherStartSegmentIndex = randomness.nextPosInt(0,
+	int fatherStartSegmentIndex = randomness.nextUnifPosInt(0,
 			genome->getGenes().size() - 1);
-	int fatherEndSegmentIndex = randomness.nextPosInt(motherStartSegmentIndex,
+	int fatherEndSegmentIndex = randomness.nextUnifPosInt(motherStartSegmentIndex,
 			genome->getGenes().size() - 1);
 
 	crossover(genome, motherStartSegmentIndex, motherEndSegmentIndex,
@@ -390,12 +390,12 @@ void MixedGenome::graftRandomlyFrom(Genome* donator) {
 
 	Randomness randomness;
 
-	attachmentIndex = randomness.nextPosInt(0, mGenes.size() - 1);
+	attachmentIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
 
 	//TODO: This can freeze up in case of certain genomes without any morphogenes (these are corrupt anyway, but that would break the code)
 	//Better search for indices containing the right type and then choose from that array.
 	do {
-		geneIndex = randomness.nextPosInt(0, donator->getGenes().size() - 1);
+		geneIndex = randomness.nextUnifPosInt(0, donator->getGenes().size() - 1);
 	} while (donator->getGenes()[geneIndex]->getType()
 			!= mGenes[attachmentIndex]->getType());
 

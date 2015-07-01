@@ -31,20 +31,34 @@ public:
 	UniverseModel();
 	virtual ~UniverseModel();
 
+	/**
+	 * Initialize the universe model.
+	 */
 	void initialize();
 
+	/**
+	 * Add a planet model to the universe model.
+	 * @param planetModel The planet model to add.
+	 */
 	void addPlanetModel(PlanetModel* planetModel);
 
+	/**
+	 * Proceed the evaluation.
+	 */
 	void proceedEvaluation();
 
 	//Accessor methods
-
-	int getCurrentEvaluationPlanetIndex() const {
+	std::vector<PlanetModel*>::size_type getCurrentEvaluationPlanetIndex() const {
 		return mCurrentEvaluationPlanetIndex;
 	}
 
-	void setCurrentEvaluationPlanetIndex(int currentEvaluationPlanetIndex) {
+	void setCurrentEvaluationPlanetIndex(
+			std::vector<PlanetModel*>::size_type currentEvaluationPlanetIndex) {
 		mCurrentEvaluationPlanetIndex = currentEvaluationPlanetIndex;
+	}
+
+	const std::vector<EvaluationModel*>& getEvaluationModels() const {
+		return mEvaluationModels;
 	}
 
 	const std::vector<PlanetModel*>& getPlanetModels() const {
@@ -66,7 +80,7 @@ private:
 	/**
 	 * Planet being currently evaluated.
 	 */
-	int mCurrentEvaluationPlanetIndex;
+	std::vector<PlanetModel*>::size_type mCurrentEvaluationPlanetIndex;
 };
 
 #endif /* MODEL_UNIVERSE_UNIVERSEMODEL_HPP_ */

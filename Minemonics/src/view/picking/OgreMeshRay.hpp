@@ -1,16 +1,24 @@
-/*
- * OgreRay.h
- *
- *  Created on: Apr 16, 2015
- *      Author: leviathan
- */
-
 #ifndef VIEW_OGRE3D_OGREMESHRAY_H_
 #define VIEW_OGRE3D_OGREMESHRAY_H_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+#include <stddef.h>
+
+//## controller headers
+//## model headers
+//## view headers
 #include <OgrePrerequisites.h>
 #include <OgreQuaternion.h>
-#include <stddef.h>
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 /***************************************************************************//*!
  * @brief Ray Collision Detection
@@ -29,6 +37,8 @@
  *		printf("No mouse collision\n Are you looking the sky ?\n");
  * 	}
  * @endcode
+ * @date 2015-04-16
+ * @author Benjamin Ellenberger
  */
 class OgreMeshRay {
 private:

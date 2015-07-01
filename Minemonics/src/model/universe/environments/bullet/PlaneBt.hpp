@@ -1,16 +1,15 @@
-/*
- * PlaneBt.h
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_ENVIRONMENT_PLANEBT_H_
 #define MODEL_ENVIRONMENT_PLANEBT_H_
 
 //# corresponding header
-#include <btBulletDynamicsCommon.h>
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
+
+//# forward declarations
+
+//# system headers
+//## controller headers
+//## model headers
+#include <btBulletDynamicsCommon.h>
 
 //## view headers
 //# custom headers
@@ -22,12 +21,12 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The bullet physics model implementation of the plane environment.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-17
  * @author		Benjamin Ellenberger
  */
-class PlaneBt : public EnvironmentBt {
+class PlaneBt: public EnvironmentBt {
 public:
 	PlaneBt();
 	virtual ~PlaneBt();
@@ -36,6 +35,7 @@ public:
 
 	virtual void update();
 
+	//Accessor methods
 	btRigidBody*& getBody() {
 		return mGroundBody;
 	}

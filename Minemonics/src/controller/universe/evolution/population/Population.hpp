@@ -49,10 +49,10 @@ public:
 	void initialize(Planet* planet,int creatureQty);
 
 	/**
-	 * Adds a new creature to the population with the bushiness as a input.
-	 * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
+	 * Adds a new creature to the population with the branchiness as a input.
+	 * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
 	 */
-	void addNewMember(double bushiness, Ogre::Vector3 rootPosition =
+	void addNewMember(double branchiness, Ogre::Vector3 rootPosition =
 			Ogre::Vector3::ZERO);
 
 	/**
@@ -60,11 +60,22 @@ public:
 	 */
 	void addMember(Creature* creature);
 
+	/**
+	 * Update the population.
+	 */
 	void update();
 
+	/**
+	 * Add the population to the world.
+	 */
 	void addToWorld();
 
+	/**
+	 * Remove the population from the world.
+	 */
 	void removeFromWorld();
+
+	//Accessor methods
 
 	std::vector<Creature*>& getCreatures() {
 		return mCreatures;

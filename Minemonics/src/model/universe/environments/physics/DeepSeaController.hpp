@@ -1,10 +1,3 @@
-/*
- * OpenSeaController.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef DEEPSEACONTROLLER_H_
 #define DEEPSEACONTROLLER_H_
 
@@ -27,7 +20,7 @@
 /**
  * @brief		The deep sea controller simulates physical motion similar to an underwater world.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
 class DeepSeaController: public MotionController {

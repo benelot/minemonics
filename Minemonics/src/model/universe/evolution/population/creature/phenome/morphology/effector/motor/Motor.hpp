@@ -38,6 +38,7 @@ public:
 	virtual void apply() = 0;
 
 	//Accessor methods
+
 	double getMaxForce() const {
 		return mMaxForce;
 	}

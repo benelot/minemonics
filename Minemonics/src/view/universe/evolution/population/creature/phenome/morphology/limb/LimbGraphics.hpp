@@ -1,10 +1,3 @@
-/*
- * LimbGraphics.h
- *
- *  Created on: Mar 24, 2015
- *      Author: leviathan
- */
-
 #ifndef VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBGRAPHICS_HPP_
 #define VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBGRAPHICS_HPP_
 
@@ -26,9 +19,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The generic graphical representation of a limb.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-24
  * @author		Benjamin Ellenberger
  */
 class LimbGraphics {
@@ -81,31 +74,29 @@ public:
 	//Accessor methods
 
 	const Ogre::Vector3& getPosition() const {
-			return mPosition;
-		}
-
-		void setPosition(const Ogre::Vector3& position) {
-			mPosition = position;
-		}
-
-		Ogre::Quaternion& getOrientation() {
-			return mOrientation;
-		}
-
-		void setOrientation(const Ogre::Quaternion& orientation) {
-			mOrientation = orientation;
-		}
-
-	bool isInWorld() const {
-		return inWorld;
+		return mPosition;
 	}
 
+	void setPosition(const Ogre::Vector3& position) {
+		mPosition = position;
+	}
 
+	Ogre::Quaternion& getOrientation() {
+		return mOrientation;
+	}
+
+	void setOrientation(const Ogre::Quaternion& orientation) {
+		mOrientation = orientation;
+	}
+
+	bool isInWorld() const {
+		return mInWorld;
+	}
 
 protected:
 
-	void setInWorld(bool inWorld) {
-		this->inWorld = inWorld;
+	void setInWorld(bool mInWorld) {
+		this->mInWorld = mInWorld;
 	}
 
 	/**
@@ -122,7 +113,7 @@ private:
 	/**
 	 * Whether the limb is in the world or not.
 	 */
-	bool inWorld;
+	bool mInWorld;
 };
 
 #endif /* VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBGRAPHICS_HPP_ */

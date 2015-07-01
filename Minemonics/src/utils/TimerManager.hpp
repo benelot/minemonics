@@ -71,8 +71,8 @@ public:
 	}
 
 	void addTimer(unsigned long period, MemberTimerHandler callback,
-			callbackClass* callbackObject, int timerID = -1, bool repeat =
-					false, bool playCatchup = true) {
+			callbackClass* callbackObject, int timerID = -1,
+			bool repeat = false, bool playCatchup = true) {
 		TimerInstance t;
 		t.mMemberTimerHandler = callback;
 		t.mcallbackClass = callbackObject;
@@ -161,8 +161,7 @@ protected:
 
 	// process next timer (if applicable)
 	bool next() {
-		if (mTimers.empty())
-		{
+		if (mTimers.empty()) {
 			return false;
 		}
 		unsigned long now = mTimer.getMilliseconds();

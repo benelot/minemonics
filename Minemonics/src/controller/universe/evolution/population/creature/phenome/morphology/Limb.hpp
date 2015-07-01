@@ -100,8 +100,8 @@ public:
 	 * @return Some information about the limb in a string.
 	 */
 	std::string getInfo();
-	// Accessor methods
 
+	// Accessor methods
 	const Ogre::Vector3& getPosition() const {
 		return mLimbGraphics->getPosition();
 	}
@@ -126,8 +126,14 @@ public:
 
 private:
 
+	/**
+	 * Graphical representation of the limb.
+	 */
 	LimbGraphics* mLimbGraphics;
 
+	/**
+	 * The model representation of the limb.
+	 */
 	LimbModel* mLimbModel;
 
 	/**

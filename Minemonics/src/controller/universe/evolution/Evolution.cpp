@@ -40,7 +40,9 @@ void Evolution::addPopulation(Population* population) {
 
 bool Evolution::proceedEvaluation() {
 
-	if (mPopulations.size() != 0) {
+	if (mPopulations.size() != 0
+			&& mEvolutionModel.getCurrentPopulationIndex()
+					< mPopulations.size()) {
 
 		switch (mEvolutionModel.getType()) {
 		case EvolutionModel::INDIVIDUAL_EVALUATION: {

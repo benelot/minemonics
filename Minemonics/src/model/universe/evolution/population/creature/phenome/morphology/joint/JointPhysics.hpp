@@ -80,6 +80,7 @@ public:
 	 */
 	virtual void removeFromWorld() = 0;
 
+	//TODO: Add serialization to the joint physics
 //	/**
 //	 * Compare the joint physics model to another joint physics model.
 //	 * @param jointPhysics Another joint physics model.

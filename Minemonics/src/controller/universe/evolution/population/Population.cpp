@@ -65,13 +65,13 @@ void Population::initialize(Planet* planet, int creatureQty) {
 
 /**
  * Adds a new creature to the population with the bushiness as a input.
- * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
+ * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
  */
-void Population::addNewMember(double bushiness, Ogre::Vector3 rootPosition) {
+void Population::addNewMember(double branchiness, Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
 		//TODO:Include planet into initializer
-		creature->initialize(mSimulationManager, this, rootPosition, bushiness);
+		creature->initialize(mSimulationManager, this, rootPosition, branchiness);
 		addMember(creature);
 	}
 

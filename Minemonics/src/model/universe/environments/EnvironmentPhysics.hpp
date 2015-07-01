@@ -21,7 +21,7 @@ class Vector3;
 //## utils headers
 
 /**
- * @brief		The physics part of the environment model.
+ * @brief		The physics model representation of the environment model.
  * @details		Details
  * @date		2015-03-17
  * @author		Benjamin Ellenberger
@@ -35,7 +35,9 @@ public:
 
 	virtual void update() = 0;
 
-	virtual void createTerrainData(Ogre::SceneNode* sceneNode, float w,float h,float* data,float minH,float maxH,Ogre::Vector3& pos,float scale,float heightScale) = 0;
+	virtual void createTerrainData(Ogre::SceneNode* sceneNode, float w, float h,
+			float* data, float minH, float maxH, Ogre::Vector3& pos,
+			float scale, float heightScale) = 0;
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_ENVIRONMENTPHYSICS_HPP_ */

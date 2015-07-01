@@ -25,7 +25,7 @@ class StateHandler;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The GUI sheet handler picks up the inputs via the menu.
  * @details		Details
  * @date		2015-04-27
  * @author		Benjamin Ellenberger

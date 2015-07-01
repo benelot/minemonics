@@ -148,6 +148,9 @@ public:
 	}
 
 private:
+	/**
+	 * The physical model representation of the joint.
+	 */
 	JointPhysics* mJointPhysics;
 
 };

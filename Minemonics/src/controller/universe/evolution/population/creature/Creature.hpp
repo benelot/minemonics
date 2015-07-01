@@ -74,7 +74,7 @@ public:
 	 */
 	void removeFromWorld();
 
-	// Facade methods
+	// Facade accessor methods
 	void setPosition(Ogre::Vector3 position) {
 		mCreatureModel->setPosition(position);
 	}
@@ -97,10 +97,11 @@ public:
 
 private:
 	/**
-	 * The model of the creature
+	 * The model representation of the creature
 	 */
 	CreatureModel* mCreatureModel;
 
+	//CHILD
 	/**
 	 * The phenotype of the creature.
 	 */

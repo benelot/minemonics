@@ -31,7 +31,7 @@ void CreatureModel::initialize(PopulationModel* populationModel,
 	mPosition = position;
 	Randomness randomness;
 	NameGenerator nameGenerator;
-	mName = nameGenerator.generateName();
+	mName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
 }
 

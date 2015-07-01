@@ -42,6 +42,12 @@ public:
 	virtual ~Jury();
 
 	/**
+	 * Calculates the fitness value at the end of the evaluation.
+	 * Therefore it should be called when the evaluation ends.
+	 */
+	virtual void evaluateFitness() = 0;
+
+	/**
 	 * Compare a jury to another jury.
 	 * @param jury Another jury
 	 * @return If the jury is equal to the other jury.
@@ -104,15 +110,20 @@ public:
 
 	JuryType getJuryType();
 
-	/**
-	 * Calculates the fitness value at the end of the evaluation.
-	 * Therefore it should be called when the evaluation ends.
-	 */
-	virtual void evaluateFitness() = 0;
-private:
-	JuryType mJuryType;
 protected:
+	/**
+	 * The type of jury.
+	 */
+	JuryType mJuryType;
+
+	/**
+	 * The summation weight of this jury.
+	 */
 	double mWeight;
+
+	/**
+	 * The fitness evaluated by this jury.
+	 */
 	double mFitness;
 };
 

@@ -1,12 +1,5 @@
-/*
- * Velocity.h
- *
- *  Created on: Feb 26, 2015
- *      Author: leviathan
- */
-
-#ifndef VELOCITY_H_
-#define VELOCITY_H_
+#ifndef MODEL_UNIVERSE_EVOLUTION_JURIES_VELOCITY_H_
+#define MODEL_UNIVERSE_EVOLUTION_JURIES_VELOCITY_H_
 
 //# corresponding headers
 #include <model/universe/evolution/juries/Jury.hpp>
@@ -25,9 +18,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The velocity jury evaluates how fast an individual moves on average during its evaluation time.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-26
  * @author		Benjamin Ellenberger
  */
 class Velocity: public Jury {
@@ -47,4 +40,4 @@ private:
 	bool mIsFirstTime;
 };
 
-#endif /* VELOCITY_H_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_VELOCITY_H_ */

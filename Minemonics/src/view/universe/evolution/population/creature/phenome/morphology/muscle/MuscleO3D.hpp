@@ -8,8 +8,6 @@
 #ifndef MUSCLEO3D_H_
 #define MUSCLEO3D_H_
 
-#include "model/evolution/population/creature/phenome/morphology/effector/muscle/Muscle.h"
-
 /**
  * @brief		Brief
  * @details		Details

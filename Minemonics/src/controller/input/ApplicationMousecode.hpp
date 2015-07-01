@@ -1,10 +1,3 @@
-/*
- * ApplicationMousecode.h
- *
- *  Created on: Feb 27, 2015
- *      Author: leviathan
- */
-
 #ifndef APPLICATIONMOUSECODE_H_
 #define APPLICATIONMOUSECODE_H_
 
@@ -23,9 +16,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		Application mouse code defines the mouse codes for the input handlers.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-27
  * @author		Benjamin Ellenberger
  */
 class ApplicationMouseCode {

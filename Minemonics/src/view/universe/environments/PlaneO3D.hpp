@@ -1,19 +1,11 @@
-/*
- * PlaneO3D.h
- *
- *  Created on: Feb 12, 2015
- *      Author: leviathan
- */
-
-#ifndef PLANEO3D_H_
-#define PLANEO3D_H_
+#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_PLANEO3D_H_
+#define VIEW_UNIVSERSE_ENVIRONMENTS_PLANEO3D_H_
 
 //# corresponding header
 //# forward declarations
 //# system headers
 //## controller headers
 //## model headers
-
 //## view headers
 #include <OgreLight.h>
 #include <Terrain/OgreTerrain.h>
@@ -30,9 +22,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The plane graphical representation in Ogre 3D.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-12
  * @author		Benjamin Ellenberger
  */
 class PlaneO3D: public EnvironmentO3D {
@@ -46,4 +38,4 @@ public:
 	bool mTerrainsImported;
 };
 
-#endif /* PLANEO3D_H_ */
+#endif /* VIEW_UNIVSERSE_ENVIRONMENTS_PLANEO3D_H_ */

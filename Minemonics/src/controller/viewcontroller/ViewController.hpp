@@ -1,19 +1,29 @@
-/*
- * ViewController.hpp
- *
- *  Created on: May 27, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_VIEWCONTROLLER_VIEWCONTROLLER_HPP_
 #define CONTROLLER_VIEWCONTROLLER_VIEWCONTROLLER_HPP_
 
+//# corresponding header
+//# forward declarations
+//# system headers
+#include <vector>
+
+//## controller headers
 #include <controller/universe/Planet.hpp>
+
+//## model headers
+//## view headers
 #include <OgrePrerequisites.h>
+
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
 #include <view/visualization/CEGUI/GUISheetHandler.hpp>
 #include <view/visualization/overlay/InfoOverlay.hpp>
 #include <view/visualization/panels/MathGLPanel.hpp>
-#include <vector>
+
+//## utils headers
 
 class ParamsPanel;
 namespace CEGUI {
@@ -21,8 +31,11 @@ class OgreRenderer;
 } /* namespace CEGUI */
 
 
-/*
- *
+/**
+ * @brief		The view controller handles the information panels of the application and what is currently in view..
+ * @details		Details
+ * @date		2015-05-27
+ * @author		Benjamin Ellenberger
  */
 class ViewController {
 public:
@@ -39,8 +52,10 @@ public:
 
 	void updateMousePosition(float mousePositionX,float mousePositionY);
 
+	//TODO: Implement the view controller to handle what planets are shown.
 	void addPlanet(Planet* planet);
 
+	//Accessor methods
 	ParamsPanel* getDetailsPanel() {
 		return mDetailsPanel;
 	}
@@ -65,6 +80,7 @@ public:
 		return mSystem;
 	}
 
+private:
 	// CEGUI components
 	CEGUI::System* mSystem;
 	CEGUI::Window* mLayout;

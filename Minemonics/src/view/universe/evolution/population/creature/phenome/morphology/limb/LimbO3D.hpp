@@ -1,12 +1,5 @@
-/*
- * LimbO3D.h
- *
- *  Created on: Dec 19, 2014
- *      Author: leviathan
- */
-
-#ifndef LIMBO3D_H_
-#define LIMBO3D_H_
+#ifndef VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBO3D_H_
+#define VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBO3D_H_
 
 //# corresponding headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
@@ -17,9 +10,6 @@ class SimulationManager;
 //# system headers
 //## controller headers
 //## model headers
-#include <OgreEntity.h>
-#include <OgreSceneNode.h>
-
 //## view headers
 //# custom headers
 //## base headers
@@ -32,9 +22,9 @@ class SimulationManager;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The graphical representation of the limb in Ogre3D.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-12-19
  * @author		Benjamin Ellenberger
  */
 class LimbO3D: public LimbGraphics {

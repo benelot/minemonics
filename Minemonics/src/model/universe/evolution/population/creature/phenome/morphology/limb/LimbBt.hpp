@@ -133,9 +133,13 @@ public:
 
 private:
 	btDynamicsWorld* mWorld;
+
 	btCollisionShape* mCollisionShape;
+
 	btDefaultMotionState* mMotionState;
+
 	btRigidBody* mBody;
+
 	btVector3 mDimensions;
 };
 

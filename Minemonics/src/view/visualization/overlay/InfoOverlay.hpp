@@ -1,12 +1,5 @@
-/*
- * MinemonicsOverlay.h
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
-
-#ifndef VIEW_OGRE3D_OGREOVERLAY_H_
-#define VIEW_OGRE3D_OGREOVERLAY_H_
+#ifndef VIEW_VISUALIZATION_OVERLAY_INFOOVERLAY_H_
+#define VIEW_VISUALIZATION_OVERLAY_INFOOVERLAY_H_
 
 //# corresponding header
 //# forward declarations
@@ -27,7 +20,7 @@
 #include <view/visualization/overlay/InfoOverlayData.hpp>
 
 /**
- * @brief		Brief
+ * @brief		The info overlay adds information to the 3D objects in the scene.
  * @details		Details
  * @date		2015-03-17
  * @author		Benjamin Ellenberger
@@ -40,7 +33,10 @@ public:
 	void initialize(Ogre::Camera* camera);
 
 	void addInfo(InfoOverlayData* data);
+
 	void update();
+
+private:
 
 	std::vector<InfoOverlayData*> mOverlayData;
 
@@ -52,4 +48,4 @@ public:
 
 };
 
-#endif /* VIEW_OGRE3D_OGREOVERLAY_H_ */
+#endif /* VIEW_VISUALIZATION_OVERLAY_INFOOVERLAY_H_ */

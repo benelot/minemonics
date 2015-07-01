@@ -153,9 +153,10 @@ void SimulationManager::createScene(void) {
 	// Create the scene node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
-					Ogre::Vector3(-400, 500, 400));
+					Ogre::Vector3(0, 500, 400));
 
-	mCamera->setPosition(-400, 500, 400);
+	mCamera->setPosition(0, 500, 400);
+	camNode->lookAt(Ogre::Vector3(0,300,-4000),Ogre::Node::TS_WORLD);
 	camNode->attachObject(mCamera);
 
 	// camera settings
@@ -211,16 +212,17 @@ void SimulationManager::createScene(void) {
 	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 17000, 30000);
 //
 //	mSceneMgr->setFog(Ogre::FOG_EXP, fadeColour, 0.002);
-//
 //	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
-	// initialize the universe
+	// ###################
+	// We initialize the universe
+	// ###################
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
 	Planet* earth = new Planet();
 	earth->initialize(this, Environment::PLANE, &mDebugDrawer,
-			EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
+			10);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
@@ -228,7 +230,7 @@ void SimulationManager::createScene(void) {
 	// create a population
 	Population* earthPopulation = new Population();
 	earthPopulation->initialize(earth, this,
-			PopulationConfiguration::DEFAULT_POPULATION_SIZE);
+			2);
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
@@ -238,10 +240,13 @@ void SimulationManager::createScene(void) {
 	std::vector<Creature*>::iterator cit =
 			earthPopulation->getCreatures().begin();
 	for (; cit != earthPopulation->getCreatures().end(); cit++) {
+//		(*cit)->setPosition(
+//				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
+//						randomness.nextDouble(300, 1000),
+//						randomness.nextDouble(-1000, 10000)));
+
 		(*cit)->setPosition(
-				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
-						randomness.nextDouble(300, 1000),
-						randomness.nextDouble(-1000, 10000)));
+				Ogre::Vector3(0,300,-4000));
 		(*cit)->performEmbryogenesis();
 	}
 //	earthPopulation->addToWorld();

@@ -1,10 +1,3 @@
-/*
- * GroundController.h
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 #ifndef GROUNDCONTROLLER_H_
 #define GROUNDCONTROLLER_H_
 
@@ -24,9 +17,9 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The ground controller simulates physical motion similar to motion on ground.
  * @details		Details
- * @date		2015-04-27
+ * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
 class GroundController: public MotionController {

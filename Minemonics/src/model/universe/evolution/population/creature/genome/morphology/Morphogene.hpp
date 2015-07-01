@@ -80,138 +80,6 @@ public:
 	 */
 	bool equals(const Morphogene& morphogene) const;
 
-	//Serialization
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the morphogene to a string.
-	 * @param os The ostream.
-	 * @param morphogene The morphogene we want to serialize.
-	 * @return A string containing all information about the morphogene.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const Morphogene &morphogene) {
-		/**The size of the morphogene*/
-		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << ","
-				<< morphogene.mZ << ")"
-
-				/**The orientation of the morphogene*/
-				<< "/Orientation=(" << morphogene.mOrientationX << ","
-				<< morphogene.mOrientationY << "," << morphogene.mOrientationZ
-				<< "," << morphogene.mOrientationW << ")"
-
-				/**The shrink factor propagated along the branches of the morphogene*/
-				<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor
-
-				/**The number of repetitions of this gene one after another.*/
-				<< "/RepetitionLimit" << morphogene.mRepetitionLimit
-
-				/**The gene that follows this one after the repetitions.*/
-				<< "/FollowUpGene=" << morphogene.mFollowUpGene
-
-				/**The color of this morphogene.*/
-				<< "/Color(" << morphogene.mColorR << "," << morphogene.mColorG
-				<< "," << morphogene.mColorB
-
-				/**The 3D primitive type of this morphogene.*/
-				<< "/PrimitiveType" << morphogene.mPrimitiveType
-
-				/**The controller gene of this morphogene's joint.*/
-				<< "/ControllerGene=" << morphogene.mControllerGene
-
-				/**The position of the joint anchor.*/
-				<< "/Joint Anchor:(" << morphogene.mJointAnchorX << ","
-				<< morphogene.mJointAnchorY << "," << morphogene.mJointAnchorZ
-				<< ")"
-
-				/**The orientation of the joint anchor.*/
-				<< "/Joint Rotation:(" << morphogene.mJointPitch << ","
-				<< morphogene.mJointYaw << "," << morphogene.mJointRoll << ")"
-
-				/**The restitution of this morphogene*/
-				<< "/Restitution=" << morphogene.mRestitution
-
-				/**The friction of this morphogene.*/
-				<< "/Friction=" << morphogene.mFriction
-
-				/**The gene branches of this gene*/
-				<< "/Gene Branches=";
-
-		std::vector<MorphogeneBranch*>::const_iterator it;
-		for (it = morphogene.mGeneBranches.begin();
-				it != morphogene.mGeneBranches.end(); it++) {
-			os << (**it);
-		}
-
-		return os;
-	}
-
-	/**
-	 * Serializes the morphogene to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar.register_type(static_cast<SineControllerGene*>(NULL));
-		ar
-		/** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Gene)
-
-		/**The size of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mX) & BOOST_SERIALIZATION_NVP(mY)
-		& BOOST_SERIALIZATION_NVP(mZ)
-
-		/**The orientation of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mOrientationX)
-		& BOOST_SERIALIZATION_NVP(mOrientationY)
-		& BOOST_SERIALIZATION_NVP(mOrientationZ)
-		& BOOST_SERIALIZATION_NVP(mOrientationW)
-
-		/**The shrink factor propagated along the branches of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor)
-
-		/**The number of repetitions of this gene one after another.*/
-		& BOOST_SERIALIZATION_NVP(mRepetitionLimit)
-
-		/**The gene that follows this one after the repetitions.*/
-		& BOOST_SERIALIZATION_NVP(mFollowUpGene)
-
-		/**The color of this morphogene.*/
-		& BOOST_SERIALIZATION_NVP(mColorR)
-		& BOOST_SERIALIZATION_NVP(mColorG)
-		& BOOST_SERIALIZATION_NVP(mColorB)
-
-		/**The 3D primitive type of this morphogene.*/
-		& BOOST_SERIALIZATION_NVP(mPrimitiveType)
-
-		/**The controller gene of this morphogene's joint.*/
-		& BOOST_SERIALIZATION_NVP(mControllerGene)
-
-		/**The position of the joint anchor.*/
-		& BOOST_SERIALIZATION_NVP(mJointAnchorX)
-		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
-		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
-
-		/**The orientation of the joint anchor.*/
-		& BOOST_SERIALIZATION_NVP(mJointPitch)
-		& BOOST_SERIALIZATION_NVP(mJointYaw)
-		& BOOST_SERIALIZATION_NVP(mJointRoll)
-
-		/**The restitution of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mRestitution)
-
-		/**The friction of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mFriction)
-
-		/**The gene branches of this gene*/
-		& BOOST_SERIALIZATION_NVP(mGeneBranches);
-	}
-
 	/**
 	 * Print the morphogene to the standard output.
 	 */
@@ -405,6 +273,138 @@ public:
 
 	void setFriction(double friction) {
 		mFriction = friction;
+	}
+
+	//Serialization
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the morphogene to a string.
+	 * @param os The ostream.
+	 * @param morphogene The morphogene we want to serialize.
+	 * @return A string containing all information about the morphogene.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const Morphogene &morphogene) {
+		/**The size of the morphogene*/
+		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << ","
+				<< morphogene.mZ << ")"
+
+				/**The orientation of the morphogene*/
+				<< "/Orientation=(" << morphogene.mOrientationX << ","
+				<< morphogene.mOrientationY << "," << morphogene.mOrientationZ
+				<< "," << morphogene.mOrientationW << ")"
+
+				/**The shrink factor propagated along the branches of the morphogene*/
+				<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor
+
+				/**The number of repetitions of this gene one after another.*/
+				<< "/RepetitionLimit" << morphogene.mRepetitionLimit
+
+				/**The gene that follows this one after the repetitions.*/
+				<< "/FollowUpGene=" << morphogene.mFollowUpGene
+
+				/**The color of this morphogene.*/
+				<< "/Color(" << morphogene.mColorR << "," << morphogene.mColorG
+				<< "," << morphogene.mColorB
+
+				/**The 3D primitive type of this morphogene.*/
+				<< "/PrimitiveType" << morphogene.mPrimitiveType
+
+				/**The controller gene of this morphogene's joint.*/
+				<< "/ControllerGene=" << morphogene.mControllerGene
+
+				/**The position of the joint anchor.*/
+				<< "/Joint Anchor:(" << morphogene.mJointAnchorX << ","
+				<< morphogene.mJointAnchorY << "," << morphogene.mJointAnchorZ
+				<< ")"
+
+				/**The orientation of the joint anchor.*/
+				<< "/Joint Rotation:(" << morphogene.mJointPitch << ","
+				<< morphogene.mJointYaw << "," << morphogene.mJointRoll << ")"
+
+				/**The restitution of this morphogene*/
+				<< "/Restitution=" << morphogene.mRestitution
+
+				/**The friction of this morphogene.*/
+				<< "/Friction=" << morphogene.mFriction
+
+				/**The gene branches of this gene*/
+				<< "/Gene Branches=";
+
+		std::vector<MorphogeneBranch*>::const_iterator it;
+		for (it = morphogene.mGeneBranches.begin();
+				it != morphogene.mGeneBranches.end(); it++) {
+			os << (**it);
+		}
+
+		return os;
+	}
+
+	/**
+	 * Serializes the morphogene to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar.register_type(static_cast<SineControllerGene*>(NULL));
+		ar
+		/** Serialize the base object */
+		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Gene)
+
+		/**The size of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mX) & BOOST_SERIALIZATION_NVP(mY)
+		& BOOST_SERIALIZATION_NVP(mZ)
+
+		/**The orientation of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mOrientationX)
+		& BOOST_SERIALIZATION_NVP(mOrientationY)
+		& BOOST_SERIALIZATION_NVP(mOrientationZ)
+		& BOOST_SERIALIZATION_NVP(mOrientationW)
+
+		/**The shrink factor propagated along the branches of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor)
+
+		/**The number of repetitions of this gene one after another.*/
+		& BOOST_SERIALIZATION_NVP(mRepetitionLimit)
+
+		/**The gene that follows this one after the repetitions.*/
+		& BOOST_SERIALIZATION_NVP(mFollowUpGene)
+
+		/**The color of this morphogene.*/
+		& BOOST_SERIALIZATION_NVP(mColorR)
+		& BOOST_SERIALIZATION_NVP(mColorG)
+		& BOOST_SERIALIZATION_NVP(mColorB)
+
+		/**The 3D primitive type of this morphogene.*/
+		& BOOST_SERIALIZATION_NVP(mPrimitiveType)
+
+		/**The controller gene of this morphogene's joint.*/
+		& BOOST_SERIALIZATION_NVP(mControllerGene)
+
+		/**The position of the joint anchor.*/
+		& BOOST_SERIALIZATION_NVP(mJointAnchorX)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
+
+		/**The orientation of the joint anchor.*/
+		& BOOST_SERIALIZATION_NVP(mJointPitch)
+		& BOOST_SERIALIZATION_NVP(mJointYaw)
+		& BOOST_SERIALIZATION_NVP(mJointRoll)
+
+		/**The restitution of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mRestitution)
+
+		/**The friction of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mFriction)
+
+		/**The gene branches of this gene*/
+		& BOOST_SERIALIZATION_NVP(mGeneBranches);
 	}
 
 private:

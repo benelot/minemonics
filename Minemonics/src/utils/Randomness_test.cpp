@@ -39,19 +39,19 @@ protected:
 TEST_F(RandomnessTest,distributionsStayWithinBounds) {
 	for (int i = 0; i < 100; i++) {
 		//biased log distribution
-		double biasedLogNumber = randomness->nextBiasedLog(3,7);
+		double biasedLogNumber = randomness->nextBiasedLogDouble(3,7);
 		std::cout << biasedLogNumber << "\t";
 		ASSERT_TRUE(3 <= biasedLogNumber);
 		ASSERT_TRUE(biasedLogNumber <= 7);
 
 		// uniformly distributed double
-		double uniformDouble = randomness->nextDouble(10,100);
+		double uniformDouble = randomness->nextUnifDouble(10,100);
 		std::cout << uniformDouble << "\t";
 		ASSERT_TRUE(10 <= uniformDouble);
 		ASSERT_TRUE(uniformDouble <= 100);
 
 		// positive integer
-		double positiveInt = randomness->nextPosInt(10,100);
+		double positiveInt = randomness->nextUnifPosInt(10,100);
 		std::cout << positiveInt << "\t";
 		ASSERT_TRUE(10 <= positiveInt);
 		ASSERT_TRUE(positiveInt <= 100);

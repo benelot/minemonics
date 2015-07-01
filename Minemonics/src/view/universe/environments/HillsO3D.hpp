@@ -1,22 +1,12 @@
-/*
- * HillsO3D.h
- *
- *  Created on: Feb 12, 2015
- *      Author: leviathan
- */
-
-#ifndef HILLSO3D_H_
-#define HILLSO3D_H_
+#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_HILLSO3D_H_
+#define VIEW_UNIVSERSE_ENVIRONMENTS_HILLSO3D_H_
 
 //# corresponding header
-
 //# forward declarations
 class SimulationManager;
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
 #include <OgreLight.h>
 #include <Terrain/OgreTerrain.h>
@@ -24,11 +14,8 @@ class SimulationManager;
 
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
 //## view headers
 #include <view/universe/environments/EnvironmentO3D.hpp>
@@ -36,9 +23,9 @@ class SimulationManager;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The hills graphical representation in Ogre 3D.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-02-12
  * @author		Benjamin Ellenberger
  */
 class HillsO3D: public EnvironmentO3D {
@@ -52,4 +39,4 @@ public:
 	bool mTerrainsImported;
 };
 
-#endif /* HILLSO3D_H_ */
+#endif /* VIEW_UNIVSERSE_ENVIRONMENTS_HILLSO3D_H_ */

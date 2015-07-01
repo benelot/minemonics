@@ -25,20 +25,8 @@ class Vector3;
 //## view headers
 //## utils headers
 
-//# corresponding header
-
-
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-//## model headers
-//## view headers
-//## utils headers
-
 /**
- * @brief		Bullet implementation of the environment.
+ * @brief		Bullet physics model implementation of the environment.
  * @details		Details
  * @date		2015-03-17
  * @author		Benjamin Ellenberger
@@ -50,7 +38,9 @@ public:
 
 	virtual btRigidBody*& getBody() = 0;
 
-	virtual void createTerrainData(Ogre::SceneNode* sceneNode, float w,float h,float* data,float minH,float maxH,Ogre::Vector3& pos,float scale,float heightScale);
+	virtual void createTerrainData(Ogre::SceneNode* sceneNode, float w, float h,
+			float* data, float minH, float maxH, Ogre::Vector3& pos,
+			float scale, float heightScale);
 
 protected:
 	btCollisionShape* mGroundShape;

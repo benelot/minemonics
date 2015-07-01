@@ -1,27 +1,55 @@
-/*
- * LimbO3D.cpp
- *
- *  Created on: Dec 19, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
-#include <boost/lexical_cast.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <OgreSceneNode.h>
-#include <SimulationManager.hpp>
-#include <view/picking/OgreMeshRay.hpp>
-#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
-#include <view/visualization/procedural/ProceduralCapsuleGenerator.h>
-
-//## configuration headers
-//## controller headers
-
-//## utils headers
-
+//# forward declarations
 #ifndef NULL
 #define NULL 0
 #endif
+
+//# system headers
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <string>
+
+//## controller headers
+//## model headers
+#include <boost/lexical_cast.hpp>
+
+//## view headers
+#include <OgreEntity.h>
+#include <OgreSceneNode.h>
+#include <OgreBlendMode.h>
+#include <OgreColourValue.h>
+#include <OgreCommon.h>
+#include <OgreMaterial.h>
+#include <OgreMaterialManager.h>
+#include <OgreMovableObject.h>
+#include <OgrePass.h>
+#include <OgrePrerequisites.h>
+#include <OgreRay.h>
+#include <OgreResourceGroupManager.h>
+#include <OgreSceneManager.h>
+#include <OgreSceneQuery.h>
+#include <OgreSingleton.h>
+#include <OgreTechnique.h>
+#include <OgreTextureUnitState.h>
+#include <OgreVector3.h>
+
+//# custom headers
+//## base headers
+#include <SimulationManager.hpp>
+
+//## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
+//## controller headers
+//## model headers
+//## view headers
+#include <view/picking/OgreMeshRay.hpp>
+#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
+#include <view/visualization/procedural/ProceduralCapsuleGenerator.h>
+#include <view/visualization/procedural/ProceduralMeshGenerator.h>
+
+//## utils headers
 
 LimbO3D::LimbO3D() :
 		mLimbEntity(NULL), mLimbEntityNode(NULL), mSimulationManager(NULL) {
