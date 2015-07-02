@@ -129,7 +129,7 @@ btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
 
 void LimbBt::reset(Ogre::Vector3 position) {
 	btTransform initialTransform;
-	initialTransform.setIdentity();
+	mMotionState->getWorldTransform(initialTransform);
 
 	btVector3 initialRelativePosition;
 	initialRelativePosition.setValue(getInitialRelativeXPosition(),getInitialRelativeYPosition(),getInitialRelativeZPosition());
@@ -142,6 +142,7 @@ void LimbBt::reset(Ogre::Vector3 position) {
 	initialTransform.setOrigin(OgreBulletUtils::convert(position) + initialRelativePosition);
 	initialTransform.setRotation(initialOrientation);
 
+	mBody->setWorldTransform(initialTransform);
 	mMotionState->setWorldTransform(initialTransform);
 }
 

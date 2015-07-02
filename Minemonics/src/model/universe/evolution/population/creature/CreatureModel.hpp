@@ -127,7 +127,7 @@ public:
 			const CreatureModel &creature) {
 		os
 		/**The name of the creature*/
-		<< "CreatureModel: Name=" << creature.mName
+		<< "CreatureModel: Name=" << creature.mFirstName
 
 		/**If the creature is developed*/
 		<< "/isDeveloped=" << creature.mDeveloped
@@ -157,7 +157,7 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
 		/**The name of the creature*/
-		& BOOST_SERIALIZATION_NVP(mName)
+		& BOOST_SERIALIZATION_NVP(mFirstName)
 
 		/**if the creature is developed already*/
 		& BOOST_SERIALIZATION_NVP(
@@ -192,8 +192,8 @@ public:
 		return mJuries;
 	}
 
-	const std::string& getName() const {
-		return mName;
+	const std::string& getFirstName() const {
+		return mFirstName;
 	}
 
 	const Ogre::Vector3& getPosition() const {
@@ -212,12 +212,16 @@ public:
 		mPhenotypeModel = phenotypeModel;
 	}
 
+	const Ogre::Vector3& getInitialPosition() const {
+		return mInitialPosition;
+	}
+
 private:
 
 	/**
 	 * The name of the creature.
 	 */
-	std::string mName;
+	std::string mFirstName;
 
 	/**
 	 * The genotype (genomic individual) of the creature.
@@ -243,6 +247,11 @@ private:
 	 * The position of the creature.
 	 */
 	Ogre::Vector3 mPosition;
+
+	/**
+	 * The initial position of the creature.
+	 */
+	Ogre::Vector3 mInitialPosition;
 
 	/**
 	 * The population the creature lives in.

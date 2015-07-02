@@ -55,6 +55,11 @@ public:
 	void reset(Ogre::Vector3 position);
 
 	/**
+	 * Reset the creature to its former position.
+	 */
+	void reset();
+
+	/**
 	 * Reposition the creature without resetting it.
 	 */
 	void reposition(Ogre::Vector3 position);

@@ -66,6 +66,11 @@ public:
 	void update();
 
 	/**
+	 * Reset all individuals in the population.
+	 */
+	void reset();
+
+	/**
 	 * Add the population to the world.
 	 */
 	void addToWorld();

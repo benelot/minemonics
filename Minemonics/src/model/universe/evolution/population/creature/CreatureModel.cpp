@@ -28,10 +28,11 @@ void CreatureModel::initialize(PopulationModel* populationModel,
 		double branchiness) {
 	mPopulationModel = populationModel;
 	mPhenotypeModel = phenomeModel;
+	mInitialPosition = position;
 	mPosition = position;
 	Randomness randomness;
 	NameGenerator nameGenerator;
-	mName = nameGenerator.generateFirstName();
+	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
 }
 
@@ -44,15 +45,17 @@ CreatureModel::~CreatureModel() {
 }
 
 void CreatureModel::reset(Ogre::Vector3 position) {
+	mInitialPosition = position;
 	mPosition = position;
 }
 
 void CreatureModel::reposition(Ogre::Vector3 position) {
+	mInitialPosition = position;
 	mPosition = position;
 }
 
 bool CreatureModel::equals(const CreatureModel & creature) const {
-	if (mName != creature.mName) {
+	if (mFirstName != creature.mFirstName) {
 		return false;
 	}
 

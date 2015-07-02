@@ -61,6 +61,10 @@ void Creature::reset(Ogre::Vector3 position) {
 	mPhenotype->reset(position);
 }
 
+void Creature::reset() {
+	reset(mCreatureModel->getInitialPosition());
+}
+
 void Creature::reposition(Ogre::Vector3 position) {
 	mCreatureModel->reposition(position);
 	mPhenotype->reposition(position);

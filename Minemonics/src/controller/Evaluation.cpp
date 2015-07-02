@@ -43,6 +43,7 @@ void Evaluation::setup() {
 	//add competing populations to the world
 	std::vector<Population*>::iterator pit = mPopulations.begin();
 	for (; pit != mPopulations.end(); pit++) {
+		(*pit)->reset();
 		(*pit)->addToWorld();
 	}
 

@@ -71,7 +71,8 @@ void Population::addNewMember(double branchiness, Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
 		//TODO:Include planet into initializer
-		creature->initialize(mSimulationManager, this, rootPosition, branchiness);
+		creature->initialize(mSimulationManager, this, rootPosition,
+				branchiness);
 		addMember(creature);
 	}
 
@@ -88,6 +89,13 @@ void Population::update() {
 	for (; cit != mCreatures.end(); cit++) {
 		(*cit)->update();
 	}
+}
+
+void Population::reset() {
+	std::vector<Creature*>::iterator cit = mCreatures.begin();
+		for (; cit != mCreatures.end(); cit++) {
+			(*cit)->reset();
+		}
 }
 
 void Population::addToWorld() {

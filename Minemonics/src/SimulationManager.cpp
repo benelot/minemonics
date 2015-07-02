@@ -251,7 +251,7 @@ void SimulationManager::createScene(void) {
 //						randomness.nextDouble(300, 1000),
 //						randomness.nextDouble(-1000, 10000)));
 
-		(*cit)->setPosition(Ogre::Vector3(0, 300, -4000));
+		(*cit)->reposition(Ogre::Vector3(0, 300, -4000));
 		(*cit)->performEmbryogenesis();
 	}
 
@@ -263,7 +263,7 @@ void SimulationManager::createScene(void) {
 //						randomness.nextDouble(300, 1000),
 //						randomness.nextDouble(-1000, 10000)));
 
-		(*cit)->setPosition(Ogre::Vector3(200, 300, -4000));
+		(*cit)->reposition(Ogre::Vector3(200, 300, -4000));
 		(*cit)->performEmbryogenesis();
 	}
 
