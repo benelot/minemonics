@@ -54,12 +54,6 @@ public:
 	void addMember(CreatureModel* creatureModel);
 
 	/**
-	 * Proceed with the evaluation.
-	 * @return If the evaluation could be proceeded.
-	 */
-	bool proceedEvaluation();
-
-	/**
 	 * Tests if a population is equal to another population.
 	 * @param population The population to test for equality.
 	 * @return If this population and the other are equal.

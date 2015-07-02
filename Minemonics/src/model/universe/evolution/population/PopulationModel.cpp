@@ -48,22 +48,6 @@ void PopulationModel::addMember(CreatureModel* creatureModel) {
 
 }
 
-bool PopulationModel::proceedEvaluation() {
-	if (mCreatureModels.size() != 0) {
-		if (mCurrentCreatureIndex < mCreatureModels.size()) {
-			mCreatureModels[mCurrentCreatureIndex]->evaluate();
-			mCurrentCreatureIndex =
-					(mCurrentCreatureIndex < mCreatureModels.size()) ?
-							mCurrentCreatureIndex + 1 : 0;
-			if (mCurrentCreatureIndex != 0) {
-				return true;
-			}
-
-		}
-	}
-	return false;
-}
-
 /**
  * Tests if a population is equal to another population.
  * @param population The population to test for equality.

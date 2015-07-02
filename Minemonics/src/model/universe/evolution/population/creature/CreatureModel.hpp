@@ -73,11 +73,6 @@ public:
 	void reposition(Ogre::Vector3 position);
 
 	/**
-	 * Evaluate the creature model.
-	 */
-	void evaluate();
-
-	/**
 	 * Provides a creature size to scale certain values in compensation for the overall size
 	 * of a creature's body. We do this by summing all creature volumes of all cuboids and
 	 * then we take the cube square of it (size(C) = sqrt^3{\sum\limits^{N(C)}_{i=1} v(c_i)}).
