@@ -91,6 +91,10 @@ public:
 		return mCreatureModel->isDeveloped();
 	}
 
+	void setDeveloped(bool developed) {
+		mCreatureModel->setDeveloped(developed);
+	}
+
 	CreatureModel* getCreatureModel() {
 		return mCreatureModel;
 	}

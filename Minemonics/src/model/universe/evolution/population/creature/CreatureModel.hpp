@@ -184,6 +184,10 @@ public:
 		return mDeveloped;
 	}
 
+	void setDeveloped(bool developed) {
+		mDeveloped = developed;
+	}
+
 	const std::vector<Jury*>& getJuries() const {
 		return mJuries;
 	}
