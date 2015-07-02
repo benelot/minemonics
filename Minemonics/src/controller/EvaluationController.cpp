@@ -6,6 +6,8 @@
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 #include <controller/EvaluationController.hpp>
@@ -15,8 +17,8 @@
 //## utils headers
 
 EvaluationController::EvaluationController() :
-		mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0), mPaused(
-				false) {
+		mSimulationManager(NULL), mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
+				0), mPaused(false) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -25,7 +27,9 @@ EvaluationController::~EvaluationController() {
 	// TODO Auto-generated destructor stub
 }
 
-void EvaluationController::initialize(int parallelEvaluationsQty) {
+void EvaluationController::initialize(SimulationManager* simulationManager,
+		int parallelEvaluationsQty) {
+	mSimulationManager = simulationManager;
 	mParallelEvaluationsQty = parallelEvaluationsQty;
 	mEvaluations.clear();
 }
@@ -42,8 +46,7 @@ void EvaluationController::scheduleEvaluations() {
 		if ((*eit)->isTornDown()) {
 			mCurrentlyRunningEvaluationsQty--;
 			eit = mEvaluations.erase(eit);
-		}
-		else{
+		} else {
 			eit++;
 		}
 	}
@@ -55,6 +58,7 @@ void EvaluationController::scheduleEvaluations() {
 				&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
 			mCurrentlyRunningEvaluationsQty++;
 			(*eit)->setup();
+			mSimulationManager->getViewController().setEvaluationInView(*eit);
 		}
 	}
 }

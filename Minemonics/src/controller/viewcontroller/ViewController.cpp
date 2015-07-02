@@ -44,7 +44,7 @@
 
 ViewController::ViewController() :
 		mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDetailsPanel(NULL), mFpsPanel(
-		NULL), mDragContainer(NULL) {
+		NULL), mDragContainer(NULL), mEvaluationInView(NULL) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -63,7 +63,6 @@ void ViewController::initialize(SimulationManager* simulationManager,
 
 	// This pointer is valid only locally
 	mSystem = &CEGUI::System::getSingleton();
-
 
 	// tell us a lot about what is going on (see CEGUI.log in the working directory)
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
@@ -128,7 +127,6 @@ void ViewController::initialize(SimulationManager* simulationManager,
 	//	light->setDiffuseColour(Ogre::ColourValue::White);
 	//	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
 
-
 }
 
 void ViewController::update(double timeSinceLastFrame) {
@@ -138,17 +136,16 @@ void ViewController::update(double timeSinceLastFrame) {
 
 }
 
-
 void ViewController::notifyDisplaySizeChanged(float width, float height) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
 }
 
-void ViewController::updateMousePosition(float mousePositionX,float mousePositionY) {
+void ViewController::updateMousePosition(float mousePositionX,
+		float mousePositionY) {
 	CEGUI::Vector2f mousePos =
-					mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-					mousePositionX - mousePos.d_x,
-					mousePositionY - mousePos.d_y);
+			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
+			mousePositionX - mousePos.d_x, mousePositionY - mousePos.d_y);
 }
 
 void ViewController::addPlanet(Planet* planet) {

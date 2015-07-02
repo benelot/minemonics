@@ -17,6 +17,8 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/Evaluation.hpp>
+
 //## model headers
 //## view headers
 #include <view/visualization/CEGUI/GUISheetHandler.hpp>
@@ -30,7 +32,6 @@ namespace CEGUI {
 class OgreRenderer;
 } /* namespace CEGUI */
 
-
 /**
  * @brief		The view controller handles the information panels of the application and what is currently in view..
  * @details		Details
@@ -42,7 +43,8 @@ public:
 	ViewController();
 	virtual ~ViewController();
 
-	void initialize(SimulationManager* simulationManager,Ogre::RenderTarget* renderTarget,StateHandler* stateHandler);
+	void initialize(SimulationManager* simulationManager,
+			Ogre::RenderTarget* renderTarget, StateHandler* stateHandler);
 
 	void update(double timeSinceLastFrame);
 
@@ -50,7 +52,7 @@ public:
 
 	void notifyDisplaySizeChanged(float width, float height);
 
-	void updateMousePosition(float mousePositionX,float mousePositionY);
+	void updateMousePosition(float mousePositionX, float mousePositionY);
 
 	//TODO: Implement the view controller to handle what planets are shown.
 	void addPlanet(Planet* planet);
@@ -80,6 +82,14 @@ public:
 		return mSystem;
 	}
 
+	Evaluation* getEvaluationInView() const {
+		return mEvaluationInView;
+	}
+
+	void setEvaluationInView(Evaluation* evaluationInView) {
+		mEvaluationInView = evaluationInView;
+	}
+
 private:
 	// CEGUI components
 	CEGUI::System* mSystem;
@@ -99,6 +109,7 @@ private:
 	InfoOverlay mInfoOverlay;
 
 	std::vector<Planet*> mPlanetsInView;
+	Evaluation* mEvaluationInView;
 };
 
 #endif /* CONTROLLER_VIEWCONTROLLER_VIEWCONTROLLER_HPP_ */

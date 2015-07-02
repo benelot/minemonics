@@ -217,7 +217,8 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
-	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
+	mUniverse.initialize(this,
+			EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
 	Planet* earth = new Planet();

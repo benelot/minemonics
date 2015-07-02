@@ -39,7 +39,8 @@ public:
 	/**
 	 * Initializes the universe.
 	 */
-	void initialize(int parallelEvaluationsQty);
+	void initialize(SimulationManager* simulationManager,
+			int parallelEvaluationsQty);
 
 	/**
 	 * Add a planet to the universe.

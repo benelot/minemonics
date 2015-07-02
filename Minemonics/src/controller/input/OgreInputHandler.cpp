@@ -222,6 +222,9 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Return;
 		break;
 		case ApplicationKeycode::APPK_SPACE:
+		if(mSimulationMgr->getViewController().getEvaluationInView() != NULL) {
+			mSimulationMgr->getViewController().getEvaluationInView()->teardown();
+		}
 		mSimulationMgr->getUniverse().proceedEvaluation();
 		break;
 		case ApplicationKeycode::APPK_BACKSPACE:

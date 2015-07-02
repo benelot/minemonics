@@ -33,9 +33,10 @@ public:
 
 	/**
 	 * Initialize the evaluation controller.
+	 * @param simulationManager Handle to the simulation manager.
 	 * @param parallelEvaluationsQty The number of parallel evaluations running in the simulator.
 	 */
-	void initialize(int parallelEvaluationsQty);
+	void initialize(SimulationManager* simulationManager,int parallelEvaluationsQty);
 
 	/**
 	 * Add a new evaluation.
@@ -85,6 +86,8 @@ private:
 
 	//TODO: Use the timer manager to trigger proceeding.
 	TimerManager<EvaluationController> mEvaluationManager;
+
+	SimulationManager* mSimulationManager;
 };
 
 #endif /* CONTROLLER_EVALUATIONCONTROLLER_HPP_ */
