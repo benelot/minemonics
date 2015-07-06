@@ -26,6 +26,7 @@ class btVector3;
 //## configuration headers
 //## controller headers
 //## model headers
+
 //## view headers
 //## utils headers
 
@@ -39,6 +40,12 @@ class LimbPhysics {
 public:
 	LimbPhysics();
 	virtual ~LimbPhysics();
+
+	/**
+	 * Clone the limb physics.
+	 * @return The clone of the limb physics.
+	 */
+	virtual LimbPhysics* clone() = 0;
 
 	/**
 	 * Reset the limb to the place when the creature was born.
@@ -199,6 +206,12 @@ protected:
 	 * The friction of this segment.
 	 */
 	double mFriction;
+
+	/**
+	 * Mass of the limb.
+	 */
+	double mMass;
+
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBPHYSICS_HPP_ */

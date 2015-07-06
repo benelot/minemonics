@@ -34,6 +34,10 @@ JointBt::JointBt() :
 	mMotors.clear();
 }
 
+JointBt::JointBt(const JointBt& jointBt) {
+	//TODO: Implement copy from jointBt.
+}
+
 JointBt::~JointBt() {
 	removeFromWorld();
 
@@ -145,4 +149,8 @@ void JointBt::addToWorld() {
 
 void JointBt::removeFromWorld() {
 	mWorld->removeConstraint((btTypedConstraint*) mG6DofJoint);
+}
+
+JointBt* JointBt::clone() {
+	return new JointBt(*this);
 }

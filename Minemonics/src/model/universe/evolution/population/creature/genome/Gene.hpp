@@ -59,7 +59,7 @@ public:
 
 	/**
 	 * Clone the gene.
-	 * @return The cloned gene.
+	 * @return The clone of the gene.
 	 */
 	virtual Gene* clone() = 0;
 

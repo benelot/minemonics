@@ -52,10 +52,16 @@ class access;
 class CreatureModel {
 public:
 	CreatureModel();
+	CreatureModel(const CreatureModel& creatureModel);
+
 	virtual ~CreatureModel();
 
 	/**
 	 * Initializes a creature with random values for its genome, name, total segments quantity and segments path limit.
+	 * @param populationModel The population model of the population it belongs to.
+	 * @param genome The creature's genome.
+	 * @param phenomeModel The creature's phenome model.
+	 * @param position The creature's position.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
 	void initialize(PopulationModel* populationModel,
@@ -100,12 +106,19 @@ public:
 		return totalVolume;
 	}
 
+	double getFitness();
+
 	/**
 	 * Compare the creature model to another creature model.
 	 * @param creature Another creature model.
 	 * @return If the creature model is equal to the other creature model.
 	 */
 	bool equals(const CreatureModel & creature) const;
+
+	/**
+	 * Clone this creature model.
+	 */
+	CreatureModel* clone();
 
 	/**
 	 * Give access to boost serialization
@@ -209,6 +222,10 @@ public:
 
 	const Ogre::Vector3& getInitialPosition() const {
 		return mInitialPosition;
+	}
+
+	PhenomeModel* getPhenotypeModel() const {
+		return mPhenotypeModel;
 	}
 
 private:

@@ -56,6 +56,18 @@ LimbO3D::LimbO3D() :
 
 }
 
+LimbO3D::LimbO3D(const LimbO3D& limbO3D) {
+	Ogre::NameGenerator ng("");
+	mLimbEntity = limbO3D.mLimbEntity->clone(ng.generate());
+	mLimbEntityNode =
+			limbO3D.mLimbEntityNode->getParentSceneNode()->createChildSceneNode(
+					limbO3D.mLimbEntityNode->getPosition(),
+					limbO3D.mLimbEntityNode->getOrientation());
+	mPosition = limbO3D.mPosition;
+	mOrientation = limbO3D.mOrientation;
+	mSimulationManager = limbO3D.mSimulationManager;
+}
+
 LimbO3D::~LimbO3D() {
 	delete mLimbEntityNode;
 	delete mLimbEntity;
@@ -207,4 +219,8 @@ Ogre::Vector3 LimbO3D::getLocalPreciseIntersection(Ogre::Vector3 origin,
 	ray.raycastFromPoint(origin, direction, result, mLimbEntity->getName());
 
 	return result;
+}
+
+LimbO3D* LimbO3D::clone() {
+	return new LimbO3D(*this);
 }

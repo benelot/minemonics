@@ -47,6 +47,8 @@ class access;
 class Morphogene: public Gene {
 public:
 	Morphogene();
+	Morphogene(const Morphogene& morphoGene);
+
 	virtual ~Morphogene();
 
 	/**

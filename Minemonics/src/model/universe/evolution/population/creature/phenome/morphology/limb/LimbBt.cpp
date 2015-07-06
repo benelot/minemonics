@@ -1,4 +1,7 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+//# forward declarations
+//# system headers
 #include <stddef.h>
 #include <iostream>
 
@@ -10,7 +13,6 @@
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btTransform.h>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //## view headers
 //# custom headers
@@ -18,11 +20,14 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
 //## view headers
 //## utils headers
 
 LimbBt::LimbBt() :
-		mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(NULL) {
+		mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(NULL), mType(
+				LimbModel::UNKNOWN) {
 }
 
 LimbBt::~LimbBt() {
@@ -35,6 +40,8 @@ void LimbBt::initialize(btDynamicsWorld* world, void* limb,
 		btScalar restitution, btScalar friction) {
 	mWorld = world;
 	mDimensions = dimensions;
+	mMass = mass;
+	mType = type;
 	btVector3 HalfExtents(dimensions.x() * 0.5f, dimensions.y() * 0.5f,
 			dimensions.z() * 0.5f);
 	switch (type) {
@@ -132,14 +139,16 @@ void LimbBt::reset(Ogre::Vector3 position) {
 	mMotionState->getWorldTransform(initialTransform);
 
 	btVector3 initialRelativePosition;
-	initialRelativePosition.setValue(getInitialRelativeXPosition(),getInitialRelativeYPosition(),getInitialRelativeZPosition());
+	initialRelativePosition.setValue(getInitialRelativeXPosition(),
+			getInitialRelativeYPosition(), getInitialRelativeZPosition());
 
 	btQuaternion initialOrientation;
 	initialOrientation.setValue(getInitialXOrientation(),
 			getInitialYOrientation(), getInitialZOrientation(),
 			getInitialWOrientation());
 
-	initialTransform.setOrigin(OgreBulletUtils::convert(position) + initialRelativePosition);
+	initialTransform.setOrigin(
+			OgreBulletUtils::convert(position) + initialRelativePosition);
 	initialTransform.setRotation(initialOrientation);
 
 	mBody->setWorldTransform(initialTransform);
@@ -177,3 +186,60 @@ void LimbBt::removeFromWorld() {
 	}
 }
 
+LimbBt::LimbBt(const LimbBt& limbBt) {
+	btVector3 HalfExtents(limbBt.mDimensions.x() * 0.5f,
+			limbBt.mDimensions.y() * 0.5f, limbBt.mDimensions.z() * 0.5f);
+	switch (limbBt.mType) {
+	case LimbModel::BLOCK:
+		mCollisionShape = new btBoxShape(HalfExtents);
+		break;
+	case LimbModel::CAPSULE:
+		mCollisionShape = new btCapsuleShape(
+				btScalar(limbBt.mDimensions.x() * 0.5f),
+				btScalar(limbBt.mDimensions.y()));
+		break;
+	case LimbModel::UNKNOWN:
+		std::cout
+				<< "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
+		exit(-1);
+	}
+
+	btVector3 localInertia(0, 0, 0);
+
+	mCollisionShape->calculateLocalInertia(mMass, localInertia);
+
+	btTransform startTransform = limbBt.mBody->getWorldTransform();
+
+	mMotionState = new btDefaultMotionState(startTransform);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, mMotionState,
+			mCollisionShape, localInertia);
+	mBody = new btRigidBody(rbInfo);
+
+	//Set the friction and restitution/elasticity of the rigid body
+	mBody->setFriction(mFriction);
+	mBody->setRestitution(mRestitution);
+
+	//Set user pointer for proper return of creature/limb information etc..
+	mBody->setUserPointer(limbBt.mBody->getUserPointer());
+	//add the limb pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limbBt.mBody->getUserPointer());
+
+	mType = limbBt.mType;
+
+	mDimensions = limbBt.mDimensions;
+	mFriction = limbBt.mFriction;
+	mRestitution = limbBt.mRestitution;
+	mInWorld = limbBt.mInWorld;
+	mInitialRelativeXPosition = limbBt.mInitialRelativeXPosition;
+	mInitialRelativeYPosition = limbBt.mInitialRelativeYPosition;
+	mInitialRelativeZPosition = limbBt.mInitialRelativeZPosition;
+
+	mInitialWOrientation = limbBt.mInitialWOrientation;
+	mInitialXOrientation = limbBt.mInitialXOrientation;
+	mInitialYOrientation = limbBt.mInitialYOrientation;
+	mInitialZOrientation = limbBt.mInitialZOrientation;
+}
+
+LimbBt* LimbBt::clone() {
+	return new LimbBt(*this);
+}

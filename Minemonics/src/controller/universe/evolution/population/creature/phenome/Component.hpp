@@ -34,12 +34,21 @@ public:
 	 */
 	void initialize(ComponentModel::ComponentType componentType);
 
+	/**
+	 * Clone the component.
+	 */
+	virtual Component* clone() = 0;
+
+	ComponentModel::ComponentType getComponentType(){
+		return mComponentModel->getComponentType();
+	}
+
 private:
 
 	/**
 	 * The model representation of the component.
 	 */
-	ComponentModel mComponentModel;
+	ComponentModel* mComponentModel;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENT_H_ */

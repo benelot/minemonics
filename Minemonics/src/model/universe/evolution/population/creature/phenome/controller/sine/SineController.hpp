@@ -26,6 +26,8 @@
 class SineController: public Controller {
 public:
 	SineController();
+	SineController(const SineController& sineController);
+
 	virtual ~SineController();
 
 	/**
@@ -36,6 +38,12 @@ public:
 	 * @param yShift shift in y direction.
 	 */
 	void initialize(double amplitude, double frequency, double xShift,double yShift);
+
+	/**
+	 * Clone the sine controller.
+	 * @return The clone of the sine controller.
+	 */
+	SineController* clone();
 
 	void perform(double timeSinceLastFrame);
 

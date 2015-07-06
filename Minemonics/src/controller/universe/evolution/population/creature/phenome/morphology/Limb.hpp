@@ -44,6 +44,8 @@ class Creature;
 class Limb: public Component {
 public:
 	Limb();
+	Limb(const Limb& limb);
+
 	virtual ~Limb();
 
 	void initialize(SimulationManager* simulationManager, Creature* creature,
@@ -60,6 +62,12 @@ public:
 	 */
 	void buildFrom(SimulationManager* simulationManager, Creature* creature,
 			LimbModel* limbModel);
+
+	/**
+	 * Clone the limb.
+	 * @return The clone of the limb.
+	 */
+	Limb* clone();
 
 	/**
 	 * Reset the creature to the way it was born.

@@ -18,6 +18,11 @@ GeneBranch::GeneBranch() :
 
 }
 
+GeneBranch::GeneBranch(const GeneBranch& geneBranch) {
+	mActive = geneBranch.mActive;
+	mType = geneBranch.mType;
+}
+
 GeneBranch::~GeneBranch() {
 	// TODO Auto-generated destructor stub
 }
@@ -25,6 +30,7 @@ GeneBranch::~GeneBranch() {
 void GeneBranch::initialize(GeneBranchType geneBranchType) {
 	mType = geneBranchType;
 }
+
 
 bool GeneBranch::equals(const GeneBranch& geneBranch) const {
 
@@ -41,3 +47,6 @@ bool GeneBranch::equals(const GeneBranch& geneBranch) const {
 	return true;
 }
 
+GeneBranch* GeneBranch::clone() {
+	return new GeneBranch(*this);
+}

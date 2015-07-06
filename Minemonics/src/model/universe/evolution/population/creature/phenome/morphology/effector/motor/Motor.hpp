@@ -35,6 +35,8 @@ public:
 
 	void initialize();
 
+	virtual Motor* clone() = 0;
+
 	virtual void apply() = 0;
 
 	//Accessor methods

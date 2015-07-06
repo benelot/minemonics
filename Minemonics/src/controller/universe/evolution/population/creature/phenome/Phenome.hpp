@@ -72,6 +72,8 @@ class Creature;
 class Phenome {
 public:
 	Phenome();
+	Phenome(const Phenome& phenome);
+
 	virtual ~Phenome();
 
 	/**
@@ -102,6 +104,11 @@ public:
 	 * @param position The position of the creature.
 	 */
 	void reposition(Ogre::Vector3 position);
+
+	/**
+	 * Clone the phenome.
+	 */
+	Phenome* clone();
 
 	/**
 	 * Update the graphical representation of the creature with its physical representation.

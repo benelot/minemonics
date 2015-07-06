@@ -55,6 +55,12 @@ public:
 	bool equals(const ComponentModel & componentModel) const;
 
 	/**
+	 * Clone the component model.
+	 * @return The clone of the component model.
+	 */
+	virtual ComponentModel* clone() = 0;
+
+	/**
 	 * Give access to boost serialization
 	 */
 	friend class boost::serialization::access;

@@ -23,15 +23,15 @@
 //## utils headers
 
 SineController::SineController() :
-		Controller(SINE_CONTROLLER), mAmplitude(0.5f), mFrequency(1), mXShift(0), mYShift(1), mTime(
-				0) {
+		Controller(SINE_CONTROLLER), mAmplitude(0.5f), mFrequency(1), mXShift(
+				0), mYShift(1), mTime(0) {
 }
 
 SineController::~SineController() {
 }
 
 void SineController::initialize(double amplitude, double frequency,
-		double xShift,double yShift) {
+		double xShift, double yShift) {
 	mAmplitude = amplitude;
 	mFrequency = frequency;
 	mXShift = xShift;
@@ -48,13 +48,28 @@ void SineController::perform(double timeSinceLastFrame) {
 	}
 	double output = mAmplitude * sin(mFrequency * mTime + mXShift) + mYShift;
 	//clamp output to [0;1]
-	output = (output > 1)?1:(output < 0)?0:output;
+	output = (output > 1) ? 1 : (output < 0) ? 0 : output;
 
 	// distribute the output to the adjacent controllers or endpoints
 	distributeOutput(output);
 }
 
-void SineController::collectInputs()
-{
+SineController::SineController(const SineController& sineController) :
+		Controller(SINE_CONTROLLER) {
+	mAmplitude = sineController.mAmplitude;
+	mFrequency = sineController.mFrequency;
+	mTime = sineController.mTime;
+	mType = sineController.mType;
+	mXShift = sineController.mXShift;
+	mYShift = sineController.mYShift;
+
+	//TODO: How to clone control inputs/outputs
+}
+
+SineController* SineController::clone() {
+	return new SineController(*this);
+}
+
+void SineController::collectInputs() {
 	//TODO::keep the inputs as they are
 }

@@ -39,6 +39,8 @@ class btTransform;
 class JointModel: public ComponentModel {
 public:
 	JointModel();
+	JointModel(const JointModel& jointModel);
+
 	virtual ~JointModel();
 
 	void initialize(btDynamicsWorld* world, btRigidBody* limbA,
@@ -60,6 +62,12 @@ public:
 	 * @return If the joint model is equal to the other joint model.
 	 */
 	bool equals(const JointModel & jointModel) const;
+
+	/**
+	 * Clone the joint model.
+	 * @return The clone of the joint model.
+	 */
+	JointModel* clone();
 
 	/**
 	 * Give access to boost serialization

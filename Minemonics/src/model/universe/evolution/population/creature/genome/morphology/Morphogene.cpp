@@ -131,38 +131,7 @@ void Morphogene::initialize(double branchiness) {
 }
 
 Morphogene* Morphogene::clone() {
-	Morphogene* morphoGene = new Morphogene();
-	morphoGene->setColorB(mColorB);
-	morphoGene->setColorG(mColorG);
-	morphoGene->setColorR(mColorR);
-
-	morphoGene->setControllerGene(mControllerGene->clone());
-	morphoGene->setFollowUpGene(mFollowUpGene);
-	morphoGene->setType(mType);
-	morphoGene->setJointAnchorX(mJointAnchorX);
-	morphoGene->setJointAnchorY(mJointAnchorY);
-	morphoGene->setJointAnchorZ(mJointAnchorZ);
-	morphoGene->setJointPitch(mJointPitch);
-	morphoGene->setJointRoll(mJointRoll);
-	morphoGene->setJointYaw(mJointYaw);
-	morphoGene->setOrientationW(mOrientationW);
-	morphoGene->setOrientationX(mOrientationX);
-	morphoGene->setOrientationY(mOrientationY);
-	morphoGene->setOrientationZ(mOrientationZ);
-	morphoGene->setPrimitiveType(mPrimitiveType);
-	morphoGene->setRepetitionLimit(mRepetitionLimit);
-	morphoGene->setSegmentShrinkFactor(mSegmentShrinkFactor);
-	morphoGene->setX(mX);
-	morphoGene->setY(mY);
-	morphoGene->setZ(mZ);
-
-	std::vector<MorphogeneBranch*>::iterator mgbit = mGeneBranches.begin();
-	for (; mgbit != mGeneBranches.end(); mgbit++) {
-		morphoGene->getGeneBranches().push_back((*mgbit)->clone());
-	}
-
-	return morphoGene;
-
+	return new Morphogene(*this);
 }
 
 void Morphogene::mutate() {
@@ -193,6 +162,39 @@ void Morphogene::grow(int branchiness) {
 		MorphogeneBranch* branch = new MorphogeneBranch();
 		branch->initialize();
 		mGeneBranches.push_back(branch);
+	}
+}
+
+Morphogene::Morphogene(const Morphogene& morphoGene) {
+	mColorB = morphoGene.mColorB;
+	mColorG = morphoGene.mColorG;
+	mColorR = morphoGene.mColorR;
+
+	mControllerGene = morphoGene.mControllerGene->clone();
+	mFollowUpGene = morphoGene.mFollowUpGene;
+	mType = morphoGene.mType;
+	mJointAnchorX = morphoGene.mJointAnchorX;
+	mJointAnchorY = morphoGene.mJointAnchorY;
+	mJointAnchorZ = morphoGene.mJointAnchorZ;
+	mJointPitch = morphoGene.mJointPitch;
+	mJointRoll = morphoGene.mJointRoll;
+	mJointYaw = morphoGene.mJointYaw;
+	mOrientationW = morphoGene.mOrientationW;
+	mOrientationX = morphoGene.mOrientationX;
+	mOrientationY = morphoGene.mOrientationY;
+	mOrientationZ = morphoGene.mOrientationZ;
+	mPrimitiveType = morphoGene.mPrimitiveType;
+	mRepetitionLimit = morphoGene.mRepetitionLimit;
+	mSegmentShrinkFactor = morphoGene.mSegmentShrinkFactor;
+	mX = morphoGene.mX;
+	mY = morphoGene.mY;
+	mZ = morphoGene.mZ;
+	mFriction = morphoGene.mFriction;
+	mRestitution = morphoGene.mRestitution;
+
+	std::vector<MorphogeneBranch*>::const_iterator mgbit = morphoGene.mGeneBranches.begin();
+	for (; mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
+		mGeneBranches.push_back((*mgbit)->clone());
 	}
 }
 

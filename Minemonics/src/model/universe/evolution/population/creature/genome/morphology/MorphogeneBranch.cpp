@@ -31,6 +31,44 @@ MorphogeneBranch::MorphogeneBranch() :
 				0), mJointMaxRollSpeed(0) {
 }
 
+MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
+	mActive = morphogeneBranch.mActive;
+	mBranchGeneType = morphogeneBranch.mBranchGeneType;
+	mFlipped = morphogeneBranch.mFlipped;
+	mType = morphogeneBranch.mType;
+	mJointAnchorX = morphogeneBranch.mJointAnchorX;
+	mJointAnchorY = morphogeneBranch.mJointAnchorY;
+	mJointAnchorZ = morphogeneBranch.mJointAnchorZ;
+	mJointMaxPitchForce = morphogeneBranch.mJointMaxPitchForce;
+	mJointMaxPitchSpeed = morphogeneBranch.mJointMaxPitchSpeed;
+	mJointMaxRollForce = morphogeneBranch.mJointMaxRollForce;
+	mJointMaxRollSpeed = morphogeneBranch.mJointMaxRollSpeed;
+	mJointMaxYawForce = morphogeneBranch.mJointMaxYawForce;
+	mJointMaxYawSpeed = morphogeneBranch.mJointMaxYawSpeed;
+	mJointPitch = morphogeneBranch.mJointPitch;
+	mJointPitchMaxAngle = morphogeneBranch.mJointPitchMaxAngle;
+	mJointPitchMinAngle = morphogeneBranch.mJointPitchMinAngle;
+	mJointPitchMotorEnabled = morphogeneBranch.mJointPitchMotorEnabled;
+	mJointPitchStiffness = morphogeneBranch.mJointPitchStiffness;
+	mJointYaw = morphogeneBranch.mJointYaw;
+	mJointYawMaxAngle = morphogeneBranch.mJointYawMaxAngle;
+	mJointYawMinAngle = morphogeneBranch.mJointYawMinAngle;
+	mJointYawMotorEnabled = morphogeneBranch.mJointYawMotorEnabled;
+	mJointYawStiffness = morphogeneBranch.mJointYawStiffness;
+	mJointRoll = morphogeneBranch.mJointRoll;
+	mJointRollMaxAngle = morphogeneBranch.mJointRollMaxAngle;
+	mJointRollMinAngle = morphogeneBranch.mJointRollMinAngle;
+	mJointRollMotorEnabled = morphogeneBranch.mJointRollMotorEnabled;
+	mJointRollStiffness = morphogeneBranch.mJointRollStiffness;
+	mMirrored = morphogeneBranch.mMirrored;
+	mSpringPitchDampingCoefficient =
+			morphogeneBranch.mSpringPitchDampingCoefficient;
+	mSpringYawDampingCoefficient =
+			morphogeneBranch.mSpringYawDampingCoefficient;
+	mSpringRollDampingCoefficient =
+			morphogeneBranch.mSpringRollDampingCoefficient;
+}
+
 void MorphogeneBranch::initialize() {
 	GeneBranch::initialize(GeneBranch::MORPHOGENE_BRANCH);
 
@@ -278,38 +316,7 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 }
 
 MorphogeneBranch* MorphogeneBranch::clone() {
-	MorphogeneBranch* morphoGeneBranch = new MorphogeneBranch();
-	morphoGeneBranch->setActive(mActive);
-	morphoGeneBranch->setBranchGeneType(mBranchGeneType);
-	morphoGeneBranch->setFlipped(mFlipped);
-	morphoGeneBranch->setType(mType);
-	morphoGeneBranch->setJointAnchorX(mJointAnchorX);
-	morphoGeneBranch->setJointAnchorY(mJointAnchorY);
-	morphoGeneBranch->setJointAnchorZ(mJointAnchorZ);
-	morphoGeneBranch->setJointMaxPitchForce(mJointMaxPitchForce);
-	morphoGeneBranch->setJointMaxPitchSpeed(mJointMaxPitchSpeed);
-	morphoGeneBranch->setJointMaxRollForce(mJointMaxRollForce);
-	morphoGeneBranch->setJointMaxRollSpeed(mJointMaxRollSpeed);
-	morphoGeneBranch->setJointMaxYawForce(mJointMaxYawForce);
-	morphoGeneBranch->setJointMaxYawSpeed(mJointMaxYawSpeed);
-	morphoGeneBranch->setJointPitch(mJointPitch);
-	morphoGeneBranch->setJointPitchMaxAngle(mJointPitchMaxAngle);
-	morphoGeneBranch->setJointPitchMinAngle(mJointPitchMinAngle);
-	morphoGeneBranch->setJointPitchMotorEnabled(mJointPitchMotorEnabled);
-	morphoGeneBranch->setJointYaw(mJointYaw);
-	morphoGeneBranch->setJointYawMaxAngle(mJointYawMaxAngle);
-	morphoGeneBranch->setJointYawMinAngle(mJointYawMinAngle);
-	morphoGeneBranch->setJointYawMotorEnabled(mJointYawMotorEnabled);
-	morphoGeneBranch->setJointRoll(mJointRoll);
-	morphoGeneBranch->setJointRollMaxAngle(mJointRollMaxAngle);
-	morphoGeneBranch->setJointRollMinAngle(mJointRollMinAngle);
-	morphoGeneBranch->setJointRollMotorEnabled(mJointRollMotorEnabled);
-	morphoGeneBranch->setMirrored(mMirrored);
-	morphoGeneBranch->setSpringPitchDampingCoefficient(mSpringPitchDampingCoefficient);
-	morphoGeneBranch->setSpringYawDampingCoefficient(mSpringYawDampingCoefficient);
-	morphoGeneBranch->setSpringRollDampingCoefficient(mSpringRollDampingCoefficient);
-
-	return morphoGeneBranch;
+	return new MorphogeneBranch(*this);
 }
 
 void MorphogeneBranch::mutate() {

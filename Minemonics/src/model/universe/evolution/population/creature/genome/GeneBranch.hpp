@@ -34,6 +34,8 @@ public:
 	};
 
 	GeneBranch();
+	GeneBranch(const GeneBranch& geneBranch);
+
 	virtual ~GeneBranch();
 
 	/**
@@ -48,6 +50,12 @@ public:
 	 * @return If the gene branch is equal to the other gene branch.
 	 */
 	bool equals(const GeneBranch& geneBranch) const;
+
+	/**
+	 * Clone the gene branch.
+	 * @return The clone of the gene branch.
+	 */
+	GeneBranch* clone();
 
 	//Serialization
 

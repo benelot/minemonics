@@ -54,6 +54,8 @@ public:
 	 */
 	bool equals(const Jury & jury) const;
 
+	virtual Jury* clone() = 0;
+
 	/**
 	 * Give access to boost serialization
 	 */

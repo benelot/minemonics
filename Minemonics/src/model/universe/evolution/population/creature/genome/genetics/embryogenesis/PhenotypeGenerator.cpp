@@ -30,3 +30,21 @@ void PhenotypeGenerator::initialize(std::map<int,int>& repetitionList,
 	mMirrored = mirrored;
 }
 
+PhenotypeGenerator::PhenotypeGenerator(
+		const PhenotypeGenerator& phenotypeGenerator) {
+	mCurrentShrinkageFactor = phenotypeGenerator.mCurrentShrinkageFactor;
+	mFlipped = phenotypeGenerator.mFlipped;
+	mGene = phenotypeGenerator.mGene;
+	mGeneBranch = phenotypeGenerator.mGeneBranch;
+	mMirrored = phenotypeGenerator.mMirrored;
+	mOrientation = phenotypeGenerator.mOrientation;
+	mParentComponentModel = phenotypeGenerator.mParentComponentModel;
+	mPosition = phenotypeGenerator.mPosition;
+	mReferenceComponents = phenotypeGenerator.mReferenceComponents;
+	mRepetitionList = phenotypeGenerator.mRepetitionList;
+	mRoot2LeafPath = phenotypeGenerator.mRoot2LeafPath;
+}
+
+PhenotypeGenerator* PhenotypeGenerator::clone() {
+	return new PhenotypeGenerator(*this);
+}

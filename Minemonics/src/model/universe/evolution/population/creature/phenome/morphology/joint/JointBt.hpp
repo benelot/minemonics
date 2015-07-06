@@ -35,6 +35,8 @@ class Motor;
 class JointBt: public JointPhysics {
 public:
 	JointBt();
+	JointBt(const JointBt& jointBt);
+
 	virtual ~JointBt();
 
 	/**
@@ -87,6 +89,12 @@ public:
 	 * @return If the joint bullet physics is equal to the other joint bullet physics.
 	 */
 	bool equals(const JointBt & jointBt) const;
+
+	/**
+	 * Clone the joint bt.
+	 * @return The clone of the joint bt.
+	 */
+	virtual JointBt* clone();
 
 	/**
 	 * Give access to boost serialization

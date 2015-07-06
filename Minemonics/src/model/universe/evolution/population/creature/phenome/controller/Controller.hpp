@@ -44,6 +44,8 @@ public:
 	Controller(ControllerType controllerType);
 	virtual ~Controller();
 
+	virtual Controller* clone() = 0;
+
 	/**
 	 * Collect inputs and prepare for computation.
 	 */

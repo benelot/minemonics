@@ -35,6 +35,12 @@ public:
 	 */
 	bool equals(const IndirectGenome & genome) const;
 
+	/**
+	 * Clone the indirect genome.
+	 * @return The clone of the indirect genome.
+	 */
+	IndirectGenome* clone() = 0;
+
 	//Serialization
 	/**
 	 * @brief Give access to boost serialization.

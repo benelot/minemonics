@@ -31,6 +31,8 @@ public:
 	void calculateAvgVelocity(double x2, double y2, double z2, float diffTime);
 	void evaluateFitness();
 
+	virtual Velocity* clone();
+
 private:
 	double mAvgVelocity;
 

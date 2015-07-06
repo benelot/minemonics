@@ -38,6 +38,8 @@ class access;
 class MorphogeneBranch: public GeneBranch {
 public:
 	MorphogeneBranch();
+	MorphogeneBranch(const MorphogeneBranch& morphogeneBranch);
+
 	virtual ~MorphogeneBranch();
 
 	/**Initialize the morphogene branch.*/

@@ -30,11 +30,19 @@ class SimulationManager;
 class LimbO3D: public LimbGraphics {
 public:
 	LimbO3D();
+	LimbO3D(const LimbO3D& limbO3D);
+
 	virtual ~LimbO3D();
 
 	void initialize(SimulationManager* simulationManager,
 			LimbModel::PrimitiveType type, Ogre::Vector3 scale,
 			Ogre::ColourValue color);
+
+	/**
+	 * Clone the limbO3D
+	 * @return The clone of the limbO3D.
+	 */
+	virtual LimbO3D* clone();
 
 	/**
 	 * Update the graphical representation of the limb with the physical representation.

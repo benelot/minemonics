@@ -45,6 +45,12 @@ public:
 	virtual void update() = 0;
 
 	/**
+	 * Clone the limb graphics.
+	 * @return The clone of the limb graphics.
+	 */
+	virtual LimbGraphics* clone() = 0;
+
+	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 * @param origin The origin of the ray in the global reference frame.
 	 * @param direction The direction of the ray.

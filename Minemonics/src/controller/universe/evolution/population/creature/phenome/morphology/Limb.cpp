@@ -47,6 +47,12 @@ Limb::Limb() :
 		mLimbGraphics(NULL), mLimbModel(NULL), mCreature(NULL) {
 }
 
+Limb::Limb(const Limb& limb) {
+	mCreature = limb.mCreature;
+	mLimbGraphics = limb.mLimbGraphics->clone();
+	mLimbModel = limb.mLimbModel->clone();
+}
+
 Limb::~Limb() {
 	delete mLimbGraphics;
 	mLimbGraphics = NULL;
@@ -128,6 +134,10 @@ void Limb::reset(Ogre::Vector3 position) {
 
 void Limb::reposition(Ogre::Vector3 position) {
 	mLimbModel->reposition(position);
+}
+
+Limb* Limb::clone() {
+	return new Limb(*this);
 }
 
 std::string Limb::getInfo() {

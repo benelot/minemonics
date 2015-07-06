@@ -27,8 +27,10 @@ class btRotationalLimitMotor;
  */
 class ServoMotor: public Motor {
 public:
-	virtual ~ServoMotor();
 	ServoMotor();
+	ServoMotor(const ServoMotor& servoMotor);
+
+	virtual ~ServoMotor();
 
 	/**
 	 * Initialize the servo motor with its bullet physics engine rotational motor.
@@ -37,6 +39,11 @@ public:
 	 */
 	void initialize(int jointMotorIndex, btRotationalLimitMotor* motorBt,
 			double maxForce, double maxSpeed);
+	/**
+	 * Clone the servomotor.
+	 * @return The clone of the servo motor.
+	 */
+	ServoMotor* clone();
 
 	void apply();
 

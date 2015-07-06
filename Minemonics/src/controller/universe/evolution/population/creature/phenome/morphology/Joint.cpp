@@ -37,6 +37,12 @@ Joint::Joint() :
 		mJointGraphics(NULL), mJointModel(NULL) {
 }
 
+Joint::Joint(const Joint& joint) {
+	mJointGraphics = joint.mJointGraphics->clone();
+	mJointModel = joint.mJointModel->clone();
+}
+
+
 Joint::~Joint() {
 	delete mJointGraphics;
 	delete mJointModel;
@@ -131,4 +137,8 @@ void Joint::reset(Ogre::Vector3 position) {
 
 void Joint::reposition(Ogre::Vector3 position) {
 	mJointModel->reposition(position);
+}
+
+Joint* Joint::clone() {
+	return new Joint(*this);
 }

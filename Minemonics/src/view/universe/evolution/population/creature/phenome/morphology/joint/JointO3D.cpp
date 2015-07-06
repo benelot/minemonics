@@ -21,12 +21,20 @@ JointO3D::JointO3D() :
 
 }
 
+JointO3D::JointO3D(const JointO3D& jointO3D) {
+	mLimbA = jointO3D.mLimbA;
+	mLimbB = jointO3D.mLimbB;
+	mLocalA = jointO3D.mLocalA;
+	mLocalB = jointO3D.mLocalB;
+	mSimulationManager = jointO3D.mSimulationManager;
+}
+
 JointO3D::~JointO3D() {
 
 }
 
 void JointO3D::initialize(/*SimulationManager* simulationManager , Limb* limbA,
-		Limb* limbB/*, btTransform localA, btTransform localB*/) {
+ Limb* limbB/*, btTransform localA, btTransform localB*/) {
 //	mSimulationManager = simulationManager;
 //	mLimbA = limbA;
 //	mLimbB = limbB;
@@ -75,3 +83,6 @@ void JointO3D::removeFromWorld() {
 
 }
 
+JointO3D* JointO3D::clone() {
+	return new JointO3D(*this);
+}

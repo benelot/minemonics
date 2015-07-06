@@ -27,6 +27,20 @@ MixedGenome::MixedGenome() :
 		mSegmentsDepthLimit(0), mTotalSegmentQtyLimit(0) {
 }
 
+MixedGenome::MixedGenome(const MixedGenome& mixedGenome) {
+	mBranchiness = mixedGenome.mBranchiness;
+	mGenomeType = mixedGenome.mGenomeType;
+	mLength = mixedGenome.mLength;
+	mSegmentsDepthLimit = mixedGenome.mSegmentsDepthLimit;
+	mTotalSegmentQtyLimit = mixedGenome.mTotalSegmentQtyLimit;
+
+	std::vector<Gene*>::const_iterator git = mixedGenome.mGenes.begin();
+	for(;git != mixedGenome.mGenes.end();git++)
+	{
+		mGenes.push_back((*git)->clone());
+	}
+}
+
 MixedGenome::~MixedGenome() {
 	while (!mGenes.empty()) {
 		Gene* f = mGenes.back();
@@ -451,4 +465,8 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 		return;
 	}
 
+}
+
+MixedGenome* MixedGenome::clone() {
+	return new MixedGenome(*this);
 }

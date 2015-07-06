@@ -26,6 +26,8 @@ public:
 	JointGraphics();
 	virtual ~JointGraphics();
 
+	virtual JointGraphics* clone() = 0;
+
 	virtual void addToWorld() = 0;
 
 	virtual void removeFromWorld() = 0;

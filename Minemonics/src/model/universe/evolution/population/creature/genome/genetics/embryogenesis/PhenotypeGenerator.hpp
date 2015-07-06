@@ -36,12 +36,20 @@ class ComponentModel;
 class PhenotypeGenerator: public BaseGenerator {
 public:
 	PhenotypeGenerator();
+	PhenotypeGenerator(const PhenotypeGenerator& phenotypeGenerator);
+
 	virtual ~PhenotypeGenerator();
 
 	void initialize(std::map<int, int>& repetitionList, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, ComponentModel* parentComponentModel,
 			GeneBranch* geneBranch, double currentShrinkageFactor,
 			bool flipped = false, bool mirrored = false);
+
+	/**
+	 * Clone the phenotype generator.
+	 * @return The clone of the phenotype generator.
+	 */
+	virtual PhenotypeGenerator* clone();
 
 	//Accessor methods
 	Gene* getGene() {

@@ -54,3 +54,6 @@ void Velocity::evaluateFitness() {
 	mFitness = mAvgVelocity;
 }
 
+Velocity* Velocity::clone() {
+	return NULL;
+}

@@ -25,6 +25,12 @@ class BaseGenerator {
 public:
 	BaseGenerator();
 	virtual ~BaseGenerator();
+
+	/**
+	 * Clone the base generator.
+	 * @return The clone of the base generator.
+	 */
+	virtual BaseGenerator* clone() = 0;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_BASEGENERATOR_HPP_ */

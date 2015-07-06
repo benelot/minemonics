@@ -41,6 +41,8 @@ class JointGraphics;
 class Joint: public Component {
 public:
 	Joint();
+	Joint(const Joint& joint);
+
 	virtual ~Joint();
 
 	/**
@@ -53,6 +55,12 @@ public:
 	 */
 	void initialize(Creature* creature, Limb* limbA,
 			Limb* limbB, btTransform localA, btTransform localB);
+
+	/**
+	 * Clone the joint.
+	 * @return The clone of the joint.
+	 */
+	Joint* clone();
 
 	/**
 	 * Build a joint from the joint model.

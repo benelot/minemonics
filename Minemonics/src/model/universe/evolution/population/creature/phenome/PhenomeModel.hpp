@@ -39,6 +39,8 @@ class MixedGenome;
 class PhenomeModel {
 public:
 	PhenomeModel();
+	PhenomeModel(const PhenomeModel& phenomeModel);
+
 	virtual ~PhenomeModel();
 
 	void initialize(SimulationManager* simulationManager,
@@ -76,6 +78,11 @@ public:
 	 * @return If the phenome model is equal to the other phenome model.
 	 */
 	bool equals(const PhenomeModel & phenomeModel) const;
+
+	/**
+	 * Clone the phenome model.
+	 */
+	PhenomeModel* clone();
 
 	/**
 	 * Give access to boost serialization

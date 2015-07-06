@@ -55,6 +55,8 @@ class MixedGenome: public IndirectGenome {
 public:
 
 	MixedGenome();
+	MixedGenome(const MixedGenome& mixedGenome);
+
 	virtual ~MixedGenome();
 
 	/**
@@ -69,6 +71,12 @@ public:
 	 * @return If the mixed genome is equal to the other mixed genome.
 	 */
 	bool equals(const MixedGenome & genome) const;
+
+	/**
+	 * Clone the mixed genome.
+	 * @return The clone of the mixed genome.
+	 */
+	MixedGenome* clone();
 
 	//Serialization
 	/**

@@ -24,6 +24,13 @@ LimbModel::LimbModel() :
 		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN) {
 }
 
+LimbModel::LimbModel(const LimbModel& limbModel) {
+	mColor = limbModel.mColor;
+	mDimensions = limbModel.mDimensions;
+	mLimbPhysics = limbModel.mLimbPhysics->clone();
+	mPrimitiveType = limbModel.mPrimitiveType;
+}
+
 LimbModel::~LimbModel() {
 	delete mLimbPhysics;
 	mLimbPhysics = NULL;
@@ -74,4 +81,8 @@ bool LimbModel::equals(const LimbModel& limbModel) const {
 	}
 
 	return true;
+}
+
+LimbModel* LimbModel::clone() {
+	return new LimbModel(*this);
 }

@@ -32,9 +32,13 @@ class SimulationManager;
 class JointO3D: public JointGraphics {
 public:
 	JointO3D();
+	JointO3D(const JointO3D& jointO3D);
+
 	virtual ~JointO3D();
 
 	void initialize();
+
+	virtual JointO3D* clone();
 
 	void update();
 

@@ -48,6 +48,8 @@ public:
 	};
 
 	LimbModel();
+	LimbModel(const LimbModel& limbModel);
+
 	virtual ~LimbModel();
 
 	/**
@@ -84,6 +86,12 @@ public:
 	 * @return If the limb model is equal to the other limb model.
 	 */
 	bool equals(const LimbModel & limbModel) const;
+
+	/**
+	 * Clone the limb model.
+	 * @return The clone of the limb model.
+	 */
+	LimbModel* clone();
 
 	/**
 	 * Give access to boost serialization

@@ -18,7 +18,7 @@ LimbPhysics::LimbPhysics() :
 		mInWorld(false), mRestitution(0.5), mFriction(0.8), mInitialRelativeXPosition(
 				0), mInitialRelativeYPosition(0), mInitialRelativeZPosition(0), mInitialXOrientation(
 				0), mInitialYOrientation(0), mInitialZOrientation(0), mInitialWOrientation(
-				1) {
+				1), mMass(0) {
 }
 
 LimbPhysics::~LimbPhysics() {
@@ -26,31 +26,31 @@ LimbPhysics::~LimbPhysics() {
 
 bool LimbPhysics::equals(const LimbPhysics& limbPhysics) const {
 
-	if(mInitialRelativeXPosition != limbPhysics.mInitialRelativeXPosition){
+	if (mInitialRelativeXPosition != limbPhysics.mInitialRelativeXPosition) {
 		return false;
 	}
 
-	if(mInitialRelativeYPosition != limbPhysics.mInitialRelativeYPosition){
+	if (mInitialRelativeYPosition != limbPhysics.mInitialRelativeYPosition) {
 		return false;
 	}
 
-	if(mInitialRelativeZPosition != limbPhysics.mInitialRelativeZPosition){
+	if (mInitialRelativeZPosition != limbPhysics.mInitialRelativeZPosition) {
 		return false;
 	}
 
-	if(mInitialXOrientation != limbPhysics.mInitialXOrientation){
+	if (mInitialXOrientation != limbPhysics.mInitialXOrientation) {
 		return false;
 	}
 
-	if(mInitialYOrientation != limbPhysics.mInitialYOrientation){
+	if (mInitialYOrientation != limbPhysics.mInitialYOrientation) {
 		return false;
 	}
 
-	if(mInitialZOrientation != limbPhysics.mInitialZOrientation){
+	if (mInitialZOrientation != limbPhysics.mInitialZOrientation) {
 		return false;
 	}
 
-	if(mInitialWOrientation != limbPhysics.mInitialWOrientation){
+	if (mInitialWOrientation != limbPhysics.mInitialWOrientation) {
 		return false;
 	}
 
@@ -63,6 +63,10 @@ bool LimbPhysics::equals(const LimbPhysics& limbPhysics) const {
 	}
 
 	if (mFriction != limbPhysics.mFriction) {
+		return false;
+	}
+
+	if (mMass != limbPhysics.mMass) {
 		return false;
 	}
 

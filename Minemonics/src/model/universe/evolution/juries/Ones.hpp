@@ -29,6 +29,7 @@ public:
 
 	void setEvaluationSubject(const std::vector< bool >& x);
 	void evaluateFitness();
+	virtual Ones* clone();
 private:
 	std::vector< bool > mEvaluationSubject;
 };

@@ -47,6 +47,33 @@ PhenomeModel::PhenomeModel() :
 	mControllers.clear();
 }
 
+PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
+	std::vector<Controller*>::const_iterator cit = phenomeModel.mControllers.begin();
+	for (; cit != phenomeModel.mControllers.end(); cit++) {
+		mControllers.push_back((*cit)->clone());
+	}
+
+	std::vector<ComponentModel*>::const_iterator coit =
+			phenomeModel.mComponentModels.begin();
+	for (; coit != phenomeModel.mComponentModels.end(); coit++) {
+		ComponentModel* componentModel = (*coit)->clone();
+		mComponentModels.push_back(componentModel);
+		switch (componentModel->getComponentType()) {
+		case ComponentModel::LimbComponent:
+			mLimbModels.push_back((LimbModel*)componentModel);
+			break;
+		case ComponentModel::JointComponent:
+			mJointModels.push_back((JointModel*)componentModel);
+			break;
+
+		}
+	}
+
+	mInWorld = phenomeModel.isInWorld();
+	mSimulationManager = phenomeModel.mSimulationManager;
+	mWorld = phenomeModel.mWorld;
+}
+
 PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
@@ -576,4 +603,8 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 		}
 	}
 	return true;
+}
+
+PhenomeModel* PhenomeModel::clone() {
+	return new PhenomeModel(*this);
 }

@@ -21,6 +21,17 @@ PopulationModel::PopulationModel() :
 
 }
 
+PopulationModel::PopulationModel(const PopulationModel& populationModel) {
+	mPlanetModel = populationModel.mPlanetModel;
+	mCreatureQty = populationModel.mCreatureQty;
+	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
+
+	std::vector<CreatureModel*>::iterator cit = populationModel.getCreatureModels().begin();
+	for(;cit != populationModel.getCreatureModels().end();cit++){
+		mCreatureModels.push_back((*cit)->clone());
+	}
+}
+
 PopulationModel::~PopulationModel() {
 	while (!mCreatureModels.empty()) {
 		CreatureModel* f = mCreatureModels.back();
@@ -73,3 +84,6 @@ bool PopulationModel::equals(const PopulationModel & population) const {
 
 }
 
+PopulationModel* PopulationModel::clone() {
+	return new PopulationModel(*this);
+}

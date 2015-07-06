@@ -40,3 +40,6 @@ void Ones::evaluateFitness() {
 		;
 }
 
+Ones* Ones::clone() {
+	return NULL;
+}

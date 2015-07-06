@@ -23,6 +23,23 @@ CreatureModel::CreatureModel() :
 
 }
 
+CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
+		mGenotype(creatureModel.mGenotype) {
+	mDeveloped = creatureModel.mDeveloped;
+	mFirstName = creatureModel.mFirstName;
+	mPopulationModel = creatureModel.mPopulationModel;
+	if (creatureModel.mPhenotypeModel != NULL) {
+		mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
+	}
+	mInitialPosition = creatureModel.mInitialPosition;
+	mPosition = creatureModel.mPosition;
+
+	std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
+	for (; jit != creatureModel.mJuries.end(); jit++) {
+		mJuries.push_back((*jit)->clone());
+	}
+}
+
 void CreatureModel::initialize(PopulationModel* populationModel,
 		PhenomeModel* phenomeModel, Ogre::Vector3 position,
 		double branchiness) {
@@ -52,6 +69,18 @@ void CreatureModel::reset(Ogre::Vector3 position) {
 void CreatureModel::reposition(Ogre::Vector3 position) {
 	mInitialPosition = position;
 	mPosition = position;
+}
+
+double CreatureModel::getFitness() {
+	double fitness;
+	double weight;
+
+	std::vector<Jury*>::iterator jit = mJuries.begin();
+	for (; jit != mJuries.end(); jit++) {
+		fitness += (*jit)->getFitness() * (*jit)->getWeight();
+		weight += (*jit)->getWeight();
+	}
+	return fitness / weight;
 }
 
 bool CreatureModel::equals(const CreatureModel & creature) const {
@@ -84,4 +113,8 @@ bool CreatureModel::equals(const CreatureModel & creature) const {
 	}
 
 	return true;
+}
+
+CreatureModel* CreatureModel::clone() {
+	return new CreatureModel(*this);
 }

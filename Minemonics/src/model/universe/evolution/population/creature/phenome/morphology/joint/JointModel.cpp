@@ -27,6 +27,10 @@ JointModel::JointModel() :
 
 }
 
+JointModel::JointModel(const JointModel& jointModel) {
+	mJointPhysics = jointModel.mJointPhysics->clone();
+}
+
 JointModel::~JointModel() {
 	delete mJointPhysics;
 	mJointPhysics = NULL;
@@ -74,6 +78,10 @@ void JointModel::reset(Ogre::Vector3 position) {
 
 void JointModel::reposition(Ogre::Vector3 position) {
 	mJointPhysics->reposition(position);
+}
+
+JointModel* JointModel::clone() {
+	return new JointModel(*this);
 }
 
 void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,

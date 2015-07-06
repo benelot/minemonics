@@ -41,15 +41,39 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 Phenome::Phenome() :
-		mSimulationManager(NULL),mCreature(NULL) {
+		mSimulationManager(NULL), mCreature(NULL) {
 
+}
+
+Phenome::Phenome(const Phenome& phenome) :
+		mPhenomeModel(phenome.mPhenomeModel) {
+
+	mCreature = phenome.mCreature;
+
+	std::vector<Component*>::const_iterator coit = phenome.mComponents.begin();
+	for (; coit != phenome.mComponents.end(); coit++) {
+		Component* component = (*coit)->clone();
+		mComponents.push_back(component);
+		switch (component->getComponentType()) {
+		case ComponentModel::LimbComponent:
+			mLimbs.push_back((Limb*) component);
+			break;
+		case ComponentModel::JointComponent:
+			mJoints.push_back((Joint*) component);
+			break;
+
+		}
+	}
+
+	mSimulationManager = phenome.mSimulationManager;
 }
 
 Phenome::~Phenome() {
 	mSimulationManager = NULL;
 }
 
-void Phenome::initialize(SimulationManager* simulationManager,Creature* creature) {
+void Phenome::initialize(SimulationManager* simulationManager,
+		Creature* creature) {
 	mSimulationManager = simulationManager;
 	mCreature = creature;
 	mPhenomeModel.initialize(mSimulationManager,
@@ -76,7 +100,7 @@ void Phenome::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
 			Limb* limb = new Limb();
-			limb->buildFrom(mSimulationManager,mCreature,(LimbModel*) *cmit);
+			limb->buildFrom(mSimulationManager, mCreature, (LimbModel*) *cmit);
 			mLimbs.push_back(limb);
 			mComponents.push_back(limb);
 			break;
@@ -91,7 +115,8 @@ void Phenome::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		}
 		case ComponentModel::UnknownComponent:
 		default:
-			std::cout << "#################################################################\nUnknown component found.\n#################################################################";
+			std::cout
+					<< "#################################################################\nUnknown component found.\n#################################################################";
 			exit(-1);
 		}
 	}
@@ -184,4 +209,8 @@ void Phenome::reposition(Ogre::Vector3 position) {
 	for (; lit != mLimbs.end(); lit++) {
 		(*lit)->reposition(position);
 	}
+}
+
+Phenome* Phenome::clone() {
+	return new Phenome(*this);
 }

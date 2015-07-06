@@ -39,6 +39,8 @@ class access;
 class PopulationModel {
 public:
 	PopulationModel();
+	PopulationModel(const PopulationModel& populationModel);
+
 	virtual ~PopulationModel();
 
 	/**
@@ -59,6 +61,11 @@ public:
 	 * @return If this population and the other are equal.
 	 */
 	bool equals(const PopulationModel & population) const;
+
+	/**
+	 * Clone the population.
+	 */
+	PopulationModel* clone();
 
 	/**
 	 * Give access to boost serialization
@@ -104,7 +111,7 @@ public:
 		mCreatureQty = creatureQty;
 	}
 
-	const std::vector<CreatureModel*>& getCreatureModels() const {
+	std::vector<CreatureModel*> getCreatureModels() const {
 		return mCreatureModels;
 	}
 
@@ -114,6 +121,10 @@ public:
 
 	void setPlanetModel(PlanetModel* planetModel) {
 		mPlanetModel = planetModel;
+	}
+
+	int getCurrentCreatureIndex() const {
+		return mCurrentCreatureIndex;
 	}
 
 private:

@@ -55,6 +55,12 @@ public:
 	bool equals(const Genome & genome) const;
 
 	/**
+	 * Clone the genome.
+	 * @return The clone of the genome.
+	 */
+	virtual Genome* clone() = 0;
+
+	/**
 	 * Variational genetics
 	 * -------------------
 	 * Variational genetics includes every type of modifying genome operator that usually leads

@@ -7,7 +7,6 @@
 //# forward declarations
 struct btDefaultMotionState;
 class btDynamicsWorld;
-class Limb;
 
 //# system headers
 //## controller headers
@@ -25,7 +24,8 @@ class Limb;
 
 //## controller headers
 //## model headers
-#include<model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
 //## utils headers
@@ -39,6 +39,8 @@ class Limb;
 class LimbBt: public LimbPhysics {
 public:
 	LimbBt();
+	LimbBt(const LimbBt& limbBt);
+
 	virtual ~LimbBt();
 
 	/**
@@ -55,6 +57,11 @@ public:
 			LimbModel::PrimitiveType type, btVector3 position,
 			btQuaternion orientation, btVector3 dimensions, btScalar mass,
 			btScalar restitution, btScalar friction);
+
+	/**
+	 * Clone the bullet physics limb.
+	 */
+	virtual LimbBt* clone();
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -141,6 +148,8 @@ private:
 	btRigidBody* mBody;
 
 	btVector3 mDimensions;
+
+	LimbModel::PrimitiveType mType;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

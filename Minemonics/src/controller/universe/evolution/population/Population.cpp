@@ -47,12 +47,12 @@ void Population::initialize(Planet* planet,
 	mPopulationModel = new PopulationModel();
 	mPopulationModel->initialize(&planet->getPlanetModel(), creatureQty);
 	Randomness randomness;
-	double bushiness = 0;
+	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
-		bushiness = randomness.nextNormalDouble(
+		branchiness = randomness.nextNormalDouble(
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		addNewMember(bushiness);
+		addNewMember(branchiness);
 	}
 	mPlanet = planet;
 }

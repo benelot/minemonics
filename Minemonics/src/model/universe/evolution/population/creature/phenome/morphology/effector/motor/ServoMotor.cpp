@@ -25,9 +25,22 @@ ServoMotor::ServoMotor() :
 		Motor(SERVO_MOTOR), mJointMotorIndex(-1), mMotorBt(NULL) {
 }
 
+ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
+		Motor(SERVO_MOTOR) {
+	mEnabled = servoMotor.mEnabled;
+	mIndex = servoMotor.mIndex;
+	mJointMotorIndex = servoMotor.mJointMotorIndex;
+	mMaxForce = servoMotor.mMaxForce;
+	mMaxSpeed = servoMotor.mMaxSpeed;
+	//TODO: How to clone this?
+	mMotorBt = servoMotor.mMotorBt;
+	mMotorType = servoMotor.mMotorType;
+	mPositionControlled = servoMotor.mPositionControlled;
+}
+
 ServoMotor::~ServoMotor() {
 	mJointMotorIndex = -1;
-	mMotorBt = 0;
+	mMotorBt = NULL;
 }
 
 void ServoMotor::initialize(int jointMotorIndex,
@@ -42,5 +55,10 @@ void ServoMotor::initialize(int jointMotorIndex,
 }
 
 void ServoMotor::apply() {
-	mMotorBt->m_currentPosition = mMotorBt->m_loLimit + getValue()*(mMotorBt->m_hiLimit-mMotorBt->m_loLimit);
+	mMotorBt->m_currentPosition = mMotorBt->m_loLimit
+			+ getValue() * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
+}
+
+ServoMotor* ServoMotor::clone() {
+	return new ServoMotor(*this);
 }

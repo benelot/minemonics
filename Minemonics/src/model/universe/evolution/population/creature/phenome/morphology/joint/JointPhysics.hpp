@@ -55,6 +55,8 @@ public:
 	JointPhysics();
 	virtual ~JointPhysics();
 
+	virtual JointPhysics* clone() = 0;
+
 	/**
 	 * Reset the joint to the place when the creature was born.
 	 */
