@@ -63,6 +63,18 @@ public:
 	 */
 	void sow(PopulationModel* population);
 
+	void crossover(PopulationModel* population,int crossoverHeads);
+
+	void mutateGenes(PopulationModel* population,int mutatedGeneHeads);
+
+	void mutateGeneAttributes(PopulationModel* population,int mutatedGeneAttributeHeads);
+
+	void mutateGeneBranches(PopulationModel* population,int mutatedGeneBranchHeads);
+
+	void mutateGeneBranchAttributes(PopulationModel* population,int mutatedGeneBranchAttributeHeads);
+
+	void sowFreshly(PopulationModel* population,int sowFreshlyHeads);
+
 private:
 	double mReapPercentage;
 	double mCrossOverPercentage;

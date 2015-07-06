@@ -1,20 +1,37 @@
 //# corresponding header
-#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/Reaper.hpp>
 
 //# forward declarations
 //# system headers
+#include <cmath>
+#include <vector>
+
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EvolutionConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
+
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
+/**
+ * Comparator for the creature sort function
+ * @param i First creature.
+ * @param j Second creature.
+ * @return if the second creature's fitness is higher.
+ */
 bool compareCreatureFitness(CreatureModel* i, CreatureModel* j) {
 	return (i->getFitness() < j->getFitness());
 }
@@ -74,178 +91,198 @@ void Reaper::sow(PopulationModel* population) {
 
 	// calculate the number of offsprings for each ancestor
 	int crossOverHeads = headsToSow * mCrossOverPercentage;
+
+	crossover(population, crossOverHeads);
+
+	sown += crossOverHeads;
+
+	// calculate the number of gene mutated heads
+	int geneMutationHeads = headsToSow * mGeneMutationPercentage;
+
+	mutateGenes(population, geneMutationHeads);
+
+	sown += geneMutationHeads;
+
+//	// calculate the number of gene attribute mutated heads
+//	int attributeMutationHeads = headsToSow * mAttributeMutationPercentage;
+//
+//	mutateGeneBranchAttributes(population, attributeMutationHeads);
+
+	// calculate the number of gene branch mutated heads
+	int branchMutationHeads = headsToSow * mBranchMutationPercentage;
+
+	mutateGeneBranches(population, branchMutationHeads);
+
+	sown += branchMutationHeads;
+
+//	// calculate the number of gene branch attribute mutated heads
+//	int branchAttributeMutationHeads = headsToSow
+//			* mBranchAttributeMutationPercentage;
+//
+//	mutateGeneBranchAttributes(population, branchAttributeMutationHeads);
+
+	// calculate the number of freshly sown heads
+	int freshlySownHeads = headsToSow - sown;
+
+	sowFreshly(population, freshlySownHeads);
+
+	sown += freshlySownHeads;
+
+}
+
+void Reaper::crossover(PopulationModel* population, int crossoverHeads) {
+	Randomness randomness;
+
 	std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().end();
-	int offspringPerParent = crossOverHeads
+	int offspringPerParent = crossoverHeads
 			/ (population->getCreatureModels().size() * mCrossOverPercentage);
+
+//crossover the best creature with those in the ranking downwards according to the cross over percentage
 	for (;
 			cit != population->getCreatureModels().begin()
-					|| crossOverHeads != 0; crossOverHeads--) {
+					|| crossoverHeads != 0; crossoverHeads--) {
 
-		std::vector<CreatureModel*>::iterator cit2 = cit;
-		for (int i = 0; i < offspringPerParent; i++) {
-			cit2--;
-			MixedGenome* offspring = (*cit)->getGenotype().clone();
-			(*cit)->getGenotype().crossoverRandomly(&((*cit2)->getGenotype()));
+		for (int i = 0; i < offspringPerParent - 1; i++) {
+
+			/**
+			 * Whenever a parent is needed, we choose a number of individuals at random from
+			 * the previous generation. These individuals constitute a tournament.
+			 * The creature with the highest fitness wins and becomes the selected parent.
+			 */
+			std::vector<CreatureModel*> tournament;
+			int bestCreatureIndex = 0;
+			int bestFitness = 0;
+
+			for (int j = 0;
+					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+					j++) {
+				CreatureModel* model = population->getCreatureModels().at(
+						randomness.nextUnifPosInt(0,
+								population->getCreatureModels().size()));
+				if (bestFitness < model->getFitness()) {
+					bestFitness = model->getFitness();
+					bestCreatureIndex = j;
+				}
+				tournament.push_back(model);
+			}
+
+			CreatureModel* offspring = (*cit)->clone();
+			offspring->getGenotype().crossoverRandomly(
+					&(tournament.at(bestCreatureIndex)->getGenotype()));
+			population->getCreatureModels().push_back(offspring);
 		}
+//Cross over with one random creature
+		Randomness randomness;
+		CreatureModel* offspring = (*cit)->clone();
+		offspring->getGenotype().crossoverRandomly(
+				&(population->getCreatureModels().at(
+						randomness.nextUnifPosInt(0,
+								population->getCreatureModels().size()))->getGenotype()));
+		population->getCreatureModels().push_back(offspring);
 		cit--;
 	}
+}
 
-//	int ancestorIndex = 0;
-//	ArrayList < Integer > offspringQts = new ArrayList<>();
-//	ArrayList<Creature> ancestors = new ArrayList<>();
-//	int offsprings = 0;
-//	for (int i = 0; i < EvolutionConfiguration.REAPER_SOW_OFFSPRING.length;
-//			i++) {
-//		double offspringPerc = EvolutionConfiguration.REAPER_SOW_OFFSPRING[i];
-//		int offspringQty = (int) (Math.ceil(
-//				offspringPerc * headsToSow
-//						* EvolutionConfiguration.REAPER_CROSSOVER_PERCENTAGE));
-//
-//		// add number of offsprings for each ancestor
-//		if (offsprings + offspringQty < headsToSow) {
-//			offspringQts.add(offspringQty);
-//			offsprings += offspringQty;
-//		} else {
-//			// if we (nearly) reached the number heads to sow we add the
-//			// remaining heads
-//			offspringQts.add(headsToSow - offsprings);
-//			offsprings = headsToSow;
-//		}
-//		Creature creature = population.getCreatures().get(0);
-//		ancestors.add(creature);
-//		// remove creature from top
-//		population.getCreatures().remove(0);
-//
-//		// and add to the end of the list
-//		population.addCreature(creature);
-//		creature.generation++;
-//	}
-//
-//	// as long as we did not already generate all offspring or all heads to
-//	// be sown
-//	while (ancestorIndex != offspringQts.size() && sown < headsToSow) {
-//		if (offspringQts.get(ancestorIndex) != 0) {
-//			Creature mate1 = ancestors.get(ancestorIndex);
-//			Creature mate2 = ancestors.get(
-//					Randomness.nextPosInt(0, ancestors.size() - 1));
-//			Genome genotype = Genetics.performCrossOver(mate1.getGenotype(),
-//					mate2.getGenotype());
-//
-//			if (genotype.size() > 1) {
-//				for (int i = 0;
-//						i < EvolutionConfiguration.REAPER_GENE_MUTATION_QTY;
-//						i++) {
-//					Genetics.performGeneMutation(genotype);
-//				}
-//			}
-//			for (int i = 0; i < EvolutionConfiguration.REAPER_GENE_MUTATION_QTY;
-//					i++) {
-//				Genetics.performAttributeMutation(genotype);
-//			}
-//			for (int i = 0; i < EvolutionConfiguration.REAPER_LINK_MUTATION_QTY;
-//					i++) {
-//				Genetics.performLinkMutation(genotype);
-//			}
-//
-//			CreaturejME3 creature = new CreaturejME3(evolution, genotype);
-//			population.addCreature(creature);
-//			offspringQts.set(ancestorIndex,
-//					offspringQts.get(ancestorIndex) - 1);
-//			sown++;
-//		} else {
-//			ancestorIndex++;
-//		}
-//	}
-//
-//	// gene mutation
-//	int geneMutationHeads = (int) (headsToSow
-//			* EvolutionConfiguration.REAPER_GENE_MUTATION_PERCENTAGE);
-//	for (int i = 0; i < geneMutationHeads; i++) {
-//		if (sown == headsToSow) {
-//			break;
-//		}
-//
-//		Creature ancestor = population.getCreatures().get(0);
-//
-//		// remove creature from top
-//		population.getCreatures().remove(0);
-//
-//		// and add to the end of the list
-//		population.getCreatures().add(ancestor);
-//
-//		Genome genotype = new Genome();
-//		genotype.append(ancestor.getGenotype(), 0,
-//				ancestor.getGenotype().size());
-//
-//		// Gene mutations
-//		for (int j = 0; j < EvolutionConfiguration.REAPER_GENE_MUTATION_QTY;
-//				j++) {
-//			Genetics.performGeneMutation(genotype);
-//		}
-//
-//		// Attribute mutations
-//		for (int j = 0;
-//				j < EvolutionConfiguration.REAPER_ATTRIBUTE_MUTATION_QTY; j++) {
-//			Genetics.performAttributeMutation(genotype);
-//		}
-//
-//		for (int j = 0; j < EvolutionConfiguration.REAPER_LINK_MUTATION_QTY;
-//				j++) {
-//			Genetics.performLinkMutation(genotype);
-//		}
-//		Creature creature = new CreaturejME3(genotype);
-//		population.addCreature(creature);
-//		sown++;
-//	}
-//
-//	// attribute mutation
-//	int attributeMutationHeads = (int) (headsToSow
-//			* EvolutionConfiguration.REAPER_ATTRIBUTE_MUTATION_PERCENTAGE);
-//	for (int i = 0; i < attributeMutationHeads; i++) {
-//		if (sown == headsToSow) {
-//			break;
-//		}
-//
-//		Creature ancestor = population.getCreatures().get(0);
-//
-//		// remove creature from top
-//		population.getCreatures().remove(0);
-//
-//		// and add to the end of the list
-//		population.addCreature(ancestor);
-//
-//		Genome genotype = new Genome();
-//		genotype.append(ancestor.getGenotype(), 0,
-//				ancestor.getGenotype().size());
-//
-//		// Attribute mutations
-//		for (int j = 0;
-//				j < EvolutionConfiguration.REAPER_ATTRIBUTE_MUTATION_QTY; j++) {
-//			Genetics.performAttributeMutation(genotype);
-//		}
-//
-//		for (int j = 0; j < EvolutionConfiguration.REAPER_LINK_MUTATION_QTY;
-//				j++) {
-//			Genetics.performLinkMutation(genotype);
-//		}
-//		Creature creature = new CreaturejME3(genotype);
-//		population.addCreature(creature);
-//		sown++;
-//	}
-//
-//	while (sown < headsToSow) {
-//		population.addNewCreature(evolution);
-//	}
-//
-//	// recreate the creature from the last generation to the next
-//	for (Creature creature : population.getCreatures()) {
-//		if (!creature.isDeveloped()) {
-//			creature.getGenotype().rewire();
-//			creature.getPhenotype().buildPhenotypeFromGenotype(
-//					creature.getGenotype());
-//		}
-//
-//	}
+void Reaper::mutateGenes(PopulationModel* population, int mutatedGeneHeads) {
+	Randomness randomness;
 
+	for (int i = 0; i < mutatedGeneHeads; i++) {
+		std::vector<CreatureModel*> tournament;
+		int bestCreatureIndex = 0;
+		int bestFitness = 0;
+
+		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+				j++) {
+			CreatureModel* model = population->getCreatureModels().at(
+					randomness.nextUnifPosInt(0,
+							population->getCreatureModels().size()));
+			if (bestFitness < model->getFitness()) {
+				bestFitness = model->getFitness();
+				bestCreatureIndex = j;
+			}
+			tournament.push_back(model);
+		}
+		CreatureModel* model = tournament.at(bestCreatureIndex)->clone();
+		model->getGenotype().mutateRandomGenes(
+				EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
+		population->getCreatureModels().push_back(model);
+
+	}
+
+}
+
+void Reaper::mutateGeneAttributes(PopulationModel* population,
+		int mutatedGeneAttributeHeads) {
+	Randomness randomness;
+
+	for (int i = 0; i < mutatedGeneAttributeHeads; i++) {
+//TODO: Make correct
+		std::vector<CreatureModel*> tournament;
+		int bestCreatureIndex = 0;
+		int bestFitness = 0;
+
+		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+				j++) {
+			CreatureModel* model = population->getCreatureModels().at(
+					randomness.nextUnifPosInt(0,
+							population->getCreatureModels().size()));
+			if (bestFitness < model->getFitness()) {
+				bestFitness = model->getFitness();
+				bestCreatureIndex = j;
+			}
+			tournament.push_back(model);
+		}
+		CreatureModel* model = tournament.at(bestCreatureIndex)->clone();
+		model->getGenotype().mutateRandomGenes(
+				EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
+		population->getCreatureModels().push_back(model);
+	}
+}
+
+void Reaper::mutateGeneBranches(PopulationModel* population,
+		int mutatedGeneBranchHeads) {
+	Randomness randomness;
+
+	for (int i = 0; i < mutatedGeneBranchHeads; i++) {
+//TODO: Make correct
+		std::vector<CreatureModel*> tournament;
+		int bestCreatureIndex = 0;
+		int bestFitness = 0;
+
+		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+				j++) {
+			CreatureModel* model = population->getCreatureModels().at(
+					randomness.nextUnifPosInt(0,
+							population->getCreatureModels().size()));
+			if (bestFitness < model->getFitness()) {
+				bestFitness = model->getFitness();
+				bestCreatureIndex = j;
+			}
+			tournament.push_back(model);
+		}
+		CreatureModel* model = tournament.at(bestCreatureIndex)->clone();
+		model->getGenotype().mutateRandomGenes(
+				EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
+		population->getCreatureModels().push_back(model);
+	}
+
+}
+
+void Reaper::mutateGeneBranchAttributes(PopulationModel* population,
+		int mutatedGeneBranchAttributeHeads) {
+}
+
+void Reaper::sowFreshly(PopulationModel* population, int sowFreshlyHeads) {
+	double branchiness = 0;
+	Randomness randomness;
+	for (int i = 0; i < sowFreshlyHeads; i++) {
+		branchiness = randomness.nextNormalDouble(
+				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
+				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
+		CreatureModel* model = new CreatureModel();
+		model->initialize(population, NULL, Ogre::Vector3(0, 0, 0),
+				branchiness);
+		population->getCreatureModels().push_back(model);
+	}
 }

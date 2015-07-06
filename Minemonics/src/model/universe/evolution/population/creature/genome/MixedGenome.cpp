@@ -11,6 +11,7 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EvolutionConfiguration.hpp>
 #include <configuration/MorphologyConfiguration.hpp>
 #include <configuration/PopulationConfiguration.hpp>
 
@@ -289,8 +290,7 @@ void MixedGenome::growRandomStubs(double growProbability) {
 	Randomness randomness;
 	for (int i = 0; i < mGenes.size(); i++) {
 		if (randomness.nextUnifPosInt(0, 1000.0f) / 1000.0f <= growProbability) {
-			//TODO: Replace with reasonable number
-			int branchiness = randomness.nextUnifDouble(0, 3);
+			int branchiness = randomness.nextUnifDouble(0, EvolutionConfiguration::REAPER_GROW_STUB_QTY);
 			growStub(i, branchiness);
 		}
 	}
@@ -299,8 +299,7 @@ void MixedGenome::growRandomStubs(double growProbability) {
 void MixedGenome::growRandomStub() {
 	Randomness randomness;
 	int geneIndex = randomness.nextUnifPosInt(0, mGenes.size() - 1);
-	//TODO: Replace with reasonable number
-	int branchiness = randomness.nextUnifDouble(0, 3);
+	int branchiness = randomness.nextUnifDouble(0, EvolutionConfiguration::REAPER_GROW_STUB_QTY);
 	growStub(geneIndex, branchiness);
 }
 
