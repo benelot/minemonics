@@ -65,6 +65,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			return mEvolutionModel.proceedEvaluation();
+			mEvolutionModel.evaluate();
 			break;
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
@@ -89,6 +90,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			mEvolutionModel.evaluate();
 			return true;
 			break;
 		}
@@ -116,6 +118,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			mEvolutionModel.evaluate();
 			return true;
 			break;
 		}
@@ -146,6 +149,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			mEvolutionModel.evaluate();
 			break;
 		}
 		case EvolutionModel::POPULATIONS_EVALUATION: {
@@ -178,6 +182,7 @@ bool Evolution::proceedEvaluation() {
 			}
 
 			mEvaluationController->addEvaluation(evaluation);
+			mEvolutionModel.evaluate();
 			return true;
 			break;
 		}
@@ -186,6 +191,15 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 	}
+
+	// process the evaluated populations
+	mEvolutionModel.process();
+
+	// cull the evaluated populations
+	mEvolutionModel.cull();
+
+	// variate the evaluated populations
+	mEvolutionModel.variate();
 	return false;
 }
 

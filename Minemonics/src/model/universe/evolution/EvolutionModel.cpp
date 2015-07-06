@@ -45,8 +45,7 @@ bool EvolutionModel::proceedEvaluation() {
 		} else if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
 			mCurrentPopulationIndex++;
 			mCurrentCreatureIndex = 0;
-		}
-		else{
+		} else {
 			mCurrentPopulationIndex = 0;
 			mCurrentCreatureIndex = 0;
 			return false;
@@ -60,24 +59,26 @@ bool EvolutionModel::proceedEvaluation() {
 bool EvolutionModel::evaluate() {
 //EVALUATION
 	mPhase = EVALUATION_PHASE;
-
+	//TODO: Delete if not used in the end.
 // run creature evaluation according to the evolution type and then return true
 
 	return true;
 }
 
 bool EvolutionModel::process() {
-//PROCESSING
+	//Enter the Processing phase
 	mPhase = PROCESSING_PHASE;
 
+	//prepare statistics
+	//TODO: Calculate everything for statistics
 	return true;
 }
 
 bool EvolutionModel::cull() {
-//REAP_AND_SOW
+	//Enter the Culling phase
 	mPhase = CULLING_PHASE;
 
-//call the reaper to reap
+	//call the reaper to reap
 	mReaper.reap(mPopulationModels[mCurrentPopulationIndex]);
 
 	return true;
@@ -88,7 +89,7 @@ void EvolutionModel::addNewPopulation(PopulationModel* populationModel) {
 }
 
 bool EvolutionModel::variate() {
-	//VARIATION
+	//Enter the Variation phase
 	mPhase = VARIATION_PHASE;
 
 	//call the reaper to sow
@@ -97,5 +98,5 @@ bool EvolutionModel::variate() {
 }
 
 void EvolutionModel::update() {
-
+	//TODO: Delete if it is not necessary.
 }

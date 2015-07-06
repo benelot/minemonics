@@ -69,7 +69,7 @@ public:
 	void update();
 
 	/**
-	 * Proceed with the evaluation. In in serial mode, this just goes on to the next evaluation, in parallel, this schedules one more evaluation.
+	 * Proceed with the evaluation. In serial mode, this just goes on to the next evaluation, in parallel mode, this schedules one more evaluation.
 	 * @return If true then this means it proceeded successfully, if false this means that the generation is over and evaluated.
 	 */
 	bool proceedEvaluation();
