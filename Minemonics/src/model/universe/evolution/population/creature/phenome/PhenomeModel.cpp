@@ -90,6 +90,12 @@ void PhenomeModel::update(double timeSinceLastFrame) {
 	for (; cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastFrame);
 	}
+
+	// test for strains
+	std::vector<JointModel*>::iterator jit = mJointModels.begin();
+	for(;jit != mJointModels.end();jit++){
+		(*jit)->isStrained();
+	}
 }
 
 void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,

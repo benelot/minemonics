@@ -34,7 +34,8 @@ JointBt::JointBt() :
 	mMotors.clear();
 }
 
-JointBt::JointBt(const JointBt& jointBt) {
+JointBt::JointBt(const JointBt& jointBt) :
+		mG6DofJoint(NULL), mWorld(NULL) {
 	//TODO: Implement copy from jointBt.
 }
 
@@ -58,6 +59,7 @@ JointBt::~JointBt() {
 
 	mMotors.clear();
 
+	delete mG6DofJoint->getJointFeedback();
 }
 
 void JointBt::initialize(btDynamicsWorld* world, btRigidBody* bodyA,
@@ -72,6 +74,10 @@ void JointBt::initialize(btDynamicsWorld* world, btRigidBody* bodyA,
 	mG6DofJoint->setAngularUpperLimit(btVector3(0, 0, 0));
 
 	mG6DofJoint->setEquilibriumPoint();
+
+	mG6DofJoint->enableFeedback(true);
+	btJointFeedback* jfb = new btJointFeedback();
+	mG6DofJoint->setJointFeedback(jfb);
 
 	//debug drawing
 	mG6DofJoint->setDbgDrawSize(btScalar(5.f));
@@ -128,6 +134,21 @@ void JointBt::reset(Ogre::Vector3 position) {
 }
 
 void JointBt::reposition(Ogre::Vector3 position) {
+}
+
+bool JointBt::isStrained() {
+	btVector3 fbA = mG6DofJoint->getJointFeedback()->m_appliedForceBodyA;
+	btVector3 fbB = mG6DofJoint->getJointFeedback()->m_appliedForceBodyB;
+	btVector3 tbA = mG6DofJoint->getJointFeedback()->m_appliedTorqueBodyA;
+	btVector3 tbB = mG6DofJoint->getJointFeedback()->m_appliedTorqueBodyB;
+	std::cout << "----------------------" << std::endl;
+	std::cout << "Applied impulse: " <<mG6DofJoint->getAppliedImpulse() << std::endl;
+	std::cout << "Joint feedback force A: (" << fbA.getX() << "," << fbA.getY() << "," << fbA.getZ() << ")" << std::endl;
+	std::cout << "Joint feedback force B: (" << fbB.getX() << "," << fbB.getY() << "," << fbB.getZ() << ")" << std::endl;
+	std::cout << "Joint feedback torque A: (" << tbA.getX() << "," << tbA.getY() << "," << tbA.getZ() << ")" << std::endl;
+	std::cout << "Joint feedback torque B: (" << tbB.getX() << "," << tbB.getY() << "," << tbB.getZ() << ")" << std::endl;
+	std::cout << "----------------------" << std::endl;
+	return false;
 }
 
 void JointBt::setRotationalLimitMotorEnabled(

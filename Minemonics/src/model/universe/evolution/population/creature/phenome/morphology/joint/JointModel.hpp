@@ -57,6 +57,12 @@ public:
 	void reposition(Ogre::Vector3 position);
 
 	/**
+	 * Returns if the joint is under tension.
+	 * @return If the joint is under tension.
+	 */
+	bool isStrained();
+
+	/**
 	 * Compare the joint model to another joint model.
 	 * @param jointModel Another joint model.
 	 * @return If the joint model is equal to the other joint model.

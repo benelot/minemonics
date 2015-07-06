@@ -84,6 +84,10 @@ JointModel* JointModel::clone() {
 	return new JointModel(*this);
 }
 
+bool JointModel::isStrained() {
+	return mJointPhysics->isStrained();
+}
+
 void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH, pitchEnable);

@@ -82,6 +82,12 @@ public:
 	 */
 	virtual void removeFromWorld() = 0;
 
+	/**
+	 * Returns if the joint is under tension.
+	 * @return If the joint is under tension.
+	 */
+	virtual bool isStrained() = 0;
+
 	//TODO: Add serialization to the joint physics
 //	/**
 //	 * Compare the joint physics model to another joint physics model.

@@ -84,6 +84,12 @@ public:
 	void removeFromWorld();
 
 	/**
+	 * Returns if the joint is under tension.
+	 * @return If the joint is under tension.
+	 */
+	bool isStrained();
+
+	/**
 	 * Compare the joint bullet physics to another joint bullet physics.
 	 * @param jointBt Another joint bullet physics model.
 	 * @return If the joint bullet physics is equal to the other joint bullet physics.
