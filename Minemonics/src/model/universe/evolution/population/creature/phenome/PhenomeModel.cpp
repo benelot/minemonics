@@ -48,7 +48,8 @@ PhenomeModel::PhenomeModel() :
 }
 
 PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
-	std::vector<Controller*>::const_iterator cit = phenomeModel.mControllers.begin();
+	std::vector<Controller*>::const_iterator cit =
+			phenomeModel.mControllers.begin();
 	for (; cit != phenomeModel.mControllers.end(); cit++) {
 		mControllers.push_back((*cit)->clone());
 	}
@@ -60,10 +61,10 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 		mComponentModels.push_back(componentModel);
 		switch (componentModel->getComponentType()) {
 		case ComponentModel::LimbComponent:
-			mLimbModels.push_back((LimbModel*)componentModel);
+			mLimbModels.push_back((LimbModel*) componentModel);
 			break;
 		case ComponentModel::JointComponent:
-			mJointModels.push_back((JointModel*)componentModel);
+			mJointModels.push_back((JointModel*) componentModel);
 			break;
 
 		}
@@ -93,7 +94,7 @@ void PhenomeModel::update(double timeSinceLastFrame) {
 
 	// test for strains
 	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-	for(;jit != mJointModels.end();jit++){
+	for (; jit != mJointModels.end(); jit++) {
 		(*jit)->isStrained();
 	}
 }
@@ -281,30 +282,25 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 //						Ogre::ColourValue(1, 0, 0));
 //
 //				// draw line from limb B along test ray (RED LINE)
-//				//TODO: Debug lines
 //				mSimulationManager->getDebugDrawer()->drawLine(limbBCOM,
 //						limbBCOM + 10000.0f * localAnchorDirOB,
 //						Ogre::ColourValue(1, 0, 0));
 
 //				// draw line from limb A to surface anchor point of A (GREEN LINE)
-//				//TODO: Debug lines
 //				mSimulationManager->getDebugDrawer()->drawLine(limbACOM,
 //						limbACOM + localAnchorOA, Ogre::ColourValue(0, 1, 0));
 //
 //				// draw line from anchor point of A to joint rotation point (BLUE LINE)
-//				//TODO: Debug lines
 //				mSimulationManager->getDebugDrawer()->drawLine(
 //						limbACOM + localAnchorOA, limbACOM + localJointOA,
 //						Ogre::ColourValue(0, 0, 1));
 //
 //				// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
-//				//TODO: Debug lines
 //				mSimulationManager->getDebugDrawer()->drawLine(
 //						limbACOM + localJointOA, limbACOM + localAnchorOBinA,
 //						Ogre::ColourValue(0, 0, 1));
 //
 //				// draw line from limb B to anchor point of B (GREEN LINE)
-//				//TODO: Debug lines
 //				mSimulationManager->getDebugDrawer()->drawLine(limbBCOM,
 //						limbBCOM + localAnchorOB, Ogre::ColourValue(0, 1, 0));
 //
@@ -315,6 +311,9 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 
 			//build the limb out of the morphogene
 			LimbModel* limbB = new LimbModel();
+			mLimbModels.push_back(limbB);
+			mComponentModels.push_back(limbB);
+
 			limbB->initialize(mWorld, creature, morphogene->getPrimitiveType(),
 					generator->getPosition(), generator->getOrientation(),
 					/*size*/
@@ -333,9 +332,8 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 							* morphogene->getZ(), morphogene->getRestitution(),
 					morphogene->getFriction(),
 					Ogre::ColourValue(morphogene->getColorR(),
-							morphogene->getColorB(), morphogene->getColorB()));
-			mLimbModels.push_back(limbB);
-			mComponentModels.push_back(limbB);
+							morphogene->getColorB(), morphogene->getColorB()),
+					mComponentModels.size() - 1);
 
 			if (generator->getParentComponentModel() != NULL) {
 
@@ -360,11 +358,18 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 
 				//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 				JointModel* joint = new JointModel();
+
+				// add the joint to the phenotype joints
+				mJointModels.push_back(joint);
+				mComponentModels.push_back(joint);
+
 				joint->initialize(mWorld,
 						/*limbA*/
 						((LimbBt*) ((LimbModel*) generator->getParentComponentModel())->getLimbPhysics())->getRigidBody(),
 						((LimbBt*) limbB->getLimbPhysics())->getRigidBody(),
-						localA, localB);
+						localA, localB,
+						((LimbModel*) generator->getParentComponentModel())->getOwnIndex(),
+						limbB->getOwnIndex(), mComponentModels.size() - 1);
 
 				//initialize rotational limit motors
 				joint->initializeRotationalLimitMotors(
@@ -401,10 +406,6 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 						morphogeneBranch->isJointPitchMotorEnabled(),
 						morphogeneBranch->isJointYawMotorEnabled(),
 						morphogeneBranch->isJointRollMotorEnabled());
-
-				// add the joint to the phenotype joints
-				mJointModels.push_back(joint);
-				mComponentModels.push_back(joint);
 
 				//TODO: Quick controller hack
 				//				std::vector<Motor*>::iterator motorIterator =

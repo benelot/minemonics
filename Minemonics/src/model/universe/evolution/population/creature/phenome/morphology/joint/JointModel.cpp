@@ -23,11 +23,12 @@
 //## utils headers
 
 JointModel::JointModel() :
-		mJointPhysics(NULL) {
+		mJointPhysics(NULL), mIndexA(-1), mIndexB(-1) {
 
 }
 
-JointModel::JointModel(const JointModel& jointModel) {
+JointModel::JointModel(const JointModel& jointModel) :
+		mIndexA(-1), mIndexB(-1) {
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 
@@ -37,8 +38,11 @@ JointModel::~JointModel() {
 }
 
 void JointModel::initialize(btDynamicsWorld* world, btRigidBody* limbA,
-		btRigidBody* limbB, btTransform localA, btTransform localB) {
-	ComponentModel::initialize(ComponentModel::JointComponent);
+		btRigidBody* limbB, btTransform localA, btTransform localB, int indexA,
+		int indexB, int ownIndex) {
+	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
+	mIndexA = indexA;
+	mIndexB = indexB;
 
 	mJointPhysics = new JointBt();
 	((JointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA, localB);
@@ -90,9 +94,12 @@ bool JointModel::isStrained() {
 
 void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH, pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW, yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL, rollEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
+			pitchEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
+			yawEnable);
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
+			rollEnable);
 }
 
 void JointModel::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,

@@ -53,8 +53,9 @@ public:
 	 * @param localA Local reference frame of limb A.
 	 * @param localB Local reference frame of limb B.
 	 */
-	void initialize(Creature* creature, Limb* limbA,
-			Limb* limbB, btTransform localA, btTransform localB);
+	void initialize(Creature* creature, Limb* limbA, Limb* limbB,
+			btTransform localA, btTransform localB, int indexA = 0, int indexB = 0,
+			int ownIndex = 0);
 
 	/**
 	 * Clone the joint.
@@ -67,7 +68,7 @@ public:
 	 * @param simulationManager The handle of the simulation manager.
 	 * @param jointModel The model of the joint.
 	 */
-	void buildFrom(/*SimulationManager* simulationManager,Limb* limbA, Limb* limbB,*/JointModel* jointModel);
+	void buildFrom(JointModel* jointModel);
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -84,7 +85,8 @@ public:
 	 * @param maxForces The maximum forces along the axes.
 	 * @param maxSpeeds The maximum speeds along the axes.
 	 */
-	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces, Ogre::Vector3 maxSpeeds);
+	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
+			Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Updates the joint position and orientation.
@@ -142,7 +144,7 @@ public:
 	 * Get the motors of this joint.
 	 * @return The motors of this joint.
 	 */
-	std::vector<Motor*> getMotors(){
+	std::vector<Motor*> getMotors() {
 		return mJointModel->getJointPhysics()->getMotors();
 	}
 

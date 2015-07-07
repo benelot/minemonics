@@ -15,13 +15,14 @@
 //## utils headers
 
 ComponentModel::ComponentModel() :
-		mComponentType(UnknownComponent) {
+		mComponentType(UnknownComponent), mOwnIndex(-1) {
 }
 
 ComponentModel::~ComponentModel() {
 }
 
-void ComponentModel::initialize(ComponentType type) {
+void ComponentModel::initialize(ComponentType type, int ownIndex) {
 	mComponentType = type;
+	mOwnIndex = ownIndex;
 }
 

@@ -115,8 +115,9 @@ void Phenome::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		}
 		case ComponentModel::UnknownComponent:
 		default:
-			std::cout
-					<< "#################################################################\nUnknown component found.\n#################################################################";
+			std::cout << "######################################\n";
+			std::cout << "Unknown component found.\n";
+			std::cout << "######################################\n";
 			exit(-1);
 		}
 	}

@@ -52,7 +52,7 @@ public:
 			LimbModel::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
 			double restitution = 1.0, double friction = 0.8, Ogre::ColourValue color =
-					Ogre::ColourValue(1, 1, 1));
+					Ogre::ColourValue(1, 1, 1),int ownIndex = 0);
 
 	/**
 	 * Build a limb from the limb model.

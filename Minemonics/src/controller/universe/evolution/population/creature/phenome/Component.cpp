@@ -31,19 +31,9 @@ Component::Component() :
 Component::~Component() {
 }
 
-void Component::initialize(ComponentModel::ComponentType componentType) {
-	switch (componentType) {
-	case ComponentModel::LimbComponent: {
-		mComponentModel = new LimbModel();
-		break;
-	}
-	case ComponentModel::JointComponent: {
-		mComponentModel = new JointModel();
-		break;
-	}
-	default:
-		break;
-	}
-	mComponentModel->initialize(componentType);
+void Component::initialize(ComponentModel::ComponentType componentType,
+		ComponentModel* componentModel) {
+
+		mComponentModel = componentModel;
 }
 

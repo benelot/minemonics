@@ -66,14 +66,15 @@ Limb::~Limb() {
 void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 		LimbModel::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
-		double restitution, double friction, Ogre::ColourValue color) {
+		double restitution, double friction, Ogre::ColourValue color,
+		int ownIndex) {
 
 	//initialize the model of the limb
 	mLimbModel = new LimbModel();
 	mLimbModel->initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			this, type, position, orientation, dimensions, mass, restitution,
-			friction, color);
+			friction, color, ownIndex);
 
 	buildFrom(simulationManager, creature, mLimbModel);
 }
@@ -83,7 +84,7 @@ void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
 	mCreature = creature;
 
 	// Define the new component as a limb
-	Component::initialize(ComponentModel::LimbComponent);
+	Component::initialize(ComponentModel::LimbComponent, limbModel);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();

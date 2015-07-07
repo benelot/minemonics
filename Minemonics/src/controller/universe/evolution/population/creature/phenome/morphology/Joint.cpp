@@ -42,21 +42,22 @@ Joint::Joint(const Joint& joint) {
 	mJointModel = joint.mJointModel->clone();
 }
 
-
 Joint::~Joint() {
 	delete mJointGraphics;
 	delete mJointModel;
 }
 
 void Joint::initialize(Creature* creature, Limb* limbA, Limb* limbB,
-		btTransform localA, btTransform localB) {
+		btTransform localA, btTransform localB, int indexA, int indexB,
+		int ownIndex) {
 
 	// initialize the physics model of the joint
 	mJointModel = new JointModel();
 	mJointModel->initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			limbA->getLimbPhysics()->getRigidBody(),
-			limbB->getLimbPhysics()->getRigidBody(), localA, localB);
+			limbB->getLimbPhysics()->getRigidBody(), localA, localB, indexA,
+			indexB, ownIndex);
 
 	buildFrom(mJointModel);
 }
@@ -115,10 +116,9 @@ void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 			JointPhysics::RDOF_ROLL, rollEnable);
 }
 
-void Joint::buildFrom(/*SimulationManager* simulationManager, Limb* limbA,
- Limb* limbB,*/JointModel* jointModel) {
+void Joint::buildFrom(JointModel* jointModel) {
 	// Define the new component as a limb
-	Component::initialize(ComponentModel::JointComponent);
+	Component::initialize(ComponentModel::JointComponent, jointModel);
 
 	// initialize the graphics part of the joint
 	mJointGraphics = new JointO3D();

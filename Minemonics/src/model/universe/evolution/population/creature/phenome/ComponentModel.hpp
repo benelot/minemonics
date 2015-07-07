@@ -45,7 +45,7 @@ public:
 	 * Initialize the component model.
 	 * @param type The type of component.
 	 */
-	void initialize(ComponentType type);
+	void initialize(ComponentType type, int ownIndex);
 
 	/**
 	 * Compare the component model to another component model.
@@ -92,11 +92,16 @@ public:
 		return mComponentType;
 	}
 
-private:
+protected:
 	/**
 	 * Component type of the compoment.
 	 */
 	ComponentType mComponentType;
+
+	/**
+	 * The index of the component in the genotype.
+	 */
+	int mOwnIndex;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENTMODEL_HPP_ */

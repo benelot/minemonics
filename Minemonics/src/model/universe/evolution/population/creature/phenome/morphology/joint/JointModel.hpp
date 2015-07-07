@@ -44,7 +44,8 @@ public:
 	virtual ~JointModel();
 
 	void initialize(btDynamicsWorld* world, btRigidBody* limbA,
-			btRigidBody* limbB, btTransform localA, btTransform localB);
+			btRigidBody* limbB, btTransform localA, btTransform localB,int indexA,int indexB,
+			int ownIndex);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -161,7 +162,20 @@ public:
 		return mJointPhysics->getMotors();
 	}
 
+	int getIndexA() const {
+		return mIndexA;
+	}
+
+	int getIndexB() const {
+		return mIndexB;
+	}
+
 private:
+
+	/**
+	 * The indices of limbA and limbB.
+	 */
+	int mIndexA,mIndexB;
 	/**
 	 * The physical model representation of the joint.
 	 */

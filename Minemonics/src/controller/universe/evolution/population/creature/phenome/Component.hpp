@@ -32,7 +32,8 @@ public:
 	 * Initialize the component.
 	 * @param componentType The type of component.
 	 */
-	void initialize(ComponentModel::ComponentType componentType);
+	void initialize(ComponentModel::ComponentType componentType,
+			ComponentModel* componentModel);
 
 	/**
 	 * Clone the component.
