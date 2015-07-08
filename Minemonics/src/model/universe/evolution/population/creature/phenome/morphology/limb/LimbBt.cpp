@@ -34,7 +34,7 @@ LimbBt::~LimbBt() {
 	delete mBody;
 }
 
-void LimbBt::initialize(btDynamicsWorld* world, void* limb,
+void LimbBt::initialize(btDynamicsWorld* world, void* limbModel,
 		LimbModel::PrimitiveType type, btVector3 position,
 		btQuaternion orientation, btVector3 dimensions, btScalar mass,
 		btScalar restitution, btScalar friction) {
@@ -54,7 +54,9 @@ void LimbBt::initialize(btDynamicsWorld* world, void* limb,
 		break;
 	case LimbModel::UNKNOWN:
 		std::cout
-				<< "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
+				<< "##########################################\n"
+				<< " LimbBt received 'Unknown' as a limb type.\n"
+				<< "##########################################\n";
 		exit(-1);
 	}
 
@@ -77,9 +79,9 @@ void LimbBt::initialize(btDynamicsWorld* world, void* limb,
 	mBody->setRestitution(restitution);
 
 	//Set user pointer for proper return of creature/limb information etc..
-	mBody->setUserPointer(limb);
-	//add the limb pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limb);
+	mBody->setUserPointer(limbModel);
+	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limbModel);
 }
 
 btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {

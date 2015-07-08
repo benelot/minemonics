@@ -48,8 +48,19 @@ public:
 	 * @param sowFreshPercentage The percentage of the population who is sown freshly.
 	 */
 	void initialize(double reapPercentage, double crossOverPercentage,
-			double geneMutationPercentage, double geneAttributeMutationPercentage,
-			double branchMutationPercentage, double branchAttributeMutationPercentage, double sowFreshPercentage);
+			double geneMutationPercentage,
+			double geneAttributeMutationPercentage,
+			double branchMutationPercentage,
+			double branchAttributeMutationPercentage,
+			double sowFreshPercentage);
+
+	/**
+	 * Comparator for the creature sort function
+	 * @param i First creature.
+	 * @param j Second creature.
+	 * @return if the second creature's fitness is higher.
+	 */
+	static bool compareCreatureFitness(CreatureModel* i, CreatureModel* j);
 
 	/**
 	 * Reap the less fit creatures from the population.
@@ -63,17 +74,20 @@ public:
 	 */
 	void sow(PopulationModel* population);
 
-	void crossover(PopulationModel* population,int crossoverHeads);
+	void crossover(PopulationModel* population, int crossoverHeads);
 
-	void mutateGenes(PopulationModel* population,int mutatedGeneHeads);
+	void mutateGenes(PopulationModel* population, int mutatedGeneHeads);
 
-	void mutateGeneAttributes(PopulationModel* population,int mutatedGeneAttributeHeads);
+	void mutateGeneAttributes(PopulationModel* population,
+			int mutatedGeneAttributeHeads);
 
-	void mutateGeneBranches(PopulationModel* population,int mutatedGeneBranchHeads);
+	void mutateGeneBranches(PopulationModel* population,
+			int mutatedGeneBranchHeads);
 
-	void mutateGeneBranchAttributes(PopulationModel* population,int mutatedGeneBranchAttributeHeads);
+	void mutateGeneBranchAttributes(PopulationModel* population,
+			int mutatedGeneBranchAttributeHeads);
 
-	void sowFreshly(PopulationModel* population,int sowFreshlyHeads);
+	void sowFreshly(PopulationModel* population, int sowFreshlyHeads);
 
 private:
 	double mReapPercentage;

@@ -86,12 +86,9 @@ public:
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
-	 * @param creature The creature handle we want to get back from the physics engine when we pick the creature.
-	 * @param genome The genome of the creature to be built.
-	 * @param rootPosition The position of origin where the creature starts to be generated in the physical space.
+	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	void performEmbryogenesis(Creature* creature, MixedGenome* genome,
-			Ogre::Vector3 rootPosition);
+	void performEmbryogenesis(CreatureModel* creatureModel);
 
 	/**
 	 * Reset the creature to the way it was born.

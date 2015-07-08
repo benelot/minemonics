@@ -36,7 +36,7 @@ LimbModel::~LimbModel() {
 	mLimbPhysics = NULL;
 }
 
-void LimbModel::initialize(btDynamicsWorld* world, void* limb,
+void LimbModel::initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
 		PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
 		double restitution, double friction, Ogre::ColourValue color,
@@ -45,12 +45,13 @@ void LimbModel::initialize(btDynamicsWorld* world, void* limb,
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
-	((LimbBt*) mLimbPhysics)->initialize(world, limb, type,
+	((LimbBt*) mLimbPhysics)->initialize(world, this, type,
 			OgreBulletUtils::convert(position),
 			OgreBulletUtils::convert(orientation),
 			OgreBulletUtils::convert(dimensions), btScalar(mass),
 			btScalar(restitution), btScalar(friction));
 
+	mCreatureModel = creatureModel;
 	mDimensions = dimensions;
 	mPrimitiveType = type;
 	mColor = color;

@@ -45,7 +45,7 @@ void Population::initialize(Planet* planet,
 		SimulationManager* simulationManager, int creatureQty) {
 	mSimulationManager = simulationManager;
 	mPopulationModel = new PopulationModel();
-	mPopulationModel->initialize(&planet->getPlanetModel(), creatureQty);
+	mPopulationModel->initialize(&planet->getPlanetModel(), 0);
 	Randomness randomness;
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {

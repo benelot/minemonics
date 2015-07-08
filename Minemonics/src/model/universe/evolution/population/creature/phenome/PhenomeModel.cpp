@@ -27,15 +27,13 @@
 #include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
-
 //## model headers
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -92,25 +90,24 @@ void PhenomeModel::update(double timeSinceLastFrame) {
 		(*cit)->perform(timeSinceLastFrame);
 	}
 
-	// test for strains
-	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-	for (; jit != mJointModels.end(); jit++) {
-		(*jit)->isStrained();
-	}
+//	// test for strains
+//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
+//	for (; jit != mJointModels.end(); jit++) {
+//		(*jit)->isStrained();
+//	}
 }
 
-void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
-		Ogre::Vector3 rootPosition) {
+void PhenomeModel::performEmbryogenesis(CreatureModel* creatureModel) {
 	std::list<PhenotypeGenerator*> generatorList;
 	int totalSegmentCounter = 0;
 
 	// get the first gene from the genome
-	Gene* gene = genome->getGenes().front();
+	Gene* gene = creatureModel->getGenotype().getGenes().front();
 
 	//create a phenotype generator and initialize it with the starting point of the creation of the creature
 	PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
 	std::map<int, int> repList;
-	rootGenerator->initialize(repList, rootPosition,
+	rootGenerator->initialize(repList, creatureModel->getInitialPosition(),
 			Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
 	rootGenerator->setGene(gene);
 	rootGenerator->setRoot2LeafPath(0);
@@ -132,11 +129,12 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 		case Gene::MorphoGene: {
 			// if the current root to leaf path is equal to the maximal segments depth, break
 			if (generator->getRoot2LeafPath()
-					== genome->getSegmentsDepthLimit()) {
+					== creatureModel->getGenotype().getSegmentsDepthLimit()) {
 				break;
 			}
 			//if the total segment counter reached the total segment quantity, break
-			if (totalSegmentCounter == genome->getTotalSegmentQtyLimit()) {
+			if (totalSegmentCounter
+					== creatureModel->getGenotype().getTotalSegmentQtyLimit()) {
 				break;
 			}
 
@@ -314,8 +312,9 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 			mLimbModels.push_back(limbB);
 			mComponentModels.push_back(limbB);
 
-			limbB->initialize(mWorld, creature, morphogene->getPrimitiveType(),
-					generator->getPosition(), generator->getOrientation(),
+			limbB->initialize(mWorld, creatureModel,
+					morphogene->getPrimitiveType(), generator->getPosition(),
+					generator->getOrientation(),
 					/*size*/
 					Ogre::Vector3(
 							generator->getCurrentShrinkageFactor()
@@ -430,7 +429,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 				if ((*branchIt)->isActive()) {
 					// get the branch gene type defined by the branch
 					Morphogene* offspring =
-							(Morphogene*) genome->getGenes()[(*branchIt)->getBranchGeneType()];
+							(Morphogene*) creatureModel->getGenotype().getGenes()[(*branchIt)->getBranchGeneType()];
 
 					// create the new generator
 					PhenotypeGenerator* generatorFromBranch =
@@ -457,7 +456,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 
 						//add the offspring's follower because the repetition limit of the offspring is exceeded
 						generatorFromBranch->setGene(
-								genome->getGenes()[offspring->getFollowUpGene()]);
+								creatureModel->getGenotype().getGenes()[offspring->getFollowUpGene()]);
 					}
 
 					//set new root to leaf path length
@@ -494,7 +493,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 
 							//add the offspring's follower because the repetition limit of the offspring is exceeded
 							flippedGeneratorFromBranch->setGene(
-									genome->getGenes()[offspring->getFollowUpGene()]);
+									creatureModel->getGenotype().getGenes()[offspring->getFollowUpGene()]);
 						}
 
 						//set new root to leaf path length
@@ -532,7 +531,7 @@ void PhenomeModel::performEmbryogenesis(Creature* creature, MixedGenome* genome,
 
 							//add the offspring's follower because the repetition limit of the offspring is exceeded
 							mirroredGeneratorFromBranch->setGene(
-									genome->getGenes()[offspring->getFollowUpGene()]);
+									creatureModel->getGenotype().getGenes()[offspring->getFollowUpGene()]);
 						}
 
 						//set new root to leaf path length

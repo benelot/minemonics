@@ -43,6 +43,14 @@ bool EvolutionModel::proceedEvaluation() {
 				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex++;
 		} else if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
+			// process the evaluated populations
+			process();
+
+			// cull the evaluated populations
+			cull();
+
+			// variate the evaluated populations
+			variate();
 			mCurrentPopulationIndex++;
 			mCurrentCreatureIndex = 0;
 		} else {

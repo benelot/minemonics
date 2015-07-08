@@ -131,9 +131,11 @@ bool JointBt::equals(const JointBt& jointBt) const {
 }
 
 void JointBt::reset(Ogre::Vector3 position) {
+	//nothing to be reset
 }
 
 void JointBt::reposition(Ogre::Vector3 position) {
+	//nothing to be repositioned
 }
 
 bool JointBt::isStrained() {

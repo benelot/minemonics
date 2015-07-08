@@ -82,14 +82,11 @@ void Phenome::initialize(SimulationManager* simulationManager,
 
 /**
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
- * @param creature the handle to the creature will want to get back from the physics engine when we pick a creature.
- * @param genome The genome we perform embryogenesis with.
- * @param rootPosition The position the creature should be generated at.
+ * @param creatureModel the handle to the creatureModel we want to get back from the physics engine when we pick a creature.
  */
-void Phenome::performEmbryogenesis(Creature* creature, MixedGenome* genome,
-		Ogre::Vector3 rootPosition) {
+void Phenome::performEmbryogenesis(CreatureModel* creatureModel) {
 	//perform the embryogenesis in the model
-	mPhenomeModel.performEmbryogenesis(creature, genome, rootPosition);
+	mPhenomeModel.performEmbryogenesis(creatureModel);
 
 	// iterate over all the component models
 	std::vector<ComponentModel*>::const_iterator cmit =

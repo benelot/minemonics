@@ -20,13 +20,16 @@
 
 CreatureModel::CreatureModel() :
 		mDeveloped(false), mPopulationModel(NULL), mPhenotypeModel(NULL) {
-
+	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 		mGenotype(creatureModel.mGenotype) {
+	mJuries.clear();
+
 	mDeveloped = creatureModel.mDeveloped;
 	mFirstName = creatureModel.mFirstName;
+
 	mPopulationModel = creatureModel.mPopulationModel;
 	if (creatureModel.mPhenotypeModel != NULL) {
 		mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
@@ -34,8 +37,8 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mInitialPosition = creatureModel.mInitialPosition;
 	mPosition = creatureModel.mPosition;
 
-	std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
-	for (; jit != creatureModel.mJuries.end(); jit++) {
+	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
+			jit != creatureModel.mJuries.end(); jit++) {
 		mJuries.push_back((*jit)->clone());
 	}
 }
@@ -72,15 +75,18 @@ void CreatureModel::reposition(Ogre::Vector3 position) {
 }
 
 double CreatureModel::getFitness() {
-	double fitness;
-	double weight;
+	double fitness = 0;
+	double weight = 1;
 
-	std::vector<Jury*>::iterator jit = mJuries.begin();
-	for (; jit != mJuries.end(); jit++) {
+	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
+			jit != mJuries.end(); jit++) {
 		fitness += (*jit)->getFitness() * (*jit)->getWeight();
 		weight += (*jit)->getWeight();
 	}
-	return fitness / weight;
+	if (weight != 0) {
+		return fitness / weight;
+	}
+	return 0;
 }
 
 bool CreatureModel::equals(const CreatureModel & creature) const {

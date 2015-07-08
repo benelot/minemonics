@@ -35,10 +35,42 @@ void Evolution::initialize(EvaluationController* evaluationController,
 
 void Evolution::addPopulation(Population* population) {
 	mPopulations.push_back(population);
+
 	mEvolutionModel.addNewPopulation(population->getPopulationModel());
 }
 
 bool Evolution::proceedEvaluation() {
+
+//	std::cout << "size: " << mPopulations[0]->getPopulationModel()->getCreatureModels().size() << std::endl;
+//	int i = 0;
+//	for (std::vector<CreatureModel*>::iterator cit =
+//			mPopulations[0]->getPopulationModel()->getCreatureModels().begin();
+//			cit != mPopulations[0]->getPopulationModel()->getCreatureModels().end();
+//			cit++) {
+////		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+//		i++;
+//	}
+//	std::cout << "size2: " << i << std::endl;
+//	std::cout << "size3: " << mPopulations[0]->getPopulationModel()->getCreatureModels().size() << std::endl;
+//	mPopulations[0]->getPopulationModel()->getCreatureModels().end();
+
+//	if (mPopulations.size() == 2) {
+//		std::cout << "size: "
+//				<< mPopulations[1]->getPopulationModel()->getCreatureModels().size()
+//				<< std::endl;
+//
+//		int i = 0;
+//		for (std::vector<CreatureModel*>::iterator cit =
+//				mPopulations[1]->getPopulationModel()->getCreatureModels().begin();
+//				cit
+//						!= mPopulations[1]->getPopulationModel()->getCreatureModels().end();
+//				cit++) {
+//			//		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+//			i++;
+//		}
+//		std::cout << "size2: " << i << std::endl;
+
+//	}
 
 	if (mPopulations.size() != 0
 			&& mEvolutionModel.getCurrentPopulationIndex()
@@ -54,18 +86,18 @@ bool Evolution::proceedEvaluation() {
 				evaluation->initialize(mPlanet,
 						mEvolutionModel.getEvaluationTime());
 
+				// create population with single creature for evaluation
 				Population* population = new Population();
 				population->initialize(mPlanet, 1);
 				population->addMember(
 						mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel.getCurrentCreatureIndex()]);
-
 				evaluation->addPopulation(population);
 
 				mEvaluationController->addEvaluation(evaluation);
 			}
 
-			return mEvolutionModel.proceedEvaluation();
 			mEvolutionModel.evaluate();
+			return mEvolutionModel.proceedEvaluation();
 			break;
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
@@ -191,15 +223,6 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 	}
-
-	// process the evaluated populations
-	mEvolutionModel.process();
-
-	// cull the evaluated populations
-	mEvolutionModel.cull();
-
-	// variate the evaluated populations
-	mEvolutionModel.variate();
 	return false;
 }
 

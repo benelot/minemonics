@@ -16,7 +16,6 @@
 
 Jury::Jury(JuryType juryType, int weight) :
 		mJuryType(juryType), mFitness(0), mWeight(weight) {
-
 }
 
 Jury::~Jury() {

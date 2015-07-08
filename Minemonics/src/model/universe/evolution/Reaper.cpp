@@ -26,16 +26,6 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-/**
- * Comparator for the creature sort function
- * @param i First creature.
- * @param j Second creature.
- * @return if the second creature's fitness is higher.
- */
-bool compareCreatureFitness(CreatureModel* i, CreatureModel* j) {
-	return (i->getFitness() < j->getFitness());
-}
-
 Reaper::Reaper() :
 		mAttributeMutationPercentage(0), mBranchAttributeMutationPercentage(0), mBranchMutationPercentage(
 				0), mCrossOverPercentage(0), mGeneMutationPercentage(0), mReapPercentage(
@@ -59,16 +49,33 @@ void Reaper::initialize(double reapPercentage, double crossOverPercentage,
 	mSowFreshPercentage = sowFreshPercentage;
 }
 
+bool Reaper::compareCreatureFitness(CreatureModel* i, CreatureModel* j) {
+	return (i->getFitness() < j->getFitness());
+}
+
 void Reaper::reap(PopulationModel* population) {
 	int headsToReap = ceil(
 			population->getCreatureModels().size() * mReapPercentage);
 
+	std::cout << "size: " << population->getCreatureModels().size() << std::endl;
+	int i = 0;
+	for (std::vector<CreatureModel*>::iterator cit =
+			population->getCreatureModels().begin();
+			cit != population->getCreatureModels().end();
+			cit++) {
+		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+		i++;
+	}
+
+
 	//TODO: Check whether the sort is descending or ascending
 	std::sort(population->getCreatureModels().begin(),
-			population->getCreatureModels().end(), compareCreatureFitness);
-	std::vector<CreatureModel*>::iterator cit =
+			population->getCreatureModels().end(),
+			Reaper::compareCreatureFitness);
+
+	for (std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().begin();
-	for (; cit != population->getCreatureModels().end() || headsToReap != 0;
+			cit != population->getCreatureModels().end() || headsToReap != 0;
 			headsToReap--) {
 		cit = population->getCreatureModels().erase(cit);
 	}

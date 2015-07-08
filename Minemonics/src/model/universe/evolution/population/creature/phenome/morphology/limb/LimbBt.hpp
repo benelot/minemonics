@@ -46,14 +46,14 @@ public:
 	/**
 	 * Initialize the bullet limb with the following parameters:
 	 * @param world The dynamics world of the bullet engine to add and remove the limb.
-	 * @param limb The handle of the limb that we want to get back if we raycast for it.
+	 * @param limbModel The handle of the limbModel that we want to get back if we raycast for it.
 	 * @param type The primitive type of the limb that should be set as a collision shape.
 	 * @param position The position of the limb.
 	 * @param orientation The orientation of the limb.
 	 * @param dimensions The dimensions of the limb.
 	 * @param mass The mass of the limb.
 	 */
-	void initialize(btDynamicsWorld* world, void* limb,
+	void initialize(btDynamicsWorld* world, void* limbModel,
 			LimbModel::PrimitiveType type, btVector3 position,
 			btQuaternion orientation, btVector3 dimensions, btScalar mass,
 			btScalar restitution, btScalar friction);

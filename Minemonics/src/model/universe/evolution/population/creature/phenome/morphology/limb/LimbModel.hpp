@@ -6,6 +6,7 @@
 
 //# forward declarations
 class btDynamicsWorld;
+class CreatureModel;
 
 //# system headers
 //## controller headers
@@ -55,7 +56,7 @@ public:
 	/**
 	 * Initialize the limb model.
 	 * @param world A handle to the bullet dynamics world.
-	 * @param limb A handle to the limb controller.
+	 * @param creatureModel A handle to the creature model.
 	 * @param type The type of 3D primitive of the limb.
 	 * @param position The position of the limb.
 	 * @param orientation The orientation of the limb.
@@ -65,7 +66,7 @@ public:
 	 * @param friction The friction of the limb.
 	 * @param color The color of the limb.
 	 */
-	void initialize(btDynamicsWorld* world, void* limb, PrimitiveType type,
+	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel, PrimitiveType type,
 			Ogre::Vector3 position, Ogre::Quaternion orientation,
 			Ogre::Vector3 dimensions, double mass, double restitution,
 			double friction, Ogre::ColourValue color,int ownIndex);
@@ -187,6 +188,12 @@ public:
 	}
 
 private:
+
+	/**
+	 * The creature model this limb belongs to.
+	 */
+	CreatureModel* mCreatureModel;
+
 	/**
 	 * The physics model of the limb.
 	 */
