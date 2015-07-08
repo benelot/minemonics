@@ -11,6 +11,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -105,6 +107,13 @@ bool EvolutionModel::variate() {
 	return true;
 }
 
-void EvolutionModel::update() {
-	//TODO: Delete if it is not necessary.
+void EvolutionModel::performEmbryogenesis() {
+	for (std::vector<PopulationModel*>::iterator pit =
+			mPopulationModels.begin(); pit != mPopulationModels.end(); pit++) {
+		for (std::vector<CreatureModel*>::iterator cit =
+				(*pit)->getCreatureModels().begin();
+				cit != (*pit)->getCreatureModels().end(); cit++) {
+			(*cit)->performEmbryogenesis();
+		}
+	}
 }

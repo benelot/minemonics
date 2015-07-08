@@ -229,30 +229,28 @@ void SimulationManager::createScene(void) {
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, this, 20);
+	earthPopulation->initialize(earth, this, 20, Ogre::Vector3(0, 300, -4000));
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
 	// create a population
 	Population* earth2Population = new Population();
-	earth2Population->initialize(earth, this, 20);
+	earth2Population->initialize(earth, this, 20, Ogre::Vector3(0, 300, -4000));
 
 	// add earth population to earth
 	earth->addPopulation(earth2Population);
 
 	Population* population = earthPopulation;
 	for (int j = 0; j < 5; j++) {
-		std::cout << "size: "
-				<< population->getPopulationModel()->getCreatureModels().size()
-				<< "\t";
+		std::cout << "size: " << population->getCreatures().size() << "\t";
 		int i = 0;
-		for (std::vector<CreatureModel*>::iterator cit =
-				population->getPopulationModel()->getCreatureModels().begin();
-				cit
-						!= population->getPopulationModel()->getCreatureModels().end();
-				cit++) {
-			//		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+		for (std::vector<Creature*>::iterator cit =
+				population->getCreatures().begin();
+				cit != population->getCreatures().end(); cit++) {
+			if (i % 10000 == 0 && i != 0) {
+				std::cout << (void *) &(*cit) << ": " << i << std::endl;
+			}
 			i++;
 		}
 		std::cout << "size2: " << i << std::endl;
@@ -262,16 +260,14 @@ void SimulationManager::createScene(void) {
 
 	population = earth2Population;
 	for (int j = 0; j < 5; j++) {
-		std::cout << "size: "
-				<< population->getPopulationModel()->getCreatureModels().size()
-				<< "\t";
+		std::cout << "size: " << population->getCreatures().size() << "\t";
 		int i = 0;
-		for (std::vector<CreatureModel*>::iterator cit =
-				population->getPopulationModel()->getCreatureModels().begin();
-				cit
-						!= population->getPopulationModel()->getCreatureModels().end();
-				cit++) {
-			//		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+		for (std::vector<Creature*>::iterator cit =
+				population->getCreatures().begin();
+				cit != population->getCreatures().end(); cit++) {
+			if (i % 10000 == 0 && i != 0) {
+				std::cout << (void *) &(*cit) << ": " << i << std::endl;
+			}
 			i++;
 		}
 		std::cout << "size2: " << i << std::endl;
@@ -279,45 +275,20 @@ void SimulationManager::createScene(void) {
 
 	std::cout << "################################\n\n\n";
 
-	// set position of the creatures
-	Randomness randomness;
-	for (std::vector<Creature*>::iterator cit =
-			earthPopulation->getCreatures().begin();
-			cit != earthPopulation->getCreatures().end(); cit++) {
-//		(*cit)->setPosition(
-//				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
-//						randomness.nextDouble(300, 1000),
-//						randomness.nextDouble(-1000, 10000)));
+	//perform embryogenesis on every creature that is not developed yet.
+	earth->performEmbryogenesis();
 
-		(*cit)->reposition(Ogre::Vector3(0, 300, -4000));
-		(*cit)->performEmbryogenesis();
-	}
-
-	// set position of the creatures
-	for (std::vector<Creature*>::iterator cit =
-			earth2Population->getCreatures().begin();
-			cit != earth2Population->getCreatures().end(); cit++) {
-//		(*cit)->setPosition(
-//				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
-//						randomness.nextDouble(300, 1000),
-//						randomness.nextDouble(-1000, 10000)));
-
-		(*cit)->reposition(Ogre::Vector3(200, 300, -4000));
-		(*cit)->performEmbryogenesis();
-	}
 
 	population = earthPopulation;
-	for (int j = 0; j < 20; j++) {
-		std::cout << "size: "
-				<< population->getPopulationModel()->getCreatureModels().size()
-				<< "\t";
+	for (int j = 0; j < 200; j++) {
+		std::cout << "size: " << population->getCreatures().size() << "\t";
 		int i = 0;
-		for (std::vector<CreatureModel*>::iterator cit =
-				population->getPopulationModel()->getCreatureModels().begin();
-				cit
-						!= population->getPopulationModel()->getCreatureModels().end();
-				cit++) {
-			//		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+		for (std::vector<Creature*>::iterator cit =
+				population->getCreatures().begin();
+				cit != population->getCreatures().end(); cit++) {
+			if (i % 10000 == 0 && i != 0) {
+				std::cout << (void *) &(*cit) << ": " << i << std::endl;
+			}
 			i++;
 		}
 		std::cout << "size2: " << i << std::endl;
@@ -326,17 +297,15 @@ void SimulationManager::createScene(void) {
 	std::cout << "################################\n\n";
 
 	population = earth2Population;
-	for (int j = 0; j < 20; j++) {
-		std::cout << "size: "
-				<< population->getPopulationModel()->getCreatureModels().size()
-				<< "\t";
+	for (int j = 0; j < 200; j++) {
+		std::cout << "size: " << population->getCreatures().size() << "\t";
 		int i = 0;
-		for (std::vector<CreatureModel*>::iterator cit =
-				population->getPopulationModel()->getCreatureModels().begin();
-				cit
-						!= population->getPopulationModel()->getCreatureModels().end();
-				cit++) {
-			//		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+		for (std::vector<Creature*>::iterator cit =
+				population->getCreatures().begin();
+				cit != population->getCreatures().end(); cit++) {
+			if (i % 10000 == 0 && i != 0) {
+				std::cout << (void *) &(*cit) << ": " << i << std::endl;
+			}
 			i++;
 		}
 		std::cout << "size2: " << i << std::endl;
@@ -362,21 +331,9 @@ void SimulationManager::createScene(void) {
 //	// set position of the creatures
 //	cit = marsPopulation->getCreatures().begin();
 //	for (; cit != marsPopulation->getCreatures().end(); cit++) {
-////		(*cit)->setPosition(
-////				Ogre::Vector3(randomness.nextDouble(-1000, 10000),
-////						randomness.nextDouble(300, 1000),
-////						randomness.nextDouble(-1000, 10000)));
 //
 //		(*cit)->setPosition(Ogre::Vector3(-200, 300, -4000));
 //		(*cit)->performEmbryogenesis();
-//	}
-//	earthPopulation->addToWorld();
-
-//	for (int i = 0; i < 50; i++) {
-//		RagDoll* ragdoll = new RagDoll(this, randomness.nextDouble(10,100),
-//				btVector3(randomness.nextDouble(-5000,5000), randomness.nextDouble(10,5000), randomness.nextDouble(-5000,5000)));
-//		mRagdolls.push_back(ragdoll);
-//		ragdoll->addToWorld();
 //	}
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";

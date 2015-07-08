@@ -39,14 +39,14 @@ public:
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
 	void initialize(Planet* planet, SimulationManager* simulationManager,
-			int creatureQty);
+			int creatureQty, Ogre::Vector3 initialPosition);
 
 	/**
 	 * Initializes the population without adding creatures up to the creatureQty.
 	 * @param planet The planet the population lives on.
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
-	void initialize(Planet* planet,int creatureQty);
+	void initialize(Planet* planet, int creatureQty);
 
 	/**
 	 * Adds a new creature to the population with the branchiness as a input.

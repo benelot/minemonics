@@ -18,8 +18,7 @@
 #include <utils/NameGenerator.hpp>
 #include <utils/Randomness.hpp>
 
-CreatureModel::CreatureModel() :
-		mDeveloped(false), mPopulationModel(NULL), mPhenotypeModel(NULL) {
+CreatureModel::CreatureModel() :mPopulationModel(NULL), mPhenotypeModel(NULL) {
 	mJuries.clear();
 }
 
@@ -27,7 +26,6 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 		mGenotype(creatureModel.mGenotype) {
 	mJuries.clear();
 
-	mDeveloped = creatureModel.mDeveloped;
 	mFirstName = creatureModel.mFirstName;
 
 	mPopulationModel = creatureModel.mPopulationModel;
@@ -94,10 +92,6 @@ bool CreatureModel::equals(const CreatureModel & creature) const {
 		return false;
 	}
 
-	if (mDeveloped != creature.mDeveloped) {
-		return false;
-	}
-
 	if (!mGenotype.equals(creature.mGenotype)) {
 		return false;
 	}
@@ -119,6 +113,10 @@ bool CreatureModel::equals(const CreatureModel & creature) const {
 	}
 
 	return true;
+}
+
+void CreatureModel::performEmbryogenesis() {
+	mPhenotypeModel->performEmbryogenesis(this);
 }
 
 CreatureModel* CreatureModel::clone() {

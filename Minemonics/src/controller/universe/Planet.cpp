@@ -97,3 +97,7 @@ void Planet::drawDebugWorld() {
 	mPlanetModel.getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld();
 
 }
+
+void Planet::performEmbryogenesis() {
+	mEvolution->performEmbryogenesis();
+}

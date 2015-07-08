@@ -69,6 +69,11 @@ public:
 			double branchiness);
 
 	/**
+	 * Perform embryogenesis on all creatures that are not developed.
+	 */
+	void performEmbryogenesis();
+
+	/**
 	 * Reset the creature to the way it was born.
 	 */
 	void reset(Ogre::Vector3 position);
@@ -137,11 +142,10 @@ public:
 		/**The name of the creature*/
 		<< "CreatureModel: Name=" << creature.mFirstName
 
-		/**If the creature is developed*/
-		<< "/isDeveloped=" << creature.mDeveloped
-
 		/**The genome of the creature*/
-		<< "/Genotype=" << creature.mGenotype;
+		<< "/Genotype=" << creature.mGenotype
+
+		<< "/Phenotype=" << creature.mPhenotypeModel;
 
 		/**The juries of the creature model*/
 		std::vector<Jury*>::const_iterator it;
@@ -167,10 +171,6 @@ public:
 		/**The name of the creature*/
 		& BOOST_SERIALIZATION_NVP(mFirstName)
 
-		/**if the creature is developed already*/
-		& BOOST_SERIALIZATION_NVP(
-				mDeveloped)
-
 		/**The genome of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mGenotype)
 
@@ -189,11 +189,11 @@ public:
 	}
 
 	bool isDeveloped() const {
-		return mDeveloped;
+		return mPhenotypeModel->isDeveloped();
 	}
 
 	void setDeveloped(bool developed) {
-		mDeveloped = developed;
+		mPhenotypeModel->setDeveloped(developed);
 	}
 
 	const std::vector<Jury*>& getJuries() const {
@@ -239,11 +239,6 @@ private:
 	 * The genotype (genomic individual) of the creature.
 	 */
 	MixedGenome mGenotype;
-
-	/**
-	 * Is the phenotype developed?
-	 */
-	bool mDeveloped;
 
 	/**
 	 * The phenotype (morphological individual) of the creature.

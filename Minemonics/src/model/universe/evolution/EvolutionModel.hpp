@@ -61,9 +61,9 @@ public:
 			double evaluationTime = 10, int tournamentSize = 1);
 
 	/**
-	 * Update the evolution model.
+	 * Perform embryogenesis on all creatures that are not developed.
 	 */
-	void update();
+	void performEmbryogenesis();
 
 	/**
 	 * Add a new population to the evolution model.

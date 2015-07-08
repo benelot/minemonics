@@ -56,6 +56,15 @@ public:
 					EvolutionModel::INDIVIDUAL_EVALUATION, int tournamentSize =
 					1);
 
+	/**
+	 * Perform embryogenesis on all creatures that are not developed.
+	 */
+	void performEmbryogenesis();
+
+	/**
+	 * Add a population to the evolution.
+	 * @param population The population to be added.
+	 */
 	void addPopulation(Population* population);
 
 	/**
@@ -65,6 +74,9 @@ public:
 	 */
 	bool proceedEvaluation();
 
+	/**
+	 * Update the evolution.
+	 */
 	void update();
 
 	//Accessor methods

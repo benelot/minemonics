@@ -39,7 +39,10 @@ bool PlanetModel::proceedEvaluation() {
 	return true;
 }
 
+void PlanetModel::performEmbryogenesis() {
+	mEvolutionModel->performEmbryogenesis();
+}
+
 void PlanetModel::update(){
 	mEnvironmentModel->update();
-	mEvolutionModel->update();
 }

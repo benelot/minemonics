@@ -52,7 +52,6 @@ void Creature::initialize(SimulationManager* simulationManager,
 
 void Creature::performEmbryogenesis() {
 	mPhenotype->performEmbryogenesis(this->getCreatureModel());
-	setDeveloped(true);
 }
 
 void Creature::reset(Ogre::Vector3 position) {

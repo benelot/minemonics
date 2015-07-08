@@ -47,6 +47,11 @@ public:
 			Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer,int evaluationTime);
 
 	/**
+	 * Perform embryogenesis on all creatures that are not yet developed.
+	 */
+	void performEmbryogenesis();
+
+	/**
 	 * Add a population to the planet.
 	 * @param population The population to be added to the planet.
 	 */

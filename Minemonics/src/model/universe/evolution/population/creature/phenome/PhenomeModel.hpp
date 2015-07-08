@@ -100,21 +100,24 @@ public:
 
 		/**The vector of limb models.*/
 		std::vector<LimbModel*>::const_iterator it;
-		for (it = phenomeModel.mLimbModels.begin(); it != phenomeModel.mLimbModels.end(); it++) {
+		for (it = phenomeModel.mLimbModels.begin();
+				it != phenomeModel.mLimbModels.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		/**The vector of joint models.*/
 		std::vector<JointModel*>::const_iterator it2;
-		for (it2 = phenomeModel.mJointModels.begin(); it2 != phenomeModel.mJointModels.end(); it2++) {
+		for (it2 = phenomeModel.mJointModels.begin();
+				it2 != phenomeModel.mJointModels.end(); it2++) {
 			os << (**it2);
 			os << "||";
 		}
 
 		/**The vector of controllers.*/
 		std::vector<Controller*>::const_iterator it3;
-		for (it3 = phenomeModel.mControllers.begin(); it3 != phenomeModel.mControllers.end(); it3++) {
+		for (it3 = phenomeModel.mControllers.begin();
+				it3 != phenomeModel.mControllers.end(); it3++) {
 			os << (**it3);
 			os << "||";
 		}
@@ -130,6 +133,8 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
+		/**If the phenome is developed*/
+		& BOOST_SERIALIZATION_NVP(mDeveloped)
 		/**if the phenome is in the world*/
 		& BOOST_SERIALIZATION_NVP(mInWorld)
 
@@ -172,7 +177,20 @@ public:
 		return mComponentModels;
 	}
 
+	bool isDeveloped() const {
+		return mDeveloped;
+	}
+
+	void setDeveloped(bool developed) {
+		mDeveloped = developed;
+	}
+
 private:
+
+	/**
+	 * Is the phenotype developed?
+	 */
+	bool mDeveloped;
 
 	/**
 	 * Handle to the dynamics world.

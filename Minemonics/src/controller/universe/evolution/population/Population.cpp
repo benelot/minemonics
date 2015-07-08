@@ -42,7 +42,7 @@ Population::~Population() {
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
 void Population::initialize(Planet* planet,
-		SimulationManager* simulationManager, int creatureQty) {
+		SimulationManager* simulationManager, int creatureQty,Ogre::Vector3 initialPosition) {
 	mSimulationManager = simulationManager;
 	mPopulationModel = new PopulationModel();
 	mPopulationModel->initialize(&planet->getPlanetModel(), 0);
@@ -52,7 +52,7 @@ void Population::initialize(Planet* planet,
 		branchiness = randomness.nextNormalDouble(
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		addNewMember(branchiness);
+		addNewMember(branchiness,initialPosition);
 	}
 	mPlanet = planet;
 }

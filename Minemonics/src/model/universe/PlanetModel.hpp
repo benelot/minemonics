@@ -42,6 +42,11 @@ public:
 	void initialize(EvolutionModel* evolutionModel, EnvironmentModel* environmentModel);
 
 	/**
+	 * Perform embryogenesis on all creatures that are not yet developed.
+	 */
+	void performEmbryogenesis();
+
+	/**
 	 * Proceed with the evaluation.
 	 * @return If the evaluation could proceed.
 	 */
