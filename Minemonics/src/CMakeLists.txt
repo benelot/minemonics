@@ -643,10 +643,10 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
 # Shark 2 (Is not a required library anymore)
 ######################################################################
 
-find_package(Shark2 REQUIRED)
+#find_package(Shark2 REQUIRED)
 
-include_directories(${Shark2_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
+#include_directories(${Shark2_INCLUDE_DIRS})
+#set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
 
 ######################################################################
 # Bullet 3 physics libary
@@ -784,16 +784,16 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
 # Add test cpp file
-add_executable(runUnitTests
-    ${TESTHDRS}
-    ${TESTSRCS}
-)
+#add_executable(runUnitTests
+#    ${TESTHDRS}
+#    ${TESTSRCS}
+#)
 
 # Link test executable against gtest & gtest_main
-target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+#target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
 
-add_test(
-    NAME runUnitTests
-    COMMAND runUnitTests
-)
+#add_test(
+#    NAME runUnitTests
+#    COMMAND runUnitTests
+#)
  
