@@ -91,6 +91,21 @@ public:
 	}
 
 private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>("Universe"));
+		}
+	} _initializer;
 
 	/**
 	 * The evaluation controller of this universe.

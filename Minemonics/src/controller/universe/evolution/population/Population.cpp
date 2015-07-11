@@ -26,14 +26,22 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
+Population::_Init Population::_initializer;
 Population::Population() :
-		mSimulationManager(NULL), mPopulationModel(NULL), mPlanet(NULL) {
+		mSimulationManager(NULL), mPlanet(NULL) {
 }
 
 Population::~Population() {
 	//Clear the handle.
 	mSimulationManager = NULL;
-	delete mPopulationModel;
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end();) {
+		Creature* creature = *cit;
+		cit = mCreatures.erase(cit);
+		delete creature;
+	}
+	mPlanet = NULL;
 }
 
 /**
@@ -42,24 +50,23 @@ Population::~Population() {
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
 void Population::initialize(Planet* planet,
-		SimulationManager* simulationManager, int creatureQty,Ogre::Vector3 initialPosition) {
+		SimulationManager* simulationManager, int creatureQty,
+		Ogre::Vector3 initialPosition) {
 	mSimulationManager = simulationManager;
-	mPopulationModel = new PopulationModel();
-	mPopulationModel->initialize(&planet->getPlanetModel(), 0);
+	mPopulationModel.initialize(&planet->getPlanetModel(), 0);
 	Randomness randomness;
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
 		branchiness = randomness.nextNormalDouble(
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		addNewMember(branchiness,initialPosition);
+		addNewMember(branchiness, initialPosition);
 	}
 	mPlanet = planet;
 }
 
 void Population::initialize(Planet* planet, int creatureQty) {
-	mPopulationModel = new PopulationModel();
-	mPopulationModel->initialize(&planet->getPlanetModel(), creatureQty);
+	mPopulationModel.initialize(&planet->getPlanetModel(), creatureQty);
 	mPlanet = planet;
 }
 
@@ -81,7 +88,7 @@ void Population::addNewMember(double branchiness, Ogre::Vector3 rootPosition) {
 void Population::addMember(Creature* creature) {
 	mCreatures.push_back(creature);
 	//hand model down to the population model
-	mPopulationModel->addMember(&creature->getCreatureModel());
+	mPopulationModel.addMember(&creature->getCreatureModel());
 }
 
 void Population::update() {
@@ -93,9 +100,9 @@ void Population::update() {
 
 void Population::reset() {
 	std::vector<Creature*>::iterator cit = mCreatures.begin();
-		for (; cit != mCreatures.end(); cit++) {
-			(*cit)->reset();
-		}
+	for (; cit != mCreatures.end(); cit++) {
+		(*cit)->reset();
+	}
 }
 
 void Population::addToWorld() {

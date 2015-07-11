@@ -18,6 +18,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger Universe::mBoostLogger; /*<! initialize the boost logger*/
+Universe::_Init Universe::_initializer;
 Universe::Universe() {
 //	mEvaluationController();
 	mPlanets.clear();

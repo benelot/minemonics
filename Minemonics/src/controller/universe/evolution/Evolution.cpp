@@ -24,6 +24,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger Evolution::mBoostLogger; /*<! initialize the boost logger*/
+Evolution::_Init Evolution::_initializer;
 Evolution::Evolution() :
 		mEvaluationController(NULL), mPlanet(NULL) {
 }
@@ -43,7 +45,7 @@ void Evolution::initialize(EvaluationController* evaluationController,
 
 void Evolution::addPopulation(Population* population) {
 	mPopulations.push_back(population);
-	mEvolutionModel.addNewPopulation(population->getPopulationModel());
+	mEvolutionModel.addNewPopulation(&population->getPopulationModel());
 }
 
 bool Evolution::proceedEvaluation() {

@@ -33,7 +33,7 @@ Creature::~Creature() {
 void Creature::initialize(SimulationManager* simulationManager,
 		Population* population, Ogre::Vector3 position, double branchiness) {
 	// set up the creature model
-	mCreatureModel.initialize(population->getPopulationModel(), NULL, position,
+	mCreatureModel.initialize(&population->getPopulationModel(), NULL, position,
 			branchiness);
 
 	// set up the phenotype

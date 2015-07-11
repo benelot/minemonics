@@ -12,6 +12,9 @@ class Planet;
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -20,6 +23,7 @@ class Planet;
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The population controller holds a certain amount of creatures together from which a we cull after evaluation.
@@ -86,16 +90,38 @@ public:
 		return mCreatures;
 	}
 
-	PopulationModel* getPopulationModel() {
+	PopulationModel& getPopulationModel() {
 		return mPopulationModel;
 	}
 
 private:
 
 	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"Population"));
+		}
+	} _initializer;
+
+	/**
 	 * The simulation manager handle.
 	 */
 	SimulationManager* mSimulationManager;
+
+	/**
+	 * The planet the population lives on.
+	 */
+	Planet* mPlanet;
 
 	/**
 	 * The creatures living in this population. All creatures in one population can mate together.
@@ -105,12 +131,7 @@ private:
 	/**
 	 * The state model of the population
 	 */
-	PopulationModel* mPopulationModel;
-
-	/**
-	 * The planet the population lives on.
-	 */
-	Planet* mPlanet;
+	PopulationModel mPopulationModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_ */

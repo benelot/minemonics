@@ -244,21 +244,21 @@ void SimulationManager::createScene(void) {
 	for (int j = 0; j < 1000; j++) {
 		int i = 0;
 		for (std::vector<CreatureModel*>::iterator cit =
-				earthPopulation->getPopulationModel()->getCreatureModels().begin();
+				earthPopulation->getPopulationModel().getCreatureModels().begin();
 				cit
-						!= earthPopulation->getPopulationModel()->getCreatureModels().end()
+						!= earthPopulation->getPopulationModel().getCreatureModels().end()
 						&& i
-								<= earthPopulation->getPopulationModel()->getCreatureModels().size();
+								<= earthPopulation->getPopulationModel().getCreatureModels().size();
 				cit++) {
 			i++;
 		}
 		if (i
-				!= earthPopulation->getPopulationModel()->getCreatureModels().size()) {
+				!= earthPopulation->getPopulationModel().getCreatureModels().size()) {
 			std::cout
 					<< "################################\n\n Block afterAnotherAdd::..."
 					<< "/" << j;
 			std::cout << "\nsize: "
-					<< earthPopulation->getPopulationModel()->getCreatureModels().size()
+					<< earthPopulation->getPopulationModel().getCreatureModels().size()
 					<< "\t";
 			std::cout << "size2: >" << i << std::endl;
 			std::cout << "################################\n\n";
@@ -276,21 +276,21 @@ void SimulationManager::createScene(void) {
 	for (int j = 0; j < 1000; j++) {
 		int i = 0;
 		for (std::vector<CreatureModel*>::iterator cit =
-				earthPopulation->getPopulationModel()->getCreatureModels().begin();
+				earthPopulation->getPopulationModel().getCreatureModels().begin();
 				cit
-						!= earthPopulation->getPopulationModel()->getCreatureModels().end()
+						!= earthPopulation->getPopulationModel().getCreatureModels().end()
 						&& i
-								<= earthPopulation->getPopulationModel()->getCreatureModels().size();
+								<= earthPopulation->getPopulationModel().getCreatureModels().size();
 				cit++) {
 			i++;
 		}
 		if (i
-				!= earthPopulation->getPopulationModel()->getCreatureModels().size()) {
+				!= earthPopulation->getPopulationModel().getCreatureModels().size()) {
 			std::cout
 					<< "################################\n\n Block afterEmbryogenesis::..."
 					<< "/" << j;
 			std::cout << "\nsize: "
-					<< earthPopulation->getPopulationModel()->getCreatureModels().size()
+					<< earthPopulation->getPopulationModel().getCreatureModels().size()
 					<< "\t";
 			std::cout << "size2: >" << i << std::endl;
 			std::cout << "################################\n\n";

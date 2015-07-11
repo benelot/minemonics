@@ -26,6 +26,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
+Planet::_Init Planet::_initializer;
 Planet::Planet() :
 		mEnvironment(NULL) {
 //	mEvolution();
