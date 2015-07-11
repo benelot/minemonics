@@ -44,25 +44,21 @@ bool Environment::isInWorld() {
 }
 
 void Environment::addToWorld() {
-	if(!mEnvironmentModel->isInWorld())
-	{
+	if (!mEnvironmentModel->isInWorld()) {
 		mEnvironmentModel->addToWorld();
 	}
 
-	if(!mEnvironmentGraphics->isInWorld())
-	{
+	if (!mEnvironmentGraphics->isInWorld()) {
 		mEnvironmentGraphics->addToWorld();
 	}
 }
 
 void Environment::removeFromWorld() {
-	if(mEnvironmentModel->isInWorld())
-	{
+	if (mEnvironmentModel->isInWorld()) {
 		mEnvironmentModel->removeFromWorld();
 	}
 
-	if(mEnvironmentGraphics->isInWorld())
-	{
+	if (mEnvironmentGraphics->isInWorld()) {
 		mEnvironmentGraphics->removeFromWorld();
 	}
 }

@@ -89,10 +89,9 @@ void Phenome::performEmbryogenesis(CreatureModel* creatureModel) {
 	mPhenomeModel.performEmbryogenesis(creatureModel);
 
 	// iterate over all the component models
-	std::vector<ComponentModel*>::const_iterator cmit =
+	for (std::vector<ComponentModel*>::const_iterator cmit =
 			mPhenomeModel.getComponentModels().begin();
-
-	for (; cmit != mPhenomeModel.getComponentModels().end(); cmit++) {
+			cmit != mPhenomeModel.getComponentModels().end(); cmit++) {
 
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {

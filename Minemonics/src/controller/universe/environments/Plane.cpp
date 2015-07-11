@@ -27,13 +27,16 @@
 
 //## utils headers
 
-Plane::Plane() {
+Plane::Plane() :
+		Environment() {
 }
 
 Plane::~Plane() {
+//	They are all deleted in environment
 }
 
-void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer) {
+void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,
+		OgreBtDebugDrawer* debugDrawer) {
 	Environment::initialize(Environment::PLANE);
 
 	// setup the plane view
@@ -48,10 +51,9 @@ void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDe
 	mEnvironmentModel->setPhysicsController(new PhysicsController());
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(debugDrawer);
-//	mEnvironmentModel->getPhysicsController()->setPhysicsPaused(true);
 }
 
-void Plane::update(){
+void Plane::update() {
 	getPlaneModel()->update();
 	getPlaneView()->update();
 }

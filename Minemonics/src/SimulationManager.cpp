@@ -150,16 +150,13 @@ void SimulationManager::createScene(void) {
 
 	//################################################################
 	//TODO: Camera must be handled within view controller #############
-	// Create the scene node
+	// Create the camera controlling node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
 					Ogre::Vector3(0, 500, 400));
-
 	mCamera->setPosition(0, 500, 400);
 	camNode->lookAt(Ogre::Vector3(0, 300, -4000), Ogre::Node::TS_WORLD);
 	camNode->attachObject(mCamera);
-
-	// camera settings
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(12000);
 
@@ -229,89 +226,79 @@ void SimulationManager::createScene(void) {
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, this, 20, Ogre::Vector3(0, 300, -4000));
+	earthPopulation->initialize(earth, this, 100, Ogre::Vector3(0, 300, -4000));
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
 	// create a population
 	Population* earth2Population = new Population();
-	earth2Population->initialize(earth, this, 20, Ogre::Vector3(0, 300, -4000));
+	earth2Population->initialize(earth, this, 100,
+			Ogre::Vector3(0, 300, -4000));
 
 	// add earth population to earth
 	earth->addPopulation(earth2Population);
 
-	Population* population = earthPopulation;
-	for (int j = 0; j < 5; j++) {
-		std::cout << "size: " << population->getCreatures().size() << "\t";
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	for (int j = 0; j < 1000; j++) {
 		int i = 0;
-		for (std::vector<Creature*>::iterator cit =
-				population->getCreatures().begin();
-				cit != population->getCreatures().end(); cit++) {
-			if (i % 10000 == 0 && i != 0) {
-				std::cout << (void *) &(*cit) << ": " << i << std::endl;
-			}
+		for (std::vector<CreatureModel*>::iterator cit =
+				earthPopulation->getPopulationModel()->getCreatureModels().begin();
+				cit
+						!= earthPopulation->getPopulationModel()->getCreatureModels().end()
+						&& i
+								<= earthPopulation->getPopulationModel()->getCreatureModels().size();
+				cit++) {
 			i++;
 		}
-		std::cout << "size2: " << i << std::endl;
-	}
-
-	std::cout << "################################\n\n";
-
-	population = earth2Population;
-	for (int j = 0; j < 5; j++) {
-		std::cout << "size: " << population->getCreatures().size() << "\t";
-		int i = 0;
-		for (std::vector<Creature*>::iterator cit =
-				population->getCreatures().begin();
-				cit != population->getCreatures().end(); cit++) {
-			if (i % 10000 == 0 && i != 0) {
-				std::cout << (void *) &(*cit) << ": " << i << std::endl;
-			}
-			i++;
+		if (i
+				!= earthPopulation->getPopulationModel()->getCreatureModels().size()) {
+			std::cout
+					<< "################################\n\n Block afterAnotherAdd::..."
+					<< "/" << j;
+			std::cout << "\nsize: "
+					<< earthPopulation->getPopulationModel()->getCreatureModels().size()
+					<< "\t";
+			std::cout << "size2: >" << i << std::endl;
+			std::cout << "################################\n\n";
+			break;
 		}
-		std::cout << "size2: " << i << std::endl;
 	}
-
-	std::cout << "################################\n\n\n";
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	//perform embryogenesis on every creature that is not developed yet.
 	earth->performEmbryogenesis();
 
-
-	population = earthPopulation;
-	for (int j = 0; j < 200; j++) {
-		std::cout << "size: " << population->getCreatures().size() << "\t";
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	for (int j = 0; j < 1000; j++) {
 		int i = 0;
-		for (std::vector<Creature*>::iterator cit =
-				population->getCreatures().begin();
-				cit != population->getCreatures().end(); cit++) {
-			if (i % 10000 == 0 && i != 0) {
-				std::cout << (void *) &(*cit) << ": " << i << std::endl;
-			}
+		for (std::vector<CreatureModel*>::iterator cit =
+				earthPopulation->getPopulationModel()->getCreatureModels().begin();
+				cit
+						!= earthPopulation->getPopulationModel()->getCreatureModels().end()
+						&& i
+								<= earthPopulation->getPopulationModel()->getCreatureModels().size();
+				cit++) {
 			i++;
 		}
-		std::cout << "size2: " << i << std::endl;
-	}
-
-	std::cout << "################################\n\n";
-
-	population = earth2Population;
-	for (int j = 0; j < 200; j++) {
-		std::cout << "size: " << population->getCreatures().size() << "\t";
-		int i = 0;
-		for (std::vector<Creature*>::iterator cit =
-				population->getCreatures().begin();
-				cit != population->getCreatures().end(); cit++) {
-			if (i % 10000 == 0 && i != 0) {
-				std::cout << (void *) &(*cit) << ": " << i << std::endl;
-			}
-			i++;
+		if (i
+				!= earthPopulation->getPopulationModel()->getCreatureModels().size()) {
+			std::cout
+					<< "################################\n\n Block afterEmbryogenesis::..."
+					<< "/" << j;
+			std::cout << "\nsize: "
+					<< earthPopulation->getPopulationModel()->getCreatureModels().size()
+					<< "\t";
+			std::cout << "size2: >" << i << std::endl;
+			std::cout << "################################\n\n";
+			break;
 		}
-		std::cout << "size2: " << i << std::endl;
 	}
-
-	std::cout << "################################\n\n\n";
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	//TODO::Make it work with multiple planets
 //	// create a planet called mars

@@ -13,7 +13,11 @@ PhenotypeGenerator::PhenotypeGenerator() :
 
 
 PhenotypeGenerator::~PhenotypeGenerator() {
-
+	mGene = NULL;
+	mGeneBranch = NULL;
+	mParentComponentModel = NULL;
+	mReferenceComponents.clear();
+	mRepetitionList.clear();
 }
 
 void PhenotypeGenerator::initialize(std::map<int,int>& repetitionList,

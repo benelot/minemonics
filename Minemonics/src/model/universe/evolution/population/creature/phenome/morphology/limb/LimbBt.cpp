@@ -26,8 +26,8 @@
 //## utils headers
 
 LimbBt::LimbBt() :
-		mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(NULL), mType(
-				LimbModel::UNKNOWN) {
+		LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
+				NULL), mType(LimbModel::UNKNOWN) {
 }
 
 LimbBt::~LimbBt() {
@@ -53,8 +53,7 @@ void LimbBt::initialize(btDynamicsWorld* world, void* limbModel,
 				btScalar(dimensions.y()));
 		break;
 	case LimbModel::UNKNOWN:
-		std::cout
-				<< "##########################################\n"
+		std::cout << "##########################################\n"
 				<< " LimbBt received 'Unknown' as a limb type.\n"
 				<< "##########################################\n";
 		exit(-1);

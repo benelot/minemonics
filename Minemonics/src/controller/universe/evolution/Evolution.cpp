@@ -1,19 +1,26 @@
 //# corresponding headers
 //# forward declarations
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 #include <controller/Evaluation.hpp>
 #include <controller/EvaluationController.hpp>
 #include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/Planet.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -22,7 +29,8 @@ Evolution::Evolution() :
 }
 
 Evolution::~Evolution() {
-
+	mEvaluationController = NULL;
+	mPlanet = NULL;
 }
 
 void Evolution::initialize(EvaluationController* evaluationController,
@@ -35,43 +43,10 @@ void Evolution::initialize(EvaluationController* evaluationController,
 
 void Evolution::addPopulation(Population* population) {
 	mPopulations.push_back(population);
-
 	mEvolutionModel.addNewPopulation(population->getPopulationModel());
 }
 
 bool Evolution::proceedEvaluation() {
-
-//	std::cout << "size: " << mPopulations[0]->getPopulationModel()->getCreatureModels().size() << std::endl;
-//	int i = 0;
-//	for (std::vector<CreatureModel*>::iterator cit =
-//			mPopulations[0]->getPopulationModel()->getCreatureModels().begin();
-//			cit != mPopulations[0]->getPopulationModel()->getCreatureModels().end();
-//			cit++) {
-////		std::cout << (void *)&(*cit) << ": " << i << std::endl;
-//		i++;
-//	}
-//	std::cout << "size2: " << i << std::endl;
-//	std::cout << "size3: " << mPopulations[0]->getPopulationModel()->getCreatureModels().size() << std::endl;
-//	mPopulations[0]->getPopulationModel()->getCreatureModels().end();
-
-//	if (mPopulations.size() == 2) {
-//		std::cout << "size: "
-//				<< mPopulations[1]->getPopulationModel()->getCreatureModels().size()
-//				<< std::endl;
-//
-//		int i = 0;
-//		for (std::vector<CreatureModel*>::iterator cit =
-//				mPopulations[1]->getPopulationModel()->getCreatureModels().begin();
-//				cit
-//						!= mPopulations[1]->getPopulationModel()->getCreatureModels().end();
-//				cit++) {
-//			//		std::cout << (void *)&(*cit) << ": " << i << std::endl;
-//			i++;
-//		}
-//		std::cout << "size2: " << i << std::endl;
-
-//	}
-
 	if (mPopulations.size() != 0
 			&& mEvolutionModel.getCurrentPopulationIndex()
 					< mPopulations.size()) {
@@ -239,6 +214,11 @@ void Evolution::performEmbryogenesis() {
 		for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
 				cit != (*pit)->getCreatures().end(); cit++) {
+
+			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			SimulationManager::detectError((*cit)->getCreatureModel()->getPopulationModel(),
+					3000, -1, 0);
+			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			(*cit)->performEmbryogenesis();
 		}
 	}

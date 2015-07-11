@@ -2,10 +2,6 @@
 #include <controller/universe/Universe.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif /*NULL*/
-
 //# system headers
 //## controller headers
 #include <controller/universe/Planet.hpp>
@@ -23,9 +19,14 @@
 //## utils headers
 
 Universe::Universe() {
+//	mEvaluationController();
+	mPlanets.clear();
+//	mUniverseModel();
 }
 
 Universe::~Universe() {
+//	~mEvaluationController()
+
 	//delete the planets
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end(); pit++) {
@@ -33,6 +34,8 @@ Universe::~Universe() {
 		delete planet;
 		pit = mPlanets.erase(pit);
 	}
+
+//	~mUniverseModel()
 }
 
 void Universe::initialize(SimulationManager* simulationManager,
