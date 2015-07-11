@@ -2,43 +2,47 @@
 #include <controller/universe/Planet.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif /*NULL*/
-
 //# system headers
 //## controller headers
 //## model headers
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
+#include <controller/universe/Universe.hpp>
 #include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/environments/Environment.hpp>
 #include <controller/universe/environments/Plane.hpp>
 
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
 //## utils headers
 
 Planet::Planet() :
-		mEnvironment(NULL), mEvolution(NULL) {
+		mEnvironment(NULL) {
+//	mEvolution();
+//	mPlanetModel();
 }
 
 Planet::~Planet() {
-	mEnvironment = NULL;
-	mEvolution = NULL;
+//	~mEnvironment()
+//	~mEvolution()
+//	~mPlanetModel()
 }
 
 void Planet::initialize(SimulationManager* simulationManager,
 		Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer,
 		int evaluationTime) {
 	//create earth evolution
-	mEvolution = new Evolution();
-	mEvolution->initialize(
+	mEvolution.initialize(
 			&simulationManager->getUniverse().getEvaluationController(), this,
 			evaluationTime);
 
@@ -57,12 +61,12 @@ void Planet::initialize(SimulationManager* simulationManager,
 		break;
 	}
 	}
-	mPlanetModel.initialize(&mEvolution->getEvolutionModel(),
+	mPlanetModel.initialize(&mEvolution.getEvolutionModel(),
 			mEnvironment->getEnvironmentModel());
 }
 
 void Planet::addPopulation(Population* population) {
-	mEvolution->addPopulation(population);
+	mEvolution.addPopulation(population);
 }
 
 void Planet::stepPhysics(double timeSinceLastFrame) {
@@ -85,7 +89,7 @@ bool Planet::proceedEvaluation() {
 	mPlanetModel.proceedEvaluation();
 
 	//if the evolution can not proceed, then remove the environment model from the world.
-	if (!mEvolution->proceedEvaluation()) {
+	if (!mEvolution.proceedEvaluation()) {
 		mEnvironment->removeFromWorld();
 		return false;
 	}
@@ -99,5 +103,5 @@ void Planet::drawDebugWorld() {
 }
 
 void Planet::performEmbryogenesis() {
-	mEvolution->performEmbryogenesis();
+	mEvolution.performEmbryogenesis();
 }

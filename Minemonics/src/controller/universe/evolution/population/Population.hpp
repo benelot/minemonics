@@ -82,7 +82,7 @@ public:
 
 	//Accessor methods
 
-	std::vector<Creature*>& getCreatures() {
+	std::vector<Creature*> getCreatures() {
 		return mCreatures;
 	}
 

@@ -56,7 +56,6 @@ void PopulationModel::initialize(PlanetModel* planetModel, int creatureQty) {
 void PopulationModel::addMember(CreatureModel* creatureModel) {
 	mCreatureModels.push_back(creatureModel);
 	mCreatureQty++;
-
 }
 
 /**

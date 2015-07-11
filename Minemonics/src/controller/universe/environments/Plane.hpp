@@ -36,6 +36,12 @@ public:
 	Plane();
 	virtual ~Plane();
 
+	/**
+	 * Initialize the plane environment.
+	 * @param simulationMgr A handle to the simulation manager.
+	 * @param l The general light source.
+	 * @param debugDrawer The debug drawer of the simulation.
+	 */
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer);
 
 	virtual void update();

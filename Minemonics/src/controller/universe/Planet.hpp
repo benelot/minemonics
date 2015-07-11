@@ -3,25 +3,19 @@
 
 //# corresponding header
 //# forward declarations
-class Environment;
-class Evolution;
-
 //# system headers
 //## controller headers
-#include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/environments/Environment.hpp>
 
 //## model headers
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 //## controller headers
 //## model headers
 #include <model/universe/PlanetModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
 //## utils headers
@@ -79,12 +73,12 @@ public:
 	 */
 	bool proceedEvaluation();
 
-	//Accessor methods
+	// Accessor methods
 	/**
 	 * Get the environment of the planet.
 	 * @return The environment of the planet.
 	 */
-	Environment*& getEnvironment() {
+	Environment* getEnvironment() {
 		return mEnvironment;
 	}
 
@@ -92,15 +86,15 @@ public:
 	 * Set the environment of the planet.
 	 * @param environment The environment of the planet.
 	 */
-	void setEnvironment(Environment*& environment) {
+	void setEnvironment(Environment* environment) {
 		mEnvironment = environment;
 	}
 
-	Evolution*& getEvolution() {
+	Evolution& getEvolution() {
 		return mEvolution;
 	}
 
-	void setEvolution(Evolution*& evolution) {
+	void setEvolution(Evolution& evolution) {
 		mEvolution = evolution;
 	}
 
@@ -118,7 +112,7 @@ private:
 	/**
 	 * The evolution on this planet.
 	 */
-	Evolution* mEvolution;
+	Evolution mEvolution;
 
 	/**
 	 * The environment of this planet.
