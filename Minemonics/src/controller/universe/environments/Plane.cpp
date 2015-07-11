@@ -27,6 +27,8 @@
 
 //## utils headers
 
+BoostLogger Plane::mBoostLogger; /*<! initialize the boost logger*/
+Plane::_Init Plane::_initializer;
 Plane::Plane() :
 		Environment() {
 }

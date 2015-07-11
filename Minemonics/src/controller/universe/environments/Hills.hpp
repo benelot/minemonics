@@ -26,7 +26,14 @@ public:
 	Hills();
 	virtual ~Hills();
 
+	/**
+	 * Initialize the hills environment.
+	 * @param simulationMgr A handle of the simulation manager.
+	 * @param l The light source.
+	 */
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l);
+
+	//Accessor methods
 
 	EnvironmentModel* getEnvironmentModel();
 };

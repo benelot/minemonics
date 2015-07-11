@@ -14,6 +14,9 @@ class Light;
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 #include <controller/universe/environments/Environment.hpp>
 
@@ -24,6 +27,7 @@ class Light;
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The plane environment simulates an environment that is a geometric plane.
@@ -44,8 +48,12 @@ public:
 	 */
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer);
 
+	/**
+	 * Update the plane environment.
+	 */
 	virtual void update();
 
+	// Accessor methods
 	PlaneO3D* getPlaneView() {
 		return (PlaneO3D*) mEnvironmentGraphics;
 	}
@@ -53,6 +61,23 @@ public:
 	PlaneModel* getPlaneModel() {
 		return (PlaneModel*)mEnvironmentModel;
 	}
+private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"Plane"));
+		}
+	} _initializer;
 };
 
 #endif /* CONTROLLER_UNIVERSE_ENVIRONMENTS_PLANE_HPP_ */

@@ -1,5 +1,5 @@
-#ifndef ENVIRONMENT_H_
-#define ENVIRONMENT_H_
+#ifndef CONTROLLER_UNIVERSE_ENVIRONEMTNS_ENVIRONMENT_H_
+#define CONTROLLER_UNIVERSE_ENVIRONEMTNS_ENVIRONMENT_H_
 
 //# corresponding header
 //# forward declarations
@@ -41,10 +41,26 @@ public:
 	Environment();
 	virtual ~Environment();
 
+	/**
+	 * Initialize the environment.
+	 * @param environmentType The type of environment.
+	 */
 	void initialize(EnvironmentType environmentType);
 
+	/**
+	 * Is the environment in the world?
+	 * @return If the environment is in the world.
+	 */
 	bool isInWorld();
+
+	/**
+	 * Add the environment to the world.
+	 */
 	void addToWorld();
+
+	/**
+	 * Remove the environment from the world.
+	 */
 	void removeFromWorld();
 
 	EnvironmentO3D* getEnvironmentO3D() {
@@ -58,9 +74,16 @@ public:
 	virtual void update() = 0;
 
 protected:
+	/**
+	 * The graphical representation of the environment.
+	 */
 	EnvironmentGraphics* mEnvironmentGraphics;
+
+	/**
+	 * The model representation of the environment.
+	 */
 	EnvironmentModel* mEnvironmentModel;
 
 };
 
-#endif /* ENVIRONMENT_H_ */
+#endif /* CONTROLLER_UNIVERSE_ENVIRONEMTNS_ENVIRONMENT_H_ */
