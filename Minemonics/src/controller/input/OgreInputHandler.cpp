@@ -45,7 +45,7 @@
 BoostLogger OgreInputHandler::mBoostLogger; /*<! initialize the boost logger*/
 OgreInputHandler::_Init OgreInputHandler::_initializer;
 OgreInputHandler::OgreInputHandler() :
-		mSimulationMgr(NULL), mRightMousePressed(false) {
+		mSimulationMgr(NULL), mRightMousePressed(false), mStateHandler(NULL) {
 
 }
 
@@ -57,6 +57,7 @@ OgreInputHandler::~OgreInputHandler() {
 
 void OgreInputHandler::initialize(SimulationManager* simulationMgr) {
 	mSimulationMgr = simulationMgr;
+	mStateHandler = &simulationMgr->getStateHandler();
 }
 
 //-------------------------------------------------------------------------------------

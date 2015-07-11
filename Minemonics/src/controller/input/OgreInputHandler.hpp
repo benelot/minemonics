@@ -4,6 +4,7 @@
 //# corresponding header
 //# forward declarations
 class SimulationManager;
+class StateHandler;
 
 //# system headers
 #include <string>

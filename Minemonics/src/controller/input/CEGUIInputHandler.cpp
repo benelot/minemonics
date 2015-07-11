@@ -2,7 +2,6 @@
 //# forward declarations
 //# system headers
 #include <iterator>
-#include <string>
 #include <utility>
 #include <vector>
 
@@ -10,7 +9,6 @@
 //## model headers
 //## view headers
 #include <CEGUI/GUIContext.h>
-#include <CEGUI/InputEvent.h>
 #include <CEGUI/MouseCursor.h>
 #include <CEGUI/NamedElement.h>
 #include <CEGUI/Size.h>
@@ -32,6 +30,9 @@
 //## controller headers
 #include <controller/input/InputUtils.hpp>
 #include <controller/input/CEGUIInputHandler.hpp>
+#include <controller/viewcontroller/ViewController.hpp>
+//## model headers
+//## view headers
 #include <view/visualization/panels/MathGLPanel.hpp>
 #include <view/visualization/panels/ParamsPanel.hpp>
 
@@ -40,7 +41,7 @@
 BoostLogger CEGUIInputHandler::mBoostLogger;  /*<! initialize the boost logger*/
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
 CEGUIInputHandler::CEGUIInputHandler() :
-		OgreInputHandler(), mCEGUIlastTick(0), mStateHandler(NULL) {
+		OgreInputHandler(), mCEGUIlastTick(0) {
 
 }
 

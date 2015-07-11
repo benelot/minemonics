@@ -1,10 +1,9 @@
-#ifndef CEGUIINPUTHANDLER_H_
-#define CEGUIINPUTHANDLER_H_
+#ifndef CONTROLLER_INPUT_CEGUIINPUTHANDLER_H_
+#define CONTROLLER_INPUT_CEGUIINPUTHANDLER_H_
 
 //# corresponding header
 //# forward declarations
 class SimulationManager;
-class StateHandler;
 
 //# system headers
 #include <string>
@@ -140,4 +139,4 @@ private:
 	double mCEGUIlastTick;
 };
 
-#endif /* CEGUIINPUTHANDLER_H_ */
+#endif /* CONTROLLER_INPUT_CEGUIINPUTHANDLER_H_ */
