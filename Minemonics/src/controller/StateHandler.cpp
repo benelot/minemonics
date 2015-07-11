@@ -10,15 +10,17 @@
 //## view headers
 //## utils headers
 
+BoostLogger StateHandler::mBoostLogger; /*<! initialize the boost logger*/
+StateHandler::_Init StateHandler::_initializer;
 StateHandler::StateHandler() :
-		mFrameTime(0), mLocked(0), mState(STARTUP) {
+		mFrameTime(0), mLocked(false), mState(STARTUP) {
 
 }
 
 StateHandler::~StateHandler() {
 }
 
-ApplicationState StateHandler::getCurrentState() {
+StateHandler::ApplicationState StateHandler::getCurrentState() {
 	return mState;
 }
 
@@ -43,6 +45,27 @@ bool StateHandler::unlockState() {
 }
 
 bool StateHandler::requestStateChange(ApplicationState newState) {
+	switch (newState) {
+	case StateHandler::GUI:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to GUI";
+		break;
+	case StateHandler::STARTUP:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to STARTUP";
+		break;
+	case StateHandler::SIMULATION:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to SIMULATION";
+		break;
+	case StateHandler::SHUTDOWN:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to SHUTDOWN";
+		break;
+	case StateHandler::LOADING:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to LOADING";
+		break;
+	case StateHandler::CANCEL_LOADING:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to CANCEL_LOADING";
+		break;
+	}
+
 	if (mState == STARTUP) {
 		mLocked = false;
 		mState = newState;
@@ -56,12 +79,12 @@ bool StateHandler::requestStateChange(ApplicationState newState) {
 	}
 
 	if ((mState == GUI || mState == SIMULATION || mState == LOADING
-			|| mState == CANCEL_LOADING) && (newState != STARTUP)
+					|| mState == CANCEL_LOADING) && (newState != STARTUP)
 			&& (newState != mState)) {
 		mState = newState;
 		return true;
 	} else
-		return false;
+	return false;
 }
 
 void StateHandler::setFrameTime(float ms) {

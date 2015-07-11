@@ -15,6 +15,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
+Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
 		mPlanet(NULL) {
 }

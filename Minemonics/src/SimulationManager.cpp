@@ -121,7 +121,7 @@ SimulationManager::~SimulationManager(void) {
 void SimulationManager::createFrameListener(void) {
 
 	// request a state change saying that the GUI is shown
-	mStateHandler.requestStateChange(GUI);
+	mStateHandler.requestStateChange(StateHandler::GUI);
 
 	// Set initial mouse clipping size
 	windowResized(mWindow);
@@ -352,7 +352,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mRuntime = mNow - mStart;
 
 	// shutdown the application if the application has initiated shutdown
-	if (mWindow->isClosed() || mStateHandler.getCurrentState() == SHUTDOWN) {
+	if (mWindow->isClosed() || mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) {
 
 		//shutdown the video writer if it is still running
 		if (mVideoWriter.isInitialized()) {
@@ -642,7 +642,7 @@ void SimulationManager::destroyScene(void) {
  * @return Returns true if the application could be closed normally.
  */
 bool SimulationManager::quit() {
-	mStateHandler.requestStateChange(SHUTDOWN);
+	mStateHandler.requestStateChange(StateHandler::SHUTDOWN);
 	mShutDown = true;
 	return true;
 }
@@ -664,7 +664,7 @@ bool SimulationManager::configure(void) {
 	// settings if you were sure there are valid ones saved in ogre.cfg
 	if (!mRoot->restoreConfig()) {
 		if (!mRoot->showConfigDialog()) {
-			mStateHandler.requestStateChange(SHUTDOWN);
+			mStateHandler.requestStateChange(StateHandler::SHUTDOWN);
 		}
 	}
 

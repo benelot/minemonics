@@ -16,6 +16,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger EvaluationController::mBoostLogger; /*<! initialize the boost logger*/
+EvaluationController::_Init EvaluationController::_initializer;
 EvaluationController::EvaluationController() :
 		mSimulationManager(NULL), mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
 				0), mPaused(false) {
@@ -23,7 +25,12 @@ EvaluationController::EvaluationController() :
 
 EvaluationController::~EvaluationController() {
 //	mCurrentlyRunningEvaluationsQty
-	mEvaluations.clear();
+	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
+			eit != mEvaluations.end();) {
+		Evaluation* evaluation = *eit;
+		eit = mEvaluations.erase(eit);
+		delete evaluation;
+	}
 //	mParallelEvaluationsQty
 //	mPaused
 	mSimulationManager = NULL;

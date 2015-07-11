@@ -846,5 +846,5 @@ void OgreInputHandler::moveCameraForward() {
 
 void OgreInputHandler::quitApplication() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Shutdown application!";
-	mSimulationMgr->getStateHandler().requestStateChange(SHUTDOWN);
+	mStateHandler->requestStateChange(StateHandler::SHUTDOWN);
 }

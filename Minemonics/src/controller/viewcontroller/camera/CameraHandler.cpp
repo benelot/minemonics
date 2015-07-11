@@ -23,6 +23,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger CameraHandler::mBoostLogger; /*<! initialize the boost logger*/
+CameraHandler::_Init CameraHandler::_initializer;
 CameraHandler::CameraHandler(SimulationManager* simulationMgr) :
 		mCamNode(NULL), mSimulationMgr(simulationMgr), mMove(
 				CameraConfiguration::CAMERA_MOVEMENT_SPEED), mRotate(

@@ -1,9 +1,7 @@
 //# corresponding headers
-//# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
+#include <controller/viewcontroller/ViewController.hpp>
 
+//# forward declarations
 //# system headers
 #include <stddef.h>
 #include <iterator>
@@ -40,8 +38,8 @@
 
 //## utils headers
 
-#include <controller/viewcontroller/ViewController.hpp>
-
+BoostLogger ViewController::mBoostLogger; /*<! initialize the boost logger*/
+ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 		mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDetailsPanel(NULL), mFpsPanel(
 		NULL), mDragContainer(NULL), mEvaluationInView(NULL) {

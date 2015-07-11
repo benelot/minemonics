@@ -8,6 +8,9 @@
 
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -20,6 +23,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		An evaluation holds the creatures and the planet that is evaluated by the simulator, possibly in parallel with other planets.
@@ -76,10 +80,36 @@ public:
 	}
 
 private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"Evaluation"));
+		}
+	} _initializer;
+
+	/**
+	 * The model representation of the evaluation.
+	 */
 	EvaluationModel mEvaluationModel;
 
+	/**
+	 * The planet the evaluation takes place on.
+	 */
 	Planet* mPlanet;
 
+	/**
+	 * The populations taking part in the evaluation.
+	 */
 	std::vector<Population*> mPopulations;
 };
 

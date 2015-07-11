@@ -580,7 +580,7 @@ void GUISheetHandler::initialize(SimulationManager* simulationMgr,
 
 //File->Quit
 bool GUISheetHandler::quitButtonClicked(const CEGUI::EventArgs &args) {
-	mStateHandler->requestStateChange(SHUTDOWN);
+	mStateHandler->requestStateChange(StateHandler::SHUTDOWN);
 	return true;
 }
 

@@ -11,6 +11,9 @@ class Evaluation;
 
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers

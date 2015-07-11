@@ -18,7 +18,8 @@
 
 //## view headers
 //## utils headers
-#include <utils/TimerManager.hpp>
+#include <utils/logging/Logger.hpp>
+//#include <utils/TimerManager.hpp>
 
 /**
  * @brief		The evaluation controller schedules the evaluations for serial or parallel evaluation.
@@ -67,6 +68,23 @@ public:
 	}
 
 private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"EvaluationController"));
+		}
+	} _initializer;
+
 	std::vector<Evaluation*> mEvaluations;
 
 	/**
@@ -87,6 +105,9 @@ private:
 	//TODO: Use the timer manager to trigger proceeding.
 //	TimerManager<EvaluationController> mEvaluationManager;
 
+	/**
+	 * The handler to the simulation manager.
+	 */
 	SimulationManager* mSimulationManager;
 };
 

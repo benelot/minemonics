@@ -5,6 +5,9 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -13,20 +16,7 @@
 //## model headers
 //## view headers
 //## utils headers
-
-/**
- * Application states
- */
-//TODO: Redefine application states according to the needs
-enum ApplicationState {
-	STARTUP, //!< The application is starting up
-	GUI, //!< The GUI is shown
-	LOADING, //!< The simulation is loading
-	CANCEL_LOADING, //!< The simulation loading is cancelled
-	SIMULATION, //!< The simulation is running
-	SHUTDOWN, //!< The simulation is shutting down
-	NUM_APPLICATION_STATES
-};
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The state handler holds the application states.
@@ -37,6 +27,21 @@ enum ApplicationState {
 class StateHandler {
 
 public:
+
+	/**
+	 * Application states
+	 */
+	//TODO: Redefine application states according to the needs
+	enum ApplicationState {
+		STARTUP, //!< The application is starting up
+		GUI, //!< The GUI is shown
+		LOADING, //!< The simulation is loading
+		CANCEL_LOADING, //!< The simulation loading is cancelled
+		SIMULATION, //!< The simulation is running
+		SHUTDOWN, //!< The simulation is shutting down
+		NUM_APPLICATION_STATES
+	};
+
 	StateHandler();
 	virtual ~StateHandler();
 
@@ -84,5 +89,22 @@ protected:
 	 * The frame time of the application.
 	 */
 	float mFrameTime;
+private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"StateHandler"));
+		}
+	} _initializer;
 };
 

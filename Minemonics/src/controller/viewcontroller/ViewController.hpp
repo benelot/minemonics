@@ -3,13 +3,19 @@
 
 //# corresponding header
 //# forward declarations
+class ParamsPanel;
+namespace CEGUI {
+class OgreRenderer;
+} /* namespace CEGUI */
+
 //# system headers
 #include <vector>
 
 //## controller headers
-#include <controller/universe/Planet.hpp>
-
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 #include <OgrePrerequisites.h>
 
@@ -17,6 +23,7 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/Planet.hpp>
 #include <controller/Evaluation.hpp>
 
 //## model headers
@@ -26,11 +33,7 @@
 #include <view/visualization/panels/MathGLPanel.hpp>
 
 //## utils headers
-
-class ParamsPanel;
-namespace CEGUI {
-class OgreRenderer;
-} /* namespace CEGUI */
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The view controller handles the information panels of the application and what is currently in view..
@@ -91,6 +94,23 @@ public:
 	}
 
 private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"ViewController"));
+		}
+	} _initializer;
+
 	// CEGUI components
 	CEGUI::System* mSystem;
 	CEGUI::Window* mLayout;
