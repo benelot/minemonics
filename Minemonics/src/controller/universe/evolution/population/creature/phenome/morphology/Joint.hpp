@@ -16,6 +16,8 @@ class JointGraphics;
 //## controller headers
 //## model headers
 #include <bullet/LinearMath/btTransform.h>
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 
 //## view headers
 //# custom headers
@@ -31,6 +33,7 @@ class JointGraphics;
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The joint controller synchronizes the joint graphical representation with the joint model.
@@ -42,6 +45,7 @@ class Joint: public Component {
 public:
 	Joint();
 	Joint(const Joint& joint);
+	Joint(const JointModel& jointModel);
 
 	virtual ~Joint();
 
@@ -62,13 +66,6 @@ public:
 	 * @return The clone of the joint.
 	 */
 	Joint* clone();
-
-	/**
-	 * Build a joint from the joint model.
-	 * @param simulationManager The handle of the simulation manager.
-	 * @param jointModel The model of the joint.
-	 */
-	void buildFrom(JointModel* jointModel);
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -145,7 +142,7 @@ public:
 	 * @return The motors of this joint.
 	 */
 	std::vector<Motor*> getMotors() {
-		return mJointModel->getJointPhysics()->getMotors();
+		return mJointModel.getJointPhysics()->getMotors();
 	}
 
 	JointGraphics*& getJointGraphics() {
@@ -153,10 +150,26 @@ public:
 	}
 
 	JointPhysics* getJointPhysics() {
-		return mJointModel->getJointPhysics();
+		return mJointModel.getJointPhysics();
 	}
 
 private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"Joint"));
+		}
+	} _initializer;
 	/**
 	 * Graphical representation of the joint.
 	 */
@@ -165,7 +178,7 @@ private:
 	/**
 	 * Model representation of the joint.
 	 */
-	JointModel* mJointModel;
+	JointModel mJointModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_HPP_ */

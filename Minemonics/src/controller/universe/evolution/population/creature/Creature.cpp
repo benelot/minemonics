@@ -21,57 +21,51 @@ class SimulationManager;
 //## view headers
 //## utils headers
 
-Creature::Creature() :
-		mCreatureModel(NULL), mPhenotype(NULL) {
+BoostLogger Creature::mBoostLogger; /*<! initialize the boost logger*/
+Creature::_Init Creature::_initializer;
+Creature::Creature() {
 
 }
 
 Creature::~Creature() {
-	delete mCreatureModel;
-	mCreatureModel = NULL;
-
-	delete mPhenotype;
-	mPhenotype = NULL;
 }
 
 void Creature::initialize(SimulationManager* simulationManager,
 		Population* population, Ogre::Vector3 position, double branchiness) {
 	// set up the creature model
-	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(population->getPopulationModel(), NULL, position,
+	mCreatureModel.initialize(population->getPopulationModel(), NULL, position,
 			branchiness);
 
 	// set up the phenotype
-	mPhenotype = new Phenome();
-	mPhenotype->initialize(simulationManager, this);
+	mPhenotype.initialize(simulationManager, this);
 
 	// hand down the phenome model to the creature model
-	mCreatureModel->setPhenotypeModel(&mPhenotype->getPhenomeModel());
+	mCreatureModel.setPhenotypeModel(&mPhenotype.getPhenomeModel());
 
 }
 
 void Creature::performEmbryogenesis() {
-	mPhenotype->performEmbryogenesis(this->getCreatureModel());
+	mPhenotype.performEmbryogenesis(&this->getCreatureModel());
 }
 
 void Creature::reset(Ogre::Vector3 position) {
-	mCreatureModel->reset(position);
-	mPhenotype->reset(position);
+	mCreatureModel.reset(position);
+	mPhenotype.reset(position);
 }
 
 void Creature::reset() {
-	reset(mCreatureModel->getInitialPosition());
+	reset(mCreatureModel.getInitialPosition());
 }
 
 void Creature::reposition(Ogre::Vector3 position) {
-	mCreatureModel->reposition(position);
-	mPhenotype->reposition(position);
+	mCreatureModel.reposition(position);
+	mPhenotype.reposition(position);
 }
 
 void Creature::update() {
 	// Update the phenotype of the creature if it is in the world.
-	if (mPhenotype->isInWorld()) {
-		mPhenotype->update();
+	if (mPhenotype.isInWorld()) {
+		mPhenotype.update();
 	}
 }
 
@@ -82,10 +76,10 @@ void Creature::addToWorld() {
 	}
 
 	// Add phenotype to world
-	mPhenotype->addToWorld();
+	mPhenotype.addToWorld();
 }
 
 void Creature::removeFromWorld() {
 	// Remove phenotype from world
-	mPhenotype->removeFromWorld();
+	mPhenotype.removeFromWorld();
 }

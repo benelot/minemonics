@@ -29,22 +29,25 @@
 
 //## utils headers
 
-#ifndef NULL
-#define NULL 0
-#endif
-
+BoostLogger Joint::mBoostLogger; /*<! initialize the boost logger*/
+Joint::_Init Joint::_initializer;
 Joint::Joint() :
-		mJointGraphics(NULL), mJointModel(NULL) {
+		mJointGraphics(NULL) {
 }
 
-Joint::Joint(const Joint& joint) {
+Joint::Joint(const Joint& joint) :
+		mJointModel(joint.mJointModel) {
 	mJointGraphics = joint.mJointGraphics->clone();
-	mJointModel = joint.mJointModel->clone();
+}
+
+Joint::Joint(const JointModel& jointModel) :
+		mJointGraphics(NULL), mJointModel(jointModel) {
+
 }
 
 Joint::~Joint() {
 	delete mJointGraphics;
-	delete mJointModel;
+//	mJointModel
 }
 
 void Joint::initialize(Creature* creature, Limb* limbA, Limb* limbB,
@@ -52,24 +55,31 @@ void Joint::initialize(Creature* creature, Limb* limbA, Limb* limbB,
 		int ownIndex) {
 
 	// initialize the physics model of the joint
-	mJointModel = new JointModel();
-	mJointModel->initialize(
+	mJointModel.initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			limbA->getLimbPhysics()->getRigidBody(),
 			limbB->getLimbPhysics()->getRigidBody(), localA, localB, indexA,
 			indexB, ownIndex);
 
-	buildFrom(mJointModel);
+	// Define the new component as a limb
+	Component::initialize(&mJointModel);
+
+	// initialize the graphics part of the joint
+	mJointGraphics = new JointO3D();
+	((JointO3D*) mJointGraphics)->initialize();
+
+	// Update the state of the joint.
+	update();
 }
 
 void Joint::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
 		Ogre::Vector3 maxSpeeds) {
-	mJointModel->initializeRotationalLimitMotors(maxForces, maxSpeeds);
+	mJointModel.initializeRotationalLimitMotors(maxForces, maxSpeeds);
 }
 
 void Joint::update() {
-	mJointModel->getJointPhysics()->update();
 	mJointGraphics->update();
+	getJointPhysics()->update();
 }
 
 /**
@@ -77,7 +87,7 @@ void Joint::update() {
  */
 void Joint::addToWorld() {
 	mJointGraphics->addToWorld();
-	mJointModel->getJointPhysics()->addToWorld();
+	getJointPhysics()->addToWorld();
 }
 
 /**
@@ -85,58 +95,43 @@ void Joint::addToWorld() {
  */
 void Joint::removeFromWorld() {
 	mJointGraphics->removeFromWorld();
-	mJointModel->getJointPhysics()->removeFromWorld();
+	getJointPhysics()->removeFromWorld();
 }
 
 void Joint::setAngularLimits(Ogre::Vector3 angularLowerLimit,
 		Ogre::Vector3 angularUpperLimit) {
-	mJointModel->setAngularLimits(angularLowerLimit, angularUpperLimit);
+	mJointModel.setAngularLimits(angularLowerLimit, angularUpperLimit);
 }
 
 void Joint::setAngularStiffness(double jointPitchStiffness,
 		double jointYawStiffness, double jointRollStiffness) {
-	mJointModel->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
+	mJointModel.setAngularStiffness(jointPitchStiffness, jointYawStiffness,
 			jointRollStiffness);
 }
 
 void Joint::setAngularDamping(double springPitchDampingCoefficient,
 		double springYawDampingCoefficient,
 		double springRollDampingCoefficient) {
-	mJointModel->setAngularDamping(springPitchDampingCoefficient,
+	mJointModel.setAngularDamping(springPitchDampingCoefficient,
 			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 		bool rollEnable) {
-	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(
-			JointPhysics::RDOF_PITCH, pitchEnable);
-	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(
-			JointPhysics::RDOF_YAW, yawEnable);
-	mJointModel->getJointPhysics()->setRotationalLimitMotorEnabled(
-			JointPhysics::RDOF_ROLL, rollEnable);
-}
-
-void Joint::buildFrom(JointModel* jointModel) {
-	// Define the new component as a limb
-	Component::initialize(ComponentModel::JointComponent, jointModel);
-
-	// initialize the graphics part of the joint
-	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize();
-
-	if (mJointModel == NULL) {
-		mJointModel = jointModel;
-	}
-	// Update the state of the joint.
-	update();
+	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
+			pitchEnable);
+	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
+			yawEnable);
+	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
+			rollEnable);
 }
 
 void Joint::reset(Ogre::Vector3 position) {
-	mJointModel->reset(position);
+	mJointModel.reset(position);
 }
 
 void Joint::reposition(Ogre::Vector3 position) {
-	mJointModel->reposition(position);
+	mJointModel.reposition(position);
 }
 
 Joint* Joint::clone() {

@@ -16,10 +16,10 @@
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/date_time/posix_time/time_formatters.hpp>
 #include <boost/lexical_cast.hpp>
-#include <OgreLogManager.h>
 
 //## view headers
 #include <OgreRenderWindow.h>
+#include <OgreLogManager.h>
 
 //# custom headers
 //## base headers

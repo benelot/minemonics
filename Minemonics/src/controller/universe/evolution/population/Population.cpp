@@ -81,7 +81,7 @@ void Population::addNewMember(double branchiness, Ogre::Vector3 rootPosition) {
 void Population::addMember(Creature* creature) {
 	mCreatures.push_back(creature);
 	//hand model down to the population model
-	mPopulationModel->addMember(creature->getCreatureModel());
+	mPopulationModel->addMember(&creature->getCreatureModel());
 }
 
 void Population::update() {

@@ -43,22 +43,42 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger Limb::mBoostLogger; /*<! initialize the boost logger*/
+Limb::_Init Limb::_initializer;
 Limb::Limb() :
-		mLimbGraphics(NULL), mLimbModel(NULL), mCreature(NULL) {
+		mLimbGraphics(NULL), mCreature(NULL) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Limb created.";
 }
 
-Limb::Limb(const Limb& limb) {
+Limb::Limb(const Limb& limb) :
+		mLimbModel(limb.mLimbModel) {
 	mCreature = limb.mCreature;
 	mLimbGraphics = limb.mLimbGraphics->clone();
-	mLimbModel = limb.mLimbModel->clone();
+}
+
+Limb::Limb(SimulationManager* simulationManager, Creature* creature,
+		LimbModel* limbModel) :
+		mLimbModel(*limbModel) {
+	mCreature = creature;
+
+	// Define the new component as a limb
+	Component::initialize(limbModel);
+
+	// initialize the graphics part of the limb
+	mLimbGraphics = new LimbO3D();
+	getLimbGraphics()->initialize(simulationManager,
+			limbModel->getPrimitiveType(), limbModel->getDimensions(),
+			limbModel->getColor());
+
+	// Update the state of the limb.
+	update();
 }
 
 Limb::~Limb() {
 	delete mLimbGraphics;
 	mLimbGraphics = NULL;
 
-	delete mLimbModel;
-	mLimbModel = NULL;
+//	mLimbModel
 
 	mCreature = NULL;
 }
@@ -70,31 +90,21 @@ void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
 		int ownIndex) {
 
 	//initialize the model of the limb
-	mLimbModel = new LimbModel();
-	mLimbModel->initialize(
+	mLimbModel.initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			creature->getCreatureModel(), type, position, orientation, dimensions, mass, restitution,
-			friction, color, ownIndex);
+			&creature->getCreatureModel(), type, position, orientation,
+			dimensions, mass, restitution, friction, color, ownIndex);
 
-	buildFrom(simulationManager, creature, mLimbModel);
-}
-
-void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
-		LimbModel* limbModel) {
 	mCreature = creature;
 
 	// Define the new component as a limb
-	Component::initialize(ComponentModel::LimbComponent, limbModel);
+	Component::initialize(&mLimbModel);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
-	((LimbO3D*) mLimbGraphics)->initialize(simulationManager,
-			limbModel->getPrimitiveType(), limbModel->getDimensions(),
-			limbModel->getColor());
-
-	if (mLimbModel == NULL) {
-		mLimbModel = limbModel;
-	}
+	getLimbGraphics()->initialize(simulationManager,
+			mLimbModel.getPrimitiveType(), mLimbModel.getDimensions(),
+			mLimbModel.getColor());
 
 	// Update the state of the limb.
 	update();
@@ -105,8 +115,7 @@ void Limb::buildFrom(SimulationManager* simulationManager, Creature* creature,
  */
 void Limb::update() {
 	// get the rigid body of the limb
-	btRigidBody* body =
-			((LimbBt*) mLimbModel->getLimbPhysics())->getRigidBody();
+	btRigidBody* body = getLimbPhysics()->getRigidBody();
 
 	// if the limb's rigid body is existing
 	if (body) {
@@ -130,11 +139,11 @@ void Limb::update() {
 }
 
 void Limb::reset(Ogre::Vector3 position) {
-	mLimbModel->reset(position);
+	mLimbModel.reset(position);
 }
 
 void Limb::reposition(Ogre::Vector3 position) {
-	mLimbModel->reposition(position);
+	mLimbModel.reposition(position);
 }
 
 Limb* Limb::clone() {
@@ -162,7 +171,7 @@ std::string Limb::getInfo() {
  */
 void Limb::addToWorld() {
 	mLimbGraphics->addToWorld();
-	mLimbModel->getLimbPhysics()->addToWorld();
+	mLimbModel.getLimbPhysics()->addToWorld();
 }
 
 /**
@@ -170,7 +179,7 @@ void Limb::addToWorld() {
  */
 void Limb::removeFromWorld() {
 	mLimbGraphics->removeFromWorld();
-	mLimbModel->getLimbPhysics()->removeFromWorld();
+	mLimbModel.getLimbPhysics()->removeFromWorld();
 }
 
 /**

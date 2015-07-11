@@ -21,7 +21,8 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbModel::LimbModel() :
-		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN) {
+		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN), mCreatureModel(
+				NULL) {
 }
 
 LimbModel::LimbModel(const LimbModel& limbModel) {
@@ -29,6 +30,7 @@ LimbModel::LimbModel(const LimbModel& limbModel) {
 	mDimensions = limbModel.mDimensions;
 	mLimbPhysics = limbModel.mLimbPhysics->clone();
 	mPrimitiveType = limbModel.mPrimitiveType;
+	mCreatureModel = limbModel.mCreatureModel;
 }
 
 LimbModel::~LimbModel() {

@@ -1,11 +1,10 @@
-/*
- * Logger.cpp
- *
- *  Created on: Feb 14, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
+#include <utils/logging/Logger.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <boost/log/core.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/log/trivial.hpp>
@@ -24,19 +23,14 @@
 #include <boost/log/attributes/scoped_attribute.hpp>
 #include <boost/log/utility/value_ref.hpp>
 #include <boost/log/utility/empty_deleter.hpp>
-#include <utils/logging/Logger.hpp>
-
-//# custom headers
-//## base headers
-
-//## configuration headers
-
-//## controller headers
-
-//## model headers
 
 //## view headers
-
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
 //## utils headers
 
 Logger::Logger() {
@@ -94,11 +88,6 @@ void Logger::initTermSink() {
 	logging::add_common_attributes();
 }
 
-//void Logger::setClass(std::string className){
-//	logger.add_attribute("ClassName",
-//			boost::log::attributes::constant<std::string>(
-//					className));
-//}
 //
 //void Logger::log(boost::log::v2_mt_posix::trivial::severity_level severityLevel,std::string message){
 //	BOOST_LOG_SEV(logger, severityLevel)<< message;

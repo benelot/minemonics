@@ -16,6 +16,8 @@ class Creature;
 #include <OgreVector3.h>
 #include <OgreQuaternion.h>
 #include <btBulletDynamicsCommon.h>
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 
 //## view headers
 #include <OgreColourValue.h>
@@ -34,6 +36,7 @@ class Creature;
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The limb controller synchronizes the limb graphical representation with the limb model.
@@ -45,6 +48,8 @@ class Limb: public Component {
 public:
 	Limb();
 	Limb(const Limb& limb);
+	Limb(SimulationManager* simulationManager, Creature* creature,
+			LimbModel* limbModel);
 
 	virtual ~Limb();
 
@@ -129,10 +134,27 @@ public:
 	 * Get the Physics part of the limb.
 	 */
 	LimbBt* getLimbPhysics() {
-		return ((LimbBt*) mLimbModel->getLimbPhysics());
+		return ((LimbBt*) mLimbModel.getLimbPhysics());
 	}
 
 private:
+
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"Limb"));
+		}
+	} _initializer;
 
 	/**
 	 * Graphical representation of the limb.
@@ -142,7 +164,7 @@ private:
 	/**
 	 * The model representation of the limb.
 	 */
-	LimbModel* mLimbModel;
+	LimbModel mLimbModel;
 
 	/**
 	 * The creature the limb belongs to.

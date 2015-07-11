@@ -81,40 +81,57 @@ public:
 
 	// Facade accessor methods
 	void setPosition(Ogre::Vector3 position) {
-		mCreatureModel->setPosition(position);
+		mCreatureModel.setPosition(position);
 	}
 
 	PlanetModel* getPlanet() {
-		return mCreatureModel->getPopulationModel()->getPlanetModel();
+		return mCreatureModel.getPopulationModel()->getPlanetModel();
 	}
 
 	void setPlanet(PlanetModel* planetModel) {
-		mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
+		mCreatureModel.getPopulationModel()->setPlanetModel(planetModel);
 	}
 
 	bool isDeveloped() {
-		return mCreatureModel->isDeveloped();
+		return mCreatureModel.isDeveloped();
 	}
 
 	void setDeveloped(bool developed) {
-		mCreatureModel->setDeveloped(developed);
+		mCreatureModel.setDeveloped(developed);
 	}
 
-	CreatureModel* getCreatureModel() {
+	CreatureModel& getCreatureModel() {
 		return mCreatureModel;
 	}
 
 private:
 	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"Creature"));
+		}
+	} _initializer;
+
+	/**
 	 * The model representation of the creature
 	 */
-	CreatureModel* mCreatureModel;
+	CreatureModel mCreatureModel;
 
 	//CHILD
 	/**
 	 * The phenotype of the creature.
 	 */
-	Phenome* mPhenotype;
+	Phenome mPhenotype;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_CREATURE_HPP_ */

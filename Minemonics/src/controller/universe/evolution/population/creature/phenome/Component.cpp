@@ -31,9 +31,8 @@ Component::Component() :
 Component::~Component() {
 }
 
-void Component::initialize(ComponentModel::ComponentType componentType,
-		ComponentModel* componentModel) {
+void Component::initialize(ComponentModel* componentModel) {
 
-		mComponentModel = componentModel;
+	mComponentModel = componentModel;
 }
 

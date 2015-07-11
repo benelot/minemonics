@@ -30,17 +30,16 @@ public:
 
 	/**
 	 * Initialize the component.
-	 * @param componentType The type of component.
+	 * @param componentModel The model of the component.
 	 */
-	void initialize(ComponentModel::ComponentType componentType,
-			ComponentModel* componentModel);
+	void initialize(ComponentModel* componentModel);
 
 	/**
 	 * Clone the component.
 	 */
 	virtual Component* clone() = 0;
 
-	ComponentModel::ComponentType getComponentType(){
+	ComponentModel::ComponentType getComponentType() {
 		return mComponentModel->getComponentType();
 	}
 

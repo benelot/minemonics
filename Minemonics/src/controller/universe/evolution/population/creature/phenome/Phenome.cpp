@@ -40,6 +40,8 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger Phenome::mBoostLogger; /*<! initialize the boost logger*/
+Phenome::_Init Phenome::_initializer;
 Phenome::Phenome() :
 		mSimulationManager(NULL), mCreature(NULL) {
 
@@ -49,6 +51,7 @@ Phenome::Phenome(const Phenome& phenome) :
 		mPhenomeModel(phenome.mPhenomeModel) {
 
 	mCreature = phenome.mCreature;
+	mSimulationManager = phenome.mSimulationManager;
 
 	std::vector<Component*>::const_iterator coit = phenome.mComponents.begin();
 	for (; coit != phenome.mComponents.end(); coit++) {
@@ -61,15 +64,31 @@ Phenome::Phenome(const Phenome& phenome) :
 		case ComponentModel::JointComponent:
 			mJoints.push_back((Joint*) component);
 			break;
-
 		}
 	}
-
-	mSimulationManager = phenome.mSimulationManager;
 }
 
 Phenome::~Phenome() {
+	for(std::vector<Limb*>::iterator lit = mLimbs.begin();lit != mLimbs.end();){
+		Limb* limb = *lit;
+		lit = mLimbs.erase(lit);
+		delete limb;
+	}
+
+	for(std::vector<Joint*>::iterator jit = mJoints.begin();jit != mJoints.end();){
+		Joint* joint = *jit;
+		jit = mJoints.erase(jit);
+		delete joint;
+	}
+
+	for(std::vector<Component*>::iterator cit = mComponents.begin();cit != mComponents.end();){
+		Component* component = *cit;
+		cit = mComponents.erase(cit);
+		delete component;
+	}
+
 	mSimulationManager = NULL;
+	mCreature = NULL;
 }
 
 void Phenome::initialize(SimulationManager* simulationManager,
@@ -95,16 +114,15 @@ void Phenome::performEmbryogenesis(CreatureModel* creatureModel) {
 
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
-			Limb* limb = new Limb();
-			limb->buildFrom(mSimulationManager, mCreature, (LimbModel*) *cmit);
+			Limb* limb = new Limb(mSimulationManager, mCreature,
+					(LimbModel*) *cmit);
 			mLimbs.push_back(limb);
 			mComponents.push_back(limb);
 			break;
 		}
 		case ComponentModel::JointComponent: {
-			Joint* joint = new Joint();
 			//TODO:: Fix with indices
-			joint->buildFrom((JointModel*) *cmit);
+			Joint* joint = new Joint(((JointModel&) **cmit));
 			mJoints.push_back(joint);
 			mComponents.push_back(joint);
 			break;

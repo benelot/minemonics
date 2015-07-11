@@ -216,7 +216,7 @@ void Evolution::performEmbryogenesis() {
 				cit != (*pit)->getCreatures().end(); cit++) {
 
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			SimulationManager::detectError((*cit)->getCreatureModel()->getPopulationModel(),
+			SimulationManager::detectError((*cit)->getCreatureModel().getPopulationModel(),
 					3000, -1, 0);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			(*cit)->performEmbryogenesis();
