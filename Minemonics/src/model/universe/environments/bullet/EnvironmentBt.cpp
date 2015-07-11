@@ -27,11 +27,18 @@
 //## view headers
 //## utils headers
 
+BoostLogger EnvironmentBt::mBoostLogger; /*<! initialize the boost logger*/
+EnvironmentBt::_Init EnvironmentBt::_initializer;
 EnvironmentBt::EnvironmentBt() :
-		mGroundShape(NULL), mGroundBody(NULL), mGroundMotionState(NULL) {
+		mGroundShape(NULL), mGroundBody(NULL) {
 }
 
 EnvironmentBt::~EnvironmentBt() {
+	delete mGroundBody;
+	mGroundBody = NULL;
+
+	delete mGroundShape;
+	mGroundShape = NULL;
 }
 
 void EnvironmentBt::createTerrainData(Ogre::SceneNode* sceneNode, float w,
@@ -40,13 +47,12 @@ void EnvironmentBt::createTerrainData(Ogre::SceneNode* sceneNode, float w,
 
 	btVector3 localScaling(scale, heightScale, scale);
 
-	mGroundShape = new btHeightfieldTerrainShape(w, h, data, 1/*ingnore*/, minH,
+	mGroundShape = new btHeightfieldTerrainShape(w, h, data, 1/*ignore*/, minH,
 			maxH, 1, PHY_FLOAT, true);
 	((btHeightfieldTerrainShape*) mGroundShape)->setUseDiamondSubdivision(true);
 	mGroundShape->setLocalScaling(localScaling);
 
-	mGroundMotionState = new btDefaultMotionState();
-	mGroundBody = new btRigidBody(0, mGroundMotionState, mGroundShape);
+	mGroundBody = new btRigidBody(0,  new btDefaultMotionState(), mGroundShape);
 	mGroundBody->getWorldTransform().setOrigin(
 			btVector3(scale * (w - 1) / 2, heightScale / 2 * heightScale,
 					scale * (w - 1) / 2));

@@ -2,10 +2,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
-
 //# system headers
 //## controller headers
 //## model headers
@@ -44,8 +40,7 @@ void JointModel::initialize(btDynamicsWorld* world, btRigidBody* limbA,
 	mIndexA = indexA;
 	mIndexB = indexB;
 
-	mJointPhysics = new JointBt();
-	((JointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA, localB);
+	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
 }
 
 void JointModel::setAngularLimits(Ogre::Vector3 angularLowerLimit,

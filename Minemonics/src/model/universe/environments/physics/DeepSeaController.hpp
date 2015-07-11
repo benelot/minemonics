@@ -1,5 +1,5 @@
-#ifndef DEEPSEACONTROLLER_H_
-#define DEEPSEACONTROLLER_H_
+#ifndef MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_DEEPSEACONTROLLER_H_
+#define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_DEEPSEACONTROLLER_H_
 
 //# corresponding header
 #include <model/universe/environments/physics/MotionController.hpp>
@@ -29,4 +29,4 @@ public:
 	virtual ~DeepSeaController();
 };
 
-#endif /* DEEPSEACONTROLLER_H_ */
+#endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_DEEPSEACONTROLLER_H_ */

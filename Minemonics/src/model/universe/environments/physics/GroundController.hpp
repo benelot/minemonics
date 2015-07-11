@@ -1,5 +1,5 @@
-#ifndef GROUNDCONTROLLER_H_
-#define GROUNDCONTROLLER_H_
+#ifndef MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_GROUNDCONTROLLER_H_
+#define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_GROUNDCONTROLLER_H_
 
 //# forward declarations
 #include <model/universe/environments/physics/MotionController.hpp>
@@ -28,4 +28,4 @@ public:
 	virtual ~GroundController();
 };
 
-#endif /* GROUNDCONTROLLER_H_ */
+#endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_GROUNDCONTROLLER_H_ */

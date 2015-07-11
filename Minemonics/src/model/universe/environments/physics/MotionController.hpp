@@ -1,5 +1,5 @@
-#ifndef MOTIONCONTROLLER_H_
-#define MOTIONCONTROLLER_H_
+#ifndef MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_MOTIONCONTROLLER_H_
+#define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_MOTIONCONTROLLER_H_
 
 //# corresponding header
 #include <model/universe/environments/physics/PhysicsController.hpp>
@@ -29,4 +29,4 @@ public:
 	virtual ~MotionController();
 };
 
-#endif /* MOTIONCONTROLLER_H_ */
+#endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_MOTIONCONTROLLER_H_ */

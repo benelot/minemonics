@@ -1,10 +1,3 @@
-/*
- * PlaneBt.cpp
- *
- *  Created on: Mar 17, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/environments/bullet/PlaneBt.hpp>
 
@@ -21,12 +14,13 @@
 //## view headers
 //## utils headers
 
+BoostLogger PlaneBt::mBoostLogger; /*<! initialize the boost logger*/
+PlaneBt::_Init PlaneBt::_initializer;
 PlaneBt::PlaneBt() {
 
 }
 
 PlaneBt::~PlaneBt() {
-	// TODO Auto-generated destructor stub
 }
 
 void PlaneBt::initialize() {
@@ -47,9 +41,10 @@ void PlaneBt::initialize() {
 	groundTransform.setIdentity();
 	groundTransform.setOrigin(btVector3(0, -50, 0));
 
-	mGroundMotionState = new btDefaultMotionState(groundTransform); //motionstate provides interpolation capabilities, and only synchronizes 'active' objects
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mGroundMotionState,
-			mGroundShape, localInertia);
+	//motionstate provides interpolation capabilities, and only synchronizes 'active' objects
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,
+			new btDefaultMotionState(groundTransform), mGroundShape,
+			localInertia);
 	mGroundBody = new btRigidBody(rbInfo);
 
 	// disable debug visualization

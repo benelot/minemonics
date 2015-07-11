@@ -9,6 +9,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 #include <btBulletDynamicsCommon.h>
 
 //## view headers
@@ -19,6 +21,7 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The bullet physics model implementation of the plane environment.
@@ -39,6 +42,23 @@ public:
 	btRigidBody*& getBody() {
 		return mGroundBody;
 	}
+private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"PlaneBt"));
+		}
+	} _initializer;
 };
 
 #endif /* MODEL_ENVIRONMENT_PLANEBT_H_ */

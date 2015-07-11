@@ -28,19 +28,12 @@
 //## view headers
 //## utils headers
 
-HillsBt::HillsBt() :
-		mGroundBody(NULL), mGroundMotionState(NULL), mGroundShape(NULL) {
+BoostLogger HillsBt::mBoostLogger; /*<! initialize the boost logger*/
+HillsBt::_Init HillsBt::_initializer;
+HillsBt::HillsBt(){
 }
 
 HillsBt::~HillsBt() {
-	delete mGroundBody;
-	mGroundBody = 0;
-
-	delete mGroundMotionState;
-	mGroundMotionState = 0;
-
-	delete mGroundShape;
-	mGroundShape = 0;
 }
 
 void HillsBt::initialize(Ogre::Terrain* terrain) {
