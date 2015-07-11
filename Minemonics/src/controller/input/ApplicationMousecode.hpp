@@ -1,5 +1,5 @@
-#ifndef APPLICATIONMOUSECODE_H_
-#define APPLICATIONMOUSECODE_H_
+#ifndef CONTROLLER_INPUT_APPLICATIONMOUSECODE_H_
+#define CONTROLLER_INPUT_APPLICATIONMOUSECODE_H_
 
 //# corresponding header
 //# forward declarations
@@ -45,4 +45,4 @@ public:
 	};
 };
 
-#endif /* APPLICATIONMOUSECODE_H_ */
+#endif /* CONTROLLER_INPUT_APPLICATIONMOUSECODE_H_ */

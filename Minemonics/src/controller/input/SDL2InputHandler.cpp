@@ -29,14 +29,17 @@
 //## view headers
 //## utils headers
 
-BoostLogger SDL2InputHandler::mBoostLogger;  // initialize the static variables
+BoostLogger SDL2InputHandler::mBoostLogger; /*<! initialize the boost logger*/
 SDL2InputHandler::_Init SDL2InputHandler::_initializer;
 SDL2InputHandler::SDL2InputHandler() :
 		CEGUIInputHandler(), mLastMouseX(0), mLastMouseY(0) {
 }
 
 SDL2InputHandler::~SDL2InputHandler() {
-	destroy();
+//	mBoostLogger
+//	mLastMouseX
+//	mLastMouseY
+	mSimulationMgr = NULL;
 }
 
 void SDL2InputHandler::initialize(StateHandler* stateHandler,
@@ -46,10 +49,6 @@ void SDL2InputHandler::initialize(StateHandler* stateHandler,
 
 	SDL_ShowCursor (SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-}
-
-void SDL2InputHandler::destroy() {
-
 }
 
 void SDL2InputHandler::injectInput() {

@@ -85,7 +85,7 @@ private:
 	bool mPaused;
 
 	//TODO: Use the timer manager to trigger proceeding.
-	TimerManager<EvaluationController> mEvaluationManager;
+//	TimerManager<EvaluationController> mEvaluationManager;
 
 	SimulationManager* mSimulationManager;
 };

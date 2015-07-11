@@ -37,7 +37,7 @@
 
 //## utils headers
 
-BoostLogger CEGUIInputHandler::mBoostLogger;  // initialize the static variables
+BoostLogger CEGUIInputHandler::mBoostLogger;  /*<! initialize the boost logger*/
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
 CEGUIInputHandler::CEGUIInputHandler() :
 		OgreInputHandler(), mCEGUIlastTick(0), mStateHandler(NULL) {

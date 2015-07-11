@@ -1,5 +1,5 @@
-#ifndef APPLICATIONKEYCODE_H_
-#define APPLICATIONKEYCODE_H_
+#ifndef CONTROLLER_INPUT_APPLICATIONKEYCODE_H_
+#define CONTROLLER_INPUT_APPLICATIONKEYCODE_H_
 
 //# corresponding header
 #include <controller/input/ApplicationScancode.hpp>
@@ -330,4 +330,4 @@ public:
 };
 /* vi: set ts=4 sw=4 expandtab: */
 
-#endif /* MINEMONICSKEYCODE_H_ */
+#endif /* CONTROLLER_INPUT_APPLICATIONKEYCODE_H_ */

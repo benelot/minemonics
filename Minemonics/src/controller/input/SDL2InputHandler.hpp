@@ -34,19 +34,48 @@ class SDL2InputHandler: public CEGUIInputHandler {
 public:
 	SDL2InputHandler();
 	virtual ~SDL2InputHandler();
+
+	/**
+	 * Initialize the SDL2InputHandler.
+	 * @param stateHandler The state handler of the simulation.
+	 * @param simulationMgr The simulation manager of the simulation.
+	 */
 	void initialize(StateHandler* stateHandler,
 			SimulationManager* simulationMgr);
-	void destroy();
+
+	/**
+	 * Inject input into the other layered handlers.
+	 */
 	void injectInput();
+
+	/**
+	 * Inject a time pulse to give the handlers a notion of time passing.
+	 */
 	void injectTimePulse();
 
+	// Accessor methods
+
+	/**
+	 * Get the mouse X position.
+	 * @return The mouse X position.
+	 */
 	int getMousePositionX();
+
+	/**
+	 * Get the mouse Y position.
+	 * @return The mouse Y position.
+	 */
 	int getMousePositionY();
 
 private:
-	// Logger
+	/**
+	 * The boost logger.
+	 */
 	static BoostLogger mBoostLogger;
 
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
 	static class _Init {
 	public:
 		_Init() {
@@ -56,7 +85,14 @@ private:
 		}
 	} _initializer;
 
+	/**
+	 * The last mouse X position.
+	 */
 	int mLastMouseX;
+
+	/**
+	 * The last mouse Y position.
+	 */
 	int mLastMouseY;
 };
 

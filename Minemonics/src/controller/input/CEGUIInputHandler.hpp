@@ -31,8 +31,6 @@ class StateHandler;
 //## utils headers
 #include <utils/logging/Logger.hpp>
 
-
-
 /**
  * @brief		The CEGUI Input handler handles the input coming from the lower hardware input layer and handles it in the context of the CEGUI.
  * @details		Details
@@ -40,22 +38,6 @@ class StateHandler;
  * @author		Benjamin Ellenberger
  */
 class CEGUIInputHandler: public OgreInputHandler {
-private:
-	StateHandler *mStateHandler;
-
-	// Logger
-	static BoostLogger mBoostLogger;
-
-	static class _Init {
-	public:
-		_Init() {
-			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"CEGUIInputHandler"));
-		}
-	} _initializer;
-
-	double mCEGUIlastTick;
 public:
 	CEGUIInputHandler();
 	virtual ~CEGUIInputHandler();
@@ -134,6 +116,28 @@ protected:
 	 * @param y The absolute y position of the mouse.
 	 */
 	void injectMousePosition(float x, float y);
+private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"CEGUIInputHandler"));
+		}
+	} _initializer;
+
+	/**
+	 * The last tick input to the CEGUI.
+	 */
+	double mCEGUIlastTick;
 };
 
 #endif /* CEGUIINPUTHANDLER_H_ */

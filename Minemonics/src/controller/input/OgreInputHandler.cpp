@@ -42,7 +42,7 @@
 
 //## utils headers
 
-BoostLogger OgreInputHandler::mBoostLogger;  // initialize the static variables
+BoostLogger OgreInputHandler::mBoostLogger; /*<! initialize the boost logger*/
 OgreInputHandler::_Init OgreInputHandler::_initializer;
 OgreInputHandler::OgreInputHandler() :
 		mSimulationMgr(NULL), mRightMousePressed(false) {
@@ -50,7 +50,9 @@ OgreInputHandler::OgreInputHandler() :
 }
 
 OgreInputHandler::~OgreInputHandler() {
-
+//	mBoostLogger
+//	mRightMousePressed
+	mSimulationMgr = NULL;
 }
 
 void OgreInputHandler::initialize(SimulationManager* simulationMgr) {

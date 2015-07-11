@@ -19,12 +19,14 @@
 EvaluationController::EvaluationController() :
 		mSimulationManager(NULL), mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
 				0), mPaused(false) {
-	// TODO Auto-generated constructor stub
-
 }
 
 EvaluationController::~EvaluationController() {
-	// TODO Auto-generated destructor stub
+//	mCurrentlyRunningEvaluationsQty
+	mEvaluations.clear();
+//	mParallelEvaluationsQty
+//	mPaused
+	mSimulationManager = NULL;
 }
 
 void EvaluationController::initialize(SimulationManager* simulationManager,

@@ -1,5 +1,5 @@
-#ifndef MINEMONICSSCANCODE_H_
-#define MINEMONICSSCANCODE_H_
+#ifndef CONTROLLER_INPUT_APPLICATIONSCANCODE_H_
+#define CONTROLLER_INPUT_APPLICATIONSCANCODE_H_
 
 
 //# corresponding header
@@ -387,4 +387,4 @@ typedef enum {
 
 /* vi: set ts=4 sw=4 expandtab: */
 
-#endif /* MINEMONICSSCANCODE_H_ */
+#endif /* CONTROLLER_INPUT_APPLICATIONSCANCODE_H_ */
