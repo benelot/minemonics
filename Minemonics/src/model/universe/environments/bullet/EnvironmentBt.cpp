@@ -41,9 +41,10 @@ EnvironmentBt::~EnvironmentBt() {
 	mGroundShape = NULL;
 }
 
-void EnvironmentBt::createTerrainData(Ogre::SceneNode* sceneNode, float w,
-		float h, float* data, float minH, float maxH, Ogre::Vector3& pos,
-		float scale, float heightScale) {
+void EnvironmentBt::createTerrainData(Ogre::SceneNode* const sceneNode,
+		const float w, const float h, const float* const data, const float minH,
+		const float maxH, const Ogre::Vector3& pos, const float scale,
+		const float heightScale) {
 
 	btVector3 localScaling(scale, heightScale, scale);
 
@@ -52,7 +53,7 @@ void EnvironmentBt::createTerrainData(Ogre::SceneNode* sceneNode, float w,
 	((btHeightfieldTerrainShape*) mGroundShape)->setUseDiamondSubdivision(true);
 	mGroundShape->setLocalScaling(localScaling);
 
-	mGroundBody = new btRigidBody(0,  new btDefaultMotionState(), mGroundShape);
+	mGroundBody = new btRigidBody(0, new btDefaultMotionState(), mGroundShape);
 	mGroundBody->getWorldTransform().setOrigin(
 			btVector3(scale * (w - 1) / 2, heightScale / 2 * heightScale,
 					scale * (w - 1) / 2));

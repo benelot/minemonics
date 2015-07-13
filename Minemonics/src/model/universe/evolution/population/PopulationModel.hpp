@@ -115,7 +115,7 @@ public:
 		return mCreatureModels;
 	}
 
-	PlanetModel* getPlanetModel() {
+	PlanetModel* getPlanetModel() const {
 		return mPlanetModel;
 	}
 

@@ -23,6 +23,7 @@ typedef boost::log::sources::severity_logger<boost::log::trivial::severity_level
 
 /**
  * @brief		The logger class helps to handle a boost logger.
+ * The logger levels are in this order: trace, debug, info, warning, error, fatal
  * @details		Details
  * @date		2015-02-14
  * @author		Benjamin Ellenberger
@@ -31,10 +32,8 @@ class Logger {
 public:
 	Logger();
 	~Logger();
-	static void init(std::string fileName);
+	static void init(std::string fileName,boost::log::trivial::severity_level severity);
 	static void initTermSink();
-	//static void setClass(BoostLogger logger,std::string className);
-	//static void log(boost::log::trivial::severity_level severityLevel,std::string message);
 
 	static const boost::log::trivial::severity_level trace =
 			boost::log::trivial::trace;

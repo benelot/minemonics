@@ -1,5 +1,5 @@
-#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_PLANEO3D_H_
-#define VIEW_UNIVSERSE_ENVIRONMENTS_PLANEO3D_H_
+#ifndef VIEW_UNIVERSE_ENVIRONMENTS_PLANEO3D_H_
+#define VIEW_UNIVERSE_ENVIRONMENTS_PLANEO3D_H_
 
 //# corresponding header
 //# forward declarations
@@ -29,13 +29,19 @@
  */
 class PlaneO3D: public EnvironmentO3D {
 public:
-	PlaneO3D(SimulationManager* simulationMgr);
+	PlaneO3D(SimulationManager* const simulationMgr);
 	virtual ~PlaneO3D();
 
-	void initialize(Ogre::Light* l);
-	void update();
+	/**
+	 * Initialize the plane view.
+	 * @param l The light of the scene.
+	 */
+	void initialize(const Ogre::Light* const l);
 
-	bool mTerrainsImported;
+	/**
+	 * Update the plane view.
+	 */
+	void update();
 };
 
-#endif /* VIEW_UNIVSERSE_ENVIRONMENTS_PLANEO3D_H_ */
+#endif /* VIEW_UNIVERSE_ENVIRONMENTS_PLANEO3D_H_ */

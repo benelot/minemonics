@@ -37,8 +37,8 @@ Plane::~Plane() {
 //	They are all deleted in environment
 }
 
-void Plane::initialize(SimulationManager* simulationMgr, Ogre::Light* l,
-		OgreBtDebugDrawer* debugDrawer) {
+void Plane::initialize(SimulationManager* const simulationMgr, const Ogre::Light* const l,
+		OgreBtDebugDrawer* const debugDrawer) {
 	Environment::initialize(Environment::PLANE);
 
 	// setup the plane view

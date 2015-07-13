@@ -46,7 +46,8 @@ public:
 	 * @param l The general light source.
 	 * @param debugDrawer The debug drawer of the simulation.
 	 */
-	void initialize(SimulationManager* simulationMgr, Ogre::Light* l,OgreBtDebugDrawer* debugDrawer);
+	void initialize(SimulationManager* const simulationMgr,
+			const Ogre::Light* const l, OgreBtDebugDrawer* const debugDrawer);
 
 	/**
 	 * Update the plane environment.
@@ -54,12 +55,12 @@ public:
 	virtual void update();
 
 	// Accessor methods
-	PlaneO3D* getPlaneView() {
+	PlaneO3D* getPlaneView() const {
 		return (PlaneO3D*) mEnvironmentGraphics;
 	}
 
-	PlaneModel* getPlaneModel() {
-		return (PlaneModel*)mEnvironmentModel;
+	PlaneModel* getPlaneModel() const {
+		return (PlaneModel*) mEnvironmentModel;
 	}
 private:
 	/**
@@ -74,8 +75,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Plane"));
+					boost::log::attributes::constant<std::string>("Plane"));
 		}
 	} _initializer;
 };

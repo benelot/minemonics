@@ -35,9 +35,9 @@ public:
 
 	virtual void update() = 0;
 
-	virtual void createTerrainData(Ogre::SceneNode* sceneNode, float w, float h,
-			float* data, float minH, float maxH, Ogre::Vector3& pos,
-			float scale, float heightScale) = 0;
+	virtual void createTerrainData(Ogre::SceneNode* const sceneNode, const float w, const float h,
+			const float* const data, const float minH, const float maxH, const Ogre::Vector3& pos,
+			const float scale, const float heightScale) = 0;
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_ENVIRONMENTPHYSICS_HPP_ */

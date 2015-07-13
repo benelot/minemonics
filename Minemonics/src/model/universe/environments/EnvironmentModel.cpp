@@ -25,7 +25,7 @@ EnvironmentModel::~EnvironmentModel() {
 	// TODO Auto-generated destructor stub
 }
 
-bool EnvironmentModel::isInWorld() {
+bool EnvironmentModel::isInWorld() const {
 	return mInWorld;
 }
 

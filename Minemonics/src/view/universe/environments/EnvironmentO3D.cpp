@@ -28,7 +28,7 @@
 #define TERRAIN_LOAD_RADIUS 1500
 #define TERRAIN_HOLD_RADIUS 3000
 
-EnvironmentO3D::EnvironmentO3D(SimulationManager* simulationMgr) :
+EnvironmentO3D::EnvironmentO3D(SimulationManager* const simulationMgr) :
 		mSimulationMgr(simulationMgr), mTerrainGlobals(NULL), mTerrainGroup(
 		NULL), mTerrainPaging(
 		NULL), mPageManager(NULL), mPagedWorld(NULL), mTerrainPagedWorldSection(
@@ -44,11 +44,22 @@ EnvironmentO3D::~EnvironmentO3D() {
 		OGRE_DELETE mPageManager;
 	}
 
-	if (mTerrainGlobals)
+	if (mTerrainGlobals){
 		OGRE_DELETE mTerrainGlobals;
+	}
+	mSimulationMgr = NULL;
+
+	if(mTerrainGroup)
+	{
+		OGRE_DELETE mTerrainGroup;
+	}
+
+	if(mTerrainPagedWorldSection){
+		OGRE_DELETE mTerrainPagedWorldSection;
+	}
 }
 
-void EnvironmentO3D::initialize(std::string fileName, Ogre::Light* l) {
+void EnvironmentO3D::initialize(std::string fileName, const Ogre::Light* l) {
 	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
 
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(
@@ -88,7 +99,7 @@ void EnvironmentO3D::initialize(std::string fileName, Ogre::Light* l) {
 	//removeFromWorld();
 }
 
-void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
+void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	// Configure global
 	mTerrainGlobals->setMaxPixelError(8);
 	// testing composite map
@@ -142,7 +153,7 @@ void EnvironmentO3D::configureTerrainDefaults(Ogre::Light* l) {
 //			"growth_weirdfungus-03_normalheight.dds");
 }
 
-bool EnvironmentO3D::isInWorld() {
+bool EnvironmentO3D::isInWorld() const {
 	return mInWorld;
 }
 

@@ -1,5 +1,5 @@
-#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
-#define VIEW_UNIVSERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
+#ifndef VIEW_UNIVERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
+#define VIEW_UNIVERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_
 
 /**
  * @brief		The environment graphics is the base class for all environment views.
@@ -12,9 +12,17 @@ public:
 	EnvironmentGraphics();
 	virtual ~EnvironmentGraphics();
 
-	virtual bool isInWorld() = 0;
+	/**
+	 * is the environment view in the world?
+	 * @return if the environment view is in the world.
+	 */
+	virtual bool isInWorld() const = 0;
+
+	/**
+	 * Add the environment view to the world.
+	 */
 	virtual void addToWorld() = 0;
 	virtual void removeFromWorld() = 0;
 };
 
-#endif /* VIEW_UNIVSERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_ */
+#endif /* VIEW_UNIVERSE_ENVIRONMENTS_ENVIRONMENTGRAPHICS_H_ */

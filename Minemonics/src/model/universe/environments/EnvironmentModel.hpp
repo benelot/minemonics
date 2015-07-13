@@ -29,25 +29,40 @@ public:
 	EnvironmentModel();
 	virtual ~EnvironmentModel();
 
+	/**
+	 * Update the environment model.
+	 */
 	virtual void update() = 0;
 
-	bool isInWorld();
+	/**
+	 * Is the environment in the world?
+	 * @return If the environment is in the world.
+	 */
+	bool isInWorld() const;
+
+	/**
+	 * Add the environment to the world.
+	 */
 	void addToWorld();
+
+	/**
+	 * Remove the environment from the world.
+	 */
 	void removeFromWorld();
 
 	//Accessor methods
 
-	EnvironmentPhysics*& getEnvironmentPhysics() {
+	EnvironmentPhysics* getEnvironmentPhysics() {
 		return mEnvironmentPhysics;
 	}
 
-	void setEnvironmentPhysics(EnvironmentPhysics* environmentPhysics) {
+	void setEnvironmentPhysics(EnvironmentPhysics* const environmentPhysics) {
 		mEnvironmentPhysics = environmentPhysics;
 	}
 
-	void createTerrainData(Ogre::SceneNode* sceneNode, float w, float h,
-			float* data, float minH, float maxH, Ogre::Vector3& pos,
-			float scale, float heightScale){
+	void createTerrainData(Ogre::SceneNode* const sceneNode, const float w, const float h,
+			const float* const data, const float minH, const float maxH, const Ogre::Vector3& pos,
+			const float scale, const float heightScale){
 		mEnvironmentPhysics->createTerrainData(sceneNode,w,h,data,minH,maxH,pos,scale,heightScale);
 	}
 

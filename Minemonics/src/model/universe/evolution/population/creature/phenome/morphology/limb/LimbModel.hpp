@@ -66,10 +66,11 @@ public:
 	 * @param friction The friction of the limb.
 	 * @param color The color of the limb.
 	 */
-	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel, PrimitiveType type,
-			Ogre::Vector3 position, Ogre::Quaternion orientation,
-			Ogre::Vector3 dimensions, double mass, double restitution,
-			double friction, Ogre::ColourValue color,int ownIndex);
+	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
+			PrimitiveType type, Ogre::Vector3 position,
+			Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
+			double restitution, double friction, Ogre::ColourValue color,
+			int ownIndex);
 
 	/**
 	 * Reset the limb to the place when the creature was born.
@@ -151,7 +152,7 @@ public:
 	 * The the limb physics model of the limb.
 	 * @return The limb physics model of the limb.
 	 */
-	LimbPhysics* getLimbPhysics() {
+	LimbPhysics* getLimbPhysics() const {
 		return mLimbPhysics;
 	}
 
@@ -159,7 +160,7 @@ public:
 	 * Get the position of the limb in the physical world.
 	 * @return The position of the limb in the physical world.
 	 */
-	Ogre::Vector3 getPosition() {
+	const Ogre::Vector3 getPosition() const {
 		return OgreBulletUtils::convert(mLimbPhysics->getPosition());
 	}
 
@@ -167,23 +168,23 @@ public:
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.
 	 */
-	Ogre::Quaternion getOrientation() {
+	const Ogre::Quaternion getOrientation() const {
 		return OgreBulletUtils::convert(mLimbPhysics->getOrientation());
 	}
 
-	const Ogre::ColourValue& getColor() const {
+	const Ogre::ColourValue getColor() const {
 		return mColor;
 	}
 
-	PrimitiveType getPrimitiveType() const {
+	const PrimitiveType getPrimitiveType() const {
 		return mPrimitiveType;
 	}
 
-	const Ogre::Vector3& getDimensions() const {
+	const Ogre::Vector3 getDimensions() const {
 		return mDimensions;
 	}
 
-	int getOwnIndex(){
+	const int getOwnIndex() const {
 		return mOwnIndex;
 	}
 

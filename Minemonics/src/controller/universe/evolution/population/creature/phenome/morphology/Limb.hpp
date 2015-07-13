@@ -50,9 +50,22 @@ public:
 	Limb(const Limb& limb);
 	Limb(SimulationManager* simulationManager, Creature* creature,
 			LimbModel* limbModel);
-
 	virtual ~Limb();
 
+	/**
+	 * Initialize the limb.
+	 * @param simulationManager A handle to the simulation manager.
+	 * @param creature A handle to the creature the limb belongs to.
+	 * @param type The primitive type of the limb.
+	 * @param position The position of the limb.
+	 * @param orientation The orientation of the limb.
+	 * @param size The size of the limb.
+	 * @param mass The mass of the limb.
+	 * @param restitution The restitution of the limb.
+	 * @param friction The friction of the limb.
+	 * @param color The color of the limb.
+	 * @param ownIndex The limb's own index in the array of limbs.
+	 */
 	void initialize(SimulationManager* simulationManager, Creature* creature,
 			LimbModel::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
@@ -115,25 +128,25 @@ public:
 	std::string getInfo();
 
 	// Accessor methods
-	const Ogre::Vector3& getPosition() const {
+	const Ogre::Vector3 getPosition() const {
 		return mLimbGraphics->getPosition();
 	}
 
-	Ogre::Quaternion& getOrientation() {
+	const Ogre::Quaternion getOrientation() const {
 		return mLimbGraphics->getOrientation();
 	}
 
 	/**
 	 * Get the Graphics part of the limb.
 	 */
-	LimbO3D* getLimbGraphics() {
+	LimbO3D* getLimbGraphics() const {
 		return ((LimbO3D*) mLimbGraphics);
 	}
 
 	/**
 	 * Get the Physics part of the limb.
 	 */
-	LimbBt* getLimbPhysics() {
+	LimbBt* getLimbPhysics() const {
 		return ((LimbBt*) mLimbModel.getLimbPhysics());
 	}
 

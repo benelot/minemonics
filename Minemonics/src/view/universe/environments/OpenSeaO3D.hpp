@@ -1,5 +1,5 @@
-#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_OPENSEAO3D_H_
-#define VIEW_UNIVSERSE_ENVIRONMENTS_OPENSEAO3D_H_
+#ifndef VIEW_UNIVERSE_ENVIRONMENTS_OPENSEAO3D_H_
+#define VIEW_UNIVERSE_ENVIRONMENTS_OPENSEAO3D_H_
 
 //# corresponding header
 //# forward declarations
@@ -27,4 +27,4 @@ public:
 	virtual ~OpenSeaO3D();
 };
 
-#endif /* OPENSEAO3D_H_ */
+#endif /* VIEW_UNIVERSE_ENVIRONMENTS_OPENSEAO3D_H_ */

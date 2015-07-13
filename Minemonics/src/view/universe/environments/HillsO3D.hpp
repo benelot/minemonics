@@ -1,5 +1,5 @@
-#ifndef VIEW_UNIVSERSE_ENVIRONMENTS_HILLSO3D_H_
-#define VIEW_UNIVSERSE_ENVIRONMENTS_HILLSO3D_H_
+#ifndef VIEW_UNIVERSE_ENVIRONMENTS_HILLSO3D_H_
+#define VIEW_UNIVERSE_ENVIRONMENTS_HILLSO3D_H_
 
 //# corresponding header
 //# forward declarations
@@ -39,4 +39,4 @@ public:
 	bool mTerrainsImported;
 };
 
-#endif /* VIEW_UNIVSERSE_ENVIRONMENTS_HILLSO3D_H_ */
+#endif /* VIEW_UNIVERSE_ENVIRONMENTS_HILLSO3D_H_ */

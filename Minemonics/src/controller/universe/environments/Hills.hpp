@@ -35,7 +35,7 @@ public:
 
 	//Accessor methods
 
-	EnvironmentModel* getEnvironmentModel();
+//	EnvironmentModel* getEnvironmentModel();
 };
 
 #endif /* CONTROLLER_UNIVERSE_ENVIRONMENTS_HILLS_HPP_ */

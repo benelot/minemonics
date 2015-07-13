@@ -99,8 +99,7 @@ void Population::update() {
 }
 
 void Population::reset() {
-	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for (; cit != mCreatures.end(); cit++) {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin(); cit != mCreatures.end(); cit++) {
 		(*cit)->reset();
 	}
 }

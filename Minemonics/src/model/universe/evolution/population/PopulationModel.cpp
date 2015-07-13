@@ -26,7 +26,7 @@ PopulationModel::PopulationModel(const PopulationModel& populationModel) {
 	mCreatureQty = populationModel.mCreatureQty;
 	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
 
-	std::vector<CreatureModel*>::iterator cit = populationModel.getCreatureModels().begin();
+	std::vector<CreatureModel*>::const_iterator cit = populationModel.getCreatureModels().begin();
 	for(;cit != populationModel.getCreatureModels().end();cit++){
 		mCreatureModels.push_back((*cit)->clone());
 	}

@@ -45,13 +45,18 @@ public:
 	 * Initialize the environment.
 	 * @param environmentType The type of environment.
 	 */
-	void initialize(EnvironmentType environmentType);
+	void initialize(const EnvironmentType environmentType);
+
+	/**
+	 * Update the environment.
+	 */
+	virtual void update() = 0;
 
 	/**
 	 * Is the environment in the world?
 	 * @return If the environment is in the world.
 	 */
-	bool isInWorld();
+	bool isInWorld() const;
 
 	/**
 	 * Add the environment to the world.
@@ -63,15 +68,15 @@ public:
 	 */
 	void removeFromWorld();
 
-	EnvironmentO3D* getEnvironmentO3D() {
+
+	//Accessor methods
+	EnvironmentO3D* getEnvironmentO3D() const {
 		return (EnvironmentO3D*) mEnvironmentGraphics;
 	}
 
-	virtual EnvironmentModel* getEnvironmentModel() {
+	EnvironmentModel* getEnvironmentModel() {
 		return mEnvironmentModel;
 	}
-
-	virtual void update() = 0;
 
 protected:
 	/**

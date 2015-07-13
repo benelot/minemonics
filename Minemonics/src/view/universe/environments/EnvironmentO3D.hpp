@@ -1,5 +1,5 @@
-#ifndef ENVIRONMENTO3D_H_
-#define ENVIRONMENTO3D_H_
+#ifndef VIEW_UNIVERSE_ENVIRONMENTS_ENVIRONMENTO3D_H_
+#define VIEW_UNIVERSE_ENVIRONMENTS_ENVIRONMENTO3D_H_
 
 //# corresponding header
 //# forward declarations
@@ -38,19 +38,41 @@ class SimulationManager;
  */
 class EnvironmentO3D: public EnvironmentGraphics {
 public:
-	EnvironmentO3D(SimulationManager* simulationMgr);
+	EnvironmentO3D(SimulationManager* const simulationMgr);
 	virtual ~EnvironmentO3D();
 
-	void initialize(std::string fileName, Ogre::Light* l);
+	/**
+	 * Initialize the environment view.
+	 * @param fileName The file name of the environment save.
+	 * @param l The light of the scene.
+	 */
+	void initialize(std::string fileName, const Ogre::Light* const l);
 
-	virtual bool isInWorld();
+	/**
+	 * Is the environment view in the world?
+	 * @return If the environment view is in the world.
+	 */
+	virtual bool isInWorld() const;
 
+	/**
+	 * Add the environment view to the world.
+	 */
 	virtual void addToWorld();
 
+	/**
+	 * Remove the environment view from the world.
+	 */
 	virtual void removeFromWorld();
 
-	void configureTerrainDefaults(Ogre::Light* l);
+	/**
+	 * Configure terrain defaults.
+	 * @param l The light of the scene.
+	 */
+	void configureTerrainDefaults(const Ogre::Light* const l);
 
+	/**
+	 * Update the environment view.
+	 */
 	void update();
 
 	class ImageTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
@@ -66,6 +88,48 @@ public:
 			terrainGroup->defineTerrain(x, y, &img);
 		}
 	};
+
+	void testCapabilities(const Ogre::RenderSystemCapabilities* caps) {
+		if (!caps->hasCapability(Ogre::RSC_VERTEX_PROGRAM)
+				|| !caps->hasCapability(Ogre::RSC_FRAGMENT_PROGRAM)) {
+			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
+					"Your graphics card does not support vertex or fragment shaders, "
+							"so you cannot run this sample. Sorry!",
+					"EnvironmentO3D::testCapabilities");
+		}
+	}
+
+	//Accessor methods
+	Ogre::TerrainGroup*& getTerrainGroup() {
+		return mTerrainGroup;
+	}
+
+	double getTerrainHeight(double x, double z) {
+		Ogre::Ray ray;
+		ray.setOrigin(Ogre::Vector3(x, mTerrainPos.y + 10000, z));
+		ray.setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y);
+
+		Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects(
+				ray);
+		if (rayResult.hit) {
+			return rayResult.position.y;
+		}
+		return 0;
+	}
+
+	Ogre::TerrainPagedWorldSection* const getTerrainPagedWorldSection() const {
+		return mTerrainPagedWorldSection;
+	}
+
+//	std::vector<Ogre::Terrain*> getAllDefinedTerrains() {
+////		Ogre::TerrainIterator tit = mTerrainGroup->getTerrainIterator();
+////		for(;tit != mTerrainGroup->getTerrainIterator().end();tit++)
+////		{
+////
+////		}
+//	}
+
+protected:
 
 	class PlaneTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
 	public:
@@ -103,47 +167,6 @@ public:
 	};
 	DummyPageProvider mDummyPageProvider;
 
-	void testCapabilities(const Ogre::RenderSystemCapabilities* caps) {
-		if (!caps->hasCapability(Ogre::RSC_VERTEX_PROGRAM)
-				|| !caps->hasCapability(Ogre::RSC_FRAGMENT_PROGRAM)) {
-			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
-					"Your graphics card does not support vertex or fragment shaders, "
-							"so you cannot run this sample. Sorry!",
-					"EnvironmentO3D::testCapabilities");
-		}
-	}
-
-	Ogre::TerrainGroup*& getTerrainGroup() {
-		return mTerrainGroup;
-	}
-
-	double getTerrainHeight(double x, double z) {
-		Ogre::Ray ray;
-		ray.setOrigin(Ogre::Vector3(x, mTerrainPos.y + 10000, z));
-		ray.setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y);
-
-		Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects(
-				ray);
-		if (rayResult.hit) {
-			return rayResult.position.y;
-		}
-		return 0;
-	}
-
-	Ogre::TerrainPagedWorldSection*& getTerrainPagedWorldSection() {
-		return mTerrainPagedWorldSection;
-	}
-
-	std::vector<Ogre::Terrain*> getAllDefinedTerrains() {
-//		Ogre::TerrainIterator tit = mTerrainGroup->getTerrainIterator();
-//		for(;tit != mTerrainGroup->getTerrainIterator().end();tit++)
-//		{
-//
-//		}
-	}
-
-protected:
-
 	void initBlendMaps(Ogre::Terrain* terrain);
 
 	SimulationManager* mSimulationMgr;
@@ -164,4 +187,4 @@ protected:
 	bool mInWorld;
 };
 
-#endif /* ENVIRONMENTO3D_H_ */
+#endif /* VIEW_UNIVERSE_ENVIRONMENTS_ENVIRONMENTO3D_H_ */

@@ -18,6 +18,8 @@
 #include <boost/make_shared.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/log/attributes.hpp>
+#include <boost/log/attributes/attribute_cast.hpp>
+#include <boost/log/attributes/attribute_value.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
 #include <boost/log/sinks/text_ostream_backend.hpp>
 #include <boost/log/attributes/scoped_attribute.hpp>
@@ -41,12 +43,13 @@ Logger::~Logger() {
 
 }
 
-void Logger::init(std::string fileName) {
+void Logger::init(std::string fileName,boost::log::trivial::severity_level severity) {
 	namespace logging = boost::log;
 	namespace src = boost::log::sources;
 	namespace sinks = boost::log::sinks;
 	namespace expr = boost::log::expressions;
 	namespace keywords = boost::log::keywords;
+	namespace attrs = boost::log::attributes;
 
 	// Set up our sink and formatting
 	logging::add_file_log(keywords::file_name = fileName,
@@ -61,8 +64,7 @@ void Logger::init(std::string fileName) {
 
 	logging::add_common_attributes();
 
-	//logging::core::get()->set_filter(
-	//		logging::trivial::severity >= logging::trivial::trace);
+	logging::core::get()->set_filter(logging::trivial::severity >= severity);
 }
 
 void Logger::initTermSink() {
@@ -87,9 +89,4 @@ void Logger::initTermSink() {
 	logging::core::get()->add_sink(sink);
 	logging::add_common_attributes();
 }
-
-//
-//void Logger::log(boost::log::v2_mt_posix::trivial::severity_level severityLevel,std::string message){
-//	BOOST_LOG_SEV(logger, severityLevel)<< message;
-//}
 

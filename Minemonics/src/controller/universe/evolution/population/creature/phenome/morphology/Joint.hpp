@@ -46,7 +46,6 @@ public:
 	Joint();
 	Joint(const Joint& joint);
 	Joint(const JointModel& jointModel);
-
 	virtual ~Joint();
 
 	/**
@@ -57,9 +56,9 @@ public:
 	 * @param localA Local reference frame of limb A.
 	 * @param localB Local reference frame of limb B.
 	 */
-	void initialize(Creature* creature, Limb* limbA, Limb* limbB,
-			btTransform localA, btTransform localB, int indexA = 0, int indexB = 0,
-			int ownIndex = 0);
+	void initialize(Creature* const creature, Limb* const limbA, Limb* const limbB,
+			btTransform localA, btTransform localB, const int indexA = 0, const int indexB = 0,
+			const int ownIndex = 0);
 
 	/**
 	 * Clone the joint.
@@ -141,15 +140,15 @@ public:
 	 * Get the motors of this joint.
 	 * @return The motors of this joint.
 	 */
-	std::vector<Motor*> getMotors() {
+	const std::vector<Motor*> getMotors() const {
 		return mJointModel.getJointPhysics()->getMotors();
 	}
 
-	JointGraphics*& getJointGraphics() {
+	JointGraphics* getJointGraphics() const {
 		return mJointGraphics;
 	}
 
-	JointPhysics* getJointPhysics() {
+	JointPhysics* getJointPhysics() const {
 		return mJointModel.getJointPhysics();
 	}
 

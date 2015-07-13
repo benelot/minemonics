@@ -33,7 +33,7 @@ void Evaluation::initialize(Planet* planet, double evaluationTime) {
 
 void Evaluation::addPopulation(Population* population) {
 	mPopulations.push_back(population);
-	mEvaluationModel.addPopulationModel(&population->getPopulationModel());
+	mEvaluationModel.addPopulationModel(&(population->getPopulationModel()));
 }
 
 void Evaluation::setup() {
