@@ -40,11 +40,10 @@ class PhenomeModel {
 public:
 	PhenomeModel();
 	PhenomeModel(const PhenomeModel& phenomeModel);
-
 	virtual ~PhenomeModel();
 
-	void initialize(SimulationManager* simulationManager,
-			btDynamicsWorld* world);
+	void initialize(SimulationManager* const simulationManager,
+			btDynamicsWorld* const world);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -56,25 +55,25 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Update the phenome model.
 	 * @param timeSinceLastFrame
 	 */
-	void update(double timeSinceLastFrame);
+	void update(const double timeSinceLastFrame);
 
 	/**
 	 * Compare the phenome model to another phenome model.
 	 * @param phenomeModel Another phenome model.
 	 * @return If the phenome model is equal to the other phenome model.
 	 */
-	bool equals(const PhenomeModel & phenomeModel) const;
+	bool equals(const PhenomeModel& phenomeModel) const;
 
 	/**
 	 * Clone the phenome model.
@@ -92,8 +91,8 @@ public:
 	 * @param phenomeModel The phemone model we want to serialize.
 	 * @return A string containing all information about the phemone model.
 	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const PhenomeModel &phenomeModel) {
+	friend std::ostream & operator<<(std::ostream& os,
+			const PhenomeModel& phenomeModel) {
 		os
 		/**if the phenome is in the world*/
 		<< "PhenomeModel: isInWorld=" << phenomeModel.mInWorld;
@@ -181,7 +180,7 @@ public:
 		return mDeveloped;
 	}
 
-	void setDeveloped(bool developed) {
+	void setDeveloped(const bool developed) {
 		mDeveloped = developed;
 	}
 

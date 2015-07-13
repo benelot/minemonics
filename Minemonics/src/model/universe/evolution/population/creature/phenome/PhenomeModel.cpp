@@ -81,13 +81,13 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
-void PhenomeModel::initialize(SimulationManager* simulationManager,
-		btDynamicsWorld* world) {
+void PhenomeModel::initialize(SimulationManager* const simulationManager,
+		btDynamicsWorld* const world) {
 	mSimulationManager = simulationManager;
 	mWorld = world;
 }
 
-void PhenomeModel::update(double timeSinceLastFrame) {
+void PhenomeModel::update(const double timeSinceLastFrame) {
 	// let the controller perform
 	std::vector<Controller*>::iterator cit = mControllers.begin();
 	for (; cit != mControllers.end(); cit++) {

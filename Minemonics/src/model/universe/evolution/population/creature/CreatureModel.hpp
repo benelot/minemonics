@@ -192,7 +192,7 @@ public:
 		return mPhenotypeModel->isDeveloped();
 	}
 
-	void setDeveloped(bool developed) {
+	void setDeveloped(const bool developed) {
 		mPhenotypeModel->setDeveloped(developed);
 	}
 
@@ -204,7 +204,7 @@ public:
 		return mFirstName;
 	}
 
-	const Ogre::Vector3& getPosition() const {
+	Ogre::Vector3 const getPosition() const {
 		return mPosition;
 	}
 
@@ -212,19 +212,19 @@ public:
 		mPosition = position;
 	}
 
-	PopulationModel* getPopulationModel() {
+	PopulationModel* const getPopulationModel() const {
 		return mPopulationModel;
 	}
 
-	void setPhenotypeModel(PhenomeModel* phenotypeModel) {
+	void setPhenotypeModel(PhenomeModel* const phenotypeModel) {
 		mPhenotypeModel = phenotypeModel;
 	}
 
-	const Ogre::Vector3& getInitialPosition() const {
+	const Ogre::Vector3 getInitialPosition() const {
 		return mInitialPosition;
 	}
 
-	PhenomeModel* getPhenotypeModel() const {
+	PhenomeModel* const getPhenotypeModel() const {
 		return mPhenotypeModel;
 	}
 

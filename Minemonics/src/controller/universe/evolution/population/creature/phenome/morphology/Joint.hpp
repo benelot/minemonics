@@ -57,7 +57,7 @@ public:
 	 * @param localB Local reference frame of limb B.
 	 */
 	void initialize(Creature* const creature, Limb* const limbA, Limb* const limbB,
-			btTransform localA, btTransform localB, const int indexA = 0, const int indexB = 0,
+			const btTransform localA, const btTransform localB, const int indexA = 0, const int indexB = 0,
 			const int ownIndex = 0);
 
 	/**

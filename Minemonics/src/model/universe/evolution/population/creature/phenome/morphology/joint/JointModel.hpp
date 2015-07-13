@@ -43,19 +43,19 @@ public:
 
 	virtual ~JointModel();
 
-	void initialize(btDynamicsWorld* world, btRigidBody* limbA,
-			btRigidBody* limbB, btTransform localA, btTransform localB,int indexA,int indexB,
-			int ownIndex);
+	void initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
+			btRigidBody* const limbB, const btTransform localA, const btTransform localB,const int indexA,const int indexB,
+			const int ownIndex);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the joint without resetting it.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Returns if the joint is under tension.

@@ -51,7 +51,7 @@ Joint::~Joint() {
 }
 
 void Joint::initialize(Creature* const creature, Limb* const limbA,
-		Limb* const limbB, btTransform localA, btTransform localB,
+		Limb* const limbB, const btTransform localA, const btTransform localB,
 		const int indexA, const int indexB, const int ownIndex) {
 
 	// initialize the physics model of the joint

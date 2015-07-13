@@ -33,9 +33,9 @@ JointModel::~JointModel() {
 	mJointPhysics = NULL;
 }
 
-void JointModel::initialize(btDynamicsWorld* world, btRigidBody* limbA,
-		btRigidBody* limbB, btTransform localA, btTransform localB, int indexA,
-		int indexB, int ownIndex) {
+void JointModel::initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
+		btRigidBody* const limbB, const btTransform localA, const btTransform localB,const int indexA,
+		const int indexB,const int ownIndex) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mIndexA = indexA;
 	mIndexB = indexB;
@@ -43,18 +43,18 @@ void JointModel::initialize(btDynamicsWorld* world, btRigidBody* limbA,
 	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
 }
 
-void JointModel::setAngularLimits(Ogre::Vector3 angularLowerLimit,
-		Ogre::Vector3 angularUpperLimit) {
+void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+		const Ogre::Vector3 angularUpperLimit) {
 	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);
 }
 
-void JointModel::setAngularStiffness(double jointPitchStiffness,
-		double jointYawStiffness, double jointRollStiffness) {
+void JointModel::setAngularStiffness(const double jointPitchStiffness,
+		const double jointYawStiffness, const double jointRollStiffness) {
 	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
 			jointRollStiffness);
 }
 
-void JointModel::setAngularDamping(double springPitchDampingCoefficient,
+void JointModel::setAngularDamping(const double springPitchDampingCoefficient,
 		double springYawDampingCoefficient,
 		double springRollDampingCoefficient) {
 	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
@@ -62,20 +62,38 @@ void JointModel::setAngularDamping(double springPitchDampingCoefficient,
 }
 
 bool JointModel::equals(const JointModel& jointModel) const {
-	//TODO: Implement joint model equals
-//	if(mJointPhysics->equals(*jointModel.mJointPhysics))
-//	{
-//		return false;
-//	}
+	if(((JointBt*)mJointPhysics)->equals((*(JointBt*)jointModel.mJointPhysics))){
+		return false;
+	}
+
+	if(mIndexA != jointModel.mIndexA)
+	{
+		return false;
+	}
+
+	if(mIndexB != jointModel.mIndexB)
+	{
+		return false;
+	}
+
+	if(mOwnIndex!=jointModel.mOwnIndex)
+	{
+		return false;
+	}
+
+	if(mComponentType!=jointModel.mComponentType)
+	{
+		return false;
+	}
 
 	return true;
 }
 
-void JointModel::reset(Ogre::Vector3 position) {
+void JointModel::reset(const Ogre::Vector3 position) {
 	mJointPhysics->reset(position);
 }
 
-void JointModel::reposition(Ogre::Vector3 position) {
+void JointModel::reposition(const Ogre::Vector3 position) {
 	mJointPhysics->reposition(position);
 }
 

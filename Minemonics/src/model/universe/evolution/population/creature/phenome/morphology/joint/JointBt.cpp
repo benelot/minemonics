@@ -39,8 +39,8 @@
 //	//TODO: Implement copy from jointBt.
 //}
 
-JointBt::JointBt(btDynamicsWorld* world, btRigidBody* bodyA, btRigidBody* bodyB,
-		btTransform& tframeInA, btTransform& tframeInB) :
+JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA, btRigidBody* const bodyB,
+		const btTransform& tframeInA, const btTransform& tframeInB) :
 		mG6DofJoint(*bodyA, *bodyB, tframeInA, tframeInB,
 				true/*use fixed frame A for linear limits*/) {
 	mWorld = world;

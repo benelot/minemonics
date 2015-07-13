@@ -45,7 +45,7 @@ public:
 	 * @param tframeInB The joint position in reference frame B.
 	 */
 	JointBt(btDynamicsWorld* world, btRigidBody* bodyA,
-			btRigidBody* bodyB, btTransform& tframeInA, btTransform& tframeInB);
+			btRigidBody* bodyB, const btTransform& tframeInA, const btTransform& tframeInB);
 	virtual ~JointBt();
 
 
