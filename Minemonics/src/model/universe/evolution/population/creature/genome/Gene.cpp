@@ -21,7 +21,7 @@ Gene::Gene() :
 Gene::~Gene() {
 }
 
-void Gene::initialize(GeneType geneType) {
+void Gene::initialize(const GeneType geneType) {
 	mType = geneType;
 }
 

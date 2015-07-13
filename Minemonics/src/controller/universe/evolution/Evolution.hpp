@@ -53,11 +53,11 @@ public:
 	/**
 	 * Initialize the evolution.
 	 */
-	void initialize(EvaluationController* evaluationController, Planet* planet,
-			double evaluationTime =
+	void initialize(EvaluationController* const evaluationController, Planet* const planet,
+			const double evaluationTime =
 					EvaluationConfiguration::DEFAULT_EVALUATION_TIME,
-			EvolutionModel::EvaluationType type =
-					EvolutionModel::INDIVIDUAL_EVALUATION, int tournamentSize =
+			const EvolutionModel::EvaluationType type =
+					EvolutionModel::INDIVIDUAL_EVALUATION, const int tournamentSize =
 					1);
 
 	/**
@@ -69,7 +69,7 @@ public:
 	 * Add a population to the evolution.
 	 * @param population The population to be added.
 	 */
-	void addPopulation(Population* population);
+	void addPopulation(Population* const population);
 
 	/**
 	 * Proceed with the next creature of the currently tested population or

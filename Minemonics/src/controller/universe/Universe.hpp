@@ -42,14 +42,14 @@ public:
 	/**
 	 * Initializes the universe.
 	 */
-	void initialize(SimulationManager* simulationManager,
-			int parallelEvaluationsQty);
+	void initialize(SimulationManager* const simulationManager,
+			const int parallelEvaluationsQty);
 
 	/**
 	 * Add a planet to the universe.
 	 * @param planet The planet to add to the universe.
 	 */
-	void addPlanet(Planet* planet);
+	void addPlanet(Planet* const planet);
 
 	/**
 	 * Proceed with the evaluation. In in serial mode, this just goes on to the next evaluation, in parallel, this schedules one more evaluation.
@@ -65,12 +65,12 @@ public:
 	 * Step the universe physics forward.
 	 * @param timeSinceLastFrame The size of the time step.
 	 */
-	void stepPhysics(double timeSinceLastFrame);
+	void stepPhysics(const double timeSinceLastFrame);
 
 	/**
 	 * Update the model of the universe.
 	 */
-	void update(double timeSinceLastFrame);
+	void update(const double timeSinceLastFrame);
 
 	//Accessor methods
 	/**

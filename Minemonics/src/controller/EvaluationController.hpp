@@ -37,13 +37,13 @@ public:
 	 * @param simulationManager Handle to the simulation manager.
 	 * @param parallelEvaluationsQty The number of parallel evaluations running in the simulator.
 	 */
-	void initialize(SimulationManager* simulationManager,int parallelEvaluationsQty);
+	void initialize(SimulationManager* const simulationManager,const int parallelEvaluationsQty);
 
 	/**
 	 * Add a new evaluation.
 	 * @param evaluation The evaluation to add.
 	 */
-	void addEvaluation(Evaluation* evaluation);
+	void addEvaluation(Evaluation* const evaluation);
 
 	/**
 	 * Schedule the evaluations, clear the torndown and setup new ones.
@@ -54,12 +54,12 @@ public:
 	 * Update evaluated objects according to the time that has passed.
 	 * @param timeSinceLastFrame The time since the last frame.
 	 */
-	void update(double timeSinceLastFrame);
+	void update(const double timeSinceLastFrame);
 
 
 	//Accessor methods
 
-	void setPaused(bool paused) {
+	void setPaused(const bool paused) {
 		mPaused = paused;
 	}
 

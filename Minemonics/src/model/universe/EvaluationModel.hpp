@@ -32,18 +32,18 @@ public:
 	EvaluationModel();
 	virtual ~EvaluationModel();
 
-	void initialize(PlanetModel* planetModel, double evaluationTime =
+	void initialize(PlanetModel* const planetModel, const double evaluationTime =
 			EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
 
-	void addPopulationModel(PopulationModel* populationModel);
+	void addPopulationModel(PopulationModel* const populationModel);
 
 	//Accessor methods
 
-	PlanetModel* getPlanetModel() {
+	PlanetModel* getPlanetModel() const {
 		return mPlanetModel;
 	}
 
-	void setPlanetModel(PlanetModel* planetModel) {
+	void setPlanetModel(PlanetModel* const planetModel) {
 		mPlanetModel = planetModel;
 	}
 
@@ -67,11 +67,11 @@ public:
 		return mTornDown;
 	}
 
-	void setEvaluating(bool evaluating) {
+	void setEvaluating(const bool evaluating) {
 		mEvaluating = evaluating;
 	}
 
-	void setTornDown(bool tornDown) {
+	void setTornDown(const bool tornDown) {
 		mTornDown = tornDown;
 	}
 

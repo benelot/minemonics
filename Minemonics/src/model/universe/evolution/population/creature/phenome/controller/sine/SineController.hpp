@@ -37,7 +37,8 @@ public:
 	 * @param xShift shift in x direction.
 	 * @param yShift shift in y direction.
 	 */
-	void initialize(double amplitude, double frequency, double xShift,double yShift);
+	void initialize(const double amplitude, const double frequency,
+			const double xShift, const double yShift);
 
 	/**
 	 * Clone the sine controller.
@@ -45,7 +46,7 @@ public:
 	 */
 	SineController* clone();
 
-	void perform(double timeSinceLastFrame);
+	void perform(const double timeSinceLastFrame);
 
 	void collectInputs();
 

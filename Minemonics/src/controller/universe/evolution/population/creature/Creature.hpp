@@ -41,8 +41,8 @@ public:
 	 * @param position The position the creature should be created in.
 	 * @param branchiness The branchiness factor of the creature.
 	 */
-	void initialize(SimulationManager* simulationManager,
-			Population* population, Ogre::Vector3 position, double branchiness);
+	void initialize(SimulationManager* const simulationManager,
+			Population* const population, const Ogre::Vector3 position, const double branchiness);
 
 	/**
 	 * Perform embryogenesis on the creature to build his phenotype from the genotype.
@@ -52,7 +52,7 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reset the creature to its former position.
@@ -62,7 +62,7 @@ public:
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Update the creature as it moves.
@@ -80,7 +80,7 @@ public:
 	void removeFromWorld();
 
 	// Facade accessor methods
-	void setPosition(Ogre::Vector3 position) {
+	void setPosition(const Ogre::Vector3 position) {
 		mCreatureModel.setPosition(position);
 	}
 

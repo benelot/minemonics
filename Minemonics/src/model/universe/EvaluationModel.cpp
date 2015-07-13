@@ -25,12 +25,12 @@ EvaluationModel::~EvaluationModel() {
 	// TODO Auto-generated destructor stub
 }
 
-void EvaluationModel::initialize(PlanetModel* planetModel,
-		double evaluationTime) {
+void EvaluationModel::initialize(PlanetModel* const planetModel,
+		const double evaluationTime) {
 	mPlanetModel = planetModel;
 	mEvaluationTime = evaluationTime;
 }
 
-void EvaluationModel::addPopulationModel(PopulationModel* populationModel) {
+void EvaluationModel::addPopulationModel(PopulationModel* const populationModel) {
 	mPopulationModels.push_back(populationModel);
 }

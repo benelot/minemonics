@@ -30,15 +30,15 @@ SineController::SineController() :
 SineController::~SineController() {
 }
 
-void SineController::initialize(double amplitude, double frequency,
-		double xShift, double yShift) {
+void SineController::initialize(const double amplitude,const double frequency,
+		const double xShift,const double yShift) {
 	mAmplitude = amplitude;
 	mFrequency = frequency;
 	mXShift = xShift;
 	mYShift = yShift;
 }
 
-void SineController::perform(double timeSinceLastFrame) {
+void SineController::perform(const double timeSinceLastFrame) {
 	double input = 0;
 	if (mControlInputs.size() != 0) {
 		std::cout << "Why is there sine control input?";

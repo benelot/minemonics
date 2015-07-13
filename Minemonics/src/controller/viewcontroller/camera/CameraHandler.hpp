@@ -34,14 +34,47 @@ class SimulationManager;
  */
 class CameraHandler {
 public:
-	CameraHandler(SimulationManager* simulationMgr);
+	CameraHandler(SimulationManager* const simulationMgr);
 	virtual ~CameraHandler();
 
-	void reposition(float timeSinceLastFrame);
+	/**
+	 * Reposition the camera.
+	 * @param timeSinceLastFrame The time since the last frame.
+	 */
+	void reposition(const float timeSinceLastFrame);
+
+	/**
+	 * Rotate the camera.
+	 * @param pitch Pitch rotation.
+	 * @param yaw Yaw rotation.
+	 * @param roll Roll rotation.
+	 */
 	void rotate(int pitch, int yaw, int roll);
+
+	/**
+	 * Move the camera.
+	 * @param x X movement.
+	 * @param y Y movement.
+	 * @param z z movement.
+	 */
 	void move(double x, double y, double z);
+
+	/**
+	 * Move the camera in x direction.
+	 * @param x X movement.
+	 */
 	void moveX(double x);
+
+	/**
+	 * Move the camera in y direction.
+	 * @param y Y movement.
+	 */
 	void moveY(double y);
+
+	/**
+	 * Move the camera in z direction.
+	 * @param z Z movement.
+	 */
 	void moveZ(double z);
 
 	//Accessor methods
@@ -52,7 +85,7 @@ public:
 		return mMove;
 	}
 
-	void setMove(Ogre::Real move) {
+	void setMove(const Ogre::Real move) {
 		mMove = move;
 	}
 

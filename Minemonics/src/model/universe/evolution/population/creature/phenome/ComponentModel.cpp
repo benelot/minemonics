@@ -21,7 +21,7 @@ ComponentModel::ComponentModel() :
 ComponentModel::~ComponentModel() {
 }
 
-void ComponentModel::initialize(ComponentType type, int ownIndex) {
+void ComponentModel::initialize(const ComponentType type, const int ownIndex) {
 	mComponentType = type;
 	mOwnIndex = ownIndex;
 }

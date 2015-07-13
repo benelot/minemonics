@@ -47,47 +47,77 @@ public:
 	 * @param branchAttributeMutationPercentage The percentage of the population whose branch attributes are mutated.
 	 * @param sowFreshPercentage The percentage of the population who is sown freshly.
 	 */
-	void initialize(double reapPercentage, double crossOverPercentage,
-			double geneMutationPercentage,
-			double geneAttributeMutationPercentage,
-			double branchMutationPercentage,
-			double branchAttributeMutationPercentage,
-			double sowFreshPercentage);
+	void initialize(const double reapPercentage, const double crossOverPercentage,
+			const double geneMutationPercentage,
+			const double geneAttributeMutationPercentage,
+			const double branchMutationPercentage,
+			const double branchAttributeMutationPercentage,
+			const double sowFreshPercentage);
 
 	/**
 	 * Comparator for the creature sort function
-	 * @param i First creature.
-	 * @param j Second creature.
+	 * @param creature1 First creature.
+	 * @param creature2 Second creature.
 	 * @return if the second creature's fitness is higher.
 	 */
-	static bool compareCreatureFitness(CreatureModel* i, CreatureModel* j);
+	static bool compareCreatureFitness(CreatureModel* const creature1, CreatureModel* const creature2);
 
 	/**
 	 * Reap the less fit creatures from the population.
 	 * @param population The population that should be reaped from.
 	 */
-	void reap(PopulationModel* population);
+	void reap(PopulationModel* const population);
 
 	/**
 	 * Sow new creatures into the population.
 	 * @param population The population that should be sowed into.
 	 */
-	void sow(PopulationModel* population);
+	void sow(PopulationModel* const population);
 
-	void crossover(PopulationModel* population, int crossoverHeads);
+	/**
+	 * Crossover creatures in the population and add n crossoverHeads.
+	 * @param population The population to crossover.
+	 * @param crossoverHeads Number of crossoverHeads to add.
+	 */
+	void crossover(PopulationModel* const population, const int crossoverHeads);
 
-	void mutateGenes(PopulationModel* population, int mutatedGeneHeads);
+	/**
+	 * Mutate creatures in the population and add n mutateGeneHeads.
+	 * @param population The population to mutate.
+	 * @param mutatedGeneHeads Number of mutatedGeneHeads to add.
+	 */
+	void mutateGenes(PopulationModel* const population,const int mutatedGeneHeads);
 
-	void mutateGeneAttributes(PopulationModel* population,
-			int mutatedGeneAttributeHeads);
+	/**
+	 * Mutate gene attributes in the population and add n mutatedGeneBranchHeads.
+	 * @param population The population to mutate.
+	 * @param mutatedGeneAttributeHeads Number of mutatedGeneBranchHeands to add.
+	 */
+	void mutateGeneAttributes(PopulationModel* const population,
+			const int mutatedGeneAttributeHeads);
 
-	void mutateGeneBranches(PopulationModel* population,
-			int mutatedGeneBranchHeads);
+	/**
+	 * Mutate gene branch in the population and add n mutatedGeneBranchAttributeHeads.
+	 * @param population The population to mutate.
+	 * @param mutatedGeneBranchHeads Number of mutatedGeneBranchAttributeHeads to add.
+	 */
+	void mutateGeneBranches(PopulationModel* const population,
+			const int mutatedGeneBranchHeads);
 
-	void mutateGeneBranchAttributes(PopulationModel* population,
-			int mutatedGeneBranchAttributeHeads);
+	/**
+	 * Mutate gene branch attributes in the population and add n mutatedGeneBranchAttributeHeads.
+	 * @param population The population to mutate.
+	 * @param mutatedGeneBranchAttributeHeads Number of mutatedGeneBranchAttributeHeads to add.
+	 */
+	void mutateGeneBranchAttributes(PopulationModel* const population,
+			const int mutatedGeneBranchAttributeHeads);
 
-	void sowFreshly(PopulationModel* population, int sowFreshlyHeads);
+	/**
+	 * Sow fresh heads in the population.
+	 * @param population The population to sow.
+	 * @param sowFreshlyHeads Numbe of heads to sow.
+	 */
+	void sowFreshly(PopulationModel* const population, const int sowFreshlyHeads);
 
 private:
 	double mReapPercentage;

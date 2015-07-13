@@ -33,6 +33,39 @@ Morphogene::Morphogene() :
 
 }
 
+Morphogene::Morphogene(const Morphogene& morphoGene) {
+	mColorB = morphoGene.mColorB;
+	mColorG = morphoGene.mColorG;
+	mColorR = morphoGene.mColorR;
+
+	mControllerGene = morphoGene.mControllerGene->clone();
+	mFollowUpGene = morphoGene.mFollowUpGene;
+	mType = morphoGene.mType;
+	mJointAnchorX = morphoGene.mJointAnchorX;
+	mJointAnchorY = morphoGene.mJointAnchorY;
+	mJointAnchorZ = morphoGene.mJointAnchorZ;
+	mJointPitch = morphoGene.mJointPitch;
+	mJointRoll = morphoGene.mJointRoll;
+	mJointYaw = morphoGene.mJointYaw;
+	mOrientationW = morphoGene.mOrientationW;
+	mOrientationX = morphoGene.mOrientationX;
+	mOrientationY = morphoGene.mOrientationY;
+	mOrientationZ = morphoGene.mOrientationZ;
+	mPrimitiveType = morphoGene.mPrimitiveType;
+	mRepetitionLimit = morphoGene.mRepetitionLimit;
+	mSegmentShrinkFactor = morphoGene.mSegmentShrinkFactor;
+	mX = morphoGene.mX;
+	mY = morphoGene.mY;
+	mZ = morphoGene.mZ;
+	mFriction = morphoGene.mFriction;
+	mRestitution = morphoGene.mRestitution;
+
+	std::vector<MorphogeneBranch*>::const_iterator mgbit = morphoGene.mGeneBranches.begin();
+	for (; mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
+		mGeneBranches.push_back((*mgbit)->clone());
+	}
+}
+
 Morphogene::~Morphogene() {
 	if (mControllerGene != NULL) {
 		delete mControllerGene;
@@ -46,7 +79,7 @@ Morphogene::~Morphogene() {
 	}
 }
 
-void Morphogene::initialize(double branchiness) {
+void Morphogene::initialize(const double branchiness) {
 	mType = Gene::MorphoGene;
 
 	Randomness randomness;
@@ -152,7 +185,7 @@ void Morphogene::mutate() {
 	initialize(randomness.nextUnifDouble(10, 30));
 }
 
-void Morphogene::grow(int branchiness) {
+void Morphogene::grow(const int branchiness) {
 	Randomness randomness;
 
 	int branchQty =
@@ -165,45 +198,12 @@ void Morphogene::grow(int branchiness) {
 	}
 }
 
-Morphogene::Morphogene(const Morphogene& morphoGene) {
-	mColorB = morphoGene.mColorB;
-	mColorG = morphoGene.mColorG;
-	mColorR = morphoGene.mColorR;
-
-	mControllerGene = morphoGene.mControllerGene->clone();
-	mFollowUpGene = morphoGene.mFollowUpGene;
-	mType = morphoGene.mType;
-	mJointAnchorX = morphoGene.mJointAnchorX;
-	mJointAnchorY = morphoGene.mJointAnchorY;
-	mJointAnchorZ = morphoGene.mJointAnchorZ;
-	mJointPitch = morphoGene.mJointPitch;
-	mJointRoll = morphoGene.mJointRoll;
-	mJointYaw = morphoGene.mJointYaw;
-	mOrientationW = morphoGene.mOrientationW;
-	mOrientationX = morphoGene.mOrientationX;
-	mOrientationY = morphoGene.mOrientationY;
-	mOrientationZ = morphoGene.mOrientationZ;
-	mPrimitiveType = morphoGene.mPrimitiveType;
-	mRepetitionLimit = morphoGene.mRepetitionLimit;
-	mSegmentShrinkFactor = morphoGene.mSegmentShrinkFactor;
-	mX = morphoGene.mX;
-	mY = morphoGene.mY;
-	mZ = morphoGene.mZ;
-	mFriction = morphoGene.mFriction;
-	mRestitution = morphoGene.mRestitution;
-
-	std::vector<MorphogeneBranch*>::const_iterator mgbit = morphoGene.mGeneBranches.begin();
-	for (; mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
-		mGeneBranches.push_back((*mgbit)->clone());
-	}
-}
-
 void Morphogene::print() {
 	// print the gene to the standard output
 	std::cout << this;
 }
 
-bool Morphogene::equals(const Morphogene & morphoGene) const {
+bool Morphogene::equals(const Morphogene& morphoGene) const {
 
 	if (mColorR != morphoGene.mColorR) {
 		return false;

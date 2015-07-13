@@ -35,7 +35,7 @@ Evolution::~Evolution() {
 	mPlanet = NULL;
 }
 
-void Evolution::initialize(EvaluationController* evaluationController,
+void Evolution::initialize(EvaluationController* const evaluationController,
 		Planet* planet, double evaluationTime,
 		EvolutionModel::EvaluationType type, int tournamentSize) {
 	mEvaluationController = evaluationController;
@@ -43,7 +43,7 @@ void Evolution::initialize(EvaluationController* evaluationController,
 	mEvolutionModel.initialize(type, evaluationTime, tournamentSize);
 }
 
-void Evolution::addPopulation(Population* population) {
+void Evolution::addPopulation(Population* const population) {
 	mPopulations.push_back(population);
 	mEvolutionModel.addNewPopulation(&population->getPopulationModel());
 }

@@ -1,10 +1,3 @@
-/*
- * SineControllerGene.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
 //# forward declarations
 //# system headers

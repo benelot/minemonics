@@ -34,8 +34,14 @@ public:
 	PlaneBt();
 	virtual ~PlaneBt();
 
+	/**
+	 * Initialize the plane bullet physics.
+	 */
 	void initialize();
 
+	/**
+	 * Update tehe plane bullet physics.
+	 */
 	virtual void update();
 
 	//Accessor methods

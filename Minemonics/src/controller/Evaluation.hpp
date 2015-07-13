@@ -41,13 +41,13 @@ public:
 	 * @param planet The planet on which the evaluation takes place.
 	 * @param evaluationTime The evaluation time in this evaluation
 	 */
-	void initialize(Planet* planet,double evaluationTime);
+	void initialize(Planet* const planet,const double evaluationTime);
 
 	/**
 	 * Add a population to the evaluation
 	 * @param population The population to be added to the evaluation.
 	 */
-	void addPopulation(Population* population);
+	void addPopulation(Population* const population);
 
 	/**
 	 * Setup the evaluation.
@@ -68,7 +68,7 @@ public:
 	 * Update the evaluation.
 	 * @param timeSinceLastFrame The time since the last graphics frame.
 	 */
-	void update(double timeSinceLastFrame);
+	void update(const double timeSinceLastFrame);
 
 	// Facade accessor methods
 	bool isEvaluating() const {

@@ -38,11 +38,11 @@ LimbModel::~LimbModel() {
 	mLimbPhysics = NULL;
 }
 
-void LimbModel::initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
-		PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
-		double restitution, double friction, Ogre::ColourValue color,
-		int ownIndex) {
+void LimbModel::initialize(btDynamicsWorld* const world, CreatureModel* const creatureModel,
+		const PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation, const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction, const Ogre::ColourValue color,
+		const int ownIndex) {
 	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
 
 	// initialize the physics model of the limb

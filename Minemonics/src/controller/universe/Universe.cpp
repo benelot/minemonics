@@ -40,12 +40,12 @@ Universe::~Universe() {
 //	~mUniverseModel()
 }
 
-void Universe::initialize(SimulationManager* simulationManager,
-		int parallelEvaluationsQty) {
+void Universe::initialize(SimulationManager* const simulationManager,
+		const int parallelEvaluationsQty) {
 	mEvaluationController.initialize(simulationManager, parallelEvaluationsQty);
 }
 
-void Universe::addPlanet(Planet* planet) {
+void Universe::addPlanet(Planet* const planet) {
 	mPlanets.push_back(planet);
 	mUniverseModel.addPlanetModel(&planet->getPlanetModel());
 }
@@ -67,7 +67,7 @@ void Universe::proceedEvaluation() {
 	mEvaluationController.scheduleEvaluations();
 }
 
-void Universe::stepPhysics(double timeSinceLastFrame) {
+void Universe::stepPhysics(const double timeSinceLastFrame) {
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end(); pit++) {
 		(*pit)->stepPhysics(timeSinceLastFrame);
@@ -81,6 +81,6 @@ void Universe::drawDebugWorld() {
 	}
 }
 
-void Universe::update(double timeSinceLastFrame) {
+void Universe::update(const double timeSinceLastFrame) {
 	mEvaluationController.update(timeSinceLastFrame);
 }

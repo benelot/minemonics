@@ -33,7 +33,7 @@ public:
 	 * @param genome another indirect genome.
 	 * @return If the indirect genome is equal to the other indirect genome.
 	 */
-	bool equals(const IndirectGenome & genome) const;
+	bool equals(const IndirectGenome& genome) const;
 
 	/**
 	 * Clone the indirect genome.

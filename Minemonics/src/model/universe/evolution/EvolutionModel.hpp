@@ -57,8 +57,8 @@ public:
 	 * @param evaluationTime The evaluation time in this evolution model
 	 * @param tournamentSize The size of the tournament for simultaneous evaluation
 	 */
-	void initialize(EvaluationType type = INDIVIDUAL_EVALUATION,
-			double evaluationTime = 10, int tournamentSize = 1);
+	void initialize(const EvaluationType type = INDIVIDUAL_EVALUATION,
+			const double evaluationTime = 10, const int tournamentSize = 1);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -69,7 +69,7 @@ public:
 	 * Add a new population to the evolution model.
 	 * @param populationModel The population to be added.
 	 */
-	void addNewPopulation(PopulationModel* populationModel);
+	void addNewPopulation(PopulationModel* const populationModel);
 
 	/**
 	 * Proceed the evaluation.
@@ -102,15 +102,15 @@ public:
 	bool variate();
 
 	//Accessor methods
-	const Reaper& getReaper() const {
+	Reaper& getReaper() {
 		return mReaper;
 	}
 
-	EvolutionPhase getPhase() const {
+	const EvolutionPhase getPhase() const {
 		return mPhase;
 	}
 
-	EvaluationType getType() const {
+	const EvaluationType getType() const {
 		return mType;
 	}
 
@@ -118,16 +118,16 @@ public:
 		return mPopulationModels;
 	}
 
-	double getEvaluationTime() const {
+	const double getEvaluationTime() const {
 		return mEvaluationTime;
 	}
 
-	std::vector<CreatureModel*>::size_type getCurrentCreatureIndex() const {
+	const std::vector<CreatureModel*>::size_type getCurrentCreatureIndex() const {
 		return mCurrentCreatureIndex;
 	}
 
 	bool setCurrentCreatureIndex(
-			std::vector<CreatureModel*>::size_type currentCreatureIndex) {
+			const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
 		if (currentCreatureIndex
 				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex = currentCreatureIndex;
@@ -137,16 +137,16 @@ public:
 		}
 	}
 
-	std::vector<PopulationModel*>::size_type getCurrentPopulationIndex() const {
+	const std::vector<PopulationModel*>::size_type getCurrentPopulationIndex() const {
 		return mCurrentPopulationIndex;
 	}
 
 	void setCurrentPopulationIndex(
-			std::vector<PopulationModel*>::size_type currentPopulationIndex) {
+			const std::vector<PopulationModel*>::size_type currentPopulationIndex) {
 		mCurrentPopulationIndex = currentPopulationIndex;
 	}
 
-	unsigned long getTournamentSize() const {
+	const unsigned long getTournamentSize() const {
 		return mTournamentSize;
 	}
 

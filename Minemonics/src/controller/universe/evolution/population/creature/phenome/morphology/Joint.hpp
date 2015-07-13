@@ -56,9 +56,10 @@ public:
 	 * @param localA Local reference frame of limb A.
 	 * @param localB Local reference frame of limb B.
 	 */
-	void initialize(Creature* const creature, Limb* const limbA, Limb* const limbB,
-			const btTransform localA, const btTransform localB, const int indexA = 0, const int indexB = 0,
-			const int ownIndex = 0);
+	void initialize(Creature* const creature, Limb* const limbA,
+			Limb* const limbB, const btTransform localA,
+			const btTransform localB, const int indexA = 0,
+			const int indexB = 0, const int ownIndex = 0);
 
 	/**
 	 * Clone the joint.
@@ -69,20 +70,20 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Initialize the rotational limit motors of the joint.
 	 * @param maxForces The maximum forces along the axes.
 	 * @param maxSpeeds The maximum speeds along the axes.
 	 */
-	void initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
-			Ogre::Vector3 maxSpeeds);
+	void initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
+			const Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Updates the joint position and orientation.
@@ -104,8 +105,8 @@ public:
 	 * @param angularLowerLimit Lower angular limits.
 	 * @param angularUpperLimit Upper angular limits.
 	 */
-	void setAngularLimits(Ogre::Vector3 angularLowerLimit,
-			Ogre::Vector3 angularUpperLimit);
+	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+			const Ogre::Vector3 angularUpperLimit);
 
 	/**
 	 * Set angular joint stiffness.
@@ -113,8 +114,8 @@ public:
 	 * @param jointYawStiffness Joint stiffness in yaw direction.
 	 * @param jointRollStiffness Joint stiffness in roll direction.
 	 */
-	void setAngularStiffness(double jointPitchStiffness,
-			double jointYawStiffness, double jointRollStiffness);
+	void setAngularStiffness(const double jointPitchStiffness,
+			const double jointYawStiffness, const double jointRollStiffness);
 
 	/**
 	 * Set the spring damping coefficients.
@@ -122,9 +123,9 @@ public:
 	 * @param springYawDampingCoefficient Damping coefficient of the spring in yaw direction.
 	 * @param springRollDampingCoefficient Damping coefficient of the spring in roll direction.
 	 */
-	void setAngularDamping(double springPitchDampingCoefficient,
-			double springYawDampingCoefficient,
-			double springRollDampingCoefficient);
+	void setAngularDamping(const double springPitchDampingCoefficient,
+			const double springYawDampingCoefficient,
+			const double springRollDampingCoefficient);
 
 	/**
 	 * Enable angular motors.
@@ -132,7 +133,8 @@ public:
 	 * @param yawEnable Enable yaw motor.
 	 * @param rollEnable Enable roll motor.
 	 */
-	void enableAngularMotor(bool pitchEnable, bool yawEnable, bool rollEnable);
+	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
+			const bool rollEnable);
 
 	// Accessor methods
 
@@ -144,11 +146,11 @@ public:
 		return mJointModel.getJointPhysics()->getMotors();
 	}
 
-	JointGraphics* getJointGraphics() const {
+	JointGraphics* const getJointGraphics() const {
 		return mJointGraphics;
 	}
 
-	JointPhysics* getJointPhysics() const {
+	JointPhysics* const getJointPhysics() const {
 		return mJointModel.getJointPhysics();
 	}
 
@@ -165,8 +167,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Joint"));
+					boost::log::attributes::constant<std::string>("Joint"));
 		}
 	} _initializer;
 	/**

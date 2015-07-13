@@ -22,7 +22,11 @@ EnvironmentModel::EnvironmentModel() :
 }
 
 EnvironmentModel::~EnvironmentModel() {
-	// TODO Auto-generated destructor stub
+	delete mEnvironmentPhysics;
+	mEnvironmentPhysics = NULL;
+
+	delete mPhysicsController;
+	mPhysicsController = NULL;
 }
 
 bool EnvironmentModel::isInWorld() const {

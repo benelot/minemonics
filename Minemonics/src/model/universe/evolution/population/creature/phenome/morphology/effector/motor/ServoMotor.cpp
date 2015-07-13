@@ -2,10 +2,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
-
 //# system headers
 //## controller headers
 //## model headers
@@ -43,8 +39,8 @@ ServoMotor::~ServoMotor() {
 	mMotorBt = NULL;
 }
 
-void ServoMotor::initialize(int jointMotorIndex,
-		btRotationalLimitMotor* motorBt, double maxForce, double maxSpeed) {
+void ServoMotor::initialize(const int jointMotorIndex,
+		btRotationalLimitMotor* const motorBt,const double maxForce,const double maxSpeed) {
 	mJointMotorIndex = jointMotorIndex;
 	mMotorBt = motorBt;
 	mMaxForce = maxForce;

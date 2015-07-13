@@ -65,7 +65,7 @@ public:
 	/**
 	 * Reposition the joint without resetting it.
 	 */
-	virtual void reposition(Ogre::Vector3 position) = 0;
+	virtual void reposition(const Ogre::Vector3 position) = 0;
 
 	/**
 	 * Update the joint physics model
@@ -121,20 +121,20 @@ public:
 //	virtual void serialize(Archive & ar, const unsigned int /* file_version */) = 0;
 
 	//Accessor methods
-	virtual std::vector<Motor*> getMotors() = 0;
+	virtual std::vector<Motor*>& getMotors() = 0;
 
-	virtual void setAngularLimits(Ogre::Vector3 angularLowerLimit,
-			Ogre::Vector3 angularUpperLimit) = 0;
+	virtual void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+			const Ogre::Vector3 angularUpperLimit) = 0;
 
-	virtual void setAngularStiffness(double jointPitchStiffness,
-			double jointYawStiffness, double jointRollStiffness) = 0;
+	virtual void setAngularStiffness(const double jointPitchStiffness,
+			const double jointYawStiffness, const double jointRollStiffness) = 0;
 
-	virtual void setAngularDamping(double springPitchDampingCoefficient,
-			double springYawDampingCoefficient,
-			double springRollDampingCoefficient) = 0;
+	virtual void setAngularDamping(const double springPitchDampingCoefficient,
+			const double springYawDampingCoefficient,
+			const double springRollDampingCoefficient) = 0;
 
-	virtual void setRotationalLimitMotorEnabled(RotationalDegreeOfFreedom index,
-			bool enable) = 0;
+	virtual void setRotationalLimitMotorEnabled(const RotationalDegreeOfFreedom index,
+			const bool enable) = 0;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */

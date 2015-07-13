@@ -36,10 +36,12 @@ Reaper::~Reaper() {
 	// TODO Auto-generated destructor stub
 }
 
-void Reaper::initialize(double reapPercentage, double crossOverPercentage,
-		double geneMutationPercentage, double attributeMutationPercentage,
-		double branchMutationPercentage,
-		double branchAttributeMutationPercentage, double sowFreshPercentage) {
+void Reaper::initialize(const double reapPercentage,
+		const double crossOverPercentage, const double geneMutationPercentage,
+		const double attributeMutationPercentage,
+		const double branchMutationPercentage,
+		const double branchAttributeMutationPercentage,
+		const double sowFreshPercentage) {
 	mReapPercentage = reapPercentage;
 	mCrossOverPercentage = crossOverPercentage;
 	mGeneMutationPercentage = geneMutationPercentage;
@@ -49,24 +51,24 @@ void Reaper::initialize(double reapPercentage, double crossOverPercentage,
 	mSowFreshPercentage = sowFreshPercentage;
 }
 
-bool Reaper::compareCreatureFitness(CreatureModel* i, CreatureModel* j) {
-	return (i->getFitness() < j->getFitness());
+bool Reaper::compareCreatureFitness(CreatureModel* const creature1,
+		CreatureModel* const creature2) {
+	return (creature1->getFitness() < creature2->getFitness());
 }
 
-void Reaper::reap(PopulationModel* population) {
+void Reaper::reap(PopulationModel* const population) {
 	int headsToReap = ceil(
 			population->getCreatureModels().size() * mReapPercentage);
 
-	std::cout << "size: " << population->getCreatureModels().size() << std::endl;
+	std::cout << "size: " << population->getCreatureModels().size()
+			<< std::endl;
 	int i = 0;
 	for (std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().begin();
-			cit != population->getCreatureModels().end();
-			cit++) {
-		std::cout << (void *)&(*cit) << ": " << i << std::endl;
+			cit != population->getCreatureModels().end(); cit++) {
+		std::cout << (void *) &(*cit) << ": " << i << std::endl;
 		i++;
 	}
-
 
 	//TODO: Check whether the sort is descending or ascending
 	std::sort(population->getCreatureModels().begin(),
@@ -82,7 +84,7 @@ void Reaper::reap(PopulationModel* population) {
 
 }
 
-void Reaper::sow(PopulationModel* population) {
+void Reaper::sow(PopulationModel* const population) {
 
 	int headsToSow = population->getCreatureQty()
 			- population->getCreatureModels().size();
@@ -137,7 +139,8 @@ void Reaper::sow(PopulationModel* population) {
 
 }
 
-void Reaper::crossover(PopulationModel* population, int crossoverHeads) {
+void Reaper::crossover(PopulationModel* const population,
+		const int crossoverHeads) {
 	Randomness randomness;
 
 	std::vector<CreatureModel*>::iterator cit =
@@ -146,9 +149,9 @@ void Reaper::crossover(PopulationModel* population, int crossoverHeads) {
 			/ (population->getCreatureModels().size() * mCrossOverPercentage);
 
 //crossover the best creature with those in the ranking downwards according to the cross over percentage
-	for (;
+	for (int i = 0;
 			cit != population->getCreatureModels().begin()
-					|| crossoverHeads != 0; crossoverHeads--) {
+					|| i < crossoverHeads; i++) {
 
 		for (int i = 0; i < offspringPerParent - 1; i++) {
 
@@ -191,7 +194,8 @@ void Reaper::crossover(PopulationModel* population, int crossoverHeads) {
 	}
 }
 
-void Reaper::mutateGenes(PopulationModel* population, int mutatedGeneHeads) {
+void Reaper::mutateGenes(PopulationModel* const population,
+		const int mutatedGeneHeads) {
 	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneHeads; i++) {
@@ -219,8 +223,8 @@ void Reaper::mutateGenes(PopulationModel* population, int mutatedGeneHeads) {
 
 }
 
-void Reaper::mutateGeneAttributes(PopulationModel* population,
-		int mutatedGeneAttributeHeads) {
+void Reaper::mutateGeneAttributes(PopulationModel* const population,
+		const int mutatedGeneAttributeHeads) {
 	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneAttributeHeads; i++) {
@@ -247,8 +251,8 @@ void Reaper::mutateGeneAttributes(PopulationModel* population,
 	}
 }
 
-void Reaper::mutateGeneBranches(PopulationModel* population,
-		int mutatedGeneBranchHeads) {
+void Reaper::mutateGeneBranches(PopulationModel* const population,
+		const int mutatedGeneBranchHeads) {
 	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneBranchHeads; i++) {
@@ -276,11 +280,11 @@ void Reaper::mutateGeneBranches(PopulationModel* population,
 
 }
 
-void Reaper::mutateGeneBranchAttributes(PopulationModel* population,
-		int mutatedGeneBranchAttributeHeads) {
+void Reaper::mutateGeneBranchAttributes(PopulationModel* const population,
+		const int mutatedGeneBranchAttributeHeads) {
 }
 
-void Reaper::sowFreshly(PopulationModel* population, int sowFreshlyHeads) {
+void Reaper::sowFreshly(PopulationModel* const population, const int sowFreshlyHeads) {
 	double branchiness = 0;
 	Randomness randomness;
 	for (int i = 0; i < sowFreshlyHeads; i++) {

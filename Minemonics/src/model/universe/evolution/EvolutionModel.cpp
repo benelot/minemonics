@@ -27,8 +27,8 @@ EvolutionModel::~EvolutionModel() {
 
 }
 
-void EvolutionModel::initialize(EvaluationType type, double evaluationTime,
-		int tournamentSize) {
+void EvolutionModel::initialize(const EvaluationType type, const double evaluationTime,
+		const int tournamentSize) {
 	mType = type;
 	mEvaluationTime = evaluationTime;
 	mTournamentSize = tournamentSize;
@@ -94,7 +94,7 @@ bool EvolutionModel::cull() {
 	return true;
 }
 
-void EvolutionModel::addNewPopulation(PopulationModel* populationModel) {
+void EvolutionModel::addNewPopulation(PopulationModel* const populationModel) {
 	mPopulationModels.push_back(populationModel);
 }
 

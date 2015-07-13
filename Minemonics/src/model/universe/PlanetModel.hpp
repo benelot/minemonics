@@ -39,7 +39,7 @@ public:
 	 * @param evolutionModel Its evolution model.
 	 * @param environmentModel Its environment model.
 	 */
-	void initialize(EvolutionModel* evolutionModel, EnvironmentModel* environmentModel);
+	void initialize(EvolutionModel* const evolutionModel, EnvironmentModel* const environmentModel);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not yet developed.
@@ -59,19 +59,19 @@ public:
 
 	//Accessor methods
 
-	EnvironmentModel*& getEnvironmentModel() {
+	EnvironmentModel* const getEnvironmentModel() const {
 		return mEnvironmentModel;
 	}
 
-	void setEnvironmentModel(EnvironmentModel* environmentModel) {
+	void setEnvironmentModel(EnvironmentModel* const environmentModel) {
 		mEnvironmentModel = environmentModel;
 	}
 
-	EvolutionModel*& getEvolutionModel() {
+	EvolutionModel* const getEvolutionModel() const {
 		return mEvolutionModel;
 	}
 
-	void setEvolutionModel(EvolutionModel* evolutionModel) {
+	void setEvolutionModel(EvolutionModel* const evolutionModel) {
 		mEvolutionModel = evolutionModel;
 	}
 

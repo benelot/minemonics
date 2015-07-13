@@ -87,8 +87,8 @@ void JointBt::update() {
 	}
 }
 
-void JointBt::initializeRotationalLimitMotors(btVector3 maxForces,
-		btVector3 maxSpeeds) {
+void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
+		const btVector3 maxSpeeds) {
 	//add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::DOF_PITCH,
@@ -123,11 +123,11 @@ bool JointBt::equals(const JointBt& jointBt) const {
 	return true;
 }
 
-void JointBt::reset(Ogre::Vector3 position) {
+void JointBt::reset(const Ogre::Vector3 position) {
 	//nothing to be reset
 }
 
-void JointBt::reposition(Ogre::Vector3 position) {
+void JointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
 
@@ -152,7 +152,7 @@ bool JointBt::isStrained() {
 }
 
 void JointBt::setRotationalLimitMotorEnabled(
-		JointPhysics::RotationalDegreeOfFreedom index, bool enable) {
+		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 	for (; motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->getIndex() == index) {

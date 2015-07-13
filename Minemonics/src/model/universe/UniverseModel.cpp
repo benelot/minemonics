@@ -21,13 +21,15 @@ UniverseModel::UniverseModel() :
 }
 
 UniverseModel::~UniverseModel() {
-	// TODO Auto-generated destructor stub
+//	mCurrentEvaluationPlanetIndex
+	mEvaluationModels.clear();
+	mPlanetModels.clear();
 }
 
 void UniverseModel::initialize() {
 }
 
-void UniverseModel::addPlanetModel(PlanetModel* planetModel) {
+void UniverseModel::addPlanetModel(PlanetModel* const planetModel) {
 	mPlanetModels.push_back(planetModel);
 }
 

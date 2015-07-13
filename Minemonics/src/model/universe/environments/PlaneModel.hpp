@@ -36,7 +36,7 @@ public:
 
 	//Accessor methods
 
-	PlaneBt* getPlaneBt()
+	PlaneBt* const getPlaneBt() const
 	{
 		return (PlaneBt*) mEnvironmentPhysics;
 	}

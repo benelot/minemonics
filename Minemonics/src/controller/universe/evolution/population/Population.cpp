@@ -49,9 +49,9 @@ Population::~Population() {
  * @param simulationManager The simulation manager handle
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void Population::initialize(Planet* planet,
-		SimulationManager* simulationManager, int creatureQty,
-		Ogre::Vector3 initialPosition) {
+void Population::initialize(Planet* const planet,
+		SimulationManager* const simulationManager, const int creatureQty,
+		const Ogre::Vector3 initialPosition) {
 	mSimulationManager = simulationManager;
 	mPopulationModel.initialize(&planet->getPlanetModel(), 0);
 	Randomness randomness;
@@ -65,7 +65,7 @@ void Population::initialize(Planet* planet,
 	mPlanet = planet;
 }
 
-void Population::initialize(Planet* planet, int creatureQty) {
+void Population::initialize(Planet* const planet, const int creatureQty) {
 	mPopulationModel.initialize(&planet->getPlanetModel(), creatureQty);
 	mPlanet = planet;
 }
@@ -74,7 +74,8 @@ void Population::initialize(Planet* planet, int creatureQty) {
  * Adds a new creature to the population with the bushiness as a input.
  * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
  */
-void Population::addNewMember(double branchiness, Ogre::Vector3 rootPosition) {
+void Population::addNewMember(const double branchiness,
+		const Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
 		//TODO:Include planet into initializer
@@ -85,7 +86,7 @@ void Population::addNewMember(double branchiness, Ogre::Vector3 rootPosition) {
 
 }
 
-void Population::addMember(Creature* creature) {
+void Population::addMember(Creature* const creature) {
 	mCreatures.push_back(creature);
 	//hand model down to the population model
 	mPopulationModel.addMember(&creature->getCreatureModel());
@@ -99,7 +100,8 @@ void Population::update() {
 }
 
 void Population::reset() {
-	for (std::vector<Creature*>::iterator cit = mCreatures.begin(); cit != mCreatures.end(); cit++) {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end(); cit++) {
 		(*cit)->reset();
 	}
 }

@@ -81,28 +81,28 @@ public:
 	/**
 	 * @brief Initialize the phenotype with the simulation manager handle.
 	 * @details Details
-	 * @param simulationManager The handle of the simulation manager.
+	 * @param simulationManager A handle of the simulation manager.
 	 */
-	void initialize(SimulationManager* simulationManager, Creature* creature);
+	void initialize(SimulationManager* const simulationManager, Creature* const creature);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	void performEmbryogenesis(CreatureModel* creatureModel);
+	void performEmbryogenesis(CreatureModel* const creatureModel);
 
 	/**
 	 * Reset the creature to the way it was born.
 	 * @param position The position of the creature.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the creature without resetting it.
 	 * @param position The position of the creature.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Clone the phenome.

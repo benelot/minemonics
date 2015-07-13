@@ -27,10 +27,18 @@ PlanetModel::PlanetModel() :
 }
 
 PlanetModel::~PlanetModel() {
-	// TODO Auto-generated destructor stub
+	if(mEnvironmentModel){
+		delete mEnvironmentModel;
+	}
+
+	mEpochs.clear();
+
+	if(mEvolutionModel){
+		delete mEvolutionModel;
+	}
 }
 
-void PlanetModel::initialize(EvolutionModel* evolutionModel, EnvironmentModel* environmentModel) {
+void PlanetModel::initialize(EvolutionModel* const evolutionModel, EnvironmentModel* const environmentModel) {
 	mEvolutionModel = evolutionModel;
 	mEnvironmentModel = environmentModel;
 }

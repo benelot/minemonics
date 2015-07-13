@@ -64,9 +64,9 @@ public:
 	 * @param position The creature's position.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(PopulationModel* populationModel,
-			PhenomeModel* phenomeModel, Ogre::Vector3 position,
-			double branchiness);
+	void initialize(PopulationModel* const populationModel,
+			PhenomeModel* const phenomeModel, const Ogre::Vector3 position,
+			const double branchiness);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -76,12 +76,12 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Provides a creature size to scale certain values in compensation for the overall size
@@ -111,14 +111,14 @@ public:
 		return totalVolume;
 	}
 
-	double getFitness();
+	double getFitness() const;
 
 	/**
 	 * Compare the creature model to another creature model.
 	 * @param creature Another creature model.
 	 * @return If the creature model is equal to the other creature model.
 	 */
-	bool equals(const CreatureModel & creature) const;
+	bool equals(const CreatureModel& creature) const;
 
 	/**
 	 * Clone this creature model.
@@ -196,7 +196,7 @@ public:
 		mPhenotypeModel->setDeveloped(developed);
 	}
 
-	const std::vector<Jury*>& getJuries() const {
+	std::vector<Jury*>& getJuries() {
 		return mJuries;
 	}
 
@@ -204,11 +204,11 @@ public:
 		return mFirstName;
 	}
 
-	Ogre::Vector3 const getPosition() const {
+	const Ogre::Vector3 getPosition() const {
 		return mPosition;
 	}
 
-	void setPosition(const Ogre::Vector3& position) {
+	void setPosition(const Ogre::Vector3 position) {
 		mPosition = position;
 	}
 

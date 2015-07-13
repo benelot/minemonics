@@ -92,7 +92,7 @@ public:
 		return mValue;
 	}
 
-	void setValue(double value) {
+	void setValue(const double value) {
 		mReceivedInput = true;
 		mValue = value;
 	}

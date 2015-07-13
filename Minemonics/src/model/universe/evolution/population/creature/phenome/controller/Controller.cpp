@@ -25,7 +25,7 @@ Controller::~Controller() {
 }
 
 
-void Controller::distributeOutput(double output) {
+void Controller::distributeOutput(const double output) {
 	std::vector<ControlInput*>::iterator controlOutputIterator =
 			mControlOutputs.begin();
 	for (; controlOutputIterator != mControlOutputs.end();
@@ -36,12 +36,12 @@ void Controller::distributeOutput(double output) {
 
 
 
-void Controller::addControlInput(ControlOutput* controlOutput)
+void Controller::addControlInput(ControlOutput* const controlOutput)
 {
 		mControlInputs.push_back(controlOutput);
 }
 
-void Controller::addControlOutput(ControlInput* controlInput)
+void Controller::addControlOutput(ControlInput* const controlInput)
 {
 		mControlOutputs.push_back(controlInput);
 }

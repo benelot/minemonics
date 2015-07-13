@@ -36,14 +36,14 @@ EvaluationController::~EvaluationController() {
 	mSimulationManager = NULL;
 }
 
-void EvaluationController::initialize(SimulationManager* simulationManager,
+void EvaluationController::initialize(SimulationManager* const simulationManager,
 		int parallelEvaluationsQty) {
 	mSimulationManager = simulationManager;
 	mParallelEvaluationsQty = parallelEvaluationsQty;
 	mEvaluations.clear();
 }
 
-void EvaluationController::addEvaluation(Evaluation* evaluation) {
+void EvaluationController::addEvaluation(Evaluation* const evaluation) {
 	mEvaluations.push_back(evaluation);
 }
 
@@ -72,7 +72,7 @@ void EvaluationController::scheduleEvaluations() {
 	}
 }
 
-void EvaluationController::update(double timeSinceLastFrame) {
+void EvaluationController::update(const double timeSinceLastFrame) {
 	if (!mPaused) {
 		std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 		for (; eit != mEvaluations.end(); eit++) {

@@ -40,9 +40,9 @@ Planet::~Planet() {
 //	~mPlanetModel()
 }
 
-void Planet::initialize(SimulationManager* simulationManager,
-		Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer,
-		int evaluationTime) {
+void Planet::initialize(SimulationManager* const simulationManager,
+		const Environment::EnvironmentType type, OgreBtDebugDrawer* const debugDrawer,
+		const int evaluationTime) {
 	//create earth evolution
 	mEvolution.initialize(
 			&simulationManager->getUniverse().getEvaluationController(), this,
@@ -67,11 +67,11 @@ void Planet::initialize(SimulationManager* simulationManager,
 			mEnvironment->getEnvironmentModel());
 }
 
-void Planet::addPopulation(Population* population) {
+void Planet::addPopulation(Population* const population) {
 	mEvolution.addPopulation(population);
 }
 
-void Planet::stepPhysics(double timeSinceLastFrame) {
+void Planet::stepPhysics(const double timeSinceLastFrame) {
 	mPlanetModel.getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(
 			timeSinceLastFrame);
 }

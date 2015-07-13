@@ -12,6 +12,8 @@ ControlInput::ControlInput() :
 }
 
 ControlInput::~ControlInput() {
+//	mReceivedInput
+//	mValue
 }
 
 bool ControlInput::equals(const ControlInput& controlInput) const {

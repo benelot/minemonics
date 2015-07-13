@@ -31,10 +31,22 @@ public:
 	ControllerGene();
 	virtual ~ControllerGene();
 
+	/**
+	 * Initialize the controller gene.
+	 */
 	virtual void initialize() = 0;
 
+	/**
+	 * Clone the controller gene.
+	 * @return The clone of the controller gene.
+	 */
 	virtual ControllerGene* clone() = 0;
 
+	/**
+	 * Compare the controller gene to another controller gene.
+	 * @param controllerGene Another controller gene.
+	 * @return If equal.
+	 */
 	bool equals(const ControllerGene& controllerGene) const;
 
 	enum ControllerGeneType {
@@ -46,7 +58,7 @@ public:
 		return mControllerGeneType;
 	}
 
-	void setControllerGeneType(ControllerGeneType controllerGeneType) {
+	void setControllerGeneType(const ControllerGeneType controllerGeneType) {
 		mControllerGeneType = controllerGeneType;
 	}
 

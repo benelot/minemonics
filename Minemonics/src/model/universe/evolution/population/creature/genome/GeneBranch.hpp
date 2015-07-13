@@ -42,7 +42,7 @@ public:
 	 * Initialize the genebranch with
 	 * @param geneBranchType its gene branch type.
 	 */
-	void initialize(GeneBranchType geneBranchType);
+	void initialize(const GeneBranchType geneBranchType);
 
 	/**
 	 * Compare the gene branch to

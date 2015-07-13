@@ -64,7 +64,7 @@ public:
 		return mAmplitude;
 	}
 
-	void setAmplitude(double amplitude) {
+	void setAmplitude(const double amplitude) {
 		mAmplitude = amplitude;
 	}
 
@@ -72,7 +72,7 @@ public:
 		return mFrequency;
 	}
 
-	void setFrequency(double frequency) {
+	void setFrequency(const double frequency) {
 		mFrequency = frequency;
 	}
 
@@ -80,7 +80,7 @@ public:
 		return mXOffset;
 	}
 
-	void setXOffset(double xOffset) {
+	void setXOffset(const double xOffset) {
 		mXOffset = xOffset;
 	}
 
@@ -88,7 +88,7 @@ public:
 		return mYOffset;
 	}
 
-	void setYOffset(double yOffset) {
+	void setYOffset(const double yOffset) {
 		mYOffset = yOffset;
 	}
 

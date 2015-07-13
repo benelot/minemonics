@@ -44,28 +44,28 @@ public:
 	 * @param tframeInA The joint position in reference frame A.
 	 * @param tframeInB The joint position in reference frame B.
 	 */
-	JointBt(btDynamicsWorld* world, btRigidBody* bodyA,
-			btRigidBody* bodyB, const btTransform& tframeInA, const btTransform& tframeInB);
+	JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
+			btRigidBody* const bodyB, const btTransform& tframeInA,
+			const btTransform& tframeInB);
 	virtual ~JointBt();
-
 
 	/**
 	 * Initialize the rotational limit motors.
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	void initializeRotationalLimitMotors(btVector3 maxForces,
-			btVector3 maxSpeeds);
+	void initializeRotationalLimitMotors(const btVector3 maxForces,
+			const btVector3 maxSpeeds);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
 	 */
-	virtual void reset(Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the joint without resetting it.
 	 */
-	virtual void reposition(Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Update the joint bullet physics model.
@@ -137,36 +137,36 @@ public:
 
 	//Accessor methods
 
-	void setLinearLimits(btVector3 linearLowerLimit,
-			btVector3 linearUpperLimit) {
+	void setLinearLimits(const btVector3 linearLowerLimit,
+			const btVector3 linearUpperLimit) {
 		mG6DofJoint.setLinearLowerLimit(linearLowerLimit);
 		mG6DofJoint.setLinearUpperLimit(linearUpperLimit);
 
 	}
 
-	void setAngularLimits(Ogre::Vector3 angularLowerLimit,
-			Ogre::Vector3 angularUpperLimit) {
+	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+			const Ogre::Vector3 angularUpperLimit) {
 		setAngularLimits(OgreBulletUtils::convert(angularLowerLimit),
 				OgreBulletUtils::convert(angularUpperLimit));
 	}
 
-	void setAngularLimits(btVector3 angularLowerLimit,
-			btVector3 angularUpperLimit) {
+	void setAngularLimits(const btVector3 angularLowerLimit,
+			const btVector3 angularUpperLimit) {
 
 		mG6DofJoint.setAngularLowerLimit(angularLowerLimit);
 		mG6DofJoint.setAngularUpperLimit(angularUpperLimit);
 	}
 
-	void setAngularStiffness(double jointPitchStiffness,
-			double jointYawStiffness, double jointRollStiffness) {
+	void setAngularStiffness(const double jointPitchStiffness,
+			const double jointYawStiffness, const double jointRollStiffness) {
 		setJointStiffness(JointPhysics::DOF_PITCH, jointPitchStiffness);
 		setJointStiffness(JointPhysics::DOF_YAW, jointYawStiffness);
 		setJointStiffness(JointPhysics::DOF_ROLL, jointRollStiffness);
 	}
 
-	void setAngularDamping(double springPitchDampingCoefficient,
-			double springYawDampingCoefficient,
-			double springRollDampingCoefficient) {
+	void setAngularDamping(const double springPitchDampingCoefficient,
+			const double springYawDampingCoefficient,
+			const double springRollDampingCoefficient) {
 		setSpringDampingCoefficient(JointPhysics::DOF_PITCH,
 				springPitchDampingCoefficient);
 		setSpringDampingCoefficient(JointPhysics::DOF_YAW,
@@ -175,29 +175,31 @@ public:
 				springRollDampingCoefficient);
 	}
 
-	void setBreakingThreshold(double breakingThreshold) {
+	void setBreakingThreshold(const double breakingThreshold) {
 		mG6DofJoint.setBreakingImpulseThreshold(breakingThreshold);
 	}
 
-	void setJointStiffness(JointPhysics::DegreeOfFreedom index,
-			double stiffness) {
+	void setJointStiffness(const JointPhysics::DegreeOfFreedom index,
+			const double stiffness) {
 		mG6DofJoint.setStiffness(index, stiffness);
 	}
 
-	void enableSpring(JointPhysics::DegreeOfFreedom index, bool enable) {
+	void enableSpring(const JointPhysics::DegreeOfFreedom index,
+			const bool enable) {
 		mG6DofJoint.enableSpring(index, enable);
 	}
 
-	void setSpringDampingCoefficient(JointPhysics::DegreeOfFreedom index,
-			double damping) {
+	void setSpringDampingCoefficient(const JointPhysics::DegreeOfFreedom index,
+			const double damping) {
 		mG6DofJoint.setDamping(index, damping);
 	}
 
 	void setRotationalLimitMotorEnabled(
-			JointPhysics::RotationalDegreeOfFreedom index, bool enable);
+			const JointPhysics::RotationalDegreeOfFreedom index,
+			const bool enable);
 
 	bool isRotationalLimitMotorEnabled(
-			JointPhysics::RotationalDegreeOfFreedom index) {
+			const JointPhysics::RotationalDegreeOfFreedom index) {
 		return mG6DofJoint.getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
@@ -209,18 +211,19 @@ public:
 	}
 
 	double getTargetRotationalVelocity(
-			JointPhysics::RotationalDegreeOfFreedom index) {
+			const JointPhysics::RotationalDegreeOfFreedom index) {
 		return mG6DofJoint.getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
-	void setMaxRotationalForce(JointPhysics::RotationalDegreeOfFreedom index,
-			double maxMotorForce) {
+	void setMaxRotationalForce(
+			const JointPhysics::RotationalDegreeOfFreedom index,
+			const double maxMotorForce) {
 		mG6DofJoint.getRotationalLimitMotor(index)->m_maxMotorForce =
 				maxMotorForce;
 	}
 
 	double getMaxRotationalForce(
-			JointPhysics::RotationalDegreeOfFreedom index) {
+			const JointPhysics::RotationalDegreeOfFreedom index) {
 		return mG6DofJoint.getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 
@@ -228,7 +231,7 @@ public:
 		return mG6DofJoint;
 	}
 
-	std::vector<Motor*> getMotors() {
+	std::vector<Motor*>& getMotors() {
 		return mMotors;
 	}
 

@@ -63,14 +63,14 @@ public:
 	 * @brief Create a randomly generated genome with the branchiness factor defining average number of gene branches.
 	 * @param branchiness The branchiness factor defining average number of gene branches.
 	 */
-	void createRandomGenome(double branchiness);
+	void createRandomGenome(const double branchiness);
 
 	/**
 	 * @brief Compare this mixed genome to another mixed genome.
 	 * @param genome another mixed genome.
 	 * @return If the mixed genome is equal to the other mixed genome.
 	 */
-	bool equals(const MixedGenome & genome) const;
+	bool equals(const MixedGenome& genome) const;
 
 	/**
 	 * Clone the mixed genome.
@@ -146,7 +146,7 @@ public:
 	 * Add random genes with probability.
 	 * @param addProbability The probability of adding a gene.
 	 */
-	virtual void addRandomGenes(double addProbability);
+	virtual void addRandomGenes(const double addProbability);
 
 	/**
 	 * Add a new, randomly generated gene to the genome.
@@ -163,7 +163,7 @@ public:
 	 * @param integrationProbability
 	 * 							The probability of adding new branches.
 	 */
-	virtual void integrateRandomGenes(double integrationProbability);
+	virtual void integrateRandomGenes(const double integrationProbability);
 
 	/**
 	 * Increases the number of branches to other genes of a random gene.
@@ -175,7 +175,7 @@ public:
 	 * @param geneIndex
 	 * 				The gene index in the mixed genome.
 	 */
-	virtual void integrateGene(int geneIndex);
+	virtual void integrateGene(const int geneIndex);
 
 	/**
 	 * @brief Replaces random genes with other random genes.
@@ -183,7 +183,7 @@ public:
 	 * 							The probability of replacing genes.
 	 */
 	virtual void replaceRandomGenesWithRandomGenes(
-			double replacementProbability);
+			const double replacementProbability);
 
 	/**
 	 * Replaces a random gene with another random gene.
@@ -196,14 +196,15 @@ public:
 	 * The new segment specification is not an exact copy of the original, but contains adjustments meant to preserve self-loops in the branching pattern of the body tree.
 	 * A self-loop arises when branch specifications dictate that segments of a particular type should have child segments of the same type. The segment copying mutation preserves this direct recursion in the tree structure when copying a segment specification from one index in the segment specification vector to another.
 	 */
-	virtual void replaceGeneWith(int geneIndex, int replacementIndex);
+	virtual void replaceGeneWith(const int geneIndex,
+			const int replacementIndex);
 
 	/**
 	 * Duplicate random genes with probability.
 	 * @param duplicateProbability
 	 * 							The probability of one gene to be duplicated.
 	 */
-	virtual void duplicateRandomGenes(double duplicateProbability);
+	virtual void duplicateRandomGenes(const double duplicateProbability);
 
 	/**
 	 * Duplicates a random gene.
@@ -215,14 +216,14 @@ public:
 	 * @param geneIndex
 	 * 				The index of the gene to be duplicated.
 	 */
-	virtual void duplicateGene(int geneIndex);
+	virtual void duplicateGene(const int geneIndex);
 
 	/**
 	 * Splits random genes with probability.
 	 * @param splitProbability
 	 * 						The probability to split a gene.
 	 */
-	virtual void splitRandomGenes(double splitProbability);
+	virtual void splitRandomGenes(const double splitProbability);
 
 	/**
 	 * Split a random gene into two of summated equal size.
@@ -242,14 +243,14 @@ public:
 	 *  @param axis
 	 *  			The axis along which the gene should be split.
 	 */
-	virtual void splitGene(int geneIndex, SplitAxis axis);
+	virtual void splitGene(const int geneIndex, const SplitAxis axis);
 
 	/**
 	 * Grow random stubs in the genome with probability.
 	 * @param growProbability
 	 * 					The probability of a gene to be grown.
 	 */
-	virtual void growRandomStubs(double growProbability);
+	virtual void growRandomStubs(const double growProbability);
 
 	/**
 	 * Grow a random stub.
@@ -268,14 +269,14 @@ public:
 	 * @param branchiness
 	 * 				A number branches between 0 and branchiness are grown.
 	 */
-	virtual void growStub(int geneIndex, int branchiness);
+	virtual void growStub(const int geneIndex, const int branchiness);
 
 	/**
 	 * Mutate random genes with probability.
 	 * @param mutationProbability
 	 * 							The probability to mutate a gene.
 	 */
-	virtual void mutateRandomGenes(double mutationProbability);
+	virtual void mutateRandomGenes(const double mutationProbability);
 
 	/**
 	 * Mutate a random gene.
@@ -292,14 +293,14 @@ public:
 	 * @param geneIndex
 	 * 					The index of the gene to be mutated.
 	 */
-	virtual void mutateGene(int geneIndex);
+	virtual void mutateGene(const int geneIndex);
 
 	/**
 	 * Mutate random branches with probability.
 	 * @param mutationProbability
 	 * 							The probability to mutate a branch.
 	 */
-	virtual void mutateRandomBranches(double mutationProbability);
+	virtual void mutateRandomBranches(const double mutationProbability);
 
 	/**
 	 * Mutate a random branch of a random gene.
@@ -311,7 +312,7 @@ public:
 	 * @param geneIndex
 	 * 					The gene index of which a random branch should be mutated.
 	 */
-	virtual void mutateRandomBranchOfGene(int geneIndex);
+	virtual void mutateRandomBranchOfGene(const int geneIndex);
 
 	/**
 	 * Mutate a certain branch of a certain gene.
@@ -320,7 +321,7 @@ public:
 	 * @param branchIndex
 	 * 					The branch index of the branch to be mutated.
 	 */
-	virtual void mutateBranch(int geneIndex, int branchIndex);
+	virtual void mutateBranch(const int geneIndex, const int branchIndex);
 
 	/**
 	 * # Crossover
@@ -333,7 +334,7 @@ public:
 	 * @param fatherGenome
 	 * 					The genome of the father.
 	 */
-	virtual void crossoverRandomly(Genome* fatherGenome);
+	virtual void crossoverRandomly(Genome* const fatherGenome);
 
 	/**
 	 * @brief Crossover with other genome where we keep all genes between motherSegmentStartIndex and motherSegmentEndIndex
@@ -348,15 +349,15 @@ public:
 	 * @param fatherSegmentEndIndex
 	 * 							The segment index in the father genome where the copying ends.
 	 */
-	virtual void crossover(Genome* fathergenome, int motherSegmentStartIndex,
-			int motherSegmentEndIndex, int fatherSegmentStartIndex,
-			int fatherSegmentEndIndex);
+	virtual void crossover(Genome* const fathergenome,
+			const int motherSegmentStartIndex, const int motherSegmentEndIndex,
+			const int fatherSegmentStartIndex, const int fatherSegmentEndIndex);
 
 	/**
 	 * @brief Grafts a random feature from the donor over to this genome.
 	 * @param donor The donor of the feature.
 	 */
-	virtual void graftRandomlyFrom(Genome* donor);
+	virtual void graftRandomlyFrom(Genome* const donor);
 
 	/**
 	 * @brief Grafting copies a feature of the donor over to the receiver beginning
@@ -374,8 +375,8 @@ public:
 	 * @param geneQty
 	 *            Number of genes to copy
 	 */
-	virtual void graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
-			int geneQty);
+	virtual void graftFrom(Genome* const donor, const int attachmentIndex,
+			const int geneIndex, const int geneQty);
 
 	//Accessor methods
 
@@ -383,7 +384,7 @@ public:
 		return mSegmentsDepthLimit;
 	}
 
-	void setSegmentsDepthLimit(int segmentsDepthLimit) {
+	void setSegmentsDepthLimit(const int segmentsDepthLimit) {
 		mSegmentsDepthLimit = segmentsDepthLimit;
 	}
 
@@ -391,7 +392,7 @@ public:
 		return mTotalSegmentQtyLimit;
 	}
 
-	void setTotalSegmentQtyLimit(int totalSegmentQtyLimit) {
+	void setTotalSegmentQtyLimit(const int totalSegmentQtyLimit) {
 		mTotalSegmentQtyLimit = totalSegmentQtyLimit;
 	}
 

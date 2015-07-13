@@ -42,7 +42,9 @@ public:
 
 	virtual ~MorphogeneBranch();
 
-	/**Initialize the morphogene branch.*/
+	/**
+	 * Initialize the morphogene branch.
+	 */
 	void initialize();
 
 	/**
@@ -70,7 +72,7 @@ public:
 		return mBranchGeneType;
 	}
 
-	void setBranchGeneType(int branchGeneType) {
+	void setBranchGeneType(const int branchGeneType) {
 		mBranchGeneType = branchGeneType;
 	}
 
@@ -78,7 +80,7 @@ public:
 		return mFlipped;
 	}
 
-	void setFlipped(bool flipped) {
+	void setFlipped(const bool flipped) {
 		mFlipped = flipped;
 	}
 
@@ -86,7 +88,7 @@ public:
 		return mJointAnchorX;
 	}
 
-	void setJointAnchorX(double jointAnchorX) {
+	void setJointAnchorX(const double jointAnchorX) {
 		mJointAnchorX = jointAnchorX;
 	}
 
@@ -94,7 +96,7 @@ public:
 		return mJointAnchorY;
 	}
 
-	void setJointAnchorY(double jointAnchorY) {
+	void setJointAnchorY(const double jointAnchorY) {
 		mJointAnchorY = jointAnchorY;
 	}
 
@@ -102,7 +104,7 @@ public:
 		return mJointAnchorZ;
 	}
 
-	void setJointAnchorZ(double jointAnchorZ) {
+	void setJointAnchorZ(const double jointAnchorZ) {
 		mJointAnchorZ = jointAnchorZ;
 	}
 
@@ -110,7 +112,7 @@ public:
 		return mJointPitch;
 	}
 
-	void setJointPitch(double jointPitch) {
+	void setJointPitch(const double jointPitch) {
 		mJointPitch = jointPitch;
 	}
 
@@ -118,7 +120,7 @@ public:
 		return mJointRoll;
 	}
 
-	void setJointRoll(double jointRoll) {
+	void setJointRoll(const double jointRoll) {
 		mJointRoll = jointRoll;
 	}
 
@@ -126,7 +128,7 @@ public:
 		return mJointYaw;
 	}
 
-	void setJointYaw(double jointYaw) {
+	void setJointYaw(const double jointYaw) {
 		mJointYaw = jointYaw;
 	}
 
@@ -134,7 +136,7 @@ public:
 		return mMirrored;
 	}
 
-	void setMirrored(bool mirrored) {
+	void setMirrored(const bool mirrored) {
 		mMirrored = mirrored;
 	}
 
@@ -142,7 +144,7 @@ public:
 		return mJointPitchMaxAngle;
 	}
 
-	void setJointPitchMaxAngle(double jointPitchMaxAngle) {
+	void setJointPitchMaxAngle(const double jointPitchMaxAngle) {
 		mJointPitchMaxAngle = jointPitchMaxAngle;
 	}
 
@@ -150,7 +152,7 @@ public:
 		return mJointPitchMinAngle;
 	}
 
-	void setJointPitchMinAngle(double jointPitchMinAngle) {
+	void setJointPitchMinAngle(const double jointPitchMinAngle) {
 		mJointPitchMinAngle = jointPitchMinAngle;
 	}
 
@@ -158,7 +160,7 @@ public:
 		return mJointRollMaxAngle;
 	}
 
-	void setJointRollMaxAngle(double jointRollMaxAngle) {
+	void setJointRollMaxAngle(const double jointRollMaxAngle) {
 		mJointRollMaxAngle = jointRollMaxAngle;
 	}
 
@@ -166,7 +168,7 @@ public:
 		return mJointRollMinAngle;
 	}
 
-	void setJointRollMinAngle(double jointRollMinAngle) {
+	void setJointRollMinAngle(const double jointRollMinAngle) {
 		mJointRollMinAngle = jointRollMinAngle;
 	}
 
@@ -174,7 +176,7 @@ public:
 		return mJointYawMaxAngle;
 	}
 
-	void setJointYawMaxAngle(double jointYawMaxAngle) {
+	void setJointYawMaxAngle(const double jointYawMaxAngle) {
 		mJointYawMaxAngle = jointYawMaxAngle;
 	}
 
@@ -182,7 +184,7 @@ public:
 		return mJointYawMinAngle;
 	}
 
-	void setJointYawMinAngle(double jointYawMinAngle) {
+	void setJointYawMinAngle(const double jointYawMinAngle) {
 		mJointYawMinAngle = jointYawMinAngle;
 	}
 
@@ -198,7 +200,7 @@ public:
 		return mJointRollStiffness;
 	}
 
-	void setJointRollStiffness(double jointRollStiffness) {
+	void setJointRollStiffness(const double jointRollStiffness) {
 		mJointRollStiffness = jointRollStiffness;
 	}
 
@@ -206,7 +208,7 @@ public:
 		return mJointYawStiffness;
 	}
 
-	void setJointYawStiffness(double jointYawStiffness) {
+	void setJointYawStiffness(const double jointYawStiffness) {
 		mJointYawStiffness = jointYawStiffness;
 	}
 
@@ -215,7 +217,7 @@ public:
 	}
 
 	void setSpringPitchDampingCoefficient(
-			double springPitchDampingCoefficient) {
+			const double springPitchDampingCoefficient) {
 		mSpringPitchDampingCoefficient = springPitchDampingCoefficient;
 	}
 
@@ -223,7 +225,7 @@ public:
 		return mSpringRollDampingCoefficient;
 	}
 
-	void setSpringRollDampingCoefficient(double springRollDampingCoefficient) {
+	void setSpringRollDampingCoefficient(const double springRollDampingCoefficient) {
 		mSpringRollDampingCoefficient = springRollDampingCoefficient;
 	}
 
@@ -231,7 +233,7 @@ public:
 		return mSpringYawDampingCoefficient;
 	}
 
-	void setSpringYawDampingCoefficient(double springYawDampingCoefficient) {
+	void setSpringYawDampingCoefficient(const double springYawDampingCoefficient) {
 		mSpringYawDampingCoefficient = springYawDampingCoefficient;
 	}
 
@@ -239,7 +241,7 @@ public:
 		return mJointPitchMotorEnabled;
 	}
 
-	void setJointPitchMotorEnabled(bool jointPitchMotorEnabled) {
+	void setJointPitchMotorEnabled(const bool jointPitchMotorEnabled) {
 		mJointPitchMotorEnabled = jointPitchMotorEnabled;
 	}
 
@@ -247,7 +249,7 @@ public:
 		return mJointRollMotorEnabled;
 	}
 
-	void setJointRollMotorEnabled(bool jointRollMotorEnabled) {
+	void setJointRollMotorEnabled(const bool jointRollMotorEnabled) {
 		mJointRollMotorEnabled = jointRollMotorEnabled;
 	}
 
@@ -255,7 +257,7 @@ public:
 		return mJointYawMotorEnabled;
 	}
 
-	void setJointYawMotorEnabled(bool jointYawMotorEnabled) {
+	void setJointYawMotorEnabled(const bool jointYawMotorEnabled) {
 		mJointYawMotorEnabled = jointYawMotorEnabled;
 	}
 
@@ -263,7 +265,7 @@ public:
 		return mJointMaxPitchForce;
 	}
 
-	void setJointMaxPitchForce(double jointMaxPitchForce) {
+	void setJointMaxPitchForce(const double jointMaxPitchForce) {
 		mJointMaxPitchForce = jointMaxPitchForce;
 	}
 
@@ -271,7 +273,7 @@ public:
 		return mJointMaxPitchSpeed;
 	}
 
-	void setJointMaxPitchSpeed(double jointMaxPitchSpeed) {
+	void setJointMaxPitchSpeed(const double jointMaxPitchSpeed) {
 		mJointMaxPitchSpeed = jointMaxPitchSpeed;
 	}
 
@@ -279,7 +281,7 @@ public:
 		return mJointMaxRollForce;
 	}
 
-	void setJointMaxRollForce(double jointMaxRollForce) {
+	void setJointMaxRollForce(const double jointMaxRollForce) {
 		mJointMaxRollForce = jointMaxRollForce;
 	}
 
@@ -287,7 +289,7 @@ public:
 		return mJointMaxRollSpeed;
 	}
 
-	void setJointMaxRollSpeed(double jointMaxRollSpeed) {
+	void setJointMaxRollSpeed(const double jointMaxRollSpeed) {
 		mJointMaxRollSpeed = jointMaxRollSpeed;
 	}
 
@@ -295,7 +297,7 @@ public:
 		return mJointMaxYawForce;
 	}
 
-	void setJointMaxYawForce(double jointMaxYawForce) {
+	void setJointMaxYawForce(const double jointMaxYawForce) {
 		mJointMaxYawForce = jointMaxYawForce;
 	}
 
@@ -303,7 +305,7 @@ public:
 		return mJointMaxYawSpeed;
 	}
 
-	void setJointMaxYawSpeed(double jointMaxYawSpeed) {
+	void setJointMaxYawSpeed(const double jointMaxYawSpeed) {
 		mJointMaxYawSpeed = jointMaxYawSpeed;
 	}
 

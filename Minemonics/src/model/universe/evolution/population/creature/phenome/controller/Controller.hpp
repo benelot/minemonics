@@ -55,25 +55,25 @@ public:
 	 * Perform computation in the controller.
 	 * @param timeSinceLastFrame The time passed since the last frame.
 	 */
-	virtual void perform(double timeSinceLastFrame) = 0;
+	virtual void perform(const double timeSinceLastFrame) = 0;
 
 	/**
 	 * Distribute the output among the adjacent controllers or endpoints
 	 * @param output
 	 */
-	virtual void distributeOutput(double output);
+	virtual void distributeOutput(const double output);
 
 	/**
 	 * Add a control input to the controller.
 	 * @param controlOutput The control output of another controller.
 	 */
-	void addControlInput(ControlOutput* controlOutput);
+	void addControlInput(ControlOutput* const controlOutput);
 
 	/**
 	 * Add a control output to the controller.
 	 * @param controlInput The control input of another controller.
 	 */
-	void addControlOutput(ControlInput* controlInput);
+	void addControlOutput(ControlInput* const controlInput);
 
 
 	/**

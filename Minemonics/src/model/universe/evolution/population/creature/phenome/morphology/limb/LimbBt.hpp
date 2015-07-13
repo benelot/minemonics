@@ -53,10 +53,10 @@ public:
 	 * @param dimensions The dimensions of the limb.
 	 * @param mass The mass of the limb.
 	 */
-	void initialize(btDynamicsWorld* world, void* limbModel,
-			LimbModel::PrimitiveType type, btVector3 position,
-			btQuaternion orientation, btVector3 dimensions, btScalar mass,
-			btScalar restitution, btScalar friction);
+	void initialize(btDynamicsWorld* const world, void* const limbModel,
+			const LimbModel::PrimitiveType type, const btVector3 position,
+			const btQuaternion orientation, const btVector3 dimensions, const btScalar mass,
+			const btScalar restitution, const btScalar friction);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -66,12 +66,12 @@ public:
 	/**
 	 * Reset the joint to the place when the creature was born.
 	 */
-	virtual void reset(Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the joint without resetting it.
 	 */
-	virtual void reposition(Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Add the limb to the physical world.
@@ -89,7 +89,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the global reference frame.
 	 */
-	btVector3 getIntersection(btVector3 origin, btVector3 direction);
+	btVector3 getIntersection(const btVector3 origin, const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the global reference frame.
@@ -97,7 +97,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getPreciseIntersection(btVector3 origin, btVector3 direction);
+	btVector3 getPreciseIntersection(const btVector3 origin, const btVector3 direction);
 
 	/**
 	 * Get the fake intersection with the surface in the local reference frame.
@@ -105,7 +105,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The fake intersection in the local reference frame.
 	 */
-	btVector3 getLocalFakeIntersection(btVector3 origin, btVector3 direction);
+	btVector3 getLocalFakeIntersection(const btVector3 origin,const btVector3 direction);
 
 	/**
 	 * Get the intersection in the local reference frame of the indicated origin.
@@ -113,7 +113,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getLocalIntersection(btVector3 origin, btVector3 direction);
+	btVector3 getLocalIntersection(const btVector3 origin,const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the local reference frame of the indicated origin.
@@ -121,20 +121,20 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getLocalPreciseIntersection(btVector3 origin,
-			btVector3 direction);
+	btVector3 getLocalPreciseIntersection(const btVector3 origin,
+			const btVector3 direction);
 
 	//Accessor methods
 
-	btVector3 getPosition() {
+	btVector3 getPosition() const {
 		return mBody->getCenterOfMassPosition();
 	}
 
-	btQuaternion getOrientation() {
+	btQuaternion getOrientation() const {
 		return mBody->getOrientation();
 	}
 
-	btRigidBody* getRigidBody() {
+	btRigidBody* getRigidBody() const {
 		return mBody;
 	}
 

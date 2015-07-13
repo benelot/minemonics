@@ -26,12 +26,12 @@ Evaluation::~Evaluation() {
 	mPopulations.clear();
 }
 
-void Evaluation::initialize(Planet* planet, double evaluationTime) {
+void Evaluation::initialize(Planet* const planet,const double evaluationTime) {
 	mPlanet = planet;
 	mEvaluationModel.initialize(&planet->getPlanetModel(), evaluationTime);
 }
 
-void Evaluation::addPopulation(Population* population) {
+void Evaluation::addPopulation(Population* const population) {
 	mPopulations.push_back(population);
 	mEvaluationModel.addPopulationModel(&(population->getPopulationModel()));
 }
@@ -71,7 +71,7 @@ void Evaluation::teardown() {
 	mEvaluationModel.setTornDown(true);
 }
 
-void Evaluation::update(double timeSinceLastFrame) {
+void Evaluation::update(const double timeSinceLastFrame) {
 
 	//update the planet's environment
 	mPlanet->getEnvironment()->update();

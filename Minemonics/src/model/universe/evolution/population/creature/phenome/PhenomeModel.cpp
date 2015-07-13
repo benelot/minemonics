@@ -758,7 +758,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 	}
 }
 
-void PhenomeModel::reset(Ogre::Vector3 position) {
+void PhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 	for (; it != mLimbModels.end(); it++) {
@@ -767,7 +767,7 @@ void PhenomeModel::reset(Ogre::Vector3 position) {
 	}
 }
 
-void PhenomeModel::reposition(Ogre::Vector3 position) {
+void PhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 	for (; it != mLimbModels.end(); it++) {

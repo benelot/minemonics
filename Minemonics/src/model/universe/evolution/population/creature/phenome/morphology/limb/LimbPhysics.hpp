@@ -139,13 +139,13 @@ public:
 	 * Get the position of the limb in the physical world.
 	 * @return The position of the limb in the physical world.
 	 */
-	virtual btVector3 getPosition() = 0;
+	virtual btVector3 getPosition() const = 0;
 
 	/**
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.
 	 */
-	virtual btQuaternion getOrientation() = 0;
+	virtual btQuaternion getOrientation() const = 0;
 
 	double getInitialRelativeXPosition() const {
 		return mInitialRelativeXPosition;

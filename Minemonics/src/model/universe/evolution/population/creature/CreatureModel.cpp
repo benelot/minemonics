@@ -41,9 +41,9 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	}
 }
 
-void CreatureModel::initialize(PopulationModel* populationModel,
-		PhenomeModel* phenomeModel, Ogre::Vector3 position,
-		double branchiness) {
+void CreatureModel::initialize(PopulationModel* const populationModel,
+		PhenomeModel* const phenomeModel, const Ogre::Vector3 position,
+		const double branchiness) {
 	mPopulationModel = populationModel;
 	mPhenotypeModel = phenomeModel;
 	mInitialPosition = position;
@@ -62,17 +62,17 @@ CreatureModel::~CreatureModel() {
 	}
 }
 
-void CreatureModel::reset(Ogre::Vector3 position) {
+void CreatureModel::reset(const Ogre::Vector3 position) {
 	mInitialPosition = position;
 	mPosition = position;
 }
 
-void CreatureModel::reposition(Ogre::Vector3 position) {
+void CreatureModel::reposition(const Ogre::Vector3 position) {
 	mInitialPosition = position;
 	mPosition = position;
 }
 
-double CreatureModel::getFitness() {
+double CreatureModel::getFitness() const {
 	double fitness = 0;
 	double weight = 1;
 
@@ -87,7 +87,7 @@ double CreatureModel::getFitness() {
 	return 0;
 }
 
-bool CreatureModel::equals(const CreatureModel & creature) const {
+bool CreatureModel::equals(const CreatureModel& creature) const {
 	if (mFirstName != creature.mFirstName) {
 		return false;
 	}

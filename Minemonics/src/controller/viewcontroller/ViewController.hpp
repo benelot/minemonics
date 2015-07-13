@@ -46,26 +46,51 @@ public:
 	ViewController();
 	virtual ~ViewController();
 
-	void initialize(SimulationManager* simulationManager,
-			Ogre::RenderTarget* renderTarget, StateHandler* stateHandler);
+	/**
+	 * Initialize the view controller.
+	 * @param simulationManager A handle to the simulation manager.
+	 * @param renderTarget The render target.
+	 * @param stateHandler The state handler of the simulation.
+	 */
+	void initialize(SimulationManager* const simulationManager,
+			Ogre::RenderTarget* const renderTarget, StateHandler* const stateHandler);
 
-	void update(double timeSinceLastFrame);
+	/**
+	 * Update the view controller.
+	 * @param timeSinceLastFrame The time since the last frame.
+	 */
+	void update(const double timeSinceLastFrame);
 
-	void updatePanels(Ogre::Real timeSinceLastFrame);
+	/**
+	 * Update the panels.
+	 * @param timeSinceLastFrame The time since the last frame.
+	 */
+	void updatePanels(const Ogre::Real timeSinceLastFrame);
 
-	void notifyDisplaySizeChanged(float width, float height);
+	/**
+	 * Notify CEGUI that the display size has changed.
+	 * @param width The new width.
+	 * @param height The new height.
+	 */
+	void notifyDisplaySizeChanged(const float width, const float height);
 
-	void updateMousePosition(float mousePositionX, float mousePositionY);
+	/**
+	 * Update the mouse position.
+	 * @param mousePositionX The new mouse position X.
+	 * @param mousePositionY The new mouse position Y.
+	 */
+	void updateMousePosition(const float mousePositionX,
+			const float mousePositionY);
 
 	//TODO: Implement the view controller to handle what planets are shown.
 	void addPlanet(Planet* planet);
 
 	//Accessor methods
-	ParamsPanel* getDetailsPanel() {
+	ParamsPanel* const getDetailsPanel() const {
 		return mDetailsPanel;
 	}
 
-	ParamsPanel* getFpsPanel() {
+	ParamsPanel* const getFpsPanel() const {
 		return mFpsPanel;
 	}
 
@@ -77,19 +102,19 @@ public:
 		return mInfoOverlay;
 	}
 
-	CEGUI::OgreRenderer* getRenderer() {
+	CEGUI::OgreRenderer* const getRenderer() const {
 		return mRenderer;
 	}
 
-	CEGUI::System* getSystem() {
+	CEGUI::System* const getSystem() const {
 		return mSystem;
 	}
 
-	Evaluation* getEvaluationInView() const {
+	Evaluation* const getEvaluationInView() const {
 		return mEvaluationInView;
 	}
 
-	void setEvaluationInView(Evaluation* evaluationInView) {
+	void setEvaluationInView(Evaluation* const evaluationInView) {
 		mEvaluationInView = evaluationInView;
 	}
 

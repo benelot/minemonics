@@ -39,8 +39,8 @@ public:
 	 * @param type The type of the environment.
 	 * @param debugDrawer The debug drawer of this simulation.
 	 */
-	void initialize(SimulationManager* simulationManager,
-			Environment::EnvironmentType type, OgreBtDebugDrawer* debugDrawer,int evaluationTime);
+	void initialize(SimulationManager* const simulationManager,
+			const Environment::EnvironmentType type, OgreBtDebugDrawer* const debugDrawer,const int evaluationTime);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not yet developed.
@@ -51,7 +51,7 @@ public:
 	 * Add a population to the planet.
 	 * @param population The population to be added to the planet.
 	 */
-	void addPopulation(Population* population);
+	void addPopulation(Population* const population);
 
 	/**
 	 * Draw the debug world if debug drawing is enabled.
@@ -62,7 +62,7 @@ public:
 	 * Step the universe physics forward.
 	 * @param timeSinceLastFrame The size of the time step.
 	 */
-	void stepPhysics(double timeSinceLastFrame);
+	void stepPhysics(const double timeSinceLastFrame);
 
 	/**
 	 * Update the model of the planet.
@@ -88,7 +88,7 @@ public:
 	 * Set the environment of the planet.
 	 * @param environment The environment of the planet.
 	 */
-	void setEnvironment(Environment* environment) {
+	void setEnvironment(Environment* const environment) {
 		mEnvironment = environment;
 	}
 
@@ -96,7 +96,7 @@ public:
 		return mEvolution;
 	}
 
-	void setEvolution(Evolution& evolution) {
+	void setEvolution(const Evolution& evolution) {
 		mEvolution = evolution;
 	}
 

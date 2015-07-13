@@ -28,15 +28,6 @@
  * @author		Benjamin Ellenberger
  */
 class PhysicsController {
-private:
-	//variables for to bullet physics API
-	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
-	btBroadphaseInterface* mBroadphase;
-	btCollisionDispatcher* mDispatcher;
-	btConstraintSolver* mSolver;
-	btDefaultCollisionConfiguration* mCollisionConfiguration;
-	btDynamicsWorld* mDynamicsWorld; //this is the most important class
-
 public:
 
 	enum PhysicsControllerType {
@@ -46,14 +37,36 @@ public:
 	PhysicsController();
 	~PhysicsController();
 
+	/**
+	 * Initialize bullet physics.
+	 */
 	void initBulletPhysics();
+
+	/**
+	 * Exit bullet physics.
+	 */
 	void exitBulletPhysics();
-	void stepBulletPhysics(double timeStep);
 
-	void addBody(btRigidBody* body);
+	/**
+	 * Step bullet physics forward.
+	 * @param timeStep The timestep to move forward.
+	 */
+	void stepBulletPhysics(const double timeStep);
 
-	void removeBody(btRigidBody* body);
+	/**
+	 * Add a bullet rigid body.
+	 * @param body The body to be added.
+	 */
+	void addBody(btRigidBody* const body);
 
+	/**
+	 * Remove a bullet ridig body.
+	 * @param body The body to be removed.
+	 */
+	void removeBody(btRigidBody* const body);
+
+
+	// Accessor methods
 	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}
@@ -90,6 +103,15 @@ public:
 	void setDebugDrawer(OgreBtDebugDrawer* debugDrawer) {
 		mDynamicsWorld->setDebugDrawer(debugDrawer);
 	}
+
+private:
+	//variables for to bullet physics API
+	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
+	btBroadphaseInterface* mBroadphase;
+	btCollisionDispatcher* mDispatcher;
+	btConstraintSolver* mSolver;
+	btDefaultCollisionConfiguration* mCollisionConfiguration;
+	btDynamicsWorld* mDynamicsWorld; //this is the most important class
 
 	/**
 	 * Is the physics simulation paused or not?

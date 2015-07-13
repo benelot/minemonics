@@ -37,8 +37,9 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(int jointMotorIndex, btRotationalLimitMotor* motorBt,
-			double maxForce, double maxSpeed);
+	void initialize(const int jointMotorIndex,
+			btRotationalLimitMotor* const motorBt, const double maxForce,
+			const double maxSpeed);
 	/**
 	 * Clone the servomotor.
 	 * @return The clone of the servo motor.
@@ -53,7 +54,7 @@ public:
 		return mJointMotorIndex;
 	}
 
-	btRotationalLimitMotor* getMotorBt() {
+	btRotationalLimitMotor* getMotorBt() const {
 		return mMotorBt;
 	}
 

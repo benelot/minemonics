@@ -42,27 +42,27 @@ public:
 	 * @param simulationManager The simulation manager handle
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
-	void initialize(Planet* planet, SimulationManager* simulationManager,
-			int creatureQty, Ogre::Vector3 initialPosition);
+	void initialize(Planet* const planet, SimulationManager* const simulationManager,
+			const int creatureQty, const Ogre::Vector3 initialPosition);
 
 	/**
 	 * Initializes the population without adding creatures up to the creatureQty.
 	 * @param planet The planet the population lives on.
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
-	void initialize(Planet* planet, int creatureQty);
+	void initialize(Planet* const planet,const int creatureQty);
 
 	/**
 	 * Adds a new creature to the population with the branchiness as a input.
 	 * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
 	 */
-	void addNewMember(double branchiness, Ogre::Vector3 rootPosition =
+	void addNewMember(const double branchiness,const Ogre::Vector3 rootPosition =
 			Ogre::Vector3::ZERO);
 
 	/**
 	 * Adds a creature to the population.
 	 */
-	void addMember(Creature* creature);
+	void addMember(Creature* const creature);
 
 	/**
 	 * Update the population.
@@ -86,7 +86,7 @@ public:
 
 	//Accessor methods
 
-	std::vector<Creature*> getCreatures() {
+	std::vector<Creature*> getCreatures() const {
 		return mCreatures;
 	}
 

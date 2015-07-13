@@ -16,14 +16,10 @@
 //## view headers
 //## utils headers
 
-
 PlaneModel::PlaneModel() {
-	// TODO Auto-generated constructor stub
-
 }
 
 PlaneModel::~PlaneModel() {
-	// TODO Auto-generated destructor stub
 }
 
 void PlaneModel::initialize() {
@@ -31,7 +27,6 @@ void PlaneModel::initialize() {
 	getPlaneBt()->initialize();
 }
 
-void PlaneModel::update()
-{
+void PlaneModel::update() {
 	mEnvironmentPhysics->update();
 }

@@ -40,10 +40,10 @@ public:
 
 	virtual ~PhenotypeGenerator();
 
-	void initialize(std::map<int, int>& repetitionList, Ogre::Vector3 position,
-			Ogre::Quaternion orientation, ComponentModel* parentComponentModel,
-			GeneBranch* geneBranch, double currentShrinkageFactor,
-			bool flipped = false, bool mirrored = false);
+	void initialize(std::map<int, int>& repetitionList, const Ogre::Vector3 position,
+			const Ogre::Quaternion orientation, ComponentModel* const parentComponentModel,
+			GeneBranch* const geneBranch, const double currentShrinkageFactor,
+			const bool flipped = false, const bool mirrored = false);
 
 	/**
 	 * Clone the phenotype generator.
@@ -52,11 +52,11 @@ public:
 	virtual PhenotypeGenerator* clone();
 
 	//Accessor methods
-	Gene* getGene() {
+	Gene* getGene() const {
 		return mGene;
 	}
 
-	void setGene(Gene* gene) {
+	void setGene(Gene* const gene) {
 		this->mGene = gene;
 	}
 
@@ -64,7 +64,7 @@ public:
 		return mRoot2LeafPath;
 	}
 
-	void setRoot2LeafPath(int root2LeafPath) {
+	void setRoot2LeafPath(const int root2LeafPath) {
 		mRoot2LeafPath = root2LeafPath;
 	}
 
@@ -72,35 +72,35 @@ public:
 		return mRepetitionList;
 	}
 
-	ComponentModel*& getParentComponentModel() {
+	ComponentModel* const getParentComponentModel() const {
 		return mParentComponentModel;
 	}
 
-	void setParentComponentModel(ComponentModel*& parentComponentModel) {
+	void setParentComponentModel(ComponentModel* const parentComponentModel) {
 		mParentComponentModel = parentComponentModel;
 	}
 
-	Ogre::Vector3& getPosition() {
+	Ogre::Vector3 getPosition() const {
 		return mPosition;
 	}
 
-	void setPosition(Ogre::Vector3 position) {
+	void setPosition(const Ogre::Vector3 position) {
 		mPosition = position;
 	}
 
-	Ogre::Quaternion& getOrientation() {
+	Ogre::Quaternion getOrientation() const {
 		return mOrientation;
 	}
 
-	void setOrientation(Ogre::Quaternion orientation) {
+	void setOrientation(const Ogre::Quaternion orientation) {
 		mOrientation = orientation;
 	}
 
-	GeneBranch*& getGeneBranch() {
+	GeneBranch* const getGeneBranch() const {
 		return mGeneBranch;
 	}
 
-	void setGeneBranch(GeneBranch*& geneBranch) {
+	void setGeneBranch(GeneBranch* const geneBranch) {
 		mGeneBranch = geneBranch;
 	}
 
@@ -108,7 +108,7 @@ public:
 		return mCurrentShrinkageFactor;
 	}
 
-	void setCurrentShrinkageFactor(double currentShrinkageFactor) {
+	void setCurrentShrinkageFactor(const double currentShrinkageFactor) {
 		mCurrentShrinkageFactor = currentShrinkageFactor;
 	}
 

@@ -72,8 +72,8 @@ void Joint::initialize(Creature* const creature, Limb* const limbA,
 	update();
 }
 
-void Joint::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
-		Ogre::Vector3 maxSpeeds) {
+void Joint::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
+		const Ogre::Vector3 maxSpeeds) {
 	mJointModel.initializeRotationalLimitMotors(maxForces, maxSpeeds);
 }
 
@@ -98,26 +98,26 @@ void Joint::removeFromWorld() {
 	getJointPhysics()->removeFromWorld();
 }
 
-void Joint::setAngularLimits(Ogre::Vector3 angularLowerLimit,
-		Ogre::Vector3 angularUpperLimit) {
+void Joint::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+		const Ogre::Vector3 angularUpperLimit) {
 	mJointModel.setAngularLimits(angularLowerLimit, angularUpperLimit);
 }
 
-void Joint::setAngularStiffness(double jointPitchStiffness,
-		double jointYawStiffness, double jointRollStiffness) {
+void Joint::setAngularStiffness(const double jointPitchStiffness,
+		const double jointYawStiffness, const double jointRollStiffness) {
 	mJointModel.setAngularStiffness(jointPitchStiffness, jointYawStiffness,
 			jointRollStiffness);
 }
 
-void Joint::setAngularDamping(double springPitchDampingCoefficient,
-		double springYawDampingCoefficient,
-		double springRollDampingCoefficient) {
+void Joint::setAngularDamping(const double springPitchDampingCoefficient,
+		const double springYawDampingCoefficient,
+		const double springRollDampingCoefficient) {
 	mJointModel.setAngularDamping(springPitchDampingCoefficient,
 			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
-void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
-		bool rollEnable) {
+void Joint::enableAngularMotor(const bool pitchEnable, const bool yawEnable,
+		const bool rollEnable) {
 	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
 			pitchEnable);
 	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
@@ -126,11 +126,11 @@ void Joint::enableAngularMotor(bool pitchEnable, bool yawEnable,
 			rollEnable);
 }
 
-void Joint::reset(Ogre::Vector3 position) {
+void Joint::reset(const Ogre::Vector3 position) {
 	mJointModel.reset(position);
 }
 
-void Joint::reposition(Ogre::Vector3 position) {
+void Joint::reposition(const Ogre::Vector3 position) {
 	mJointModel.reposition(position);
 }
 

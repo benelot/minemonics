@@ -48,8 +48,8 @@ class Limb: public Component {
 public:
 	Limb();
 	Limb(const Limb& limb);
-	Limb(SimulationManager* simulationManager, Creature* creature,
-			LimbModel* limbModel);
+	Limb(SimulationManager* const simulationManager, Creature* const creature,
+			LimbModel* const limbModel);
 	virtual ~Limb();
 
 	/**
@@ -66,11 +66,11 @@ public:
 	 * @param color The color of the limb.
 	 * @param ownIndex The limb's own index in the array of limbs.
 	 */
-	void initialize(SimulationManager* simulationManager, Creature* creature,
-			LimbModel::PrimitiveType type, Ogre::Vector3 position,
-			Ogre::Quaternion orientation, Ogre::Vector3 size, double mass,
-			double restitution = 1.0, double friction = 0.8, Ogre::ColourValue color =
-					Ogre::ColourValue(1, 1, 1),int ownIndex = 0);
+	void initialize(SimulationManager* const simulationManager, Creature* const creature,
+			const LimbModel::PrimitiveType type, const Ogre::Vector3 position,
+			const Ogre::Quaternion orientation, const Ogre::Vector3 size, const double mass,
+			const double restitution = 1.0, const double friction = 0.8, const Ogre::ColourValue color =
+					Ogre::ColourValue(1, 1, 1), const int ownIndex = 0);
 
 	/**
 	 * Build a limb from the limb model.
@@ -78,8 +78,8 @@ public:
 	 * @param creature The handle of the creature.
 	 * @param limbModel The model of the limb.
 	 */
-	void buildFrom(SimulationManager* simulationManager, Creature* creature,
-			LimbModel* limbModel);
+	void buildFrom(SimulationManager* const simulationManager, Creature* const creature,
+			LimbModel* const limbModel);
 
 	/**
 	 * Clone the limb.
@@ -90,12 +90,12 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	void reset(Ogre::Vector3 position);
+	void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	void reposition(Ogre::Vector3 position);
+	void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Update the graphical representation of the limb with the physical representation.
@@ -118,8 +118,8 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 */
-	Ogre::Vector3 getIntersection(Ogre::Vector3 origin,
-			Ogre::Vector3 direction);
+	Ogre::Vector3 getIntersection(const Ogre::Vector3 origin,
+			const Ogre::Vector3 direction);
 
 	/**
 	 * Get some information about the limb in a string.
@@ -139,14 +139,14 @@ public:
 	/**
 	 * Get the Graphics part of the limb.
 	 */
-	LimbO3D* getLimbGraphics() const {
+	LimbO3D* const getLimbGraphics() const {
 		return ((LimbO3D*) mLimbGraphics);
 	}
 
 	/**
 	 * Get the Physics part of the limb.
 	 */
-	LimbBt* getLimbPhysics() const {
+	LimbBt* const getLimbPhysics() const {
 		return ((LimbBt*) mLimbModel.getLimbPhysics());
 	}
 

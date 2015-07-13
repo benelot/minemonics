@@ -25,10 +25,22 @@
  */
 class Velocity: public Jury {
 public:
-	Velocity(double weight);
+	Velocity(const double weight);
 	virtual ~Velocity();
 
-	void calculateAvgVelocity(double x2, double y2, double z2, float diffTime);
+	/**
+	 * Calculates the current average velocity.
+	 * @param x2 The new x position.
+	 * @param y2 The new y position.
+	 * @param z2 The new z position.
+	 * @param diffTime The time since the last velocity calculation.
+	 */
+	void calculateAvgVelocity(const double x2, const double y2, const double z2,
+			const float diffTime);
+
+	/**
+	 * Evaluate the fitness.
+	 */
 	void evaluateFitness();
 
 	virtual Velocity* clone();

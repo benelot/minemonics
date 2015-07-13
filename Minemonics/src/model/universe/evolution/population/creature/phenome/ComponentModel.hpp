@@ -45,14 +45,14 @@ public:
 	 * Initialize the component model.
 	 * @param type The type of component.
 	 */
-	void initialize(ComponentType type, int ownIndex);
+	void initialize(const ComponentType type, const int ownIndex);
 
 	/**
 	 * Compare the component model to another component model.
 	 * @param componentModel Another component model.
 	 * @return If the component model is equal to the other component model.
 	 */
-	bool equals(const ComponentModel & componentModel) const;
+	bool equals(const ComponentModel& componentModel) const;
 
 	/**
 	 * Clone the component model.

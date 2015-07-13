@@ -79,10 +79,11 @@ void PhysicsController::exitBulletPhysics() {
 	mCollisionConfiguration = 0;
 }
 
-void PhysicsController::stepBulletPhysics(double timeStep) {
+void PhysicsController::stepBulletPhysics(const double timeStep) {
 	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) //step the simulation
 	{
-		mDynamicsWorld->stepSimulation(timeStep); //1.0f/60.0f);
+		int subSteps = timeStep*60.0f;
+		mDynamicsWorld->stepSimulation(timeStep,subSteps); //1.0f/60.0f);
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
 		if (mPhysicsStepped) {
@@ -92,7 +93,7 @@ void PhysicsController::stepBulletPhysics(double timeStep) {
 	}
 }
 
-void PhysicsController::addBody(btRigidBody* body) {
+void PhysicsController::addBody(btRigidBody* const body) {
 	mCollisionShapes.push_back(body->getCollisionShape());
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
 }

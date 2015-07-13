@@ -160,7 +160,7 @@ public:
 	 * Set whether the phenotype is in the world or not.
 	 * @param inWorld Whether the phenotype is in the world or not.
 	 */
-	void setInWorld(bool inWorld) {
+	void setInWorld(const bool inWorld) {
 		this->mInWorld = inWorld;
 	}
 

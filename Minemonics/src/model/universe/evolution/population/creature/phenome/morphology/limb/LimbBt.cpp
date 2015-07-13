@@ -34,10 +34,10 @@ LimbBt::~LimbBt() {
 	delete mBody;
 }
 
-void LimbBt::initialize(btDynamicsWorld* world, void* limbModel,
-		LimbModel::PrimitiveType type, btVector3 position,
-		btQuaternion orientation, btVector3 dimensions, btScalar mass,
-		btScalar restitution, btScalar friction) {
+void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
+		const LimbModel::PrimitiveType type, const btVector3 position,
+		const btQuaternion orientation, const btVector3 dimensions, const btScalar mass,
+		const btScalar restitution, const btScalar friction) {
 	mWorld = world;
 	mDimensions = dimensions;
 	mMass = mass;
@@ -87,12 +87,13 @@ btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 	return getPreciseIntersection(origin, direction);
 }
 
-btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
-		btVector3 direction) {
+btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
+		const btVector3 direction) {
 	//TODO: Fix raytesting with bullet to get the precise intersection point
-	direction.normalize();
-	direction *= 10000.f;
-	btVector3 rayEnd = origin + direction;
+	btVector3 nDirection = direction;
+	nDirection.normalize();
+	nDirection *= 10000.f;
+	btVector3 rayEnd = origin + nDirection;
 
 	btVector3 hitPosition(0, 0, 0);
 
@@ -124,18 +125,18 @@ btVector3 LimbBt::getPreciseIntersection(btVector3 origin,
 	return origin;
 }
 
-btVector3 LimbBt::getLocalFakeIntersection(btVector3 origin,
-		btVector3 direction) {
+btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
+		const btVector3 direction) {
 	return mDimensions.length() / 2.0f * direction.normalized();
 }
 
-btVector3 LimbBt::getLocalIntersection(btVector3 origin, btVector3 direction) {
+btVector3 LimbBt::getLocalIntersection(const btVector3 origin, const btVector3 direction) {
 	// for the moment we fake the local intersection point until the real intersection can be calculated
 	return getLocalFakeIntersection(origin, direction);
 	//return getLocalPreciseIntersection(origin, direction);
 }
 
-void LimbBt::reset(Ogre::Vector3 position) {
+void LimbBt::reset(const Ogre::Vector3 position) {
 	btTransform initialTransform;
 	mMotionState->getWorldTransform(initialTransform);
 
@@ -156,20 +157,30 @@ void LimbBt::reset(Ogre::Vector3 position) {
 	mMotionState->setWorldTransform(initialTransform);
 }
 
-void LimbBt::reposition(Ogre::Vector3 position) {
-	//TODO: Implement repositioning limbs.
-//	btTransform tf;
-//	btQuaternion qu;
-//	qu.setValue(getInitialRelativeXOrientation(),
-//			getInitialRelativeYOrientation(), getInitialRelativeZOrientation(),
-//			getInitialRelativeWOrientation());
-//	tf.setOrigin(OgreBulletUtils::convert(position) + initialRelativePosition);
-//	tf.setRotation(qu);
-//	mMotionState->setWorldTransform(tf);
+void LimbBt::reposition(const Ogre::Vector3 position) {
+//	TODO: Implement repositioning limbs.
+	btTransform initialTransform;
+	mMotionState->getWorldTransform(initialTransform);
+
+	btVector3 initialRelativePosition;
+	initialRelativePosition.setValue(getInitialRelativeXPosition(),
+			getInitialRelativeYPosition(), getInitialRelativeZPosition());
+
+	btQuaternion initialOrientation;
+	initialOrientation.setValue(getInitialXOrientation(),
+			getInitialYOrientation(), getInitialZOrientation(),
+			getInitialWOrientation());
+
+	initialTransform.setOrigin(
+			OgreBulletUtils::convert(position) + initialRelativePosition);
+	initialTransform.setRotation(initialOrientation);
+
+	mBody->setWorldTransform(initialTransform);
+	mMotionState->setWorldTransform(initialTransform);
 }
 
-btVector3 LimbBt::getLocalPreciseIntersection(btVector3 origin,
-		btVector3 direction) {
+btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
+		const btVector3 direction) {
 	return getPreciseIntersection(origin, direction) - origin;
 }
 

@@ -1,10 +1,3 @@
-/*
- * Component.cpp
- *
- *  Created on: Mar 23, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
@@ -31,7 +24,7 @@ Component::Component() :
 Component::~Component() {
 }
 
-void Component::initialize(ComponentModel* componentModel) {
+void Component::initialize(ComponentModel* const componentModel) {
 
 	mComponentModel = componentModel;
 }

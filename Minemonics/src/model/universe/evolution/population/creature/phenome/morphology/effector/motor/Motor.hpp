@@ -30,13 +30,23 @@ public:
 		MUSCLE, SERVO_MOTOR
 	};
 
-	Motor(MotorType motorType);
+	Motor(const MotorType motorType);
 	~Motor();
 
+	/**
+	 * Initialize the motor.
+	 */
 	void initialize();
 
+	/**
+	 * Clone the motor.
+	 * @return The clone of the motor.
+	 */
 	virtual Motor* clone() = 0;
 
+	/**
+	 * Apply the motor's effect.
+	 */
 	virtual void apply() = 0;
 
 	//Accessor methods
@@ -45,7 +55,7 @@ public:
 		return mMaxForce;
 	}
 
-	void setMaxForce(double maxForce) {
+	void setMaxForce(const double maxForce) {
 		mMaxForce = maxForce;
 	}
 
@@ -53,7 +63,7 @@ public:
 		return mMaxSpeed;
 	}
 
-	void setMaxSpeed(double maxSpeed) {
+	void setMaxSpeed(const double maxSpeed) {
 		mMaxSpeed = maxSpeed;
 	}
 
@@ -61,7 +71,7 @@ public:
 		return mPositionControlled;
 	}
 
-	void setPositionControlled(bool positionControlled) {
+	void setPositionControlled(const bool positionControlled) {
 		mPositionControlled = positionControlled;
 	}
 
@@ -69,7 +79,7 @@ public:
 		return mIndex;
 	}
 
-	void setIndex(int index) {
+	void setIndex(const int index) {
 		mIndex = index;
 	}
 
@@ -77,7 +87,7 @@ public:
 		return mEnabled;
 	}
 
-	void setEnabled(bool enabled) {
+	void setEnabled(const bool enabled) {
 		mEnabled = enabled;
 	}
 

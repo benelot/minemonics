@@ -55,7 +55,7 @@ public:
 	 * Initialize the morphogene defined by the branchiness.
 	 * @param branchiness The branchiness defines the number of branches sprouting out of it.
 	 */
-	void initialize(double branchiness);
+	void initialize(const double branchiness);
 
 	/**
 	 * Mutate the morphogene.
@@ -93,7 +93,7 @@ public:
 		return mColorB;
 	}
 
-	void setColorB(double colorB) {
+	void setColorB(const double colorB) {
 		mColorB = colorB;
 	}
 
@@ -101,7 +101,7 @@ public:
 		return mColorG;
 	}
 
-	void setColorG(double colorG) {
+	void setColorG(const double colorG) {
 		mColorG = colorG;
 	}
 
@@ -109,15 +109,15 @@ public:
 		return mColorR;
 	}
 
-	void setColorR(double colorR) {
+	void setColorR(const double colorR) {
 		mColorR = colorR;
 	}
 
-	const ControllerGene* getControllerGene() {
+	ControllerGene* const getControllerGene() const {
 		return mControllerGene;
 	}
 
-	void setControllerGene(ControllerGene* controllerGene) {
+	void setControllerGene(ControllerGene* const controllerGene) {
 		mControllerGene = controllerGene;
 	}
 
@@ -137,7 +137,7 @@ public:
 		return mJointAnchorX;
 	}
 
-	void setJointAnchorX(double jointAnchorX) {
+	void setJointAnchorX(const double jointAnchorX) {
 		mJointAnchorX = jointAnchorX;
 	}
 
@@ -145,7 +145,7 @@ public:
 		return mJointAnchorY;
 	}
 
-	void setJointAnchorY(double jointAnchorY) {
+	void setJointAnchorY(const double jointAnchorY) {
 		mJointAnchorY = jointAnchorY;
 	}
 
@@ -153,7 +153,7 @@ public:
 		return mJointAnchorZ;
 	}
 
-	void setJointAnchorZ(double jointAnchorZ) {
+	void setJointAnchorZ(const double jointAnchorZ) {
 		mJointAnchorZ = jointAnchorZ;
 	}
 
@@ -161,7 +161,7 @@ public:
 		return mJointPitch;
 	}
 
-	void setJointPitch(double jointPitch) {
+	void setJointPitch(const double jointPitch) {
 		mJointPitch = jointPitch;
 	}
 
@@ -169,7 +169,7 @@ public:
 		return mJointRoll;
 	}
 
-	void setJointRoll(double jointRoll) {
+	void setJointRoll(const double jointRoll) {
 		mJointRoll = jointRoll;
 	}
 
@@ -177,7 +177,7 @@ public:
 		return mJointYaw;
 	}
 
-	void setJointYaw(double jointYaw) {
+	void setJointYaw(const double jointYaw) {
 		mJointYaw = jointYaw;
 	}
 
@@ -185,7 +185,7 @@ public:
 		return mRepetitionLimit;
 	}
 
-	void setRepetitionLimit(int repetitionLimit) {
+	void setRepetitionLimit(const int repetitionLimit) {
 		mRepetitionLimit = repetitionLimit;
 	}
 
@@ -201,7 +201,7 @@ public:
 		return mX;
 	}
 
-	void setX(double x) {
+	void setX(const double x) {
 		mX = x;
 	}
 
@@ -209,7 +209,7 @@ public:
 		return mY;
 	}
 
-	void setY(double y) {
+	void setY(const double y) {
 		mY = y;
 	}
 
@@ -217,7 +217,7 @@ public:
 		return mZ;
 	}
 
-	void setZ(double z) {
+	void setZ(const double z) {
 		mZ = z;
 	}
 
@@ -225,7 +225,7 @@ public:
 		return mPrimitiveType;
 	}
 
-	void setPrimitiveType(LimbModel::PrimitiveType primitiveType) {
+	void setPrimitiveType(const LimbModel::PrimitiveType primitiveType) {
 		mPrimitiveType = primitiveType;
 	}
 
@@ -233,7 +233,7 @@ public:
 		return mOrientationW;
 	}
 
-	void setOrientationW(double orientationW) {
+	void setOrientationW(const double orientationW) {
 		mOrientationW = orientationW;
 	}
 
@@ -249,7 +249,7 @@ public:
 		return mOrientationY;
 	}
 
-	void setOrientationY(double orientationY) {
+	void setOrientationY(const double orientationY) {
 		mOrientationY = orientationY;
 	}
 
@@ -257,7 +257,7 @@ public:
 		return mOrientationZ;
 	}
 
-	void setOrientationZ(double orientationZ) {
+	void setOrientationZ(const double orientationZ) {
 		mOrientationZ = orientationZ;
 	}
 
@@ -265,7 +265,7 @@ public:
 		return mRestitution;
 	}
 
-	void setRestitution(double restitution) {
+	void setRestitution(const double restitution) {
 		mRestitution = restitution;
 	}
 
@@ -273,7 +273,7 @@ public:
 		return mFriction;
 	}
 
-	void setFriction(double friction) {
+	void setFriction(const double friction) {
 		mFriction = friction;
 	}
 

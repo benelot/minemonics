@@ -33,9 +33,10 @@ JointModel::~JointModel() {
 	mJointPhysics = NULL;
 }
 
-void JointModel::initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
-		btRigidBody* const limbB, const btTransform localA, const btTransform localB,const int indexA,
-		const int indexB,const int ownIndex) {
+void JointModel::initialize(btDynamicsWorld* const world,
+		btRigidBody* const limbA, btRigidBody* const limbB,
+		const btTransform localA, const btTransform localB, const int indexA,
+		const int indexB, const int ownIndex) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mIndexA = indexA;
 	mIndexB = indexB;
@@ -62,27 +63,24 @@ void JointModel::setAngularDamping(const double springPitchDampingCoefficient,
 }
 
 bool JointModel::equals(const JointModel& jointModel) const {
-	if(((JointBt*)mJointPhysics)->equals((*(JointBt*)jointModel.mJointPhysics))){
+	if (((JointBt*) mJointPhysics)->equals(
+			(*(JointBt*) jointModel.mJointPhysics))) {
 		return false;
 	}
 
-	if(mIndexA != jointModel.mIndexA)
-	{
+	if (mIndexA != jointModel.mIndexA) {
 		return false;
 	}
 
-	if(mIndexB != jointModel.mIndexB)
-	{
+	if (mIndexB != jointModel.mIndexB) {
 		return false;
 	}
 
-	if(mOwnIndex!=jointModel.mOwnIndex)
-	{
+	if (mOwnIndex != jointModel.mOwnIndex) {
 		return false;
 	}
 
-	if(mComponentType!=jointModel.mComponentType)
-	{
+	if (mComponentType != jointModel.mComponentType) {
 		return false;
 	}
 
@@ -105,8 +103,8 @@ bool JointModel::isStrained() {
 	return mJointPhysics->isStrained();
 }
 
-void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,
-		bool rollEnable) {
+void JointModel::enableAngularMotor(const bool pitchEnable,
+		const bool yawEnable, const bool rollEnable) {
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
 			pitchEnable);
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
@@ -115,8 +113,8 @@ void JointModel::enableAngularMotor(bool pitchEnable, bool yawEnable,
 			rollEnable);
 }
 
-void JointModel::initializeRotationalLimitMotors(Ogre::Vector3 maxForces,
-		Ogre::Vector3 maxSpeeds) {
+void JointModel::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
+		const Ogre::Vector3 maxSpeeds) {
 	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(
 			OgreBulletUtils::convert(maxForces),
 			OgreBulletUtils::convert(maxSpeeds));

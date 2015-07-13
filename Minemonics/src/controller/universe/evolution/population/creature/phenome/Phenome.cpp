@@ -91,8 +91,8 @@ Phenome::~Phenome() {
 	mCreature = NULL;
 }
 
-void Phenome::initialize(SimulationManager* simulationManager,
-		Creature* creature) {
+void Phenome::initialize(SimulationManager* const simulationManager,
+		Creature* const creature) {
 	mSimulationManager = simulationManager;
 	mCreature = creature;
 	mPhenomeModel.initialize(mSimulationManager,
@@ -103,7 +103,7 @@ void Phenome::initialize(SimulationManager* simulationManager,
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
  * @param creatureModel the handle to the creatureModel we want to get back from the physics engine when we pick a creature.
  */
-void Phenome::performEmbryogenesis(CreatureModel* creatureModel) {
+void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 	//perform the embryogenesis in the model
 	mPhenomeModel.performEmbryogenesis(creatureModel);
 
@@ -194,7 +194,7 @@ void Phenome::removeFromWorld() {
 	}
 }
 
-void Phenome::reset(Ogre::Vector3 position) {
+void Phenome::reset(const Ogre::Vector3 position) {
 	mPhenomeModel.reset(position);
 
 	// reset all constraints
@@ -210,7 +210,7 @@ void Phenome::reset(Ogre::Vector3 position) {
 	}
 }
 
-void Phenome::reposition(Ogre::Vector3 position) {
+void Phenome::reposition(const Ogre::Vector3 position) {
 	mPhenomeModel.reposition(position);
 
 	// reset all constraints

@@ -1,12 +1,5 @@
-/*
- * SaveController.h
- *
- *  Created on: Mar 3, 2015
- *      Author: leviathan
- */
-
-#ifndef SAVECONTROLLER_H_
-#define SAVECONTROLLER_H_
+#ifndef CONTROLLER_SAVECONTROLLER_H_
+#define CONTROLLER_SAVECONTROLLER_H_
 
 //# corresponding header
 //# forward declarations
@@ -35,9 +28,9 @@
 #include <utils/logging/Logger.hpp>
 
 /**
- * @brief		Brief
+ * @brief		The template to serialize objects with boost.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-03
  * @author		Benjamin Ellenberger
  */
 template <class T> class SaveController {
@@ -87,7 +80,7 @@ private:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
 					boost::log::attributes::constant<std::string>(
-							"Evaluation"));
+							"SaveController"));
 		}
 	} _initializer;
 };

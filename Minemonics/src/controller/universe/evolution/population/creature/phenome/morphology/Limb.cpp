@@ -2,10 +2,6 @@
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
-
 //# system headers
 //## controller headers
 //## model headers
@@ -47,7 +43,7 @@ BoostLogger Limb::mBoostLogger; /*<! initialize the boost logger*/
 Limb::_Init Limb::_initializer;
 Limb::Limb() :
 		mLimbGraphics(NULL), mCreature(NULL) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Limb created.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Limb created.";
 }
 
 Limb::Limb(const Limb& limb) :
@@ -56,8 +52,8 @@ Limb::Limb(const Limb& limb) :
 	mLimbGraphics = limb.mLimbGraphics->clone();
 }
 
-Limb::Limb(SimulationManager* simulationManager, Creature* creature,
-		LimbModel* limbModel) :
+Limb::Limb(SimulationManager* const simulationManager, Creature* const creature,
+		LimbModel* const limbModel) :
 		mLimbModel(*limbModel) {
 	mCreature = creature;
 
@@ -83,11 +79,11 @@ Limb::~Limb() {
 	mCreature = NULL;
 }
 
-void Limb::initialize(SimulationManager* simulationManager, Creature* creature,
-		LimbModel::PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
-		double restitution, double friction, Ogre::ColourValue color,
-		int ownIndex) {
+void Limb::initialize(SimulationManager* const simulationManager, Creature* const creature,
+		const LimbModel::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation, const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction, const Ogre::ColourValue color,
+		const int ownIndex) {
 
 	//initialize the model of the limb
 	mLimbModel.initialize(
@@ -138,11 +134,11 @@ void Limb::update() {
 	mLimbGraphics->update();
 }
 
-void Limb::reset(Ogre::Vector3 position) {
+void Limb::reset(const Ogre::Vector3 position) {
 	mLimbModel.reset(position);
 }
 
-void Limb::reposition(Ogre::Vector3 position) {
+void Limb::reposition(const Ogre::Vector3 position) {
 	mLimbModel.reposition(position);
 }
 
@@ -185,7 +181,7 @@ void Limb::removeFromWorld() {
 /**
  * Get intersection point with the limb graphics given a straight line defined by origin and direction.
  */
-Ogre::Vector3 Limb::getIntersection(Ogre::Vector3 origin,
-		Ogre::Vector3 direction) {
+Ogre::Vector3 Limb::getIntersection(const Ogre::Vector3 origin,
+		const Ogre::Vector3 direction) {
 	return mLimbGraphics->getIntersection(origin, direction);
 }

@@ -27,7 +27,7 @@ GeneBranch::~GeneBranch() {
 	// TODO Auto-generated destructor stub
 }
 
-void GeneBranch::initialize(GeneBranchType geneBranchType) {
+void GeneBranch::initialize(const GeneBranchType geneBranchType) {
 	mType = geneBranchType;
 }
 

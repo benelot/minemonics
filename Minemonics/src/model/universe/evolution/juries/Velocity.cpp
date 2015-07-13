@@ -1,13 +1,9 @@
-/*
- * Velocity.cpp
- *
- *  Created on: Feb 26, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
-#include <math.h>
 #include <model/universe/evolution/juries/Velocity.hpp>
+
+//# forward declarations
+//# system headers
+#include <math.h>
 
 //## controller headers
 //## model headers
@@ -20,6 +16,7 @@
 //## view headers
 //## utils headers
 
+
 Velocity::Velocity(double weight) :
 		Jury(Jury::VELOCITY, weight), mIsFirstTime(true), mAvgVelocity(0), mX(
 				0), mY(0), mZ(0), mTimestamp(0), mSampleQty(0) {
@@ -27,12 +24,21 @@ Velocity::Velocity(double weight) :
 }
 
 Velocity::~Velocity() {
-	// TODO Auto-generated destructor stub
+//	mAvgVelocity
+//	mFitness
+//	mIsFirstTime
+//	mJuryType
+//	mSampleQty
+//	mTimestamp
+//	mWeight
+//	mX
+//	mY
+//	mZ
 }
 
 // the continuously called function
-void Velocity::calculateAvgVelocity(double x2, double y2, double z2,
-		float diffTime) {
+void Velocity::calculateAvgVelocity(const double x2, const double y2,
+		const double z2, const float diffTime) {
 	if (!mIsFirstTime) {
 		double distance = sqrt(
 				pow(x2 - mX, 2) + pow(y2 - mY, 2) + pow(z2 - mZ, 2));
@@ -55,5 +61,5 @@ void Velocity::evaluateFitness() {
 }
 
 Velocity* Velocity::clone() {
-	return NULL;
+	return new Velocity(*this);
 }

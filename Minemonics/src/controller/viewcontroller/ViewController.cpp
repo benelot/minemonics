@@ -51,8 +51,8 @@ ViewController::~ViewController() {
 	// TODO Auto-generated destructor stub
 }
 
-void ViewController::initialize(SimulationManager* simulationManager,
-		Ogre::RenderTarget* renderTarget, StateHandler* stateHandler) {
+void ViewController::initialize(SimulationManager* const simulationManager,
+		Ogre::RenderTarget* const renderTarget, StateHandler* const stateHandler) {
 
 	// CEGUI
 	// with a scene manager and window, we can create a the GUI renderer
@@ -127,24 +127,24 @@ void ViewController::initialize(SimulationManager* simulationManager,
 
 }
 
-void ViewController::update(double timeSinceLastFrame) {
+void ViewController::update(const double timeSinceLastFrame) {
 
 	// update the information overlay
 	mInfoOverlay.update();
 
 }
 
-void ViewController::notifyDisplaySizeChanged(float width, float height) {
+void ViewController::notifyDisplaySizeChanged(const float width, const float height) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
 }
 
-void ViewController::updateMousePosition(float mousePositionX,
-		float mousePositionY) {
+void ViewController::updateMousePosition(const float mousePositionX,
+		const float mousePositionY) {
 	CEGUI::Vector2f mousePos =
 			mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 			mousePositionX - mousePos.d_x, mousePositionY - mousePos.d_y);
 }
 
-void ViewController::addPlanet(Planet* planet) {
+void ViewController::addPlanet(Planet* const planet) {
 }

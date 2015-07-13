@@ -44,7 +44,7 @@ PopulationModel::~PopulationModel() {
  * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void PopulationModel::initialize(PlanetModel* planetModel, int creatureQty) {
+void PopulationModel::initialize(PlanetModel* const planetModel, const int creatureQty) {
 	mPlanetModel = planetModel;
 	mCreatureQty = creatureQty;
 }
@@ -53,7 +53,7 @@ void PopulationModel::initialize(PlanetModel* planetModel, int creatureQty) {
  * Adds a new creature to the population with the bushiness as a input.
  * @param bushiness The bushiness determines the number of gene branches a gene has in this creature's genome.
  */
-void PopulationModel::addMember(CreatureModel* creatureModel) {
+void PopulationModel::addMember(CreatureModel* const creatureModel) {
 	mCreatureModels.push_back(creatureModel);
 	mCreatureQty++;
 }
@@ -63,7 +63,7 @@ void PopulationModel::addMember(CreatureModel* creatureModel) {
  * @param population The population to test for equality.
  * @return If this population and the other are equal.
  */
-bool PopulationModel::equals(const PopulationModel & population) const {
+bool PopulationModel::equals(const PopulationModel& population) const {
 	if (mCreatureQty != population.mCreatureQty) {
 		return false;
 	}

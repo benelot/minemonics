@@ -30,8 +30,8 @@ Creature::Creature() {
 Creature::~Creature() {
 }
 
-void Creature::initialize(SimulationManager* simulationManager,
-		Population* population, Ogre::Vector3 position, double branchiness) {
+void Creature::initialize(SimulationManager* const simulationManager,
+		Population* const population, const Ogre::Vector3 position, const double branchiness) {
 	// set up the creature model
 	mCreatureModel.initialize(&(population->getPopulationModel()), NULL, position,
 			branchiness);
@@ -48,7 +48,7 @@ void Creature::performEmbryogenesis() {
 	mPhenotype.performEmbryogenesis(&this->getCreatureModel());
 }
 
-void Creature::reset(Ogre::Vector3 position) {
+void Creature::reset(const Ogre::Vector3 position) {
 	mCreatureModel.reset(position);
 	mPhenotype.reset(position);
 }
@@ -57,7 +57,7 @@ void Creature::reset() {
 	reset(mCreatureModel.getInitialPosition());
 }
 
-void Creature::reposition(Ogre::Vector3 position) {
+void Creature::reposition(const Ogre::Vector3 position) {
 	mCreatureModel.reposition(position);
 	mPhenotype.reposition(position);
 }

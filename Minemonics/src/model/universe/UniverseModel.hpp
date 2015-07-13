@@ -40,7 +40,7 @@ public:
 	 * Add a planet model to the universe model.
 	 * @param planetModel The planet model to add.
 	 */
-	void addPlanetModel(PlanetModel* planetModel);
+	void addPlanetModel(PlanetModel* const planetModel);
 
 	/**
 	 * Proceed the evaluation.
@@ -48,20 +48,20 @@ public:
 	void proceedEvaluation();
 
 	//Accessor methods
-	std::vector<PlanetModel*>::size_type getCurrentEvaluationPlanetIndex() const {
+	const std::vector<PlanetModel*>::size_type getCurrentEvaluationPlanetIndex() const {
 		return mCurrentEvaluationPlanetIndex;
 	}
 
 	void setCurrentEvaluationPlanetIndex(
-			std::vector<PlanetModel*>::size_type currentEvaluationPlanetIndex) {
+			const std::vector<PlanetModel*>::size_type currentEvaluationPlanetIndex) {
 		mCurrentEvaluationPlanetIndex = currentEvaluationPlanetIndex;
 	}
 
-	const std::vector<EvaluationModel*>& getEvaluationModels() const {
+	std::vector<EvaluationModel*>& getEvaluationModels() {
 		return mEvaluationModels;
 	}
 
-	const std::vector<PlanetModel*>& getPlanetModels() const {
+	std::vector<PlanetModel*>& getPlanetModels() {
 		return mPlanetModels;
 	}
 

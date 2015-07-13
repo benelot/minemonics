@@ -51,7 +51,7 @@ public:
 	 * @param state The state to switch to.
 	 * @return If it switched to the requested state.
 	 */
-	bool requestStateChange(ApplicationState state);
+	bool requestStateChange(const ApplicationState state);
 
 	/**
 	 * Lock the current state.
@@ -68,9 +68,9 @@ public:
 	//Accessor methods
 	ApplicationState getCurrentState();
 
-	void setFrameTime(float ms);
+	void setFrameTime(const float ms);
 
-	inline float getFrameTime() {
+	inline float getFrameTime() const {
 		return mFrameTime;
 	}
 

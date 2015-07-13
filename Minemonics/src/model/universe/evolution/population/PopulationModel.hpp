@@ -48,19 +48,19 @@ public:
 	 * @param planetModel The planet the population lives on.
 	 * @param creatureQty The number of creatures living in the population.
 	 */
-	void initialize(PlanetModel* planetModel,int creatureQty);
+	void initialize(PlanetModel* const planetModel, const int creatureQty);
 
 	/**
 	 * Adds a new creature to the population.
 	 */
-	void addMember(CreatureModel* creatureModel);
+	void addMember(CreatureModel* const creatureModel);
 
 	/**
 	 * Tests if a population is equal to another population.
 	 * @param population The population to test for equality.
 	 * @return If this population and the other are equal.
 	 */
-	bool equals(const PopulationModel & population) const;
+	bool equals(const PopulationModel& population) const;
 
 	/**
 	 * Clone the population.
@@ -107,11 +107,15 @@ public:
 		return mCreatureQty;
 	}
 
-	void setCreatureQty(int creatureQty) {
+	void setCreatureQty(const int creatureQty) {
 		mCreatureQty = creatureQty;
 	}
 
-	std::vector<CreatureModel*> getCreatureModels() const {
+	std::vector<CreatureModel*>& getCreatureModels() {
+		return mCreatureModels;
+	}
+
+	const std::vector<CreatureModel*>& getCreatureModels() const {
 		return mCreatureModels;
 	}
 
@@ -119,7 +123,7 @@ public:
 		return mPlanetModel;
 	}
 
-	void setPlanetModel(PlanetModel* planetModel) {
+	void setPlanetModel(PlanetModel* const planetModel) {
 		mPlanetModel = planetModel;
 	}
 

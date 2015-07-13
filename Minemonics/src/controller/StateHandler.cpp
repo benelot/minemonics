@@ -18,6 +18,9 @@ StateHandler::StateHandler() :
 }
 
 StateHandler::~StateHandler() {
+//	mFrameTime
+//	mLocked
+//	mState
 }
 
 StateHandler::ApplicationState StateHandler::getCurrentState() {
@@ -44,7 +47,7 @@ bool StateHandler::unlockState() {
 		return false;
 }
 
-bool StateHandler::requestStateChange(ApplicationState newState) {
+bool StateHandler::requestStateChange(const ApplicationState newState) {
 	switch (newState) {
 	case StateHandler::GUI:
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to GUI";
@@ -87,7 +90,7 @@ bool StateHandler::requestStateChange(ApplicationState newState) {
 	return false;
 }
 
-void StateHandler::setFrameTime(float ms) {
+void StateHandler::setFrameTime(const float ms) {
 	mFrameTime = ms;
 }
 

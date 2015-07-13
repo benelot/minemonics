@@ -47,7 +47,7 @@ public:
 	 * @param geneType
 	 *				A gene type.
 	 */
-	void initialize(GeneType geneType);
+	void initialize(const GeneType geneType);
 
 	/**
 	 * Compare gene with another gene.
@@ -72,7 +72,7 @@ public:
 	 * Grow some branches to the gene.
 	 * @param branchiness
 	 */
-	virtual void grow(int branchiness) = 0;
+	virtual void grow(const int branchiness) = 0;
 
 	//Serialization
 
