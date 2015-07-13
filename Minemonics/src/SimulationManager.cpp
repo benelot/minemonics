@@ -80,6 +80,7 @@
 #include <configuration/EnvironmentConfiguration.hpp>
 #include <configuration/OgreSystemConfigStrings.hpp>
 #include <configuration/PopulationConfiguration.hpp>
+#include <configuration/LoggerConfiguration.hpp>
 
 //## controller headers
 #include <controller/universe/environments/Hills.hpp>
@@ -138,7 +139,7 @@ void SimulationManager::createFrameListener(void) {
 void SimulationManager::createScene(void) {
 
 	// Initialize the logger
-	Logger::init("minemonics.log");
+	Logger::init("minemonics.log",LoggerConfiguration::LOGGING_LEVEL);
 	Logger::initTermSink();
 
 	// initialize random number generator
@@ -352,7 +353,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	mRuntime = mNow - mStart;
 
 	// shutdown the application if the application has initiated shutdown
-	if (mWindow->isClosed() || mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) {
+	if (mWindow->isClosed()
+			|| mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) {
 
 		//shutdown the video writer if it is still running
 		if (mVideoWriter.isInitialized()) {
@@ -652,9 +654,9 @@ bool SimulationManager::quit() {
  */
 bool SimulationManager::configure(void) {
 
-	mInputHandler.initialize(&mStateHandler, this);
+	mInputHandler.initialize(this);
 
-	if (SDL_Init( SDL_INIT_EVERYTHING) != 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
 				"Cannot initialize SDL2!", "GraphicsSystem::initialize");
 	}

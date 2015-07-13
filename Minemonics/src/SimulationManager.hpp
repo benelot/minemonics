@@ -69,71 +69,6 @@ class ParamsPanel;
  * @author		Benjamin Ellenberger
  */
 class SimulationManager: public BaseApplication {
-private:
-
-	void updatePhysics(double timeSinceLastFrame);
-
-//	void updateEvolution();
-
-	//## controller components
-
-	// State handler
-	StateHandler mStateHandler;
-
-	// Game component handlers
-	SDL2InputHandler mInputHandler;
-	SDL_Window *mSdlWindow;
-	CameraHandler mCameraHandler;
-
-	//The universe and everything
-	Universe mUniverse;
-
-	//## model components
-	//	int t;
-	//	PopulationT<bool> parents;
-	//	PopulationT<bool> offsprings;
-	//	Ones jury;
-	//
-	//	 //scaling window
-	//	std::vector<double> window;
-
-	//	std::vector<RagDoll*> mRagdolls;
-
-	//## view components
-
-	// timing component
-	boost::posix_time::ptime mStart;
-	boost::posix_time::ptime mNow;
-	boost::posix_time::time_duration mRuntime;
-
-	ViewController mViewController;
-
-	Ogre3DFFMPEGVideoWriter mVideoWriter;
-
-	OgreBtDebugDrawer mDebugDrawer;
-
-	//## Debug components
-	// Logger
-	static BoostLogger mBoostLogger;
-
-	static class _Init {
-	public:
-		_Init() {
-			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"SimulationManager"));
-		}
-	} _initializer;
-
-protected:
-	bool configure(void);
-	virtual void createScene(void);
-	virtual void createFrameListener(void);
-	virtual void destroyScene(void);
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-	void updatePanels(Ogre::Real timeSinceLastFrame);
-	virtual void windowFocusChange(Ogre::RenderWindow* rw);
-
 public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);
@@ -221,6 +156,75 @@ public:
 	ViewController& getViewController() {
 		return mViewController;
 	}
+
+protected:
+	bool configure(void);
+
+	/**
+	 * Create the scene in the simulation manager.
+	 */
+	virtual void createScene(void);
+	virtual void createFrameListener(void);
+	virtual void destroyScene(void);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	void updatePanels(Ogre::Real timeSinceLastFrame);
+	virtual void windowFocusChange(Ogre::RenderWindow* rw);
+
+private:
+
+	void updatePhysics(double timeSinceLastFrame);
+
+//	void updateEvolution();
+
+	//## controller components
+
+	// State handler
+	StateHandler mStateHandler;
+
+	// Game component handlers
+	SDL2InputHandler mInputHandler;
+	SDL_Window *mSdlWindow;
+	CameraHandler mCameraHandler;
+
+	//The universe and everything
+	Universe mUniverse;
+
+	//## model components
+	//	int t;
+	//	PopulationT<bool> parents;
+	//	PopulationT<bool> offsprings;
+	//	Ones jury;
+	//
+	//	 //scaling window
+	//	std::vector<double> window;
+
+	//	std::vector<RagDoll*> mRagdolls;
+
+	//## view components
+
+	// timing component
+	boost::posix_time::ptime mStart;
+	boost::posix_time::ptime mNow;
+	boost::posix_time::time_duration mRuntime;
+
+	ViewController mViewController;
+
+	Ogre3DFFMPEGVideoWriter mVideoWriter;
+
+	OgreBtDebugDrawer mDebugDrawer;
+
+	//## Debug components
+	// Logger
+	static BoostLogger mBoostLogger;
+
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"SimulationManager"));
+		}
+	} _initializer;
 };
 
 #endif // #ifndef __SimulationManager_h_

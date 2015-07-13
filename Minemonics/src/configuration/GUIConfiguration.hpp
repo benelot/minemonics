@@ -1,17 +1,27 @@
-/*
- * GUIConfiguration.hpp
- *
- *  Created on: May 15, 2015
- *      Author: leviathan
- */
-
 #ifndef CONFIGURATION_GUICONFIGURATION_HPP_
 #define CONFIGURATION_GUICONFIGURATION_HPP_
 
+//# corresponding headers
+//# forward declarations
+//# system headers
 #include <string>
 
-/*
- *
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
+/**
+ * @brief		The configuration of the GUI.
+ * @details		Details
+ * @date		2015-05-15
+ * @author		Benjamin Ellenberger
  */
 class GUIConfiguration {
 public:

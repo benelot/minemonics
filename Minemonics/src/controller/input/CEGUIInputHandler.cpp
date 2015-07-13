@@ -38,7 +38,7 @@
 
 //## utils headers
 
-BoostLogger CEGUIInputHandler::mBoostLogger;  /*<! initialize the boost logger*/
+BoostLogger CEGUIInputHandler::mBoostLogger; /*<! initialize the boost logger*/
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
 CEGUIInputHandler::CEGUIInputHandler() :
 		OgreInputHandler(), mCEGUIlastTick(0) {
@@ -49,13 +49,12 @@ CEGUIInputHandler::~CEGUIInputHandler() {
 	//OgreInputHandler is called automatically
 }
 
-void CEGUIInputHandler::initialize(StateHandler* stateHandler,
-		SimulationManager* simulationMgr) {
-	mStateHandler = stateHandler;
+void CEGUIInputHandler::initialize(SimulationManager* simulationMgr) {
+	OgreInputHandler::initialize(simulationMgr);
 }
 
 //-------------------------------------------------------------------------------------
-bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
+bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey::" << key;
 
@@ -127,14 +126,16 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		}
 
 		mSimulationMgr->getCamera()->setPolygonMode(pm);
-		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(10, newVal);
+		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(10,
+				newVal);
 		break;
 	case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
 
 		Ogre::TextureFilterOptions tfo;
 		unsigned int aniso;
 
-		switch (mSimulationMgr->getViewController().getDetailsPanel()->getParamValue(9)[0]) {
+		switch (mSimulationMgr->getViewController().getDetailsPanel()->getParamValue(
+				9)[0]) {
 		case 'B':
 			newVal = "Trilinear";
 			tfo = Ogre::TFO_TRILINEAR;
@@ -158,7 +159,8 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 
 		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
 		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(9, newVal);
+		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(9,
+				newVal);
 		break;
 	case ApplicationKeycode::APPK_y:
 		// return CEGUI::Key::Y;
@@ -188,10 +190,14 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 		if (!mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->isVisible()) {
 			ParamsPanel::VectorStringPairs items;
 			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
-			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(false);
+			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
+					false);
 		} else {
-			bool simple = mSimulationMgr->getViewController().getFpsPanel()->size() == 1;
-			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(true);
+			bool simple =
+					mSimulationMgr->getViewController().getFpsPanel()->size()
+							== 1;
+			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
+					true);
 		}
 		break;
 	case ApplicationKeycode::APPK_g: // toggle visibility of even rarer debugging details
@@ -460,7 +466,7 @@ bool CEGUIInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 }
 
 //-------------------------------------------------------------------------------------
-bool CEGUIInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
+bool CEGUIInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 
 	switch (key) {
 	case ApplicationKeycode::APPK_1:
@@ -795,14 +801,14 @@ bool CEGUIInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 	return OgreInputHandler::keyReleased(key);
 }
 
-void CEGUIInputHandler::injectTimeImpulse(double tick) {
+void CEGUIInputHandler::injectTimeImpulse(const double tick) {
 	/* inject the time that passed since the last call */
 	CEGUI::System::getSingleton().injectTimePulse(float(tick - mCEGUIlastTick));
 	mCEGUIlastTick = tick;
 }
 
 // CEGUI::MouseListener
-bool CEGUIInputHandler::mouseMoved(float x, float y) {
+bool CEGUIInputHandler::mouseMoved(const float x, const float y) {
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
 
@@ -812,7 +818,7 @@ bool CEGUIInputHandler::mouseMoved(float x, float y) {
 }
 
 // CEGUI:MouseWheelListener
-bool CEGUIInputHandler::mouseWheelMoved(float rel) {
+bool CEGUIInputHandler::mouseWheelMoved(const float rel) {
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
 	// Scroll wheel.
@@ -820,8 +826,8 @@ bool CEGUIInputHandler::mouseWheelMoved(float rel) {
 	return OgreInputHandler::mouseWheelMoved(rel);
 }
 
-bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
-	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "MOUSE BUTTON PRESSED" << button;
+bool CEGUIInputHandler::mousePressed(const ApplicationMouseCode::MouseButton button) {
+	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "MOUSE BUTTON PRESSED" << button;
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
 
@@ -833,7 +839,10 @@ bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 			&& button == ApplicationMouseCode::RightButton) {
 		std::vector<MathGLPanel*>::iterator it =
 				mSimulationMgr->getViewController().getGraphWindows().begin();
-		for (; it !=mSimulationMgr->getViewController().getGraphWindows().end(); it++) {
+		for (;
+				it
+						!= mSimulationMgr->getViewController().getGraphWindows().end();
+				it++) {
 			if ((*it)->getMathGlWindow() == window
 					|| (*it)->getMathGlWindow()->getChild("MathGLRTTWindow")
 							== window) {
@@ -848,19 +857,19 @@ bool CEGUIInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 }
 
 bool CEGUIInputHandler::mouseReleased(
-		ApplicationMouseCode::MouseButton button) {
+		const ApplicationMouseCode::MouseButton button) {
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
 	context.injectMouseButtonUp(InputUtils::convertToCEGUI(button));
 	return OgreInputHandler::mouseReleased(button);
 }
 
-void CEGUIInputHandler::windowResized(int width, int height) {
+void CEGUIInputHandler::windowResized(int width, int height) const {
 	CEGUI::System::getSingleton().notifyDisplaySizeChanged(
 			CEGUI::Sizef(width, height));
 }
 
-void CEGUIInputHandler::injectMousePosition(float x, float y) {
+void CEGUIInputHandler::injectMousePosition(const float x, const float y) const {
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
 			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();

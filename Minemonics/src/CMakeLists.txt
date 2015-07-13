@@ -375,6 +375,7 @@ set(MISCHDRS
 	./configuration/OgreSystemConfigStrings.hpp
 	./configuration/CEGUIConfiguration.hpp
 	./configuration/GUIConfiguration.hpp
+	./configuration/LoggerConfiguration.hpp
 	
 	# logger
 	./utils/logging/Logger.hpp

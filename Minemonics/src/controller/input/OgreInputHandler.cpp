@@ -61,8 +61,8 @@ void OgreInputHandler::initialize(SimulationManager* simulationMgr) {
 }
 
 //-------------------------------------------------------------------------------------
-bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
-	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey pressed::" << key;
+bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
+//	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "RawKey pressed::" << key;
 
 	switch (key) {
 	case ApplicationKeycode::APPK_1:
@@ -417,7 +417,7 @@ bool OgreInputHandler::keyPressed(ApplicationKeycode::Keycode key) {
 }
 
 //-------------------------------------------------------------------------------------
-bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
+bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "RawKey released::" << key;
 	Ogre::String newVal;
@@ -749,7 +749,7 @@ bool OgreInputHandler::keyReleased(ApplicationKeycode::Keycode key) {
 }
 
 // CEGUI::MouseListener
-bool OgreInputHandler::mouseMoved(float x, float y) {
+bool OgreInputHandler::mouseMoved(const float x, const float y) const {
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse moved by " << x << "," << y;
 	if (mRightMousePressed) {
 		mSimulationMgr->getCameraHandler().rotate(y, x, 0);
@@ -814,7 +814,7 @@ void OgreInputHandler::stopCameraZDimensionMovement() {
 	mSimulationMgr->getCameraHandler().moveZ(0);
 }
 
-void OgreInputHandler::moveCameraLeft() {
+void OgreInputHandler::moveCameraLeft() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move left!";
 	mSimulationMgr->getCameraHandler().moveX(-1);
 }
@@ -844,7 +844,7 @@ void OgreInputHandler::moveCameraForward() {
 	mSimulationMgr->getCameraHandler().moveZ(-1);
 }
 
-void OgreInputHandler::quitApplication() {
+void OgreInputHandler::quitApplication() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Shutdown application!";
 	mStateHandler->requestStateChange(StateHandler::SHUTDOWN);
 }

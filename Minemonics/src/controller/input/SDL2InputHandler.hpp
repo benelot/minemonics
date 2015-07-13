@@ -1,5 +1,5 @@
-#ifndef SDL2INPUTHANDLER_H_
-#define SDL2INPUTHANDLER_H_
+#ifndef CONTROLLER_INPUT_SDL2INPUTHANDLER_H_
+#define CONTROLLER_INPUT_SDL2INPUTHANDLER_H_
 
 //# corresponding headers
 //# forward declarations
@@ -37,11 +37,9 @@ public:
 
 	/**
 	 * Initialize the SDL2InputHandler.
-	 * @param stateHandler The state handler of the simulation.
 	 * @param simulationMgr The simulation manager of the simulation.
 	 */
-	void initialize(StateHandler* stateHandler,
-			SimulationManager* simulationMgr);
+	void initialize(SimulationManager* const simulationMgr);
 
 	/**
 	 * Inject input into the other layered handlers.
@@ -59,13 +57,13 @@ public:
 	 * Get the mouse X position.
 	 * @return The mouse X position.
 	 */
-	int getMousePositionX();
+	int getMousePositionX() const;
 
 	/**
 	 * Get the mouse Y position.
 	 * @return The mouse Y position.
 	 */
-	int getMousePositionY();
+	int getMousePositionY() const;
 
 private:
 	/**
@@ -96,4 +94,4 @@ private:
 	int mLastMouseY;
 };
 
-#endif /* SDL2INPUTHANDLER_H_ */
+#endif /* CONTROLLER_INPUT_SDL2INPUTHANDLER_H_ */

@@ -44,17 +44,15 @@ public:
 protected:
 	/**
 	 * Initialize the CEGUIInputHandler
-	 * @param stateHandler The statehandler of the application
 	 * @param simulationMgr The simulation manager of the application.
 	 */
-	void initialize(StateHandler* stateHandler,
-			SimulationManager* simulationMgr);
+	void initialize(SimulationManager* const simulationMgr);
 
 	/**
 	 * Inject time impulse to give the input layer a notion of time.
 	 * @param tick Number of ticks that passed.
 	 */
-	void injectTimeImpulse(double tick);
+	void injectTimeImpulse(const double tick);
 
 	// CEGUI::KeyListener
 	/**
@@ -62,14 +60,14 @@ protected:
 	 * @param key The key code of the key
 	 * @return If the key event has been used by the handler.
 	 */
-	bool keyPressed(ApplicationKeycode::Keycode key);
+	bool keyPressed(const ApplicationKeycode::Keycode key);
 
 	/**
 	 * Is triggered if a key is released.
 	 * @param key The key code of the key.
 	 * @return If the key event has been used by the handler.
 	 */
-	bool keyReleased(ApplicationKeycode::Keycode key);
+	bool keyReleased(const ApplicationKeycode::Keycode key);
 
 	// CEGUI::MouseListener
 
@@ -79,42 +77,42 @@ protected:
 	 * @param y How much the mouse moved in y direction.
 	 * @return If the mouse move event has been used by the handler.
 	 */
-	bool mouseMoved(float x, float y);
+	bool mouseMoved(const float x, const float y);
 
 	/**
 	 * Is triggered if the mouse wheel is moved.
 	 * @param rel The movement of the mouse wheel.
 	 * @return If the mouse wheel movement event has been used by the handler.
 	 */
-	bool mouseWheelMoved(float rel);
+	bool mouseWheelMoved(const float rel);
 
 	/**
 	 * Is triggered if a mouse button is pressed.
 	 * @param button The mouse button code.
 	 * @return If the mouse button event has been used by the handler.
 	 */
-	bool mousePressed(ApplicationMouseCode::MouseButton button);
+	bool mousePressed(const ApplicationMouseCode::MouseButton button);
 
 	/**
 	 * Is triggered if a mouse button is released.
 	 * @param button The mouse button code.
 	 * @return If the mouse button event has been used by the handler.
 	 */
-	bool mouseReleased(ApplicationMouseCode::MouseButton button);
+	bool mouseReleased(const ApplicationMouseCode::MouseButton button);
 
 	/**
 	 * Is triggered if the window has been resized.
 	 * @param width The new width of the window.
 	 * @param height The new height of the window.
 	 */
-	void windowResized(int width, int height);
+	void windowResized(const int width, const int height) const;
 
 	/**
 	 * Inject the mouse absolute position.
 	 * @param x The absolute x position of the mouse.
 	 * @param y The absolute y position of the mouse.
 	 */
-	void injectMousePosition(float x, float y);
+	void injectMousePosition(const float x, const float y) const;
 private:
 	/**
 	 * The boost logger.

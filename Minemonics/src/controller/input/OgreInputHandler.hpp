@@ -1,5 +1,5 @@
-#ifndef OGREINPUTHANDLER_H_
-#define OGREINPUTHANDLER_H_
+#ifndef CONTROLLER_INPUT_OGREINPUTHANDLER_H_
+#define CONTROLLER_INPUT_OGREINPUTHANDLER_H_
 
 //# corresponding header
 //# forward declarations
@@ -43,7 +43,7 @@ protected:
 	 * Initialize the Ogre input handler.
 	 * @param simulationMgr A handle to the simulation manager of the simulation.
 	 */
-	void initialize(SimulationManager* simulationMgr);
+	void initialize(SimulationManager* const simulationMgr);
 
 	/**
 	 * Key pressed event handler.
@@ -65,7 +65,7 @@ protected:
 	 * @param y The mouse Y position.
 	 * @return If the mouse move was consumed.
 	 */
-	bool mouseMoved(float x, float y);
+	bool mouseMoved(float x, float y) const;
 
 	/**
 	 * Mouse wheel moved event handler.
@@ -91,7 +91,7 @@ protected:
 	/**
 	 * Quit the application.
 	 */
-	void quitApplication();
+	void quitApplication() const;
 
 private:
 
@@ -113,7 +113,7 @@ private:
 	/**
 	 * Move the camera left.
 	 */
-	void moveCameraLeft();
+	void moveCameraLeft() const;
 
 	/**
 	 * Move the camera up.
@@ -175,4 +175,4 @@ protected:
 	SimulationManager* mSimulationMgr;
 };
 
-#endif /* SDL2INPUTHANDLER_H_ */
+#endif /* CONTROLLER_INPUT_OGREINPUTHANDLER_H_ */
