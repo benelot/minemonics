@@ -320,7 +320,8 @@ void OgreBtDebugDrawer::reportErrorWarning(const char* warningString) {
 
 void OgreBtDebugDrawer::draw3dText(const btVector3 &location,
 		const char *textString) {
-	//Add text to overlay
+	//TODO:Add text to overlay
+//	http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Simple+text
 
 }
 
