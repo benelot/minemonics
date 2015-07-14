@@ -133,6 +133,10 @@ public:
 		return mComponents;
 	}
 
+	const std::vector<Component*>& getComponents() const {
+		return mComponents;
+	}
+
 	/**
 	 * Is the phenotype in the world?
 	 * @return
@@ -152,6 +156,15 @@ public:
 	PhenomeModel& getPhenomeModel() {
 		return mPhenomeModel;
 	}
+
+	const std::vector<Joint*>& getJoints() const {
+		return mJoints;
+	}
+
+	const std::vector<Limb*>& getLimbs() const {
+		return mLimbs;
+	}
+
 
 private:
 	/**

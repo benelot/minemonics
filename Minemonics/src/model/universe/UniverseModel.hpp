@@ -57,11 +57,11 @@ public:
 		mCurrentEvaluationPlanetIndex = currentEvaluationPlanetIndex;
 	}
 
-	std::vector<EvaluationModel*>& getEvaluationModels() {
+	const std::vector<EvaluationModel*>& getEvaluationModels() const {
 		return mEvaluationModels;
 	}
 
-	std::vector<PlanetModel*>& getPlanetModels() {
+	const std::vector<PlanetModel*>& getPlanetModels() const {
 		return mPlanetModels;
 	}
 

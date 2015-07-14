@@ -209,7 +209,7 @@ private:
 	Ogre::ManualObject *mTriangles;
 	Ogre::ManualObject *mTriangles2;
 	Ogre::ManualObject *mTrianglesSwap;
-	std::vector<ContactPoint> *mContactPoints;
+	std::vector<ContactPoint>* mContactPoints;
 	std::vector<ContactPoint> mContactPoints1;
 	std::vector<ContactPoint> mContactPoints2;
 

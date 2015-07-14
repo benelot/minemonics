@@ -75,7 +75,6 @@ public:
 	 */
 	void addControlOutput(ControlInput* const controlInput);
 
-
 	/**
 	 * Compare the controller to another controller.
 	 * @param controller Another controller.
@@ -103,18 +102,18 @@ public:
 		<< "Controller: type=" << controller.mType;
 
 		/**The vector of control inputs.*/
-		std::vector<ControlOutput*>::const_iterator it;
-		for (it = controller.mControlInputs.begin();
+		for (std::vector<ControlOutput*>::const_iterator it =
+				controller.mControlInputs.begin();
 				it != controller.mControlInputs.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		/**The vector of control outputs.*/
-		std::vector<ControlInput*>::const_iterator it1;
-		for (it1 = controller.mControlOutputs.begin();
-				it1 != controller.mControlOutputs.end(); it1++) {
-			os << (**it1);
+		for (std::vector<ControlInput*>::const_iterator it =
+				controller.mControlOutputs.begin();
+				it != controller.mControlOutputs.end(); it++) {
+			os << (**it);
 			os << "||";
 		}
 		return os;

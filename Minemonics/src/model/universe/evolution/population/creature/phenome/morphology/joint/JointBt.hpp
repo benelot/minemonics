@@ -115,8 +115,8 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 			const JointBt & jointBt) {
 		/**The vector of motors.*/
-		std::vector<Motor*>::const_iterator it;
-		for (it = jointBt.mMotors.begin(); it != jointBt.mMotors.end(); it++) {
+		for (std::vector<Motor*>::const_iterator it = jointBt.mMotors.begin();
+				it != jointBt.mMotors.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -231,7 +231,7 @@ public:
 		return mG6DofJoint;
 	}
 
-	std::vector<Motor*>& getMotors() {
+	const std::vector<Motor*>& getMotors() const {
 		return mMotors;
 	}
 

@@ -102,7 +102,7 @@ void ViewController::initialize(SimulationManager* const simulationManager,
 	//					CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
 	//					CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
 
-	std::vector<MathGLPanel*>::iterator it = mGraphWindows.begin();
+	std::vector<MathGLPanel*>::const_iterator it = mGraphWindows.begin();
 	for (; it != mGraphWindows.end(); it++) {
 		mLayout->addChild((*it)->getMathGlWindow());
 	}

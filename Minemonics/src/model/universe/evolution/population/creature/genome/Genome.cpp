@@ -39,8 +39,8 @@ bool Genome::equals(const Genome& genome) const {
 
 	/**Compare the vector of genes.*/
 	std::vector<Gene*>::const_iterator it = mGenes.begin();
-	std::vector<Gene*>::const_iterator it2 = genome.getConstGenes().begin();
-	for (; it != mGenes.end(), it2 != genome.getConstGenes().end();
+	std::vector<Gene*>::const_iterator it2 = genome.getGenes().begin();
+	for (; it != mGenes.end(), it2 != genome.getGenes().end();
 			it++, it2++) {
 		if (!(*it)->equals(**it2)) {
 			return false;

@@ -98,6 +98,10 @@ public:
 		return mGraphWindows;
 	}
 
+	const std::vector<MathGLPanel*>& getGraphWindows() const{
+		return mGraphWindows;
+	}
+
 	const InfoOverlay& getInfoOverlay() const {
 		return mInfoOverlay;
 	}
@@ -116,6 +120,10 @@ public:
 
 	void setEvaluationInView(Evaluation* const evaluationInView) {
 		mEvaluationInView = evaluationInView;
+	}
+
+	const std::vector<Planet*>& getPlanetsInView() const {
+		return mPlanetsInView;
 	}
 
 private:

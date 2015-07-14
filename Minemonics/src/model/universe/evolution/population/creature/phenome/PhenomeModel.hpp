@@ -98,26 +98,27 @@ public:
 		<< "PhenomeModel: isInWorld=" << phenomeModel.mInWorld;
 
 		/**The vector of limb models.*/
-		std::vector<LimbModel*>::const_iterator it;
-		for (it = phenomeModel.mLimbModels.begin();
+
+		for (std::vector<LimbModel*>::const_iterator it =
+				phenomeModel.mLimbModels.begin();
 				it != phenomeModel.mLimbModels.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		/**The vector of joint models.*/
-		std::vector<JointModel*>::const_iterator it2;
-		for (it2 = phenomeModel.mJointModels.begin();
-				it2 != phenomeModel.mJointModels.end(); it2++) {
-			os << (**it2);
+		for (std::vector<JointModel*>::const_iterator it =
+				phenomeModel.mJointModels.begin();
+				it != phenomeModel.mJointModels.end(); it++) {
+			os << (**it);
 			os << "||";
 		}
 
 		/**The vector of controllers.*/
-		std::vector<Controller*>::const_iterator it3;
-		for (it3 = phenomeModel.mControllers.begin();
-				it3 != phenomeModel.mControllers.end(); it3++) {
-			os << (**it3);
+		for (std::vector<Controller*>::const_iterator it =
+				phenomeModel.mControllers.begin();
+				it != phenomeModel.mControllers.end(); it++) {
+			os << (**it);
 			os << "||";
 		}
 
@@ -164,12 +165,8 @@ public:
 		this->mInWorld = inWorld;
 	}
 
-	std::vector<Controller*>& getControllers() {
+	const std::vector<Controller*>& getControllers() const {
 		return mControllers;
-	}
-
-	void setControllers(const std::vector<Controller*>& controllers) {
-		mControllers = controllers;
 	}
 
 	const std::vector<ComponentModel*>& getComponentModels() const {

@@ -121,7 +121,7 @@ public:
 //	virtual void serialize(Archive & ar, const unsigned int /* file_version */) = 0;
 
 	//Accessor methods
-	virtual std::vector<Motor*>& getMotors() = 0;
+	virtual const std::vector<Motor*>& getMotors() const = 0;
 
 	virtual void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 			const Ogre::Vector3 angularUpperLimit) = 0;

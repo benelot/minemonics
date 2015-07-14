@@ -97,11 +97,11 @@ public:
 	 * Provides the total volume of the whole creature body.
 	 * @return The total volume of the whole creature body.
 	 */
-	double getCreatureVolume() {
-		std::vector<Gene*>::const_iterator it;
+	double getCreatureVolume() const {
 		double totalVolume = 0;
-		for (it = mGenotype.getGenes().begin();
-				it != mGenotype.getGenes().end(); it++) {
+		for (std::vector<Gene*>::const_iterator it =
+				mGenotype.getGenes().begin(); it != mGenotype.getGenes().end();
+				it++) {
 			if ((*it)->getType() == Gene::MorphoGene) {
 				totalVolume += ((Morphogene*) *it)->getX()
 						* ((Morphogene*) *it)->getY()
@@ -148,8 +148,7 @@ public:
 		<< "/Phenotype=" << creature.mPhenotypeModel;
 
 		/**The juries of the creature model*/
-		std::vector<Jury*>::const_iterator it;
-		for (it = creature.mJuries.begin(); it != creature.mJuries.end();
+		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin(); it != creature.mJuries.end();
 				it++) {
 			os << (**it);
 			os << "||";
@@ -196,7 +195,7 @@ public:
 		mPhenotypeModel->setDeveloped(developed);
 	}
 
-	std::vector<Jury*>& getJuries() {
+	const std::vector<Jury*>& getJuries() const {
 		return mJuries;
 	}
 

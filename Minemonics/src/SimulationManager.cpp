@@ -232,19 +232,19 @@ void SimulationManager::createScene(void) {
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
-	// create a population
-	Population* earth2Population = new Population();
-	earth2Population->initialize(earth, this, 100,
-			Ogre::Vector3(0, 300, -4000));
-
-	// add earth population to earth
-	earth->addPopulation(earth2Population);
+//	// create a population
+//	Population* earth2Population = new Population();
+//	earth2Population->initialize(earth, this, 100,
+//			Ogre::Vector3(0, 300, -4000));
+//
+//	// add earth population to earth
+//	earth->addPopulation(earth2Population);
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	for (int j = 0; j < 1000; j++) {
 		int i = 0;
-		for (std::vector<CreatureModel*>::iterator cit =
+		for (std::vector<CreatureModel*>::const_iterator cit =
 				earthPopulation->getPopulationModel().getCreatureModels().begin();
 				cit
 						!= earthPopulation->getPopulationModel().getCreatureModels().end()
@@ -276,7 +276,7 @@ void SimulationManager::createScene(void) {
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	for (int j = 0; j < 1000; j++) {
 		int i = 0;
-		for (std::vector<CreatureModel*>::iterator cit =
+		for (std::vector<CreatureModel*>::const_iterator cit =
 				earthPopulation->getPopulationModel().getCreatureModels().begin();
 				cit
 						!= earthPopulation->getPopulationModel().getCreatureModels().end()

@@ -60,16 +60,6 @@ void Reaper::reap(PopulationModel* const population) {
 	int headsToReap = ceil(
 			population->getCreatureModels().size() * mReapPercentage);
 
-	std::cout << "size: " << population->getCreatureModels().size()
-			<< std::endl;
-	int i = 0;
-	for (std::vector<CreatureModel*>::iterator cit =
-			population->getCreatureModels().begin();
-			cit != population->getCreatureModels().end(); cit++) {
-		std::cout << (void *) &(*cit) << ": " << i << std::endl;
-		i++;
-	}
-
 	//TODO: Check whether the sort is descending or ascending
 	std::sort(population->getCreatureModels().begin(),
 			population->getCreatureModels().end(),
@@ -228,7 +218,7 @@ void Reaper::mutateGeneAttributes(PopulationModel* const population,
 	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneAttributeHeads; i++) {
-//TODO: Make correct
+		//TODO: Make correct
 		std::vector<CreatureModel*> tournament;
 		int bestCreatureIndex = 0;
 		int bestFitness = 0;
@@ -256,7 +246,7 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneBranchHeads; i++) {
-//TODO: Make correct
+		//TODO: Make correct
 		std::vector<CreatureModel*> tournament;
 		int bestCreatureIndex = 0;
 		int bestFitness = 0;

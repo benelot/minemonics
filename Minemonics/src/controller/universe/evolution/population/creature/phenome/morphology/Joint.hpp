@@ -142,7 +142,7 @@ public:
 	 * Get the motors of this joint.
 	 * @return The motors of this joint.
 	 */
-	const std::vector<Motor*> getMotors() const {
+	const std::vector<Motor*>& getMotors() const {
 		return mJointModel.getJointPhysics()->getMotors();
 	}
 

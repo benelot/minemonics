@@ -89,6 +89,9 @@ public:
 		return mEvolutionModel;
 	}
 
+	const std::vector<Population*>& getPopulations() const {
+		return mPopulations;
+	}
 private:
 	/**
 	 * The boost logger.

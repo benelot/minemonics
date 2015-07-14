@@ -106,8 +106,8 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 	int tests = 3000;
 	bool endEmbryogenesis = false;
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	SimulationManager::detectError(creatureModel->getPopulationModel(), tests, 0,
-			0);
+	SimulationManager::detectError(creatureModel->getPopulationModel(), tests,
+			0, 0);
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	int whileCounter = 0;
 
@@ -740,8 +740,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 			}
 			// delete the generator of this gene
 //			delete generator;
-			if(endEmbryogenesis)
-			{
+			if (endEmbryogenesis) {
 				break;
 			}
 		}
@@ -760,8 +759,8 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 
 void PhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-	for (; it != mLimbModels.end(); it++) {
+	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+			it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
 
 	}
@@ -769,8 +768,8 @@ void PhenomeModel::reset(const Ogre::Vector3 position) {
 
 void PhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-	for (; it != mLimbModels.end(); it++) {
+	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+			it != mLimbModels.end(); it++) {
 		(*it)->reposition(position);
 
 	}

@@ -78,9 +78,9 @@ TEST_F(GenomeTest,hasNormalGenes) {
 }
 
 TEST_F(GenomeTest,areAllBranchesSet) {
-	std::vector<Morphogene*>::iterator geneIt = genome->getGenes().begin();
+	std::vector<Morphogene*>::const_iterator geneIt = genome->getGenes().begin();
 	for (; geneIt != genome->getGenes().end(); geneIt++) {
-		std::vector<MorphogeneBranch*>::iterator branchIt =
+		std::vector<MorphogeneBranch*>::const_iterator branchIt =
 				(*geneIt)->getGeneBranches().begin();
 		for (; branchIt != (*geneIt)->getGeneBranches().end(); branchIt++) {
 			ASSERT_TRUE((*branchIt)->getBranchGeneType() != -1);

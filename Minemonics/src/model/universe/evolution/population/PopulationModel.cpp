@@ -26,8 +26,9 @@ PopulationModel::PopulationModel(const PopulationModel& populationModel) {
 	mCreatureQty = populationModel.mCreatureQty;
 	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
 
-	std::vector<CreatureModel*>::const_iterator cit = populationModel.getCreatureModels().begin();
-	for(;cit != populationModel.getCreatureModels().end();cit++){
+	for (std::vector<CreatureModel*>::const_iterator cit =
+			populationModel.getCreatureModels().begin();
+			cit != populationModel.getCreatureModels().end(); cit++) {
 		mCreatureModels.push_back((*cit)->clone());
 	}
 }
@@ -44,7 +45,8 @@ PopulationModel::~PopulationModel() {
  * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void PopulationModel::initialize(PlanetModel* const planetModel, const int creatureQty) {
+void PopulationModel::initialize(PlanetModel* const planetModel,
+		const int creatureQty) {
 	mPlanetModel = planetModel;
 	mCreatureQty = creatureQty;
 }

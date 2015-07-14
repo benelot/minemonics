@@ -332,8 +332,8 @@ public:
 		<< "/length=" << genome.mLength;
 
 		/**The vector of genes.*/
-		std::vector<Gene*>::const_iterator it;
-		for (it = genome.mGenes.begin(); it != genome.mGenes.end(); it++) {
+		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
+				it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -360,7 +360,7 @@ public:
 		return mGenes;
 	}
 
-	const std::vector<Gene*>& getConstGenes() const {
+	const std::vector<Gene*>& getGenes() const {
 		return mGenes;
 	}
 

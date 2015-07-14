@@ -72,8 +72,8 @@ void InfoOverlay::update() {
 	}
 	mStatusLabelList.clear();
 
-	std::vector<InfoOverlayData*>::iterator it = mOverlayData.begin();
-	for (; it != mOverlayData.end(); it++) {
+	for (std::vector<InfoOverlayData*>::iterator it = mOverlayData.begin();
+			it != mOverlayData.end(); it++) {
 
 		Ogre::Vector3 pt = mCamera->getProjectionMatrix()
 				* (mCamera->getViewMatrix() * (*it)->getPosition());

@@ -77,6 +77,10 @@ public:
 	 * Get the planets of the universe.
 	 * @return The planets of the universe.
 	 */
+	std::vector<Planet*>& getPlanets() {
+		return mPlanets;
+	}
+
 	const std::vector<Planet*>& getPlanets() const {
 		return mPlanets;
 	}

@@ -86,7 +86,11 @@ public:
 
 	//Accessor methods
 
-	std::vector<Creature*> getCreatures() const {
+	std::vector<Creature*>& getCreatures() {
+		return mCreatures;
+	}
+
+	const std::vector<Creature*>& getCreatures() const {
 		return mCreatures;
 	}
 

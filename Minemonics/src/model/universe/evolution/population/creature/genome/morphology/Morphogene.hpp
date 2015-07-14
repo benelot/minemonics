@@ -133,6 +133,10 @@ public:
 		return mGeneBranches;
 	}
 
+	const std::vector<MorphogeneBranch*>& getGeneBranches() const {
+		return mGeneBranches;
+	}
+
 	double getJointAnchorX() const {
 		return mJointAnchorX;
 	}
@@ -338,8 +342,8 @@ public:
 				/**The gene branches of this gene*/
 				<< "/Gene Branches=";
 
-		std::vector<MorphogeneBranch*>::const_iterator it;
-		for (it = morphogene.mGeneBranches.begin();
+		for (std::vector<MorphogeneBranch*>::const_iterator it =
+				morphogene.mGeneBranches.begin();
 				it != morphogene.mGeneBranches.end(); it++) {
 			os << (**it);
 		}

@@ -81,8 +81,8 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 			const PopulationModel &population) {
 		os << population.mCreatureQty;
-		std::vector<CreatureModel*>::const_iterator it;
-		for (it = population.mCreatureModels.begin();
+		for (std::vector<CreatureModel*>::const_iterator it =
+				population.mCreatureModels.begin();
 				it != population.mCreatureModels.end(); it++) {
 			os << (**it);
 		}

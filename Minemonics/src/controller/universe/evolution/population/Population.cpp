@@ -78,7 +78,6 @@ void Population::addNewMember(const double branchiness,
 		const Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
 		Creature* creature = new Creature();
-		//TODO:Include planet into initializer
 		creature->initialize(mSimulationManager, this, rootPosition,
 				branchiness);
 		addMember(creature);

@@ -67,6 +67,10 @@ public:
 		return mPaused;
 	}
 
+	const std::vector<Evaluation*>& getEvaluations() const {
+		return mEvaluations;
+	}
+
 private:
 	/**
 	 * The boost logger.

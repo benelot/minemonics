@@ -76,27 +76,33 @@ public:
 	bool quit();
 	virtual void windowResized(Ogre::RenderWindow* rw);
 
-	static bool detectError(PopulationModel* populationModel,
-			int numberOfRuns,int identifier,int additionalCounter,bool showNothingFound=true) {
+	static bool detectError(PopulationModel* populationModel, int numberOfRuns,
+			int identifier, int additionalCounter,
+			bool showNothingFound = true) {
 		bool nothingFound = true;
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		for (int j = 0; j < numberOfRuns; j++) {
 			int i = 0;
-			for (std::vector<CreatureModel*>::iterator cit = populationModel->getCreatureModels().begin();
-					cit != populationModel->getCreatureModels().end() && i <= populationModel->getCreatureModels().size(); cit++) {
+			for (std::vector<CreatureModel*>::const_iterator cit =
+					populationModel->getCreatureModels().begin();
+					cit != populationModel->getCreatureModels().end()
+							&& i <= populationModel->getCreatureModels().size();
+					cit++) {
 				i++;
 			}
 			if (i != populationModel->getCreatureModels().size()) {
 				nothingFound = false;
-				std::cout << "Block " << identifier << "::..." << additionalCounter << "/" << j;
-				std::cout << "\nsize: " << populationModel->getCreatureModels().size() << "\t";
+				std::cout << "Block " << identifier << "::..."
+						<< additionalCounter << "/" << j;
+				std::cout << "\nsize: "
+						<< populationModel->getCreatureModels().size() << "\t";
 				std::cout << "size2: >" << i << std::endl;
 				return true;
 			}
 		}
 
-		if(showNothingFound && nothingFound){
+		if (showNothingFound && nothingFound) {
 			std::cout << "Block " << identifier << "::..." << additionalCounter;
 			std::cout << "\nNothing found\n\n";
 			return false;

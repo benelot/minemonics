@@ -214,12 +214,10 @@ void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
 
 void OgreBtDebugDrawer::draw() {
 	if (mDebugDrawingEnabled) {
-		for (std::vector<Line>::iterator i = mExtLines.begin();
-				i < mExtLines.end(); i++) {
-			Line &l = *i;
-			if (l.drawn == true && !mDrawTrajectory) {
-				//mLines.erase(i--);
-			} else {
+		for (std::vector<Line>::iterator elit = mExtLines.begin();
+				elit < mExtLines.end(); elit++) {
+			Line &l = *elit;
+			if (!l.drawn || mDrawTrajectory) {
 				mLines->position(l.from);
 				mLines->colour(l.color);
 				mLines->position(l.to);
@@ -228,12 +226,10 @@ void OgreBtDebugDrawer::draw() {
 			}
 		}
 
-		for (std::vector<Triangle>::iterator i = mExtTriangles.begin();
-				i < mExtTriangles.end(); i++) {
-			Triangle &t = *i;
-			if (t.drawn == true && !mDrawTrajectory) {
-				//mTriangles.erase(i--);
-			} else {
+		for (std::vector<Triangle>::iterator etit = mExtTriangles.begin();
+				etit < mExtTriangles.end(); etit++) {
+			Triangle &t = *etit;
+			if (!t.drawn || mDrawTrajectory) {
 				mLines->position(t.v0);
 				mLines->colour(t.color);
 				mLines->position(t.v1);
@@ -279,14 +275,15 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	std::vector<ContactPoint> *newCP =
 			mContactPoints == &mContactPoints1 ?
 					&mContactPoints2 : &mContactPoints1;
-	for (std::vector<ContactPoint>::iterator i = mContactPoints->begin();
-			i < mContactPoints->end(); i++) {
-		ContactPoint &cp = *i;
+	for (std::vector<ContactPoint>::iterator cit = mContactPoints->begin();
+			cit < mContactPoints->end(); cit++) {
+		ContactPoint &cp = *cit;
 		mLines->position(cp.from);
 		mLines->colour(cp.color);
 		mLines->position(cp.to);
-		if (now <= cp.dieTime)
+		if (now <= cp.dieTime) {
 			newCP->push_back(cp);
+		}
 	}
 	mContactPoints->clear();
 	mContactPoints = newCP;
