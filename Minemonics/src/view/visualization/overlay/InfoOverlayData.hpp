@@ -26,7 +26,7 @@
  */
 class InfoOverlayData {
 public:
-	InfoOverlayData(Ogre::Vector3 position, std::string text);
+	InfoOverlayData(const Ogre::Vector3 position, const std::string text);
 	virtual ~InfoOverlayData();
 
 	const Ogre::Vector3& getPosition() const {

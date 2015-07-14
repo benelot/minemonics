@@ -27,9 +27,9 @@ GUISheetHandler::GUISheetHandler() :
 GUISheetHandler::~GUISheetHandler() {
 }
 
-void GUISheetHandler::initialize(SimulationManager* simulationMgr,
-		CEGUI::System* system, CEGUI::Window* sheet,
-		StateHandler* stateHandler) {
+void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
+		CEGUI::System* const system, CEGUI::Window* const sheet,
+		StateHandler* const stateHandler) {
 
 	mSimulationMgr = simulationMgr;
 	mSystem = system;

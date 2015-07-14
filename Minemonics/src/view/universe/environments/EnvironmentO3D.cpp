@@ -1,10 +1,3 @@
-/*
- * EnvironmentO3D.cpp
- *
- *  Created on: Feb 21, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <SimulationManager.hpp>
 #include <view/universe/environments/EnvironmentO3D.hpp>
@@ -59,7 +52,7 @@ EnvironmentO3D::~EnvironmentO3D() {
 	}
 }
 
-void EnvironmentO3D::initialize(std::string fileName, const Ogre::Light* l) {
+void EnvironmentO3D::initialize(const std::string fileName, const Ogre::Light* const l) {
 	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
 
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(
@@ -169,7 +162,7 @@ void EnvironmentO3D::removeFromWorld() {
 }
 
 //-------------------------------------------------------------------------------------
-void EnvironmentO3D::initBlendMaps(Ogre::Terrain* terrain) {
+void EnvironmentO3D::initBlendMaps(Ogre::Terrain* const terrain) {
 	Ogre::TerrainLayerBlendMap* blendMap0 = terrain->getLayerBlendMap(1);
 	Ogre::TerrainLayerBlendMap* blendMap1 = terrain->getLayerBlendMap(2);
 	Ogre::Real minHeight0 = 70;

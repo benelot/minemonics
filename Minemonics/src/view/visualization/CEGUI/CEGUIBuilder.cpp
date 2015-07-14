@@ -28,7 +28,7 @@
 //## view headers
 //## utils headers
 
-CEGUIBuilder::CEGUIBuilder(SimulationManager* simulationMgr) {
+CEGUIBuilder::CEGUIBuilder(SimulationManager* const simulationMgr) {
 	mSimulationMgr = simulationMgr;
 
 }

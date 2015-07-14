@@ -56,8 +56,8 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 */
-	virtual Ogre::Vector3 getIntersection(Ogre::Vector3 origin,
-			Ogre::Vector3 direction) = 0;
+	virtual Ogre::Vector3 getIntersection(const Ogre::Vector3 origin,
+			const Ogre::Vector3 direction) = 0;
 
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally less expensive than the precise version.
@@ -65,8 +65,8 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
 	 */
-	virtual Ogre::Vector3 getLocalIntersection(Ogre::Vector3 origin,
-			Ogre::Vector3 direction) = 0;
+	virtual Ogre::Vector3 getLocalIntersection(const Ogre::Vector3 origin,
+			const Ogre::Vector3 direction) = 0;
 
 	/**
 	 * Get the precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally more expensive than the non-precise version.
@@ -74,8 +74,8 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
 	 */
-	virtual Ogre::Vector3 getLocalPreciseIntersection(Ogre::Vector3 origin,
-			Ogre::Vector3 direction) = 0;
+	virtual Ogre::Vector3 getLocalPreciseIntersection(const Ogre::Vector3 origin,
+			const Ogre::Vector3 direction) = 0;
 
 	//Accessor methods
 
@@ -87,7 +87,7 @@ public:
 		mPosition = position;
 	}
 
-	Ogre::Quaternion& getOrientation() {
+	const Ogre::Quaternion& getOrientation() {
 		return mOrientation;
 	}
 

@@ -30,9 +30,9 @@ public:
 	InfoOverlay();
 	virtual ~InfoOverlay();
 
-	void initialize(Ogre::Camera* camera);
+	void initialize(Ogre::Camera* const camera);
 
-	void addInfo(InfoOverlayData* data);
+	void addInfo(InfoOverlayData* const data);
 
 	void update();
 

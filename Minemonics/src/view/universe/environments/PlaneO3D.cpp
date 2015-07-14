@@ -16,7 +16,7 @@ PlaneO3D::PlaneO3D(SimulationManager* const simulationMgr) :
 PlaneO3D::~PlaneO3D() {
 }
 
-void PlaneO3D::initialize(const Ogre::Light* l) {
+void PlaneO3D::initialize(const Ogre::Light* const l) {
 	EnvironmentO3D::initialize("PlaneO3D",l);
 	mTerrainPagedWorldSection->setDefiner(OGRE_NEW PlaneTerrainDefiner);
 }

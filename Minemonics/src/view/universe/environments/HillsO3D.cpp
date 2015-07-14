@@ -1,33 +1,17 @@
-/*
- * HillsO3D.cpp
- *
- *  Created on: Feb 12, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <view/universe/environments/HillsO3D.hpp>
 
 //# forward declarations
-
 //# system headers
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 HillsO3D::HillsO3D(SimulationManager* simulationMgr) :

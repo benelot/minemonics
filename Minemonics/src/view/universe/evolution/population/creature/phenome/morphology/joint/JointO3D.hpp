@@ -36,14 +36,30 @@ public:
 
 	virtual ~JointO3D();
 
+	/**
+	 * Initialize the Joint O3D.
+	 */
 	void initialize();
 
+	/**
+	 * Clone the joint O3D.
+	 * @return The clone of the joint O3D.
+	 */
 	virtual JointO3D* clone();
 
+	/**
+	 * Update the joint graphical representation.
+	 */
 	void update();
 
+	/**
+	 * Add the joint to the world.
+	 */
 	void addToWorld();
 
+	/**
+	 * Remove the joint from the world.
+	 */
 	void removeFromWorld();
 
 private:

@@ -1,11 +1,18 @@
-/*
- * InfoPanel.cpp
- *
- *  Created on: May 26, 2015
- *      Author: leviathan
- */
-
+//# corresponding header
 #include <view/visualization/panels/InfoPanel.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 InfoPanel::InfoPanel() {
 	// TODO Auto-generated constructor stub

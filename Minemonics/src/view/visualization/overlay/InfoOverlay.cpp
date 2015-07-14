@@ -44,7 +44,7 @@ InfoOverlay::~InfoOverlay() {
 	}
 }
 
-void InfoOverlay::initialize(Ogre::Camera* camera) {
+void InfoOverlay::initialize(Ogre::Camera* const camera) {
 	// setup LOD info overlay
 	mCamera = camera;
 	mInfoOverlay = Ogre::OverlayManager::getSingleton().create("InfoOverlay");
@@ -60,7 +60,7 @@ void InfoOverlay::initialize(Ogre::Camera* camera) {
 	mInfoOverlay->show();
 }
 
-void InfoOverlay::addInfo(InfoOverlayData* data) {
+void InfoOverlay::addInfo(InfoOverlayData* const data) {
 	mOverlayData.push_back(data);
 }
 

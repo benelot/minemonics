@@ -39,11 +39,11 @@ class TextureTarget;
  */
 class MathGLPanel: public InfoPanel {
 public:
-	MathGLPanel(ViewController* viewController,Ogre::Root* root, int textureWidth,
-			int textureHeight,CEGUI::USize windowSize,CEGUI::USize windowPosition);
+	MathGLPanel(ViewController* const viewController,Ogre::Root* const root,const int textureWidth,
+			const int textureHeight,const CEGUI::USize windowSize,const CEGUI::USize windowPosition);
 	virtual ~MathGLPanel();
 
-	void update(double timeSinceLastFrame);
+	void update(const double timeSinceLastFrame);
 
 	CEGUI::Window*& getMathGlWindow();
 

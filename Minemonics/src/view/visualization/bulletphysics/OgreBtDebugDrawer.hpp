@@ -3,6 +3,13 @@
 
 //# corresponding header
 //# forward declarations
+namespace Ogre {
+class Overlay;
+class OverlayContainer;
+class OverlayManager;
+class TextAreaOverlayElement;
+} /* namespace Ogre */
+
 //# system headers
 #include <stddef.h>
 #include <vector>
@@ -37,21 +44,82 @@ class OgreBtDebugDrawer: public btIDebugDraw, public Ogre::FrameListener {
 public:
 	OgreBtDebugDrawer();
 	~OgreBtDebugDrawer();
-	void initialize(Ogre::SceneManager *scm, bool drawTrajectory);
+
+	/**
+	 * Initialize the Ogre Bullet Debug Drawer.
+	 * @param sceneManager A handle to the scene manager.
+	 * @param drawTrajectory A possibility to draw a trajectory by not deleting lines.
+	 */
+	void initialize(Ogre::SceneManager* const sceneManager, const bool drawTrajectory);
+
+	/**
+	 * Draw a line.
+	 * @param from Starting point of the line.
+	 * @param to Ending point of the line.
+	 * @param color The color of the line.
+	 */
 	virtual void drawLine(const btVector3 &from, const btVector3 &to,
 			const btVector3 &color);
+
+	/**
+	 * Draw a line.
+	 * @param from Starting point of the line.
+	 * @param to Ending point of the line.
+	 * @param color The color of the line.
+	 */
 	void drawLine(const Ogre::Vector3& from, const Ogre::Vector3& to,
-			Ogre::ColourValue color);
+			const Ogre::ColourValue color);
+
+	/**
+	 * Draw a triangle.
+	 * @param v0 First vertex of the triangle.
+	 * @param v1 Second vertex of the triangle.
+	 * @param v2 Third vertex of the triangle.
+	 * @param color The color of the triangle.
+	 * @param alpha The alpha value of the triangle.
+	 */
 	virtual void drawTriangle(const btVector3 &v0, const btVector3 &v1,
-			const btVector3 &v2, const btVector3 &color, btScalar);
+			const btVector3 &v2, const btVector3 &color, const btScalar alpha);
+
+	/**
+	 * Draw a triangle.
+	 * @param v0 First vertex of the triangle.
+	 * @param v1 Second vertex of the triangle.
+	 * @param v2 Third vertex of the triangle.
+	 * @param color The color of the triangle.
+	 * @param alpha The alpha value of the triangle.
+	 */
 	void drawTriangle(const Ogre::Vector3& v0, const Ogre::Vector3& v1,
-			const Ogre::Vector3& v2, Ogre::ColourValue color, Ogre::Real alpha);
+			const Ogre::Vector3& v2, Ogre::ColourValue color, const Ogre::Real alpha);
+
+	/**
+	 * Draw contact point.
+	 * @param PointOnB Point on surface.
+	 * @param normalOnB Normal on surface.
+	 * @param distance Lenght of normal.
+	 * @param lifeTime The lifetime of the contact point until it gets removed.
+	 * @param color The color of the contact point.
+	 */
 	virtual void drawContactPoint(const btVector3 &PointOnB,
 			const btVector3 &normalOnB, btScalar distance, int lifeTime,
 			const btVector3 &color);
+
+	/**
+	 * Draw contact point.
+	 * @param PointOnB Point on surface.
+	 * @param normalOnB Normal on surface.
+	 * @param distance Lenght of normal.
+	 * @param lifeTime The lifetime of the contact point until it gets removed.
+	 * @param color The color of the contact point.
+	 */
 	void drawContactPoint(const Ogre::Vector3& PointOnB,
-			const Ogre::Vector3& normalOnB, Ogre::Real distance, int lifeTime,
+			const Ogre::Vector3& normalOnB, Ogre::Real distance, const int lifeTime,
 			const Ogre::ColourValue& color);
+
+	/**
+	 * Report a warning.
+	 * @param warningString The warning string.
+	 */
 	virtual void reportErrorWarning(const char *warningString);
 	virtual void draw3dText(const btVector3 &location, const char *textString);
 	virtual void setDebugMode(int debugMode);
@@ -150,6 +218,12 @@ private:
 	bool mDrawable;
 
 	bool mDebugDrawingEnabled;
+
+    Ogre::OverlayManager *olm;
+    Ogre::OverlayContainer *panel;
+    Ogre::Overlay *overlay;
+    Ogre::TextAreaOverlayElement *textArea;
+    Ogre::String szElement;
 
 	const char* getMatName() {
 		return "OgreBulletCollisionsDebugDefault";

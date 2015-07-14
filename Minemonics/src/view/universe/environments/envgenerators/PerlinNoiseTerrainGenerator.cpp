@@ -58,7 +58,7 @@ PerlinNoiseTerrainGenerator::PerlinNoiseTerrainGenerator(const Real& alpha, cons
 	}
 }
 
-void PerlinNoiseTerrainGenerator::define( TerrainGroup* terrainGroup, long x, long y )
+void PerlinNoiseTerrainGenerator::define( TerrainGroup* const terrainGroup,const long x,const long y )
 {
 	uint16 terrainSize = terrainGroup->getTerrainSize();
 	float* heightMap = OGRE_ALLOC_T(float, terrainSize*terrainSize, MEMCATEGORY_GEOMETRY);

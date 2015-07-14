@@ -35,8 +35,8 @@ public:
 	GUISheetHandler();
 	~GUISheetHandler();
 
-	void initialize(SimulationManager* simulationmgr, CEGUI::System* system, CEGUI::Window* sheet,
-			StateHandler* stateHandler);
+	void initialize(SimulationManager* const simulationmgr, CEGUI::System* const system, CEGUI::Window* const sheet,
+			StateHandler* const stateHandler);
 
 	// CEGUI event handlers. You can name these whatever you like, as long as they have the proper
 	// signature: bool <method name>(const CEGUI::EventArgs &args)

@@ -4,11 +4,11 @@
 //# forward declarations
 //# system headers
 #include <vector>
+#include <string>
 
 //## controller headers
 //## model headers
 #include <GLX/OgreTimerImp.h>
-#include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
 
 //## view headers
@@ -18,14 +18,19 @@
 #include <OgreManualObject.h>
 #include <OgreMaterial.h>
 #include <OgreMaterialManager.h>
+#include <OgreOverlay.h>
+#include <OgreOverlayContainer.h>
+#include <OgreOverlayElement.h>
+#include <OgreOverlayManager.h>
 #include <OgrePass.h>
-#include <OgrePrerequisites.h>
 #include <OgreRenderOperation.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 #include <OgreSingleton.h>
+#include <OgreStringConverter.h>
 #include <OgreTechnique.h>
+#include <OgreTextAreaOverlayElement.h>
 #include <OgreTextureUnitState.h>
 
 //# custom headers
@@ -40,12 +45,12 @@
 OgreBtDebugDrawer::OgreBtDebugDrawer() :
 		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(false), mClear(
 				0), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
-				NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
-				NULL) {
+		NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
+		NULL), textArea(NULL), olm(NULL), overlay(NULL), panel(NULL) {
 }
 
-void OgreBtDebugDrawer::initialize(Ogre::SceneManager *scm,
-		bool drawTrajectory) {
+void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
+		const bool drawTrajectory) {
 	mDrawTrajectory = drawTrajectory;
 	mContactPoints = &mContactPoints1;
 	mLines = new Ogre::ManualObject("BulletPhysicsLines1");
@@ -61,12 +66,12 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager *scm,
 	//mLines->estimateVertexCount( 100000 );
 	//mLines->estimateIndexCount( 0 );
 
-	scm->getRootSceneNode()->attachObject(mLines);
-	scm->getRootSceneNode()->attachObject(mLines2);
-	scm->getRootSceneNode()->attachObject(mTriangles);
-	scm->getRootSceneNode()->attachObject(mTriangles2);
+	sceneManager->getRootSceneNode()->attachObject(mLines);
+	sceneManager->getRootSceneNode()->attachObject(mLines2);
+	sceneManager->getRootSceneNode()->attachObject(mTriangles);
+	sceneManager->getRootSceneNode()->attachObject(mTriangles2);
 
-	static const char * matName = "OgreBulletCollisionsDebugDefault";
+	static const char* matName = "OgreBulletCollisionsDebugDefault";
 	Ogre::MaterialPtr mtl =
 			Ogre::MaterialManager::getSingleton().getDefaultSettings()->clone(
 					matName);
@@ -80,7 +85,26 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager *scm,
 	mtl->getTechnique(0)->setLightingEnabled(false);
 	//mtl->getTechnique(0)->setSelfIllumination( ColourValue::White );
 
+	//for the ogre text
 	Ogre::Root::getSingleton().addFrameListener(this);
+
+	olm = Ogre::OverlayManager::getSingletonPtr();
+	panel = static_cast<Ogre::OverlayContainer*>(olm->createOverlayElement(
+			"Panel", "GUI"));
+	panel->setMetricsMode(Ogre::GMM_PIXELS);
+	panel->setPosition(0, 0);
+	panel->setDimensions(1.0f, 1.0f);
+	overlay = olm->create("OGREBTDEBUGDRAWER_OVERLAY");
+	overlay->add2D(panel);
+
+	szElement = "element_";
+	overlay = olm->getByName("OGREBTDEBUGDRAWER_OVERLAY");
+	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement("GUI"));
+	textArea =
+			static_cast<Ogre::TextAreaOverlayElement*>(olm->createOverlayElement(
+					"TextArea", szElement));
+	panel->addChild(textArea);
+	overlay->show();
 
 }
 
@@ -88,6 +112,13 @@ OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 	Ogre::Root::getSingleton().removeFrameListener(this);
 	delete mLines;
 	delete mTriangles;
+
+	szElement = "element_";
+	olm->destroyOverlayElement(szElement);
+
+	olm->destroyOverlayElement("GUI");
+	olm->destroy("GUI_OVERLAY");
+
 }
 
 void OgreBtDebugDrawer::drawLine(const btVector3 &from, const btVector3 &to,
@@ -100,7 +131,8 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 		const Ogre::Vector3& to, Ogre::ColourValue color) {
 	if (mDebugMode > 0 && mDebugDrawingEnabled) {
 		if (mDrawable) {
-			color.saturate();
+//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//			color.saturate();
 			mLines->position(from);
 			mLines->colour(color);
 			mLines->position(to);
@@ -108,7 +140,8 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 			draw();
 		} else {
 			Line line;
-			color.saturate();
+//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//			color.saturate();
 			line.color = color;
 			line.from = from;
 			line.to = to;
@@ -119,7 +152,7 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 }
 
 void OgreBtDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
-		const btVector3 &v2, const btVector3 &color, btScalar alpha) {
+		const btVector3 &v2, const btVector3 &color, const btScalar alpha) {
 	drawTriangle(OgreBulletUtils::convert(v0), OgreBulletUtils::convert(v1),
 			OgreBulletUtils::convert(v2),
 			Ogre::ColourValue(color.getX(), color.getY(), color.getZ()),
@@ -128,9 +161,11 @@ void OgreBtDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
 
 void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 		const Ogre::Vector3& v1, const Ogre::Vector3& v2,
-		Ogre::ColourValue color, Ogre::Real alpha) {
+		const Ogre::ColourValue color, const Ogre::Real alpha) {
 	if (mDebugMode > 0 && mDebugDrawingEnabled) {
 		if (mDrawable) {
+//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//			color.saturate();
 			mTriangles->position(v0);
 			mTriangles->colour(color);
 			mTriangles->position(v1);
@@ -140,8 +175,8 @@ void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 			draw();
 		} else {
 			Triangle triangle;
-
-			color.saturate();
+//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//			color.saturate();
 			triangle.color = color;
 			triangle.v0 = v0;
 			triangle.v1 = v1;
@@ -153,18 +188,20 @@ void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 }
 
 void OgreBtDebugDrawer::drawContactPoint(const btVector3 &PointOnB,
-		const btVector3 &normalOnB, btScalar distance, int lifeTime,
-		const btVector3 &color) {
+		const btVector3& normalOnB, const btScalar distance, const int lifeTime,
+		const btVector3& color) {
 	drawContactPoint(OgreBulletUtils::convert(PointOnB),
 			OgreBulletUtils::convert(normalOnB), distance, lifeTime,
 			Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
 }
 
 void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
-		const Ogre::Vector3& normalOnB, Ogre::Real distance, int lifeTime,
-		const Ogre::ColourValue& color) {
+		const Ogre::Vector3& normalOnB, const Ogre::Real distance,
+		const int lifeTime, const Ogre::ColourValue& color) {
 	if ((mDebugMode & btIDebugDraw::DBG_DrawContactPoints)
 			&& mDebugDrawingEnabled) {
+//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//		color.saturate();
 		ContactPoint p;
 		p.from = PointOnB;
 		p.to = p.from + normalOnB * distance;
@@ -277,16 +314,17 @@ bool OgreBtDebugDrawer::frameEnded(const Ogre::FrameEvent& evt) {
 	return true;
 }
 
-void OgreBtDebugDrawer::reportErrorWarning(const char *warningString) {
+void OgreBtDebugDrawer::reportErrorWarning(const char* warningString) {
 	Ogre::LogManager::getSingleton().getDefaultLog()->logMessage(warningString);
 }
 
 void OgreBtDebugDrawer::draw3dText(const btVector3 &location,
 		const char *textString) {
+	//Add text to overlay
 
 }
 
-void OgreBtDebugDrawer::setDebugMode(int debugMode) {
+void OgreBtDebugDrawer::setDebugMode(const int debugMode) {
 	mDebugMode = debugMode;
 }
 
@@ -295,7 +333,7 @@ int OgreBtDebugDrawer::getDebugMode() const {
 }
 
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawAabb(bool enable) {
+void OgreBtDebugDrawer::setDrawAabb(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawAabb;
 	else
@@ -374,7 +412,7 @@ bool OgreBtDebugDrawer::doesEnableCCD() const {
 }
 ;
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawWireframe(bool enable) {
+void OgreBtDebugDrawer::setDrawWireframe(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawWireframe;
 	else
@@ -382,7 +420,7 @@ void OgreBtDebugDrawer::setDrawWireframe(bool enable) {
 }
 
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawConstraints(bool enable) {
+void OgreBtDebugDrawer::setDrawConstraints(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawConstraints;
 	else
@@ -390,77 +428,77 @@ void OgreBtDebugDrawer::setDrawConstraints(bool enable) {
 }
 
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawConstraintLimits(bool enable) {
+void OgreBtDebugDrawer::setDrawConstraintLimits(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawConstraintLimits;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_DrawConstraintLimits;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawNormals(bool enable) {
+void OgreBtDebugDrawer::setDrawNormals(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawNormals;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_DrawNormals;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawFeaturesText(bool enable) {
+void OgreBtDebugDrawer::setDrawFeaturesText(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawFeaturesText;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_DrawFeaturesText;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawContactPoints(bool enable) {
+void OgreBtDebugDrawer::setDrawContactPoints(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawContactPoints;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_DrawContactPoints;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setNoDeactivation(bool enable) {
+void OgreBtDebugDrawer::setNoDeactivation(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_NoDeactivation;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_NoDeactivation;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setNoHelpText(bool enable) {
+void OgreBtDebugDrawer::setNoHelpText(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_NoHelpText;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_NoHelpText;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDrawText(bool enable) {
+void OgreBtDebugDrawer::setDrawText(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DrawText;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_DrawText;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setProfileTimings(bool enable) {
+void OgreBtDebugDrawer::setProfileTimings(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_ProfileTimings;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_ProfileTimings;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setEnableSatComparison(bool enable) {
+void OgreBtDebugDrawer::setEnableSatComparison(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_EnableSatComparison;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_EnableSatComparison;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setDisableBulletLCP(bool enable) {
+void OgreBtDebugDrawer::setDisableBulletLCP(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_DisableBulletLCP;
 	else
 		mDebugMode &= ~btIDebugDraw::DBG_DisableBulletLCP;
 }
 //------------------------------------------------------------------------------------------------
-void OgreBtDebugDrawer::setEnableCCD(bool enable) {
+void OgreBtDebugDrawer::setEnableCCD(const bool enable) {
 	if (enable)
 		mDebugMode |= btIDebugDraw::DBG_EnableCCD;
 	else

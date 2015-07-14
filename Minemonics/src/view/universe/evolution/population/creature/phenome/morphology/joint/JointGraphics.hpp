@@ -26,12 +26,25 @@ public:
 	JointGraphics();
 	virtual ~JointGraphics();
 
+	/**
+	 * Clone the joint graphics.
+	 * @return
+	 */
 	virtual JointGraphics* clone() = 0;
 
+	/**
+	 * Add the joint to the world.
+	 */
 	virtual void addToWorld() = 0;
 
+	/**
+	 * Remove the joint from the world.
+	 */
 	virtual void removeFromWorld() = 0;
 
+	/**
+	 * Update the joint.
+	 */
 	virtual void update() = 0;
 };
 

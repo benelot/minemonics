@@ -14,7 +14,7 @@
 //## view headers
 //## utils headers
 
-InfoOverlayData::InfoOverlayData(Ogre::Vector3 position, std::string text) :
+InfoOverlayData::InfoOverlayData(const Ogre::Vector3 position, const std::string text) :
 		mPosition(position), mText(text) {
 
 }

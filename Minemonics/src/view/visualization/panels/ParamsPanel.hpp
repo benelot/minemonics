@@ -45,14 +45,15 @@ protected:
 	CEGUI::Window* mTextBoxValues;
 	VectorString mParams;
 
-	ParamsPanel(int left, int top, std::string name, int width,
-			VectorStringPairs items);
+	ParamsPanel(const int left, const int top, const std::string name,
+			const int width, VectorStringPairs items);
 	void _destroy();
 public:
 	~ParamsPanel(void);
 
-	void setParamValue(int index, std::string value, bool autoUpdate = true);
-	std::string getParamValue(int index);
+	void setParamValue(const int index, const std::string value,
+			const bool autoUpdate = true);
+	std::string getParamValue(const int index);
 	void update();
 	size_t size();
 	int getWidth();
@@ -61,8 +62,9 @@ public:
 	void show();
 	bool isVisible();
 
-	static ParamsPanel* createParamsPanel(int left, int top, std::string name,
-			int width, VectorStringPairs items);
+	static ParamsPanel* createParamsPanel(const int left, const int top,
+			const std::string name, const int width,
+			const VectorStringPairs items);
 	static void destroyParamsPanel(ParamsPanel* panel);
 	CEGUI::FrameWindow*& getWidgetPanel();
 };

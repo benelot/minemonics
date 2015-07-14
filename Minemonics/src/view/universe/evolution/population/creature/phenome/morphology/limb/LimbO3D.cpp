@@ -1,9 +1,5 @@
 //# corresponding header
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
-
 //# system headers
 #include <iostream>
 #include <iterator>

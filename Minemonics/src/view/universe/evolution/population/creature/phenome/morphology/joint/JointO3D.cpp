@@ -1,10 +1,3 @@
-/*
- * JointO3D.cpp
- *
- *  Created on: Apr 14, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <SimulationManager.hpp>
 #include <utils/ogre3D/Euler.hpp>

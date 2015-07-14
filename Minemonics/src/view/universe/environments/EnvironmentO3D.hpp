@@ -46,7 +46,7 @@ public:
 	 * @param fileName The file name of the environment save.
 	 * @param l The light of the scene.
 	 */
-	void initialize(std::string fileName, const Ogre::Light* const l);
+	void initialize(const std::string fileName, const Ogre::Light* const l);
 
 	/**
 	 * Is the environment view in the world?
@@ -75,21 +75,7 @@ public:
 	 */
 	void update();
 
-	class ImageTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
-	public:
-		virtual void define(Ogre::TerrainGroup* terrainGroup, long x, long y) {
-			Ogre::Image img;
-			img.load("terrain.png",
-					Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-			if (x % 2)
-				img.flipAroundY();
-			if (y % 2)
-				img.flipAroundX();
-			terrainGroup->defineTerrain(x, y, &img);
-		}
-	};
-
-	void testCapabilities(const Ogre::RenderSystemCapabilities* caps) {
+	void testCapabilities(const Ogre::RenderSystemCapabilities* const caps) {
 		if (!caps->hasCapability(Ogre::RSC_VERTEX_PROGRAM)
 				|| !caps->hasCapability(Ogre::RSC_FRAGMENT_PROGRAM)) {
 			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
@@ -104,7 +90,7 @@ public:
 		return mTerrainGroup;
 	}
 
-	double getTerrainHeight(double x, double z) {
+	double getTerrainHeight(const double x,const double z) {
 		Ogre::Ray ray;
 		ray.setOrigin(Ogre::Vector3(x, mTerrainPos.y + 10000, z));
 		ray.setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y);
@@ -145,6 +131,20 @@ protected:
 		}
 	};
 
+	class ImageTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
+	public:
+		virtual void define(Ogre::TerrainGroup* const terrainGroup,const long x, const long y) {
+			Ogre::Image img;
+			img.load("terrain.png",
+					Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+			if (x % 2)
+				img.flipAroundY();
+			if (y % 2)
+				img.flipAroundX();
+			terrainGroup->defineTerrain(x, y, &img);
+		}
+	};
+
 	/// This class just pretends to provide procedural page content to avoid page loading
 	class DummyPageProvider: public Ogre::PageProvider {
 	public:
@@ -167,7 +167,7 @@ protected:
 	};
 	DummyPageProvider mDummyPageProvider;
 
-	void initBlendMaps(Ogre::Terrain* terrain);
+	void initBlendMaps(Ogre::Terrain* const terrain);
 
 	SimulationManager* mSimulationMgr;
 

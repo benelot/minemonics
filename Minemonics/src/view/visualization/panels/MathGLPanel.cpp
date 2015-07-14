@@ -45,8 +45,8 @@
 //## view headers
 //## utils headers
 
-MathGLPanel::MathGLPanel(ViewController* viewController,Ogre::Root* root, int textureWidth,
-		int textureHeight, CEGUI::USize windowSize,CEGUI::USize windowPosition) :
+MathGLPanel::MathGLPanel(ViewController* const viewController,Ogre::Root* const root, const int textureWidth,
+		const int textureHeight, const CEGUI::USize windowSize,const CEGUI::USize windowPosition) :
 		mViewController(viewController),mTime(0),mMakePrint(false) {
 
 	CEGUI::Sizef size(static_cast<float>(textureWidth),
@@ -147,7 +147,7 @@ MathGLPanel::~MathGLPanel() {
 	mRenderTextureTarget = NULL;
 }
 
-void MathGLPanel::update(double timeSinceLastFrame) {
+void MathGLPanel::update(const double timeSinceLastFrame) {
 
 	mTime += timeSinceLastFrame;
 

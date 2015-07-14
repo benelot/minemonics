@@ -7,6 +7,21 @@
  * @date		2015-05-26
  * @author		Benjamin Ellenberger
  */
+
+//# corresponding header
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
 class InfoPanel {
 public:
 	InfoPanel();

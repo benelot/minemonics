@@ -32,11 +32,25 @@ class Window;
  */
 class CEGUIBuilder {
 public:
-	CEGUIBuilder(SimulationManager* simulationMgr);
+	CEGUIBuilder(SimulationManager* const simulationMgr);
 	virtual ~CEGUIBuilder();
 
+	/**
+	 * Create the top menu.
+	 * @return The window with the menu.
+	 */
 	CEGUI::Window * createMenu();
+
+	/**
+	 * Create the fps panel.
+	 * @return The fps panel handle.
+	 */
 	ParamsPanel* createFpsPanel();
+
+	/**
+	 * Create the details panel.
+	 * @return The details panel handle.
+	 */
 	ParamsPanel* createDetailsPanel();
 private:
 	SimulationManager* mSimulationMgr;

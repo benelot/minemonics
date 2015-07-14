@@ -40,7 +40,7 @@ public:
 			const Ogre::Real& heightScale = 4);
 
 	/// Define terrain
-	virtual void define(Ogre::TerrainGroup* terrainGroup, long x, long y);
+	virtual void define(Ogre::TerrainGroup* const terrainGroup,const long x,const long y);
 	/// Random terrain origin point to make it looks different
 	void randomize();
 private:

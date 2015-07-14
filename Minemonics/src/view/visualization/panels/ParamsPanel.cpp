@@ -28,8 +28,8 @@
 //## view headers
 //## utils headers
 
-ParamsPanel::ParamsPanel(int left, int top, std::string name, int width,
-		VectorStringPairs items) :
+ParamsPanel::ParamsPanel(const int left, const int top, const std::string name,
+		const int width, VectorStringPairs items) :
 		mWidgetPanel(NULL), mTextBoxLabel(NULL), mTextBoxValues(NULL), mRootGui(
 		NULL) {
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
@@ -120,7 +120,8 @@ void ParamsPanel::_destroy() {
 	mTextBoxLabel = NULL;
 }
 
-void ParamsPanel::setParamValue(int index, std::string value, bool autoUpdate) {
+void ParamsPanel::setParamValue(const int index, const std::string value,
+		const bool autoUpdate) {
 	if (index < 0 || index >= mParams.size())
 		return;
 	mParams[index] = value;
@@ -128,7 +129,7 @@ void ParamsPanel::setParamValue(int index, std::string value, bool autoUpdate) {
 		update();
 }
 
-std::string ParamsPanel::getParamValue(int index) {
+std::string ParamsPanel::getParamValue(const int index) {
 	if (index < 0 || index >= mParams.size())
 		return "";
 	else
@@ -171,8 +172,8 @@ bool ParamsPanel::isVisible() {
 	return (mWidgetPanel != NULL) ? mWidgetPanel->isVisible() : false;
 }
 
-ParamsPanel* ParamsPanel::createParamsPanel(int left, int top, std::string name,
-		int width, VectorStringPairs items) {
+ParamsPanel* ParamsPanel::createParamsPanel(const int left, const int top,
+		const std::string name,const int width, const VectorStringPairs items) {
 	ParamsPanel* ppp = new ParamsPanel(left, top, name, width, items);
 	return ppp;
 }
