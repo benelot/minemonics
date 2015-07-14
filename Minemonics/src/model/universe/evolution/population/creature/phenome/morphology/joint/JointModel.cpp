@@ -24,7 +24,7 @@ JointModel::JointModel() :
 }
 
 JointModel::JointModel(const JointModel& jointModel) :
-		mIndexA(-1), mIndexB(-1) {
+		mIndexA(jointModel.mIndexA), mIndexB(jointModel.mIndexB) {
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 

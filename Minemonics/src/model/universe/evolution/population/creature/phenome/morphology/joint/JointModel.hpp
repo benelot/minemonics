@@ -40,6 +40,7 @@ class JointModel: public ComponentModel {
 public:
 	JointModel();
 	JointModel(const JointModel& jointModel);
+	JointModel(const JointModel* jointModel);
 
 	virtual ~JointModel();
 

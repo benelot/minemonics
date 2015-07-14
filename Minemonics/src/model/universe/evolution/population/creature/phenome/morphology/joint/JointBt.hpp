@@ -47,6 +47,7 @@ public:
 	JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 			btRigidBody* const bodyB, const btTransform& tframeInA,
 			const btTransform& tframeInB);
+	JointBt(const JointBt& jointBt);
 	virtual ~JointBt();
 
 	/**
@@ -139,8 +140,8 @@ public:
 
 	void setLinearLimits(const btVector3 linearLowerLimit,
 			const btVector3 linearUpperLimit) {
-		mG6DofJoint.setLinearLowerLimit(linearLowerLimit);
-		mG6DofJoint.setLinearUpperLimit(linearUpperLimit);
+		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
+		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
 
 	}
 
@@ -153,8 +154,8 @@ public:
 	void setAngularLimits(const btVector3 angularLowerLimit,
 			const btVector3 angularUpperLimit) {
 
-		mG6DofJoint.setAngularLowerLimit(angularLowerLimit);
-		mG6DofJoint.setAngularUpperLimit(angularUpperLimit);
+		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
+		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
 	}
 
 	void setAngularStiffness(const double jointPitchStiffness,
@@ -176,22 +177,22 @@ public:
 	}
 
 	void setBreakingThreshold(const double breakingThreshold) {
-		mG6DofJoint.setBreakingImpulseThreshold(breakingThreshold);
+		mG6DofJoint->setBreakingImpulseThreshold(breakingThreshold);
 	}
 
 	void setJointStiffness(const JointPhysics::DegreeOfFreedom index,
 			const double stiffness) {
-		mG6DofJoint.setStiffness(index, stiffness);
+		mG6DofJoint->setStiffness(index, stiffness);
 	}
 
 	void enableSpring(const JointPhysics::DegreeOfFreedom index,
 			const bool enable) {
-		mG6DofJoint.enableSpring(index, enable);
+		mG6DofJoint->enableSpring(index, enable);
 	}
 
 	void setSpringDampingCoefficient(const JointPhysics::DegreeOfFreedom index,
 			const double damping) {
-		mG6DofJoint.setDamping(index, damping);
+		mG6DofJoint->setDamping(index, damping);
 	}
 
 	void setRotationalLimitMotorEnabled(
@@ -200,34 +201,34 @@ public:
 
 	bool isRotationalLimitMotorEnabled(
 			const JointPhysics::RotationalDegreeOfFreedom index) {
-		return mG6DofJoint.getRotationalLimitMotor(index)->m_enableMotor;
+		return mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
 	void setTargetRotationalVelocity(
 			JointPhysics::RotationalDegreeOfFreedom index,
 			double targetVelocity) {
-		mG6DofJoint.getRotationalLimitMotor(index)->m_targetVelocity =
+		mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity =
 				targetVelocity;
 	}
 
 	double getTargetRotationalVelocity(
 			const JointPhysics::RotationalDegreeOfFreedom index) {
-		return mG6DofJoint.getRotationalLimitMotor(index)->m_targetVelocity;
+		return mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
 	void setMaxRotationalForce(
 			const JointPhysics::RotationalDegreeOfFreedom index,
 			const double maxMotorForce) {
-		mG6DofJoint.getRotationalLimitMotor(index)->m_maxMotorForce =
+		mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce =
 				maxMotorForce;
 	}
 
 	double getMaxRotationalForce(
 			const JointPhysics::RotationalDegreeOfFreedom index) {
-		return mG6DofJoint.getRotationalLimitMotor(index)->m_maxMotorForce;
+		return mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 
-	btGeneric6DofSpringConstraint& getG6DofJoint() {
+	btGeneric6DofSpringConstraint* getG6DofJoint() {
 		return mG6DofJoint;
 	}
 
@@ -235,11 +236,25 @@ public:
 		return mMotors;
 	}
 
+	bool isInWorld() const {
+		return mInWorld;
+	}
+
+	void setInWorld(const bool inWorld) {
+		mInWorld = inWorld;
+	}
+
 private:
+
+	/**
+	 * If the joint constraint is in the world.
+	 */
+	bool mInWorld;
+
 	/**
 	 * The 6 Degrees of freedom joint that is used as a physical model.
 	 */
-	btGeneric6DofSpringConstraint mG6DofJoint;
+	btGeneric6DofSpringConstraint* mG6DofJoint;
 
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.

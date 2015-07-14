@@ -82,8 +82,10 @@ void PhysicsController::exitBulletPhysics() {
 void PhysicsController::stepBulletPhysics(const double timeStep) {
 	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) //step the simulation
 	{
-		int subSteps = timeStep*60.0f;
-		mDynamicsWorld->stepSimulation(timeStep,subSteps); //1.0f/60.0f);
+		int subSteps = ceil(timeStep * 60.0f);
+		if (timeStep) {
+			mDynamicsWorld->stepSimulation(timeStep, subSteps); //1.0f/60.0f);
+		}
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
 		if (mPhysicsStepped) {
@@ -98,7 +100,7 @@ void PhysicsController::addBody(btRigidBody* const body) {
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
 }
 
-void PhysicsController::removeBody(btRigidBody* body){
-		mCollisionShapes.remove(body->getCollisionShape());
-		mDynamicsWorld->removeRigidBody(body); //remove the body to the dynamics world
+void PhysicsController::removeBody(btRigidBody* body) {
+	mCollisionShapes.remove(body->getCollisionShape());
+	mDynamicsWorld->removeRigidBody(body); //remove the body to the dynamics world
 }

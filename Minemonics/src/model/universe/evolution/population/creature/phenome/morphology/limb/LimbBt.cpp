@@ -30,6 +30,62 @@ LimbBt::LimbBt() :
 				NULL), mType(LimbModel::UNKNOWN) {
 }
 
+LimbBt::LimbBt(const LimbBt& limbBt) {
+	btVector3 HalfExtents(limbBt.mDimensions.x() * 0.5f,
+			limbBt.mDimensions.y() * 0.5f, limbBt.mDimensions.z() * 0.5f);
+	switch (limbBt.mType) {
+	case LimbModel::BLOCK:
+		mCollisionShape = new btBoxShape(HalfExtents);
+		break;
+	case LimbModel::CAPSULE:
+		mCollisionShape = new btCapsuleShape(
+				btScalar(limbBt.mDimensions.x() * 0.5f),
+				btScalar(limbBt.mDimensions.y()));
+		break;
+	case LimbModel::UNKNOWN:
+		std::cout
+				<< "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
+		exit(-1);
+	}
+
+	btVector3 localInertia(0, 0, 0);
+
+	mCollisionShape->calculateLocalInertia(mMass, localInertia);
+
+	btTransform startTransform = limbBt.mBody->getWorldTransform();
+
+	mMotionState = new btDefaultMotionState(startTransform);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, mMotionState,
+			mCollisionShape, localInertia);
+	mBody = new btRigidBody(rbInfo);
+
+	//Set the friction and restitution/elasticity of the rigid body
+	mBody->setFriction(mFriction);
+	mBody->setRestitution(mRestitution);
+
+	//Set user pointer for proper return of creature/limb information etc..
+	mBody->setUserPointer(limbBt.mBody->getUserPointer());
+	//add the limb pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limbBt.mBody->getUserPointer());
+
+	mType = limbBt.mType;
+
+	mWorld = limbBt.mWorld;
+
+	mDimensions = limbBt.mDimensions;
+	mFriction = limbBt.mFriction;
+	mRestitution = limbBt.mRestitution;
+	mInWorld = limbBt.mInWorld;
+	mInitialRelativeXPosition = limbBt.mInitialRelativeXPosition;
+	mInitialRelativeYPosition = limbBt.mInitialRelativeYPosition;
+	mInitialRelativeZPosition = limbBt.mInitialRelativeZPosition;
+
+	mInitialWOrientation = limbBt.mInitialWOrientation;
+	mInitialXOrientation = limbBt.mInitialXOrientation;
+	mInitialYOrientation = limbBt.mInitialYOrientation;
+	mInitialZOrientation = limbBt.mInitialZOrientation;
+}
+
 LimbBt::~LimbBt() {
 	delete mBody;
 }
@@ -196,60 +252,6 @@ void LimbBt::removeFromWorld() {
 		mWorld->removeRigidBody(mBody);
 		setInWorld(false);
 	}
-}
-
-LimbBt::LimbBt(const LimbBt& limbBt) {
-	btVector3 HalfExtents(limbBt.mDimensions.x() * 0.5f,
-			limbBt.mDimensions.y() * 0.5f, limbBt.mDimensions.z() * 0.5f);
-	switch (limbBt.mType) {
-	case LimbModel::BLOCK:
-		mCollisionShape = new btBoxShape(HalfExtents);
-		break;
-	case LimbModel::CAPSULE:
-		mCollisionShape = new btCapsuleShape(
-				btScalar(limbBt.mDimensions.x() * 0.5f),
-				btScalar(limbBt.mDimensions.y()));
-		break;
-	case LimbModel::UNKNOWN:
-		std::cout
-				<< "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
-		exit(-1);
-	}
-
-	btVector3 localInertia(0, 0, 0);
-
-	mCollisionShape->calculateLocalInertia(mMass, localInertia);
-
-	btTransform startTransform = limbBt.mBody->getWorldTransform();
-
-	mMotionState = new btDefaultMotionState(startTransform);
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, mMotionState,
-			mCollisionShape, localInertia);
-	mBody = new btRigidBody(rbInfo);
-
-	//Set the friction and restitution/elasticity of the rigid body
-	mBody->setFriction(mFriction);
-	mBody->setRestitution(mRestitution);
-
-	//Set user pointer for proper return of creature/limb information etc..
-	mBody->setUserPointer(limbBt.mBody->getUserPointer());
-	//add the limb pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limbBt.mBody->getUserPointer());
-
-	mType = limbBt.mType;
-
-	mDimensions = limbBt.mDimensions;
-	mFriction = limbBt.mFriction;
-	mRestitution = limbBt.mRestitution;
-	mInWorld = limbBt.mInWorld;
-	mInitialRelativeXPosition = limbBt.mInitialRelativeXPosition;
-	mInitialRelativeYPosition = limbBt.mInitialRelativeYPosition;
-	mInitialRelativeZPosition = limbBt.mInitialRelativeZPosition;
-
-	mInitialWOrientation = limbBt.mInitialWOrientation;
-	mInitialXOrientation = limbBt.mInitialXOrientation;
-	mInitialYOrientation = limbBt.mInitialYOrientation;
-	mInitialZOrientation = limbBt.mInitialZOrientation;
 }
 
 LimbBt* LimbBt::clone() {

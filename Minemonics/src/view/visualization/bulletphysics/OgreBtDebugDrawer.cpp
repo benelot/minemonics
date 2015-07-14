@@ -90,7 +90,7 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
 
 	olm = Ogre::OverlayManager::getSingletonPtr();
 	panel = static_cast<Ogre::OverlayContainer*>(olm->createOverlayElement(
-			"Panel", "GUI"));
+			"Panel", "OGREBTDEBUGDRAWER_GUI"));
 	panel->setMetricsMode(Ogre::GMM_PIXELS);
 	panel->setPosition(0, 0);
 	panel->setDimensions(1.0f, 1.0f);
@@ -99,7 +99,7 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
 
 	szElement = "element_";
 	overlay = olm->getByName("OGREBTDEBUGDRAWER_OVERLAY");
-	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement("GUI"));
+	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement("OGREBTDEBUGDRAWER_GUI"));
 	textArea =
 			static_cast<Ogre::TextAreaOverlayElement*>(olm->createOverlayElement(
 					"TextArea", szElement));
@@ -116,8 +116,8 @@ OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 	szElement = "element_";
 	olm->destroyOverlayElement(szElement);
 
-	olm->destroyOverlayElement("GUI");
-	olm->destroy("GUI_OVERLAY");
+	olm->destroyOverlayElement("OGREBTDEBUGDRAWER_GUI");
+	olm->destroy("OGREBTDEBUGDRAWER_OVERLAY");
 
 }
 

@@ -39,25 +39,37 @@
 //	//TODO: Implement copy from jointBt.
 //}
 
-JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA, btRigidBody* const bodyB,
-		const btTransform& tframeInA, const btTransform& tframeInB) :
-		mG6DofJoint(*bodyA, *bodyB, tframeInA, tframeInB,
-				true/*use fixed frame A for linear limits*/) {
+JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
+		btRigidBody* const bodyB, const btTransform& tframeInA,
+		const btTransform& tframeInB) {
 	mWorld = world;
-	mG6DofJoint.setLinearLowerLimit(btVector3(0, 0, 0));
-	mG6DofJoint.setLinearUpperLimit(btVector3(0, 0, 0));
+	mG6DofJoint = new btGeneric6DofSpringConstraint(*bodyA, *bodyB, tframeInA,
+			tframeInB, true/*use fixed frame A for linear limits*/);
+	mG6DofJoint->setLinearLowerLimit(btVector3(0, 0, 0));
+	mG6DofJoint->setLinearUpperLimit(btVector3(0, 0, 0));
 
-	mG6DofJoint.setAngularLowerLimit(btVector3(0, 0, 0));
-	mG6DofJoint.setAngularUpperLimit(btVector3(0, 0, 0));
+	mG6DofJoint->setAngularLowerLimit(btVector3(0, 0, 0));
+	mG6DofJoint->setAngularUpperLimit(btVector3(0, 0, 0));
 
-	mG6DofJoint.setEquilibriumPoint();
+	mG6DofJoint->setEquilibriumPoint();
 
-	mG6DofJoint.enableFeedback(true);
-	mG6DofJoint.setJointFeedback(new btJointFeedback());
+	mG6DofJoint->enableFeedback(true);
+	mG6DofJoint->setJointFeedback(new btJointFeedback());
 
 	//debug drawing
-	mG6DofJoint.setDbgDrawSize(btScalar(5.f));
+	mG6DofJoint->setDbgDrawSize(btScalar(5.f));
 
+}
+
+JointBt::JointBt(const JointBt& jointBt) {
+	mWorld = jointBt.mWorld;
+	mG6DofJoint = jointBt.mG6DofJoint;
+
+	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
+			mit != jointBt.mMotors.end(); mit++) {
+		Motor* motor = (*mit)->clone();
+		mMotors.push_back(motor);
+	}
 }
 
 JointBt::~JointBt() {
@@ -75,6 +87,9 @@ JointBt::~JointBt() {
 	}
 
 	mMotors.clear();
+
+	delete mG6DofJoint;
+	mG6DofJoint = NULL;
 }
 
 void JointBt::update() {
@@ -92,21 +107,21 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 	//add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::DOF_PITCH,
-			mG6DofJoint.getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+			mG6DofJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
 			maxSpeeds.getX());
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
 	servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::DOF_YAW,
-			mG6DofJoint.getRotationalLimitMotor(JointPhysics::RDOF_YAW),
+			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_YAW),
 			maxForces.getY(), maxSpeeds.getY());
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
 	servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::DOF_ROLL,
-			mG6DofJoint.getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
+			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
 			maxForces.getZ(), maxSpeeds.getZ());
 	mMotors.push_back(servoMotor);
 }
@@ -132,12 +147,12 @@ void JointBt::reposition(const Ogre::Vector3 position) {
 }
 
 bool JointBt::isStrained() {
-	btVector3 fbA = mG6DofJoint.getJointFeedback()->m_appliedForceBodyA;
-	btVector3 fbB = mG6DofJoint.getJointFeedback()->m_appliedForceBodyB;
-	btVector3 tbA = mG6DofJoint.getJointFeedback()->m_appliedTorqueBodyA;
-	btVector3 tbB = mG6DofJoint.getJointFeedback()->m_appliedTorqueBodyB;
+	btVector3 fbA = mG6DofJoint->getJointFeedback()->m_appliedForceBodyA;
+	btVector3 fbB = mG6DofJoint->getJointFeedback()->m_appliedForceBodyB;
+	btVector3 tbA = mG6DofJoint->getJointFeedback()->m_appliedTorqueBodyA;
+	btVector3 tbB = mG6DofJoint->getJointFeedback()->m_appliedTorqueBodyB;
 	std::cout << "----------------------" << std::endl;
-	std::cout << "Applied impulse: " << mG6DofJoint.getAppliedImpulse()
+	std::cout << "Applied impulse: " << mG6DofJoint->getAppliedImpulse()
 			<< std::endl;
 	std::cout << "Joint feedback force A: (" << fbA.getX() << "," << fbA.getY()
 			<< "," << fbA.getZ() << ")" << std::endl;
@@ -152,7 +167,8 @@ bool JointBt::isStrained() {
 }
 
 void JointBt::setRotationalLimitMotorEnabled(
-		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
+		const JointPhysics::RotationalDegreeOfFreedom index,
+		const bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 	for (; motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->getIndex() == index) {
@@ -161,15 +177,21 @@ void JointBt::setRotationalLimitMotorEnabled(
 		}
 	}
 
-	mG6DofJoint.getRotationalLimitMotor(index)->m_enableMotor = enable;
+	mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor = enable;
 }
 
 void JointBt::addToWorld() {
-	mWorld->addConstraint((btTypedConstraint*) &mG6DofJoint, true);
+	if (!isInWorld()) {
+		mWorld->addConstraint((btTypedConstraint*) mG6DofJoint, true);
+		setInWorld(true);
+	}
 }
 
 void JointBt::removeFromWorld() {
-	mWorld->removeConstraint((btTypedConstraint*) &mG6DofJoint);
+	if (!isInWorld()) {
+	mWorld->removeConstraint((btTypedConstraint*) mG6DofJoint);
+	setInWorld(false);
+	}
 }
 
 JointBt* JointBt::clone() {

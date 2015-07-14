@@ -31,7 +31,7 @@ protected:
 		// Set up an object of the class you want to test
 		genome = new MixedGenome();
 		genome->createRandomGenome(30);
-		genome->linkRandomGenes();
+//		genome->linkRandomGenes();
 	}
 
 	virtual void TearDown() {
