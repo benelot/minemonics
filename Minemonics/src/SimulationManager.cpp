@@ -214,6 +214,8 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
+	detectChildren(mSceneMgr->getRootSceneNode());
+	detectChildren((Ogre::SceneNode*)mSceneMgr->getRootSceneNode()->getChild("CamNode1"));
 	mUniverse.initialize(this,
 			EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 

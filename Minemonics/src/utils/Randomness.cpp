@@ -1,4 +1,6 @@
 //# corresponding header
+#include <utils/Randomness.hpp>
+
 //## controller headers
 //## model headers
 #include <boost/random/uniform_real_distribution.hpp>
@@ -15,7 +17,6 @@
 //## model headers
 //## view headers
 //## utils headers
-#include <utils/Randomness.hpp>
 
 Randomness::Randomness() {
 	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970, 1, 1));

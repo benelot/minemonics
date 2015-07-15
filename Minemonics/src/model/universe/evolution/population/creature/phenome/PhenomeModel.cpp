@@ -271,7 +271,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 					limbBBt->removeFromWorld();
 
 					delete limbBBt;
-					limbBBt = 0;
+					limbBBt = NULL;
 
 					// global center of mass of limb B
 					Ogre::Vector3 limbBCOM(

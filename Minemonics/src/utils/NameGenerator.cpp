@@ -1,31 +1,16 @@
-/*
- * NameGenerator.cpp
- *
- *  Created on: Mar 13, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <utils/NameGenerator.hpp>
 #include <string>
 
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //# custom headers
 //## base headers
-
 //## configuration headers
-
 //## controller headers
-
 //## model headers
-
 //## view headers
-
 //## utils headers
 
 NameGenerator::NameGenerator() {
@@ -34,7 +19,6 @@ NameGenerator::NameGenerator() {
 }
 
 NameGenerator::~NameGenerator() {
-	// TODO Auto-generated destructor stub
 }
 
 void NameGenerator::initialize() {

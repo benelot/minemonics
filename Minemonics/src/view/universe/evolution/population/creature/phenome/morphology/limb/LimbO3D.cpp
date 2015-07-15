@@ -53,12 +53,12 @@ LimbO3D::LimbO3D() :
 }
 
 LimbO3D::LimbO3D(const LimbO3D& limbO3D) {
-	Ogre::NameGenerator ng("");
-	mLimbEntity = limbO3D.mLimbEntity->clone(ng.generate());
-	mLimbEntityNode =
-			limbO3D.mLimbEntityNode->getParentSceneNode()->createChildSceneNode(
-					limbO3D.mLimbEntityNode->getPosition(),
-					limbO3D.mLimbEntityNode->getOrientation());
+	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
+	mLimbEntity = limbO3D.mLimbEntity->clone(name);
+	mLimbEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
+	mLimbEntityNode->setPosition(limbO3D.mLimbEntityNode->getPosition());
+	mLimbEntityNode->setOrientation(limbO3D.mLimbEntityNode->getOrientation());
+
 	mPosition = limbO3D.mPosition;
 	mOrientation = limbO3D.mOrientation;
 	mSimulationManager = limbO3D.mSimulationManager;
@@ -99,6 +99,8 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 	tex->setTextureFiltering(Ogre::TFO_ANISOTROPIC);
 	tex->setTextureAnisotropy(8);
 
+	mLimbEntityNode =
+				mSimulationManager->getSceneManager()->createSceneNode();
 	switch (type) {
 	case LimbModel::BLOCK:
 
@@ -107,8 +109,7 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(
 				Ogre::SceneManager::PT_CUBE);
 		mLimbEntity->setMaterialName(materialName);
-		mLimbEntityNode =
-				mSimulationManager->getSceneManager()->createSceneNode();
+
 		mLimbEntityNode->attachObject(mLimbEntity);
 
 		mLimbEntityNode->scale(
@@ -124,8 +125,6 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 				0.5f * scale.z).setHeight(scale.y).realizeMesh(name);
 		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(name);
 		mLimbEntity->setMaterialName(materialName);
-		mLimbEntityNode =
-				mSimulationManager->getSceneManager()->createSceneNode();
 		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
 	}

@@ -66,7 +66,7 @@ Limb::Limb(SimulationManager* const simulationManager, Creature* const creature,
 			limbModel->getPrimitiveType(), limbModel->getDimensions(),
 			limbModel->getColor());
 
-	// Update the state of the limb.
+//	// Update the state of the limb.
 	update();
 }
 

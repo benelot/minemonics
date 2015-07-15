@@ -105,7 +105,7 @@ public:
 
 		if (showNothingFound && nothingFound) {
 			std::cout << "Block " << identifier << "::..." << additionalCounter;
-			std::cout << "CreatureModel vector size check....";
+			std::cout << "\nCreatureModel vector size check....";
 			std::cout << "\nNo errors found\n\n";
 			return false;
 		}
@@ -113,6 +113,19 @@ public:
 
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	}
+
+	static bool detectChildren(Ogre::SceneNode* node) {
+		int i = 0;
+		Ogre::SceneNode::ChildNodeIterator m = node->getChildIterator();
+		while (m.hasMoreElements()) {
+			i++;
+			m.getNext();
+		}
+
+		std::cout << "\nRoot children: " << i << "\n";
+
+		return i;
 	}
 
 	// Accessor methods
