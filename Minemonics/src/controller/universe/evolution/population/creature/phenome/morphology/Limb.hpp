@@ -66,10 +66,13 @@ public:
 	 * @param color The color of the limb.
 	 * @param ownIndex The limb's own index in the array of limbs.
 	 */
-	void initialize(SimulationManager* const simulationManager, Creature* const creature,
-			const LimbModel::PrimitiveType type, const Ogre::Vector3 position,
-			const Ogre::Quaternion orientation, const Ogre::Vector3 size, const double mass,
-			const double restitution = 1.0, const double friction = 0.8, const Ogre::ColourValue color =
+	void initialize(SimulationManager* const simulationManager,
+			Creature* const creature, const LimbModel::PrimitiveType type,
+			const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+			const Ogre::Vector3 initialRelativePosition,
+			const Ogre::Quaternion initialOrientation, const Ogre::Vector3 size,
+			const double mass, const double restitution = 1.0,
+			const double friction = 0.8, const Ogre::ColourValue color =
 					Ogre::ColourValue(1, 1, 1), const int ownIndex = 0);
 
 	/**
@@ -78,8 +81,8 @@ public:
 	 * @param creature The handle of the creature.
 	 * @param limbModel The model of the limb.
 	 */
-	void buildFrom(SimulationManager* const simulationManager, Creature* const creature,
-			LimbModel* const limbModel);
+	void buildFrom(SimulationManager* const simulationManager,
+			Creature* const creature, LimbModel* const limbModel);
 
 	/**
 	 * Clone the limb.
@@ -164,8 +167,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Limb"));
+					boost::log::attributes::constant<std::string>("Limb"));
 		}
 	} _initializer;
 

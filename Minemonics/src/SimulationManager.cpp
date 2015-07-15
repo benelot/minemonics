@@ -208,7 +208,6 @@ void SimulationManager::createScene(void) {
 	Ogre::ColourValue fadeColour(0, 0, 0);
 	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
 	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 17000, 30000);
-//
 //	mSceneMgr->setFog(Ogre::FOG_EXP, fadeColour, 0.002);
 //	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
@@ -240,66 +239,8 @@ void SimulationManager::createScene(void) {
 //	// add earth population to earth
 //	earth->addPopulation(earth2Population);
 
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	for (int j = 0; j < 1000; j++) {
-		int i = 0;
-		for (std::vector<CreatureModel*>::const_iterator cit =
-				earthPopulation->getPopulationModel().getCreatureModels().begin();
-				cit
-						!= earthPopulation->getPopulationModel().getCreatureModels().end()
-						&& i
-								<= earthPopulation->getPopulationModel().getCreatureModels().size();
-				cit++) {
-			i++;
-		}
-		if (i
-				!= earthPopulation->getPopulationModel().getCreatureModels().size()) {
-			std::cout
-					<< "################################\n\n Block afterAnotherAdd::..."
-					<< "/" << j;
-			std::cout << "\nsize: "
-					<< earthPopulation->getPopulationModel().getCreatureModels().size()
-					<< "\t";
-			std::cout << "size2: >" << i << std::endl;
-			std::cout << "################################\n\n";
-			break;
-		}
-	}
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 	//perform embryogenesis on every creature that is not developed yet.
 	earth->performEmbryogenesis();
-
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	for (int j = 0; j < 1000; j++) {
-		int i = 0;
-		for (std::vector<CreatureModel*>::const_iterator cit =
-				earthPopulation->getPopulationModel().getCreatureModels().begin();
-				cit
-						!= earthPopulation->getPopulationModel().getCreatureModels().end()
-						&& i
-								<= earthPopulation->getPopulationModel().getCreatureModels().size();
-				cit++) {
-			i++;
-		}
-		if (i
-				!= earthPopulation->getPopulationModel().getCreatureModels().size()) {
-			std::cout
-					<< "################################\n\n Block afterEmbryogenesis::..."
-					<< "/" << j;
-			std::cout << "\nsize: "
-					<< earthPopulation->getPopulationModel().getCreatureModels().size()
-					<< "\t";
-			std::cout << "size2: >" << i << std::endl;
-			std::cout << "################################\n\n";
-			break;
-		}
-	}
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	//TODO::Make it work with multiple planets
 //	// create a planet called mars
@@ -315,14 +256,6 @@ void SimulationManager::createScene(void) {
 //
 //	// add earth population to earth
 //	mars->addPopulation(marsPopulation);
-//
-//	// set position of the creatures
-//	cit = marsPopulation->getCreatures().begin();
-//	for (; cit != marsPopulation->getCreatures().end(); cit++) {
-//
-//		(*cit)->setPosition(Ogre::Vector3(-200, 300, -4000));
-//		(*cit)->performEmbryogenesis();
-//	}
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";
 }
@@ -471,12 +404,12 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 }
 
 //void SimulationManager::updatePhysics(double timeSinceLastFrame) {
-
+//
 //	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
 //	for (; it != mRagdolls.end(); it++) {
 //		(*it)->update();
 //	}
-
+//
 //	const int numObjects =
 //			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
 //
@@ -487,27 +420,27 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 //
 //		if (body) {
 //
-////			btVector3 Point = body->getCenterOfMassPosition();
+//			btVector3 Point = body->getCenterOfMassPosition();
 //
-////			std::string text;
-////			text.append("O: ");
-//////			text.append(boost::lexical_cast<std::string>((int)Point[0]));
-//////			text.append(",");
-//////			text.append(boost::lexical_cast<std::string>((int)Point[1]));
-//////			text.append(",");
-//////			text.append(boost::lexical_cast<std::string>((int)Point[2]));
-//////			text.append(",\n");
-//////			text.append("------");
-////			InfoOverlayData* data = new InfoOverlayData(
-////					Ogre::Vector3((float) Point[0], (float) Point[1],
-////							(float) Point[2]), text);
-////			mInfoOverlay.addInfo(data);
+//			std::string text;
+//			text.append("O: ");
+//			text.append(boost::lexical_cast<std::string>((int)Point[0]));
+//			text.append(",");
+//			text.append(boost::lexical_cast<std::string>((int)Point[1]));
+//			text.append(",");
+//			text.append(boost::lexical_cast<std::string>((int)Point[2]));
+//			text.append(",\n");
+//			text.append("------");
+//			InfoOverlayData* data = new InfoOverlayData(
+//					Ogre::Vector3((float) Point[0], (float) Point[1],
+//							(float) Point[2]), text);
+//			mInfoOverlay.addInfo(data);
 //
 //			// Get the Orientation of the rigidbody as a bullet Quaternion
 //			// Convert it to an Ogre quaternion
-////			btQuaternion btq = body->getOrientation();
-////			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
-////					btq.z());
+//			btQuaternion btq = body->getOrientation();
+//			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
+//					btq.z());
 //		}
 //	}
 //}

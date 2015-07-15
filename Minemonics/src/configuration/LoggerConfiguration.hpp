@@ -42,7 +42,7 @@ public:
 	static const boost::log::trivial::severity_level fatal =
 			boost::log::trivial::fatal;
 
-	static const boost::log::trivial::severity_level LOGGING_LEVEL = warning;
+	static const boost::log::trivial::severity_level LOGGING_LEVEL = info;
 };
 
 #endif /* CONFIGURATION_LOGGERCONFIGURATION_HPP_ */

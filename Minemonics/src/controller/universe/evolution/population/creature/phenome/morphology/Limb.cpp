@@ -79,17 +79,21 @@ Limb::~Limb() {
 	mCreature = NULL;
 }
 
-void Limb::initialize(SimulationManager* const simulationManager, Creature* const creature,
-		const LimbModel::PrimitiveType type, const Ogre::Vector3 position,
-		const Ogre::Quaternion orientation, const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction, const Ogre::ColourValue color,
-		const int ownIndex) {
+void Limb::initialize(SimulationManager* const simulationManager,
+		Creature* const creature, const LimbModel::PrimitiveType type,
+		const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation,
+		const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction,
+		const Ogre::ColourValue color, const int ownIndex) {
 
 	//initialize the model of the limb
 	mLimbModel.initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			&creature->getCreatureModel(), type, position, orientation,
-			dimensions, mass, restitution, friction, color, ownIndex);
+			initialRelativePosition, initialOrientation, dimensions, mass,
+			restitution, friction, color, ownIndex);
 
 	mCreature = creature;
 

@@ -104,7 +104,7 @@ public:
 
 		if (showNothingFound && nothingFound) {
 			std::cout << "Block " << identifier << "::..." << additionalCounter;
-			std::cout << "\nNothing found\n\n";
+			std::cout << "\nNo errors found\n\n";
 			return false;
 		}
 		return false;

@@ -211,17 +211,36 @@ void Evolution::update() {
 }
 
 void Evolution::performEmbryogenesis() {
+
+	//for each population...
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
 			pit != mPopulations.end(); pit++) {
+
+		int creatureQty = 0;
+		//for each creature in the population
 		for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
 				cit != (*pit)->getCreatures().end(); cit++) {
+			creatureQty++;
 
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			SimulationManager::detectError((*cit)->getCreatureModel().getPopulationModel(),
-					3000, -1, 0);
+			SimulationManager::detectError(
+					(*cit)->getCreatureModel().getPopulationModel(), 10, -1,
+					0);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+			//Performing embryogenesis on creature(x/all)
+			//Gene Qty: z
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Performing embryogenesis on creature("
+			<< creatureQty <<"/"<< (*pit)->getCreatures().size() << "):\nGene Qty: "
+			<< (*cit)->getCreatureModel().getGenotype().getGenes().size();
+
 			(*cit)->performEmbryogenesis();
+
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Components:" << (**cit).getCreatureModel().getPhenotypeModel()->getComponentModels().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< (**cit).getCreatureModel();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature finished.\n"
+			<< "################################\n\n";
 		}
 	}
 }

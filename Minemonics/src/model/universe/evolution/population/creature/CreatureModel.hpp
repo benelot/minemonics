@@ -140,12 +140,12 @@ public:
 			const CreatureModel &creature) {
 		os
 		/**The name of the creature*/
-		<< "CreatureModel: Name=" << creature.mFirstName
+		<< "/CreatureModel: Name=" << creature.mFirstName
 
 		/**The genome of the creature*/
-		<< "/Genotype=" << creature.mGenotype
+		<< "\n/Genotype=" << creature.mGenotype
 
-		<< "/Phenotype=" << creature.mPhenotypeModel;
+		<< "\n/Phenotype=" << *creature.mPhenotypeModel;
 
 		/**The juries of the creature model*/
 		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin(); it != creature.mJuries.end();

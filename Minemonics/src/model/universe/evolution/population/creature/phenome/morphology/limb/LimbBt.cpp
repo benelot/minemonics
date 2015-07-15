@@ -27,63 +27,23 @@
 
 LimbBt::LimbBt() :
 		LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-				NULL), mType(LimbModel::UNKNOWN) {
+		NULL), mType(LimbModel::UNKNOWN) {
 }
 
 LimbBt::LimbBt(const LimbBt& limbBt) {
-	btVector3 HalfExtents(limbBt.mDimensions.x() * 0.5f,
-			limbBt.mDimensions.y() * 0.5f, limbBt.mDimensions.z() * 0.5f);
-	switch (limbBt.mType) {
-	case LimbModel::BLOCK:
-		mCollisionShape = new btBoxShape(HalfExtents);
-		break;
-	case LimbModel::CAPSULE:
-		mCollisionShape = new btCapsuleShape(
-				btScalar(limbBt.mDimensions.x() * 0.5f),
-				btScalar(limbBt.mDimensions.y()));
-		break;
-	case LimbModel::UNKNOWN:
-		std::cout
-				<< "#################################################################\n LimbBt received 'Unknown' as a limb type.\n#################################################################";
-		exit(-1);
-	}
-
-	btVector3 localInertia(0, 0, 0);
-
-	mCollisionShape->calculateLocalInertia(mMass, localInertia);
-
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
+	initialize(limbBt.mWorld, limbBt.mCollisionShape->getUserPointer(),
+			limbBt.mType, startTransform.getOrigin(),
+			startTransform.getRotation(),
+			btVector3(limbBt.mInitialRelativeXPosition,
+					limbBt.mInitialRelativeYPosition,
+					limbBt.mInitialRelativeZPosition),
+			btQuaternion(limbBt.mInitialXOrientation,
+					limbBt.mInitialYOrientation, limbBt.mInitialZOrientation,
+					limbBt.mInitialWOrientation), limbBt.mDimensions,
+			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction);
 
-	mMotionState = new btDefaultMotionState(startTransform);
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mMass, mMotionState,
-			mCollisionShape, localInertia);
-	mBody = new btRigidBody(rbInfo);
-
-	//Set the friction and restitution/elasticity of the rigid body
-	mBody->setFriction(mFriction);
-	mBody->setRestitution(mRestitution);
-
-	//Set user pointer for proper return of creature/limb information etc..
-	mBody->setUserPointer(limbBt.mBody->getUserPointer());
-	//add the limb pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limbBt.mBody->getUserPointer());
-
-	mType = limbBt.mType;
-
-	mWorld = limbBt.mWorld;
-
-	mDimensions = limbBt.mDimensions;
-	mFriction = limbBt.mFriction;
-	mRestitution = limbBt.mRestitution;
 	mInWorld = limbBt.mInWorld;
-	mInitialRelativeXPosition = limbBt.mInitialRelativeXPosition;
-	mInitialRelativeYPosition = limbBt.mInitialRelativeYPosition;
-	mInitialRelativeZPosition = limbBt.mInitialRelativeZPosition;
-
-	mInitialWOrientation = limbBt.mInitialWOrientation;
-	mInitialXOrientation = limbBt.mInitialXOrientation;
-	mInitialYOrientation = limbBt.mInitialYOrientation;
-	mInitialZOrientation = limbBt.mInitialZOrientation;
 }
 
 LimbBt::~LimbBt() {
@@ -92,8 +52,10 @@ LimbBt::~LimbBt() {
 
 void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 		const LimbModel::PrimitiveType type, const btVector3 position,
-		const btQuaternion orientation, const btVector3 dimensions, const btScalar mass,
-		const btScalar restitution, const btScalar friction) {
+		const btQuaternion orientation, const btVector3 initialRelativePosition,
+		const btQuaternion initialOrientation, const btVector3 dimensions,
+		const btScalar mass, const btScalar restitution,
+		const btScalar friction) {
 	mWorld = world;
 	mDimensions = dimensions;
 	mMass = mass;
@@ -137,6 +99,15 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	mBody->setUserPointer(limbModel);
 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
 	mCollisionShape->setUserPointer(limbModel);
+
+	mInitialRelativeXPosition = initialRelativePosition.getX();
+	mInitialRelativeYPosition = initialRelativePosition.getY();
+	mInitialRelativeZPosition = initialRelativePosition.getZ();
+
+	mInitialWOrientation = initialOrientation.getW();
+	mInitialXOrientation = initialOrientation.getX();
+	mInitialYOrientation = initialOrientation.getY();
+	mInitialZOrientation = initialOrientation.getZ();
 }
 
 btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
@@ -186,7 +157,8 @@ btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
 	return mDimensions.length() / 2.0f * direction.normalized();
 }
 
-btVector3 LimbBt::getLocalIntersection(const btVector3 origin, const btVector3 direction) {
+btVector3 LimbBt::getLocalIntersection(const btVector3 origin,
+		const btVector3 direction) {
 	// for the moment we fake the local intersection point until the real intersection can be calculated
 	return getLocalFakeIntersection(origin, direction);
 	//return getLocalPreciseIntersection(origin, direction);

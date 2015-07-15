@@ -68,9 +68,11 @@ public:
 	 */
 	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
 			PrimitiveType type, Ogre::Vector3 position,
-			Ogre::Quaternion orientation, Ogre::Vector3 dimensions, double mass,
-			double restitution, double friction, Ogre::ColourValue color,
-			int ownIndex);
+			Ogre::Quaternion orientation,
+			const Ogre::Vector3 initialRelativePosition,
+			const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
+			double mass, double restitution, double friction,
+			Ogre::ColourValue color, int ownIndex);
 
 	/**
 	 * Reset the limb to the place when the creature was born.

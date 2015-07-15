@@ -40,6 +40,8 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger PhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
+PhenomeModel::_Init PhenomeModel::_initializer;
 PhenomeModel::PhenomeModel() :
 		mSimulationManager(NULL), mWorld(NULL), mInWorld(false), mDeveloped(
 				false) {
@@ -102,15 +104,6 @@ void PhenomeModel::update(const double timeSinceLastFrame) {
 }
 
 void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
-
-	int tests = 3000;
-	bool endEmbryogenesis = false;
-//	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//	SimulationManager::detectError(creatureModel->getPopulationModel(), tests,
-//			0, 0);
-//	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	int whileCounter = 0;
-
 	if (!mDeveloped) {
 		std::list<PhenotypeGenerator*> generatorList;
 		int totalSegmentCounter = 0;
@@ -127,26 +120,10 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
 
-//		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//		SimulationManager::detectError(creatureModel->getPopulationModel(),
-//				tests, 1, 0);
-//		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-		int whileCounter = 0;
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 		while (!generatorList.empty()) {
-			whileCounter++;
 
-//			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//			SimulationManager::detectError(creatureModel->getPopulationModel(),
-//					tests, 2, whileCounter);
-//			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-			//		std::cout << "Phenome generator qty:" << generatorList.size()
-			//				<< std::endl;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Phenome generator qty:" << generatorList.size();
 
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
@@ -157,33 +134,17 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 			switch (generator->getGene()->getType()) {
 			case Gene::MorphoGene: {
 
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//				SimulationManager::detectError(
-//						creatureModel->getPopulationModel(), tests, 3,
-//						whileCounter);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 				// if the current root to leaf path is equal to the maximal segments depth, break
 				if (generator->getRoot2LeafPath()
 						== creatureModel->getGenotype().getSegmentsDepthLimit()) {
 					break;
 				}
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//				SimulationManager::detectError(
-//						creatureModel->getPopulationModel(), tests, 4,
-//						whileCounter);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 				//if the total segment counter reached the total segment quantity, break
 				if (totalSegmentCounter
 						== creatureModel->getGenotype().getTotalSegmentQtyLimit()) {
-					endEmbryogenesis = true;
 					break;
 				}
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//				SimulationManager::detectError(
-//						creatureModel->getPopulationModel(), tests, 5,
-//						whileCounter);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 				totalSegmentCounter++;
 
@@ -195,11 +156,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 
 				// joint position in reference frame B
 				Ogre::Vector3 localJointOB(0, 0, 0);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//				SimulationManager::detectError(
-//						creatureModel->getPopulationModel(), tests, 6,
-//						whileCounter);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 				// if there exists a parent component, then we calculate the position of the new limb according to the parent component
 				if (generator->getParentComponentModel() != NULL) {
@@ -211,12 +167,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 					//get the limb A'a center of mass
 					Ogre::Vector3 limbACOM =
 							((LimbModel*) generator->getParentComponentModel())->getPosition();
-
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 7,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					//get anchor direction of limb A in reference frame of A
 					Ogre::Vector3 localAnchorDirOA;
@@ -241,12 +191,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 								(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
 					}
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 8,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					//get surface point of limb A in reference frame of A
 					Ogre::Vector3 localAnchorOA(limbA->getLocalIntersection(
 					/*origin of limb A*/
@@ -265,12 +209,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 							+ eulerA * localAnchorDirOA.normalisedCopy()
 									* MorphologyConfiguration::JOINT_LENGTH;
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 9,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					//get anchor direction of limb B
 					Ogre::Vector3 localAnchorDirOB(
 							morphogene->getJointAnchorX(),
@@ -287,26 +225,18 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 							localJointOA
 									- eulerB * localAnchorDirOB.normalisedCopy()
 											* MorphologyConfiguration::JOINT_LENGTH);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 10,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
 					LimbBt* limbBBt = new LimbBt();
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 101,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 					limbBBt->initialize(mWorld,
 					NULL, morphogene->getPrimitiveType(),
 							OgreBulletUtils::convert(generator->getPosition()),
 							btQuaternion(morphogene->getOrientationX(),
 									morphogene->getOrientationY(),
 									morphogene->getOrientationZ(),
-									morphogene->getOrientationW()),
+									morphogene->getOrientationW()), btVector3(),
+							btQuaternion(),
 							/*size*/
 							btVector3(
 									generator->getCurrentShrinkageFactor()
@@ -327,12 +257,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 							morphogene->getFriction());
 					limbBBt->addToWorld();
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 11,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					//get the surface point of limb B in the local reference frame of B
 					Ogre::Vector3 localAnchorOB(
 							OgreBulletUtils::convert(
@@ -344,19 +268,8 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 											OgreBulletUtils::convert(
 													localAnchorDirOB))));
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 111,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					limbBBt->removeFromWorld();
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 1111,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 					delete limbBBt;
 					limbBBt = 0;
 
@@ -365,11 +278,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 							limbACOM + localAnchorOBinA - localAnchorOB);
 					// set global center of mass of limb B as the new generation point
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 11111,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 					generator->setPosition(limbBCOM);
 					generator->setOrientation(
 							Ogre::Quaternion(morphogene->getOrientationW(),
@@ -377,21 +285,9 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 									morphogene->getOrientationY(),
 									morphogene->getOrientationZ()));
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 11111,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					localJointOB = localAnchorOB
 							+ eulerB * localAnchorDirOB.normalisedCopy()
 									* MorphologyConfiguration::JOINT_LENGTH;
-
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 12,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 //				// draw line from limb A along test ray (RED LINE)
 //				//TODO: Debug lines
@@ -427,12 +323,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 //						limbACOM, Ogre::ColourValue(1, 1, 1));
 				}
 
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//				SimulationManager::detectError(
-//						creatureModel->getPopulationModel(), tests, 13,
-//						whileCounter);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 				//build the limb out of the morphogene
 				LimbModel* limbB = new LimbModel();
 				mLimbModels.push_back(limbB);
@@ -441,6 +331,10 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 				limbB->initialize(mWorld, creatureModel,
 						morphogene->getPrimitiveType(),
 						generator->getPosition(), generator->getOrientation(),
+						Ogre::Vector3(
+								generator->getPosition()
+										- creatureModel->getPosition()),
+						Ogre::Quaternion(generator->getOrientation()),
 						/*size*/
 						Ogre::Vector3(
 								generator->getCurrentShrinkageFactor()
@@ -462,12 +356,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 								morphogene->getColorG()),
 						mComponentModels.size() - 1);
 
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//				SimulationManager::detectError(
-//						creatureModel->getPopulationModel(), tests, 14,
-//						whileCounter);
-//				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 				if (generator->getParentComponentModel() != NULL) {
 
 					// transformation from the limb A and limb B center of mass to the joint in the respective reference frames
@@ -485,12 +373,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 							morphogeneBranch->getJointYaw(),
 							morphogeneBranch->getJointPitch());
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 15,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					// define the position and direction of the joint in the reference frame of B
 					localB.setOrigin(OgreBulletUtils::convert(localJointOB));
 					localB.getBasis().setEulerZYX(morphogene->getJointRoll(),
@@ -503,12 +385,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 					// add the joint to the phenotype joints
 					mJointModels.push_back(joint);
 					mComponentModels.push_back(joint);
-
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 16,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					joint->initialize(mWorld,
 							/*limbA*/
@@ -540,12 +416,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 									morphogeneBranch->getJointYawMaxAngle(),
 									morphogeneBranch->getJointRollMaxAngle()));
 
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 17,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 					//set the angular stiffness of the joint
 					joint->setAngularStiffness(
 							morphogeneBranch->getJointPitchStiffness(),
@@ -575,12 +445,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 					//					controller->addControlOutput((*motorIterator));
 					//					mPhenomeModel.getControllers().push_back(controller);
 					//				}
-
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 18,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 				}
 
 				//iterate over all morphogene branches
@@ -588,12 +452,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 						morphogene->getGeneBranches().begin();
 						branchIt != morphogene->getGeneBranches().end();
 						branchIt++) {
-
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//					SimulationManager::detectError(
-//							creatureModel->getPopulationModel(), tests, 19,
-//							whileCounter);
-//					//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					// only add new generator if the branch is active
 					if ((*branchIt)->isActive()) {
@@ -632,12 +490,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 						//set new root to leaf path length
 						generatorFromBranch->setRoot2LeafPath(
 								generator->getRoot2LeafPath() + 1);
-
-//						//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//						SimulationManager::detectError(
-//								creatureModel->getPopulationModel(), tests, 20,
-//								whileCounter);
-//						//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 						//add generator to the list
 						generatorList.push_back(generatorFromBranch);
@@ -680,12 +532,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 							generatorList.push_back(flippedGeneratorFromBranch);
 						}
 
-//						//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//						SimulationManager::detectError(
-//								creatureModel->getPopulationModel(), tests, 21,
-//								whileCounter);
-//						//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 						if ((*branchIt)->isMirrored()) {
 							// create the new generator
 							PhenotypeGenerator* mirroredGeneratorFromBranch =
@@ -716,12 +562,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 										creatureModel->getGenotype().getGenes()[offspring->getFollowUpGene()]);
 							}
 
-//							//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//							SimulationManager::detectError(
-//									creatureModel->getPopulationModel(), tests,
-//									22, whileCounter);
-//							//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 							//set new root to leaf path length
 							mirroredGeneratorFromBranch->setRoot2LeafPath(
 									generator->getRoot2LeafPath() + 1);
@@ -739,20 +579,9 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 			}
 			// delete the generator of this gene
 			delete generator;
-			if (endEmbryogenesis) {
-				break;
-			}
 		}
 
 		mDeveloped = true;
-
-//		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//		SimulationManager::detectError(creatureModel->getPopulationModel(),
-//				tests, 23, whileCounter);
-//		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-		std::cout << "Creature finished.\n";
-		std::cout << "################################\n\n";
 	}
 }
 

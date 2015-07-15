@@ -100,14 +100,17 @@ public:
 		<< "MixedGenome: Type: " << genome.mGenomeType
 
 		/**The length of the genome*/
-		<< "/length=" << genome.mLength;
+		<< "/length=" << genome.mLength
 
+		<< "/Genes=[";
 		/**The vector of genes.*/
 		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
 				it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
+
+		os << "]";
 
 		/**The total segment quantity limit*/
 		os << "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit

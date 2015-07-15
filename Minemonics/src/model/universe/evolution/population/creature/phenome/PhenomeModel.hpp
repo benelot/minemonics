@@ -14,6 +14,8 @@ class MixedGenome;
 //## model headers
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 #include <OgreVector3.h>
 #include <btBulletDynamicsCommon.h>
 
@@ -29,6 +31,7 @@ class MixedGenome;
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The phenome model holds all the state information of the phenome independent of other models.
@@ -95,7 +98,9 @@ public:
 			const PhenomeModel& phenomeModel) {
 		os
 		/**if the phenome is in the world*/
-		<< "PhenomeModel: isInWorld=" << phenomeModel.mInWorld;
+		<< "/PhenomeModel: isInWorld=" << phenomeModel.mInWorld
+
+		<< "/Limbs=[";
 
 		/**The vector of limb models.*/
 
@@ -106,6 +111,8 @@ public:
 			os << "||";
 		}
 
+		os << "]/Joints=[";
+
 		/**The vector of joint models.*/
 		for (std::vector<JointModel*>::const_iterator it =
 				phenomeModel.mJointModels.begin();
@@ -114,6 +121,8 @@ public:
 			os << "||";
 		}
 
+		os << "]/Controllers=[";
+
 		/**The vector of controllers.*/
 		for (std::vector<Controller*>::const_iterator it =
 				phenomeModel.mControllers.begin();
@@ -121,6 +130,8 @@ public:
 			os << (**it);
 			os << "||";
 		}
+
+		os << "]";
 
 		return os;
 	}
@@ -182,6 +193,22 @@ public:
 	}
 
 private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"PhenomeModel"));
+		}
+	} _initializer;
 
 	/**
 	 * Is the phenotype developed?

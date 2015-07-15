@@ -52,8 +52,14 @@ Population::~Population() {
 void Population::initialize(Planet* const planet,
 		SimulationManager* const simulationManager, const int creatureQty,
 		const Ogre::Vector3 initialPosition) {
+
 	mSimulationManager = simulationManager;
+	mPlanet = planet;
+
+	//initialize the population model with zero creatures.
 	mPopulationModel.initialize(&planet->getPlanetModel(), 0);
+
+	// add creatures up to the creature quantity.
 	Randomness randomness;
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
@@ -62,12 +68,13 @@ void Population::initialize(Planet* const planet,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		addNewMember(branchiness, initialPosition);
 	}
-	mPlanet = planet;
 }
 
 void Population::initialize(Planet* const planet, const int creatureQty) {
-	mPopulationModel.initialize(&planet->getPlanetModel(), creatureQty);
 	mPlanet = planet;
+
+	//initialize the population model with n creatures.
+	mPopulationModel.initialize(&planet->getPlanetModel(), creatureQty);
 }
 
 /**
@@ -77,23 +84,27 @@ void Population::initialize(Planet* const planet, const int creatureQty) {
 void Population::addNewMember(const double branchiness,
 		const Ogre::Vector3 rootPosition) {
 	if (mSimulationManager) {
+
+		//add new creature
 		Creature* creature = new Creature();
 		creature->initialize(mSimulationManager, this, rootPosition,
 				branchiness);
 		addMember(creature);
+
 	}
 
 }
 
 void Population::addMember(Creature* const creature) {
 	mCreatures.push_back(creature);
+
 	//hand model down to the population model
 	mPopulationModel.addMember(&creature->getCreatureModel());
 }
 
 void Population::update() {
-	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for (; cit != mCreatures.end(); cit++) {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end(); cit++) {
 		(*cit)->update();
 	}
 }
@@ -106,15 +117,15 @@ void Population::reset() {
 }
 
 void Population::addToWorld() {
-	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for (; cit != mCreatures.end(); cit++) {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end(); cit++) {
 		(*cit)->addToWorld();
 	}
 }
 
 void Population::removeFromWorld() {
-	std::vector<Creature*>::iterator cit = mCreatures.begin();
-	for (; cit != mCreatures.end(); cit++) {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end(); cit++) {
 		(*cit)->removeFromWorld();
 	}
 }

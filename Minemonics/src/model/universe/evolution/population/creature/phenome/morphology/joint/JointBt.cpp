@@ -41,7 +41,8 @@
 
 JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB) {
+		const btTransform& tframeInB) :
+		mInWorld(false) {
 	mWorld = world;
 	mG6DofJoint = new btGeneric6DofSpringConstraint(*bodyA, *bodyB, tframeInA,
 			tframeInB, true/*use fixed frame A for linear limits*/);
@@ -63,12 +64,12 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 
 JointBt::JointBt(const JointBt& jointBt) {
 	mWorld = jointBt.mWorld;
+	mInWorld = jointBt.mInWorld;
 	mG6DofJoint = jointBt.mG6DofJoint;
 
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
 			mit != jointBt.mMotors.end(); mit++) {
-		Motor* motor = (*mit)->clone();
-		mMotors.push_back(motor);
+		mMotors.push_back((*mit)->clone());
 	}
 }
 
@@ -188,9 +189,9 @@ void JointBt::addToWorld() {
 }
 
 void JointBt::removeFromWorld() {
-	if (!isInWorld()) {
-	mWorld->removeConstraint((btTypedConstraint*) mG6DofJoint);
-	setInWorld(false);
+	if (isInWorld()) {
+		mWorld->removeConstraint((btTypedConstraint*) mG6DofJoint);
+		setInWorld(false);
 	}
 }
 

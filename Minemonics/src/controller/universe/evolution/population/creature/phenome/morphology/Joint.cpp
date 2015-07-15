@@ -40,13 +40,15 @@ Joint::Joint(const Joint& joint) :
 	mJointGraphics = joint.mJointGraphics->clone();
 }
 
-Joint::Joint(const JointModel& jointModel) : mJointModel(jointModel) {
+Joint::Joint(const JointModel& jointModel) :
+		mJointModel(jointModel) {
 	mJointGraphics = new JointO3D();
 	((JointO3D*) mJointGraphics)->initialize();
 }
 
 Joint::~Joint() {
 	delete mJointGraphics;
+	mJointGraphics = NULL;
 //	mJointModel
 }
 

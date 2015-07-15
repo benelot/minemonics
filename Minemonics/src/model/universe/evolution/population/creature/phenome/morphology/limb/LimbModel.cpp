@@ -22,7 +22,7 @@
 
 LimbModel::LimbModel() :
 		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN), mCreatureModel(
-				NULL) {
+		NULL) {
 }
 
 LimbModel::LimbModel(const LimbModel& limbModel) {
@@ -38,11 +38,14 @@ LimbModel::~LimbModel() {
 	mLimbPhysics = NULL;
 }
 
-void LimbModel::initialize(btDynamicsWorld* const world, CreatureModel* const creatureModel,
-		const PrimitiveType type, const Ogre::Vector3 position,
-		const Ogre::Quaternion orientation, const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction, const Ogre::ColourValue color,
-		const int ownIndex) {
+void LimbModel::initialize(btDynamicsWorld* const world,
+		CreatureModel* const creatureModel, const PrimitiveType type,
+		const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation,
+		const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction,
+		const Ogre::ColourValue color, const int ownIndex) {
 	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
 
 	// initialize the physics model of the limb
@@ -50,6 +53,8 @@ void LimbModel::initialize(btDynamicsWorld* const world, CreatureModel* const cr
 	((LimbBt*) mLimbPhysics)->initialize(world, this, type,
 			OgreBulletUtils::convert(position),
 			OgreBulletUtils::convert(orientation),
+			OgreBulletUtils::convert(initialRelativePosition),
+			OgreBulletUtils::convert(initialOrientation),
 			OgreBulletUtils::convert(dimensions), btScalar(mass),
 			btScalar(restitution), btScalar(friction));
 

@@ -55,8 +55,11 @@ public:
 	 */
 	void initialize(btDynamicsWorld* const world, void* const limbModel,
 			const LimbModel::PrimitiveType type, const btVector3 position,
-			const btQuaternion orientation, const btVector3 dimensions, const btScalar mass,
-			const btScalar restitution, const btScalar friction);
+			const btQuaternion orientation,
+			const btVector3 initialRelativePosition,
+			const btQuaternion initialOrientation, const btVector3 dimensions,
+			const btScalar mass, const btScalar restitution,
+			const btScalar friction);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -89,7 +92,8 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the global reference frame.
 	 */
-	btVector3 getIntersection(const btVector3 origin, const btVector3 direction);
+	btVector3 getIntersection(const btVector3 origin,
+			const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the global reference frame.
@@ -97,7 +101,8 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getPreciseIntersection(const btVector3 origin, const btVector3 direction);
+	btVector3 getPreciseIntersection(const btVector3 origin,
+			const btVector3 direction);
 
 	/**
 	 * Get the fake intersection with the surface in the local reference frame.
@@ -105,7 +110,8 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The fake intersection in the local reference frame.
 	 */
-	btVector3 getLocalFakeIntersection(const btVector3 origin,const btVector3 direction);
+	btVector3 getLocalFakeIntersection(const btVector3 origin,
+			const btVector3 direction);
 
 	/**
 	 * Get the intersection in the local reference frame of the indicated origin.
@@ -113,7 +119,8 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getLocalIntersection(const btVector3 origin,const btVector3 direction);
+	btVector3 getLocalIntersection(const btVector3 origin,
+			const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the local reference frame of the indicated origin.
