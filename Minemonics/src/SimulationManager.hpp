@@ -95,6 +95,7 @@ public:
 				nothingFound = false;
 				std::cout << "Block " << identifier << "::..."
 						<< additionalCounter << "/" << j;
+				std::cout << "CreatureModel vector size check....";
 				std::cout << "\nsize: "
 						<< populationModel->getCreatureModels().size() << "\t";
 				std::cout << "size2: >" << i << std::endl;
@@ -104,6 +105,7 @@ public:
 
 		if (showNothingFound && nothingFound) {
 			std::cout << "Block " << identifier << "::..." << additionalCounter;
+			std::cout << "CreatureModel vector size check....";
 			std::cout << "\nNo errors found\n\n";
 			return false;
 		}
