@@ -121,8 +121,7 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 			break;
 		}
 		case ComponentModel::JointComponent: {
-			//TODO:: Fix with indices
-			Joint* joint = new Joint(((JointModel&) **cmit));
+			Joint* joint = new Joint(((JointModel*) *cmit));
 			mJoints.push_back(joint);
 			mComponents.push_back(joint);
 			break;

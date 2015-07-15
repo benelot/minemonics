@@ -46,6 +46,7 @@ public:
 	Joint();
 	Joint(const Joint& joint);
 	Joint(const JointModel& jointModel);
+	Joint(JointModel* const jointModel);
 	virtual ~Joint();
 
 	/**
@@ -143,7 +144,7 @@ public:
 	 * @return The motors of this joint.
 	 */
 	const std::vector<Motor*>& getMotors() const {
-		return mJointModel.getJointPhysics()->getMotors();
+		return mJointModel->getJointPhysics()->getMotors();
 	}
 
 	JointGraphics* const getJointGraphics() const {
@@ -151,7 +152,7 @@ public:
 	}
 
 	JointPhysics* const getJointPhysics() const {
-		return mJointModel.getJointPhysics();
+		return mJointModel->getJointPhysics();
 	}
 
 private:
@@ -178,7 +179,7 @@ private:
 	/**
 	 * Model representation of the joint.
 	 */
-	JointModel mJointModel;
+	JointModel* mJointModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_HPP_ */

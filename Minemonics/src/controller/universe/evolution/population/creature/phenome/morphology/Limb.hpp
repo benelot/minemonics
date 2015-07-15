@@ -150,7 +150,7 @@ public:
 	 * Get the Physics part of the limb.
 	 */
 	LimbBt* const getLimbPhysics() const {
-		return ((LimbBt*) mLimbModel.getLimbPhysics());
+		return ((LimbBt*) mLimbModel->getLimbPhysics());
 	}
 
 private:
@@ -179,7 +179,7 @@ private:
 	/**
 	 * The model representation of the limb.
 	 */
-	LimbModel mLimbModel;
+	LimbModel* mLimbModel;
 
 	/**
 	 * The creature the limb belongs to.

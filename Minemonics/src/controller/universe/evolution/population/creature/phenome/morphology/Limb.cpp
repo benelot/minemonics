@@ -42,7 +42,7 @@
 BoostLogger Limb::mBoostLogger; /*<! initialize the boost logger*/
 Limb::_Init Limb::_initializer;
 Limb::Limb() :
-		mLimbGraphics(NULL), mCreature(NULL) {
+		mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Limb created.";
 }
 
@@ -53,8 +53,8 @@ Limb::Limb(const Limb& limb) :
 }
 
 Limb::Limb(SimulationManager* const simulationManager, Creature* const creature,
-		LimbModel* const limbModel) :
-		mLimbModel(*limbModel) {
+		LimbModel* const limbModel) {
+	mLimbModel = limbModel;
 	mCreature = creature;
 
 	// Define the new component as a limb
@@ -74,7 +74,8 @@ Limb::~Limb() {
 	delete mLimbGraphics;
 	mLimbGraphics = NULL;
 
-//	mLimbModel
+	delete mLimbModel;
+	mLimbModel = NULL;
 
 	mCreature = NULL;
 }
@@ -89,7 +90,8 @@ void Limb::initialize(SimulationManager* const simulationManager,
 		const Ogre::ColourValue color, const int ownIndex) {
 
 	//initialize the model of the limb
-	mLimbModel.initialize(
+	mLimbModel = new LimbModel();
+	mLimbModel->initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			&creature->getCreatureModel(), type, position, orientation,
 			initialRelativePosition, initialOrientation, dimensions, mass,
@@ -98,13 +100,13 @@ void Limb::initialize(SimulationManager* const simulationManager,
 	mCreature = creature;
 
 	// Define the new component as a limb
-	Component::initialize(&mLimbModel);
+	Component::initialize(mLimbModel);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D();
 	getLimbGraphics()->initialize(simulationManager,
-			mLimbModel.getPrimitiveType(), mLimbModel.getDimensions(),
-			mLimbModel.getColor());
+			mLimbModel->getPrimitiveType(), mLimbModel->getDimensions(),
+			mLimbModel->getColor());
 
 	// Update the state of the limb.
 	update();
@@ -139,11 +141,11 @@ void Limb::update() {
 }
 
 void Limb::reset(const Ogre::Vector3 position) {
-	mLimbModel.reset(position);
+	mLimbModel->reset(position);
 }
 
 void Limb::reposition(const Ogre::Vector3 position) {
-	mLimbModel.reposition(position);
+	mLimbModel->reposition(position);
 }
 
 Limb* Limb::clone() {
@@ -171,7 +173,7 @@ std::string Limb::getInfo() {
  */
 void Limb::addToWorld() {
 	mLimbGraphics->addToWorld();
-	mLimbModel.getLimbPhysics()->addToWorld();
+	mLimbModel->getLimbPhysics()->addToWorld();
 }
 
 /**
@@ -179,7 +181,7 @@ void Limb::addToWorld() {
  */
 void Limb::removeFromWorld() {
 	mLimbGraphics->removeFromWorld();
-	mLimbModel.getLimbPhysics()->removeFromWorld();
+	mLimbModel->getLimbPhysics()->removeFromWorld();
 }
 
 /**
