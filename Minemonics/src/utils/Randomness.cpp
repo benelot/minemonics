@@ -54,6 +54,9 @@ int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
 	if (upperLimit <= 0) {
 		return 0;
 	}
+	else if(lowerLimit == upperLimit){
+		return lowerLimit;
+	}
 
 	//create a uniform integer distribution
 	boost::random::uniform_int_distribution<> unifIntDistribution(lowerLimit,
