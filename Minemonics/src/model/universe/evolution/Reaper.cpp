@@ -195,6 +195,9 @@ void Reaper::crossover(PopulationModel* const population,
 			population->getCreatureModels().push_back(offspring);
 		}
 		crossOverSown++;
+		if(crossOverSown == crossoverHeads){
+			break;
+		}
 		cit--;
 	}
 }
