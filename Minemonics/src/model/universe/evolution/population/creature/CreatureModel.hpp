@@ -111,7 +111,7 @@ public:
 		return totalVolume;
 	}
 
-	double getFitness() const;
+	double getFitness();
 
 	/**
 	 * Compare the creature model to another creature model.
@@ -228,6 +228,8 @@ public:
 	}
 
 private:
+
+	int mFitness;
 
 	/**
 	 * The name of the creature.

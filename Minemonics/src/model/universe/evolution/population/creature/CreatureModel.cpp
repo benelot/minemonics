@@ -18,12 +18,13 @@
 #include <utils/NameGenerator.hpp>
 #include <utils/Randomness.hpp>
 
-CreatureModel::CreatureModel() :mPopulationModel(NULL), mPhenotypeModel(NULL) {
+CreatureModel::CreatureModel() :
+		mPopulationModel(NULL), mPhenotypeModel(NULL), mFitness(0) {
 	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-		mGenotype(creatureModel.mGenotype) {
+		mGenotype(creatureModel.mGenotype), mFitness(0) {
 	mJuries.clear();
 
 	mFirstName = creatureModel.mFirstName;
@@ -72,15 +73,22 @@ void CreatureModel::reposition(const Ogre::Vector3 position) {
 	mPosition = position;
 }
 
-double CreatureModel::getFitness() const {
+double CreatureModel::getFitness() {
 	double fitness = 0;
 	double weight = 1;
 
-	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
-			jit != mJuries.end(); jit++) {
-		fitness += (*jit)->getFitness() * (*jit)->getWeight();
-		weight += (*jit)->getWeight();
+//	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
+//			jit != mJuries.end(); jit++) {
+//		fitness += (*jit)->getFitness() * (*jit)->getWeight();
+//		weight += (*jit)->getWeight();
+//	}
+
+	if (mFitness == 0) {
+		Randomness randomness;
+		mFitness = randomness.nextUnifDouble(0, 100);
 	}
+	fitness = mFitness;
+
 	if (weight != 0) {
 		return fitness / weight;
 	}

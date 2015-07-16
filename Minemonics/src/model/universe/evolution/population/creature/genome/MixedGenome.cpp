@@ -370,7 +370,7 @@ void MixedGenome::crossoverRandomly(Genome* genome) {
 
 	int fatherStartSegmentIndex = randomness.nextUnifPosInt(0,
 			genome->getGenes().size() - 1);
-	int fatherEndSegmentIndex = randomness.nextUnifPosInt(motherStartSegmentIndex,
+	int fatherEndSegmentIndex = randomness.nextUnifPosInt(fatherStartSegmentIndex,
 			genome->getGenes().size() - 1);
 
 	crossover(genome, motherStartSegmentIndex, motherEndSegmentIndex,
@@ -380,7 +380,7 @@ void MixedGenome::crossoverRandomly(Genome* genome) {
 void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
 		int motherSegmentEndIndex, int fatherSegmentStartIndex,
 		int fatherSegmentEndIndex) {
-	for (int i = mGenes.size(); i > motherSegmentEndIndex; i--) {
+	for (int i = mGenes.size()-1; i > motherSegmentEndIndex; i--) {
 		Gene* gene = mGenes[i];
 		mGenes.erase(mGenes.begin() + i);
 		delete gene;
@@ -389,6 +389,7 @@ void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
 	for (int i = 0; i < motherSegmentStartIndex; i++) {
 		Gene* gene = mGenes[0];
 		mGenes.erase(mGenes.begin());
+		delete gene;
 	}
 
 	for (int i = fatherSegmentStartIndex; i < fatherSegmentEndIndex; i++) {

@@ -228,7 +228,7 @@ void SimulationManager::createScene(void) {
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, this, 100, Ogre::Vector3(0, 300, -4000));
+	earthPopulation->initialize(earth, this, 10, Ogre::Vector3(0, 300, -4000));
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);

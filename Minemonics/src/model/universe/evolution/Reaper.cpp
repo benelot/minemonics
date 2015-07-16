@@ -53,6 +53,7 @@ void Reaper::initialize(const double reapPercentage,
 
 bool Reaper::compareCreatureFitness(CreatureModel* const creature1,
 		CreatureModel* const creature2) {
+	// lesser means ascending/ greater means descending
 	return (creature1->getFitness() < creature2->getFitness());
 }
 
@@ -67,8 +68,9 @@ void Reaper::reap(PopulationModel* const population) {
 
 	for (std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().begin();
-			cit != population->getCreatureModels().end() || headsToReap != 0;
+			cit != population->getCreatureModels().end() && headsToReap != 0;
 			headsToReap--) {
+
 		cit = population->getCreatureModels().erase(cit);
 	}
 
@@ -89,14 +91,15 @@ void Reaper::sow(PopulationModel* const population) {
 	// #############
 
 	// calculate the number of offsprings for each ancestor
-	int crossOverHeads = headsToSow * mCrossOverPercentage;
+	int crossOverHeads = ceil(((double) headsToSow) * mCrossOverPercentage);
 
 	crossover(population, crossOverHeads);
 
 	sown += crossOverHeads;
 
 	// calculate the number of gene mutated heads
-	int geneMutationHeads = headsToSow * mGeneMutationPercentage;
+	int geneMutationHeads = ceil(
+			((double) headsToSow) * mGeneMutationPercentage);
 
 	mutateGenes(population, geneMutationHeads);
 
@@ -108,7 +111,8 @@ void Reaper::sow(PopulationModel* const population) {
 //	mutateGeneBranchAttributes(population, attributeMutationHeads);
 
 	// calculate the number of gene branch mutated heads
-	int branchMutationHeads = headsToSow * mBranchMutationPercentage;
+	int branchMutationHeads = ceil(
+			((double) headsToSow) * mBranchMutationPercentage);
 
 	mutateGeneBranches(population, branchMutationHeads);
 
@@ -135,51 +139,62 @@ void Reaper::crossover(PopulationModel* const population,
 
 	std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().end();
-	int offspringPerParent = crossoverHeads
-			/ (population->getCreatureModels().size() * mCrossOverPercentage);
+
+	//how many offspring do we get per parent?
+	int offspringPerParent = ceil(
+			crossoverHeads
+					/ (population->getCreatureModels().size()
+							* mCrossOverPercentage));
+
+	int crossOverSown = 0;
 
 //crossover the best creature with those in the ranking downwards according to the cross over percentage
 	for (int i = 0;
-			cit != population->getCreatureModels().begin()
-					|| i < crossoverHeads; i++) {
+			cit != population->getCreatureModels().begin() && i < crossoverHeads;
+			i++) {
 
-		for (int i = 0; i < offspringPerParent - 1; i++) {
+		if (randomness.nextUnifBoolean()) {
+			for (int k = 0; k < offspringPerParent; k++) {
 
-			/**
-			 * Whenever a parent is needed, we choose a number of individuals at random from
-			 * the previous generation. These individuals constitute a tournament.
-			 * The creature with the highest fitness wins and becomes the selected parent.
-			 */
-			std::vector<CreatureModel*> tournament;
-			int bestCreatureIndex = 0;
-			int bestFitness = 0;
+				/**
+				 * Whenever a parent is needed, we choose a number of individuals at random from
+				 * the previous generation. These individuals constitute a tournament.
+				 * The creature with the highest fitness wins and becomes the selected parent.
+				 */
+				std::vector<CreatureModel*> tournament;
+				int bestCreatureIndex = 0;
+				int bestFitness = 0;
 
-			for (int j = 0;
-					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
-					j++) {
-				CreatureModel* model = population->getCreatureModels().at(
-						randomness.nextUnifPosInt(0,
-								population->getCreatureModels().size()));
-				if (bestFitness < model->getFitness()) {
-					bestFitness = model->getFitness();
-					bestCreatureIndex = j;
+				for (int j = 0;
+						j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+						j++) {
+					CreatureModel* model = population->getCreatureModels().at(
+							randomness.nextUnifPosInt(0,
+									population->getCreatureModels().size()
+											- 1));
+					if (bestFitness < model->getFitness()) {
+						bestFitness = model->getFitness();
+						bestCreatureIndex = j;
+					}
+					tournament.push_back(model);
 				}
-				tournament.push_back(model);
-			}
 
+				CreatureModel* offspring = (*cit)->clone();
+				offspring->getGenotype().crossoverRandomly(
+						&(tournament.at(bestCreatureIndex)->getGenotype()));
+				population->getCreatureModels().push_back(offspring);
+			}
+		} else {
+			//Cross over with one random creature
+			Randomness randomness;
 			CreatureModel* offspring = (*cit)->clone();
 			offspring->getGenotype().crossoverRandomly(
-					&(tournament.at(bestCreatureIndex)->getGenotype()));
+					&(population->getCreatureModels().at(
+							randomness.nextUnifPosInt(0,
+									population->getCreatureModels().size() - 1))->getGenotype()));
 			population->getCreatureModels().push_back(offspring);
 		}
-//Cross over with one random creature
-		Randomness randomness;
-		CreatureModel* offspring = (*cit)->clone();
-		offspring->getGenotype().crossoverRandomly(
-				&(population->getCreatureModels().at(
-						randomness.nextUnifPosInt(0,
-								population->getCreatureModels().size()))->getGenotype()));
-		population->getCreatureModels().push_back(offspring);
+		crossOverSown++;
 		cit--;
 	}
 }
@@ -197,7 +212,7 @@ void Reaper::mutateGenes(PopulationModel* const population,
 				j++) {
 			CreatureModel* model = population->getCreatureModels().at(
 					randomness.nextUnifPosInt(0,
-							population->getCreatureModels().size()));
+							population->getCreatureModels().size() - 1));
 			if (bestFitness < model->getFitness()) {
 				bestFitness = model->getFitness();
 				bestCreatureIndex = j;
@@ -227,7 +242,7 @@ void Reaper::mutateGeneAttributes(PopulationModel* const population,
 				j++) {
 			CreatureModel* model = population->getCreatureModels().at(
 					randomness.nextUnifPosInt(0,
-							population->getCreatureModels().size()));
+							population->getCreatureModels().size() - 1));
 			if (bestFitness < model->getFitness()) {
 				bestFitness = model->getFitness();
 				bestCreatureIndex = j;
@@ -255,7 +270,7 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 				j++) {
 			CreatureModel* model = population->getCreatureModels().at(
 					randomness.nextUnifPosInt(0,
-							population->getCreatureModels().size()));
+							population->getCreatureModels().size() - 1));
 			if (bestFitness < model->getFitness()) {
 				bestFitness = model->getFitness();
 				bestCreatureIndex = j;
@@ -274,7 +289,8 @@ void Reaper::mutateGeneBranchAttributes(PopulationModel* const population,
 		const int mutatedGeneBranchAttributeHeads) {
 }
 
-void Reaper::sowFreshly(PopulationModel* const population, const int sowFreshlyHeads) {
+void Reaper::sowFreshly(PopulationModel* const population,
+		const int sowFreshlyHeads) {
 	double branchiness = 0;
 	Randomness randomness;
 	for (int i = 0; i < sowFreshlyHeads; i++) {

@@ -27,8 +27,8 @@ EvolutionModel::~EvolutionModel() {
 
 }
 
-void EvolutionModel::initialize(const EvaluationType type, const double evaluationTime,
-		const int tournamentSize) {
+void EvolutionModel::initialize(const EvaluationType type,
+		const double evaluationTime, const int tournamentSize) {
 	mType = type;
 	mEvaluationTime = evaluationTime;
 	mTournamentSize = tournamentSize;
@@ -44,7 +44,8 @@ bool EvolutionModel::proceedEvaluation() {
 		if (mCurrentCreatureIndex
 				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex++;
-		} else if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
+			return true;
+		} else {
 			// process the evaluated populations
 			process();
 
@@ -53,6 +54,9 @@ bool EvolutionModel::proceedEvaluation() {
 
 			// variate the evaluated populations
 			variate();
+		}
+
+		if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
 			mCurrentPopulationIndex++;
 			mCurrentCreatureIndex = 0;
 		} else {
