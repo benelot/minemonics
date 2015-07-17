@@ -19,23 +19,26 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mPopulationModel(NULL), mPhenotypeModel(NULL), mFitness(0) {
+		mPopulationModel(NULL), mPhenotypeModel(NULL), mCulled(false), mNew(
+				false) {
 	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-		mGenotype(creatureModel.mGenotype), mFitness(0) {
-	mJuries.clear();
+		mGenotype(creatureModel.mGenotype) {
 
 	mFirstName = creatureModel.mFirstName;
-
+	mCulled = creatureModel.mCulled;
+	mNew = creatureModel.mNew;
 	mPopulationModel = creatureModel.mPopulationModel;
-	if (creatureModel.mPhenotypeModel != NULL) {
-		mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
-	}
 	mInitialPosition = creatureModel.mInitialPosition;
 	mPosition = creatureModel.mPosition;
 
+	if (creatureModel.mPhenotypeModel != NULL) {
+		mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
+	}
+
+	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
 			jit != creatureModel.mJuries.end(); jit++) {
 		mJuries.push_back((*jit)->clone());
@@ -83,11 +86,7 @@ double CreatureModel::getFitness() {
 //		weight += (*jit)->getWeight();
 //	}
 
-	if (mFitness == 0) {
-		Randomness randomness;
-		mFitness = randomness.nextUnifDouble(0, 100);
-	}
-	fitness = mFitness;
+	fitness = mPhenotypeModel->getComponentModels().size();
 
 	if (weight != 0) {
 		return fitness / weight;
@@ -125,6 +124,11 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 
 void CreatureModel::performEmbryogenesis() {
 	mPhenotypeModel->performEmbryogenesis(this);
+}
+
+void CreatureModel::giveRebirth() {
+	NameGenerator nameGenerator;
+	mFirstName = nameGenerator.generateFirstName();
 }
 
 CreatureModel* CreatureModel::clone() {

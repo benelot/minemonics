@@ -74,6 +74,11 @@ public:
 	void performEmbryogenesis();
 
 	/**
+	 * Give rebirth to the creature.
+	 */
+	void giveRebirth();
+
+	/**
 	 * Reset the creature to the way it was born.
 	 */
 	void reset(const Ogre::Vector3 position);
@@ -227,9 +232,33 @@ public:
 		return mPhenotypeModel;
 	}
 
+	bool isCulled() const {
+		return mCulled;
+	}
+
+	void setCulled(bool culled) {
+		mCulled = culled;
+	}
+
+	bool isNew() const {
+		return mNew;
+	}
+
+	void setNew(bool _new) {
+		mNew = _new;
+	}
+
 private:
 
-	int mFitness;
+	/**
+	 * If the creature was culled or not.
+	 */
+	bool mCulled;
+
+	/**
+	 * If the creature is new and does not have a controller element yet.
+	 */
+	bool mNew;
 
 	/**
 	 * The name of the creature.

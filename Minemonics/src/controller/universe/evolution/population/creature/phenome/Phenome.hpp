@@ -105,6 +105,11 @@ public:
 	void reposition(const Ogre::Vector3 position);
 
 	/**
+	 * Cleanup the phenome for a new embryogenesis.
+	 */
+	void cleanup();
+
+	/**
 	 * Clone the phenome.
 	 */
 	Phenome* clone();

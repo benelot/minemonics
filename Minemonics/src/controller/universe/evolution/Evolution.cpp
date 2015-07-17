@@ -53,6 +53,10 @@ bool Evolution::proceedEvaluation() {
 			&& mEvolutionModel.getCurrentPopulationIndex()
 					< mPopulations.size()) {
 
+		if(mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->isOutOfSync()){
+			mPopulations[mEvolutionModel.getCurrentPopulationIndex()]->resyncWithModel();
+		}
+
 		switch (mEvolutionModel.getType()) {
 		case EvolutionModel::INDIVIDUAL_EVALUATION: {
 
@@ -225,7 +229,7 @@ void Evolution::performEmbryogenesis() {
 
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			SimulationManager::detectError(
-					(*cit)->getCreatureModel().getPopulationModel(), 10, -1,
+					(*cit)->getCreatureModel()->getPopulationModel(), 10, -1,
 					0);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -233,11 +237,11 @@ void Evolution::performEmbryogenesis() {
 			//Gene Qty: z
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Performing embryogenesis on creature("
 			<< creatureQty <<"/"<< (*pit)->getCreatures().size() << "):\nGene Qty: "
-			<< (*cit)->getCreatureModel().getGenotype().getGenes().size();
+			<< (*cit)->getCreatureModel()->getGenotype().getGenes().size();
 
 			(*cit)->performEmbryogenesis();
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Components:" << (**cit).getCreatureModel().getPhenotypeModel()->getComponentModels().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Components:" << (**cit).getCreatureModel()->getPhenotypeModel()->getComponentModels().size();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< (**cit).getCreatureModel();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature finished.\n"
 			<< "################################\n\n";

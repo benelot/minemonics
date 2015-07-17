@@ -99,7 +99,7 @@ void Population::addMember(Creature* const creature) {
 	mCreatures.push_back(creature);
 
 	//hand model down to the population model
-	mPopulationModel.addMember(&creature->getCreatureModel());
+	mPopulationModel.addMember(creature->getCreatureModel());
 }
 
 void Population::update() {
@@ -128,4 +128,30 @@ void Population::removeFromWorld() {
 			cit != mCreatures.end(); cit++) {
 		(*cit)->removeFromWorld();
 	}
+}
+
+void Population::resyncWithModel() {
+	//remove the creatures that were culled
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end();) {
+		if ((*cit)->isCulled()) {
+			Creature* creature = *cit;
+			delete creature;
+			cit = mCreatures.erase(cit);
+		} else {
+			cit++;
+		}
+	}
+
+	for (std::vector<CreatureModel*>::const_iterator cit =
+			mPopulationModel.getCreatureModels().begin();
+			cit != mPopulationModel.getCreatureModels().end(); cit++) {
+		if((*cit)->isNew()){
+			Creature* creature = new Creature(*cit);
+			mCreatures.push_back(creature);
+			(*cit)->setNew(false);
+		}
+	}
+
+	mPopulationModel.setOutOfSync(false);
 }

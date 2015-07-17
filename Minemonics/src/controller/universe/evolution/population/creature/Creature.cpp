@@ -23,42 +23,51 @@ class SimulationManager;
 
 BoostLogger Creature::mBoostLogger; /*<! initialize the boost logger*/
 Creature::_Init Creature::_initializer;
-Creature::Creature() {
+Creature::Creature() :
+		mCreatureModel(NULL) {
 
+}
+
+Creature::Creature(CreatureModel* const creatureModel) {
+	mCreatureModel = creatureModel;
 }
 
 Creature::~Creature() {
+	delete mCreatureModel;
+//	mPhenotype
 }
 
 void Creature::initialize(SimulationManager* const simulationManager,
-		Population* const population, const Ogre::Vector3 position, const double branchiness) {
+		Population* const population, const Ogre::Vector3 position,
+		const double branchiness) {
 	// set up the creature model
-	mCreatureModel.initialize(&(population->getPopulationModel()), NULL, position,
-			branchiness);
+	mCreatureModel = new CreatureModel();
+	mCreatureModel->initialize(&(population->getPopulationModel()), NULL,
+			position, branchiness);
 
 	// set up the phenotype
 	mPhenotype.initialize(simulationManager, this);
 
 	// hand down the phenome model to the creature model
-	mCreatureModel.setPhenotypeModel(&mPhenotype.getPhenomeModel());
+	mCreatureModel->setPhenotypeModel(&mPhenotype.getPhenomeModel());
 
 }
 
 void Creature::performEmbryogenesis() {
-	mPhenotype.performEmbryogenesis(&this->getCreatureModel());
+	mPhenotype.performEmbryogenesis(mCreatureModel);
 }
 
 void Creature::reset(const Ogre::Vector3 position) {
-	mCreatureModel.reset(position);
+	mCreatureModel->reset(position);
 	mPhenotype.reset(position);
 }
 
 void Creature::reset() {
-	reset(mCreatureModel.getInitialPosition());
+	reset(mCreatureModel->getInitialPosition());
 }
 
 void Creature::reposition(const Ogre::Vector3 position) {
-	mCreatureModel.reposition(position);
+	mCreatureModel->reposition(position);
 	mPhenotype.reposition(position);
 }
 

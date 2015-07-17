@@ -65,6 +65,11 @@ public:
 	void addMember(Creature* const creature);
 
 	/**
+	 * Resynchronize this population with its model again.
+	 */
+	void resyncWithModel();
+
+	/**
 	 * Update the population.
 	 */
 	void update();
@@ -96,6 +101,14 @@ public:
 
 	PopulationModel& getPopulationModel() {
 		return mPopulationModel;
+	}
+
+	bool isOutOfSync() const {
+		return mPopulationModel.isOutOfSync();
+	}
+
+	void setOutOfSync(const bool outOfSync) {
+		mPopulationModel.setOutOfSync(outOfSync);
 	}
 
 private:

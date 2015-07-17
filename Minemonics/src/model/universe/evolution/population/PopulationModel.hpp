@@ -131,7 +131,21 @@ public:
 		return mCurrentCreatureIndex;
 	}
 
+	bool isOutOfSync() const {
+		return mOutOfSync;
+	}
+
+	void setOutOfSync(bool outOfSync) {
+		mOutOfSync = outOfSync;
+	}
+
 private:
+
+	/**
+	 * If the population model is out of sync with the controller.
+	 */
+	bool mOutOfSync;
+
 	/**
 	 * The creatures living in this population. All creatures in one population can mate together.
 	 */

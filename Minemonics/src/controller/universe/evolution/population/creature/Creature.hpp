@@ -32,6 +32,7 @@ class Population;
 class Creature {
 public:
 	Creature();
+	Creature(CreatureModel* const creatureModel);
 	virtual ~Creature();
 
 	/**
@@ -42,7 +43,8 @@ public:
 	 * @param branchiness The branchiness factor of the creature.
 	 */
 	void initialize(SimulationManager* const simulationManager,
-			Population* const population, const Ogre::Vector3 position, const double branchiness);
+			Population* const population, const Ogre::Vector3 position,
+			const double branchiness);
 
 	/**
 	 * Perform embryogenesis on the creature to build his phenotype from the genotype.
@@ -81,27 +83,31 @@ public:
 
 	// Facade accessor methods
 	void setPosition(const Ogre::Vector3 position) {
-		mCreatureModel.setPosition(position);
+		mCreatureModel->setPosition(position);
 	}
 
 	PlanetModel* getPlanet() {
-		return mCreatureModel.getPopulationModel()->getPlanetModel();
+		return mCreatureModel->getPopulationModel()->getPlanetModel();
 	}
 
 	void setPlanet(PlanetModel* planetModel) {
-		mCreatureModel.getPopulationModel()->setPlanetModel(planetModel);
+		mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
 	}
 
 	bool isDeveloped() {
-		return mCreatureModel.isDeveloped();
+		return mCreatureModel->isDeveloped();
 	}
 
 	void setDeveloped(bool developed) {
-		mCreatureModel.setDeveloped(developed);
+		mCreatureModel->setDeveloped(developed);
 	}
 
-	CreatureModel& getCreatureModel() {
+	CreatureModel* getCreatureModel() {
 		return mCreatureModel;
+	}
+
+	bool isCulled() const {
+		return mCreatureModel->isCulled();
 	}
 
 private:
@@ -117,15 +123,14 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Creature"));
+					boost::log::attributes::constant<std::string>("Creature"));
 		}
 	} _initializer;
 
 	/**
 	 * The model representation of the creature
 	 */
-	CreatureModel mCreatureModel;
+	CreatureModel* mCreatureModel;
 
 	//CHILD
 	/**

@@ -48,9 +48,12 @@ PhenomeModel::PhenomeModel() :
 	mControllers.clear();
 }
 
-PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) :
-		mSimulationManager(NULL), mWorld(NULL), mInWorld(false), mDeveloped(
-				false) {
+PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
+	mInWorld = phenomeModel.mInWorld;
+	mSimulationManager = phenomeModel.mSimulationManager;
+	mWorld = phenomeModel.mWorld;
+	mDeveloped = phenomeModel.mDeveloped;
+
 	std::vector<Controller*>::const_iterator cit =
 			phenomeModel.mControllers.begin();
 	for (; cit != phenomeModel.mControllers.end(); cit++) {
@@ -72,11 +75,6 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) :
 
 		}
 	}
-
-	mInWorld = phenomeModel.mInWorld;
-	mSimulationManager = phenomeModel.mSimulationManager;
-	mWorld = phenomeModel.mWorld;
-	mDeveloped = phenomeModel.mDeveloped;
 }
 
 PhenomeModel::~PhenomeModel() {
@@ -90,6 +88,8 @@ void PhenomeModel::initialize(SimulationManager* const simulationManager,
 }
 
 void PhenomeModel::update(const double timeSinceLastFrame) {
+	//update all controllers
+	//TODO: Hacks to make it run, make nicer
 	// let the controller perform
 	std::vector<Controller*>::iterator cit = mControllers.begin();
 	for (; cit != mControllers.end(); cit++) {
@@ -104,7 +104,8 @@ void PhenomeModel::update(const double timeSinceLastFrame) {
 }
 
 void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
-	if (!mDeveloped) {
+ 	if (!mDeveloped) {
+		cleanup();
 		std::list<PhenotypeGenerator*> generatorList;
 		int totalSegmentCounter = 0;
 
@@ -590,8 +591,17 @@ void PhenomeModel::reset(const Ogre::Vector3 position) {
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 			it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
-
 	}
+}
+
+void PhenomeModel::cleanup(){
+	for (std::vector<ComponentModel*>::iterator cit = mComponentModels.begin();
+			cit != mComponentModels.end();) {
+		delete *cit;
+		cit = mComponentModels.erase(cit);
+	}
+	mLimbModels.clear();
+	mJointModels.clear();
 }
 
 void PhenomeModel::reposition(const Ogre::Vector3 position) {

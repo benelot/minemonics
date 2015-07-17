@@ -69,22 +69,10 @@ Phenome::Phenome(const Phenome& phenome) :
 }
 
 Phenome::~Phenome() {
-	for(std::vector<Limb*>::iterator lit = mLimbs.begin();lit != mLimbs.end();){
-		Limb* limb = *lit;
-		lit = mLimbs.erase(lit);
-		delete limb;
-	}
-
-	for(std::vector<Joint*>::iterator jit = mJoints.begin();jit != mJoints.end();){
-		Joint* joint = *jit;
-		jit = mJoints.erase(jit);
-		delete joint;
-	}
-
-	for(std::vector<Component*>::iterator cit = mComponents.begin();cit != mComponents.end();){
-		Component* component = *cit;
+	for (std::vector<Component*>::iterator cit = mComponents.begin();
+			cit != mComponents.end();) {
+		delete *cit;
 		cit = mComponents.erase(cit);
-		delete component;
 	}
 
 	mSimulationManager = NULL;
@@ -104,6 +92,7 @@ void Phenome::initialize(SimulationManager* const simulationManager,
  * @param creatureModel the handle to the creatureModel we want to get back from the physics engine when we pick a creature.
  */
 void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
+	cleanup();
 	//perform the embryogenesis in the model
 	mPhenomeModel.performEmbryogenesis(creatureModel);
 
@@ -137,8 +126,6 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 }
 
 void Phenome::update() {
-	//update all controllers
-	//TODO: Hacks to make it run, make nicer
 	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970, 1, 1));
 	boost::posix_time::ptime now =
 			boost::posix_time::microsec_clock::local_time();
@@ -147,14 +134,14 @@ void Phenome::update() {
 	mPhenomeModel.update(diff.total_milliseconds());
 
 	// Update all limbs
-	std::vector<Limb*>::iterator lit = mLimbs.begin();
-	for (; lit != mLimbs.end(); lit++) {
+	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
+			lit++) {
 		(*lit)->update();
 	}
 
 	// Update all constraints
-	std::vector<Joint*>::iterator jit = mJoints.begin();
-	for (; jit != mJoints.end(); jit++) {
+	for (std::vector<Joint*>::iterator jit = mJoints.begin();
+			jit != mJoints.end(); jit++) {
 		(*jit)->update();
 	}
 }
@@ -162,14 +149,14 @@ void Phenome::update() {
 void Phenome::addToWorld() {
 	if (!isInWorld()) {
 		// Add all limbs
-		std::vector<Limb*>::iterator lit = mLimbs.begin();
-		for (; lit != mLimbs.end(); lit++) {
+		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
+				lit != mLimbs.end(); lit++) {
 			(*lit)->addToWorld();
 		}
 
 		// Add all constraints
-		std::vector<Joint*>::iterator jit = mJoints.begin();
-		for (; jit != mJoints.end(); jit++) {
+		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+				jit != mJoints.end(); jit++) {
 			(*jit)->addToWorld();
 		}
 		setInWorld(true);
@@ -179,32 +166,42 @@ void Phenome::addToWorld() {
 void Phenome::removeFromWorld() {
 	if (isInWorld()) {
 		// Remove all constraints
-		std::vector<Joint*>::iterator jit = mJoints.begin();
-		for (; jit != mJoints.end(); jit++) {
+		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+				jit != mJoints.end(); jit++) {
 			(*jit)->removeFromWorld();
 		}
 
 		// Remove all limbs
-		std::vector<Limb*>::iterator lit = mLimbs.begin();
-		for (; lit != mLimbs.end(); lit++) {
+		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
+				lit != mLimbs.end(); lit++) {
 			(*lit)->removeFromWorld();
 		}
 		setInWorld(false);
 	}
 }
 
+void Phenome::cleanup() {
+	for(std::vector<Component*>::iterator cit = mComponents.begin();cit != mComponents.end();){
+		delete *cit;
+		cit = mComponents.erase(cit);
+	}
+	mLimbs.clear();
+	mJoints.clear();
+
+}
+
 void Phenome::reset(const Ogre::Vector3 position) {
 	mPhenomeModel.reset(position);
 
 	// reset all constraints
-	std::vector<Joint*>::iterator jit = mJoints.begin();
-	for (; jit != mJoints.end(); jit++) {
+	for (std::vector<Joint*>::iterator jit = mJoints.begin();
+			jit != mJoints.end(); jit++) {
 		(*jit)->reset(position);
 	}
 
 	// reset all limbs
-	std::vector<Limb*>::iterator lit = mLimbs.begin();
-	for (; lit != mLimbs.end(); lit++) {
+	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
+			lit++) {
 		(*lit)->reset(position);
 	}
 }
@@ -213,14 +210,14 @@ void Phenome::reposition(const Ogre::Vector3 position) {
 	mPhenomeModel.reposition(position);
 
 	// reset all constraints
-	std::vector<Joint*>::iterator jit = mJoints.begin();
-	for (; jit != mJoints.end(); jit++) {
+	for (std::vector<Joint*>::iterator jit = mJoints.begin();
+			jit != mJoints.end(); jit++) {
 		(*jit)->reposition(position);
 	}
 
 	// reset all limbs
-	std::vector<Limb*>::iterator lit = mLimbs.begin();
-	for (; lit != mLimbs.end(); lit++) {
+	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
+			lit++) {
 		(*lit)->reposition(position);
 	}
 }

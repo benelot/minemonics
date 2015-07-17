@@ -54,6 +54,9 @@ bool EvolutionModel::proceedEvaluation() {
 
 			// variate the evaluated populations
 			variate();
+
+			mPopulationModels[mCurrentPopulationIndex]->setOutOfSync(true);
+
 		}
 
 		if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
@@ -71,10 +74,9 @@ bool EvolutionModel::proceedEvaluation() {
 }
 
 bool EvolutionModel::evaluate() {
-//EVALUATION
+	//EVALUATION
 	mPhase = EVALUATION_PHASE;
-	//TODO: Delete if not used in the end.
-// run creature evaluation according to the evolution type and then return true
+	// run creature evaluation according to the evolution type and then return true
 
 	return true;
 }

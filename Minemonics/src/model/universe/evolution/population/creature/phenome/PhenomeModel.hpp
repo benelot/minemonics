@@ -61,6 +61,11 @@ public:
 	void reset(const Ogre::Vector3 position);
 
 	/**
+	 * Cleanup phenome model for a new embryogenesis.
+	 */
+	void cleanup();
+
+	/**
 	 * Reposition the creature without resetting it.
 	 */
 	void reposition(const Ogre::Vector3 position);

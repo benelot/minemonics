@@ -93,7 +93,7 @@ void Limb::initialize(SimulationManager* const simulationManager,
 	mLimbModel = new LimbModel();
 	mLimbModel->initialize(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			&creature->getCreatureModel(), type, position, orientation,
+			creature->getCreatureModel(), type, position, orientation,
 			initialRelativePosition, initialOrientation, dimensions, mass,
 			restitution, friction, color, ownIndex);
 

@@ -86,9 +86,9 @@ public:
 	 * The best performing creature takes part in <ratio> of all cross-overs etc.
 	 */
 	static const double REAPER_SOW_OFFSPRING[]; // Initialization in EvolutionConfiguration.cpp
-	static const int REAPER_GENE_MUTATION_PROBABILITY = 0.3;
-	static const int REAPER_ATTRIBUTE_MUTATION_PROBABILITY = 0.5;
-	static const int REAPER_LINK_MUTATION_PROBABILITY = 0.6;
+	static const double REAPER_GENE_MUTATION_PROBABILITY = 0.3;
+	static const double REAPER_ATTRIBUTE_MUTATION_PROBABILITY = 0.5;
+	static const double REAPER_LINK_MUTATION_PROBABILITY = 0.6;
 	static const int REAPER_GROW_STUB_QTY = 3;
 
 	static const double REAPER_REAP_PERCENTAGE = 0.1;
