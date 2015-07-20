@@ -124,10 +124,12 @@ void Population::removeFromWorld() {
 }
 
 void Population::resyncWithModel() {
+	int before = mCreatures.size();
 	//remove the creatures that were culled
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end();) {
 		if ((*cit)->isCulled()) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature culled.";
 			Creature* creature = *cit;
 			delete creature;
 			cit = mCreatures.erase(cit);
@@ -140,6 +142,7 @@ void Population::resyncWithModel() {
 			mPopulationModel->getCreatureModels().begin();
 			cit != mPopulationModel->getCreatureModels().end(); cit++) {
 		if ((*cit)->isNew()) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature added.";
 			Creature* creature = new Creature(*cit);
 			mCreatures.push_back(creature);
 			(*cit)->setNew(false);
@@ -147,4 +150,8 @@ void Population::resyncWithModel() {
 	}
 
 	mPopulationModel->setOutOfSync(false);
+
+	if(before > mCreatures.size()){
+ 		exit(-1);
+	}
 }

@@ -89,7 +89,7 @@ void Reaper::sow(PopulationModel* const population) {
 	// #############
 
 	// calculate the number of offsprings for each ancestor
-	int crossOverHeads = ceil(((double) headsToSow) * mCrossOverPercentage);
+	int crossOverHeads = round(((double) headsToSow) * mCrossOverPercentage);
 
 	crossover(population, crossOverHeads);
 
@@ -100,7 +100,7 @@ void Reaper::sow(PopulationModel* const population) {
 	}
 
 	// calculate the number of gene mutated heads
-	int geneMutationHeads = ceil(
+	int geneMutationHeads = round(
 			((double) headsToSow) * mGeneMutationPercentage);
 
 	mutateGenes(population, geneMutationHeads);
@@ -117,7 +117,7 @@ void Reaper::sow(PopulationModel* const population) {
 //	mutateGeneAttributes(population, attributeMutationHeads);
 
 	// calculate the number of gene branch mutated heads
-	int branchMutationHeads = ceil(
+	int branchMutationHeads = round(
 			((double) headsToSow) * mBranchMutationPercentage);
 
 	mutateGeneBranches(population, branchMutationHeads);

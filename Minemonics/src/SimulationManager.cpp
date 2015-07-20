@@ -103,6 +103,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mCameraHandler(this), mSdlWindow(
 		NULL) {
+	// Initialize the singleton
 	mSimulationManager = this;
 	// main frame timer initialization
 	mStart = boost::posix_time::microsec_clock::local_time();
