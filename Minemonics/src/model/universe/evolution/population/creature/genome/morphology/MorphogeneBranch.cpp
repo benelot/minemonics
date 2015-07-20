@@ -71,111 +71,108 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 
 void MorphogeneBranch::initialize() {
 	GeneBranch::initialize(GeneBranch::MORPHOGENE_BRANCH);
-
-	Randomness randomness;
-
 	/** Set joint anchor X, Y and Z, where the anchor lies in the center of mass
 	 and the X, Y and Z form a vector, pointing to the point on the surface where
 	 the joint will be attached.*/
 	do {
-		mJointAnchorX = randomness.nextUnifDouble(-1.0f, 1.0f);
-		mJointAnchorY = randomness.nextUnifDouble(-1.0f, 1.0f);
-		mJointAnchorZ = randomness.nextUnifDouble(-1.0f, 1.0f);
+		mJointAnchorX = Randomness::getSingleton()->nextUnifDouble(-1.0f, 1.0f);
+		mJointAnchorY = Randomness::getSingleton()->nextUnifDouble(-1.0f, 1.0f);
+		mJointAnchorZ = Randomness::getSingleton()->nextUnifDouble(-1.0f, 1.0f);
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
 	/**
 	 * The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	 */
-	mJointYaw = randomness.nextUnifDouble(0,
+	mJointYaw = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointPitch = randomness.nextUnifDouble(0,
+	mJointPitch = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointRoll = randomness.nextUnifDouble(0,
+	mJointRoll = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
 
 	/**
 	 * The joint limits in each direction (pitch,yaw, roll)
 	 */
-	mJointPitchMinAngle = randomness.nextUnifDouble(0,
+	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointPitchMaxAngle = randomness.nextUnifDouble(0,
+	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointYawMinAngle = randomness.nextUnifDouble(0,
+	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointYawMaxAngle = randomness.nextUnifDouble(0,
+	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointRollMinAngle = randomness.nextUnifDouble(0,
+	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointRollMaxAngle = randomness.nextUnifDouble(0,
+	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
 
 	/**
 	 * Set whether the branch should be mirrored or flipped to the other side.
 	 */
-	mMirrored = randomness.nextUnifBoolean();
+	mMirrored = Randomness::getSingleton()->nextUnifBoolean();
 
-	mFlipped = randomness.nextUnifBoolean();
+	mFlipped = Randomness::getSingleton()->nextUnifBoolean();
 
-	mActive = randomness.nextUnifBoolean();
+	mActive = Randomness::getSingleton()->nextUnifBoolean();
 
 	mBranchGeneType = -1;
 
 	/**
 	 * The spring damping coefficient
 	 */
-	mSpringPitchDampingCoefficient = randomness.nextUnifDouble(
+	mSpringPitchDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
 			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
-	mSpringYawDampingCoefficient = randomness.nextUnifDouble(
+	mSpringYawDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
 			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
-	mSpringRollDampingCoefficient = randomness.nextUnifDouble(
+	mSpringRollDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_SPRING_COEFFICIENT,
 			MorphologyConfiguration::JOINT_MAX_SPRING_COEFFICIENT);
 
 	/**
 	 * The joint stiffness
 	 */
-	mJointPitchStiffness = randomness.nextUnifDouble(
+	mJointPitchStiffness = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
 			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
-	mJointYawStiffness = randomness.nextUnifDouble(
+	mJointYawStiffness = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
 			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
-	mJointRollStiffness = randomness.nextUnifDouble(
+	mJointRollStiffness = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_STIFFNESS,
 			MorphologyConfiguration::JOINT_MAX_STIFFNESS);
 
 	/**
 	 * Whether the joint motors are enabled or not.
 	 */
-	mJointPitchMotorEnabled = randomness.nextUnifBoolean();
-	mJointYawMotorEnabled = randomness.nextUnifBoolean();
-	mJointRollMotorEnabled = randomness.nextUnifBoolean();
+	mJointPitchMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
+	mJointYawMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
+	mJointRollMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
 
 	/**
 	 * The maximum joint force
 	 */
-	mJointMaxPitchForce = randomness.nextUnifDouble(
+	mJointMaxPitchForce = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_FORCE,
 			MorphologyConfiguration::JOINT_MAX_FORCE);
-	mJointMaxYawForce = randomness.nextUnifDouble(
+	mJointMaxYawForce = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_FORCE,
 			MorphologyConfiguration::JOINT_MAX_FORCE);
-	mJointMaxRollForce = randomness.nextUnifDouble(
+	mJointMaxRollForce = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_FORCE,
 			MorphologyConfiguration::JOINT_MAX_FORCE);
 
 	/**
 	 * The maximum joint speed
 	 */
-	mJointMaxPitchSpeed = randomness.nextUnifDouble(
+	mJointMaxPitchSpeed = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_SPEED,
 			MorphologyConfiguration::JOINT_MAX_SPEED);
-	mJointMaxYawSpeed = randomness.nextUnifDouble(
+	mJointMaxYawSpeed = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_SPEED,
 			MorphologyConfiguration::JOINT_MAX_SPEED);
-	mJointMaxRollSpeed = randomness.nextUnifDouble(
+	mJointMaxRollSpeed = Randomness::getSingleton()->nextUnifDouble(
 			MorphologyConfiguration::JOINT_MIN_SPEED,
 			MorphologyConfiguration::JOINT_MAX_SPEED);
 }

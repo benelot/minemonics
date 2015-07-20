@@ -105,6 +105,10 @@ SimulationManager::SimulationManager(void) :
 		NULL) {
 	// Initialize the singleton
 	mSimulationManager = this;
+
+	//initialize the singleton
+	mRandomness = new Randomness();
+
 	// main frame timer initialization
 	mStart = boost::posix_time::microsec_clock::local_time();
 	mNow = boost::posix_time::microsec_clock::local_time();
@@ -118,6 +122,9 @@ SimulationManager::~SimulationManager(void) {
 
 	// destroy the ogre renderer system
 	CEGUI::OgreRenderer::destroySystem();
+
+	//delete static randomness
+	delete mRandomness;
 }
 
 //-------------------------------------------------------------------------------------

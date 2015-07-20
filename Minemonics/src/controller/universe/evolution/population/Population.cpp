@@ -60,10 +60,9 @@ void Population::initialize(Planet* const planet, const int creatureQty,
 	mPopulationModel->initialize(planet->getPlanetModel(), 0);
 
 	// add creatures up to the creature quantity.
-	Randomness randomness;
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
-		branchiness = randomness.nextNormalDouble(
+		branchiness = Randomness::getSingleton()->nextNormalDouble(
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		addNewMember(branchiness, initialPosition);
@@ -124,7 +123,6 @@ void Population::removeFromWorld() {
 }
 
 void Population::resyncWithModel() {
-	int before = mCreatures.size();
 	//remove the creatures that were culled
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end();) {
@@ -150,8 +148,4 @@ void Population::resyncWithModel() {
 	}
 
 	mPopulationModel->setOutOfSync(false);
-
-	if(before > mCreatures.size()){
- 		exit(-1);
-	}
 }

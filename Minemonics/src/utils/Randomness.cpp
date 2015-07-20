@@ -17,8 +17,9 @@
 //## model headers
 //## view headers
 //## utils headers
-
+Randomness* Randomness::mRandomness;
 Randomness::Randomness() {
+	mRandomness = this;
 	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970, 1, 1));
 	boost::posix_time::ptime now =
 			boost::posix_time::microsec_clock::local_time();

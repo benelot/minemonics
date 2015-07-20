@@ -47,7 +47,6 @@ void CreatureModel::initialize(PopulationModel* const populationModel, const Ogr
 	mPopulationModel = populationModel;
 	mInitialPosition = position;
 	mPosition = position;
-	Randomness randomness;
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
