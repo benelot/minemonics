@@ -1,6 +1,16 @@
-//# corresponding header
-#include <SimulationManager.hpp>
+//# corresponding headers
 #include <view/universe/environments/EnvironmentO3D.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+#include <boost/lexical_cast.hpp>
+
+//## view headers
+//# custom headers
+//## base headers
+#include <SimulationManager.hpp>
 
 //## configuration headers
 //## controller headers
@@ -52,16 +62,18 @@ EnvironmentO3D::~EnvironmentO3D() {
 
 void EnvironmentO3D::initialize(const std::string fileName,
 		const Ogre::Light* const l) {
-	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
+	mTerrainGlobals = new Ogre::TerrainGlobalOptions();
 
-	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(
-			SimulationManager::getSingleton()->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
+	mTerrainGroup = new Ogre::TerrainGroup(
+			SimulationManager::getSingleton()->getSceneManager(),
+			Ogre::Terrain::ALIGN_X_Z,
 			TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 
 	//TODO: The terrain does not need to be saved, it is always randomly created.
 	//set how the terrain should be named for faster loading
 	mTerrainGroup->setFilenameConvention(Ogre::String(),
-			Ogre::String("terrain"));
+			Ogre::String(
+					boost::lexical_cast<std::string>(this) + "/" + "Terrain"));
 
 	//set origin of the terrain
 	mTerrainGroup->setOrigin(mTerrainPos);
@@ -73,14 +85,14 @@ void EnvironmentO3D::initialize(const std::string fileName,
 	configureTerrainDefaults(l);
 
 	// Paging setup
-	mPageManager = OGRE_NEW Ogre::PageManager();
+	mPageManager = new Ogre::PageManager();
 	// Since we're not loading any pages from .page files, we need a way just
 	// to say we've loaded them without them actually being loaded
 	mPageManager->setPageProvider(&mDummyPageProvider);
 	mPageManager->addCamera(SimulationManager::getSingleton()->getCamera());
 	mPageManager->setDebugDisplayLevel(0);
 
-	mTerrainPaging = OGRE_NEW Ogre::TerrainPaging(mPageManager);
+	mTerrainPaging = new Ogre::TerrainPaging(mPageManager);
 	mPagedWorld = mPageManager->createWorld();
 	mTerrainPagedWorldSection = mTerrainPaging->createWorldSection(mPagedWorld,
 			mTerrainGroup, TERRAIN_LOAD_RADIUS, TERRAIN_HOLD_RADIUS,
@@ -89,7 +101,6 @@ void EnvironmentO3D::initialize(const std::string fileName,
 	mTerrainGroup->freeTemporaryResources();
 
 	mTerrainGroup->loadAllTerrains(true);
-	//removeFromWorld();
 }
 
 void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
@@ -100,15 +111,16 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 
 	mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(false);
 
-	mTerrainGlobals->setCompositeMapAmbient(
-			SimulationManager::getSingleton()->getSceneManager()->getAmbientLight());
+//	mTerrainGlobals->setCompositeMapAmbient(
+//			SimulationManager::getSingleton()->getSceneManager()->getAmbientLight());
+	mTerrainGlobals->setCompositeMapAmbient(Ogre::ColourValue(1, 1, 1));
 
 	if (l != NULL) {
 		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
 		mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
 	}
 
-	// Configure default import settings for if we use imported image
+//	 Configure default import settings for if we use imported image
 	Ogre::Terrain::ImportData& defaultimp =
 			mTerrainGroup->getDefaultImportSettings();
 	defaultimp.terrainSize = TERRAIN_SIZE;
@@ -119,15 +131,12 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 
 	// textures
 	defaultimp.layerList.resize(1);
-//	defaultimp.layerList[0].worldSize = 1000;
-//	defaultimp.layerList[0].textureNames.push_back(
-//			"grid_illusion.png");
-//	defaultimp.layerList[0].textureNames.push_back(
-//			"grid_illusion.png");
-
 	defaultimp.layerList[0].worldSize = 1000;
-	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
-	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
+	defaultimp.layerList[0].textureNames.push_back("grid5.png");
+//
+//	defaultimp.layerList[0].worldSize = 1000;
+//	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
+//	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
 
 //	defaultimp.layerList[0].worldSize = 100;
 //	defaultimp.layerList[0].textureNames.push_back(

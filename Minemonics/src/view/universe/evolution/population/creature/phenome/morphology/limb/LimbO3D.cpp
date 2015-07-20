@@ -100,7 +100,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	case LimbModel::CAPSULE:
 
 		material->load();
-		//because we can only scale bullet capsule that way, we do not scale this object differently
+		// capsule does not need to be scaled, it is exactly one to one as it seems.
 		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
 				0.5f * limbModel->getDimensions().x).setHeight(
 				limbModel->getDimensions().y).realizeMesh(name);

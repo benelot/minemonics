@@ -149,7 +149,7 @@ void SimulationManager::createFrameListener(void) {
 void SimulationManager::createScene(void) {
 
 	// Initialize the logger
-	Logger::init("minemonics.log",LoggerConfiguration::LOGGING_LEVEL);
+	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL);
 	Logger::initTermSink();
 
 	// initialize random number generator
@@ -237,7 +237,8 @@ void SimulationManager::createScene(void) {
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, 10, EvolutionConfiguration::ROOT_POSITION);
+	earthPopulation->initialize(earth, 10,
+			EvolutionConfiguration::ROOT_POSITION);
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
@@ -254,17 +255,17 @@ void SimulationManager::createScene(void) {
 	//TODO: The whole planet embryogenesis still causes issues that give us capsules sticking to the camera.
 //	earth->performEmbryogenesis();
 
-	//TODO::Make it work with multiple planets
+//	TODO::Make it work with multiple planets
 //	// create a planet called mars
-//	Planet* mars = new Planet();
-//	mars->initialize(this, Environment::PLANE, &mDebugDrawer, 10);
+//	Planet* mars = new Planet(Environment::PLANE, &mDebugDrawer, 10);
 //
 //	// add mars to universe
 //	mUniverse.addPlanet(mars);
 //
 //	// create a population
 //	Population* marsPopulation = new Population();
-//	marsPopulation->initialize(mars, this, 3);
+//	marsPopulation->initialize(earth, 10,
+//			EvolutionConfiguration::ROOT_POSITION);
 //
 //	// add earth population to earth
 //	mars->addPopulation(marsPopulation);
