@@ -95,8 +95,9 @@ public:
 
 	/**
 	 * Bullet box to capsule scaling factor
+	 * static const double BULLET_OGRE_CAPSULE_SCALING_FACTOR = 0.5;
+	 * static const double BULLET_OGRE_CAPSULE_HEIGHT_SCALING_FACTOR = 1;
 	 */
-	static const double BULLET_CAPSULE_BOX_SCALING_FACTOR = 0.015;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */
