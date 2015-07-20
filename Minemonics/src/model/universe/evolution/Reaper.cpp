@@ -311,7 +311,7 @@ void Reaper::sowFreshly(PopulationModel* const population,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		CreatureModel* offspring = new CreatureModel();
 		offspring->setNew(true);
-		offspring->initialize(population, Ogre::Vector3(0, 0, 0), branchiness);
+		offspring->initialize(population, EvolutionConfiguration::ROOT_POSITION, branchiness);
 		population->getCreatureModels().push_back(offspring);
 	}
 }

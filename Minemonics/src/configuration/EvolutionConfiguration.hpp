@@ -6,6 +6,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -101,6 +103,8 @@ public:
 	 * = 1.0 - REAPER_ATTRIBUTE_MUTATION_PERCENTAGE - REAPER_CROSSOVER_PERCENTAGE - EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE
 	 */
 	static const double REAPER_SOW_FRESH_PERCENTAGE; // Initialization in EvolutionConfiguration.cpp
+
+	static const Ogre::Vector3 ROOT_POSITION;
 
 };
 

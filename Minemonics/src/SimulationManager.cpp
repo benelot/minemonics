@@ -80,6 +80,7 @@
 #include <configuration/EnvironmentConfiguration.hpp>
 #include <configuration/OgreSystemConfigStrings.hpp>
 #include <configuration/PopulationConfiguration.hpp>
+#include <configuration/EvolutionConfiguration.hpp>
 #include <configuration/LoggerConfiguration.hpp>
 
 //## controller headers
@@ -236,7 +237,7 @@ void SimulationManager::createScene(void) {
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, 10, Ogre::Vector3(0, 300, -4000));
+	earthPopulation->initialize(earth, 10, EvolutionConfiguration::ROOT_POSITION);
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
@@ -244,7 +245,7 @@ void SimulationManager::createScene(void) {
 //	// create a population
 //	Population* earth2Population = new Population();
 //	earth2Population->initialize(earth, this, 100,
-//			Ogre::Vector3(0, 300, -4000));
+//			EvolutionConfiguration::ROOT_POSITION);
 //
 //	// add earth population to earth
 //	earth->addPopulation(earth2Population);
