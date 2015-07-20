@@ -16,10 +16,10 @@
 //## view headers
 //## utils headers
 
-EvolutionModel::EvolutionModel() :
-		mPhase(VARIATION_PHASE), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(
-				0), mCurrentPopulationIndex(0), mCurrentCreatureIndex(0), mTournamentSize(
-				1) {
+EvolutionModel::EvolutionModel(SimulationManager* simulationManager) :
+		mReaper(simulationManager), mPhase(VARIATION_PHASE), mType(
+				INDIVIDUAL_EVALUATION), mEvaluationTime(0), mCurrentPopulationIndex(
+				0), mCurrentCreatureIndex(0), mTournamentSize(1) {
 
 }
 

@@ -29,14 +29,11 @@ class SimulationManager;
  */
 class LimbO3D: public LimbGraphics {
 public:
-	LimbO3D();
+	LimbO3D(SimulationManager* simulationManager,
+			const LimbModel* const limbModel);
 	LimbO3D(const LimbO3D& limbO3D);
 
 	virtual ~LimbO3D();
-
-	void initialize(SimulationManager* const simulationManager,
-			const LimbModel::PrimitiveType type, const Ogre::Vector3 scale,
-			const Ogre::ColourValue color);
 
 	/**
 	 * Clone the limbO3D
@@ -99,7 +96,7 @@ public:
 private:
 
 	/**
-	 * The simulationmanager handle
+	 * The simulation manager handle
 	 */
 	SimulationManager* mSimulationManager;
 

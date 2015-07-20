@@ -23,13 +23,27 @@ class SimulationManager;
 
 BoostLogger Creature::mBoostLogger; /*<! initialize the boost logger*/
 Creature::_Init Creature::_initializer;
-Creature::Creature() :
-		mCreatureModel(NULL) {
+Creature::Creature(SimulationManager* const simulationManager,
+		Population* const population, const Ogre::Vector3 position,
+		const double branchiness) {
+	// set up the creature model
+	mCreatureModel = new CreatureModel();
+	mCreatureModel->initialize(simulationManager,
+			population->getPopulationModel(), position, branchiness);
+
+	// set up the phenotype
+	mPhenotype.initialize(simulationManager, this);
+
+	mPhenotype.setPhenotypeModel(&mCreatureModel->getPhenotypeModel());
 
 }
 
-Creature::Creature(CreatureModel* const creatureModel) {
-	mCreatureModel = creatureModel;
+Creature::Creature(SimulationManager* const simulationManager, CreatureModel* const creatureModel) :
+		mCreatureModel(creatureModel) {
+	// set up the phenotype
+	mPhenotype.initialize(simulationManager, this);
+
+	mPhenotype.setPhenotypeModel(&mCreatureModel->getPhenotypeModel());
 }
 
 Creature::~Creature() {
@@ -40,17 +54,6 @@ Creature::~Creature() {
 void Creature::initialize(SimulationManager* const simulationManager,
 		Population* const population, const Ogre::Vector3 position,
 		const double branchiness) {
-	// set up the creature model
-	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(&(population->getPopulationModel()), NULL,
-			position, branchiness);
-
-	// set up the phenotype
-	mPhenotype.initialize(simulationManager, this);
-
-	// hand down the phenome model to the creature model
-	mCreatureModel->setPhenotypeModel(&mPhenotype.getPhenomeModel());
-
 }
 
 void Creature::performEmbryogenesis() {

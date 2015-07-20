@@ -147,7 +147,7 @@ public:
 	 * @return
 	 */
 	bool isInWorld() const {
-		return mPhenomeModel.isInWorld();
+		return mPhenotypeModel->isInWorld();
 	}
 
 	/**
@@ -155,11 +155,7 @@ public:
 	 * @param inWorld Whether the phenotype is in the world or not.
 	 */
 	void setInWorld(bool inWorld) {
-		mPhenomeModel.setInWorld(inWorld);
-	}
-
-	PhenomeModel& getPhenomeModel() {
-		return mPhenomeModel;
+		mPhenotypeModel->setInWorld(inWorld);
 	}
 
 	const std::vector<Joint*>& getJoints() const {
@@ -170,6 +166,13 @@ public:
 		return mLimbs;
 	}
 
+	const PhenomeModel* getPhenotypeModel() const {
+		return mPhenotypeModel;
+	}
+
+	void setPhenotypeModel(PhenomeModel* const phenotypeModel) {
+		mPhenotypeModel = phenotypeModel;
+	}
 
 private:
 	/**
@@ -199,7 +202,7 @@ private:
 	/**
 	 * The phenome model representation.
 	 */
-	PhenomeModel mPhenomeModel;
+	PhenomeModel* mPhenotypeModel;
 
 	/**
 	 * The vector of phenotype components

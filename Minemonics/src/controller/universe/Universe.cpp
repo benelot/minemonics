@@ -47,7 +47,7 @@ void Universe::initialize(SimulationManager* const simulationManager,
 
 void Universe::addPlanet(Planet* const planet) {
 	mPlanets.push_back(planet);
-	mUniverseModel.addPlanetModel(&planet->getPlanetModel());
+	mUniverseModel.addPlanetModel(planet->getPlanetModel());
 }
 
 void Universe::proceedEvaluation() {

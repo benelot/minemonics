@@ -34,7 +34,7 @@
 class Reaper {
 public:
 
-	Reaper();
+	Reaper(SimulationManager* simulationManager);
 	virtual ~Reaper();
 
 	/**
@@ -120,6 +120,9 @@ public:
 	void sowFreshly(PopulationModel* const population, const int sowFreshlyHeads);
 
 private:
+
+	SimulationManager* mSimulationManager;
+
 	double mReapPercentage;
 	double mCrossOverPercentage;
 	double mGeneMutationPercentage;

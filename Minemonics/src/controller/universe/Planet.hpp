@@ -30,7 +30,10 @@
  */
 class Planet {
 public:
-	Planet();
+	Planet(SimulationManager* const simulationManager,
+			const Environment::EnvironmentType type,
+			OgreBtDebugDrawer* const debugDrawer, const int evaluationTime);
+	Planet(SimulationManager* simulationManager,PlanetModel* const planetModel);
 	virtual ~Planet();
 
 	/**
@@ -100,7 +103,7 @@ public:
 		mEvolution = evolution;
 	}
 
-	PlanetModel& getPlanetModel() {
+	PlanetModel* getPlanetModel() {
 		return mPlanetModel;
 	}
 
@@ -125,7 +128,7 @@ private:
 	/**
 	 * The model representation of this planet.
 	 */
-	PlanetModel mPlanetModel;
+	PlanetModel* mPlanetModel;
 
 	/**
 	 * The evolution on this planet.

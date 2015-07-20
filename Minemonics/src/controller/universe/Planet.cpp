@@ -28,21 +28,12 @@
 
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
-Planet::Planet() :
-		mEnvironment(NULL) {
-//	mEvolution();
-//	mPlanetModel();
-}
+Planet::Planet(SimulationManager* const simulationManager,
+		const Environment::EnvironmentType type,
+		OgreBtDebugDrawer* const debugDrawer, const int evaluationTime) :
+		mEnvironment(NULL), mEvolution(simulationManager) {
+	mPlanetModel = new PlanetModel();
 
-Planet::~Planet() {
-//	~mEnvironment()
-//	~mEvolution()
-//	~mPlanetModel()
-}
-
-void Planet::initialize(SimulationManager* const simulationManager,
-		const Environment::EnvironmentType type, OgreBtDebugDrawer* const debugDrawer,
-		const int evaluationTime) {
 	//create earth evolution
 	mEvolution.initialize(
 			&simulationManager->getUniverse().getEvaluationController(), this,
@@ -51,8 +42,8 @@ void Planet::initialize(SimulationManager* const simulationManager,
 	// set up environment
 	switch (type) {
 	case Environment::HILLS: {
-//		mEnvironment = new Hills();
-//		((Hills*) mEnvironment)->initialize(this, NULL,debugDrawer);
+		//		mEnvironment = new Hills();
+		//		((Hills*) mEnvironment)->initialize(this, NULL,debugDrawer);
 		break;
 	}
 	case Environment::PLANE: {
@@ -63,8 +54,18 @@ void Planet::initialize(SimulationManager* const simulationManager,
 		break;
 	}
 	}
-	mPlanetModel.initialize(&mEvolution.getEvolutionModel(),
+	mPlanetModel->initialize(mEvolution.getEvolutionModel(),
 			mEnvironment->getEnvironmentModel());
+}
+
+Planet::Planet(SimulationManager* simulationManager, PlanetModel* const planetModel) :
+		mEnvironment(NULL), mPlanetModel(planetModel),mEvolution(simulationManager) {
+}
+
+Planet::~Planet() {
+//	~mEnvironment()
+//	~mEvolution()
+	delete mPlanetModel;
 }
 
 void Planet::addPopulation(Population* const population) {
@@ -72,7 +73,7 @@ void Planet::addPopulation(Population* const population) {
 }
 
 void Planet::stepPhysics(const double timeSinceLastFrame) {
-	mPlanetModel.getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(
+	mPlanetModel->getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(
 			timeSinceLastFrame);
 }
 
@@ -88,7 +89,7 @@ bool Planet::proceedEvaluation() {
 		mEnvironment->addToWorld();
 	}
 
-	mPlanetModel.proceedEvaluation();
+	mPlanetModel->proceedEvaluation();
 
 	//if the evolution can not proceed, then remove the environment model from the world.
 	if (!mEvolution.proceedEvaluation()) {
@@ -100,7 +101,7 @@ bool Planet::proceedEvaluation() {
 
 void Planet::drawDebugWorld() {
 	//draws the debug world if it is enabled
-	mPlanetModel.getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld();
+	mPlanetModel->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld();
 
 }
 

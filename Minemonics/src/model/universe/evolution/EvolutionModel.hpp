@@ -48,7 +48,7 @@ public:
 		NUM_EVALUATION_TYPES
 	};
 
-	EvolutionModel();
+	EvolutionModel(SimulationManager* simulationManager);
 	~EvolutionModel();
 
 	/**

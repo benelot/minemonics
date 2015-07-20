@@ -26,10 +26,11 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-Reaper::Reaper() :
+Reaper::Reaper(SimulationManager* simulationManager) :
 		mAttributeMutationPercentage(0), mBranchAttributeMutationPercentage(0), mBranchMutationPercentage(
 				0), mCrossOverPercentage(0), mGeneMutationPercentage(0), mReapPercentage(
-				0), mSowFreshPercentage(0) {
+				0), mSowFreshPercentage(0), mSimulationManager(
+				simulationManager) {
 }
 
 Reaper::~Reaper() {
@@ -95,7 +96,7 @@ void Reaper::sow(PopulationModel* const population) {
 
 	sown += crossOverHeads;
 
-	if(headsToSow <= sown){
+	if (headsToSow <= sown) {
 		return;
 	}
 
@@ -107,7 +108,7 @@ void Reaper::sow(PopulationModel* const population) {
 
 	sown += geneMutationHeads;
 
-	if(headsToSow <= sown){
+	if (headsToSow <= sown) {
 		return;
 	}
 
@@ -124,7 +125,7 @@ void Reaper::sow(PopulationModel* const population) {
 
 	sown += branchMutationHeads;
 
-	if(headsToSow <= sown){
+	if (headsToSow <= sown) {
 		return;
 	}
 
@@ -208,7 +209,7 @@ void Reaper::crossover(PopulationModel* const population,
 			population->getCreatureModels().push_back(offspring);
 		}
 		crossOverSown++;
-		if(crossOverSown == crossoverHeads){
+		if (crossOverSown == crossoverHeads) {
 			break;
 		}
 		cit--;
@@ -219,7 +220,7 @@ void Reaper::mutateGenes(PopulationModel* const population,
 		const int mutatedGeneHeads) {
 	Randomness randomness;
 
- 	for (int i = 0; i < mutatedGeneHeads; i++) {
+	for (int i = 0; i < mutatedGeneHeads; i++) {
 		std::vector<CreatureModel*> tournament;
 		int bestCreatureIndex = 0;
 		int bestFitness = 0;
@@ -317,8 +318,8 @@ void Reaper::sowFreshly(PopulationModel* const population,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		CreatureModel* offspring = new CreatureModel();
 		offspring->setNew(true);
-		offspring->initialize(population, NULL, Ogre::Vector3(0, 0, 0),
-				branchiness);
+		offspring->initialize(mSimulationManager, population,
+				Ogre::Vector3(0, 0, 0), branchiness);
 		population->getCreatureModels().push_back(offspring);
 	}
 }

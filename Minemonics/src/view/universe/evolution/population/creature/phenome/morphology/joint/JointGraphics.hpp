@@ -3,6 +3,7 @@
 
 //# corresponding header
 //# forward declarations
+class JointModel;
 //# system headers
 //## controller headers
 //## model headers
@@ -23,7 +24,7 @@
  */
 class JointGraphics {
 public:
-	JointGraphics();
+	JointGraphics(const JointModel* const jointModel);
 	virtual ~JointGraphics();
 
 	/**
@@ -46,6 +47,12 @@ public:
 	 * Update the joint.
 	 */
 	virtual void update() = 0;
+
+protected:
+	/**
+	 * A const handle to the joint model to render.
+	 */
+	const JointModel* mJointModel;
 };
 
 #endif /* VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTGRAPHICS_HPP_ */

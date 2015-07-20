@@ -34,6 +34,7 @@ class Planet;
 class Population {
 public:
 	Population();
+	Population(PopulationModel* const populationModel);
 	virtual ~Population();
 
 	/**
@@ -99,16 +100,16 @@ public:
 		return mCreatures;
 	}
 
-	PopulationModel& getPopulationModel() {
+	PopulationModel* getPopulationModel() {
 		return mPopulationModel;
 	}
 
 	bool isOutOfSync() const {
-		return mPopulationModel.isOutOfSync();
+		return mPopulationModel->isOutOfSync();
 	}
 
 	void setOutOfSync(const bool outOfSync) {
-		mPopulationModel.setOutOfSync(outOfSync);
+		mPopulationModel->setOutOfSync(outOfSync);
 	}
 
 private:
@@ -148,7 +149,7 @@ private:
 	/**
 	 * The state model of the population
 	 */
-	PopulationModel mPopulationModel;
+	PopulationModel* mPopulationModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_ */

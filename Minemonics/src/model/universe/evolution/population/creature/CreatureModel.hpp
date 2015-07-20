@@ -64,9 +64,8 @@ public:
 	 * @param position The creature's position.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(PopulationModel* const populationModel,
-			PhenomeModel* const phenomeModel, const Ogre::Vector3 position,
-			const double branchiness);
+	void initialize(SimulationManager* simulationmanager,PopulationModel* const populationModel,
+			const Ogre::Vector3 position, const double branchiness);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -150,11 +149,11 @@ public:
 		/**The genome of the creature*/
 		<< "\n/Genotype=" << creature.mGenotype
 
-		<< "\n/Phenotype=" << *creature.mPhenotypeModel;
+		<< "\n/Phenotype=" << creature.mPhenotypeModel;
 
 		/**The juries of the creature model*/
-		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin(); it != creature.mJuries.end();
-				it++) {
+		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin();
+				it != creature.mJuries.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -193,11 +192,11 @@ public:
 	}
 
 	bool isDeveloped() const {
-		return mPhenotypeModel->isDeveloped();
+		return mPhenotypeModel.isDeveloped();
 	}
 
 	void setDeveloped(const bool developed) {
-		mPhenotypeModel->setDeveloped(developed);
+		mPhenotypeModel.setDeveloped(developed);
 	}
 
 	const std::vector<Jury*>& getJuries() const {
@@ -220,15 +219,15 @@ public:
 		return mPopulationModel;
 	}
 
-	void setPhenotypeModel(PhenomeModel* const phenotypeModel) {
-		mPhenotypeModel = phenotypeModel;
-	}
-
 	const Ogre::Vector3 getInitialPosition() const {
 		return mInitialPosition;
 	}
 
-	PhenomeModel* const getPhenotypeModel() const {
+	PhenomeModel& getPhenotypeModel() {
+		return mPhenotypeModel;
+	}
+
+	const PhenomeModel& getPhenotypeModel() const {
 		return mPhenotypeModel;
 	}
 
@@ -273,7 +272,7 @@ private:
 	/**
 	 * The phenotype (morphological individual) of the creature.
 	 */
-	PhenomeModel* mPhenotypeModel;
+	PhenomeModel mPhenotypeModel;
 
 	/**
 	 * The juries that rate the creature according to their fitness function.

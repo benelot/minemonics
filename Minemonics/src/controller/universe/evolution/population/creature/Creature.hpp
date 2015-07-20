@@ -31,8 +31,11 @@ class Population;
  */
 class Creature {
 public:
-	Creature();
-	Creature(CreatureModel* const creatureModel);
+	Creature(SimulationManager* const simulationManager,
+			Population* const population, const Ogre::Vector3 position,
+			const double branchiness);
+	Creature(SimulationManager* const simulationManager,
+			CreatureModel* const creatureModel);
 	virtual ~Creature();
 
 	/**

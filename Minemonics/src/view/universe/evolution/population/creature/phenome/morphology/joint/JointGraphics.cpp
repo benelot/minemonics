@@ -11,10 +11,13 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+
 //## view headers
 //## utils headers
 
-JointGraphics::JointGraphics() {
+JointGraphics::JointGraphics(const JointModel* const jointModel) :
+		mJointModel(jointModel) {
 }
 
 JointGraphics::~JointGraphics() {

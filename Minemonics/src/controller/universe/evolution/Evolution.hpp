@@ -47,7 +47,8 @@ class EvaluationController;
  */
 class Evolution {
 public:
-	Evolution();
+	Evolution(SimulationManager* simulationManager);
+	Evolution(EvolutionModel* const evolutionModel);
 	virtual ~Evolution();
 
 	/**
@@ -85,7 +86,7 @@ public:
 
 	//Accessor methods
 
-	EvolutionModel& getEvolutionModel() {
+	EvolutionModel* getEvolutionModel() {
 		return mEvolutionModel;
 	}
 
@@ -129,7 +130,7 @@ private:
 	/**
 	 * The model of the evolution
 	 */
-	EvolutionModel mEvolutionModel;
+	EvolutionModel* mEvolutionModel;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_ */

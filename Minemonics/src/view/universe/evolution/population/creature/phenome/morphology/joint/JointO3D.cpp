@@ -9,12 +9,14 @@
 //## model headers
 //## view headers
 
-JointO3D::JointO3D() :
-		mSimulationManager(NULL), mLimbA(NULL), mLimbB(NULL) {
+JointO3D::JointO3D(SimulationManager* simulationManager,
+		const JointModel* const jointModel) :
+		JointGraphics(jointModel), mSimulationManager(simulationManager), mLimbA(
+				NULL), mLimbB(NULL) {
 
 }
 
-JointO3D::JointO3D(const JointO3D& jointO3D) {
+JointO3D::JointO3D(const JointO3D& jointO3D):JointGraphics(jointO3D.mJointModel) {
 	mLimbA = jointO3D.mLimbA;
 	mLimbB = jointO3D.mLimbB;
 	mLocalA = jointO3D.mLocalA;
@@ -26,6 +28,7 @@ JointO3D::~JointO3D() {
 
 }
 
+//TODO:Remove this if possible
 void JointO3D::initialize(/*SimulationManager* simulationManager , Limb* limbA,
  Limb* limbB/*, btTransform localA, btTransform localB*/) {
 //	mSimulationManager = simulationManager;

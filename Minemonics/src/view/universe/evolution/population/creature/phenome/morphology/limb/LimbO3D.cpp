@@ -47,31 +47,9 @@
 
 //## utils headers
 
-LimbO3D::LimbO3D() :
-		mLimbEntity(NULL), mLimbEntityNode(NULL), mSimulationManager(NULL) {
-
-}
-
-LimbO3D::LimbO3D(const LimbO3D& limbO3D) {
-	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
-	mLimbEntity = limbO3D.mLimbEntity->clone(name);
-	mLimbEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
-	mLimbEntityNode->setPosition(limbO3D.mLimbEntityNode->getPosition());
-	mLimbEntityNode->setOrientation(limbO3D.mLimbEntityNode->getOrientation());
-
-	mPosition = limbO3D.mPosition;
-	mOrientation = limbO3D.mOrientation;
-	mSimulationManager = limbO3D.mSimulationManager;
-}
-
-LimbO3D::~LimbO3D() {
-	delete mLimbEntityNode;
-	delete mLimbEntity;
-}
-
-void LimbO3D::initialize(SimulationManager* simulationManager,
-		LimbModel::PrimitiveType type, Ogre::Vector3 scale,
-		Ogre::ColourValue color) {
+LimbO3D::LimbO3D(SimulationManager* simulationManager,
+		const LimbModel* const limbModel) :
+		LimbGraphics(limbModel) {
 	mSimulationManager = simulationManager;
 
 	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
@@ -85,10 +63,10 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 
 	Ogre::Pass *pass = material->getTechnique(0)->getPass(0);
 	pass->setLightingEnabled(true);
-	pass->setAmbient(color);
-	pass->setDiffuse(color);
-	//pass->setSpecular(color);
-	pass->setEmissive(color);
+	pass->setAmbient(limbModel->getColor());
+	pass->setDiffuse(limbModel->getColor());
+	//pass->setSpecular(limbModel->getColor());
+	pass->setEmissive(limbModel->getColor());
 	pass->setDepthCheckEnabled(true);
 	pass->setDepthWriteEnabled(false);
 	pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
@@ -99,9 +77,8 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 	tex->setTextureFiltering(Ogre::TFO_ANISOTROPIC);
 	tex->setTextureAnisotropy(8);
 
-	mLimbEntityNode =
-				mSimulationManager->getSceneManager()->createSceneNode();
-	switch (type) {
+	mLimbEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
+	switch (limbModel->getPrimitiveType()) {
 	case LimbModel::BLOCK:
 
 		tex->setTextureScale(4, 4);
@@ -113,26 +90,64 @@ void LimbO3D::initialize(SimulationManager* simulationManager,
 		mLimbEntityNode->attachObject(mLimbEntity);
 
 		mLimbEntityNode->scale(
-				scale.x * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
-				scale.y * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
-				scale.z * PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR);
+				limbModel->getDimensions().x
+						* PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
+				limbModel->getDimensions().y
+						* PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR,
+				limbModel->getDimensions().z
+						* PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR);
 		break;
 	case LimbModel::CAPSULE:
 
 		material->load();
 		//because we can only scale bullet capsule that way, we do not scale this object differently
 		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
-				0.5f * scale.z).setHeight(scale.y).realizeMesh(name);
+				0.5f * limbModel->getDimensions().z).setHeight(
+				limbModel->getDimensions().y).realizeMesh(name);
 		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(name);
 		mLimbEntity->setMaterialName(materialName);
 		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
 	}
+
+}
+
+LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
+		LimbGraphics(limbO3D.mLimbModel) {
+	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
+	mLimbEntity = limbO3D.mLimbEntity->clone(name);
+	mSimulationManager = limbO3D.mSimulationManager;
+	mLimbEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
+	mLimbEntityNode->setPosition(limbO3D.mLimbModel->getPosition());
+	mLimbEntityNode->setOrientation(limbO3D.mLimbModel->getOrientation());
+}
+
+LimbO3D::~LimbO3D() {
+	delete mLimbEntityNode;
+	delete mLimbEntity;
 }
 
 void LimbO3D::update() {
-	mLimbEntityNode->setPosition(mPosition);
-	mLimbEntityNode->setOrientation(mOrientation);
+	// get the rigid body of the limb
+	btRigidBody* body =
+			((LimbBt*) mLimbModel->getLimbPhysics())->getRigidBody();
+
+	// if the limb's rigid body is existing
+	if (body) {
+
+		// update the position of the limb graphics
+		btVector3 point = body->getCenterOfMassPosition();
+		mLimbEntityNode->setPosition(mLimbModel->getPosition());
+
+		// Get the Orientation of the rigid body as a bullet Quaternion
+		// Convert it to an Ogre quaternion
+		btQuaternion btq = body->getOrientation();
+		Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
+				btq.z());
+
+		// update the orientation of the limb graphics
+		mLimbEntityNode->setOrientation(mLimbModel->getOrientation());
+	}
 }
 
 void LimbO3D::addToWorld() {

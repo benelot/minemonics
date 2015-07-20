@@ -43,14 +43,14 @@
 BoostLogger Phenome::mBoostLogger; /*<! initialize the boost logger*/
 Phenome::_Init Phenome::_initializer;
 Phenome::Phenome() :
-		mSimulationManager(NULL), mCreature(NULL) {
+		mSimulationManager(NULL), mCreature(NULL), mPhenotypeModel(NULL) {
 
 }
 
-Phenome::Phenome(const Phenome& phenome) :
-		mPhenomeModel(phenome.mPhenomeModel) {
+Phenome::Phenome(const Phenome& phenome) {
 
 	mCreature = phenome.mCreature;
+	mPhenotypeModel = phenome.mPhenotypeModel;
 	mSimulationManager = phenome.mSimulationManager;
 
 	std::vector<Component*>::const_iterator coit = phenome.mComponents.begin();
@@ -83,8 +83,6 @@ void Phenome::initialize(SimulationManager* const simulationManager,
 		Creature* const creature) {
 	mSimulationManager = simulationManager;
 	mCreature = creature;
-	mPhenomeModel.initialize(mSimulationManager,
-			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld());
 }
 
 /**
@@ -94,12 +92,12 @@ void Phenome::initialize(SimulationManager* const simulationManager,
 void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 	cleanup();
 	//perform the embryogenesis in the model
-	mPhenomeModel.performEmbryogenesis(creatureModel);
+	mPhenotypeModel->performEmbryogenesis(creatureModel);
 
 	// iterate over all the component models
 	for (std::vector<ComponentModel*>::const_iterator cmit =
-			mPhenomeModel.getComponentModels().begin();
-			cmit != mPhenomeModel.getComponentModels().end(); cmit++) {
+			mPhenotypeModel->getComponentModels().begin();
+			cmit != mPhenotypeModel->getComponentModels().end(); cmit++) {
 
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
@@ -110,7 +108,7 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 			break;
 		}
 		case ComponentModel::JointComponent: {
-			Joint* joint = new Joint(((JointModel*) *cmit));
+			Joint* joint = new Joint(mSimulationManager, ((JointModel*) *cmit));
 			mJoints.push_back(joint);
 			mComponents.push_back(joint);
 			break;
@@ -131,7 +129,7 @@ void Phenome::update() {
 			boost::posix_time::microsec_clock::local_time();
 	boost::posix_time::time_duration diff = now - time_t_epoch;
 
-	mPhenomeModel.update(diff.total_milliseconds());
+	mPhenotypeModel->update(diff.total_milliseconds());
 
 	// Update all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
@@ -181,7 +179,8 @@ void Phenome::removeFromWorld() {
 }
 
 void Phenome::cleanup() {
-	for(std::vector<Component*>::iterator cit = mComponents.begin();cit != mComponents.end();){
+	for (std::vector<Component*>::iterator cit = mComponents.begin();
+			cit != mComponents.end();) {
 		delete *cit;
 		cit = mComponents.erase(cit);
 	}
@@ -191,7 +190,7 @@ void Phenome::cleanup() {
 }
 
 void Phenome::reset(const Ogre::Vector3 position) {
-	mPhenomeModel.reset(position);
+	mPhenotypeModel->reset(position);
 
 	// reset all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();
@@ -207,7 +206,7 @@ void Phenome::reset(const Ogre::Vector3 position) {
 }
 
 void Phenome::reposition(const Ogre::Vector3 position) {
-	mPhenomeModel.reposition(position);
+	mPhenotypeModel->reposition(position);
 
 	// reset all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();

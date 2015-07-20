@@ -12,6 +12,7 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
 
 //## view headers
 //## utils headers
@@ -19,13 +20,13 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mPopulationModel(NULL), mPhenotypeModel(NULL), mCulled(false), mNew(
+		mPopulationModel(NULL), mCulled(false), mNew(
 				false) {
 	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-		mGenotype(creatureModel.mGenotype) {
+		mGenotype(creatureModel.mGenotype),mPhenotypeModel(creatureModel.mPhenotypeModel) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -34,10 +35,6 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mInitialPosition = creatureModel.mInitialPosition;
 	mPosition = creatureModel.mPosition;
 
-	if (creatureModel.mPhenotypeModel != NULL) {
-		mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
-	}
-
 	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
 			jit != creatureModel.mJuries.end(); jit++) {
@@ -45,17 +42,17 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	}
 }
 
-void CreatureModel::initialize(PopulationModel* const populationModel,
-		PhenomeModel* const phenomeModel, const Ogre::Vector3 position,
+void CreatureModel::initialize(SimulationManager* simulationmanager,PopulationModel* const populationModel, const Ogre::Vector3 position,
 		const double branchiness) {
 	mPopulationModel = populationModel;
-	mPhenotypeModel = phenomeModel;
 	mInitialPosition = position;
 	mPosition = position;
 	Randomness randomness;
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
+	mPhenotypeModel.initialize(simulationmanager,
+			mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld());
 }
 
 CreatureModel::~CreatureModel() {
@@ -86,7 +83,7 @@ double CreatureModel::getFitness() {
 //		weight += (*jit)->getWeight();
 //	}
 
-	fitness = mPhenotypeModel->getComponentModels().size();
+	fitness = mPhenotypeModel.getComponentModels().size();
 
 	if (weight != 0) {
 		return fitness / weight;
@@ -111,7 +108,7 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 		}
 	}
 
-	if (mPhenotypeModel->equals(*creature.mPhenotypeModel)) {
+	if (mPhenotypeModel.equals(creature.mPhenotypeModel)) {
 		return false;
 	}
 
@@ -123,7 +120,7 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 }
 
 void CreatureModel::performEmbryogenesis() {
-	mPhenotypeModel->performEmbryogenesis(this);
+	mPhenotypeModel.performEmbryogenesis(this);
 }
 
 void CreatureModel::giveRebirth() {

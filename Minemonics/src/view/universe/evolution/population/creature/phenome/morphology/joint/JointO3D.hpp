@@ -31,7 +31,7 @@ class SimulationManager;
  */
 class JointO3D: public JointGraphics {
 public:
-	JointO3D();
+	JointO3D(SimulationManager* simulationManager, const JointModel* const jointModel);
 	JointO3D(const JointO3D& jointO3D);
 
 	virtual ~JointO3D();

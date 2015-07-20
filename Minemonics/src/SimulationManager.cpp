@@ -214,14 +214,13 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
-	detectChildren(mSceneMgr->getRootSceneNode());
-	detectChildren((Ogre::SceneNode*)mSceneMgr->getRootSceneNode()->getChild("CamNode1"));
+//	detectChildren(mSceneMgr->getRootSceneNode());
+//	detectChildren((Ogre::SceneNode*)mSceneMgr->getRootSceneNode()->getChild("CamNode1"));
 	mUniverse.initialize(this,
 			EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet();
-	earth->initialize(this, Environment::PLANE, &mDebugDrawer, 10);
+	Planet* earth = new Planet(this, Environment::PLANE, &mDebugDrawer, 10);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);

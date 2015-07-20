@@ -30,6 +30,12 @@ BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
 Population::_Init Population::_initializer;
 Population::Population() :
 		mSimulationManager(NULL), mPlanet(NULL) {
+	mPopulationModel = new PopulationModel();
+}
+
+Population::Population(PopulationModel* const populationModel) :
+		mSimulationManager(NULL), mPlanet(NULL), mPopulationModel(
+				populationModel) {
 }
 
 Population::~Population() {
@@ -57,7 +63,7 @@ void Population::initialize(Planet* const planet,
 	mPlanet = planet;
 
 	//initialize the population model with zero creatures.
-	mPopulationModel.initialize(&planet->getPlanetModel(), 0);
+	mPopulationModel->initialize(planet->getPlanetModel(), 0);
 
 	// add creatures up to the creature quantity.
 	Randomness randomness;
@@ -74,7 +80,7 @@ void Population::initialize(Planet* const planet, const int creatureQty) {
 	mPlanet = planet;
 
 	//initialize the population model with n creatures.
-	mPopulationModel.initialize(&planet->getPlanetModel(), creatureQty);
+	mPopulationModel->initialize(planet->getPlanetModel(), creatureQty);
 }
 
 /**
@@ -86,9 +92,8 @@ void Population::addNewMember(const double branchiness,
 	if (mSimulationManager) {
 
 		//add new creature
-		Creature* creature = new Creature();
-		creature->initialize(mSimulationManager, this, rootPosition,
-				branchiness);
+		Creature* creature = new Creature(mSimulationManager, this,
+				rootPosition, branchiness);
 		addMember(creature);
 
 	}
@@ -99,7 +104,7 @@ void Population::addMember(Creature* const creature) {
 	mCreatures.push_back(creature);
 
 	//hand model down to the population model
-	mPopulationModel.addMember(creature->getCreatureModel());
+	mPopulationModel->addMember(creature->getCreatureModel());
 }
 
 void Population::update() {
@@ -144,14 +149,14 @@ void Population::resyncWithModel() {
 	}
 
 	for (std::vector<CreatureModel*>::const_iterator cit =
-			mPopulationModel.getCreatureModels().begin();
-			cit != mPopulationModel.getCreatureModels().end(); cit++) {
-		if((*cit)->isNew()){
-			Creature* creature = new Creature(*cit);
+			mPopulationModel->getCreatureModels().begin();
+			cit != mPopulationModel->getCreatureModels().end(); cit++) {
+		if ((*cit)->isNew()) {
+			Creature* creature = new Creature(mSimulationManager, *cit);
 			mCreatures.push_back(creature);
 			(*cit)->setNew(false);
 		}
 	}
 
-	mPopulationModel.setOutOfSync(false);
+	mPopulationModel->setOutOfSync(false);
 }

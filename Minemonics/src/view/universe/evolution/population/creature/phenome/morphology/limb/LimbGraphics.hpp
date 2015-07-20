@@ -3,6 +3,8 @@
 
 //# corresponding header
 //# forward declarations
+class LimbModel;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -26,7 +28,7 @@
  */
 class LimbGraphics {
 public:
-	LimbGraphics();
+	LimbGraphics(const LimbModel* const limbModel);
 	virtual ~LimbGraphics();
 
 	/**
@@ -79,22 +81,6 @@ public:
 
 	//Accessor methods
 
-	const Ogre::Vector3& getPosition() const {
-		return mPosition;
-	}
-
-	void setPosition(const Ogre::Vector3& position) {
-		mPosition = position;
-	}
-
-	const Ogre::Quaternion& getOrientation() {
-		return mOrientation;
-	}
-
-	void setOrientation(const Ogre::Quaternion& orientation) {
-		mOrientation = orientation;
-	}
-
 	bool isInWorld() const {
 		return mInWorld;
 	}
@@ -105,17 +91,13 @@ protected:
 		this->mInWorld = mInWorld;
 	}
 
-	/**
-	 * The position of the limb.
-	 */
-	Ogre::Vector3 mPosition;
+protected:
 
 	/**
-	 * The orientation of the limb.
+	 * A const handle of the limb model to get the information to render.
 	 */
-	Ogre::Quaternion mOrientation;
+	const LimbModel* mLimbModel;
 
-private:
 	/**
 	 * Whether the limb is in the world or not.
 	 */

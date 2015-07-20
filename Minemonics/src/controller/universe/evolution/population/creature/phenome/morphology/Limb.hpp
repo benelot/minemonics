@@ -132,11 +132,11 @@ public:
 
 	// Accessor methods
 	const Ogre::Vector3 getPosition() const {
-		return mLimbGraphics->getPosition();
+		return mLimbModel->getPosition();
 	}
 
 	const Ogre::Quaternion getOrientation() const {
-		return mLimbGraphics->getOrientation();
+		return mLimbModel->getOrientation();
 	}
 
 	/**

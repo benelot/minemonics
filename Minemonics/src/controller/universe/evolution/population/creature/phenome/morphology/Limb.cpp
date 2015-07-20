@@ -44,6 +44,8 @@ Limb::_Init Limb::_initializer;
 Limb::Limb() :
 		mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Limb created.";
+	mLimbModel = new LimbModel();
+	//TODO: Fix this!
 }
 
 Limb::Limb(const Limb& limb) :
@@ -61,10 +63,7 @@ Limb::Limb(SimulationManager* const simulationManager, Creature* const creature,
 	Component::initialize(limbModel);
 
 	// initialize the graphics part of the limb
-	mLimbGraphics = new LimbO3D();
-	getLimbGraphics()->initialize(simulationManager,
-			limbModel->getPrimitiveType(), limbModel->getDimensions(),
-			limbModel->getColor());
+	mLimbGraphics = new LimbO3D(simulationManager, mLimbModel);
 
 //	// Update the state of the limb.
 	update();
@@ -103,10 +102,7 @@ void Limb::initialize(SimulationManager* const simulationManager,
 	Component::initialize(mLimbModel);
 
 	// initialize the graphics part of the limb
-	mLimbGraphics = new LimbO3D();
-	getLimbGraphics()->initialize(simulationManager,
-			mLimbModel->getPrimitiveType(), mLimbModel->getDimensions(),
-			mLimbModel->getColor());
+	mLimbGraphics = new LimbO3D(simulationManager, mLimbModel);
 
 	// Update the state of the limb.
 	update();
@@ -116,27 +112,7 @@ void Limb::initialize(SimulationManager* const simulationManager,
  * Update the state of the limb.
  */
 void Limb::update() {
-	// get the rigid body of the limb
-	btRigidBody* body = getLimbPhysics()->getRigidBody();
-
-	// if the limb's rigid body is existing
-	if (body) {
-
-		// update the position of the limb graphics
-		btVector3 point = body->getCenterOfMassPosition();
-		mLimbGraphics->setPosition(
-				Ogre::Vector3(point.x(), point.y(), point.z()));
-
-		// Get the Orientation of the rigid body as a bullet Quaternion
-		// Convert it to an Ogre quaternion
-		btQuaternion btq = body->getOrientation();
-		Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
-				btq.z());
-
-		// update the orientation of the limb graphics
-		mLimbGraphics->setOrientation(quart);
-	}
-
+	//update the limb graphics
 	mLimbGraphics->update();
 }
 
@@ -153,18 +129,19 @@ Limb* Limb::clone() {
 }
 
 std::string Limb::getInfo() {
+	//TODO: Is this necessary or not? If yes, make it useful.
 	std::string text;
-	text.append("Box coordinate: ");
-	text.append(
-			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().x));
-	text.append(",");
-	text.append(
-			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().y));
-	text.append(",");
-	text.append(
-			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().z));
-	text.append(",\n");
-	text.append("---------");
+//	text.append("Box coordinate: ");
+//	text.append(
+//			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().x));
+//	text.append(",");
+//	text.append(
+//			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().y));
+//	text.append(",");
+//	text.append(
+//			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().z));
+//	text.append(",\n");
+//	text.append("---------");
 	return text;
 }
 

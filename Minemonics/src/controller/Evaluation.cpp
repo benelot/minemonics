@@ -28,12 +28,12 @@ Evaluation::~Evaluation() {
 
 void Evaluation::initialize(Planet* const planet,const double evaluationTime) {
 	mPlanet = planet;
-	mEvaluationModel.initialize(&planet->getPlanetModel(), evaluationTime);
+	mEvaluationModel.initialize(planet->getPlanetModel(), evaluationTime);
 }
 
 void Evaluation::addPopulation(Population* const population) {
 	mPopulations.push_back(population);
-	mEvaluationModel.addPopulationModel(&(population->getPopulationModel()));
+	mEvaluationModel.addPopulationModel(population->getPopulationModel());
 }
 
 void Evaluation::setup() {

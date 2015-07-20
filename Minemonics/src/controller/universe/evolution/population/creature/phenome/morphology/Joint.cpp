@@ -31,8 +31,26 @@
 
 BoostLogger Joint::mBoostLogger; /*<! initialize the boost logger*/
 Joint::_Init Joint::_initializer;
-Joint::Joint() :
-		mJointGraphics(NULL), mJointModel(NULL) {
+Joint::Joint(SimulationManager* simulationManager, Creature* const creature, Limb* const limbA,
+		Limb* const limbB, const btTransform localA, const btTransform localB,
+		const int indexA, const int indexB, const int ownIndex) {
+	// initialize the physics model of the joint
+		mJointModel = new JointModel();
+		mJointModel->initialize(
+				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+				limbA->getLimbPhysics()->getRigidBody(),
+				limbB->getLimbPhysics()->getRigidBody(), localA, localB, indexA,
+				indexB, ownIndex);
+
+		// Define the new component as a limb
+		Component::initialize(mJointModel);
+
+		// initialize the graphics part of the joint
+		mJointGraphics = new JointO3D(simulationManager,mJointModel);
+		((JointO3D*) mJointGraphics)->initialize();
+
+		// Update the state of the joint.
+		update();
 }
 
 Joint::Joint(const Joint& joint) :
@@ -41,15 +59,13 @@ Joint::Joint(const Joint& joint) :
 }
 
 Joint::Joint(const JointModel& jointModel) {
+	//TODO: Fix this
 	mJointModel = new JointModel(jointModel);
-	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize();
+	mJointGraphics = new JointO3D(NULL, mJointModel);
 }
 
-Joint::Joint(JointModel* const jointModel) {
-	mJointModel = jointModel;
-	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize();
+Joint::Joint(SimulationManager* simulationManager, JointModel* const jointModel):mJointModel(jointModel) {
+	mJointGraphics = new JointO3D(simulationManager, jointModel);
 }
 
 Joint::~Joint() {
@@ -64,23 +80,7 @@ void Joint::initialize(Creature* const creature, Limb* const limbA,
 		Limb* const limbB, const btTransform localA, const btTransform localB,
 		const int indexA, const int indexB, const int ownIndex) {
 
-	// initialize the physics model of the joint
-	mJointModel = new JointModel();
-	mJointModel->initialize(
-			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			limbA->getLimbPhysics()->getRigidBody(),
-			limbB->getLimbPhysics()->getRigidBody(), localA, localB, indexA,
-			indexB, ownIndex);
 
-	// Define the new component as a limb
-	Component::initialize(mJointModel);
-
-	// initialize the graphics part of the joint
-	mJointGraphics = new JointO3D();
-	((JointO3D*) mJointGraphics)->initialize();
-
-	// Update the state of the joint.
-	update();
 }
 
 void Joint::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
