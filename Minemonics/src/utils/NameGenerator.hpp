@@ -45,8 +45,6 @@ private:
 	std::vector<std::string> mNamePrefix;
 	std::vector<std::string> mNameStems;
 	std::vector<std::string> mNameSuffix;
-
-	Randomness mRandomness;
 };
 
 #endif /* UTILS_NAMEGENERATOR_HPP_ */

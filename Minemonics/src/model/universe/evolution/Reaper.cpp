@@ -29,7 +29,7 @@
 Reaper::Reaper() :
 		mAttributeMutationPercentage(0), mBranchAttributeMutationPercentage(0), mBranchMutationPercentage(
 				0), mCrossOverPercentage(0), mGeneMutationPercentage(0), mReapPercentage(
-				0), mSowFreshPercentage(0){
+				0), mSowFreshPercentage(0) {
 }
 
 Reaper::~Reaper() {
@@ -144,7 +144,6 @@ void Reaper::sow(PopulationModel* const population) {
 
 void Reaper::crossover(PopulationModel* const population,
 		const int crossoverHeads) {
-	Randomness randomness;
 
 	std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().end();
@@ -162,7 +161,7 @@ void Reaper::crossover(PopulationModel* const population,
 			cit != population->getCreatureModels().begin() && i < crossoverHeads;
 			i++) {
 
-		if (randomness.nextUnifBoolean()) {
+		if (Randomness::getSingleton()->nextUnifBoolean()) {
 			for (int k = 0; k < offspringPerParent; k++) {
 
 				/**
@@ -178,7 +177,7 @@ void Reaper::crossover(PopulationModel* const population,
 						j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
 						j++) {
 					CreatureModel* model = population->getCreatureModels().at(
-							randomness.nextUnifPosInt(0,
+							Randomness::getSingleton()->nextUnifPosInt(0,
 									population->getCreatureModels().size()
 											- 1));
 					if (bestFitness < model->getFitness()) {
@@ -197,12 +196,11 @@ void Reaper::crossover(PopulationModel* const population,
 			}
 		} else {
 			//Cross over with one random creature
-			Randomness randomness;
 			CreatureModel* offspring = (*cit)->clone();
 			offspring->setNew(true);
 			offspring->getGenotype().crossoverRandomly(
 					&(population->getCreatureModels().at(
-							randomness.nextUnifPosInt(0,
+							Randomness::getSingleton()->nextUnifPosInt(0,
 									population->getCreatureModels().size() - 1))->getGenotype()));
 			offspring->giveRebirth();
 			population->getCreatureModels().push_back(offspring);
@@ -217,7 +215,6 @@ void Reaper::crossover(PopulationModel* const population,
 
 void Reaper::mutateGenes(PopulationModel* const population,
 		const int mutatedGeneHeads) {
-	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneHeads; i++) {
 		std::vector<CreatureModel*> tournament;
@@ -227,7 +224,7 @@ void Reaper::mutateGenes(PopulationModel* const population,
 		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
 				j++) {
 			CreatureModel* model = population->getCreatureModels().at(
-					randomness.nextUnifPosInt(0,
+					Randomness::getSingleton()->nextUnifPosInt(0,
 							population->getCreatureModels().size() - 1));
 			if (bestFitness < model->getFitness()) {
 				bestFitness = model->getFitness();
@@ -248,7 +245,6 @@ void Reaper::mutateGenes(PopulationModel* const population,
 
 void Reaper::mutateGeneAttributes(PopulationModel* const population,
 		const int mutatedGeneAttributeHeads) {
-	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneAttributeHeads; i++) {
 		std::vector<CreatureModel*> tournament;
@@ -258,7 +254,7 @@ void Reaper::mutateGeneAttributes(PopulationModel* const population,
 		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
 				j++) {
 			CreatureModel* model = population->getCreatureModels().at(
-					randomness.nextUnifPosInt(0,
+					Randomness::getSingleton()->nextUnifPosInt(0,
 							population->getCreatureModels().size() - 1));
 			if (bestFitness < model->getFitness()) {
 				bestFitness = model->getFitness();
@@ -276,7 +272,6 @@ void Reaper::mutateGeneAttributes(PopulationModel* const population,
 
 void Reaper::mutateGeneBranches(PopulationModel* const population,
 		const int mutatedGeneBranchHeads) {
-	Randomness randomness;
 
 	for (int i = 0; i < mutatedGeneBranchHeads; i++) {
 		std::vector<CreatureModel*> tournament;
@@ -286,7 +281,7 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
 				j++) {
 			CreatureModel* model = population->getCreatureModels().at(
-					randomness.nextUnifPosInt(0,
+					Randomness::getSingleton()->nextUnifPosInt(0,
 							population->getCreatureModels().size() - 1));
 			if (bestFitness < model->getFitness()) {
 				bestFitness = model->getFitness();
@@ -310,15 +305,13 @@ void Reaper::mutateGeneBranchAttributes(PopulationModel* const population,
 void Reaper::sowFreshly(PopulationModel* const population,
 		const int sowFreshlyHeads) {
 	double branchiness = 0;
-	Randomness randomness;
 	for (int i = 0; i < sowFreshlyHeads; i++) {
-		branchiness = randomness.nextNormalDouble(
+		branchiness = Randomness::getSingleton()->nextNormalDouble(
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		CreatureModel* offspring = new CreatureModel();
 		offspring->setNew(true);
-		offspring->initialize(population,
-				Ogre::Vector3(0, 0, 0), branchiness);
+		offspring->initialize(population, Ogre::Vector3(0, 0, 0), branchiness);
 		population->getCreatureModels().push_back(offspring);
 	}
 }

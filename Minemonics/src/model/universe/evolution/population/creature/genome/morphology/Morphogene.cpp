@@ -60,7 +60,8 @@ Morphogene::Morphogene(const Morphogene& morphoGene) {
 	mFriction = morphoGene.mFriction;
 	mRestitution = morphoGene.mRestitution;
 
-	std::vector<MorphogeneBranch*>::const_iterator mgbit = morphoGene.mGeneBranches.begin();
+	std::vector<MorphogeneBranch*>::const_iterator mgbit =
+			morphoGene.mGeneBranches.begin();
 	for (; mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
 		mGeneBranches.push_back((*mgbit)->clone());
 	}
@@ -82,24 +83,27 @@ Morphogene::~Morphogene() {
 void Morphogene::initialize(const double branchiness) {
 	mType = Gene::MorphoGene;
 
-	Randomness randomness;
 	//Choose the dimensions of the segment with a bias toward larger dimensions
 	//TODO: Fix biased log
-//	mX = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+//	mX = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
 //			MorphologyConfiguration::LIMB_MAX_SIZE);
-//	mY = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+//	mY = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
 //			MorphologyConfiguration::LIMB_MAX_SIZE);
-//	mZ = randomness.nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
+//	mZ = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
 //			MorphologyConfiguration::LIMB_MAX_SIZE);
-	mX = randomness.nextUnifDouble(MorphologyConfiguration::LIMB_MIN_SIZE,
+	mX = Randomness::getSingleton()->nextUnifDouble(
+			MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
-	mY = randomness.nextUnifDouble(MorphologyConfiguration::LIMB_MIN_SIZE,
+	mY = Randomness::getSingleton()->nextUnifDouble(
+			MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
-	mZ = randomness.nextUnifDouble(MorphologyConfiguration::LIMB_MIN_SIZE,
+	mZ = Randomness::getSingleton()->nextUnifDouble(
+			MorphologyConfiguration::LIMB_MIN_SIZE,
 			MorphologyConfiguration::LIMB_MAX_SIZE);
 
 	mSegmentShrinkFactor = 1.0
-			+ randomness.nextUnifDouble(MorphologyConfiguration::LIMB_SCALE_MIN,
+			+ Randomness::getSingleton()->nextUnifDouble(
+					MorphologyConfiguration::LIMB_SCALE_MIN,
 					MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	//set restitution and friction
@@ -111,28 +115,28 @@ void Morphogene::initialize(const double branchiness) {
 	 the joint will be attached. The vector contains three values between -1 and 1.
 	 */
 	do {
-		mJointAnchorX = randomness.nextUnifDouble(-1, 1);
-		mJointAnchorY = randomness.nextUnifDouble(-1, 1);
-		mJointAnchorZ = randomness.nextUnifDouble(-1, 1);
+		mJointAnchorX = Randomness::getSingleton()->nextUnifDouble(-1, 1);
+		mJointAnchorY = Randomness::getSingleton()->nextUnifDouble(-1, 1);
+		mJointAnchorZ = Randomness::getSingleton()->nextUnifDouble(-1, 1);
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
 	/*
 	 * The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	 */
-	mJointYaw = randomness.nextUnifDouble(0,
+	mJointYaw = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointPitch = randomness.nextUnifDouble(0,
+	mJointPitch = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
-	mJointRoll = randomness.nextUnifDouble(0,
+	mJointRoll = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
 
 	// A random color RGB values between 0 and 1
-	mColorR = randomness.nextUnifDouble(0.0f, 1.0f);
-	mColorG = randomness.nextUnifDouble(0.0f, 1.0f);
-	mColorB = randomness.nextUnifDouble(0.0f, 1.0f);
+	mColorR = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
+	mColorG = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
+	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
-	switch ((LimbModel::PrimitiveType) randomness.nextUnifPosInt(1,
-			LimbModel::NUM_PRIMITIVES)) {
+	switch ((LimbModel::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
+			1, LimbModel::NUM_PRIMITIVES)) {
 	case LimbModel::BLOCK: {
 		//Randomly choose a segment primitive
 		mPrimitiveType = LimbModel::BLOCK;
@@ -145,13 +149,13 @@ void Morphogene::initialize(const double branchiness) {
 	}
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
-	mRepetitionLimit = randomness.nextUnifPosInt(0,
+	mRepetitionLimit = Randomness::getSingleton()->nextUnifPosInt(0,
 			MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
 	//The follow up gene follows instead if this gene's repetition limit is reached.
 	mFollowUpGene = -1;
 
-	int branchQty = randomness.nextUnifPosInt(0, branchiness);
+	int branchQty = Randomness::getSingleton()->nextUnifPosInt(0, branchiness);
 
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();
@@ -180,16 +184,13 @@ void Morphogene::mutate() {
 		delete f;
 	}
 
-	Randomness randomness;
 	//TODO: Add reasonable numbers
-	initialize(randomness.nextUnifDouble(10, 30));
+	initialize(Randomness::getSingleton()->nextUnifDouble(10, 30));
 }
 
 void Morphogene::grow(const int branchiness) {
-	Randomness randomness;
-
 	int branchQty =
-			(branchiness != 0) ? randomness.nextUnifPosInt(0, branchiness) : 0;
+			(branchiness != 0) ? Randomness::getSingleton()->nextUnifPosInt(0, branchiness) : 0;
 
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();

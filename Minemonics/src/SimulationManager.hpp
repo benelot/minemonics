@@ -60,6 +60,7 @@ class ParamsPanel;
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
+#include <utils/Randomness.hpp>
 
 /**
  * @brief		The Simulation manager holds the whole application together.
@@ -243,6 +244,8 @@ private:
 	static BoostLogger mBoostLogger;
 
 	static SimulationManager* mSimulationManager;
+
+	Randomness* mRandomness;
 
 	static class _Init {
 	public:

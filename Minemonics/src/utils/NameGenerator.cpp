@@ -115,22 +115,26 @@ void NameGenerator::initialize() {
 
 std::string NameGenerator::generateFirstName() {
 	std::string newName;
-	int number = mRandomness.nextUnifPosInt(0, mNamePrefix.size() - 1);
-	newName.append(
-			mNamePrefix.at(number));
-	if (mRandomness.nextUnifPosInt(0, 1)) {
+	int number = Randomness::getSingleton()->nextUnifPosInt(0,
+			mNamePrefix.size() - 1);
+	newName.append(mNamePrefix.at(number));
+	if (Randomness::getSingleton()->nextUnifPosInt(0, 1)) {
 		newName.append(
 				mNameStems.at(
-						mRandomness.nextUnifPosInt(0, mNameStems.size() - 1)));
+						Randomness::getSingleton()->nextUnifPosInt(0,
+								mNameStems.size() - 1)));
 	}
 	//The name can not be fully empty, it must at least either have a prefix or a suffix.
-	if(number!= 0){
-	newName.append(
-			mNameSuffix.at(mRandomness.nextUnifPosInt(0, mNameSuffix.size() - 1)));
-	}else
-	{
+	if (number != 0) {
 		newName.append(
-				mNameSuffix.at(mRandomness.nextUnifPosInt(1, mNameSuffix.size() - 1)));
+				mNameSuffix.at(
+						Randomness::getSingleton()->nextUnifPosInt(0,
+								mNameSuffix.size() - 1)));
+	} else {
+		newName.append(
+				mNameSuffix.at(
+						Randomness::getSingleton()->nextUnifPosInt(1,
+								mNameSuffix.size() - 1)));
 	}
 
 	//Make the first letter capital...

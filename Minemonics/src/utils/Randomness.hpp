@@ -85,10 +85,19 @@ public:
 	 */
 	bool nextNormalBoolean(double mean, double variance);
 
+	static Randomness* getSingleton(){
+		return mRandomness;
+	}
+
 private:
 
 	// A mersenne twister in a very good configuration
 	boost::random::mt19937 rng;
+
+	/**
+	 * Singleton instance.
+	 */
+	static Randomness* mRandomness;
 };
 
 #endif /* UTILS_RANDOMNESS_H_ */

@@ -30,14 +30,13 @@ SineControllerGene::~SineControllerGene() {
 
 void SineControllerGene::initialize() {
 
-	Randomness randomness;
-	mXOffset = randomness.nextUnifDouble(0,
+	mXOffset = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
 
-	mYOffset = randomness.nextUnifDouble(-1, 1);
-	mAmplitude = randomness.nextUnifDouble(0,
+	mYOffset = Randomness::getSingleton()->nextUnifDouble(-1, 1);
+	mAmplitude = Randomness::getSingleton()->nextUnifDouble(0,
 			ControlConfiguration::CPG_SINE_INITIAL_MAX_AMPLITUDE);
-	mFrequency = randomness.nextUnifDouble(0,
+	mFrequency = Randomness::getSingleton()->nextUnifDouble(0,
 			ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
 }
 
