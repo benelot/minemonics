@@ -31,7 +31,7 @@
 
 BoostLogger Joint::mBoostLogger; /*<! initialize the boost logger*/
 Joint::_Init Joint::_initializer;
-Joint::Joint(SimulationManager* simulationManager, Creature* const creature, Limb* const limbA,
+Joint::Joint(Creature* const creature, Limb* const limbA,
 		Limb* const limbB, const btTransform localA, const btTransform localB,
 		const int indexA, const int indexB, const int ownIndex) {
 	// initialize the physics model of the joint
@@ -46,7 +46,7 @@ Joint::Joint(SimulationManager* simulationManager, Creature* const creature, Lim
 		Component::initialize(mJointModel);
 
 		// initialize the graphics part of the joint
-		mJointGraphics = new JointO3D(simulationManager,mJointModel);
+		mJointGraphics = new JointO3D(mJointModel);
 		((JointO3D*) mJointGraphics)->initialize();
 
 		// Update the state of the joint.
@@ -59,13 +59,12 @@ Joint::Joint(const Joint& joint) :
 }
 
 Joint::Joint(const JointModel& jointModel) {
-	//TODO: Fix this
 	mJointModel = new JointModel(jointModel);
-	mJointGraphics = new JointO3D(NULL, mJointModel);
+	mJointGraphics = new JointO3D(mJointModel);
 }
 
-Joint::Joint(SimulationManager* simulationManager, JointModel* const jointModel):mJointModel(jointModel) {
-	mJointGraphics = new JointO3D(simulationManager, jointModel);
+Joint::Joint(JointModel* const jointModel):mJointModel(jointModel) {
+	mJointGraphics = new JointO3D(jointModel);
 }
 
 Joint::~Joint() {

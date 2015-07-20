@@ -42,8 +42,7 @@
 
 BoostLogger Phenome::mBoostLogger; /*<! initialize the boost logger*/
 Phenome::_Init Phenome::_initializer;
-Phenome::Phenome() :
-		mSimulationManager(NULL), mCreature(NULL), mPhenotypeModel(NULL) {
+Phenome::Phenome() : mCreature(NULL), mPhenotypeModel(NULL) {
 
 }
 
@@ -51,7 +50,6 @@ Phenome::Phenome(const Phenome& phenome) {
 
 	mCreature = phenome.mCreature;
 	mPhenotypeModel = phenome.mPhenotypeModel;
-	mSimulationManager = phenome.mSimulationManager;
 
 	std::vector<Component*>::const_iterator coit = phenome.mComponents.begin();
 	for (; coit != phenome.mComponents.end(); coit++) {
@@ -74,14 +72,10 @@ Phenome::~Phenome() {
 		delete *cit;
 		cit = mComponents.erase(cit);
 	}
-
-	mSimulationManager = NULL;
 	mCreature = NULL;
 }
 
-void Phenome::initialize(SimulationManager* const simulationManager,
-		Creature* const creature) {
-	mSimulationManager = simulationManager;
+void Phenome::initialize(Creature* const creature) {
 	mCreature = creature;
 }
 
@@ -101,14 +95,14 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
-			Limb* limb = new Limb(mSimulationManager, mCreature,
+			Limb* limb = new Limb(mCreature,
 					(LimbModel*) *cmit);
 			mLimbs.push_back(limb);
 			mComponents.push_back(limb);
 			break;
 		}
 		case ComponentModel::JointComponent: {
-			Joint* joint = new Joint(mSimulationManager, ((JointModel*) *cmit));
+			Joint* joint = new Joint(((JointModel*) *cmit));
 			mJoints.push_back(joint);
 			mComponents.push_back(joint);
 			break;

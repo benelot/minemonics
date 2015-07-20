@@ -27,8 +27,6 @@
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 //## controller headers
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
@@ -60,9 +58,9 @@
 #define CONSTRAINT_DEBUG_SIZE 0.2f
 #endif
 
-RagDoll::RagDoll(SimulationManager* simulationManager, double size,
+RagDoll::RagDoll(double size,
 		const btVector3& positionOffset) :
-		Creature(NULL, NULL), mWorld(NULL) {
+		Creature(NULL), mWorld(NULL) {
 
 	btTransform transform;
 	btTransform localA, localB;
@@ -79,7 +77,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	Limb* limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -95,7 +93,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -111,7 +109,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -127,7 +125,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -143,7 +141,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -159,7 +157,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -175,7 +173,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.setOrigin(transform.getOrigin() + positionOffset);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -192,7 +190,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.getBasis().setEulerZYX(0, 0, M_PI_2);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -209,7 +207,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.getBasis().setEulerZYX(0, 0, M_PI_2);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -226,7 +224,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.getBasis().setEulerZYX(0, 0, -M_PI_2);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -243,7 +241,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 	transform.getBasis().setEulerZYX(0, 0, -M_PI_2);
 
 	limb = new Limb();
-	limb->initialize(simulationManager, NULL, type,
+	limb->initialize(NULL, type,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
@@ -273,7 +271,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.15),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_PELVIS],
+	joint = new Joint(this, mLimbs[BODYPART_PELVIS],
 			mLimbs[BODYPART_SPINE], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
 			Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2));
@@ -290,7 +288,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.14),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_SPINE], mLimbs[BODYPART_HEAD],
+	joint = new Joint(this, mLimbs[BODYPART_SPINE], mLimbs[BODYPART_HEAD],
 			localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, -M_PI_2),
 			Ogre::Vector3(M_PI_4, M_PI_4, M_PI_2));
@@ -307,7 +305,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.225),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_PELVIS],
+	joint = new Joint(this, mLimbs[BODYPART_PELVIS],
 			mLimbs[BODYPART_LEFT_UPPER_LEG], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
 			Ogre::Vector3(M_PI_4, M_PI_4, 0));
@@ -324,7 +322,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.185),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_LEFT_UPPER_LEG],
+	joint = new Joint(this, mLimbs[BODYPART_LEFT_UPPER_LEG],
 			mLimbs[BODYPART_LEFT_LOWER_LEG], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(0, M_PI_2, 0));
@@ -341,7 +339,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.225),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_PELVIS],
+	joint = new Joint(this, mLimbs[BODYPART_PELVIS],
 			mLimbs[BODYPART_RIGHT_UPPER_LEG], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
 			Ogre::Vector3(M_PI_4, M_PI_4, 0));
@@ -358,7 +356,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * 0.185),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_RIGHT_UPPER_LEG],
+	joint = new Joint(this, mLimbs[BODYPART_RIGHT_UPPER_LEG],
 			mLimbs[BODYPART_RIGHT_LOWER_LEG], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(0, M_PI_2, 0));
@@ -375,7 +373,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.18),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_SPINE],
+	joint = new Joint(this, mLimbs[BODYPART_SPINE],
 			mLimbs[BODYPART_LEFT_UPPER_ARM], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, 0),
 			Ogre::Vector3(M_PI_2, M_PI_2, 0));
@@ -392,7 +390,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.14),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_LEFT_UPPER_ARM],
+	joint = new Joint(this, mLimbs[BODYPART_LEFT_UPPER_ARM],
 			mLimbs[BODYPART_LEFT_LOWER_ARM], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(M_PI_2, 0, 0));
@@ -409,7 +407,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.18),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_SPINE],
+	joint = new Joint(this, mLimbs[BODYPART_SPINE],
 			mLimbs[BODYPART_RIGHT_UPPER_ARM], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, 0),
 			Ogre::Vector3(M_PI_2, M_PI_2, 0));
@@ -426,7 +424,7 @@ RagDoll::RagDoll(SimulationManager* simulationManager, double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.14),
 					btScalar(size * 0.)));
 
-	joint = new Joint(NULL, this, mLimbs[BODYPART_RIGHT_UPPER_ARM],
+	joint = new Joint(this, mLimbs[BODYPART_RIGHT_UPPER_ARM],
 			mLimbs[BODYPART_RIGHT_LOWER_ARM], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(M_PI_2, 0, 0));

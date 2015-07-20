@@ -38,7 +38,7 @@ class SimulationManager;
  */
 class EnvironmentO3D: public EnvironmentGraphics {
 public:
-	EnvironmentO3D(SimulationManager* const simulationMgr);
+	EnvironmentO3D();
 	virtual ~EnvironmentO3D();
 
 	/**
@@ -168,8 +168,6 @@ protected:
 	DummyPageProvider mDummyPageProvider;
 
 	void initBlendMaps(Ogre::Terrain* const terrain);
-
-	SimulationManager* mSimulationMgr;
 
 	Ogre::TerrainGlobalOptions* mTerrainGlobals;
 	Ogre::TerrainGroup* mTerrainGroup;

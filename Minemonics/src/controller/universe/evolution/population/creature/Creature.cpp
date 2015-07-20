@@ -10,6 +10,8 @@ class SimulationManager;
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 #include <controller/universe/evolution/population/Population.hpp>
@@ -23,25 +25,24 @@ class SimulationManager;
 
 BoostLogger Creature::mBoostLogger; /*<! initialize the boost logger*/
 Creature::_Init Creature::_initializer;
-Creature::Creature(SimulationManager* const simulationManager,
-		Population* const population, const Ogre::Vector3 position,
+Creature::Creature(Population* const population, const Ogre::Vector3 position,
 		const double branchiness) {
 	// set up the creature model
 	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(simulationManager,
-			population->getPopulationModel(), position, branchiness);
+	mCreatureModel->initialize(population->getPopulationModel(), position,
+			branchiness);
 
 	// set up the phenotype
-	mPhenotype.initialize(simulationManager, this);
+	mPhenotype.initialize(this);
 
 	mPhenotype.setPhenotypeModel(&mCreatureModel->getPhenotypeModel());
 
 }
 
-Creature::Creature(SimulationManager* const simulationManager, CreatureModel* const creatureModel) :
+Creature::Creature(CreatureModel* const creatureModel) :
 		mCreatureModel(creatureModel) {
 	// set up the phenotype
-	mPhenotype.initialize(simulationManager, this);
+	mPhenotype.initialize(this);
 
 	mPhenotype.setPhenotypeModel(&mCreatureModel->getPhenotypeModel());
 }
@@ -49,11 +50,6 @@ Creature::Creature(SimulationManager* const simulationManager, CreatureModel* co
 Creature::~Creature() {
 	delete mCreatureModel;
 //	mPhenotype
-}
-
-void Creature::initialize(SimulationManager* const simulationManager,
-		Population* const population, const Ogre::Vector3 position,
-		const double branchiness) {
 }
 
 void Creature::performEmbryogenesis() {

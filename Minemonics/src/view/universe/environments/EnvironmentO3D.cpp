@@ -21,8 +21,8 @@
 #define TERRAIN_LOAD_RADIUS 1500
 #define TERRAIN_HOLD_RADIUS 3000
 
-EnvironmentO3D::EnvironmentO3D(SimulationManager* const simulationMgr) :
-		mSimulationMgr(simulationMgr), mTerrainGlobals(NULL), mTerrainGroup(
+EnvironmentO3D::EnvironmentO3D() :
+		mTerrainGlobals(NULL), mTerrainGroup(
 		NULL), mTerrainPaging(
 		NULL), mPageManager(NULL), mPagedWorld(NULL), mTerrainPagedWorldSection(
 		NULL), mPerlinNoiseTerrainGenerator(NULL), mLODStatus(false), mAutoLOD(
@@ -37,26 +37,25 @@ EnvironmentO3D::~EnvironmentO3D() {
 		OGRE_DELETE mPageManager;
 	}
 
-	if (mTerrainGlobals){
+	if (mTerrainGlobals) {
 		OGRE_DELETE mTerrainGlobals;
 	}
-	mSimulationMgr = NULL;
 
-	if(mTerrainGroup)
-	{
+	if (mTerrainGroup) {
 		OGRE_DELETE mTerrainGroup;
 	}
 
-	if(mTerrainPagedWorldSection){
+	if (mTerrainPagedWorldSection) {
 		OGRE_DELETE mTerrainPagedWorldSection;
 	}
 }
 
-void EnvironmentO3D::initialize(const std::string fileName, const Ogre::Light* const l) {
+void EnvironmentO3D::initialize(const std::string fileName,
+		const Ogre::Light* const l) {
 	mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
 
 	mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(
-			mSimulationMgr->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
+			SimulationManager::getSingleton()->getSceneManager(), Ogre::Terrain::ALIGN_X_Z,
 			TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 
 	//TODO: The terrain does not need to be saved, it is always randomly created.
@@ -78,13 +77,14 @@ void EnvironmentO3D::initialize(const std::string fileName, const Ogre::Light* c
 	// Since we're not loading any pages from .page files, we need a way just
 	// to say we've loaded them without them actually being loaded
 	mPageManager->setPageProvider(&mDummyPageProvider);
-	mPageManager->addCamera(mSimulationMgr->getCamera());
+	mPageManager->addCamera(SimulationManager::getSingleton()->getCamera());
 	mPageManager->setDebugDisplayLevel(0);
 
 	mTerrainPaging = OGRE_NEW Ogre::TerrainPaging(mPageManager);
 	mPagedWorld = mPageManager->createWorld();
 	mTerrainPagedWorldSection = mTerrainPaging->createWorldSection(mPagedWorld,
-			mTerrainGroup, TERRAIN_LOAD_RADIUS, TERRAIN_HOLD_RADIUS, ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
+			mTerrainGroup, TERRAIN_LOAD_RADIUS, TERRAIN_HOLD_RADIUS,
+			ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
 			ENDLESS_PAGE_MAX_X, ENDLESS_PAGE_MAX_Y);
 	mTerrainGroup->freeTemporaryResources();
 
@@ -101,7 +101,7 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(false);
 
 	mTerrainGlobals->setCompositeMapAmbient(
-			mSimulationMgr->getSceneManager()->getAmbientLight());
+			SimulationManager::getSingleton()->getSceneManager()->getAmbientLight());
 
 	if (l != NULL) {
 		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
@@ -158,7 +158,7 @@ void EnvironmentO3D::addToWorld() {
 void EnvironmentO3D::removeFromWorld() {
 	mInWorld = false;
 	//TODO: There must be another way to hide a terrain.
-	mTerrainGroup->setOrigin(Ogre::Vector3(0,1000000,0));
+	mTerrainGroup->setOrigin(Ogre::Vector3(0, 1000000, 0));
 }
 
 //-------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ class EvaluationController;
  */
 class Evolution {
 public:
-	Evolution(SimulationManager* simulationManager);
+	Evolution();
 	Evolution(EvolutionModel* const evolutionModel);
 	virtual ~Evolution();
 

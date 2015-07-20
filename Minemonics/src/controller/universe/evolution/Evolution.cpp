@@ -26,9 +26,9 @@
 
 BoostLogger Evolution::mBoostLogger; /*<! initialize the boost logger*/
 Evolution::_Init Evolution::_initializer;
-Evolution::Evolution(SimulationManager* simulationManager) :
+Evolution::Evolution() :
 		mEvaluationController(NULL), mPlanet(NULL) {
-	mEvolutionModel = new EvolutionModel(simulationManager);
+	mEvolutionModel = new EvolutionModel();
 }
 
 Evolution::Evolution(EvolutionModel* const evolutionModel) :

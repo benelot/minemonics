@@ -130,6 +130,10 @@ public:
 
 	// Accessor methods
 
+	static SimulationManager* getSingleton(){
+		return mSimulationManager;
+	}
+
 	CameraHandler& getCameraHandler() {
 		return mCameraHandler;
 	}
@@ -237,6 +241,8 @@ private:
 	//## Debug components
 	// Logger
 	static BoostLogger mBoostLogger;
+
+	static SimulationManager* mSimulationManager;
 
 	static class _Init {
 	public:

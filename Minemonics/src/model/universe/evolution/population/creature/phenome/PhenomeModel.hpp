@@ -45,8 +45,7 @@ public:
 	PhenomeModel(const PhenomeModel& phenomeModel);
 	virtual ~PhenomeModel();
 
-	void initialize(SimulationManager* const simulationManager,
-			btDynamicsWorld* const world);
+	void initialize(btDynamicsWorld* const world);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -224,11 +223,6 @@ private:
 	 * Handle to the dynamics world.
 	 */
 	btDynamicsWorld* mWorld;
-
-	/**
-	 * Handle to the simulation manager
-	 */
-	SimulationManager* mSimulationManager;
 
 	/**
 	 * Whether the phenome is in the world or not.

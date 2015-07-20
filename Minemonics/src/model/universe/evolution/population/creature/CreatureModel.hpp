@@ -64,7 +64,7 @@ public:
 	 * @param position The creature's position.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(SimulationManager* simulationmanager,PopulationModel* const populationModel,
+	void initialize(PopulationModel* const populationModel,
 			const Ogre::Vector3 position, const double branchiness);
 
 	/**

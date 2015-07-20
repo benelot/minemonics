@@ -48,13 +48,12 @@ class Limb: public Component {
 public:
 	Limb();
 	Limb(const Limb& limb);
-	Limb(SimulationManager* const simulationManager, Creature* const creature,
+	Limb(Creature* const creature,
 			LimbModel* const limbModel);
 	virtual ~Limb();
 
 	/**
 	 * Initialize the limb.
-	 * @param simulationManager A handle to the simulation manager.
 	 * @param creature A handle to the creature the limb belongs to.
 	 * @param type The primitive type of the limb.
 	 * @param position The position of the limb.
@@ -66,8 +65,7 @@ public:
 	 * @param color The color of the limb.
 	 * @param ownIndex The limb's own index in the array of limbs.
 	 */
-	void initialize(SimulationManager* const simulationManager,
-			Creature* const creature, const LimbModel::PrimitiveType type,
+	void initialize(Creature* const creature, const LimbModel::PrimitiveType type,
 			const Ogre::Vector3 position, const Ogre::Quaternion orientation,
 			const Ogre::Vector3 initialRelativePosition,
 			const Ogre::Quaternion initialOrientation, const Ogre::Vector3 size,

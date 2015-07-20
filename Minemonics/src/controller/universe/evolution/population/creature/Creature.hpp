@@ -31,23 +31,21 @@ class Population;
  */
 class Creature {
 public:
-	Creature(SimulationManager* const simulationManager,
-			Population* const population, const Ogre::Vector3 position,
+	Creature(Population* const population, const Ogre::Vector3 position,
 			const double branchiness);
-	Creature(SimulationManager* const simulationManager,
-			CreatureModel* const creatureModel);
+	Creature(CreatureModel* const creatureModel);
 	virtual ~Creature();
 
-	/**
-	 * Initialize the creature.
-	 * @param simulationManager The simulation manager
-	 * @param population The population the creature belongs to.
-	 * @param position The position the creature should be created in.
-	 * @param branchiness The branchiness factor of the creature.
-	 */
-	void initialize(SimulationManager* const simulationManager,
-			Population* const population, const Ogre::Vector3 position,
-			const double branchiness);
+//	/**
+//	 * Initialize the creature.
+//	 * @param simulationManager The simulation manager
+//	 * @param population The population the creature belongs to.
+//	 * @param position The position the creature should be created in.
+//	 * @param branchiness The branchiness factor of the creature.
+//	 */
+//	void initialize(SimulationManager* const simulationManager,
+//			Population* const population, const Ogre::Vector3 position,
+//			const double branchiness);
 
 	/**
 	 * Perform embryogenesis on the creature to build his phenotype from the genotype.

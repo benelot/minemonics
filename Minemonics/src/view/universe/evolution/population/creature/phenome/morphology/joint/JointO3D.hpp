@@ -31,7 +31,7 @@ class SimulationManager;
  */
 class JointO3D: public JointGraphics {
 public:
-	JointO3D(SimulationManager* simulationManager, const JointModel* const jointModel);
+	JointO3D(const JointModel* const jointModel);
 	JointO3D(const JointO3D& jointO3D);
 
 	virtual ~JointO3D();
@@ -63,8 +63,6 @@ public:
 	void removeFromWorld();
 
 private:
-	SimulationManager* mSimulationManager;
-
 	Limb* mLimbA;
 
 	Limb* mLimbB;

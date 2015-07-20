@@ -105,14 +105,6 @@ private:
 	 * If the evaluation is paused or not.
 	 */
 	bool mPaused;
-
-	//TODO: Use the timer manager to trigger proceeding.
-//	TimerManager<EvaluationController> mEvaluationManager;
-
-	/**
-	 * The handler to the simulation manager.
-	 */
-	SimulationManager* mSimulationManager;
 };
 
 #endif /* CONTROLLER_EVALUATIONCONTROLLER_HPP_ */

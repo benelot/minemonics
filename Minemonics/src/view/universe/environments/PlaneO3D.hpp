@@ -3,6 +3,8 @@
 
 //# corresponding header
 //# forward declarations
+class PlaneModel;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -29,7 +31,7 @@
  */
 class PlaneO3D: public EnvironmentO3D {
 public:
-	PlaneO3D(SimulationManager* const simulationMgr);
+	PlaneO3D(const PlaneModel* const planeModel);
 	virtual ~PlaneO3D();
 
 	/**
@@ -42,6 +44,9 @@ public:
 	 * Update the plane view.
 	 */
 	void update();
+
+private:
+	const PlaneModel* mPlaneModel;
 };
 
 #endif /* VIEW_UNIVERSE_ENVIRONMENTS_PLANEO3D_H_ */

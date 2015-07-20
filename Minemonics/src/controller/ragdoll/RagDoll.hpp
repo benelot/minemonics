@@ -1,16 +1,8 @@
-/*
- * Ragdoll.h
- *
- *  Created on: Mar 24, 2015
- *      Author: leviathan
- */
-
 #ifndef CONTROLLER_RAGDOLL_RAGDOLL_HPP_
 #define CONTROLLER_RAGDOLL_RAGDOLL_HPP_
 
 //# corresponding header
 //# forward declarations
-class SimulationManager;
 class Limb;
 class Joint;
 
@@ -33,9 +25,9 @@ class Joint;
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		A dummy creature to test things with a simple, well defined creature.
  * @details		Details
- * @date		2015-04-27
+ * @date		2015-03-24
  * @author		Benjamin Ellenberger
  */
 class RagDoll: public Creature {
@@ -73,7 +65,7 @@ class RagDoll: public Creature {
 	btDynamicsWorld* mWorld;
 
 public:
-	RagDoll(SimulationManager* simulationManager, double size,
+	RagDoll(double size,
 			const btVector3& positionOffset);
 
 	virtual ~RagDoll();

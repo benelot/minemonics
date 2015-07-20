@@ -37,17 +37,17 @@ Plane::~Plane() {
 //	They are all deleted in environment
 }
 
-void Plane::initialize(SimulationManager* const simulationMgr, const Ogre::Light* const l,
+void Plane::initialize(const Ogre::Light* const l,
 		OgreBtDebugDrawer* const debugDrawer) {
 	Environment::initialize(Environment::PLANE);
-
-	// setup the plane view
-	mEnvironmentGraphics = new PlaneO3D(simulationMgr);
-	getPlaneView()->initialize(l);
 
 	// setup the planet model
 	mEnvironmentModel = new PlaneModel();
 	getPlaneModel()->initialize();
+
+	// setup the plane view
+	mEnvironmentGraphics = new PlaneO3D((PlaneModel*)mEnvironmentModel);
+	getPlaneView()->initialize(l);
 
 	// set up the physics controller
 	mEnvironmentModel->setPhysicsController(new PhysicsController());

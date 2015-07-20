@@ -29,18 +29,15 @@
 BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
 Population::_Init Population::_initializer;
 Population::Population() :
-		mSimulationManager(NULL), mPlanet(NULL) {
+		mPlanet(NULL) {
 	mPopulationModel = new PopulationModel();
 }
 
 Population::Population(PopulationModel* const populationModel) :
-		mSimulationManager(NULL), mPlanet(NULL), mPopulationModel(
-				populationModel) {
+		mPlanet(NULL), mPopulationModel(populationModel) {
 }
 
 Population::~Population() {
-	//Clear the handle.
-	mSimulationManager = NULL;
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end();) {
 		Creature* creature = *cit;
@@ -55,11 +52,8 @@ Population::~Population() {
  * @param simulationManager The simulation manager handle
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
-void Population::initialize(Planet* const planet,
-		SimulationManager* const simulationManager, const int creatureQty,
+void Population::initialize(Planet* const planet, const int creatureQty,
 		const Ogre::Vector3 initialPosition) {
-
-	mSimulationManager = simulationManager;
 	mPlanet = planet;
 
 	//initialize the population model with zero creatures.
@@ -89,15 +83,9 @@ void Population::initialize(Planet* const planet, const int creatureQty) {
  */
 void Population::addNewMember(const double branchiness,
 		const Ogre::Vector3 rootPosition) {
-	if (mSimulationManager) {
-
-		//add new creature
-		Creature* creature = new Creature(mSimulationManager, this,
-				rootPosition, branchiness);
-		addMember(creature);
-
-	}
-
+	//add new creature
+	Creature* creature = new Creature(this, rootPosition, branchiness);
+	addMember(creature);
 }
 
 void Population::addMember(Creature* const creature) {
@@ -152,7 +140,7 @@ void Population::resyncWithModel() {
 			mPopulationModel->getCreatureModels().begin();
 			cit != mPopulationModel->getCreatureModels().end(); cit++) {
 		if ((*cit)->isNew()) {
-			Creature* creature = new Creature(mSimulationManager, *cit);
+			Creature* creature = new Creature(*cit);
 			mCreatures.push_back(creature);
 			(*cit)->setNew(false);
 		}

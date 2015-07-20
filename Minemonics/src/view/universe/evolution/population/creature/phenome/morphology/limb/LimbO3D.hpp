@@ -29,8 +29,7 @@ class SimulationManager;
  */
 class LimbO3D: public LimbGraphics {
 public:
-	LimbO3D(SimulationManager* simulationManager,
-			const LimbModel* const limbModel);
+	LimbO3D(const LimbModel* const limbModel);
 	LimbO3D(const LimbO3D& limbO3D);
 
 	virtual ~LimbO3D();
@@ -94,11 +93,6 @@ public:
 	}
 
 private:
-
-	/**
-	 * The simulation manager handle
-	 */
-	SimulationManager* mSimulationManager;
 
 	/**
 	 * The limb object in the graphical world.

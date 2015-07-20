@@ -96,13 +96,14 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+SimulationManager* SimulationManager::mSimulationManager;
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mCameraHandler(this), mSdlWindow(
 		NULL) {
-
+	mSimulationManager = this;
 	// main frame timer initialization
 	mStart = boost::posix_time::microsec_clock::local_time();
 	mNow = boost::posix_time::microsec_clock::local_time();
@@ -220,14 +221,14 @@ void SimulationManager::createScene(void) {
 			EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(this, Environment::PLANE, &mDebugDrawer, 10);
+	Planet* earth = new Planet(Environment::PLANE, &mDebugDrawer, 10);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, this, 10, Ogre::Vector3(0, 300, -4000));
+	earthPopulation->initialize(earth, 10, Ogre::Vector3(0, 300, -4000));
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
@@ -752,5 +753,4 @@ int main(int argc, char *argv[])
 
 #ifdef __cplusplus
 }
-
 #endif

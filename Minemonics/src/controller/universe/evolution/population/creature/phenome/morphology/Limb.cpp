@@ -54,7 +54,7 @@ Limb::Limb(const Limb& limb) :
 	mLimbGraphics = limb.mLimbGraphics->clone();
 }
 
-Limb::Limb(SimulationManager* const simulationManager, Creature* const creature,
+Limb::Limb(Creature* const creature,
 		LimbModel* const limbModel) {
 	mLimbModel = limbModel;
 	mCreature = creature;
@@ -63,7 +63,7 @@ Limb::Limb(SimulationManager* const simulationManager, Creature* const creature,
 	Component::initialize(limbModel);
 
 	// initialize the graphics part of the limb
-	mLimbGraphics = new LimbO3D(simulationManager, mLimbModel);
+	mLimbGraphics = new LimbO3D(mLimbModel);
 
 //	// Update the state of the limb.
 	update();
@@ -79,8 +79,7 @@ Limb::~Limb() {
 	mCreature = NULL;
 }
 
-void Limb::initialize(SimulationManager* const simulationManager,
-		Creature* const creature, const LimbModel::PrimitiveType type,
+void Limb::initialize(Creature* const creature, const LimbModel::PrimitiveType type,
 		const Ogre::Vector3 position, const Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
 		const Ogre::Quaternion initialOrientation,
@@ -102,7 +101,7 @@ void Limb::initialize(SimulationManager* const simulationManager,
 	Component::initialize(mLimbModel);
 
 	// initialize the graphics part of the limb
-	mLimbGraphics = new LimbO3D(simulationManager, mLimbModel);
+	mLimbGraphics = new LimbO3D(mLimbModel);
 
 	// Update the state of the limb.
 	update();

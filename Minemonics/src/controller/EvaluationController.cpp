@@ -18,8 +18,7 @@
 
 BoostLogger EvaluationController::mBoostLogger; /*<! initialize the boost logger*/
 EvaluationController::_Init EvaluationController::_initializer;
-EvaluationController::EvaluationController() :
-		mSimulationManager(NULL), mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
+EvaluationController::EvaluationController() : mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
 				0), mPaused(false) {
 }
 
@@ -33,12 +32,10 @@ EvaluationController::~EvaluationController() {
 	}
 //	mParallelEvaluationsQty
 //	mPaused
-	mSimulationManager = NULL;
 }
 
 void EvaluationController::initialize(SimulationManager* const simulationManager,
 		int parallelEvaluationsQty) {
-	mSimulationManager = simulationManager;
 	mParallelEvaluationsQty = parallelEvaluationsQty;
 	mEvaluations.clear();
 }
@@ -67,7 +64,7 @@ void EvaluationController::scheduleEvaluations() {
 				&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
 			mCurrentlyRunningEvaluationsQty++;
 			(*eit)->setup();
-			mSimulationManager->getViewController().setEvaluationInView(*eit);
+			SimulationManager::getSingleton()->getViewController().setEvaluationInView(*eit);
 		}
 	}
 }

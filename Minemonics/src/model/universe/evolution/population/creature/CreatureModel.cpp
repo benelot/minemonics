@@ -42,7 +42,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	}
 }
 
-void CreatureModel::initialize(SimulationManager* simulationmanager,PopulationModel* const populationModel, const Ogre::Vector3 position,
+void CreatureModel::initialize(PopulationModel* const populationModel, const Ogre::Vector3 position,
 		const double branchiness) {
 	mPopulationModel = populationModel;
 	mInitialPosition = position;
@@ -51,8 +51,7 @@ void CreatureModel::initialize(SimulationManager* simulationmanager,PopulationMo
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
-	mPhenotypeModel.initialize(simulationmanager,
-			mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld());
+	mPhenotypeModel.initialize(mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld());
 }
 
 CreatureModel::~CreatureModel() {

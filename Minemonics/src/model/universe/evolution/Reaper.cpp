@@ -26,11 +26,10 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-Reaper::Reaper(SimulationManager* simulationManager) :
+Reaper::Reaper() :
 		mAttributeMutationPercentage(0), mBranchAttributeMutationPercentage(0), mBranchMutationPercentage(
 				0), mCrossOverPercentage(0), mGeneMutationPercentage(0), mReapPercentage(
-				0), mSowFreshPercentage(0), mSimulationManager(
-				simulationManager) {
+				0), mSowFreshPercentage(0){
 }
 
 Reaper::~Reaper() {
@@ -318,7 +317,7 @@ void Reaper::sowFreshly(PopulationModel* const population,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		CreatureModel* offspring = new CreatureModel();
 		offspring->setNew(true);
-		offspring->initialize(mSimulationManager, population,
+		offspring->initialize(population,
 				Ogre::Vector3(0, 0, 0), branchiness);
 		population->getCreatureModels().push_back(offspring);
 	}

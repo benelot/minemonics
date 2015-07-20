@@ -30,10 +30,9 @@
  */
 class Planet {
 public:
-	Planet(SimulationManager* const simulationManager,
-			const Environment::EnvironmentType type,
+	Planet(const Environment::EnvironmentType type,
 			OgreBtDebugDrawer* const debugDrawer, const int evaluationTime);
-	Planet(SimulationManager* simulationManager,PlanetModel* const planetModel);
+	Planet(PlanetModel* const planetModel);
 	virtual ~Planet();
 
 	/**
@@ -42,8 +41,7 @@ public:
 	 * @param type The type of the environment.
 	 * @param debugDrawer The debug drawer of this simulation.
 	 */
-	void initialize(SimulationManager* const simulationManager,
-			const Environment::EnvironmentType type, OgreBtDebugDrawer* const debugDrawer,const int evaluationTime);
+	void initialize(const Environment::EnvironmentType type, OgreBtDebugDrawer* const debugDrawer,const int evaluationTime);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not yet developed.

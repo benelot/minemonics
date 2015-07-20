@@ -1,15 +1,23 @@
 //# corresponding header
-#include <SimulationManager.hpp>
 #include <view/universe/environments/PlaneO3D.hpp>
 
-//## configuration headers
+//# forward declarations
+//# system headers
 //## controller headers
 //## model headers
 //## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+#include <model/universe/environments/PlaneModel.hpp>
+
+//## view headers
 //## utils headers
 
-PlaneO3D::PlaneO3D(SimulationManager* const simulationMgr) :
-		EnvironmentO3D(simulationMgr) {
+PlaneO3D::PlaneO3D(const PlaneModel* const planeModel) :
+		EnvironmentO3D(),mPlaneModel(planeModel) {
 
 }
 

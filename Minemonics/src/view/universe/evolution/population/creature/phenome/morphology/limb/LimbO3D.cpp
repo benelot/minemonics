@@ -47,10 +47,8 @@
 
 //## utils headers
 
-LimbO3D::LimbO3D(SimulationManager* simulationManager,
-		const LimbModel* const limbModel) :
+LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		LimbGraphics(limbModel) {
-	mSimulationManager = simulationManager;
 
 	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	Ogre::String materialName = boost::lexical_cast<std::string>(this) + "/"
@@ -77,13 +75,13 @@ LimbO3D::LimbO3D(SimulationManager* simulationManager,
 	tex->setTextureFiltering(Ogre::TFO_ANISOTROPIC);
 	tex->setTextureAnisotropy(8);
 
-	mLimbEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
+	mLimbEntityNode = SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	switch (limbModel->getPrimitiveType()) {
 	case LimbModel::BLOCK:
 
 		tex->setTextureScale(4, 4);
 		material->load();
-		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(
+		mLimbEntity = SimulationManager::getSingleton()->getSceneManager()->createEntity(
 				Ogre::SceneManager::PT_CUBE);
 		mLimbEntity->setMaterialName(materialName);
 
@@ -104,7 +102,7 @@ LimbO3D::LimbO3D(SimulationManager* simulationManager,
 		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
 				0.5f * limbModel->getDimensions().z).setHeight(
 				limbModel->getDimensions().y).realizeMesh(name);
-		mLimbEntity = mSimulationManager->getSceneManager()->createEntity(name);
+		mLimbEntity = SimulationManager::getSingleton()->getSceneManager()->createEntity(name);
 		mLimbEntity->setMaterialName(materialName);
 		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
@@ -116,8 +114,7 @@ LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
 		LimbGraphics(limbO3D.mLimbModel) {
 	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	mLimbEntity = limbO3D.mLimbEntity->clone(name);
-	mSimulationManager = limbO3D.mSimulationManager;
-	mLimbEntityNode = mSimulationManager->getSceneManager()->createSceneNode();
+	mLimbEntityNode = SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	mLimbEntityNode->setPosition(limbO3D.mLimbModel->getPosition());
 	mLimbEntityNode->setOrientation(limbO3D.mLimbModel->getOrientation());
 }
@@ -152,7 +149,7 @@ void LimbO3D::update() {
 
 void LimbO3D::addToWorld() {
 	if (!isInWorld()) {
-		mSimulationManager->getSceneManager()->getRootSceneNode()->addChild(
+		SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->addChild(
 				mLimbEntityNode);
 		setInWorld(true);
 	}
@@ -160,7 +157,7 @@ void LimbO3D::addToWorld() {
 
 void LimbO3D::removeFromWorld() {
 	if (isInWorld()) {
-		mSimulationManager->getSceneManager()->getRootSceneNode()->removeChild(
+		SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->removeChild(
 				mLimbEntityNode);
 		setInWorld(false);
 	}
@@ -173,7 +170,7 @@ Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
 	ray.setDirection(direction);
 
 	Ogre::RaySceneQuery* mRayScnQuery =
-			mSimulationManager->getSceneManager()->createRayQuery(Ogre::Ray());
+			SimulationManager::getSingleton()->getSceneManager()->createRayQuery(Ogre::Ray());
 	mRayScnQuery->setSortByDistance(true);
 	mRayScnQuery->setRay(ray);
 
@@ -190,7 +187,7 @@ Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
 			//curObject = it->movable->getParentSceneNode();
 		}
 	}
-	mSimulationManager->getSceneManager()->destroyQuery(mRayScnQuery);
+	SimulationManager::getSingleton()->getSceneManager()->destroyQuery(mRayScnQuery);
 
 	return origin + direction * distance / direction.length();
 }
@@ -202,7 +199,7 @@ Ogre::Vector3 LimbO3D::getLocalIntersection(Ogre::Vector3 origin,
 	ray.setDirection(direction);
 
 	Ogre::RaySceneQuery* mRayScnQuery =
-			mSimulationManager->getSceneManager()->createRayQuery(Ogre::Ray());
+			SimulationManager::getSingleton()->getSceneManager()->createRayQuery(Ogre::Ray());
 	mRayScnQuery->setSortByDistance(true);
 	mRayScnQuery->setRay(ray);
 
@@ -217,14 +214,14 @@ Ogre::Vector3 LimbO3D::getLocalIntersection(Ogre::Vector3 origin,
 			//curObject = it->movable->getParentSceneNode();
 		}
 	}
-	mSimulationManager->getSceneManager()->destroyQuery(mRayScnQuery);
+	SimulationManager::getSingleton()->getSceneManager()->destroyQuery(mRayScnQuery);
 
 	return direction * distance / direction.length();
 }
 
 Ogre::Vector3 LimbO3D::getLocalPreciseIntersection(Ogre::Vector3 origin,
 		Ogre::Vector3 direction) {
-	OgreMeshRay ray(mSimulationManager->getSceneManager());
+	OgreMeshRay ray(SimulationManager::getSingleton()->getSceneManager());
 	Ogre::Vector3 result;
 	ray.raycastFromPoint(origin, direction, result, mLimbEntity->getName());
 

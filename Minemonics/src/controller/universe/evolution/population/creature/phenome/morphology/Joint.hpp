@@ -43,13 +43,13 @@ class JointGraphics;
  */
 class Joint: public Component {
 public:
-	Joint(SimulationManager* simulationManager, Creature* const creature,
+	Joint(Creature* const creature,
 			Limb* const limbA, Limb* const limbB, const btTransform localA,
 			const btTransform localB, const int indexA, const int indexB,
 			const int ownIndex);
 	Joint(const Joint& joint);
 	Joint(const JointModel& jointModel);
-	Joint(SimulationManager* simulationManager, JointModel* const jointModel);
+	Joint(JointModel* const jointModel);
 	virtual ~Joint();
 
 	/**

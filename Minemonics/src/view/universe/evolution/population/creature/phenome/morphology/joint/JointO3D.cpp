@@ -1,27 +1,33 @@
 //# corresponding header
-#include <SimulationManager.hpp>
-#include <utils/ogre3D/Euler.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
 //## configuration headers
 //## controller headers
 //## model headers
 //## view headers
+//## utils headers
+#include <utils/ogre3D/Euler.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
-JointO3D::JointO3D(SimulationManager* simulationManager,
-		const JointModel* const jointModel) :
-		JointGraphics(jointModel), mSimulationManager(simulationManager), mLimbA(
-				NULL), mLimbB(NULL) {
+JointO3D::JointO3D(const JointModel* const jointModel) :
+		JointGraphics(jointModel), mLimbA(
+		NULL), mLimbB(NULL) {
 
 }
 
-JointO3D::JointO3D(const JointO3D& jointO3D):JointGraphics(jointO3D.mJointModel) {
+JointO3D::JointO3D(const JointO3D& jointO3D) :
+		JointGraphics(jointO3D.mJointModel) {
 	mLimbA = jointO3D.mLimbA;
 	mLimbB = jointO3D.mLimbB;
 	mLocalA = jointO3D.mLocalA;
 	mLocalB = jointO3D.mLocalB;
-	mSimulationManager = jointO3D.mSimulationManager;
 }
 
 JointO3D::~JointO3D() {
@@ -29,11 +35,10 @@ JointO3D::~JointO3D() {
 }
 
 //TODO:Remove this if possible
-void JointO3D::initialize(/*SimulationManager* simulationManager , Limb* limbA,
+void JointO3D::initialize(/*Limb* limbA,
  Limb* limbB/*, btTransform localA, btTransform localB*/) {
-//	mSimulationManager = simulationManager;
-//	mLimbA = limbA;
-//	mLimbB = limbB;
+	//mLimbA = limbA;
+	//mLimbB = limbB;
 	//mLocalA = localA;
 	//mLocalB = localB;
 }
@@ -50,24 +55,24 @@ void JointO3D::update() {
 //			limbBCOM
 //					+ /*euler2 */OgreBulletUtils::convert(mLocalB.getOrigin()));
 //
-//	mSimulationManager->getDebugDrawer()->drawLine(limbACOM, limbAJoint,
+//	SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbACOM, limbAJoint,
 //			Ogre::ColourValue(1, 1, 1));
-//	mSimulationManager->getDebugDrawer()->drawLine(limbBCOM, limbBJoint,
+//	SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbBCOM, limbBJoint,
 //			Ogre::ColourValue(1, 1, 1));
 //
-//	mSimulationManager->getDebugDrawer()->drawLine(limbACOM, limbBCOM,
+//	SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbACOM, limbBCOM,
 //			Ogre::ColourValue(1, 1, 1));
 
 //	std::string text;
 //	text.append("+");
 //	InfoOverlayData* data = new InfoOverlayData(
 //			mLimbA->getPosition(), text);
-//	mSimulationManager->getInfoOverlay().addInfo(data);
+//	SimulationManager::getSingleton()->getInfoOverlay().addInfo(data);
 //	text.clear();
 //	text.append("x");
 //	data = new InfoOverlayData(
 //			mLimbB->getPosition(), text);
-//	mSimulationManager->getInfoOverlay().addInfo(data);
+//	SimulationManager::getSingleton()->getInfoOverlay().addInfo(data);
 
 }
 

@@ -81,9 +81,8 @@ public:
 	/**
 	 * @brief Initialize the phenotype with the simulation manager handle.
 	 * @details Details
-	 * @param simulationManager A handle of the simulation manager.
 	 */
-	void initialize(SimulationManager* const simulationManager, Creature* const creature);
+	void initialize(Creature* const creature);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -218,12 +217,6 @@ private:
 	 * The vector of the phenotype's joints between the limbs.
 	 */
 	std::vector<Joint*> mJoints;
-
-	// HANDLES
-	/**
-	 * The simulation manager handle.
-	 */
-	SimulationManager* mSimulationManager;
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_HPP_ */

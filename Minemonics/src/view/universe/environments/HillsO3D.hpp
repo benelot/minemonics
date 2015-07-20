@@ -3,7 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class SimulationManager;
 //# system headers
 //## controller headers
 //## model headers
@@ -30,7 +29,7 @@ class SimulationManager;
  */
 class HillsO3D: public EnvironmentO3D {
 public:
-	HillsO3D(SimulationManager* simulationMgr);
+	HillsO3D();
 	virtual ~HillsO3D();
 
 	void initialize(Ogre::Light* l);

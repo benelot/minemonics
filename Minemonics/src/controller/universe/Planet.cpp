@@ -28,16 +28,15 @@
 
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
-Planet::Planet(SimulationManager* const simulationManager,
-		const Environment::EnvironmentType type,
+Planet::Planet(const Environment::EnvironmentType type,
 		OgreBtDebugDrawer* const debugDrawer, const int evaluationTime) :
-		mEnvironment(NULL), mEvolution(simulationManager) {
+		mEnvironment(NULL) {
 	mPlanetModel = new PlanetModel();
 
 	//create earth evolution
 	mEvolution.initialize(
-			&simulationManager->getUniverse().getEvaluationController(), this,
-			evaluationTime);
+			&SimulationManager::getSingleton()->getUniverse().getEvaluationController(),
+			this, evaluationTime);
 
 	// set up environment
 	switch (type) {
@@ -49,8 +48,7 @@ Planet::Planet(SimulationManager* const simulationManager,
 	case Environment::PLANE: {
 		//create the terrain
 		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(simulationManager, NULL,
-				debugDrawer);
+		((Plane*) mEnvironment)->initialize(NULL, debugDrawer);
 		break;
 	}
 	}
@@ -58,8 +56,8 @@ Planet::Planet(SimulationManager* const simulationManager,
 			mEnvironment->getEnvironmentModel());
 }
 
-Planet::Planet(SimulationManager* simulationManager, PlanetModel* const planetModel) :
-		mEnvironment(NULL), mPlanetModel(planetModel),mEvolution(simulationManager) {
+Planet::Planet(PlanetModel* const planetModel) :
+		mEnvironment(NULL), mPlanetModel(planetModel) {
 }
 
 Planet::~Planet() {

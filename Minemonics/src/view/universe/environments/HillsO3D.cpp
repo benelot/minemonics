@@ -14,8 +14,8 @@
 //## view headers
 //## utils headers
 
-HillsO3D::HillsO3D(SimulationManager* simulationMgr) :
-		EnvironmentO3D(simulationMgr), mTerrainsImported(false) {
+HillsO3D::HillsO3D() :
+		EnvironmentO3D(), mTerrainsImported(false) {
 }
 
 HillsO3D::~HillsO3D() {
