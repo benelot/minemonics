@@ -195,7 +195,7 @@ set(CONTROLLERSRCS
 	## view controller
 	./controller/viewcontroller/ViewController.cpp
 	./controller/viewcontroller/camera/CameraHandler.cpp
-	
+		
 	## application state handler
 	./controller/StateHandler.cpp
 	
@@ -418,12 +418,12 @@ set(TESTSRCS
     ./model/universe/PlanetModel_test.cpp
     ./model/universe/evolution/juries/Velocity_test.cpp
     ./model/universe/evolution/juries/Ones_test.cpp
-    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
-    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
-    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
+#    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
+#    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
+#    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     ./model/universe/evolution/population/creature/genome/Genome_test.cpp
-    ./model/universe/evolution/population/creature/CreatureModel_test.cpp
-    ./model/universe/evolution/population/PopulationModel_test.cpp
+#    ./model/universe/evolution/population/creature/CreatureModel_test.cpp
+#    ./model/universe/evolution/population/PopulationModel_test.cpp
     ./utils/NameGenerator_test.cpp
     ./utils/Randomness_test.cpp
     
@@ -785,16 +785,16 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
 # Add test cpp file
-#add_executable(runUnitTests
-#    ${TESTHDRS}
-#    ${TESTSRCS}
-#)
+add_executable(runUnitTests
+    ${TESTHDRS}
+    ${TESTSRCS}
+)
 
 # Link test executable against gtest & gtest_main
-#target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
 
-#add_test(
-#    NAME runUnitTests
-#    COMMAND runUnitTests
-#)
+add_test(
+    NAME runUnitTests
+    COMMAND runUnitTests
+)
  

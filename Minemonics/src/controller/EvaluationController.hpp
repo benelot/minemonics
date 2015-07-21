@@ -19,7 +19,6 @@
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>
-//#include <utils/TimerManager.hpp>
 
 /**
  * @brief		The evaluation controller schedules the evaluations for serial or parallel evaluation.

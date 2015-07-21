@@ -1,9 +1,7 @@
 //# corresponding headers
 #include <configuration/GUIConfiguration.hpp>
-
 //# forward declarations
 //# system headers
-
 //## controller headers
 //## model headers
 //## view headers

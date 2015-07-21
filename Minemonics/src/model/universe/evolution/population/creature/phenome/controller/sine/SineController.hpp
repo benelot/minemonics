@@ -50,6 +50,56 @@ public:
 
 	void collectInputs();
 
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the sine controller model to a string.
+	 * @param os The ostream.
+	 * @param creature The sine controller we want to serialize.
+	 * @return A string containing all information about the sine controller.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const SineController &sineController) {
+		/**The type of controller*/
+		os << "SineController: Type=" << sineController.mType
+		/**The amplitude of the sine controller*/
+		<< "/Amplitude=" << sineController.mAmplitude
+		/**The frequence of the sine controller*/
+		<< "/Frequency= " << sineController.mFrequency << "Hz"
+		/**The X shift of the sine controller*/
+		<< "/XShift=" << sineController.mXShift
+		/**The YShift of the sine controller*/
+		<< "/YShift=" << sineController.mYShift;
+
+		//TODO: Controller input and outputs serialization
+		return os;
+	}
+
+	/**
+	 * Serializes the sine controller to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+
+		/**The type of controller*/
+		& BOOST_SERIALIZATION_NVP(mType)
+		/**The amplitude of the sine controller*/
+		& BOOST_SERIALIZATION_NVP(mAmplitude)
+		/**The frequence of the sine controller*/
+		& BOOST_SERIALIZATION_NVP(mFrequency)
+		/**The X shift of the sine controller*/
+		& BOOST_SERIALIZATION_NVP(mXShift)
+		/**The YShift of the sine controller*/
+		& BOOST_SERIALIZATION_NVP(mYShift);
+		//TODO: Controller input and outputs serialization
+	}
+
 private:
 	/**
 	 * The amplitude of the sine wave
@@ -76,5 +126,7 @@ private:
 	 */
 	double mTime;
 };
+
+BOOST_CLASS_VERSION(SineController, 1)
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_CONTROLLER_SINE_SINECONTROLLER_HPP_ */

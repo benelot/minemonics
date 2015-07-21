@@ -85,7 +85,7 @@ public:
 		return mValue;
 	}
 
-	void setvalue(const double value) {
+	void setValue(const double value) {
 		mValue = value;
 	}
 

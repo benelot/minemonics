@@ -74,9 +74,27 @@ public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);
 
+	/**
+	 * Quit the simulation.
+	 * @return If the simulation could be quit.
+	 */
 	bool quit();
+
+	/**
+	 * Event triggered when the window is resized.
+	 * @param rw The renderwindow's details.
+	 */
 	virtual void windowResized(Ogre::RenderWindow* rw);
 
+	/**
+	 * Debug method for an error causing the creature vectors to have wrong sizes via the iterators.
+	 * @param populationModel
+	 * @param numberOfRuns
+	 * @param identifier
+	 * @param additionalCounter
+	 * @param showNothingFound
+	 * @return
+	 */
 	static bool detectError(PopulationModel* populationModel, int numberOfRuns,
 			int identifier, int additionalCounter,
 			bool showNothingFound = true) {
@@ -116,6 +134,11 @@ public:
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	}
 
+	/**
+	 * Debug method to see the child nodes of a node.
+	 * @param node
+	 * @return
+	 */
 	static bool detectChildren(Ogre::SceneNode* node) {
 		int i = 0;
 		Ogre::SceneNode::ChildNodeIterator m = node->getChildIterator();

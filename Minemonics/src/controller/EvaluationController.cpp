@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <controller/EvaluationController.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -10,8 +12,6 @@
 
 //## configuration headers
 //## controller headers
-#include <controller/EvaluationController.hpp>
-
 //## model headers
 //## view headers
 //## utils headers

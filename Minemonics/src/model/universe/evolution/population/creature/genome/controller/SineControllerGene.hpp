@@ -108,14 +108,14 @@ public:
 			const SineControllerGene &sineControllerGene) {
 		return os
 		/**The type of controller*/
-		<< "SineControllerGene: Controllertype "
+		<< "SineControllerGene: Controllertype="
 				<< sineControllerGene.mControllerGeneType
 
 				/**The x offset of the sine wave of the controller*/
-				<< "/XOffset = " << sineControllerGene.mXOffset
+				<< "/XOffset=" << sineControllerGene.mXOffset
 
 				/**The y offset of the sine wave of the controller*/
-				<< "/YOffset = " << sineControllerGene.mYOffset
+				<< "/YOffset=" << sineControllerGene.mYOffset
 
 				/**The amplitude of the sine wave of the controller*/
 				<< "/Amplitude=" << sineControllerGene.mAmplitude
