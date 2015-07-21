@@ -63,6 +63,12 @@ Here is a link to the presentation: [Emergent gait periodicity in artificially e
 
 (You need to download the figs folder as well, because otherwise you can not find the videos that are linked in the presentation)
 
+Results from an early run showing the changes of an evolutionary step to another:
+![A population of 6 creatures in 3 generations](Minemonics/doc/visuals/Milestone 4 - Evolutionary Algorithm/3Gx6I-Evolution.png?raw=true "A population of 6 creatures in 3 generations")
+
+A population of 10 creatures were evolved of which 6 were chosen for the visualization to show their details.
+The fitness function for creature selection is the number of limbs they have. The last in the row has obviously only one limb and is therefore rated the lowest by the fitness function. It therefore gets culled and replaced twice until it has more limbs.
+
 
 ## Milestone 5: Graphs and Data Logging
 
