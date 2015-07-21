@@ -594,6 +594,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/OgreInputHandler.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/KeyboardStateInputHandler.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/KeyboardStateInputHandler.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/ViewController.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/viewcontroller/ViewController.cpp</location>
@@ -1207,6 +1212,11 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/OgreInputHandler.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/OgreInputHandler.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/KeyboardStateInputHandler.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/input/KeyboardStateInputHandler.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/InputUtils.hpp</name>

@@ -600,7 +600,7 @@ bool SimulationManager::quit() {
  */
 bool SimulationManager::configure(void) {
 
-	mInputHandler.initialize(this);
+	mInputHandler.initialize();
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,

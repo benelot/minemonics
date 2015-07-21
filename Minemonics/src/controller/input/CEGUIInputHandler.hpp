@@ -44,9 +44,8 @@ public:
 protected:
 	/**
 	 * Initialize the CEGUIInputHandler
-	 * @param simulationMgr The simulation manager of the application.
 	 */
-	void initialize(SimulationManager* const simulationMgr);
+	void initialize();
 
 	/**
 	 * Inject time impulse to give the input layer a notion of time.

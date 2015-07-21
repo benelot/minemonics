@@ -39,11 +39,10 @@ SDL2InputHandler::~SDL2InputHandler() {
 //	mBoostLogger
 //	mLastMouseX
 //	mLastMouseY
-	mSimulationMgr = NULL;
 }
 
-void SDL2InputHandler::initialize(SimulationManager* simulationMgr) {
-	CEGUIInputHandler::initialize(simulationMgr);
+void SDL2InputHandler::initialize() {
+	CEGUIInputHandler::initialize();
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initializing SDL2 input handler...";
 
 	SDL_ShowCursor (SDL_DISABLE);
@@ -105,10 +104,10 @@ void SDL2InputHandler::injectInput() {
 			break;
 			/* WM quit event occured */
 		case SDL_QUIT:
-			mSimulationMgr->quit();
+			SimulationManager::getSingleton()->quit();
 			break;
 		case SDL_WINDOWEVENT:
-			mSimulationMgr->windowResized(mSimulationMgr->getWindow());
+			SimulationManager::getSingleton()->windowResized(SimulationManager::getSingleton()->getWindow());
 			//CEGUIInputHandler::windowResized(e.window.data1, e.window.data2);
 			break;
 		}

@@ -37,9 +37,8 @@ public:
 
 	/**
 	 * Initialize the SDL2InputHandler.
-	 * @param simulationMgr The simulation manager of the simulation.
 	 */
-	void initialize(SimulationManager* const simulationMgr);
+	void initialize();
 
 	/**
 	 * Inject input into the other layered handlers.

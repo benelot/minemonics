@@ -49,8 +49,8 @@ CEGUIInputHandler::~CEGUIInputHandler() {
 	//OgreInputHandler is called automatically
 }
 
-void CEGUIInputHandler::initialize(SimulationManager* simulationMgr) {
-	OgreInputHandler::initialize(simulationMgr);
+void CEGUIInputHandler::initialize() {
+	OgreInputHandler::initialize();
 }
 
 //-------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 		Ogre::PolygonMode pm;
 
-		switch (mSimulationMgr->getCamera()->getPolygonMode()) {
+		switch (SimulationManager::getSingleton()->getCamera()->getPolygonMode()) {
 		case Ogre::PM_SOLID:
 			newVal = "Wireframe";
 			pm = Ogre::PM_WIREFRAME;
@@ -125,8 +125,8 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 			pm = Ogre::PM_SOLID;
 		}
 
-		mSimulationMgr->getCamera()->setPolygonMode(pm);
-		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(10,
+		SimulationManager::getSingleton()->getCamera()->setPolygonMode(pm);
+		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(10,
 				newVal);
 		break;
 	case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
@@ -134,7 +134,7 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		Ogre::TextureFilterOptions tfo;
 		unsigned int aniso;
 
-		switch (mSimulationMgr->getViewController().getDetailsPanel()->getParamValue(
+		switch (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->getParamValue(
 				9)[0]) {
 		case 'B':
 			newVal = "Trilinear";
@@ -159,7 +159,7 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
 		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-		mSimulationMgr->getViewController().getDetailsPanel()->setParamValue(9,
+		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(9,
 				newVal);
 		break;
 	case ApplicationKeycode::APPK_y:
@@ -187,25 +187,25 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::D;
 		break;
 	case ApplicationKeycode::APPK_f: // toggle visibility of advanced frame stats
-		if (!mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->isVisible()) {
+		if (!SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->isVisible()) {
 			ParamsPanel::VectorStringPairs items;
 			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
-			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
+			SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
 					false);
 		} else {
 			bool simple =
-					mSimulationMgr->getViewController().getFpsPanel()->size()
+					SimulationManager::getSingleton()->getViewController().getFpsPanel()->size()
 							== 1;
-			mSimulationMgr->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
+			SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
 					true);
 		}
 		break;
 	case ApplicationKeycode::APPK_g: // toggle visibility of even rarer debugging details
 
-		if (mSimulationMgr->getViewController().getDetailsPanel()->isVisible()) {
-			mSimulationMgr->getViewController().getDetailsPanel()->hide();
+		if (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->isVisible()) {
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->hide();
 		} else {
-			mSimulationMgr->getViewController().getDetailsPanel()->show();
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->show();
 		}
 		break;
 	case ApplicationKeycode::APPK_h:
@@ -826,7 +826,8 @@ bool CEGUIInputHandler::mouseWheelMoved(const float rel) {
 	return OgreInputHandler::mouseWheelMoved(rel);
 }
 
-bool CEGUIInputHandler::mousePressed(const ApplicationMouseCode::MouseButton button) {
+bool CEGUIInputHandler::mousePressed(
+		const ApplicationMouseCode::MouseButton button) {
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "MOUSE BUTTON PRESSED" << button;
 	CEGUI::GUIContext& context =
 			CEGUI::System::getSingleton().getDefaultGUIContext();
@@ -838,10 +839,10 @@ bool CEGUIInputHandler::mousePressed(const ApplicationMouseCode::MouseButton but
 					|| window->getName() == "MathGLRTTWindow")
 			&& button == ApplicationMouseCode::RightButton) {
 		std::vector<MathGLPanel*>::iterator it =
-				mSimulationMgr->getViewController().getGraphWindows().begin();
+				SimulationManager::getSingleton()->getViewController().getGraphWindows().begin();
 		for (;
 				it
-						!= mSimulationMgr->getViewController().getGraphWindows().end();
+						!= SimulationManager::getSingleton()->getViewController().getGraphWindows().end();
 				it++) {
 			if ((*it)->getMathGlWindow() == window
 					|| (*it)->getMathGlWindow()->getChild("MathGLRTTWindow")
@@ -869,7 +870,8 @@ void CEGUIInputHandler::windowResized(int width, int height) const {
 			CEGUI::Sizef(width, height));
 }
 
-void CEGUIInputHandler::injectMousePosition(const float x, const float y) const {
+void CEGUIInputHandler::injectMousePosition(const float x,
+		const float y) const {
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
 			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();

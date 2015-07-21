@@ -376,6 +376,30 @@ controller/input/CEGUIInputHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/CEGUIInputHandler.cpp.s
 .PHONY : controller/input/CEGUIInputHandler.cpp.s
 
+controller/input/KeyboardStateInputHandler.o: controller/input/KeyboardStateInputHandler.cpp.o
+.PHONY : controller/input/KeyboardStateInputHandler.o
+
+# target to build an object file
+controller/input/KeyboardStateInputHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/KeyboardStateInputHandler.cpp.o
+.PHONY : controller/input/KeyboardStateInputHandler.cpp.o
+
+controller/input/KeyboardStateInputHandler.i: controller/input/KeyboardStateInputHandler.cpp.i
+.PHONY : controller/input/KeyboardStateInputHandler.i
+
+# target to preprocess a source file
+controller/input/KeyboardStateInputHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/KeyboardStateInputHandler.cpp.i
+.PHONY : controller/input/KeyboardStateInputHandler.cpp.i
+
+controller/input/KeyboardStateInputHandler.s: controller/input/KeyboardStateInputHandler.cpp.s
+.PHONY : controller/input/KeyboardStateInputHandler.s
+
+# target to generate assembly for a file
+controller/input/KeyboardStateInputHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/input/KeyboardStateInputHandler.cpp.s
+.PHONY : controller/input/KeyboardStateInputHandler.cpp.s
+
 controller/input/OgreInputHandler.o: controller/input/OgreInputHandler.cpp.o
 .PHONY : controller/input/OgreInputHandler.o
 
@@ -3289,6 +3313,9 @@ help:
 	@echo "... controller/input/CEGUIInputHandler.o"
 	@echo "... controller/input/CEGUIInputHandler.i"
 	@echo "... controller/input/CEGUIInputHandler.s"
+	@echo "... controller/input/KeyboardStateInputHandler.o"
+	@echo "... controller/input/KeyboardStateInputHandler.i"
+	@echo "... controller/input/KeyboardStateInputHandler.s"
 	@echo "... controller/input/OgreInputHandler.o"
 	@echo "... controller/input/OgreInputHandler.i"
 	@echo "... controller/input/OgreInputHandler.s"

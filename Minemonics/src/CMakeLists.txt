@@ -146,6 +146,7 @@ set(CONTROLLERHDRS
 	./controller/input/SDL2InputHandler.hpp
 	./controller/input/CEGUIInputHandler.hpp
 	./controller/input/OgreInputHandler.hpp
+	./controller/input/KeyboardStateInputHandler.hpp
 	./controller/input/InputUtils.hpp
 	
 	## view controller
@@ -191,6 +192,7 @@ set(CONTROLLERSRCS
 	./controller/input/SDL2InputHandler.cpp
 	./controller/input/CEGUIInputHandler.cpp
 	./controller/input/OgreInputHandler.cpp
+	./controller/input/KeyboardStateInputHandler.cpp
 	
 	## view controller
 	./controller/viewcontroller/ViewController.cpp

@@ -44,20 +44,15 @@
 
 BoostLogger OgreInputHandler::mBoostLogger; /*<! initialize the boost logger*/
 OgreInputHandler::_Init OgreInputHandler::_initializer;
-OgreInputHandler::OgreInputHandler() :
-		mSimulationMgr(NULL), mRightMousePressed(false), mStateHandler(NULL) {
+OgreInputHandler::OgreInputHandler() {
 
 }
 
 OgreInputHandler::~OgreInputHandler() {
 //	mBoostLogger
-//	mRightMousePressed
-	mSimulationMgr = NULL;
 }
 
-void OgreInputHandler::initialize(SimulationManager* simulationMgr) {
-	mSimulationMgr = simulationMgr;
-	mStateHandler = &simulationMgr->getStateHandler();
+void OgreInputHandler::initialize() {
 }
 
 //-------------------------------------------------------------------------------------
@@ -120,8 +115,31 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::O;
 		break;
 	case ApplicationKeycode::APPK_p:
-		mSimulationMgr->getUniverse().getEvaluationController().setPaused(
-				!mSimulationMgr->getUniverse().getEvaluationController().isPaused());
+		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+		case StateHandler::SIMULATION: {
+			SimulationManager::getSingleton()->getUniverse().getEvaluationController().setPaused(
+					!SimulationManager::getSingleton()->getUniverse().getEvaluationController().isPaused());
+			break;
+		}
+		case StateHandler::CANCEL_LOADING: {
+			break;
+		}
+		case StateHandler::GUI: {
+			break;
+		}
+		case StateHandler::LOADING: {
+			break;
+		}
+		case StateHandler::SHUTDOWN: {
+			break;
+		}
+		case StateHandler::STARTUP: {
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 		break;
 	case ApplicationKeycode::APPK_a:
 		moveCameraLeft();
@@ -175,245 +193,340 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::Period;
 		break;
 	case ApplicationKeycode::APPK_SLASH:
-		mSimulationMgr->getDebugDrawer().setDebugDrawingEnabled(
-				!mSimulationMgr->getDebugDrawer().isDebugDrawingEnabled());
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (mSimulationMgr->getDebugDrawer().isDebugDrawingEnabled())?"true":"false";
-		break;
-		case ApplicationKeycode::APPK_BACKSLASH:
-		mSimulationMgr->getDebugDrawer().setDrawTrajectory(!mSimulationMgr->getDebugDrawer().isDrawTrajectory());
-		break;
-		case ApplicationKeycode::APPK_MINUS:
-		if(mSimulationMgr->getVideoWriter().isInitialized())
-		{
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video stopped.";
-			mSimulationMgr->getVideoWriter().close();
+		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+		case StateHandler::SIMULATION: {
+			SimulationManager::getSingleton()->getDebugDrawer().setDebugDrawingEnabled(
+					!SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled());
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled())?"true":"false";
+			break;
 		}
-		else
-		{
-			// create video file name
-			std::string videoName;
-			videoName.append("Minemonics-");
-			videoName.append(boost::posix_time::to_iso_string(mSimulationMgr->getNow()));
-			videoName.append(".mp4");
-
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video started.";
-
-			//This even works on if the screen gets resized
-			mSimulationMgr->getVideoWriter().setup(mSimulationMgr,videoName.c_str(),mSimulationMgr->getWindow()->getWidth(),mSimulationMgr->getWindow()->getHeight());
+		case StateHandler::CANCEL_LOADING: {
+			break;
+		}
+		case StateHandler::GUI: {
+			break;
+		}
+		case StateHandler::LOADING: {
+			break;
+		}
+		case StateHandler::SHUTDOWN: {
+			break;
+		}
+		case StateHandler::STARTUP: {
+			break;
+		}
+		default: {
+			break;
+		}
+			break;
 		}
 		break;
-		case ApplicationKeycode::APPK_EQUALS:
-		// return CEGUI::Key::Equals;
-		break;
-		case ApplicationKeycode::APPK_SEMICOLON:
-		// return CEGUI::Key::Semicolon;
-		break;
-		case ApplicationKeycode::APPK_LEFTBRACKET:
-		// return CEGUI::Key::LeftBracket;
-		break;
-		case ApplicationKeycode::APPK_RIGHTBRACKET:
-		// return CEGUI::Key::RightBracket;
-		break;
-		case ApplicationKeycode::APPK_QUOTE:
-		// return CEGUI::Key::Apostrophe;
-		break;
-		case ApplicationKeycode::APPK_BACKQUOTE:
-		// return CEGUI::Key::Grave;
-		break;
-
-		case ApplicationKeycode::APPK_RETURN:
-		// return CEGUI::Key::Return;
-		break;
-		case ApplicationKeycode::APPK_SPACE:
-		if(mSimulationMgr->getViewController().getEvaluationInView() != NULL) {
-			mSimulationMgr->getViewController().getEvaluationInView()->teardown();
+	case ApplicationKeycode::APPK_BACKSLASH:
+		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+		case StateHandler::SIMULATION: {
+			SimulationManager::getSingleton()->getDebugDrawer().setDrawTrajectory(
+					!SimulationManager::getSingleton()->getDebugDrawer().isDrawTrajectory());
+			break;
 		}
-		mSimulationMgr->getUniverse().proceedEvaluation();
+		case StateHandler::CANCEL_LOADING: {
+			break;
+		}
+		case StateHandler::GUI: {
+			break;
+		}
+		case StateHandler::LOADING: {
+			break;
+		}
+		case StateHandler::SHUTDOWN: {
+			break;
+		}
+		case StateHandler::STARTUP: {
+			break;
+		}
+		default: {
+			break;
+		}
+		}
 		break;
-		case ApplicationKeycode::APPK_BACKSPACE:
-		// return CEGUI::Key::Backspace;
-		break;
-		case ApplicationKeycode::APPK_TAB:
-		// return CEGUI::Key::Tab;
-		break;
+	case ApplicationKeycode::APPK_MINUS:
+		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+		case StateHandler::SIMULATION: {
+			if (SimulationManager::getSingleton()->getVideoWriter().isInitialized()) {
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video stopped.";
+				SimulationManager::getSingleton()->getVideoWriter().close();
+			}
+			else
+			{
+				// create video file name
+				std::string videoName;
+				videoName.append("Minemonics-");
+				videoName.append(boost::posix_time::to_iso_string(SimulationManager::getSingleton()->getNow()));
+				videoName.append(".mp4");
 
-		case ApplicationKeycode::APPK_ESCAPE:
-		// return CEGUI::Key::Escape;
-		break;
-		case ApplicationKeycode::APPK_PAUSE:
-		// return CEGUI::Key::Pause;
-		break;
-		case ApplicationKeycode::APPK_SYSREQ:
-		// take a screenshot
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Smile! Screenshot taken!";
-		mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
-		break;
-		case ApplicationKeycode::APPK_POWER:
-		// return CEGUI::Key::Power;
-		break;
-		//case ApplicationKeycode::APPK_NUMLOCK: return CEGUI::Key::NumLock;
-		break;
-		case ApplicationKeycode::APPK_SCROLLLOCK:
-		// return CEGUI::Key::ScrollLock;
-		break;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video started.";
 
-		case ApplicationKeycode::APPK_F1:
-		// return CEGUI::Key::F1;
-		break;
-		case ApplicationKeycode::APPK_F2:
-		// return CEGUI::Key::F2;
-		break;
-		case ApplicationKeycode::APPK_F3:
-		// return CEGUI::Key::F3;
-		break;
-		case ApplicationKeycode::APPK_F4:
-		// return CEGUI::Key::F4;
-		break;
-		case ApplicationKeycode::APPK_F5:
-		// return CEGUI::Key::F5;
-		break;
-		case ApplicationKeycode::APPK_F6:
-		// return CEGUI::Key::F6;
-		break;
-		case ApplicationKeycode::APPK_F7:
-		// return CEGUI::Key::F7;
-		break;
-		case ApplicationKeycode::APPK_F8:
-		// return CEGUI::Key::F8;
-		break;
-		case ApplicationKeycode::APPK_F9:
-		// return CEGUI::Key::F9;
-		break;
-		case ApplicationKeycode::APPK_F10:
-		// return CEGUI::Key::F10;
-		break;
-		case ApplicationKeycode::APPK_F11:
-		// return CEGUI::Key::F11;
-		break;
-		case ApplicationKeycode::APPK_F12:
-		// return CEGUI::Key::F12;
-		break;
-		case ApplicationKeycode::APPK_F13:
-		// return CEGUI::Key::F13;
-		break;
-		case ApplicationKeycode::APPK_F14:
-		// return CEGUI::Key::F14;
-		break;
-		case ApplicationKeycode::APPK_F15:
-		// return CEGUI::Key::F15;
-		break;
-
-		case ApplicationKeycode::APPK_LCTRL:
-		// return CEGUI::Key::LeftControl;
-		break;
-		case ApplicationKeycode::APPK_LALT:
-		// return CEGUI::Key::LeftAlt;
-		break;
-		case ApplicationKeycode::APPK_LSHIFT:
-		mSimulationMgr->getCameraHandler().setMove(CameraConfiguration::CAMERA_MOVEMENT_SPEED * CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
-		break;
-		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
-		break;
-		case ApplicationKeycode::APPK_RCTRL:
-		// return CEGUI::Key::RightControl;
-		break;
-		case ApplicationKeycode::APPK_RALT:
-		//take screen shot
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Smile! Screenshot taken!";
-		mSimulationMgr->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
-		break;
-		case ApplicationKeycode::APPK_RSHIFT:
-		// return CEGUI::Key::RightShift;
-		break;
-		//case ApplicationKeycode::APPK_RSUPER: // return CEGUI::Key::RightWindows;
-		break;
-		case ApplicationKeycode::APPK_MENU:
-		// return CEGUI::Key::AppMenu;
-		break;
-
-		case ApplicationKeycode::APPK_KP_0:
-		// return CEGUI::Key::Numpad0;
-		break;
-		case ApplicationKeycode::APPK_KP_1:
-		// return CEGUI::Key::Numpad1;
-		break;
-		case ApplicationKeycode::APPK_KP_2:
-		// return CEGUI::Key::Numpad2;
-		break;
-		case ApplicationKeycode::APPK_KP_3:
-		// return CEGUI::Key::Numpad3;
-		break;
-		case ApplicationKeycode::APPK_KP_4:
-		// return CEGUI::Key::Numpad4;
-		break;
-		case ApplicationKeycode::APPK_KP_5:
-		// return CEGUI::Key::Numpad5;
-		break;
-		case ApplicationKeycode::APPK_KP_6:
-		// return CEGUI::Key::Numpad6;
-		break;
-		case ApplicationKeycode::APPK_KP_7:
-		// return CEGUI::Key::Numpad7;
-		break;
-		case ApplicationKeycode::APPK_KP_8:
-		// return CEGUI::Key::Numpad8;
-		break;
-		case ApplicationKeycode::APPK_KP_9:
-		// return CEGUI::Key::Numpad9;
-		break;
-		case ApplicationKeycode::APPK_KP_PERIOD:
-		// return CEGUI::Key::Decimal;
-		break;
-		case ApplicationKeycode::APPK_KP_PLUS:
-		// return CEGUI::Key::Add;
-		break;
-		case ApplicationKeycode::APPK_KP_MINUS:
-		// return CEGUI::Key::Subtract;
-		break;
-		case ApplicationKeycode::APPK_KP_MULTIPLY:
-		// return CEGUI::Key::Multiply;
-		break;
-		case ApplicationKeycode::APPK_KP_DIVIDE:
-		// return CEGUI::Key::Divide;
-		break;
-		case ApplicationKeycode::APPK_KP_ENTER:
-		// return CEGUI::Key::NumpadEnter;
-		break;
-
-		case ApplicationKeycode::APPK_UP:
-		moveCameraForward();
-		break;
-		case ApplicationKeycode::APPK_LEFT:
-		moveCameraLeft();
-		break;
-		case ApplicationKeycode::APPK_RIGHT:
-		moveCameraRight();
-		break;
-		case ApplicationKeycode::APPK_DOWN:
-		moveCameraBackward();
-		break;
-
-		case ApplicationKeycode::APPK_HOME:
-		// return CEGUI::Key::Home;
-		break;
-		case ApplicationKeycode::APPK_END:
-		// return CEGUI::Key::End;
-		break;
-		case ApplicationKeycode::APPK_PAGEUP:
-		moveCameraUp();
-		break;
-		case ApplicationKeycode::APPK_PAGEDOWN:
-		moveCameraDown();
-		break;
-		case ApplicationKeycode::APPK_INSERT:
-		// return CEGUI::Key::Insert;
-		break;
-		case ApplicationKeycode::APPK_DELETE:
-		// return CEGUI::Key::Delete;
-		break;
+				//This even works on if the screen gets resized
+				SimulationManager::getSingleton()->getVideoWriter().setup(SimulationManager::getSingleton(),videoName.c_str(),SimulationManager::getSingleton()->getWindow()->getWidth(),SimulationManager::getSingleton()->getWindow()->getHeight());
+			}
+			break;
+		}
+		case StateHandler::CANCEL_LOADING: {
+			break;
+		}
+		case StateHandler::GUI: {
+			break;
+		}
+		case StateHandler::LOADING: {
+			break;
+		}
+		case StateHandler::SHUTDOWN: {
+			break;
+		}
+		case StateHandler::STARTUP: {
+			break;
+		}
+		default: {
+			break;
+		}
 	}
 
-	return true;
+	break;
+	case ApplicationKeycode::APPK_EQUALS:
+	// return CEGUI::Key::Equals;
+	break;
+	case ApplicationKeycode::APPK_SEMICOLON:
+	// return CEGUI::Key::Semicolon;
+	break;
+	case ApplicationKeycode::APPK_LEFTBRACKET:
+	// return CEGUI::Key::LeftBracket;
+	break;
+	case ApplicationKeycode::APPK_RIGHTBRACKET:
+	// return CEGUI::Key::RightBracket;
+	break;
+	case ApplicationKeycode::APPK_QUOTE:
+	// return CEGUI::Key::Apostrophe;
+	break;
+	case ApplicationKeycode::APPK_BACKQUOTE:
+	// return CEGUI::Key::Grave;
+	break;
+
+	case ApplicationKeycode::APPK_RETURN:
+	// return CEGUI::Key::Return;
+	break;
+	case ApplicationKeycode::APPK_SPACE:
+	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+		case StateHandler::SIMULATION: {
+			if(SimulationManager::getSingleton()->getViewController().getEvaluationInView() != NULL) {
+				SimulationManager::getSingleton()->getViewController().getEvaluationInView()->teardown();
+			}
+			SimulationManager::getSingleton()->getUniverse().proceedEvaluation();
+			break;
+		}
+		case StateHandler::CANCEL_LOADING: {
+			break;
+		}
+		case StateHandler::GUI: {
+			break;
+		}
+		case StateHandler::LOADING: {
+			break;
+		}
+		case StateHandler::SHUTDOWN: {
+			break;
+		}
+		case StateHandler::STARTUP: {
+			break;
+		}
+		default: {
+			break;
+		}
+	}
+	break;
+	case ApplicationKeycode::APPK_BACKSPACE:
+	// return CEGUI::Key::Backspace;
+	break;
+	case ApplicationKeycode::APPK_TAB:
+	// return CEGUI::Key::Tab;
+	break;
+
+	case ApplicationKeycode::APPK_ESCAPE:
+	// return CEGUI::Key::Escape;
+	break;
+	case ApplicationKeycode::APPK_PAUSE:
+	// return CEGUI::Key::Pause;
+	break;
+	case ApplicationKeycode::APPK_SYSREQ:
+	// take a screenshot
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Smile! Screenshot taken!";
+	SimulationManager::getSingleton()->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
+	break;
+	case ApplicationKeycode::APPK_POWER:
+	// return CEGUI::Key::Power;
+	break;
+	//case ApplicationKeycode::APPK_NUMLOCK: return CEGUI::Key::NumLock;
+	break;
+	case ApplicationKeycode::APPK_SCROLLLOCK:
+	// return CEGUI::Key::ScrollLock;
+	break;
+
+	case ApplicationKeycode::APPK_F1:
+	// return CEGUI::Key::F1;
+	break;
+	case ApplicationKeycode::APPK_F2:
+	// return CEGUI::Key::F2;
+	break;
+	case ApplicationKeycode::APPK_F3:
+	// return CEGUI::Key::F3;
+	break;
+	case ApplicationKeycode::APPK_F4:
+	// return CEGUI::Key::F4;
+	break;
+	case ApplicationKeycode::APPK_F5:
+	// return CEGUI::Key::F5;
+	break;
+	case ApplicationKeycode::APPK_F6:
+	// return CEGUI::Key::F6;
+	break;
+	case ApplicationKeycode::APPK_F7:
+	// return CEGUI::Key::F7;
+	break;
+	case ApplicationKeycode::APPK_F8:
+	// return CEGUI::Key::F8;
+	break;
+	case ApplicationKeycode::APPK_F9:
+	// return CEGUI::Key::F9;
+	break;
+	case ApplicationKeycode::APPK_F10:
+	// return CEGUI::Key::F10;
+	break;
+	case ApplicationKeycode::APPK_F11:
+	// return CEGUI::Key::F11;
+	break;
+	case ApplicationKeycode::APPK_F12:
+	// return CEGUI::Key::F12;
+	break;
+	case ApplicationKeycode::APPK_F13:
+	// return CEGUI::Key::F13;
+	break;
+	case ApplicationKeycode::APPK_F14:
+	// return CEGUI::Key::F14;
+	break;
+	case ApplicationKeycode::APPK_F15:
+	// return CEGUI::Key::F15;
+	break;
+
+	case ApplicationKeycode::APPK_LCTRL:
+	setRightControlPressed(true);
+	break;
+	case ApplicationKeycode::APPK_LALT:
+	setLeftAltPressed(true);
+	break;
+	case ApplicationKeycode::APPK_LSHIFT:
+	setLeftShiftPressed(true);
+	break;
+	//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
+	break;
+	case ApplicationKeycode::APPK_RCTRL:
+	setRightControlPressed(true);
+	break;
+	case ApplicationKeycode::APPK_RALT:
+	setRightAltPressed(true);
+	//take screen shot
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Smile! Screenshot taken!";
+	SimulationManager::getSingleton()->getWindow()->writeContentsToTimestampedFile("Minemonics-", ".jpg");
+	break;
+	case ApplicationKeycode::APPK_RSHIFT:
+	setRightShiftPressed(true);
+	break;
+	//case ApplicationKeycode::APPK_RSUPER: // return CEGUI::Key::RightWindows;
+	break;
+	case ApplicationKeycode::APPK_MENU:
+	// return CEGUI::Key::AppMenu;
+	break;
+
+	case ApplicationKeycode::APPK_KP_0:
+	// return CEGUI::Key::Numpad0;
+	break;
+	case ApplicationKeycode::APPK_KP_1:
+	// return CEGUI::Key::Numpad1;
+	break;
+	case ApplicationKeycode::APPK_KP_2:
+	// return CEGUI::Key::Numpad2;
+	break;
+	case ApplicationKeycode::APPK_KP_3:
+	// return CEGUI::Key::Numpad3;
+	break;
+	case ApplicationKeycode::APPK_KP_4:
+	// return CEGUI::Key::Numpad4;
+	break;
+	case ApplicationKeycode::APPK_KP_5:
+	// return CEGUI::Key::Numpad5;
+	break;
+	case ApplicationKeycode::APPK_KP_6:
+	// return CEGUI::Key::Numpad6;
+	break;
+	case ApplicationKeycode::APPK_KP_7:
+	// return CEGUI::Key::Numpad7;
+	break;
+	case ApplicationKeycode::APPK_KP_8:
+	// return CEGUI::Key::Numpad8;
+	break;
+	case ApplicationKeycode::APPK_KP_9:
+	// return CEGUI::Key::Numpad9;
+	break;
+	case ApplicationKeycode::APPK_KP_PERIOD:
+	// return CEGUI::Key::Decimal;
+	break;
+	case ApplicationKeycode::APPK_KP_PLUS:
+	// return CEGUI::Key::Add;
+	break;
+	case ApplicationKeycode::APPK_KP_MINUS:
+	// return CEGUI::Key::Subtract;
+	break;
+	case ApplicationKeycode::APPK_KP_MULTIPLY:
+	// return CEGUI::Key::Multiply;
+	break;
+	case ApplicationKeycode::APPK_KP_DIVIDE:
+	// return CEGUI::Key::Divide;
+	break;
+	case ApplicationKeycode::APPK_KP_ENTER:
+	// return CEGUI::Key::NumpadEnter;
+	break;
+
+	case ApplicationKeycode::APPK_UP:
+	moveCameraForward();
+	break;
+	case ApplicationKeycode::APPK_LEFT:
+	moveCameraLeft();
+	break;
+	case ApplicationKeycode::APPK_RIGHT:
+	moveCameraRight();
+	break;
+	case ApplicationKeycode::APPK_DOWN:
+	moveCameraBackward();
+	break;
+
+	case ApplicationKeycode::APPK_HOME:
+	// return CEGUI::Key::Home;
+	break;
+	case ApplicationKeycode::APPK_END:
+	// return CEGUI::Key::End;
+	break;
+	case ApplicationKeycode::APPK_PAGEUP:
+	moveCameraUp();
+	break;
+	case ApplicationKeycode::APPK_PAGEDOWN:
+	moveCameraDown();
+	break;
+	case ApplicationKeycode::APPK_INSERT:
+	// return CEGUI::Key::Insert;
+	break;
+	case ApplicationKeycode::APPK_DELETE:
+	// return CEGUI::Key::Delete;
+	break;
+}
+
+return true;
 }
 
 //-------------------------------------------------------------------------------------
@@ -573,7 +686,7 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		break;
 
 	case ApplicationKeycode::APPK_ESCAPE:
-		mSimulationMgr->quit();
+		SimulationManager::getSingleton()->quit();
 		break;
 	case ApplicationKeycode::APPK_PAUSE:
 		// return CEGUI::Key::Pause;
@@ -644,7 +757,7 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::LeftAlt;
 		break;
 	case ApplicationKeycode::APPK_LSHIFT:
-		mSimulationMgr->getCameraHandler().setMove(
+		SimulationManager::getSingleton()->getCameraHandler().setMove(
 				CameraConfiguration::CAMERA_MOVEMENT_SPEED);
 		break;
 		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
@@ -752,7 +865,7 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 bool OgreInputHandler::mouseMoved(const float x, const float y) const {
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse moved by " << x << "," << y;
 	if (mRightMousePressed) {
-		mSimulationMgr->getCameraHandler().rotate(y, x, 0);
+		SimulationManager::getSingleton()->getCameraHandler().rotate(y, x, 0);
 	}
 
 	return true;
@@ -803,48 +916,78 @@ bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
 }
 
 void OgreInputHandler::stopCameraXDimensionMovement() {
-	mSimulationMgr->getCameraHandler().moveX(0);
+	SimulationManager::getSingleton()->getCameraHandler().moveX(0);
 }
 
 void OgreInputHandler::stopCameraYDimensionMovement() {
-	mSimulationMgr->getCameraHandler().moveY(0);
+	SimulationManager::getSingleton()->getCameraHandler().moveY(0);
 }
 
 void OgreInputHandler::stopCameraZDimensionMovement() {
-	mSimulationMgr->getCameraHandler().moveZ(0);
+	SimulationManager::getSingleton()->getCameraHandler().moveZ(0);
 }
 
 void OgreInputHandler::moveCameraLeft() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move left!";
-	mSimulationMgr->getCameraHandler().moveX(-1);
+	if(mLeftShiftPressed || mRightShiftPressed) {
+		SimulationManager::getSingleton()->getCameraHandler().moveX(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+	}
+	else {
+		SimulationManager::getSingleton()->getCameraHandler().moveX(-1);
+	}
 }
 
 void OgreInputHandler::moveCameraUp() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move up!";
-	mSimulationMgr->getCameraHandler().moveY(1);
+	if(mLeftShiftPressed || mRightShiftPressed) {
+		SimulationManager::getSingleton()->getCameraHandler().moveY(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+	}
+	else {
+		SimulationManager::getSingleton()->getCameraHandler().moveY(1);
+	}
 }
 
 void OgreInputHandler::moveCameraBackward() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move backward!";
-	mSimulationMgr->getCameraHandler().moveZ(1);
+	if(mLeftShiftPressed || mRightShiftPressed) {
+		SimulationManager::getSingleton()->getCameraHandler().moveZ(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+	}
+	else {
+		SimulationManager::getSingleton()->getCameraHandler().moveZ(1);
+	}
 }
 
 void OgreInputHandler::moveCameraRight() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move right!";
-	mSimulationMgr->getCameraHandler().moveX(1);
+	if(mLeftShiftPressed || mRightShiftPressed) {
+		SimulationManager::getSingleton()->getCameraHandler().moveX(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+	}
+	else {
+		SimulationManager::getSingleton()->getCameraHandler().moveX(1);
+	}
 }
 
 void OgreInputHandler::moveCameraDown() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move down!";
-	mSimulationMgr->getCameraHandler().moveY(-1);
+	if(mLeftShiftPressed || mRightShiftPressed) {
+		SimulationManager::getSingleton()->getCameraHandler().moveY(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+	}
+	else {
+		SimulationManager::getSingleton()->getCameraHandler().moveY(-1);
+	}
 }
 
 void OgreInputHandler::moveCameraForward() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move forward!";
-	mSimulationMgr->getCameraHandler().moveZ(-1);
+	if(mLeftShiftPressed || mRightShiftPressed) {
+		SimulationManager::getSingleton()->getCameraHandler().moveZ(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+	}
+	else {
+		SimulationManager::getSingleton()->getCameraHandler().moveZ(-1);
+	}
 }
 
 void OgreInputHandler::quitApplication() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Shutdown application!";
-	mStateHandler->requestStateChange(StateHandler::SHUTDOWN);
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(StateHandler::SHUTDOWN);
 }

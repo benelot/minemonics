@@ -3,8 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class SimulationManager;
-class StateHandler;
 
 //# system headers
 #include <string>
@@ -21,6 +19,7 @@ class StateHandler;
 //## controller headers
 #include <controller/input/ApplicationMousecode.hpp>
 #include <controller/input/ApplicationKeycode.hpp>
+#include <controller/input/KeyboardStateInputHandler.hpp>
 
 //## model headers
 //## view headers
@@ -33,7 +32,7 @@ class StateHandler;
  * @date		2015-02-27
  * @author		Benjamin Ellenberger
  */
-class OgreInputHandler {
+class OgreInputHandler: public KeyboardStateInputHandler {
 public:
 	OgreInputHandler();
 	virtual ~OgreInputHandler();
@@ -41,9 +40,8 @@ public:
 protected:
 	/**
 	 * Initialize the Ogre input handler.
-	 * @param simulationMgr A handle to the simulation manager of the simulation.
 	 */
-	void initialize(SimulationManager* const simulationMgr);
+	void initialize();
 
 	/**
 	 * Key pressed event handler.
@@ -140,7 +138,6 @@ private:
 	 */
 	void moveCameraForward();
 
-private:
 	/**
 	 * The boost logger.
 	 */
@@ -157,22 +154,6 @@ private:
 							"OgreInputHandler"));
 		}
 	} _initializer;
-
-	/**
-	 * If the right mouse button is pressed.
-	 */
-	bool mRightMousePressed;
-
-protected:
-	/**
-	 * The state handler of the simulation.
-	 */
-	StateHandler *mStateHandler;
-
-	/**
-	 * A handle to the simulation manager.
-	 */
-	SimulationManager* mSimulationMgr;
 };
 
 #endif /* CONTROLLER_INPUT_OGREINPUTHANDLER_H_ */
