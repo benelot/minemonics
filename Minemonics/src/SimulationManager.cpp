@@ -102,7 +102,7 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-		mStateHandler(), mInputHandler(), mCameraHandler(this), mSdlWindow(
+		mStateHandler(), mInputHandler(), mSdlWindow(
 		NULL) {
 	// Initialize the singleton
 	mSimulationManager = this;
@@ -526,7 +526,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
  * @param rw The handle of the render window that was resized.
  */
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
-	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Repositioning CEGUI pointer...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Repositioning CEGUI pointer...";
 	unsigned int width, height, depth;
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
@@ -536,7 +536,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
-			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 			x - mousePos.d_x, y - mousePos.d_y);
 	int w, h;
@@ -547,7 +547,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mWindow->windowMovedOrResized();
 #endif
 
-	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Notifying CEGUI of resize....";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace) << "Notifying CEGUI of resize....";
 	mViewController.notifyDisplaySizeChanged(width, height);
 }
 
@@ -557,13 +557,13 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
  */
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
-		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Window has gained focus...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Window has gained focus...";
 
 		// Align CEGUI mouse with SDL mouse
 		mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
 				mInputHandler.getMousePositionY());
 	} else {
-		//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Window has lost focus...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace) << "Window has lost focus...";
 	}
 }
 //-------------------------------------------------------------------------------------

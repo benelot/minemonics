@@ -34,7 +34,7 @@ class SimulationManager;
  */
 class CameraHandler {
 public:
-	CameraHandler(SimulationManager* const simulationMgr);
+	CameraHandler();
 	virtual ~CameraHandler();
 
 	/**
@@ -81,14 +81,6 @@ public:
 	const Ogre::SceneNode* getCamNode() const;
 	void setCamNode(Ogre::SceneNode* camNode);
 
-	Ogre::Real getMove() const {
-		return mMove;
-	}
-
-	void setMove(const Ogre::Real move) {
-		mMove = move;
-	}
-
 private:
 	/**
 	 * The boost logger.
@@ -106,18 +98,6 @@ private:
 							"CameraHandler"));
 		}
 	} _initializer;
-
-	SimulationManager* mSimulationMgr;
-
-	/**
-	 * The rotation constant
-	 */
-	Ogre::Real mRotate;
-
-	/**
-	 * The movement constant
-	 */
-	Ogre::Real mMove;
 
 	/**
 	 * The SceneNode the camera is currently attached to

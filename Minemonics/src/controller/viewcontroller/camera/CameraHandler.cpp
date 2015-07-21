@@ -25,18 +25,13 @@
 
 BoostLogger CameraHandler::mBoostLogger; /*<! initialize the boost logger*/
 CameraHandler::_Init CameraHandler::_initializer;
-CameraHandler::CameraHandler(SimulationManager* simulationMgr) :
-		mCamNode(NULL), mSimulationMgr(simulationMgr), mMove(
-				CameraConfiguration::CAMERA_MOVEMENT_SPEED), mRotate(
-				CameraConfiguration::CAMERA_ROTATION_SPEED), mDirection(
-				Ogre::Vector3::ZERO) {
+CameraHandler::CameraHandler() :
+		mCamNode(NULL), mDirection(Ogre::Vector3::ZERO) {
 }
 
 CameraHandler::~CameraHandler() {
 	delete mCamNode;
 	mCamNode = NULL;
-
-	mSimulationMgr = NULL;
 }
 
 void CameraHandler::reposition(float timeSinceLastFrame) {
@@ -44,8 +39,12 @@ void CameraHandler::reposition(float timeSinceLastFrame) {
 }
 
 void CameraHandler::rotate(int pitch, int yaw, int roll) {
-	mCamNode->yaw(Ogre::Degree(-mRotate * yaw), Ogre::Node::TS_WORLD);
-	mCamNode->pitch(Ogre::Degree(-mRotate * pitch), Ogre::Node::TS_LOCAL);
+	mCamNode->yaw(
+			Ogre::Degree(-CameraConfiguration::CAMERA_ROTATION_SPEED * yaw),
+			Ogre::Node::TS_WORLD);
+	mCamNode->pitch(
+			Ogre::Degree(-CameraConfiguration::CAMERA_ROTATION_SPEED * pitch),
+			Ogre::Node::TS_LOCAL);
 }
 
 const Ogre::SceneNode* CameraHandler::getCamNode() const {
@@ -63,14 +62,14 @@ void CameraHandler::move(double x, double y, double z) {
 }
 
 void CameraHandler::moveX(double x) {
-	mDirection.x = mMove * x;
+	mDirection.x = CameraConfiguration::CAMERA_MOVEMENT_SPEED * x;
 }
 
 void CameraHandler::moveY(double y) {
-	mDirection.y = mMove * y;
+	mDirection.y = CameraConfiguration::CAMERA_MOVEMENT_SPEED * y;
 }
 
 void CameraHandler::moveZ(double z) {
-	mDirection.z = mMove * z;
+	mDirection.z = CameraConfiguration::CAMERA_MOVEMENT_SPEED * z;
 }
 

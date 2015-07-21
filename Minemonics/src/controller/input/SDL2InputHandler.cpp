@@ -43,11 +43,11 @@ SDL2InputHandler::~SDL2InputHandler() {
 
 void SDL2InputHandler::initialize() {
 	CEGUIInputHandler::initialize();
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initializing SDL2 input handler...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Initializing SDL2 input handler...";
 
 	SDL_ShowCursor (SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_FALSE);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initializing SDL2 input handler...done";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Initializing SDL2 input handler...done";
 }
 
 void SDL2InputHandler::injectInput() {
@@ -77,7 +77,7 @@ void SDL2InputHandler::injectInput() {
 			/* mouse down handler */
 		case SDL_MOUSEBUTTONDOWN:
 			/* let a special function handle the mouse button down event */
-//			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button pressed" << e.button.button;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Mouse button pressed" << e.button.button;
 			CEGUIInputHandler::mousePressed(
 					InputUtils::convertToOgre3D(e.button.button));
 			break;
