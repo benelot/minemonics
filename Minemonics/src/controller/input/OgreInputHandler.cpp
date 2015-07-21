@@ -61,34 +61,34 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 	switch (key) {
 		case ApplicationKeycode::APPK_1:
-		// return CEGUI::Key::One;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01);
 		break;
 		case ApplicationKeycode::APPK_2:
-		// return CEGUI::Key::Two;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_02);
 		break;
 		case ApplicationKeycode::APPK_3:
-		// return CEGUI::Key::Three;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_03);
 		break;
 		case ApplicationKeycode::APPK_4:
-		// return CEGUI::Key::Four;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_04);
 		break;
 		case ApplicationKeycode::APPK_5:
-		// return CEGUI::Key::Five;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_05);
 		break;
 		case ApplicationKeycode::APPK_6:
-		// return CEGUI::Key::Six;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_06);
 		break;
 		case ApplicationKeycode::APPK_7:
-		// return CEGUI::Key::Seven;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_07);
 		break;
 		case ApplicationKeycode::APPK_8:
-		// return CEGUI::Key::Eight;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_08);
 		break;
 		case ApplicationKeycode::APPK_9:
-		// return CEGUI::Key::Nine;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_09);
 		break;
 		case ApplicationKeycode::APPK_0:
-		// return CEGUI::Key::Zero;
+			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_10);
 		break;
 
 		case ApplicationKeycode::APPK_q:

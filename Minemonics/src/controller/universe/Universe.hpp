@@ -61,6 +61,8 @@ public:
 	 */
 	void drawDebugWorld();
 
+	void setSimulationSpeed(double simulationSpeed);
+
 	/**
 	 * Step the universe physics forward.
 	 * @param timeSinceLastFrame The size of the time step.

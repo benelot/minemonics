@@ -13,6 +13,8 @@
 //## configuration headers
 //## controller headers
 #include <model/universe/UniverseModel.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## model headers
 //## view headers
@@ -65,6 +67,13 @@ void Universe::proceedEvaluation() {
 	}
 	mUniverseModel.proceedEvaluation();
 	mEvaluationController.scheduleEvaluations();
+}
+
+void Universe::setSimulationSpeed(double simulationSpeed){
+	std::vector<Planet*>::iterator pit = mPlanets.begin();
+	for (; pit != mPlanets.end(); pit++) {
+		(*pit)->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->setSimulationSpeed(simulationSpeed);
+	}
 }
 
 void Universe::stepPhysics(const double timeSinceLastFrame) {

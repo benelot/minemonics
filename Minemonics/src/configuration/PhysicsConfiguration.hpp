@@ -81,7 +81,9 @@ public:
 	/**
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
 	 */
-	static const double SIMULATOR_STEP_SIZE = 0.001;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE = 1.0f / 60.0f; //0.001;
+
+	static const int SIMULATOR_SECURITY_MARGIN = 5;
 
 	/**
 	 * Are the body boxes allowed to interpenetrate each other?
@@ -98,6 +100,17 @@ public:
 	 * static const double BULLET_OGRE_CAPSULE_SCALING_FACTOR = 0.5;
 	 * static const double BULLET_OGRE_CAPSULE_HEIGHT_SCALING_FACTOR = 1;
 	 */
+
+	static const double SIMULATION_SPEED_01 = 0.25;
+	static const double SIMULATION_SPEED_02 = 0.5;
+	static const double SIMULATION_SPEED_03 = 1;
+	static const double SIMULATION_SPEED_04 = 2;
+	static const double SIMULATION_SPEED_05 = 4;
+	static const double SIMULATION_SPEED_06 = 8;
+	static const double SIMULATION_SPEED_07 = 16;
+	static const double SIMULATION_SPEED_08 = 32;
+	static const double SIMULATION_SPEED_09 = 64;
+	static const double SIMULATION_SPEED_10 = 128;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

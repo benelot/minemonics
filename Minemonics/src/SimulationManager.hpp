@@ -206,6 +206,14 @@ public:
 		return mViewController;
 	}
 
+	double getSimulationSpeed() const {
+		return mSimulationSpeed;
+	}
+
+	void setSimulationSpeed(double simulationSpeed) {
+		mSimulationSpeed = simulationSpeed;
+	}
+
 protected:
 	bool configure(void);
 
@@ -253,8 +261,14 @@ private:
 
 	// timing component
 	boost::posix_time::ptime mStart;
+	boost::posix_time::ptime mPrevious;
 	boost::posix_time::ptime mNow;
 	boost::posix_time::time_duration mRuntime;
+	boost::posix_time::time_duration mApplicationDt;
+	boost::posix_time::ptime mApplicationClock;
+
+	double mSimulationSpeed;
+
 
 	ViewController mViewController;
 

@@ -23,7 +23,7 @@
 PhysicsController::PhysicsController() :
 		mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
 		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(
-		NULL) {
+		NULL), mSimulationSpeed(50) {
 
 }
 
@@ -81,10 +81,18 @@ void PhysicsController::exitBulletPhysics() {
 
 void PhysicsController::stepBulletPhysics(const double timeStep) {
 	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) //step the simulation
-	{
-		int subSteps = ceil(timeStep * 60.0f);
+			{
+
+		//calculate the number of substeps the simulator needs to take
+		int subSteps =
+				PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
+						+ ceil(
+								mSimulationSpeed * timeStep
+										/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
 		if (timeStep) {
-			mDynamicsWorld->stepSimulation(timeStep, subSteps); //1.0f/60.0f);
+			mDynamicsWorld->stepSimulation(mSimulationSpeed * timeStep,
+					subSteps,
+					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE); //1.0f/60.0f);
 		}
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger

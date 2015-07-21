@@ -104,6 +104,14 @@ public:
 		mDynamicsWorld->setDebugDrawer(debugDrawer);
 	}
 
+	double getSimulationSpeed() const {
+		return mSimulationSpeed;
+	}
+
+	void setSimulationSpeed(double simulationSpeed) {
+		mSimulationSpeed = simulationSpeed;
+	}
+
 private:
 	//variables for to bullet physics API
 	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
@@ -122,6 +130,11 @@ private:
 	 * Is the physics simulation triggered stepwise?
 	 */
 	bool mPhysicsStepped;
+
+	/**
+	 * The simulation speed
+	 */
+	double mSimulationSpeed;
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_PHYSICSCONTROLLER_H_ */

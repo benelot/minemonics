@@ -103,7 +103,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mSdlWindow(
-		NULL) {
+		NULL), mSimulationSpeed(1) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -111,6 +111,7 @@ SimulationManager::SimulationManager(void) :
 	mRandomness = new Randomness();
 
 	// main frame timer initialization
+	mApplicationClock = boost::posix_time::microsec_clock::local_time();
 	mStart = boost::posix_time::microsec_clock::local_time();
 	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
@@ -129,25 +130,10 @@ SimulationManager::~SimulationManager(void) {
 }
 
 //-------------------------------------------------------------------------------------
-void SimulationManager::createFrameListener(void) {
-
-	// request a state change saying that the GUI is shown
-	mStateHandler.requestStateChange(StateHandler::GUI);
-
-	// Set initial mouse clipping size
-	windowResized(mWindow);
-
-	// Register as a Window and Frame listener
-	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
-	mRoot->addFrameListener(this);
-}
-
-//-------------------------------------------------------------------------------------
 /**
  * Creates the scene of the application.
  */
 void SimulationManager::createScene(void) {
-
 	// Initialize the logger
 	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL);
 	Logger::initTermSink();
@@ -181,6 +167,9 @@ void SimulationManager::createScene(void) {
 
 	// initialize GUI and views
 	mViewController.initialize(this, renderTarget, &mStateHandler);
+
+	// request a state change saying that the GUI is shown
+	mStateHandler.requestStateChange(StateHandler::GUI);
 
 	//################################################################
 
@@ -271,6 +260,19 @@ void SimulationManager::createScene(void) {
 //	mars->addPopulation(marsPopulation);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";
+	// request a state change saying that the simulation is running
+	mStateHandler.requestStateChange(StateHandler::SIMULATION);
+}
+
+//-------------------------------------------------------------------------------------
+void SimulationManager::createFrameListener(void) {
+
+	// Set initial mouse clipping size
+	windowResized(mWindow);
+
+	// Register as a Window and Frame listener
+	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
+	mRoot->addFrameListener(this);
 }
 
 /**
@@ -295,6 +297,7 @@ void SimulationManager::createScene(void) {
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	// update main frame timer
+	mPrevious = mNow;
 	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
 
@@ -309,26 +312,39 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 	}
 
-	// Inject input into handlers
-	mInputHandler.injectInput();
+	// step the physics forward
+	mUniverse.setSimulationSpeed(mSimulationSpeed);
+	mUniverse.stepPhysics((mNow - mPrevious).total_milliseconds() / 1000.0f);
+
+	// Game Clock part of the loop
+	/*  This ticks once every APPLICATION_TICK milliseconds on average */
+	mApplicationDt = mNow - mApplicationClock;
+	while (mApplicationDt
+			>= boost::posix_time::millisec(
+					ApplicationConfiguration::APPLICATION_TICK)) {
+		mApplicationDt -= boost::posix_time::millisec(
+				ApplicationConfiguration::APPLICATION_TICK);
+		mApplicationClock += boost::posix_time::millisec(
+				ApplicationConfiguration::APPLICATION_TICK);
+		// Inject input into handlers
+		mInputHandler.injectInput();
+
+		// update the universe
+		mUniverse.update(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
+
+		// update the information in the panels on screen
+		updatePanels(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
+
+		// update view
+		mViewController.update(
+				ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
+	}
 
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
-	// step the physics forward
-	mUniverse.stepPhysics(evt.timeSinceLastFrame);
-
-	// update the universe
-	mUniverse.update(evt.timeSinceLastFrame);
-
 	// draw the debug output if enabled
 	mUniverse.drawDebugWorld();
-
-	// update the information in the panels on screen
-	updatePanels(evt.timeSinceLastFrame);
-
-	// update view
-	mViewController.update(evt.timeSinceLastFrame);
 
 	return true;
 }
