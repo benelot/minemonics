@@ -119,6 +119,11 @@ public:
 	void update();
 
 	/**
+	 * Add the phenotype to the physics world.
+	 */
+	void addToPhysicsWorld();
+
+	/**
 	 * Add the phenotype to the physical and graphical world.
 	 */
 	void addToWorld();

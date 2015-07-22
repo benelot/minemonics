@@ -58,8 +58,7 @@
 #define CONSTRAINT_DEBUG_SIZE 0.2f
 #endif
 
-RagDoll::RagDoll(double size,
-		const btVector3& positionOffset) :
+RagDoll::RagDoll(double size, const btVector3& positionOffset) :
 		Creature(NULL), mWorld(NULL) {
 
 	btTransform transform;
@@ -251,10 +250,12 @@ RagDoll::RagDoll(double size,
 
 	std::vector<Limb*>::iterator it = mLimbs.begin();
 	for (; it != mLimbs.end(); it++) {
-		(*it)->getLimbPhysics()->getRigidBody()->setDamping(0.05, 0.85);
-		(*it)->getLimbPhysics()->getRigidBody()->setDeactivationTime(0.8);
-		(*it)->getLimbPhysics()->getRigidBody()->setSleepingThresholds(1.6,
-				2.5);
+		((LimbBt*) (*it)->getLimbPhysics())->getRigidBody()->setDamping(0.05,
+				0.85);
+		((LimbBt*) (*it)->getLimbPhysics())->getRigidBody()->setDeactivationTime(
+				0.8);
+		((LimbBt*) (*it)->getLimbPhysics())->getRigidBody()->setSleepingThresholds(
+				1.6, 2.5);
 	}
 
 ////	 Now setup the constraints
@@ -271,8 +272,8 @@ RagDoll::RagDoll(double size,
 			btVector3(btScalar(size * 0.), btScalar(size * -0.15),
 					btScalar(size * 0.)));
 
-	joint = new Joint(this, mLimbs[BODYPART_PELVIS],
-			mLimbs[BODYPART_SPINE], localA, localB, 0, 0, 0);
+	joint = new Joint(this, mLimbs[BODYPART_PELVIS], mLimbs[BODYPART_SPINE],
+			localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
 			Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2));
 	mJoints.push_back(joint);
@@ -474,6 +475,20 @@ void RagDoll::addToWorld() {
 	std::vector<Joint*>::iterator jit = mJoints.begin();
 	for (; jit != mJoints.end(); jit++) {
 		(*jit)->addToWorld();
+	}
+}
+
+void RagDoll::addToPhysicsWorld() {
+	// Add all limbs
+	std::vector<Limb*>::iterator lit = mLimbs.begin();
+	for (; lit != mLimbs.end(); lit++) {
+		(*lit)->addToPhysicsWorld();
+	}
+
+	// Add all constraints
+	std::vector<Joint*>::iterator jit = mJoints.begin();
+	for (; jit != mJoints.end(); jit++) {
+		(*jit)->addToPhysicsWorld();
 	}
 }
 

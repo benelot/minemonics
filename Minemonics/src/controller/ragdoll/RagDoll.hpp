@@ -74,6 +74,8 @@ public:
 
 	void addToWorld();
 
+	void addToPhysicsWorld();
+
 	void removeFromWorld();
 };
 

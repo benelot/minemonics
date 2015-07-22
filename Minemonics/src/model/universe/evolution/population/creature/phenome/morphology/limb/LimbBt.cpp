@@ -215,14 +215,14 @@ btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
 		mWorld->addRigidBody(mBody);
-		setInWorld(true);
+		LimbPhysics::addToWorld();
 	}
 }
 
 void LimbBt::removeFromWorld() {
 	if (isInWorld()) {
 		mWorld->removeRigidBody(mBody);
-		setInWorld(false);
+		LimbPhysics::removeFromWorld();
 	}
 }
 

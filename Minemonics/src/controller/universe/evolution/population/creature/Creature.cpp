@@ -77,6 +77,16 @@ void Creature::update() {
 	}
 }
 
+void Creature::addToPhysicsWorld(){
+	// develop creature if it is not developed yet.
+	if (!isDeveloped()) {
+		performEmbryogenesis();
+	}
+
+	// Add phenotype to world
+	mPhenotype.addToPhysicsWorld();
+}
+
 void Creature::addToWorld() {
 	// develop creature if it is not developed yet.
 	if (!isDeveloped()) {

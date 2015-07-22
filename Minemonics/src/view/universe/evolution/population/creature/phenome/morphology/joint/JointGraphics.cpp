@@ -17,7 +17,7 @@
 //## utils headers
 
 JointGraphics::JointGraphics(const JointModel* const jointModel) :
-		mJointModel(jointModel) {
+		mJointModel(jointModel), mInWorld(false) {
 }
 
 JointGraphics::~JointGraphics() {

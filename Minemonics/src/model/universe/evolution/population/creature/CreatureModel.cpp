@@ -50,7 +50,7 @@ void CreatureModel::initialize(PopulationModel* const populationModel, const Ogr
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
-	mPhenotypeModel.initialize(mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld());
+	mPhenotypeModel.initialize(this);
 }
 
 CreatureModel::~CreatureModel() {

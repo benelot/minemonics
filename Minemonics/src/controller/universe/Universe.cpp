@@ -42,9 +42,8 @@ Universe::~Universe() {
 //	~mUniverseModel()
 }
 
-void Universe::initialize(SimulationManager* const simulationManager,
-		const int parallelEvaluationsQty) {
-	mEvaluationController.initialize(simulationManager, parallelEvaluationsQty);
+void Universe::initialize(const int parallelEvaluationsQty) {
+	mEvaluationController.initialize(this, parallelEvaluationsQty);
 }
 
 void Universe::addPlanet(Planet* const planet) {
@@ -66,7 +65,6 @@ void Universe::proceedEvaluation() {
 		}
 	}
 	mUniverseModel.proceedEvaluation();
-	mEvaluationController.scheduleEvaluations();
 }
 
 void Universe::setSimulationSpeed(double simulationSpeed){

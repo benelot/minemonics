@@ -3,22 +3,19 @@
 
 //# corresponding headers
 //# forward declarations
-class SimulationManager;
 class CreatureModel;
-class MixedGenome;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
 #include <vector>
 
 //## controller headers
 //## model headers
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/version.hpp>
-#include <boost/log/attributes/constant.hpp>
-#include <boost/log/sources/basic_logger.hpp>
-#include <OgreVector3.h>
-#include <btBulletDynamicsCommon.h>
-
 //## view headers
 //# custom headers
 //## base headers
@@ -45,7 +42,7 @@ public:
 	PhenomeModel(const PhenomeModel& phenomeModel);
 	virtual ~PhenomeModel();
 
-	void initialize(btDynamicsWorld* const world);
+	void initialize(CreatureModel* const creatureModel);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
@@ -219,10 +216,7 @@ private:
 	 */
 	bool mDeveloped;
 
-	/**
-	 * Handle to the dynamics world.
-	 */
-	btDynamicsWorld* mWorld;
+	CreatureModel* mCreatureModel;
 
 	/**
 	 * Whether the phenome is in the world or not.

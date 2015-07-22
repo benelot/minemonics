@@ -12,6 +12,8 @@
 
 //## configuration headers
 //## controller headers
+#include <controller/universe/Universe.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -19,7 +21,7 @@
 BoostLogger EvaluationController::mBoostLogger; /*<! initialize the boost logger*/
 EvaluationController::_Init EvaluationController::_initializer;
 EvaluationController::EvaluationController() : mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
-				0), mPaused(false) {
+				0), mPaused(false),mUniverse(NULL) {
 }
 
 EvaluationController::~EvaluationController() {
@@ -34,8 +36,9 @@ EvaluationController::~EvaluationController() {
 //	mPaused
 }
 
-void EvaluationController::initialize(SimulationManager* const simulationManager,
+void EvaluationController::initialize(Universe* const universe,
 		int parallelEvaluationsQty) {
+	mUniverse = universe;
 	mParallelEvaluationsQty = parallelEvaluationsQty;
 	mEvaluations.clear();
 }
@@ -77,5 +80,10 @@ void EvaluationController::update(const double timeSinceLastFrame) {
 				(*eit)->update(timeSinceLastFrame);
 			}
 		}
+	}
+	scheduleEvaluations();
+
+	while(mEvaluations.size() < mParallelEvaluationsQty){
+		mUniverse->proceedEvaluation();
 	}
 }

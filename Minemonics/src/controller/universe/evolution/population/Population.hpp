@@ -80,6 +80,11 @@ public:
 	void reset();
 
 	/**
+	 * Add the population to the physics world.
+	 */
+	void addToPhysicsWorld();
+
+	/**
 	 * Add the population to the world.
 	 */
 	void addToWorld();

@@ -54,8 +54,7 @@ Limb::Limb(const Limb& limb) :
 	mLimbGraphics = limb.mLimbGraphics->clone();
 }
 
-Limb::Limb(Creature* const creature,
-		LimbModel* const limbModel) {
+Limb::Limb(Creature* const creature, LimbModel* const limbModel) {
 	mLimbModel = limbModel;
 	mCreature = creature;
 
@@ -79,8 +78,9 @@ Limb::~Limb() {
 	mCreature = NULL;
 }
 
-void Limb::initialize(Creature* const creature, const LimbModel::PrimitiveType type,
-		const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+void Limb::initialize(Creature* const creature,
+		const LimbModel::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
 		const Ogre::Quaternion initialOrientation,
 		const Ogre::Vector3 dimensions, const double mass,
@@ -127,37 +127,40 @@ Limb* Limb::clone() {
 	return new Limb(*this);
 }
 
-std::string Limb::getInfo() {
-	//TODO: Is this necessary or not? If yes, make it useful.
-	std::string text;
-//	text.append("Box coordinate: ");
-//	text.append(
-//			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().x));
-//	text.append(",");
-//	text.append(
-//			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().y));
-//	text.append(",");
-//	text.append(
-//			boost::lexical_cast<std::string>(mLimbGraphics->getPosition().z));
-//	text.append(",\n");
-//	text.append("---------");
-	return text;
+/**
+ * Add the limb to the physics world.
+ */
+void Limb::addToPhysicsWorld() {
+
+	if (!getLimbPhysics()->isInWorld()) {
+		getLimbPhysics()->addToWorld();
+	}
 }
 
 /**
  * Add the limb to the world.
  */
 void Limb::addToWorld() {
-	mLimbGraphics->addToWorld();
-	mLimbModel->getLimbPhysics()->addToWorld();
+	if (!mLimbGraphics->isInWorld()) {
+		mLimbGraphics->addToWorld();
+	}
+
+	if (!getLimbPhysics()->isInWorld()) {
+		getLimbPhysics()->addToWorld();
+	}
 }
 
 /**
  * Remove the limb from the world.
  */
 void Limb::removeFromWorld() {
-	mLimbGraphics->removeFromWorld();
-	mLimbModel->getLimbPhysics()->removeFromWorld();
+	if (mLimbGraphics->isInWorld()) {
+		mLimbGraphics->removeFromWorld();
+	}
+
+	if (getLimbPhysics()->isInWorld()) {
+		getLimbPhysics()->removeFromWorld();
+	}
 }
 
 /**

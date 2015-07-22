@@ -6,10 +6,14 @@
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
+#include <controller/StateHandler.hpp>
 #include <controller/Evaluation.hpp>
 #include <controller/universe/Planet.hpp>
+#include <controller/universe/environments/Environment.hpp>
 
 //## model headers
 //## view headers
@@ -40,14 +44,35 @@ void Evaluation::setup() {
 	//add environment to the world
 	//TODO: Must be a separate copy for parallel evaluations(you can not use the same reference for multiple worlds), but must update (possibly in parallel)
 	// the main environment to stay the same for all evaluations
-	mPlanet->getEnvironment()->addToWorld();
+	switch(SimulationManager::getSingleton()->getStateHandler().getCurrentState())
+	{
+	case StateHandler::SIMULATION:{
+		mPlanet->getEnvironment()->addToWorld();
 
-	//add competing populations to the world
-	std::vector<Population*>::iterator pit = mPopulations.begin();
-	for (; pit != mPopulations.end(); pit++) {
-		(*pit)->reset();
-		(*pit)->addToWorld();
+		//add competing populations to the world
+		std::vector<Population*>::iterator pit = mPopulations.begin();
+		for (; pit != mPopulations.end(); pit++) {
+			(*pit)->reset();
+			(*pit)->addToWorld();
+		}
+		break;
 	}
+	case StateHandler::HEADLESS_SIMULATION:{
+		mPlanet->getEnvironment()->addToPhysicsWorld();
+
+		//add competing populations to the world
+		std::vector<Population*>::iterator pit = mPopulations.begin();
+		for (; pit != mPopulations.end(); pit++) {
+			(*pit)->reset();
+			(*pit)->addToPhysicsWorld();
+		}
+		break;
+	}
+	default:{
+		break;
+	}
+	}
+
 
 	mEvaluationModel.setEvaluating(true);
 }
@@ -84,6 +109,7 @@ void Evaluation::update(const double timeSinceLastFrame) {
 	}
 
 	//update the time passed
+	//TODO: Change to evaluation time instead of actual time
 	mEvaluationModel.addTimePassed(timeSinceLastFrame);
 
 	//terminate if the time passed is higher than the evaluation time

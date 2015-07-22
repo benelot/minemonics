@@ -73,6 +73,11 @@ public:
 	void update();
 
 	/**
+	 * Add the creature to the physics world.
+	 */
+	void addToPhysicsWorld();
+
+	/**
 	 * Add the creature to the world.
 	 */
 	void addToWorld();

@@ -104,6 +104,11 @@ public:
 	void update();
 
 	/**
+	 * Add the limb to the physics world.
+	 */
+	void addToPhysicsWorld();
+
+	/**
 	 * Add the limb to the graphical and the physical world.
 	 */
 	void addToWorld();
@@ -122,12 +127,6 @@ public:
 	Ogre::Vector3 getIntersection(const Ogre::Vector3 origin,
 			const Ogre::Vector3 direction);
 
-	/**
-	 * Get some information about the limb in a string.
-	 * @return Some information about the limb in a string.
-	 */
-	std::string getInfo();
-
 	// Accessor methods
 	const Ogre::Vector3 getPosition() const {
 		return mLimbModel->getPosition();
@@ -140,15 +139,15 @@ public:
 	/**
 	 * Get the Graphics part of the limb.
 	 */
-	LimbO3D* const getLimbGraphics() const {
-		return ((LimbO3D*) mLimbGraphics);
+	LimbGraphics* const getLimbGraphics() const {
+		return mLimbGraphics;
 	}
 
 	/**
 	 * Get the Physics part of the limb.
 	 */
-	LimbBt* const getLimbPhysics() const {
-		return ((LimbBt*) mLimbModel->getLimbPhysics());
+	LimbPhysics* const getLimbPhysics() const {
+		return mLimbModel->getLimbPhysics();
 	}
 
 private:

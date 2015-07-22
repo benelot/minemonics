@@ -138,6 +138,23 @@ void Phenome::update() {
 	}
 }
 
+void Phenome::addToPhysicsWorld() {
+	if (!isInWorld()) {
+		// Add all limbs
+		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
+				lit != mLimbs.end(); lit++) {
+			(*lit)->addToPhysicsWorld();
+		}
+
+		// Add all constraints
+		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+				jit != mJoints.end(); jit++) {
+			(*jit)->addToPhysicsWorld();
+		}
+		setInWorld(true);
+	}
+}
+
 void Phenome::addToWorld() {
 	if (!isInWorld()) {
 		// Add all limbs

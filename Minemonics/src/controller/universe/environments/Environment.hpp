@@ -64,6 +64,11 @@ public:
 	void addToWorld();
 
 	/**
+	 * Add the environment to the physics world only.
+	 */
+	void addToPhysicsWorld();
+
+	/**
 	 * Remove the environment from the world.
 	 */
 	void removeFromWorld();

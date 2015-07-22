@@ -102,6 +102,11 @@ public:
 	void addToWorld();
 
 	/**
+	 * Add the joint to the physics world only.
+	 */
+	void addToPhysicsWorld();
+
+	/**
 	 * Remove the joint from the graphical and model world.
 	 */
 	void removeFromWorld();

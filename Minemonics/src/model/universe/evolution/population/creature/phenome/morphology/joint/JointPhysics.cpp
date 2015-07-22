@@ -14,7 +14,7 @@
 //## view headers
 //## utils headers
 
-JointPhysics::JointPhysics() {
+JointPhysics::JointPhysics():mInWorld(false) {
 }
 
 JointPhysics::~JointPhysics() {

@@ -3,6 +3,8 @@
 
 //# corresponding headers
 //# forward declarations
+class Universe;
+
 //# system headers
 #include <vector>
 
@@ -33,10 +35,10 @@ public:
 
 	/**
 	 * Initialize the evaluation controller.
-	 * @param simulationManager Handle to the simulation manager.
+	 * @param universe The universe the controller belongs to.
 	 * @param parallelEvaluationsQty The number of parallel evaluations running in the simulator.
 	 */
-	void initialize(SimulationManager* const simulationManager,const int parallelEvaluationsQty);
+	void initialize(Universe* const universe,const int parallelEvaluationsQty);
 
 	/**
 	 * Add a new evaluation.
@@ -45,7 +47,7 @@ public:
 	void addEvaluation(Evaluation* const evaluation);
 
 	/**
-	 * Schedule the evaluations, clear the torndown and setup new ones.
+	 * Schedule the evaluations, clear the torn down and setup new ones.
 	 */
 	void scheduleEvaluations();
 
@@ -104,6 +106,11 @@ private:
 	 * If the evaluation is paused or not.
 	 */
 	bool mPaused;
+
+	/**
+	 * The universe of the evaluations controller.
+	 */
+	Universe* mUniverse;
 };
 
 #endif /* CONTROLLER_EVALUATIONCONTROLLER_HPP_ */

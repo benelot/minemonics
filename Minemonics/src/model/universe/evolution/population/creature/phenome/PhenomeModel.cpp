@@ -8,7 +8,6 @@
 
 //## controller headers
 //## model headers
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <LinearMath/btMatrix3x3.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
@@ -18,6 +17,7 @@
 //## view headers
 #include <OgreColourValue.h>
 #include <OgreQuaternion.h>
+#include <OgreVector3.h>
 
 //# custom headers
 //## base headers
@@ -28,12 +28,20 @@
 
 //## controller headers
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
+#include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
+#include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
@@ -42,14 +50,14 @@
 
 BoostLogger PhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 PhenomeModel::_Init PhenomeModel::_initializer;
-PhenomeModel::PhenomeModel() : mWorld(NULL), mInWorld(false), mDeveloped(
-				false) {
+PhenomeModel::PhenomeModel() :
+		mCreatureModel(NULL), mInWorld(false), mDeveloped(false) {
 	mControllers.clear();
 }
 
 PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 	mInWorld = phenomeModel.mInWorld;
-	mWorld = phenomeModel.mWorld;
+	mCreatureModel = phenomeModel.mCreatureModel;
 	mDeveloped = phenomeModel.mDeveloped;
 
 	std::vector<Controller*>::const_iterator cit =
@@ -79,8 +87,8 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
-void PhenomeModel::initialize(btDynamicsWorld* const world) {
-	mWorld = world;
+void PhenomeModel::initialize(CreatureModel* const creatureModel) {
+	mCreatureModel = creatureModel;
 }
 
 void PhenomeModel::update(const double timeSinceLastFrame) {
@@ -226,7 +234,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 						// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
 						LimbBt* limbBBt = new LimbBt();
 
-						limbBBt->initialize(mWorld,
+						limbBBt->initialize(mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 								NULL, morphogene->getPrimitiveType(),
 								OgreBulletUtils::convert(generator->getPosition()),
 								btQuaternion(morphogene->getOrientationX(),
@@ -325,7 +333,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 					mLimbModels.push_back(limbB);
 					mComponentModels.push_back(limbB);
 
-					limbB->initialize(mWorld, creatureModel,
+					limbB->initialize(mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(), creatureModel,
 							morphogene->getPrimitiveType(),
 							generator->getPosition(), generator->getOrientation(),
 							Ogre::Vector3(
@@ -383,7 +391,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 						mJointModels.push_back(joint);
 						mComponentModels.push_back(joint);
 
-						joint->initialize(mWorld,
+						joint->initialize(mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 								/*limbA*/
 								((LimbBt*) ((LimbModel*) generator->getParentComponentModel())->getLimbPhysics())->getRigidBody(),
 								((LimbBt*) limbB->getLimbPhysics())->getRigidBody(),

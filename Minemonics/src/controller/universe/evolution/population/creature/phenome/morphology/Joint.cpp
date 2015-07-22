@@ -28,26 +28,26 @@
 
 BoostLogger Joint::mBoostLogger; /*<! initialize the boost logger*/
 Joint::_Init Joint::_initializer;
-Joint::Joint(Creature* const creature, Limb* const limbA,
-		Limb* const limbB, const btTransform localA, const btTransform localB,
-		const int indexA, const int indexB, const int ownIndex) {
+Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
+		const btTransform localA, const btTransform localB, const int indexA,
+		const int indexB, const int ownIndex) {
 	// initialize the physics model of the joint
-		mJointModel = new JointModel();
-		mJointModel->initialize(
-				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-				limbA->getLimbPhysics()->getRigidBody(),
-				limbB->getLimbPhysics()->getRigidBody(), localA, localB, indexA,
-				indexB, ownIndex);
+	mJointModel = new JointModel();
+	mJointModel->initialize(
+			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+			((LimbBt*) limbA->getLimbPhysics())->getRigidBody(),
+			((LimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
+			indexA, indexB, ownIndex);
 
-		// Define the new component as a limb
-		Component::initialize(mJointModel);
+	// Define the new component as a limb
+	Component::initialize(mJointModel);
 
-		// initialize the graphics part of the joint
-		mJointGraphics = new JointO3D(mJointModel);
-		((JointO3D*) mJointGraphics)->initialize();
+	// initialize the graphics part of the joint
+	mJointGraphics = new JointO3D(mJointModel);
+	((JointO3D*) mJointGraphics)->initialize();
 
-		// Update the state of the joint.
-		update();
+	// Update the state of the joint.
+	update();
 }
 
 Joint::Joint(const Joint& joint) :
@@ -60,7 +60,8 @@ Joint::Joint(const JointModel& jointModel) {
 	mJointGraphics = new JointO3D(mJointModel);
 }
 
-Joint::Joint(JointModel* const jointModel):mJointModel(jointModel) {
+Joint::Joint(JointModel* const jointModel) :
+		mJointModel(jointModel) {
 	mJointGraphics = new JointO3D(jointModel);
 }
 
@@ -76,7 +77,6 @@ void Joint::initialize(Creature* const creature, Limb* const limbA,
 		Limb* const limbB, const btTransform localA, const btTransform localB,
 		const int indexA, const int indexB, const int ownIndex) {
 
-
 }
 
 void Joint::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
@@ -90,19 +90,38 @@ void Joint::update() {
 }
 
 /**
+ * Add the joint to the physics world.
+ */
+void Joint::addToPhysicsWorld() {
+	if (!getJointPhysics()->isInWorld()) {
+		getJointPhysics()->addToWorld();
+	}
+}
+
+/**
  * Add the joint to the world.
  */
 void Joint::addToWorld() {
-	mJointGraphics->addToWorld();
-	getJointPhysics()->addToWorld();
+	if (!mJointGraphics->isInWorld()) {
+		mJointGraphics->addToWorld();
+	}
+
+	if (!getJointPhysics()->isInWorld()) {
+		getJointPhysics()->addToWorld();
+	}
 }
 
 /**
  * Remove the joint from the world.
  */
 void Joint::removeFromWorld() {
-	mJointGraphics->removeFromWorld();
-	getJointPhysics()->removeFromWorld();
+	if (mJointGraphics->isInWorld()) {
+		mJointGraphics->removeFromWorld();
+	}
+
+	if (getJointPhysics()->isInWorld()) {
+		getJointPhysics()->removeFromWorld();
+	}
 }
 
 void Joint::setAngularLimits(const Ogre::Vector3 angularLowerLimit,

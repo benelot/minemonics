@@ -108,6 +108,13 @@ void Population::reset() {
 	}
 }
 
+void Population::addToPhysicsWorld(){
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end(); cit++) {
+		(*cit)->addToPhysicsWorld();
+	}
+}
+
 void Population::addToWorld() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end(); cit++) {
@@ -127,7 +134,7 @@ void Population::resyncWithModel() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end();) {
 		if ((*cit)->isCulled()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature culled.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature culled.";
 			Creature* creature = *cit;
 			delete creature;
 			cit = mCreatures.erase(cit);

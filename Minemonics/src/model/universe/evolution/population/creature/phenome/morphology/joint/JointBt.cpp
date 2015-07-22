@@ -41,8 +41,7 @@
 
 JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB) :
-		mInWorld(false) {
+		const btTransform& tframeInB) {
 	mWorld = world;
 	mG6DofJoint = new btGeneric6DofSpringConstraint(*bodyA, *bodyB, tframeInA,
 			tframeInB, true/*use fixed frame A for linear limits*/);
@@ -184,14 +183,14 @@ void JointBt::setRotationalLimitMotorEnabled(
 void JointBt::addToWorld() {
 	if (!isInWorld()) {
 		mWorld->addConstraint((btTypedConstraint*) mG6DofJoint, true);
-		setInWorld(true);
+		JointPhysics::addToWorld();
 	}
 }
 
 void JointBt::removeFromWorld() {
 	if (isInWorld()) {
 		mWorld->removeConstraint((btTypedConstraint*) mG6DofJoint);
-		setInWorld(false);
+		JointPhysics::removeFromWorld();
 	}
 }
 

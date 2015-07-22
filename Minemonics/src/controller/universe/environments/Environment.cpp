@@ -43,6 +43,12 @@ bool Environment::isInWorld() const {
 	return (mEnvironmentGraphics->isInWorld() == mEnvironmentModel->isInWorld());
 }
 
+void Environment::addToPhysicsWorld() {
+	if (!mEnvironmentModel->isInWorld()) {
+		mEnvironmentModel->addToWorld();
+	}
+}
+
 void Environment::addToWorld() {
 	if (!mEnvironmentModel->isInWorld()) {
 		mEnvironmentModel->addToWorld();

@@ -60,12 +60,16 @@ public:
 	/**
 	 * Add the limb to the physical world.
 	 */
-	virtual void addToWorld() = 0;
+	virtual void addToWorld(){
+		mInWorld = true;
+	}
 
 	/**
 	 * Remove the limb from the physical world.
 	 */
-	virtual void removeFromWorld() = 0;
+	virtual void removeFromWorld(){
+		mInWorld = false;
+	}
 
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
@@ -176,9 +180,6 @@ public:
 	}
 
 protected:
-	void setInWorld(bool inWorld) {
-		mInWorld = inWorld;
-	}
 
 	/**
 	 * Whether the limb is in the world or not.

@@ -73,14 +73,26 @@ public:
 	virtual void update() = 0;
 
 	/**
+	 * If the joint physics is in the world.
+	 * @return If it is in the world.
+	 */
+	virtual bool isInWorld(){
+		return mInWorld;
+	}
+
+	/**
 	 * Add the joint physics model to the physics world.
 	 */
-	virtual void addToWorld() = 0;
+	virtual void addToWorld(){
+		mInWorld = true;
+	}
 
 	/**
 	 * Remove the joint physics model from the physics world.
 	 */
-	virtual void removeFromWorld() = 0;
+	virtual void removeFromWorld(){
+		mInWorld = false;
+	}
 
 	/**
 	 * Returns if the joint is under tension.
@@ -135,6 +147,9 @@ public:
 
 	virtual void setRotationalLimitMotorEnabled(const RotationalDegreeOfFreedom index,
 			const bool enable) = 0;
+
+protected:
+	bool mInWorld;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */

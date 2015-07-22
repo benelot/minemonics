@@ -236,20 +236,7 @@ public:
 		return mMotors;
 	}
 
-	bool isInWorld() const {
-		return mInWorld;
-	}
-
-	void setInWorld(const bool inWorld) {
-		mInWorld = inWorld;
-	}
-
 private:
-
-	/**
-	 * If the joint constraint is in the world.
-	 */
-	bool mInWorld;
 
 	/**
 	 * The 6 Degrees of freedom joint that is used as a physical model.

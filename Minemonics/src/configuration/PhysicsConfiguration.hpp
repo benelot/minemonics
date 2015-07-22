@@ -110,7 +110,8 @@ public:
 	static const double SIMULATION_SPEED_07 = 16;
 	static const double SIMULATION_SPEED_08 = 32;
 	static const double SIMULATION_SPEED_09 = 64;
-	static const double SIMULATION_SPEED_10 = 128;
+	// 100 means as fast as it can
+	static const double SIMULATION_SPEED_10 = 100;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */
