@@ -42,7 +42,7 @@ public:
 	 * @param planet The planet on which the evaluation takes place.
 	 * @param evaluationTime The evaluation time in this evaluation
 	 */
-	void initialize(Planet* const planet,const double evaluationTime);
+	void initialize(Planet* const planet, const double evaluationTime);
 
 	/**
 	 * Add a population to the evaluation

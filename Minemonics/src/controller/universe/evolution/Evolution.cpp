@@ -32,7 +32,8 @@ Evolution::Evolution() :
 }
 
 Evolution::Evolution(EvolutionModel* const evolutionModel) :
-		mEvaluationController(NULL), mPlanet(NULL),mEvolutionModel(evolutionModel) {
+		mEvaluationController(NULL), mPlanet(NULL), mEvolutionModel(
+				evolutionModel) {
 }
 
 Evolution::~Evolution() {
@@ -58,7 +59,7 @@ bool Evolution::proceedEvaluation() {
 			&& mEvolutionModel->getCurrentPopulationIndex()
 					< mPopulations.size()) {
 
-		if(mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->isOutOfSync()){
+		if (mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->isOutOfSync()) {
 			mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->resyncWithModel();
 		}
 

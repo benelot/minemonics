@@ -72,12 +72,12 @@ void EvaluationController::scheduleEvaluations() {
 	}
 }
 
-void EvaluationController::update(const double timeSinceLastFrame) {
+void EvaluationController::update(const double timeSinceLastTick) {
 	if (!mPaused) {
 		std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 		for (; eit != mEvaluations.end(); eit++) {
 			if ((*eit)->isEvaluating()) {
-				(*eit)->update(timeSinceLastFrame);
+				(*eit)->update(timeSinceLastTick);
 			}
 		}
 	}

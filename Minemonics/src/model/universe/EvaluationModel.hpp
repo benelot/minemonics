@@ -75,6 +75,14 @@ public:
 		mTornDown = tornDown;
 	}
 
+	double getSimulationSpeed() const {
+		return mSimulationSpeed;
+	}
+
+	void setSimulationSpeed(double simulationSpeed) {
+		mSimulationSpeed = simulationSpeed;
+	}
+
 	//Serialization
 	//TODO: Add serialization to the evaluation model.
 
@@ -108,8 +116,12 @@ private:
 	/**
 	 * The time that has already passed.
 	 */
-
 	double mTimePassed;
+
+	/**
+	 * The speed of the simulation.
+	 */
+	double mSimulationSpeed;
 };
 
 #endif /* MODEL_UNIVERSE_EVALUATIONMODEL_HPP_ */

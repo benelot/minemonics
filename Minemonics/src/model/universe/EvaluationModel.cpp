@@ -16,7 +16,7 @@
 
 EvaluationModel::EvaluationModel() :
 		mPlanetModel(NULL), mEvaluationTime(0), mTimePassed(0), mEvaluating(
-				false), mTornDown(false) {
+				false), mTornDown(false), mSimulationSpeed(1) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -31,6 +31,7 @@ void EvaluationModel::initialize(PlanetModel* const planetModel,
 	mEvaluationTime = evaluationTime;
 }
 
-void EvaluationModel::addPopulationModel(PopulationModel* const populationModel) {
+void EvaluationModel::addPopulationModel(
+		PopulationModel* const populationModel) {
 	mPopulationModels.push_back(populationModel);
 }

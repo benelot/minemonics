@@ -16,6 +16,9 @@
 #include <controller/universe/environments/Environment.hpp>
 
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 //## utils headers
 
@@ -30,7 +33,7 @@ Evaluation::~Evaluation() {
 	mPopulations.clear();
 }
 
-void Evaluation::initialize(Planet* const planet,const double evaluationTime) {
+void Evaluation::initialize(Planet* const planet, const double evaluationTime) {
 	mPlanet = planet;
 	mEvaluationModel.initialize(planet->getPlanetModel(), evaluationTime);
 }
@@ -44,9 +47,8 @@ void Evaluation::setup() {
 	//add environment to the world
 	//TODO: Must be a separate copy for parallel evaluations(you can not use the same reference for multiple worlds), but must update (possibly in parallel)
 	// the main environment to stay the same for all evaluations
-	switch(SimulationManager::getSingleton()->getStateHandler().getCurrentState())
-	{
-	case StateHandler::SIMULATION:{
+	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+	case StateHandler::SIMULATION: {
 		mPlanet->getEnvironment()->addToWorld();
 
 		//add competing populations to the world
@@ -57,7 +59,7 @@ void Evaluation::setup() {
 		}
 		break;
 	}
-	case StateHandler::HEADLESS_SIMULATION:{
+	case StateHandler::HEADLESS_SIMULATION: {
 		mPlanet->getEnvironment()->addToPhysicsWorld();
 
 		//add competing populations to the world
@@ -68,11 +70,10 @@ void Evaluation::setup() {
 		}
 		break;
 	}
-	default:{
+	default: {
 		break;
 	}
 	}
-
 
 	mEvaluationModel.setEvaluating(true);
 }
@@ -96,11 +97,10 @@ void Evaluation::teardown() {
 	mEvaluationModel.setTornDown(true);
 }
 
-void Evaluation::update(const double timeSinceLastFrame) {
+void Evaluation::update(const double timeSinceLastTick) {
 
-	//update the planet's environment
+	//update the planet's environment shared with other evaluation
 	mPlanet->getEnvironment()->update();
-
 
 	//update the competing populations
 	std::vector<Population*>::iterator pit = mPopulations.begin();
@@ -109,8 +109,9 @@ void Evaluation::update(const double timeSinceLastFrame) {
 	}
 
 	//update the time passed
-	//TODO: Change to evaluation time instead of actual time
-	mEvaluationModel.addTimePassed(timeSinceLastFrame);
+	mEvaluationModel.addTimePassed(
+			timeSinceLastTick
+					* mPlanet->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getSimulationSpeed());
 
 	//terminate if the time passed is higher than the evaluation time
 	if (mEvaluationModel.getTimePassed()
