@@ -58,6 +58,9 @@ bool StateHandler::requestStateChange(const ApplicationState newState) {
 	case StateHandler::SIMULATION:
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to SIMULATION";
 		break;
+	case StateHandler::HEADLESS_SIMULATION:
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to HEADLESS_SIMULATION";
+		break;
 	case StateHandler::SHUTDOWN:
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to SHUTDOWN";
 		break;

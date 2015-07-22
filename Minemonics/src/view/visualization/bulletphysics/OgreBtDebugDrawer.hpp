@@ -3,6 +3,7 @@
 
 //# corresponding header
 //# forward declarations
+class btDynamicsWorld;
 namespace Ogre {
 class Overlay;
 class OverlayContainer;
@@ -124,6 +125,7 @@ public:
 	virtual void draw3dText(const btVector3 &location, const char *textString);
 	virtual void setDebugMode(int debugMode);
 	virtual int getDebugMode() const;
+	void drawRigidBodyInformation(btDynamicsWorld* btDWorld);
 	void draw();
 
 	//accessor methods

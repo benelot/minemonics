@@ -2089,6 +2089,33 @@ test/TestRunner.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/test/TestRunner.cpp.s
 .PHONY : test/TestRunner.cpp.s
 
+utils/Debugger.o: utils/Debugger.cpp.o
+.PHONY : utils/Debugger.o
+
+# target to build an object file
+utils/Debugger.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/Debugger.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Debugger.cpp.o
+.PHONY : utils/Debugger.cpp.o
+
+utils/Debugger.i: utils/Debugger.cpp.i
+.PHONY : utils/Debugger.i
+
+# target to preprocess a source file
+utils/Debugger.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/Debugger.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Debugger.cpp.i
+.PHONY : utils/Debugger.cpp.i
+
+utils/Debugger.s: utils/Debugger.cpp.s
+.PHONY : utils/Debugger.s
+
+# target to generate assembly for a file
+utils/Debugger.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/Debugger.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Debugger.cpp.s
+.PHONY : utils/Debugger.cpp.s
+
 utils/NameGenerator.o: utils/NameGenerator.cpp.o
 .PHONY : utils/NameGenerator.o
 
@@ -3511,6 +3538,9 @@ help:
 	@echo "... test/TestRunner.o"
 	@echo "... test/TestRunner.i"
 	@echo "... test/TestRunner.s"
+	@echo "... utils/Debugger.o"
+	@echo "... utils/Debugger.i"
+	@echo "... utils/Debugger.s"
 	@echo "... utils/NameGenerator.o"
 	@echo "... utils/NameGenerator.i"
 	@echo "... utils/NameGenerator.s"

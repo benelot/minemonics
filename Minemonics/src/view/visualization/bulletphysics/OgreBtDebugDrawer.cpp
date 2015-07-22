@@ -3,12 +3,17 @@
 
 //# forward declarations
 //# system headers
-#include <vector>
+#include <iterator>
 #include <string>
 
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <GLX/OgreTimerImp.h>
+#include <LinearMath/btQuadWord.h>
 #include <LinearMath/btVector3.h>
 
 //## view headers
@@ -23,12 +28,11 @@
 #include <OgreOverlayElement.h>
 #include <OgreOverlayManager.h>
 #include <OgrePass.h>
+#include <OgreQuaternion.h>
 #include <OgreRenderOperation.h>
 #include <OgreRoot.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
-#include <OgreSingleton.h>
-#include <OgreStringConverter.h>
 #include <OgreTechnique.h>
 #include <OgreTextAreaOverlayElement.h>
 #include <OgreTextureUnitState.h>
@@ -99,7 +103,8 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
 
 	szElement = "element_";
 	overlay = olm->getByName("OGREBTDEBUGDRAWER_OVERLAY");
-	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement("OGREBTDEBUGDRAWER_GUI"));
+	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement(
+			"OGREBTDEBUGDRAWER_GUI"));
 	textArea =
 			static_cast<Ogre::TextAreaOverlayElement*>(olm->createOverlayElement(
 					"TextArea", szElement));
@@ -209,6 +214,41 @@ void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
 				+ lifeTime;
 		p.color = color;
 		mContactPoints->push_back(p);
+	}
+}
+
+void OgreBtDebugDrawer::drawRigidBodyInformation(btDynamicsWorld* btDWorld) {
+	const int numObjects = btDWorld->getNumCollisionObjects();
+
+	for (int i = 0; i < numObjects; i++) {
+		btCollisionObject* colObj = btDWorld->getCollisionObjectArray()[i];
+		btRigidBody* body = btRigidBody::upcast(colObj);
+
+		if (body) {
+
+			btVector3 Point = body->getCenterOfMassPosition();
+
+			std::string text;
+			text.append("O: ");
+			text.append(boost::lexical_cast<std::string>((int) Point[0]));
+			text.append(",");
+			text.append(boost::lexical_cast<std::string>((int) Point[1]));
+			text.append(",");
+			text.append(boost::lexical_cast<std::string>((int) Point[2]));
+			text.append(",\n");
+			text.append("------");
+//			InfoOverlayData* data = new InfoOverlayData(
+//					Ogre::Vector3((float) Point[0], (float) Point[1],
+//							(float) Point[2]), text);
+			//TODO: Add ogre bullet debug drawer overlay and add information
+//			mInfoOverlay.addInfo(data);
+
+			// Get the Orientation of the rigidbody as a bullet Quaternion
+			// Convert it to an Ogre quaternion
+			btQuaternion btq = body->getOrientation();
+			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
+					btq.z());
+		}
 	}
 }
 

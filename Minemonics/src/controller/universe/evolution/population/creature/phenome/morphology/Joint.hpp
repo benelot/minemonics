@@ -5,17 +5,17 @@
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //# forward declarations
-class SimulationManager;
-class Limb;
 class btTransform;
-class btVector3;
+class Creature;
 class JointGraphics;
+class Limb;
 
 //# system headers
+#include <string>
 #include <vector>
+
 //## controller headers
 //## model headers
-#include <bullet/LinearMath/btTransform.h>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 
@@ -24,6 +24,8 @@ class JointGraphics;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
+
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>

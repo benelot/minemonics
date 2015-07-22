@@ -61,34 +61,34 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 	switch (key) {
 		case ApplicationKeycode::APPK_1:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01);
 		break;
 		case ApplicationKeycode::APPK_2:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_02);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_02);
 		break;
 		case ApplicationKeycode::APPK_3:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_03);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_03);
 		break;
 		case ApplicationKeycode::APPK_4:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_04);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_04);
 		break;
 		case ApplicationKeycode::APPK_5:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_05);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_05);
 		break;
 		case ApplicationKeycode::APPK_6:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_06);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_06);
 		break;
 		case ApplicationKeycode::APPK_7:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_07);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_07);
 		break;
 		case ApplicationKeycode::APPK_8:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_08);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_08);
 		break;
 		case ApplicationKeycode::APPK_9:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_09);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_09);
 		break;
 		case ApplicationKeycode::APPK_0:
-			SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_10);
+		SimulationManager::getSingleton()->setSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_10);
 		break;
 
 		case ApplicationKeycode::APPK_q:
@@ -119,21 +119,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 			case StateHandler::SIMULATION: {
 				SimulationManager::getSingleton()->getUniverse().getEvaluationController().setPaused(
 						!SimulationManager::getSingleton()->getUniverse().getEvaluationController().isPaused());
-				break;
-			}
-			case StateHandler::CANCEL_LOADING: {
-				break;
-			}
-			case StateHandler::GUI: {
-				break;
-			}
-			case StateHandler::LOADING: {
-				break;
-			}
-			case StateHandler::SHUTDOWN: {
-				break;
-			}
-			case StateHandler::STARTUP: {
 				break;
 			}
 			default: {
@@ -200,21 +185,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Draw Bullet Debug output::" << (SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled())?"true":"false";
 				break;
 			}
-			case StateHandler::CANCEL_LOADING: {
-				break;
-			}
-			case StateHandler::GUI: {
-				break;
-			}
-			case StateHandler::LOADING: {
-				break;
-			}
-			case StateHandler::SHUTDOWN: {
-				break;
-			}
-			case StateHandler::STARTUP: {
-				break;
-			}
 			default: {
 				break;
 			}
@@ -226,21 +196,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 			case StateHandler::SIMULATION: {
 				SimulationManager::getSingleton()->getDebugDrawer().setDrawTrajectory(
 						!SimulationManager::getSingleton()->getDebugDrawer().isDrawTrajectory());
-				break;
-			}
-			case StateHandler::CANCEL_LOADING: {
-				break;
-			}
-			case StateHandler::GUI: {
-				break;
-			}
-			case StateHandler::LOADING: {
-				break;
-			}
-			case StateHandler::SHUTDOWN: {
-				break;
-			}
-			case StateHandler::STARTUP: {
 				break;
 			}
 			default: {
@@ -268,21 +223,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 					//This even works on if the screen gets resized
 					SimulationManager::getSingleton()->getVideoWriter().setup(SimulationManager::getSingleton(),videoName.c_str(),SimulationManager::getSingleton()->getWindow()->getWidth(),SimulationManager::getSingleton()->getWindow()->getHeight());
 				}
-				break;
-			}
-			case StateHandler::CANCEL_LOADING: {
-				break;
-			}
-			case StateHandler::GUI: {
-				break;
-			}
-			case StateHandler::LOADING: {
-				break;
-			}
-			case StateHandler::SHUTDOWN: {
-				break;
-			}
-			case StateHandler::STARTUP: {
 				break;
 			}
 			default: {
@@ -320,21 +260,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 					SimulationManager::getSingleton()->getViewController().getEvaluationInView()->teardown();
 				}
 				SimulationManager::getSingleton()->getUniverse().proceedEvaluation();
-				break;
-			}
-			case StateHandler::CANCEL_LOADING: {
-				break;
-			}
-			case StateHandler::GUI: {
-				break;
-			}
-			case StateHandler::LOADING: {
-				break;
-			}
-			case StateHandler::SHUTDOWN: {
-				break;
-			}
-			case StateHandler::STARTUP: {
 				break;
 			}
 			default: {
@@ -443,7 +368,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_MENU:
 		// return CEGUI::Key::AppMenu;
 		break;
-
 		case ApplicationKeycode::APPK_KP_0:
 		// return CEGUI::Key::Numpad0;
 		break;
@@ -505,7 +429,6 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_DOWN:
 		moveCameraBackward();
 		break;
-
 		case ApplicationKeycode::APPK_HOME:
 		// return CEGUI::Key::Home;
 		break;
@@ -671,7 +594,6 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_BACKQUOTE:
 		// return CEGUI::Key::Grave;
 		break;
-
 		case ApplicationKeycode::APPK_RETURN:
 		// return CEGUI::Key::Return;
 		break;
@@ -684,7 +606,6 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_TAB:
 		// return CEGUI::Key::Tab;
 		break;
-
 		case ApplicationKeycode::APPK_ESCAPE:
 		SimulationManager::getSingleton()->quit();
 		break;
@@ -696,7 +617,6 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_POWER:
 		// return CEGUI::Key::Power;
 		break;
-
 		//case ApplicationKeycode::APPK_NUMLOCK:
 		// return CEGUI::Key::NumLock;
 		break;
@@ -759,7 +679,8 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_LSHIFT:
 		setLeftShiftPressed(false);
 		break;
-		//case ApplicationKeycode::APPK_LSUPER: // return CEGUI::Key::LeftWindows;
+		//case ApplicationKeycode::APPK_LSUPER:
+		// return CEGUI::Key::LeftWindows;
 		break;
 		case ApplicationKeycode::APPK_RCTRL:
 		setRightControlPressed(false);
@@ -770,7 +691,8 @@ bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_RSHIFT:
 		setLeftShiftPressed(false);
 		break;
-		//case ApplicationKeycode::APPK_RSUPER: // return CEGUI::Key::RightWindows;
+		//case ApplicationKeycode::APPK_RSUPER:
+		// return CEGUI::Key::RightWindows;
 		break;
 		case ApplicationKeycode::APPK_MENU:
 		// return CEGUI::Key::AppMenu;

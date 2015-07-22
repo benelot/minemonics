@@ -5,8 +5,6 @@
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
 
 //# forward declarations
-class SimulationManager;
-
 //# system headers
 //## controller headers
 //## model headers
@@ -16,8 +14,6 @@ class SimulationManager;
 //## configuration headers
 //## controller headers
 //## model headers
-#include<model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-
 //## view headers
 //## utils headers
 

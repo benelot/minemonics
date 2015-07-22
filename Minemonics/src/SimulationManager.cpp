@@ -1,4 +1,4 @@
-//# corresponding headers
+//# corresponding header
 #include <SimulationManager.hpp>
 
 //# forward declarations
@@ -7,58 +7,44 @@
 #include <iostream>
 #include <iterator>
 #include <map>
+#include <string>
 #include <utility>
+#include <vector>
 
 //## controller headers
 #include <SDL.h>
 #include <SDL_mouse.h>
 #include <SDL_stdinc.h>
-#include <SDL_version.h>
+#include <SDL_syswm.h>
 #include <SDL_video.h>
 
 //## model headers
-//### Boost headers
 #include <boost/date_time/microsec_time_clock.hpp>
+#include <boost/date_time/posix_time/posix_time_duration.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <boost/date_time/time.hpp>
 #include <boost/date_time/time_duration.hpp>
 #include <boost/log/core/record.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 #include <boost/log/sources/record_ostream.hpp>
 #include <boost/log/sources/severity_feature.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/formatting_ostream.hpp>
+#include <boost/operators.hpp>
 #include <boost/parameter/keyword.hpp>
 
-//## Bullet headers
-#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-
 //## view headers
-//### CeGUI headers
-#include <CEGUI/FontManager.h>
 #include <CEGUI/GUIContext.h>
-#include <CEGUI/Logger.h>
 #include <CEGUI/MouseCursor.h>
-#include <CEGUI/NamedXMLResourceManager.h>
-#include <CEGUI/SchemeManager.h>
-#include <CEGUI/Singleton.h>
-#include <CEGUI/Size.h>
-#include <CEGUI/String.h>
 #include <CEGUI/System.h>
-#include <CEGUI/UDim.h>
 #include <CEGUI/Vector.h>
-#include <CEGUI/widgets/FrameWindow.h>
-#include <CEGUI/WindowManager.h>
-
-//### Ogre headers
 #include <OgreCamera.h>
 #include <OgreColourValue.h>
 #include <OgreCommon.h>
 #include <OgreConfigOptionMap.h>
 #include <OgreException.h>
 #include <OgreFrameListener.h>
-#include <OgreLight.h>
-#include <OgreLogManager.h>
+#include <OgreNode.h>
 #include <OgrePlatform.h>
 #include <OgreQuaternion.h>
 #include <OgreRenderSystem.h>
@@ -71,28 +57,29 @@
 #include <OgreStringConverter.h>
 #include <OgreUTFString.h>
 #include <OgreVector3.h>
+#include <OgreViewport.h>
 #include <OgreWindowEventUtilities.h>
+#include <Renderer.h>
 
 //# custom headers
 //## base headers
 //## configuration headers
 #include <configuration/ApplicationConfiguration.hpp>
 #include <configuration/EnvironmentConfiguration.hpp>
-#include <configuration/OgreSystemConfigStrings.hpp>
-#include <configuration/PopulationConfiguration.hpp>
+#include <configuration/EvaluationConfiguration.hpp>
 #include <configuration/EvolutionConfiguration.hpp>
 #include <configuration/LoggerConfiguration.hpp>
+#include <configuration/OgreSystemConfigStrings.hpp>
 
 //## controller headers
-#include <controller/universe/environments/Hills.hpp>
-#include <controller/universe/environments/Plane.hpp>
+#include <controller/universe/environments/Environment.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
-#include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/Planet.hpp>
 
 //## model headers
 //## view headers
-#include <view/visualization/CEGUI/CEGUIBuilder.hpp>
+#include <view/visualization/panels/MathGLPanel.hpp>
+#include <view/visualization/panels/ParamsPanel.hpp>
 
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -213,8 +200,6 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
-//	detectChildren(mSceneMgr->getRootSceneNode());
-//	detectChildren((Ogre::SceneNode*)mSceneMgr->getRootSceneNode()->getChild("CamNode1"));
 	mUniverse.initialize(this,
 			EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
@@ -296,10 +281,13 @@ void SimulationManager::createFrameListener(void) {
  */
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
-	// update main frame timer
+
 	mPrevious = mNow;
 	mNow = boost::posix_time::microsec_clock::local_time();
+
+	// update main frame timer
 	mRuntime = mNow - mStart;
+
 
 	// shutdown the application if the application has initiated shutdown
 	if (mWindow->isClosed()
@@ -334,14 +322,13 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 		// update the information in the panels on screen
 		updatePanels(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
-
-		// update view
-		mViewController.update(
-				ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
 	}
 
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
+
+	// update view
+	mViewController.update(evt.timeSinceLastFrame);
 
 	// draw the debug output if enabled
 	mUniverse.drawDebugWorld();
@@ -431,111 +418,6 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 		}
 	}
 }
-
-//void SimulationManager::updatePhysics(double timeSinceLastFrame) {
-//
-//	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
-//	for (; it != mRagdolls.end(); it++) {
-//		(*it)->update();
-//	}
-//
-//	const int numObjects =
-//			mPhysicsController.getDynamicsWorld()->getNumCollisionObjects();
-//
-//	for (int i = 0; i < numObjects; i++) {
-//		btCollisionObject* colObj =
-//				mPhysicsController.getDynamicsWorld()->getCollisionObjectArray()[i];
-//		btRigidBody* body = btRigidBody::upcast(colObj);
-//
-//		if (body) {
-//
-//			btVector3 Point = body->getCenterOfMassPosition();
-//
-//			std::string text;
-//			text.append("O: ");
-//			text.append(boost::lexical_cast<std::string>((int)Point[0]));
-//			text.append(",");
-//			text.append(boost::lexical_cast<std::string>((int)Point[1]));
-//			text.append(",");
-//			text.append(boost::lexical_cast<std::string>((int)Point[2]));
-//			text.append(",\n");
-//			text.append("------");
-//			InfoOverlayData* data = new InfoOverlayData(
-//					Ogre::Vector3((float) Point[0], (float) Point[1],
-//							(float) Point[2]), text);
-//			mInfoOverlay.addInfo(data);
-//
-//			// Get the Orientation of the rigidbody as a bullet Quaternion
-//			// Convert it to an Ogre quaternion
-//			btQuaternion btq = body->getOrientation();
-//			Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
-//					btq.z());
-//		}
-//	}
-//}
-
-//TODO: Use for creature evolution, but clean up afterwards
-//void SimulationManager::updateEvolution() {
-//
-//	//
-//	// maximization task
-//	//
-//	int i = 0;
-//	parents.setMaximize();
-//	offsprings.setMaximize();
-//
-//	//
-//	// initialize all chromosomes of parent population
-//	//
-//	for (i = 0; i < parents.size(); ++i)
-//		parents[i][0].initialize();
-//
-//	//
-//	// evaluate parents (only needed for elitist strategy)
-//	//
-//	if (EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY > 0)
-//		for (i = 0; i < parents.size(); ++i) {
-//			jury.setEvaluationSubject(parents[i][0]);
-//			jury.evaluateFitness();
-//			parents[i].setFitness(jury.getFitness());
-//		}
-//
-//	//
-//	// recombine by crossing over two parents
-//	//
-//	offsprings = parents;
-//	for (i = 0; i < offsprings.size() - 1; i += 2)
-//		if (Rng::coinToss(EvolutionConfiguration::CrossProb))
-//			offsprings[i][0].crossover(offsprings[i + 1][0],
-//					EvolutionConfiguration::CrossPoints);
-//	//
-//	// mutate by flipping bits
-//	//
-//	for (i = 0; i < offsprings.size(); ++i)
-//		offsprings[i][0].flip(EvolutionConfiguration::FlipProb);
-//	//
-//	// evaluate objective function
-//	//
-//	for (i = 0; i < offsprings.size(); ++i) {
-//		jury.setEvaluationSubject((offsprings[i][0]));
-//		jury.evaluateFitness();
-//		offsprings[i].setFitness(jury.getFitness());
-//	}
-//	//
-//	// scale fitness values and use proportional selection
-//	//
-//	//offsprings.linearDynamicScaling(window, t);
-//	parents.selectProportional(offsprings,
-//			EvolutionConfiguration::EVOLUTION_SELECTION_ELITISTS_QTY);
-//
-//	t++;
-//	//
-//	// print out best value found so far
-//	//
-//	std::cout << "Generation " << t << "s best individual has fitness value "
-//			<< "\t" << parents.best().fitnessValue() << std::endl;
-//
-//}
 
 /**
  * What to do if the window is resized.

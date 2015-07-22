@@ -380,6 +380,7 @@ set(MISCHDRS
 	./configuration/LoggerConfiguration.hpp
 	
 	# logger
+	./utils/Debugger.hpp
 	./utils/logging/Logger.hpp
 	./utils/Randomness.hpp
 	./utils/NameGenerator.hpp
@@ -396,6 +397,7 @@ set(MISCSRCS
     ./configuration/GUIConfiguration.cpp
     
 	# logger
+	./utils/Debugger.cpp
 	./utils/logging/Logger.cpp
 	./utils/Randomness.cpp
 	./utils/NameGenerator.cpp

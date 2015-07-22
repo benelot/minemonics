@@ -2,65 +2,39 @@
 #define __SimulationManager_h_
 
 //# corresponding header
-#include <SimulationManager.hpp>
+#include <BaseApplication.hpp>
 
 //# forward declarations
-class Environment;
-class Logger;
-class OgreBtDebugDrawer;
-class ParamsPanel;
+class Randomness;
+struct SDL_Window;
 
 //# system headers
-#include <string>
-#include <vector>
-
 //## controller headers
 //## model headers
 #include <boost/date_time/posix_time/posix_time_config.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
-#include <boost/log/attributes/constant.hpp>
-#include <boost/log/sources/basic_logger.hpp>
-//#include <EALib/PopulationT.h>
 
 //## view headers
-#include <CEGUI/CEGUI.h>
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include <SDL_syswm.h>
-#include <OgreOverlaySystem.h>
 #include <OgrePrerequisites.h>
 
 //# custom headers
 //## base headers
-#include <BaseApplication.hpp>
-
 //## configuration headers
-#include <configuration/EvolutionConfiguration.hpp>
-
 //## controller headers
-#include <controller/StateHandler.hpp>
-#include <controller/viewcontroller/ViewController.hpp>
-#include <controller/viewcontroller/camera/CameraHandler.hpp>
 #include <controller/input/SDL2InputHandler.hpp>
-#include <controller/ragdoll/RagDoll.hpp>
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <controller/universe/evolution/population/Population.hpp>
+#include <controller/StateHandler.hpp>
 #include <controller/universe/Universe.hpp>
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
+#include <controller/viewcontroller/ViewController.hpp>
 
 //## model headers
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/juries/Ones.hpp>
-
 //## view headers
-#include <view/visualization/panels/MathGLPanel.hpp>
-#include <view/visualization/CEGUI/GUISheetHandler.hpp>
-#include <view/visualization/panels/ParamsPanel.hpp>
-#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
-#include <view/visualization/overlay/InfoOverlay.hpp>
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
 //## utils headers
+#include <utils/Debugger.hpp>
 #include <utils/logging/Logger.hpp>
-#include <utils/Randomness.hpp>
 
 /**
  * @brief		The Simulation manager holds the whole application together.
@@ -86,75 +60,9 @@ public:
 	 */
 	virtual void windowResized(Ogre::RenderWindow* rw);
 
-	/**
-	 * Debug method for an error causing the creature vectors to have wrong sizes via the iterators.
-	 * @param populationModel
-	 * @param numberOfRuns
-	 * @param identifier
-	 * @param additionalCounter
-	 * @param showNothingFound
-	 * @return
-	 */
-	static bool detectError(PopulationModel* populationModel, int numberOfRuns,
-			int identifier, int additionalCounter,
-			bool showNothingFound = true) {
-		bool nothingFound = true;
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		for (int j = 0; j < numberOfRuns; j++) {
-			int i = 0;
-			for (std::vector<CreatureModel*>::const_iterator cit =
-					populationModel->getCreatureModels().begin();
-					cit != populationModel->getCreatureModels().end()
-							&& i <= populationModel->getCreatureModels().size();
-					cit++) {
-				i++;
-			}
-			if (i != populationModel->getCreatureModels().size()) {
-				nothingFound = false;
-				std::cout << "Block " << identifier << "::..."
-						<< additionalCounter << "/" << j;
-				std::cout << "CreatureModel vector size check....";
-				std::cout << "\nsize: "
-						<< populationModel->getCreatureModels().size() << "\t";
-				std::cout << "size2: >" << i << std::endl;
-				return true;
-			}
-		}
-
-		if (showNothingFound && nothingFound) {
-			std::cout << "Block " << identifier << "::..." << additionalCounter;
-			std::cout << "\nCreatureModel vector size check....";
-			std::cout << "\nNo errors found\n\n";
-			return false;
-		}
-		return false;
-
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	}
-
-	/**
-	 * Debug method to see the child nodes of a node.
-	 * @param node
-	 * @return
-	 */
-	static bool detectChildren(Ogre::SceneNode* node) {
-		int i = 0;
-		Ogre::SceneNode::ChildNodeIterator m = node->getChildIterator();
-		while (m.hasMoreElements()) {
-			i++;
-			m.getNext();
-		}
-
-		std::cout << "\nRoot children: " << i << "\n";
-
-		return i;
-	}
-
 	// Accessor methods
 
-	static SimulationManager* getSingleton(){
+	static SimulationManager* getSingleton() {
 		return mSimulationManager;
 	}
 
@@ -214,6 +122,10 @@ public:
 		mSimulationSpeed = simulationSpeed;
 	}
 
+	const Debugger& getDebugger() const {
+		return mDebugger;
+	}
+
 protected:
 	bool configure(void);
 
@@ -221,18 +133,51 @@ protected:
 	 * Create the scene in the simulation manager.
 	 */
 	virtual void createScene(void);
+
+	/**
+	 * Create the frame listener to react to frame trigger events.
+	 */
 	virtual void createFrameListener(void);
-	virtual void destroyScene(void);
+
+	/**
+	 * Called after all render targets have had their rendering commands
+	 * issued, but before render windows have been asked to flip their
+	 * buffers over.
+	 * @param evt
+	 * 		Information about the frame rendering.
+	 * @remarks
+	 * 		The usefulness of this event comes from the fact that rendering
+	 * commands are queued for the GPU to process. These can take a little
+	 * while to finish, and so while that is happening the CPU can be doing
+	 * useful things. Once the request to 'flip buffers' happens, the thread
+	 * requesting it will block until the GPU is ready, which can waste CPU
+	 * cycles. Therefore, it is often a good idea to use this callback to
+	 * perform per-frame processing. Of course because the frame's rendering
+	 * commands have already been issued, any changes you make will only
+	 * take effect from the next frame, but in most cases that's not noticeable.
+	 * @return
+	 * 		True to continue rendering, false to drop out of the rendering loop.
+	 */
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
+	/**
+	 * Destroy the scene on shutdown.
+	 */
+	virtual void destroyScene(void);
+
+	/**
+	 * Update the information panels.
+	 * @param timeSinceLastFrame
+	 */
 	void updatePanels(Ogre::Real timeSinceLastFrame);
+
+	/**
+	 * If the window focus changes.
+	 * @param rw Information about the render window.
+	 */
 	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 
 private:
-
-	void updatePhysics(double timeSinceLastFrame);
-
-//	void updateEvolution();
-
 	//## controller components
 
 	// State handler
@@ -247,17 +192,18 @@ private:
 	Universe mUniverse;
 
 	//## model components
-	//	int t;
-	//	PopulationT<bool> parents;
-	//	PopulationT<bool> offsprings;
-	//	Ones jury;
-	//
-	//	 //scaling window
-	//	std::vector<double> window;
-
-	//	std::vector<RagDoll*> mRagdolls;
-
 	//## view components
+
+	double mSimulationSpeed;
+
+	ViewController mViewController;
+
+	Ogre3DFFMPEGVideoWriter mVideoWriter;
+
+	static SimulationManager* mSimulationManager;
+
+	//randomness singleton
+	Randomness* mRandomness;
 
 	// timing component
 	boost::posix_time::ptime mStart;
@@ -267,22 +213,16 @@ private:
 	boost::posix_time::time_duration mApplicationDt;
 	boost::posix_time::ptime mApplicationClock;
 
-	double mSimulationSpeed;
+	//## Debug components
 
-
-	ViewController mViewController;
-
-	Ogre3DFFMPEGVideoWriter mVideoWriter;
-
+	//ogre bullet debug drawer
 	OgreBtDebugDrawer mDebugDrawer;
 
-	//## Debug components
+	// simulation debugger
+	Debugger mDebugger;
+
 	// Logger
 	static BoostLogger mBoostLogger;
-
-	static SimulationManager* mSimulationManager;
-
-	Randomness* mRandomness;
 
 	static class _Init {
 	public:

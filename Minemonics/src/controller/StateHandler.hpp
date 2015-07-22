@@ -38,6 +38,7 @@ public:
 		LOADING, //!< The simulation is loading
 		CANCEL_LOADING, //!< The simulation loading is cancelled
 		SIMULATION, //!< The simulation is running
+		HEADLESS_SIMULATION, //!< The simulation is running headlessly
 		SHUTDOWN, //!< The simulation is shutting down
 		NUM_APPLICATION_STATES
 	};

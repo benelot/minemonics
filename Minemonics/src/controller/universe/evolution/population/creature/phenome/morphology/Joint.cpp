@@ -1,28 +1,25 @@
 //# corresponding header
 //# forward declarations
 //# system headers
-#include <stddef.h>
-
 //## controller headers
 //## model headers
-#include <LinearMath/btVector3.h>
+#include <LinearMath/btTransform.h>
 #include <OgreVector3.h>
 
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //##view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>

@@ -4,26 +4,28 @@
 #include <iostream>
 #include <iterator>
 #include <vector>
-#include <string>
 
 //## controller headers
 //## model headers
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <LinearMath/btQuadWord.h>
+#include <LinearMath/btVector3.h>
 #include <boost/lexical_cast.hpp>
 
 //## view headers
-#include <OgreEntity.h>
-#include <OgreSceneNode.h>
 #include <OgreBlendMode.h>
-#include <OgreColourValue.h>
 #include <OgreCommon.h>
+#include <OgreEntity.h>
 #include <OgreMaterial.h>
 #include <OgreMaterialManager.h>
 #include <OgreMovableObject.h>
 #include <OgrePass.h>
 #include <OgrePrerequisites.h>
+#include <OgreQuaternion.h>
 #include <OgreRay.h>
 #include <OgreResourceGroupManager.h>
 #include <OgreSceneManager.h>
+#include <OgreSceneNode.h>
 #include <OgreSceneQuery.h>
 #include <OgreSingleton.h>
 #include <OgreTechnique.h>
@@ -39,6 +41,9 @@
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
 //## view headers
 #include <view/picking/OgreMeshRay.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>

@@ -233,7 +233,7 @@ void Evolution::performEmbryogenesis() {
 			creatureQty++;
 
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			SimulationManager::detectError(
+			SimulationManager::getSingleton()->getDebugger().detectError(
 					(*cit)->getCreatureModel()->getPopulationModel(), 10, -1,
 					0);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
