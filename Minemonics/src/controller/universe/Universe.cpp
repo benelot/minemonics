@@ -88,6 +88,6 @@ void Universe::drawDebugWorld() {
 	}
 }
 
-void Universe::update(const double timeSinceLastFrame) {
-	mEvaluationController.update(timeSinceLastFrame);
+void Universe::update(const double timeSinceLastTick) {
+	mEvaluationController.update(timeSinceLastTick);
 }

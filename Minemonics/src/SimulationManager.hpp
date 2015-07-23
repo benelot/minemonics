@@ -213,6 +213,25 @@ private:
 	boost::posix_time::time_duration mApplicationDt;
 	boost::posix_time::ptime mApplicationClock;
 
+	/**
+	 * The time it took the graphics rendering last time
+	 */
+	boost::posix_time::time_duration mLastGraphicsTick;
+	boost::posix_time::ptime mGraphicsStart;
+
+	/**
+	 * The time it took the input to process last time
+	 */
+	boost::posix_time::time_duration mLastInputTick;
+	boost::posix_time::ptime mInputStart;
+
+	/**
+	 * The time it took the model to update last time
+	 * This includes the bullet physics update
+	 */
+	boost::posix_time::time_duration mLastModelTick;
+	boost::posix_time::ptime mModelStart;
+
 	//## Debug components
 
 	//ogre bullet debug drawer

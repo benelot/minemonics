@@ -279,14 +279,8 @@ void SimulationManager::createFrameListener(void) {
  * 		True to continue rendering, false to drop out of the rendering loop.
  */
 bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
-
-
-	mPrevious = mNow;
-	mNow = boost::posix_time::microsec_clock::local_time();
-
-	// update main frame timer
-	mRuntime = mNow - mStart;
-
+	// structure according to the canonical game loop
+	// http://www.bulletphysics.org/mediawiki-1.5.8/index.php/Canonical_Game_Loop
 
 	// shutdown the application if the application has initiated shutdown
 	if (mWindow->isClosed()
@@ -299,10 +293,45 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 	}
 
-	// step the physics forward
-	mUniverse.setSimulationSpeed(mSimulationSpeed);
-	mUniverse.stepPhysics((mNow - mPrevious).total_milliseconds() / 1000.0f);
+	mModelStart = boost::posix_time::microsec_clock::local_time();
+	mLastGraphicsTick = mModelStart - mGraphicsStart;
 
+	//#############
+	// Physics handling part
+	//#############
+	/* This, like the rendering, ticks every time around.
+	 Bullet does the interpolation for us. */
+	//update timers
+	mPrevious = mNow;
+	mNow = boost::posix_time::microsec_clock::local_time();
+
+	// update main frame timer
+	mRuntime = mNow - mStart;
+
+	switch (mStateHandler.getCurrentState()) {
+	case StateHandler::SIMULATION: {
+		// step the physics forward
+		mUniverse.setSimulationSpeed(mSimulationSpeed);
+		mUniverse.stepPhysics(
+				(mNow - mPrevious).total_milliseconds() / 1000.0f);
+		// update the universe
+		mUniverse.update((mNow - mPrevious).total_milliseconds() / 1000.0f);
+
+		break;
+	}
+	case StateHandler::HEADLESS_SIMULATION: {
+		break;
+	}
+	default:
+		break;
+	}
+
+	mInputStart = mNow = boost::posix_time::microsec_clock::local_time();
+	mLastModelTick = mInputStart - mModelStart;
+
+	//#############
+	// Input part
+	//#############
 	// Game Clock part of the loop
 	/*  This ticks once every APPLICATION_TICK milliseconds on average */
 	mApplicationDt = mNow - mApplicationClock;
@@ -316,13 +345,16 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		// Inject input into handlers
 		mInputHandler.injectInput();
 
-		// update the universe
-		mUniverse.update(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
-
 		// update the information in the panels on screen
 		updatePanels(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
 	}
 
+	mGraphicsStart = boost::posix_time::microsec_clock::local_time();
+	mLastInputTick = mGraphicsStart - mInputStart;
+
+	//#############
+	// Graphics part
+	//#############
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
