@@ -96,7 +96,7 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 					pow(2,
 							PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
 							* timeStep, subSteps,
-					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE); //1.0f/60.0f);
+					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
 		}
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
