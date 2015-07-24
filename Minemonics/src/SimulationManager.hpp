@@ -194,7 +194,7 @@ private:
 	//## model components
 	//## view components
 
-	double mSimulationSpeed;
+	int mSimulationSpeed;
 
 	ViewController mViewController;
 
@@ -231,6 +231,9 @@ private:
 	 */
 	boost::posix_time::time_duration mLastModelTick;
 	boost::posix_time::ptime mModelStart;
+	boost::posix_time::time_duration mPhysicsTick;
+	boost::posix_time::ptime mPhysicsStepStart;
+	boost::posix_time::ptime mPhysicsStepEnd;
 
 	//## Debug components
 

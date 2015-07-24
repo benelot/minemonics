@@ -101,17 +101,22 @@ public:
 	 * static const double BULLET_OGRE_CAPSULE_HEIGHT_SCALING_FACTOR = 1;
 	 */
 
-	static const double SIMULATION_SPEED_01 = 0.25;
-	static const double SIMULATION_SPEED_02 = 0.5;
-	static const double SIMULATION_SPEED_03 = 1;
-	static const double SIMULATION_SPEED_04 = 2;
-	static const double SIMULATION_SPEED_05 = 4;
-	static const double SIMULATION_SPEED_06 = 8;
-	static const double SIMULATION_SPEED_07 = 16;
-	static const double SIMULATION_SPEED_08 = 32;
-	static const double SIMULATION_SPEED_09 = 64;
-	// 100 means as fast as it can
-	static const double SIMULATION_SPEED_10 = 100;
+	// the speed will be 2^SPEED
+	enum SIMULATION_SPEED{
+		SIMULATION_SPEED_01,
+		SIMULATION_SPEED_02,
+		SIMULATION_SPEED_03,
+		SIMULATION_SPEED_04,
+		SIMULATION_SPEED_05,
+		SIMULATION_SPEED_06,
+		SIMULATION_SPEED_07,
+		SIMULATION_SPEED_08,
+		//9 and 10 run as fast as they can
+		SIMULATION_SPEED_09,// with graphics
+		SIMULATION_SPEED_10//headless
+	};
+
+	static const int SIMULATION_SPEEDS[];
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

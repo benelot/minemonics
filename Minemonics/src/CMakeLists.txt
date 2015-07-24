@@ -395,6 +395,7 @@ set(MISCSRCS
     # configuration
     ./configuration/EvolutionConfiguration.cpp
     ./configuration/GUIConfiguration.cpp
+    ./configuration/PhysicsConfiguration.cpp
     
 	# logger
 	./utils/Debugger.cpp

@@ -134,7 +134,7 @@ private:
 	/**
 	 * The simulation speed
 	 */
-	double mSimulationSpeed;
+	int mSimulationSpeed;
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_PHYSICSCONTROLLER_H_ */

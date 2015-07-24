@@ -90,7 +90,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mSdlWindow(
-		NULL), mSimulationSpeed(1) {
+		NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_03) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -102,6 +102,11 @@ SimulationManager::SimulationManager(void) :
 	mStart = boost::posix_time::microsec_clock::local_time();
 	mNow = boost::posix_time::microsec_clock::local_time();
 	mRuntime = mNow - mStart;
+	mGraphicsStart = boost::posix_time::microsec_clock::local_time();
+	mModelStart = boost::posix_time::microsec_clock::local_time();
+	mInputStart = boost::posix_time::microsec_clock::local_time();
+	mPhysicsStepStart = boost::posix_time::microsec_clock::local_time();
+	mPhysicsStepEnd = boost::posix_time::microsec_clock::local_time();
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
@@ -293,64 +298,78 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 	}
 
-	mModelStart = boost::posix_time::microsec_clock::local_time();
-	mLastGraphicsTick = mModelStart - mGraphicsStart;
-
 	//#############
 	// Physics handling part
 	//#############
 	/* This, like the rendering, ticks every time around.
 	 Bullet does the interpolation for us. */
-	//update timers
-	mPrevious = mNow;
-	mNow = boost::posix_time::microsec_clock::local_time();
+	do {
+		// update timers
+		mPrevious = mNow;
+		mNow = boost::posix_time::microsec_clock::local_time();
 
-	// update main frame timer
-	mRuntime = mNow - mStart;
+		// update main frame timer
+		mRuntime = mNow - mStart;
 
-	switch (mStateHandler.getCurrentState()) {
-	case StateHandler::SIMULATION: {
-		// step the physics forward
-		mUniverse.setSimulationSpeed(mSimulationSpeed);
-		mUniverse.stepPhysics(
-				(mNow - mPrevious).total_milliseconds() / 1000.0f);
-		// update the universe
-		mUniverse.update((mNow - mPrevious).total_milliseconds() / 1000.0f);
+		mModelStart = boost::posix_time::microsec_clock::local_time();
+		mLastGraphicsTick = mModelStart - mGraphicsStart;
 
-		break;
-	}
-	case StateHandler::HEADLESS_SIMULATION: {
-		break;
-	}
-	default:
-		break;
-	}
+		if (mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09
+				|| mSimulationSpeed
+						== PhysicsConfiguration::SIMULATION_SPEED_10) {
+			mPhysicsTick = boost::posix_time::millisec(
+					ApplicationConfiguration::APPLICATION_TICK)
+					- mLastGraphicsTick - mLastInputTick;
 
-	mInputStart = mNow = boost::posix_time::microsec_clock::local_time();
-	mLastModelTick = mInputStart - mModelStart;
+			mPhysicsStepStart = boost::posix_time::microsec_clock::local_time();
+			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) {
+				// step the physics forward
+				mUniverse.setSimulationSpeed(mSimulationSpeed);
+				mUniverse.stepPhysics(
+						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
+				// update the universe
+				mUniverse.update(
+						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
+				mPhysicsStepEnd =
+						boost::posix_time::microsec_clock::local_time();
+			}
+		} else {
+			// step the physics forward
+			mUniverse.setSimulationSpeed(mSimulationSpeed);
+			mUniverse.stepPhysics(
+					(mNow - mPrevious).total_milliseconds() / 1000.0f);
+			// update the universe
+			mUniverse.update((mNow - mPrevious).total_milliseconds() / 1000.0f);
+		}
 
-	//#############
-	// Input part
-	//#############
-	// Game Clock part of the loop
-	/*  This ticks once every APPLICATION_TICK milliseconds on average */
-	mApplicationDt = mNow - mApplicationClock;
-	while (mApplicationDt
-			>= boost::posix_time::millisec(
-					ApplicationConfiguration::APPLICATION_TICK)) {
-		mApplicationDt -= boost::posix_time::millisec(
-				ApplicationConfiguration::APPLICATION_TICK);
-		mApplicationClock += boost::posix_time::millisec(
-				ApplicationConfiguration::APPLICATION_TICK);
-		// Inject input into handlers
-		mInputHandler.injectInput();
+		mInputStart = mNow = boost::posix_time::microsec_clock::local_time();
+		mLastModelTick = mInputStart - mModelStart;
 
-		// update the information in the panels on screen
-		updatePanels(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
-	}
+		//#############
+		// Input part
+		//#############
+		// Game Clock part of the loop
+		/*  This ticks once every APPLICATION_TICK milliseconds on average */
+		mApplicationDt = mNow - mApplicationClock;
+		while (mApplicationDt
+				>= boost::posix_time::millisec(
+						ApplicationConfiguration::APPLICATION_TICK)) {
+			mApplicationDt -= boost::posix_time::millisec(
+					ApplicationConfiguration::APPLICATION_TICK);
+			mApplicationClock += boost::posix_time::millisec(
+					ApplicationConfiguration::APPLICATION_TICK);
+			// Inject input into handlers
+			mInputHandler.injectInput();
 
-	mGraphicsStart = boost::posix_time::microsec_clock::local_time();
-	mLastInputTick = mGraphicsStart - mInputStart;
+			// update the information in the panels on screen
+			updatePanels(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
+		}
+
+		mGraphicsStart = boost::posix_time::microsec_clock::local_time();
+		mLastInputTick = mGraphicsStart - mInputStart;
+
+	} while (mStateHandler.getCurrentState()
+			== StateHandler::HEADLESS_SIMULATION);
 
 	//#############
 	// Graphics part

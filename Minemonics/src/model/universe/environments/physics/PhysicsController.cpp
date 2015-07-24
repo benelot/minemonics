@@ -80,18 +80,22 @@ void PhysicsController::exitBulletPhysics() {
 }
 
 void PhysicsController::stepBulletPhysics(const double timeStep) {
-	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) //step the simulation
-			{
+	//step the simulation
+	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) {
 
 		//calculate the number of substeps the simulator needs to take
 		int subSteps =
 				PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
 						+ ceil(
-								mSimulationSpeed * timeStep
+								pow(2,
+										PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+										* timeStep
 										/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
 		if (timeStep) {
-			mDynamicsWorld->stepSimulation(mSimulationSpeed * timeStep,
-					subSteps,
+			mDynamicsWorld->stepSimulation(
+					pow(2,
+							PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+							* timeStep, subSteps,
 					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE); //1.0f/60.0f);
 		}
 

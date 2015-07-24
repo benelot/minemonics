@@ -280,6 +280,33 @@ configuration/GUIConfiguration.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/GUIConfiguration.cpp.s
 .PHONY : configuration/GUIConfiguration.cpp.s
 
+configuration/PhysicsConfiguration.o: configuration/PhysicsConfiguration.cpp.o
+.PHONY : configuration/PhysicsConfiguration.o
+
+# target to build an object file
+configuration/PhysicsConfiguration.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/PhysicsConfiguration.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/PhysicsConfiguration.cpp.o
+.PHONY : configuration/PhysicsConfiguration.cpp.o
+
+configuration/PhysicsConfiguration.i: configuration/PhysicsConfiguration.cpp.i
+.PHONY : configuration/PhysicsConfiguration.i
+
+# target to preprocess a source file
+configuration/PhysicsConfiguration.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/PhysicsConfiguration.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/PhysicsConfiguration.cpp.i
+.PHONY : configuration/PhysicsConfiguration.cpp.i
+
+configuration/PhysicsConfiguration.s: configuration/PhysicsConfiguration.cpp.s
+.PHONY : configuration/PhysicsConfiguration.s
+
+# target to generate assembly for a file
+configuration/PhysicsConfiguration.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/configuration/PhysicsConfiguration.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/configuration/PhysicsConfiguration.cpp.s
+.PHONY : configuration/PhysicsConfiguration.cpp.s
+
 controller/Evaluation.o: controller/Evaluation.cpp.o
 .PHONY : controller/Evaluation.o
 
@@ -3328,6 +3355,9 @@ help:
 	@echo "... configuration/GUIConfiguration.o"
 	@echo "... configuration/GUIConfiguration.i"
 	@echo "... configuration/GUIConfiguration.s"
+	@echo "... configuration/PhysicsConfiguration.o"
+	@echo "... configuration/PhysicsConfiguration.i"
+	@echo "... configuration/PhysicsConfiguration.s"
 	@echo "... controller/Evaluation.o"
 	@echo "... controller/Evaluation.i"
 	@echo "... controller/Evaluation.s"
