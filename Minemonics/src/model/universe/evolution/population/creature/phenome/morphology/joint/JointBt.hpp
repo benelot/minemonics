@@ -34,8 +34,8 @@ class Motor;
  */
 class JointBt: public JointPhysics {
 public:
-//	JointBt();
-//	JointBt(const JointBt& jointBt);
+	JointBt();
+	JointBt(const JointBt& jointBt);
 	/**
 	 * Initialize the joint bullet physics model.
 	 * @param world A handle to the bullet dynamics world.
@@ -47,7 +47,6 @@ public:
 	JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 			btRigidBody* const bodyB, const btTransform& tframeInA,
 			const btTransform& tframeInB);
-	JointBt(const JointBt& jointBt);
 	virtual ~JointBt();
 
 	/**

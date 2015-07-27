@@ -29,15 +29,21 @@
 //## view headers
 //## utils headers
 
-//JointBt::JointBt() :
-//		mWorld(NULL) {
-//	mMotors.clear();
-//}
-//
-//JointBt::JointBt(const JointBt& jointBt) :
-//		mWorld(NULL) {
-//	//TODO: Implement copy from jointBt.
-//}
+JointBt::JointBt() :
+		mWorld(NULL), mG6DofJoint(NULL) {
+	mMotors.clear();
+}
+
+JointBt::JointBt(const JointBt& jointBt) {
+	mWorld = jointBt.mWorld;
+	mG6DofJoint = jointBt.mG6DofJoint;
+	mInWorld = jointBt.mInWorld;
+
+	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
+			mit != jointBt.mMotors.end(); mit++) {
+		mMotors.push_back(*mit);
+	}
+}
 
 JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
@@ -59,17 +65,6 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	//debug drawing
 	mG6DofJoint->setDbgDrawSize(btScalar(5.f));
 
-}
-
-JointBt::JointBt(const JointBt& jointBt) {
-	mWorld = jointBt.mWorld;
-	mInWorld = jointBt.mInWorld;
-	mG6DofJoint = jointBt.mG6DofJoint;
-
-	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
-			mit != jointBt.mMotors.end(); mit++) {
-		mMotors.push_back((*mit)->clone());
-	}
 }
 
 JointBt::~JointBt() {
@@ -131,7 +126,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 bool JointBt::equals(const JointBt& jointBt) const {
 
 	/**Comparison of motors*/
-	if(mMotors.size() != jointBt.mMotors.size()){
+	if (mMotors.size() != jointBt.mMotors.size()) {
 		return false;
 	}
 	std::vector<Motor*>::const_iterator it = mMotors.begin();
