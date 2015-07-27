@@ -24,5 +24,8 @@ IndirectGenome::~IndirectGenome() {
 }
 
 bool IndirectGenome::equals(const IndirectGenome& genome) const {
-	Genome::equals(genome);
+	if(!Genome::equals(genome)){
+		return false;
+	}
+	return true;
 }

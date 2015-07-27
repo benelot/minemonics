@@ -78,7 +78,9 @@ void MixedGenome::createRandomGenome(double branchiness) {
 }
 
 bool MixedGenome::equals(const MixedGenome & genome) const {
-	IndirectGenome::equals(genome);
+	if(!IndirectGenome::equals(genome)){
+		return false;
+	}
 
 	/**Compare the total segment quantity limit*/
 	if (mTotalSegmentQtyLimit != genome.mTotalSegmentQtyLimit) {
