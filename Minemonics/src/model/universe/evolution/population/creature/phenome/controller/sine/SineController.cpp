@@ -23,8 +23,8 @@
 //## utils headers
 
 SineController::SineController() :
-		Controller(SINE_CONTROLLER), mAmplitude(1), mFrequency(1), mXShift(
-				0), mYShift(1), mTime(0) {
+		Controller(SINE_CONTROLLER), mAmplitude(1), mFrequency(1), mXShift(0), mYShift(
+				1), mTime(0) {
 }
 
 SineController::~SineController() {
@@ -47,7 +47,8 @@ void SineController::perform(const double timeSinceLastFrame) {
 	//TODO:It seems that the time is not properly kept that way. Time since last frame is often 0.
 	mTime += timeSinceLastFrame;
 
-	double output = mAmplitude * sin(mFrequency * mTime/1000.0f*M_PI + mXShift) + mYShift;
+	double output = mAmplitude
+			* sin(mFrequency * mTime / 1000.0f * M_PI + mXShift) + mYShift;
 	//clamp output to [0;1]
 	output = (output > 1) ? 1 : (output < 0) ? 0 : output;
 
@@ -66,7 +67,17 @@ SineController::SineController(const SineController& sineController) :
 	mXShift = sineController.mXShift;
 	mYShift = sineController.mYShift;
 
-	//TODO: How to clone control inputs/outputs
+	for (std::vector<ControlInput*>::const_iterator cit =
+			sineController.mControlOutputs.begin();
+			cit != sineController.mControlOutputs.end(); cit++) {
+		mControlOutputs.push_back(*cit);
+	}
+
+	for (std::vector<ControlOutput*>::const_iterator cit =
+			sineController.mControlInputs.begin();
+			cit != sineController.mControlInputs.end(); cit++) {
+		mControlInputs.push_back(*cit);
+	}
 }
 
 SineController* SineController::clone() {
