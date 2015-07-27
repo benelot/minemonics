@@ -159,8 +159,17 @@ public:
 		}
 
 		/**The position of the creature model*/
-		return os << "/Position=(" << creature.mPosition.x << ","
+		os << "/Position=(" << creature.mPosition.x << ","
 				<< creature.mPosition.y << "," << creature.mPosition.z << ")";
+
+		/**The initial position of the creature model*/
+		os << "/InitialPosition=(" << creature.mInitialPosition.x << ","
+				<< creature.mInitialPosition.y << ","
+				<< creature.mInitialPosition.z << ")";
+
+		os << "/isCulled=" << creature.mCulled;
+		os << "/isNew=" << creature.mNew;
+		return os;
 	}
 
 	/**
@@ -177,13 +186,26 @@ public:
 		/**The genome of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mGenotype)
 
+		& BOOST_SERIALIZATION_NVP(mPhenotypeModel)
+
 		/**The juries of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mJuries)
 
 		/**The position of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mPosition.x)
 		& BOOST_SERIALIZATION_NVP(mPosition.y)
-		& BOOST_SERIALIZATION_NVP(mPosition.z);
+		& BOOST_SERIALIZATION_NVP(mPosition.z)
+
+		/**The initial position of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
+
+		/**If the creature was culled or not*/
+		& BOOST_SERIALIZATION_NVP(mCulled)
+
+		/**If the creature is new*/
+		& BOOST_SERIALIZATION_NVP(mNew);
 	}
 
 	//Accessor methods
@@ -250,16 +272,6 @@ public:
 private:
 
 	/**
-	 * If the creature was culled or not.
-	 */
-	bool mCulled;
-
-	/**
-	 * If the creature is new and does not have a controller element yet.
-	 */
-	bool mNew;
-
-	/**
 	 * The name of the creature.
 	 */
 	std::string mFirstName;
@@ -288,6 +300,16 @@ private:
 	 * The initial position of the creature.
 	 */
 	Ogre::Vector3 mInitialPosition;
+
+	/**
+	 * If the creature was culled or not.
+	 */
+	bool mCulled;
+
+	/**
+	 * If the creature is new and does not have a controller element yet.
+	 */
+	bool mNew;
 
 	/**
 	 * The population the creature lives in.

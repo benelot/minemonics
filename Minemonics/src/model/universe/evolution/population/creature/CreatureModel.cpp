@@ -75,14 +75,11 @@ double CreatureModel::getFitness() {
 	double fitness = 0;
 	double weight = 1;
 
-//	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
-//			jit != mJuries.end(); jit++) {
-//		fitness += (*jit)->getFitness() * (*jit)->getWeight();
-//		weight += (*jit)->getWeight();
-//	}
-
-//TODO: Replace with correct jury fitness above
-	fitness = mPhenotypeModel.getComponentModels().size();
+	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
+			jit != mJuries.end(); jit++) {
+		fitness += (*jit)->getFitness() * (*jit)->getWeight();
+		weight += (*jit)->getWeight();
+	}
 
 	if (weight != 0) {
 		return fitness / weight;
@@ -99,6 +96,10 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 		return false;
 	}
 
+	if (!mPhenotypeModel.equals(creature.mPhenotypeModel)) {
+		return false;
+	}
+
 	/**Comparison of juries*/
 	if (mJuries.size() != creature.mJuries.size()) {
 		return false;
@@ -111,11 +112,23 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 		}
 	}
 
-	if (mPhenotypeModel.equals(creature.mPhenotypeModel)) {
+	if(mPosition != creature.mPosition){
 		return false;
 	}
 
-	if (mPopulationModel != mPopulationModel) {
+	if(mInitialPosition != creature.mInitialPosition){
+		return false;
+	}
+
+	if(mCulled != creature.mCulled){
+		return false;
+	}
+
+	if(mNew != creature.mNew){
+		return false;
+	}
+
+	if (mPopulationModel != creature.mPopulationModel) {
 		return false;
 	}
 

@@ -17,11 +17,13 @@
 //## utils headers
 
 PopulationModel::PopulationModel() :
-		mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL) {
+		mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL), mOutOfSync(
+				false) {
 
 }
 
-PopulationModel::PopulationModel(const PopulationModel& populationModel) {
+PopulationModel::PopulationModel(const PopulationModel& populationModel) :
+		mOutOfSync(false) {
 	mPlanetModel = populationModel.mPlanetModel;
 	mCreatureQty = populationModel.mCreatureQty;
 	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
@@ -71,7 +73,7 @@ bool PopulationModel::equals(const PopulationModel& population) const {
 	}
 
 	/**Comparison of creature models*/
-	if(mCreatureModels.size() != population.mCreatureModels.size()){
+	if (mCreatureModels.size() != population.mCreatureModels.size()) {
 		return false;
 	}
 	std::vector<CreatureModel*>::const_iterator it = mCreatureModels.begin();
