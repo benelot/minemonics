@@ -35,7 +35,7 @@ protected:
 	virtual void TearDown() {
 		// delete and set the pointer to zero
 		delete population;
-		population = 0;
+		population = NULL;
 	}
 	PopulationModel* population;
 };

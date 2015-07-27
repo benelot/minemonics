@@ -240,6 +240,11 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
+	/**Compare morphogene branches */
+	if(mGeneBranches.size() != morphoGene.mGeneBranches.size()){
+		return false;
+	}
+
 	std::vector<MorphogeneBranch*>::const_iterator it = mGeneBranches.begin();
 	std::vector<MorphogeneBranch*>::const_iterator it2 =
 			morphoGene.mGeneBranches.begin();

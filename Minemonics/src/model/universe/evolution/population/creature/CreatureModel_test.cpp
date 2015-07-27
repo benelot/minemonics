@@ -27,29 +27,34 @@
 //## model headers
 //## view headers
 //## utils headers
-//# corresponding header
+#include <utils/Randomness.hpp>
 
 class CreatureTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		// Set up an object of the class you want to test
+		randomness = new Randomness();
 		creature = new CreatureModel();
-		creature->initialize(NULL,Ogre::Vector3(0,0,0),30);
+		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
 	}
 
 	virtual void TearDown() {
 		// delete and set the pointer to zero
 		delete creature;
 		creature = NULL;
+		delete randomness;
+		randomness = NULL;
 	}
 	CreatureModel* creature;
+
+	Randomness* randomness;
 };
 
 class CreatureSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
+		randomness = new Randomness();
 		creature = new CreatureModel();
-		creature->initialize(NULL,Ogre::Vector3(0,0,0),30);
+		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
 
 		creature2 = new CreatureModel();
 
@@ -62,13 +67,17 @@ protected:
 
 	virtual void TearDown() {
 		delete creature;
-		creature = 0;
+		creature = NULL;
 		delete creature2;
-		creature2 = 0;
+		creature2 = NULL;
+		delete randomness;
+		randomness = NULL;
 	}
 	CreatureModel* creature;
 
 	CreatureModel* creature2;
+
+	Randomness* randomness;
 };
 
 TEST_F(CreatureTest,DummyTest) {

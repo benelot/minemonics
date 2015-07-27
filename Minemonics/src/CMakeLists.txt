@@ -424,9 +424,10 @@ set(TESTSRCS
     ./model/universe/evolution/juries/Velocity_test.cpp
     ./model/universe/evolution/juries/Ones_test.cpp
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
+    ./model/universe/evolution/population/creature/genome/GeneBranch_test.cpp
     ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
     ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
-    ./model/universe/evolution/population/creature/genome/Genome_test.cpp
+    ./model/universe/evolution/population/creature/genome/MixedGenome_test.cpp
     ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
     ./model/universe/evolution/population/creature/CreatureModel_test.cpp
     ./model/universe/evolution/population/PopulationModel_test.cpp

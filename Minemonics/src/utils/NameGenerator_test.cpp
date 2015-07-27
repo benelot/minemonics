@@ -38,9 +38,9 @@ protected:
 
 	virtual void TearDown() {
 		delete nameGenerator;
-		nameGenerator = 0;
+		nameGenerator = NULL;
 		delete randomness;
-		randomness = 0;
+		randomness = NULL;
 	}
 	Randomness* randomness;
 	NameGenerator* nameGenerator;

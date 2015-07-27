@@ -114,7 +114,6 @@ void PhenomeModel::update(const double timeSinceLastFrame) {
 //		(*jit)->isStrained();
 //	}
 
-
 }
 
 void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
@@ -635,6 +634,9 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 
 	/**The vector of limb models.*/
+	if (mLimbModels.size() != phenomeModel.mLimbModels.size()) {
+		return false;
+	}
 	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 	std::vector<LimbModel*>::const_iterator it2 =
 			phenomeModel.mLimbModels.begin();
@@ -646,6 +648,9 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 
 	/**The vector of joint models.*/
+	if(mJointModels.size() != phenomeModel.mJointModels.size()){
+		return false;
+	}
 	std::vector<JointModel*>::const_iterator it3 = mJointModels.begin();
 	std::vector<JointModel*>::const_iterator it4 =
 			phenomeModel.mJointModels.begin();
@@ -657,6 +662,9 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 
 	/**The vector of controllers.*/
+	if(mControllers.size() != phenomeModel.mControllers.size()){
+		return false;
+	}
 	std::vector<Controller*>::const_iterator it5 = mControllers.begin();
 	std::vector<Controller*>::const_iterator it6 =
 			phenomeModel.mControllers.begin();

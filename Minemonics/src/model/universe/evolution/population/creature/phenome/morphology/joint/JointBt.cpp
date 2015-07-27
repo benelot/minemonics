@@ -129,6 +129,11 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 }
 
 bool JointBt::equals(const JointBt& jointBt) const {
+
+	/**Comparison of motors*/
+	if(mMotors.size() != jointBt.mMotors.size()){
+		return false;
+	}
 	std::vector<Motor*>::const_iterator it = mMotors.begin();
 	std::vector<Motor*>::const_iterator it2 = jointBt.mMotors.begin();
 	for (; it != mMotors.end(), it2 != jointBt.mMotors.end(); it++, it2++) {

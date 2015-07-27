@@ -70,6 +70,10 @@ bool PopulationModel::equals(const PopulationModel& population) const {
 		return false;
 	}
 
+	/**Comparison of creature models*/
+	if(mCreatureModels.size() != population.mCreatureModels.size()){
+		return false;
+	}
 	std::vector<CreatureModel*>::const_iterator it = mCreatureModels.begin();
 	std::vector<CreatureModel*>::const_iterator it2 =
 			population.getCreatureModels().begin();

@@ -35,7 +35,7 @@ void Ones::setEvaluationSubject(const std::vector<bool>& x) {
  */
 void Ones::evaluateFitness() {
 	unsigned i;
-	for (mFitness = 0., i = 0; i < mEvaluationSubject.size(); mFitness +=
+	for (mFitness = 0, i = 0; i < mEvaluationSubject.size(); mFitness +=
 			mEvaluationSubject[i++])
 		;
 }

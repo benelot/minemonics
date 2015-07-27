@@ -47,6 +47,9 @@ bool Controller::equals(const Controller& controller) const {
 	}
 
 	/**The vector of control inputs.*/
+	if(mControlInputs.size() != controller.mControlInputs.size()){
+		return false;
+	}
 	std::vector<ControlOutput*>::const_iterator it1 = mControlInputs.begin();
 	std::vector<ControlOutput*>::const_iterator it2 =
 			controller.mControlInputs.begin();
@@ -57,7 +60,10 @@ bool Controller::equals(const Controller& controller) const {
 		}
 	}
 
-	/**The vector of joint models.*/
+	/**The vector of control outputs.*/
+	if(mControlOutputs.size() != controller.mControlOutputs.size()){
+		return false;
+	}
 	std::vector<ControlInput*>::const_iterator it3 = mControlOutputs.begin();
 	std::vector<ControlInput*>::const_iterator it4 =
 			controller.mControlOutputs.begin();

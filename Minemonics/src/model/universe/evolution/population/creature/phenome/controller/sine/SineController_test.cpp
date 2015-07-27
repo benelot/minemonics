@@ -24,12 +24,15 @@
 //## view headers
 //## utils headers
 
+#define AMPLITUDE 1
+#define FREQUENCY 1
+
 class SineControllerTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		// Set up an object of the class you want to test
 		sineController = new SineController();
-		sineController->initialize(1,1,0,0);
+		sineController->initialize(AMPLITUDE, FREQUENCY, 0, 0);
 	}
 
 	virtual void TearDown() {
@@ -44,7 +47,7 @@ class SineControllerSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		sineController = new SineController();
-		sineController->initialize(1,1,0,0);
+		sineController->initialize(AMPLITUDE, FREQUENCY, 0, 0);
 
 		sineController2 = new SineController();
 
@@ -57,16 +60,25 @@ protected:
 
 	virtual void TearDown() {
 		delete sineController;
-		sineController = 0;
+		sineController = NULL;
 		delete sineController2;
-		sineController2 = 0;
+		sineController2 = NULL;
 	}
 	SineController* sineController;
 
 	SineController* sineController2;
 };
 
-TEST_F(SineControllerTest,DummyTest) {
+TEST_F(SineControllerTest,AmplitudeTest) {
+	for (double i = 0; i < 2 * M_PI; i += 0.01) {
+		sineController->perform(i);
+		ASSERT_TRUE(sineController->getOutputValue() <= 1);
+		ASSERT_TRUE(sineController->getOutputValue() >= -1);
+	}
+
+}
+
+TEST_F(SineControllerTest,FrequencyTest) {
 	//TODO: Add all tests
 	//ASSERT_TRUE(creature->)
 }

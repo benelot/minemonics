@@ -6,39 +6,44 @@
  */
 
 //# corresponding header
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
-#include <controller/SaveController.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
+#include <controller/SaveController.hpp>
 
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
 class MorphoGeneBranchTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
+		randomness = new Randomness();
 		geneBranch = new MorphogeneBranch();
 		geneBranch->initialize();
 
 	}
 
 	virtual void TearDown() {
+		delete randomness;
+		randomness = NULL;
 		delete geneBranch;
-		geneBranch = 0;
+		geneBranch = NULL;
 	}
 	MorphogeneBranch* geneBranch;
+	Randomness* randomness;
 };
 
 class MorphoGeneBranchSerializationTest: public ::testing::Test {

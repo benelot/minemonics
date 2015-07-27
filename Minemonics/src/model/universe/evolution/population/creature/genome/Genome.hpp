@@ -348,10 +348,13 @@ public:
 		& BOOST_SERIALIZATION_NVP(mGenomeType)
 
 		/**The length of the genome*/
-		& BOOST_SERIALIZATION_NVP(mLength)
+		& BOOST_SERIALIZATION_NVP(mLength);
 
-		/**The vector of genes.*/
-		& BOOST_SERIALIZATION_NVP(mGenes);
+//		/**The vector of genes.*/
+//		for (std::vector<Gene*>::const_iterator it = mGenes.begin();
+//				it != mGenes.end(); it++) {
+//			ar & (**it);
+//		}
 	}
 
 	//Accessor methods

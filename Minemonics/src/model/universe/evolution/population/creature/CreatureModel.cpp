@@ -20,13 +20,13 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mPopulationModel(NULL), mCulled(false), mNew(
-				false) {
+		mPopulationModel(NULL), mCulled(false), mNew(false) {
 	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-		mGenotype(creatureModel.mGenotype),mPhenotypeModel(creatureModel.mPhenotypeModel) {
+		mGenotype(creatureModel.mGenotype), mPhenotypeModel(
+				creatureModel.mPhenotypeModel) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -42,8 +42,8 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	}
 }
 
-void CreatureModel::initialize(PopulationModel* const populationModel, const Ogre::Vector3 position,
-		const double branchiness) {
+void CreatureModel::initialize(PopulationModel* const populationModel,
+		const Ogre::Vector3 position, const double branchiness) {
 	mPopulationModel = populationModel;
 	mInitialPosition = position;
 	mPosition = position;
@@ -81,7 +81,7 @@ double CreatureModel::getFitness() {
 //		weight += (*jit)->getWeight();
 //	}
 
-	//TODO: Replace with correct jury fitness above
+//TODO: Replace with correct jury fitness above
 	fitness = mPhenotypeModel.getComponentModels().size();
 
 	if (weight != 0) {
@@ -99,6 +99,10 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 		return false;
 	}
 
+	/**Comparison of juries*/
+	if (mJuries.size() != creature.mJuries.size()) {
+		return false;
+	}
 	std::vector<Jury*>::const_iterator it = mJuries.begin();
 	std::vector<Jury*>::const_iterator it2 = creature.mJuries.begin();
 	for (; it != mJuries.end(), it2 != creature.mJuries.end(); it++, it2++) {

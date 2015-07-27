@@ -37,7 +37,7 @@ protected:
 
 	virtual void TearDown() {
 		delete ones;
-		ones = 0;
+		ones = NULL;
 	}
 	Ones* ones;
 };

@@ -6,26 +6,31 @@
  */
 
 //# corresponding header
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
-#include <controller/SaveController.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
 
+//## controller headers
+#include <controller/SaveController.hpp>
+
+//## model headers
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
 class MorphoGeneTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
+		randomness = new Randomness();
 		gene = new Morphogene();
 		gene->initialize(30);
 
@@ -34,13 +39,17 @@ protected:
 	virtual void TearDown() {
 		delete gene;
 		gene = NULL;
+		delete randomness;
+		randomness = NULL;
 	}
 	Morphogene* gene;
+	Randomness* randomness;
 };
 
 class MorphoGeneSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
+		randomness = new Randomness();
 		morphoGene = new Morphogene();
 		morphoGene->initialize(30);
 
@@ -55,13 +64,17 @@ protected:
 
 	virtual void TearDown() {
 		delete morphoGene;
-		morphoGene = 0;
+		morphoGene = NULL;
 		delete morphoGene2;
-		morphoGene2 = 0;
+		morphoGene2 = NULL;
+		delete randomness;
+		randomness = NULL;
 	}
 	Morphogene* morphoGene;
 
 	Morphogene* morphoGene2;
+
+	Randomness* randomness;
 };
 
 TEST_F(MorphoGeneTest,hasSizeWithinBounds) {

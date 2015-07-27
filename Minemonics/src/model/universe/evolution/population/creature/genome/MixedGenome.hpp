@@ -38,7 +38,7 @@ class access;
  * with each type is a fixed number of branch specifications that dictate the way in which a segment of
  * a given type sprouts branches of other segment types. The encoded information also specifies the scaling,
  * positioning, and other aspects of the branching.
- *  * The genetic representation of this morphology is a directed graph of
+ * The genetic representation of this morphology is a directed graph of
  * nodes and connections. Each graph contains the developmental instructions
  * for growing a creature, and provides a way of reusing instructions to
  * make similar or recursive components within the creature. A phenotype
@@ -408,12 +408,6 @@ private:
 
 	/**
 	 * A bound on the depth of the body's tree structure (the number of segments along any root-to-leaf path).
-	 * This bound is iteratively adjusted until both it and the segment quantity limit are satisfied.
-	 * First, the creature is instantiated using the depth bound provided
-	 * in the evolution configuration. If, during that process, the total number of body
-	 * segments exceeds the segment count limit, the body is deleted, the depth bound is
-	 * decreased, and the body is constructed again. This process will repeat, decreasing the
-	 * depth bound each time, until the segment count falls within the specific limit.
 	 */
 	int mSegmentsDepthLimit;
 

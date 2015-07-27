@@ -23,7 +23,7 @@
 //## utils headers
 
 SineController::SineController() :
-		Controller(SINE_CONTROLLER), mAmplitude(0.5f), mFrequency(1), mXShift(
+		Controller(SINE_CONTROLLER), mAmplitude(1), mFrequency(1), mXShift(
 				0), mYShift(1), mTime(0) {
 }
 
@@ -47,7 +47,7 @@ void SineController::perform(const double timeSinceLastFrame) {
 	//TODO:It seems that the time is not properly kept that way. Time since last frame is often 0.
 	mTime += timeSinceLastFrame;
 
-	double output = mAmplitude * sin(mFrequency * mTime + mXShift) + mYShift;
+	double output = mAmplitude * sin(mFrequency * mTime/1000.0f*M_PI + mXShift) + mYShift;
 	//clamp output to [0;1]
 	output = (output > 1) ? 1 : (output < 0) ? 0 : output;
 

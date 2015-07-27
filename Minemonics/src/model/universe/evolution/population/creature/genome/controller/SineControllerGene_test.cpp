@@ -25,19 +25,24 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
 class SineControllerGeneTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
+		randomness = new Randomness();
 		sineControllerGene = new SineControllerGene();
 		sineControllerGene->initialize();
 	}
 
 	virtual void TearDown() {
+		delete randomness;
+		randomness = NULL;
 		delete sineControllerGene;
-		sineControllerGene = 0;
+		sineControllerGene = NULL;
 	}
 	SineControllerGene* sineControllerGene;
+	Randomness* randomness;
 };
 
 class SineControllerGeneSerializationTest: public ::testing::Test {
@@ -57,9 +62,9 @@ protected:
 
 	virtual void TearDown() {
 		delete sineControllerGene;
-		sineControllerGene = 0;
+		sineControllerGene = NULL;
 		delete sineControllerGene2;
-		sineControllerGene2 = 0;
+		sineControllerGene2 = NULL;
 	}
 	SineControllerGene* sineControllerGene;
 
