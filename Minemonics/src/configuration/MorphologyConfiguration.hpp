@@ -166,22 +166,22 @@ public:
 	/**
 	 * The smallest max strength of a joint motor
 	 */
-	static const double JOINT_MIN_FORCE = 1;
+	static const double JOINT_MIN_FORCE = 9999;
 
 	/**
 	 * The highest max strength of a joint motor
 	 */
-	static const double JOINT_MAX_FORCE = 10;
+	static const double JOINT_MAX_FORCE = 10000;
 
 	/**
 	 * The smallest max speed of a joint motor
 	 */
-	static const double JOINT_MIN_SPEED = 1;
+	static const double JOINT_MIN_SPEED = 10;
 
 	/**
 	 * The highest max speed of a joint motor
 	 */
-	static const double JOINT_MAX_SPEED = 10;
+	static const double JOINT_MAX_SPEED = 100;
 
 	/**
 	 * The initial branch number mean

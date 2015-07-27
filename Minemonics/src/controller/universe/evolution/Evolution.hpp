@@ -82,7 +82,7 @@ public:
 	/**
 	 * Update the evolution.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 	//Accessor methods
 

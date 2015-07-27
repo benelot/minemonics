@@ -39,7 +39,7 @@ public:
 	/**
 	 * Update the environment physics.
 	 */
-	virtual void update() = 0;
+	virtual void update(double timeSinceLastTick) = 0;
 
 	/**
 	 * Create the terrain data.

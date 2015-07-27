@@ -50,7 +50,7 @@ public:
 	/**
 	 * Update the plane environment.
 	 */
-	virtual void update();
+	virtual void update(double timeSinceLastTick);
 
 	// Accessor methods
 	PlaneO3D* getPlaneView() const {

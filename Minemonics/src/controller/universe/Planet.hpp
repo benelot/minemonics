@@ -68,7 +68,7 @@ public:
 	/**
 	 * Update the model of the planet.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Proceed with the evaluation. In serial mode, this just goes on to the next evaluation, in parallel mode, this schedules one more evaluation.

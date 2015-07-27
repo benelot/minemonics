@@ -201,7 +201,7 @@ void EnvironmentO3D::initBlendMaps(Ogre::Terrain* const terrain) {
 	blendMap1->update();
 }
 
-void EnvironmentO3D::update() {
+void EnvironmentO3D::update(double timeSinceLastTick) {
 	mTerrainGroup->autoUpdateLodAll(false,
 			Ogre::Any(Ogre::Real(HOLD_LOD_DISTANCE)));
 }

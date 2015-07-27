@@ -30,9 +30,16 @@ public:
 	PlaneModel();
 	virtual ~PlaneModel();
 
+	/**
+	 * Initialize the plane model.
+	 */
 	virtual void initialize();
 
-	virtual void update();
+	/**
+	 * Update the plane model.
+	 * @param timeSinceLastTick The time that has passed since the last update.
+	 */
+	virtual void update(double timeSinceLastTick);
 
 	//Accessor methods
 

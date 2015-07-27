@@ -75,9 +75,9 @@ void Planet::stepPhysics(const double timeSinceLastFrame) {
 			timeSinceLastFrame);
 }
 
-void Planet::update() {
-	mEnvironment->update();
-	mEvolution.update();
+void Planet::update(double timeSinceLastTick) {
+	mEnvironment->update(timeSinceLastTick);
+	mEvolution.update(timeSinceLastTick);
 }
 
 bool Planet::proceedEvaluation() {

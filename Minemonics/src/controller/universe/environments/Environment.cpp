@@ -69,7 +69,7 @@ void Environment::removeFromWorld() {
 	}
 }
 
-void Environment::update() {
+void Environment::update(double timeSinceLastTick) {
 	//TODO: Make terrain paging with bullet physics
 //	std::vector<Ogre::Terrain*> terrains = getEnvironmentO3D()->getAllDefinedTerrains();
 //	Ogre::TerrainIterator tit = getEnvironmentO3D()->getTerrainGroup()->getTerrainIterator();

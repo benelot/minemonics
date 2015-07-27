@@ -8,7 +8,7 @@
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 
 ControlInput::ControlInput() :
-		mReceivedInput(false), mValue(0) {
+		mReceivedInput(false), mInputValue(0) {
 }
 
 ControlInput::~ControlInput() {
@@ -21,7 +21,7 @@ bool ControlInput::equals(const ControlInput& controlInput) const {
 		return false;
 	}
 
-	if (mValue != controlInput.mValue) {
+	if (mInputValue != controlInput.mInputValue) {
 		return false;
 	}
 

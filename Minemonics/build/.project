@@ -1734,9 +1734,39 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/juries/Ones_test.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/SineControllerGene_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/MorphogeneBranch_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/Morphogene_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Genome_test.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/Genome_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/SineController_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/CreatureModel_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/PopulationModel_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/PopulationModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/NameGenerator_test.cpp</name>

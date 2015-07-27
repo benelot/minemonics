@@ -29,7 +29,7 @@ void PlaneO3D::initialize(const Ogre::Light* const l) {
 	mTerrainPagedWorldSection->setDefiner(OGRE_NEW PlaneTerrainDefiner);
 }
 
-void PlaneO3D::update(){
-	EnvironmentO3D::update();
+void PlaneO3D::update(double timeSinceLastTick){
+	EnvironmentO3D::update(timeSinceLastTick);
 }
 

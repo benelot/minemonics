@@ -40,6 +40,7 @@
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
 
@@ -95,16 +96,25 @@ void PhenomeModel::update(const double timeSinceLastFrame) {
 	//update all controllers
 	//TODO: Hacks to make it run, make nicer
 	// let the controller perform
-	std::vector<Controller*>::iterator cit = mControllers.begin();
-	for (; cit != mControllers.end(); cit++) {
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+			cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastFrame);
+		(*cit)->getOutputValue();
 	}
+
+//
+//		std::vector<JointModel*>::iterator jit = mJointModels.begin();
+//		for (; jit != mJointModels.end(); jit++) {
+//			(*jit)->
+//		}
 
 //	// test for strains
 //	std::vector<JointModel*>::iterator jit = mJointModels.begin();
 //	for (; jit != mJointModels.end(); jit++) {
 //		(*jit)->isStrained();
 //	}
+
+
 }
 
 void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
@@ -410,6 +420,16 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 										morphogeneBranch->getJointMaxYawForce(),
 										morphogeneBranch->getJointMaxRollForce()));
 
+						//TODO: Quick controller hack
+						for (std::vector<Motor*>::const_iterator motorIterator =
+								joint->getMotors().begin(); motorIterator != joint->getMotors().end();
+								motorIterator++) {
+							SineController* controller = new SineController();
+							controller->initialize(0.5, 1, 0, 0);
+							controller->addControlOutput((*motorIterator));
+							mControllers.push_back(controller);
+						}
+
 						//set the angular limits of the joint
 						joint->setAngularLimits(
 								Ogre::Vector3(
@@ -438,18 +458,6 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 								morphogeneBranch->isJointPitchMotorEnabled(),
 								morphogeneBranch->isJointYawMotorEnabled(),
 								morphogeneBranch->isJointRollMotorEnabled());
-
-						//TODO: Quick controller hack
-						//				std::vector<Motor*>::iterator motorIterator =
-						//						joint->getMotors().begin();
-						//
-						//				for (; motorIterator != joint->getMotors().end();
-						//						motorIterator++) {
-						//					SineController* controller = new SineController();
-						//					controller->initialize(0.5, 1, 0, 0);
-						//					controller->addControlOutput((*motorIterator));
-						//					mPhenomeModel.getControllers().push_back(controller);
-						//				}
 					}
 
 					//iterate over all morphogene branches

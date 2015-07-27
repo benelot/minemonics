@@ -70,10 +70,10 @@ void Creature::reposition(const Ogre::Vector3 position) {
 	mPhenotype.reposition(position);
 }
 
-void Creature::update() {
+void Creature::update(double timeSinceLastFrame) {
 	// Update the phenotype of the creature if it is in the world.
 	if (mPhenotype.isInWorld()) {
-		mPhenotype.update();
+		mPhenotype.update(timeSinceLastFrame);
 	}
 }
 

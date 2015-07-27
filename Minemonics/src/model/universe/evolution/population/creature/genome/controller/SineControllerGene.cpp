@@ -43,7 +43,9 @@ void SineControllerGene::initialize() {
 bool SineControllerGene::equals(
 		const SineControllerGene& sineControllerGene) const {
 
-	ControllerGene::equals((ControllerGene&) sineControllerGene);
+	if(!ControllerGene::equals((ControllerGene&) sineControllerGene)){
+		return false;
+	}
 
 	if (mXOffset != sineControllerGene.mXOffset)
 		return false;

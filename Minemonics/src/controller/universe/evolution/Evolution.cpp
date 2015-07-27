@@ -213,10 +213,10 @@ bool Evolution::proceedEvaluation() {
 	return false;
 }
 
-void Evolution::update() {
+void Evolution::update(double timeSinceLastTick) {
 	std::vector<Population*>::iterator pit = mPopulations.begin();
 	for (; pit != mPopulations.end(); pit++) {
-		(*pit)->update();
+		(*pit)->update(timeSinceLastTick);
 	}
 }
 

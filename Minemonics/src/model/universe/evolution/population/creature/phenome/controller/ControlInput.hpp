@@ -67,7 +67,7 @@ public:
 		<< "ControlInput: ReceivedInput=" << controlInput.mReceivedInput
 
 		/**The input value*/
-		<< "/InputValue=" << controlInput.mValue;
+		<< "/InputValue=" << controlInput.mInputValue;
 	}
 
 	/**
@@ -82,19 +82,19 @@ public:
 		& BOOST_SERIALIZATION_NVP(mReceivedInput)
 
 		/**The input value*/
-		& BOOST_SERIALIZATION_NVP(mValue);
+		& BOOST_SERIALIZATION_NVP(mInputValue);
 	}
 
 	//Accessor methods
 
-	double getValue() {
+	double getInputValue() {
 		mReceivedInput = false;
-		return mValue;
+		return mInputValue;
 	}
 
-	void setValue(const double value) {
+	void setInputValue(const double inputValue) {
 		mReceivedInput = true;
-		mValue = value;
+		mInputValue = inputValue;
 	}
 
 	bool isReceivedInput() const {
@@ -110,7 +110,7 @@ private:
 	/**
 	 * The input that was received.
 	 */
-	double mValue;
+	double mInputValue;
 };
 BOOST_CLASS_VERSION(ControlInput, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControlInput)

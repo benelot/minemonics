@@ -116,7 +116,7 @@ public:
 	/**
 	 * Update the graphical representation of the creature with its physical representation.
 	 */
-	void update();
+	void update(double timeSinceLastFrame);
 
 	/**
 	 * Add the phenotype to the physics world.

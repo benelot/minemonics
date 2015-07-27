@@ -55,7 +55,7 @@ void Plane::initialize(const Ogre::Light* const l,
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(debugDrawer);
 }
 
-void Plane::update() {
-	getPlaneModel()->update();
-	getPlaneView()->update();
+void Plane::update(double timeSinceLastTick) {
+	getPlaneModel()->update(timeSinceLastTick);
+	getPlaneView()->update(timeSinceLastTick);
 }

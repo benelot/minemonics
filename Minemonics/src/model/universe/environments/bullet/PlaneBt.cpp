@@ -53,5 +53,5 @@ void PlaneBt::initialize() {
 					| btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
 }
 
-void PlaneBt::update() {
+void PlaneBt::update(double timeSinceLastTick) {
 }

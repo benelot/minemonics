@@ -24,30 +24,25 @@ Controller::Controller(ControllerType controllerType) :
 Controller::~Controller() {
 }
 
-
 void Controller::distributeOutput(const double output) {
 	std::vector<ControlInput*>::iterator controlOutputIterator =
 			mControlOutputs.begin();
 	for (; controlOutputIterator != mControlOutputs.end();
 			controlOutputIterator++) {
-		(*controlOutputIterator)->setValue(output);
+		(*controlOutputIterator)->setInputValue(output);
 	}
 }
 
-
-
-void Controller::addControlInput(ControlOutput* const controlOutput)
-{
-		mControlInputs.push_back(controlOutput);
+void Controller::addControlInput(ControlOutput* const controlOutput) {
+	mControlInputs.push_back(controlOutput);
 }
 
-void Controller::addControlOutput(ControlInput* const controlInput)
-{
-		mControlOutputs.push_back(controlInput);
+void Controller::addControlOutput(ControlInput* const controlInput) {
+	mControlOutputs.push_back(controlInput);
 }
 
 bool Controller::equals(const Controller& controller) const {
-	if(mType != controller.mType){
+	if (mType != controller.mType) {
 		return false;
 	}
 
@@ -66,8 +61,9 @@ bool Controller::equals(const Controller& controller) const {
 	std::vector<ControlInput*>::const_iterator it3 = mControlOutputs.begin();
 	std::vector<ControlInput*>::const_iterator it4 =
 			controller.mControlOutputs.begin();
-	for (; it3 != mControlOutputs.end(), it4 != controller.mControlOutputs.end();
-			it3++, it4++) {
+	for (;
+			it3 != mControlOutputs.end(), it4
+					!= controller.mControlOutputs.end(); it3++, it4++) {
 		if (!(*it3)->equals(**(it4))) {
 			return false;
 		}

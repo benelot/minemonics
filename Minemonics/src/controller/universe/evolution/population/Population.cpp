@@ -94,10 +94,10 @@ void Population::addMember(Creature* const creature) {
 	mPopulationModel->addMember(creature->getCreatureModel());
 }
 
-void Population::update() {
+void Population::update(double timeSinceLastFrame) {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end(); cit++) {
-		(*cit)->update();
+		(*cit)->update(timeSinceLastFrame);
 	}
 }
 

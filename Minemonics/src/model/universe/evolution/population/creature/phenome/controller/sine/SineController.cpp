@@ -30,8 +30,8 @@ SineController::SineController() :
 SineController::~SineController() {
 }
 
-void SineController::initialize(const double amplitude,const double frequency,
-		const double xShift,const double yShift) {
+void SineController::initialize(const double amplitude, const double frequency,
+		const double xShift, const double yShift) {
 	mAmplitude = amplitude;
 	mFrequency = frequency;
 	mXShift = xShift;
@@ -43,12 +43,15 @@ void SineController::perform(const double timeSinceLastFrame) {
 	if (mControlInputs.size() != 0) {
 		std::cout << "Why is there sine control input?";
 		//input = mControlInput->getControlInput();
-	} else {
-		mTime += timeSinceLastFrame;
 	}
+	//TODO:It seems that the time is not properly kept that way. Time since last frame is often 0.
+	mTime += timeSinceLastFrame;
+
 	double output = mAmplitude * sin(mFrequency * mTime + mXShift) + mYShift;
 	//clamp output to [0;1]
 	output = (output > 1) ? 1 : (output < 0) ? 0 : output;
+
+	setOutputValue(output);
 
 	// distribute the output to the adjacent controllers or endpoints
 	distributeOutput(output);

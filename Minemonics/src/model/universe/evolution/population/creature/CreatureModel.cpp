@@ -81,6 +81,7 @@ double CreatureModel::getFitness() {
 //		weight += (*jit)->getWeight();
 //	}
 
+	//TODO: Replace with correct jury fitness above
 	fitness = mPhenotypeModel.getComponentModels().size();
 
 	if (weight != 0) {

@@ -208,14 +208,14 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, &mDebugDrawer, 10);
+	Planet* earth = new Planet(Environment::PLANE, &mDebugDrawer, 1000);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
 
 	// create a population
 	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, 10,
+	earthPopulation->initialize(earth, 100,
 			EvolutionConfiguration::ROOT_POSITION);
 
 	// add earth population to earth

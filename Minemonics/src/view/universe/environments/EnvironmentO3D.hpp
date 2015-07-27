@@ -73,7 +73,7 @@ public:
 	/**
 	 * Update the environment view.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 	void testCapabilities(const Ogre::RenderSystemCapabilities* const caps) {
 		if (!caps->hasCapability(Ogre::RSC_VERTEX_PROGRAM)

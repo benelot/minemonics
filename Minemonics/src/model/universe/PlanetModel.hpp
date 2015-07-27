@@ -55,7 +55,7 @@ public:
 	/**
 	 * Update the planet.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 	//Accessor methods
 

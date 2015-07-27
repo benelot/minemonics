@@ -100,12 +100,12 @@ void Evaluation::teardown() {
 void Evaluation::update(const double timeSinceLastTick) {
 
 	//update the planet's environment shared with other evaluation
-	mPlanet->getEnvironment()->update();
+	mPlanet->getEnvironment()->update(timeSinceLastTick);
 
 	//update the competing populations
 	std::vector<Population*>::iterator pit = mPopulations.begin();
 	for (; pit != mPopulations.end(); pit++) {
-		(*pit)->update();
+		(*pit)->update(timeSinceLastTick);
 	}
 
 	//update the time passed

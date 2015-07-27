@@ -423,12 +423,13 @@ set(TESTSRCS
     ./model/universe/PlanetModel_test.cpp
     ./model/universe/evolution/juries/Velocity_test.cpp
     ./model/universe/evolution/juries/Ones_test.cpp
-#    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
-#    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
-#    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
+    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
+    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
+    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     ./model/universe/evolution/population/creature/genome/Genome_test.cpp
-#    ./model/universe/evolution/population/creature/CreatureModel_test.cpp
-#    ./model/universe/evolution/population/PopulationModel_test.cpp
+    ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
+    ./model/universe/evolution/population/creature/CreatureModel_test.cpp
+    ./model/universe/evolution/population/PopulationModel_test.cpp
     ./utils/NameGenerator_test.cpp
     ./utils/Randomness_test.cpp
     
@@ -644,6 +645,14 @@ find_package(FFMPEG REQUIRED)
 
 include_directories(${FFMPEG_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
+
+######################################################################
+# Boost
+######################################################################
+find_package(Boost REQUIRED random log thread date_time regex system chrono serialization)
+
+include_directories(${Boost_INCLUDE_DIRS})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 
 ######################################################################
 # Shark 2 (Is not a required library anymore)

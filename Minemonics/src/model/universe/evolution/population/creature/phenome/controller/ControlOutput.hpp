@@ -64,7 +64,7 @@ public:
 			const ControlOutput &controlOutput) {
 		return os
 		/**The output value*/
-		<< "/InputValue=" << controlOutput.mValue;
+		<< "/InputValue=" << controlOutput.mOutputValue;
 	}
 
 	/**
@@ -76,24 +76,24 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
 		/**The input value*/
-		& BOOST_SERIALIZATION_NVP(mValue);
+		& BOOST_SERIALIZATION_NVP(mOutputValue);
 	}
 
 	//Accessor methods
 
-	double getValue() const {
-		return mValue;
+	double getOutputValue() const {
+		return mOutputValue;
 	}
 
-	void setValue(const double value) {
-		mValue = value;
+	void setOutputValue(const double outputValue) {
+		mOutputValue = outputValue;
 	}
 
 private:
 	/**
 	 * The control output value
 	 */
-	double mValue;
+	double mOutputValue;
 };
 BOOST_CLASS_VERSION(ControlOutput, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControlOutput)

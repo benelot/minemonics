@@ -51,6 +51,6 @@ void PlanetModel::performEmbryogenesis() {
 	mEvolutionModel->performEmbryogenesis();
 }
 
-void PlanetModel::update(){
-	mEnvironmentModel->update();
+void PlanetModel::update(double timeSinceLastTick){
+	mEnvironmentModel->update(timeSinceLastTick);
 }

@@ -27,6 +27,6 @@ void PlaneModel::initialize() {
 	getPlaneBt()->initialize();
 }
 
-void PlaneModel::update() {
-	mEnvironmentPhysics->update();
+void PlaneModel::update(double timeSinceLastTick) {
+	mEnvironmentPhysics->update(timeSinceLastTick);
 }

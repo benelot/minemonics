@@ -117,13 +117,9 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 	}
 }
 
-void Phenome::update() {
-	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970, 1, 1));
-	boost::posix_time::ptime now =
-			boost::posix_time::microsec_clock::local_time();
-	boost::posix_time::time_duration diff = now - time_t_epoch;
+void Phenome::update(double timeSinceLastFrame) {
 
-	mPhenotypeModel->update(diff.total_milliseconds());
+	mPhenotypeModel->update(timeSinceLastFrame);
 
 	// Update all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();

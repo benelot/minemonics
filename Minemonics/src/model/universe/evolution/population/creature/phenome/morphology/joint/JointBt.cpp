@@ -109,6 +109,8 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 	servoMotor->initialize(JointPhysics::DOF_PITCH,
 			mG6DofJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
 			maxSpeeds.getX());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor

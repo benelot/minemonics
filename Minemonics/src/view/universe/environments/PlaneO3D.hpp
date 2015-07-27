@@ -43,7 +43,7 @@ public:
 	/**
 	 * Update the plane view.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 private:
 	const PlaneModel* mPlaneModel;

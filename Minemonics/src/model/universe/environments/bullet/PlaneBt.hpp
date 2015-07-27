@@ -42,7 +42,7 @@ public:
 	/**
 	 * Update tehe plane bullet physics.
 	 */
-	virtual void update();
+	virtual void update(double timeSinceLastTick);
 
 	//Accessor methods
 	btRigidBody*& getBody() {

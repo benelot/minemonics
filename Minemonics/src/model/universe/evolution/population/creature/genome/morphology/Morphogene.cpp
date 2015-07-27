@@ -163,6 +163,7 @@ void Morphogene::initialize(const double branchiness) {
 		mGeneBranches.push_back(branch);
 	}
 
+	//TODO: Does nothing yet, improve.
 	mControllerGene = new SineControllerGene();
 	mControllerGene->initialize();
 }

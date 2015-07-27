@@ -72,7 +72,7 @@ public:
 	/**
 	 * Update the population.
 	 */
-	void update();
+	void update(double timeSinceLastFrame);
 
 	/**
 	 * Reset all individuals in the population.

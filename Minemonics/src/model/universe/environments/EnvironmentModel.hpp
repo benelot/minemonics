@@ -32,7 +32,7 @@ public:
 	/**
 	 * Update the environment model.
 	 */
-	virtual void update() = 0;
+	virtual void update(double timeSinceLastTick) = 0;
 
 	/**
 	 * Is the environment in the world?

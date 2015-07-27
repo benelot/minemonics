@@ -15,14 +15,14 @@
 //## utils headers
 
 ControlOutput::ControlOutput() :
-		mValue(0) {
+		mOutputValue(0) {
 }
 
 ControlOutput::~ControlOutput() {
 }
 
 bool ControlOutput::equals(const ControlOutput& controlOutput) const {
-	if (mValue != controlOutput.mValue) {
+	if (mOutputValue != controlOutput.mOutputValue) {
 		return false;
 	}
 
