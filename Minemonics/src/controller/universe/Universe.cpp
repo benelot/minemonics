@@ -33,7 +33,7 @@ Universe::~Universe() {
 
 	//delete the planets
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
+	for (; pit != mPlanets.end();) {
 		Planet* planet = (*pit);
 		delete planet;
 		pit = mPlanets.erase(pit);
