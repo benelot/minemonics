@@ -358,6 +358,8 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		//in order to detect a derived class type from a base type for serialization,
+		//you have to register the derived class type in beforehand.
 		ar.register_type(static_cast<SineControllerGene*>(NULL));
 		ar
 		/** Serialize the base object */

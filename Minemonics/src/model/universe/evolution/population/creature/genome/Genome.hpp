@@ -18,6 +18,7 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //## utils headers
@@ -343,18 +344,18 @@ public:
 
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		//in order to detect a derived class type from a base type for serialization,
+		//you have to register the derived class type in beforehand.
+		ar.register_type(static_cast<Morphogene*>(NULL));
 		ar
 		/**The type of the genome*/
 		& BOOST_SERIALIZATION_NVP(mGenomeType)
 
 		/**The length of the genome*/
-		& BOOST_SERIALIZATION_NVP(mLength);
+		& BOOST_SERIALIZATION_NVP(mLength)
 
-//		/**The vector of genes.*/
-//		for (std::vector<Gene*>::const_iterator it = mGenes.begin();
-//				it != mGenes.end(); it++) {
-//			ar & (**it);
-//		}
+		/**The vector of genes.*/
+		& BOOST_SERIALIZATION_NVP(mGenes);
 	}
 
 	//Accessor methods
