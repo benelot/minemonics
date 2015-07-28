@@ -60,7 +60,8 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	mG6DofJoint->setEquilibriumPoint();
 
 	mG6DofJoint->enableFeedback(true);
-	mG6DofJoint->setJointFeedback(new btJointFeedback());
+	mJointFeedBack = new btJointFeedback();
+	mG6DofJoint->setJointFeedback(mJointFeedBack);
 
 	//debug drawing
 	mG6DofJoint->setDbgDrawSize(btScalar(5.f));
@@ -74,23 +75,24 @@ JointBt::~JointBt() {
 	mWorld = NULL;
 
 	//delete and clear the motor vector
-	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-	for (; motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->isEnabled()) {
-			delete (*motorIterator);
-		}
+	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
+			motorIterator != mMotors.end(); motorIterator++) {
+		delete (*motorIterator);
 	}
 
 	mMotors.clear();
 
 	delete mG6DofJoint;
 	mG6DofJoint = NULL;
+
+	delete mJointFeedBack;
+	mJointFeedBack = NULL;
 }
 
 void JointBt::update() {
 	//apply motor forces
-	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-	for (; motorIterator != mMotors.end(); motorIterator++) {
+	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
+			motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
 			(*motorIterator)->apply();
 		}
@@ -113,6 +115,8 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 	servoMotor->initialize(JointPhysics::DOF_YAW,
 			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_YAW),
 			maxForces.getY(), maxSpeeds.getY());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
@@ -120,6 +124,8 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 	servoMotor->initialize(JointPhysics::DOF_ROLL,
 			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
 			maxForces.getZ(), maxSpeeds.getZ());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 }
 

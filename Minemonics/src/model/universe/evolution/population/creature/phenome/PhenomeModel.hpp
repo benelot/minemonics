@@ -68,9 +68,9 @@ public:
 
 	/**
 	 * Update the phenome model.
-	 * @param timeSinceLastFrame
+	 * @param timeSinceLastTick
 	 */
-	void update(const double timeSinceLastFrame);
+	void update(const double timeSinceLastTick);
 
 	/**
 	 * Compare the phenome model to another phenome model.

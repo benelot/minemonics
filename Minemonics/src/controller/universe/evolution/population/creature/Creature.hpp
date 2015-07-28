@@ -70,7 +70,7 @@ public:
 	/**
 	 * Update the creature as it moves.
 	 */
-	void update(double timeSinceLastFrame);
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Add the creature to the physics world.

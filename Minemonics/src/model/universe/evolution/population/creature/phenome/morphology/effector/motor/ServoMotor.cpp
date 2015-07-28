@@ -39,21 +39,27 @@ ServoMotor::~ServoMotor() {
 }
 
 void ServoMotor::initialize(const int jointMotorIndex,
-		btRotationalLimitMotor* const motorBt,const double maxForce,const double maxSpeed) {
+		btRotationalLimitMotor* const motorBt, const double maxForce,
+		const double maxSpeed) {
 	mJointMotorIndex = jointMotorIndex;
 	mMotorBt = motorBt;
 	mMaxForce = maxForce;
 	mMaxSpeed = maxSpeed;
 	mMotorBt->m_maxMotorForce = mMaxForce;
-	//TODO:: Check if this is the right velocity
-	mMotorBt->m_targetVelocity = mMaxSpeed;
+	//TODO:: Check if this is the right velocity (it is not)
+	//mMotorBt->m_targetVelocity = mMaxSpeed;
 }
 
 void ServoMotor::apply() {
-	mMotorBt->m_currentPosition = mMotorBt->m_loLimit
+	mMotorBt->m_enableMotor = true;
+	mMotorBt->m_maxMotorForce = 1000000000.0f;
+	btScalar targetLimitAngle = mMotorBt->m_loLimit
 			+ getInputValue() * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
-	std::cout << "Input Value: "<< getInputValue() <<  std::endl;
-	std::cout << "\t\t/MotorPosition" << mMotorBt->m_currentPosition << std::endl;
+	btScalar angleError = targetLimitAngle - mMotorBt->m_currentPosition;
+	mMotorBt->m_targetVelocity = 1000000.f * angleError;
+	std::cout << mMotorBt << "::Input Value:   " << getInputValue() << "\t/MotorPosition:  "
+			<< mMotorBt->m_currentPosition << "\t/AngleError: " << angleError
+			<< std::endl;
 }
 
 ServoMotor* ServoMotor::clone() {

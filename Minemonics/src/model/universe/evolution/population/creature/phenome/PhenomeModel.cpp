@@ -92,13 +92,13 @@ void PhenomeModel::initialize(CreatureModel* const creatureModel) {
 	mCreatureModel = creatureModel;
 }
 
-void PhenomeModel::update(const double timeSinceLastFrame) {
+void PhenomeModel::update(const double timeSinceLastTick) {
 	//update all controllers
 	//TODO: Hacks to make it run, make nicer
 	// let the controller perform
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 			cit != mControllers.end(); cit++) {
-		(*cit)->perform(timeSinceLastFrame);
+		(*cit)->perform(timeSinceLastTick);
 		(*cit)->getOutputValue();
 	}
 

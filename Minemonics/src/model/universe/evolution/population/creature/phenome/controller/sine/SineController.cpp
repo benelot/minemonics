@@ -38,19 +38,16 @@ void SineController::initialize(const double amplitude, const double frequency,
 	mYShift = yShift;
 }
 
-void SineController::perform(const double timeSinceLastFrame) {
+void SineController::perform(const double timeSinceLastTick) {
 	double input = 0;
 	if (mControlInputs.size() != 0) {
 		std::cout << "Why is there sine control input?";
-		//input = mControlInput->getControlInput();
 	}
-	//TODO:It seems that the time is not properly kept that way. Time since last frame is often 0.
-	mTime += timeSinceLastFrame;
+	//time might not be the same as real-time, but it is close. On the other hand it is a very accurate simulation.
+	mTime += timeSinceLastTick;
 
 	double output = mAmplitude
-			* sin(mFrequency * mTime / 1000.0f * M_PI + mXShift) + mYShift;
-	//clamp output to [0;1]
-	output = (output > 1) ? 1 : (output < 0) ? 0 : output;
+			* sin(mFrequency * mTime * 2.0f * M_PIl + mXShift) + mYShift;
 
 	setOutputValue(output);
 

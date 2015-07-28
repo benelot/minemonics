@@ -117,9 +117,9 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 	}
 }
 
-void Phenome::update(double timeSinceLastFrame) {
+void Phenome::update(double timeSinceLastTick) {
 
-	mPhenotypeModel->update(timeSinceLastFrame);
+	mPhenotypeModel->update(timeSinceLastTick);
 
 	// Update all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
