@@ -81,7 +81,7 @@ public:
 	/**
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
 	 */
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE = 1.0f / 60.0f; //0.001;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE = 0.001f;
 
 	static const int SIMULATOR_SECURITY_MARGIN = 5;
 
