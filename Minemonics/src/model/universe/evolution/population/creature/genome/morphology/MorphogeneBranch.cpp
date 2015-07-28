@@ -83,28 +83,28 @@ void MorphogeneBranch::initialize() {
 	/**
 	 * The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	 */
-	mJointYaw = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointPitch = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointRoll = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
+	mJointYaw = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
+	mJointPitch = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
+	mJointRoll = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
 
 	/**
-	 * The joint limits in each direction (pitch,yaw, roll)
+	 * The joint limits in each direction (pitch=1=Y,yaw=2=Z, roll=0=X)
 	 */
-	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
+	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>()/2.0f,
+			boost::math::constants::pi<double>()/2.0f);
+	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>()/2.0f,
+			boost::math::constants::pi<double>()/2.0f);
+	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
+	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
+	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
+	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(-boost::math::constants::pi<double>(),
+			boost::math::constants::pi<double>());
 
 	/**
 	 * Set whether the branch should be mirrored or flipped to the other side.
