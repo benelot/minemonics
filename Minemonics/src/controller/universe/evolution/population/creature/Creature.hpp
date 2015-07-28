@@ -70,7 +70,7 @@ public:
 	/**
 	 * Update the creature as it moves.
 	 */
-	void update(double timeSinceLastTick);
+	virtual void update(double timeSinceLastTick);
 
 	/**
 	 * Add the creature to the physics world.
@@ -80,12 +80,12 @@ public:
 	/**
 	 * Add the creature to the world.
 	 */
-	void addToWorld();
+	virtual void addToWorld();
 
 	/**
 	 * Remove the creature from the world.
 	 */
-	void removeFromWorld();
+	virtual void removeFromWorld();
 
 	// Facade accessor methods
 	void setPosition(const Ogre::Vector3 position) {
@@ -116,7 +116,7 @@ public:
 		return mCreatureModel->isCulled();
 	}
 
-private:
+protected:
 	/**
 	 * The boost logger.
 	 */

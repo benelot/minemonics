@@ -162,12 +162,24 @@ public:
 		mPhenotypeModel->setInWorld(inWorld);
 	}
 
+	std::vector<Joint*>& getJoints() {
+		return mJoints;
+	}
+
 	const std::vector<Joint*>& getJoints() const {
 		return mJoints;
 	}
 
+	std::vector<Limb*>& getLimbs() {
+		return mLimbs;
+	}
+
 	const std::vector<Limb*>& getLimbs() const {
 		return mLimbs;
+	}
+
+	PhenomeModel* getPhenotypeModel() {
+		return mPhenotypeModel;
 	}
 
 	const PhenomeModel* getPhenotypeModel() const {

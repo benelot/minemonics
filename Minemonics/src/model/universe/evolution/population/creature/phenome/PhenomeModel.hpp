@@ -177,6 +177,10 @@ public:
 		this->mInWorld = inWorld;
 	}
 
+	std::vector<Controller*>& getControllers() {
+		return mControllers;
+	}
+
 	const std::vector<Controller*>& getControllers() const {
 		return mControllers;
 	}
@@ -191,6 +195,22 @@ public:
 
 	void setDeveloped(const bool developed) {
 		mDeveloped = developed;
+	}
+
+	std::vector<JointModel*>& getJointModels() {
+		return mJointModels;
+	}
+
+	const std::vector<JointModel*>& getJointModels() const {
+		return mJointModels;
+	}
+
+	std::vector<LimbModel*>& getLimbModels() {
+		return mLimbModels;
+	}
+
+	const std::vector<LimbModel*>& getLimbModels() const {
+		return mLimbModels;
 	}
 
 private:

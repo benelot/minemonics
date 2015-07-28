@@ -205,6 +205,8 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
+
+
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
@@ -221,12 +223,12 @@ void SimulationManager::createScene(void) {
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
-//	// create a population
+	// create a population
 //	Population* earth2Population = new Population();
-//	earth2Population->initialize(earth, this, 100,
+//	earth2Population->initialize(earth, 100,
 //			EvolutionConfiguration::ROOT_POSITION);
-//
-//	// add earth population to earth
+
+	// add earth population to earth
 //	earth->addPopulation(earth2Population);
 
 	//perform embryogenesis on every creature that is not developed yet.

@@ -150,6 +150,14 @@ public:
 		return mLimbModel->getLimbPhysics();
 	}
 
+	LimbModel* getLimbModel() {
+		return mLimbModel;
+	}
+
+	const LimbModel* getLimbModel() const {
+		return mLimbModel;
+	}
+
 private:
 
 	/**

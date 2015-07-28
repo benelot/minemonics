@@ -165,6 +165,14 @@ public:
 		return mJointModel->getJointPhysics();
 	}
 
+	JointModel* getJointModel() {
+		return mJointModel;
+	}
+
+	const JointModel* getJointModel() const {
+		return mJointModel;
+	}
+
 private:
 	/**
 	 * The boost logger.

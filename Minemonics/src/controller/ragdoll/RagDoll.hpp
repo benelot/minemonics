@@ -59,24 +59,19 @@ class RagDoll: public Creature {
 		JOINT_COUNT
 	};
 
-	std::vector<Limb*> mLimbs;
-	std::vector<Joint*> mJoints;
-
-	btDynamicsWorld* mWorld;
-
 public:
-	RagDoll(double size,
+	RagDoll(Population* const population, double size,
 			const btVector3& positionOffset);
 
 	virtual ~RagDoll();
 
-	void update();
+	virtual void update(double timeSinceLastTick);
 
-	void addToWorld();
+	virtual void addToWorld();
 
-	void addToPhysicsWorld();
+	virtual void addToPhysicsWorld();
 
-	void removeFromWorld();
+	virtual void removeFromWorld();
 };
 
 #endif /* CONTROLLER_RAGDOLL_RAGDOLL_HPP_ */
