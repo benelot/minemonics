@@ -99,7 +99,6 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 			cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastTick);
-		(*cit)->getOutputValue();
 	}
 
 //
@@ -358,6 +357,8 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 									generator->getCurrentShrinkageFactor()
 									* morphogene->getZ()),
 							/*mass*/
+							//TODO: Root element is static, remove it
+//							(generator == rootGenerator)?0:
 							generator->getCurrentShrinkageFactor()
 							* morphogene->getX()
 							* generator->getCurrentShrinkageFactor()
@@ -424,7 +425,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 								joint->getMotors().begin(); motorIterator != joint->getMotors().end();
 								motorIterator++) {
 							SineController* controller = new SineController();
-							controller->initialize(0.5, 1, 0, 0);
+							controller->initialize(0.5f, 0.1f, 0, 0);
 							controller->addControlOutput((*motorIterator));
 							mControllers.push_back(controller);
 						}
@@ -441,22 +442,24 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 										morphogeneBranch->getJointRollMaxAngle()));
 
 						//set the angular stiffness of the joint
-						joint->setAngularStiffness(
-								morphogeneBranch->getJointPitchStiffness(),
-								morphogeneBranch->getJointYawStiffness(),
-								morphogeneBranch->getJointRollStiffness());
-
+//						joint->setAngularStiffness(
+//								morphogeneBranch->getJointPitchStiffness(),
+//								morphogeneBranch->getJointYawStiffness(),
+//								morphogeneBranch->getJointRollStiffness());
+						joint->setAngularStiffness(0,0,0);
 						//set the angular spring damping coefficients of the joint
-						joint->setAngularDamping(
-								morphogeneBranch->getSpringPitchDampingCoefficient(),
-								morphogeneBranch->getSpringYawDampingCoefficient(),
-								morphogeneBranch->getSpringRollDampingCoefficient());
+//						joint->setAngularDamping(
+//								morphogeneBranch->getSpringPitchDampingCoefficient(),
+//								morphogeneBranch->getSpringYawDampingCoefficient(),
+//								morphogeneBranch->getSpringRollDampingCoefficient());
+						joint->setAngularDamping(0,0,0);
 
 						//set if the angular motor is enabled
-						joint->enableAngularMotor(
-								morphogeneBranch->isJointPitchMotorEnabled(),
-								morphogeneBranch->isJointYawMotorEnabled(),
-								morphogeneBranch->isJointRollMotorEnabled());
+						//TODO: Reenable if working motors
+//						joint->enableAngularMotor(
+//								morphogeneBranch->isJointPitchMotorEnabled(),
+//								morphogeneBranch->isJointYawMotorEnabled(),
+//								morphogeneBranch->isJointRollMotorEnabled());
 					}
 
 					//iterate over all morphogene branches
@@ -648,7 +651,7 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 
 	/**The vector of joint models.*/
-	if(mJointModels.size() != phenomeModel.mJointModels.size()){
+	if (mJointModels.size() != phenomeModel.mJointModels.size()) {
 		return false;
 	}
 	std::vector<JointModel*>::const_iterator it3 = mJointModels.begin();
@@ -662,7 +665,7 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 
 	/**The vector of controllers.*/
-	if(mControllers.size() != phenomeModel.mControllers.size()){
+	if (mControllers.size() != phenomeModel.mControllers.size()) {
 		return false;
 	}
 	std::vector<Controller*>::const_iterator it5 = mControllers.begin();

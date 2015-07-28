@@ -60,8 +60,7 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	mG6DofJoint->setEquilibriumPoint();
 
 	mG6DofJoint->enableFeedback(true);
-	mJointFeedBack = new btJointFeedback();
-	mG6DofJoint->setJointFeedback(mJointFeedBack);
+	mG6DofJoint->setJointFeedback(new btJointFeedback());
 
 	//debug drawing
 	mG6DofJoint->setDbgDrawSize(btScalar(5.f));
@@ -84,12 +83,10 @@ JointBt::~JointBt() {
 
 	delete mG6DofJoint;
 	mG6DofJoint = NULL;
-
-	delete mJointFeedBack;
-	mJointFeedBack = NULL;
 }
 
 void JointBt::update() {
+
 	//apply motor forces
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 			motorIterator != mMotors.end(); motorIterator++) {

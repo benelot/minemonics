@@ -242,8 +242,6 @@ private:
 	 */
 	btGeneric6DofSpringConstraint* mG6DofJoint;
 
-	btJointFeedback* mJointFeedBack;
-
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.
 	 */

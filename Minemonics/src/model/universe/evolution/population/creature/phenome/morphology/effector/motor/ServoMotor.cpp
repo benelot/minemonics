@@ -45,21 +45,21 @@ void ServoMotor::initialize(const int jointMotorIndex,
 	mMotorBt = motorBt;
 	mMaxForce = maxForce;
 	mMaxSpeed = maxSpeed;
-	mMotorBt->m_maxMotorForce = 1000.0f;;
+	mMotorBt->m_maxMotorForce = 10.0f;
 	//TODO:: Check if this is the right velocity (it is not)
 	//mMotorBt->m_targetVelocity = mMaxSpeed;
 }
 
 void ServoMotor::apply() {
-	mMotorBt->m_enableMotor = true;
+	mMotorBt->m_enableMotor = mEnabled;
 //	mMotorBt->m_maxMotorForce = 1000000000.0f;
-	btScalar targetLimitAngle = mMotorBt->m_loLimit
+	btScalar targetAngle = mMotorBt->m_loLimit
 			+ getInputValue() * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
-	btScalar angleError = targetLimitAngle - mMotorBt->m_currentPosition;
-	mMotorBt->m_targetVelocity = 1000000.f * angleError;
-//	std::cout << mMotorBt << "::Input Value:   " << getInputValue() << "\t/MotorPosition:  "
-//			<< mMotorBt->m_currentPosition << "\t/targetVelocity: " << mMotorBt->m_targetVelocity
-//			<< std::endl;
+	btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
+	mMotorBt->m_targetVelocity =  1000000.f * angleError;
+	std::cout << mMotorBt << "::Input Value:   " << getInputValue() << "\t/MotorPosition:  "
+			<< mMotorBt->m_currentPosition << "\t/targetVelocity: " << mMotorBt->m_targetVelocity
+			<< std::endl;
 }
 
 ServoMotor* ServoMotor::clone() {

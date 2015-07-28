@@ -26,7 +26,7 @@
 class PhysicsConfiguration {
 public:
 
-	static const double REALITY_BULLET_GRAVITY_SCALING_FACTOR = 102;
+	static const double REALITY_BULLET_GRAVITY_SCALING_FACTOR = 30;
 
 	/**
 	 * No gravity

@@ -154,7 +154,7 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 
 btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
 		const btVector3 direction) {
-	return mDimensions.length() / 2.0f * direction.normalized();
+	return mDimensions.length() / 2.0f * direction.normalized() * 5.0f;
 }
 
 btVector3 LimbBt::getLocalIntersection(const btVector3 origin,

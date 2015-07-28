@@ -142,10 +142,10 @@ void SimulationManager::createScene(void) {
 	// Create the camera controlling node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
-					Ogre::Vector3(0, 500, 400));
-	mCamera->setPosition(0, 500, 400);
-	camNode->lookAt(Ogre::Vector3(0, 300, -4000), Ogre::Node::TS_WORLD);
+					EvolutionConfiguration::ROOT_POSITION+Ogre::Vector3(0,10,100));
+	mCamera->setPosition(EvolutionConfiguration::ROOT_POSITION+Ogre::Vector3(0,10,100));
 	camNode->attachObject(mCamera);
+	camNode->lookAt(EvolutionConfiguration::ROOT_POSITION, Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(12000);
 

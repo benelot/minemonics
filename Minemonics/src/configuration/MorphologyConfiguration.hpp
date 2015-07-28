@@ -28,13 +28,13 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 5;
+	static const double LIMB_MIN_SIZE = 0.1;
 	//Still pretty tiny, but a visible size
 
 	/**
 	 * The limb maximum dimension size
 	 */
-	static const double LIMB_MAX_SIZE = 100;
+	static const double LIMB_MAX_SIZE = 10;
 	//TODO: Optimize with bullet physics engine
 
 	/**
@@ -186,12 +186,12 @@ public:
 	/**
 	 * The initial branch number mean
 	 */
-	static const double BODY_BRANCH_INITIAL_MEAN = 5;
+	static const double BODY_BRANCH_INITIAL_MEAN = 2;
 
 	/**
 	 * The initial branch number variance
 	 */
-	static const double BODY_BRANCH_INITIAL_VAR = 5;
+	static const double BODY_BRANCH_INITIAL_VAR = 1;
 };
 
 #endif /* MORPHOLOGYCONFIGURATION_H_ */
