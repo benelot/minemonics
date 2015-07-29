@@ -16,9 +16,9 @@
 
 const int PhysicsConfiguration::SIMULATION_SPEEDS[] = {
 /*SIMULATION_SPEED_01*/
--2,
+-20,
 /*SIMULATION_SPEED_02*/
--1,
+-5,
 /*SIMULATION_SPEED_03*/
 0,
 /*SIMULATION_SPEED_04*/

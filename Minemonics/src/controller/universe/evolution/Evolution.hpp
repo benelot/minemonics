@@ -93,6 +93,8 @@ public:
 	const std::vector<Population*>& getPopulations() const {
 		return mPopulations;
 	}
+
+	int getTotalCreatureQty();
 private:
 	/**
 	 * The boost logger.

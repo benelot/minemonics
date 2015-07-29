@@ -273,7 +273,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 							mBoostLogger, boost::log::trivial::info)
 					<< "Recording video started.";
 
-//This even works on if the screen gets resized
+					//This even works on if the screen gets resized
 					SimulationManager::getSingleton()->getVideoWriter().setup(SimulationManager::getSingleton(),videoName.c_str(),SimulationManager::getSingleton()->getWindow()->getWidth(),SimulationManager::getSingleton()->getWindow()->getHeight());
 				}
 				break;

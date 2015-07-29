@@ -20,8 +20,9 @@
 
 BoostLogger EvaluationController::mBoostLogger; /*<! initialize the boost logger*/
 EvaluationController::_Init EvaluationController::_initializer;
-EvaluationController::EvaluationController() : mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(
-				0), mPaused(false),mUniverse(NULL) {
+EvaluationController::EvaluationController() :
+		mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0), mPaused(
+				false), mUniverse(NULL) {
 }
 
 EvaluationController::~EvaluationController() {
@@ -67,7 +68,8 @@ void EvaluationController::scheduleEvaluations() {
 				&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
 			mCurrentlyRunningEvaluationsQty++;
 			(*eit)->setup();
-			SimulationManager::getSingleton()->getViewController().setEvaluationInView(*eit);
+			SimulationManager::getSingleton()->getViewController().setEvaluationInView(
+					*eit);
 		}
 	}
 }
@@ -83,7 +85,11 @@ void EvaluationController::update(const double timeSinceLastTick) {
 	}
 	scheduleEvaluations();
 
-	while(mEvaluations.size() < mParallelEvaluationsQty){
-		mUniverse->proceedEvaluation();
+	//breaks when there are no creatures on the planets to evaluate
+	while (mEvaluations.size() < mParallelEvaluationsQty
+			&& mUniverse->getTotalCreatureQty() != 0) {
+		if (!mUniverse->proceedEvaluation()) {
+			break;
+		}
 	}
 }

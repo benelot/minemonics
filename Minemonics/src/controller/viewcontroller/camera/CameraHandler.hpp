@@ -78,8 +78,17 @@ public:
 	void moveZ(double z);
 
 	//Accessor methods
-	const Ogre::SceneNode* getCamNode() const;
-	void setCamNode(Ogre::SceneNode* camNode);
+	Ogre::SceneNode* getCamNode() {
+		return mCamNode;
+	}
+
+	const Ogre::SceneNode* getCamNode() const {
+		return mCamNode;
+	}
+
+	void setCamNode(Ogre::SceneNode* camNode) {
+		mCamNode = camNode;
+	}
 
 private:
 	/**

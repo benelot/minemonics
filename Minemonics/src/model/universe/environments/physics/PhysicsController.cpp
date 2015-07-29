@@ -1,10 +1,3 @@
-/*
- * PhysicsController.cpp
- *
- *  Created on: Mar 3, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/environments/physics/PhysicsController.hpp>
 //# forward declarations
@@ -23,7 +16,8 @@
 PhysicsController::PhysicsController() :
 		mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
 		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(
-		NULL), mSimulationSpeed(50) {
+		NULL), mSimulationSpeed(
+				pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)) {
 
 }
 

@@ -254,3 +254,20 @@ void Evolution::performEmbryogenesis() {
 		}
 	}
 }
+
+int Evolution::getTotalCreatureQty(){
+	int creatureQty = 0;
+	//for each population...
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
+
+
+		//for each creature in the population
+		for (std::vector<Creature*>::iterator cit =
+				(*pit)->getCreatures().begin();
+				cit != (*pit)->getCreatures().end(); cit++) {
+			creatureQty++;
+		}
+	}
+	return creatureQty;
+}

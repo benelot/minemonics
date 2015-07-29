@@ -11,6 +11,8 @@
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 #include <controller/universe/environments/Plane.hpp>
@@ -37,8 +39,7 @@ Plane::~Plane() {
 //	They are all deleted in environment
 }
 
-void Plane::initialize(const Ogre::Light* const l,
-		OgreBtDebugDrawer* const debugDrawer) {
+void Plane::initialize(const Ogre::Light* const l) {
 	Environment::initialize(Environment::PLANE);
 
 	// setup the planet model
@@ -52,7 +53,7 @@ void Plane::initialize(const Ogre::Light* const l,
 	// set up the physics controller
 	mEnvironmentModel->setPhysicsController(new PhysicsController());
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
-	mEnvironmentModel->getPhysicsController()->setDebugDrawer(debugDrawer);
+	mEnvironmentModel->getPhysicsController()->setDebugDrawer(&(SimulationManager::getSingleton()->getDebugDrawer()));
 }
 
 void Plane::update(double timeSinceLastTick) {

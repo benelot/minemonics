@@ -52,7 +52,8 @@ ViewController::~ViewController() {
 }
 
 void ViewController::initialize(SimulationManager* const simulationManager,
-		Ogre::RenderTarget* const renderTarget, StateHandler* const stateHandler) {
+		Ogre::RenderTarget* const renderTarget,
+		StateHandler* const stateHandler) {
 
 	// CEGUI
 	// with a scene manager and window, we can create a the GUI renderer
@@ -118,12 +119,15 @@ void ViewController::initialize(SimulationManager* const simulationManager,
 
 	mInfoOverlay.initialize(simulationManager->getCamera());
 
-	//TODO: Add light to the camera like a head light of a miner
-	//	Ogre::Light* light = mSceneMgr->createLight("tstLight");
-	//	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	//	light->setDirection(lightdir);
-	//	light->setDiffuseColour(Ogre::ColourValue::White);
-	//	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
+	//Add light to the camera like a head light of a miner
+	Ogre::Light* light = simulationManager->getSceneManager()->createLight(
+			"headLight");
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
+	light->setPosition(simulationManager->getCamera()->getPosition());
+	light->setDirection(simulationManager->getCamera()->getDirection());
+	light->setDiffuseColour(Ogre::ColourValue::White);
+	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
+	simulationManager->getCameraHandler().getCamNode()->attachObject(light);
 
 }
 
@@ -134,7 +138,8 @@ void ViewController::update(const double timeSinceLastFrame) {
 
 }
 
-void ViewController::notifyDisplaySizeChanged(const float width, const float height) {
+void ViewController::notifyDisplaySizeChanged(const float width,
+		const float height) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
 }
 

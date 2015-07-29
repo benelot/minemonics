@@ -53,7 +53,7 @@ public:
 	/**
 	 * Proceed with the evaluation. In in serial mode, this just goes on to the next evaluation, in parallel, this schedules one more evaluation.
 	 */
-	void proceedEvaluation();
+	bool proceedEvaluation();
 
 	/**
 	 * Draw the debug world if debug drawing is enabled.
@@ -97,6 +97,8 @@ public:
 	EvaluationController& getEvaluationController() {
 		return mEvaluationController;
 	}
+
+	int getTotalCreatureQty();
 
 private:
 	/**

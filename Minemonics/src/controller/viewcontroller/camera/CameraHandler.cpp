@@ -47,14 +47,6 @@ void CameraHandler::rotate(int pitch, int yaw, int roll) {
 			Ogre::Node::TS_LOCAL);
 }
 
-const Ogre::SceneNode* CameraHandler::getCamNode() const {
-	return mCamNode;
-}
-
-void CameraHandler::setCamNode(Ogre::SceneNode* camNode) {
-	mCamNode = camNode;
-}
-
 void CameraHandler::move(double x, double y, double z) {
 	moveX(x);
 	moveY(y);

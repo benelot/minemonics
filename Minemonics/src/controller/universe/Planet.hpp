@@ -30,18 +30,9 @@
  */
 class Planet {
 public:
-	Planet(const Environment::EnvironmentType type,
-			OgreBtDebugDrawer* const debugDrawer, const int evaluationTime);
+	Planet(const Environment::EnvironmentType type, const int evaluationTime);
 	Planet(PlanetModel* const planetModel);
 	virtual ~Planet();
-
-	/**
-	 * Initialize the planet.
-	 * @param simulationManager The simulation manager.
-	 * @param type The type of the environment.
-	 * @param debugDrawer The debug drawer of this simulation.
-	 */
-	void initialize(const Environment::EnvironmentType type, OgreBtDebugDrawer* const debugDrawer,const int evaluationTime);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not yet developed.
@@ -105,6 +96,8 @@ public:
 		return mPlanetModel;
 	}
 
+	int getTotalCreatureQty();
+
 private:
 	/**
 	 * The boost logger.
@@ -118,8 +111,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Planet"));
+					boost::log::attributes::constant<std::string>("Planet"));
 		}
 	} _initializer;
 

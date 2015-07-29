@@ -51,7 +51,7 @@ void Universe::addPlanet(Planet* const planet) {
 	mUniverseModel.addPlanetModel(planet->getPlanetModel());
 }
 
-void Universe::proceedEvaluation() {
+bool Universe::proceedEvaluation() {
 	// if there are planets in the universe
 	if (mPlanets.size() != 0) {
 		// if the evaluation of the certain planet goes into the next generation, we go to the next planet.
@@ -64,7 +64,12 @@ void Universe::proceedEvaluation() {
 							0);
 		}
 	}
+	else
+	{
+		return false;
+	}
 	mUniverseModel.proceedEvaluation();
+	return true;
 }
 
 void Universe::setSimulationSpeed(double simulationSpeed){
@@ -90,4 +95,13 @@ void Universe::drawDebugWorld() {
 
 void Universe::update(const double timeSinceLastTick) {
 	mEvaluationController.update(timeSinceLastTick);
+}
+
+int Universe::getTotalCreatureQty(){
+	int totalCreatureQty = 0;
+	std::vector<Planet*>::iterator pit = mPlanets.begin();
+	for (; pit != mPlanets.end(); pit++) {
+		totalCreatureQty +=(*pit)->getTotalCreatureQty();
+	}
+	return totalCreatureQty;
 }

@@ -43,9 +43,8 @@ public:
 	/**
 	 * Initialize the plane environment.
 	 * @param l The general light source.
-	 * @param debugDrawer The debug drawer of the simulation.
 	 */
-	void initialize(const Ogre::Light* const l, OgreBtDebugDrawer* const debugDrawer);
+	void initialize(const Ogre::Light* const l);
 
 	/**
 	 * Update the plane environment.

@@ -57,7 +57,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 
 	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	Ogre::String materialName = boost::lexical_cast<std::string>(this) + "/"
-			+ "Limb";
+			+ "LimbMaterial";
 
 	// add the true as the last parameter to make it a manual material
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
@@ -81,7 +81,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	tex->setTextureAnisotropy(8);
 
 	mLimbEntityNode =
-			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
+			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name+"Node");
 	switch (limbModel->getPrimitiveType()) {
 	case LimbModel::BLOCK:
 
@@ -124,7 +124,7 @@ LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
 	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	mLimbEntity = limbO3D.mLimbEntity->clone(name);
 	mLimbEntityNode =
-			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
+			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name + "Node");
 	mLimbEntityNode->setPosition(limbO3D.mLimbModel->getPosition());
 	mLimbEntityNode->setOrientation(limbO3D.mLimbModel->getOrientation());
 }

@@ -29,7 +29,7 @@
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
 Planet::Planet(const Environment::EnvironmentType type,
-		OgreBtDebugDrawer* const debugDrawer, const int evaluationTime) :
+		const int evaluationTime) :
 		mEnvironment(NULL) {
 	mPlanetModel = new PlanetModel();
 
@@ -48,7 +48,9 @@ Planet::Planet(const Environment::EnvironmentType type,
 	case Environment::PLANE: {
 		//create the terrain
 		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(NULL, debugDrawer);
+		((Plane*) mEnvironment)->initialize(
+				(Ogre::Light*) SimulationManager::getSingleton()->getCameraHandler().getCamNode()->getAttachedObject(
+						"headLight"));
 		break;
 	}
 	}
@@ -104,4 +106,8 @@ void Planet::drawDebugWorld() {
 
 void Planet::performEmbryogenesis() {
 	mEvolution.performEmbryogenesis();
+}
+
+int Planet::getTotalCreatureQty() {
+	return mEvolution.getTotalCreatureQty();
 }

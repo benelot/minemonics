@@ -93,7 +93,7 @@ public:
 	/**
 	 * A box of unit size in ogre has the size of 96.9 in bullet
 	 */
-	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.013;
+	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.01;
 
 	/**
 	 * Bullet box to capsule scaling factor

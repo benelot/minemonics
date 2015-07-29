@@ -90,7 +90,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mSdlWindow(
-		NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_03) {
+		NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -210,7 +210,7 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, &mDebugDrawer, 1000);
+	Planet* earth = new Planet(Environment::PLANE, 1000);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
@@ -522,16 +522,6 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
  * Destroy the scene if the application is quit.
  */
 void SimulationManager::destroyScene(void) {
-//	std::vector<RagDoll*>::iterator it = mRagdolls.begin();
-//	for (; it != mRagdolls.end(); it++) {
-//		(*it)->removeFromWorld();
-//	}
-
-	//mUniverse.removeFromWorld();
-
-//TODO: Clean up universe properly
-//	mPhysicsController.exitBulletPhysics();
-
 }
 //-------------------------------------------------------------------------------------
 

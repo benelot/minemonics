@@ -128,8 +128,14 @@ OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 
 void OgreBtDebugDrawer::drawLine(const btVector3 &from, const btVector3 &to,
 		const btVector3 &color) {
+	if(color == btVector3(0,0,0)){
+		drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
+					Ogre::ColourValue(1,1,1));
+	}
+	else{
 	drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
 			Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
+	}
 }
 
 void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
@@ -167,6 +173,7 @@ void OgreBtDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
 void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 		const Ogre::Vector3& v1, const Ogre::Vector3& v2,
 		const Ogre::ColourValue color, const Ogre::Real alpha) {
+	//TODO:Seems to draw random triangles. Fix it #129.
 	if (mDebugMode > 0 && mDebugDrawingEnabled) {
 		if (mDrawable) {
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
