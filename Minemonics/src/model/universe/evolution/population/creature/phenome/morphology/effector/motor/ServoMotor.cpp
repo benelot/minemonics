@@ -56,10 +56,11 @@ void ServoMotor::apply() {
 	btScalar targetAngle = mMotorBt->m_loLimit
 			+ getInputValue() * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
 	btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
-	mMotorBt->m_targetVelocity =  1000000.f * angleError;
-	std::cout << mMotorBt << "::Input Value:   " << getInputValue() << "\t/MotorPosition:  "
-			<< mMotorBt->m_currentPosition << "\t/targetVelocity: " << mMotorBt->m_targetVelocity
-			<< std::endl;
+	mMotorBt->m_targetVelocity = 500.f * angleError;
+	std::cout << mMotorBt << "::Input Value:   " << getInputValue()
+			<< "\t/MotorPosition(error):  " << mMotorBt->m_currentPosition
+			<< "/" << angleError << "\t/targetVelocity: "
+			<< mMotorBt->m_targetVelocity << std::endl;
 }
 
 ServoMotor* ServoMotor::clone() {
