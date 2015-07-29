@@ -68,7 +68,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	LimbModel::PrimitiveType type = LimbModel::CAPSULE;
 
 	bool enableMotor = false;
-	int gapSize = size * 10.1f;
+	int gapSize = size * 1.3f;
 
 	// Setup the geometry
 	// BODYPART_PELVIS
@@ -121,7 +121,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2), 0);
+			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2), 1);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -477,7 +477,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * -0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, M_PI_2);
+	localB.getBasis().setEulerZYX(0, 0, -M_PI_4);
 	localB.setOrigin(
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
@@ -539,7 +539,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * 0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, M_PI_2);
+	localB.getBasis().setEulerZYX(0, 0, -M_PI_4);
 	localB.setOrigin(
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
