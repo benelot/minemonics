@@ -42,15 +42,17 @@ Planet::Planet(const Environment::EnvironmentType type,
 	switch (type) {
 	case Environment::HILLS: {
 		//		mEnvironment = new Hills();
-		//		((Hills*) mEnvironment)->initialize(this, NULL,debugDrawer);
+		//		((Hills*) mEnvironment)->initialize(this, NULL);
 		break;
 	}
 	case Environment::PLANE: {
 		//create the terrain
 		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(
-				(Ogre::Light*) SimulationManager::getSingleton()->getCameraHandler().getCamNode()->getAttachedObject(
-						"headLight"));
+		((Plane*) mEnvironment)->initialize(NULL);
+		//TODO: Improve the head light #134.
+//		((Plane*) mEnvironment)->initialize(
+//				(Ogre::Light*) SimulationManager::getSingleton()->getCameraHandler().getCamNode()->getAttachedObject(
+//						"headLight"));
 		break;
 	}
 	}

@@ -119,15 +119,15 @@ void ViewController::initialize(SimulationManager* const simulationManager,
 
 	mInfoOverlay.initialize(simulationManager->getCamera());
 
-	//Add light to the camera like a head light of a miner
-	Ogre::Light* light = simulationManager->getSceneManager()->createLight(
-			"headLight");
-	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setPosition(simulationManager->getCamera()->getPosition());
-	light->setDirection(simulationManager->getCamera()->getDirection());
-	light->setDiffuseColour(Ogre::ColourValue::White);
-	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
-	simulationManager->getCameraHandler().getCamNode()->attachObject(light);
+	// TODO: Add light to the camera like a head light of a miner #134.
+//	Ogre::Light* light = simulationManager->getSceneManager()->createLight(
+//			"headLight");
+//	light->setType(Ogre::Light::LT_DIRECTIONAL);
+//	light->setPosition(simulationManager->getCamera()->getPosition());
+//	light->setDirection(simulationManager->getCamera()->getDirection());
+//	light->setDiffuseColour(Ogre::ColourValue::White);
+//	light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
+//	simulationManager->getCameraHandler().getCamNode()->attachObject(light);
 
 }
 

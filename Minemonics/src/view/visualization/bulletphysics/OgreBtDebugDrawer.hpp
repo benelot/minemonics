@@ -221,11 +221,12 @@ private:
 
 	bool mDebugDrawingEnabled;
 
-    Ogre::OverlayManager *olm;
-    Ogre::OverlayContainer *panel;
-    Ogre::Overlay *overlay;
-    Ogre::TextAreaOverlayElement *textArea;
-    Ogre::String szElement;
+	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
+//    Ogre::OverlayManager *olm;
+//    Ogre::OverlayContainer *panel;
+//    Ogre::Overlay *overlay;
+//    Ogre::TextAreaOverlayElement *textArea;
+//    Ogre::String szElement;
 
 	const char* getMatName() {
 		return "OgreBulletCollisionsDebugDefault";

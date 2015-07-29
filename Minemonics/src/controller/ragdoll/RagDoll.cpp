@@ -65,10 +65,10 @@ RagDoll::RagDoll(Population* const population, double size,
 	btTransform transform;
 	btTransform localA, localB;
 
-	LimbModel::PrimitiveType type = LimbModel::BLOCK;
+	LimbModel::PrimitiveType type = LimbModel::CAPSULE;
 
 	bool enableMotor = false;
-	int gapSize = size * 1.0f;
+	int gapSize = size * 10.1f;
 
 	// Setup the geometry
 	// BODYPART_PELVIS
@@ -473,7 +473,7 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	localA.setIdentity();
 	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, 0, M_PI);
+	localA.getBasis().setEulerZYX(M_PI, 0, 0);
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * -0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
@@ -485,8 +485,8 @@ RagDoll::RagDoll(Population* const population, double size,
 	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_SPINE],
 			mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM], localA, localB, 0,
 			0, 0);
-	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, 0),
-			Ogre::Vector3(M_PI_2, M_PI_2, 0));
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
+			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
 	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
 			Ogre::Vector3(1000, 1000, 1000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
@@ -535,7 +535,7 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	localA.setIdentity();
 	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, 0, 0);
+	localA.getBasis().setEulerZYX(0, 0, M_PI);
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * 0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
@@ -547,8 +547,8 @@ RagDoll::RagDoll(Population* const population, double size,
 	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_SPINE],
 			mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_ARM], localA, localB, 0,
 			0, 0);
-	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, 0),
-			Ogre::Vector3(M_PI_2, M_PI_2, 0));
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
+			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);

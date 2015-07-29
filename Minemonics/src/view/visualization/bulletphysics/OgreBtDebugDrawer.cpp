@@ -50,7 +50,9 @@ OgreBtDebugDrawer::OgreBtDebugDrawer() :
 		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(false), mClear(
 				0), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
 		NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
-		NULL), textArea(NULL), olm(NULL), overlay(NULL), panel(NULL) {
+		NULL)
+//, textArea(NULL), olm(NULL), overlay(NULL), panel(NULL)
+{
 }
 
 void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
@@ -91,25 +93,25 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
 
 	//for the ogre text
 	Ogre::Root::getSingleton().addFrameListener(this);
-
-	olm = Ogre::OverlayManager::getSingletonPtr();
-	panel = static_cast<Ogre::OverlayContainer*>(olm->createOverlayElement(
-			"Panel", "OGREBTDEBUGDRAWER_GUI"));
-	panel->setMetricsMode(Ogre::GMM_PIXELS);
-	panel->setPosition(0, 0);
-	panel->setDimensions(1.0f, 1.0f);
-	overlay = olm->create("OGREBTDEBUGDRAWER_OVERLAY");
-	overlay->add2D(panel);
-
-	szElement = "element_";
-	overlay = olm->getByName("OGREBTDEBUGDRAWER_OVERLAY");
-	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement(
-			"OGREBTDEBUGDRAWER_GUI"));
-	textArea =
-			static_cast<Ogre::TextAreaOverlayElement*>(olm->createOverlayElement(
-					"TextArea", szElement));
-	panel->addChild(textArea);
-	overlay->show();
+	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
+//	olm = Ogre::OverlayManager::getSingletonPtr();
+//	panel = static_cast<Ogre::OverlayContainer*>(olm->createOverlayElement(
+//			"Panel", "OGREBTDEBUGDRAWER_GUI"));
+//	panel->setMetricsMode(Ogre::GMM_PIXELS);
+//	panel->setPosition(0, 0);
+//	panel->setDimensions(1.0f, 1.0f);
+//	overlay = olm->create("OGREBTDEBUGDRAWER_OVERLAY");
+//	overlay->add2D(panel);
+//
+//	szElement = "element_";
+//	overlay = olm->getByName("OGREBTDEBUGDRAWER_OVERLAY");
+//	panel = static_cast<Ogre::OverlayContainer*>(olm->getOverlayElement(
+//			"OGREBTDEBUGDRAWER_GUI"));
+//	textArea =
+//			static_cast<Ogre::TextAreaOverlayElement*>(olm->createOverlayElement(
+//					"TextArea", szElement));
+//	panel->addChild(textArea);
+//	overlay->show();
 
 }
 
@@ -117,12 +119,12 @@ OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 	Ogre::Root::getSingleton().removeFrameListener(this);
 	delete mLines;
 	delete mTriangles;
-
-	szElement = "element_";
-	olm->destroyOverlayElement(szElement);
-
-	olm->destroyOverlayElement("OGREBTDEBUGDRAWER_GUI");
-	olm->destroy("OGREBTDEBUGDRAWER_OVERLAY");
+	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
+//	szElement = "element_";
+//	olm->destroyOverlayElement(szElement);
+//
+//	olm->destroyOverlayElement("OGREBTDEBUGDRAWER_GUI");
+//	olm->destroy("OGREBTDEBUGDRAWER_OVERLAY");
 
 }
 
