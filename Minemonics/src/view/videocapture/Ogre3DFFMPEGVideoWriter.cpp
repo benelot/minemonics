@@ -1,4 +1,6 @@
 //# corresponding header
+#include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -28,10 +30,8 @@ extern "C" {
 //## view headers
 //## utils headers
 
-#include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
-
-void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
-		const char* filename, int width, int height, int bitrate,float timebasefactor) {
+void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
+		int bitrate, float timebasefactor) {
 
 	mTimebasefactor = timebasefactor;
 	// main frame timer initialization
@@ -40,14 +40,14 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 	mRuntime = mNow - mStart;
 
 	mVideoTexture =
-			simulationManager->getRoot()->getTextureManager()->createManual(
+			SimulationManager::getSingleton()->getRoot()->getTextureManager()->createManual(
 					"VideoTex",
 					Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 					Ogre::TEX_TYPE_2D, width, height, 0, Ogre::PF_R8G8B8_UINT,
 					Ogre::TU_RENDERTARGET);
 
 	mRenderTexture = mVideoTexture->getBuffer()->getRenderTarget();
-	mRenderTexture->addViewport(simulationManager->getCamera());
+	mRenderTexture->addViewport(SimulationManager::getSingleton()->getCamera());
 	mRenderTexture->getViewport(0)->setClearEveryFrame(true);
 	mRenderTexture->getViewport(0)->setBackgroundColour(
 			Ogre::ColourValue::Black);
@@ -65,7 +65,8 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 	if (!mAvFormatContext) {
 		printf(
 				"Could not deduce output format from file extension: using MPEG.\n");
-		avformat_alloc_output_context2(&mAvFormatContext, NULL, "mp4", filename);
+		avformat_alloc_output_context2(&mAvFormatContext, NULL, "mp4",
+				filename);
 	}
 	if (!mAvFormatContext) {
 		fprintf(stderr, "could not create AVFormat context\n");
@@ -148,7 +149,8 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 			fprintf(stderr, "Could not open codec: %s\n", av_err2str(ret));
 			exit(1);
 		} else {
-			printf("opened %s\n", avcodec_get_name(mAVOutputFormat->video_codec));
+			printf("opened %s\n",
+					avcodec_get_name(mAVOutputFormat->video_codec));
 		}
 //        } else
 //            printf("raw video, no codec\n");
@@ -158,8 +160,9 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 		mAVFrame->linesize[0] = -1;
 		mAVFrame->format = mAVCodecContext->pix_fmt;
 
-		ret = av_image_alloc(mAVFrame->data, mAVFrame->linesize, mAVCodecContext->width,
-				mAVCodecContext->height, (AVPixelFormat) mAVFrame->format, 32);
+		ret = av_image_alloc(mAVFrame->data, mAVFrame->linesize,
+				mAVCodecContext->width, mAVCodecContext->height,
+				(AVPixelFormat) mAVFrame->format, 32);
 		if (ret < 0) {
 			fprintf(stderr, "Could not allocate raw picture buffer: %s\n",
 					av_err2str(ret));
@@ -169,15 +172,15 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 					"allocated picture of size %d (ptr %x), linesize %d %d %d %d\n",
 					ret, mAVFrame->data[0], mAVFrame->linesize[0],
 					mAVFrame->linesize[1], mAVFrame->linesize[2],
-					 mAVFrame->linesize[3]);
+					mAVFrame->linesize[3]);
 		}
 
 		mPictureRGB24 = avcodec_alloc_frame();
 		mPictureRGB24->format = AV_PIX_FMT_0RGB32;
 
 		if ((ret = av_image_alloc(mPictureRGB24->data, mPictureRGB24->linesize,
-				mAVCodecContext->width, mAVCodecContext->height, (AVPixelFormat) mPictureRGB24->format, 24))
-				< 0) {
+				mAVCodecContext->width, mAVCodecContext->height,
+				(AVPixelFormat) mPictureRGB24->format, 24)) < 0) {
 			fprintf(stderr, "cannot allocate RGB temp image\n");
 			exit(1);
 		} else
@@ -194,7 +197,8 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 	/* open the output file, if needed */
 	if (!(mAVOutputFormat->flags & AVFMT_NOFILE)) {
 		int ret;
-		if ((ret = avio_open(&mAvFormatContext->pb, filename, AVIO_FLAG_WRITE)) < 0) {
+		if ((ret = avio_open(&mAvFormatContext->pb, filename, AVIO_FLAG_WRITE))
+				< 0) {
 			fprintf(stderr, "Could not open '%s': %s\n", filename,
 					av_err2str(ret));
 			exit(1);
@@ -209,8 +213,9 @@ void Ogre3DFFMPEGVideoWriter::setup(SimulationManager* simulationManager,
 	}
 
 	/* get sws context for RGB24 -> YUV420 conversion */
-	mSwsContext = sws_getContext(mAVCodecContext->width, mAVCodecContext->height,
-			(AVPixelFormat) mPictureRGB24->format, mAVCodecContext->width, mAVCodecContext->height,
+	mSwsContext = sws_getContext(mAVCodecContext->width,
+			mAVCodecContext->height, (AVPixelFormat) mPictureRGB24->format,
+			mAVCodecContext->width, mAVCodecContext->height,
 			(AVPixelFormat) mAVFrame->format,
 			SWS_BICUBIC, NULL, NULL, NULL);
 	if (!mSwsContext) {
@@ -254,7 +259,8 @@ void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest, long int timestamp) {
 			int got_packet;
 			av_init_packet(&pkt);
 			/* encode the image */
-			ret = avcodec_encode_video2(mAVCodecContext, &pkt, mAVFrame, &got_packet);
+			ret = avcodec_encode_video2(mAVCodecContext, &pkt, mAVFrame,
+					&got_packet);
 			if (ret < 0) {
 				fprintf(stderr, "Error encoding video frame: %s\n",
 						av_err2str(ret));
@@ -275,8 +281,8 @@ void Ogre3DFFMPEGVideoWriter::addFrame(Ogre::uint8* pDest, long int timestamp) {
 		} else {
 			//std::cout << "pts::" << picture->pts << "/avrescale::" << av_rescale_q(timestamp, video_st->codec->time_base,
 			//		video_st->time_base) << std::endl;
-			mAVFrame->pts += av_rescale_q(timestamp, mAVStream->codec->time_base,
-					mAVStream->time_base);
+			mAVFrame->pts += av_rescale_q(timestamp,
+					mAVStream->codec->time_base, mAVStream->time_base);
 		}
 		frame_count++;
 	}
@@ -312,6 +318,7 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 
 	if (mWriterInitialized) {
 		// main frame timer update
+		mPrevious = mNow;
 		mNow = boost::posix_time::microsec_clock::local_time();
 		mRuntime = mNow - mStart;
 
@@ -327,7 +334,9 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 		//TODO: If video colors are wrong in the video, check the value of
 		// pb.format in OgrePixelFormat.h and set picture_rgb24->format in setup accordingly
 		//std::cout << "diff::" << mRuntime.total_milliseconds()/(0.5f*1000.0f/mTimebasefactor) << std::endl;
-		addFrame(pDest, mRuntime.total_milliseconds()/(0.5f*1000.0f/mTimebasefactor));
+				addFrame(pDest,
+						mRuntime.total_milliseconds()
+								/ (1000.0f/(mNow-mPrevious).total_milliseconds() / mTimebasefactor));
 		mStart = boost::posix_time::microsec_clock::local_time();
 
 		buffer->unlock();

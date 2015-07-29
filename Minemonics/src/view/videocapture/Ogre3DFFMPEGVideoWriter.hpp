@@ -65,12 +65,12 @@ public:
 	/**
 	 * setup the video writer
 	 * @param output filename, the codec and format will be determined by it. (e.g. "xxx.mpg" will create an MPEG1 file)
-	 * @param width of the frame
-	 * @param height of the frame
-	 * @param the bitrate
-	 * @param the framerate
+	 * @param width width of the frame
+	 * @param height height of the frame
+	 * @param bitrate the bitrate of the video
+	 * @param timebasefactor the timebasefactor
 	 **/
-	void setup(SimulationManager* simulationManager, const char* filename,
+	void setup(const char* filename,
 			int width, int height, int bitrate = 800000, float timebasefactor =
 					200);
 	/**
@@ -94,6 +94,7 @@ public:
 
 private:
 	boost::posix_time::ptime mStart;
+	boost::posix_time::ptime mPrevious;
 	boost::posix_time::ptime mNow;
 	boost::posix_time::time_duration mRuntime;
 	float mTimebasefactor;
