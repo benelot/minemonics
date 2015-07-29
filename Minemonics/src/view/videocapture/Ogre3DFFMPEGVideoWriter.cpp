@@ -333,10 +333,14 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 
 		//TODO: If video colors are wrong in the video, check the value of
 		// pb.format in OgrePixelFormat.h and set picture_rgb24->format in setup accordingly
-		//std::cout << "diff::" << mRuntime.total_milliseconds()/(0.5f*1000.0f/mTimebasefactor) << std::endl;
-				addFrame(pDest,
-						mRuntime.total_milliseconds()
-								/ (1000.0f/(mNow-mPrevious).total_milliseconds() / mTimebasefactor));
+//		std::cout << "diff::"
+//				<< mRuntime.total_milliseconds()
+//						/ (1000.0f / (mNow - mPrevious).total_milliseconds()
+//								/ mTimebasefactor) << std::endl;
+		addFrame(pDest,
+				mRuntime.total_milliseconds()
+						/ (1000.0f / (mNow - mPrevious).total_milliseconds()
+								/ mTimebasefactor));
 		mStart = boost::posix_time::microsec_clock::local_time();
 
 		buffer->unlock();
