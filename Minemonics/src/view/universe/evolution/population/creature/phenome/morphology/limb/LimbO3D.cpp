@@ -134,7 +134,7 @@ LimbO3D::~LimbO3D() {
 	delete mLimbEntity;
 }
 
-void LimbO3D::update() {
+void LimbO3D::update(double timeSinceLastTick) {
 	// get the rigid body of the limb
 	btRigidBody* body =
 			((LimbBt*) mLimbModel->getLimbPhysics())->getRigidBody();

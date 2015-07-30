@@ -44,6 +44,10 @@ void JointModel::initialize(btDynamicsWorld* const world,
 	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
 }
 
+void JointModel::update(double timeSinceLastTick){
+	mJointPhysics->update(timeSinceLastTick);
+}
+
 void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {
 	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);

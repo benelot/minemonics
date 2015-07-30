@@ -45,7 +45,6 @@ Limb::Limb() :
 		mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Limb created.";
 	mLimbModel = new LimbModel();
-	//TODO: Fix this!
 }
 
 Limb::Limb(const Limb& limb) :
@@ -65,7 +64,7 @@ Limb::Limb(Creature* const creature, LimbModel* const limbModel) {
 	mLimbGraphics = new LimbO3D(mLimbModel);
 
 //	// Update the state of the limb.
-	update();
+	update(0);
 }
 
 Limb::~Limb() {
@@ -104,15 +103,15 @@ void Limb::initialize(Creature* const creature,
 	mLimbGraphics = new LimbO3D(mLimbModel);
 
 	// Update the state of the limb.
-	update();
+	update(0);
 }
 
 /**
  * Update the state of the limb.
  */
-void Limb::update() {
+void Limb::update(double timeSinceLastTick) {
 	//update the limb graphics
-	mLimbGraphics->update();
+	mLimbGraphics->update(timeSinceLastTick);
 }
 
 void Limb::reset(const Ogre::Vector3 position) {

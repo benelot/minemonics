@@ -39,7 +39,7 @@ public:
 	/**
 	 * Update the graphical representation of the limb with the physical representation.
 	 */
-	virtual void update();
+	virtual void update(double timeSinceLastTick);
 
 	/**
 	 * Add the limb to the graphical world.

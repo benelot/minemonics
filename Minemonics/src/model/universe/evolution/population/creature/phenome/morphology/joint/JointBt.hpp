@@ -70,7 +70,7 @@ public:
 	/**
 	 * Update the joint bullet physics model.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Add the joint bullet physics model to the world.

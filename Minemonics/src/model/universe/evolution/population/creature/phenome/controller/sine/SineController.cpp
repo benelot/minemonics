@@ -49,6 +49,8 @@ void SineController::perform(const double timeSinceLastTick) {
 	double output = mAmplitude
 			* sin(mFrequency * mTime * 2.0f * M_PIl + mXShift) + mYShift;
 
+//	std::cout << this << "::" << timeSinceLastTick << "/Output:" << output << std::endl;
+
 	setOutputValue(output);
 
 	// distribute the output to the adjacent controllers or endpoints

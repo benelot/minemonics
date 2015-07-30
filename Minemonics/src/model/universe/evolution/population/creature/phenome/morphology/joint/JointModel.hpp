@@ -49,6 +49,12 @@ public:
 			const int ownIndex);
 
 	/**
+	 * Update the joint model.
+	 * @param timeSinceLastTick
+	 */
+	void update(double timeSinceLastTick);
+
+	/**
 	 * Reset the joint to the place when the creature was born.
 	 */
 	void reset(const Ogre::Vector3 position);

@@ -231,10 +231,6 @@ void SimulationManager::createScene(void) {
 	// add earth population to earth
 //	earth->addPopulation(earth2Population);
 
-	//perform embryogenesis on every creature that is not developed yet.
-	//TODO: The whole planet embryogenesis still causes issues that give us capsules sticking to the camera.
-//	earth->performEmbryogenesis();
-
 //	TODO::Make it work with multiple planets
 //	// create a planet called mars
 //	Planet* mars = new Planet(Environment::PLANE, &mDebugDrawer, 10);

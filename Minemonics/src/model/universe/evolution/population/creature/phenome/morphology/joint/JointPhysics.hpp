@@ -70,7 +70,7 @@ public:
 	/**
 	 * Update the joint physics model
 	 */
-	virtual void update() = 0;
+	virtual void update(double timeSinceLastTick) = 0;
 
 	/**
 	 * If the joint physics is in the world.

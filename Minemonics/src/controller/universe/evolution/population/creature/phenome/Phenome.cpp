@@ -124,13 +124,13 @@ void Phenome::update(double timeSinceLastTick) {
 	// Update all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
 			lit++) {
-		(*lit)->update();
+		(*lit)->update(timeSinceLastTick);
 	}
 
 	// Update all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();
 			jit != mJoints.end(); jit++) {
-		(*jit)->update();
+		(*jit)->update(timeSinceLastTick);
 	}
 }
 

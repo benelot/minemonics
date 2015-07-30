@@ -46,7 +46,11 @@ public:
 	 */
 	ServoMotor* clone();
 
-	void apply();
+	/**
+	 * Apply the movement of the servomotor on the joint it controls.
+	 * @param timeSinceLastTick
+	 */
+	void apply(double timeSinceLastTick);
 
 	//Accessor methods
 

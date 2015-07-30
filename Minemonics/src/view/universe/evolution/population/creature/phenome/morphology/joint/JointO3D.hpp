@@ -50,7 +50,7 @@ public:
 	/**
 	 * Update the joint graphical representation.
 	 */
-	void update();
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Add the joint to the world.

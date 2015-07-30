@@ -53,7 +53,7 @@ public:
 	/**
 	 * Update the joint.
 	 */
-	virtual void update() = 0;
+	virtual void update(double timeSinceLastTick) = 0;
 
 protected:
 	/**

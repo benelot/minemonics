@@ -65,7 +65,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	int gapSize = size * 1.3f;
 
 	// Setup the geometry
-	// BODYPART_PELVIS
+	// BODYPART_ABDOMENPELVIS
 	//	btTransform transform;
 	transform.setIdentity();
 	transform.setOrigin(
@@ -79,12 +79,12 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.3, size * 0.2, size * 0.3), 1);
+			Ogre::Vector3(size * 0.3, size * 0.2, size * 0.3), 0);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
-	// BODYPART_SPINE
+	// BODYPART_THORAX
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 1.2),
@@ -97,7 +97,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.3, size * 0.28, size * 0.3), 1);
+			Ogre::Vector3(size * 0.3, size * 0.28, size * 0.3), 0);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -116,12 +116,12 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2),
-			(attachHead) ? 0 : 1);
+			(attachHead) ? 0 : RAGDOLL_HEAD);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
-	//BODYPART_LEFT_UPPER_LEG
+	//BODYPART_LEFT_THIGH
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(gapSize * -0.18), btScalar(gapSize * 0.65),
@@ -134,12 +134,13 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
+			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14),
+			RAGDOLL_THIGH);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
-	//	BODYPART_LEFT_LOWER_LEG
+	//	BODYPART_LEFTLEG
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(gapSize * -0.18), btScalar(gapSize * 0.2),
@@ -152,12 +153,12 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), 1);
+			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), RAGDOLL_LEG);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
-	//BODYPART_RIGHT_UPPER_LEG
+	//BODYPART_RIGHT_THIGH
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(gapSize * 0.18), btScalar(gapSize * 0.65),
@@ -170,12 +171,13 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
+			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14),
+			RAGDOLL_THIGH);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
-	// BODYPART_RIGHT_LOWER_LEG
+	// BODYPART_RIGHT_LEG
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(gapSize * 0.18), btScalar(gapSize * 0.2),
@@ -188,7 +190,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), 1);
+			Ogre::Vector3(size * 0.1, size * 0.37, size * 0.1), RAGDOLL_LEG);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -207,12 +209,13 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1), 1);
+			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1),
+			RAGDOLL_UPPER_ARM);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
-	//BODYPART_LEFT_LOWER_ARM
+	//BODYPART_LEFT_FOREARM
 	transform.setIdentity();
 	transform.setOrigin(
 			btVector3(btScalar(gapSize * -0.7), btScalar(gapSize * 1.45),
@@ -226,7 +229,8 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08), 1);
+			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08),
+			RAGDOLL_FOREARM);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -245,7 +249,8 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1), 1);
+			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1),
+			RAGDOLL_UPPER_ARM);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -264,7 +269,8 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08), 1);
+			Ogre::Vector3(size * 0.08, size * 0.25, size * 0.08),
+			RAGDOLL_FOREARM);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -282,71 +288,71 @@ RagDoll::RagDoll(Population* const population, double size,
 ////	 Now setup the constraints
 	Joint* joint;
 
-	localA.setIdentity();
-	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
-	localA.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.15),
-					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, M_PI_2, 0);
-	localB.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.15),
-					btScalar(gapSize * 0.)));
+//	localA.setIdentity();
+//	localB.setIdentity();
+//	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
+//	localA.setOrigin(
+//			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.15),
+//					btScalar(gapSize * 0.)));
+//	localB.getBasis().setEulerZYX(0, M_PI_2, 0);
+//	localB.setOrigin(
+//			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.15),
+//					btScalar(gapSize * 0.)));
+//
+//	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_ABDOMENPELVIS],
+//			mPhenotype.getLimbs()[BODYPART_THORAX], localA, localB, 0, 0, 0);
+//	joint->setAngularLimits(Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
+//			Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2));
+//	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+//			Ogre::Vector3(10000, 10000, 10000));
+//	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+//			joint->getJointModel());
+//	mPhenotype.getJoints().push_back(joint);
+//
+//	enableMotor = false;
+////	enableMotor = true;
+//	for (std::vector<Motor*>::const_iterator motorIterator =
+//			joint->getMotors().begin();
+//			motorIterator != joint->getMotors().end(); motorIterator++) {
+//		SineController* controller = new SineController();
+//		controller->initialize(0.5f, 0.1f, 0, 0.5f);
+//		controller->addControlOutput((*motorIterator));
+//		(*motorIterator)->setEnabled(enableMotor);
+//		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
+//	}
 
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_PELVIS],
-			mPhenotype.getLimbs()[BODYPART_SPINE], localA, localB, 0, 0, 0);
-	joint->setAngularLimits(Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
-			Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
-			Ogre::Vector3(10000, 10000, 10000));
-	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-			joint->getJointModel());
-	mPhenotype.getJoints().push_back(joint);
-
-	enableMotor = false;
-	enableMotor = true;
-	for (std::vector<Motor*>::const_iterator motorIterator =
-			joint->getMotors().begin();
-			motorIterator != joint->getMotors().end(); motorIterator++) {
-		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0.5f);
-		controller->addControlOutput((*motorIterator));
-		(*motorIterator)->setEnabled(enableMotor);
-		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
-	}
-
-	localA.setIdentity();
-	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, 0, M_PI_2);
-	localA.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.30),
-					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, M_PI_2);
-	localB.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
-					btScalar(gapSize * 0.)));
-
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_SPINE],
-			mPhenotype.getLimbs()[BODYPART_HEAD], localA, localB, 0, 0, 0);
-	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, -M_PI_2),
-			Ogre::Vector3(M_PI_4, M_PI_4, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
-			Ogre::Vector3(10000, 10000, 10000));
-	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-			joint->getJointModel());
-	mPhenotype.getJoints().push_back(joint);
-
-	enableMotor = false;
-	enableMotor = true;
-	for (std::vector<Motor*>::const_iterator motorIterator =
-			joint->getMotors().begin();
-			motorIterator != joint->getMotors().end(); motorIterator++) {
-		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0.5f);
-		controller->addControlOutput((*motorIterator));
-		(*motorIterator)->setEnabled(enableMotor);
-		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
-	}
+//	localA.setIdentity();
+//	localB.setIdentity();
+//	localA.getBasis().setEulerZYX(0, 0, M_PI_2);
+//	localA.setOrigin(
+//			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.30),
+//					btScalar(gapSize * 0.)));
+//	localB.getBasis().setEulerZYX(0, 0, M_PI_2);
+//	localB.setOrigin(
+//			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
+//					btScalar(gapSize * 0.)));
+//
+//	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
+//			mPhenotype.getLimbs()[BODYPART_HEAD], localA, localB, 0, 0, 0);
+//	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, -M_PI_2),
+//			Ogre::Vector3(M_PI_4, M_PI_4, M_PI_2));
+//	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+//			Ogre::Vector3(10000, 10000, 10000));
+//	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+//			joint->getJointModel());
+//	mPhenotype.getJoints().push_back(joint);
+//
+//	enableMotor = false;
+////	enableMotor = true;
+//	for (std::vector<Motor*>::const_iterator motorIterator =
+//			joint->getMotors().begin();
+//			motorIterator != joint->getMotors().end(); motorIterator++) {
+//		SineController* controller = new SineController();
+//		controller->initialize(0.5f, 0.1f, 0, 0.5f);
+//		controller->addControlOutput((*motorIterator));
+//		(*motorIterator)->setEnabled(enableMotor);
+//		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
+//	}
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -359,45 +365,11 @@ RagDoll::RagDoll(Population* const population, double size,
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.225),
 					btScalar(gapSize * 0.)));
 
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_PELVIS],
-			mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_LEG], localA, localB, 0,
-			0, 0);
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_ABDOMENPELVIS],
+			mPhenotype.getLimbs()[BODYPART_LEFT_THIGH], localA, localB, 0, 0,
+			0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
 			Ogre::Vector3(M_PI_4, M_PI_4, 0));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
-			Ogre::Vector3(10000, 10000, 10000));
-	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-			joint->getJointModel());
-	mPhenotype.getJoints().push_back(joint);
-
-	enableMotor = false;
-	enableMotor = true;
-	for (std::vector<Motor*>::const_iterator motorIterator =
-			joint->getMotors().begin();
-			motorIterator != joint->getMotors().end(); motorIterator++) {
-		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0.5f);
-		controller->addControlOutput((*motorIterator));
-		(*motorIterator)->setEnabled(enableMotor);
-		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
-	}
-
-	localA.setIdentity();
-	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
-	localA.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.225),
-					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, M_PI_2, 0);
-	localB.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.185),
-					btScalar(gapSize * 0.)));
-
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_LEG],
-			mPhenotype.getLimbs()[BODYPART_LEFT_LOWER_LEG], localA, localB, 0,
-			0, 0);
-	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
-			Ogre::Vector3(0, 0, M_PI_2));
 	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
 			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
@@ -427,9 +399,9 @@ RagDoll::RagDoll(Population* const population, double size,
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.225),
 					btScalar(gapSize * 0.)));
 
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_PELVIS],
-			mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_LEG], localA, localB, 0,
-			0, 0);
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_ABDOMENPELVIS],
+			mPhenotype.getLimbs()[BODYPART_RIGHT_THIGH], localA, localB, 0, 0,
+			0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
 			Ogre::Vector3(M_PI_4, M_PI_4, 0));
 	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
@@ -461,9 +433,8 @@ RagDoll::RagDoll(Population* const population, double size,
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.185),
 					btScalar(gapSize * 0.)));
 
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_LEG],
-			mPhenotype.getLimbs()[BODYPART_RIGHT_LOWER_LEG], localA, localB, 0,
-			0, 0);
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_THIGH],
+			mPhenotype.getLimbs()[BODYPART_LEFT_LEG], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(0, 0, M_PI_2));
 	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
@@ -486,21 +457,54 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	localA.setIdentity();
 	localB.setIdentity();
-	localA.getBasis().setEulerZYX(M_PI, 0, 0);
+	localA.getBasis().setEulerZYX(0, M_PI_2, 0);
+	localA.setOrigin(
+			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.225),
+					btScalar(gapSize * 0.)));
+	localB.getBasis().setEulerZYX(0, M_PI_2, 0);
+	localB.setOrigin(
+			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.185),
+					btScalar(gapSize * 0.)));
+
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_RIGHT_THIGH],
+			mPhenotype.getLimbs()[BODYPART_RIGHT_LEG], localA, localB, 0, 0, 0);
+	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(0, 0, 3 * M_PI_4));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
+	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+			joint->getJointModel());
+	mPhenotype.getJoints().push_back(joint);
+
+	enableMotor = false;
+	enableMotor = true;
+	for (std::vector<Motor*>::const_iterator motorIterator =
+			joint->getMotors().begin();
+			motorIterator != joint->getMotors().end(); motorIterator++) {
+		SineController* controller = new SineController();
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
+		controller->addControlOutput((*motorIterator));
+		(*motorIterator)->setEnabled(enableMotor);
+		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
+	}
+
+	localA.setIdentity();
+	localB.setIdentity();
+	localA.getBasis().setEulerZYX(M_PI, 0, M_PI);
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * -0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, -M_PI_4);
+	localB.getBasis().setEulerZYX(0, 0, 0);
 	localB.setOrigin(
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
 
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_SPINE],
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
 			mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM], localA, localB, 0,
 			0, 0);
-	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_4, -M_PI_2),
 			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(4, 4, 4),
 			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
@@ -520,55 +524,21 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	localA.setIdentity();
 	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, 0, 0);
-	localA.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.18),
-					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, 0);
-	localB.setOrigin(
-			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
-					btScalar(gapSize * 0.)));
-
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM],
-			mPhenotype.getLimbs()[BODYPART_LEFT_LOWER_ARM], localA, localB, 0,
-			0, 0);
-	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
-			Ogre::Vector3(M_PI_2, 0, 0));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
-			Ogre::Vector3(10000, 10000, 10000));
-	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-			joint->getJointModel());
-	mPhenotype.getJoints().push_back(joint);
-
-	enableMotor = false;
-	enableMotor = true;
-	for (std::vector<Motor*>::const_iterator motorIterator =
-			joint->getMotors().begin();
-			motorIterator != joint->getMotors().end(); motorIterator++) {
-		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0.5f);
-		controller->addControlOutput((*motorIterator));
-		(*motorIterator)->setEnabled(enableMotor);
-		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
-	}
-
-	localA.setIdentity();
-	localB.setIdentity();
-	localA.getBasis().setEulerZYX(0, 0, M_PI);
+	localA.getBasis().setEulerZYX(M_PI, 0, 0);
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * 0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, -M_PI_4);
+	localB.getBasis().setEulerZYX(0, M_PI, 0);
 	localB.setOrigin(
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
 
-	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_SPINE],
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
 			mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_ARM], localA, localB, 0,
 			0, 0);
-	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_4, -M_PI_2),
 			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(4, 4, 4),
 			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
@@ -585,6 +555,41 @@ RagDoll::RagDoll(Population* const population, double size,
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
 	}
+
+		localA.setIdentity();
+		localB.setIdentity();
+		localA.getBasis().setEulerZYX(0, 0, 0);
+		localA.setOrigin(
+				btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.18),
+						btScalar(gapSize * 0.)));
+		localB.getBasis().setEulerZYX(0, 0, 0);
+		localB.setOrigin(
+				btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
+						btScalar(gapSize * 0.)));
+
+		joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM],
+				mPhenotype.getLimbs()[BODYPART_LEFT_FOREARM], localA, localB, 0, 0,
+				0);
+		joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+				Ogre::Vector3(3*M_PI_4, 0, 0));
+		joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+				Ogre::Vector3(10000, 10000, 10000));
+		mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+				joint->getJointModel());
+		mPhenotype.getJoints().push_back(joint);
+
+		enableMotor = false;
+		enableMotor = true;
+		for (std::vector<Motor*>::const_iterator motorIterator =
+				joint->getMotors().begin();
+				motorIterator != joint->getMotors().end(); motorIterator++) {
+			SineController* controller = new SineController();
+			controller->initialize(0.5f, 0.1f, 0, 0.5f);
+			controller->addControlOutput((*motorIterator));
+			(*motorIterator)->setEnabled(enableMotor);
+			mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
+		}
+
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -598,11 +603,11 @@ RagDoll::RagDoll(Population* const population, double size,
 					btScalar(gapSize * 0.)));
 
 	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_ARM],
-			mPhenotype.getLimbs()[BODYPART_RIGHT_LOWER_ARM], localA, localB, 0,
-			0, 0);
+			mPhenotype.getLimbs()[BODYPART_RIGHT_FOREARM], localA, localB, 0, 0,
+			0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
-			Ogre::Vector3(M_PI_2, 0, 0));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(3 * M_PI_4, 0, 0));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(4, 4, 4),
 			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());

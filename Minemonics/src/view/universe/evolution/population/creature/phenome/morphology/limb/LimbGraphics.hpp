@@ -44,7 +44,7 @@ public:
 	/**
 	 * Update the graphical representation of the limb with the physical representation.
 	 */
-	virtual void update() = 0;
+	virtual void update(double timeSinceLastTick) = 0;
 
 	/**
 	 * Clone the limb graphics.

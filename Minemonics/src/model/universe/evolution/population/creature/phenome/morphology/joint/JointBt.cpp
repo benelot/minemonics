@@ -85,13 +85,13 @@ JointBt::~JointBt() {
 	mG6DofJoint = NULL;
 }
 
-void JointBt::update() {
+void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 			motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			(*motorIterator)->apply();
+			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 }

@@ -43,7 +43,7 @@ void JointO3D::initialize(/*Limb* limbA,
 	//mLocalB = localB;
 }
 
-void JointO3D::update() {
+void JointO3D::update(double timeSinceLastTick) {
 	//TODO:: Fix local to global frame rotation
 //	Ogre::Vector3 limbACOM(mLimbA->getPosition());
 //	Ogre::Euler euler(OgreBulletUtils::convert(mLocalA.getRotation()));
