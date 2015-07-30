@@ -1,10 +1,3 @@
-/*
- * Ragdoll.cpp
- *
- *  Created on: Mar 24, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
 //# forward declarations
 //# system headers
@@ -67,6 +60,7 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	LimbModel::PrimitiveType type = LimbModel::CAPSULE;
 
+	bool attachHead = true;
 	bool enableMotor = true;
 	int gapSize = size * 1.3f;
 
@@ -121,7 +115,8 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2), 0);
+			Ogre::Vector3(size * 0.2, size * 0.2, size * 0.2),
+			(attachHead) ? 0 : 1);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -139,7 +134,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 0);
+			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -175,7 +170,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 0);
+			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14), 1);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -302,19 +297,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			mPhenotype.getLimbs()[BODYPART_SPINE], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
 			Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
-			Ogre::Vector3(1000, 1000, 1000));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -335,19 +330,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			mPhenotype.getLimbs()[BODYPART_HEAD], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, -M_PI_2),
 			Ogre::Vector3(M_PI_4, M_PI_4, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
-			Ogre::Vector3(1000, 1000, 1000));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -369,19 +364,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
 			Ogre::Vector3(M_PI_4, M_PI_4, 0));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
-			Ogre::Vector3(1, 1, 1));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -403,19 +398,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(0, 0, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
-			Ogre::Vector3(1000, 1000, 1000));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -437,19 +432,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_4, -M_PI_4, 0),
 			Ogre::Vector3(M_PI_4, M_PI_4, 0));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
-			Ogre::Vector3(1000, 1000, 1000));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -472,7 +467,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(0, 0, M_PI_2));
 	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
-			Ogre::Vector3(10, 10, 10));
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
@@ -505,19 +500,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
 			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
-			Ogre::Vector3(1000, 1000, 1000));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -539,19 +534,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(M_PI_2, 0, 0));
-	joint->initializeRotationalLimitMotors(Ogre::Vector3(1, 1, 1),
-			Ogre::Vector3(1000, 1000, 1000));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -573,17 +568,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
 			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
@@ -605,17 +602,19 @@ RagDoll::RagDoll(Population* const population, double size,
 			0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(M_PI_2, 0, 0));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
+			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
 			joint->getJointModel());
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-//	enableMotor = true;
+	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
 		SineController* controller = new SineController();
-		controller->initialize(0.5f, 0.1f, 0, 0);
+		controller->initialize(0.5f, 0.1f, 0, 0.5f);
 		controller->addControlOutput((*motorIterator));
 		(*motorIterator)->setEnabled(enableMotor);
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);

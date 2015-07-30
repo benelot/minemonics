@@ -46,17 +46,30 @@ void ServoMotor::initialize(const int jointMotorIndex,
 	mMaxForce = maxForce;
 	mMaxSpeed = maxSpeed;
 	mMotorBt->m_maxMotorForce = 10.0f;
-	//TODO:: Check if this is the right velocity (it is not)
-	//mMotorBt->m_targetVelocity = mMaxSpeed;
 }
 
 void ServoMotor::apply() {
+
+	//simple p(roportional) controller
 	mMotorBt->m_enableMotor = mEnabled;
-//	mMotorBt->m_maxMotorForce = 1000000000.0f;
+
+	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
+	btScalar clampedInputValue = (getInputValue() > 1) ? 1 :
+									(getInputValue() < 0) ? 0 : getInputValue();
+
+	//calculate the target angle of the motor
 	btScalar targetAngle = mMotorBt->m_loLimit
 			+ getInputValue() * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
+
+	//calculate the angle error
 	btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
-	mMotorBt->m_targetVelocity = 500.f * angleError;
+
+	//calculate the target velocity and clamp it with the maximum speed
+	mMotorBt->m_targetVelocity =
+			(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
+			(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
+
+	//print some values TODO: Print them to the logger only
 	std::cout << mMotorBt << "::Input Value:   " << getInputValue()
 			<< "\t/MotorPosition(error):  " << mMotorBt->m_currentPosition
 			<< "/" << angleError << "\t/targetVelocity: "
