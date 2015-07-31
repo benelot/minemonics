@@ -32,11 +32,25 @@ public:
 	Embryogenesis();
 	virtual ~Embryogenesis();
 
+	/**
+	 * Transcribe a gene into the component it represents.
+	 * @param generatorList The generator list in case new generators are added by it.
+	 * @param totalSegmentCounter The total segment counter for phenotype elements.
+	 * @param phenomeModel The phenome model where the new components are added.
+	 * @param generator The generator of that should be transcribed.
+	 */
 	static void transcribeGene(std::list<PhenotypeGenerator*>& generatorList,
 			int& totalSegmentCounter, PhenomeModel* phenomeModel,
 			BaseGenerator* generator);
 
-	static void transcribeMorphoGene(
+	/**
+	 * Transcribe a morphogene into the component it represents.
+	 * @param generatorList The generator list in case new generators are added by it.
+	 * @param totalSegmentCounter The total segment counter for phenotype elements.
+	 * @param phenomeModel The phenome model where the new components are added.
+	 * @param generator The generator of that should be transcribed.
+	 */
+	static void transcribeMorphogene(
 			std::list<PhenotypeGenerator*>& generatorList,
 			int& totalSegmentCounter, PhenomeModel* phenomeModel,
 			PhenotypeGenerator* generator);

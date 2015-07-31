@@ -55,12 +55,9 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 Embryogenesis::Embryogenesis() {
-	// TODO Auto-generated constructor stub
-
 }
 
 Embryogenesis::~Embryogenesis() {
-	// TODO Auto-generated destructor stub
 }
 
 void Embryogenesis::transcribeGene(
@@ -68,18 +65,18 @@ void Embryogenesis::transcribeGene(
 		PhenomeModel* phenomeModel, BaseGenerator* generator) {
 	// what is the next gene type
 	switch (generator->getGene()->getType()) {
-		case Gene::MorphoGene: {
-			transcribeMorphoGene(generatorList, totalSegmentCounter, phenomeModel,
-					(PhenotypeGenerator*) generator);
-			break;
-		}
-		default: {
-			break;
-		}
+	case Gene::MorphoGene: {
+		transcribeMorphogene(generatorList, totalSegmentCounter, phenomeModel,
+				(PhenotypeGenerator*) generator);
+		break;
+	}
+	default: {
+		break;
+	}
 	}
 }
 
-void Embryogenesis::transcribeMorphoGene(
+void Embryogenesis::transcribeMorphogene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 	// if the current root to leaf path is equal to the maximal segments depth, break
@@ -97,142 +94,161 @@ void Embryogenesis::transcribeMorphoGene(
 	totalSegmentCounter++;
 
 	// get the morphogene and start creating the limb and its joint to its parent
-	Morphogene * morphogene = ((Morphogene*) generator->getGene());
+	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
 
-	// joint position in reference frame A
-	Ogre::Vector3 localJointOA(0, 0, 0);
+	//get the morphogene branch that defines the joint and connects the limbs
+	MorphogeneBranch* morphogeneBranch =
+			((MorphogeneBranch*) generator->getGeneBranch());
 
-	// joint position in reference frame B
-	Ogre::Vector3 localJointOB(0, 0, 0);
+	// joint position in local reference frame of the parent
+	Ogre::Vector3 localParentJointInRefParent(0, 0, 0);
+
+	// joint position in local reference frame of the child
+	Ogre::Vector3 localChildJointInRefChild(0, 0, 0);
 
 	// if there exists a parent component, then we calculate the position of the new limb according to the parent component
 	if (generator->getParentComponentModel() != NULL) {
 
-		// get parent limb A
-		LimbPhysics* limbA =
+		// get parent limb
+		LimbPhysics* parentLimb =
 				((LimbModel*) generator->getParentComponentModel())->getLimbPhysics();
 
-		//get the limb A'a center of mass
-		Ogre::Vector3 limbACOM =
+		//get the parent limb's center of mass position
+		Ogre::Vector3 parentLimbCOM =
 				((LimbModel*) generator->getParentComponentModel())->getPosition();
 
-		//get anchor direction of limb A in reference frame of A
-		Ogre::Vector3 localAnchorDirOA;
+		//get anchor direction of the parent limb in reference frame of itself
+		Ogre::Vector3 localParentAnchorDirInRefParent;
 
+		//if the generator is the mirrored version of another generator
+		//mirrored is: -O  -> O- | \O -> O\   mirroring = sign inversion  //
 		if (generator->isMirrored()) {
-			localAnchorDirOA =
+
+			//get mirrored direction
+			localParentAnchorDirInRefParent =
 					(-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), -((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), -((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+			//if the generator is the flipped version of another generator
+			//flipped is: \O -> O/ and the flipping axis is the parent limb direction
 		} else if (generator->isFlipped()) {
-			localAnchorDirOA =
+
+			// get flipped direction
+			localParentAnchorDirInRefParent =
 					(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
-			//	get direction vector of object
-			Ogre::Vector3 n(1, 0, 0);
-			n =
-					((LimbModel*) generator->getParentComponentModel())->getOrientation()
-							* n;
+			//	get direction vector of parent limb
+			Ogre::Vector3 parentLimbDir(1, 0, 0);
+			parentLimbDir = OgreBulletUtils::convert(parentLimb->getOrientation()) * parentLimbDir;
 
 			//reflect on the direction vector
-			localAnchorDirOA = -localAnchorDirOA
-					- 2 * ((-localAnchorDirOA).dotProduct(n)) * n;
+			localParentAnchorDirInRefParent = -localParentAnchorDirInRefParent
+					- 2
+							* ((-localParentAnchorDirInRefParent).dotProduct(
+									parentLimbDir)) * parentLimbDir;
 		} else {
-			localAnchorDirOA =
-					(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+
+			//get normal direction
+			localParentAnchorDirInRefParent = Ogre::Vector3(
+					morphogeneBranch->getJointAnchorX(),
+					morphogeneBranch->getJointAnchorY(),
+					morphogeneBranch->getJointAnchorZ());
 		}
 
-		//get surface point of limb A in reference frame of A
-		Ogre::Vector3 localAnchorOA(limbA->getLocalIntersection(
-		/*origin of limb A*/
-		OgreBulletUtils::convert(limbACOM),
-		/*direction of anchor of limb A*/
-		OgreBulletUtils::convert(localAnchorDirOA)));
+		//get surface point of the parent limb in reference frame itself
+		Ogre::Vector3 localParentAnchorInRefParent(
+				parentLimb->getLocalIntersection(
+				/*origin of limb parent*/
+				OgreBulletUtils::convert(parentLimbCOM),
+				/*direction of anchor of limb parent*/
+				OgreBulletUtils::convert(localParentAnchorDirInRefParent)));
 
-		// joint direction of joint part of A
-		Ogre::Euler eulerA(
-				((MorphogeneBranch*) generator->getGeneBranch())->getJointYaw(),
-				((MorphogeneBranch*) generator->getGeneBranch())->getJointPitch(),
-				((MorphogeneBranch*) generator->getGeneBranch())->getJointRoll());
+		// joint direction of joint part of parent
+		Ogre::Euler parentEulerJointDir(morphogeneBranch->getJointYaw(),
+				morphogeneBranch->getJointPitch(),
+				morphogeneBranch->getJointRoll());
 
-		//get local joint rotation point in reference frame A
-		localJointOA = localAnchorOA
-				+ eulerA * localAnchorDirOA.normalisedCopy()
+		//get local joint rotation point in reference frame parent
+		localParentJointInRefParent = localParentAnchorInRefParent
+				+ parentEulerJointDir
+						* localParentAnchorDirInRefParent.normalisedCopy()
 						* MorphologyConfiguration::JOINT_LENGTH;
 
-		//get anchor direction of limb B
-		Ogre::Vector3 localAnchorDirOB(morphogene->getJointAnchorX(),
-				morphogene->getJointAnchorY(), morphogene->getJointAnchorZ());
+		// get local joint direction in the local reference frame of child
+		Ogre::Euler childEulerJointDir(childMorphogene->getJointYaw(),
+				childMorphogene->getJointPitch(),
+				childMorphogene->getJointRoll());
 
-		// get local joint rotation point in the local reference frame of B
-		Ogre::Euler eulerB(morphogene->getJointYaw(),
-				morphogene->getJointPitch(), morphogene->getJointRoll());
+		//	get direction vector of child joint anchor
+		Ogre::Vector3 childJointDir(1, 0, 0);
+		childJointDir = childEulerJointDir * childJointDir;
 
-		//get local surface anchor point of B in reference frame A
-		Ogre::Vector3 localAnchorOBinA(
-				localJointOA
-						- eulerB * localAnchorDirOB.normalisedCopy()
+		//get local surface anchor point of child in reference frame parent
+		Ogre::Vector3 localAnchorOfChildInRefParent(
+				localParentJointInRefParent
+						- childJointDir.normalisedCopy()
 								* MorphologyConfiguration::JOINT_LENGTH);
 
 		// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
-		LimbBt* limbBBt = new LimbBt();
+		LimbBt* childLimbBt = new LimbBt();
 
-		limbBBt->initialize(
+		childLimbBt->initialize(
 				phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-				NULL, morphogene->getPrimitiveType(),
+				NULL, childMorphogene->getPrimitiveType(),
 				OgreBulletUtils::convert(generator->getPosition()),
-				btQuaternion(morphogene->getOrientationX(),
-						morphogene->getOrientationY(),
-						morphogene->getOrientationZ(),
-						morphogene->getOrientationW()), btVector3(),
+				btQuaternion(childMorphogene->getOrientationX(),
+						childMorphogene->getOrientationY(),
+						childMorphogene->getOrientationZ(),
+						childMorphogene->getOrientationW()), btVector3(),
 				btQuaternion(),
 				/*size*/
 				btVector3(
 						generator->getCurrentShrinkageFactor()
-								* morphogene->getX(),
+								* childMorphogene->getX(),
 						generator->getCurrentShrinkageFactor()
-								* morphogene->getY(),
+								* childMorphogene->getY(),
 						generator->getCurrentShrinkageFactor()
-								* morphogene->getZ()),
+								* childMorphogene->getZ()),
 				/*mass*/
 				btScalar(
 						generator->getCurrentShrinkageFactor()
-								* morphogene->getX()
+								* childMorphogene->getX()
 								* generator->getCurrentShrinkageFactor()
-								* morphogene->getY()
+								* childMorphogene->getY()
 								* generator->getCurrentShrinkageFactor()
-								* morphogene->getZ()),
-				morphogene->getRestitution(), morphogene->getFriction());
-		limbBBt->addToWorld();
+								* childMorphogene->getZ()),
+				childMorphogene->getRestitution(),
+				childMorphogene->getFriction());
+		childLimbBt->addToWorld();
 
-		//get the surface point of limb B in the local reference frame of B
-		Ogre::Vector3 localAnchorOB(
-				OgreBulletUtils::convert(limbBBt->getLocalIntersection(
-				/*origin of limb B*/
+		//get anchor direction of limb child in the local reference frame of child
+		Ogre::Vector3 localChildAnchorDirInRefChild(
+				childMorphogene->getJointAnchorX(),
+				childMorphogene->getJointAnchorY(),
+				childMorphogene->getJointAnchorZ());
+
+		//get the surface point of child limb in the local reference frame of itself
+		Ogre::Vector3 localAnchorInRefChild(
+				OgreBulletUtils::convert(childLimbBt->getLocalIntersection(
+				/*origin of child limb*/
 				OgreBulletUtils::convert(generator->getPosition()),
-				/*direction of anchor of limb B*/
-				OgreBulletUtils::convert(localAnchorDirOB))));
+				/*direction of anchor of child limb*/
+				OgreBulletUtils::convert(localChildAnchorDirInRefChild))));
 
-		limbBBt->removeFromWorld();
+		childLimbBt->removeFromWorld();
 
-		delete limbBBt;
-		limbBBt = NULL;
+		delete childLimbBt;
+		childLimbBt = NULL;
 
-		// global center of mass of limb B
-		Ogre::Vector3 limbBCOM(limbACOM + localAnchorOBinA - localAnchorOB);
-		// set global center of mass of limb B as the new generation point
+		// global center of mass of child limb
+		Ogre::Vector3 childLimbCOM(
+				parentLimbCOM + localAnchorOfChildInRefParent
+						- localAnchorInRefChild);
 
-		generator->setPosition(limbBCOM);
-		generator->setOrientation(
-				Ogre::Quaternion(morphogene->getOrientationW(),
-						morphogene->getOrientationX(),
-						morphogene->getOrientationY(),
-						morphogene->getOrientationZ()));
-
-		localJointOB = localAnchorOB
-				+ eulerB * localAnchorDirOB.normalisedCopy()
+		localChildJointInRefChild = localAnchorInRefChild
+				+ localChildAnchorDirInRefChild.normalisedCopy()
 						* MorphologyConfiguration::JOINT_LENGTH;
 
 		//				// draw line from limb A along test ray (RED LINE)
 		//				//TODO: Debug lines
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbACOM,
+		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(parentLimbCOM,
 		//						limbACOM + 10000.0f * localAnchorDirOA,
 		//						Ogre::ColourValue(1, 0, 0));
 		//
@@ -242,7 +258,7 @@ void Embryogenesis::transcribeMorphoGene(
 		//						Ogre::ColourValue(1, 0, 0));
 
 		//				// draw line from limb A to surface anchor point of A (GREEN LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbACOM,
+		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(parentLimbCOM,
 		//						limbACOM + localAnchorOA, Ogre::ColourValue(0, 1, 0));
 		//
 		//				// draw line from anchor point of A to joint rotation point (BLUE LINE)
@@ -262,77 +278,94 @@ void Embryogenesis::transcribeMorphoGene(
 		//				// draw line from limb A to limb B (WHITE LINE)
 		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbBCOM,
 		//						limbACOM, Ogre::ColourValue(1, 1, 1));
+
+		// set global center of mass of child limb as the new generation point for generation
+		generator->setPosition(childLimbCOM);
+		generator->setOrientation(
+				Ogre::Quaternion(childMorphogene->getOrientationW(),
+						childMorphogene->getOrientationX(),
+						childMorphogene->getOrientationY(),
+						childMorphogene->getOrientationZ()));
 	}
 
 	//build the limb out of the morphogene
-	LimbModel* limbB = new LimbModel();
-	phenomeModel->getLimbModels().push_back(limbB);
-	phenomeModel->getComponentModels().push_back(limbB);
+	LimbModel* childLimb = new LimbModel();
 
-	limbB->initialize(
+	childLimb->initialize(
 			phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			phenomeModel->getCreatureModel(), morphogene->getPrimitiveType(),
-			generator->getPosition(), generator->getOrientation(),
+			phenomeModel->getCreatureModel(),
+			childMorphogene->getPrimitiveType(), generator->getPosition(),
+			generator->getOrientation(),
 			Ogre::Vector3(
 					generator->getPosition()
 							- phenomeModel->getCreatureModel()->getPosition()),
 			Ogre::Quaternion(generator->getOrientation()),
 			/*size*/
 			Ogre::Vector3(
-					generator->getCurrentShrinkageFactor() * morphogene->getX(),
-					generator->getCurrentShrinkageFactor() * morphogene->getY(),
 					generator->getCurrentShrinkageFactor()
-							* morphogene->getZ()),
+							* childMorphogene->getX(),
+					generator->getCurrentShrinkageFactor()
+							* childMorphogene->getY(),
+					generator->getCurrentShrinkageFactor()
+							* childMorphogene->getZ()),
 			/*mass*/
 			//TODO: Root element is static, remove it
 			//							(generator == rootGenerator)?0:
-			generator->getCurrentShrinkageFactor() * morphogene->getX()
+			generator->getCurrentShrinkageFactor() * childMorphogene->getX()
 					* generator->getCurrentShrinkageFactor()
-					* morphogene->getY()
+					* childMorphogene->getY()
 					* generator->getCurrentShrinkageFactor()
-					* morphogene->getZ(), morphogene->getRestitution(),
-			morphogene->getFriction(),
-			Ogre::ColourValue(morphogene->getColorR(), morphogene->getColorB(),
-					morphogene->getColorG()),
+					* childMorphogene->getZ(),
+			childMorphogene->getRestitution(), childMorphogene->getFriction(),
+			Ogre::ColourValue(childMorphogene->getColorR(),
+					childMorphogene->getColorB(), childMorphogene->getColorG()),
 			phenomeModel->getComponentModels().size() - 1);
+
+	phenomeModel->getLimbModels().push_back(childLimb);
+	phenomeModel->getComponentModels().push_back(childLimb);
 
 	if (generator->getParentComponentModel() != NULL) {
 
-		// transformation from the limb A and limb B center of mass to the joint in the respective reference frames
-		btTransform localA, localB;
-		localA.setIdentity();
-		localB.setIdentity();
+		// get parent limb
+		LimbModel* parentLimb = (LimbModel*)generator->getParentComponentModel();
 
-		MorphogeneBranch* morphogeneBranch =
-				((MorphogeneBranch*) generator->getGeneBranch());
+		// transformation from the parent limb and child limb center of mass to the joint in the respective reference frames
+		btTransform localParentJointTransform, localChildJointTransform;
+		localParentJointTransform.setIdentity();
+		localChildJointTransform.setIdentity();
 
-		// define the position and direction of the joint in the reference frame of A
-		localA.setOrigin(OgreBulletUtils::convert(localJointOA));
-		localA.getBasis().setEulerZYX(morphogeneBranch->getJointRoll(),
+		// define the position and direction of the joint in the reference frame of the parent
+		localParentJointTransform.setOrigin(
+				OgreBulletUtils::convert(localParentJointInRefParent));
+		localParentJointTransform.getBasis().setEulerYPR(
 				morphogeneBranch->getJointYaw(),
-				morphogeneBranch->getJointPitch());
+				morphogeneBranch->getJointPitch(),
+				morphogeneBranch->getJointRoll());
 
-		// define the position and direction of the joint in the reference frame of B
-		localB.setOrigin(OgreBulletUtils::convert(localJointOB));
-		localB.getBasis().setEulerZYX(morphogene->getJointRoll(),
-				morphogene->getJointYaw(), morphogene->getJointPitch());
+		// define the position and direction of the joint in the reference frame of child
+		localChildJointTransform.setOrigin(
+				OgreBulletUtils::convert(localChildJointInRefChild));
+		localChildJointTransform.getBasis().setEulerYPR(
+				childMorphogene->getJointYaw(),
+				childMorphogene->getJointPitch(),
+				childMorphogene->getJointRoll());
 
 		//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 		JointModel* joint = new JointModel();
 
+		joint->initialize(
+				phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+				/*parent limb*/
+				((LimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
+				/*child limb*/
+				((LimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
+				localParentJointTransform, localChildJointTransform,
+				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
+				phenomeModel->getComponentModels().size() - 1);
+
 		// add the joint to the phenotype joints
 		phenomeModel->getJointModels().push_back(joint);
 		phenomeModel->getComponentModels().push_back(joint);
-
-		joint->initialize(
-				phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-				/*limbA*/
-				((LimbBt*) ((LimbModel*) generator->getParentComponentModel())->getLimbPhysics())->getRigidBody(),
-				((LimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA,
-				localB,
-				((LimbModel*) generator->getParentComponentModel())->getOwnIndex(),
-				limbB->getOwnIndex(),
-				phenomeModel->getComponentModels().size() - 1);
 
 		//initialize rotational limit motors
 		joint->initializeRotationalLimitMotors(
@@ -363,99 +396,100 @@ void Embryogenesis::transcribeMorphoGene(
 						morphogeneBranch->getJointRollMaxAngle()));
 
 		//set the angular stiffness of the joint
-		//						joint->setAngularStiffness(
-		//								morphogeneBranch->getJointPitchStiffness(),
-		//								morphogeneBranch->getJointYawStiffness(),
-		//								morphogeneBranch->getJointRollStiffness());
-		joint->setAngularStiffness(0, 0, 0);
+		joint->setAngularStiffness(morphogeneBranch->getJointPitchStiffness(),
+				morphogeneBranch->getJointYawStiffness(),
+				morphogeneBranch->getJointRollStiffness());
+
 		//set the angular spring damping coefficients of the joint
-		//						joint->setAngularDamping(
-		//								morphogeneBranch->getSpringPitchDampingCoefficient(),
-		//								morphogeneBranch->getSpringYawDampingCoefficient(),
-		//								morphogeneBranch->getSpringRollDampingCoefficient());
-		joint->setAngularDamping(0, 0, 0);
+		joint->setAngularDamping(
+				morphogeneBranch->getSpringPitchDampingCoefficient(),
+				morphogeneBranch->getSpringYawDampingCoefficient(),
+				morphogeneBranch->getSpringRollDampingCoefficient());
 
 		//set if the angular motor is enabled
-		//TODO: Reenable if working motors
-		//						joint->enableAngularMotor(
-		//								morphogeneBranch->isJointPitchMotorEnabled(),
-		//								morphogeneBranch->isJointYawMotorEnabled(),
-		//								morphogeneBranch->isJointRollMotorEnabled());
+		joint->enableAngularMotor(morphogeneBranch->isJointPitchMotorEnabled(),
+				morphogeneBranch->isJointYawMotorEnabled(),
+				morphogeneBranch->isJointRollMotorEnabled());
 	}
+
+	//Create new generators from the morphogene branches
 
 	//iterate over all morphogene branches
 	for (std::vector<MorphogeneBranch*>::iterator branchIt =
-			morphogene->getGeneBranches().begin();
-			branchIt != morphogene->getGeneBranches().end(); branchIt++) {
+			childMorphogene->getGeneBranches().begin();
+			branchIt != childMorphogene->getGeneBranches().end(); branchIt++) {
 
-		// only add new generator if the branch is active
+		// only add a new generator if the branch is active
 		if ((*branchIt)->isActive()) {
 			// get the branch gene type defined by the branch
-			Morphogene* offspring =
+			Morphogene* branchingMorphoGeneType =
 					(Morphogene*) phenomeModel->getCreatureModel()->getGenotype().getGenes()[(*branchIt)->getBranchGeneType()];
 
-			// create the new generator
+			// create a new generator from the branch
 			PhenotypeGenerator* generatorFromBranch = new PhenotypeGenerator();
 			generatorFromBranch->initialize(generator->getRepetitionList(),
 					generator->getPosition(), generator->getOrientation(),
-					limbB, (*branchIt.base()),
-					morphogene->getSegmentShrinkFactor()
+					childLimb, (*branchIt.base()),
+					childMorphogene->getSegmentShrinkFactor()
 							* generator->getCurrentShrinkageFactor());
 
-			//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
+			// If repetition limit of this component is not exceeded
+			// (if it does not find the key OR if the repetition limit of the key is not exceeded)
 			if (generatorFromBranch->getRepetitionList().find(
 					(*branchIt)->getBranchGeneType())
 					== generatorFromBranch->getRepetitionList().end()
 					|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-							<= offspring->getRepetitionLimit()) {
+							<= branchingMorphoGeneType->getRepetitionLimit()) {
 
-				//add another of this offspring type
+				//add another of this branching morphogene type
 				generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-				generatorFromBranch->setGene(offspring);
+				generatorFromBranch->setGene(branchingMorphoGeneType);
 			} else {
 
-				//add the offspring's follower because the repetition limit of the offspring is exceeded
+				//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
 				generatorFromBranch->setGene(
-						phenomeModel->getCreatureModel()->getGenotype().getGenes()[offspring->getFollowUpGene()]);
+						phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
 			}
 
-			//set new root to leaf path length
+			// increase root to leaf path length by 1
 			generatorFromBranch->setRoot2LeafPath(
 					generator->getRoot2LeafPath() + 1);
 
 			//add generator to the list
 			generatorList.push_back(generatorFromBranch);
 
+			// if the branch also defines a flipped branch
 			if ((*branchIt)->isFlipped()) {
-				// create the new generator
+				// create a new generator with the flipped flag set
 				PhenotypeGenerator* flippedGeneratorFromBranch =
 						new PhenotypeGenerator();
 				flippedGeneratorFromBranch->initialize(
 						generator->getRepetitionList(),
 						generator->getPosition(), generator->getOrientation(),
-						limbB, (*branchIt.base()),
-						morphogene->getSegmentShrinkFactor()
+						childLimb, (*branchIt.base()),
+						childMorphogene->getSegmentShrinkFactor()
 								* generator->getCurrentShrinkageFactor(),
 						true/*Flipped*/, false);
 
-				//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
+				// If repetition limit not exceeded
+				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
 				if (flippedGeneratorFromBranch->getRepetitionList().find(
 						(*branchIt)->getBranchGeneType())
 						== flippedGeneratorFromBranch->getRepetitionList().end()
 						|| flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-								<= offspring->getRepetitionLimit()) {
+								<= branchingMorphoGeneType->getRepetitionLimit()) {
 
 					//add another of this offspring type
 					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-					flippedGeneratorFromBranch->setGene(offspring);
+					flippedGeneratorFromBranch->setGene(branchingMorphoGeneType);
 				} else {
 
-					//add the offspring's follower because the repetition limit of the offspring is exceeded
+					//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
 					flippedGeneratorFromBranch->setGene(
-							phenomeModel->getCreatureModel()->getGenotype().getGenes()[offspring->getFollowUpGene()]);
+							phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
 				}
 
-				//set new root to leaf path length
+				// increase root to leaf path length by 1
 				flippedGeneratorFromBranch->setRoot2LeafPath(
 						generator->getRoot2LeafPath() + 1);
 
@@ -463,6 +497,7 @@ void Embryogenesis::transcribeMorphoGene(
 				generatorList.push_back(flippedGeneratorFromBranch);
 			}
 
+			// if the branch also defines a mirrored branch
 			if ((*branchIt)->isMirrored()) {
 				// create the new generator
 				PhenotypeGenerator* mirroredGeneratorFromBranch =
@@ -470,29 +505,31 @@ void Embryogenesis::transcribeMorphoGene(
 				mirroredGeneratorFromBranch->initialize(
 						generator->getRepetitionList(),
 						generator->getPosition(), generator->getOrientation(),
-						limbB, (*branchIt.base()),
-						morphogene->getSegmentShrinkFactor()
+						childLimb, (*branchIt.base()),
+						childMorphogene->getSegmentShrinkFactor()
 								* generator->getCurrentShrinkageFactor(), false,
 						true/*Mirrored*/);
 
-				//If repetition limit not exceeded (if it does not find the key OR if the repetition limit of the key is not exceeded)
+				// If repetition limit not exceeded
+				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
 				if (mirroredGeneratorFromBranch->getRepetitionList().find(
 						(*branchIt)->getBranchGeneType())
 						== mirroredGeneratorFromBranch->getRepetitionList().end()
 						|| mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-								<= offspring->getRepetitionLimit()) {
+								<= branchingMorphoGeneType->getRepetitionLimit()) {
 
-					//add another of this offspring type
+					//add another of this branching morphogene type
 					mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-					mirroredGeneratorFromBranch->setGene(offspring);
+					mirroredGeneratorFromBranch->setGene(
+							branchingMorphoGeneType);
 				} else {
 
-					//add the offspring's follower because the repetition limit of the offspring is exceeded
+					//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
 					mirroredGeneratorFromBranch->setGene(
-							phenomeModel->getCreatureModel()->getGenotype().getGenes()[offspring->getFollowUpGene()]);
+							phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
 				}
 
-				//set new root to leaf path length
+				// increase root to leaf path length by 1
 				mirroredGeneratorFromBranch->setRoot2LeafPath(
 						generator->getRoot2LeafPath() + 1);
 
