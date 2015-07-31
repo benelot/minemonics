@@ -23,7 +23,8 @@
 
 BoostLogger Universe::mBoostLogger; /*<! initialize the boost logger*/
 Universe::_Init Universe::_initializer;
-Universe::Universe() {
+Universe::Universe() :
+		mSimulationSpeed(pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)) {
 //	mEvaluationController();
 	mPlanets.clear();
 //	mUniverseModel();

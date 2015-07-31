@@ -185,6 +185,10 @@ public:
 		return mControllers;
 	}
 
+	std::vector<ComponentModel*>& getComponentModels() {
+		return mComponentModels;
+	}
+
 	const std::vector<ComponentModel*>& getComponentModels() const {
 		return mComponentModels;
 	}
@@ -213,6 +217,9 @@ public:
 		return mLimbModels;
 	}
 
+	CreatureModel* const getCreatureModel() const {
+		return mCreatureModel;
+	}
 private:
 	/**
 	 * The boost logger.

@@ -3,6 +3,8 @@
 
 //# corresponding headers
 //# forward declarations
+class Gene;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -31,6 +33,21 @@ public:
 	 * @return The clone of the base generator.
 	 */
 	virtual BaseGenerator* clone() = 0;
+
+	//Accessor methods
+	Gene* getGene() const {
+		return mGene;
+	}
+
+	void setGene(Gene* const gene) {
+		this->mGene = gene;
+	}
+
+protected:
+	/**
+	 * The gene the generator transcribes.
+	 */
+	Gene* mGene;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_BASEGENERATOR_HPP_ */

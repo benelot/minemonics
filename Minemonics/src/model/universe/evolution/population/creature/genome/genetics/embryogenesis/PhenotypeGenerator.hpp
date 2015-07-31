@@ -52,14 +52,6 @@ public:
 	virtual PhenotypeGenerator* clone();
 
 	//Accessor methods
-	Gene* getGene() const {
-		return mGene;
-	}
-
-	void setGene(Gene* const gene) {
-		this->mGene = gene;
-	}
-
 	int getRoot2LeafPath() const {
 		return mRoot2LeafPath;
 	}
@@ -121,7 +113,6 @@ public:
 	}
 
 private:
-	Gene* mGene;
 
 	int mRoot2LeafPath;
 

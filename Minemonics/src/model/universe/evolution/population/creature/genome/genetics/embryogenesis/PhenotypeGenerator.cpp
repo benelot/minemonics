@@ -7,23 +7,21 @@
 //## utils headers
 
 PhenotypeGenerator::PhenotypeGenerator() :
-		mGene(NULL), mRoot2LeafPath(0), mParentComponentModel(NULL), mCurrentShrinkageFactor(
-				1), mGeneBranch(NULL),mFlipped(false),mMirrored(false) {
+		mRoot2LeafPath(0), mParentComponentModel(NULL), mCurrentShrinkageFactor(
+				1), mGeneBranch(NULL), mFlipped(false), mMirrored(false) {
 }
 
-
 PhenotypeGenerator::~PhenotypeGenerator() {
-	mGene = NULL;
 	mGeneBranch = NULL;
 	mParentComponentModel = NULL;
 	mReferenceComponents.clear();
 	mRepetitionList.clear();
 }
 
-void PhenotypeGenerator::initialize(std::map<int,int>& repetitionList,
+void PhenotypeGenerator::initialize(std::map<int, int>& repetitionList,
 		Ogre::Vector3 position, Ogre::Quaternion orientation,
 		ComponentModel* parentComponentModel, GeneBranch* geneBranch,
-		double currentShrinkageFactor,bool flipped,bool mirrored) {
+		double currentShrinkageFactor, bool flipped, bool mirrored) {
 	mRepetitionList = repetitionList;
 	mPosition = position;
 	mOrientation = orientation;

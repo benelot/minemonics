@@ -3,6 +3,8 @@
 
 //# forward declarations
 //# system headers
+#include <stddef.h>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -14,8 +16,8 @@
 //## view headers
 //## utils headers
 
-
-BaseGenerator::BaseGenerator() {
+BaseGenerator::BaseGenerator() :
+		mGene(NULL) {
 	// TODO Auto-generated constructor stub
 
 }

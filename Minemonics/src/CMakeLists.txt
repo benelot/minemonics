@@ -48,6 +48,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/genome/DirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.hpp
+	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp
 	./model/universe/evolution/population/creature/genome/Gene.hpp
@@ -110,6 +111,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/genome/DirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.cpp
+    ./model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.cpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.cpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.cpp
 	./model/universe/evolution/population/creature/genome/Gene.cpp
