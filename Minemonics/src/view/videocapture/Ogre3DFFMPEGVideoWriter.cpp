@@ -35,8 +35,8 @@ void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
 
 	mTimebasefactor = timebasefactor;
 	// main frame timer initialization
-	mStart = boost::posix_time::microsec_clock::local_time();
-	mNow = boost::posix_time::microsec_clock::local_time();
+	mStart = time.getMilliseconds();
+	mNow = mStart;
 	mRuntime = mNow - mStart;
 
 	mVideoTexture =
@@ -319,7 +319,7 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 	if (mWriterInitialized) {
 		// main frame timer update
 		mPrevious = mNow;
-		mNow = boost::posix_time::microsec_clock::local_time();
+		mNow = time.getMilliseconds();
 		mRuntime = mNow - mStart;
 
 		Ogre::RenderTexture *pRenderTex =
@@ -338,10 +338,8 @@ void Ogre3DFFMPEGVideoWriter::postRenderTargetUpdate(
 //						/ (1000.0f / (mNow - mPrevious).total_milliseconds()
 //								/ mTimebasefactor) << std::endl;
 		addFrame(pDest,
-				mRuntime.total_milliseconds()
-						/ (1000.0f / (mNow - mPrevious).total_milliseconds()
-								/ mTimebasefactor));
-		mStart = boost::posix_time::microsec_clock::local_time();
+				mRuntime / (1000.0f / (mNow - mPrevious) / mTimebasefactor));
+		mStart = time.getMilliseconds();
 
 		buffer->unlock();
 	}

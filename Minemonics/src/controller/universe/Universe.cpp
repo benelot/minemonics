@@ -96,23 +96,8 @@ void Universe::drawDebugWorld() {
 
 void Universe::update(const double timeSinceLastTick) {
 
-	//calculate the number of substeps the simulator needs to take
-	int subSteps =
-			PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
-					+ ceil(
-							pow(2,
-									PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-									* timeSinceLastTick
-									/ ControlConfiguration::SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC);
-	if (timeSinceLastTick) {
-		for (int i = 0; i < subSteps; i++) {
-			stepPhysics(
-					ControlConfiguration::SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC);
-			mEvaluationController.update(
-					ControlConfiguration::SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC);
-		}
-	}
-
+	stepPhysics(timeSinceLastTick);
+	mEvaluationController.update(timeSinceLastTick);
 }
 
 int Universe::getTotalCreatureQty() {

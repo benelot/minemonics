@@ -82,10 +82,15 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 			int subSteps =
 					PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
 							+ ceil(
-									timeStep
+									pow(2,
+											PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+											* timeStep
 											/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 
-			mDynamicsWorld->stepSimulation(timeStep, subSteps,
+			mDynamicsWorld->stepSimulation(
+					pow(2,
+							PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+							* timeStep, subSteps,
 					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 		}
 

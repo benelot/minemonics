@@ -93,10 +93,11 @@ public:
 	void postRenderTargetUpdate(const Ogre::RenderTargetEvent &evt);
 
 private:
-	boost::posix_time::ptime mStart;
-	boost::posix_time::ptime mPrevious;
-	boost::posix_time::ptime mNow;
-	boost::posix_time::time_duration mRuntime;
+	Ogre::Timer time;
+	unsigned long int mStart;
+	unsigned long int mPrevious;
+	unsigned long int mNow;
+	long int mRuntime;
 	float mTimebasefactor;
 
 	//instance variables
