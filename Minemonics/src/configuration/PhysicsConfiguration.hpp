@@ -26,7 +26,7 @@
 class PhysicsConfiguration {
 public:
 
-	static const double REALITY_BULLET_GRAVITY_SCALING_FACTOR = 30;
+	static const double REALITY_BULLET_GRAVITY_SCALING_FACTOR = 1;
 
 	/**
 	 * No gravity
@@ -81,9 +81,10 @@ public:
 	/**
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
 	 */
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE = 0.001f;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC = 0.001f;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = 0.001f * 1000.0f;
 
-	static const int SIMULATOR_SECURITY_MARGIN = 5;
+	static const int SIMULATOR_SECURITY_MARGIN = 2;
 
 	/**
 	 * Are the body boxes allowed to interpenetrate each other?

@@ -28,7 +28,7 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 0.1;
+	static const double LIMB_MIN_SIZE = 0.05;
 	//Still pretty tiny, but a visible size
 
 	/**

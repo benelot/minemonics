@@ -113,6 +113,7 @@ void Evaluation::update(const double timeSinceLastTick) {
 			timeSinceLastTick
 					* mPlanet->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getSimulationSpeed());
 
+	std::cout << mEvaluationModel.getTimePassed() << std::endl;
 	//terminate if the time passed is higher than the evaluation time
 	if (mEvaluationModel.getTimePassed()
 			> mEvaluationModel.getEvaluationTime()) {

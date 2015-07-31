@@ -19,11 +19,6 @@
 #include <SDL_video.h>
 
 //## model headers
-#include <boost/date_time/microsec_time_clock.hpp>
-#include <boost/date_time/posix_time/posix_time_duration.hpp>
-#include <boost/date_time/posix_time/posix_time_types.hpp>
-#include <boost/date_time/time.hpp>
-#include <boost/date_time/time_duration.hpp>
 #include <boost/log/core/record.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 #include <boost/log/sources/record_ostream.hpp>
@@ -98,15 +93,30 @@ SimulationManager::SimulationManager(void) :
 	mRandomness = new Randomness();
 
 	// main frame timer initialization
-	mApplicationClock = boost::posix_time::microsec_clock::local_time();
-	mStart = boost::posix_time::microsec_clock::local_time();
-	mNow = boost::posix_time::microsec_clock::local_time();
+	mStart = time.getMilliseconds();
+	mApplicationClock = mStart;
+	mPrevious = mStart;
+	mNow = mStart;
 	mRuntime = mNow - mStart;
-	mGraphicsStart = boost::posix_time::microsec_clock::local_time();
-	mModelStart = boost::posix_time::microsec_clock::local_time();
-	mInputStart = boost::posix_time::microsec_clock::local_time();
-	mPhysicsStepStart = boost::posix_time::microsec_clock::local_time();
-	mPhysicsStepEnd = boost::posix_time::microsec_clock::local_time();
+
+	mGraphicsStart = mStart;
+
+	mModelStart = mStart;
+
+	mInputStart = mStart;
+
+	mPhysicsStepStart = mStart;
+	mPhysicsStepEnd = mStart;
+
+	//durations
+	mLastGraphicsTick = 0;
+	mLastModelTick = 0;
+	mLastInputTick = 0;
+	mPhysicsTick = 0;
+
+	mApplicationDt = 0;
+	mAccumulator = 0;
+	mFrameTime = 0;
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
@@ -130,9 +140,6 @@ void SimulationManager::createScene(void) {
 	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL);
 	Logger::initTermSink();
 
-	// initialize random number generator
-	boost::posix_time::time_duration duration(mNow.time_of_day());
-
 	// Set render target with the current application name
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);
@@ -142,10 +149,13 @@ void SimulationManager::createScene(void) {
 	// Create the camera controlling node
 	Ogre::SceneNode *camNode =
 			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
-					EvolutionConfiguration::ROOT_POSITION+Ogre::Vector3(0,10,100));
-	mCamera->setPosition(EvolutionConfiguration::ROOT_POSITION+Ogre::Vector3(0,10,100));
+					EvolutionConfiguration::ROOT_POSITION
+							+ Ogre::Vector3(0, 10, 100));
+	mCamera->setPosition(
+			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
 	camNode->attachObject(mCamera);
-	camNode->lookAt(EvolutionConfiguration::ROOT_POSITION, Ogre::Node::TS_WORLD);
+	camNode->lookAt(EvolutionConfiguration::ROOT_POSITION,
+			Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(12000);
 
@@ -205,7 +215,6 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
-
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
@@ -303,44 +312,53 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	 Bullet does the interpolation for us. */
 	do {
 		// update timers
+		mNow = time.getMilliseconds();
+		mFrameTime = mNow - mPrevious;
+
 		mPrevious = mNow;
-		mNow = boost::posix_time::microsec_clock::local_time();
 
 		// update main frame timer
 		mRuntime = mNow - mStart;
 
-		mModelStart = boost::posix_time::microsec_clock::local_time();
+		mModelStart = time.getMilliseconds();
 		mLastGraphicsTick = mModelStart - mGraphicsStart;
+
+		// step the physics forward
+		mUniverse.setSimulationSpeed(mSimulationSpeed);
 
 		if (mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09
 				|| mSimulationSpeed
 						== PhysicsConfiguration::SIMULATION_SPEED_10) {
-			mPhysicsTick = boost::posix_time::millisec(
-					ApplicationConfiguration::APPLICATION_TICK)
+			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK
 					- mLastGraphicsTick - mLastInputTick;
 
-			mPhysicsStepStart = boost::posix_time::microsec_clock::local_time();
+			mPhysicsStepStart = time.getMilliseconds();
+
 			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) {
-				// step the physics forward
-				mUniverse.setSimulationSpeed(mSimulationSpeed);
-				mUniverse.stepPhysics(
-						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
 				// update the universe
 				mUniverse.update(
-						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE);
-				mPhysicsStepEnd =
-						boost::posix_time::microsec_clock::local_time();
+						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+				mPhysicsStepEnd = time.getMilliseconds();
 			}
 		} else {
-			// step the physics forward
-			mUniverse.setSimulationSpeed(mSimulationSpeed);
-			mUniverse.stepPhysics(
-					(mNow - mPrevious).total_milliseconds() / 1000.0f);
-			// update the universe
-			mUniverse.update((mNow - mPrevious).total_milliseconds() / 1000.0f);
+			//cap frametime to make the application lose time, not the physics
+			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) {
+				mFrameTime = ApplicationConfiguration::APPLICATION_TICK;
+			}
+
+			mAccumulator += mFrameTime;
+
+			while (mAccumulator
+					>= PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI) {
+				// update the universe
+				mUniverse.update(
+						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+				mAccumulator -=
+						PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI;
+			}
 		}
 
-		mInputStart = mNow = boost::posix_time::microsec_clock::local_time();
+		mInputStart = time.getMilliseconds();
 		mLastModelTick = mInputStart - mModelStart;
 
 		//#############
@@ -349,21 +367,13 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		// Game Clock part of the loop
 		/*  This ticks once every APPLICATION_TICK milliseconds on average */
 		mApplicationDt = mNow - mApplicationClock;
-		while (mApplicationDt
-				>= boost::posix_time::millisec(
-						ApplicationConfiguration::APPLICATION_TICK)) {
-			mApplicationDt -= boost::posix_time::millisec(
-					ApplicationConfiguration::APPLICATION_TICK);
-			mApplicationClock += boost::posix_time::millisec(
-					ApplicationConfiguration::APPLICATION_TICK);
+		if (mApplicationDt >= ApplicationConfiguration::APPLICATION_TICK) {
+			mApplicationClock = mNow;
 			// Inject input into handlers
 			mInputHandler.injectInput();
 
-			// update the information in the panels on screen
-			updatePanels(ApplicationConfiguration::APPLICATION_TICK / 1000.0f);
 		}
-
-		mGraphicsStart = boost::posix_time::microsec_clock::local_time();
+		mGraphicsStart = time.getMilliseconds();
 		mLastInputTick = mGraphicsStart - mInputStart;
 
 	} while (mStateHandler.getCurrentState()
@@ -372,6 +382,10 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	//#############
 	// Graphics part
 	//#############
+
+	// update the information in the panels on screen
+	updatePanels(evt.timeSinceLastFrame);
+
 	// reposition the camera
 	mCameraHandler.reposition(evt.timeSinceLastFrame);
 
@@ -400,8 +414,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 						Ogre::StringConverter::toString(mWindow->getLastFPS()),
 						true);
 				mViewController.getFpsPanel()->setParamValue(1,
-						Ogre::StringConverter::toString(
-								mRuntime.total_milliseconds()), true);
+						Ogre::StringConverter::toString(mRuntime), true);
 
 //				if (mTerrain->mEnvironmentType == Environment::HILLS) {
 //					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {

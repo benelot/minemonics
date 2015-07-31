@@ -32,6 +32,10 @@ public:
 	 * The initial maximum frequency of the sine wave controller
 	 */
 	static const double CPG_SINE_INITIAL_MAX_FREQUENCY = 1; // Hz
+
+	static const double SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC = 0.01;
+
+	static const double SIMULATION_CONTROL_FIXED_STEP_SIZE_MILLI = 0.01 * 1000.0f;
 };
 
 #endif /* CONTROLCONFIGURATION_H_ */

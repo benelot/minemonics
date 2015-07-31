@@ -266,7 +266,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 					// create video file name
 					std::string videoName;
 					videoName.append("Minemonics-");
-					videoName.append(boost::posix_time::to_iso_string(SimulationManager::getSingleton()->getNow()));
+					videoName.append(boost::lexical_cast<std::string>(SimulationManager::getSingleton()->getNow()));
 					videoName.append(".mp4");
 
 					BOOST_LOG_SEV(

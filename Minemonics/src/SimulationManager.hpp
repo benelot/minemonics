@@ -12,6 +12,7 @@ class RagDoll;
 //# system headers
 //## controller headers
 //## model headers
+#include <OgreTimer.h>
 #include <boost/date_time/posix_time/posix_time_config.hpp>
 #include <boost/date_time/posix_time/ptime.hpp>
 
@@ -95,11 +96,11 @@ public:
 		return mVideoWriter;
 	}
 
-	boost::posix_time::time_duration& getRuntime() {
+	unsigned long int getRuntime() {
 		return mRuntime;
 	}
 
-	boost::posix_time::ptime& getNow() {
+	unsigned long int getNow() {
 		return mNow;
 	}
 
@@ -207,34 +208,38 @@ private:
 	Randomness* mRandomness;
 
 	// timing component
-	boost::posix_time::ptime mStart;
-	boost::posix_time::ptime mPrevious;
-	boost::posix_time::ptime mNow;
-	boost::posix_time::time_duration mRuntime;
-	boost::posix_time::time_duration mApplicationDt;
-	boost::posix_time::ptime mApplicationClock;
+	Ogre::Timer time;
+	unsigned long int mStart;
+	unsigned long int mFrameTime;
+	unsigned long int mPrevious;
+	unsigned long int mNow;
+	unsigned long int mRuntime;
+	unsigned long int mAccumulator;
+	unsigned long int mApplicationDt;
+	unsigned long int mApplicationClock;
+
 
 	/**
 	 * The time it took the graphics rendering last time
 	 */
-	boost::posix_time::time_duration mLastGraphicsTick;
-	boost::posix_time::ptime mGraphicsStart;
+	long int mLastGraphicsTick;
+	unsigned long int mGraphicsStart;
 
 	/**
 	 * The time it took the input to process last time
 	 */
-	boost::posix_time::time_duration mLastInputTick;
-	boost::posix_time::ptime mInputStart;
+	long int mLastInputTick;
+	unsigned long int mInputStart;
 
 	/**
 	 * The time it took the model to update last time
 	 * This includes the bullet physics update
 	 */
-	boost::posix_time::time_duration mLastModelTick;
-	boost::posix_time::ptime mModelStart;
-	boost::posix_time::time_duration mPhysicsTick;
-	boost::posix_time::ptime mPhysicsStepStart;
-	boost::posix_time::ptime mPhysicsStepEnd;
+	long int mLastModelTick;
+	long int mModelStart;
+	long int mPhysicsTick;
+	long int mPhysicsStepStart;
+	long int mPhysicsStepEnd;
 
 	//## Debug components
 

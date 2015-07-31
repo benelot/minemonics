@@ -11,6 +11,7 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/ControlConfiguration.hpp>
 //## controller headers
 #include <model/universe/UniverseModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
@@ -31,7 +32,7 @@ Universe::Universe() {
 Universe::~Universe() {
 //	~mEvaluationController()
 
-	//delete the planets
+//delete the planets
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end();) {
 		Planet* planet = (*pit);
@@ -63,19 +64,19 @@ bool Universe::proceedEvaluation() {
 									+ 1 :
 							0);
 		}
-	}
-	else
-	{
+	} else {
 		return false;
 	}
 	mUniverseModel.proceedEvaluation();
 	return true;
 }
 
-void Universe::setSimulationSpeed(double simulationSpeed){
+void Universe::setSimulationSpeed(double simulationSpeed) {
+	mSimulationSpeed = simulationSpeed;
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end(); pit++) {
-		(*pit)->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->setSimulationSpeed(simulationSpeed);
+		(*pit)->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->setSimulationSpeed(
+				simulationSpeed);
 	}
 }
 
@@ -94,14 +95,31 @@ void Universe::drawDebugWorld() {
 }
 
 void Universe::update(const double timeSinceLastTick) {
-	mEvaluationController.update(timeSinceLastTick);
+
+	//calculate the number of substeps the simulator needs to take
+	int subSteps =
+			PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
+					+ ceil(
+							pow(2,
+									PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+									* timeSinceLastTick
+									/ ControlConfiguration::SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC);
+	if (timeSinceLastTick) {
+		for (int i = 0; i < subSteps; i++) {
+			stepPhysics(
+					ControlConfiguration::SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC);
+			mEvaluationController.update(
+					ControlConfiguration::SIMULATION_CONTROL_FIXED_STEP_SIZE_SEC);
+		}
+	}
+
 }
 
-int Universe::getTotalCreatureQty(){
+int Universe::getTotalCreatureQty() {
 	int totalCreatureQty = 0;
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end(); pit++) {
-		totalCreatureQty +=(*pit)->getTotalCreatureQty();
+		totalCreatureQty += (*pit)->getTotalCreatureQty();
 	}
 	return totalCreatureQty;
 }

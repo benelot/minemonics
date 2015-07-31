@@ -131,6 +131,8 @@ private:
 	 * The planets of the universe.
 	 */
 	std::vector<Planet*> mPlanets;
+
+	int mSimulationSpeed;
 };
 
 #endif /* CONTROLLER_UNIVERSE_UNIVERSE_HPP_ */

@@ -135,7 +135,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14),
-			RAGDOLL_THIGH);
+			0);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -172,7 +172,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14),
-			RAGDOLL_THIGH);
+			0);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -210,7 +210,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1),
-			RAGDOLL_UPPER_ARM);
+			0);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -250,7 +250,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1),
-			RAGDOLL_UPPER_ARM);
+			0);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -436,7 +436,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_THIGH],
 			mPhenotype.getLimbs()[BODYPART_LEFT_LEG], localA, localB, 0, 0, 0);
 	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
-			Ogre::Vector3(0, 0, M_PI_2));
+			Ogre::Vector3(0, 0, 3 * M_PI_4));
 	joint->initializeRotationalLimitMotors(Ogre::Vector3(0.5, 0.5, 0.5),
 			Ogre::Vector3(10000, 10000, 10000));
 	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
