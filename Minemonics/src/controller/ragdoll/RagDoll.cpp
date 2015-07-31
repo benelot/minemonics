@@ -60,7 +60,7 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	LimbModel::PrimitiveType type = LimbModel::CAPSULE;
 
-	bool attachHead = false;
+	bool attachHead = true;
 	bool enableMotor = true;
 	int gapSize = size * 1.0f;
 
@@ -614,7 +614,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
-	enableMotor = true;
+//	enableMotor = true;
 	for (std::vector<Motor*>::const_iterator motorIterator =
 			joint->getMotors().begin();
 			motorIterator != joint->getMotors().end(); motorIterator++) {
