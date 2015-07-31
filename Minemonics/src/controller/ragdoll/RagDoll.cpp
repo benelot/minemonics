@@ -60,9 +60,9 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	LimbModel::PrimitiveType type = LimbModel::CAPSULE;
 
-	bool attachHead = true;
+	bool attachHead = false;
 	bool enableMotor = true;
-	int gapSize = size * 1.3f;
+	int gapSize = size * 1.0f;
 
 	// Setup the geometry
 	// BODYPART_ABDOMENPELVIS
@@ -135,7 +135,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14),
-			0);
+			RAGDOLL_THIGH);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -172,7 +172,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.14, size * 0.45, size * 0.14),
-			0);
+			RAGDOLL_THIGH);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -210,7 +210,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1),
-			0);
+			RAGDOLL_UPPER_ARM);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -250,7 +250,7 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
 			Ogre::Vector3(size * 0.1, size * 0.33, size * 0.1),
-			0);
+			RAGDOLL_UPPER_ARM);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
@@ -494,7 +494,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	localA.setOrigin(
 			btVector3(btScalar(gapSize * -0.2), btScalar(gapSize * 0.15),
 					btScalar(gapSize * 0.)));
-	localB.getBasis().setEulerZYX(0, 0, 0);
+	localB.getBasis().setEulerZYX(0, M_PI, 0);
 	localB.setOrigin(
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
