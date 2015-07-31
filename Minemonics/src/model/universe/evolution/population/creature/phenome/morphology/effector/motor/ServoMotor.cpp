@@ -54,12 +54,12 @@ void ServoMotor::apply(double timeSinceLastTick) {
 	mMotorBt->m_enableMotor = mEnabled;
 
 	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
-	btScalar clampedInputValue = (getInputValue() > 1) ? 1 :
-									(getInputValue() < 0) ? 0 : getInputValue();
+	btScalar clampedInputValue = (getInputValue() > 1.0f) ? 1.0f :
+									(getInputValue() < 0.0f) ? 0.0f : getInputValue();
 
 	//calculate the target angle of the motor
 	btScalar targetAngle = mMotorBt->m_loLimit
-			+ getInputValue() * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
+			+ clampedInputValue * (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
 
 	//calculate the angle error
 	btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
