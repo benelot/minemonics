@@ -25,7 +25,7 @@
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
-		mPlanet(NULL) {
+		mPlanet(NULL), mStart(0) {
 }
 
 Evaluation::~Evaluation() {
@@ -76,6 +76,8 @@ void Evaluation::setup() {
 	}
 
 	mEvaluationModel.setEvaluating(true);
+
+	mStart = SimulationManager::getSingleton()->getRuntime();
 }
 
 void Evaluation::process() {
@@ -95,6 +97,13 @@ void Evaluation::teardown() {
 
 	mEvaluationModel.setEvaluating(false);
 	mEvaluationModel.setTornDown(true);
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mEvaluationModel.getTimePassed() << " seconds simulated in "
+	<< ((float) (SimulationManager::getSingleton()->getRuntime()
+					- mStart)) / 1000.0f << " seconds/ Speedup = "
+	<< mEvaluationModel.getTimePassed()
+	/ (((float) (SimulationManager::getSingleton()->getRuntime()
+							- mStart)) / 1000.0f) << std::endl;
 }
 
 void Evaluation::update(const double timeSinceLastTick) {
@@ -109,11 +118,8 @@ void Evaluation::update(const double timeSinceLastTick) {
 	}
 
 	//update the time passed
-	mEvaluationModel.addTimePassed(
-			timeSinceLastTick
-					* mPlanet->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getSimulationSpeed());
+	mEvaluationModel.addTimePassed(timeSinceLastTick);
 
-	std::cout << mEvaluationModel.getTimePassed() << std::endl;
 	//terminate if the time passed is higher than the evaluation time
 	if (mEvaluationModel.getTimePassed()
 			> mEvaluationModel.getEvaluationTime()) {

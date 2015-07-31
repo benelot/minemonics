@@ -314,7 +314,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		// update timers
 		mNow = time.getMilliseconds();
 		mFrameTime = mNow - mPrevious;
-
 		mPrevious = mNow;
 
 		// update main frame timer

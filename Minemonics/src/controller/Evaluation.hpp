@@ -116,6 +116,8 @@ private:
 	 * The populations taking part in the evaluation.
 	 */
 	std::vector<Population*> mPopulations;
+
+	unsigned long int mStart;
 };
 
 #endif /* CONTROLLER_EVALUATION_HPP_ */

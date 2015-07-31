@@ -214,8 +214,8 @@ private:
 	unsigned long int mPrevious;
 	unsigned long int mNow;
 	unsigned long int mRuntime;
-	unsigned long int mAccumulator;
-	unsigned long int mApplicationDt;
+	long int mAccumulator;
+	long int mApplicationDt;
 	unsigned long int mApplicationClock;
 
 

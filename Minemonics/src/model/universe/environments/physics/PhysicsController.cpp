@@ -79,18 +79,13 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 
 		if (timeStep) {
 			//calculate the number of substeps the simulator needs to take
-			int subSteps =
-					PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
-							+ ceil(
-									pow(2,
-											PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-											* timeStep
-											/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+			int subSteps = 1;
+//					PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
+//							+ ceil(
+//									timeStep
+//											/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 
-			mDynamicsWorld->stepSimulation(
-					pow(2,
-							PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-							* timeStep, subSteps,
+			mDynamicsWorld->stepSimulation(timeStep, subSteps,
 					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 		}
 
