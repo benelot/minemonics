@@ -2413,6 +2413,33 @@ utils/Randomness_test.cpp.s:
 	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/Randomness_test.cpp.s
 .PHONY : utils/Randomness_test.cpp.s
 
+utils/StringFormatter.o: utils/StringFormatter.cpp.o
+.PHONY : utils/StringFormatter.o
+
+# target to build an object file
+utils/StringFormatter.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/StringFormatter.cpp.o
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/StringFormatter.cpp.o
+.PHONY : utils/StringFormatter.cpp.o
+
+utils/StringFormatter.i: utils/StringFormatter.cpp.i
+.PHONY : utils/StringFormatter.i
+
+# target to preprocess a source file
+utils/StringFormatter.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/StringFormatter.cpp.i
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/StringFormatter.cpp.i
+.PHONY : utils/StringFormatter.cpp.i
+
+utils/StringFormatter.s: utils/StringFormatter.cpp.s
+.PHONY : utils/StringFormatter.s
+
+# target to generate assembly for a file
+utils/StringFormatter.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/StringFormatter.cpp.s
+	$(MAKE) -f CMakeFiles/runUnitTests.dir/build.make CMakeFiles/runUnitTests.dir/utils/StringFormatter.cpp.s
+.PHONY : utils/StringFormatter.cpp.s
+
 utils/logging/Logger.o: utils/logging/Logger.cpp.o
 .PHONY : utils/logging/Logger.o
 
@@ -3772,6 +3799,9 @@ help:
 	@echo "... utils/Randomness_test.o"
 	@echo "... utils/Randomness_test.i"
 	@echo "... utils/Randomness_test.s"
+	@echo "... utils/StringFormatter.o"
+	@echo "... utils/StringFormatter.i"
+	@echo "... utils/StringFormatter.s"
 	@echo "... utils/logging/Logger.o"
 	@echo "... utils/logging/Logger.i"
 	@echo "... utils/logging/Logger.s"

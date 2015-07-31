@@ -380,11 +380,21 @@ set(MISCHDRS
 	./configuration/LoggerConfiguration.hpp
 	
 	# logger
-	./utils/Debugger.hpp
 	./utils/logging/Logger.hpp
+	
+	# debugger
+	./utils/Debugger.hpp
+	
+	# randomness
 	./utils/Randomness.hpp
+	
+	# name generator
 	./utils/NameGenerator.hpp
 	
+	# StringFormatter
+	./utils/StringFormatter.hpp
+	
+	# euler angle calculations
 	./utils/ogre3D/Euler.hpp
 	
 	# conversion utils
@@ -398,10 +408,19 @@ set(MISCSRCS
     ./configuration/PhysicsConfiguration.cpp
     
 	# logger
-	./utils/Debugger.cpp
 	./utils/logging/Logger.cpp
+	
+	# debugger
+	./utils/Debugger.cpp
+	
+	# randomness
 	./utils/Randomness.cpp
+	
+	# name generator
 	./utils/NameGenerator.cpp
+	
+	# StringFormatter
+	./utils/StringFormatter.cpp
 )
 
 set(TESTHDRS

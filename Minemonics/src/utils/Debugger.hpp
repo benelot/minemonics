@@ -23,6 +23,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/StringFormatter.hpp>
 
 /**
  * @brief		The debugger collects debug methods to be used in different contexts do quickly get debug information.
@@ -62,11 +63,17 @@ public:
 			if (i != populationModel->getCreatureModels().size()) {
 				nothingFound = false;
 				std::cout << "Block " << identifier << "::..."
-						<< additionalCounter << "/" << j;
-				std::cout << "CreatureModel vector size check....";
-				std::cout << "\nsize: "
-						<< populationModel->getCreatureModels().size() << "\t";
-				std::cout << "size2: >" << i << std::endl;
+						<< additionalCounter << "/" << j
+						<< "CreatureModel vector size check...." << "\nsize: "
+						<< populationModel->getCreatureModels().size() << "\t"
+						<< "size2: >" << i << std::endl;
+				throw std::runtime_error(
+						StringFormatter() << "Block " << identifier << "::..."
+								<< additionalCounter << "/" << j
+								<< "CreatureModel vector size check...."
+								<< "\nsize: "
+								<< populationModel->getCreatureModels().size()
+								<< "\t" << "size2: >" << i >> StringFormatter::to_str);
 				return true;
 			}
 		}
