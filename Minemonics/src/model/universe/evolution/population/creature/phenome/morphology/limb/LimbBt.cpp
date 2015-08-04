@@ -18,6 +18,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -124,8 +126,8 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 
 	btVector3 hitPosition(0, 0, 0);
 
-	btCollisionWorld::ClosestRayResultCallback rayCallback(origin, rayEnd);
-	mWorld->rayTest(origin, rayEnd, rayCallback);
+	btCollisionWorld::ClosestRayResultCallback rayCallback(rayEnd, origin);
+	mWorld->rayTest(rayEnd, origin, rayCallback);
 
 	if (rayCallback.hasHit()) {
 		hitPosition = rayCallback.m_hitPointWorld;
@@ -154,14 +156,14 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 
 btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
 		const btVector3 direction) {
-	return mDimensions.length() / 2.0f * direction.normalized() * 5.0f;
+	return mDimensions.length() / 2.0f * direction.normalized();
 }
 
 btVector3 LimbBt::getLocalIntersection(const btVector3 origin,
 		const btVector3 direction) {
 	// for the moment we fake the local intersection point until the real intersection can be calculated
-	return getLocalFakeIntersection(origin, direction);
-	//return getLocalPreciseIntersection(origin, direction);
+//	return getLocalFakeIntersection(origin, direction);
+	return getLocalPreciseIntersection(origin, direction);
 }
 
 void LimbBt::reset(const Ogre::Vector3 position) {
@@ -214,7 +216,7 @@ btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
-		mWorld->addRigidBody(mBody);
+		mWorld->addRigidBody(mBody,PhysicsConfiguration::COL_CREATURE,PhysicsConfiguration::CREATURE_COLLIDES_WITH);
 		LimbPhysics::addToWorld();
 	}
 }

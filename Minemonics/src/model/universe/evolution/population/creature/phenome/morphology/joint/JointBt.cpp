@@ -3,16 +3,14 @@
 
 //# forward declarations
 //# system headers
-#include <stddef.h>
-#include <iterator>
+#include <iostream>
 #include <vector>
 
 //## controller headers
 //## model headers
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
 #include <BulletDynamics/ConstraintSolver/btTypedConstraint.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
@@ -49,15 +47,51 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
 		const btTransform& tframeInB) {
 	mWorld = world;
-	mG6DofJoint = new btGeneric6DofSpringConstraint(*bodyA, *bodyB, tframeInA,
-			tframeInB, true/*use fixed frame A for linear limits*/);
+	mG6DofJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA,
+			tframeInB EXTRAPARAMS);
 	mG6DofJoint->setLinearLowerLimit(btVector3(0, 0, 0));
 	mG6DofJoint->setLinearUpperLimit(btVector3(0, 0, 0));
 
 	mG6DofJoint->setAngularLowerLimit(btVector3(0, 0, 0));
 	mG6DofJoint->setAngularUpperLimit(btVector3(0, 0, 0));
 
-	mG6DofJoint->setEquilibriumPoint();
+	//springs
+	mG6DofJoint->enableSpring(0, true);
+	mG6DofJoint->enableSpring(1, true);
+	mG6DofJoint->enableSpring(2, true);
+	mG6DofJoint->enableSpring(3, true);
+	mG6DofJoint->enableSpring(4, true);
+	mG6DofJoint->enableSpring(5, true);
+	mG6DofJoint->setStiffness(0, 100);
+	mG6DofJoint->setStiffness(1, 100);
+	mG6DofJoint->setStiffness(2, 100);
+	mG6DofJoint->setStiffness(3, 100);
+	mG6DofJoint->setStiffness(4, 100);
+	mG6DofJoint->setStiffness(5, 100);
+
+#ifdef USE_6DOF2
+	mG6DofJoint->setDamping(0, 0);
+	mG6DofJoint->setDamping(1, 0);
+	mG6DofJoint->setDamping(2, 0);
+	mG6DofJoint->setDamping(3, 0);
+	mG6DofJoint->setDamping(4, 0);
+	mG6DofJoint->setDamping(5, 0);
+#else
+	mG6DofJoint->setDamping(0, 1);
+	mG6DofJoint->setDamping(1, 1);
+	mG6DofJoint->setDamping(2, 1);
+	mG6DofJoint->setDamping(3, 1);
+	mG6DofJoint->setDamping(4, 1);
+	mG6DofJoint->setDamping(5, 1);
+	mG6DofJoint->setDamping(6, 1);
+#endif
+
+	mG6DofJoint->setEquilibriumPoint(0, 0);
+	mG6DofJoint->setEquilibriumPoint(1, 0);
+	mG6DofJoint->setEquilibriumPoint(2, 0);
+	mG6DofJoint->setEquilibriumPoint(3, 0);
+	mG6DofJoint->setEquilibriumPoint(4, 0);
+	mG6DofJoint->setEquilibriumPoint(5, 0);
 
 	mG6DofJoint->enableFeedback(true);
 	mG6DofJoint->setJointFeedback(new btJointFeedback());
@@ -88,42 +122,42 @@ JointBt::~JointBt() {
 void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
-	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-			motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->isEnabled()) {
-			(*motorIterator)->apply(timeSinceLastTick);
-		}
-	}
+//	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
+//			motorIterator != mMotors.end(); motorIterator++) {
+//		if ((*motorIterator)->isEnabled()) {
+//			(*motorIterator)->apply(timeSinceLastTick);
+//		}
+//	}
 }
 
 void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 		const btVector3 maxSpeeds) {
-	//add pitch servo motor
-	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::DOF_PITCH,
-			mG6DofJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
-			maxSpeeds.getX());
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
-
-	// add yaw servo motor
-	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::DOF_YAW,
-			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_YAW),
-			maxForces.getY(), maxSpeeds.getY());
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
-
-	//add roll servo motor
-	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::DOF_ROLL,
-			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
-			maxForces.getZ(), maxSpeeds.getZ());
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
+//	//add pitch servo motor
+//	ServoMotor* servoMotor = new ServoMotor();
+//	servoMotor->initialize(JointPhysics::DOF_PITCH,
+//			mG6DofJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+//			maxSpeeds.getX());
+//	//TODO: Hack, make better
+//	servoMotor->setEnabled(true);
+//	mMotors.push_back(servoMotor);
+//
+//	// add yaw servo motor
+//	servoMotor = new ServoMotor();
+//	servoMotor->initialize(JointPhysics::DOF_YAW,
+//			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_YAW),
+//			maxForces.getY(), maxSpeeds.getY());
+//	//TODO: Hack, make better
+//	servoMotor->setEnabled(true);
+//	mMotors.push_back(servoMotor);
+//
+//	//add roll servo motor
+//	servoMotor = new ServoMotor();
+//	servoMotor->initialize(JointPhysics::DOF_ROLL,
+//			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
+//			maxForces.getZ(), maxSpeeds.getZ());
+//	//TODO: Hack, make better
+//	servoMotor->setEnabled(true);
+//	mMotors.push_back(servoMotor);
 }
 
 bool JointBt::equals(const JointBt& jointBt) const {
@@ -182,7 +216,7 @@ void JointBt::setRotationalLimitMotorEnabled(
 		}
 	}
 
-	mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor = enable;
+//	mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor = enable;
 }
 
 void JointBt::addToWorld() {

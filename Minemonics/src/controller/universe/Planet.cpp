@@ -85,11 +85,6 @@ void Planet::update(double timeSinceLastTick) {
 }
 
 bool Planet::proceedEvaluation() {
-	// add the environment model to the world if it is not yet added.
-	if (!mEnvironment->isInWorld()) {
-		mEnvironment->addToWorld();
-	}
-
 	mPlanetModel->proceedEvaluation();
 
 	//if the evolution can not proceed, then remove the environment model from the world.

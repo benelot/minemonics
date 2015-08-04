@@ -5,7 +5,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
-class btRotationalLimitMotor;
+class btRotationalLimitMotor2;
 
 //# system headers
 //## controller headers
@@ -38,7 +38,7 @@ public:
 	 * @param motorBt
 	 */
 	void initialize(const int jointMotorIndex,
-			btRotationalLimitMotor* const motorBt, const double maxForce,
+			btRotationalLimitMotor2* const motorBt, const double maxForce,
 			const double maxSpeed);
 	/**
 	 * Clone the servomotor.
@@ -58,13 +58,13 @@ public:
 		return mJointMotorIndex;
 	}
 
-	btRotationalLimitMotor* getMotorBt() const {
+	btRotationalLimitMotor2* getMotorBt() const {
 		return mMotorBt;
 	}
 
 private:
 	int mJointMotorIndex;
-	btRotationalLimitMotor* mMotorBt;
+	btRotationalLimitMotor2* mMotorBt;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

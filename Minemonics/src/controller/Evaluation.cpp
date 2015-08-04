@@ -49,7 +49,6 @@ void Evaluation::setup() {
 	// the main environment to stay the same for all evaluations
 	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 	case StateHandler::SIMULATION: {
-		mPlanet->getEnvironment()->addToWorld();
 
 		//add competing populations to the world
 		std::vector<Population*>::iterator pit = mPopulations.begin();
@@ -57,10 +56,11 @@ void Evaluation::setup() {
 			(*pit)->reset();
 			(*pit)->addToWorld();
 		}
+
+		mPlanet->getEnvironment()->addToWorld();
 		break;
 	}
 	case StateHandler::HEADLESS_SIMULATION: {
-		mPlanet->getEnvironment()->addToPhysicsWorld();
 
 		//add competing populations to the world
 		std::vector<Population*>::iterator pit = mPopulations.begin();
@@ -68,6 +68,8 @@ void Evaluation::setup() {
 			(*pit)->reset();
 			(*pit)->addToPhysicsWorld();
 		}
+
+		mPlanet->getEnvironment()->addToPhysicsWorld();
 		break;
 	}
 	default: {

@@ -25,6 +25,8 @@
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
 
@@ -50,6 +52,8 @@
 #include <model/universe/PlanetModel.hpp>
 
 //## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
@@ -79,6 +83,10 @@ void Embryogenesis::transcribeGene(
 void Embryogenesis::transcribeMorphogene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
+
+	//##
+	// Continuation checks
+	//##
 	// if the current root to leaf path is equal to the maximal segments depth, break
 	if (generator->getRoot2LeafPath()
 			== phenomeModel->getCreatureModel()->getGenotype().getSegmentsDepthLimit()) {
@@ -93,30 +101,42 @@ void Embryogenesis::transcribeMorphogene(
 
 	totalSegmentCounter++;
 
-	// get the morphogene and start creating the limb and its joint to its parent
-	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
+	// ##
+	// Start generating
+	// ##
 
-	//get the morphogene branch that defines the joint and connects the limbs
-	MorphogeneBranch* morphogeneBranch =
-			((MorphogeneBranch*) generator->getGeneBranch());
+	//PARENT CONNECTION
 
 	// joint position in local reference frame of the parent
 	Ogre::Vector3 localParentJointInRefParent(0, 0, 0);
 
+	//CHILD
+	// get the morphogene and start creating the limb and its joint to its parent
+	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
+
 	// joint position in local reference frame of the child
 	Ogre::Vector3 localChildJointInRefChild(0, 0, 0);
 
+	// CONTINUE FROM PARENT?
 	// if there exists a parent component, then we calculate the position of the new limb according to the parent component
 	if (generator->getParentComponentModel() != NULL) {
 
+		//PARENT
+		//get the morphogene branch that defines the joint and connects the limbs
+		MorphogeneBranch* parentMorphogeneBranch =
+				((MorphogeneBranch*) generator->getGeneBranch());
+
 		// get parent limb
-		LimbPhysics* parentLimb =
-				((LimbModel*) generator->getParentComponentModel())->getLimbPhysics();
+		LimbBt* parentLimb =
+				((LimbBt*) ((LimbModel*) generator->getParentComponentModel())->getLimbPhysics());
 
 		//get the parent limb's center of mass position
 		Ogre::Vector3 parentLimbCOM =
 				((LimbModel*) generator->getParentComponentModel())->getPosition();
 
+		// ##
+		// PARENT ANCHOR DIRECTION
+		// ##
 		//get anchor direction of the parent limb in reference frame of itself
 		Ogre::Vector3 localParentAnchorDirInRefParent;
 
@@ -136,7 +156,8 @@ void Embryogenesis::transcribeMorphogene(
 					(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
 			//	get direction vector of parent limb
 			Ogre::Vector3 parentLimbDir(1, 0, 0);
-			parentLimbDir = OgreBulletUtils::convert(parentLimb->getOrientation()) * parentLimbDir;
+			parentLimbDir = OgreBulletUtils::convert(
+					parentLimb->getOrientation()) * parentLimbDir;
 
 			//reflect on the direction vector
 			localParentAnchorDirInRefParent = -localParentAnchorDirInRefParent
@@ -147,11 +168,17 @@ void Embryogenesis::transcribeMorphogene(
 
 			//get normal direction
 			localParentAnchorDirInRefParent = Ogre::Vector3(
-					morphogeneBranch->getJointAnchorX(),
-					morphogeneBranch->getJointAnchorY(),
-					morphogeneBranch->getJointAnchorZ());
+					parentMorphogeneBranch->getJointAnchorX(),
+					parentMorphogeneBranch->getJointAnchorY(),
+					parentMorphogeneBranch->getJointAnchorZ());
 		}
 
+		//##
+		// PARENT LIMB ANCHOR POINT
+		//##
+
+		// add parent limb to world
+		parentLimb->addToWorld();
 		//get surface point of the parent limb in reference frame itself
 		Ogre::Vector3 localParentAnchorInRefParent(
 				parentLimb->getLocalIntersection(
@@ -160,10 +187,16 @@ void Embryogenesis::transcribeMorphogene(
 				/*direction of anchor of limb parent*/
 				OgreBulletUtils::convert(localParentAnchorDirInRefParent)));
 
+		// remove parent limb from world
+		parentLimb->removeFromWorld();
+
+		//##
+		// PARENT JOINT POSITION
+		//##
 		// joint direction of joint part of parent
-		Ogre::Euler parentEulerJointDir(morphogeneBranch->getJointYaw(),
-				morphogeneBranch->getJointPitch(),
-				morphogeneBranch->getJointRoll());
+		Ogre::Euler parentEulerJointDir(parentMorphogeneBranch->getJointYaw(),
+				parentMorphogeneBranch->getJointPitch(),
+				parentMorphogeneBranch->getJointRoll());
 
 		//get local joint rotation point in reference frame parent
 		localParentJointInRefParent = localParentAnchorInRefParent
@@ -171,6 +204,9 @@ void Embryogenesis::transcribeMorphogene(
 						* localParentAnchorDirInRefParent.normalisedCopy()
 						* MorphologyConfiguration::JOINT_LENGTH;
 
+		//##
+		// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
+		//##
 		// get local joint direction in the local reference frame of child
 		Ogre::Euler childEulerJointDir(childMorphogene->getJointYaw(),
 				childMorphogene->getJointPitch(),
@@ -181,11 +217,14 @@ void Embryogenesis::transcribeMorphogene(
 		childJointDir = childEulerJointDir * childJointDir;
 
 		//get local surface anchor point of child in reference frame parent
-		Ogre::Vector3 localAnchorOfChildInRefParent(
+		Ogre::Vector3 localChildAnchorInRefParent(
 				localParentJointInRefParent
 						- childJointDir.normalisedCopy()
 								* MorphologyConfiguration::JOINT_LENGTH);
 
+		//##
+		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
+		//##
 		// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
 		LimbBt* childLimbBt = new LimbBt();
 
@@ -216,68 +255,107 @@ void Embryogenesis::transcribeMorphogene(
 								* childMorphogene->getZ()),
 				childMorphogene->getRestitution(),
 				childMorphogene->getFriction());
-		childLimbBt->addToWorld();
 
-		//get anchor direction of limb child in the local reference frame of child
+		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(
 				childMorphogene->getJointAnchorX(),
 				childMorphogene->getJointAnchorY(),
 				childMorphogene->getJointAnchorZ());
 
+		// add child limb to world
+		childLimbBt->addToWorld();
+
 		//get the surface point of child limb in the local reference frame of itself
-		Ogre::Vector3 localAnchorInRefChild(
+		Ogre::Vector3 localChildAnchorInRefChild(
 				OgreBulletUtils::convert(childLimbBt->getLocalIntersection(
 				/*origin of child limb*/
 				OgreBulletUtils::convert(generator->getPosition()),
 				/*direction of anchor of child limb*/
 				OgreBulletUtils::convert(localChildAnchorDirInRefChild))));
 
+		// remove child limb from world
 		childLimbBt->removeFromWorld();
 
 		delete childLimbBt;
 		childLimbBt = NULL;
 
-		// global center of mass of child limb
-		Ogre::Vector3 childLimbCOM(
-				parentLimbCOM + localAnchorOfChildInRefParent
-						- localAnchorInRefChild);
-
-		localChildJointInRefChild = localAnchorInRefChild
-				+ localChildAnchorDirInRefChild.normalisedCopy()
+		//
+		localChildJointInRefChild = localChildAnchorInRefChild
+				+ childJointDir.normalisedCopy()
 						* MorphologyConfiguration::JOINT_LENGTH;
 
-		//				// draw line from limb A along test ray (RED LINE)
-		//				//TODO: Debug lines
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(parentLimbCOM,
-		//						limbACOM + 10000.0f * localAnchorDirOA,
-		//						Ogre::ColourValue(1, 0, 0));
-		//
-		//				// draw line from limb B along test ray (RED LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbBCOM,
-		//						limbBCOM + 10000.0f * localAnchorDirOB,
-		//						Ogre::ColourValue(1, 0, 0));
+		// global center of mass of child limb
+		Ogre::Vector3 childLimbCOM(
+				parentLimbCOM + localChildAnchorInRefParent
+						- localChildAnchorInRefChild);
 
-		//				// draw line from limb A to surface anchor point of A (GREEN LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(parentLimbCOM,
-		//						limbACOM + localAnchorOA, Ogre::ColourValue(0, 1, 0));
-		//
-		//				// draw line from anchor point of A to joint rotation point (BLUE LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(
-		//						limbACOM + localAnchorOA, limbACOM + localJointOA,
-		//						Ogre::ColourValue(0, 0, 1));
-		//
-		//				// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(
-		//						limbACOM + localJointOA, limbACOM + localAnchorOBinA,
-		//						Ogre::ColourValue(0, 0, 1));
-		//
-		//				// draw line from limb B to anchor point of B (GREEN LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbBCOM,
-		//						limbBCOM + localAnchorOB, Ogre::ColourValue(0, 1, 0));
-		//
-		//				// draw line from limb A to limb B (WHITE LINE)
-		//				SimulationManager::getSingleton()->getDebugDrawer()->drawLine(limbBCOM,
-		//						limbACOM, Ogre::ColourValue(1, 1, 1));
+//		// draw line from parent limb along test ray (RED LINE)
+//		//TODO: Debug lines
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM,
+				parentLimbCOM + 10000.0f * localParentAnchorDirInRefParent,
+				Ogre::ColourValue(1, 0, 0));
+
+		// draw line from child limb along test ray (RED LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				childLimbCOM,
+				childLimbCOM + 10000.0f * localChildAnchorDirInRefChild,
+				Ogre::ColourValue(1, 0, 0));
+
+		// draw line from limb A to surface anchor point of A (GREEN LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
+				Ogre::ColourValue(0, 1, 0));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				parentLimbCOM, Ogre::Vector3(0, 1, 0), 1, 10,
+				Ogre::ColourValue(0, 1, 0));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				parentLimbCOM + localParentAnchorInRefParent,
+				Ogre::Vector3(0, 1, 0), 1, 10, Ogre::ColourValue(0, 1, 0));
+
+		// draw line from anchor point of A to joint rotation point (BLUE LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM + localParentAnchorInRefParent,
+				parentLimbCOM + localParentJointInRefParent,
+				Ogre::ColourValue(0, 0, 1));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				parentLimbCOM + localParentAnchorInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
+						Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				parentLimbCOM + localParentJointInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
+						Ogre::ColourValue(0, 0, 1));
+
+		// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM + localParentJointInRefParent,
+				parentLimbCOM + localChildAnchorInRefParent,
+				Ogre::ColourValue(0, 0, 1));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				parentLimbCOM + localParentJointInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
+						Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				parentLimbCOM + localChildAnchorInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
+						Ogre::ColourValue(0, 0, 1));
+
+		// draw line from limb B to anchor point of B (GREEN LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				childLimbCOM, childLimbCOM + localChildAnchorInRefChild,
+				Ogre::ColourValue(0, 1, 0));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				childLimbCOM, Ogre::Vector3(0, 1, 0), 1, 10,
+						Ogre::ColourValue(0, 1, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
+				childLimbCOM + localChildAnchorInRefChild, Ogre::Vector3(0, 1, 0), 1, 10,
+						Ogre::ColourValue(0, 1, 0));
+
+//		// draw line from limb A to limb B (WHITE LINE)
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+//				childLimbCOM, parentLimbCOM, Ogre::ColourValue(1, 1, 1));
 
 		// set global center of mass of child limb as the new generation point for generation
 		generator->setPosition(childLimbCOM);
@@ -299,7 +377,7 @@ void Embryogenesis::transcribeMorphogene(
 			Ogre::Vector3(
 					generator->getPosition()
 							- phenomeModel->getCreatureModel()->getPosition()),
-			Ogre::Quaternion(generator->getOrientation()),
+			generator->getOrientation(),
 			/*size*/
 			Ogre::Vector3(
 					generator->getCurrentShrinkageFactor()
@@ -326,8 +404,14 @@ void Embryogenesis::transcribeMorphogene(
 
 	if (generator->getParentComponentModel() != NULL) {
 
+		//PARENT
+		//get the morphogene branch that defines the joint and connects the limbs
+		MorphogeneBranch* parentMorphogeneBranch =
+				((MorphogeneBranch*) generator->getGeneBranch());
+
 		// get parent limb
-		LimbModel* parentLimb = (LimbModel*)generator->getParentComponentModel();
+		LimbModel* parentLimb =
+				(LimbModel*) generator->getParentComponentModel();
 
 		// transformation from the parent limb and child limb center of mass to the joint in the respective reference frames
 		btTransform localParentJointTransform, localChildJointTransform;
@@ -338,9 +422,9 @@ void Embryogenesis::transcribeMorphogene(
 		localParentJointTransform.setOrigin(
 				OgreBulletUtils::convert(localParentJointInRefParent));
 		localParentJointTransform.getBasis().setEulerYPR(
-				morphogeneBranch->getJointYaw(),
-				morphogeneBranch->getJointPitch(),
-				morphogeneBranch->getJointRoll());
+				parentMorphogeneBranch->getJointYaw(),
+				parentMorphogeneBranch->getJointPitch(),
+				parentMorphogeneBranch->getJointRoll());
 
 		// define the position and direction of the joint in the reference frame of child
 		localChildJointTransform.setOrigin(
@@ -369,12 +453,12 @@ void Embryogenesis::transcribeMorphogene(
 
 		//initialize rotational limit motors
 		joint->initializeRotationalLimitMotors(
-				Ogre::Vector3(morphogeneBranch->getJointMaxPitchForce(),
-						morphogeneBranch->getJointMaxYawForce(),
-						morphogeneBranch->getJointMaxRollForce()),
-				Ogre::Vector3(morphogeneBranch->getJointMaxPitchForce(),
-						morphogeneBranch->getJointMaxYawForce(),
-						morphogeneBranch->getJointMaxRollForce()));
+				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
+						parentMorphogeneBranch->getJointMaxYawForce(),
+						parentMorphogeneBranch->getJointMaxRollForce()),
+				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
+						parentMorphogeneBranch->getJointMaxYawForce(),
+						parentMorphogeneBranch->getJointMaxRollForce()));
 
 		//TODO: Quick controller hack
 		for (std::vector<Motor*>::const_iterator motorIterator =
@@ -388,28 +472,30 @@ void Embryogenesis::transcribeMorphogene(
 
 		//set the angular limits of the joint
 		joint->setAngularLimits(
-				Ogre::Vector3(morphogeneBranch->getJointPitchMinAngle(),
-						morphogeneBranch->getJointYawMinAngle(),
-						morphogeneBranch->getJointRollMinAngle()),
-				Ogre::Vector3(morphogeneBranch->getJointPitchMaxAngle(),
-						morphogeneBranch->getJointYawMaxAngle(),
-						morphogeneBranch->getJointRollMaxAngle()));
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+						parentMorphogeneBranch->getJointYawMinAngle(),
+						parentMorphogeneBranch->getJointRollMinAngle()),
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+						parentMorphogeneBranch->getJointYawMaxAngle(),
+						parentMorphogeneBranch->getJointRollMaxAngle()));
 
 		//set the angular stiffness of the joint
-		joint->setAngularStiffness(morphogeneBranch->getJointPitchStiffness(),
-				morphogeneBranch->getJointYawStiffness(),
-				morphogeneBranch->getJointRollStiffness());
+		joint->setAngularStiffness(
+				parentMorphogeneBranch->getJointPitchStiffness(),
+				parentMorphogeneBranch->getJointYawStiffness(),
+				parentMorphogeneBranch->getJointRollStiffness());
 
 		//set the angular spring damping coefficients of the joint
 		joint->setAngularDamping(
-				morphogeneBranch->getSpringPitchDampingCoefficient(),
-				morphogeneBranch->getSpringYawDampingCoefficient(),
-				morphogeneBranch->getSpringRollDampingCoefficient());
+				parentMorphogeneBranch->getSpringPitchDampingCoefficient(),
+				parentMorphogeneBranch->getSpringYawDampingCoefficient(),
+				parentMorphogeneBranch->getSpringRollDampingCoefficient());
 
 		//set if the angular motor is enabled
-		joint->enableAngularMotor(morphogeneBranch->isJointPitchMotorEnabled(),
-				morphogeneBranch->isJointYawMotorEnabled(),
-				morphogeneBranch->isJointRollMotorEnabled());
+		joint->enableAngularMotor(
+				parentMorphogeneBranch->isJointPitchMotorEnabled(),
+				parentMorphogeneBranch->isJointYawMotorEnabled(),
+				parentMorphogeneBranch->isJointRollMotorEnabled());
 	}
 
 	//Create new generators from the morphogene branches
@@ -481,7 +567,8 @@ void Embryogenesis::transcribeMorphogene(
 
 					//add another of this offspring type
 					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-					flippedGeneratorFromBranch->setGene(branchingMorphoGeneType);
+					flippedGeneratorFromBranch->setGene(
+							branchingMorphoGeneType);
 				} else {
 
 					//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded

@@ -9,6 +9,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
@@ -35,7 +37,7 @@ bool EnvironmentModel::isInWorld() const {
 
 void EnvironmentModel::addToWorld() {
 	mPhysicsController->addBody(
-			((EnvironmentBt*) mEnvironmentPhysics)->getBody());
+			((EnvironmentBt*) mEnvironmentPhysics)->getBody(),PhysicsConfiguration::COL_GROUND,PhysicsConfiguration::GROUND_COLLIDES_WITH);
 	mInWorld = true;
 }
 

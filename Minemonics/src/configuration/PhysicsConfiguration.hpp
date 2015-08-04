@@ -82,7 +82,8 @@ public:
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
 	 */
 	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC = 0.001f;
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = 0.001f * 1000.0f;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = 0.001f
+			* 1000.0f;
 
 	static const int SIMULATOR_SECURITY_MARGIN = 2;
 
@@ -103,7 +104,7 @@ public:
 	 */
 
 	// the speed will be 2^SPEED
-	enum SIMULATION_SPEED{
+	enum SIMULATION_SPEED {
 		SIMULATION_SPEED_01,
 		SIMULATION_SPEED_02,
 		SIMULATION_SPEED_03,
@@ -113,11 +114,21 @@ public:
 		SIMULATION_SPEED_07,
 		SIMULATION_SPEED_08,
 		//9 and 10 run as fast as they can
-		SIMULATION_SPEED_09,// with graphics
-		SIMULATION_SPEED_10//headless
+		SIMULATION_SPEED_09, // with graphics
+		SIMULATION_SPEED_10 //headless
 	};
 
 	static const int SIMULATION_SPEEDS[];
+
+#define BIT(x) (1<<(x))
+	enum collisiontypes {
+		COL_NOTHING = 0, //<Collide with nothing
+		COL_CREATURE = BIT(0), //<Collide with ships
+		COL_GROUND = BIT(1), //<Collide with walls
+	};
+
+	static const int CREATURE_COLLIDES_WITH = COL_GROUND;
+	static const int GROUND_COLLIDES_WITH = COL_CREATURE;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

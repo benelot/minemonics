@@ -33,6 +33,10 @@ void PhysicsController::initBulletPhysics() {
 	mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
 	mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);
+	//TODO: Not sure if helps
+	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
+	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
+
 	mDynamicsWorld->setGravity(
 			btVector3(0,
 					-PhysicsConfiguration::EARTH_GRAVITY
@@ -100,6 +104,11 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 void PhysicsController::addBody(btRigidBody* const body) {
 	mCollisionShapes.push_back(body->getCollisionShape());
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
+}
+
+void PhysicsController::addBody(btRigidBody* const body,int collisionGroup,int collidesWith) {
+	mCollisionShapes.push_back(body->getCollisionShape());
+	mDynamicsWorld->addRigidBody(body,collisionGroup,collidesWith); //add the body to the dynamics world
 }
 
 void PhysicsController::removeBody(btRigidBody* body) {

@@ -26,6 +26,16 @@ class Motor;
 
 //## utils headers
 
+//comment this out to compare with original spring constraint
+#define USE_6DOF2
+#ifdef USE_6DOF2
+	#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
+	#define EXTRAPARAMS
+#else
+	#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
+	#define EXTRAPARAMS ,true
+#endif
+
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
  * @details		Details
@@ -139,8 +149,8 @@ public:
 
 	void setLinearLimits(const btVector3 linearLowerLimit,
 			const btVector3 linearUpperLimit) {
-		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
-		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
+//		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
+//		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
 
 	}
 
@@ -153,8 +163,8 @@ public:
 	void setAngularLimits(const btVector3 angularLowerLimit,
 			const btVector3 angularUpperLimit) {
 
-		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
-		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
+//		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
+//		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
 	}
 
 	void setAngularStiffness(const double jointPitchStiffness,
@@ -227,7 +237,7 @@ public:
 		return mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 
-	btGeneric6DofSpringConstraint* getG6DofJoint() {
+	CONSTRAINT_TYPE* getG6DofJoint() {
 		return mG6DofJoint;
 	}
 
@@ -240,7 +250,7 @@ private:
 	/**
 	 * The 6 Degrees of freedom joint that is used as a physical model.
 	 */
-	btGeneric6DofSpringConstraint* mG6DofJoint;
+	CONSTRAINT_TYPE* mG6DofJoint;
 
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.

@@ -60,6 +60,14 @@ public:
 	void addBody(btRigidBody* const body);
 
 	/**
+	 * Add a bullet rigid body.
+	 * @param body The body to be added.
+	 * @param collisionGroup its collision group
+	 * @param collidesWith With which groups it collides.
+	 */
+	void addBody(btRigidBody* const body,int collisionGroup,int collidesWith);
+
+	/**
 	 * Remove a bullet ridig body.
 	 * @param body The body to be removed.
 	 */

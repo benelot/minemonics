@@ -5,7 +5,7 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
 #include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
 
 //## view headers
@@ -39,7 +39,7 @@ ServoMotor::~ServoMotor() {
 }
 
 void ServoMotor::initialize(const int jointMotorIndex,
-		btRotationalLimitMotor* const motorBt, const double maxForce,
+		btRotationalLimitMotor2* const motorBt, const double maxForce,
 		const double maxSpeed) {
 	mJointMotorIndex = jointMotorIndex;
 	mMotorBt = motorBt;
