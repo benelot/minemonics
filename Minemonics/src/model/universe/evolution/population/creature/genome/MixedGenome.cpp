@@ -354,7 +354,7 @@ void MixedGenome::mutateRandomBranch() {
 }
 
 void MixedGenome::mutateRandomBranchOfGene(int geneIndex) {
-	if (mGenes[geneIndex]->getType() == Gene::MorphoGene) {
+	if (mGenes[geneIndex]->getType() == Gene::MorphoGene && ((Morphogene*)mGenes[geneIndex])->getGeneBranches().size() != 0) {
 		mutateBranch(geneIndex,
 				Randomness::getSingleton()->nextUnifPosInt(0,
 						((Morphogene*) mGenes[geneIndex])->getGeneBranches().size()

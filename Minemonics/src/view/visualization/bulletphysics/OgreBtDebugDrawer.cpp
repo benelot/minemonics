@@ -130,13 +130,12 @@ OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 
 void OgreBtDebugDrawer::drawLine(const btVector3 &from, const btVector3 &to,
 		const btVector3 &color) {
-	if(color == btVector3(0,0,0)){
+	if (color == btVector3(0, 0, 0)) {
 		drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
-					Ogre::ColourValue(1,1,1));
-	}
-	else{
-	drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
-			Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
+				Ogre::ColourValue(1, 1, 1));
+	} else {
+		drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
+				Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
 	}
 }
 
@@ -347,12 +346,17 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 
 void OgreBtDebugDrawer::drawSphere(const Ogre::Vector3& p, const double size,
 		const Ogre::ColourValue& colour) {
-	btIDebugDraw::drawSphere(OgreBulletUtils::convert(p),size,OgreBulletUtils::convert(colour));
+	if (mDebugDrawingEnabled) {
+		drawSphere(OgreBulletUtils::convert(p), size,
+				OgreBulletUtils::convert(colour));
+	}
 }
 
 void OgreBtDebugDrawer::drawSphere(const btVector3 constBtVector3,
 		const btScalar size, const btVector3 colour) {
-	btIDebugDraw::drawSphere(constBtVector3,size,colour);
+	if (mDebugDrawingEnabled) {
+		btIDebugDraw::drawSphere(constBtVector3, size, colour);
+	}
 }
 
 bool OgreBtDebugDrawer::frameEnded(const Ogre::FrameEvent& evt) {
