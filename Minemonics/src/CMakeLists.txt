@@ -693,6 +693,12 @@ find_package(Bullet REQUIRED)
 
 include_directories(${BULLET_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${BULLET_LIBRARIES})
+if(BULLET_FOUND)
+	message(STATUS "Found Bullet: ${BULLET_LIBRARIES}")
+	message(STATUS "--${BULLET_INCLUDE_DIRS}")
+else ()
+	message(SEND_ERROR "Failed to find Bullet.")
+endif(BULLET_FOUND)
 
 
 ######################################################################
@@ -821,16 +827,16 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
 # Add test cpp file
-add_executable(runUnitTests
-    ${TESTHDRS}
-    ${TESTSRCS}
-)
+#add_executable(runUnitTests
+#    ${TESTHDRS}
+#    ${TESTSRCS}
+#)
 
 # Link test executable against gtest & gtest_main
-target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+#target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
 
-add_test(
-    NAME runUnitTests
-    COMMAND runUnitTests
-)
+#add_test(
+#    NAME runUnitTests
+#    COMMAND runUnitTests
+#)
  

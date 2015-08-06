@@ -31,11 +31,9 @@ cd ../..
 
 # Bullet Physics 3
 git clone https://github.com/bulletphysics/bullet3.git
-cd bullet3
-mkdir build
-cd build
+cd bullet3/build3
 # configure make files with cmake
-cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET2_DEMOS=ON -DBUILD_BULLET3=ON -DBUILD_EXTRAS=ON -DINSTALL_EXTRA_LIBS=ON ..
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET2_DEMOS=ON -DBUILD_CPU_DEMOS=ON -DBUILD_BULLET3=ON -DBUILD_OPENGL3_DEMOS=ON -DBUILD_EXTRAS=ON -DBUILD_SHARED_LIBS=ON  -DINSTALL_EXTRA_LIBS=ON -DUSE_DOUBLE_PRECISION=ON ..
 make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
