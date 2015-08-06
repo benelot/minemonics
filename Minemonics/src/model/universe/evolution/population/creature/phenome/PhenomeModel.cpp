@@ -8,14 +8,23 @@
 
 //## controller headers
 //## model headers
+#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/PlanetModel.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
@@ -80,11 +89,10 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 		(*cit)->perform(timeSinceLastTick);
 	}
 
-//
-//		std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//		for (; jit != mJointModels.end(); jit++) {
-//			(*jit)->
-//		}
+	std::vector<JointModel*>::iterator jit = mJointModels.begin();
+	for (; jit != mJointModels.end(); jit++) {
+		(*jit)->update(timeSinceLastTick);
+	}
 
 //	// test for strains
 //	std::vector<JointModel*>::iterator jit = mJointModels.begin();

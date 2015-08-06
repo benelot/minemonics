@@ -7,6 +7,7 @@
 
 //## controller headers
 //## model headers
+#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
@@ -17,6 +18,8 @@
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
 
@@ -83,6 +86,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 
 	mCollisionShape->calculateLocalInertia(mass, localInertia);
 
+	// position the limb in the world
 	btTransform startTransform;
 	startTransform.setIdentity();
 	startTransform.setOrigin(position);
@@ -95,7 +99,11 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 
 	//Set the friction and restitution/elasticity of the rigid body
 	mBody->setFriction(friction);
+	mBody->setRollingFriction(friction);
 	mBody->setRestitution(restitution);
+	mBody->setAnisotropicFriction(
+			mCollisionShape->getAnisotropicRollingFrictionDirection(),
+			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
 	//Set user pointer for proper return of creature/limb information etc..
 	mBody->setUserPointer(limbModel);
@@ -119,39 +127,75 @@ btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 		const btVector3 direction) {
 	//TODO: Fix raytesting with bullet to get the precise intersection point
-	btVector3 nDirection = direction;
-	nDirection.normalize();
-	nDirection *= 10000.f;
-	btVector3 rayEnd = origin + nDirection;
 
-	btVector3 hitPosition(0, 0, 0);
+	// the ray caster currently only finds the intersection
+	// when hitting the forward face of a triangle therefore,
+	//the ray has to come from the outside of the shape
+	btVector3 rayStart = origin + direction.normalized() * 100.0f;
+	btVector3 rayEnd = origin;
 
-	btCollisionWorld::ClosestRayResultCallback rayCallback(rayEnd, origin);
-	mWorld->rayTest(rayEnd, origin, rayCallback);
+//	btVector3 rayStart = origin - direction.normalized() * 100.0f;
+//  btVector3 rayEnd = origin + direction.normalized() * 100.0f;
+
+	//TODO: Debug output, draw test ray
+	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
+			rayEnd, btVector3(1, 1, 0));
+
+	btVector3 hitPosition = origin;
+
+	btCollisionWorld::ClosestRayResultCallback rayCallback(rayStart, rayEnd);
+
+//	btCollisionWorld::AllHitsRayResultCallback rayCallback(rayStart, rayEnd);
+//	allResults.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
+	//kF_UseGjkConvexRaytest flag is now enabled by default, use the faster but more approximate algorithm
+	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
+	rayCallback.m_flags &= !btTriangleRaycastCallback::kF_FilterBackfaces;
+	rayCallback.m_collisionFilterGroup =
+			PhysicsConfiguration::COL_CREATURE_TESTRAY;
+	rayCallback.m_collisionFilterMask =
+			PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
+
+//	std::cout << "Worldhandle:" << mWorld << std::endl;
+	mWorld->rayTest(rayStart, rayEnd, rayCallback);
+
+//	for (int i = 0; i < rayCallback.m_hitFractions.size(); i++) {
+//		btVector3 p = origin.lerp(rayEnd, rayCallback.m_hitFractions[i]);
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
+//				btVector3(1, 0, 0));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
+//				p + rayCallback.m_hitNormalWorld[i], btVector3(1, 0, 0));
+//		return p;
+//	}
 
 	if (rayCallback.hasHit()) {
-		hitPosition = rayCallback.m_hitPointWorld;
-		//Normal = RayCallback.m_hitNormalWorld;
-		std::cout
-				<< "############################################################\n"
-				<< "hit an object!\n" << origin.x() << ",\t" << origin.y()
-				<< ",\t" << origin.z() << "\t::Origin\n" << hitPosition.x()
-				<< ",\t" << hitPosition.y() << ",\t" << hitPosition.z()
-				<< "\t::hit\n" << rayEnd.x() << ",\t" << rayEnd.y() << ",\t"
-				<< rayEnd.z() << "\t::rayEnd\n"
-				<< "############################################################\n\n";
+		btVector3 p = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
+				btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
+				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
+		hitPosition = p;
+//		std::cout
+//				<< "############################################################\n"
+//				<< "hit an object!\n" << rayStart.x() << ",\t" << rayStart.y()
+//				<< ",\t" << rayStart.z() << "\t::rayStart\n" << hitPosition.x()
+//				<< ",\t" << hitPosition.y() << ",\t" << hitPosition.z()
+//				<< "\t::hitPosition\n" << rayEnd.x() << ",\t" << rayEnd.y()
+//				<< ",\t" << rayEnd.z() << "\t::rayEnd\n"
+//				<< "############################################################\n\n";
 
-		//return hit
-		return hitPosition;
+	} else {
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
+				1, btVector3(1, 0, 0));
+//		std::cout
+//				<< "############################################################\n"
+//				<< "no hit!\n" << rayStart.x() << ",\t" << rayStart.y() << ",\t"
+//				<< rayStart.z() << "\t::rayStart\n" << rayEnd.x() << ",\t"
+//				<< rayEnd.y() << ",\t" << rayEnd.z() << "\t::rayEnd\n"
+//				<< "############################################################\n\n";
+		//no hit
 	}
-	std::cout
-			<< "############################################################\n"
-			<< "no hit!\n" << origin.x() << ",\t" << origin.y() << ",\t"
-			<< origin.z() << "\t::Origin\n" << rayEnd.x() << ",\t" << rayEnd.y()
-			<< ",\t" << rayEnd.z() << "\t::rayEnd\n"
-			<< "############################################################\n\n";
-	//no hit
-	return origin;
+
+	return hitPosition;
 }
 
 btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
@@ -162,8 +206,12 @@ btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
 btVector3 LimbBt::getLocalIntersection(const btVector3 origin,
 		const btVector3 direction) {
 	// for the moment we fake the local intersection point until the real intersection can be calculated
-//	return getLocalFakeIntersection(origin, direction);
-	return getLocalPreciseIntersection(origin, direction);
+	btVector3 intersection = getLocalPreciseIntersection(origin, direction);
+	if (intersection.isZero()) {
+		return getLocalFakeIntersection(origin, direction);
+	} else {
+		return intersection;
+	}
 }
 
 void LimbBt::reset(const Ogre::Vector3 position) {
@@ -216,7 +264,10 @@ btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
-		mWorld->addRigidBody(mBody,PhysicsConfiguration::COL_CREATURE,PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+		//TODO:Make all limbs collide as soon as the body creation works
+		mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
+				PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+//		mWorld->addRigidBody(mBody);
 		LimbPhysics::addToWorld();
 	}
 }

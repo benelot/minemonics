@@ -97,6 +97,7 @@ public:
 
 	/**
 	 * Get the precise intersection in the global reference frame.
+	 * Note that this only hits other creature elements in the COL_CREATURE collision group.
 	 * @param origin The origin the intersection starts from.
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.

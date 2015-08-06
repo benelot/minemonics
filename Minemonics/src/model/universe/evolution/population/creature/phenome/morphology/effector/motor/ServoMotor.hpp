@@ -19,6 +19,12 @@ class btRotationalLimitMotor2;
 //## view headers
 //## utils headers
 
+#define USE_6DOF2
+#ifdef USE_6DOF2
+#define MOTOR_TYPE btRotationalLimitMotor2
+#else
+#define MOTOR_TYPE btRotationalLimitMotor
+#endif
 /**
  * @brief		The servo motor acts directly on the DoF of a joint and thereby moves the creature.
  * @details		Details
@@ -38,7 +44,7 @@ public:
 	 * @param motorBt
 	 */
 	void initialize(const int jointMotorIndex,
-			btRotationalLimitMotor2* const motorBt, const double maxForce,
+			MOTOR_TYPE* const motorBt, const double maxForce,
 			const double maxSpeed);
 	/**
 	 * Clone the servomotor.
@@ -58,13 +64,13 @@ public:
 		return mJointMotorIndex;
 	}
 
-	btRotationalLimitMotor2* getMotorBt() const {
+	MOTOR_TYPE* getMotorBt() const {
 		return mMotorBt;
 	}
 
 private:
 	int mJointMotorIndex;
-	btRotationalLimitMotor2* mMotorBt;
+	MOTOR_TYPE* mMotorBt;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

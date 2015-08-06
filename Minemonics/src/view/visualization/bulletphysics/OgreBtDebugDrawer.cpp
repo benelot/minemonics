@@ -345,6 +345,16 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	return true;
 }
 
+void OgreBtDebugDrawer::drawSphere(const Ogre::Vector3& p, const double size,
+		const Ogre::ColourValue& colour) {
+	btIDebugDraw::drawSphere(OgreBulletUtils::convert(p),size,OgreBulletUtils::convert(colour));
+}
+
+void OgreBtDebugDrawer::drawSphere(const btVector3 constBtVector3,
+		const btScalar size, const btVector3 colour) {
+	btIDebugDraw::drawSphere(constBtVector3,size,colour);
+}
+
 bool OgreBtDebugDrawer::frameEnded(const Ogre::FrameEvent& evt) {
 
 	mLines->end();

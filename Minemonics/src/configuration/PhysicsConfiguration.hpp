@@ -125,10 +125,14 @@ public:
 		COL_NOTHING = 0, //<Collide with nothing
 		COL_CREATURE = BIT(0), //<Collide with ships
 		COL_GROUND = BIT(1), //<Collide with walls
+		COL_CREATURE_TESTRAY = BIT(2), //<Collide with creature test ray
+		COL_GROUND_TESTRAY = BIT(3) //< Collide with ground test ray
 	};
 
-	static const int CREATURE_COLLIDES_WITH = COL_GROUND;
-	static const int GROUND_COLLIDES_WITH = COL_CREATURE;
+	static const int CREATURE_COLLIDES_WITH = COL_GROUND | COL_CREATURE_TESTRAY;
+	static const int GROUND_COLLIDES_WITH = COL_CREATURE | COL_GROUND_TESTRAY;
+	static const int CREATURE_TESTRAY_COLLIDES_WITH = COL_CREATURE;
+	static const int GROUND_TESTRAY_COLLIDES_WITH = COL_GROUND;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

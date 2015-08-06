@@ -70,10 +70,10 @@ void ServoMotor::apply(double timeSinceLastTick) {
 			(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
 
 	//print some values TODO: Print them to the logger only
-//	std::cout << mMotorBt << "("<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-//			<< "\t/MotorPosition(error):  " << mMotorBt->m_currentPosition
-//			<< "/" << angleError << "\t/targetVelocity: "
-//			<< mMotorBt->m_targetVelocity << std::endl;
+	std::cout << mMotorBt << "("<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
+			<< "\t/MotorPosition(error):  " << mMotorBt->m_currentPosition
+			<< "/" << angleError << "\t/targetVelocity: "
+			<< mMotorBt->m_targetVelocity << std::endl;
 }
 
 ServoMotor* ServoMotor::clone() {

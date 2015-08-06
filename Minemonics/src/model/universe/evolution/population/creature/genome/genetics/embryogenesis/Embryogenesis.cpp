@@ -289,31 +289,17 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimbCOM + localChildAnchorInRefParent
 						- localChildAnchorInRefChild);
 
-//		// draw line from parent limb along test ray (RED LINE)
-//		//TODO: Debug lines
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-				parentLimbCOM,
-				parentLimbCOM + 10000.0f * localParentAnchorDirInRefParent,
-				Ogre::ColourValue(1, 0, 0));
-
-		// draw line from child limb along test ray (RED LINE)
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-				childLimbCOM,
-				childLimbCOM + 10000.0f * localChildAnchorDirInRefChild,
-				Ogre::ColourValue(1, 0, 0));
-
 		// draw line from limb A to surface anchor point of A (GREEN LINE)
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
 				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
 				Ogre::ColourValue(0, 1, 0));
 
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				parentLimbCOM, Ogre::Vector3(0, 1, 0), 1, 10,
-				Ogre::ColourValue(0, 1, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
 
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				parentLimbCOM + localParentAnchorInRefParent,
-				Ogre::Vector3(0, 1, 0), 1, 10, Ogre::ColourValue(0, 1, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentAnchorInRefParent, 0.1,
+				Ogre::ColourValue(0, 1, 0));
 
 		// draw line from anchor point of A to joint rotation point (BLUE LINE)
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
@@ -321,12 +307,12 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimbCOM + localParentJointInRefParent,
 				Ogre::ColourValue(0, 0, 1));
 
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				parentLimbCOM + localParentAnchorInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
-						Ogre::ColourValue(0, 0, 1));
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				parentLimbCOM + localParentJointInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
-						Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentAnchorInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentJointInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
 
 		// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
@@ -334,24 +320,23 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimbCOM + localChildAnchorInRefParent,
 				Ogre::ColourValue(0, 0, 1));
 
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				parentLimbCOM + localParentJointInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
-						Ogre::ColourValue(0, 0, 1));
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				parentLimbCOM + localChildAnchorInRefParent, Ogre::Vector3(0, 1, 0), 1, 10,
-						Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentJointInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localChildAnchorInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
 
 		// draw line from limb B to anchor point of B (GREEN LINE)
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
 				childLimbCOM, childLimbCOM + localChildAnchorInRefChild,
 				Ogre::ColourValue(0, 1, 0));
 
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				childLimbCOM, Ogre::Vector3(0, 1, 0), 1, 10,
-						Ogre::ColourValue(0, 1, 0));
-		SimulationManager::getSingleton()->getDebugDrawer().drawContactPoint(
-				childLimbCOM + localChildAnchorInRefChild, Ogre::Vector3(0, 1, 0), 1, 10,
-						Ogre::ColourValue(0, 1, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				childLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				childLimbCOM + localChildAnchorInRefChild, 0.1,
+				Ogre::ColourValue(0, 1, 0));
 
 //		// draw line from limb A to limb B (WHITE LINE)
 //		SimulationManager::getSingleton()->getDebugDrawer().drawLine(

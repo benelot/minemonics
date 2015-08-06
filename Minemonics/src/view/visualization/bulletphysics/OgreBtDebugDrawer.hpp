@@ -93,6 +93,9 @@ public:
 	void drawTriangle(const Ogre::Vector3& v0, const Ogre::Vector3& v1,
 			const Ogre::Vector3& v2, Ogre::ColourValue color, const Ogre::Real alpha);
 
+	void drawSphere(const Ogre::Vector3& p,const double size, const Ogre::ColourValue& colour);
+
+	void drawSphere(const btVector3, const btScalar size, const btVector3 colour);
 	/**
 	 * Draw contact point.
 	 * @param PointOnB Point on surface.

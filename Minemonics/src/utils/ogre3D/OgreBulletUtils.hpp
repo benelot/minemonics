@@ -7,12 +7,26 @@
 
 #ifndef MODEL_BULLET_OGREBULLETUTILS_H_
 #define MODEL_BULLET_OGREBULLETUTILS_H_
-
+//# corresponding headers
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btVector3.h>
+#include <OgreColourValue.h>
 #include <OgreQuaternion.h>
 #include <OgreVector3.h>
+
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 class OgreBulletUtils {
 public:
@@ -27,12 +41,15 @@ public:
 	static btQuaternion convert(const Ogre::Quaternion &Q) {
 		return btQuaternion(Q.x, Q.y, Q.z, Q.w);
 	}
-	;
 
 	static Ogre::Quaternion convert(const btQuaternion &Q) {
 		return Ogre::Quaternion(Q.w(), Q.x(), Q.y(), Q.z());
 	}
-	;
+
+	static btVector3 convert(const Ogre::ColourValue &c) {
+		return btVector3(c.r, c.g, c.b);
+	}
+
 };
 
 #endif /* MODEL_BULLET_OGREBULLETUTILS_H_ */

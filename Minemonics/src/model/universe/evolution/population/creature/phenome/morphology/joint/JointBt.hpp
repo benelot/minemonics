@@ -29,11 +29,11 @@ class Motor;
 //comment this out to compare with original spring constraint
 #define USE_6DOF2
 #ifdef USE_6DOF2
-	#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
-	#define EXTRAPARAMS
+#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
+#define EXTRAPARAMS
 #else
-	#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-	#define EXTRAPARAMS ,true
+#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
+#define EXTRAPARAMS ,true
 #endif
 
 /**
@@ -149,8 +149,8 @@ public:
 
 	void setLinearLimits(const btVector3 linearLowerLimit,
 			const btVector3 linearUpperLimit) {
-//		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
-//		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
+		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
+		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
 
 	}
 
@@ -163,8 +163,8 @@ public:
 	void setAngularLimits(const btVector3 angularLowerLimit,
 			const btVector3 angularUpperLimit) {
 
-//		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
-//		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
+		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
+		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
 	}
 
 	void setAngularStiffness(const double jointPitchStiffness,
@@ -216,8 +216,11 @@ public:
 	void setTargetRotationalVelocity(
 			JointPhysics::RotationalDegreeOfFreedom index,
 			double targetVelocity) {
-		mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity =
-				targetVelocity;
+#ifdef USE_6DOF2
+		mG6DofJoint->setTargetVelocity(2 + index, targetVelocity);
+#else
+		mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
+#endif
 	}
 
 	double getTargetRotationalVelocity(
@@ -228,8 +231,11 @@ public:
 	void setMaxRotationalForce(
 			const JointPhysics::RotationalDegreeOfFreedom index,
 			const double maxMotorForce) {
-		mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce =
-				maxMotorForce;
+#ifdef USE_6DOF2
+		mG6DofJoint->setMaxMotorForce(2 + index, maxMotorForce);
+#else
+		mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce = maxMotorForce;
+#endif
 	}
 
 	double getMaxRotationalForce(
