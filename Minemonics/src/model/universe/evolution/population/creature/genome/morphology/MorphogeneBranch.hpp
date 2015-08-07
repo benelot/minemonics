@@ -225,7 +225,8 @@ public:
 		return mSpringRollDampingCoefficient;
 	}
 
-	void setSpringRollDampingCoefficient(const double springRollDampingCoefficient) {
+	void setSpringRollDampingCoefficient(
+			const double springRollDampingCoefficient) {
 		mSpringRollDampingCoefficient = springRollDampingCoefficient;
 	}
 
@@ -233,7 +234,8 @@ public:
 		return mSpringYawDampingCoefficient;
 	}
 
-	void setSpringYawDampingCoefficient(const double springYawDampingCoefficient) {
+	void setSpringYawDampingCoefficient(
+			const double springYawDampingCoefficient) {
 		mSpringYawDampingCoefficient = springYawDampingCoefficient;
 	}
 
@@ -386,6 +388,54 @@ public:
 				<< morphogeneBranch.mJointMaxRollSpeed;
 	}
 
+	double getJointPitchFrequency() const {
+		return mJointPitchFrequency;
+	}
+
+	double getJointRollFrequency() const {
+		return mJointRollFrequency;
+	}
+
+	double getJointYawFrequency() const {
+		return mJointYawFrequency;
+	}
+
+	double getJointPitchAmplitude() const {
+		return mJointPitchAmplitude;
+	}
+
+	double getJointPitchYOffset() const {
+		return mJointPitchYOffset;
+	}
+
+	double getJointRollAmplitude() const {
+		return mJointRollAmplitude;
+	}
+
+	double getJointRollYOffset() const {
+		return mJointRollYOffset;
+	}
+
+	double getJointYawAmplitude() const {
+		return mJointYawAmplitude;
+	}
+
+	double getJointYawYOffset() const {
+		return mJointYawYOffset;
+	}
+
+	double getJointPitchXOffset() const {
+		return mJointPitchXOffset;
+	}
+
+	double getJointRollXOffset() const {
+		return mJointRollXOffset;
+	}
+
+	double getJointYawXOffset() const {
+		return mJointYawXOffset;
+	}
+
 	/**
 	 * Serializes the morphogene branch to an xml file.
 	 * @param ar The archive.
@@ -455,7 +505,27 @@ public:
 		/**The maximum joint speeds*/
 		& BOOST_SERIALIZATION_NVP(mJointMaxPitchSpeed)
 		& BOOST_SERIALIZATION_NVP(mJointMaxYawSpeed)
-		& BOOST_SERIALIZATION_NVP(mJointMaxRollSpeed);
+		& BOOST_SERIALIZATION_NVP(mJointMaxRollSpeed)
+
+		/** The joint frequency*/
+		& BOOST_SERIALIZATION_NVP(mJointPitchFrequency)
+		& BOOST_SERIALIZATION_NVP(mJointYawFrequency)
+		& BOOST_SERIALIZATION_NVP(mJointRollFrequency)
+
+		/** The joint amplitude*/
+		& BOOST_SERIALIZATION_NVP(mJointPitchAmplitude)
+		& BOOST_SERIALIZATION_NVP(mJointYawAmplitude)
+		& BOOST_SERIALIZATION_NVP(mJointRollAmplitude)
+
+		/** The joint x offset*/
+		& BOOST_SERIALIZATION_NVP(mJointPitchXOffset)
+		& BOOST_SERIALIZATION_NVP(mJointYawXOffset)
+		& BOOST_SERIALIZATION_NVP(mJointRollXOffset)
+
+		/** The joint y offset*/
+		& BOOST_SERIALIZATION_NVP(mJointPitchYOffset)
+		& BOOST_SERIALIZATION_NVP(mJointYawYOffset)
+		& BOOST_SERIALIZATION_NVP(mJointRollYOffset);
 	}
 
 private:
@@ -500,6 +570,17 @@ private:
 	 * The maximum speed of the joint
 	 */
 	double mJointMaxPitchSpeed, mJointMaxYawSpeed, mJointMaxRollSpeed;
+
+	/**
+	 * The frequency at which the sine controller runs.
+	 */
+	double mJointPitchFrequency, mJointYawFrequency, mJointRollFrequency;
+
+	double mJointPitchAmplitude, mJointYawAmplitude, mJointRollAmplitude;
+
+	double mJointPitchXOffset, mJointYawXOffset, mJointRollXOffset;
+
+	double mJointPitchYOffset, mJointYawYOffset, mJointRollYOffset;
 
 	/**
 	 * Determines if this branch is mirrored through the center of mass of its segment.

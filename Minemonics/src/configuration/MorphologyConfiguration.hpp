@@ -153,6 +153,22 @@ public:
 	 */
 	static const double JOINT_MAX_STIFFNESS = 10;
 
+	static const double JOINT_MIN_FREQUENCY = 0.1;
+
+	static const double JOINT_MAX_FREQUENCY = 10;
+
+	static const double JOINT_MIN_AMPLITUDE = 0;
+
+	static const double JOINT_MAX_AMPLITUDE = 0.5;
+
+	static const double JOINT_MIN_X_OFFSET = 0;
+
+	static const double JOINT_MAX_X_OFFSET = 2* M_PI;
+
+	static const double JOINT_MIN_Y_OFFSET = 0;
+
+	static const double JOINT_MAX_Y_OFFSET = 1;
+
 	/**
 	 * The minimum spring damping coefficient of the joint
 	 */
