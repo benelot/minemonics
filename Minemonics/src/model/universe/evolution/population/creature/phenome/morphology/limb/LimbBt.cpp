@@ -96,6 +96,11 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
 			mCollisionShape, localInertia);
 	mBody = new btRigidBody(rbInfo);
+	mBody->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
+	mBody->setSleepingThresholds(
+			PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
+			PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
+	mBody->setActivationState(DISABLE_DEACTIVATION);
 
 	//Set the friction and restitution/elasticity of the rigid body
 	mBody->setFriction(friction);
@@ -134,7 +139,7 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 	btVector3 rayStart = origin + direction.normalized() * 100.0f;
 	btVector3 rayEnd = origin;
 
-//	btVector3 rayStart = origin - direction.normalized() * 100.0f;
+//	btVector3 rayStart = origin;
 //  btVector3 rayEnd = origin + direction.normalized() * 100.0f;
 
 	//TODO: Debug output, draw test ray

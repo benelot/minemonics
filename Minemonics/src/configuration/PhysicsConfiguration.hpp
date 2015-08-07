@@ -97,6 +97,11 @@ public:
 	 */
 	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.01;
 
+	static const double BULLET_DEACTIVATION_TIME = 5;
+
+	static const double BULLET_LINEAR_SLEEPING_TIME = 1.6;
+	static const double BULLET_ANGULAR_SLEEPING_TIME = 5;
+
 	/**
 	 * Bullet box to capsule scaling factor
 	 * static const double BULLET_OGRE_CAPSULE_SCALING_FACTOR = 0.5;

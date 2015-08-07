@@ -5,7 +5,10 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
+class btGeneric6DofSpring2Constraint;
+class btGeneric6DofSpringConstraint;
 class btRotationalLimitMotor2;
+class btRotationalLimitMotor;
 
 //# system headers
 //## controller headers
@@ -21,8 +24,10 @@ class btRotationalLimitMotor2;
 
 #define USE_6DOF2
 #ifdef USE_6DOF2
+#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
 #define MOTOR_TYPE btRotationalLimitMotor2
 #else
+#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
 #define MOTOR_TYPE btRotationalLimitMotor
 #endif
 /**
@@ -43,7 +48,7 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(const int jointMotorIndex,
+	void initialize(const int jointMotorIndex,CONSTRAINT_TYPE* constraint,
 			MOTOR_TYPE* const motorBt, const double maxForce,
 			const double maxSpeed);
 	/**
@@ -71,6 +76,7 @@ public:
 private:
 	int mJointMotorIndex;
 	MOTOR_TYPE* mMotorBt;
+	CONSTRAINT_TYPE* mConstraint;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

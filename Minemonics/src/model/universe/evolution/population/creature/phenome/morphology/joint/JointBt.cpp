@@ -49,11 +49,6 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	mWorld = world;
 	mG6DofJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA,
 			tframeInB EXTRAPARAMS);
-	mG6DofJoint->setLinearLowerLimit(btVector3(0, 0, 0));
-	mG6DofJoint->setLinearUpperLimit(btVector3(0, 0, 0));
-
-	mG6DofJoint->setAngularLowerLimit(btVector3(0, 0, 0));
-	mG6DofJoint->setAngularUpperLimit(btVector3(0, 0, 0));
 
 	//springs
 	mG6DofJoint->enableSpring(0, true);
@@ -122,19 +117,19 @@ void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
 	//TODO: Turn on when you want to use motors
-//	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-//			motorIterator != mMotors.end(); motorIterator++) {
-//		if ((*motorIterator)->isEnabled()) {
-//			(*motorIterator)->apply(timeSinceLastTick);
-//		}
-//	}
+	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
+			motorIterator != mMotors.end(); motorIterator++) {
+		if ((*motorIterator)->isEnabled()) {
+			(*motorIterator)->apply(timeSinceLastTick);
+		}
+	}
 }
 
 void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 		const btVector3 maxSpeeds) {
 	//add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::DOF_PITCH,
+	servoMotor->initialize(JointPhysics::DOF_PITCH, mG6DofJoint,
 			mG6DofJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
 			maxSpeeds.getX());
 	//TODO: Hack, make better
@@ -143,7 +138,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 
 	// add yaw servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::DOF_YAW,
+	servoMotor->initialize(JointPhysics::DOF_YAW, mG6DofJoint,
 			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_YAW),
 			maxForces.getY(), maxSpeeds.getY());
 	//TODO: Hack, make better
@@ -152,7 +147,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 
 	//add roll servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::DOF_ROLL,
+	servoMotor->initialize(JointPhysics::DOF_ROLL, mG6DofJoint,
 			mG6DofJoint->getRotationalLimitMotor(JointPhysics::RDOF_ROLL),
 			maxForces.getZ(), maxSpeeds.getZ());
 	//TODO: Hack, make better
@@ -217,7 +212,7 @@ void JointBt::setRotationalLimitMotorEnabled(
 	}
 
 #ifdef USE_6DOF2
-	mG6DofJoint->enableMotor(2+index, true);
+	mG6DofJoint->enableMotor(2 + index, true);
 
 #else
 	mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor = true;

@@ -160,9 +160,13 @@ public:
 				OgreBulletUtils::convert(angularUpperLimit));
 	}
 
+	void setAngularLimit(JointPhysics::DegreeOfFreedom dof,
+			const double lowerLimit, const double upperLimit) {
+		mG6DofJoint->setLimit(dof, lowerLimit, upperLimit);
+	}
+
 	void setAngularLimits(const btVector3 angularLowerLimit,
 			const btVector3 angularUpperLimit) {
-
 		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
 		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
 	}
