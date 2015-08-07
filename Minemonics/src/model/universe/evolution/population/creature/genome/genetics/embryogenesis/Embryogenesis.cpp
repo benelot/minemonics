@@ -446,14 +446,38 @@ void Embryogenesis::transcribeMorphogene(
 						parentMorphogeneBranch->getJointMaxRollForce()));
 
 		//TODO: Quick controller hack
-		for (std::vector<Motor*>::const_iterator motorIterator =
-				joint->getMotors().begin();
-				motorIterator != joint->getMotors().end(); motorIterator++) {
-			SineController* controller = new SineController();
-			controller->initialize(0.5f, 0.1f, 0, 0);
-			controller->addControlOutput((*motorIterator));
-			phenomeModel->getControllers().push_back(controller);
-		}
+//		for (std::vector<Motor*>::const_iterator motorIterator =
+//				joint->getMotors().begin();
+//				motorIterator != joint->getMotors().end(); motorIterator++) {
+//			SineController* controller = new SineController();
+//			controller->initialize(0.5f, 0.1f, 0, 0.5f);
+//			controller->addControlOutput((*motorIterator));
+//			phenomeModel->getControllers().push_back(controller);
+//		}
+
+		SineController* controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
+				parentMorphogeneBranch->getJointPitchFrequency(),
+				parentMorphogeneBranch->getJointPitchXOffset(),
+				parentMorphogeneBranch->getJointPitchYOffset());
+		controller->addControlOutput(joint->getMotors()[0]);
+		phenomeModel->getControllers().push_back(controller);
+
+		controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
+				parentMorphogeneBranch->getJointYawFrequency(),
+				parentMorphogeneBranch->getJointYawXOffset(),
+				parentMorphogeneBranch->getJointYawYOffset());
+		controller->addControlOutput(joint->getMotors()[1]);
+		phenomeModel->getControllers().push_back(controller);
+
+		controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
+				parentMorphogeneBranch->getJointRollFrequency(),
+				parentMorphogeneBranch->getJointRollXOffset(),
+				parentMorphogeneBranch->getJointRollYOffset());
+		controller->addControlOutput(joint->getMotors()[2]);
+		phenomeModel->getControllers().push_back(controller);
 
 		//set the angular limits of the joint
 		joint->setAngularLimits(
