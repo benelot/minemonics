@@ -81,7 +81,8 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	tex->setTextureAnisotropy(8);
 
 	mLimbEntityNode =
-			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name+"Node");
+			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(
+					name + "Node");
 	switch (limbModel->getPrimitiveType()) {
 	case LimbModel::BLOCK:
 
@@ -123,13 +124,18 @@ LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
 		LimbGraphics(limbO3D.mLimbModel) {
 	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	mLimbEntity = limbO3D.mLimbEntity->clone(name);
+//	mLimbEntityNode =
+//			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name + "Node");
 	mLimbEntityNode =
-			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name + "Node");
+			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	mLimbEntityNode->setPosition(limbO3D.mLimbModel->getPosition());
 	mLimbEntityNode->setOrientation(limbO3D.mLimbModel->getOrientation());
 }
 
 LimbO3D::~LimbO3D() {
+	mLimbEntityNode->removeAndDestroyAllChildren();
+	SimulationManager::getSingleton()->getSceneManager()->destroySceneNode(
+			mLimbEntityNode);
 	delete mLimbEntityNode;
 	delete mLimbEntity;
 }
