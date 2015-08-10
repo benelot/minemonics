@@ -98,6 +98,10 @@ public:
 
 	int getTotalCreatureQty();
 
+	void addEpoch(Epoch* epoch) {
+		mPlanetModel->addEpoch(epoch);
+	}
+
 private:
 	/**
 	 * The boost logger.

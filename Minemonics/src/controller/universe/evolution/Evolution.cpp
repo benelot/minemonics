@@ -19,6 +19,8 @@
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
+#include <model/universe/Epoch.hpp>
+#include <model/universe/evolution/juries/JuryFactory.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
@@ -76,8 +78,22 @@ bool Evolution::proceedEvaluation() {
 				// create population with single creature for evaluation
 				Population* population = new Population();
 				population->initialize(mPlanet, 1);
-				population->addMember(
-						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
+
+				Creature* creature =
+						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()];
+				//add juries
+				creature->clearJuries();
+				for (int i = 0;
+						i
+								< mPlanet->getPlanetModel()->getCurrentEpoch()->getJuryTypes().size();
+						i++) {
+					Epoch* epoch = mPlanet->getPlanetModel()->getCurrentEpoch();
+					creature->addJury(
+							JuryFactory::buildJury(epoch->getJuryTypes()[i],
+									epoch->getWeights()[i]));
+				}
+
+				population->addMember(creature);
 				evaluation->addPopulation(population);
 
 				mEvaluationController->addEvaluation(evaluation);
@@ -209,13 +225,29 @@ bool Evolution::proceedEvaluation() {
 			return false;
 			break;
 		}
+	} else {
+		//update highest fitness
+		double highestFitness = 0;
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+				pit != mPopulations.end(); pit++) {
+			double fitness = (*pit)->getHighestFitness();
+			highestFitness =
+					(highestFitness < fitness) ? fitness : highestFitness;
+		}
+		mPlanet->getPlanetModel()->getCurrentEpoch()->setCurrentFitness(
+				highestFitness);
+
+		//update lasting generations
+		mPlanet->getPlanetModel()->getCurrentEpoch()->setLastingGenerations(
+				mPlanet->getPlanetModel()->getCurrentEpoch()->getLastingGenerations()
+						+ 1);
 	}
 	return false;
 }
 
 void Evolution::update(double timeSinceLastTick) {
-	std::vector<Population*>::iterator pit = mPopulations.begin();
-	for (; pit != mPopulations.end(); pit++) {
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
 		(*pit)->update(timeSinceLastTick);
 	}
 }
@@ -230,14 +262,8 @@ void Evolution::performEmbryogenesis() {
 		//for each creature in the population
 		for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
-				cit != (*pit)->getCreatures().end(); cit++) {
-			creatureQty++;
+				cit != (*pit)->getCreatures().end(); ) {
 
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-			SimulationManager::getSingleton()->getDebugger().detectError(
-					(*cit)->getCreatureModel()->getPopulationModel(), 10, -1,
-					0);
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 			//Performing embryogenesis on creature(x/all)
 			//Gene Qty: z
@@ -245,22 +271,32 @@ void Evolution::performEmbryogenesis() {
 			<< creatureQty <<"/"<< (*pit)->getCreatures().size() << "):\nGene Qty: "
 			<< (*cit)->getCreatureModel()->getGenotype().getGenes().size();
 
-			(*cit)->performEmbryogenesis();
+			int limbQty = (*cit)->performEmbryogenesis();
+
 
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Components:" << (*cit)->getCreatureModel()->getPhenotypeModel().getComponentModels().size();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< (**cit).getCreatureModel();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature finished.\n"
 			<< "################################\n\n";
+
+			if(limbQty == 0){
+				Creature* creature = *cit;
+				cit = (*pit)->getCreatures().erase(cit);
+				delete creature;
+			}
+			else{
+				creatureQty++;
+				cit++;
+			}
 		}
 	}
 }
 
-int Evolution::getTotalCreatureQty(){
+int Evolution::getTotalCreatureQty() {
 	int creatureQty = 0;
 	//for each population...
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
 			pit != mPopulations.end(); pit++) {
-
 
 		//for each creature in the population
 		for (std::vector<Creature*>::iterator cit =

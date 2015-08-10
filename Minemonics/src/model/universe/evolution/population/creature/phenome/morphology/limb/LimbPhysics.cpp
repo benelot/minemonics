@@ -18,7 +18,7 @@ LimbPhysics::LimbPhysics() :
 		mInWorld(false), mRestitution(0.5), mFriction(0.8), mInitialRelativeXPosition(
 				0), mInitialRelativeYPosition(0), mInitialRelativeZPosition(0), mInitialXOrientation(
 				0), mInitialYOrientation(0), mInitialZOrientation(0), mInitialWOrientation(
-				1), mMass(0) {
+				1), mMass(0),mVolume(0) {
 }
 
 LimbPhysics::~LimbPhysics() {

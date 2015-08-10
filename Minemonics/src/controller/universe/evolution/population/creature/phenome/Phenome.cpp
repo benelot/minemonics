@@ -42,7 +42,8 @@
 
 BoostLogger Phenome::mBoostLogger; /*<! initialize the boost logger*/
 Phenome::_Init Phenome::_initializer;
-Phenome::Phenome() : mCreature(NULL), mPhenotypeModel(NULL) {
+Phenome::Phenome() :
+		mCreature(NULL), mPhenotypeModel(NULL) {
 
 }
 
@@ -83,11 +84,14 @@ void Phenome::initialize(Creature* const creature) {
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
  * @param creatureModel the handle to the creatureModel we want to get back from the physics engine when we pick a creature.
  */
-void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
+int Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 	cleanup();
 	//perform the embryogenesis in the model
-	mPhenotypeModel->performEmbryogenesis(creatureModel);
+	int limbQty = mPhenotypeModel->performEmbryogenesis(creatureModel);
 
+	if (limbQty == 0) {
+		return limbQty;
+	}
 	// iterate over all the component models
 	for (std::vector<ComponentModel*>::const_iterator cmit =
 			mPhenotypeModel->getComponentModels().begin();
@@ -95,8 +99,7 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
-			Limb* limb = new Limb(mCreature,
-					(LimbModel*) *cmit);
+			Limb* limb = new Limb(mCreature, (LimbModel*) *cmit);
 			mLimbs.push_back(limb);
 			mComponents.push_back(limb);
 			break;
@@ -115,6 +118,7 @@ void Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 			exit(-1);
 		}
 	}
+	return limbQty;
 }
 
 void Phenome::update(double timeSinceLastTick) {

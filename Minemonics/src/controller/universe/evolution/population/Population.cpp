@@ -110,18 +110,22 @@ void Population::reset() {
 	}
 }
 
-void Population::addToPhysicsWorld(){
+int Population::addToPhysicsWorld() {
+	int limbQty = 0;
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end(); cit++) {
-		(*cit)->addToPhysicsWorld();
+		limbQty = (*cit)->addToPhysicsWorld();
 	}
+	return limbQty;
 }
 
-void Population::addToWorld() {
+int Population::addToWorld() {
+	int limbQty = 0;
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 			cit != mCreatures.end(); cit++) {
-		(*cit)->addToWorld();
+		limbQty += (*cit)->addToWorld();
 	}
+	return limbQty;
 }
 
 void Population::removeFromWorld() {
@@ -157,4 +161,22 @@ void Population::resyncWithModel() {
 	}
 
 	mPopulationModel->setOutOfSync(false);
+}
+
+void Population::process() {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end(); cit++) {
+		(*cit)->processJuries();
+	}
+}
+
+double Population::getHighestFitness() {
+	double highestFitness = 0;
+	for (std::vector<CreatureModel*>::const_iterator cit =
+			mPopulationModel->getCreatureModels().begin();
+			cit != mPopulationModel->getCreatureModels().end(); cit++) {
+		double fitness = (*cit)->getFitness();
+		highestFitness = (highestFitness < fitness) ? fitness : highestFitness;
+	}
+	return highestFitness;
 }

@@ -50,7 +50,7 @@ public:
 	/**
 	 * Perform embryogenesis on the creature to build his phenotype from the genotype.
 	 */
-	void performEmbryogenesis();
+	int performEmbryogenesis();
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -75,12 +75,12 @@ public:
 	/**
 	 * Add the creature to the physics world.
 	 */
-	void addToPhysicsWorld();
+	int addToPhysicsWorld();
 
 	/**
 	 * Add the creature to the world.
 	 */
-	virtual void addToWorld();
+	virtual int addToWorld();
 
 	/**
 	 * Remove the creature from the world.
@@ -115,6 +115,16 @@ public:
 	bool isCulled() const {
 		return mCreatureModel->isCulled();
 	}
+
+	void addJury(Jury* jury) {
+		mCreatureModel->addJury(jury);
+	}
+
+	void clearJuries() {
+		mCreatureModel->clearJuries();
+	}
+
+	void processJuries();
 
 protected:
 	/**

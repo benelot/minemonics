@@ -17,12 +17,11 @@
 EvaluationModel::EvaluationModel() :
 		mPlanetModel(NULL), mEvaluationTime(0), mTimePassed(0), mEvaluating(
 				false), mTornDown(false), mSimulationSpeed(1) {
-	// TODO Auto-generated constructor stub
-
 }
 
 EvaluationModel::~EvaluationModel() {
-	// TODO Auto-generated destructor stub
+	mPlanetModel = NULL;
+	mPopulationModels.clear();
 }
 
 void EvaluationModel::initialize(PlanetModel* const planetModel,

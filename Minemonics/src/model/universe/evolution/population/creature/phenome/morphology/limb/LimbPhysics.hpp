@@ -151,6 +151,12 @@ public:
 	 */
 	virtual btQuaternion getOrientation() const = 0;
 
+	/**
+	 * Get the volume of the limb.
+	 * @return The volume of the limb.
+	 */
+	virtual const double getVolume() = 0;
+
 	double getInitialRelativeXPosition() const {
 		return mInitialRelativeXPosition;
 	}
@@ -212,6 +218,11 @@ protected:
 	 * Mass of the limb.
 	 */
 	double mMass;
+
+	/**
+	 * The volume of the limb.
+	 */
+	double mVolume;
 
 };
 

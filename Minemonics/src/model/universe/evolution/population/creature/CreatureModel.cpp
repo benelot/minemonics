@@ -11,6 +11,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/juries/Jury.hpp>
+#include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 
@@ -112,19 +114,19 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 		}
 	}
 
-	if(mPosition != creature.mPosition){
+	if (mPosition != creature.mPosition) {
 		return false;
 	}
 
-	if(mInitialPosition != creature.mInitialPosition){
+	if (mInitialPosition != creature.mInitialPosition) {
 		return false;
 	}
 
-	if(mCulled != creature.mCulled){
+	if (mCulled != creature.mCulled) {
 		return false;
 	}
 
-	if(mNew != creature.mNew){
+	if (mNew != creature.mNew) {
 		return false;
 	}
 
@@ -146,4 +148,23 @@ void CreatureModel::giveRebirth() {
 
 CreatureModel* CreatureModel::clone() {
 	return new CreatureModel(*this);
+}
+
+void CreatureModel::update(double timeSinceLastTick) {
+	for (std::vector<Jury*>::iterator jit = mJuries.begin();
+			jit != mJuries.end(); jit++) {
+		switch ((*jit)->getJuryType()) {
+		case Jury::AVG_VELOCITY: {
+			(*jit)->calculateFitness(this, timeSinceLastTick);
+			break;
+		}
+		}
+	}
+}
+
+void CreatureModel::processJuries() {
+	for (std::vector<Jury*>::iterator jit = mJuries.begin();
+			jit != mJuries.end(); jit++) {
+		(*jit)->evaluateFitness();
+	}
 }

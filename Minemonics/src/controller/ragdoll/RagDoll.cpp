@@ -79,7 +79,8 @@ RagDoll::RagDoll(Population* const population, double size,
 			OgreBulletUtils::convert(transform.getRotation()),
 			OgreBulletUtils::convert(transform.getOrigin()),
 			OgreBulletUtils::convert(transform.getRotation()),
-			Ogre::Vector3(size * 0.3, size * 0.2, size * 0.3), RAGDOLL_ABDOMENPELVIS);
+			Ogre::Vector3(size * 0.3, size * 0.2, size * 0.3),
+			RAGDOLL_ABDOMENPELVIS);
 //	((LimbBt*)limb->getLimbPhysics())->getRigidBody()->setActivationState(DISABLE_DEACTIVATION);
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
 			limb->getLimbModel());
@@ -567,40 +568,39 @@ RagDoll::RagDoll(Population* const population, double size,
 		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
 	}
 
-		localA.setIdentity();
-		localB.setIdentity();
-		localA.getBasis().setEulerZYX(0, 0, 0);
-		localA.setOrigin(
-				btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.18),
-						btScalar(gapSize * 0.)));
-		localB.getBasis().setEulerZYX(0, 0, 0);
-		localB.setOrigin(
-				btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
-						btScalar(gapSize * 0.)));
+	localA.setIdentity();
+	localB.setIdentity();
+	localA.getBasis().setEulerZYX(0, 0, 0);
+	localA.setOrigin(
+			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.18),
+					btScalar(gapSize * 0.)));
+	localB.getBasis().setEulerZYX(0, 0, 0);
+	localB.setOrigin(
+			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
+					btScalar(gapSize * 0.)));
 
-		joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM],
-				mPhenotype.getLimbs()[BODYPART_LEFT_FOREARM], localA, localB, 0, 0,
-				0);
-		joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
-				Ogre::Vector3(3*M_PI_4, 0, 0));
-		joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
-				Ogre::Vector3(3, 3, 3));
-		mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-				joint->getJointModel());
-		mPhenotype.getJoints().push_back(joint);
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM],
+			mPhenotype.getLimbs()[BODYPART_LEFT_FOREARM], localA, localB, 0, 0,
+			0);
+	joint->setAngularLimits(Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(3 * M_PI_4, 0, 0));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
+			Ogre::Vector3(3, 3, 3));
+	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+			joint->getJointModel());
+	mPhenotype.getJoints().push_back(joint);
 
-		enableMotor = false;
-		enableMotor = true;
-		for (std::vector<Motor*>::const_iterator motorIterator =
-				joint->getMotors().begin();
-				motorIterator != joint->getMotors().end(); motorIterator++) {
-			SineController* controller = new SineController();
-			controller->initialize(0.5f, 0.5f, 0, 0.5f);
-			controller->addControlOutput((*motorIterator));
-			(*motorIterator)->setEnabled(enableMotor);
-			mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
-		}
-
+	enableMotor = false;
+	enableMotor = true;
+	for (std::vector<Motor*>::const_iterator motorIterator =
+			joint->getMotors().begin();
+			motorIterator != joint->getMotors().end(); motorIterator++) {
+		SineController* controller = new SineController();
+		controller->initialize(0.5f, 0.5f, 0, 0.5f);
+		controller->addControlOutput((*motorIterator));
+		(*motorIterator)->setEnabled(enableMotor);
+		mPhenotype.getPhenotypeModel()->getControllers().push_back(controller);
+	}
 
 	localA.setIdentity();
 	localB.setIdentity();
@@ -663,51 +663,64 @@ void RagDoll::update(double timeSinceLastTick) {
 	Creature::update(timeSinceLastTick);
 }
 
-void RagDoll::addToWorld() {
-	// Add all limbs
-	std::vector<Limb*>::iterator lit = mPhenotype.getLimbs().begin();
-	for (; lit != mPhenotype.getLimbs().end(); lit++) {
-		(*lit)->addToWorld();
-	}
+int RagDoll::addToWorld() {
+	int limbQty = 0;
+	if (!mPhenotype.isInWorld()) {
+		// Add all limbs
+		std::vector<Limb*>::iterator lit = mPhenotype.getLimbs().begin();
+		for (; lit != mPhenotype.getLimbs().end(); lit++) {
+			(*lit)->addToWorld();
+			limbQty++;
+		}
 
-	// Add all constraints
-	std::vector<Joint*>::iterator jit = mPhenotype.getJoints().begin();
-	for (; jit != mPhenotype.getJoints().end(); jit++) {
-		(*jit)->addToWorld();
-	}
+		// Add all constraints
+		std::vector<Joint*>::iterator jit = mPhenotype.getJoints().begin();
+		for (; jit != mPhenotype.getJoints().end(); jit++) {
+			(*jit)->addToWorld();
+		}
 
-	mPhenotype.setInWorld(true);
+		mPhenotype.setInWorld(true);
+
+	}
+	return limbQty;
 }
 
-void RagDoll::addToPhysicsWorld() {
-	// Add all limbs
-	std::vector<Limb*>::iterator lit = mPhenotype.getLimbs().begin();
-	for (; lit != mPhenotype.getLimbs().end(); lit++) {
-		(*lit)->addToPhysicsWorld();
-	}
+int RagDoll::addToPhysicsWorld() {
+	int limbQty = 0;
+	if (!mPhenotype.isInWorld()) {
+		// Add all limbs
+		std::vector<Limb*>::iterator lit = mPhenotype.getLimbs().begin();
+		for (; lit != mPhenotype.getLimbs().end(); lit++) {
+			(*lit)->addToPhysicsWorld();
+			limbQty++;
+		}
 
-	// Add all constraints
-	std::vector<Joint*>::iterator jit = mPhenotype.getJoints().begin();
-	for (; jit != mPhenotype.getJoints().end(); jit++) {
-		(*jit)->addToPhysicsWorld();
-	}
+		// Add all constraints
+		std::vector<Joint*>::iterator jit = mPhenotype.getJoints().begin();
+		for (; jit != mPhenotype.getJoints().end(); jit++) {
+			(*jit)->addToPhysicsWorld();
+		}
 
-	mPhenotype.setInWorld(true);
+		mPhenotype.setInWorld(true);
+	}
+	return limbQty;
 }
 
 void RagDoll::removeFromWorld() {
-	// Remove all constraints
-	std::vector<Joint*>::iterator jit = mPhenotype.getJoints().begin();
-	for (; jit != mPhenotype.getJoints().end(); jit++) {
-		(*jit)->removeFromWorld();
-	}
+	if (mPhenotype.isInWorld()) {
+		// Remove all constraints
+		std::vector<Joint*>::iterator jit = mPhenotype.getJoints().begin();
+		for (; jit != mPhenotype.getJoints().end(); jit++) {
+			(*jit)->removeFromWorld();
+		}
 
-	// Remove all limbs
-	std::vector<Limb*>::iterator lit = mPhenotype.getLimbs().begin();
-	for (; lit != mPhenotype.getLimbs().end(); lit++) {
-		(*lit)->removeFromWorld();
-	}
+		// Remove all limbs
+		std::vector<Limb*>::iterator lit = mPhenotype.getLimbs().begin();
+		for (; lit != mPhenotype.getLimbs().end(); lit++) {
+			(*lit)->removeFromWorld();
+		}
 
-	mPhenotype.setInWorld(false);
+		mPhenotype.setInWorld(false);
+	}
 }
 

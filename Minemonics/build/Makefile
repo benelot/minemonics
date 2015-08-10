@@ -784,6 +784,30 @@ controller/viewcontroller/camera/CameraHandler.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/controller/viewcontroller/camera/CameraHandler.cpp.s
 .PHONY : controller/viewcontroller/camera/CameraHandler.cpp.s
 
+model/universe/Epoch.o: model/universe/Epoch.cpp.o
+.PHONY : model/universe/Epoch.o
+
+# target to build an object file
+model/universe/Epoch.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/Epoch.cpp.o
+.PHONY : model/universe/Epoch.cpp.o
+
+model/universe/Epoch.i: model/universe/Epoch.cpp.i
+.PHONY : model/universe/Epoch.i
+
+# target to preprocess a source file
+model/universe/Epoch.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/Epoch.cpp.i
+.PHONY : model/universe/Epoch.cpp.i
+
+model/universe/Epoch.s: model/universe/Epoch.cpp.s
+.PHONY : model/universe/Epoch.s
+
+# target to generate assembly for a file
+model/universe/Epoch.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/Epoch.cpp.s
+.PHONY : model/universe/Epoch.cpp.s
+
 model/universe/EvaluationModel.o: model/universe/EvaluationModel.cpp.o
 .PHONY : model/universe/EvaluationModel.o
 
@@ -1072,6 +1096,30 @@ model/universe/evolution/Reaper.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/Reaper.cpp.s
 .PHONY : model/universe/evolution/Reaper.cpp.s
 
+model/universe/evolution/juries/AverageVelocity.o: model/universe/evolution/juries/AverageVelocity.cpp.o
+.PHONY : model/universe/evolution/juries/AverageVelocity.o
+
+# target to build an object file
+model/universe/evolution/juries/AverageVelocity.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/AverageVelocity.cpp.o
+.PHONY : model/universe/evolution/juries/AverageVelocity.cpp.o
+
+model/universe/evolution/juries/AverageVelocity.i: model/universe/evolution/juries/AverageVelocity.cpp.i
+.PHONY : model/universe/evolution/juries/AverageVelocity.i
+
+# target to preprocess a source file
+model/universe/evolution/juries/AverageVelocity.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/AverageVelocity.cpp.i
+.PHONY : model/universe/evolution/juries/AverageVelocity.cpp.i
+
+model/universe/evolution/juries/AverageVelocity.s: model/universe/evolution/juries/AverageVelocity.cpp.s
+.PHONY : model/universe/evolution/juries/AverageVelocity.s
+
+# target to generate assembly for a file
+model/universe/evolution/juries/AverageVelocity.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/AverageVelocity.cpp.s
+.PHONY : model/universe/evolution/juries/AverageVelocity.cpp.s
+
 model/universe/evolution/juries/Jury.o: model/universe/evolution/juries/Jury.cpp.o
 .PHONY : model/universe/evolution/juries/Jury.o
 
@@ -1095,54 +1143,6 @@ model/universe/evolution/juries/Jury.s: model/universe/evolution/juries/Jury.cpp
 model/universe/evolution/juries/Jury.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Jury.cpp.s
 .PHONY : model/universe/evolution/juries/Jury.cpp.s
-
-model/universe/evolution/juries/Ones.o: model/universe/evolution/juries/Ones.cpp.o
-.PHONY : model/universe/evolution/juries/Ones.o
-
-# target to build an object file
-model/universe/evolution/juries/Ones.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Ones.cpp.o
-.PHONY : model/universe/evolution/juries/Ones.cpp.o
-
-model/universe/evolution/juries/Ones.i: model/universe/evolution/juries/Ones.cpp.i
-.PHONY : model/universe/evolution/juries/Ones.i
-
-# target to preprocess a source file
-model/universe/evolution/juries/Ones.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Ones.cpp.i
-.PHONY : model/universe/evolution/juries/Ones.cpp.i
-
-model/universe/evolution/juries/Ones.s: model/universe/evolution/juries/Ones.cpp.s
-.PHONY : model/universe/evolution/juries/Ones.s
-
-# target to generate assembly for a file
-model/universe/evolution/juries/Ones.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Ones.cpp.s
-.PHONY : model/universe/evolution/juries/Ones.cpp.s
-
-model/universe/evolution/juries/Velocity.o: model/universe/evolution/juries/Velocity.cpp.o
-.PHONY : model/universe/evolution/juries/Velocity.o
-
-# target to build an object file
-model/universe/evolution/juries/Velocity.cpp.o:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Velocity.cpp.o
-.PHONY : model/universe/evolution/juries/Velocity.cpp.o
-
-model/universe/evolution/juries/Velocity.i: model/universe/evolution/juries/Velocity.cpp.i
-.PHONY : model/universe/evolution/juries/Velocity.i
-
-# target to preprocess a source file
-model/universe/evolution/juries/Velocity.cpp.i:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Velocity.cpp.i
-.PHONY : model/universe/evolution/juries/Velocity.cpp.i
-
-model/universe/evolution/juries/Velocity.s: model/universe/evolution/juries/Velocity.cpp.s
-.PHONY : model/universe/evolution/juries/Velocity.s
-
-# target to generate assembly for a file
-model/universe/evolution/juries/Velocity.cpp.s:
-	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/model/universe/evolution/juries/Velocity.cpp.s
-.PHONY : model/universe/evolution/juries/Velocity.cpp.s
 
 model/universe/evolution/population/PopulationModel.o: model/universe/evolution/population/PopulationModel.cpp.o
 .PHONY : model/universe/evolution/population/PopulationModel.o
@@ -3107,6 +3107,9 @@ help:
 	@echo "... controller/viewcontroller/camera/CameraHandler.o"
 	@echo "... controller/viewcontroller/camera/CameraHandler.i"
 	@echo "... controller/viewcontroller/camera/CameraHandler.s"
+	@echo "... model/universe/Epoch.o"
+	@echo "... model/universe/Epoch.i"
+	@echo "... model/universe/Epoch.s"
 	@echo "... model/universe/EvaluationModel.o"
 	@echo "... model/universe/EvaluationModel.i"
 	@echo "... model/universe/EvaluationModel.s"
@@ -3143,15 +3146,12 @@ help:
 	@echo "... model/universe/evolution/Reaper.o"
 	@echo "... model/universe/evolution/Reaper.i"
 	@echo "... model/universe/evolution/Reaper.s"
+	@echo "... model/universe/evolution/juries/AverageVelocity.o"
+	@echo "... model/universe/evolution/juries/AverageVelocity.i"
+	@echo "... model/universe/evolution/juries/AverageVelocity.s"
 	@echo "... model/universe/evolution/juries/Jury.o"
 	@echo "... model/universe/evolution/juries/Jury.i"
 	@echo "... model/universe/evolution/juries/Jury.s"
-	@echo "... model/universe/evolution/juries/Ones.o"
-	@echo "... model/universe/evolution/juries/Ones.i"
-	@echo "... model/universe/evolution/juries/Ones.s"
-	@echo "... model/universe/evolution/juries/Velocity.o"
-	@echo "... model/universe/evolution/juries/Velocity.i"
-	@echo "... model/universe/evolution/juries/Velocity.s"
 	@echo "... model/universe/evolution/population/PopulationModel.o"
 	@echo "... model/universe/evolution/population/PopulationModel.i"
 	@echo "... model/universe/evolution/population/PopulationModel.s"

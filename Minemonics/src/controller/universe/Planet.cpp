@@ -85,14 +85,17 @@ void Planet::update(double timeSinceLastTick) {
 }
 
 bool Planet::proceedEvaluation() {
-	mPlanetModel->proceedEvaluation();
+
 
 	//if the evolution can not proceed, then remove the environment model from the world.
-	if (!mEvolution.proceedEvaluation()) {
+	bool canNotProceed = !mEvolution.proceedEvaluation();
+	if (canNotProceed) {
 		mEnvironment->removeFromWorld();
-		return false;
 	}
-	return true;
+
+	//TODO: The return value says if we are at the planet's end because it ran out of epochs.
+	mPlanetModel->proceedEvaluation();
+	return canNotProceed;
 }
 
 void Planet::drawDebugWorld() {

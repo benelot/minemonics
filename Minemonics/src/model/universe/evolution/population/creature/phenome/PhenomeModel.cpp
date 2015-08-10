@@ -102,11 +102,11 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 
 }
 
-void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
+int PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
+	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
 		cleanup();
 		std::list<PhenotypeGenerator*> generatorList;
-		int totalSegmentCounter = 0;
 
 		mCreatureModel = creatureModel;
 
@@ -138,6 +138,7 @@ void PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 
 		mDeveloped = true;
 	}
+	return totalSegmentCounter;
 }
 
 void PhenomeModel::reset(const Ogre::Vector3 position) {

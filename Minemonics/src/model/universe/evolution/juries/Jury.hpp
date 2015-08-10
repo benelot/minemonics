@@ -3,6 +3,7 @@
 
 //# corresponding headers
 //# forward declarations
+class CreatureModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -35,11 +36,13 @@ class access;
 class Jury {
 public:
 	enum JuryType {
-		VELOCITY, ONES
+		AVG_VELOCITY
 	};
 
 	Jury(JuryType juryType, int weight);
 	virtual ~Jury();
+
+	virtual void calculateFitness(CreatureModel* creature, double timeSinceLastTick) = 0;
 
 	/**
 	 * Calculates the fitness value at the end of the evaluation.

@@ -72,6 +72,8 @@
 #include <controller/universe/Planet.hpp>
 
 //## model headers
+#include <model/universe/Epoch.hpp>
+
 //## view headers
 #include <view/visualization/panels/MathGLPanel.hpp>
 #include <view/visualization/panels/ParamsPanel.hpp>
@@ -221,7 +223,7 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, 1000);
+	Planet* earth = new Planet(Environment::PLANE, 10);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
@@ -233,6 +235,11 @@ void SimulationManager::createScene(void) {
 
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
+
+	Epoch* oneEpoch = new Epoch();
+	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1);
+
+	earth->addEpoch(oneEpoch);
 
 	// create a population
 //	Population* earth2Population = new Population();

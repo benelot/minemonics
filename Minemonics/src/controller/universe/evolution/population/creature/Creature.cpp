@@ -52,8 +52,8 @@ Creature::~Creature() {
 //	mPhenotype
 }
 
-void Creature::performEmbryogenesis() {
-	mPhenotype.performEmbryogenesis(mCreatureModel);
+int Creature::performEmbryogenesis() {
+	return mPhenotype.performEmbryogenesis(mCreatureModel);
 }
 
 void Creature::reset(const Ogre::Vector3 position) {
@@ -71,33 +71,43 @@ void Creature::reposition(const Ogre::Vector3 position) {
 }
 
 void Creature::update(double timeSinceLastTick) {
+	mCreatureModel->update(timeSinceLastTick);
 	// Update the phenotype of the creature if it is in the world.
 	if (mPhenotype.isInWorld()) {
 		mPhenotype.update(timeSinceLastTick);
 	}
 }
 
-void Creature::addToPhysicsWorld(){
+int Creature::addToPhysicsWorld(){
+	int limbQty = 1;
 	// develop creature if it is not developed yet.
 	if (!isDeveloped()) {
-		performEmbryogenesis();
+		limbQty = performEmbryogenesis();
 	}
 
 	// Add phenotype to world
 	mPhenotype.addToPhysicsWorld();
+	return limbQty;
 }
 
-void Creature::addToWorld() {
+int Creature::addToWorld() {
+	int limbQty = 1;
 	// develop creature if it is not developed yet.
 	if (!isDeveloped()) {
-		performEmbryogenesis();
+		limbQty = performEmbryogenesis();
 	}
 
 	// Add phenotype to world
 	mPhenotype.addToWorld();
+
+	return limbQty;
 }
 
 void Creature::removeFromWorld() {
 	// Remove phenotype from world
 	mPhenotype.removeFromWorld();
+}
+
+void Creature::processJuries() {
+	mCreatureModel->processJuries();
 }

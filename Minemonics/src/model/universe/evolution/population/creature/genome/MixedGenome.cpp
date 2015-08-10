@@ -78,7 +78,7 @@ void MixedGenome::createRandomGenome(double branchiness) {
 }
 
 bool MixedGenome::equals(const MixedGenome & genome) const {
-	if(!IndirectGenome::equals(genome)){
+	if (!IndirectGenome::equals(genome)) {
 		return false;
 	}
 
@@ -98,8 +98,7 @@ bool MixedGenome::equals(const MixedGenome & genome) const {
 void MixedGenome::addRandomGenes(double percentage) {
 	//TODO:Add reasonable number
 	for (int i = 0; i < 10; i++) {
-		if (Randomness::getSingleton()->nextUnifPosInt(0, 1000.0f) / 1000.0f
-				<= percentage) {
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1) <= percentage) {
 			addRandomGene();
 		}
 	}
@@ -127,7 +126,7 @@ void MixedGenome::repairGenes() {
 
 void MixedGenome::integrateRandomGenes(double integrationProbability) {
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (Randomness::getSingleton()->nextUnifPosInt(0, 1000.0f) / 1000.0f
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
 				<= integrationProbability) {
 			integrateGene(i);
 		}
@@ -178,7 +177,7 @@ void MixedGenome::integrateGene(int geneIndex) {
 void MixedGenome::replaceRandomGenesWithRandomGenes(
 		double replacementProbability) {
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (Randomness::getSingleton()->nextUnifPosInt(0, 1000.0f) / 1000.0f
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
 				<= replacementProbability) {
 			int replacementIndex = Randomness::getSingleton()->nextUnifPosInt(0,
 					mGenes.size() - 1);
@@ -203,7 +202,7 @@ void MixedGenome::replaceGeneWith(int geneIndex, int replacementIndex) {
 
 void MixedGenome::duplicateRandomGenes(double duplicateProbability) {
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (Randomness::getSingleton()->nextUnifPosInt(0, 1000.0f) / 1000.0f
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
 				<= duplicateProbability) {
 			duplicateGene(i);
 		}
@@ -221,7 +220,7 @@ void MixedGenome::duplicateGene(int geneIndex) {
 
 void MixedGenome::splitRandomGenes(double splitProbability) {
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (Randomness::getSingleton()->nextUnifPosInt(0, 1000.0f) / 1000.0f
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
 				<= splitProbability) {
 			splitGene(i,
 					(SplitAxis) Randomness::getSingleton()->nextUnifPosInt(1,
@@ -288,7 +287,7 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 
 void MixedGenome::growRandomStubs(double growProbability) {
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (Randomness::getSingleton()->nextUnifPosInt(0, 1000.0f) / 1000.0f
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
 				<= growProbability) {
 			int branchiness = Randomness::getSingleton()->nextUnifDouble(0,
 					EvolutionConfiguration::REAPER_GROW_STUB_QTY);
@@ -354,7 +353,9 @@ void MixedGenome::mutateRandomBranch() {
 }
 
 void MixedGenome::mutateRandomBranchOfGene(int geneIndex) {
-	if (mGenes[geneIndex]->getType() == Gene::MorphoGene && ((Morphogene*)mGenes[geneIndex])->getGeneBranches().size() != 0) {
+	if (mGenes[geneIndex]->getType() == Gene::MorphoGene
+			&& ((Morphogene*) mGenes[geneIndex])->getGeneBranches().size()
+					!= 0) {
 		mutateBranch(geneIndex,
 				Randomness::getSingleton()->nextUnifPosInt(0,
 						((Morphogene*) mGenes[geneIndex])->getGeneBranches().size()

@@ -97,19 +97,14 @@ void ServoMotor::apply(double timeSinceLastTick) {
 		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
 		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
 #endif
-
-		std::cout << std::setw(10) << std::right << mMotorBt << "("
-				<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-				<< "\t/MotorPosition(error):  " << std::setw(10) << std::right
-				<< mMotorBt->m_currentPosition << "/" << std::setw(10)
-				<< std::right << targetAngle << "/" << std::setw(10)
-				<< std::right << angleError << "\t/targetVelocity: "
-				<< mMotorBt->m_targetVelocity << std::endl;
-//	//print some values TODO: Print them to the logger only
-//	std::cout << mMotorBt << "("<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-//			<< "\t/MotorPosition(error):  " << mMotorBt->m_currentPosition
-//			<< "/" << targetAngle << "/" << angleError << "\t/targetVelocity: "
-//			<< mMotorBt->m_targetVelocity << std::endl;
+//TODO: Print to logger only
+//		std::cout << std::setw(10) << std::right << mMotorBt << "("
+//				<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
+//				<< "\t/MotorPosition(error):  " << std::setw(10) << std::right
+//				<< mMotorBt->m_currentPosition << "/" << std::setw(10)
+//				<< std::right << targetAngle << "/" << std::setw(10)
+//				<< std::right << angleError << "\t/targetVelocity: "
+//				<< mMotorBt->m_targetVelocity << std::endl;
 	}
 }
 

@@ -51,10 +51,16 @@ void Evaluation::setup() {
 	case StateHandler::SIMULATION: {
 
 		//add competing populations to the world
-		std::vector<Population*>::iterator pit = mPopulations.begin();
-		for (; pit != mPopulations.end(); pit++) {
+
+		int limbQty = 0;
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+				pit != mPopulations.end(); pit++) {
 			(*pit)->reset();
-			(*pit)->addToWorld();
+			limbQty += (*pit)->addToWorld();
+		}
+
+		if(limbQty  == 0){
+			teardown();
 		}
 
 		mPlanet->getEnvironment()->addToWorld();
@@ -63,10 +69,16 @@ void Evaluation::setup() {
 	case StateHandler::HEADLESS_SIMULATION: {
 
 		//add competing populations to the world
-		std::vector<Population*>::iterator pit = mPopulations.begin();
-		for (; pit != mPopulations.end(); pit++) {
+
+		int limbQty = 0;
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+				pit != mPopulations.end(); pit++) {
 			(*pit)->reset();
-			(*pit)->addToPhysicsWorld();
+			limbQty += (*pit)->addToPhysicsWorld();
+		}
+
+		if(limbQty  == 0){
+			teardown();
 		}
 
 		mPlanet->getEnvironment()->addToPhysicsWorld();
@@ -83,17 +95,22 @@ void Evaluation::setup() {
 }
 
 void Evaluation::process() {
-	//TODO: Process populations and add scores from juries.
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
+		(*pit)->process();
+	}
 }
 
 void Evaluation::teardown() {
+
+	process();
 
 	//remove the environment from the world
 	mPlanet->getEnvironment()->removeFromWorld();
 
 	// remove competing populations from the world
-	std::vector<Population*>::iterator pit = mPopulations.begin();
-	for (; pit != mPopulations.end(); pit++) {
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
 		(*pit)->removeFromWorld();
 	}
 
@@ -125,7 +142,6 @@ void Evaluation::update(const double timeSinceLastTick) {
 	//terminate if the time passed is higher than the evaluation time
 	if (mEvaluationModel.getTimePassed()
 			> mEvaluationModel.getEvaluationTime()) {
-		process();
 
 		teardown();
 	}

@@ -166,6 +166,10 @@ public:
 		return OgreBulletUtils::convert(mLimbPhysics->getPosition());
 	}
 
+	const double getVolume() const {
+		return mLimbPhysics->getVolume();
+	}
+
 	/**
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.

@@ -78,6 +78,11 @@ public:
 	void giveRebirth();
 
 	/**
+	 * Update the creature.
+	 */
+	void update(double timeSinceLastTick);
+
+	/**
 	 * Reset the creature to the way it was born.
 	 */
 	void reset(const Ogre::Vector3 position);
@@ -224,6 +229,20 @@ public:
 	const std::vector<Jury*>& getJuries() const {
 		return mJuries;
 	}
+
+	void addJury(Jury* jury) {
+		mJuries.push_back(jury);
+	}
+
+	void clearJuries() {
+		for (std::vector<Jury*>::iterator jit = mJuries.begin();
+				jit != mJuries.end(); jit++) {
+			delete *jit;
+		}
+		mJuries.clear();
+	}
+
+	void processJuries();
 
 	const std::string& getFirstName() const {
 		return mFirstName;

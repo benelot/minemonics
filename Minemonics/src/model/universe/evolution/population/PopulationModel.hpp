@@ -165,6 +165,11 @@ private:
 	 * The planet the population lives on.
 	 */
 	PlanetModel* mPlanetModel;
+
+	/**
+	 * The epochs of the population.
+	 */
+	std::vector<Epoch*> mEpochs;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_POPULATIONMODEL_HPP_ */

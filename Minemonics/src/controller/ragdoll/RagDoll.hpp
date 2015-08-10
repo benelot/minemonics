@@ -76,9 +76,9 @@ public:
 
 	virtual void update(double timeSinceLastTick);
 
-	virtual void addToWorld();
+	virtual int addToWorld();
 
-	virtual void addToPhysicsWorld();
+	virtual int addToPhysicsWorld();
 
 	virtual void removeFromWorld();
 };

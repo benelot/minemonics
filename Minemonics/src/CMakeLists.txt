@@ -29,13 +29,13 @@ set(MODELHDRS
 	
 	## juries
 	./model/universe/evolution/juries/Jury.hpp
-	./model/universe/evolution/juries/Ones.hpp
-	./model/universe/evolution/juries/Velocity.hpp
+	./model/universe/evolution/juries/AverageVelocity.hpp
 	
 	## universe
 	./model/universe/EvaluationModel.hpp
 	./model/universe/UniverseModel.hpp
 	./model/universe/PlanetModel.hpp
+	./model/universe/Epoch.hpp
 	
 	## evolution
 	./model/universe/evolution/EvolutionModel.hpp
@@ -92,13 +92,13 @@ set(MODELSRCS
    
     ## juries
 	./model/universe/evolution/juries/Jury.cpp
-	./model/universe/evolution/juries/Ones.cpp
-	./model/universe/evolution/juries/Velocity.cpp
+	./model/universe/evolution/juries/AverageVelocity.cpp
 	
 	## universe
 	./model/universe/EvaluationModel.cpp
 	./model/universe/UniverseModel.cpp
 	./model/universe/PlanetModel.cpp
+	./model/universe/Epoch.cpp
 	
 	## evolution
 	./model/universe/evolution/EvolutionModel.cpp
@@ -443,7 +443,6 @@ set(TESTSRCS
     ./model/universe/UniverseModel_test.cpp
     ./model/universe/PlanetModel_test.cpp
     ./model/universe/evolution/juries/Velocity_test.cpp
-    ./model/universe/evolution/juries/Ones_test.cpp
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     ./model/universe/evolution/population/creature/genome/GeneBranch_test.cpp
     ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp

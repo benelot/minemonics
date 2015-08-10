@@ -131,8 +131,6 @@ btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 
 btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 		const btVector3 direction) {
-	//TODO: Fix raytesting with bullet to get the precise intersection point
-
 	// the ray caster currently only finds the intersection
 	// when hitting the forward face of a triangle therefore,
 	//the ray has to come from the outside of the shape

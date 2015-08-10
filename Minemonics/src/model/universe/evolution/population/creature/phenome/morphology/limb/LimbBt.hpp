@@ -142,6 +142,27 @@ public:
 		return mBody->getOrientation();
 	}
 
+	virtual const double getVolume() {
+		if (mVolume != 0) {
+			return mVolume;
+		}
+
+		double volume = 0;
+		switch (mType) {
+		case LimbModel::BLOCK: {
+			volume = mDimensions.x() * mDimensions.y() * mDimensions.z();
+			break;
+		}
+		case LimbModel::CAPSULE: {
+			volume = pow(mDimensions.x() * 0.5f, 2) * M_PI * mDimensions.z()
+					+ pow(mDimensions.x(), 3) * M_PI / 6.0f;
+			break;
+		}
+		}
+		mVolume = volume;
+		return volume;
+	}
+
 	btRigidBody* getRigidBody() const {
 		return mBody;
 	}

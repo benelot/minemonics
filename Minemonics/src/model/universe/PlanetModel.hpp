@@ -75,6 +75,15 @@ public:
 		mEvolutionModel = evolutionModel;
 	}
 
+	void addEpoch(Epoch* epoch) {
+		mEpochs.push_back(epoch);
+	}
+
+	Epoch* getCurrentEpoch()
+	{
+		return mEpochs[mCurrentEpoch];
+	}
+
 	//Serialization
 	//TODO: Add serialization to the planet model.
 
@@ -93,6 +102,11 @@ private:
 	 * The epochs of the planet.
 	 */
 	std::vector<Epoch*> mEpochs;
+
+	/**
+	 * The current epoch of the planet
+	 */
+	int mCurrentEpoch;
 };
 
 #endif /* MODEL_UNIVERSE_PLANETMODEL_HPP_ */

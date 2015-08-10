@@ -82,17 +82,22 @@ public:
 	/**
 	 * Add the population to the physics world.
 	 */
-	void addToPhysicsWorld();
+	int addToPhysicsWorld();
 
 	/**
 	 * Add the population to the world.
 	 */
-	void addToWorld();
+	int addToWorld();
 
 	/**
 	 * Remove the population from the world.
 	 */
 	void removeFromWorld();
+
+	/**
+	 * Process the population and finalize jury scores.
+	 */
+	void process();
 
 	//Accessor methods
 
@@ -115,6 +120,8 @@ public:
 	void setOutOfSync(const bool outOfSync) {
 		mPopulationModel->setOutOfSync(outOfSync);
 	}
+
+	double getHighestFitness();
 
 private:
 

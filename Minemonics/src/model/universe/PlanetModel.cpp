@@ -15,6 +15,7 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/Epoch.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/evolution/EvolutionModel.hpp>
 
@@ -22,35 +23,41 @@
 //## utils headers
 
 PlanetModel::PlanetModel() :
-		mEnvironmentModel(NULL), mEvolutionModel(NULL) {
-
+		mEnvironmentModel(NULL), mEvolutionModel(NULL), mCurrentEpoch(0) {
 }
 
 PlanetModel::~PlanetModel() {
-	if(mEnvironmentModel){
+	if (mEnvironmentModel) {
 		delete mEnvironmentModel;
 	}
 
 	mEpochs.clear();
 
-	if(mEvolutionModel){
+	if (mEvolutionModel) {
 		delete mEvolutionModel;
 	}
 }
 
-void PlanetModel::initialize(EvolutionModel* const evolutionModel, EnvironmentModel* const environmentModel) {
+void PlanetModel::initialize(EvolutionModel* const evolutionModel,
+		EnvironmentModel* const environmentModel) {
 	mEvolutionModel = evolutionModel;
 	mEnvironmentModel = environmentModel;
 }
 
 bool PlanetModel::proceedEvaluation() {
-	return true;
+	if (mEpochs.size() > mCurrentEpoch) {
+		if (mEpochs[mCurrentEpoch]->isEndOfEpoch()) {
+			mCurrentEpoch++;
+		}
+		return true;
+	}
+	return false;
 }
 
 void PlanetModel::performEmbryogenesis() {
 	mEvolutionModel->performEmbryogenesis();
 }
 
-void PlanetModel::update(double timeSinceLastTick){
+void PlanetModel::update(double timeSinceLastTick) {
 	mEnvironmentModel->update(timeSinceLastTick);
 }
