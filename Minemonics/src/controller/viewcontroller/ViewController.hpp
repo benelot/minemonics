@@ -25,6 +25,7 @@ class OgreRenderer;
 //## controller headers
 #include <controller/universe/Planet.hpp>
 #include <controller/Evaluation.hpp>
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
 
 //## model headers
 //## view headers
@@ -48,12 +49,10 @@ public:
 
 	/**
 	 * Initialize the view controller.
-	 * @param simulationManager A handle to the simulation manager.
 	 * @param renderTarget The render target.
 	 * @param stateHandler The state handler of the simulation.
 	 */
-	void initialize(SimulationManager* const simulationManager,
-			Ogre::RenderTarget* const renderTarget, StateHandler* const stateHandler);
+	void initialize(Ogre::RenderTarget* const renderTarget, StateHandler* const stateHandler);
 
 	/**
 	 * Update the view controller.
@@ -84,6 +83,8 @@ public:
 
 	//TODO: Implement the view controller to handle what planets are shown.
 	void addPlanet(Planet* planet);
+
+	void removePlanet(Planet* const planet);
 
 	//Accessor methods
 	ParamsPanel* const getDetailsPanel() const {
@@ -126,6 +127,10 @@ public:
 		return mPlanetsInView;
 	}
 
+	CameraHandler& getCameraHandler() {
+		return mCameraHandler;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -150,6 +155,9 @@ private:
 
 	//SheetHandler
 	GUISheetHandler mGUISheetHandler;
+
+	//Camera Handler
+	CameraHandler mCameraHandler;
 
 	//CEGUI
 	ParamsPanel* mFpsPanel;

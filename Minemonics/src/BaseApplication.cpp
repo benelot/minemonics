@@ -42,7 +42,7 @@
 
 //---------------------------------------------------------------------------
 BaseApplication::BaseApplication(void) :
-		mRoot(0), mCamera(0), mSceneMgr(0), mWindow(0), mResourcesCfg(
+		mRoot(0), mSceneMgr(0), mWindow(0), mResourcesCfg(
 				Ogre::StringUtil::BLANK), mPluginsCfg(Ogre::StringUtil::BLANK), mCursorWasVisible(
 				false), mShutDown(false), mOverlaySystem(0) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
@@ -87,17 +87,7 @@ void BaseApplication::chooseSceneManager(void) {
 	mOverlaySystem = new Ogre::OverlaySystem();
 	mSceneMgr->addRenderQueueListener(mOverlaySystem);
 }
-//---------------------------------------------------------------------------
-void BaseApplication::createCamera(void) {
-	// Create the camera
-	mCamera = mSceneMgr->createCamera("PlayerCam");
 
-	// Position it at 500 in Z direction
-	mCamera->setPosition(Ogre::Vector3(0, 0, 80));
-	// Look back along -Z
-	mCamera->lookAt(Ogre::Vector3(0, 0, -300));
-	mCamera->setNearClipDistance(5);
-}
 //---------------------------------------------------------------------------
 void BaseApplication::createFrameListener(void) {
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
@@ -117,17 +107,6 @@ void BaseApplication::createFrameListener(void) {
 }
 //---------------------------------------------------------------------------
 void BaseApplication::destroyScene(void) {
-}
-//---------------------------------------------------------------------------
-void BaseApplication::createViewports(void) {
-	// Create one viewport, entire window
-	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
-	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
-
-	// Alter the camera aspect ratio to match the viewport
-	mCamera->setAspectRatio(
-			Ogre::Real(vp->getActualWidth())
-					/ Ogre::Real(vp->getActualHeight()));
 }
 //---------------------------------------------------------------------------
 void BaseApplication::setupResources(void) {
@@ -207,8 +186,7 @@ bool BaseApplication::setup(void) {
 		return false;
 
 	chooseSceneManager();
-	createCamera();
-	createViewports();
+	setupView();
 
 	// Set default mipmap level (NB some APIs ignore this)
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);

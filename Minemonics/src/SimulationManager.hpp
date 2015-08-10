@@ -33,6 +33,7 @@ class RagDoll;
 //## view headers
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+#include <view/picking/MousePicker.hpp>
 
 //## utils headers
 #include <utils/Debugger.hpp>
@@ -49,6 +50,8 @@ class SimulationManager: public BaseApplication {
 public:
 	SimulationManager(void);
 	virtual ~SimulationManager(void);
+
+	virtual void setupView(void);
 
 	/**
 	 * Quit the simulation.
@@ -68,20 +71,12 @@ public:
 		return mSimulationManager;
 	}
 
-	CameraHandler& getCameraHandler() {
-		return mCameraHandler;
-	}
-
 	SDL2InputHandler& getInputHandler() {
 		return mInputHandler;
 	}
 
 	StateHandler& getStateHandler() {
 		return mStateHandler;
-	}
-
-	Ogre::Camera* getCamera() {
-		return mCamera;
 	}
 
 	Ogre::SceneManager* getSceneManager() {
@@ -126,6 +121,10 @@ public:
 
 	const Debugger& getDebugger() const {
 		return mDebugger;
+	}
+
+	MousePicker& getMousePicker() {
+		return mMousePicker;
 	}
 
 protected:
@@ -188,7 +187,6 @@ private:
 	// Game component handlers
 	SDL2InputHandler mInputHandler;
 	SDL_Window *mSdlWindow;
-	CameraHandler mCameraHandler;
 
 	//The universe and everything
 	Universe mUniverse;
@@ -199,6 +197,8 @@ private:
 	int mSimulationSpeed;
 
 	ViewController mViewController;
+
+	MousePicker mMousePicker;
 
 	Ogre3DFFMPEGVideoWriter mVideoWriter;
 

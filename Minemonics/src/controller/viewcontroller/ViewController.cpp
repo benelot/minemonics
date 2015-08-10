@@ -51,9 +51,10 @@ ViewController::~ViewController() {
 	// TODO Auto-generated destructor stub
 }
 
-void ViewController::initialize(SimulationManager* const simulationManager,
-		Ogre::RenderTarget* const renderTarget,
+void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 		StateHandler* const stateHandler) {
+
+	mCameraHandler.initialize();
 
 	// CEGUI
 	// with a scene manager and window, we can create a the GUI renderer
@@ -87,7 +88,7 @@ void ViewController::initialize(SimulationManager* const simulationManager,
 	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
 			(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
 
-	CEGUIBuilder ceguiBuilder(simulationManager);
+	CEGUIBuilder ceguiBuilder(SimulationManager::getSingleton());
 	CEGUI::Window* menu = ceguiBuilder.createMenu();
 	menu->setAlwaysOnTop(true);
 	mLayout->addChild(menu);
@@ -114,10 +115,10 @@ void ViewController::initialize(SimulationManager* const simulationManager,
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 	// make an instance of our GUI sheet handler class
-	mGUISheetHandler.initialize(simulationManager, mSystem, mLayout,
-			stateHandler);
+	mGUISheetHandler.initialize(SimulationManager::getSingleton(), mSystem,
+			mLayout, stateHandler);
 
-	mInfoOverlay.initialize(simulationManager->getCamera());
+	mInfoOverlay.initialize(mCameraHandler.getCamera());
 
 	// TODO: Add light to the camera like a head light of a miner #134.
 //	Ogre::Light* light = simulationManager->getSceneManager()->createLight(
@@ -136,6 +137,9 @@ void ViewController::update(const double timeSinceLastFrame) {
 	// update the information overlay
 	mInfoOverlay.update();
 
+	// reposition the camera
+	mCameraHandler.reposition(timeSinceLastFrame);
+
 }
 
 void ViewController::notifyDisplaySizeChanged(const float width,
@@ -152,4 +156,15 @@ void ViewController::updateMousePosition(const float mousePositionX,
 }
 
 void ViewController::addPlanet(Planet* const planet) {
+	mPlanetsInView.push_back(planet);
+}
+
+void ViewController::removePlanet(Planet* const planet) {
+	for (std::vector<Planet*>::iterator pit = mPlanetsInView.begin();
+			pit != mPlanetsInView.end(); pit++) {
+		if ((*pit) == planet) {
+			mPlanetsInView.erase(pit);
+			break;
+		}
+	}
 }

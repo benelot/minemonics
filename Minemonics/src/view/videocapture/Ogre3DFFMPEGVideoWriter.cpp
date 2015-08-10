@@ -47,7 +47,8 @@ void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
 					Ogre::TU_RENDERTARGET);
 
 	mRenderTexture = mVideoTexture->getBuffer()->getRenderTarget();
-	mRenderTexture->addViewport(SimulationManager::getSingleton()->getCamera());
+	mRenderTexture->addViewport(
+			SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera());
 	mRenderTexture->getViewport(0)->setClearEveryFrame(true);
 	mRenderTexture->getViewport(0)->setBackgroundColour(
 			Ogre::ColourValue::Black);

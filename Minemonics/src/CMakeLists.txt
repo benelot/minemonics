@@ -267,6 +267,8 @@ set(VIEWHDRS
 	
 	## picking
 	./view/picking/OgreMeshRay.hpp
+	./view/picking/BulletRay.hpp
+	./view/picking/MousePicker.hpp
     
     # procedural
 	./view/visualization/procedural/ProceduralPlatform.h
@@ -337,6 +339,8 @@ set(VIEWSRCS
 	
 	## picking
 	./view/picking/OgreMeshRay.cpp
+	./view/picking/BulletRay.cpp
+	./view/picking/MousePicker.cpp
 	
 	# procedural
 	./view/visualization/procedural/ProceduralBoxGenerator.cpp

@@ -37,6 +37,8 @@ public:
 	CameraHandler();
 	virtual ~CameraHandler();
 
+	void initialize();
+
 	/**
 	 * Reposition the camera.
 	 * @param timeSinceLastFrame The time since the last frame.
@@ -90,6 +92,14 @@ public:
 		mCamNode = camNode;
 	}
 
+	Ogre::Camera* getCamera() const {
+		return mCamera;
+	}
+
+	void setCamera(Ogre::Camera* camera) {
+		mCamera = camera;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -112,6 +122,8 @@ private:
 	 * The SceneNode the camera is currently attached to
 	 */
 	Ogre::SceneNode *mCamNode;
+
+	Ogre::Camera* mCamera;
 
 	/**
 	 *  Value to move in the correct direction

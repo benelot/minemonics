@@ -110,7 +110,7 @@ private:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
 					boost::log::attributes::constant<std::string>(
-							"StateInputHandler"));
+							"KeyboardStateInputHandler"));
 		}
 	} _initializer;
 

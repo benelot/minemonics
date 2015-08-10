@@ -1960,6 +1960,54 @@ utils/logging/Logger.cpp.s:
 	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/utils/logging/Logger.cpp.s
 .PHONY : utils/logging/Logger.cpp.s
 
+view/picking/BulletRay.o: view/picking/BulletRay.cpp.o
+.PHONY : view/picking/BulletRay.o
+
+# target to build an object file
+view/picking/BulletRay.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/BulletRay.cpp.o
+.PHONY : view/picking/BulletRay.cpp.o
+
+view/picking/BulletRay.i: view/picking/BulletRay.cpp.i
+.PHONY : view/picking/BulletRay.i
+
+# target to preprocess a source file
+view/picking/BulletRay.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/BulletRay.cpp.i
+.PHONY : view/picking/BulletRay.cpp.i
+
+view/picking/BulletRay.s: view/picking/BulletRay.cpp.s
+.PHONY : view/picking/BulletRay.s
+
+# target to generate assembly for a file
+view/picking/BulletRay.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/BulletRay.cpp.s
+.PHONY : view/picking/BulletRay.cpp.s
+
+view/picking/MousePicker.o: view/picking/MousePicker.cpp.o
+.PHONY : view/picking/MousePicker.o
+
+# target to build an object file
+view/picking/MousePicker.cpp.o:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/MousePicker.cpp.o
+.PHONY : view/picking/MousePicker.cpp.o
+
+view/picking/MousePicker.i: view/picking/MousePicker.cpp.i
+.PHONY : view/picking/MousePicker.i
+
+# target to preprocess a source file
+view/picking/MousePicker.cpp.i:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/MousePicker.cpp.i
+.PHONY : view/picking/MousePicker.cpp.i
+
+view/picking/MousePicker.s: view/picking/MousePicker.cpp.s
+.PHONY : view/picking/MousePicker.s
+
+# target to generate assembly for a file
+view/picking/MousePicker.cpp.s:
+	$(MAKE) -f CMakeFiles/Minemonics.dir/build.make CMakeFiles/Minemonics.dir/view/picking/MousePicker.cpp.s
+.PHONY : view/picking/MousePicker.cpp.s
+
 view/picking/OgreMeshRay.o: view/picking/OgreMeshRay.cpp.o
 .PHONY : view/picking/OgreMeshRay.o
 
@@ -3254,6 +3302,12 @@ help:
 	@echo "... utils/logging/Logger.o"
 	@echo "... utils/logging/Logger.i"
 	@echo "... utils/logging/Logger.s"
+	@echo "... view/picking/BulletRay.o"
+	@echo "... view/picking/BulletRay.i"
+	@echo "... view/picking/BulletRay.s"
+	@echo "... view/picking/MousePicker.o"
+	@echo "... view/picking/MousePicker.i"
+	@echo "... view/picking/MousePicker.s"
 	@echo "... view/picking/OgreMeshRay.o"
 	@echo "... view/picking/OgreMeshRay.i"
 	@echo "... view/picking/OgreMeshRay.s"

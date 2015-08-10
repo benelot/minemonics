@@ -464,6 +464,16 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/OgreMeshRay.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/BulletRay.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/BulletRay.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/MousePicker.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/MousePicker.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/ProceduralBoxGenerator.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/procedural/ProceduralBoxGenerator.cpp</location>
@@ -1062,6 +1072,16 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/OgreMeshRay.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/OgreMeshRay.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/BulletRay.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/BulletRay.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/MousePicker.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/MousePicker.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/ProceduralPlatform.h</name>

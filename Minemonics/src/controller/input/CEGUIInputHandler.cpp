@@ -111,7 +111,7 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 		Ogre::PolygonMode pm;
 
-		switch (SimulationManager::getSingleton()->getCamera()->getPolygonMode()) {
+		switch (SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->getPolygonMode()) {
 		case Ogre::PM_SOLID:
 			newVal = "Wireframe";
 			pm = Ogre::PM_WIREFRAME;
@@ -125,7 +125,7 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 			pm = Ogre::PM_SOLID;
 		}
 
-		SimulationManager::getSingleton()->getCamera()->setPolygonMode(pm);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(pm);
 		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(10,
 				newVal);
 		break;

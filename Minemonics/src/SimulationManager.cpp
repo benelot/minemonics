@@ -89,7 +89,8 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mSdlWindow(
-		NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01) {
+		NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(
+				&mViewController) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -135,6 +136,22 @@ SimulationManager::~SimulationManager(void) {
 	delete mRandomness;
 }
 
+void SimulationManager::setupView(void) {
+
+	// Create the camera
+	Ogre::Camera* camera = mSceneMgr->createCamera("PlayerCam");
+	mViewController.getCameraHandler().setCamera(camera);
+
+	// Create one viewport, entire window
+	Ogre::Viewport* vp = mWindow->addViewport(camera);
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+
+	// Alter the camera aspect ratio to match the viewport
+	camera->setAspectRatio(
+			Ogre::Real(vp->getActualWidth())
+					/ Ogre::Real(vp->getActualHeight()));
+}
+
 //-------------------------------------------------------------------------------------
 /**
  * Creates the scene of the application.
@@ -148,31 +165,8 @@ void SimulationManager::createScene(void) {
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 			ApplicationConfiguration::APPLICATION_TITLE);
 
-	//################################################################
-	//TODO: Camera must be handled within view controller #############
-	// Create the camera controlling node
-	Ogre::SceneNode *camNode =
-			mSceneMgr->getRootSceneNode()->createChildSceneNode("CamNode1",
-					EvolutionConfiguration::ROOT_POSITION
-							+ Ogre::Vector3(0, 10, 100));
-	mCamera->setPosition(
-			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
-	camNode->attachObject(mCamera);
-	camNode->lookAt(EvolutionConfiguration::ROOT_POSITION,
-			Ogre::Node::TS_WORLD);
-	mCamera->setNearClipDistance(0.1);
-	mCamera->setFarClipDistance(12000);
-
-	if (mRoot->getRenderSystem()->getCapabilities()->hasCapability(
-			Ogre::RSC_INFINITE_FAR_PLANE)) {
-		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
-	}
-
-	// Populate the camera container
-	mCameraHandler.setCamNode(mCamera->getParentSceneNode());
-
 	// initialize GUI and views
-	mViewController.initialize(this, renderTarget, &mStateHandler);
+	mViewController.initialize(renderTarget, &mStateHandler);
 
 	// request a state change saying that the GUI is shown
 	mStateHandler.requestStateChange(StateHandler::GUI);
@@ -394,9 +388,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// update the information in the panels on screen
 	updatePanels(evt.timeSinceLastFrame);
 
-	// reposition the camera
-	mCameraHandler.reposition(evt.timeSinceLastFrame);
-
 	// update view
 	mViewController.update(evt.timeSinceLastFrame);
 
@@ -465,25 +456,32 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 		{
 			mViewController.getDetailsPanel()->setParamValue(0,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedPosition().x), false);
+							mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
+					false);
 			mViewController.getDetailsPanel()->setParamValue(1,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedPosition().y), false);
+							mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
+					false);
 			mViewController.getDetailsPanel()->setParamValue(2,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedPosition().z), false);
+							mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
+					false);
 			mViewController.getDetailsPanel()->setParamValue(4,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().w), false);
+							mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
+					false);
 			mViewController.getDetailsPanel()->setParamValue(5,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().x), false);
+							mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
+					false);
 			mViewController.getDetailsPanel()->setParamValue(6,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().y), false);
+							mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
+					false);
 			mViewController.getDetailsPanel()->setParamValue(7,
 					Ogre::StringConverter::toString(
-							mCamera->getDerivedOrientation().z), true);
+							mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
+					true);
 		}
 	}
 }
@@ -720,4 +718,5 @@ int main(int argc, char *argv[])
 
 #ifdef __cplusplus
 }
+
 #endif

@@ -840,12 +840,12 @@ bool OgreInputHandler::mouseMoved(const float x, const float y) const {
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse moved by " << x << "," << y;
 	if (isRightMousePressed()) {
 		if (isLeftShiftPressed() || isRightShiftPressed()) {
-			SimulationManager::getSingleton()->getCameraHandler().rotate(
+			SimulationManager::getSingleton()->getViewController().getCameraHandler().rotate(
 					CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * y,
 					CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * x,
 					0);
 		} else {
-			SimulationManager::getSingleton()->getCameraHandler().rotate(y, x,
+			SimulationManager::getSingleton()->getViewController().getCameraHandler().rotate(y, x,
 					0);
 		}
 	}
@@ -865,6 +865,7 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	switch (button) {
 	case ApplicationMouseCode::LeftButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
+		mLeftMousePressed = true;
 		break;
 	}
 	case ApplicationMouseCode::RightButton: {
@@ -884,6 +885,10 @@ bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
 	switch (button) {
 	case ApplicationMouseCode::LeftButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse left-release");
+		if(isLeftAltPressed()){
+			SimulationManager::getSingleton()->getMousePicker().castRay();
+		}
+		mLeftMousePressed = false;
 		break;
 	}
 	case ApplicationMouseCode::RightButton: {
@@ -898,74 +903,74 @@ bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
 }
 
 void OgreInputHandler::stopCameraXDimensionMovement() {
-	SimulationManager::getSingleton()->getCameraHandler().moveX(0);
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(0);
 }
 
 void OgreInputHandler::stopCameraYDimensionMovement() {
-	SimulationManager::getSingleton()->getCameraHandler().moveY(0);
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(0);
 }
 
 void OgreInputHandler::stopCameraZDimensionMovement() {
-	SimulationManager::getSingleton()->getCameraHandler().moveZ(0);
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(0);
 }
 
 void OgreInputHandler::moveCameraLeft() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move left!";
 	if(mLeftShiftPressed || mRightShiftPressed) {
-		SimulationManager::getSingleton()->getCameraHandler().moveX(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	}
 	else {
-		SimulationManager::getSingleton()->getCameraHandler().moveX(-1);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(-1);
 	}
 }
 
 void OgreInputHandler::moveCameraUp() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move up!";
 	if(mLeftShiftPressed || mRightShiftPressed) {
-		SimulationManager::getSingleton()->getCameraHandler().moveY(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	}
 	else {
-		SimulationManager::getSingleton()->getCameraHandler().moveY(1);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(1);
 	}
 }
 
 void OgreInputHandler::moveCameraBackward() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move backward!";
 	if(mLeftShiftPressed || mRightShiftPressed) {
-		SimulationManager::getSingleton()->getCameraHandler().moveZ(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	}
 	else {
-		SimulationManager::getSingleton()->getCameraHandler().moveZ(1);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(1);
 	}
 }
 
 void OgreInputHandler::moveCameraRight() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move right!";
 	if(mLeftShiftPressed || mRightShiftPressed) {
-		SimulationManager::getSingleton()->getCameraHandler().moveX(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	}
 	else {
-		SimulationManager::getSingleton()->getCameraHandler().moveX(1);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(1);
 	}
 }
 
 void OgreInputHandler::moveCameraDown() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move down!";
 	if(mLeftShiftPressed || mRightShiftPressed) {
-		SimulationManager::getSingleton()->getCameraHandler().moveY(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	}
 	else {
-		SimulationManager::getSingleton()->getCameraHandler().moveY(-1);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(-1);
 	}
 }
 
 void OgreInputHandler::moveCameraForward() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Camera move forward!";
 	if(mLeftShiftPressed || mRightShiftPressed) {
-		SimulationManager::getSingleton()->getCameraHandler().moveZ(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	}
 	else {
-		SimulationManager::getSingleton()->getCameraHandler().moveZ(-1);
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(-1);
 	}
 }
 

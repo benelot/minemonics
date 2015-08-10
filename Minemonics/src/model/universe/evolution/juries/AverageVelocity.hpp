@@ -8,6 +8,8 @@
 class CreatureModel;
 
 //# system headers
+#include <vector>
+
 //## controller headers
 //## model headers
 #include <OgreVector3.h>
@@ -64,10 +66,7 @@ private:
 	int mSampleQty;
 	bool mIsFirstTime;
 
-	double* mLastX;
-	double* mLastY;
-	double* mLastZ;
-
+	std::vector<Ogre::Vector3> mLastCoords;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_ */

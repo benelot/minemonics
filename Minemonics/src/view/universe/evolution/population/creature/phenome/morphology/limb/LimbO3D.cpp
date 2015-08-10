@@ -55,14 +55,11 @@
 LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		LimbGraphics(limbModel) {
 
-	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
-	Ogre::String materialName = boost::lexical_cast<std::string>(this) + "/"
-			+ "LimbMaterial";
+//	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 
-	// add the true as the last parameter to make it a manual material
+// add the true as the last parameter to make it a manual material
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
-			materialName,
-			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false);
+			"", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false);
 
 	Ogre::Pass *pass = material->getTechnique(0)->getPass(0);
 	pass->setLightingEnabled(true);
@@ -80,9 +77,11 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	tex->setTextureFiltering(Ogre::TFO_ANISOTROPIC);
 	tex->setTextureAnisotropy(8);
 
+//	mLimbEntityNode =
+//			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(
+//					name + "Node");
 	mLimbEntityNode =
-			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(
-					name + "Node");
+			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	switch (limbModel->getPrimitiveType()) {
 	case LimbModel::BLOCK:
 
@@ -91,7 +90,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		mLimbEntity =
 				SimulationManager::getSingleton()->getSceneManager()->createEntity(
 						Ogre::SceneManager::PT_CUBE);
-		mLimbEntity->setMaterialName(materialName);
+		mLimbEntity->setMaterial(material);
 
 		mLimbEntityNode->attachObject(mLimbEntity);
 
@@ -107,13 +106,14 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 
 		material->load();
 		// capsule does not need to be scaled, it is exactly one to one as it seems.
-		Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
-				0.5f * limbModel->getDimensions().x).setHeight(
-				limbModel->getDimensions().y).realizeMesh(name);
+		Ogre::MeshPtr mesh =
+				Procedural::CapsuleGenerator().setPosition(0, 0, 0).setRadius(
+						0.5f * limbModel->getDimensions().x).setHeight(
+						limbModel->getDimensions().y).realizeMesh();
 		mLimbEntity =
 				SimulationManager::getSingleton()->getSceneManager()->createEntity(
-						name);
-		mLimbEntity->setMaterialName(materialName);
+						mesh);
+		mLimbEntity->setMaterial(material);
 		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
 	}
@@ -122,8 +122,8 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 
 LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
 		LimbGraphics(limbO3D.mLimbModel) {
-	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
-	mLimbEntity = limbO3D.mLimbEntity->clone(name);
+//	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
+	mLimbEntity = limbO3D.mLimbEntity->clone("");
 //	mLimbEntityNode =
 //			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name + "Node");
 	mLimbEntityNode =
@@ -136,7 +136,7 @@ LimbO3D::~LimbO3D() {
 	mLimbEntityNode->removeAndDestroyAllChildren();
 	SimulationManager::getSingleton()->getSceneManager()->destroySceneNode(
 			mLimbEntityNode);
-	delete mLimbEntityNode;
+	mLimbEntityNode = 0;
 	delete mLimbEntity;
 }
 

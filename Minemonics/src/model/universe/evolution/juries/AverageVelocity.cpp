@@ -26,42 +26,30 @@
 
 AverageVelocity::AverageVelocity(double weight) :
 		Jury(Jury::AVG_VELOCITY, weight), mIsFirstTime(true), mAvgVelocity(0), mTimestamp(
-				0), mSampleQty(0), mLastX(NULL), mLastY(NULL), mLastZ(NULL), mCreatureLimbQty(
-				0) {
+				0), mSampleQty(0), mCreatureLimbQty(0) {
 
 }
 
 AverageVelocity::~AverageVelocity() {
 //	mAvgVelocity
 //	mFitness
-//	mIsFirstTime
 //	mJuryType
 //	mSampleQty
 //	mTimestamp
 //	mWeight
-	delete[] mLastX;
-	mLastX = NULL;
-	delete[] mLastY;
-	mLastY = NULL;
-	delete[] mLastZ;
-	mLastZ = NULL;
+	mLastCoords.clear();
 }
 
 void AverageVelocity::calculateFitness(CreatureModel* creature,
 		double timeSinceLastTick) {
 	if (mIsFirstTime) {
 		mCreatureLimbQty = creature->getPhenotypeModel().getLimbModels().size();
-		mLastX = new double[mCreatureLimbQty];
-		mLastY = new double[mCreatureLimbQty];
-		mLastZ = new double[mCreatureLimbQty];
 		int i = 0;
 		for (std::vector<LimbModel*>::iterator lit =
 				creature->getPhenotypeModel().getLimbModels().begin();
 				lit != creature->getPhenotypeModel().getLimbModels().end();
 				lit++, i++) {
-			mLastX[i] = (*lit)->getPosition().x;
-			mLastY[i] = (*lit)->getPosition().y;
-			mLastZ[i] = (*lit)->getPosition().z;
+			mLastCoords.push_back((*lit)->getPosition());
 		}
 		mIsFirstTime = false;
 	} else {
@@ -74,19 +62,14 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 				lit != creature->getPhenotypeModel().getLimbModels().end();
 				lit++, i++) {
 			totalMovement += (*lit)->getVolume()
-					* getDistanceVector((*lit)->getPosition().x, mLastX[i],
-							(*lit)->getPosition().y, mLastY[i],
-							(*lit)->getPosition().z, mLastZ[i]);
+					* ((*lit)->getPosition() - mLastCoords[i]);
 			totalVolume += (*lit)->getVolume();
 		}
-		if(totalVolume == 0){
+		if (totalVolume == 0) {
 			mTotalMovement = 0;
-		}
-		else{
+		} else {
 			mTotalMovement += totalMovement / totalVolume;
 		}
-
-
 
 	}
 
@@ -95,9 +78,7 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 			creature->getPhenotypeModel().getLimbModels().begin();
 			lit != creature->getPhenotypeModel().getLimbModels().end();
 			lit++, i++) {
-		mLastX[i] = (*lit)->getPosition().x;
-		mLastY[i] = (*lit)->getPosition().y;
-		mLastZ[i] = (*lit)->getPosition().z;
+		mLastCoords[i] = (*lit)->getPosition();
 	}
 	mTimestamp += timeSinceLastTick;
 	mSampleQty++;

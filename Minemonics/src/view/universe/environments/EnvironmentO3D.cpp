@@ -14,6 +14,9 @@
 
 //## configuration headers
 //## controller headers
+#include <controller/viewcontroller/ViewController.hpp>
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -89,7 +92,8 @@ void EnvironmentO3D::initialize(const std::string fileName,
 	// Since we're not loading any pages from .page files, we need a way just
 	// to say we've loaded them without them actually being loaded
 	mPageManager->setPageProvider(&mDummyPageProvider);
-	mPageManager->addCamera(SimulationManager::getSingleton()->getCamera());
+	mPageManager->addCamera(
+			SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera());
 	mPageManager->setDebugDisplayLevel(0);
 
 	mTerrainPaging = new Ogre::TerrainPaging(mPageManager);
