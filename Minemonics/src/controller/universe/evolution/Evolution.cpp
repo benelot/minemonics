@@ -90,6 +90,7 @@ bool Evolution::proceedEvaluation() {
 					Epoch* epoch = mPlanet->getPlanetModel()->getCurrentEpoch();
 					creature->addJury(
 							JuryFactory::buildJury(epoch->getJuryTypes()[i],
+									epoch->getSortOrders()[i],
 									epoch->getWeights()[i]));
 				}
 
@@ -226,16 +227,16 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 	} else {
-		//update highest fitness
-		double highestFitness = 0;
-		for (std::vector<Population*>::iterator pit = mPopulations.begin();
-				pit != mPopulations.end(); pit++) {
-			double fitness = (*pit)->getHighestFitness();
-			highestFitness =
-					(highestFitness < fitness) ? fitness : highestFitness;
-		}
-		mPlanet->getPlanetModel()->getCurrentEpoch()->setCurrentFitness(
-				highestFitness);
+//		//update highest fitness
+//		double highestFitness = 0;
+//		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+//				pit != mPopulations.end(); pit++) {
+//			double fitness = (*pit)->getHighestFitness();
+//			highestFitness =
+//					(highestFitness < fitness) ? fitness : highestFitness;
+//		}
+//		mPlanet->getPlanetModel()->getCurrentEpoch()->setCurrentFitness(
+//				highestFitness);
 
 		//update lasting generations
 		mPlanet->getPlanetModel()->getCurrentEpoch()->setLastingGenerations(
@@ -262,8 +263,7 @@ void Evolution::performEmbryogenesis() {
 		//for each creature in the population
 		for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
-				cit != (*pit)->getCreatures().end(); ) {
-
+				cit != (*pit)->getCreatures().end();) {
 
 			//Performing embryogenesis on creature(x/all)
 			//Gene Qty: z
@@ -273,18 +273,17 @@ void Evolution::performEmbryogenesis() {
 
 			int limbQty = (*cit)->performEmbryogenesis();
 
-
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Components:" << (*cit)->getCreatureModel()->getPhenotypeModel().getComponentModels().size();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< (**cit).getCreatureModel();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature finished.\n"
 			<< "################################\n\n";
 
-			if(limbQty == 0){
+			if(limbQty == 0) {
 				Creature* creature = *cit;
 				cit = (*pit)->getCreatures().erase(cit);
 				delete creature;
 			}
-			else{
+			else {
 				creatureQty++;
 				cit++;
 			}

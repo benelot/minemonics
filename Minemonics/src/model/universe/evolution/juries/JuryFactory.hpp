@@ -6,6 +6,7 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/juries/AverageHeight.hpp>
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 
@@ -26,16 +27,17 @@
  */
 class JuryFactory {
 public:
-	static Jury* buildJury(Jury::JuryType type,double weight){
+	static Jury* buildJury(Jury::JuryType type, bool higherIsBetter,
+			double weight) {
 		Jury* jury;
 
-		switch(type){
+		switch (type) {
 		case Jury::AVG_VELOCITY:
-			jury = new AverageVelocity(weight);
+			jury = new AverageVelocity(higherIsBetter, weight);
 			break;
+		case Jury::AVG_HEIGHT:
+			jury = new AverageHeight(higherIsBetter, weight);
 		}
-
-
 
 		return jury;
 	}

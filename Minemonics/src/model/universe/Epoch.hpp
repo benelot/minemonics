@@ -65,9 +65,10 @@ public:
 		mLastingGenerations = lastingGenerations;
 	}
 
-	void addJuryType(Jury::JuryType type, double weight) {
+	void addJuryType(Jury::JuryType type, double weight, bool higherIsBetter) {
 		mJuryTypes.push_back(type);
 		mWeights.push_back(weight);
+		mSortOrders.push_back(higherIsBetter);
 	}
 
 	int getLastingGenerationsLimit() const {
@@ -102,10 +103,16 @@ public:
 		return mWeights;
 	}
 
+	const std::vector<bool>& getSortOrders() const {
+		return mSortOrders;
+	}
+
 private:
 	std::vector<Jury::JuryType> mJuryTypes;
 
 	std::vector<double> mWeights;
+
+	std::vector<bool> mSortOrders;
 
 	//Epoch criteria
 

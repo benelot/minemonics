@@ -29,13 +29,11 @@ public:
 	 * The limb minimum dimension size
 	 */
 	static const double LIMB_MIN_SIZE = 0.05;
-	//Still pretty tiny, but a visible size
 
 	/**
 	 * The limb maximum dimension size
 	 */
 	static const double LIMB_MAX_SIZE = 10;
-	//TODO: Optimize with bullet physics engine
 
 	/**
 	 * The limb minimum density
@@ -155,7 +153,7 @@ public:
 
 	static const double JOINT_MIN_FREQUENCY = 0.1;
 
-	static const double JOINT_MAX_FREQUENCY = 10;
+	static const double JOINT_MAX_FREQUENCY = 5;
 
 	static const double JOINT_MIN_AMPLITUDE = 0;
 

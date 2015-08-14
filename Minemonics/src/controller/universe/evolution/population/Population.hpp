@@ -121,7 +121,7 @@ public:
 		mPopulationModel->setOutOfSync(outOfSync);
 	}
 
-	double getHighestFitness();
+//	double getHighestFitness();
 
 private:
 

@@ -31,7 +31,7 @@ class CreatureModel;
  */
 class AverageVelocity: public Jury {
 public:
-	AverageVelocity(const double weight);
+	AverageVelocity(const bool higherIsBetter,const double weight);
 	virtual ~AverageVelocity();
 
 	virtual void calculateFitness(CreatureModel* creature, double timeSinceLastTick);

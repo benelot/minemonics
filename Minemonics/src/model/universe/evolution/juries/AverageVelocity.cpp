@@ -24,10 +24,10 @@
 //## view headers
 //## utils headers
 
-AverageVelocity::AverageVelocity(double weight) :
-		Jury(Jury::AVG_VELOCITY, weight), mIsFirstTime(true), mAvgVelocity(0), mTimestamp(
-				0), mSampleQty(0), mCreatureLimbQty(0) {
-
+AverageVelocity::AverageVelocity(const bool higherIsBetter, double weight) :
+		Jury(Jury::AVG_VELOCITY, higherIsBetter, weight), mIsFirstTime(true), mAvgVelocity(
+				0), mTimestamp(0), mSampleQty(0), mCreatureLimbQty(0), mTotalMovement(
+				0, 0, 0) {
 }
 
 AverageVelocity::~AverageVelocity() {
@@ -42,21 +42,13 @@ AverageVelocity::~AverageVelocity() {
 
 void AverageVelocity::calculateFitness(CreatureModel* creature,
 		double timeSinceLastTick) {
-	if (mIsFirstTime) {
-		mCreatureLimbQty = creature->getPhenotypeModel().getLimbModels().size();
-		int i = 0;
-		for (std::vector<LimbModel*>::iterator lit =
-				creature->getPhenotypeModel().getLimbModels().begin();
-				lit != creature->getPhenotypeModel().getLimbModels().end();
-				lit++, i++) {
-			mLastCoords.push_back((*lit)->getPosition());
-		}
-		mIsFirstTime = false;
-	} else {
+
+	if (!mIsFirstTime) {
 
 		int i = 0;
 		Ogre::Vector3 totalMovement = Ogre::Vector3::ZERO;
 		double totalVolume = 0;
+		int segmentQty = 0;
 		for (std::vector<LimbModel*>::iterator lit =
 				creature->getPhenotypeModel().getLimbModels().begin();
 				lit != creature->getPhenotypeModel().getLimbModels().end();
@@ -64,9 +56,16 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 			totalMovement += (*lit)->getVolume()
 					* ((*lit)->getPosition() - mLastCoords[i]);
 			totalVolume += (*lit)->getVolume();
+			segmentQty++;
 		}
-		if (totalVolume == 0) {
-			mTotalMovement = 0;
+		if (totalVolume == 0 || segmentQty == 1) {
+
+			mTotalMovement =
+					(mHigherIsBetter) ?
+							Ogre::Vector3::ZERO :
+							Ogre::Vector3(std::numeric_limits<double>::max(),
+									std::numeric_limits<double>::max(),
+									std::numeric_limits<double>::max());
 		} else {
 			mTotalMovement += totalMovement / totalVolume;
 		}
@@ -78,9 +77,15 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 			creature->getPhenotypeModel().getLimbModels().begin();
 			lit != creature->getPhenotypeModel().getLimbModels().end();
 			lit++, i++) {
-		mLastCoords[i] = (*lit)->getPosition();
+		if (mIsFirstTime) {
+
+			mLastCoords.push_back((*lit)->getPosition());
+		} else {
+			mLastCoords[i] = (*lit)->getPosition();
+		}
 	}
 	mTimestamp += timeSinceLastTick;
+	mIsFirstTime = false;
 	mSampleQty++;
 }
 
@@ -101,11 +106,15 @@ double AverageVelocity::calculateDistance(const double x1, const double x2,
 }
 
 void AverageVelocity::evaluateFitness() {
-	mAvgVelocity = mTotalMovement.squaredLength() / mTimestamp;
-	std::cout << "Fitness: " << mAvgVelocity << std::endl;
+	if (mTimestamp != 0) {
+		mAvgVelocity = mTotalMovement.squaredLength() / mTimestamp;
+	} else {
+		mAvgVelocity = 0;
+	}
+	std::cout << "Average Velocity Fitness: " << mAvgVelocity << std::endl;
 	mFitness = mAvgVelocity;
 }
 
-AverageVelocity* AverageVelocity::clone() {
+AverageVelocity * AverageVelocity::clone() {
 	return new AverageVelocity(*this);
 }

@@ -120,8 +120,6 @@ public:
 		return totalVolume;
 	}
 
-	double getFitness();
-
 	/**
 	 * Compare the creature model to another creature model.
 	 * @param creature Another creature model.
@@ -244,6 +242,8 @@ public:
 
 	void processJuries();
 
+	double getFitnessScore();
+
 	const std::string& getFirstName() const {
 		return mFirstName;
 	}
@@ -334,6 +334,8 @@ private:
 	 * The population the creature lives in.
 	 */
 	PopulationModel* mPopulationModel;
+
+	double mFitnessScore;
 
 };
 BOOST_CLASS_VERSION(CreatureModel, 1)

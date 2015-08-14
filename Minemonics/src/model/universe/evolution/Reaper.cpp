@@ -21,6 +21,8 @@
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
+#include <model/universe/evolution/CreatureFitnessComparator.hpp>
+#include <model/universe/evolution/CreatureFitnessScoreComparator.hpp>
 
 //## view headers
 //## utils headers
@@ -50,19 +52,31 @@ void Reaper::initialize(const double reapPercentage,
 	mSowFreshPercentage = sowFreshPercentage;
 }
 
-bool Reaper::compareCreatureFitness(CreatureModel* const creature1,
-		CreatureModel* const creature2) {
-	// lesser means ascending/ greater means descending
-	return (creature1->getFitness() < creature2->getFitness());
-}
-
 void Reaper::reap(PopulationModel* const population) {
 	int headsToReap = ceil(
 			population->getCreatureModels().size() * mReapPercentage);
 
-	std::sort(population->getCreatureModels().begin(),
-			population->getCreatureModels().end(),
-			Reaper::compareCreatureFitness);
+	for (int i = 0; i < population->getCreatureModels()[0]->getJuries().size();
+			i++) {
+
+		CreatureFitnessComparator comparator(i);
+		std::sort(population->getCreatureModels().begin(),
+				population->getCreatureModels().end(),
+				comparator.compareCreatureFitness);
+
+		//add linear scoring descending
+		int j = population->getCreatureModels().size();
+		for (std::vector<CreatureModel*>::iterator cit =
+				population->getCreatureModels().begin();
+				cit != population->getCreatureModels().end(); cit++, j--) {
+			(*cit)->getJuries()[i]->setScore(j);
+		}
+
+	}
+//	CreatureFitnessScoreComparator scoreComparator();
+//	std::sort(population->getCreatureModels().begin(),
+//			population->getCreatureModels().end(),
+//			scoreComparator.compareCreatureFitnessScore);
 
 	for (std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().begin();
@@ -180,8 +194,8 @@ void Reaper::crossover(PopulationModel* const population,
 							Randomness::getSingleton()->nextUnifPosInt(0,
 									population->getCreatureModels().size()
 											- 1));
-					if (bestFitness < model->getFitness()) {
-						bestFitness = model->getFitness();
+					if (bestFitness < model->getFitnessScore()) {
+						bestFitness = model->getFitnessScore();
 						bestCreatureIndex = j;
 					}
 					tournament.push_back(model);
@@ -226,8 +240,8 @@ void Reaper::mutateGenes(PopulationModel* const population,
 			CreatureModel* model = population->getCreatureModels().at(
 					Randomness::getSingleton()->nextUnifPosInt(0,
 							population->getCreatureModels().size() - 1));
-			if (bestFitness < model->getFitness()) {
-				bestFitness = model->getFitness();
+			if (bestFitness < model->getFitnessScore()) {
+				bestFitness = model->getFitnessScore();
 				bestCreatureIndex = j;
 			}
 			tournament.push_back(model);
@@ -256,8 +270,8 @@ void Reaper::mutateGeneAttributes(PopulationModel* const population,
 			CreatureModel* model = population->getCreatureModels().at(
 					Randomness::getSingleton()->nextUnifPosInt(0,
 							population->getCreatureModels().size() - 1));
-			if (bestFitness < model->getFitness()) {
-				bestFitness = model->getFitness();
+			if (bestFitness < model->getFitnessScore()) {
+				bestFitness = model->getFitnessScore();
 				bestCreatureIndex = j;
 			}
 			tournament.push_back(model);
@@ -283,8 +297,8 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 			CreatureModel* model = population->getCreatureModels().at(
 					Randomness::getSingleton()->nextUnifPosInt(0,
 							population->getCreatureModels().size() - 1));
-			if (bestFitness < model->getFitness()) {
-				bestFitness = model->getFitness();
+			if (bestFitness < model->getFitnessScore()) {
+				bestFitness = model->getFitnessScore();
 				bestCreatureIndex = j;
 			}
 			tournament.push_back(model);
@@ -311,7 +325,8 @@ void Reaper::sowFreshly(PopulationModel* const population,
 				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		CreatureModel* offspring = new CreatureModel();
 		offspring->setNew(true);
-		offspring->initialize(population, EvolutionConfiguration::ROOT_POSITION, branchiness);
+		offspring->initialize(population, EvolutionConfiguration::ROOT_POSITION,
+				branchiness);
 		population->getCreatureModels().push_back(offspring);
 	}
 }

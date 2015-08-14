@@ -394,7 +394,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		break;
 
 		case ApplicationKeycode::APPK_LCTRL:
-		setRightControlPressed(true);
+		setLeftControlPressed(true);
 		break;
 		case ApplicationKeycode::APPK_LALT:
 		setLeftAltPressed(true);
@@ -865,6 +865,9 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	switch (button) {
 	case ApplicationMouseCode::LeftButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
+		if(isLeftControlPressed()){
+			SimulationManager::getSingleton()->getMousePicker().castRay();
+		}
 		mLeftMousePressed = true;
 		break;
 	}
@@ -885,9 +888,6 @@ bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
 	switch (button) {
 	case ApplicationMouseCode::LeftButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse left-release");
-		if(isLeftAltPressed()){
-			SimulationManager::getSingleton()->getMousePicker().castRay();
-		}
 		mLeftMousePressed = false;
 		break;
 	}

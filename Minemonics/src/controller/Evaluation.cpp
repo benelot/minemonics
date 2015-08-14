@@ -44,6 +44,7 @@ void Evaluation::addPopulation(Population* const population) {
 }
 
 void Evaluation::setup() {
+	SimulationManager::getSingleton()->getViewController().addPlanet(mPlanet);
 	//add environment to the world
 	//TODO: Must be a separate copy for parallel evaluations(you can not use the same reference for multiple worlds), but must update (possibly in parallel)
 	// the main environment to stay the same for all evaluations
@@ -102,7 +103,7 @@ void Evaluation::process() {
 }
 
 void Evaluation::teardown() {
-
+	SimulationManager::getSingleton()->getViewController().removePlanet(mPlanet);
 	process();
 
 	//remove the environment from the world

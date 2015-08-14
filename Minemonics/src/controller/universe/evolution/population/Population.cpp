@@ -170,13 +170,13 @@ void Population::process() {
 	}
 }
 
-double Population::getHighestFitness() {
-	double highestFitness = 0;
-	for (std::vector<CreatureModel*>::const_iterator cit =
-			mPopulationModel->getCreatureModels().begin();
-			cit != mPopulationModel->getCreatureModels().end(); cit++) {
-		double fitness = (*cit)->getFitness();
-		highestFitness = (highestFitness < fitness) ? fitness : highestFitness;
-	}
-	return highestFitness;
-}
+//double Population::getHighestFitness() {
+//	double highestFitness = 0;
+//	for (std::vector<CreatureModel*>::const_iterator cit =
+//			mPopulationModel->getCreatureModels().begin();
+//			cit != mPopulationModel->getCreatureModels().end(); cit++) {
+//		double fitness = (*cit)->getFitness();
+//		highestFitness = (highestFitness < fitness) ? fitness : highestFitness;
+//	}
+//	return highestFitness;
+//}

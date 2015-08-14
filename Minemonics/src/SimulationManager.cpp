@@ -73,6 +73,7 @@
 
 //## model headers
 #include <model/universe/Epoch.hpp>
+#include <model/universe/CollisionHandler.hpp>
 
 //## view headers
 #include <view/visualization/panels/MathGLPanel.hpp>
@@ -96,6 +97,9 @@ SimulationManager::SimulationManager(void) :
 
 	//initialize the singleton
 	mRandomness = new Randomness();
+
+	//set the contact processor callback
+	gContactProcessedCallback = processContactCallback;
 
 	// main frame timer initialization
 	mStart = time.getMilliseconds();
@@ -231,7 +235,8 @@ void SimulationManager::createScene(void) {
 	earth->addPopulation(earthPopulation);
 
 	Epoch* oneEpoch = new Epoch();
-	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1);
+	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
+	oneEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
 
 	earth->addEpoch(oneEpoch);
 

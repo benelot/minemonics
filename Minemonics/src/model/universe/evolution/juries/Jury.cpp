@@ -14,8 +14,9 @@
 //## view headers
 //## utils headers
 
-Jury::Jury(JuryType juryType, int weight) :
-		mJuryType(juryType), mFitness(0), mWeight(weight) {
+Jury::Jury(JuryType juryType, bool higherIsBetter, int weight) :
+		mJuryType(juryType), mFitness(0), mWeight(weight), mHigherIsBetter(
+				higherIsBetter) {
 }
 
 Jury::~Jury() {
@@ -43,16 +44,15 @@ Jury::JuryType Jury::getJuryType() {
 }
 
 bool Jury::equals(const Jury& jury) const {
-	if(mJuryType != jury.mJuryType)
-	{
+	if (mJuryType != jury.mJuryType) {
 		return false;
 	}
 
-	if(mWeight != jury.mWeight){
+	if (mWeight != jury.mWeight) {
 		return false;
 	}
 
-	if(mFitness != jury.mFitness){
+	if (mFitness != jury.mFitness) {
 		return false;
 	}
 

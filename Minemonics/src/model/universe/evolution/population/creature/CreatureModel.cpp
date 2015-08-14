@@ -22,7 +22,7 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mPopulationModel(NULL), mCulled(false), mNew(false) {
+		mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1) {
 	mJuries.clear();
 }
 
@@ -36,6 +36,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mPopulationModel = creatureModel.mPopulationModel;
 	mInitialPosition = creatureModel.mInitialPosition;
 	mPosition = creatureModel.mPosition;
+	mFitnessScore = creatureModel.mFitnessScore;
 
 	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
@@ -73,20 +74,27 @@ void CreatureModel::reposition(const Ogre::Vector3 position) {
 	mPosition = position;
 }
 
-double CreatureModel::getFitness() {
+double CreatureModel::getFitnessScore() {
+
+	if (mFitnessScore != -1) {
+		return mFitnessScore;
+	}
+
 	double fitness = 0;
-	double weight = 1;
+	double weight = 0;
 
 	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
 			jit != mJuries.end(); jit++) {
-		fitness += (*jit)->getFitness() * (*jit)->getWeight();
+		fitness += (*jit)->getScore() * (*jit)->getWeight();
 		weight += (*jit)->getWeight();
 	}
 
 	if (weight != 0) {
-		return fitness / weight;
+		mFitnessScore = fitness / weight;
+	} else {
+		mFitnessScore = 0;
 	}
-	return 0;
+	return mFitnessScore;
 }
 
 bool CreatureModel::equals(const CreatureModel& creature) const {
@@ -154,7 +162,7 @@ void CreatureModel::update(double timeSinceLastTick) {
 	for (std::vector<Jury*>::iterator jit = mJuries.begin();
 			jit != mJuries.end(); jit++) {
 		switch ((*jit)->getJuryType()) {
-		case Jury::AVG_VELOCITY: {
+		default: {
 			(*jit)->calculateFitness(this, timeSinceLastTick);
 			break;
 		}

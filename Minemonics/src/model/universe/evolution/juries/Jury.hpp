@@ -36,13 +36,14 @@ class access;
 class Jury {
 public:
 	enum JuryType {
-		AVG_VELOCITY
+		AVG_VELOCITY, AVG_HEIGHT
 	};
 
-	Jury(JuryType juryType, int weight);
+	Jury(JuryType juryType, bool higherIsBetter, int weight);
 	virtual ~Jury();
 
-	virtual void calculateFitness(CreatureModel* creature, double timeSinceLastTick) = 0;
+	virtual void calculateFitness(CreatureModel* creature,
+			double timeSinceLastTick) = 0;
 
 	/**
 	 * Calculates the fitness value at the end of the evaluation.
@@ -79,7 +80,9 @@ public:
 		<< "/Weight=" << jury.mWeight
 
 		/**The fitness score of the jury.*/
-		<< "Fitness=" << jury.mFitness;
+		<< "/Fitness=" << jury.mFitness
+
+		<< "/HigherIsBetter=" << jury.mHigherIsBetter;
 	}
 
 	/**
@@ -98,6 +101,8 @@ public:
 
 		/**The fitness score of the jury.*/
 		& BOOST_SERIALIZATION_NVP(mFitness);
+
+		& BOOST_SERIALIZATION_NVP(mHigherIsBetter);
 	}
 
 	//Accessor methods
@@ -115,6 +120,18 @@ public:
 
 	JuryType getJuryType();
 
+	double isHigherBetter() const {
+		return mHigherIsBetter;
+	}
+
+	double getScore() const {
+		return mScore;
+	}
+
+	void setScore(double score) {
+		mScore = score;
+	}
+
 protected:
 	/**
 	 * The type of jury.
@@ -127,9 +144,19 @@ protected:
 	double mWeight;
 
 	/**
+	 * If a higher score is better or not.
+	 */
+	double mHigherIsBetter;
+
+	/**
 	 * The fitness evaluated by this jury.
 	 */
 	double mFitness;
+
+	/**
+	 * The score it received in the comparative rating.
+	 */
+	double mScore;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_JURY_HPP_ */

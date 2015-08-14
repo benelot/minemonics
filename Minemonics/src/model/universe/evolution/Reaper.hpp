@@ -6,14 +6,14 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/PopulationModel.hpp>
-
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -60,7 +60,16 @@ public:
 	 * @param creature2 Second creature.
 	 * @return if the second creature's fitness is higher.
 	 */
-	static bool compareCreatureFitness(CreatureModel* const creature1, CreatureModel* const creature2);
+	static bool compareCreatureFitnessAsc(CreatureModel* const creature1, CreatureModel* const creature2);
+
+	/**
+	 * Comparator for the creature sort function
+	 * @param creature1 First creature.
+	 * @param creature2 Second creature.
+	 * @return if the second creature's fitness is higher.
+	 */
+	static bool compareCreatureFitnessDsc(CreatureModel* const creature1, CreatureModel* const creature2);
+
 
 	/**
 	 * Reap the less fit creatures from the population.
