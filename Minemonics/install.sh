@@ -10,11 +10,6 @@
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Building+Ogre
 
 
-# We need the newest Cmake update, at least 3.0 (we do not need anymore)
-#sudo add-apt-repository ppa:george-edison55/cmake-3.x
-#sudo apt-get update
-#sudo apt-get install cmake
-
 sudo apt-get install git mercurial
 
 mkdir dependencies
@@ -35,7 +30,7 @@ hg clone https://bitbucket.org/sinbad/ogre/ -u v1-9 .
 mkdir build
 cd build
 # configure make files with cmake
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ..
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ..
 make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
@@ -43,9 +38,14 @@ cd ../..
 
 # Bullet Physics 3
 git clone https://github.com/bulletphysics/bullet3.git
-cd bullet3/build3
+cd bullet3
+mkdir build
+cd build
 # configure make files with cmake
-cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET2_DEMOS=ON -DBUILD_CPU_DEMOS=ON -DBUILD_BULLET3=ON -DBUILD_OPENGL3_DEMOS=ON -DBUILD_EXTRAS=ON -DBUILD_SHARED_LIBS=ON  -DINSTALL_EXTRA_LIBS=ON -DUSE_DOUBLE_PRECISION=ON ..
+#for pure installation (on some systems, the double precision build does not work)
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET3=ON .. #-DUSE_DOUBLE_PRECISION=ON ..
+#for development
+#cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET2_DEMOS=ON -DBUILD_CPU_DEMOS=ON -DBUILD_BULLET3=ON -DBUILD_OPENGL3_DEMOS=ON -DBUILD_EXTRAS=ON -DBUILD_SHARED_LIBS=ON  -DINSTALL_EXTRA_LIBS=ON .. #-DUSE_DOUBLE_PRECISION=ON ..
 make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
@@ -68,7 +68,7 @@ cd ../..
 #cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ..
 #make -j8 # because I have 8 cores for parallel compilation
 #sudo make install
-#sudo ldconfig
+#sudo ldconfig 
 
 #cd ../..
 
@@ -77,10 +77,10 @@ cd ../..
 #sudo apt-get install libglew-dev libglm-dev
 mkdir CeGUI
 cd CeGUI
-hg clone https://underworldguardian@bitbucket.org/cegui/cegui . -r c60fe39a5b27
+hg clone https://bitbucket.org/cegui/cegui . -r c60fe39a5b27
 mkdir build
 cd build
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=off ..
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=OFF -D CEGUI_BUILD_RENDERER_OGRE=ON ....
 make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig
@@ -107,9 +107,10 @@ sudo apt-get -y --force-yes install autoconf automake build-essential libass-dev
 sudo apt-get install yasm libx264-dev libopus-dev libmp3lame-dev
 mkdir FFmpeg
 cd FFmpeg
-git clone https://github.com/FFmpeg/FFmpeg.git
-PATH="/usr/local/bin:$PATH" PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" ./configure   --prefix="/usr/local"   --extra-cflags="-I/usr/local/include"   --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin"   --enable-gpl   --enable-libass --enable-libfreetype   --enable-libmp3lame   --enable-libopus   --enable-libtheora   --enable-libvorbis   --enable-libx264   --enable-nonfree
-PATH="/usr/local/bin:$PATH" make
+git clone https://github.com/FFmpeg/FFmpeg.git . -o 0773f6739538db9cbe2712bfffd4de47639a685e
+PATH="/usr/local/bin:$PATH" PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" ./configure   --prefix="/usr/local"   --extra-cflags="-I/usr/local/include"   --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin"  --disable-vaapi
+#PATH="/usr/local/bin:$PATH" PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" ./configure   --prefix="/usr/local"   --extra-cflags="-I/usr/local/include"   --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin"  --disable-vaapi  --#enable-gpl   --enable-libass --enable-libfreetype   --enable-libmp3lame   --enable-libopus   --enable-libtheora   --enable-libvorbis   --enable-libx264   --enable-nonfree 
+PATH="/usr/local/bin:$PATH" make -j8
 sudo make install
 sudo ldconfig
 
