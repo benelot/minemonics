@@ -15,6 +15,8 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 
 //## view headers
 //## utils headers
@@ -62,6 +64,9 @@ void LimbModel::initialize(btDynamicsWorld* const world,
 	mDimensions = dimensions;
 	mPrimitiveType = type;
 	mColor = color;
+
+	//TODO: proof of concept, make better.
+	mTactioceptors.push_back(new Tactioceptor());
 }
 
 void LimbModel::reset(Ogre::Vector3 position) {
@@ -94,4 +99,30 @@ bool LimbModel::equals(const LimbModel& limbModel) const {
 
 LimbModel* LimbModel::clone() {
 	return new LimbModel(*this);
+}
+
+void LimbModel::activateTactioceptors() {
+	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
+			tit != mTactioceptors.end(); tit++) {
+		(*tit)->setTouched(true);
+	}
+}
+
+void LimbModel::resetSensors() {
+	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
+			tit != mTactioceptors.end(); tit++) {
+		(*tit)->setTouched(false);
+	}
+}
+
+void LimbModel::update(double timeSinceLastTick) {
+	std::cout << std::endl << "TactileSensors:";
+	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
+			tit != mTactioceptors.end(); tit++) {
+		std::cout << (*tit)->isTouched() << "|";
+	}
+	std::cout << std::endl;
+
+	// reset the sensors when they are processed
+	resetSensors();
 }

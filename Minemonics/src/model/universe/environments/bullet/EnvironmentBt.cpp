@@ -63,6 +63,10 @@ void EnvironmentBt::createTerrainData(Ogre::SceneNode* const sceneNode,
 	mGroundBody->setCollisionFlags(
 			mGroundBody->getCollisionFlags()
 					| btCollisionObject::CF_STATIC_OBJECT);
-	//TODO:: Do this when you add the environment to the world
-//	dynamicsWorld->addRigidBody(rigidBody);
+	mGroundBody->setUserPointer(NULL);
+
+	//to get custom collision callbacks in collisionhandler
+	mGroundBody->setCollisionFlags(
+			mGroundBody->getCollisionFlags()
+					| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 }

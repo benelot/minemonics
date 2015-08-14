@@ -102,6 +102,11 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 			PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
 	mBody->setActivationState(DISABLE_DEACTIVATION);
 
+	//to get custom collision callbacks in collisionhandler
+	mBody->setCollisionFlags(
+			mBody->getCollisionFlags()
+					| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
 	//Set the friction and restitution/elasticity of the rigid body
 	mBody->setFriction(friction);
 	mBody->setRollingFriction(friction);

@@ -7,6 +7,8 @@
 //# forward declarations
 class btDynamicsWorld;
 class CreatureModel;
+class Sensor;
+class Tactioceptor;
 
 //# system headers
 //## controller headers
@@ -74,6 +76,7 @@ public:
 			double mass, double restitution, double friction,
 			Ogre::ColourValue color, int ownIndex);
 
+	void update(double timeSinceLastTick);
 	/**
 	 * Reset the limb to the place when the creature was born.
 	 */
@@ -194,6 +197,10 @@ public:
 		return mOwnIndex;
 	}
 
+	void activateTactioceptors();
+
+	void resetSensors();
+
 private:
 
 	/**
@@ -220,6 +227,10 @@ private:
 	 * The dimensions of the limb.
 	 */
 	Ogre::Vector3 mDimensions;
+
+	std::vector<Sensor*> mSensors;
+
+	std::vector<Tactioceptor*> mTactioceptors;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */

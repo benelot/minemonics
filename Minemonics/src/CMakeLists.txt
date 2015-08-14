@@ -30,16 +30,20 @@ set(MODELHDRS
 	## juries
 	./model/universe/evolution/juries/Jury.hpp
 	./model/universe/evolution/juries/AverageVelocity.hpp
+	./model/universe/evolution/juries/AverageHeight.hpp
 	
 	## universe
 	./model/universe/EvaluationModel.hpp
 	./model/universe/UniverseModel.hpp
 	./model/universe/PlanetModel.hpp
 	./model/universe/Epoch.hpp
+	./model/universe/CollisionHandler.hpp
 	
 	## evolution
 	./model/universe/evolution/EvolutionModel.hpp
 	./model/universe/evolution/Reaper.hpp
+	./model/universe/evolution/CreatureFitnessComparator.hpp
+	./model/universe/evolution/CreatureFitnessComparator.hpp
 	./model/universe/evolution/population/PopulationModel.hpp
 	./model/universe/evolution/population/creature/CreatureModel.hpp
 	
@@ -70,8 +74,12 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp
+	
+	## sensors
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp
 		
-	## controller
+	## creature controller
 	./model/universe/evolution/population/creature/phenome/controller/Controller.hpp
 	./model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp
 	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp
@@ -93,6 +101,7 @@ set(MODELSRCS
     ## juries
 	./model/universe/evolution/juries/Jury.cpp
 	./model/universe/evolution/juries/AverageVelocity.cpp
+	./model/universe/evolution/juries/AverageHeight.cpp
 	
 	## universe
 	./model/universe/EvaluationModel.cpp
@@ -103,6 +112,8 @@ set(MODELSRCS
 	## evolution
 	./model/universe/evolution/EvolutionModel.cpp
 	./model/universe/evolution/Reaper.cpp
+	./model/universe/evolution/CreatureFitnessComparator.cpp
+	./model/universe/evolution/CreatureFitnessComparator.cpp
 	./model/universe/evolution/population/PopulationModel.cpp
 	./model/universe/evolution/population/creature/CreatureModel.cpp
 	
@@ -133,7 +144,11 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp
 	
-	## controller
+	## sensors
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.cpp
+	
+	## creature controller
     ./model/universe/evolution/population/creature/phenome/controller/Controller.cpp
 	./model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp
 	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp

@@ -111,6 +111,7 @@ void Limb::initialize(Creature* const creature,
  */
 void Limb::update(double timeSinceLastTick) {
 	//update the limb graphics
+	mLimbModel->update(timeSinceLastTick);
 	mLimbGraphics->update(timeSinceLastTick);
 }
 
