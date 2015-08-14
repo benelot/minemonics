@@ -3,3 +3,5 @@
 /CTestTestfile.cmake
 /CMakeCache.txt
 /Makefile
+/.cproject
+/.project
