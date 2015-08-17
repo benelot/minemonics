@@ -202,6 +202,11 @@ void SimulationManager::createScene(void) {
 
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
 
+	//add some filtering to reduce the moire effect
+	Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(
+			Ogre::TFO_ANISOTROPIC);
+	Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(8);
+
 //  Create skyplane
 //	Ogre::Plane plane;
 //	plane.d = 100;

@@ -677,7 +677,7 @@ ParamsPanel*CEGUIBuilder::createDetailsPanel() {
 	items.push_back(ParamsPanel::PairString("cam.oY", "0"));		// 6
 	items.push_back(ParamsPanel::PairString("cam.oZ", "0"));		// 7
 	items.push_back(ParamsPanel::PairString("", ""));		// 8
-	items.push_back(ParamsPanel::PairString("Filtering", "None"));		// 9
+	items.push_back(ParamsPanel::PairString("Filtering", "Anisotropic"));		// 9
 	items.push_back(ParamsPanel::PairString("Poly Mode", "Solid"));		// 10
 	ParamsPanel* detailsPanel = ParamsPanel::createParamsPanel(
 			(int) mSimulationMgr->getWindow()->getWidth() - 200

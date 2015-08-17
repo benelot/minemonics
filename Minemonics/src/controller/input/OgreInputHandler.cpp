@@ -20,6 +20,10 @@
 //## view headers
 #include <OgreRenderWindow.h>
 #include <OgreLogManager.h>
+#include <OgreCamera.h>
+#include <OgreCommon.h>
+#include <OgreMaterialManager.h>
+#include <OgrePrerequisites.h>
 
 //# custom headers
 //## base headers
@@ -32,6 +36,7 @@
 #include <controller/StateHandler.hpp>
 #include <controller/universe/Universe.hpp>
 #include <controller/viewcontroller/camera/CameraHandler.hpp>
+#include <controller/viewcontroller/ViewController.hpp>
 
 //## model headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
@@ -39,6 +44,8 @@
 //## view headers
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+#include <view/visualization/panels/MathGLPanel.hpp>
+#include <view/visualization/panels/ParamsPanel.hpp>
 
 //## utils headers
 
@@ -150,8 +157,65 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_e:
 		moveCameraDown();
 		break;
-		case ApplicationKeycode::APPK_r:
-		break;
+		case ApplicationKeycode::APPK_r: {
+			// cycle polygon rendering mode
+			Ogre::String newVal;
+			Ogre::PolygonMode pm;
+
+			switch (SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->getPolygonMode()) {
+				case Ogre::PM_SOLID:
+				newVal = "Wireframe";
+				pm = Ogre::PM_WIREFRAME;
+				break;
+				case Ogre::PM_WIREFRAME:
+				newVal = "Points";
+				pm = Ogre::PM_POINTS;
+				break;
+				default:
+				newVal = "Solid";
+				pm = Ogre::PM_SOLID;
+			}
+
+			SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(pm);
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(10,
+					newVal);
+			break;
+		}
+		case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
+		{
+			Ogre::String newVal;
+			Ogre::TextureFilterOptions tfo;
+			unsigned int aniso;
+
+			switch (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->getParamValue(
+							9)[0]) {
+				case 'B':
+				newVal = "Trilinear";
+				tfo = Ogre::TFO_TRILINEAR;
+				aniso = 1;
+				break;
+				case 'T':
+				newVal = "Anisotropic";
+				tfo = Ogre::TFO_ANISOTROPIC;
+				aniso = 8;
+				break;
+				case 'A':
+				newVal = "None";
+				tfo = Ogre::TFO_NONE;
+				aniso = 1;
+				break;
+				default:
+				newVal = "Bilinear";
+				tfo = Ogre::TFO_BILINEAR;
+				aniso = 1;
+			}
+
+			Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
+			Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(9,
+					newVal);
+			break;
+		}
 		case ApplicationKeycode::APPK_y:
 		// return CEGUI::Key::Y;
 		break;
@@ -185,7 +249,27 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		case ApplicationKeycode::APPK_d:
 		moveCameraRight();
 		break;
-		case ApplicationKeycode::APPK_f:
+		case ApplicationKeycode::APPK_f: // toggle visibility of advanced frame stats
+		if (!SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->isVisible()) {
+			ParamsPanel::VectorStringPairs items;
+			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
+			SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
+					false);
+		} else {
+			bool simple =
+			SimulationManager::getSingleton()->getViewController().getFpsPanel()->size()
+			== 1;
+			SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
+					true);
+		}
+		break;
+		case ApplicationKeycode::APPK_g: // toggle visibility of even rarer debugging details
+
+		if (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->isVisible()) {
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->hide();
+		} else {
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->show();
+		}
 		break;
 		case ApplicationKeycode::APPK_h:
 		// return CEGUI::Key::H;
@@ -845,8 +929,8 @@ bool OgreInputHandler::mouseMoved(const float x, const float y) const {
 					CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * x,
 					0);
 		} else {
-			SimulationManager::getSingleton()->getViewController().getCameraHandler().rotate(y, x,
-					0);
+			SimulationManager::getSingleton()->getViewController().getCameraHandler().rotate(
+					y, x, 0);
 		}
 	}
 
@@ -865,7 +949,7 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	switch (button) {
 	case ApplicationMouseCode::LeftButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
-		if(isLeftControlPressed()){
+		if (isLeftControlPressed()) {
 			SimulationManager::getSingleton()->getMousePicker().castRay();
 		}
 		mLeftMousePressed = true;
@@ -903,15 +987,18 @@ bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
 }
 
 void OgreInputHandler::stopCameraXDimensionMovement() {
-	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(0);
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(
+			0);
 }
 
 void OgreInputHandler::stopCameraYDimensionMovement() {
-	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(0);
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(
+			0);
 }
 
 void OgreInputHandler::stopCameraZDimensionMovement() {
-	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(0);
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(
+			0);
 }
 
 void OgreInputHandler::moveCameraLeft() const {

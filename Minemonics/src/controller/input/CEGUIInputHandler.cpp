@@ -17,10 +17,6 @@
 #include <CEGUI/Vector.h>
 #include <CEGUI/widgets/FrameWindow.h>
 #include <CEGUI/Window.h>
-#include <OgreCamera.h>
-#include <OgreCommon.h>
-#include <OgreMaterialManager.h>
-#include <OgrePrerequisites.h>
 
 //# custom headers
 //## base headers
@@ -33,9 +29,6 @@
 #include <controller/viewcontroller/ViewController.hpp>
 //## model headers
 //## view headers
-#include <view/visualization/panels/MathGLPanel.hpp>
-#include <view/visualization/panels/ParamsPanel.hpp>
-
 //## utils headers
 
 BoostLogger CEGUIInputHandler::mBoostLogger; /*<! initialize the boost logger*/
@@ -64,7 +57,6 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		return true;
 	}
 
-	Ogre::String newVal;
 	switch (key) {
 	case ApplicationKeycode::APPK_1:
 		// return CEGUI::Key::One;
@@ -107,60 +99,8 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::E;
 		break;
 	case ApplicationKeycode::APPK_r:
-		// cycle polygon rendering mode
-
-		Ogre::PolygonMode pm;
-
-		switch (SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->getPolygonMode()) {
-		case Ogre::PM_SOLID:
-			newVal = "Wireframe";
-			pm = Ogre::PM_WIREFRAME;
-			break;
-		case Ogre::PM_WIREFRAME:
-			newVal = "Points";
-			pm = Ogre::PM_POINTS;
-			break;
-		default:
-			newVal = "Solid";
-			pm = Ogre::PM_SOLID;
-		}
-
-		SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(pm);
-		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(10,
-				newVal);
 		break;
-	case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
-
-		Ogre::TextureFilterOptions tfo;
-		unsigned int aniso;
-
-		switch (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->getParamValue(
-				9)[0]) {
-		case 'B':
-			newVal = "Trilinear";
-			tfo = Ogre::TFO_TRILINEAR;
-			aniso = 1;
-			break;
-		case 'T':
-			newVal = "Anisotropic";
-			tfo = Ogre::TFO_ANISOTROPIC;
-			aniso = 8;
-			break;
-		case 'A':
-			newVal = "None";
-			tfo = Ogre::TFO_NONE;
-			aniso = 1;
-			break;
-		default:
-			newVal = "Bilinear";
-			tfo = Ogre::TFO_BILINEAR;
-			aniso = 1;
-		}
-
-		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(9,
-				newVal);
+	case ApplicationKeycode::APPK_t:
 		break;
 	case ApplicationKeycode::APPK_y:
 		// return CEGUI::Key::Y;
@@ -186,27 +126,9 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_d:
 		// return CEGUI::Key::D;
 		break;
-	case ApplicationKeycode::APPK_f: // toggle visibility of advanced frame stats
-		if (!SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->isVisible()) {
-			ParamsPanel::VectorStringPairs items;
-			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
-			SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
-					false);
-		} else {
-			bool simple =
-					SimulationManager::getSingleton()->getViewController().getFpsPanel()->size()
-							== 1;
-			SimulationManager::getSingleton()->getViewController().getFpsPanel()->getWidgetPanel()->setVisible(
-					true);
-		}
+	case ApplicationKeycode::APPK_f:
 		break;
-	case ApplicationKeycode::APPK_g: // toggle visibility of even rarer debugging details
-
-		if (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->isVisible()) {
-			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->hide();
-		} else {
-			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->show();
-		}
+	case ApplicationKeycode::APPK_g:
 		break;
 	case ApplicationKeycode::APPK_h:
 		// return CEGUI::Key::H;
