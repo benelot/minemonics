@@ -108,21 +108,29 @@ void EnvironmentO3D::initialize(const std::string fileName,
 }
 
 void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
+
 	// Configure global
+	//TODO:Change this to zero if the bullet physics terrain
 	mTerrainGlobals->setMaxPixelError(8);
 
-	mTerrainGlobals->setCompositeMapDistance(0);
-	mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(false);
-
+	//TODO: Fix ambient light for composite map
 //	mTerrainGlobals->setCompositeMapAmbient(
 //			SimulationManager::getSingleton()->getSceneManager()->getAmbientLight());
 	mTerrainGlobals->setCompositeMapAmbient(Ogre::ColourValue(1, 1, 1));
 
 	if (l != NULL) {
 		// testing composite map
-		mTerrainGlobals->setCompositeMapDistance(3000);
+		mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(
+				true);
+		mTerrainGlobals->setCompositeMapDistance(32000);
 		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
 		mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
+		mTerrainGlobals->setCastsDynamicShadows(true);
+
+	} else {
+		mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(
+				false);
+		mTerrainGlobals->setCompositeMapDistance(0);
 	}
 
 //	 Configure default import settings for if we use imported image
@@ -134,7 +142,7 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	defaultimp.minBatchSize = 33;
 	defaultimp.maxBatchSize = 65;
 
-	// textures
+//	 textures
 	defaultimp.layerList.resize(1);
 	defaultimp.layerList[0].worldSize = 100;
 	defaultimp.layerList[0].textureNames.push_back("grid5.png");
@@ -143,6 +151,7 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 //	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
 //	defaultimp.layerList[0].textureNames.push_back("honeycomb.png");
 
+//	defaultimp.layerList.resize(3);
 //	defaultimp.layerList[0].worldSize = 100;
 //	defaultimp.layerList[0].textureNames.push_back(
 //			"dirt_grayrocky_diffusespecular.dds");
