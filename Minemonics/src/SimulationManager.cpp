@@ -91,7 +91,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 SimulationManager::SimulationManager(void) :
 		mStateHandler(), mInputHandler(), mSdlWindow(
 		NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(
-				&mViewController) {
+				&mViewController), mSun(NULL) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -200,6 +200,8 @@ void SimulationManager::createScene(void) {
 	// either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
 
+	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+
 //  Create skyplane
 //	Ogre::Plane plane;
 //	plane.d = 100;
@@ -217,11 +219,16 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We initialize the universe
 	// ###################
+	mSun = mSceneMgr->createLight();
+	mSun->setType(Ogre::Light::LT_DIRECTIONAL);
+	mSun->setDiffuseColour(Ogre::ColourValue(1, 1, 0.2));
+	mSun->setSpecularColour(Ogre::ColourValue(1, 1, 0.2));
+	mSun->setDirection(0, -1, -1);
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, 20);
+	Planet* earth = new Planet(Environment::PLANE, 20, mSun);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);

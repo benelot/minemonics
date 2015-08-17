@@ -117,6 +117,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
 	}
+	mLimbEntity->setCastShadows(true);
 
 }
 

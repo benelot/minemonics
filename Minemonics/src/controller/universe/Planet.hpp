@@ -30,7 +30,7 @@
  */
 class Planet {
 public:
-	Planet(const Environment::EnvironmentType type, const int evaluationTime);
+	Planet(const Environment::EnvironmentType type, const int evaluationTime,Ogre::Light* light = NULL);
 	Planet(PlanetModel* const planetModel);
 	virtual ~Planet();
 

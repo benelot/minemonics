@@ -29,7 +29,7 @@
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
 Planet::Planet(const Environment::EnvironmentType type,
-		const int evaluationTime) :
+		const int evaluationTime,Ogre::Light* light) :
 		mEnvironment(NULL) {
 	mPlanetModel = new PlanetModel();
 

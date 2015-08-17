@@ -52,7 +52,7 @@ bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
 
 		if (limbModel1->getJointIndex() != limbModel2->getJointIndex()) {
 			if (cp.getDistance() < PhysicsConfiguration::PENETRATION_THRESHOLD) {
-				std::cout << "Interpenetration depth:" << cp.getDistance() << std::endl;
+//				std::cout << "Interpenetration depth:" << cp.getDistance() << std::endl;
 				limbModel1->setInterpenetrationDepth(
 						limbModel1->getInterpenetrationDepth()
 								+ cp.getDistance());

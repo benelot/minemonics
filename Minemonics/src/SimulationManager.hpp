@@ -191,6 +191,8 @@ private:
 	//The universe and everything
 	Universe mUniverse;
 
+	Ogre::Light* mSun;
+
 	//## model components
 	//## view components
 
@@ -217,7 +219,6 @@ private:
 	long int mAccumulator;
 	long int mApplicationDt;
 	unsigned long int mApplicationClock;
-
 
 	/**
 	 * The time it took the graphics rendering last time

@@ -49,21 +49,18 @@ void Evaluation::setup() {
 	//add environment to the world
 	//TODO: Must be a separate copy for parallel evaluations(you can not use the same reference for multiple worlds), but must update (possibly in parallel)
 	// the main environment to stay the same for all evaluations
+	int limbQty = 0;
 	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 	case StateHandler::SIMULATION: {
 
 		//add competing populations to the world
-
-		int limbQty = 0;
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 				pit != mPopulations.end(); pit++) {
 			(*pit)->reset();
 			limbQty += (*pit)->addToWorld();
 		}
 
-		if (limbQty == 0 || limbQty == 1) {
-			teardown();
-		}
+
 
 		mPlanet->getEnvironment()->addToWorld();
 		break;
@@ -71,16 +68,10 @@ void Evaluation::setup() {
 	case StateHandler::HEADLESS_SIMULATION: {
 
 		//add competing populations to the world
-
-		int limbQty = 0;
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 				pit != mPopulations.end(); pit++) {
 			(*pit)->reset();
 			limbQty += (*pit)->addToPhysicsWorld();
-		}
-
-		if (limbQty == 0 || limbQty == 1) {
-			teardown();
 		}
 
 		mPlanet->getEnvironment()->addToPhysicsWorld();
@@ -89,6 +80,11 @@ void Evaluation::setup() {
 	default: {
 		break;
 	}
+	}
+
+	if (limbQty == 0 || limbQty == 1) {
+		std::cout << "Creature discarded because it had no body or just one limb." << std::endl;
+		teardown();
 	}
 
 	mEvaluationModel.setEvaluating(true);
@@ -149,6 +145,7 @@ void Evaluation::update(const double timeSinceLastTick) {
 				pit != mPopulations.end(); pit++) {
 			if ((*pit)->hasInterpenetrations()) {
 				//TODO: Review this decision again in the case of a whole population
+				std::cout << "Creature discarded because of unsolvable interpenetrations." << std::endl;
 				mHasFailed = true;
 				teardown();
 				break;

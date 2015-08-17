@@ -112,11 +112,12 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	// Configure global
 	//TODO:Change this to zero if the bullet physics terrain
 	mTerrainGlobals->setMaxPixelError(8);
-
 	//TODO: Fix ambient light for composite map
 //	mTerrainGlobals->setCompositeMapAmbient(
 //			SimulationManager::getSingleton()->getSceneManager()->getAmbientLight());
 	mTerrainGlobals->setCompositeMapAmbient(Ogre::ColourValue(1, 1, 1));
+
+	mTerrainGlobals->setCastsDynamicShadows(false);
 
 	if (l != NULL) {
 		// testing composite map
@@ -125,12 +126,10 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 		mTerrainGlobals->setCompositeMapDistance(32000);
 		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
 		mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
-		mTerrainGlobals->setCastsDynamicShadows(true);
-
 	} else {
 		mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(
 				false);
-		mTerrainGlobals->setCompositeMapDistance(0);
+		mTerrainGlobals->setCompositeMapDistance(32000);
 	}
 
 //	 Configure default import settings for if we use imported image
