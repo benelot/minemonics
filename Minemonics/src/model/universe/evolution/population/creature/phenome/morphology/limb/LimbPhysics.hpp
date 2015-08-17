@@ -26,6 +26,7 @@ class btVector3;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
 //## utils headers
@@ -185,6 +186,14 @@ public:
 		return mInitialZOrientation;
 	}
 
+	double getInterpenetrationDepth() const {
+		return mInterpenetrationDepth;
+	}
+
+	void setInterpenetrationDepth(double interpenetrationDepth) {
+		mInterpenetrationDepth = interpenetrationDepth;
+	}
+
 protected:
 
 	/**
@@ -223,6 +232,10 @@ protected:
 	 * The volume of the limb.
 	 */
 	double mVolume;
+
+	double mInterpenetrationDepth;
+
+	LimbModel::PrimitiveType mType;
 
 };
 

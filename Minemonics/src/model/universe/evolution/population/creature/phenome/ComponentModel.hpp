@@ -92,6 +92,10 @@ public:
 		return mComponentType;
 	}
 
+	int getIndex() const {
+		return mOwnIndex;
+	}
+
 protected:
 	/**
 	 * Component type of the compoment.

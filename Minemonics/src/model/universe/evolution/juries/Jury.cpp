@@ -3,6 +3,8 @@
 
 //# forward declarations
 //# system headers
+#include <limits>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -15,8 +17,11 @@
 //## utils headers
 
 Jury::Jury(JuryType juryType, bool higherIsBetter, int weight) :
-		mJuryType(juryType), mFitness(0), mWeight(weight), mHigherIsBetter(
-				higherIsBetter) {
+		mJuryType(juryType), mFitness(
+				(higherIsBetter) ?
+						std::numeric_limits<double>::min() :
+						std::numeric_limits<double>::max()), mWeight(weight), mHigherIsBetter(
+				higherIsBetter), mScore(0) {
 }
 
 Jury::~Jury() {

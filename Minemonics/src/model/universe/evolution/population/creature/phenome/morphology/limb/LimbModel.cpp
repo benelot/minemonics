@@ -14,6 +14,7 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
@@ -116,13 +117,49 @@ void LimbModel::resetSensors() {
 }
 
 void LimbModel::update(double timeSinceLastTick) {
-	std::cout << std::endl << "TactileSensors:";
+//	std::cout << std::endl << "TactileSensors:";
 	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
 			tit != mTactioceptors.end(); tit++) {
-		std::cout << (*tit)->isTouched() << "|";
+//		std::cout << (*tit)->isTouched() << "|";
 	}
-	std::cout << std::endl;
+//	std::cout << std::endl;
 
 	// reset the sensors when they are processed
 	resetSensors();
+}
+
+/**
+ * The the limb physics model of the limb.
+ * @return The limb physics model of the limb.
+ */
+LimbPhysics* LimbModel::getLimbPhysics() const {
+	return mLimbPhysics;
+}
+
+/**
+ * Get the position of the limb in the physical world.
+ * @return The position of the limb in the physical world.
+ */
+const Ogre::Vector3 LimbModel::getPosition() const {
+	return OgreBulletUtils::convert(mLimbPhysics->getPosition());
+}
+
+const double LimbModel::getVolume() const {
+	return mLimbPhysics->getVolume();
+}
+
+/**
+ * Get the orientation of the limb in the physical world.
+ * @return The orientation of the limb in the physical world.
+ */
+const Ogre::Quaternion LimbModel::getOrientation() const {
+	return OgreBulletUtils::convert(mLimbPhysics->getOrientation());
+}
+
+void LimbModel::setInterpenetrationDepth(double interpenetrationDepth) {
+	mLimbPhysics->setInterpenetrationDepth(interpenetrationDepth);
+}
+
+double LimbModel::getInterpenetrationDepth() {
+	return mLimbPhysics->getInterpenetrationDepth();
 }

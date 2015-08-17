@@ -27,6 +27,7 @@
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+
 //## controller headers
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
@@ -123,8 +124,6 @@ int Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 
 void Phenome::update(double timeSinceLastTick) {
 
-	mPhenotypeModel->update(timeSinceLastTick);
-
 	// Update all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
 			lit++) {
@@ -136,6 +135,8 @@ void Phenome::update(double timeSinceLastTick) {
 			jit != mJoints.end(); jit++) {
 		(*jit)->update(timeSinceLastTick);
 	}
+
+	mPhenotypeModel->update(timeSinceLastTick);
 }
 
 void Phenome::addToPhysicsWorld() {

@@ -220,6 +220,11 @@ public:
 	CreatureModel* const getCreatureModel() const {
 		return mCreatureModel;
 	}
+
+	bool hasInterpenetrations() const {
+		return mHasInterpenetrations;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -271,6 +276,8 @@ private:
 	 * The vector of phenotype joint controller models.
 	 */
 	std::vector<Controller*> mControllers;
+
+	bool mHasInterpenetrations;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

@@ -9,6 +9,7 @@ class btDynamicsWorld;
 class CreatureModel;
 class Sensor;
 class Tactioceptor;
+class LimbPhysics;
 
 //# system headers
 //## controller headers
@@ -28,8 +29,6 @@ class Tactioceptor;
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
-
 //## view headers
 //## utils headers
 #include<utils/ogre3D/OgreBulletUtils.hpp>
@@ -157,29 +156,21 @@ public:
 	 * The the limb physics model of the limb.
 	 * @return The limb physics model of the limb.
 	 */
-	LimbPhysics* getLimbPhysics() const {
-		return mLimbPhysics;
-	}
+	LimbPhysics* getLimbPhysics() const;
 
 	/**
 	 * Get the position of the limb in the physical world.
 	 * @return The position of the limb in the physical world.
 	 */
-	const Ogre::Vector3 getPosition() const {
-		return OgreBulletUtils::convert(mLimbPhysics->getPosition());
-	}
+	const Ogre::Vector3 getPosition() const;
 
-	const double getVolume() const {
-		return mLimbPhysics->getVolume();
-	}
+	const double getVolume() const;
 
 	/**
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.
 	 */
-	const Ogre::Quaternion getOrientation() const {
-		return OgreBulletUtils::convert(mLimbPhysics->getOrientation());
-	}
+	const Ogre::Quaternion getOrientation() const;
 
 	const Ogre::ColourValue getColor() const {
 		return mColor;
@@ -200,6 +191,18 @@ public:
 	void activateTactioceptors();
 
 	void resetSensors();
+
+	void setInterpenetrationDepth(double interpenetrationDepth);
+
+	double getInterpenetrationDepth();
+
+	int getJointIndex() const {
+		return mJointIndex;
+	}
+
+	void setJointIndex(int jointIndex) {
+		mJointIndex = jointIndex;
+	}
 
 private:
 
@@ -231,6 +234,8 @@ private:
 	std::vector<Sensor*> mSensors;
 
 	std::vector<Tactioceptor*> mTactioceptors;
+
+	int mJointIndex;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */

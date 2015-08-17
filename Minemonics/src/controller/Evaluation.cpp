@@ -25,7 +25,8 @@
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
-		mPlanet(NULL), mStart(0) {
+		mPlanet(NULL), mStart(0), mHasDiscardingTestRun(false), mHasFailed(
+				false) {
 }
 
 Evaluation::~Evaluation() {
@@ -60,7 +61,7 @@ void Evaluation::setup() {
 			limbQty += (*pit)->addToWorld();
 		}
 
-		if(limbQty  == 0){
+		if (limbQty == 0 || limbQty == 1) {
 			teardown();
 		}
 
@@ -78,7 +79,7 @@ void Evaluation::setup() {
 			limbQty += (*pit)->addToPhysicsWorld();
 		}
 
-		if(limbQty  == 0){
+		if (limbQty == 0 || limbQty == 1) {
 			teardown();
 		}
 
@@ -103,8 +104,12 @@ void Evaluation::process() {
 }
 
 void Evaluation::teardown() {
-	SimulationManager::getSingleton()->getViewController().removePlanet(mPlanet);
-	process();
+	SimulationManager::getSingleton()->getViewController().removePlanet(
+			mPlanet);
+
+	if (!mHasFailed) {
+		process();
+	}
 
 	//remove the environment from the world
 	mPlanet->getEnvironment()->removeFromWorld();
@@ -132,9 +137,24 @@ void Evaluation::update(const double timeSinceLastTick) {
 	mPlanet->getEnvironment()->update(timeSinceLastTick);
 
 	//update the competing populations
-	std::vector<Population*>::iterator pit = mPopulations.begin();
-	for (; pit != mPopulations.end(); pit++) {
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
 		(*pit)->update(timeSinceLastTick);
+	}
+
+	double discardingThreshold = 0.5;
+	if (mEvaluationModel.getTimePassed() > discardingThreshold
+			&& !mHasDiscardingTestRun) {
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+				pit != mPopulations.end(); pit++) {
+			if ((*pit)->hasInterpenetrations()) {
+				//TODO: Review this decision again in the case of a whole population
+				mHasFailed = true;
+				teardown();
+				break;
+			}
+		}
+//		mHasDiscardingTestRun = true;
 	}
 
 	//update the time passed

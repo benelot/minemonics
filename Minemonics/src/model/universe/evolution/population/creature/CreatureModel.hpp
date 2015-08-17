@@ -120,6 +120,10 @@ public:
 		return totalVolume;
 	}
 
+	bool hasInterpenetrations(){
+		return mPhenotypeModel.hasInterpenetrations();
+	}
+
 	/**
 	 * Compare the creature model to another creature model.
 	 * @param creature Another creature model.

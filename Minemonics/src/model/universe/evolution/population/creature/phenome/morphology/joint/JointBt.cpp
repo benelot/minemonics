@@ -120,6 +120,7 @@ void JointBt::update(double timeSinceLastTick) {
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 			motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
+			//TODO:Reenable motors when interpenetration problems are fixed.
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}

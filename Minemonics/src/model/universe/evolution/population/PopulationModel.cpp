@@ -94,3 +94,15 @@ bool PopulationModel::equals(const PopulationModel& population) const {
 PopulationModel* PopulationModel::clone() {
 	return new PopulationModel(*this);
 }
+
+bool PopulationModel::hasInterpenetrations() {
+	bool hasInterpenetrations = false;
+	for (std::vector<CreatureModel*>::const_iterator cit =
+			mCreatureModels.begin(); cit != mCreatureModels.end(); cit++) {
+		if ((*cit)->hasInterpenetrations()) {
+			hasInterpenetrations = true;
+			break;
+		}
+	}
+	return hasInterpenetrations;
+}

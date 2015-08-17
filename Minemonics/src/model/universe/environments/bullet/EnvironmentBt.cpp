@@ -65,7 +65,7 @@ void EnvironmentBt::createTerrainData(Ogre::SceneNode* const sceneNode,
 					| btCollisionObject::CF_STATIC_OBJECT);
 	mGroundBody->setUserPointer(NULL);
 
-	//to get custom collision callbacks in collisionhandler
+	//to get custom collision callbacks in CollisionHandler
 	mGroundBody->setCollisionFlags(
 			mGroundBody->getCollisionFlags()
 					| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);

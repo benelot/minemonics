@@ -126,6 +126,10 @@ public:
 
 	void processJuries();
 
+	void hasInterpenetrations(){
+		mCreatureModel->hasInterpenetrations();
+	}
+
 protected:
 	/**
 	 * The boost logger.

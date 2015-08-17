@@ -1,5 +1,5 @@
-//#ifndef MODEL_UNIVERSE_COLLISIONHANDLER_HPP_
-//#define MODEL_UNIVERSE_COLLISIONHANDLER_HPP_
+#ifndef MODEL_UNIVERSE_COLLISIONHANDLER_HPP_
+#define MODEL_UNIVERSE_COLLISIONHANDLER_HPP_
 
 //# corresponding header
 //# forward declarations
@@ -14,6 +14,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -28,25 +30,36 @@
  * @author		Benjamin Ellenberger
  */
 bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
-	LimbModel* limbModel1;
-	LimbModel* limbModel2;
+	LimbModel* limbModel1 = NULL;
+	LimbModel* limbModel2 = NULL;
 	btCollisionObject* o1 = static_cast<btCollisionObject*>(body0);
 	btCollisionObject* o2 = static_cast<btCollisionObject*>(body1);
-	int groundID = 9;
+
+	//check if the collision partners are limbs
 	if (o1->getUserPointer() != NULL) {
 		limbModel1 = static_cast<LimbModel*>(o1->getUserPointer());
 		limbModel1->activateTactioceptors();
 	}
 
+	//check if the collision partners are limbs
 	if (o2->getUserPointer() != NULL) {
 		limbModel2 = static_cast<LimbModel*>(o2->getUserPointer());
 		limbModel2->activateTactioceptors();
 	}
 
-	double threshold = -1e7;
+	// if both were limbs (not ground or anything else)
 	if (limbModel1 != NULL && limbModel2 != NULL) {
-		if (cp.getDistance() < threshold) {
-			//TODO: Penetration testing
+
+		if (limbModel1->getJointIndex() != limbModel2->getJointIndex()) {
+			if (cp.getDistance() < PhysicsConfiguration::PENETRATION_THRESHOLD) {
+				std::cout << "Interpenetration depth:" << cp.getDistance() << std::endl;
+				limbModel1->setInterpenetrationDepth(
+						limbModel1->getInterpenetrationDepth()
+								+ cp.getDistance());
+				limbModel2->setInterpenetrationDepth(
+						limbModel2->getInterpenetrationDepth()
+								+ cp.getDistance());
+			}
 		}
 	}
 
@@ -54,4 +67,4 @@ bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
 	return false;
 }
 
-//#endif /* MODEL_UNIVERSE_COLLISIONHANDLER_HPP_ */
+#endif /* MODEL_UNIVERSE_COLLISIONHANDLER_HPP_ */

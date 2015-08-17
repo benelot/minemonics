@@ -5,6 +5,8 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations
+//# corresponding header
+//# forward declarations
 struct btDefaultMotionState;
 class btDynamicsWorld;
 
@@ -24,7 +26,6 @@ class btDynamicsWorld;
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
@@ -177,8 +178,6 @@ private:
 	btRigidBody* mBody;
 
 	btVector3 mDimensions;
-
-	LimbModel::PrimitiveType mType;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

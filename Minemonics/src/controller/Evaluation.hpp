@@ -118,6 +118,10 @@ private:
 	std::vector<Population*> mPopulations;
 
 	unsigned long int mStart;
+
+	bool mHasDiscardingTestRun;
+
+	bool mHasFailed;
 };
 
 #endif /* CONTROLLER_EVALUATION_HPP_ */

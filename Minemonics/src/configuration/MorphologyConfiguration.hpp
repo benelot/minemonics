@@ -137,9 +137,9 @@ public:
 	static const double JOINT_MAX_TORQUE_CONSTANT = 1;
 
 	/**
-	 * The length of a joint from the anchor point to the joint rotation point.
+	 * The length of a joint from the anchor point to the joint rotation point. 1 means we exactly hit the surface point of the limb.
 	 */
-	static const double JOINT_LENGTH = 1;
+	static const double JOINT_LENGTH = 1.5;
 
 	/**
 	 * The minimum stiffness of the joint

@@ -99,6 +99,8 @@ public:
 	 */
 	void process();
 
+	bool hasInterpenetrations();
+
 	//Accessor methods
 
 	std::vector<Creature*>& getCreatures() {
@@ -120,8 +122,6 @@ public:
 	void setOutOfSync(const bool outOfSync) {
 		mPopulationModel->setOutOfSync(outOfSync);
 	}
-
-//	double getHighestFitness();
 
 private:
 

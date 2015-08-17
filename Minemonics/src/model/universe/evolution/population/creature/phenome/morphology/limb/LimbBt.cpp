@@ -32,7 +32,7 @@
 
 LimbBt::LimbBt() :
 		LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-		NULL), mType(LimbModel::UNKNOWN) {
+		NULL) {
 }
 
 LimbBt::LimbBt(const LimbBt& limbBt) {
@@ -244,7 +244,6 @@ void LimbBt::reset(const Ogre::Vector3 position) {
 }
 
 void LimbBt::reposition(const Ogre::Vector3 position) {
-//	TODO: Implement repositioning limbs.
 	btTransform initialTransform;
 	mMotionState->getWorldTransform(initialTransform);
 
@@ -273,9 +272,9 @@ btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
 		//TODO:Make all limbs collide as soon as the body creation works
-		mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
-				PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-//		mWorld->addRigidBody(mBody);
+//		mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
+//				PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+		mWorld->addRigidBody(mBody);
 		LimbPhysics::addToWorld();
 	}
 }

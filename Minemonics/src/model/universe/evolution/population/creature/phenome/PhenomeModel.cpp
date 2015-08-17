@@ -40,7 +40,8 @@
 BoostLogger PhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 PhenomeModel::_Init PhenomeModel::_initializer;
 PhenomeModel::PhenomeModel() :
-		mCreatureModel(NULL), mInWorld(false), mDeveloped(false) {
+		mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
+				true) {
 	mControllers.clear();
 }
 
@@ -48,16 +49,17 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 	mInWorld = phenomeModel.mInWorld;
 	mCreatureModel = phenomeModel.mCreatureModel;
 	mDeveloped = phenomeModel.mDeveloped;
+	mHasInterpenetrations = phenomeModel.mHasInterpenetrations;
 
-	std::vector<Controller*>::const_iterator cit =
+	for (std::vector<Controller*>::const_iterator cit =
 			phenomeModel.mControllers.begin();
-	for (; cit != phenomeModel.mControllers.end(); cit++) {
+			cit != phenomeModel.mControllers.end(); cit++) {
 		mControllers.push_back((*cit)->clone());
 	}
 
-	std::vector<ComponentModel*>::const_iterator coit =
+	for (std::vector<ComponentModel*>::const_iterator coit =
 			phenomeModel.mComponentModels.begin();
-	for (; coit != phenomeModel.mComponentModels.end(); coit++) {
+			coit != phenomeModel.mComponentModels.end(); coit++) {
 		ComponentModel* componentModel = (*coit)->clone();
 		mComponentModels.push_back(componentModel);
 		switch (componentModel->getComponentType()) {
@@ -89,16 +91,34 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 		(*cit)->perform(timeSinceLastTick);
 	}
 
-	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-	for (; jit != mJointModels.end(); jit++) {
-		(*jit)->update(timeSinceLastTick);
-	}
+//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
+//	for (; jit != mJointModels.end(); jit++) {
+//		(*jit)->update(timeSinceLastTick);
+//	}
 
 //	// test for strains
+	//TODO: Remove if not used
 //	std::vector<JointModel*>::iterator jit = mJointModels.begin();
 //	for (; jit != mJointModels.end(); jit++) {
 //		(*jit)->isStrained();
 //	}
+
+	// Update all limb models
+	mHasInterpenetrations = false;
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+			lit != mLimbModels.end(); lit++) {
+
+		//detect interpenetrations
+		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
+
+//			std::cout << "Limb interpenetration depth: "
+//					<< (*lit)->getInterpenetrationDepth()
+//					<< std::endl;
+			mHasInterpenetrations = true;
+			break;
+		}
+		(*lit)->setInterpenetrationDepth(0);
+	}
 
 }
 

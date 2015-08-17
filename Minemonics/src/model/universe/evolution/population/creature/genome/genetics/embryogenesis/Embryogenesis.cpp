@@ -431,6 +431,8 @@ void Embryogenesis::transcribeMorphogene(
 				localParentJointTransform, localChildJointTransform,
 				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
 				phenomeModel->getComponentModels().size() - 1);
+		parentLimb->setJointIndex(joint->getIndex());
+		childLimb->setJointIndex(joint->getIndex());
 
 		// add the joint to the phenotype joints
 		phenomeModel->getJointModels().push_back(joint);

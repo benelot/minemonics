@@ -67,6 +67,8 @@ public:
 	 */
 	PopulationModel* clone();
 
+	bool hasInterpenetrations();
+
 	/**
 	 * Give access to boost serialization
 	 */
