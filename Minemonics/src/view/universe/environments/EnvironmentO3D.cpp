@@ -110,9 +110,8 @@ void EnvironmentO3D::initialize(const std::string fileName,
 void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	// Configure global
 	mTerrainGlobals->setMaxPixelError(8);
-	// testing composite map
-	mTerrainGlobals->setCompositeMapDistance(3000);
 
+	mTerrainGlobals->setCompositeMapDistance(0);
 	mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(false);
 
 //	mTerrainGlobals->setCompositeMapAmbient(
@@ -120,6 +119,8 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	mTerrainGlobals->setCompositeMapAmbient(Ogre::ColourValue(1, 1, 1));
 
 	if (l != NULL) {
+		// testing composite map
+		mTerrainGlobals->setCompositeMapDistance(3000);
 		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
 		mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
 	}
