@@ -56,6 +56,17 @@ void Reaper::reap(PopulationModel* const population) {
 	int headsToReap = ceil(
 			population->getCreatureModels().size() * mReapPercentage);
 
+	//cull all preselected ones
+	for (std::vector<CreatureModel*>::iterator cit =
+			population->getCreatureModels().begin();
+			cit != population->getCreatureModels().end();) {
+		if ((*cit)->isCulled()) {
+			cit = population->getCreatureModels().erase(cit);
+		} else {
+			cit++;
+		}
+	}
+
 	for (int i = 0; i < population->getCreatureModels()[0]->getJuries().size();
 			i++) {
 
@@ -230,84 +241,100 @@ void Reaper::crossover(PopulationModel* const population,
 void Reaper::mutateGenes(PopulationModel* const population,
 		const int mutatedGeneHeads) {
 
-	for (int i = 0; i < mutatedGeneHeads; i++) {
-		std::vector<CreatureModel*> tournament;
-		int bestCreatureIndex = 0;
-		int bestFitness = 0;
+	if (population->getCreatureModels().size() != 0) {
+		for (int i = 0; i < mutatedGeneHeads; i++) {
+			std::vector<CreatureModel*> tournament;
+			int bestCreatureIndex = 0;
+			int bestFitness = 0;
 
-		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
-				j++) {
-			CreatureModel* model = population->getCreatureModels().at(
-					Randomness::getSingleton()->nextUnifPosInt(0,
-							population->getCreatureModels().size() - 1));
-			if (bestFitness < model->getFitnessScore()) {
-				bestFitness = model->getFitnessScore();
-				bestCreatureIndex = j;
+			for (int j = 0;
+					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+					j++) {
+				CreatureModel* model = population->getCreatureModels().at(
+						Randomness::getSingleton()->nextUnifPosInt(0,
+								population->getCreatureModels().size() - 1));
+				if (bestFitness < model->getFitnessScore()) {
+					bestFitness = model->getFitnessScore();
+					bestCreatureIndex = j;
+				}
+				tournament.push_back(model);
 			}
-			tournament.push_back(model);
+			if (tournament.size() != 0) {
+				CreatureModel* offspring =
+						tournament.at(bestCreatureIndex)->clone();
+				offspring->setNew(true);
+				offspring->getGenotype().mutateRandomGenes(
+						EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
+				offspring->giveRebirth();
+				population->getCreatureModels().push_back(offspring);
+			}
+
 		}
-		CreatureModel* offspring = tournament.at(bestCreatureIndex)->clone();
-		offspring->setNew(true);
-		offspring->getGenotype().mutateRandomGenes(
-				EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
-		offspring->giveRebirth();
-		population->getCreatureModels().push_back(offspring);
-
 	}
-
 }
 
 void Reaper::mutateGeneAttributes(PopulationModel* const population,
 		const int mutatedGeneAttributeHeads) {
+	if (population->getCreatureModels().size() != 0) {
+		for (int i = 0; i < mutatedGeneAttributeHeads; i++) {
+			std::vector<CreatureModel*> tournament;
+			int bestCreatureIndex = 0;
+			int bestFitness = 0;
 
-	for (int i = 0; i < mutatedGeneAttributeHeads; i++) {
-		std::vector<CreatureModel*> tournament;
-		int bestCreatureIndex = 0;
-		int bestFitness = 0;
-
-		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
-				j++) {
-			CreatureModel* model = population->getCreatureModels().at(
-					Randomness::getSingleton()->nextUnifPosInt(0,
-							population->getCreatureModels().size() - 1));
-			if (bestFitness < model->getFitnessScore()) {
-				bestFitness = model->getFitnessScore();
-				bestCreatureIndex = j;
+			for (int j = 0;
+					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+					j++) {
+				CreatureModel* model = population->getCreatureModels().at(
+						Randomness::getSingleton()->nextUnifPosInt(0,
+								population->getCreatureModels().size() - 1));
+				if (bestFitness < model->getFitnessScore()) {
+					bestFitness = model->getFitnessScore();
+					bestCreatureIndex = j;
+				}
+				tournament.push_back(model);
 			}
-			tournament.push_back(model);
+
+			if (tournament.size() != 0) {
+				CreatureModel* offspring =
+						tournament.at(bestCreatureIndex)->clone();
+				offspring->setNew(true);
+				offspring->getGenotype().mutateRandomGenes(
+						EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
+				population->getCreatureModels().push_back(offspring);
+			}
 		}
-		CreatureModel* offspring = tournament.at(bestCreatureIndex)->clone();
-		offspring->setNew(true);
-		offspring->getGenotype().mutateRandomGenes(
-				EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
-		population->getCreatureModels().push_back(offspring);
 	}
 }
 
 void Reaper::mutateGeneBranches(PopulationModel* const population,
 		const int mutatedGeneBranchHeads) {
+	if (population->getCreatureModels().size() != 0) {
+		for (int i = 0; i < mutatedGeneBranchHeads; i++) {
+			std::vector<CreatureModel*> tournament;
+			int bestCreatureIndex = 0;
+			int bestFitness = 0;
 
-	for (int i = 0; i < mutatedGeneBranchHeads; i++) {
-		std::vector<CreatureModel*> tournament;
-		int bestCreatureIndex = 0;
-		int bestFitness = 0;
-
-		for (int j = 0; j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
-				j++) {
-			CreatureModel* model = population->getCreatureModels().at(
-					Randomness::getSingleton()->nextUnifPosInt(0,
-							population->getCreatureModels().size() - 1));
-			if (bestFitness < model->getFitnessScore()) {
-				bestFitness = model->getFitnessScore();
-				bestCreatureIndex = j;
+			for (int j = 0;
+					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+					j++) {
+				CreatureModel* model = population->getCreatureModels().at(
+						Randomness::getSingleton()->nextUnifPosInt(0,
+								population->getCreatureModels().size() - 1));
+				if (bestFitness < model->getFitnessScore()) {
+					bestFitness = model->getFitnessScore();
+					bestCreatureIndex = j;
+				}
+				tournament.push_back(model);
 			}
-			tournament.push_back(model);
+			if (tournament.size() != 0) {
+				CreatureModel* offspring =
+						tournament.at(bestCreatureIndex)->clone();
+				offspring->setNew(true);
+				offspring->getGenotype().mutateRandomBranches(
+						EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY);
+				population->getCreatureModels().push_back(offspring);
+			}
 		}
-		CreatureModel* offspring = tournament.at(bestCreatureIndex)->clone();
-		offspring->setNew(true);
-		offspring->getGenotype().mutateRandomBranches(
-				EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY);
-		population->getCreatureModels().push_back(offspring);
 	}
 
 }

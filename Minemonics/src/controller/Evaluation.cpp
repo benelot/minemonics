@@ -25,7 +25,7 @@
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
-		mPlanet(NULL), mStart(0), mHasDiscardingTestRun(false), mHasFailed(
+		mPlanet(NULL), mStart(0), mHasFailed(
 				false) {
 }
 
@@ -84,6 +84,7 @@ void Evaluation::setup() {
 
 	if (limbQty == 0 || limbQty == 1) {
 		std::cout << "Creature discarded because it had no body or just one limb." << std::endl;
+		mHasFailed = true;
 		teardown();
 	}
 
@@ -105,6 +106,12 @@ void Evaluation::teardown() {
 
 	if (!mHasFailed) {
 		process();
+	}else{
+		// remove competing populations from the world
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+				pit != mPopulations.end(); pit++) {
+			(*pit)->markCull();
+		}
 	}
 
 	//remove the environment from the world
@@ -138,9 +145,7 @@ void Evaluation::update(const double timeSinceLastTick) {
 		(*pit)->update(timeSinceLastTick);
 	}
 
-	double discardingThreshold = 0.5;
-	if (mEvaluationModel.getTimePassed() > discardingThreshold
-			&& !mHasDiscardingTestRun) {
+	if (mEvaluationModel.getTimePassed() > PhysicsConfiguration::DISCARDING_STARTS) {
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 				pit != mPopulations.end(); pit++) {
 			if ((*pit)->hasInterpenetrations()) {
@@ -151,7 +156,6 @@ void Evaluation::update(const double timeSinceLastTick) {
 				break;
 			}
 		}
-//		mHasDiscardingTestRun = true;
 	}
 
 	//update the time passed

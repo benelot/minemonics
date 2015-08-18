@@ -174,3 +174,9 @@ bool Population::hasInterpenetrations() {
 	return mPopulationModel->hasInterpenetrations();
 }
 
+void Population::markCull() {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end();cit++) {
+		(*cit)->setCulled(true);
+	}
+}

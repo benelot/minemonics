@@ -217,7 +217,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 			break;
 		}
 		case ApplicationKeycode::APPK_y:
-		// return CEGUI::Key::Y;
+		SimulationManager::getSingleton()->getViewController().setShowShadows(!SimulationManager::getSingleton()->getViewController().doesShowShadows());
 		break;
 		case ApplicationKeycode::APPK_u:
 		// return CEGUI::Key::U;

@@ -55,8 +55,6 @@
 LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		LimbGraphics(limbModel) {
 
-//	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
-
 // add the true as the last parameter to make it a manual material
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
 			"", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false);
@@ -77,9 +75,6 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	tex->setTextureFiltering(Ogre::TFO_ANISOTROPIC);
 	tex->setTextureAnisotropy(8);
 
-//	mLimbEntityNode =
-//			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(
-//					name + "Node");
 	mLimbEntityNode =
 			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	switch (limbModel->getPrimitiveType()) {
@@ -117,16 +112,13 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		mLimbEntityNode->attachObject(mLimbEntity);
 		break;
 	}
-	mLimbEntity->setCastShadows(true);
+	mLimbEntity->setCastShadows(SimulationManager::getSingleton()->getViewController().doesShowShadows());
 
 }
 
 LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
 		LimbGraphics(limbO3D.mLimbModel) {
-//	Ogre::String name = boost::lexical_cast<std::string>(this) + "/" + "Limb";
 	mLimbEntity = limbO3D.mLimbEntity->clone("");
-//	mLimbEntityNode =
-//			SimulationManager::getSingleton()->getSceneManager()->createSceneNode(name + "Node");
 	mLimbEntityNode =
 			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	mLimbEntityNode->setPosition(limbO3D.mLimbModel->getPosition());
@@ -148,20 +140,23 @@ void LimbO3D::update(double timeSinceLastTick) {
 
 	// if the limb's rigid body is existing
 	if (body) {
-
 		// update the position of the limb graphics
-		btVector3 point = body->getCenterOfMassPosition();
-		mLimbEntityNode->setPosition(mLimbModel->getPosition());
+		Ogre::Vector3 point = mLimbModel->getPosition();
+		if (!(std::isnan(point.x) || std::isnan(point.y) || std::isnan(point.z))) {
+			mLimbEntityNode->setPosition(point);
+		}
 
 		// Get the Orientation of the rigid body as a bullet Quaternion
 		// Convert it to an Ogre quaternion
-		btQuaternion btq = body->getOrientation();
-		Ogre::Quaternion quart = Ogre::Quaternion(btq.w(), btq.x(), btq.y(),
-				btq.z());
-
-		// update the orientation of the limb graphics
-		mLimbEntityNode->setOrientation(mLimbModel->getOrientation());
+		Ogre::Quaternion btq = mLimbModel->getOrientation();
+		if (!(std::isnan(btq.x) || std::isnan(btq.y) || std::isnan(btq.z)
+				|| std::isnan(btq.w))) {
+			// update the orientation of the limb graphics
+			mLimbEntityNode->setOrientation(btq);
+		}
 	}
+
+	mLimbEntity->setCastShadows(SimulationManager::getSingleton()->getViewController().doesShowShadows());
 }
 
 void LimbO3D::addToWorld() {
@@ -193,16 +188,14 @@ Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
 	mRayScnQuery->setRay(ray);
 
 	Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
-	Ogre::RaySceneQueryResult::iterator it = result.begin();
 
-	//Ogre::SceneNode* curObject;
 	double distance = 0;
-	for (; it != result.end(); it++) {
+	for (Ogre::RaySceneQueryResult::iterator it = result.begin();
+			it != result.end(); it++) {
 		std::cout << "Collision name:" << it->movable->getName() << std::endl;
 		if (it->movable->getName() == mLimbEntity->getName()) {
 			distance = it->distance;
 			std::cout << "Distance from center" << distance << std::endl;
-			//curObject = it->movable->getParentSceneNode();
 		}
 	}
 	SimulationManager::getSingleton()->getSceneManager()->destroyQuery(
@@ -226,12 +219,10 @@ Ogre::Vector3 LimbO3D::getLocalIntersection(Ogre::Vector3 origin,
 	Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
 	Ogre::RaySceneQueryResult::iterator it = result.begin();
 
-	//Ogre::SceneNode* curObject;
 	double distance = 0;
 	for (; it != result.end(); it++) {
 		if (it->movable->getName() == mLimbEntity->getName()) {
 			distance = it->distance;
-			//curObject = it->movable->getParentSceneNode();
 		}
 	}
 	SimulationManager::getSingleton()->getSceneManager()->destroyQuery(

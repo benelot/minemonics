@@ -42,13 +42,28 @@ BoostLogger ViewController::mBoostLogger; /*<! initialize the boost logger*/
 ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 		mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDetailsPanel(NULL), mFpsPanel(
-		NULL), mDragContainer(NULL), mEvaluationInView(NULL) {
-	// TODO Auto-generated constructor stub
-
+		NULL), mDragContainer(NULL), mEvaluationInView(NULL), mShowShadows(
+				false) {
 }
 
 ViewController::~ViewController() {
-	// TODO Auto-generated destructor stub
+	delete mLayout;
+	mLayout = NULL;
+
+	mSystem = NULL;
+
+	mEvaluationInView = NULL;
+
+	mRenderer = NULL;
+
+	delete mDetailsPanel;
+	mDetailsPanel = NULL;
+
+	delete mFpsPanel;
+	mFpsPanel = NULL;
+
+	delete mDragContainer;
+	mDragContainer = NULL;
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget,

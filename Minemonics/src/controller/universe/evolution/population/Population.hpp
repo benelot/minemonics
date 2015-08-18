@@ -101,6 +101,8 @@ public:
 
 	bool hasInterpenetrations();
 
+	void markCull();
+
 	//Accessor methods
 
 	std::vector<Creature*>& getCreatures() {

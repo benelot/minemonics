@@ -131,6 +131,14 @@ public:
 		return mCameraHandler;
 	}
 
+	bool doesShowShadows() const {
+		return mShowShadows;
+	}
+
+	void setShowShadows(bool showShadows) {
+		mShowShadows = showShadows;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -171,6 +179,7 @@ private:
 
 	std::vector<Planet*> mPlanetsInView;
 	Evaluation* mEvaluationInView;
+	bool mShowShadows;
 };
 
 #endif /* CONTROLLER_VIEWCONTROLLER_VIEWCONTROLLER_HPP_ */

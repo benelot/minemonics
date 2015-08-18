@@ -53,6 +53,7 @@ LimbBt::LimbBt(const LimbBt& limbBt) {
 
 LimbBt::~LimbBt() {
 	delete mBody;
+	mBody = NULL;
 }
 
 void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,

@@ -119,8 +119,6 @@ private:
 
 	unsigned long int mStart;
 
-	bool mHasDiscardingTestRun;
-
 	bool mHasFailed;
 };
 

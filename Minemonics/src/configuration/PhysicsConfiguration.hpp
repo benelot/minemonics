@@ -140,6 +140,8 @@ public:
 	static const int GROUND_TESTRAY_COLLIDES_WITH = COL_GROUND;
 
 	static const double PENETRATION_THRESHOLD = -1e-3;
+
+	static const double DISCARDING_STARTS = 0.3;
 };
 
 #endif /* PHYSICSCONFIGURATION_H_ */

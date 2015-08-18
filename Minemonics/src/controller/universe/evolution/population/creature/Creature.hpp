@@ -112,6 +112,10 @@ public:
 		return mCreatureModel;
 	}
 
+	void setCulled(bool culled) {
+		mCreatureModel->setCulled(culled);
+	}
+
 	bool isCulled() const {
 		return mCreatureModel->isCulled();
 	}
