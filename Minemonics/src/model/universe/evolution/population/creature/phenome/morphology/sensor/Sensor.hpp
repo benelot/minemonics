@@ -27,6 +27,8 @@ class Sensor: public ControlOutput {
 public:
 	Sensor();
 	~Sensor();
+
+	virtual void update(double timeSinceLastTick) = 0;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_SENSORS_SENSOR_H_ */

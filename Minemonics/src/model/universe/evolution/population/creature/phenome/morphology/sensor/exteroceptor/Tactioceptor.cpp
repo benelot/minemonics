@@ -16,11 +16,10 @@
 
 Tactioceptor::Tactioceptor() :
 		mTouched(false) {
-	// TODO Auto-generated constructor stub
-
 }
 
 Tactioceptor::~Tactioceptor() {
-	// TODO Auto-generated destructor stub
 }
 
+void Tactioceptor::update(double timeSinceLastTick) {
+}

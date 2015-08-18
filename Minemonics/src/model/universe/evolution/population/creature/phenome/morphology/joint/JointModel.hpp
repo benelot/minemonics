@@ -26,6 +26,9 @@ class btTransform;
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.hpp>
 
 //## view headers
 //## utils headers
@@ -187,6 +190,14 @@ private:
 	 * The physical model representation of the joint.
 	 */
 	JointPhysics* mJointPhysics;
+
+	std::vector<Sensor*> mSensors;
+
+	std::vector<JointAngleProprioceptor*> mAngleceptors;
+
+	std::vector<JointForceProprioceptor*> mForceceptors;
+
+	std::vector<JointLimitProprioceptor*> mLimitceptors;
 
 };
 

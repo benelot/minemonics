@@ -42,10 +42,55 @@ void JointModel::initialize(btDynamicsWorld* const world,
 	mIndexB = indexB;
 
 	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
+
+	//TODO: proof of concept, make better.
+	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
+			((JointBt*) mJointPhysics)->getG6DofJoint(),
+			JointPhysics::RDOF_PITCH);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
+
+	JointForceProprioceptor* forceceptor = new JointForceProprioceptor(
+			((JointBt*) mJointPhysics)->getG6DofJoint(),
+			JointPhysics::RDOF_PITCH);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
+
+	JointLimitProprioceptor* limitceptor = new JointLimitProprioceptor(
+			((JointBt*) mJointPhysics)->getG6DofJoint(),
+			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
 }
 
-void JointModel::update(double timeSinceLastTick){
+void JointModel::update(double timeSinceLastTick) {
 	mJointPhysics->update(timeSinceLastTick);
+
+	for (std::vector<Sensor*>::iterator sit = mSensors.begin();
+			sit != mSensors.end(); sit++) {
+		(*sit)->update(timeSinceLastTick);
+	}
+
+	std::cout << std::endl << "AngleSensors:";
+	for (std::vector<JointAngleProprioceptor*>::iterator tit = mAngleceptors.begin();
+			tit != mAngleceptors.end(); tit++) {
+		std::cout << (*tit)->getAngle() << "|";
+	}
+	std::cout << std::endl;
+
+	std::cout << std::endl << "ForceSensors:";
+	for (std::vector<JointForceProprioceptor*>::iterator tit = mForceceptors.begin();
+			tit != mForceceptors.end(); tit++) {
+		std::cout << (*tit)->getForce() << "|";
+	}
+	std::cout << std::endl;
+
+	std::cout << std::endl << "LimitSensors:";
+	for (std::vector<JointLimitProprioceptor*>::iterator tit = mLimitceptors.begin();
+			tit != mLimitceptors.end(); tit++) {
+		std::cout << (*tit)->getLimitError() << "|";
+	}
+	std::cout << std::endl;
 }
 
 void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,

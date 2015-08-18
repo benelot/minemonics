@@ -28,12 +28,16 @@ public:
 	Tactioceptor();
 	virtual ~Tactioceptor();
 
+	virtual void update(double timeSinceLastTick);
+
+	//Accessor methods
 	bool isTouched() const {
 		return mTouched;
 	}
 
 	void setTouched(bool touched) {
 		mTouched = touched;
+		setOutputValue(mTouched);
 	}
 
 private:

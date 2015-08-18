@@ -25,7 +25,7 @@
 
 LimbModel::LimbModel() :
 		mLimbPhysics(NULL), mColor(0, 0, 0), mPrimitiveType(UNKNOWN), mCreatureModel(
-		NULL) {
+		NULL), mJointIndex(0) {
 }
 
 LimbModel::LimbModel(const LimbModel& limbModel) {
@@ -34,6 +34,7 @@ LimbModel::LimbModel(const LimbModel& limbModel) {
 	mLimbPhysics = limbModel.mLimbPhysics->clone();
 	mPrimitiveType = limbModel.mPrimitiveType;
 	mCreatureModel = limbModel.mCreatureModel;
+	mJointIndex = limbModel.mJointIndex;
 }
 
 LimbModel::~LimbModel() {
@@ -67,7 +68,9 @@ void LimbModel::initialize(btDynamicsWorld* const world,
 	mColor = color;
 
 	//TODO: proof of concept, make better.
-	mTactioceptors.push_back(new Tactioceptor());
+	Tactioceptor* tactioceptor = new Tactioceptor();
+	mSensors.push_back(tactioceptor);
+	mTactioceptors.push_back(tactioceptor);
 }
 
 void LimbModel::reset(Ogre::Vector3 position) {
@@ -117,14 +120,20 @@ void LimbModel::resetSensors() {
 }
 
 void LimbModel::update(double timeSinceLastTick) {
-//	std::cout << std::endl << "TactileSensors:";
+
+	for (std::vector<Sensor*>::iterator sit = mSensors.begin();
+			sit != mSensors.end(); sit++) {
+		(*sit)->update(timeSinceLastTick);
+	}
+
+	std::cout << std::endl << "TactileSensors:";
 	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
 			tit != mTactioceptors.end(); tit++) {
-//		std::cout << (*tit)->isTouched() << "|";
+		std::cout << (*tit)->isTouched() << "|";
 	}
-//	std::cout << std::endl;
+	std::cout << std::endl;
 
-	// reset the sensors when they are processed
+// reset the sensors when they are processed
 	resetSensors();
 }
 
