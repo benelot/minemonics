@@ -45,17 +45,17 @@ public:
 	}
 
 	void save(const T & object, const char* filename) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Saving " << filename;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Saving " << filename << "...";
 		// make an archive from the object
 		std::ofstream ofs(filename);
 		assert(ofs.good());
 		boost::archive::xml_oarchive oa(ofs);
 		oa << BOOST_SERIALIZATION_NVP(object);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Saved " << filename;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Saved " << filename << ".";
 	}
 
 	void restore(T &object, const char* filename) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Restoring " << filename;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Restoring " << filename << "...";
 		// open the archive
 		std::ifstream ifs(filename);
 		assert(ifs.good());
@@ -63,7 +63,7 @@ public:
 
 		// restore the object from the archive
 		ia >> BOOST_SERIALIZATION_NVP(object);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Restored " << filename;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Restored " << filename << ".";
 	}
 
 private:
