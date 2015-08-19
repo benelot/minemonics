@@ -142,6 +142,8 @@ public:
 	static const double PENETRATION_THRESHOLD = -1e-3;
 
 	static const double DISCARDING_STARTS = 0.3;
+
+	static const bool NO_INTRACOLLISION = false;
 };
 
 #endif /* CONFIGURATION_PHYSICSCONFIGURATION_H_ */

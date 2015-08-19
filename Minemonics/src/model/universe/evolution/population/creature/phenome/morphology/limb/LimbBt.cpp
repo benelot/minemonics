@@ -46,7 +46,7 @@ LimbBt::LimbBt(const LimbBt& limbBt) {
 			btQuaternion(limbBt.mInitialXOrientation,
 					limbBt.mInitialYOrientation, limbBt.mInitialZOrientation,
 					limbBt.mInitialWOrientation), limbBt.mDimensions,
-			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,limbBt.mColor);
+			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction, limbBt.mColor);
 
 	mInWorld = limbBt.mInWorld;
 }
@@ -61,7 +61,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 		const btQuaternion orientation, const btVector3 initialRelativePosition,
 		const btQuaternion initialOrientation, const btVector3 dimensions,
 		const btScalar mass, const btScalar restitution,
-		const btScalar friction,const btVector3 color) {
+		const btScalar friction, const btVector3 color) {
 	mWorld = world;
 	mDimensions = dimensions;
 	mMass = mass;
@@ -148,8 +148,8 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 //  btVector3 rayEnd = origin + direction.normalized() * 100.0f;
 
 	//TODO: Debug output, draw test ray
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
-			rayEnd, btVector3(1, 1, 0));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
+//			rayEnd, btVector3(1, 1, 0));
 
 	btVector3 hitPosition = origin;
 
@@ -179,10 +179,10 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 
 	if (rayCallback.hasHit()) {
 		btVector3 p = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
-				btVector3(1, 0, 0));
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
-				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
+//				btVector3(1, 0, 0));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
+//				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
 		hitPosition = p;
 //		std::cout
 //				<< "############################################################\n"
@@ -194,8 +194,8 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 //				<< "############################################################\n\n";
 
 	} else {
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
-				1, btVector3(1, 0, 0));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
+//				1, btVector3(1, 0, 0));
 //		std::cout
 //				<< "############################################################\n"
 //				<< "no hit!\n" << rayStart.x() << ",\t" << rayStart.y() << ",\t"
@@ -273,10 +273,12 @@ btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
-		//TODO:Make all limbs collide as soon as the body creation works
-//		mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
-//				PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-		mWorld->addRigidBody(mBody);
+		if (PhysicsConfiguration::NO_INTRACOLLISION) {
+			mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
+					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+		} else {
+			mWorld->addRigidBody(mBody);
+		}
 		LimbPhysics::addToWorld();
 	}
 }
