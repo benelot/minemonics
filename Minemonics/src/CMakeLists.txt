@@ -472,6 +472,7 @@ set(TESTSRCS
     ./model/universe/UniverseModel_test.cpp
     ./model/universe/PlanetModel_test.cpp
     ./model/universe/evolution/juries/AverageVelocity_test.cpp
+    ./model/universe/evolution/juries/AverageHeight_test.cpp
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     ./model/universe/evolution/population/creature/genome/GeneBranch_test.cpp
     ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
