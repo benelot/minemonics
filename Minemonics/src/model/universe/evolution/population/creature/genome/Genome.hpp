@@ -354,6 +354,9 @@ public:
 		/**The length of the genome*/
 		& BOOST_SERIALIZATION_NVP(mLength)
 
+		/**The branchiness of the genome*/
+		& BOOST_SERIALIZATION_NVP(mBranchiness)
+
 		/**The vector of genes.*/
 		& BOOST_SERIALIZATION_NVP(mGenes);
 	}

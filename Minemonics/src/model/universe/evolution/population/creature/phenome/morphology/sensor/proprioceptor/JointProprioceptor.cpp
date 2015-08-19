@@ -14,11 +14,10 @@
 //## view headers
 //## utils headers
 
-JointProprioceptor::JointProprioceptor(CONSTRAINT_TYPE* g6DofJoint,
+JointProprioceptor::JointProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
 		JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-		mG6DofJoint(g6DofJoint), mMotorIndex(rotationalDOF) {
+		mJointIndex(jointIndex), mMotorIndex(rotationalDOF) {
 }
 
 JointProprioceptor::~JointProprioceptor() {
-	mG6DofJoint = NULL;
 }

@@ -10,6 +10,7 @@ class access;
 } /* namespace boost */
 
 //# system headers
+#include <vector>
 #include <iostream>
 
 //## controller headers
@@ -45,7 +46,7 @@ public:
 	 * Initialize the component model.
 	 * @param type The type of component.
 	 */
-	void initialize(const ComponentType type, const int ownIndex);
+	void initialize(const ComponentType type, const std::vector<ComponentModel*>::size_type ownIndex);
 
 	/**
 	 * Compare the component model to another component model.
@@ -92,7 +93,7 @@ public:
 		return mComponentType;
 	}
 
-	int getIndex() const {
+	std::vector<ComponentModel*>::size_type getIndex() const {
 		return mOwnIndex;
 	}
 
@@ -105,7 +106,7 @@ protected:
 	/**
 	 * The index of the component in the genotype.
 	 */
-	int mOwnIndex;
+	std::vector<ComponentModel*>::size_type mOwnIndex;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENTMODEL_HPP_ */

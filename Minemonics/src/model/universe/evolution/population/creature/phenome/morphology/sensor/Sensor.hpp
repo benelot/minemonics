@@ -28,7 +28,40 @@ public:
 	Sensor();
 	~Sensor();
 
+	/**
+	 * Update the sensor values.
+	 * @param timeSinceLastTick
+	 */
 	virtual void update(double timeSinceLastTick) = 0;
-};
 
+	// Accessor methods
+
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the sensor model to a string.
+	 * @param os The ostream.
+	 * @param sensor The sensor we want to serialize.
+	 * @return A string containing all information about the sensor.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const Sensor &sensor) {
+		return os;
+	}
+
+	/**
+	 * Serializes the sensor to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+	}
+};
+BOOST_CLASS_VERSION(Sensor, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Sensor)
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_SENSORS_SENSOR_H_ */

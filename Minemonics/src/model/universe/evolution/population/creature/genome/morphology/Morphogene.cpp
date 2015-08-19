@@ -8,15 +8,7 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
-
-//## controller headers
-//## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
@@ -120,9 +112,7 @@ void Morphogene::initialize(const double branchiness) {
 		mJointAnchorZ = Randomness::getSingleton()->nextUnifDouble(-1, 1);
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
-	/*
-	 * The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
-	 */
+	//The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	mJointYaw = Randomness::getSingleton()->nextUnifDouble(0,
 			2 * boost::math::constants::pi<double>());
 	mJointPitch = Randomness::getSingleton()->nextUnifDouble(0,
@@ -135,6 +125,7 @@ void Morphogene::initialize(const double branchiness) {
 	mColorG = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
+	// A random primitive from the available primitives
 	switch ((LimbModel::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
 			1, LimbModel::NUM_PRIMITIVES)) {
 	case LimbModel::BLOCK: {
@@ -163,7 +154,7 @@ void Morphogene::initialize(const double branchiness) {
 		mGeneBranches.push_back(branch);
 	}
 
-	//TODO: Does nothing yet, improve.
+	// create an instance of the sine controller gene for the morphogene.
 	mControllerGene = new SineControllerGene();
 	mControllerGene->initialize();
 }

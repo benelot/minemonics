@@ -10,6 +10,7 @@
 
 //### bullet headers
 #include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <configuration/MorphologyConfiguration.hpp>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
@@ -21,7 +22,6 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
 #include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers

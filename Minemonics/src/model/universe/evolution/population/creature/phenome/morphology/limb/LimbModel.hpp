@@ -73,7 +73,7 @@ public:
 			const Ogre::Vector3 initialRelativePosition,
 			const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
 			double mass, double restitution, double friction,
-			Ogre::ColourValue color, int ownIndex);
+			Ogre::ColourValue color, std::vector<ComponentModel*>::size_type ownIndex);
 
 	void update(double timeSinceLastTick);
 	/**
@@ -98,38 +98,6 @@ public:
 	 * @return The clone of the limb model.
 	 */
 	LimbModel* clone();
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the phemone model to a string.
-	 * @param os The ostream.
-	 * @param phenomeModel The phemone model we want to serialize.
-	 * @return A string containing all information about the phemone model.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const LimbModel &limbModel) {
-		//TODO: Improve the printout.
-		return os;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel)
-
-		/**The type of the limb*/
-		& BOOST_SERIALIZATION_NVP(mLimbPhysics);
-	}
 
 	//Accessor methods
 	/**
@@ -178,6 +146,39 @@ public:
 		mJointIndex = jointIndex;
 	}
 
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the phemone model to a string.
+	 * @param os The ostream.
+	 * @param phenomeModel The phemone model we want to serialize.
+	 * @return A string containing all information about the phemone model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const LimbModel &limbModel) {
+		//TODO: Improve the printout.
+		return os;
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/** Serialize the base object */
+		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel)
+
+		/**The type of the limb*/
+		& BOOST_SERIALIZATION_NVP(mLimbPhysics);
+	}
+
 private:
 
 	/**
@@ -190,12 +191,20 @@ private:
 	 */
 	LimbPhysics* mLimbPhysics;
 
-
+	/**
+	 * All the sensors of the limb.
+	 */
 	std::vector<Sensor*> mSensors;
 
+	/**
+	 * The tactioceptors of the limb.
+	 */
 	std::vector<Tactioceptor*> mTactioceptors;
 
-	int mJointIndex;
+	/**
+	 * The index of the joint the limb is connected to.
+	 */
+	std::vector<LimbModel*>::size_type mJointIndex;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */

@@ -1,10 +1,3 @@
-/*
- * Genome_test.cpp
- *
- *  Created on: Mar 8, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <gtest/gtest.h>
@@ -33,7 +26,6 @@ protected:
 		// Set up an object of the class you want to test
 		genome = new MixedGenome();
 		genome->createRandomGenome(30);
-//		genome->linkRandomGenes();
 	}
 
 	virtual void TearDown() {

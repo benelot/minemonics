@@ -16,9 +16,6 @@
 //## configuration headers
 #include <configuration/EvolutionConfiguration.hpp>
 #include <configuration/MorphologyConfiguration.hpp>
-
-//## controller headers
-//## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/CreatureFitnessComparator.hpp>

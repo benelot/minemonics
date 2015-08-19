@@ -12,14 +12,7 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
-
-//## controller headers
 #include <controller/SaveController.hpp>
 
 //## model headers

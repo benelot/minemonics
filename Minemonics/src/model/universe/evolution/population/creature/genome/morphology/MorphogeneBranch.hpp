@@ -311,6 +311,54 @@ public:
 		mJointMaxYawSpeed = jointMaxYawSpeed;
 	}
 
+	double getJointPitchFrequency() const {
+		return mJointPitchFrequency;
+	}
+
+	double getJointRollFrequency() const {
+		return mJointRollFrequency;
+	}
+
+	double getJointYawFrequency() const {
+		return mJointYawFrequency;
+	}
+
+	double getJointPitchAmplitude() const {
+		return mJointPitchAmplitude;
+	}
+
+	double getJointPitchYOffset() const {
+		return mJointPitchYOffset;
+	}
+
+	double getJointRollAmplitude() const {
+		return mJointRollAmplitude;
+	}
+
+	double getJointRollYOffset() const {
+		return mJointRollYOffset;
+	}
+
+	double getJointYawAmplitude() const {
+		return mJointYawAmplitude;
+	}
+
+	double getJointYawYOffset() const {
+		return mJointYawYOffset;
+	}
+
+	double getJointPitchXOffset() const {
+		return mJointPitchXOffset;
+	}
+
+	double getJointRollXOffset() const {
+		return mJointRollXOffset;
+	}
+
+	double getJointYawXOffset() const {
+		return mJointYawXOffset;
+	}
+
 	//Serialization
 	/**
 	 * Give access to boost serialization
@@ -386,54 +434,6 @@ public:
 				<< morphogeneBranch.mJointMaxPitchSpeed << "][Yaw:"
 				<< morphogeneBranch.mJointMaxYawSpeed << "][Roll:"
 				<< morphogeneBranch.mJointMaxRollSpeed;
-	}
-
-	double getJointPitchFrequency() const {
-		return mJointPitchFrequency;
-	}
-
-	double getJointRollFrequency() const {
-		return mJointRollFrequency;
-	}
-
-	double getJointYawFrequency() const {
-		return mJointYawFrequency;
-	}
-
-	double getJointPitchAmplitude() const {
-		return mJointPitchAmplitude;
-	}
-
-	double getJointPitchYOffset() const {
-		return mJointPitchYOffset;
-	}
-
-	double getJointRollAmplitude() const {
-		return mJointRollAmplitude;
-	}
-
-	double getJointRollYOffset() const {
-		return mJointRollYOffset;
-	}
-
-	double getJointYawAmplitude() const {
-		return mJointYawAmplitude;
-	}
-
-	double getJointYawYOffset() const {
-		return mJointYawYOffset;
-	}
-
-	double getJointPitchXOffset() const {
-		return mJointPitchXOffset;
-	}
-
-	double getJointRollXOffset() const {
-		return mJointRollXOffset;
-	}
-
-	double getJointYawXOffset() const {
-		return mJointYawXOffset;
 	}
 
 	/**

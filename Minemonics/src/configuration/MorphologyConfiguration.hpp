@@ -202,12 +202,12 @@ public:
 	/**
 	 * The initial branch number mean
 	 */
-	static const double BODY_BRANCH_INITIAL_MEAN = 2;
+	static const double BODY_BRANCH_INITIAL_MEAN = 6;
 
 	/**
 	 * The initial branch number variance
 	 */
-	static const double BODY_BRANCH_INITIAL_VAR = 1;
+	static const double BODY_BRANCH_INITIAL_VAR = 3;
 };
 
 #endif /* CONFIGURATION_MORPHOLOGYCONFIGURATION_H_ */

@@ -80,7 +80,6 @@ double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
 			pow(10, lowerLimit), pow(10, upperLimit));
 
 	//draw m and n
-
 	double tenpowm = unifDoubleDistribution(rng);
 	double tenpown = unifDoubleDistribution(rng);
 
@@ -93,7 +92,6 @@ bool Randomness::nextUnifBoolean() {
 	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1);
 
 	// return true if 1 else false
-
 	return (unifIntDistribution(rng)) ? true : false;
 }
 

@@ -8,14 +8,10 @@
 //## model headers
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-
-//## view headers
-//# custom headers
-//## base headers
+#include <configuration/MorphologyConfiguration.hpp>
 #include <SimulationManager.hpp>
 
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
 #include <configuration/PhysicsConfiguration.hpp>
 
 //## model headers

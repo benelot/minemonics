@@ -20,7 +20,7 @@
 //## view headers
 //## utils headers
 
-#define NUM_NAMES 500
+#define NUM_NAMES 100
 
 class NameGeneratorTest: public ::testing::Test {
 protected:

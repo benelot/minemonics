@@ -1,13 +1,7 @@
-/*
- * Embryogenesis.cpp
- *
- *  Created on: Apr 20, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 //# forward declarations
 //# system headers
+#include <configuration/MorphologyConfiguration.hpp>
 #include <map>
 #include <vector>
 
@@ -28,10 +22,6 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
-
-//## controller headers
-//## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
@@ -289,54 +279,54 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimbCOM + localChildAnchorInRefParent
 						- localChildAnchorInRefChild);
 
-		// draw line from limb A to surface anchor point of A (GREEN LINE)
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
-				Ogre::ColourValue(0, 1, 0));
-
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
-
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				parentLimbCOM + localParentAnchorInRefParent, 0.1,
-				Ogre::ColourValue(0, 1, 0));
-
-		// draw line from anchor point of A to joint rotation point (BLUE LINE)
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-				parentLimbCOM + localParentAnchorInRefParent,
-				parentLimbCOM + localParentJointInRefParent,
-				Ogre::ColourValue(0, 0, 1));
-
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				parentLimbCOM + localParentAnchorInRefParent, 0.1,
-				Ogre::ColourValue(0, 0, 1));
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				parentLimbCOM + localParentJointInRefParent, 0.1,
-				Ogre::ColourValue(0, 0, 1));
-
-		// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-				parentLimbCOM + localParentJointInRefParent,
-				parentLimbCOM + localChildAnchorInRefParent,
-				Ogre::ColourValue(0, 0, 1));
-
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				parentLimbCOM + localParentJointInRefParent, 0.1,
-				Ogre::ColourValue(0, 0, 1));
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				parentLimbCOM + localChildAnchorInRefParent, 0.1,
-				Ogre::ColourValue(0, 0, 1));
-
-		// draw line from limb B to anchor point of B (GREEN LINE)
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-				childLimbCOM, childLimbCOM + localChildAnchorInRefChild,
-				Ogre::ColourValue(0, 1, 0));
-
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				childLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				childLimbCOM + localChildAnchorInRefChild, 0.1,
-				Ogre::ColourValue(0, 1, 0));
+//		// draw line from limb A to surface anchor point of A (GREEN LINE)
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+//				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
+//				Ogre::ColourValue(0, 1, 0));
+//
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
+//
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				parentLimbCOM + localParentAnchorInRefParent, 0.1,
+//				Ogre::ColourValue(0, 1, 0));
+//
+//		// draw line from anchor point of A to joint rotation point (BLUE LINE)
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+//				parentLimbCOM + localParentAnchorInRefParent,
+//				parentLimbCOM + localParentJointInRefParent,
+//				Ogre::ColourValue(0, 0, 1));
+//
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				parentLimbCOM + localParentAnchorInRefParent, 0.1,
+//				Ogre::ColourValue(0, 0, 1));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				parentLimbCOM + localParentJointInRefParent, 0.1,
+//				Ogre::ColourValue(0, 0, 1));
+//
+//		// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+//				parentLimbCOM + localParentJointInRefParent,
+//				parentLimbCOM + localChildAnchorInRefParent,
+//				Ogre::ColourValue(0, 0, 1));
+//
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				parentLimbCOM + localParentJointInRefParent, 0.1,
+//				Ogre::ColourValue(0, 0, 1));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				parentLimbCOM + localChildAnchorInRefParent, 0.1,
+//				Ogre::ColourValue(0, 0, 1));
+//
+//		// draw line from limb B to anchor point of B (GREEN LINE)
+//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+//				childLimbCOM, childLimbCOM + localChildAnchorInRefChild,
+//				Ogre::ColourValue(0, 1, 0));
+//
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				childLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
+//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//				childLimbCOM + localChildAnchorInRefChild, 0.1,
+//				Ogre::ColourValue(0, 1, 0));
 
 //		// draw line from limb A to limb B (WHITE LINE)
 //		SimulationManager::getSingleton()->getDebugDrawer().drawLine(

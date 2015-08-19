@@ -16,9 +16,10 @@
 //## view headers
 //## utils headers
 
-JointLimitProprioceptor::JointLimitProprioceptor(CONSTRAINT_TYPE* g6DofJoint,
+JointLimitProprioceptor::JointLimitProprioceptor(
+		std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
 		JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit) :
-		JointProprioceptor(g6DofJoint, rotationalDOF), mLimitError(0), mLimit(
+		JointProprioceptor(jointIndex, rotationalDOF), mLimitError(0), mLimit(
 				limit) {
 
 }

@@ -1,11 +1,5 @@
-/*
- * Creature_test.cpp
- *
- *  Created on: Mar 8, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
+#include <configuration/MorphologyConfiguration.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //# forward declarations
@@ -19,9 +13,6 @@
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
-
-//## controller headers
 #include <controller/SaveController.hpp>
 
 //## model headers

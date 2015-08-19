@@ -75,7 +75,6 @@ public:
 	virtual void grow(const int branchiness) = 0;
 
 	//Serialization
-
 	/**
 	 * Give access to boost serialization
 	 */

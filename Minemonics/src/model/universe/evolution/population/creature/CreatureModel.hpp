@@ -136,86 +136,7 @@ public:
 	 */
 	CreatureModel* clone();
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the creature model to a string.
-	 * @param os The ostream.
-	 * @param creature The creature we want to serialize.
-	 * @return A string containing all information about the creature.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const CreatureModel &creature) {
-		os
-		/**The name of the creature*/
-		<< "/CreatureModel: Name=" << creature.mFirstName
-
-		/**The genome of the creature*/
-		<< "\n/Genotype=" << creature.mGenotype
-
-		<< "\n/Phenotype=" << creature.mPhenotypeModel;
-
-		/**The juries of the creature model*/
-		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin();
-				it != creature.mJuries.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		/**The position of the creature model*/
-		os << "/Position=(" << creature.mPosition.x << ","
-				<< creature.mPosition.y << "," << creature.mPosition.z << ")";
-
-		/**The initial position of the creature model*/
-		os << "/InitialPosition=(" << creature.mInitialPosition.x << ","
-				<< creature.mInitialPosition.y << ","
-				<< creature.mInitialPosition.z << ")";
-
-		os << "/isCulled=" << creature.mCulled;
-		os << "/isNew=" << creature.mNew;
-		return os;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The name of the creature*/
-		& BOOST_SERIALIZATION_NVP(mFirstName)
-
-		/**The genome of the creature model*/
-		& BOOST_SERIALIZATION_NVP(mGenotype)
-
-		& BOOST_SERIALIZATION_NVP(mPhenotypeModel)
-
-		/**The juries of the creature model*/
-		& BOOST_SERIALIZATION_NVP(mJuries)
-
-		/**The position of the creature model*/
-		& BOOST_SERIALIZATION_NVP(mPosition.x)
-		& BOOST_SERIALIZATION_NVP(mPosition.y)
-		& BOOST_SERIALIZATION_NVP(mPosition.z)
-
-		/**The initial position of the creature model*/
-		& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
-		& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
-		& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
-
-		/**If the creature was culled or not*/
-		& BOOST_SERIALIZATION_NVP(mCulled)
-
-		/**If the creature is new*/
-		& BOOST_SERIALIZATION_NVP(mNew);
-	}
-
-	//Accessor methods
+	// Accessor methods
 	MixedGenome& getGenotype() {
 		return mGenotype;
 	}
@@ -292,6 +213,85 @@ public:
 		mNew = _new;
 	}
 
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the creature model to a string.
+	 * @param os The ostream.
+	 * @param creature The creature we want to serialize.
+	 * @return A string containing all information about the creature.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const CreatureModel &creature) {
+		os
+		/**The name of the creature*/
+		<< "/CreatureModel: Name=" << creature.mFirstName
+
+		/**The genome of the creature*/
+		<< "\n/Genotype=" << creature.mGenotype
+
+		<< "\n/Phenotype=" << creature.mPhenotypeModel;
+
+		/**The juries of the creature model*/
+		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin();
+				it != creature.mJuries.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+
+		/**The position of the creature model*/
+		os << "/Position=(" << creature.mPosition.x << ","
+				<< creature.mPosition.y << "," << creature.mPosition.z << ")";
+
+		/**The initial position of the creature model*/
+		os << "/InitialPosition=(" << creature.mInitialPosition.x << ","
+				<< creature.mInitialPosition.y << ","
+				<< creature.mInitialPosition.z << ")";
+
+		os << "/isCulled=" << creature.mCulled;
+		os << "/isNew=" << creature.mNew;
+		return os;
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The name of the creature*/
+		& BOOST_SERIALIZATION_NVP(mFirstName)
+
+		/**The genome of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mGenotype)
+
+//		& BOOST_SERIALIZATION_NVP(mPhenotypeModel)
+
+		/**The juries of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mJuries)
+
+		/**The position of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mPosition.x)
+		& BOOST_SERIALIZATION_NVP(mPosition.y)
+		& BOOST_SERIALIZATION_NVP(mPosition.z)
+
+		/**The initial position of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
+
+		/**If the creature was culled or not*/
+		& BOOST_SERIALIZATION_NVP(mCulled)
+
+		/**If the creature is new*/
+		& BOOST_SERIALIZATION_NVP(mNew);
+	}
 private:
 
 	/**
@@ -339,6 +339,9 @@ private:
 	 */
 	PopulationModel* mPopulationModel;
 
+	/**
+	 * The fitness score competitively eruated by the juries.
+	 */
 	double mFitnessScore;
 
 };

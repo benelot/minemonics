@@ -35,32 +35,35 @@ JointModel::~JointModel() {
 
 void JointModel::initialize(btDynamicsWorld* const world,
 		btRigidBody* const limbA, btRigidBody* const limbB,
-		const btTransform localA, const btTransform localB, const int indexA,
-		const int indexB, const int ownIndex) {
+		const btTransform localA, const btTransform localB,
+		const std::vector<LimbModel*>::size_type indexA,
+		const std::vector<LimbModel*>::size_type indexB,
+		const std::vector<LimbModel*>::size_type ownIndex) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mIndexA = indexA;
 	mIndexB = indexB;
+	mOwnIndex = ownIndex;
 
 	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
 
 	//TODO: proof of concept, make better.
-	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
-			((JointBt*) mJointPhysics)->getG6DofJoint(),
-			JointPhysics::RDOF_PITCH);
-	mSensors.push_back(angleceptor);
-	mAngleceptors.push_back(angleceptor);
-
-	JointForceProprioceptor* forceceptor = new JointForceProprioceptor(
-			((JointBt*) mJointPhysics)->getG6DofJoint(),
-			JointPhysics::RDOF_PITCH);
-	mSensors.push_back(forceceptor);
-	mForceceptors.push_back(forceceptor);
-
-	JointLimitProprioceptor* limitceptor = new JointLimitProprioceptor(
-			((JointBt*) mJointPhysics)->getG6DofJoint(),
-			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
-	mSensors.push_back(limitceptor);
-	mLimitceptors.push_back(limitceptor);
+//	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
+//			((JointBt*) mJointPhysics)->getG6DofJoint(),
+//			JointPhysics::RDOF_PITCH);
+//	mSensors.push_back(angleceptor);
+//	mAngleceptors.push_back(angleceptor);
+//
+//	JointForceProprioceptor* forceceptor = new JointForceProprioceptor(
+//			((JointBt*) mJointPhysics)->getG6DofJoint(),
+//			JointPhysics::RDOF_PITCH);
+//	mSensors.push_back(forceceptor);
+//	mForceceptors.push_back(forceceptor);
+//
+//	JointLimitProprioceptor* limitceptor = new JointLimitProprioceptor(
+//			((JointBt*) mJointPhysics)->getG6DofJoint(),
+//			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
+//	mSensors.push_back(limitceptor);
+//	mLimitceptors.push_back(limitceptor);
 }
 
 void JointModel::update(double timeSinceLastTick) {

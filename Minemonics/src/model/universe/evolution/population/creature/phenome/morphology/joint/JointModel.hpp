@@ -25,6 +25,7 @@ class btTransform;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.hpp>
@@ -48,8 +49,11 @@ public:
 	virtual ~JointModel();
 
 	void initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
-			btRigidBody* const limbB, const btTransform localA, const btTransform localB,const int indexA,const int indexB,
-			const int ownIndex);
+			btRigidBody* const limbB, const btTransform localA,
+			const btTransform localB,
+			const std::vector<LimbModel*>::size_type indexA,
+			const std::vector<LimbModel*>::size_type indexB,
+			const std::vector<JointModel*>::size_type ownIndex);
 
 	/**
 	 * Update the joint model.
@@ -85,36 +89,6 @@ public:
 	 * @return The clone of the joint model.
 	 */
 	JointModel* clone();
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the joint model to a string.
-	 * @param os The ostream.
-	 * @param jointModel The joint model we want to serialize.
-	 * @return A string containing all information about the joint model.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const JointModel &jointModel) {
-		return os;
-//		/**The physics component of the joint model*/
-//		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The physics component of the joint model*/
-		& BOOST_SERIALIZATION_NVP(mJointPhysics);
-	}
 
 	//Accessor methods
 
@@ -162,7 +136,8 @@ public:
 	 * @param yawEnable Enable yaw motor.
 	 * @param rollEnable Enable roll motor.
 	 */
-	void enableAngularMotor(const bool pitchEnable, const bool yawEnable, const bool rollEnable);
+	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
+			const bool rollEnable);
 
 	/**
 	 * Get the motors of this joint.
@@ -172,12 +147,43 @@ public:
 		return mJointPhysics->getMotors();
 	}
 
-	const int getIndexA() const {
+	const std::vector<LimbModel*>::size_type getIndexA() const {
 		return mIndexA;
 	}
 
-	const int getIndexB() const {
+	const std::vector<LimbModel*>::size_type getIndexB() const {
 		return mIndexB;
+	}
+
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the joint model to a string.
+	 * @param os The ostream.
+	 * @param jointModel The joint model we want to serialize.
+	 * @return A string containing all information about the joint model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const JointModel &jointModel) {
+		return os;
+//		/**The physics component of the joint model*/
+//		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The physics component of the joint model*/
+		& BOOST_SERIALIZATION_NVP(mJointPhysics);
 	}
 
 private:
@@ -185,18 +191,36 @@ private:
 	/**
 	 * The indices of limbA and limbB.
 	 */
-	int mIndexA,mIndexB;
+	std::vector<LimbModel*>::size_type mIndexA, mIndexB;
+
+	/**
+	 * The joint's own index.
+	 */
+	std::vector<JointModel*>::size_type mOwnIndex;
+
 	/**
 	 * The physical model representation of the joint.
 	 */
 	JointPhysics* mJointPhysics;
 
+	/**
+	 * All the sensors of the joint.
+	 */
 	std::vector<Sensor*> mSensors;
 
+	/**
+	 * The angleceptors of the joint.
+	 */
 	std::vector<JointAngleProprioceptor*> mAngleceptors;
 
+	/**
+	 * The forceceptors of the joint.
+	 */
 	std::vector<JointForceProprioceptor*> mForceceptors;
 
+	/**
+	 * The limitceptors of the joint.
+	 */
 	std::vector<JointLimitProprioceptor*> mLimitceptors;
 
 };

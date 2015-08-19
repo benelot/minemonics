@@ -30,7 +30,40 @@ public:
 	Proprioceptor();
 	~Proprioceptor();
 
+	/**
+	 * Update the proprioceptor input.
+	 * @param timeSinceLastTick
+	 */
 	virtual void update(double timeSinceLastTick) = 0;
-};
 
+	// Accessor methods
+
+	//Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the proprioceptor to a string.
+	 * @param os The ostream.
+	 * @param proprioceptor The proprioceptor we want to serialize.
+	 * @return A string containing all information about the proprioceptor.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const Proprioceptor &proprioceptor) {
+		return os;
+	}
+
+	/**
+	 * Serializes the proprioceptor to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+	}
+};
+BOOST_CLASS_VERSION(Proprioceptor, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Proprioceptor)
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_SENSORS_PROPRIOCEPTOR_H_ */

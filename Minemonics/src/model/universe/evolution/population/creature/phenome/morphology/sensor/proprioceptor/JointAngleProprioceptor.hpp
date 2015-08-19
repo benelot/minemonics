@@ -25,7 +25,7 @@
  */
 class JointAngleProprioceptor: public JointProprioceptor {
 public:
-	JointAngleProprioceptor(CONSTRAINT_TYPE* g6DofJoint,
+	JointAngleProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
 			JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
 	virtual ~JointAngleProprioceptor();
 

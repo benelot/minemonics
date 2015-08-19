@@ -22,7 +22,7 @@ class PhenomeModel;
 //## utils headers
 
 /**
- * @brief		The embryogenesis builds a phenotype according to the specification in the gentype.
+ * @brief		The embryogenesis builds a phenotype according to the specification in the genotype.
  * @details		Details
  * @date		2015-05-20
  * @author		Benjamin Ellenberger

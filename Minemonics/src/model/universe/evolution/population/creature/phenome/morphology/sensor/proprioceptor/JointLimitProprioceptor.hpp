@@ -28,7 +28,7 @@ public:
 	enum Limit {
 		LOWER_LIMIT, UPPER_LIMIT, BOTH_LIMITS
 	};
-	JointLimitProprioceptor(CONSTRAINT_TYPE* g6DofJoint,
+	JointLimitProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
 			JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit);
 	virtual ~JointLimitProprioceptor();
 

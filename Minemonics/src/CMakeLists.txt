@@ -469,18 +469,34 @@ set(TESTSRCS
     ## unit test cases
     ## (unit tests usually only test the model)
     ## therefore it should never be necessary to include the srcs from view and controller above
+    
+    ## universe
     ./model/universe/UniverseModel_test.cpp
     ./model/universe/PlanetModel_test.cpp
+    
+    ## juries
     ./model/universe/evolution/juries/AverageVelocity_test.cpp
     ./model/universe/evolution/juries/AverageHeight_test.cpp
-    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
-    ./model/universe/evolution/population/creature/genome/GeneBranch_test.cpp
-    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
-    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
-    ./model/universe/evolution/population/creature/genome/MixedGenome_test.cpp
-    ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
+    
+    ## creatures
     ./model/universe/evolution/population/creature/CreatureModel_test.cpp
     ./model/universe/evolution/population/PopulationModel_test.cpp
+    
+    # genome
+    ./model/universe/evolution/population/creature/genome/MixedGenome_test.cpp
+    
+    # morphology
+    ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
+    ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
+    
+    ## controllers
+    ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
+    
+    # phenome
+    ## controllers
+    ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
+    
+    # misc
     ./utils/NameGenerator_test.cpp
     ./utils/Randomness_test.cpp
     

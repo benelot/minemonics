@@ -46,7 +46,8 @@ void LimbModel::initialize(btDynamicsWorld* const world,
 		const Ogre::Quaternion initialOrientation,
 		const Ogre::Vector3 dimensions, const double mass,
 		const double restitution, const double friction,
-		const Ogre::ColourValue color, const int ownIndex) {
+		const Ogre::ColourValue color,
+		const std::vector<ComponentModel*>::size_type ownIndex) {
 	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
 
 	// initialize the physics model of the limb

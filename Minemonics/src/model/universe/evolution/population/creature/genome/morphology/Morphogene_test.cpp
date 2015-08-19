@@ -1,10 +1,3 @@
-/*
- * Gene_test.cpp
- *
- *  Created on: Mar 8, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <gtest/gtest.h>
@@ -12,14 +5,7 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
-
-//## controller headers
 #include <controller/SaveController.hpp>
 
 //## model headers

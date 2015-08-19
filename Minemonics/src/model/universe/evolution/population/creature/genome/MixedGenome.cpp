@@ -150,9 +150,8 @@ void MixedGenome::integrateGene(int geneIndex) {
 		} while (((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
 				!= geneIndex);
 
-		std::vector<MorphogeneBranch*>::iterator branchIt =
+		for (std::vector<MorphogeneBranch*>::iterator branchIt =
 				((Morphogene*) mGenes[geneIndex])->getGeneBranches().begin();
-		for (;
 				branchIt
 						!= ((Morphogene*) mGenes[geneIndex])->getGeneBranches().end();
 				branchIt++) {
