@@ -1,5 +1,5 @@
-#ifndef CONTROLCONFIGURATION_H_
-#define CONTROLCONFIGURATION_H_
+#ifndef CONFIGURATION_CONTROLCONFIGURATION_H_
+#define CONFIGURATION_CONTROLCONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -34,4 +34,4 @@ public:
 	static const double CPG_SINE_INITIAL_MAX_FREQUENCY = 1; // Hz
 };
 
-#endif /* CONTROLCONFIGURATION_H_ */
+#endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */

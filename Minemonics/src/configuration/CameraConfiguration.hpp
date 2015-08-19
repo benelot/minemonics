@@ -1,5 +1,5 @@
-#ifndef CAMERACONFIGURATION_H_
-#define CAMERACONFIGURATION_H_
+#ifndef CONFIGURATION_CAMERACONFIGURATION_H_
+#define CONFIGURATION_CAMERACONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -45,4 +45,4 @@ public:
 
 };
 
-#endif /* CAMERACONFIGURATION_H_ */
+#endif /* CONFIGURATION_CAMERACONFIGURATION_H_ */

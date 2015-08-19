@@ -1,5 +1,5 @@
-#ifndef OGRESYSTEMCONFIGSTRINGS_H_
-#define OGRESYSTEMCONFIGSTRINGS_H_
+#ifndef CONFIGURATION_OGRESYSTEMCONFIGSTRINGS_H_
+#define CONFIGURATION_OGRESYSTEMCONFIGSTRINGS_H_
 
 
 //# corresponding headers
@@ -42,4 +42,4 @@ const Ogre::UTFString OgreConf::GAMMA_CONV("sRGB Gamma Conversion");
 const std::string OgreConf::YES = "Yes";
 const std::string OgreConf::NO = "No";
 
-#endif /* OGRESYSTEMCONFIGSTRINGS_H_ */
+#endif /* CONFIGURATION_OGRESYSTEMCONFIGSTRINGS_H_ */

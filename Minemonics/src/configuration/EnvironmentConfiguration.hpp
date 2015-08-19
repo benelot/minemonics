@@ -1,5 +1,5 @@
-#ifndef ENVIRONMENTCONFIGURATION_H_
-#define ENVIRONMENTCONFIGURATION_H_
+#ifndef CONFIGURATON_ENVIRONMENTCONFIGURATION_H_
+#define CONFIGURATON_ENVIRONMENTCONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -18,7 +18,7 @@
 //## utils headers
 
 /**
- * @brief		Brief
+ * @brief		The configuration of the environment.
  * @details		Details
  * @date		2014-11-17
  * @author		Benjamin Ellenberger
@@ -30,4 +30,4 @@ public:
  static const float AMBIENT_B = 0.35;
 };
 
-#endif /* ENVIRONMENTCONFIGURATION_H_ */
+#endif /* CONFIGURATON_ENVIRONMENTCONFIGURATION_H_ */

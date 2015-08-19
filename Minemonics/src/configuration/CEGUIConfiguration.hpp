@@ -1,5 +1,5 @@
-#ifndef CEGUICONFIGURATION_H_
-#define CEGUICONFIGURATION_H_
+#ifndef CONFIGURATION_CEGUICONFIGURATION_H_
+#define CONFIGURATION_CEGUICONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -49,4 +49,4 @@ public:
 	static const float INFOPANEL_COL2 = 0.5f;
 };
 
-#endif /* CEGUICONFIGURATION_H_ */
+#endif /* CONFIGURATION_CEGUICONFIGURATION_H_ */

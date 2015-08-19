@@ -1,9 +1,11 @@
-#ifndef MORPHOLOGYCONFIGURATION_H_
-#define MORPHOLOGYCONFIGURATION_H_
+#ifndef CONFIGURATION_MORPHOLOGYCONFIGURATION_H_
+#define CONFIGURATION_MORPHOLOGYCONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
 //# system headers
+#include<math.h>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -208,4 +210,4 @@ public:
 	static const double BODY_BRANCH_INITIAL_VAR = 1;
 };
 
-#endif /* MORPHOLOGYCONFIGURATION_H_ */
+#endif /* CONFIGURATION_MORPHOLOGYCONFIGURATION_H_ */

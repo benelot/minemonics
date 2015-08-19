@@ -1,5 +1,5 @@
-#ifndef PHYSICSCONFIGURATION_H_
-#define PHYSICSCONFIGURATION_H_
+#ifndef CONFIGURATION_PHYSICSCONFIGURATION_H_
+#define CONFIGURATION_PHYSICSCONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -144,4 +144,4 @@ public:
 	static const double DISCARDING_STARTS = 0.3;
 };
 
-#endif /* PHYSICSCONFIGURATION_H_ */
+#endif /* CONFIGURATION_PHYSICSCONFIGURATION_H_ */

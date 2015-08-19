@@ -1,5 +1,5 @@
-#ifndef APPLICATIONCONFIGURATION_H_
-#define APPLICATIONCONFIGURATION_H_
+#ifndef CONFIGURATION_APPLICATIONCONFIGURATION_H_
+#define CONFIGURATION_APPLICATIONCONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -34,4 +34,4 @@ public:
 // version.features.bugs-fixed.commit
 const std::string ApplicationConfiguration::APPLICATION_TITLE = "Minemonics - The Origin of Creatures v.0.34.7.347";
 
-#endif /* APPLICATIONCONFIGURATION_H_ */
+#endif /* CONFIGURATION_APPLICATIONCONFIGURATION_H_ */

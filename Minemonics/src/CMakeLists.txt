@@ -471,7 +471,7 @@ set(TESTSRCS
     ## therefore it should never be necessary to include the srcs from view and controller above
     ./model/universe/UniverseModel_test.cpp
     ./model/universe/PlanetModel_test.cpp
-    ./model/universe/evolution/juries/Velocity_test.cpp
+    ./model/universe/evolution/juries/AverageVelocity_test.cpp
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     ./model/universe/evolution/population/creature/genome/GeneBranch_test.cpp
     ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
@@ -855,16 +855,16 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
 # Add test cpp file
-#add_executable(runUnitTests
-#    ${TESTHDRS}
-#    ${TESTSRCS}
-#)
+add_executable(runUnitTests
+    ${TESTHDRS}
+    ${TESTSRCS}
+)
 
 # Link test executable against gtest & gtest_main
-#target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
 
-#add_test(
-#    NAME runUnitTests
-#    COMMAND runUnitTests
-#)
+add_test(
+    NAME runUnitTests
+    COMMAND runUnitTests
+)
  

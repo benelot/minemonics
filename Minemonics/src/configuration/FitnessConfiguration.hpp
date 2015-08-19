@@ -1,5 +1,5 @@
-#ifndef FITNESSCONFIGURATION_H_
-#define FITNESSCONFIGURATION_H_
+#ifndef CONFIGURATION_FITNESSCONFIGURATION_H_
+#define CONFIGURATION_FITNESSCONFIGURATION_H_
 
 //# corresponding headers
 //# forward declarations
@@ -26,4 +26,4 @@ public:
 
 };
 
-#endif /* FITNESSCONFIGURATION_H_ */
+#endif /* CONFIGURATION_FITNESSCONFIGURATION_H_ */
