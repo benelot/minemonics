@@ -194,6 +194,26 @@ public:
 		mInterpenetrationDepth = interpenetrationDepth;
 	}
 
+	const btVector3 getDimensions() const {
+		return mDimensions;
+	}
+
+	void setDimensions(const btVector3 dimensions) {
+		mDimensions = dimensions;
+	}
+
+	const btVector3 getColor() const {
+		return mColor;
+	}
+
+	void setColor(const btVector3 color) {
+		mColor = color;
+	}
+
+	LimbModel::PrimitiveType getType() const {
+		return mType;
+	}
+
 protected:
 
 	/**
@@ -237,6 +257,15 @@ protected:
 
 	LimbModel::PrimitiveType mType;
 
+	/**
+	 * The dimensions of the limb.
+	 */
+	btVector3 mDimensions;
+
+	/**
+	 * The color of the limb.
+	 */
+	btVector3 mColor;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBPHYSICS_HPP_ */

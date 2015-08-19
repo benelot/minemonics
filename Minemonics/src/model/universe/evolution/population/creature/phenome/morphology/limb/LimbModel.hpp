@@ -112,18 +112,8 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 			const LimbModel &limbModel) {
-		return os
-		/**The type of the limb*/
-		<< "LimbModel: Type=" << limbModel.mPrimitiveType
-
-		/**The dimensions of the limb*/
-		<< "/Dimensions=(" << limbModel.mDimensions.x << ","
-				<< limbModel.mDimensions.y << "," << limbModel.mDimensions.z
-				<< ")"
-
-				/**The color of the limb*/
-				<< "/Color=(" << limbModel.mColor.r << "," << limbModel.mColor.b
-				<< "," << limbModel.mColor.g << ")";
+		//TODO: Improve the printout.
+		return os;
 	}
 
 	/**
@@ -138,17 +128,7 @@ public:
 		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel)
 
 		/**The type of the limb*/
-		& BOOST_SERIALIZATION_NVP(mPrimitiveType)
-
-		/**The dimensions of the limb*/
-		& BOOST_SERIALIZATION_NVP(mDimensions.x)
-		& BOOST_SERIALIZATION_NVP(mDimensions.y)
-		& BOOST_SERIALIZATION_NVP(mDimensions.z)
-
-		/**The color of the limb*/
-		& BOOST_SERIALIZATION_NVP(mColor.r)
-		& BOOST_SERIALIZATION_NVP(mColor.g)
-		& BOOST_SERIALIZATION_NVP(mColor.b);
+		& BOOST_SERIALIZATION_NVP(mLimbPhysics);
 	}
 
 	//Accessor methods
@@ -172,17 +152,11 @@ public:
 	 */
 	const Ogre::Quaternion getOrientation() const;
 
-	const Ogre::ColourValue getColor() const {
-		return mColor;
-	}
+	const Ogre::ColourValue getColor() const;
 
-	const PrimitiveType getPrimitiveType() const {
-		return mPrimitiveType;
-	}
+	const PrimitiveType getPrimitiveType() const;
 
-	const Ogre::Vector3 getDimensions() const {
-		return mDimensions;
-	}
+	const Ogre::Vector3 getDimensions() const;
 
 	const int getOwnIndex() const {
 		return mOwnIndex;
@@ -216,20 +190,6 @@ private:
 	 */
 	LimbPhysics* mLimbPhysics;
 
-	/**
-	 * The color of the limb.
-	 */
-	Ogre::ColourValue mColor;
-
-	/**
-	 * The 3D primitive type of the limb.
-	 */
-	PrimitiveType mPrimitiveType;
-
-	/**
-	 * The dimensions of the limb.
-	 */
-	Ogre::Vector3 mDimensions;
 
 	std::vector<Sensor*> mSensors;
 

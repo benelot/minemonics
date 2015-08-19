@@ -113,7 +113,6 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		break;
 	}
 	mLimbEntity->setCastShadows(SimulationManager::getSingleton()->getViewController().doesShowShadows());
-
 }
 
 LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
@@ -155,7 +154,6 @@ void LimbO3D::update(double timeSinceLastTick) {
 			mLimbEntityNode->setOrientation(btq);
 		}
 	}
-
 	mLimbEntity->setCastShadows(SimulationManager::getSingleton()->getViewController().doesShowShadows());
 }
 

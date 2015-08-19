@@ -254,7 +254,7 @@ void Embryogenesis::transcribeMorphogene(
 								* generator->getCurrentShrinkageFactor()
 								* childMorphogene->getZ()),
 				childMorphogene->getRestitution(),
-				childMorphogene->getFriction());
+				childMorphogene->getFriction(), btVector3(0, 0, 0));
 
 		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(

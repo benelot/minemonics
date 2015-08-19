@@ -203,7 +203,10 @@ void SimulationManager::createScene(void) {
 	// either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
 
-	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+	mSceneMgr->setShadowTechnique(
+			(mViewController.doesShowShadows()) ?
+					Ogre::SHADOWTYPE_STENCIL_MODULATIVE :
+					Ogre::SHADOWTYPE_NONE);
 
 	//add some filtering to reduce the moire effect
 	Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(
@@ -327,6 +330,12 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		}
 		return false;
 	}
+
+	//turn on or off the shadows.
+	mSceneMgr->setShadowTechnique(
+			(mViewController.doesShowShadows()) ?
+					Ogre::SHADOWTYPE_STENCIL_MODULATIVE :
+					Ogre::SHADOWTYPE_NONE);
 
 	//#############
 	// Physics handling part

@@ -60,7 +60,7 @@ public:
 			const btVector3 initialRelativePosition,
 			const btQuaternion initialOrientation, const btVector3 dimensions,
 			const btScalar mass, const btScalar restitution,
-			const btScalar friction);
+			const btScalar friction, const btVector3 color);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -176,8 +176,6 @@ private:
 	btDefaultMotionState* mMotionState;
 
 	btRigidBody* mBody;
-
-	btVector3 mDimensions;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

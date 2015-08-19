@@ -71,26 +71,26 @@ void JointModel::update(double timeSinceLastTick) {
 		(*sit)->update(timeSinceLastTick);
 	}
 
-	std::cout << std::endl << "AngleSensors:";
-	for (std::vector<JointAngleProprioceptor*>::iterator tit = mAngleceptors.begin();
-			tit != mAngleceptors.end(); tit++) {
-		std::cout << (*tit)->getAngle() << "|";
-	}
-	std::cout << std::endl;
-
-	std::cout << std::endl << "ForceSensors:";
-	for (std::vector<JointForceProprioceptor*>::iterator tit = mForceceptors.begin();
-			tit != mForceceptors.end(); tit++) {
-		std::cout << (*tit)->getForce() << "|";
-	}
-	std::cout << std::endl;
-
-	std::cout << std::endl << "LimitSensors:";
-	for (std::vector<JointLimitProprioceptor*>::iterator tit = mLimitceptors.begin();
-			tit != mLimitceptors.end(); tit++) {
-		std::cout << (*tit)->getLimitError() << "|";
-	}
-	std::cout << std::endl;
+//	std::cout << std::endl << "AngleSensors:";
+//	for (std::vector<JointAngleProprioceptor*>::iterator tit = mAngleceptors.begin();
+//			tit != mAngleceptors.end(); tit++) {
+//		std::cout << (*tit)->getAngle() << "|";
+//	}
+//	std::cout << std::endl;
+//
+//	std::cout << std::endl << "ForceSensors:";
+//	for (std::vector<JointForceProprioceptor*>::iterator tit = mForceceptors.begin();
+//			tit != mForceceptors.end(); tit++) {
+//		std::cout << (*tit)->getForce() << "|";
+//	}
+//	std::cout << std::endl;
+//
+//	std::cout << std::endl << "LimitSensors:";
+//	for (std::vector<JointLimitProprioceptor*>::iterator tit = mLimitceptors.begin();
+//			tit != mLimitceptors.end(); tit++) {
+//		std::cout << (*tit)->getLimitError() << "|";
+//	}
+//	std::cout << std::endl;
 }
 
 void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,

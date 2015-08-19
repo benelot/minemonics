@@ -46,7 +46,7 @@ LimbBt::LimbBt(const LimbBt& limbBt) {
 			btQuaternion(limbBt.mInitialXOrientation,
 					limbBt.mInitialYOrientation, limbBt.mInitialZOrientation,
 					limbBt.mInitialWOrientation), limbBt.mDimensions,
-			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction);
+			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,limbBt.mColor);
 
 	mInWorld = limbBt.mInWorld;
 }
@@ -61,7 +61,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 		const btQuaternion orientation, const btVector3 initialRelativePosition,
 		const btQuaternion initialOrientation, const btVector3 dimensions,
 		const btScalar mass, const btScalar restitution,
-		const btScalar friction) {
+		const btScalar friction,const btVector3 color) {
 	mWorld = world;
 	mDimensions = dimensions;
 	mMass = mass;
@@ -129,6 +129,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	mInitialXOrientation = initialOrientation.getX();
 	mInitialYOrientation = initialOrientation.getY();
 	mInitialZOrientation = initialOrientation.getZ();
+	mColor = color;
 }
 
 btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
