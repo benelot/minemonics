@@ -3,6 +3,11 @@
 
 //# corresponding header
 //# forward declarations
+namespace Ogre {
+class Quaternion;
+class Vector3;
+} /* namespace Ogre */
+
 //# system headers
 //## controller headers
 //## model headers
@@ -17,6 +22,9 @@
 //## model headers
 //## view headers
 //## utils headers
+
+
+
 
 /**
  * @brief		The randomness class abstracts the randomness used in this program, making it easier to change it if necessary.
@@ -84,6 +92,10 @@ public:
 	 * @return The normally distributed boolean.
 	 */
 	bool nextNormalBoolean(double mean, double variance);
+
+	Ogre::Vector3 nextVector();
+
+	Ogre::Quaternion nextQuaternion();
 
 	static Randomness* getSingleton(){
 		return mRandomness;

@@ -5,9 +5,12 @@
 //## model headers
 #include <boost/random/uniform_real_distribution.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
+#include <boost/math/constants/constants.hpp>
 #include <boost/math/special_functions/round.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <OgreVector3.h>
+#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
@@ -54,8 +57,7 @@ double Randomness::nextUnifDouble(double lowerLimit, double upperLimit) {
 int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
 	if (upperLimit <= 0) {
 		return 0;
-	}
-	else if(lowerLimit == upperLimit){
+	} else if (lowerLimit == upperLimit) {
 		return lowerLimit;
 	}
 
@@ -150,4 +152,45 @@ bool Randomness::nextNormalBoolean(double mean, double variance) {
 	}
 
 	return result;
+}
+
+Ogre::Vector3 Randomness::nextVector() {
+	double theta = nextUnifDouble(0.0,
+			2 * boost::math::constants::pi<double>());
+
+	double rawX = sin(theta);
+
+	double rawY = cos(theta);
+
+	double z = nextUnifDouble(-1.0, 1.0);
+
+	double phi = asin(z);
+
+	double scalar = cos(phi);
+
+	double x = rawX * scalar;
+
+	double y = rawY * scalar;
+
+	return Ogre::Vector3(x, y, z);
+}
+
+Ogre::Quaternion Randomness::nextQuaternion() {
+	Ogre::Vector3 v = nextVector();
+
+	double x = v.x;
+
+	double y = v.y;
+
+	double z = v.z;
+
+	double theta = nextUnifDouble(0.0,
+			2 * boost::math::constants::pi<double>());
+
+	double cosTheta = cos(theta);
+
+	double sinTheta = sin(theta);
+
+	return Ogre::Quaternion(cosTheta, x * sinTheta, y * sinTheta,
+			z * sinTheta);
 }
