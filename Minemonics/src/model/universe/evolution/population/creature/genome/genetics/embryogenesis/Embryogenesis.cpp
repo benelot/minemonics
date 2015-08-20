@@ -35,6 +35,7 @@
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
@@ -100,9 +101,13 @@ void Embryogenesis::transcribeMorphogene(
 	// joint position in local reference frame of the parent
 	Ogre::Vector3 localParentJointInRefParent(0, 0, 0);
 
+	btTransform parentHitTransform;
+
 	//CHILD
 	// get the morphogene and start creating the limb and its joint to its parent
 	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
+
+	btTransform childHitTransform;
 
 	// joint position in local reference frame of the child
 	Ogre::Vector3 localChildJointInRefChild(0, 0, 0);
@@ -169,13 +174,14 @@ void Embryogenesis::transcribeMorphogene(
 
 		// add parent limb to world
 		parentLimb->addToWorld();
+		parentHitTransform = parentLimb->getLocalIntersection(
+		/*origin of limb parent*/
+		OgreBulletUtils::convert(parentLimbCOM),
+		/*direction of anchor of limb parent*/
+		OgreBulletUtils::convert(localParentAnchorDirInRefParent));
 		//get surface point of the parent limb in reference frame itself
 		Ogre::Vector3 localParentAnchorInRefParent(
-				parentLimb->getLocalIntersection(
-				/*origin of limb parent*/
-				OgreBulletUtils::convert(parentLimbCOM),
-				/*direction of anchor of limb parent*/
-				OgreBulletUtils::convert(localParentAnchorDirInRefParent)));
+				OgreBulletUtils::convert(parentHitTransform.getOrigin()));
 
 		// remove parent limb from world
 		parentLimb->removeFromWorld();
@@ -221,14 +227,14 @@ void Embryogenesis::transcribeMorphogene(
 		childLimbBt->initialize(
 				phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 				NULL, childMorphogene->getPrimitiveType(),
-				OgreBulletUtils::convert(generator->getPosition()),
+				generator->getPosition(),
 				btQuaternion(childMorphogene->getOrientationX(),
 						childMorphogene->getOrientationY(),
 						childMorphogene->getOrientationZ(),
 						childMorphogene->getOrientationW()), btVector3(),
 				btQuaternion(),
 				/*size*/
-				btVector3(
+				Ogre::Vector3(
 						generator->getCurrentShrinkageFactor()
 								* childMorphogene->getX(),
 						generator->getCurrentShrinkageFactor()
@@ -244,7 +250,7 @@ void Embryogenesis::transcribeMorphogene(
 								* generator->getCurrentShrinkageFactor()
 								* childMorphogene->getZ()),
 				childMorphogene->getRestitution(),
-				childMorphogene->getFriction(), btVector3(0, 0, 0));
+				childMorphogene->getFriction(), Ogre::ColourValue(0, 0, 0));
 
 		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(
@@ -255,13 +261,14 @@ void Embryogenesis::transcribeMorphogene(
 		// add child limb to world
 		childLimbBt->addToWorld();
 
+		childHitTransform = childLimbBt->getLocalIntersection(
+		/*origin of child limb*/
+		OgreBulletUtils::convert(generator->getPosition()),
+		/*direction of anchor of child limb*/
+		OgreBulletUtils::convert(localChildAnchorDirInRefChild));
 		//get the surface point of child limb in the local reference frame of itself
 		Ogre::Vector3 localChildAnchorInRefChild(
-				OgreBulletUtils::convert(childLimbBt->getLocalIntersection(
-				/*origin of child limb*/
-				OgreBulletUtils::convert(generator->getPosition()),
-				/*direction of anchor of child limb*/
-				OgreBulletUtils::convert(localChildAnchorDirInRefChild))));
+				OgreBulletUtils::convert(childHitTransform.getOrigin()));
 
 		// remove child limb from world
 		childLimbBt->removeFromWorld();
@@ -396,6 +403,8 @@ void Embryogenesis::transcribeMorphogene(
 		// define the position and direction of the joint in the reference frame of the parent
 		localParentJointTransform.setOrigin(
 				OgreBulletUtils::convert(localParentJointInRefParent));
+		localParentJointTransform.getBasis().setRotation(
+				parentHitTransform.getRotation());
 		localParentJointTransform.getBasis().setEulerYPR(
 				parentMorphogeneBranch->getJointYaw(),
 				parentMorphogeneBranch->getJointPitch(),
@@ -404,6 +413,10 @@ void Embryogenesis::transcribeMorphogene(
 		// define the position and direction of the joint in the reference frame of child
 		localChildJointTransform.setOrigin(
 				OgreBulletUtils::convert(localChildJointInRefChild));
+		//set the direction of the joint normals
+		localChildJointTransform.getBasis().setRotation(
+				childHitTransform.getRotation());
+		//correct the direction of the joint by some random rotation
 		localChildJointTransform.getBasis().setEulerYPR(
 				childMorphogene->getJointYaw(),
 				childMorphogene->getJointPitch(),
@@ -438,14 +451,14 @@ void Embryogenesis::transcribeMorphogene(
 						parentMorphogeneBranch->getJointMaxRollForce()));
 
 		//TODO: Quick controller hack
-//		for (std::vector<Motor*>::const_iterator motorIterator =
-//				joint->getMotors().begin();
-//				motorIterator != joint->getMotors().end(); motorIterator++) {
-//			SineController* controller = new SineController();
-//			controller->initialize(0.5f, 0.1f, 0, 0.5f);
-//			controller->addControlOutput((*motorIterator));
-//			phenomeModel->getControllers().push_back(controller);
-//		}
+		for (std::vector<Motor*>::const_iterator motorIterator =
+				joint->getMotors().begin();
+				motorIterator != joint->getMotors().end(); motorIterator++) {
+			SineController* controller = new SineController();
+			controller->initialize(0.5f, 0.1f, 0, 0.5f);
+			controller->addControlOutput((*motorIterator));
+			phenomeModel->getControllers().push_back(controller);
+		}
 
 		SineController* controller = new SineController();
 		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),

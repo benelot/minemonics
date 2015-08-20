@@ -26,8 +26,8 @@ JointForceProprioceptor::~JointForceProprioceptor() {
 }
 
 void JointForceProprioceptor::update(double timeSinceLastTick) {
-	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
+//	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
 	//TODO: This is not the correct force, but only the maximum force
 	//http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=9&t=10759
-	setForce(motor->m_maxMotorForce);
+//	setForce(motor->m_maxMotorForce);
 }

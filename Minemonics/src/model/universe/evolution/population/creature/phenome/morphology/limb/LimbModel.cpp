@@ -14,7 +14,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
@@ -40,8 +39,9 @@ LimbModel::~LimbModel() {
 }
 
 void LimbModel::initialize(btDynamicsWorld* const world,
-		CreatureModel* const creatureModel, const PrimitiveType type,
-		const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+		CreatureModel* const creatureModel,
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
 		const Ogre::Quaternion initialOrientation,
 		const Ogre::Vector3 dimensions, const double mass,
@@ -52,14 +52,11 @@ void LimbModel::initialize(btDynamicsWorld* const world,
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
-	((LimbBt*) mLimbPhysics)->initialize(world, this, type,
-			OgreBulletUtils::convert(position),
+	((LimbBt*) mLimbPhysics)->initialize(world, this, type, position,
 			OgreBulletUtils::convert(orientation),
 			OgreBulletUtils::convert(initialRelativePosition),
-			OgreBulletUtils::convert(initialOrientation),
-			OgreBulletUtils::convert(dimensions), btScalar(mass),
-			btScalar(restitution), btScalar(friction),
-			OgreBulletUtils::convert(color));
+			OgreBulletUtils::convert(initialOrientation), dimensions,
+			btScalar(mass), btScalar(restitution), btScalar(friction), color);
 
 	mCreatureModel = creatureModel;
 
@@ -154,19 +151,22 @@ void LimbModel::setInterpenetrationDepth(double interpenetrationDepth) {
 	mLimbPhysics->setInterpenetrationDepth(interpenetrationDepth);
 }
 
+void LimbModel::calm() {
+	mLimbPhysics->calm();
+}
+
 double LimbModel::getInterpenetrationDepth() {
 	return mLimbPhysics->getInterpenetrationDepth();
 }
 
 const Ogre::ColourValue LimbModel::getColor() const {
-	return Ogre::ColourValue(mLimbPhysics->getColor().x(),
-			mLimbPhysics->getColor().y(), mLimbPhysics->getColor().z());
+	return mLimbPhysics->getColor();
 }
 
-const LimbModel::PrimitiveType LimbModel::getPrimitiveType() const {
+const LimbPhysics::PrimitiveType LimbModel::getPrimitiveType() const {
 	return mLimbPhysics->getType();
 }
 
 const Ogre::Vector3 LimbModel::getDimensions() const {
-	return OgreBulletUtils::convert(mLimbPhysics->getDimensions());
+	return mLimbPhysics->getDimensions();
 }

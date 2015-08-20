@@ -58,7 +58,7 @@ RagDoll::RagDoll(Population* const population, double size,
 	btTransform transform;
 	btTransform localA, localB;
 
-	LimbModel::PrimitiveType type = LimbModel::CAPSULE;
+	LimbPhysics::PrimitiveType type = LimbPhysics::CAPSULE;
 
 	bool attachHead = true;
 	bool enableMotor = true;

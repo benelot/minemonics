@@ -122,6 +122,13 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 
 }
 
+void PhenomeModel::calm(){
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+				lit != mLimbModels.end(); lit++) {
+			(*lit)->calm();
+		}
+}
+
 int PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {

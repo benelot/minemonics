@@ -29,6 +29,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/ogre3D/Euler.hpp>
 
 LimbBt::LimbBt() :
 		LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
@@ -38,7 +39,7 @@ LimbBt::LimbBt() :
 LimbBt::LimbBt(const LimbBt& limbBt) {
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
 	initialize(limbBt.mWorld, limbBt.mCollisionShape->getUserPointer(),
-			limbBt.mType, startTransform.getOrigin(),
+			limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
 			startTransform.getRotation(),
 			btVector3(limbBt.mInitialRelativeXPosition,
 					limbBt.mInitialRelativeYPosition,
@@ -57,26 +58,26 @@ LimbBt::~LimbBt() {
 }
 
 void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
-		const LimbModel::PrimitiveType type, const btVector3 position,
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 		const btQuaternion orientation, const btVector3 initialRelativePosition,
-		const btQuaternion initialOrientation, const btVector3 dimensions,
+		const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
 		const btScalar mass, const btScalar restitution,
-		const btScalar friction, const btVector3 color) {
+		const btScalar friction, const Ogre::ColourValue color) {
 	mWorld = world;
 	mDimensions = dimensions;
 	mMass = mass;
 	mType = type;
-	btVector3 HalfExtents(dimensions.x() * 0.5f, dimensions.y() * 0.5f,
-			dimensions.z() * 0.5f);
+	btVector3 halfExtents(dimensions.x * 0.5f, dimensions.y * 0.5f,
+			dimensions.z * 0.5f);
 	switch (type) {
-	case LimbModel::BLOCK:
-		mCollisionShape = new btBoxShape(HalfExtents);
+	case LimbPhysics::BLOCK:
+		mCollisionShape = new btBoxShape(halfExtents);
 		break;
-	case LimbModel::CAPSULE:
-		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x() * 0.5f),
-				btScalar(dimensions.y()));
+	case LimbPhysics::CAPSULE:
+		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x * 0.5f),
+				btScalar(dimensions.y));
 		break;
-	case LimbModel::UNKNOWN:
+	case LimbPhysics::UNKNOWN:
 		std::cout << "##########################################\n"
 				<< " LimbBt received 'Unknown' as a limb type.\n"
 				<< "##########################################\n";
@@ -90,7 +91,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	// position the limb in the world
 	btTransform startTransform;
 	startTransform.setIdentity();
-	startTransform.setOrigin(position);
+	startTransform.setOrigin(OgreBulletUtils::convert(position));
 	startTransform.setRotation(orientation);
 
 	mMotionState = new btDefaultMotionState(startTransform);
@@ -116,6 +117,8 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 			mCollisionShape->getAnisotropicRollingFrictionDirection(),
 			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
+	calm();
+
 	//Set user pointer for proper return of creature/limb information etc..
 	mBody->setUserPointer(limbModel);
 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
@@ -132,11 +135,11 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	mColor = color;
 }
 
-btVector3 LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
+btTransform LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 	return getPreciseIntersection(origin, direction);
 }
 
-btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
+btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 		const btVector3 direction) {
 	// the ray caster currently only finds the intersection
 	// when hitting the forward face of a triangle therefore,
@@ -152,6 +155,7 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 //			rayEnd, btVector3(1, 1, 0));
 
 	btVector3 hitPosition = origin;
+	btVector3 hitNormal = btVector3(1,0,0);
 
 	btCollisionWorld::ClosestRayResultCallback rayCallback(rayStart, rayEnd);
 
@@ -178,12 +182,12 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 //	}
 
 	if (rayCallback.hasHit()) {
-		btVector3 p = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
+		hitPosition = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
+		hitNormal = rayCallback.m_hitNormalWorld;
 //		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
 //				btVector3(1, 0, 0));
 //		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
 //				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
-		hitPosition = p;
 //		std::cout
 //				<< "############################################################\n"
 //				<< "hit an object!\n" << rayStart.x() << ",\t" << rayStart.y()
@@ -205,7 +209,13 @@ btVector3 LimbBt::getPreciseIntersection(const btVector3 origin,
 		//no hit
 	}
 
-	return hitPosition;
+	btTransform hitTransform;
+	hitTransform.setIdentity();
+	hitTransform.setOrigin(hitPosition);
+	Ogre::Euler euler(0,0,0);
+	euler.direction(OgreBulletUtils::convert(hitNormal));
+	hitTransform.setRotation(OgreBulletUtils::convert(euler.toQuaternion()));
+	return hitTransform;
 }
 
 btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
@@ -213,15 +223,13 @@ btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
 	return mDimensions.length() / 2.0f * direction.normalized();
 }
 
-btVector3 LimbBt::getLocalIntersection(const btVector3 origin,
+btTransform LimbBt::getLocalIntersection(const btVector3 origin,
 		const btVector3 direction) {
-	// for the moment we fake the local intersection point until the real intersection can be calculated
-	btVector3 intersection = getLocalPreciseIntersection(origin, direction);
-	if (intersection.isZero()) {
-		return getLocalFakeIntersection(origin, direction);
-	} else {
-		return intersection;
+	btTransform intersection = getLocalPreciseIntersection(origin, direction);
+	if (intersection.getOrigin().isZero()) {
+		intersection.setOrigin(getLocalFakeIntersection(origin, direction));
 	}
+	return intersection;
 }
 
 void LimbBt::reset(const Ogre::Vector3 position) {
@@ -266,9 +274,11 @@ void LimbBt::reposition(const Ogre::Vector3 position) {
 	mMotionState->setWorldTransform(initialTransform);
 }
 
-btVector3 LimbBt::getLocalPreciseIntersection(const btVector3 origin,
+btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 		const btVector3 direction) {
-	return getPreciseIntersection(origin, direction) - origin;
+	btTransform transform = getPreciseIntersection(origin, direction);
+	transform.setOrigin(transform.getOrigin()-origin);
+	return transform;
 }
 
 void LimbBt::addToWorld() {
@@ -292,4 +302,11 @@ void LimbBt::removeFromWorld() {
 
 LimbBt* LimbBt::clone() {
 	return new LimbBt(*this);
+}
+
+void LimbBt::calm() {
+	mBody->clearForces();
+	btVector3 zeroVector(0,0,0);
+	mBody->setLinearVelocity(zeroVector);
+	mBody->setAngularVelocity(zeroVector);
 }

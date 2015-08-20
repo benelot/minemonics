@@ -155,7 +155,7 @@ public:
 
 	static const double JOINT_MIN_FREQUENCY = 0.1;
 
-	static const double JOINT_MAX_FREQUENCY = 5;
+	static const double JOINT_MAX_FREQUENCY = 2;
 
 	static const double JOINT_MIN_AMPLITUDE = 0;
 

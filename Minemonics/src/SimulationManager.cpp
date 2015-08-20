@@ -184,8 +184,8 @@ void SimulationManager::createScene(void) {
 	mDebugDrawer.initialize(mSceneMgr, false);
 	mDebugDrawer.setDebugDrawingEnabled(false);
 	mDebugDrawer.setDrawWireframe(true);
-	mDebugDrawer.setDrawConstraints(false);
-	mDebugDrawer.setDrawConstraintLimits(false);
+	mDebugDrawer.setDrawConstraints(true);
+	mDebugDrawer.setDrawConstraintLimits(true);
 	mDebugDrawer.setDrawContactPoints(false);
 	mDebugDrawer.setDrawNormals(false);
 
@@ -239,7 +239,7 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, 20, mSun);
+	Planet* earth = new Planet(Environment::PLANE, 2000, mSun);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);

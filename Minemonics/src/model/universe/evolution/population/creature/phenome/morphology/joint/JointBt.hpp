@@ -27,14 +27,17 @@ class Motor;
 //## utils headers
 
 //comment this out to compare with original spring constraint
-#define USE_6DOF2
-#ifdef USE_6DOF2
-#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
+#define CONSTRAINT_TYPE btConeTwistConstraint
 #define EXTRAPARAMS
-#else
-#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-#define EXTRAPARAMS ,true
-#endif
+//#define CONSTRAINT_TYPE btPoint2PointConstraint
+//#define EXTRAPARAMS
+//#define CONSTRAINT_TYPE btGeneric6DofConstraint
+//#define EXTRAPARAMS ,true
+//#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
+//#define EXTRAPARAMS
+//#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
+//#define EXTRAPARAMS ,true
+
 
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
@@ -147,65 +150,22 @@ public:
 
 	//Accessor methods
 
-	void setLinearLimits(const btVector3 linearLowerLimit,
-			const btVector3 linearUpperLimit) {
-		mG6DofJoint->setLinearLowerLimit(linearLowerLimit);
-		mG6DofJoint->setLinearUpperLimit(linearUpperLimit);
-
+	void setLimits(const Ogre::Vector3 limits) {
+		setLimits(OgreBulletUtils::convert(limits));
 	}
 
-	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-			const Ogre::Vector3 angularUpperLimit) {
-		setAngularLimits(OgreBulletUtils::convert(angularLowerLimit),
-				OgreBulletUtils::convert(angularUpperLimit));
+	void setLimit(JointPhysics::RotationalDegreeOfFreedom dof,
+			const double limit) {
+		mJoint->setLimit(dof, limit);
 	}
 
-	void setAngularLimit(JointPhysics::DegreeOfFreedom dof,
-			const double lowerLimit, const double upperLimit) {
-		mG6DofJoint->setLimit(dof, lowerLimit, upperLimit);
+	void setLimits(const btVector3 limits) {
+		mJoint->setLimit(limits.x(),limits.y(),limits.z());
 	}
 
-	void setAngularLimits(const btVector3 angularLowerLimit,
-			const btVector3 angularUpperLimit) {
-		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
-		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
-	}
-
-	void setAngularStiffness(const double jointPitchStiffness,
-			const double jointYawStiffness, const double jointRollStiffness) {
-		setJointStiffness(JointPhysics::DOF_PITCH, jointPitchStiffness);
-		setJointStiffness(JointPhysics::DOF_YAW, jointYawStiffness);
-		setJointStiffness(JointPhysics::DOF_ROLL, jointRollStiffness);
-	}
-
-	void setAngularDamping(const double springPitchDampingCoefficient,
-			const double springYawDampingCoefficient,
-			const double springRollDampingCoefficient) {
-		setSpringDampingCoefficient(JointPhysics::DOF_PITCH,
-				springPitchDampingCoefficient);
-		setSpringDampingCoefficient(JointPhysics::DOF_YAW,
-				springYawDampingCoefficient);
-		setSpringDampingCoefficient(JointPhysics::DOF_ROLL,
-				springRollDampingCoefficient);
-	}
 
 	void setBreakingThreshold(const double breakingThreshold) {
-		mG6DofJoint->setBreakingImpulseThreshold(breakingThreshold);
-	}
-
-	void setJointStiffness(const JointPhysics::DegreeOfFreedom index,
-			const double stiffness) {
-		mG6DofJoint->setStiffness(index, stiffness);
-	}
-
-	void enableSpring(const JointPhysics::DegreeOfFreedom index,
-			const bool enable) {
-		mG6DofJoint->enableSpring(index, enable);
-	}
-
-	void setSpringDampingCoefficient(const JointPhysics::DegreeOfFreedom index,
-			const double damping) {
-		mG6DofJoint->setDamping(index, damping);
+		mJoint->setBreakingImpulseThreshold(breakingThreshold);
 	}
 
 	void setRotationalLimitMotorEnabled(
@@ -214,45 +174,49 @@ public:
 
 	bool isRotationalLimitMotorEnabled(
 			const JointPhysics::RotationalDegreeOfFreedom index) {
-		return mG6DofJoint->getRotationalLimitMotor(index)->m_enableMotor;
+		return true;
+//		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
 	void setTargetRotationalVelocity(
 			JointPhysics::RotationalDegreeOfFreedom index,
 			double targetVelocity) {
-#ifdef USE_6DOF2
-		mG6DofJoint->setTargetVelocity(2 + index, targetVelocity);
-#else
-		mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
-#endif
+//		mJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
 	}
 
 	double getTargetRotationalVelocity(
 			const JointPhysics::RotationalDegreeOfFreedom index) {
-		return mG6DofJoint->getRotationalLimitMotor(index)->m_targetVelocity;
+		return 0;
+//		return mJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
 	void setMaxRotationalForce(
 			const JointPhysics::RotationalDegreeOfFreedom index,
 			const double maxMotorForce) {
-#ifdef USE_6DOF2
-		mG6DofJoint->setMaxMotorForce(2 + index, maxMotorForce);
-#else
-		mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce = maxMotorForce;
-#endif
+//		mJoint->setMaxMotorImpulse(maxMotorForce);
+
 	}
 
 	double getMaxRotationalForce(
 			const JointPhysics::RotationalDegreeOfFreedom index) {
-		return mG6DofJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
+		return 0;
+//		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 
-	CONSTRAINT_TYPE* getG6DofJoint() {
-		return mG6DofJoint;
+	CONSTRAINT_TYPE* getJoint() {
+		return mJoint;
 	}
 
 	const std::vector<Motor*>& getMotors() const {
 		return mMotors;
+	}
+
+	const btQuaternion& getMotorTarget() const {
+		return mMotorTarget;
+	}
+
+	void setMotorTarget(const btQuaternion motorTarget) {
+		mMotorTarget = motorTarget;
 	}
 
 private:
@@ -260,7 +224,7 @@ private:
 	/**
 	 * The 6 Degrees of freedom joint that is used as a physical model.
 	 */
-	CONSTRAINT_TYPE* mG6DofJoint;
+	CONSTRAINT_TYPE* mJoint;
 
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.
@@ -272,6 +236,8 @@ private:
 	 * Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
 	 */
 	std::vector<Motor*> mMotors;
+
+	btQuaternion mMotorTarget;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

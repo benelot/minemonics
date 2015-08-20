@@ -87,6 +87,8 @@ public:
 	 */
 	virtual void removeFromWorld();
 
+	void calm();
+
 	// Facade accessor methods
 	void setPosition(const Ogre::Vector3 position) {
 		mCreatureModel->setPosition(position);

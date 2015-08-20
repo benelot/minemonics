@@ -120,6 +120,8 @@ public:
 		return totalVolume;
 	}
 
+	void calm();
+
 	bool hasInterpenetrations(){
 		return mPhenotypeModel.hasInterpenetrations();
 	}
@@ -271,7 +273,7 @@ public:
 		/**The genome of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mGenotype)
 
-//		& BOOST_SERIALIZATION_NVP(mPhenotypeModel)
+		& BOOST_SERIALIZATION_NVP(mPhenotypeModel)
 
 		/**The juries of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mJuries)

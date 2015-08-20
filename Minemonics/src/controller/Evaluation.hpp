@@ -120,6 +120,8 @@ private:
 	unsigned long int mStart;
 
 	bool mHasFailed;
+
+	bool mOnce;
 };
 
 #endif /* CONTROLLER_EVALUATION_HPP_ */

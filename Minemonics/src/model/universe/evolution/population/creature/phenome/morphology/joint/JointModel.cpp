@@ -98,20 +98,20 @@ void JointModel::update(double timeSinceLastTick) {
 
 void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {
-	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);
+	mJointPhysics->setLimits(angularUpperLimit);
 }
 
 void JointModel::setAngularStiffness(const double jointPitchStiffness,
 		const double jointYawStiffness, const double jointRollStiffness) {
-	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-			jointRollStiffness);
+//	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
+//			jointRollStiffness);
 }
 
 void JointModel::setAngularDamping(const double springPitchDampingCoefficient,
 		double springYawDampingCoefficient,
 		double springRollDampingCoefficient) {
-	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-			springYawDampingCoefficient, springRollDampingCoefficient);
+//	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
+//			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 bool JointModel::equals(const JointModel& jointModel) const {

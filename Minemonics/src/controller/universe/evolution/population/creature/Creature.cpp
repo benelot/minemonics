@@ -111,3 +111,7 @@ void Creature::removeFromWorld() {
 void Creature::processJuries() {
 	mCreatureModel->processJuries();
 }
+
+void Creature::calm() {
+	mCreatureModel->calm();
+}

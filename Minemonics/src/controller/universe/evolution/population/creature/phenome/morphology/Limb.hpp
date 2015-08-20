@@ -65,7 +65,7 @@ public:
 	 * @param color The color of the limb.
 	 * @param ownIndex The limb's own index in the array of limbs.
 	 */
-	void initialize(Creature* const creature, const LimbModel::PrimitiveType type,
+	void initialize(Creature* const creature, const LimbPhysics::PrimitiveType type,
 			const Ogre::Vector3 position, const Ogre::Quaternion orientation,
 			const Ogre::Vector3 initialRelativePosition,
 			const Ogre::Quaternion initialOrientation, const Ogre::Vector3 size,

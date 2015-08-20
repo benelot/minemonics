@@ -139,11 +139,14 @@ public:
 	static const int CREATURE_TESTRAY_COLLIDES_WITH = COL_CREATURE;
 	static const int GROUND_TESTRAY_COLLIDES_WITH = COL_GROUND;
 
-	static const double PENETRATION_THRESHOLD = -1e-3;
+	static const double PENETRATION_THRESHOLD = -50000;//-1e-3;
 
-	static const double DISCARDING_STARTS = 0.3;
+	static const double FORCE_THRESHOLD = 1e6;
+	static const double TORQUE_THRESHOLD = 1e6;
 
-	static const bool NO_INTRACOLLISION = false;
+	static const double DISCARDING_STARTS = 0.1;
+
+	static const bool NO_INTRACOLLISION = true;
 };
 
 #endif /* CONFIGURATION_PHYSICSCONFIGURATION_H_ */

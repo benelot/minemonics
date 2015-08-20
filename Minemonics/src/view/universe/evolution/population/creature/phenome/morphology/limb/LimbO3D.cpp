@@ -78,7 +78,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	mLimbEntityNode =
 			SimulationManager::getSingleton()->getSceneManager()->createSceneNode();
 	switch (limbModel->getPrimitiveType()) {
-	case LimbModel::BLOCK:
+	case LimbPhysics::BLOCK:
 
 		tex->setTextureScale(4, 4);
 		material->load();
@@ -97,7 +97,7 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 				limbModel->getDimensions().z
 						* PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR);
 		break;
-	case LimbModel::CAPSULE:
+	case LimbPhysics::CAPSULE:
 
 		material->load();
 		// capsule does not need to be scaled, it is exactly one to one as it seems.

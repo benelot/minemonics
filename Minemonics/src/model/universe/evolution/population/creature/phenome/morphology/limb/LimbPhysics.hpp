@@ -10,15 +10,20 @@ class access;
 } /* namespace boost */
 class btQuaternion;
 class btVector3;
+class btTransform;
 
 //# system headers
 #include <iostream>
 
 //## controller headers
 //## model headers
-#include <boost/serialization/nvp.hpp>
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
+#include <OgreColourValue.h>
 
 //## view headers
 //# custom headers
@@ -26,8 +31,6 @@ class btVector3;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-
 //## view headers
 //## utils headers
 
@@ -39,6 +42,13 @@ class btVector3;
  */
 class LimbPhysics {
 public:
+	/**
+	 * Primitive type of a limb
+	 */
+	enum PrimitiveType {
+		UNKNOWN = 0, BLOCK = 2, CAPSULE = 1, NUM_PRIMITIVES
+	};
+
 	LimbPhysics();
 	virtual ~LimbPhysics();
 
@@ -58,17 +68,18 @@ public:
 	 */
 	virtual void reposition(Ogre::Vector3 position) = 0;
 
+	virtual void calm() = 0;
 	/**
 	 * Add the limb to the physical world.
 	 */
-	virtual void addToWorld(){
+	virtual void addToWorld() {
 		mInWorld = true;
 	}
 
 	/**
 	 * Remove the limb from the physical world.
 	 */
-	virtual void removeFromWorld(){
+	virtual void removeFromWorld() {
 		mInWorld = false;
 	}
 
@@ -78,7 +89,7 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 */
-	virtual btVector3 getIntersection(btVector3 origin,
+	virtual btTransform getIntersection(btVector3 origin,
 			btVector3 direction) = 0;
 
 	/**
@@ -87,7 +98,7 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
 	 */
-	virtual btVector3 getLocalIntersection(btVector3 origin,
+	virtual btTransform getLocalIntersection(btVector3 origin,
 			btVector3 direction) = 0;
 
 	/**
@@ -96,7 +107,7 @@ public:
 	 * @param direction The direction of the ray.
 	 * @return The precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
 	 */
-	virtual btVector3 getLocalPreciseIntersection(btVector3 origin,
+	virtual btTransform getLocalPreciseIntersection(btVector3 origin,
 			btVector3 direction) = 0;
 
 	/**
@@ -105,30 +116,6 @@ public:
 	 * @return If the limb physics  model is equal to the other limb physics  model.
 	 */
 	bool equals(const LimbPhysics & limbPhysics) const;
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the limb physics model to a string.
-	 * @param os The ostream.
-	 * @param limbPhysics The limb physics model we want to serialize.
-	 * @return A string containing all information about the limb physics model.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const LimbPhysics &limbPhysics) {
-		return os
-		/**If the limb physics is in the world*/
-		<< "LimbPhysics: isInWorld=" << limbPhysics.mInWorld
-
-		/**The restitution of the limb*/
-		<< "/Restitution=" << limbPhysics.mRestitution
-
-		/**The friction of the limb*/
-		<< "/Friction=" << limbPhysics.mFriction;
-	}
 
 	//Accessor methods
 
@@ -194,24 +181,126 @@ public:
 		mInterpenetrationDepth = interpenetrationDepth;
 	}
 
-	const btVector3 getDimensions() const {
+	const Ogre::Vector3 getDimensions() const {
 		return mDimensions;
 	}
 
-	void setDimensions(const btVector3 dimensions) {
+	void setDimensions(const Ogre::Vector3 dimensions) {
 		mDimensions = dimensions;
 	}
 
-	const btVector3 getColor() const {
+	const Ogre::ColourValue getColor() const {
 		return mColor;
 	}
 
-	void setColor(const btVector3 color) {
+	void setColor(const Ogre::ColourValue color) {
 		mColor = color;
 	}
 
-	LimbModel::PrimitiveType getType() const {
+	PrimitiveType getType() const {
 		return mType;
+	}
+
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the limb physics model to a string.
+	 * @param os The ostream.
+	 * @param limbPhysics The limb physics model we want to serialize.
+	 * @return A string containing all information about the limb physics model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const LimbPhysics &limbPhysics) {
+		return os
+		/**The primitive type of the limb*/
+		<< "LimbPhysics: Type=" << limbPhysics.mType
+
+		/**The dimensions of the limb*/
+		<< "/Dimensions=(" << limbPhysics.mDimensions.x << ","
+				<< limbPhysics.mDimensions.y << "," << limbPhysics.mDimensions.z
+
+				/**The color of the limb*/
+				<< ")/Color=(" << limbPhysics.mColor.r << ","
+				<< limbPhysics.mColor.g << "," << limbPhysics.mColor.b
+
+				/**if the limb physics model is in the world*/
+				<< ")/isInWorld=" << limbPhysics.mInWorld
+
+				/** The limb's relative position*/
+				<< "/InitialRelativePosition=("
+				<< limbPhysics.mInitialRelativeXPosition << ","
+				<< limbPhysics.mInitialRelativeYPosition << ","
+				<< limbPhysics.mInitialRelativeZPosition
+
+				/**The limb's orientation*/
+				<< ")/InitialOrientation=(" << limbPhysics.mInitialWOrientation
+				<< "," << limbPhysics.mInitialXOrientation << ","
+				<< limbPhysics.mInitialYOrientation << ","
+				<< limbPhysics.mInitialZOrientation
+
+				/**The restitution of the limb physics model*/
+				<< ")/Restitution=" << limbPhysics.mRestitution
+
+				/**The friction of the limb physics model*/
+				<< "/Friction=" << limbPhysics.mFriction
+
+				/**The mass of the limb physics model*/
+				<< "/Mass=" << limbPhysics.mMass
+
+				/**The volume of the limb physics model*/
+				<< "/Volume=" << limbPhysics.mVolume;
+	}
+
+	/**
+	 * Serializes the limb physics model to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The primitive type of the limb*/
+		& BOOST_SERIALIZATION_NVP(mType)
+
+		/**The dimensions of the limb*/
+		& BOOST_SERIALIZATION_NVP(mDimensions.x)
+		& BOOST_SERIALIZATION_NVP(mDimensions.y)
+		& BOOST_SERIALIZATION_NVP(mDimensions.z)
+
+		/**The color of the limb*/
+		& BOOST_SERIALIZATION_NVP(mColor.r)
+		& BOOST_SERIALIZATION_NVP(mColor.g)
+		& BOOST_SERIALIZATION_NVP(mColor.b)
+
+		/**if the limb physics model is in the world*/
+		& BOOST_SERIALIZATION_NVP(mInWorld)
+
+		/** The limb's relative position*/
+		& BOOST_SERIALIZATION_NVP(mInitialRelativeXPosition)
+		& BOOST_SERIALIZATION_NVP(mInitialRelativeYPosition)
+		& BOOST_SERIALIZATION_NVP(mInitialRelativeZPosition)
+
+		/**The limb's orientation*/
+		& BOOST_SERIALIZATION_NVP(mInitialWOrientation)
+		& BOOST_SERIALIZATION_NVP(mInitialXOrientation)
+		& BOOST_SERIALIZATION_NVP(mInitialYOrientation)
+		& BOOST_SERIALIZATION_NVP(mInitialZOrientation)
+
+		/**The restitution of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mRestitution)
+
+		/**The friction of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mFriction)
+
+		/**The mass of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mMass)
+
+		/**The volume of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mVolume);
 	}
 
 protected:
@@ -253,19 +342,26 @@ protected:
 	 */
 	double mVolume;
 
+	/**
+	 * The interpenetration depth of this limb with the others.
+	 */
 	double mInterpenetrationDepth;
 
-	LimbModel::PrimitiveType mType;
+	/**
+	 * The primitive type of this limb.
+	 */
+	PrimitiveType mType;
 
 	/**
 	 * The dimensions of the limb.
 	 */
-	btVector3 mDimensions;
+	Ogre::Vector3 mDimensions;
 
 	/**
 	 * The color of the limb.
 	 */
-	btVector3 mColor;
+	Ogre::ColourValue mColor;
 };
-
+BOOST_CLASS_VERSION(LimbPhysics, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(LimbPhysics)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBPHYSICS_HPP_ */

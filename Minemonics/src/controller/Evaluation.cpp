@@ -26,7 +26,7 @@ BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
 		mPlanet(NULL), mStart(0), mHasFailed(
-				false) {
+				false),mOnce(true) {
 }
 
 Evaluation::~Evaluation() {
@@ -148,7 +148,10 @@ void Evaluation::update(const double timeSinceLastTick) {
 	if (mEvaluationModel.getTimePassed() > PhysicsConfiguration::DISCARDING_STARTS) {
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 				pit != mPopulations.end(); pit++) {
-			if ((*pit)->hasInterpenetrations()) {
+			if(mOnce){
+				(*pit)->calm();
+			}
+			if ((*pit)->hasInterpenetrations() /*|| (*pit)->hasHighAppliedForces()*/) {
 				//TODO: Review this decision again in the case of a whole population
 				std::cout << "Creature discarded because of unsolvable interpenetrations." << std::endl;
 				mHasFailed = true;
@@ -156,6 +159,7 @@ void Evaluation::update(const double timeSinceLastTick) {
 				break;
 			}
 		}
+		mOnce = false;
 	}
 
 	//update the time passed

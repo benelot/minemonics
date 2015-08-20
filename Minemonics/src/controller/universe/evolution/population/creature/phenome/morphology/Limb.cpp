@@ -78,7 +78,7 @@ Limb::~Limb() {
 }
 
 void Limb::initialize(Creature* const creature,
-		const LimbModel::PrimitiveType type, const Ogre::Vector3 position,
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 		const Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
 		const Ogre::Quaternion initialOrientation,

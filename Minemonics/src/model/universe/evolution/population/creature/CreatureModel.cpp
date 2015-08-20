@@ -176,3 +176,7 @@ void CreatureModel::processJuries() {
 		(*jit)->evaluateFitness();
 	}
 }
+
+void CreatureModel::calm() {
+	mPhenotypeModel.calm();
+}

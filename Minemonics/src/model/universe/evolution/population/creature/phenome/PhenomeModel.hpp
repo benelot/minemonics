@@ -84,82 +84,6 @@ public:
 	 */
 	PhenomeModel* clone();
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the phemone model to a string.
-	 * @param os The ostream.
-	 * @param phenomeModel The phemone model we want to serialize.
-	 * @return A string containing all information about the phemone model.
-	 */
-	friend std::ostream & operator<<(std::ostream& os,
-			const PhenomeModel& phenomeModel) {
-		os
-		/**if the phenome is in the world*/
-		<< "/PhenomeModel: isInWorld=" << phenomeModel.mInWorld
-
-		<< "/Limbs=[";
-
-		/**The vector of limb models.*/
-
-		for (std::vector<LimbModel*>::const_iterator it =
-				phenomeModel.mLimbModels.begin();
-				it != phenomeModel.mLimbModels.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		os << "]/Joints=[";
-
-		/**The vector of joint models.*/
-		for (std::vector<JointModel*>::const_iterator it =
-				phenomeModel.mJointModels.begin();
-				it != phenomeModel.mJointModels.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		os << "]/Controllers=[";
-
-		/**The vector of controllers.*/
-		for (std::vector<Controller*>::const_iterator it =
-				phenomeModel.mControllers.begin();
-				it != phenomeModel.mControllers.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		os << "]";
-
-		return os;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**If the phenome is developed*/
-		& BOOST_SERIALIZATION_NVP(mDeveloped)
-		/**if the phenome is in the world*/
-		& BOOST_SERIALIZATION_NVP(mInWorld)
-
-		/**The vector of limb models.*/
-		& BOOST_SERIALIZATION_NVP(mLimbModels)
-
-		/**The vector of joint models.*/
-		& BOOST_SERIALIZATION_NVP(mJointModels)
-
-		/**The vector of controllers.*/
-		& BOOST_SERIALIZATION_NVP(mControllers);
-	}
-
 	//Accessor methods
 	/**
 	 * Is the phenotype in the world?
@@ -225,6 +149,83 @@ public:
 		return mHasInterpenetrations;
 	}
 
+	void calm();
+
+	/**
+		 * Give access to boost serialization
+		 */
+		friend class boost::serialization::access;
+
+		/**
+		 * Serializes the phemone model to a string.
+		 * @param os The ostream.
+		 * @param phenomeModel The phemone model we want to serialize.
+		 * @return A string containing all information about the phemone model.
+		 */
+		friend std::ostream & operator<<(std::ostream& os,
+				const PhenomeModel& phenomeModel) {
+			os
+			/**if the phenome is in the world*/
+			<< "/PhenomeModel: isInWorld=" << phenomeModel.mInWorld
+
+			<< "/Limbs=[";
+
+			/**The vector of limb models.*/
+
+			for (std::vector<LimbModel*>::const_iterator it =
+					phenomeModel.mLimbModels.begin();
+					it != phenomeModel.mLimbModels.end(); it++) {
+				os << (**it);
+				os << "||";
+			}
+
+			os << "]/Joints=[";
+
+			/**The vector of joint models.*/
+			for (std::vector<JointModel*>::const_iterator it =
+					phenomeModel.mJointModels.begin();
+					it != phenomeModel.mJointModels.end(); it++) {
+				os << (**it);
+				os << "||";
+			}
+
+			os << "]/Controllers=[";
+
+			/**The vector of controllers.*/
+			for (std::vector<Controller*>::const_iterator it =
+					phenomeModel.mControllers.begin();
+					it != phenomeModel.mControllers.end(); it++) {
+				os << (**it);
+				os << "||";
+			}
+
+			os << "]";
+
+			return os;
+		}
+
+		/**
+		 * Serializes the creature to an xml file.
+		 * @param ar The archive.
+		 * @param The file version.
+		 */
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int /* file_version */) {
+			ar
+			/**If the phenome is developed*/
+			& BOOST_SERIALIZATION_NVP(mDeveloped)
+			/**if the phenome is in the world*/
+			& BOOST_SERIALIZATION_NVP(mInWorld)
+
+			/**The vector of limb models.*/
+			& BOOST_SERIALIZATION_NVP(mLimbModels);
+
+//			/**The vector of joint models.*/
+//			& BOOST_SERIALIZATION_NVP(mJointModels)
+//
+//			/**The vector of controllers.*/
+//			& BOOST_SERIALIZATION_NVP(mControllers);
+		}
 private:
 	/**
 	 * The boost logger.

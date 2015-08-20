@@ -27,8 +27,8 @@ JointAngleProprioceptor::~JointAngleProprioceptor() {
 }
 
 void JointAngleProprioceptor::update(double timeSinceLastTick) {
-	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
-	setAngle(
-			(motor->m_currentPosition
-					/ (motor->m_hiLimit - motor->m_loLimit)) * M_PI);
+//	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
+//	setAngle(
+//			(motor->m_currentPosition
+//					/ (motor->m_hiLimit - motor->m_loLimit)) * M_PI);
 }

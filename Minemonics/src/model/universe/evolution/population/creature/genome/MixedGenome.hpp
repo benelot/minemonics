@@ -78,60 +78,6 @@ public:
 	 */
 	MixedGenome* clone();
 
-	//Serialization
-	/**
-	 * @brief Give access to boost serialization.
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * @brief Serializes the genome to a string.
-	 * @param os
-	 * 			The ostream.
-	 * @param genome
-	 * 			The genome we want to serialize.
-	 * @return A string containing all information about the genome.
-	 */
-
-	friend std::ostream & operator<<(std::ostream &os,
-			const MixedGenome &genome) {
-		os
-		/**The type of genome*/
-		<< "MixedGenome: Type: " << genome.mGenomeType
-
-		/**The length of the genome*/
-		<< "/length=" << genome.mLength
-
-		<< "/Genes=[";
-		/**The vector of genes.*/
-		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
-				it != genome.mGenes.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		os << "]";
-
-		/**The total segment quantity limit*/
-		os << "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit
-
-		/**The segments depth limit*/
-		<< "/SegmentsDepthLimit=" << genome.mTotalSegmentQtyLimit;
-		return os;
-	}
-
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar /** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(IndirectGenome)
-
-		/**The total segment quantity limit*/
-		& BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit)
-
-		/**The segments depth limit*/
-		& BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit);
-	}
-
 	/**
 	 * Variational genetics
 	 * -------------------
@@ -397,6 +343,60 @@ public:
 
 	void setTotalSegmentQtyLimit(const int totalSegmentQtyLimit) {
 		mTotalSegmentQtyLimit = totalSegmentQtyLimit;
+	}
+
+	//Serialization
+	/**
+	 * @brief Give access to boost serialization.
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * @brief Serializes the genome to a string.
+	 * @param os
+	 * 			The ostream.
+	 * @param genome
+	 * 			The genome we want to serialize.
+	 * @return A string containing all information about the genome.
+	 */
+
+	friend std::ostream & operator<<(std::ostream &os,
+			const MixedGenome &genome) {
+		os
+		/**The type of genome*/
+		<< "MixedGenome: Type=" << genome.mGenomeType
+
+		/**The length of the genome*/
+		<< "/length=" << genome.mLength
+
+		<< "/Genes=[";
+		/**The vector of genes.*/
+		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
+				it != genome.mGenes.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+
+		os << "]";
+
+		/**The total segment quantity limit*/
+		os << "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit
+
+		/**The segments depth limit*/
+		<< "/SegmentsDepthLimit=" << genome.mTotalSegmentQtyLimit;
+		return os;
+	}
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar /** Serialize the base object */
+		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(IndirectGenome)
+
+		/**The total segment quantity limit*/
+		& BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit)
+
+		/**The segments depth limit*/
+		& BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit);
 	}
 
 private:

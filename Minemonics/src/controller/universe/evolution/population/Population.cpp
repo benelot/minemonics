@@ -178,3 +178,10 @@ void Population::markCull() {
 		(*cit)->setCulled(true);
 	}
 }
+
+void Population::calm() {
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+			cit != mCreatures.end();cit++) {
+		(*cit)->calm();
+	}
+}

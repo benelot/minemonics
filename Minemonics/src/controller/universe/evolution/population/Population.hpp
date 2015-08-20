@@ -103,6 +103,8 @@ public:
 
 	void markCull();
 
+	void calm();
+
 	//Accessor methods
 
 	std::vector<Creature*>& getCreatures() {

@@ -20,7 +20,7 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-class CreatureTest: public ::testing::Test {
+class CreatureModelTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
@@ -40,7 +40,7 @@ protected:
 	Randomness* randomness;
 };
 
-class CreatureSerializationTest: public ::testing::Test {
+class CreatureModelSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
@@ -71,12 +71,12 @@ protected:
 	Randomness* randomness;
 };
 
-TEST_F(CreatureTest,DummyTest) {
+TEST_F(CreatureModelTest,DummyTest) {
 	//TODO: Add all tests
 	//ASSERT_TRUE(creature->)
 }
 
-TEST_F(CreatureSerializationTest,isEqualAfterSerialization) {
+TEST_F(CreatureModelSerializationTest,isEqualAfterSerialization) {
 	ASSERT_TRUE(creature != creature2);
 	ASSERT_TRUE(creature->equals(*creature2));
 }

@@ -17,6 +17,7 @@ class btDynamicsWorld;
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
+#include <LinearMath/btTransform.h>
 
 //## view headers
 //# custom headers
@@ -26,8 +27,6 @@ class btDynamicsWorld;
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
-
 //## view headers
 //## utils headers
 
@@ -55,12 +54,13 @@ public:
 	 * @param mass The mass of the limb.
 	 */
 	void initialize(btDynamicsWorld* const world, void* const limbModel,
-			const LimbModel::PrimitiveType type, const btVector3 position,
+			const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 			const btQuaternion orientation,
 			const btVector3 initialRelativePosition,
-			const btQuaternion initialOrientation, const btVector3 dimensions,
-			const btScalar mass, const btScalar restitution,
-			const btScalar friction, const btVector3 color);
+			const btQuaternion initialOrientation,
+			const Ogre::Vector3 dimensions, const btScalar mass,
+			const btScalar restitution, const btScalar friction,
+			const Ogre::ColourValue color);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -93,7 +93,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the global reference frame.
 	 */
-	btVector3 getIntersection(const btVector3 origin,
+	btTransform getIntersection(const btVector3 origin,
 			const btVector3 direction);
 
 	/**
@@ -103,7 +103,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getPreciseIntersection(const btVector3 origin,
+	btTransform getPreciseIntersection(const btVector3 origin,
 			const btVector3 direction);
 
 	/**
@@ -121,7 +121,7 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getLocalIntersection(const btVector3 origin,
+	btTransform getLocalIntersection(const btVector3 origin,
 			const btVector3 direction);
 
 	/**
@@ -130,9 +130,10 @@ public:
 	 * @param direction: The direction of the intersection testing ray.
 	 * @return The intersection in the local reference frame.
 	 */
-	btVector3 getLocalPreciseIntersection(const btVector3 origin,
+	btTransform getLocalPreciseIntersection(const btVector3 origin,
 			const btVector3 direction);
 
+	virtual void calm();
 	//Accessor methods
 
 	btVector3 getPosition() const {
@@ -150,13 +151,13 @@ public:
 
 		double volume = 0;
 		switch (mType) {
-		case LimbModel::BLOCK: {
-			volume = mDimensions.x() * mDimensions.y() * mDimensions.z();
+		case LimbPhysics::BLOCK: {
+			volume = mDimensions.x * mDimensions.y * mDimensions.z;
 			break;
 		}
-		case LimbModel::CAPSULE: {
-			volume = pow(mDimensions.x() * 0.5f, 2) * M_PI * mDimensions.z()
-					+ pow(mDimensions.x(), 3) * M_PI / 6.0f;
+		case LimbPhysics::CAPSULE: {
+			volume = pow(mDimensions.x * 0.5f, 2) * M_PI * mDimensions.z
+					+ pow(mDimensions.x, 3) * M_PI / 6.0f;
 			break;
 		}
 		}
@@ -168,6 +169,36 @@ public:
 		return mBody;
 	}
 
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the limb bullet model to a string.
+	 * @param os The ostream.
+	 * @param limbPhysics The limb bullet model we want to serialize.
+	 * @return A string containing all information about the limb bullet model.
+	 */
+//	friend std::ostream & operator<<(std::ostream &os,
+//			const LimbPhysics &limbPhysics) {
+//		return os
+//				/**The limb physics model of the limb bullet model*/
+//				<< "LimbBt: LimbPhysics=" << LimbPhysics;
+//	}
+	/**
+	 * Serializes the limb bullet model to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**The limb physics model of the limb bullet model*/
+		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbPhysics);
+	}
+
 private:
 	btDynamicsWorld* mWorld;
 
@@ -177,5 +208,5 @@ private:
 
 	btRigidBody* mBody;
 };
-
+BOOST_CLASS_VERSION(LimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

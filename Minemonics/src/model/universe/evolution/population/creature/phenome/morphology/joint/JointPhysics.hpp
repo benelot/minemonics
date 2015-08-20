@@ -100,14 +100,15 @@ public:
 	 */
 	virtual bool isStrained() = 0;
 
-	//TODO: Add serialization to the joint physics
-//	/**
-//	 * Compare the joint physics model to another joint physics model.
-//	 * @param jointPhysics Another joint physics model.
-//	 * @return If the joint physics model is equal to the other joint physics model.
-//	 */
-//	virtual bool equals(const JointPhysics & jointPhysics) const = 0;
+	//Accessor methods
+	virtual const std::vector<Motor*>& getMotors() const = 0;
 
+	virtual void setLimits(const Ogre::Vector3 limits) = 0;
+
+	virtual void setRotationalLimitMotorEnabled(const RotationalDegreeOfFreedom index,
+			const bool enable) = 0;
+
+	//TODO: Add serialization to the joint physics
 	//Serialization
 
 	/**
@@ -131,23 +132,6 @@ public:
 //	 */
 //	template<class Archive>
 //	virtual void serialize(Archive & ar, const unsigned int /* file_version */) = 0;
-
-	//Accessor methods
-	virtual const std::vector<Motor*>& getMotors() const = 0;
-
-	virtual void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-			const Ogre::Vector3 angularUpperLimit) = 0;
-
-	virtual void setAngularStiffness(const double jointPitchStiffness,
-			const double jointYawStiffness, const double jointRollStiffness) = 0;
-
-	virtual void setAngularDamping(const double springPitchDampingCoefficient,
-			const double springYawDampingCoefficient,
-			const double springRollDampingCoefficient) = 0;
-
-	virtual void setRotationalLimitMotorEnabled(const RotationalDegreeOfFreedom index,
-			const bool enable) = 0;
-
 protected:
 	bool mInWorld;
 };

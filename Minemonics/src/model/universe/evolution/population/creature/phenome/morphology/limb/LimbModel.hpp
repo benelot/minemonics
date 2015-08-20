@@ -9,7 +9,6 @@ class btDynamicsWorld;
 class CreatureModel;
 class Sensor;
 class Tactioceptor;
-class LimbPhysics;
 
 //# system headers
 //## controller headers
@@ -29,6 +28,8 @@ class LimbPhysics;
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+
 //## view headers
 //## utils headers
 #include<utils/ogre3D/OgreBulletUtils.hpp>
@@ -41,13 +42,6 @@ class LimbPhysics;
  */
 class LimbModel: public ComponentModel {
 public:
-
-	/**
-	 * Primitive type of a limb
-	 */
-	enum PrimitiveType {
-		UNKNOWN = 0, BLOCK = 2, CAPSULE = 1, NUM_PRIMITIVES
-	};
 
 	LimbModel();
 	LimbModel(const LimbModel& limbModel);
@@ -68,7 +62,7 @@ public:
 	 * @param color The color of the limb.
 	 */
 	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
-			PrimitiveType type, Ogre::Vector3 position,
+			LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
 			Ogre::Quaternion orientation,
 			const Ogre::Vector3 initialRelativePosition,
 			const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
@@ -99,6 +93,8 @@ public:
 	 */
 	LimbModel* clone();
 
+	void calm();
+
 	//Accessor methods
 	/**
 	 * The the limb physics model of the limb.
@@ -122,7 +118,7 @@ public:
 
 	const Ogre::ColourValue getColor() const;
 
-	const PrimitiveType getPrimitiveType() const;
+	const LimbPhysics::PrimitiveType getPrimitiveType() const;
 
 	const Ogre::Vector3 getDimensions() const;
 
