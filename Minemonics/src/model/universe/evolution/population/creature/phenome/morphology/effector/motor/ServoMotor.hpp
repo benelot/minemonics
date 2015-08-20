@@ -29,12 +29,12 @@ class JointBt;
 //## utils headers
 
 //comment this out to compare with original spring constraint
-#define CONSTRAINT_TYPE btConeTwistConstraint
-#define EXTRAPARAMS
-#define MOTOR_TYPE btRotationalLimitMotor
-//#define CONSTRAINT_TYPE btPoint2PointConstraint
+//#define CONSTRAINT_TYPE btConeTwistConstraint
 //#define EXTRAPARAMS
 //#define MOTOR_TYPE btRotationalLimitMotor
+#define CONSTRAINT_TYPE btPoint2PointConstraint
+#define EXTRAPARAMS
+#define MOTOR_TYPE btRotationalLimitMotor
 //#define CONSTRAINT_TYPE btGeneric6DofConstraint
 //#define EXTRAPARAMS ,true
 //#define MOTOR_TYPE btRotationalLimitMotor

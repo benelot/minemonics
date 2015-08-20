@@ -144,7 +144,7 @@ public:
 	static const double FORCE_THRESHOLD = 1e6;
 	static const double TORQUE_THRESHOLD = 1e6;
 
-	static const double DISCARDING_STARTS = 0.1;
+	static const double DISCARDING_STARTS = 0.1f;
 
 	static const bool NO_INTRACOLLISION = true;
 };

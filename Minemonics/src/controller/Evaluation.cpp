@@ -114,6 +114,7 @@ void Evaluation::teardown() {
 		}
 	}
 
+	SimulationManager::getSingleton()->getDebugDrawer().clear();
 	//remove the environment from the world
 	mPlanet->getEnvironment()->removeFromWorld();
 
@@ -149,7 +150,8 @@ void Evaluation::update(const double timeSinceLastTick) {
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 				pit != mPopulations.end(); pit++) {
 			if(mOnce){
-				(*pit)->calm();
+				//TODO: Enable to calm forces from numerical resolving.
+//				(*pit)->calm();
 			}
 			if ((*pit)->hasInterpenetrations() /*|| (*pit)->hasHighAppliedForces()*/) {
 				//TODO: Review this decision again in the case of a whole population

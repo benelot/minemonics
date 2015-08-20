@@ -60,7 +60,7 @@ RagDoll::RagDoll(Population* const population, double size,
 
 	LimbPhysics::PrimitiveType type = LimbPhysics::CAPSULE;
 
-	bool attachHead = true;
+	bool attachHead = false;
 	bool enableMotor = true;
 	int gapSize = size * 1.0f;
 
@@ -511,16 +511,16 @@ RagDoll::RagDoll(Population* const population, double size,
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
 
-//	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
-//			mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM], localA, localB, 0,
-//			0, 0);
-//	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
-//			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
-//	joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
-//			Ogre::Vector3(3, 3, 3));
-//	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-//			joint->getJointModel());
-//	mPhenotype.getJoints().push_back(joint);
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
+			mPhenotype.getLimbs()[BODYPART_LEFT_UPPER_ARM], localA, localB, 0,
+			0, 0);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
+			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
+			Ogre::Vector3(3, 3, 3));
+	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+			joint->getJointModel());
+	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
 //	enableMotor = true;
@@ -545,16 +545,16 @@ RagDoll::RagDoll(Population* const population, double size,
 			btVector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
 					btScalar(gapSize * 0.)));
 
-//	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
-//			mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_ARM], localA, localB, 0,
-//			0, 0);
-//	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
-//			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
-//	joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
-//			Ogre::Vector3(3, 3, 3));
-//	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
-//			joint->getJointModel());
-//	mPhenotype.getJoints().push_back(joint);
+	joint = new Joint(this, mPhenotype.getLimbs()[BODYPART_THORAX],
+			mPhenotype.getLimbs()[BODYPART_RIGHT_UPPER_ARM], localA, localB, 0,
+			0, 0);
+	joint->setAngularLimits(Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
+			Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2));
+	joint->initializeRotationalLimitMotors(Ogre::Vector3(10, 10, 10),
+			Ogre::Vector3(3, 3, 3));
+	mCreatureModel->getPhenotypeModel().getJointModels().push_back(
+			joint->getJointModel());
+	mPhenotype.getJoints().push_back(joint);
 
 	enableMotor = false;
 //	enableMotor = true;

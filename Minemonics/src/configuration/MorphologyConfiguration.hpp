@@ -30,7 +30,7 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 0.05;
+	static const double LIMB_MIN_SIZE = 9.9;
 
 	/**
 	 * The limb maximum dimension size
@@ -139,9 +139,9 @@ public:
 	static const double JOINT_MAX_TORQUE_CONSTANT = 1;
 
 	/**
-	 * The length of a joint from the anchor point to the joint rotation point. 1 means we exactly hit the surface point of the limb.
+	 * The length of a joint from the anchor point to the joint rotation point. 0 means we exactly hit the surface point of the limb.
 	 */
-	static const double JOINT_LENGTH = 1.5;
+	static const double JOINT_LENGTH = 0;
 
 	/**
 	 * The minimum stiffness of the joint

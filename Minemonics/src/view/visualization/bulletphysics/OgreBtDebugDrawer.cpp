@@ -48,7 +48,7 @@
 
 OgreBtDebugDrawer::OgreBtDebugDrawer() :
 		mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(false), mClear(
-				0), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
+				false), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
 		NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
 		NULL)
 //, textArea(NULL), olm(NULL), overlay(NULL), panel(NULL)
@@ -293,6 +293,10 @@ void OgreBtDebugDrawer::draw() {
 	mExtTriangles.clear();
 }
 
+void OgreBtDebugDrawer::clear(){
+	mClear = true;
+}
+
 bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 
 	mLinesSwap = mLines;
@@ -366,9 +370,10 @@ bool OgreBtDebugDrawer::frameEnded(const Ogre::FrameEvent& evt) {
 
 	mDrawable = false;
 
-	if (!mDrawTrajectory) {
+	if (!mDrawTrajectory || mClear) {
 		mLines2->clear();
 		mTriangles2->clear();
+		mClear = false;
 	}
 
 	return true;

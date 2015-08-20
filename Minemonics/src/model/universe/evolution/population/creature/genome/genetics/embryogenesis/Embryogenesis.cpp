@@ -58,6 +58,7 @@ Embryogenesis::~Embryogenesis() {
 void Embryogenesis::transcribeGene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		PhenomeModel* phenomeModel, BaseGenerator* generator) {
+
 	// what is the next gene type
 	switch (generator->getGene()->getType()) {
 	case Gene::MorphoGene: {
@@ -75,9 +76,9 @@ void Embryogenesis::transcribeMorphogene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 
-	//##
+	//#####################
 	// Continuation checks
-	//##
+	//#####################
 	// if the current root to leaf path is equal to the maximal segments depth, break
 	if (generator->getRoot2LeafPath()
 			== phenomeModel->getCreatureModel()->getGenotype().getSegmentsDepthLimit()) {
@@ -92,9 +93,9 @@ void Embryogenesis::transcribeMorphogene(
 
 	totalSegmentCounter++;
 
-	// ##
+	//#####################
 	// Start generating
-	// ##
+	//#####################
 
 	//PARENT CONNECTION
 
@@ -286,54 +287,54 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimbCOM + localChildAnchorInRefParent
 						- localChildAnchorInRefChild);
 
-//		// draw line from limb A to surface anchor point of A (GREEN LINE)
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-//				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
-//				Ogre::ColourValue(0, 1, 0));
-//
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
-//
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				parentLimbCOM + localParentAnchorInRefParent, 0.1,
-//				Ogre::ColourValue(0, 1, 0));
-//
-//		// draw line from anchor point of A to joint rotation point (BLUE LINE)
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-//				parentLimbCOM + localParentAnchorInRefParent,
-//				parentLimbCOM + localParentJointInRefParent,
-//				Ogre::ColourValue(0, 0, 1));
-//
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				parentLimbCOM + localParentAnchorInRefParent, 0.1,
-//				Ogre::ColourValue(0, 0, 1));
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				parentLimbCOM + localParentJointInRefParent, 0.1,
-//				Ogre::ColourValue(0, 0, 1));
-//
-//		// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-//				parentLimbCOM + localParentJointInRefParent,
-//				parentLimbCOM + localChildAnchorInRefParent,
-//				Ogre::ColourValue(0, 0, 1));
-//
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				parentLimbCOM + localParentJointInRefParent, 0.1,
-//				Ogre::ColourValue(0, 0, 1));
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				parentLimbCOM + localChildAnchorInRefParent, 0.1,
-//				Ogre::ColourValue(0, 0, 1));
-//
-//		// draw line from limb B to anchor point of B (GREEN LINE)
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-//				childLimbCOM, childLimbCOM + localChildAnchorInRefChild,
-//				Ogre::ColourValue(0, 1, 0));
-//
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				childLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//				childLimbCOM + localChildAnchorInRefChild, 0.1,
-//				Ogre::ColourValue(0, 1, 0));
+		// draw line from limb A to surface anchor point of A (GREEN LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
+				Ogre::ColourValue(0, 1, 0));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentAnchorInRefParent, 0.1,
+				Ogre::ColourValue(0, 1, 0));
+
+		// draw line from anchor point of A to joint rotation point (BLUE LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM + localParentAnchorInRefParent,
+				parentLimbCOM + localParentJointInRefParent,
+				Ogre::ColourValue(0, 0, 1));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentAnchorInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentJointInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
+
+		// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				parentLimbCOM + localParentJointInRefParent,
+				parentLimbCOM + localChildAnchorInRefParent,
+				Ogre::ColourValue(0, 0, 1));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localParentJointInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				parentLimbCOM + localChildAnchorInRefParent, 0.1,
+				Ogre::ColourValue(0, 0, 1));
+
+		// draw line from limb B to anchor point of B (GREEN LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				childLimbCOM, childLimbCOM + localChildAnchorInRefChild,
+				Ogre::ColourValue(0, 1, 0));
+
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				childLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				childLimbCOM + localChildAnchorInRefChild, 0.1,
+				Ogre::ColourValue(0, 1, 0));
 
 //		// draw line from limb A to limb B (WHITE LINE)
 //		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
@@ -405,10 +406,10 @@ void Embryogenesis::transcribeMorphogene(
 				OgreBulletUtils::convert(localParentJointInRefParent));
 		localParentJointTransform.getBasis().setRotation(
 				parentHitTransform.getRotation());
-		localParentJointTransform.getBasis().setEulerYPR(
-				parentMorphogeneBranch->getJointYaw(),
-				parentMorphogeneBranch->getJointPitch(),
-				parentMorphogeneBranch->getJointRoll());
+//		localParentJointTransform.getBasis().setEulerYPR(
+//				parentMorphogeneBranch->getJointYaw(),
+//				parentMorphogeneBranch->getJointPitch(),
+//				parentMorphogeneBranch->getJointRoll());
 
 		// define the position and direction of the joint in the reference frame of child
 		localChildJointTransform.setOrigin(
@@ -417,10 +418,10 @@ void Embryogenesis::transcribeMorphogene(
 		localChildJointTransform.getBasis().setRotation(
 				childHitTransform.getRotation());
 		//correct the direction of the joint by some random rotation
-		localChildJointTransform.getBasis().setEulerYPR(
-				childMorphogene->getJointYaw(),
-				childMorphogene->getJointPitch(),
-				childMorphogene->getJointRoll());
+//		localChildJointTransform.getBasis().setEulerYPR(
+//				childMorphogene->getJointYaw(),
+//				childMorphogene->getJointPitch(),
+//				childMorphogene->getJointRoll());
 
 		//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 		JointModel* joint = new JointModel();
@@ -441,75 +442,75 @@ void Embryogenesis::transcribeMorphogene(
 		phenomeModel->getJointModels().push_back(joint);
 		phenomeModel->getComponentModels().push_back(joint);
 
-		//initialize rotational limit motors
-		joint->initializeRotationalLimitMotors(
-				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
-						parentMorphogeneBranch->getJointMaxYawForce(),
-						parentMorphogeneBranch->getJointMaxRollForce()),
-				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
-						parentMorphogeneBranch->getJointMaxYawForce(),
-						parentMorphogeneBranch->getJointMaxRollForce()));
-
-		//TODO: Quick controller hack
-		for (std::vector<Motor*>::const_iterator motorIterator =
-				joint->getMotors().begin();
-				motorIterator != joint->getMotors().end(); motorIterator++) {
-			SineController* controller = new SineController();
-			controller->initialize(0.5f, 0.1f, 0, 0.5f);
-			controller->addControlOutput((*motorIterator));
-			phenomeModel->getControllers().push_back(controller);
-		}
-
-		SineController* controller = new SineController();
-		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
-				parentMorphogeneBranch->getJointPitchFrequency(),
-				parentMorphogeneBranch->getJointPitchXOffset(),
-				parentMorphogeneBranch->getJointPitchYOffset());
-		controller->addControlOutput(joint->getMotors()[0]);
-		phenomeModel->getControllers().push_back(controller);
-
-		controller = new SineController();
-		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
-				parentMorphogeneBranch->getJointYawFrequency(),
-				parentMorphogeneBranch->getJointYawXOffset(),
-				parentMorphogeneBranch->getJointYawYOffset());
-		controller->addControlOutput(joint->getMotors()[1]);
-		phenomeModel->getControllers().push_back(controller);
-
-		controller = new SineController();
-		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
-				parentMorphogeneBranch->getJointRollFrequency(),
-				parentMorphogeneBranch->getJointRollXOffset(),
-				parentMorphogeneBranch->getJointRollYOffset());
-		controller->addControlOutput(joint->getMotors()[2]);
-		phenomeModel->getControllers().push_back(controller);
-
-		//set the angular limits of the joint
-		joint->setAngularLimits(
-				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
-						parentMorphogeneBranch->getJointYawMinAngle(),
-						parentMorphogeneBranch->getJointRollMinAngle()),
-				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
-						parentMorphogeneBranch->getJointYawMaxAngle(),
-						parentMorphogeneBranch->getJointRollMaxAngle()));
-
-		//set the angular stiffness of the joint
-		joint->setAngularStiffness(
-				parentMorphogeneBranch->getJointPitchStiffness(),
-				parentMorphogeneBranch->getJointYawStiffness(),
-				parentMorphogeneBranch->getJointRollStiffness());
-
-		//set the angular spring damping coefficients of the joint
-		joint->setAngularDamping(
-				parentMorphogeneBranch->getSpringPitchDampingCoefficient(),
-				parentMorphogeneBranch->getSpringYawDampingCoefficient(),
-				parentMorphogeneBranch->getSpringRollDampingCoefficient());
-
-		//set if the angular motor is enabled
-		joint->enableAngularMotor(
-				parentMorphogeneBranch->isJointPitchMotorEnabled(),
-				parentMorphogeneBranch->isJointYawMotorEnabled(),
-				parentMorphogeneBranch->isJointRollMotorEnabled());
+//		//initialize rotational limit motors
+//		joint->initializeRotationalLimitMotors(
+//				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
+//						parentMorphogeneBranch->getJointMaxYawForce(),
+//						parentMorphogeneBranch->getJointMaxRollForce()),
+//				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
+//						parentMorphogeneBranch->getJointMaxYawForce(),
+//						parentMorphogeneBranch->getJointMaxRollForce()));
+//
+//		//TODO: Quick controller hack
+//		for (std::vector<Motor*>::const_iterator motorIterator =
+//				joint->getMotors().begin();
+//				motorIterator != joint->getMotors().end(); motorIterator++) {
+//			SineController* controller = new SineController();
+//			controller->initialize(0.5f, 0.1f, 0, 0.5f);
+//			controller->addControlOutput((*motorIterator));
+//			phenomeModel->getControllers().push_back(controller);
+//		}
+//
+//		SineController* controller = new SineController();
+//		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
+//				parentMorphogeneBranch->getJointPitchFrequency(),
+//				parentMorphogeneBranch->getJointPitchXOffset(),
+//				parentMorphogeneBranch->getJointPitchYOffset());
+//		controller->addControlOutput(joint->getMotors()[0]);
+//		phenomeModel->getControllers().push_back(controller);
+//
+//		controller = new SineController();
+//		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
+//				parentMorphogeneBranch->getJointYawFrequency(),
+//				parentMorphogeneBranch->getJointYawXOffset(),
+//				parentMorphogeneBranch->getJointYawYOffset());
+//		controller->addControlOutput(joint->getMotors()[1]);
+//		phenomeModel->getControllers().push_back(controller);
+//
+//		controller = new SineController();
+//		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
+//				parentMorphogeneBranch->getJointRollFrequency(),
+//				parentMorphogeneBranch->getJointRollXOffset(),
+//				parentMorphogeneBranch->getJointRollYOffset());
+//		controller->addControlOutput(joint->getMotors()[2]);
+//		phenomeModel->getControllers().push_back(controller);
+//
+//		//set the angular limits of the joint
+//		joint->setAngularLimits(
+//				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+//						parentMorphogeneBranch->getJointYawMinAngle(),
+//						parentMorphogeneBranch->getJointRollMinAngle()),
+//				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+//						parentMorphogeneBranch->getJointYawMaxAngle(),
+//						parentMorphogeneBranch->getJointRollMaxAngle()));
+//
+//		//set the angular stiffness of the joint
+//		joint->setAngularStiffness(
+//				parentMorphogeneBranch->getJointPitchStiffness(),
+//				parentMorphogeneBranch->getJointYawStiffness(),
+//				parentMorphogeneBranch->getJointRollStiffness());
+//
+//		//set the angular spring damping coefficients of the joint
+//		joint->setAngularDamping(
+//				parentMorphogeneBranch->getSpringPitchDampingCoefficient(),
+//				parentMorphogeneBranch->getSpringYawDampingCoefficient(),
+//				parentMorphogeneBranch->getSpringRollDampingCoefficient());
+//
+//		//set if the angular motor is enabled
+//		joint->enableAngularMotor(
+//				parentMorphogeneBranch->isJointPitchMotorEnabled(),
+//				parentMorphogeneBranch->isJointYawMotorEnabled(),
+//				parentMorphogeneBranch->isJointRollMotorEnabled());
 	}
 
 	//Create new generators from the morphogene branches

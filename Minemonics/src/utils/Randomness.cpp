@@ -191,6 +191,5 @@ Ogre::Quaternion Randomness::nextQuaternion() {
 
 	double sinTheta = sin(theta);
 
-	return Ogre::Quaternion(cosTheta, x * sinTheta, y * sinTheta,
-			z * sinTheta);
+	return Ogre::Quaternion(cosTheta, x * sinTheta, y * sinTheta, z * sinTheta);
 }

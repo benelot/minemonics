@@ -49,9 +49,11 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
 		const btTransform& tframeInB) {
 	mWorld = world;
-	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA,
-			tframeInB EXTRAPARAMS);
+	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA.getOrigin(),
+			tframeInB.getOrigin() EXTRAPARAMS);
 
+//	mJoint->setDamping(10000);
+	
 	mJoint->enableFeedback(true);
 	mJoint->setJointFeedback(new btJointFeedback());
 
@@ -86,11 +88,11 @@ void JointBt::update(double timeSinceLastTick) {
 			motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
 			//TODO:Reenable motors when interpenetration problems are fixed.
-			(*motorIterator)->apply(timeSinceLastTick);
+//			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 	//set new motor target to joint
-	mJoint->setMotorTarget(mMotorTarget);
+//	mJoint->setMotorTarget(mMotorTarget);
 
 //	isStrained();
 }

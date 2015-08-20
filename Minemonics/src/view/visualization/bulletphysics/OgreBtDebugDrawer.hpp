@@ -130,6 +130,7 @@ public:
 	virtual int getDebugMode() const;
 	void drawRigidBodyInformation(btDynamicsWorld* btDWorld);
 	void draw();
+	void clear();
 
 	//accessor methods
 	void setDrawAabb(bool enable);
@@ -219,7 +220,7 @@ private:
 	std::vector<ContactPoint> mContactPoints2;
 
 	bool mDrawTrajectory;
-	int mClear;
+	bool mClear;
 	bool mDrawable;
 
 	bool mDebugDrawingEnabled;
