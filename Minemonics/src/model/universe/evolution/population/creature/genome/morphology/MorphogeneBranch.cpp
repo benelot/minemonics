@@ -28,7 +28,11 @@ MorphogeneBranch::MorphogeneBranch() :
 				0), mJointRollStiffness(0), mJointPitchMotorEnabled(false), mJointYawMotorEnabled(
 				false), mJointRollMotorEnabled(false), mJointMaxPitchForce(0), mJointMaxPitchSpeed(
 				0), mJointMaxYawForce(0), mJointMaxYawSpeed(0), mJointMaxRollForce(
-				0), mJointMaxRollSpeed(0) {
+				0), mJointMaxRollSpeed(0), mJointPitchXOffset(0), mJointPitchYOffset(
+				0), mJointPitchAmplitude(0), mJointPitchFrequency(0), mJointYawXOffset(
+				0), mJointYawYOffset(0), mJointYawAmplitude(0), mJointYawFrequency(
+				0), mJointRollXOffset(0), mJointRollYOffset(0), mJointRollAmplitude(
+				0), mJointRollFrequency(0) {
 }
 
 MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
@@ -67,6 +71,19 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 			morphogeneBranch.mSpringYawDampingCoefficient;
 	mSpringRollDampingCoefficient =
 			morphogeneBranch.mSpringRollDampingCoefficient;
+
+	mJointPitchXOffset = morphogeneBranch.mJointPitchXOffset;
+	mJointPitchYOffset = morphogeneBranch.mJointPitchYOffset;
+	mJointPitchAmplitude = morphogeneBranch.mJointPitchAmplitude;
+	mJointPitchFrequency = morphogeneBranch.mJointPitchFrequency;
+	mJointYawXOffset = morphogeneBranch.mJointYawXOffset;
+	mJointYawYOffset = morphogeneBranch.mJointYawYOffset;
+	mJointYawAmplitude = morphogeneBranch.mJointYawAmplitude;
+	mJointYawFrequency = morphogeneBranch.mJointYawFrequency;
+	mJointRollXOffset = morphogeneBranch.mJointRollXOffset;
+	mJointRollYOffset = morphogeneBranch.mJointRollYOffset;
+	mJointRollAmplitude = morphogeneBranch.mJointRollAmplitude;
+	mJointRollFrequency = morphogeneBranch.mJointRollFrequency;
 }
 
 void MorphogeneBranch::initialize() {
@@ -97,23 +114,23 @@ void MorphogeneBranch::initialize() {
 	 * The joint limits in each direction (pitch=1=Y,yaw=2=Z, roll=0=X)
 	 */
 	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>() / 2.0f,
+			0,
 			boost::math::constants::pi<double>() / 2.0f);
 	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>() / 2.0f,
+			0,
 			boost::math::constants::pi<double>() / 2.0f);
 	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>(),
-			boost::math::constants::pi<double>());
+			0,
+			boost::math::constants::pi<double>() / 2.0f);
 	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>(),
-			boost::math::constants::pi<double>());
+			0,
+			boost::math::constants::pi<double>() / 2.0f);
 	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>(),
-			boost::math::constants::pi<double>());
+			0,
+			boost::math::constants::pi<double>() / 2.0f);
 	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>(),
-			boost::math::constants::pi<double>());
+			0,
+			boost::math::constants::pi<double>() / 2.0f);
 
 	/**
 	 * Set whether the branch should be mirrored or flipped to the other side.

@@ -1,22 +1,29 @@
-//# corresponding headers
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
-
+//# corresponding header
 //# forward declarations
 //# system headers
-#include <iostream>
-
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
+#include <OgreQuaternion.h>
+
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
+//## controller headers
+//## model headers
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
 
 Morphogene::Morphogene() :
-		mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(LimbModel::UNKNOWN), mControllerGene(
+		mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
+				LimbPhysics::UNKNOWN), mControllerGene(
 		NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 				0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
 				0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
@@ -113,12 +120,15 @@ void Morphogene::initialize(const double branchiness) {
 	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
 
 	//The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
-	mJointYaw = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointPitch = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
-	mJointRoll = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
+	mJointYaw = Randomness::getSingleton()->nextUnifDouble(
+			-boost::math::constants::pi<double>() / 2.0,
+			boost::math::constants::pi<double>() / 2.0);
+	mJointPitch = Randomness::getSingleton()->nextUnifDouble(
+			-boost::math::constants::pi<double>() / 2.0,
+			boost::math::constants::pi<double>() / 2.0);
+	mJointRoll = Randomness::getSingleton()->nextUnifDouble(
+			-boost::math::constants::pi<double>() / 2.0,
+			boost::math::constants::pi<double>() / 2.0);
 
 	// A random color RGB values between 0 and 1
 	mColorR = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
@@ -126,18 +136,9 @@ void Morphogene::initialize(const double branchiness) {
 	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
 	// A random primitive from the available primitives
-	switch ((LimbModel::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
-			1, LimbModel::NUM_PRIMITIVES)) {
-	case LimbModel::BLOCK: {
-		//Randomly choose a segment primitive
-		mPrimitiveType = LimbModel::BLOCK;
-		break;
-	}
-	case LimbModel::CAPSULE: {
-		mPrimitiveType = LimbModel::CAPSULE;
-		break;
-	}
-	}
+	mPrimitiveType =
+			(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
+					1, LimbPhysics::NUM_PRIMITIVES);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
 	mRepetitionLimit = Randomness::getSingleton()->nextUnifPosInt(0,
@@ -157,6 +158,12 @@ void Morphogene::initialize(const double branchiness) {
 	// create an instance of the sine controller gene for the morphogene.
 	mControllerGene = new SineControllerGene();
 	mControllerGene->initialize();
+
+	Ogre::Quaternion q = Randomness::getSingleton()->nextQuaternion();
+	mOrientationW = q.w;
+	mOrientationX = q.x;
+	mOrientationY = q.y;
+	mOrientationZ = q.z;
 }
 
 Morphogene* Morphogene::clone() {
@@ -182,7 +189,9 @@ void Morphogene::mutate() {
 
 void Morphogene::grow(const int branchiness) {
 	int branchQty =
-			(branchiness != 0) ? Randomness::getSingleton()->nextUnifPosInt(0, branchiness) : 0;
+			(branchiness != 0) ?
+					Randomness::getSingleton()->nextUnifPosInt(0, branchiness) :
+					0;
 
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();
@@ -232,7 +241,7 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 	}
 
 	/**Compare morphogene branches */
-	if(mGeneBranches.size() != morphoGene.mGeneBranches.size()){
+	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) {
 		return false;
 	}
 

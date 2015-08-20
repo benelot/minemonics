@@ -225,11 +225,11 @@ public:
 		mZ = z;
 	}
 
-	LimbModel::PrimitiveType getPrimitiveType() const {
+	LimbPhysics::PrimitiveType getPrimitiveType() const {
 		return mPrimitiveType;
 	}
 
-	void setPrimitiveType(const LimbModel::PrimitiveType primitiveType) {
+	void setPrimitiveType(const LimbPhysics::PrimitiveType primitiveType) {
 		mPrimitiveType = primitiveType;
 	}
 
@@ -465,7 +465,7 @@ private:
 	/**
 	 * Segment type
 	 */
-	LimbModel::PrimitiveType mPrimitiveType;
+	LimbPhysics::PrimitiveType mPrimitiveType;
 
 	/**
 	 * A vector of genetic branches
