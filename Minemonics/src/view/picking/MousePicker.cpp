@@ -28,8 +28,6 @@
 #include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
-#include <view/picking/BulletRay.hpp>
-
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
@@ -42,19 +40,25 @@ MousePicker::~MousePicker() {
 	// TODO Auto-generated destructor stub
 }
 
-void MousePicker::castRay(btDynamicsWorld* world) {
+void MousePicker::pickBody(btDynamicsWorld* world) {
 	Ogre::Ray ray = getMouseRay();
-	BulletRay::castRay(world, OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getDirection()));
+	mBulletPicker.pickBody(world, OgreBulletUtils::convert(ray.getOrigin()),
+			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()));
 }
 
-void MousePicker::castRay() {
+void MousePicker::pickBody() {
 	//Implement OgreMeshRay
 	Ogre::Ray ray = getMouseRay();
-	BulletRay::castRay(
+	mBulletPicker.pickBody(
 			mViewController->getPlanetsInView()[0]->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getDirection()));
+			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()));
+}
+
+void MousePicker::moveBody(){
+	Ogre::Ray ray = getMouseRay();
+	mBulletPicker.movePickedBody(OgreBulletUtils::convert(ray.getOrigin()),
+			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()));
 }
 
 Ogre::Ray MousePicker::getMouseRay() {

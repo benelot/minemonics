@@ -1,5 +1,6 @@
 #ifndef VIEW_PICKING_MOUSEPICKER_HPP_
 #define VIEW_PICKING_MOUSEPICKER_HPP_
+
 //# corresponding headers
 //# forward declarations
 class btDynamicsWorld;
@@ -11,6 +12,8 @@ class Ray;
 //# system headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/physics/BulletPicker.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -19,8 +22,6 @@ class Ray;
 //## model headers
 //## view headers
 //## utils headers
-
-
 
 
 /**
@@ -35,13 +36,16 @@ public:
 	MousePicker(ViewController* viewController);
 	virtual ~MousePicker();
 
-	void castRay(btDynamicsWorld* world);
-	void castRay();
+	void pickBody(btDynamicsWorld* world);
+	void pickBody();
+
+	void moveBody();
 
 	Ogre::Ray getMouseRay();
 
 private:
 	ViewController* mViewController;
+	BulletPicker mBulletPicker;
 };
 
 #endif /* VIEW_PICKING_MOUSEPICKER_HPP_ */

@@ -950,7 +950,11 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 	case ApplicationMouseCode::LeftButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
 		if (isLeftControlPressed()) {
-			SimulationManager::getSingleton()->getMousePicker().castRay();
+			if (isLeftMousePressed()) {
+				SimulationManager::getSingleton()->getMousePicker().moveBody();
+			} else {
+				SimulationManager::getSingleton()->getMousePicker().pickBody();
+			}
 		}
 		mLeftMousePressed = true;
 		break;

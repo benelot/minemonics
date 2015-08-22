@@ -136,8 +136,7 @@ void Morphogene::initialize(const double branchiness) {
 	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
 	// A random primitive from the available primitives
-	mPrimitiveType = //LimbPhysics::BLOCK;
-			(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
+	mPrimitiveType = (LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
 					1, LimbPhysics::NUM_PRIMITIVES);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.

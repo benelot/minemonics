@@ -26,6 +26,7 @@ set(MODELHDRS
 	
     ## bullet physics controller
     ./model/universe/environments/physics/PhysicsController.hpp
+    ./model/universe/environments/physics/BulletPicker.hpp
 	
 	## juries
 	./model/universe/evolution/juries/Jury.hpp
@@ -102,6 +103,7 @@ set(MODELSRCS
 	
 	## bullet physics controller
 	./model/universe/environments/physics/PhysicsController.cpp
+	./model/universe/environments/physics/BulletPicker.cpp
    
     ## juries
 	./model/universe/evolution/juries/Jury.cpp
@@ -294,7 +296,6 @@ set(VIEWHDRS
 	
 	## picking
 	./view/picking/OgreMeshRay.hpp
-	./view/picking/BulletRay.hpp
 	./view/picking/MousePicker.hpp
     
     # procedural
@@ -366,7 +367,6 @@ set(VIEWSRCS
 	
 	## picking
 	./view/picking/OgreMeshRay.cpp
-	./view/picking/BulletRay.cpp
 	./view/picking/MousePicker.cpp
 	
 	# procedural
