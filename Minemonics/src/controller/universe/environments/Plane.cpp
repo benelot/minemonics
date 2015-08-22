@@ -5,9 +5,6 @@
 
 //## controller headers
 //## model headers
-#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-
 //## view headers
 //# custom headers
 //## base headers

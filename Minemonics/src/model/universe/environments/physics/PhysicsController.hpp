@@ -3,11 +3,17 @@
 
 //# corresponding header
 //# forward declarations
+class btDefaultCollisionConfiguration;
+class btMultiBodyConstraintSolver;
 //# system headers
 //## controller headers
-#include <btBulletDynamicsCommon.h>
-
 //## model headers
+#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
+#include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
+#include <BulletCollision/CollisionShapes/btCollisionShape.h>
+#include <LinearMath/btAlignedObjectArray.h>
+#include <LinearMath/btVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -75,7 +81,7 @@ public:
 
 
 	// Accessor methods
-	btDynamicsWorld*& getDynamicsWorld() {
+	btMultiBodyDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}
 
@@ -125,9 +131,9 @@ private:
 	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
 	btBroadphaseInterface* mBroadphase;
 	btCollisionDispatcher* mDispatcher;
-	btConstraintSolver* mSolver;
+	btMultiBodyConstraintSolver* mSolver;
 	btDefaultCollisionConfiguration* mCollisionConfiguration;
-	btDynamicsWorld* mDynamicsWorld; //this is the most important class
+	btMultiBodyDynamicsWorld* mDynamicsWorld; //this is the most important class
 
 	/**
 	 * Is the physics simulation paused or not?

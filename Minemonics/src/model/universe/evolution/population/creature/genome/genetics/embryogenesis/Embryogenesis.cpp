@@ -277,7 +277,6 @@ void Embryogenesis::transcribeMorphogene(
 		delete childLimbBt;
 		childLimbBt = NULL;
 
-		//
 		localChildJointInRefChild = localChildAnchorInRefChild
 				+ childJointDir.normalisedCopy()
 						* MorphologyConfiguration::JOINT_LENGTH;
@@ -380,7 +379,7 @@ void Embryogenesis::transcribeMorphogene(
 			childMorphogene->getRestitution(), childMorphogene->getFriction(),
 			Ogre::ColourValue(childMorphogene->getColorR(),
 					childMorphogene->getColorB(), childMorphogene->getColorG()),
-			phenomeModel->getComponentModels().size() - 1);
+			phenomeModel->getLimbModels().size());
 
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
@@ -434,9 +433,10 @@ void Embryogenesis::transcribeMorphogene(
 				((LimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
 				localParentJointTransform, localChildJointTransform,
 				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
-				phenomeModel->getComponentModels().size() - 1);
-		parentLimb->setJointIndex(joint->getIndex());
-		childLimb->setJointIndex(joint->getIndex());
+				phenomeModel->getJointModels().size());
+
+		parentLimb->addChildJointIndex(joint->getIndex());
+		childLimb->setParentJointIndex(joint->getIndex());
 
 		// add the joint to the phenotype joints
 		phenomeModel->getJointModels().push_back(joint);

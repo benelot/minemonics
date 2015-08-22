@@ -137,6 +137,7 @@ void Phenome::update(double timeSinceLastTick) {
 
 void Phenome::addToPhysicsWorld() {
 	if (!isInWorld()) {
+		mPhenotypeModel->addToWorld();
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
 				lit != mLimbs.end(); lit++) {
@@ -154,28 +155,30 @@ void Phenome::addToPhysicsWorld() {
 
 void Phenome::addToWorld() {
 	if (!isInWorld()) {
+		mPhenotypeModel->addToWorld();
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
 				lit != mLimbs.end(); lit++) {
 			(*lit)->addToWorld();
 		}
 
-		// Add all constraints
-		for (std::vector<Joint*>::iterator jit = mJoints.begin();
-				jit != mJoints.end(); jit++) {
-			(*jit)->addToWorld();
-		}
+//		// Add all constraints
+//		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+//				jit != mJoints.end(); jit++) {
+//			(*jit)->addToWorld();
+//		}
 		setInWorld(true);
 	}
 }
 
 void Phenome::removeFromWorld() {
 	if (isInWorld()) {
-		// Remove all constraints
-		for (std::vector<Joint*>::iterator jit = mJoints.begin();
-				jit != mJoints.end(); jit++) {
-			(*jit)->removeFromWorld();
-		}
+//		// Remove all constraints
+//		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+//				jit != mJoints.end(); jit++) {
+//			(*jit)->removeFromWorld();
+//		}
+		mPhenotypeModel->removeFromWorld();
 
 		// Remove all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();

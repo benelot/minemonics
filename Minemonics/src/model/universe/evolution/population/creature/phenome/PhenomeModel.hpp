@@ -3,6 +3,8 @@
 
 //# corresponding headers
 //# forward declarations
+class btMultiBody;
+class btMultiBodyDynamicsWorld;
 class CreatureModel;
 namespace boost {
 namespace serialization {
@@ -51,6 +53,8 @@ public:
 	 */
 	int performEmbryogenesis(CreatureModel* const creatureModel);
 
+	void generateBody();
+
 	/**
 	 * Reset the creature to the way it was born.
 	 */
@@ -92,6 +96,16 @@ public:
 	bool isInWorld() const {
 		return mInWorld;
 	}
+
+	/**
+	 * Add the phenotype to the physical and graphical world.
+	 */
+	void addToWorld();
+
+	/**
+	 * Remove the phenotype from the physical and graphical world.
+	 */
+	void removeFromWorld();
 
 	/**
 	 * Set whether the phenotype is in the world or not.
@@ -204,6 +218,14 @@ public:
 			return os;
 		}
 
+	btMultiBody* getMultiBody() {
+		return mMultiBody;
+	}
+
+	void setMultiBody(btMultiBody* multiBody) {
+		mMultiBody = multiBody;
+	}
+
 		/**
 		 * Serializes the creature to an xml file.
 		 * @param ar The archive.
@@ -279,6 +301,10 @@ private:
 	std::vector<Controller*> mControllers;
 
 	bool mHasInterpenetrations;
+
+	btMultiBody* mMultiBody;
+
+	btMultiBodyDynamicsWorld* mWorld;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

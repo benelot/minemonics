@@ -19,12 +19,12 @@
 //## utils headers
 
 JointModel::JointModel() :
-		mJointPhysics(NULL), mIndexA(-1), mIndexB(-1) {
+		mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1),mOwnIndex(-1) {
 
 }
 
 JointModel::JointModel(const JointModel& jointModel) :
-		mIndexA(jointModel.mIndexA), mIndexB(jointModel.mIndexB) {
+		mParentIndex(jointModel.mParentIndex), mChildIndex(jointModel.mChildIndex),mOwnIndex(jointModel.mOwnIndex) {
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 
@@ -40,10 +40,11 @@ void JointModel::initialize(btDynamicsWorld* const world,
 		const std::vector<LimbModel*>::size_type indexB,
 		const std::vector<LimbModel*>::size_type ownIndex) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
-	mIndexA = indexA;
-	mIndexB = indexB;
+	mParentIndex = indexA;
+	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
-
+	mLocalA = localA;
+	mLocalB = localB;
 	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
 
 	//TODO: proof of concept, make better.
@@ -120,11 +121,11 @@ bool JointModel::equals(const JointModel& jointModel) const {
 		return false;
 	}
 
-	if (mIndexA != jointModel.mIndexA) {
+	if (mParentIndex != jointModel.mParentIndex) {
 		return false;
 	}
 
-	if (mIndexB != jointModel.mIndexB) {
+	if (mChildIndex != jointModel.mChildIndex) {
 		return false;
 	}
 

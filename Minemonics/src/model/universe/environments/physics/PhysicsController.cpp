@@ -2,14 +2,26 @@
 #include <model/universe/environments/physics/PhysicsController.hpp>
 //# forward declarations
 //# system headers
+#include <cmath>
+
 //## controller headers
 //## model headers
+#include <BulletCollision/BroadphaseCollision/btDbvtBroadphase.h>
+#include <BulletCollision/CollisionDispatch/btCollisionDispatcher.h>
+#include <BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h>
+#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
+#include <LinearMath/btMotionState.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 //## utils headers
 
@@ -30,12 +42,18 @@ void PhysicsController::initBulletPhysics() {
 	mCollisionConfiguration = new btDefaultCollisionConfiguration(); //collision configuration contains default setup for memory, collision setup
 	mDispatcher = new btCollisionDispatcher(mCollisionConfiguration); //use the default collision dispatcher
 	mBroadphase = new btDbvtBroadphase();
-	mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
-	mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
-			mSolver, mCollisionConfiguration);
+//	mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
+	//Use the btMultiBodyConstraintSolver for Featherstone btMultiBody support
+	mSolver = new btMultiBodyConstraintSolver;
+
+	//use btMultiBodyDynamicsWorld for Featherstone btMultiBody support
+	mDynamicsWorld = new btMultiBodyDynamicsWorld(mDispatcher,
+			mBroadphase, mSolver, mCollisionConfiguration);
+//	mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
+//			mSolver, mCollisionConfiguration);
 	//TODO: Not sure if helps
-	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
-	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
+//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
+//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
 
 	mDynamicsWorld->setGravity(
 			btVector3(0,

@@ -9,8 +9,13 @@ class btDynamicsWorld;
 class CreatureModel;
 class Sensor;
 class Tactioceptor;
+class btMultiBody;
+class btMultiBodyLinkCollider;
+class JointModel;
 
 //# system headers
+#include <vector>
+
 //## controller headers
 //## model headers
 #include <boost/serialization/nvp.hpp>
@@ -67,7 +72,8 @@ public:
 			const Ogre::Vector3 initialRelativePosition,
 			const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
 			double mass, double restitution, double friction,
-			Ogre::ColourValue color, std::vector<ComponentModel*>::size_type ownIndex);
+			Ogre::ColourValue color,
+			std::vector<ComponentModel*>::size_type ownIndex);
 
 	void update(double timeSinceLastTick);
 	/**
@@ -134,12 +140,29 @@ public:
 
 	double getInterpenetrationDepth();
 
-	int getJointIndex() const {
-		return mJointIndex;
+	const double getMass() const {
+		return mLimbPhysics->getMass();
 	}
 
-	void setJointIndex(int jointIndex) {
-		mJointIndex = jointIndex;
+	const btVector3 getInertia() const {
+		return mLimbPhysics->getInertia();
+	}
+
+	virtual btCollisionShape* getCollisionShape() {
+		return mLimbPhysics->getCollisionShape();
+	}
+
+	const double getFriction() {
+		return mLimbPhysics->getFriction();
+	}
+
+	void generateLink(btMultiBody* multiBody, btVector3 origin,
+			btQuaternion rotation, int index) {
+		mLimbPhysics->generateLink(multiBody, origin, rotation, index);
+	}
+
+	btMultiBodyLinkCollider* getLink() {
+		return mLimbPhysics->getLink();
 	}
 
 	// Serialization
@@ -158,6 +181,24 @@ public:
 			const LimbModel &limbModel) {
 		//TODO: Improve the printout.
 		return os;
+	}
+
+	std::vector<LimbModel*>::size_type getParentJointIndex() const {
+		return mParentJointIndex;
+	}
+
+	void setParentJointIndex(
+			std::vector<LimbModel*>::size_type parentJointIndex) {
+		mParentJointIndex = parentJointIndex;
+	}
+
+	const std::vector<std::vector<JointModel*>::size_type>& getChildJointIndices() const {
+		return mChildJointIndices;
+	}
+
+	void addChildJointIndex(
+			std::vector<JointModel*>::size_type childJointIndex) {
+		mChildJointIndices.push_back(childJointIndex);
 	}
 
 	/**
@@ -198,9 +239,12 @@ private:
 	std::vector<Tactioceptor*> mTactioceptors;
 
 	/**
-	 * The index of the joint the limb is connected to.
+	 * The index of the joint the limb is connected to its parent.
 	 */
-	std::vector<LimbModel*>::size_type mJointIndex;
+	std::vector<JointModel*>::size_type mParentJointIndex;
+
+	std::vector<std::vector<JointModel*>::size_type> mChildJointIndices;
+
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */

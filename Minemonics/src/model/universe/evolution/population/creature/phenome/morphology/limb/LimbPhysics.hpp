@@ -3,24 +3,25 @@
 
 //# corresponding header
 //# forward declarations
+class btCollisionShape;
+class btMultiBody;
+class btQuaternion;
+class btTransform;
+class btVector3;
+class btMultiBodyLinkCollider;
 namespace boost {
 namespace serialization {
 class access;
 } /* namespace serialization */
 } /* namespace boost */
-class btQuaternion;
-class btVector3;
-class btTransform;
 
 //# system headers
 #include <iostream>
 
 //## controller headers
 //## model headers
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/vector.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
 #include <OgreColourValue.h>
@@ -201,6 +202,18 @@ public:
 		return mType;
 	}
 
+	double getMass() const {
+		return mMass;
+	}
+
+	virtual const btVector3& getInertia() const = 0;
+
+	virtual btCollisionShape* getCollisionShape() = 0;
+
+	virtual void generateLink(btMultiBody* multiBody, btVector3 origin, btQuaternion rotation,int index) = 0;
+
+	virtual btMultiBodyLinkCollider* getLink() = 0;
+
 	// Serialization
 	/**
 	 * Give access to boost serialization
@@ -253,6 +266,10 @@ public:
 
 				/**The volume of the limb physics model*/
 				<< "/Volume=" << limbPhysics.mVolume;
+	}
+
+	double getFriction() const {
+		return mFriction;
 	}
 
 	/**

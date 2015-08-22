@@ -163,6 +163,11 @@ void Limb::removeFromWorld() {
 	}
 }
 
+void Limb::generateLink(btMultiBody* multiBody, btVector3 origin,
+		btQuaternion rotation, int index) {
+	mLimbModel->generateLink(multiBody, origin, rotation, index);
+}
+
 /**
  * Get intersection point with the limb graphics given a straight line defined by origin and direction.
  */

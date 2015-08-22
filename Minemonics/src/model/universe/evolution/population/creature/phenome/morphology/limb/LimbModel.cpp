@@ -24,13 +24,13 @@
 
 LimbModel::LimbModel() :
 		mLimbPhysics(NULL), mCreatureModel(
-		NULL), mJointIndex(0) {
+		NULL), mParentJointIndex(0) {
 }
 
 LimbModel::LimbModel(const LimbModel& limbModel) {
 	mLimbPhysics = limbModel.mLimbPhysics->clone();
 	mCreatureModel = limbModel.mCreatureModel;
-	mJointIndex = limbModel.mJointIndex;
+	mParentJointIndex = limbModel.mParentJointIndex;
 }
 
 LimbModel::~LimbModel() {

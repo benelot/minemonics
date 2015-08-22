@@ -5,19 +5,29 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations
-//# corresponding header
-//# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 struct btDefaultMotionState;
 class btDynamicsWorld;
+class btMultiBody;
+//class btMultiBodyLinkCollider;
 
 //# system headers
+#include <cmath>
+
 //## controller headers
 //## model headers
+#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
-#include <LinearMath/btTransform.h>
 
 //## view headers
 //# custom headers
@@ -61,6 +71,9 @@ public:
 			const Ogre::Vector3 dimensions, const btScalar mass,
 			const btScalar restitution, const btScalar friction,
 			const Ogre::ColourValue color);
+
+	virtual void generateLink(btMultiBody* multiBody, btVector3 origin,
+			btQuaternion rotation, int index);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -136,12 +149,28 @@ public:
 	virtual void calm();
 	//Accessor methods
 
+//	btVector3 getPosition() const {
+//		return mBody->getCenterOfMassPosition();
+//	}
+//
+//	btQuaternion getOrientation() const {
+//		return mBody->getOrientation();
+//	}
+
 	btVector3 getPosition() const {
-		return mBody->getCenterOfMassPosition();
+		if (mLink) {
+			return mLink->getWorldTransform().getOrigin();
+		} else {
+			return mBody->getCenterOfMassPosition();
+		}
 	}
 
 	btQuaternion getOrientation() const {
-		return mBody->getOrientation();
+		if (mLink) {
+			return mLink->getWorldTransform().getRotation();
+		} else {
+			return mBody->getOrientation();
+		}
 	}
 
 	virtual const double getVolume() {
@@ -167,6 +196,22 @@ public:
 
 	btRigidBody* getRigidBody() const {
 		return mBody;
+	}
+
+	virtual btCollisionShape* getCollisionShape() {
+		return mCollisionShape;
+	}
+
+	virtual const btVector3& getInertia() const {
+		return mInertia;
+	}
+
+	void setInertia(const btVector3& inertia) {
+		mInertia = inertia;
+	}
+
+	btMultiBodyLinkCollider* getLink() {
+		return mLink;
 	}
 
 	// Serialization
@@ -207,6 +252,10 @@ private:
 	btDefaultMotionState* mMotionState;
 
 	btRigidBody* mBody;
+
+	btVector3 mInertia;
+
+	btMultiBodyLinkCollider* mLink;
 };
 BOOST_CLASS_VERSION(LimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

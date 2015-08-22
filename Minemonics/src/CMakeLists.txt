@@ -190,9 +190,6 @@ set(CONTROLLERHDRS
 	./controller/EvaluationController.hpp
 	./controller/Evaluation.hpp
 	
-	## ragdoll
-    ./controller/ragdoll/RagDoll.hpp
-    
     ## universe
     ./controller/universe/Universe.hpp
     ./controller/universe/Planet.hpp
@@ -205,8 +202,12 @@ set(CONTROLLERHDRS
     ## evolution
     ./controller/universe/evolution/Evolution.hpp
     ./controller/universe/evolution/population/Population.hpp
-        
-    ## phenome
+    
+    ## ragdoll
+	./controller/universe/evolution/population/ragdoll/RagDoll.hpp
+	./controller/universe/evolution/population/snake/Snake.hpp
+	
+    ## creature
     ./controller/universe/evolution/population/creature/Creature.hpp
     ./controller/universe/evolution/population/creature/phenome/Phenome.hpp
     ./controller/universe/evolution/population/creature/phenome/Component.hpp
@@ -231,10 +232,7 @@ set(CONTROLLERSRCS
 	## evaluation controller
 	./controller/EvaluationController.cpp
 	./controller/Evaluation.cpp
-	
-	## ragdoll
-	./controller/ragdoll/RagDoll.cpp
-	
+		
 	## universe
     ./controller/universe/Universe.cpp
     ./controller/universe/Planet.cpp
@@ -248,6 +246,10 @@ set(CONTROLLERSRCS
     ./controller/universe/evolution/Evolution.cpp
     ./controller/universe/evolution/population/Population.cpp
     
+    ## ragdoll
+	./controller/universe/evolution/population/ragdoll/RagDoll.cpp
+	./controller/universe/evolution/population/snake/Snake.cpp
+	
     ## creature
     ./controller/universe/evolution/population/creature/Creature.cpp
     ./controller/universe/evolution/population/creature/phenome/Phenome.cpp

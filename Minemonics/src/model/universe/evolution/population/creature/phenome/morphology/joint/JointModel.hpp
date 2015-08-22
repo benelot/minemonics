@@ -147,12 +147,12 @@ public:
 		return mJointPhysics->getMotors();
 	}
 
-	const std::vector<LimbModel*>::size_type getIndexA() const {
-		return mIndexA;
+	const std::vector<LimbModel*>::size_type getParentIndex() const {
+		return mParentIndex;
 	}
 
-	const std::vector<LimbModel*>::size_type getIndexB() const {
-		return mIndexB;
+	const std::vector<LimbModel*>::size_type getChildIndex() const {
+		return mChildIndex;
 	}
 
 	// Serialization
@@ -174,6 +174,22 @@ public:
 //		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
 	}
 
+	const btTransform& getParentComToPivot() const {
+		return mLocalA;
+	}
+
+	void setLocalA(const btTransform& localA) {
+		mLocalA = localA;
+	}
+
+	const btTransform& getPivotToChildCom() const {
+		return mLocalB;
+	}
+
+	void setLocalB(const btTransform& localB) {
+		mLocalB = localB;
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -191,7 +207,9 @@ private:
 	/**
 	 * The indices of limbA and limbB.
 	 */
-	std::vector<LimbModel*>::size_type mIndexA, mIndexB;
+	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex;
+
+	btTransform mLocalA,mLocalB;
 
 	/**
 	 * The joint's own index.

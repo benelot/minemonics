@@ -162,6 +162,14 @@ public:
 		mPhenotypeModel->setInWorld(inWorld);
 	}
 
+	bool isDeveloped() const {
+		return mPhenotypeModel->isDeveloped();
+	}
+
+	void setDeveloped(bool developed){
+		mPhenotypeModel->setDeveloped(developed);
+	}
+
 	std::vector<Joint*>& getJoints() {
 		return mJoints;
 	}

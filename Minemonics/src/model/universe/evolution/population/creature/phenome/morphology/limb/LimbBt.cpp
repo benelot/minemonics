@@ -7,13 +7,19 @@
 
 //## controller headers
 //## model headers
-#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
+#include <BulletCollision/CollisionShapes/btCollisionShape.h>
+#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Featherstone/btMultiBody.h>
+#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <LinearMath/btDefaultMotionState.h>
+#include <LinearMath/btQuadWord.h>
 #include <LinearMath/btTransform.h>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -30,10 +36,11 @@
 //## view headers
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbBt::LimbBt() :
 		LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-		NULL) {
+		NULL), mInertia(0, 0, 0), mLink(NULL) {
 }
 
 LimbBt::LimbBt(const LimbBt& limbBt) {
@@ -50,11 +57,14 @@ LimbBt::LimbBt(const LimbBt& limbBt) {
 			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction, limbBt.mColor);
 
 	mInWorld = limbBt.mInWorld;
+	mInertia = limbBt.mInertia;
 }
 
 LimbBt::~LimbBt() {
 	delete mBody;
 	mBody = NULL;
+	delete mLink;
+	mLink = NULL;
 }
 
 void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
@@ -84,9 +94,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 		exit(-1);
 	}
 
-	btVector3 localInertia(0, 0, 0);
-
-	mCollisionShape->calculateLocalInertia(mass, localInertia);
+	mCollisionShape->calculateLocalInertia(mass, mInertia);
 
 	// position the limb in the world
 	btTransform startTransform;
@@ -96,7 +104,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 
 	mMotionState = new btDefaultMotionState(startTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
-			mCollisionShape, localInertia);
+			mCollisionShape, mInertia);
 	mBody = new btRigidBody(rbInfo);
 	mBody->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 	mBody->setSleepingThresholds(
@@ -155,7 +163,7 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 //			rayEnd, btVector3(1, 1, 0));
 
 	btVector3 hitPosition = origin;
-	btVector3 hitNormal = btVector3(1,0,0);
+	btVector3 hitNormal = btVector3(1, 0, 0);
 
 	btCollisionWorld::ClosestRayResultCallback rayCallback(rayStart, rayEnd);
 
@@ -212,7 +220,7 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 	btTransform hitTransform;
 	hitTransform.setIdentity();
 	hitTransform.setOrigin(hitPosition);
-	Ogre::Euler euler(0,0,0);
+	Ogre::Euler euler(0, 0, 0);
 	euler.direction(OgreBulletUtils::convert(hitNormal));
 	hitTransform.setRotation(OgreBulletUtils::convert(euler.toQuaternion()));
 	return hitTransform;
@@ -277,17 +285,20 @@ void LimbBt::reposition(const Ogre::Vector3 position) {
 btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 		const btVector3 direction) {
 	btTransform transform = getPreciseIntersection(origin, direction);
-	transform.setOrigin(transform.getOrigin()-origin);
+	transform.setOrigin(transform.getOrigin() - origin);
 	return transform;
 }
 
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
-		if (PhysicsConfiguration::NO_INTRACOLLISION) {
-			mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
-					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-		} else {
-			mWorld->addRigidBody(mBody);
+		if (mLink != NULL) {
+			if (PhysicsConfiguration::NO_INTRACOLLISION) {
+				mWorld->addCollisionObject(mLink,
+						PhysicsConfiguration::COL_CREATURE,
+						PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+			} else {
+				mWorld->addCollisionObject(mLink);
+			}
 		}
 		LimbPhysics::addToWorld();
 	}
@@ -295,7 +306,9 @@ void LimbBt::addToWorld() {
 
 void LimbBt::removeFromWorld() {
 	if (isInWorld()) {
-		mWorld->removeRigidBody(mBody);
+		if (mLink != NULL) {
+			mWorld->removeCollisionObject(mLink);
+		}
 		LimbPhysics::removeFromWorld();
 	}
 }
@@ -306,7 +319,21 @@ LimbBt* LimbBt::clone() {
 
 void LimbBt::calm() {
 	mBody->clearForces();
-	btVector3 zeroVector(0,0,0);
+	btVector3 zeroVector(0, 0, 0);
 	mBody->setLinearVelocity(zeroVector);
 	mBody->setAngularVelocity(zeroVector);
+}
+
+void LimbBt::generateLink(btMultiBody* multiBody, btVector3 origin,
+		btQuaternion rotation, int index) {
+	mLink = new btMultiBodyLinkCollider(multiBody, index);
+	mLink->setCollisionShape(mCollisionShape);
+
+	btTransform tr;
+	tr.setIdentity();
+	tr.setOrigin(origin);
+	tr.setRotation(rotation);
+	mLink->setWorldTransform(tr);
+	mLink->setFriction(mFriction);
+	//				pWorld->addCollisionObject(col, 2, 1 + 2);
 }
