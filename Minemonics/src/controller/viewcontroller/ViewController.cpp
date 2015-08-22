@@ -47,7 +47,6 @@ ViewController::ViewController() :
 }
 
 ViewController::~ViewController() {
-	delete mLayout;
 	mLayout = NULL;
 
 	mSystem = NULL;
