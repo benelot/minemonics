@@ -1,4 +1,5 @@
 //# corresponding headers
+#include <controller/universe/evolution/population/ragdoll/RagDoll.hpp>
 //# forward declarations
 //# system headers
 #include <stddef.h>
@@ -9,7 +10,6 @@
 //## model headers
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
-#include <controller/ragdoll/RagDoll.hpp>
 #include <LinearMath/btMatrix3x3.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>

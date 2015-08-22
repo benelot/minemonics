@@ -18,7 +18,8 @@
 //## configuration headers
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <controller/ragdoll/RagDoll.hpp>
+#include <controller/universe/evolution/population/ragdoll/RagDoll.hpp>
+#include <controller/universe/evolution/population/snake/Snake.hpp>
 
 //## model headers
 //## view headers
@@ -82,8 +83,9 @@ void Population::initialize(Planet* const planet, const int creatureQty) {
 void Population::addNewMember(const double branchiness,
 		const Ogre::Vector3 rootPosition) {
 	//add new creature
+	Creature* creature = new Snake(this,15,OgreBulletUtils::convert(rootPosition));
 //	Creature* creature = new RagDoll(this,10,OgreBulletUtils::convert(rootPosition));
-	Creature* creature = new Creature(this, rootPosition, 2);
+//	Creature* creature = new Creature(this, rootPosition, branchiness);
 	addMember(creature);
 }
 
