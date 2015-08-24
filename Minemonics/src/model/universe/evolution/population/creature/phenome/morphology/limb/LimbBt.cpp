@@ -329,8 +329,4 @@ void LimbBt::generateLink(btMultiBody* multiBody, btVector3 origin,
 	mLink->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 	mLink->setWorldTransform(tr);
 	mLink->setFriction(mFriction);
-	mLink->activate();
-	//TODO: Think about the disable deactivation again when we got rid of the single rigidbody.
-	mLink->setActivationState(DISABLE_DEACTIVATION);
-//				pWorld->addCollisionObject(col, 2, 1 + 2);
 }
