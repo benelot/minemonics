@@ -196,24 +196,10 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 //				btVector3(1, 0, 0));
 //		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
 //				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
-//		std::cout
-//				<< "############################################################\n"
-//				<< "hit an object!\n" << rayStart.x() << ",\t" << rayStart.y()
-//				<< ",\t" << rayStart.z() << "\t::rayStart\n" << hitPosition.x()
-//				<< ",\t" << hitPosition.y() << ",\t" << hitPosition.z()
-//				<< "\t::hitPosition\n" << rayEnd.x() << ",\t" << rayEnd.y()
-//				<< ",\t" << rayEnd.z() << "\t::rayEnd\n"
-//				<< "############################################################\n\n";
 
 	} else {
 //		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
 //				1, btVector3(1, 0, 0));
-//		std::cout
-//				<< "############################################################\n"
-//				<< "no hit!\n" << rayStart.x() << ",\t" << rayStart.y() << ",\t"
-//				<< rayStart.z() << "\t::rayStart\n" << rayEnd.x() << ",\t"
-//				<< rayEnd.y() << ",\t" << rayEnd.z() << "\t::rayEnd\n"
-//				<< "############################################################\n\n";
 		//no hit
 	}
 
@@ -242,7 +228,6 @@ btTransform LimbBt::getLocalIntersection(const btVector3 origin,
 
 void LimbBt::reset(const Ogre::Vector3 position) {
 	btTransform initialTransform;
-	mMotionState->getWorldTransform(initialTransform);
 
 	btVector3 initialRelativePosition;
 	initialRelativePosition.setValue(getInitialRelativeXPosition(),
@@ -263,7 +248,6 @@ void LimbBt::reset(const Ogre::Vector3 position) {
 
 void LimbBt::reposition(const Ogre::Vector3 position) {
 	btTransform initialTransform;
-	mMotionState->getWorldTransform(initialTransform);
 
 	btVector3 initialRelativePosition;
 	initialRelativePosition.setValue(getInitialRelativeXPosition(),
@@ -300,6 +284,9 @@ void LimbBt::addToWorld() {
 				mWorld->addCollisionObject(mLink);
 			}
 		}
+		else{
+			std::cout << "OHNO";
+		}
 		LimbPhysics::addToWorld();
 	}
 }
@@ -333,7 +320,12 @@ void LimbBt::generateLink(btMultiBody* multiBody, btVector3 origin,
 	tr.setIdentity();
 	tr.setOrigin(origin);
 	tr.setRotation(rotation);
+	mLink->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
+//	mLink->setSleepingThresholds(
+//			PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
+//			PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
 	mLink->setWorldTransform(tr);
 	mLink->setFriction(mFriction);
+	mLink->activate();
 	//				pWorld->addCollisionObject(col, 2, 1 + 2);
 }

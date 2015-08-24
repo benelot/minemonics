@@ -435,6 +435,8 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
 				phenomeModel->getJointModels().size());
 
+		std::cout << "Joint Parent: " << joint->getParentIndex() << " /Joint Child: " << joint->getChildIndex() << std::endl;
+
 		parentLimb->addChildJointIndex(joint->getIndex());
 		childLimb->setParentJointIndex(joint->getIndex());
 

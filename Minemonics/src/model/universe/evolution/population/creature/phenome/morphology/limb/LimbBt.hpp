@@ -166,11 +166,15 @@ public:
 	}
 
 	btQuaternion getOrientation() const {
+		btTransform transform;
 		if (mLink) {
-			return mLink->getWorldTransform().getRotation();
+			transform = mLink->getWorldTransform();
 		} else {
-			return mBody->getOrientation();
+			transform = mBody->getWorldTransform();
 		}
+
+		//if there are NaNs, this removes them it seems.
+		return transform.getRotation().normalized();
 	}
 
 	virtual const double getVolume() {
