@@ -217,14 +217,14 @@ void PhenomeModel::generateBody() {
 
 		for (int i = 0; i < mJointModels.size(); i++) {
 			mMultiBody->setupSpherical(
-					((long) mJointModels.at(i)->getChildIndex()) - 1,
+					((long) mJointModels[i]->getChildIndex()) - 1,
 					mLimbModels[i + 1]->getMass(),
 					mLimbModels[i + 1]->getInertia(),
-					((long) mJointModels.at(i)->getParentIndex()) - 1,
-					mJointModels.at(i)->getParentComToPivot().getRotation()
-							* mJointModels.at(i)->getPivotToChildCom().getRotation(),
-					mJointModels.at(i)->getParentComToPivot().getOrigin(),
-					-mJointModels.at(i)->getPivotToChildCom().getOrigin(), false);
+					((long) mJointModels[i]->getParentIndex()) - 1,
+					mJointModels[i]->getParentComToPivot().getRotation()
+							* mJointModels[i]->getPivotToChildCom().getRotation(),
+					mJointModels[i]->getParentComToPivot().getOrigin(),
+					-mJointModels[i]->getPivotToChildCom().getOrigin(), false);
 		}
 		//TODO: Limit joints that way
 //	  // Link joint limits
@@ -254,33 +254,38 @@ void PhenomeModel::generateBody() {
 		btAlignedObjectArray<btVector3> localOrigin;
 		localOrigin.resize(mMultiBody->getNumLinks() + 1);
 
+		worldtoLocal[0] = mMultiBody->getWorldToBaseRot();
+		localOrigin[0] = mMultiBody->getBasePos();
 		for (int i = 0; i < mMultiBody->getNumLinks(); ++i) {
-			if (i == 0) {
-				worldtoLocal.at(i) = mMultiBody->getWorldToBaseRot();
-				localOrigin.at(i) = mMultiBody->getBasePos();
-			} else {
-				const int parent = mMultiBody->getParent(i);
-				worldtoLocal.at(i) = mMultiBody->getParentToLocalRot(i)
-						* worldtoLocal[parent];
-				localOrigin.at(i) = localOrigin[parent]
-						+ (quatRotate(worldtoLocal.at(i).inverse(),
-								mMultiBody->getRVector(i)));
-			}
+			const int parent = mMultiBody->getParent(i);
+			worldtoLocal[i + 1] = mMultiBody->getParentToLocalRot(i)
+					* worldtoLocal[parent + 1];
+			localOrigin[i + 1] = localOrigin[parent + 1]
+					+ (quatRotate(worldtoLocal[i + 1].inverse(),
+							mMultiBody->getRVector(i)));
+		}
+
+		{
+			btVector3 origin = localOrigin[0];
+
+			btQuaternion orientation(-worldtoLocal[0].x(), -worldtoLocal[0].y(),
+					-worldtoLocal[0].z(), worldtoLocal[0].w());
+
+			mLimbModels[0]->generateLink(mMultiBody, origin, orientation, -1);
+			mMultiBody->setBaseCollider(mLimbModels[0]->getLink());
 		}
 
 		for (int i = 0; i < mMultiBody->getNumLinks(); ++i) {
 
-			btVector3 origin = localOrigin.at(i);
+			btVector3 origin = localOrigin[i + 1];
 
-			btQuaternion orientation(-worldtoLocal.at(i).x(), -worldtoLocal.at(i).y(),
-					-worldtoLocal.at(i).z(), worldtoLocal.at(i).w());
-			mLimbModels.at(i)->generateLink(mMultiBody, origin, orientation,
-					mLimbModels.at(i)->getIndex() - 1);
-			if (i == 0) {
-				mMultiBody->setBaseCollider(mLimbModels.at(i)->getLink());
-			} else {
-				mMultiBody->getLink(i).m_collider = mLimbModels.at(i)->getLink();
-			}
+			btQuaternion orientation(-worldtoLocal[i + 1].x(),
+					-worldtoLocal[i + 1].y(), -worldtoLocal[i + 1].z(),
+					worldtoLocal[i + 1].w());
+			mLimbModels[i + 1]->generateLink(mMultiBody, origin, orientation,
+					i);
+
+			mMultiBody->getLink(i).m_collider = mLimbModels[i + 1]->getLink();
 		}
 	}
 }
