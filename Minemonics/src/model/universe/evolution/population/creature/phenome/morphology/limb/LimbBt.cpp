@@ -283,9 +283,13 @@ void LimbBt::addToWorld() {
 			} else {
 				mWorld->addCollisionObject(mLink);
 			}
-		}
-		else{
-			std::cout << "OHNO";
+		} else {
+			if (PhysicsConfiguration::NO_INTRACOLLISION) {
+				mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
+						PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+			} else {
+				mWorld->addRigidBody(mBody);
+			}
 		}
 		LimbPhysics::addToWorld();
 	}
@@ -295,9 +299,11 @@ void LimbBt::removeFromWorld() {
 	if (isInWorld()) {
 		if (mLink != NULL) {
 			mWorld->removeCollisionObject(mLink);
+		} else {
+			mWorld->removeRigidBody(mBody);
 		}
-		LimbPhysics::removeFromWorld();
 	}
+	LimbPhysics::removeFromWorld();
 }
 
 LimbBt* LimbBt::clone() {
@@ -321,11 +327,8 @@ void LimbBt::generateLink(btMultiBody* multiBody, btVector3 origin,
 	tr.setOrigin(origin);
 	tr.setRotation(rotation);
 	mLink->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
-//	mLink->setSleepingThresholds(
-//			PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
-//			PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
 	mLink->setWorldTransform(tr);
 	mLink->setFriction(mFriction);
 	mLink->activate();
-	//				pWorld->addCollisionObject(col, 2, 1 + 2);
+//				pWorld->addCollisionObject(col, 2, 1 + 2);
 }
