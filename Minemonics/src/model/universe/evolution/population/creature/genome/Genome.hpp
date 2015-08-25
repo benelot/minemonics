@@ -125,7 +125,7 @@ public:
 	 * 							The probability of replacing genes.
 	 */
 	virtual void replaceRandomGenesWithRandomGenes(
-			const double replacementProbability) = 0;
+	const double replacementProbability) = 0;
 
 	/**
 	 * Replaces a random gene with another random gene.
@@ -138,7 +138,7 @@ public:
 	 * A self-loop arises when branch specifications dictate that segments of a particular type should have child segments of the same type. The segment copying mutation preserves this direct recursion in the tree structure when copying a segment specification from one index in the segment specification vector to another.
 	 */
 	virtual void replaceGeneWith(const int geneIndex,
-			const int replacementIndex) = 0;
+	const int replacementIndex) = 0;
 
 	/**
 	 * Duplicate random genes with probability.
@@ -291,9 +291,8 @@ public:
 	 * 							The segment index in the father genome where the copying ends.
 	 */
 	virtual void crossover(Genome* const fathergenome,
-			const int motherSegmentStartIndex, const int motherSegmentEndIndex,
-			const int fatherSegmentStartIndex,
-			const int fatherSegmentEndIndex) = 0;
+	const int motherSegmentStartIndex, const int motherSegmentEndIndex,
+	const int fatherSegmentStartIndex, const int fatherSegmentEndIndex) = 0;
 
 	/**
 	 * @brief Grafts a random feature from the donor over to this genome.
@@ -318,13 +317,10 @@ public:
 	 *            Number of genes to copy
 	 */
 	virtual void graftFrom(Genome* const donor, const int attachmentIndex,
-			const int geneIndex, const int geneQty) = 0;
+	const int geneIndex, const int geneQty) = 0;
 
 	//Serialization
-	/**
-	 * @brief Give access to boost serialization.
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization.*/
 
 	/**
 	 * @brief Serializes the genome to a string.
@@ -337,15 +333,13 @@ public:
 
 	friend std::ostream & operator<<(std::ostream &os, const Genome &genome) {
 		os
-		/**The type of genome*/
-		<< "MixedGenome: Type: " << genome.mGenomeType
 
-		/**The length of the genome*/
-		<< "/length=" << genome.mLength;
+		<< "MixedGenome: Type: " << genome.mGenomeType /**!< The type of genome*/
 
-		/**The vector of genes.*/
-		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
-				it != genome.mGenes.end(); it++) {
+		<< "/length=" << genome.mLength; /**!< The length of the genome*/
+
+		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin(); /**!< The vector of genes.*/
+		it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -358,18 +352,13 @@ public:
 		//in order to detect a derived class type from a base type for serialization,
 		//you have to register the derived class type in beforehand.
 		ar.register_type(static_cast<Morphogene*>(NULL));
-		ar
-		/**The type of the genome*/
-		& BOOST_SERIALIZATION_NVP(mGenomeType)
+		ar & BOOST_SERIALIZATION_NVP(mGenomeType) /**!< The type of the genome*/
 
-		/**The length of the genome*/
-		& BOOST_SERIALIZATION_NVP(mLength)
+		& BOOST_SERIALIZATION_NVP(mLength) /**!< The length of the genome*/
 
-		/**The branchiness of the genome*/
-		& BOOST_SERIALIZATION_NVP(mBranchiness)
+		& BOOST_SERIALIZATION_NVP(mBranchiness) /**!< The branchiness of the genome*/
 
-		/**The vector of genes.*/
-		& BOOST_SERIALIZATION_NVP(mGenes);
+		& BOOST_SERIALIZATION_NVP(mGenes); /**!< The vector of genes.*/
 	}
 
 	//Accessor methods

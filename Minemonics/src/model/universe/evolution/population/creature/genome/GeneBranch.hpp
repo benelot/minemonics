@@ -65,12 +65,26 @@ public:
 	 */
 	GeneBranch* clone();
 
-	//Serialization
+	//Accessor methods
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	GeneBranchType getType() const {
+		return mType;
+	}
+
+	void setType(GeneBranchType geneBranchType) {
+		mType = geneBranchType;
+	}
+
+	bool isActive() const {
+		return mActive;
+	}
+
+	void setActive(bool active) {
+		mActive = active;
+	}
+
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization*/
 
 	/**
 	 * Serializes the gene branch to a string.
@@ -97,25 +111,6 @@ public:
 		ar & BOOST_SERIALIZATION_NVP(mActive) /**!< If the gene branch is active or not*/
 		& BOOST_SERIALIZATION_NVP(mType); /**!< The type of gene branch*/
 	}
-
-	//Accessor methods
-
-	GeneBranchType getType() const {
-		return mType;
-	}
-
-	void setType(GeneBranchType geneBranchType) {
-		mType = geneBranchType;
-	}
-
-	bool isActive() const {
-		return mActive;
-	}
-
-	void setActive(bool active) {
-		mActive = active;
-	}
-
 protected:
 
 	bool mActive; /**!< Determines if this branch is active. */

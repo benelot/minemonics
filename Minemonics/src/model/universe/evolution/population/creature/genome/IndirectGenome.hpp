@@ -59,10 +59,7 @@ public:
 	IndirectGenome* clone() = 0;
 
 	//Serialization
-	/**
-	 * @brief Give access to boost serialization.
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization.*/
 
 	/**
 	 * @brief Serializes the genome to a string.

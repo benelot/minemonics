@@ -40,8 +40,8 @@ public:
 	 * @param generator The generator of that should be transcribed.
 	 */
 	static void transcribeGene(std::list<PhenotypeGenerator*>& generatorList,
-			int& totalSegmentCounter, PhenomeModel* phenomeModel,
-			BaseGenerator* generator);
+	int& totalSegmentCounter, PhenomeModel* phenomeModel,
+	BaseGenerator* generator);
 
 	/**
 	 * Transcribe a morphogene into the component it represents.
@@ -51,9 +51,8 @@ public:
 	 * @param generator The generator of that should be transcribed.
 	 */
 	static void transcribeMorphogene(
-			std::list<PhenotypeGenerator*>& generatorList,
-			int& totalSegmentCounter, PhenomeModel* phenomeModel,
-			PhenotypeGenerator* generator);
+	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
+	PhenomeModel* phenomeModel, PhenotypeGenerator* generator);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_ */
