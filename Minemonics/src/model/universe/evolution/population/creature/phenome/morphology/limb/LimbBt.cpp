@@ -171,7 +171,7 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 //	allResults.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	//kF_UseGjkConvexRaytest flag is now enabled by default, use the faster but more approximate algorithm
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
-	rayCallback.m_flags &= !btTriangleRaycastCallback::kF_FilterBackfaces;
+	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
 	rayCallback.m_collisionFilterGroup =
 			PhysicsConfiguration::COL_CREATURE_TESTRAY;
 	rayCallback.m_collisionFilterMask =
@@ -276,7 +276,7 @@ btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
 		if (mLink != NULL) {
-			if (PhysicsConfiguration::NO_INTRACOLLISION) {
+			if (!PhysicsConfiguration::SELF_COLLISION) {
 				mWorld->addCollisionObject(mLink,
 						PhysicsConfiguration::COL_CREATURE,
 						PhysicsConfiguration::CREATURE_COLLIDES_WITH);
@@ -284,7 +284,7 @@ void LimbBt::addToWorld() {
 				mWorld->addCollisionObject(mLink);
 			}
 		} else {
-			if (PhysicsConfiguration::NO_INTRACOLLISION) {
+			if (!PhysicsConfiguration::SELF_COLLISION) {
 				mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
 						PhysicsConfiguration::CREATURE_COLLIDES_WITH);
 			} else {
@@ -317,7 +317,7 @@ void LimbBt::calm() {
 	mBody->setAngularVelocity(zeroVector);
 }
 
-void LimbBt::generateLink(btMultiBody* multiBody, btVector3 origin,
+void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel, btVector3 origin,
 		btQuaternion rotation, int index) {
 	mLink = new btMultiBodyLinkCollider(multiBody, index);
 	mLink->setCollisionShape(mCollisionShape);
@@ -329,4 +329,8 @@ void LimbBt::generateLink(btMultiBody* multiBody, btVector3 origin,
 	mLink->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 	mLink->setWorldTransform(tr);
 	mLink->setFriction(mFriction);
+	//Set user pointer for proper return of creature/limb information etc..
+	mLink->setUserPointer(limbModel);
+	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limbModel);
 }

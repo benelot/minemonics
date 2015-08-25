@@ -5,6 +5,7 @@
 //# forward declarations
 class btDynamicsWorld;
 class btMultiBodyPoint2Point;
+class btMultiBodyDynamicsWorld;
 class btRigidBody;
 class btTypedConstraint;
 
@@ -31,10 +32,18 @@ class btTypedConstraint;
  */
 class BulletPicker {
 public:
+	BulletPicker();
 	btVector3 pickBody(btDynamicsWorld* world, const btVector3& rayFromWorld,
 			const btVector3& rayToWorld);
 	bool movePickedBody(const btVector3& rayFromWorld,
 			const btVector3& rayToWorld);
+
+	bool isPicking() const {
+		return mPicking;
+	}
+
+	void setPicking(bool picking);
+
 private:
 	//data for picking objects
 	btRigidBody* mPickedBody;
@@ -45,6 +54,9 @@ private:
 	btVector3 mHitPos;
 	btScalar mOldPickingDist;
 	bool mPrevCanSleep;
+	bool mPicking;
+	btMultiBodyDynamicsWorld* mMultibodyworld;
+	btDynamicsWorld* mWorld;
 };
 
 #endif /* VIEW_PICKING_BULLETRAY_HPP_ */

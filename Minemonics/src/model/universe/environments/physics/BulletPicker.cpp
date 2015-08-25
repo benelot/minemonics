@@ -33,23 +33,31 @@
 
 //## utils headers
 
-btVector3 BulletPicker::pickBody(btDynamicsWorld* world, const btVector3& rayFromWorld, const btVector3& rayToWorld) {
+BulletPicker::BulletPicker() :
+		mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
+		NULL), mPickedConstraint(NULL), mPrevCanSleep(false), mMultibodyworld(
+				NULL), mWorld(NULL) {
+}
+
+btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
+		const btVector3& rayFromWorld, const btVector3& rayToWorld) {
+	mWorld = world;
 	// the ray caster currently only finds the intersection
 	// when hitting the forward face of a triangle therefore,
 	//the ray has to come from the outside of the shape
-	//TODO: Debug output, draw test ray
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayFromWorld,
 			rayToWorld, btVector3(1, 1, 0));
 
 	btVector3 hitPosition = rayFromWorld;
 
-	btCollisionWorld::ClosestRayResultCallback rayCallback(rayFromWorld, rayToWorld);
+	btCollisionWorld::ClosestRayResultCallback rayCallback(rayFromWorld,
+			rayToWorld);
 
 //	btCollisionWorld::AllHitsRayResultCallback rayCallback(rayStart, rayEnd);
 //	allResults.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	//kF_UseGjkConvexRaytest flag is now enabled by default, use the faster but more approximate algorithm
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
-	rayCallback.m_flags &= !btTriangleRaycastCallback::kF_FilterBackfaces;
+	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
 	rayCallback.m_collisionFilterGroup =
 			PhysicsConfiguration::COL_CREATURE_TESTRAY;
 	rayCallback.m_collisionFilterMask =
@@ -68,7 +76,9 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world, const btVector3& rayFro
 //	}
 
 	if (rayCallback.hasHit()) {
-		btVector3 p = rayFromWorld.lerp(rayToWorld, rayCallback.m_closestHitFraction);
+		mPicking = true;
+		btVector3 p = rayFromWorld.lerp(rayToWorld,
+				rayCallback.m_closestHitFraction);
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
 				btVector3(1, 0, 0));
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
@@ -89,6 +99,13 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world, const btVector3& rayFro
 				btPoint2PointConstraint* p2p = new btPoint2PointConstraint(
 						*body, localPivot);
 				world->addConstraint(p2p, true);
+
+				if (mPickedConstraint) {
+					world->removeConstraint(mPickedConstraint);
+					delete mPickedConstraint;
+					mPickedConstraint = NULL;
+				}
+
 				mPickedConstraint = p2p;
 				btScalar mousePickClamping = 30.f;
 				p2p->m_setting.m_impulseClamp = mousePickClamping;
@@ -114,41 +131,44 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world, const btVector3& rayFro
 				//see also http://www.bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=4&t=949
 				//so we try to avoid it by clamping the maximum impulse (force) that the mouse pick can apply
 				//it is not satisfying, hopefully we find a better solution (higher order integrator, using joint friction using a zero-velocity target motor with limited force etc?)
-				btScalar scaling = 1;
+				btScalar scaling = 10;
 				p2p->setMaxAppliedImpulse(2 * scaling);
 
 				btMultiBodyDynamicsWorld* multibodyworld =
 						(btMultiBodyDynamicsWorld*) world;
 				multibodyworld->addMultiBodyConstraint(p2p);
+
+				if (mPickingMultiBodyPoint2Point) {
+					multibodyworld->removeMultiBodyConstraint(
+							mPickingMultiBodyPoint2Point);
+					delete mPickingMultiBodyPoint2Point;
+					mPickingMultiBodyPoint2Point = NULL;
+				}
 				mPickingMultiBodyPoint2Point = p2p;
+				mMultibodyworld = multibodyworld;
 			}
 		}
 
-		//					pickObject(pickPos, rayCallback.m_collisionObject);
 		mOldPickingPos = rayToWorld;
 		mHitPos = pickPos;
 		mOldPickingDist = (pickPos - rayFromWorld).length();
-		//					printf("hit !\n");
-		//add p2p
-
 	} else {
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayFromWorld,
-				1, btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+				rayFromWorld, 1, btVector3(1, 0, 0));
 		//no hit
 	}
 	return hitPosition;
 }
 
-bool BulletPicker::movePickedBody(const btVector3& rayFromWorld, const btVector3& rayToWorld)
-{
-	if (mPickedBody  && mPickedConstraint)
-	{
-		btPoint2PointConstraint* pickCon = static_cast<btPoint2PointConstraint*>(mPickedConstraint);
-		if (pickCon)
-		{
+bool BulletPicker::movePickedBody(const btVector3& rayFromWorld,
+		const btVector3& rayToWorld) {
+	if (mPickedBody && mPickedConstraint) {
+		btPoint2PointConstraint* pickCon =
+				static_cast<btPoint2PointConstraint*>(mPickedConstraint);
+		if (pickCon) {
 			//keep it at the same picking distance
 
-			btVector3 dir = rayToWorld-rayFromWorld;
+			btVector3 dir = rayToWorld - rayFromWorld;
 			dir.normalize();
 			dir *= mOldPickingDist;
 
@@ -157,12 +177,10 @@ bool BulletPicker::movePickedBody(const btVector3& rayFromWorld, const btVector3
 		}
 	}
 
-	if (mPickingMultiBodyPoint2Point)
-	{
+	if (mPickingMultiBodyPoint2Point) {
 		//keep it at the same picking distance
 
-
-		btVector3 dir = rayToWorld-rayFromWorld;
+		btVector3 dir = rayToWorld - rayFromWorld;
 		dir.normalize();
 		dir *= mOldPickingDist;
 
@@ -172,4 +190,23 @@ bool BulletPicker::movePickedBody(const btVector3& rayFromWorld, const btVector3
 	}
 
 	return false;
+}
+
+void BulletPicker::setPicking(bool picking) {
+	mPicking = picking;
+	if (!mPicking) {
+		if (mPickedConstraint) {
+			mWorld->removeConstraint(mPickedConstraint);
+			delete mPickedConstraint;
+			mPickedConstraint = NULL;
+			mWorld = NULL;
+		}
+		if (mPickingMultiBodyPoint2Point) {
+			mMultibodyworld->removeMultiBodyConstraint(
+					mPickingMultiBodyPoint2Point);
+			delete mPickingMultiBodyPoint2Point;
+			mPickingMultiBodyPoint2Point = NULL;
+			mMultibodyworld = NULL;
+		}
+	}
 }

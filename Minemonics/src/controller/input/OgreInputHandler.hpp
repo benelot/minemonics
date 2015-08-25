@@ -43,6 +43,8 @@ protected:
 	 */
 	void initialize();
 
+	void update(double timeSinceLastUpdate);
+
 	/**
 	 * Key pressed event handler.
 	 * @param key The key that was pressed.

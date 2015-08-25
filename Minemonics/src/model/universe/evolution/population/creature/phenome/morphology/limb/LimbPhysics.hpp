@@ -210,7 +210,7 @@ public:
 
 	virtual btCollisionShape* getCollisionShape() = 0;
 
-	virtual void generateLink(btMultiBody* multiBody, btVector3 origin, btQuaternion rotation,int index) = 0;
+	virtual void generateLink(btMultiBody* multiBody, void* const limbModel, btVector3 origin, btQuaternion rotation,int index) = 0;
 
 	virtual btMultiBodyLinkCollider* getLink() = 0;
 

@@ -127,6 +127,22 @@ public:
 		return mMousePicker;
 	}
 
+	int getWindowHeight() const {
+		return mWindowHeight;
+	}
+
+	void setWindowHeight(int windowHeight) {
+		mWindowHeight = windowHeight;
+	}
+
+	int getWindowWidth() const {
+		return mWindowWidth;
+	}
+
+	void setWindowWidth(int windowWidth) {
+		mWindowWidth = windowWidth;
+	}
+
 protected:
 	bool configure(void);
 
@@ -249,6 +265,8 @@ private:
 
 	// simulation debugger
 	Debugger mDebugger;
+
+	int mWindowWidth, mWindowHeight;
 
 	// Logger
 	static BoostLogger mBoostLogger;

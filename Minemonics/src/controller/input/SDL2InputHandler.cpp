@@ -131,3 +131,7 @@ int SDL2InputHandler::getMousePositionY() const {
 	SDL_GetMouseState(&x, &y);
 	return y;
 }
+
+void SDL2InputHandler::update(double timeSinceLastTick) {
+	CEGUIInputHandler::update(timeSinceLastTick);
+}

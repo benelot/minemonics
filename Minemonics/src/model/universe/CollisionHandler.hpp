@@ -51,15 +51,15 @@ bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
 	if (limbModel1 != NULL && limbModel2 != NULL) {
 
 //		if (limbModel1->getJointIndex() != limbModel2->getJointIndex()) { // no need for filtering that, they do not occur anyway
-			if (cp.getDistance() < PhysicsConfiguration::PENETRATION_THRESHOLD) {
-//				std::cout << "Interpenetration depth:" << cp.getDistance() << std::endl;
+		if (cp.getDistance() < PhysicsConfiguration::PENETRATION_THRESHOLD) {
+				std::cout << "Interpenetration depth:" << cp.getDistance() << std::endl;
 				limbModel1->setInterpenetrationDepth(
 						limbModel1->getInterpenetrationDepth()
 								+ cp.getDistance());
 				limbModel2->setInterpenetrationDepth(
 						limbModel2->getInterpenetrationDepth()
 								+ cp.getDistance());
-			}
+		}
 //		}
 	}
 

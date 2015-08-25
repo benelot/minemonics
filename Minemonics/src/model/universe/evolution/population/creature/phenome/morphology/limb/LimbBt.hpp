@@ -72,8 +72,8 @@ public:
 			const btScalar restitution, const btScalar friction,
 			const Ogre::ColourValue color);
 
-	virtual void generateLink(btMultiBody* multiBody, btVector3 origin,
-			btQuaternion rotation, int index);
+	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
+			btVector3 origin, btQuaternion rotation, int index);
 
 	/**
 	 * Clone the bullet physics limb.

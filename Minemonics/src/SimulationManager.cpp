@@ -403,6 +403,9 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 			// Inject input into handlers
 			mInputHandler.injectInput();
 
+			//update elements that work on the current input state
+			mInputHandler.update(mApplicationClock);
+
 		}
 		mGraphicsStart = time.getMilliseconds();
 		mLastInputTick = mGraphicsStart - mInputStart;
@@ -533,10 +536,10 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 			x - mousePos.d_x, y - mousePos.d_y);
-	int w, h;
-	SDL_GetWindowSize(mSdlWindow, &w, &h);
+
+	SDL_GetWindowSize(mSdlWindow, &mWindowWidth, &mWindowHeight);
 #if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-	mWindow->resize(w, h);
+	mWindow->resize(mWindowWidth, mWindowHeight);
 #else
 	mWindow->windowMovedOrResized();
 #endif

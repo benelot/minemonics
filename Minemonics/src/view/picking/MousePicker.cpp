@@ -17,6 +17,8 @@
 
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 #include <controller/universe/Planet.hpp>
@@ -52,13 +54,13 @@ void MousePicker::pickBody() {
 	mBulletPicker.pickBody(
 			mViewController->getPlanetsInView()[0]->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()));
+			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()*10000.0f));
 }
 
 void MousePicker::moveBody(){
 	Ogre::Ray ray = getMouseRay();
 	mBulletPicker.movePickedBody(OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()));
+			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()*10000.0f));
 }
 
 Ogre::Ray MousePicker::getMouseRay() {
@@ -69,5 +71,5 @@ Ogre::Ray MousePicker::getMouseRay() {
 
 	//return the mouse ray
 	return mViewController->getCameraHandler().getCamera()->getCameraToViewportRay(
-			mousePos.d_x, mousePos.d_y);
+			mousePos.d_x/((double)SimulationManager::getSingleton()->getWindowWidth()), mousePos.d_y/((double)SimulationManager::getSingleton()->getWindowHeight()));
 }

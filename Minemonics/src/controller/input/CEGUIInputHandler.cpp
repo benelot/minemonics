@@ -802,3 +802,7 @@ void CEGUIInputHandler::injectMousePosition(const float x,
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position SDL:" << x << "," << y;
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position CEGUI:" << mousePos.d_x << "," << mousePos.d_y;
 }
+
+void CEGUIInputHandler::update(double timeSinceLastTick) {
+	OgreInputHandler::update(timeSinceLastTick);
+}

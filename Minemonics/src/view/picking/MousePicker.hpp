@@ -41,6 +41,14 @@ public:
 
 	void moveBody();
 
+	void setPicking(const bool picking){
+		mBulletPicker.setPicking(picking);
+	}
+
+	const bool isPicking() const {
+		return mBulletPicker.isPicking();
+	}
+
 	Ogre::Ray getMouseRay();
 
 private:

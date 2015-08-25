@@ -944,23 +944,23 @@ bool OgreInputHandler::mouseWheelMoved(float rel) {
 }
 
 bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
-	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " pressed";
+//	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Mouse button " << button << " pressed";
 
 	switch (button) {
 	case ApplicationMouseCode::LeftButton: {
-		//Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
+//		Ogre::LogManager::getSingleton().logMessage("Mouse left-click");
 		if (isLeftControlPressed()) {
-			if (isLeftMousePressed()) {
-				SimulationManager::getSingleton()->getMousePicker().moveBody();
-			} else {
-				SimulationManager::getSingleton()->getMousePicker().pickBody();
-			}
+			SimulationManager::getSingleton()->getMousePicker().pickBody();
 		}
 		mLeftMousePressed = true;
 		break;
 	}
 	case ApplicationMouseCode::RightButton: {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse right-click");
+		if (isLeftControlPressed()) {
+			SimulationManager::getSingleton()->getMousePicker().setPicking(
+					false);
+		}
 		mRightMousePressed = true;
 		break;
 	}
@@ -1068,4 +1068,14 @@ void OgreInputHandler::moveCameraForward() {
 void OgreInputHandler::quitApplication() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Key::Shutdown application!";
 	SimulationManager::getSingleton()->getStateHandler().requestStateChange(StateHandler::SHUTDOWN);
+}
+
+void OgreInputHandler::update(double timeSinceLastUpdate) {
+	if (mLeftControlPressed) {
+		if (mLeftMousePressed) {
+			if (SimulationManager::getSingleton()->getMousePicker().isPicking()) {
+				SimulationManager::getSingleton()->getMousePicker().moveBody();
+			}
+		}
+	}
 }

@@ -158,7 +158,7 @@ public:
 
 	void generateLink(btMultiBody* multiBody, btVector3 origin,
 			btQuaternion rotation, int index) {
-		mLimbPhysics->generateLink(multiBody, origin, rotation, index);
+		mLimbPhysics->generateLink(multiBody, this, origin, rotation, index);
 	}
 
 	btMultiBodyLinkCollider* getLink() {

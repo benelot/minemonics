@@ -53,6 +53,8 @@ protected:
 	 */
 	void injectTimeImpulse(const double tick);
 
+	void update(double timeSinceLastTick);
+
 	// CEGUI::KeyListener
 	/**
 	 * Is triggered if a key is pressed.

@@ -50,6 +50,8 @@ public:
 	 */
 	void injectTimePulse();
 
+	void update(double timeSinceLastTick);
+
 	// Accessor methods
 
 	/**
