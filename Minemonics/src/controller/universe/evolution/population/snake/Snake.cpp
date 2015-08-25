@@ -72,7 +72,7 @@ Snake::Snake(Population* const population, double size,
 	int numLinks = 10;
 	bool spherical = true; //set it to false -to use 1DoF hinges instead of 3DoF sphericals
 	bool canSleep = true;
-	bool selfCollide = false;
+	bool selfCollide = PhysicsConfiguration::SELF_COLLISION;
 	bool attachHead = false;
 	bool enableMotor = false;
 
@@ -255,7 +255,7 @@ btMultiBody* Snake::createFeatherstoneMultiBody(int numLinks,
 			//pMultiBody->setupPlanar(i, linkMass, linkInertiaDiag, i - 1, btQuaternion(0.f, 0.f, 0.f, 1.f)/*quat0*/, btVector3(1, 0, 0), parentComToCurrentPivot*2, false);
 			pMultiBody->setupSpherical(i, linkMass, linkInertiaDiag, i - 1,
 					btQuaternion(0.f, 0.f, 0.f, 1.f), parentComToCurrentPivot,
-					currentPivotToCurrentCom, false);
+					currentPivotToCurrentCom, true);
 	}
 
 	pMultiBody->finalizeMultiDof();
@@ -290,7 +290,7 @@ void Snake::addColliders(btMultiBody *multiBody,
 			OgreBulletUtils::convert(tr.getRotation()),
 			OgreBulletUtils::convert(tr.getOrigin()),
 			OgreBulletUtils::convert(tr.getRotation()),
-			OgreBulletUtils::convert(baseHalfExtents), 0);
+			OgreBulletUtils::convert(baseHalfExtents*2.0f), 0);
 
 	limb->generateLink(mPhenotype.getPhenotypeModel()->getMultiBody(),
 			tr.getOrigin(), tr.getRotation(), -1);
@@ -326,7 +326,7 @@ void Snake::addColliders(btMultiBody *multiBody,
 				OgreBulletUtils::convert(tr.getRotation()),
 				OgreBulletUtils::convert(tr.getOrigin()),
 				OgreBulletUtils::convert(tr.getRotation()),
-				OgreBulletUtils::convert(baseHalfExtents), i);
+				OgreBulletUtils::convert(linkHalfExtents*2.0f), i);
 
 		limb->generateLink(mPhenotype.getPhenotypeModel()->getMultiBody(),
 				tr.getOrigin(), tr.getRotation(), i);
