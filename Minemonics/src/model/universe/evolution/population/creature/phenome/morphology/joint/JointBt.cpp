@@ -30,13 +30,13 @@
 //## utils headers
 
 JointBt::JointBt() :
-		mWorld(NULL), mJoint(NULL), mMotorTarget(0, 0, 0, 1) {
+		mWorld(NULL)/*, mJoint(NULL), mMotorTarget(0, 0, 0, 1)*/ {
 	mMotors.clear();
 }
 
 JointBt::JointBt(const JointBt& jointBt) {
 	mWorld = jointBt.mWorld;
-	mJoint = jointBt.mJoint;
+//	mJoint = jointBt.mJoint;
 	mInWorld = jointBt.mInWorld;
 
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
@@ -49,16 +49,16 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
 		const btTransform& tframeInB) {
 	mWorld = world;
-	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA.getOrigin(),
-			tframeInB.getOrigin() EXTRAPARAMS);
+//	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA.getOrigin(),
+//			tframeInB.getOrigin() EXTRAPARAMS);
 
 //	mJoint->setDamping(10000);
 
-	mJoint->enableFeedback(true);
-	mJoint->setJointFeedback(new btJointFeedback());
+//	mJoint->enableFeedback(true);
+//	mJoint->setJointFeedback(new btJointFeedback());
 
 	//debug drawing
-	mJoint->setDbgDrawSize(btScalar(5.f));
+//	mJoint->setDbgDrawSize(btScalar(5.f));
 
 }
 
@@ -76,8 +76,8 @@ JointBt::~JointBt() {
 
 	mMotors.clear();
 
-	delete mJoint;
-	mJoint = NULL;
+//	delete mJoint;
+//	mJoint = NULL;
 }
 
 void JointBt::update(double timeSinceLastTick) {
@@ -88,7 +88,7 @@ void JointBt::update(double timeSinceLastTick) {
 			motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
 			//TODO:Reenable motors when interpenetration problems are fixed.
-//			(*motorIterator)->apply(timeSinceLastTick);
+			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 	//set new motor target to joint
@@ -151,31 +151,32 @@ void JointBt::reposition(const Ogre::Vector3 position) {
 }
 
 bool JointBt::isStrained() {
-	btVector3 fbA = mJoint->getJointFeedback()->m_appliedForceBodyA;
-	btVector3 fbB = mJoint->getJointFeedback()->m_appliedForceBodyB;
-	btVector3 tbA = mJoint->getJointFeedback()->m_appliedTorqueBodyA;
-	btVector3 tbB = mJoint->getJointFeedback()->m_appliedTorqueBodyB;
-	if (abs(fbA.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
-			&& abs(fbA.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
-			&& abs(fbA.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD
-			&& abs(fbB.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
-			&& abs(fbB.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
-			&& abs(fbB.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD) {
-		std::cout << "----------------------" << std::endl;
-		std::cout << "Applied impulse: " << mJoint->getAppliedImpulse()
-				<< std::endl;
-
-		std::cout << "Joint feedback force A: (" << fbA.getX() << ","
-				<< fbA.getY() << "," << fbA.getZ() << ")" << std::endl;
-		std::cout << "Joint feedback force B: (" << fbB.getX() << ","
-				<< fbB.getY() << "," << fbB.getZ() << ")" << std::endl;
-		std::cout << "Joint feedback torque A: (" << tbA.getX() << ","
-				<< tbA.getY() << "," << tbA.getZ() << ")" << std::endl;
-		std::cout << "Joint feedback torque B: (" << tbB.getX() << ","
-				<< tbB.getY() << "," << tbB.getZ() << ")" << std::endl;
-		std::cout << "----------------------" << std::endl;
-	}
-	return false;
+	//TODO: Broken
+//	btVector3 fbA = mJoint->getJointFeedback()->m_appliedForceBodyA;
+//	btVector3 fbB = mJoint->getJointFeedback()->m_appliedForceBodyB;
+//	btVector3 tbA = mJoint->getJointFeedback()->m_appliedTorqueBodyA;
+//	btVector3 tbB = mJoint->getJointFeedback()->m_appliedTorqueBodyB;
+//	if (abs(fbA.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
+//			&& abs(fbA.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
+//			&& abs(fbA.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD
+//			&& abs(fbB.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
+//			&& abs(fbB.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
+//			&& abs(fbB.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD) {
+//		std::cout << "----------------------" << std::endl;
+//		std::cout << "Applied impulse: " << mJoint->getAppliedImpulse()
+//				<< std::endl;
+//
+//		std::cout << "Joint feedback force A: (" << fbA.getX() << ","
+//				<< fbA.getY() << "," << fbA.getZ() << ")" << std::endl;
+//		std::cout << "Joint feedback force B: (" << fbB.getX() << ","
+//				<< fbB.getY() << "," << fbB.getZ() << ")" << std::endl;
+//		std::cout << "Joint feedback torque A: (" << tbA.getX() << ","
+//				<< tbA.getY() << "," << tbA.getZ() << ")" << std::endl;
+//		std::cout << "Joint feedback torque B: (" << tbB.getX() << ","
+//				<< tbB.getY() << "," << tbB.getZ() << ")" << std::endl;
+//		std::cout << "----------------------" << std::endl;
+//	}
+//	return false;
 }
 
 void JointBt::setRotationalLimitMotorEnabled(
@@ -195,14 +196,14 @@ void JointBt::setRotationalLimitMotorEnabled(
 
 void JointBt::addToWorld() {
 	if (!isInWorld()) {
-		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
+//		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
 		JointPhysics::addToWorld();
 	}
 }
 
 void JointBt::removeFromWorld() {
 	if (isInWorld()) {
-		mWorld->removeConstraint((btTypedConstraint*) mJoint);
+//		mWorld->removeConstraint((btTypedConstraint*) mJoint);
 		JointPhysics::removeFromWorld();
 	}
 }

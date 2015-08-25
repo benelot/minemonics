@@ -27,7 +27,7 @@
  */
 class JointProprioceptor: public Proprioceptor {
 public:
-	JointProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+	JointProprioceptor(std::vector<int*>::size_type jointIndex,
 			JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
 	~JointProprioceptor();
 
@@ -81,12 +81,12 @@ protected:
 	/**
 	 * The joint index the proprioceptor is working on.
 	 */
-	std::vector<CONSTRAINT_TYPE*>::size_type mJointIndex;
+	std::vector<int*>::size_type mJointIndex;
 
 	/**
 	 * A pointer for the joint the proprioceptor is working on.
 	 */
-	CONSTRAINT_TYPE* mG6DofJoint;
+	int* mG6DofJoint;
 };
 BOOST_CLASS_VERSION(JointProprioceptor, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointProprioceptor)

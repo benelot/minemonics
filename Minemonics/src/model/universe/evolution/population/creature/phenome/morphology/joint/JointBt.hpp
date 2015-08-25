@@ -26,19 +26,6 @@ class Motor;
 
 //## utils headers
 
-//comment this out to compare with original spring constraint
-//#define CONSTRAINT_TYPE btConeTwistConstraint
-//#define EXTRAPARAMS
-#define CONSTRAINT_TYPE btPoint2PointConstraint
-#define EXTRAPARAMS
-//#define CONSTRAINT_TYPE btGeneric6DofConstraint
-//#define EXTRAPARAMS ,true
-//#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
-//#define EXTRAPARAMS
-//#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-//#define EXTRAPARAMS ,true
-
-
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
  * @details		Details
@@ -164,9 +151,9 @@ public:
 //	}
 
 
-	void setBreakingThreshold(const double breakingThreshold) {
-		mJoint->setBreakingImpulseThreshold(breakingThreshold);
-	}
+//	void setBreakingThreshold(const double breakingThreshold) {
+//		mJoint->setBreakingImpulseThreshold(breakingThreshold);
+//	}
 
 	void setRotationalLimitMotorEnabled(
 			const JointPhysics::RotationalDegreeOfFreedom index,
@@ -203,9 +190,9 @@ public:
 //		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 
-	CONSTRAINT_TYPE* getJoint() {
-		return mJoint;
-	}
+//	CONSTRAINT_TYPE* getJoint() {
+//		return mJoint;
+//	}
 
 	const std::vector<Motor*>& getMotors() const {
 		return mMotors;
@@ -215,20 +202,20 @@ public:
 		return mMotors;
 	}
 
-	const btQuaternion& getMotorTarget() const {
-		return mMotorTarget;
-	}
-
-	void setMotorTarget(const btQuaternion motorTarget) {
-		mMotorTarget = motorTarget;
-	}
+//	const btQuaternion& getMotorTarget() const {
+//		return mMotorTarget;
+//	}
+//
+//	void setMotorTarget(const btQuaternion motorTarget) {
+//		mMotorTarget = motorTarget;
+//	}
 
 private:
 
-	/**
-	 * The 6 Degrees of freedom joint that is used as a physical model.
-	 */
-	CONSTRAINT_TYPE* mJoint;
+//	/**
+//	 * The 6 Degrees of freedom joint that is used as a physical model.
+//	 */
+//	CONSTRAINT_TYPE* mJoint;
 
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.
@@ -240,8 +227,6 @@ private:
 	 * Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
 	 */
 	std::vector<Motor*> mMotors;
-
-	btQuaternion mMotorTarget;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

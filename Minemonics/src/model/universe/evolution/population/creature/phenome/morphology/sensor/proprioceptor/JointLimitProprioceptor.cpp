@@ -17,7 +17,7 @@
 //## utils headers
 
 JointLimitProprioceptor::JointLimitProprioceptor(
-		std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+		std::vector<int*>::size_type jointIndex,
 		JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit) :
 		JointProprioceptor(jointIndex, rotationalDOF), mLimitError(0), mLimit(
 				limit) {

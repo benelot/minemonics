@@ -25,7 +25,7 @@
  */
 class JointForceProprioceptor: public JointProprioceptor {
 public:
-	JointForceProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+	JointForceProprioceptor(std::vector<int*>::size_type jointIndex,
 			JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
 	virtual ~JointForceProprioceptor();
 

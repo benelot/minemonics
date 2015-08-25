@@ -59,6 +59,9 @@ void ServoMotor::initialize(
 }
 
 void ServoMotor::apply(double timeSinceLastTick) {
+	if(!mJointMotor){
+		return;
+	}
 //		mMotorBt->m_enableMotor = mEnabled;
 	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 	btScalar clampedInputValue =

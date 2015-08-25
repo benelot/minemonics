@@ -16,7 +16,7 @@
 //## view headers
 //## utils headers
 
-JointAngleProprioceptor::JointAngleProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+JointAngleProprioceptor::JointAngleProprioceptor(std::vector<int*>::size_type jointIndex,
 		JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
 		JointProprioceptor(jointIndex, rotationalDOF), mAngle(0) {
 
