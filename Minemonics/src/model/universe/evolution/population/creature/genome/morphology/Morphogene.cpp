@@ -136,7 +136,8 @@ void Morphogene::initialize(const double branchiness) {
 	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
 	// A random primitive from the available primitives
-	mPrimitiveType = (LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
+	mPrimitiveType =
+			(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
 					1, LimbPhysics::NUM_PRIMITIVES);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
@@ -206,6 +207,46 @@ void Morphogene::print() {
 
 bool Morphogene::equals(const Morphogene& morphoGene) const {
 
+	if (mX != morphoGene.mX) {
+		return false;
+	}
+
+	if (mY != morphoGene.mY) {
+		return false;
+	}
+
+	if (mZ != morphoGene.mZ) {
+		return false;
+	}
+
+	if (mOrientationW != morphoGene.mOrientationW) {
+		return false;
+	}
+
+	if (mOrientationX != morphoGene.mOrientationX) {
+		return false;
+	}
+
+	if (mOrientationY != morphoGene.mOrientationY) {
+		return false;
+	}
+
+	if (mOrientationZ != morphoGene.mOrientationZ) {
+		return false;
+	}
+
+	if (mSegmentShrinkFactor != morphoGene.mSegmentShrinkFactor) {
+		return false;
+	}
+
+	if (mRepetitionLimit != morphoGene.mRepetitionLimit) {
+		return false;
+	}
+
+	if (mFollowUpGene != morphoGene.mFollowUpGene) {
+		return false;
+	}
+
 	if (mColorR != morphoGene.mColorR) {
 		return false;
 	}
@@ -215,6 +256,10 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 	}
 
 	if (mColorB != morphoGene.mColorB) {
+		return false;
+	}
+
+	if (mPrimitiveType != morphoGene.mPrimitiveType) {
 		return false;
 	}
 
@@ -232,25 +277,6 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 			break;
 		default:
 			break;
-		}
-	}
-
-	if (mFollowUpGene != morphoGene.mFollowUpGene) {
-		return false;
-	}
-
-	/**Compare morphogene branches */
-	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) {
-		return false;
-	}
-
-	std::vector<MorphogeneBranch*>::const_iterator it = mGeneBranches.begin();
-	std::vector<MorphogeneBranch*>::const_iterator it2 =
-			morphoGene.mGeneBranches.begin();
-	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
-			it++, it2++) {
-		if (!(*it)->equals(**it2)) {
-			return false;
 		}
 	}
 
@@ -278,40 +304,27 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	if (mRepetitionLimit != morphoGene.mRepetitionLimit) {
+	if(mRestitution != morphoGene.mRestitution){
 		return false;
 	}
 
-	if (mSegmentShrinkFactor != morphoGene.mSegmentShrinkFactor) {
+	if(mFriction != morphoGene.mFriction){
 		return false;
 	}
 
-	if (mX != morphoGene.mX) {
+	/**Compare morphogene branches */
+	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) {
 		return false;
 	}
 
-	if (mY != morphoGene.mY) {
-		return false;
-	}
-
-	if (mZ != morphoGene.mZ) {
-		return false;
-	}
-
-	if (mOrientationW != morphoGene.mOrientationW) {
-		return false;
-	}
-
-	if (mOrientationX != morphoGene.mOrientationX) {
-		return false;
-	}
-
-	if (mOrientationY != morphoGene.mOrientationY) {
-		return false;
-	}
-
-	if (mOrientationZ != morphoGene.mOrientationZ) {
-		return false;
+	std::vector<MorphogeneBranch*>::const_iterator it = mGeneBranches.begin();
+	std::vector<MorphogeneBranch*>::const_iterator it2 =
+			morphoGene.mGeneBranches.begin();
+	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
+			it++, it2++) {
+		if (!(*it)->equals(**it2)) {
+			return false;
+		}
 	}
 
 	return true;

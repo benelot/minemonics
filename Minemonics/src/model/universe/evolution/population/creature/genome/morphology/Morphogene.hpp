@@ -282,11 +282,7 @@ public:
 	}
 
 	//Serialization
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
 	 * Serializes the morphogene to a string.
@@ -296,51 +292,38 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 			const Morphogene &morphogene) {
-		/**The size of the morphogene*/
-		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << ","
-				<< morphogene.mZ << ")"
+		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << "," /**!< The size of the morphogene*/
+		<< morphogene.mZ << ")"
 
-				/**The orientation of the morphogene*/
-				<< "/Orientation=(" << morphogene.mOrientationX << ","
-				<< morphogene.mOrientationY << "," << morphogene.mOrientationZ
-				<< "," << morphogene.mOrientationW << ")"
+		<< "/Orientation=(" << morphogene.mOrientationX << "," /**!< The orientation of the morphogene*/
+		<< morphogene.mOrientationY << "," << morphogene.mOrientationZ << ","
+				<< morphogene.mOrientationW << ")"
 
-				/**The shrink factor propagated along the branches of the morphogene*/
-				<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor
+				<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor /**!< The shrink factor propagated along the branches of the morphogene*/
 
-				/**The number of repetitions of this gene one after another.*/
-				<< "/RepetitionLimit" << morphogene.mRepetitionLimit
+				<< "/RepetitionLimit" << morphogene.mRepetitionLimit /**!< The number of repetitions of this gene one after another.*/
 
-				/**The gene that follows this one after the repetitions.*/
-				<< "/FollowUpGene=" << morphogene.mFollowUpGene
+				<< "/FollowUpGene=" << morphogene.mFollowUpGene /**!< The gene that follows this one after the repetitions.*/
 
-				/**The color of this morphogene.*/
-				<< "/Color(" << morphogene.mColorR << "," << morphogene.mColorG
+				<< "/Color(" << morphogene.mColorR << "," << morphogene.mColorG /**!< The color of this morphogene.*/
 				<< "," << morphogene.mColorB
 
-				/**The 3D primitive type of this morphogene.*/
-				<< "/PrimitiveType" << morphogene.mPrimitiveType
+				<< "/PrimitiveType" << morphogene.mPrimitiveType /**!< The 3D primitive type of this morphogene.*/
 
-				/**The controller gene of this morphogene's joint.*/
-				<< "/ControllerGene=" << morphogene.mControllerGene
+				<< "/ControllerGene=" << morphogene.mControllerGene /**!< The controller gene of this morphogene's joint.*/
 
-				/**The position of the joint anchor.*/
-				<< "/Joint Anchor:(" << morphogene.mJointAnchorX << ","
+				<< "/Joint Anchor:(" << morphogene.mJointAnchorX << "," /**!< The position of the joint anchor.*/
 				<< morphogene.mJointAnchorY << "," << morphogene.mJointAnchorZ
 				<< ")"
 
-				/**The orientation of the joint anchor.*/
-				<< "/Joint Rotation:(" << morphogene.mJointPitch << ","
+				<< "/Joint Rotation:(" << morphogene.mJointPitch << "," /**!< The orientation of the joint anchor.*/
 				<< morphogene.mJointYaw << "," << morphogene.mJointRoll << ")"
 
-				/**The restitution of this morphogene*/
-				<< "/Restitution=" << morphogene.mRestitution
+				<< "/Restitution=" << morphogene.mRestitution /**!< The restitution of this morphogene*/
 
-				/**The friction of this morphogene.*/
-				<< "/Friction=" << morphogene.mFriction
+				<< "/Friction=" << morphogene.mFriction /**!< The friction of this morphogene.*/
 
-				/**The gene branches of this gene*/
-				<< "/Gene Branches=";
+				<< "/Gene Branches="; /**The gene branches of this gene*/
 
 		for (std::vector<MorphogeneBranch*>::const_iterator it =
 				morphogene.mGeneBranches.begin();
@@ -361,131 +344,76 @@ public:
 		//in order to detect a derived class type from a base type for serialization,
 		//you have to register the derived class type in beforehand.
 		ar.register_type(static_cast<SineControllerGene*>(NULL));
-		ar
-		/** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Gene)
-
-		/**The size of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mX) & BOOST_SERIALIZATION_NVP(mY)
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Gene) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mX) /**!< The size of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mY)
 		& BOOST_SERIALIZATION_NVP(mZ)
 
-		/**The orientation of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mOrientationX)
+		& BOOST_SERIALIZATION_NVP(mOrientationX) /**!< The orientation of the morphogene*/
 		& BOOST_SERIALIZATION_NVP(mOrientationY)
 		& BOOST_SERIALIZATION_NVP(mOrientationZ)
 		& BOOST_SERIALIZATION_NVP(mOrientationW)
 
-		/**The shrink factor propagated along the branches of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor)
+		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor) /** !< The shrink factor propagated along the branches of the morphogene*/
 
-		/**The number of repetitions of this gene one after another.*/
-		& BOOST_SERIALIZATION_NVP(mRepetitionLimit)
+		& BOOST_SERIALIZATION_NVP(mRepetitionLimit) /** !< The number of repetitions of this gene one after another.*/
 
-		/**The gene that follows this one after the repetitions.*/
-		& BOOST_SERIALIZATION_NVP(mFollowUpGene)
+		& BOOST_SERIALIZATION_NVP(mFollowUpGene) /** !< The gene that follows this one after the repetitions.*/
 
-		/**The color of this morphogene.*/
-		& BOOST_SERIALIZATION_NVP(mColorR)
+		& BOOST_SERIALIZATION_NVP(mColorR) /**!< The color of this morphogene.*/
 		& BOOST_SERIALIZATION_NVP(mColorG)
 		& BOOST_SERIALIZATION_NVP(mColorB)
 
-		/**The 3D primitive type of this morphogene.*/
-		& BOOST_SERIALIZATION_NVP(mPrimitiveType)
+		& BOOST_SERIALIZATION_NVP(mPrimitiveType) /**!< The 3D primitive type of this morphogene.*/
 
-		/**The controller gene of this morphogene's joint.*/
-		& BOOST_SERIALIZATION_NVP(mControllerGene)
+		& BOOST_SERIALIZATION_NVP(mControllerGene) /**!< The controller gene of this morphogene's joint.*/
 
-		/**The position of the joint anchor.*/
-		& BOOST_SERIALIZATION_NVP(mJointAnchorX)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**!< The position of the joint anchor.*/
 		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
 		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
 
-		/**The orientation of the joint anchor.*/
-		& BOOST_SERIALIZATION_NVP(mJointPitch)
+		& BOOST_SERIALIZATION_NVP(mJointPitch) /**!< The orientation of the joint anchor.*/
 		& BOOST_SERIALIZATION_NVP(mJointYaw)
 		& BOOST_SERIALIZATION_NVP(mJointRoll)
 
-		/**The restitution of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mRestitution)
+		& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the morphogene*/
 
-		/**The friction of the morphogene*/
-		& BOOST_SERIALIZATION_NVP(mFriction)
+		& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the morphogene*/
 
-		/**The gene branches of this gene*/
-		& BOOST_SERIALIZATION_NVP(mGeneBranches);
+		& BOOST_SERIALIZATION_NVP(mGeneBranches); /**!< The gene branches of this gene*/
 	}
 
 private:
+	double mX, mY, mZ; /**!< Dimensions of the segment.*/
 
-	/**
-	 * The limit of repetitions the gene can have in one root-to-leaf path.
-	 */
-	int mRepetitionLimit;
+	double mOrientationX, mOrientationY, mOrientationZ, mOrientationW; /**!< Orientation of the segment. */
 
-	/**
-	 * The gene type with which the growth should continue after the repetition limit. If a segment of a given
+	double mSegmentShrinkFactor; /**!< Segment shrink factor */
+
+	int mRepetitionLimit; /**!< The limit of repetitions the gene can have in one root-to-leaf path. */
+
+	int mFollowUpGene; /**!< The gene type with which the growth should continue after the repetition limit. If a segment of a given
 	 * type specifies that the same type should continue when repeats are exhausted, growth
 	 * will simply terminate at that point in the tree. Alternatively, if the type of segment
 	 * chosen to continue when repeats are exhausted has already had its own type's repeats
 	 * exhausted, this will also terminate growth.
 	 */
-	int mFollowUpGene;
 
-	/**
-	 * Dimensions of the segment.
-	 */
-	double mX, mY, mZ;
+	double mColorR, mColorG, mColorB; /**!< Colors red, green, blue */
 
-	/**
-	 * Orientation of the segment.
-	 */
-	double mOrientationX, mOrientationY, mOrientationZ, mOrientationW;
+	LimbPhysics::PrimitiveType mPrimitiveType; /**!< Segment type */
 
-	/**
-	 * Spherical coordinates around the origin of the segment at the center of mass.
-	 */
-	double mJointAnchorX, mJointAnchorY, mJointAnchorZ;
+	ControllerGene* mControllerGene; /**!< The controller of this gene */
 
-	/**
-	 * Direction of joint anchoring on the surface of the segment
-	 */
-	double mJointPitch, mJointYaw, mJointRoll;
+	double mJointAnchorX, mJointAnchorY, mJointAnchorZ; /**!< Spherical coordinates around the origin of the segment at the center of mass. */
 
-	/**
-	 * The controller of this gene
-	 */
-	ControllerGene* mControllerGene;
+	double mJointPitch, mJointYaw, mJointRoll; /**!< Direction of joint anchoring on the surface of the segment */
 
-	/**
-	 * Segment shrink factor
-	 */
+	double mRestitution; /**!< Restitution is the amount of force that is reflected in a collision. It is similar to elasticity.*/
 
-	double mSegmentShrinkFactor;
+	double mFriction; /**!< The friction of this segment. */
 
-	/**
-	 * Segment type
-	 */
-	LimbPhysics::PrimitiveType mPrimitiveType;
-
-	/**
-	 * A vector of genetic branches
-	 */
-	std::vector<MorphogeneBranch*> mGeneBranches;
-
-	/**
-	 * Colors red, green, blue
-	 */
-	double mColorR, mColorG, mColorB;
-
-	/**
-	 * Restitution is the amount of force that is reflected in a collision. It is similar to elasticity.
-	 */
-	double mRestitution;
-
-	/**
-	 * The friction of this segment.
-	 */
-	double mFriction;
+	std::vector<MorphogeneBranch*> mGeneBranches; /**!< A vector of genetic branches */
 
 };
 BOOST_CLASS_VERSION(Morphogene, 1)
