@@ -2,20 +2,18 @@
 //# corresponding header
 //# forward declarations
 class SimulationManager;
-
+class StateHandler;
 namespace CEGUI {
+class EventArgs;
 class System;
 class Window;
-}
+} /* namespace CEGUI */
 
-class StateHandler;
 
 //# system headers
 //## controller headers
 //## model headers
 //## view headers
-#include <CEGUI/Window.h>
-
 //# custom headers
 //## base headers
 //## configuration headers
