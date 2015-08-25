@@ -207,6 +207,10 @@ void Morphogene::print() {
 
 bool Morphogene::equals(const Morphogene& morphoGene) const {
 
+	if(!Gene::equals(morphoGene)){
+		return false;
+	}
+
 	if (mX != morphoGene.mX) {
 		return false;
 	}

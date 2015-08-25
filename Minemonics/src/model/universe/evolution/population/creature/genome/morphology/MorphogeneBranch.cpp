@@ -260,15 +260,16 @@ MorphogeneBranch::~MorphogeneBranch() {
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 
-	if (mActive != geneBranch.mActive) {
-		return false;
-	}
 
-	if (mBranchGeneType != geneBranch.mBranchGeneType) {
+	if(!GeneBranch::equals(geneBranch)){
 		return false;
 	}
 
 	if (mFlipped != geneBranch.mFlipped) {
+		return false;
+	}
+
+	if (mMirrored != geneBranch.mMirrored) {
 		return false;
 	}
 
@@ -288,15 +289,19 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
+	if (mJointYaw != geneBranch.mJointYaw) {
+		return false;
+	}
+
+	if (mJointRoll != geneBranch.mJointRoll) {
+		return false;
+	}
+
 	if (mJointPitchMinAngle != geneBranch.mJointPitchMinAngle) {
 		return false;
 	}
 
 	if (mJointPitchMaxAngle != geneBranch.mJointPitchMaxAngle) {
-		return false;
-	}
-
-	if (mJointYaw != geneBranch.mJointYaw) {
 		return false;
 	}
 
@@ -308,10 +313,6 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mJointRoll != geneBranch.mJointRoll) {
-		return false;
-	}
-
 	if (mJointRollMinAngle != geneBranch.mJointRollMinAngle) {
 		return false;
 	}
@@ -320,16 +321,8 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mMirrored != geneBranch.mMirrored) {
-		return false;
-	}
-
 	if (mSpringPitchDampingCoefficient
 			!= geneBranch.mSpringPitchDampingCoefficient) {
-		return false;
-	}
-
-	if (mJointPitchStiffness != geneBranch.mJointPitchStiffness) {
 		return false;
 	}
 
@@ -338,12 +331,17 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mJointYawStiffness != geneBranch.mJointYawStiffness) {
-		return false;
-	}
 
 	if (mSpringRollDampingCoefficient
 			!= geneBranch.mSpringRollDampingCoefficient) {
+		return false;
+	}
+
+	if (mJointPitchStiffness != geneBranch.mJointPitchStiffness) {
+		return false;
+	}
+
+	if (mJointYawStiffness != geneBranch.mJointYawStiffness) {
 		return false;
 	}
 
@@ -432,6 +430,10 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 	}
 
 	if (mJointRollYOffset != geneBranch.mJointRollYOffset) {
+		return false;
+	}
+
+	if(mBranchGeneType != geneBranch.mBranchGeneType){
 		return false;
 	}
 

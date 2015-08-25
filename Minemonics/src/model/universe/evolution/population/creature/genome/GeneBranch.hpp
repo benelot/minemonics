@@ -29,7 +29,7 @@
  */
 class GeneBranch {
 public:
-	enum GeneBranchType {
+	enum GeneBranchType { /**!< The type of gene branch */
 		MORPHOGENE_BRANCH, UNKNOWN_GENE_BRANCH
 	};
 
@@ -39,7 +39,7 @@ public:
 	virtual ~GeneBranch();
 
 	/**
-	 * Initialize the genebranch with
+	 * Initialize the gene branch with
 	 * @param geneBranchType its gene branch type.
 	 */
 	void initialize(const GeneBranchType geneBranchType);
@@ -71,13 +71,12 @@ public:
 	 * @return A string containing all information about the gene branch.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const GeneBranch &geneBranch) {
-		return os
-		/**If the gene branch is active or not*/
-		<< "GeneBranch: Active:" << geneBranch.mActive
+	const GeneBranch &geneBranch) {
+		return os << "GeneBranch: Active:" /**!< If the gene branch is active or not*/
+		<< geneBranch.mActive
 
-		/**The type of gene branch*/
-		<< "/Type" << geneBranch.mType;
+		<< "/Type" /**!< The type of gene branch*/
+		<< geneBranch.mType;
 	}
 
 	/**
@@ -87,12 +86,8 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**If the gene branch is active or not*/
-		& BOOST_SERIALIZATION_NVP(mActive)
-
-		/**The type of gene branch*/
-		& BOOST_SERIALIZATION_NVP(mType);
+		ar & BOOST_SERIALIZATION_NVP(mActive) /**!< If the gene branch is active or not*/
+		& BOOST_SERIALIZATION_NVP(mType); /**!< The type of gene branch*/
 	}
 
 	//Accessor methods
@@ -114,15 +109,10 @@ public:
 	}
 
 protected:
-	/**
-	 * Determines if this branch is active.
-	 */
-	bool mActive;
 
-	/**
-	 * The type of gene branch.
-	 */
-	GeneBranchType mType;
+	bool mActive; /**!< Determines if this branch is active. */
+
+	GeneBranchType mType; /**!< The type of gene branch. */
 };
 BOOST_CLASS_VERSION(GeneBranch, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(GeneBranch)

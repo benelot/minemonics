@@ -291,43 +291,44 @@ public:
 	 * @return A string containing all information about the morphogene.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const Morphogene &morphogene) {
-		os << "Gene: Size(" << morphogene.mX << "," << morphogene.mY << "," /**!< The size of the morphogene*/
-		<< morphogene.mZ << ")"
+	const Morphogene &morphogene) {
+		os << "Morphogene: " << "Size(" /**!< The size of the morphogene*/
+		<< morphogene.mX << "," << morphogene.mY << "," << morphogene.mZ << ")"
 
-		<< "/Orientation=(" << morphogene.mOrientationX << "," /**!< The orientation of the morphogene*/
-		<< morphogene.mOrientationY << "," << morphogene.mOrientationZ << ","
-				<< morphogene.mOrientationW << ")"
+		<< "/Orientation=(" /**!< The orientation of the morphogene*/
+		<< morphogene.mOrientationX << "," << morphogene.mOrientationY << ","
+		<< morphogene.mOrientationZ << "," << morphogene.mOrientationW << ")"
 
-				<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor /**!< The shrink factor propagated along the branches of the morphogene*/
+		<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor /**!< The shrink factor propagated along the branches of the morphogene*/
 
-				<< "/RepetitionLimit" << morphogene.mRepetitionLimit /**!< The number of repetitions of this gene one after another.*/
+		<< "/RepetitionLimit" << morphogene.mRepetitionLimit /**!< The number of repetitions of this gene one after another.*/
 
-				<< "/FollowUpGene=" << morphogene.mFollowUpGene /**!< The gene that follows this one after the repetitions.*/
+		<< "/FollowUpGene=" << morphogene.mFollowUpGene /**!< The gene that follows this one after the repetitions.*/
 
-				<< "/Color(" << morphogene.mColorR << "," << morphogene.mColorG /**!< The color of this morphogene.*/
-				<< "," << morphogene.mColorB
+		<< "/Color(" /**!< The color of this morphogene.*/
+		<< morphogene.mColorR << "," << morphogene.mColorG << ","
+		<< morphogene.mColorB
 
-				<< "/PrimitiveType" << morphogene.mPrimitiveType /**!< The 3D primitive type of this morphogene.*/
+		<< "/PrimitiveType" << morphogene.mPrimitiveType /**!< The 3D primitive type of this morphogene.*/
 
-				<< "/ControllerGene=" << morphogene.mControllerGene /**!< The controller gene of this morphogene's joint.*/
+		<< "/ControllerGene=" << morphogene.mControllerGene /**!< The controller gene of this morphogene's joint.*/
 
-				<< "/Joint Anchor:(" << morphogene.mJointAnchorX << "," /**!< The position of the joint anchor.*/
-				<< morphogene.mJointAnchorY << "," << morphogene.mJointAnchorZ
-				<< ")"
+		<< "/Joint Anchor:(" /**!< The position of the joint anchor.*/
+		<< morphogene.mJointAnchorX << "," << morphogene.mJointAnchorY << ","
+		<< morphogene.mJointAnchorZ << ")"
 
-				<< "/Joint Rotation:(" << morphogene.mJointPitch << "," /**!< The orientation of the joint anchor.*/
-				<< morphogene.mJointYaw << "," << morphogene.mJointRoll << ")"
+		<< "/Joint Rotation:(" /**!< The orientation of the joint anchor.*/
+		<< morphogene.mJointPitch << "," << morphogene.mJointYaw << ","
+		<< morphogene.mJointRoll << ")"
 
-				<< "/Restitution=" << morphogene.mRestitution /**!< The restitution of this morphogene*/
+		<< "/Restitution=" << morphogene.mRestitution /**!< The restitution of this morphogene*/
 
-				<< "/Friction=" << morphogene.mFriction /**!< The friction of this morphogene.*/
+		<< "/Friction=" << morphogene.mFriction /**!< The friction of this morphogene.*/
 
-				<< "/Gene Branches="; /**The gene branches of this gene*/
-
+		<< "/Gene Branches="; /**The gene branches of this gene*/
 		for (std::vector<MorphogeneBranch*>::const_iterator it =
-				morphogene.mGeneBranches.begin();
-				it != morphogene.mGeneBranches.end(); it++) {
+		morphogene.mGeneBranches.begin(); it != morphogene.mGeneBranches.end();
+		it++) {
 			os << (**it);
 		}
 

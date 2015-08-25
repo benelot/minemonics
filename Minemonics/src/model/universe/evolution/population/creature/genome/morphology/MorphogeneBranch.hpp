@@ -217,7 +217,7 @@ public:
 	}
 
 	void setSpringPitchDampingCoefficient(
-			const double springPitchDampingCoefficient) {
+	const double springPitchDampingCoefficient) {
 		mSpringPitchDampingCoefficient = springPitchDampingCoefficient;
 	}
 
@@ -226,7 +226,7 @@ public:
 	}
 
 	void setSpringRollDampingCoefficient(
-			const double springRollDampingCoefficient) {
+	const double springRollDampingCoefficient) {
 		mSpringRollDampingCoefficient = springRollDampingCoefficient;
 	}
 
@@ -235,7 +235,7 @@ public:
 	}
 
 	void setSpringYawDampingCoefficient(
-			const double springYawDampingCoefficient) {
+	const double springYawDampingCoefficient) {
 		mSpringYawDampingCoefficient = springYawDampingCoefficient;
 	}
 
@@ -372,68 +372,58 @@ public:
 	 * @return A string containing all information about the morphogene branch.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const MorphogeneBranch &morphogeneBranch) {
+	const MorphogeneBranch &morphogeneBranch) {
 		return os
-		/**If the morphogene branch is active or not*/
-		<< "MorphogeneBranch: isActive=" << morphogeneBranch.mActive
 
-		/**The type of gene the branch leads to*/
-		<< "/GeneType=" << morphogeneBranch.mBranchGeneType
+		<< "MorphogeneBranch: isActive=" << morphogeneBranch.mActive /**If the morphogene branch is active or not*/
 
-		/**If the morphogene branch is flipped on the morphogene to the other side.*/
-		<< "/isFlipped=" << morphogeneBranch.mFlipped
+		<< "/GeneType=" << morphogeneBranch.mBranchGeneType /**The type of gene the branch leads to*/
 
-		/**If the morphogene branch is mirrored on the morphogene.*/
-		<< "/isMirrored=" << morphogeneBranch.mMirrored
+		<< "/isFlipped=" << morphogeneBranch.mFlipped /**If the morphogene branch is flipped on the morphogene to the other side.*/
 
-		/**The joint anchor position on the morphogene branching into.*/
-		<< "/Joint Anchor:(" << morphogeneBranch.mJointAnchorX << ","
-				<< morphogeneBranch.mJointAnchorY << ","
-				<< morphogeneBranch.mJointAnchorZ << ")"
+		<< "/isMirrored=" << morphogeneBranch.mMirrored /**If the morphogene branch is mirrored on the morphogene.*/
 
-				/**The joint anchor orientation on the morphogene branching into*/
-				<< "/Joint Rotation:(" << morphogeneBranch.mJointPitch << ","
-				<< morphogeneBranch.mJointYaw << ","
-				<< morphogeneBranch.mJointRoll << ")"
+		<< "/Joint Anchor:(" /**The joint anchor position on the morphogene branching into.*/
+		<< morphogeneBranch.mJointAnchorX << ","
+		<< morphogeneBranch.mJointAnchorY << ","
+		<< morphogeneBranch.mJointAnchorZ << ")"
 
-				/**The joint limits in all directions*/
-				<< "/Joint Limits (Min/Max)[Pitch:"
-				<< morphogeneBranch.mJointPitchMinAngle << "/"
-				<< morphogeneBranch.mJointPitchMaxAngle << "][Yaw:"
-				<< morphogeneBranch.mJointYawMinAngle << "/"
-				<< morphogeneBranch.mJointYawMaxAngle << "][Roll:"
-				<< morphogeneBranch.mJointRollMinAngle << "/"
-				<< morphogeneBranch.mJointRollMaxAngle
+		<< "/Joint Rotation:(" << morphogeneBranch.mJointPitch << "," /**The joint anchor orientation on the morphogene branching into*/
+		<< morphogeneBranch.mJointYaw << "," << morphogeneBranch.mJointRoll
+		<< ")"
 
-				/**The spring damping coefficients of the joint*/
-				<< "/SpringDamping: [Pitch:"
-				<< morphogeneBranch.mSpringPitchDampingCoefficient << "][Yaw:"
-				<< morphogeneBranch.mSpringYawDampingCoefficient << "][Roll:"
-				<< morphogeneBranch.mSpringRollDampingCoefficient
+		<< "/Joint Limits (Min/Max)[Pitch:" /**The joint limits in all directions*/
+		<< morphogeneBranch.mJointPitchMinAngle << "/"
+		<< morphogeneBranch.mJointPitchMaxAngle << "][Yaw:"
+		<< morphogeneBranch.mJointYawMinAngle << "/"
+		<< morphogeneBranch.mJointYawMaxAngle << "][Roll:"
+		<< morphogeneBranch.mJointRollMinAngle << "/"
+		<< morphogeneBranch.mJointRollMaxAngle
 
-				/**The joint stiffness*/
-				<< "/JointStiffness: [Pitch:"
-				<< morphogeneBranch.mJointPitchStiffness << "][Yaw:"
-				<< morphogeneBranch.mJointYawStiffness << "][Roll:"
-				<< morphogeneBranch.mJointRollStiffness
+		<< "/SpringDamping: [Pitch:" /**The spring damping coefficients of the joint*/
+		<< morphogeneBranch.mSpringPitchDampingCoefficient << "][Yaw:"
+		<< morphogeneBranch.mSpringYawDampingCoefficient << "][Roll:"
+		<< morphogeneBranch.mSpringRollDampingCoefficient
 
-				/**If the joint motors is enabled or not*/
-				<< "/JointMotorEnabled: [Pitch:"
-				<< morphogeneBranch.mJointPitchMotorEnabled << "][Yaw:"
-				<< morphogeneBranch.mJointYawMotorEnabled << "][Roll:"
-				<< morphogeneBranch.mJointRollMotorEnabled
+		<< "/JointStiffness: [Pitch:" /**The joint stiffness*/
+		<< morphogeneBranch.mJointPitchStiffness << "][Yaw:"
+		<< morphogeneBranch.mJointYawStiffness << "][Roll:"
+		<< morphogeneBranch.mJointRollStiffness
 
-				/**The maximum joint forces*/
-				<< "/JointMaxForce: [Pitch:"
-				<< morphogeneBranch.mJointMaxPitchForce << "][Yaw:"
-				<< morphogeneBranch.mJointMaxYawForce << "][Roll:"
-				<< morphogeneBranch.mJointMaxRollForce
+		<< "/JointMotorEnabled: [Pitch:" /**If the joint motors is enabled or not*/
+		<< morphogeneBranch.mJointPitchMotorEnabled << "][Yaw:"
+		<< morphogeneBranch.mJointYawMotorEnabled << "][Roll:"
+		<< morphogeneBranch.mJointRollMotorEnabled
 
-				/**The maximum joint speeds*/
-				<< "/JointMaxSpeed: [Pitch:"
-				<< morphogeneBranch.mJointMaxPitchSpeed << "][Yaw:"
-				<< morphogeneBranch.mJointMaxYawSpeed << "][Roll:"
-				<< morphogeneBranch.mJointMaxRollSpeed;
+		<< "/JointMaxForce: [Pitch:" /**The maximum joint forces*/
+		<< morphogeneBranch.mJointMaxPitchForce << "][Yaw:"
+		<< morphogeneBranch.mJointMaxYawForce << "][Roll:"
+		<< morphogeneBranch.mJointMaxRollForce
+
+		<< "/JointMaxSpeed: [Pitch:" /**The maximum joint speeds*/
+		<< morphogeneBranch.mJointMaxPitchSpeed << "][Yaw:"
+		<< morphogeneBranch.mJointMaxYawSpeed << "][Roll:"
+		<< morphogeneBranch.mJointMaxRollSpeed;
 	}
 
 	/**
@@ -443,159 +433,101 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeneBranch)
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeneBranch) /**!< Serialize the base object */
 
-		/**If the morphogene branch is active or not*/
-		& BOOST_SERIALIZATION_NVP(
-				mActive)
+		& BOOST_SERIALIZATION_NVP(mFlipped) /**!< If the morphogene branch is flipped on the morphogene to the other side.*/
 
-		/**The type of gene the branch leads to*/
-		& BOOST_SERIALIZATION_NVP(mBranchGeneType)
+		& BOOST_SERIALIZATION_NVP(mMirrored) /**If the morphogene branch is mirrored on the morphogene.*/
 
-		/**If the morphogene branch is flipped on the morphogene to the other side.*/
-		& BOOST_SERIALIZATION_NVP(mFlipped)
-
-		/**If the morphogene branch is mirrored on the morphogene.*/
-		& BOOST_SERIALIZATION_NVP(mMirrored)
-
-		/**The joint anchor position on the morphogene branching into.*/
-		& BOOST_SERIALIZATION_NVP(mJointAnchorX)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**The joint anchor position on the morphogene branching into.*/
 		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
 		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
 
-		/**The joint anchor orientation on the morphogene branching into*/
-		& BOOST_SERIALIZATION_NVP(mJointPitch)
+		& BOOST_SERIALIZATION_NVP(mJointPitch) /**!< Direction of joint anchoring on the surface of the segment */
 		& BOOST_SERIALIZATION_NVP(mJointYaw)
 		& BOOST_SERIALIZATION_NVP(mJointRoll)
 
-		/**The joint limits in pitch direction*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle)
+		& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< The joint limits in pitch direction*/
 		& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
 
-		/**The joint limits in yaw direction*/
-		& BOOST_SERIALIZATION_NVP(mJointYawMinAngle)
+		& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< The joint limits in yaw direction*/
 		& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
 
-		/**The joint limits in roll direction*/
-		& BOOST_SERIALIZATION_NVP(mJointRollMinAngle)
+		& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< The joint limits in roll direction*/
 		& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle)
 
-		/**The spring damping coefficients of the joint*/
-		& BOOST_SERIALIZATION_NVP(mSpringPitchDampingCoefficient)
+		& BOOST_SERIALIZATION_NVP(mSpringPitchDampingCoefficient) /**!< The spring damping coefficients of the joint*/
 		& BOOST_SERIALIZATION_NVP(mSpringYawDampingCoefficient)
 		& BOOST_SERIALIZATION_NVP(mSpringRollDampingCoefficient)
 
-		/**The joint stiffness*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchStiffness)
+		& BOOST_SERIALIZATION_NVP(mJointPitchStiffness) /**!< The joint stiffness*/
 		& BOOST_SERIALIZATION_NVP(mJointYawStiffness)
 		& BOOST_SERIALIZATION_NVP(mJointRollStiffness)
 
-		/**If the joint motors is enabled or not*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchMotorEnabled)
+		& BOOST_SERIALIZATION_NVP(mJointPitchMotorEnabled) /**!< If the joint motors is enabled or not*/
 		& BOOST_SERIALIZATION_NVP(mJointYawMotorEnabled)
 		& BOOST_SERIALIZATION_NVP(mJointRollMotorEnabled)
 
-		/**The maximum joint forces*/
-		& BOOST_SERIALIZATION_NVP(mJointMaxPitchForce)
+		& BOOST_SERIALIZATION_NVP(mJointMaxPitchForce) /**!< The maximum joint forces*/
 		& BOOST_SERIALIZATION_NVP(mJointMaxYawForce)
 		& BOOST_SERIALIZATION_NVP(mJointMaxRollForce)
 
-		/**The maximum joint speeds*/
-		& BOOST_SERIALIZATION_NVP(mJointMaxPitchSpeed)
+		& BOOST_SERIALIZATION_NVP(mJointMaxPitchSpeed) /**!< The maximum joint speeds*/
 		& BOOST_SERIALIZATION_NVP(mJointMaxYawSpeed)
 		& BOOST_SERIALIZATION_NVP(mJointMaxRollSpeed)
 
-		/** The joint frequency*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchFrequency)
+		& BOOST_SERIALIZATION_NVP(mJointPitchFrequency) /**!< The joint frequency*/
 		& BOOST_SERIALIZATION_NVP(mJointYawFrequency)
 		& BOOST_SERIALIZATION_NVP(mJointRollFrequency)
 
-		/** The joint amplitude*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchAmplitude)
+		& BOOST_SERIALIZATION_NVP(mJointPitchAmplitude) /**!< The joint amplitude*/
 		& BOOST_SERIALIZATION_NVP(mJointYawAmplitude)
 		& BOOST_SERIALIZATION_NVP(mJointRollAmplitude)
 
-		/** The joint x offset*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchXOffset)
+		& BOOST_SERIALIZATION_NVP(mJointPitchXOffset) /**!< The joint x offset*/
 		& BOOST_SERIALIZATION_NVP(mJointYawXOffset)
 		& BOOST_SERIALIZATION_NVP(mJointRollXOffset)
 
-		/** The joint y offset*/
-		& BOOST_SERIALIZATION_NVP(mJointPitchYOffset)
+		& BOOST_SERIALIZATION_NVP(mJointPitchYOffset) /**!< The joint y offset*/
 		& BOOST_SERIALIZATION_NVP(mJointYawYOffset)
-		& BOOST_SERIALIZATION_NVP(mJointRollYOffset);
+		& BOOST_SERIALIZATION_NVP(mJointRollYOffset)
+
+		& BOOST_SERIALIZATION_NVP(mBranchGeneType); /**!< The type of gene the branch leads to*/
+
 	}
 
 private:
-	/**
-	 * Spherical coordinates around the origin of the segment at the center of mass.
-	 */
-	double mJointAnchorX, mJointAnchorY, mJointAnchorZ;
+	bool mMirrored; /**!< Determines if this branch is mirrored through the center of mass of its segment. */
 
-	/**
-	 * Direction of joint anchoring on the surface of the segment
-	 */
-	double mJointPitch, mJointYaw, mJointRoll;
+	bool mFlipped; /**!< Determines if this branch is mirrored along the axis defined by the parent gene branch of this branch. */
 
-	/**
-	 * Joint limits for each degree of freedom
-	 */
-	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle;
+	double mJointAnchorX, mJointAnchorY, mJointAnchorZ; /**!< Spherical coordinates around the origin of the segment at the center of mass. */
+
+	double mJointPitch, mJointYaw, mJointRoll; /**!< Direction of joint anchoring on the surface of the segment */
+
+	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 
-	/**
-	 * The spring damping coefficient of the joint springs.
-	 */
-	double mSpringPitchDampingCoefficient, mSpringYawDampingCoefficient,
-			mSpringRollDampingCoefficient;
+	double mSpringPitchDampingCoefficient, mSpringYawDampingCoefficient, /** !< The spring damping coefficient of the joint springs. */
+	mSpringRollDampingCoefficient;
 
-	/**
-	 * The stiffness of the joint.
-	 */
-	double mJointPitchStiffness, mJointYawStiffness, mJointRollStiffness;
+	double mJointPitchStiffness, mJointYawStiffness, mJointRollStiffness; /**!< The stiffness of the joint. */
 
-	/**
-	 * If the angular motor is enabled.
-	 */
-	bool mJointPitchMotorEnabled, mJointYawMotorEnabled, mJointRollMotorEnabled;
+	bool mJointPitchMotorEnabled, mJointYawMotorEnabled, mJointRollMotorEnabled; /**!< If the angular motor is enabled. */
 
-	/**
-	 * The maximum force of the joint
-	 */
-	double mJointMaxPitchForce, mJointMaxYawForce, mJointMaxRollForce;
+	double mJointMaxPitchForce, mJointMaxYawForce, mJointMaxRollForce; /**!< The maximum force of the joint */
 
-	/**
-	 * The maximum speed of the joint
-	 */
-	double mJointMaxPitchSpeed, mJointMaxYawSpeed, mJointMaxRollSpeed;
+	double mJointMaxPitchSpeed, mJointMaxYawSpeed, mJointMaxRollSpeed; /**!< The maximum speed of the joint */
 
-	/**
-	 * The frequency at which the sine controller runs.
-	 */
-	double mJointPitchFrequency, mJointYawFrequency, mJointRollFrequency;
+	double mJointPitchFrequency, mJointYawFrequency, mJointRollFrequency; /**!< The frequency at which the sine controller runs. */
 
-	double mJointPitchAmplitude, mJointYawAmplitude, mJointRollAmplitude;
+	double mJointPitchAmplitude, mJointYawAmplitude, mJointRollAmplitude; /**!< The amplitude at which the sine controller runs. */
 
-	double mJointPitchXOffset, mJointYawXOffset, mJointRollXOffset;
+	double mJointPitchXOffset, mJointYawXOffset, mJointRollXOffset; /**!< The x offset at which the sine controller runs. */
 
-	double mJointPitchYOffset, mJointYawYOffset, mJointRollYOffset;
+	double mJointPitchYOffset, mJointYawYOffset, mJointRollYOffset; /**!< The y offset at which the sine controller runs. */
 
-	/**
-	 * Determines if this branch is mirrored through the center of mass of its segment.
-	 */
-	bool mMirrored;
-
-	/**
-	 * Determines if this branch is mirrored along the axis defined by the parent gene branch of this branch.
-	 */
-	bool mFlipped;
-
-	/**
-	 * The gene type it branches into.
-	 */
-	int mBranchGeneType;
+	int mBranchGeneType; /**!< The gene type it branches into. */
 };
 BOOST_CLASS_VERSION(MorphogeneBranch, 1)
 
