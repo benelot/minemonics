@@ -15,13 +15,11 @@
 //## utils headers
 
 DirectGenome::DirectGenome() :
-		Genome(Genome::UnknownGenome) {
-	// TODO Auto-generated constructor stub
+Genome(Genome::UnknownGenome) {
 
 }
 
 DirectGenome::~DirectGenome() {
-	// TODO Auto-generated destructor stub
 }
 
 bool DirectGenome::equals(const DirectGenome& genome) const {

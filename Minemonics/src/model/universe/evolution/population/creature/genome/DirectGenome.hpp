@@ -42,10 +42,7 @@ public:
 	virtual DirectGenome* clone() = 0;
 
 	//Serialization
-	/**
-	 * @brief Give access to boost serialization.
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization. */
 
 	/**
 	 * @brief Serializes the genome to a string.
@@ -57,18 +54,16 @@ public:
 	 */
 
 	friend std::ostream & operator<<(std::ostream &os,
-			const DirectGenome &genome) {
+	const DirectGenome &genome) {
 		os
-		/**The type of genome*/
-		<< "MixedGenome: Type: " << genome.mGenomeType
 
-		/**The length of the genome*/
-		<< "/length=" << genome.mLength;
+		<< "MixedGenome: Type: " << genome.mGenomeType /**!< The type of genome*/
+
+		<< "/length=" << genome.mLength;/**!< The length of the genome*/
 
 		/**The vector of genes.*/
-
 		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
-				it != genome.mGenes.end(); it++) {
+		it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -78,8 +73,7 @@ public:
 
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar /** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Genome);
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Genome); /**!< Serialize the base object */
 	}
 };
 BOOST_CLASS_VERSION(DirectGenome, 1)

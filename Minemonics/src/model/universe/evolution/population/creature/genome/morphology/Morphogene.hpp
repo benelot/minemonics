@@ -2,7 +2,10 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_MORPHOGENE_H_
 
 //# corresponding headers
+#include <model/universe/evolution/population/creature/genome/Gene.hpp>
+
 //# forward declarations
+class ControllerGene;
 namespace boost {
 namespace serialization {
 class access;
@@ -17,6 +20,7 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
@@ -27,11 +31,9 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
 //## utils headers

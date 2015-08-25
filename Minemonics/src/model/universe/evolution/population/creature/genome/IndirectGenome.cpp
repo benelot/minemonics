@@ -15,16 +15,15 @@
 //## utils headers
 
 IndirectGenome::IndirectGenome() :
-		Genome(Genome::UnknownGenome) {
+Genome(Genome::UnknownGenome) {
 
 }
 
 IndirectGenome::~IndirectGenome() {
-	// TODO Auto-generated destructor stub
 }
 
 bool IndirectGenome::equals(const IndirectGenome& genome) const {
-	if(!Genome::equals(genome)){
+	if (!Genome::equals(genome)) {
 		return false;
 	}
 	return true;

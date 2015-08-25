@@ -1,21 +1,22 @@
-/*
- * MorphoGeneBranch.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
-//# corresponding header
+//# corresponding headers
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <boost/math/constants/constants.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
+
+//## view headers
+//## utils headers
 #include <utils/Randomness.hpp>
 
 MorphogeneBranch::MorphogeneBranch() :

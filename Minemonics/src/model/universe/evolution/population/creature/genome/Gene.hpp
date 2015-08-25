@@ -14,7 +14,6 @@ class access;
 
 //## controller headers
 //## model headers
-// include headers that implement a archive in xml format
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>

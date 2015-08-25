@@ -16,6 +16,8 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
@@ -25,8 +27,8 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/IndirectGenome.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //## utils headers
@@ -132,7 +134,7 @@ public:
 	 * 							The probability of replacing genes.
 	 */
 	virtual void replaceRandomGenesWithRandomGenes(
-			const double replacementProbability);
+	const double replacementProbability);
 
 	/**
 	 * Replaces a random gene with another random gene.
@@ -146,7 +148,7 @@ public:
 	 * A self-loop arises when branch specifications dictate that segments of a particular type should have child segments of the same type. The segment copying mutation preserves this direct recursion in the tree structure when copying a segment specification from one index in the segment specification vector to another.
 	 */
 	virtual void replaceGeneWith(const int geneIndex,
-			const int replacementIndex);
+	const int replacementIndex);
 
 	/**
 	 * Duplicate random genes with probability.
@@ -299,8 +301,8 @@ public:
 	 * 							The segment index in the father genome where the copying ends.
 	 */
 	virtual void crossover(Genome* const fathergenome,
-			const int motherSegmentStartIndex, const int motherSegmentEndIndex,
-			const int fatherSegmentStartIndex, const int fatherSegmentEndIndex);
+	const int motherSegmentStartIndex, const int motherSegmentEndIndex,
+	const int fatherSegmentStartIndex, const int fatherSegmentEndIndex);
 
 	/**
 	 * @brief Grafts a random feature from the donor over to this genome.
@@ -325,7 +327,7 @@ public:
 	 *            Number of genes to copy
 	 */
 	virtual void graftFrom(Genome* const donor, const int attachmentIndex,
-			const int geneIndex, const int geneQty);
+	const int geneIndex, const int geneQty);
 
 	//Accessor methods
 
@@ -346,10 +348,7 @@ public:
 	}
 
 	//Serialization
-	/**
-	 * @brief Give access to boost serialization.
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization.*/
 
 	/**
 	 * @brief Serializes the genome to a string.
@@ -361,55 +360,39 @@ public:
 	 */
 
 	friend std::ostream & operator<<(std::ostream &os,
-			const MixedGenome &genome) {
-		os
-		/**The type of genome*/
-		<< "MixedGenome: Type=" << genome.mGenomeType
+	const MixedGenome &genome) {
+		os << "MixedGenome: Type=" << genome.mGenomeType /**!< The type of genome*/
 
-		/**The length of the genome*/
-		<< "/length=" << genome.mLength
+		<< "/length=" << genome.mLength /**!< The length of the genome*/
 
-		<< "/Genes=[";
-		/**The vector of genes.*/
+		<< "/Genes=["; /**!< The vector of genes.*/
 		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
-				it != genome.mGenes.end(); it++) {
+		it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		os << "]";
 
-		/**The total segment quantity limit*/
-		os << "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit
+		os << "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit /**!< The total segment quantity limit*/
 
-		/**The segments depth limit*/
-		<< "/SegmentsDepthLimit=" << genome.mTotalSegmentQtyLimit;
+		<< "/SegmentsDepthLimit=" << genome.mTotalSegmentQtyLimit; /**!< The segments depth limit*/
 		return os;
 	}
 
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar /** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(IndirectGenome)
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(IndirectGenome) /**!< Serialize the base object */
 
-		/**The total segment quantity limit*/
-		& BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit)
+		& BOOST_SERIALIZATION_NVP(mTotalSegmentQtyLimit) /**!< The total segment quantity limit*/
 
-		/**The segments depth limit*/
-		& BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit);
+		& BOOST_SERIALIZATION_NVP(mSegmentsDepthLimit); /**!< The segments depth limit*/
 	}
 
 private:
+	int mTotalSegmentQtyLimit; /**!< A hard limit on the total number of body segments allowed.*/
 
-	/**
-	 * A hard limit on the total number of body segments allowed.
-	 */
-	int mTotalSegmentQtyLimit;
-
-	/**
-	 * A bound on the depth of the body's tree structure (the number of segments along any root-to-leaf path).
-	 */
-	int mSegmentsDepthLimit;
+	int mSegmentsDepthLimit; /**!< A bound on the depth of the body's tree structure (the number of segments along any root-to-leaf path).*/
 
 };
 BOOST_CLASS_VERSION(MixedGenome, 1)

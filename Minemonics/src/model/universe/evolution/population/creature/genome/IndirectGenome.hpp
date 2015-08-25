@@ -5,9 +5,21 @@
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+#include <iterator>
+#include <vector>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
@@ -17,6 +29,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/Gene.hpp>
+
 //## view headers
 //## utils headers
 
@@ -60,17 +74,13 @@ public:
 	 */
 
 	friend std::ostream & operator<<(std::ostream &os,
-			const IndirectGenome &genome) {
-		os
-		/**The type of genome*/
-		<< "MixedGenome: Type: " << genome.mGenomeType
+	const IndirectGenome &genome) {
+		os << "MixedGenome: Type: " << genome.mGenomeType /**!< The type of genome*/
 
-		/**The length of the genome*/
-		<< "/length=" << genome.mLength;
+		<< "/length=" << genome.mLength; /**!< The length of the genome*/
 
-		/**The vector of genes.*/
-		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
-				it != genome.mGenes.end(); it++) {
+		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin(); /**!< The vector of genes.*/
+		it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -80,8 +90,7 @@ public:
 
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar /** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(Genome);
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Genome); /**!< Serialize the base object */
 	}
 };
 BOOST_CLASS_VERSION(IndirectGenome, 1)

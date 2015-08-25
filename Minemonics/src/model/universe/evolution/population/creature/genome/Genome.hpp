@@ -3,11 +3,22 @@
 
 //# corresponding headers
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <stddef.h>
+#include <iostream>
+#include <iterator>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 

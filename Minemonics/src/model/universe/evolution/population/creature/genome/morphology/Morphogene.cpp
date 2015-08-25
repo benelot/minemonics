@@ -4,7 +4,6 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
-#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
@@ -14,8 +13,8 @@
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
 //## utils headers

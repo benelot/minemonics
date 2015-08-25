@@ -3,13 +3,21 @@
 
 //# corresponding header
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 // include headers that implement a archive in xml format
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+// include headers that implement a archive in xml format
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
 //## view headers
