@@ -3,14 +3,20 @@
 
 //# corresponding header
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 // include headers that implement a archive in xml format
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/vector.hpp>
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
 //## view headers
@@ -71,6 +77,16 @@ public:
 	 */
 	virtual void grow(const int branchiness) = 0;
 
+	//Accessor methods
+
+	GeneType getType() const {
+		return mType;
+	}
+
+	void setType(GeneType geneType) {
+		mType = geneType;
+	}
+
 	//Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
@@ -92,16 +108,6 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_NVP(mType); /**!< The type of gene. */
-	}
-
-	//Accessor methods
-
-	GeneType getType() const {
-		return mType;
-	}
-
-	void setType(GeneType geneType) {
-		mType = geneType;
 	}
 
 protected:
