@@ -19,12 +19,13 @@
 //## utils headers
 
 JointModel::JointModel() :
-		mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1),mOwnIndex(-1) {
+		mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1) {
 
 }
 
 JointModel::JointModel(const JointModel& jointModel) :
-		mParentIndex(jointModel.mParentIndex), mChildIndex(jointModel.mChildIndex),mOwnIndex(jointModel.mOwnIndex) {
+		mParentIndex(jointModel.mParentIndex), mChildIndex(
+				jointModel.mChildIndex), mOwnIndex(jointModel.mOwnIndex) {
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 
@@ -99,7 +100,7 @@ void JointModel::update(double timeSinceLastTick) {
 
 void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {
-	mJointPhysics->setLimits(angularUpperLimit);
+	mJointPhysics->setAngularLimits(angularLowerLimit,angularUpperLimit);
 }
 
 void JointModel::setAngularStiffness(const double jointPitchStiffness,
@@ -170,6 +171,8 @@ void JointModel::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
 		const Ogre::Vector3 maxSpeeds) {
 	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(
 			OgreBulletUtils::convert(maxForces),
-			OgreBulletUtils::convert(maxSpeeds));
+			OgreBulletUtils::convert(maxSpeeds),
+			OgreBulletUtils::convert(getLowerLimits()),
+			OgreBulletUtils::convert(getUpperLimits()));
 }
 

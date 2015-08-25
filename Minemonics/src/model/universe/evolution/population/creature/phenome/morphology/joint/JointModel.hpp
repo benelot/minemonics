@@ -147,6 +147,10 @@ public:
 		return mJointPhysics->getMotors();
 	}
 
+	std::vector<Motor*>& getMotors() {
+		return mJointPhysics->getMotors();
+	}
+
 	const std::vector<LimbModel*>::size_type getParentIndex() const {
 		return mParentIndex;
 	}
@@ -190,6 +194,18 @@ public:
 		mLocalB = localB;
 	}
 
+	Ogre::Vector3 getLowerLimits() {
+		return Ogre::Vector3(mJointPhysics->getJointRollMinAngle(),
+				mJointPhysics->getJointPitchMinAngle(),
+				mJointPhysics->getJointYawMinAngle());
+	}
+
+	Ogre::Vector3 getUpperLimits() {
+		return Ogre::Vector3(mJointPhysics->getJointRollMaxAngle(),
+				mJointPhysics->getJointPitchMaxAngle(),
+				mJointPhysics->getJointYawMaxAngle());
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -209,7 +225,7 @@ private:
 	 */
 	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex;
 
-	btTransform mLocalA,mLocalB;
+	btTransform mLocalA, mLocalB;
 
 	/**
 	 * The joint's own index.

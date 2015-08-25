@@ -9,10 +9,8 @@
 
 //## controller headers
 //## model headers
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
-#include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
+#include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -28,8 +26,8 @@
 #include <utils/ogre3D/Euler.hpp>
 
 ServoMotor::ServoMotor() :
-		Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mJointBt(
-		NULL) {
+		Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mJointMotor(
+		NULL),mLowerLimit(0),mUpperLimit(0) {
 }
 
 ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
@@ -41,7 +39,9 @@ ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
 	mMaxSpeed = servoMotor.mMaxSpeed;
 	mMotorType = servoMotor.mMotorType;
 	mPositionControlled = servoMotor.mPositionControlled;
-	mJointBt = servoMotor.mJointBt;
+	mJointMotor = servoMotor.mJointMotor;
+	mLowerLimit = servoMotor.mLowerLimit;
+	mUpperLimit = servoMotor.mUpperLimit;
 }
 
 ServoMotor::~ServoMotor() {
@@ -50,57 +50,35 @@ ServoMotor::~ServoMotor() {
 
 void ServoMotor::initialize(
 		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		JointBt* jointBt, const double maxForce, const double maxSpeed) {
+		const double maxForce, const double maxSpeed,double lowerLimit, double upperLimit) {
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
 	mMaxSpeed = maxSpeed;
-
-	mJointBt = jointBt;
-
+	mLowerLimit = lowerLimit;
+	mUpperLimit = upperLimit;
 }
 
 void ServoMotor::apply(double timeSinceLastTick) {
-	Ogre::Euler euler(OgreBulletUtils::convert(mJointBt->getMotorTarget()));
-	switch (mJointMotorIndex) {
-	case JointPhysics::RDOF_PITCH:
-		euler.setPitch(Ogre::Radian(getInputValue()));
-		break;
-	case JointPhysics::RDOF_YAW:
-		euler.setYaw(Ogre::Radian(getInputValue()));
-		break;
-	case JointPhysics::RDOF_ROLL:
-		euler.setRoll(Ogre::Radian(getInputValue()));
-		break;
-	}
+//		mMotorBt->m_enableMotor = mEnabled;
+	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
+	btScalar clampedInputValue =
+			(getInputValue() > 1.0f) ? 1.0f :
+			(getInputValue() < 0.0f) ? 0.0f : getInputValue();
 
-	mJointBt->setMotorTarget(OgreBulletUtils::convert(euler.toQuaternion()));
-//	if (mMotorBt->m_hiLimit - mMotorBt->m_loLimit != 0) {
-////		mMotorBt->m_enableMotor = mEnabled;
-//		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
-//		btScalar clampedInputValue =
-//				(getInputValue() > 1.0f) ? 1.0f :
-//				(getInputValue() < 0.0f) ? 0.0f : getInputValue();
-//
-//		//calculate the target angle of the motor
-//		btScalar targetAngle = mMotorBt->m_loLimit
-//				+ clampedInputValue
-//						* (mMotorBt->m_hiLimit - mMotorBt->m_loLimit);
-//
-//		//calculate the angle error
-//		btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
-//
-//#ifdef USE_6DOF2
-////		mMotorBt->m_targetVelocity =
-////		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-////		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
-//		mConstraint->setServoTarget(mJointMotorIndex, targetAngle);
-//#else
-//		//simple p(roportional) controller
-//		//calculate the target velocity and clamp it with the maximum speed
-//		mMotorBt->m_targetVelocity =
-//		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-//		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
-//#endif
+	//calculate the target angle of the motor
+	btScalar targetAngle = mLowerLimit
+			+ clampedInputValue * (mUpperLimit - mLowerLimit);
+
+	//calculate the angle error
+	btScalar angleError = targetAngle - mJointMotor->getPosition(mJointMotorIndex);
+
+	//simple p(roportional) controller
+	//calculate the target velocity and clamp it with the maximum speed
+	mJointMotor->setVelocityTarget(
+			(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
+			(500.f * angleError < -mMaxSpeed) ?
+					-mMaxSpeed : 500.f * angleError);
+
 //TODO: Print to logger only
 //		std::cout << std::setw(10) << std::right << mMotorBt << "("
 //				<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
@@ -109,7 +87,7 @@ void ServoMotor::apply(double timeSinceLastTick) {
 //				<< std::right << targetAngle << "/" << std::setw(10)
 //				<< std::right << angleError << "\t/targetVelocity: "
 //				<< mMotorBt->m_targetVelocity << std::endl;
-//}
+
 }
 
 ServoMotor* ServoMotor::clone() {

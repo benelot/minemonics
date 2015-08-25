@@ -68,7 +68,7 @@ public:
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
 	void initializeRotationalLimitMotors(const btVector3 maxForces,
-			const btVector3 maxSpeeds);
+			const btVector3 maxSpeeds,const btVector3 lowerLimits, const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -150,18 +150,18 @@ public:
 
 	//Accessor methods
 
-	void setLimits(const Ogre::Vector3 limits) {
-		setLimits(OgreBulletUtils::convert(limits));
-	}
-
-	void setLimit(JointPhysics::RotationalDegreeOfFreedom dof,
-			const double limit) {
-//		mJoint->setLimit(dof, limit);
-	}
-
-	void setLimits(const btVector3 limits) {
-//		mJoint->setLimit(limits.x(),limits.y(),limits.z());
-	}
+//	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+//			const Ogre::Vector3 angularUpperLimit) {
+//		setAngularLimits(OgreBulletUtils::convert(angularLowerLimit),
+//				OgreBulletUtils::convert(angularUpperLimit));
+//	}
+//
+//	void setAngularLimits(const btVector3 angularLowerLimit,
+//			const btVector3 angularUpperLimit) {
+//
+////		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
+////		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
+//	}
 
 
 	void setBreakingThreshold(const double breakingThreshold) {
@@ -208,6 +208,10 @@ public:
 	}
 
 	const std::vector<Motor*>& getMotors() const {
+		return mMotors;
+	}
+
+	std::vector<Motor*>& getMotors() {
 		return mMotors;
 	}
 

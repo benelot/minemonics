@@ -103,10 +103,68 @@ public:
 	//Accessor methods
 	virtual const std::vector<Motor*>& getMotors() const = 0;
 
-	virtual void setLimits(const Ogre::Vector3 limits) = 0;
+	virtual std::vector<Motor*>& getMotors() = 0;
+
+	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+			const Ogre::Vector3 angularUpperLimit) {
+		mJointPitchMinAngle = angularLowerLimit[RDOF_PITCH];
+		mJointPitchMaxAngle = angularUpperLimit[RDOF_PITCH];
+		mJointRollMinAngle = angularLowerLimit[RDOF_ROLL];
+		mJointRollMaxAngle = angularUpperLimit[RDOF_ROLL];
+		mJointYawMinAngle = angularLowerLimit[RDOF_YAW];
+		mJointYawMaxAngle = angularUpperLimit[RDOF_YAW];
+	}
 
 	virtual void setRotationalLimitMotorEnabled(const RotationalDegreeOfFreedom index,
 			const bool enable) = 0;
+
+	double getJointPitchMaxAngle() const {
+		return mJointPitchMaxAngle;
+	}
+
+	void setJointPitchMaxAngle(double jointPitchMaxAngle) {
+		mJointPitchMaxAngle = jointPitchMaxAngle;
+	}
+
+	double getJointPitchMinAngle() const {
+		return mJointPitchMinAngle;
+	}
+
+	void setJointPitchMinAngle(double jointPitchMinAngle) {
+		mJointPitchMinAngle = jointPitchMinAngle;
+	}
+
+	double getJointRollMaxAngle() const {
+		return mJointRollMaxAngle;
+	}
+
+	void setJointRollMaxAngle(double jointRollMaxAngle) {
+		mJointRollMaxAngle = jointRollMaxAngle;
+	}
+
+	double getJointRollMinAngle() const {
+		return mJointRollMinAngle;
+	}
+
+	void setJointRollMinAngle(double jointRollMinAngle) {
+		mJointRollMinAngle = jointRollMinAngle;
+	}
+
+	double getJointYawMaxAngle() const {
+		return mJointYawMaxAngle;
+	}
+
+	void setJointYawMaxAngle(double jointYawMaxAngle) {
+		mJointYawMaxAngle = jointYawMaxAngle;
+	}
+
+	double getJointYawMinAngle() const {
+		return mJointYawMinAngle;
+	}
+
+	void setJointYawMinAngle(double jointYawMinAngle) {
+		mJointYawMinAngle = jointYawMinAngle;
+	}
 
 	//TODO: Add serialization to the joint physics
 	//Serialization
@@ -134,6 +192,12 @@ public:
 //	virtual void serialize(Archive & ar, const unsigned int /* file_version */) = 0;
 protected:
 	bool mInWorld;
+
+	/**
+	 * Joint limits for each degree of freedom
+	 */
+	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle;
+	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */

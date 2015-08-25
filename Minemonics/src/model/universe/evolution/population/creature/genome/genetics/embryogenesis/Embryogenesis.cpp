@@ -435,7 +435,8 @@ void Embryogenesis::transcribeMorphogene(
 				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
 				phenomeModel->getJointModels().size());
 
-		std::cout << "Joint Parent: " << joint->getParentIndex() << " /Joint Child: " << joint->getChildIndex() << std::endl;
+		std::cout << "Joint Parent: " << joint->getParentIndex()
+				<< " /Joint Child: " << joint->getChildIndex() << std::endl;
 
 		parentLimb->addChildJointIndex(joint->getIndex());
 		childLimb->setParentJointIndex(joint->getIndex());
@@ -444,58 +445,50 @@ void Embryogenesis::transcribeMorphogene(
 		phenomeModel->getJointModels().push_back(joint);
 		phenomeModel->getComponentModels().push_back(joint);
 
-//		//initialize rotational limit motors
-//		joint->initializeRotationalLimitMotors(
-//				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
-//						parentMorphogeneBranch->getJointMaxYawForce(),
-//						parentMorphogeneBranch->getJointMaxRollForce()),
-//				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
-//						parentMorphogeneBranch->getJointMaxYawForce(),
-//						parentMorphogeneBranch->getJointMaxRollForce()));
-//
-//		//TODO: Quick controller hack
-//		for (std::vector<Motor*>::const_iterator motorIterator =
-//				joint->getMotors().begin();
-//				motorIterator != joint->getMotors().end(); motorIterator++) {
-//			SineController* controller = new SineController();
-//			controller->initialize(0.5f, 0.1f, 0, 0.5f);
-//			controller->addControlOutput((*motorIterator));
-//			phenomeModel->getControllers().push_back(controller);
-//		}
-//
-//		SineController* controller = new SineController();
-//		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
-//				parentMorphogeneBranch->getJointPitchFrequency(),
-//				parentMorphogeneBranch->getJointPitchXOffset(),
-//				parentMorphogeneBranch->getJointPitchYOffset());
-//		controller->addControlOutput(joint->getMotors()[0]);
-//		phenomeModel->getControllers().push_back(controller);
-//
-//		controller = new SineController();
-//		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
-//				parentMorphogeneBranch->getJointYawFrequency(),
-//				parentMorphogeneBranch->getJointYawXOffset(),
-//				parentMorphogeneBranch->getJointYawYOffset());
-//		controller->addControlOutput(joint->getMotors()[1]);
-//		phenomeModel->getControllers().push_back(controller);
-//
-//		controller = new SineController();
-//		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
-//				parentMorphogeneBranch->getJointRollFrequency(),
-//				parentMorphogeneBranch->getJointRollXOffset(),
-//				parentMorphogeneBranch->getJointRollYOffset());
-//		controller->addControlOutput(joint->getMotors()[2]);
-//		phenomeModel->getControllers().push_back(controller);
-//
-//		//set the angular limits of the joint
-//		joint->setAngularLimits(
-//				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
-//						parentMorphogeneBranch->getJointYawMinAngle(),
-//						parentMorphogeneBranch->getJointRollMinAngle()),
-//				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
-//						parentMorphogeneBranch->getJointYawMaxAngle(),
-//						parentMorphogeneBranch->getJointRollMaxAngle()));
-//
+		//set the angular limits of the joint
+		joint->setAngularLimits(
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+						parentMorphogeneBranch->getJointYawMinAngle(),
+						parentMorphogeneBranch->getJointRollMinAngle()),
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+						parentMorphogeneBranch->getJointYawMaxAngle(),
+						parentMorphogeneBranch->getJointRollMaxAngle()));
+
+		//initialize rotational limit motors
+		joint->initializeRotationalLimitMotors(
+				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
+						parentMorphogeneBranch->getJointMaxYawForce(),
+						parentMorphogeneBranch->getJointMaxRollForce()),
+				Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
+						parentMorphogeneBranch->getJointMaxYawForce(),
+						parentMorphogeneBranch->getJointMaxRollForce()));
+
+		//TODO: Quick controller hack
+		SineController* controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
+				parentMorphogeneBranch->getJointPitchFrequency(),
+				parentMorphogeneBranch->getJointPitchXOffset(),
+				parentMorphogeneBranch->getJointPitchYOffset());
+		controller->addControlOutput(joint->getMotors()[0]);
+		phenomeModel->getControllers().push_back(controller);
+
+		controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
+				parentMorphogeneBranch->getJointYawFrequency(),
+				parentMorphogeneBranch->getJointYawXOffset(),
+				parentMorphogeneBranch->getJointYawYOffset());
+		controller->addControlOutput(joint->getMotors()[1]);
+		phenomeModel->getControllers().push_back(controller);
+
+		controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
+				parentMorphogeneBranch->getJointRollFrequency(),
+				parentMorphogeneBranch->getJointRollXOffset(),
+				parentMorphogeneBranch->getJointRollYOffset());
+		controller->addControlOutput(joint->getMotors()[2]);
+		phenomeModel->getControllers().push_back(controller);
+		//
+
 //		//set the angular stiffness of the joint
 //		joint->setAngularStiffness(
 //				parentMorphogeneBranch->getJointPitchStiffness(),

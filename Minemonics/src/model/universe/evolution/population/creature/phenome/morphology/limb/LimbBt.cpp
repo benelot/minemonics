@@ -155,12 +155,8 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 	btVector3 rayStart = origin + direction.normalized() * 100.0f;
 	btVector3 rayEnd = origin;
 
-//	btVector3 rayStart = origin;
-//  btVector3 rayEnd = origin + direction.normalized() * 100.0f;
-
-	//TODO: Debug output, draw test ray
-//	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
-//			rayEnd, btVector3(1, 1, 0));
+	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
+			rayEnd, btVector3(1, 1, 0));
 
 	btVector3 hitPosition = origin;
 	btVector3 hitNormal = btVector3(1, 0, 0);
@@ -180,26 +176,18 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 //	std::cout << "Worldhandle:" << mWorld << std::endl;
 	mWorld->rayTest(rayStart, rayEnd, rayCallback);
 
-//	for (int i = 0; i < rayCallback.m_hitFractions.size(); i++) {
-//		btVector3 p = origin.lerp(rayEnd, rayCallback.m_hitFractions[i]);
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
-//				btVector3(1, 0, 0));
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
-//				p + rayCallback.m_hitNormalWorld[i], btVector3(1, 0, 0));
-//		return p;
-//	}
 
 	if (rayCallback.hasHit()) {
 		hitPosition = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
 		hitNormal = rayCallback.m_hitNormalWorld;
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
-//				btVector3(1, 0, 0));
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
-//				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(hitPosition, 1,
+				btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(hitPosition,
+				hitPosition + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
 
 	} else {
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
-//				1, btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
+				1, btVector3(1, 0, 0));
 		//no hit
 	}
 

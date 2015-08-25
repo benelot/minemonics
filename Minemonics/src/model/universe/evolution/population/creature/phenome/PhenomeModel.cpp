@@ -5,6 +5,7 @@
 //# system headers
 #include <list>
 #include <map>
+#include <vector>
 
 //## controller headers
 //## model headers
@@ -12,6 +13,7 @@
 #include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLink.h>
+#include <BulletDynamics/Featherstone/btMultiBodyConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
 #include <BulletDynamics/Featherstone/btMultiBodyPoint2Point.h>
@@ -23,6 +25,8 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/PlanetModel.hpp>
@@ -38,6 +42,7 @@
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //## view headers
 //## utils headers
@@ -98,18 +103,6 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 			cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastTick);
 	}
-
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->update(timeSinceLastTick);
-//	}
-
-//	// test for strains
-	//TODO: Remove if not used
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->isStrained();
-//	}
 
 	// Update all limb models
 	mHasInterpenetrations = false;
@@ -190,6 +183,8 @@ int PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		}
 
 		generateBody();
+		//TODO: the joint limit constraint does not yet support the limiting of the spherical joint
+		addJointConstraints();
 
 		mDeveloped = true;
 	}
@@ -203,7 +198,7 @@ void PhenomeModel::generateBody() {
 	bool gyro = true;
 	bool multibodyOnly = false;
 	bool canSleep = true;
-	bool selfCollide = false;
+	bool selfCollision = PhysicsConfiguration::SELF_COLLISION;
 
 	if (mJointModels.size() != 0) {
 		mMultiBody = new btMultiBody(mJointModels.size(),
@@ -221,23 +216,18 @@ void PhenomeModel::generateBody() {
 					mLimbModels[i + 1]->getMass(),
 					mLimbModels[i + 1]->getInertia(),
 					((long) mJointModels[i]->getParentIndex()) - 1,
-					mJointModels[i]->getParentComToPivot().getRotation()
-							* mJointModels[i]->getPivotToChildCom().getRotation(),
-					mJointModels[i]->getParentComToPivot().getOrigin(),
-					-mJointModels[i]->getPivotToChildCom().getOrigin(), false);
+					mJointModels[i]->getParentComToPivot().getRotation().normalized()
+							* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
+					mJointModels[i]->getParentComToPivot().getOrigin()
+							* MorphologyConfiguration::LINK_LENGTH,
+					-mJointModels[i]->getPivotToChildCom().getOrigin()
+							* MorphologyConfiguration::LINK_LENGTH, true);
 		}
-		//TODO: Limit joints that way
-//	  // Link joint limits
-//		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
-//		    multiBody, linkIndex, -1.6, 1.6);
-//		// The default value (100) behaves like a lock on -1.6
-//		limitCons->setMaxAppliedImpulse(40);
-//		world->addMultiBodyConstraint(limitCons);
 
 		mMultiBody->finalizeMultiDof();
 
 		mMultiBody->setCanSleep(canSleep);
-		mMultiBody->setHasSelfCollision(selfCollide);
+		mMultiBody->setHasSelfCollision(selfCollision);
 		mMultiBody->setUseGyroTerm(gyro);
 		//
 		if (!setDamping) {
@@ -286,6 +276,40 @@ void PhenomeModel::generateBody() {
 					i);
 
 			mMultiBody->getLink(i).m_collider = mLimbModels[i + 1]->getLink();
+		}
+	}
+}
+
+void PhenomeModel::addJointConstraints() {
+	for (int i = 0; i < mJointModels.size(); i++) {
+		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
+		// Link joint limits
+		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
+				mMultiBody, i,
+				mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH],
+				mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]);
+//			// The default value (100) behaves like a lock on -1.6
+//			limitCons->setMaxAppliedImpulse(40);
+		mLimitConstraints.push_back(limitCons);
+	}
+
+}
+
+void PhenomeModel::addMotors() {
+
+	for (int i = 0; i < mJointModels.size(); i++) {
+		for (std::vector<Motor*>::iterator sit =
+				mJointModels[i]->getMotors().begin();
+				sit != mJointModels[i]->getMotors().end(); sit++) {
+			//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
+			// Link joint limits
+			const float max_impulse = 100000.0f;
+			btMultiBodyJointMotor* jointMotor = new btMultiBodyJointMotor(
+					mMultiBody, mJointModels[i]->getIndex(), 0.0f, max_impulse);
+
+//			// The default value (100) behaves like a lock on -1.6
+//			limitCons->setMaxAppliedImpulse(40);
+			((ServoMotor*) (*sit))->setJointMotor(jointMotor);
 		}
 	}
 }

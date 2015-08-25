@@ -143,6 +143,8 @@ public:
 	 */
 	static const double JOINT_LENGTH = 1;
 
+	static const double LINK_LENGTH = 2;
+
 	/**
 	 * The minimum stiffness of the joint
 	 */

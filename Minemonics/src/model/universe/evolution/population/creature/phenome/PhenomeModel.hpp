@@ -6,6 +6,7 @@
 class btMultiBody;
 class btMultiBodyDynamicsWorld;
 class CreatureModel;
+class btMultiBodyConstraint;
 namespace boost {
 namespace serialization {
 class access;
@@ -54,6 +55,10 @@ public:
 	int performEmbryogenesis(CreatureModel* const creatureModel);
 
 	void generateBody();
+
+	void addJointConstraints();
+
+	void addMotors();
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -305,6 +310,8 @@ private:
 	btMultiBody* mMultiBody;
 
 	btMultiBodyDynamicsWorld* mWorld;
+
+	std::vector<btMultiBodyConstraint*> mLimitConstraints;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

@@ -5,14 +5,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
-class btGeneric6DofSpring2Constraint;
-class btGeneric6DofSpringConstraint;
-class btGeneric6DofConstraint;
-class btRotationalLimitMotor2;
-class btRotationalLimitMotor;
-class btPoint2PointConstraint;
-class btConeTwistConstraint;
-class JointBt;
+class btMultiBodyJointMotor;
 
 //# system headers
 //## controller headers
@@ -27,23 +20,6 @@ class JointBt;
 
 //## view headers
 //## utils headers
-
-//comment this out to compare with original spring constraint
-//#define CONSTRAINT_TYPE btConeTwistConstraint
-//#define EXTRAPARAMS
-//#define MOTOR_TYPE btRotationalLimitMotor
-#define CONSTRAINT_TYPE btPoint2PointConstraint
-#define EXTRAPARAMS
-#define MOTOR_TYPE btRotationalLimitMotor
-//#define CONSTRAINT_TYPE btGeneric6DofConstraint
-//#define EXTRAPARAMS ,true
-//#define MOTOR_TYPE btRotationalLimitMotor
-//#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
-//#define EXTRAPARAMS
-//#define MOTOR_TYPE btRotationalLimitMotor2
-//#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-//#define EXTRAPARAMS ,true
-//#define MOTOR_TYPE btRotationalLimitMotor
 
 /**
  * @brief		The servo motor acts directly on the DoF of a joint and thereby moves the creature.
@@ -63,8 +39,8 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex, JointBt* jointBt,
-			const double maxForce, const double maxSpeed);
+	void initialize(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+			const double maxForce, const double maxSpeed,double lowerLimit, double upperLimit);
 	/**
 	 * Clone the servomotor.
 	 * @return The clone of the servo motor.
@@ -83,9 +59,20 @@ public:
 		return mJointMotorIndex;
 	}
 
+	const btMultiBodyJointMotor* getJointMotor() const {
+		return mJointMotor;
+	}
+
+	void setJointMotor(btMultiBodyJointMotor* jointMotor) {
+		mJointMotor = jointMotor;
+	}
+
 private:
 	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;
-	JointBt* mJointBt;
+	btMultiBodyJointMotor* mJointMotor;
+
+	double mLowerLimit;
+	double mUpperLimit;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

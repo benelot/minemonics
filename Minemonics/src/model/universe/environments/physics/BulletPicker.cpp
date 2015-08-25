@@ -131,8 +131,8 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				//see also http://www.bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=4&t=949
 				//so we try to avoid it by clamping the maximum impulse (force) that the mouse pick can apply
 				//it is not satisfying, hopefully we find a better solution (higher order integrator, using joint friction using a zero-velocity target motor with limited force etc?)
-				btScalar scaling = 10;
-				p2p->setMaxAppliedImpulse(2 * scaling);
+				btScalar scaling = PhysicsConfiguration::BULLET_PICKER_FORCE;
+				p2p->setMaxAppliedImpulse(scaling);
 
 				btMultiBodyDynamicsWorld* multibodyworld =
 						(btMultiBodyDynamicsWorld*) world;

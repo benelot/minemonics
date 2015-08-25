@@ -53,7 +53,7 @@ JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 			tframeInB.getOrigin() EXTRAPARAMS);
 
 //	mJoint->setDamping(10000);
-	
+
 	mJoint->enableFeedback(true);
 	mJoint->setJointFeedback(new btJointFeedback());
 
@@ -98,27 +98,28 @@ void JointBt::update(double timeSinceLastTick) {
 }
 
 void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
-		const btVector3 maxSpeeds) {
+		const btVector3 maxSpeeds, const btVector3 lowerLimits,
+		const btVector3 upperLimits) {
 //	add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH, this, maxForces.getX(),
-			maxSpeeds.getX());
+	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.getX(),
+			maxSpeeds.getX(), lowerLimits.getX(), upperLimits.getX());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_YAW, this, maxForces.getY(),
-			maxSpeeds.getY());
+	servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.getY(),
+			maxSpeeds.getY(), lowerLimits.getY(), upperLimits.getY());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_ROLL, this, maxForces.getZ(),
-			maxSpeeds.getZ());
+	servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.getZ(),
+			maxSpeeds.getZ(), lowerLimits.getZ(), upperLimits.getZ());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
