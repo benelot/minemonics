@@ -874,16 +874,16 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR})
 
 # Add test cpp file
-#add_executable(runUnitTests
-#    ${TESTHDRS}
-#    ${TESTSRCS}
-#)
-#
+add_executable(runUnitTests
+    ${TESTHDRS}
+    ${TESTSRCS}
+)
+
 # Link test executable against gtest & gtest_main
-#target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
-#
-#add_test(
-#    NAME runUnitTests
-#    COMMAND runUnitTests
-#)
+target_link_libraries(runUnitTests ${GTEST_BOTH_LIBRARIES} ${OGRE_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
+set_target_properties(runUnitTests PROPERTIES COMPILE_DEFINITIONS "EXCLUDE_FROM_TEST")
+add_test(
+    NAME runUnitTests
+    COMMAND runUnitTests
+)
  

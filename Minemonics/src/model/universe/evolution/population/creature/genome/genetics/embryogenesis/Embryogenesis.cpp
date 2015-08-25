@@ -285,7 +285,7 @@ void Embryogenesis::transcribeMorphogene(
 		Ogre::Vector3 childLimbCOM(
 				parentLimbCOM + localChildAnchorInRefParent
 						- localChildAnchorInRefChild);
-
+#ifndef EXCLUDE_FROM_TEST
 		// draw line from limb A to surface anchor point of A (GREEN LINE)
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
 				parentLimbCOM, parentLimbCOM + localParentAnchorInRefParent,
@@ -335,9 +335,10 @@ void Embryogenesis::transcribeMorphogene(
 				childLimbCOM + localChildAnchorInRefChild, 0.1,
 				Ogre::ColourValue(0, 1, 0));
 
-//		// draw line from limb A to limb B (WHITE LINE)
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-//				childLimbCOM, parentLimbCOM, Ogre::ColourValue(1, 1, 1));
+		// draw line from limb A to limb B (WHITE LINE)
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+				childLimbCOM, parentLimbCOM, Ogre::ColourValue(1, 1, 1));
+#endif
 
 		// set global center of mass of child limb as the new generation point for generation
 		generator->setPosition(childLimbCOM);

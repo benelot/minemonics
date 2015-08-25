@@ -155,8 +155,10 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 	btVector3 rayStart = origin + direction.normalized() * 100.0f;
 	btVector3 rayEnd = origin;
 
+#ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
 			rayEnd, btVector3(1, 1, 0));
+#endif
 
 	btVector3 hitPosition = origin;
 	btVector3 hitNormal = btVector3(1, 0, 0);
@@ -180,14 +182,17 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 	if (rayCallback.hasHit()) {
 		hitPosition = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
 		hitNormal = rayCallback.m_hitNormalWorld;
+#ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(hitPosition, 1,
 				btVector3(1, 0, 0));
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(hitPosition,
 				hitPosition + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
-
+#endif
 	} else {
+#ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
 				1, btVector3(1, 0, 0));
+#endif
 		//no hit
 	}
 

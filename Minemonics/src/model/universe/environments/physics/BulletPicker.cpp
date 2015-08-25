@@ -45,8 +45,10 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	// the ray caster currently only finds the intersection
 	// when hitting the forward face of a triangle therefore,
 	//the ray has to come from the outside of the shape
+#ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayFromWorld,
 			rayToWorld, btVector3(1, 1, 0));
+#endif
 
 	btVector3 hitPosition = rayFromWorld;
 
@@ -66,23 +68,16 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 //	std::cout << "Worldhandle:" << mWorld << std::endl;
 	world->rayTest(rayFromWorld, rayToWorld, rayCallback);
 
-//	for (int i = 0; i < rayCallback.m_hitFractions.size(); i++) {
-//		btVector3 p = origin.lerp(rayEnd, rayCallback.m_hitFractions[i]);
-//		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
-//				btVector3(1, 0, 0));
-//		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
-//				p + rayCallback.m_hitNormalWorld[i], btVector3(1, 0, 0));
-//		return p;
-//	}
-
 	if (rayCallback.hasHit()) {
 		mPicking = true;
 		btVector3 p = rayFromWorld.lerp(rayToWorld,
 				rayCallback.m_closestHitFraction);
+#ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
 				btVector3(1, 0, 0));
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
 				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
+#endif
 		hitPosition = p;
 
 		btVector3 pickPos = rayCallback.m_hitPointWorld;
@@ -153,8 +148,10 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 		mHitPos = pickPos;
 		mOldPickingDist = (pickPos - rayFromWorld).length();
 	} else {
+#ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
 				rayFromWorld, 1, btVector3(1, 0, 0));
+#endif
 		//no hit
 	}
 	return hitPosition;
