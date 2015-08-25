@@ -91,8 +91,10 @@ PhenomeModel::~PhenomeModel() {
 
 void PhenomeModel::initialize(CreatureModel* const creatureModel) {
 	mCreatureModel = creatureModel;
+#ifndef EXCLUDE_FROM_TEST
 	mWorld =
 			mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+#endif
 }
 
 void PhenomeModel::update(const double timeSinceLastTick) {
