@@ -3,8 +3,6 @@
 
 //# forward declarations
 //# system headers
-#include <vector>
-
 //## controller headers
 //## model headers
 //## view headers

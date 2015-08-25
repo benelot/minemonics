@@ -5,9 +5,20 @@
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -38,7 +49,7 @@ public:
 	 * @param yShift shift in y direction.
 	 */
 	void initialize(const double amplitude, const double frequency,
-			const double xShift, const double yShift);
+	const double xShift, const double yShift);
 
 	/**
 	 * Clone the sine controller.
@@ -50,10 +61,8 @@ public:
 
 	void collectInputs();
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization*/
 
 	/**
 	 * Serializes the sine controller model to a string.
@@ -62,19 +71,17 @@ public:
 	 * @return A string containing all information about the sine controller.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const SineController &sineController) {
-		/**The type of controller*/
-		os << "SineController: Type=" << sineController.mType
-		/**The amplitude of the sine controller*/
-		<< "/Amplitude=" << sineController.mAmplitude
-		/**The frequence of the sine controller*/
-		<< "/Frequency= " << sineController.mFrequency << "Hz"
-		/**The X shift of the sine controller*/
-		<< "/XShift=" << sineController.mXShift
-		/**The YShift of the sine controller*/
-		<< "/YShift=" << sineController.mYShift;
+	const SineController &sineController) {
+		os << "SineController: Type=" << sineController.mType /**!< The type of controller*/
 
-		//TODO: Controller input and outputs serialization
+		<< "/Amplitude=" << sineController.mAmplitude /**!< The amplitude of the sine controller*/
+
+		<< "/Frequency= " << sineController.mFrequency << "Hz" /**!< The frequence of the sine controller*/
+
+		<< "/XShift=" << sineController.mXShift /**!< The X shift of the sine controller*/
+
+		<< "/YShift=" << sineController.mYShift; /**!< The YShift of the sine controller*/
+		//TODO: Control inputs and outputs
 		return os;
 	}
 
@@ -85,19 +92,17 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Controller) /**!< Serialize the base object */
 
-		/**The type of controller*/
-		& BOOST_SERIALIZATION_NVP(mType)
-		/**The amplitude of the sine controller*/
-		& BOOST_SERIALIZATION_NVP(mAmplitude)
-		/**The frequence of the sine controller*/
-		& BOOST_SERIALIZATION_NVP(mFrequency)
-		/**The X shift of the sine controller*/
-		& BOOST_SERIALIZATION_NVP(mXShift)
-		/**The YShift of the sine controller*/
-		& BOOST_SERIALIZATION_NVP(mYShift);
-		//TODO: Controller input and outputs serialization
+		& BOOST_SERIALIZATION_NVP(mAmplitude) /**The amplitude of the sine controller*/
+
+		& BOOST_SERIALIZATION_NVP(mFrequency) /**The frequence of the sine controller*/
+
+		& BOOST_SERIALIZATION_NVP(mXShift) /**The X shift of the sine controller*/
+
+		& BOOST_SERIALIZATION_NVP(mYShift) /**The YShift of the sine controller*/
+
+		& BOOST_SERIALIZATION_NVP(mTime); /**The time of the sine controller*/
 	}
 
 private:

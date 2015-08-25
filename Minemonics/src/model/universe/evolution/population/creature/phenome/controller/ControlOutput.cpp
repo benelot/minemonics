@@ -15,7 +15,7 @@
 //## utils headers
 
 ControlOutput::ControlOutput() :
-		mOutputValue(0) {
+mOutputValue(0) {
 }
 
 ControlOutput::~ControlOutput() {

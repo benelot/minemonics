@@ -1,11 +1,18 @@
-/*
- * ControlInput.cpp
- *
- *  Created on: Apr 30, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
 
 ControlInput::ControlInput() :
 		mReceivedInput(false), mInputValue(0) {
@@ -13,7 +20,7 @@ ControlInput::ControlInput() :
 
 ControlInput::~ControlInput() {
 //	mReceivedInput
-//	mValue
+//	mInputValue
 }
 
 bool ControlInput::equals(const ControlInput& controlInput) const {

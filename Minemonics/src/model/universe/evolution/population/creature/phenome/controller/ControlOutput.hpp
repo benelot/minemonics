@@ -14,11 +14,9 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
 
 //## view headers
 //# custom headers
@@ -47,38 +45,6 @@ public:
 	 */
 	bool equals(const ControlOutput &controlOutput) const;
 
-	//Serialization
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the control output to a string.
-	 * @param os The ostream.
-	 * @param controlOutput The control output we want to serialize.
-	 * @return A string containing all information about the control output.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const ControlOutput &controlOutput) {
-		return os
-		/**The output value*/
-		<< "/InputValue=" << controlOutput.mOutputValue;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The input value*/
-		& BOOST_SERIALIZATION_NVP(mOutputValue);
-	}
-
 	//Accessor methods
 
 	double getOutputValue() const {
@@ -89,11 +55,32 @@ public:
 		mOutputValue = outputValue;
 	}
 
-private:
+	//Serialization
+	friend class boost::serialization::access; /**!<  Give access to boost serialization*/
+
 	/**
-	 * The control output value
+	 * Serializes the control output to a string.
+	 * @param os The ostream.
+	 * @param controlOutput The control output we want to serialize.
+	 * @return A string containing all information about the control output.
 	 */
-	double mOutputValue;
+	friend std::ostream & operator<<(std::ostream &os,
+	const ControlOutput &controlOutput) {
+		return os << "/InputValue=" << controlOutput.mOutputValue; /**!< The output value*/
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_NVP(mOutputValue); /**!< The input value*/
+	}
+
+private:
+	double mOutputValue; /**!< The control output value */
 };
 BOOST_CLASS_VERSION(ControlOutput, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControlOutput)

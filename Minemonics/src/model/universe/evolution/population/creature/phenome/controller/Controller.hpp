@@ -1,18 +1,16 @@
 #ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_CONTROLLER_CONTROLLER_HPP_
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_CONTROLLER_CONTROLLER_HPP_
-
 //# corresponding headers
 //# forward declarations
 //# system headers
+#include <iostream>
+#include <iterator>
 #include <vector>
 
 //## controller headers
 //## model headers
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
 
 //## view headers
 //# custom headers
@@ -83,11 +81,7 @@ public:
 	bool equals(const Controller & controller) const;
 
 	//Serialization
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization*/
 
 	/**
 	 * Serializes the controller to a string.
@@ -96,23 +90,22 @@ public:
 	 * @return A string containing all information about the controller.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const Controller &controller) {
-		os
-		/**The type of gene*/
-		<< "Controller: type=" << controller.mType;
+	const Controller &controller) {
+		os << "Controller: type=" << controller.mType; /**The type of gene*/
 
+		//TODO: Serialize inputs and outputs via indices
 		/**The vector of control inputs.*/
 		for (std::vector<ControlOutput*>::const_iterator it =
-				controller.mControlInputs.begin();
-				it != controller.mControlInputs.end(); it++) {
+		controller.mControlInputs.begin();
+		it != controller.mControlInputs.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		/**The vector of control outputs.*/
 		for (std::vector<ControlInput*>::const_iterator it =
-				controller.mControlOutputs.begin();
-				it != controller.mControlOutputs.end(); it++) {
+		controller.mControlOutputs.begin();
+		it != controller.mControlOutputs.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -126,33 +119,20 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The type of controller*/
-		& BOOST_SERIALIZATION_NVP(mType)
+		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of controller*/
 
-		/**The vector of control inputs*/
-		& BOOST_SERIALIZATION_NVP(mControlInputs);
+		& BOOST_SERIALIZATION_NVP(mControlInputs) /**!< The vector of control inputs*/
 
-		/**The vector of control outputs*/
-		&BOOST_SERIALIZATION_NVP(mControlOutputs);
+		& BOOST_SERIALIZATION_NVP(mControlOutputs); /**!< The vector of control outputs*/
 	}
 
 protected:
 
-	/**
-	 * The type of controller that is running
-	 */
-	ControllerType mType;
+	ControllerType mType; /**!< The type of controller that is running */
 
-	/**
-	 * The control input the controller reads from.
-	 */
-	std::vector<ControlOutput*> mControlInputs;
+	std::vector<ControlOutput*> mControlInputs; /**!< The control input the controller reads from. */
 
-	/**
-	 * The control output the controller writes to.
-	 */
-	std::vector<ControlInput*> mControlOutputs;
+	std::vector<ControlInput*> mControlOutputs; /**!< The control output the controller writes to.*/
 };
 BOOST_CLASS_VERSION(Controller, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Controller)

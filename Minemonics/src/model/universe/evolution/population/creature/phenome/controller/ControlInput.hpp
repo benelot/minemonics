@@ -14,11 +14,9 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
 
 //## view headers
 //# custom headers
@@ -47,44 +45,6 @@ public:
 	 */
 	bool equals(const ControlInput &controlInput) const;
 
-	//Serialization
-
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the control input to a string.
-	 * @param os The ostream.
-	 * @param controlInput The control input we want to serialize.
-	 * @return A string containing all information about the control input.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const ControlInput &controlInput) {
-		return os
-		/**If the control input has new input*/
-		<< "ControlInput: ReceivedInput=" << controlInput.mReceivedInput
-
-		/**The input value*/
-		<< "/InputValue=" << controlInput.mInputValue;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**If the control input has new input*/
-		& BOOST_SERIALIZATION_NVP(mReceivedInput)
-
-		/**The input value*/
-		& BOOST_SERIALIZATION_NVP(mInputValue);
-	}
-
 	//Accessor methods
 
 	double getInputValue() {
@@ -101,16 +61,41 @@ public:
 		return mReceivedInput;
 	}
 
-private:
-	/**
-	 * If it received input.
-	 */
-	bool mReceivedInput;
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
-	 * The input that was received.
+	 * Serializes the control input to a string.
+	 * @param os The ostream.
+	 * @param controlInput The control input we want to serialize.
+	 * @return A string containing all information about the control input.
 	 */
-	double mInputValue;
+	friend std::ostream & operator<<(std::ostream &os,
+	const ControlInput &controlInput) {
+		return os << "ControlInput: ReceivedInput=" /**!< If the control input has new input*/
+		<< controlInput.mReceivedInput
+
+		<< "/InputValue=" << controlInput.mInputValue; /**!< The input that was received. */
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+
+		& BOOST_SERIALIZATION_NVP(mReceivedInput) /**!< If the control input has new input*/
+
+		& BOOST_SERIALIZATION_NVP(mInputValue); /**!< The input that was received. */
+	}
+
+private:
+	bool mReceivedInput; /**!< If it received input. */
+
+	double mInputValue; /**!< The input that was received. */
 };
 BOOST_CLASS_VERSION(ControlInput, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControlInput)
