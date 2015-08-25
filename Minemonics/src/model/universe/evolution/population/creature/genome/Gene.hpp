@@ -33,11 +33,8 @@ public:
 	Gene();
 	virtual ~Gene();
 
-	/**
-	 * The type of the gene
-	 */
-	enum GeneType{
-		UnknownGene,//!< UnknownGene
+	enum GeneType { /**!< The type of the gene */
+		UnknownGene, //!< UnknownGene
 		MorphoGene,  //!< MorphoGene
 		NUM_GENES
 	};
@@ -75,10 +72,7 @@ public:
 	virtual void grow(const int branchiness) = 0;
 
 	//Serialization
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
 	 * Serializes the gene to a string.
@@ -87,9 +81,7 @@ public:
 	 * @return A string containing all information about the gene.
 	 */
 	friend std::ostream & operator<<(std::ostream &os, const Gene &gene) {
-		return os
-		/**The type of gene*/
-		<< "Gene: type="<< gene.mType;
+		return os << "Gene: type=" << gene.mType; /**!< The type of gene*/
 	}
 
 	/**
@@ -99,9 +91,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The type of gene*/
-		& BOOST_SERIALIZATION_NVP(mType);
+		ar & BOOST_SERIALIZATION_NVP(mType); /**!< The type of gene. */
 	}
 
 	//Accessor methods
@@ -115,11 +105,7 @@ public:
 	}
 
 protected:
-
-	/**
-	 * The type of the gene.
-	 */
-	GeneType mType;
+	GeneType mType; /**!< The type of the gene. */
 };
 BOOST_CLASS_VERSION(Gene, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Gene)
