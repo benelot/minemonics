@@ -327,3 +327,11 @@ void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel, btVecto
 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
 	mCollisionShape->setUserPointer(limbModel);
 }
+
+bool LimbBt::equals(const LimbBt& limbBt) const {
+	if(!LimbPhysics::equals(limbBt))
+	{
+		return false;
+	}
+	return true;
+}

@@ -338,11 +338,13 @@ public:
 
 		<< "/length=" << genome.mLength; /**!< The length of the genome*/
 
+		os << "/Genes=[";
 		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin(); /**!< The vector of genes.*/
 		it != genome.mGenes.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
+		os << "]";
 
 		return os;
 	}
@@ -353,11 +355,8 @@ public:
 		//you have to register the derived class type in beforehand.
 		ar.register_type(static_cast<Morphogene*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mGenomeType) /**!< The type of the genome*/
-
 		& BOOST_SERIALIZATION_NVP(mLength) /**!< The length of the genome*/
-
 		& BOOST_SERIALIZATION_NVP(mBranchiness) /**!< The branchiness of the genome*/
-
 		& BOOST_SERIALIZATION_NVP(mGenes); /**!< The vector of genes.*/
 	}
 

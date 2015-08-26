@@ -15,6 +15,7 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
@@ -46,7 +47,8 @@ public:
 	 * Initialize the component model.
 	 * @param type The type of component.
 	 */
-	void initialize(const ComponentType type, const std::vector<ComponentModel*>::size_type ownIndex);
+	void initialize(const ComponentType type,
+	const std::vector<ComponentModel*>::size_type ownIndex);
 
 	/**
 	 * Compare the component model to another component model.
@@ -61,33 +63,7 @@ public:
 	 */
 	virtual ComponentModel* clone() = 0;
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the component model to a string.
-	 * @param os The ostream.
-	 * @param creature The component we want to serialize.
-	 * @return A string containing all information about the component.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const ComponentModel & componentModel) {
-		return os << "ComponentModel: Type=" << componentModel.mComponentType;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The type of the component*/
-		& BOOST_SERIALIZATION_NVP(mComponentType);
-	}
+	// Accessor methods
 
 	ComponentType getComponentType() const {
 		return mComponentType;
@@ -97,16 +73,37 @@ public:
 		return mOwnIndex;
 	}
 
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
+
+	/**
+	 * Serializes the component model to a string.
+	 * @param os The ostream.
+	 * @param creature The component we want to serialize.
+	 * @return A string containing all information about the component.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+	const ComponentModel & componentModel) {
+		return os << "ComponentModel: Type=" << componentModel.mComponentType /**!< The type of the component*/
+		<< "/Index=" << componentModel.mOwnIndex; /**!< The index of the component in the genotype. */
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_NVP(mComponentType) /**!< The type of the component*/
+		& BOOST_SERIALIZATION_NVP(mOwnIndex); /**!< The index of the component in the genotype. */
+	}
+
 protected:
-	/**
-	 * Component type of the compoment.
-	 */
-	ComponentType mComponentType;
+	ComponentType mComponentType; /**!< The type of the component*/
 
-	/**
-	 * The index of the component in the genotype.
-	 */
-	std::vector<ComponentModel*>::size_type mOwnIndex;
+	std::vector<ComponentModel*>::size_type mOwnIndex; /**!< The index of the component in the genotype. */
 };
-
+BOOST_CLASS_VERSION(ComponentModel, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(ComponentModel)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENTMODEL_HPP_ */

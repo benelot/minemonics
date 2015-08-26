@@ -19,7 +19,6 @@ class access;
 //## controller headers
 //## model headers
 #include <boost/serialization/assume_abstract.hpp>
-#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 

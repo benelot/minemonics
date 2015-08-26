@@ -5,19 +5,25 @@
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //# forward declarations
+class JointModel;
 class btDynamicsWorld;
-class CreatureModel;
-class Sensor;
-class Tactioceptor;
 class btMultiBody;
 class btMultiBodyLinkCollider;
-class JointModel;
+class CreatureModel;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+#include <iterator>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreColourValue.h>
@@ -34,6 +40,8 @@ class JointModel;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 
 //## view headers
 //## utils headers
@@ -67,13 +75,11 @@ public:
 	 * @param color The color of the limb.
 	 */
 	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
-			LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
-			Ogre::Quaternion orientation,
-			const Ogre::Vector3 initialRelativePosition,
-			const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
-			double mass, double restitution, double friction,
-			Ogre::ColourValue color,
-			std::vector<ComponentModel*>::size_type ownIndex);
+	LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
+	Ogre::Quaternion orientation, const Ogre::Vector3 initialRelativePosition,
+	const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
+	double mass, double restitution, double friction, Ogre::ColourValue color,
+	std::vector<ComponentModel*>::size_type ownIndex);
 
 	void update(double timeSinceLastTick);
 	/**
@@ -157,12 +163,30 @@ public:
 	}
 
 	void generateLink(btMultiBody* multiBody, btVector3 origin,
-			btQuaternion rotation, int index) {
+	btQuaternion rotation, int index) {
 		mLimbPhysics->generateLink(multiBody, this, origin, rotation, index);
 	}
 
 	btMultiBodyLinkCollider* getLink() {
 		return mLimbPhysics->getLink();
+	}
+
+	std::vector<LimbModel*>::size_type getParentJointIndex() const {
+		return mParentJointIndex;
+	}
+
+	void setParentJointIndex(
+	std::vector<LimbModel*>::size_type parentJointIndex) {
+		mParentJointIndex = parentJointIndex;
+	}
+
+	const std::vector<std::vector<JointModel*>::size_type>& getChildJointIndices() const {
+		return mChildJointIndices;
+	}
+
+	void addChildJointIndex(
+	std::vector<JointModel*>::size_type childJointIndex) {
+		mChildJointIndices.push_back(childJointIndex);
 	}
 
 	// Serialization
@@ -172,78 +196,42 @@ public:
 	friend class boost::serialization::access;
 
 	/**
-	 * Serializes the phemone model to a string.
+	 * Serializes the limb model to a string.
 	 * @param os The ostream.
-	 * @param phenomeModel The phemone model we want to serialize.
-	 * @return A string containing all information about the phemone model.
+	 * @param phenomeModel The limb model we want to serialize.
+	 * @return A string containing all information about the limb model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const LimbModel &limbModel) {
-		//TODO: Improve the printout.
-		return os;
-	}
-
-	std::vector<LimbModel*>::size_type getParentJointIndex() const {
-		return mParentJointIndex;
-	}
-
-	void setParentJointIndex(
-			std::vector<LimbModel*>::size_type parentJointIndex) {
-		mParentJointIndex = parentJointIndex;
-	}
-
-	const std::vector<std::vector<JointModel*>::size_type>& getChildJointIndices() const {
-		return mChildJointIndices;
-	}
-
-	void addChildJointIndex(
-			std::vector<JointModel*>::size_type childJointIndex) {
-		mChildJointIndices.push_back(childJointIndex);
-	}
-
+	const LimbModel &limbModel);
 	/**
-	 * Serializes the creature to an xml file.
+	 * Serializes the limb model to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel)
+		ar.register_type(static_cast<LimbBt*>(NULL));
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mLimbPhysics) /**!< The type of the limb*/
+		& BOOST_SERIALIZATION_NVP(mParentJointIndex) /**!< The index of the joint the limb is connected to its parent. */
+		& BOOST_SERIALIZATION_NVP(mChildJointIndices) /**!< The child joint indices */
+		& BOOST_SERIALIZATION_NVP(mTactioceptors); /**!< The tactioceptors of the limb*/
 
-		/**The type of the limb*/
-		& BOOST_SERIALIZATION_NVP(mLimbPhysics);
 	}
 
 private:
 
-	/**
-	 * The creature model this limb belongs to.
-	 */
-	CreatureModel* mCreatureModel;
+	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
 
-	/**
-	 * The physics model of the limb.
-	 */
-	LimbPhysics* mLimbPhysics;
+	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
 
-	/**
-	 * All the sensors of the limb.
-	 */
-	std::vector<Sensor*> mSensors;
+	std::vector<JointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
 
-	/**
-	 * The tactioceptors of the limb.
-	 */
-	std::vector<Tactioceptor*> mTactioceptors;
+	std::vector<std::vector<JointModel*>::size_type> mChildJointIndices; /**!< The child joint indices */
 
-	/**
-	 * The index of the joint the limb is connected to its parent.
-	 */
-	std::vector<JointModel*>::size_type mParentJointIndex;
+	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
 
-	std::vector<std::vector<JointModel*>::size_type> mChildJointIndices;
+	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
 
 };
 

@@ -62,16 +62,14 @@ public:
 	 * @param mass The mass of the limb.
 	 */
 	void initialize(btDynamicsWorld* const world, void* const limbModel,
-			const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-			const btQuaternion orientation,
-			const btVector3 initialRelativePosition,
-			const btQuaternion initialOrientation,
-			const Ogre::Vector3 dimensions, const btScalar mass,
-			const btScalar restitution, const btScalar friction,
-			const Ogre::ColourValue color);
+	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+	const btQuaternion orientation, const btVector3 initialRelativePosition,
+	const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
+	const btScalar mass, const btScalar restitution, const btScalar friction,
+	const Ogre::ColourValue color);
 
 	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
-			btVector3 origin, btQuaternion rotation, int index);
+	btVector3 origin, btQuaternion rotation, int index);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -105,7 +103,7 @@ public:
 	 * @return The intersection in the global reference frame.
 	 */
 	btTransform getIntersection(const btVector3 origin,
-			const btVector3 direction);
+	const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the global reference frame.
@@ -115,7 +113,7 @@ public:
 	 * @return The intersection in the local reference frame.
 	 */
 	btTransform getPreciseIntersection(const btVector3 origin,
-			const btVector3 direction);
+	const btVector3 direction);
 
 	/**
 	 * Get the fake intersection with the surface in the local reference frame.
@@ -124,7 +122,7 @@ public:
 	 * @return The fake intersection in the local reference frame.
 	 */
 	btVector3 getLocalFakeIntersection(const btVector3 origin,
-			const btVector3 direction);
+	const btVector3 direction);
 
 	/**
 	 * Get the intersection in the local reference frame of the indicated origin.
@@ -133,7 +131,7 @@ public:
 	 * @return The intersection in the local reference frame.
 	 */
 	btTransform getLocalIntersection(const btVector3 origin,
-			const btVector3 direction);
+	const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the local reference frame of the indicated origin.
@@ -142,9 +140,16 @@ public:
 	 * @return The intersection in the local reference frame.
 	 */
 	btTransform getLocalPreciseIntersection(const btVector3 origin,
-			const btVector3 direction);
+	const btVector3 direction);
 
 	virtual void calm();
+
+	/**
+	 * Compare the limb bullet physics model to another limb bullet physics model.
+	 * @param limbPhysics Another limb bullet physics model.
+	 * @return If the limb bullet physics model is equal to the other limb bullet physics model.
+	 */
+	bool equals(const LimbBt & limbBt) const;
 
 	//Accessor methods
 
@@ -166,27 +171,6 @@ public:
 
 		//if there are NaNs, this removes them it seems.
 		return transform.getRotation().normalized();
-	}
-
-	virtual const double getVolume() {
-		if (mVolume != 0) {
-			return mVolume;
-		}
-
-		double volume = 0;
-		switch (mType) {
-		case LimbPhysics::BLOCK: {
-			volume = mDimensions.x * mDimensions.y * mDimensions.z;
-			break;
-		}
-		case LimbPhysics::CAPSULE: {
-			volume = pow(mDimensions.x * 0.5f, 2) * M_PI * mDimensions.z
-					+ pow(mDimensions.x, 3) * M_PI / 6.0f;
-			break;
-		}
-		}
-		mVolume = volume;
-		return volume;
 	}
 
 	btRigidBody* getRigidBody() const {
@@ -218,11 +202,8 @@ public:
 	 * @param limbPhysics The limb bullet model we want to serialize.
 	 * @return A string containing all information about the limb bullet model.
 	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const LimbBt &limbBt) {
-		return os
-				/**The limb physics model of the limb bullet model*/
-				<< "LimbBt: LimbPhysics=" << limbBt;
+	friend std::ostream & operator<<(std::ostream &os, const LimbBt &limbBt) {
+		return os << "LimbBt: LimbPhysics=" << limbBt; /**!< The limb physics model of the limb bullet model*/
 	}
 	/**
 	 * Serializes the limb bullet model to an xml file.
@@ -231,23 +212,21 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The limb physics model of the limb bullet model*/
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbPhysics);
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbPhysics); /**!< Serialize the base object */
 	}
 
 private:
-	btDynamicsWorld* mWorld;
+	btDynamicsWorld* mWorld; /**!< The world the limb is in */
 
-	btCollisionShape* mCollisionShape;
+	btCollisionShape* mCollisionShape; /**!< The collision shape of the limb */
 
-	btDefaultMotionState* mMotionState;
+	btDefaultMotionState* mMotionState; /**!< The motion state of the limb */
 
-	btRigidBody* mBody;
+	btRigidBody* mBody; /**!< The rigid body of the limb */
 
-	btVector3 mInertia;
+	btVector3 mInertia; /**!< The inertia of the limb */
 
-	btMultiBodyLinkCollider* mLink;
+	btMultiBodyLinkCollider* mLink; /**!< The multibody link segment of the limb */
 };
 BOOST_CLASS_VERSION(LimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -18,77 +18,76 @@
 #include <utils/Randomness.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-class LimbModelTest: public ::testing::Test {
+class LimbBtTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		limbModel = new LimbModel();
-		limbModel->initialize(NULL, NULL,
+		limbBt = new LimbBt();
+		limbBt->initialize(NULL, NULL,
 		(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 		LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-		randomness->nextQuaternion(),
-		randomness->nextVector(),
-		randomness->nextQuaternion(),
+		OgreBulletUtils::convert(randomness->nextQuaternion()),
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextQuaternion()),
 		randomness->nextVector(), randomness->nextUnifDouble(0, 10),
 		randomness->nextUnifDouble(0, 10), randomness->nextUnifDouble(0, 10),
 		Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
-		randomness->nextUnifDouble(0, 1), randomness->nextUnifDouble(0, 1)),randomness->nextUnifPosInt(0,10));
+		randomness->nextUnifDouble(0, 1), randomness->nextUnifDouble(0, 1)));
 	}
 
 	virtual void TearDown() {
 		// delete and set the pointer to zero
-		delete limbModel;
-		limbModel = NULL;
+		delete limbBt;
+		limbBt = NULL;
 		delete randomness;
 		randomness = NULL;
 	}
-	LimbModel* limbModel;
+	LimbBt* limbBt;
 	Randomness* randomness;
 };
 
-class LimbModelSerializationTest: public ::testing::Test {
+class LimbBtSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		limbModel = new LimbModel();
-		limbModel->initialize(NULL, NULL,
+		limbBt = new LimbBt();
+		limbBt->initialize(NULL, NULL,
 		(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 		LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-		randomness->nextQuaternion(),
-		randomness->nextVector(),
-		randomness->nextQuaternion(),
+		OgreBulletUtils::convert(randomness->nextQuaternion()),
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextQuaternion()),
 		randomness->nextVector(), randomness->nextUnifDouble(0, 10),
 		randomness->nextUnifDouble(0, 10), randomness->nextUnifDouble(0, 10),
 		Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
-		randomness->nextUnifDouble(0, 1), randomness->nextUnifDouble(0, 1)),randomness->nextUnifPosInt(0,10));
+		randomness->nextUnifDouble(0, 1), randomness->nextUnifDouble(0, 1)));
 
-		limbModel2 = new LimbModel();
+		limbBt2 = new LimbBt();
 
-		SaveController<LimbModel> saveController;
+		SaveController<LimbBt> saveController;
 
-		saveController.save(*limbModel, "LimbModel.test");
+		saveController.save(*limbBt, "LimbBt.test");
 
-		saveController.restore(*limbModel2, "LimbModel.test");
+		saveController.restore(*limbBt2, "LimbBt.test");
 	}
 
 	virtual void TearDown() {
 		// delete and set the pointer to zero
-		// delete and set the pointer to zero
-		delete limbModel;
-		limbModel = NULL;
-		delete limbModel2;
-		limbModel2 = NULL;
+		delete limbBt;
+		limbBt = NULL;
+		delete limbBt2;
+		limbBt2 = NULL;
 		delete randomness;
 		randomness = NULL;
 	}
-	LimbModel* limbModel;
-	LimbModel* limbModel2;
+	LimbBt* limbBt;
+	LimbBt* limbBt2;
 	Randomness* randomness;
 };
 
-TEST_F(LimbModelTest,hasNormalGenes) {
+TEST_F(LimbBtTest,hasNormalGenes) {
 //	ASSERT_TRUE(
 //	PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
 //	- PopulationConfiguration::POPULATION_GENES_INITIAL_VAR
@@ -97,8 +96,8 @@ TEST_F(LimbModelTest,hasNormalGenes) {
 //	+ PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
 }
 
-TEST_F(LimbModelSerializationTest,isEqualAfterSerialization) {
-	ASSERT_TRUE(limbModel != limbModel2);
-	ASSERT_TRUE(limbModel->equals(*limbModel2));
+TEST_F(LimbBtSerializationTest,isEqualAfterSerialization) {
+	ASSERT_TRUE(limbBt != limbBt2);
+	ASSERT_TRUE(limbBt->equals(*limbBt2));
 }
 

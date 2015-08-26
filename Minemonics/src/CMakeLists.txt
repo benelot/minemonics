@@ -487,7 +487,7 @@ set(TESTSRCS
     # genome
     ./model/universe/evolution/population/creature/genome/MixedGenome_test.cpp
     
-    # morphology
+    ## morphology
     ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch_test.cpp
     ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     
@@ -497,6 +497,10 @@ set(TESTSRCS
     # phenome
     ## controllers
     ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
+    
+    ## morphology
+    ./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt_test.cpp
+    ./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel_test.cpp
     
     # misc
     ./utils/NameGenerator_test.cpp

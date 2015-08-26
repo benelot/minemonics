@@ -27,6 +27,10 @@ LimbPhysics::~LimbPhysics() {
 
 bool LimbPhysics::equals(const LimbPhysics& limbPhysics) const {
 
+	if(mType != limbPhysics.mType){
+		return false;
+	}
+
 	if (mInitialRelativeXPosition != limbPhysics.mInitialRelativeXPosition) {
 		return false;
 	}

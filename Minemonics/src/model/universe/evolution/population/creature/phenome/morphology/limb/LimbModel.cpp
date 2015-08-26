@@ -8,15 +8,17 @@
 #include <LinearMath/btScalar.h>
 #include <OgreVector3.h>
 
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
 //## utils headers
@@ -169,4 +171,28 @@ const LimbPhysics::PrimitiveType LimbModel::getPrimitiveType() const {
 
 const Ogre::Vector3 LimbModel::getDimensions() const {
 	return mLimbPhysics->getDimensions();
+}
+
+std::ostream & operator<<(std::ostream &os,
+const LimbModel &limbModel) {
+	os << "LimbModel: LimbPhysics=" << (*limbModel.mLimbPhysics)
+	<< "/ParentJointIndex=" << limbModel.mParentJointIndex;
+
+	os << "/ChildJointIndices=[";
+	for (std::vector<std::vector<JointModel*>::size_type>::const_iterator it =
+	limbModel.mChildJointIndices.begin(); /**!< The vector of child joint indices.*/
+	it != limbModel.mChildJointIndices.end(); it++) {
+		os << (*it);
+		os << "||";
+	}
+	os << "]/Sensors=[";
+
+	for (std::vector<Tactioceptor*>::const_iterator it =
+	limbModel.mTactioceptors.begin(); /**!< The vector of tactioceptors.*/
+	it != limbModel.mTactioceptors.end(); it++) {
+		os << (**it);
+		os << "||";
+	}
+	os << "]";
+	return os;
 }
