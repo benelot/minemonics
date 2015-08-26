@@ -27,6 +27,12 @@ protected:
 		jointBt->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
 		OgreBulletUtils::convert(randomness->nextVector()),
 		OgreBulletUtils::convert(randomness->nextVector()));
+
+		jointBt->initializeRotationalLimitMotors(
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextVector()));
 	}
 
 	virtual void TearDown() {
@@ -47,6 +53,11 @@ protected:
 		// Set up an object of the class you want to test
 		jointBt = new JointBt();
 		jointBt->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextVector()));
+		jointBt->initializeRotationalLimitMotors(
+		OgreBulletUtils::convert(randomness->nextVector()),
+		OgreBulletUtils::convert(randomness->nextVector()),
 		OgreBulletUtils::convert(randomness->nextVector()),
 		OgreBulletUtils::convert(randomness->nextVector()));
 

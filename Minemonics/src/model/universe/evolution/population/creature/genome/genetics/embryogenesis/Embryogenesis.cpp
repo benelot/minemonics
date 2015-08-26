@@ -22,8 +22,6 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
@@ -39,8 +37,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
-#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
@@ -223,7 +219,7 @@ PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 		LimbBt* childLimbBt = new LimbBt();
 
 		childLimbBt->initialize(
-		phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+		phenomeModel->getCreatureModel()->getWorld(),
 		NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
 		btQuaternion(childMorphogene->getOrientationX(),
 		childMorphogene->getOrientationY(), childMorphogene->getOrientationZ(),
@@ -339,7 +335,7 @@ PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 	LimbModel* childLimb = new LimbModel();
 
 	childLimb->initialize(
-	phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+	phenomeModel->getCreatureModel()->getWorld(),
 	phenomeModel->getCreatureModel(), childMorphogene->getPrimitiveType(),
 	generator->getPosition(), generator->getOrientation(),
 	Ogre::Vector3(
@@ -406,7 +402,7 @@ PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 		JointModel* joint = new JointModel();
 
 		joint->initialize(
-		phenomeModel->getCreatureModel()->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+		phenomeModel->getCreatureModel()->getWorld(),
 		/*parent limb*/
 		((LimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
 		/*child limb*/

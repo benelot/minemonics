@@ -21,6 +21,7 @@ class Motor;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //## view headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
@@ -191,6 +192,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar.register_type(static_cast<ServoMotor*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics) /**!< Serialize the base object */
 		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
 	}

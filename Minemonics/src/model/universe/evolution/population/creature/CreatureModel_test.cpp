@@ -26,8 +26,13 @@ class CreatureModelTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
+
 		creature = new CreatureModel();
+		physicsController = new PhysicsController();
+		physicsController->initBulletPhysics();
+		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
+		creature->performEmbryogenesis();
 	}
 
 	virtual void TearDown() {
@@ -36,8 +41,12 @@ protected:
 		creature = NULL;
 		delete randomness;
 		randomness = NULL;
+		delete physicsController;
+		physicsController = NULL;
 	}
 	CreatureModel* creature;
+
+	PhysicsController* physicsController;
 
 	Randomness* randomness;
 };
@@ -47,7 +56,11 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		creature = new CreatureModel();
+		physicsController = new PhysicsController();
+		physicsController->initBulletPhysics();
+		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
+		creature->performEmbryogenesis();
 
 		creature2 = new CreatureModel();
 
@@ -65,10 +78,15 @@ protected:
 		creature2 = NULL;
 		delete randomness;
 		randomness = NULL;
+		delete physicsController;
+		physicsController = NULL;
+
 	}
 	CreatureModel* creature;
 
 	CreatureModel* creature2;
+
+	PhysicsController* physicsController;
 
 	Randomness* randomness;
 };

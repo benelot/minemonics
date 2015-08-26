@@ -24,7 +24,6 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //## view headers
 //## utils headers

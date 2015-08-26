@@ -26,6 +26,7 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
@@ -235,6 +236,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar.register_type(static_cast<SineController*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mDeveloped) /**!< If the phenome is developed*/
 
 		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/

@@ -12,6 +12,8 @@ class CreatureModel;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -31,6 +33,7 @@ class CreatureModel;
  */
 class AverageVelocity: public Jury {
 public:
+	AverageVelocity();
 	AverageVelocity(const bool higherIsBetter,const double weight);
 	virtual ~AverageVelocity();
 
@@ -57,16 +60,46 @@ public:
 
 	virtual AverageVelocity* clone();
 
+	//Accessor methods
+
+	// Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
+
+	/**
+	 * Serializes the average velocity jury to a string.
+	 * @param os The ostream.
+	 * @param avgVelocityJury The average velocity jury we want to serialize.
+	 * @return A string containing all information about the average velocity jury.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const AverageVelocity &avgVelocityJury) {
+		return os;
+	}
+
+	/**
+	 * Serializes the average velocity jury to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Jury); /**!< Serialize the base object */
+	}
+
 private:
 	Ogre::Vector3 mTotalMovement;
-	double mAvgVelocity;
-	int mCreatureLimbQty;
 
-	double mTimestamp;
-	int mSampleQty;
-	bool mIsFirstTime;
+	double mAvgVelocity; /**!< The average velocity */
 
-	std::vector<Ogre::Vector3> mLastCoords;
+	int mCreatureLimbQty; /**!< The number of limbs of the creature */
+
+	double mTimestamp; /**!< The timestamp of the last invocation */
+
+	int mSampleQty; /**!< THe number of samples of this average */
+
+	bool mIsFirstTime; /** Is this the first time this jury is run */
+
+	std::vector<Ogre::Vector3> mLastCoords; /**!< The last coordinates of each limb */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_ */

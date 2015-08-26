@@ -10,6 +10,8 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/SaveController.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -17,7 +19,7 @@
 class AverageHeightTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		height = new AverageHeight(true, 1);
+		height = new AverageHeight(false, 2);
 	}
 
 	virtual void TearDown() {
@@ -27,8 +29,31 @@ protected:
 	AverageHeight* height;
 };
 
-TEST_F(AverageHeightTest,hasWeightOne) {
-	ASSERT_TRUE(height->getWeight() == 1);
+class AverageHeightSerializationTest: public ::testing::Test {
+protected:
+	virtual void SetUp() {
+		height = new AverageHeight(false, 2);
+		height2 = new AverageHeight(true, 1);
+
+		SaveController<AverageHeight> saveController;
+
+		saveController.save(*height, "AvgHeight.test");
+
+		saveController.restore(*height2, "AvgHeight.test");
+	}
+
+	virtual void TearDown() {
+		delete height;
+		height = 0;
+		delete height2;
+		height2 = 0;
+	}
+	AverageHeight* height;
+	AverageHeight* height2;
+};
+
+TEST_F(AverageHeightTest,hasWeightTwo) {
+	ASSERT_TRUE(height->getWeight() == 2);
 }
 
 TEST_F(AverageHeightTest,evaluateHeight) {
@@ -37,5 +62,10 @@ TEST_F(AverageHeightTest,evaluateHeight) {
 //	velocity->calculateFitness(1,0,0,1);
 //	velocity->evaluateFitness();
 //	ASSERT_TRUE(velocity->getFitness() == 1);
+}
+
+TEST_F(AverageHeightSerializationTest,isEqualAfterSerialization) {
+	ASSERT_TRUE(height != height2);
+	ASSERT_TRUE(height->equals(*height2));
 }
 

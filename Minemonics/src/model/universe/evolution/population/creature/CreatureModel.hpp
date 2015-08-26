@@ -11,21 +11,17 @@ class access;
 } /* namespace boost */
 
 //# system headers
-#include <fstream>
-#include <iterator>
+#include <iostream>
 #include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
 // include headers that implement a archive in xmlformat
-#include <boost/archive/tmpdir.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/vector.hpp>
-#include <boost/math/special_functions/cbrt.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <boost/math/special_functions/cbrt.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -39,6 +35,10 @@ class access;
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/juries/AverageHeight.hpp>
+#include <model/universe/evolution/juries/AverageVelocity.hpp>
+#include <model/universe/evolution/population/creature/genome/Gene.hpp>
+#include <model/universe/evolution/population/creature/genome/Genome.hpp>
 
 //## view headers
 //## utils headers
@@ -65,7 +65,7 @@ public:
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
 	void initialize(PopulationModel* const populationModel,
-			const Ogre::Vector3 position, const double branchiness);
+	const Ogre::Vector3 position, const double branchiness);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -109,12 +109,10 @@ public:
 	double getCreatureVolume() const {
 		double totalVolume = 0;
 		for (std::vector<Gene*>::const_iterator it =
-				mGenotype.getGenes().begin(); it != mGenotype.getGenes().end();
-				it++) {
+		mGenotype.getGenes().begin(); it != mGenotype.getGenes().end(); it++) {
 			if ((*it)->getType() == Gene::MorphoGene) {
 				totalVolume += ((Morphogene*) *it)->getX()
-						* ((Morphogene*) *it)->getY()
-						* ((Morphogene*) *it)->getZ();
+				* ((Morphogene*) *it)->getY() * ((Morphogene*) *it)->getZ();
 			}
 		}
 		return totalVolume;
@@ -122,7 +120,7 @@ public:
 
 	void calm();
 
-	bool hasInterpenetrations(){
+	bool hasInterpenetrations() {
 		return mPhenotypeModel.hasInterpenetrations();
 	}
 
@@ -161,7 +159,7 @@ public:
 
 	void clearJuries() {
 		for (std::vector<Jury*>::iterator jit = mJuries.begin();
-				jit != mJuries.end(); jit++) {
+		jit != mJuries.end(); jit++) {
 			delete *jit;
 		}
 		mJuries.clear();
@@ -215,6 +213,12 @@ public:
 		mNew = _new;
 	}
 
+	btDynamicsWorld*& getWorld();
+
+	void setWorld(btDynamicsWorld* world) {
+		mWorld = world;
+	}
+
 	// Serialization
 	/**
 	 * Give access to boost serialization
@@ -228,7 +232,7 @@ public:
 	 * @return A string containing all information about the creature.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const CreatureModel &creature) {
+	const CreatureModel &creature) {
 		os
 		/**The name of the creature*/
 		<< "/CreatureModel: Name=" << creature.mFirstName
@@ -240,19 +244,19 @@ public:
 
 		/**The juries of the creature model*/
 		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin();
-				it != creature.mJuries.end(); it++) {
+		it != creature.mJuries.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		/**The position of the creature model*/
 		os << "/Position=(" << creature.mPosition.x << ","
-				<< creature.mPosition.y << "," << creature.mPosition.z << ")";
+		<< creature.mPosition.y << "," << creature.mPosition.z << ")";
 
 		/**The initial position of the creature model*/
 		os << "/InitialPosition=(" << creature.mInitialPosition.x << ","
-				<< creature.mInitialPosition.y << ","
-				<< creature.mInitialPosition.z << ")";
+		<< creature.mInitialPosition.y << "," << creature.mInitialPosition.z
+		<< ")";
 
 		os << "/isCulled=" << creature.mCulled;
 		os << "/isNew=" << creature.mNew;
@@ -266,6 +270,8 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar.register_type(static_cast<AverageVelocity*>(NULL));
+		ar.register_type(static_cast<AverageHeight*>(NULL));
 		ar
 		/**The name of the creature*/
 		& BOOST_SERIALIZATION_NVP(mFirstName)
@@ -345,6 +351,8 @@ private:
 	 * The fitness score competitively eruated by the juries.
 	 */
 	double mFitnessScore;
+
+	btDynamicsWorld* mWorld;
 
 };
 BOOST_CLASS_VERSION(CreatureModel, 1)

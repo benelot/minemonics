@@ -15,6 +15,7 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
@@ -100,7 +101,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mWeight)
 
 		/**The fitness score of the jury.*/
-		& BOOST_SERIALIZATION_NVP(mFitness);
+		& BOOST_SERIALIZATION_NVP(mFitness)
 
 		& BOOST_SERIALIZATION_NVP(mHigherIsBetter);
 	}
@@ -158,5 +159,6 @@ protected:
 	 */
 	double mScore;
 };
-
+BOOST_CLASS_VERSION(Jury, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Jury)
 #endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_JURY_HPP_ */

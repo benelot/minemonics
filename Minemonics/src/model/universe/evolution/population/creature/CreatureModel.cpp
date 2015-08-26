@@ -15,6 +15,8 @@
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
@@ -22,13 +24,13 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-		mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1) {
+mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1),mWorld(NULL) {
 	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-		mGenotype(creatureModel.mGenotype), mPhenotypeModel(
-				creatureModel.mPhenotypeModel) {
+mGenotype(creatureModel.mGenotype), mPhenotypeModel(
+creatureModel.mPhenotypeModel) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -37,16 +39,17 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mInitialPosition = creatureModel.mInitialPosition;
 	mPosition = creatureModel.mPosition;
 	mFitnessScore = creatureModel.mFitnessScore;
+	mWorld = creatureModel.mWorld;
 
 	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
-			jit != creatureModel.mJuries.end(); jit++) {
+	jit != creatureModel.mJuries.end(); jit++) {
 		mJuries.push_back((*jit)->clone());
 	}
 }
 
 void CreatureModel::initialize(PopulationModel* const populationModel,
-		const Ogre::Vector3 position, const double branchiness) {
+const Ogre::Vector3 position, const double branchiness) {
 	mPopulationModel = populationModel;
 	mInitialPosition = position;
 	mPosition = position;
@@ -84,7 +87,7 @@ double CreatureModel::getFitnessScore() {
 	double weight = 0;
 
 	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
-			jit != mJuries.end(); jit++) {
+	jit != mJuries.end(); jit++) {
 		fitness += (*jit)->getScore() * (*jit)->getWeight();
 		weight += (*jit)->getWeight();
 	}
@@ -160,7 +163,7 @@ CreatureModel* CreatureModel::clone() {
 
 void CreatureModel::update(double timeSinceLastTick) {
 	for (std::vector<Jury*>::iterator jit = mJuries.begin();
-			jit != mJuries.end(); jit++) {
+	jit != mJuries.end(); jit++) {
 		switch ((*jit)->getJuryType()) {
 		default: {
 			(*jit)->calculateFitness(this, timeSinceLastTick);
@@ -172,11 +175,20 @@ void CreatureModel::update(double timeSinceLastTick) {
 
 void CreatureModel::processJuries() {
 	for (std::vector<Jury*>::iterator jit = mJuries.begin();
-			jit != mJuries.end(); jit++) {
+	jit != mJuries.end(); jit++) {
 		(*jit)->evaluateFitness();
 	}
 }
 
 void CreatureModel::calm() {
 	mPhenotypeModel.calm();
+}
+
+btDynamicsWorld*& CreatureModel::getWorld() {
+	if (!mWorld) {
+		mWorld =
+		mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+	}
+	return mWorld;
+
 }
