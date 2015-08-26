@@ -46,7 +46,8 @@ void JointModel::initialize(btDynamicsWorld* const world,
 	mOwnIndex = ownIndex;
 	mLocalA = localA;
 	mLocalB = localB;
-	mJointPhysics = new JointBt(world, limbA, limbB, localA, localB);
+	mJointPhysics = new JointBt();
+	((JointBt*)mJointPhysics)->initialize(world, limbA, limbB, localA, localB);
 
 	//TODO: proof of concept, make better.
 //	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(

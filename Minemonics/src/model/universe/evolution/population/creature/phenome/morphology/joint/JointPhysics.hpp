@@ -3,9 +3,19 @@
 
 //# corresponding header
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+#include <vector>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
@@ -76,21 +86,21 @@ public:
 	 * If the joint physics is in the world.
 	 * @return If it is in the world.
 	 */
-	virtual bool isInWorld(){
+	virtual bool isInWorld() {
 		return mInWorld;
 	}
 
 	/**
 	 * Add the joint physics model to the physics world.
 	 */
-	virtual void addToWorld(){
+	virtual void addToWorld() {
 		mInWorld = true;
 	}
 
 	/**
 	 * Remove the joint physics model from the physics world.
 	 */
-	virtual void removeFromWorld(){
+	virtual void removeFromWorld() {
 		mInWorld = false;
 	}
 
@@ -106,7 +116,7 @@ public:
 	virtual std::vector<Motor*>& getMotors() = 0;
 
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-			const Ogre::Vector3 angularUpperLimit) {
+	const Ogre::Vector3 angularUpperLimit) {
 		mJointPitchMinAngle = angularLowerLimit[RDOF_PITCH];
 		mJointPitchMaxAngle = angularUpperLimit[RDOF_PITCH];
 		mJointRollMinAngle = angularLowerLimit[RDOF_ROLL];
@@ -115,8 +125,8 @@ public:
 		mJointYawMaxAngle = angularUpperLimit[RDOF_YAW];
 	}
 
-	virtual void setRotationalLimitMotorEnabled(const RotationalDegreeOfFreedom index,
-			const bool enable) = 0;
+	virtual void setRotationalLimitMotorEnabled(
+	const RotationalDegreeOfFreedom index, const bool enable) = 0;
 
 	double getJointPitchMaxAngle() const {
 		return mJointPitchMaxAngle;
@@ -166,38 +176,54 @@ public:
 		mJointYawMinAngle = jointYawMinAngle;
 	}
 
-	//TODO: Add serialization to the joint physics
 	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
-	 * Give access to boost serialization
+	 * Serializes the joint physics model to a string.
+	 * @param os The ostream.
+	 * @param jointPhysics The joint physics model we want to serialize.
+	 * @return A string containing all information about the joint physics model.
 	 */
-//	friend class boost::serialization::access;
+	friend std::ostream & operator<<(std::ostream &os,
+		const JointPhysics &jointPhysics) {
+		os << "JointPhysics: inWorld=" << jointPhysics.mInWorld /**!< If the joint is in the world*/
+		<< "JointPitchLimit=[" /**!< Joint Pitch limit */
+		<< jointPhysics.mJointPitchMinAngle << ","
+		<< jointPhysics.mJointPitchMaxAngle
 
-//	/**
-//	 * Serializes the joint physics model to a string.
-//	 * @param os The ostream.
-//	 * @param jointPhysics The joint physics model we want to serialize.
-//	 * @return A string containing all information about the joint physics model.
-//	 */
-//	virtual friend std::ostream & operator<<(std::ostream &os,
-//			const JointPhysics & jointPhysics) = 0;
-//
-//	/**
-//	 * Serializes the creature to an xml file.
-//	 * @param ar The archive.
-//	 * @param The file version.
-//	 */
-//	template<class Archive>
-//	virtual void serialize(Archive & ar, const unsigned int /* file_version */) = 0;
+		<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
+		<< jointPhysics.mJointYawMinAngle << ","
+		<< jointPhysics.mJointYawMaxAngle
+
+		<< "]/JointRollLimit=[" /**!< Joint Roll limit */
+		<< jointPhysics.mJointRollMinAngle << ","
+		<< jointPhysics.mJointRollMaxAngle << "]";
+		return os;
+	}
+
+	/**
+	 * Serializes the joint physics model to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */)  {
+		ar & BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< Joint Pitch limit */
+		& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
+
+		& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< Joint Yaw limit */
+		& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
+
+		& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< Joint Roll limit */
+		& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle);
+	}
 protected:
-	bool mInWorld;
+	bool mInWorld; /**!< If the joint physics is in the world or not. */
 
-	/**
-	 * Joint limits for each degree of freedom
-	 */
-	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle;
+	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 };
-
+BOOST_CLASS_VERSION(JointPhysics, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointPhysics)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */

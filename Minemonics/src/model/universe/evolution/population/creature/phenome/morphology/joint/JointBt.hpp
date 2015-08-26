@@ -8,6 +8,7 @@ class Motor;
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
@@ -36,6 +37,7 @@ class JointBt: public JointPhysics {
 public:
 	JointBt();
 	JointBt(const JointBt& jointBt);
+
 	/**
 	 * Initialize the joint bullet physics model.
 	 * @param world A handle to the bullet dynamics world.
@@ -44,9 +46,9 @@ public:
 	 * @param tframeInA The joint position in reference frame A.
 	 * @param tframeInB The joint position in reference frame B.
 	 */
-	JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-			btRigidBody* const bodyB, const btTransform& tframeInA,
-			const btTransform& tframeInB);
+	void initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
+	btRigidBody* const bodyB, const btTransform& tframeInA,
+	const btTransform& tframeInB);
 	virtual ~JointBt();
 
 	/**
@@ -55,7 +57,8 @@ public:
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
 	void initializeRotationalLimitMotors(const btVector3 maxForces,
-			const btVector3 maxSpeeds,const btVector3 lowerLimits, const btVector3 upperLimits);
+	const btVector3 maxSpeeds, const btVector3 lowerLimits,
+	const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -101,40 +104,6 @@ public:
 	 */
 	virtual JointBt* clone();
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the joint bullet physics to a string.
-	 * @param os The ostream.
-	 * @param jointModel The joint bullet physics we want to serialize.
-	 * @return A string containing all information about the joint bullet physics.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const JointBt & jointBt) {
-		/**The vector of motors.*/
-		for (std::vector<Motor*>::const_iterator it = jointBt.mMotors.begin();
-				it != jointBt.mMotors.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-		return os;
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The motors of the joint bullet physics model*/
-		& BOOST_SERIALIZATION_NVP(mMotors);
-	}
-
 	//Accessor methods
 
 //	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
@@ -150,49 +119,42 @@ public:
 ////		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
 //	}
 
-
 //	void setBreakingThreshold(const double breakingThreshold) {
 //		mJoint->setBreakingImpulseThreshold(breakingThreshold);
 //	}
 
 	void setRotationalLimitMotorEnabled(
-			const JointPhysics::RotationalDegreeOfFreedom index,
-			const bool enable);
+	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
 
 	bool isRotationalLimitMotorEnabled(
-			const JointPhysics::RotationalDegreeOfFreedom index) {
+	const JointPhysics::RotationalDegreeOfFreedom index) {
 		return true;
 //		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
 	void setTargetRotationalVelocity(
-			JointPhysics::RotationalDegreeOfFreedom index,
-			double targetVelocity) {
+	JointPhysics::RotationalDegreeOfFreedom index, double targetVelocity) {
 //		mJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
 	}
 
 	double getTargetRotationalVelocity(
-			const JointPhysics::RotationalDegreeOfFreedom index) {
+	const JointPhysics::RotationalDegreeOfFreedom index) {
 		return 0;
 //		return mJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
 	void setMaxRotationalForce(
-			const JointPhysics::RotationalDegreeOfFreedom index,
-			const double maxMotorForce) {
+	const JointPhysics::RotationalDegreeOfFreedom index,
+	const double maxMotorForce) {
 //		mJoint->setMaxMotorImpulse(maxMotorForce);
 
 	}
 
 	double getMaxRotationalForce(
-			const JointPhysics::RotationalDegreeOfFreedom index) {
+	const JointPhysics::RotationalDegreeOfFreedom index) {
 		return 0;
 //		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
-
-//	CONSTRAINT_TYPE* getJoint() {
-//		return mJoint;
-//	}
 
 	const std::vector<Motor*>& getMotors() const {
 		return mMotors;
@@ -202,20 +164,37 @@ public:
 		return mMotors;
 	}
 
-//	const btQuaternion& getMotorTarget() const {
-//		return mMotorTarget;
-//	}
-//
-//	void setMotorTarget(const btQuaternion motorTarget) {
-//		mMotorTarget = motorTarget;
-//	}
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
+
+	/**
+	 * Serializes the joint bullet physics model to a string.
+	 * @param os The ostream.
+	 * @param jointBt The joint bullet physics model we want to serialize.
+	 * @return A string containing all information about the joint bullet physics model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+	const JointBt & jointBt) {
+		for (std::vector<Motor*>::const_iterator it = jointBt.mMotors.begin(); /**!< The motors of the joint bullet physics model*/
+		it != jointBt.mMotors.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+		return os;
+	}
+
+	/**
+	 * Serializes the joint bullet physics model to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
+	}
 
 private:
-
-//	/**
-//	 * The 6 Degrees of freedom joint that is used as a physical model.
-//	 */
-//	CONSTRAINT_TYPE* mJoint;
 
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.

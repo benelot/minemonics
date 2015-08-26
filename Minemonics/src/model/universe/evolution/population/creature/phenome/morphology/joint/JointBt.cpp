@@ -30,13 +30,12 @@
 //## utils headers
 
 JointBt::JointBt() :
-		mWorld(NULL)/*, mJoint(NULL), mMotorTarget(0, 0, 0, 1)*/ {
+		mWorld(NULL) {
 	mMotors.clear();
 }
 
 JointBt::JointBt(const JointBt& jointBt) {
 	mWorld = jointBt.mWorld;
-//	mJoint = jointBt.mJoint;
 	mInWorld = jointBt.mInWorld;
 
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
@@ -45,20 +44,10 @@ JointBt::JointBt(const JointBt& jointBt) {
 	}
 }
 
-JointBt::JointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
+void JointBt::initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
 		const btTransform& tframeInB) {
 	mWorld = world;
-//	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA.getOrigin(),
-//			tframeInB.getOrigin() EXTRAPARAMS);
-
-//	mJoint->setDamping(10000);
-
-//	mJoint->enableFeedback(true);
-//	mJoint->setJointFeedback(new btJointFeedback());
-
-	//debug drawing
-//	mJoint->setDbgDrawSize(btScalar(5.f));
 
 }
 
@@ -75,24 +64,17 @@ JointBt::~JointBt() {
 	}
 
 	mMotors.clear();
-
-//	delete mJoint;
-//	mJoint = NULL;
 }
 
 void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
-	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 			motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			//TODO:Reenable motors when interpenetration problems are fixed.
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
-	//set new motor target to joint
-//	mJoint->setMotorTarget(mMotorTarget);
 
 //	isStrained();
 }
