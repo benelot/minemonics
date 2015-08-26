@@ -5,28 +5,26 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations
+struct btDefaultMotionState;
+class btDynamicsWorld;
+class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
 } /* namespace serialization */
 } /* namespace boost */
-struct btDefaultMotionState;
-class btDynamicsWorld;
-class btMultiBody;
-//class btMultiBodyLinkCollider;
 
 //# system headers
 #include <cmath>
 
 //## controller headers
 //## model headers
-#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
-#include <boost/serialization/base_object.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/version.hpp>
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
+#include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
 
 //## view headers
@@ -147,15 +145,8 @@ public:
 			const btVector3 direction);
 
 	virtual void calm();
-	//Accessor methods
 
-//	btVector3 getPosition() const {
-//		return mBody->getCenterOfMassPosition();
-//	}
-//
-//	btQuaternion getOrientation() const {
-//		return mBody->getOrientation();
-//	}
+	//Accessor methods
 
 	btVector3 getPosition() const {
 		if (mLink) {
@@ -219,10 +210,7 @@ public:
 	}
 
 	// Serialization
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
 	 * Serializes the limb bullet model to a string.
@@ -230,12 +218,12 @@ public:
 	 * @param limbPhysics The limb bullet model we want to serialize.
 	 * @return A string containing all information about the limb bullet model.
 	 */
-//	friend std::ostream & operator<<(std::ostream &os,
-//			const LimbPhysics &limbPhysics) {
-//		return os
-//				/**The limb physics model of the limb bullet model*/
-//				<< "LimbBt: LimbPhysics=" << LimbPhysics;
-//	}
+	friend std::ostream & operator<<(std::ostream &os,
+			const LimbBt &limbBt) {
+		return os
+				/**The limb physics model of the limb bullet model*/
+				<< "LimbBt: LimbPhysics=" << limbBt;
+	}
 	/**
 	 * Serializes the limb bullet model to an xml file.
 	 * @param ar The archive.

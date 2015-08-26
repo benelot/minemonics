@@ -16,7 +16,7 @@
 
 bool CreatureFitnessScoreComparator::mHigherIsBetter = true;
 CreatureFitnessScoreComparator::CreatureFitnessScoreComparator(
-		bool higherIsBetter) {
+bool higherIsBetter) {
 	mHigherIsBetter = higherIsBetter;
 }
 

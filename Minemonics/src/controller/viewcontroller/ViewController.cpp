@@ -43,7 +43,7 @@ ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 		mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDetailsPanel(NULL), mFpsPanel(
 		NULL), mDragContainer(NULL), mEvaluationInView(NULL), mShowShadows(
-				false) {
+				false),mSelectedPlanet(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -52,6 +52,10 @@ ViewController::~ViewController() {
 	mSystem = NULL;
 
 	mEvaluationInView = NULL;
+
+	mPlanetsInView.clear();
+
+	mSelectedPlanet = NULL;
 
 	mRenderer = NULL;
 
@@ -169,11 +173,11 @@ void ViewController::updateMousePosition(const float mousePositionX,
 			mousePositionX - mousePos.d_x, mousePositionY - mousePos.d_y);
 }
 
-void ViewController::addPlanet(Planet* const planet) {
+void ViewController::addPlanetToView(Planet* const planet) {
 	mPlanetsInView.push_back(planet);
 }
 
-void ViewController::removePlanet(Planet* const planet) {
+void ViewController::removePlanetFromView(Planet* const planet) {
 	for (std::vector<Planet*>::iterator pit = mPlanetsInView.begin();
 			pit != mPlanetsInView.end(); pit++) {
 		if ((*pit) == planet) {

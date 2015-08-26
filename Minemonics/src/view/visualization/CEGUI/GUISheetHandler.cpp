@@ -922,21 +922,21 @@ const CEGUI::EventArgs &args) {
 
 //Settings->Physics->Gravity->No Gravity
 bool GUISheetHandler::noGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::NO_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Pluto Gravity
 bool GUISheetHandler::plutoGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::PLUTO_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Moon Gravity
 bool GUISheetHandler::moonGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::MOON_GRAVITY);
 	return true;
 }
@@ -944,14 +944,14 @@ bool GUISheetHandler::moonGravityButtonClicked(const CEGUI::EventArgs &args) {
 //Settings->Physics->Gravity->Mars/Mercury Gravity
 bool GUISheetHandler::marsMercuryGravityButtonClicked(
 const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::MARS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Uranus Gravity
 bool GUISheetHandler::uranusGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::URANUS_GRAVITY);
 	return true;
 }
@@ -959,14 +959,14 @@ bool GUISheetHandler::uranusGravityButtonClicked(const CEGUI::EventArgs &args) {
 //Settings->Physics->Gravity->Venus/Saturn Gravity
 bool GUISheetHandler::venusSaturnGravityButtonClicked(
 const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::VENUS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Earth Gravity
 bool GUISheetHandler::earthGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::EARTH_GRAVITY);
 	return true;
 }
@@ -974,7 +974,7 @@ bool GUISheetHandler::earthGravityButtonClicked(const CEGUI::EventArgs &args) {
 //Settings->Physics->Gravity->Neptune Gravity
 bool GUISheetHandler::neptuneGravityButtonClicked(
 const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::NEPTUNE_GRAVITY);
 	return true;
 }
@@ -982,14 +982,14 @@ const CEGUI::EventArgs &args) {
 //Settings->Physics->Gravity->Jupiter Gravity
 bool GUISheetHandler::jupiterGravityButtonClicked(
 const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::JUPITER_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Sun Gravity
 bool GUISheetHandler::sunGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getViewController().getPlanetsInView()[0]->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
 	PhysicsConfiguration::SUN_GRAVITY);
 	return true;
 }

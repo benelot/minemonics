@@ -81,10 +81,9 @@ public:
 	void updateMousePosition(const float mousePositionX,
 			const float mousePositionY);
 
-	//TODO: Implement the view controller to handle what planets are shown.
-	void addPlanet(Planet* planet);
+	void addPlanetToView(Planet* planet);
 
-	void removePlanet(Planet* const planet);
+	void removePlanetFromView(Planet* const planet);
 
 	//Accessor methods
 	ParamsPanel* const getDetailsPanel() const {
@@ -139,6 +138,14 @@ public:
 		mShowShadows = showShadows;
 	}
 
+	Planet* getSelectedPlanet() const {
+		return mSelectedPlanet;
+	}
+
+	void setSelectedPlanet(Planet* selectedPlanet) {
+		mSelectedPlanet = selectedPlanet;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -178,6 +185,7 @@ private:
 	InfoOverlay mInfoOverlay;
 
 	std::vector<Planet*> mPlanetsInView;
+	Planet* mSelectedPlanet;
 	Evaluation* mEvaluationInView;
 	bool mShowShadows;
 };

@@ -52,7 +52,7 @@ void MousePicker::pickBody() {
 	//Implement OgreMeshRay
 	Ogre::Ray ray = getMouseRay();
 	mBulletPicker.pickBody(
-			mViewController->getPlanetsInView()[0]->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+			mViewController->getSelectedPlanet()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			OgreBulletUtils::convert(ray.getOrigin()),
 			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()*10000.0f));
 }

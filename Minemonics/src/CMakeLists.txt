@@ -3,7 +3,7 @@
 #Filename:    CMakeLists.txt
 #-----------------------------------------------------------------------------
 #
-#This source file is part of the Minemonics 3D Virtual Creatures simulator
+#This source file is part of the Minemonics 3D Virtual Creature simulator
 #
 #-----------------------------------------------------------------------------
 #*/
@@ -44,7 +44,7 @@ set(MODELHDRS
 	./model/universe/evolution/EvolutionModel.hpp
 	./model/universe/evolution/Reaper.hpp
 	./model/universe/evolution/CreatureFitnessComparator.hpp
-	./model/universe/evolution/CreatureFitnessComparator.hpp
+	./model/universe/evolution/CreatureFitnessScoreComparator.hpp
 	./model/universe/evolution/population/PopulationModel.hpp
 	./model/universe/evolution/population/creature/CreatureModel.hpp
 	
@@ -120,7 +120,7 @@ set(MODELSRCS
 	./model/universe/evolution/EvolutionModel.cpp
 	./model/universe/evolution/Reaper.cpp
 	./model/universe/evolution/CreatureFitnessComparator.cpp
-	./model/universe/evolution/CreatureFitnessComparator.cpp
+	./model/universe/evolution/CreatureFitnessScoreComparator.cpp
 	./model/universe/evolution/population/PopulationModel.cpp
 	./model/universe/evolution/population/creature/CreatureModel.cpp
 	

@@ -64,9 +64,11 @@ void Reaper::reap(PopulationModel* const population) {
 		}
 	}
 
+	//for each jury type
 	for (int i = 0; i < population->getCreatureModels()[0]->getJuries().size();
 			i++) {
 
+		//sort by the ith criterium
 		CreatureFitnessComparator comparator(i);
 		std::sort(population->getCreatureModels().begin(),
 				population->getCreatureModels().end(),
@@ -81,10 +83,11 @@ void Reaper::reap(PopulationModel* const population) {
 		}
 
 	}
-//	CreatureFitnessScoreComparator scoreComparator();
-//	std::sort(population->getCreatureModels().begin(),
-//			population->getCreatureModels().end(),
-//			scoreComparator.compareCreatureFitnessScore);
+	// sort by the fitness score
+	CreatureFitnessScoreComparator scoreComparator;
+	std::sort(population->getCreatureModels().begin(),
+			population->getCreatureModels().end(),
+			scoreComparator.compareCreatureFitnessScore);
 
 	for (std::vector<CreatureModel*>::iterator cit =
 			population->getCreatureModels().begin();
