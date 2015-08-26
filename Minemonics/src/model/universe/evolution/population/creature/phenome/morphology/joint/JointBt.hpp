@@ -48,7 +48,8 @@ public:
 	 */
 	void initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	btRigidBody* const bodyB, const btTransform& tframeInA,
-	const btTransform& tframeInB);
+	const btTransform& tframeInB, btVector3 jointLowerLimits,
+	btVector3 jointUpperLimits);
 	virtual ~JointBt();
 
 	/**

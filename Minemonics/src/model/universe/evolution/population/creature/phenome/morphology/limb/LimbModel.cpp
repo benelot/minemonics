@@ -77,6 +77,9 @@ void LimbModel::reposition(Ogre::Vector3 position) {
 }
 
 bool LimbModel::equals(const LimbModel& limbModel) const {
+	if(!ComponentModel::equals(limbModel)){
+		return false;
+	}
 
 	if (!mLimbPhysics->equals(*limbModel.mLimbPhysics)) {
 		return false;

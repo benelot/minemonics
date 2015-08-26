@@ -1,34 +1,25 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.hpp>
-
-//# forward declarations
-//# system headers
-//## controller headers
-//## model headers
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-//## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
 
 //## view headers
 //## utils headers
 
-JointLimitProprioceptor::JointLimitProprioceptor(
-		std::vector<int*>::size_type jointIndex,
-		JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit) :
-		JointProprioceptor(jointIndex, rotationalDOF), mLimitError(0), mLimit(
-				limit) {
+JointLimitceptor::JointLimitceptor() :
+mLimit(BOTH_LIMITS), mLimitError(0) {
+}
+
+JointLimitceptor::JointLimitceptor(std::vector<int*>::size_type jointIndex,
+JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit) :
+JointProprioceptor(jointIndex, rotationalDOF), mLimitError(0), mLimit(limit) {
 
 }
 
-JointLimitProprioceptor::~JointLimitProprioceptor() {
+JointLimitceptor::~JointLimitceptor() {
 
 }
 
-void JointLimitProprioceptor::update(double timeSinceLastTick) {
+void JointLimitceptor::update(double timeSinceLastTick) {
 //	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
 //	switch (mLimit) {
 //	case LOWER_LIMIT:

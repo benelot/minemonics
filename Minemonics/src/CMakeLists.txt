@@ -81,9 +81,9 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp
-	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.hpp
-	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.hpp
-	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp
 		
 	## creature controller
 	./model/universe/evolution/population/creature/phenome/controller/Controller.hpp
@@ -156,9 +156,9 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp
-	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.cpp
-	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.cpp
-	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp
 	
 	## creature controller
     ./model/universe/evolution/population/creature/phenome/controller/Controller.cpp
@@ -502,6 +502,7 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt_test.cpp
     ./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel_test.cpp
     ./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt_test.cpp
+    ./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel_test.cpp
     
     # misc
     ./utils/NameGenerator_test.cpp

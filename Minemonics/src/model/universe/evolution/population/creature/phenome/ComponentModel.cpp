@@ -27,3 +27,14 @@ const std::vector<ComponentModel*>::size_type ownIndex) {
 	mOwnIndex = ownIndex;
 }
 
+bool ComponentModel::equals(const ComponentModel& componentModel) const {
+	if (mComponentType != componentModel.mComponentType) {
+		return false;
+	}
+
+	if (mOwnIndex != componentModel.mOwnIndex) {
+		return false;
+	}
+
+	return true;
+}

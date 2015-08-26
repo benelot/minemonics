@@ -19,6 +19,9 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>

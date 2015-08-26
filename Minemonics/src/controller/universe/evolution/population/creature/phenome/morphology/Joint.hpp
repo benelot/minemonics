@@ -45,10 +45,10 @@ class Limb;
  */
 class Joint: public Component {
 public:
-	Joint(Creature* const creature,
-			Limb* const limbA, Limb* const limbB, const btTransform localA,
-			const btTransform localB, const int indexA, const int indexB,
-			const int ownIndex);
+	Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
+	const btTransform localA, const btTransform localB, const int indexA,
+	const int indexB, const int ownIndex, Ogre::Vector3 jointLowerLimits,
+	Ogre::Vector3 jointUpperLimits);
 	Joint(const Joint& joint);
 	Joint(const JointModel& jointModel);
 	Joint(JointModel* const jointModel);
@@ -63,9 +63,8 @@ public:
 	 * @param localB Local reference frame of limb B.
 	 */
 	void initialize(Creature* const creature, Limb* const limbA,
-			Limb* const limbB, const btTransform localA,
-			const btTransform localB, const int indexA = 0,
-			const int indexB = 0, const int ownIndex = 0);
+	Limb* const limbB, const btTransform localA, const btTransform localB,
+	const int indexA = 0, const int indexB = 0, const int ownIndex = 0);
 
 	/**
 	 * Clone the joint.
@@ -89,7 +88,7 @@ public:
 	 * @param maxSpeeds The maximum speeds along the axes.
 	 */
 	void initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
-			const Ogre::Vector3 maxSpeeds);
+	const Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Updates the joint position and orientation.
@@ -117,7 +116,7 @@ public:
 	 * @param angularUpperLimit Upper angular limits.
 	 */
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-			const Ogre::Vector3 angularUpperLimit);
+	const Ogre::Vector3 angularUpperLimit);
 
 	/**
 	 * Set angular joint stiffness.
@@ -126,7 +125,7 @@ public:
 	 * @param jointRollStiffness Joint stiffness in roll direction.
 	 */
 	void setAngularStiffness(const double jointPitchStiffness,
-			const double jointYawStiffness, const double jointRollStiffness);
+	const double jointYawStiffness, const double jointRollStiffness);
 
 	/**
 	 * Set the spring damping coefficients.
@@ -135,8 +134,8 @@ public:
 	 * @param springRollDampingCoefficient Damping coefficient of the spring in roll direction.
 	 */
 	void setAngularDamping(const double springPitchDampingCoefficient,
-			const double springYawDampingCoefficient,
-			const double springRollDampingCoefficient);
+	const double springYawDampingCoefficient,
+	const double springRollDampingCoefficient);
 
 	/**
 	 * Enable angular motors.
@@ -145,7 +144,7 @@ public:
 	 * @param rollEnable Enable roll motor.
 	 */
 	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
-			const bool rollEnable);
+	const bool rollEnable);
 
 	// Accessor methods
 
@@ -186,7 +185,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>("Joint"));
+			boost::log::attributes::constant<std::string>("Joint"));
 		}
 	} _initializer;
 	/**

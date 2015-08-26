@@ -46,8 +46,16 @@ JointBt::JointBt(const JointBt& jointBt) {
 
 void JointBt::initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB) {
+const btTransform& tframeInB, btVector3 jointLowerLimits,
+btVector3 jointUpperLimits) {
 	mWorld = world;
+	mJointPitchMinAngle = jointLowerLimits.x();
+	mJointYawMinAngle = jointLowerLimits.y();
+	mJointRollMinAngle = jointLowerLimits.z();
+
+	mJointPitchMaxAngle = jointUpperLimits.x();
+	mJointYawMaxAngle = jointUpperLimits.y();
+	mJointRollMaxAngle = jointUpperLimits.z();
 
 }
 

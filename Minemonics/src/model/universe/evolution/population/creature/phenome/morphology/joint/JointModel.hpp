@@ -7,15 +7,22 @@
 //# forward declarations
 class btDynamicsWorld;
 class btRigidBody;
-class btTransform;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <LinearMath/btTransform.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -24,12 +31,13 @@ class btTransform;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
 
 //## view headers
 //## utils headers
@@ -49,11 +57,11 @@ public:
 	virtual ~JointModel();
 
 	void initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
-			btRigidBody* const limbB, const btTransform localA,
-			const btTransform localB,
-			const std::vector<LimbModel*>::size_type indexA,
-			const std::vector<LimbModel*>::size_type indexB,
-			const std::vector<JointModel*>::size_type ownIndex);
+	btRigidBody* const limbB, const btTransform localA,
+	const btTransform localB, const std::vector<LimbModel*>::size_type indexA,
+	const std::vector<LimbModel*>::size_type indexB,
+	const std::vector<JointModel*>::size_type ownIndex,
+	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits);
 
 	/**
 	 * Update the joint model.
@@ -101,7 +109,7 @@ public:
 	}
 
 	void initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
-			const Ogre::Vector3 maxSpeeds);
+	const Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.
@@ -109,7 +117,7 @@ public:
 	 * @param angularUpperLimit Upper angular limits.
 	 */
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-			const Ogre::Vector3 angularUpperLimit);
+	const Ogre::Vector3 angularUpperLimit);
 
 	/**
 	 * Set angular joint stiffness.
@@ -118,7 +126,7 @@ public:
 	 * @param jointRollStiffness Joint stiffness in roll direction.
 	 */
 	void setAngularStiffness(const double jointPitchStiffness,
-			const double jointYawStiffness, const double jointRollStiffness);
+	const double jointYawStiffness, const double jointRollStiffness);
 
 	/**
 	 * Set the spring damping coefficients.
@@ -127,8 +135,8 @@ public:
 	 * @param springRollDampingCoefficient Damping coefficient of the spring in roll direction.
 	 */
 	void setAngularDamping(const double springPitchDampingCoefficient,
-			const double springYawDampingCoefficient,
-			const double springRollDampingCoefficient);
+	const double springYawDampingCoefficient,
+	const double springRollDampingCoefficient);
 
 	/**
 	 * Enable angular motors.
@@ -137,7 +145,7 @@ public:
 	 * @param rollEnable Enable roll motor.
 	 */
 	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
-			const bool rollEnable);
+	const bool rollEnable);
 
 	/**
 	 * Get the motors of this joint.
@@ -159,25 +167,6 @@ public:
 		return mChildIndex;
 	}
 
-	// Serialization
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the joint model to a string.
-	 * @param os The ostream.
-	 * @param jointModel The joint model we want to serialize.
-	 * @return A string containing all information about the joint model.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const JointModel &jointModel) {
-		return os;
-//		/**The physics component of the joint model*/
-//		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
-	}
-
 	const btTransform& getParentComToPivot() const {
 		return mLocalA;
 	}
@@ -196,26 +185,48 @@ public:
 
 	Ogre::Vector3 getLowerLimits() {
 		return Ogre::Vector3(mJointPhysics->getJointRollMinAngle(),
-				mJointPhysics->getJointPitchMinAngle(),
-				mJointPhysics->getJointYawMinAngle());
+		mJointPhysics->getJointPitchMinAngle(),
+		mJointPhysics->getJointYawMinAngle());
 	}
 
 	Ogre::Vector3 getUpperLimits() {
 		return Ogre::Vector3(mJointPhysics->getJointRollMaxAngle(),
-				mJointPhysics->getJointPitchMaxAngle(),
-				mJointPhysics->getJointYawMaxAngle());
+		mJointPhysics->getJointPitchMaxAngle(),
+		mJointPhysics->getJointYawMaxAngle());
+	}
+
+	// Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization .*/
+
+	/**
+	 * Serializes the joint model to a string.
+	 * @param os The ostream.
+	 * @param jointModel The joint model we want to serialize.
+	 * @return A string containing all information about the joint model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+	const JointModel &jointModel) {
+		return os;
+//		/**The physics component of the joint model*/
+//		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
 	}
 
 	/**
-	 * Serializes the creature to an xml file.
+	 * Serializes the joint model to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The physics component of the joint model*/
-		& BOOST_SERIALIZATION_NVP(mJointPhysics);
+		ar.register_type(static_cast<JointBt*>(NULL));
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mJointPhysics) /**!< The physics component of the joint model*/
+		& BOOST_SERIALIZATION_NVP(mOwnIndex) /**!< The joint's own index */
+		& BOOST_SERIALIZATION_NVP(mParentIndex) /**!< The joint's parent limb index */
+		& BOOST_SERIALIZATION_NVP(mChildIndex) /**!< The joint's child limb index */
+		& BOOST_SERIALIZATION_NVP(mAngleceptors) /**!< The angle measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mForceceptors) /**!< The force measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mLimitceptors); /**!< The limit measuring sensors of the joint */
 	}
 
 private:
@@ -245,17 +256,17 @@ private:
 	/**
 	 * The angleceptors of the joint.
 	 */
-	std::vector<JointAngleProprioceptor*> mAngleceptors;
+	std::vector<JointAngleceptor*> mAngleceptors;
 
 	/**
 	 * The forceceptors of the joint.
 	 */
-	std::vector<JointForceProprioceptor*> mForceceptors;
+	std::vector<JointForceceptor*> mForceceptors;
 
 	/**
 	 * The limitceptors of the joint.
 	 */
-	std::vector<JointLimitProprioceptor*> mLimitceptors;
+	std::vector<JointLimitceptor*> mLimitceptors;
 
 };
 

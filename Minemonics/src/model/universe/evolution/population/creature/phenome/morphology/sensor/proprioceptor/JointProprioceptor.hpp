@@ -27,8 +27,10 @@
  */
 class JointProprioceptor: public Proprioceptor {
 public:
+	JointProprioceptor();
+
 	JointProprioceptor(std::vector<int*>::size_type jointIndex,
-			JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
+	JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
 	~JointProprioceptor();
 
 	/**
@@ -50,12 +52,10 @@ public:
 	 * @return A string containing all information about the joint proprioceptor.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const JointProprioceptor &jointProprioceptor) {
-		return os
-		/**The joint index*/
-		<< "JointProprioceptor: Joint index=" << jointProprioceptor.mJointIndex
-		/** The motor index*/
-		<< "/Motor index=" << jointProprioceptor.mMotorIndex;
+	const JointProprioceptor &jointProprioceptor) {
+		return os << "JointProprioceptor: Joint index="
+		<< jointProprioceptor.mJointIndex /**!< The joint index*/
+		<< "/Motor index=" << jointProprioceptor.mMotorIndex; /**!< The motor index*/
 	}
 
 	/**
@@ -65,11 +65,9 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/**The joint index*/
-		& BOOST_SERIALIZATION_NVP(mJointIndex)
-		/** The motor index*/
-		& BOOST_SERIALIZATION_NVP(mMotorIndex);
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Proprioceptor) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mJointIndex) /**!< The joint index*/
+		& BOOST_SERIALIZATION_NVP(mMotorIndex); /**!< The motor index*/
 	}
 
 protected:
@@ -86,7 +84,7 @@ protected:
 	/**
 	 * A pointer for the joint the proprioceptor is working on.
 	 */
-	int* mG6DofJoint;
+//	int* mG6DofJoint;
 };
 BOOST_CLASS_VERSION(JointProprioceptor, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointProprioceptor)
