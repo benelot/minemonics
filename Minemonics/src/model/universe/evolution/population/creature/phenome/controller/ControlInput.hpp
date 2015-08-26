@@ -85,10 +85,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-
-		& BOOST_SERIALIZATION_NVP(mReceivedInput) /**!< If the control input has new input*/
-
+		ar & BOOST_SERIALIZATION_NVP(mReceivedInput) /**!< If the control input has new input*/
 		& BOOST_SERIALIZATION_NVP(mInputValue); /**!< The input that was received. */
 	}
 

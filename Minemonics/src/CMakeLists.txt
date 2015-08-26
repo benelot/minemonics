@@ -503,6 +503,7 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel_test.cpp
     ./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt_test.cpp
     ./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel_test.cpp
+    ./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor_test.cpp
     
     # misc
     ./utils/NameGenerator_test.cpp

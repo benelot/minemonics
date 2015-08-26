@@ -384,19 +384,19 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/JointAngleProprioceptor.cpp</name>
+			<name>[Targets]/[exe] Minemonics/Source Files/JointAngleceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/JointForceProprioceptor.cpp</name>
+			<name>[Targets]/[exe] Minemonics/Source Files/JointForceceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/JointLimitProprioceptor.cpp</name>
+			<name>[Targets]/[exe] Minemonics/Source Files/JointLimitceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Controller.cpp</name>
@@ -1054,19 +1054,19 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/JointAngleProprioceptor.hpp</name>
+			<name>[Targets]/[exe] Minemonics/Header Files/JointAngleceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/JointForceProprioceptor.hpp</name>
+			<name>[Targets]/[exe] Minemonics/Header Files/JointForceceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/JointLimitProprioceptor.hpp</name>
+			<name>[Targets]/[exe] Minemonics/Header Files/JointLimitceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Controller.hpp</name>
@@ -1859,19 +1859,19 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] runUnitTests/Source Files/JointAngleProprioceptor.cpp</name>
+			<name>[Targets]/[exe] runUnitTests/Source Files/JointAngleceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] runUnitTests/Source Files/JointForceProprioceptor.cpp</name>
+			<name>[Targets]/[exe] runUnitTests/Source Files/JointForceceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] runUnitTests/Source Files/JointLimitProprioceptor.cpp</name>
+			<name>[Targets]/[exe] runUnitTests/Source Files/JointLimitceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Controller.cpp</name>
@@ -1997,6 +1997,21 @@
 			<name>[Targets]/[exe] runUnitTests/Source Files/LimbModel_test.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/JointBt_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointBt_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/JointModel_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/JointModel_test.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/ServoMotor_test.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/NameGenerator_test.cpp</name>
@@ -2264,19 +2279,19 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] runUnitTests/Header Files/JointAngleProprioceptor.hpp</name>
+			<name>[Targets]/[exe] runUnitTests/Header Files/JointAngleceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] runUnitTests/Header Files/JointForceProprioceptor.hpp</name>
+			<name>[Targets]/[exe] runUnitTests/Header Files/JointForceceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] runUnitTests/Header Files/JointLimitProprioceptor.hpp</name>
+			<name>[Targets]/[exe] runUnitTests/Header Files/JointLimitceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Controller.hpp</name>

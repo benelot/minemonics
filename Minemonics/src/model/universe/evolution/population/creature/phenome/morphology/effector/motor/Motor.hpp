@@ -5,9 +5,22 @@
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -91,37 +104,49 @@ public:
 		mEnabled = enabled;
 	}
 
+	// Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
+
+	/**
+	 * Serializes the motor to a string.
+	 * @param os The ostream.
+	 * @param motor The motor we want to serialize.
+	 * @return A string containing all information about the motor.
+	 */
+	friend std::ostream & operator<<(std::ostream &os, const Motor &motor) {
+		return os;
+	}
+
+	/**
+	 * Serializes the motor to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ControlInput) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mMotorType) /**!< The type of motor */
+		& BOOST_SERIALIZATION_NVP(mEnabled) /**!< Whether the motor is enabled */
+		& BOOST_SERIALIZATION_NVP(mPositionControlled) /**!< Direction or position? */
+		& BOOST_SERIALIZATION_NVP(mMaxForce) /**!< The maximum force of the motor.*/
+		& BOOST_SERIALIZATION_NVP(mMaxSpeed) /**!< The maximum speed of the motor. */
+		& BOOST_SERIALIZATION_NVP(mIndex); /**!< The index of the motor. */
+	}
+
 protected:
 
-	/**
-	 * The type of motor
-	 */
-	MotorType mMotorType;
+	MotorType mMotorType; /**!< The type of motor */
 
-	/**
-	 * Direction or position?
-	 */
-	bool mPositionControlled;
+	bool mEnabled; /**!< Whether the motor is enabled */
 
-	/**
-	 * The maximum force of the motor.
-	 */
-	double mMaxForce;
+	bool mPositionControlled; /**!< Direction or position? */
 
-	/**
-	 * The maximum speed of the motor.
-	 */
-	double mMaxSpeed;
+	double mMaxForce; /**!< The maximum force of the motor.*/
 
-	/**
-	 * The index of the motor.
-	 */
-	int mIndex;
+	double mMaxSpeed; /**!< The maximum speed of the motor. */
 
-	/**
-	 * Whether the motor is enabled
-	 */
-	bool mEnabled;
+	int mIndex; /**!< The index of the motor. */
 };
-
+BOOST_CLASS_VERSION(Motor, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(Motor)
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_MOTOR_H_ */

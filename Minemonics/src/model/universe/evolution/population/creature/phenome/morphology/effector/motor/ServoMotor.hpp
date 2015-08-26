@@ -67,12 +67,39 @@ public:
 		mJointMotor = jointMotor;
 	}
 
-private:
-	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;
-	btMultiBodyJointMotor* mJointMotor;
+	// Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
-	double mLowerLimit;
-	double mUpperLimit;
+	/**
+	 * Serializes the servo motor to a string.
+	 * @param os The ostream.
+	 * @param servoMotor The servo motor we want to serialize.
+	 * @return A string containing all information about the servo motor.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+			const ServoMotor &servoMotor) {
+		return os;
+	}
+
+	/**
+	 * Serializes the servo motor to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Motor) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
+		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
+		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
+	}
+
+private:
+	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
+	btMultiBodyJointMotor* mJointMotor; /**!< The jointMotor of the servo */
+
+	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
+	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */
