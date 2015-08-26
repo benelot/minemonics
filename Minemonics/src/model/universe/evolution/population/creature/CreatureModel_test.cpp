@@ -1,18 +1,20 @@
 //# corresponding headers
-#include <configuration/MorphologyConfiguration.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <gtest/gtest.h>
 
 //# forward declarations
 //# system headers
 //## controller headers
 //## model headers
-#include <gtest/gtest.h>
 #include <OgreVector3.h>
 
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
+//## controller headers
 #include <controller/SaveController.hpp>
 
 //## model headers

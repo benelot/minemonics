@@ -495,6 +495,7 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     
     # phenome
+    ./model/universe/evolution/population/creature/phenome/PhenomeModel_test.cpp
     ## controllers
     ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
     

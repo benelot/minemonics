@@ -1,10 +1,3 @@
-/*
- * SineController_test.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 
