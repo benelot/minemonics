@@ -80,7 +80,7 @@ cd CeGUI
 hg clone https://bitbucket.org/cegui/cegui . -r c60fe39a5b27
 mkdir build
 cd build
-cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=OFF -D CEGUI_BUILD_RENDERER_OGRE=ON ....
+cmake -G"Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Release -D CEGUI_BUILD_PYTHON_MODULES=OFF -D CEGUI_BUILD_RENDERER_OGRE=ON .. # add -D CEGUI_SAMPLES_ENABLE=ON for samples
 make -j8 # because I have 8 cores for parallel compilation
 sudo make install
 sudo ldconfig

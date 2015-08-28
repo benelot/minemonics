@@ -18,6 +18,7 @@ class RagDoll;
 
 //## view headers
 #include <OgrePrerequisites.h>
+#include <OgreRenderWindow.h>
 
 //# custom headers
 //## base headers
@@ -128,19 +129,15 @@ public:
 	}
 
 	int getWindowHeight() const {
-		return mWindowHeight;
-	}
-
-	void setWindowHeight(int windowHeight) {
-		mWindowHeight = windowHeight;
+		return mWindow->getHeight();
 	}
 
 	int getWindowWidth() const {
-		return mWindowWidth;
+		return mWindow->getWidth();
 	}
 
-	void setWindowWidth(int windowWidth) {
-		mWindowWidth = windowWidth;
+	Ogre::Light*& getSun() {
+		return mSun;
 	}
 
 protected:
@@ -196,34 +193,29 @@ protected:
 
 private:
 	//## controller components
+	static SimulationManager* mSimulationManager; /**!< The simulation manager singleton handle */
 
-	// State handler
-	StateHandler mStateHandler;
+	StateHandler mStateHandler; /**!< The application state handler */
 
-	// Game component handlers
-	SDL2InputHandler mInputHandler;
-	SDL_Window *mSdlWindow;
+	SDL2InputHandler mInputHandler; /**!< The input handler of the simulation */
 
-	//The universe and everything
-	Universe mUniverse;
+	Universe mUniverse; /**!< The universe and everything */
 
-	Ogre::Light* mSun;
+	Ogre::Light* mSun; /**!< The sun of the universe */
 
 	//## model components
+	int mSimulationSpeed; /**!< The speed of the currently runnig simulations */
+
 	//## view components
+	SDL_Window* mSdlWindow; /**!< The window of the simulator */
 
-	int mSimulationSpeed;
+	ViewController mViewController; /**!< The view controller of the simulation */
 
-	ViewController mViewController;
+	MousePicker mMousePicker; /**!< The mouse picker to move 3D elements with the mouse */
 
-	MousePicker mMousePicker;
+	Ogre3DFFMPEGVideoWriter mVideoWriter; /**!< The video writer to produce videos from the scene */
 
-	Ogre3DFFMPEGVideoWriter mVideoWriter;
-
-	static SimulationManager* mSimulationManager;
-
-	//randomness singleton
-	Randomness* mRandomness;
+	Randomness* mRandomness; /**!< The randomness generator singleton to be used in the simulator */
 
 	// timing component
 	Ogre::Timer time;
@@ -236,47 +228,34 @@ private:
 	long int mApplicationDt;
 	unsigned long int mApplicationClock;
 
-	/**
-	 * The time it took the graphics rendering last time
-	 */
-	long int mLastGraphicsTick;
+	long int mLastGraphicsTick; /*!< The time it took the graphics rendering last time */
 	unsigned long int mGraphicsStart;
 
-	/**
-	 * The time it took the input to process last time
-	 */
-	long int mLastInputTick;
+	long int mLastInputTick; /**!< The time it took the input to process last time */
 	unsigned long int mInputStart;
 
-	/**
-	 * The time it took the model to update last time
-	 * This includes the bullet physics update
-	 */
-	long int mLastModelTick;
+	long int mLastModelTick; /**!<  The time it took the model to update last time
+	 This includes the bullet physics update */
 	long int mModelStart;
+
 	long int mPhysicsTick;
 	long int mPhysicsStepStart;
 	long int mPhysicsStepEnd;
 
 	//## Debug components
 
-	//ogre bullet debug drawer
-	OgreBtDebugDrawer mDebugDrawer;
+	OgreBtDebugDrawer mDebugDrawer; /**!< The debug drawer used by bullet physics to show debug information */
 
-	// simulation debugger
-	Debugger mDebugger;
+	Debugger mDebugger; /**!< Common simulator debug routines */
 
-	int mWindowWidth, mWindowHeight;
-
-	// Logger
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The logger instance of the simulation manager */
 
 	static class _Init {
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"SimulationManager"));
+			boost::log::attributes::constant < std::string
+			> ("SimulationManager"));
 		}
 	} _initializer;
 };

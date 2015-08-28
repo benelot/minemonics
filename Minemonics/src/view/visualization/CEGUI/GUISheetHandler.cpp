@@ -56,15 +56,106 @@ StateHandler* const stateHandler) {
 	mStateHandler = stateHandler;
 
 	// hook up the event handlers to the window elements
+	{
+		//#####################
+		//File menu
+		//File->Quit
+		CEGUI::PushButton* quitButton =
+		(CEGUI::PushButton*) mWindow->getChildRecursive(
+		GUIConfiguration::quitApplicationCmd);
+		quitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+		CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
+	}
 
-	//File->Quit
-	CEGUI::PushButton* pQuitButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::quitApplicationCmd);
-	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
+	{
+		//#####################
+		//Evaluation menu
+		//Evaluation->Evolution Track
+		CEGUI::PushButton* evolutionTrackButton =
+		(CEGUI::PushButton*) mWindow->getChildRecursive(
+		GUIConfiguration::setEvolutionTrackCmd);
+		evolutionTrackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+		CEGUI::Event::Subscriber(&GUISheetHandler::evolutionTrackButtonClicked,
+		this));
 
-	//Evolution->New Evolution
+		//Evaluation->Learning Track
+		CEGUI::PushButton* learningTrackButton =
+		(CEGUI::PushButton*) mWindow->getChildRecursive(
+		GUIConfiguration::setLearningTrackCmd);
+		learningTrackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+		CEGUI::Event::Subscriber(&GUISheetHandler::learningTrackButtonClicked,
+		this));
+	}
+
+	{
+		//#####################
+		//Planet menu
+		//Planets->New Planet
+		CEGUI::PushButton* newPlanetButton =
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		GUIConfiguration::newPlanetCmd);
+		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+		CEGUI::Event::Subscriber(&GUISheetHandler::newPlanetButtonClicked,
+		this));
+	}
+
+//Evolution->Open Evolution
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Evolution->Save Evolution as...
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Close Evolution
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Run Evolution
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Pause Evolution
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Stop Evolution
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Browse History
+//	CEGUI::PushButton* pQuitButton =
+//			(CEGUI::PushButton *) mWindow->getChildRecursive(
+//					"cmdQuitApplication");
+//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+//					this));
+
+//Evolution->New Evolution
 //	CEGUI::PushButton* pQuitButton =
 //			(CEGUI::PushButton *) mWindow->getChildRecursive(
 //					"cmdQuitApplication");
@@ -596,6 +687,27 @@ StateHandler* const stateHandler) {
 //File->Quit
 bool GUISheetHandler::quitButtonClicked(const CEGUI::EventArgs &args) {
 	mStateHandler->requestStateChange(StateHandler::SHUTDOWN);
+	return true;
+}
+
+//Evaluation->Evolution Track
+bool GUISheetHandler::evolutionTrackButtonClicked(
+const CEGUI::EventArgs& args) {
+	return true;
+}
+
+//Evaluation->Learning Track
+bool GUISheetHandler::learningTrackButtonClicked(const CEGUI::EventArgs& args) {
+	return true;
+}
+
+//Planets->New Planet
+bool GUISheetHandler::newPlanetButtonClicked(const CEGUI::EventArgs &args) {
+	Planet* planet = new Planet(Environment::PLANE, 2000,
+	SimulationManager::getSingleton()->getSun());
+
+	// add planet to universe
+	SimulationManager::getSingleton()->getUniverse().addPlanet(planet);
 	return true;
 }
 

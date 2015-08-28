@@ -284,12 +284,15 @@ set(VIEWHDRS
 	
     ## CEGUI
 	./view/visualization/CEGUI/GUISheetHandler.hpp
-	./view/visualization/CEGUI/CEGUIBuilder.hpp
+	./view/visualization/CEGUI/elements/MenuBar.hpp
+	./view/visualization/CEGUI/elements/BasePanel.hpp
+	./view/visualization/CEGUI/elements/MovablePanel.hpp
+    ./view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp
+	./view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp
 	
 	## panels
-    ./view/visualization/panels/InfoPanel.hpp
-    ./view/visualization/panels/ParamsPanel.hpp
-    ./view/visualization/panels/MathGLPanel.hpp
+    #
+    #./view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp
     
     ## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
@@ -355,12 +358,15 @@ set(VIEWSRCS
 	
 	## CEGUI
 	./view/visualization/CEGUI/GUISheetHandler.cpp
-	./view/visualization/CEGUI/CEGUIBuilder.cpp
+	./view/visualization/CEGUI/elements/MenuBar.cpp
+	./view/visualization/CEGUI/elements/BasePanel.cpp
+	./view/visualization/CEGUI/elements/MovablePanel.cpp
+	./view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp
+	./view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp
 	
 	## MathGL
-	./view/visualization/panels/InfoPanel.cpp
-	./view/visualization/panels/ParamsPanel.cpp
-    ./view/visualization/panels/MathGLPanel.cpp
+    #
+    #./view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp
 	
 	## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp

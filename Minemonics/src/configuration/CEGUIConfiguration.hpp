@@ -31,7 +31,7 @@ public:
 	/**
 	 * Information panel text height
 	 */
-	static const float INFOPANEL_TEXT = 30;
+	static const float INFOPANEL_TEXT_HEIGHT = 35;
 
 	/**
 	 * Information panel border height
@@ -39,14 +39,14 @@ public:
 	static const float INFOPANEL_BORDER = 10;
 
 	/**
-	 * Information panel column1 height
+	 * Information panel column1 width
 	 */
-	static const float INFOPANEL_COL1 = 0.5f;
+	static const float INFOPANEL_LEFT_COL_WIDTH = 0.3f;
 
 	/**
-	 * Information panel column2 height
+	 * Information panel column2 width
 	 */
-	static const float INFOPANEL_COL2 = 0.5f;
+	static const float INFOPANEL_RIGHT_COL_WIDTH = 0.7f;
 };
 
 #endif /* CONFIGURATION_CEGUICONFIGURATION_H_ */

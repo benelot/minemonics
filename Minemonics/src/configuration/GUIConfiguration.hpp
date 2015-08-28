@@ -27,15 +27,28 @@ class GUIConfiguration {
 public:
 
 	//#####################
-
-	//quit item
+	// File menu
+	static const std::string fileName;
+	// Quit
 	static const std::string quitApplicationName;
 	static const std::string quitApplicationCmd;
-//		CEGUI::Window *quitApplicationItem = wmgr.createWindow(
-//				"Ogremonics/MenuItem", "cmdQuitApplication");
-//		quitApplicationItem->setText("Quit [Q]");
-//		fileMenu->addChild(quitApplicationItem);
 
+	//#####################
+	// Evaluation menu
+	static const std::string evaluationName;
+	// Evolution Track
+	static const std::string setEvolutionTrackName;
+	static const std::string setEvolutionTrackCmd;
+
+	// Learning Track
+	static const std::string setLearningTrackName;
+	static const std::string setLearningTrackCmd;
+
+	//#####################
+	//Planet menu
+	// New planet
+	static const std::string newPlanetName;
+	static const std::string newPlanetCmd;
 //#####################
 //Evolution menu
 //		CEGUI::Window *evolutionTopItem = wmgr.createWindow("Ogremonics/MenuItem",

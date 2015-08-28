@@ -4,6 +4,8 @@
 //# corresponding header
 //# forward declarations
 class ParamsPanel;
+class ImmovablePanel;
+class MovablePanel;
 namespace CEGUI {
 class OgreRenderer;
 } /* namespace CEGUI */
@@ -31,7 +33,8 @@ class OgreRenderer;
 //## view headers
 #include <view/visualization/CEGUI/GUISheetHandler.hpp>
 #include <view/visualization/overlay/InfoOverlay.hpp>
-#include <view/visualization/panels/MathGLPanel.hpp>
+#include <view/visualization/CEGUI/elements/MenuBar.hpp>
+#include <view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp>
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
@@ -52,7 +55,8 @@ public:
 	 * @param renderTarget The render target.
 	 * @param stateHandler The state handler of the simulation.
 	 */
-	void initialize(Ogre::RenderTarget* const renderTarget, StateHandler* const stateHandler);
+	void initialize(Ogre::RenderTarget* const renderTarget,
+	StateHandler* const stateHandler);
 
 	/**
 	 * Update the view controller.
@@ -79,27 +83,19 @@ public:
 	 * @param mousePositionY The new mouse position Y.
 	 */
 	void updateMousePosition(const float mousePositionX,
-			const float mousePositionY);
+	const float mousePositionY);
 
 	void addPlanetToView(Planet* planet);
 
 	void removePlanetFromView(Planet* const planet);
 
 	//Accessor methods
-	ParamsPanel* const getDetailsPanel() const {
-		return mDetailsPanel;
-	}
-
-	ParamsPanel* const getFpsPanel() const {
+//	DetailsPanel const getDetailsPanel() const {
+//		return mDetailsPanel;
+//	}
+//
+	FPSPanel* const getFpsPanel() const {
 		return mFpsPanel;
-	}
-
-	std::vector<MathGLPanel*>& getGraphWindows() {
-		return mGraphWindows;
-	}
-
-	const std::vector<MathGLPanel*>& getGraphWindows() const{
-		return mGraphWindows;
 	}
 
 	const InfoOverlay& getInfoOverlay() const {
@@ -159,8 +155,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"ViewController"));
+			boost::log::attributes::constant < std::string
+			> ("ViewController"));
 		}
 	} _initializer;
 
@@ -175,13 +171,15 @@ private:
 	CameraHandler mCameraHandler;
 
 	//CEGUI
-	ParamsPanel* mFpsPanel;
-	ParamsPanel* mDetailsPanel;
+	MenuBar* mMenuBar;
+	FPSPanel* mFpsPanel;
+//	DetailsPanel mDetailsPanel;
 	CEGUI::OgreRenderer* mRenderer;
 	CEGUI::Window* mDragContainer;
 
 	// Visualization components
-	std::vector<MathGLPanel*> mGraphWindows;
+	std::vector<ImmovablePanel*> mImmovablePanels;
+	std::vector<MovablePanel*> mMovablePanels;
 	InfoOverlay mInfoOverlay;
 
 	std::vector<Planet*> mPlanetsInView;

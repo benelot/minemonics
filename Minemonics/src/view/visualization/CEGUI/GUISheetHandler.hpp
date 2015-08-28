@@ -9,7 +9,6 @@ class System;
 class Window;
 } /* namespace CEGUI */
 
-
 //# system headers
 //## controller headers
 //## model headers
@@ -33,13 +32,28 @@ public:
 	GUISheetHandler();
 	~GUISheetHandler();
 
-	void initialize(SimulationManager* const simulationmgr, CEGUI::System* const system, CEGUI::Window* const sheet,
-			StateHandler* const stateHandler);
+	void initialize(SimulationManager* const simulationmgr,
+	CEGUI::System* const system, CEGUI::Window* const sheet,
+	StateHandler* const stateHandler);
 
 	// CEGUI event handlers. You can name these whatever you like, as long as they have the proper
 	// signature: bool <method name>(const CEGUI::EventArgs &args)
+
+	//#####################
+	//File menu
 	//File->Quit
 	bool quitButtonClicked(const CEGUI::EventArgs &args);
+
+	//#####################
+	//Evaluation menu
+	//Evaluation->Evolution Track
+	bool evolutionTrackButtonClicked(const CEGUI::EventArgs &args);
+
+	//Evaluation->Learning Track
+	bool learningTrackButtonClicked(const CEGUI::EventArgs &args);
+
+	//Planets->New Planet
+	bool newPlanetButtonClicked(const CEGUI::EventArgs &args);
 
 	//Evolution->New Evolution
 	bool newEvolutionButtonClicked(const CEGUI::EventArgs &args);

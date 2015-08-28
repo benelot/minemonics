@@ -79,8 +79,8 @@
 #include <model/universe/CollisionHandler.hpp>
 
 //## view headers
-#include <view/visualization/panels/MathGLPanel.hpp>
-#include <view/visualization/panels/ParamsPanel.hpp>
+//#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
+//#include <view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp>
 
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -92,9 +92,9 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-mStateHandler(), mInputHandler(), mSdlWindow(
-NULL), mSimulationSpeed(PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(
-&mViewController), mSun(NULL), mWindowWidth(0), mWindowHeight(0) {
+mStateHandler(), mInputHandler(), mSdlWindow(NULL), mSimulationSpeed(
+PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(&mViewController), mSun(
+NULL) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -191,7 +191,8 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We create the evaluation scene defined by the planet to be evaluated
 	// ###################
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+	<< "Setup evaluation environment...";
 
 	// Set default ambient light
 	mSceneMgr->setAmbientLight(
@@ -235,25 +236,25 @@ void SimulationManager::createScene(void) {
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
-	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, 2000, mSun);
-
-	// add earth to universe
-	mUniverse.addPlanet(earth);
-
-	// create a population
-	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, 100,
-	EvolutionConfiguration::ROOT_POSITION);
-
-	// add earth population to earth
-	earth->addPopulation(earthPopulation);
-
-	Epoch* oneEpoch = new Epoch();
-	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
-	oneEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
-
-	earth->addEpoch(oneEpoch);
+//	// create a planet called earth
+//	Planet* earth = new Planet(Environment::PLANE, 2000, mSun);
+//
+//	// add earth to universe
+//	mUniverse.addPlanet(earth);
+//
+//	// create a population
+//	Population* earthPopulation = new Population();
+//	earthPopulation->initialize(earth, 100,
+//	EvolutionConfiguration::ROOT_POSITION);
+//
+//	// add earth population to earth
+//	earth->addPopulation(earthPopulation);
+//
+//	Epoch* oneEpoch = new Epoch();
+//	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
+//	oneEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
+//
+//	earth->addEpoch(oneEpoch);
 
 	// create a population
 //	Population* earth2Population = new Population();
@@ -278,7 +279,8 @@ void SimulationManager::createScene(void) {
 //	// add earth population to earth
 //	mars->addPopulation(marsPopulation);
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+	<< "Setup evaluation environment...done.";
 	// request a state change saying that the simulation is running
 	mStateHandler.requestStateChange(StateHandler::SIMULATION);
 }
@@ -287,7 +289,7 @@ void SimulationManager::createScene(void) {
 void SimulationManager::createFrameListener(void) {
 
 	// Set initial mouse clipping size
-	windowResized(mWindow);
+	windowResized (mWindow);
 
 	// Register as a Window and Frame listener
 	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
@@ -426,12 +428,12 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
-	std::vector<MathGLPanel*>::iterator it =
-	mViewController.getGraphWindows().begin();
-	for (; it != mViewController.getGraphWindows().end(); it++) {
-		(*it)->update(timeSinceLastFrame);
-	}
-
+//	std::vector<MathGLPanel*>::iterator it =
+//	mViewController.getGraphWindows().begin();
+//	for (; it != mViewController.getGraphWindows().end(); it++) {
+//		(*it)->update(timeSinceLastFrame);
+//	}
+//
 	if (mViewController.getFpsPanel() != NULL) {
 		if (mViewController.getFpsPanel()->isVisible()) // if fps panel is visible, then update its contents
 		{
@@ -476,39 +478,39 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 			}
 		}
 	}
-	if (mViewController.getDetailsPanel() != NULL) {
-		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
-		{
-			mViewController.getDetailsPanel()->setParamValue(0,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
-			false);
-			mViewController.getDetailsPanel()->setParamValue(1,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
-			false);
-			mViewController.getDetailsPanel()->setParamValue(2,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
-			false);
-			mViewController.getDetailsPanel()->setParamValue(4,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
-			false);
-			mViewController.getDetailsPanel()->setParamValue(5,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
-			false);
-			mViewController.getDetailsPanel()->setParamValue(6,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
-			false);
-			mViewController.getDetailsPanel()->setParamValue(7,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
-			true);
-		}
-	}
+//	if (mViewController.getDetailsPanel() != NULL) {
+//		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
+//		{
+//			mViewController.getDetailsPanel()->setParamValue(0,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
+//			false);
+//			mViewController.getDetailsPanel()->setParamValue(1,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
+//			false);
+//			mViewController.getDetailsPanel()->setParamValue(2,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
+//			false);
+//			mViewController.getDetailsPanel()->setParamValue(4,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
+//			false);
+//			mViewController.getDetailsPanel()->setParamValue(5,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
+//			false);
+//			mViewController.getDetailsPanel()->setParamValue(6,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
+//			false);
+//			mViewController.getDetailsPanel()->setParamValue(7,
+//			Ogre::StringConverter::toString(
+//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
+//			true);
+//		}
+//	}
 }
 
 /**
@@ -516,7 +518,8 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
  * @param rw The handle of the render window that was resized.
  */
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Repositioning CEGUI pointer...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+	<< "Repositioning CEGUI pointer...";
 	unsigned int width, height, depth;
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
@@ -530,14 +533,16 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
 	x - mousePos.d_x, y - mousePos.d_y);
 
-	SDL_GetWindowSize(mSdlWindow, &mWindowWidth, &mWindowHeight);
+	int wwidth, wheight;
+	SDL_GetWindowSize(mSdlWindow, &wwidth, &wheight);
 #if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-	mWindow->resize(mWindowWidth, mWindowHeight);
+	mWindow->resize(width, height);
 #else
 	mWindow->windowMovedOrResized();
 #endif
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace) << "Notifying CEGUI of resize....";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+	<< "Notifying CEGUI of resize....";
 	mViewController.notifyDisplaySizeChanged(width, height);
 }
 
@@ -547,13 +552,15 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
  */
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Window has gained focus...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+		<< "Window has gained focus...";
 
 		// Align CEGUI mouse with SDL mouse
 		mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
 		mInputHandler.getMousePositionY());
 	} else {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace) << "Window has lost focus...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+		<< "Window has lost focus...";
 	}
 }
 //-------------------------------------------------------------------------------------
@@ -603,7 +610,7 @@ bool SimulationManager::configure(void) {
 	mRoot->initialise(false);
 
 	//split resolution string
-	std::vector<std::string> elems;
+	std::vector < std::string > elems;
 	std::stringstream ss(cfgOpts[OgreConf::VIDEO_MODE].currentValue);
 	std::string item;
 	while (std::getline(ss, item, 'x')) {
@@ -693,7 +700,7 @@ bool SimulationManager::configure(void) {
 	params.insert(std::make_pair("vsync", cfgOpts["VSync"].currentValue));
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	params.insert( std::make_pair("externalWindowHandle", winHandle) );
+	params.insert(std::make_pair("externalWindowHandle", winHandle));
 #else
 	params.insert(std::make_pair("parentWindowHandle", winHandle));
 #endif
@@ -718,7 +725,7 @@ extern "C" {
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
+INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 #else
 int main(int argc, char *argv[])
 #endif
@@ -730,7 +737,8 @@ int main(int argc, char *argv[])
 		app.go();
 	} catch (Ogre::Exception& e) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+		MessageBox(NULL, e.getFullDescription().c_str(),
+		"An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
 		std::cerr << "An exception has occured: "
 		<< e.getFullDescription().c_str() << std::endl;
