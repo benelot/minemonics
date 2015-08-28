@@ -1,14 +1,27 @@
-/*
- * DetailsPanel.cpp
- *
- *  Created on: Aug 28, 2015
- *      Author: leviathan
- */
-
+//# corresponding headers
 #include <view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp>
 
+//# forward declarations
+//# system headers
+#include <string>
+#include <utility>
+#include <vector>
+
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+#include <view/visualization/CEGUI/elements/MovablePanel.hpp>
+
+//## utils headers
+
 DetailsPanel::DetailsPanel(const int left, const int top) :
-ParamsPanel("Debug") {
+ParamsPanel("Debug", MovablePanel::DETAILSPANEL) {
 	ParamsPanel::VectorStringPairs items;
 
 	items.push_back(ParamsPanel::PairString("cam.pX", "0"));		// 0
