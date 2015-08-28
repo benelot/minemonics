@@ -35,6 +35,7 @@ class OgreRenderer;
 #include <view/visualization/overlay/InfoOverlay.hpp>
 #include <view/visualization/CEGUI/elements/MenuBar.hpp>
 #include <view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp>
+#include <view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp>
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
@@ -90,10 +91,10 @@ public:
 	void removePlanetFromView(Planet* const planet);
 
 	//Accessor methods
-//	DetailsPanel const getDetailsPanel() const {
-//		return mDetailsPanel;
-//	}
-//
+	DetailsPanel* const getDetailsPanel() const {
+		return mDetailsPanel;
+	}
+
 	FPSPanel* const getFpsPanel() const {
 		return mFpsPanel;
 	}
@@ -142,6 +143,10 @@ public:
 		mSelectedPlanet = selectedPlanet;
 	}
 
+	std::vector<MovablePanel*>& getMovablePanels() {
+		return mMovablePanels;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -173,7 +178,7 @@ private:
 	//CEGUI
 	MenuBar* mMenuBar;
 	FPSPanel* mFpsPanel;
-//	DetailsPanel mDetailsPanel;
+	DetailsPanel* mDetailsPanel;
 	CEGUI::OgreRenderer* mRenderer;
 	CEGUI::Window* mDragContainer;
 

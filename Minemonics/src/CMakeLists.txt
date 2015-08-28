@@ -289,6 +289,7 @@ set(VIEWHDRS
 	./view/visualization/CEGUI/elements/MovablePanel.hpp
     ./view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp
 	./view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp
+	./view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp
 	
 	## panels
     #
@@ -363,6 +364,7 @@ set(VIEWSRCS
 	./view/visualization/CEGUI/elements/MovablePanel.cpp
 	./view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp
 	./view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp
+	./view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp
 	
 	## MathGL
     #

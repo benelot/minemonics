@@ -108,16 +108,23 @@ StateHandler* const stateHandler) {
 	mMenuBar = new MenuBar();
 	mLayout->addChild(mMenuBar->getWindow());
 
+	// store window width and height
+	int windowWidth =
+	(int) SimulationManager::getSingleton()->getWindow()->getWidth();
+	int windowHeight =
+	(int) SimulationManager::getSingleton()->getWindow()->getHeight();
+
 	// add fps panel
 	mFpsPanel = new FPSPanel(CEGUIConfiguration::INFOPANEL_BORDER,
-	(int) SimulationManager::getSingleton()->getWindow()->getHeight()
-	- (3 * CEGUIConfiguration::INFOPANEL_BORDER));
-	mLayout->addChild(mFpsPanel->getWindow());
-//	mMovablePanels.push_back(fpsPanel);
+	(int) windowHeight * 4.0f / 5.0f);
+	mMovablePanels.push_back(mFpsPanel);
 
 	// add details panel
-//	DetailsPanel* detailsPanel = new DetailsPanel();
-//	mMovablePanels.push_back(detailsPanel);
+	mDetailsPanel = new DetailsPanel(
+	(int) windowWidth - 200 - 3 * CEGUIConfiguration::INFOPANEL_BORDER,
+	(int) windowHeight / 6.0f);
+	mDetailsPanel->hide();
+	mMovablePanels.push_back(mDetailsPanel);
 
 	// TODO: Add graphwindows again when used
 //	mMovablePanels.push_back(
@@ -126,10 +133,10 @@ StateHandler* const stateHandler) {
 //	CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
 
 	// add all movable panels to the layout
-//	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();
-//	for (; it != mMovablePanels.end(); it++) {
-//		mLayout->addChild((*it)->getWindow());
-//	}
+	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();
+	for (; it != mMovablePanels.end(); it++) {
+		mLayout->addChild((*it)->getWindow());
+	}
 
 	// you need to tell CEGUI which layout to display. You can call this at any time to change the layout to
 	// another loaded layout (i.e. moving from screen to screen or to load your HUD layout). Note that this takes

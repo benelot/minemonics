@@ -36,6 +36,7 @@ BasePanel::BasePanel(const std::string name) {
 
 	// set tooltip text
 	mFrameWindow->setTooltipText(name);
+	mName = name;
 }
 
 BasePanel::~BasePanel(void) {

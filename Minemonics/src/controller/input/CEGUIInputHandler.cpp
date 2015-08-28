@@ -277,7 +277,13 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		break;
 
 	case ApplicationKeycode::APPK_LCTRL:
-		// return CEGUI::Key::LeftControl;
+		for (std::vector<MovablePanel*>::iterator iit =
+		SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
+		iit
+		!= SimulationManager::getSingleton()->getViewController().getMovablePanels().end();
+		iit++) {
+			(*iit)->showTitleBar();
+		}
 		break;
 	case ApplicationKeycode::APPK_LALT:
 		// return CEGUI::Key::LeftAlt;
@@ -606,7 +612,13 @@ bool CEGUIInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		break;
 
 	case ApplicationKeycode::APPK_LCTRL:
-		// return CEGUI::Key::LeftControl;
+		for (std::vector<MovablePanel*>::iterator iit =
+		SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
+		iit
+		!= SimulationManager::getSingleton()->getViewController().getMovablePanels().end();
+		iit++) {
+			(*iit)->hideTitleBar();
+		}
 		break;
 	case ApplicationKeycode::APPK_LALT:
 		// return CEGUI::Key::LeftAlt;

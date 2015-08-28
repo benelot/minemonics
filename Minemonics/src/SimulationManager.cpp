@@ -478,39 +478,39 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 			}
 		}
 	}
-//	if (mViewController.getDetailsPanel() != NULL) {
-//		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
-//		{
-//			mViewController.getDetailsPanel()->setParamValue(0,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
-//			false);
-//			mViewController.getDetailsPanel()->setParamValue(1,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
-//			false);
-//			mViewController.getDetailsPanel()->setParamValue(2,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
-//			false);
-//			mViewController.getDetailsPanel()->setParamValue(4,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
-//			false);
-//			mViewController.getDetailsPanel()->setParamValue(5,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
-//			false);
-//			mViewController.getDetailsPanel()->setParamValue(6,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
-//			false);
-//			mViewController.getDetailsPanel()->setParamValue(7,
-//			Ogre::StringConverter::toString(
-//			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
-//			true);
-//		}
-//	}
+	if (mViewController.getDetailsPanel() != NULL) {
+		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
+		{
+			mViewController.getDetailsPanel()->setParamValue(0,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
+			false);
+			mViewController.getDetailsPanel()->setParamValue(1,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
+			false);
+			mViewController.getDetailsPanel()->setParamValue(2,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
+			false);
+			mViewController.getDetailsPanel()->setParamValue(4,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
+			false);
+			mViewController.getDetailsPanel()->setParamValue(5,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
+			false);
+			mViewController.getDetailsPanel()->setParamValue(6,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
+			false);
+			mViewController.getDetailsPanel()->setParamValue(7,
+			Ogre::StringConverter::toString(
+			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
+			true);
+		}
+	}
 }
 
 /**

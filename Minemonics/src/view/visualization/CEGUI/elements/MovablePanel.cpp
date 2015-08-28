@@ -42,24 +42,18 @@ const int height, const bool hasTitleBar) {
 	mSizeWithToolbar = CEGUI::USize(
 	CEGUI::UDim(0, width + 2 * CEGUIConfiguration::INFOPANEL_BORDER),
 	CEGUI::UDim(0,
-	CEGUIConfiguration::INFOPANEL_CAPTION + height
+	2 * CEGUIConfiguration::INFOPANEL_CAPTION + height
 	+ 2 * CEGUIConfiguration::INFOPANEL_BORDER));
 
 	if (hasTitleBar) {
 		mFrameWindow->setPosition(
-		CEGUI::UVector2(CEGUI::UDim(0, left),
-		CEGUI::UDim(0,
-		top - CEGUIConfiguration::INFOPANEL_CAPTION
-		- 2 * CEGUIConfiguration::INFOPANEL_BORDER)));
+		CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
 		// set widget size
 		mFrameWindow->setSize(mSizeWithToolbar);
 		showTitleBar();
 	} else {
 		mFrameWindow->setPosition(
-		CEGUI::UVector2(CEGUI::UDim(0, left),
-		CEGUI::UDim(0,
-		top - CEGUIConfiguration::INFOPANEL_CAPTION
-		- 2 * CEGUIConfiguration::INFOPANEL_BORDER)));
+		CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
 		// set widget size
 		mFrameWindow->setSize(mSizeWithoutToolbar);
 		hideTitleBar();
@@ -76,13 +70,15 @@ void MovablePanel::update() {
 }
 
 void MovablePanel::showTitleBar() {
-	mFrameWindow->setSize(mSizeWithToolbar);
 	mFrameWindow->setSizingEnabled(true);
 	mFrameWindow->setTitleBarEnabled(true);
+	mFrameWindow->setSize(mSizeWithToolbar);
+	mFrameWindow->notifyScreenAreaChanged(true);
 }
 
 void MovablePanel::hideTitleBar() {
-	mFrameWindow->setSize(mSizeWithoutToolbar);
 	mFrameWindow->setSizingEnabled(false);
 	mFrameWindow->setTitleBarEnabled(false);
+	mFrameWindow->setSize(mSizeWithoutToolbar);
+	mFrameWindow->notifyScreenAreaChanged(true);
 }

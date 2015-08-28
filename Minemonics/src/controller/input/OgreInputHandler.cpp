@@ -205,43 +205,43 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(
 		pm);
-//		SimulationManager::getSingleton()->getViewController().getDetailsPanel().setParamValue(
-//		10, newVal);
+		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(
+		10, newVal);
 		break;
 	}
 	case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
 	{
-//		Ogre::String newVal;
-//		Ogre::TextureFilterOptions tfo;
-//		unsigned int aniso;
-//
-//		switch (SimulationManager::getSingleton()->getViewController().getDetailsPanel().getParamValue(
-//		9)[0]) {
-//		case 'B':
-//			newVal = "Trilinear";
-//			tfo = Ogre::TFO_TRILINEAR;
-//			aniso = 1;
-//			break;
-//		case 'T':
-//			newVal = "Anisotropic";
-//			tfo = Ogre::TFO_ANISOTROPIC;
-//			aniso = 8;
-//			break;
-//		case 'A':
-//			newVal = "None";
-//			tfo = Ogre::TFO_NONE;
-//			aniso = 1;
-//			break;
-//		default:
-//			newVal = "Bilinear";
-//			tfo = Ogre::TFO_BILINEAR;
-//			aniso = 1;
-//		}
-//
-//		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-//		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-//		SimulationManager::getSingleton()->getViewController().getDetailsPanel().setParamValue(
-//		9, newVal);
+		Ogre::String newVal;
+		Ogre::TextureFilterOptions tfo;
+		unsigned int aniso;
+
+		switch (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->getParamValue(
+		9)[0]) {
+		case 'B':
+			newVal = "Trilinear";
+			tfo = Ogre::TFO_TRILINEAR;
+			aniso = 1;
+			break;
+		case 'T':
+			newVal = "Anisotropic";
+			tfo = Ogre::TFO_ANISOTROPIC;
+			aniso = 8;
+			break;
+		case 'A':
+			newVal = "None";
+			tfo = Ogre::TFO_NONE;
+			aniso = 1;
+			break;
+		default:
+			newVal = "Bilinear";
+			tfo = Ogre::TFO_BILINEAR;
+			aniso = 1;
+		}
+
+		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
+		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
+		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(
+		9, newVal);
 		break;
 	}
 	case ApplicationKeycode::APPK_y:
@@ -279,9 +279,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		moveCameraRight();
 		break;
 	case ApplicationKeycode::APPK_f: // toggle visibility of advanced frame stats
-		if (!SimulationManager::getSingleton()->getViewController().getFpsPanel()->isVisible()) {
-			ParamsPanel::VectorStringPairs items;
-			items.push_back(ParamsPanel::PairString("Last FPS", "0"));		// 0
+		if (SimulationManager::getSingleton()->getViewController().getFpsPanel()->isVisible()) {
 			SimulationManager::getSingleton()->getViewController().getFpsPanel()->hide();
 		} else {
 			SimulationManager::getSingleton()->getViewController().getFpsPanel()->show();
@@ -289,11 +287,11 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		break;
 	case ApplicationKeycode::APPK_g: // toggle visibility of even rarer debugging details
 
-//		if (SimulationManager::getSingleton()->getViewController().getDetailsPanel().isVisible()) {
-//			SimulationManager::getSingleton()->getViewController().getDetailsPanel().hide();
-//		} else {
-//			SimulationManager::getSingleton()->getViewController().getDetailsPanel().show();
-//		}
+		if (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->isVisible()) {
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->hide();
+		} else {
+			SimulationManager::getSingleton()->getViewController().getDetailsPanel()->show();
+		}
 		break;
 	case ApplicationKeycode::APPK_h:
 		// return CEGUI::Key::H;
