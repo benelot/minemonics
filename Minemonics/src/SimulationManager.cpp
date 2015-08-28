@@ -79,8 +79,7 @@
 #include <model/universe/CollisionHandler.hpp>
 
 //## view headers
-//#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
-//#include <view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp>
+#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
 
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -428,12 +427,21 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
-//	std::vector<MathGLPanel*>::iterator it =
-//	mViewController.getGraphWindows().begin();
-//	for (; it != mViewController.getGraphWindows().end(); it++) {
-//		(*it)->update(timeSinceLastFrame);
-//	}
-//
+	std::vector<MovablePanel*>::iterator it =
+	mViewController.getMovablePanels().begin();
+	for (; it != mViewController.getMovablePanels().end(); it++) {
+		switch ((*it)->getType()) {
+		case MovablePanel::GRAPHPANEL: {
+			((MathGLPanel*) (*it))->update(timeSinceLastFrame);
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+
+	}
+
 	if (mViewController.getFpsPanel() != NULL) {
 		if (mViewController.getFpsPanel()->isVisible()) // if fps panel is visible, then update its contents
 		{

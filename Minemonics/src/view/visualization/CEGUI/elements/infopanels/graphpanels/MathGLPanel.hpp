@@ -13,8 +13,8 @@ class TextureTarget;
 //## controller headers
 //## model headers
 //## view headers
-
 #include <OgrePrerequisites.h>
+#include <OgreTexture.h>
 
 //# custom headers
 //## base headers

@@ -35,6 +35,7 @@
 //## controller headers
 //## model headers
 //## view headers
+#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
 
 //## utils headers
 
@@ -43,7 +44,7 @@ ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDragContainer(NULL), mEvaluationInView(
 NULL), mShowShadows(false), mSelectedPlanet(NULL), mMenuBar(NULL), mFpsPanel(
-NULL) {
+NULL), mDetailsPanel(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -64,6 +65,12 @@ ViewController::~ViewController() {
 
 	delete mMenuBar;
 	mMenuBar = NULL;
+
+	delete mFpsPanel;
+	mFpsPanel = NULL;
+
+	delete mDetailsPanel;
+	mDetailsPanel = NULL;
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
@@ -104,7 +111,6 @@ StateHandler* const stateHandler) {
 	(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
 
 	// add menu
-//	CEGUIBuilder ceguiBuilder(SimulationManager::getSingleton());
 	mMenuBar = new MenuBar();
 	mLayout->addChild(mMenuBar->getWindow());
 
@@ -128,9 +134,8 @@ StateHandler* const stateHandler) {
 
 	// TODO: Add graphwindows again when used
 //	mMovablePanels.push_back(
-//	new MathGLPanel(this, SimulationManager::getSingleton()->getRoot(), 400,
-//	400, CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.2f, 0)),
-//	CEGUI::USize(CEGUI::UDim(0.8f, 0), CEGUI::UDim(0.8f, 0))));
+//	new MathGLPanel(400, 400, 400, 400, this,
+//	SimulationManager::getSingleton()->getRoot(), 400, 400));
 
 	// add all movable panels to the layout
 	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();

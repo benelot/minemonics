@@ -3,8 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class ParamsPanel;
-class ImmovablePanel;
 class MovablePanel;
 namespace CEGUI {
 class OgreRenderer;
@@ -183,7 +181,6 @@ private:
 	CEGUI::Window* mDragContainer;
 
 	// Visualization components
-	std::vector<ImmovablePanel*> mImmovablePanels;
 	std::vector<MovablePanel*> mMovablePanels;
 	InfoOverlay mInfoOverlay;
 
