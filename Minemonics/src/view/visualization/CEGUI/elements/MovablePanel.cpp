@@ -27,8 +27,8 @@
 //## view headers
 //## utils headers
 
-MovablePanel::MovablePanel(const std::string name) :
-BasePanel(name) {
+MovablePanel::MovablePanel(const std::string name, MovablePanelType type) :
+BasePanel(name), mType(type) {
 }
 
 void MovablePanel::initialize(const int left, const int top, const int width,

@@ -39,7 +39,7 @@ public:
 	enum MovablePanelType {
 		GRAPHPANEL, FPSPANEL, DETAILSPANEL
 	};
-	MovablePanel(const std::string name);
+	MovablePanel(const std::string name, MovablePanelType type);
 
 	void initialize(const int left, const int top, const int width,
 	const int height, const bool hasTitleBar);
@@ -52,11 +52,16 @@ public:
 
 	void hideTitleBar(); /**!< Hide the title bar. */
 
+	MovablePanelType getType() const {
+		return mType;
+	}
+
 	//Accessor methods
 
 private:
 	CEGUI::USize mSizeWithToolbar;
 	CEGUI::USize mSizeWithoutToolbar;
+	MovablePanelType mType;
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_MOVABLEPANEL_HPP_ */
