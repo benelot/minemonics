@@ -45,31 +45,37 @@ MousePicker::~MousePicker() {
 void MousePicker::pickBody(btDynamicsWorld* world) {
 	Ogre::Ray ray = getMouseRay();
 	mBulletPicker.pickBody(world, OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()));
+	OgreBulletUtils::convert(ray.getOrigin() + ray.getDirection()));
 }
 
 void MousePicker::pickBody() {
 	//Implement OgreMeshRay
 	Ogre::Ray ray = getMouseRay();
-	mBulletPicker.pickBody(
-			mViewController->getSelectedPlanet()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()*10000.0f));
+	if (mViewController->getSelectedPlanet()) {
+		mBulletPicker.pickBody(
+		mViewController->getSelectedPlanet()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+		OgreBulletUtils::convert(ray.getOrigin()),
+		OgreBulletUtils::convert(
+		ray.getOrigin() + ray.getDirection() * 10000.0f));
+	}
 }
 
-void MousePicker::moveBody(){
+void MousePicker::moveBody() {
 	Ogre::Ray ray = getMouseRay();
 	mBulletPicker.movePickedBody(OgreBulletUtils::convert(ray.getOrigin()),
-			OgreBulletUtils::convert(ray.getOrigin()+ray.getDirection()*10000.0f));
+	OgreBulletUtils::convert(ray.getOrigin() + ray.getDirection() * 10000.0f));
 }
 
 Ogre::Ray MousePicker::getMouseRay() {
 	//get the mouse position
 	CEGUI::GUIContext& context =
-			CEGUI::System::getSingleton().getDefaultGUIContext();
+	CEGUI::System::getSingleton().getDefaultGUIContext();
 	CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
 
 	//return the mouse ray
 	return mViewController->getCameraHandler().getCamera()->getCameraToViewportRay(
-			mousePos.d_x/((double)SimulationManager::getSingleton()->getWindowWidth()), mousePos.d_y/((double)SimulationManager::getSingleton()->getWindowHeight()));
+	mousePos.d_x
+	/ ((double) SimulationManager::getSingleton()->getWindowWidth()),
+	mousePos.d_y
+	/ ((double) SimulationManager::getSingleton()->getWindowHeight()));
 }
