@@ -39,7 +39,7 @@ public:
 	typedef std::vector<PairString> VectorStringPairs;
 
 public:
-	ParamsPanel(const std::string name);
+	ParamsPanel(const std::string name, MovablePanelType type);
 	~ParamsPanel(void);
 
 	void initialize(const int left, const int top, const int width,

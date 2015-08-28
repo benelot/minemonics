@@ -1,6 +1,7 @@
 //# corresponding header
 #include <view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp>
 
+//## system headers
 #include <stddef.h>
 #include <string>
 #include <vector>
@@ -22,14 +23,13 @@
 
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
-#include <view/visualization/CEGUI/elements/MovablePanel.hpp>
 //## controller headers
 //## model headers
 //## view headers
 //## utils headers
 
-ParamsPanel::ParamsPanel(const std::string name) :
-MovablePanel(name), mTextBoxLabel(NULL), mTextBoxValues(NULL) {
+ParamsPanel::ParamsPanel(const std::string name, MovablePanelType type) :
+MovablePanel(name, type), mTextBoxLabel(NULL), mTextBoxValues(NULL) {
 }
 
 void ParamsPanel::initialize(const int left, const int top, const int width,
