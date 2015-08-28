@@ -3,9 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-#include <CEGUI/Element.h>
-#include <CEGUI/widgets/FrameWindow.h>
-
 //# system headers
 #include <string>
 #include <vector>
@@ -13,6 +10,9 @@
 //## controller headers
 //## model headers
 //## view headers
+#include <CEGUI/Element.h>
+#include <CEGUI/widgets/FrameWindow.h>
+
 //# custom headers
 //## base headers
 //## configuration headers
