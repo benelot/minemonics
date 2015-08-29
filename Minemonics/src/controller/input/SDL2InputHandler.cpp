@@ -32,7 +32,7 @@
 BoostLogger SDL2InputHandler::mBoostLogger; /*<! initialize the boost logger*/
 SDL2InputHandler::_Init SDL2InputHandler::_initializer;
 SDL2InputHandler::SDL2InputHandler() :
-		CEGUIInputHandler(), mLastMouseX(0), mLastMouseY(0) {
+	CEGUIInputHandler(), mLastMouseX(0), mLastMouseY(0), mIgnoreEvent(-1) {
 }
 
 SDL2InputHandler::~SDL2InputHandler() {
@@ -43,11 +43,13 @@ SDL2InputHandler::~SDL2InputHandler() {
 
 void SDL2InputHandler::initialize() {
 	CEGUIInputHandler::initialize();
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Initializing SDL2 input handler...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+		<< "Initializing SDL2 input handler...";
 
 	SDL_ShowCursor (SDL_DISABLE);
-	SDL_SetRelativeMouseMode(SDL_FALSE);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Initializing SDL2 input handler...done";
+	SDL_SetRelativeMouseMode (SDL_FALSE);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+		<< "Initializing SDL2 input handler...done";
 }
 
 void SDL2InputHandler::injectInput() {
@@ -62,12 +64,11 @@ void SDL2InputHandler::injectInput() {
 		case SDL_MOUSEMOTION:
 			/* we inject the mouse position directly. */
 			CEGUIInputHandler::mouseMoved(
-					static_cast<float>(e.motion.x) - mLastMouseX,
-					static_cast<float>(e.motion.y) - mLastMouseY);
+				static_cast<float>(e.motion.x) - mLastMouseX,
+				static_cast<float>(e.motion.y) - mLastMouseY);
 
 			CEGUIInputHandler::injectMousePosition(
-					static_cast<float>(e.motion.x),
-					static_cast<float>(e.motion.y));
+				static_cast<float>(e.motion.x), static_cast<float>(e.motion.y));
 
 			// keep last mouse position
 			mLastMouseX = static_cast<float>(e.motion.x);
@@ -77,27 +78,34 @@ void SDL2InputHandler::injectInput() {
 			/* mouse down handler */
 		case SDL_MOUSEBUTTONDOWN:
 			/* let a special function handle the mouse button down event */
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Mouse button pressed" << e.button.button;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
+				<< "Mouse button pressed" << e.button.button;
 			CEGUIInputHandler::mousePressed(
-					InputUtils::convertToOgre3D(e.button.button));
+				InputUtils::convertToOgre3D(e.button.button));
 			break;
 
 			/* mouse up handler */
 		case SDL_MOUSEBUTTONUP:
 			/* let a special function handle the mouse button up event */
 			CEGUIInputHandler::mouseReleased(
-					InputUtils::convertToOgre3D(e.button.button));
+				InputUtils::convertToOgre3D(e.button.button));
 			break;
-
-			/* key down */
-		case SDL_KEYDOWN:
-			CEGUIInputHandler::keyPressed(
-					InputUtils::convertToOgre3D(e.key.keysym.sym));
+		case SDL_TEXTINPUT:
+			/* Inject letter */
+			CEGUIInputHandler::injectCharacter(e.text.text);
 			break;
 			/* key up */
+			/* key down */
+		case SDL_KEYDOWN: {
+			if (!CEGUIInputHandler::acceptsInput()) {
+				CEGUIInputHandler::keyPressed(
+					InputUtils::convertToOgre3D(e.key.keysym.sym));
+			}
+			break;
+		}
 		case SDL_KEYUP:
 			CEGUIInputHandler::keyReleased(
-					InputUtils::convertToOgre3D(e.key.keysym.sym));
+				InputUtils::convertToOgre3D(e.key.keysym.sym));
 			break;
 		case SDL_MOUSEWHEEL:
 			CEGUIInputHandler::mouseWheelMoved(e.wheel.y);
@@ -107,7 +115,8 @@ void SDL2InputHandler::injectInput() {
 			SimulationManager::getSingleton()->quit();
 			break;
 		case SDL_WINDOWEVENT:
-			SimulationManager::getSingleton()->windowResized(SimulationManager::getSingleton()->getWindow());
+			SimulationManager::getSingleton()->windowResized(
+				SimulationManager::getSingleton()->getWindow());
 			//CEGUIInputHandler::windowResized(e.window.data1, e.window.data2);
 			break;
 		}

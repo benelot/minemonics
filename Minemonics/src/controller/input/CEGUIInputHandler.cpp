@@ -34,7 +34,7 @@
 BoostLogger CEGUIInputHandler::mBoostLogger; /*<! initialize the boost logger*/
 CEGUIInputHandler::_Init CEGUIInputHandler::_initializer;
 CEGUIInputHandler::CEGUIInputHandler() :
-OgreInputHandler(), mCEGUIlastTick(0) {
+	OgreInputHandler(), mCEGUIlastTick(0) {
 
 }
 
@@ -53,7 +53,7 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 	//If CEGUI used the input, then return
 	if (CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(
-	(CEGUI::Key::Scan) InputUtils::convertToCEGUI(key))) {
+		(CEGUI::Key::Scan) InputUtils::convertToCEGUI(key))) {
 		return true;
 	}
 
@@ -278,10 +278,10 @@ bool CEGUIInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 
 	case ApplicationKeycode::APPK_LCTRL:
 		for (std::vector<MovablePanel*>::iterator iit =
-		SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
-		iit
-		!= SimulationManager::getSingleton()->getViewController().getMovablePanels().end();
-		iit++) {
+			SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
+			iit
+				!= SimulationManager::getSingleton()->getViewController().getMovablePanels().end();
+			iit++) {
 			(*iit)->showTitleBar();
 		}
 		break;
@@ -613,10 +613,10 @@ bool CEGUIInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 
 	case ApplicationKeycode::APPK_LCTRL:
 		for (std::vector<MovablePanel*>::iterator iit =
-		SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
-		iit
-		!= SimulationManager::getSingleton()->getViewController().getMovablePanels().end();
-		iit++) {
+			SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
+			iit
+				!= SimulationManager::getSingleton()->getViewController().getMovablePanels().end();
+			iit++) {
 			(*iit)->hideTitleBar();
 		}
 		break;
@@ -727,7 +727,7 @@ bool CEGUIInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 
 //If CEGUI used the input, then return
 	if (CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(
-	(CEGUI::Key::Scan) InputUtils::convertToCEGUI(key))) {
+		(CEGUI::Key::Scan) InputUtils::convertToCEGUI(key))) {
 		return true;
 	}
 
@@ -744,7 +744,7 @@ void CEGUIInputHandler::injectTimeImpulse(const double tick) {
 // CEGUI::MouseListener
 bool CEGUIInputHandler::mouseMoved(const float x, const float y) {
 	CEGUI::GUIContext& context =
-	CEGUI::System::getSingleton().getDefaultGUIContext();
+		CEGUI::System::getSingleton().getDefaultGUIContext();
 
 	context.injectMouseMove(x, y);
 
@@ -754,17 +754,17 @@ bool CEGUIInputHandler::mouseMoved(const float x, const float y) {
 // CEGUI:MouseWheelListener
 bool CEGUIInputHandler::mouseWheelMoved(const float rel) {
 	CEGUI::GUIContext& context =
-	CEGUI::System::getSingleton().getDefaultGUIContext();
+		CEGUI::System::getSingleton().getDefaultGUIContext();
 	// Scroll wheel.
 	context.injectMouseWheelChange(rel / 120.0f);
 	return OgreInputHandler::mouseWheelMoved(rel);
 }
 
 bool CEGUIInputHandler::mousePressed(
-const ApplicationMouseCode::MouseButton button) {
+	const ApplicationMouseCode::MouseButton button) {
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "MOUSE BUTTON PRESSED" << button;
 	CEGUI::GUIContext& context =
-	CEGUI::System::getSingleton().getDefaultGUIContext();
+		CEGUI::System::getSingleton().getDefaultGUIContext();
 
 	// Saving a mathgl graph to a file on right click
 	CEGUI::Window* window = context.getWindowContainingMouse();
@@ -792,29 +792,44 @@ const ApplicationMouseCode::MouseButton button) {
 }
 
 bool CEGUIInputHandler::mouseReleased(
-const ApplicationMouseCode::MouseButton button) {
+	const ApplicationMouseCode::MouseButton button) {
 	CEGUI::GUIContext& context =
-	CEGUI::System::getSingleton().getDefaultGUIContext();
+		CEGUI::System::getSingleton().getDefaultGUIContext();
 	context.injectMouseButtonUp(InputUtils::convertToCEGUI(button));
 	return OgreInputHandler::mouseReleased(button);
 }
 
 void CEGUIInputHandler::windowResized(int width, int height) const {
 	CEGUI::System::getSingleton().notifyDisplaySizeChanged(
-	CEGUI::Sizef(width, height));
+		CEGUI::Sizef(width, height));
 }
 
 void CEGUIInputHandler::injectMousePosition(const float x,
-const float y) const {
+	const float y) const {
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+		CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-	x - mousePos.d_x, y - mousePos.d_y);
+		x - mousePos.d_x, y - mousePos.d_y);
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position SDL:" << x << "," << y;
 	//BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Current mouse position CEGUI:" << mousePos.d_x << "," << mousePos.d_y;
 }
 
 void CEGUIInputHandler::update(double timeSinceLastTick) {
 	OgreInputHandler::update(timeSinceLastTick);
+}
+
+bool CEGUIInputHandler::acceptsInput() {
+	bool acceptsInput =
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectChar(34);
+	if (acceptsInput) {
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(
+			CEGUI::Key::Backspace);
+	}
+	return acceptsInput;
+}
+
+bool CEGUIInputHandler::injectCharacter(char* character) const {
+	return CEGUI::System::getSingleton().getDefaultGUIContext().injectChar(
+		character[0]);
 }

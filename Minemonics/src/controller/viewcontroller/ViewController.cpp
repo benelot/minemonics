@@ -36,15 +36,16 @@
 //## model headers
 //## view headers
 #include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
+#include <view/visualization/CEGUI/elements/ShowCasePanel.hpp>
 
 //## utils headers
 
 BoostLogger ViewController::mBoostLogger; /*<! initialize the boost logger*/
 ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
-mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDragContainer(NULL), mEvaluationInView(
-NULL), mShowShadows(false), mSelectedPlanet(NULL), mMenuBar(NULL), mFpsPanel(
-NULL), mDetailsPanel(NULL) {
+	mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDragContainer(NULL), mEvaluationInView(
+		NULL), mShowShadows(false), mSelectedPlanet(NULL), mMenuBar(NULL), mFpsPanel(
+		NULL), mDetailsPanel(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -74,7 +75,7 @@ ViewController::~ViewController() {
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
-StateHandler* const stateHandler) {
+	StateHandler* const stateHandler) {
 
 	mCameraHandler.initialize();
 
@@ -91,24 +92,20 @@ StateHandler* const stateHandler) {
 
 	// use this CEGUI scheme definition (see CEGUI docs for more)
 	CEGUI::SchemeManager::getSingleton().createFromFile(
-	(CEGUI::utf8*) "Ogremonics.scheme", (CEGUI::utf8*) "GUI");
-	//	CEGUI::SchemeManager::getSingleton().createFromFile(
-	//			(CEGUI::utf8*) "TaharezLook.scheme", (CEGUI::utf8*) "GUI");
-	//	CEGUI::SchemeManager::getSingleton().createFromFile(
-	//			(CEGUI::utf8*) "WindowsLook.scheme", (CEGUI::utf8*) "GUI");
+		CEGUIConfiguration::CEGUI_SCHEME + ".scheme", (CEGUI::utf8*) "GUI");
 
 	// hide the CEGUI mouse cursor (defined in the look-n-feel)
 	mSystem->getDefaultGUIContext().getMouseCursor().setDefaultImage(NULL);
 
 	// use this font for text in the UI
 	CEGUI::FontManager::getSingleton().createFromFile("Tahoma-8.font",
-	(CEGUI::utf8*) "GUI");
+		(CEGUI::utf8*) "GUI");
 	mSystem->getDefaultGUIContext().setDefaultFont("Tahoma-8");
 
 	// load a layout from the XML layout file (you'll find this in resources/gui.zip), and
 	// put it in the GUI resource group
 	mLayout = CEGUI::WindowManager::getSingleton().createWindow(
-	(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
+		(CEGUI::utf8*) "DefaultWindow", (CEGUI::utf8*) "Sheet");
 
 	// add menu
 	mMenuBar = new MenuBar();
@@ -116,19 +113,19 @@ StateHandler* const stateHandler) {
 
 	// store window width and height
 	int windowWidth =
-	(int) SimulationManager::getSingleton()->getWindow()->getWidth();
+		(int) SimulationManager::getSingleton()->getWindow()->getWidth();
 	int windowHeight =
-	(int) SimulationManager::getSingleton()->getWindow()->getHeight();
+		(int) SimulationManager::getSingleton()->getWindow()->getHeight();
 
 	// add fps panel
 	mFpsPanel = new FPSPanel(CEGUIConfiguration::INFOPANEL_BORDER,
-	(int) windowHeight * 4.0f / 5.0f);
+		(int) windowHeight * 4.0f / 5.0f);
 	mMovablePanels.push_back(mFpsPanel);
 
 	// add details panel
 	mDetailsPanel = new DetailsPanel(
-	(int) windowWidth - 200 - 3 * CEGUIConfiguration::INFOPANEL_BORDER,
-	(int) windowHeight / 6.0f);
+		(int) windowWidth - 200 - 3 * CEGUIConfiguration::INFOPANEL_BORDER,
+		(int) windowHeight / 6.0f);
 	mDetailsPanel->hide();
 	mMovablePanels.push_back(mDetailsPanel);
 
@@ -136,6 +133,9 @@ StateHandler* const stateHandler) {
 //	mMovablePanels.push_back(
 //	new MathGLPanel(400, 400, 400, 400, this,
 //	SimulationManager::getSingleton()->getRoot(), 400, 400));
+
+//	mMovablePanels.push_back(
+//		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));
 
 	// add all movable panels to the layout
 	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();
@@ -150,7 +150,7 @@ StateHandler* const stateHandler) {
 
 	// make an instance of our GUI sheet handler class
 	mGUISheetHandler.initialize(SimulationManager::getSingleton(), mSystem,
-	mLayout, stateHandler);
+		mLayout, stateHandler);
 
 	mInfoOverlay.initialize(mCameraHandler.getCamera());
 
@@ -177,16 +177,16 @@ void ViewController::update(const double timeSinceLastFrame) {
 }
 
 void ViewController::notifyDisplaySizeChanged(const float width,
-const float height) {
+	const float height) {
 	mSystem->notifyDisplaySizeChanged(CEGUI::Size<float>(width, height));
 }
 
 void ViewController::updateMousePosition(const float mousePositionX,
-const float mousePositionY) {
+	const float mousePositionY) {
 	CEGUI::Vector2f mousePos =
-	mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
+		mSystem->getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-	mousePositionX - mousePos.d_x, mousePositionY - mousePos.d_y);
+		mousePositionX - mousePos.d_x, mousePositionY - mousePos.d_y);
 }
 
 void ViewController::addPlanetToView(Planet* const planet) {
@@ -195,7 +195,7 @@ void ViewController::addPlanetToView(Planet* const planet) {
 
 void ViewController::removePlanetFromView(Planet* const planet) {
 	for (std::vector<Planet*>::iterator pit = mPlanetsInView.begin();
-	pit != mPlanetsInView.end(); pit++) {
+		pit != mPlanetsInView.end(); pit++) {
 		if ((*pit) == planet) {
 			mPlanetsInView.erase(pit);
 			break;

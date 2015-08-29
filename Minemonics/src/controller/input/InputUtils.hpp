@@ -772,7 +772,8 @@ public:
 	 * @param button The Ogre3D mouse button.
 	 * @return The CEGUI mouse button.
 	 */
-	static CEGUI::MouseButton convertToCEGUI(ApplicationMouseCode::MouseButton button) {
+	static CEGUI::MouseButton convertToCEGUI(
+		ApplicationMouseCode::MouseButton button) {
 		switch (button) {
 		case ApplicationMouseCode::LeftButton:
 			return CEGUI::LeftButton;

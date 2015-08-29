@@ -41,6 +41,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/CEGUIConfiguration.hpp>
+
 //## controller headers
 #include <controller/viewcontroller/ViewController.hpp>
 
@@ -49,42 +51,43 @@
 //## utils headers
 
 MathGLPanel::MathGLPanel(const int left, const int top, const int width,
-const int height, ViewController* const viewController, Ogre::Root* const root,
-const int textureWidth, const int textureHeight) :
-MovablePanel("MathGLWindow", MovablePanel::GRAPHPANEL), mViewController(
-viewController), mTime(0), mMakePrint(false) {
+	const int height, ViewController* const viewController,
+	Ogre::Root* const root, const int textureWidth, const int textureHeight) :
+	MovablePanel("MathGLWindow", MovablePanel::GRAPHPANEL), mViewController(
+		viewController), mTime(0), mMakePrint(false) {
 
 	CEGUI::Sizef size(static_cast<float>(textureWidth),
-	static_cast<float>(textureHeight));
+		static_cast<float>(textureHeight));
 
 	// We create a CEGUI texture target and create a GUIContext that will use it.
 	mRenderTextureTarget =
-	mViewController->getRenderer()->createTextureTarget();
+		mViewController->getRenderer()->createTextureTarget();
 	mRenderTextureTarget->declareRenderSize(size);
 	mRenderGuiContext = &mViewController->getSystem()->createGUIContext(
-	static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
+		static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
 
 	mTexture = root->getTextureManager()->createManual("RTT",
-	Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Ogre::TEX_TYPE_2D,
-	textureWidth, textureHeight, 0, Ogre::PF_R8G8B8, Ogre::TU_RENDERTARGET);
+		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Ogre::TEX_TYPE_2D, textureWidth, textureHeight, 0, Ogre::PF_R8G8B8,
+		Ogre::TU_RENDERTARGET);
 
 	Ogre::RenderTexture *rtex = mTexture->getBuffer()->getRenderTarget();
 
 	// We create a CEGUI Texture using the renderer you use:
 	CEGUI::Texture& texture = mViewController->getRenderer()->createTexture(
-	"MathGLTexture", mTexture);
+		"MathGLTexture", mTexture);
 
 	// Now we need to cast it to the CEGUI::Texture superclass which matches your Renderer. This can be CEGUI::OgreTexture or CEGUI::OpenGLTexture, depending on the renderer you use in your application
 	// We will use Ogre here as an example
 	CEGUI::OgreTexture& rendererTexture =
-	static_cast<CEGUI::OgreTexture&>(texture);
+		static_cast<CEGUI::OgreTexture&>(texture);
 
 	rendererTexture.setOgreTexture(mTexture, false);
 
 	// We create a BasicImage and set the Texture
 	CEGUI::BasicImage* image =
-	static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create(
-	"BasicImage", "RTTImage"));
+		static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create(
+			"BasicImage", "RTTImage"));
 	image->setTexture(static_cast<CEGUI::Texture*>(&rendererTexture));
 
 	CEGUI::Rectf imageArea;
@@ -99,10 +102,11 @@ viewController), mTime(0), mMakePrint(false) {
 	image->setAutoScaled(CEGUI::ASM_Disabled);
 
 	CEGUI::Window* staticImage =
-	CEGUI::WindowManager::getSingleton().createWindow("Ogremonics/StaticImage",
-	"MathGLRTTWindow");
+		CEGUI::WindowManager::getSingleton().createWindow(
+			CEGUIConfiguration::CEGUI_SCHEME + "/StaticImage",
+			"MathGLRTTWindow");
 	staticImage->setSize(
-	CEGUI::USize(CEGUI::UDim(1.0f, 0), CEGUI::UDim(1.0f, 0)));
+		CEGUI::USize(CEGUI::UDim(1.0f, 0), CEGUI::UDim(1.0f, 0)));
 	staticImage->setProperty("Image", "RTTImage");
 
 	MovablePanel::initialize(left, top, width, height, false);
@@ -163,7 +167,7 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	// Copy chart image to the pixel buffer
 	Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pixelBox.data);
 	graph.GetBGRN((unsigned char*) pDest,
-	4 * mTexture->getWidth() * mTexture->getHeight());
+		4 * mTexture->getWidth() * mTexture->getHeight());
 
 	// Unlock the pixel buffer
 	pixelBuffer->unlock();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Imageset version="2" name="OgremonicsImages" imagefile="OgreTrayImages.png" nativeHorzRes="1280" nativeVertRes="720" autoScaled="vertical" >
+<Imageset version="2" name="OgremonicsImages" imagefile="OgremonicsImages.png" nativeHorzRes="1280" nativeVertRes="720" autoScaled="vertical" >
     <Image name="Pulse" xPos="201" yPos="98" width="8" height="1" />
     <Image name="Shade" xPos="2" yPos="127" width="62" height="46" />
     <Image name="TrayB" xPos="179" yPos="50" width="34" height="15" />
@@ -56,7 +56,7 @@
     <Image name="MiniTrayBR" xPos="186" yPos="103" width="12" height="12" />
     <Image name="MiniTrayTL" xPos="166" yPos="83" width="12" height="12" />
     <Image name="MiniTrayTR" xPos="186" yPos="83" width="12" height="12" />
-    <Image name="MouseArrow" xPos="1" yPos="100" width="20" height="23" />
+    <Image name="MouseArrow" xPos="1" yPos="100" width="1" height="1" />
     <Image name="SeparatorL" xPos="173" yPos="71" width="20" height="4" />
     <Image name="SeparatorM" xPos="193" yPos="71" width="10" height="4" />
     <Image name="SeparatorR" xPos="203" yPos="71" width="20" height="4" />

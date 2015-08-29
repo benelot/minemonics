@@ -4,6 +4,8 @@
 //# corresponding headers
 //# forward declarations
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -23,6 +25,8 @@
  */
 class CEGUIConfiguration {
 public:
+
+	static const std::string CEGUI_SCHEME;
 	/**
 	 * Information panel caption height
 	 */

@@ -23,7 +23,6 @@
 //## utils headers
 #include <utils/logging/Logger.hpp>
 
-
 /**
  * @brief		The SDL2 input handler handles the input coming directly from the hardware layer SDL2 manages and hands the inputs up to its connecting input handlers.
  * @details		Details
@@ -79,8 +78,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"SDL2InputHandler"));
+				boost::log::attributes::constant < std::string
+					> ("SDL2InputHandler"));
 		}
 	} _initializer;
 
@@ -93,6 +92,8 @@ private:
 	 * The last mouse Y position.
 	 */
 	int mLastMouseY;
+
+	int mIgnoreEvent;
 };
 
 #endif /* CONTROLLER_INPUT_SDL2INPUTHANDLER_H_ */

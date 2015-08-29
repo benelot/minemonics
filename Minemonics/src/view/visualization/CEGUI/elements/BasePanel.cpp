@@ -29,7 +29,7 @@ BasePanel::BasePanel(const std::string name) {
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 	// Initialize panel
 	mFrameWindow = static_cast<CEGUI::FrameWindow*>(wmgr.createWindow(
-	"Ogremonics/FrameWindow", name + "_Panel"));
+	CEGUIConfiguration::CEGUI_SCHEME + "/FrameWindow", name + "_Panel"));
 
 	// set widget name
 	mFrameWindow->setText(name);

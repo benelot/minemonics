@@ -22,7 +22,7 @@
     <FalagardMapping windowType="Ogremonics/ComboDropList"        targetType="CEGUI/ComboDropList"    renderer="Core/Listbox"             lookNFeel="Ogremonics/Listbox" />
     <FalagardMapping windowType="Ogremonics/Combobox"             targetType="CEGUI/Combobox"         renderer="Core/Default"             lookNFeel="Ogremonics/Combobox" />
     <FalagardMapping windowType="Ogremonics/DropDownMenu"         targetType="CEGUI/Combobox"         renderer="Core/Default"             lookNFeel="Ogremonics/DropDownMenu" />
-    <FalagardMapping windowType="Ogremonics/Group"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/Group" />
+    <FalagardMapping windowType="Ogremonics/GroupBox"                targetType="DefaultWindow"          renderer="Core/Default"             lookNFeel="Ogremonics/Group" />
     <FalagardMapping windowType="Ogremonics/Checkbox"             targetType="CEGUI/ToggleButton"     renderer="Core/ToggleButton"        lookNFeel="Ogremonics/Checkbox" />
     <FalagardMapping windowType="Ogremonics/RadioButton"          targetType="CEGUI/RadioButton"      renderer="Core/ToggleButton"        lookNFeel="Ogremonics/RadioButton" />
     <FalagardMapping windowType="Ogremonics/Slider"               targetType="CEGUI/Slider"           renderer="Core/Slider"              lookNFeel="Ogremonics/Slider" />

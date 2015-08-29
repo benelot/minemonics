@@ -519,6 +519,16 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/MathGLPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/ShowCasePanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/ShowCasePanel.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Ogre3DFFMPEGVideoWriter.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
@@ -777,6 +787,11 @@
 			<name>[Targets]/[exe] Minemonics/Source Files/PhysicsConfiguration.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/PhysicsConfiguration.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/CEGUIConfiguration.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/CEGUIConfiguration.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Logger.cpp</name>
@@ -1197,6 +1212,16 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/DetailsPanel.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/MathGLPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/ShowCasePanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/ShowCasePanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Ogre3DFFMPEGVideoWriter.hpp</name>
@@ -1927,6 +1952,11 @@
 			<name>[Targets]/[exe] runUnitTests/Source Files/PhysicsConfiguration.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/PhysicsConfiguration.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/CEGUIConfiguration.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/CEGUIConfiguration.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Logger.cpp</name>

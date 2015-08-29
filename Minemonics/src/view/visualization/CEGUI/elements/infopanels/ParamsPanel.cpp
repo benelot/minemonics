@@ -29,61 +29,65 @@
 //## utils headers
 
 ParamsPanel::ParamsPanel(const std::string name, MovablePanelType type) :
-MovablePanel(name, type), mTextBoxLabel(NULL), mTextBoxValues(NULL) {
+	MovablePanel(name, type), mTextBoxLabel(NULL), mTextBoxValues(NULL) {
 }
 
 void ParamsPanel::initialize(const int left, const int top, const int width,
-const bool hasTitleBar, VectorStringPairs items) {
+	const bool hasTitleBar, VectorStringPairs items) {
 
 	int height = CEGUIConfiguration::INFOPANEL_TEXT_HEIGHT * items.size()
-	+ CEGUIConfiguration::INFOPANEL_CAPTION;
+		+ CEGUIConfiguration::INFOPANEL_CAPTION;
 	MovablePanel::initialize(left, top, width, height, hasTitleBar);
 
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
 	CEGUI::Window* innerWidget =
-	static_cast<CEGUI::FrameWindow*>(wmgr.createWindow("Ogremonics/Group",
-	mName + "_Panel"));
+		static_cast<CEGUI::FrameWindow*>(wmgr.createWindow(
+			CEGUIConfiguration::CEGUI_SCHEME + "/GroupBox", mName + "_Panel"));
 	innerWidget->setText(mName);
 	innerWidget->setSize(
-	CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, height)));
+		CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, height)));
 	mFrameWindow->addChild(innerWidget);
 
 	// Items
 	// + Names
-	mTextBoxLabel = wmgr.createWindow("Ogremonics/Label", mName + "_Label");
+	mTextBoxLabel = wmgr.createWindow(
+		CEGUIConfiguration::CEGUI_SCHEME + "/Label", mName + "_Label");
 
 	mTextBoxLabel->setSize(
-	CEGUI::USize(
-	CEGUI::UDim(0,
-	(int) (CEGUIConfiguration::INFOPANEL_LEFT_COL_WIDTH * (float) (width))),
-	CEGUI::UDim(0, height - CEGUIConfiguration::INFOPANEL_CAPTION)));
+		CEGUI::USize(
+			CEGUI::UDim(0,
+				(int) (CEGUIConfiguration::INFOPANEL_LEFT_COL_WIDTH
+					* (float) (width))),
+			CEGUI::UDim(0, height - CEGUIConfiguration::INFOPANEL_CAPTION)));
 
 	mTextBoxLabel->setPosition(
-	CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
+		CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
 	innerWidget->addChild(mTextBoxLabel);
 
 	// + Values
-	mTextBoxValues = wmgr.createWindow("Ogremonics/Label", mName + "_Values");
+	mTextBoxValues = wmgr.createWindow(
+		CEGUIConfiguration::CEGUI_SCHEME + "/Label", mName + "_Values");
 
 	mTextBoxValues->setSize(
-	CEGUI::USize(
-	CEGUI::UDim(0,
-	(int) (CEGUIConfiguration::INFOPANEL_RIGHT_COL_WIDTH * (float) (width))),
-	CEGUI::UDim(0, height - CEGUIConfiguration::INFOPANEL_CAPTION)));
+		CEGUI::USize(
+			CEGUI::UDim(0,
+				(int) (CEGUIConfiguration::INFOPANEL_RIGHT_COL_WIDTH
+					* (float) (width))),
+			CEGUI::UDim(0, height - CEGUIConfiguration::INFOPANEL_CAPTION)));
 
 	mTextBoxValues->setPosition(
-	CEGUI::UVector2(
-	CEGUI::UDim(0,
-	(int) (CEGUIConfiguration::INFOPANEL_LEFT_COL_WIDTH * (float) (width))),
-	CEGUI::UDim(0, 0)));
+		CEGUI::UVector2(
+			CEGUI::UDim(0,
+				(int) (CEGUIConfiguration::INFOPANEL_LEFT_COL_WIDTH
+					* (float) (width))), CEGUI::UDim(0, 0)));
 	innerWidget->addChild(mTextBoxValues);
 
 	std::string labelText = "";
 	std::string valuesText = "";
 	// + Content
 	for (VectorStringPairs::iterator iter = items.begin(); iter != items.end();
-	++iter) {
+		++iter) {
 		if (iter->first.size() > 1) {
 			labelText.append(iter->first);
 			labelText.append(":");
@@ -107,7 +111,7 @@ ParamsPanel::~ParamsPanel(void) {
 }
 
 void ParamsPanel::setParamValue(const int index, const std::string value,
-const bool autoUpdate) {
+	const bool autoUpdate) {
 	if (index < 0 || index >= mParams.size())
 		return;
 	mParams[index] = value;
@@ -125,7 +129,7 @@ std::string ParamsPanel::getParamValue(const int index) {
 void ParamsPanel::update() {
 	std::string valuesText = "";
 	for (VectorString::iterator iter = mParams.begin(); iter != mParams.end();
-	++iter) {
+		++iter) {
 		valuesText.append(*iter);
 		valuesText.append("\n");
 	}

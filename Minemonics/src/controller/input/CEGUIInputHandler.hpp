@@ -114,6 +114,10 @@ protected:
 	 * @param y The absolute y position of the mouse.
 	 */
 	void injectMousePosition(const float x, const float y) const;
+
+	bool injectCharacter(char* character) const;
+
+	bool acceptsInput();
 private:
 	/**
 	 * The boost logger.
@@ -127,8 +131,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"CEGUIInputHandler"));
+				boost::log::attributes::constant < std::string
+					> ("CEGUIInputHandler"));
 		}
 	} _initializer;
 
