@@ -29,17 +29,17 @@
 BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
 Population::_Init Population::_initializer;
 Population::Population() :
-		mPlanet(NULL) {
+mPlanet(NULL) {
 	mPopulationModel = new PopulationModel();
 }
 
 Population::Population(PopulationModel* const populationModel) :
-		mPlanet(NULL), mPopulationModel(populationModel) {
+mPlanet(NULL), mPopulationModel(populationModel) {
 }
 
 Population::~Population() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end();) {
+	cit != mCreatures.end();) {
 		Creature* creature = *cit;
 		cit = mCreatures.erase(cit);
 		delete creature;
@@ -53,7 +53,7 @@ Population::~Population() {
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
 void Population::initialize(Planet* const planet, const int creatureQty,
-		const Ogre::Vector3 initialPosition) {
+const Ogre::Vector3 initialPosition) {
 	mPlanet = planet;
 
 	//initialize the population model with zero creatures.
@@ -63,8 +63,8 @@ void Population::initialize(Planet* const planet, const int creatureQty,
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
 		branchiness = Randomness::getSingleton()->nextNormalDouble(
-				MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
-				MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
+		MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
+		MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		addNewMember(branchiness, initialPosition);
 	}
 }
@@ -81,7 +81,7 @@ void Population::initialize(Planet* const planet, const int creatureQty) {
  * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
  */
 void Population::addNewMember(const double branchiness,
-		const Ogre::Vector3 rootPosition) {
+const Ogre::Vector3 rootPosition) {
 	//add new creature
 //	Creature* creature = new Snake(this,15,OgreBulletUtils::convert(rootPosition));
 //	Creature* creature = new RagDoll(this,10,OgreBulletUtils::convert(rootPosition));
@@ -98,14 +98,14 @@ void Population::addMember(Creature* const creature) {
 
 void Population::update(double timeSinceLastTick) {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end(); cit++) {
+	cit != mCreatures.end(); cit++) {
 		(*cit)->update(timeSinceLastTick);
 	}
 }
 
 void Population::reset() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end(); cit++) {
+	cit != mCreatures.end(); cit++) {
 		(*cit)->reset();
 	}
 }
@@ -113,7 +113,7 @@ void Population::reset() {
 int Population::addToPhysicsWorld() {
 	int limbQty = 0;
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end(); cit++) {
+	cit != mCreatures.end(); cit++) {
 		limbQty = (*cit)->addToPhysicsWorld();
 	}
 	return limbQty;
@@ -122,7 +122,7 @@ int Population::addToPhysicsWorld() {
 int Population::addToWorld() {
 	int limbQty = 0;
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end(); cit++) {
+	cit != mCreatures.end(); cit++) {
 		limbQty += (*cit)->addToWorld();
 	}
 	return limbQty;
@@ -130,7 +130,7 @@ int Population::addToWorld() {
 
 void Population::removeFromWorld() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end(); cit++) {
+	cit != mCreatures.end(); cit++) {
 		(*cit)->removeFromWorld();
 	}
 }
@@ -138,9 +138,10 @@ void Population::removeFromWorld() {
 void Population::resyncWithModel() {
 	//remove the creatures that were culled
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end();) {
+	cit != mCreatures.end();) {
 		if ((*cit)->isCulled()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature culled.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "Creature culled.";
 			Creature* creature = *cit;
 			delete creature;
 			cit = mCreatures.erase(cit);
@@ -150,10 +151,11 @@ void Population::resyncWithModel() {
 	}
 
 	for (std::vector<CreatureModel*>::const_iterator cit =
-			mPopulationModel->getCreatureModels().begin();
-			cit != mPopulationModel->getCreatureModels().end(); cit++) {
+	mPopulationModel->getCreatureModels().begin();
+	cit != mPopulationModel->getCreatureModels().end(); cit++) {
 		if ((*cit)->isNew()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature added.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "Creature added.";
 			Creature* creature = new Creature(*cit);
 			mCreatures.push_back(creature);
 			(*cit)->setNew(false);
@@ -165,7 +167,7 @@ void Population::resyncWithModel() {
 
 void Population::process() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end(); cit++) {
+	cit != mCreatures.end(); cit++) {
 		(*cit)->processJuries();
 	}
 }
@@ -176,14 +178,14 @@ bool Population::hasInterpenetrations() {
 
 void Population::markCull() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end();cit++) {
+	cit != mCreatures.end(); cit++) {
 		(*cit)->setCulled(true);
 	}
 }
 
 void Population::calm() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-			cit != mCreatures.end();cit++) {
+	cit != mCreatures.end(); cit++) {
 		(*cit)->calm();
 	}
 }

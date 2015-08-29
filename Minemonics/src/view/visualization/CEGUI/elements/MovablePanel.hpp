@@ -37,26 +37,28 @@ class Window;
 class MovablePanel: public BasePanel {
 public:
 	enum MovablePanelType {
-		GRAPHPANEL, FPSPANEL, DETAILSPANEL
+		GRAPHPANEL, FPSPANEL, DETAILSPANEL, NEW_POPULATION_PANEL
 	};
 	MovablePanel(const std::string name, MovablePanelType type);
 
 	void initialize(const int left, const int top, const int width,
-	const int height, const bool hasTitleBar);
+		const int height, const bool hasTitleBar);
 
-	~MovablePanel(void);
+	virtual ~MovablePanel(void);
 
 	void update(); /**!< Updates the movable panel. */
 
-	void showTitleBar(); /**!< Show the title bar. */
+	virtual void showTitleBar(); /**!< Show the title bar. */
 
-	void hideTitleBar(); /**!< Hide the title bar. */
+	virtual void hideTitleBar(); /**!< Hide the title bar. */
 
 	MovablePanelType getType() const {
 		return mType;
 	}
 
 	//Accessor methods
+protected:
+	CEGUI::Window* mBaseWidget;
 
 private:
 	CEGUI::USize mSizeWithToolbar;

@@ -41,14 +41,6 @@ void ParamsPanel::initialize(const int left, const int top, const int width,
 
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
-	CEGUI::Window* innerWidget =
-		static_cast<CEGUI::FrameWindow*>(wmgr.createWindow(
-			CEGUIConfiguration::CEGUI_SCHEME + "/GroupBox", mName + "_Panel"));
-	innerWidget->setText(mName);
-	innerWidget->setSize(
-		CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, height)));
-	mFrameWindow->addChild(innerWidget);
-
 	// Items
 	// + Names
 	mTextBoxLabel = wmgr.createWindow(
@@ -63,7 +55,7 @@ void ParamsPanel::initialize(const int left, const int top, const int width,
 
 	mTextBoxLabel->setPosition(
 		CEGUI::UVector2(CEGUI::UDim(0, 0), CEGUI::UDim(0, 0)));
-	innerWidget->addChild(mTextBoxLabel);
+	mBaseWidget->addChild(mTextBoxLabel);
 
 	// + Values
 	mTextBoxValues = wmgr.createWindow(
@@ -81,7 +73,7 @@ void ParamsPanel::initialize(const int left, const int top, const int width,
 			CEGUI::UDim(0,
 				(int) (CEGUIConfiguration::INFOPANEL_LEFT_COL_WIDTH
 					* (float) (width))), CEGUI::UDim(0, 0)));
-	innerWidget->addChild(mTextBoxValues);
+	mBaseWidget->addChild(mTextBoxValues);
 
 	std::string labelText = "";
 	std::string valuesText = "";

@@ -28,32 +28,39 @@
 //## utils headers
 
 MovablePanel::MovablePanel(const std::string name, MovablePanelType type) :
-BasePanel(name), mType(type) {
+	BasePanel(name), mType(type), mBaseWidget(NULL) {
 }
 
 void MovablePanel::initialize(const int left, const int top, const int width,
-const int height, const bool hasTitleBar) {
+	const int height, const bool hasTitleBar) {
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
+	mBaseWidget = static_cast<CEGUI::FrameWindow*>(wmgr.createWindow(
+		CEGUIConfiguration::CEGUI_SCHEME + "/GroupBox", mName + "_Panel"));
+	mBaseWidget->setText(mName);
+	mBaseWidget->setSize(
+		CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, height)));
+	mFrameWindow->addChild(mBaseWidget);
+
 	mSizeWithoutToolbar = CEGUI::USize(
-	CEGUI::UDim(0, width + 2 * CEGUIConfiguration::INFOPANEL_BORDER),
-	CEGUI::UDim(0, height + 2 * CEGUIConfiguration::INFOPANEL_BORDER));
+		CEGUI::UDim(0, width + 2 * CEGUIConfiguration::INFOPANEL_BORDER),
+		CEGUI::UDim(0, height + 2 * CEGUIConfiguration::INFOPANEL_BORDER));
 
 	mSizeWithToolbar = CEGUI::USize(
-	CEGUI::UDim(0, width + 2 * CEGUIConfiguration::INFOPANEL_BORDER),
-	CEGUI::UDim(0,
-	2 * CEGUIConfiguration::INFOPANEL_CAPTION + height
-	+ 2 * CEGUIConfiguration::INFOPANEL_BORDER));
+		CEGUI::UDim(0, width + 2 * CEGUIConfiguration::INFOPANEL_BORDER),
+		CEGUI::UDim(0,
+			2 * CEGUIConfiguration::INFOPANEL_CAPTION + height
+				+ 2 * CEGUIConfiguration::INFOPANEL_BORDER));
 
 	if (hasTitleBar) {
 		mFrameWindow->setPosition(
-		CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
+			CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
 		// set widget size
 		mFrameWindow->setSize(mSizeWithToolbar);
 		showTitleBar();
 	} else {
 		mFrameWindow->setPosition(
-		CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
+			CEGUI::UVector2(CEGUI::UDim(0, left), CEGUI::UDim(0, top)));
 		// set widget size
 		mFrameWindow->setSize(mSizeWithoutToolbar);
 		hideTitleBar();
@@ -70,6 +77,7 @@ void MovablePanel::update() {
 }
 
 void MovablePanel::showTitleBar() {
+	mBaseWidget->setText("");
 	mFrameWindow->setSizingEnabled(true);
 	mFrameWindow->setTitleBarEnabled(true);
 	mFrameWindow->setSize(mSizeWithToolbar);
@@ -77,6 +85,7 @@ void MovablePanel::showTitleBar() {
 }
 
 void MovablePanel::hideTitleBar() {
+	mBaseWidget->setText(mName);
 	mFrameWindow->setSizingEnabled(false);
 	mFrameWindow->setTitleBarEnabled(false);
 	mFrameWindow->setSize(mSizeWithoutToolbar);

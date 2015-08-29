@@ -43,9 +43,9 @@ public:
 	~ParamsPanel(void);
 
 	void initialize(const int left, const int top, const int width,
-	const bool hasTitleBar, VectorStringPairs items);
+		const bool hasTitleBar, VectorStringPairs items);
 	void setParamValue(const int index, const std::string value,
-	const bool autoUpdate = true);
+		const bool autoUpdate = true);
 	std::string getParamValue(const int index);
 	void update();
 	size_t size();
