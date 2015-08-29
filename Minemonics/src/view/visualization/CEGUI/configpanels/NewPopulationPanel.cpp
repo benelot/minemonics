@@ -1,6 +1,4 @@
 //# corresponding header
-#include <view/visualization/CEGUI/elements/configpanels/NewPopulationPanel.hpp>
-//## system headers
 #include <stddef.h>
 #include <string>
 #include <vector>
@@ -20,6 +18,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp>
 
 //## controller headers
 //## model headers
@@ -69,8 +68,8 @@ NewPopulationPanel::NewPopulationPanel(const int left, const int top,
 					* (float) (width))), CEGUI::UDim(0, 0)));
 	mBaseWidget->addChild(mTextBoxValues);
 
-	std::string labelText = "";
-	std::string valuesText = "";
+	std::string labelText = "Hello";
+	std::string valuesText = "World";
 
 	mTextBoxLabel->setText(labelText);
 	mTextBoxValues->setText(valuesText);

@@ -284,15 +284,16 @@ set(VIEWHDRS
 	
     ## CEGUI
 	./view/visualization/CEGUI/GUISheetHandler.hpp
-	./view/visualization/CEGUI/elements/MenuBar.hpp
-	./view/visualization/CEGUI/elements/BasePanel.hpp
-	./view/visualization/CEGUI/elements/MovablePanel.hpp
-    ./view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp
-	./view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp
-	./view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp
-	./view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp
-    ./view/visualization/CEGUI/elements/ShowCasePanel.hpp
-    ./view/visualization/CEGUI/elements/configpanels/NewPopulationPanel.hpp
+	./view/visualization/CEGUI/MenuBar.hpp
+	./view/visualization/CEGUI/BasePanel.hpp
+	./view/visualization/CEGUI/MovablePanel.hpp
+    ./view/visualization/CEGUI/infopanels/ParamsPanel.hpp
+	./view/visualization/CEGUI/infopanels/FPSPanel.hpp
+	./view/visualization/CEGUI/infopanels/DetailsPanel.hpp
+	./view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp
+    ./view/visualization/CEGUI/ShowCasePanel.hpp
+    ./view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp
+    ./view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp
     	
     ## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
@@ -358,15 +359,16 @@ set(VIEWSRCS
 	
 	## CEGUI
 	./view/visualization/CEGUI/GUISheetHandler.cpp
-	./view/visualization/CEGUI/elements/MenuBar.cpp
-	./view/visualization/CEGUI/elements/BasePanel.cpp
-	./view/visualization/CEGUI/elements/MovablePanel.cpp
-	./view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp
-	./view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp
-	./view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp
-	./view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp
-	./view/visualization/CEGUI/elements/ShowCasePanel.cpp
-    ./view/visualization/CEGUI/elements/configpanels/NewPopulationPanel.cpp
+	./view/visualization/CEGUI/MenuBar.cpp
+	./view/visualization/CEGUI/BasePanel.cpp
+	./view/visualization/CEGUI/MovablePanel.cpp
+	./view/visualization/CEGUI/infopanels/ParamsPanel.cpp
+	./view/visualization/CEGUI/infopanels/FPSPanel.cpp
+	./view/visualization/CEGUI/infopanels/DetailsPanel.cpp
+	./view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp
+	./view/visualization/CEGUI/ShowCasePanel.cpp
+	./view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp
+    ./view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp
 
 	## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp

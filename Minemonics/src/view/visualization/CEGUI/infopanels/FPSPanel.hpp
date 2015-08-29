@@ -1,8 +1,8 @@
-#ifndef VIEW_VISUALIZATION_CEGUI_ELEMENTS_INFOPANELS_FPSPANEL_HPP_
-#define VIEW_VISUALIZATION_CEGUI_ELEMENTS_INFOPANELS_FPSPANEL_HPP_
+#ifndef VIEW_VISUALIZATION_CEGUI_INFOPANELS_FPSPANEL_HPP_
+#define VIEW_VISUALIZATION_CEGUI_INFOPANELS_FPSPANEL_HPP_
 
 //# corresponding headers
-#include <view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/ParamsPanel.hpp>
 
 //# forward declarations
 //# system headers
@@ -29,4 +29,4 @@ public:
 	virtual ~FPSPanel();
 };
 
-#endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_INFOPANELS_FPSPANEL_HPP_ */
+#endif /* VIEW_VISUALIZATION_CEGUI_INFOPANELS_FPSPANEL_HPP_ */

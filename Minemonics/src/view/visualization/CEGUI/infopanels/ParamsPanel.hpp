@@ -2,7 +2,7 @@
 #define VIEW_VISUALIZATION_PANELS_PARAMSPANEL_H_
 
 //# corresponding header
-#include <view/visualization/CEGUI/elements/MovablePanel.hpp>
+#include <view/visualization/CEGUI/MovablePanel.hpp>
 
 //# forward declarations
 #pragma once

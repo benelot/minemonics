@@ -31,9 +31,9 @@ class OgreRenderer;
 //## view headers
 #include <view/visualization/CEGUI/GUISheetHandler.hpp>
 #include <view/visualization/overlay/InfoOverlay.hpp>
-#include <view/visualization/CEGUI/elements/MenuBar.hpp>
-#include <view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp>
-#include <view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp>
+#include <view/visualization/CEGUI/MenuBar.hpp>
+#include <view/visualization/CEGUI/infopanels/FPSPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/DetailsPanel.hpp>
 
 //## utils headers
 #include <utils/logging/Logger.hpp>

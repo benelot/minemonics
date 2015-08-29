@@ -1,8 +1,7 @@
 //# corresponding headers
-#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
 
-//# forward declarations
-//# system headers
+//## system headers
 #include <stddef.h>
 #include <cstdio>
 #include <string>

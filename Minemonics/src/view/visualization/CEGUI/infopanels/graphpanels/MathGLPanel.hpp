@@ -1,7 +1,7 @@
 #ifndef VIEW_VISUALIZATION_PANELS_MATHGLPANEL_H_
 #define VIEW_VISUALIZATION_PANELS_MATHGLPANEL_H_
 //# corresponding headers
-#include <view/visualization/CEGUI/elements/MovablePanel.hpp>
+#include <view/visualization/CEGUI/MovablePanel.hpp>
 
 //# forward declarations
 class ViewController;

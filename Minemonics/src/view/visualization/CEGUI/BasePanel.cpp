@@ -1,7 +1,4 @@
 //# corresponding header
-#include <view/visualization/CEGUI/elements/BasePanel.hpp>
-
-//## system headers
 #include <stddef.h>
 #include <string>
 #include <vector>
@@ -19,6 +16,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <view/visualization/CEGUI/BasePanel.hpp>
 
 //## controller headers
 //## model headers

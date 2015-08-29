@@ -1,8 +1,8 @@
-#ifndef VIEW_VISUALIZATION_CEGUI_ELEMENTS_MOVABLEPANEL_HPP_
-#define VIEW_VISUALIZATION_CEGUI_ELEMENTS_MOVABLEPANEL_HPP_
+#ifndef VIEW_VISUALIZATION_CEGUI_MOVABLEPANEL_HPP_
+#define VIEW_VISUALIZATION_CEGUI_MOVABLEPANEL_HPP_
 
 //# corresponding header
-#include <view/visualization/CEGUI/elements/BasePanel.hpp>
+#include <view/visualization/CEGUI/BasePanel.hpp>
 
 //# forward declarations
 #pragma once
@@ -37,7 +37,11 @@ class Window;
 class MovablePanel: public BasePanel {
 public:
 	enum MovablePanelType {
-		GRAPHPANEL, FPSPANEL, DETAILSPANEL, NEW_POPULATION_PANEL
+		GRAPHPANEL,
+		FPSPANEL,
+		DETAILSPANEL,
+		NEW_POPULATION_PANEL,
+		NEW_PLANET_PANEL
 	};
 	MovablePanel(const std::string name, MovablePanelType type);
 
@@ -66,4 +70,4 @@ private:
 	MovablePanelType mType;
 };
 
-#endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_MOVABLEPANEL_HPP_ */
+#endif /* VIEW_VISUALIZATION_CEGUI_MOVABLEPANEL_HPP_ */

@@ -1,6 +1,8 @@
 //# corresponding headers
 //# forward declarations
 //# system headers
+#include <view/visualization/CEGUI/infopanels/FPSPanel.hpp>
+#include <view/visualization/CEGUI/MovablePanel.hpp>
 #include <string>
 #include <utility>
 #include <vector>
@@ -14,8 +16,6 @@
 //## controller headers
 //## model headers
 //## view headers
-#include <view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp>
-#include <view/visualization/CEGUI/elements/MovablePanel.hpp>
 
 //## utils headers
 

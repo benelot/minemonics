@@ -1,7 +1,4 @@
 //# corresponding header
-#include <view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp>
-
-//## system headers
 #include <stddef.h>
 #include <string>
 #include <vector>
@@ -23,6 +20,7 @@
 
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <view/visualization/CEGUI/infopanels/ParamsPanel.hpp>
 //## controller headers
 //## model headers
 //## view headers

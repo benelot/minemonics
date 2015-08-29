@@ -79,7 +79,7 @@
 #include <model/universe/CollisionHandler.hpp>
 
 //## view headers
-#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
 
 //## utils headers
 #include <utils/Randomness.hpp>

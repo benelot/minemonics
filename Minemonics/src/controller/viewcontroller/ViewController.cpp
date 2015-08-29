@@ -35,9 +35,10 @@
 //## controller headers
 //## model headers
 //## view headers
-#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
-#include <view/visualization/CEGUI/elements/ShowCasePanel.hpp>
-#include <view/visualization/CEGUI/elements/configpanels/NewPopulationPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
+#include <view/visualization/CEGUI/ShowCasePanel.hpp>
 
 //## utils headers
 
@@ -134,12 +135,11 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 //	mMovablePanels.push_back(
 //	new MathGLPanel(400, 400, 400, 400, this,
 //	SimulationManager::getSingleton()->getRoot(), 400, 400));
-
+//
 //	mMovablePanels.push_back(
 //		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));
 
-	mMovablePanels.push_back(
-		new NewPopulationPanel(40, 50, "New Population", 400, 300));
+	mMovablePanels.push_back(new NewPlanetPanel(40, 50, "New Planet"));
 
 	// add all movable panels to the layout
 	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();

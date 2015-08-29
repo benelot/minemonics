@@ -22,8 +22,8 @@
 //## utils headers
 
 Environment::Environment() :
-		mEnvironmentType(UNKNOWN_ENVIRONMENT_TYPE), mEnvironmentGraphics(
-		NULL), mEnvironmentModel(NULL) {
+	mEnvironmentType(UNKNOWN_ENVIRONMENT_TYPE), mEnvironmentGraphics(NULL), mEnvironmentModel(
+		NULL) {
 }
 
 Environment::~Environment() {

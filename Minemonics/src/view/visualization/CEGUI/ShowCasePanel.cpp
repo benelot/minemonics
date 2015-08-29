@@ -1,7 +1,4 @@
 //# corresponding header
-#include <view/visualization/CEGUI/elements/ShowCasePanel.hpp>
-
-//## system headers
 #include <stddef.h>
 #include <string>
 #include <vector>
@@ -40,6 +37,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <view/visualization/CEGUI/ShowCasePanel.hpp>
 
 //## controller headers
 //## model headers
@@ -296,7 +294,7 @@ ShowCasePanel::ShowCasePanel(const int left, const int top,
 //	uint idCombobox = combobox->getSelectedItem()->getID(); // Retrieve the ID of the selected combobox item
 //	combobox->setPosition(
 //		CEGUI::UVector2(CEGUI::UDim(0.3f, 0.0f), CEGUI::UDim(0.7f, 0.0f)));
-//	innerWidget->addChild(combobox);
+//	mBaseWidget->addChild(combobox);
 //
 //	/* MultiColumnList */
 //	CEGUI::MultiColumnList* multiColumnList =

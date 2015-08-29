@@ -49,6 +49,11 @@ public:
 	btMultiBody* createFeatherstoneMultiBody(int numLinks, const btVector3 &basePosition, const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents, bool spherical, bool floating);
 
 	void addColliders(btMultiBody *pMultiBody, const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents);
+
+private:
+	double rotate;
+	double sign;
+	btVector3 integrativeError;
 };
 
 #endif /* CONTROLLER_SNAKE_SNAKE_HPP_ */

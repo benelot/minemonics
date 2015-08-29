@@ -1,8 +1,4 @@
 //# corresponding headers
-#include <view/visualization/CEGUI/elements/MenuBar.hpp>
-
-//# forward declarations
-//# system headers
 #include <stddef.h>
 
 //## controller headers
@@ -21,6 +17,7 @@
 //## configuration headers
 #include <configuration/GUIConfiguration.hpp>
 #include <configuration/CEGUIConfiguration.hpp>
+#include <view/visualization/CEGUI/MenuBar.hpp>
 
 //## controller headers
 //## model headers
