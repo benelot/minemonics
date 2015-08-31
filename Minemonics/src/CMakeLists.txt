@@ -287,6 +287,7 @@ set(VIEWHDRS
 	./view/visualization/CEGUI/MenuBar.hpp
 	./view/visualization/CEGUI/BasePanel.hpp
 	./view/visualization/CEGUI/MovablePanel.hpp
+	./view/visualization/CEGUI/elements/BoxSlider.hpp
     ./view/visualization/CEGUI/infopanels/ParamsPanel.hpp
 	./view/visualization/CEGUI/infopanels/FPSPanel.hpp
 	./view/visualization/CEGUI/infopanels/DetailsPanel.hpp
@@ -362,6 +363,7 @@ set(VIEWSRCS
 	./view/visualization/CEGUI/MenuBar.cpp
 	./view/visualization/CEGUI/BasePanel.cpp
 	./view/visualization/CEGUI/MovablePanel.cpp
+	./view/visualization/CEGUI/elements/BoxSlider.cpp
 	./view/visualization/CEGUI/infopanels/ParamsPanel.cpp
 	./view/visualization/CEGUI/infopanels/FPSPanel.cpp
 	./view/visualization/CEGUI/infopanels/DetailsPanel.cpp

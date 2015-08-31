@@ -28,7 +28,7 @@ public:
 
 	static const std::string CEGUI_SCHEME;
 
-	static const float NEW_PLANET_PANEL_LEFT_COL_WIDTH = 0.3;
+	static const float NEW_PLANET_PANEL_LEFT_COL_WIDTH = 0.25;
 
 	static const float NEW_PLANET_PANEL_RIGHT_COL_WIDTH = 0.7;
 

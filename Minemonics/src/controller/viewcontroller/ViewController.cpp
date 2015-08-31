@@ -139,7 +139,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 //	mMovablePanels.push_back(
 //		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));
 
-	mMovablePanels.push_back(new NewPlanetPanel(40, 50, "New Planet"));
+//	mMovablePanels.push_back(new NewPlanetPanel(40, 50, "New Planet"));
 
 	// add all movable panels to the layout
 	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();

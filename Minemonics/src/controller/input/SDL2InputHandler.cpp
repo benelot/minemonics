@@ -97,7 +97,9 @@ void SDL2InputHandler::injectInput() {
 			/* key up */
 			/* key down */
 		case SDL_KEYDOWN: {
-			if (!CEGUIInputHandler::acceptsInput()) {
+			if (!CEGUIInputHandler::acceptsInput()
+				|| !CEGUIInputHandler::isCharacter(
+					InputUtils::convertToOgre3D(e.key.keysym.sym))) {
 				CEGUIInputHandler::keyPressed(
 					InputUtils::convertToOgre3D(e.key.keysym.sym));
 			}

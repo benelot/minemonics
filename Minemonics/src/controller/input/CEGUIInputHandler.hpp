@@ -118,6 +118,8 @@ protected:
 	bool injectCharacter(char* character) const;
 
 	bool acceptsInput();
+
+	bool isCharacter(const ApplicationKeycode::Keycode key);
 private:
 	/**
 	 * The boost logger.

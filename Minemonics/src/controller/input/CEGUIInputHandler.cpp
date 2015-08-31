@@ -439,6 +439,8 @@ bool CEGUIInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		break;
 	case ApplicationKeycode::APPK_r:
 		break;
+	case ApplicationKeycode::APPK_t:
+		break;
 	case ApplicationKeycode::APPK_y:
 		// return CEGUI::Key::Y;
 		break;
@@ -464,6 +466,8 @@ bool CEGUIInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 		// return CEGUI::Key::D;
 		break;
 	case ApplicationKeycode::APPK_f:
+		break;
+	case ApplicationKeycode::APPK_g:
 		break;
 	case ApplicationKeycode::APPK_h:
 		// return CEGUI::Key::H;
@@ -832,4 +836,133 @@ bool CEGUIInputHandler::acceptsInput() {
 bool CEGUIInputHandler::injectCharacter(char* character) const {
 	return CEGUI::System::getSingleton().getDefaultGUIContext().injectChar(
 		character[0]);
+}
+
+bool CEGUIInputHandler::isCharacter(const ApplicationKeycode::Keycode key) {
+	switch (key) {
+	case ApplicationKeycode::APPK_1:
+		// return CEGUI::Key::One;
+	case ApplicationKeycode::APPK_2:
+		// return CEGUI::Key::Two;
+	case ApplicationKeycode::APPK_3:
+		// return CEGUI::Key::Three;
+	case ApplicationKeycode::APPK_4:
+		// return CEGUI::Key::Four;
+	case ApplicationKeycode::APPK_5:
+		// return CEGUI::Key::Five;
+	case ApplicationKeycode::APPK_6:
+		// return CEGUI::Key::Six;
+	case ApplicationKeycode::APPK_7:
+		// return CEGUI::Key::Seven;
+	case ApplicationKeycode::APPK_8:
+		// return CEGUI::Key::Eight;
+	case ApplicationKeycode::APPK_9:
+		// return CEGUI::Key::Nine;
+	case ApplicationKeycode::APPK_0:
+		// return CEGUI::Key::Zero;
+	case ApplicationKeycode::APPK_q:
+		// return CEGUI::Key::Q;
+	case ApplicationKeycode::APPK_w:
+		// return CEGUI::Key::W;
+	case ApplicationKeycode::APPK_e:
+		// return CEGUI::Key::E;
+	case ApplicationKeycode::APPK_r:
+	case ApplicationKeycode::APPK_t:
+	case ApplicationKeycode::APPK_y:
+		// return CEGUI::Key::Y;
+	case ApplicationKeycode::APPK_u:
+		// return CEGUI::Key::U;
+	case ApplicationKeycode::APPK_i:
+		// return CEGUI::Key::I;
+	case ApplicationKeycode::APPK_o:
+		// return CEGUI::Key::O;
+	case ApplicationKeycode::APPK_p:
+		// return CEGUI::Key::P;
+	case ApplicationKeycode::APPK_a:
+		// return CEGUI::Key::A;
+	case ApplicationKeycode::APPK_s:
+		// return CEGUI::Key::S;
+	case ApplicationKeycode::APPK_d:
+		// return CEGUI::Key::D;
+	case ApplicationKeycode::APPK_f:
+	case ApplicationKeycode::APPK_g:
+	case ApplicationKeycode::APPK_h:
+		// return CEGUI::Key::H;
+	case ApplicationKeycode::APPK_j:
+		// return CEGUI::Key::J;
+	case ApplicationKeycode::APPK_k:
+		// return CEGUI::Key::K;
+	case ApplicationKeycode::APPK_l:
+		// return CEGUI::Key::L;
+	case ApplicationKeycode::APPK_z:
+		// return CEGUI::Key::Z;
+	case ApplicationKeycode::APPK_x:
+		// return CEGUI::Key::X;
+	case ApplicationKeycode::APPK_c:
+		// return CEGUI::Key::C;
+	case ApplicationKeycode::APPK_v:
+		// return CEGUI::Key::V;
+	case ApplicationKeycode::APPK_b:
+		// return CEGUI::Key::B;
+	case ApplicationKeycode::APPK_n:
+		// return CEGUI::Key::N;
+	case ApplicationKeycode::APPK_m:
+		// return CEGUI::Key::M;
+	case ApplicationKeycode::APPK_COMMA:
+		// return CEGUI::Key::Comma;
+	case ApplicationKeycode::APPK_PERIOD:
+		// return CEGUI::Key::Period;
+	case ApplicationKeycode::APPK_SLASH:
+		// return CEGUI::Key::Slash;
+	case ApplicationKeycode::APPK_BACKSLASH:
+		// return CEGUI::Key::Backslash;
+	case ApplicationKeycode::APPK_MINUS:
+		// return CEGUI::Key::Minus;
+	case ApplicationKeycode::APPK_EQUALS:
+		// return CEGUI::Key::Equals;
+	case ApplicationKeycode::APPK_SEMICOLON:
+		// return CEGUI::Key::Semicolon;
+	case ApplicationKeycode::APPK_LEFTBRACKET:
+		// return CEGUI::Key::LeftBracket;
+	case ApplicationKeycode::APPK_RIGHTBRACKET:
+		// return CEGUI::Key::RightBracket;
+	case ApplicationKeycode::APPK_QUOTE:
+		// return CEGUI::Key::Apostrophe;
+	case ApplicationKeycode::APPK_BACKQUOTE:
+		// return CEGUI::Key::Grave;
+	case ApplicationKeycode::APPK_KP_0:
+		// return CEGUI::Key::Numpad0;
+	case ApplicationKeycode::APPK_KP_1:
+		// return CEGUI::Key::Numpad1;
+	case ApplicationKeycode::APPK_KP_2:
+		// return CEGUI::Key::Numpad2;
+	case ApplicationKeycode::APPK_KP_3:
+		// return CEGUI::Key::Numpad3;
+	case ApplicationKeycode::APPK_KP_4:
+		// return CEGUI::Key::Numpad4;
+	case ApplicationKeycode::APPK_KP_5:
+		// return CEGUI::Key::Numpad5;
+	case ApplicationKeycode::APPK_KP_6:
+		// return CEGUI::Key::Numpad6;
+	case ApplicationKeycode::APPK_KP_7:
+		// return CEGUI::Key::Numpad7;
+	case ApplicationKeycode::APPK_KP_8:
+		// return CEGUI::Key::Numpad8;
+	case ApplicationKeycode::APPK_KP_9:
+		// return CEGUI::Key::Numpad9;
+	case ApplicationKeycode::APPK_KP_PERIOD:
+		// return CEGUI::Key::Decimal;
+	case ApplicationKeycode::APPK_KP_PLUS:
+		// return CEGUI::Key::Add;
+	case ApplicationKeycode::APPK_KP_MINUS:
+		// return CEGUI::Key::Subtract;
+	case ApplicationKeycode::APPK_KP_MULTIPLY:
+		// return CEGUI::Key::Multiply;
+	case ApplicationKeycode::APPK_KP_DIVIDE:
+		return true;
+		break;
+	default:
+		return false;
+		break;
+	}
 }

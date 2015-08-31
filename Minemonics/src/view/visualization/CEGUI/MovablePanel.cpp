@@ -12,6 +12,7 @@
 #include <CEGUI/UDim.h>
 #include <CEGUI/Vector.h>
 #include <CEGUI/widgets/FrameWindow.h>
+#include <CEGUI/widgets/GroupBox.h>
 #include <CEGUI/WindowManager.h>
 
 //# custom headers
@@ -33,7 +34,7 @@ void MovablePanel::initialize(const int left, const int top, const int width,
 	const int height, const bool hasTitleBar) {
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
-	mBaseWidget = static_cast<CEGUI::FrameWindow*>(wmgr.createWindow(
+	mBaseWidget = static_cast<CEGUI::GroupBox*>(wmgr.createWindow(
 		CEGUIConfiguration::CEGUI_SCHEME + "/GroupBox", mName + "_Panel"));
 	mBaseWidget->setText(mName);
 	mBaseWidget->setSize(
