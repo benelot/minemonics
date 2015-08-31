@@ -91,9 +91,9 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-mStateHandler(), mInputHandler(), mSdlWindow(NULL), mSimulationSpeed(
-PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(&mViewController), mSun(
-NULL) {
+	mStateHandler(), mInputHandler(), mSdlWindow(NULL), mSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(
+		&mViewController), mSun(NULL) {
 	// Initialize the singleton
 	mSimulationManager = this;
 
@@ -154,7 +154,7 @@ void SimulationManager::setupView(void) {
 
 	// Alter the camera aspect ratio to match the viewport
 	camera->setAspectRatio(
-	Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+		Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 }
 
 //-------------------------------------------------------------------------------------
@@ -168,7 +168,7 @@ void SimulationManager::createScene(void) {
 
 	// Set render target with the current application name
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
-	ApplicationConfiguration::APPLICATION_TITLE);
+		ApplicationConfiguration::APPLICATION_TITLE);
 
 	// initialize GUI and views
 	mViewController.initialize(renderTarget, &mStateHandler);
@@ -191,23 +191,24 @@ void SimulationManager::createScene(void) {
 	// We create the evaluation scene defined by the planet to be evaluated
 	// ###################
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Setup evaluation environment...";
+		<< "Setup evaluation environment...";
 
 	// Set default ambient light
 	mSceneMgr->setAmbientLight(
-	Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
-	EnvironmentConfiguration::AMBIENT_G, EnvironmentConfiguration::AMBIENT_B));
+		Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
+			EnvironmentConfiguration::AMBIENT_G,
+			EnvironmentConfiguration::AMBIENT_B));
 
 	// either create a skydome or a skyplane
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
 
 	mSceneMgr->setShadowTechnique(
-	(mViewController.doesShowShadows()) ?
-	Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
+		(mViewController.doesShowShadows()) ?
+			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
 
 	//add some filtering to reduce the moire effect
 	Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(
-	Ogre::TFO_ANISOTROPIC);
+		Ogre::TFO_ANISOTROPIC);
 	Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(8);
 
 //  Create skyplane
@@ -235,25 +236,25 @@ void SimulationManager::createScene(void) {
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
-//	// create a planet called earth
-//	Planet* earth = new Planet(Environment::PLANE, 2000, mSun);
-//
-//	// add earth to universe
-//	mUniverse.addPlanet(earth);
-//
-//	// create a population
-//	Population* earthPopulation = new Population();
-//	earthPopulation->initialize(earth, 100,
-//	EvolutionConfiguration::ROOT_POSITION);
-//
-//	// add earth population to earth
-//	earth->addPopulation(earthPopulation);
-//
-//	Epoch* oneEpoch = new Epoch();
-//	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
-//	oneEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
-//
-//	earth->addEpoch(oneEpoch);
+	// create a planet called earth
+	Planet* earth = new Planet(Environment::PLANE, 2000, mSun);
+
+	// add earth to universe
+	mUniverse.addPlanet(earth);
+
+	// create a population
+	Population* earthPopulation = new Population();
+	earthPopulation->initialize(earth, 100,
+		EvolutionConfiguration::ROOT_POSITION);
+
+	// add earth population to earth
+	earth->addPopulation(earthPopulation);
+
+	Epoch* oneEpoch = new Epoch();
+	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
+	oneEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
+
+	earth->addEpoch(oneEpoch);
 
 	// create a population
 //	Population* earth2Population = new Population();
@@ -279,7 +280,7 @@ void SimulationManager::createScene(void) {
 //	mars->addPopulation(marsPopulation);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Setup evaluation environment...done.";
+		<< "Setup evaluation environment...done.";
 	// request a state change saying that the simulation is running
 	mStateHandler.requestStateChange(StateHandler::SIMULATION);
 }
@@ -320,7 +321,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	// shutdown the application if the application has initiated shutdown
 	if (mWindow->isClosed()
-	|| mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) {
+		|| mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) {
 
 		//shutdown the video writer if it is still running
 		if (mVideoWriter.isInitialized()) {
@@ -331,8 +332,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	//turn on or off the shadows.
 	mSceneMgr->setShadowTechnique(
-	(mViewController.doesShowShadows()) ?
-	Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
+		(mViewController.doesShowShadows()) ?
+			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
 
 	//#############
 	// Physics handling part
@@ -355,16 +356,16 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		mUniverse.setSimulationSpeed(mSimulationSpeed);
 
 		if (mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09
-		|| mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_10) {
+			|| mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_10) {
 			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK
-			- mLastGraphicsTick - mLastInputTick;
+				- mLastGraphicsTick - mLastInputTick;
 
 			mPhysicsStepStart = time.getMilliseconds();
 
 			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) {
 				// update the universe
 				mUniverse.update(
-				PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 				mPhysicsStepEnd = time.getMilliseconds();
 			}
 		} else {
@@ -376,12 +377,12 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 			mAccumulator += mFrameTime;
 
 			while (mAccumulator
-			>= PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI) {
+				>= PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI) {
 				// update the universe
 				mUniverse.update(
-				PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 				mAccumulator -=
-				PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI;
+					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI;
 			}
 		}
 
@@ -407,7 +408,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		mLastInputTick = mGraphicsStart - mInputStart;
 
 	} while (mStateHandler.getCurrentState()
-	== StateHandler::HEADLESS_SIMULATION);
+		== StateHandler::HEADLESS_SIMULATION);
 
 	//#############
 	// Graphics part
@@ -428,7 +429,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
 	std::vector<MovablePanel*>::iterator it =
-	mViewController.getMovablePanels().begin();
+		mViewController.getMovablePanels().begin();
 	for (; it != mViewController.getMovablePanels().end(); it++) {
 		switch ((*it)->getType()) {
 		case MovablePanel::GRAPHPANEL: {
@@ -447,9 +448,10 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 		{
 			if (mViewController.getFpsPanel()->size() == 3) {
 				mViewController.getFpsPanel()->setParamValue(0,
-				Ogre::StringConverter::toString(mWindow->getLastFPS()), true);
+					Ogre::StringConverter::toString(mWindow->getLastFPS()),
+					true);
 				mViewController.getFpsPanel()->setParamValue(1,
-				Ogre::StringConverter::toString(mRuntime), true);
+					Ogre::StringConverter::toString(mRuntime), true);
 
 //				if (mTerrain->mEnvironmentType == Environment::HILLS) {
 //					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
@@ -472,17 +474,17 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 			} else {
 				Ogre::RenderTarget::FrameStats fs = mWindow->getStatistics();
 				mViewController.getFpsPanel()->setParamValue(0,
-				Ogre::StringConverter::toString(fs.lastFPS), false);
+					Ogre::StringConverter::toString(fs.lastFPS), false);
 				mViewController.getFpsPanel()->setParamValue(1,
-				Ogre::StringConverter::toString(fs.avgFPS), false);
+					Ogre::StringConverter::toString(fs.avgFPS), false);
 				mViewController.getFpsPanel()->setParamValue(2,
-				Ogre::StringConverter::toString(fs.bestFPS), false);
+					Ogre::StringConverter::toString(fs.bestFPS), false);
 				mViewController.getFpsPanel()->setParamValue(3,
-				Ogre::StringConverter::toString(fs.worstFPS), false);
+					Ogre::StringConverter::toString(fs.worstFPS), false);
 				mViewController.getFpsPanel()->setParamValue(4,
-				Ogre::StringConverter::toString(fs.triangleCount), false);
+					Ogre::StringConverter::toString(fs.triangleCount), false);
 				mViewController.getFpsPanel()->setParamValue(5,
-				Ogre::StringConverter::toString(fs.batchCount), true);
+					Ogre::StringConverter::toString(fs.batchCount), true);
 			}
 		}
 	}
@@ -490,33 +492,33 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
 		{
 			mViewController.getDetailsPanel()->setParamValue(0,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
-			false);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedPosition().x),
+				false);
 			mViewController.getDetailsPanel()->setParamValue(1,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
-			false);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedPosition().y),
+				false);
 			mViewController.getDetailsPanel()->setParamValue(2,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
-			false);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedPosition().z),
+				false);
 			mViewController.getDetailsPanel()->setParamValue(4,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
-			false);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedOrientation().w),
+				false);
 			mViewController.getDetailsPanel()->setParamValue(5,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
-			false);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedOrientation().x),
+				false);
 			mViewController.getDetailsPanel()->setParamValue(6,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
-			false);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedOrientation().y),
+				false);
 			mViewController.getDetailsPanel()->setParamValue(7,
-			Ogre::StringConverter::toString(
-			mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
-			true);
+				Ogre::StringConverter::toString(
+					mViewController.getCameraHandler().getCamera()->getDerivedOrientation().z),
+				true);
 		}
 	}
 }
@@ -527,7 +529,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
  */
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-	<< "Repositioning CEGUI pointer...";
+		<< "Repositioning CEGUI pointer...";
 	unsigned int width, height, depth;
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
@@ -537,9 +539,9 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 
 	// Align CEGUI mouse with SDL2 mouse
 	CEGUI::Vector2f mousePos =
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+		CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-	x - mousePos.d_x, y - mousePos.d_y);
+		x - mousePos.d_x, y - mousePos.d_y);
 
 	int wwidth, wheight;
 	SDL_GetWindowSize(mSdlWindow, &wwidth, &wheight);
@@ -550,7 +552,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 #endif
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-	<< "Notifying CEGUI of resize....";
+		<< "Notifying CEGUI of resize....";
 	mViewController.notifyDisplaySizeChanged(width, height);
 }
 
@@ -561,14 +563,14 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Window has gained focus...";
+			<< "Window has gained focus...";
 
 		// Align CEGUI mouse with SDL mouse
 		mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
-		mInputHandler.getMousePositionY());
+			mInputHandler.getMousePositionY());
 	} else {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Window has lost focus...";
+			<< "Window has lost focus...";
 	}
 }
 //-------------------------------------------------------------------------------------
@@ -599,7 +601,7 @@ bool SimulationManager::configure(void) {
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
-		"Cannot initialize SDL2!", "GraphicsSystem::initialize");
+			"Cannot initialize SDL2!", "GraphicsSystem::initialize");
 	}
 
 	// Show the configuration dialog and initialize the system
@@ -612,7 +614,7 @@ bool SimulationManager::configure(void) {
 	}
 
 	Ogre::ConfigOptionMap& cfgOpts =
-	mRoot->getRenderSystem()->getConfigOptions();
+		mRoot->getRenderSystem()->getConfigOptions();
 
 	mRoot->getRenderSystem()->setConfigOption("sRGB Gamma Conversion", "Yes");
 	mRoot->initialise(false);
@@ -637,7 +639,7 @@ bool SimulationManager::configure(void) {
 
 	//is the configuration in full screen?
 	bool fullscreen = (cfgOpts[OgreConf::FULL_SCREEN].currentValue
-	== OgreConf::YES);
+		== OgreConf::YES);
 
 	//if full screen
 	if (fullscreen) {
@@ -652,13 +654,13 @@ bool SimulationManager::configure(void) {
 
 	// create the SDL window
 	mSdlWindow = SDL_CreateWindow(
-	ApplicationConfiguration::APPLICATION_TITLE.c_str(), // window title
-	posX,               // initial x position
-	posY,               // initial y position
-	width,              // width, in pixels
-	height,             // height, in pixels
-	SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)
-	| SDL_WINDOW_RESIZABLE);
+		ApplicationConfiguration::APPLICATION_TITLE.c_str(), // window title
+		posX,               // initial x position
+		posY,               // initial y position
+		width,              // width, in pixels
+		height,             // height, in pixels
+		SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)
+			| SDL_WINDOW_RESIZABLE);
 
 	//Get the native window handle
 	SDL_SysWMinfo wmInfo;
@@ -666,7 +668,7 @@ bool SimulationManager::configure(void) {
 
 	if (SDL_GetWindowWMInfo(mSdlWindow, &wmInfo) == SDL_FALSE) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
-		"Couldn't get WM Info! (SDL2)", "GraphicsSystem::initialize");
+			"Couldn't get WM Info! (SDL2)", "GraphicsSystem::initialize");
 	}
 
 	Ogre::String winHandle;
@@ -690,19 +692,19 @@ bool SimulationManager::configure(void) {
 	case SDL_SYSWM_X11:
 		//required to make OGRE work on Linux
 		winHandle = Ogre::StringConverter::toString(
-		(unsigned long) wmInfo.info.x11.window);
+			(unsigned long) wmInfo.info.x11.window);
 		break;
 #endif
 	default:
 		// in case it can not recognize the windowing system
 		OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
-		"Unexpected WM! (SDL2)", "GraphicsSystem::initialize");
+			"Unexpected WM! (SDL2)", "GraphicsSystem::initialize");
 		break;
 	}
 
 	//put together the parameter list for the OGRE render window
 	params.insert(
-	std::make_pair("title", ApplicationConfiguration::APPLICATION_TITLE));
+		std::make_pair("title", ApplicationConfiguration::APPLICATION_TITLE));
 	params.insert(std::make_pair("gamma", "true"));
 	params.insert(std::make_pair("FSAA", cfgOpts["FSAA"].currentValue));
 	params.insert(std::make_pair("vsync", cfgOpts["VSync"].currentValue));
@@ -715,8 +717,8 @@ bool SimulationManager::configure(void) {
 
 	// create the OGRE render window
 	mWindow = Ogre::Root::getSingleton().createRenderWindow(
-	ApplicationConfiguration::APPLICATION_TITLE, width, height, fullscreen,
-	&params);
+		ApplicationConfiguration::APPLICATION_TITLE, width, height, fullscreen,
+		&params);
 	return true;
 }
 
@@ -735,9 +737,9 @@ extern "C" {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 #else
-int main(int argc, char *argv[])
+	int main(int argc, char *argv[])
 #endif
-{
+	{
 // Create application object
 	SimulationManager app;
 
@@ -746,7 +748,7 @@ int main(int argc, char *argv[])
 	} catch (Ogre::Exception& e) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		MessageBox(NULL, e.getFullDescription().c_str(),
-		"An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+			"An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
 		std::cerr << "An exception has occured: "
 		<< e.getFullDescription().c_str() << std::endl;

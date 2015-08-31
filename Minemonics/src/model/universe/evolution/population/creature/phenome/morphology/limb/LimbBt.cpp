@@ -39,22 +39,21 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbBt::LimbBt() :
-		LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
+	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
 		NULL), mInertia(0, 0, 0), mLink(NULL) {
 }
 
 LimbBt::LimbBt(const LimbBt& limbBt) {
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
 	initialize(limbBt.mWorld, limbBt.mCollisionShape->getUserPointer(),
-			limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
-			startTransform.getRotation(),
-			btVector3(limbBt.mInitialRelativeXPosition,
-					limbBt.mInitialRelativeYPosition,
-					limbBt.mInitialRelativeZPosition),
-			btQuaternion(limbBt.mInitialXOrientation,
-					limbBt.mInitialYOrientation, limbBt.mInitialZOrientation,
-					limbBt.mInitialWOrientation), limbBt.mDimensions,
-			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction, limbBt.mColor);
+		limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
+		startTransform.getRotation(),
+		btVector3(limbBt.mInitialRelativeXPosition,
+			limbBt.mInitialRelativeYPosition, limbBt.mInitialRelativeZPosition),
+		btQuaternion(limbBt.mInitialXOrientation, limbBt.mInitialYOrientation,
+			limbBt.mInitialZOrientation, limbBt.mInitialWOrientation),
+		limbBt.mDimensions, limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,
+		limbBt.mColor, limbBt.mIntraBodyColliding);
 
 	mInWorld = limbBt.mInWorld;
 	mInertia = limbBt.mInertia;
@@ -68,29 +67,30 @@ LimbBt::~LimbBt() {
 }
 
 void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
-		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-		const btQuaternion orientation, const btVector3 initialRelativePosition,
-		const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
-		const btScalar mass, const btScalar restitution,
-		const btScalar friction, const Ogre::ColourValue color) {
+	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+	const btQuaternion orientation, const btVector3 initialRelativePosition,
+	const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
+	const btScalar mass, const btScalar restitution, const btScalar friction,
+	const Ogre::ColourValue color, bool isIntraBodyColliding) {
 	mWorld = world;
 	mDimensions = dimensions;
 	mMass = mass;
 	mType = type;
+	mIntraBodyColliding = isIntraBodyColliding;
 	btVector3 halfExtents(dimensions.x * 0.5f, dimensions.y * 0.5f,
-			dimensions.z * 0.5f);
+		dimensions.z * 0.5f);
 	switch (type) {
 	case LimbPhysics::BLOCK:
 		mCollisionShape = new btBoxShape(halfExtents);
 		break;
 	case LimbPhysics::CAPSULE:
 		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x * 0.5f),
-				btScalar(dimensions.y));
+			btScalar(dimensions.y));
 		break;
 	case LimbPhysics::UNKNOWN:
 		std::cout << "##########################################\n"
-				<< " LimbBt received 'Unknown' as a limb type.\n"
-				<< "##########################################\n";
+			<< " LimbBt received 'Unknown' as a limb type.\n"
+			<< "##########################################\n";
 		exit(-1);
 	}
 
@@ -104,26 +104,26 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 
 	mMotionState = new btDefaultMotionState(startTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
-			mCollisionShape, mInertia);
+		mCollisionShape, mInertia);
 	mBody = new btRigidBody(rbInfo);
 	mBody->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 	mBody->setSleepingThresholds(
-			PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
-			PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
+		PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
+		PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
 	mBody->setActivationState(DISABLE_DEACTIVATION);
 
 	//to get custom collision callbacks in collisionhandler
 	mBody->setCollisionFlags(
-			mBody->getCollisionFlags()
-					| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+		mBody->getCollisionFlags()
+			| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 	//Set the friction and restitution/elasticity of the rigid body
 	mBody->setFriction(friction);
 	mBody->setRollingFriction(friction);
 	mBody->setRestitution(restitution);
 	mBody->setAnisotropicFriction(
-			mCollisionShape->getAnisotropicRollingFrictionDirection(),
-			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
+		mCollisionShape->getAnisotropicRollingFrictionDirection(),
+		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
 	calm();
 
@@ -141,6 +141,7 @@ void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	mInitialYOrientation = initialOrientation.getY();
 	mInitialZOrientation = initialOrientation.getZ();
 	mColor = color;
+	mIntraBodyColliding = isIntraBodyColliding;
 }
 
 btTransform LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
@@ -148,7 +149,7 @@ btTransform LimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 }
 
 btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
-		const btVector3 direction) {
+	const btVector3 direction) {
 	// the ray caster currently only finds the intersection
 	// when hitting the forward face of a triangle therefore,
 	//the ray has to come from the outside of the shape
@@ -157,7 +158,7 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 
 #ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
-			rayEnd, btVector3(1, 1, 0));
+		rayEnd, btVector3(1, 1, 0));
 #endif
 
 	btVector3 hitPosition = origin;
@@ -171,27 +172,27 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
 	rayCallback.m_collisionFilterGroup =
-			PhysicsConfiguration::COL_CREATURE_TESTRAY;
+		PhysicsConfiguration::COL_CREATURE_TESTRAY;
 	rayCallback.m_collisionFilterMask =
-			PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
+		PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
 
 //	std::cout << "Worldhandle:" << mWorld << std::endl;
 	mWorld->rayTest(rayStart, rayEnd, rayCallback);
-
 
 	if (rayCallback.hasHit()) {
 		hitPosition = rayStart.lerp(rayEnd, rayCallback.m_closestHitFraction);
 		hitNormal = rayCallback.m_hitNormalWorld;
 #ifndef EXCLUDE_FROM_TEST
-		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(hitPosition, 1,
-				btVector3(1, 0, 0));
-		SimulationManager::getSingleton()->getDebugDrawer().drawLine(hitPosition,
-				hitPosition + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+			hitPosition, 1, btVector3(1, 0, 0));
+		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+			hitPosition, hitPosition + rayCallback.m_hitNormalWorld,
+			btVector3(1, 0, 0));
 #endif
 	} else {
 #ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
-				1, btVector3(1, 0, 0));
+			1, btVector3(1, 0, 0));
 #endif
 		//no hit
 	}
@@ -206,12 +207,12 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 }
 
 btVector3 LimbBt::getLocalFakeIntersection(const btVector3 origin,
-		const btVector3 direction) {
+	const btVector3 direction) {
 	return mDimensions.length() / 2.0f * direction.normalized();
 }
 
 btTransform LimbBt::getLocalIntersection(const btVector3 origin,
-		const btVector3 direction) {
+	const btVector3 direction) {
 	btTransform intersection = getLocalPreciseIntersection(origin, direction);
 	if (intersection.getOrigin().isZero()) {
 		intersection.setOrigin(getLocalFakeIntersection(origin, direction));
@@ -224,15 +225,15 @@ void LimbBt::reset(const Ogre::Vector3 position) {
 
 	btVector3 initialRelativePosition;
 	initialRelativePosition.setValue(getInitialRelativeXPosition(),
-			getInitialRelativeYPosition(), getInitialRelativeZPosition());
+		getInitialRelativeYPosition(), getInitialRelativeZPosition());
 
 	btQuaternion initialOrientation;
 	initialOrientation.setValue(getInitialXOrientation(),
-			getInitialYOrientation(), getInitialZOrientation(),
-			getInitialWOrientation());
+		getInitialYOrientation(), getInitialZOrientation(),
+		getInitialWOrientation());
 
 	initialTransform.setOrigin(
-			OgreBulletUtils::convert(position) + initialRelativePosition);
+		OgreBulletUtils::convert(position) + initialRelativePosition);
 	initialTransform.setRotation(initialOrientation);
 
 	mBody->setWorldTransform(initialTransform);
@@ -244,15 +245,15 @@ void LimbBt::reposition(const Ogre::Vector3 position) {
 
 	btVector3 initialRelativePosition;
 	initialRelativePosition.setValue(getInitialRelativeXPosition(),
-			getInitialRelativeYPosition(), getInitialRelativeZPosition());
+		getInitialRelativeYPosition(), getInitialRelativeZPosition());
 
 	btQuaternion initialOrientation;
 	initialOrientation.setValue(getInitialXOrientation(),
-			getInitialYOrientation(), getInitialZOrientation(),
-			getInitialWOrientation());
+		getInitialYOrientation(), getInitialZOrientation(),
+		getInitialWOrientation());
 
 	initialTransform.setOrigin(
-			OgreBulletUtils::convert(position) + initialRelativePosition);
+		OgreBulletUtils::convert(position) + initialRelativePosition);
 	initialTransform.setRotation(initialOrientation);
 
 	mBody->setWorldTransform(initialTransform);
@@ -260,7 +261,7 @@ void LimbBt::reposition(const Ogre::Vector3 position) {
 }
 
 btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
-		const btVector3 direction) {
+	const btVector3 direction) {
 	btTransform transform = getPreciseIntersection(origin, direction);
 	transform.setOrigin(transform.getOrigin() - origin);
 	return transform;
@@ -269,17 +270,17 @@ btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
 		if (mLink != NULL) {
-			if (!PhysicsConfiguration::SELF_COLLISION) {
+			if (!mIntraBodyColliding) {
 				mWorld->addCollisionObject(mLink,
-						PhysicsConfiguration::COL_CREATURE,
-						PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+					PhysicsConfiguration::COL_CREATURE,
+					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
 			} else {
 				mWorld->addCollisionObject(mLink);
 			}
 		} else {
-			if (!PhysicsConfiguration::SELF_COLLISION) {
+			if (!mIntraBodyColliding) {
 				mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
-						PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
 			} else {
 				mWorld->addRigidBody(mBody);
 			}
@@ -310,8 +311,8 @@ void LimbBt::calm() {
 	mBody->setAngularVelocity(zeroVector);
 }
 
-void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel, btVector3 origin,
-		btQuaternion rotation, int index) {
+void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
+	btVector3 origin, btQuaternion rotation, int index) {
 	mLink = new btMultiBodyLinkCollider(multiBody, index);
 	mLink->setCollisionShape(mCollisionShape);
 
@@ -329,8 +330,7 @@ void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel, btVecto
 }
 
 bool LimbBt::equals(const LimbBt& limbBt) const {
-	if(!LimbPhysics::equals(limbBt))
-	{
+	if (!LimbPhysics::equals(limbBt)) {
 		return false;
 	}
 	return true;

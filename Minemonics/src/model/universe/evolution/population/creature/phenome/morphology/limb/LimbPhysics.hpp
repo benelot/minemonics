@@ -91,7 +91,7 @@ public:
 	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 */
 	virtual btTransform getIntersection(btVector3 origin,
-	btVector3 direction) = 0;
+		btVector3 direction) = 0;
 
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally less expensive than the precise version.
@@ -100,7 +100,7 @@ public:
 	 * @return The intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
 	 */
 	virtual btTransform getLocalIntersection(btVector3 origin,
-	btVector3 direction) = 0;
+		btVector3 direction) = 0;
 
 	/**
 	 * Get the precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally more expensive than the non-precise version.
@@ -109,7 +109,7 @@ public:
 	 * @return The precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
 	 */
 	virtual btTransform getLocalPreciseIntersection(btVector3 origin,
-	btVector3 direction) = 0;
+		btVector3 direction) = 0;
 
 	/**
 	 * Compare the limb physics model to another limb physics  model.
@@ -127,7 +127,7 @@ public:
 	 * @param index The index of the limb link in the multibody.
 	 */
 	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
-	btVector3 origin, btQuaternion rotation, int index) = 0;
+		btVector3 origin, btQuaternion rotation, int index) = 0;
 
 	//Accessor methods
 
@@ -185,7 +185,7 @@ public:
 		}
 		case CAPSULE: {
 			volume = pow(mDimensions.x * 0.5f, 2) * M_PI * mDimensions.z
-			+ pow(mDimensions.x, 3) * M_PI / 6.0f;
+				+ pow(mDimensions.x, 3) * M_PI / 6.0f;
 			break;
 		}
 		}
@@ -267,37 +267,46 @@ public:
 	 * @return A string containing all information about the limb physics model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const LimbPhysics &limbPhysics) {
+		const LimbPhysics &limbPhysics) {
 		return os << "LimbPhysics: Type=" << limbPhysics.mType /**!< The primitive type of the limb*/
 
 		<< "/Dimensions=(" /**!< The dimensions of the limb*/
 		<< limbPhysics.mDimensions.x << "," << limbPhysics.mDimensions.y << ","
-		<< limbPhysics.mDimensions.z
+			<< limbPhysics.mDimensions.z
 
-		<< ")/Color=(" /**!<The color of the limb*/
-		<< limbPhysics.mColor.r << "," << limbPhysics.mColor.g << ","
-		<< limbPhysics.mColor.b
+			<< ")/Color=(" /**!<The color of the limb*/
+			<< limbPhysics.mColor.r << "," << limbPhysics.mColor.g << ","
+			<< limbPhysics.mColor.b
 
-		<< ")/isInWorld=" << limbPhysics.mInWorld /**!< if the limb physics model is in the world*/
+			<< ")/isInWorld=" << limbPhysics.mInWorld /**!< if the limb physics model is in the world*/
 
-		<< "/InitialRelativePosition=(" /**!< The limb's relative position*/
-		<< limbPhysics.mInitialRelativeXPosition << ","
-		<< limbPhysics.mInitialRelativeYPosition << ","
-		<< limbPhysics.mInitialRelativeZPosition
+			<< "/InitialRelativePosition=(" /**!< The limb's relative position*/
+			<< limbPhysics.mInitialRelativeXPosition << ","
+			<< limbPhysics.mInitialRelativeYPosition << ","
+			<< limbPhysics.mInitialRelativeZPosition
 
-		<< ")/InitialOrientation=(" /**!< The limb's orientation*/
-		<< limbPhysics.mInitialWOrientation << ","
-		<< limbPhysics.mInitialXOrientation << ","
-		<< limbPhysics.mInitialYOrientation << ","
-		<< limbPhysics.mInitialZOrientation
+			<< ")/InitialOrientation=(" /**!< The limb's orientation*/
+			<< limbPhysics.mInitialWOrientation << ","
+			<< limbPhysics.mInitialXOrientation << ","
+			<< limbPhysics.mInitialYOrientation << ","
+			<< limbPhysics.mInitialZOrientation
 
-		<< ")/Restitution=" << limbPhysics.mRestitution /**!< The restitution of the limb physics model*/
+			<< ")/Restitution=" << limbPhysics.mRestitution /**!< The restitution of the limb physics model*/
 
-		<< "/Friction=" << limbPhysics.mFriction /**!< The friction of the limb physics model*/
+			<< "/Friction=" << limbPhysics.mFriction /**!< The friction of the limb physics model*/
 
-		<< "/Mass=" << limbPhysics.mMass /**!< The mass of the limb physics model*/
+			<< "/Mass=" << limbPhysics.mMass /**!< The mass of the limb physics model*/
 
-		<< "/Volume=" << limbPhysics.mVolume; /**!< The volume of the limb physics model*/
+			<< "/Volume=" << limbPhysics.mVolume /**!< The volume of the limb physics model*/
+			<< "/IntraBodyColliding=" << limbPhysics.mIntraBodyColliding; /**!< If the limb is colliding with the other limbs */
+	}
+
+	bool isIntraBodyColliding() const {
+		return mIntraBodyColliding;
+	}
+
+	void setIntraBodyColliding(bool intraBodyColliding) {
+		mIntraBodyColliding = intraBodyColliding;
 	}
 
 	/**
@@ -311,26 +320,27 @@ public:
 
 		& BOOST_SERIALIZATION_NVP(mDimensions.x) /**!< The dimensions of the limb*/
 		& BOOST_SERIALIZATION_NVP(mDimensions.y)
-		& BOOST_SERIALIZATION_NVP(mDimensions.z)
+			& BOOST_SERIALIZATION_NVP(mDimensions.z)
 
-		& BOOST_SERIALIZATION_NVP(mColor.r) /**!< The color of the limb*/
-		& BOOST_SERIALIZATION_NVP(mColor.g)
-		& BOOST_SERIALIZATION_NVP(mColor.b)
+			& BOOST_SERIALIZATION_NVP(mColor.r) /**!< The color of the limb*/
+			& BOOST_SERIALIZATION_NVP(mColor.g)
+			& BOOST_SERIALIZATION_NVP(mColor.b)
 
-		& BOOST_SERIALIZATION_NVP(mInitialRelativeXPosition) /**!< The limb's relative position*/
-		& BOOST_SERIALIZATION_NVP(mInitialRelativeYPosition)
-		& BOOST_SERIALIZATION_NVP(mInitialRelativeZPosition)
+			& BOOST_SERIALIZATION_NVP(mInitialRelativeXPosition) /**!< The limb's relative position*/
+			& BOOST_SERIALIZATION_NVP(mInitialRelativeYPosition)
+			& BOOST_SERIALIZATION_NVP(mInitialRelativeZPosition)
 
-		& BOOST_SERIALIZATION_NVP(mInitialWOrientation) /**!< The limb's orientation*/
-		& BOOST_SERIALIZATION_NVP(mInitialXOrientation)
-		& BOOST_SERIALIZATION_NVP(mInitialYOrientation)
-		& BOOST_SERIALIZATION_NVP(mInitialZOrientation)
+			& BOOST_SERIALIZATION_NVP(mInitialWOrientation) /**!< The limb's orientation*/
+			& BOOST_SERIALIZATION_NVP(mInitialXOrientation)
+			& BOOST_SERIALIZATION_NVP(mInitialYOrientation)
+			& BOOST_SERIALIZATION_NVP(mInitialZOrientation)
 
-		& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the limb physics model*/
+			& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the limb physics model*/
 
-		& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the limb physics model*/
+			& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the limb physics model*/
 
-		& BOOST_SERIALIZATION_NVP(mMass); /**!< The mass of the limb physics model*/
+			& BOOST_SERIALIZATION_NVP(mMass) /**!< The mass of the limb physics model*/
+			& BOOST_SERIALIZATION_NVP(mIntraBodyColliding);/**!< If the limb is colliding with the other limbs */
 	}
 
 protected:
@@ -354,6 +364,8 @@ protected:
 	double mMass; /**!< Mass of the limb. */
 
 	double mVolume; /**!< The volume of the limb. */
+
+	bool mIntraBodyColliding; /**!< If the limb collides with the other limbs */
 
 	// should not be serialized
 	bool mInWorld; /**!< Whether the limb is in the world or not.*/

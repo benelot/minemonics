@@ -50,8 +50,8 @@
 BoostLogger PhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 PhenomeModel::_Init PhenomeModel::_initializer;
 PhenomeModel::PhenomeModel() :
-		mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
-				true), mMultiBody(NULL), mWorld(NULL) {
+	mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
+		true), mMultiBody(NULL), mWorld(NULL) {
 	mControllers.clear();
 }
 
@@ -63,14 +63,14 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 	mMultiBody = NULL;
 	mWorld = phenomeModel.mWorld;
 	for (std::vector<Controller*>::const_iterator cit =
-			phenomeModel.mControllers.begin();
-			cit != phenomeModel.mControllers.end(); cit++) {
+		phenomeModel.mControllers.begin();
+		cit != phenomeModel.mControllers.end(); cit++) {
 		mControllers.push_back((*cit)->clone());
 	}
 
 	for (std::vector<ComponentModel*>::const_iterator coit =
-			phenomeModel.mComponentModels.begin();
-			coit != phenomeModel.mComponentModels.end(); coit++) {
+		phenomeModel.mComponentModels.begin();
+		coit != phenomeModel.mComponentModels.end(); coit++) {
 		ComponentModel* componentModel = (*coit)->clone();
 		mComponentModels.push_back(componentModel);
 		switch (componentModel->getComponentType()) {
@@ -93,7 +93,7 @@ void PhenomeModel::initialize(CreatureModel* const creatureModel) {
 	mCreatureModel = creatureModel;
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
-			mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+		mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
 #endif
 }
 
@@ -102,14 +102,14 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 	//TODO: Hacks to make it run, make nicer
 	// let the controller perform
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
-			cit != mControllers.end(); cit++) {
+		cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastTick);
 	}
 
 	// Update all limb models
 	mHasInterpenetrations = false;
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
-			lit != mLimbModels.end(); lit++) {
+		lit != mLimbModels.end(); lit++) {
 
 		//detect interpenetrations
 		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
@@ -145,7 +145,7 @@ void PhenomeModel::removeFromWorld() {
 
 void PhenomeModel::calm() {
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
-			lit != mLimbModels.end(); lit++) {
+		lit != mLimbModels.end(); lit++) {
 		(*lit)->calm();
 	}
 }
@@ -165,7 +165,7 @@ int PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
 		std::map<int, int> repList;
 		rootGenerator->initialize(repList, creatureModel->getInitialPosition(),
-				Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
+			Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
 		rootGenerator->setGene(gene);
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
@@ -173,12 +173,14 @@ int PhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 		while (!generatorList.empty()) {
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< "Phenome generator qty:" << generatorList.size();
 
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
 
-			Embryogenesis::transcribeGene(generatorList,totalSegmentCounter,this,generator);
+			Embryogenesis::transcribeGene(generatorList, totalSegmentCounter,
+				this, generator);
 
 			// delete the generator of this gene
 			delete generator;
@@ -200,30 +202,51 @@ void PhenomeModel::generateBody() {
 	bool gyro = true;
 	bool multibodyOnly = false;
 	bool canSleep = true;
-	bool selfCollision = PhysicsConfiguration::SELF_COLLISION;
 
 	if (mJointModels.size() != 0) {
+		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
+
 		mMultiBody = new btMultiBody(mJointModels.size(),
-				mLimbModels[0]->getMass(), mLimbModels[0]->getInertia(),
-				isFixedBase, canSleep, isMultiDof);
+			mLimbModels[0]->getMass(), mLimbModels[0]->getInertia(),
+			isFixedBase, canSleep, isMultiDof);
 
 		mMultiBody->setBasePos(
-				OgreBulletUtils::convert(mLimbModels[0]->getPosition()));
+			OgreBulletUtils::convert(mLimbModels[0]->getPosition()));
 		mMultiBody->setWorldToBaseRot(
-				OgreBulletUtils::convert(mLimbModels[0]->getOrientation()));
+			OgreBulletUtils::convert(mLimbModels[0]->getOrientation()));
 
 		for (int i = 0; i < mJointModels.size(); i++) {
-			mMultiBody->setupSpherical(
+			switch (mJointModels[i]->getType()) {
+			case JointPhysics::HINGE_JOINT:
+				mMultiBody->setupRevolute(
 					((long) mJointModels[i]->getChildIndex()) - 1,
 					mLimbModels[i + 1]->getMass(),
 					mLimbModels[i + 1]->getInertia(),
 					((long) mJointModels[i]->getParentIndex()) - 1,
 					mJointModels[i]->getParentComToPivot().getRotation().normalized()
-							* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
+						* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
+					mJointModels[i]->getJointPitchAxis(),
 					mJointModels[i]->getParentComToPivot().getOrigin()
-							* MorphologyConfiguration::LINK_LENGTH,
+						* MorphologyConfiguration::LINK_LENGTH,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-							* MorphologyConfiguration::LINK_LENGTH, true);
+						* MorphologyConfiguration::LINK_LENGTH, true);
+				break;
+			case JointPhysics::SPHERICAL_JOINT:
+				mMultiBody->setupSpherical(
+					((long) mJointModels[i]->getChildIndex()) - 1,
+					mLimbModels[i + 1]->getMass(),
+					mLimbModels[i + 1]->getInertia(),
+					((long) mJointModels[i]->getParentIndex()) - 1,
+					mJointModels[i]->getParentComToPivot().getRotation().normalized()
+						* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
+					mJointModels[i]->getParentComToPivot().getOrigin()
+						* MorphologyConfiguration::LINK_LENGTH,
+					-mJointModels[i]->getPivotToChildCom().getOrigin()
+						* MorphologyConfiguration::LINK_LENGTH, true);
+				break;
+			default:
+				break;
+			}
 		}
 
 		mMultiBody->finalizeMultiDof();
@@ -240,10 +263,10 @@ void PhenomeModel::generateBody() {
 			mMultiBody->setAngularDamping(0.9f);
 		}
 
-		btAlignedObjectArray<btQuaternion> worldtoLocal;
+		btAlignedObjectArray < btQuaternion > worldtoLocal;
 		worldtoLocal.resize(mMultiBody->getNumLinks() + 1);
 
-		btAlignedObjectArray<btVector3> localOrigin;
+		btAlignedObjectArray < btVector3 > localOrigin;
 		localOrigin.resize(mMultiBody->getNumLinks() + 1);
 
 		worldtoLocal[0] = mMultiBody->getWorldToBaseRot();
@@ -251,17 +274,17 @@ void PhenomeModel::generateBody() {
 		for (int i = 0; i < mMultiBody->getNumLinks(); ++i) {
 			const int parent = mMultiBody->getParent(i);
 			worldtoLocal[i + 1] = mMultiBody->getParentToLocalRot(i)
-					* worldtoLocal[parent + 1];
+				* worldtoLocal[parent + 1];
 			localOrigin[i + 1] = localOrigin[parent + 1]
-					+ (quatRotate(worldtoLocal[i + 1].inverse(),
-							mMultiBody->getRVector(i)));
+				+ (quatRotate(worldtoLocal[i + 1].inverse(),
+					mMultiBody->getRVector(i)));
 		}
 
 		{
 			btVector3 origin = localOrigin[0];
 
 			btQuaternion orientation(-worldtoLocal[0].x(), -worldtoLocal[0].y(),
-					-worldtoLocal[0].z(), worldtoLocal[0].w());
+				-worldtoLocal[0].z(), worldtoLocal[0].w());
 
 			mLimbModels[0]->generateLink(mMultiBody, origin, orientation, -1);
 			mMultiBody->setBaseCollider(mLimbModels[0]->getLink());
@@ -272,10 +295,10 @@ void PhenomeModel::generateBody() {
 			btVector3 origin = localOrigin[i + 1];
 
 			btQuaternion orientation(-worldtoLocal[i + 1].x(),
-					-worldtoLocal[i + 1].y(), -worldtoLocal[i + 1].z(),
-					worldtoLocal[i + 1].w());
+				-worldtoLocal[i + 1].y(), -worldtoLocal[i + 1].z(),
+				worldtoLocal[i + 1].w());
 			mLimbModels[i + 1]->generateLink(mMultiBody, origin, orientation,
-					i);
+				i);
 
 			mMultiBody->getLink(i).m_collider = mLimbModels[i + 1]->getLink();
 		}
@@ -287,9 +310,9 @@ void PhenomeModel::addJointConstraints() {
 		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
 		// Link joint limits
 		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
-				mMultiBody, i,
-				mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH],
-				mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]);
+			mMultiBody, i,
+			mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH],
+			mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]);
 //			// The default value (100) behaves like a lock on -1.6
 //			limitCons->setMaxAppliedImpulse(40);
 		mLimitConstraints.push_back(limitCons);
@@ -301,13 +324,13 @@ void PhenomeModel::addMotors() {
 
 	for (int i = 0; i < mJointModels.size(); i++) {
 		for (std::vector<Motor*>::iterator sit =
-				mJointModels[i]->getMotors().begin();
-				sit != mJointModels[i]->getMotors().end(); sit++) {
+			mJointModels[i]->getMotors().begin();
+			sit != mJointModels[i]->getMotors().end(); sit++) {
 			//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
 			// Link joint limits
 			const float max_impulse = 100000.0f;
 			btMultiBodyJointMotor* jointMotor = new btMultiBodyJointMotor(
-					mMultiBody, mJointModels[i]->getIndex(), 0.0f, max_impulse);
+				mMultiBody, mJointModels[i]->getIndex(), 0.0f, max_impulse);
 
 //			// The default value (100) behaves like a lock on -1.6
 //			limitCons->setMaxAppliedImpulse(40);
@@ -319,14 +342,14 @@ void PhenomeModel::addMotors() {
 void PhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-			it != mLimbModels.end(); it++) {
+		it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
 	}
 }
 
 void PhenomeModel::cleanup() {
 	for (std::vector<ComponentModel*>::iterator cit = mComponentModels.begin();
-			cit != mComponentModels.end();) {
+		cit != mComponentModels.end();) {
 		delete *cit;
 		cit = mComponentModels.erase(cit);
 	}
@@ -337,7 +360,7 @@ void PhenomeModel::cleanup() {
 void PhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-			it != mLimbModels.end(); it++) {
+		it != mLimbModels.end(); it++) {
 		(*it)->reposition(position);
 
 	}
@@ -358,9 +381,9 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 	std::vector<LimbModel*>::const_iterator it2 =
-			phenomeModel.mLimbModels.begin();
+		phenomeModel.mLimbModels.begin();
 	for (; it != mLimbModels.end(), it2 != phenomeModel.mLimbModels.end();
-			it++, it2++) {
+		it++, it2++) {
 		if (!(*it)->equals(**(it2))) {
 			return false;
 		}
@@ -372,9 +395,9 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 	std::vector<JointModel*>::const_iterator it3 = mJointModels.begin();
 	std::vector<JointModel*>::const_iterator it4 =
-			phenomeModel.mJointModels.begin();
+		phenomeModel.mJointModels.begin();
 	for (; it3 != mJointModels.end(), it4 != phenomeModel.mJointModels.end();
-			it3++, it4++) {
+		it3++, it4++) {
 		if (!(*it3)->equals(**(it4))) {
 			return false;
 		}
@@ -386,9 +409,9 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 	std::vector<Controller*>::const_iterator it5 = mControllers.begin();
 	std::vector<Controller*>::const_iterator it6 =
-			phenomeModel.mControllers.begin();
+		phenomeModel.mControllers.begin();
 	for (; it5 != mControllers.end(), it6 != phenomeModel.mControllers.end();
-			it5++, it6++) {
+		it5++, it6++) {
 		if (!(*it5)->equals(**(it6))) {
 			return false;
 		}

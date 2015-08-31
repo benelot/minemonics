@@ -48,8 +48,7 @@ class Limb: public Component {
 public:
 	Limb();
 	Limb(const Limb& limb);
-	Limb(Creature* const creature,
-			LimbModel* const limbModel);
+	Limb(Creature* const creature, LimbModel* const limbModel);
 	virtual ~Limb();
 
 	/**
@@ -65,13 +64,15 @@ public:
 	 * @param color The color of the limb.
 	 * @param ownIndex The limb's own index in the array of limbs.
 	 */
-	void initialize(Creature* const creature, const LimbPhysics::PrimitiveType type,
-			const Ogre::Vector3 position, const Ogre::Quaternion orientation,
-			const Ogre::Vector3 initialRelativePosition,
-			const Ogre::Quaternion initialOrientation, const Ogre::Vector3 size,
-			const double mass, const double restitution = 1.0,
-			const double friction = 0.8, const Ogre::ColourValue color =
-					Ogre::ColourValue(1, 1, 1), const int ownIndex = 0);
+	void initialize(Creature* const creature,
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation, const Ogre::Vector3 size,
+		const double mass, const double restitution = 1.0,
+		const double friction = 0.8, const Ogre::ColourValue color =
+			Ogre::ColourValue(1, 1, 1), bool isIntraBodyColliding = true,
+		const int ownIndex = 0);
 
 	/**
 	 * Build a limb from the limb model.
@@ -80,7 +81,7 @@ public:
 	 * @param limbModel The model of the limb.
 	 */
 	void buildFrom(SimulationManager* const simulationManager,
-			Creature* const creature, LimbModel* const limbModel);
+		Creature* const creature, LimbModel* const limbModel);
 
 	/**
 	 * Clone the limb.
@@ -119,7 +120,7 @@ public:
 	void removeFromWorld();
 
 	void generateLink(btMultiBody* multiBody, btVector3 origin,
-				btQuaternion rotation, int index);
+		btQuaternion rotation, int index);
 
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
@@ -128,7 +129,7 @@ public:
 	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 */
 	Ogre::Vector3 getIntersection(const Ogre::Vector3 origin,
-			const Ogre::Vector3 direction);
+		const Ogre::Vector3 direction);
 
 	// Accessor methods
 	const Ogre::Vector3 getPosition() const {
@@ -179,7 +180,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>("Limb"));
+				boost::log::attributes::constant < std::string > ("Limb"));
 		}
 	} _initializer;
 

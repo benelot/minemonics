@@ -21,13 +21,12 @@
 #include <utils/Randomness.hpp>
 
 Morphogene::Morphogene() :
-		mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
-				LimbPhysics::UNKNOWN), mControllerGene(
+	mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(LimbPhysics::UNKNOWN), mControllerGene(
 		NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
-				0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
-				0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
-				0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(
-				1) {
+		0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
+		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
+		0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(1), mIntraBodyColliding(
+		true) {
 
 }
 
@@ -57,9 +56,10 @@ Morphogene::Morphogene(const Morphogene& morphoGene) {
 	mZ = morphoGene.mZ;
 	mFriction = morphoGene.mFriction;
 	mRestitution = morphoGene.mRestitution;
+	mIntraBodyColliding = morphoGene.mIntraBodyColliding;
 
 	std::vector<MorphogeneBranch*>::const_iterator mgbit =
-			morphoGene.mGeneBranches.begin();
+		morphoGene.mGeneBranches.begin();
 	for (; mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
 		mGeneBranches.push_back((*mgbit)->clone());
 	}
@@ -90,19 +90,19 @@ void Morphogene::initialize(const double branchiness) {
 //	mZ = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
 //			MorphologyConfiguration::LIMB_MAX_SIZE);
 	mX = Randomness::getSingleton()->nextUnifDouble(
-			MorphologyConfiguration::LIMB_MIN_SIZE,
-			MorphologyConfiguration::LIMB_MAX_SIZE);
+		MorphologyConfiguration::LIMB_MIN_SIZE,
+		MorphologyConfiguration::LIMB_MAX_SIZE);
 	mY = Randomness::getSingleton()->nextUnifDouble(
-			MorphologyConfiguration::LIMB_MIN_SIZE,
-			MorphologyConfiguration::LIMB_MAX_SIZE);
+		MorphologyConfiguration::LIMB_MIN_SIZE,
+		MorphologyConfiguration::LIMB_MAX_SIZE);
 	mZ = Randomness::getSingleton()->nextUnifDouble(
-			MorphologyConfiguration::LIMB_MIN_SIZE,
-			MorphologyConfiguration::LIMB_MAX_SIZE);
+		MorphologyConfiguration::LIMB_MIN_SIZE,
+		MorphologyConfiguration::LIMB_MAX_SIZE);
 
 	mSegmentShrinkFactor = 1.0
-			+ Randomness::getSingleton()->nextUnifDouble(
-					MorphologyConfiguration::LIMB_SCALE_MIN,
-					MorphologyConfiguration::LIMB_SCALE_MAX);
+		+ Randomness::getSingleton()->nextUnifDouble(
+			MorphologyConfiguration::LIMB_SCALE_MIN,
+			MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	//set restitution and friction
 	mRestitution = MorphologyConfiguration::LIMB_INITIAL_RESTITUTION;
@@ -120,14 +120,14 @@ void Morphogene::initialize(const double branchiness) {
 
 	//The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	mJointYaw = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>() / 2.0,
-			boost::math::constants::pi<double>() / 2.0);
+		-boost::math::constants::pi<double>() / 2.0,
+		boost::math::constants::pi<double>() / 2.0);
 	mJointPitch = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>() / 2.0,
-			boost::math::constants::pi<double>() / 2.0);
+		-boost::math::constants::pi<double>() / 2.0,
+		boost::math::constants::pi<double>() / 2.0);
 	mJointRoll = Randomness::getSingleton()->nextUnifDouble(
-			-boost::math::constants::pi<double>() / 2.0,
-			boost::math::constants::pi<double>() / 2.0);
+		-boost::math::constants::pi<double>() / 2.0,
+		boost::math::constants::pi<double>() / 2.0);
 
 	// A random color RGB values between 0 and 1
 	mColorR = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
@@ -136,12 +136,12 @@ void Morphogene::initialize(const double branchiness) {
 
 	// A random primitive from the available primitives
 	mPrimitiveType =
-			(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
-					1, LimbPhysics::NUM_PRIMITIVES);
+		(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
+			1, LimbPhysics::NUM_PRIMITIVES);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
 	mRepetitionLimit = Randomness::getSingleton()->nextUnifPosInt(0,
-			MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
+		MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
 	//The follow up gene follows instead if this gene's repetition limit is reached.
 	mFollowUpGene = -1;
@@ -163,6 +163,8 @@ void Morphogene::initialize(const double branchiness) {
 	mOrientationX = q.x;
 	mOrientationY = q.y;
 	mOrientationZ = q.z;
+
+	mIntraBodyColliding = Randomness::getSingleton()->nextUnifBoolean();
 }
 
 Morphogene* Morphogene::clone() {
@@ -188,9 +190,8 @@ void Morphogene::mutate() {
 
 void Morphogene::grow(const int branchiness) {
 	int branchQty =
-			(branchiness != 0) ?
-					Randomness::getSingleton()->nextUnifPosInt(0, branchiness) :
-					0;
+		(branchiness != 0) ?
+			Randomness::getSingleton()->nextUnifPosInt(0, branchiness) : 0;
 
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();
@@ -206,7 +207,7 @@ void Morphogene::print() {
 
 bool Morphogene::equals(const Morphogene& morphoGene) const {
 
-	if(!Gene::equals(morphoGene)){
+	if (!Gene::equals(morphoGene)) {
 		return false;
 	}
 
@@ -267,14 +268,14 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 	}
 
 	if ((mControllerGene == NULL && morphoGene.mControllerGene != NULL)
-			|| (mControllerGene != NULL && morphoGene.mControllerGene == NULL)) {
+		|| (mControllerGene != NULL && morphoGene.mControllerGene == NULL)) {
 		return false;
 	} else if (mControllerGene != NULL && morphoGene.mControllerGene != NULL
-			&& mControllerGene->equals(*morphoGene.mControllerGene)) {
+		&& mControllerGene->equals(*morphoGene.mControllerGene)) {
 		switch (mControllerGene->getControllerGeneType()) {
 		case ControllerGene::SineControllerGene:
 			if (!((SineControllerGene*) mControllerGene)->equals(
-					((SineControllerGene&) (*morphoGene.mControllerGene)))) {
+				((SineControllerGene&) (*morphoGene.mControllerGene)))) {
 				return false;
 			}
 			break;
@@ -307,11 +308,11 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	if(mRestitution != morphoGene.mRestitution){
+	if (mRestitution != morphoGene.mRestitution) {
 		return false;
 	}
 
-	if(mFriction != morphoGene.mFriction){
+	if (mFriction != morphoGene.mFriction) {
 		return false;
 	}
 
@@ -322,9 +323,9 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 
 	std::vector<MorphogeneBranch*>::const_iterator it = mGeneBranches.begin();
 	std::vector<MorphogeneBranch*>::const_iterator it2 =
-			morphoGene.mGeneBranches.begin();
+		morphoGene.mGeneBranches.begin();
 	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
-			it++, it2++) {
+		it++, it2++) {
 		if (!(*it)->equals(**it2)) {
 			return false;
 		}

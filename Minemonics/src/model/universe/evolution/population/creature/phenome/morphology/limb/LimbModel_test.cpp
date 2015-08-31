@@ -25,15 +25,17 @@ protected:
 		// Set up an object of the class you want to test
 		limbModel = new LimbModel();
 		limbModel->initialize(NULL, NULL,
-		(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
-		LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-		randomness->nextQuaternion(),
-		randomness->nextVector(),
-		randomness->nextQuaternion(),
-		randomness->nextVector(), randomness->nextUnifDouble(0, 10),
-		randomness->nextUnifDouble(0, 10), randomness->nextUnifDouble(0, 10),
-		Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
-		randomness->nextUnifDouble(0, 1), randomness->nextUnifDouble(0, 1)),randomness->nextUnifPosInt(0,10));
+			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
+				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextUnifDouble(0, 10),
+			randomness->nextUnifDouble(0, 10),
+			randomness->nextUnifDouble(0, 10),
+			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
+				randomness->nextUnifDouble(0, 1),
+				randomness->nextUnifDouble(0, 1)), true,
+			randomness->nextUnifPosInt(0, 10));
 	}
 
 	virtual void TearDown() {
@@ -54,19 +56,21 @@ protected:
 		// Set up an object of the class you want to test
 		limbModel = new LimbModel();
 		limbModel->initialize(NULL, NULL,
-		(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
-		LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-		randomness->nextQuaternion(),
-		randomness->nextVector(),
-		randomness->nextQuaternion(),
-		randomness->nextVector(), randomness->nextUnifDouble(0, 10),
-		randomness->nextUnifDouble(0, 10), randomness->nextUnifDouble(0, 10),
-		Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
-		randomness->nextUnifDouble(0, 1), randomness->nextUnifDouble(0, 1)),randomness->nextUnifPosInt(0,10));
+			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
+				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextUnifDouble(0, 10),
+			randomness->nextUnifDouble(0, 10),
+			randomness->nextUnifDouble(0, 10),
+			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
+				randomness->nextUnifDouble(0, 1),
+				randomness->nextUnifDouble(0, 1)), true,
+			randomness->nextUnifPosInt(0, 10));
 
 		limbModel2 = new LimbModel();
 
-		SaveController<LimbModel> saveController;
+		SaveController < LimbModel > saveController;
 
 		saveController.save(*limbModel, "LimbModel.test");
 

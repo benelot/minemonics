@@ -48,9 +48,11 @@ public:
 	 * @param tframeInB The joint position in reference frame B.
 	 */
 	void initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
-	btRigidBody* const bodyB, const btTransform& tframeInA,
-	const btTransform& tframeInB, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits);
+		btRigidBody* const bodyB, const btTransform& tframeInA,
+		const btTransform& tframeInB, JointPhysics::JointType type,
+		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
+		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+		btVector3 jointUpperLimits);
 	virtual ~JointBt();
 
 	/**
@@ -59,8 +61,8 @@ public:
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
 	void initializeRotationalLimitMotors(const btVector3 maxForces,
-	const btVector3 maxSpeeds, const btVector3 lowerLimits,
-	const btVector3 upperLimits);
+		const btVector3 maxSpeeds, const btVector3 lowerLimits,
+		const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -126,34 +128,34 @@ public:
 //	}
 
 	void setRotationalLimitMotorEnabled(
-	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
+		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
 
 	bool isRotationalLimitMotorEnabled(
-	const JointPhysics::RotationalDegreeOfFreedom index) {
+		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return true;
 //		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
 	void setTargetRotationalVelocity(
-	JointPhysics::RotationalDegreeOfFreedom index, double targetVelocity) {
+		JointPhysics::RotationalDegreeOfFreedom index, double targetVelocity) {
 //		mJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
 	}
 
 	double getTargetRotationalVelocity(
-	const JointPhysics::RotationalDegreeOfFreedom index) {
+		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return 0;
 //		return mJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
 	void setMaxRotationalForce(
-	const JointPhysics::RotationalDegreeOfFreedom index,
-	const double maxMotorForce) {
+		const JointPhysics::RotationalDegreeOfFreedom index,
+		const double maxMotorForce) {
 //		mJoint->setMaxMotorImpulse(maxMotorForce);
 
 	}
 
 	double getMaxRotationalForce(
-	const JointPhysics::RotationalDegreeOfFreedom index) {
+		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return 0;
 //		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
@@ -176,7 +178,7 @@ public:
 	 * @return A string containing all information about the joint bullet physics model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const JointBt & jointBt) {
+		const JointBt & jointBt) {
 		for (std::vector<Motor*>::const_iterator it = jointBt.mMotors.begin(); /**!< The motors of the joint bullet physics model*/
 		it != jointBt.mMotors.end(); it++) {
 			os << (**it);

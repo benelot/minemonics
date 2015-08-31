@@ -62,6 +62,10 @@ public:
 		RDOF_ROLL, RDOF_PITCH, RDOF_YAW
 	};
 
+	enum JointType {
+		UNKNOWN_JOINT, HINGE_JOINT, SPHERICAL_JOINT, NUM_JOINTS
+	};
+
 	JointPhysics();
 	virtual ~JointPhysics();
 
@@ -116,7 +120,7 @@ public:
 	virtual std::vector<Motor*>& getMotors() = 0;
 
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-	const Ogre::Vector3 angularUpperLimit) {
+		const Ogre::Vector3 angularUpperLimit) {
 		mJointPitchMinAngle = angularLowerLimit[RDOF_PITCH];
 		mJointPitchMaxAngle = angularUpperLimit[RDOF_PITCH];
 		mJointRollMinAngle = angularLowerLimit[RDOF_ROLL];
@@ -126,7 +130,7 @@ public:
 	}
 
 	virtual void setRotationalLimitMotorEnabled(
-	const RotationalDegreeOfFreedom index, const bool enable) = 0;
+		const RotationalDegreeOfFreedom index, const bool enable) = 0;
 
 	double getJointPitchMaxAngle() const {
 		return mJointPitchMaxAngle;
@@ -190,16 +194,72 @@ public:
 		os << "JointPhysics: inWorld=" << jointPhysics.mInWorld /**!< If the joint is in the world*/
 		<< "JointPitchLimit=[" /**!< Joint Pitch limit */
 		<< jointPhysics.mJointPitchMinAngle << ","
-		<< jointPhysics.mJointPitchMaxAngle
+			<< jointPhysics.mJointPitchMaxAngle
 
-		<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
-		<< jointPhysics.mJointYawMinAngle << ","
-		<< jointPhysics.mJointYawMaxAngle
+			<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
+			<< jointPhysics.mJointYawMinAngle << ","
+			<< jointPhysics.mJointYawMaxAngle
 
-		<< "]/JointRollLimit=[" /**!< Joint Roll limit */
-		<< jointPhysics.mJointRollMinAngle << ","
-		<< jointPhysics.mJointRollMaxAngle << "]";
+			<< "]/JointRollLimit=[" /**!< Joint Roll limit */
+			<< jointPhysics.mJointRollMinAngle << ","
+			<< jointPhysics.mJointRollMaxAngle << "]";
 		return os;
+	}
+
+	bool isJointPitchEnabled() const {
+		return mJointPitchEnabled;
+	}
+
+	void setJointPitchEnabled(bool jointPitchEnabled) {
+		mJointPitchEnabled = jointPitchEnabled;
+	}
+
+	bool isJointRollEnabled() const {
+		return mJointRollEnabled;
+	}
+
+	void setJointRollEnabled(bool jointRollEnabled) {
+		mJointRollEnabled = jointRollEnabled;
+	}
+
+	bool isJointYawEnabled() const {
+		return mJointYawEnabled;
+	}
+
+	void setJointYawEnabled(bool jointYawEnabled) {
+		mJointYawEnabled = jointYawEnabled;
+	}
+
+	JointType getType() const {
+		return mType;
+	}
+
+	void setType(JointType type) {
+		mType = type;
+	}
+
+	double getJointPitchAxisX() const {
+		return mJointPitchAxisX;
+	}
+
+	void setJointPitchAxisX(double jointPitchAxisX) {
+		mJointPitchAxisX = jointPitchAxisX;
+	}
+
+	double getJointPitchAxisY() const {
+		return mJointPitchAxisY;
+	}
+
+	void setJointPitchAxisY(double jointPitchAxisY) {
+		mJointPitchAxisY = jointPitchAxisY;
+	}
+
+	double getJointPitchAxisZ() const {
+		return mJointPitchAxisZ;
+	}
+
+	void setJointPitchAxisZ(double jointPitchAxisZ) {
+		mJointPitchAxisZ = jointPitchAxisZ;
 	}
 
 	/**
@@ -208,21 +268,37 @@ public:
 	 * @param The file version.
 	 */
 	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */)  {
-		ar & BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< Joint Pitch limit */
-		& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of joint */
+		& BOOST_SERIALIZATION_NVP(mJointPitchEnabled) /**!< If Joint Dof are enabled */
+		& BOOST_SERIALIZATION_NVP(mJointYawEnabled)
+			& BOOST_SERIALIZATION_NVP(mJointRollEnabled)
 
-		& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< Joint Yaw limit */
-		& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxisX) /**!< The direction of the joint pitch axis */
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxisY)
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxisZ)
 
-		& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< Joint Roll limit */
-		& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle);
+			& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< Joint Pitch limit */
+			& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
+
+			& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< Joint Yaw limit */
+			& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
+
+			& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< Joint Roll limit */
+			& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle);
 	}
 protected:
-	bool mInWorld; /**!< If the joint physics is in the world or not. */
 
+	bool mJointPitchEnabled, mJointYawEnabled, mJointRollEnabled; /**!< If Joint Dof are enabled. */
+
+	JointType mType; /**!< The type of joint */
+
+	double mJointPitchAxisX, mJointPitchAxisY, mJointPitchAxisZ; /**!< The direction of the joint pitch axis*/
 	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
+
+	// should not be serialized
+	bool mInWorld; /**!< If the joint physics is in the world or not. */
 };
 BOOST_CLASS_VERSION(JointPhysics, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointPhysics)

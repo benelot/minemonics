@@ -899,27 +899,6 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] controller/universe/evolution/population/ragdoll/RagDoll.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>controller/universe/evolution/population/ragdoll/RagDoll.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] controller/universe/evolution/population/ragdoll/RagDoll.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>controller/universe/evolution/population/ragdoll/RagDoll.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] controller/universe/evolution/population/ragdoll/RagDoll.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>controller/universe/evolution/population/ragdoll/RagDoll.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
 <target name="[obj] controller/universe/evolution/population/snake/Snake.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
@@ -2936,6 +2915,27 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
+<target name="[obj] view/visualization/CEGUI/BasePanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/BasePanel.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] view/visualization/CEGUI/BasePanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/BasePanel.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] view/visualization/CEGUI/BasePanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/BasePanel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
 <target name="[obj] view/visualization/CEGUI/GUISheetHandler.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
@@ -2957,171 +2957,213 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/BasePanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/MenuBar.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/BasePanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/MenuBar.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/BasePanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/MenuBar.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/BasePanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/MenuBar.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/BasePanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/MenuBar.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/BasePanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/MenuBar.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/MenuBar.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/MovablePanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/MenuBar.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/MovablePanel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/MenuBar.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/MovablePanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/MenuBar.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/MovablePanel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/MenuBar.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/MovablePanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/MenuBar.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/MovablePanel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/MovablePanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/ShowCasePanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/MovablePanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/ShowCasePanel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/MovablePanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/ShowCasePanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/MovablePanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/ShowCasePanel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/MovablePanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/ShowCasePanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/MovablePanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/ShowCasePanel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/ShowCasePanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/ShowCasePanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/ShowCasePanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/ShowCasePanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/ShowCasePanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/ShowCasePanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/elements/BoxSlider.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/elements/BoxSlider.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/elements/BoxSlider.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/elements/BoxSlider.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/elements/BoxSlider.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/elements/BoxSlider.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/infopanels/DetailsPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/infopanels/DetailsPanel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/infopanels/DetailsPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/infopanels/DetailsPanel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/infopanels/DetailsPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/infopanels/DetailsPanel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] view/visualization/CEGUI/infopanels/FPSPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp.o</buildTarget>
+<buildTarget>view/visualization/CEGUI/infopanels/FPSPanel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] view/visualization/CEGUI/infopanels/FPSPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp.i</buildTarget>
+<buildTarget>view/visualization/CEGUI/infopanels/FPSPanel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] view/visualization/CEGUI/infopanels/FPSPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp.s</buildTarget>
+<buildTarget>view/visualization/CEGUI/infopanels/FPSPanel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] view/visualization/CEGUI/infopanels/ParamsPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/infopanels/ParamsPanel.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] view/visualization/CEGUI/infopanels/ParamsPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/infopanels/ParamsPanel.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] view/visualization/CEGUI/infopanels/ParamsPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/infopanels/ParamsPanel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>

@@ -65,14 +65,15 @@ public:
 	 * @param mass The mass of the limb.
 	 */
 	void initialize(btDynamicsWorld* const world, void* const limbModel,
-	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-	const btQuaternion orientation, const btVector3 initialRelativePosition,
-	const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
-	const btScalar mass, const btScalar restitution, const btScalar friction,
-	const Ogre::ColourValue color);
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+		const btQuaternion orientation, const btVector3 initialRelativePosition,
+		const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
+		const btScalar mass, const btScalar restitution,
+		const btScalar friction, const Ogre::ColourValue color,
+		bool isIntraBodyColliding);
 
 	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
-	btVector3 origin, btQuaternion rotation, int index);
+		btVector3 origin, btQuaternion rotation, int index);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -106,7 +107,7 @@ public:
 	 * @return The intersection in the global reference frame.
 	 */
 	btTransform getIntersection(const btVector3 origin,
-	const btVector3 direction);
+		const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the global reference frame.
@@ -116,7 +117,7 @@ public:
 	 * @return The intersection in the local reference frame.
 	 */
 	btTransform getPreciseIntersection(const btVector3 origin,
-	const btVector3 direction);
+		const btVector3 direction);
 
 	/**
 	 * Get the fake intersection with the surface in the local reference frame.
@@ -125,7 +126,7 @@ public:
 	 * @return The fake intersection in the local reference frame.
 	 */
 	btVector3 getLocalFakeIntersection(const btVector3 origin,
-	const btVector3 direction);
+		const btVector3 direction);
 
 	/**
 	 * Get the intersection in the local reference frame of the indicated origin.
@@ -134,7 +135,7 @@ public:
 	 * @return The intersection in the local reference frame.
 	 */
 	btTransform getLocalIntersection(const btVector3 origin,
-	const btVector3 direction);
+		const btVector3 direction);
 
 	/**
 	 * Get the precise intersection in the local reference frame of the indicated origin.
@@ -143,7 +144,7 @@ public:
 	 * @return The intersection in the local reference frame.
 	 */
 	btTransform getLocalPreciseIntersection(const btVector3 origin,
-	const btVector3 direction);
+		const btVector3 direction);
 
 	virtual void calm();
 

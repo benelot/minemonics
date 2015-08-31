@@ -25,9 +25,11 @@ protected:
 		// Set up an object of the class you want to test
 		jointModel = new JointModel();
 		jointModel->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
-		randomness->nextUnifPosInt(0, 10), randomness->nextUnifPosInt(0, 10),
-		randomness->nextUnifPosInt(0, 10), randomness->nextVector(),
-		randomness->nextVector());
+			randomness->nextUnifPosInt(0, 10),
+			randomness->nextUnifPosInt(0, 10),
+			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
+			true, true, randomness->nextVector(), randomness->nextVector(),
+			randomness->nextVector());
 	}
 
 	virtual void TearDown() {
@@ -48,13 +50,15 @@ protected:
 		// Set up an object of the class you want to test
 		jointModel = new JointModel();
 		jointModel->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
-		randomness->nextUnifPosInt(0, 10), randomness->nextUnifPosInt(0, 10),
-		randomness->nextUnifPosInt(0, 10), randomness->nextVector(),
-		randomness->nextVector());
+			randomness->nextUnifPosInt(0, 10),
+			randomness->nextUnifPosInt(0, 10),
+			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
+			true, true, randomness->nextVector(), randomness->nextVector(),
+			randomness->nextVector());
 
 		jointModel2 = new JointModel();
 
-		SaveController<JointModel> saveController;
+		SaveController < JointModel > saveController;
 
 		saveController.save(*jointModel, "JointModel.test");
 

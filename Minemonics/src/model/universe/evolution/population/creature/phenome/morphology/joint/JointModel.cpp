@@ -19,13 +19,13 @@
 //## utils headers
 
 JointModel::JointModel() :
-mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1) {
+	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1) {
 
 }
 
 JointModel::JointModel(const JointModel& jointModel) :
-mParentIndex(jointModel.mParentIndex), mChildIndex(jointModel.mChildIndex), mOwnIndex(
-jointModel.mOwnIndex) {
+	mParentIndex(jointModel.mParentIndex), mChildIndex(jointModel.mChildIndex), mOwnIndex(
+		jointModel.mOwnIndex) {
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 
@@ -35,11 +35,14 @@ JointModel::~JointModel() {
 }
 
 void JointModel::initialize(btDynamicsWorld* const world,
-btRigidBody* const limbA, btRigidBody* const limbB, const btTransform localA,
-const btTransform localB, const std::vector<LimbModel*>::size_type indexA,
-const std::vector<LimbModel*>::size_type indexB,
-const std::vector<LimbModel*>::size_type ownIndex,
-Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
+	btRigidBody* const limbA, btRigidBody* const limbB,
+	const btTransform localA, const btTransform localB,
+	const std::vector<LimbModel*>::size_type indexA,
+	const std::vector<LimbModel*>::size_type indexB,
+	const std::vector<LimbModel*>::size_type ownIndex,
+	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
+	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
+	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mParentIndex = indexA;
 	mChildIndex = indexB;
@@ -48,8 +51,10 @@ Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
 	mLocalB = localB;
 	mJointPhysics = new JointBt();
 	((JointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA, localB,
-	OgreBulletUtils::convert(jointLowerLimits),
-	OgreBulletUtils::convert(jointUpperLimits));
+		type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
+		OgreBulletUtils::convert(jointPitchAxis),
+		OgreBulletUtils::convert(jointLowerLimits),
+		OgreBulletUtils::convert(jointUpperLimits));
 
 	//TODO: proof of concept, make better.
 //	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
@@ -75,7 +80,7 @@ void JointModel::update(double timeSinceLastTick) {
 	mJointPhysics->update(timeSinceLastTick);
 
 	for (std::vector<Sensor*>::iterator sit = mSensors.begin();
-	sit != mSensors.end(); sit++) {
+		sit != mSensors.end(); sit++) {
 		(*sit)->update(timeSinceLastTick);
 	}
 
@@ -102,18 +107,18 @@ void JointModel::update(double timeSinceLastTick) {
 }
 
 void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-const Ogre::Vector3 angularUpperLimit) {
+	const Ogre::Vector3 angularUpperLimit) {
 	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);
 }
 
 void JointModel::setAngularStiffness(const double jointPitchStiffness,
-const double jointYawStiffness, const double jointRollStiffness) {
+	const double jointYawStiffness, const double jointRollStiffness) {
 //	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
 //			jointRollStiffness);
 }
 
 void JointModel::setAngularDamping(const double springPitchDampingCoefficient,
-double springYawDampingCoefficient, double springRollDampingCoefficient) {
+	double springYawDampingCoefficient, double springRollDampingCoefficient) {
 //	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
 //			springYawDampingCoefficient, springRollDampingCoefficient);
 }
@@ -124,7 +129,7 @@ bool JointModel::equals(const JointModel& jointModel) const {
 	}
 
 	if (!((JointBt*) mJointPhysics)->equals(
-	(*(JointBt*) jointModel.mJointPhysics))) {
+		(*(JointBt*) jointModel.mJointPhysics))) {
 		return false;
 	}
 
@@ -164,20 +169,21 @@ bool JointModel::isStrained() {
 }
 
 void JointModel::enableAngularMotor(const bool pitchEnable,
-const bool yawEnable, const bool rollEnable) {
+	const bool yawEnable, const bool rollEnable) {
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
-	pitchEnable);
+		pitchEnable);
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
-	yawEnable);
+		yawEnable);
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
-	rollEnable);
+		rollEnable);
 }
 
 void JointModel::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
-const Ogre::Vector3 maxSpeeds) {
+	const Ogre::Vector3 maxSpeeds) {
 	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(
-	OgreBulletUtils::convert(maxForces), OgreBulletUtils::convert(maxSpeeds),
-	OgreBulletUtils::convert(getLowerLimits()),
-	OgreBulletUtils::convert(getUpperLimits()));
+		OgreBulletUtils::convert(maxForces),
+		OgreBulletUtils::convert(maxSpeeds),
+		OgreBulletUtils::convert(getLowerLimits()),
+		OgreBulletUtils::convert(getUpperLimits()));
 }
 

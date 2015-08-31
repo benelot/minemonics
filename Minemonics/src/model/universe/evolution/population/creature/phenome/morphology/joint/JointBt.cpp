@@ -29,7 +29,7 @@
 //## utils headers
 
 JointBt::JointBt() :
-		mWorld(NULL) {
+	mWorld(NULL) {
 	mMotors.clear();
 }
 
@@ -38,16 +38,27 @@ JointBt::JointBt(const JointBt& jointBt) {
 	mInWorld = jointBt.mInWorld;
 
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
-			mit != jointBt.mMotors.end(); mit++) {
+		mit != jointBt.mMotors.end(); mit++) {
 		mMotors.push_back(*mit);
 	}
 }
 
 void JointBt::initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btTransform& tframeInA,
-const btTransform& tframeInB, btVector3 jointLowerLimits,
-btVector3 jointUpperLimits) {
+	btRigidBody* const bodyB, const btTransform& tframeInA,
+	const btTransform& tframeInB, JointPhysics::JointType type,
+	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
+	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+	btVector3 jointUpperLimits) {
 	mWorld = world;
+	mType = type;
+	mJointPitchEnabled = jointPitchEnabled;
+	mJointYawEnabled = jointYawEnabled;
+	mJointRollEnabled = jointRollEnabled;
+
+	mJointPitchAxisX = jointPitchAxis.x();
+	mJointPitchAxisY = jointPitchAxis.y();
+	mJointPitchAxisZ = jointPitchAxis.z();
+
 	mJointPitchMinAngle = jointLowerLimits.x();
 	mJointYawMinAngle = jointLowerLimits.y();
 	mJointRollMinAngle = jointLowerLimits.z();
@@ -66,7 +77,7 @@ JointBt::~JointBt() {
 
 	//delete and clear the motor vector
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-			motorIterator != mMotors.end(); motorIterator++) {
+		motorIterator != mMotors.end(); motorIterator++) {
 		delete (*motorIterator);
 	}
 
@@ -77,7 +88,7 @@ void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-			motorIterator != mMotors.end(); motorIterator++) {
+		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
@@ -87,12 +98,12 @@ void JointBt::update(double timeSinceLastTick) {
 }
 
 void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
-		const btVector3 maxSpeeds, const btVector3 lowerLimits,
-		const btVector3 upperLimits) {
+	const btVector3 maxSpeeds, const btVector3 lowerLimits,
+	const btVector3 upperLimits) {
 //	add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.getX(),
-			maxSpeeds.getX(), lowerLimits.getX(), upperLimits.getX());
+		maxSpeeds.getX(), lowerLimits.getX(), upperLimits.getX());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -100,7 +111,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 	// add yaw servo motor
 	servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.getY(),
-			maxSpeeds.getY(), lowerLimits.getY(), upperLimits.getY());
+		maxSpeeds.getY(), lowerLimits.getY(), upperLimits.getY());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -108,7 +119,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 	//add roll servo motor
 	servoMotor = new ServoMotor();
 	servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.getZ(),
-			maxSpeeds.getZ(), lowerLimits.getZ(), upperLimits.getZ());
+		maxSpeeds.getZ(), lowerLimits.getZ(), upperLimits.getZ());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -169,8 +180,7 @@ bool JointBt::isStrained() {
 }
 
 void JointBt::setRotationalLimitMotorEnabled(
-		const JointPhysics::RotationalDegreeOfFreedom index,
-		const bool enable) {
+	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 	for (; motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->getIndex() == index) {

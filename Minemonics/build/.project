@@ -491,42 +491,57 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/MenuBar.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/MenuBar.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/MenuBar.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/BasePanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/BasePanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/BasePanel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/MovablePanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/MovablePanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/MovablePanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/BoxSlider.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/BoxSlider.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/ParamsPanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/ParamsPanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/ParamsPanel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FPSPanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/FPSPanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/FPSPanel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/DetailsPanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/DetailsPanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/DetailsPanel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/MathGLPanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/ShowCasePanel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/ShowCasePanel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/ShowCasePanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/NewPlanetPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/NewPopulationPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Ogre3DFFMPEGVideoWriter.cpp</name>
@@ -737,11 +752,6 @@
 			<name>[Targets]/[exe] Minemonics/Source Files/Population.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/Population.cpp</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/RagDoll.cpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/ragdoll/RagDoll.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Snake.cpp</name>
@@ -1186,42 +1196,57 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/MenuBar.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/MenuBar.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/MenuBar.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/BasePanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/BasePanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/BasePanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/MovablePanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/MovablePanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/MovablePanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/BoxSlider.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/BoxSlider.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/ParamsPanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/ParamsPanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FPSPanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/FPSPanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/FPSPanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/DetailsPanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/DetailsPanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/DetailsPanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/MathGLPanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/ShowCasePanel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/elements/ShowCasePanel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/ShowCasePanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/NewPlanetPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/NewPopulationPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Ogre3DFFMPEGVideoWriter.hpp</name>
@@ -1482,11 +1507,6 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/Population.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/Population.hpp</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/RagDoll.hpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/ragdoll/RagDoll.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Snake.hpp</name>

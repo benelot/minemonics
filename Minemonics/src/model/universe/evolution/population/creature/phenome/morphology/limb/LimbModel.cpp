@@ -8,7 +8,6 @@
 #include <LinearMath/btScalar.h>
 #include <OgreVector3.h>
 
-
 //## view headers
 //# custom headers
 //## base headers
@@ -25,8 +24,7 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbModel::LimbModel() :
-		mLimbPhysics(NULL), mCreatureModel(
-		NULL), mParentJointIndex(0) {
+	mLimbPhysics(NULL), mCreatureModel(NULL), mParentJointIndex(0) {
 }
 
 LimbModel::LimbModel(const LimbModel& limbModel) {
@@ -41,24 +39,23 @@ LimbModel::~LimbModel() {
 }
 
 void LimbModel::initialize(btDynamicsWorld* const world,
-		CreatureModel* const creatureModel,
-		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-		const Ogre::Quaternion orientation,
-		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation,
-		const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction,
-		const Ogre::ColourValue color,
-		const std::vector<ComponentModel*>::size_type ownIndex) {
+	CreatureModel* const creatureModel, const LimbPhysics::PrimitiveType type,
+	const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+	const Ogre::Vector3 initialRelativePosition,
+	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
+	const double mass, const double restitution, const double friction,
+	const Ogre::ColourValue color, bool isIntraBodyColliding,
+	const std::vector<ComponentModel*>::size_type ownIndex) {
 	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new LimbBt();
 	((LimbBt*) mLimbPhysics)->initialize(world, this, type, position,
-			OgreBulletUtils::convert(orientation),
-			OgreBulletUtils::convert(initialRelativePosition),
-			OgreBulletUtils::convert(initialOrientation), dimensions,
-			btScalar(mass), btScalar(restitution), btScalar(friction), color);
+		OgreBulletUtils::convert(orientation),
+		OgreBulletUtils::convert(initialRelativePosition),
+		OgreBulletUtils::convert(initialOrientation), dimensions,
+		btScalar(mass), btScalar(restitution), btScalar(friction), color,
+		isIntraBodyColliding);
 
 	mCreatureModel = creatureModel;
 
@@ -77,7 +74,7 @@ void LimbModel::reposition(Ogre::Vector3 position) {
 }
 
 bool LimbModel::equals(const LimbModel& limbModel) const {
-	if(!ComponentModel::equals(limbModel)){
+	if (!ComponentModel::equals(limbModel)) {
 		return false;
 	}
 
@@ -94,14 +91,14 @@ LimbModel* LimbModel::clone() {
 
 void LimbModel::activateTactioceptors() {
 	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
-			tit != mTactioceptors.end(); tit++) {
+		tit != mTactioceptors.end(); tit++) {
 		(*tit)->setTouched(true);
 	}
 }
 
 void LimbModel::resetSensors() {
 	for (std::vector<Tactioceptor*>::iterator tit = mTactioceptors.begin();
-			tit != mTactioceptors.end(); tit++) {
+		tit != mTactioceptors.end(); tit++) {
 		(*tit)->setTouched(false);
 	}
 }
@@ -109,7 +106,7 @@ void LimbModel::resetSensors() {
 void LimbModel::update(double timeSinceLastTick) {
 
 	for (std::vector<Sensor*>::iterator sit = mSensors.begin();
-			sit != mSensors.end(); sit++) {
+		sit != mSensors.end(); sit++) {
 		(*sit)->update(timeSinceLastTick);
 	}
 
@@ -176,14 +173,13 @@ const Ogre::Vector3 LimbModel::getDimensions() const {
 	return mLimbPhysics->getDimensions();
 }
 
-std::ostream & operator<<(std::ostream &os,
-const LimbModel &limbModel) {
+std::ostream & operator<<(std::ostream &os, const LimbModel &limbModel) {
 	os << "LimbModel: LimbPhysics=" << (*limbModel.mLimbPhysics)
-	<< "/ParentJointIndex=" << limbModel.mParentJointIndex;
+		<< "/ParentJointIndex=" << limbModel.mParentJointIndex;
 
 	os << "/ChildJointIndices=[";
 	for (std::vector<std::vector<JointModel*>::size_type>::const_iterator it =
-	limbModel.mChildJointIndices.begin(); /**!< The vector of child joint indices.*/
+		limbModel.mChildJointIndices.begin(); /**!< The vector of child joint indices.*/
 	it != limbModel.mChildJointIndices.end(); it++) {
 		os << (*it);
 		os << "||";
@@ -191,7 +187,7 @@ const LimbModel &limbModel) {
 	os << "]/Sensors=[";
 
 	for (std::vector<Tactioceptor*>::const_iterator it =
-	limbModel.mTactioceptors.begin(); /**!< The vector of tactioceptors.*/
+		limbModel.mTactioceptors.begin(); /**!< The vector of tactioceptors.*/
 	it != limbModel.mTactioceptors.end(); it++) {
 		os << (**it);
 		os << "||";

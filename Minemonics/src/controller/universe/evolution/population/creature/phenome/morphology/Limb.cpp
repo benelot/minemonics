@@ -42,13 +42,13 @@
 BoostLogger Limb::mBoostLogger; /*<! initialize the boost logger*/
 Limb::_Init Limb::_initializer;
 Limb::Limb() :
-		mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Limb created.";
+	mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug) << "Limb created.";
 	mLimbModel = new LimbModel();
 }
 
 Limb::Limb(const Limb& limb) :
-		mLimbModel(limb.mLimbModel) {
+	mLimbModel(limb.mLimbModel) {
 	mCreature = limb.mCreature;
 	mLimbGraphics = limb.mLimbGraphics->clone();
 }
@@ -78,26 +78,26 @@ Limb::~Limb() {
 }
 
 void Limb::initialize(Creature* const creature,
-		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-		const Ogre::Quaternion orientation,
-		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation,
-		const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction,
-		const Ogre::ColourValue color, const int ownIndex) {
+	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+	const Ogre::Quaternion orientation,
+	const Ogre::Vector3 initialRelativePosition,
+	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
+	const double mass, const double restitution, const double friction,
+	const Ogre::ColourValue color, bool isIntraBodyColliding,
+	const int ownIndex) {
 
 	//initialize the model of the limb
 	mLimbModel = new LimbModel();
 	mLimbModel->initialize(
-			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			creature->getCreatureModel(), type, position, orientation,
-			initialRelativePosition, initialOrientation, dimensions, mass,
-			restitution, friction, color, ownIndex);
+		creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+		creature->getCreatureModel(), type, position, orientation,
+		initialRelativePosition, initialOrientation, dimensions, mass,
+		restitution, friction, color, isIntraBodyColliding, ownIndex);
 
 	mCreature = creature;
 
 	// Define the new component as a limb
-	Component::initialize(mLimbModel);
+	Component::initialize (mLimbModel);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D(mLimbModel);
@@ -164,7 +164,7 @@ void Limb::removeFromWorld() {
 }
 
 void Limb::generateLink(btMultiBody* multiBody, btVector3 origin,
-		btQuaternion rotation, int index) {
+	btQuaternion rotation, int index) {
 	mLimbModel->generateLink(multiBody, origin, rotation, index);
 }
 
@@ -172,6 +172,6 @@ void Limb::generateLink(btMultiBody* multiBody, btVector3 origin,
  * Get intersection point with the limb graphics given a straight line defined by origin and direction.
  */
 Ogre::Vector3 Limb::getIntersection(const Ogre::Vector3 origin,
-		const Ogre::Vector3 direction) {
+	const Ogre::Vector3 direction) {
 	return mLimbGraphics->getIntersection(origin, direction);
 }

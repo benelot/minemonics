@@ -57,11 +57,15 @@ public:
 	virtual ~JointModel();
 
 	void initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
-	btRigidBody* const limbB, const btTransform localA,
-	const btTransform localB, const std::vector<LimbModel*>::size_type indexA,
-	const std::vector<LimbModel*>::size_type indexB,
-	const std::vector<JointModel*>::size_type ownIndex,
-	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits);
+		btRigidBody* const limbB, const btTransform localA,
+		const btTransform localB,
+		const std::vector<LimbModel*>::size_type indexA,
+		const std::vector<LimbModel*>::size_type indexB,
+		const std::vector<JointModel*>::size_type ownIndex,
+		JointPhysics::JointType type, bool jointPitchEnabled,
+		bool jointYawEnabled, bool jointRollEnabled,
+		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
+		Ogre::Vector3 jointUpperLimits);
 
 	/**
 	 * Update the joint model.
@@ -109,7 +113,7 @@ public:
 	}
 
 	void initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 maxSpeeds);
+		const Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.
@@ -117,7 +121,7 @@ public:
 	 * @param angularUpperLimit Upper angular limits.
 	 */
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-	const Ogre::Vector3 angularUpperLimit);
+		const Ogre::Vector3 angularUpperLimit);
 
 	/**
 	 * Set angular joint stiffness.
@@ -126,7 +130,7 @@ public:
 	 * @param jointRollStiffness Joint stiffness in roll direction.
 	 */
 	void setAngularStiffness(const double jointPitchStiffness,
-	const double jointYawStiffness, const double jointRollStiffness);
+		const double jointYawStiffness, const double jointRollStiffness);
 
 	/**
 	 * Set the spring damping coefficients.
@@ -135,8 +139,8 @@ public:
 	 * @param springRollDampingCoefficient Damping coefficient of the spring in roll direction.
 	 */
 	void setAngularDamping(const double springPitchDampingCoefficient,
-	const double springYawDampingCoefficient,
-	const double springRollDampingCoefficient);
+		const double springYawDampingCoefficient,
+		const double springRollDampingCoefficient);
 
 	/**
 	 * Enable angular motors.
@@ -145,7 +149,7 @@ public:
 	 * @param rollEnable Enable roll motor.
 	 */
 	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
-	const bool rollEnable);
+		const bool rollEnable);
 
 	/**
 	 * Get the motors of this joint.
@@ -185,14 +189,36 @@ public:
 
 	Ogre::Vector3 getLowerLimits() {
 		return Ogre::Vector3(mJointPhysics->getJointRollMinAngle(),
-		mJointPhysics->getJointPitchMinAngle(),
-		mJointPhysics->getJointYawMinAngle());
+			mJointPhysics->getJointPitchMinAngle(),
+			mJointPhysics->getJointYawMinAngle());
 	}
 
 	Ogre::Vector3 getUpperLimits() {
 		return Ogre::Vector3(mJointPhysics->getJointRollMaxAngle(),
-		mJointPhysics->getJointPitchMaxAngle(),
-		mJointPhysics->getJointYawMaxAngle());
+			mJointPhysics->getJointPitchMaxAngle(),
+			mJointPhysics->getJointYawMaxAngle());
+	}
+
+	const bool getJointPitchEnabled() const {
+		return mJointPhysics->isJointPitchEnabled();
+	}
+
+	const bool getJointYawEnabled() const {
+		return mJointPhysics->isJointYawEnabled();
+	}
+
+	const bool getJointRollEnabled() const {
+		return mJointPhysics->isJointRollEnabled();
+	}
+
+	const JointPhysics::JointType getType() const {
+		return mJointPhysics->getType();
+	}
+
+	const btVector3 getJointPitchAxis() const {
+		return btVector3(mJointPhysics->getJointPitchAxisX(),
+			mJointPhysics->getJointPitchAxisY(),
+			mJointPhysics->getJointPitchAxisZ());
 	}
 
 	// Serialization
@@ -205,7 +231,7 @@ public:
 	 * @return A string containing all information about the joint model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const JointModel &jointModel) {
+		const JointModel &jointModel) {
 		return os;
 //		/**The physics component of the joint model*/
 //		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";

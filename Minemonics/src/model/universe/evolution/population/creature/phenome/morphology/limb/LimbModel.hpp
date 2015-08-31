@@ -75,11 +75,13 @@ public:
 	 * @param color The color of the limb.
 	 */
 	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
-	LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
-	Ogre::Quaternion orientation, const Ogre::Vector3 initialRelativePosition,
-	const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
-	double mass, double restitution, double friction, Ogre::ColourValue color,
-	std::vector<ComponentModel*>::size_type ownIndex);
+		LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
+		Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
+		double mass, double restitution, double friction,
+		Ogre::ColourValue color, bool isIntraBodyColliding,
+		std::vector<ComponentModel*>::size_type ownIndex);
 
 	void update(double timeSinceLastTick);
 	/**
@@ -163,7 +165,7 @@ public:
 	}
 
 	void generateLink(btMultiBody* multiBody, btVector3 origin,
-	btQuaternion rotation, int index) {
+		btQuaternion rotation, int index) {
 		mLimbPhysics->generateLink(multiBody, this, origin, rotation, index);
 	}
 
@@ -176,7 +178,7 @@ public:
 	}
 
 	void setParentJointIndex(
-	std::vector<LimbModel*>::size_type parentJointIndex) {
+		std::vector<LimbModel*>::size_type parentJointIndex) {
 		mParentJointIndex = parentJointIndex;
 	}
 
@@ -185,11 +187,15 @@ public:
 	}
 
 	void addChildJointIndex(
-	std::vector<JointModel*>::size_type childJointIndex) {
+		std::vector<JointModel*>::size_type childJointIndex) {
 		mChildJointIndices.push_back(childJointIndex);
 	}
 
-	// Serialization
+	const bool isIntraBodyColliding() const {
+		return mLimbPhysics->isIntraBodyColliding();
+	}
+
+// Serialization
 	/**
 	 * Give access to boost serialization
 	 */
@@ -202,7 +208,7 @@ public:
 	 * @return A string containing all information about the limb model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const LimbModel &limbModel);
+		const LimbModel &limbModel);
 	/**
 	 * Serializes the limb model to an xml file.
 	 * @param ar The archive.
