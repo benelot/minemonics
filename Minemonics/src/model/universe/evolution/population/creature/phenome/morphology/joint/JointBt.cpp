@@ -10,7 +10,7 @@
 //## model headers
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
+#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <BulletDynamics/ConstraintSolver/btTypedConstraint.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
@@ -55,17 +55,9 @@ void JointBt::initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	mJointYawEnabled = jointYawEnabled;
 	mJointRollEnabled = jointRollEnabled;
 
-	mJointPitchAxisX = jointPitchAxis.x();
-	mJointPitchAxisY = jointPitchAxis.y();
-	mJointPitchAxisZ = jointPitchAxis.z();
-
-	mJointPitchMinAngle = jointLowerLimits.x();
-	mJointYawMinAngle = jointLowerLimits.y();
-	mJointRollMinAngle = jointLowerLimits.z();
-
-	mJointPitchMaxAngle = jointUpperLimits.x();
-	mJointYawMaxAngle = jointUpperLimits.y();
-	mJointRollMaxAngle = jointUpperLimits.z();
+	mJointPitchAxis = OgreBulletUtils::convert(jointPitchAxis);
+	mJointMinAngle = OgreBulletUtils::convert(jointLowerLimits);
+	mJointMaxAngle = OgreBulletUtils::convert(jointUpperLimits);
 
 }
 
@@ -84,46 +76,55 @@ JointBt::~JointBt() {
 	mMotors.clear();
 }
 
-void JointBt::update(btMultiBody* multiBody, double timeSinceLastTick) {
+void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			(*motorIterator)->apply(multiBody, timeSinceLastTick);
+			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 
 //	isStrained();
 }
 
-void JointBt::initializeRotationalLimitMotors(const int ownIndex,
-	const btVector3 maxForces, const btVector3 maxSpeeds,
-	const btVector3 lowerLimits, const btVector3 upperLimits) {
-//	add pitch servo motor
-	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(ownIndex, JointPhysics::RDOF_PITCH, maxForces.getX(),
-		maxSpeeds.getX(), lowerLimits.getX(), upperLimits.getX());
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
-
-	// add yaw servo motor
-	servoMotor = new ServoMotor();
-	servoMotor->initialize(ownIndex, JointPhysics::RDOF_YAW, maxForces.getY(),
-		maxSpeeds.getY(), lowerLimits.getY(), upperLimits.getY());
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
-
-	//add roll servo motor
-	servoMotor = new ServoMotor();
-	servoMotor->initialize(ownIndex, JointPhysics::RDOF_ROLL, maxForces.getZ(),
-		maxSpeeds.getZ(), lowerLimits.getZ(), upperLimits.getZ());
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
-}
+//void JointBt::initializeRotationalLimitMotors(btMultiBody* multiBody,
+//	const int ownIndex, const btVector3 maxForces, const btVector3 maxSpeeds,
+//	const btVector3 lowerLimits, const btVector3 upperLimits) {
+//	// add pitch servo motor
+//	ServoMotor* servoMotor = new ServoMotor();
+//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_PITCH,
+//		maxForces.getX(), maxSpeeds.getX(), lowerLimits.getX(),
+//		upperLimits.getX());
+//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
+//		servoMotor->getJointMotor());
+//	//TODO: Hack, make better
+//	servoMotor->setEnabled(true);
+//	mMotors.push_back(servoMotor);
+//
+//	// add yaw servo motor
+//	servoMotor = new ServoMotor();
+//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_YAW,
+//		maxForces.getY(), maxSpeeds.getY(), lowerLimits.getY(),
+//		upperLimits.getY());
+//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
+//		servoMotor->getJointMotor());
+//	//TODO: Hack, make better
+//	servoMotor->setEnabled(true);
+//	mMotors.push_back(servoMotor);
+//
+//	//add roll servo motor
+//	servoMotor = new ServoMotor();
+//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_ROLL,
+//		maxForces.getZ(), maxSpeeds.getZ(), lowerLimits.getZ(),
+//		upperLimits.getZ());
+//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
+//		servoMotor->getJointMotor());
+//	//TODO: Hack, make better
+//	servoMotor->setEnabled(true);
+//	mMotors.push_back(servoMotor);
+//}
 
 bool JointBt::equals(const JointBt& jointBt) const {
 

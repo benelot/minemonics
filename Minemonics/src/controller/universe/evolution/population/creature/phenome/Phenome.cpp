@@ -129,7 +129,7 @@ void Phenome::update(double timeSinceLastTick) {
 	// Update all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();
 		jit != mJoints.end(); jit++) {
-		(*jit)->update(mPhenotypeModel->getMultiBody(), timeSinceLastTick);
+		(*jit)->update(timeSinceLastTick);
 	}
 
 	mPhenotypeModel->update(timeSinceLastTick);

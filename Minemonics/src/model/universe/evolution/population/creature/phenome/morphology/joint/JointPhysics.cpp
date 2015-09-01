@@ -11,15 +11,16 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+
 //## view headers
 //## utils headers
 
 JointPhysics::JointPhysics() :
-	mInWorld(false), mType(JointPhysics::UNKNOWN_JOINT), mJointPitchAxisX(1), mJointPitchAxisY(
-		0), mJointPitchAxisZ(0), mJointPitchEnabled(true), mJointPitchMaxAngle(
-		0), mJointPitchMinAngle(0), mJointRollEnabled(true), mJointRollMaxAngle(
-		0), mJointRollMinAngle(0), mJointYawEnabled(true), mJointYawMaxAngle(0), mJointYawMinAngle(
-		0) {
+	mInWorld(false), mType(JointPhysics::UNKNOWN_JOINT), mJointPitchEnabled(
+		true), mJointRollEnabled(true), mJointYawEnabled(true), mJointMaxAngle(
+		0, 0, 0), mJointMaxForces(0, 0, 0), mJointMaxSpeeds(0, 0, 0), mJointMinAngle(
+		0, 0, 0), mJointPitchAxis(1, 0, 0) {
 }
 
 JointPhysics::~JointPhysics() {
@@ -34,11 +35,7 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 
-	if (mJointPitchAxisX != jointPhysics.mJointPitchAxisX) {
-		return false;
-	}
-
-	if (mJointPitchAxisY != jointPhysics.mJointPitchAxisY) {
+	if (mJointPitchAxis != jointPhysics.mJointPitchAxis) {
 		return false;
 	}
 
@@ -46,11 +43,19 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 
-	if (mJointPitchMaxAngle != jointPhysics.mJointPitchMaxAngle) {
+	if (mJointMinAngle != jointPhysics.mJointMinAngle) {
 		return false;
 	}
 
-	if (mJointPitchMinAngle != jointPhysics.mJointPitchMinAngle) {
+	if (mJointMaxAngle != jointPhysics.mJointMaxAngle) {
+		return false;
+	}
+
+	if (mJointMaxForces != jointPhysics.mJointMaxForces) {
+		return false;
+	}
+
+	if (mJointMaxSpeeds != jointPhysics.mJointMaxSpeeds) {
 		return false;
 	}
 
@@ -58,23 +63,7 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 
-	if (mJointRollMaxAngle != jointPhysics.mJointRollMaxAngle) {
-		return false;
-	}
-
-	if (mJointRollMinAngle != jointPhysics.mJointRollMinAngle) {
-		return false;
-	}
-
 	if (mJointYawEnabled != jointPhysics.mJointYawEnabled) {
-		return false;
-	}
-
-	if (mJointYawMaxAngle != jointPhysics.mJointYawMaxAngle) {
-		return false;
-	}
-
-	if (mJointYawMinAngle != jointPhysics.mJointYawMinAngle) {
 		return false;
 	}
 
@@ -82,4 +71,38 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 	return true;
+}
+
+void JointPhysics::generateMotors(const Ogre::Vector3 maxForces,
+	const Ogre::Vector3 maxSpeeds) {
+	mJointMaxForces = maxForces;
+	mJointMaxSpeeds = maxSpeeds;
+
+	// add pitch servo motor
+	ServoMotor* servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.x, maxSpeeds.x,
+		mJointMinAngle.x, mJointMaxAngle.x);
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+
+	if (mType == SPHERICAL_JOINT) {
+		// add yaw servo motor
+		servoMotor = new ServoMotor();
+		servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.y, maxSpeeds.y,
+			mJointMinAngle.y, mJointMaxAngle.y);
+
+		//TODO: Hack, make better
+		servoMotor->setEnabled(true);
+		mMotors.push_back(servoMotor);
+
+		//add roll servo motor
+		servoMotor = new ServoMotor();
+		servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.z,
+			maxSpeeds.z, mJointMinAngle.z, mJointMaxSpeeds.z);
+
+		//TODO: Hack, make better
+		servoMotor->setEnabled(true);
+		mMotors.push_back(servoMotor);
+	}
 }

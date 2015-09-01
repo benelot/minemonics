@@ -27,8 +27,8 @@
 #include <utils/ogre3D/Euler.hpp>
 
 ServoMotor::ServoMotor() :
-	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mJointMotor(
-		NULL), mLowerLimit(0), mUpperLimit(0), mJointIndex(0) {
+	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mLowerLimit(
+		0), mUpperLimit(0), mJointIndex(0) {
 }
 
 ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
@@ -41,7 +41,6 @@ ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
 	mMaxSpeed = servoMotor.mMaxSpeed;
 	mMotorType = servoMotor.mMotorType;
 	mPositionControlled = servoMotor.mPositionControlled;
-	mJointMotor = servoMotor.mJointMotor;
 	mLowerLimit = servoMotor.mLowerLimit;
 	mUpperLimit = servoMotor.mUpperLimit;
 }
@@ -50,11 +49,11 @@ ServoMotor::~ServoMotor() {
 	mJointMotorIndex = JointPhysics::RDOF_PITCH;
 }
 
-void ServoMotor::initialize(const int jointIndex,
+void ServoMotor::initialize(
 	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 	const double maxForce, const double maxSpeed, double lowerLimit,
 	double upperLimit) {
-	mJointIndex = jointIndex;
+
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
 	mMaxSpeed = maxSpeed;
@@ -62,7 +61,12 @@ void ServoMotor::initialize(const int jointIndex,
 	mUpperLimit = upperLimit;
 }
 
-void ServoMotor::apply(btMultiBody* multiBody, double timeSinceLastTick) {
+void ServoMotor::instantiate(btMultiBody* multiBody, const int jointIndex) {
+	mMultiBody = multiBody;
+	mJointIndex = jointIndex;
+}
+
+void ServoMotor::apply(double timeSinceLastTick) {
 //	if (!mJointMotor) {
 //		return;
 //	}
@@ -77,17 +81,14 @@ void ServoMotor::apply(btMultiBody* multiBody, double timeSinceLastTick) {
 		+ clampedInputValue * (mUpperLimit - mLowerLimit);
 
 	//calculate the angle error
-	btScalar angleError = targetAngle - multiBody->getJointPos(mJointIndex);
-//	btScalar angleError = targetAngle
-//		- mJointMotor->getPosition(mJointMotorIndex);
+	btScalar angleError = targetAngle - mMultiBody->getJointPos(mJointIndex);
 
 	float kP = 20;	//500
 	//simple p(roportional) controller
 	//calculate the target velocity and clamp it with the maximum speed
-	multiBody->setJointVel(mJointIndex,
+	mMultiBody->setJointVel(mJointIndex,
 		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
 		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError);
-//mJointMotor->setVelocityTarget();
 
 //TODO: Print to logger only
 //		std::cout << std::setw(10) << std::right << mMotorBt << "("

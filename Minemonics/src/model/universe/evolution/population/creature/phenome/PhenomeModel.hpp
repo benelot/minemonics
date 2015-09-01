@@ -59,8 +59,6 @@ public:
 
 	void addJointConstraints();
 
-	void addMotors();
-
 	/**
 	 * Reset the creature to the way it was born.
 	 */
@@ -188,7 +186,7 @@ public:
 	 * @return A string containing all information about the phenome model.
 	 */
 	friend std::ostream & operator<<(std::ostream& os,
-	const PhenomeModel& phenomeModel) {
+		const PhenomeModel& phenomeModel) {
 		os
 		/**if the phenome is in the world*/
 		<< "/PhenomeModel: isInWorld=" << phenomeModel.mInWorld
@@ -198,8 +196,8 @@ public:
 		/**The vector of limb models.*/
 
 		for (std::vector<LimbModel*>::const_iterator it =
-		phenomeModel.mLimbModels.begin(); it != phenomeModel.mLimbModels.end();
-		it++) {
+			phenomeModel.mLimbModels.begin();
+			it != phenomeModel.mLimbModels.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -208,8 +206,8 @@ public:
 
 		/**The vector of joint models.*/
 		for (std::vector<JointModel*>::const_iterator it =
-		phenomeModel.mJointModels.begin();
-		it != phenomeModel.mJointModels.end(); it++) {
+			phenomeModel.mJointModels.begin();
+			it != phenomeModel.mJointModels.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -218,8 +216,8 @@ public:
 
 		/**The vector of controllers.*/
 		for (std::vector<Controller*>::const_iterator it =
-		phenomeModel.mControllers.begin();
-		it != phenomeModel.mControllers.end(); it++) {
+			phenomeModel.mControllers.begin();
+			it != phenomeModel.mControllers.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
@@ -260,7 +258,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-			boost::log::attributes::constant<std::string>("PhenomeModel"));
+				boost::log::attributes::constant < std::string
+					> ("PhenomeModel"));
 		}
 	} _initializer;
 

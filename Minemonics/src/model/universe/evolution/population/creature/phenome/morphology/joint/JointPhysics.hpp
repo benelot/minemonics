@@ -85,7 +85,7 @@ public:
 	/**
 	 * Update the joint physics model
 	 */
-	virtual void update(btMultiBody* multiBody, double timeSinceLastTick) = 0;
+	virtual void update(double timeSinceLastTick) = 0;
 
 	/**
 	 * If the joint physics is in the world.
@@ -127,92 +127,21 @@ public:
 
 	virtual std::vector<Motor*>& getMotors() = 0;
 
+	void generateMotors(const Ogre::Vector3 maxForces,
+		const Ogre::Vector3 maxSpeeds);
+
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {
-		mJointPitchMinAngle = angularLowerLimit[RDOF_PITCH];
-		mJointPitchMaxAngle = angularUpperLimit[RDOF_PITCH];
-		mJointRollMinAngle = angularLowerLimit[RDOF_ROLL];
-		mJointRollMaxAngle = angularUpperLimit[RDOF_ROLL];
-		mJointYawMinAngle = angularLowerLimit[RDOF_YAW];
-		mJointYawMaxAngle = angularUpperLimit[RDOF_YAW];
+		mJointMinAngle.x = angularLowerLimit[RDOF_PITCH];
+		mJointMaxAngle.x = angularUpperLimit[RDOF_PITCH];
+		mJointMinAngle.z = angularLowerLimit[RDOF_ROLL];
+		mJointMaxAngle.z = angularUpperLimit[RDOF_ROLL];
+		mJointMinAngle.y = angularLowerLimit[RDOF_YAW];
+		mJointMaxAngle.y = angularUpperLimit[RDOF_YAW];
 	}
 
 	virtual void setRotationalLimitMotorEnabled(
 		const RotationalDegreeOfFreedom index, const bool enable) = 0;
-
-	double getJointPitchMaxAngle() const {
-		return mJointPitchMaxAngle;
-	}
-
-	void setJointPitchMaxAngle(double jointPitchMaxAngle) {
-		mJointPitchMaxAngle = jointPitchMaxAngle;
-	}
-
-	double getJointPitchMinAngle() const {
-		return mJointPitchMinAngle;
-	}
-
-	void setJointPitchMinAngle(double jointPitchMinAngle) {
-		mJointPitchMinAngle = jointPitchMinAngle;
-	}
-
-	double getJointRollMaxAngle() const {
-		return mJointRollMaxAngle;
-	}
-
-	void setJointRollMaxAngle(double jointRollMaxAngle) {
-		mJointRollMaxAngle = jointRollMaxAngle;
-	}
-
-	double getJointRollMinAngle() const {
-		return mJointRollMinAngle;
-	}
-
-	void setJointRollMinAngle(double jointRollMinAngle) {
-		mJointRollMinAngle = jointRollMinAngle;
-	}
-
-	double getJointYawMaxAngle() const {
-		return mJointYawMaxAngle;
-	}
-
-	void setJointYawMaxAngle(double jointYawMaxAngle) {
-		mJointYawMaxAngle = jointYawMaxAngle;
-	}
-
-	double getJointYawMinAngle() const {
-		return mJointYawMinAngle;
-	}
-
-	void setJointYawMinAngle(double jointYawMinAngle) {
-		mJointYawMinAngle = jointYawMinAngle;
-	}
-
-	//Serialization
-	friend class boost::serialization::access; /**!< Give access to boost serialization */
-
-	/**
-	 * Serializes the joint physics model to a string.
-	 * @param os The ostream.
-	 * @param jointPhysics The joint physics model we want to serialize.
-	 * @return A string containing all information about the joint physics model.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-		const JointPhysics &jointPhysics) {
-		os << "JointPhysics: inWorld=" << jointPhysics.mInWorld /**!< If the joint is in the world*/
-		<< "JointPitchLimit=[" /**!< Joint Pitch limit */
-		<< jointPhysics.mJointPitchMinAngle << ","
-			<< jointPhysics.mJointPitchMaxAngle
-
-			<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
-			<< jointPhysics.mJointYawMinAngle << ","
-			<< jointPhysics.mJointYawMaxAngle
-
-			<< "]/JointRollLimit=[" /**!< Joint Roll limit */
-			<< jointPhysics.mJointRollMinAngle << ","
-			<< jointPhysics.mJointRollMaxAngle << "]";
-		return os;
-	}
 
 	bool isJointPitchEnabled() const {
 		return mJointPitchEnabled;
@@ -246,28 +175,40 @@ public:
 		mType = type;
 	}
 
-	double getJointPitchAxisX() const {
-		return mJointPitchAxisX;
+	const Ogre::Vector3& getJointPitchAxis() const {
+		return mJointPitchAxis;
 	}
 
-	void setJointPitchAxisX(double jointPitchAxisX) {
-		mJointPitchAxisX = jointPitchAxisX;
+	const Ogre::Vector3& getJointMaxAngle() const {
+		return mJointMaxAngle;
 	}
 
-	double getJointPitchAxisY() const {
-		return mJointPitchAxisY;
+	const Ogre::Vector3& getJointMinAngle() const {
+		return mJointMinAngle;
 	}
 
-	void setJointPitchAxisY(double jointPitchAxisY) {
-		mJointPitchAxisY = jointPitchAxisY;
-	}
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
-	double getJointPitchAxisZ() const {
-		return mJointPitchAxisZ;
-	}
+	/**
+	 * Serializes the joint physics model to a string.
+	 * @param os The ostream.
+	 * @param jointPhysics The joint physics model we want to serialize.
+	 * @return A string containing all information about the joint physics model.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const JointPhysics &jointPhysics) {
+		os << "JointPhysics: inWorld=" << jointPhysics.mInWorld /**!< If the joint is in the world*/
+		<< "JointPitchLimit=[" /**!< Joint Pitch limit */
+		<< jointPhysics.mJointMinAngle.x << "," << jointPhysics.mJointMaxAngle.x
 
-	void setJointPitchAxisZ(double jointPitchAxisZ) {
-		mJointPitchAxisZ = jointPitchAxisZ;
+		<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
+		<< jointPhysics.mJointMinAngle.y << "," << jointPhysics.mJointMaxAngle.y
+
+		<< "]/JointRollLimit=[" /**!< Joint Roll limit */
+		<< jointPhysics.mJointMinAngle.z << "," << jointPhysics.mJointMaxAngle.z
+			<< "]";
+		return os;
 	}
 
 	/**
@@ -282,18 +223,19 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointYawEnabled)
 			& BOOST_SERIALIZATION_NVP(mJointRollEnabled)
 
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxisX) /**!< The direction of the joint pitch axis */
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxisY)
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxisZ)
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
 
-			& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< Joint Pitch limit */
-			& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
+			& BOOST_SERIALIZATION_NVP(mJointMinAngle.x) /**!< Joint Pitch limit */
+			& BOOST_SERIALIZATION_NVP(mJointMaxAngle.x)
 
-			& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< Joint Yaw limit */
-			& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
+			& BOOST_SERIALIZATION_NVP(mJointMinAngle.y) /**!< Joint Yaw limit */
+			& BOOST_SERIALIZATION_NVP(mJointMaxAngle.y)
 
-			& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< Joint Roll limit */
-			& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle);
+			& BOOST_SERIALIZATION_NVP(mJointMinAngle.z) /**!< Joint Roll limit */
+			& BOOST_SERIALIZATION_NVP(mJointMaxAngle.z)
+			& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
 	}
 protected:
 
@@ -301,12 +243,20 @@ protected:
 
 	JointType mType; /**!< The type of joint */
 
-	double mJointPitchAxisX, mJointPitchAxisY, mJointPitchAxisZ; /**!< The direction of the joint pitch axis*/
-	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
-	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
+	Ogre::Vector3 mJointPitchAxis;/**!< The direction of the joint pitch axis*/
+	Ogre::Vector3 mJointMaxAngle; /**!< Joint limits for each degree of freedom */
+	Ogre::Vector3 mJointMinAngle;
+	Ogre::Vector3 mJointMaxForces;
+	Ogre::Vector3 mJointMaxSpeeds;
 
 	// should not be serialized
 	bool mInWorld; /**!< If the joint physics is in the world or not. */
+
+	/**
+	 * The vector of motors that are working across this joint.
+	 * Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
+	 */
+	std::vector<Motor*> mMotors;
 };
 BOOST_CLASS_VERSION(JointPhysics, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointPhysics)

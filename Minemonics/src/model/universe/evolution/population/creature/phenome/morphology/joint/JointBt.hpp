@@ -4,6 +4,7 @@
 //# corresponding header
 //# forward declarations
 class Motor;
+class btMultiBody;
 
 //# system headers
 //## controller headers
@@ -60,9 +61,10 @@ public:
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	void initializeRotationalLimitMotors(const int ownIndex,
-		const btVector3 maxForces, const btVector3 maxSpeeds,
-		const btVector3 lowerLimits, const btVector3 upperLimits);
+	void initializeRotationalLimitMotors(btMultiBody* multiBody,
+		const int ownIndex, const btVector3 maxForces,
+		const btVector3 maxSpeeds, const btVector3 lowerLimits,
+		const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -77,7 +79,7 @@ public:
 	/**
 	 * Update the joint bullet physics model.
 	 */
-	void update(btMultiBody* multiBody, double timeSinceLastTick);
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Add the joint bullet physics model to the world.
@@ -195,8 +197,7 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<ServoMotor*>(NULL));
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics); /**!< Serialize the base object */
 	}
 
 private:
@@ -205,12 +206,6 @@ private:
 	 * The bullet dynamics world of the bullet physics engine. Reference only.
 	 */
 	btDynamicsWorld* mWorld;
-
-	/**
-	 * The vector of motors that are working across this joint.
-	 * Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
-	 */
-	std::vector<Motor*> mMotors;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

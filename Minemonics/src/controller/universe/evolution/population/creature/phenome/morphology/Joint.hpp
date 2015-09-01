@@ -90,13 +90,13 @@ public:
 	 * @param maxForces The maximum forces along the axes.
 	 * @param maxSpeeds The maximum speeds along the axes.
 	 */
-	void initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
+	void generateMotors(const Ogre::Vector3 maxForces,
 		const Ogre::Vector3 maxSpeeds);
 
 	/**
 	 * Updates the joint position and orientation.
 	 */
-	void update(btMultiBody* multiBody, double timeSinceLastTick);
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Add the joint to the graphical and model world.

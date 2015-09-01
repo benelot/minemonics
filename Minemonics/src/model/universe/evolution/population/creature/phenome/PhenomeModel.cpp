@@ -204,7 +204,7 @@ void PhenomeModel::generateBody() {
 	bool canSleep = true;
 
 	if (mJointModels.size() != 0) {
-		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
+		bool selfCollision = false;	//mLimbModels[0]->isIntraBodyColliding();
 
 		mMultiBody = new btMultiBody(mJointModels.size(),
 			mLimbModels[0]->getMass(), mLimbModels[0]->getInertia(),
@@ -246,6 +246,13 @@ void PhenomeModel::generateBody() {
 				break;
 			default:
 				break;
+			}
+
+			for (std::vector<Motor*>::iterator mit =
+				mJointModels[i]->getMotors().begin();
+				mit != mJointModels[i]->getMotors().end(); mit++) {
+				((ServoMotor*) (*mit))->instantiate(mMultiBody,
+					mJointModels[i]->getIndex());
 			}
 		}
 
@@ -318,25 +325,6 @@ void PhenomeModel::addJointConstraints() {
 		mLimitConstraints.push_back(limitCons);
 	}
 
-}
-
-void PhenomeModel::addMotors() {
-
-	for (int i = 0; i < mJointModels.size(); i++) {
-		for (std::vector<Motor*>::iterator sit =
-			mJointModels[i]->getMotors().begin();
-			sit != mJointModels[i]->getMotors().end(); sit++) {
-			//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
-			// Link joint limits
-			const float max_impulse = 100000.0f;
-			btMultiBodyJointMotor* jointMotor = new btMultiBodyJointMotor(
-				mMultiBody, mJointModels[i]->getIndex(), 0.0f, max_impulse);
-
-//			// The default value (100) behaves like a lock on -1.6
-//			limitCons->setMaxAppliedImpulse(40);
-			((ServoMotor*) (*sit))->setJointMotor(jointMotor);
-		}
-	}
 }
 
 void PhenomeModel::reset(const Ogre::Vector3 position) {

@@ -72,7 +72,7 @@ public:
 	 * Update the joint model.
 	 * @param timeSinceLastTick
 	 */
-	void update(btMultiBody* multiBody, double timeSinceLastTick);
+	void update(double timeSinceLastTick);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -113,7 +113,7 @@ public:
 		mJointPhysics = jointPhysics;
 	}
 
-	void initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
+	void generateMotors(const Ogre::Vector3 maxForces,
 		const Ogre::Vector3 maxSpeeds);
 
 	/**
@@ -189,15 +189,11 @@ public:
 	}
 
 	Ogre::Vector3 getLowerLimits() {
-		return Ogre::Vector3(mJointPhysics->getJointRollMinAngle(),
-			mJointPhysics->getJointPitchMinAngle(),
-			mJointPhysics->getJointYawMinAngle());
+		return mJointPhysics->getJointMinAngle();
 	}
 
 	Ogre::Vector3 getUpperLimits() {
-		return Ogre::Vector3(mJointPhysics->getJointRollMaxAngle(),
-			mJointPhysics->getJointPitchMaxAngle(),
-			mJointPhysics->getJointYawMaxAngle());
+		return mJointPhysics->getJointMaxAngle();
 	}
 
 	const bool getJointPitchEnabled() const {
@@ -217,9 +213,7 @@ public:
 	}
 
 	const btVector3 getJointPitchAxis() const {
-		return btVector3(mJointPhysics->getJointPitchAxisX(),
-			mJointPhysics->getJointPitchAxisY(),
-			mJointPhysics->getJointPitchAxisZ());
+		return OgreBulletUtils::convert(mJointPhysics->getJointPitchAxis());
 	}
 
 	// Serialization

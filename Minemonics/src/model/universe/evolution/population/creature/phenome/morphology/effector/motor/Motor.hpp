@@ -61,7 +61,7 @@ public:
 	/**
 	 * Apply the motor's effect.
 	 */
-	virtual void apply(btMultiBody* multiBody, double timeSinceLastTick) = 0;
+	virtual void apply(double timeSinceLastTick) = 0;
 
 	//Accessor methods
 

@@ -270,7 +270,7 @@ btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
 		if (mLink != NULL) {
-			if (!mIntraBodyColliding && false) {
+			if (!mIntraBodyColliding) {
 				mWorld->addCollisionObject(mLink,
 					PhysicsConfiguration::COL_CREATURE,
 					PhysicsConfiguration::CREATURE_COLLIDES_WITH);

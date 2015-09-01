@@ -40,10 +40,12 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(const int jointIndex,
+	void initialize(
 		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 		const double maxForce, const double maxSpeed, double lowerLimit,
 		double upperLimit);
+
+	void instantiate(btMultiBody* multiBody, const int jointIndex);
 	/**
 	 * Clone the servomotor.
 	 * @return The clone of the servo motor.
@@ -56,20 +58,12 @@ public:
 	 * Apply the movement of the servomotor on the joint it controls.
 	 * @param timeSinceLastTick
 	 */
-	void apply(btMultiBody* multiBody, double timeSinceLastTick);
+	void apply(double timeSinceLastTick);
 
 	//Accessor methods
 
 	int getJointMotorIndex() const {
 		return mJointMotorIndex;
-	}
-
-	const btMultiBodyJointMotor* getJointMotor() const {
-		return mJointMotor;
-	}
-
-	void setJointMotor(btMultiBodyJointMotor* jointMotor) {
-		mJointMotor = jointMotor;
 	}
 
 	// Serialization
@@ -104,7 +98,8 @@ private:
 
 	int mJointIndex; /**!< The index of the joint. */
 	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
-	btMultiBodyJointMotor* mJointMotor; /**!< The jointMotor of the servo */
+
+	btMultiBody* mMultiBody;
 
 	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
