@@ -76,8 +76,8 @@ void JointModel::initialize(btDynamicsWorld* const world,
 //	mLimitceptors.push_back(limitceptor);
 }
 
-void JointModel::update(double timeSinceLastTick) {
-	mJointPhysics->update(timeSinceLastTick);
+void JointModel::update(btMultiBody* multiBody, double timeSinceLastTick) {
+	mJointPhysics->update(multiBody, timeSinceLastTick);
 
 	for (std::vector<Sensor*>::iterator sit = mSensors.begin();
 		sit != mSensors.end(); sit++) {
@@ -180,7 +180,7 @@ void JointModel::enableAngularMotor(const bool pitchEnable,
 
 void JointModel::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
 	const Ogre::Vector3 maxSpeeds) {
-	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(
+	((JointBt*) mJointPhysics)->initializeRotationalLimitMotors(mOwnIndex,
 		OgreBulletUtils::convert(maxForces),
 		OgreBulletUtils::convert(maxSpeeds),
 		OgreBulletUtils::convert(getLowerLimits()),

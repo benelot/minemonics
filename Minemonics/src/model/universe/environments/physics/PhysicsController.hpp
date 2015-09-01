@@ -35,12 +35,14 @@ class btMultiBodyConstraintSolver;
  */
 class PhysicsController {
 public:
-
-	enum PhysicsControllerType {
+	enum SolverType {
+		FeatherstoneController, RigidbodyController
+	};
+	enum EnvironmentType {
 		GroundController, DeepSeaController
 	};
 
-	PhysicsController();
+	PhysicsController(SolverType solverType, EnvironmentType environmentType);
 	~PhysicsController();
 
 	/**
@@ -71,7 +73,7 @@ public:
 	 * @param collisionGroup its collision group
 	 * @param collidesWith With which groups it collides.
 	 */
-	void addBody(btRigidBody* const body,int collisionGroup,int collidesWith);
+	void addBody(btRigidBody* const body, int collisionGroup, int collidesWith);
 
 	/**
 	 * Remove a bullet ridig body.
@@ -79,9 +81,8 @@ public:
 	 */
 	void removeBody(btRigidBody* const body);
 
-
 	// Accessor methods
-	btMultiBodyDynamicsWorld*& getDynamicsWorld() {
+	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}
 
@@ -91,10 +92,10 @@ public:
 	 */
 	void setGravity(const double gravity) const {
 		mDynamicsWorld->setGravity(
-				btVector3(0,
-						-gravity
-								* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
-						0));
+			btVector3(0,
+				-gravity
+					* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
+				0));
 	}
 
 	/**
@@ -103,7 +104,7 @@ public:
 	 */
 	double getGravity() {
 		return -mDynamicsWorld->getGravity().getY()
-				/ PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR;
+			/ PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR;
 	}
 
 	bool isPhysicsPaused() const {
@@ -126,14 +127,16 @@ public:
 		mSimulationSpeed = simulationSpeed;
 	}
 
-private:
+protected:
 	//variables for to bullet physics API
 	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
 	btBroadphaseInterface* mBroadphase;
 	btCollisionDispatcher* mDispatcher;
-	btMultiBodyConstraintSolver* mSolver;
 	btDefaultCollisionConfiguration* mCollisionConfiguration;
-	btMultiBodyDynamicsWorld* mDynamicsWorld; //this is the most important class
+
+	//rigidbody
+	btDynamicsWorld* mDynamicsWorld;  //this is the most important class
+	btConstraintSolver* mSolver;
 
 	/**
 	 * Is the physics simulation paused or not?
@@ -149,6 +152,10 @@ private:
 	 * The simulation speed
 	 */
 	int mSimulationSpeed;
+
+	SolverType mSolverType;
+
+	EnvironmentType mEnvironmentType;
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_PHYSICSCONTROLLER_H_ */

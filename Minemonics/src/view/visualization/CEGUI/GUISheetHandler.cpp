@@ -39,7 +39,7 @@
 //## utils headers
 
 GUISheetHandler::GUISheetHandler() :
-mSimulationMgr(NULL), mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
+	mSimulationMgr(NULL), mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
 
 }
 
@@ -47,8 +47,8 @@ GUISheetHandler::~GUISheetHandler() {
 }
 
 void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
-CEGUI::System* const system, CEGUI::Window* const sheet,
-StateHandler* const stateHandler) {
+	CEGUI::System* const system, CEGUI::Window* const sheet,
+	StateHandler* const stateHandler) {
 
 	mSimulationMgr = simulationMgr;
 	mSystem = system;
@@ -61,10 +61,11 @@ StateHandler* const stateHandler) {
 		//File menu
 		//File->Quit
 		CEGUI::PushButton* quitButton =
-		(CEGUI::PushButton*) mWindow->getChildRecursive(
-		GUIConfiguration::quitApplicationCmd);
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::quitApplicationCmd);
 		quitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-		CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked, this));
+			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
+				this));
 	}
 
 	{
@@ -72,19 +73,19 @@ StateHandler* const stateHandler) {
 		//Evaluation menu
 		//Evaluation->Evolution Track
 		CEGUI::PushButton* evolutionTrackButton =
-		(CEGUI::PushButton*) mWindow->getChildRecursive(
-		GUIConfiguration::setEvolutionTrackCmd);
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::setEvolutionTrackCmd);
 		evolutionTrackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-		CEGUI::Event::Subscriber(&GUISheetHandler::evolutionTrackButtonClicked,
-		this));
+			CEGUI::Event::Subscriber(
+				&GUISheetHandler::evolutionTrackButtonClicked, this));
 
 		//Evaluation->Learning Track
 		CEGUI::PushButton* learningTrackButton =
-		(CEGUI::PushButton*) mWindow->getChildRecursive(
-		GUIConfiguration::setLearningTrackCmd);
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::setLearningTrackCmd);
 		learningTrackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-		CEGUI::Event::Subscriber(&GUISheetHandler::learningTrackButtonClicked,
-		this));
+			CEGUI::Event::Subscriber(
+				&GUISheetHandler::learningTrackButtonClicked, this));
 	}
 
 	{
@@ -92,11 +93,11 @@ StateHandler* const stateHandler) {
 		//Planet menu
 		//Planets->New Planet
 		CEGUI::PushButton* newPlanetButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
-		GUIConfiguration::newPlanetCmd);
+			(CEGUI::PushButton *) mWindow->getChildRecursive(
+				GUIConfiguration::newPlanetCmd);
 		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-		CEGUI::Event::Subscriber(&GUISheetHandler::newPlanetButtonClicked,
-		this));
+			CEGUI::Event::Subscriber(&GUISheetHandler::newPlanetButtonClicked,
+				this));
 	}
 
 //Evolution->Open Evolution
@@ -413,91 +414,91 @@ StateHandler* const stateHandler) {
 
 //Settings->Rendering->Ambient light->0 %
 	CEGUI::PushButton* pAmbientLight0Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight0Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight0Cmd);
 	pAmbientLight0Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight0ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight0ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->10 %
 	CEGUI::PushButton* pAmbientLight10Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight10Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight10Cmd);
 	pAmbientLight10Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight10ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight10ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->20 %
 	CEGUI::PushButton* pAmbientLight20Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight20Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight20Cmd);
 	pAmbientLight20Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight20ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight20ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->30 %
 	CEGUI::PushButton* pAmbientLight30Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight30Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight30Cmd);
 	pAmbientLight30Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight30ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight30ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->40 %
 	CEGUI::PushButton* pAmbientLight40Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight40Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight40Cmd);
 	pAmbientLight40Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight40ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight40ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->50 %
 	CEGUI::PushButton* pAmbientLight50Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight50Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight50Cmd);
 	pAmbientLight50Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight50ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight50ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->60 %
 	CEGUI::PushButton* pAmbientLight60Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight60Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight60Cmd);
 	pAmbientLight60Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight60ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight60ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->70 %
 	CEGUI::PushButton* pAmbientLight70Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight70Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight70Cmd);
 	pAmbientLight70Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight70ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight70ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->80 %
 	CEGUI::PushButton* pAmbientLight80Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight80Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight80Cmd);
 	pAmbientLight80Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight80ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight80ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->90 %
 	CEGUI::PushButton* pAmbientLight90Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight90Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight90Cmd);
 	pAmbientLight90Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight90ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight90ButtonClicked,
+			this));
 
 	//Settings->Rendering->Ambient light->100 %
 	CEGUI::PushButton* pAmbientLight100Button =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::ambientLight100Cmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::ambientLight100Cmd);
 	pAmbientLight100Button->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight100ButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight100ButtonClicked,
+			this));
 
 	//Settings->Rendering->Tune for Speed
 //	CEGUI::PushButton* pQuitButton =
@@ -605,79 +606,82 @@ StateHandler* const stateHandler) {
 
 //Settings->Physics->Gravity->No Gravity
 	CEGUI::PushButton* pNoGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::noGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::noGravityCmd);
 	pNoGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::noGravityButtonClicked, this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::noGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Pluto Gravity
 	CEGUI::PushButton* pPlutoGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive("cmdPlutoGravity");
+		(CEGUI::PushButton *) mWindow->getChildRecursive("cmdPlutoGravity");
 	pPlutoGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::plutoGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::plutoGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Moon Gravity
 	CEGUI::PushButton* pMoonGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::moonGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::moonGravityCmd);
 	pMoonGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::moonGravityButtonClicked, this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::moonGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Mars Gravity
 	CEGUI::PushButton* pMarsMercuryGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::marsMercuryGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::marsMercuryGravityCmd);
 	pMarsMercuryGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::marsMercuryGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(
+			&GUISheetHandler::marsMercuryGravityButtonClicked, this));
 
 	//Settings->Physics->Gravity->Uranus Gravity
 	CEGUI::PushButton* pUranusGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::uranusGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::uranusGravityCmd);
 	pUranusGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::uranusGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::uranusGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Venus/Saturn Gravity
 	CEGUI::PushButton* pVenusSaturnGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::venusSaturnGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::venusSaturnGravityCmd);
 	pVenusSaturnGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::venusSaturnGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(
+			&GUISheetHandler::venusSaturnGravityButtonClicked, this));
 
 	//Settings->Physics->Gravity->Earth Gravity
 	CEGUI::PushButton* pEarthGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::earthGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::earthGravityCmd);
 	pEarthGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::earthGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::earthGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Neptune Gravity
 	CEGUI::PushButton* pNeptuneGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::neptuneGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::neptuneGravityCmd);
 	pNeptuneGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::neptuneGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::neptuneGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Jupiter Gravity
 	CEGUI::PushButton* pJupiterGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::jupiterGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::jupiterGravityCmd);
 	pJupiterGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::jupiterGravityButtonClicked,
-	this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::jupiterGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Sun Gravity
 	CEGUI::PushButton* pSunGravityButton =
-	(CEGUI::PushButton *) mWindow->getChildRecursive(
-	GUIConfiguration::sunGravityCmd);
+		(CEGUI::PushButton *) mWindow->getChildRecursive(
+			GUIConfiguration::sunGravityCmd);
 	pSunGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-	CEGUI::Event::Subscriber(&GUISheetHandler::sunGravityButtonClicked, this));
+		CEGUI::Event::Subscriber(&GUISheetHandler::sunGravityButtonClicked,
+			this));
 
 	//Settings->Physics->Gravity->Custom Gravity
 
@@ -692,7 +696,7 @@ bool GUISheetHandler::quitButtonClicked(const CEGUI::EventArgs &args) {
 
 //Evaluation->Evolution Track
 bool GUISheetHandler::evolutionTrackButtonClicked(
-const CEGUI::EventArgs& args) {
+	const CEGUI::EventArgs& args) {
 	return true;
 }
 
@@ -703,11 +707,11 @@ bool GUISheetHandler::learningTrackButtonClicked(const CEGUI::EventArgs& args) {
 
 //Planets->New Planet
 bool GUISheetHandler::newPlanetButtonClicked(const CEGUI::EventArgs &args) {
-	Planet* planet = new Planet(Environment::PLANE, 2000,
-	SimulationManager::getSingleton()->getSun());
-
-	// add planet to universe
-	SimulationManager::getSingleton()->getUniverse().addPlanet(planet);
+//	Planet* planet = new Planet(Environment::PLANE, 2000,
+//	SimulationManager::getSingleton()->getSun());
+//
+//	// add planet to universe
+//	SimulationManager::getSingleton()->getUniverse().addPlanet(planet);
 	return true;
 }
 
@@ -723,13 +727,13 @@ bool GUISheetHandler::openEvolutionButtonClicked(const CEGUI::EventArgs &args) {
 
 //Evolution->Save Evolution as...
 bool GUISheetHandler::saveEvolutionAsButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
 //Close Evolution
 bool GUISheetHandler::closeEvolutionButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
@@ -740,7 +744,7 @@ bool GUISheetHandler::runEvolutionButtonClicked(const CEGUI::EventArgs &args) {
 
 //Pause Evolution
 bool GUISheetHandler::pauseEvolutionButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
@@ -776,13 +780,13 @@ bool GUISheetHandler::newPopulationButtonClicked(const CEGUI::EventArgs &args) {
 
 //Population->Save Population as...
 bool GUISheetHandler::savePopulationAsButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
 //Population->Close Population
 bool GUISheetHandler::closePopulationButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
@@ -798,7 +802,7 @@ bool GUISheetHandler::openCreatureButtonClicked(const CEGUI::EventArgs &args) {
 
 //Creature->Save Creature as...
 bool GUISheetHandler::saveCreatureAsButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
@@ -829,19 +833,19 @@ bool GUISheetHandler::spawnCapsuleButtonClicked(const CEGUI::EventArgs &args) {
 
 //Action->Return to Origin
 bool GUISheetHandler::returnToOriginButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
 //Settings->Population->Population Size...
 bool GUISheetHandler::populationSizeButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
 //Settings->Population->Selection Style...
 bool GUISheetHandler::selectionStyleButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
@@ -887,81 +891,81 @@ bool GUISheetHandler::ambientlight0ButtonClicked(const CEGUI::EventArgs &args) {
 
 //Settings->Rendering->Ambient light->10 %
 bool GUISheetHandler::ambientlight10ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.1, 0.1, 0.1));
+		Ogre::ColourValue(0.1, 0.1, 0.1));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->20 %
 bool GUISheetHandler::ambientlight20ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.2, 0.2, 0.2));
+		Ogre::ColourValue(0.2, 0.2, 0.2));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->30 %
 bool GUISheetHandler::ambientlight30ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.3, 0.3, 0.3));
+		Ogre::ColourValue(0.3, 0.3, 0.3));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->40 %
 bool GUISheetHandler::ambientlight40ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.4, 0.4, 0.4));
+		Ogre::ColourValue(0.4, 0.4, 0.4));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->50 %
 bool GUISheetHandler::ambientlight50ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.5, 0.5, 0.5));
+		Ogre::ColourValue(0.5, 0.5, 0.5));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->60 %
 bool GUISheetHandler::ambientlight60ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.6, 0.6, 0.6));
+		Ogre::ColourValue(0.6, 0.6, 0.6));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->70 %
 bool GUISheetHandler::ambientlight70ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.7, 0.7, 0.7));
+		Ogre::ColourValue(0.7, 0.7, 0.7));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->80 %
 bool GUISheetHandler::ambientlight80ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.8, 0.8, 0.8));
+		Ogre::ColourValue(0.8, 0.8, 0.8));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->90 %
 bool GUISheetHandler::ambientlight90ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(0.9, 0.9, 0.9));
+		Ogre::ColourValue(0.9, 0.9, 0.9));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->100 %
 bool GUISheetHandler::ambientlight100ButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	mSimulationMgr->getSceneManager()->setAmbientLight(
-	Ogre::ColourValue(1.0, 1.0, 1.0));
+		Ogre::ColourValue(1.0, 1.0, 1.0));
 	return true;
 }
 
@@ -972,7 +976,7 @@ bool GUISheetHandler::tuneForSpeedButtonClicked(const CEGUI::EventArgs &args) {
 
 //Settings->Rendering->Tune for Quality
 bool GUISheetHandler::tuneForQualityButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
@@ -1028,81 +1032,81 @@ bool GUISheetHandler::speed10ButtonClicked(const CEGUI::EventArgs &args) {
 
 //Settings->Physics->Pause Simulation
 bool GUISheetHandler::pauseSimulationButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	return true;
 }
 
 //Settings->Physics->Gravity->No Gravity
 bool GUISheetHandler::noGravityButtonClicked(const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::NO_GRAVITY);
+		PhysicsConfiguration::NO_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Pluto Gravity
 bool GUISheetHandler::plutoGravityButtonClicked(const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::PLUTO_GRAVITY);
+		PhysicsConfiguration::PLUTO_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Moon Gravity
 bool GUISheetHandler::moonGravityButtonClicked(const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::MOON_GRAVITY);
+		PhysicsConfiguration::MOON_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Mars/Mercury Gravity
 bool GUISheetHandler::marsMercuryGravityButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::MARS_GRAVITY);
+		PhysicsConfiguration::MARS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Uranus Gravity
 bool GUISheetHandler::uranusGravityButtonClicked(const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::URANUS_GRAVITY);
+		PhysicsConfiguration::URANUS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Venus/Saturn Gravity
 bool GUISheetHandler::venusSaturnGravityButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::VENUS_GRAVITY);
+		PhysicsConfiguration::VENUS_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Earth Gravity
 bool GUISheetHandler::earthGravityButtonClicked(const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::EARTH_GRAVITY);
+		PhysicsConfiguration::EARTH_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Neptune Gravity
 bool GUISheetHandler::neptuneGravityButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::NEPTUNE_GRAVITY);
+		PhysicsConfiguration::NEPTUNE_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Jupiter Gravity
 bool GUISheetHandler::jupiterGravityButtonClicked(
-const CEGUI::EventArgs &args) {
+	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::JUPITER_GRAVITY);
+		PhysicsConfiguration::JUPITER_GRAVITY);
 	return true;
 }
 
 //Settings->Physics->Gravity->Sun Gravity
 bool GUISheetHandler::sunGravityButtonClicked(const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getViewController().getSelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-	PhysicsConfiguration::SUN_GRAVITY);
+		PhysicsConfiguration::SUN_GRAVITY);
 	return true;
 }
 

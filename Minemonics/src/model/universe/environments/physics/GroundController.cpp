@@ -1,10 +1,3 @@
-/*
- * GroundController.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/environments/physics/GroundController.hpp>
 
@@ -21,12 +14,12 @@
 //## view headers
 //## utils headers
 
-GroundController::GroundController() {
-	// TODO Auto-generated constructor stub
+GroundController::GroundController(PhysicsController::SolverType solverType) :
+	PhysicsController(solverType, PhysicsController::GroundController) {
 
 }
 
 GroundController::~GroundController() {
-	// TODO Auto-generated destructor stub
+
 }
 

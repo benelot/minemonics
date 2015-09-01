@@ -51,7 +51,8 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	((JointO3D*) mJointGraphics)->initialize();
 
 	// Update the state of the joint.
-	update(0);
+	//TODO: Enable again later
+	//update(0);
 }
 
 Joint::Joint(const Joint& joint) :
@@ -88,9 +89,9 @@ void Joint::initializeRotationalLimitMotors(const Ogre::Vector3 maxForces,
 	mJointModel->initializeRotationalLimitMotors(maxForces, maxSpeeds);
 }
 
-void Joint::update(double timeSinceLastTick) {
+void Joint::update(btMultiBody* multiBody, double timeSinceLastTick) {
 	mJointGraphics->update(timeSinceLastTick);
-	mJointModel->update(timeSinceLastTick);
+	mJointModel->update(multiBody, timeSinceLastTick);
 }
 
 /**

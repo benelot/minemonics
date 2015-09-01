@@ -44,7 +44,8 @@ public:
 	 * Initialize the plane environment.
 	 * @param l The general light source.
 	 */
-	void initialize(const Ogre::Light* const l);
+	void initialize(const PhysicsController::SolverType solverType,
+		const Ogre::Light* const l);
 
 	/**
 	 * Update the plane environment.
@@ -72,7 +73,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>("Plane"));
+				boost::log::attributes::constant < std::string > ("Plane"));
 		}
 	} _initializer;
 };

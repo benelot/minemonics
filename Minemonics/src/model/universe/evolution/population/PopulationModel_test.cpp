@@ -14,6 +14,8 @@
 #include <controller/SaveController.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/GroundController.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -24,7 +26,8 @@ protected:
 		// Set up an object of the class you want to test
 		randomness = new Randomness();
 		population = new PopulationModel();
-		physicsController = new PhysicsController();
+		physicsController = new GroundController(
+			PhysicsController::FeatherstoneController);
 		physicsController->initBulletPhysics();
 		population->initialize(NULL, 0);
 		for (int i = 0; i < 30; ++i) {
@@ -56,7 +59,8 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		population = new PopulationModel();
-		physicsController = new PhysicsController();
+		physicsController = new GroundController(
+			PhysicsController::FeatherstoneController);
 		physicsController->initBulletPhysics();
 		population->initialize(NULL, 0);
 		for (int i = 0; i < 30; ++i) {
@@ -69,7 +73,7 @@ protected:
 
 		population2 = new PopulationModel();
 
-		SaveController<PopulationModel> saveController;
+		SaveController < PopulationModel > saveController;
 
 		saveController.save(*population, "Population.test");
 

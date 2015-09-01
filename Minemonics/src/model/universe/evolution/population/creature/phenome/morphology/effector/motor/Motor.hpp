@@ -5,6 +5,7 @@
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 
 //# forward declarations
+class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -60,7 +61,7 @@ public:
 	/**
 	 * Apply the motor's effect.
 	 */
-	virtual void apply(double timeSinceLastTick) = 0;
+	virtual void apply(btMultiBody* multiBody, double timeSinceLastTick) = 0;
 
 	//Accessor methods
 

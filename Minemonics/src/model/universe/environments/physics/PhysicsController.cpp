@@ -25,11 +25,12 @@
 //## view headers
 //## utils headers
 
-PhysicsController::PhysicsController() :
-		mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
-		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(
-		NULL), mSimulationSpeed(
-				pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)) {
+PhysicsController::PhysicsController(SolverType solverType,
+	EnvironmentType environmentType) :
+	mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
+		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
+		pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)), mSolverType(
+		solverType), mEnvironmentType(environmentType) {
 
 }
 
@@ -42,31 +43,41 @@ void PhysicsController::initBulletPhysics() {
 	mCollisionConfiguration = new btDefaultCollisionConfiguration(); //collision configuration contains default setup for memory, collision setup
 	mDispatcher = new btCollisionDispatcher(mCollisionConfiguration); //use the default collision dispatcher
 	mBroadphase = new btDbvtBroadphase();
-//	mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
-	//Use the btMultiBodyConstraintSolver for Featherstone btMultiBody support
-	mSolver = new btMultiBodyConstraintSolver;
 
-	//use btMultiBodyDynamicsWorld for Featherstone btMultiBody support
-	mDynamicsWorld = new btMultiBodyDynamicsWorld(mDispatcher,
-			mBroadphase, mSolver, mCollisionConfiguration);
-//	mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
-//			mSolver, mCollisionConfiguration);
-	//TODO: Not sure if helps
-//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
-//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
+	switch (mSolverType) {
+	case PhysicsController::FeatherstoneController: {
+		//Use the btMultiBodyConstraintSolver for Featherstone btMultiBody support
+		mSolver = new btMultiBodyConstraintSolver;
+		//use btMultiBodyDynamicsWorld for Featherstone btMultiBody support
+		mDynamicsWorld = new btMultiBodyDynamicsWorld(mDispatcher, mBroadphase,
+			(btMultiBodyConstraintSolver*) mSolver, mCollisionConfiguration);
+		break;
+	}
+	case PhysicsController::RigidbodyController: {
+		mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
+		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
+			mSolver, mCollisionConfiguration);
+		//TODO: Not sure if helps
+		//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
+		//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
+		break;
+	}
+	default:
+		break;
+	}
 
 	mDynamicsWorld->setGravity(
-			btVector3(0,
-					-PhysicsConfiguration::EARTH_GRAVITY
-							* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
-					0));
+		btVector3(0,
+			-PhysicsConfiguration::EARTH_GRAVITY
+				* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
+			0));
 }
 
 void PhysicsController::exitBulletPhysics() {
 	//cleanup in the reverse order of creation/initialization
 
 	for (int i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) //remove the rigidbodies from the dynamics world and delete them
-			{
+		{
 		btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[i];
 		btRigidBody* body = btRigidBody::upcast(obj);
 		if (body && body->getMotionState())
@@ -77,7 +88,7 @@ void PhysicsController::exitBulletPhysics() {
 	}
 
 	for (int j = 0; j < mCollisionShapes.size(); j++) //delete collision shapes
-			{
+		{
 		btCollisionShape* shape = mCollisionShapes[j];
 		delete shape;
 	}
@@ -100,15 +111,11 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 	if (mDynamicsWorld && (!mPhysicsPaused || mPhysicsStepped)) {
 
 		if (timeStep) {
-			//calculate the number of substeps the simulator needs to take
+			// since we want to see all substeps, we make them by ourselves
 			int subSteps = 1;
-//					PhysicsConfiguration::SIMULATOR_SECURITY_MARGIN
-//							+ ceil(
-//									timeStep
-//											/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 
 			mDynamicsWorld->stepSimulation(timeStep, subSteps,
-					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+				PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 		}
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
@@ -124,9 +131,10 @@ void PhysicsController::addBody(btRigidBody* const body) {
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
 }
 
-void PhysicsController::addBody(btRigidBody* const body,int collisionGroup,int collidesWith) {
+void PhysicsController::addBody(btRigidBody* const body, int collisionGroup,
+	int collidesWith) {
 	mCollisionShapes.push_back(body->getCollisionShape());
-	mDynamicsWorld->addRigidBody(body,collisionGroup,collidesWith); //add the body to the dynamics world
+	mDynamicsWorld->addRigidBody(body, collisionGroup, collidesWith); //add the body to the dynamics world
 }
 
 void PhysicsController::removeBody(btRigidBody* body) {

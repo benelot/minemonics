@@ -28,27 +28,28 @@
 
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
-Planet::Planet(const Environment::EnvironmentType type,
-		const int evaluationTime,Ogre::Light* light) :
-		mEnvironment(NULL) {
+Planet::Planet(const PhysicsController::SolverType solverType,
+	const Environment::EnvironmentType type, const int evaluationTime,
+	Ogre::Light* light) :
+	mEnvironment(NULL) {
 	mPlanetModel = new PlanetModel();
 
 	//create earth evolution
 	mEvolution.initialize(
-			&SimulationManager::getSingleton()->getUniverse().getEvaluationController(),
-			this, evaluationTime);
+		&SimulationManager::getSingleton()->getUniverse().getEvaluationController(),
+		this, evaluationTime);
 
 	// set up environment
 	switch (type) {
 	case Environment::HILLS: {
 		//		mEnvironment = new Hills();
-		//		((Hills*) mEnvironment)->initialize(this, NULL);
+		//		((Hills*) mEnvironment)->initialize(solverType, light);
 		break;
 	}
 	case Environment::PLANE: {
 		//create the terrain
 		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(NULL);
+		((Plane*) mEnvironment)->initialize(solverType, light);
 		//TODO: Improve the head light #134.
 //		((Plane*) mEnvironment)->initialize(
 //				(Ogre::Light*) SimulationManager::getSingleton()->getCameraHandler().getCamNode()->getAttachedObject(
@@ -57,11 +58,11 @@ Planet::Planet(const Environment::EnvironmentType type,
 	}
 	}
 	mPlanetModel->initialize(mEvolution.getEvolutionModel(),
-			mEnvironment->getEnvironmentModel());
+		mEnvironment->getEnvironmentModel());
 }
 
 Planet::Planet(PlanetModel* const planetModel) :
-		mEnvironment(NULL), mPlanetModel(planetModel) {
+	mEnvironment(NULL), mPlanetModel(planetModel) {
 }
 
 Planet::~Planet() {
@@ -76,7 +77,7 @@ void Planet::addPopulation(Population* const population) {
 
 void Planet::stepPhysics(const double timeSinceLastFrame) {
 	mPlanetModel->getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(
-			timeSinceLastFrame);
+		timeSinceLastFrame);
 }
 
 void Planet::update(double timeSinceLastTick) {
@@ -85,7 +86,6 @@ void Planet::update(double timeSinceLastTick) {
 }
 
 bool Planet::proceedEvaluation() {
-
 
 	//if the evolution can not proceed, then remove the environment model from the world.
 	bool canNotProceed = !mEvolution.proceedEvaluation();

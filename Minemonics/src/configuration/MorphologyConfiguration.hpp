@@ -165,7 +165,7 @@ public:
 
 	static const double JOINT_MIN_X_OFFSET = 0;
 
-	static const double JOINT_MAX_X_OFFSET = 2* M_PI;
+	static const double JOINT_MAX_X_OFFSET = 2 * M_PI;
 
 	static const double JOINT_MIN_Y_OFFSET = 0;
 

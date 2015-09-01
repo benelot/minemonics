@@ -2,7 +2,7 @@
 #define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_GROUNDCONTROLLER_H_
 
 //# forward declarations
-#include <model/universe/environments/physics/MotionController.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //# system headers
 //## controller headers
@@ -22,9 +22,9 @@
  * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
-class GroundController: public MotionController {
+class GroundController: public PhysicsController {
 public:
-	GroundController();
+	GroundController(PhysicsController::SolverType solverType);
 	virtual ~GroundController();
 };
 

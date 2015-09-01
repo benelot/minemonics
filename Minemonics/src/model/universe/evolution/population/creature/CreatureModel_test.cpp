@@ -18,6 +18,8 @@
 #include <controller/SaveController.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/GroundController.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -28,7 +30,8 @@ protected:
 		randomness = new Randomness();
 
 		creature = new CreatureModel();
-		physicsController = new PhysicsController();
+		physicsController = new GroundController(
+			PhysicsController::FeatherstoneController);
 		physicsController->initBulletPhysics();
 		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
@@ -56,7 +59,8 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		creature = new CreatureModel();
-		physicsController = new PhysicsController();
+		physicsController = new GroundController(
+			PhysicsController::FeatherstoneController);
 		physicsController->initBulletPhysics();
 		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
@@ -64,7 +68,7 @@ protected:
 
 		creature2 = new CreatureModel();
 
-		SaveController<CreatureModel> saveController;
+		SaveController < CreatureModel > saveController;
 
 		saveController.save(*creature, "Creature.test");
 

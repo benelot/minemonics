@@ -9,6 +9,7 @@
 
 //## controller headers
 //## model headers
+#include <BulletDynamics/Featherstone/btMultiBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
 
 //## view headers
@@ -26,14 +27,15 @@
 #include <utils/ogre3D/Euler.hpp>
 
 ServoMotor::ServoMotor() :
-		Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mJointMotor(
-		NULL),mLowerLimit(0),mUpperLimit(0) {
+	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mJointMotor(
+		NULL), mLowerLimit(0), mUpperLimit(0), mJointIndex(0) {
 }
 
 ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
-		Motor(SERVO_MOTOR) {
+	Motor(SERVO_MOTOR) {
 	mEnabled = servoMotor.mEnabled;
 	mIndex = servoMotor.mIndex;
+	mJointIndex = servoMotor.mJointIndex;
 	mJointMotorIndex = servoMotor.mJointMotorIndex;
 	mMaxForce = servoMotor.mMaxForce;
 	mMaxSpeed = servoMotor.mMaxSpeed;
@@ -48,9 +50,11 @@ ServoMotor::~ServoMotor() {
 	mJointMotorIndex = JointPhysics::RDOF_PITCH;
 }
 
-void ServoMotor::initialize(
-		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		const double maxForce, const double maxSpeed,double lowerLimit, double upperLimit) {
+void ServoMotor::initialize(const int jointIndex,
+	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+	const double maxForce, const double maxSpeed, double lowerLimit,
+	double upperLimit) {
+	mJointIndex = jointIndex;
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
 	mMaxSpeed = maxSpeed;
@@ -58,29 +62,32 @@ void ServoMotor::initialize(
 	mUpperLimit = upperLimit;
 }
 
-void ServoMotor::apply(double timeSinceLastTick) {
-	if(!mJointMotor){
-		return;
-	}
+void ServoMotor::apply(btMultiBody* multiBody, double timeSinceLastTick) {
+//	if (!mJointMotor) {
+//		return;
+//	}
 //		mMotorBt->m_enableMotor = mEnabled;
 	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 	btScalar clampedInputValue =
-			(getInputValue() > 1.0f) ? 1.0f :
-			(getInputValue() < 0.0f) ? 0.0f : getInputValue();
+		(getInputValue() > 1.0f) ? 1.0f :
+		(getInputValue() < 0.0f) ? 0.0f : getInputValue();
 
 	//calculate the target angle of the motor
 	btScalar targetAngle = mLowerLimit
-			+ clampedInputValue * (mUpperLimit - mLowerLimit);
+		+ clampedInputValue * (mUpperLimit - mLowerLimit);
 
 	//calculate the angle error
-	btScalar angleError = targetAngle - mJointMotor->getPosition(mJointMotorIndex);
+	btScalar angleError = targetAngle - multiBody->getJointPos(mJointIndex);
+//	btScalar angleError = targetAngle
+//		- mJointMotor->getPosition(mJointMotorIndex);
 
+	float kP = 20;	//500
 	//simple p(roportional) controller
 	//calculate the target velocity and clamp it with the maximum speed
-	mJointMotor->setVelocityTarget(
-			(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-			(500.f * angleError < -mMaxSpeed) ?
-					-mMaxSpeed : 500.f * angleError);
+	multiBody->setJointVel(mJointIndex,
+		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
+		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError);
+//mJointMotor->setVelocityTarget();
 
 //TODO: Print to logger only
 //		std::cout << std::setw(10) << std::right << mMotorBt << "("

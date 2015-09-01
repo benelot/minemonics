@@ -3,6 +3,7 @@
 
 //# corresponding header
 //# forward declarations
+class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -84,7 +85,7 @@ public:
 	/**
 	 * Update the joint physics model
 	 */
-	virtual void update(double timeSinceLastTick) = 0;
+	virtual void update(btMultiBody* multiBody, double timeSinceLastTick) = 0;
 
 	/**
 	 * If the joint physics is in the world.
@@ -113,6 +114,13 @@ public:
 	 * @return If the joint is under tension.
 	 */
 	virtual bool isStrained() = 0;
+
+	/**
+	 * Compare the joint physics model to another joint physics model.
+	 * @param jointPhysics Another joint physics model.
+	 * @return If the joint physics model is equal to the other joint physics model.
+	 */
+	bool equals(const JointPhysics & jointPhysics) const;
 
 	//Accessor methods
 	virtual const std::vector<Motor*>& getMotors() const = 0;

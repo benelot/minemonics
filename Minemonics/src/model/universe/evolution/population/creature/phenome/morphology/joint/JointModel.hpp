@@ -7,6 +7,7 @@
 //# forward declarations
 class btDynamicsWorld;
 class btRigidBody;
+class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -71,7 +72,7 @@ public:
 	 * Update the joint model.
 	 * @param timeSinceLastTick
 	 */
-	void update(double timeSinceLastTick);
+	void update(btMultiBody* multiBody, double timeSinceLastTick);
 
 	/**
 	 * Reset the joint to the place when the creature was born.

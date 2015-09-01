@@ -26,6 +26,7 @@ set(MODELHDRS
 	
     ## bullet physics controller
     ./model/universe/environments/physics/PhysicsController.hpp
+    ./model/universe/environments/physics/GroundController.hpp
     ./model/universe/environments/physics/BulletPicker.hpp
 	
 	## juries
@@ -103,6 +104,7 @@ set(MODELSRCS
 	
 	## bullet physics controller
 	./model/universe/environments/physics/PhysicsController.cpp
+	./model/universe/environments/physics/GroundController.cpp
 	./model/universe/environments/physics/BulletPicker.cpp
    
     ## juries

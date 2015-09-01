@@ -25,3 +25,61 @@ JointPhysics::JointPhysics() :
 JointPhysics::~JointPhysics() {
 }
 
+bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
+	if (mInWorld != jointPhysics.mInWorld) {
+		return false;
+	}
+
+	if (mType != jointPhysics.mType) {
+		return false;
+	}
+
+	if (mJointPitchAxisX != jointPhysics.mJointPitchAxisX) {
+		return false;
+	}
+
+	if (mJointPitchAxisY != jointPhysics.mJointPitchAxisY) {
+		return false;
+	}
+
+	if (mJointPitchEnabled != jointPhysics.mJointPitchEnabled) {
+		return false;
+	}
+
+	if (mJointPitchMaxAngle != jointPhysics.mJointPitchMaxAngle) {
+		return false;
+	}
+
+	if (mJointPitchMinAngle != jointPhysics.mJointPitchMinAngle) {
+		return false;
+	}
+
+	if (mJointRollEnabled != jointPhysics.mJointRollEnabled) {
+		return false;
+	}
+
+	if (mJointRollMaxAngle != jointPhysics.mJointRollMaxAngle) {
+		return false;
+	}
+
+	if (mJointRollMinAngle != jointPhysics.mJointRollMinAngle) {
+		return false;
+	}
+
+	if (mJointYawEnabled != jointPhysics.mJointYawEnabled) {
+		return false;
+	}
+
+	if (mJointYawMaxAngle != jointPhysics.mJointYawMaxAngle) {
+		return false;
+	}
+
+	if (mJointYawMinAngle != jointPhysics.mJointYawMinAngle) {
+		return false;
+	}
+
+	if (mType != jointPhysics.mType) {
+		return false;
+	}
+	return true;
+}

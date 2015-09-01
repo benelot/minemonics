@@ -84,25 +84,25 @@ JointBt::~JointBt() {
 	mMotors.clear();
 }
 
-void JointBt::update(double timeSinceLastTick) {
+void JointBt::update(btMultiBody* multiBody, double timeSinceLastTick) {
 
 	//apply motor forces
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			(*motorIterator)->apply(timeSinceLastTick);
+			(*motorIterator)->apply(multiBody, timeSinceLastTick);
 		}
 	}
 
 //	isStrained();
 }
 
-void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
-	const btVector3 maxSpeeds, const btVector3 lowerLimits,
-	const btVector3 upperLimits) {
+void JointBt::initializeRotationalLimitMotors(const int ownIndex,
+	const btVector3 maxForces, const btVector3 maxSpeeds,
+	const btVector3 lowerLimits, const btVector3 upperLimits) {
 //	add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.getX(),
+	servoMotor->initialize(ownIndex, JointPhysics::RDOF_PITCH, maxForces.getX(),
 		maxSpeeds.getX(), lowerLimits.getX(), upperLimits.getX());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
@@ -110,7 +110,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 
 	// add yaw servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.getY(),
+	servoMotor->initialize(ownIndex, JointPhysics::RDOF_YAW, maxForces.getY(),
 		maxSpeeds.getY(), lowerLimits.getY(), upperLimits.getY());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
@@ -118,7 +118,7 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 
 	//add roll servo motor
 	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.getZ(),
+	servoMotor->initialize(ownIndex, JointPhysics::RDOF_ROLL, maxForces.getZ(),
 		maxSpeeds.getZ(), lowerLimits.getZ(), upperLimits.getZ());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
@@ -126,6 +126,10 @@ void JointBt::initializeRotationalLimitMotors(const btVector3 maxForces,
 }
 
 bool JointBt::equals(const JointBt& jointBt) const {
+
+	if (JointPhysics::equals(jointBt)) {
+		return false;
+	}
 
 	/**Comparison of motors*/
 	if (mMotors.size() != jointBt.mMotors.size()) {

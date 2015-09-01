@@ -60,9 +60,9 @@ public:
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	void initializeRotationalLimitMotors(const btVector3 maxForces,
-		const btVector3 maxSpeeds, const btVector3 lowerLimits,
-		const btVector3 upperLimits);
+	void initializeRotationalLimitMotors(const int ownIndex,
+		const btVector3 maxForces, const btVector3 maxSpeeds,
+		const btVector3 lowerLimits, const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -77,7 +77,7 @@ public:
 	/**
 	 * Update the joint bullet physics model.
 	 */
-	void update(double timeSinceLastTick);
+	void update(btMultiBody* multiBody, double timeSinceLastTick);
 
 	/**
 	 * Add the joint bullet physics model to the world.

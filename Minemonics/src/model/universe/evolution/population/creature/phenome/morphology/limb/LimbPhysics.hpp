@@ -257,6 +257,14 @@ public:
 		return mFriction;
 	}
 
+	bool isIntraBodyColliding() const {
+		return mIntraBodyColliding;
+	}
+
+	void setIntraBodyColliding(bool intraBodyColliding) {
+		mIntraBodyColliding = intraBodyColliding;
+	}
+
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization*?
 
@@ -299,14 +307,6 @@ public:
 
 			<< "/Volume=" << limbPhysics.mVolume /**!< The volume of the limb physics model*/
 			<< "/IntraBodyColliding=" << limbPhysics.mIntraBodyColliding; /**!< If the limb is colliding with the other limbs */
-	}
-
-	bool isIntraBodyColliding() const {
-		return mIntraBodyColliding;
-	}
-
-	void setIntraBodyColliding(bool intraBodyColliding) {
-		mIntraBodyColliding = intraBodyColliding;
 	}
 
 	/**

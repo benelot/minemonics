@@ -365,6 +365,7 @@ public:
 			& BOOST_SERIALIZATION_NVP(mOrientationZ)
 			& BOOST_SERIALIZATION_NVP(mOrientationW)
 
+			& BOOST_SERIALIZATION_NVP(mIntraBodyColliding) /**!< If the limb will be colliding with others */
 			& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor) /** !< The shrink factor propagated along the branches of the morphogene*/
 
 			& BOOST_SERIALIZATION_NVP(mRepetitionLimit) /** !< The number of repetitions of this gene one after another.*/

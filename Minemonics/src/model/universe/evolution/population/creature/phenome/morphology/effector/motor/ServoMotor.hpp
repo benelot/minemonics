@@ -5,6 +5,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
+class btMultiBody;
 class btMultiBodyJointMotor;
 
 //# system headers
@@ -39,19 +40,23 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-			const double maxForce, const double maxSpeed,double lowerLimit, double upperLimit);
+	void initialize(const int jointIndex,
+		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+		const double maxForce, const double maxSpeed, double lowerLimit,
+		double upperLimit);
 	/**
 	 * Clone the servomotor.
 	 * @return The clone of the servo motor.
 	 */
 	ServoMotor* clone();
 
+	//TODO: Add equals method
+
 	/**
 	 * Apply the movement of the servomotor on the joint it controls.
 	 * @param timeSinceLastTick
 	 */
-	void apply(double timeSinceLastTick);
+	void apply(btMultiBody* multiBody, double timeSinceLastTick);
 
 	//Accessor methods
 
@@ -77,7 +82,7 @@ public:
 	 * @return A string containing all information about the servo motor.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const ServoMotor &servoMotor) {
+		const ServoMotor &servoMotor) {
 		return os;
 	}
 
@@ -89,12 +94,15 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Motor) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mJointIndex) /**!< The index of the joint. */
 		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
 		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
 		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
 	}
 
 private:
+
+	int mJointIndex; /**!< The index of the joint. */
 	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
 	btMultiBodyJointMotor* mJointMotor; /**!< The jointMotor of the servo */
 

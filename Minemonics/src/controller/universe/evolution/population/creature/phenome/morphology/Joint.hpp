@@ -5,6 +5,7 @@
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //# forward declarations
+class btMultiBody;
 class btTransform;
 class Creature;
 class JointGraphics;
@@ -95,7 +96,7 @@ public:
 	/**
 	 * Updates the joint position and orientation.
 	 */
-	void update(double timeSinceLastTick);
+	void update(btMultiBody* multiBody, double timeSinceLastTick);
 
 	/**
 	 * Add the joint to the graphical and model world.

@@ -23,9 +23,11 @@ protected:
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
 		servoMotor = new ServoMotor();
-		servoMotor->initialize(JointPhysics::RDOF_PITCH,
-		randomness->nextUnifDouble(1, 10), randomness->nextUnifDouble(1, 10),
-		randomness->nextUnifDouble(0, 10), randomness->nextUnifDouble(0, 10));
+		servoMotor->initialize(0, JointPhysics::RDOF_PITCH,
+			randomness->nextUnifDouble(1, 10),
+			randomness->nextUnifDouble(1, 10),
+			randomness->nextUnifDouble(0, 10),
+			randomness->nextUnifDouble(0, 10));
 	}
 
 	virtual void TearDown() {
@@ -45,13 +47,15 @@ protected:
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
 		servoMotor = new ServoMotor();
-		servoMotor->initialize(JointPhysics::RDOF_PITCH,
-		randomness->nextUnifDouble(1, 10), randomness->nextUnifDouble(1, 10),
-		randomness->nextUnifDouble(0, 10), randomness->nextUnifDouble(0, 10));
+		servoMotor->initialize(0, JointPhysics::RDOF_PITCH,
+			randomness->nextUnifDouble(1, 10),
+			randomness->nextUnifDouble(1, 10),
+			randomness->nextUnifDouble(0, 10),
+			randomness->nextUnifDouble(0, 10));
 
 		servoMotor2 = new ServoMotor();
 
-		SaveController<ServoMotor> saveController;
+		SaveController < ServoMotor > saveController;
 
 		saveController.save(*servoMotor, "ServoMotor.test");
 

@@ -30,7 +30,7 @@ protected:
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()));
 
-		jointBt->initializeRotationalLimitMotors(
+		jointBt->initializeRotationalLimitMotors(0,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
@@ -59,7 +59,7 @@ protected:
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()));
-		jointBt->initializeRotationalLimitMotors(
+		jointBt->initializeRotationalLimitMotors(0,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),

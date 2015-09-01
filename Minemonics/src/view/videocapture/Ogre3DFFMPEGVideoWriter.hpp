@@ -57,9 +57,11 @@ static const std::string av_make_error_string(int errnum) {
 class Ogre3DFFMPEGVideoWriter: public Ogre::RenderTargetListener {
 public:
 	Ogre3DFFMPEGVideoWriter() :
-			mAvFormatContext(NULL), mAVCodec(NULL), mWriterInitialized(false), frame_count(1), mAVCodecContext(NULL), size(
-					0), mAVOutputFormat(NULL), mSwsContext(NULL), mAVFrame(NULL), mPictureRGB24(
-			NULL), mTimebasefactor(0), mAVStream(NULL), mRenderTexture(NULL) {
+		mAvFormatContext(NULL), mAVCodec(NULL), mWriterInitialized(false), frame_count(
+			1), mAVCodecContext(NULL), size(0), mAVOutputFormat(NULL), mSwsContext(
+			NULL), mAVFrame(NULL), mPictureRGB24(NULL), mTimebasefactor(0), mAVStream(
+			NULL), mRenderTexture(NULL), mPrevious(0), mNow(0), mRuntime(0), mStart(
+			0) {
 	}
 
 	/**
@@ -70,9 +72,8 @@ public:
 	 * @param bitrate the bitrate of the video
 	 * @param timebasefactor the timebasefactor
 	 **/
-	void setup(const char* filename,
-			int width, int height, int bitrate = 800000, float timebasefactor =
-					200);
+	void setup(const char* filename, int width, int height,
+		int bitrate = 800000, float timebasefactor = 200);
 	/**
 	 * add a frame to the video file
 	 * @param pixels the pixels packed in RGB (24-bit RGBRGBRGB...)

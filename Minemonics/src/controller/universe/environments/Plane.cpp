@@ -19,6 +19,7 @@
 #include <model/universe/environments/PlaneModel.hpp>
 #include <model/universe/environments/bullet/PlaneBt.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/environments/physics/GroundController.hpp>
 
 //## view headers
 #include <view/universe/environments/PlaneO3D.hpp>
@@ -29,14 +30,15 @@
 BoostLogger Plane::mBoostLogger; /*<! initialize the boost logger*/
 Plane::_Init Plane::_initializer;
 Plane::Plane() :
-		Environment() {
+	Environment() {
 }
 
 Plane::~Plane() {
 //	They are all deleted in environment
 }
 
-void Plane::initialize(const Ogre::Light* const l) {
+void Plane::initialize(const PhysicsController::SolverType solverType,
+	const Ogre::Light* const l) {
 	Environment::initialize(Environment::PLANE);
 
 	// setup the planet model
@@ -44,13 +46,14 @@ void Plane::initialize(const Ogre::Light* const l) {
 	getPlaneModel()->initialize();
 
 	// setup the plane view
-	mEnvironmentGraphics = new PlaneO3D((PlaneModel*)mEnvironmentModel);
+	mEnvironmentGraphics = new PlaneO3D((PlaneModel*) mEnvironmentModel);
 	getPlaneView()->initialize(l);
 
 	// set up the physics controller
-	mEnvironmentModel->setPhysicsController(new PhysicsController());
+	mEnvironmentModel->setPhysicsController(new GroundController(solverType));
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
-	mEnvironmentModel->getPhysicsController()->setDebugDrawer(&(SimulationManager::getSingleton()->getDebugDrawer()));
+	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
+		&(SimulationManager::getSingleton()->getDebugDrawer()));
 }
 
 void Plane::update(double timeSinceLastTick) {

@@ -237,7 +237,8 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(Environment::PLANE, 2000, mSun);
+	Planet* earth = new Planet(PhysicsController::FeatherstoneController,
+		Environment::PLANE, 10, mSun);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);

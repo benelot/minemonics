@@ -19,7 +19,7 @@
 //## utils headers
 
 EnvironmentModel::EnvironmentModel() :
-		mEnvironmentPhysics(NULL), mPhysicsController(NULL), mInWorld(false) {
+	mEnvironmentPhysics(NULL), mPhysicsController(NULL), mInWorld(false) {
 
 }
 
@@ -37,12 +37,14 @@ bool EnvironmentModel::isInWorld() const {
 
 void EnvironmentModel::addToWorld() {
 	mPhysicsController->addBody(
-			((EnvironmentBt*) mEnvironmentPhysics)->getBody(),PhysicsConfiguration::COL_GROUND,PhysicsConfiguration::GROUND_COLLIDES_WITH);
+		((EnvironmentBt*) mEnvironmentPhysics)->getBody(),
+		PhysicsConfiguration::COL_GROUND,
+		PhysicsConfiguration::GROUND_COLLIDES_WITH);
 	mInWorld = true;
 }
 
 void EnvironmentModel::removeFromWorld() {
 	mPhysicsController->removeBody(
-			((EnvironmentBt*) mEnvironmentPhysics)->getBody());
+		((EnvironmentBt*) mEnvironmentPhysics)->getBody());
 	mInWorld = false;
 }

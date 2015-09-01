@@ -296,6 +296,10 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
+	if (mJointType != geneBranch.mJointType) {
+		return false;
+	}
+
 	if (mJointAnchorX != geneBranch.mJointAnchorX) {
 		return false;
 	}
@@ -305,6 +309,30 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 	}
 
 	if (mJointAnchorZ != geneBranch.mJointAnchorZ) {
+		return false;
+	}
+
+	if (mJointPitchEnabled != geneBranch.mJointPitchEnabled) {
+		return false;
+	}
+
+	if (mJointYawEnabled != geneBranch.mJointYawEnabled) {
+		return false;
+	}
+
+	if (mJointRollEnabled != geneBranch.mJointRollEnabled) {
+		return false;
+	}
+
+	if (mJointPitchAxisX != geneBranch.mJointPitchAxisX) {
+		return false;
+	}
+
+	if (mJointPitchAxisY != geneBranch.mJointPitchAxisY) {
+		return false;
+	}
+
+	if (mJointPitchAxisZ != geneBranch.mJointPitchAxisZ) {
 		return false;
 	}
 

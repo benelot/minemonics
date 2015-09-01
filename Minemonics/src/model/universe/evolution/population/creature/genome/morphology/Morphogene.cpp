@@ -239,6 +239,10 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
+	if (mIntraBodyColliding != morphoGene.mIntraBodyColliding) {
+		return false;
+	}
+
 	if (mSegmentShrinkFactor != morphoGene.mSegmentShrinkFactor) {
 		return false;
 	}

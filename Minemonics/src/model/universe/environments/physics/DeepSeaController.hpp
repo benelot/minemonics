@@ -2,7 +2,7 @@
 #define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_DEEPSEACONTROLLER_H_
 
 //# corresponding header
-#include <model/universe/environments/physics/MotionController.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //# forward declarations
 //# system headers
@@ -23,7 +23,7 @@
  * @date		2014-11-17
  * @author		Benjamin Ellenberger
  */
-class DeepSeaController: public MotionController {
+class DeepSeaController: public PhysicsController {
 public:
 	DeepSeaController();
 	virtual ~DeepSeaController();

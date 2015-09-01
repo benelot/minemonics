@@ -93,7 +93,7 @@ void PhenomeModel::initialize(CreatureModel* const creatureModel) {
 	mCreatureModel = creatureModel;
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
-		mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+		(btMultiBodyDynamicsWorld*) mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
 #endif
 }
 
@@ -225,7 +225,7 @@ void PhenomeModel::generateBody() {
 					((long) mJointModels[i]->getParentIndex()) - 1,
 					mJointModels[i]->getParentComToPivot().getRotation().normalized()
 						* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
-					mJointModels[i]->getJointPitchAxis(),
+					mJointModels[i]->getJointPitchAxis().normalized(),
 					mJointModels[i]->getParentComToPivot().getOrigin()
 						* MorphologyConfiguration::LINK_LENGTH,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()

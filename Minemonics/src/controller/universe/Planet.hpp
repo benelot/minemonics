@@ -30,7 +30,9 @@
  */
 class Planet {
 public:
-	Planet(const Environment::EnvironmentType type, const int evaluationTime,Ogre::Light* light = NULL);
+	Planet(const PhysicsController::SolverType solverType,
+		const Environment::EnvironmentType type, const int evaluationTime,
+		Ogre::Light* light = NULL);
 	Planet(PlanetModel* const planetModel);
 	virtual ~Planet();
 
@@ -115,7 +117,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>("Planet"));
+				boost::log::attributes::constant < std::string > ("Planet"));
 		}
 	} _initializer;
 
