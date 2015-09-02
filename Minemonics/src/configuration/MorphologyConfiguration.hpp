@@ -30,7 +30,7 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 9.9;
+	static const double LIMB_MIN_SIZE = 0.1;
 
 	/**
 	 * The limb maximum dimension size
@@ -57,7 +57,7 @@ public:
 	/**
 	 * The limb initial friction
 	 */
-	static const double LIMB_INITIAL_FRICTION = 0.8;
+	static const double LIMB_INITIAL_FRICTION = 10.0f;
 
 	/**
 	 * This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.
@@ -119,15 +119,15 @@ public:
 
 	/**
 	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
-	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2](1 + t)
+	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 1;
+	static const double MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 8.0f * 10e2;
 
 	/**
 	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
-	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2](1 + t)
+	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 1;
+	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
 	/**
 	 * The joints between body segments are set to break if they experience torques beyond
@@ -139,10 +139,8 @@ public:
 	static const double JOINT_MAX_TORQUE_CONSTANT = 1;
 
 	/**
-	 * The length of a joint from the anchor point to the joint rotation point. 0 means we exactly hit the surface point of the limb.
+	 * The length of an object between the parent joint and the child joint, 1 meaning its correct length. This is basically how much the creature is rayman.
 	 */
-	static const double JOINT_LENGTH = 1;
-
 	static const double LINK_LENGTH = 2;
 
 	/**
@@ -184,12 +182,7 @@ public:
 	/**
 	 * The smallest max strength of a joint motor
 	 */
-	static const double JOINT_MIN_FORCE = 9999;
-
-	/**
-	 * The highest max strength of a joint motor
-	 */
-	static const double JOINT_MAX_FORCE = 10000;
+	static const double JOINT_MIN_FORCE = 1;
 
 	/**
 	 * The smallest max speed of a joint motor

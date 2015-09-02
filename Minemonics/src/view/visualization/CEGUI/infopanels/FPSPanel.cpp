@@ -31,6 +31,6 @@ ParamsPanel("FPS", MovablePanel::FPSPANEL) {
 }
 
 FPSPanel::~FPSPanel() {
-	// TODO Auto-generated destructor stub
+	
 }
 

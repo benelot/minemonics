@@ -155,8 +155,8 @@ void JointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
 
-bool JointBt::isStrained() {
-	//TODO: Broken
+//bool JointBt::isStrained() {
+//TODO: Broken
 //	btVector3 fbA = mJoint->getJointFeedback()->m_appliedForceBodyA;
 //	btVector3 fbB = mJoint->getJointFeedback()->m_appliedForceBodyB;
 //	btVector3 tbA = mJoint->getJointFeedback()->m_appliedTorqueBodyA;
@@ -182,7 +182,7 @@ bool JointBt::isStrained() {
 //		std::cout << "----------------------" << std::endl;
 //	}
 //	return false;
-}
+//}
 
 void JointBt::setRotationalLimitMotorEnabled(
 	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {

@@ -16,11 +16,11 @@
 //## utils headers
 
 OpenSeaO3D::OpenSeaO3D() {
-	// TODO Auto-generated constructor stub
+	
 
 }
 
 OpenSeaO3D::~OpenSeaO3D() {
-	// TODO Auto-generated destructor stub
+	
 }
 

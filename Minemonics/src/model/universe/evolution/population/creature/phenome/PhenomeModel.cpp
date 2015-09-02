@@ -99,8 +99,6 @@ void PhenomeModel::initialize(CreatureModel* const creatureModel) {
 
 void PhenomeModel::update(const double timeSinceLastTick) {
 	//update all controllers
-	//TODO: Hacks to make it run, make nicer
-	// let the controller perform
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 		cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastTick);
@@ -204,7 +202,7 @@ void PhenomeModel::generateBody() {
 	bool canSleep = true;
 
 	if (mJointModels.size() != 0) {
-		bool selfCollision = false;	//mLimbModels[0]->isIntraBodyColliding();
+		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
 
 		mMultiBody = new btMultiBody(mJointModels.size(),
 			mLimbModels[0]->getMass(), mLimbModels[0]->getInertia(),

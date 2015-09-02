@@ -20,7 +20,7 @@ Epoch::Epoch() :
 }
 
 Epoch::~Epoch() {
-	// TODO Auto-generated destructor stub
+	
 }
 
 bool Epoch::isEndOfEpoch() {

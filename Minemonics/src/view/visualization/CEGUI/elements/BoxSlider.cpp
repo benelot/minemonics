@@ -50,7 +50,7 @@ BoxSlider::BoxSlider(const std::string name, const int width,
 }
 
 BoxSlider::~BoxSlider() {
-	// TODO Auto-generated destructor stub
+	
 }
 
 void BoxSlider::onSliderValueChanged() {

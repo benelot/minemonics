@@ -20,6 +20,6 @@ CreatureFitnessComparator::CreatureFitnessComparator(int criterium){
 }
 
 CreatureFitnessComparator::~CreatureFitnessComparator() {
-	// TODO Auto-generated destructor stub
+	
 }
 

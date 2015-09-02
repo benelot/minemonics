@@ -88,10 +88,8 @@ public:
 	/**
 	 * Initialize the rotational limit motors of the joint.
 	 * @param maxForces The maximum forces along the axes.
-	 * @param maxSpeeds The maximum speeds along the axes.
 	 */
-	void generateMotors(const Ogre::Vector3 maxForces,
-		const Ogre::Vector3 maxSpeeds);
+	void generateMotors(const Ogre::Vector3 maxForces);
 
 	/**
 	 * Updates the joint position and orientation.

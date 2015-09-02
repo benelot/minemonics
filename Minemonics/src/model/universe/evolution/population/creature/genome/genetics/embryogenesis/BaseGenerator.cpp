@@ -17,12 +17,11 @@
 //## utils headers
 
 BaseGenerator::BaseGenerator() :
-		mGene(NULL) {
-	// TODO Auto-generated constructor stub
+	mGene(NULL) {
 
 }
 
 BaseGenerator::~BaseGenerator() {
-	// TODO Auto-generated destructor stub
+
 }
 

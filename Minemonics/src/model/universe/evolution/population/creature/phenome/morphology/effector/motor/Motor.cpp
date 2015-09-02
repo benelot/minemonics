@@ -15,8 +15,8 @@
 //## utils headers
 
 Motor::Motor(const MotorType motorType) :
-		mMotorType(motorType), mMaxForce(0), mMaxSpeed(0), mPositionControlled(
-				true), mIndex(-1), mEnabled(false) {
+	mMotorType(motorType), mMaxForce(0), mPositionControlled(true), mIndex(-1), mEnabled(
+		false) {
 }
 
 Motor::~Motor() {

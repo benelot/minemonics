@@ -194,8 +194,7 @@ void Embryogenesis::transcribeMorphogene(
 		//get local joint rotation point in reference frame parent
 		localParentJointInRefParent = localParentAnchorInRefParent
 			+ parentEulerJointDir
-				* localParentAnchorDirInRefParent.normalisedCopy()
-				* MorphologyConfiguration::JOINT_LENGTH;
+				* localParentAnchorDirInRefParent.normalisedCopy();
 
 		//##
 		// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
@@ -210,9 +209,7 @@ void Embryogenesis::transcribeMorphogene(
 
 		//get local surface anchor point of child in reference frame parent
 		Ogre::Vector3 localChildAnchorInRefParent(
-			localParentJointInRefParent
-				- childJointDir.normalisedCopy()
-					* MorphologyConfiguration::JOINT_LENGTH);
+			localParentJointInRefParent - childJointDir.normalisedCopy());
 
 		//##
 		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
@@ -270,8 +267,7 @@ void Embryogenesis::transcribeMorphogene(
 		childLimbBt = NULL;
 
 		localChildJointInRefChild = localChildAnchorInRefChild
-			+ childJointDir.normalisedCopy()
-				* MorphologyConfiguration::JOINT_LENGTH;
+			+ childJointDir.normalisedCopy();
 
 		// global center of mass of child limb
 		Ogre::Vector3 childLimbCOM(
@@ -344,6 +340,33 @@ void Embryogenesis::transcribeMorphogene(
 	//build the limb out of the morphogene
 	LimbModel* childLimb = new LimbModel();
 
+	double sizeX =
+		(generator->getCurrentShrinkageFactor() * childMorphogene->getX()
+			< MorphologyConfiguration::LIMB_MIN_SIZE) ?
+			MorphologyConfiguration::LIMB_MIN_SIZE :
+		(generator->getCurrentShrinkageFactor() * childMorphogene->getX()
+			> MorphologyConfiguration::LIMB_MAX_SIZE) ?
+			MorphologyConfiguration::LIMB_MAX_SIZE :
+			generator->getCurrentShrinkageFactor() * childMorphogene->getX();
+
+	double sizeY =
+		(generator->getCurrentShrinkageFactor() * childMorphogene->getY()
+			< MorphologyConfiguration::LIMB_MIN_SIZE) ?
+			MorphologyConfiguration::LIMB_MIN_SIZE :
+		(generator->getCurrentShrinkageFactor() * childMorphogene->getY()
+			> MorphologyConfiguration::LIMB_MAX_SIZE) ?
+			MorphologyConfiguration::LIMB_MAX_SIZE :
+			generator->getCurrentShrinkageFactor() * childMorphogene->getY();
+
+	double sizeZ =
+		(generator->getCurrentShrinkageFactor() * childMorphogene->getZ()
+			< MorphologyConfiguration::LIMB_MIN_SIZE) ?
+			MorphologyConfiguration::LIMB_MIN_SIZE :
+		(generator->getCurrentShrinkageFactor() * childMorphogene->getZ()
+			> MorphologyConfiguration::LIMB_MAX_SIZE) ?
+			MorphologyConfiguration::LIMB_MAX_SIZE :
+			generator->getCurrentShrinkageFactor() * childMorphogene->getZ();
+
 	childLimb->initialize(phenomeModel->getCreatureModel()->getWorld(),
 		phenomeModel->getCreatureModel(), childMorphogene->getPrimitiveType(),
 		generator->getPosition(), generator->getOrientation(),
@@ -352,15 +375,10 @@ void Embryogenesis::transcribeMorphogene(
 				- phenomeModel->getCreatureModel()->getPosition()),
 		generator->getOrientation(),
 		/*size*/
-		Ogre::Vector3(
-			generator->getCurrentShrinkageFactor() * childMorphogene->getX(),
-			generator->getCurrentShrinkageFactor() * childMorphogene->getY(),
-			generator->getCurrentShrinkageFactor() * childMorphogene->getZ()),
+		Ogre::Vector3(sizeX, sizeY, sizeZ),
 		/*mass*/
-		generator->getCurrentShrinkageFactor() * childMorphogene->getX()
-			* generator->getCurrentShrinkageFactor() * childMorphogene->getY()
-			* generator->getCurrentShrinkageFactor() * childMorphogene->getZ(),
-		childMorphogene->getRestitution(), childMorphogene->getFriction(),
+		sizeX * sizeY * sizeZ, childMorphogene->getRestitution(),
+		childMorphogene->getFriction(),
 		Ogre::ColourValue(childMorphogene->getColorR(),
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
 		childMorphogene->isIntraBodyColliding(),
@@ -443,13 +461,15 @@ void Embryogenesis::transcribeMorphogene(
 		phenomeModel->getComponentModels().push_back(joint);
 
 		//initialize rotational limit motors
-		joint->generateMotors(
-			Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchForce(),
-				parentMorphogeneBranch->getJointMaxYawForce(),
-				parentMorphogeneBranch->getJointMaxRollForce()),
-			Ogre::Vector3(parentMorphogeneBranch->getJointMaxPitchSpeed(),
-				parentMorphogeneBranch->getJointMaxYawSpeed(),
-				parentMorphogeneBranch->getJointMaxRollSpeed()));
+		//TODO: Remove max speed if not necessary
+		double mass1 = parentLimb->getMass();
+		double mass2 = childLimb->getMass();
+		double maxTorque =
+			(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+				* (mass1 + mass2)
+				+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+					* pow(mass1 + mass2, 2));
+		joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque));
 
 		//TODO: Quick controller hack
 		SineController* controller = new SineController();

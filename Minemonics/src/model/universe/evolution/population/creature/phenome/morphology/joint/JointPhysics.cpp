@@ -73,14 +73,12 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 	return true;
 }
 
-void JointPhysics::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 maxSpeeds) {
+void JointPhysics::generateMotors(const Ogre::Vector3 maxForces) {
 	mJointMaxForces = maxForces;
-	mJointMaxSpeeds = maxSpeeds;
 
 	// add pitch servo motor
 	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.x, maxSpeeds.x,
+	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.x,
 		mJointMinAngle.x, mJointMaxAngle.x);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
@@ -89,7 +87,7 @@ void JointPhysics::generateMotors(const Ogre::Vector3 maxForces,
 	if (mType == SPHERICAL_JOINT) {
 		// add yaw servo motor
 		servoMotor = new ServoMotor();
-		servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.y, maxSpeeds.y,
+		servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.y,
 			mJointMinAngle.y, mJointMaxAngle.y);
 
 		//TODO: Hack, make better
@@ -99,7 +97,7 @@ void JointPhysics::generateMotors(const Ogre::Vector3 maxForces,
 		//add roll servo motor
 		servoMotor = new ServoMotor();
 		servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.z,
-			maxSpeeds.z, mJointMinAngle.z, mJointMaxSpeeds.z);
+			mJointMinAngle.z, mJointMaxSpeeds.z);
 
 		//TODO: Hack, make better
 		servoMotor->setEnabled(true);

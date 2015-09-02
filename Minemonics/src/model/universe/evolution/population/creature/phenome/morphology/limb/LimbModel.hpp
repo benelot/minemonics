@@ -124,6 +124,8 @@ public:
 
 	const double getVolume() const;
 
+	const Ogre::Vector3 getVelocities() const;
+
 	/**
 	 * Get the orientation of the limb in the physical world.
 	 * @return The orientation of the limb in the physical world.

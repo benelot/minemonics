@@ -100,6 +100,8 @@ public:
 	 */
 	void removeFromWorld();
 
+	virtual const Ogre::Vector3 getVelocities() const;
+
 	/**
 	 * Get the intersection in the global reference frame.
 	 * @param origin: The origin the intersection starts from.

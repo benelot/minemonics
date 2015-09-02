@@ -195,3 +195,7 @@ std::ostream & operator<<(std::ostream &os, const LimbModel &limbModel) {
 	os << "]";
 	return os;
 }
+
+const Ogre::Vector3 LimbModel::getVelocities() const {
+	return mLimbPhysics->getVelocities();
+}

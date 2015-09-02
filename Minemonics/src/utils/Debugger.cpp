@@ -1,18 +1,23 @@
-/*
- * Debugger.cpp
- *
- *  Created on: Jul 22, 2015
- *      Author: leviathan
- */
-
+//# corresponding header
 #include <utils/Debugger.hpp>
 
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
+//## utils headers
+
 Debugger::Debugger() {
-	// TODO Auto-generated constructor stub
 
 }
 
 Debugger::~Debugger() {
-	// TODO Auto-generated destructor stub
 }
 

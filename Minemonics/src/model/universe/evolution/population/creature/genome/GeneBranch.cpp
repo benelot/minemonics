@@ -14,7 +14,7 @@
 //## utils headers
 
 GeneBranch::GeneBranch() :
-		mType(UNKNOWN_GENE_BRANCH), mActive(false) {
+	mType(UNKNOWN_GENE_BRANCH), mActive(false) {
 
 }
 
@@ -28,13 +28,13 @@ GeneBranch::~GeneBranch() {
 
 void GeneBranch::initialize(const GeneBranchType geneBranchType) {
 	mType = geneBranchType;
-}
 
+}
 
 bool GeneBranch::equals(const GeneBranch& geneBranch) const {
 
 	/**Compare the gene branch is active or not*/
-	if(mActive != geneBranch.mActive){
+	if (mActive != geneBranch.mActive) {
 		return false;
 	}
 

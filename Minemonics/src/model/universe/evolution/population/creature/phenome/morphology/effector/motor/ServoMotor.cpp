@@ -28,7 +28,7 @@
 
 ServoMotor::ServoMotor() :
 	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mLowerLimit(
-		0), mUpperLimit(0), mJointIndex(0) {
+		0), mUpperLimit(0), mJointIndex(0), mMultiBody(NULL) {
 }
 
 ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
@@ -38,11 +38,11 @@ ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
 	mJointIndex = servoMotor.mJointIndex;
 	mJointMotorIndex = servoMotor.mJointMotorIndex;
 	mMaxForce = servoMotor.mMaxForce;
-	mMaxSpeed = servoMotor.mMaxSpeed;
 	mMotorType = servoMotor.mMotorType;
 	mPositionControlled = servoMotor.mPositionControlled;
 	mLowerLimit = servoMotor.mLowerLimit;
 	mUpperLimit = servoMotor.mUpperLimit;
+	mMultiBody = servoMotor.mMultiBody;
 }
 
 ServoMotor::~ServoMotor() {
@@ -51,12 +51,10 @@ ServoMotor::~ServoMotor() {
 
 void ServoMotor::initialize(
 	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-	const double maxForce, const double maxSpeed, double lowerLimit,
-	double upperLimit) {
+	const double maxForce, double lowerLimit, double upperLimit) {
 
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
-	mMaxSpeed = maxSpeed;
 	mLowerLimit = lowerLimit;
 	mUpperLimit = upperLimit;
 }
@@ -67,10 +65,7 @@ void ServoMotor::instantiate(btMultiBody* multiBody, const int jointIndex) {
 }
 
 void ServoMotor::apply(double timeSinceLastTick) {
-//	if (!mJointMotor) {
-//		return;
-//	}
-//		mMotorBt->m_enableMotor = mEnabled;
+
 	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 	btScalar clampedInputValue =
 		(getInputValue() > 1.0f) ? 1.0f :
@@ -83,22 +78,12 @@ void ServoMotor::apply(double timeSinceLastTick) {
 	//calculate the angle error
 	btScalar angleError = targetAngle - mMultiBody->getJointPos(mJointIndex);
 
-	float kP = 20;	//500
+	float kP = 500000000;
 	//simple p(roportional) controller
-	//calculate the target velocity and clamp it with the maximum speed
-	mMultiBody->setJointVel(mJointIndex,
-		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
-		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError);
-
-//TODO: Print to logger only
-//		std::cout << std::setw(10) << std::right << mMotorBt << "("
-//				<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-//				<< "\t/MotorPosition(error):  " << std::setw(10) << std::right
-//				<< mMotorBt->m_currentPosition << "/" << std::setw(10)
-//				<< std::right << targetAngle << "/" << std::setw(10)
-//				<< std::right << angleError << "\t/targetVelocity: "
-//				<< mMotorBt->m_targetVelocity << std::endl;
-
+	//calculate the target force and clamp it with the maximum force
+	mMultiBody->addJointTorque(mJointIndex,
+		(kP * angleError > mMaxForce) ? mMaxForce :
+		(kP * angleError < -mMaxForce) ? -mMaxForce : kP * angleError);
 }
 
 ServoMotor* ServoMotor::clone() {

@@ -109,11 +109,11 @@ public:
 		mInWorld = false;
 	}
 
-	/**
-	 * Returns if the joint is under tension.
-	 * @return If the joint is under tension.
-	 */
-	virtual bool isStrained() = 0;
+//	/**
+//	 * Returns if the joint is under tension.
+//	 * @return If the joint is under tension.
+//	 */
+//	virtual bool isStrained() = 0;
 
 	/**
 	 * Compare the joint physics model to another joint physics model.
@@ -127,8 +127,7 @@ public:
 
 	virtual std::vector<Motor*>& getMotors() = 0;
 
-	void generateMotors(const Ogre::Vector3 maxForces,
-		const Ogre::Vector3 maxSpeeds);
+	void generateMotors(const Ogre::Vector3 maxForces);
 
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {

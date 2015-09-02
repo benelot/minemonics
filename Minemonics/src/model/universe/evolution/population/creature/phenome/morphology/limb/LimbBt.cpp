@@ -166,8 +166,6 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 
 	btCollisionWorld::ClosestRayResultCallback rayCallback(rayStart, rayEnd);
 
-//	btCollisionWorld::AllHitsRayResultCallback rayCallback(rayStart, rayEnd);
-//	allResults.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	//kF_UseGjkConvexRaytest flag is now enabled by default, use the faster but more approximate algorithm
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
@@ -176,7 +174,6 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 	rayCallback.m_collisionFilterMask =
 		PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
 
-//	std::cout << "Worldhandle:" << mWorld << std::endl;
 	mWorld->rayTest(rayStart, rayEnd, rayCallback);
 
 	if (rayCallback.hasHit()) {
@@ -190,11 +187,11 @@ btTransform LimbBt::getPreciseIntersection(const btVector3 origin,
 			btVector3(1, 0, 0));
 #endif
 	} else {
+		//no hit
 #ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(rayStart,
 			1, btVector3(1, 0, 0));
 #endif
-		//no hit
 	}
 
 	btTransform hitTransform;
@@ -323,6 +320,9 @@ void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
 	mLink->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 	mLink->setWorldTransform(tr);
 	mLink->setFriction(mFriction);
+	mLink->setAnisotropicFriction(
+		mCollisionShape->getAnisotropicRollingFrictionDirection(),
+		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 	//Set user pointer for proper return of creature/limb information etc..
 	mLink->setUserPointer(limbModel);
 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
@@ -334,4 +334,8 @@ bool LimbBt::equals(const LimbBt& limbBt) const {
 		return false;
 	}
 	return true;
+}
+
+const Ogre::Vector3 LimbBt::getVelocities() const {
+	return OgreBulletUtils::convert(mLink->getInterpolationLinearVelocity());
 }

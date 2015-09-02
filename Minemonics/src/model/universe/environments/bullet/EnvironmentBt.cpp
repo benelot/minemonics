@@ -30,7 +30,7 @@
 BoostLogger EnvironmentBt::mBoostLogger; /*<! initialize the boost logger*/
 EnvironmentBt::_Init EnvironmentBt::_initializer;
 EnvironmentBt::EnvironmentBt() :
-		mGroundShape(NULL), mGroundBody(NULL) {
+	mGroundShape(NULL), mGroundBody(NULL) {
 }
 
 EnvironmentBt::~EnvironmentBt() {
@@ -42,31 +42,31 @@ EnvironmentBt::~EnvironmentBt() {
 }
 
 void EnvironmentBt::createTerrainData(Ogre::SceneNode* const sceneNode,
-		const float w, const float h, const float* const data, const float minH,
-		const float maxH, const Ogre::Vector3& pos, const float scale,
-		const float heightScale) {
+	const float w, const float h, const float* const data, const float minH,
+	const float maxH, const Ogre::Vector3& pos, const float scale,
+	const float heightScale) {
 
 	btVector3 localScaling(scale, heightScale, scale);
 
 	mGroundShape = new btHeightfieldTerrainShape(w, h, data, 1/*ignore*/, minH,
-			maxH, 1, PHY_FLOAT, true);
+		maxH, 1, PHY_FLOAT, true);
 	((btHeightfieldTerrainShape*) mGroundShape)->setUseDiamondSubdivision(true);
 	mGroundShape->setLocalScaling(localScaling);
 
 	mGroundBody = new btRigidBody(0, new btDefaultMotionState(), mGroundShape);
 	mGroundBody->getWorldTransform().setOrigin(
-			btVector3(scale * (w - 1) / 2, heightScale / 2 * heightScale,
-					scale * (w - 1) / 2));
+		btVector3(scale * (w - 1) / 2, heightScale / 2 * heightScale,
+			scale * (w - 1) / 2));
 	Ogre::Quaternion q = Ogre::Quaternion::IDENTITY;
 	mGroundBody->getWorldTransform().setRotation(
-			btQuaternion(q.x, q.y, q.z, q.w));
+		btQuaternion(q.x, q.y, q.z, q.w));
 	mGroundBody->setCollisionFlags(
-			mGroundBody->getCollisionFlags()
-					| btCollisionObject::CF_STATIC_OBJECT);
+		mGroundBody->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
 	mGroundBody->setUserPointer(NULL);
+	mGroundBody->setFriction(1.0f);
 
 	//to get custom collision callbacks in CollisionHandler
 	mGroundBody->setCollisionFlags(
-			mGroundBody->getCollisionFlags()
-					| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+		mGroundBody->getCollisionFlags()
+			| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 }

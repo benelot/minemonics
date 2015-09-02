@@ -83,9 +83,8 @@ void Joint::initialize(Creature* const creature, Limb* const limbA,
 
 }
 
-void Joint::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 maxSpeeds) {
-	mJointModel->generateMotors(maxForces, maxSpeeds);
+void Joint::generateMotors(const Ogre::Vector3 maxForces) {
+	mJointModel->generateMotors(maxForces);
 }
 
 void Joint::update(double timeSinceLastTick) {

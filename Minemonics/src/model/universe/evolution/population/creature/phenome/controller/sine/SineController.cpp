@@ -23,15 +23,15 @@
 //## utils headers
 
 SineController::SineController() :
-		Controller(SINE_CONTROLLER), mAmplitude(1), mFrequency(1), mXShift(0), mYShift(
-				1), mTime(0) {
+	Controller(SINE_CONTROLLER), mAmplitude(1), mFrequency(1), mXShift(0), mYShift(
+		1), mTime(0) {
 }
 
 SineController::~SineController() {
 }
 
 void SineController::initialize(const double amplitude, const double frequency,
-		const double xShift, const double yShift) {
+	const double xShift, const double yShift) {
 	mAmplitude = amplitude;
 	mFrequency = frequency;
 	mXShift = xShift;
@@ -47,7 +47,7 @@ void SineController::perform(const double timeSinceLastTick) {
 	mTime += timeSinceLastTick;
 
 	double output = mAmplitude
-			* sin(mFrequency * mTime * 2.0f * M_PIl + mXShift) + mYShift;
+		* sin(mFrequency * mTime * 2.0f * M_PIl + mXShift) + mYShift;
 
 //	std::cout << this << "::" << timeSinceLastTick << "/Output:" << output << std::endl;
 
@@ -58,7 +58,7 @@ void SineController::perform(const double timeSinceLastTick) {
 }
 
 SineController::SineController(const SineController& sineController) :
-		Controller(SINE_CONTROLLER) {
+	Controller(SINE_CONTROLLER) {
 	mAmplitude = sineController.mAmplitude;
 	mFrequency = sineController.mFrequency;
 	mTime = sineController.mTime;
@@ -67,14 +67,14 @@ SineController::SineController(const SineController& sineController) :
 	mYShift = sineController.mYShift;
 
 	for (std::vector<ControlInput*>::const_iterator cit =
-			sineController.mControlOutputs.begin();
-			cit != sineController.mControlOutputs.end(); cit++) {
+		sineController.mControlOutputs.begin();
+		cit != sineController.mControlOutputs.end(); cit++) {
 		mControlOutputs.push_back(*cit);
 	}
 
 	for (std::vector<ControlOutput*>::const_iterator cit =
-			sineController.mControlInputs.begin();
-			cit != sineController.mControlInputs.end(); cit++) {
+		sineController.mControlInputs.begin();
+		cit != sineController.mControlInputs.end(); cit++) {
 		mControlInputs.push_back(*cit);
 	}
 }
@@ -84,5 +84,5 @@ SineController* SineController::clone() {
 }
 
 void SineController::collectInputs() {
-	//TODO::keep the inputs as they are
+	//Keep the inputs as they are
 }

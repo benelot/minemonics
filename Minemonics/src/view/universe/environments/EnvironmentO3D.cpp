@@ -35,11 +35,10 @@
 #define TERRAIN_HOLD_RADIUS 3000
 
 EnvironmentO3D::EnvironmentO3D() :
-		mTerrainGlobals(NULL), mTerrainGroup(
-		NULL), mTerrainPaging(
-		NULL), mPageManager(NULL), mPagedWorld(NULL), mTerrainPagedWorldSection(
-		NULL), mPerlinNoiseTerrainGenerator(NULL), mLODStatus(false), mAutoLOD(
-				true), mTerrainPos(0, 0, 0), mInWorld(false) {
+	mTerrainGlobals(NULL), mTerrainGroup(NULL), mTerrainPaging(NULL), mPageManager(
+		NULL), mPagedWorld(NULL), mTerrainPagedWorldSection(NULL), mPerlinNoiseTerrainGenerator(
+		NULL), mLODStatus(false), mAutoLOD(true), mTerrainPos(0, 0, 0), mInWorld(
+		false) {
 
 }
 
@@ -64,26 +63,25 @@ EnvironmentO3D::~EnvironmentO3D() {
 }
 
 void EnvironmentO3D::initialize(const std::string fileName,
-		const Ogre::Light* const l) {
+	const Ogre::Light* const l) {
 	mTerrainGlobals = new Ogre::TerrainGlobalOptions();
 
 	mTerrainGroup = new Ogre::TerrainGroup(
-			SimulationManager::getSingleton()->getSceneManager(),
-			Ogre::Terrain::ALIGN_X_Z,
-			TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
+		SimulationManager::getSingleton()->getSceneManager(),
+		Ogre::Terrain::ALIGN_X_Z,
+		TERRAIN_SIZE, TERRAIN_WORLD_SIZE);
 
 	//TODO: The terrain does not need to be saved, it is always randomly created.
 	//set how the terrain should be named for faster loading
 	mTerrainGroup->setFilenameConvention(Ogre::String(),
-			Ogre::String(
-					boost::lexical_cast<std::string>(this) + "/" + "Terrain"));
+		Ogre::String(
+			boost::lexical_cast < std::string > (this) + "/" + "Terrain"));
 
 	//set origin of the terrain
 	mTerrainGroup->setOrigin(mTerrainPos);
 
 	mTerrainGroup->setAutoUpdateLod(
-			Ogre::TerrainAutoUpdateLodFactory::getAutoUpdateLod(
-					Ogre::BY_DISTANCE));
+		Ogre::TerrainAutoUpdateLodFactory::getAutoUpdateLod(Ogre::BY_DISTANCE));
 
 	configureTerrainDefaults(l);
 
@@ -93,15 +91,15 @@ void EnvironmentO3D::initialize(const std::string fileName,
 	// to say we've loaded them without them actually being loaded
 	mPageManager->setPageProvider(&mDummyPageProvider);
 	mPageManager->addCamera(
-			SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera());
+		SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera());
 	mPageManager->setDebugDisplayLevel(0);
 
 	mTerrainPaging = new Ogre::TerrainPaging(mPageManager);
 	mPagedWorld = mPageManager->createWorld();
 	mTerrainPagedWorldSection = mTerrainPaging->createWorldSection(mPagedWorld,
-			mTerrainGroup, TERRAIN_LOAD_RADIUS, TERRAIN_HOLD_RADIUS,
-			ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
-			ENDLESS_PAGE_MAX_X, ENDLESS_PAGE_MAX_Y);
+		mTerrainGroup, TERRAIN_LOAD_RADIUS, TERRAIN_HOLD_RADIUS,
+		ENDLESS_PAGE_MIN_X, ENDLESS_PAGE_MIN_Y,
+		ENDLESS_PAGE_MAX_X, ENDLESS_PAGE_MAX_Y);
 	mTerrainGroup->freeTemporaryResources();
 
 	mTerrainGroup->loadAllTerrains(true);
@@ -110,7 +108,7 @@ void EnvironmentO3D::initialize(const std::string fileName,
 void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 
 	// Configure global
-	//TODO:Change this to zero if the bullet physics terrain
+	//TODO:Change this to zero if the bullet physics terrain is strongly different
 	mTerrainGlobals->setMaxPixelError(8);
 	//TODO: Fix ambient light for composite map
 //	mTerrainGlobals->setCompositeMapAmbient(
@@ -122,19 +120,19 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 	if (l != NULL) {
 		// testing composite map
 		mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(
-				true);
+			true);
 		mTerrainGlobals->setCompositeMapDistance(32000);
 		mTerrainGlobals->setCompositeMapDiffuse(l->getDiffuseColour());
 		mTerrainGlobals->setLightMapDirection(l->getDerivedDirection());
 	} else {
 		mTerrainGlobals->getDefaultMaterialGenerator()->setLightmapEnabled(
-				false);
+			false);
 		mTerrainGlobals->setCompositeMapDistance(32000);
 	}
 
 //	 Configure default import settings for if we use imported image
 	Ogre::Terrain::ImportData& defaultimp =
-			mTerrainGroup->getDefaultImportSettings();
+		mTerrainGroup->getDefaultImportSettings();
 	defaultimp.terrainSize = TERRAIN_SIZE;
 	defaultimp.worldSize = TERRAIN_WORLD_SIZE;
 	defaultimp.inputScale = 600;
@@ -216,6 +214,6 @@ void EnvironmentO3D::initBlendMaps(Ogre::Terrain* const terrain) {
 
 void EnvironmentO3D::update(double timeSinceLastTick) {
 	mTerrainGroup->autoUpdateLodAll(false,
-			Ogre::Any(Ogre::Real(HOLD_LOD_DISTANCE)));
+		Ogre::Any(Ogre::Real(HOLD_LOD_DISTANCE)));
 }
 

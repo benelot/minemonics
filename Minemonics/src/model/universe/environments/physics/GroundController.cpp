@@ -16,7 +16,6 @@
 
 GroundController::GroundController(PhysicsController::SolverType solverType) :
 	PhysicsController(solverType, PhysicsController::GroundController) {
-
 }
 
 GroundController::~GroundController() {

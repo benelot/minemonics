@@ -84,6 +84,8 @@ public:
 		mInWorld = false;
 	}
 
+	virtual const Ogre::Vector3 getVelocities() const = 0;
+
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 * @param origin The origin of the ray in the global reference frame.

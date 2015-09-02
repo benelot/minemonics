@@ -9,7 +9,7 @@ Hills::Hills() {
 }
 
 Hills::~Hills() {
-	// TODO Auto-generated destructor stub
+	
 }
 
 void Hills::initialize(SimulationManager* simulationMgr, Ogre::Light* l) {

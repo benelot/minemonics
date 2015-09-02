@@ -15,11 +15,11 @@
 //## utils headers
 
 InfoPanel::InfoPanel() {
-	// TODO Auto-generated constructor stub
+	
 
 }
 
 InfoPanel::~InfoPanel() {
-	// TODO Auto-generated destructor stub
+	
 }
 

@@ -8,11 +8,10 @@
 #include <view/universe/evolution/population/creature/phenome/morphology/muscle/MuscleO3D.hpp>
 
 MuscleO3D::MuscleO3D() {
-	// TODO Auto-generated constructor stub
 
 }
 
 MuscleO3D::~MuscleO3D() {
-	// TODO Auto-generated destructor stub
+
 }
 

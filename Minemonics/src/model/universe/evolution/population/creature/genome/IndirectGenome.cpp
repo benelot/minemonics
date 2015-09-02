@@ -15,11 +15,12 @@
 //## utils headers
 
 IndirectGenome::IndirectGenome() :
-Genome(Genome::UnknownGenome) {
+	Genome(Genome::UnknownGenome) {
 
 }
 
 IndirectGenome::~IndirectGenome() {
+
 }
 
 bool IndirectGenome::equals(const IndirectGenome& genome) const {

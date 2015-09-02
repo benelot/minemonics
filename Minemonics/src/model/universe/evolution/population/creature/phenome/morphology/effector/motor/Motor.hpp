@@ -73,14 +73,6 @@ public:
 		mMaxForce = maxForce;
 	}
 
-	double getMaxSpeed() const {
-		return mMaxSpeed;
-	}
-
-	void setMaxSpeed(const double maxSpeed) {
-		mMaxSpeed = maxSpeed;
-	}
-
 	bool isPositionControlled() const {
 		return mPositionControlled;
 	}
@@ -130,7 +122,6 @@ public:
 		& BOOST_SERIALIZATION_NVP(mEnabled) /**!< Whether the motor is enabled */
 		& BOOST_SERIALIZATION_NVP(mPositionControlled) /**!< Direction or position? */
 		& BOOST_SERIALIZATION_NVP(mMaxForce) /**!< The maximum force of the motor.*/
-		& BOOST_SERIALIZATION_NVP(mMaxSpeed) /**!< The maximum speed of the motor. */
 		& BOOST_SERIALIZATION_NVP(mIndex); /**!< The index of the motor. */
 	}
 
@@ -143,8 +134,6 @@ protected:
 	bool mPositionControlled; /**!< Direction or position? */
 
 	double mMaxForce; /**!< The maximum force of the motor.*/
-
-	double mMaxSpeed; /**!< The maximum speed of the motor. */
 
 	int mIndex; /**!< The index of the motor. */
 };

@@ -37,6 +37,6 @@ ParamsPanel("Debug", MovablePanel::DETAILSPANEL) {
 }
 
 DetailsPanel::~DetailsPanel() {
-// TODO Auto-generated destructor stub
+
 }
 

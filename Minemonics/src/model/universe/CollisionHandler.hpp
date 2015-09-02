@@ -50,20 +50,26 @@ bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
 	// if both were limbs (not ground or anything else)
 	if (limbModel1 != NULL && limbModel2 != NULL) {
 
-//		if (limbModel1->getJointIndex() != limbModel2->getJointIndex()) { // no need for filtering that, they do not occur anyway
+//		float threshold = 50;
+//		if (limbModel1->getVelocities().length() > threshold) {
+//			std::cout << limbModel1->getVelocities().x
+//				<< limbModel1->getVelocities().y
+//				<< limbModel1->getVelocities().z << std::endl;
+//		}
 		if (cp.getDistance() < PhysicsConfiguration::PENETRATION_THRESHOLD) {
-				std::cout << "Interpenetration depth:" << cp.getDistance() << std::endl;
-				limbModel1->setInterpenetrationDepth(
-						limbModel1->getInterpenetrationDepth()
-								+ cp.getDistance());
-				limbModel2->setInterpenetrationDepth(
-						limbModel2->getInterpenetrationDepth()
-								+ cp.getDistance());
+			std::cout << "Interpenetration depth:" << cp.getDistance()
+				<< std::endl;
+			limbModel1->setInterpenetrationDepth(
+				limbModel1->getInterpenetrationDepth()
+					+ cp.getDistance() / limbModel1->getDimensions().length());
+			limbModel2->setInterpenetrationDepth(
+				limbModel2->getInterpenetrationDepth()
+					+ cp.getDistance() / limbModel2->getDimensions().length());
 		}
 //		}
 	}
 
-	//ignore according to the documentation.
+//ignore according to the documentation.
 	return false;
 }
 

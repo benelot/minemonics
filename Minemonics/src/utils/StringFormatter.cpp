@@ -8,11 +8,10 @@
 #include <utils/StringFormatter.hpp>
 
 StringFormatter::StringFormatter() {
-	// TODO Auto-generated constructor stub
 
 }
 
 StringFormatter::~StringFormatter() {
-	// TODO Auto-generated destructor stub
+
 }
 

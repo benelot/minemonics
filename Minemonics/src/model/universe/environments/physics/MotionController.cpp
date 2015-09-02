@@ -21,11 +21,11 @@
 //## view headers
 //## utils headers
 MotionController::MotionController() {
-	// TODO Auto-generated constructor stub
+	
 
 }
 
 MotionController::~MotionController() {
-	// TODO Auto-generated destructor stub
+	
 }
 

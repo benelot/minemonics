@@ -91,11 +91,11 @@ public:
 	 */
 	void removeFromWorld();
 
-	/**
-	 * Returns if the joint is under tension.
-	 * @return If the joint is under tension.
-	 */
-	bool isStrained();
+//	/**
+//	 * Returns if the joint is under tension.
+//	 * @return If the joint is under tension.
+//	 */
+//	bool isStrained();
 
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.
@@ -136,17 +136,6 @@ public:
 		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return true;
 //		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
-	}
-
-	void setTargetRotationalVelocity(
-		JointPhysics::RotationalDegreeOfFreedom index, double targetVelocity) {
-//		mJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
-	}
-
-	double getTargetRotationalVelocity(
-		const JointPhysics::RotationalDegreeOfFreedom index) {
-		return 0;
-//		return mJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
 	void setMaxRotationalForce(

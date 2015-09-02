@@ -84,11 +84,11 @@ public:
 	 */
 	void reposition(const Ogre::Vector3 position);
 
-	/**
-	 * Returns if the joint is under tension.
-	 * @return If the joint is under tension.
-	 */
-	bool isStrained();
+//	/**
+//	 * Returns if the joint is under tension.
+//	 * @return If the joint is under tension.
+//	 */
+//	bool isStrained();
 
 	/**
 	 * Compare the joint model to another joint model.
@@ -113,8 +113,7 @@ public:
 		mJointPhysics = jointPhysics;
 	}
 
-	void generateMotors(const Ogre::Vector3 maxForces,
-		const Ogre::Vector3 maxSpeeds);
+	void generateMotors(const Ogre::Vector3 maxForces);
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.

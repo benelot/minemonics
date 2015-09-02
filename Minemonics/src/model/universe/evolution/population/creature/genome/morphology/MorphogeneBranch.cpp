@@ -203,16 +203,16 @@ void MorphogeneBranch::initialize() {
 	/**
 	 * The maximum joint force
 	 */
-	mJointMaxPitchForce = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_FORCE,
-		MorphologyConfiguration::JOINT_MAX_FORCE);
-	mJointMaxYawForce = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_FORCE,
-		MorphologyConfiguration::JOINT_MAX_FORCE);
-	mJointMaxRollForce = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_FORCE,
-		MorphologyConfiguration::JOINT_MAX_FORCE);
-
+	//TODO: Remove if not necessary anymore.
+//	mJointMaxPitchForce = Randomness::getSingleton()->nextUnifDouble(
+//		MorphologyConfiguration::JOINT_MIN_FORCE,
+//		MorphologyConfiguration::JOINT_MAX_FORCE);
+//	mJointMaxYawForce = Randomness::getSingleton()->nextUnifDouble(
+//		MorphologyConfiguration::JOINT_MIN_FORCE,
+//		MorphologyConfiguration::JOINT_MAX_FORCE);
+//	mJointMaxRollForce = Randomness::getSingleton()->nextUnifDouble(
+//		MorphologyConfiguration::JOINT_MIN_FORCE,
+//		MorphologyConfiguration::JOINT_MAX_FORCE);
 	/**
 	 * The maximum joint speed
 	 */

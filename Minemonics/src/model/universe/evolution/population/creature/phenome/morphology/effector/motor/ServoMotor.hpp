@@ -42,8 +42,7 @@ public:
 	 */
 	void initialize(
 		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		const double maxForce, const double maxSpeed, double lowerLimit,
-		double upperLimit);
+		const double maxForce, double lowerLimit, double upperLimit);
 
 	void instantiate(btMultiBody* multiBody, const int jointIndex);
 	/**
