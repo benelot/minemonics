@@ -238,7 +238,7 @@ void SimulationManager::createScene(void) {
 
 	// create a planet called earth
 	Planet* earth = new Planet(PhysicsController::FeatherstoneController,
-		Environment::PLANE, 1000, mSun);
+		Environment::PLANE, 20, mSun);
 
 	// add earth to universe
 	mUniverse.addPlanet(earth);
