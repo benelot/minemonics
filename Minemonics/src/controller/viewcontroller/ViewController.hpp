@@ -55,7 +55,7 @@ public:
 	 * @param stateHandler The state handler of the simulation.
 	 */
 	void initialize(Ogre::RenderTarget* const renderTarget,
-	StateHandler* const stateHandler);
+		StateHandler* const stateHandler);
 
 	/**
 	 * Update the view controller.
@@ -82,7 +82,7 @@ public:
 	 * @param mousePositionY The new mouse position Y.
 	 */
 	void updateMousePosition(const float mousePositionX,
-	const float mousePositionY);
+		const float mousePositionY);
 
 	void addPlanetToView(Planet* planet);
 
@@ -158,14 +158,17 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-			boost::log::attributes::constant < std::string
-			> ("ViewController"));
+				boost::log::attributes::constant < std::string
+					> ("ViewController"));
 		}
 	} _initializer;
 
 	// CEGUI components
 	CEGUI::System* mSystem;
 	CEGUI::Window* mLayout;
+
+	//CEGUI windows
+	MovablePanel* mNewPlanetWindow;
 
 	//SheetHandler
 	GUISheetHandler mGUISheetHandler;

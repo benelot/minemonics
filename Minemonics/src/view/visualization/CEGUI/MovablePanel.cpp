@@ -32,6 +32,7 @@ MovablePanel::MovablePanel(const std::string name, MovablePanelType type) :
 
 void MovablePanel::initialize(const int left, const int top, const int width,
 	const int height, const bool hasTitleBar) {
+	BasePanel::initialize(left, top, width, height, hasTitleBar);
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
 	mBaseWidget = static_cast<CEGUI::GroupBox*>(wmgr.createWindow(

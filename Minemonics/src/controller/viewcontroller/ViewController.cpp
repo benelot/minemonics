@@ -131,6 +131,10 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 	mDetailsPanel->hide();
 	mMovablePanels.push_back(mDetailsPanel);
 
+	// initialize windows
+	mNewPlanetWindow = new NewPlanetPanel(40, 50, "New Planet");
+//	mMovablePanels.push_back(mNewPlanetWindow);
+
 	// TODO: Add graphwindows again when used
 //	mMovablePanels.push_back(
 //	new MathGLPanel(400, 400, 400, 400, this,
@@ -138,8 +142,6 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 //
 //	mMovablePanels.push_back(
 //		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));
-
-//	mMovablePanels.push_back(new NewPlanetPanel(40, 50, "New Planet"));
 
 	// add all movable panels to the layout
 	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();
