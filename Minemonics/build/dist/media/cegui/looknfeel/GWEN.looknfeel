@@ -1,0 +1,5146 @@
+<?xml version="1.0" ?>
+<Falagard version="7">
+      <WidgetLook name="GWEN/Label">
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF000000" type="Colour" name="NormalTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="FF444444" type="Colour" name="DisabledTextColour"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="CentreAligned" type="VerticalTextFormatting" name="VertFormatting"/>
+        <PropertyDefinition redrawOnWrite="true" initialValue="CentreAligned" type="HorizontalTextFormatting" name="HorzFormatting"/>
+        <Property name="Size" value="{{0, 128}, {0, 32}}" />
+        <ImagerySection name="Label">
+            <TextComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="Height">
+                        <UnifiedDim scale="1" type="Height"/>
+                    </Dim>
+                </Area>
+                <VertFormatProperty name="VertFormatting"/>
+                <HorzFormatProperty name="HorzFormatting"/>
+            </TextComponent>
+        </ImagerySection>
+        <StateImagery name="Enabled">
+            <Layer>
+                <Section section="Label">
+                    <ColourProperty name="NormalTextColour"/>
+                </Section>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="Disabled">
+            <Layer>
+                <Section section="Label">
+                    <ColourProperty name="DisabledTextColour"/>
+                </Section>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+  <WidgetLook name="GWEN/Button">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertLabelFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzLabelFormatting" />
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormatProperty name="VertLabelFormatting" />
+        <HorzFormatProperty name="HorzLabelFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.Button.Normal.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.Button.Normal.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.Button.Normal.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.Button.Normal.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/Input.Button.Normal.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.Button.Normal.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/Input.Button.Normal.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.Button.Normal.Middle.Right" />
+        <Image component="Background" name="GWEN/Input.Button.Normal.Middle.Middle" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.Button.Hovered.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.Button.Hovered.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.Button.Hovered.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.Button.Hovered.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/Input.Button.Hovered.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.Button.Hovered.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/Input.Button.Hovered.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.Button.Hovered.Middle.Right" />
+        <Image component="Background" name="GWEN/Input.Button.Hovered.Middle.Middle" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.Button.Pressed.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.Button.Pressed.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.Button.Pressed.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.Button.Pressed.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/Input.Button.Pressed.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.Button.Pressed.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/Input.Button.Pressed.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.Button.Pressed.Middle.Right" />
+        <Image component="Background" name="GWEN/Input.Button.Pressed.Middle.Middle" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.Button.Disabled.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.Button.Disabled.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.Button.Disabled.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.Button.Disabled.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/Input.Button.Disabled.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.Button.Disabled.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/Input.Button.Disabled.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.Button.Disabled.Middle.Right" />
+        <Image component="Background" name="GWEN/Input.Button.Disabled.Middle.Middle" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="DisabledImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/RadioButton">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/RadioButton.Active.Normal" />
+          <AbsoluteDim value="3" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/RadioButton.Active.Normal" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/RadioButton.Disabled.Normal" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="select_mark">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/RadioButton.Active.Checked" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="select_mark_disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/RadioButton.Disabled.Checked" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedNormal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="select_mark" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedHover">
+      <Layer>
+        <Section section="normal" />
+        <Section section="select_mark" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedDisabled">
+      <Layer>
+        <Section section="normal" />
+        <Section section="select_mark_disabled" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Checkbox">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Checkbox.Active.Normal" />
+          <AbsoluteDim value="3" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Checkbox.Active.Normal" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Checkbox.Disabled.Normal" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="select_mark">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Checkbox.Active.Checked" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="select_mark_disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Checkbox.Disabled.Checked" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedNormal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="select_mark" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedHover">
+      <Layer>
+        <Section section="normal" />
+        <Section section="select_mark" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedDisabled">
+      <Layer>
+        <Section section="normal" />
+        <Section section="select_mark_disabled" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Editbox">
+    <PropertyDefinition initialValue="FF323232" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF5EBCFF" name="ActiveSelectionColour" redrawOnWrite="true" />
+    <NamedArea name="TextArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="5" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="5" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim offset="-5" scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim offset="-5" scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="container_normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/TextBox.Normal.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/TextBox.Normal.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/TextBox.Normal.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/TextBox.Normal.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/TextBox.Normal.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/TextBox.Normal.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/TextBox.Normal.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/TextBox.Normal.Bottom.Middle" />
+        <Image component="Background" name="GWEN/TextBox.Normal.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="container_focus">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/TextBox.Focus.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/TextBox.Focus.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/TextBox.Focus.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/TextBox.Focus.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/TextBox.Focus.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/TextBox.Focus.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/TextBox.Focus.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/TextBox.Focus.Bottom.Middle" />
+        <Image component="Background" name="GWEN/TextBox.Focus.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="container_disabled">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/TextBox.Disabled.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/TextBox.Disabled.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/TextBox.Disabled.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/TextBox.Disabled.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/TextBox.Disabled.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/TextBox.Disabled.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/TextBox.Disabled.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/TextBox.Disabled.Bottom.Middle" />
+        <Image component="Background" name="GWEN/TextBox.Disabled.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="selection">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1.0" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1.0" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/TextBox.SelectedTextColor" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="Caret">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <UnifiedDim scale="0.1" type="TopEdge" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/TextBox.CursorColor" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="0.9" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/TextBox.CursorColor" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="container_normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ReadOnly">
+      <Layer>
+        <Section section="container_focus" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="container_disabled" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ActiveSelection">
+      <Layer>
+        <Section section="selection">
+          <ColourProperty name="ActiveSelectionColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="InactiveSelection">
+      <Layer>
+        <Section section="selection">
+          <ColourProperty name="ActiveSelectionColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Titlebar">
+    <PropertyDefinition initialValue="FFFFFFFF" name="CaptionColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzFormatting" />
+    <Property name="NonClient" value="True" />
+    <ImagerySection name="main">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/Window.Head.Normal.Left" />
+        <Image component="RightEdge" name="GWEN/Window.Head.Normal.Right" />
+        <Image component="Background" name="GWEN/Window.Head.Normal.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="inactive">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/Window.Head.Inactive.Left" />
+        <Image component="RightEdge" name="GWEN/Window.Head.Inactive.Right" />
+        <Image component="Background" name="GWEN/Window.Head.Inactive.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="caption">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <ColourProperty name="CaptionColour" />
+        <VertFormatProperty name="VertFormatting" />
+        <HorzFormatProperty name="HorzFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <StateImagery name="Active">
+      <Layer>
+        <Section section="main" />
+        <Section section="caption" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Inactive">
+      <Layer>
+        <Section section="inactive" />
+        <Section section="caption" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="inactive" />
+        <Section section="caption" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ImageButton">
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="normal">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="DisabledImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/FrameWindow">
+    <PropertyLinkDefinition initialValue="FFFFFFFF" name="CaptionColour" targetProperty="CaptionColour" widget="__auto_titlebar__" />
+    <PropertyLinkDefinition name="CaptionFont" targetProperty="Font" widget="__auto_titlebar__" />
+    <Property name="MinSize" value="{{0.1,0},{0.1,0}}" />
+    <Property name="AutoRenderingSurface" value="True" />
+    <NamedArea name="ClientWithTitleWithFrame">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Window.Head.Normal.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_titlebar__" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Window.Head.Normal.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Window.Bottom.Normal.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ClientWithTitleNoFrame">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_titlebar__" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <WidgetDim dimension="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ClientNoTitleWithFrame">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Window.Head.Normal.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Window.Head.Normal.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Window.Head.Normal.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Window.Bottom.Normal.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ClientNoTitleNoFrame">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_titlebar__" type="GWEN/Titlebar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <FontDim padding="8" type="LineSpacing" />
+        </Dim>
+      </Area>
+      <Property name="AlwaysOnTop" value="False" />
+    </Child>
+    <Child nameSuffix="__auto_closebutton__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <OperatorDim op="Add"><AbsoluteDim value="0.0" />
+        <OperatorDim op="Subtract"><WidgetDim dimension="Width" widget="__auto_titlebar__" />
+          <OperatorDim op="Multiply"><ImageDim dimension="Width" name="GWEN/Window.Close" />
+              <AbsoluteDim value="1.3" />
+                  </OperatorDim>
+                </OperatorDim>
+            </OperatorDim></Dim>
+        <Dim type="TopEdge">
+          <OperatorDim op="Multiply"><AbsoluteDim value="0.5" />
+        <OperatorDim op="Subtract"><WidgetDim dimension="Height" widget="__auto_titlebar__" />
+            <ImageDim dimension="Width" name="GWEN/Window.Close" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Window.Close" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Width" name="GWEN/Window.Close" />
+        </Dim>
+      </Area>
+      <Property name="AlwaysOnTop" value="True" />
+      <Property name="NormalImage" value="GWEN/Window.Close" />
+      <Property name="HoverImage" value="GWEN/Window.Close_Hover" />
+      <Property name="PushedImage" value="GWEN/Window.Close_Down" />
+      <Property name="NonClient" value="True" />
+    </Child>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <WidgetDim dimension="Height" widget="__auto_titlebar__" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="BottomLeftCorner" name="GWEN/Window.Bottom.Normal.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Window.Bottom.Normal.Right" />
+        <Image component="LeftEdge" name="GWEN/Window.Middle.Normal.Left" />
+        <Image component="RightEdge" name="GWEN/Window.Middle.Normal.Right" />
+        <Image component="BottomEdge" name="GWEN/Window.Bottom.Normal.Middle" />
+        <Image component="Background" name="GWEN/Window.Middle.Normal.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled_frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <WidgetDim dimension="Height" widget="__auto_titlebar__" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="BottomLeftCorner" name="GWEN/Window.Bottom.Inactive.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Window.Bottom.Inactive.Right" />
+        <Image component="LeftEdge" name="GWEN/Window.Middle.Inactive.Left" />
+        <Image component="RightEdge" name="GWEN/Window.Middle.Inactive.Right" />
+        <Image component="BottomEdge" name="GWEN/Window.Bottom.Inactive.Middle" />
+        <Image component="Background" name="GWEN/Window.Middle.Inactive.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="noframe">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Window.Middle.Normal.Middle" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="ActiveWithTitleWithFrame">
+      <Layer>
+        <Section section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="InactiveWithTitleWithFrame">
+      <Layer>
+        <Section section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledWithTitleWithFrame">
+      <Layer>
+        <Section section="disabled_frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ActiveWithTitleNoFrame">
+      <Layer>
+        <Section section="noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="InactiveWithTitleNoFrame">
+      <Layer>
+        <Section section="noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledWithTitleNoFrame">
+      <Layer>
+        <Section section="noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ActiveNoTitleWithFrame">
+      <Layer>
+        <Section section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="InactiveNoTitleWithFrame">
+      <Layer>
+        <Section section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledNoTitleWithFrame">
+      <Layer>
+        <Section section="disabled_frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ActiveNoTitleNoFrame">
+      <Layer>
+        <Section section="noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="InactiveNoTitleNoFrame">
+      <Layer>
+        <Section section="noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledNoTitleNoFrame">
+      <Layer>
+        <Section section="noframe" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/GroupBox">
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <Child nameSuffix="__auto_contentpane__" type="DefaultWindow">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="8" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="20" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim offset="0" scale="1" type="RightEdge" />
+        <AbsoluteDim value="8" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim offset="0" scale="1" type="BottomEdge" />
+        <AbsoluteDim value="8" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </Child>
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="2" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim offset="0" scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim offset="0" scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <VertFormat type="TopAligned" />
+        <HorzFormat type="LeftAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="13" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim offset="0" scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim offset="0" scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/GroupBox.Normal.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/GroupBox.Normal.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/GroupBox.Normal.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/GroupBox.Normal.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/GroupBox.Normal.Middle.Left" />
+        <Image component="TopEdge" name="GWEN/GroupBox.Normal.Top.Middle" />
+        <Image component="RightEdge" name="GWEN/GroupBox.Normal.Middle.Right" />
+        <Image component="BottomEdge" name="GWEN/GroupBox.Normal.Bottom.Middle" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="frame" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="frame" />
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ProgressBar">
+    <NamedArea name="ProgressArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <OperatorDim op="Divide"><ImageDim dimension="Width" name="GWEN/ProgressBar.Front.Middle.Left" />
+        <AbsoluteDim value="2" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/ProgressBar.Front.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/ProgressBar.Back.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/ProgressBar.Back.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/ProgressBar.Back.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/ProgressBar.Back.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/ProgressBar.Back.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/ProgressBar.Back.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/ProgressBar.Back.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/ProgressBar.Back.Middle.Right" />
+        <Image component="Background" name="GWEN/ProgressBar.Back.Middle.Middle" />
+        <HorzFormat type="Stretched" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="progress_lights">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/ProgressBar.Front.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/ProgressBar.Front.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/ProgressBar.Front.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/ProgressBar.Front.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/ProgressBar.Front.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/ProgressBar.Front.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/ProgressBar.Front.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/ProgressBar.Front.Middle.Right" />
+        <Image component="Background" name="GWEN/ProgressBar.Front.Middle.Middle" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="EnabledProgress">
+      <Layer>
+        <Section section="progress_lights" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledProgress">
+      <Layer>
+        <Section section="progress_lights">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/VUMeter">
+    <Property name="VerticalProgress" value="True" />
+    <NamedArea name="ProgressArea">
+      <Area>
+        <Dim type="TopEdge">
+          <OperatorDim op="Divide"><ImageDim dimension="Height" name="GWEN/VProgressBar.Front.Top.Middle" />
+        <AbsoluteDim value="2" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/VProgressBar.Front.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/VProgressBar.Back.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/VProgressBar.Back.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/VProgressBar.Back.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/VProgressBar.Back.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/VProgressBar.Back.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/VProgressBar.Back.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/VProgressBar.Back.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/VProgressBar.Back.Middle.Right" />
+        <Image component="Background" name="GWEN/VProgressBar.Back.Middle.Middle" />
+        <VertFormat type="Stretched" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="progress_lights">
+      <FrameComponent>
+        <Area>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/VProgressBar.Front.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/VProgressBar.Front.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/VProgressBar.Front.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/VProgressBar.Front.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/VProgressBar.Front.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/VProgressBar.Front.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/VProgressBar.Front.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/VProgressBar.Front.Middle.Right" />
+        <Image component="Background" name="GWEN/VProgressBar.Front.Middle.Middle" />
+        <HorzFormat type="Stretched" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="EnabledProgress">
+      <Layer>
+        <Section section="progress_lights" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledProgress">
+      <Layer>
+        <Section section="progress_lights">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/SliderThumb">
+    <Property name="VertFree" value="True" />
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <ImagerySection name="normal">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.V.Normal" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.V.Hover" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.V.Down" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.V.Disabled" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/HorizontalSliderThumb">
+    <Property name="VertFree" value="True" />
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <ImagerySection name="normal">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.H.Normal" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.H.Hover" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.H.Down" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.Slider.H.Disabled" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Slider">
+    <Property name="VerticalSlider" value="True" />
+    <Property name="MouseAutoRepeatEnabled" value="True" />
+    <Property name="WantsMultiClickEvents" value="False" />
+    <NamedArea name="ThumbTrackArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_thumb__" type="GWEN/SliderThumb">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1.0" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Input.Slider.V.Normal" />
+        </Dim>
+      </Area>
+    </Child>
+    <ImagerySection name="main">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="10" />
+          </Dim>
+          <Dim type="Width">
+            <AbsoluteDim value="1" />
+          </Dim>
+          <Dim type="TopEdge">
+            <OperatorDim op="Divide"><WidgetDim dimension="Height" widget="__auto_thumb__" />
+          <AbsoluteDim value="2" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="BottomEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="Height" />
+          <OperatorDim op="Divide"><WidgetDim dimension="Height" widget="__auto_thumb__" />
+              <AbsoluteDim value="2" />
+                  </OperatorDim>
+                </OperatorDim>
+            </Dim>
+        </Area>
+        <Image name="GWEN/Slider" />
+        <VertFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/HorizontalSlider">
+    <Property name="VerticalSlider" value="False" />
+    <Property name="MouseAutoRepeatEnabled" value="True" />
+    <Property name="WantsMultiClickEvents" value="False" />
+    <NamedArea name="ThumbTrackArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_thumb__" type="GWEN/HorizontalSliderThumb">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Input.Slider.H.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Input.Slider.H.Normal" />
+        </Dim>
+      </Area>
+      <Property name="HorzFree" value="True" />
+    </Child>
+    <ImagerySection name="main">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <OperatorDim op="Divide"><WidgetDim dimension="Width" widget="__auto_thumb__" />
+          <AbsoluteDim value="2" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="RightEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="Width" />
+          <OperatorDim op="Divide"><WidgetDim dimension="Width" widget="__auto_thumb__" />
+              <AbsoluteDim value="2" />
+                  </OperatorDim>
+                </OperatorDim>
+            </Dim>
+          <Dim type="TopEdge">
+            <OperatorDim op="Divide"><WidgetDim dimension="Height" widget="__auto_thumb__" />
+          <AbsoluteDim value="2" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="Height">
+            <AbsoluteDim value="1" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Slider" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/HorizontalScrollbarThumb">
+    <Property name="HorzFree" value="True" />
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/Scroller.ButtonH.Normal.Left" />
+        <Image component="RightEdge" name="GWEN/Scroller.ButtonH.Normal.Right" />
+        <Image component="Background" name="GWEN/Scroller.ButtonH.Normal.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/Scroller.ButtonH.Hover.Left" />
+        <Image component="RightEdge" name="GWEN/Scroller.ButtonH.Hover.Right" />
+        <Image component="Background" name="GWEN/Scroller.ButtonH.Hover.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/Scroller.ButtonH.Down.Left" />
+        <Image component="RightEdge" name="GWEN/Scroller.ButtonH.Down.Right" />
+        <Image component="Background" name="GWEN/Scroller.ButtonH.Down.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/Scroller.ButtonH.Disabled.Left" />
+        <Image component="RightEdge" name="GWEN/Scroller.ButtonH.Disabled.Right" />
+        <Image component="Background" name="GWEN/Scroller.ButtonH.Disabled.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/HorizontalScrollbar">
+    <NamedArea name="ThumbTrackArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Scroller.Button.Right.Normal" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_incbtn__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Right.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+      <Property name="NormalImage" value="GWEN/Scroller.Button.Right.Normal" />
+      <Property name="HoverImage" value="GWEN/Scroller.Button.Right.Hover" />
+      <Property name="PushedImage" value="GWEN/Scroller.Button.Right.Down" />
+    </Child>
+    <Child nameSuffix="__auto_decbtn__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <Property name="NormalImage" value="GWEN/Scroller.Button.Left.Normal" />
+      <Property name="HoverImage" value="GWEN/Scroller.Button.Left.Hover" />
+      <Property name="PushedImage" value="GWEN/Scroller.Button.Left.Down" />
+    </Child>
+    <Child nameSuffix="__auto_thumb__" type="GWEN/HorizontalScrollbarThumb">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="0.1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <Property name="MinSize" value="{{0,25},{0,0}}" />
+    </Child>
+    <ImagerySection name="main">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <ImageDim dimension="Width" name="GWEN/Scroller.Button.Left.Normal" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="RightEdge" />
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Right.Normal" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1.0" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Scroller.TrackH" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <ImageDim dimension="Width" name="GWEN/Scroller.Button.Left.Disabled" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="RightEdge" />
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Right.Disabled" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1.0" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Scroller.TrackH" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/VerticalScrollbarThumb">
+    <Property name="VertFree" value="True" />
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopEdge" name="GWEN/Scroller.ButtonV.Normal.Top" />
+        <Image component="BottomEdge" name="GWEN/Scroller.ButtonV.Normal.Bottom" />
+        <Image component="Background" name="GWEN/Scroller.ButtonV.Normal.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopEdge" name="GWEN/Scroller.ButtonV.Hover.Top" />
+        <Image component="BottomEdge" name="GWEN/Scroller.ButtonV.Hover.Bottom" />
+        <Image component="Background" name="GWEN/Scroller.ButtonV.Hover.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopEdge" name="GWEN/Scroller.ButtonV.Down.Top" />
+        <Image component="BottomEdge" name="GWEN/Scroller.ButtonV.Down.Bottom" />
+        <Image component="Background" name="GWEN/Scroller.ButtonV.Down.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopEdge" name="GWEN/Scroller.ButtonV.Disabled.Top" />
+        <Image component="BottomEdge" name="GWEN/Scroller.ButtonV.Disabled.Bottom" />
+        <Image component="Background" name="GWEN/Scroller.ButtonV.Disabled.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/VerticalScrollbar">
+    <Property name="VerticalScrollbar" value="True" />
+    <NamedArea name="ThumbTrackArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Up.Normal" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Scroller.Button.Down.Normal" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_incbtn__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Down.Normal" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+      <Property name="NormalImage" value="GWEN/Scroller.Button.Down.Normal" />
+      <Property name="HoverImage" value="GWEN/Scroller.Button.Down.Hover" />
+      <Property name="PushedImage" value="GWEN/Scroller.Button.Down.Down" />
+    </Child>
+    <Child nameSuffix="__auto_decbtn__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Up.Normal" />
+        </Dim>
+      </Area>
+      <Property name="NormalImage" value="GWEN/Scroller.Button.Up.Normal" />
+      <Property name="HoverImage" value="GWEN/Scroller.Button.Up.Hover" />
+      <Property name="PushedImage" value="GWEN/Scroller.Button.Up.Down" />
+    </Child>
+    <Child nameSuffix="__auto_thumb__" type="GWEN/VerticalScrollbarThumb">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="0.1" type="Height" />
+        </Dim>
+      </Area>
+      <Property name="MinSize" value="{{0,0},{0,25}}" />
+    </Child>
+    <ImagerySection name="main">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <ImageDim dimension="Height" name="GWEN/Scroller.Button.Up.Normal" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1.0" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="BottomEdge" />
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Down.Normal" />
+              </OperatorDim>
+            </Dim>
+        </Area>
+        <Image name="GWEN/Scroller.TrackV" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <ImageDim dimension="Height" name="GWEN/Scroller.Button.Up.Disabled" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1.0" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1.0" type="BottomEdge" />
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Down.Disabled" />
+              </OperatorDim>
+            </Dim>
+        </Area>
+        <Image name="GWEN/Scroller.TrackV" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ListboxItem">
+    <PropertyDefinition initialValue="FF494949" name="TextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="SelectedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="set:GWEN image:Input.ListBox.EvenLineSelected" name="SelectionBrush" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF5C8FFF" name="SelectionColour" redrawOnWrite="true" />
+    <Property name="Selectable" value="True" />
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <NamedArea name="ContentSize">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <FontDim padding="6" type="HorzExtent" />
+        </Dim>
+        <Dim type="Height">
+          <FontDim type="LineSpacing" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="4" />
+          </Dim>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="8" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim offset="-3" scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="selection">
+      <ImageryComponent>
+        <Area>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <ImageProperty name="SelectionBrush" />
+        <ColourProperty name="SelectionColour" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="label">
+          <ColourProperty name="TextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="label">
+          <ColourProperty name="TextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedEnabled">
+      <Layer>
+        <Section section="selection" />
+        <Section section="label">
+          <ColourProperty name="SelectedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SelectedDisabled">
+      <Layer>
+        <Section section="selection" />
+        <Section section="label">
+          <ColourProperty name="SelectedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Listbox">
+    <NamedArea name="ItemRenderingArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Input.ListBox.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Input.ListBox.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Input.ListBox.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Input.ListBox.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Input.ListBox.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Input.ListBox.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-15" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <AbsoluteDim value="15" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <AbsoluteDim value="15" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+    </Child>
+    <ImagerySection name="main">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.ListBox.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.ListBox.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.ListBox.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.ListBox.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Input.ListBox.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.ListBox.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Input.ListBox.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.ListBox.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Input.ListBox.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="main">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ComboDropList">
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <NamedArea name="ItemRenderingArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Menu.Background.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Menu.Background.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Menu.Background.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Menu.Background.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Menu.Background.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Menu.Background.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-15" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <AbsoluteDim value="15" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <AbsoluteDim value="15" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+    </Child>
+    <ImagerySection name="main">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Menu.Background.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Menu.Background.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Menu.Background.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Menu.Background.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Menu.Background.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Menu.Background.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Menu.Background.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Menu.Background.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Menu.Background.Middle.Middle" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="main">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ComboEditbox">
+    <PropertyDefinition initialValue="FF323232" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF000000" name="SelectedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF5EBCFF" name="ActiveSelectionColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF808080" name="InactiveSelectionColour" redrawOnWrite="true" />
+    <NamedArea name="TextArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="5" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="5" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim offset="-5" scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim offset="-5" scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="container_normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.ComboBox.Normal.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.ComboBox.Normal.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.ComboBox.Normal.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.ComboBox.Normal.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/Input.ComboBox.Normal.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.ComboBox.Normal.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/Input.ComboBox.Normal.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.ComboBox.Normal.Middle.Right" />
+        <Image component="Background" name="GWEN/Input.ComboBox.Normal.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="container_disabled">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1.0" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1.0" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.ComboBox.Disabled.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.ComboBox.Disabled.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.ComboBox.Disabled.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.ComboBox.Disabled.Bottom.Right" />
+        <Image component="TopEdge" name="GWEN/Input.ComboBox.Disabled.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.ComboBox.Disabled.Bottom.Middle" />
+        <Image component="LeftEdge" name="GWEN/Input.ComboBox.Disabled.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.ComboBox.Disabled.Middle.Right" />
+        <Image component="Background" name="GWEN/Input.ComboBox.Disabled.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="selection">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1.0" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1.0" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/TextBox.SelectedTextColor" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="Caret">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <UnifiedDim scale="0.1" type="TopEdge" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/TextBox.CursorColor" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="0.9" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/TextBox.CursorColor" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="container_normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ReadOnly">
+      <Layer>
+        <Section section="container_normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="container_normal">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ActiveSelection">
+      <Layer>
+        <Section section="selection">
+          <ColourProperty name="ActiveSelectionColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="InactiveSelection">
+      <Layer>
+        <Section section="selection">
+          <ColourProperty name="InactiveSelectionColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Combobox">
+    <PropertyDefinition initialValue="set:GWEN image:Input.ListBox.EvenLineSelected" name="SelectionBrush" redrawOnWrite="true" />
+    <PropertyLinkDefinition initialValue="FF323232" name="NormalEditTextColour" targetProperty="NormalTextColour" widget="__auto_editbox__" />
+    <PropertyLinkDefinition initialValue="FF000000" name="SelectedEditTextColour" targetProperty="SelectedTextColour" widget="__auto_editbox__" />
+    <PropertyLinkDefinition initialValue="FF5EBCFF" name="ActiveEditSelectionColour" targetProperty="ActiveSelectionColour" widget="__auto_editbox__" />
+    <Child nameSuffix="__auto_editbox__" type="GWEN/ComboEditbox">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="Height">
+          <FontDim padding="10" type="LineSpacing" />
+        </Dim>
+      </Area>
+    </Child>
+    <Child nameSuffix="__auto_droplist__" type="GWEN/ComboDropList">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_editbox__" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </Child>
+    <Child nameSuffix="__auto_button__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="-2" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="5" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/RadioButton.Active.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/RadioButton.Active.Normal" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+      <Property name="NormalImage" value="GWEN/Input.ComboBox.Button.Normal" />
+      <Property name="HoverImage" value="GWEN/Input.ComboBox.Button.Hover" />
+      <Property name="PushedImage" value="GWEN/Input.ComboBox.Button.Pushed" />
+      <Property name="DisabledImage" value="set:GWEN image:Input.ComboBox.Button.Disabled" />
+    </Child>
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Spinner">
+    <Child nameSuffix="__auto_editbox__" type="GWEN/Editbox">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+    </Child>
+    <Child nameSuffix="__auto_incbtn__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="-2" />
+        </Dim>
+        <Dim type="TopEdge">
+          <UnifiedDim scale="0.0" type="TopEdge" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Input.UpDown.Up.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Input.UpDown.Up.Normal" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+      <Property name="NormalImage" value="GWEN/Input.UpDown.Up.Normal" />
+      <Property name="HoverImage" value="GWEN/Input.UpDown.Up.Hover" />
+      <Property name="PushedImage" value="GWEN/Input.UpDown.Up.Down" />
+      <Property name="AlwaysOnTop" value="True" />
+    </Child>
+    <Child nameSuffix="__auto_decbtn__" type="GWEN/ImageButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="-2" />
+        </Dim>
+        <Dim type="TopEdge">
+          <UnifiedDim scale="0.5" type="TopEdge" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Input.UpDown.Down.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Input.UpDown.Down.Normal" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+      <Property name="NormalImage" value="GWEN/Input.UpDown.Down.Normal" />
+      <Property name="HoverImage" value="GWEN/Input.UpDown.Down.Hover" />
+      <Property name="PushedImage" value="GWEN/Input.UpDown.Down.Down" />
+      <Property name="AlwaysOnTop" value="True" />
+    </Child>
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/StaticShared">
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/GroupBox.Normal.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/GroupBox.Normal.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/GroupBox.Normal.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/GroupBox.Normal.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/GroupBox.Normal.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/GroupBox.Normal.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/GroupBox.Normal.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/GroupBox.Normal.Bottom.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="background">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Left" />
+          </Dim>
+          <Dim type="TopEdge">
+            <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Top.Middle" />
+          </Dim>
+          <Dim type="RightEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+          <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Right" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="BottomEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+          <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Bottom.Middle" />
+              </OperatorDim>
+            </Dim>
+        </Area>
+        <Image name="GWEN/GroupBox.Normal.Middle.Middle" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="background_noframe">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/GroupBox.Normal.Middle.Middle" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/StaticImage">
+    <PropertyDefinition initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" name="ImageColours" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" name="FrameColours" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" name="BackgroundColours" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzFormatting" redrawOnWrite="true" />
+    <Property name="BackgroundEnabled" value="True" />
+    <Property name="FrameEnabled" value="True" />
+    <ImagerySection name="image_withframe">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Left" />
+          </Dim>
+          <Dim type="TopEdge">
+            <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Top.Middle" />
+          </Dim>
+          <Dim type="RightEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+          <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Right" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="BottomEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+          <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Bottom.Middle" />
+              </OperatorDim>
+            </Dim>
+        </Area>
+        <ImageProperty name="Image" />
+        <ColourRectProperty name="ImageColours" />
+        <VertFormatProperty name="VertFormatting" />
+        <HorzFormatProperty name="HorzFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="image_noframe">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="Image" />
+        <ColourRectProperty name="ImageColours" />
+        <VertFormatProperty name="VertFormatting" />
+        <HorzFormatProperty name="HorzFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+    <StateImagery name="EnabledFrame">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledFrame">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="WithFrameEnabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="WithFrameDisabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="NoFrameEnabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background_noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="NoFrameDisabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background_noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="WithFrameImage">
+      <Layer>
+        <Section section="image_withframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="NoFrameImage">
+      <Layer>
+        <Section section="image_noframe" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/StaticText">
+    <Property name="TextColours" value="tl:FF494949 tr:FF494949 bl:FF494949 br:FF494949" />
+    <Property name="FrameEnabled" value="True" />
+    <Property name="BackgroundEnabled" value="True" />
+    <NamedArea name="WithFrameTextRenderArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="WithFrameTextRenderAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="WithFrameTextRenderAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="WithFrameTextRenderAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/GroupBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/GroupBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="NoFrameTextRenderArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="NoFrameTextRenderAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="NoFrameTextRenderAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="NoFrameTextRenderAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-12" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <AbsoluteDim value="12" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <AbsoluteDim value="12" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim offset="-12" scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+    </Child>
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+    <StateImagery name="EnabledFrame">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledFrame">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="frame" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="WithFrameEnabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="WithFrameDisabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="NoFrameEnabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background_noframe" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="NoFrameDisabledBackground">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="background_noframe" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ListHeaderSegment">
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <ImagerySection name="segment">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="LeftEdge" name="GWEN/CategoryList.Header.Left" />
+        <Image component="RightEdge" name="GWEN/CategoryList.Header.Right" />
+        <Image component="Background" name="GWEN/CategoryList.Header.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="ascend_icon">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="3" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="3" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/Input.UpDown.Up.Normal" />
+          </Dim>
+          <Dim type="Height">
+            <ImageDim dimension="Height" name="GWEN/Input.UpDown.Up.Normal" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.UpDown.Down.Normal" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="descend_icon">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="3" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="3" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/Input.UpDown.Down.Normal" />
+          </Dim>
+          <Dim type="Height">
+            <ImageDim dimension="Height" name="GWEN/Input.UpDown.Down.Normal" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Input.UpDown.Up.Normal" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Input.UpDown.Up.Normal" />
+          <AbsoluteDim value="5" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormat type="CentreAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="segment" />
+        <Section section="label" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="segment" />
+        <Section section="label" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="SplitterHover">
+      <Layer>
+        <Section section="segment" />
+        <Section section="label" />
+      </Layer>
+    </StateImagery>
+    <StateImagery clipped="false" name="DragGhost">
+      <Layer priority="1">
+        <Section section="segment">
+          <Colours bottomLeft="90FFFFFF" bottomRight="90FFFFFF" topLeft="90FFFFFF" topRight="90FFFFFF" />
+        </Section>
+        <Section section="label">
+          <Colours bottomLeft="90FFFFFF" bottomRight="90FFFFFF" topLeft="90FFFFFF" topRight="90FFFFFF" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="AscendingSortIcon">
+      <Layer>
+        <Section section="ascend_icon" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DescendingSortIcon">
+      <Layer>
+        <Section section="descend_icon" />
+      </Layer>
+    </StateImagery>
+    <StateImagery clipped="false" name="GhostAscendingSortIcon">
+      <Layer priority="1">
+        <Section section="ascend_icon">
+          <Colours bottomLeft="90FFFFFF" bottomRight="90FFFFFF" topLeft="90FFFFFF" topRight="90FFFFFF" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery clipped="false" name="GhostDescendingSortIcon">
+      <Layer priority="1">
+        <Section section="descend_icon">
+          <Colours bottomLeft="90FFFFFF" bottomRight="90FFFFFF" topLeft="90FFFFFF" topRight="90FFFFFF" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="segment_normal">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+        <Section section="label">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ListHeader">
+    <Property name="SegmentWidgetType" value="GWEN/ListHeaderSegment" />
+    <Property name="MouseInputPropagationEnabled" value="True" />
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/MultiColumnList">
+    <NamedArea name="ItemRenderingArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_listheader__" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_listheader__" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_listheader__" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ItemRenderingAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Input.ListBox.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_listheader__" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_listheader__" type="GWEN/ListHeader">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="Height">
+          <OperatorDim op="Multiply"><FontDim type="LineSpacing" />
+        <AbsoluteDim value="1.5" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </Child>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-15" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <WidgetDim dimension="BottomEdge" widget="__auto_listheader__" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Up.Normal" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+    </Child>
+    <ImagerySection name="main">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Input.ListBox.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Input.ListBox.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Input.ListBox.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Input.ListBox.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Input.ListBox.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Input.ListBox.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Input.ListBox.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Input.ListBox.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Input.ListBox.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="main">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/MultiLineEditbox">
+    <PropertyDefinition initialValue="FF323232" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF5EBCFF" name="ActiveSelectionColour" redrawOnWrite="true" />
+    <NamedArea name="TextArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/TextBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/TextBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/TextBox.Normal.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/TextBox.Normal.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="TextAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/TextBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/TextBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/TextBox.Normal.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="TextAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/TextBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/TextBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/TextBox.Normal.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="TextAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/TextBox.Normal.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/TextBox.Normal.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-15" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Up.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+    </Child>
+    <ImagerySection name="main">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/TextBox.Normal.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/TextBox.Normal.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/TextBox.Normal.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/TextBox.Normal.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/TextBox.Normal.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/TextBox.Normal.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/TextBox.Normal.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/TextBox.Normal.Bottom.Middle" />
+        <Image component="Background" name="GWEN/TextBox.Normal.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="readonly">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/TextBox.Focus.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/TextBox.Focus.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/TextBox.Focus.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/TextBox.Focus.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/TextBox.Focus.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/TextBox.Focus.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/TextBox.Focus.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/TextBox.Focus.Bottom.Middle" />
+        <Image component="Background" name="GWEN/TextBox.Focus.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="disabled">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/TextBox.Disabled.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/TextBox.Disabled.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/TextBox.Disabled.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/TextBox.Disabled.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/TextBox.Disabled.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/TextBox.Disabled.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/TextBox.Disabled.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/TextBox.Disabled.Bottom.Middle" />
+        <Image component="Background" name="GWEN/TextBox.Disabled.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="Caret">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/TextBox.CursorColor" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1.0" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/TextBox.CursorColor" />
+        <VertFormat type="Stretched" />
+        <HorzFormat type="Stretched" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="ReadOnly">
+      <Layer>
+        <Section section="readonly" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="disabled" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Tooltip">
+    <NamedArea name="TextArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Tooltip.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Tooltip.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <ImageDim dimension="Width" name="GWEN/Tooltip.Middle.Right" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <ImageDim dimension="Height" name="GWEN/Tooltip.Bottom.Middle" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="main">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Tooltip.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Tooltip.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Tooltip.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Tooltip.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Tooltip.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Tooltip.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Tooltip.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Tooltip.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Tooltip.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <ImageDim dimension="Width" name="GWEN/Tooltip.Middle.Left" />
+          </Dim>
+          <Dim type="TopEdge">
+            <ImageDim dimension="Height" name="GWEN/Tooltip.Top.Middle" />
+          </Dim>
+          <Dim type="RightEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+          <ImageDim dimension="Width" name="GWEN/Tooltip.Middle.Right" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="BottomEdge">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+          <ImageDim dimension="Height" name="GWEN/Tooltip.Bottom.Middle" />
+              </OperatorDim>
+            </Dim>
+        </Area>
+        <Colours bottomLeft="FF7C7C7C" bottomRight="FF7C7C7C" topLeft="FF7C7C7C" topRight="FF7C7C7C" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="CentreAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="main" />
+        <Section section="label" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="main" />
+        <Section section="label" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/ScrollablePane">
+    <NamedArea name="ViewableArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ViewableAreaHScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1.0" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ViewableAreaVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1.0" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="ViewableAreaHVScroll">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <WidgetDim dimension="Width" widget="__auto_vscrollbar__" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <WidgetDim dimension="Height" widget="__auto_hscrollbar__" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-15" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+      <Property name="NonClient" value="True" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Up.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+      <Property name="NonClient" value="True" />
+    </Child>
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/TabButton">
+    <PropertyDefinition initialValue="FF727272" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFF9F9F9" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF57ADFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF1166B6" name="SelectedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF57ADFF" name="DisabledTextColour" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="CentreAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="top_normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Tab.Top.Inactive.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Tab.Top.Inactive.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Tab.Top.Inactive.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Tab.Top.Inactive.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Tab.Top.Inactive.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Tab.Top.Inactive.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Tab.Top.Inactive.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Tab.Top.Inactive.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Tab.Top.Inactive.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="bot_normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Tab.Bottom.Inactive.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Tab.Bottom.Inactive.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Tab.Bottom.Inactive.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Tab.Bottom.Inactive.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Tab.Bottom.Inactive.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Tab.Bottom.Inactive.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Tab.Bottom.Inactive.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Tab.Bottom.Inactive.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Tab.Bottom.Inactive.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="top_selected">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Tab.Top.Active.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Tab.Top.Active.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Tab.Top.Active.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Tab.Top.Active.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Tab.Top.Active.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Tab.Top.Active.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Tab.Top.Active.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Tab.Top.Active.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Tab.Top.Active.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="bot_selected">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Tab.Bottom.Active.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Tab.Bottom.Active.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Tab.Bottom.Active.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Tab.Bottom.Active.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Tab.Bottom.Active.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Tab.Bottom.Active.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Tab.Bottom.Active.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Tab.Bottom.Active.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Tab.Bottom.Active.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="TopNormal">
+      <Layer>
+        <Section section="top_normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="BottomNormal">
+      <Layer>
+        <Section section="bot_normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="TopHover">
+      <Layer>
+        <Section section="top_normal" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="BottomHover">
+      <Layer>
+        <Section section="bot_normal" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="TopSelected">
+      <Layer>
+        <Section section="top_selected" />
+        <Section section="label">
+          <ColourProperty name="SelectedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="BottomSelected">
+      <Layer>
+        <Section section="bot_selected" />
+        <Section section="label">
+          <ColourProperty name="SelectedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="TopPushed">
+      <Layer>
+        <Section section="top_normal" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="BottomPushed">
+      <Layer>
+        <Section section="bot_normal" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="TopDisabled">
+      <Layer>
+        <Section section="top_normal">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="BottomDisabled">
+      <Layer>
+        <Section section="bot_normal">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/TabContentPane">
+    <PropertyDefinition initialValue="0" layoutOnWrite="true" name="EnableTop" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="0" layoutOnWrite="true" name="EnableBottom" redrawOnWrite="true" />
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Tab.Control.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Tab.Control.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Tab.Control.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Tab.Control.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Tab.Control.Middle.Left" />
+        <Image component="TopEdge" name="GWEN/Tab.Control.Top.Middle" />
+        <Image component="RightEdge" name="GWEN/Tab.Control.Middle.Right" />
+        <Image component="BottomEdge" name="GWEN/Tab.Control.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Tab.Control.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="normal">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/TabButtonPane">
+    <PropertyDefinition initialValue="1" layoutOnWrite="true" name="EnableTop" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="1" layoutOnWrite="true" name="EnableBottom" redrawOnWrite="true" />
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+      </FrameComponent>
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+      </FrameComponent>
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="normal" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="normal">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/TabControl">
+    <Property name="TabButtonType" value="GWEN/TabButton" />
+    <Property name="TabTextPadding" value="{0,8}" />
+    <Child nameSuffix="__auto_TabPane__" type="GWEN/TabContentPane">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="TopEdge">
+          <OperatorDim op="Multiply"><PropertyDim name="EnableBottom" widget="__auto_TabPane__" />
+        <PropertyDim name="TabHeight" type="Height" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="Height">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Height" />
+        <PropertyDim name="TabHeight" type="Height" />
+            </OperatorDim>
+          </Dim>
+      </Area>
+    </Child>
+    <Child nameSuffix="__auto_TabPane__Buttons" type="GWEN/TabButtonPane">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Width" />
+        <OperatorDim op="Multiply"><WidgetDim dimension="Width" widget="__auto_TabPane__ScrollRight" />
+            <AbsoluteDim value="2" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="TopEdge">
+          <OperatorDim op="Multiply"><PropertyDim name="EnableTop" widget="__auto_TabPane__Buttons" />
+        <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Height" />
+            <PropertyDim name="TabHeight" type="Height" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="Height">
+          <PropertyDim name="TabHeight" type="Height" />
+        </Dim>
+      </Area>
+    </Child>
+    <Child nameSuffix="__auto_TabPane__ScrollLeft" type="GWEN/SystemButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Width" />
+        <OperatorDim op="Multiply"><WidgetDim dimension="Width" widget="__auto_TabPane__ScrollRight" />
+            <AbsoluteDim value="2" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="TopEdge">
+          <OperatorDim op="Add"><WidgetDim dimension="TopEdge" widget="__auto_TabPane__Buttons" />
+        <AbsoluteDim value="4" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Left.Normal" />
+        </Dim>
+      </Area>
+      <Property name="AlwaysOnTop" value="True" />
+      <Property name="NormalImage" value="GWEN/Scroller.Button.Left.Normal" />
+      <Property name="HoverImage" value="GWEN/Scroller.Button.Left.Hover" />
+      <Property name="PushedImage" value="GWEN/Scroller.Button.Left.Down" />
+    </Child>
+    <Child nameSuffix="__auto_TabPane__ScrollRight" type="GWEN/SystemButton">
+      <Area>
+        <Dim type="LeftEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Width" />
+        <WidgetDim dimension="Width" widget="__auto_TabPane__ScrollRight" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="TopEdge">
+          <OperatorDim op="Add"><WidgetDim dimension="TopEdge" widget="__auto_TabPane__Buttons" />
+        <AbsoluteDim value="4" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="Width">
+          <ImageDim dimension="Width" name="GWEN/Scroller.Button.Right.Normal" />
+        </Dim>
+        <Dim type="Height">
+          <ImageDim dimension="Height" name="GWEN/Scroller.Button.Right.Normal" />
+        </Dim>
+      </Area>
+      <Property name="AlwaysOnTop" value="True" />
+      <Property name="NormalImage" value="GWEN/Scroller.Button.Right.Normal" />
+      <Property name="HoverImage" value="GWEN/Scroller.Button.Right.Hover" />
+      <Property name="PushedImage" value="GWEN/Scroller.Button.Right.Down" />
+    </Child>
+    <StateImagery name="Enabled" />
+    <StateImagery name="Disabled" />
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/MenuItem">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF525252" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <Property name="WantsMultiClickEvents" value="False" />
+    <NamedArea name="ContentSize">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <OperatorDim op="Add"><FontDim padding="28" type="HorzExtent" />
+        <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Menu.Hover.Middle.Left" />
+            <ImageDim dimension="Width" name="GWEN/Menu.Hover.Middle.Right" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="Height">
+          <OperatorDim op="Add"><FontDim type="LineSpacing" />
+        <OperatorDim op="Add"><ImageDim dimension="Height" name="GWEN/Menu.Hover.Top.Middle" />
+            <ImageDim dimension="Height" name="GWEN/Menu.Hover.Bottom.Middle" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <NamedArea name="HasPopupContentSize">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <OperatorDim op="Add"><FontDim padding="28" type="HorzExtent" />
+        <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Menu.Hover.Middle.Left" />
+            <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Menu.Hover.Middle.Right" />
+                <OperatorDim op="Multiply"><ImageDim dimension="Width" name="GWEN/Menu.LeftArrow" />
+                    <AbsoluteDim value="3" />
+                        </OperatorDim>
+                      </OperatorDim>
+                  </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="Height">
+          <OperatorDim op="Add"><FontDim type="LineSpacing" />
+        <OperatorDim op="Add"><ImageDim dimension="Height" name="GWEN/Menu.Hover.Top.Middle" />
+            <ImageDim dimension="Height" name="GWEN/Menu.Hover.Bottom.Middle" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <ImageDim dimension="Width" name="GWEN/Menu.Hover.Middle.Left" />
+          </Dim>
+          <Dim type="TopEdge">
+            <ImageDim dimension="Height" name="GWEN/Menu.Hover.Top.Middle" />
+          </Dim>
+          <Dim type="RightEdge">
+            <UnifiedDim scale="1" type="RightEdge" />
+          </Dim>
+          <Dim type="BottomEdge">
+            <UnifiedDim scale="1" type="BottomEdge" />
+          </Dim>
+        </Area>
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="LeftAligned" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Menu.Hover.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Menu.Hover.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Menu.Hover.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Menu.Hover.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Menu.Hover.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Menu.Hover.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Menu.Hover.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Menu.Hover.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Menu.Hover.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <ImagerySection name="popup_arrow_right">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Width" />
+          <ImageDim dimension="Width" name="GWEN/Menu.RightArrow" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Menu.RightArrow" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="RightAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="popup_arrow_left">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <OperatorDim op="Subtract"><UnifiedDim scale="1" type="Width" />
+          <ImageDim dimension="Width" name="GWEN/Menu.RightArrow" />
+              </OperatorDim>
+            </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Menu.RightArrow" />
+        <VertFormat type="CentreAligned" />
+        <HorzFormat type="RightAligned" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="EnabledNormal">
+      <Layer>
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="EnabledHover">
+      <Layer>
+        <Section section="frame" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="EnabledPushed">
+      <Layer>
+        <Section section="frame" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="EnabledPopupOpen">
+      <Layer>
+        <Section section="frame" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledNormal">
+      <Layer>
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledHover">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledPushed">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="DisabledPopupOpen">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+        <Section section="label">
+          <ColourProperty name="DisabledTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PopupClosedIcon">
+      <Layer>
+        <Section section="popup_arrow_right" />
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PopupOpenIcon">
+      <Layer>
+        <Section section="popup_arrow_left" />
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/PopupMenu">
+    <PropertyDefinition initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" name="BackgroundColours" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="4" layoutOnWrite="true" name="BorderWidth" />
+    <NamedArea name="ItemRenderArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Left" />
+        <PropertyDim name="BorderWidth" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="TopEdge">
+          <OperatorDim op="Add"><ImageDim dimension="Height" name="GWEN/Menu.Background.Top.Middle" />
+        <PropertyDim name="BorderWidth" />
+            </OperatorDim>
+          </Dim>
+        <Dim type="RightEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="RightEdge" />
+        <OperatorDim op="Add"><ImageDim dimension="Width" name="GWEN/Menu.Background.Middle.Right" />
+            <PropertyDim name="BorderWidth" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+        <Dim type="BottomEdge">
+          <OperatorDim op="Subtract"><UnifiedDim scale="1" type="BottomEdge" />
+        <OperatorDim op="Add"><ImageDim dimension="Height" name="GWEN/Menu.Background.Bottom.Middle" />
+            <PropertyDim name="BorderWidth" />
+                </OperatorDim>
+              </OperatorDim>
+          </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="TopLeftCorner" name="GWEN/Menu.Background.Top.Left" />
+        <Image component="TopRightCorner" name="GWEN/Menu.Background.Top.Right" />
+        <Image component="BottomLeftCorner" name="GWEN/Menu.Background.Bottom.Left" />
+        <Image component="BottomRightCorner" name="GWEN/Menu.Background.Bottom.Right" />
+        <Image component="LeftEdge" name="GWEN/Menu.Background.Middle.Left" />
+        <Image component="RightEdge" name="GWEN/Menu.Background.Middle.Right" />
+        <Image component="TopEdge" name="GWEN/Menu.Background.Top.Middle" />
+        <Image component="BottomEdge" name="GWEN/Menu.Background.Bottom.Middle" />
+        <Image component="Background" name="GWEN/Menu.Background.Middle.Middle" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="frame">
+          <ColourRectProperty name="BackgroundColours" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Menubar">
+    <PropertyDefinition initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" name="BackgroundColours" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="5" layoutOnWrite="true" name="BorderWidth" />
+    <NamedArea name="ItemRenderArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <PropertyDim name="BorderWidth" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <ImagerySection name="frame">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Background" name="GWEN/Menu.Strip" />
+      </FrameComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section section="frame">
+          <ColourRectProperty name="BackgroundColours" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+  
+  <WidgetLook name="GWEN/Tree">
+    <Property name="SelectionBrushImage" value="GWEN/Input.ListBox.EvenLineSelected" />
+    <Property name="NormalTextColour" value="FF5E666E" />
+    <Property name="SelectedTextColour" value="FF3394F0" />
+    <Property name="ActiveSelectionColour" value="FFFFFFFF" />
+    <Property name="InactiveSelectionColour" value="FF808080" />
+    <NamedArea name="ItemRenderingArea">
+      <Area>
+        <Dim type="LeftEdge">
+          <ImageDim dimension="Width" name="GWEN/Tree.Middle.Left" />
+        </Dim>
+        <Dim type="TopEdge">
+          <ImageDim dimension="Height" name="GWEN/Tree.Top.Middle" />
+        </Dim>
+        <Dim type="RightEdge">
+          <UnifiedDim scale="1" type="RightEdge" />
+        </Dim>
+        <Dim type="BottomEdge">
+          <UnifiedDim scale="1" type="BottomEdge" />
+        </Dim>
+      </Area>
+    </NamedArea>
+    <Child nameSuffix="__auto_hscrollbar__" type="GWEN/HorizontalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <UnifiedDim offset="-15" scale="1" type="Width" />
+        </Dim>
+        <Dim type="Height">
+          <AbsoluteDim value="15" />
+        </Dim>
+      </Area>
+      <VertAlignment type="BottomAligned" />
+    </Child>
+    <Child nameSuffix="__auto_vscrollbar__" type="GWEN/VerticalScrollbar">
+      <Area>
+        <Dim type="LeftEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="TopEdge">
+          <AbsoluteDim value="0" />
+        </Dim>
+        <Dim type="Width">
+          <AbsoluteDim value="15" />
+        </Dim>
+        <Dim type="Height">
+          <UnifiedDim scale="1" type="Height" />
+        </Dim>
+      </Area>
+      <HorzAlignment type="RightAligned" />
+    </Child>
+    <ImagerySection name="OpenTreeButton">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/Tree.Plus" />
+          </Dim>
+          <Dim type="Height">
+            <ImageDim dimension="Height" name="GWEN/Tree.Plus" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Tree.Plus" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="CloseTreeButton">
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <ImageDim dimension="Width" name="GWEN/Tree.Minus" />
+          </Dim>
+          <Dim type="Height">
+            <ImageDim dimension="Height" name="GWEN/Tree.Minus" />
+          </Dim>
+        </Area>
+        <Image name="GWEN/Tree.Minus" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Enabled">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Disabled">
+      <Layer>
+        <Section look="GWEN/StaticShared" section="frame">
+          <Colours bottomLeft="FF7F7F7F" bottomRight="FF7F7F7F" topLeft="FF7F7F7F" topRight="FF7F7F7F" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+</Falagard>

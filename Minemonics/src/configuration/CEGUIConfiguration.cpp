@@ -14,4 +14,4 @@
 //## view headers
 //## utils headers
 
-const std::string CEGUIConfiguration::CEGUI_SCHEME = "Ogremonics";
+const std::string CEGUIConfiguration::CEGUI_SCHEME = "GWEN";
