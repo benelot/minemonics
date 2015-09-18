@@ -47,7 +47,7 @@ ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 	mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDragContainer(NULL), mEvaluationInView(
 		NULL), mShowShadows(false), mSelectedPlanet(NULL), mMenuBar(NULL), mFpsPanel(
-		NULL), mDetailsPanel(NULL) {
+		NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL) {
 }
 
 ViewController::~ViewController() {
