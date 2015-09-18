@@ -64,7 +64,7 @@ EnvironmentO3D::~EnvironmentO3D() {
 
 void EnvironmentO3D::initialize(const std::string fileName,
 	const Ogre::Light* const l) {
-	mTerrainGlobals = new Ogre::TerrainGlobalOptions();
+	mTerrainGlobals = &SimulationManager::getSingleton()->getTerrainGlobals();
 
 	mTerrainGroup = new Ogre::TerrainGroup(
 		SimulationManager::getSingleton()->getSceneManager(),

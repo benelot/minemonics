@@ -77,11 +77,11 @@ public:
 
 	void testCapabilities(const Ogre::RenderSystemCapabilities* const caps) {
 		if (!caps->hasCapability(Ogre::RSC_VERTEX_PROGRAM)
-				|| !caps->hasCapability(Ogre::RSC_FRAGMENT_PROGRAM)) {
+			|| !caps->hasCapability(Ogre::RSC_FRAGMENT_PROGRAM)) {
 			OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
-					"Your graphics card does not support vertex or fragment shaders, "
-							"so you cannot run this sample. Sorry!",
-					"EnvironmentO3D::testCapabilities");
+				"Your graphics card does not support vertex or fragment shaders, "
+					"so you cannot run this sample. Sorry!",
+				"EnvironmentO3D::testCapabilities");
 		}
 	}
 
@@ -90,13 +90,13 @@ public:
 		return mTerrainGroup;
 	}
 
-	double getTerrainHeight(const double x,const double z) {
+	double getTerrainHeight(const double x, const double z) {
 		Ogre::Ray ray;
 		ray.setOrigin(Ogre::Vector3(x, mTerrainPos.y + 10000, z));
 		ray.setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y);
 
 		Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects(
-				ray);
+			ray);
 		if (rayResult.hit) {
 			return rayResult.position.y;
 		}
@@ -120,48 +120,42 @@ protected:
 	class PlaneTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
 	public:
 		virtual void define(Ogre::TerrainGroup* terrainGroup, long x, long y) {
-			Ogre::Image img;
-			img.load("plane.png",
-					Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-			if (x % 2)
-				img.flipAroundY();
-			if (y % 2)
-				img.flipAroundX();
-			terrainGroup->defineTerrain(x, y, &img);
+			terrainGroup->defineTerrain(x, y, 0.0f);
 		}
 	};
+//
+//	class ImageTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
+//	public:
+//		virtual void define(Ogre::TerrainGroup* const terrainGroup,
+//			const long x, const long y) {
+//			Ogre::Image img;
+//			img.load("terrain.png",
+//				Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+//			if (x % 2)
+//				img.flipAroundY();
+//			if (y % 2)
+//				img.flipAroundX();
+//			terrainGroup->defineTerrain(x, y, &img);
+//		}
+//	};
 
-	class ImageTerrainDefiner: public Ogre::TerrainPagedWorldSection::TerrainDefiner {
-	public:
-		virtual void define(Ogre::TerrainGroup* const terrainGroup,const long x, const long y) {
-			Ogre::Image img;
-			img.load("terrain.png",
-					Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-			if (x % 2)
-				img.flipAroundY();
-			if (y % 2)
-				img.flipAroundX();
-			terrainGroup->defineTerrain(x, y, &img);
-		}
-	};
-
-	/// This class just pretends to provide procedural page content to avoid page loading
+/// This class just pretends to provide procedural page content to avoid page loading
 	class DummyPageProvider: public Ogre::PageProvider {
 	public:
 		bool prepareProceduralPage(Ogre::Page* page,
-				Ogre::PagedWorldSection* section) {
+			Ogre::PagedWorldSection* section) {
 			return true;
 		}
 		bool loadProceduralPage(Ogre::Page* page,
-				Ogre::PagedWorldSection* section) {
+			Ogre::PagedWorldSection* section) {
 			return true;
 		}
 		bool unloadProceduralPage(Ogre::Page* page,
-				Ogre::PagedWorldSection* section) {
+			Ogre::PagedWorldSection* section) {
 			return true;
 		}
 		bool unprepareProceduralPage(Ogre::Page* page,
-				Ogre::PagedWorldSection* section) {
+			Ogre::PagedWorldSection* section) {
 			return true;
 		}
 	};
