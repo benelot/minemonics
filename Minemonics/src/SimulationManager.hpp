@@ -19,6 +19,7 @@ class RagDoll;
 //## view headers
 #include <OgrePrerequisites.h>
 #include <OgreRenderWindow.h>
+#include <OgreTerrain.h>
 
 //# custom headers
 //## base headers
@@ -140,6 +141,10 @@ public:
 		return mSun;
 	}
 
+	Ogre::TerrainGlobalOptions& getTerrainGlobals() {
+		return mTerrainGlobals;
+	}
+
 protected:
 	bool configure(void);
 
@@ -207,6 +212,9 @@ private:
 	int mSimulationSpeed; /**!< The speed of the currently runnig simulations */
 
 	//## view components
+
+	Ogre::TerrainGlobalOptions mTerrainGlobals; /**!< This must be a singleton it seems */
+
 	SDL_Window* mSdlWindow; /**!< The window of the simulator */
 
 	ViewController mViewController; /**!< The view controller of the simulation */
@@ -254,8 +262,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-			boost::log::attributes::constant < std::string
-			> ("SimulationManager"));
+				boost::log::attributes::constant < std::string
+					> ("SimulationManager"));
 		}
 	} _initializer;
 };

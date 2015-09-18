@@ -240,6 +240,12 @@ void SimulationManager::createScene(void) {
 	Planet* earth = new Planet(PhysicsController::FeatherstoneController,
 		Environment::PLANE, 20, mSun);
 
+	Epoch* oneEarthEpoch = new Epoch();
+	oneEarthEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
+	oneEarthEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
+
+	earth->addEpoch(oneEarthEpoch);
+
 	// add earth to universe
 	mUniverse.addPlanet(earth);
 
@@ -251,37 +257,38 @@ void SimulationManager::createScene(void) {
 	// add earth population to earth
 	earth->addPopulation(earthPopulation);
 
-	Epoch* oneEpoch = new Epoch();
-	oneEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
-	oneEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
-
-	earth->addEpoch(oneEpoch);
-
-	// create a population
+//	// create a population
 //	Population* earth2Population = new Population();
 //	earth2Population->initialize(earth, 100,
 //			EvolutionConfiguration::ROOT_POSITION);
 
-	// add earth population to earth
+//	// add earth population to earth
 //	earth->addPopulation(earth2Population);
 
 //	TODO::Make it work with multiple planets
-//	// create a planet called mars
-//	Planet* mars = new Planet(Environment::PLANE, &mDebugDrawer, 10);
+	// create a planet called mars
+//	Planet* mars = new Planet(PhysicsController::FeatherstoneController,
+//		Environment::PLANE, 20, mSun);
+//
+//	Epoch* oneMarsEpoch = new Epoch();
+//	oneMarsEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
+//	oneMarsEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
+//
+//	mars->addEpoch(oneMarsEpoch);
 //
 //	// add mars to universe
 //	mUniverse.addPlanet(mars);
 //
 //	// create a population
 //	Population* marsPopulation = new Population();
-//	marsPopulation->initialize(earth, 10,
-//			EvolutionConfiguration::ROOT_POSITION);
+//	marsPopulation->initialize(mars, 10, EvolutionConfiguration::ROOT_POSITION);
 //
-//	// add earth population to earth
+//	// add earth population to mars
 //	mars->addPopulation(marsPopulation);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 		<< "Setup evaluation environment...done.";
+
 	// request a state change saying that the simulation is running
 	mStateHandler.requestStateChange(StateHandler::SIMULATION);
 }
