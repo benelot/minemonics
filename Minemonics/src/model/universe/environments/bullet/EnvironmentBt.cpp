@@ -48,12 +48,13 @@ void EnvironmentBt::createTerrainData(Ogre::SceneNode* const sceneNode,
 
 	btVector3 localScaling(scale, heightScale, scale);
 
-	mGroundShape = new btHeightfieldTerrainShape(w, h, data, 1/*ignore*/, minH,
-		maxH, 1, PHY_FLOAT, true);
+	mGroundShape = new btHeightfieldTerrainShape(btScalar(w), btScalar(h), data,
+		1/*ignore*/, btScalar(minH), btScalar(maxH), 1, PHY_FLOAT, true);
 	((btHeightfieldTerrainShape*) mGroundShape)->setUseDiamondSubdivision(true);
 	mGroundShape->setLocalScaling(localScaling);
 
-	mGroundBody = new btRigidBody(0, new btDefaultMotionState(), mGroundShape);
+	mGroundBody = new btRigidBody(btScalar(0), new btDefaultMotionState(),
+		mGroundShape);
 	mGroundBody->getWorldTransform().setOrigin(
 		btVector3(scale * (w - 1) / 2, heightScale / 2 * heightScale,
 			scale * (w - 1) / 2));

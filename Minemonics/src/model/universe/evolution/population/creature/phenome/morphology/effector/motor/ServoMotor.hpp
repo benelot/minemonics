@@ -3,6 +3,7 @@
 
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 class btMultiBody;

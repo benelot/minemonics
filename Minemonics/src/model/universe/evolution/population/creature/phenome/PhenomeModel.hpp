@@ -2,6 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_
 
 //# corresponding headers
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class btMultiBody;
 class btMultiBodyDynamicsWorld;

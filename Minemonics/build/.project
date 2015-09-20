@@ -1619,6 +1619,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/LoggerConfiguration.hpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/Definitions.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/Definitions.hpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Logger.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/logging/Logger.hpp</location>
@@ -2477,6 +2482,11 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/LoggerConfiguration.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/LoggerConfiguration.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/Definitions.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/Definitions.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Logger.hpp</name>

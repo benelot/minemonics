@@ -2,6 +2,8 @@
 #define CONTROLLER_RAGDOLL_RAGDOLL_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class Limb;
 class Joint;
@@ -70,7 +72,7 @@ class RagDoll: public Creature {
 
 public:
 	RagDoll(Population* const population, double size,
-			const btVector3& positionOffset);
+		const btVector3& positionOffset);
 
 	virtual ~RagDoll();
 

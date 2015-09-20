@@ -3,9 +3,9 @@
 
 //# corresponding header
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
-
 //# system headers
 //## controller headers
 //## model headers
@@ -61,8 +61,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"PlaneBt"));
+				boost::log::attributes::constant < std::string > ("PlaneBt"));
 		}
 	} _initializer;
 };

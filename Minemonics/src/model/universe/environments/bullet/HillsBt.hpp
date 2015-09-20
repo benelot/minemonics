@@ -3,6 +3,7 @@
 
 //# corresponding header
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 namespace Ogre {
@@ -31,7 +32,7 @@ class Terrain;
  * @date		2015-03-17
  * @author		Benjamin Ellenberger
  */
-class HillsBt : public EnvironmentBt {
+class HillsBt: public EnvironmentBt {
 public:
 	HillsBt();
 	virtual ~HillsBt();
@@ -55,8 +56,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"HillsBt"));
+				boost::log::attributes::constant < std::string > ("HillsBt"));
 		}
 	} _initializer;
 };

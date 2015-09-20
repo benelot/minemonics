@@ -13,8 +13,6 @@ class EnvironmentO3D;
 //# system headers
 //## controller headers
 //## model headers
-#include <btBulletDynamicsCommon.h>
-
 //## view headers
 //# custom headers
 //## base headers

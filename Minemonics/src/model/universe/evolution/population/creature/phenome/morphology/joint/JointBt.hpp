@@ -2,9 +2,14 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
-class Motor;
+class btDynamicsWorld;
 class btMultiBody;
+class btRigidBody;
+class btTransform;
+class btVector3;
 
 //# system headers
 //## controller headers
@@ -13,7 +18,6 @@ class btMultiBody;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
-#include <btBulletDynamicsCommon.h>
 
 //## view headers
 //# custom headers

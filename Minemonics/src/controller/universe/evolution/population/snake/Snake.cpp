@@ -65,8 +65,9 @@
 #endif
 
 Snake::Snake(Population* const population, double size,
-const btVector3& positionOffset) :integrativeError(0,0,0),
-Creature(population, OgreBulletUtils::convert(positionOffset), 0) {
+	const btVector3& positionOffset) :
+	integrativeError(0, 0, 0), Creature(population,
+		OgreBulletUtils::convert(positionOffset), 0) {
 	rotate = -1.0f;
 	sign = 1;
 
@@ -83,13 +84,13 @@ Creature(population, OgreBulletUtils::convert(positionOffset), 0) {
 	btVector3 baseHalfExtents(size * 0.05, size * 0.37, size * 0.1);
 
 	btMultiBody* mb = createFeatherstoneMultiBody(numLinks, positionOffset,
-	linkHalfExtents, baseHalfExtents, spherical, attachHead);
+		linkHalfExtents, baseHalfExtents, spherical, attachHead);
 
 	mPhenotype.getPhenotypeModel()->setMultiBody(mb);
 
 	mPhenotype.getPhenotypeModel()->getMultiBody()->setCanSleep(canSleep);
 	mPhenotype.getPhenotypeModel()->getMultiBody()->setHasSelfCollision(
-	selfCollide);
+		selfCollide);
 	mPhenotype.getPhenotypeModel()->getMultiBody()->setUseGyroTerm(gyro);
 	//
 	if (!damping) {
@@ -105,20 +106,20 @@ Creature(population, OgreBulletUtils::convert(positionOffset), 0) {
 		if (!spherical)
 			if (mPhenotype.getPhenotypeModel()->getMultiBody()->isMultiDof())
 				mPhenotype.getPhenotypeModel()->getMultiBody()->setJointPosMultiDof(
-				0, &q0);
+					0, &q0);
 			else
 				mPhenotype.getPhenotypeModel()->getMultiBody()->setJointPos(0,
-				q0);
+					q0);
 		else {
 			btQuaternion quat0(btVector3(1, 1, 0).normalized(), q0);
 			quat0.normalize();
 			mPhenotype.getPhenotypeModel()->getMultiBody()->setJointPosMultiDof(
-			0, quat0);
+				0, quat0);
 		}
 	}
 
 	addColliders(mPhenotype.getPhenotypeModel()->getMultiBody(),
-	baseHalfExtents, linkHalfExtents);
+		baseHalfExtents, linkHalfExtents);
 
 	mPhenotype.setDeveloped(true);
 }
@@ -183,14 +184,14 @@ void Snake::update(double timeSinceLastTick) {
 	qdActual.m_floats[dof2] = mMultibody->getJointVelMultiDof(joint)[dof2];
 	qdActual.m_floats[dof3] = mMultibody->getJointVelMultiDof(joint)[dof3];
 
-
 	btVector3 positionError = (position - qActual);
 
 	integrativeError += positionError * timeSinceLastTick * 10.0f;
 
 	btVector3 desiredVelocity(0, 0, 0);
 	btVector3 velocityError = (desiredVelocity - qdActual);
-	btVector3 force = kp * positionError + ki * integrativeError + kd * velocityError;
+	btVector3 force = kp * positionError + ki * integrativeError
+		+ kd * velocityError;
 	btClamp(force.m_floats[0], -maxForce, maxForce);
 	btClamp(force.m_floats[1], -maxForce, maxForce);
 	btClamp(force.m_floats[2], -maxForce, maxForce);
@@ -198,18 +199,19 @@ void Snake::update(double timeSinceLastTick) {
 	if (0) {
 //			mMultibody->addJointTorque(joint, force);
 	} else {
-			mMultibody->addJointTorqueMultiDof(joint, dof1,
-			force.m_floats[dof1]);
-		mMultibody->addJointTorqueMultiDof(joint, dof2, force.m_floats[dof2]);
-			mMultibody->addJointTorqueMultiDof(joint, dof3,
-			force.m_floats[dof3]);
+		mMultibody->addJointTorqueMultiDof(joint, dof1,
+			btScalar(force.m_floats[dof1]));
+		mMultibody->addJointTorqueMultiDof(joint, dof2,
+			btScalar(force.m_floats[dof2]));
+		mMultibody->addJointTorqueMultiDof(joint, dof3,
+			btScalar(force.m_floats[dof3]));
 	}
 	//mMultibody->addJointTorqueMultiDof(joint, 0,  k*(-SIMD_PI-mMultibody->getJointPosMultiDof(joint)[0]));
 	int showDof = dof3;
 	std::cout << "Desired position: \t" << position.m_floats[showDof]
-	<< "position error: \t" << positionError.m_floats[showDof]
-	<< "\tvelocity error: \t" << velocityError.m_floats[showDof]
-	<< "\tApplied force: " << force.m_floats[showDof] << std::endl;
+		<< "position error: \t" << positionError.m_floats[showDof]
+		<< "\tvelocity error: \t" << velocityError.m_floats[showDof]
+		<< "\tApplied force: " << force.m_floats[showDof] << std::endl;
 	//mMultibody->addJointTorqueMultiDof(joint, 2,  k*(-SIMD_PI-mMultibody->getJointPosMultiDof(joint)[2]));
 //		m_multiBody->addJointTorque(joint, force);
 //	}
@@ -270,23 +272,24 @@ void Snake::removeFromWorld() {
 }
 
 btMultiBody* Snake::createFeatherstoneMultiBody(int numLinks,
-const btVector3 &basePosition, const btVector3 &baseHalfExtents,
-const btVector3 &linkHalfExtents, bool spherical, bool floating) {
+	const btVector3 &basePosition, const btVector3 &baseHalfExtents,
+	const btVector3 &linkHalfExtents, bool spherical, bool floating) {
 	//init the base
 	btVector3 baseInertiaDiag(0.f, 0.f, 0.f);
 	float baseMass = 1.f;
 
 	if (baseMass) {
 		btCollisionShape *pTempBox = new btBoxShape(
-		btVector3(baseHalfExtents[0], baseHalfExtents[1], baseHalfExtents[2]));
+			btVector3(baseHalfExtents[0], baseHalfExtents[1],
+				baseHalfExtents[2]));
 		pTempBox->calculateLocalInertia(baseMass, baseInertiaDiag);
 		delete pTempBox;
 	}
 
 	bool canSleep = false;
 	bool isMultiDof = true;
-	btMultiBody *pMultiBody = new btMultiBody(numLinks, baseMass,
-	baseInertiaDiag, floating, canSleep, isMultiDof);
+	btMultiBody *pMultiBody = new btMultiBody(numLinks, btScalar(baseMass),
+		baseInertiaDiag, floating, canSleep, isMultiDof);
 
 	btQuaternion baseOriQuat(0.f, 0.f, 0.f, 1.f);
 	pMultiBody->setBasePos(basePosition);
@@ -300,7 +303,7 @@ const btVector3 &linkHalfExtents, bool spherical, bool floating) {
 	btVector3 linkInertiaDiag(0.f, 0.f, 0.f);
 
 	btCollisionShape *pTempBox = new btBoxShape(
-	btVector3(linkHalfExtents[0], linkHalfExtents[1], linkHalfExtents[2]));
+		btVector3(linkHalfExtents[0], linkHalfExtents[1], linkHalfExtents[2]));
 	pTempBox->calculateLocalInertia(linkMass, linkInertiaDiag);
 	delete pTempBox;
 
@@ -308,7 +311,7 @@ const btVector3 &linkHalfExtents, bool spherical, bool floating) {
 	btVector3 parentComToCurrentCom(0, -linkHalfExtents[1] * 2.f, 0); //par body's COM to cur body's COM offset
 	btVector3 currentPivotToCurrentCom(0, -linkHalfExtents[1], 0); //cur body's COM to cur body's PIV offset
 	btVector3 parentComToCurrentPivot = parentComToCurrentCom
-	- currentPivotToCurrentCom;	//par body's COM to cur body's PIV offset
+		- currentPivotToCurrentCom;	//par body's COM to cur body's PIV offset
 
 	//////
 	btScalar q0 = 0.f * SIMD_PI / 180.f;
@@ -319,9 +322,9 @@ const btVector3 &linkHalfExtents, bool spherical, bool floating) {
 	for (int i = 0; i < numLinks; ++i) {
 		if (!spherical)
 //			if (i == 0) {
-			pMultiBody->setupRevolute(i, linkMass, linkInertiaDiag, i - 1,
-			btQuaternion(0.f, 0.f, 0.f, 1.f), hingeJointAxis,
-			parentComToCurrentPivot, currentPivotToCurrentCom, false);
+			pMultiBody->setupRevolute(i, btScalar(linkMass), linkInertiaDiag,
+				i - 1, btQuaternion(0.f, 0.f, 0.f, 1.f), hingeJointAxis,
+				parentComToCurrentPivot, currentPivotToCurrentCom, false);
 //			} else {
 //				pMultiBody->setupFixed(i, linkMass, linkInertiaDiag, i - 1,
 //				btQuaternion(0.f, 0.f, 0.f, 1.f), parentComToCurrentPivot,
@@ -331,13 +334,13 @@ const btVector3 &linkHalfExtents, bool spherical, bool floating) {
 		else {
 			if (i == 0) {
 				//pMultiBody->setupPlanar(i, linkMass, linkInertiaDiag, i - 1, btQuaternion(0.f, 0.f, 0.f, 1.f)/*quat0*/, btVector3(1, 0, 0), parentComToCurrentPivot*2, false);
-				pMultiBody->setupSpherical(i, linkMass, linkInertiaDiag, i - 1,
-				btQuaternion(0.f, 0.f, 0.f, 1.f), parentComToCurrentPivot,
-				currentPivotToCurrentCom, true);
+				pMultiBody->setupSpherical(i, btScalar(linkMass),
+					linkInertiaDiag, i - 1, btQuaternion(0.f, 0.f, 0.f, 1.f),
+					parentComToCurrentPivot, currentPivotToCurrentCom, true);
 			} else {
-				pMultiBody->setupFixed(i, linkMass, linkInertiaDiag, i - 1,
-				btQuaternion(0.f, 0.f, 0.f, 1.f), parentComToCurrentPivot,
-				currentPivotToCurrentCom, true);
+				pMultiBody->setupFixed(i, btScalar(linkMass), linkInertiaDiag,
+					i - 1, btQuaternion(0.f, 0.f, 0.f, 1.f),
+					parentComToCurrentPivot, currentPivotToCurrentCom, true);
 			}
 		}
 	}
@@ -348,15 +351,15 @@ const btVector3 &linkHalfExtents, bool spherical, bool floating) {
 }
 
 void Snake::addColliders(btMultiBody *multiBody,
-const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents) {
+	const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents) {
 
 	LimbPhysics::PrimitiveType type = LimbPhysics::BLOCK;
 
 	// Setup the geometry
-	btAlignedObjectArray<btQuaternion> world_to_local;
+	btAlignedObjectArray < btQuaternion > world_to_local;
 	world_to_local.resize(multiBody->getNumLinks() + 1);
 
-	btAlignedObjectArray<btVector3> local_origin;
+	btAlignedObjectArray < btVector3 > local_origin;
 	local_origin.resize(multiBody->getNumLinks() + 1);
 	world_to_local[0] = multiBody->getWorldToBaseRot();
 	local_origin[0] = multiBody->getBasePos();
@@ -366,33 +369,33 @@ const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents) {
 	tr.setIdentity();
 	tr.setOrigin(local_origin[0]);
 	tr.setRotation(
-	btQuaternion(-world_to_local[0].x(), -world_to_local[0].y(),
-	-world_to_local[0].z(), world_to_local[0].w()));
+		btQuaternion(-world_to_local[0].x(), -world_to_local[0].y(),
+			-world_to_local[0].z(), world_to_local[0].w()));
 
 	Limb* limb = new Limb();
 	limb->initialize(this, type, OgreBulletUtils::convert(tr.getOrigin()),
-	OgreBulletUtils::convert(tr.getRotation()),
-	OgreBulletUtils::convert(tr.getOrigin()),
-	OgreBulletUtils::convert(tr.getRotation()),
-	OgreBulletUtils::convert(baseHalfExtents * 2.0f), 0);
+		OgreBulletUtils::convert(tr.getRotation()),
+		OgreBulletUtils::convert(tr.getOrigin()),
+		OgreBulletUtils::convert(tr.getRotation()),
+		OgreBulletUtils::convert(baseHalfExtents * 2.0f), 0);
 
 	limb->generateLink(mPhenotype.getPhenotypeModel()->getMultiBody(),
-	tr.getOrigin(), tr.getRotation(), -1);
+		tr.getOrigin(), tr.getRotation(), -1);
 
 	multiBody->setBaseCollider(limb->getLink());
 
 	mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
-	limb->getLimbModel());
+		limb->getLimbModel());
 	mPhenotype.getLimbs().push_back(limb);
 
 	//calculate positions of other elements
 	for (int i = 0; i < multiBody->getNumLinks(); ++i) {
 		const int parent = multiBody->getParent(i);
 		world_to_local[i + 1] = multiBody->getParentToLocalRot(i)
-		* world_to_local[parent + 1];
-		local_origin[i + 1] =
-		local_origin[parent + 1]
-		+ (quatRotate(world_to_local[i + 1].inverse(), multiBody->getRVector(i)));
+			* world_to_local[parent + 1];
+		local_origin[i + 1] = local_origin[parent + 1]
+			+ (quatRotate(world_to_local[i + 1].inverse(),
+				multiBody->getRVector(i)));
 	}
 
 	// create other limbs
@@ -402,22 +405,22 @@ const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents) {
 		tr.setIdentity();
 		tr.setOrigin(local_origin[i + 1]);
 		tr.setRotation(
-		btQuaternion(-world_to_local[i + 1].x(), -world_to_local[i + 1].y(),
-		-world_to_local[i + 1].z(), world_to_local[i + 1].w()));
+			btQuaternion(-world_to_local[i + 1].x(), -world_to_local[i + 1].y(),
+				-world_to_local[i + 1].z(), world_to_local[i + 1].w()));
 		limb = new Limb();
 		limb->initialize(this, type, OgreBulletUtils::convert(tr.getOrigin()),
-		OgreBulletUtils::convert(tr.getRotation()),
-		OgreBulletUtils::convert(tr.getOrigin()),
-		OgreBulletUtils::convert(tr.getRotation()),
-		OgreBulletUtils::convert(linkHalfExtents * 2.0f), i);
+			OgreBulletUtils::convert(tr.getRotation()),
+			OgreBulletUtils::convert(tr.getOrigin()),
+			OgreBulletUtils::convert(tr.getRotation()),
+			OgreBulletUtils::convert(linkHalfExtents * 2.0f), i);
 
 		limb->generateLink(mPhenotype.getPhenotypeModel()->getMultiBody(),
-		tr.getOrigin(), tr.getRotation(), i);
+			tr.getOrigin(), tr.getRotation(), i);
 
 		mPhenotype.getPhenotypeModel()->getMultiBody()->getLink(i).m_collider =
-		limb->getLink();
+			limb->getLink();
 		mCreatureModel->getPhenotypeModel().getLimbModels().push_back(
-		limb->getLimbModel());
+			limb->getLimbModel());
 		mPhenotype.getLimbs().push_back(limb);
 	}
 }

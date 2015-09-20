@@ -423,6 +423,7 @@ set(MISCHDRS
 	./configuration/CEGUIConfiguration.hpp
 	./configuration/GUIConfiguration.hpp
 	./configuration/LoggerConfiguration.hpp
+	./configuration/Definitions.hpp
 	
 	# logger
 	./utils/logging/Logger.hpp

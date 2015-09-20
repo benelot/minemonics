@@ -30,7 +30,7 @@ void PlaneBt::initialize() {
 	 (d, which is the distance of the plane's origin.
 	 Planes can only be used for static objects.
 	 */
-	mGroundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 50);
+	mGroundShape = new btStaticPlaneShape(btVector3(0, 1, 0), btScalar(50.0f));
 
 	btScalar mass = 0; //rigidbody is static if mass is zero, otherwise dynamic
 	btVector3 localInertia(0, 0, 0);
@@ -43,14 +43,13 @@ void PlaneBt::initialize() {
 
 	//motionstate provides interpolation capabilities, and only synchronizes 'active' objects
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,
-			new btDefaultMotionState(groundTransform), mGroundShape,
-			localInertia);
+		new btDefaultMotionState(groundTransform), mGroundShape, localInertia);
 	mGroundBody = new btRigidBody(rbInfo);
 
 	// disable debug visualization
 	mGroundBody->setCollisionFlags(
-			mGroundBody->getCollisionFlags()
-					| btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
+		mGroundBody->getCollisionFlags()
+			| btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
 }
 
 void PlaneBt::update(double timeSinceLastTick) {

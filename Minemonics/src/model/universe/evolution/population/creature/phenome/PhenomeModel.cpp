@@ -205,42 +205,42 @@ void PhenomeModel::generateBody() {
 		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
 
 		mMultiBody = new btMultiBody(mJointModels.size(),
-			mLimbModels[0]->getMass(), mLimbModels[0]->getInertia(),
+			btScalar(mLimbModels[0]->getMass()), mLimbModels[0]->getInertia(),
 			isFixedBase, canSleep, isMultiDof);
 
 		mMultiBody->setBasePos(
 			OgreBulletUtils::convert(mLimbModels[0]->getPosition()));
 		mMultiBody->setWorldToBaseRot(
 			OgreBulletUtils::convert(mLimbModels[0]->getOrientation()));
-
+		btScalar linkLength = MorphologyConfiguration::LINK_LENGTH;
 		for (int i = 0; i < mJointModels.size(); i++) {
 			switch (mJointModels[i]->getType()) {
 			case JointPhysics::HINGE_JOINT:
 				mMultiBody->setupRevolute(
 					((long) mJointModels[i]->getChildIndex()) - 1,
-					mLimbModels[i + 1]->getMass(),
+					btScalar(mLimbModels[i + 1]->getMass()),
 					mLimbModels[i + 1]->getInertia(),
 					((long) mJointModels[i]->getParentIndex()) - 1,
 					mJointModels[i]->getParentComToPivot().getRotation().normalized()
 						* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
 					mJointModels[i]->getJointPitchAxis().normalized(),
 					mJointModels[i]->getParentComToPivot().getOrigin()
-						* MorphologyConfiguration::LINK_LENGTH,
+						* linkLength,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-						* MorphologyConfiguration::LINK_LENGTH, true);
+						* linkLength, true);
 				break;
 			case JointPhysics::SPHERICAL_JOINT:
 				mMultiBody->setupSpherical(
 					((long) mJointModels[i]->getChildIndex()) - 1,
-					mLimbModels[i + 1]->getMass(),
+					btScalar(mLimbModels[i + 1]->getMass()),
 					mLimbModels[i + 1]->getInertia(),
 					((long) mJointModels[i]->getParentIndex()) - 1,
 					mJointModels[i]->getParentComToPivot().getRotation().normalized()
 						* mJointModels[i]->getPivotToChildCom().getRotation().normalized(),
 					mJointModels[i]->getParentComToPivot().getOrigin()
-						* MorphologyConfiguration::LINK_LENGTH,
+						* linkLength,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-						* MorphologyConfiguration::LINK_LENGTH, true);
+						* linkLength, true);
 				break;
 			default:
 				break;

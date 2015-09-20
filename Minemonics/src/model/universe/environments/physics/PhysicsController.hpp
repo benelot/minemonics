@@ -2,6 +2,8 @@
 #define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_PHYSICSCONTROLLER_H_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class btDefaultCollisionConfiguration;
 class btMultiBodyConstraintSolver;
