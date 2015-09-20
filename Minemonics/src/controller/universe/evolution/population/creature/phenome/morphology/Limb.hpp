@@ -3,6 +3,7 @@
 
 //# corresponding headers
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 class SimulationManager;
@@ -15,7 +16,6 @@ class Creature;
 //## model headers
 #include <OgreVector3.h>
 #include <OgreQuaternion.h>
-#include <btBulletDynamicsCommon.h>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 

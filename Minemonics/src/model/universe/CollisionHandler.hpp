@@ -2,6 +2,8 @@
 #define MODEL_UNIVERSE_COLLISIONHANDLER_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 //# system headers
 #include <stddef.h>
@@ -10,6 +12,7 @@
 //## model headers
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletCollision/NarrowPhaseCollision/btManifoldPoint.h>
+
 //## view headers
 //# custom headers
 //## base headers

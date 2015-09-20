@@ -1,20 +1,25 @@
-//# corresponding header
+//# corresponding headers
+#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
+
 //# forward declarations
 //# system headers
-#include <configuration/MorphologyConfiguration.hpp>
+#include <cmath>
+#include <iostream>
+#include <iterator>
 #include <map>
 #include <vector>
+#include <stddef.h>
 
 //## controller headers
 //## model headers
-#include <OgreColourValue.h>
-#include <OgreQuaternion.h>
-#include <OgreVector3.h>
 #include <LinearMath/btMatrix3x3.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
+#include <OgreColourValue.h>
+#include <OgreQuaternion.h>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -22,25 +27,30 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
+//## controller headers
+//## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
+#include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
-
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
@@ -224,7 +234,7 @@ void Embryogenesis::transcribeMorphogene(
 				childMorphogene->getOrientationZ(),
 				childMorphogene->getOrientationW()), btVector3(),
 			btQuaternion(),
-			/*size*/
+			/*dimensions*/
 			Ogre::Vector3(
 				generator->getCurrentShrinkageFactor()
 					* childMorphogene->getX(),
@@ -239,7 +249,8 @@ void Embryogenesis::transcribeMorphogene(
 					* childMorphogene->getY()
 					* generator->getCurrentShrinkageFactor()
 					* childMorphogene->getZ()),
-			childMorphogene->getRestitution(), childMorphogene->getFriction(),
+			btScalar(childMorphogene->getRestitution()),
+			btScalar(childMorphogene->getFriction()),
 			Ogre::ColourValue(0, 0, 0), false);
 
 		// get anchor direction of limb child in the local reference frame of child

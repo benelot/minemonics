@@ -1,7 +1,9 @@
-#ifndef VIEW_PICKING_BULLETRAY_HPP_
-#define VIEW_PICKING_BULLETRAY_HPP_
+#ifndef MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_BULLETRAY_HPP_
+#define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_BULLETRAY_HPP_
 
 //# corresponding headers
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class btDynamicsWorld;
 class btMultiBodyPoint2Point;
@@ -34,9 +36,9 @@ class BulletPicker {
 public:
 	BulletPicker();
 	btVector3 pickBody(btDynamicsWorld* world, const btVector3& rayFromWorld,
-			const btVector3& rayToWorld);
+		const btVector3& rayToWorld);
 	bool movePickedBody(const btVector3& rayFromWorld,
-			const btVector3& rayToWorld);
+		const btVector3& rayToWorld);
 
 	bool isPicking() const {
 		return mPicking;
@@ -59,4 +61,4 @@ private:
 	btDynamicsWorld* mWorld;
 };
 
-#endif /* VIEW_PICKING_BULLETRAY_HPP_ */
+#endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_BULLETRAY_HPP_ */

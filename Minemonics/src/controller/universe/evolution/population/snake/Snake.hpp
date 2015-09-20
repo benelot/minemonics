@@ -2,6 +2,8 @@
 #define CONTROLLER_SNAKE_SNAKE_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class Limb;
 class Joint;
@@ -34,7 +36,7 @@ class Snake: public Creature {
 
 public:
 	Snake(Population* const population, double size,
-			const btVector3& positionOffset);
+		const btVector3& positionOffset);
 
 	virtual ~Snake();
 
@@ -46,9 +48,12 @@ public:
 
 	virtual void removeFromWorld();
 
-	btMultiBody* createFeatherstoneMultiBody(int numLinks, const btVector3 &basePosition, const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents, bool spherical, bool floating);
+	btMultiBody* createFeatherstoneMultiBody(int numLinks,
+		const btVector3 &basePosition, const btVector3 &baseHalfExtents,
+		const btVector3 &linkHalfExtents, bool spherical, bool floating);
 
-	void addColliders(btMultiBody *pMultiBody, const btVector3 &baseHalfExtents, const btVector3 &linkHalfExtents);
+	void addColliders(btMultiBody *pMultiBody, const btVector3 &baseHalfExtents,
+		const btVector3 &linkHalfExtents);
 
 private:
 	double rotate;

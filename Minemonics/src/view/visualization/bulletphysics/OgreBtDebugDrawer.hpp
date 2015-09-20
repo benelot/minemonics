@@ -2,6 +2,8 @@
 #define VIEW_VISUALIZATION_BULLETPHYSICS_OGREDEBUGDRAWER_H_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class btDynamicsWorld;
 namespace Ogre {
@@ -51,7 +53,8 @@ public:
 	 * @param sceneManager A handle to the scene manager.
 	 * @param drawTrajectory A possibility to draw a trajectory by not deleting lines.
 	 */
-	void initialize(Ogre::SceneManager* const sceneManager, const bool drawTrajectory);
+	void initialize(Ogre::SceneManager* const sceneManager,
+		const bool drawTrajectory);
 
 	/**
 	 * Draw a line.
@@ -60,7 +63,7 @@ public:
 	 * @param color The color of the line.
 	 */
 	virtual void drawLine(const btVector3 &from, const btVector3 &to,
-			const btVector3 &color);
+		const btVector3 &color);
 
 	/**
 	 * Draw a line.
@@ -69,7 +72,7 @@ public:
 	 * @param color The color of the line.
 	 */
 	void drawLine(const Ogre::Vector3& from, const Ogre::Vector3& to,
-			const Ogre::ColourValue color);
+		const Ogre::ColourValue color);
 
 	/**
 	 * Draw a triangle.
@@ -80,7 +83,7 @@ public:
 	 * @param alpha The alpha value of the triangle.
 	 */
 	virtual void drawTriangle(const btVector3 &v0, const btVector3 &v1,
-			const btVector3 &v2, const btVector3 &color, const btScalar alpha);
+		const btVector3 &v2, const btVector3 &color, const btScalar alpha);
 
 	/**
 	 * Draw a triangle.
@@ -91,11 +94,14 @@ public:
 	 * @param alpha The alpha value of the triangle.
 	 */
 	void drawTriangle(const Ogre::Vector3& v0, const Ogre::Vector3& v1,
-			const Ogre::Vector3& v2, Ogre::ColourValue color, const Ogre::Real alpha);
+		const Ogre::Vector3& v2, Ogre::ColourValue color,
+		const Ogre::Real alpha);
 
-	void drawSphere(const Ogre::Vector3& p,const double size, const Ogre::ColourValue& colour);
+	void drawSphere(const Ogre::Vector3& p, const double size,
+		const Ogre::ColourValue& colour);
 
-	void drawSphere(const btVector3, const btScalar size, const btVector3 colour);
+	void drawSphere(const btVector3, const btScalar size,
+		const btVector3 colour);
 	/**
 	 * Draw contact point.
 	 * @param PointOnB Point on surface.
@@ -105,8 +111,8 @@ public:
 	 * @param color The color of the contact point.
 	 */
 	virtual void drawContactPoint(const btVector3 &PointOnB,
-			const btVector3 &normalOnB, btScalar distance, int lifeTime,
-			const btVector3 &color);
+		const btVector3 &normalOnB, btScalar distance, int lifeTime,
+		const btVector3 &color);
 
 	/**
 	 * Draw contact point.
@@ -117,8 +123,8 @@ public:
 	 * @param color The color of the contact point.
 	 */
 	void drawContactPoint(const Ogre::Vector3& PointOnB,
-			const Ogre::Vector3& normalOnB, Ogre::Real distance, const int lifeTime,
-			const Ogre::ColourValue& color);
+		const Ogre::Vector3& normalOnB, Ogre::Real distance, const int lifeTime,
+		const Ogre::ColourValue& color);
 
 	/**
 	 * Report a warning.

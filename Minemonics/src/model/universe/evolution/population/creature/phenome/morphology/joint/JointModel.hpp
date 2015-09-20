@@ -3,6 +3,7 @@
 
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 class btDynamicsWorld;

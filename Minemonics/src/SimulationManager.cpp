@@ -1,6 +1,3 @@
-#define OGRE_DEBUG_MODE 0
-#define DEBUG 0
-
 //# corresponding header
 #include <SimulationManager.hpp>
 

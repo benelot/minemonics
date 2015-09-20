@@ -3,6 +3,7 @@
 
 //# forward declarations
 #include <model/universe/environments/physics/PhysicsController.hpp>
+#include <configuration/Definitions.hpp>
 
 //# system headers
 //## controller headers

@@ -3,6 +3,7 @@
 
 //# corresponding header
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 class SimulationManager;

@@ -5,6 +5,9 @@
 //## controller headers
 //## model headers
 #include <boost/math/constants/constants.hpp>
+#include <LinearMath/btTransform.h>
+#include <LinearMath/btVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers

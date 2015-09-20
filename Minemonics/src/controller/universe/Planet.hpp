@@ -2,6 +2,8 @@
 #define CONTROLLER_UNIVERSE_PLANET_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers

@@ -82,8 +82,9 @@ void ServoMotor::apply(double timeSinceLastTick) {
 	//simple p(roportional) controller
 	//calculate the target force and clamp it with the maximum force
 	mMultiBody->addJointTorque(mJointIndex,
-		(kP * angleError > mMaxForce) ? mMaxForce :
-		(kP * angleError < -mMaxForce) ? -mMaxForce : kP * angleError);
+		btScalar(
+			(kP * angleError > mMaxForce) ? mMaxForce :
+			(kP * angleError < -mMaxForce) ? -mMaxForce : kP * angleError));
 }
 
 ServoMotor* ServoMotor::clone() {

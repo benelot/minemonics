@@ -3,6 +3,7 @@
 
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 struct btDefaultMotionState;
