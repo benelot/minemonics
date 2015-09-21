@@ -1,5 +1,5 @@
-#ifndef MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_
-#define MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_
+#ifndef MODEL_UNIVERSE_EVOLUTION_JURIES_INTEGRALAVERAGEVELOCITY_H_
+#define MODEL_UNIVERSE_EVOLUTION_JURIES_INTEGRALAVERAGEVELOCITY_H_
 
 //# corresponding headers
 #include <model/universe/evolution/juries/Jury.hpp>
@@ -31,11 +31,11 @@ class CreatureModel;
  * @date		2015-02-26
  * @author		Benjamin Ellenberger
  */
-class AverageVelocity: public Jury {
+class IntegralAverageVelocity: public Jury {
 public:
-	AverageVelocity();
-	AverageVelocity(const bool higherIsBetter, const double weight);
-	virtual ~AverageVelocity();
+	IntegralAverageVelocity();
+	IntegralAverageVelocity(const bool higherIsBetter, const double weight);
+	virtual ~IntegralAverageVelocity();
 
 	virtual void calculateFitness(CreatureModel* creature,
 		double timeSinceLastTick);
@@ -59,7 +59,7 @@ public:
 	 */
 	void evaluateFitness();
 
-	virtual AverageVelocity* clone();
+	virtual IntegralAverageVelocity* clone();
 
 	//Accessor methods
 
@@ -73,7 +73,7 @@ public:
 	 * @return A string containing all information about the average velocity jury.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-		const AverageVelocity &avgVelocityJury) {
+		const IntegralAverageVelocity &avgVelocityJury) {
 		return os;
 	}
 
@@ -103,4 +103,4 @@ private:
 	std::vector<Ogre::Vector3> mLastCoords; /**!< The last coordinates of each limb */
 };
 
-#endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_INTEGRALAVERAGEVELOCITY_H_ */

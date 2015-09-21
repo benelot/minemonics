@@ -78,7 +78,7 @@ void ServoMotor::apply(double timeSinceLastTick) {
 	//calculate the angle error
 	btScalar angleError = targetAngle - mMultiBody->getJointPos(mJointIndex);
 
-	float kP = 500000000;
+	float kP = 10000000;
 	//simple p(roportional) controller
 	//calculate the target force and clamp it with the maximum force
 	mMultiBody->addJointTorque(mJointIndex,

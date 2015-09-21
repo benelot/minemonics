@@ -65,7 +65,7 @@ public:
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
 	void initialize(PopulationModel* const populationModel,
-	const Ogre::Vector3 position, const double branchiness);
+		const Ogre::Vector3 position, const double branchiness);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -109,10 +109,11 @@ public:
 	double getCreatureVolume() const {
 		double totalVolume = 0;
 		for (std::vector<Gene*>::const_iterator it =
-		mGenotype.getGenes().begin(); it != mGenotype.getGenes().end(); it++) {
+			mGenotype.getGenes().begin(); it != mGenotype.getGenes().end();
+			it++) {
 			if ((*it)->getType() == Gene::MorphoGene) {
 				totalVolume += ((Morphogene*) *it)->getX()
-				* ((Morphogene*) *it)->getY() * ((Morphogene*) *it)->getZ();
+					* ((Morphogene*) *it)->getY() * ((Morphogene*) *it)->getZ();
 			}
 		}
 		return totalVolume;
@@ -159,7 +160,7 @@ public:
 
 	void clearJuries() {
 		for (std::vector<Jury*>::iterator jit = mJuries.begin();
-		jit != mJuries.end(); jit++) {
+			jit != mJuries.end(); jit++) {
 			delete *jit;
 		}
 		mJuries.clear();
@@ -232,7 +233,7 @@ public:
 	 * @return A string containing all information about the creature.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const CreatureModel &creature) {
+		const CreatureModel &creature) {
 		os
 		/**The name of the creature*/
 		<< "/CreatureModel: Name=" << creature.mFirstName
@@ -244,19 +245,19 @@ public:
 
 		/**The juries of the creature model*/
 		for (std::vector<Jury*>::const_iterator it = creature.mJuries.begin();
-		it != creature.mJuries.end(); it++) {
+			it != creature.mJuries.end(); it++) {
 			os << (**it);
 			os << "||";
 		}
 
 		/**The position of the creature model*/
 		os << "/Position=(" << creature.mPosition.x << ","
-		<< creature.mPosition.y << "," << creature.mPosition.z << ")";
+			<< creature.mPosition.y << "," << creature.mPosition.z << ")";
 
 		/**The initial position of the creature model*/
 		os << "/InitialPosition=(" << creature.mInitialPosition.x << ","
-		<< creature.mInitialPosition.y << "," << creature.mInitialPosition.z
-		<< ")";
+			<< creature.mInitialPosition.y << "," << creature.mInitialPosition.z
+			<< ")";
 
 		os << "/isCulled=" << creature.mCulled;
 		os << "/isNew=" << creature.mNew;
@@ -286,19 +287,19 @@ public:
 
 		/**The position of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mPosition.x)
-		& BOOST_SERIALIZATION_NVP(mPosition.y)
-		& BOOST_SERIALIZATION_NVP(mPosition.z)
+			& BOOST_SERIALIZATION_NVP(mPosition.y)
+			& BOOST_SERIALIZATION_NVP(mPosition.z)
 
-		/**The initial position of the creature model*/
-		& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
-		& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
-		& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
+			/**The initial position of the creature model*/
+			& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
+			& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
+			& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
 
-		/**If the creature was culled or not*/
-		& BOOST_SERIALIZATION_NVP(mCulled)
+			/**If the creature was culled or not*/
+			& BOOST_SERIALIZATION_NVP(mCulled)
 
-		/**If the creature is new*/
-		& BOOST_SERIALIZATION_NVP(mNew);
+			/**If the creature is new*/
+			& BOOST_SERIALIZATION_NVP(mNew);
 	}
 private:
 

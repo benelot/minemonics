@@ -32,6 +32,7 @@ set(MODELHDRS
 	## juries
 	./model/universe/evolution/juries/Jury.hpp
 	./model/universe/evolution/juries/AverageVelocity.hpp
+	./model/universe/evolution/juries/IntegralAverageVelocity.hpp
 	./model/universe/evolution/juries/AverageHeight.hpp
 	
 	## universe
@@ -110,6 +111,7 @@ set(MODELSRCS
     ## juries
 	./model/universe/evolution/juries/Jury.cpp
 	./model/universe/evolution/juries/AverageVelocity.cpp
+	./model/universe/evolution/juries/IntegralAverageVelocity.cpp
 	./model/universe/evolution/juries/AverageHeight.cpp
 	
 	## universe
@@ -445,6 +447,9 @@ set(MISCHDRS
 	
 	# conversion utils
     ./utils/ogre3D/OgreBulletUtils.hpp
+    
+    # bullet utils
+    ./utils/bullet/BulletUtils.hpp
 )
 set(MISCSRCS
 
@@ -492,6 +497,7 @@ set(TESTSRCS
     
     ## juries
     ./model/universe/evolution/juries/AverageVelocity_test.cpp
+    ./model/universe/evolution/juries/IntegralAverageVelocity_test.cpp
     ./model/universe/evolution/juries/AverageHeight_test.cpp
     
     ## creatures

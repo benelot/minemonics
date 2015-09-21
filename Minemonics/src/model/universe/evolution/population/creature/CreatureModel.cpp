@@ -12,10 +12,10 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/juries/Jury.hpp>
-#include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/evolution/juries/IntegralAverageVelocity.hpp>
 #include <model/universe/PlanetModel.hpp>
 
 //## view headers

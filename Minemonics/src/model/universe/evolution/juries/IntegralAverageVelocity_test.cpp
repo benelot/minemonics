@@ -10,32 +10,32 @@
 //## configuration headers
 //## controller headers
 #include <controller/SaveController.hpp>
-#include <model/universe/evolution/juries/AverageVelocity.hpp>
+#include <model/universe/evolution/juries/IntegralAverageVelocity.hpp>
 
 //## model headers
 //## view headers
 //## utils headers
 
-class AverageVelocityTest: public ::testing::Test {
+class IntegralAverageVelocityTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		velocity = new AverageVelocity(false, 2);
+		velocity = new IntegralAverageVelocity(false, 2);
 	}
 
 	virtual void TearDown() {
 		delete velocity;
 		velocity = 0;
 	}
-	AverageVelocity* velocity;
+	IntegralAverageVelocity* velocity;
 };
 
-class AverageVelocitySerializationTest: public ::testing::Test {
+class IntegralAverageVelocitySerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		velocity = new AverageVelocity(false, 2);
-		velocity2 = new AverageVelocity(true, 1);
+		velocity = new IntegralAverageVelocity(false, 2);
+		velocity2 = new IntegralAverageVelocity(true, 1);
 
-		SaveController < AverageVelocity > saveController;
+		SaveController < IntegralAverageVelocity > saveController;
 
 		saveController.save(*velocity, "AvgVelocity.test");
 
@@ -48,15 +48,15 @@ protected:
 		delete velocity2;
 		velocity2 = 0;
 	}
-	AverageVelocity* velocity;
-	AverageVelocity* velocity2;
+	IntegralAverageVelocity* velocity;
+	IntegralAverageVelocity* velocity2;
 };
 
-TEST_F(AverageVelocityTest,hasWeightTwo) {
+TEST_F(IntegralAverageVelocityTest,hasWeightTwo) {
 	ASSERT_TRUE(velocity->getWeight() == 2);
 }
 
-TEST_F(AverageVelocityTest,evaluateVelocity) {
+TEST_F(IntegralAverageVelocityTest,evaluateVelocity) {
 	//TODO: Broken test
 //	velocity->calculateFitness(0,0,0,0);
 //	velocity->calculateFitness(1,0,0,1);
@@ -64,7 +64,7 @@ TEST_F(AverageVelocityTest,evaluateVelocity) {
 //	ASSERT_TRUE(velocity->getFitness() == 1);
 }
 
-TEST_F(AverageVelocitySerializationTest,isEqualAfterSerialization) {
+TEST_F(IntegralAverageVelocitySerializationTest,isEqualAfterSerialization) {
 	ASSERT_TRUE(velocity != velocity2);
 	ASSERT_TRUE(velocity->equals(*velocity2));
 }
