@@ -81,9 +81,28 @@ public:
 	/**
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
 	 */
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC = 0.001f;
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = 0.001f
-			* 1000.0f;
+//#define FIXED_STEP 1.0f/60.0f // Too low
+//#define FIXED_STEP 1.0f/120.0f // Might be too low
+//#define FIXED_STEP 1.0f/200.0f // Might be ok
+#define FIXED_STEP 1.0f/240.0f // Might be better
+//#define FIXED_STEP 1.0f/1000.0f // Best results
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC = FIXED_STEP;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = FIXED_STEP
+		* 1000.0f;
+
+	/**
+	 * Joint error and the Error Reduction Parameter (ERP)
+	 * The ERP specifies what proportion of the joint error will be fixed during the next simulation step.
+	 * @link http://ode-wiki.org/wiki/index.php?title=Manual:_All&printable=yes#How_To_Use_ERP_and_CFM
+	 */
+	static const double SIMULATOR_PHYSICS_ERP = 0.7f; // [0.1;0.8] ODE default 0.2
+
+	/**
+	 * A nonzero (positive) value of CFM allows the original constraint equation to be violated by an amount proportional
+	 * to CFM times the restoring force \lambda that is needed to enforce the constraint.
+	 * @link http://ode-wiki.org/wiki/index.php?title=Manual:_All&printable=yes#How_To_Use_ERP_and_CFM
+	 */
+	static const double SIMULATOR_PHYSICS_CFM = 0.5f;
 
 	static const int SIMULATOR_SECURITY_MARGIN = 2;
 
@@ -139,7 +158,7 @@ public:
 	static const int CREATURE_TESTRAY_COLLIDES_WITH = COL_CREATURE;
 	static const int GROUND_TESTRAY_COLLIDES_WITH = COL_GROUND;
 
-	static const double PENETRATION_THRESHOLD = -40;//-15
+	static const double PENETRATION_THRESHOLD = -40; //-15
 
 	static const double FORCE_THRESHOLD = 1e6;
 	static const double TORQUE_THRESHOLD = 1e6;

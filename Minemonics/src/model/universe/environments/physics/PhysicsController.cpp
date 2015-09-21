@@ -57,14 +57,26 @@ void PhysicsController::initBulletPhysics() {
 		mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);
-		//TODO: Not sure if helps
-		//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
-		//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
 		break;
 	}
 	default:
 		break;
 	}
+
+	mDynamicsWorld->getSolverInfo().m_erp =
+		PhysicsConfiguration::SIMULATOR_PHYSICS_ERP;
+	mDynamicsWorld->getSolverInfo().m_globalCfm =
+		PhysicsConfiguration::SIMULATOR_PHYSICS_CFM;
+
+	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
+	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
+	mDynamicsWorld->getSolverInfo().m_erp2 =
+		PhysicsConfiguration::SIMULATOR_PHYSICS_ERP;
+	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp =
+		PhysicsConfiguration::SIMULATOR_PHYSICS_ERP;
+	//TODO: Not sure if helps
+	//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
+	//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
 
 	mDynamicsWorld->setGravity(
 		btVector3(0,
