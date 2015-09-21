@@ -145,10 +145,10 @@ void Phenome::addToPhysicsWorld() {
 		}
 
 		// Add all constraints
-		for (std::vector<Joint*>::iterator jit = mJoints.begin();
-			jit != mJoints.end(); jit++) {
-			(*jit)->addToPhysicsWorld();
-		}
+//		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+//			jit != mJoints.end(); jit++) {
+//			(*jit)->addToPhysicsWorld();
+//		}
 		setInWorld(true);
 	}
 }
