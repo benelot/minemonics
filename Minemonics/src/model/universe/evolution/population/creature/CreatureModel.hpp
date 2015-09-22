@@ -34,7 +34,7 @@ class access;
 #include <model/universe/evolution/juries/Jury.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp>
 #include <model/universe/evolution/juries/AverageHeight.hpp>
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>

@@ -10,6 +10,9 @@
 //## model headers
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/SRBcreature/SRBCreature.hpp>
 #include <LinearMath/btMatrix3x3.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
@@ -22,11 +25,6 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-
-//## model headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -53,7 +51,7 @@
 
 RagDoll::RagDoll(Population* const population, double size,
 const btVector3& positionOffset) :
-Creature(population, OgreBulletUtils::convert(positionOffset), 0) {
+SRBCreature(population, OgreBulletUtils::convert(positionOffset), 0) {
 
 	btTransform transform;
 	btTransform localA, localB;
@@ -648,7 +646,7 @@ RagDoll::~RagDoll() {
 }
 
 void RagDoll::update(double timeSinceLastTick) {
-	Creature::update(timeSinceLastTick);
+	SRBCreature::update(timeSinceLastTick);
 }
 
 int RagDoll::addToWorld() {

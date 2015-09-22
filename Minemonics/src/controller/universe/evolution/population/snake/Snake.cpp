@@ -23,18 +23,10 @@
 #include <BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
 #include <BulletDynamics/Featherstone/btMultiBodyPoint2Point.h>
-
-//## view headers
-//# custom headers
-//## base headers
-//## configuration headers
-//## controller headers
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/SRBcreature/SRBCreature.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
-
-//## model headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -66,7 +58,7 @@
 
 Snake::Snake(Population* const population, double size,
 	const btVector3& positionOffset) :
-	integrativeError(0, 0, 0), Creature(population,
+	integrativeError(0, 0, 0), SRBCreature(population,
 		OgreBulletUtils::convert(positionOffset), 0) {
 	rotate = -1.0f;
 	sign = 1;
@@ -145,7 +137,7 @@ Snake::~Snake() {
 }
 
 void Snake::update(double timeSinceLastTick) {
-	Creature::update(timeSinceLastTick);
+	SRBCreature::update(timeSinceLastTick);
 
 	rotate += sign * timeSinceLastTick;
 	if (abs(rotate) >= 1) {

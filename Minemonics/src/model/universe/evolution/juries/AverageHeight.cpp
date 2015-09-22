@@ -18,20 +18,20 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers
 
 AverageHeight::AverageHeight() :
-Jury(Jury::AVG_HEIGHT, true, 1), mIsFirstTime(true), mAvgHeight(0), mSampleQty(
-0) {
+	Jury(Jury::AVG_HEIGHT, true, 1), mIsFirstTime(true), mAvgHeight(0), mSampleQty(
+		0) {
 }
 
 AverageHeight::AverageHeight(const bool higherIsBetter, const double weight) :
-Jury(Jury::AVG_HEIGHT, higherIsBetter, weight), mIsFirstTime(true), mAvgHeight(
-0), mSampleQty(0) {
+	Jury(Jury::AVG_HEIGHT, higherIsBetter, weight), mIsFirstTime(true), mAvgHeight(
+		0), mSampleQty(0) {
 
 }
 
@@ -40,7 +40,7 @@ AverageHeight::~AverageHeight() {
 }
 
 void AverageHeight::calculateFitness(CreatureModel* creature,
-double timeSinceLastTick) {
+	double timeSinceLastTick) {
 
 	if (!mIsFirstTime) {
 		int i = 0;
@@ -48,9 +48,9 @@ double timeSinceLastTick) {
 		double totalVolume = 0;
 		int segmentQty = 0;
 		for (std::vector<LimbModel*>::iterator lit =
-		creature->getPhenotypeModel().getLimbModels().begin();
-		lit != creature->getPhenotypeModel().getLimbModels().end();
-		lit++, i++) {
+			creature->getPhenotypeModel().getLimbModels().begin();
+			lit != creature->getPhenotypeModel().getLimbModels().end();
+			lit++, i++) {
 			currentAvgHeight += (*lit)->getVolume() * ((*lit)->getPosition().y);
 			totalVolume += (*lit)->getVolume();
 			segmentQty++;
@@ -58,11 +58,11 @@ double timeSinceLastTick) {
 		if (totalVolume == 0 || segmentQty == 1) {
 
 			mAvgHeight =
-			(mHigherIsBetter) ? 0 : std::numeric_limits<double>::max();
+				(mHigherIsBetter) ? 0 : std::numeric_limits<double>::max();
 
 		} else {
 			mAvgHeight = ((mAvgHeight * mSampleQty)
-			+ currentAvgHeight / totalVolume) / (mSampleQty + 1);
+				+ currentAvgHeight / totalVolume) / (mSampleQty + 1);
 		}
 	}
 

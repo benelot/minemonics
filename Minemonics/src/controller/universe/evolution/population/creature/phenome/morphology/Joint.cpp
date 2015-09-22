@@ -2,6 +2,10 @@
 //# forward declarations
 //# system headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
 #include <LinearMath/btTransform.h>
 #include <OgreVector3.h>
@@ -11,14 +15,9 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-
-//## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/PlanetModel.hpp>
 
 //##view headers

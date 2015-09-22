@@ -31,21 +31,16 @@ class Population;
  */
 class Creature {
 public:
-	Creature(Population* const population, const Ogre::Vector3 position,
-			const double branchiness);
+
+	enum PhysicsModelType {
+		FeatherStoneMultiBody, SingleRigidBody
+	};
+
+	Creature(Population* const population,
+		const PhysicsModelType physicsModelType, const Ogre::Vector3 position,
+		const double branchiness);
 	Creature(CreatureModel* const creatureModel);
 	virtual ~Creature();
-
-//	/**
-//	 * Initialize the creature.
-//	 * @param simulationManager The simulation manager
-//	 * @param population The population the creature belongs to.
-//	 * @param position The position the creature should be created in.
-//	 * @param branchiness The branchiness factor of the creature.
-//	 */
-//	void initialize(SimulationManager* const simulationManager,
-//			Population* const population, const Ogre::Vector3 position,
-//			const double branchiness);
 
 	/**
 	 * Perform embryogenesis on the creature to build his phenotype from the genotype.
@@ -132,7 +127,7 @@ public:
 
 	void processJuries();
 
-	void hasInterpenetrations(){
+	void hasInterpenetrations() {
 		mCreatureModel->hasInterpenetrations();
 	}
 
@@ -149,7 +144,7 @@ protected:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>("Creature"));
+				boost::log::attributes::constant < std::string > ("Creature"));
 		}
 	} _initializer;
 
@@ -165,4 +160,4 @@ protected:
 	Phenome mPhenotype;
 };
 
-#endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_CREATURE_HPP_ */
+#endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_RSBCREATURE_CREATURE_HPP_ */

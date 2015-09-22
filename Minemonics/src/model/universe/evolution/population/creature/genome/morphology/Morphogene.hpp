@@ -33,7 +33,7 @@ class access;
 //## model headers
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
 //## utils headers
