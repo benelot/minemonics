@@ -15,8 +15,6 @@
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <BulletDynamics/Featherstone/btMultiBody.h>
-#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btTransform.h>
@@ -37,11 +35,10 @@
 //## view headers
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbBt::LimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-		NULL), mInertia(0, 0, 0), mLink(NULL) {
+		NULL), mInertia(0, 0, 0) {
 }
 
 LimbBt::LimbBt(const LimbBt& limbBt) {
@@ -63,8 +60,6 @@ LimbBt::LimbBt(const LimbBt& limbBt) {
 LimbBt::~LimbBt() {
 	delete mBody;
 	mBody = NULL;
-	delete mLink;
-	mLink = NULL;
 }
 
 void LimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
@@ -267,21 +262,11 @@ btTransform LimbBt::getLocalPreciseIntersection(const btVector3 origin,
 
 void LimbBt::addToWorld() {
 	if (!isInWorld()) {
-		if (mLink != NULL) {
-			if (!mIntraBodyColliding) {
-				mWorld->addCollisionObject(mLink,
-					PhysicsConfiguration::COL_CREATURE,
-					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-			} else {
-				mWorld->addCollisionObject(mLink);
-			}
+		if (!mIntraBodyColliding) {
+			mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
+				PhysicsConfiguration::CREATURE_COLLIDES_WITH);
 		} else {
-			if (!mIntraBodyColliding) {
-				mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
-					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-			} else {
-				mWorld->addRigidBody(mBody);
-			}
+			mWorld->addRigidBody(mBody);
 		}
 		LimbPhysics::addToWorld();
 	}
@@ -289,13 +274,9 @@ void LimbBt::addToWorld() {
 
 void LimbBt::removeFromWorld() {
 	if (isInWorld()) {
-		if (mLink != NULL) {
-			mWorld->removeCollisionObject(mLink);
-		} else {
-			mWorld->removeRigidBody(mBody);
-		}
+		mWorld->removeRigidBody(mBody);
+		LimbPhysics::removeFromWorld();
 	}
-	LimbPhysics::removeFromWorld();
 }
 
 LimbBt* LimbBt::clone() {
@@ -309,27 +290,6 @@ void LimbBt::calm() {
 	mBody->setAngularVelocity(zeroVector);
 }
 
-void LimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
-	btVector3 origin, btQuaternion rotation, int index) {
-	mLink = new btMultiBodyLinkCollider(multiBody, index);
-	mLink->setCollisionShape(mCollisionShape);
-
-	btTransform tr;
-	tr.setIdentity();
-	tr.setOrigin(origin);
-	tr.setRotation(rotation);
-	mLink->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
-	mLink->setWorldTransform(tr);
-	mLink->setFriction(mFriction);
-	mLink->setAnisotropicFriction(
-		mCollisionShape->getAnisotropicRollingFrictionDirection(),
-		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-	//Set user pointer for proper return of creature/limb information etc..
-	mLink->setUserPointer(limbModel);
-	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limbModel);
-}
-
 bool LimbBt::equals(const LimbBt& limbBt) const {
 	if (!LimbPhysics::equals(limbBt)) {
 		return false;
@@ -338,5 +298,5 @@ bool LimbBt::equals(const LimbBt& limbBt) const {
 }
 
 const Ogre::Vector3 LimbBt::getVelocities() const {
-	return OgreBulletUtils::convert(mLink->getInterpolationLinearVelocity());
+	return OgreBulletUtils::convert(mBody->getLinearVelocity());
 }

@@ -4,11 +4,9 @@
 //# corresponding header
 //# forward declarations
 class btCollisionShape;
-class btMultiBody;
 class btQuaternion;
 class btTransform;
 class btVector3;
-class btMultiBodyLinkCollider;
 namespace boost {
 namespace serialization {
 class access;
@@ -120,17 +118,6 @@ public:
 	 */
 	bool equals(const LimbPhysics & limbPhysics) const;
 
-	/**
-	 * Generate the multibody link element according to the limb's specification.
-	 * @param multiBody The multibody the link belongs to.
-	 * @param limbModel The limb model to get the specification from.
-	 * @param origin The origin of the limb link's reference frame.
-	 * @param rotation The rotation of the limb link's reference frame.
-	 * @param index The index of the limb link in the multibody.
-	 */
-	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
-		btVector3 origin, btQuaternion rotation, int index) = 0;
-
 	//Accessor methods
 
 	/**
@@ -145,11 +132,6 @@ public:
 	 */
 	virtual btCollisionShape* getCollisionShape() = 0;
 
-	/**
-	 * Get the multibody link element of the limb.
-	 * @return
-	 */
-	virtual btMultiBodyLinkCollider* getLink() = 0;
 	/**
 	 * Is the limb in the physical world?
 	 * @return Whether the limb is in the physical world or not.

@@ -6,8 +6,14 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btMultiBody;
-class btMultiBodyJointMotor;
+class btGeneric6DofSpring2Constraint;
+class btGeneric6DofSpringConstraint;
+class btGeneric6DofConstraint;
+class btRotationalLimitMotor2;
+class btRotationalLimitMotor;
+class btPoint2PointConstraint;
+class btConeTwistConstraint;
+class JointBt;
 
 //# system headers
 //## controller headers
@@ -22,6 +28,23 @@ class btMultiBodyJointMotor;
 
 //## view headers
 //## utils headers
+
+//comment this out to compare with original spring constraint
+//#define CONSTRAINT_TYPE btConeTwistConstraint
+//#define EXTRAPARAMS
+//#define MOTOR_TYPE btRotationalLimitMotor
+//#define CONSTRAINT_TYPE btPoint2PointConstraint
+//#define EXTRAPARAMS
+//#define MOTOR_TYPE btRotationalLimitMotor
+#define CONSTRAINT_TYPE btGeneric6DofConstraint
+#define EXTRAPARAMS ,true
+#define MOTOR_TYPE btRotationalLimitMotor
+//#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
+//#define EXTRAPARAMS
+//#define MOTOR_TYPE btRotationalLimitMotor2
+//#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
+//#define EXTRAPARAMS ,true
+//#define MOTOR_TYPE btRotationalLimitMotor
 
 /**
  * @brief		The servo motor acts directly on the DoF of a joint and thereby moves the creature.
@@ -43,16 +66,14 @@ public:
 	 */
 	void initialize(
 		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		const double maxForce, double lowerLimit, double upperLimit);
+		MOTOR_TYPE* const motorBt, const double maxForce, double lowerLimit,
+		double upperLimit);
 
-	void instantiate(btMultiBody* multiBody, const int jointIndex);
 	/**
 	 * Clone the servomotor.
 	 * @return The clone of the servo motor.
 	 */
 	ServoMotor* clone();
-
-	//TODO: Add equals method
 
 	/**
 	 * Apply the movement of the servomotor on the joint it controls.
@@ -88,21 +109,17 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Motor) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mJointIndex) /**!< The index of the joint. */
 		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
 		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
 		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
 	}
 
 private:
-
-	int mJointIndex; /**!< The index of the joint. */
-	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
-
-	btMultiBody* mMultiBody;
-
+	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;
+	MOTOR_TYPE* mMotorBt;
 	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
+
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

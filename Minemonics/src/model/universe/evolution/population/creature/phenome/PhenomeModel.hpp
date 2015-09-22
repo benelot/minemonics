@@ -2,13 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_
 
 //# corresponding headers
-#include <configuration/Definitions.hpp>
-
 //# forward declarations
-class btMultiBody;
-class btMultiBodyDynamicsWorld;
 class CreatureModel;
-class btMultiBodyConstraint;
 namespace boost {
 namespace serialization {
 class access;
@@ -28,7 +23,6 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
-#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
@@ -56,10 +50,6 @@ public:
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
 	int performEmbryogenesis(CreatureModel* const creatureModel);
-
-	void generateBody();
-
-	void addJointConstraints();
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -94,8 +84,6 @@ public:
 	 */
 	PhenomeModel* clone();
 
-	void calm();
-
 	//Accessor methods
 	/**
 	 * Is the phenotype in the world?
@@ -104,16 +92,6 @@ public:
 	bool isInWorld() const {
 		return mInWorld;
 	}
-
-	/**
-	 * Add the phenotype to the physical and graphical world.
-	 */
-	void addToWorld();
-
-	/**
-	 * Remove the phenotype from the physical and graphical world.
-	 */
-	void removeFromWorld();
 
 	/**
 	 * Set whether the phenotype is in the world or not.
@@ -171,82 +149,83 @@ public:
 		return mHasInterpenetrations;
 	}
 
-	btMultiBody* getMultiBody() {
-		return mMultiBody;
-	}
-
-	void setMultiBody(btMultiBody* multiBody) {
-		mMultiBody = multiBody;
-	}
-
-	friend class boost::serialization::access; /**!< Give access to boost serialization */
+	void calm();
 
 	/**
-	 * Serializes the phenome model to a string.
-	 * @param os The ostream.
-	 * @param phenomeModel The phenome model we want to serialize.
-	 * @return A string containing all information about the phenome model.
-	 */
-	friend std::ostream & operator<<(std::ostream& os,
-		const PhenomeModel& phenomeModel) {
-		os
-		/**if the phenome is in the world*/
-		<< "/PhenomeModel: isInWorld=" << phenomeModel.mInWorld
+		 * Give access to boost serialization
+		 */
+		friend class boost::serialization::access;
 
-		<< "/Limbs=[";
+		/**
+		 * Serializes the phemone model to a string.
+		 * @param os The ostream.
+		 * @param phenomeModel The phemone model we want to serialize.
+		 * @return A string containing all information about the phemone model.
+		 */
+		friend std::ostream & operator<<(std::ostream& os,
+				const PhenomeModel& phenomeModel) {
+			os
+			/**if the phenome is in the world*/
+			<< "/PhenomeModel: isInWorld=" << phenomeModel.mInWorld
 
-		/**The vector of limb models.*/
+			<< "/Limbs=[";
 
-		for (std::vector<LimbModel*>::const_iterator it =
-			phenomeModel.mLimbModels.begin();
-			it != phenomeModel.mLimbModels.end(); it++) {
-			os << (**it);
-			os << "||";
+			/**The vector of limb models.*/
+
+			for (std::vector<LimbModel*>::const_iterator it =
+					phenomeModel.mLimbModels.begin();
+					it != phenomeModel.mLimbModels.end(); it++) {
+				os << (**it);
+				os << "||";
+			}
+
+			os << "]/Joints=[";
+
+			/**The vector of joint models.*/
+			for (std::vector<JointModel*>::const_iterator it =
+					phenomeModel.mJointModels.begin();
+					it != phenomeModel.mJointModels.end(); it++) {
+				os << (**it);
+				os << "||";
+			}
+
+			os << "]/Controllers=[";
+
+			/**The vector of controllers.*/
+			for (std::vector<Controller*>::const_iterator it =
+					phenomeModel.mControllers.begin();
+					it != phenomeModel.mControllers.end(); it++) {
+				os << (**it);
+				os << "||";
+			}
+
+			os << "]";
+
+			return os;
 		}
 
-		os << "]/Joints=[";
+		/**
+		 * Serializes the creature to an xml file.
+		 * @param ar The archive.
+		 * @param The file version.
+		 */
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int /* file_version */) {
+			ar
+			/**If the phenome is developed*/
+			& BOOST_SERIALIZATION_NVP(mDeveloped)
+			/**if the phenome is in the world*/
+			& BOOST_SERIALIZATION_NVP(mInWorld)
 
-		/**The vector of joint models.*/
-		for (std::vector<JointModel*>::const_iterator it =
-			phenomeModel.mJointModels.begin();
-			it != phenomeModel.mJointModels.end(); it++) {
-			os << (**it);
-			os << "||";
+			/**The vector of limb models.*/
+			& BOOST_SERIALIZATION_NVP(mLimbModels);
+
+//			/**The vector of joint models.*/
+//			& BOOST_SERIALIZATION_NVP(mJointModels)
+//
+//			/**The vector of controllers.*/
+//			& BOOST_SERIALIZATION_NVP(mControllers);
 		}
-
-		os << "]/Controllers=[";
-
-		/**The vector of controllers.*/
-		for (std::vector<Controller*>::const_iterator it =
-			phenomeModel.mControllers.begin();
-			it != phenomeModel.mControllers.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		os << "]";
-
-		return os;
-	}
-
-	/**
-	 * Serializes the phenome model to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar.register_type(static_cast<SineController*>(NULL));
-		ar & BOOST_SERIALIZATION_NVP(mDeveloped) /**!< If the phenome is developed*/
-
-		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/
-
-		& BOOST_SERIALIZATION_NVP(mLimbModels) /**!< The vector of limb models.*/
-
-		& BOOST_SERIALIZATION_NVP(mJointModels) /**!< The vector of joint models.*/
-
-		& BOOST_SERIALIZATION_NVP(mControllers); /**!< The vector of controllers.*/
-	}
 private:
 	/**
 	 * The boost logger.
@@ -260,8 +239,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string
-					> ("PhenomeModel"));
+					boost::log::attributes::constant<std::string>(
+							"PhenomeModel"));
 		}
 	} _initializer;
 
@@ -292,18 +271,14 @@ private:
 	 */
 	std::vector<JointModel*> mJointModels;
 
+	//std::vector<Sensor*> mSensors;
+
 	/**
 	 * The vector of phenotype joint controller models.
 	 */
 	std::vector<Controller*> mControllers;
 
 	bool mHasInterpenetrations;
-
-	btMultiBody* mMultiBody;
-
-	btMultiBodyDynamicsWorld* mWorld;
-
-	std::vector<btMultiBodyConstraint*> mLimitConstraints;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

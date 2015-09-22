@@ -8,10 +8,6 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <boost/serialization/assume_abstract.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/version.hpp>
-
 //## view headers
 //# custom headers
 //## base headers
@@ -41,7 +37,10 @@ public:
 	// Accessor methods
 
 	// Serialization
-	friend class boost::serialization::access; /**!< Give access to boost serialization */
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
 
 	/**
 	 * Serializes the sensor model to a string.
@@ -61,7 +60,6 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ControlOutput); /**!< Serialize the base object */
 	}
 };
 BOOST_CLASS_VERSION(Sensor, 1)

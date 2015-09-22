@@ -5,6 +5,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <LinearMath/btVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -71,36 +73,4 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 	return true;
-}
-
-void JointPhysics::generateMotors(const Ogre::Vector3 maxForces) {
-	mJointMaxForces = maxForces;
-
-	// add pitch servo motor
-	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.x,
-		mJointMinAngle.x, mJointMaxAngle.x);
-	//TODO: Hack, make better
-	servoMotor->setEnabled(true);
-	mMotors.push_back(servoMotor);
-
-	if (mType == SPHERICAL_JOINT) {
-		// add yaw servo motor
-		servoMotor = new ServoMotor();
-		servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.y,
-			mJointMinAngle.y, mJointMaxAngle.y);
-
-		//TODO: Hack, make better
-		servoMotor->setEnabled(true);
-		mMotors.push_back(servoMotor);
-
-		//add roll servo motor
-		servoMotor = new ServoMotor();
-		servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.z,
-			mJointMinAngle.z, mJointMaxSpeeds.z);
-
-		//TODO: Hack, make better
-		servoMotor->setEnabled(true);
-		mMotors.push_back(servoMotor);
-	}
 }

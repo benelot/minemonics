@@ -16,8 +16,8 @@
 #define DEBUG 0
 #endif
 
-#ifndef BT_USE_DOUBLE_PRECISION
-#define BT_USE_DOUBLE_PRECISION 1
-#endif
+//#ifndef BT_USE_DOUBLE_PRECISION
+//#define BT_USE_DOUBLE_PRECISION 0
+//#endif
 
 #endif /* CONFIGURATION_DEFINITIONS_HPP_ */

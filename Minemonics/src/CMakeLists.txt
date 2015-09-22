@@ -211,7 +211,7 @@ set(CONTROLLERHDRS
     
     ## ragdoll
 #	./controller/universe/evolution/population/ragdoll/RagDoll.hpp
-	./controller/universe/evolution/population/snake/Snake.hpp
+#	./controller/universe/evolution/population/snake/Snake.hpp
 	
     ## creature
     ./controller/universe/evolution/population/creature/Creature.hpp
@@ -254,7 +254,7 @@ set(CONTROLLERSRCS
     
     ## ragdoll
 #	./controller/universe/evolution/population/ragdoll/RagDoll.cpp
-	./controller/universe/evolution/population/snake/Snake.cpp
+#	./controller/universe/evolution/population/snake/Snake.cpp
 	
     ## creature
     ./controller/universe/evolution/population/creature/Creature.cpp

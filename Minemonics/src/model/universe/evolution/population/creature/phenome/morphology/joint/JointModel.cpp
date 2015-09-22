@@ -168,8 +168,11 @@ JointModel* JointModel::clone() {
 //	return mJointPhysics->isStrained();
 //}
 
-void JointModel::generateMotors(const Ogre::Vector3 maxForces) {
-	mJointPhysics->generateMotors(maxForces);
+void JointModel::generateMotors(const Ogre::Vector3 maxForces,
+	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {
+	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
+		OgreBulletUtils::convert(lowerLimits),
+		OgreBulletUtils::convert(upperLimits));
 }
 
 void JointModel::enableAngularMotor(const bool pitchEnable,

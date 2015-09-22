@@ -6,10 +6,10 @@
 
 //# forward declarations
 class btDynamicsWorld;
-class btMultiBody;
 class btRigidBody;
 class btTransform;
 class btVector3;
+class Motor;
 
 //# system headers
 //## controller headers
@@ -18,6 +18,7 @@ class btVector3;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
 
 //## view headers
 //# custom headers
@@ -32,6 +33,18 @@ class btVector3;
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 //## utils headers
+
+//comment this out to compare with original spring constraint
+//#define CONSTRAINT_TYPE btConeTwistConstraint
+//#define EXTRAPARAMS
+//#define CONSTRAINT_TYPE btPoint2PointConstraint
+//#define EXTRAPARAMS
+#define CONSTRAINT_TYPE btGeneric6DofConstraint
+#define EXTRAPARAMS ,true
+//#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
+//#define EXTRAPARAMS
+//#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
+//#define EXTRAPARAMS ,true
 
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
@@ -65,10 +78,8 @@ public:
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	void initializeRotationalLimitMotors(btMultiBody* multiBody,
-		const int ownIndex, const btVector3 maxForces,
-		const btVector3 maxSpeeds, const btVector3 lowerLimits,
-		const btVector3 upperLimits);
+	virtual void generateMotors(const btVector3 maxForces,
+		const btVector3 lowerLimits, const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.
@@ -116,22 +127,22 @@ public:
 
 	//Accessor methods
 
-//	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-//			const Ogre::Vector3 angularUpperLimit) {
-//		setAngularLimits(OgreBulletUtils::convert(angularLowerLimit),
-//				OgreBulletUtils::convert(angularUpperLimit));
-//	}
-//
-//	void setAngularLimits(const btVector3 angularLowerLimit,
-//			const btVector3 angularUpperLimit) {
-//
-////		mG6DofJoint->setAngularLowerLimit(angularLowerLimit);
-////		mG6DofJoint->setAngularUpperLimit(angularUpperLimit);
-//	}
+	void setLimits(const Ogre::Vector3 limits) {
+		setLimits(OgreBulletUtils::convert(limits));
+	}
 
-//	void setBreakingThreshold(const double breakingThreshold) {
-//		mJoint->setBreakingImpulseThreshold(breakingThreshold);
-//	}
+	void setLimit(JointPhysics::RotationalDegreeOfFreedom dof,
+		const double limit) {
+//		mJoint->setLimit(dof, limit);
+	}
+
+	void setLimits(const btVector3 limits) {
+//		mJoint->setLimit(limits.x(),limits.y(),limits.z());
+	}
+
+	void setBreakingThreshold(const double breakingThreshold) {
+		mJoint->setBreakingImpulseThreshold(breakingThreshold);
+	}
 
 	void setRotationalLimitMotorEnabled(
 		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
@@ -140,6 +151,17 @@ public:
 		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return true;
 //		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
+	}
+
+	void setTargetRotationalVelocity(
+		JointPhysics::RotationalDegreeOfFreedom index, double targetVelocity) {
+//		mJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
+	}
+
+	double getTargetRotationalVelocity(
+		const JointPhysics::RotationalDegreeOfFreedom index) {
+		return 0;
+//		return mJoint->getRotationalLimitMotor(index)->m_targetVelocity;
 	}
 
 	void setMaxRotationalForce(
@@ -155,11 +177,15 @@ public:
 //		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
 
-	const std::vector<Motor*>& getMotors() const {
+	CONSTRAINT_TYPE* getJoint() {
+		return mJoint;
+	}
+
+	virtual const std::vector<Motor*>& getMotors() const {
 		return mMotors;
 	}
 
-	std::vector<Motor*>& getMotors() {
+	virtual std::vector<Motor*>& getMotors() {
 		return mMotors;
 	}
 
@@ -193,12 +219,29 @@ public:
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics); /**!< Serialize the base object */
 	}
 
+	void setMotorTarget(const btQuaternion motorTarget) {
+		mMotorTarget = motorTarget;
+	}
+
 private:
+
+	/**
+	 * The 6 Degrees of freedom joint that is used as a physical model.
+	 */
+	CONSTRAINT_TYPE* mJoint;
 
 	/**
 	 * The bullet dynamics world of the bullet physics engine. Reference only.
 	 */
 	btDynamicsWorld* mWorld;
+
+	/**
+	 * The vector of motors that are working across this joint.
+	 * Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
+	 */
+	std::vector<Motor*> mMotors;
+
+	btQuaternion mMotorTarget;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

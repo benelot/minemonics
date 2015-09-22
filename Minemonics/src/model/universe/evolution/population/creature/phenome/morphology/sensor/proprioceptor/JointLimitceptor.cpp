@@ -5,13 +5,10 @@
 //## view headers
 //## utils headers
 
-JointLimitceptor::JointLimitceptor() :
-mLimit(BOTH_LIMITS), mLimitError(0) {
-}
-
-JointLimitceptor::JointLimitceptor(std::vector<int*>::size_type jointIndex,
-JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit) :
-JointProprioceptor(jointIndex, rotationalDOF), mLimitError(0), mLimit(limit) {
+JointLimitceptor::JointLimitceptor(
+	std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+	JointPhysics::RotationalDegreeOfFreedom rotationalDOF, Limit limit) :
+	JointProprioceptor(jointIndex, rotationalDOF), mLimitError(0), mLimit(limit) {
 
 }
 

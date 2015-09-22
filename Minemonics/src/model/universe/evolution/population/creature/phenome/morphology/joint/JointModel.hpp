@@ -8,7 +8,6 @@
 //# forward declarations
 class btDynamicsWorld;
 class btRigidBody;
-class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -114,7 +113,8 @@ public:
 		mJointPhysics = jointPhysics;
 	}
 
-	void generateMotors(const Ogre::Vector3 maxForces);
+	void generateMotors(const Ogre::Vector3 maxForces,
+		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits);
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.

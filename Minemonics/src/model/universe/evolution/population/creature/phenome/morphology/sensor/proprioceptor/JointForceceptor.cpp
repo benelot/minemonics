@@ -5,13 +5,10 @@
 //## view headers
 //## utils headers
 
-JointForceceptor::JointForceceptor() :
-mForce(0) {
-}
-
-JointForceceptor::JointForceceptor(std::vector<int*>::size_type jointIndex,
-JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-JointProprioceptor(jointIndex, rotationalDOF), mForce(0) {
+JointForceceptor::JointForceceptor(
+	std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+	JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
+	JointProprioceptor(jointIndex, rotationalDOF), mForce(0) {
 
 }
 

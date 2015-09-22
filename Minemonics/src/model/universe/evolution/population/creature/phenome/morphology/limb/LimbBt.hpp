@@ -25,7 +25,6 @@ class access;
 #include <boost/serialization/version.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
-#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
@@ -72,9 +71,6 @@ public:
 		const btScalar mass, const btScalar restitution,
 		const btScalar friction, const Ogre::ColourValue color,
 		bool isIntraBodyColliding);
-
-	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
-		btVector3 origin, btQuaternion rotation, int index);
 
 	/**
 	 * Clone the bullet physics limb.
@@ -161,28 +157,16 @@ public:
 	//Accessor methods
 
 	btVector3 getPosition() const {
-		if (mLink) {
-			return mLink->getWorldTransform().getOrigin();
-		} else {
-			return mBody->getCenterOfMassPosition();
-		}
+		return mBody->getCenterOfMassPosition();
 	}
 
 	btQuaternion getOrientation() const {
-		btTransform transform;
-		if (mLink) {
-			transform = mLink->getWorldTransform();
-		} else {
-			transform = mBody->getWorldTransform();
-		}
+			btTransform transform = mBody->getWorldTransform();
 
 		//if there are NaNs, this removes them it seems.
 		return transform.getRotation().normalized();
 	}
 
-	btRigidBody* getRigidBody() const {
-		return mBody;
-	}
 
 	virtual btCollisionShape* getCollisionShape() {
 		return mCollisionShape;
@@ -191,13 +175,13 @@ public:
 	virtual const btVector3& getInertia() const {
 		return mInertia;
 	}
-
+	
 	void setInertia(const btVector3& inertia) {
 		mInertia = inertia;
 	}
 
-	btMultiBodyLinkCollider* getLink() {
-		return mLink;
+	btRigidBody* getRigidBody() const {
+		return mBody;
 	}
 
 	// Serialization
@@ -232,8 +216,6 @@ private:
 	btRigidBody* mBody; /**!< The rigid body of the limb */
 
 	btVector3 mInertia; /**!< The inertia of the limb */
-
-	btMultiBodyLinkCollider* mLink; /**!< The multibody link segment of the limb */
 };
 BOOST_CLASS_VERSION(LimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBBT_HPP_ */

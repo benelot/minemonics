@@ -119,9 +119,6 @@ public:
 	 */
 	void removeFromWorld();
 
-	void generateLink(btMultiBody* multiBody, btVector3 origin,
-		btQuaternion rotation, int index);
-
 	/**
 	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
 	 * @param origin The origin of the ray in the global reference frame.
@@ -160,10 +157,6 @@ public:
 
 	const LimbModel* getLimbModel() const {
 		return mLimbModel;
-	}
-
-	btMultiBodyLinkCollider* getLink() {
-		return mLimbModel->getLink();
 	}
 
 private:

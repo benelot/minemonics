@@ -10,7 +10,7 @@
 //## model headers
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
-#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
 #include <BulletDynamics/ConstraintSolver/btTypedConstraint.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
@@ -24,17 +24,19 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //## view headers
 //## utils headers
 
 JointBt::JointBt() :
-	mWorld(NULL) {
+	mWorld(NULL), mJoint(NULL), mMotorTarget(0, 0, 0, 1) {
 	mMotors.clear();
 }
 
 JointBt::JointBt(const JointBt& jointBt) {
 	mWorld = jointBt.mWorld;
+	mJoint = jointBt.mJoint;
 	mInWorld = jointBt.mInWorld;
 
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
@@ -50,6 +52,17 @@ void JointBt::initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits) {
 	mWorld = world;
+	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA,
+		tframeInB EXTRAPARAMS);
+
+//	mJoint->setDamping(10000);
+
+	mJoint->enableFeedback(true);
+	mJoint->setJointFeedback(new btJointFeedback());
+
+	//debug drawing
+	mJoint->setDbgDrawSize(btScalar(5.f));
+
 	mType = type;
 	mJointPitchEnabled = jointPitchEnabled;
 	mJointYawEnabled = jointYawEnabled;
@@ -74,57 +87,57 @@ JointBt::~JointBt() {
 	}
 
 	mMotors.clear();
+
+	delete mJoint;
+	mJoint = NULL;
 }
 
 void JointBt::update(double timeSinceLastTick) {
 
 	//apply motor forces
+	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			(*motorIterator)->apply(timeSinceLastTick);
+			//TODO:Reenable motors when interpenetration problems are fixed.
+//			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
+	//set new motor target to joint
+//	mJoint->setMotorTarget(mMotorTarget);
 
 //	isStrained();
 }
 
-//void JointBt::initializeRotationalLimitMotors(btMultiBody* multiBody,
-//	const int ownIndex, const btVector3 maxForces, const btVector3 maxSpeeds,
-//	const btVector3 lowerLimits, const btVector3 upperLimits) {
-//	// add pitch servo motor
-//	ServoMotor* servoMotor = new ServoMotor();
-//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_PITCH,
-//		maxForces.getX(), maxSpeeds.getX(), lowerLimits.getX(),
-//		upperLimits.getX());
-//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
-//		servoMotor->getJointMotor());
-//	//TODO: Hack, make better
-//	servoMotor->setEnabled(true);
-//	mMotors.push_back(servoMotor);
-//
-//	// add yaw servo motor
-//	servoMotor = new ServoMotor();
-//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_YAW,
-//		maxForces.getY(), maxSpeeds.getY(), lowerLimits.getY(),
-//		upperLimits.getY());
-//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
-//		servoMotor->getJointMotor());
-//	//TODO: Hack, make better
-//	servoMotor->setEnabled(true);
-//	mMotors.push_back(servoMotor);
-//
-//	//add roll servo motor
-//	servoMotor = new ServoMotor();
-//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_ROLL,
-//		maxForces.getZ(), maxSpeeds.getZ(), lowerLimits.getZ(),
-//		upperLimits.getZ());
-//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
-//		servoMotor->getJointMotor());
-//	//TODO: Hack, make better
-//	servoMotor->setEnabled(true);
-//	mMotors.push_back(servoMotor);
-//}
+void JointBt::generateMotors(const btVector3 maxForces,
+	const btVector3 lowerLimits, const btVector3 upperLimits) {
+//	add pitch servo motor
+	ServoMotor* servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_PITCH,
+		mJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+		lowerLimits.x(), upperLimits.x());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+
+	// add yaw servo motor
+	servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_YAW,
+		mJoint->getRotationalLimitMotor(RDOF_YAW), maxForces.getY(),
+		lowerLimits.y(), upperLimits.y());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+
+	//add roll servo motor
+	servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_ROLL,
+		mJoint->getRotationalLimitMotor(RDOF_ROLL), maxForces.getZ(),
+		lowerLimits.z(), upperLimits.z());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+}
 
 bool JointBt::equals(const JointBt& jointBt) const {
 
@@ -200,14 +213,14 @@ void JointBt::setRotationalLimitMotorEnabled(
 
 void JointBt::addToWorld() {
 	if (!isInWorld()) {
-//		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
+		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
 		JointPhysics::addToWorld();
 	}
 }
 
 void JointBt::removeFromWorld() {
 	if (isInWorld()) {
-//		mWorld->removeConstraint((btTypedConstraint*) mJoint);
+		mWorld->removeConstraint((btTypedConstraint*) mJoint);
 		JointPhysics::removeFromWorld();
 	}
 }

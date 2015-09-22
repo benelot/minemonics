@@ -15,7 +15,6 @@ class access;
 
 //## controller headers
 //## model headers
-#include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 
@@ -47,8 +46,7 @@ public:
 	 * Initialize the component model.
 	 * @param type The type of component.
 	 */
-	void initialize(const ComponentType type,
-	const std::vector<ComponentModel*>::size_type ownIndex);
+	void initialize(const ComponentType type, const std::vector<ComponentModel*>::size_type ownIndex);
 
 	/**
 	 * Compare the component model to another component model.
@@ -63,18 +61,10 @@ public:
 	 */
 	virtual ComponentModel* clone() = 0;
 
-	// Accessor methods
-
-	ComponentType getComponentType() const {
-		return mComponentType;
-	}
-
-	std::vector<ComponentModel*>::size_type getIndex() const {
-		return mOwnIndex;
-	}
-
-	//Serialization
-	friend class boost::serialization::access; /**!< Give access to boost serialization */
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
 
 	/**
 	 * Serializes the component model to a string.
@@ -83,9 +73,8 @@ public:
 	 * @return A string containing all information about the component.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const ComponentModel & componentModel) {
-		return os << "ComponentModel: Type=" << componentModel.mComponentType /**!< The type of the component*/
-		<< "/Index=" << componentModel.mOwnIndex; /**!< The index of the component in the genotype. */
+			const ComponentModel & componentModel) {
+		return os << "ComponentModel: Type=" << componentModel.mComponentType;
 	}
 
 	/**
@@ -95,15 +84,29 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mComponentType) /**!< The type of the component*/
-		& BOOST_SERIALIZATION_NVP(mOwnIndex); /**!< The index of the component in the genotype. */
+		ar
+		/**The type of the component*/
+		& BOOST_SERIALIZATION_NVP(mComponentType);
+	}
+
+	ComponentType getComponentType() const {
+		return mComponentType;
+	}
+
+	std::vector<ComponentModel*>::size_type getIndex() const {
+		return mOwnIndex;
 	}
 
 protected:
-	ComponentType mComponentType; /**!< The type of the component*/
+	/**
+	 * Component type of the compoment.
+	 */
+	ComponentType mComponentType;
 
-	std::vector<ComponentModel*>::size_type mOwnIndex; /**!< The index of the component in the genotype. */
+	/**
+	 * The index of the component in the genotype.
+	 */
+	std::vector<ComponentModel*>::size_type mOwnIndex;
 };
-BOOST_CLASS_VERSION(ComponentModel, 1)
-BOOST_SERIALIZATION_ASSUME_ABSTRACT(ComponentModel)
+
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENTMODEL_HPP_ */

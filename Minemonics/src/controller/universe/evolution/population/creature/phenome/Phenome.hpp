@@ -2,8 +2,6 @@
 #define CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_HPP_
 
 //# corresponding header
-#include <configuration/Definitions.hpp>
-
 //# forward declarations
 class SimulationManager;
 class MixedGenome;
@@ -14,6 +12,7 @@ class Creature;
 
 //## controller headers
 //## model headers
+#include <bullet/BulletDynamics/ConstraintSolver/btHingeConstraint.h>
 #include <OgreVector3.h>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
@@ -163,14 +162,6 @@ public:
 		mPhenotypeModel->setInWorld(inWorld);
 	}
 
-	bool isDeveloped() const {
-		return mPhenotypeModel->isDeveloped();
-	}
-
-	void setDeveloped(bool developed) {
-		mPhenotypeModel->setDeveloped(developed);
-	}
-
 	std::vector<Joint*>& getJoints() {
 		return mJoints;
 	}
@@ -212,7 +203,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("Phenome"));
+					boost::log::attributes::constant<std::string>(
+							"Phenome"));
 		}
 	} _initializer;
 

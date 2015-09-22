@@ -480,7 +480,13 @@ void Embryogenesis::transcribeMorphogene(
 				* (mass1 + mass2)
 				+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
 					* pow(mass1 + mass2, 2));
-		joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque));
+		joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
+			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+				parentMorphogeneBranch->getJointYawMinAngle(),
+				parentMorphogeneBranch->getJointRollMinAngle()),
+			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+				parentMorphogeneBranch->getJointYawMaxAngle(),
+				parentMorphogeneBranch->getJointRollMaxAngle()));
 
 		//TODO: Quick controller hack
 		SineController* controller = new SineController();

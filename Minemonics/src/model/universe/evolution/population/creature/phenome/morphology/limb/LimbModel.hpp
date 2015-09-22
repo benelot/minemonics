@@ -8,8 +8,6 @@
 //# forward declarations
 class JointModel;
 class btDynamicsWorld;
-class btMultiBody;
-class btMultiBodyLinkCollider;
 class CreatureModel;
 namespace boost {
 namespace serialization {
@@ -167,15 +165,6 @@ public:
 		return mLimbPhysics->getFriction();
 	}
 
-	void generateLink(btMultiBody* multiBody, btVector3 origin,
-		btQuaternion rotation, int index) {
-		mLimbPhysics->generateLink(multiBody, this, origin, rotation, index);
-	}
-
-	btMultiBodyLinkCollider* getLink() {
-		return mLimbPhysics->getLink();
-	}
-
 	std::vector<LimbModel*>::size_type getParentJointIndex() const {
 		return mParentJointIndex;
 	}
@@ -213,7 +202,7 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 		const LimbModel &limbModel);
 	/**
-	 * Serializes the limb model to an xml file.
+	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */

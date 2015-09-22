@@ -5,7 +5,6 @@
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //# forward declarations
-class btMultiBody;
 class btTransform;
 class Creature;
 class JointGraphics;
@@ -89,7 +88,8 @@ public:
 	 * Initialize the rotational limit motors of the joint.
 	 * @param maxForces The maximum forces along the axes.
 	 */
-	void generateMotors(const Ogre::Vector3 maxForces);
+	void generateMotors(const Ogre::Vector3 maxForces,
+		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits);
 
 	/**
 	 * Updates the joint position and orientation.

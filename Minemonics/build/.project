@@ -764,11 +764,6 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/Population.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/Snake.cpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/snake/Snake.cpp</location>
-		</link>
-		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Creature.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/creature/Creature.cpp</location>
@@ -1527,11 +1522,6 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/Population.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/Population.hpp</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/Snake.hpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/snake/Snake.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Creature.hpp</name>

@@ -5,7 +5,6 @@
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 
 //# forward declarations
-class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;

@@ -40,7 +40,7 @@
 BoostLogger Phenome::mBoostLogger; /*<! initialize the boost logger*/
 Phenome::_Init Phenome::_initializer;
 Phenome::Phenome() :
-	mCreature(NULL), mPhenotypeModel(NULL) {
+		mCreature(NULL), mPhenotypeModel(NULL) {
 
 }
 
@@ -66,7 +66,7 @@ Phenome::Phenome(const Phenome& phenome) {
 
 Phenome::~Phenome() {
 	for (std::vector<Component*>::iterator cit = mComponents.begin();
-		cit != mComponents.end();) {
+			cit != mComponents.end();) {
 		delete *cit;
 		cit = mComponents.erase(cit);
 	}
@@ -91,8 +91,8 @@ int Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
 	}
 	// iterate over all the component models
 	for (std::vector<ComponentModel*>::const_iterator cmit =
-		mPhenotypeModel->getComponentModels().begin();
-		cmit != mPhenotypeModel->getComponentModels().end(); cmit++) {
+			mPhenotypeModel->getComponentModels().begin();
+			cmit != mPhenotypeModel->getComponentModels().end(); cmit++) {
 
 		switch ((*cmit)->getComponentType()) {
 		case ComponentModel::LimbComponent: {
@@ -122,13 +122,13 @@ void Phenome::update(double timeSinceLastTick) {
 
 	// Update all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
-		lit++) {
+			lit++) {
 		(*lit)->update(timeSinceLastTick);
 	}
 
 	// Update all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();
-		jit != mJoints.end(); jit++) {
+			jit != mJoints.end(); jit++) {
 		(*jit)->update(timeSinceLastTick);
 	}
 
@@ -137,52 +137,49 @@ void Phenome::update(double timeSinceLastTick) {
 
 void Phenome::addToPhysicsWorld() {
 	if (!isInWorld()) {
-		mPhenotypeModel->addToWorld();
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
-			lit != mLimbs.end(); lit++) {
+				lit != mLimbs.end(); lit++) {
 			(*lit)->addToPhysicsWorld();
 		}
 
 		// Add all constraints
-//		for (std::vector<Joint*>::iterator jit = mJoints.begin();
-//			jit != mJoints.end(); jit++) {
-//			(*jit)->addToPhysicsWorld();
-//		}
+		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+				jit != mJoints.end(); jit++) {
+			(*jit)->addToPhysicsWorld();
+		}
 		setInWorld(true);
 	}
 }
 
 void Phenome::addToWorld() {
 	if (!isInWorld()) {
-		mPhenotypeModel->addToWorld();
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
-			lit != mLimbs.end(); lit++) {
+				lit != mLimbs.end(); lit++) {
 			(*lit)->addToWorld();
 		}
 
-//		// Add all constraints
-//		for (std::vector<Joint*>::iterator jit = mJoints.begin();
-//				jit != mJoints.end(); jit++) {
-//			(*jit)->addToWorld();
-//		}
+		// Add all constraints
+		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+				jit != mJoints.end(); jit++) {
+			(*jit)->addToWorld();
+		}
 		setInWorld(true);
 	}
 }
 
 void Phenome::removeFromWorld() {
 	if (isInWorld()) {
-//		// Remove all constraints
-//		for (std::vector<Joint*>::iterator jit = mJoints.begin();
-//				jit != mJoints.end(); jit++) {
-//			(*jit)->removeFromWorld();
-//		}
-		mPhenotypeModel->removeFromWorld();
+		// Remove all constraints
+		for (std::vector<Joint*>::iterator jit = mJoints.begin();
+				jit != mJoints.end(); jit++) {
+			(*jit)->removeFromWorld();
+		}
 
 		// Remove all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
-			lit != mLimbs.end(); lit++) {
+				lit != mLimbs.end(); lit++) {
 			(*lit)->removeFromWorld();
 		}
 		setInWorld(false);
@@ -191,7 +188,7 @@ void Phenome::removeFromWorld() {
 
 void Phenome::cleanup() {
 	for (std::vector<Component*>::iterator cit = mComponents.begin();
-		cit != mComponents.end();) {
+			cit != mComponents.end();) {
 		delete *cit;
 		cit = mComponents.erase(cit);
 	}
@@ -205,13 +202,13 @@ void Phenome::reset(const Ogre::Vector3 position) {
 
 	// reset all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();
-		jit != mJoints.end(); jit++) {
+			jit != mJoints.end(); jit++) {
 		(*jit)->reset(position);
 	}
 
 	// reset all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
-		lit++) {
+			lit++) {
 		(*lit)->reset(position);
 	}
 }
@@ -221,13 +218,13 @@ void Phenome::reposition(const Ogre::Vector3 position) {
 
 	// reset all constraints
 	for (std::vector<Joint*>::iterator jit = mJoints.begin();
-		jit != mJoints.end(); jit++) {
+			jit != mJoints.end(); jit++) {
 		(*jit)->reposition(position);
 	}
 
 	// reset all limbs
 	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
-		lit++) {
+			lit++) {
 		(*lit)->reposition(position);
 	}
 }

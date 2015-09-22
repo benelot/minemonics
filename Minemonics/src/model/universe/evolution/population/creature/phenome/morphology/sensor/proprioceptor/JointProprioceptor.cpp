@@ -14,13 +14,9 @@
 //## view headers
 //## utils headers
 
-JointProprioceptor::JointProprioceptor() :
-mJointIndex(0), mMotorIndex(JointPhysics::RDOF_PITCH) {
-}
-
-JointProprioceptor::JointProprioceptor(std::vector<int*>::size_type jointIndex,
-JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-mJointIndex(jointIndex), mMotorIndex(rotationalDOF) {
+JointProprioceptor::JointProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+		JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
+		mJointIndex(jointIndex), mMotorIndex(rotationalDOF) {
 }
 
 JointProprioceptor::~JointProprioceptor() {

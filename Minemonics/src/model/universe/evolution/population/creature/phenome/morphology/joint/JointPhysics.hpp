@@ -5,7 +5,7 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btMultiBody;
+class btVector3;
 namespace boost {
 namespace serialization {
 class access;
@@ -129,7 +129,8 @@ public:
 
 	virtual std::vector<Motor*>& getMotors() = 0;
 
-	void generateMotors(const Ogre::Vector3 maxForces);
+	virtual void generateMotors(const btVector3 maxForces,
+		const btVector3 lowerLimits, const btVector3 upperLimits) = 0;
 
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {

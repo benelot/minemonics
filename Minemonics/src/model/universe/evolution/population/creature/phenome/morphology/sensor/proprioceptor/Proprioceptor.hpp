@@ -8,16 +8,14 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <boost/serialization/assume_abstract.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/version.hpp>
-
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+
 //## view headers
 //## utils headers
 
@@ -64,7 +62,6 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Sensor); /**!< Serialize the base object */
 	}
 };
 BOOST_CLASS_VERSION(Proprioceptor, 1)
