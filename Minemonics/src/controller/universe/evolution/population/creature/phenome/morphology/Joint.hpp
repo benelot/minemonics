@@ -27,9 +27,9 @@ class Limb;
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>

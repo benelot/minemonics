@@ -27,7 +27,7 @@
 #include <utils/ogre3D/Euler.hpp>
 
 FSServoMotor::FSServoMotor() :
-	Motor(SERVO_MOTOR), mJointMotorIndex(FSJointPhysics::RDOF_PITCH), mLowerLimit(
+	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mLowerLimit(
 		0), mUpperLimit(0), mJointIndex(0), mMultiBody(NULL) {
 }
 
@@ -46,11 +46,11 @@ FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) :
 }
 
 FSServoMotor::~FSServoMotor() {
-	mJointMotorIndex = FSJointPhysics::RDOF_PITCH;
+	mJointMotorIndex = JointPhysics::RDOF_PITCH;
 }
 
 void FSServoMotor::initialize(
-	const FSJointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 	const double maxForce, double lowerLimit, double upperLimit) {
 
 	mJointMotorIndex = jointMotorIndex;

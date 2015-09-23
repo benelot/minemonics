@@ -34,7 +34,7 @@ class access;
 #include <model/universe/evolution/juries/Jury.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <model/universe/evolution/juries/AverageHeight.hpp>
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
@@ -65,6 +65,7 @@ public:
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
 	void initialize(PopulationModel* const populationModel,
+		const PhysicsController::PhysicsModelType physicsModelType,
 		const Ogre::Vector3 position, const double branchiness);
 
 	/**
@@ -122,7 +123,7 @@ public:
 	void calm();
 
 	bool hasInterpenetrations() {
-		return mPhenotypeModel.hasInterpenetrations();
+		return mPhenotypeModel->hasInterpenetrations();
 	}
 
 	/**
@@ -143,11 +144,11 @@ public:
 	}
 
 	bool isDeveloped() const {
-		return mPhenotypeModel.isDeveloped();
+		return mPhenotypeModel->isDeveloped();
 	}
 
 	void setDeveloped(const bool developed) {
-		mPhenotypeModel.setDeveloped(developed);
+		mPhenotypeModel->setDeveloped(developed);
 	}
 
 	const std::vector<Jury*>& getJuries() const {
@@ -190,11 +191,11 @@ public:
 		return mInitialPosition;
 	}
 
-	PhenomeModel& getPhenotypeModel() {
+	PhenomeModel* getPhenotypeModel() {
 		return mPhenotypeModel;
 	}
 
-	const PhenomeModel& getPhenotypeModel() const {
+	PhenomeModel* const getPhenotypeModel() const {
 		return mPhenotypeModel;
 	}
 
@@ -316,7 +317,7 @@ private:
 	/**
 	 * The phenotype (morphological individual) of the creature.
 	 */
-	PhenomeModel mPhenotypeModel;
+	PhenomeModel* mPhenotypeModel;
 
 	/**
 	 * The juries that rate the creature according to their fitness function.

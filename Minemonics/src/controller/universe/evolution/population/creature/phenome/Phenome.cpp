@@ -18,12 +18,12 @@
 #include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //## controller headers
 #include <view/picking/OgreMeshRay.hpp>

@@ -48,7 +48,7 @@ class access;
  * @date		2015-03-24
  * @author		Benjamin Ellenberger
  */
-class FSLimbBt: public FSLimbPhysics {
+class FSLimbBt: public LimbPhysics {
 public:
 	FSLimbBt();
 	FSLimbBt(const FSLimbBt& limbBt);
@@ -66,12 +66,13 @@ public:
 	 * @param mass The mass of the limb.
 	 */
 	void initialize(btDynamicsWorld* const world, void* const limbModel,
-		const FSLimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-		const btQuaternion orientation, const btVector3 initialRelativePosition,
-		const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
-		const btScalar mass, const btScalar restitution,
-		const btScalar friction, const Ogre::ColourValue color,
-		bool isIntraBodyColliding);
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation,
+		const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction,
+		const Ogre::ColourValue color, bool isIntraBodyColliding);
 
 	virtual void generateLink(btMultiBody* multiBody, void* const limbModel,
 		btVector3 origin, btQuaternion rotation, int index);
@@ -219,7 +220,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(FSLimbPhysics); /**!< Serialize the base object */
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbPhysics); /**!< Serialize the base object */
 	}
 
 private:

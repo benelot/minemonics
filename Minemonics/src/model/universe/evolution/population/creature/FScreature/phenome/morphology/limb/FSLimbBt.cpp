@@ -40,7 +40,7 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 FSLimbBt::FSLimbBt() :
-	FSLimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
+	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
 		NULL), mInertia(0, 0, 0), mLink(NULL) {
 }
 
@@ -48,13 +48,14 @@ FSLimbBt::FSLimbBt(const FSLimbBt& limbBt) {
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
 	initialize(limbBt.mWorld, limbBt.mCollisionShape->getUserPointer(),
 		limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
-		startTransform.getRotation(),
-		btVector3(limbBt.mInitialRelativeXPosition,
+		OgreBulletUtils::convert(startTransform.getRotation()),
+		Ogre::Vector3(limbBt.mInitialRelativeXPosition,
 			limbBt.mInitialRelativeYPosition, limbBt.mInitialRelativeZPosition),
-		btQuaternion(limbBt.mInitialXOrientation, limbBt.mInitialYOrientation,
-			limbBt.mInitialZOrientation, limbBt.mInitialWOrientation),
-		limbBt.mDimensions, limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,
-		limbBt.mColor, limbBt.mIntraBodyColliding);
+		Ogre::Quaternion(limbBt.mInitialXOrientation,
+			limbBt.mInitialYOrientation, limbBt.mInitialZOrientation,
+			limbBt.mInitialWOrientation), limbBt.mDimensions, limbBt.mMass,
+		limbBt.mRestitution, limbBt.mFriction, limbBt.mColor,
+		limbBt.mIntraBodyColliding);
 
 	mInWorld = limbBt.mInWorld;
 	mInertia = limbBt.mInertia;
@@ -68,10 +69,11 @@ FSLimbBt::~FSLimbBt() {
 }
 
 void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
-	const FSLimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-	const btQuaternion orientation, const btVector3 initialRelativePosition,
-	const btQuaternion initialOrientation, const Ogre::Vector3 dimensions,
-	const btScalar mass, const btScalar restitution, const btScalar friction,
+	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+	const Ogre::Quaternion orientation,
+	const Ogre::Vector3 initialRelativePosition,
+	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
+	const double mass, const double restitution, const double friction,
 	const Ogre::ColourValue color, bool isIntraBodyColliding) {
 	mWorld = world;
 	mDimensions = dimensions;
@@ -81,14 +83,14 @@ void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	btVector3 halfExtents(dimensions.x * 0.5f, dimensions.y * 0.5f,
 		dimensions.z * 0.5f);
 	switch (type) {
-	case FSLimbPhysics::BLOCK:
+	case LimbPhysics::BLOCK:
 		mCollisionShape = new btBoxShape(halfExtents);
 		break;
-	case FSLimbPhysics::CAPSULE:
+	case LimbPhysics::CAPSULE:
 		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x * 0.5f),
 			btScalar(dimensions.y));
 		break;
-	case FSLimbPhysics::UNKNOWN:
+	case LimbPhysics::UNKNOWN:
 		std::cout << "##########################################\n"
 			<< " LimbBt received 'Unknown' as a limb type.\n"
 			<< "##########################################\n";
@@ -101,7 +103,7 @@ void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	btTransform startTransform;
 	startTransform.setIdentity();
 	startTransform.setOrigin(OgreBulletUtils::convert(position));
-	startTransform.setRotation(orientation);
+	startTransform.setRotation(OgreBulletUtils::convert(orientation));
 
 	mMotionState = new btDefaultMotionState(startTransform);
 	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
@@ -133,14 +135,14 @@ void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
 	mCollisionShape->setUserPointer(limbModel);
 
-	mInitialRelativeXPosition = initialRelativePosition.getX();
-	mInitialRelativeYPosition = initialRelativePosition.getY();
-	mInitialRelativeZPosition = initialRelativePosition.getZ();
+	mInitialRelativeXPosition = initialRelativePosition.x;
+	mInitialRelativeYPosition = initialRelativePosition.y;
+	mInitialRelativeZPosition = initialRelativePosition.z;
 
-	mInitialWOrientation = initialOrientation.getW();
-	mInitialXOrientation = initialOrientation.getX();
-	mInitialYOrientation = initialOrientation.getY();
-	mInitialZOrientation = initialOrientation.getZ();
+	mInitialWOrientation = initialOrientation.w;
+	mInitialXOrientation = initialOrientation.x;
+	mInitialYOrientation = initialOrientation.y;
+	mInitialZOrientation = initialOrientation.z;
 	mColor = color;
 	mIntraBodyColliding = isIntraBodyColliding;
 }
@@ -283,7 +285,7 @@ void FSLimbBt::addToWorld() {
 				mWorld->addRigidBody(mBody);
 			}
 		}
-		FSLimbPhysics::addToWorld();
+		LimbPhysics::addToWorld();
 	}
 }
 
@@ -295,7 +297,7 @@ void FSLimbBt::removeFromWorld() {
 			mWorld->removeRigidBody(mBody);
 		}
 	}
-	FSLimbPhysics::removeFromWorld();
+	LimbPhysics::removeFromWorld();
 }
 
 FSLimbBt* FSLimbBt::clone() {
@@ -331,7 +333,7 @@ void FSLimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
 }
 
 bool FSLimbBt::equals(const FSLimbBt& limbBt) const {
-	if (!FSLimbPhysics::equals(limbBt)) {
+	if (!LimbPhysics::equals(limbBt)) {
 		return false;
 	}
 	return true;

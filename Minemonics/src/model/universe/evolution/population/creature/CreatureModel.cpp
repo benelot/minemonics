@@ -17,6 +17,8 @@
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/juries/IntegralAverageVelocity.hpp>
 #include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -24,13 +26,14 @@
 #include <utils/Randomness.hpp>
 
 CreatureModel::CreatureModel() :
-mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1),mWorld(NULL) {
+	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
+		NULL), mPhenotypeModel(NULL) {
 	mJuries.clear();
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-mGenotype(creatureModel.mGenotype), mPhenotypeModel(
-creatureModel.mPhenotypeModel) {
+	mGenotype(creatureModel.mGenotype), mPhenotypeModel(
+		creatureModel.mPhenotypeModel) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -40,23 +43,36 @@ creatureModel.mPhenotypeModel) {
 	mPosition = creatureModel.mPosition;
 	mFitnessScore = creatureModel.mFitnessScore;
 	mWorld = creatureModel.mWorld;
+	mPhenotypeModel = creatureModel.mPhenotypeModel;
 
 	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
-	jit != creatureModel.mJuries.end(); jit++) {
+		jit != creatureModel.mJuries.end(); jit++) {
 		mJuries.push_back((*jit)->clone());
 	}
 }
 
 void CreatureModel::initialize(PopulationModel* const populationModel,
-const Ogre::Vector3 position, const double branchiness) {
+	const PhysicsController::PhysicsModelType physicsModelType,
+	const Ogre::Vector3 position, const double branchiness) {
 	mPopulationModel = populationModel;
 	mInitialPosition = position;
 	mPosition = position;
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
-	mPhenotypeModel.initialize(this);
+
+	switch (physicsModelType) {
+	case PhysicsController::FeatherstoneModel:
+//		mPhenotypeModel = new FSPhenomeModel();
+		break;
+	case PhysicsController::RigidbodyModel:
+		mPhenotypeModel = new SRBPhenomeModel();
+		break;
+	default:
+		break;
+	}
+	mPhenotypeModel->initialize(this);
 }
 
 CreatureModel::~CreatureModel() {
@@ -87,7 +103,7 @@ double CreatureModel::getFitnessScore() {
 	double weight = 0;
 
 	for (std::vector<Jury*>::const_iterator jit = mJuries.begin();
-	jit != mJuries.end(); jit++) {
+		jit != mJuries.end(); jit++) {
 		fitness += (*jit)->getScore() * (*jit)->getWeight();
 		weight += (*jit)->getWeight();
 	}
@@ -109,7 +125,7 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 		return false;
 	}
 
-	if (!mPhenotypeModel.equals(creature.mPhenotypeModel)) {
+	if (!mPhenotypeModel->equals(*creature.mPhenotypeModel)) {
 		return false;
 	}
 
@@ -149,7 +165,7 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 }
 
 void CreatureModel::performEmbryogenesis() {
-	mPhenotypeModel.performEmbryogenesis(this);
+	mPhenotypeModel->performEmbryogenesis(this);
 }
 
 void CreatureModel::giveRebirth() {
@@ -163,7 +179,7 @@ CreatureModel* CreatureModel::clone() {
 
 void CreatureModel::update(double timeSinceLastTick) {
 	for (std::vector<Jury*>::iterator jit = mJuries.begin();
-	jit != mJuries.end(); jit++) {
+		jit != mJuries.end(); jit++) {
 		switch ((*jit)->getJuryType()) {
 		default: {
 			(*jit)->calculateFitness(this, timeSinceLastTick);
@@ -175,19 +191,19 @@ void CreatureModel::update(double timeSinceLastTick) {
 
 void CreatureModel::processJuries() {
 	for (std::vector<Jury*>::iterator jit = mJuries.begin();
-	jit != mJuries.end(); jit++) {
+		jit != mJuries.end(); jit++) {
 		(*jit)->evaluateFitness();
 	}
 }
 
 void CreatureModel::calm() {
-	mPhenotypeModel.calm();
+	mPhenotypeModel->calm();
 }
 
 btDynamicsWorld*& CreatureModel::getWorld() {
 	if (!mWorld) {
 		mWorld =
-		mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+			mPopulationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
 	}
 	return mWorld;
 

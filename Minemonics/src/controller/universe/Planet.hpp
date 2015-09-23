@@ -32,7 +32,7 @@
  */
 class Planet {
 public:
-	Planet(const PhysicsController::SolverType solverType,
+	Planet(const PhysicsController::PhysicsModelType physicsModelType,
 		const Environment::EnvironmentType type, const int evaluationTime,
 		Ogre::Light* light = NULL);
 	Planet(PlanetModel* const planetModel);

@@ -25,7 +25,7 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //## view headers
 //## utils headers

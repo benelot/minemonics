@@ -25,7 +25,7 @@
 //## view headers
 //## utils headers
 
-PhysicsController::PhysicsController(SolverType solverType,
+PhysicsController::PhysicsController(PhysicsModelType solverType,
 	EnvironmentType environmentType) :
 	mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
 		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
@@ -45,7 +45,7 @@ void PhysicsController::initBulletPhysics() {
 	mBroadphase = new btDbvtBroadphase();
 
 	switch (mSolverType) {
-	case PhysicsController::FeatherstoneController: {
+	case PhysicsController::FeatherstoneModel: {
 		//Use the btMultiBodyConstraintSolver for Featherstone btMultiBody support
 		mSolver = new btMultiBodyConstraintSolver;
 		//use btMultiBodyDynamicsWorld for Featherstone btMultiBody support
@@ -53,7 +53,7 @@ void PhysicsController::initBulletPhysics() {
 			(btMultiBodyConstraintSolver*) mSolver, mCollisionConfiguration);
 		break;
 	}
-	case PhysicsController::RigidbodyController: {
+	case PhysicsController::RigidbodyModel: {
 		mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);

@@ -32,13 +32,9 @@ class Population;
 class Creature {
 public:
 
-	enum PhysicsModelType {
-		FeatherStoneMultiBody, SingleRigidBody
-	};
-
 	Creature(Population* const population,
-		const PhysicsModelType physicsModelType, const Ogre::Vector3 position,
-		const double branchiness);
+		const PhysicsController::PhysicsModelType physicsModelType,
+		const Ogre::Vector3 position, const double branchiness);
 	Creature(CreatureModel* const creatureModel);
 	virtual ~Creature();
 

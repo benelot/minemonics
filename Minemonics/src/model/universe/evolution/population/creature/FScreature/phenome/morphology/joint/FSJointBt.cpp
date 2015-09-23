@@ -43,11 +43,11 @@ FSJointBt::FSJointBt(const FSJointBt& jointBt) {
 	}
 }
 
-void FSJointBt::initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
-	btRigidBody* const bodyB, const btTransform& tframeInA,
-	const btTransform& tframeInB, FSJointPhysics::JointType type,
-	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
-	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+void FSJointBt::initialize(btDynamicsWorld* const world,
+	btRigidBody* const bodyA, btRigidBody* const bodyB,
+	const btTransform& tframeInA, const btTransform& tframeInB,
+	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
+	bool jointRollEnabled, btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits) {
 	mWorld = world;
 	mType = type;
@@ -89,42 +89,36 @@ void FSJointBt::update(double timeSinceLastTick) {
 //	isStrained();
 }
 
-//void JointBt::initializeRotationalLimitMotors(btMultiBody* multiBody,
-//	const int ownIndex, const btVector3 maxForces, const btVector3 maxSpeeds,
-//	const btVector3 lowerLimits, const btVector3 upperLimits) {
-//	// add pitch servo motor
-//	ServoMotor* servoMotor = new ServoMotor();
-//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_PITCH,
-//		maxForces.getX(), maxSpeeds.getX(), lowerLimits.getX(),
-//		upperLimits.getX());
-//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
-//		servoMotor->getJointMotor());
-//	//TODO: Hack, make better
-//	servoMotor->setEnabled(true);
-//	mMotors.push_back(servoMotor);
-//
-//	// add yaw servo motor
-//	servoMotor = new ServoMotor();
-//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_YAW,
-//		maxForces.getY(), maxSpeeds.getY(), lowerLimits.getY(),
-//		upperLimits.getY());
-//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
-//		servoMotor->getJointMotor());
-//	//TODO: Hack, make better
-//	servoMotor->setEnabled(true);
-//	mMotors.push_back(servoMotor);
-//
-//	//add roll servo motor
-//	servoMotor = new ServoMotor();
-//	servoMotor->initialize(multiBody, ownIndex, JointPhysics::RDOF_ROLL,
-//		maxForces.getZ(), maxSpeeds.getZ(), lowerLimits.getZ(),
-//		upperLimits.getZ());
-//	((btMultiBodyDynamicsWorld*) mWorld)->addMultiBodyConstraint(
-//		servoMotor->getJointMotor());
-//	//TODO: Hack, make better
-//	servoMotor->setEnabled(true);
-//	mMotors.push_back(servoMotor);
-//}
+void FSJointBt::generateMotors(btMultiBody* multiBody, const int ownIndex,
+	const btVector3 maxForces, const btVector3 lowerLimits,
+	const btVector3 upperLimits) {
+//	add pitch servo motor
+	ServoMotor* servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_PITCH,
+		mJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+		lowerLimits.x(), upperLimits.x());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+
+	// add yaw servo motor
+	servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_YAW,
+		mJoint->getRotationalLimitMotor(RDOF_YAW), maxForces.getY(),
+		lowerLimits.y(), upperLimits.y());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+
+	//add roll servo motor
+	servoMotor = new ServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_ROLL,
+		mJoint->getRotationalLimitMotor(RDOF_ROLL), maxForces.getZ(),
+		lowerLimits.z(), upperLimits.z());
+	//TODO: Hack, make better
+	servoMotor->setEnabled(true);
+	mMotors.push_back(servoMotor);
+}
 
 bool FSJointBt::equals(const FSJointBt& jointBt) const {
 
@@ -185,7 +179,7 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 //}
 
 void FSJointBt::setRotationalLimitMotorEnabled(
-	const FSJointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
+	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 	for (; motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->getIndex() == index) {
@@ -201,14 +195,14 @@ void FSJointBt::setRotationalLimitMotorEnabled(
 void FSJointBt::addToWorld() {
 	if (!isInWorld()) {
 //		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
-		FSJointPhysics::addToWorld();
+		JointPhysics::addToWorld();
 	}
 }
 
 void FSJointBt::removeFromWorld() {
 	if (isInWorld()) {
 //		mWorld->removeConstraint((btTypedConstraint*) mJoint);
-		FSJointPhysics::removeFromWorld();
+		JointPhysics::removeFromWorld();
 	}
 }
 

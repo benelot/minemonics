@@ -1508,27 +1508,6 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/PopulationModel_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/PopulationModel_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/PopulationModel_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/PopulationModel_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/PopulationModel_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/PopulationModel_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
 <target name="[obj] model/universe/evolution/population/creature/CreatureModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
@@ -1550,465 +1529,150 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/CreatureModel_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/CreatureModel_test.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/CreatureModel_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/CreatureModel_test.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/CreatureModel_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/CreatureModel_test.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp.o</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp.o</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp.i</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp.i</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp.s</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[obj] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp.o</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[pre] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp.i</buildTarget>
-<stopOnError>true</stopOnError>
-<useDefaultCommand>false</useDefaultCommand>
-</target>
-<target name="[to asm] model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
-<buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-j8</buildArguments>
-<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp.s</buildTarget>
+<buildTarget>model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
@@ -2513,6 +2177,237 @@
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
 <buildTarget>model/universe/evolution/population/creature/phenome/ComponentModel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/PhenomeModel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/Controller.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/Controller.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/Controller.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp.s</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>

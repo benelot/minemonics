@@ -25,7 +25,7 @@
  */
 class GroundController: public PhysicsController {
 public:
-	GroundController(PhysicsController::SolverType solverType);
+	GroundController(PhysicsController::PhysicsModelType solverType);
 	virtual ~GroundController();
 };
 

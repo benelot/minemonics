@@ -50,7 +50,7 @@ class access;
  * @date		2015-04-29
  * @author		Benjamin Ellenberger
  */
-class FSJointModel: public FSComponentModel {
+class FSJointModel: public JointModel {
 public:
 	FSJointModel();
 	FSJointModel(const FSJointModel& jointModel);
