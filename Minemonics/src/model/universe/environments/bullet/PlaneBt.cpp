@@ -50,6 +50,11 @@ void PlaneBt::initialize() {
 	mGroundBody->setCollisionFlags(
 		mGroundBody->getCollisionFlags()
 			| btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
+
+	// max friction is clamped to [-10;10]
+	//TODO: maybe make is customizable from outside
+	// http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?t=6783
+	mGroundBody->setFriction(btScalar(10.0f));
 }
 
 void PlaneBt::update(double timeSinceLastTick) {
