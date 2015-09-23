@@ -201,7 +201,8 @@ void SRBEmbryogenesis::transcribeMorphogene(
 		//get local joint rotation point in reference frame parent
 		localParentJointInRefParent = localParentAnchorInRefParent
 			+ parentEulerJointDir
-				* localParentAnchorDirInRefParent.normalisedCopy();
+				* localParentAnchorDirInRefParent.normalisedCopy()
+				* MorphologyConfiguration::LINK_LENGTH;
 
 		//##
 		// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
@@ -216,7 +217,9 @@ void SRBEmbryogenesis::transcribeMorphogene(
 
 		//get local surface anchor point of child in reference frame parent
 		Ogre::Vector3 localChildAnchorInRefParent(
-			localParentJointInRefParent - childJointDir.normalisedCopy());
+			localParentJointInRefParent
+				- childJointDir.normalisedCopy()
+					* MorphologyConfiguration::LINK_LENGTH);
 
 		//##
 		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
