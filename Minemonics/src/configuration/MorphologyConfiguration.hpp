@@ -30,12 +30,12 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 0.1;
+	static const double LIMB_MIN_SIZE = 3;
 
 	/**
 	 * The limb maximum dimension size
 	 */
-	static const double LIMB_MAX_SIZE = 10;
+	static const double LIMB_MAX_SIZE = 20;
 
 	/**
 	 * The limb minimum density
