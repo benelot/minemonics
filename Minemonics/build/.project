@@ -801,7 +801,7 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Limb.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Joint.cpp</name>
@@ -1581,7 +1581,7 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Limb.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Joint.hpp</name>

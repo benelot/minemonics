@@ -11,7 +11,7 @@
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <controller/universe/evolution/population/creature/SRBcreature/SRBCreature.hpp>
 #include <LinearMath/btMatrix3x3.h>
 #include <LinearMath/btScalar.h>

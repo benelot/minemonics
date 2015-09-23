@@ -19,7 +19,7 @@ class SimulationManager;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## view headers
 //## utils headers

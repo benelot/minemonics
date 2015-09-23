@@ -14,8 +14,8 @@
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
-#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>

@@ -3,8 +3,8 @@
 //# system headers
 //## controller headers
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
 #include <LinearMath/btTransform.h>

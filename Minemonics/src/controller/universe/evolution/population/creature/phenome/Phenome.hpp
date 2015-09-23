@@ -26,7 +26,7 @@ class Creature;
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>

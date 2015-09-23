@@ -224,7 +224,7 @@ set(CONTROLLERHDRS
     ./controller/universe/evolution/population/creature/Creature.hpp
     ./controller/universe/evolution/population/creature/phenome/Phenome.hpp
     ./controller/universe/evolution/population/creature/phenome/Component.hpp
-    ./controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp
+    ./controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp
     ./controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp
 )
 set(CONTROLLERSRCS
@@ -267,7 +267,7 @@ set(CONTROLLERSRCS
     ./controller/universe/evolution/population/creature/Creature.cpp
     ./controller/universe/evolution/population/creature/phenome/Phenome.cpp
     ./controller/universe/evolution/population/creature/phenome/Component.cpp
-    ./controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.cpp
+    ./controller/universe/evolution/population/creature/phenome/morphology/Limb.cpp
     ./controller/universe/evolution/population/creature/phenome/morphology/Joint.cpp
 )
 set(VIEWHDRS

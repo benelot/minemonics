@@ -1,11 +1,4 @@
 //# corresponding headers
-#include <controller/universe/evolution/population/creature/SRBcreature/phenome/morphology/Limb.hpp>
-
-//# forward declarations
-
-//# system headers
-
-//## controller headers
 #include <boost/lexical_cast.hpp>
 //## model headers
 #include <BulletDynamics/Dynamics/btRigidBody.h>
@@ -24,6 +17,7 @@
 #include <configuration/PhysicsConfiguration.hpp>
 
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>

@@ -146,9 +146,10 @@ void LimbO3D::update(double timeSinceLastTick) {
 		|| std::isnan(btq.w))) {
 		// update the orientation of the limb graphics
 		mLimbEntityNode->setOrientation(btq);
+
+		mLimbEntity->setCastShadows(
+			SimulationManager::getSingleton()->getViewController().doesShowShadows());
 	}
-	mLimbEntity->setCastShadows(
-		SimulationManager::getSingleton()->getViewController().doesShowShadows());
 }
 
 void LimbO3D::addToWorld() {
@@ -232,6 +233,6 @@ Ogre::Vector3 LimbO3D::getLocalPreciseIntersection(Ogre::Vector3 origin,
 	return result;
 }
 
-LimbO3D* LimbO3D::clone() {
+LimbO3D * LimbO3D::clone() {
 	return new LimbO3D(*this);
 }
