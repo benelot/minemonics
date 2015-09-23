@@ -131,6 +131,10 @@ public:
 		mSimulationSpeed = simulationSpeed;
 	}
 
+	PhysicsModelType getPhysicsModelType() const {
+		return mPhysicsModelType;
+	}
+
 protected:
 	//variables for to bullet physics API
 	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
@@ -157,7 +161,7 @@ protected:
 	 */
 	int mSimulationSpeed;
 
-	PhysicsModelType mSolverType;
+	PhysicsModelType mPhysicsModelType;
 
 	EnvironmentType mEnvironmentType;
 };

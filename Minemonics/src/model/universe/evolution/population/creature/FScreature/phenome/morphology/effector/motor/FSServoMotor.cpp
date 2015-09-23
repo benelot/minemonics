@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 
 //# forward declarations
 //# system headers
@@ -27,12 +27,10 @@
 #include <utils/ogre3D/Euler.hpp>
 
 FSServoMotor::FSServoMotor() :
-	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mLowerLimit(
-		0), mUpperLimit(0), mJointIndex(0), mMultiBody(NULL) {
+	mJointIndex(0), mMultiBody(NULL) {
 }
 
-FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) :
-	Motor(SERVO_MOTOR) {
+FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {
 	mEnabled = servoMotor.mEnabled;
 	mIndex = servoMotor.mIndex;
 	mJointIndex = servoMotor.mJointIndex;

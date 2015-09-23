@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
 
 //# forward declarations
 //# system headers
@@ -89,31 +89,27 @@ void FSJointBt::update(double timeSinceLastTick) {
 //	isStrained();
 }
 
-void FSJointBt::generateMotors(btMultiBody* multiBody, const int ownIndex,
-	const btVector3 maxForces, const btVector3 lowerLimits,
-	const btVector3 upperLimits) {
+void FSJointBt::generateMotors(const btVector3 maxForces,
+	const btVector3 lowerLimits, const btVector3 upperLimits) {
 //	add pitch servo motor
-	ServoMotor* servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH,
-		mJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+	FSServoMotor* servoMotor = new FSServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.getX(),
 		lowerLimits.x(), upperLimits.x());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
-	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_YAW,
-		mJoint->getRotationalLimitMotor(RDOF_YAW), maxForces.getY(),
+	servoMotor = new FSServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.getY(),
 		lowerLimits.y(), upperLimits.y());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
-	servoMotor = new ServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_ROLL,
-		mJoint->getRotationalLimitMotor(RDOF_ROLL), maxForces.getZ(),
+	servoMotor = new FSServoMotor();
+	servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.getZ(),
 		lowerLimits.z(), upperLimits.z());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
@@ -122,7 +118,7 @@ void FSJointBt::generateMotors(btMultiBody* multiBody, const int ownIndex,
 
 bool FSJointBt::equals(const FSJointBt& jointBt) const {
 
-	if (FSJointPhysics::equals(jointBt)) {
+	if (JointPhysics::equals(jointBt)) {
 		return false;
 	}
 

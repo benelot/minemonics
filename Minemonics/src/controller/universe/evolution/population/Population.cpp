@@ -85,7 +85,7 @@ void Population::addNewMember(const double branchiness,
 	//add new creature
 //	Creature* creature = new Snake(this,15,OgreBulletUtils::convert(rootPosition));
 //	Creature* creature = new RagDoll(this,10,OgreBulletUtils::convert(rootPosition));
-	Creature* creature = new Creature(this, PhysicsController::RigidbodyModel,
+	Creature* creature = new Creature(this, mPlanet->getPhysicsModelType(),
 		rootPosition, branchiness);
 	addMember(creature);
 }

@@ -127,7 +127,7 @@ public:
 	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
 	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 0;
+	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 8.0f * 10e2;
 
 	/**
 	 * The joints between body segments are set to break if they experience torques beyond

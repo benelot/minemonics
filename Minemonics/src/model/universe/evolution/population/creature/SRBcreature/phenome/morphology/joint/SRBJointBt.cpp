@@ -100,10 +100,6 @@ void SRBJointBt::update(double timeSinceLastTick) {
 //			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
-	//set new motor target to joint
-//	mJoint->setMotorTarget(mMotorTarget);
-
-//	isStrained();
 }
 
 void SRBJointBt::generateMotors(const btVector3 maxForces,

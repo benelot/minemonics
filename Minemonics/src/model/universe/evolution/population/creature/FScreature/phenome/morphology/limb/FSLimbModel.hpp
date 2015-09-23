@@ -1,8 +1,8 @@
-#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_
-#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_
+#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBMODEL_HPP_
+#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBMODEL_HPP_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
@@ -54,7 +54,7 @@ class access;
  *@date 2015-04-29
  *@author Benjamin Ellenberger
  */
-class FSLimbModel: public ComponentModel {
+class FSLimbModel: public LimbModel {
 public:
 
 	FSLimbModel();
@@ -167,15 +167,6 @@ public:
 		return mLimbPhysics->getFriction();
 	}
 
-	void generateLink(btMultiBody* multiBody, btVector3 origin,
-		btQuaternion rotation, int index) {
-		mLimbPhysics->generateLink(multiBody, this, origin, rotation, index);
-	}
-
-	btMultiBodyLinkCollider* getLink() {
-		return mLimbPhysics->getLink();
-	}
-
 	std::vector<FSLimbModel*>::size_type getParentJointIndex() const {
 		return mParentJointIndex;
 	}
@@ -230,18 +221,18 @@ public:
 
 private:
 
-	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
-
-	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
-
-	std::vector<FSJointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
-
-	std::vector<std::vector<FSJointModel*>::size_type> mChildJointIndices; /**!< The child joint indices */
-
-	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
-
-	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
+//	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
+//
+//	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
+//
+//	std::vector<FSJointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
+//
+//	std::vector<std::vector<FSJointModel*>::size_type> mChildJointIndices; /**!< The child joint indices */
+//
+//	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
+//
+//	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
 
 };
 
-#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBMODEL_HPP_ */

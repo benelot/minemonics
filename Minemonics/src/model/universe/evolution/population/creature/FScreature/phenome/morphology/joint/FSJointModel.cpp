@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
 
 //# forward declarations
 //# system headers
@@ -18,14 +18,14 @@
 //## view headers
 //## utils headers
 
-FSJointModel::FSJointModel() :
-	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1) {
+FSJointModel::FSJointModel() {
 
 }
 
-FSJointModel::FSJointModel(const FSJointModel& jointModel) :
-	mParentIndex(jointModel.mParentIndex), mChildIndex(jointModel.mChildIndex), mOwnIndex(
-		jointModel.mOwnIndex) {
+FSJointModel::FSJointModel(const FSJointModel& jointModel) {
+	mParentIndex = jointModel.mParentIndex;
+	mChildIndex = jointModel.mChildIndex;
+	mOwnIndex = jointModel.mOwnIndex;
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 
@@ -40,7 +40,7 @@ void FSJointModel::initialize(btDynamicsWorld* const world,
 	const std::vector<FSLimbModel*>::size_type indexA,
 	const std::vector<FSLimbModel*>::size_type indexB,
 	const std::vector<FSLimbModel*>::size_type ownIndex,
-	FSJointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
+	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
 	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
 	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
@@ -50,8 +50,8 @@ void FSJointModel::initialize(btDynamicsWorld* const world,
 	mLocalA = localA;
 	mLocalB = localB;
 	mJointPhysics = new FSJointBt();
-	((FSJointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA, localB,
-		type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
+	((FSJointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA,
+		localB, type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointLowerLimits),
 		OgreBulletUtils::convert(jointUpperLimits));
@@ -168,7 +168,7 @@ FSJointModel* FSJointModel::clone() {
 //	return mJointPhysics->isStrained();
 //}
 
-void JointModel::generateMotors(const Ogre::Vector3 maxForces,
+void FSJointModel::generateMotors(const Ogre::Vector3 maxForces,
 	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {
 	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
 		OgreBulletUtils::convert(lowerLimits),
@@ -177,11 +177,11 @@ void JointModel::generateMotors(const Ogre::Vector3 maxForces,
 
 void FSJointModel::enableAngularMotor(const bool pitchEnable,
 	const bool yawEnable, const bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(FSJointPhysics::RDOF_PITCH,
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
 		pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(FSJointPhysics::RDOF_YAW,
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
 		yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(FSJointPhysics::RDOF_ROLL,
+	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
 		rollEnable);
 }
 

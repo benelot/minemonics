@@ -2,7 +2,7 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
@@ -62,11 +62,11 @@ public:
 
 	//Accessor methods
 
-	int getJointMotorIndex() const {
-		return mJointMotorIndex;
-	}
+//	int getJointMotorIndex() const {
+//		return mJointMotorIndex;
+//	}
 
-	// Serialization
+// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
@@ -87,22 +87,22 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Motor) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mJointIndex) /**!< The index of the joint. */
-		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
-		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
-		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ServoMotor) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mJointIndex); /**!< The index of the joint. */
+//		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
+//		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
+//		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
 	}
 
 private:
-
+//
 	int mJointIndex; /**!< The index of the joint. */
-	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
-
+//	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
+//
 	btMultiBody* mMultiBody;
-
-	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
-	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
+//
+//	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
+//	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_ */

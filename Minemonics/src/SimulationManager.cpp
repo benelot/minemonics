@@ -234,7 +234,7 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create a planet called earth
-	Planet* earth = new Planet(PhysicsController::RigidbodyModel,
+	Planet* earth = new Planet(PhysicsController::FeatherstoneModel,
 		Environment::PLANE, 20, mSun);
 
 	Epoch* oneEarthEpoch = new Epoch();

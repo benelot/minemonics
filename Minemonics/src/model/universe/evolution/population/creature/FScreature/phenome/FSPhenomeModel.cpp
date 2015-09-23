@@ -1,5 +1,5 @@
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 
 //# forward declarations
 //# system headers
@@ -35,7 +35,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
+#include <model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
@@ -49,8 +49,7 @@
 BoostLogger FSPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 FSPhenomeModel::_Init FSPhenomeModel::_initializer;
 FSPhenomeModel::FSPhenomeModel() :
-	mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
-		true), mMultiBody(NULL), mWorld(NULL) {
+	mMultiBody(NULL), mWorld(NULL) {
 	mControllers.clear();
 }
 
@@ -59,7 +58,7 @@ FSPhenomeModel::FSPhenomeModel(const FSPhenomeModel& phenomeModel) {
 	mCreatureModel = phenomeModel.mCreatureModel;
 	mDeveloped = phenomeModel.mDeveloped;
 	mHasInterpenetrations = phenomeModel.mHasInterpenetrations;
-	mMultiBody = NULL;
+	mMultiBody = phenomeModel.mMultiBody;
 	mWorld = phenomeModel.mWorld;
 	for (std::vector<Controller*>::const_iterator cit =
 		phenomeModel.mControllers.begin();
@@ -117,7 +116,7 @@ void FSPhenomeModel::update(const double timeSinceLastTick) {
 
 	// Update all limb models
 	mHasInterpenetrations = false;
-	for (std::vector<FSLimbModel*>::iterator lit = mLimbModels.begin();
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
 
 		//detect interpenetrations
@@ -139,8 +138,8 @@ void FSPhenomeModel::addToWorld() {
 		if (mMultiBody != NULL) {
 			mWorld->addMultiBody(mMultiBody);
 		}
-		setInWorld(true);
 	}
+	PhenomeModel::addToWorld();
 }
 
 void FSPhenomeModel::removeFromWorld() {
@@ -153,7 +152,7 @@ void FSPhenomeModel::removeFromWorld() {
 }
 
 void FSPhenomeModel::calm() {
-	for (std::vector<FSLimbModel*>::iterator lit = mLimbModels.begin();
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
 		(*lit)->calm();
 	}
@@ -188,7 +187,7 @@ int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
 
-			Embryogenesis::transcribeGene(generatorList, totalSegmentCounter,
+			FSEmbryogenesis::transcribeGene(generatorList, totalSegmentCounter,
 				this, generator);
 
 			// delete the generator of this gene
@@ -302,8 +301,10 @@ void FSPhenomeModel::generateBody() {
 			btQuaternion orientation(-worldtoLocal[0].x(), -worldtoLocal[0].y(),
 				-worldtoLocal[0].z(), worldtoLocal[0].w());
 
-			mLimbModels[0]->generateLink(mMultiBody, origin, orientation, -1);
-			mMultiBody->setBaseCollider(mLimbModels[0]->getLink());
+			((FSLimbBt*) mLimbModels[0]->getLimbPhysics())->generateLink(
+				mMultiBody, mLimbModels[0], origin, orientation, -1);
+			mMultiBody->setBaseCollider(
+				((FSLimbBt*) mLimbModels[0]->getLimbPhysics())->getLink());
 		}
 
 		for (int i = 0; i < mMultiBody->getNumLinks(); ++i) {
@@ -313,10 +314,11 @@ void FSPhenomeModel::generateBody() {
 			btQuaternion orientation(-worldtoLocal[i + 1].x(),
 				-worldtoLocal[i + 1].y(), -worldtoLocal[i + 1].z(),
 				worldtoLocal[i + 1].w());
-			mLimbModels[i + 1]->generateLink(mMultiBody, origin, orientation,
-				i);
+			((FSLimbBt*) mLimbModels[i + 1]->getLimbPhysics())->generateLink(
+				mMultiBody, mLimbModels[i + 1], origin, orientation, i);
 
-			mMultiBody->getLink(i).m_collider = mLimbModels[i + 1]->getLink();
+			mMultiBody->getLink(i).m_collider =
+				((FSLimbBt*) mLimbModels[i + 1]->getLimbPhysics())->getLink();
 		}
 	}
 }
@@ -338,7 +340,7 @@ void FSPhenomeModel::addJointConstraints() {
 
 void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	for (std::vector<FSLimbModel*>::const_iterator it = mLimbModels.begin();
+	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
 	}
@@ -356,7 +358,7 @@ void FSPhenomeModel::cleanup() {
 
 void FSPhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	for (std::vector<FSLimbModel*>::const_iterator it = mLimbModels.begin();
+	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reposition(position);
 
@@ -376,8 +378,8 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 	if (mLimbModels.size() != phenomeModel.mLimbModels.size()) {
 		return false;
 	}
-	std::vector<FSLimbModel*>::const_iterator it = mLimbModels.begin();
-	std::vector<FSLimbModel*>::const_iterator it2 =
+	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+	std::vector<LimbModel*>::const_iterator it2 =
 		phenomeModel.mLimbModels.begin();
 	for (; it != mLimbModels.end(), it2 != phenomeModel.mLimbModels.end();
 		it++, it2++) {
@@ -390,8 +392,8 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 	if (mJointModels.size() != phenomeModel.mJointModels.size()) {
 		return false;
 	}
-	std::vector<FSJointModel*>::const_iterator it3 = mJointModels.begin();
-	std::vector<FSJointModel*>::const_iterator it4 =
+	std::vector<JointModel*>::const_iterator it3 = mJointModels.begin();
+	std::vector<JointModel*>::const_iterator it4 =
 		phenomeModel.mJointModels.begin();
 	for (; it3 != mJointModels.end(), it4 != phenomeModel.mJointModels.end();
 		it3++, it4++) {

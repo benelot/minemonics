@@ -265,6 +265,10 @@ public:
 		return os;
 	}
 
+	PhysicsController::PhysicsModelType getPhysicsModelType() const {
+		return mPhysicsModelType;
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -343,6 +347,11 @@ private:
 	 * If the creature is new and does not have a controller element yet.
 	 */
 	bool mNew;
+
+	/**
+	 * Physics model type
+	 */
+	PhysicsController::PhysicsModelType mPhysicsModelType;
 
 	/**
 	 * The population the creature lives in.

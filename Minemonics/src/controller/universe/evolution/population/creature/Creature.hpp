@@ -113,6 +113,10 @@ public:
 		return mCreatureModel->isCulled();
 	}
 
+	PhysicsController::PhysicsModelType getPhysicsModelType() {
+		return mCreatureModel->getPhysicsModelType();
+	}
+
 	void addJury(Jury* jury) {
 		mCreatureModel->addJury(jury);
 	}

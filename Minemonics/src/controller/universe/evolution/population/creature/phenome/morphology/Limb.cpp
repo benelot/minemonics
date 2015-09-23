@@ -20,6 +20,8 @@
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 
@@ -77,7 +79,17 @@ void Limb::initialize(Creature* const creature,
 	const int ownIndex) {
 
 	//initialize the model of the limb
-	mLimbModel = new SRBLimbModel();
+	switch (creature->getPhysicsModelType()) {
+	case PhysicsController::RigidbodyModel:
+		mLimbModel = new SRBLimbModel();
+		break;
+	case PhysicsController::FeatherstoneModel:
+		mLimbModel = new FSLimbModel();
+		break;
+	default:
+		break;
+	}
+
 	mLimbModel->initialize(
 		creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 		creature->getCreatureModel(), type, position, orientation,

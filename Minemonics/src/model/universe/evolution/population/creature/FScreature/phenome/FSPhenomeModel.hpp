@@ -2,6 +2,7 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_
 
 //# corresponding headers
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <configuration/Definitions.hpp>
 
 //# forward declarations

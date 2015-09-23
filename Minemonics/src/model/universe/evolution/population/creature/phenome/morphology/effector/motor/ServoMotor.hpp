@@ -114,8 +114,10 @@ public:
 		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
 	}
 
-private:
-	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;MOTOR_TYPE* mMotorBt;
+protected:
+	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;
+
+	MOTOR_TYPE* mMotorBt;
 	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 

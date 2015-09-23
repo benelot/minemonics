@@ -66,9 +66,11 @@ public:
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	void generateMotors(btMultiBody* multiBody, const int ownIndex,
-		const btVector3 maxForces, const btVector3 lowerLimits,
+	void generateMotors(const btVector3 maxForces, const btVector3 lowerLimits,
 		const btVector3 upperLimits);
+//	void generateMotors(btMultiBody* multiBody, const int ownIndex,
+//		const btVector3 maxForces, const btVector3 lowerLimits,
+//		const btVector3 upperLimits);
 
 	/**
 	 * Reset the joint to the place when the creature was born.

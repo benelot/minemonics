@@ -149,6 +149,7 @@ void Phenome::addToPhysicsWorld() {
 }
 
 void Phenome::addToWorld() {
+	mPhenotypeModel->addToWorld();
 	if (!isInWorld()) {
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();

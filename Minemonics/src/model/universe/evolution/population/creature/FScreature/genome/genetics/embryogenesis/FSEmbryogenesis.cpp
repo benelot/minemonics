@@ -1,5 +1,5 @@
 //# corresponding headers
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
+#include <model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.hpp>
 
 //# forward declarations
 //# system headers
@@ -33,7 +33,6 @@
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/Embryogenesis.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
@@ -43,25 +42,23 @@
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-
-//## view headers
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-Embryogenesis::Embryogenesis() {
+FSEmbryogenesis::FSEmbryogenesis() {
 }
 
-Embryogenesis::~Embryogenesis() {
+FSEmbryogenesis::~FSEmbryogenesis() {
 }
 
-void Embryogenesis::transcribeGene(
+void FSEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	FSPhenomeModel* phenomeModel, BaseGenerator* generator) {
 
@@ -78,7 +75,7 @@ void Embryogenesis::transcribeGene(
 	}
 }
 
-void Embryogenesis::transcribeMorphogene(
+void FSEmbryogenesis::transcribeMorphogene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	FSPhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 
@@ -229,11 +226,11 @@ void Embryogenesis::transcribeMorphogene(
 
 		childLimbBt->initialize(phenomeModel->getCreatureModel()->getWorld(),
 			NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
-			btQuaternion(childMorphogene->getOrientationX(),
+			Ogre::Quaternion(childMorphogene->getOrientationX(),
 				childMorphogene->getOrientationY(),
 				childMorphogene->getOrientationZ(),
-				childMorphogene->getOrientationW()), btVector3(),
-			btQuaternion(),
+				childMorphogene->getOrientationW()), Ogre::Vector3(),
+			Ogre::Quaternion(),
 			/*dimensions*/
 			Ogre::Vector3(
 				generator->getCurrentShrinkageFactor()
@@ -243,15 +240,13 @@ void Embryogenesis::transcribeMorphogene(
 				generator->getCurrentShrinkageFactor()
 					* childMorphogene->getZ()),
 			/*mass*/
-			btScalar(
-				generator->getCurrentShrinkageFactor() * childMorphogene->getX()
-					* generator->getCurrentShrinkageFactor()
-					* childMorphogene->getY()
-					* generator->getCurrentShrinkageFactor()
-					* childMorphogene->getZ()),
-			btScalar(childMorphogene->getRestitution()),
-			btScalar(childMorphogene->getFriction()),
-			Ogre::ColourValue(0, 0, 0), false);
+
+			generator->getCurrentShrinkageFactor() * childMorphogene->getX()
+				* generator->getCurrentShrinkageFactor()
+				* childMorphogene->getY()
+				* generator->getCurrentShrinkageFactor()
+				* childMorphogene->getZ(), childMorphogene->getRestitution(),
+			childMorphogene->getFriction(), Ogre::ColourValue(0, 0, 0), false);
 
 		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(
@@ -497,7 +492,7 @@ void Embryogenesis::transcribeMorphogene(
 		controller->addControlOutput(joint->getMotors()[0]);
 		phenomeModel->getControllers().push_back(controller);
 
-		if (joint->getType() == FSJointPhysics::SPHERICAL_JOINT) {
+		if (joint->getType() == JointPhysics::SPHERICAL_JOINT) {
 			controller = new SineController();
 			controller->initialize(
 				parentMorphogeneBranch->getJointYawAmplitude(),

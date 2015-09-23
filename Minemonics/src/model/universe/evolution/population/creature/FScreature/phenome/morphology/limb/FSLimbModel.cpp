@@ -1,5 +1,5 @@
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 
 //# forward declarations
 //# system headers
@@ -23,8 +23,7 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-FSLimbModel::FSLimbModel() :
-	mLimbPhysics(NULL), mCreatureModel(NULL), mParentJointIndex(0) {
+FSLimbModel::FSLimbModel() {
 }
 
 FSLimbModel::FSLimbModel(const FSLimbModel& limbModel) {

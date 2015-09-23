@@ -6,6 +6,8 @@
 
 //# forward declarations
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 #include <boost/log/attributes/constant.hpp>
@@ -19,10 +21,12 @@
 #include <controller/universe/environments/Environment.hpp>
 
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/PlanetModel.hpp>
-
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The planet controller holds an evolution together with a certain environment in which it is evaluated.
@@ -98,6 +102,10 @@ public:
 
 	PlanetModel* getPlanetModel() {
 		return mPlanetModel;
+	}
+
+	PhysicsController::PhysicsModelType getPhysicsModelType() {
+		return mEnvironment->getEnvironmentModel()->getPhysicsController()->getPhysicsModelType();
 	}
 
 	int getTotalCreatureQty();

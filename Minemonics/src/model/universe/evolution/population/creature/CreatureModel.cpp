@@ -27,7 +27,8 @@
 
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
-		NULL), mPhenotypeModel(NULL) {
+		NULL), mPhenotypeModel(NULL), mPhysicsModelType(
+		PhysicsController::RigidbodyModel) {
 	mJuries.clear();
 }
 
@@ -44,6 +45,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mFitnessScore = creatureModel.mFitnessScore;
 	mWorld = creatureModel.mWorld;
 	mPhenotypeModel = creatureModel.mPhenotypeModel;
+	mPhysicsModelType = creatureModel.mPhysicsModelType;
 
 	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
@@ -61,10 +63,11 @@ void CreatureModel::initialize(PopulationModel* const populationModel,
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
 	mGenotype.createRandomGenome(branchiness);
+	mPhysicsModelType = physicsModelType;
 
 	switch (physicsModelType) {
 	case PhysicsController::FeatherstoneModel:
-//		mPhenotypeModel = new FSPhenomeModel();
+		mPhenotypeModel = new FSPhenomeModel();
 		break;
 	case PhysicsController::RigidbodyModel:
 		mPhenotypeModel = new SRBPhenomeModel();

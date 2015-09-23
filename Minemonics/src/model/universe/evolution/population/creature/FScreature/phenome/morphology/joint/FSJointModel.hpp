@@ -1,11 +1,12 @@
-#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_
-#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_
+#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_FSJOINTMODEL_HPP_
+#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_FSJOINTMODEL_HPP_
 
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
+class FSLimbModel;
 class btDynamicsWorld;
 class btRigidBody;
 class btMultiBody;
@@ -64,7 +65,7 @@ public:
 		const std::vector<FSLimbModel*>::size_type indexA,
 		const std::vector<FSLimbModel*>::size_type indexB,
 		const std::vector<FSJointModel*>::size_type ownIndex,
-		FSJointPhysics::JointType type, bool jointPitchEnabled,
+		JointPhysics::JointType type, bool jointPitchEnabled,
 		bool jointYawEnabled, bool jointRollEnabled,
 		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
 		Ogre::Vector3 jointUpperLimits);
@@ -106,11 +107,11 @@ public:
 
 	//Accessor methods
 
-	FSJointPhysics* const getJointPhysics() const {
+	JointPhysics* const getJointPhysics() const {
 		return mJointPhysics;
 	}
 
-	void setJointPhysics(FSJointPhysics* const jointPhysics) {
+	void setJointPhysics(JointPhysics* const jointPhysics) {
 		mJointPhysics = jointPhysics;
 	}
 
@@ -209,7 +210,7 @@ public:
 		return mJointPhysics->isJointRollEnabled();
 	}
 
-	const FSJointPhysics::JointType getType() const {
+	const JointPhysics::JointType getType() const {
 		return mJointPhysics->getType();
 	}
 
@@ -253,43 +254,43 @@ public:
 
 private:
 
-	/**
-	 * The indices of limbA and limbB.
-	 */
-	std::vector<FSLimbModel*>::size_type mParentIndex, mChildIndex;
-
-	btTransform mLocalA, mLocalB;
-
-	/**
-	 * The joint's own index.
-	 */
-	std::vector<FSJointModel*>::size_type mOwnIndex;
-
-	/**
-	 * The physical model representation of the joint.
-	 */
-	FSJointPhysics* mJointPhysics;
-
-	/**
-	 * All the sensors of the joint.
-	 */
-	std::vector<Sensor*> mSensors;
-
-	/**
-	 * The angleceptors of the joint.
-	 */
-	std::vector<JointAngleceptor*> mAngleceptors;
-
-	/**
-	 * The forceceptors of the joint.
-	 */
-	std::vector<JointForceceptor*> mForceceptors;
-
-	/**
-	 * The limitceptors of the joint.
-	 */
-	std::vector<JointLimitceptor*> mLimitceptors;
+//	/**
+//	 * The indices of limbA and limbB.
+//	 */
+//	std::vector<FSLimbModel*>::size_type mParentIndex, mChildIndex;
+//
+//	btTransform mLocalA, mLocalB;
+//
+//	/**
+//	 * The joint's own index.
+//	 */
+//	std::vector<FSJointModel*>::size_type mOwnIndex;
+//
+//	/**
+//	 * The physical model representation of the joint.
+//	 */
+//	JointPhysics* mJointPhysics;
+//
+//	/**
+//	 * All the sensors of the joint.
+//	 */
+//	std::vector<Sensor*> mSensors;
+//
+//	/**
+//	 * The angleceptors of the joint.
+//	 */
+//	std::vector<JointAngleceptor*> mAngleceptors;
+//
+//	/**
+//	 * The forceceptors of the joint.
+//	 */
+//	std::vector<JointForceceptor*> mForceceptors;
+//
+//	/**
+//	 * The limitceptors of the joint.
+//	 */
+//	std::vector<JointLimitceptor*> mLimitceptors;
 
 };
 
-#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_FSJOINTMODEL_HPP_ */

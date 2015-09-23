@@ -1,5 +1,5 @@
-#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_
-#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_
+#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_
+#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_
 
 //# corresponding header
 #include <configuration/Definitions.hpp>
@@ -24,15 +24,15 @@ class FSPhenomeModel;
 //## utils headers
 
 /**
- * @brief		The embryogenesis builds a phenotype according to the specification in the genotype.
+ * @brief		The FSEmbryogenesis builds a phenotype according to the specification in the genotype.
  * @details		Details
  * @date		2015-05-20
  * @author		Benjamin Ellenberger
  */
-class Embryogenesis {
+class FSEmbryogenesis {
 public:
-	Embryogenesis();
-	virtual ~Embryogenesis();
+	FSEmbryogenesis();
+	virtual ~FSEmbryogenesis();
 
 	/**
 	 * Transcribe a gene into the component it represents.
@@ -57,4 +57,4 @@ public:
 		FSPhenomeModel* phenomeModel, PhenotypeGenerator* generator);
 };
 
-#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_ */
