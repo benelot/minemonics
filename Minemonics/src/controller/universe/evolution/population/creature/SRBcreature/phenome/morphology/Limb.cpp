@@ -25,9 +25,9 @@
 
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
@@ -40,7 +40,7 @@ Limb::_Init Limb::_initializer;
 Limb::Limb() :
 	mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug) << "Limb created.";
-	mLimbModel = new LimbModel();
+	mLimbModel = new SRBLimbModel();
 }
 
 Limb::Limb(const Limb& limb) :
@@ -83,7 +83,7 @@ void Limb::initialize(Creature* const creature,
 	const int ownIndex) {
 
 	//initialize the model of the limb
-	mLimbModel = new LimbModel();
+	mLimbModel = new SRBLimbModel();
 	mLimbModel->initialize(
 		creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 		creature->getCreatureModel(), type, position, orientation,

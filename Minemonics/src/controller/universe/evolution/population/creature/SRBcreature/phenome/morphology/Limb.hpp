@@ -27,9 +27,9 @@ class Creature;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>

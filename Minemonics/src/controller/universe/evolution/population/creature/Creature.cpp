@@ -26,17 +26,17 @@ class SimulationManager;
 BoostLogger Creature::mBoostLogger; /*<! initialize the boost logger*/
 Creature::_Init Creature::_initializer;
 Creature::Creature(Population* const population,
-	const PhysicsModelType physicsModelType, const Ogre::Vector3 position,
-	const double branchiness) {
+	const PhysicsController::PhysicsModelType physicsModelType,
+	const Ogre::Vector3 position, const double branchiness) {
 	// set up the creature model
 	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(population->getPopulationModel(), position,
-		branchiness);
+	mCreatureModel->initialize(population->getPopulationModel(),
+		physicsModelType, position, branchiness);
 
 	// set up the phenotype
 	mPhenotype.initialize(this);
 
-	mPhenotype.setPhenotypeModel(&mCreatureModel->getPhenotypeModel());
+	mPhenotype.setPhenotypeModel(mCreatureModel->getPhenotypeModel());
 
 }
 
@@ -45,7 +45,7 @@ Creature::Creature(CreatureModel* const creatureModel) :
 	// set up the phenotype
 	mPhenotype.initialize(this);
 
-	mPhenotype.setPhenotypeModel(&mCreatureModel->getPhenotypeModel());
+	mPhenotype.setPhenotypeModel(mCreatureModel->getPhenotypeModel());
 }
 
 Creature::~Creature() {

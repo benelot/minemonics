@@ -37,14 +37,16 @@ class btMultiBodyConstraintSolver;
  */
 class PhysicsController {
 public:
-	enum SolverType {
-		FeatherstoneController, RigidbodyController
+	enum PhysicsModelType {
+		FeatherstoneModel, RigidbodyModel, MixedBodyModel
 	};
+
 	enum EnvironmentType {
 		GroundController, DeepSeaController
 	};
 
-	PhysicsController(SolverType solverType, EnvironmentType environmentType);
+	PhysicsController(PhysicsModelType solverType,
+		EnvironmentType environmentType);
 	~PhysicsController();
 
 	/**
@@ -155,7 +157,7 @@ protected:
 	 */
 	int mSimulationSpeed;
 
-	SolverType mSolverType;
+	PhysicsModelType mSolverType;
 
 	EnvironmentType mEnvironmentType;
 };

@@ -28,7 +28,7 @@
 
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
-Planet::Planet(const PhysicsController::SolverType solverType,
+Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 	const Environment::EnvironmentType type, const int evaluationTime,
 	Ogre::Light* light) :
 	mEnvironment(NULL) {
@@ -49,7 +49,7 @@ Planet::Planet(const PhysicsController::SolverType solverType,
 	case Environment::PLANE: {
 		//create the terrain
 		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(solverType, light);
+		((Plane*) mEnvironment)->initialize(physicsModelType, light);
 		//TODO: Improve the head light #134.
 //		((Plane*) mEnvironment)->initialize(
 //				(Ogre::Light*) SimulationManager::getSingleton()->getCameraHandler().getCamNode()->getAttachedObject(

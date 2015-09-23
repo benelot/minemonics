@@ -29,13 +29,12 @@
 BoostLogger Evolution::mBoostLogger; /*<! initialize the boost logger*/
 Evolution::_Init Evolution::_initializer;
 Evolution::Evolution() :
-		mEvaluationController(NULL), mPlanet(NULL) {
+	mEvaluationController(NULL), mPlanet(NULL) {
 	mEvolutionModel = new EvolutionModel();
 }
 
 Evolution::Evolution(EvolutionModel* const evolutionModel) :
-		mEvaluationController(NULL), mPlanet(NULL), mEvolutionModel(
-				evolutionModel) {
+	mEvaluationController(NULL), mPlanet(NULL), mEvolutionModel(evolutionModel) {
 }
 
 Evolution::~Evolution() {
@@ -44,8 +43,8 @@ Evolution::~Evolution() {
 }
 
 void Evolution::initialize(EvaluationController* const evaluationController,
-		Planet* planet, double evaluationTime,
-		EvolutionModel::EvaluationType type, int tournamentSize) {
+	Planet* planet, double evaluationTime, EvolutionModel::EvaluationType type,
+	int tournamentSize) {
 	mEvaluationController = evaluationController;
 	mPlanet = planet;
 	mEvolutionModel->initialize(type, evaluationTime, tournamentSize);
@@ -58,8 +57,7 @@ void Evolution::addPopulation(Population* const population) {
 
 bool Evolution::proceedEvaluation() {
 	if (mPopulations.size() != 0
-			&& mEvolutionModel->getCurrentPopulationIndex()
-					< mPopulations.size()) {
+		&& mEvolutionModel->getCurrentPopulationIndex() < mPopulations.size()) {
 
 		if (mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->isOutOfSync()) {
 			mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->resyncWithModel();
@@ -69,29 +67,28 @@ bool Evolution::proceedEvaluation() {
 		case EvolutionModel::INDIVIDUAL_EVALUATION: {
 
 			if (mEvolutionModel->getCurrentCreatureIndex()
-					< mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures().size()) {
+				< mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures().size()) {
 
 				Evaluation* evaluation = new Evaluation();
 				evaluation->initialize(mPlanet,
-						mEvolutionModel->getEvaluationTime());
+					mEvolutionModel->getEvaluationTime());
 
 				// create population with single creature for evaluation
 				Population* population = new Population();
 				population->initialize(mPlanet, 1);
 
 				Creature* creature =
-						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()];
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()];
 				//add juries
 				creature->clearJuries();
 				for (int i = 0;
-						i
-								< mPlanet->getPlanetModel()->getCurrentEpoch()->getJuryTypes().size();
-						i++) {
+					i
+						< mPlanet->getPlanetModel()->getCurrentEpoch()->getJuryTypes().size();
+					i++) {
 					Epoch* epoch = mPlanet->getPlanetModel()->getCurrentEpoch();
 					creature->addJury(
-							JuryFactory::buildJury(epoch->getJuryTypes()[i],
-									epoch->getSortOrders()[i],
-									epoch->getWeights()[i]));
+						JuryFactory::buildJury(epoch->getJuryTypes()[i],
+							epoch->getSortOrders()[i], epoch->getWeights()[i]));
 				}
 
 				population->addMember(creature);
@@ -107,14 +104,14 @@ bool Evolution::proceedEvaluation() {
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
 			evaluation->initialize(mPlanet,
-					mEvolutionModel->getEvaluationTime());
+				mEvolutionModel->getEvaluationTime());
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getTournamentSize(); i++) {
 				population = new Population();
 				population->initialize(mPlanet, 1);
 				population->addMember(
-						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
 				;
 
 				evaluation->addPopulation(population);
@@ -133,17 +130,17 @@ bool Evolution::proceedEvaluation() {
 		case EvolutionModel::POPULATION_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
 			evaluation->initialize(mPlanet,
-					mEvolutionModel->getEvaluationTime());
+				mEvolutionModel->getEvaluationTime());
 
 			Population* population;
 			for (int i = 0;
-					i
-							< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
-					i++) {
+				i
+					< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
+				i++) {
 				population = new Population();
 				population->initialize(mPlanet, 1);
 				population->addMember(
-						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
 
 				evaluation->addPopulation(population);
 
@@ -161,19 +158,19 @@ bool Evolution::proceedEvaluation() {
 		case EvolutionModel::N_POPULATIONS_TOURNAMENT_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
 			evaluation->initialize(mPlanet,
-					mEvolutionModel->getEvaluationTime());
+				mEvolutionModel->getEvaluationTime());
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getTournamentSize(); i++) {
 				population = new Population();
 				population->initialize(mPlanet,
-						mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size());
+					mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size());
 				for (int j = 0;
-						j
-								< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
-						j++) {
+					j
+						< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
+					j++) {
 					population->addMember(
-							mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
+						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
 
 					evaluation->addPopulation(population);
 
@@ -191,27 +188,27 @@ bool Evolution::proceedEvaluation() {
 		case EvolutionModel::POPULATIONS_EVALUATION: {
 			Evaluation* evaluation = new Evaluation();
 			evaluation->initialize(mPlanet,
-					mEvolutionModel->getEvaluationTime());
+				mEvolutionModel->getEvaluationTime());
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getPopulationModels().size();
-					i++) {
+				i++) {
 				population = new Population();
 				population->initialize(mPlanet,
-						mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size());
+					mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size());
 				for (int j = 0;
-						j
-								< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
-						j++) {
+					j
+						< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
+					j++) {
 					population->addMember(
-							mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
+						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
 					mEvolutionModel->proceedEvaluation();
 
 					evaluation->addPopulation(population);
 
 					//break if there are no more creatures
 					if (!mEvolutionModel->setCurrentCreatureIndex(
-							mEvolutionModel->getCurrentCreatureIndex() + 1)) {
+						mEvolutionModel->getCurrentCreatureIndex() + 1)) {
 						break;
 					}
 				}
@@ -238,17 +235,17 @@ bool Evolution::proceedEvaluation() {
 //		mPlanet->getPlanetModel()->getCurrentEpoch()->setCurrentFitness(
 //				highestFitness);
 
-		//update lasting generations
+//update lasting generations
 		mPlanet->getPlanetModel()->getCurrentEpoch()->setLastingGenerations(
-				mPlanet->getPlanetModel()->getCurrentEpoch()->getLastingGenerations()
-						+ 1);
+			mPlanet->getPlanetModel()->getCurrentEpoch()->getLastingGenerations()
+				+ 1);
 	}
 	return false;
 }
 
 void Evolution::update(double timeSinceLastTick) {
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
-			pit != mPopulations.end(); pit++) {
+		pit != mPopulations.end(); pit++) {
 		(*pit)->update(timeSinceLastTick);
 	}
 }
@@ -257,33 +254,37 @@ void Evolution::performEmbryogenesis() {
 
 	//for each population...
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
-			pit != mPopulations.end(); pit++) {
+		pit != mPopulations.end(); pit++) {
 
 		int creatureQty = 0;
 		//for each creature in the population
 		for (std::vector<Creature*>::iterator cit =
-				(*pit)->getCreatures().begin();
-				cit != (*pit)->getCreatures().end();) {
+			(*pit)->getCreatures().begin(); cit != (*pit)->getCreatures().end();
+			) {
 
 			//Performing embryogenesis on creature(x/all)
 			//Gene Qty: z
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Performing embryogenesis on creature("
-			<< creatureQty <<"/"<< (*pit)->getCreatures().size() << "):\nGene Qty: "
-			<< (*cit)->getCreatureModel()->getGenotype().getGenes().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< "Performing embryogenesis on creature(" << creatureQty << "/"
+				<< (*pit)->getCreatures().size() << "):\nGene Qty: "
+				<< (*cit)->getCreatureModel()->getGenotype().getGenes().size();
 
 			int limbQty = (*cit)->performEmbryogenesis();
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Components:" << (*cit)->getCreatureModel()->getPhenotypeModel().getComponentModels().size();
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< (**cit).getCreatureModel();
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature finished.\n"
-			<< "################################\n\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< "Components:"
+				<< (*cit)->getCreatureModel()->getPhenotypeModel()->getComponentModels().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< (**cit).getCreatureModel();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< "Creature finished.\n"
+				<< "################################\n\n";
 
-			if(limbQty == 0) {
+			if (limbQty == 0) {
 				Creature* creature = *cit;
 				cit = (*pit)->getCreatures().erase(cit);
 				delete creature;
-			}
-			else {
+			} else {
 				creatureQty++;
 				cit++;
 			}
@@ -295,12 +296,12 @@ int Evolution::getTotalCreatureQty() {
 	int creatureQty = 0;
 	//for each population...
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
-			pit != mPopulations.end(); pit++) {
+		pit != mPopulations.end(); pit++) {
 
 		//for each creature in the population
 		for (std::vector<Creature*>::iterator cit =
-				(*pit)->getCreatures().begin();
-				cit != (*pit)->getCreatures().end(); cit++) {
+			(*pit)->getCreatures().begin(); cit != (*pit)->getCreatures().end();
+			cit++) {
 			creatureQty++;
 		}
 	}

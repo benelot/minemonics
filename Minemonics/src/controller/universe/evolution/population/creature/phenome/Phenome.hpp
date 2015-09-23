@@ -31,7 +31,8 @@ class Creature;
 //## model headers
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers

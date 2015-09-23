@@ -15,8 +15,8 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -52,8 +52,8 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 		double totalVolume = 0;
 		int segmentQty = 0;
 		for (std::vector<LimbModel*>::iterator lit =
-			creature->getPhenotypeModel().getLimbModels().begin();
-			lit != creature->getPhenotypeModel().getLimbModels().end();
+			creature->getPhenotypeModel()->getLimbModels().begin();
+			lit != creature->getPhenotypeModel()->getLimbModels().end();
 			lit++, i++) {
 			totalMovement += (*lit)->getVolume()
 				* ((*lit)->getPosition() - mLastCoords[0]);
@@ -76,8 +76,8 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 
 	int i = 0;
 	for (std::vector<LimbModel*>::iterator lit =
-		creature->getPhenotypeModel().getLimbModels().begin();
-		lit != creature->getPhenotypeModel().getLimbModels().end();
+		creature->getPhenotypeModel()->getLimbModels().begin();
+		lit != creature->getPhenotypeModel()->getLimbModels().end();
 		lit++, i++) {
 		if (mIsFirstTime) {
 			mLastCoords.push_back((*lit)->getPosition());

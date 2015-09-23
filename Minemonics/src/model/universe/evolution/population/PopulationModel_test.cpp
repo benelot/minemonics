@@ -27,7 +27,7 @@ protected:
 		randomness = new Randomness();
 		population = new PopulationModel();
 		physicsController = new GroundController(
-			PhysicsController::FeatherstoneController);
+			PhysicsController::FeatherstoneModel);
 		physicsController->initBulletPhysics();
 		population->initialize(NULL, 0);
 		for (int i = 0; i < 30; ++i) {
@@ -60,7 +60,7 @@ protected:
 		randomness = new Randomness();
 		population = new PopulationModel();
 		physicsController = new GroundController(
-			PhysicsController::FeatherstoneController);
+			PhysicsController::FeatherstoneModel);
 		physicsController->initBulletPhysics();
 		population->initialize(NULL, 0);
 		for (int i = 0; i < 30; ++i) {

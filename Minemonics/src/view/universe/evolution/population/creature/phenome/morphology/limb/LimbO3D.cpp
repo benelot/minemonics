@@ -38,13 +38,11 @@
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp>
-
-//## view headers
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 #include <view/picking/OgreMeshRay.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 #include <view/visualization/procedural/ProceduralCapsuleGenerator.h>
@@ -135,26 +133,26 @@ LimbO3D::~LimbO3D() {
 
 void LimbO3D::update(double timeSinceLastTick) {
 	// get the rigid body of the limb
-	btRigidBody* body =
-		((LimbBt*) mLimbModel->getLimbPhysics())->getRigidBody();
+//	btRigidBody* body =
+//		((LimbBt*) mLimbModel->getLimbPhysics())->getRigidBody();
 
-	// if the limb's rigid body is existing
-	if (body) {
-		// update the position of the limb graphics
-		Ogre::Vector3 point = mLimbModel->getPosition();
-		if (!(std::isnan(point.x) || std::isnan(point.y) || std::isnan(point.z))) {
-			mLimbEntityNode->setPosition(point);
-		}
-
-		// Get the Orientation of the rigid body as a bullet Quaternion
-		// Convert it to an Ogre quaternion
-		Ogre::Quaternion btq = mLimbModel->getOrientation();
-		if (!(std::isnan(btq.x) || std::isnan(btq.y) || std::isnan(btq.z)
-			|| std::isnan(btq.w))) {
-			// update the orientation of the limb graphics
-			mLimbEntityNode->setOrientation(btq);
-		}
+// if the limb's rigid body is existing
+//	if (body) {
+	// update the position of the limb graphics
+	Ogre::Vector3 point = mLimbModel->getPosition();
+	if (!(std::isnan(point.x) || std::isnan(point.y) || std::isnan(point.z))) {
+		mLimbEntityNode->setPosition(point);
 	}
+
+	// Get the Orientation of the rigid body as a bullet Quaternion
+	// Convert it to an Ogre quaternion
+	Ogre::Quaternion btq = mLimbModel->getOrientation();
+	if (!(std::isnan(btq.x) || std::isnan(btq.y) || std::isnan(btq.z)
+		|| std::isnan(btq.w))) {
+		// update the orientation of the limb graphics
+		mLimbEntityNode->setOrientation(btq);
+	}
+//	}
 	mLimbEntity->setCastShadows(
 		SimulationManager::getSingleton()->getViewController().doesShowShadows());
 }

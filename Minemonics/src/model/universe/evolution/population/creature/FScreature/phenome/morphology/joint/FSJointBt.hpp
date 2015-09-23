@@ -27,6 +27,7 @@ class btVector3;
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 
 //## view headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
@@ -39,7 +40,7 @@ class btVector3;
  * @date		2015-03-25
  * @author		Benjamin Ellenberger
  */
-class FSJointBt: public FSJointPhysics {
+class FSJointBt: public JointPhysics {
 public:
 	FSJointBt();
 	FSJointBt(const FSJointBt& jointBt);
@@ -54,7 +55,7 @@ public:
 	 */
 	void initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB, FSJointPhysics::JointType type,
+		const btTransform& tframeInB, JointPhysics::JointType type,
 		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits);
@@ -65,9 +66,8 @@ public:
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	void generateMotors(btMultiBody* multiBody,
-		const int ownIndex, const btVector3 maxForces,
-		const btVector3 maxSpeeds, const btVector3 lowerLimits,
+	void generateMotors(btMultiBody* multiBody, const int ownIndex,
+		const btVector3 maxForces, const btVector3 lowerLimits,
 		const btVector3 upperLimits);
 
 	/**
@@ -134,23 +134,23 @@ public:
 	}
 
 	void setRotationalLimitMotorEnabled(
-		const FSJointPhysics::RotationalDegreeOfFreedom index, const bool enable);
+		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
 
 	bool isRotationalLimitMotorEnabled(
-		const FSJointPhysics::RotationalDegreeOfFreedom index) {
+		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return true;
 //		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
 	void setMaxRotationalForce(
-		const FSJointPhysics::RotationalDegreeOfFreedom index,
+		const JointPhysics::RotationalDegreeOfFreedom index,
 		const double maxMotorForce) {
 //		mJoint->setMaxMotorImpulse(maxMotorForce);
 
 	}
 
 	double getMaxRotationalForce(
-		const FSJointPhysics::RotationalDegreeOfFreedom index) {
+		const JointPhysics::RotationalDegreeOfFreedom index) {
 		return 0;
 //		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
 	}
@@ -190,7 +190,7 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<FSServoMotor*>(NULL));
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(FSJointPhysics); /**!< Serialize the base object */
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics); /**!< Serialize the base object */
 	}
 
 private:

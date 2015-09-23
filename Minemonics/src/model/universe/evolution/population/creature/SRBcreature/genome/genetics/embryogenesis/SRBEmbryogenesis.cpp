@@ -1,8 +1,4 @@
 //# corresponding headers
-#include <model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.hpp>
-
-//# forward declarations
-//# system headers
 #include <cmath>
 #include <iostream>
 #include <iterator>
@@ -33,35 +29,33 @@
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp>
-
-//## view headers
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-Embryogenesis::Embryogenesis() {
+SRBEmbryogenesis::SRBEmbryogenesis() {
 }
 
-Embryogenesis::~Embryogenesis() {
+SRBEmbryogenesis::~SRBEmbryogenesis() {
 }
 
-void Embryogenesis::transcribeGene(
+void SRBEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	PhenomeModel* phenomeModel, BaseGenerator* generator) {
 
@@ -78,7 +72,7 @@ void Embryogenesis::transcribeGene(
 	}
 }
 
-void Embryogenesis::transcribeMorphogene(
+void SRBEmbryogenesis::transcribeMorphogene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 
@@ -129,8 +123,8 @@ void Embryogenesis::transcribeMorphogene(
 			((MorphogeneBranch*) generator->getGeneBranch());
 
 		// get parent limb
-		LimbBt* parentLimb =
-			((LimbBt*) ((LimbModel*) generator->getParentComponentModel())->getLimbPhysics());
+		SRBLimbBt* parentLimb =
+			((SRBLimbBt*) ((SRBLimbModel*) generator->getParentComponentModel())->getLimbPhysics());
 
 		//get the parent limb's center of mass position
 		Ogre::Vector3 parentLimbCOM =
@@ -225,15 +219,15 @@ void Embryogenesis::transcribeMorphogene(
 		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 		//##
 		// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
-		LimbBt* childLimbBt = new LimbBt();
+		SRBLimbBt* childLimbBt = new SRBLimbBt();
 
 		childLimbBt->initialize(phenomeModel->getCreatureModel()->getWorld(),
 			NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
-			btQuaternion(childMorphogene->getOrientationX(),
+			Ogre::Quaternion(childMorphogene->getOrientationW(),
+				childMorphogene->getOrientationX(),
 				childMorphogene->getOrientationY(),
-				childMorphogene->getOrientationZ(),
-				childMorphogene->getOrientationW()), btVector3(),
-			btQuaternion(),
+				childMorphogene->getOrientationZ()), Ogre::Vector3(),
+			Ogre::Quaternion(),
 			/*dimensions*/
 			Ogre::Vector3(
 				generator->getCurrentShrinkageFactor()
@@ -243,15 +237,12 @@ void Embryogenesis::transcribeMorphogene(
 				generator->getCurrentShrinkageFactor()
 					* childMorphogene->getZ()),
 			/*mass*/
-			btScalar(
-				generator->getCurrentShrinkageFactor() * childMorphogene->getX()
-					* generator->getCurrentShrinkageFactor()
-					* childMorphogene->getY()
-					* generator->getCurrentShrinkageFactor()
-					* childMorphogene->getZ()),
-			btScalar(childMorphogene->getRestitution()),
-			btScalar(childMorphogene->getFriction()),
-			Ogre::ColourValue(0, 0, 0), false);
+			generator->getCurrentShrinkageFactor() * childMorphogene->getX()
+				* generator->getCurrentShrinkageFactor()
+				* childMorphogene->getY()
+				* generator->getCurrentShrinkageFactor()
+				* childMorphogene->getZ(), childMorphogene->getRestitution(),
+			childMorphogene->getFriction(), Ogre::ColourValue(0, 0, 0), false);
 
 		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(
@@ -349,7 +340,7 @@ void Embryogenesis::transcribeMorphogene(
 	}
 
 	//build the limb out of the morphogene
-	LimbModel* childLimb = new LimbModel();
+	SRBLimbModel* childLimb = new SRBLimbModel();
 
 	double sizeX =
 		(generator->getCurrentShrinkageFactor() * childMorphogene->getX()
@@ -437,13 +428,13 @@ void Embryogenesis::transcribeMorphogene(
 //				childMorphogene->getJointRoll());
 
 		//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
-		JointModel* joint = new JointModel();
+		SRBJointModel* joint = new SRBJointModel();
 
 		joint->initialize(phenomeModel->getCreatureModel()->getWorld(),
 		/*parent limb*/
-		((LimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
+		((SRBLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
 		/*child limb*/
-		((LimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
+		((SRBLimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
 			localParentJointTransform, localChildJointTransform,
 			parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
 			phenomeModel->getJointModels().size(),

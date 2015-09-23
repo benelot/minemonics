@@ -17,7 +17,7 @@
 //## controller headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/PlanetModel.hpp>
 
 //##view headers
@@ -34,11 +34,11 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
 	Ogre::Vector3 jointUpperLimits) {
 	// initialize the physics model of the joint
-	mJointModel = new JointModel();
+	mJointModel = new SRBJointModel();
 	mJointModel->initialize(
 		creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-		((LimbBt*) limbA->getLimbPhysics())->getRigidBody(),
-		((LimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
+		((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
+		((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
 		indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
 		jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
 
@@ -59,7 +59,7 @@ Joint::Joint(const Joint& joint) :
 }
 
 Joint::Joint(const JointModel& jointModel) {
-	mJointModel = new JointModel(jointModel);
+//	mJointModel = new JointModel(jointModel);
 	mJointGraphics = new JointO3D(mJointModel);
 }
 

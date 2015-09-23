@@ -1,5 +1,5 @@
-#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_
-#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_
+#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_
+#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_
 
 //# corresponding headers
 #include <configuration/Definitions.hpp>
@@ -7,8 +7,8 @@
 //# forward declarations
 class btMultiBody;
 class btMultiBodyDynamicsWorld;
-class CreatureModel;
 class btMultiBodyConstraint;
+class CreatureModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -30,7 +30,9 @@ class access;
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 
 //## view headers
 //## utils headers
@@ -42,20 +44,20 @@ class access;
  * @date		2015-04-29
  * @author		Benjamin Ellenberger
  */
-class FSPhenomeModel {
+class FSPhenomeModel: public PhenomeModel {
 public:
 	FSPhenomeModel();
 	FSPhenomeModel(const FSPhenomeModel& phenomeModel);
 	virtual ~FSPhenomeModel();
 
-	void initialize(CreatureModel* const creatureModel);
+	virtual void initialize(CreatureModel* const creatureModel);
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	int performEmbryogenesis(CreatureModel* const creatureModel);
+	virtual int performEmbryogenesis(CreatureModel* const creatureModel);
 
 	void generateBody();
 
@@ -64,23 +66,23 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	void reset(const Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position);
 
 	/**
 	 * Cleanup phenome model for a new embryogenesis.
 	 */
-	void cleanup();
+	virtual void cleanup();
 
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	void reposition(const Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position);
 
 	/**
 	 * Update the phenome model.
 	 * @param timeSinceLastTick
 	 */
-	void update(const double timeSinceLastTick);
+	virtual void update(const double timeSinceLastTick);
 
 	/**
 	 * Compare the phenome model to another phenome model.
@@ -94,16 +96,7 @@ public:
 	 */
 	FSPhenomeModel* clone();
 
-	void calm();
-
-	//Accessor methods
-	/**
-	 * Is the phenotype in the world?
-	 * @return
-	 */
-	bool isInWorld() const {
-		return mInWorld;
-	}
+	virtual void calm();
 
 	/**
 	 * Add the phenotype to the physical and graphical world.
@@ -115,61 +108,70 @@ public:
 	 */
 	void removeFromWorld();
 
-	/**
-	 * Set whether the phenotype is in the world or not.
-	 * @param inWorld Whether the phenotype is in the world or not.
-	 */
-	void setInWorld(const bool inWorld) {
-		this->mInWorld = inWorld;
-	}
-
-	std::vector<Controller*>& getControllers() {
-		return mControllers;
-	}
-
-	const std::vector<Controller*>& getControllers() const {
-		return mControllers;
-	}
-
-	std::vector<FSComponentModel*>& getComponentModels() {
-		return mComponentModels;
-	}
-
-	const std::vector<FSComponentModel*>& getComponentModels() const {
-		return mComponentModels;
-	}
-
-	bool isDeveloped() const {
-		return mDeveloped;
-	}
-
-	void setDeveloped(const bool developed) {
-		mDeveloped = developed;
-	}
-
-	std::vector<FSJointModel*>& getJointModels() {
-		return mJointModels;
-	}
-
-	const std::vector<FSJointModel*>& getJointModels() const {
-		return mJointModels;
-	}
-
-	std::vector<FSLimbModel*>& getLimbModels() {
-		return mLimbModels;
-	}
-
-	const std::vector<FSLimbModel*>& getLimbModels() const {
-		return mLimbModels;
-	}
-
-	FSCreatureModel* const getCreatureModel() const {
-		return mCreatureModel;
-	}
-
-	bool hasInterpenetrations() const {
-		return mHasInterpenetrations;
-	}
+	//Accessor methods
+//	/**
+//	 * Is the phenotype in the world?
+//	 * @return
+//	 */
+//	bool isInWorld() const {
+//		return mInWorld;
+//	}
+//
+//	/**
+//	 * Set whether the phenotype is in the world or not.
+//	 * @param inWorld Whether the phenotype is in the world or not.
+//	 */
+//	void setInWorld(const bool inWorld) {
+//		this->mInWorld = inWorld;
+//	}
+//
+//	std::vector<Controller*>& getControllers() {
+//		return mControllers;
+//	}
+//
+//	const std::vector<Controller*>& getControllers() const {
+//		return mControllers;
+//	}
+//
+//	std::vector<ComponentModel*>& getComponentModels() {
+//		return mComponentModels;
+//	}
+//
+//	const std::vector<ComponentModel*>& getComponentModels() const {
+//		return mComponentModels;
+//	}
+//
+//	bool isDeveloped() const {
+//		return mDeveloped;
+//	}
+//
+//	void setDeveloped(const bool developed) {
+//		mDeveloped = developed;
+//	}
+//
+//	std::vector<FSJointModel*>& getJointModels() {
+//		return mJointModels;
+//	}
+//
+//	const std::vector<FSJointModel*>& getJointModels() const {
+//		return mJointModels;
+//	}
+//
+//	std::vector<FSLimbModel*>& getLimbModels() {
+//		return mLimbModels;
+//	}
+//
+//	const std::vector<FSLimbModel*>& getLimbModels() const {
+//		return mLimbModels;
+//	}
+//
+//	FSCreatureModel* const getCreatureModel() const {
+//		return mCreatureModel;
+//	}
+//
+//	bool hasInterpenetrations() const {
+//		return mHasInterpenetrations;
+//	}
 
 	btMultiBody* getMultiBody() {
 		return mMultiBody;
@@ -196,24 +198,23 @@ public:
 		<< "/Limbs=[";
 
 		/**The vector of limb models.*/
-
-		for (std::vector<FSLimbModel*>::const_iterator it =
-			phenomeModel.mLimbModels.begin();
-			it != phenomeModel.mLimbModels.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
-		os << "]/Joints=[";
-
-		/**The vector of joint models.*/
-		for (std::vector<FSJointModel*>::const_iterator it =
-			phenomeModel.mJointModels.begin();
-			it != phenomeModel.mJointModels.end(); it++) {
-			os << (**it);
-			os << "||";
-		}
-
+//TODO
+//		for (std::vector<FSLimbModel*>::const_iterator it =
+//			phenomeModel.mLimbModels.begin();
+//			it != phenomeModel.mLimbModels.end(); it++) {
+//			os << (**it);
+//			os << "||";
+//		}
+//
+//		os << "]/Joints=[";
+//
+//		/**The vector of joint models.*/
+//		for (std::vector<FSJointModel*>::const_iterator it =
+//			phenomeModel.mJointModels.begin();
+//			it != phenomeModel.mJointModels.end(); it++) {
+//			os << (**it);
+//			os << "||";
+//		}
 		os << "]/Controllers=[";
 
 		/**The vector of controllers.*/
@@ -265,39 +266,39 @@ private:
 		}
 	} _initializer;
 
-	/**
-	 * Is the phenotype developed?
-	 */
-	bool mDeveloped;
+//	/**
+//	 * Is the phenotype developed?
+//	 */
+//	bool mDeveloped;
+//
+//	CreatureModel* mCreatureModel;
+//
+//	/**
+//	 * Whether the phenome is in the world or not.
+//	 */
+//	bool mInWorld;
 
-	FSCreatureModel* mCreatureModel;
+//	/**
+//	 * The vector of phenotype component models.
+//	 */
+//	std::vector<ComponentModel*> mComponentModels;
+//
+//	/**
+//	 * The vector of phenotype limb models.
+//	 */
+//	std::vector<FSLimbModel*> mLimbModels;
+//
+//	/**
+//	 * The vector of phenotype joint models.
+//	 */
+//	std::vector<FSJointModel*> mJointModels;
+//
+//	/**
+//	 * The vector of phenotype joint controller models.
+//	 */
+//	std::vector<Controller*> mControllers;
 
-	/**
-	 * Whether the phenome is in the world or not.
-	 */
-	bool mInWorld;
-
-	/**
-	 * The vector of phenotype component models.
-	 */
-	std::vector<FSComponentModel*> mComponentModels;
-
-	/**
-	 * The vector of phenotype limb models.
-	 */
-	std::vector<FSLimbModel*> mLimbModels;
-
-	/**
-	 * The vector of phenotype joint models.
-	 */
-	std::vector<FSJointModel*> mJointModels;
-
-	/**
-	 * The vector of phenotype joint controller models.
-	 */
-	std::vector<Controller*> mControllers;
-
-	bool mHasInterpenetrations;
+//	bool mHasInterpenetrations;
 
 	btMultiBody* mMultiBody;
 
@@ -306,4 +307,4 @@ private:
 	std::vector<btMultiBodyConstraint*> mLimitConstraints;
 };
 
-#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_ */

@@ -37,7 +37,7 @@ Plane::~Plane() {
 //	They are all deleted in environment
 }
 
-void Plane::initialize(const PhysicsController::SolverType solverType,
+void Plane::initialize(const PhysicsController::PhysicsModelType physicsModelType,
 	const Ogre::Light* const l) {
 	Environment::initialize(Environment::PLANE);
 
@@ -50,7 +50,7 @@ void Plane::initialize(const PhysicsController::SolverType solverType,
 	getPlaneView()->initialize(l);
 
 	// set up the physics controller
-	mEnvironmentModel->setPhysicsController(new GroundController(solverType));
+	mEnvironmentModel->setPhysicsController(new GroundController(physicsModelType));
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
 		&(SimulationManager::getSingleton()->getDebugDrawer()));

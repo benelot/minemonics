@@ -39,23 +39,20 @@ FSLimbModel::~FSLimbModel() {
 }
 
 void FSLimbModel::initialize(btDynamicsWorld* const world,
-	CreatureModel* const creatureModel, const FSLimbPhysics::PrimitiveType type,
+	CreatureModel* const creatureModel, const LimbPhysics::PrimitiveType type,
 	const Ogre::Vector3 position, const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
 	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
 	const double mass, const double restitution, const double friction,
 	const Ogre::ColourValue color, bool isIntraBodyColliding,
-	const std::vector<FSComponentModel*>::size_type ownIndex) {
-	FSComponentModel::initialize(FSComponentModel::LimbComponent, ownIndex);
+	const std::vector<ComponentModel*>::size_type ownIndex) {
+	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
 
 	// initialize the physics model of the limb
 	mLimbPhysics = new FSLimbBt();
-	((FSLimbBt*) mLimbPhysics)->initialize(world, this, type, position,
-		OgreBulletUtils::convert(orientation),
-		OgreBulletUtils::convert(initialRelativePosition),
-		OgreBulletUtils::convert(initialOrientation), dimensions,
-		btScalar(mass), btScalar(restitution), btScalar(friction), color,
-		isIntraBodyColliding);
+	mLimbPhysics->initialize(world, this, type, position, orientation,
+		initialRelativePosition, initialOrientation, dimensions, mass,
+		restitution, friction, color, isIntraBodyColliding);
 
 	mCreatureModel = creatureModel;
 
@@ -125,7 +122,7 @@ void FSLimbModel::update(double timeSinceLastTick) {
  * The the limb physics model of the limb.
  * @return The limb physics model of the limb.
  */
-FSLimbPhysics* FSLimbModel::getLimbPhysics() const {
+LimbPhysics* FSLimbModel::getLimbPhysics() const {
 	return mLimbPhysics;
 }
 
@@ -165,7 +162,7 @@ const Ogre::ColourValue FSLimbModel::getColor() const {
 	return mLimbPhysics->getColor();
 }
 
-const FSLimbPhysics::PrimitiveType FSLimbModel::getPrimitiveType() const {
+const LimbPhysics::PrimitiveType FSLimbModel::getPrimitiveType() const {
 	return mLimbPhysics->getType();
 }
 

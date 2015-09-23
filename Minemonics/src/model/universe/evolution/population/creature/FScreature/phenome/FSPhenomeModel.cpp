@@ -5,7 +5,6 @@
 //# system headers
 #include <list>
 #include <map>
-#include <vector>
 
 //## controller headers
 //## model headers
@@ -68,17 +67,17 @@ FSPhenomeModel::FSPhenomeModel(const FSPhenomeModel& phenomeModel) {
 		mControllers.push_back((*cit)->clone());
 	}
 
-	for (std::vector<FSComponentModel*>::const_iterator coit =
+	for (std::vector<ComponentModel*>::const_iterator coit =
 		phenomeModel.mComponentModels.begin();
 		coit != phenomeModel.mComponentModels.end(); coit++) {
-		FSComponentModel* componentModel = (*coit)->clone();
+		ComponentModel* componentModel = (*coit)->clone();
 		mComponentModels.push_back(componentModel);
 		switch (componentModel->getComponentType()) {
-		case FSComponentModel::LimbComponent:
-			mLimbModels.push_back((FSLimbModel*) componentModel);
+		case ComponentModel::LimbComponent:
+			mLimbModels.push_back((LimbModel*) componentModel);
 			break;
-		case FSComponentModel::JointComponent:
-			mJointModels.push_back((FSJointModel*) componentModel);
+		case ComponentModel::JointComponent:
+			mJointModels.push_back((JointModel*) componentModel);
 			break;
 
 		}
@@ -89,7 +88,7 @@ FSPhenomeModel::~FSPhenomeModel() {
 	mControllers.clear();
 }
 
-void FSPhenomeModel::initialize(FSCreatureModel* const creatureModel) {
+void FSPhenomeModel::initialize(CreatureModel* const creatureModel) {
 	mCreatureModel = creatureModel;
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
@@ -103,6 +102,18 @@ void FSPhenomeModel::update(const double timeSinceLastTick) {
 		cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastTick);
 	}
+
+//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
+//	for (; jit != mJointModels.end(); jit++) {
+//		(*jit)->update(timeSinceLastTick);
+//	}
+
+//	// test for strains
+	//TODO: Remove if not used
+//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
+//	for (; jit != mJointModels.end(); jit++) {
+//		(*jit)->isStrained();
+//	}
 
 	// Update all limb models
 	mHasInterpenetrations = false;
@@ -148,7 +159,7 @@ void FSPhenomeModel::calm() {
 	}
 }
 
-int FSPhenomeModel::performEmbryogenesis(FSCreatureModel* const creatureModel) {
+int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
 		cleanup();
@@ -215,7 +226,7 @@ void FSPhenomeModel::generateBody() {
 		btScalar linkLength = MorphologyConfiguration::LINK_LENGTH;
 		for (int i = 0; i < mJointModels.size(); i++) {
 			switch (mJointModels[i]->getType()) {
-			case FSJointPhysics::HINGE_JOINT:
+			case JointPhysics::HINGE_JOINT:
 				mMultiBody->setupRevolute(
 					((long) mJointModels[i]->getChildIndex()) - 1,
 					btScalar(mLimbModels[i + 1]->getMass()),
@@ -229,7 +240,7 @@ void FSPhenomeModel::generateBody() {
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
 						* linkLength, true);
 				break;
-			case FSJointPhysics::SPHERICAL_JOINT:
+			case JointPhysics::SPHERICAL_JOINT:
 				mMultiBody->setupSpherical(
 					((long) mJointModels[i]->getChildIndex()) - 1,
 					btScalar(mLimbModels[i + 1]->getMass()),
@@ -316,8 +327,8 @@ void FSPhenomeModel::addJointConstraints() {
 		// Link joint limits
 		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
 			mMultiBody, i,
-			mJointModels[i]->getLowerLimits()[FSJointPhysics::RDOF_PITCH],
-			mJointModels[i]->getUpperLimits()[FSJointPhysics::RDOF_PITCH]);
+			mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH],
+			mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]);
 //			// The default value (100) behaves like a lock on -1.6
 //			limitCons->setMaxAppliedImpulse(40);
 		mLimitConstraints.push_back(limitCons);
@@ -334,7 +345,7 @@ void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 }
 
 void FSPhenomeModel::cleanup() {
-	for (std::vector<FSComponentModel*>::iterator cit = mComponentModels.begin();
+	for (std::vector<ComponentModel*>::iterator cit = mComponentModels.begin();
 		cit != mComponentModels.end();) {
 		delete *cit;
 		cit = mComponentModels.erase(cit);

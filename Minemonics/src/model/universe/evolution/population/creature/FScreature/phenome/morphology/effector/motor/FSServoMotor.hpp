@@ -1,5 +1,5 @@
-#ifndef MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_
-#define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_
+#ifndef MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_
+#define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_
 
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
@@ -29,7 +29,7 @@ class btMultiBodyJointMotor;
  * @date		2015-03-09
  * @author		Benjamin Ellenberger
  */
-class FSServoMotor: public Motor {
+class FSServoMotor: public ServoMotor {
 public:
 	FSServoMotor();
 	FSServoMotor(const FSServoMotor& servoMotor);
@@ -42,7 +42,7 @@ public:
 	 * @param motorBt
 	 */
 	void initialize(
-		const FSJointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 		const double maxForce, double lowerLimit, double upperLimit);
 
 	void instantiate(btMultiBody* multiBody, const int jointIndex);
@@ -97,7 +97,7 @@ public:
 private:
 
 	int mJointIndex; /**!< The index of the joint. */
-	FSJointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
+	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
 
 	btMultiBody* mMultiBody;
 
@@ -105,4 +105,4 @@ private:
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 };
 
-#endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */
+#endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_ */

@@ -54,7 +54,7 @@ class access;
  *@date 2015-04-29
  *@author Benjamin Ellenberger
  */
-class FSLimbModel: public FSComponentModel {
+class FSLimbModel: public ComponentModel {
 public:
 
 	FSLimbModel();
@@ -76,7 +76,7 @@ public:
 	 * @param color The color of the limb.
 	 */
 	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
-		FSLimbPhysics::PrimitiveType type, Ogre::Vector3 position,
+		LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
 		Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
 		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
@@ -115,7 +115,7 @@ public:
 	 * The the limb physics model of the limb.
 	 * @return The limb physics model of the limb.
 	 */
-	FSLimbPhysics* getLimbPhysics() const;
+	LimbPhysics* getLimbPhysics() const;
 
 	/**
 	 * Get the position of the limb in the physical world.
@@ -135,7 +135,7 @@ public:
 
 	const Ogre::ColourValue getColor() const;
 
-	const FSLimbPhysics::PrimitiveType getPrimitiveType() const;
+	const LimbPhysics::PrimitiveType getPrimitiveType() const;
 
 	const Ogre::Vector3 getDimensions() const;
 
@@ -232,7 +232,7 @@ private:
 
 	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
 
-	FSLimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
+	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
 
 	std::vector<FSJointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
 

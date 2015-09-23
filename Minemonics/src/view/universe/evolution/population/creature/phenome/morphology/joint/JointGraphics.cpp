@@ -1,4 +1,5 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //# forward declarations
@@ -11,7 +12,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.hpp>
 
 //## view headers
 //## utils headers

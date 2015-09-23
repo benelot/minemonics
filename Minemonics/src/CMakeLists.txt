@@ -55,7 +55,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/genome/DirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.hpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.hpp
-	./model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.hpp
+	./model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp
 	./model/universe/evolution/population/creature/genome/Gene.hpp
@@ -66,17 +66,20 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp
 	
 	## phenome
-	./model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.hpp
-
-    ./model/universe/evolution/population/creature/phenome/ComponentModel.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.hpp
+	./model/universe/evolution/population/creature/phenome/PhenomeModel.hpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp
+	./model/universe/evolution/population/creature/phenome/ComponentModel.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp
+    ./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp
 	
 	## sensors
 	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.hpp
@@ -88,10 +91,10 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp
 		
 	## creature controller
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.hpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.hpp
+	./model/universe/evolution/population/creature/phenome/controller/Controller.hpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp
+	./model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp
 )
 set(MODELSRCS
     # model
@@ -133,7 +136,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/genome/DirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/IndirectGenome.cpp
 	./model/universe/evolution/population/creature/genome/MixedGenome.cpp
-    ./model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/Embryogenesis.cpp
+    ./model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.cpp
 	./model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.cpp
 	./model/universe/evolution/population/creature/genome/Gene.cpp
@@ -144,16 +147,20 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp
 	
 	## phenome
-	./model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel.cpp
+	./model/universe/evolution/population/creature/phenome/PhenomeModel.cpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp
 	./model/universe/evolution/population/creature/phenome/ComponentModel.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbPhysics.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel.cpp
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointPhysics.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/Motor.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.cpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.cpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.cpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp
+    ./model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.cpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.cpp
+	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp
 	
 	## sensors
 	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.cpp
@@ -165,10 +172,10 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp
 	
 	## creature controller
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/controller/Controller.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlInput.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/ControlOutput.cpp
-	./model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController.cpp
+    ./model/universe/evolution/population/creature/phenome/controller/Controller.cpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp
+	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp
+	./model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -501,8 +508,8 @@ set(TESTSRCS
     ./model/universe/evolution/juries/AverageHeight_test.cpp
     
     ## creatures
-    ./model/universe/evolution/population/creature/CreatureModel_test.cpp
-    ./model/universe/evolution/population/PopulationModel_test.cpp
+    #./model/universe/evolution/population/creature/CreatureModel_test.cpp
+    #./model/universe/evolution/population/PopulationModel_test.cpp
     
     # genome
     ./model/universe/evolution/population/creature/genome/MixedGenome_test.cpp
@@ -515,16 +522,16 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     
     # phenome
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp
     ## controllers
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp
     
     ## morphology
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp
-    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp
+    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp
     
     # misc
     ./utils/NameGenerator_test.cpp
