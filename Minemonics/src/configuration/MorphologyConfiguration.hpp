@@ -127,7 +127,7 @@ public:
 	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
 	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 8.0f * 10e2;
+	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
 	/**
 	 * The joints between body segments are set to break if they experience torques beyond
@@ -141,7 +141,7 @@ public:
 	/**
 	 * The length of an object between the parent joint and the child joint, 1 meaning its correct length. This is basically how much the creature is rayman.
 	 */
-	static const double LINK_LENGTH = 2;
+	static const double LINK_LENGTH = 1;
 
 	/**
 	 * The minimum stiffness of the joint

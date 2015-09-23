@@ -34,26 +34,26 @@
 //## utils headers
 
 BulletPicker::BulletPicker() :
-		mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
+	mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
 		NULL), mPickedConstraint(NULL), mPrevCanSleep(false), mMultibodyworld(
-				NULL), mWorld(NULL) {
+		NULL), mWorld(NULL) {
 }
 
 btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
-		const btVector3& rayFromWorld, const btVector3& rayToWorld) {
+	const btVector3& rayFromWorld, const btVector3& rayToWorld) {
 	mWorld = world;
 	// the ray caster currently only finds the intersection
 	// when hitting the forward face of a triangle therefore,
 	//the ray has to come from the outside of the shape
 #ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayFromWorld,
-			rayToWorld, btVector3(1, 1, 0));
+		rayToWorld, btVector3(1, 1, 0));
 #endif
 
 	btVector3 hitPosition = rayFromWorld;
 
 	btCollisionWorld::ClosestRayResultCallback rayCallback(rayFromWorld,
-			rayToWorld);
+		rayToWorld);
 
 //	btCollisionWorld::AllHitsRayResultCallback rayCallback(rayStart, rayEnd);
 //	allResults.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
@@ -61,9 +61,9 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
 	rayCallback.m_collisionFilterGroup =
-			PhysicsConfiguration::COL_CREATURE_TESTRAY;
+		PhysicsConfiguration::COL_CREATURE_TESTRAY;
 	rayCallback.m_collisionFilterMask =
-			PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
+		PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
 
 //	std::cout << "Worldhandle:" << mWorld << std::endl;
 	world->rayTest(rayFromWorld, rayToWorld, rayCallback);
@@ -71,18 +71,18 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	if (rayCallback.hasHit()) {
 		mPicking = true;
 		btVector3 p = rayFromWorld.lerp(rayToWorld,
-				rayCallback.m_closestHitFraction);
+			rayCallback.m_closestHitFraction);
 #ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(p, 1,
-				btVector3(1, 0, 0));
+			btVector3(1, 0, 0));
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(p,
-				p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
+			p + rayCallback.m_hitNormalWorld, btVector3(1, 0, 0));
 #endif
 		hitPosition = p;
 
 		btVector3 pickPos = rayCallback.m_hitPointWorld;
 		btRigidBody* body = (btRigidBody*) btRigidBody::upcast(
-				rayCallback.m_collisionObject);
+			rayCallback.m_collisionObject);
 		if (body) {
 			//other exclusions?
 			if (!(body->isStaticObject() || body->isKinematicObject())) {
@@ -90,9 +90,9 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				mPickedBody->setActivationState(DISABLE_DEACTIVATION);
 				//printf("pickPos=%f,%f,%f\n",pickPos.getX(),pickPos.getY(),pickPos.getZ());
 				btVector3 localPivot =
-						body->getCenterOfMassTransform().inverse() * pickPos;
+					body->getCenterOfMassTransform().inverse() * pickPos;
 				btPoint2PointConstraint* p2p = new btPoint2PointConstraint(
-						*body, localPivot);
+					*body, localPivot);
 				world->addConstraint(p2p, true);
 
 				if (mPickedConstraint) {
@@ -109,19 +109,19 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 			}
 		} else {
 			btMultiBodyLinkCollider* multiCol =
-					(btMultiBodyLinkCollider*) btMultiBodyLinkCollider::upcast(
-							rayCallback.m_collisionObject);
+				(btMultiBodyLinkCollider*) btMultiBodyLinkCollider::upcast(
+					rayCallback.m_collisionObject);
 			if (multiCol && multiCol->m_multiBody) {
 
 				mPrevCanSleep = multiCol->m_multiBody->getCanSleep();
 				multiCol->m_multiBody->setCanSleep(false);
 
 				btVector3 pivotInA = multiCol->m_multiBody->worldPosToLocal(
-						multiCol->m_link, pickPos);
+					multiCol->m_link, pickPos);
 
 				btMultiBodyPoint2Point* p2p = new btMultiBodyPoint2Point(
-						multiCol->m_multiBody, multiCol->m_link, 0, pivotInA,
-						pickPos);
+					multiCol->m_multiBody, multiCol->m_link, 0, pivotInA,
+					pickPos);
 				//if you add too much energy to the system, causing high angular velocities, simulation 'explodes'
 				//see also http://www.bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=4&t=949
 				//so we try to avoid it by clamping the maximum impulse (force) that the mouse pick can apply
@@ -130,12 +130,12 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				p2p->setMaxAppliedImpulse(scaling);
 
 				btMultiBodyDynamicsWorld* multibodyworld =
-						(btMultiBodyDynamicsWorld*) world;
+					(btMultiBodyDynamicsWorld*) world;
 				multibodyworld->addMultiBodyConstraint(p2p);
 
 				if (mPickingMultiBodyPoint2Point) {
 					multibodyworld->removeMultiBodyConstraint(
-							mPickingMultiBodyPoint2Point);
+						mPickingMultiBodyPoint2Point);
 					delete mPickingMultiBodyPoint2Point;
 					mPickingMultiBodyPoint2Point = NULL;
 				}
@@ -150,7 +150,7 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	} else {
 #ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-				rayFromWorld, 1, btVector3(1, 0, 0));
+			rayFromWorld, 1, btVector3(1, 0, 0));
 #endif
 		//no hit
 	}
@@ -158,10 +158,11 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 }
 
 bool BulletPicker::movePickedBody(const btVector3& rayFromWorld,
-		const btVector3& rayToWorld) {
+	const btVector3& rayToWorld) {
+
 	if (mPickedBody && mPickedConstraint) {
 		btPoint2PointConstraint* pickCon =
-				static_cast<btPoint2PointConstraint*>(mPickedConstraint);
+			static_cast<btPoint2PointConstraint*>(mPickedConstraint);
 		if (pickCon) {
 			//keep it at the same picking distance
 
@@ -200,7 +201,7 @@ void BulletPicker::setPicking(bool picking) {
 		}
 		if (mPickingMultiBodyPoint2Point) {
 			mMultibodyworld->removeMultiBodyConstraint(
-					mPickingMultiBodyPoint2Point);
+				mPickingMultiBodyPoint2Point);
 			delete mPickingMultiBodyPoint2Point;
 			mPickingMultiBodyPoint2Point = NULL;
 			mMultibodyworld = NULL;

@@ -208,7 +208,6 @@ void FSPhenomeModel::generateBody() {
 	bool isMultiDof = true;
 	bool setDamping = true;
 	bool gyro = true;
-	bool multibodyOnly = false;
 	bool canSleep = true;
 
 	if (mJointModels.size() != 0) {
@@ -331,8 +330,8 @@ void FSPhenomeModel::addJointConstraints() {
 			mMultiBody, i,
 			mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH],
 			mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]);
-//			// The default value (100) behaves like a lock on -1.6
-//			limitCons->setMaxAppliedImpulse(40);
+		// The default value (100) behaves like a lock on -1.6
+//		limitCons->setMaxAppliedImpulse(40);
 		mLimitConstraints.push_back(limitCons);
 	}
 

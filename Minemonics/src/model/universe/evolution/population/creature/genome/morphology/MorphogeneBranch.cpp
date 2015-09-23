@@ -144,17 +144,17 @@ void MorphogeneBranch::initialize() {
 	 * The joint limits in each direction (pitch=1=Y,yaw=2=Z, roll=0=X)
 	 */
 	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() / 2.0f);
+		boost::math::constants::pi<double>() * 2.0f);
 	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() / 2.0f);
+		boost::math::constants::pi<double>() * 2.0f);
 	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() / 2.0f);
+		boost::math::constants::pi<double>() * 2.0f);
 	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() / 2.0f);
+		boost::math::constants::pi<double>() * 2.0f);
 	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() / 2.0f);
+		boost::math::constants::pi<double>() * 2.0f);
 	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() / 2.0f);
+		boost::math::constants::pi<double>() * 2.0f);
 
 	/**
 	 * Set whether the branch should be mirrored or flipped to the other side.
@@ -200,19 +200,6 @@ void MorphogeneBranch::initialize() {
 	mJointYawMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
 	mJointRollMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
 
-	/**
-	 * The maximum joint force
-	 */
-	//TODO: Remove if not necessary anymore.
-//	mJointMaxPitchForce = Randomness::getSingleton()->nextUnifDouble(
-//		MorphologyConfiguration::JOINT_MIN_FORCE,
-//		MorphologyConfiguration::JOINT_MAX_FORCE);
-//	mJointMaxYawForce = Randomness::getSingleton()->nextUnifDouble(
-//		MorphologyConfiguration::JOINT_MIN_FORCE,
-//		MorphologyConfiguration::JOINT_MAX_FORCE);
-//	mJointMaxRollForce = Randomness::getSingleton()->nextUnifDouble(
-//		MorphologyConfiguration::JOINT_MIN_FORCE,
-//		MorphologyConfiguration::JOINT_MAX_FORCE);
 	/**
 	 * The maximum joint speed
 	 */

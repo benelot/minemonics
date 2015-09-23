@@ -5,13 +5,14 @@
 #include <model/universe/evolution/population/PopulationModel.hpp>
 
 //# forward declarations
-class SimulationManager;
-class Creature;
 class Planet;
 
 //# system headers
+#include <vector>
+
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 
@@ -20,6 +21,8 @@ class Planet;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -43,7 +46,7 @@ public:
 	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
 	void initialize(Planet* const planet, const int creatureQty,
-			const Ogre::Vector3 initialPosition);
+		const Ogre::Vector3 initialPosition);
 
 	/**
 	 * Initializes the population without adding creatures up to the creatureQty.
@@ -57,7 +60,7 @@ public:
 	 * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
 	 */
 	void addNewMember(const double branchiness,
-			const Ogre::Vector3 rootPosition = Ogre::Vector3::ZERO);
+		const Ogre::Vector3 rootPosition = Ogre::Vector3::ZERO);
 
 	/**
 	 * Adds a creature to the population.
@@ -141,8 +144,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Population"));
+				boost::log::attributes::constant < std::string
+					> ("Population"));
 		}
 	} _initializer;
 

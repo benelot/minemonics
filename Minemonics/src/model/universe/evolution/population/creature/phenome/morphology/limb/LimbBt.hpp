@@ -73,11 +73,6 @@ public:
 		bool isIntraBodyColliding);
 
 	/**
-	 * Clone the bullet physics limb.
-	 */
-	virtual LimbBt* clone();
-
-	/**
 	 * Reset the joint to the place when the creature was born.
 	 */
 	virtual void reset(const Ogre::Vector3 position);

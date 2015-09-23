@@ -273,10 +273,6 @@ void LimbBt::removeFromWorld() {
 	}
 }
 
-LimbBt* LimbBt::clone() {
-	return new LimbBt(*this);
-}
-
 void LimbBt::calm() {
 	mBody->clearForces();
 	btVector3 zeroVector(0, 0, 0);

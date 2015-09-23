@@ -13,6 +13,9 @@
 #include <BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h>
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <LinearMath/btMotionState.h>
+#include <BulletDynamics/MLCPSolvers/btDantzigSolver.h>
+#include <BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h>
+#include <BulletDynamics/MLCPSolvers/btMLCPSolver.h>
 
 //## view headers
 //# custom headers
@@ -54,9 +57,24 @@ void PhysicsController::initBulletPhysics() {
 		break;
 	}
 	case PhysicsController::RigidbodyModel: {
-		mSolver = new btSequentialImpulseConstraintSolver; //the default constraint solver
+		bool useMCLPSolver = true;
+		if (useMCLPSolver) {
+			btDantzigSolver* mlcp = new btDantzigSolver();
+//			btSolveProjectedGaussSeidel* mlcp = new btSolveProjectedGaussSeidel();
+			btMLCPSolver* sol = new btMLCPSolver(mlcp);
+			mSolver = sol;
+		} else {
+			mSolver = new btSequentialImpulseConstraintSolver();
+		}
+
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);
+
+		if (useMCLPSolver) {
+			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
+		} else {
+			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
+		}
 		break;
 	}
 	default:

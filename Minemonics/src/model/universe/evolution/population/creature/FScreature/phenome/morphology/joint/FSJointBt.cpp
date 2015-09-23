@@ -85,8 +85,6 @@ void FSJointBt::update(double timeSinceLastTick) {
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
-
-//	isStrained();
 }
 
 void FSJointBt::generateMotors(const btVector3 maxForces,
@@ -145,35 +143,6 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
 
-//bool JointBt::isStrained() {
-//TODO: Broken
-//	btVector3 fbA = mJoint->getJointFeedback()->m_appliedForceBodyA;
-//	btVector3 fbB = mJoint->getJointFeedback()->m_appliedForceBodyB;
-//	btVector3 tbA = mJoint->getJointFeedback()->m_appliedTorqueBodyA;
-//	btVector3 tbB = mJoint->getJointFeedback()->m_appliedTorqueBodyB;
-//	if (abs(fbA.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbA.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbA.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbB.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbB.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbB.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD) {
-//		std::cout << "----------------------" << std::endl;
-//		std::cout << "Applied impulse: " << mJoint->getAppliedImpulse()
-//				<< std::endl;
-//
-//		std::cout << "Joint feedback force A: (" << fbA.getX() << ","
-//				<< fbA.getY() << "," << fbA.getZ() << ")" << std::endl;
-//		std::cout << "Joint feedback force B: (" << fbB.getX() << ","
-//				<< fbB.getY() << "," << fbB.getZ() << ")" << std::endl;
-//		std::cout << "Joint feedback torque A: (" << tbA.getX() << ","
-//				<< tbA.getY() << "," << tbA.getZ() << ")" << std::endl;
-//		std::cout << "Joint feedback torque B: (" << tbB.getX() << ","
-//				<< tbB.getY() << "," << tbB.getZ() << ")" << std::endl;
-//		std::cout << "----------------------" << std::endl;
-//	}
-//	return false;
-//}
-
 void FSJointBt::setRotationalLimitMotorEnabled(
 	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
@@ -183,21 +152,16 @@ void FSJointBt::setRotationalLimitMotorEnabled(
 			break;
 		}
 	}
-
-//	mJoint->enableMotor(true);
-
 }
 
 void FSJointBt::addToWorld() {
 	if (!isInWorld()) {
-//		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
 		JointPhysics::addToWorld();
 	}
 }
 
 void FSJointBt::removeFromWorld() {
 	if (isInWorld()) {
-//		mWorld->removeConstraint((btTypedConstraint*) mJoint);
 		JointPhysics::removeFromWorld();
 	}
 }
