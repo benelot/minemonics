@@ -20,6 +20,9 @@
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/CreatureFitnessComparator.hpp>
 #include <model/universe/evolution/CreatureFitnessScoreComparator.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
@@ -81,8 +84,8 @@ void Reaper::reap(PopulationModel* const population) {
 			cit != population->getCreatureModels().end(); cit++, j--) {
 			(*cit)->getJuries()[i]->setScore(j);
 		}
-
 	}
+
 	// sort by the fitness score
 	CreatureFitnessScoreComparator scoreComparator;
 	std::sort(population->getCreatureModels().begin(),
@@ -347,7 +350,8 @@ void Reaper::sowFreshly(PopulationModel* const population,
 			MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
 		CreatureModel* offspring = new CreatureModel();
 		offspring->setNew(true);
-		offspring->initialize(population, PhysicsController::RigidbodyModel,
+		offspring->initialize(population,
+			population->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getPhysicsModelType(),
 			EvolutionConfiguration::ROOT_POSITION, branchiness);
 		population->getCreatureModels().push_back(offspring);
 	}

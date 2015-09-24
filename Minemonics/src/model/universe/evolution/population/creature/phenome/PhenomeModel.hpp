@@ -84,6 +84,8 @@ public:
 
 	virtual void addToWorld();
 
+	virtual void removeFromWorld();
+
 	//Accessor methods
 	/**
 	 * Is the phenotype in the world?

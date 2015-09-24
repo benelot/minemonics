@@ -154,10 +154,7 @@ void Evaluation::update(const double timeSinceLastTick) {
 		> PhysicsConfiguration::DISCARDING_STARTS) {
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 			pit != mPopulations.end(); pit++) {
-//			if (mOnce) {
-//				//TODO: Enable to calm forces from numerical resolving.
-//				(*pit)->calm();
-//			}
+
 			if ((*pit)->hasInterpenetrations()) {
 				//TODO: Review this decision again in the case of a whole population
 				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
@@ -167,7 +164,6 @@ void Evaluation::update(const double timeSinceLastTick) {
 				break;
 			}
 		}
-//		mOnce = false;
 	}
 
 	//update the time passed

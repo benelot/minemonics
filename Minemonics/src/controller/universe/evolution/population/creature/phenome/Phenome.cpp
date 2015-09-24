@@ -167,6 +167,7 @@ void Phenome::addToWorld() {
 }
 
 void Phenome::removeFromWorld() {
+	mPhenotypeModel->removeFromWorld();
 	if (isInWorld()) {
 		// Remove all constraints
 		for (std::vector<Joint*>::iterator jit = mJoints.begin();

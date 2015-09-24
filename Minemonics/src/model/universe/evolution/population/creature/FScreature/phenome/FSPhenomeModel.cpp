@@ -103,18 +103,6 @@ void FSPhenomeModel::update(const double timeSinceLastTick) {
 		(*cit)->perform(timeSinceLastTick);
 	}
 
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->update(timeSinceLastTick);
-//	}
-
-//	// test for strains
-	//TODO: Remove if not used
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->isStrained();
-//	}
-
 	// Update all limb models
 	mHasInterpenetrations = false;
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
@@ -122,10 +110,6 @@ void FSPhenomeModel::update(const double timeSinceLastTick) {
 
 		//detect interpenetrations
 		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
-
-//			std::cout << "Limb interpenetration depth: "
-//					<< (*lit)->getInterpenetrationDepth()
-//					<< std::endl;
 			mHasInterpenetrations = true;
 			break;
 		}
@@ -148,8 +132,8 @@ void FSPhenomeModel::removeFromWorld() {
 		if (mMultiBody != NULL) {
 			mWorld->removeMultiBody(mMultiBody);
 		}
-		setInWorld(false);
 	}
+	PhenomeModel::removeFromWorld();
 }
 
 void FSPhenomeModel::calm() {
@@ -356,6 +340,8 @@ void FSPhenomeModel::cleanup() {
 	}
 	mLimbModels.clear();
 	mJointModels.clear();
+	delete mMultiBody;
+	mMultiBody = NULL;
 }
 
 void FSPhenomeModel::reposition(const Ogre::Vector3 position) {

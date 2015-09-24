@@ -91,7 +91,7 @@ public:
 	 * @details Details
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	int performEmbryogenesis(CreatureModel* const creatureModel);
+	virtual int performEmbryogenesis(CreatureModel* const creatureModel);
 
 	/**
 	 * Reset the creature to the way it was born.

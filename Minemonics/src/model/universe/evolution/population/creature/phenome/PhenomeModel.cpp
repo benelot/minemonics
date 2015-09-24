@@ -208,3 +208,6 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 
 void PhenomeModel::addToWorld() {
 }
+
+void PhenomeModel::removeFromWorld() {
+}

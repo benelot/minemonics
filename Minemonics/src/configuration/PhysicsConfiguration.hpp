@@ -165,8 +165,6 @@ public:
 
 	static const double DISCARDING_STARTS = 1.0f;
 
-	static const bool SELF_COLLISION = true;
-
 	static const double BULLET_PICKER_FORCE = 100000;
 };
 
