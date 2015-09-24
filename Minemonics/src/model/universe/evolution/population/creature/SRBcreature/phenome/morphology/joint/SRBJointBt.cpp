@@ -1,4 +1,6 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
+#include <configuration/Definitions.hpp>
 #include <iostream>
 #include <vector>
 
@@ -21,7 +23,6 @@
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 
 //## view headers
 //## utils headers

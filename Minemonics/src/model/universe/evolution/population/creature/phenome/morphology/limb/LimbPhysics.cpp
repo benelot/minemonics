@@ -1,4 +1,5 @@
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations

@@ -1,7 +1,8 @@
 //# corresponding header
-#include <LinearMath/btTransform.h>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
+#include <configuration/Definitions.hpp>
+#include <LinearMath/btTransform.h>
 //## view headers
 //# custom headers
 //## base headers

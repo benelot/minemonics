@@ -1,4 +1,5 @@
 //# corresponding headers
+#include <configuration/Definitions.hpp>
 #include <boost/lexical_cast.hpp>
 //## model headers
 #include <BulletDynamics/Dynamics/btRigidBody.h>

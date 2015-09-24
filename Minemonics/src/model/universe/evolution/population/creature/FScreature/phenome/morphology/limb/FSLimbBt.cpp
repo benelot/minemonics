@@ -1,5 +1,6 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 //# system headers

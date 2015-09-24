@@ -48,8 +48,14 @@ void EnvironmentBt::createTerrainData(Ogre::SceneNode* const sceneNode,
 
 	btVector3 localScaling(scale, heightScale, scale);
 
+#ifdef BT_USE_DOUBLE_PRECISION
+	mGroundShape = new btHeightfieldTerrainShape(btScalar(w), btScalar(h), data,
+		1/*ignore*/, btScalar(minH), btScalar(maxH), 1, PHY_DOUBLE, true);
+#else
 	mGroundShape = new btHeightfieldTerrainShape(btScalar(w), btScalar(h), data,
 		1/*ignore*/, btScalar(minH), btScalar(maxH), 1, PHY_FLOAT, true);
+#endif
+
 	((btHeightfieldTerrainShape*) mGroundShape)->setUseDiamondSubdivision(true);
 	mGroundShape->setLocalScaling(localScaling);
 

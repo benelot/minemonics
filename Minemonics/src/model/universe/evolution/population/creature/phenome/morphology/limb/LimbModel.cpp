@@ -1,4 +1,5 @@
 //# corresponding headers
+#include <configuration/Definitions.hpp>
 #include <LinearMath/btScalar.h>
 #include <OgreVector3.h>
 

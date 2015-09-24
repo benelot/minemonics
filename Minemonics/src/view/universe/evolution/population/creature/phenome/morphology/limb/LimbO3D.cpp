@@ -7,9 +7,6 @@
 
 //## controller headers
 //## model headers
-#include <BulletDynamics/Dynamics/btRigidBody.h>
-#include <LinearMath/btQuadWord.h>
-#include <LinearMath/btVector3.h>
 #include <boost/lexical_cast.hpp>
 
 //## view headers

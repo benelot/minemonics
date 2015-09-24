@@ -1,5 +1,6 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 //# system headers

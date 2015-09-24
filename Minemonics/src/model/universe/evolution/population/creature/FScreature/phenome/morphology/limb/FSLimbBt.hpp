@@ -17,17 +17,19 @@ class access;
 
 //# system headers
 #include <cmath>
+#include <iostream>
 
 //## controller headers
 //## model headers
+#include <OgreQuaternion.h>
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <boost/serialization/base_object.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <LinearMath/btQuaternion.h>
-#include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
 

@@ -1,5 +1,6 @@
 //# corresponding headers
 #include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
+#include <configuration/Definitions.hpp>
 
 //# forward declarations
 //# system headers
@@ -328,8 +329,10 @@ void FSPhenomeModel::addJointConstraints() {
 		// Link joint limits
 		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
 			mMultiBody, i,
-			mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH],
-			mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]);
+			btScalar(
+				mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH]),
+			btScalar(
+				mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]));
 		// The default value (100) behaves like a lock on -1.6
 //		limitCons->setMaxAppliedImpulse(40);
 		mLimitConstraints.push_back(limitCons);
