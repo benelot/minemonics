@@ -30,7 +30,7 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 6;
+	static const double LIMB_MIN_SIZE = 5;
 
 	/**
 	 * The limb maximum dimension size
