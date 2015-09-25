@@ -1,5 +1,9 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <configuration/Definitions.hpp>
+
+//# forward declarations
+//# system headers
 #include <stddef.h>
 #include <iostream>
 
@@ -24,7 +28,6 @@
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 
 //## controller headers
@@ -83,7 +86,7 @@ void SRBLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 		break;
 	case LimbPhysics::UNKNOWN:
 		std::cout << "##########################################\n"
-			<< " SRBLimbBt received 'Unknown' as a limb type.\n"
+			<< " LimbBt received 'Unknown' as a limb type.\n"
 			<< "##########################################\n";
 		exit(-1);
 	}

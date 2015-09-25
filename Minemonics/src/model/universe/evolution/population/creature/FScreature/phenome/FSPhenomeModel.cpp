@@ -180,7 +180,7 @@ int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		}
 
 		generateBody();
-		//TODO: the joint limit constraint does not yet support the limiting of the spherical joint
+
 		addJointConstraints();
 
 		mDeveloped = true;
@@ -198,7 +198,18 @@ void FSPhenomeModel::generateBody() {
 	if (mJointModels.size() != 0) {
 		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
 
-		mMultiBody = new btMultiBody(mJointModels.size(),
+		int linkQty = 0;
+		for (int i = 0; i < mJointModels.size(); i++) {
+			switch (mJointModels[i]->getType()) {
+			case JointPhysics::HINGE_JOINT:
+				linkQty++;
+				break;
+			case JointPhysics::SPHERICAL_JOINT:
+				linkQty += 3;
+				break;
+			}
+		}
+		mMultiBody = new btMultiBody(linkQty,
 			btScalar(mLimbModels[0]->getMass()), mLimbModels[0]->getInertia(),
 			isFixedBase, canSleep, isMultiDof);
 
@@ -206,7 +217,10 @@ void FSPhenomeModel::generateBody() {
 			OgreBulletUtils::convert(mLimbModels[0]->getPosition()));
 		mMultiBody->setWorldToBaseRot(
 			OgreBulletUtils::convert(mLimbModels[0]->getOrientation()));
+
 		btScalar linkLength = MorphologyConfiguration::LINK_LENGTH;
+
+		linkQty = 0;
 		for (int i = 0; i < mJointModels.size(); i++) {
 			switch (mJointModels[i]->getType()) {
 			case JointPhysics::HINGE_JOINT:

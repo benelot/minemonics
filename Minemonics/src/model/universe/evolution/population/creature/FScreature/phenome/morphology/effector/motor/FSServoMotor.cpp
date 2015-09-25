@@ -76,14 +76,18 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 
 	//calculate the angle error
 	btScalar angleError = targetAngle - mMultiBody->getJointPos(mJointIndex);
+	btScalar velocityError = 0 - mMultiBody->getJointVel(mJointIndex);
 
-	float kP = 10000000;
+	float kP = 100000000;
+	float kD = 200;
 	//simple p(roportional) controller
 	//calculate the target force and clamp it with the maximum force
+	double correction = kP * angleError + kD * velocityError;
 	mMultiBody->addJointTorque(mJointIndex,
 		btScalar(
-			(kP * angleError > mMaxForce) ? mMaxForce :
-			(kP * angleError < -mMaxForce) ? -mMaxForce : kP * angleError));
+			(correction > mMaxForce) ? mMaxForce :
+			(correction < -mMaxForce) ? -mMaxForce : correction));
+	std::cout << mMaxForce << "," << std::setw(10) << correction << std::endl;
 }
 
 FSServoMotor* FSServoMotor::clone() {

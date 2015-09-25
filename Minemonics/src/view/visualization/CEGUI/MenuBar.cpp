@@ -756,7 +756,7 @@ MenuBar::MenuBar() {
 }
 
 MenuBar::~MenuBar() {
-	delete mMenuBar;
-	mMenuBar = NULL;
+//	delete mMenuBar;
+//	mMenuBar = NULL;
 }
 

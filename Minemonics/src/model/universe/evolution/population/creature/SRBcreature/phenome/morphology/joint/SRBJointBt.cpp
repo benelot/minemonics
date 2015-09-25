@@ -98,7 +98,7 @@ void SRBJointBt::update(double timeSinceLastTick) {
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
 			//TODO:Reenable motors when interpenetration problems are fixed.
-//			(*motorIterator)->apply(timeSinceLastTick);
+			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 }
@@ -106,7 +106,7 @@ void SRBJointBt::update(double timeSinceLastTick) {
 void SRBJointBt::generateMotors(const btVector3 maxForces,
 	const btVector3 lowerLimits, const btVector3 upperLimits) {
 //	add pitch servo motor
-	ServoMotor* servoMotor = new ServoMotor();
+	SRBServoMotor* servoMotor = new SRBServoMotor();
 	servoMotor->initialize(JointPhysics::RDOF_PITCH,
 		mJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
 		lowerLimits.x(), upperLimits.x());
@@ -115,7 +115,7 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
-	servoMotor = new ServoMotor();
+	servoMotor = new SRBServoMotor();
 	servoMotor->initialize(JointPhysics::RDOF_YAW,
 		mJoint->getRotationalLimitMotor(RDOF_YAW), maxForces.getY(),
 		lowerLimits.y(), upperLimits.y());
@@ -124,7 +124,7 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
-	servoMotor = new ServoMotor();
+	servoMotor = new SRBServoMotor();
 	servoMotor->initialize(JointPhysics::RDOF_ROLL,
 		mJoint->getRotationalLimitMotor(RDOF_ROLL), maxForces.getZ(),
 		lowerLimits.z(), upperLimits.z());

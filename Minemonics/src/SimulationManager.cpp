@@ -179,8 +179,8 @@ void SimulationManager::createScene(void) {
 	mDebugDrawer.initialize(mSceneMgr, false);
 	mDebugDrawer.setDebugDrawingEnabled(false);
 	mDebugDrawer.setDrawWireframe(true);
-	mDebugDrawer.setDrawConstraints(false);
-	mDebugDrawer.setDrawConstraintLimits(false);
+	mDebugDrawer.setDrawConstraints(true);
+	mDebugDrawer.setDrawConstraintLimits(true);
 	mDebugDrawer.setDrawContactPoints(false);
 	mDebugDrawer.setDrawNormals(false);
 

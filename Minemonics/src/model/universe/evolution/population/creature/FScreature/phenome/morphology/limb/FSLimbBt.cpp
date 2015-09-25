@@ -98,7 +98,7 @@ void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 		exit(-1);
 	}
 
-	mCollisionShape->calculateLocalInertia(mass, mInertia);
+	mCollisionShape->calculateLocalInertia(btScalar(mass), mInertia);
 
 	// position the limb in the world
 	btTransform startTransform;
@@ -107,8 +107,8 @@ void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	startTransform.setRotation(OgreBulletUtils::convert(orientation));
 
 	mMotionState = new btDefaultMotionState(startTransform);
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, mMotionState,
-		mCollisionShape, mInertia);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(mass),
+		mMotionState, mCollisionShape, mInertia);
 	mBody = new btRigidBody(rbInfo);
 	mBody->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 	mBody->setSleepingThresholds(
@@ -122,9 +122,9 @@ void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 			| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 	//Set the friction and restitution/elasticity of the rigid body
-	mBody->setFriction(friction);
-	mBody->setRollingFriction(friction);
-	mBody->setRestitution(restitution);
+	mBody->setFriction(btScalar(friction));
+	mBody->setRollingFriction(btScalar(friction));
+	mBody->setRestitution(btScalar(restitution));
 	mBody->setAnisotropicFriction(
 		mCollisionShape->getAnisotropicRollingFrictionDirection(),
 		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);

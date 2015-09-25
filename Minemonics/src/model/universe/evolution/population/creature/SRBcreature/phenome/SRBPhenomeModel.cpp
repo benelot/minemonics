@@ -86,13 +86,6 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 //		(*jit)->update(timeSinceLastTick);
 //	}
 
-//	// test for strains
-	//TODO: Remove if not used
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->isStrained();
-//	}
-
 	// Update all limb models
 	mHasInterpenetrations = false;
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();

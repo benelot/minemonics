@@ -137,7 +137,7 @@ public:
 	}
 
 	void setLimits(const btVector3 limits) {
-//		mJoint->setLimit(limits.x(),limits.y(),limits.z());
+//		mJoint->setLimit(limits.x(), limits.y(), limits.z());
 	}
 
 	void setBreakingThreshold(const double breakingThreshold) {

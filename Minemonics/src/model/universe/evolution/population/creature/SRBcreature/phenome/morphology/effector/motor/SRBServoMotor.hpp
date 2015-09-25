@@ -39,6 +39,7 @@ class JointBt;
 #define CONSTRAINT_TYPE btGeneric6DofConstraint
 #define EXTRAPARAMS ,true
 #define MOTOR_TYPE btRotationalLimitMotor
+//#define USE_6DOF2
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
 //#define EXTRAPARAMS
 //#define MOTOR_TYPE btRotationalLimitMotor2

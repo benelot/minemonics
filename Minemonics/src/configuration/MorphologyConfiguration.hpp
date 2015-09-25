@@ -30,12 +30,12 @@ public:
 	/**
 	 * The limb minimum dimension size
 	 */
-	static const double LIMB_MIN_SIZE = 3;
+	static const double LIMB_MIN_SIZE = 6;
 
 	/**
 	 * The limb maximum dimension size
 	 */
-	static const double LIMB_MAX_SIZE = 20;
+	static const double LIMB_MAX_SIZE = 30;
 
 	/**
 	 * The limb minimum density
@@ -121,7 +121,7 @@ public:
 	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
 	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 100.0f * 10e2;
+	static const double MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 10e6;
 
 	/**
 	 * The maximum allowable torque that can be exerted by a servo motor in its effort to

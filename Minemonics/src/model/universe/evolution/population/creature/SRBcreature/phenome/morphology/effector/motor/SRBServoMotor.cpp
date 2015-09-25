@@ -55,6 +55,9 @@ void SRBServoMotor::initialize(
 
 	mMotorBt = motorBt;
 
+	mMotorBt->m_hiLimit = mUpperLimit;
+	mMotorBt->m_loLimit = mLowerLimit;
+
 #ifdef USE_6DOF2
 	constraint->enableMotor(mJointMotorIndex, true);
 	constraint->setTargetVelocity(mJointMotorIndex, maxSpeed);
@@ -82,29 +85,18 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
 
 #ifdef USE_6DOF2
-//		mMotorBt->m_targetVelocity =
-//		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-//		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
 	mConstraint->setServoTarget(mJointMotorIndex, targetAngle);
 #else
 
-	float kP = 500.0f;
-	float mMaxSpeed = 10000.0f;
+	float kP = 40.0f;
+	float mMaxSpeed = 0.1f;
 	//simple p(roportional) controller
 	//calculate the target velocity and clamp it with the maximum speed
 	mMotorBt->m_targetVelocity =
-		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
+		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
+		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
 #endif
-//TODO: Print to logger only
-//		std::cout << std::setw(10) << std::right << mMotorBt << "("
-//				<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-//				<< "\t/MotorPosition(error):  " << std::setw(10) << std::right
-//				<< mMotorBt->m_currentPosition << "/" << std::setw(10)
-//				<< std::right << targetAngle << "/" << std::setw(10)
-//				<< std::right << angleError << "\t/targetVelocity: "
-//				<< mMotorBt->m_targetVelocity << std::endl;
-//}
+	std::cout << targetAngle << "," << mMotorBt->m_currentPosition << std::endl;
 }
 
 SRBServoMotor* SRBServoMotor::clone() {
