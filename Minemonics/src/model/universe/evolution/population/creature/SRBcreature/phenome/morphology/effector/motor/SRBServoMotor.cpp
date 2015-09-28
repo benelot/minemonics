@@ -88,15 +88,16 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	mConstraint->setServoTarget(mJointMotorIndex, targetAngle);
 #else
 
-	float kP = 40.0f;
-	float mMaxSpeed = 0.1f;
+	float kP = 2.0f;
+	float mMaxForce = 1000.0f;
 	//simple p(roportional) controller
 	//calculate the target velocity and clamp it with the maximum speed
-	mMotorBt->m_targetVelocity =
-		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
-		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
+	mMotorBt->m_targetVelocity = 10000000;
+	mMotorBt->m_maxMotorForce =
+		(kP * angleError > mMaxForce) ? mMaxForce :
+		(kP * angleError < -mMaxForce) ? -mMaxForce : kP * angleError;
 #endif
-	std::cout << targetAngle << "," << mMotorBt->m_currentPosition << std::endl;
+	std::cout << mMaxForce << "," << kP * angleError << std::endl;
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

@@ -87,7 +87,7 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 		btScalar(
 			(correction > mMaxForce) ? mMaxForce :
 			(correction < -mMaxForce) ? -mMaxForce : correction));
-	std::cout << mMaxForce << "," << std::setw(10) << correction << std::endl;
+//	std::cout << mMaxForce << "," << std::setw(10) << correction << std::endl;
 }
 
 FSServoMotor* FSServoMotor::clone() {

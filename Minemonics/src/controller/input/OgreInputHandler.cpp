@@ -44,8 +44,6 @@
 //## view headers
 #include <view/videocapture/Ogre3DFFMPEGVideoWriter.hpp>
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
-//#include <view/visualization/CEGUI/elements/infopanels/graphpanels/MathGLPanel.hpp>
-//#include <view/visualization/CEGUI/elements/infopanels/ParamsPanel.hpp>
 
 //## utils headers
 
@@ -65,113 +63,113 @@ void OgreInputHandler::initialize() {
 //-------------------------------------------------------------------------------------
 bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-	<< "RawKey pressed::" << key;
+		<< "RawKey pressed::" << key;
 
 	switch (key) {
 	case ApplicationKeycode::APPK_1: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_01);
+			PhysicsConfiguration::SIMULATION_SPEED_01);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_01]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_01]);
 	}
 		break;
 	case ApplicationKeycode::APPK_2: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_02);
+			PhysicsConfiguration::SIMULATION_SPEED_02);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_02]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_02]);
 	}
 		break;
 	case ApplicationKeycode::APPK_3: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_03);
+			PhysicsConfiguration::SIMULATION_SPEED_03);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_03]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_03]);
 	}
 		break;
 	case ApplicationKeycode::APPK_4: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_04);
+			PhysicsConfiguration::SIMULATION_SPEED_04);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_04]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_04]);
 	}
 		break;
 	case ApplicationKeycode::APPK_5: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_05);
+			PhysicsConfiguration::SIMULATION_SPEED_05);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_05]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_05]);
 	}
 		break;
 	case ApplicationKeycode::APPK_6: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_06);
+			PhysicsConfiguration::SIMULATION_SPEED_06);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_06]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_06]);
 	}
 		break;
 	case ApplicationKeycode::APPK_7: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_07);
+			PhysicsConfiguration::SIMULATION_SPEED_07);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_07]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_07]);
 	}
 		break;
 	case ApplicationKeycode::APPK_8: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_08);
+			PhysicsConfiguration::SIMULATION_SPEED_08);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to "
-		<< pow(2,
-		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_08]);
+			<< "Changed simulation speed to "
+			<< pow(2,
+				PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_08]);
 	}
 		break;
 	case ApplicationKeycode::APPK_9: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::SIMULATION);
+			StateHandler::SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_09);
+			PhysicsConfiguration::SIMULATION_SPEED_09);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to as fast as possible";
+			<< "Changed simulation speed to as fast as possible";
 	}
 		break;
 	case ApplicationKeycode::APPK_0: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-		StateHandler::HEADLESS_SIMULATION);
+			StateHandler::HEADLESS_SIMULATION);
 		SimulationManager::getSingleton()->setSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_10);
+			PhysicsConfiguration::SIMULATION_SPEED_10);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Changed simulation speed to as fast as possible";
+			<< "Changed simulation speed to as fast as possible";
 	}
 		break;
 
@@ -204,9 +202,9 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		}
 
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(
-		pm);
+			pm);
 		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(
-		10, newVal);
+			10, newVal);
 		break;
 	}
 	case ApplicationKeycode::APPK_t: // cycle polygon rendering mode
@@ -216,7 +214,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		unsigned int aniso;
 
 		switch (SimulationManager::getSingleton()->getViewController().getDetailsPanel()->getParamValue(
-		9)[0]) {
+			9)[0]) {
 		case 'B':
 			newVal = "Trilinear";
 			tfo = Ogre::TFO_TRILINEAR;
@@ -241,12 +239,12 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
 		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
 		SimulationManager::getSingleton()->getViewController().getDetailsPanel()->setParamValue(
-		9, newVal);
+			9, newVal);
 		break;
 	}
 	case ApplicationKeycode::APPK_y:
 		SimulationManager::getSingleton()->getViewController().setShowShadows(
-		!SimulationManager::getSingleton()->getViewController().doesShowShadows());
+			!SimulationManager::getSingleton()->getViewController().doesShowShadows());
 		break;
 	case ApplicationKeycode::APPK_u:
 		// return CEGUI::Key::U;
@@ -261,7 +259,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 		case StateHandler::SIMULATION: {
 			SimulationManager::getSingleton()->getUniverse().getEvaluationController().setPaused(
-			!SimulationManager::getSingleton()->getUniverse().getEvaluationController().isPaused());
+				!SimulationManager::getSingleton()->getUniverse().getEvaluationController().isPaused());
 			break;
 		}
 		default: {
@@ -337,11 +335,11 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 		case StateHandler::SIMULATION: {
 			SimulationManager::getSingleton()->getDebugDrawer().setDebugDrawingEnabled(
-			!SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled());
+				!SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled());
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-			<< "Draw Bullet Debug output::"
-			<< (SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled()) ?
-			"true" : "false";
+				<< "Draw Bullet Debug output::"
+				<< (SimulationManager::getSingleton()->getDebugDrawer().isDebugDrawingEnabled()) ?
+				"true" : "false";
 			break;
 		}
 		default: {
@@ -354,7 +352,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 		case StateHandler::SIMULATION: {
 			SimulationManager::getSingleton()->getDebugDrawer().setDrawTrajectory(
-			!SimulationManager::getSingleton()->getDebugDrawer().isDrawTrajectory());
+				!SimulationManager::getSingleton()->getDebugDrawer().isDrawTrajectory());
 			break;
 		}
 		default: {
@@ -367,25 +365,25 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		case StateHandler::SIMULATION: {
 			if (SimulationManager::getSingleton()->getVideoWriter().isInitialized()) {
 				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Recording video stopped.";
+					<< "Recording video stopped.";
 				SimulationManager::getSingleton()->getVideoWriter().close();
 			} else {
 				// create video file name
 				std::string videoName;
 				videoName.append("Minemonics-");
 				videoName.append(
-				boost::lexical_cast < std::string
-				> (SimulationManager::getSingleton()->getNow()));
+					boost::lexical_cast < std::string
+						> (SimulationManager::getSingleton()->getNow()));
 				videoName.append(".mp4");
 
 				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Recording video started.";
+					<< "Recording video started.";
 
 				//This even works on if the screen gets resized
 				SimulationManager::getSingleton()->getVideoWriter().setup(
-				videoName.c_str(),
-				SimulationManager::getSingleton()->getWindow()->getWidth(),
-				SimulationManager::getSingleton()->getWindow()->getHeight());
+					videoName.c_str(),
+					SimulationManager::getSingleton()->getWindow()->getWidth(),
+					SimulationManager::getSingleton()->getWindow()->getHeight());
 			}
 			break;
 		}
@@ -421,7 +419,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 		case StateHandler::SIMULATION: {
 			if (SimulationManager::getSingleton()->getViewController().getEvaluationInView()
-			!= NULL) {
+				!= NULL) {
 				SimulationManager::getSingleton()->getViewController().getEvaluationInView()->teardown();
 			}
 			SimulationManager::getSingleton()->getUniverse().proceedEvaluation();
@@ -448,9 +446,9 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_SYSREQ:
 // take a screenshot
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Smile! Screenshot taken!";
+			<< "Smile! Screenshot taken!";
 		SimulationManager::getSingleton()->getWindow()->writeContentsToTimestampedFile(
-		"Minemonics-", ".jpg");
+			"Minemonics-", ".jpg");
 		break;
 	case ApplicationKeycode::APPK_POWER:
 // return CEGUI::Key::Power;
@@ -525,9 +523,9 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		setRightAltPressed(true);
 //take screen shot
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Smile! Screenshot taken!";
+			<< "Smile! Screenshot taken!";
 		SimulationManager::getSingleton()->getWindow()->writeContentsToTimestampedFile(
-		"Minemonics-", ".jpg");
+			"Minemonics-", ".jpg");
 		break;
 	case ApplicationKeycode::APPK_RSHIFT:
 		setRightShiftPressed(true);
@@ -625,7 +623,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 bool OgreInputHandler::keyReleased(const ApplicationKeycode::Keycode key) {
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-	<< "RawKey released::" << key;
+		<< "RawKey released::" << key;
 	Ogre::String newVal;
 
 	switch (key) {
@@ -958,11 +956,11 @@ bool OgreInputHandler::mouseMoved(const float x, const float y) const {
 	if (isRightMousePressed()) {
 		if (isLeftShiftPressed() || isRightShiftPressed()) {
 			SimulationManager::getSingleton()->getViewController().getCameraHandler().rotate(
-			CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * y,
-			CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * x, 0);
+				CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * y,
+				CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR * x, 0);
 		} else {
 			SimulationManager::getSingleton()->getViewController().getCameraHandler().rotate(
-			y, x, 0);
+				y, x, 0);
 		}
 	}
 
@@ -991,7 +989,7 @@ bool OgreInputHandler::mousePressed(ApplicationMouseCode::MouseButton button) {
 		//Ogre::LogManager::getSingleton().logMessage("Mouse right-click");
 		if (isLeftControlPressed()) {
 			SimulationManager::getSingleton()->getMousePicker().setPicking(
-			false);
+				false);
 		}
 		mRightMousePressed = true;
 		break;
@@ -1024,96 +1022,96 @@ bool OgreInputHandler::mouseReleased(ApplicationMouseCode::MouseButton button) {
 
 void OgreInputHandler::stopCameraXDimensionMovement() {
 	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(
-	0);
+		0);
 }
 
 void OgreInputHandler::stopCameraYDimensionMovement() {
 	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(
-	0);
+		0);
 }
 
 void OgreInputHandler::stopCameraZDimensionMovement() {
 	SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(
-	0);
+		0);
 }
 
 void OgreInputHandler::moveCameraLeft() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Camera move left!";
+		<< "Key::Camera move left!";
 	if (mLeftShiftPressed || mRightShiftPressed) {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(
-		-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+			-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	} else {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(
-		-1);
+			-1);
 	}
 }
 
 void OgreInputHandler::moveCameraUp() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Camera move up!";
+		<< "Key::Camera move up!";
 	if (mLeftShiftPressed || mRightShiftPressed) {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(
-		CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+			CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	} else {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(
-		1);
+			1);
 	}
 }
 
 void OgreInputHandler::moveCameraBackward() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Camera move backward!";
+		<< "Key::Camera move backward!";
 	if (mLeftShiftPressed || mRightShiftPressed) {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(
-		CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+			CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	} else {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(
-		1);
+			1);
 	}
 }
 
 void OgreInputHandler::moveCameraRight() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Camera move right!";
+		<< "Key::Camera move right!";
 	if (mLeftShiftPressed || mRightShiftPressed) {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(
-		CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+			CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	} else {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveX(
-		1);
+			1);
 	}
 }
 
 void OgreInputHandler::moveCameraDown() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Camera move down!";
+		<< "Key::Camera move down!";
 	if (mLeftShiftPressed || mRightShiftPressed) {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(
-		-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+			-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	} else {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveY(
-		-1);
+			-1);
 	}
 }
 
 void OgreInputHandler::moveCameraForward() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Camera move forward!";
+		<< "Key::Camera move forward!";
 	if (mLeftShiftPressed || mRightShiftPressed) {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(
-		-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
+			-CameraConfiguration::CAMERA_SHIFT_MOVEMENT_SPEED_FACTOR);
 	} else {
 		SimulationManager::getSingleton()->getViewController().getCameraHandler().moveZ(
-		-1);
+			-1);
 	}
 }
 
 void OgreInputHandler::quitApplication() const {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-	<< "Key::Shutdown application!";
+		<< "Key::Shutdown application!";
 	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
-	StateHandler::SHUTDOWN);
+		StateHandler::SHUTDOWN);
 }
 
 void OgreInputHandler::update(double timeSinceLastUpdate) {
