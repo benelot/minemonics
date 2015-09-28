@@ -39,6 +39,8 @@ class access;
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -278,6 +280,8 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<AverageVelocity*>(NULL));
 		ar.register_type(static_cast<AverageHeight*>(NULL));
+		ar.register_type(static_cast<FSPhenomeModel*>(NULL));
+		ar.register_type(static_cast<SRBPhenomeModel*>(NULL));
 		ar
 		/**The name of the creature*/
 		& BOOST_SERIALIZATION_NVP(mFirstName)

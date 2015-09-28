@@ -1,25 +1,22 @@
 //# corresponding headers
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
+
+//# forward declarations
+//# system headers
 #include <list>
 #include <map>
 
 //## controller headers
 //## model headers
-#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/PlanetModel.hpp>
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
@@ -27,8 +24,6 @@
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 
 //## view headers
 //## utils headers

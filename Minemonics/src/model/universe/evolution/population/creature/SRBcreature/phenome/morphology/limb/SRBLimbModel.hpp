@@ -2,11 +2,10 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_SRBLimbModel_HPP_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //# forward declarations
-class JointModel;
 class btDynamicsWorld;
 class CreatureModel;
 namespace boost {
@@ -17,7 +16,6 @@ class access;
 
 //# system headers
 #include <iostream>
-#include <iterator>
 #include <vector>
 
 //## controller headers
@@ -26,9 +24,8 @@ class access;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreColourValue.h>
-#include <OgreQuaternion.h>
-#include <LinearMath/btQuaternion.h>
 #include <LinearMath/btVector3.h>
+#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
@@ -38,9 +35,10 @@ class access;
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
 //## utils headers
@@ -165,15 +163,6 @@ public:
 		return mLimbPhysics->getFriction();
 	}
 
-//	std::vector<SRBLimbModel*>::size_type getParentJointIndex() const {
-//		return mParentJointIndex;
-//	}
-//
-//	void setParentJointIndex(
-//		std::vector<SRBLimbModel*>::size_type parentJointIndex) {
-//		mParentJointIndex = parentJointIndex;
-//	}
-
 	const std::vector<std::vector<JointModel*>::size_type>& getChildJointIndices() const {
 		return mChildJointIndices;
 	}
@@ -208,7 +197,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbModel);
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbModel); /**!< Serialize the base object */
 
 	}
 

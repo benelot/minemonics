@@ -1,15 +1,18 @@
 //# corresponding header
-
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <configuration/Definitions.hpp>
-#include <LinearMath/btTransform.h>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
 
 //## view headers
 //## utils headers

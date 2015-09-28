@@ -50,6 +50,7 @@ void SRBJointBt::initialize(btDynamicsWorld* const world,
 	bool jointRollEnabled, btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits) {
 	mWorld = world;
+#ifndef EXCLUDE_FROM_TEST
 	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA,
 		tframeInB EXTRAPARAMS);
 
@@ -58,9 +59,9 @@ void SRBJointBt::initialize(btDynamicsWorld* const world,
 	mJoint->enableFeedback(true);
 	mJoint->setJointFeedback(new btJointFeedback());
 
-	//debug drawing
+//debug drawing
 	mJoint->setDbgDrawSize(btScalar(5.f));
-
+#endif
 	mType = type;
 	mJointPitchEnabled = jointPitchEnabled;
 	mJointYawEnabled = jointYawEnabled;
@@ -135,7 +136,7 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 
 bool SRBJointBt::equals(const SRBJointBt& SRBJointBt) const {
 
-	if (JointPhysics::equals(SRBJointBt)) {
+	if (!JointPhysics::equals(SRBJointBt)) {
 		return false;
 	}
 

@@ -1,4 +1,11 @@
 //# corresponding headers
+#include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <LinearMath/btScalar.h>
 #include <OgreVector3.h>
 
@@ -8,10 +15,12 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+
+//## view headers
+//## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 SRBLimbModel::SRBLimbModel() {

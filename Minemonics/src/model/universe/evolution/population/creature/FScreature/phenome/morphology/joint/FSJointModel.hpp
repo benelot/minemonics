@@ -35,6 +35,7 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -242,14 +243,7 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<FSJointBt*>(NULL));
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mJointPhysics) /**!< The physics component of the joint model*/
-		& BOOST_SERIALIZATION_NVP(mOwnIndex) /**!< The joint's own index */
-		& BOOST_SERIALIZATION_NVP(mParentIndex) /**!< The joint's parent limb index */
-		& BOOST_SERIALIZATION_NVP(mChildIndex) /**!< The joint's child limb index */
-		& BOOST_SERIALIZATION_NVP(mAngleceptors) /**!< The angle measuring sensors of the joint */
-		& BOOST_SERIALIZATION_NVP(mForceceptors) /**!< The force measuring sensors of the joint */
-		& BOOST_SERIALIZATION_NVP(mLimitceptors); /**!< The limit measuring sensors of the joint */
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointModel); /**!< Serialize the base object */
 	}
 
 private:

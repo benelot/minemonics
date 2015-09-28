@@ -225,6 +225,18 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointYawEnabled)
 			& BOOST_SERIALIZATION_NVP(mJointRollEnabled)
 
+			& BOOST_SERIALIZATION_NVP(mJointMaxForces.x) /**!< The max forces of the joint axes */
+			& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
+			& BOOST_SERIALIZATION_NVP(mJointMaxForces.z)
+
+			& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.x) /**!< The max speeds of the joint axes */
+			& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.y)
+			& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.z)
+
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
+			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
+
 			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
 			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
 			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)

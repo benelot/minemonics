@@ -1,4 +1,5 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -10,7 +11,6 @@
 //## configuration headers
 //## controller headers
 #include <controller/SaveController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //## model headers
 //## view headers
@@ -27,10 +27,9 @@ protected:
 		limbBt->initialize(NULL, NULL,
 			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			randomness->nextVector(), randomness->nextUnifDouble(0, 10),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
@@ -58,10 +57,9 @@ protected:
 		limbBt->initialize(NULL, NULL,
 			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			randomness->nextVector(), randomness->nextUnifDouble(0, 10),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),

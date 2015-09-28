@@ -40,7 +40,7 @@ class JointForceceptor: public JointProprioceptor {
 public:
 	JointForceceptor();
 	JointForceceptor(std::vector<int*>::size_type jointIndex,
-			FSJointPhysics::RotationalDegreeOfFreedom rotationalDOF);
+		JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
 	virtual ~JointForceceptor();
 
 	virtual void update(double timeSinceLastTick);
@@ -65,7 +65,7 @@ public:
 	 * @return A string containing all information about the jointforceceptor.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const JointForceceptor &jointForceceptor) {
+		const JointForceceptor &jointForceceptor) {
 		os << "JointForceceptor";
 		return os;
 	}

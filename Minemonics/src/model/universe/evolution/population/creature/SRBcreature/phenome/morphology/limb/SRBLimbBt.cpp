@@ -1,15 +1,13 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //# forward declarations
 //# system headers
-#include <stddef.h>
-#include <iostream>
+#include <cstdlib>
 
 //## controller headers
 //## model headers
-#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
@@ -18,7 +16,9 @@
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuadWord.h>
-#include <LinearMath/btTransform.h>
+#include <LinearMath/btScalar.h>
+
+#include <OgreQuaternion.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -28,11 +28,15 @@
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 
 //## controller headers
 //## model headers
+//## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
+//## utils headers
 #include <utils/ogre3D/Euler.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 SRBLimbBt::SRBLimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(

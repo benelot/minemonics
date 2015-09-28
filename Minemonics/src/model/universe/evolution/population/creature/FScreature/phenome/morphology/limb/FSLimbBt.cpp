@@ -1,26 +1,24 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //# forward declarations
 //# system headers
 #include <stddef.h>
 #include <iostream>
+#include <cstdlib>
 
 //## controller headers
 //## model headers
-#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <BulletDynamics/Featherstone/btMultiBody.h>
-#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuadWord.h>
-#include <LinearMath/btTransform.h>
+#include <LinearMath/btScalar.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -36,6 +34,8 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>

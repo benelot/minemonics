@@ -2,13 +2,12 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_
 
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //# forward declarations
 class btMultiBody;
 class btMultiBodyDynamicsWorld;
-class btMultiBodyConstraint;
 class CreatureModel;
 namespace boost {
 namespace serialization {
@@ -22,18 +21,16 @@ class access;
 
 //## controller headers
 //## model headers
+#include <BulletDynamics/Featherstone/btMultiBodyConstraint.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -110,69 +107,6 @@ public:
 	void removeFromWorld();
 
 	//Accessor methods
-//	/**
-//	 * Is the phenotype in the world?
-//	 * @return
-//	 */
-//	bool isInWorld() const {
-//		return mInWorld;
-//	}
-//
-//	/**
-//	 * Set whether the phenotype is in the world or not.
-//	 * @param inWorld Whether the phenotype is in the world or not.
-//	 */
-//	void setInWorld(const bool inWorld) {
-//		this->mInWorld = inWorld;
-//	}
-//
-//	std::vector<Controller*>& getControllers() {
-//		return mControllers;
-//	}
-//
-//	const std::vector<Controller*>& getControllers() const {
-//		return mControllers;
-//	}
-//
-//	std::vector<ComponentModel*>& getComponentModels() {
-//		return mComponentModels;
-//	}
-//
-//	const std::vector<ComponentModel*>& getComponentModels() const {
-//		return mComponentModels;
-//	}
-//
-//	bool isDeveloped() const {
-//		return mDeveloped;
-//	}
-//
-//	void setDeveloped(const bool developed) {
-//		mDeveloped = developed;
-//	}
-//
-//	std::vector<FSJointModel*>& getJointModels() {
-//		return mJointModels;
-//	}
-//
-//	const std::vector<FSJointModel*>& getJointModels() const {
-//		return mJointModels;
-//	}
-//
-//	std::vector<FSLimbModel*>& getLimbModels() {
-//		return mLimbModels;
-//	}
-//
-//	const std::vector<FSLimbModel*>& getLimbModels() const {
-//		return mLimbModels;
-//	}
-//
-//	FSCreatureModel* const getCreatureModel() const {
-//		return mCreatureModel;
-//	}
-//
-//	bool hasInterpenetrations() const {
-//		return mHasInterpenetrations;
-//	}
 
 	btMultiBody* getMultiBody() {
 		return mMultiBody;
@@ -238,16 +172,7 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar.register_type(static_cast<SineController*>(NULL));
-		ar & BOOST_SERIALIZATION_NVP(mDeveloped) /**!< If the phenome is developed*/
-
-		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/
-
-		& BOOST_SERIALIZATION_NVP(mLimbModels) /**!< The vector of limb models.*/
-
-		& BOOST_SERIALIZATION_NVP(mJointModels) /**!< The vector of joint models.*/
-
-		& BOOST_SERIALIZATION_NVP(mControllers); /**!< The vector of controllers.*/
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(PhenomeModel); /**!< Serialize the base object */
 	}
 private:
 	/**
@@ -266,40 +191,6 @@ private:
 					> ("PhenomeModel"));
 		}
 	} _initializer;
-
-//	/**
-//	 * Is the phenotype developed?
-//	 */
-//	bool mDeveloped;
-//
-//	CreatureModel* mCreatureModel;
-//
-//	/**
-//	 * Whether the phenome is in the world or not.
-//	 */
-//	bool mInWorld;
-
-//	/**
-//	 * The vector of phenotype component models.
-//	 */
-//	std::vector<ComponentModel*> mComponentModels;
-//
-//	/**
-//	 * The vector of phenotype limb models.
-//	 */
-//	std::vector<FSLimbModel*> mLimbModels;
-//
-//	/**
-//	 * The vector of phenotype joint models.
-//	 */
-//	std::vector<FSJointModel*> mJointModels;
-//
-//	/**
-//	 * The vector of phenotype joint controller models.
-//	 */
-//	std::vector<Controller*> mControllers;
-
-//	bool mHasInterpenetrations;
 
 	btMultiBody* mMultiBody;
 

@@ -5,8 +5,8 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btDynamicsWorld;
 class btCollisionShape;
+class btDynamicsWorld;
 class btQuaternion;
 class btTransform;
 class btVector3;
@@ -17,6 +17,7 @@ class access;
 } /* namespace boost */
 
 //# system headers
+#include <cmath>
 #include <iostream>
 
 //## controller headers
@@ -24,8 +25,9 @@ class access;
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <OgreVector3.h>
 #include <OgreColourValue.h>
+#include <OgreQuaternion.h>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers

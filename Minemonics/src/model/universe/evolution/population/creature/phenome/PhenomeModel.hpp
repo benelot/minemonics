@@ -18,6 +18,10 @@ class access;
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -26,6 +30,8 @@ class access;
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 
@@ -214,6 +220,10 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<SineController*>(NULL));
+		ar.register_type(static_cast<FSLimbModel*>(NULL));
+		ar.register_type(static_cast<SRBLimbModel*>(NULL));
+		ar.register_type(static_cast<FSJointModel*>(NULL));
+		ar.register_type(static_cast<SRBJointModel*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mDeveloped) /**!< If the phenome is developed*/
 
 		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/
@@ -279,5 +289,5 @@ protected:
 
 	bool mHasInterpenetrations;
 };
-
+BOOST_CLASS_VERSION(PhenomeModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

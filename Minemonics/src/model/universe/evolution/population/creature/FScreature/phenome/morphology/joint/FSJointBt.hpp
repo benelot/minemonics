@@ -3,20 +3,28 @@
 
 //# corresponding header
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //# forward declarations
 class btDynamicsWorld;
-class btMultiBody;
 class btRigidBody;
 class btTransform;
-class btVector3;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+#include <vector>
+
 //## controller headers
 //## model headers
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <LinearMath/btVector3.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -25,14 +33,11 @@ class btVector3;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 
 //## view headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
-
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.

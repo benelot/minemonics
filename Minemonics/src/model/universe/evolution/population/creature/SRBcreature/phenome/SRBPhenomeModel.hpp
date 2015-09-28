@@ -1,6 +1,5 @@
 #ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_
-
 //# corresponding headers
 #include <configuration/Definitions.hpp>
 
@@ -14,10 +13,17 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -25,8 +31,8 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
@@ -88,69 +94,6 @@ public:
 	virtual void calm();
 
 	//Accessor methods
-//	/**
-//	 * Is the phenotype in the world?
-//	 * @return
-//	 */
-//	bool isInWorld() const {
-//		return mInWorld;
-//	}
-//
-//	/**
-//	 * Set whether the phenotype is in the world or not.
-//	 * @param inWorld Whether the phenotype is in the world or not.
-//	 */
-//	void setInWorld(const bool inWorld) {
-//		this->mInWorld = inWorld;
-//	}
-//
-//	std::vector<Controller*>& getControllers() {
-//		return mControllers;
-//	}
-//
-//	const std::vector<Controller*>& getControllers() const {
-//		return mControllers;
-//	}
-//
-//	std::vector<ComponentModel*>& getComponentModels() {
-//		return mComponentModels;
-//	}
-//
-//	const std::vector<ComponentModel*>& getComponentModels() const {
-//		return mComponentModels;
-//	}
-//
-//	bool isDeveloped() const {
-//		return mDeveloped;
-//	}
-//
-//	void setDeveloped(const bool developed) {
-//		mDeveloped = developed;
-//	}
-//
-//	std::vector<JointModel*>& getJointModels() {
-//		return mJointModels;
-//	}
-//
-//	const std::vector<JointModel*>& getJointModels() const {
-//		return mJointModels;
-//	}
-//
-//	std::vector<LimbModel*>& getLimbModels() {
-//		return mLimbModels;
-//	}
-//
-//	const std::vector<LimbModel*>& getLimbModels() const {
-//		return mLimbModels;
-//	}
-//
-//	CreatureModel* const getCreatureModel() const {
-//		return mCreatureModel;
-//	}
-//
-//	bool hasInterpenetrations() const {
-//		return mHasInterpenetrations;
-//	}
 
 	/**
 	 * Give access to boost serialization
@@ -231,42 +174,6 @@ private:
 					> ("PhenomeModel"));
 		}
 	} _initializer;
-
-//	/**
-//	 * Is the phenotype developed?
-//	 */
-//	bool mDeveloped;
-//
-//	CreatureModel* mCreatureModel;
-//
-//	/**
-//	 * Whether the phenome is in the world or not.
-//	 */
-//	bool mInWorld;
-
-//	/**
-//	 * The vector of phenotype component models.
-//	 */
-//	std::vector<ComponentModel*> mComponentModels;
-//
-//	/**
-//	 * The vector of phenotype limb models.
-//	 */
-//	std::vector<LimbModel*> mLimbModels;
-//
-//	/**
-//	 * The vector of phenotype joint models.
-//	 */
-//	std::vector<JointModel*> mJointModels;
-
-//std::vector<Sensor*> mSensors;
-//
-//	/**
-//	 * The vector of phenotype joint controller models.
-//	 */
-//	std::vector<Controller*> mControllers;
-
-//	bool mHasInterpenetrations;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_ */

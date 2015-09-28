@@ -11,12 +11,13 @@ class access;
 
 //# system headers
 #include <iostream>
-#include <iterator>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 
 //## view headers
 //# custom headers
@@ -24,11 +25,13 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/PlanetModel.hpp>
+#include <model/universe/Epoch.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
 //## utils headers
+
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 /**
  * @brief		The population model holds the information about a population of creatures.
@@ -69,40 +72,6 @@ public:
 
 	bool hasInterpenetrations();
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
-
-	/**
-	 * Serializes the population to a string.
-	 * @param os The ostream.
-	 * @param creature The population we want to serialize.
-	 * @return A string containing all information about the population.
-	 */
-	friend std::ostream & operator<<(std::ostream &os,
-			const PopulationModel &population) {
-		os << population.mCreatureQty;
-		for (std::vector<CreatureModel*>::const_iterator it =
-				population.mCreatureModels.begin();
-				it != population.mCreatureModels.end(); it++) {
-			os << (**it);
-		}
-		return os;
-
-	}
-
-	/**
-	 * Serializes the creature to an xml file.
-	 * @param ar The archive.
-	 * @param The file version.
-	 */
-	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mCreatureQty) & BOOST_SERIALIZATION_NVP(
-				mCreatureModels);
-	}
-
 	//Accessor methods
 
 	int getCreatureQty() const {
@@ -141,6 +110,41 @@ public:
 		mOutOfSync = outOfSync;
 	}
 
+	// Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the population to a string.
+	 * @param os The ostream.
+	 * @param creature The population we want to serialize.
+	 * @return A string containing all information about the population.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const PopulationModel &population) {
+		os << population.mCreatureQty;
+		for (std::vector<CreatureModel*>::const_iterator it =
+			population.mCreatureModels.begin();
+			it != population.mCreatureModels.end(); it++) {
+			os << (**it);
+		}
+		return os;
+
+	}
+
+	/**
+	 * Serializes the creature to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
+			& BOOST_SERIALIZATION_NVP(mCreatureModels);
+	}
+
 private:
 
 	/**
@@ -173,5 +177,5 @@ private:
 	 */
 	std::vector<Epoch*> mEpochs;
 };
-
+BOOST_CLASS_VERSION(PopulationModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_POPULATIONMODEL_HPP_ */

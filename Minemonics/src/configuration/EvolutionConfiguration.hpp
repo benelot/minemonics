@@ -25,23 +25,6 @@
  */
 class EvolutionConfiguration {
 public:
-	/**
-	 * The size of the population.
-	 */
-	//TODO: Make the population size changeable from within the simulator.
-	static const unsigned EVOLUTION_POPULATION_SIZE = 20;
-
-	/**
-	 * The dimensions of the genome
-	 */
-	//TODO: Remove after the implementation of the evolutionary algorithm
-	static const unsigned DIMENSIONS = 200;
-
-	/**
-	 * The number of generations before the evolution terminates
-	 */
-	//TODO: Remove after the implementation of the evolutionary algorithm
-	static const unsigned EVOLUTION_GENERATIONS = 1000;
 
 	/**
 	 * Number of elitists (the ones that get carried over to the next generation because they are so successful)
@@ -55,12 +38,6 @@ public:
 	 The trade-off is one of noise reduction vs. computation time.
 	 */
 	static const unsigned EVOLUTION_EVALUATION_RUNS = 1;
-
-	//TODO: Look if they are still necessary after the implementation of the evolutionary algorithm.
-	static const unsigned Omega = 5;
-	static const unsigned CrossPoints = 2;
-	static const double CrossProb = 0.6;
-	static const double FlipProb = 1. / DIMENSIONS;
 
 	/**
 	 * Whenever a parent is needed, this setting dictates the number of individuals to choose

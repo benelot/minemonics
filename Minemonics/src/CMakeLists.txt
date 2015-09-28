@@ -521,8 +521,8 @@ set(TESTSRCS
     ./model/universe/evolution/juries/AverageHeight_test.cpp
     
     ## creatures
-    #./model/universe/evolution/population/creature/CreatureModel_test.cpp
-    #./model/universe/evolution/population/PopulationModel_test.cpp
+   ./model/universe/evolution/population/creature/CreatureModel_test.cpp
+   ./model/universe/evolution/population/PopulationModel_test.cpp
     
     # genome
     ./model/universe/evolution/population/creature/genome/MixedGenome_test.cpp
@@ -535,16 +535,30 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     
     # phenome
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/PhenomeModel_test.cpp
+    ./model/universe/evolution/population/creature/phenome/PhenomeModel_test.cpp
+    ./model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel_test.cpp
+    ./model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel_test.cpp
     ## controllers
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/controller/sine/SineController_test.cpp
+    ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
     
     ## morphology
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbBt_test.cpp
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/LimbModel_test.cpp
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointBt_test.cpp
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/JointModel_test.cpp
-    #./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/ServoMotor_test.cpp
+    #./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt_test.cpp
+    #./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel_test.cpp
+    #./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt_test.cpp
+    #./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel_test.cpp
+    #./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor_test.cpp
+    
+    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt_test.cpp
+    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel_test.cpp
+    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt_test.cpp
+    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel_test.cpp
+    ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor_test.cpp
+    
+    ./model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt_test.cpp
+    ./model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel_test.cpp
+    ./model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt_test.cpp
+    ./model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel_test.cpp
+    ./model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor_test.cpp
     
     # misc
     ./utils/NameGenerator_test.cpp

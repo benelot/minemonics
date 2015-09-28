@@ -2,8 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_SRBJointModel_HPP_
 
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 
 //# forward declarations
 class btDynamicsWorld;
@@ -24,6 +24,7 @@ class access;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <LinearMath/btTransform.h>
+#include <LinearMath/btVector3.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -33,17 +34,12 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  * @brief		The joint model holds all the state information of the joint.

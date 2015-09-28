@@ -2,15 +2,11 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBMODEL_HPP_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //# forward declarations
-class FSJointModel;
 class btDynamicsWorld;
-class btMultiBody;
-class btMultiBodyLinkCollider;
-class FSCreatureModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -19,7 +15,6 @@ class access;
 
 //# system headers
 #include <iostream>
-#include <iterator>
 #include <vector>
 
 //## controller headers
@@ -27,9 +22,7 @@ class access;
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <OgreColourValue.h>
 #include <OgreQuaternion.h>
-#include <LinearMath/btQuaternion.h>
 #include <LinearMath/btVector3.h>
 
 //## view headers
@@ -40,13 +33,13 @@ class access;
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 
 //## view headers
 //## utils headers
-#include<utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  *@brief The limb model holds all the information of the limb state.
@@ -211,27 +204,11 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<FSLimbBt*>(NULL));
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mLimbPhysics) /**!< The type of the limb*/
-		& BOOST_SERIALIZATION_NVP(mParentJointIndex) /**!< The index of the joint the limb is connected to its parent. */
-		& BOOST_SERIALIZATION_NVP(mChildJointIndices) /**!< The child joint indices */
-		& BOOST_SERIALIZATION_NVP(mTactioceptors); /**!< The tactioceptors of the limb*/
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbModel); /**!< Serialize the base object */
 
 	}
 
 private:
-
-//	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
-//
-//	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
-//
-//	std::vector<FSJointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
-//
-//	std::vector<std::vector<FSJointModel*>::size_type> mChildJointIndices; /**!< The child joint indices */
-//
-//	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
-//
-//	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
 
 };
 

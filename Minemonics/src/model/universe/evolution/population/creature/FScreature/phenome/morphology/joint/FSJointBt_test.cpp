@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -28,12 +28,15 @@ protected:
 		// Set up an object of the class you want to test
 		jointBt = new FSJointBt();
 		jointBt->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
-			FSJointPhysics::HINGE_JOINT, true, true, true,
+			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()));
 
-		jointBt->generateMotors(randomness->nextVector());
+		jointBt->generateMotors(
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()));
 	}
 
 	virtual void TearDown() {
@@ -54,11 +57,14 @@ protected:
 		// Set up an object of the class you want to test
 		jointBt = new FSJointBt();
 		jointBt->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
-			FSJointPhysics::HINGE_JOINT, true, true, true,
+			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()));
-		jointBt->generateMotors(randomness->nextVector());
+		jointBt->generateMotors(
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()));
 
 		jointBt2 = new FSJointBt();
 

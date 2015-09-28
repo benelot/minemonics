@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
+
 //# forward declarations
 //# system headers
 #include <stddef.h>
@@ -11,26 +13,26 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
 
 PopulationModel::PopulationModel() :
-		mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL), mOutOfSync(
-				false) {
+	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL), mOutOfSync(
+		false) {
 
 }
 
 PopulationModel::PopulationModel(const PopulationModel& populationModel) :
-		mOutOfSync(false) {
+	mOutOfSync(false) {
 	mPlanetModel = populationModel.mPlanetModel;
 	mCreatureQty = populationModel.mCreatureQty;
 	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
 
 	for (std::vector<CreatureModel*>::const_iterator cit =
-			populationModel.getCreatureModels().begin();
-			cit != populationModel.getCreatureModels().end(); cit++) {
+		populationModel.getCreatureModels().begin();
+		cit != populationModel.getCreatureModels().end(); cit++) {
 		mCreatureModels.push_back((*cit)->clone());
 	}
 }
@@ -48,7 +50,7 @@ PopulationModel::~PopulationModel() {
  * @param creatureQty The number of creatures that the population will consist of in every generation.
  */
 void PopulationModel::initialize(PlanetModel* const planetModel,
-		const int creatureQty) {
+	const int creatureQty) {
 	mPlanetModel = planetModel;
 	mCreatureQty = creatureQty;
 }
@@ -78,10 +80,10 @@ bool PopulationModel::equals(const PopulationModel& population) const {
 	}
 	std::vector<CreatureModel*>::const_iterator it = mCreatureModels.begin();
 	std::vector<CreatureModel*>::const_iterator it2 =
-			population.getCreatureModels().begin();
+		population.getCreatureModels().begin();
 	for (;
-			it != mCreatureModels.end(), it2
-					!= population.getCreatureModels().end(); it++, it2++) {
+		it != mCreatureModels.end(), it2 != population.getCreatureModels().end();
+		it++, it2++) {
 		if (!(*it)->equals(**it2)) {
 			return false;
 		}
@@ -98,7 +100,7 @@ PopulationModel* PopulationModel::clone() {
 bool PopulationModel::hasInterpenetrations() {
 	bool hasInterpenetrations = false;
 	for (std::vector<CreatureModel*>::const_iterator cit =
-			mCreatureModels.begin(); cit != mCreatureModels.end(); cit++) {
+		mCreatureModels.begin(); cit != mCreatureModels.end(); cit++) {
 		if ((*cit)->hasInterpenetrations()) {
 			hasInterpenetrations = true;
 			break;

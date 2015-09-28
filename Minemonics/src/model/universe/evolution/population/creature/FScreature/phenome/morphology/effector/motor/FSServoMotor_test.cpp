@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -23,7 +23,7 @@ protected:
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
 		servoMotor = new FSServoMotor();
-		servoMotor->initialize(FSJointPhysics::RDOF_PITCH,
+		servoMotor->initialize(JointPhysics::RDOF_PITCH,
 			randomness->nextUnifDouble(1, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10));
@@ -46,7 +46,7 @@ protected:
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
 		servoMotor = new FSServoMotor();
-		servoMotor->initialize(FSJointPhysics::RDOF_PITCH,
+		servoMotor->initialize(JointPhysics::RDOF_PITCH,
 			randomness->nextUnifDouble(1, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10));

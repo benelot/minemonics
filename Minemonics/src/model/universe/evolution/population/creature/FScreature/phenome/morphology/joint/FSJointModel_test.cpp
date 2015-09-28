@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -27,9 +27,9 @@ protected:
 		jointModel->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
 			randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
-			randomness->nextUnifPosInt(0, 10), FSJointPhysics::HINGE_JOINT,
-			true, true, true, randomness->nextVector(),
-			randomness->nextVector(), randomness->nextVector());
+			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
+			true, true, randomness->nextVector(), randomness->nextVector(),
+			randomness->nextVector());
 	}
 
 	virtual void TearDown() {
@@ -52,9 +52,9 @@ protected:
 		jointModel->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
 			randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
-			randomness->nextUnifPosInt(0, 10), FSJointPhysics::HINGE_JOINT,
-			true, true, true, randomness->nextVector(),
-			randomness->nextVector(), randomness->nextVector());
+			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
+			true, true, randomness->nextVector(), randomness->nextVector(),
+			randomness->nextVector());
 
 		jointModel2 = new FSJointModel();
 

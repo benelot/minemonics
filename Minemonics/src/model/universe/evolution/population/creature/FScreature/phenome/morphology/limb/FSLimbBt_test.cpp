@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -25,12 +25,11 @@ protected:
 		// Set up an object of the class you want to test
 		limbBt = new FSLimbBt();
 		limbBt->initialize(NULL, NULL,
-			(FSLimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
-				FSLimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			randomness->nextVector(), randomness->nextUnifDouble(0, 10),
+			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
+				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
@@ -56,12 +55,11 @@ protected:
 		// Set up an object of the class you want to test
 		limbBt = new FSLimbBt();
 		limbBt->initialize(NULL, NULL,
-			(FSLimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
-				FSLimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextQuaternion()),
-			randomness->nextVector(), randomness->nextUnifDouble(0, 10),
+			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
+				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextQuaternion(), randomness->nextVector(),
+			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10),
 			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),

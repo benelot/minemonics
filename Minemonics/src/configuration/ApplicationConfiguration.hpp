@@ -23,15 +23,14 @@
  */
 class ApplicationConfiguration {
 public:
-	/**
-	 * The title of the application.
-	 */
-	static const std::string APPLICATION_TITLE;
 
-	static const int APPLICATION_TICK = 1000.0f/60.0f;//ms
+	static const std::string APPLICATION_TITLE; /**!< The title of the application.*/
+
+	static const int APPLICATION_TICK = 1000.0f / 60.0f; //ms
 };
 
 // version.features.bugs-fixed.commit
-const std::string ApplicationConfiguration::APPLICATION_TITLE = "Minemonics - The Origin of Creatures v.0.34.7.347";
+const std::string ApplicationConfiguration::APPLICATION_TITLE =
+	"Minemonics - The Origin of Creatures v.0.78.40.525";
 
 #endif /* CONFIGURATION_APPLICATIONCONFIGURATION_H_ */

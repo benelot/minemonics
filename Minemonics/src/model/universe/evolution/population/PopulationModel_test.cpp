@@ -33,7 +33,8 @@ protected:
 		for (int i = 0; i < 30; ++i) {
 			CreatureModel* creature = new CreatureModel();
 			creature->setWorld(physicsController->getDynamicsWorld());
-			creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
+			creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+				Ogre::Vector3(0, 0, 0), 30);
 			creature->performEmbryogenesis();
 			population->addMember(creature);
 		}
@@ -43,7 +44,7 @@ protected:
 		// delete and set the pointer to zero
 		delete population;
 		population = NULL;
-		delete physicsController;
+		delete ((GroundController*) physicsController);
 		physicsController = NULL;
 		delete randomness;
 		randomness = NULL;
@@ -66,7 +67,8 @@ protected:
 		for (int i = 0; i < 30; ++i) {
 			CreatureModel* creature = new CreatureModel();
 			creature->setWorld(physicsController->getDynamicsWorld());
-			creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
+			creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+				Ogre::Vector3(0, 0, 0), 30);
 			creature->performEmbryogenesis();
 			population->addMember(creature);
 		}
@@ -85,7 +87,7 @@ protected:
 		population = NULL;
 		delete population2;
 		population2 = NULL;
-		delete physicsController;
+		delete ((GroundController*) physicsController);
 		physicsController = NULL;
 		delete randomness;
 		randomness = NULL;

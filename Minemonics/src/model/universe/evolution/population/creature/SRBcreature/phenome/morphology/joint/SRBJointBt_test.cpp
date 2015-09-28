@@ -1,4 +1,5 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -13,7 +14,6 @@
 //## configuration headers
 //## controller headers
 #include <controller/SaveController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 
 //## model headers
 //## view headers
@@ -26,17 +26,17 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		jointBt = new JointBt();
+		jointBt = new SRBJointBt();
 		jointBt->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
 			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()));
 
-		jointBt->generateMotors(
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+//		jointBt->generateMotors(
+//			OgreBulletUtils::convert(randomness->nextVector()),
+//			OgreBulletUtils::convert(randomness->nextVector()),
+//			OgreBulletUtils::convert(randomness->nextVector()));
 	}
 
 	virtual void TearDown() {
@@ -46,7 +46,7 @@ protected:
 		delete randomness;
 		randomness = NULL;
 	}
-	JointBt* jointBt;
+	SRBJointBt* jointBt;
 	Randomness* randomness;
 };
 
@@ -55,20 +55,20 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		jointBt = new JointBt();
+		jointBt = new SRBJointBt();
 		jointBt->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
 			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()));
-		jointBt->generateMotors(
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+//		jointBt->generateMotors(
+//			OgreBulletUtils::convert(randomness->nextVector()),
+//			OgreBulletUtils::convert(randomness->nextVector()),
+//			OgreBulletUtils::convert(randomness->nextVector()));
 
-		jointBt2 = new JointBt();
+		jointBt2 = new SRBJointBt();
 
-		SaveController < JointBt > saveController;
+		SaveController < SRBJointBt > saveController;
 
 		saveController.save(*jointBt, "JointBt.test");
 
@@ -84,8 +84,8 @@ protected:
 		delete randomness;
 		randomness = NULL;
 	}
-	JointBt* jointBt;
-	JointBt* jointBt2;
+	SRBJointBt* jointBt;
+	SRBJointBt* jointBt2;
 	Randomness* randomness;
 };
 

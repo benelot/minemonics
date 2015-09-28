@@ -54,6 +54,7 @@ void ServoMotor::initialize(
 	mLowerLimit = lowerLimit;
 	mUpperLimit = upperLimit;
 
+#ifndef EXCLUDE_FROM_TEST
 	mMotorBt = motorBt;
 
 #ifdef USE_6DOF2
@@ -65,6 +66,7 @@ void ServoMotor::initialize(
 	mMotorBt->m_enableMotor = true;
 	mMotorBt->m_maxMotorForce = mMaxForce;
 	//servo motor is not implemented in 6dofspring constraint
+#endif
 #endif
 
 }

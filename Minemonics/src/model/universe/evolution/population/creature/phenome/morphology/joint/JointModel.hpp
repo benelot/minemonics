@@ -2,8 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_
 
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //# forward declarations
 class btDynamicsWorld;
@@ -15,15 +15,18 @@ class access;
 } /* namespace boost */
 
 //# system headers
+#include <stddef.h>
 #include <iostream>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <LinearMath/btTransform.h>
+#include <LinearMath/btVector3.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -33,16 +36,17 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
 
 //## view headers
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  * @brief		The joint model holds all the state information of the joint.
@@ -234,15 +238,16 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar.register_type(static_cast<JointBt*>(NULL));
+		ar.register_type(static_cast<FSJointBt*>(NULL));
+		ar.register_type(static_cast<SRBJointBt*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
 		& BOOST_SERIALIZATION_NVP(mJointPhysics) /**!< The physics component of the joint model*/
 		& BOOST_SERIALIZATION_NVP(mOwnIndex) /**!< The joint's own index */
 		& BOOST_SERIALIZATION_NVP(mParentIndex) /**!< The joint's parent limb index */
-		& BOOST_SERIALIZATION_NVP(mChildIndex) /**!< The joint's child limb index */
-		& BOOST_SERIALIZATION_NVP(mAngleceptors) /**!< The angle measuring sensors of the joint */
-		& BOOST_SERIALIZATION_NVP(mForceceptors) /**!< The force measuring sensors of the joint */
-		& BOOST_SERIALIZATION_NVP(mLimitceptors); /**!< The limit measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mChildIndex); /**!< The joint's child limb index */
+//		& BOOST_SERIALIZATION_NVP(mAngleceptors) /**!< The angle measuring sensors of the joint */
+//		& BOOST_SERIALIZATION_NVP(mForceceptors) /**!< The force measuring sensors of the joint */
+//		& BOOST_SERIALIZATION_NVP(mLimitceptors); /**!< The limit measuring sensors of the joint */
 	}
 
 protected:

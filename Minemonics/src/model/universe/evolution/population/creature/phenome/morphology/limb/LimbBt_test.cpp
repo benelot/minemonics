@@ -10,7 +10,7 @@
 //## configuration headers
 //## controller headers
 #include <controller/SaveController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 
 //## model headers
 //## view headers

@@ -1,6 +1,11 @@
 //# corresponding headers
 #include <configuration/Definitions.hpp>
-#include <LinearMath/btScalar.h>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <OgreVector3.h>
 
 //## view headers
@@ -10,10 +15,9 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+
+//## view headers
+//## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
 LimbModel::LimbModel() :

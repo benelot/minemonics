@@ -2,8 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //# forward declarations
 class JointModel;
@@ -16,8 +16,8 @@ class access;
 } /* namespace boost */
 
 //# system headers
+#include <stddef.h>
 #include <iostream>
-#include <iterator>
 #include <vector>
 
 //## controller headers
@@ -25,10 +25,8 @@ class access;
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <OgreColourValue.h>
-#include <OgreQuaternion.h>
-#include <LinearMath/btQuaternion.h>
 #include <LinearMath/btVector3.h>
+#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers

@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/MorphologyConfiguration.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //# forward declarations
@@ -13,9 +12,12 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
 #include <controller/SaveController.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/GroundController.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -24,32 +26,47 @@ class CreatureModelTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
+		physicsController = new GroundController(
+			PhysicsController::FeatherstoneModel);
+		physicsController->initBulletPhysics();
 		creature = new CreatureModel();
-		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
+		creature->setWorld(physicsController->getDynamicsWorld());
+		creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+			Ogre::Vector3(0, 0, 0), 30);
+		creature->performEmbryogenesis();
 	}
 
 	virtual void TearDown() {
 		// delete and set the pointer to zero
 		delete creature;
 		creature = NULL;
+		delete ((GroundController*) physicsController);
+		physicsController = NULL;
 		delete randomness;
 		randomness = NULL;
 	}
 	CreatureModel* creature;
 
 	Randomness* randomness;
+	PhysicsController* physicsController;
 };
 
 class CreatureModelSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
+		physicsController = new GroundController(
+			PhysicsController::FeatherstoneModel);
+		physicsController->initBulletPhysics();
 		creature = new CreatureModel();
-		creature->initialize(NULL, Ogre::Vector3(0, 0, 0), 30);
+		creature->setWorld(physicsController->getDynamicsWorld());
+		creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+			Ogre::Vector3(0, 0, 0), 30);
+		creature->performEmbryogenesis();
 
 		creature2 = new CreatureModel();
 
-		SaveController<CreatureModel> saveController;
+		SaveController < CreatureModel > saveController;
 
 		saveController.save(*creature, "Creature.test");
 
@@ -61,6 +78,8 @@ protected:
 		creature = NULL;
 		delete creature2;
 		creature2 = NULL;
+		delete ((GroundController*) physicsController);
+		physicsController = NULL;
 		delete randomness;
 		randomness = NULL;
 	}
@@ -69,6 +88,8 @@ protected:
 	CreatureModel* creature2;
 
 	Randomness* randomness;
+
+	PhysicsController* physicsController;
 };
 
 TEST_F(CreatureModelTest,DummyTest) {

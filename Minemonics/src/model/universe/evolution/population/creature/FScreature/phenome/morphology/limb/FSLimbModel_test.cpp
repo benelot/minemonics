@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -25,8 +25,8 @@ protected:
 		// Set up an object of the class you want to test
 		limbModel = new FSLimbModel();
 		limbModel->initialize(NULL, NULL,
-			(FSLimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
-				FSLimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
+			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
+				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
 			randomness->nextUnifDouble(0, 10),
@@ -56,8 +56,8 @@ protected:
 		// Set up an object of the class you want to test
 		limbModel = new FSLimbModel();
 		limbModel->initialize(NULL, NULL,
-			(FSLimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
-				FSLimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
+			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
+				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
 			randomness->nextUnifDouble(0, 10),

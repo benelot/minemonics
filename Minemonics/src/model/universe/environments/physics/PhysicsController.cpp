@@ -38,6 +38,20 @@ PhysicsController::PhysicsController(PhysicsModelType physicsModelType,
 }
 
 PhysicsController::~PhysicsController() {
+	delete mDynamicsWorld;
+	mDynamicsWorld = NULL;
+
+	delete mSolver;
+	mSolver = NULL;
+
+	delete mBroadphase;
+	mBroadphase = NULL;
+
+	delete mDispatcher;
+	mDispatcher = NULL;
+
+	delete mCollisionConfiguration;
+	mCollisionConfiguration = NULL;
 
 }
 

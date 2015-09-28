@@ -1,6 +1,6 @@
 //# corresponding headers
-#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 
 //# forward declarations
 //# system headers
@@ -9,14 +9,16 @@
 
 //## controller headers
 //## model headers
+#include <BulletDynamics/Featherstone/btMultiBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
-#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
-#include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
-#include <BulletDynamics/Featherstone/btMultiBodyLink.h>
-#include <BulletDynamics/Featherstone/btMultiBodyConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h>
-#include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
-#include <BulletDynamics/Featherstone/btMultiBodyPoint2Point.h>
+#include <BulletDynamics/Featherstone/btMultiBodyLink.h>
+#include <configuration/MorphologyConfiguration.hpp>
+#include <LinearMath/btAlignedObjectArray.h>
+#include <LinearMath/btQuadWord.h>
+#include <LinearMath/btQuaternion.h>
+#include <LinearMath/btScalar.h>
+#include <LinearMath/btVector3.h>
 #include <OgreQuaternion.h>
 
 //## view headers
@@ -29,23 +31,28 @@
 
 //## controller headers
 //## model headers
-#include <model/universe/PlanetModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BoostLogger FSPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 FSPhenomeModel::_Init FSPhenomeModel::_initializer;

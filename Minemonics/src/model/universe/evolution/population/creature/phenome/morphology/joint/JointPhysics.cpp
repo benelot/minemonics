@@ -32,21 +32,21 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 
-	if (mJointPitchAxis != jointPhysics.mJointPitchAxis) {
-		return false;
-	}
+//	if (mJointPitchAxis != jointPhysics.mJointPitchAxis) {
+//		return false;
+//	}
 
 	if (mJointPitchEnabled != jointPhysics.mJointPitchEnabled) {
 		return false;
 	}
 
-	if (mJointMinAngle != jointPhysics.mJointMinAngle) {
-		return false;
-	}
-
-	if (mJointMaxAngle != jointPhysics.mJointMaxAngle) {
-		return false;
-	}
+//	if (mJointMinAngle != jointPhysics.mJointMinAngle) {
+//		return false;
+//	}
+//
+//	if (mJointMaxAngle != jointPhysics.mJointMaxAngle) {
+//		return false;
+//	}
 
 	if (mJointMaxForces != jointPhysics.mJointMaxForces) {
 		return false;

@@ -1,19 +1,12 @@
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
 
 //# forward declarations
 //# system headers
-#include <iostream>
-#include <vector>
-
 //## controller headers
 //## model headers
-#include <LinearMath/btScalar.h>
-#include <LinearMath/btVector3.h>
-#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
-#include <BulletDynamics/ConstraintSolver/btTypedConstraint.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
 
 //## view headers
 //# custom headers
@@ -116,7 +109,7 @@ void FSJointBt::generateMotors(const btVector3 maxForces,
 
 bool FSJointBt::equals(const FSJointBt& jointBt) const {
 
-	if (JointPhysics::equals(jointBt)) {
+	if (!JointPhysics::equals(jointBt)) {
 		return false;
 	}
 

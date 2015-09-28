@@ -6,8 +6,9 @@
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //# forward declarations
-class SimulationManager;
 class Creature;
+class LimbGraphics;
+class SimulationManager;
 
 //# system headers
 #include <string>
@@ -37,6 +38,10 @@ class Creature;
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
+
+#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 /**
  * @brief		The limb controller synchronizes the limb graphical representation with the limb model.

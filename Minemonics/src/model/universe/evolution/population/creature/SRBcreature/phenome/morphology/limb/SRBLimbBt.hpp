@@ -8,7 +8,6 @@
 //# forward declarations
 struct btDefaultMotionState;
 class btDynamicsWorld;
-class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -16,19 +15,20 @@ class access;
 } /* namespace boost */
 
 //# system headers
-#include <cmath>
+#include <iostream>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btQuaternion.h>
-#include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
+#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
