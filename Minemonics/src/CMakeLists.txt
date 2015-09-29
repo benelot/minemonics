@@ -617,7 +617,9 @@ if(UNIX)
 	set(PROJECT_HOME .)
 endif(UNIX)
 
+#Set if it should be built in debug or release mode
 set(CMAKE_BUILD_TYPE "Debug")
+#set(CMAKE_BUILD_TYPE "Release")
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
