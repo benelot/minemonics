@@ -2,8 +2,6 @@
 #define CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_
 
 //# corresponding headers
-#include <model/universe/evolution/population/PopulationModel.hpp>
-
 //# forward declarations
 class Planet;
 
@@ -22,6 +20,7 @@ class Planet;
 //## configuration headers
 //## controller headers
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
 
 //## model headers
 //## view headers
@@ -132,14 +131,8 @@ public:
 
 private:
 
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
-	/**
-	 * Initializer of the boost logger to include the class name into the logging messages.
-	 */
 	static class _Init {
 	public:
 		_Init() {
@@ -147,22 +140,13 @@ private:
 				boost::log::attributes::constant < std::string
 					> ("Population"));
 		}
-	} _initializer;
+	} _initializer; /**!< Initializer of the boost logger to include the class name into the logging messages. */
 
-	/**
-	 * The planet the population lives on.
-	 */
-	Planet* mPlanet;
+	Planet* mPlanet; /**!< The planet the population lives on. */
 
-	/**
-	 * The creatures living in this population. All creatures in one population can mate together.
-	 */
-	std::vector<Creature*> mCreatures;
+	std::vector<Creature*> mCreatures; /**!< The creatures living in this population. All creatures in one population can mate together. */
 
-	/**
-	 * The state model of the population
-	 */
-	PopulationModel* mPopulationModel;
+	PopulationModel* mPopulationModel; /**!< The state model of the population */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_ */
