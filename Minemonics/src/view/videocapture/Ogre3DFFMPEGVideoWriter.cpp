@@ -169,7 +169,7 @@ void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
 			exit(1);
 		} else {
 			printf(
-				"allocated picture of size %d (ptr %x), linesize %d %d %d %d\n",
+				"allocated picture of size %d (ptr %p), linesize %d %d %d %d\n",
 				ret, mAVFrame->data[0], mAVFrame->linesize[0],
 				mAVFrame->linesize[1], mAVFrame->linesize[2],
 				mAVFrame->linesize[3]);
@@ -185,7 +185,7 @@ void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
 			exit(1);
 		} else
 			printf(
-				"allocated picture of size %d (ptr %x), linesize %d %d %d %d\n",
+				"allocated picture of size %d (ptr %p), linesize %d %d %d %d\n",
 				ret, mPictureRGB24->data[0], mPictureRGB24->linesize[0],
 				mPictureRGB24->linesize[1], mPictureRGB24->linesize[2],
 				mPictureRGB24->linesize[3]);
