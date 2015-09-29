@@ -153,13 +153,13 @@ public:
 		}
 	}
 
-	void savePopulation() {
+	virtual void save() {
 		if (SerializationConfiguration::POPULATION_EXPANDED) {
 			saveCreatures();
 		}
 	}
 
-	void loadPopulation() {
+	virtual void load() {
 		if (SerializationConfiguration::POPULATION_EXPANDED) {
 			loadCreatures();
 		}

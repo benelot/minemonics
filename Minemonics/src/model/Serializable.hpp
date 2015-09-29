@@ -28,6 +28,10 @@ public:
 	Serializable();
 	virtual ~Serializable();
 
+	virtual void save() = 0;
+
+	virtual void load() = 0;
+
 	const std::string& getSerializationPath() const {
 		return mSerializationPath;
 	}
