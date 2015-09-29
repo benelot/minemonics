@@ -16,6 +16,8 @@ project(Minemonics)
 
 set(MODELHDRS
 	# model
+	./model/Serializable.hpp
+	
 	## environment
     ./model/universe/environments/EnvironmentModel.hpp
     ./model/universe/environments/PlaneModel.hpp
@@ -104,6 +106,8 @@ set(MODELHDRS
 )
 set(MODELSRCS
     # model
+    ./model/Serializable.cpp
+    
     ## environment
     ./model/universe/environments/EnvironmentModel.cpp
     ./model/universe/environments/PlaneModel.cpp

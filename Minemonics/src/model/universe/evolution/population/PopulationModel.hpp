@@ -2,6 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_POPULATIONMODEL_HPP_
 
 //# corresponding headers
+#include <model/Serializable.hpp>
+
 //# forward declarations
 namespace boost {
 namespace serialization {
@@ -23,8 +25,10 @@ class access;
 //# custom headers
 //## base headers
 //## configuration headers
-//## controller headers
 #include <configuration/SerializationConfiguration.hpp>
+
+//## controller headers
+#include <controller/SaveController.hpp>
 
 //## model headers
 #include <model/universe/Epoch.hpp>
@@ -39,7 +43,7 @@ class access;
  * @date		2015-03-09
  * @author		Benjamin Ellenberger
  */
-class PopulationModel {
+class PopulationModel: public Serializable {
 public:
 	PopulationModel();
 	PopulationModel(const PopulationModel& populationModel);
@@ -149,23 +153,36 @@ public:
 		}
 	}
 
-//	void saveCreatures(std::string savePath) {
-//		SaveController < CreatureModel > creatureModelSaveController;
-//		for (std::vector<CreatureModel*>::const_iterator it =
-//			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
-//			creatureModelSaveController.save(**it, "SomeFile");
-//		}
-//	}
-//
-//	void loadCreatures(std::string loadPath) {
-//		SaveController < CreatureModel > creatureModelSaveController;
-//		for (std::vector<CreatureModel*>::const_iterator it =
-//			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
-//			creatureModelSaveController.restore(**it, "SomeFile");
-//		}
-//	}
+	void savePopulation() {
+		if (SerializationConfiguration::POPULATION_EXPANDED) {
+			saveCreatures();
+		}
+	}
+
+	void loadPopulation() {
+		if (SerializationConfiguration::POPULATION_EXPANDED) {
+			loadCreatures();
+		}
+	}
 
 private:
+
+	void saveCreatures() {
+		SaveController < CreatureModel > creatureModelSaveController;
+		for (std::vector<CreatureModel*>::const_iterator it =
+			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+			creatureModelSaveController.save(**it, mSerializationPath.c_str());
+		}
+	}
+
+	void loadCreatures() {
+		SaveController < CreatureModel > creatureModelSaveController;
+		for (std::vector<CreatureModel*>::const_iterator it =
+			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+			creatureModelSaveController.restore(**it,
+				mSerializationPath.c_str());
+		}
+	}
 
 	/**
 	 * If the population model is out of sync with the controller.
