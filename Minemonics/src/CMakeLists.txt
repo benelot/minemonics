@@ -543,12 +543,6 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
     
     ## morphology
-    #./model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt_test.cpp
-    #./model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel_test.cpp
-    #./model/universe/evolution/population/creature/phenome/morphology/joint/JointBt_test.cpp
-    #./model/universe/evolution/population/creature/phenome/morphology/joint/JointModel_test.cpp
-    #./model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor_test.cpp
-    
     ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt_test.cpp
     ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel_test.cpp
     ./model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt_test.cpp
