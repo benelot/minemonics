@@ -77,9 +77,9 @@ protected:
 
 		SaveController < PopulationModel > saveController;
 
-		saveController.save(*population, "Population.test");
+		saveController.save(*population, "test/Population.test");
 
-		saveController.restore(*population2, "Population.test");
+		saveController.restore(*population2, "test/Population.test");
 	}
 
 	virtual void TearDown() {

@@ -41,11 +41,11 @@ protected:
 
 		morphoGene2 = new Morphogene();
 
-		SaveController<Morphogene> saveController;
+		SaveController < Morphogene > saveController;
 
-		saveController.save(*morphoGene, "MorphoGene.test");
+		saveController.save(*morphoGene, "test/MorphoGene.test");
 
-		saveController.restore(*morphoGene2, "MorphoGene.test");
+		saveController.restore(*morphoGene2, "test/MorphoGene.test");
 	}
 
 	virtual void TearDown() {
@@ -65,14 +65,14 @@ protected:
 
 TEST_F(MorphoGeneTest,hasSizeWithinBounds) {
 	ASSERT_TRUE(
-			MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getX()
-					<= MorphologyConfiguration::LIMB_MAX_SIZE);
+		MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getX()
+		<= MorphologyConfiguration::LIMB_MAX_SIZE);
 	ASSERT_TRUE(
-			MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getY()
-					<= MorphologyConfiguration::LIMB_MAX_SIZE);
+		MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getY()
+		<= MorphologyConfiguration::LIMB_MAX_SIZE);
 	ASSERT_TRUE(
-			MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getZ()
-					<= MorphologyConfiguration::LIMB_MAX_SIZE);
+		MorphologyConfiguration::LIMB_MIN_SIZE <= gene->getZ()
+		<= MorphologyConfiguration::LIMB_MAX_SIZE);
 }
 
 TEST_F(MorphoGeneTest,hasValidJointAnchor) {
@@ -81,21 +81,21 @@ TEST_F(MorphoGeneTest,hasValidJointAnchor) {
 	ASSERT_TRUE(0 <= gene->getJointAnchorY() <= 1);
 	ASSERT_TRUE(0 <= gene->getJointAnchorZ() <= 1);
 	ASSERT_TRUE(
-			gene->getJointAnchorX() != 0 && gene->getJointAnchorY() != 0
-					&& gene->getJointAnchorZ() != 0);
+		gene->getJointAnchorX() != 0 && gene->getJointAnchorY() != 0
+		&& gene->getJointAnchorZ() != 0);
 }
 
 TEST_F(MorphoGeneTest,hasValidJointRotation) {
 	//test valid joint rotation
 	ASSERT_TRUE(
-			0 <= gene->getJointPitch()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= gene->getJointPitch()
+		<= 2 * boost::math::constants::pi<double>());
 	ASSERT_TRUE(
-			0 <= gene->getJointYaw()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= gene->getJointYaw()
+		<= 2 * boost::math::constants::pi<double>());
 	ASSERT_TRUE(
-			0 <= gene->getJointRoll()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= gene->getJointRoll()
+		<= 2 * boost::math::constants::pi<double>());
 }
 
 TEST_F(MorphoGeneTest,hasValidColor) {
@@ -116,14 +116,14 @@ TEST_F(MorphoGeneTest,testMisc) {
 
 	//test segment shrink factor is in range
 	ASSERT_TRUE(
-			1 - MorphologyConfiguration::LIMB_SCALE_MAX
-					<= gene->getSegmentShrinkFactor()
-					<= 1 + MorphologyConfiguration::LIMB_SCALE_MAX);
+		1 - MorphologyConfiguration::LIMB_SCALE_MAX
+		<= gene->getSegmentShrinkFactor()
+		<= 1 + MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	// test repetition limit
 	ASSERT_TRUE(
-			0 <= gene->getRepetitionLimit()
-					<= MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
+		0 <= gene->getRepetitionLimit()
+		<= MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
 	// follow up gene can not be valid at this time
 

@@ -53,11 +53,12 @@ protected:
 
 		sineControllerGene2 = new SineControllerGene();
 
-		SaveController<SineControllerGene> saveController;
+		SaveController < SineControllerGene > saveController;
 
-		saveController.save(*sineControllerGene, "SineController.test");
+		saveController.save(*sineControllerGene, "test/SineController.test");
 
-		saveController.restore(*sineControllerGene2, "SineController.test");
+		saveController.restore(*sineControllerGene2,
+			"test/SineController.test");
 	}
 
 	virtual void TearDown() {
@@ -73,16 +74,16 @@ protected:
 
 TEST_F(SineControllerGeneTest,DummyTest) {
 	ASSERT_TRUE(
-			0 <= sineControllerGene->getXOffset()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= sineControllerGene->getXOffset()
+		<= 2 * boost::math::constants::pi<double>());
 
 	ASSERT_TRUE(-1 <= sineControllerGene->getYOffset() <= 1);
 	ASSERT_TRUE(
-			0 <= sineControllerGene->getAmplitude()
-					<= ControlConfiguration::CPG_SINE_INITIAL_MAX_AMPLITUDE);
+		0 <= sineControllerGene->getAmplitude()
+		<= ControlConfiguration::CPG_SINE_INITIAL_MAX_AMPLITUDE);
 	ASSERT_TRUE(
-			0 <= sineControllerGene->getFrequency()
-					<= ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
+		0 <= sineControllerGene->getFrequency()
+		<= ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
 }
 
 TEST_F(SineControllerGeneSerializationTest,isEqualAfterSerialization) {

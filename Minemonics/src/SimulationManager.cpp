@@ -163,6 +163,8 @@ void SimulationManager::createScene(void) {
 	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL);
 	Logger::initTermSink();
 
+	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
+
 	// Set render target with the current application name
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 		ApplicationConfiguration::APPLICATION_TITLE);

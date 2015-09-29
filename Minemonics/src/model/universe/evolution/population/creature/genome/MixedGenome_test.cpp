@@ -49,11 +49,11 @@ protected:
 
 		genome2 = new MixedGenome();
 
-		SaveController<MixedGenome> saveController;
+		SaveController < MixedGenome > saveController;
 
-		saveController.save(*genome, "MixedGenome.test");
+		saveController.save(*genome, "test/MixedGenome.test");
 
-		saveController.restore(*genome2, "MixedGenome.test");
+		saveController.restore(*genome2, "test/MixedGenome.test");
 	}
 
 	virtual void TearDown() {
@@ -73,22 +73,22 @@ protected:
 
 TEST_F(MixedGenomeTest,hasNormalGenes) {
 	ASSERT_TRUE(
-			PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
-					- PopulationConfiguration::POPULATION_GENES_INITIAL_VAR
-					<= genome->getGenes().size()
-					<= PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
-							+ PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
+		PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
+		- PopulationConfiguration::POPULATION_GENES_INITIAL_VAR
+		<= genome->getGenes().size()
+		<= PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
+		+ PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
 }
 
 TEST_F(MixedGenomeTest,areAllBranchesSet) {
 	for (std::vector<Gene*>::const_iterator geneIt = genome->getGenes().begin();
-			geneIt != genome->getGenes().end(); geneIt++) {
+		geneIt != genome->getGenes().end(); geneIt++) {
 		if ((*geneIt)->getType() == Gene::MorphoGene) {
 			for (std::vector<MorphogeneBranch*>::const_iterator branchIt =
-					((Morphogene*) (*geneIt))->getGeneBranches().begin();
-					branchIt
-							!= ((Morphogene*) (*geneIt))->getGeneBranches().end();
-					branchIt++) {
+				((Morphogene*) (*geneIt))->getGeneBranches().begin();
+				branchIt
+				!= ((Morphogene*) (*geneIt))->getGeneBranches().end();
+				branchIt++) {
 				ASSERT_TRUE((*branchIt)->getBranchGeneType() != -1);
 			}
 		}

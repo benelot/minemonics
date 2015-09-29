@@ -446,6 +446,7 @@ set(MISCHDRS
 	./configuration/GUIConfiguration.hpp
 	./configuration/LoggerConfiguration.hpp
 	./configuration/Definitions.hpp
+	./configuration/SerializationConfiguration.hpp
 	
 	# logger
 	./utils/logging/Logger.hpp
@@ -784,15 +785,6 @@ find_package(Boost REQUIRED random log thread date_time regex system chrono seri
 
 include_directories(${Boost_INCLUDE_DIRS})
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
-
-######################################################################
-# Shark 2 (Is not a required library anymore)
-######################################################################
-
-#find_package(Shark2 REQUIRED)
-
-#include_directories(${Shark2_INCLUDE_DIRS})
-#set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Shark2_LIBRARIES})
 
 ######################################################################
 # Bullet 3 physics libary

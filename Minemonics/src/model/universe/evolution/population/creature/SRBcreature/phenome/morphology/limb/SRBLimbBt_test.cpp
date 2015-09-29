@@ -70,9 +70,9 @@ protected:
 
 		SaveController < SRBLimbBt > saveController;
 
-		saveController.save(*limbBt, "LimbBt.test");
+		saveController.save(*limbBt, "test/SRBLimbBt.test");
 
-		saveController.restore(*limbBt2, "LimbBt.test");
+		saveController.restore(*limbBt2, "test/SRBLimbBt.test");
 	}
 
 	virtual void TearDown() {

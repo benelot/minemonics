@@ -55,9 +55,9 @@ protected:
 
 		SaveController < ServoMotor > saveController;
 
-		saveController.save(*servoMotor, "ServoMotor.test");
+		saveController.save(*servoMotor, "test/SRBServoMotor.test");
 
-		saveController.restore(*servoMotor2, "ServoMotor.test");
+		saveController.restore(*servoMotor2, "test/SRBServoMotor.test");
 	}
 
 	virtual void TearDown() {

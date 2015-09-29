@@ -68,9 +68,9 @@ protected:
 
 		SaveController < CreatureModel > saveController;
 
-		saveController.save(*creature, "Creature.test");
+		saveController.save(*creature, "test/CreatureModel.test");
 
-		saveController.restore(*creature2, "Creature.test");
+		saveController.restore(*creature2, "test/CreatureModel.test");
 	}
 
 	virtual void TearDown() {

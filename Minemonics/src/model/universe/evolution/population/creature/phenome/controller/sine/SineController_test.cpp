@@ -41,9 +41,9 @@ protected:
 
 		SaveController < SineController > saveController;
 
-		saveController.save(*sineController, "SineController.test");
+		saveController.save(*sineController, "test/SineController.test");
 
-		saveController.restore(*sineController2, "SineController.test");
+		saveController.restore(*sineController2, "test/SineController.test");
 	}
 
 	virtual void TearDown() {

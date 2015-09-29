@@ -53,9 +53,9 @@ protected:
 
 		SaveController < FSPhenomeModel > saveController;
 
-		saveController.save(*phenomeModel, "PhenomeModel.test");
+		saveController.save(*phenomeModel, "test/FSPhenomeModel.test");
 
-		saveController.restore(*phenomeModel2, "PhenomeModel.test");
+		saveController.restore(*phenomeModel2, "test/FSPhenomeModel.test");
 	}
 
 	virtual void TearDown() {

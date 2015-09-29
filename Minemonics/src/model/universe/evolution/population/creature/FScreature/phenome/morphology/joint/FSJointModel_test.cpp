@@ -60,9 +60,9 @@ protected:
 
 		SaveController < FSJointModel > saveController;
 
-		saveController.save(*jointModel, "JointModel.test");
+		saveController.save(*jointModel, "test/FSJointModel.test");
 
-		saveController.restore(*jointModel2, "JointModel.test");
+		saveController.restore(*jointModel2, "test/FSJointModel.test");
 	}
 
 	virtual void TearDown() {

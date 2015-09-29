@@ -70,9 +70,9 @@ protected:
 
 		SaveController < JointBt > saveController;
 
-		saveController.save(*jointBt, "JointBt.test");
+		saveController.save(*jointBt, "test/JointBt.test");
 
-		saveController.restore(*jointBt2, "JointBt.test");
+		saveController.restore(*jointBt2, "test/JointBt.test");
 	}
 
 	virtual void TearDown() {

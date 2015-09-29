@@ -35,11 +35,11 @@ protected:
 		height = new AverageHeight(false, 2);
 		height2 = new AverageHeight(true, 1);
 
-		SaveController<AverageHeight> saveController;
+		SaveController < AverageHeight > saveController;
 
-		saveController.save(*height, "AvgHeight.test");
+		saveController.save(*height, "test/AvgHeight.test");
 
-		saveController.restore(*height2, "AvgHeight.test");
+		saveController.restore(*height2, "test/AvgHeight.test");
 	}
 
 	virtual void TearDown() {

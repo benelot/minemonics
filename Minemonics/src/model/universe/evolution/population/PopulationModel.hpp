@@ -24,14 +24,14 @@ class access;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <configuration/SerializationConfiguration.hpp>
+
 //## model headers
 #include <model/universe/Epoch.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
 //## utils headers
-
-#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 /**
  * @brief		The population model holds the information about a population of creatures.
@@ -141,9 +141,29 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
-			& BOOST_SERIALIZATION_NVP(mCreatureModels);
+		if (SerializationConfiguration::POPULATION_EXPANDED) {
+			ar & BOOST_SERIALIZATION_NVP(mCreatureQty);
+		} else {
+			ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
+				& BOOST_SERIALIZATION_NVP(mCreatureModels);
+		}
 	}
+
+//	void saveCreatures(std::string savePath) {
+//		SaveController < CreatureModel > creatureModelSaveController;
+//		for (std::vector<CreatureModel*>::const_iterator it =
+//			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+//			creatureModelSaveController.save(**it, "SomeFile");
+//		}
+//	}
+//
+//	void loadCreatures(std::string loadPath) {
+//		SaveController < CreatureModel > creatureModelSaveController;
+//		for (std::vector<CreatureModel*>::const_iterator it =
+//			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+//			creatureModelSaveController.restore(**it, "SomeFile");
+//		}
+//	}
 
 private:
 

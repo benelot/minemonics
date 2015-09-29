@@ -1,10 +1,3 @@
-/*
- * GeneBranch_test.cpp
- *
- *  Created on: Mar 9, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <gtest/gtest.h>
@@ -47,9 +40,9 @@ protected:
 
 		geneBranch2 = new MorphogeneBranch();
 
-		SaveController<MorphogeneBranch> geneBranchSaveController;
-		geneBranchSaveController.save(*geneBranch, "GeneBranch.test");
-		geneBranchSaveController.restore(*geneBranch2, "GeneBranch.test");
+		SaveController < MorphogeneBranch > geneBranchSaveController;
+		geneBranchSaveController.save(*geneBranch, "test/GeneBranch.test");
+		geneBranchSaveController.restore(*geneBranch2, "test/GeneBranch.test");
 
 	}
 
@@ -71,22 +64,22 @@ TEST_F(MorphoGeneBranchTest,hasValidJointAnchor) {
 	ASSERT_TRUE(0 <= geneBranch->getJointAnchorY() <= 1);
 	ASSERT_TRUE(0 <= geneBranch->getJointAnchorZ() <= 1);
 	ASSERT_TRUE(
-			geneBranch->getJointAnchorX() != 0
-					&& geneBranch->getJointAnchorY() != 0
-					&& geneBranch->getJointAnchorZ() != 0);
+		geneBranch->getJointAnchorX() != 0
+		&& geneBranch->getJointAnchorY() != 0
+		&& geneBranch->getJointAnchorZ() != 0);
 }
 
 TEST_F(MorphoGeneBranchTest,hasValidJointRotation) {
 	//test valid joint rotation
 	ASSERT_TRUE(
-			0 <= geneBranch->getJointPitch()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= geneBranch->getJointPitch()
+		<= 2 * boost::math::constants::pi<double>());
 	ASSERT_TRUE(
-			0 <= geneBranch->getJointYaw()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= geneBranch->getJointYaw()
+		<= 2 * boost::math::constants::pi<double>());
 	ASSERT_TRUE(
-			0 <= geneBranch->getJointRoll()
-					<= 2 * boost::math::constants::pi<double>());
+		0 <= geneBranch->getJointRoll()
+		<= 2 * boost::math::constants::pi<double>());
 }
 
 // everything else can not be tested (booleans and a pointer pointing to NULL or non-NULL)

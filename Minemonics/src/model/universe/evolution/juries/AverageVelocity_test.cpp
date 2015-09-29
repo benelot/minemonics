@@ -37,9 +37,9 @@ protected:
 
 		SaveController < AverageVelocity > saveController;
 
-		saveController.save(*velocity, "AvgVelocity.test");
+		saveController.save(*velocity, "test/AvgVelocity.test");
 
-		saveController.restore(*velocity2, "AvgVelocity.test");
+		saveController.restore(*velocity2, "test/AvgVelocity.test");
 	}
 
 	virtual void TearDown() {
