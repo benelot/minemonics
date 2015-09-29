@@ -119,7 +119,7 @@ void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
 	 * video codecs and allocate the necessary encode buffers. */
 	{
 
-		mAVFrame = avcodec_alloc_frame();
+		mAVFrame = av_frame_alloc();
 		mAVFrame->pts = 0;
 
 		/* put sample parameters */
@@ -175,7 +175,7 @@ void Ogre3DFFMPEGVideoWriter::setup(const char* filename, int width, int height,
 				mAVFrame->linesize[3]);
 		}
 
-		mPictureRGB24 = avcodec_alloc_frame();
+		mPictureRGB24 = av_frame_alloc();
 		mPictureRGB24->format = AV_PIX_FMT_0RGB32;
 
 		if ((ret = av_image_alloc(mPictureRGB24->data, mPictureRGB24->linesize,
