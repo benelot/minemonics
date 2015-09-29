@@ -73,7 +73,7 @@ public:
 	 * @param timebasefactor the timebasefactor
 	 **/
 	void setup(const char* filename, int width, int height,
-		int bitrate = 800000, float timebasefactor = 200);
+		int bitrate = 800000, float timebasefactor = 25);
 	/**
 	 * add a frame to the video file
 	 * @param pixels the pixels packed in RGB (24-bit RGBRGBRGB...)
