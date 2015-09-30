@@ -168,7 +168,15 @@ private:
 	CEGUI::Window* mLayout;
 
 	//CEGUI windows
+	//# planet windows
 	MovablePanel* mNewPlanetWindow;
+	MovablePanel* mEditPlanetWindow;
+	MovablePanel* mLoadPlanetWindow;
+
+	//# population windows
+	MovablePanel* mNewPopulationWindow;
+	MovablePanel* mEditPopulationWindow;
+	MovablePanel* mLoadPopulationWindow;
 
 	//SheetHandler
 	GUISheetHandler mGUISheetHandler;

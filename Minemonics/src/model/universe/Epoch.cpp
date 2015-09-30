@@ -15,16 +15,16 @@
 //## utils headers
 
 Epoch::Epoch() :
-		mEndingAtFitness(0), mFitnessEnabled(false), mGenerationsEnabled(false), mLastingGenerations(
-				0), mCurrentFitness(0), mLastingGenerationsLimit(0) {
+	mEndingAtFitness(0), mFitnessEnabled(false), mGenerationsEnabled(false), mCurrentGeneration(
+		0), mCurrentFitness(0), mEndingAtGeneration(0) {
 }
 
 Epoch::~Epoch() {
-	
+
 }
 
 bool Epoch::isEndOfEpoch() {
-	if (mGenerationsEnabled && isLastingGenerationsReached()) {
+	if (mGenerationsEnabled && isEndingGenerationReached()) {
 		return true;
 	}
 

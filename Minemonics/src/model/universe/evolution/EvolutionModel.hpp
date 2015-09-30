@@ -1,12 +1,21 @@
 #ifndef MODEL_UNIVERSE_EVOLUTION_EVOLUTIONMODEL_HPP_
 #define MODEL_UNIVERSE_EVOLUTION_EVOLUTIONMODEL_HPP_
 
-//# corresponding header
+//# corresponding headers
 //# forward declarations
-
 //# system headers
 #include <vector>
 
+//## controller headers
+//## model headers
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
 //## controller headers
 //## model headers
 #include <model/universe/evolution/Reaper.hpp>
@@ -58,7 +67,7 @@ public:
 	 * @param tournamentSize The size of the tournament for simultaneous evaluation
 	 */
 	void initialize(const EvaluationType type = INDIVIDUAL_EVALUATION,
-			const double evaluationTime = 10, const int tournamentSize = 1);
+		const double evaluationTime = 10, const int tournamentSize = 1);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -127,9 +136,9 @@ public:
 	}
 
 	bool setCurrentCreatureIndex(
-			const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
+		const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
 		if (currentCreatureIndex
-				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
+			< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex = currentCreatureIndex;
 			return true;
 		} else {
@@ -142,7 +151,7 @@ public:
 	}
 
 	void setCurrentPopulationIndex(
-			const std::vector<PopulationModel*>::size_type currentPopulationIndex) {
+		const std::vector<PopulationModel*>::size_type currentPopulationIndex) {
 		mCurrentPopulationIndex = currentPopulationIndex;
 	}
 
@@ -150,46 +159,91 @@ public:
 		return mTournamentSize;
 	}
 
+	//Serialization
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the evolution model to a string.
+	 * @param os The ostream.
+	 * @param evolution The evolution we want to serialize.
+	 * @return A string containing all information about the evolution.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const EvolutionModel &evolution) {
+		os
+
+		<< "/EvolutionModel: EvaluationType=" << evolution.mType /**!< The evaluation type */
+
+		<< "\n/TournamentSize=" << evolution.mTournamentSize /**!< The tournament size */
+
+		<< "\n/EvaluationTime=" << evolution.mEvaluationTime /**!< The evaluation time */
+		<< "\n/Phase=" << evolution.mPhase; /**!< The phase the evolution is currently in */
+
+		/**The populations of the planet*/
+		for (std::vector<PopulationModel*>::const_iterator it =
+			evolution.mPopulationModels.begin();
+			it != evolution.mPopulationModels.end(); it++) {
+			os << (**it);
+			os << "||";
+		}
+
+		/** The current population*/
+		os << "\n/Current Epoch=" << evolution.mCurrentPopulationIndex
+		/** The current creature*/
+		<< "\n/Current Creature=" << evolution.mCurrentCreatureIndex;
+		return os;
+	}
+
+	/**
+	 * Serializes the evolution to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**!< The evaluation type */
+		& BOOST_SERIALIZATION_NVP(mType)
+
+		/**!< The tournament size */
+		& BOOST_SERIALIZATION_NVP(mTournamentSize)
+
+		/**!< The evaluation time */
+		& BOOST_SERIALIZATION_NVP(mEvaluationTime)
+
+		/**!< The phase the evolution is currently in */
+		& BOOST_SERIALIZATION_NVP(mPhase)
+
+		/**The populations of the planet*/
+		& BOOST_SERIALIZATION_NVP(mPopulationModels)
+
+		/** The current population*/
+		& BOOST_SERIALIZATION_NVP(mCurrentPopulationIndex)
+
+		/** The current creature*/
+		& BOOST_SERIALIZATION_NVP(mCurrentCreatureIndex);
+	}
+
 private:
-	/**
-	 * The vector of populations that are evaluated.
-	 */
-	std::vector<PopulationModel*> mPopulationModels;
+	std::vector<PopulationModel*> mPopulationModels; /**!< The vector of populations that are evaluated. */
 
-	/**
-	 * The currently evaluated population.
-	 */
-	std::vector<PopulationModel*>::size_type mCurrentPopulationIndex;
+	std::vector<PopulationModel*>::size_type mCurrentPopulationIndex; /**!< The currently evaluated population. */
 
-	/**
-	 * The currently evaluated creature.
-	 */
-	std::vector<CreatureModel*>::size_type mCurrentCreatureIndex;
+	std::vector<CreatureModel*>::size_type mCurrentCreatureIndex; /**!< The currently evaluated creature. */
 
-	/**
-	 * The reaper of this evolution model.
-	 */
-	Reaper mReaper;
+	Reaper mReaper; /**!< The reaper of this evolution model. */
 
-	/**
-	 * The phase this evolution is in.
-	 */
-	EvolutionPhase mPhase;
+	EvolutionPhase mPhase; /**!< The phase this evolution is in. */
 
-	/**
-	 * The type of evolution model.
-	 */
-	EvaluationType mType;
+	EvaluationType mType; /**!< The type of evolution model. */
 
-	/**
-	 * Evaluation time
-	 */
-	double mEvaluationTime;
+	double mEvaluationTime; /**!< Evaluation time */
 
-	/**
-	 * Tournament size
-	 */
-	unsigned long mTournamentSize;
+	unsigned long mTournamentSize; /**!< Tournament size */
 };
-
+BOOST_CLASS_VERSION(EvolutionModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_EVOLUTIONMODEL_HPP_ */

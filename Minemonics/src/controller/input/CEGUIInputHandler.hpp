@@ -53,6 +53,10 @@ protected:
 	 */
 	void injectTimeImpulse(const double tick);
 
+	/**
+	 * Update the CEGUI input handler.
+	 * @param timeSinceLastTick Time since last tick
+	 */
 	void update(double timeSinceLastTick);
 
 	// CEGUI::KeyListener

@@ -58,11 +58,11 @@ public:
 	}
 
 	int getLastingGenerations() const {
-		return mLastingGenerations;
+		return mCurrentGeneration;
 	}
 
 	void setLastingGenerations(int lastingGenerations) {
-		mLastingGenerations = lastingGenerations;
+		mCurrentGeneration = lastingGenerations;
 	}
 
 	void addJuryType(Jury::JuryType type, double weight, bool higherIsBetter) {
@@ -71,19 +71,19 @@ public:
 		mSortOrders.push_back(higherIsBetter);
 	}
 
-	int getLastingGenerationsLimit() const {
-		return mLastingGenerationsLimit;
+	int getEndingAtGeneration() const {
+		return mEndingAtGeneration;
 	}
 
-	void setLastingGenerationsLimit(int lastingGenerationsLimit) {
-		mLastingGenerationsLimit = lastingGenerationsLimit;
+	void setEndingAtGeneration(int endingAtGeneration) {
+		mEndingAtGeneration = endingAtGeneration;
 	}
 
-	bool isLastingGenerationsReached(){
-		return mLastingGenerationsLimit <= mLastingGenerations;
+	bool isEndingGenerationReached() {
+		return mEndingAtGeneration <= mCurrentGeneration;
 	}
 
-	bool isFitnessReached(){
+	bool isFitnessReached() {
 		return mCurrentFitness >= mEndingAtFitness;
 	}
 
@@ -107,6 +107,70 @@ public:
 		return mSortOrders;
 	}
 
+	//Serialization
+
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the epoch model to a string.
+	 * @param os The ostream.
+	 * @param planet The epoch we want to serialize.
+	 * @return A string containing all information about the epoch.
+	 */
+	friend std::ostream & operator<<(std::ostream &os, const Epoch &epoch) {
+		os
+
+		<< "/Epoch: Fitness enabled=" << epoch.mFitnessEnabled /**!< If the epoch is related to fitness */
+
+		<< "/Epoch: Current fitness=" << epoch.mCurrentFitness /**!< The current fitness */
+
+		<< "/Epoch: Maximum fitness=" << epoch.mEndingAtFitness /**!< The maximum fitness */
+
+		<< "/Epoch: Generations enabled=" << epoch.mGenerationsEnabled /**!< If the epoch is related to number of generations */
+
+		<< "/Epoch: Current Generation=" << epoch.mCurrentGeneration /**!< The current generation */
+
+		<< "/Epoch: Maximum Generation=" << epoch.mEndingAtGeneration; /**!< The maximum generation */
+
+		/**The juries of the epoch*/
+		for (int i = 0; i < epoch.mJuryTypes.size(); i++) {
+			os << epoch.mJuryTypes[i] << "," << epoch.mSortOrders[i]
+				<< epoch.mWeights[i] << "||";
+		}
+
+		return os;
+	}
+
+	/**
+	 * Serializes the planet to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+		/**!< If the epoch is related to fitness */
+		& BOOST_SERIALIZATION_NVP(mFitnessEnabled)
+
+		/**!< The current fitness */
+		& BOOST_SERIALIZATION_NVP(mCurrentFitness)
+
+		/**!< The maximum fitness */
+		& BOOST_SERIALIZATION_NVP(mEndingAtFitness)
+
+		/**!< If the epoch is related to generations */
+		& BOOST_SERIALIZATION_NVP(mGenerationsEnabled)
+
+		/**!< The current generation */
+		& BOOST_SERIALIZATION_NVP(mCurrentGeneration)
+
+		/**!< The maximum generation */
+		& BOOST_SERIALIZATION_NVP(mEndingAtGeneration);
+	}
+
 private:
 	std::vector<Jury::JuryType> mJuryTypes;
 
@@ -118,8 +182,8 @@ private:
 
 	//Number of generations
 	bool mGenerationsEnabled;
-	int mLastingGenerations;
-	int mLastingGenerationsLimit;
+	int mCurrentGeneration;
+	int mEndingAtGeneration;
 
 	//Reached fitness
 	bool mFitnessEnabled;

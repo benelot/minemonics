@@ -75,6 +75,10 @@ public:
 	 */
 	bool proceedEvaluation();
 
+	void save() {
+		mPlanetModel->save();
+	}
+
 	// Accessor methods
 	/**
 	 * Get the environment of the planet.

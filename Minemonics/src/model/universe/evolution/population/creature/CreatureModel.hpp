@@ -2,6 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_CREATUREM_H_
 
 //# corresponding header
+#include <model/Serializable.hpp>
+
 //# forward declarations
 class PopulationModel;
 namespace boost {
@@ -29,6 +31,8 @@ class access;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/SaveController.hpp>
+
 //## model headers
 #include <model/universe/PlanetModel.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
@@ -51,7 +55,7 @@ class access;
  * @date		2014-12-02
  * @author		Benjamin Ellenberger
  */
-class CreatureModel {
+class CreatureModel: public Serializable {
 public:
 	CreatureModel();
 	CreatureModel(const CreatureModel& creatureModel);
@@ -124,10 +128,6 @@ public:
 
 	void calm();
 
-	bool hasInterpenetrations() {
-		return mPhenotypeModel->hasInterpenetrations();
-	}
-
 	/**
 	 * Compare the creature model to another creature model.
 	 * @param creature Another creature model.
@@ -141,6 +141,11 @@ public:
 	CreatureModel* clone();
 
 	// Accessor methods
+
+	bool hasInterpenetrations() {
+		return mPhenotypeModel->hasInterpenetrations();
+	}
+
 	MixedGenome& getGenotype() {
 		return mGenotype;
 	}
@@ -224,6 +229,17 @@ public:
 	}
 
 	// Serialization
+
+	virtual void save() {
+		SaveController<CreatureModel> creatureModelSaver;
+		creatureModelSaver.save(*this, mSerializationPath.c_str());
+	}
+
+	virtual void load() {
+		SaveController<CreatureModel> creatureModelSaver;
+		creatureModelSaver.restore(*this, mSerializationPath.c_str());
+	}
+
 	/**
 	 * Give access to boost serialization
 	 */

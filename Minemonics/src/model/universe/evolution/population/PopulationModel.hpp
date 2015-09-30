@@ -36,6 +36,7 @@ class access;
 
 //## view headers
 //## utils headers
+#include <utils/serialization/FilesystemManipulator.hpp>
 
 /**
  * @brief		The population model holds the information about a population of creatures.
@@ -135,7 +136,6 @@ public:
 			os << (**it);
 		}
 		return os;
-
 	}
 
 	/**
@@ -154,12 +154,16 @@ public:
 	}
 
 	virtual void save() {
+		SaveController<PopulationModel> populationSaveController;
+		populationSaveController.save(*this, mSerializationPath.c_str());
 		if (SerializationConfiguration::POPULATION_EXPANDED) {
 			saveCreatures();
 		}
 	}
 
 	virtual void load() {
+		SaveController<PopulationModel> populationSaveController;
+		populationSaveController.restore(*this, mSerializationPath.c_str());
 		if (SerializationConfiguration::POPULATION_EXPANDED) {
 			loadCreatures();
 		}
@@ -168,19 +172,28 @@ public:
 private:
 
 	void saveCreatures() {
-		SaveController < CreatureModel > creatureModelSaveController;
 		for (std::vector<CreatureModel*>::const_iterator it =
 			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
-			creatureModelSaveController.save(**it, mSerializationPath.c_str());
+			(*it)->save();
 		}
 	}
 
 	void loadCreatures() {
-		SaveController < CreatureModel > creatureModelSaveController;
-		for (std::vector<CreatureModel*>::const_iterator it =
-			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
-			creatureModelSaveController.restore(**it,
-				mSerializationPath.c_str());
+		mCreatureModels.clear();
+
+		//get parent directory name
+		std::string dirname =
+			boost::filesystem::path(mSerializationPath).parent_path().string();
+
+		std::vector < std::string > files =
+			FilesystemManipulator::getFileNamesByExtension(dirname,
+				".creature");
+		for (int i = 0; i < files.size(); i++) {
+			CreatureModel* creature = new CreatureModel();
+
+			creature->setSerializationPath(files[i]);
+			creature->load();
+			mCreatureModels.push_back(creature);
 		}
 	}
 

@@ -475,6 +475,9 @@ set(MISCHDRS
     
     # bullet utils
     ./utils/bullet/BulletUtils.hpp
+    
+    # serialization
+    ./utils/serialization/FilesystemManipulator.hpp
 )
 set(MISCSRCS
 
@@ -692,7 +695,7 @@ if (MINGW)
 endif ()
 #include <OgreSceneManager.h>
   
-set(MINEMONICS_BOOST_COMPONENTS log)
+set(MINEMONICS_BOOST_COMPONENTS log filesystem)
 find_package(Boost COMPONENTS ${MINEMONICS_BOOST_COMPONENTS} REQUIRED)
 
 set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})

@@ -24,7 +24,7 @@
 BoostLogger Universe::mBoostLogger; /*<! initialize the boost logger*/
 Universe::_Init Universe::_initializer;
 Universe::Universe() :
-		mSimulationSpeed(pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)) {
+	mSimulationSpeed(pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)) {
 //	mEvaluationController();
 	mPlanets.clear();
 //	mUniverseModel();
@@ -58,12 +58,12 @@ bool Universe::proceedEvaluation() {
 	if (mPlanets.size() != 0) {
 		// if the evaluation of the certain planet goes into the next generation, we go to the next planet.
 		if (!mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->proceedEvaluation()) {
+			//save the whole planet
+			mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->save();
 			mUniverseModel.setCurrentEvaluationPlanetIndex(
-					(mUniverseModel.getCurrentEvaluationPlanetIndex() + 1
-							< mPlanets.size()) ?
-							mUniverseModel.getCurrentEvaluationPlanetIndex()
-									+ 1 :
-							0);
+				(mUniverseModel.getCurrentEvaluationPlanetIndex() + 1
+					< mPlanets.size()) ?
+					mUniverseModel.getCurrentEvaluationPlanetIndex() + 1 : 0);
 		}
 	} else {
 		return false;
@@ -77,7 +77,7 @@ void Universe::setSimulationSpeed(double simulationSpeed) {
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end(); pit++) {
 		(*pit)->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->setSimulationSpeed(
-				simulationSpeed);
+			simulationSpeed);
 	}
 }
 
@@ -97,22 +97,18 @@ void Universe::drawDebugWorld() {
 
 void Universe::update(const double timeStep) {
 	//calculate the number of substeps the simulator needs to take
-	int subSteps =
-			ceil(
-					pow(2,
-							PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-							* timeStep
-							/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+	int subSteps = ceil(
+		pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+			* timeStep
+			/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
 
 	for (int i = 0; i < subSteps; i++) {
 		stepPhysics(
-				pow(2,
-						PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-						* timeStep / ((float) subSteps));
+			pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+				* timeStep / ((float) subSteps));
 		mEvaluationController.update(
-				pow(2,
-						PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-						* timeStep / ((float) subSteps));
+			pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
+				* timeStep / ((float) subSteps));
 	}
 }
 

@@ -5,6 +5,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -13,6 +15,8 @@
 //## configuration headers
 //## controller headers
 #include <controller/universe/Universe.hpp>
+#include <controller/SaveController.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
 //## view headers
@@ -21,14 +25,14 @@
 BoostLogger EvaluationController::mBoostLogger; /*<! initialize the boost logger*/
 EvaluationController::_Init EvaluationController::_initializer;
 EvaluationController::EvaluationController() :
-		mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0), mPaused(
-				false), mUniverse(NULL) {
+	mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0), mPaused(
+		false), mUniverse(NULL) {
 }
 
 EvaluationController::~EvaluationController() {
 //	mCurrentlyRunningEvaluationsQty
 	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-			eit != mEvaluations.end();) {
+		eit != mEvaluations.end();) {
 		Evaluation* evaluation = *eit;
 		eit = mEvaluations.erase(eit);
 		delete evaluation;
@@ -38,7 +42,7 @@ EvaluationController::~EvaluationController() {
 }
 
 void EvaluationController::initialize(Universe* const universe,
-		int parallelEvaluationsQty) {
+	int parallelEvaluationsQty) {
 	mUniverse = universe;
 	mParallelEvaluationsQty = parallelEvaluationsQty;
 	mEvaluations.clear();
@@ -54,6 +58,20 @@ void EvaluationController::scheduleEvaluations() {
 
 		// erase torn down evaluations
 		if ((*eit)->isTornDown()) {
+
+//			std::string creatureFile;
+//			creatureFile.append("creatures/Creature-");
+//			creatureFile.append(
+//				boost::lexical_cast < std::string
+//					> (SimulationManager::getSingleton()->getNow()));
+//			creatureFile.append(".creature");
+//
+//			Population* population = *(*eit)->getPopulations().begin();
+//			Creature* creature = *population->getCreatures().begin();
+//			SaveController < CreatureModel > creatureSaver;
+//			creatureSaver.save(*(creature->getCreatureModel()),
+//				creatureFile.c_str());
+
 			mCurrentlyRunningEvaluationsQty--;
 			eit = mEvaluations.erase(eit);
 		} else {
@@ -65,11 +83,11 @@ void EvaluationController::scheduleEvaluations() {
 
 		//if the evaluation is newly scheduled, then set it up for evaluation
 		if (!(*eit)->isEvaluating()
-				&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
+			&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
 			mCurrentlyRunningEvaluationsQty++;
 			(*eit)->setup();
 			SimulationManager::getSingleton()->getViewController().setEvaluationInView(
-					*eit);
+				*eit);
 		}
 	}
 }
@@ -87,7 +105,7 @@ void EvaluationController::update(const double timeSinceLastTick) {
 
 	//breaks when there are no creatures on the planets to evaluate
 	while (mEvaluations.size() < mParallelEvaluationsQty
-			&& mUniverse->getTotalCreatureQty() != 0) {
+		&& mUniverse->getTotalCreatureQty() != 0) {
 		if (!mUniverse->proceedEvaluation()) {
 			break;
 		}

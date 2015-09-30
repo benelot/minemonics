@@ -81,8 +81,6 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-//#define BT_USE_DOUBLE_PRECISION
-
 SimulationManager* SimulationManager::mSimulationManager;
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
@@ -159,6 +157,7 @@ void SimulationManager::setupView(void) {
  * Creates the scene of the application.
  */
 void SimulationManager::createScene(void) {
+
 	// Initialize the logger
 	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL);
 	Logger::initTermSink();
