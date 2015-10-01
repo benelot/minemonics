@@ -103,7 +103,7 @@ void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
 		CEGUI::PushButton* editPlanetButton =
 			(CEGUI::PushButton*) mWindow->getChildRecursive(
 				GUIConfiguration::editPlanetCmd);
-		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+		editPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::editPlanetButtonClicked,
 				this));
 
@@ -111,7 +111,7 @@ void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
 		CEGUI::PushButton* loadPlanetButton =
 			(CEGUI::PushButton*) mWindow->getChildRecursive(
 				GUIConfiguration::loadPlanetCmd);
-		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+		loadPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::loadPlanetButtonClicked,
 				this));
 	}
