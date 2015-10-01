@@ -31,12 +31,17 @@
 
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <configuration/GUIConfiguration.hpp>
 
 //## controller headers
 //## model headers
 //## view headers
 #include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>
 #include <view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/EditPlanetPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/EditPopulationPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/LoadPlanetPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/LoadPopulationPanel.hpp>
 #include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
 #include <view/visualization/CEGUI/ShowCasePanel.hpp>
 
@@ -47,7 +52,9 @@ ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 	mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDragContainer(NULL), mEvaluationInView(
 		NULL), mShowShadows(false), mSelectedPlanet(NULL), mMenuBar(NULL), mFpsPanel(
-		NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL) {
+		NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
+		NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
+		NULL), mLoadPopulationWindow(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -132,8 +139,36 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 	mMovablePanels.push_back(mDetailsPanel);
 
 	// initialize windows
-	mNewPlanetWindow = new NewPlanetPanel(40, 50, "New Planet");
-//	mMovablePanels.push_back(mNewPlanetWindow);
+	//# new planet window
+	mNewPlanetWindow = new NewPlanetPanel(40, 50,
+		GUIConfiguration::newPlanetName);
+	mNewPlanetWindow->hide();
+	mMovablePanels.push_back(mNewPlanetWindow);
+
+	mNewPopulationWindow = new NewPopulationPanel(40, 50,
+		GUIConfiguration::newPopulationName, 600, 600);
+	mNewPopulationWindow->hide();
+	mMovablePanels.push_back(mNewPopulationWindow);
+
+	mEditPlanetWindow = new EditPlanetPanel(40, 50,
+		GUIConfiguration::editPlanetName);
+	mEditPlanetWindow->hide();
+	mMovablePanels.push_back(mEditPlanetWindow);
+
+	mEditPopulationWindow = new EditPopulationPanel(40, 50,
+		GUIConfiguration::editPopulationName, 600, 600);
+	mEditPopulationWindow->hide();
+	mMovablePanels.push_back(mEditPopulationWindow);
+
+	mLoadPlanetWindow = new LoadPlanetPanel(40, 50,
+		GUIConfiguration::loadPlanetName);
+	mLoadPlanetWindow->hide();
+	mMovablePanels.push_back(mLoadPlanetWindow);
+
+	mLoadPopulationWindow = new LoadPopulationPanel(40, 50,
+		GUIConfiguration::loadPopulationName);
+	mLoadPopulationWindow->hide();
+	mMovablePanels.push_back(mLoadPopulationWindow);
 
 	// TODO: Add graphwindows again when used
 //	mMovablePanels.push_back(

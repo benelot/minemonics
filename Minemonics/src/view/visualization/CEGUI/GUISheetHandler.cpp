@@ -93,10 +93,26 @@ void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
 		//Planet menu
 		//Planets->New Planet
 		CEGUI::PushButton* newPlanetButton =
-			(CEGUI::PushButton *) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
 				GUIConfiguration::newPlanetCmd);
 		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::newPlanetButtonClicked,
+				this));
+
+		//Planets->Edit Planet
+		CEGUI::PushButton* editPlanetButton =
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::editPlanetCmd);
+		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&GUISheetHandler::editPlanetButtonClicked,
+				this));
+
+		//Planets->Load Planet
+		CEGUI::PushButton* loadPlanetButton =
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::loadPlanetCmd);
+		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&GUISheetHandler::loadPlanetButtonClicked,
 				this));
 	}
 
@@ -244,13 +260,31 @@ void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
 //			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
 //					this));
 
-//Population->New Population
-//	CEGUI::PushButton* pQuitButton =
-//			(CEGUI::PushButton *) mWindow->getChildRecursive(
-//					"cmdQuitApplication");
-//	pQuitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-//			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
-//					this));
+	{
+		//Population->New Population
+		CEGUI::PushButton* newPopulationButton =
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::newPopulationCmd);
+		newPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				&GUISheetHandler::newPopulationButtonClicked, this));
+
+		//Population->Edit Population
+		CEGUI::PushButton* editPopulationButton =
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::editPopulationCmd);
+		editPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				&GUISheetHandler::editPopulationButtonClicked, this));
+
+		//Population->Load Population
+		CEGUI::PushButton* loadPopulationButton =
+			(CEGUI::PushButton*) mWindow->getChildRecursive(
+				GUIConfiguration::loadPopulationCmd);
+		loadPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(
+				&GUISheetHandler::loadPopulationButtonClicked, this));
+	}
 
 //Population->Save Population as...
 //	CEGUI::PushButton* pQuitButton =
@@ -707,11 +741,22 @@ bool GUISheetHandler::learningTrackButtonClicked(const CEGUI::EventArgs& args) {
 
 //Planets->New Planet
 bool GUISheetHandler::newPlanetButtonClicked(const CEGUI::EventArgs &args) {
-//	Planet* planet = new Planet(Environment::PLANE, 2000,
-//	SimulationManager::getSingleton()->getSun());
-//
-//	// add planet to universe
-//	SimulationManager::getSingleton()->getUniverse().addPlanet(planet);
+	SimulationManager::getSingleton()->getViewController().setNewPlanetWindowVisibility(
+		true);
+	return true;
+}
+
+//Planets->Edit Planet
+bool GUISheetHandler::editPlanetButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getViewController().setEditPlanetWindowVisibility(
+		true);
+	return true;
+}
+
+//Planets->Load Planet
+bool GUISheetHandler::loadPlanetButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getViewController().setLoadPlanetWindowVisibility(
+		true);
 	return true;
 }
 
@@ -775,6 +820,24 @@ bool GUISheetHandler::planeButtonClicked(const CEGUI::EventArgs &args) {
 
 //Population->New Population
 bool GUISheetHandler::newPopulationButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getViewController().setNewPopulationWindowVisibility(
+		true);
+	return true;
+}
+
+//Population->Edit Population
+bool GUISheetHandler::editPopulationButtonClicked(
+	const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getViewController().setEditPopulationWindowVisibility(
+		true);
+	return true;
+}
+
+//Population->Load Population
+bool GUISheetHandler::loadPopulationButtonClicked(
+	const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getViewController().setLoadPopulationWindowVisibility(
+		true);
 	return true;
 }
 

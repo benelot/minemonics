@@ -26,7 +26,7 @@ const std::string GUIConfiguration::evaluationName = "Evaluation";
 // evolution track
 const std::string GUIConfiguration::setEvolutionTrackName = "Evolution Track";
 const std::string GUIConfiguration::setEvolutionTrackCmd =
-"cmdSetEvolutionTrack";
+	"cmdSetEvolutionTrack";
 
 // learning track
 const std::string GUIConfiguration::setLearningTrackName = "Learning Track";
@@ -34,9 +34,29 @@ const std::string GUIConfiguration::setLearningTrackCmd = "cmdSetLearningTrack";
 
 //#####################
 //Planet menu
-//new planet
+//New planet
 const std::string GUIConfiguration::newPlanetName = "New Planet";
 const std::string GUIConfiguration::newPlanetCmd = "cmdNewPlanet";
+
+//Edit planet
+const std::string GUIConfiguration::editPlanetName = "Edit Planet";
+const std::string GUIConfiguration::editPlanetCmd = "cmdEditPlanet";
+
+//load planet
+const std::string GUIConfiguration::loadPlanetName = "Load Planet";
+const std::string GUIConfiguration::loadPlanetCmd = "cmdLoadPlanet";
+
+//New population
+const std::string GUIConfiguration::newPopulationName = "New Population";
+const std::string GUIConfiguration::newPopulationCmd = "cmdNewPopulation";
+
+//Edit population
+const std::string GUIConfiguration::editPopulationName = "Edit Population";
+const std::string GUIConfiguration::editPopulationCmd = "cmdEditPopulation";
+
+//load population
+const std::string GUIConfiguration::loadPopulationName = "Load Population";
+const std::string GUIConfiguration::loadPopulationCmd = "cmdLoadPopulation";
 
 //#####################
 //Evolution menu
@@ -521,9 +541,9 @@ const std::string GUIConfiguration::moonGravityCmd = "cmdMoonGravity";
 
 // Mars/Mercury gravity 0.377/0.378
 const std::string GUIConfiguration::marsMercuryGravityName =
-"Mars/Mercury Gravity 0.377 g";
+	"Mars/Mercury Gravity 0.377 g";
 const std::string GUIConfiguration::marsMercuryGravityCmd =
-"cmdMarsMercuryGravity";
+	"cmdMarsMercuryGravity";
 
 // Uranus gravity 0.889
 const std::string GUIConfiguration::uranusGravityName = "Uranus Gravity 0.899 g";
@@ -531,9 +551,9 @@ const std::string GUIConfiguration::uranusGravityCmd = "cmdUranusGravity";
 
 // Venus/Saturn gravity 0.907/0.916
 const std::string GUIConfiguration::venusSaturnGravityName =
-"Venus/Saturn Gravity 0.91 g";
+	"Venus/Saturn Gravity 0.91 g";
 const std::string GUIConfiguration::venusSaturnGravityCmd =
-"cmdVenusSaturnGravity";
+	"cmdVenusSaturnGravity";
 
 // Earth gravity 1
 const std::string GUIConfiguration::earthGravityName = "Earth Gravity 1 g";
@@ -541,12 +561,12 @@ const std::string GUIConfiguration::earthGravityCmd = "cmdEarthGravity";
 
 // Neptune gravity 1.12
 const std::string GUIConfiguration::neptuneGravityName =
-"Neptune Gravity 1.12 g";
+	"Neptune Gravity 1.12 g";
 const std::string GUIConfiguration::neptuneGravityCmd = "cmdNeptuneGravity";
 
 // Jupiter gravity 2.36
 const std::string GUIConfiguration::jupiterGravityName =
-"Jupiter Gravity 2.36 g";
+	"Jupiter Gravity 2.36 g";
 const std::string GUIConfiguration::jupiterGravityCmd = "cmdJupiterGravity";
 
 // Sun gravity 27.930682977

@@ -614,6 +614,26 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/EditPlanetPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/EditPlanetPanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/EditPopulationPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/EditPopulationPanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/LoadPlanetPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/LoadPlanetPanel.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/LoadPopulationPanel.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/LoadPopulationPanel.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Ogre3DFFMPEGVideoWriter.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
@@ -1377,6 +1397,26 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/NewPopulationPanel.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/EditPlanetPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/EditPlanetPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/EditPopulationPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/EditPopulationPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/LoadPlanetPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/LoadPlanetPanel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/LoadPopulationPanel.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/LoadPopulationPanel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Ogre3DFFMPEGVideoWriter.hpp</name>

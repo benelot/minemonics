@@ -49,6 +49,26 @@ public:
 	// New planet
 	static const std::string newPlanetName;
 	static const std::string newPlanetCmd;
+
+	//edit planet
+	static const std::string editPlanetName;
+	static const std::string editPlanetCmd;
+
+	//load planet
+	static const std::string loadPlanetName;
+	static const std::string loadPlanetCmd;
+
+	//new population
+	static const std::string newPopulationName;
+	static const std::string newPopulationCmd;
+
+	//edit population
+	static const std::string editPopulationName;
+	static const std::string editPopulationCmd;
+
+	//load population
+	static const std::string loadPopulationName;
+	static const std::string loadPopulationCmd;
 //#####################
 //Evolution menu
 //		CEGUI::Window *evolutionTopItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",

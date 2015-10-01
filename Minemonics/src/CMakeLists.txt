@@ -323,6 +323,10 @@ set(VIEWHDRS
     ./view/visualization/CEGUI/ShowCasePanel.hpp
     ./view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp
     ./view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp
+    ./view/visualization/CEGUI/configpanels/EditPlanetPanel.hpp
+    ./view/visualization/CEGUI/configpanels/EditPopulationPanel.hpp
+    ./view/visualization/CEGUI/configpanels/LoadPlanetPanel.hpp
+    ./view/visualization/CEGUI/configpanels/LoadPopulationPanel.hpp
     	
     ## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
@@ -399,6 +403,10 @@ set(VIEWSRCS
 	./view/visualization/CEGUI/ShowCasePanel.cpp
 	./view/visualization/CEGUI/configpanels/NewPlanetPanel.cpp
     ./view/visualization/CEGUI/configpanels/NewPopulationPanel.cpp
+    ./view/visualization/CEGUI/configpanels/EditPlanetPanel.cpp
+    ./view/visualization/CEGUI/configpanels/EditPopulationPanel.cpp
+    ./view/visualization/CEGUI/configpanels/LoadPlanetPanel.cpp
+    ./view/visualization/CEGUI/configpanels/LoadPopulationPanel.cpp
 
 	## Videocapture
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp

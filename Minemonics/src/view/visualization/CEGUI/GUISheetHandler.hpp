@@ -33,8 +33,8 @@ public:
 	~GUISheetHandler();
 
 	void initialize(SimulationManager* const simulationmgr,
-	CEGUI::System* const system, CEGUI::Window* const sheet,
-	StateHandler* const stateHandler);
+		CEGUI::System* const system, CEGUI::Window* const sheet,
+		StateHandler* const stateHandler);
 
 	// CEGUI event handlers. You can name these whatever you like, as long as they have the proper
 	// signature: bool <method name>(const CEGUI::EventArgs &args)
@@ -54,6 +54,12 @@ public:
 
 	//Planets->New Planet
 	bool newPlanetButtonClicked(const CEGUI::EventArgs &args);
+
+	//Planets->Edit Planet
+	bool editPlanetButtonClicked(const CEGUI::EventArgs &args);
+
+	//Planets->Load Planet
+	bool loadPlanetButtonClicked(const CEGUI::EventArgs &args);
 
 	//Evolution->New Evolution
 	bool newEvolutionButtonClicked(const CEGUI::EventArgs &args);
@@ -90,6 +96,12 @@ public:
 
 	//Population->New Population
 	bool newPopulationButtonClicked(const CEGUI::EventArgs &args);
+
+	//Population->Edit Population
+	bool editPopulationButtonClicked(const CEGUI::EventArgs &args);
+
+	//Population->Load Population
+	bool loadPopulationButtonClicked(const CEGUI::EventArgs &args);
 
 	//Population->Save Population as...
 	bool savePopulationAsButtonClicked(const CEGUI::EventArgs &args);

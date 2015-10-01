@@ -145,6 +145,54 @@ public:
 		return mMovablePanels;
 	}
 
+	void setNewPlanetWindowVisibility(bool visible) {
+		if (visible) {
+			mNewPlanetWindow->show();
+		} else {
+			mNewPlanetWindow->hide();
+		}
+	}
+
+	void setEditPlanetWindowVisibility(bool visible) {
+		if (visible) {
+			mEditPlanetWindow->show();
+		} else {
+			mEditPlanetWindow->hide();
+		}
+	}
+
+	void setLoadPlanetWindowVisibility(bool visible) {
+		if (visible) {
+			mLoadPlanetWindow->show();
+		} else {
+			mLoadPlanetWindow->hide();
+		}
+	}
+
+	void setNewPopulationWindowVisibility(bool visible) {
+		if (visible) {
+			mNewPopulationWindow->show();
+		} else {
+			mNewPopulationWindow->hide();
+		}
+	}
+
+	void setEditPopulationWindowVisibility(bool visible) {
+		if (visible) {
+			mEditPopulationWindow->show();
+		} else {
+			mEditPopulationWindow->hide();
+		}
+	}
+
+	void setLoadPopulationWindowVisibility(bool visible) {
+		if (visible) {
+			mLoadPopulationWindow->show();
+		} else {
+			mLoadPopulationWindow->hide();
+		}
+	}
+
 private:
 	/**
 	 * The boost logger.
