@@ -1,4 +1,8 @@
 //# corresponding header
+#include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>
+
+//# forward declarations
+//# system headers
 #include <stddef.h>
 #include <string>
 
@@ -14,7 +18,6 @@
 #include <CEGUI/widgets/ListboxTextItem.h>
 #include <CEGUI/widgets/PushButton.h>
 #include <CEGUI/WindowManager.h>
-#include <CEGUI/PropertySet.h>
 
 //# custom headers
 //## base headers
@@ -32,7 +35,6 @@
 
 //## view headers
 #include <view/visualization/CEGUI/elements/BoxSlider.hpp>
-#include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>
 
 //## utils headers
 
@@ -149,7 +151,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mBaseWidget->addChild(mEvaluationTimeLabel);
 
 		mEvaluationTimeBs = new BoxSlider("EvaluationTimeBoxSlider",
-			rightColWidth * width, "[0-9]*");
+			rightColWidth * width, 100, 10, "[0-9]*");
 		mEvaluationTimeBs->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0),
 				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
@@ -226,7 +228,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mBaseWidget->addChild(mTournamentSizeLabel);
 
 		mTournamentSizeBs = new BoxSlider("TournamentSizeBoxSlider",
-			rightColWidth * width, "[0-9]*");
+			rightColWidth * width, 100, 10, "[0-9]*");
 		mTournamentSizeBs->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0),
 				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));

@@ -101,7 +101,7 @@ EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 		mBaseWidget->addChild(mEvaluationTimeLabel);
 
 		mEvaluationTimeBs = new BoxSlider("EvaluationTimeBoxSlider",
-			rightColWidth * width, "[0-9]*");
+			rightColWidth * width, 100, 10, "[0-9]*");
 		mEvaluationTimeBs->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0),
 				CEGUI::UDim(verticalStep * 1.0f + verticalOffset, 0)));
@@ -179,7 +179,7 @@ EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 		mBaseWidget->addChild(mTournamentSizeLabel);
 
 		mTournamentSizeBs = new BoxSlider("TournamentSizeBoxSlider",
-			rightColWidth * width, "[0-9]*");
+			rightColWidth * width, 100, 10, "[0-9]*");
 		mTournamentSizeBs->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0),
 				CEGUI::UDim(verticalStep * 3.0f + verticalOffset, 0)));

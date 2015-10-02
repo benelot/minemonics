@@ -29,6 +29,7 @@
 //## utils headers
 
 BoxSlider::BoxSlider(const std::string name, const int width,
+	const int maxValue, const int currentValue,
 	const std::string validationString) :
 	CEGUI::Window(CEGUIConfiguration::CEGUI_SCHEME + "/Slider", name) {
 	setSize(CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, 20)));
@@ -46,9 +47,9 @@ BoxSlider::BoxSlider(const std::string name, const int width,
 	mSlider->setPosition(
 		CEGUI::UVector2(CEGUI::UDim(0, 0.0f), CEGUI::UDim(0, 0.0f)));
 
-	mSlider->setMaxValue(100.0f);
+	mSlider->setMaxValue(maxValue);
 	mSlider->setClickStep(1.0f);
-	mSlider->setCurrentValue(10.0f);
+	mSlider->setCurrentValue(currentValue);
 
 	mSlider->subscribeEvent(CEGUI::Slider::EventValueChanged,
 		CEGUI::Event::Subscriber(&BoxSlider::onSliderValueChanged, this));

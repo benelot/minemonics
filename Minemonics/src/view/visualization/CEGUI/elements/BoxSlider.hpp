@@ -20,8 +20,8 @@
  */
 class BoxSlider: public CEGUI::Window {
 public:
-	BoxSlider(const std::string name, const int width,
-		const std::string validationString);
+	BoxSlider(const std::string name, const int width, const int maxValue,
+		const int currentValue, const std::string validationString);
 	virtual ~BoxSlider();
 
 	void onSliderValueChanged();

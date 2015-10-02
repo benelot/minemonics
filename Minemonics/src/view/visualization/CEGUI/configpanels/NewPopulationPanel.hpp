@@ -5,9 +5,12 @@
 #include <view/visualization/CEGUI/MovablePanel.hpp>
 
 //# forward declarations
+class BoxSlider;
 #pragma once
 namespace CEGUI {
 class Window;
+class Combobox;
+class PushButton;
 } /* namespace CEGUI */
 
 //# system headers
@@ -33,9 +36,16 @@ public:
 	NewPopulationPanel(const int left, const int top, const std::string name);
 	~NewPopulationPanel(void);
 
+	void onConfirmClicked();
+
 protected:
-	CEGUI::Window* mTextBoxLabel;
-	CEGUI::Window* mTextBoxValues;
+protected:
+	// labels
+	CEGUI::Window* mPopulationSizeLabel;
+
+	//configuration elements
+	BoxSlider* mPopulationSizeBs;
+	CEGUI::PushButton* mConfirmButton;
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_NEWPOPULATIONPANEL_HPP_ */
