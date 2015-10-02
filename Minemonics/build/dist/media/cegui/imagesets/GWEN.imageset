@@ -83,6 +83,7 @@
   <Image height="2" name="Input.ComboBox.Disabled.Top.Middle" width="123" xPos="386" yPos="432" />
   <Image height="15" name="Input.ComboBox.Button.Normal" width="15" xPos="496" yPos="272" />
   <Image height="15" name="Input.ComboBox.Button.Hover" width="15" xPos="496" yPos="288" />
+  <Image height="15" name="Input.ComboBox.Button.Pushed" width="15" xPos="496" yPos="304" />
   <Image height="15" name="Input.ComboBox.Button.Down" width="15" xPos="496" yPos="304" />
   <Image height="15" name="Input.ComboBox.Button.Disabled" width="15" xPos="496" yPos="320" />
   <Image height="7" name="Input.UpDown.Up.Normal" width="7" xPos="384" yPos="112" />

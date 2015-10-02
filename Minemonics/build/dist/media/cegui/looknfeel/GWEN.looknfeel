@@ -878,6 +878,7 @@
         <Section section="inactive" />
         <Section section="caption" />
       </Layer>
+
     </StateImagery>
   </WidgetLook>
   
