@@ -1000,7 +1000,7 @@ bool GUISheetHandler::ambientlight0ButtonClicked(const CEGUI::EventArgs &args) {
 bool GUISheetHandler::ambientlight10ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.1, 0.1, 0.1));
+		Ogre::ColourValue(0.1, 0.1, 0.05));
 	return true;
 }
 
@@ -1008,7 +1008,7 @@ bool GUISheetHandler::ambientlight10ButtonClicked(
 bool GUISheetHandler::ambientlight20ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.2, 0.2, 0.2));
+		Ogre::ColourValue(0.2, 0.2, 0.15));
 	return true;
 }
 
@@ -1016,7 +1016,7 @@ bool GUISheetHandler::ambientlight20ButtonClicked(
 bool GUISheetHandler::ambientlight30ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.3, 0.3, 0.3));
+		Ogre::ColourValue(0.3, 0.3, 0.25));
 	return true;
 }
 
@@ -1024,7 +1024,7 @@ bool GUISheetHandler::ambientlight30ButtonClicked(
 bool GUISheetHandler::ambientlight40ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.4, 0.4, 0.4));
+		Ogre::ColourValue(0.4, 0.4, 0.35));
 	return true;
 }
 
@@ -1032,7 +1032,7 @@ bool GUISheetHandler::ambientlight40ButtonClicked(
 bool GUISheetHandler::ambientlight50ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.5, 0.5, 0.5));
+		Ogre::ColourValue(0.5, 0.5, 0.45));
 	return true;
 }
 
@@ -1040,7 +1040,7 @@ bool GUISheetHandler::ambientlight50ButtonClicked(
 bool GUISheetHandler::ambientlight60ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.6, 0.6, 0.6));
+		Ogre::ColourValue(0.6, 0.6, 0.55));
 	return true;
 }
 
@@ -1048,7 +1048,7 @@ bool GUISheetHandler::ambientlight60ButtonClicked(
 bool GUISheetHandler::ambientlight70ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.7, 0.7, 0.7));
+		Ogre::ColourValue(0.7, 0.7, 0.65));
 	return true;
 }
 
@@ -1056,7 +1056,7 @@ bool GUISheetHandler::ambientlight70ButtonClicked(
 bool GUISheetHandler::ambientlight80ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.8, 0.8, 0.8));
+		Ogre::ColourValue(0.8, 0.8, 0.75));
 	return true;
 }
 
@@ -1064,7 +1064,7 @@ bool GUISheetHandler::ambientlight80ButtonClicked(
 bool GUISheetHandler::ambientlight90ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(0.9, 0.9, 0.9));
+		Ogre::ColourValue(0.9, 0.9, 0.85));
 	return true;
 }
 
@@ -1072,7 +1072,7 @@ bool GUISheetHandler::ambientlight90ButtonClicked(
 bool GUISheetHandler::ambientlight100ButtonClicked(
 	const CEGUI::EventArgs &args) {
 	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
-		Ogre::ColourValue(1.0, 1.0, 1.0));
+		Ogre::ColourValue(1.0, 1.0, 0.95));
 	return true;
 }
 
