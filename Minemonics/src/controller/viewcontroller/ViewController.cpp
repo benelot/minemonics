@@ -97,7 +97,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 	mSystem = &CEGUI::System::getSingleton();
 
 	// tell us a lot about what is going on (see CEGUI.log in the working directory)
-	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Warnings);
 
 	// use this CEGUI scheme definition (see CEGUI docs for more)
 	CEGUI::SchemeManager::getSingleton().createFromFile(
@@ -190,8 +190,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 	// make an instance of our GUI sheet handler class
-	mGUISheetHandler.initialize(SimulationManager::getSingleton(), mSystem,
-		mLayout, stateHandler);
+	mGUISheetHandler.initialize(mSystem, mLayout, stateHandler);
 
 	mInfoOverlay.initialize(mCameraHandler.getCamera());
 

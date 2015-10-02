@@ -32,8 +32,7 @@ public:
 	GUISheetHandler();
 	~GUISheetHandler();
 
-	void initialize(SimulationManager* const simulationmgr,
-		CEGUI::System* const system, CEGUI::Window* const sheet,
+	void initialize(CEGUI::System* const system, CEGUI::Window* const sheet,
 		StateHandler* const stateHandler);
 
 	// CEGUI event handlers. You can name these whatever you like, as long as they have the proper
@@ -272,7 +271,6 @@ public:
 	bool helpButtonClicked(const CEGUI::EventArgs &args);
 
 private:
-	SimulationManager* mSimulationMgr;
 	CEGUI::System* mSystem;	// pointer to the CEGUI System instance
 	CEGUI::Window* mWindow;	// pointer to the layout sheet window
 	StateHandler* mStateHandler;	// pointer to the Simulation controller

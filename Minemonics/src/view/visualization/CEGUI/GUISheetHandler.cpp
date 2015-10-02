@@ -9,6 +9,7 @@
 //## model headers
 #include <OgreColourValue.h>
 #include <OgreSceneManager.h>
+#include <boost/lexical_cast.hpp>
 
 //## view headers
 #include <CEGUI/Event.h>
@@ -39,18 +40,16 @@
 //## utils headers
 
 GUISheetHandler::GUISheetHandler() :
-	mSimulationMgr(NULL), mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
+	mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
 
 }
 
 GUISheetHandler::~GUISheetHandler() {
 }
 
-void GUISheetHandler::initialize(SimulationManager* const simulationMgr,
-	CEGUI::System* const system, CEGUI::Window* const sheet,
-	StateHandler* const stateHandler) {
+void GUISheetHandler::initialize(CEGUI::System* const system,
+	CEGUI::Window* const sheet, StateHandler* const stateHandler) {
 
-	mSimulationMgr = simulationMgr;
 	mSystem = system;
 	mWindow = sheet;
 	mStateHandler = stateHandler;
@@ -876,6 +875,36 @@ bool GUISheetHandler::closeCreatureButtonClicked(const CEGUI::EventArgs &args) {
 
 //Creature->Record frames
 bool GUISheetHandler::recordFramesButtonClicked(const CEGUI::EventArgs &args) {
+	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+	case StateHandler::SIMULATION: {
+		if (SimulationManager::getSingleton()->getVideoWriter().isInitialized()) {
+//			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+//				<< "Recording video stopped.";
+			SimulationManager::getSingleton()->getVideoWriter().close();
+		} else {
+			// create video file name
+			std::string videoName;
+			videoName.append("Minemonics-");
+			videoName.append(
+				boost::lexical_cast < std::string
+					> (SimulationManager::getSingleton()->getNow()));
+			videoName.append(".mp4");
+
+//			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+//				<< "Recording video started.";
+
+			//This even works on if the screen gets resized
+			SimulationManager::getSingleton()->getVideoWriter().setup(
+				videoName.c_str(),
+				SimulationManager::getSingleton()->getWindow()->getWidth(),
+				SimulationManager::getSingleton()->getWindow()->getHeight());
+		}
+		break;
+	}
+	default: {
+		break;
+	}
+	}
 	return true;
 }
 
@@ -914,6 +943,8 @@ bool GUISheetHandler::selectionStyleButtonClicked(
 
 //Settings->Rendering->Shadows on/off
 bool GUISheetHandler::shadowsButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getViewController().setShowShadows(
+		!SimulationManager::getSingleton()->getViewController().doesShowShadows());
 	return true;
 }
 
@@ -939,23 +970,36 @@ bool GUISheetHandler::statusButtonClicked(const CEGUI::EventArgs &args) {
 
 //Settings->Rendering->Polygon mode->Solid mode
 bool GUISheetHandler::solidButtonClicked(const CEGUI::EventArgs &args) {
+	Ogre::PolygonMode pm = Ogre::PM_SOLID;
+
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(
+		pm);
+
 	return true;
 }
 
 //Settings->Rendering->Polygon mode->Wireframe mode
 bool GUISheetHandler::wireframeButtonClicked(const CEGUI::EventArgs &args) {
+
+	Ogre::PolygonMode pm = Ogre::PM_WIREFRAME;
+
+	SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->setPolygonMode(
+		pm);
+
 	return true;
 }
 
 //Settings->Rendering->Ambient light->0 %
 bool GUISheetHandler::ambientlight0ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
+		Ogre::ColourValue(0, 0, 0));
 	return true;
 }
 
 //Settings->Rendering->Ambient light->10 %
 bool GUISheetHandler::ambientlight10ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.1, 0.1, 0.1));
 	return true;
 }
@@ -963,7 +1007,7 @@ bool GUISheetHandler::ambientlight10ButtonClicked(
 //Settings->Rendering->Ambient light->20 %
 bool GUISheetHandler::ambientlight20ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.2, 0.2, 0.2));
 	return true;
 }
@@ -971,7 +1015,7 @@ bool GUISheetHandler::ambientlight20ButtonClicked(
 //Settings->Rendering->Ambient light->30 %
 bool GUISheetHandler::ambientlight30ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.3, 0.3, 0.3));
 	return true;
 }
@@ -979,7 +1023,7 @@ bool GUISheetHandler::ambientlight30ButtonClicked(
 //Settings->Rendering->Ambient light->40 %
 bool GUISheetHandler::ambientlight40ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.4, 0.4, 0.4));
 	return true;
 }
@@ -987,7 +1031,7 @@ bool GUISheetHandler::ambientlight40ButtonClicked(
 //Settings->Rendering->Ambient light->50 %
 bool GUISheetHandler::ambientlight50ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.5, 0.5, 0.5));
 	return true;
 }
@@ -995,7 +1039,7 @@ bool GUISheetHandler::ambientlight50ButtonClicked(
 //Settings->Rendering->Ambient light->60 %
 bool GUISheetHandler::ambientlight60ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.6, 0.6, 0.6));
 	return true;
 }
@@ -1003,7 +1047,7 @@ bool GUISheetHandler::ambientlight60ButtonClicked(
 //Settings->Rendering->Ambient light->70 %
 bool GUISheetHandler::ambientlight70ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.7, 0.7, 0.7));
 	return true;
 }
@@ -1011,7 +1055,7 @@ bool GUISheetHandler::ambientlight70ButtonClicked(
 //Settings->Rendering->Ambient light->80 %
 bool GUISheetHandler::ambientlight80ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.8, 0.8, 0.8));
 	return true;
 }
@@ -1019,7 +1063,7 @@ bool GUISheetHandler::ambientlight80ButtonClicked(
 //Settings->Rendering->Ambient light->90 %
 bool GUISheetHandler::ambientlight90ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(0.9, 0.9, 0.9));
 	return true;
 }
@@ -1027,7 +1071,7 @@ bool GUISheetHandler::ambientlight90ButtonClicked(
 //Settings->Rendering->Ambient light->100 %
 bool GUISheetHandler::ambientlight100ButtonClicked(
 	const CEGUI::EventArgs &args) {
-	mSimulationMgr->getSceneManager()->setAmbientLight(
+	SimulationManager::getSingleton()->getSceneManager()->setAmbientLight(
 		Ogre::ColourValue(1.0, 1.0, 1.0));
 	return true;
 }
