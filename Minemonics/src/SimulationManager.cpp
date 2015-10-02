@@ -552,14 +552,9 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
 
-	int x, y;
-	SDL_GetMouseState(&x, &y);
-
 	// Align CEGUI mouse with SDL2 mouse
-	CEGUI::Vector2f mousePos =
-		CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
-	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(
-		x - mousePos.d_x, y - mousePos.d_y);
+	mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
+		mInputHandler.getMousePositionY());
 
 	int wwidth, wheight;
 	SDL_GetWindowSize(mSdlWindow, &wwidth, &wheight);
@@ -700,7 +695,7 @@ bool SimulationManager::configure(void) {
 	break;
 #elif __MACOSX__
 	case SDL_SYSWM_COCOA:
-	//required to make OGRE work on MAX OSX
+	//required to make OGRE work on MAC OSX
 	params.insert( std::make_pair("macAPI", "cocoa") );
 	params.insert( std::make_pair("macAPICocoaUseNSView", "true") );
 
@@ -723,7 +718,7 @@ bool SimulationManager::configure(void) {
 	//put together the parameter list for the OGRE render window
 	params.insert(
 		std::make_pair("title", ApplicationConfiguration::APPLICATION_TITLE));
-	params.insert(std::make_pair("gamma", "true"));
+	params.insert(std::make_pair("gamma", "false"));
 	params.insert(std::make_pair("FSAA", cfgOpts["FSAA"].currentValue));
 	params.insert(std::make_pair("vsync", cfgOpts["VSync"].currentValue));
 
