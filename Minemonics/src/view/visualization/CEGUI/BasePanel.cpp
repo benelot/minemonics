@@ -2,7 +2,6 @@
 #include <stddef.h>
 #include <string>
 #include <vector>
-#include <iostream>
 
 //## controller headers
 //## model headers
@@ -24,7 +23,8 @@
 //## view headers
 //## utils headers
 
-BasePanel::BasePanel(const std::string name) {
+BasePanel::BasePanel(const std::string name) :
+	mWidth(0), mHeight(0) {
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 	// Initialize panel
 	mFrameWindow = static_cast<CEGUI::FrameWindow*>(wmgr.createWindow(
@@ -45,8 +45,8 @@ BasePanel::~BasePanel(void) {
 
 void BasePanel::initialize(const int left, const int top, const int width,
 	const int height, bool withTitleBar) {
-	std::cout << mName << ":" << left << "," << left - ((float) width) / 2.0f
-		<< "," << top << "," << top - ((float) height) / 2.0f << std::endl;
+//	std::cout << mName << ":" << left << "," << left - ((float) width) / 2.0f
+//		<< "," << top << "," << top - ((float) height) / 2.0f << std::endl;
 	mWidth = width;
 	mHeight = height;
 	// set widget position

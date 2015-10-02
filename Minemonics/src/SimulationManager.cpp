@@ -198,7 +198,26 @@ void SimulationManager::createScene(void) {
 			EnvironmentConfiguration::AMBIENT_B));
 
 	// either create a skydome or a skyplane
-	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
+//	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
+//	mSceneMgr->setSkyDome(true, "Examples/SpaceSkyDome1", 10, 1, 15000, true);
+
+	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox2", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/StormSkyBox", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/CloudyNoonSkyBox", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/SceneSkyBox1", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/SceneSkyBox2", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/TrippySkyBox", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/EarlyMorningSkyBox", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/MorningSkyBox", 4000, true);
+//	mSceneMgr->setSkyBox(true, "Examples/EveningSkyBox", 4000, true);
+
+	//  Create skyplane
+	//	Ogre::Plane plane;
+	//	plane.d = 100;
+	//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
+	//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
+	//			0.5, 150, 150);
+//	Examples/SpaceSkyPlane
 
 	mSceneMgr->setShadowTechnique(
 		(mViewController.doesShowShadows()) ?
@@ -208,13 +227,6 @@ void SimulationManager::createScene(void) {
 	Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(
 		Ogre::TFO_ANISOTROPIC);
 	Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(8);
-
-//  Create skyplane
-//	Ogre::Plane plane;
-//	plane.d = 100;
-//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
-//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
-//			0.5, 150, 150);
 
 	//Set fog color and fading function
 	Ogre::ColourValue fadeColour(0, 0, 0);
