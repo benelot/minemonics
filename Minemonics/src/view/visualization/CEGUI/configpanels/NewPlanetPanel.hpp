@@ -41,12 +41,14 @@ public:
 
 protected:
 	// labels
+	CEGUI::Window* mPhysicsControllerTypeLabel;
 	CEGUI::Window* mEnvironmentTypeLabel;
 	CEGUI::Window* mEvaluationTimeLabel;
 	CEGUI::Window* mEvaluationTypeLabel;
 	CEGUI::Window* mTournamentSizeLabel;
 
 	//configuration elements
+	CEGUI::Combobox* mPhysicsControllerTypeCb;
 	CEGUI::Combobox* mEnvironmentTypeCb;
 	BoxSlider* mEvaluationTimeBs;
 	CEGUI::Combobox* mEvaluationTypeCb;

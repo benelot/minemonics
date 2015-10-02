@@ -26,9 +26,11 @@
 //## utils headers
 
 EditPopulationPanel::EditPopulationPanel(const int left, const int top,
-	const std::string name, const int width, const int height) :
+	const std::string name) :
 	MovablePanel(name, MovablePanel::NEW_POPULATION_PANEL), mTextBoxLabel(NULL), mTextBoxValues(
 		NULL) {
+	int width = 600;
+	int height = 600;
 
 	MovablePanel::initialize(left, top, width, height, false);
 

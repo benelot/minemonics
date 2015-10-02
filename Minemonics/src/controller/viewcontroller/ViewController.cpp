@@ -140,33 +140,33 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 
 	// initialize windows
 	//# new planet window
-	mNewPlanetWindow = new NewPlanetPanel(40, 50,
-		GUIConfiguration::newPlanetName);
+	mNewPlanetWindow = new NewPlanetPanel(windowWidth / 3.0f,
+		windowHeight / 4.0f, GUIConfiguration::newPlanetName);
 	mNewPlanetWindow->hide();
 	mMovablePanels.push_back(mNewPlanetWindow);
 
-	mNewPopulationWindow = new NewPopulationPanel(40, 50,
-		GUIConfiguration::newPopulationName, 600, 600);
+	mNewPopulationWindow = new NewPopulationPanel(windowWidth / 3.0f,
+		windowHeight / 4.0f, GUIConfiguration::newPopulationName);
 	mNewPopulationWindow->hide();
 	mMovablePanels.push_back(mNewPopulationWindow);
 
-	mEditPlanetWindow = new EditPlanetPanel(40, 50,
-		GUIConfiguration::editPlanetName);
+	mEditPlanetWindow = new EditPlanetPanel(windowWidth / 3.0f,
+		windowHeight / 4.0f, GUIConfiguration::editPlanetName);
 	mEditPlanetWindow->hide();
 	mMovablePanels.push_back(mEditPlanetWindow);
 
-	mEditPopulationWindow = new EditPopulationPanel(40, 50,
-		GUIConfiguration::editPopulationName, 600, 600);
+	mEditPopulationWindow = new EditPopulationPanel(windowWidth / 3.0f,
+		windowHeight / 4.0f, GUIConfiguration::editPopulationName);
 	mEditPopulationWindow->hide();
 	mMovablePanels.push_back(mEditPopulationWindow);
 
-	mLoadPlanetWindow = new LoadPlanetPanel(40, 50,
-		GUIConfiguration::loadPlanetName);
+	mLoadPlanetWindow = new LoadPlanetPanel(windowWidth / 3.0f,
+		windowHeight / 4.0f, GUIConfiguration::loadPlanetName);
 	mLoadPlanetWindow->hide();
 	mMovablePanels.push_back(mLoadPlanetWindow);
 
-	mLoadPopulationWindow = new LoadPopulationPanel(40, 50,
-		GUIConfiguration::loadPopulationName);
+	mLoadPopulationWindow = new LoadPopulationPanel(windowWidth / 3.0f,
+		windowHeight / 4.0f, GUIConfiguration::loadPopulationName);
 	mLoadPopulationWindow->hide();
 	mMovablePanels.push_back(mLoadPopulationWindow);
 

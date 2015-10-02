@@ -34,7 +34,7 @@ public:
 	~BasePanel(void);
 
 	void initialize(const int left, const int top, const int width,
-	const int height, bool withTitleBar);
+		const int height, bool withTitleBar);
 
 	void update(); /**!< Updates the immovable panel. */
 
@@ -64,6 +64,8 @@ public:
 protected:
 	CEGUI::FrameWindow* mFrameWindow; /** The framed window of the panel. */
 	std::string mName;
+	int mWidth;
+	int mHeight;
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_BASEPANEL_HPP_ */

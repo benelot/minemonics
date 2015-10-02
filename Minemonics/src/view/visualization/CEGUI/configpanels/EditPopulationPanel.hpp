@@ -30,8 +30,7 @@ class Window;
  */
 class EditPopulationPanel: public MovablePanel {
 public:
-	EditPopulationPanel(const int left, const int top, const std::string name,
-		const int width, const int height);
+	EditPopulationPanel(const int left, const int top, const std::string name);
 	~EditPopulationPanel(void);
 
 protected:

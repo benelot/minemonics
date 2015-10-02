@@ -14,14 +14,18 @@
 #include <CEGUI/widgets/ListboxTextItem.h>
 #include <CEGUI/widgets/PushButton.h>
 #include <CEGUI/WindowManager.h>
+#include <CEGUI/PropertySet.h>
 
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
 
 //## controller headers
 #include <controller/universe/environments/Environment.hpp>
+#include <controller/universe/Planet.hpp>
 
 //## model headers
 #include <model/universe/evolution/EvolutionModel.hpp>
@@ -40,7 +44,8 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 	int height = 600;
 
 	float verticalOffset = 0.1f;
-	float verticalStep = 0.2f;
+	float verticalStep = 0.16f;
+	float i = 0;
 
 	MovablePanel::initialize(left, top, width, height, false);
 
@@ -48,6 +53,46 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 
 	float leftColWidth = CEGUIConfiguration::NEW_PLANET_PANEL_LEFT_COL_WIDTH;
 	float rightColWidth = CEGUIConfiguration::NEW_PLANET_PANEL_RIGHT_COL_WIDTH;
+
+	{
+		// physics controller type
+		mPhysicsControllerTypeLabel = wmgr.createWindow(
+			CEGUIConfiguration::CEGUI_SCHEME + "/Label");
+		mPhysicsControllerTypeLabel->setSize(
+			CEGUI::USize(CEGUI::UDim(0, leftColWidth * width),
+				CEGUI::UDim(0, CEGUIConfiguration::INFOPANEL_TEXT_HEIGHT)));
+		mPhysicsControllerTypeLabel->setHorizontalAlignment(CEGUI::HA_LEFT);
+
+		mPhysicsControllerTypeLabel->setPosition(
+			CEGUI::UVector2(CEGUI::UDim(0.0, 0),
+				CEGUI::UDim(verticalOffset, 0)));
+		mPhysicsControllerTypeLabel->setText("Physics Controller Type: ");
+		mBaseWidget->addChild(mPhysicsControllerTypeLabel);
+
+		// Physics Controller type Combobox
+		mPhysicsControllerTypeCb =
+			static_cast<CEGUI::Combobox*>(wmgr.createWindow(
+				CEGUIConfiguration::CEGUI_SCHEME + "/Combobox"));
+		mPhysicsControllerTypeCb->setReadOnly(true);
+		CEGUI::ListboxTextItem* itemCombobox = new CEGUI::ListboxTextItem(
+			"RigidBody Dynamicsworld", PhysicsController::RigidbodyModel);
+		mPhysicsControllerTypeCb->addItem(itemCombobox);
+
+		itemCombobox = new CEGUI::ListboxTextItem(
+			"Featherstone MultiBody Dynamicsworld",
+			PhysicsController::FeatherstoneModel);
+		mPhysicsControllerTypeCb->addItem(itemCombobox);
+		mPhysicsControllerTypeCb->setText(itemCombobox->getText()); // Copy the item's text into the Editbox
+		mPhysicsControllerTypeCb->setItemSelectState(itemCombobox, true);
+		mPhysicsControllerTypeCb->setSize(
+			CEGUI::USize(CEGUI::UDim(0, rightColWidth * width),
+				CEGUI::UDim(0, 200)));
+		mPhysicsControllerTypeCb->setPosition(
+			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0.0f),
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0.0f)));
+		mBaseWidget->addChild(mPhysicsControllerTypeCb);
+		i++;
+	}
 
 	{
 		// Environment type
@@ -60,7 +105,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 
 		mEnvironmentTypeLabel->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.0, 0),
-				CEGUI::UDim(verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mEnvironmentTypeLabel->setText("Environment type: ");
 		mBaseWidget->addChild(mEnvironmentTypeLabel);
 
@@ -79,11 +124,14 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 			Environment::OPENSEA);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 
-		mEnvironmentTypeCb->setWidth(CEGUI::UDim(0, rightColWidth * width));
+		mEnvironmentTypeCb->setSize(
+			CEGUI::USize(CEGUI::UDim(0, rightColWidth * width),
+				CEGUI::UDim(0, 200)));
 		mEnvironmentTypeCb->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0.0f),
-				CEGUI::UDim(verticalOffset, 0.0f)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0.0f)));
 		mBaseWidget->addChild(mEnvironmentTypeCb);
+		i++;
 	}
 
 	{
@@ -96,7 +144,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mEvaluationTimeLabel->setHorizontalAlignment(CEGUI::HA_LEFT);
 		mEvaluationTimeLabel->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.0, 0),
-				CEGUI::UDim(verticalStep * 1.0f + verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mEvaluationTimeLabel->setText("Evaluation time: ");
 		mBaseWidget->addChild(mEvaluationTimeLabel);
 
@@ -104,9 +152,9 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 			rightColWidth * width, "[0-9]*");
 		mEvaluationTimeBs->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0),
-				CEGUI::UDim(verticalStep * 1.0f + verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mBaseWidget->addChild(mEvaluationTimeBs);
-
+		i++;
 	}
 
 	{
@@ -119,7 +167,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mEvaluationTypeLabel->setHorizontalAlignment(CEGUI::HA_LEFT);
 		mEvaluationTypeLabel->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.0, 0),
-				CEGUI::UDim(verticalStep * 2.0f + verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mEvaluationTypeLabel->setText("Evaluation type: ");
 		mBaseWidget->addChild(mEvaluationTypeLabel);
 
@@ -149,18 +197,17 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 			EvolutionModel::POPULATIONS_EVALUATION);
 		mEvaluationTypeCb->addItem(itemCombobox);
 
-		mEvaluationTypeCb->setWidth(CEGUI::UDim(0, rightColWidth * width));
+		mEvaluationTypeCb->setSize(
+			CEGUI::USize(CEGUI::UDim(0, rightColWidth * width),
+				CEGUI::UDim(0, 200)));
 		mEvaluationTypeCb->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0.0f),
-				CEGUI::UDim(verticalStep * 2.0f + verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mEvaluationTypeCb->subscribeEvent(
 			CEGUI::Combobox::EventListSelectionAccepted,
 			CEGUI::Event::Subscriber(&NewPlanetPanel::onValueChanged, this));
 		mBaseWidget->addChild(mEvaluationTypeCb);
-
-		//	CEGUI::String valueCombobox = mEnvironmentTypeCb->getText(); // Retrieve the displayed text
-		//	uint idCombobox = mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the ID of the selected combobox item
-
+		i++;
 	}
 
 	{
@@ -173,7 +220,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mTournamentSizeLabel->setHorizontalAlignment(CEGUI::HA_LEFT);
 		mTournamentSizeLabel->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.0, 0),
-				CEGUI::UDim(verticalStep * 3.0f + verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mTournamentSizeLabel->setText("Tournament size: ");
 		mTournamentSizeLabel->hide();
 		mBaseWidget->addChild(mTournamentSizeLabel);
@@ -182,21 +229,23 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 			rightColWidth * width, "[0-9]*");
 		mTournamentSizeBs->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(leftColWidth, 0),
-				CEGUI::UDim(verticalStep * 3.0f + verticalOffset, 0)));
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0)));
 		mTournamentSizeBs->hide();
 		mBaseWidget->addChild(mTournamentSizeBs);
-
+		i++;
 	}
 
 	{
 		/* Button */
 		mConfirmButton = static_cast<CEGUI::PushButton*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Button"));
-		mConfirmButton->setText("New Planet");
+		mConfirmButton->setText("Create");
+		mConfirmButton->setSize(
+			CEGUI::USize(CEGUI::UDim(0, 150), CEGUI::UDim(0, 20)));
 		mConfirmButton->setPosition(
 			CEGUI::UVector2(
-				CEGUI::UDim(leftColWidth + rightColWidth / 2.0f, 0.0f),
-				CEGUI::UDim(verticalStep * 4.0f + verticalOffset, 0.0f)));
+				CEGUI::UDim(leftColWidth + rightColWidth / 1.5f, 0.0f),
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0.0f)));
 		mConfirmButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&NewPlanetPanel::onConfirmClicked, this));
 		mBaseWidget->addChild(mConfirmButton);
@@ -225,13 +274,21 @@ void NewPlanetPanel::onValueChanged() {
 }
 
 void NewPlanetPanel::onConfirmClicked() {
+	PhysicsController::PhysicsModelType modelType =
+		(PhysicsController::PhysicsModelType) mPhysicsControllerTypeCb->getID(); // Retrieve the model type
+
 	Environment::EnvironmentType environmentType =
-		(Environment::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the ID of the selected combobox item
+		(Environment::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the environment type
 
 	int evaluationTime = mEvaluationTimeBs->getCurrentValue();
 
 	EvolutionModel::EvaluationType evaluationType =
-		(EvolutionModel::EvaluationType) mEvaluationTypeCb->getSelectedItem()->getID(); // Retrieve the ID of the selected combobox item
+		(EvolutionModel::EvaluationType) mEvaluationTypeCb->getSelectedItem()->getID(); // Retrieve the evaluation type
 
-	int tournamentSize = mTournamentSizeBs->getCurrentValue();
+	//TODO: Tournament size is not used yet
+	int tournamentSize = mTournamentSizeBs->getCurrentValue(); // Retrieve the tournament size
+
+	SimulationManager::getSingleton()->getUniverse().addPlanet(
+		new Planet(modelType, environmentType, evaluationTime));
+	this->hide();
 }
