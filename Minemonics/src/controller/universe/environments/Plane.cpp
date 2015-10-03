@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <controller/universe/environments/Plane.hpp>
+
 //# forward declarations
 //# system headers
 #include <stddef.h>
@@ -12,8 +14,6 @@
 
 //## configuration headers
 //## controller headers
-#include <controller/universe/environments/Plane.hpp>
-
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/PlaneModel.hpp>
@@ -37,7 +37,8 @@ Plane::~Plane() {
 //	They are all deleted in environment
 }
 
-void Plane::initialize(const PhysicsController::PhysicsModelType physicsModelType,
+void Plane::initialize(
+	const PhysicsController::PhysicsModelType physicsModelType,
 	const Ogre::Light* const l) {
 	Environment::initialize(Environment::PLANE);
 
@@ -50,7 +51,8 @@ void Plane::initialize(const PhysicsController::PhysicsModelType physicsModelTyp
 	getPlaneView()->initialize(l);
 
 	// set up the physics controller
-	mEnvironmentModel->setPhysicsController(new GroundController(physicsModelType));
+	mEnvironmentModel->setPhysicsController(
+		new GroundController(physicsModelType));
 	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
 		&(SimulationManager::getSingleton()->getDebugDrawer()));

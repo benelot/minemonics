@@ -20,6 +20,8 @@ PlaneModel::PlaneModel() {
 }
 
 PlaneModel::~PlaneModel() {
+	delete mEnvironmentPhysics;
+	mEnvironmentPhysics = NULL;
 }
 
 void PlaneModel::initialize() {

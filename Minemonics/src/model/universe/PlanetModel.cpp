@@ -2,10 +2,6 @@
 #include <model/universe/PlanetModel.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif /*NULL*/
-
 //# system headers
 //## controller headers
 //## model headers
@@ -32,6 +28,10 @@ PlanetModel::~PlanetModel() {
 		delete mEnvironmentModel;
 	}
 
+	for (std::vector<Epoch*>::iterator eit = mEpochs.begin();
+		eit != mEpochs.end(); eit++) {
+		delete (*eit);
+	}
 	mEpochs.clear();
 
 	if (mEvolutionModel) {

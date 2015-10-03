@@ -2,10 +2,6 @@
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 
 //# forward declarations
-#ifndef NULL
-#define NULL 0
-#endif
-
 //# system headers
 #include <cmath>
 #include <iostream>

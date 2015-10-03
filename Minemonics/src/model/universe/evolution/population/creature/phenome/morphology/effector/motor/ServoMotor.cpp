@@ -1,4 +1,8 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
+
+//# forward declarations
+//# system headers
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -9,9 +13,7 @@
 #include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
 #include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
 #include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
-#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
+
 //## view headers
 //# custom headers
 //## base headers

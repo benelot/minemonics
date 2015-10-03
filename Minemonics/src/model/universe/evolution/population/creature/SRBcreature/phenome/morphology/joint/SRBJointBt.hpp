@@ -38,7 +38,7 @@ class Motor;
 //#define CONSTRAINT_TYPE btConeTwistConstraint
 //#define EXTRAPARAMS
 //#define CONSTRAINT_TYPE btPoint2PointConstraint
-//#define EXTRAPARAMS
+////#define EXTRAPARAMS
 #define CONSTRAINT_TYPE btGeneric6DofConstraint
 #define EXTRAPARAMS ,true
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
@@ -57,6 +57,8 @@ public:
 	SRBJointBt();
 	SRBJointBt(const SRBJointBt& SRBJointBt);
 
+	virtual ~SRBJointBt();
+
 	/**
 	 * Initialize the joint bullet physics model.
 	 * @param world A handle to the bullet dynamics world.
@@ -71,7 +73,6 @@ public:
 		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits);
-	virtual ~SRBJointBt();
 
 	/**
 	 * Initialize the rotational limit motors.
@@ -141,7 +142,7 @@ public:
 	}
 
 	void setBreakingThreshold(const double breakingThreshold) {
-		mJoint->setBreakingImpulseThreshold(breakingThreshold);
+//		mJoint->setBreakingImpulseThreshold(breakingThreshold);
 	}
 
 	void setRotationalLimitMotorEnabled(

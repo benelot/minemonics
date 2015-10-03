@@ -37,6 +37,8 @@ EvaluationController::~EvaluationController() {
 		eit = mEvaluations.erase(eit);
 		delete evaluation;
 	}
+
+	mUniverse = NULL;
 //	mParallelEvaluationsQty
 //	mPaused
 }

@@ -31,8 +31,6 @@ class PhenomeModel;
  */
 class SRBEmbryogenesis {
 public:
-	SRBEmbryogenesis();
-	virtual ~SRBEmbryogenesis();
 
 	/**
 	 * Transcribe a gene into the component it represents.

@@ -1,4 +1,6 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -14,7 +16,6 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //## utils headers

@@ -66,9 +66,12 @@ Planet::Planet(PlanetModel* const planetModel) :
 }
 
 Planet::~Planet() {
-//	~mEnvironment()
 //	~mEvolution()
 	delete mPlanetModel;
+	mPlanetModel = NULL;
+
+	delete mEnvironment;
+	mEnvironment = NULL;
 }
 
 void Planet::addPopulation(Population* const population) {

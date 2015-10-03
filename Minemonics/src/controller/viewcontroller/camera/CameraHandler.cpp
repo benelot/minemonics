@@ -29,12 +29,15 @@
 BoostLogger CameraHandler::mBoostLogger; /*<! initialize the boost logger*/
 CameraHandler::_Init CameraHandler::_initializer;
 CameraHandler::CameraHandler() :
-		mCamNode(NULL), mDirection(Ogre::Vector3::ZERO), mCamera(NULL) {
+	mCamNode(NULL), mDirection(Ogre::Vector3::ZERO), mCamera(NULL) {
 }
 
 CameraHandler::~CameraHandler() {
 	delete mCamNode;
 	mCamNode = NULL;
+	delete mCamera;
+
+	mCamera = NULL;
 }
 
 void CameraHandler::reposition(float timeSinceLastFrame) {
@@ -43,11 +46,11 @@ void CameraHandler::reposition(float timeSinceLastFrame) {
 
 void CameraHandler::rotate(int pitch, int yaw, int roll) {
 	mCamNode->yaw(
-			Ogre::Degree(-CameraConfiguration::CAMERA_ROTATION_SPEED * yaw),
-			Ogre::Node::TS_WORLD);
+		Ogre::Degree(-CameraConfiguration::CAMERA_ROTATION_SPEED * yaw),
+		Ogre::Node::TS_WORLD);
 	mCamNode->pitch(
-			Ogre::Degree(-CameraConfiguration::CAMERA_ROTATION_SPEED * pitch),
-			Ogre::Node::TS_LOCAL);
+		Ogre::Degree(-CameraConfiguration::CAMERA_ROTATION_SPEED * pitch),
+		Ogre::Node::TS_LOCAL);
 }
 
 void CameraHandler::move(double x, double y, double z) {
@@ -67,21 +70,20 @@ void CameraHandler::moveY(double y) {
 void CameraHandler::initialize() {
 	// Create the camera controlling node
 	mCamNode =
-			SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->createChildSceneNode(
-					"CamNode1",
-					EvolutionConfiguration::ROOT_POSITION
-							+ Ogre::Vector3(0, 10, 100));
+		SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->createChildSceneNode(
+			"CamNode1",
+			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
 
 	mCamera->setPosition(
-			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
+		EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
 	mCamNode->attachObject(mCamera);
 	mCamNode->lookAt(EvolutionConfiguration::ROOT_POSITION,
-			Ogre::Node::TS_WORLD);
+		Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(12000);
 
 	if (SimulationManager::getSingleton()->getRoot()->getRenderSystem()->getCapabilities()->hasCapability(
-			Ogre::RSC_INFINITE_FAR_PLANE)) {
+		Ogre::RSC_INFINITE_FAR_PLANE)) {
 		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
 	}
 }

@@ -25,6 +25,8 @@ class Light;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>

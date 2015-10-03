@@ -47,16 +47,13 @@
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
+
+//## view headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
-
-FSEmbryogenesis::FSEmbryogenesis() {
-}
-
-FSEmbryogenesis::~FSEmbryogenesis() {
-}
 
 void FSEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
@@ -475,6 +472,10 @@ void FSEmbryogenesis::transcribeMorphogene(
 				* (mass1 + mass2)
 				+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
 					* pow(mass1 + mass2, 2));
+//		double maxTorque = (15.0f * (mass1 + mass2)
+//			+ 0.01f * pow(mass1 + mass2, 2));
+
+//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
 		joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
 			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
 				parentMorphogeneBranch->getJointYawMinAngle(),

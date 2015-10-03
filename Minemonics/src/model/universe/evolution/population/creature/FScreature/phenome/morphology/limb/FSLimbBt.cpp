@@ -1,6 +1,6 @@
 //# corresponding header
 #include <configuration/Definitions.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbBt.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
 
 //# forward declarations
 //# system headers
@@ -65,8 +65,17 @@ FSLimbBt::FSLimbBt(const FSLimbBt& limbBt) {
 FSLimbBt::~FSLimbBt() {
 	delete mBody;
 	mBody = NULL;
+
+	delete mCollisionShape;
+	mCollisionShape = NULL;
+
+	delete mMotionState;
+	mMotionState = NULL;
+
 	delete mLink;
 	mLink = NULL;
+
+	mWorld = NULL;
 }
 
 void FSLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,

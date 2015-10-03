@@ -35,7 +35,6 @@
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
@@ -92,7 +91,7 @@ FSPhenomeModel::FSPhenomeModel(const FSPhenomeModel& phenomeModel) {
 }
 
 FSPhenomeModel::~FSPhenomeModel() {
-	mControllers.clear();
+	mMultiBody = NULL;
 }
 
 void FSPhenomeModel::initialize(CreatureModel* const creatureModel) {

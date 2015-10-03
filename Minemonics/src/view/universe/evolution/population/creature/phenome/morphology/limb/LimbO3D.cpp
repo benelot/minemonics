@@ -40,7 +40,6 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
-#include <view/picking/OgreMeshRay.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 #include <view/visualization/procedural/ProceduralCapsuleGenerator.h>
 #include <view/visualization/procedural/ProceduralMeshGenerator.h>
@@ -163,71 +162,6 @@ void LimbO3D::removeFromWorld() {
 			mLimbEntityNode);
 		setInWorld(false);
 	}
-}
-
-Ogre::Vector3 LimbO3D::getIntersection(Ogre::Vector3 origin,
-	Ogre::Vector3 direction) {
-	Ogre::Ray ray;
-	ray.setOrigin(origin);
-	ray.setDirection(direction);
-
-	Ogre::RaySceneQuery* mRayScnQuery =
-		SimulationManager::getSingleton()->getSceneManager()->createRayQuery(
-			Ogre::Ray());
-	mRayScnQuery->setSortByDistance(true);
-	mRayScnQuery->setRay(ray);
-
-	Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
-
-	double distance = 0;
-	for (Ogre::RaySceneQueryResult::iterator it = result.begin();
-		it != result.end(); it++) {
-		std::cout << "Collision name:" << it->movable->getName() << std::endl;
-		if (it->movable->getName() == mLimbEntity->getName()) {
-			distance = it->distance;
-			std::cout << "Distance from center" << distance << std::endl;
-		}
-	}
-	SimulationManager::getSingleton()->getSceneManager()->destroyQuery(
-		mRayScnQuery);
-
-	return origin + direction * distance / direction.length();
-}
-
-Ogre::Vector3 LimbO3D::getLocalIntersection(Ogre::Vector3 origin,
-	Ogre::Vector3 direction) {
-	Ogre::Ray ray;
-	ray.setOrigin(origin);
-	ray.setDirection(direction);
-
-	Ogre::RaySceneQuery* mRayScnQuery =
-		SimulationManager::getSingleton()->getSceneManager()->createRayQuery(
-			Ogre::Ray());
-	mRayScnQuery->setSortByDistance(true);
-	mRayScnQuery->setRay(ray);
-
-	Ogre::RaySceneQueryResult& result = mRayScnQuery->execute();
-	Ogre::RaySceneQueryResult::iterator it = result.begin();
-
-	double distance = 0;
-	for (; it != result.end(); it++) {
-		if (it->movable->getName() == mLimbEntity->getName()) {
-			distance = it->distance;
-		}
-	}
-	SimulationManager::getSingleton()->getSceneManager()->destroyQuery(
-		mRayScnQuery);
-
-	return direction * distance / direction.length();
-}
-
-Ogre::Vector3 LimbO3D::getLocalPreciseIntersection(Ogre::Vector3 origin,
-	Ogre::Vector3 direction) {
-	OgreMeshRay ray(SimulationManager::getSingleton()->getSceneManager());
-	Ogre::Vector3 result;
-	ray.raycastFromPoint(origin, direction, result, mLimbEntity->getName());
-
-	return result;
 }
 
 LimbO3D * LimbO3D::clone() {

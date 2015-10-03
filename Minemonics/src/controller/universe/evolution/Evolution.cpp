@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <controller/universe/evolution/Evolution.hpp>
+
 //# forward declarations
 //# system headers
 #include <iostream>
@@ -14,7 +16,6 @@
 //## controller headers
 #include <controller/Evaluation.hpp>
 #include <controller/EvaluationController.hpp>
-#include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
@@ -38,6 +39,9 @@ Evolution::Evolution(EvolutionModel* const evolutionModel) :
 }
 
 Evolution::~Evolution() {
+	delete mEvolutionModel;
+	mEvolutionModel = NULL;
+
 	mEvaluationController = NULL;
 	mPlanet = NULL;
 }

@@ -1,4 +1,6 @@
 //# corresponding header
+#include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
+
 //# forward declarations
 //# system headers
 #include <vector>
@@ -9,13 +11,20 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <configuration/MorphologyConfiguration.hpp>
+
+//## view headers
+//## custom headers
+//# base headers
 #include <SimulationManager.hpp>
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
+
+//## controller headers
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
+
+//## model headers
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
@@ -25,8 +34,7 @@
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
-//## controller headers
-#include <view/picking/OgreMeshRay.hpp>
+//## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
@@ -66,6 +74,9 @@ Phenome::~Phenome() {
 		delete *cit;
 		cit = mComponents.erase(cit);
 	}
+
+	delete mPhenotypeModel;
+	mPhenotypeModel = NULL;
 	mCreature = NULL;
 }
 

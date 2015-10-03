@@ -165,11 +165,3 @@ void Limb::removeFromWorld() {
 		getLimbPhysics()->removeFromWorld();
 	}
 }
-
-/**
- * Get intersection point with the limb graphics given a straight line defined by origin and direction.
- */
-Ogre::Vector3 Limb::getIntersection(const Ogre::Vector3 origin,
-	const Ogre::Vector3 direction) {
-	return mLimbGraphics->getIntersection(origin, direction);
-}

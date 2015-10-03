@@ -1,4 +1,9 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
+#include <configuration/Definitions.hpp>
+
+//# forward declarations
+//# system headers
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -10,7 +15,6 @@
 #include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
 #include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
 #include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
 //## view headers
 //# custom headers
@@ -91,13 +95,10 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	float kP = 2.0f;
 	float mMaxForce = 1000.0f;
 	//simple p(roportional) controller
-	//calculate the target velocity and clamp it with the maximum speed
-	mMotorBt->m_targetVelocity = 10000000;
-	mMotorBt->m_maxMotorForce =
-		(kP * angleError > mMaxForce) ? mMaxForce :
-		(kP * angleError < -mMaxForce) ? -mMaxForce : kP * angleError;
+	mMotorBt->m_targetVelocity = kP * angleError;
+	mMotorBt->m_maxMotorForce = 1000;
 #endif
-	std::cout << mMaxForce << "," << kP * angleError << std::endl;
+	std::cout << mMotorBt->m_currentPosition << "," << targetAngle << std::endl;
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

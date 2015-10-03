@@ -41,7 +41,7 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(
+	virtual void initialize(
 		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 		const double maxForce, double lowerLimit, double upperLimit);
 

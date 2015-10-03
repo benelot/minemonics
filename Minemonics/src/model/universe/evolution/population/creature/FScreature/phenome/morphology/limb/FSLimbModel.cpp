@@ -36,6 +36,8 @@ FSLimbModel::FSLimbModel(const FSLimbModel& limbModel) {
 FSLimbModel::~FSLimbModel() {
 	delete mLimbPhysics;
 	mLimbPhysics = NULL;
+
+	mCreatureModel = NULL;
 }
 
 void FSLimbModel::initialize(btDynamicsWorld* const world,

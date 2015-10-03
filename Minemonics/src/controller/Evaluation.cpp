@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <controller/Evaluation.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -11,7 +13,6 @@
 //## configuration headers
 //## controller headers
 #include <controller/StateHandler.hpp>
-#include <controller/Evaluation.hpp>
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/environments/Environment.hpp>
 

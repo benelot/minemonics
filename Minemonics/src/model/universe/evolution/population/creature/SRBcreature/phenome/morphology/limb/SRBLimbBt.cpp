@@ -64,6 +64,14 @@ SRBLimbBt::SRBLimbBt(const SRBLimbBt& SRBLimbBt) {
 SRBLimbBt::~SRBLimbBt() {
 	delete mBody;
 	mBody = NULL;
+
+	delete mCollisionShape;
+	mCollisionShape = NULL;
+
+	delete mMotionState;
+	mMotionState = NULL;
+
+	mWorld = NULL;
 }
 
 void SRBLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,

@@ -1,4 +1,5 @@
 //# corresponding headers
+#include <configuration/Definitions.hpp>
 #include <model/universe/environments/physics/BulletPicker.hpp>
 
 //# forward declarations
@@ -37,6 +38,17 @@ BulletPicker::BulletPicker() :
 	mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
 		NULL), mPickedConstraint(NULL), mPrevCanSleep(false), mMultibodyworld(
 		NULL), mWorld(NULL) {
+}
+
+BulletPicker::~BulletPicker() {
+	mPickedBody = NULL;
+	if (mPickingMultiBodyPoint2Point) {
+		delete mPickingMultiBodyPoint2Point;
+		mPickingMultiBodyPoint2Point = NULL;
+	}
+	mPickedConstraint = NULL;
+	mMultibodyworld = NULL;
+	mWorld = NULL;
 }
 
 btVector3 BulletPicker::pickBody(btDynamicsWorld* world,

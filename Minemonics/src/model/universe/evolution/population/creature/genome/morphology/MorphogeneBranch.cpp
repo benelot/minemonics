@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -13,8 +15,6 @@
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
-
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -95,6 +95,9 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 	mJointRollYOffset = morphogeneBranch.mJointRollYOffset;
 	mJointRollAmplitude = morphogeneBranch.mJointRollAmplitude;
 	mJointRollFrequency = morphogeneBranch.mJointRollFrequency;
+}
+
+MorphogeneBranch::~MorphogeneBranch() {
 }
 
 void MorphogeneBranch::initialize() {
@@ -264,9 +267,6 @@ void MorphogeneBranch::initialize() {
 	mJointRollYOffset = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::JOINT_MIN_Y_OFFSET,
 		MorphologyConfiguration::JOINT_MAX_Y_OFFSET);
-}
-
-MorphogeneBranch::~MorphogeneBranch() {
 }
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {

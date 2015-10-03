@@ -332,7 +332,6 @@ set(VIEWHDRS
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.hpp
 	
 	## picking
-	./view/picking/OgreMeshRay.hpp
 	./view/picking/MousePicker.hpp
     
     # procedural
@@ -412,7 +411,6 @@ set(VIEWSRCS
 	./view/videocapture/Ogre3DFFMPEGVideoWriter.cpp
 	
 	## picking
-	./view/picking/OgreMeshRay.cpp
 	./view/picking/MousePicker.cpp
 	
 	# procedural

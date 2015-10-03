@@ -1,5 +1,8 @@
 //# corresponding headers
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <configuration/Definitions.hpp>
+//# forward declarations
+//# system headers
 #include <list>
 #include <map>
 
@@ -26,10 +29,6 @@
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -72,6 +71,26 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 }
 
 PhenomeModel::~PhenomeModel() {
+	for (std::vector<ComponentModel*>::const_iterator coit =
+		mComponentModels.begin(); coit != mComponentModels.end(); coit++) {
+		switch ((*coit)->getComponentType()) {
+		case ComponentModel::LimbComponent:
+			delete ((LimbModel*) *coit);
+			break;
+		case ComponentModel::JointComponent:
+			delete ((JointModel*) *coit);
+			break;
+
+		}
+	}
+
+	mComponentModels.clear();
+
+	for (std::vector<Controller*>::const_iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		delete (*cit);
+	}
+
 	mControllers.clear();
 }
 

@@ -639,11 +639,6 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/videocapture/Ogre3DFFMPEGVideoWriter.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/OgreMeshRay.cpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/OgreMeshRay.cpp</location>
-		</link>
-		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/MousePicker.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/MousePicker.cpp</location>
@@ -1422,11 +1417,6 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/Ogre3DFFMPEGVideoWriter.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/videocapture/Ogre3DFFMPEGVideoWriter.hpp</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/OgreMeshRay.hpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/picking/OgreMeshRay.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/MousePicker.hpp</name>

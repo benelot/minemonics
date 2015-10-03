@@ -81,6 +81,24 @@ ViewController::~ViewController() {
 
 	delete mDetailsPanel;
 	mDetailsPanel = NULL;
+
+	delete mNewPlanetWindow;
+	mNewPlanetWindow = NULL;
+
+	delete mEditPlanetWindow;
+	mEditPlanetWindow = NULL;
+
+	delete mLoadPlanetWindow;
+	mLoadPlanetWindow = NULL;
+
+	delete mNewPopulationWindow;
+	mNewPlanetWindow = NULL;
+
+	delete mEditPopulationWindow;
+	mEditPlanetWindow = NULL;
+
+	delete mLoadPopulationWindow;
+	mLoadPlanetWindow = NULL;
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget,

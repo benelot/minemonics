@@ -43,6 +43,8 @@ PopulationModel::~PopulationModel() {
 		mCreatureModels.pop_back();
 		delete f;
 	}
+
+	mPlanetModel = NULL;
 }
 
 /**

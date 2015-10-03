@@ -1,9 +1,9 @@
 //# corresponding headers
+#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
-#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
-
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
@@ -21,6 +21,8 @@ Component::Component() :
 }
 
 Component::~Component() {
+	delete mComponentModel;
+	mComponentModel = NULL;
 }
 
 void Component::initialize(ComponentModel* const componentModel) {

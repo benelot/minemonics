@@ -33,6 +33,8 @@ LimbModel::LimbModel(const LimbModel& limbModel) {
 LimbModel::~LimbModel() {
 	delete mLimbPhysics;
 	mLimbPhysics = NULL;
+
+	mCreatureModel = NULL;
 }
 
 void LimbModel::reset(Ogre::Vector3 position) {

@@ -52,12 +52,6 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-SRBEmbryogenesis::SRBEmbryogenesis() {
-}
-
-SRBEmbryogenesis::~SRBEmbryogenesis() {
-}
-
 void SRBEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	PhenomeModel* phenomeModel, BaseGenerator* generator) {

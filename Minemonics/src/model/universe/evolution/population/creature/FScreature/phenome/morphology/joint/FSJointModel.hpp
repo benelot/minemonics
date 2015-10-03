@@ -36,7 +36,6 @@ class access;
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>

@@ -35,6 +35,7 @@ class btTypedConstraint;
 class BulletPicker {
 public:
 	BulletPicker();
+	virtual ~BulletPicker();
 	btVector3 pickBody(btDynamicsWorld* world, const btVector3& rayFromWorld,
 		const btVector3& rayToWorld);
 	bool movePickedBody(const btVector3& rayFromWorld,

@@ -52,33 +52,6 @@ public:
 	 */
 	void removeFromWorld();
 
-	/**
-	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
-	 * @param origin The origin of the ray in the global reference frame.
-	 * @param direction The direction of the ray.
-	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
-	 */
-	Ogre::Vector3 getIntersection(const Ogre::Vector3 origin,
-		const Ogre::Vector3 direction);
-
-	/**
-	 * Get the intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally less expensive than the precise version.
-	 * @param origin The origin of the ray in the global reference frame.
-	 * @param direction The direction of the ray.
-	 * @return The intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
-	 */
-	Ogre::Vector3 getLocalIntersection(const Ogre::Vector3 origin,
-		const Ogre::Vector3 direction);
-
-	/**
-	 * Get the precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb. This might be computationally more expensive than the non-precise version.
-	 * @param origin The origin of the ray in the global reference frame.
-	 * @param direction The direction of the ray.
-	 * @return The precise intersection of a ray with origin and direction and the limb surface in the local reference frame of this limb.
-	 */
-	Ogre::Vector3 getLocalPreciseIntersection(const Ogre::Vector3 origin,
-		const Ogre::Vector3 direction);
-
 	//Accessor methods
 
 	Ogre::Entity*& getEntity() {

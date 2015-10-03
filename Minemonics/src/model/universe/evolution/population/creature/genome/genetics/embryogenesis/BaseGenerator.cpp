@@ -22,6 +22,6 @@ BaseGenerator::BaseGenerator() :
 }
 
 BaseGenerator::~BaseGenerator() {
-
+	mGene = NULL;
 }
 

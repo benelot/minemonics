@@ -1,5 +1,6 @@
 //# corresponding header
 #include <configuration/Definitions.hpp>
+#include <model/universe/environments/bullet/HillsBt.hpp>
 
 //# forward declarations
 //# system headers
@@ -25,8 +26,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/bullet/HillsBt.hpp>
-
 //## view headers
 //## utils headers
 

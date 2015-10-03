@@ -31,9 +31,6 @@ class FSPhenomeModel;
  */
 class FSEmbryogenesis {
 public:
-	FSEmbryogenesis();
-	virtual ~FSEmbryogenesis();
-
 	/**
 	 * Transcribe a gene into the component it represents.
 	 * @param generatorList The generator list in case new generators are added by it.

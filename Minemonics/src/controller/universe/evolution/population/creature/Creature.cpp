@@ -2,8 +2,6 @@
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //# forward declarations
-class SimulationManager;
-
 //# system headers
 //## controller headers
 //## model headers
@@ -50,6 +48,7 @@ Creature::Creature(CreatureModel* const creatureModel) :
 
 Creature::~Creature() {
 	delete mCreatureModel;
+	mCreatureModel = NULL;
 //	mPhenotype
 }
 

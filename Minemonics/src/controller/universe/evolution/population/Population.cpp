@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/MorphologyConfiguration.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
 
 //# forward declarations
@@ -16,6 +15,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+//## controller headers
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 #include <controller/universe/evolution/population/ragdoll/RagDoll.hpp>
@@ -44,6 +45,10 @@ Population::~Population() {
 		cit = mCreatures.erase(cit);
 		delete creature;
 	}
+
+	delete mPopulationModel;
+	mPopulationModel = NULL;
+
 	mPlanet = NULL;
 }
 

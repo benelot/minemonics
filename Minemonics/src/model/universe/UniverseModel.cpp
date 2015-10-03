@@ -11,18 +11,29 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/EvaluationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
 
 UniverseModel::UniverseModel() :
-		mCurrentEvaluationPlanetIndex(0) {
+	mCurrentEvaluationPlanetIndex(0) {
 }
 
 UniverseModel::~UniverseModel() {
 //	mCurrentEvaluationPlanetIndex
+
+	for (std::vector<EvaluationModel*>::iterator eit =
+		mEvaluationModels.begin(); eit != mEvaluationModels.end(); eit++) {
+		delete (*eit);
+	}
 	mEvaluationModels.clear();
+
+	for (std::vector<PlanetModel*>::iterator eit = mPlanetModels.begin();
+		eit != mPlanetModels.end(); eit++) {
+		delete (*eit);
+	}
 	mPlanetModels.clear();
 }
 

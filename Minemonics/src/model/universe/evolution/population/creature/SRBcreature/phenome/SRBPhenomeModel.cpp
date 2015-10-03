@@ -64,7 +64,6 @@ SRBPhenomeModel::SRBPhenomeModel(const SRBPhenomeModel& SRBPhenomeModel) {
 }
 
 SRBPhenomeModel::~SRBPhenomeModel() {
-	mControllers.clear();
 }
 
 void SRBPhenomeModel::update(const double timeSinceLastTick) {

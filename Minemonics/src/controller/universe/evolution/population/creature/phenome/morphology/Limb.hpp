@@ -124,15 +124,6 @@ public:
 	 */
 	void removeFromWorld();
 
-	/**
-	 * Get the intersection of a ray with origin and direction and the limb surface in the global reference frame.
-	 * @param origin The origin of the ray in the global reference frame.
-	 * @param direction The direction of the ray.
-	 * @return The intersection of a ray with origin and direction and the limb surface in the global reference frame.
-	 */
-	Ogre::Vector3 getIntersection(const Ogre::Vector3 origin,
-		const Ogre::Vector3 direction);
-
 	// Accessor methods
 	const Ogre::Vector3 getPosition() const {
 		return mLimbModel->getPosition();

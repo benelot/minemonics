@@ -84,6 +84,18 @@ CreatureModel::~CreatureModel() {
 		mJuries.pop_back();
 		delete f;
 	}
+
+	switch (mPhysicsModelType) {
+	case PhysicsController::FeatherstoneModel:
+		delete ((FSPhenomeModel*) mPhenotypeModel);
+		break;
+	case PhysicsController::RigidbodyModel:
+		delete ((SRBPhenomeModel*) mPhenotypeModel);
+		break;
+	default:
+		break;
+	}
+	mPhenotypeModel = NULL;
 }
 
 void CreatureModel::reset(const Ogre::Vector3 position) {
