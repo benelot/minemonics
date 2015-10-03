@@ -20,7 +20,6 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointBt.hpp>
 
 //## view headers
 //## utils headers
@@ -46,6 +45,7 @@ FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {
 
 FSServoMotor::~FSServoMotor() {
 	mJointMotorIndex = JointPhysics::RDOF_PITCH;
+	mMultiBody = NULL;
 }
 
 void FSServoMotor::initialize(
@@ -78,10 +78,15 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 	btScalar angleError = targetAngle - mMultiBody->getJointPos(mJointIndex);
 	btScalar velocityError = 0 - mMultiBody->getJointVel(mJointIndex);
 
-	float kP = 200000000;
-	float kD = 2000;
 	//simple p(roportional) controller
 	//calculate the target force and clamp it with the maximum force
+//	float kP = 200;
+//	float kD = 20;
+//	double correction = mMaxForce * (kP * angleError + kD * velocityError);
+//	mMultiBody->addJointTorque(mJointIndex, btScalar(correction));
+
+	float kP = 200000000;
+	float kD = 2000;
 	double correction = kP * angleError + kD * velocityError;
 	mMultiBody->addJointTorque(mJointIndex,
 		btScalar(

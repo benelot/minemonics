@@ -95,14 +95,16 @@ public:
 	 * The ERP specifies what proportion of the joint error will be fixed during the next simulation step.
 	 * @link http://ode-wiki.org/wiki/index.php?title=Manual:_All&printable=yes#How_To_Use_ERP_and_CFM
 	 */
-	static const double SIMULATOR_PHYSICS_ERP = 0.7f; // [0.1;0.8] ODE default 0.2
+	static const double SIMULATOR_PHYSICS_FS_ERP = 0.15f;
+	static const double SIMULATOR_PHYSICS_SRB_ERP = 0; // [0.1;0.8] ODE default 0.2
 
 	/**
 	 * A nonzero (positive) value of CFM allows the original constraint equation to be violated by an amount proportional
 	 * to CFM times the restoring force \lambda that is needed to enforce the constraint.
 	 * @link http://ode-wiki.org/wiki/index.php?title=Manual:_All&printable=yes#How_To_Use_ERP_and_CFM
 	 */
-	static const double SIMULATOR_PHYSICS_CFM = 0.5f;
+	static const double SIMULATOR_PHYSICS_FS_CFM = 0.1f;
+	static const double SIMULATOR_PHYSICS_SRB_CFM = 0;
 
 	static const int SIMULATOR_SECURITY_MARGIN = 2;
 

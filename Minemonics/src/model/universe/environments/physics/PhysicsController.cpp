@@ -1,5 +1,7 @@
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
+
 //# forward declarations
 //# system headers
 #include <cmath>
@@ -12,10 +14,10 @@
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h>
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
-#include <LinearMath/btMotionState.h>
 #include <BulletDynamics/MLCPSolvers/btDantzigSolver.h>
 #include <BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h>
 #include <BulletDynamics/MLCPSolvers/btMLCPSolver.h>
+#include <LinearMath/btMotionState.h>
 
 //## view headers
 //# custom headers
@@ -23,8 +25,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/physics/PhysicsController.hpp>
-
 //## view headers
 //## utils headers
 
@@ -68,10 +68,16 @@ void PhysicsController::initBulletPhysics() {
 		//use btMultiBodyDynamicsWorld for Featherstone btMultiBody support
 		mDynamicsWorld = new btMultiBodyDynamicsWorld(mDispatcher, mBroadphase,
 			(btMultiBodyConstraintSolver*) mSolver, mCollisionConfiguration);
+
+		mDynamicsWorld->getSolverInfo().m_erp =
+			PhysicsConfiguration::SIMULATOR_PHYSICS_FS_ERP;
+
+		mDynamicsWorld->getSolverInfo().m_globalCfm =
+			PhysicsConfiguration::SIMULATOR_PHYSICS_FS_CFM;
 		break;
 	}
 	case PhysicsController::RigidbodyModel: {
-		bool useMCLPSolver = true;
+		bool useMCLPSolver = false;
 		if (useMCLPSolver) {
 			btDantzigSolver* mlcp = new btDantzigSolver();
 //			btSolveProjectedGaussSeidel* mlcp = new btSolveProjectedGaussSeidel();
@@ -84,28 +90,29 @@ void PhysicsController::initBulletPhysics() {
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);
 
-		if (useMCLPSolver) {
-			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
-		} else {
-			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
-		}
+//		if (useMCLPSolver) {
+//			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
+//		} else {
+//			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
+//		}
+
+		mDynamicsWorld->getSolverInfo().m_erp = 0.00001f;
+		//PhysicsConfiguration::SIMULATOR_PHYSICS_SRB_ERP;
+
+		mDynamicsWorld->getSolverInfo().m_globalCfm = 0.9f;
+		//PhysicsConfiguration::SIMULATOR_PHYSICS_SRB_CFM;
 		break;
 	}
 	default:
 		break;
 	}
 
-	mDynamicsWorld->getSolverInfo().m_erp =
-		PhysicsConfiguration::SIMULATOR_PHYSICS_ERP;
-	mDynamicsWorld->getSolverInfo().m_globalCfm =
-		PhysicsConfiguration::SIMULATOR_PHYSICS_CFM;
-
 	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
 	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
 	mDynamicsWorld->getSolverInfo().m_erp2 =
-		PhysicsConfiguration::SIMULATOR_PHYSICS_ERP;
+		PhysicsConfiguration::SIMULATOR_PHYSICS_FS_ERP;
 	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp =
-		PhysicsConfiguration::SIMULATOR_PHYSICS_ERP;
+		PhysicsConfiguration::SIMULATOR_PHYSICS_FS_ERP;
 	//TODO: Not sure if helps
 	//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
 	//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
