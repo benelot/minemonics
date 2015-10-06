@@ -39,7 +39,6 @@ public:
 	void onConfirmClicked();
 
 protected:
-protected:
 	// labels
 	CEGUI::Window* mPopulationSizeLabel;
 

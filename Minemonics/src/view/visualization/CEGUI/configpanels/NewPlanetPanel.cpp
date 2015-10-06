@@ -277,7 +277,7 @@ void NewPlanetPanel::onValueChanged() {
 
 void NewPlanetPanel::onConfirmClicked() {
 	PhysicsController::PhysicsModelType modelType =
-		(PhysicsController::PhysicsModelType) mPhysicsControllerTypeCb->getID(); // Retrieve the model type
+		(PhysicsController::PhysicsModelType) mPhysicsControllerTypeCb->getSelectedItem()->getID(); // Retrieve the model type
 
 	Environment::EnvironmentType environmentType =
 		(Environment::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the environment type

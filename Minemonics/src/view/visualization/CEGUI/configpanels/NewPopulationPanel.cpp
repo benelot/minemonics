@@ -108,5 +108,5 @@ void NewPopulationPanel::onConfirmClicked() {
 		EvolutionConfiguration::ROOT_POSITION);
 	SimulationManager::getSingleton()->getUniverse().getPlanets()[0]->addPopulation(
 		population);
-	this->hide();
+	close();
 }

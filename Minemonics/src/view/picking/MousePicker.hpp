@@ -23,7 +23,6 @@ class Ray;
 //## view headers
 //## utils headers
 
-
 /**
  * @brief		The mouse picker picks the objects on screen.
  * @details		Details
@@ -41,7 +40,7 @@ public:
 
 	void moveBody();
 
-	void setPicking(const bool picking){
+	void setPicking(const bool picking) {
 		mBulletPicker.setPicking(picking);
 	}
 
