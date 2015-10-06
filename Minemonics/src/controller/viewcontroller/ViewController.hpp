@@ -225,6 +225,7 @@ private:
 	MovablePanel* mNewPopulationWindow;
 	MovablePanel* mEditPopulationWindow;
 	MovablePanel* mLoadPopulationWindow;
+	MovablePanel* mOpenFileDialog;
 
 	//SheetHandler
 	GUISheetHandler mGUISheetHandler;

@@ -60,6 +60,8 @@ public:
 
 	virtual void hideTitleBar(); /**!< Hide the title bar. */
 
+	virtual void close(); /**!< Closes the window. */
+
 	MovablePanelType getType() const {
 		return mType;
 	}

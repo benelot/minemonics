@@ -42,6 +42,9 @@ void MovablePanel::initialize(const int left, const int top, const int width,
 		CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, height)));
 	mFrameWindow->addChild(mBaseWidget);
 
+	mFrameWindow->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked,
+		CEGUI::Event::Subscriber(&MovablePanel::close, this));
+
 	mSizeWithoutToolbar = CEGUI::USize(
 		CEGUI::UDim(0, width + 2 * CEGUIConfiguration::INFOPANEL_BORDER),
 		CEGUI::UDim(0, height + 2 * CEGUIConfiguration::INFOPANEL_BORDER));
@@ -90,4 +93,8 @@ void MovablePanel::hideTitleBar() {
 	mFrameWindow->setTitleBarEnabled(false);
 	mFrameWindow->setSize(mSizeWithoutToolbar);
 	mFrameWindow->notifyScreenAreaChanged(true);
+}
+
+void MovablePanel::close() {
+	hide();
 }
