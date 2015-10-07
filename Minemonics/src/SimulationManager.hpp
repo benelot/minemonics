@@ -101,6 +101,8 @@ public:
 		return mNow;
 	}
 
+	std::string getTimeStamp();
+
 	OgreBtDebugDrawer& getDebugDrawer() {
 		return mDebugDrawer;
 	}
@@ -143,6 +145,10 @@ public:
 
 	Ogre::TerrainGlobalOptions& getTerrainGlobals() {
 		return mTerrainGlobals;
+	}
+
+	const std::string& getSerializationPath() const {
+		return mSerializationPath;
 	}
 
 protected:
@@ -257,6 +263,8 @@ private:
 	Debugger mDebugger; /**!< Common simulator debug routines */
 
 	static BoostLogger mBoostLogger; /**!< The logger instance of the simulation manager */
+
+	std::string mSerializationPath;
 
 	static class _Init {
 	public:

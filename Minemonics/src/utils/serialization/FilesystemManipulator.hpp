@@ -54,6 +54,15 @@ public:
 
 		return files;
 	}
+
+	static std::string createFolder(std::string parentPath, std::string folderName){
+		std::string path = parentPath + "/" + folderName;
+		boost::filesystem::path bpath = boost::filesystem::path(path);
+		if(!boost::filesystem::exists(bpath)){
+			boost::filesystem::create_directories(bpath);
+		}
+		return boost::filesystem::absolute(bpath).c_str();
+	}
 };
 
 #endif /* UTILS_SERIALIZATION_FILESYSTEMMANIPULATOR_HPP_ */

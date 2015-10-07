@@ -494,6 +494,7 @@ set(MISCSRCS
     ./configuration/GUIConfiguration.cpp
     ./configuration/PhysicsConfiguration.cpp
     ./configuration/CEGUIConfiguration.cpp
+    ./configuration/SerializationConfiguration.cpp
     
 	# logger
 	./utils/logging/Logger.cpp

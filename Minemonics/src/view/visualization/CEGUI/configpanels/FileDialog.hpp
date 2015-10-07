@@ -25,9 +25,9 @@
 //## utils headers
 
 /**
- * @brief		An open file dialog to select a file on the file system.
+ * @brief		An file dialog to select a file on the file system.
  * @details
- * @date		2015-03-02
+ * @date		2015-10-05
  * @author		Benjamin Ellenberger
  */
 class FileDialog: public MovablePanel {

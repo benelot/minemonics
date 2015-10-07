@@ -37,6 +37,7 @@ public:
 	~NewPlanetPanel(void);
 
 	void onValueChanged();
+	void onAddJury();
 	void onConfirmClicked();
 
 protected:
@@ -54,6 +55,12 @@ protected:
 	CEGUI::Combobox* mEvaluationTypeCb;
 	BoxSlider* mTournamentSizeBs;
 	CEGUI::PushButton* mConfirmButton;
+
+	CEGUI::Editbox* mEpochNumber;
+	CEGUI::Combobox* mJuryType;
+	CEGUI::Combobox* mDirection;
+	CEGUI::PushButton* mAddJury;
+	CEGUI::MultiColumnList* mJuryMcl;
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_CONFIGPANELS_NewPlanetPanel_HPP_ */

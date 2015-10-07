@@ -13,6 +13,8 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/Planet.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -75,6 +77,14 @@ public:
 		return mFrameTime;
 	}
 
+	Planet* getCurrentlySelectedPlanet() const {
+		return mCurrentlySelectedPlanet;
+	}
+
+	void setCurrentlySelectedPlanet(Planet* currentlySelectedPlanet) {
+		mCurrentlySelectedPlanet = currentlySelectedPlanet;
+	}
+
 protected:
 	/**
 	 * The state of the application.
@@ -107,5 +117,7 @@ private:
 							"StateHandler"));
 		}
 	} _initializer;
+
+	Planet* mCurrentlySelectedPlanet;
 };
 

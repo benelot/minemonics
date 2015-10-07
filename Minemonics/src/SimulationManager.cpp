@@ -65,6 +65,7 @@
 #include <configuration/EvolutionConfiguration.hpp>
 #include <configuration/LoggerConfiguration.hpp>
 #include <configuration/OgreSystemConfigStrings.hpp>
+#include <configuration/SerializationConfiguration.hpp>
 
 //## controller headers
 #include <controller/universe/environments/Environment.hpp>
@@ -245,6 +246,9 @@ void SimulationManager::createScene(void) {
 	mSun->setDirection(0, -1, -1);
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
+
+	// create the serialization top folder if necessary
+	mSerializationPath = FilesystemManipulator::createFolder(".",SerializationConfiguration::TOP_FOLDER);
 
 	// create a planet called earth
 	Planet* earth = new Planet(PhysicsController::FeatherstoneModel,
@@ -772,6 +776,15 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 }
 
 #ifdef __cplusplus
+}
+
+std::string SimulationManager::getTimeStamp() {
+	namespace pt = boost::posix_time;
+	pt::ptime now = pt::second_clock::local_time();
+	std::stringstream ss;
+	ss << now.date().year() << static_cast<int>(now.date().month()) << now.date().day()
+	    << now.time_of_day().hours() << now.time_of_day().minutes() << now.time_of_day().seconds();
+	return ss.str();
 }
 
 #endif

@@ -141,7 +141,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 	// initialize windows
 	//# new planet window
 	mNewPlanetWindow = new NewPlanetPanel(windowWidth / 3.0f,
-		windowHeight / 4.0f, GUIConfiguration::newPlanetName);
+		windowHeight / 6.0f, GUIConfiguration::newPlanetName);
 	mNewPlanetWindow->hide();
 	mMovablePanels.push_back(mNewPlanetWindow);
 

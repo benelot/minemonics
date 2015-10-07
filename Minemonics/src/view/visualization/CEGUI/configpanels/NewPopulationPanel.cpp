@@ -106,7 +106,7 @@ void NewPopulationPanel::onConfirmClicked() {
 	Population* population = new Population();
 	population->initialize(NULL, populationSize,
 		EvolutionConfiguration::ROOT_POSITION);
-	SimulationManager::getSingleton()->getUniverse().getPlanets()[0]->addPopulation(
+	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->addPopulation(
 		population);
 	close();
 }

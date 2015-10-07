@@ -118,6 +118,15 @@ public:
 		mPlanetModel->addEpoch(epoch);
 	}
 
+	void setSerializationPath(std::string serializationPath){
+		mPlanetModel->setSerializationPath(serializationPath);
+	}
+
+	std::string getSerializationPath()
+	{
+		return mPlanetModel->getSerializationPath();
+	}
+
 private:
 	/**
 	 * The boost logger.
