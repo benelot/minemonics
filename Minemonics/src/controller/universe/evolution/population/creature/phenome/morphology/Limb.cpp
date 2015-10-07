@@ -1,7 +1,12 @@
 //# corresponding headers
 #include <configuration/Definitions.hpp>
-#include <boost/lexical_cast.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <configuration/MorphologyConfiguration.hpp>
 #include <LinearMath/btQuadWord.h>
@@ -17,8 +22,10 @@
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
 
+//## controller headers
 #include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+
+//## model headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
@@ -37,7 +44,6 @@ Limb::_Init Limb::_initializer;
 Limb::Limb() :
 	mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug) << "Limb created.";
-	mLimbModel = new SRBLimbModel();
 }
 
 Limb::Limb(const Limb& limb) :

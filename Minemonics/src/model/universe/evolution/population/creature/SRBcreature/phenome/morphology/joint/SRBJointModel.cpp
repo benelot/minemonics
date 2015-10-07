@@ -28,8 +28,6 @@ SRBJointModel::SRBJointModel(const SRBJointModel& SRBJointModel) :
 }
 
 SRBJointModel::~SRBJointModel() {
-	delete mJointPhysics;
-	mJointPhysics = NULL;
 }
 
 void SRBJointModel::initialize(btDynamicsWorld* const world,

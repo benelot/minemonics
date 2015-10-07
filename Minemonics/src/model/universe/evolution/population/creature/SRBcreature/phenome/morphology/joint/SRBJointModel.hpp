@@ -239,46 +239,6 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointModel); /**!< Serialize the base object */
 	}
-
-private:
-
-//	/**
-//	 * The indices of limbA and limbB.
-//	 */
-//	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex;
-//
-//	btTransform mLocalA, mLocalB;
-//
-//	/**
-//	 * The joint's own index.
-//	 */
-//	std::vector<SRBJointModel*>::size_type mOwnIndex;
-//
-//	/**
-//	 * The physical model representation of the joint.
-//	 */
-//	JointPhysics* mJointPhysics;
-//
-//	/**
-//	 * All the sensors of the joint.
-//	 */
-//	std::vector<Sensor*> mSensors;
-//
-//	/**
-//	 * The angleceptors of the joint.
-//	 */
-//	std::vector<JointAngleceptor*> mAngleceptors;
-//
-//	/**
-//	 * The forceceptors of the joint.
-//	 */
-//	std::vector<JointForceceptor*> mForceceptors;
-//
-//	/**
-//	 * The limitceptors of the joint.
-//	 */
-//	std::vector<JointLimitceptor*> mLimitceptors;
-
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_SRBJOINTMODEL_HPP_ */

@@ -207,9 +207,6 @@ public:
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbModel); /**!< Serialize the base object */
 
 	}
-
-private:
-
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBMODEL_HPP_ */

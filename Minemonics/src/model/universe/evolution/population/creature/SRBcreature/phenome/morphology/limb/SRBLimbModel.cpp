@@ -33,8 +33,6 @@ SRBLimbModel::SRBLimbModel(const SRBLimbModel& SRBLimbModel) {
 }
 
 SRBLimbModel::~SRBLimbModel() {
-	delete mLimbPhysics;
-	mLimbPhysics = NULL;
 }
 
 void SRBLimbModel::initialize(btDynamicsWorld* const world,

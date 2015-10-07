@@ -30,8 +30,6 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 }
 
 FSJointModel::~FSJointModel() {
-	delete mJointPhysics;
-	mJointPhysics = NULL;
 }
 
 void FSJointModel::initialize(btDynamicsWorld* const world,
