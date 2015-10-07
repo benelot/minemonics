@@ -1,14 +1,15 @@
 //# corresponding header
-#include <stddef.h>
-#include <string>
-#include <vector>
+#include <view/visualization/CEGUI/MovablePanel.hpp>
 
+//# system headers
 //## controller headers
 //## model headers
 //## view headers
 #include <CEGUI/Element.h>
+#include <CEGUI/Event.h>
 #include <CEGUI/Singleton.h>
-#include <CEGUI/Size.h>
+#include <CEGUI/String.h>
+#include <CEGUI/SubscriberSlot.h>
 #include <CEGUI/UDim.h>
 #include <CEGUI/Vector.h>
 #include <CEGUI/widgets/FrameWindow.h>
@@ -19,7 +20,6 @@
 //## base headers
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
-#include <view/visualization/CEGUI/MovablePanel.hpp>
 
 //## controller headers
 //## model headers
@@ -71,7 +71,7 @@ void MovablePanel::initialize(const int left, const int top, const int width,
 }
 
 MovablePanel::~MovablePanel(void) {
-	delete mFrameWindow;
+	delete ((CEGUI::FrameWindow*)mFrameWindow);
 	mFrameWindow = NULL;
 }
 

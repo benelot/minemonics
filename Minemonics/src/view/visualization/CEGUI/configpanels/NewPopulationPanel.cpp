@@ -104,8 +104,9 @@ void NewPopulationPanel::onConfirmClicked() {
 	int populationSize = mPopulationSizeBs->getCurrentValue();
 
 	Population* population = new Population();
-	population->initialize(NULL, populationSize,
-		EvolutionConfiguration::ROOT_POSITION);
+	population->initialize(
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet(),
+		populationSize, EvolutionConfiguration::ROOT_POSITION);
 	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->addPopulation(
 		population);
 	close();

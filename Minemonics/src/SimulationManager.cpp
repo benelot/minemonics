@@ -250,26 +250,26 @@ void SimulationManager::createScene(void) {
 	// create the serialization top folder if necessary
 	mSerializationPath = FilesystemManipulator::createFolder(".",SerializationConfiguration::TOP_FOLDER);
 
-	// create a planet called earth
-	Planet* earth = new Planet(PhysicsController::FeatherstoneModel,
-		Environment::PLANE, 20, mSun);
-
-	Epoch* oneEarthEpoch = new Epoch();
-	oneEarthEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
-	oneEarthEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
-
-	earth->addEpoch(oneEarthEpoch);
-
-	// add earth to universe
-	mUniverse.addPlanet(earth);
-
-	// create a population
-	Population* earthPopulation = new Population();
-	earthPopulation->initialize(earth, 100,
-		EvolutionConfiguration::ROOT_POSITION);
-
-	// add earth population to earth
-	earth->addPopulation(earthPopulation);
+//	// create a planet called earth
+//	Planet* earth = new Planet(PhysicsController::FeatherstoneModel,
+//		Environment::PLANE, 20, mSun);
+//
+//	Epoch* oneEarthEpoch = new Epoch();
+//	oneEarthEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
+//	oneEarthEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
+//
+//	earth->addEpoch(oneEarthEpoch);
+//
+//	// add earth to universe
+//	mUniverse.addPlanet(earth);
+//
+//	// create a population
+//	Population* earthPopulation = new Population();
+//	earthPopulation->initialize(earth, 100,
+//		EvolutionConfiguration::ROOT_POSITION);
+//
+//	// add earth population to earth
+//	earth->addPopulation(earthPopulation);
 
 //	// create a population
 //	Population* earth2Population = new Population();

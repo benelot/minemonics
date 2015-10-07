@@ -76,11 +76,29 @@ ViewController::~ViewController() {
 	delete mMenuBar;
 	mMenuBar = NULL;
 
-	delete mFpsPanel;
-	mFpsPanel = NULL;
+//	delete mFpsPanel;
+//	mFpsPanel = NULL;
 
-	delete mDetailsPanel;
-	mDetailsPanel = NULL;
+//	delete mDetailsPanel;
+//	mDetailsPanel = NULL;
+
+	delete mNewPlanetWindow;
+	mNewPlanetWindow = NULL;
+
+	delete mNewPopulationWindow;
+	mNewPopulationWindow = NULL;
+
+	delete mEditPlanetWindow;
+	mEditPlanetWindow = NULL;
+
+	delete mEditPopulationWindow;
+	mEditPopulationWindow = NULL;
+
+	delete mLoadPlanetWindow;
+	mLoadPlanetWindow = NULL;
+
+	delete mLoadPopulationWindow;
+	mLoadPopulationWindow = NULL;
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget,

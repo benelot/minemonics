@@ -5,15 +5,15 @@
 #include <view/visualization/CEGUI/MovablePanel.hpp>
 
 //# forward declarations
-#pragma once
 namespace CEGUI {
-class FrameWindow;
 class Window;
 } /* namespace CEGUI */
 
 //# system headers
 #include <string>
+#include <utility>
 #include <vector>
+#include <stddef.h>
 
 //## controller headers
 //## model headers

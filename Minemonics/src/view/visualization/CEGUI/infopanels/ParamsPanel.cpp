@@ -1,4 +1,7 @@
 //# corresponding header
+#include <view/visualization/CEGUI/infopanels/ParamsPanel.hpp>
+
+//# system headers
 #include <stddef.h>
 #include <string>
 #include <vector>
@@ -11,16 +14,14 @@
 #include <CEGUI/Size.h>
 #include <CEGUI/UDim.h>
 #include <CEGUI/Vector.h>
-#include <CEGUI/widgets/FrameWindow.h>
+#include <CEGUI/Window.h>
 #include <CEGUI/WindowManager.h>
 
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
-#include <view/visualization/CEGUI/infopanels/ParamsPanel.hpp>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -92,11 +93,10 @@ void ParamsPanel::initialize(const int left, const int top, const int width,
 }
 
 ParamsPanel::~ParamsPanel(void) {
-	if (mTextBoxValues != NULL && mFrameWindow != NULL)
-		mFrameWindow->destroyChild(mTextBoxValues);
+	delete mTextBoxValues;
 	mTextBoxValues = NULL;
-	if (mTextBoxLabel != NULL && mFrameWindow != NULL)
-		mFrameWindow->destroyChild(mTextBoxLabel);
+
+	delete mTextBoxLabel;
 	mTextBoxLabel = NULL;
 }
 
