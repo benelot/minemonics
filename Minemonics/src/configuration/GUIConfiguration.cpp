@@ -43,7 +43,7 @@ const std::string GUIConfiguration::editPlanetName = "Edit Planet";
 const std::string GUIConfiguration::editPlanetCmd = "cmdEditPlanet";
 
 //load planet
-const std::string GUIConfiguration::loadPlanetName = "Load Planet";
+const std::string GUIConfiguration::loadPlanetName = "Load Planet...";
 const std::string GUIConfiguration::loadPlanetCmd = "cmdLoadPlanet";
 
 //New population
@@ -55,8 +55,11 @@ const std::string GUIConfiguration::editPopulationName = "Edit Population";
 const std::string GUIConfiguration::editPopulationCmd = "cmdEditPopulation";
 
 //load population
-const std::string GUIConfiguration::loadPopulationName = "Load Population";
+const std::string GUIConfiguration::loadPopulationName = "Load Population...";
 const std::string GUIConfiguration::loadPopulationCmd = "cmdLoadPopulation";
+
+const std::string GUIConfiguration::OpenFileSaveConfirm = "Do you really want to save here?";
+const std::string GUIConfiguration::OpenFileLoadConfirm = "Do you really want to load this?";
 
 //#####################
 //Evolution menu

@@ -69,6 +69,9 @@ public:
 	//load population
 	static const std::string loadPopulationName;
 	static const std::string loadPopulationCmd;
+
+	static const std::string OpenFileSaveConfirm;
+	static const std::string OpenFileLoadConfirm;
 //#####################
 //Evolution menu
 //		CEGUI::Window *evolutionTopItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",

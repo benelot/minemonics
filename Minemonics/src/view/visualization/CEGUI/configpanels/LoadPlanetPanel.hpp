@@ -2,17 +2,9 @@
 #define VIEW_VISUALIZATION_CEGUI_ELEMENTS_CONFIGPANELS_LOADPLANETPANEL_HPP_
 
 //# corresponding header
-#include <view/visualization/CEGUI/MovablePanel.hpp>
+#include <view/visualization/CEGUI/configpanels/FileDialog.hpp>
 
 //# forward declarations
-class BoxSlider;
-#pragma once
-namespace CEGUI {
-class Window;
-class Combobox;
-class PushButton;
-} /* namespace CEGUI */
-
 //# system headers
 //## controller headers
 //## model headers
@@ -26,32 +18,16 @@ class PushButton;
 //## utils headers
 
 /**
- * @brief		A panel to configure a new planet with.
+ * @brief		A panel to load a population with.
  * @details		Details
  * @date		2015-08-28
  * @author		Benjamin Ellenberger
  */
-class LoadPlanetPanel: public MovablePanel {
+class LoadPlanetPanel: public FileDialog {
 public:
 	LoadPlanetPanel(const int left, const int top, const std::string name);
 	~LoadPlanetPanel(void);
-
-	void onValueChanged();
-	void onConfirmClicked();
-
-protected:
-	// labels
-	CEGUI::Window* mEnvironmentTypeLabel;
-	CEGUI::Window* mEvaluationTimeLabel;
-	CEGUI::Window* mEvaluationTypeLabel;
-	CEGUI::Window* mTournamentSizeLabel;
-
-	//configuration elements
-	CEGUI::Combobox* mEnvironmentTypeCb;
-	BoxSlider* mEvaluationTimeBs;
-	CEGUI::Combobox* mEvaluationTypeCb;
-	BoxSlider* mTournamentSizeBs;
-	CEGUI::PushButton* mConfirmButton;
+	virtual void openFile(std::string filePath);
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_CONFIGPANELS_LOADPLANETPANEL_HPP_ */

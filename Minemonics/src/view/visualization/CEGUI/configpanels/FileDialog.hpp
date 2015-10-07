@@ -1,5 +1,5 @@
-#ifndef VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_OPENFILEDIALOG_HPP_
-#define VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_OPENFILEDIALOG_HPP_
+#ifndef VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_FILEDIALOG_HPP_
+#define VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_FILEDIALOG_HPP_
 
 //# corresponding headers
 #include <view/visualization/CEGUI/MovablePanel.hpp>
@@ -30,13 +30,14 @@
  * @date		2015-03-02
  * @author		Benjamin Ellenberger
  */
-class OpenFileDialog: public MovablePanel {
+class FileDialog: public MovablePanel {
 public:
 
 	static const int MAX_NUMBER_OF_HISTORY_ITEMS = 10;
 
-	OpenFileDialog(const int left, const int top, const std::string name);
-	virtual ~OpenFileDialog();
+	FileDialog(const int left, const int top, const std::string name,
+		MovablePanel::MovablePanelType type);
+	virtual ~FileDialog();
 
 	// Open/close/enable/disable windows and widgets
 	void disableDialog(void);
@@ -80,22 +81,24 @@ public:
 	void fillListbox(void);
 	void fillDrivesbox(void);
 
+	virtual void openFile(std::string filePath) = 0;
+
 	//==========================================================================
 	// Sort paths alphabetically (folders first, files last)
 	//==========================================================================
-	static bool sortFunction(boost::filesystem::path p1,
-		boost::filesystem::path p2) {
-		bool d1 = is_directory(p1);
-		bool d2 = is_directory(p2);
+	static bool sortFunction(std::string p1,
+		std::string p2) {
+		bool d1 = is_directory(boost::filesystem::path(p1));
+		bool d2 = is_directory(boost::filesystem::path(p2));
 
-		if (d1 && d2)
-			return (p1.filename() < p2.filename());
+		if ((d1 && d2) || (!d1 && !d2))
+			return (boost::filesystem::path(p1).filename() < boost::filesystem::path(p2).filename());
 		else if (d1)
 			return true;
 		else if (d2)
 			return false;
-		else
-			return (p1.filename() < p2.filename());
+
+		return false;
 	}
 
 	const std::string& getSelectedFile() const {
@@ -137,7 +140,9 @@ protected:
 	std::string mCurrentPath; // the current path
 	std::string mSelectedFile;
 
+	MovablePanelType mType;
+
 	bool mDialogShown;
 };
 
-#endif /* VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_OPENFILEDIALOG_HPP_ */
+#endif /* VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_FILEDIALOG_HPP_ */

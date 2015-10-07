@@ -44,8 +44,8 @@ public:
 		NEW_PLANET_PANEL,
 		EDIT_PLANET_PANEL,
 		EDIT_POPULATION_PANEL,
-		LOAD_PLANET_PANEL,
-		LOAD_POPULATION_PANEL
+		SAVE_PANEL,
+		LOAD_PANEL
 	};
 	MovablePanel(const std::string name, MovablePanelType type);
 

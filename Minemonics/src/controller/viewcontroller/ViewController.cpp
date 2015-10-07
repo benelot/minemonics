@@ -43,7 +43,6 @@
 #include <view/visualization/CEGUI/configpanels/LoadPlanetPanel.hpp>
 #include <view/visualization/CEGUI/configpanels/LoadPopulationPanel.hpp>
 #include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
-#include <view/visualization/CEGUI/configpanels/OpenFileDialog.hpp>
 #include <view/visualization/CEGUI/ShowCasePanel.hpp>
 
 //## utils headers
@@ -82,24 +81,6 @@ ViewController::~ViewController() {
 
 	delete mDetailsPanel;
 	mDetailsPanel = NULL;
-
-	delete mNewPlanetWindow;
-	mNewPlanetWindow = NULL;
-
-	delete mEditPlanetWindow;
-	mEditPlanetWindow = NULL;
-
-	delete mLoadPlanetWindow;
-	mLoadPlanetWindow = NULL;
-
-	delete mNewPopulationWindow;
-	mNewPlanetWindow = NULL;
-
-	delete mEditPopulationWindow;
-	mEditPlanetWindow = NULL;
-
-	delete mLoadPopulationWindow;
-	mLoadPlanetWindow = NULL;
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
@@ -188,10 +169,6 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 		windowHeight / 4.0f, GUIConfiguration::loadPopulationName);
 	mLoadPopulationWindow->hide();
 	mMovablePanels.push_back(mLoadPopulationWindow);
-
-	mOpenFileDialog = new OpenFileDialog(windowWidth / 3.0f,
-		windowHeight / 4.0f, "OpenFileDialog");
-	mMovablePanels.push_back(mOpenFileDialog);
 
 	// TODO: Add graphwindows again when used
 //	mMovablePanels.push_back(

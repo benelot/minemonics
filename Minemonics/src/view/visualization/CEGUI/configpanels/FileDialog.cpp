@@ -1,8 +1,4 @@
 //# corresponding headers
-#include <view/visualization/CEGUI/configpanels/OpenFileDialog.hpp>
-
-//# forward declarations
-//# system headers
 #include <stddef.h>
 #include <algorithm>
 #include <iostream>
@@ -34,15 +30,19 @@
 //## base headers
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <configuration/GUIConfiguration.hpp>
+#include <view/visualization/CEGUI/configpanels/FileDialog.hpp>
 
 //## controller headers
 //## model headers
 //## view headers
 //## utils headers
 
-OpenFileDialog::OpenFileDialog(const int left, const int top,
-	const std::string name) :
-	MovablePanel(name, MovablePanel::LOAD_PLANET_PANEL), mDialogShown(false) {
+FileDialog::FileDialog(const int left, const int top,
+	const std::string name, MovablePanel::MovablePanelType type) :
+	MovablePanel(name, type), mDialogShown(false) {
+
+	mType = type;
 
 	int width = 600;
 	int height = 600;
@@ -171,6 +171,7 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 		//static prompt load
 		mStPromptLoad = static_cast<CEGUI::Window*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Label"));
+		mStPromptLoad->setText(GUIConfiguration::OpenFileLoadConfirm);
 		mStPromptLoad->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.05f, 0), CEGUI::UDim(0.2f, 0)));
 		mStPromptLoad->setSize(
@@ -182,7 +183,7 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 		// loading window ok button
 		mPromptLoadOkButton = static_cast<CEGUI::PushButton*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Button"));
-		mPromptLoadOkButton->setText("Ok");
+		mPromptLoadOkButton->setText("Yes");
 		mPromptLoadOkButton->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.8f, 0)));
 		mPromptLoadOkButton->setSize(
@@ -195,7 +196,7 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 		mPromptLoadCancelButton =
 			static_cast<CEGUI::PushButton*>(wmgr.createWindow(
 				CEGUIConfiguration::CEGUI_SCHEME + "/Button"));
-		mPromptLoadCancelButton->setText("Cancel");
+		mPromptLoadCancelButton->setText("No");
 		mPromptLoadCancelButton->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.55f, 0), CEGUI::UDim(0.8f, 0)));
 		mPromptLoadCancelButton->setSize(
@@ -217,6 +218,7 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 		//static prompt save
 		mStPromptSave = static_cast<CEGUI::Window*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Label"));
+		mStPromptSave->setText(GUIConfiguration::OpenFileSaveConfirm);
 		mStPromptSave->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.05f, 0), CEGUI::UDim(0.2f, 0)));
 		mStPromptSave->setSize(
@@ -228,7 +230,7 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 		// saving window ok button
 		mPromptSaveOkButton = static_cast<CEGUI::PushButton*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Button"));
-		mPromptSaveOkButton->setText("Ok");
+		mPromptSaveOkButton->setText("Yes");
 		mPromptSaveOkButton->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.8f, 0)));
 		mPromptSaveOkButton->setSize(
@@ -241,7 +243,7 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 		mPromptSaveCancelButton =
 			static_cast<CEGUI::PushButton*>(wmgr.createWindow(
 				CEGUIConfiguration::CEGUI_SCHEME + "/Button"));
-		mPromptSaveCancelButton->setText("Cancel");
+		mPromptSaveCancelButton->setText("No");
 		mPromptSaveCancelButton->setPosition(
 			CEGUI::UVector2(CEGUI::UDim(0.55f, 0), CEGUI::UDim(0.8f, 0)));
 		mPromptSaveCancelButton->setSize(
@@ -250,23 +252,23 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 	}
 
 	if (mBackButton) {
-		mBackButton->setText("UP ^"); // Must set it here, otherwise the xml parser gets confused
+		mBackButton->setText("^"); // Must set it here, otherwise the xml parser gets confused
 		mBackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleBack, this));
+			CEGUI::Event::Subscriber(&FileDialog::handleBack, this));
 	}
 
 	if (mCancelButton)
 		mCancelButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleCancel, this));
+			CEGUI::Event::Subscriber(&FileDialog::handleCancel, this));
 
 	if (mOkButton)
 		mOkButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleOk, this));
+			CEGUI::Event::Subscriber(&FileDialog::handleOk, this));
 
 	if (mExtensionsCb) {
 		mExtensionsCb->subscribeEvent(
 			CEGUI::Combobox::EventListSelectionAccepted,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleFilterSelect,
+			CEGUI::Event::Subscriber(&FileDialog::handleFilterSelect,
 				this));
 		CEGUI::ListboxTextItem* itemCombobox = new CEGUI::ListboxTextItem(
 			" All (*)", 0);
@@ -277,51 +279,55 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 
 	if (mDrivesCb) {
 		mDrivesCb->subscribeEvent(CEGUI::Combobox::EventListSelectionAccepted,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleDriveSelect, this));
+			CEGUI::Event::Subscriber(&FileDialog::handleDriveSelect, this));
 	}
 
 	if (mFilesLb) {
 		mFilesLb->setSortingEnabled(true);
 		mFilesLb->subscribeEvent(CEGUI::Listbox::EventMouseClick,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleSingleClickSelect, this));
-		mFilesLb->subscribeEvent(CEGUI::Listbox::EventMouseDoubleClick,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleDoubleClickSelect,
+			CEGUI::Event::Subscriber(&FileDialog::handleSingleClickSelect,
 				this));
+		mFilesLb->subscribeEvent(CEGUI::Listbox::EventMouseDoubleClick,
+			CEGUI::Event::Subscriber(&FileDialog::handleDoubleClickSelect,
+				this));
+		mFilesLb->setSortingEnabled(false);
 	}
 
 	if (mWindowPromptLoad) {
 		mBaseWidget->getParent()->addChild(mWindowPromptLoad);
+		mWindowPromptLoad->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked,
+			CEGUI::Event::Subscriber(&FileDialog::handlePromptLoadCancel, this));
 		mWindowPromptLoad->disable();
 		mWindowPromptLoad->hide();
 	}
 
 	if (mPromptLoadOkButton) {
 		mPromptLoadOkButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleOk,
-				this));
+			CEGUI::Event::Subscriber(&FileDialog::handleOk, this));
 	}
 
 	if (mPromptLoadCancelButton) {
-		mPromptSaveCancelButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handlePromptLoadCancel,
+		mPromptLoadCancelButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+			CEGUI::Event::Subscriber(&FileDialog::handlePromptLoadCancel,
 				this));
 	}
 
 	if (mWindowPromptSave) {
 		mBaseWidget->getParent()->addChild(mWindowPromptSave);
+		mWindowPromptSave->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked,
+			CEGUI::Event::Subscriber(&FileDialog::handlePromptSaveCancel, this));
 		mWindowPromptSave->disable();
 		mWindowPromptSave->hide();
 	}
 
 	if (mPromptSaveOkButton) {
 		mPromptSaveOkButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handleOk,
-				this));
+			CEGUI::Event::Subscriber(&FileDialog::handleOk, this));
 	}
 
 	if (mPromptSaveCancelButton) {
 		mPromptSaveCancelButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(&OpenFileDialog::handlePromptSaveCancel,
+			CEGUI::Event::Subscriber(&FileDialog::handlePromptSaveCancel,
 				this));
 	}
 
@@ -331,11 +337,11 @@ OpenFileDialog::OpenFileDialog(const int left, const int top,
 	fillDrivesbox();
 }
 
-OpenFileDialog::~OpenFileDialog() {
+FileDialog::~FileDialog() {
 	// TODO Auto-generated destructor stub
 }
 
-void OpenFileDialog::disableDialog(void) {
+void FileDialog::disableDialog(void) {
 	if (mBackButton)
 		mBackButton->disable();
 	if (mOkButton)
@@ -352,7 +358,7 @@ void OpenFileDialog::disableDialog(void) {
 		mFilesLb->disable();
 }
 
-void OpenFileDialog::enableDialog(void) {
+void FileDialog::enableDialog(void) {
 	if (mBackButton)
 		mBackButton->enable();
 	if (mOkButton)
@@ -369,14 +375,14 @@ void OpenFileDialog::enableDialog(void) {
 		mFilesLb->enable();
 }
 
-void OpenFileDialog::closeWindow(void) {
+void FileDialog::closeWindow(void) {
 	close();
 
 	closePromptWindowLoad();
 	closePromptWindowSave();
 }
 
-void OpenFileDialog::closePromptWindowLoad(void) {
+void FileDialog::closePromptWindowLoad(void) {
 	if (mWindowPromptLoad) {
 		mWindowPromptLoad->disable();
 		mWindowPromptLoad->hide();
@@ -384,7 +390,7 @@ void OpenFileDialog::closePromptWindowLoad(void) {
 	enableDialog();
 }
 
-void OpenFileDialog::closePromptWindowSave(void) {
+void FileDialog::closePromptWindowSave(void) {
 	if (mWindowPromptSave) {
 		mWindowPromptSave->disable();
 		mWindowPromptSave->hide();
@@ -392,7 +398,7 @@ void OpenFileDialog::closePromptWindowSave(void) {
 	enableDialog();
 }
 
-void OpenFileDialog::openPromptWindowLoad(void) {
+void FileDialog::openPromptWindowLoad(void) {
 	if (mWindowPromptLoad) {
 		disableDialog();
 		mWindowPromptLoad->show();
@@ -400,7 +406,7 @@ void OpenFileDialog::openPromptWindowLoad(void) {
 	}
 }
 
-void OpenFileDialog::openPromptWindowSave(void) {
+void FileDialog::openPromptWindowSave(void) {
 	if (mWindowPromptSave) {
 		disableDialog();
 		mWindowPromptSave->show();
@@ -408,58 +414,64 @@ void OpenFileDialog::openPromptWindowSave(void) {
 	}
 }
 
-bool OpenFileDialog::handleClose(const CEGUI::EventArgs&) {
+bool FileDialog::handleClose(const CEGUI::EventArgs&) {
 	prefillOutputAndClearInput();
 	closeWindow();
 	return true;
 }
 
-bool OpenFileDialog::handleCancel(const CEGUI::EventArgs&) {
+bool FileDialog::handleCancel(const CEGUI::EventArgs&) {
 	prefillOutputAndClearInput();
 	closeWindow();
 }
 
-void OpenFileDialog::okExecute(void) {
+void FileDialog::okExecute(void) {
 	prefillOutputAndClearInput();
 
 	// Add the filename to the combobox (= history)
 	addFileNameToHistory(getCurrentFile());
 
 	closeWindow();
+	openFile(mSelectedFile);
 }
 
-bool OpenFileDialog::handleOk(const CEGUI::EventArgs&) {
+bool FileDialog::handleOk(const CEGUI::EventArgs&) {
 
-	if (!mDialogShown && isFileExisting(getCurrentFile())) {
-		openPromptWindowLoad();
-		mDialogShown = true;
-		return true;
-	}
-
-	if (!mDialogShown && isFileExisting(getCurrentFile())) {
-		openPromptWindowSave();
-		mDialogShown = true;
-		return true;
+	switch (mType) {
+	case MovablePanel::LOAD_PANEL:
+		if (!mDialogShown && isFileExisting(getCurrentFile())) {
+			openPromptWindowLoad();
+			mDialogShown = true;
+			return true;
+		}
+		break;
+	case MovablePanel::SAVE_PANEL:
+		if (!mDialogShown && isFileExisting(getCurrentFile())) {
+			openPromptWindowSave();
+			mDialogShown = true;
+			return true;
+		}
+		break;
 	}
 
 	okExecute();
 	return true;
 }
 
-bool OpenFileDialog::handleBack(const CEGUI::EventArgs&) {
-	changeDirectory(mCurrentPath + "..");
+bool FileDialog::handleBack(const CEGUI::EventArgs&) {
+	changeDirectory(mCurrentPath + "/..");
 }
 
-bool OpenFileDialog::handleDriveSelect(const CEGUI::EventArgs&) {
+bool FileDialog::handleDriveSelect(const CEGUI::EventArgs&) {
 	changeDirectory(getCurrentDrive());
 }
 
-bool OpenFileDialog::handleFilterSelect(const CEGUI::EventArgs&) {
+bool FileDialog::handleFilterSelect(const CEGUI::EventArgs&) {
 	changeDirectory(mCurrentPath);
 	return true;
 }
 
-bool OpenFileDialog::handleSingleClickSelect(const CEGUI::EventArgs&) {
+bool FileDialog::handleSingleClickSelect(const CEGUI::EventArgs&) {
 	if (mFilesLb) {
 		CEGUI::ListboxTextItem* item =
 			static_cast<CEGUI::ListboxTextItem*>(mFilesLb->getFirstSelectedItem());
@@ -472,7 +484,8 @@ bool OpenFileDialog::handleSingleClickSelect(const CEGUI::EventArgs&) {
 							(*mPathMap.find(item->getText().c_str())).second))) {
 					if (mFileCb) {
 						mFileCb->setText(item->getText());
-						mSelectedFile = (*mPathMap.find(item->getText().c_str())).second;
+						mSelectedFile =
+							(*mPathMap.find(item->getText().c_str())).second;
 					}
 				}
 
@@ -482,7 +495,7 @@ bool OpenFileDialog::handleSingleClickSelect(const CEGUI::EventArgs&) {
 	return true;
 }
 
-bool OpenFileDialog::handleDoubleClickSelect(const CEGUI::EventArgs&) {
+bool FileDialog::handleDoubleClickSelect(const CEGUI::EventArgs&) {
 	if (mFilesLb) {
 		CEGUI::ListboxTextItem* item =
 			static_cast<CEGUI::ListboxTextItem*>(mFilesLb->getFirstSelectedItem());
@@ -497,13 +510,13 @@ bool OpenFileDialog::handleDoubleClickSelect(const CEGUI::EventArgs&) {
 						changeDirectory(
 							mPathMap.find(item->getText().c_str())->second);
 						fillListbox();
-					}
-					else if(boost::filesystem::is_regular_file(
+					} else if (boost::filesystem::is_regular_file(
 						boost::filesystem::path(
-							mPathMap.find(item->getText().c_str())->second))){
+							mPathMap.find(item->getText().c_str())->second))) {
 						if (mFileCb) {
 							mFileCb->setText(item->getText());
-							mSelectedFile = (*mPathMap.find(item->getText().c_str())).second;
+							mSelectedFile = (*mPathMap.find(
+								item->getText().c_str())).second;
 						}
 						handleOk(CEGUI::EventArgs());
 					}
@@ -515,37 +528,37 @@ bool OpenFileDialog::handleDoubleClickSelect(const CEGUI::EventArgs&) {
 	return true;
 }
 
-bool OpenFileDialog::handlePromptLoadOk(const CEGUI::EventArgs&) {
+bool FileDialog::handlePromptLoadOk(const CEGUI::EventArgs&) {
 	closePromptWindowLoad();
 	return true;
 }
 
-bool OpenFileDialog::handlePromptSaveOk(const CEGUI::EventArgs&) {
+bool FileDialog::handlePromptSaveOk(const CEGUI::EventArgs&) {
 	closePromptWindowLoad();
 	return true;
 }
 
-bool OpenFileDialog::handlePromptLoadCancel(const CEGUI::EventArgs&) {
+bool FileDialog::handlePromptLoadCancel(const CEGUI::EventArgs&) {
 	closePromptWindowLoad();
 	mDialogShown = false;
 	return true;
 }
 
-bool OpenFileDialog::handlePromptSaveCancel(const CEGUI::EventArgs&) {
+bool FileDialog::handlePromptSaveCancel(const CEGUI::EventArgs&) {
 	closePromptWindowSave();
 	mDialogShown = false;
 	return true;
 }
 
-bool OpenFileDialog::isFileExisting(const std::string file) {
+bool FileDialog::isFileExisting(const std::string file) {
 	return boost::filesystem::exists(boost::filesystem::path(file));
 }
 
-void OpenFileDialog::prefillOutputAndClearInput(void) {
+void FileDialog::prefillOutputAndClearInput(void) {
 	mFileCb->setText("");
 }
 
-void OpenFileDialog::determineDrives() {
+void FileDialog::determineDrives() {
 	mDrives.clear();
 
 //Linux
@@ -575,7 +588,7 @@ void OpenFileDialog::determineDrives() {
 		}
 	}
 }
-void OpenFileDialog::changeDirectory(std::string path) {
+void FileDialog::changeDirectory(std::string path) {
 
 	mCurrentPath =
 		boost::filesystem::absolute(boost::filesystem::path(path)).c_str();
@@ -583,7 +596,7 @@ void OpenFileDialog::changeDirectory(std::string path) {
 
 	mNames.clear();
 
-	mNames.push_back("[..]");
+//	mNames.push_back("\[..]");
 
 	std::vector<std::string> tempPaths;
 
@@ -602,16 +615,16 @@ void OpenFileDialog::changeDirectory(std::string path) {
 		}
 	}
 
-// some shitty OSs don't sort paths..
+	// some shitty OSs don't sort paths..
 	std::sort(tempPaths.begin(), tempPaths.end(), sortFunction);
 
 	for (size_t i = 0; i < tempPaths.size(); i++) {
 		// folder
 		if (boost::filesystem::is_directory(tempPaths[i])) {
-			std::string folderName = std::string("[")
+			std::string folderName = std::string("\\[")
 				+ std::string(
 					boost::filesystem::path(tempPaths[i]).filename().c_str())
-				+ ']';
+				+ "\\]";
 			mPathMap.insert(std::make_pair(folderName, tempPaths[i]));
 			mNames.push_back(folderName);
 		}
@@ -645,33 +658,33 @@ void OpenFileDialog::changeDirectory(std::string path) {
 
 }
 
-std::string OpenFileDialog::getWorkingPath(void) {
+std::string FileDialog::getWorkingPath(void) {
 	return mCurrentPath;
 }
 
-std::string OpenFileDialog::getCurrentDrive(void) {
+std::string FileDialog::getCurrentDrive(void) {
 	return mDrivesCb->getSelectedItem()->getText().c_str();
 }
 
-int OpenFileDialog::getCurrentFilterElement(void) {
+int FileDialog::getCurrentFilterElement(void) {
 	return mExtensionsCb->getSelectedItem()->getID();
 }
 
-void OpenFileDialog::setCurrentFile(const std::string allocator) {
+void FileDialog::setCurrentFile(const std::string allocator) {
 }
 
-std::string OpenFileDialog::getCurrentFile(void) {
+std::string FileDialog::getCurrentFile(void) {
 	return mSelectedFile;
 }
 
-void OpenFileDialog::addFileNameToHistory(const std::string szFileName) {
+void FileDialog::addFileNameToHistory(const std::string szFileName) {
 	mFileCb->insertItem(new CEGUI::ListboxTextItem(szFileName.c_str()), NULL);
 	uint uNumberOfItems = mFileCb->getItemCount();
 	if (uNumberOfItems > MAX_NUMBER_OF_HISTORY_ITEMS)
 		mFileCb->removeItem(mFileCb->getListboxItemFromIndex(--uNumberOfItems));
 }
 
-void OpenFileDialog::fillListbox(void) {
+void FileDialog::fillListbox(void) {
 	for (int i = mFilesLb->getItemCount() - 1; i >= 0; --i) {
 		CEGUI::ListboxItem* lti = mFilesLb->getListboxItemFromIndex(i);
 		mFilesLb->removeItem(lti);
@@ -684,7 +697,7 @@ void OpenFileDialog::fillListbox(void) {
 	}
 }
 
-void OpenFileDialog::fillDrivesbox(void) {
+void FileDialog::fillDrivesbox(void) {
 	for (int i = mDrivesCb->getItemCount() - 1; i >= 0; --i) {
 		CEGUI::ListboxItem* lti = mDrivesCb->getListboxItemFromIndex(i);
 		mFilesLb->removeItem(lti);

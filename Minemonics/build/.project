@@ -634,9 +634,9 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/LoadPopulationPanel.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Source Files/OpenFileDialog.cpp</name>
+			<name>[Targets]/[exe] Minemonics/Source Files/FileDialog.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/OpenFileDialog.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/FileDialog.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Ogre3DFFMPEGVideoWriter.cpp</name>
@@ -1419,9 +1419,9 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/LoadPopulationPanel.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/OpenFileDialog.hpp</name>
+			<name>[Targets]/[exe] Minemonics/Header Files/FileDialog.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/OpenFileDialog.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/view/visualization/CEGUI/configpanels/FileDialog.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Ogre3DFFMPEGVideoWriter.hpp</name>
