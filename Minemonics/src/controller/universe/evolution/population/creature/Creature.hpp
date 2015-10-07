@@ -80,6 +80,8 @@ public:
 
 	void calm();
 
+	void save(std::string folderPath);
+
 	// Facade accessor methods
 	void setPosition(const Ogre::Vector3 position) {
 		mCreatureModel->setPosition(position);

@@ -84,8 +84,7 @@ void Evaluation::setup() {
 	}
 
 	if (limbQty == 0 || limbQty == 1) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-			<< "Creature discarded because it had no body or just one limb.";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because it had no body or just one limb.";
 		mHasFailed = true;
 		teardown();
 	} else {
@@ -106,9 +105,21 @@ void Evaluation::teardown() {
 	SimulationManager::getSingleton()->getViewController().removePlanetFromView(
 		mPlanet);
 	SimulationManager::getSingleton()->getViewController().setSelectedPlanet(
-		NULL);
+	NULL);
 
 	if (!mHasFailed) {
+		std::string generationSerializationPath =
+			mPlanet->getPlanetModel()->getEvolutionModel()->getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel()->getCurrentPopulationIndex()]->getGenerationSerializationPath();
+
+		// save creatures
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
+			for (std::vector<Creature*>::iterator cit =
+				(*pit)->getCreatures().begin();
+				cit != (*pit)->getCreatures().end(); cit++) {
+				(*cit)->save(generationSerializationPath);
+			}
+		}
 		process();
 	} else {
 		// remove competing populations from the world
@@ -131,12 +142,11 @@ void Evaluation::teardown() {
 	mEvaluationModel.setEvaluating(false);
 	mEvaluationModel.setTornDown(true);
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< mEvaluationModel.getTimePassed() << " seconds simulated in "
-		<< ((float) (SimulationManager::getSingleton()->getRuntime() - mStart))
-			/ 1000.0f << " seconds/ Speedup = "
-		<< mEvaluationModel.getTimePassed()
-			/ (((float) (SimulationManager::getSingleton()->getRuntime()
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mEvaluationModel.getTimePassed() << " seconds simulated in "
+	<< ((float) (SimulationManager::getSingleton()->getRuntime() - mStart))
+	/ 1000.0f << " seconds/ Speedup = "
+	<< mEvaluationModel.getTimePassed()
+	/ (((float) (SimulationManager::getSingleton()->getRuntime()
 				- mStart)) / 1000.0f) << std::endl;
 }
 
@@ -158,8 +168,7 @@ void Evaluation::update(const double timeSinceLastTick) {
 
 			if ((*pit)->hasInterpenetrations()) {
 				//TODO: Review this decision again in the case of a whole population
-				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-					<< "Creature discarded because of unsolvable interpenetrations.";
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because of unsolvable interpenetrations.";
 				mHasFailed = true;
 				teardown();
 				break;

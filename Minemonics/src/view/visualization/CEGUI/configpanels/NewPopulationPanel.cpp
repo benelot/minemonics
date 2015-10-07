@@ -107,6 +107,18 @@ void NewPopulationPanel::onConfirmClicked() {
 	population->initialize(
 		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet(),
 		populationSize, EvolutionConfiguration::ROOT_POSITION);
+
+	//create folder for the population
+	std::string populationName = std::string("Population-")
+		+ boost::lexical_cast<std::string>(
+			SimulationManager::getSingleton()->getTimeStamp());
+	std::string path =
+		FilesystemManipulator::createFolder(
+			SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getSerializationPath(),
+			populationName);
+
+	population->setSerializationPath(path);
+
 	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->addPopulation(
 		population);
 	close();

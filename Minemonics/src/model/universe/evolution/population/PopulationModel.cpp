@@ -20,7 +20,7 @@
 
 PopulationModel::PopulationModel() :
 	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL), mOutOfSync(
-		false) {
+		false),mCurrentGeneration(0) {
 
 }
 
@@ -29,6 +29,7 @@ PopulationModel::PopulationModel(const PopulationModel& populationModel) :
 	mPlanetModel = populationModel.mPlanetModel;
 	mCreatureQty = populationModel.mCreatureQty;
 	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
+	mCurrentGeneration = populationModel.mCurrentGeneration;
 
 	for (std::vector<CreatureModel*>::const_iterator cit =
 		populationModel.getCreatureModels().begin();

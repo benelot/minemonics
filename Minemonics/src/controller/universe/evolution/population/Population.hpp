@@ -129,6 +129,22 @@ public:
 		mPopulationModel->setOutOfSync(outOfSync);
 	}
 
+	void setSerializationPath(std::string path){
+		mPopulationModel->setSerializationPath(path);
+	}
+
+	const std::string getSerializationPath() const {
+		return mPopulationModel->getSerializationPath();
+	}
+
+	const int getCurrentGeneration() const {
+		return mPopulationModel->getCurrentGeneration();
+	}
+
+	const std::string getGenerationSerializationPath(){
+		return mPopulationModel->getGenerationSerializationPath();
+	}
+
 private:
 
 	static BoostLogger mBoostLogger; /**!< The boost logger. */

@@ -73,6 +73,17 @@ bool Evolution::proceedEvaluation() {
 			if (mEvolutionModel->getCurrentCreatureIndex()
 				< mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures().size()) {
 
+				// create generation folder
+				if (mEvolutionModel->getCurrentCreatureIndex() == 0) {
+					//create folder for the generation
+					std::string generationName = std::string("Generation-")
+						+ boost::lexical_cast<std::string>(
+							mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCurrentGeneration());
+					FilesystemManipulator::createFolder(
+							mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
+							generationName);
+				}
+
 				Evaluation* evaluation = new Evaluation();
 				evaluation->initialize(mPlanet,
 					mEvolutionModel->getEvaluationTime());
@@ -228,16 +239,6 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 	} else {
-//		//update highest fitness
-//		double highestFitness = 0;
-//		for (std::vector<Population*>::iterator pit = mPopulations.begin();
-//				pit != mPopulations.end(); pit++) {
-//			double fitness = (*pit)->getHighestFitness();
-//			highestFitness =
-//					(highestFitness < fitness) ? fitness : highestFitness;
-//		}
-//		mPlanet->getPlanetModel()->getCurrentEpoch()->setCurrentFitness(
-//				highestFitness);
 
 //update lasting generations
 		mPlanet->getPlanetModel()->getCurrentEpoch()->setLastingGenerations(
@@ -268,21 +269,20 @@ void Evolution::performEmbryogenesis() {
 
 			//Performing embryogenesis on creature(x/all)
 			//Gene Qty: z
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Performing embryogenesis on creature(" << creatureQty << "/"
-				<< (*pit)->getCreatures().size() << "):\nGene Qty: "
-				<< (*cit)->getCreatureModel()->getGenotype().getGenes().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Performing embryogenesis on creature(" << creatureQty << "/"
+			<< (*pit)->getCreatures().size() << "):\nGene Qty: "
+			<< (*cit)->getCreatureModel()->getGenotype().getGenes().size();
 
 			int limbQty = (*cit)->performEmbryogenesis();
 
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Components:"
-				<< (*cit)->getCreatureModel()->getPhenotypeModel()->getComponentModels().size();
+			<< "Components:"
+			<< (*cit)->getCreatureModel()->getPhenotypeModel()->getComponentModels().size();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< (**cit).getCreatureModel();
+			<< (**cit).getCreatureModel();
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Creature finished.\n"
-				<< "################################\n\n";
+			<< "Creature finished.\n"
+			<< "################################\n\n";
 
 			if (limbQty == 0) {
 				Creature* creature = *cit;

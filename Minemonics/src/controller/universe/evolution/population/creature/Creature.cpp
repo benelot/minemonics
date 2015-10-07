@@ -115,3 +115,18 @@ void Creature::processJuries() {
 void Creature::calm() {
 	mCreatureModel->calm();
 }
+
+void Creature::save(std::string folderPath) {
+				std::string creatureFilePath;
+				creatureFilePath.append(folderPath);
+				creatureFilePath.append("/Creature-");
+
+				creatureFilePath.append(boost::lexical_cast<std::string>(getCreatureModel()->getFitnessScore()));
+				creatureFilePath.append("-");
+				creatureFilePath.append(SimulationManager::getSingleton()->getTimeStamp());
+				creatureFilePath.append(".cr");
+
+				SaveController < CreatureModel > creatureSaver;
+				creatureSaver.save(*(getCreatureModel()),
+					creatureFilePath.c_str());
+}

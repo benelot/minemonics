@@ -13,10 +13,14 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/filesystem/path.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
@@ -115,6 +119,14 @@ public:
 		mOutOfSync = outOfSync;
 	}
 
+	const std::string getGenerationSerializationPath(){
+		//create folder for the generation
+			std::string generationName = std::string("Generation-")
+					+ boost::lexical_cast<std::string>(
+						getCurrentGeneration());
+			return getSerializationPath() + "/" + generationName;
+	}
+
 	// Serialization
 	/**
 	 * Give access to boost serialization
@@ -146,9 +158,11 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		if (SerializationConfiguration::POPULATION_EXPANDED) {
-			ar & BOOST_SERIALIZATION_NVP(mCreatureQty);
+			ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
+			& BOOST_SERIALIZATION_NVP(mCurrentGeneration);
 		} else {
 			ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
+				& BOOST_SERIALIZATION_NVP(mCurrentGeneration)
 				& BOOST_SERIALIZATION_NVP(mCreatureModels);
 		}
 	}
@@ -167,6 +181,14 @@ public:
 		if (SerializationConfiguration::POPULATION_EXPANDED) {
 			loadCreatures();
 		}
+	}
+
+	int getCurrentGeneration() const {
+		return mCurrentGeneration;
+	}
+
+	void setCurrentGeneration(int currentGeneration) {
+		mCurrentGeneration = currentGeneration;
 	}
 
 private:
@@ -197,35 +219,19 @@ private:
 		}
 	}
 
-	/**
-	 * If the population model is out of sync with the controller.
-	 */
-	bool mOutOfSync;
+	bool mOutOfSync; /**!< If the population model is out of sync with the controller. */
 
-	/**
-	 * The creatures living in this population. All creatures in one population can mate together.
-	 */
-	std::vector<CreatureModel*> mCreatureModels;
+	std::vector<CreatureModel*> mCreatureModels; /**!< The creatures living in this population. All creatures in one population can mate together. */
 
-	/**
-	 * The index of the creature that is currently evaluated.
-	 */
-	int mCurrentCreatureIndex;
+	int mCurrentCreatureIndex; /**!< The index of the creature that is currently evaluated. */
 
-	/**
-	 * The number of creatures that the population will consist of in every generation.
-	 */
-	int mCreatureQty;
+	int mCreatureQty; /**!< The number of creatures that the population will consist of in every generation. */
 
-	/**
-	 * The planet the population lives on.
-	 */
-	PlanetModel* mPlanetModel;
+	int mCurrentGeneration; /**!< The current generation */
 
-	/**
-	 * The epochs of the population.
-	 */
-	std::vector<Epoch*> mEpochs;
+	PlanetModel* mPlanetModel; /**!< The planet the population lives on. */
+
+	std::vector<Epoch*> mEpochs; /**!< The epochs of the population. */
 };
 BOOST_CLASS_VERSION(PopulationModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_POPULATIONMODEL_HPP_ */

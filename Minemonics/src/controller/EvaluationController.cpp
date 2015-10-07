@@ -60,20 +60,6 @@ void EvaluationController::scheduleEvaluations() {
 
 		// erase torn down evaluations
 		if ((*eit)->isTornDown()) {
-
-//			std::string creatureFile;
-//			creatureFile.append("creatures/Creature-");
-//			creatureFile.append(
-//				boost::lexical_cast < std::string
-//					> (SimulationManager::getSingleton()->getNow()));
-//			creatureFile.append(".creature");
-//
-//			Population* population = *(*eit)->getPopulations().begin();
-//			Creature* creature = *population->getCreatures().begin();
-//			SaveController < CreatureModel > creatureSaver;
-//			creatureSaver.save(*(creature->getCreatureModel()),
-//				creatureFile.c_str());
-
 			mCurrentlyRunningEvaluationsQty--;
 			eit = mEvaluations.erase(eit);
 		} else {
