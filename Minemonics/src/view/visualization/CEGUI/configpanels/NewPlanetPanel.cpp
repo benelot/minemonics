@@ -419,13 +419,14 @@ void NewPlanetPanel::onConfirmClicked() {
 
 	std::vector<Epoch*> mEpochs;
 
+	//TODO: This is not user friendly
 	for (int i = 0; i < mJuryMcl->getRowCount(); i++) {
 		CEGUI::MCLGridRef epochNumberGridRef(i, 0); // Select according to a grid reference; second row
 
 		CEGUI::ListboxItem* listboxItem = mJuryMcl->getItemAtGridReference(
 			epochNumberGridRef);
-		uint valueColumnEpochNumber = boost::lexical_cast < int
-			> (listboxItem->getText()); // Retrieve the value of the item
+		uint valueColumnEpochNumber = boost::lexical_cast<int>(
+			listboxItem->getText()); // Retrieve the value of the item
 
 		CEGUI::MCLGridRef juryTypeGridRef(i, 1); // Select according to a grid reference
 
@@ -437,16 +438,15 @@ void NewPlanetPanel::onConfirmClicked() {
 		listboxItem = mJuryMcl->getItemAtGridReference(juryDirectionGridRef);
 		uint valueColumnJuryDirection = listboxItem->getID(); // Retrieve the value of the item
 
-		if (mEpochs.size() >= valueColumnEpochNumber) {
-			mEpochs[valueColumnEpochNumber - 1]->addJuryType(
-				(Jury::JuryType) valueColumnJuryType, 1,
-				valueColumnJuryDirection);
-		} else {
-			Epoch* epoch = new Epoch();
-			epoch->addJuryType((Jury::JuryType) valueColumnJuryType, 1,
-				valueColumnJuryDirection);
-			mEpochs.push_back(epoch);
+		if (mEpochs.size() < valueColumnEpochNumber) {
+			for (int i = valueColumnEpochNumber - mEpochs.size(); i > 0; i--) {
+				Epoch* epoch = new Epoch();
+				mEpochs.push_back(epoch);
+			}
 		}
+		mEpochs[valueColumnEpochNumber - 1]->addJuryType(
+						(Jury::JuryType) valueColumnJuryType, 1,
+						valueColumnJuryDirection);
 	}
 
 	for (int i = 0; i < mEpochs.size(); i++) {
