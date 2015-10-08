@@ -354,7 +354,8 @@ public:
 		//in order to detect a derived class type from a base type for serialization,
 		//you have to register the derived class type in beforehand.
 		ar.register_type(static_cast<Morphogene*>(NULL));
-		ar & BOOST_SERIALIZATION_NVP(mGenomeType) /**!< The type of the genome*/
+		ar & BOOST_SERIALIZATION_NVP(mRootIndex) /**!< The root index */
+		& BOOST_SERIALIZATION_NVP(mGenomeType) /**!< The type of the genome*/
 		& BOOST_SERIALIZATION_NVP(mLength) /**!< The length of the genome*/
 		& BOOST_SERIALIZATION_NVP(mBranchiness) /**!< The branchiness of the genome*/
 		& BOOST_SERIALIZATION_NVP(mGenes); /**!< The vector of genes.*/
