@@ -15,7 +15,7 @@
 //## utils headers
 
 Gene::Gene() :
-		mType(UnknownGene) {
+		mType(NUM_GENES) {
 }
 
 Gene::~Gene() {

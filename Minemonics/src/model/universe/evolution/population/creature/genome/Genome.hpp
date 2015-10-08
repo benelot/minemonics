@@ -378,26 +378,25 @@ public:
 		return mLength;
 	}
 
+	int getRootIndex() const {
+		return mRootIndex;
+	}
+
+	void setRootIndex(int rootIndex) {
+		mRootIndex = rootIndex;
+	}
+
 protected:
-	/**
-	 * The length of the genome
-	 */
-	int mLength;
 
-	/**
-	 * The vector of genes.
-	 */
-	std::vector<Gene*> mGenes;
+	int mRootIndex; /**!< The root index */
 
-	/**
-	 * The type of genome.
-	 */
-	GenomeType mGenomeType;
+	int mLength; /**!< The length of the genome */
 
-	/**
-	 * The branchiness of the genome
-	 */
-	double mBranchiness;
+	std::vector<Gene*> mGenes; /**!< The genes of the genome */
+
+	GenomeType mGenomeType; /**!< The type of genome */
+
+	double mBranchiness; /**!< The branchiness of the genome */
 };
 BOOST_CLASS_VERSION(Genome, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Genome)

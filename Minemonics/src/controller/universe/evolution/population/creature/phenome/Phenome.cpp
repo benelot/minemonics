@@ -163,13 +163,15 @@ void Phenome::addToPhysicsWorld() {
 	}
 }
 
-void Phenome::addToWorld() {
+int Phenome::addToWorld() {
+	int limbQty = 0;
 	mPhenotypeModel->addToWorld();
 	if (!isInWorld()) {
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
 			lit != mLimbs.end(); lit++) {
 			(*lit)->addToWorld();
+			limbQty++;
 		}
 
 		// Add all constraints
@@ -179,6 +181,7 @@ void Phenome::addToWorld() {
 		}
 		setInWorld(true);
 	}
+	return limbQty;
 }
 
 void Phenome::removeFromWorld() {
@@ -212,18 +215,6 @@ void Phenome::cleanup() {
 
 void Phenome::reset(const Ogre::Vector3 position) {
 	mPhenotypeModel->reset(position);
-
-	// reset all constraints
-	for (std::vector<Joint*>::iterator jit = mJoints.begin();
-		jit != mJoints.end(); jit++) {
-		(*jit)->reset(position);
-	}
-
-	// reset all limbs
-	for (std::vector<Limb*>::iterator lit = mLimbs.begin(); lit != mLimbs.end();
-		lit++) {
-		(*lit)->reset(position);
-	}
 }
 
 void Phenome::reposition(const Ogre::Vector3 position) {

@@ -162,7 +162,7 @@ int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		mCreatureModel = creatureModel;
 
 		// get the first gene from the genome
-		Gene* gene = mCreatureModel->getGenotype().getGenes().front();
+		Gene* gene = mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
@@ -350,6 +350,7 @@ void FSPhenomeModel::addJointConstraints() {
 
 void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
+	//mMultiBody->setBasePos(OgreBulletUtils::convert(position));
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reset(position);

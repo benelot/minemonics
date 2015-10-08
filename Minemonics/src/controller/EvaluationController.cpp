@@ -26,7 +26,7 @@ BoostLogger EvaluationController::mBoostLogger; /*<! initialize the boost logger
 EvaluationController::_Init EvaluationController::_initializer;
 EvaluationController::EvaluationController() :
 	mCurrentlyRunningEvaluationsQty(0), mParallelEvaluationsQty(0), mPaused(
-		false), mUniverse(NULL) {
+		false), mUniverse(NULL), mFails(0) {
 }
 
 EvaluationController::~EvaluationController() {
@@ -60,6 +60,12 @@ void EvaluationController::scheduleEvaluations() {
 
 		// erase torn down evaluations
 		if ((*eit)->isTornDown()) {
+
+			if ((*eit)->hasFailed()) {
+				mFails += (*eit)->hasFailed();
+				std::cout << "Fails: " << mFails << std::endl;
+			}
+
 			mCurrentlyRunningEvaluationsQty--;
 			eit = mEvaluations.erase(eit);
 		} else {

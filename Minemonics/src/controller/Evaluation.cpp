@@ -161,20 +161,20 @@ void Evaluation::update(const double timeSinceLastTick) {
 		(*pit)->update(timeSinceLastTick);
 	}
 
-	if (mEvaluationModel.getTimePassed()
-		> PhysicsConfiguration::DISCARDING_STARTS) {
-		for (std::vector<Population*>::iterator pit = mPopulations.begin();
-			pit != mPopulations.end(); pit++) {
-
-			if ((*pit)->hasInterpenetrations()) {
-				//TODO: Review this decision again in the case of a whole population
-				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because of unsolvable interpenetrations.";
-				mHasFailed = true;
-				teardown();
-				break;
-			}
-		}
-	}
+//	if (mEvaluationModel.getTimePassed()
+//		> PhysicsConfiguration::DISCARDING_STARTS) {
+//		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+//			pit != mPopulations.end(); pit++) {
+//
+//			if ((*pit)->hasInterpenetrations()) {
+//				//TODO: Review this decision again in the case of a whole population
+//				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because of unsolvable interpenetrations.";
+//				mHasFailed = true;
+//				teardown();
+//				break;
+//			}
+//		}
+//	}
 
 	//update the time passed
 	mEvaluationModel.addTimePassed(timeSinceLastTick);

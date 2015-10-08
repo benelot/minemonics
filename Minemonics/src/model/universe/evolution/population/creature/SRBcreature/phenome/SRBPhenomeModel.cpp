@@ -112,7 +112,7 @@ int SRBPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		mCreatureModel = creatureModel;
 
 		// get the first gene from the genome
-		Gene* gene = mCreatureModel->getGenotype().getGenes().front();
+		Gene* gene = mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();

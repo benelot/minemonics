@@ -104,6 +104,12 @@ public:
 	 */
 	virtual void addRandomGene();
 
+	virtual void addRandomGeneBranches(double percentage);
+
+	virtual void addRandomGeneBranch();
+
+	virtual void addGeneBranch(const int geneIndex1,const int geneIndex2);
+
 	/**
 	 * Repair the genes by checking their integrity.
 	 */

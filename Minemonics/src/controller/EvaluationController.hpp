@@ -111,6 +111,8 @@ private:
 	 * The universe of the evaluations controller.
 	 */
 	Universe* mUniverse;
+
+	int mFails;
 };
 
 #endif /* CONTROLLER_EVALUATIONCONTROLLER_HPP_ */

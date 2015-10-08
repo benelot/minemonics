@@ -63,7 +63,7 @@ public:
 	/**
 	 * Reset the creature to the way it was born.
 	 */
-	virtual void reset(const Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position) = 0;
 
 	/**
 	 * Cleanup phenome model for a new embryogenesis.
@@ -73,7 +73,7 @@ public:
 	/**
 	 * Reposition the creature without resetting it.
 	 */
-	virtual void reposition(const Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position) = 0;
 
 	/**
 	 * Update the phenome model.

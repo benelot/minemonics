@@ -90,14 +90,14 @@ int Creature::addToPhysicsWorld() {
 }
 
 int Creature::addToWorld() {
-	int limbQty = 1;
+	int limbQty = 0;
 	// develop creature if it is not developed yet.
 	if (!isDeveloped()) {
-		limbQty = performEmbryogenesis();
+		performEmbryogenesis();
 	}
 
 	// Add phenotype to world
-	mPhenotype.addToWorld();
+	limbQty = mPhenotype.addToWorld();
 
 	return limbQty;
 }

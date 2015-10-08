@@ -39,7 +39,6 @@ public:
 	virtual ~Gene();
 
 	enum GeneType { /**!< The type of the gene */
-		UnknownGene, //!< UnknownGene
 		MorphoGene,  //!< MorphoGene
 		NUM_GENES
 	};

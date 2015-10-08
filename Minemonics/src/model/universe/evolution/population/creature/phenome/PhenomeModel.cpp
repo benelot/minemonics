@@ -87,8 +87,6 @@ void PhenomeModel::initialize(CreatureModel* const creatureModel) {
 }
 
 void PhenomeModel::update(const double timeSinceLastTick) {
-	//update all controllers
-	//TODO: Hacks to make it run, make nicer
 	// let the controller perform
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 		cit != mControllers.end(); cit++) {
@@ -98,13 +96,6 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 //	std::vector<JointModel*>::iterator jit = mJointModels.begin();
 //	for (; jit != mJointModels.end(); jit++) {
 //		(*jit)->update(timeSinceLastTick);
-//	}
-
-//	// test for strains
-	//TODO: Remove if not used
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->isStrained();
 //	}
 
 	// Update all limb models
@@ -133,14 +124,6 @@ void PhenomeModel::calm() {
 	}
 }
 
-void PhenomeModel::reset(const Ogre::Vector3 position) {
-	/**The vector of limb models.*/
-	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-		it != mLimbModels.end(); it++) {
-		(*it)->reset(position);
-	}
-}
-
 void PhenomeModel::cleanup() {
 	for (std::vector<ComponentModel*>::iterator cit = mComponentModels.begin();
 		cit != mComponentModels.end();) {
@@ -149,15 +132,6 @@ void PhenomeModel::cleanup() {
 	}
 	mLimbModels.clear();
 	mJointModels.clear();
-}
-
-void PhenomeModel::reposition(const Ogre::Vector3 position) {
-	/**The vector of limb models.*/
-	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-		it != mLimbModels.end(); it++) {
-		(*it)->reposition(position);
-
-	}
 }
 
 bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {

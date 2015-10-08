@@ -84,6 +84,10 @@ public:
 		return mPopulations;
 	}
 
+	bool hasFailed() const {
+		return mHasFailed;
+	}
+
 private:
 	/**
 	 * The boost logger.

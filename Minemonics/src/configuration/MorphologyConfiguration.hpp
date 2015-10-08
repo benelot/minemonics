@@ -87,7 +87,7 @@ public:
 	/**
 	 * Initial segments depth variance
 	 */
-	static const double LIMB_DEPTH_INITIAL_VAR = 5;
+	static const double LIMB_DEPTH_INITIAL_VAR = 2;
 
 	/**
 	 * Initial total segments mean
@@ -97,7 +97,7 @@ public:
 	/**
 	 * Initial total segments variance
 	 */
-	static const double LIMB_TOTAL_INITIAL_VAR = 10;
+	static const double LIMB_TOTAL_INITIAL_VAR = 5;
 
 	/**
 	 * The density of fat in kg per cubic meter
@@ -202,7 +202,7 @@ public:
 	/**
 	 * The initial branch number variance
 	 */
-	static const double BODY_BRANCH_INITIAL_VAR = 1;
+	static const double BODY_BRANCH_INITIAL_VAR = 1.0f;
 };
 
 #endif /* CONFIGURATION_MORPHOLOGYCONFIGURATION_H_ */

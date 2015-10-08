@@ -387,6 +387,7 @@ void FSEmbryogenesis::transcribeMorphogene(
 		childMorphogene->isIntraBodyColliding(),
 		phenomeModel->getLimbModels().size());
 
+	std::cout << "Limb: " << phenomeModel->getLimbModels().size() <<  std::endl;
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
 
@@ -453,8 +454,8 @@ void FSEmbryogenesis::transcribeMorphogene(
 				parentMorphogeneBranch->getJointYawMaxAngle(),
 				parentMorphogeneBranch->getJointRollMaxAngle()));
 
-		std::cout << "Joint Parent: " << joint->getParentIndex()
-			<< " /Joint Child: " << joint->getChildIndex() << std::endl;
+		std::cout << "Joint: Parent: " << joint->getParentIndex()
+			<< " /Child: " << joint->getChildIndex() << std::endl;
 
 		parentLimb->addChildJointIndex(joint->getIndex());
 		childLimb->setParentJointIndex(joint->getIndex());

@@ -25,7 +25,7 @@ Randomness::Randomness() {
 	mRandomness = this;
 	boost::posix_time::ptime time_t_epoch(boost::gregorian::date(1970, 1, 1));
 	boost::posix_time::ptime now =
-			boost::posix_time::microsec_clock::local_time();
+		boost::posix_time::microsec_clock::local_time();
 	boost::posix_time::time_duration diff = now - time_t_epoch;
 
 	rng.seed(diff.total_milliseconds());
@@ -43,8 +43,12 @@ Randomness::~Randomness() {
  * @return A random double which is limited by a lower and an upper limit.
  */
 double Randomness::nextUnifDouble(double lowerLimit, double upperLimit) {
+	if (lowerLimit == upperLimit) {
+		return lowerLimit;
+	}
+
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
-			lowerLimit, upperLimit);
+		lowerLimit, upperLimit);
 
 	return unifDoubleDistribution(rng);
 }
@@ -61,13 +65,21 @@ int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
 		return lowerLimit;
 	}
 
+	std::cout <<" Limits: " << lowerLimit << "," << upperLimit;
+
 	//create a uniform integer distribution
 	boost::random::uniform_int_distribution<> unifIntDistribution(lowerLimit,
-			upperLimit);
+		upperLimit);
 
 	//draw from it via the mersenne twister
-
-	return unifIntDistribution(rng);
+	int i = unifIntDistribution(rng);
+	//TODO: It seems that the distribution sometimes returns very high values
+	if(i > upperLimit){
+		i = upperLimit;
+	}else if(i < lowerLimit){
+		i = lowerLimit;
+	}
+	return i;
 }
 /**
  * Is a function which generates two values,
@@ -78,8 +90,12 @@ int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
  * @return The double which is nearer to
  */
 double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
+	if (lowerLimit == upperLimit) {
+		return lowerLimit;
+	}
+
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
-			pow(10, lowerLimit), pow(10, upperLimit));
+		pow(10, lowerLimit), pow(10, upperLimit));
 
 	//draw m and n
 	double tenpowm = unifDoubleDistribution(rng);
@@ -100,7 +116,7 @@ bool Randomness::nextUnifBoolean() {
 int Randomness::nextNormalInt(double mean, double variance, double limit) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalIntDistribution(mean,
-			(variance));
+		(variance));
 
 	double number = normalIntDistribution(rng);
 	int integer = round(number);
@@ -117,10 +133,10 @@ int Randomness::nextNormalInt(double mean, double variance, double limit) {
 }
 
 double Randomness::nextNormalDouble(double mean, double variance,
-		double limit) {
+	double limit) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalDoubleDistribution(mean,
-			variance);
+		variance);
 
 	double number = normalDoubleDistribution(rng);
 
@@ -139,7 +155,7 @@ double Randomness::nextNormalDouble(double mean, double variance,
 bool Randomness::nextNormalBoolean(double mean, double variance) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalBooleanDistribution(mean,
-			variance);
+		variance);
 
 	double number = normalBooleanDistribution(rng);
 	bool result = false;
@@ -156,7 +172,7 @@ bool Randomness::nextNormalBoolean(double mean, double variance) {
 
 Ogre::Vector3 Randomness::nextVector() {
 	double theta = nextUnifDouble(0.0,
-			2 * boost::math::constants::pi<double>());
+		2 * boost::math::constants::pi<double>());
 
 	double rawX = sin(theta);
 
@@ -185,7 +201,7 @@ Ogre::Quaternion Randomness::nextQuaternion() {
 	double z = v.z;
 
 	double theta = nextUnifDouble(0.0,
-			2 * boost::math::constants::pi<double>());
+		2 * boost::math::constants::pi<double>());
 
 	double cosTheta = cos(theta);
 

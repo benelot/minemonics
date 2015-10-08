@@ -127,7 +127,7 @@ public:
 	/**
 	 * Add the phenotype to the physical and graphical world.
 	 */
-	virtual void addToWorld();
+	virtual int addToWorld();
 
 	/**
 	 * Remove the phenotype from the physical and graphical world.
