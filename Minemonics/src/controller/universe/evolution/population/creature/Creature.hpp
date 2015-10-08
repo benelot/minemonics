@@ -134,10 +134,7 @@ public:
 	}
 
 protected:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -150,16 +147,10 @@ protected:
 		}
 	} _initializer;
 
-	/**
-	 * The model representation of the creature
-	 */
-	CreatureModel* mCreatureModel;
+	CreatureModel* mCreatureModel; /**!< The model representation of the creature */
 
 	//CHILD
-	/**
-	 * The phenotype of the creature.
-	 */
-	Phenome mPhenotype;
+	Phenome mPhenotype; /**!< The phenotype of the creature. */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_RSBCREATURE_CREATURE_HPP_ */

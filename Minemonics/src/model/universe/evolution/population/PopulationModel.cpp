@@ -39,11 +39,8 @@ PopulationModel::PopulationModel(const PopulationModel& populationModel) :
 }
 
 PopulationModel::~PopulationModel() {
-	while (!mCreatureModels.empty()) {
-		CreatureModel* f = mCreatureModels.back();
-		mCreatureModels.pop_back();
-		delete f;
-	}
+	// models only delete their own things
+	mCreatureModels.clear();
 
 	mPlanetModel = NULL;
 }

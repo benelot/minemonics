@@ -19,6 +19,11 @@ Genome::Genome(GenomeType type) :
 }
 
 Genome::~Genome() {
+	for(std::vector<Gene*>::iterator git = mGenes.begin();git != mGenes.end();git++){
+		delete *git;
+	}
+
+	mGenes.clear();
 }
 
 void Genome::addGene(Gene* gene) {

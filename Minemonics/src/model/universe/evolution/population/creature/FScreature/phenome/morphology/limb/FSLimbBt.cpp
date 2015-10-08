@@ -1,5 +1,4 @@
 //# corresponding header
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
 
 //# forward declarations

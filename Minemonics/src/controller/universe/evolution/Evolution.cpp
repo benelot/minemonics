@@ -44,6 +44,12 @@ Evolution::~Evolution() {
 
 	mEvaluationController = NULL;
 	mPlanet = NULL;
+
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+		pit != mPopulations.end(); pit++) {
+		delete (*pit);
+	}
+	mPopulations.clear();
 }
 
 void Evolution::initialize(EvaluationController* const evaluationController,
@@ -76,12 +82,13 @@ bool Evolution::proceedEvaluation() {
 				// create generation folder
 				if (mEvolutionModel->getCurrentCreatureIndex() == 0) {
 					//create folder for the generation
-					std::string generationName = std::string("Generation-")
-						+ boost::lexical_cast<std::string>(
-							mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCurrentGeneration());
+					std::string generationName =
+						std::string("Generation-")
+							+ boost::lexical_cast<std::string>(
+								mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCurrentGeneration());
 					FilesystemManipulator::createFolder(
-							mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
-							generationName);
+						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
+						generationName);
 				}
 
 				Evaluation* evaluation = new Evaluation();

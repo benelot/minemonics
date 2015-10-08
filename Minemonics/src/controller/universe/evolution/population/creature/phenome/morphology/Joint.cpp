@@ -1,11 +1,9 @@
 //# corresponding header
+#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-
 //## model headers
 #include <LinearMath/btTransform.h>
 #include <OgreVector3.h>
@@ -15,6 +13,10 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+
+//## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
@@ -33,14 +35,29 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
 	Ogre::Vector3 jointUpperLimits) {
-	// initialize the physics model of the joint
-	mJointModel = new SRBJointModel();
-	mJointModel->initialize(
-		creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-		((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
-		((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
-		indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
-		jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+	// initialize the model of the joint
+	switch (creature->getPhysicsModelType()) {
+	case PhysicsController::RigidbodyModel:
+		mJointModel = new SRBJointModel();
+		mJointModel->initialize(
+			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+			((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
+			((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
+			indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
+			jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+		break;
+	case PhysicsController::FeatherstoneModel:
+		mJointModel = new FSJointModel();
+		mJointModel->initialize(
+			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+			((FSLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
+			((FSLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
+			indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
+			jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+		break;
+	default:
+		break;
+	}
 
 	// Define the new component as a limb
 	Component::initialize (mJointModel);

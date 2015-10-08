@@ -31,7 +31,6 @@ class Creature;
 //## model headers
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
@@ -201,10 +200,7 @@ public:
 	}
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -218,31 +214,16 @@ private:
 	} _initializer;
 
 	// PARENT
-	/**
-	 * The creature this phenome belongs to.
-	 */
-	Creature* mCreature;
+	Creature* mCreature; /**!< The creature this phenome belongs to. */
 
 	// COMPONENTS
-	/**
-	 * The phenome model representation.
-	 */
-	PhenomeModel* mPhenotypeModel;
+	PhenomeModel* mPhenotypeModel; /**!< The phenome model representation. */
 
-	/**
-	 * The vector of phenotype components
-	 */
-	std::vector<Component*> mComponents;
+	std::vector<Component*> mComponents; /**!< The vector of phenotype components */
 
-	/**
-	 * The vector of the phenotype's limbs
-	 */
-	std::vector<Limb*> mLimbs;
+	std::vector<Limb*> mLimbs; /**!< The vector of the phenotype's limbs */
 
-	/**
-	 * The vector of the phenotype's joints between the limbs.
-	 */
-	std::vector<Joint*> mJoints;
+	std::vector<Joint*> mJoints; /**!< The vector of the phenotype's joints between the limbs. */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOME_HPP_ */

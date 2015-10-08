@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 
 //# forward declarations
@@ -16,7 +15,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 

@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
 
 //# forward declarations

@@ -1,6 +1,11 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 #include <LinearMath/btVector3.h>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
 
 //## view headers
 //# custom headers
@@ -8,8 +13,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-
 //## view headers
 //## utils headers
 
@@ -21,6 +24,13 @@ JointPhysics::JointPhysics() :
 }
 
 JointPhysics::~JointPhysics() {
+	//delete and clear the motor vector
+	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
+		motorIterator != mMotors.end(); motorIterator++) {
+		delete (*motorIterator);
+	}
+
+	mMotors.clear();
 }
 
 bool JointPhysics::equals(const JointPhysics& jointPhysics) const {

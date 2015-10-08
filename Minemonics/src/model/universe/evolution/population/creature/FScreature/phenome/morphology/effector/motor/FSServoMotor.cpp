@@ -1,6 +1,5 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp>
-#include <configuration/Definitions.hpp>
 
 //# forward declarations
 //# system headers
@@ -44,7 +43,6 @@ FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {
 }
 
 FSServoMotor::~FSServoMotor() {
-	mJointMotorIndex = JointPhysics::RDOF_PITCH;
 	mMultiBody = NULL;
 }
 

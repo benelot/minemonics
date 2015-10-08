@@ -45,10 +45,7 @@ public:
 
 private:
 
-	/**
-	 * The model representation of the component.
-	 */
-	ComponentModel* mComponentModel;
+	ComponentModel* mComponentModel; /**!< The model representation of the component. */
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENT_H_ */

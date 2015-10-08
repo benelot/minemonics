@@ -12,6 +12,7 @@
 //## model headers
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -24,6 +25,7 @@
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/PlanetModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>

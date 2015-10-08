@@ -21,7 +21,7 @@ Component::Component() :
 }
 
 Component::~Component() {
-	delete mComponentModel;
+	//The componentmodel is killed in the specific component
 	mComponentModel = NULL;
 }
 

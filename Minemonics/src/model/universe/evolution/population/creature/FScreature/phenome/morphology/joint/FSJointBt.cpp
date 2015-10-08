@@ -1,5 +1,4 @@
 //# corresponding header
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp>
 
 //# forward declarations
@@ -59,14 +58,6 @@ FSJointBt::~FSJointBt() {
 
 	// nullify the world reference
 	mWorld = NULL;
-
-	//delete and clear the motor vector
-	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-		motorIterator != mMotors.end(); motorIterator++) {
-		delete (*motorIterator);
-	}
-
-	mMotors.clear();
 }
 
 void FSJointBt::update(double timeSinceLastTick) {

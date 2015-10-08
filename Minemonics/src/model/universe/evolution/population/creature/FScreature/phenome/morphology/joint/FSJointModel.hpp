@@ -2,8 +2,8 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_FSJOINTMODEL_HPP_
 
 //# corresponding headers
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 
 //# forward declarations
 class FSLimbModel;
@@ -244,46 +244,6 @@ public:
 		ar.register_type(static_cast<FSJointBt*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointModel); /**!< Serialize the base object */
 	}
-
-private:
-
-//	/**
-//	 * The indices of limbA and limbB.
-//	 */
-//	std::vector<FSLimbModel*>::size_type mParentIndex, mChildIndex;
-//
-//	btTransform mLocalA, mLocalB;
-//
-//	/**
-//	 * The joint's own index.
-//	 */
-//	std::vector<FSJointModel*>::size_type mOwnIndex;
-//
-//	/**
-//	 * The physical model representation of the joint.
-//	 */
-//	JointPhysics* mJointPhysics;
-//
-//	/**
-//	 * All the sensors of the joint.
-//	 */
-//	std::vector<Sensor*> mSensors;
-//
-//	/**
-//	 * The angleceptors of the joint.
-//	 */
-//	std::vector<JointAngleceptor*> mAngleceptors;
-//
-//	/**
-//	 * The forceceptors of the joint.
-//	 */
-//	std::vector<JointForceceptor*> mForceceptors;
-//
-//	/**
-//	 * The limitceptors of the joint.
-//	 */
-//	std::vector<JointLimitceptor*> mLimitceptors;
-
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_FSJOINTMODEL_HPP_ */

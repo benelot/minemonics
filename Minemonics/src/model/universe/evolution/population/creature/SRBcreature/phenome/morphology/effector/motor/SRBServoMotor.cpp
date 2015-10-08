@@ -1,6 +1,5 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
-#include <configuration/Definitions.hpp>
 
 //# forward declarations
 //# system headers

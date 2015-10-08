@@ -2,8 +2,8 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //# forward declarations
 class btMultiBody;
@@ -95,14 +95,10 @@ public:
 	}
 
 private:
-//
 	int mJointIndex; /**!< The index of the joint. */
-//	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The joint motor index */
-//
+
 	btMultiBody* mMultiBody;
-//
-//	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
-//	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
+
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_ */

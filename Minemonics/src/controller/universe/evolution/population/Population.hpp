@@ -101,10 +101,20 @@ public:
 	 */
 	void process();
 
+	/**
+	 * If there are interpenetrations in the creatures of the population.
+	 * @return
+	 */
 	bool hasInterpenetrations();
 
+	/**
+	 * Mark the whole population to be culled.
+	 */
 	void markCull();
 
+	/**
+	 * Calm the population.
+	 */
 	void calm();
 
 	//Accessor methods

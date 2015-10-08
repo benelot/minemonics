@@ -1,7 +1,6 @@
 #ifndef CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_
 #define CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_
 
-
 //# corresponding headers
 //# forward declarations
 class EvaluationController;
@@ -28,7 +27,6 @@ class EvaluationController;
 
 //## view headers
 //## utils headers
-//#include <utils/TimerManager.hpp>
 
 /**
  * @brief		The evolution runs evaluations depending on type.
@@ -96,10 +94,8 @@ public:
 
 	int getTotalCreatureQty();
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+
+	static BoostLogger mBoostLogger; /**!<  The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -114,25 +110,14 @@ private:
 	} _initializer;
 
 	//PARENT
-	/**
-	 * The planet the evolution takes place on.
-	 */
-	Planet* mPlanet;
+	Planet* mPlanet; /**!< The planet the evolution takes place on. */
 
-	/**
-	 * The evaluation controller of the universe.
-	 */
-	EvaluationController* mEvaluationController;
+	//PARENT
+	EvaluationController* mEvaluationController; /**!< The evaluation controller of the universe. */
 
-	/**
-	 * Vector of populations
-	 */
-	std::vector<Population*> mPopulations;
+	std::vector<Population*> mPopulations; /**!< The population under the same evolution */
 
-	/**
-	 * The model of the evolution
-	 */
-	EvolutionModel* mEvolutionModel;
+	EvolutionModel* mEvolutionModel; /**!< The model of the evolution */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_EVOLUTION_HPP_ */

@@ -12,6 +12,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/ControlConfiguration.hpp>
+
 //## controller headers
 #include <model/universe/UniverseModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
@@ -35,11 +36,11 @@ Universe::~Universe() {
 
 //delete the planets
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end();) {
-		Planet* planet = (*pit);
-		delete planet;
-		pit = mPlanets.erase(pit);
+	for (; pit != mPlanets.end();pit++) {
+		delete (*pit);
 	}
+
+	mPlanets.clear();
 
 //	~mUniverseModel()
 }

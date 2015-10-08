@@ -17,18 +17,18 @@
 //## utils headers
 
 EvolutionModel::EvolutionModel() :
-		mPhase(VARIATION_PHASE), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(
-				0), mCurrentPopulationIndex(0), mCurrentCreatureIndex(0), mTournamentSize(
-				1) {
+	mPhase(VARIATION_PHASE), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0), mCurrentPopulationIndex(
+		0), mCurrentCreatureIndex(0), mTournamentSize(1) {
 
 }
 
 EvolutionModel::~EvolutionModel() {
-
+	// models only delete their own things
+	mPopulationModels.clear();
 }
 
 void EvolutionModel::initialize(const EvaluationType type,
-		const double evaluationTime, const int tournamentSize) {
+	const double evaluationTime, const int tournamentSize) {
 	mType = type;
 	mEvaluationTime = evaluationTime;
 	mTournamentSize = tournamentSize;
@@ -42,7 +42,7 @@ bool EvolutionModel::proceedEvaluation() {
 	if (mCurrentPopulationIndex < mPopulationModels.size()) {
 
 		if (mCurrentCreatureIndex
-				< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
+			< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
 			mCurrentCreatureIndex++;
 			return true;
 		} else {
@@ -54,6 +54,11 @@ bool EvolutionModel::proceedEvaluation() {
 
 			// variate the evaluated populations
 			variate();
+
+			//increase generation
+			mPopulationModels[mCurrentPopulationIndex]->setCurrentGeneration(
+				mPopulationModels[mCurrentPopulationIndex]->getCurrentGeneration()
+					+ 1);
 
 			mPopulationModels[mCurrentPopulationIndex]->setOutOfSync(true);
 
@@ -115,10 +120,10 @@ bool EvolutionModel::variate() {
 
 void EvolutionModel::performEmbryogenesis() {
 	for (std::vector<PopulationModel*>::iterator pit =
-			mPopulationModels.begin(); pit != mPopulationModels.end(); pit++) {
+		mPopulationModels.begin(); pit != mPopulationModels.end(); pit++) {
 		for (std::vector<CreatureModel*>::iterator cit =
-				(*pit)->getCreatureModels().begin();
-				cit != (*pit)->getCreatureModels().end(); cit++) {
+			(*pit)->getCreatureModels().begin();
+			cit != (*pit)->getCreatureModels().end(); cit++) {
 			(*cit)->performEmbryogenesis();
 		}
 	}

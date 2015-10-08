@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
 
 //# forward declarations
@@ -13,7 +12,6 @@
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLink.h>
-#include <configuration/MorphologyConfiguration.hpp>
 #include <LinearMath/btAlignedObjectArray.h>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
@@ -92,6 +90,12 @@ FSPhenomeModel::FSPhenomeModel(const FSPhenomeModel& phenomeModel) {
 
 FSPhenomeModel::~FSPhenomeModel() {
 	mMultiBody = NULL;
+	mWorld = NULL;
+
+	while(!mLimitConstraints.empty()){
+		delete mLimitConstraints.back();
+		mLimitConstraints.pop_back();
+	}
 }
 
 void FSPhenomeModel::initialize(CreatureModel* const creatureModel) {

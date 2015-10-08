@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //# forward declarations
@@ -8,7 +7,6 @@
 //## model headers
 #include <boost/lexical_cast.hpp>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
-#include <configuration/MorphologyConfiguration.hpp>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
@@ -21,6 +19,7 @@
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
 #include <controller/universe/evolution/population/creature/Creature.hpp>

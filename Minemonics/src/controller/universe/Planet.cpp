@@ -50,10 +50,6 @@ Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 		//create the terrain
 		mEnvironment = new Plane();
 		((Plane*) mEnvironment)->initialize(physicsModelType, light);
-		//TODO: Improve the head light #134.
-//		((Plane*) mEnvironment)->initialize(
-//				(Ogre::Light*) SimulationManager::getSingleton()->getCameraHandler().getCamNode()->getAttachedObject(
-//						"headLight"));
 		break;
 	}
 	}

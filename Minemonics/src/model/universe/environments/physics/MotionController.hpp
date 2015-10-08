@@ -2,8 +2,8 @@
 #define MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_MOTIONCONTROLLER_H_
 
 //# corresponding header
-#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //# forward declarations
 //# system headers

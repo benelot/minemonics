@@ -26,6 +26,7 @@ PlanetModel::PlanetModel() :
 PlanetModel::~PlanetModel() {
 	if (mEnvironmentModel) {
 		delete mEnvironmentModel;
+		mEnvironmentModel = NULL;
 	}
 
 	for (std::vector<Epoch*>::iterator eit = mEpochs.begin();
@@ -36,6 +37,7 @@ PlanetModel::~PlanetModel() {
 
 	if (mEvolutionModel) {
 		delete mEvolutionModel;
+		mEvolutionModel = NULL;
 	}
 }
 

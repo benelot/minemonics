@@ -16,6 +16,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
@@ -40,11 +41,10 @@ Population::Population(PopulationModel* const populationModel) :
 
 Population::~Population() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-		cit != mCreatures.end();) {
-		Creature* creature = *cit;
-		cit = mCreatures.erase(cit);
-		delete creature;
+		cit != mCreatures.end();cit++) {
+		delete (*cit);
 	}
+	mCreatures.clear();
 
 	delete mPopulationModel;
 	mPopulationModel = NULL;

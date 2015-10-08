@@ -185,13 +185,13 @@ public:
 	/**
 	 * Serializes the limb model to a string.
 	 * @param os The ostream.
-	 * @param phenomeModel The limb model we want to serialize.
+	 * @param SRBLimbModel The limb model we want to serialize.
 	 * @return A string containing all information about the limb model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 		const SRBLimbModel &SRBLimbModel);
 	/**
-	 * Serializes the creature to an xml file.
+	 * Serializes the limb model to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
@@ -200,21 +200,6 @@ public:
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(LimbModel); /**!< Serialize the base object */
 
 	}
-
-private:
-
-//	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
-//
-//	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
-//
-//	std::vector<JointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
-//
-//	std::vector<std::vector<JointModel*>::size_type> mChildJointIndices; /**!< The child joint indices */
-//
-//	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
-//
-//	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
-
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_SRBLIMBMODEL_HPP_ */

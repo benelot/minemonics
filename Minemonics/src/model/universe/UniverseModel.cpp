@@ -30,9 +30,9 @@ UniverseModel::~UniverseModel() {
 	}
 	mEvaluationModels.clear();
 
-	for (std::vector<PlanetModel*>::iterator eit = mPlanetModels.begin();
-		eit != mPlanetModels.end(); eit++) {
-		delete (*eit);
+	for (std::vector<PlanetModel*>::iterator pit = mPlanetModels.begin();
+		pit != mPlanetModels.end(); pit++) {
+		delete (*pit);
 	}
 	mPlanetModels.clear();
 }

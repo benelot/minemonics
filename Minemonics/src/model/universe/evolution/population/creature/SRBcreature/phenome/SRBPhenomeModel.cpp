@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
 
 //# forward declarations
@@ -68,8 +67,6 @@ SRBPhenomeModel::~SRBPhenomeModel() {
 
 void SRBPhenomeModel::update(const double timeSinceLastTick) {
 	//update all controllers
-	//TODO: Hacks to make it run, make nicer
-	// let the controller perform
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 		cit != mControllers.end(); cit++) {
 		(*cit)->perform(timeSinceLastTick);

@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -13,8 +15,6 @@
 #include <configuration/ControlConfiguration.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
-
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>

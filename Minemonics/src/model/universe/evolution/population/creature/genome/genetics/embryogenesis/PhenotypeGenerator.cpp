@@ -1,10 +1,23 @@
 //# corresponding headers
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
+//# forward declarations
+//# system headers
+#include <stddef.h>
+#include <list>
+
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
 //## view headers
 //## utils headers
+
+//# corresponding headers
 
 PhenotypeGenerator::PhenotypeGenerator() :
 		mRoot2LeafPath(0), mParentComponentModel(NULL), mCurrentShrinkageFactor(

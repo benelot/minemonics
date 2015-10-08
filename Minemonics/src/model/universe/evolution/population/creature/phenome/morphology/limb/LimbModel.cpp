@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //# forward declarations
@@ -35,6 +34,13 @@ LimbModel::~LimbModel() {
 	mLimbPhysics = NULL;
 
 	mCreatureModel = NULL;
+
+	while(!mSensors.empty()){
+		delete mSensors.back();
+		mSensors.pop_back();
+	}
+
+	mTactioceptors.clear();
 }
 
 void LimbModel::reset(Ogre::Vector3 position) {

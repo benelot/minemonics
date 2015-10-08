@@ -33,7 +33,6 @@ Creature::Creature(Population* const population,
 
 	// set up the phenotype
 	mPhenotype.initialize(this);
-
 	mPhenotype.setPhenotypeModel(mCreatureModel->getPhenotypeModel());
 
 }

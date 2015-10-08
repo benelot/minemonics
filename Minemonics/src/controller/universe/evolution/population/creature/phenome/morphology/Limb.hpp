@@ -27,10 +27,10 @@ class SimulationManager;
 //## base headers
 //## configuration headers
 //## controller headers
+
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
@@ -38,10 +38,6 @@ class SimulationManager;
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
-
-#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 /**
  * @brief		The limb controller synchronizes the limb graphical representation with the limb model.

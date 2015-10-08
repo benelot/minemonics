@@ -1,6 +1,6 @@
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-#include <configuration/Definitions.hpp>
+
 //# forward declarations
 //# system headers
 #include <list>
@@ -38,7 +38,6 @@ PhenomeModel::_Init PhenomeModel::_initializer;
 PhenomeModel::PhenomeModel() :
 	mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
 		true) {
-	mControllers.clear();
 }
 
 PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
@@ -71,20 +70,9 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 }
 
 PhenomeModel::~PhenomeModel() {
-	for (std::vector<ComponentModel*>::const_iterator coit =
-		mComponentModels.begin(); coit != mComponentModels.end(); coit++) {
-		switch ((*coit)->getComponentType()) {
-		case ComponentModel::LimbComponent:
-			delete ((LimbModel*) *coit);
-			break;
-		case ComponentModel::JointComponent:
-			delete ((JointModel*) *coit);
-			break;
-
-		}
-	}
-
 	mComponentModels.clear();
+	mLimbModels.clear();
+	mJointModels.clear();
 
 	for (std::vector<Controller*>::const_iterator cit = mControllers.begin();
 		cit != mControllers.end(); cit++) {

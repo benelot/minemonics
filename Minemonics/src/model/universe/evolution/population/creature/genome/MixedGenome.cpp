@@ -45,11 +45,7 @@ MixedGenome::MixedGenome(const MixedGenome& mixedGenome) {
 }
 
 MixedGenome::~MixedGenome() {
-	while (!mGenes.empty()) {
-		Gene* f = mGenes.back();
-		mGenes.pop_back();
-		delete f;
-	}
+
 }
 
 void MixedGenome::createRandomGenome(double branchiness) {

@@ -31,6 +31,15 @@ JointModel::JointModel(const JointModel& jointModel) :
 JointModel::~JointModel() {
 	delete mJointPhysics;
 	mJointPhysics = NULL;
+
+	while(!mSensors.empty()){
+		delete mSensors.back();
+		mSensors.pop_back();
+	}
+
+	mAngleceptors.clear();
+	mForceceptors.clear();
+	mLimitceptors.clear();
 }
 
 void JointModel::update(double timeSinceLastTick) {

@@ -1,10 +1,3 @@
-/*
- * MotionController.cpp
- *
- *  Created on: Mar 3, 2015
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/environments/physics/MotionController.hpp>
 

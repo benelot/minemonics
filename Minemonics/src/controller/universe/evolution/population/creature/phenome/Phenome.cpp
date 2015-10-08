@@ -70,13 +70,17 @@ Phenome::Phenome(const Phenome& phenome) {
 
 Phenome::~Phenome() {
 	for (std::vector<Component*>::iterator cit = mComponents.begin();
-		cit != mComponents.end();) {
-		delete *cit;
-		cit = mComponents.erase(cit);
+		cit != mComponents.end();cit++) {
+		delete (*cit);
 	}
+	mComponents.clear();
+	mLimbs.clear();
+	mJoints.clear();
 
-	delete mPhenotypeModel;
-	mPhenotypeModel = NULL;
+	//TODO: Fix the phenotype model memory leak (if any)
+//	delete mPhenotypeModel;
+//	mPhenotypeModel = NULL;
+
 	mCreature = NULL;
 }
 

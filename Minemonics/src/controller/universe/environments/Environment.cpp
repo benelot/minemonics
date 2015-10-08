@@ -27,7 +27,6 @@ Environment::Environment() :
 }
 
 Environment::~Environment() {
-
 	delete mEnvironmentGraphics;
 	mEnvironmentGraphics = NULL;
 

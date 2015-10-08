@@ -2,8 +2,8 @@
 #define MODEL_BULLET_ENVIRONMENTS_ENVIRONMENTBT_H_
 
 //# corresponding headers
-#include <model/universe/environments/EnvironmentPhysics.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/environments/EnvironmentPhysics.hpp>
 
 //# forward declarations
 class btCollisionShape;
