@@ -1,8 +1,9 @@
-/MinemonicsApplicationTerrain_00000000.dat
+
 /CEGUI.log
 /Ogre.log
 /*.test
+/test/*.test
 /Minemonics-build.log
-/OgreApp_d
 /images
 /Minemonics_d
+/.fuse_*
