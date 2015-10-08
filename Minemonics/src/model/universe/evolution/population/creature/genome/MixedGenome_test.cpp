@@ -9,7 +9,7 @@
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/PopulationConfiguration.hpp>
+#include <configuration/GeneticsConfiguration.hpp>
 
 //## controller headers
 #include <controller/SaveController.hpp>
@@ -73,11 +73,11 @@ protected:
 
 TEST_F(MixedGenomeTest,hasNormalGenes) {
 	ASSERT_TRUE(
-		PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
-		- PopulationConfiguration::POPULATION_GENES_INITIAL_VAR
+		GeneticsConfiguration::GENES_INITIAL_MEAN
+		- GeneticsConfiguration::GENES_INITIAL_VAR
 		<= genome->getGenes().size()
-		<= PopulationConfiguration::POPULATION_GENES_INITIAL_MEAN
-		+ PopulationConfiguration::POPULATION_GENES_INITIAL_VAR);
+		<= GeneticsConfiguration::GENES_INITIAL_MEAN
+		+ GeneticsConfiguration::GENES_INITIAL_VAR);
 }
 
 TEST_F(MixedGenomeTest,areAllBranchesSet) {
