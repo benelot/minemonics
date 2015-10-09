@@ -40,19 +40,10 @@ PlanetModel::PlanetModel(const EvolutionModel::EvaluationType type,
 	}
 	case EnvironmentModel::PLANE: {
 		//create the terrain
-		mEnvironmentModel = new PlaneModel();
+		mEnvironmentModel = new PlaneModel(physicsModelType);
 		break;
 	}
 	}
-
-	// set up the physics controller
-	mEnvironmentModel->setPhysicsController(
-		new GroundController(physicsModelType));
-	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
-#ifndef EXCLUDE_FROM_TEST
-	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
-		&(SimulationManager::getSingleton()->getDebugDrawer()));
-#endif
 }
 
 PlanetModel::~PlanetModel() {
@@ -69,6 +60,11 @@ PlanetModel::~PlanetModel() {
 }
 
 void PlanetModel::initialize() {
+	mEnvironmentModel->getPhysicsController()->initialize();
+#ifndef EXCLUDE_FROM_TEST
+	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
+		&(SimulationManager::getSingleton()->getDebugDrawer()));
+#endif
 
 }
 

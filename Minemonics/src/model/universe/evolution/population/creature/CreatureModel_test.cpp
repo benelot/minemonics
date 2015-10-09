@@ -28,7 +28,7 @@ protected:
 		randomness = new Randomness();
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
-		physicsController->initBulletPhysics();
+		physicsController->initialize();
 		creature = new CreatureModel();
 		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize(NULL, PhysicsController::FeatherstoneModel,
@@ -57,7 +57,7 @@ protected:
 		randomness = new Randomness();
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
-		physicsController->initBulletPhysics();
+		physicsController->initialize();
 		creature = new CreatureModel();
 		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize(NULL, PhysicsController::FeatherstoneModel,

@@ -28,6 +28,7 @@ class PlaneBt;
 class PlaneModel: public EnvironmentModel {
 public:
 	PlaneModel();
+	PlaneModel(PhysicsController::PhysicsModelType type);
 	virtual ~PlaneModel();
 
 	/**

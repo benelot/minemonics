@@ -57,7 +57,7 @@ public:
 	/**
 	 * Initialize bullet physics.
 	 */
-	void initBulletPhysics();
+	void initialize();
 
 	/**
 	 * Exit bullet physics.

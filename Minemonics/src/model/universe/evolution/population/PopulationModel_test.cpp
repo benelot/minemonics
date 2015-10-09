@@ -28,7 +28,7 @@ protected:
 		population = new PopulationModel();
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
-		physicsController->initBulletPhysics();
+		physicsController->initialize();
 		population->initialize(NULL, 0);
 		for (int i = 0; i < 30; ++i) {
 			CreatureModel* creature = new CreatureModel();
@@ -62,7 +62,7 @@ protected:
 		population = new PopulationModel();
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
-		physicsController->initBulletPhysics();
+		physicsController->initialize();
 		population->initialize(NULL, 0);
 		for (int i = 0; i < 30; ++i) {
 			CreatureModel* creature = new CreatureModel();

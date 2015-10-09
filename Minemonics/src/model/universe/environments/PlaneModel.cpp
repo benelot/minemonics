@@ -17,7 +17,12 @@
 //## utils headers
 
 PlaneModel::PlaneModel() {
+}
+
+PlaneModel::PlaneModel(PhysicsController::PhysicsModelType type){
 	mEnvironmentPhysics = new PlaneBt();
+	// set up the physics controller
+	mPhysicsController = new GroundController(type);
 }
 
 PlaneModel::~PlaneModel() {

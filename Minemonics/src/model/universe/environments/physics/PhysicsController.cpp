@@ -61,7 +61,7 @@ PhysicsController::~PhysicsController() {
 
 }
 
-void PhysicsController::initBulletPhysics() {
+void PhysicsController::initialize() {
 
 	mCollisionConfiguration = new btDefaultCollisionConfiguration(); //collision configuration contains default setup for memory, collision setup
 	mDispatcher = new btCollisionDispatcher(mCollisionConfiguration); //use the default collision dispatcher

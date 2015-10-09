@@ -49,6 +49,8 @@ Planet::Planet(PlanetModel* const planetModel) :
 }
 
 void Planet::initialize() {
+	mPlanetModel->initialize();
+
 	//create earth evolution
 	mEvolution.initialize(
 		&SimulationManager::getSingleton()->getUniverse().getEvaluationController(),
@@ -143,4 +145,5 @@ void Planet::save() {
 
 void Planet::load() {
 	mPlanetModel->load();
+	initialize();
 }
