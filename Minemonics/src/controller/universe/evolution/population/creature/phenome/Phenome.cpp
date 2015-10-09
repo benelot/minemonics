@@ -23,8 +23,10 @@
 //## controller headers
 #include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
 #include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
+#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
@@ -236,3 +238,27 @@ void Phenome::reposition(const Ogre::Vector3 position) {
 Phenome* Phenome::clone() {
 	return new Phenome(*this);
 }
+
+/**
+	 * Is the phenotype in the world?
+	 * @return
+	 */
+	bool Phenome::isInWorld() const {
+		return mPhenotypeModel->isInWorld();
+	}
+
+	/**
+	 * Set whether the phenotype is in the world or not.
+	 * @param inWorld Whether the phenotype is in the world or not.
+	 */
+	void Phenome::setInWorld(bool inWorld) {
+		mPhenotypeModel->setInWorld(inWorld);
+	}
+
+	bool Phenome::isDeveloped() const {
+		return mPhenotypeModel->isDeveloped();
+	}
+
+	void Phenome::setDeveloped(bool developed) {
+		mPhenotypeModel->setDeveloped(developed);
+	}

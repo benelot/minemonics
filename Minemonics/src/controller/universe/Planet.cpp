@@ -16,18 +16,21 @@
 //## controller headers
 #include <controller/universe/Universe.hpp>
 #include <controller/universe/evolution/Evolution.hpp>
-#include <controller/universe/environments/Environment.hpp>
 #include <controller/universe/environments/Plane.hpp>
 
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
 
 BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
+Planet::Planet() :
+	mEnvironment(NULL), mPlanetModel(NULL) {
+}
 Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 	const Environment::EnvironmentType type, const int evaluationTime,
 	Ogre::Light* light) :
@@ -43,7 +46,7 @@ Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 	switch (type) {
 	case Environment::HILLS: {
 		//		mEnvironment = new Hills();
-		//		((Hills*) mEnvironment)->initialize(solverType, light);
+		//		((Hills*) mEnvironment)->initialize(physicsModelType, light);
 		break;
 	}
 	case Environment::PLANE: {
@@ -109,4 +112,20 @@ void Planet::performEmbryogenesis() {
 
 int Planet::getTotalCreatureQty() {
 	return mEvolution.getTotalCreatureQty();
+}
+
+PhysicsController::PhysicsModelType Planet::getPhysicsModelType() {
+	return mEnvironment->getEnvironmentModel()->getPhysicsController()->getPhysicsModelType();
+}
+
+void Planet::addEpoch(Epoch* epoch) {
+	mPlanetModel->addEpoch(epoch);
+}
+
+void Planet::setSerializationPath(std::string serializationPath) {
+	mPlanetModel->setSerializationPath(serializationPath);
+}
+
+std::string Planet::getSerializationPath() {
+	return mPlanetModel->getSerializationPath();
 }

@@ -9,6 +9,8 @@
 class Creature;
 class LimbGraphics;
 class SimulationManager;
+class LimbO3D;
+class LimbModel;
 
 //# system headers
 #include <string>
@@ -29,13 +31,9 @@ class SimulationManager;
 //## controller headers
 
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //## view headers
-#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
-#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
-
 //## utils headers
 #include <utils/logging/Logger.hpp>
 
@@ -121,27 +119,19 @@ public:
 	void removeFromWorld();
 
 	// Accessor methods
-	const Ogre::Vector3 getPosition() const {
-		return mLimbModel->getPosition();
-	}
+	const Ogre::Vector3 getPosition() const;
 
-	const Ogre::Quaternion getOrientation() const {
-		return mLimbModel->getOrientation();
-	}
+	const Ogre::Quaternion getOrientation() const;
 
 	/**
 	 * Get the Graphics part of the limb.
 	 */
-	LimbGraphics* const getLimbGraphics() const {
-		return mLimbGraphics;
-	}
+	LimbGraphics* const getLimbGraphics() const;
 
 	/**
 	 * Get the Physics part of the limb.
 	 */
-	LimbPhysics* const getLimbPhysics() const {
-		return mLimbModel->getLimbPhysics();
-	}
+	LimbPhysics* const getLimbPhysics() const;
 
 	LimbModel* getLimbModel() {
 		return mLimbModel;

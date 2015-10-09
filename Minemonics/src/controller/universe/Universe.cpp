@@ -59,9 +59,6 @@ bool Universe::proceedEvaluation() {
 	if (mPlanets.size() != 0) {
 		// if the evaluation of the certain planet goes into the next generation, we go to the next planet.
 		if (!mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->proceedEvaluation()) {
-			//save the whole planet
-			//TODO: Fix saving
-			//mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->save();
 			mUniverseModel.setCurrentEvaluationPlanetIndex(
 				(mUniverseModel.getCurrentEvaluationPlanetIndex() + 1
 					< mPlanets.size()) ?

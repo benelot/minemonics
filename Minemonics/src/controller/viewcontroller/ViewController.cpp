@@ -34,6 +34,9 @@
 #include <configuration/GUIConfiguration.hpp>
 
 //## controller headers
+#include <controller/universe/Planet.hpp>
+#include <controller/Evaluation.hpp>
+
 //## model headers
 //## view headers
 #include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>

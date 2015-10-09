@@ -4,6 +4,8 @@
 //# corresponding headers
 //# forward declarations
 class EvaluationController;
+class Population;
+class Planet;
 
 //# system headers
 #include <vector>
@@ -20,8 +22,6 @@ class EvaluationController;
 #include <configuration/EvaluationConfiguration.hpp>
 
 //## controller headers
-#include <controller/universe/evolution/population/Population.hpp>
-
 //## model headers
 #include <model/universe/evolution/EvolutionModel.hpp>
 

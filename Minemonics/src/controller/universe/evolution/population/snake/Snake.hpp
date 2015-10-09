@@ -5,15 +5,10 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class Limb;
-class Joint;
-
 //# system headers
 #include <vector>
 
 //## controller headers
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-
 //## model headers
 #include <btBulletDynamicsCommon.h>
 
@@ -22,6 +17,8 @@ class Joint;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
 //## view headers
 //## utils headers

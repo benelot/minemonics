@@ -24,6 +24,8 @@
 #include <controller/universe/evolution/population/snake/Snake.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
@@ -41,7 +43,7 @@ Population::Population(PopulationModel* const populationModel) :
 
 Population::~Population() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
-		cit != mCreatures.end();cit++) {
+		cit != mCreatures.end(); cit++) {
 		delete (*cit);
 	}
 	mCreatures.clear();
@@ -146,8 +148,7 @@ void Population::resyncWithModel() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 		cit != mCreatures.end();) {
 		if ((*cit)->isCulled()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Creature culled.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature culled.";
 			Creature* creature = *cit;
 			delete creature;
 			cit = mCreatures.erase(cit);
@@ -161,7 +162,7 @@ void Population::resyncWithModel() {
 		cit != mPopulationModel->getCreatureModels().end(); cit++) {
 		if ((*cit)->isNew()) {
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Creature added.";
+			<< "Creature added.";
 			Creature* creature = new Creature(*cit);
 			mCreatures.push_back(creature);
 			(*cit)->setNew(false);
@@ -194,4 +195,28 @@ void Population::calm() {
 		cit != mCreatures.end(); cit++) {
 		(*cit)->calm();
 	}
+}
+
+bool Population::isOutOfSync() const {
+	return mPopulationModel->isOutOfSync();
+}
+
+void Population::setOutOfSync(const bool outOfSync) {
+	mPopulationModel->setOutOfSync(outOfSync);
+}
+
+void Population::setSerializationPath(std::string path) {
+	mPopulationModel->setSerializationPath(path);
+}
+
+const std::string Population::getSerializationPath() const {
+	return mPopulationModel->getSerializationPath();
+}
+
+const int Population::getCurrentGeneration() const {
+	return mPopulationModel->getCurrentGeneration();
+}
+
+const std::string Population::getGenerationSerializationPath() {
+	return mPopulationModel->getGenerationSerializationPath();
 }

@@ -4,6 +4,7 @@
 //# corresponding headers
 //# forward declarations
 class Universe;
+class Evaluation;
 
 //# system headers
 #include <vector>
@@ -16,8 +17,6 @@ class Universe;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <controller/Evaluation.hpp>
-
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>

@@ -8,6 +8,11 @@
 class SimulationManager;
 class MixedGenome;
 class Creature;
+class CreatureModel;
+class Limb;
+class Joint;
+class Component;
+class PhenomeModel;
 
 //# system headers
 #include <vector>
@@ -24,17 +29,11 @@ class Creature;
 //## configuration headers
 //## controller headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief
@@ -151,25 +150,17 @@ public:
 	 * Is the phenotype in the world?
 	 * @return
 	 */
-	bool isInWorld() const {
-		return mPhenotypeModel->isInWorld();
-	}
+	bool isInWorld() const;
 
 	/**
 	 * Set whether the phenotype is in the world or not.
 	 * @param inWorld Whether the phenotype is in the world or not.
 	 */
-	void setInWorld(bool inWorld) {
-		mPhenotypeModel->setInWorld(inWorld);
-	}
+	void setInWorld(bool inWorld);
 
-	bool isDeveloped() const {
-		return mPhenotypeModel->isDeveloped();
-	}
+	bool isDeveloped() const;
 
-	void setDeveloped(bool developed) {
-		mPhenotypeModel->setDeveloped(developed);
-	}
+	void setDeveloped(bool developed);
 
 	std::vector<Joint*>& getJoints() {
 		return mJoints;

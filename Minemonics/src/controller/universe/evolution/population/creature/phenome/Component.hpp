@@ -39,9 +39,7 @@ public:
 	 */
 	virtual Component* clone() = 0;
 
-	const ComponentModel::ComponentType getComponentType() {
-		return mComponentModel->getComponentType();
-	}
+	const ComponentModel::ComponentType getComponentType();
 
 private:
 

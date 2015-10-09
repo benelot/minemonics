@@ -9,6 +9,8 @@ class btTransform;
 class Creature;
 class JointGraphics;
 class Limb;
+class Motor;
+class JointModel;
 
 //# system headers
 #include <string>
@@ -27,12 +29,9 @@ class Limb;
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //## view headers
-#include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
@@ -149,21 +148,17 @@ public:
 
 	// Accessor methods
 
-	/**
-	 * Get the motors of this joint.
-	 * @return The motors of this joint.
-	 */
-	const std::vector<Motor*>& getMotors() const {
-		return mJointModel->getJointPhysics()->getMotors();
-	}
-
 	JointGraphics* const getJointGraphics() const {
 		return mJointGraphics;
 	}
 
-	JointPhysics* const getJointPhysics() const {
-		return mJointModel->getJointPhysics();
-	}
+	JointPhysics* const getJointPhysics() const;
+
+	/**
+	 * Get the motors of this joint.
+	 * @return The motors of this joint.
+	 */
+	const std::vector<Motor*>& getMotors() const;
 
 	JointModel* getJointModel() {
 		return mJointModel;
@@ -186,7 +181,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("Joint"));
+				boost::log::attributes::constant<std::string>("Joint"));
 		}
 	} _initializer;
 	/**

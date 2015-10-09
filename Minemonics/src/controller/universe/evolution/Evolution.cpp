@@ -17,6 +17,7 @@
 #include <controller/Evaluation.hpp>
 #include <controller/EvaluationController.hpp>
 #include <controller/universe/Planet.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers

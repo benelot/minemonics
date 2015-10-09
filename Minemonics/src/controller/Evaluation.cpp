@@ -15,6 +15,8 @@
 #include <controller/StateHandler.hpp>
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/environments/Environment.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
@@ -120,6 +122,7 @@ void Evaluation::teardown() {
 				(*cit)->save(generationSerializationPath);
 			}
 		}
+
 		process();
 	} else {
 		// remove competing populations from the world

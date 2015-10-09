@@ -4,6 +4,8 @@
 //# corresponding header
 //# forward declarations
 class MovablePanel;
+class Planet;
+class Evaluation;
 namespace CEGUI {
 class OgreRenderer;
 } /* namespace CEGUI */
@@ -23,8 +25,6 @@ class OgreRenderer;
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/Planet.hpp>
-#include <controller/Evaluation.hpp>
 #include <controller/viewcontroller/camera/CameraHandler.hpp>
 
 //## model headers

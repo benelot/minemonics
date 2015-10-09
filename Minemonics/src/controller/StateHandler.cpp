@@ -11,6 +11,8 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/Planet.hpp>
+
 //## model headers
 //## view headers
 //## utils headers

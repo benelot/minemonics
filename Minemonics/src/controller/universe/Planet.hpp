@@ -5,6 +5,8 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
+class PlanetModel;
+
 //# system headers
 #include <string>
 
@@ -22,9 +24,7 @@
 #include <controller/universe/environments/Environment.hpp>
 
 //## model headers
-#include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
@@ -38,6 +38,7 @@
  */
 class Planet {
 public:
+	Planet();
 	Planet(const PhysicsController::PhysicsModelType physicsModelType,
 		const Environment::EnvironmentType type, const int evaluationTime,
 		Ogre::Light* light = NULL);
@@ -81,6 +82,10 @@ public:
 		mPlanetModel->save();
 	}
 
+	void load(){
+		mPlanetModel->load();
+	}
+
 	// Accessor methods
 	/**
 	 * Get the environment of the planet.
@@ -110,24 +115,15 @@ public:
 		return mPlanetModel;
 	}
 
-	PhysicsController::PhysicsModelType getPhysicsModelType() {
-		return mEnvironment->getEnvironmentModel()->getPhysicsController()->getPhysicsModelType();
-	}
+	PhysicsController::PhysicsModelType getPhysicsModelType();
 
 	int getTotalCreatureQty();
 
-	void addEpoch(Epoch* epoch) {
-		mPlanetModel->addEpoch(epoch);
-	}
+	void addEpoch(Epoch* epoch) ;
 
-	void setSerializationPath(std::string serializationPath){
-		mPlanetModel->setSerializationPath(serializationPath);
-	}
+	void setSerializationPath(std::string serializationPath);
 
-	std::string getSerializationPath()
-	{
-		return mPlanetModel->getSerializationPath();
-	}
+	std::string getSerializationPath();
 
 private:
 	/**

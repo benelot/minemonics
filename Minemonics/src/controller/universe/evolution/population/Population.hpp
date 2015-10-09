@@ -4,6 +4,8 @@
 //# corresponding headers
 //# forward declarations
 class Planet;
+class Creature;
+class PopulationModel;
 
 //# system headers
 #include <vector>
@@ -19,8 +21,7 @@ class Planet;
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
+
 
 //## model headers
 //## view headers
@@ -131,29 +132,17 @@ public:
 		return mPopulationModel;
 	}
 
-	bool isOutOfSync() const {
-		return mPopulationModel->isOutOfSync();
-	}
+	bool isOutOfSync() const;
 
-	void setOutOfSync(const bool outOfSync) {
-		mPopulationModel->setOutOfSync(outOfSync);
-	}
+	void setOutOfSync(const bool outOfSync);
 
-	void setSerializationPath(std::string path){
-		mPopulationModel->setSerializationPath(path);
-	}
+	void setSerializationPath(std::string path);
 
-	const std::string getSerializationPath() const {
-		return mPopulationModel->getSerializationPath();
-	}
+	const std::string getSerializationPath() const;
 
-	const int getCurrentGeneration() const {
-		return mPopulationModel->getCurrentGeneration();
-	}
+	const int getCurrentGeneration() const;
 
-	const std::string getGenerationSerializationPath(){
-		return mPopulationModel->getGenerationSerializationPath();
-	}
+	const std::string getGenerationSerializationPath();
 
 private:
 

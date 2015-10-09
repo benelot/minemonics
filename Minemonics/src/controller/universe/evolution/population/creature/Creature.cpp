@@ -13,9 +13,9 @@
 //## configuration headers
 //## controller headers
 #include <controller/universe/evolution/population/Population.hpp>
-#include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
@@ -116,16 +116,61 @@ void Creature::calm() {
 }
 
 void Creature::save(std::string folderPath) {
-				std::string creatureFilePath;
-				creatureFilePath.append(folderPath);
-				creatureFilePath.append("/Creature-");
+	std::string creatureFilePath;
+	creatureFilePath.append(folderPath);
+	creatureFilePath.append("/Creature-");
 
-				creatureFilePath.append(boost::lexical_cast<std::string>(getCreatureModel()->getFitnessScore()));
-				creatureFilePath.append("-");
-				creatureFilePath.append(SimulationManager::getSingleton()->getTimeStamp());
-				creatureFilePath.append(".cr");
+	creatureFilePath.append(
+		boost::lexical_cast<std::string>(
+			getCreatureModel()->getFitnessScore()));
+	creatureFilePath.append("-");
+	creatureFilePath.append(SimulationManager::getSingleton()->getTimeStamp());
+	creatureFilePath.append(".cr");
 
-				SaveController < CreatureModel > creatureSaver;
-				creatureSaver.save(*(getCreatureModel()),
-					creatureFilePath.c_str());
+	SaveController<CreatureModel> creatureSaver;
+	creatureSaver.save(*(getCreatureModel()), creatureFilePath.c_str());
+}
+
+void Creature::setPosition(const Ogre::Vector3 position) {
+	mCreatureModel->setPosition(position);
+}
+
+PlanetModel* Creature::getPlanet() {
+	return mCreatureModel->getPopulationModel()->getPlanetModel();
+}
+
+void Creature::setPlanet(PlanetModel* planetModel) {
+	mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
+}
+
+bool Creature::isDeveloped() {
+	return mCreatureModel->isDeveloped();
+}
+
+void Creature::setDeveloped(bool developed) {
+	mCreatureModel->setDeveloped(developed);
+}
+
+void Creature::setCulled(bool culled) {
+	mCreatureModel->setCulled(culled);
+}
+
+bool Creature::isCulled() const {
+	return mCreatureModel->isCulled();
+}
+
+PhysicsController::PhysicsModelType Creature::getPhysicsModelType() {
+	return mCreatureModel->getPhysicsModelType();
+}
+
+void Creature::addJury(Jury* jury) {
+	mCreatureModel->addJury(jury);
+}
+
+void Creature::clearJuries() {
+	mCreatureModel->clearJuries();
+}
+
+void Creature::hasInterpenetrations() {
+	mCreatureModel->hasInterpenetrations();
 }

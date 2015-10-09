@@ -5,6 +5,10 @@
 //# forward declarations
 class SimulationManager;
 class Population;
+class PlanetModel;
+class PopulationModel;
+class CreatureModel;
+class Jury;
 
 //# system headers
 //## controller headers
@@ -17,11 +21,11 @@ class Population;
 #include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/PopulationModel.hpp>
-#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The creature controller synchronizes the model with the view.
@@ -83,55 +87,35 @@ public:
 	void save(std::string folderPath);
 
 	// Facade accessor methods
-	void setPosition(const Ogre::Vector3 position) {
-		mCreatureModel->setPosition(position);
-	}
-
-	PlanetModel* getPlanet() {
-		return mCreatureModel->getPopulationModel()->getPlanetModel();
-	}
-
-	void setPlanet(PlanetModel* planetModel) {
-		mCreatureModel->getPopulationModel()->setPlanetModel(planetModel);
-	}
-
-	bool isDeveloped() {
-		return mCreatureModel->isDeveloped();
-	}
-
-	void setDeveloped(bool developed) {
-		mCreatureModel->setDeveloped(developed);
-	}
-
 	CreatureModel* getCreatureModel() {
 		return mCreatureModel;
 	}
 
-	void setCulled(bool culled) {
-		mCreatureModel->setCulled(culled);
-	}
-
-	bool isCulled() const {
-		return mCreatureModel->isCulled();
-	}
-
-	PhysicsController::PhysicsModelType getPhysicsModelType() {
-		return mCreatureModel->getPhysicsModelType();
-	}
-
-	void addJury(Jury* jury) {
-		mCreatureModel->addJury(jury);
-	}
-
-	void clearJuries() {
-		mCreatureModel->clearJuries();
-	}
-
 	void processJuries();
 
-	void hasInterpenetrations() {
-		mCreatureModel->hasInterpenetrations();
-	}
+	void setPosition(const Ogre::Vector3 position);
+
+	PlanetModel* getPlanet();
+
+	void setPlanet(PlanetModel* planetModel);
+
+	bool isDeveloped();
+
+	void setDeveloped(bool developed);
+
+	void setCulled(bool culled);
+
+	bool isCulled() const;
+
+	PhysicsController::PhysicsModelType getPhysicsModelType() ;
+
+	void addJury(Jury* jury);
+
+	void clearJuries();
+
+
+
+	void hasInterpenetrations();
 
 protected:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
@@ -143,7 +127,7 @@ protected:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("Creature"));
+				boost::log::attributes::constant<std::string>("Creature"));
 		}
 	} _initializer;
 

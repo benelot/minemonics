@@ -2,6 +2,8 @@
 
 //# corresponding header
 //# forward declarations
+class Planet;
+
 //# system headers
 //## controller headers
 //## model headers
@@ -13,8 +15,6 @@
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/Planet.hpp>
-
 //## model headers
 //## view headers
 //## utils headers

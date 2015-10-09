@@ -21,8 +21,13 @@
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
 
 //##view headers
+#include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## utils headers
@@ -182,4 +187,16 @@ void Joint::reposition(const Ogre::Vector3 position) {
 
 Joint* Joint::clone() {
 	return new Joint(*this);
+}
+
+JointPhysics* const Joint::getJointPhysics() const {
+	return mJointModel->getJointPhysics();
+}
+
+/**
+ * Get the motors of this joint.
+ * @return The motors of this joint.
+ */
+const std::vector<Motor*>& Joint::getMotors() const {
+	return mJointModel->getJointPhysics()->getMotors();
 }

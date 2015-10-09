@@ -27,12 +27,14 @@
 //## model headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 
 //## view headers
+#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
@@ -42,7 +44,7 @@ BoostLogger Limb::mBoostLogger; /*<! initialize the boost logger*/
 Limb::_Init Limb::_initializer;
 Limb::Limb() :
 	mLimbGraphics(NULL), mCreature(NULL), mLimbModel(NULL) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug) << "Limb created.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< "Limb created.";
 }
 
 Limb::Limb(const Limb& limb) :
@@ -105,7 +107,7 @@ void Limb::initialize(Creature* const creature,
 	mCreature = creature;
 
 	// Define the new component as a limb
-	Component::initialize (mLimbModel);
+	Component::initialize(mLimbModel);
 
 	// initialize the graphics part of the limb
 	mLimbGraphics = new LimbO3D(mLimbModel);
@@ -169,4 +171,26 @@ void Limb::removeFromWorld() {
 	if (getLimbPhysics()->isInWorld()) {
 		getLimbPhysics()->removeFromWorld();
 	}
+}
+
+const Ogre::Vector3 Limb::getPosition() const {
+	return mLimbModel->getPosition();
+}
+
+const Ogre::Quaternion Limb::getOrientation() const {
+	return mLimbModel->getOrientation();
+}
+
+/**
+ * Get the Graphics part of the limb.
+ */
+LimbGraphics* const Limb::getLimbGraphics() const {
+	return mLimbGraphics;
+}
+
+/**
+ * Get the Physics part of the limb.
+ */
+LimbPhysics* const Limb::getLimbPhysics() const {
+	return mLimbModel->getLimbPhysics();
 }
