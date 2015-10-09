@@ -25,6 +25,7 @@ class EvolutionModel;
 //## model headers
 #include <model/universe/Epoch.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/environments/PlaneModel.hpp>
 
 //## view headers
 //## utils headers
@@ -136,8 +137,10 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar.register_type(static_cast<PlaneModel*>(NULL));
+
 		ar
-		/**!< The name of the creature */
+		/**!< The name of the planet */
 		& BOOST_SERIALIZATION_NVP(mName)
 
 		/**The evolutionmodel of the planet*/

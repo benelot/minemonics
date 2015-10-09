@@ -10,6 +10,8 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/SaveController.hpp>
+
 //## model headers
 #include <model/universe/Epoch.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>

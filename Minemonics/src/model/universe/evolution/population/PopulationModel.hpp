@@ -119,12 +119,11 @@ public:
 		mOutOfSync = outOfSync;
 	}
 
-	const std::string getGenerationSerializationPath(){
+	const std::string getGenerationSerializationPath() {
 		//create folder for the generation
-			std::string generationName = std::string("Generation-")
-					+ boost::lexical_cast<std::string>(
-						getCurrentGeneration());
-			return getSerializationPath() + "/" + generationName;
+		std::string generationName = std::string("Generation-")
+			+ boost::lexical_cast<std::string>(getCurrentGeneration());
+		return getSerializationPath() + "/" + generationName;
 	}
 
 	// Serialization
@@ -151,19 +150,17 @@ public:
 	}
 
 	/**
-	 * Serializes the creature to an xml file.
+	 * Serializes the population to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		if (SerializationConfiguration::POPULATION_EXPANDED) {
-			ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
-			& BOOST_SERIALIZATION_NVP(mCurrentGeneration);
-		} else {
-			ar & BOOST_SERIALIZATION_NVP(mCreatureQty)
-				& BOOST_SERIALIZATION_NVP(mCurrentGeneration)
-				& BOOST_SERIALIZATION_NVP(mCreatureModels);
+		ar
+			& BOOST_SERIALIZATION_NVP(
+				mCreatureQty) & BOOST_SERIALIZATION_NVP(mCurrentGeneration);
+		if (!SerializationConfiguration::POPULATION_EXPANDED) {
+			ar & BOOST_SERIALIZATION_NVP(mCreatureModels);
 		}
 	}
 
@@ -207,7 +204,7 @@ private:
 		std::string dirname =
 			boost::filesystem::path(mSerializationPath).parent_path().string();
 
-		std::vector < std::string > files =
+		std::vector<std::string> files =
 			FilesystemManipulator::getFileNamesByExtension(dirname,
 				".creature");
 		for (int i = 0; i < files.size(); i++) {

@@ -14,9 +14,13 @@
 //## view headers
 //## utils headers
 
+GroundController::GroundController(){
+
+}
+
 GroundController::GroundController(
-	PhysicsController::PhysicsModelType solverType) :
-	PhysicsController(solverType, PhysicsController::GroundController) {
+	PhysicsController::PhysicsModelType physicsModelType) :
+	PhysicsController(physicsModelType, PhysicsController::GroundController) {
 }
 
 GroundController::~GroundController() {

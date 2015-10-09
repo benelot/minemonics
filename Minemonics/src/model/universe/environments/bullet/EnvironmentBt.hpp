@@ -17,6 +17,10 @@ class Vector3;
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 
@@ -65,6 +69,51 @@ public:
 	 */
 	virtual btRigidBody*& getBody() = 0;
 
+	//Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the planet model to a string.
+	 * @param os The ostream.
+	 * @param planet The planet we want to serialize.
+	 * @return A string containing all information about the planet.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const EnvironmentBt &environmentBt) {
+//		os
+//
+//		<< "/PlanetModel: Name=" << planet.mName /**!< The name of the creature */
+//
+//		/**The evolutionmodel of the planet*/
+//		<< "\n/EvolutionModel=" << planet.mEvolutionModel
+//
+//		/**!< The environment of the planet */
+//		<< "\n/EnvironmentModel=" << planet.mEnvironmentModel;
+//
+//		/**The epochs of the planet*/
+//		for (std::vector<Epoch*>::const_iterator eit = planet.mEpochs.begin();
+//			eit != planet.mEpochs.end(); eit++) {
+//			os << (**eit) << "||";
+//		}
+//
+//		/** The current epoch of the planet*/
+//		os << "\n/Current Epoch=" << planet.mCurrentEpoch;
+		return os;
+	}
+
+	/**
+	 * Serializes the environment to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(EnvironmentPhysics); /**!< Serialize the base object */
+	}
+
 protected:
 	/**
 	 * The boost logger.
@@ -93,5 +142,6 @@ protected:
 	 */
 	btRigidBody* mGroundBody;
 };
-
+BOOST_CLASS_VERSION(EnvironmentBt, 1)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(EnvironmentBt)
 #endif /* MODEL_BULLET_ENVIRONMENTS_ENVIRONMENTBT_H_ */

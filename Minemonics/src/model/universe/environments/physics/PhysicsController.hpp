@@ -7,9 +7,13 @@
 //# forward declarations
 class btDefaultCollisionConfiguration;
 class btMultiBodyConstraintSolver;
+
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
@@ -45,9 +49,10 @@ public:
 		GroundController, DeepSeaController
 	};
 
+	PhysicsController();
 	PhysicsController(PhysicsModelType solverType,
 		EnvironmentType environmentType);
-	~PhysicsController();
+	virtual ~PhysicsController();
 
 	/**
 	 * Initialize bullet physics.
@@ -135,35 +140,73 @@ public:
 		return mPhysicsModelType;
 	}
 
+	//Serialization
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
+
+	/**
+	 * Serializes the planet model to a string.
+	 * @param os The ostream.
+	 * @param planet The planet we want to serialize.
+	 * @return A string containing all information about the planet.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const PhysicsController &physicsController) {
+//		os
+//
+//		<< "/PlanetModel: Name=" << planet.mName /**!< The name of the creature */
+//
+//		/**The evolutionmodel of the planet*/
+//		<< "\n/EvolutionModel=" << planet.mEvolutionModel
+//
+//		/**!< The environment of the planet */
+//		<< "\n/EnvironmentModel=" << planet.mEnvironmentModel;
+//
+//		/**The epochs of the planet*/
+//		for (std::vector<Epoch*>::const_iterator eit = planet.mEpochs.begin();
+//			eit != planet.mEpochs.end(); eit++) {
+//			os << (**eit) << "||";
+//		}
+//
+//		/** The current epoch of the planet*/
+//		os << "\n/Current Epoch=" << planet.mCurrentEpoch;
+		return os;
+	}
+
+	/**
+	 * Serializes the environment to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar
+			& BOOST_SERIALIZATION_NVP(
+				mPhysicsPaused) & BOOST_SERIALIZATION_NVP(mPhysicsStepped)
+				& BOOST_SERIALIZATION_NVP(mSimulationSpeed)
+				& BOOST_SERIALIZATION_NVP(mPhysicsPaused)
+				& BOOST_SERIALIZATION_NVP(mPhysicsModelType)
+				& BOOST_SERIALIZATION_NVP(mEnvironmentType);
+	}
+
 protected:
 	//variables for to bullet physics API
-	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; //keep the collision shapes, for deletion/cleanup
-	btBroadphaseInterface* mBroadphase;
-	btCollisionDispatcher* mDispatcher;
+	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; /**!< keep the collision shapes, for deletion/cleanup */
+	btBroadphaseInterface* mBroadphase; /**!< The broadphase interface */
+	btCollisionDispatcher* mDispatcher; /**!< The Collision dispatcher */
 	btDefaultCollisionConfiguration* mCollisionConfiguration;
 
-	//rigidbody
-	btDynamicsWorld* mDynamicsWorld;  //this is the most important class
-	btConstraintSolver* mSolver;
+	btDynamicsWorld* mDynamicsWorld; /**!< The dynamics world defining the physics model of the simulation */
+	btConstraintSolver* mSolver; /**!< The constraint solver */
 
-	/**
-	 * Is the physics simulation paused or not?
-	 */
-	bool mPhysicsPaused;
+	bool mPhysicsPaused; /**!< Is the physics simulation paused or not?*/
 
-	/**
-	 * Is the physics simulation triggered stepwise?
-	 */
-	bool mPhysicsStepped;
+	bool mPhysicsStepped; /**!< Is the physics simulation triggered stepwise? */
 
-	/**
-	 * The simulation speed
-	 */
-	int mSimulationSpeed;
+	int mSimulationSpeed; /**!< The simulation speed */
 
-	PhysicsModelType mPhysicsModelType;
+	PhysicsModelType mPhysicsModelType; /**!< The physics model type of the controller */
 
-	EnvironmentType mEnvironmentType;
+	EnvironmentType mEnvironmentType; /**!< The environment type the physics controller simulates */
 };
-
+BOOST_CLASS_VERSION(PhysicsController, 1)
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_PHYSICSCONTROLLER_H_ */

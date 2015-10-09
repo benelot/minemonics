@@ -454,13 +454,18 @@ void NewPlanetPanel::onConfirmClicked() {
 	}
 
 	//create folder for the planet
-	std::string planetName = std::string("Planet-")
+	std::string planetFolderName = std::string("Planet-")
 		+ boost::lexical_cast<std::string>(
 			SimulationManager::getSingleton()->getTimeStamp());
-	std::string path = FilesystemManipulator::createFolder(
-		SimulationManager::getSingleton()->getSerializationPath(), planetName);
+	std::string folderPath = FilesystemManipulator::createFolder(
+		SimulationManager::getSingleton()->getSerializationPath(), planetFolderName);
 
-	planet->setSerializationPath(path);
+	std::string planetFilePath = folderPath + std::string("/planet.pl");
+
+
+	planet->setSerializationPath(planetFilePath);
+	planet->save();
+
 	SimulationManager::getSingleton()->getUniverse().addPlanet(planet);
 
 	//set planet selected because it was the last one added

@@ -30,6 +30,7 @@
 
 //## controller headers
 #include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/Planet.hpp>
 
 //## model headers
 //## view headers

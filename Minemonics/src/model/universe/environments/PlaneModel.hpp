@@ -42,14 +42,54 @@ public:
 	virtual void update(double timeSinceLastTick);
 
 	//Accessor methods
-
-	PlaneBt* const getPlaneBt() const
-	{
+	PlaneBt* const getPlaneBt() const {
 		return (PlaneBt*) mEnvironmentPhysics;
 	}
 
 	//Serialization
-	//TODO: Add serialization to plane model
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the plane model to a string.
+	 * @param os The ostream.
+	 * @param planet The planet we want to serialize.
+	 * @return A string containing all information about the plane.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const PlaneModel &planeModel) {
+		//		os
+		//
+		//		<< "/PlanetModel: Name=" << planet.mName /**!< The name of the creature */
+		//
+		//		/**The evolutionmodel of the planet*/
+		//		<< "\n/EvolutionModel=" << planet.mEvolutionModel
+		//
+		//		/**!< The environment of the planet */
+		//		<< "\n/EnvironmentModel=" << planet.mEnvironmentModel;
+		//
+		//		/**The epochs of the planet*/
+		//		for (std::vector<Epoch*>::const_iterator eit = planet.mEpochs.begin();
+		//			eit != planet.mEpochs.end(); eit++) {
+		//			os << (**eit) << "||";
+		//		}
+		//
+		//		/** The current epoch of the planet*/
+		//		os << "\n/Current Epoch=" << planet.mCurrentEpoch;
+		return os;
+	}
+
+	/**
+	 * Serializes the plane to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(EnvironmentModel); /**!< Serialize the base object */
+	}
 };
 
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_PLANEMODEL_HPP_ */

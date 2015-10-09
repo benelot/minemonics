@@ -9,6 +9,9 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 #include <btBulletDynamicsCommon.h>
@@ -48,6 +51,51 @@ public:
 	btRigidBody*& getBody() {
 		return mGroundBody;
 	}
+
+	//Serialization
+	/**
+	 * Give access to boost serialization
+	 */
+	friend class boost::serialization::access;
+
+	/**
+	 * Serializes the planet model to a string.
+	 * @param os The ostream.
+	 * @param planet The planet we want to serialize.
+	 * @return A string containing all information about the planet.
+	 */
+	friend std::ostream & operator<<(std::ostream &os,
+		const PlaneBt &planetBt) {
+//		os
+//
+//		<< "/PlanetModel: Name=" << planet.mName /**!< The name of the creature */
+//
+//		/**The evolutionmodel of the planet*/
+//		<< "\n/EvolutionModel=" << planet.mEvolutionModel
+//
+//		/**!< The environment of the planet */
+//		<< "\n/EnvironmentModel=" << planet.mEnvironmentModel;
+//
+//		/**The epochs of the planet*/
+//		for (std::vector<Epoch*>::const_iterator eit = planet.mEpochs.begin();
+//			eit != planet.mEpochs.end(); eit++) {
+//			os << (**eit) << "||";
+//		}
+//
+//		/** The current epoch of the planet*/
+//		os << "\n/Current Epoch=" << planet.mCurrentEpoch;
+		return os;
+	}
+
+	/**
+	 * Serializes the environment to an xml file.
+	 * @param ar The archive.
+	 * @param The file version.
+	 */
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int /* file_version */) {
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(EnvironmentBt); /**!< Serialize the base object */
+	}
 private:
 	/**
 	 * The boost logger.
@@ -65,5 +113,5 @@ private:
 		}
 	} _initializer;
 };
-
+BOOST_CLASS_VERSION(PlaneBt, 1)
 #endif /* MODEL_ENVIRONMENT_PLANEBT_H_ */

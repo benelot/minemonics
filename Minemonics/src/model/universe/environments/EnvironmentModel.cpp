@@ -12,6 +12,8 @@
 #include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
+#include <controller/SaveController.hpp>
+
 //## model headers
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
 
@@ -47,4 +49,14 @@ void EnvironmentModel::removeFromWorld() {
 	mPhysicsController->removeBody(
 		((EnvironmentBt*) mEnvironmentPhysics)->getBody());
 	mInWorld = false;
+}
+
+void EnvironmentModel::save() {
+	SaveController < EnvironmentModel > environmentModelSaver;
+	environmentModelSaver.save(*this, mSerializationPath.c_str());
+}
+
+void EnvironmentModel::load() {
+	SaveController < EnvironmentModel > environmentModelSaver;
+	environmentModelSaver.restore(*this, mSerializationPath.c_str());
 }

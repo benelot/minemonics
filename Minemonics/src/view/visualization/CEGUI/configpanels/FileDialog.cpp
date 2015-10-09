@@ -692,7 +692,7 @@ void FileDialog::fillListbox(void) {
 
 	for (std::vector<std::string>::iterator pos = mNames.begin();
 		pos != mNames.end(); pos++) {
-		std::cout << *pos << std::endl;
+//		std::cout << *pos << std::endl;
 		mFilesLb->addItem(new CEGUI::ListboxTextItem(*pos));
 	}
 }

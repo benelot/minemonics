@@ -27,6 +27,12 @@
 //## model headers
 //## view headers
 //## utils headers
+PhysicsController::PhysicsController():mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
+	NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
+	pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)), mPhysicsModelType(
+	FeatherstoneModel), mEnvironmentType(GroundController) {
+
+}
 
 PhysicsController::PhysicsController(PhysicsModelType physicsModelType,
 	EnvironmentType environmentType) :

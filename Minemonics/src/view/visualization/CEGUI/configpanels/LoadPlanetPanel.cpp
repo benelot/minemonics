@@ -12,6 +12,8 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/Planet.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -27,4 +29,7 @@ LoadPlanetPanel::~LoadPlanetPanel(void) {
 }
 
 void LoadPlanetPanel::openFile(std::string filePath) {
+	Planet* planet = new Planet();
+	planet->setSerializationPath(filePath);
+	planet->load();
 }
