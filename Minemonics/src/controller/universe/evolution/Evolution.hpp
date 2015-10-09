@@ -52,12 +52,8 @@ public:
 	/**
 	 * Initialize the evolution.
 	 */
-	void initialize(EvaluationController* const evaluationController, Planet* const planet,
-			const double evaluationTime =
-					EvaluationConfiguration::DEFAULT_EVALUATION_TIME,
-			const EvolutionModel::EvaluationType type =
-					EvolutionModel::INDIVIDUAL_EVALUATION, const int tournamentSize =
-					1);
+	void initialize(EvaluationController* const evaluationController,
+		Planet* const planet, EvolutionModel* const evolutionModel);
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -104,8 +100,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Evolution"));
+				boost::log::attributes::constant<std::string>("Evolution"));
 		}
 	} _initializer;
 

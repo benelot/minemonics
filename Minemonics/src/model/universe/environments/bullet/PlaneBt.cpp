@@ -17,13 +17,6 @@
 BoostLogger PlaneBt::mBoostLogger; /*<! initialize the boost logger*/
 PlaneBt::_Init PlaneBt::_initializer;
 PlaneBt::PlaneBt() {
-
-}
-
-PlaneBt::~PlaneBt() {
-}
-
-void PlaneBt::initialize() {
 	/* Another primitive collision shape, an infinite plane.
 	 To create a plane you have to pass both the plane's
 	 normal vector (Vec3(nx, ny, nz)) and the plane constant
@@ -55,6 +48,13 @@ void PlaneBt::initialize() {
 	//TODO: maybe make is customizable from outside
 	// http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?t=6783
 	mGroundBody->setFriction(btScalar(10.0f));
+}
+
+PlaneBt::~PlaneBt() {
+}
+
+void PlaneBt::initialize() {
+
 }
 
 void PlaneBt::update(double timeSinceLastTick) {

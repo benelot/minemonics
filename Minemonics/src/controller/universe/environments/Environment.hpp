@@ -6,7 +6,6 @@
 class SimulationManager;
 class EnvironmentGraphics;
 class EnvironmentPhysics;
-class EnvironmentModel;
 class PhysicsController;
 class EnvironmentO3D;
 
@@ -19,6 +18,8 @@ class EnvironmentO3D;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+
 //## view headers
 //## utils headers
 
@@ -30,20 +31,13 @@ class EnvironmentO3D;
  */
 class Environment {
 public:
-	enum EnvironmentType {
-		UNKNOWN_ENVIRONMENT_TYPE = 0, HILLS = 1, PLANE = 2, OPENSEA = 3
-	};
-
-	EnvironmentType mEnvironmentType;
-
 	Environment();
 	virtual ~Environment();
 
 	/**
 	 * Initialize the environment.
-	 * @param environmentType The type of environment.
 	 */
-	void initialize(const EnvironmentType environmentType);
+	void initialize();
 
 	/**
 	 * Update the environment.

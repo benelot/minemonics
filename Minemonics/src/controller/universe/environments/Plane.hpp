@@ -46,7 +46,7 @@ public:
 	 * Initialize the plane environment.
 	 * @param l The general light source.
 	 */
-	void initialize(const PhysicsController::PhysicsModelType physicsModelType,
+	void initialize(EnvironmentModel* const environmentModel,
 		const Ogre::Light* const l);
 
 	/**

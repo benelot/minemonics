@@ -30,38 +30,45 @@ BoostLogger Planet::mBoostLogger; /*<! initialize the boost logger*/
 Planet::_Init Planet::_initializer;
 Planet::Planet() :
 	mEnvironment(NULL), mPlanetModel(NULL) {
+	mPlanetModel = new PlanetModel();
 }
 Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
-	const Environment::EnvironmentType type, const int evaluationTime,
-	Ogre::Light* light) :
+	const EnvironmentModel::EnvironmentType environmentType,
+	const int evaluationTime, EvolutionModel::EvaluationType evaluationType,
+	int tournamentSize) :
 	mEnvironment(NULL) {
-	mPlanetModel = new PlanetModel();
+	mPlanetModel = new PlanetModel(evaluationType, evaluationTime,
+		tournamentSize,physicsModelType, environmentType);
 
-	//create earth evolution
-	mEvolution.initialize(
-		&SimulationManager::getSingleton()->getUniverse().getEvaluationController(),
-		this, evaluationTime);
-
-	// set up environment
-	switch (type) {
-	case Environment::HILLS: {
-		//		mEnvironment = new Hills();
-		//		((Hills*) mEnvironment)->initialize(physicsModelType, light);
-		break;
-	}
-	case Environment::PLANE: {
-		//create the terrain
-		mEnvironment = new Plane();
-		((Plane*) mEnvironment)->initialize(physicsModelType, light);
-		break;
-	}
-	}
-	mPlanetModel->initialize(mEvolution.getEvolutionModel(),
-		mEnvironment->getEnvironmentModel());
+	//the planet specification is complete, we can initialize it
+	initialize();
 }
 
 Planet::Planet(PlanetModel* const planetModel) :
 	mEnvironment(NULL), mPlanetModel(planetModel) {
+}
+
+void Planet::initialize() {
+	//create earth evolution
+	mEvolution.initialize(
+		&SimulationManager::getSingleton()->getUniverse().getEvaluationController(),
+		this, &mPlanetModel->getEvolutionModel());
+
+	// set up environment
+	switch (mPlanetModel->getEnvironmentModel()->getType()) {
+	case EnvironmentModel::HILLS: {
+		//		mEnvironment = new Hills();
+		//		((Hills*) mEnvironment)->initialize(physicsModelType, light);
+		break;
+	}
+	case EnvironmentModel::PLANE: {
+		//create the terrain
+		mEnvironment = new Plane();
+		((Plane*) mEnvironment)->initialize(mPlanetModel->getEnvironmentModel(),
+			SimulationManager::getSingleton()->getSun());
+		break;
+	}
+	}
 }
 
 Planet::~Planet() {
@@ -128,4 +135,12 @@ void Planet::setSerializationPath(std::string serializationPath) {
 
 std::string Planet::getSerializationPath() {
 	return mPlanetModel->getSerializationPath();
+}
+
+void Planet::save() {
+	mPlanetModel->save();
+}
+
+void Planet::load() {
+	mPlanetModel->load();
 }

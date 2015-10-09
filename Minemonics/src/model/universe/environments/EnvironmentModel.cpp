@@ -21,7 +21,8 @@
 //## utils headers
 
 EnvironmentModel::EnvironmentModel() :
-	mEnvironmentPhysics(NULL), mPhysicsController(NULL), mInWorld(false) {
+	mEnvironmentPhysics(NULL), mPhysicsController(NULL), mInWorld(false), mType(
+		PLANE) {
 
 }
 
@@ -52,11 +53,11 @@ void EnvironmentModel::removeFromWorld() {
 }
 
 void EnvironmentModel::save() {
-	SaveController < EnvironmentModel > environmentModelSaver;
+	SaveController<EnvironmentModel> environmentModelSaver;
 	environmentModelSaver.save(*this, mSerializationPath.c_str());
 }
 
 void EnvironmentModel::load() {
-	SaveController < EnvironmentModel > environmentModelSaver;
+	SaveController<EnvironmentModel> environmentModelSaver;
 	environmentModelSaver.restore(*this, mSerializationPath.c_str());
 }

@@ -13,7 +13,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
 
 //## view headers
@@ -21,8 +20,7 @@
 
 //## utils headers
 
-Environment::Environment() :
-	mEnvironmentType(UNKNOWN_ENVIRONMENT_TYPE), mEnvironmentGraphics(NULL), mEnvironmentModel(
+Environment::Environment() : mEnvironmentGraphics(NULL), mEnvironmentModel(
 		NULL) {
 }
 
@@ -34,8 +32,7 @@ Environment::~Environment() {
 	mEnvironmentModel = NULL;
 }
 
-void Environment::initialize(const EnvironmentType environmentType) {
-	mEnvironmentType = environmentType;
+void Environment::initialize() {
 }
 
 bool Environment::isInWorld() const {

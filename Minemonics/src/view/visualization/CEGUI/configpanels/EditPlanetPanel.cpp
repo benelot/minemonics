@@ -69,14 +69,14 @@ EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 			CEGUIConfiguration::CEGUI_SCHEME + "/Combobox"));
 		mEnvironmentTypeCb->setReadOnly(true);
 		CEGUI::ListboxTextItem* itemCombobox = new CEGUI::ListboxTextItem(
-			"Plane", Environment::PLANE);
+			"Plane", EnvironmentModel::PLANE);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		mEnvironmentTypeCb->setText(itemCombobox->getText()); // Copy the item's text into the Editbox
 		mEnvironmentTypeCb->setItemSelectState(itemCombobox, true);
-		itemCombobox = new CEGUI::ListboxTextItem("Hills", Environment::HILLS);
+		itemCombobox = new CEGUI::ListboxTextItem("Hills", EnvironmentModel::HILLS);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		itemCombobox = new CEGUI::ListboxTextItem("Open Sea",
-			Environment::OPENSEA);
+			EnvironmentModel::OPENSEA);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 
 		mEnvironmentTypeCb->setWidth(CEGUI::UDim(0, rightColWidth * width));
@@ -225,8 +225,8 @@ void EditPlanetPanel::onValueChanged() {
 }
 
 void EditPlanetPanel::onConfirmClicked() {
-	Environment::EnvironmentType environmentType =
-		(Environment::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the ID of the selected combobox item
+	EnvironmentModel::EnvironmentType environmentType =
+		(EnvironmentModel::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the ID of the selected combobox item
 
 	int evaluationTime = mEvaluationTimeBs->getCurrentValue();
 

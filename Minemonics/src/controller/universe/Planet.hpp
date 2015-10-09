@@ -38,12 +38,33 @@ class PlanetModel;
  */
 class Planet {
 public:
-	Planet();
+	/**
+	 * Constructor to create a new planet.
+	 * @param physicsModelType The physics model type.
+	 * @param environmentType The environment type.
+	 * @param evaluationTime The evalution time.
+	 * @param evaluationType The evaluation type.
+	 * @param tournamentSize The tournament size.
+	 */
 	Planet(const PhysicsController::PhysicsModelType physicsModelType,
-		const Environment::EnvironmentType type, const int evaluationTime,
-		Ogre::Light* light = NULL);
+		const EnvironmentModel::EnvironmentType environmentType, const int evaluationTime,
+		EvolutionModel::EvaluationType evaluationType, int tournamentSize);
+	/**
+	 * Constructor to load a planet afterwards.
+	 */
+	Planet();
+
+	/**
+	 * Copy constructor.
+	 * @param planetModel
+	 */
 	Planet(PlanetModel* const planetModel);
 	virtual ~Planet();
+
+	/**
+	 * Called to initialize the planet to be a complete entity.
+	 */
+	void initialize();
 
 	/**
 	 * Perform embryogenesis on all creatures that are not yet developed.
@@ -78,13 +99,9 @@ public:
 	 */
 	bool proceedEvaluation();
 
-	void save() {
-		mPlanetModel->save();
-	}
+	void save();
 
-	void load(){
-		mPlanetModel->load();
-	}
+	void load();
 
 	// Accessor methods
 	/**

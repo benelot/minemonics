@@ -21,6 +21,7 @@
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
+#include <model/universe/PlanetModel.hpp>
 #include <model/universe/Epoch.hpp>
 #include <model/universe/evolution/juries/JuryFactory.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
@@ -54,11 +55,10 @@ Evolution::~Evolution() {
 }
 
 void Evolution::initialize(EvaluationController* const evaluationController,
-	Planet* planet, double evaluationTime, EvolutionModel::EvaluationType type,
-	int tournamentSize) {
+	Planet* planet,EvolutionModel* const evolutionModel) {
 	mEvaluationController = evaluationController;
 	mPlanet = planet;
-	mEvolutionModel->initialize(type, evaluationTime, tournamentSize);
+	mEvolutionModel = evolutionModel;
 }
 
 void Evolution::addPopulation(Population* const population) {

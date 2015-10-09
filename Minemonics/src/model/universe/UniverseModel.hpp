@@ -67,20 +67,11 @@ public:
 
 private:
 
-	/**
-	 * Vector of evaluation models
-	 */
-	std::vector<EvaluationModel*> mEvaluationModels;
+	std::vector<EvaluationModel*> mEvaluationModels; /**!< The evaluations currently running */
 
-	/**
-	 * The models of the planets in this universe.
-	 */
-	std::vector<PlanetModel*> mPlanetModels;
+	std::vector<PlanetModel*> mPlanetModels; /**!< The models of the planets in this universe. */
 
-	/**
-	 * Planet being currently evaluated.
-	 */
-	std::vector<PlanetModel*>::size_type mCurrentEvaluationPlanetIndex;
+	std::vector<PlanetModel*>::size_type mCurrentEvaluationPlanetIndex; /**!< Planet being currently evaluated. */
 };
 
 #endif /* MODEL_UNIVERSE_UNIVERSEMODEL_HPP_ */

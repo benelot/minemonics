@@ -15,7 +15,12 @@
 
 //## view headers
 //## utils headers
+EvolutionModel::EvolutionModel(const EvaluationType type,
+	const double evaluationTime, const int tournamentSize) :
+	mPhase(VARIATION_PHASE), mType(type), mEvaluationTime(evaluationTime), mCurrentPopulationIndex(
+		0), mCurrentCreatureIndex(0), mTournamentSize(tournamentSize) {
 
+}
 EvolutionModel::EvolutionModel() :
 	mPhase(VARIATION_PHASE), mType(INDIVIDUAL_EVALUATION), mEvaluationTime(0), mCurrentPopulationIndex(
 		0), mCurrentCreatureIndex(0), mTournamentSize(1) {
@@ -128,3 +133,14 @@ void EvolutionModel::performEmbryogenesis() {
 		}
 	}
 }
+
+bool EvolutionModel::setCurrentCreatureIndex(
+		const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
+		if (currentCreatureIndex
+			< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
+			mCurrentCreatureIndex = currentCreatureIndex;
+			return true;
+		} else {
+			return false;
+		}
+	}

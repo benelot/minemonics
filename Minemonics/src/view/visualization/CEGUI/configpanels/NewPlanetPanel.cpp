@@ -118,14 +118,14 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 			CEGUIConfiguration::CEGUI_SCHEME + "/Combobox"));
 		mEnvironmentTypeCb->setReadOnly(true);
 		CEGUI::ListboxTextItem* itemCombobox = new CEGUI::ListboxTextItem(
-			"Plane", Environment::PLANE);
+			"Plane", EnvironmentModel::PLANE);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		mEnvironmentTypeCb->setText(itemCombobox->getText()); // Copy the item's text into the Editbox
 		mEnvironmentTypeCb->setItemSelectState(itemCombobox, true);
-		itemCombobox = new CEGUI::ListboxTextItem("Hills", Environment::HILLS);
+		itemCombobox = new CEGUI::ListboxTextItem("Hills", EnvironmentModel::HILLS);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		itemCombobox = new CEGUI::ListboxTextItem("Open Sea",
-			Environment::OPENSEA);
+			EnvironmentModel::OPENSEA);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 
 		mEnvironmentTypeCb->setSize(
@@ -403,19 +403,19 @@ void NewPlanetPanel::onConfirmClicked() {
 	PhysicsController::PhysicsModelType modelType =
 		(PhysicsController::PhysicsModelType) mPhysicsControllerTypeCb->getSelectedItem()->getID(); // Retrieve the model type
 
-	Environment::EnvironmentType environmentType =
-		(Environment::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the environment type
+	EnvironmentModel::EnvironmentType environmentType =
+		(EnvironmentModel::EnvironmentType) mEnvironmentTypeCb->getSelectedItem()->getID(); // Retrieve the environment type
 
 	int evaluationTime = mEvaluationTimeBs->getCurrentValue();
 
 	EvolutionModel::EvaluationType evaluationType =
 		(EvolutionModel::EvaluationType) mEvaluationTypeCb->getSelectedItem()->getID(); // Retrieve the evaluation type
 
-	//TODO: Tournament size is not used yet
+	//TODO: Changing tournament size might not have an effect
 	int tournamentSize = mTournamentSizeBs->getCurrentValue(); // Retrieve the tournament size
 
 	//create the planet and set its serialization path
-	Planet* planet = new Planet(modelType, environmentType, evaluationTime);
+	Planet* planet = new Planet(modelType, environmentType, evaluationTime,evaluationType,tournamentSize);
 
 	std::vector<Epoch*> mEpochs;
 

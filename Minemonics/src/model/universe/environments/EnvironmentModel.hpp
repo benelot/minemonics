@@ -35,6 +35,10 @@
  */
 class EnvironmentModel: public Serializable {
 public:
+	enum EnvironmentType {
+		UNKNOWN_ENVIRONMENT_TYPE = 0, HILLS = 1, PLANE = 2, OPENSEA = 3
+	};
+
 	EnvironmentModel();
 	virtual ~EnvironmentModel();
 
@@ -124,6 +128,14 @@ public:
 		return os;
 	}
 
+	EnvironmentType getType() const {
+		return mType;
+	}
+
+	void setType(EnvironmentType type) {
+		mType = type;
+	}
+
 	/**
 	 * Serializes the environment to an xml file.
 	 * @param ar The archive.
@@ -148,20 +160,13 @@ public:
 
 protected:
 
-	/**
-	 * Is the environment in the world?
-	 */
-	bool mInWorld;
+	bool mInWorld; /**!< Is the environment in the world? */
 
-	/**
-	 * The physics controller of the environment.
-	 */
-	PhysicsController* mPhysicsController;
+	EnvironmentType mType; /**!< The type of environment */
 
-	/**
-	 * The physical model representation of the environment.
-	 */
-	EnvironmentPhysics* mEnvironmentPhysics;
+	PhysicsController* mPhysicsController; /**!< The physics controller of the environment. */
+
+	EnvironmentPhysics* mEnvironmentPhysics; /**!< The physical model representation of the environment. */
 };
 BOOST_CLASS_VERSION(EnvironmentModel, 1)
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_ENVIRONMENTMODEL_HPP_ */

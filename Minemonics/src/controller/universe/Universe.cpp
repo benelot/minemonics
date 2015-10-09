@@ -15,6 +15,7 @@
 
 //## controller headers
 #include <model/universe/UniverseModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 

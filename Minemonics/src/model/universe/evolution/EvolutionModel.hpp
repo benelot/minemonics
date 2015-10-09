@@ -57,6 +57,8 @@ public:
 		NUM_EVALUATION_TYPES
 	};
 
+	EvolutionModel(const EvaluationType type,
+		const double evaluationTime, const int tournamentSize);
 	EvolutionModel();
 	~EvolutionModel();
 
@@ -136,15 +138,7 @@ public:
 	}
 
 	bool setCurrentCreatureIndex(
-		const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
-		if (currentCreatureIndex
-			< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
-			mCurrentCreatureIndex = currentCreatureIndex;
-			return true;
-		} else {
-			return false;
-		}
-	}
+		const std::vector<CreatureModel*>::size_type currentCreatureIndex);
 
 	const std::vector<PopulationModel*>::size_type getCurrentPopulationIndex() const {
 		return mCurrentPopulationIndex;

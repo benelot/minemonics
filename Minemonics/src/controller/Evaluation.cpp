@@ -19,6 +19,9 @@
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
+#include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/EvolutionModel.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 
@@ -111,7 +114,7 @@ void Evaluation::teardown() {
 
 	if (!mHasFailed) {
 		std::string generationSerializationPath =
-			mPlanet->getPlanetModel()->getEvolutionModel()->getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel()->getCurrentPopulationIndex()]->getGenerationSerializationPath();
+			mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
 
 		// save creatures
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();

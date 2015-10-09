@@ -5,6 +5,7 @@
 #include <model/Serializable.hpp>
 
 //# forward declarations
+class PlanetModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -127,6 +128,10 @@ public:
 	}
 
 	// Serialization
+	virtual void save();
+
+	virtual void load();
+
 	/**
 	 * Give access to boost serialization
 	 */
@@ -164,22 +169,6 @@ public:
 		}
 	}
 
-	virtual void save() {
-		SaveController<PopulationModel> populationSaveController;
-		populationSaveController.save(*this, mSerializationPath.c_str());
-		if (SerializationConfiguration::POPULATION_EXPANDED) {
-			saveCreatures();
-		}
-	}
-
-	virtual void load() {
-		SaveController<PopulationModel> populationSaveController;
-		populationSaveController.restore(*this, mSerializationPath.c_str());
-		if (SerializationConfiguration::POPULATION_EXPANDED) {
-			loadCreatures();
-		}
-	}
-
 	int getCurrentGeneration() const {
 		return mCurrentGeneration;
 	}
@@ -190,31 +179,9 @@ public:
 
 private:
 
-	void saveCreatures() {
-		for (std::vector<CreatureModel*>::const_iterator it =
-			mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
-			(*it)->save();
-		}
-	}
+	void saveCreatures();
 
-	void loadCreatures() {
-		mCreatureModels.clear();
-
-		//get parent directory name
-		std::string dirname =
-			boost::filesystem::path(mSerializationPath).parent_path().string();
-
-		std::vector<std::string> files =
-			FilesystemManipulator::getFileNamesByExtension(dirname,
-				".creature");
-		for (int i = 0; i < files.size(); i++) {
-			CreatureModel* creature = new CreatureModel();
-
-			creature->setSerializationPath(files[i]);
-			creature->load();
-			mCreatureModels.push_back(creature);
-		}
-	}
+	void loadCreatures();
 
 	bool mOutOfSync; /**!< If the population model is out of sync with the controller. */
 

@@ -20,7 +20,7 @@
 
 PopulationModel::PopulationModel() :
 	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(NULL), mOutOfSync(
-		false),mCurrentGeneration(0) {
+		false), mCurrentGeneration(0) {
 
 }
 
@@ -108,3 +108,45 @@ bool PopulationModel::hasInterpenetrations() {
 	}
 	return hasInterpenetrations;
 }
+
+void PopulationModel::save() {
+	SaveController<PopulationModel> populationSaveController;
+	populationSaveController.save(*this, mSerializationPath.c_str());
+	if (SerializationConfiguration::POPULATION_EXPANDED) {
+		saveCreatures();
+	}
+}
+
+void PopulationModel::load() {
+	SaveController<PopulationModel> populationSaveController;
+	populationSaveController.restore(*this, mSerializationPath.c_str());
+	if (SerializationConfiguration::POPULATION_EXPANDED) {
+		loadCreatures();
+	}
+}
+
+void PopulationModel::saveCreatures() {
+	for (std::vector<CreatureModel*>::const_iterator it =
+		mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+		(*it)->save();
+	}
+}
+
+void PopulationModel::loadCreatures() {
+	mCreatureModels.clear();
+
+	//get parent directory name
+	std::string dirname =
+		boost::filesystem::path(mSerializationPath).parent_path().string();
+
+	std::vector<std::string> files =
+		FilesystemManipulator::getFileNamesByExtension(dirname, ".cr");
+	for (int i = 0; i < files.size(); i++) {
+		CreatureModel* creature = new CreatureModel();
+
+		creature->setSerializationPath(files[i]);
+		creature->load();
+		mCreatureModels.push_back(creature);
+	}
+}
+

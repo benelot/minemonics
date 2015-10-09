@@ -26,6 +26,7 @@ class EvolutionModel;
 #include <model/universe/Epoch.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/PlaneModel.hpp>
+#include <model/universe/evolution/EvolutionModel.hpp>
 
 //## view headers
 //## utils headers
@@ -39,6 +40,10 @@ class EvolutionModel;
 class PlanetModel: public Serializable {
 public:
 	PlanetModel();
+	PlanetModel(const EvolutionModel::EvaluationType type, const double evaluationTime,
+		const int tournamentSize,
+		const PhysicsController::PhysicsModelType physicsModelType,
+		const EnvironmentModel::EnvironmentType environmentType);
 	virtual ~PlanetModel();
 
 	/**
@@ -46,8 +51,7 @@ public:
 	 * @param evolutionModel Its evolution model.
 	 * @param environmentModel Its environment model.
 	 */
-	void initialize(EvolutionModel* const evolutionModel,
-		EnvironmentModel* const environmentModel);
+	void initialize();
 
 	/**
 	 * Perform embryogenesis on all creatures that are not yet developed.
@@ -73,14 +77,6 @@ public:
 
 	void setEnvironmentModel(EnvironmentModel* const environmentModel) {
 		mEnvironmentModel = environmentModel;
-	}
-
-	EvolutionModel* const getEvolutionModel() const {
-		return mEvolutionModel;
-	}
-
-	void setEvolutionModel(EvolutionModel* const evolutionModel) {
-		mEvolutionModel = evolutionModel;
 	}
 
 	void addEpoch(Epoch* epoch) {
@@ -130,6 +126,14 @@ public:
 		return os;
 	}
 
+	EvolutionModel& getEvolutionModel() {
+		return mEvolutionModel;
+	}
+
+	const EvolutionModel& getEvolutionModel() const {
+		return mEvolutionModel;
+	}
+
 	/**
 	 * Serializes the planet to an xml file.
 	 * @param ar The archive.
@@ -160,7 +164,7 @@ private:
 
 	std::string mName; /**!< The name of the planet */
 
-	EvolutionModel* mEvolutionModel; /**!< The evolution model of this planet.*/
+	EvolutionModel mEvolutionModel; /**!< The evolution model of this planet.*/
 
 	EnvironmentModel* mEnvironmentModel; /**!< The environment model of this planet.*/
 

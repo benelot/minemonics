@@ -17,6 +17,7 @@
 //## utils headers
 
 PlaneModel::PlaneModel() {
+	mEnvironmentPhysics = new PlaneBt();
 }
 
 PlaneModel::~PlaneModel() {

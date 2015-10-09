@@ -115,7 +115,8 @@ void NewPopulationPanel::onConfirmClicked() {
 			SimulationManager::getSingleton()->getTimeStamp());
 	std::string path =
 		FilesystemManipulator::createFolder(
-			SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getSerializationPath(),
+			boost::filesystem::path(
+				SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getSerializationPath()).parent_path().c_str(),
 			populationName);
 
 	population->setSerializationPath(path);

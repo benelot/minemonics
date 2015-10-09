@@ -18,6 +18,7 @@
 #include <configuration/MorphologyConfiguration.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/CreatureFitnessComparator.hpp>

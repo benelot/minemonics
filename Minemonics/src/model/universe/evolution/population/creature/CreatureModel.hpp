@@ -34,7 +34,7 @@ class access;
 #include <controller/SaveController.hpp>
 
 //## model headers
-#include <model/universe/PlanetModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>

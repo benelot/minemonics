@@ -38,24 +38,16 @@ Plane::~Plane() {
 }
 
 void Plane::initialize(
-	const PhysicsController::PhysicsModelType physicsModelType,
+	EnvironmentModel* const environmentModel,
 	const Ogre::Light* const l) {
-	Environment::initialize(Environment::PLANE);
+	Environment::initialize();
 
 	// setup the planet model
-	mEnvironmentModel = new PlaneModel();
-	getPlaneModel()->initialize();
+	mEnvironmentModel = environmentModel;
 
 	// setup the plane view
 	mEnvironmentGraphics = new PlaneO3D((PlaneModel*) mEnvironmentModel);
 	getPlaneView()->initialize(l);
-
-	// set up the physics controller
-	mEnvironmentModel->setPhysicsController(
-		new GroundController(physicsModelType));
-	mEnvironmentModel->getPhysicsController()->initBulletPhysics();
-	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
-		&(SimulationManager::getSingleton()->getDebugDrawer()));
 }
 
 void Plane::update(double timeSinceLastTick) {
