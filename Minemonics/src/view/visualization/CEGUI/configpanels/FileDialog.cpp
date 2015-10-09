@@ -592,7 +592,7 @@ void FileDialog::changeDirectory(std::string path) {
 
 	mCurrentPath =
 		boost::filesystem::absolute(boost::filesystem::path(path)).c_str();
-	std::cout << mCurrentPath << std::endl;
+//	std::cout << mCurrentPath << std::endl;
 
 	mNames.clear();
 
