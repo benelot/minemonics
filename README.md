@@ -1,4 +1,4 @@
-# Minemonics
+# Minemonics (Alpha Stage, work in progress)
 
 An open-source 3D virtual creature evolution simulator built with OGRE3D rendering engine in C++. For the Evolutionary Algorithm Shark machine learning will probably be used, furthermore MathGL (http://mathgl.sourceforge.net/doc_en/Website.html) and Igraph (http://igraph.org) for graph plotting, FFmpeg (https://www.ffmpeg.org/) for capturing video, Bullet3 for the physics and Boost for logging and testing. In the future, a library for Deep neural networks will also be needed.
 
