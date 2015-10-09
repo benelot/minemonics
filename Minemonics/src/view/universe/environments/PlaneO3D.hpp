@@ -2,6 +2,8 @@
 #define VIEW_UNIVERSE_ENVIRONMENTS_PLANEO3D_H_
 
 //# corresponding header
+#include <view/universe/environments/EnvironmentO3D.hpp>
+
 //# forward declarations
 class PlaneModel;
 
@@ -19,8 +21,6 @@ class PlaneModel;
 //## controller headers
 //## model headers
 //## view headers
-#include <view/universe/environments/EnvironmentO3D.hpp>
-
 //## utils headers
 
 /**

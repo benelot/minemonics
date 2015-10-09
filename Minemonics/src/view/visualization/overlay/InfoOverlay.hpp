@@ -3,6 +3,8 @@
 
 //# corresponding header
 //# forward declarations
+class InfoOverlayData;
+
 //# system headers
 #include <vector>
 
@@ -17,7 +19,6 @@
 //## controller headers
 //## model headers
 //## view headers
-#include <view/visualization/overlay/InfoOverlayData.hpp>
 
 /**
  * @brief		The info overlay adds information to the 3D objects in the scene.

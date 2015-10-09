@@ -39,34 +39,46 @@ public:
 	typedef std::vector<PairString> VectorStringPairs;
 
 protected:
-	CEGUI::Window* mRootGui;
-	CEGUI::FrameWindow* mWidgetPanel;
-	CEGUI::Window* mTextBoxLabel;
-	CEGUI::Window* mTextBoxValues;
-	VectorString mParams;
-
 	ParamsPanel(const int left, const int top, const std::string name,
 			const int width, VectorStringPairs items);
+
 	void _destroy();
 public:
 	~ParamsPanel(void);
 
 	void setParamValue(const int index, const std::string value,
 			const bool autoUpdate = true);
+
 	std::string getParamValue(const int index);
+
 	void update();
+
 	size_t size();
+
 	int getWidth();
+
 	int getHeight();
+
 	void hide();
+
 	void show();
+
 	bool isVisible();
 
 	static ParamsPanel* createParamsPanel(const int left, const int top,
 			const std::string name, const int width,
 			const VectorStringPairs items);
+
 	static void destroyParamsPanel(ParamsPanel* panel);
+
 	CEGUI::FrameWindow*& getWidgetPanel();
+
+protected:
+	CEGUI::Window* mRootGui;
+	CEGUI::FrameWindow* mWidgetPanel;
+	CEGUI::Window* mTextBoxLabel;
+	CEGUI::Window* mTextBoxValues;
+	VectorString mParams;
 };
 
 #endif /* VIEW_VISUALIZATION_PANELS_PARAMSPANEL_H_ */

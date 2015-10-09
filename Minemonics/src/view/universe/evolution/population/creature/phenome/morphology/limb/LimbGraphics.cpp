@@ -1,5 +1,4 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
 
 //# forward declarations

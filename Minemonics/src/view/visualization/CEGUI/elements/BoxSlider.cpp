@@ -1,4 +1,5 @@
 //# corresponding headers
+#include <view/visualization/CEGUI/elements/BoxSlider.hpp>
 //# forward declarations
 //# system headers
 #include <string>
@@ -24,8 +25,6 @@
 //## controller headers
 //## model headers
 //## view headers
-#include <view/visualization/CEGUI/elements/BoxSlider.hpp>
-
 //## utils headers
 
 BoxSlider::BoxSlider(const std::string name, const int width,

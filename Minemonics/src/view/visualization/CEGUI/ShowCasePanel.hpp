@@ -2,6 +2,8 @@
 #define VIEW_VISUALIZATION_CEGUI_ELEMENTS_CONFIGPANELS_ShowCasePanel_HPP_
 //# corresponding header
 #include <view/visualization/CEGUI/MovablePanel.hpp>
+//# forward declarations
+//# system headers
 #include <string>
 
 //## controller headers

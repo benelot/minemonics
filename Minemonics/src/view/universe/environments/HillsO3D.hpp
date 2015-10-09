@@ -2,6 +2,8 @@
 #define VIEW_UNIVERSE_ENVIRONMENTS_HILLSO3D_H_
 
 //# corresponding header
+#include <view/universe/environments/EnvironmentO3D.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -17,8 +19,6 @@
 //## controller headers
 //## model headers
 //## view headers
-#include <view/universe/environments/EnvironmentO3D.hpp>
-
 //## utils headers
 
 /**

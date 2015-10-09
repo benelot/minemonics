@@ -22,6 +22,8 @@
 //## controller headers
 //## model headers
 //## view headers
+#include <view/visualization/overlay/InfoOverlayData.hpp>
+
 
 InfoOverlay::InfoOverlay() :
 		mCamera(NULL), mInfoOverlay(NULL), mInfoOverlayContainer(NULL) {
