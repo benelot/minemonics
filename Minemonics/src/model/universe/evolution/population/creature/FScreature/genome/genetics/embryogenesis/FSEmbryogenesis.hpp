@@ -5,7 +5,10 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
+class btTransform;
+class FSLimbModel;
 class FSPhenomeModel;
+class Morphogene;
 
 //# system headers
 #include <list>
@@ -52,6 +55,18 @@ public:
 	static void transcribeMorphogene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		FSPhenomeModel* phenomeModel, PhenotypeGenerator* generator);
+
+	static void appendToParentLimb(FSPhenomeModel* phenomeModel,
+		FSLimbModel* childLimb, PhenotypeGenerator* generator,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild,
+		btTransform& parentHitTransform, btTransform& childHitTransform);
+
+	static void createNewGenerators(FSPhenomeModel* phenomeModel,
+		Morphogene * childMorphogene, FSLimbModel* childLimb,
+		PhenotypeGenerator* generator,
+		std::list<PhenotypeGenerator*>& generatorList,
+		int& totalSegmentCounter);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_ */

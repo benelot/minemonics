@@ -23,8 +23,7 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		limbBt = new FSLimbBt();
-		limbBt->initialize(NULL, NULL,
+		limbBt = new FSLimbBt(NULL, NULL,
 			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
@@ -35,6 +34,7 @@ protected:
 			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
 				randomness->nextUnifDouble(0, 1),
 				randomness->nextUnifDouble(0, 1)), true);
+		limbBt->initialize();
 	}
 
 	virtual void TearDown() {
@@ -53,8 +53,7 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		limbBt = new FSLimbBt();
-		limbBt->initialize(NULL, NULL,
+		limbBt = new FSLimbBt(NULL, NULL,
 			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
@@ -65,6 +64,7 @@ protected:
 			Ogre::ColourValue(randomness->nextUnifDouble(0, 1),
 				randomness->nextUnifDouble(0, 1),
 				randomness->nextUnifDouble(0, 1)), true);
+		limbBt->initialize();
 
 		limbBt2 = new FSLimbBt();
 

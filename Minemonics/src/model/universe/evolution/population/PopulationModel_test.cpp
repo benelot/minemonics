@@ -25,16 +25,16 @@ protected:
 	virtual void SetUp() {
 		// Set up an object of the class you want to test
 		randomness = new Randomness();
-		population = new PopulationModel();
+		population = new PopulationModel(NULL,0,Ogre::Vector3(0,0,0));
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
 		physicsController->initialize();
-		population->initialize(NULL, 0);
+		population->initialize();
 		for (int i = 0; i < 30; ++i) {
-			CreatureModel* creature = new CreatureModel();
-			creature->setWorld(physicsController->getDynamicsWorld());
-			creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+			CreatureModel* creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
 				Ogre::Vector3(0, 0, 0), 30);
+			creature->setWorld(physicsController->getDynamicsWorld());
+			creature->initialize();
 			creature->performEmbryogenesis();
 			population->addMember(creature);
 		}
@@ -59,16 +59,16 @@ class PopulationSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
-		population = new PopulationModel();
+		population = new PopulationModel(NULL,0,Ogre::Vector3(0,0,0));
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
 		physicsController->initialize();
-		population->initialize(NULL, 0);
+		population->initialize();
 		for (int i = 0; i < 30; ++i) {
-			CreatureModel* creature = new CreatureModel();
-			creature->setWorld(physicsController->getDynamicsWorld());
-			creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+			CreatureModel* creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
 				Ogre::Vector3(0, 0, 0), 30);
+			creature->setWorld(physicsController->getDynamicsWorld());
+			creature->initialize();
 			creature->performEmbryogenesis();
 			population->addMember(creature);
 		}

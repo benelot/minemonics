@@ -104,10 +104,10 @@ void NewPopulationPanel::onConfirmClicked() {
 
 	int populationSize = mPopulationSizeBs->getCurrentValue();
 
-	Population* population = new Population();
-	population->initialize(
-		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet(),
-		populationSize, EvolutionConfiguration::ROOT_POSITION);
+	Population* population =
+		new Population(
+			SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet(),
+			populationSize, EvolutionConfiguration::ROOT_POSITION);
 
 	//create folder for the population
 	std::string populationName = std::string("Population-")

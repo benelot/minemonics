@@ -37,14 +37,31 @@ class PopulationModel;
 class Population {
 public:
 	Population();
+
+	/**
+	 *
+	 * @param planet The planet the population lives on.
+	 * @param creatureQty The number of creatures that the population will consist of in every generation.
+	 */
+	Population(Planet* const planet, const int creatureQty);
+
+	/**
+	 *
+	 * @param planet The planet the population lives on.
+	 * @param creatureQty The number of creatures that the population will consist of in every generation.
+	 * @param initialPosition
+	 */
+	Population(Planet* const planet,
+		const int creatureQty,const Ogre::Vector3 initialPosition);
 	Population(PopulationModel* const populationModel);
 	virtual ~Population();
 
 	/**
 	 * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
-	 * @param planet The planet the population lives on.
-	 * @param creatureQty The number of creatures that the population will consist of in every generation.
 	 */
+	void initialize();
+
+
 	void initialize(Planet* const planet, const int creatureQty,
 		const Ogre::Vector3 initialPosition);
 
@@ -135,6 +152,10 @@ public:
 	bool isOutOfSync() const;
 
 	void setOutOfSync(const bool outOfSync);
+
+	void save();
+
+	void load();
 
 	void setSerializationPath(std::string path);
 

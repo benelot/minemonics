@@ -87,6 +87,8 @@ public:
 		return mEpochs[mCurrentEpoch];
 	}
 
+	PhysicsController::PhysicsModelType getPhysicsModelType();
+
 	//Serialization
 	virtual void save();
 

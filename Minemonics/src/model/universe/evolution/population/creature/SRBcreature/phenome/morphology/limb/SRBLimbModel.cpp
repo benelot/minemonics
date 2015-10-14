@@ -31,10 +31,7 @@ SRBLimbModel::SRBLimbModel(const SRBLimbModel& SRBLimbModel) {
 	mParentJointIndex = SRBLimbModel.mParentJointIndex;
 }
 
-SRBLimbModel::~SRBLimbModel() {
-}
-
-void SRBLimbModel::initialize(btDynamicsWorld* const world,
+SRBLimbModel::SRBLimbModel(btDynamicsWorld* const world,
 	CreatureModel* const creatureModel, const LimbPhysics::PrimitiveType type,
 	const Ogre::Vector3 position, const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
@@ -45,8 +42,7 @@ void SRBLimbModel::initialize(btDynamicsWorld* const world,
 	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
 
 	// initialize the physics model of the limb
-	mLimbPhysics = new SRBLimbBt();
-	mLimbPhysics->initialize(world, this, type, position, orientation,
+	mLimbPhysics = new SRBLimbBt(world, this, type, position, orientation,
 		initialRelativePosition, initialOrientation, dimensions, mass,
 		restitution, friction, color, isIntraBodyColliding);
 
@@ -56,6 +52,14 @@ void SRBLimbModel::initialize(btDynamicsWorld* const world,
 	Tactioceptor* tactioceptor = new Tactioceptor();
 	mSensors.push_back(tactioceptor);
 	mTactioceptors.push_back(tactioceptor);
+
+}
+
+SRBLimbModel::~SRBLimbModel() {
+}
+
+void SRBLimbModel::initialize(){
+	mLimbPhysics->initialize();
 }
 
 void SRBLimbModel::reset(Ogre::Vector3 position) {

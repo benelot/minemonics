@@ -43,17 +43,16 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	// initialize the model of the joint
 	switch (creature->getPhysicsModelType()) {
 	case PhysicsController::RigidbodyModel:
-		mJointModel = new SRBJointModel();
-		mJointModel->initialize(
+		mJointModel = new SRBJointModel(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
 			((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
 			indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
 			jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+
 		break;
 	case PhysicsController::FeatherstoneModel:
-		mJointModel = new FSJointModel();
-		mJointModel->initialize(
+		mJointModel = new FSJointModel(
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			((FSLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
 			((FSLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
@@ -63,6 +62,7 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	default:
 		break;
 	}
+	mJointModel->initialize();
 
 	// Define the new component as a limb
 	Component::initialize (mJointModel);

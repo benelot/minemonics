@@ -52,16 +52,31 @@ class access;
 class PopulationModel: public Serializable {
 public:
 	PopulationModel();
+	PopulationModel(PlanetModel* const planetModel,
+		const int creatureQty);
+	PopulationModel(PlanetModel* const planetModel,
+		const int creatureQty,
+		const Ogre::Vector3 initialPosition);
 	PopulationModel(const PopulationModel& populationModel);
 
 	virtual ~PopulationModel();
 
 	/**
 	 * Initialize the population model
-	 * @param planetModel The planet the population lives on.
-	 * @param creatureQty The number of creatures living in the population.
 	 */
-	void initialize(PlanetModel* const planetModel, const int creatureQty);
+	void initialize();
+
+	/**
+	 * Initialize the population model
+	 * @param planetModel The planet the population lives on.
+	 */
+	void initialize(PlanetModel* const planetModel);
+
+	/**
+	 * Adds a new creature to the population.
+	 */
+	void addNewMember(const double branchiness,
+		const Ogre::Vector3 rootPosition);
 
 	/**
 	 * Adds a new creature to the population.

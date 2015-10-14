@@ -55,7 +55,7 @@ Evolution::~Evolution() {
 }
 
 void Evolution::initialize(EvaluationController* const evaluationController,
-	Planet* planet,EvolutionModel* const evolutionModel) {
+	Planet* planet, EvolutionModel* const evolutionModel) {
 	mEvaluationController = evaluationController;
 	mPlanet = planet;
 	mEvolutionModel = evolutionModel;
@@ -82,6 +82,9 @@ bool Evolution::proceedEvaluation() {
 
 				// create generation folder
 				if (mEvolutionModel->getCurrentCreatureIndex() == 0) {
+					// save population
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->save();
+
 					//create folder for the generation
 					std::string generationName =
 						std::string("Generation-")
@@ -97,8 +100,7 @@ bool Evolution::proceedEvaluation() {
 					mEvolutionModel->getEvaluationTime());
 
 				// create population with single creature for evaluation
-				Population* population = new Population();
-				population->initialize(mPlanet, 1);
+				Population* population = new Population(mPlanet, 0);
 
 				Creature* creature =
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()];
@@ -131,8 +133,7 @@ bool Evolution::proceedEvaluation() {
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getTournamentSize(); i++) {
-				population = new Population();
-				population->initialize(mPlanet, 1);
+				population = new Population(mPlanet, 0);
 				population->addMember(
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
 				;
@@ -160,8 +161,7 @@ bool Evolution::proceedEvaluation() {
 				i
 					< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
 				i++) {
-				population = new Population();
-				population->initialize(mPlanet, 1);
+				population = new Population(mPlanet, 0);
 				population->addMember(
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
 
@@ -185,9 +185,7 @@ bool Evolution::proceedEvaluation() {
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getTournamentSize(); i++) {
-				population = new Population();
-				population->initialize(mPlanet,
-					mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size());
+				population = new Population(mPlanet, 0);
 				for (int j = 0;
 					j
 						< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();
@@ -216,9 +214,7 @@ bool Evolution::proceedEvaluation() {
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getPopulationModels().size();
 				i++) {
-				population = new Population();
-				population->initialize(mPlanet,
-					mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size());
+				population = new Population(mPlanet, 0);
 				for (int j = 0;
 					j
 						< mEvolutionModel->getPopulationModels()[mEvolutionModel->getCurrentCreatureIndex()]->getCreatureModels().size();

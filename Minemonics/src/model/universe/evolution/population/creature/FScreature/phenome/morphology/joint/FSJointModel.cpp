@@ -29,10 +29,7 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 	mJointPhysics = jointModel.mJointPhysics->clone();
 }
 
-FSJointModel::~FSJointModel() {
-}
-
-void FSJointModel::initialize(btDynamicsWorld* const world,
+FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	btRigidBody* const limbA, btRigidBody* const limbB,
 	const btTransform localA, const btTransform localB,
 	const std::vector<FSLimbModel*>::size_type indexA,
@@ -40,19 +37,56 @@ void FSJointModel::initialize(btDynamicsWorld* const world,
 	const std::vector<FSLimbModel*>::size_type ownIndex,
 	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
 	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
-	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
+	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mParentIndex = indexA;
 	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
 	mLocalA = localA;
 	mLocalB = localB;
-	mJointPhysics = new FSJointBt();
-	((FSJointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA,
+	mLocalAPosition = OgreBulletUtils::convert(localA.getOrigin());
+	mLocalBPosition = OgreBulletUtils::convert(localB.getOrigin());
+
+	mLocalAOrientation = OgreBulletUtils::convert(localB.getRotation());
+	mLocalBOrientation = OgreBulletUtils::convert(localB.getRotation());
+
+	mJointPhysics = new FSJointBt(world, limbA, limbB, localA,
 		localB, type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
-		OgreBulletUtils::convert(jointLowerLimits),
-		OgreBulletUtils::convert(jointUpperLimits));
+		OgreBulletUtils::convert(jointMinAngle),
+		OgreBulletUtils::convert(jointMaxAngle));
+
+	//TODO: proof of concept, make better.
+//	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
+//			((JointBt*) mJointPhysics)->getG6DofJoint(),
+//			JointPhysics::RDOF_PITCH);
+//	mSensors.push_back(angleceptor);
+//	mAngleceptors.push_back(angleceptor);
+//
+//	JointForceProprioceptor* forceceptor = new JointForceProprioceptor(
+//			((JointBt*) mJointPhysics)->getG6DofJoint(),
+//			JointPhysics::RDOF_PITCH);
+//	mSensors.push_back(forceceptor);
+//	mForceceptors.push_back(forceceptor);
+//
+//	JointLimitProprioceptor* limitceptor = new JointLimitProprioceptor(
+//			((JointBt*) mJointPhysics)->getG6DofJoint(),
+//			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
+//	mSensors.push_back(limitceptor);
+//	mLimitceptors.push_back(limitceptor);
+
+}
+
+FSJointModel::~FSJointModel() {
+}
+
+void FSJointModel::initialize() {
+	mLocalA.setOrigin(OgreBulletUtils::convert(mLocalAPosition));
+	mLocalA.setRotation(OgreBulletUtils::convert(mLocalAOrientation));
+	mLocalB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
+	mLocalB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
+
+	mJointPhysics->initialize();
 
 	//TODO: proof of concept, make better.
 //	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(

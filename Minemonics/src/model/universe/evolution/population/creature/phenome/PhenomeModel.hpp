@@ -48,17 +48,40 @@ class access;
 class PhenomeModel {
 public:
 	PhenomeModel();
+	PhenomeModel(CreatureModel* const creatureModel);
 	PhenomeModel(const PhenomeModel& phenomeModel);
 	virtual ~PhenomeModel();
 
-	virtual void initialize(CreatureModel* const creatureModel);
+	virtual void initialize() = 0;
+
+//	virtual LimbModel* addLimb(btDynamicsWorld* const world,
+//		CreatureModel* const creatureModel,
+//		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+//		const Ogre::Quaternion orientation,
+//		const Ogre::Vector3 initialRelativePosition,
+//		const Ogre::Quaternion initialOrientation,
+//		const Ogre::Vector3 dimensions, const double mass,
+//		const double restitution, const double friction,
+//		const Ogre::ColourValue color, bool isIntraBodyColliding,
+//		const std::vector<ComponentModel*>::size_type ownIndex);
+//
+//	virtual JointModel* addJoint(btDynamicsWorld* const world,
+//		btRigidBody* const limbA, btRigidBody* const limbB,
+//		const btTransform localA, const btTransform localB,
+//		const std::vector<FSLimbModel*>::size_type indexA,
+//		const std::vector<FSLimbModel*>::size_type indexB,
+//		const std::vector<FSJointModel*>::size_type ownIndex,
+//		JointPhysics::JointType type, bool jointPitchEnabled,
+//		bool jointYawEnabled, bool jointRollEnabled,
+//		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointMinAngle,
+//		Ogre::Vector3 jointMaxAngle) = 0;
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	virtual int performEmbryogenesis(CreatureModel* const creatureModel) = 0;
+	virtual int performEmbryogenesis() = 0;
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -159,6 +182,10 @@ public:
 
 	void calm();
 
+	void setCreatureModel(CreatureModel* creatureModel) {
+		mCreatureModel = creatureModel;
+	}
+
 	/**
 	 * Give access to boost serialization
 	 */
@@ -226,7 +253,7 @@ public:
 		ar.register_type(static_cast<SRBJointModel*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mDeveloped) /**!< If the phenome is developed*/
 
-		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/
+//		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/
 
 		& BOOST_SERIALIZATION_NVP(mLimbModels) /**!< The vector of limb models.*/
 
@@ -247,8 +274,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string
-					> ("PhenomeModel"));
+				boost::log::attributes::constant<std::string>("PhenomeModel"));
 		}
 	} _initializer;
 

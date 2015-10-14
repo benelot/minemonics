@@ -44,36 +44,23 @@ SRBLimbBt::SRBLimbBt() :
 
 SRBLimbBt::SRBLimbBt(const SRBLimbBt& SRBLimbBt) {
 	btTransform startTransform = SRBLimbBt.mBody->getWorldTransform();
-	initialize(SRBLimbBt.mWorld, SRBLimbBt.mCollisionShape->getUserPointer(),
-		SRBLimbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
-		OgreBulletUtils::convert(startTransform.getRotation()),
-		Ogre::Vector3(SRBLimbBt.mInitialRelativeXPosition,
-			SRBLimbBt.mInitialRelativeYPosition,
-			SRBLimbBt.mInitialRelativeZPosition),
-		Ogre::Quaternion(SRBLimbBt.mInitialXOrientation,
-			SRBLimbBt.mInitialYOrientation, SRBLimbBt.mInitialZOrientation,
-			SRBLimbBt.mInitialWOrientation), SRBLimbBt.mDimensions,
-		SRBLimbBt.mMass, SRBLimbBt.mRestitution, SRBLimbBt.mFriction,
-		SRBLimbBt.mColor, SRBLimbBt.mIntraBodyColliding);
+//	initialize(SRBLimbBt.mWorld, SRBLimbBt.mCollisionShape->getUserPointer(),
+//		SRBLimbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
+//		OgreBulletUtils::convert(startTransform.getRotation()),
+//		Ogre::Vector3(SRBLimbBt.mInitialRelativeXPosition,
+//			SRBLimbBt.mInitialRelativeYPosition,
+//			SRBLimbBt.mInitialRelativeZPosition),
+//		Ogre::Quaternion(SRBLimbBt.mInitialXOrientation,
+//			SRBLimbBt.mInitialYOrientation, SRBLimbBt.mInitialZOrientation,
+//			SRBLimbBt.mInitialWOrientation), SRBLimbBt.mDimensions,
+//		SRBLimbBt.mMass, SRBLimbBt.mRestitution, SRBLimbBt.mFriction,
+//		SRBLimbBt.mColor, SRBLimbBt.mIntraBodyColliding);
 
 	mInWorld = SRBLimbBt.mInWorld;
 	mInertia = SRBLimbBt.mInertia;
 }
 
-SRBLimbBt::~SRBLimbBt() {
-	delete mBody;
-	mBody = NULL;
-
-	delete mCollisionShape;
-	mCollisionShape = NULL;
-
-	delete mMotionState;
-	mMotionState = NULL;
-
-	mWorld = NULL;
-}
-
-void SRBLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
+SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world, void* const limbModel,
 	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 	const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
@@ -150,6 +137,23 @@ void SRBLimbBt::initialize(btDynamicsWorld* const world, void* const limbModel,
 	mInitialZOrientation = initialOrientation.z;
 	mColor = color;
 	mIntraBodyColliding = isIntraBodyColliding;
+
+}
+
+SRBLimbBt::~SRBLimbBt() {
+	delete mBody;
+	mBody = NULL;
+
+	delete mCollisionShape;
+	mCollisionShape = NULL;
+
+	delete mMotionState;
+	mMotionState = NULL;
+
+	mWorld = NULL;
+}
+
+void SRBLimbBt::initialize() {
 }
 
 btTransform SRBLimbBt::getIntersection(btVector3 origin, btVector3 direction) {

@@ -20,8 +20,8 @@
 //## controller headers
 #include <controller/universe/Planet.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
-#include <controller/universe/evolution/population/ragdoll/RagDoll.hpp>
-#include <controller/universe/evolution/population/snake/Snake.hpp>
+//#include <controller/universe/evolution/population/ragdoll/RagDoll.hpp>
+//#include <controller/universe/evolution/population/snake/Snake.hpp>
 
 //## model headers
 #include <model/universe/evolution/population/PopulationModel.hpp>
@@ -32,9 +32,24 @@
 
 BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
 Population::_Init Population::_initializer;
-Population::Population() :
-	mPlanet(NULL) {
+Population::Population():
+		mPlanet(NULL){
 	mPopulationModel = new PopulationModel();
+
+}
+Population::Population(Planet* const planet, const int creatureQty) :
+	mPlanet(planet) {
+	mPopulationModel = new PopulationModel(planet->getPlanetModel(), creatureQty);
+
+	initialize();
+}
+
+Population::Population(Planet* const planet, const int creatureQty,
+	const Ogre::Vector3 initialPosition) :
+	mPlanet(planet) {
+	mPopulationModel = new PopulationModel(planet->getPlanetModel(), creatureQty,initialPosition);
+
+	initialize();
 }
 
 Population::Population(PopulationModel* const populationModel) :
@@ -54,33 +69,10 @@ Population::~Population() {
 	mPlanet = NULL;
 }
 
-/**
- * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
- * @param simulationManager The simulation manager handle
- * @param creatureQty The number of creatures that the population will consist of in every generation.
- */
-void Population::initialize(Planet* const planet, const int creatureQty,
-	const Ogre::Vector3 initialPosition) {
-	mPlanet = planet;
-
+void Population::initialize() {
 	//initialize the population model with zero creatures.
-	mPopulationModel->initialize(planet->getPlanetModel(), 0);
-
-	// add creatures up to the creature quantity.
-	double branchiness = 0;
-	for (int i = 0; i < creatureQty; i++) {
-		branchiness = Randomness::getSingleton()->nextNormalDouble(
-			MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
-			MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		addNewMember(branchiness, initialPosition);
-	}
-}
-
-void Population::initialize(Planet* const planet, const int creatureQty) {
-	mPlanet = planet;
-
-	//initialize the population model with n creatures.
-	mPopulationModel->initialize(planet->getPlanetModel(), creatureQty);
+	mPopulationModel->initialize();
+	resyncWithModel();
 }
 
 /**
@@ -215,6 +207,15 @@ const std::string Population::getSerializationPath() const {
 
 const int Population::getCurrentGeneration() const {
 	return mPopulationModel->getCurrentGeneration();
+}
+
+void Population::save() {
+	mPopulationModel->save();
+}
+
+void Population::load() {
+	mPopulationModel->load();
+	initialize();
 }
 
 const std::string Population::getGenerationSerializationPath() {

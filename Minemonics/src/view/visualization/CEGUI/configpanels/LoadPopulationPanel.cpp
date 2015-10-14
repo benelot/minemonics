@@ -11,8 +11,13 @@
 //## view headers
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
+#include <controller/universe/Planet.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -28,4 +33,10 @@ LoadPopulationPanel::~LoadPopulationPanel(void) {
 }
 
 void LoadPopulationPanel::openFile(std::string filePath) {
+	Population* population = new Population();
+	population->setSerializationPath(boost::filesystem::path(filePath).parent_path().c_str());
+	population->getPopulationModel()->setPlanetModel(SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getPlanetModel());
+	population->load();
+	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->addPopulation(population);
+	this->hide();
 }

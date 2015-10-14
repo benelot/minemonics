@@ -25,7 +25,7 @@
  */
 class SerializationConfiguration {
 public:
-	static const bool POPULATION_EXPANDED = false;
+	static const bool POPULATION_EXPANDED = true;
 
 	static const std::string TOP_FOLDER;
 };

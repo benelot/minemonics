@@ -58,6 +58,9 @@ class access;
 class CreatureModel: public Serializable {
 public:
 	CreatureModel();
+	CreatureModel(PopulationModel* const populationModel,
+		const PhysicsController::PhysicsModelType physicsModelType,
+		const Ogre::Vector3 position, const double branchiness);
 	CreatureModel(const CreatureModel& creatureModel);
 
 	virtual ~CreatureModel();
@@ -70,9 +73,7 @@ public:
 	 * @param position The creature's position.
 	 * @param branchiness The branchiness parameter defining whether the creature branches into many limbs.
 	 */
-	void initialize(PopulationModel* const populationModel,
-		const PhysicsController::PhysicsModelType physicsModelType,
-		const Ogre::Vector3 position, const double branchiness);
+	void initialize();
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.
@@ -238,6 +239,7 @@ public:
 	virtual void load() {
 		SaveController<CreatureModel> creatureModelSaver;
 		creatureModelSaver.restore(*this, mSerializationPath.c_str());
+		mPhenotypeModel->setCreatureModel(this);
 	}
 
 	/**
@@ -287,6 +289,10 @@ public:
 		return mPhysicsModelType;
 	}
 
+	void setPopulationModel(PopulationModel* populationModel) {
+		mPopulationModel = populationModel;
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -304,7 +310,7 @@ public:
 
 		/**The genome of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mGenotype)
-
+		& BOOST_SERIALIZATION_NVP(mPhysicsModelType)
 		& BOOST_SERIALIZATION_NVP(mPhenotypeModel)
 
 		/**The juries of the creature model*/

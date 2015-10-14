@@ -55,6 +55,14 @@ public:
 
 	SRBLimbModel();
 	SRBLimbModel(const SRBLimbModel& SRBLimbModel);
+	SRBLimbModel(btDynamicsWorld* world, CreatureModel* creatureModel,
+		LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
+		Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
+		double mass, double restitution, double friction,
+		Ogre::ColourValue color, bool isIntraBodyColliding,
+		std::vector<ComponentModel*>::size_type ownIndex);
 
 	virtual ~SRBLimbModel();
 
@@ -71,14 +79,7 @@ public:
 	 * @param friction The friction of the limb.
 	 * @param color The color of the limb.
 	 */
-	void initialize(btDynamicsWorld* world, CreatureModel* creatureModel,
-		LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
-		Ogre::Quaternion orientation,
-		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
-		double mass, double restitution, double friction,
-		Ogre::ColourValue color, bool isIntraBodyColliding,
-		std::vector<ComponentModel*>::size_type ownIndex);
+	virtual void initialize();
 
 	void update(double timeSinceLastTick);
 	/**

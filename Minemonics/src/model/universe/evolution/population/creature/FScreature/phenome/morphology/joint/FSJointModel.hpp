@@ -56,10 +56,7 @@ public:
 	FSJointModel();
 	FSJointModel(const FSJointModel& jointModel);
 	FSJointModel(const FSJointModel* jointModel);
-
-	virtual ~FSJointModel();
-
-	void initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
+	FSJointModel(btDynamicsWorld* const world, btRigidBody* const limbA,
 		btRigidBody* const limbB, const btTransform localA,
 		const btTransform localB,
 		const std::vector<FSLimbModel*>::size_type indexA,
@@ -67,8 +64,12 @@ public:
 		const std::vector<FSJointModel*>::size_type ownIndex,
 		JointPhysics::JointType type, bool jointPitchEnabled,
 		bool jointYawEnabled, bool jointRollEnabled,
-		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
-		Ogre::Vector3 jointUpperLimits);
+		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointMinAngle,
+		Ogre::Vector3 jointMaxAngle);
+
+	virtual ~FSJointModel();
+
+	void initialize();
 
 	/**
 	 * Update the joint model.

@@ -52,10 +52,7 @@ public:
 	SRBJointModel();
 	SRBJointModel(const SRBJointModel& SRBJointModel);
 	SRBJointModel(const SRBJointModel* SRBJointModel);
-
-	virtual ~SRBJointModel();
-
-	void initialize(btDynamicsWorld* const world, btRigidBody* const limbA,
+	SRBJointModel(btDynamicsWorld* const world, btRigidBody* const limbA,
 		btRigidBody* const limbB, const btTransform localA,
 		const btTransform localB,
 		const std::vector<LimbModel*>::size_type indexA,
@@ -65,6 +62,10 @@ public:
 		bool jointYawEnabled, bool jointRollEnabled,
 		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
 		Ogre::Vector3 jointUpperLimits);
+
+	virtual ~SRBJointModel();
+
+	virtual void initialize();
 
 	/**
 	 * Update the joint model.

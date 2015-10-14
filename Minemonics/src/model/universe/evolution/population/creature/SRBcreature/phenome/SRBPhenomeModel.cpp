@@ -29,8 +29,11 @@
 
 BoostLogger SRBPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 SRBPhenomeModel::_Init SRBPhenomeModel::_initializer;
-SRBPhenomeModel::SRBPhenomeModel() {
-	mControllers.clear();
+SRBPhenomeModel::~SRBPhenomeModel() {
+}
+
+SRBPhenomeModel::SRBPhenomeModel(CreatureModel* const creatureModel) {
+	mCreatureModel = creatureModel;
 }
 
 SRBPhenomeModel::SRBPhenomeModel(const SRBPhenomeModel& SRBPhenomeModel) {
@@ -62,8 +65,9 @@ SRBPhenomeModel::SRBPhenomeModel(const SRBPhenomeModel& SRBPhenomeModel) {
 	}
 }
 
-SRBPhenomeModel::~SRBPhenomeModel() {
+void SRBPhenomeModel::initialize() {
 }
+
 
 void SRBPhenomeModel::update(const double timeSinceLastTick) {
 	//update all controllers
@@ -96,6 +100,9 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 
 }
 
+SRBPhenomeModel::SRBPhenomeModel() {
+}
+
 void SRBPhenomeModel::calm() {
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
@@ -103,13 +110,11 @@ void SRBPhenomeModel::calm() {
 	}
 }
 
-int SRBPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
+int SRBPhenomeModel::performEmbryogenesis() {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
 		cleanup();
 		std::list<PhenotypeGenerator*> generatorList;
-
-		mCreatureModel = creatureModel;
 
 		// get the first gene from the genome
 		Gene* gene = mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
@@ -117,7 +122,7 @@ int SRBPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
 		std::map<int, int> repList;
-		rootGenerator->initialize(repList, creatureModel->getInitialPosition(),
+		rootGenerator->initialize(repList, mCreatureModel->getInitialPosition(),
 			Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
 		rootGenerator->setGene(gene);
 		rootGenerator->setRoot2LeafPath(0);

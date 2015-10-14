@@ -124,7 +124,7 @@ int Planet::getTotalCreatureQty() {
 }
 
 PhysicsController::PhysicsModelType Planet::getPhysicsModelType() {
-	return mEnvironment->getEnvironmentModel()->getPhysicsController()->getPhysicsModelType();
+	return mPlanetModel->getPhysicsModelType();
 }
 
 void Planet::addEpoch(Epoch* epoch) {

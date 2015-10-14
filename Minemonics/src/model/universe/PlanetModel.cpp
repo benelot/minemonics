@@ -117,3 +117,7 @@ void PlanetModel::load() {
 		mEvolutionModel.getPopulationModels().push_back(population);
 	}
 }
+
+PhysicsController::PhysicsModelType PlanetModel::getPhysicsModelType() {
+	return mEnvironmentModel->getPhysicsController()->getPhysicsModelType();
+}

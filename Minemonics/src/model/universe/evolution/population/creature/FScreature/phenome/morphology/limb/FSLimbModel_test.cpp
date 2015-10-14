@@ -23,8 +23,7 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		limbModel = new FSLimbModel();
-		limbModel->initialize(NULL, NULL,
+		limbModel = new FSLimbModel(NULL, NULL,
 			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
@@ -36,6 +35,7 @@ protected:
 				randomness->nextUnifDouble(0, 1),
 				randomness->nextUnifDouble(0, 1)), true,
 			randomness->nextUnifPosInt(0, 10));
+		limbModel->initialize();
 	}
 
 	virtual void TearDown() {
@@ -54,8 +54,7 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		limbModel = new FSLimbModel();
-		limbModel->initialize(NULL, NULL,
+		limbModel = new FSLimbModel(NULL, NULL,
 			(LimbPhysics::PrimitiveType) randomness->nextUnifPosInt(1,
 				LimbPhysics::NUM_PRIMITIVES), randomness->nextVector(),
 			randomness->nextQuaternion(), randomness->nextVector(),
@@ -67,6 +66,7 @@ protected:
 				randomness->nextUnifDouble(0, 1),
 				randomness->nextUnifDouble(0, 1)), true,
 			randomness->nextUnifPosInt(0, 10));
+		limbModel->initialize();
 
 		limbModel2 = new FSLimbModel();
 

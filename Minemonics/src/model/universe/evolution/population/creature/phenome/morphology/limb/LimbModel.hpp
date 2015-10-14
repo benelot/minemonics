@@ -56,6 +56,14 @@ public:
 
 	LimbModel();
 	LimbModel(const LimbModel& limbModel);
+	LimbModel(btDynamicsWorld* world,
+		CreatureModel* creatureModel, LimbPhysics::PrimitiveType type,
+		Ogre::Vector3 position, Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
+		double mass, double restitution, double friction,
+		Ogre::ColourValue color, bool isIntraBodyColliding,
+		std::vector<ComponentModel*>::size_type ownIndex);
 
 	virtual ~LimbModel();
 
@@ -72,14 +80,7 @@ public:
 	 * @param friction The friction of the limb.
 	 * @param color The color of the limb.
 	 */
-	virtual void initialize(btDynamicsWorld* world,
-		CreatureModel* creatureModel, LimbPhysics::PrimitiveType type,
-		Ogre::Vector3 position, Ogre::Quaternion orientation,
-		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
-		double mass, double restitution, double friction,
-		Ogre::ColourValue color, bool isIntraBodyColliding,
-		std::vector<ComponentModel*>::size_type ownIndex) = 0;
+	virtual void initialize() = 0;
 
 	virtual void update(double timeSinceLastTick);
 	/**

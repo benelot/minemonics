@@ -41,6 +41,8 @@ public:
 	};
 
 	ComponentModel();
+	ComponentModel(const ComponentType type,
+	const std::vector<ComponentModel*>::size_type ownIndex);
 	virtual ~ComponentModel();
 
 	/**

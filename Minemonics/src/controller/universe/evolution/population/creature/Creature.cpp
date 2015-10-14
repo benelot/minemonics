@@ -27,9 +27,9 @@ Creature::Creature(Population* const population,
 	const PhysicsController::PhysicsModelType physicsModelType,
 	const Ogre::Vector3 position, const double branchiness) {
 	// set up the creature model
-	mCreatureModel = new CreatureModel();
-	mCreatureModel->initialize(population->getPopulationModel(),
+	mCreatureModel = new CreatureModel(population->getPopulationModel(),
 		physicsModelType, position, branchiness);
+	mCreatureModel->initialize();
 
 	// set up the phenotype
 	mPhenotype.initialize(this);
@@ -39,10 +39,10 @@ Creature::Creature(Population* const population,
 
 Creature::Creature(CreatureModel* const creatureModel) :
 	mCreatureModel(creatureModel) {
+	mPhenotype.setPhenotypeModel(mCreatureModel->getPhenotypeModel());
+
 	// set up the phenotype
 	mPhenotype.initialize(this);
-
-	mPhenotype.setPhenotypeModel(mCreatureModel->getPhenotypeModel());
 }
 
 Creature::~Creature() {
@@ -52,7 +52,7 @@ Creature::~Creature() {
 }
 
 int Creature::performEmbryogenesis() {
-	return mPhenotype.performEmbryogenesis(mCreatureModel);
+	return mPhenotype.performEmbryogenesis();
 }
 
 void Creature::reset(const Ogre::Vector3 position) {

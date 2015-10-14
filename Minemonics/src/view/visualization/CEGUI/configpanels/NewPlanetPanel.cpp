@@ -462,7 +462,6 @@ void NewPlanetPanel::onConfirmClicked() {
 
 	std::string planetFilePath = folderPath + std::string("/planet.pl");
 
-
 	planet->setSerializationPath(planetFilePath);
 	planet->save();
 

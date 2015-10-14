@@ -72,6 +72,8 @@ public:
 	JointPhysics();
 	virtual ~JointPhysics();
 
+	virtual void initialize() = 0;
+
 	virtual JointPhysics* clone() = 0;
 
 	/**

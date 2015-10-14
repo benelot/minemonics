@@ -46,16 +46,16 @@ SRBJointBt::SRBJointBt(const SRBJointBt& SRBJointBt) {
 	}
 }
 
-void SRBJointBt::initialize(btDynamicsWorld* const world,
-	btRigidBody* const bodyA, btRigidBody* const bodyB,
-	const btTransform& tframeInA, const btTransform& tframeInB,
-	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
-	bool jointRollEnabled, btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
+	btRigidBody* const bodyB, const btTransform& tframeInA,
+	const btTransform& tframeInB, JointPhysics::JointType type,
+	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
+	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits) {
 	mWorld = world;
 #ifndef EXCLUDE_FROM_TEST
-	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA,
-		tframeInB EXTRAPARAMS);
+	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA, tframeInB
+		EXTRAPARAMS);
 
 //	mJoint->setDamping(10000);
 
@@ -73,6 +73,9 @@ void SRBJointBt::initialize(btDynamicsWorld* const world,
 	mJointPitchAxis = OgreBulletUtils::convert(jointPitchAxis);
 	mJointMinAngle = OgreBulletUtils::convert(jointLowerLimits);
 	mJointMaxAngle = OgreBulletUtils::convert(jointUpperLimits);
+}
+
+void SRBJointBt::initialize() {
 
 }
 

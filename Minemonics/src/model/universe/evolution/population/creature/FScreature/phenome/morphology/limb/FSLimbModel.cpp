@@ -31,10 +31,7 @@ FSLimbModel::FSLimbModel(const FSLimbModel& limbModel) {
 	mParentJointIndex = limbModel.mParentJointIndex;
 }
 
-FSLimbModel::~FSLimbModel() {
-}
-
-void FSLimbModel::initialize(btDynamicsWorld* const world,
+FSLimbModel::FSLimbModel(btDynamicsWorld* const world,
 	CreatureModel* const creatureModel, const LimbPhysics::PrimitiveType type,
 	const Ogre::Vector3 position, const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
@@ -42,20 +39,25 @@ void FSLimbModel::initialize(btDynamicsWorld* const world,
 	const double mass, const double restitution, const double friction,
 	const Ogre::ColourValue color, bool isIntraBodyColliding,
 	const std::vector<ComponentModel*>::size_type ownIndex) {
-	ComponentModel::initialize(ComponentModel::LimbComponent, ownIndex);
-
 	// initialize the physics model of the limb
-	mLimbPhysics = new FSLimbBt();
-	mLimbPhysics->initialize(world, this, type, position, orientation,
+	mLimbPhysics = new FSLimbBt(world, creatureModel, type, position, orientation,
 		initialRelativePosition, initialOrientation, dimensions, mass,
 		restitution, friction, color, isIntraBodyColliding);
-
+	mOwnIndex = ownIndex;
 	mCreatureModel = creatureModel;
 
 	//TODO: proof of concept, make better.
-	Tactioceptor* tactioceptor = new Tactioceptor();
-	mSensors.push_back(tactioceptor);
-	mTactioceptors.push_back(tactioceptor);
+//	Tactioceptor* tactioceptor = new Tactioceptor();
+//	mSensors.push_back(tactioceptor);
+//	mTactioceptors.push_back(tactioceptor);
+}
+
+FSLimbModel::~FSLimbModel() {
+}
+
+void FSLimbModel::initialize() {
+	ComponentModel::initialize(ComponentModel::LimbComponent, mOwnIndex);
+	mLimbPhysics->initialize();
 }
 
 void FSLimbModel::reset(Ogre::Vector3 position) {

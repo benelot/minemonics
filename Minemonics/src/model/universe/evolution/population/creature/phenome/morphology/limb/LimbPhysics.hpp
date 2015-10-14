@@ -66,14 +66,7 @@ public:
 	 * @param dimensions The dimensions of the limb.
 	 * @param mass The mass of the limb.
 	 */
-	virtual void initialize(btDynamicsWorld* const world, void* const limbModel,
-		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-		const Ogre::Quaternion orientation,
-		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation,
-		const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction,
-		const Ogre::ColourValue color, bool isIntraBodyColliding) = 0;
+	virtual void initialize() = 0;
 
 	/**
 	 * Clone the limb physics.
@@ -334,6 +327,10 @@ public:
 			& BOOST_SERIALIZATION_NVP(mColor.g)
 			& BOOST_SERIALIZATION_NVP(mColor.b)
 
+			& BOOST_SERIALIZATION_NVP(mPosition.x)
+			& BOOST_SERIALIZATION_NVP(mPosition.y)
+			& BOOST_SERIALIZATION_NVP(mPosition.z)
+
 			& BOOST_SERIALIZATION_NVP(mInitialRelativeXPosition) /**!< The limb's relative position*/
 			& BOOST_SERIALIZATION_NVP(mInitialRelativeYPosition)
 			& BOOST_SERIALIZATION_NVP(mInitialRelativeZPosition)
@@ -359,6 +356,7 @@ protected:
 
 	Ogre::ColourValue mColor; /**!< The color of the limb. */
 
+	Ogre::Vector3 mPosition;
 	double mInitialRelativeXPosition, /**!< Initial position at birth relative to the root node*/
 	mInitialRelativeYPosition, mInitialRelativeZPosition;
 

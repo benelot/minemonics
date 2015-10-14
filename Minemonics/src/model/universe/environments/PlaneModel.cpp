@@ -20,6 +20,8 @@ PlaneModel::PlaneModel() {
 }
 
 PlaneModel::PlaneModel(PhysicsController::PhysicsModelType type){
+	mType = EnvironmentModel::PLANE;
+
 	mEnvironmentPhysics = new PlaneBt();
 	// set up the physics controller
 	mPhysicsController = new GroundController(type);
@@ -29,7 +31,6 @@ PlaneModel::~PlaneModel() {
 }
 
 void PlaneModel::initialize() {
-	mEnvironmentPhysics = new PlaneBt();
 	getPlaneBt()->initialize();
 }
 

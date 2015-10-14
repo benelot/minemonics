@@ -27,9 +27,37 @@
 
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
-		NULL), mPhenotypeModel(NULL), mPhysicsModelType(
+	NULL), mPhenotypeModel(NULL), mPhysicsModelType(
 		PhysicsController::RigidbodyModel) {
-	mJuries.clear();
+}
+
+CreatureModel::CreatureModel(PopulationModel* const populationModel,
+	const PhysicsController::PhysicsModelType physicsModelType,
+	const Ogre::Vector3 position, const double branchiness) :
+	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
+		-1), mWorld(
+		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()), mPhenotypeModel(
+	NULL), mPhysicsModelType(physicsModelType), mInitialPosition(position), mPosition(
+		position) {
+
+	//set first name of creature
+	NameGenerator nameGenerator;
+	mFirstName = nameGenerator.generateFirstName();
+
+	//generate random genome for the creature
+	mGenotype.createRandomGenome(branchiness);
+
+	// add the phenome model depending on physics model type
+	switch (mPhysicsModelType) {
+	case PhysicsController::FeatherstoneModel:
+		mPhenotypeModel = new FSPhenomeModel(this);
+		break;
+	case PhysicsController::RigidbodyModel:
+		mPhenotypeModel = new SRBPhenomeModel(this);
+		break;
+	default:
+		break;
+	}
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
@@ -54,28 +82,10 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	}
 }
 
-void CreatureModel::initialize(PopulationModel* const populationModel,
-	const PhysicsController::PhysicsModelType physicsModelType,
-	const Ogre::Vector3 position, const double branchiness) {
-	mPopulationModel = populationModel;
-	mInitialPosition = position;
-	mPosition = position;
-	NameGenerator nameGenerator;
-	mFirstName = nameGenerator.generateFirstName();
-	mGenotype.createRandomGenome(branchiness);
-	mPhysicsModelType = physicsModelType;
+void CreatureModel::initialize() {
+	//initialize the phenome model
+	mPhenotypeModel->initialize();
 
-	switch (physicsModelType) {
-	case PhysicsController::FeatherstoneModel:
-		mPhenotypeModel = new FSPhenomeModel();
-		break;
-	case PhysicsController::RigidbodyModel:
-		mPhenotypeModel = new SRBPhenomeModel();
-		break;
-	default:
-		break;
-	}
-	mPhenotypeModel->initialize(this);
 }
 
 CreatureModel::~CreatureModel() {
@@ -168,7 +178,7 @@ bool CreatureModel::equals(const CreatureModel& creature) const {
 }
 
 void CreatureModel::performEmbryogenesis() {
-	mPhenotypeModel->performEmbryogenesis(this);
+	mPhenotypeModel->performEmbryogenesis();
 }
 
 void CreatureModel::giveRebirth() {

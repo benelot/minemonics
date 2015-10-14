@@ -106,8 +106,8 @@ void MixedGenome::createRandomGenome(double branchiness) {
 
 	repairGenes();
 	if (mGenes.size() != 0) {
-		int geneSize = mGenes.size()-1;
-		std::cout <<"GenomeSize: " << geneSize << std::endl;
+		int geneSize = mGenes.size() - 1;
+		std::cout << "GenomeSize: " << geneSize << std::endl;
 		addGeneBranch(mRootIndex,
 			Randomness::getSingleton()->nextUnifPosInt(0, geneSize));
 	}
@@ -171,6 +171,18 @@ void MixedGenome::addRandomGeneBranch() {
 }
 
 void MixedGenome::addGeneBranch(const int geneIndex1, const int geneIndex2) {
+	int geneIndex1C = geneIndex1;
+	//TODO: Sometimes I get very high random values here.
+	if (geneIndex1C > mGenes.size() - 1) {
+		geneIndex1C = mGenes.size() - 1;
+	}
+
+	int geneIndex2C = geneIndex2;
+	//TODO: Sometimes I get very high random values here.
+	if (geneIndex2C > mGenes.size() - 1) {
+		geneIndex2C = mGenes.size() - 1;
+	}
+
 	Gene::GeneType type =
 		(Gene::GeneType) Randomness::getSingleton()->nextUnifPosInt(
 			Gene::MorphoGene, Gene::NUM_GENES - 1);
@@ -180,8 +192,10 @@ void MixedGenome::addGeneBranch(const int geneIndex1, const int geneIndex2) {
 	case Gene::MorphoGene: {
 		geneBranch = new MorphogeneBranch();
 		((MorphogeneBranch*) geneBranch)->initialize();
+
 		((Morphogene*) mGenes[geneIndex1])->getGeneBranches().push_back(
 			((MorphogeneBranch*) geneBranch));
+
 		geneBranch->setActive(true);
 		((MorphogeneBranch*) geneBranch)->setBranchGeneType(geneIndex2);
 

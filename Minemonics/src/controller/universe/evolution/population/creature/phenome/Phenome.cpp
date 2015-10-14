@@ -88,16 +88,18 @@ Phenome::~Phenome() {
 
 void Phenome::initialize(Creature* const creature) {
 	mCreature = creature;
+	performEmbryogenesis();
 }
 
 /**
  * Performs the embryogenesis of a genome. We follow each part of the tree with the phenotype generators.
  * @param creatureModel the handle to the creatureModel we want to get back from the physics engine when we pick a creature.
  */
-int Phenome::performEmbryogenesis(CreatureModel* const creatureModel) {
+int Phenome::performEmbryogenesis() {
 	cleanup();
 	//perform the embryogenesis in the model
-	int limbQty = mPhenotypeModel->performEmbryogenesis(creatureModel);
+	mPhenotypeModel->performEmbryogenesis();
+	int limbQty = mPhenotypeModel->getLimbModels().size();
 
 	if (limbQty == 0) {
 		return limbQty;

@@ -49,6 +49,12 @@ class FSJointBt: public JointPhysics {
 public:
 	FSJointBt();
 	FSJointBt(const FSJointBt& jointBt);
+	FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
+		btRigidBody* const bodyB, const btTransform& tframeInA,
+		const btTransform& tframeInB, JointPhysics::JointType type,
+		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
+		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+		btVector3 jointUpperLimits);
 
 	/**
 	 * Initialize the joint bullet physics model.
@@ -58,12 +64,7 @@ public:
 	 * @param tframeInA The joint position in reference frame A.
 	 * @param tframeInB The joint position in reference frame B.
 	 */
-	void initialize(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB, JointPhysics::JointType type,
-		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
-		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-		btVector3 jointUpperLimits);
+	void initialize();
 	virtual ~FSJointBt();
 
 	/**

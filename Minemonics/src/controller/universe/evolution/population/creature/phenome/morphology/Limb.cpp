@@ -90,20 +90,26 @@ void Limb::initialize(Creature* const creature,
 	//initialize the model of the limb
 	switch (creature->getPhysicsModelType()) {
 	case PhysicsController::RigidbodyModel:
-		mLimbModel = new SRBLimbModel();
+		mLimbModel =
+			new SRBLimbModel(
+				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+				creature->getCreatureModel(), type, position, orientation,
+				initialRelativePosition, initialOrientation, dimensions, mass,
+				restitution, friction, color, isIntraBodyColliding, ownIndex);
 		break;
 	case PhysicsController::FeatherstoneModel:
-		mLimbModel = new FSLimbModel();
+		mLimbModel =
+			new FSLimbModel(
+				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+				creature->getCreatureModel(), type, position, orientation,
+				initialRelativePosition, initialOrientation, dimensions, mass,
+				restitution, friction, color, isIntraBodyColliding, ownIndex);
 		break;
 	default:
 		break;
 	}
 
-	mLimbModel->initialize(
-		creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-		creature->getCreatureModel(), type, position, orientation,
-		initialRelativePosition, initialOrientation, dimensions, mass,
-		restitution, friction, color, isIntraBodyColliding, ownIndex);
+	mLimbModel->initialize();
 
 	mCreature = creature;
 

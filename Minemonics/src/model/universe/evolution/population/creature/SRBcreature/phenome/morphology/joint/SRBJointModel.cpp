@@ -26,10 +26,7 @@ SRBJointModel::SRBJointModel(const SRBJointModel& SRBJointModel) :
 	JointModel(SRBJointModel) {
 }
 
-SRBJointModel::~SRBJointModel() {
-}
-
-void SRBJointModel::initialize(btDynamicsWorld* const world,
+SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 	btRigidBody* const limbA, btRigidBody* const limbB,
 	const btTransform localA, const btTransform localB,
 	const std::vector<LimbModel*>::size_type indexA,
@@ -44,8 +41,7 @@ void SRBJointModel::initialize(btDynamicsWorld* const world,
 	mOwnIndex = ownIndex;
 	mLocalA = localA;
 	mLocalB = localB;
-	mJointPhysics = new SRBJointBt();
-	((SRBJointBt*) mJointPhysics)->initialize(world, limbA, limbB, localA,
+	mJointPhysics = new SRBJointBt(world, limbA, limbB, localA,
 		localB, type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointLowerLimits),
@@ -69,6 +65,14 @@ void SRBJointModel::initialize(btDynamicsWorld* const world,
 //			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
 //	mSensors.push_back(limitceptor);
 //	mLimitceptors.push_back(limitceptor);
+
+}
+
+SRBJointModel::~SRBJointModel() {
+}
+
+void SRBJointModel::initialize(){
+	((SRBJointBt*) mJointPhysics)->initialize();
 }
 
 void SRBJointModel::update(double timeSinceLastTick) {

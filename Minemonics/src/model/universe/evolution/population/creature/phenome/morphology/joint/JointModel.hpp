@@ -59,10 +59,7 @@ public:
 	JointModel();
 	JointModel(const JointModel& jointModel);
 	JointModel(JointModel* const jointModel);
-
-	virtual ~JointModel();
-
-	virtual void initialize(btDynamicsWorld* const world,
+	JointModel(btDynamicsWorld* const world,
 		btRigidBody* const limbA, btRigidBody* const limbB,
 		const btTransform localA, const btTransform localB,
 		const std::vector<LimbModel*>::size_type indexA,
@@ -71,7 +68,11 @@ public:
 		JointPhysics::JointType type, bool jointPitchEnabled,
 		bool jointYawEnabled, bool jointRollEnabled,
 		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
-		Ogre::Vector3 jointUpperLimits) = 0;
+		Ogre::Vector3 jointUpperLimits);
+
+	virtual ~JointModel();
+
+	virtual void initialize() = 0;
 
 	/**
 	 * Update the joint model.
@@ -241,6 +242,20 @@ public:
 		ar.register_type(static_cast<FSJointBt*>(NULL));
 		ar.register_type(static_cast<SRBJointBt*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
+		& BOOST_SERIALIZATION_NVP(mLocalAPosition.x)
+		& BOOST_SERIALIZATION_NVP(mLocalAPosition.y)
+		& BOOST_SERIALIZATION_NVP(mLocalAPosition.z)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.w)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.x)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.y)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.z)
+		& BOOST_SERIALIZATION_NVP(mLocalBPosition.x)
+		& BOOST_SERIALIZATION_NVP(mLocalBPosition.y)
+		& BOOST_SERIALIZATION_NVP(mLocalBPosition.z)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.w)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.x)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.y)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.z)
 		& BOOST_SERIALIZATION_NVP(mJointPhysics) /**!< The physics component of the joint model*/
 		& BOOST_SERIALIZATION_NVP(mOwnIndex) /**!< The joint's own index */
 		& BOOST_SERIALIZATION_NVP(mParentIndex) /**!< The joint's parent limb index */
@@ -258,6 +273,11 @@ protected:
 	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex;
 
 	btTransform mLocalA, mLocalB;
+
+	Ogre::Vector3 mLocalAPosition;
+	Ogre::Quaternion mLocalAOrientation;
+	Ogre::Vector3 mLocalBPosition;
+	Ogre::Quaternion mLocalBOrientation;
 
 	/**
 	 * The joint's own index.

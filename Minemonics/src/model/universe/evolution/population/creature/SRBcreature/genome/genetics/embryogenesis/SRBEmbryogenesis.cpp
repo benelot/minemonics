@@ -219,9 +219,7 @@ void SRBEmbryogenesis::transcribeMorphogene(
 		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 		//##
 		// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
-		SRBLimbBt* childLimbBt = new SRBLimbBt();
-
-		childLimbBt->initialize(phenomeModel->getCreatureModel()->getWorld(),
+		SRBLimbBt* childLimbBt = new SRBLimbBt(phenomeModel->getCreatureModel()->getWorld(),
 			NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
 			Ogre::Quaternion(childMorphogene->getOrientationW(),
 				childMorphogene->getOrientationX(),
@@ -243,6 +241,8 @@ void SRBEmbryogenesis::transcribeMorphogene(
 				* generator->getCurrentShrinkageFactor()
 				* childMorphogene->getZ(), childMorphogene->getRestitution(),
 			childMorphogene->getFriction(), Ogre::ColourValue(0, 0, 0), false);
+
+		childLimbBt->initialize();
 
 		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(
@@ -339,9 +339,6 @@ void SRBEmbryogenesis::transcribeMorphogene(
 				childMorphogene->getOrientationZ()));
 	}
 
-	//build the limb out of the morphogene
-	SRBLimbModel* childLimb = new SRBLimbModel();
-
 	double sizeX =
 		(generator->getCurrentShrinkageFactor() * childMorphogene->getX()
 			< MorphologyConfiguration::LIMB_MIN_SIZE) ?
@@ -369,7 +366,8 @@ void SRBEmbryogenesis::transcribeMorphogene(
 			MorphologyConfiguration::LIMB_MAX_SIZE :
 			generator->getCurrentShrinkageFactor() * childMorphogene->getZ();
 
-	childLimb->initialize(phenomeModel->getCreatureModel()->getWorld(),
+	//build the limb out of the morphogene
+	SRBLimbModel* childLimb = new SRBLimbModel(phenomeModel->getCreatureModel()->getWorld(),
 		phenomeModel->getCreatureModel(), childMorphogene->getPrimitiveType(),
 		generator->getPosition(), generator->getOrientation(),
 		Ogre::Vector3(
@@ -385,6 +383,8 @@ void SRBEmbryogenesis::transcribeMorphogene(
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
 		childMorphogene->isIntraBodyColliding(),
 		phenomeModel->getLimbModels().size());
+
+	childLimb->initialize();
 
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
@@ -428,29 +428,29 @@ void SRBEmbryogenesis::transcribeMorphogene(
 //				childMorphogene->getJointRoll());
 
 		//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
-		SRBJointModel* joint = new SRBJointModel();
+		SRBJointModel* joint = new SRBJointModel(phenomeModel->getCreatureModel()->getWorld(),
+			/*parent limb*/
+			((SRBLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
+			/*child limb*/
+			((SRBLimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
+				localParentJointTransform, localChildJointTransform,
+				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
+				phenomeModel->getJointModels().size(),
+				parentMorphogeneBranch->getJointType(),
+				parentMorphogeneBranch->isJointPitchEnabled(),
+				parentMorphogeneBranch->isJointYawEnabled(),
+				parentMorphogeneBranch->isJointRollEnabled(),
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
+					parentMorphogeneBranch->getJointPitchAxisY(),
+					parentMorphogeneBranch->getJointPitchAxisZ()),
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+					parentMorphogeneBranch->getJointYawMinAngle(),
+					parentMorphogeneBranch->getJointRollMinAngle()),
+				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+					parentMorphogeneBranch->getJointYawMaxAngle(),
+					parentMorphogeneBranch->getJointRollMaxAngle()));
 
-		joint->initialize(phenomeModel->getCreatureModel()->getWorld(),
-		/*parent limb*/
-		((SRBLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
-		/*child limb*/
-		((SRBLimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
-			localParentJointTransform, localChildJointTransform,
-			parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
-			phenomeModel->getJointModels().size(),
-			parentMorphogeneBranch->getJointType(),
-			parentMorphogeneBranch->isJointPitchEnabled(),
-			parentMorphogeneBranch->isJointYawEnabled(),
-			parentMorphogeneBranch->isJointRollEnabled(),
-			Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
-				parentMorphogeneBranch->getJointPitchAxisY(),
-				parentMorphogeneBranch->getJointPitchAxisZ()),
-			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
-				parentMorphogeneBranch->getJointYawMinAngle(),
-				parentMorphogeneBranch->getJointRollMinAngle()),
-			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
-				parentMorphogeneBranch->getJointYawMaxAngle(),
-				parentMorphogeneBranch->getJointRollMaxAngle()));
+		joint->initialize();
 
 		std::cout << "Joint Parent: " << joint->getParentIndex()
 			<< " /Joint Child: " << joint->getChildIndex() << std::endl;

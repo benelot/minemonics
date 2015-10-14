@@ -55,6 +55,16 @@ BoostLogger FSPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 FSPhenomeModel::_Init FSPhenomeModel::_initializer;
 FSPhenomeModel::FSPhenomeModel() :
 	mMultiBody(NULL), mWorld(NULL) {
+}
+
+FSPhenomeModel::FSPhenomeModel(CreatureModel* const creatureModel) :
+	PhenomeModel(creatureModel), mMultiBody(NULL), mWorld(NULL) {
+
+	//set the dynamics world for the phenome model
+#ifndef EXCLUDE_FROM_TEST
+	mWorld =
+		(btMultiBodyDynamicsWorld*) mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+#endif
 	mControllers.clear();
 }
 
@@ -92,18 +102,33 @@ FSPhenomeModel::~FSPhenomeModel() {
 	mMultiBody = NULL;
 	mWorld = NULL;
 
-	while(!mLimitConstraints.empty()){
+	while (!mLimitConstraints.empty()) {
 		delete mLimitConstraints.back();
 		mLimitConstraints.pop_back();
 	}
 }
 
-void FSPhenomeModel::initialize(CreatureModel* const creatureModel) {
-	mCreatureModel = creatureModel;
-#ifndef EXCLUDE_FROM_TEST
-	mWorld =
-		(btMultiBodyDynamicsWorld*) mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
-#endif
+void FSPhenomeModel::initialize() {
+
+	performEmbryogenesis();
+
+	//initialize the limb models if it did not already happen in embryogenesis
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		((FSLimbModel*) (*lit))->setWorld(getWorld());
+		(*lit)->initialize();
+	}
+
+	//initialize the joint models if it did not already happen in embryogenesis
+	for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		(*jit)->initialize();
+	}
+
+	generateBody();
+
+	addJointConstraints();
+
 }
 
 void FSPhenomeModel::update(const double timeSinceLastTick) {
@@ -131,16 +156,37 @@ void FSPhenomeModel::update(const double timeSinceLastTick) {
 void FSPhenomeModel::addToWorld() {
 	if (!isInWorld()) {
 		if (mMultiBody != NULL) {
-			mWorld->addMultiBody(mMultiBody);
+			getWorld()->addMultiBody(mMultiBody);
 		}
 	}
 	PhenomeModel::addToWorld();
 }
 
+//LimbModel* FSPhenomeModel::addLimb(btDynamicsWorld* const world,
+//	CreatureModel* const creatureModel, const LimbPhysics::PrimitiveType type,
+//	const Ogre::Vector3 position, const Ogre::Quaternion orientation,
+//	const Ogre::Vector3 initialRelativePosition,
+//	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
+//	const double mass, const double restitution, const double friction,
+//	const Ogre::ColourValue color, bool isIntraBodyColliding,
+//	const std::vector<ComponentModel*>::size_type ownIndex) {
+//}
+//
+//JointModel* FSPhenomeModel::addJoint(btDynamicsWorld* const world,
+//	btRigidBody* const limbA, btRigidBody* const limbB,
+//	const btTransform localA, const btTransform localB,
+//	const std::vector<FSLimbModel*>::size_type indexA,
+//	const std::vector<FSLimbModel*>::size_type indexB,
+//	const std::vector<FSJointModel*>::size_type ownIndex,
+//	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
+//	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
+//	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
+//}
+
 void FSPhenomeModel::removeFromWorld() {
 	if (isInWorld()) {
 		if (mMultiBody != NULL) {
-			mWorld->removeMultiBody(mMultiBody);
+			getWorld()->removeMultiBody(mMultiBody);
 		}
 	}
 	PhenomeModel::removeFromWorld();
@@ -153,21 +199,20 @@ void FSPhenomeModel::calm() {
 	}
 }
 
-int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
+int FSPhenomeModel::performEmbryogenesis() {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
 		cleanup();
 		std::list<PhenotypeGenerator*> generatorList;
 
-		mCreatureModel = creatureModel;
-
 		// get the first gene from the genome
-		Gene* gene = mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
+		Gene* gene =
+			mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
 		std::map<int, int> repList;
-		rootGenerator->initialize(repList, creatureModel->getInitialPosition(),
+		rootGenerator->initialize(repList, mCreatureModel->getInitialPosition(),
 			Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
 		rootGenerator->setGene(gene);
 		rootGenerator->setRoot2LeafPath(0);
@@ -176,8 +221,7 @@ int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 		while (!generatorList.empty()) {
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Phenome generator qty:" << generatorList.size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
 
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
@@ -189,11 +233,18 @@ int FSPhenomeModel::performEmbryogenesis(CreatureModel* const creatureModel) {
 			delete generator;
 		}
 
-		generateBody();
-
-		addJointConstraints();
-
 		mDeveloped = true;
+	} else {
+		mComponentModels.clear();
+		for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+			it != mLimbModels.end(); it++) {
+			mComponentModels.push_back((*it));
+		}
+
+		for (std::vector<JointModel*>::const_iterator it = mJointModels.begin();
+			it != mJointModels.end(); it++) {
+			mComponentModels.push_back((*it));
+		}
 	}
 	return totalSegmentCounter;
 }
@@ -204,6 +255,10 @@ void FSPhenomeModel::generateBody() {
 	bool setDamping = true;
 	bool gyro = true;
 	bool canSleep = true;
+
+	if (mMultiBody) {
+		return;
+	}
 
 	if (mJointModels.size() != 0) {
 		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
@@ -286,10 +341,10 @@ void FSPhenomeModel::generateBody() {
 			mMultiBody->setAngularDamping(0.9f);
 		}
 
-		btAlignedObjectArray < btQuaternion > worldtoLocal;
+		btAlignedObjectArray<btQuaternion> worldtoLocal;
 		worldtoLocal.resize(mMultiBody->getNumLinks() + 1);
 
-		btAlignedObjectArray < btVector3 > localOrigin;
+		btAlignedObjectArray<btVector3> localOrigin;
 		localOrigin.resize(mMultiBody->getNumLinks() + 1);
 
 		worldtoLocal[0] = mMultiBody->getWorldToBaseRot();
@@ -433,4 +488,14 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 
 FSPhenomeModel* FSPhenomeModel::clone() {
 	return new FSPhenomeModel(*this);
+}
+
+btMultiBodyDynamicsWorld* FSPhenomeModel::getWorld() {
+	if (!mWorld) {
+#ifndef EXCLUDE_FROM_TEST
+		mWorld =
+			(btMultiBodyDynamicsWorld*) mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+#endif
+	}
+	return mWorld;
 }

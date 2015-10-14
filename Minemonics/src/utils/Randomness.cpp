@@ -65,7 +65,7 @@ int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
 		return lowerLimit;
 	}
 
-	std::cout <<" Limits: " << lowerLimit << "," << upperLimit;
+//	std::cout <<" Limits: " << lowerLimit << "," << upperLimit;
 
 	//create a uniform integer distribution
 	boost::random::uniform_int_distribution<> unifIntDistribution(lowerLimit,

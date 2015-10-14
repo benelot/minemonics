@@ -45,21 +45,17 @@ class access;
 class FSPhenomeModel: public PhenomeModel {
 public:
 	FSPhenomeModel();
+	FSPhenomeModel(CreatureModel* const creatureModel);
 	FSPhenomeModel(const FSPhenomeModel& phenomeModel);
 	virtual ~FSPhenomeModel();
 
-	virtual void initialize(CreatureModel* const creatureModel);
+	virtual void initialize();
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
-	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	virtual int performEmbryogenesis(CreatureModel* const creatureModel);
-
-	void generateBody();
-
-	void addJointConstraints();
+	virtual int performEmbryogenesis();
 
 	/**
 	 * Reset the creature to the way it was born.
@@ -166,7 +162,7 @@ public:
 	}
 
 	/**
-	 * Serializes the phenome model to an xml file.
+	 * Serializes the FS phenome model to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
@@ -175,6 +171,9 @@ public:
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(PhenomeModel); /**!< Serialize the base object */
 	}
 private:
+
+	btMultiBodyDynamicsWorld* getWorld();
+
 	/**
 	 * The boost logger.
 	 */

@@ -50,6 +50,14 @@ class access;
 class SRBLimbBt: public LimbPhysics {
 public:
 	SRBLimbBt();
+	SRBLimbBt(btDynamicsWorld* const world, void* const limbModel,
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation,
+		const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction,
+		const Ogre::ColourValue color, bool isIntraBodyColliding);
 	SRBLimbBt(const SRBLimbBt& SRBLimbBt);
 
 	virtual ~SRBLimbBt();
@@ -64,14 +72,7 @@ public:
 	 * @param dimensions The dimensions of the limb.
 	 * @param mass The mass of the limb.
 	 */
-	void initialize(btDynamicsWorld* const world, void* const limbModel,
-		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-		const Ogre::Quaternion orientation,
-		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation,
-		const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction,
-		const Ogre::ColourValue color, bool isIntraBodyColliding);
+	void initialize();
 
 	/**
 	 * Clone the bullet physics limb.

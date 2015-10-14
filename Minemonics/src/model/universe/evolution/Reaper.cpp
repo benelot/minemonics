@@ -351,11 +351,11 @@ void Reaper::sowFreshly(PopulationModel* const population,
 		branchiness = Randomness::getSingleton()->nextNormalDouble(
 			MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
 			MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
-		CreatureModel* offspring = new CreatureModel();
-		offspring->setNew(true);
-		offspring->initialize(population,
+		CreatureModel* offspring = new CreatureModel(population,
 			population->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getPhysicsModelType(),
 			EvolutionConfiguration::ROOT_POSITION, branchiness);
+		offspring->setNew(true);
+		offspring->initialize();
 		population->getCreatureModels().push_back(offspring);
 	}
 }

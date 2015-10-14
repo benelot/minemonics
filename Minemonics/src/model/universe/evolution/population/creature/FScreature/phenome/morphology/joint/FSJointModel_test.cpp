@@ -23,13 +23,13 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		jointModel = new FSJointModel();
-		jointModel->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
-			randomness->nextUnifPosInt(0, 10),
+		jointModel = new FSJointModel(NULL, NULL, NULL, btTransform(),
+			btTransform(), randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
 			true, true, randomness->nextVector(), randomness->nextVector(),
 			randomness->nextVector());
+		jointModel->initialize();
 	}
 
 	virtual void TearDown() {
@@ -48,17 +48,17 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		jointModel = new FSJointModel();
-		jointModel->initialize(NULL, NULL, NULL, btTransform(), btTransform(),
-			randomness->nextUnifPosInt(0, 10),
+		jointModel = new FSJointModel(NULL, NULL, NULL, btTransform(),
+			btTransform(), randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
 			true, true, randomness->nextVector(), randomness->nextVector(),
 			randomness->nextVector());
+		jointModel->initialize();
 
 		jointModel2 = new FSJointModel();
 
-		SaveController < FSJointModel > saveController;
+		SaveController<FSJointModel> saveController;
 
 		saveController.save(*jointModel, "test/FSJointModel.test");
 

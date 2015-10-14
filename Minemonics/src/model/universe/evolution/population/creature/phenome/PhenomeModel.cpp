@@ -35,9 +35,15 @@
 
 BoostLogger PhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 PhenomeModel::_Init PhenomeModel::_initializer;
+
 PhenomeModel::PhenomeModel() :
 	mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
-		true) {
+		false) {
+}
+
+PhenomeModel::PhenomeModel(CreatureModel* const creatureModel) :
+	mCreatureModel(creatureModel), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
+		false) {
 }
 
 PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
@@ -82,9 +88,6 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
-void PhenomeModel::initialize(CreatureModel* const creatureModel) {
-	mCreatureModel = creatureModel;
-}
 
 void PhenomeModel::update(const double timeSinceLastTick) {
 	// let the controller perform

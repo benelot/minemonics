@@ -151,6 +151,9 @@ public:
 //		ar.register_type(static_cast<EnvironmentPhysics*>(NULL));
 
 		ar
+		/**The type of environment */
+		& BOOST_SERIALIZATION_NVP(mType)
+
 		/**The physics controller of the environment*/
 		& BOOST_SERIALIZATION_NVP(mPhysicsController)
 

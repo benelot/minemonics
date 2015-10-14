@@ -29,10 +29,10 @@ protected:
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
 		physicsController->initialize();
-		creature = new CreatureModel();
-		creature->setWorld(physicsController->getDynamicsWorld());
-		creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+		creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
 			Ogre::Vector3(0, 0, 0), 30);
+		creature->setWorld(physicsController->getDynamicsWorld());
+		creature->initialize();
 		creature->performEmbryogenesis();
 	}
 
@@ -58,10 +58,10 @@ protected:
 		physicsController = new GroundController(
 			PhysicsController::FeatherstoneModel);
 		physicsController->initialize();
-		creature = new CreatureModel();
-		creature->setWorld(physicsController->getDynamicsWorld());
-		creature->initialize(NULL, PhysicsController::FeatherstoneModel,
+		creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
 			Ogre::Vector3(0, 0, 0), 30);
+		creature->setWorld(physicsController->getDynamicsWorld());
+		creature->initialize();
 		creature->performEmbryogenesis();
 
 		creature2 = new CreatureModel();

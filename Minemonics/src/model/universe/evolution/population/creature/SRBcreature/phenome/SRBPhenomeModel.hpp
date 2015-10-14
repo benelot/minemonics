@@ -48,15 +48,18 @@ class access;
 class SRBPhenomeModel: public PhenomeModel {
 public:
 	SRBPhenomeModel();
+	SRBPhenomeModel(CreatureModel* const creatureModel);
 	SRBPhenomeModel(const SRBPhenomeModel& phenomeModel);
 	virtual ~SRBPhenomeModel();
+
+	virtual void initialize();
 
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
-	virtual int performEmbryogenesis(CreatureModel* const creatureModel);
+	virtual int performEmbryogenesis();
 
 	/**
 	 * Reset the creature to the way it was born.
