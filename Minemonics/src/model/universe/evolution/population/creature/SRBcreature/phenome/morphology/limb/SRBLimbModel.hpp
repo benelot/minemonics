@@ -136,9 +136,9 @@ public:
 
 	const Ogre::Vector3 getDimensions() const;
 
-//	const int getOwnIndex() const {
-//		return mOwnIndex;
-//	}
+	const int getOwnIndex() const {
+		return mOwnIndex;
+	}
 
 	void activateTactioceptors();
 
@@ -175,6 +175,14 @@ public:
 
 	const bool isIntraBodyColliding() const {
 		return mLimbPhysics->isIntraBodyColliding();
+	}
+
+	void setWorld(btDynamicsWorld* world){
+		((SRBLimbBt*)mLimbPhysics)->setWorld(world);
+	}
+
+	btRigidBody* getRigidBody(){
+		return ((SRBLimbBt*)mLimbPhysics)->getRigidBody();
 	}
 
 // Serialization

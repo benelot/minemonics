@@ -49,9 +49,9 @@ SRBLimbModel::SRBLimbModel(btDynamicsWorld* const world,
 	mCreatureModel = creatureModel;
 
 	//TODO: proof of concept, make better.
-	Tactioceptor* tactioceptor = new Tactioceptor();
-	mSensors.push_back(tactioceptor);
-	mTactioceptors.push_back(tactioceptor);
+//	Tactioceptor* tactioceptor = new Tactioceptor();
+//	mSensors.push_back(tactioceptor);
+//	mTactioceptors.push_back(tactioceptor);
 
 }
 
@@ -59,6 +59,7 @@ SRBLimbModel::~SRBLimbModel() {
 }
 
 void SRBLimbModel::initialize(){
+ComponentModel::initialize(ComponentModel::LimbComponent, mOwnIndex);
 	mLimbPhysics->initialize();
 }
 

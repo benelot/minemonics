@@ -8,6 +8,7 @@
 //# forward declarations
 struct btDefaultMotionState;
 class btDynamicsWorld;
+class LimbModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -50,13 +51,12 @@ class access;
 class SRBLimbBt: public LimbPhysics {
 public:
 	SRBLimbBt();
-	SRBLimbBt(btDynamicsWorld* const world, void* const limbModel,
+	SRBLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
 		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 		const Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation,
-		const Ogre::Vector3 dimensions, const double mass,
-		const double restitution, const double friction,
+		const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
+		const double mass, const double restitution, const double friction,
 		const Ogre::ColourValue color, bool isIntraBodyColliding);
 	SRBLimbBt(const SRBLimbBt& SRBLimbBt);
 
@@ -72,7 +72,7 @@ public:
 	 * @param dimensions The dimensions of the limb.
 	 * @param mass The mass of the limb.
 	 */
-	void initialize();
+	virtual void initialize();
 
 	/**
 	 * Clone the bullet physics limb.
@@ -198,6 +198,11 @@ public:
 		const SRBLimbBt &SRBLimbBt) {
 		return os << "SRBLimbBt: LimbPhysics=" << SRBLimbBt; /**!< The limb physics model of the limb bullet model*/
 	}
+
+	void setWorld(btDynamicsWorld* world) {
+		mWorld = world;
+	}
+
 	/**
 	 * Serializes the limb bullet model to an xml file.
 	 * @param ar The archive.
@@ -218,6 +223,8 @@ private:
 	btRigidBody* mBody; /**!< The rigid body of the limb */
 
 	btVector3 mInertia; /**!< The inertia of the limb */
+
+	LimbModel* mLimbModel;
 };
 BOOST_CLASS_VERSION(SRBLimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_SRBLIMBBT_HPP_ */

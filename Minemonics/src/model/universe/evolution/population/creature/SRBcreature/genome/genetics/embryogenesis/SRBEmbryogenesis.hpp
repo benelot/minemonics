@@ -5,7 +5,10 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class PhenomeModel;
+class btTransform;
+class SRBLimbModel;
+class SRBPhenomeModel;
+class Morphogene;
 
 //# system headers
 #include <list>
@@ -40,7 +43,7 @@ public:
 	 * @param generator The generator of that should be transcribed.
 	 */
 	static void transcribeGene(std::list<PhenotypeGenerator*>& generatorList,
-		int& totalSegmentCounter, PhenomeModel* phenomeModel,
+		int& totalSegmentCounter, SRBPhenomeModel* phenomeModel,
 		BaseGenerator* generator);
 
 	/**
@@ -52,7 +55,19 @@ public:
 	 */
 	static void transcribeMorphogene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
-		PhenomeModel* phenomeModel, PhenotypeGenerator* generator);
+		SRBPhenomeModel* phenomeModel, PhenotypeGenerator* generator);
+
+	static void appendToParentLimb(SRBPhenomeModel* phenomeModel,
+		SRBLimbModel* childLimb, PhenotypeGenerator* generator,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild,
+		btTransform& parentHitTransform, btTransform& childHitTransform);
+
+	static void createNewGenerators(SRBPhenomeModel* phenomeModel,
+		Morphogene * childMorphogene, SRBLimbModel* childLimb,
+		PhenotypeGenerator* generator,
+		std::list<PhenotypeGenerator*>& generatorList,
+		int& totalSegmentCounter);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_SRBEMBRYOGENESIS_HPP_ */

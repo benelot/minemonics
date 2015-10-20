@@ -39,94 +39,27 @@
 
 SRBLimbBt::SRBLimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-		NULL), mInertia(0, 0, 0) {
+		NULL), mInertia(0, 0, 0),mLimbModel(NULL) {
 }
 
-SRBLimbBt::SRBLimbBt(const SRBLimbBt& SRBLimbBt) {
-	btTransform startTransform = SRBLimbBt.mBody->getWorldTransform();
-//	initialize(SRBLimbBt.mWorld, SRBLimbBt.mCollisionShape->getUserPointer(),
-//		SRBLimbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
-//		OgreBulletUtils::convert(startTransform.getRotation()),
-//		Ogre::Vector3(SRBLimbBt.mInitialRelativeXPosition,
-//			SRBLimbBt.mInitialRelativeYPosition,
-//			SRBLimbBt.mInitialRelativeZPosition),
-//		Ogre::Quaternion(SRBLimbBt.mInitialXOrientation,
-//			SRBLimbBt.mInitialYOrientation, SRBLimbBt.mInitialZOrientation,
-//			SRBLimbBt.mInitialWOrientation), SRBLimbBt.mDimensions,
-//		SRBLimbBt.mMass, SRBLimbBt.mRestitution, SRBLimbBt.mFriction,
-//		SRBLimbBt.mColor, SRBLimbBt.mIntraBodyColliding);
-
-	mInWorld = SRBLimbBt.mInWorld;
-	mInertia = SRBLimbBt.mInertia;
-}
-
-SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world, void* const limbModel,
+SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
 	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 	const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
 	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
 	const double mass, const double restitution, const double friction,
-	const Ogre::ColourValue color, bool isIntraBodyColliding) {
-	mWorld = world;
+	const Ogre::ColourValue color, bool isIntraBodyColliding):
+	mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(world), mInertia(
+		0, 0, 0) {
+
 	mDimensions = dimensions;
 	mMass = mass;
 	mType = type;
+	mFriction = friction;
+	mRestitution = restitution;
 	mIntraBodyColliding = isIntraBodyColliding;
-	btVector3 halfExtents(dimensions.x * 0.5f, dimensions.y * 0.5f,
-		dimensions.z * 0.5f);
-	switch (type) {
-	case LimbPhysics::BLOCK:
-		mCollisionShape = new btBoxShape(halfExtents);
-		break;
-	case LimbPhysics::CAPSULE:
-		mCollisionShape = new btCapsuleShape(btScalar(dimensions.x * 0.5f),
-			btScalar(dimensions.y));
-		break;
-	case LimbPhysics::UNKNOWN:
-		std::cout << "##########################################\n"
-			<< " LimbBt received 'Unknown' as a limb type.\n"
-			<< "##########################################\n";
-		exit(-1);
-	}
 
-	mCollisionShape->calculateLocalInertia(btScalar(mass), mInertia);
-
-	// position the limb in the world
-	btTransform startTransform;
-	startTransform.setIdentity();
-	startTransform.setOrigin(OgreBulletUtils::convert(position));
-	startTransform.setRotation(OgreBulletUtils::convert(orientation));
-
-	mMotionState = new btDefaultMotionState(startTransform);
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(mass),
-		mMotionState, mCollisionShape, mInertia);
-	mBody = new btRigidBody(rbInfo);
-	mBody->setDeactivationTime(PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
-	mBody->setSleepingThresholds(
-		PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
-		PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
-	mBody->setActivationState(DISABLE_DEACTIVATION);
-
-	//to get custom collision callbacks in collisionhandler
-	mBody->setCollisionFlags(
-		mBody->getCollisionFlags()
-			| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-
-	//Set the friction and restitution/elasticity of the rigid body
-	mBody->setFriction(btScalar(friction));
-	mBody->setRollingFriction(btScalar(friction));
-	mBody->setRestitution(btScalar(restitution));
-	mBody->setAnisotropicFriction(
-		mCollisionShape->getAnisotropicRollingFrictionDirection(),
-		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-
-	calm();
-
-	//Set user pointer for proper return of creature/limb information etc..
-	mBody->setUserPointer(limbModel);
-	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limbModel);
-
+	mPosition = position;
 	mInitialRelativeXPosition = initialRelativePosition.x;
 	mInitialRelativeYPosition = initialRelativePosition.y;
 	mInitialRelativeZPosition = initialRelativePosition.z;
@@ -137,7 +70,30 @@ SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world, void* const limbModel,
 	mInitialZOrientation = initialOrientation.z;
 	mColor = color;
 	mIntraBodyColliding = isIntraBodyColliding;
+	mLimbModel = limbModel;
+}
 
+SRBLimbBt::SRBLimbBt(const SRBLimbBt& limbBt) {
+	btTransform startTransform = limbBt.mBody->getWorldTransform();
+	SRBLimbBt(limbBt.mWorld, (LimbModel*)limbBt.mCollisionShape->getUserPointer(),
+		limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
+		OgreBulletUtils::convert(startTransform.getRotation()),
+		Ogre::Vector3(limbBt.mInitialRelativeXPosition,
+			limbBt.mInitialRelativeYPosition,
+			limbBt.mInitialRelativeZPosition),
+		Ogre::Quaternion(limbBt.mInitialWOrientation,
+			limbBt.mInitialXOrientation, limbBt.mInitialYOrientation,
+			limbBt.mInitialZOrientation), limbBt.mDimensions,
+			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,
+			limbBt.mColor, limbBt.mIntraBodyColliding);
+
+	mInWorld = limbBt.mInWorld;
+	mInertia = limbBt.mInertia;
+	mWorld = limbBt.mWorld;
+	mBody = limbBt.mBody;
+	mCollisionShape = limbBt.mCollisionShape;
+	mLimbModel = limbBt.mLimbModel;
+	mMotionState = limbBt.mMotionState;
 }
 
 SRBLimbBt::~SRBLimbBt() {
@@ -154,6 +110,66 @@ SRBLimbBt::~SRBLimbBt() {
 }
 
 void SRBLimbBt::initialize() {
+	if (!mCollisionShape) {
+		btVector3 halfExtents(mDimensions.x * 0.5f, mDimensions.y * 0.5f,
+			mDimensions.z * 0.5f);
+		switch (mType) {
+		case LimbPhysics::BLOCK:
+			mCollisionShape = new btBoxShape(halfExtents);
+			break;
+		case LimbPhysics::CAPSULE:
+			mCollisionShape = new btCapsuleShape(btScalar(mDimensions.x * 0.5f),
+				btScalar(mDimensions.y));
+			break;
+		case LimbPhysics::UNKNOWN:
+			std::cout << "##########################################\n"
+				<< " LimbBt received 'Unknown' as a limb type.\n"
+				<< "##########################################\n";
+			exit(-1);
+		}
+
+		mCollisionShape->calculateLocalInertia(btScalar(mMass), mInertia);
+
+		// position the limb in the world
+		btTransform startTransform;
+		startTransform.setIdentity();
+		startTransform.setOrigin(
+			OgreBulletUtils::convert(mPosition));
+		startTransform.setRotation(
+			btQuaternion(mInitialXOrientation, mInitialYOrientation,
+				mInitialZOrientation, mInitialWOrientation));
+
+		mMotionState = new btDefaultMotionState(startTransform);
+		btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(mMass),
+			mMotionState, mCollisionShape, mInertia);
+		mBody = new btRigidBody(rbInfo);
+		mBody->setDeactivationTime(
+			PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
+		mBody->setSleepingThresholds(
+			PhysicsConfiguration::BULLET_LINEAR_SLEEPING_TIME,
+			PhysicsConfiguration::BULLET_ANGULAR_SLEEPING_TIME);
+		mBody->setActivationState(DISABLE_DEACTIVATION);
+
+		//to get custom collision callbacks in collisionhandler
+		mBody->setCollisionFlags(
+			mBody->getCollisionFlags()
+				| btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
+		//Set the friction and restitution/elasticity of the rigid body
+		mBody->setFriction(btScalar(mFriction));
+		mBody->setRollingFriction(btScalar(mFriction));
+		mBody->setRestitution(btScalar(mRestitution));
+		mBody->setAnisotropicFriction(
+			mCollisionShape->getAnisotropicRollingFrictionDirection(),
+			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
+
+//		calm();
+
+		//Set user pointer for proper return of creature/limb information etc..
+		mBody->setUserPointer(mLimbModel);
+		//add the creature model pointer to the collision shape to get it back if we raycast for this object.
+		mCollisionShape->setUserPointer(mLimbModel);
+	}
 }
 
 btTransform SRBLimbBt::getIntersection(btVector3 origin, btVector3 direction) {

@@ -54,7 +54,7 @@
 
 void SRBEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
-	PhenomeModel* phenomeModel, BaseGenerator* generator) {
+	SRBPhenomeModel* phenomeModel, BaseGenerator* generator) {
 
 	// what is the next gene type
 	switch (generator->getGene()->getType()) {
@@ -71,7 +71,7 @@ void SRBEmbryogenesis::transcribeGene(
 
 void SRBEmbryogenesis::transcribeMorphogene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
-	PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
+	SRBPhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 
 	//#####################
 	// Continuation checks
@@ -225,7 +225,10 @@ void SRBEmbryogenesis::transcribeMorphogene(
 				childMorphogene->getOrientationX(),
 				childMorphogene->getOrientationY(),
 				childMorphogene->getOrientationZ()), Ogre::Vector3(),
-			Ogre::Quaternion(),
+			Ogre::Quaternion(childMorphogene->getOrientationW(),
+				childMorphogene->getOrientationX(),
+				childMorphogene->getOrientationY(),
+				childMorphogene->getOrientationZ()),
 			/*dimensions*/
 			Ogre::Vector3(
 				generator->getCurrentShrinkageFactor()
@@ -333,10 +336,11 @@ void SRBEmbryogenesis::transcribeMorphogene(
 		// set global center of mass of child limb as the new generation point for generation
 		generator->setPosition(childLimbCOM);
 		generator->setOrientation(
-			Ogre::Quaternion(childMorphogene->getOrientationW(),
-				childMorphogene->getOrientationX(),
-				childMorphogene->getOrientationY(),
-				childMorphogene->getOrientationZ()));
+			generator->getOrientation()
+				* Ogre::Quaternion(childMorphogene->getOrientationW(),
+					childMorphogene->getOrientationX(),
+					childMorphogene->getOrientationY(),
+					childMorphogene->getOrientationZ()));
 	}
 
 	double sizeX =
@@ -386,130 +390,153 @@ void SRBEmbryogenesis::transcribeMorphogene(
 
 	childLimb->initialize();
 
+	std::cout << "Limb: " << phenomeModel->getLimbModels().size() << std::endl;
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
 
+	// if there is a parent limb, we connect them with a joint
 	if (generator->getParentComponentModel() != NULL) {
-
-		//PARENT
-		//get the morphogene branch that defines the joint and connects the limbs
-		MorphogeneBranch* parentMorphogeneBranch =
-			((MorphogeneBranch*) generator->getGeneBranch());
-
-		// get parent limb
-		LimbModel* parentLimb =
-			(LimbModel*) generator->getParentComponentModel();
-
-		// transformation from the parent limb and child limb center of mass to the joint in the respective reference frames
-		btTransform localParentJointTransform, localChildJointTransform;
-		localParentJointTransform.setIdentity();
-		localChildJointTransform.setIdentity();
-
-		// define the position and direction of the joint in the reference frame of the parent
-		localParentJointTransform.setOrigin(
-			OgreBulletUtils::convert(localParentJointInRefParent));
-		localParentJointTransform.getBasis().setRotation(
-			parentHitTransform.getRotation());
-//		localParentJointTransform.getBasis().setEulerYPR(
-//				parentMorphogeneBranch->getJointYaw(),
-//				parentMorphogeneBranch->getJointPitch(),
-//				parentMorphogeneBranch->getJointRoll());
-
-		// define the position and direction of the joint in the reference frame of child
-		localChildJointTransform.setOrigin(
-			OgreBulletUtils::convert(localChildJointInRefChild));
-		//set the direction of the joint normals
-		localChildJointTransform.getBasis().setRotation(
-			childHitTransform.getRotation());
-		//correct the direction of the joint by some random rotation
-//		localChildJointTransform.getBasis().setEulerYPR(
-//				childMorphogene->getJointYaw(),
-//				childMorphogene->getJointPitch(),
-//				childMorphogene->getJointRoll());
-
-		//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
-		SRBJointModel* joint = new SRBJointModel(phenomeModel->getCreatureModel()->getWorld(),
-			/*parent limb*/
-			((SRBLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
-			/*child limb*/
-			((SRBLimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
-				localParentJointTransform, localChildJointTransform,
-				parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
-				phenomeModel->getJointModels().size(),
-				parentMorphogeneBranch->getJointType(),
-				parentMorphogeneBranch->isJointPitchEnabled(),
-				parentMorphogeneBranch->isJointYawEnabled(),
-				parentMorphogeneBranch->isJointRollEnabled(),
-				Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
-					parentMorphogeneBranch->getJointPitchAxisY(),
-					parentMorphogeneBranch->getJointPitchAxisZ()),
-				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
-					parentMorphogeneBranch->getJointYawMinAngle(),
-					parentMorphogeneBranch->getJointRollMinAngle()),
-				Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
-					parentMorphogeneBranch->getJointYawMaxAngle(),
-					parentMorphogeneBranch->getJointRollMaxAngle()));
-
-		joint->initialize();
-
-		std::cout << "Joint Parent: " << joint->getParentIndex()
-			<< " /Joint Child: " << joint->getChildIndex() << std::endl;
-
-		parentLimb->addChildJointIndex(joint->getIndex());
-		childLimb->setParentJointIndex(joint->getIndex());
-
-		// add the joint to the phenotype joints
-		phenomeModel->getJointModels().push_back(joint);
-		phenomeModel->getComponentModels().push_back(joint);
-
-		//initialize rotational limit motors
-		//TODO: Remove max speed if not necessary
-		double mass1 = parentLimb->getMass();
-		double mass2 = childLimb->getMass();
-		double maxTorque =
-			(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
-				* (mass1 + mass2)
-				+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
-					* pow(mass1 + mass2, 2));
-		joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
-			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
-				parentMorphogeneBranch->getJointYawMinAngle(),
-				parentMorphogeneBranch->getJointRollMinAngle()),
-			Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
-				parentMorphogeneBranch->getJointYawMaxAngle(),
-				parentMorphogeneBranch->getJointRollMaxAngle()));
-
-		//TODO: Quick controller hack
-		SineController* controller = new SineController();
-		controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
-			parentMorphogeneBranch->getJointPitchFrequency(),
-			parentMorphogeneBranch->getJointPitchXOffset(),
-			parentMorphogeneBranch->getJointPitchYOffset());
-		controller->addControlOutput(joint->getMotors()[0]);
-		phenomeModel->getControllers().push_back(controller);
-
-		if (joint->getType() == JointPhysics::SPHERICAL_JOINT) {
-			controller = new SineController();
-			controller->initialize(
-				parentMorphogeneBranch->getJointYawAmplitude(),
-				parentMorphogeneBranch->getJointYawFrequency(),
-				parentMorphogeneBranch->getJointYawXOffset(),
-				parentMorphogeneBranch->getJointYawYOffset());
-			controller->addControlOutput(joint->getMotors()[1]);
-			phenomeModel->getControllers().push_back(controller);
-
-			controller = new SineController();
-			controller->initialize(
-				parentMorphogeneBranch->getJointRollAmplitude(),
-				parentMorphogeneBranch->getJointRollFrequency(),
-				parentMorphogeneBranch->getJointRollXOffset(),
-				parentMorphogeneBranch->getJointRollYOffset());
-			controller->addControlOutput(joint->getMotors()[2]);
-			phenomeModel->getControllers().push_back(controller);
-		}
+		appendToParentLimb(phenomeModel, childLimb, generator,
+			localParentJointInRefParent, localChildJointInRefChild,
+			parentHitTransform, childHitTransform);
 	}
 
 	//Create new generators from the morphogene branches
+	createNewGenerators(phenomeModel, childMorphogene, childLimb, generator,
+		generatorList, totalSegmentCounter);
+}
+
+void SRBEmbryogenesis::appendToParentLimb(SRBPhenomeModel* phenomeModel,
+	SRBLimbModel* childLimb, PhenotypeGenerator* generator,
+	Ogre::Vector3& localParentJointInRefParent,
+	Ogre::Vector3& localChildJointInRefChild, btTransform& parentHitTransform,
+	btTransform& childHitTransform) {
+
+	//PARENT
+	//get the morphogene branch that defines the joint and connects the limbs
+	MorphogeneBranch* parentMorphogeneBranch =
+		((MorphogeneBranch*) generator->getGeneBranch());
+
+	// get parent limb
+	SRBLimbModel* parentLimb =
+		(SRBLimbModel*) generator->getParentComponentModel();
+
+	// transformation from the parent limb and child limb center of mass to the joint in the respective reference frames
+	btTransform localParentJointTransform, localChildJointTransform;
+	localParentJointTransform.setIdentity();
+	localChildJointTransform.setIdentity();
+
+	// define the position and direction of the joint in the reference frame of the parent
+	localParentJointTransform.setOrigin(
+		OgreBulletUtils::convert(localParentJointInRefParent));
+	localParentJointTransform.getBasis().setRotation(
+		parentHitTransform.getRotation());
+	//		localParentJointTransform.getBasis().setEulerYPR(
+	//				parentMorphogeneBranch->getJointYaw(),
+	//				parentMorphogeneBranch->getJointPitch(),
+	//				parentMorphogeneBranch->getJointRoll());
+
+	// define the position and direction of the joint in the reference frame of child
+	localChildJointTransform.setOrigin(
+		OgreBulletUtils::convert(localChildJointInRefChild));
+	//set the direction of the joint normals
+	localChildJointTransform.getBasis().setRotation(
+		childHitTransform.getRotation());
+	//correct the direction of the joint by some random rotation
+	//		localChildJointTransform.getBasis().setEulerYPR(
+	//				childMorphogene->getJointYaw(),
+	//				childMorphogene->getJointPitch(),
+	//				childMorphogene->getJointRoll());
+
+	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
+	SRBJointModel* joint = new SRBJointModel(
+		phenomeModel->getCreatureModel()->getWorld(),
+		/*parent limb*/
+		((FSLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
+		/*child limb*/
+		((FSLimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
+		localParentJointTransform, localChildJointTransform,
+		parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
+		phenomeModel->getJointModels().size(),
+		parentMorphogeneBranch->getJointType(),
+		parentMorphogeneBranch->isJointPitchEnabled(),
+		parentMorphogeneBranch->isJointYawEnabled(),
+		parentMorphogeneBranch->isJointRollEnabled(),
+		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
+			parentMorphogeneBranch->getJointPitchAxisY(),
+			parentMorphogeneBranch->getJointPitchAxisZ()),
+		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+			parentMorphogeneBranch->getJointYawMinAngle(),
+			parentMorphogeneBranch->getJointRollMinAngle()),
+		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+			parentMorphogeneBranch->getJointYawMaxAngle(),
+			parentMorphogeneBranch->getJointRollMaxAngle()));
+
+	//joint->initialize();
+
+	std::cout << "Joint: Parent: " << joint->getParentIndex() << " /Child: "
+		<< joint->getChildIndex() << std::endl;
+
+	parentLimb->addChildJointIndex(joint->getIndex());
+	childLimb->setParentJointIndex(joint->getIndex());
+
+	// add the joint to the phenotype joints
+	phenomeModel->getJointModels().push_back(joint);
+	phenomeModel->getComponentModels().push_back(joint);
+
+	//initialize rotational limit motors
+	//TODO: Remove max speed if not necessary
+	double mass1 = parentLimb->getMass();
+	double mass2 = childLimb->getMass();
+	double maxTorque =
+		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+			* (mass1 + mass2)
+			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+				* pow(mass1 + mass2, 2));
+	//		double maxTorque = (15.0f * (mass1 + mass2)
+	//			+ 0.01f * pow(mass1 + mass2, 2));
+
+	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
+	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
+		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
+			parentMorphogeneBranch->getJointYawMinAngle(),
+			parentMorphogeneBranch->getJointRollMinAngle()),
+		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
+			parentMorphogeneBranch->getJointYawMaxAngle(),
+			parentMorphogeneBranch->getJointRollMaxAngle()));
+
+	//TODO: Quick controller hack
+	SineController* controller = new SineController();
+	controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
+		parentMorphogeneBranch->getJointPitchFrequency(),
+		parentMorphogeneBranch->getJointPitchXOffset(),
+		parentMorphogeneBranch->getJointPitchYOffset());
+	controller->addControlOutput(joint->getMotors()[0]);
+	phenomeModel->getControllers().push_back(controller);
+
+	if (joint->getType() == JointPhysics::SPHERICAL_JOINT) {
+		controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
+			parentMorphogeneBranch->getJointYawFrequency(),
+			parentMorphogeneBranch->getJointYawXOffset(),
+			parentMorphogeneBranch->getJointYawYOffset());
+		controller->addControlOutput(joint->getMotors()[1]);
+		phenomeModel->getControllers().push_back(controller);
+
+		controller = new SineController();
+		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
+			parentMorphogeneBranch->getJointRollFrequency(),
+			parentMorphogeneBranch->getJointRollXOffset(),
+			parentMorphogeneBranch->getJointRollYOffset());
+		controller->addControlOutput(joint->getMotors()[2]);
+		phenomeModel->getControllers().push_back(controller);
+	}
+}
+
+void SRBEmbryogenesis::createNewGenerators(SRBPhenomeModel* phenomeModel,
+	Morphogene * childMorphogene, SRBLimbModel* childLimb,
+	PhenotypeGenerator* generator,
+	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter) {
 
 	//iterate over all morphogene branches
 	for (std::vector<MorphogeneBranch*>::iterator branchIt =
@@ -565,7 +592,7 @@ void SRBEmbryogenesis::transcribeMorphogene(
 					generator->getOrientation(), childLimb, (*branchIt.base()),
 					childMorphogene->getSegmentShrinkFactor()
 						* generator->getCurrentShrinkageFactor(),
-					true/*Flipped*/, false);
+					true != generator->isFlipped() /*Flipped*/, false);
 
 				// If repetition limit not exceeded
 				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
@@ -604,7 +631,7 @@ void SRBEmbryogenesis::transcribeMorphogene(
 					generator->getOrientation(), childLimb, (*branchIt.base()),
 					childMorphogene->getSegmentShrinkFactor()
 						* generator->getCurrentShrinkageFactor(), false,
-					true/*Mirrored*/);
+					true != generator->isMirrored()/*Mirrored*/);
 
 				// If repetition limit not exceeded
 				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
@@ -634,5 +661,5 @@ void SRBEmbryogenesis::transcribeMorphogene(
 			}
 		}
 	}
-}
 
+}

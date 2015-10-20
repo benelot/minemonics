@@ -97,7 +97,7 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	mMotorBt->m_targetVelocity = kP * angleError;
 	mMotorBt->m_maxMotorForce = 1000;
 #endif
-	std::cout << mMotorBt->m_currentPosition << "," << targetAngle << std::endl;
+	//std::cout << mMotorBt->m_currentPosition << "," << targetAngle << std::endl;
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

@@ -34,18 +34,24 @@ SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 	const std::vector<LimbModel*>::size_type ownIndex,
 	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
 	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
-	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
+	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mParentIndex = indexA;
 	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
 	mLocalA = localA;
 	mLocalB = localB;
+	mLocalAPosition = OgreBulletUtils::convert(localA.getOrigin());
+	mLocalBPosition = OgreBulletUtils::convert(localB.getOrigin());
+
+	mLocalAOrientation = OgreBulletUtils::convert(localB.getRotation());
+	mLocalBOrientation = OgreBulletUtils::convert(localB.getRotation());
+
 	mJointPhysics = new SRBJointBt(world, limbA, limbB, localA,
 		localB, type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
-		OgreBulletUtils::convert(jointLowerLimits),
-		OgreBulletUtils::convert(jointUpperLimits));
+		OgreBulletUtils::convert(jointMinAngle),
+		OgreBulletUtils::convert(jointMaxAngle));
 
 	//TODO: proof of concept, make better.
 //	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
@@ -72,7 +78,14 @@ SRBJointModel::~SRBJointModel() {
 }
 
 void SRBJointModel::initialize(){
-	((SRBJointBt*) mJointPhysics)->initialize();
+	mLocalA.setOrigin(OgreBulletUtils::convert(mLocalAPosition));
+	mLocalA.setRotation(OgreBulletUtils::convert(mLocalAOrientation));
+	mLocalB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
+	mLocalB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
+
+	((SRBJointBt*)mJointPhysics)->setFrameInA(mLocalA);
+	((SRBJointBt*)mJointPhysics)->setFrameInB(mLocalB);
+	mJointPhysics->initialize();
 }
 
 void SRBJointModel::update(double timeSinceLastTick) {
@@ -163,10 +176,6 @@ void SRBJointModel::reposition(const Ogre::Vector3 position) {
 SRBJointModel* SRBJointModel::clone() {
 	return new SRBJointModel(*this);
 }
-
-//bool SRBJointModel::isStrained() {
-//	return mJointPhysics->isStrained();
-//}
 
 void SRBJointModel::generateMotors(const Ogre::Vector3 maxForces,
 	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {

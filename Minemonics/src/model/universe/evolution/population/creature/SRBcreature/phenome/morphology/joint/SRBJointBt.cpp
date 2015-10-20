@@ -31,14 +31,18 @@
 //## utils headers
 
 SRBJointBt::SRBJointBt() :
-	mWorld(NULL), mJoint(NULL), mMotorTarget(0, 0, 0, 1) {
-	mMotors.clear();
+	mWorld(NULL), mJoint(NULL), mMotorTarget(0, 0, 0, 1), mBodyA(NULL), mBodyB(
+		NULL) {
 }
 
 SRBJointBt::SRBJointBt(const SRBJointBt& SRBJointBt) {
 	mWorld = SRBJointBt.mWorld;
 	mJoint = SRBJointBt.mJoint;
 	mInWorld = SRBJointBt.mInWorld;
+	mBodyA = SRBJointBt.mBodyA;
+	mBodyB = SRBJointBt.mBodyB;
+	mFrameInA = SRBJointBt.mFrameInA;
+	mFrameInB = SRBJointBt.mFrameInB;
 
 	for (std::vector<Motor*>::const_iterator mit = SRBJointBt.mMotors.begin();
 		mit != SRBJointBt.mMotors.end(); mit++) {
@@ -51,20 +55,12 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits) {
+	btVector3 jointUpperLimits):mJoint(NULL) {
 	mWorld = world;
-#ifndef EXCLUDE_FROM_TEST
-	mJoint = new CONSTRAINT_TYPE(*bodyA, *bodyB, tframeInA, tframeInB
-		EXTRAPARAMS);
-
-//	mJoint->setDamping(10000);
-
-	mJoint->enableFeedback(true);
-	mJoint->setJointFeedback(new btJointFeedback());
-
-//debug drawing
-	mJoint->setDbgDrawSize(btScalar(5.f));
-#endif
+	mBodyA = bodyA;
+	mBodyB = bodyB;
+	mFrameInA = tframeInA;
+	mFrameInB = tframeInB;
 	mType = type;
 	mJointPitchEnabled = jointPitchEnabled;
 	mJointYawEnabled = jointYawEnabled;
@@ -76,6 +72,18 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 }
 
 void SRBJointBt::initialize() {
+#ifndef EXCLUDE_FROM_TEST
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB
+	EXTRAPARAMS);
+
+//	mJoint->setDamping(10000);
+
+	mJoint->enableFeedback(true);
+	mJoint->setJointFeedback(new btJointFeedback());
+
+//debug drawing
+	mJoint->setDbgDrawSize(btScalar(5.f));
+#endif
 
 }
 
@@ -168,35 +176,6 @@ void SRBJointBt::reset(const Ogre::Vector3 position) {
 void SRBJointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
-
-//bool SRBJointBt::isStrained() {
-//TODO: Broken
-//	btVector3 fbA = mJoint->getJointFeedback()->m_appliedForceBodyA;
-//	btVector3 fbB = mJoint->getJointFeedback()->m_appliedForceBodyB;
-//	btVector3 tbA = mJoint->getJointFeedback()->m_appliedTorqueBodyA;
-//	btVector3 tbB = mJoint->getJointFeedback()->m_appliedTorqueBodyB;
-//	if (abs(fbA.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbA.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbA.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbB.getX()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbB.getY()) > PhysicsConfiguration::TORQUE_THRESHOLD
-//			&& abs(fbB.getZ()) > PhysicsConfiguration::TORQUE_THRESHOLD) {
-//		std::cout << "----------------------" << std::endl;
-//		std::cout << "Applied impulse: " << mJoint->getAppliedImpulse()
-//				<< std::endl;
-//
-//		std::cout << "Joint feedback force A: (" << fbA.getX() << ","
-//				<< fbA.getY() << "," << fbA.getZ() << ")" << std::endl;
-//		std::cout << "Joint feedback force B: (" << fbB.getX() << ","
-//				<< fbB.getY() << "," << fbB.getZ() << ")" << std::endl;
-//		std::cout << "Joint feedback torque A: (" << tbA.getX() << ","
-//				<< tbA.getY() << "," << tbA.getZ() << ")" << std::endl;
-//		std::cout << "Joint feedback torque B: (" << tbB.getX() << ","
-//				<< tbB.getY() << "," << tbB.getZ() << ")" << std::endl;
-//		std::cout << "----------------------" << std::endl;
-//	}
-//	return false;
-//}
 
 void SRBJointBt::setRotationalLimitMotorEnabled(
 	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {

@@ -226,6 +226,26 @@ public:
 		mMotorTarget = motorTarget;
 	}
 
+	void setBodyA(btRigidBody* bodyA) {
+		mBodyA = bodyA;
+	}
+
+	void setBodyB(btRigidBody* bodyB) {
+		mBodyB = bodyB;
+	}
+
+	void setFrameInA(const btTransform& frameInA) {
+		mFrameInA = frameInA;
+	}
+
+	void setFrameInB(const btTransform& frameInB) {
+		mFrameInB = frameInB;
+	}
+
+	void setWorld(btDynamicsWorld* world) {
+		mWorld = world;
+	}
+
 private:
 
 	/**
@@ -245,6 +265,11 @@ private:
 	std::vector<Motor*> mMotors;
 
 	btQuaternion mMotorTarget;
+
+	btRigidBody* mBodyA;
+	btRigidBody* mBodyB;
+	btTransform mFrameInA;
+	btTransform mFrameInB;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_SRBJOINTBT_HPP_ */

@@ -61,6 +61,8 @@ public:
 	 */
 	virtual int performEmbryogenesis();
 
+	void generateBody();
+
 	/**
 	 * Reset the creature to the way it was born.
 	 */
@@ -95,6 +97,8 @@ public:
 	SRBPhenomeModel* clone();
 
 	virtual void calm();
+
+	btDynamicsWorld* getWorld();
 
 	//Accessor methods
 
@@ -177,6 +181,8 @@ private:
 					> ("PhenomeModel"));
 		}
 	} _initializer;
+	
+	btDynamicsWorld* mWorld;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_ */

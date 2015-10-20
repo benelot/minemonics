@@ -16,6 +16,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
@@ -23,17 +25,24 @@
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
 
 BoostLogger SRBPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 SRBPhenomeModel::_Init SRBPhenomeModel::_initializer;
+SRBPhenomeModel::SRBPhenomeModel() :
+	mWorld(NULL) {
+}
+
 SRBPhenomeModel::~SRBPhenomeModel() {
 }
 
 SRBPhenomeModel::SRBPhenomeModel(CreatureModel* const creatureModel) {
 	mCreatureModel = creatureModel;
+	mWorld = creatureModel->getWorld();
 }
 
 SRBPhenomeModel::SRBPhenomeModel(const SRBPhenomeModel& SRBPhenomeModel) {
@@ -41,6 +50,8 @@ SRBPhenomeModel::SRBPhenomeModel(const SRBPhenomeModel& SRBPhenomeModel) {
 	mCreatureModel = SRBPhenomeModel.mCreatureModel;
 	mDeveloped = SRBPhenomeModel.mDeveloped;
 	mHasInterpenetrations = SRBPhenomeModel.mHasInterpenetrations;
+
+	mWorld = SRBPhenomeModel.mWorld;
 
 	for (std::vector<Controller*>::const_iterator cit =
 		SRBPhenomeModel.mControllers.begin();
@@ -66,8 +77,18 @@ SRBPhenomeModel::SRBPhenomeModel(const SRBPhenomeModel& SRBPhenomeModel) {
 }
 
 void SRBPhenomeModel::initialize() {
-}
 
+	performEmbryogenesis();
+
+	//initialize the limb models if it did not already happen in embryogenesis
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		((SRBLimbModel*) (*lit))->setWorld(getWorld());
+		(*lit)->initialize();
+	}
+
+	generateBody();
+}
 
 void SRBPhenomeModel::update(const double timeSinceLastTick) {
 	//update all controllers
@@ -81,7 +102,7 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 //		(*jit)->update(timeSinceLastTick);
 //	}
 
-	// Update all limb models
+// Update all limb models
 	mHasInterpenetrations = false;
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
@@ -100,9 +121,6 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 
 }
 
-SRBPhenomeModel::SRBPhenomeModel() {
-}
-
 void SRBPhenomeModel::calm() {
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
@@ -117,7 +135,8 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		std::list<PhenotypeGenerator*> generatorList;
 
 		// get the first gene from the genome
-		Gene* gene = mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
+		Gene* gene =
+			mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
@@ -131,8 +150,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 		while (!generatorList.empty()) {
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Phenome generator qty:" << generatorList.size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
 
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
@@ -145,8 +163,66 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		}
 
 		mDeveloped = true;
+	} else {
+		mComponentModels.clear();
+		for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+			it != mLimbModels.end(); it++) {
+			mComponentModels.push_back((*it));
+		}
+
+		for (std::vector<JointModel*>::const_iterator it = mJointModels.begin();
+			it != mJointModels.end(); it++) {
+			mComponentModels.push_back((*it));
+		}
 	}
 	return totalSegmentCounter;
+}
+
+void SRBPhenomeModel::generateBody() {
+	bool isFixedBase = false;
+	bool isMultiDof = true;
+	bool setDamping = true;
+	bool gyro = true;
+	bool canSleep = true;
+
+	if (mBodyGenerated) {
+		return;
+	}
+
+	if (mJointModels.size() != 0) {
+
+		for (int i = 0; i < mJointModels.size(); i++) {
+
+			((SRBJointModel*) mJointModels[i])->setBodyA(
+				((SRBLimbModel*) mLimbModels[((long) mJointModels[i]->getParentIndex())])->getRigidBody());
+
+
+			((SRBJointModel*) mJointModels[i])->setFrameInA(
+				mJointModels[i]->getParentComToPivot());
+
+			((SRBJointModel*) mJointModels[i])->setBodyB(
+				((SRBLimbModel*) mLimbModels[((long) mJointModels[i]->getChildIndex())])->getRigidBody());
+
+			((SRBJointModel*) mJointModels[i])->setFrameInB(
+				mJointModels[i]->getPivotToChildCom());
+
+			std::cout << "Joint: Parent: " << mJointModels[i]->getParentIndex() << " /Child: "
+				<< mJointModels[i]->getChildIndex() << std::endl;
+
+
+
+			((SRBJointModel*) mJointModels[i])->setWorld(getWorld());
+
+			mJointModels[i]->initialize();
+
+//			for (std::vector<Motor*>::iterator mit =
+//				mJointModels[i]->getMotors().begin();
+//				mit != mJointModels[i]->getMotors().end(); mit++) {
+//				((FSServoMotor*) (*mit))->instantiate(mMultiBody,
+//					mJointModels[i]->getIndex());
+//			}
+		}
+	}
 }
 
 void SRBPhenomeModel::reset(const Ogre::Vector3 position) {
@@ -231,4 +307,14 @@ bool SRBPhenomeModel::equals(const SRBPhenomeModel& SRBPhenomeModel) const {
 
 SRBPhenomeModel* SRBPhenomeModel::clone() {
 	return new SRBPhenomeModel(*this);
+}
+
+btDynamicsWorld* SRBPhenomeModel::getWorld() {
+	if (!mWorld) {
+#ifndef EXCLUDE_FROM_TEST
+		mWorld = (btDynamicsWorld*) mCreatureModel->getWorld();
+#endif
+	}
+	return mWorld;
+
 }

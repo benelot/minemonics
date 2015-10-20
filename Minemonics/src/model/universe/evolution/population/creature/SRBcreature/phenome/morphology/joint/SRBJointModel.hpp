@@ -60,8 +60,8 @@ public:
 		const std::vector<SRBJointModel*>::size_type ownIndex,
 		JointPhysics::JointType type, bool jointPitchEnabled,
 		bool jointYawEnabled, bool jointRollEnabled,
-		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
-		Ogre::Vector3 jointUpperLimits);
+		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointMinAngle,
+		Ogre::Vector3 jointMaxAngle);
 
 	virtual ~SRBJointModel();
 
@@ -82,12 +82,6 @@ public:
 	 * Reposition the joint without resetting it.
 	 */
 	void reposition(const Ogre::Vector3 position);
-
-//	/**
-//	 * Returns if the joint is under tension.
-//	 * @return If the joint is under tension.
-//	 */
-//	bool isStrained();
 
 	/**
 	 * Compare the joint model to another joint model.
@@ -215,13 +209,33 @@ public:
 		return OgreBulletUtils::convert(mJointPhysics->getJointPitchAxis());
 	}
 
+	void setBodyA(btRigidBody* bodyA) {
+		((SRBJointBt*)mJointPhysics)->setBodyA(bodyA);
+	}
+
+	void setBodyB(btRigidBody* bodyB) {
+		((SRBJointBt*)mJointPhysics)->setBodyB(bodyB);
+	}
+
+	void setFrameInA(const btTransform& frameInA) {
+		((SRBJointBt*)mJointPhysics)->setFrameInA(frameInA);
+	}
+
+	void setFrameInB(const btTransform& frameInB) {
+		((SRBJointBt*)mJointPhysics)->setFrameInB(frameInB);
+	}
+
+	void setWorld(btDynamicsWorld* world) {
+		((SRBJointBt*)mJointPhysics)->setWorld(world);
+	}
+
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization .*/
 
 	/**
 	 * Serializes the joint model to a string.
 	 * @param os The ostream.
-	 * @param SRBJointModel The joint model we want to serialize.
+	 * @param SRBjointModel The joint model we want to serialize.
 	 * @return A string containing all information about the joint model.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
