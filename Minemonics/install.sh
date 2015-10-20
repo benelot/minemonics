@@ -112,7 +112,7 @@ sudo apt-get install yasm libx264-dev libopus-dev libmp3lame-dev
 mkdir FFmpeg
 cd FFmpeg
 git clone https://github.com/FFmpeg/FFmpeg.git . -o 0773f6739538db9cbe2712bfffd4de47639a685e
-PATH="/usr/local/bin:$PATH" PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" ./configure   --prefix="/usr/local"   --extra-cflags="-I/usr/local/include"   --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin"  --disable-vaapi
+PATH="/usr/local/bin:$PATH" PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" ./configure   --prefix="/usr/local"   --extra-cflags="-I/usr/local/include"   --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin"  --disable-vaapi --enable-shared
 #PATH="/usr/local/bin:$PATH" PKG_CONFIG_PATH="/usr/local/lib/pkgconfig" ./configure   --prefix="/usr/local"   --extra-cflags="-I/usr/local/include"   --extra-ldflags="-L/usr/local/lib"   --bindir="/usr/local/bin"  --disable-vaapi  --#enable-gpl   --enable-libass --enable-libfreetype   --enable-libmp3lame   --enable-libopus   --enable-libtheora   --enable-libvorbis   --enable-libx264   --enable-nonfree 
 PATH="/usr/local/bin:$PATH" make -j8
 sudo make install
@@ -120,6 +120,7 @@ sudo ldconfig
 
 cd ..
 
+# gtest
 sudo apt-get install libgtest-dev
 #Stop distributing static library (although still build it, to ensure gtest works).
 mkdir gtest
@@ -129,4 +130,45 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=RELEASE /usr/src/gtest/
 make
 sudo mv libg* /usr/lib/
+
 cd ../..
+
+# CUDA installation is missing
+## Download CUDA .deb from Nvidia. 
+# cuda-repo-ubuntu1504-7-5-local_7.5-18_amd64.deb
+#sudo dpkg -i cuda-repo-ubuntu1504-7-5-local_7.5-18_amd64.deb
+#sudo apt-get update
+#sudo apt-get install cuda
+
+#OpenBLAS
+## According to https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide
+# Download the development version of OpenBLAS
+git clone git://github.com/xianyi/OpenBLAS
+cd OpenBLAS
+make FC=gfortran
+sudo make PREFIX=/usr/local/OPENBLAS install
+
+cd ..
+
+# OpenCV
+## According to http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation
+sudo apt-get install build-essential
+sudo apt-get install cmake git libgtk2.0-dev pkg-config # We use FFmpeg libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+git clone https://github.com/Itseez/opencv.git
+cd opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+make -j8
+sudo make install
+
+cd ../..
+
+
+# Caffe
+## According to http://caffe.berkeleyvision.org/installation.html
+sudo apt-get install protobuf, glog, gflags
+sudo apt-get install hdf5, leveldb, snappy, lmdb # IO libraries
+git clone https://github.com/BVLC/caffe.git
+
