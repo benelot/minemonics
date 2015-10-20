@@ -258,12 +258,6 @@ private:
 	 */
 	btDynamicsWorld* mWorld;
 
-	/**
-	 * The vector of motors that are working across this joint.
-	 * Be it servo motors acting directly on the DoF or be it muscles acting on attachment points on the limb.
-	 */
-	std::vector<Motor*> mMotors;
-
 	btQuaternion mMotorTarget;
 
 	btRigidBody* mBodyA;

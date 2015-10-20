@@ -87,15 +87,10 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ServoMotor) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mJointIndex); /**!< The index of the joint. */
-//		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
-//		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
-//		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ServoMotor); /**!< Serialize the base object */
 	}
 
 private:
-	int mJointIndex; /**!< The index of the joint. */
 
 	btMultiBody* mMultiBody;
 

@@ -102,10 +102,12 @@ void PhysicsController::initialize() {
 //			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
 //		}
 
-		mDynamicsWorld->getSolverInfo().m_erp = 0.00001f;
+		//mDynamicsWorld->getSolverInfo().m_erp = 0.00001f;
+		//mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEPS_PER_SEC,1,10);
 		//PhysicsConfiguration::SIMULATOR_PHYSICS_SRB_ERP;
 
-		mDynamicsWorld->getSolverInfo().m_globalCfm = 0.9f;
+		//mDynamicsWorld->getSolverInfo().m_globalCfm = 0.9f;
+		//mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEPS_PER_SEC,1,1);
 		//PhysicsConfiguration::SIMULATOR_PHYSICS_SRB_CFM;
 		break;
 	}

@@ -62,7 +62,7 @@ public:
 	 */
 	static btScalar getERP(btScalar timeStep, btScalar kSpring,
 		btScalar kDamper) {
-		return timeStep * kSpring / (timeStep * kSpring + kDamper);
+		return kSpring / (timeStep * kSpring + kDamper);
 	}
 
 	/**
@@ -85,9 +85,9 @@ public:
 	 * Thus CFM simply adds to the diagonal of the original system matrix. Using a positive value of CFM has the additional benefit of taking the system away from any singularity and thus improving the factorizer accuracy.
 	 * @return
 	 */
-	static btScalar getCFM(btScalar timeStep, btScalar kSpring,
+	static btScalar getCFM(btScalar avoidSingularity, btScalar timeStep, btScalar kSpring,
 		btScalar kDamper) {
-		return btScalar(1) / (timeStep * kSpring + kDamper);
+		return btScalar(avoidSingularity) / (timeStep * kSpring + kDamper);
 	}
 };
 

@@ -25,8 +25,7 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
 
-FSServoMotor::FSServoMotor() :
-	mJointIndex(0), mMultiBody(NULL) {
+FSServoMotor::FSServoMotor() : mMultiBody(NULL) {
 }
 
 FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {

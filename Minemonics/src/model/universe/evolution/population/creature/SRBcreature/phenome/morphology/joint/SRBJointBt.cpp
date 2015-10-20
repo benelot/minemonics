@@ -32,7 +32,7 @@
 
 SRBJointBt::SRBJointBt() :
 	mWorld(NULL), mJoint(NULL), mMotorTarget(0, 0, 0, 1), mBodyA(NULL), mBodyB(
-		NULL) {
+	NULL) {
 }
 
 SRBJointBt::SRBJointBt(const SRBJointBt& SRBJointBt) {
@@ -55,7 +55,8 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits):mJoint(NULL) {
+	btVector3 jointUpperLimits) :
+	mJoint(NULL) {
 	mWorld = world;
 	mBodyA = bodyA;
 	mBodyB = bodyB;
@@ -83,6 +84,18 @@ void SRBJointBt::initialize() {
 
 //debug drawing
 	mJoint->setDbgDrawSize(btScalar(5.f));
+
+	//	add pitch servo motor
+	((SRBServoMotor*)mMotors[0])->initialize(
+		mJoint->getRotationalLimitMotor(RDOF_PITCH));
+
+	// add yaw servo motor
+	((SRBServoMotor*)mMotors[1])->initialize(
+		mJoint->getRotationalLimitMotor(RDOF_YAW));
+
+	//add roll servo motor
+	((SRBServoMotor*)mMotors[2])->initialize(
+		mJoint->getRotationalLimitMotor(RDOF_ROLL));
 #endif
 
 }
@@ -120,28 +133,27 @@ void SRBJointBt::update(double timeSinceLastTick) {
 
 void SRBJointBt::generateMotors(const btVector3 maxForces,
 	const btVector3 lowerLimits, const btVector3 upperLimits) {
+
+	mJointMaxForces = OgreBulletUtils::convert(maxForces);
+	mJointMaxAngle = OgreBulletUtils::convert(upperLimits);
+	mJointMinAngle = OgreBulletUtils::convert(lowerLimits);
+
 //	add pitch servo motor
-	SRBServoMotor* servoMotor = new SRBServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH,
-		mJoint->getRotationalLimitMotor(RDOF_PITCH), maxForces.getX(),
+	SRBServoMotor* servoMotor = new SRBServoMotor(JointPhysics::RDOF_PITCH, maxForces.getX(),
 		lowerLimits.x(), upperLimits.x());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
-	servoMotor = new SRBServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_YAW,
-		mJoint->getRotationalLimitMotor(RDOF_YAW), maxForces.getY(),
+	servoMotor = new SRBServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
 		lowerLimits.y(), upperLimits.y());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
-	servoMotor = new SRBServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_ROLL,
-		mJoint->getRotationalLimitMotor(RDOF_ROLL), maxForces.getZ(),
+	servoMotor = new SRBServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
 		lowerLimits.z(), upperLimits.z());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);

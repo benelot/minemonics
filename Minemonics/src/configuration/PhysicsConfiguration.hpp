@@ -81,13 +81,14 @@ public:
 	/**
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
 	 */
-//#define FIXED_STEP 1.0f/60.0f // Too low
-//#define FIXED_STEP 1.0f/120.0f // Might be too low
-//#define FIXED_STEP 1.0f/200.0f // Might be ok
-#define FIXED_STEP 1.0f/240.0f // Might be better
-//#define FIXED_STEP 1.0f/1000.0f // Best results
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC = FIXED_STEP;
-	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = FIXED_STEP
+//#define FIXED_STEPS_PER_SEC 60.0f // Too low
+//#define FIXED_STEPS_PER_SEC 120.0f // Might be too low
+//#define FIXED_STEPS_PER_SEC 200.0f // Might be ok
+#define FIXED_STEPS_PER_SEC 240.0f // Might be better
+//#define FIXED_STEPS_PER_SEC 1000.0f // Best results
+	static const double SIMULATOR_PHYSICS_FIXED_STEPS_PER_SEC = FIXED_STEPS_PER_SEC;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC = 1.0f/FIXED_STEPS_PER_SEC;
+	static const double SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI = 1.0f/FIXED_STEPS_PER_SEC
 		* 1000.0f;
 
 	/**

@@ -25,8 +25,18 @@
 #include <utils/ogre3D/Euler.hpp>
 
 SRBServoMotor::SRBServoMotor() :
-	mJointMotorIndex(JointPhysics::RDOF_PITCH), mMotorBt(NULL), mLowerLimit(0), mUpperLimit(
-		0) {
+	mMotorBt(NULL) {
+}
+
+SRBServoMotor::SRBServoMotor(
+	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+	const double maxForce, double lowerLimit, double upperLimit) :
+	mMotorBt(NULL) {
+	mJointMotorIndex = jointMotorIndex;
+	mMaxForce = 8.0f;
+	mLowerLimit = lowerLimit;
+	mUpperLimit = upperLimit;
+
 }
 
 SRBServoMotor::SRBServoMotor(const SRBServoMotor& SRBServoMotor) {
@@ -46,15 +56,7 @@ SRBServoMotor::~SRBServoMotor() {
 	mMotorBt = NULL;
 }
 
-void SRBServoMotor::initialize(
-	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-	MOTOR_TYPE* const motorBt, const double maxForce, double lowerLimit,
-	double upperLimit) {
-
-	mJointMotorIndex = jointMotorIndex;
-	mMaxForce = maxForce;
-	mLowerLimit = lowerLimit;
-	mUpperLimit = upperLimit;
+void SRBServoMotor::initialize(MOTOR_TYPE* const motorBt) {
 
 	mMotorBt = motorBt;
 
@@ -91,11 +93,16 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	mConstraint->setServoTarget(mJointMotorIndex, targetAngle);
 #else
 
-	float kP = 2.0f;
-	float mMaxForce = 1000.0f;
+	float kP = 500.0f;
+	float mMaxSpeed = 10000.0f;
 	//simple p(roportional) controller
-	mMotorBt->m_targetVelocity = kP * angleError;
-	mMotorBt->m_maxMotorForce = 1000;
+//	mMotorBt->m_targetVelocity = kP * angleError;
+//	mMotorBt->m_maxMotorForce = 1000;
+
+//calculate the target velocity and clamp it with the maximum speed
+	mMotorBt->m_targetVelocity =
+		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
+		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
 #endif
 	//std::cout << mMotorBt->m_currentPosition << "," << targetAngle << std::endl;
 }

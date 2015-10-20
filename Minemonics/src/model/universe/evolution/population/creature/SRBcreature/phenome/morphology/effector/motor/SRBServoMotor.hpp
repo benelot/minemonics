@@ -56,6 +56,8 @@ class JointBt;
 class SRBServoMotor: public ServoMotor {
 public:
 	SRBServoMotor();
+	SRBServoMotor(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+		const double maxForce, double lowerLimit, double upperLimit);
 	SRBServoMotor(const SRBServoMotor& SRBServoMotor);
 
 	virtual ~SRBServoMotor();
@@ -65,10 +67,7 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(
-		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		MOTOR_TYPE* const motorBt, const double maxForce, double lowerLimit,
-		double upperLimit);
+	void initialize(MOTOR_TYPE* const motorBt);
 
 	/**
 	 * Clone the SRBServoMotor.
@@ -109,20 +108,11 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Motor) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
-		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
-		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ServoMotor); /**!< Serialize the base object */
 	}
 
 private:
-	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;
-
 	MOTOR_TYPE* mMotorBt;
-
-	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
-	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
-
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SRBSERVOMOTOR_H_ */
