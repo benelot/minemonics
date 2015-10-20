@@ -65,21 +65,28 @@ public:
 	 * The best performing creature takes part in <ratio> of all cross-overs etc.
 	 */
 	static const double REAPER_SOW_OFFSPRING[]; // Initialization in EvolutionConfiguration.cpp
-	static const double REAPER_GENE_MUTATION_PROBABILITY = 0.3;
-	static const double REAPER_ATTRIBUTE_MUTATION_PROBABILITY = 0.5;
-	static const double REAPER_LINK_MUTATION_PROBABILITY = 0.6;
-	static const int REAPER_GROW_STUB_QTY = 3;
 
-	static const double REAPER_REAP_PERCENTAGE = 0.1;
-	static const double REAPER_CROSSOVER_PERCENTAGE = 0.5;
-	static const double REAPER_GENE_MUTATION_PERCENTAGE = 0.2;
-	static const double REAPER_ATTRIBUTE_MUTATION_PERCENTAGE = 0.2;
+	static const double REAPER_REAP_PERCENTAGE = 0.1; /**!< First the reaper reaps off a percentage */
 
-	/**
-	 * How many creatures should be sown randomly.
-	 * = 1.0 - REAPER_ATTRIBUTE_MUTATION_PERCENTAGE - REAPER_CROSSOVER_PERCENTAGE - EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE
-	 */
-	static const double REAPER_SOW_FRESH_PERCENTAGE; // Initialization in EvolutionConfiguration.cpp
+	static const double REAPER_CROSSOVER_PERCENTAGE = 0.5f; /**!< Cross over percentage and sow fresh sum up to 1.0*/
+	static const double REAPER_SOW_FRESH_PERCENTAGE = 0.5f; /** !< How many creatures should be sown randomly. */
+
+	/** The percentage of the population to be affected. The following sum up to 1.0*/
+	static const double REAPER_GENE_MUTATION_PERCENTAGE = 0.2f;
+	static const double REAPER_GENE_SPLIT_PERCENTAGE = 0.2f;
+	static const double REAPER_LINK_MUTATION_PERCENTAGE = 0.2f;
+	static const int REAPER_GROW_STUB_PERCENTAGE = 0.2f;
+	static const double REAPER_GRAFT_PERCENTAGE = 0.2f;
+
+	/** The probability of genome to be affected. The following DO NOT sum up to 1.0*/
+	static const double REAPER_GENE_MUTATION_PROBABILITY = 0.2f;
+	static const double REAPER_LINK_MUTATION_PROBABILITY = 0.2f;
+	static const double REAPER_GENE_SPLIT_PROBABILITY = 0.1f;
+	static const int REAPER_GROW_STUB_PROBABILITY = 0.6f;
+	static const int REAPER_GROW_STUB_BRANCHINESS = 2;
+	static const double REAPER_GRAFT_PROPABILITY = 0.6f;
+
+
 
 	static const Ogre::Vector3 ROOT_POSITION;
 

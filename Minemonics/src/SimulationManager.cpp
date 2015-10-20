@@ -189,8 +189,7 @@ void SimulationManager::createScene(void) {
 	// ###################
 	// We create the evaluation scene defined by the planet to be evaluated
 	// ###################
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Setup evaluation environment...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...";
 
 	// Set default ambient light
 	mSceneMgr->setAmbientLight(
@@ -202,7 +201,13 @@ void SimulationManager::createScene(void) {
 //	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
 //	mSceneMgr->setSkyDome(true, "Examples/SpaceSkyDome1", 10, 1, 15000, true);
 
-	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox2", 4000, true);
+	int skyindex = Randomness::getSingleton()->nextUnifPosInt(1, 30);
+	std::string skyboxstring;
+	skyboxstring = std::string("Examples/SpaceSkyBox")
+		+ std::string(1 - (skyindex > 10), '0')
+		+ std::string(boost::lexical_cast<std::string>(skyindex));
+
+	mSceneMgr->setSkyBox(true, skyboxstring, 4000, true);
 //	mSceneMgr->setSkyBox(true, "Examples/StormSkyBox", 4000, true);
 //	mSceneMgr->setSkyBox(true, "Examples/CloudyNoonSkyBox", 4000, true);
 //	mSceneMgr->setSkyBox(true, "Examples/SceneSkyBox1", 4000, true);
@@ -248,60 +253,10 @@ void SimulationManager::createScene(void) {
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
 
 	// create the serialization top folder if necessary
-	mSerializationPath = FilesystemManipulator::createFolder(".",SerializationConfiguration::TOP_FOLDER);
+	mSerializationPath = FilesystemManipulator::createFolder(".",
+		SerializationConfiguration::TOP_FOLDER);
 
-//	// create a planet called earth
-//	Planet* earth = new Planet(PhysicsController::FeatherstoneModel,
-//		Environment::PLANE, 20, mSun);
-//
-//	Epoch* oneEarthEpoch = new Epoch();
-//	oneEarthEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
-//	oneEarthEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
-//
-//	earth->addEpoch(oneEarthEpoch);
-//
-//	// add earth to universe
-//	mUniverse.addPlanet(earth);
-//
-//	// create a population
-//	Population* earthPopulation = new Population();
-//	earthPopulation->initialize(earth, 100,
-//		EvolutionConfiguration::ROOT_POSITION);
-//
-//	// add earth population to earth
-//	earth->addPopulation(earthPopulation);
-
-//	// create a population
-//	Population* earth2Population = new Population();
-//	earth2Population->initialize(earth, 100,
-//			EvolutionConfiguration::ROOT_POSITION);
-
-//	// add earth population to earth
-//	earth->addPopulation(earth2Population);
-
-//	TODO::Make it work with multiple planets
-	// create a planet called mars
-//	Planet* mars = new Planet(PhysicsController::FeatherstoneController,
-//		Environment::PLANE, 20, mSun);
-//
-//	Epoch* oneMarsEpoch = new Epoch();
-//	oneMarsEpoch->addJuryType(Jury::AVG_VELOCITY, 1, true);
-//	oneMarsEpoch->addJuryType(Jury::AVG_HEIGHT, 1, false);
-//
-//	mars->addEpoch(oneMarsEpoch);
-//
-//	// add mars to universe
-//	mUniverse.addPlanet(mars);
-//
-//	// create a population
-//	Population* marsPopulation = new Population();
-//	marsPopulation->initialize(mars, 10, EvolutionConfiguration::ROOT_POSITION);
-//
-//	// add earth population to mars
-//	mars->addPopulation(marsPopulation);
-
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-		<< "Setup evaluation environment...done.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";
 
 	// request a state change saying that the simulation is running
 	mStateHandler.requestStateChange(StateHandler::SIMULATION);
@@ -311,7 +266,7 @@ void SimulationManager::createScene(void) {
 void SimulationManager::createFrameListener(void) {
 
 	// Set initial mouse clipping size
-	windowResized (mWindow);
+	windowResized(mWindow);
 
 	// Register as a Window and Frame listener
 	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
@@ -550,8 +505,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
  * @param rw The handle of the render window that was resized.
  */
 void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Repositioning CEGUI pointer...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Repositioning CEGUI pointer...";
 	unsigned int width, height, depth;
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
@@ -569,7 +523,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 #endif
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Notifying CEGUI of resize....";
+	<< "Notifying CEGUI of resize....";
 	mViewController.notifyDisplaySizeChanged(width, height);
 }
 
@@ -579,15 +533,14 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
  */
 void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-			<< "Window has gained focus...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Window has gained focus...";
 
 		// Align CEGUI mouse with SDL mouse
 		mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
 			mInputHandler.getMousePositionY());
 	} else {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-			<< "Window has lost focus...";
+		<< "Window has lost focus...";
 	}
 }
 //-------------------------------------------------------------------------------------
@@ -637,7 +590,7 @@ bool SimulationManager::configure(void) {
 	mRoot->initialise(false);
 
 	//split resolution string
-	std::vector < std::string > elems;
+	std::vector<std::string> elems;
 	std::stringstream ss(cfgOpts[OgreConf::VIDEO_MODE].currentValue);
 	std::string item;
 	while (std::getline(ss, item, 'x')) {
@@ -754,7 +707,7 @@ extern "C" {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 #else
-	int main(int argc, char *argv[])
+int main(int argc, char *argv[])
 #endif
 	{
 // Create application object
@@ -768,7 +721,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 			"An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
 		std::cerr << "An exception has occured: "
-		<< e.getFullDescription().c_str() << std::endl;
+			<< e.getFullDescription().c_str() << std::endl;
 #endif
 	}
 
@@ -782,8 +735,10 @@ std::string SimulationManager::getTimeStamp() {
 	namespace pt = boost::posix_time;
 	pt::ptime now = pt::microsec_clock::local_time();
 	std::stringstream ss;
-	ss << now.date().year() << static_cast<int>(now.date().month()) << now.date().day()
-	    << now.time_of_day().hours() << now.time_of_day().minutes() << now.time_of_day().seconds() << now.time_of_day().fractional_seconds();
+	ss << now.date().year() << static_cast<int>(now.date().month())
+		<< now.date().day() << now.time_of_day().hours()
+		<< now.time_of_day().minutes() << now.time_of_day().seconds()
+		<< now.time_of_day().fractional_seconds();
 	return ss.str();
 }
 

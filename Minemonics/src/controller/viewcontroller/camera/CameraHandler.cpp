@@ -71,16 +71,17 @@ void CameraHandler::initialize() {
 	// Create the camera controlling node
 	mCamNode =
 		SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->createChildSceneNode(
-			"CamNode1",
-			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
+			"ObserverCameraNode",
+			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 200));
 
 	mCamera->setPosition(
-		EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 100));
+		EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 200));
 	mCamNode->attachObject(mCamera);
 	mCamNode->lookAt(EvolutionConfiguration::ROOT_POSITION,
 		Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(12000);
+	mCamera->setFOVy(Ogre::Degree(60.0f));
 
 	if (SimulationManager::getSingleton()->getRoot()->getRenderSystem()->getCapabilities()->hasCapability(
 		Ogre::RSC_INFINITE_FAR_PLANE)) {
