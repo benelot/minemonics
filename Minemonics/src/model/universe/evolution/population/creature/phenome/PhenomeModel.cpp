@@ -38,12 +38,12 @@ PhenomeModel::_Init PhenomeModel::_initializer;
 
 PhenomeModel::PhenomeModel() :
 	mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
-		false) {
+		false), mBodyGenerated(false) {
 }
 
 PhenomeModel::PhenomeModel(CreatureModel* const creatureModel) :
 	mCreatureModel(creatureModel), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
-		false) {
+		false),mBodyGenerated(false) {
 }
 
 PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
@@ -73,6 +73,7 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 
 		}
 	}
+	mBodyGenerated = phenomeModel.mBodyGenerated;
 }
 
 PhenomeModel::~PhenomeModel() {
@@ -88,7 +89,6 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
-
 void PhenomeModel::update(const double timeSinceLastTick) {
 	// let the controller perform
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
@@ -101,7 +101,7 @@ void PhenomeModel::update(const double timeSinceLastTick) {
 //		(*jit)->update(timeSinceLastTick);
 //	}
 
-	// Update all limb models
+// Update all limb models
 	mHasInterpenetrations = false;
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {

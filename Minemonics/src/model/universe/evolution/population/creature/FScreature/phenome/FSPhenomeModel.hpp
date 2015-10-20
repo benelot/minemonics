@@ -57,6 +57,10 @@ public:
 	 */
 	virtual int performEmbryogenesis();
 
+	void generateBody();
+
+	void addJointConstraints();
+	
 	/**
 	 * Reset the creature to the way it was born.
 	 */

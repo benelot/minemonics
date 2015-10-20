@@ -253,8 +253,6 @@ public:
 		ar.register_type(static_cast<SRBJointModel*>(NULL));
 		ar & BOOST_SERIALIZATION_NVP(mDeveloped) /**!< If the phenome is developed*/
 
-//		& BOOST_SERIALIZATION_NVP(mInWorld) /**!< if the phenome is in the world*/
-
 		& BOOST_SERIALIZATION_NVP(mLimbModels) /**!< The vector of limb models.*/
 
 		& BOOST_SERIALIZATION_NVP(mJointModels) /**!< The vector of joint models.*/
@@ -314,6 +312,8 @@ protected:
 	std::vector<Controller*> mControllers;
 
 	bool mHasInterpenetrations;
+
+	bool mBodyGenerated;
 };
 BOOST_CLASS_VERSION(PhenomeModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

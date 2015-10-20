@@ -42,10 +42,10 @@
 
 FSLimbBt::FSLimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-	NULL), mInertia(0, 0, 0), mLink(NULL), mCreatureModel(NULL) {
+	NULL), mInertia(0, 0, 0), mLink(NULL), mLimbModel(NULL) {
 }
 
-FSLimbBt::FSLimbBt(btDynamicsWorld* const world, CreatureModel* const creatureModel,
+FSLimbBt::FSLimbBt(btDynamicsWorld* const world, LimbModel* const limbModel,
 	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 	const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
@@ -73,25 +73,30 @@ FSLimbBt::FSLimbBt(btDynamicsWorld* const world, CreatureModel* const creatureMo
 	mInitialZOrientation = initialOrientation.z;
 	mColor = color;
 	mIntraBodyColliding = isIntraBodyColliding;
-	mCreatureModel = creatureModel;
+	mLimbModel = limbModel;
 }
 
 FSLimbBt::FSLimbBt(const FSLimbBt& limbBt) {
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
-	FSLimbBt(limbBt.mWorld, (CreatureModel*)limbBt.mCollisionShape->getUserPointer(),
+	FSLimbBt(limbBt.mWorld, (LimbModel*)limbBt.mCollisionShape->getUserPointer(),
 		limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
 		OgreBulletUtils::convert(startTransform.getRotation()),
 		Ogre::Vector3(limbBt.mInitialRelativeXPosition,
 			limbBt.mInitialRelativeYPosition, limbBt.mInitialRelativeZPosition),
-		Ogre::Quaternion(limbBt.mInitialXOrientation,
-			limbBt.mInitialYOrientation, limbBt.mInitialZOrientation,
-			limbBt.mInitialWOrientation), limbBt.mDimensions, limbBt.mMass,
+		Ogre::Quaternion(limbBt.mInitialWOrientation,
+			limbBt.mInitialXOrientation, limbBt.mInitialYOrientation,
+			limbBt.mInitialZOrientation), limbBt.mDimensions, limbBt.mMass,
 		limbBt.mRestitution, limbBt.mFriction, limbBt.mColor,
 		limbBt.mIntraBodyColliding);
 
 	mWorld = limbBt.mWorld;
 	mInWorld = limbBt.mInWorld;
 	mInertia = limbBt.mInertia;
+	mLimbModel = limbBt.mLimbModel;
+	mBody = limbBt.mBody;
+	mMotionState = limbBt.mMotionState;
+	mCollisionShape = limbBt.mCollisionShape;
+	mLink = limbBt.mLink;
 }
 
 FSLimbBt::~FSLimbBt() {
@@ -167,9 +172,9 @@ void FSLimbBt::initialize() {
 //		calm();
 
 		//Set user pointer for proper return of creature/limb information etc..
-		mBody->setUserPointer(mCreatureModel);
+		mBody->setUserPointer(mLimbModel);
 		//add the creature model pointer to the collision shape to get it back if we raycast for this object.
-		mCollisionShape->setUserPointer(mCreatureModel);
+		mCollisionShape->setUserPointer(mLimbModel);
 	}
 }
 

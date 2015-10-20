@@ -20,7 +20,7 @@
 BoostLogger StateHandler::mBoostLogger; /*<! initialize the boost logger*/
 StateHandler::_Init StateHandler::_initializer;
 StateHandler::StateHandler() :
-	mFrameTime(0), mLocked(false), mState(STARTUP) {
+	mFrameTime(0), mLocked(false), mState(STARTUP),mCurrentlySelectedPlanet(NULL) {
 
 }
 

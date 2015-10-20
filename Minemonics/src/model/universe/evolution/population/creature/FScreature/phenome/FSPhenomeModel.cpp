@@ -256,7 +256,7 @@ void FSPhenomeModel::generateBody() {
 	bool gyro = true;
 	bool canSleep = true;
 
-	if (mMultiBody) {
+	if (mBodyGenerated) {
 		return;
 	}
 
@@ -384,6 +384,7 @@ void FSPhenomeModel::generateBody() {
 				((FSLimbBt*) mLimbModels[i + 1]->getLimbPhysics())->getLink();
 		}
 	}
+	mBodyGenerated = true;
 }
 
 void FSPhenomeModel::addJointConstraints() {
@@ -494,7 +495,7 @@ btMultiBodyDynamicsWorld* FSPhenomeModel::getWorld() {
 	if (!mWorld) {
 #ifndef EXCLUDE_FROM_TEST
 		mWorld =
-			(btMultiBodyDynamicsWorld*) mCreatureModel->getPopulationModel()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+			(btMultiBodyDynamicsWorld*) mCreatureModel->getWorld();
 #endif
 	}
 	return mWorld;

@@ -14,6 +14,7 @@ project(Minemonics)
 #DEVELOPMENT INPUT
 # Append header files here
 
+
 set(MODELHDRS
 	# model
 	./model/Serializable.hpp
@@ -788,7 +789,7 @@ set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${MATHGL2_LIBRARIES})
 find_package(FFMPEG REQUIRED)
 
 include_directories(${FFMPEG_INCLUDE_DIRS})
-set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES})
+set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${FFMPEG_LIBRARIES} "-llzma")
 
 ######################################################################
 # Boost
@@ -832,7 +833,6 @@ include_directories(
 add_executable(Minemonics WIN32 ${HDRS} ${SRCS})
  
 set_target_properties(Minemonics PROPERTIES DEBUG_POSTFIX _d)
-
 ######################################################################
 # LINKING
 ######################################################################

@@ -40,7 +40,7 @@ FSLimbModel::FSLimbModel(btDynamicsWorld* const world,
 	const Ogre::ColourValue color, bool isIntraBodyColliding,
 	const std::vector<ComponentModel*>::size_type ownIndex) {
 	// initialize the physics model of the limb
-	mLimbPhysics = new FSLimbBt(world, creatureModel, type, position, orientation,
+	mLimbPhysics = new FSLimbBt(world, this, type, position, orientation,
 		initialRelativePosition, initialOrientation, dimensions, mass,
 		restitution, friction, color, isIntraBodyColliding);
 	mOwnIndex = ownIndex;

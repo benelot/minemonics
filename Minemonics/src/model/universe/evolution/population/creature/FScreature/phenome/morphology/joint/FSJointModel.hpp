@@ -69,7 +69,7 @@ public:
 
 	virtual ~FSJointModel();
 
-	void initialize();
+	virtual void initialize();
 
 	/**
 	 * Update the joint model.
@@ -167,11 +167,11 @@ public:
 		return mJointPhysics->getMotors();
 	}
 
-	const std::vector<FSLimbModel*>::size_type getParentIndex() const {
+	const std::vector<LimbModel*>::size_type getParentIndex() const {
 		return mParentIndex;
 	}
 
-	const std::vector<FSLimbModel*>::size_type getChildIndex() const {
+	const std::vector<LimbModel*>::size_type getChildIndex() const {
 		return mChildIndex;
 	}
 

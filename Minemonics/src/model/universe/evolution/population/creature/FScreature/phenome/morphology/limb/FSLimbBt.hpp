@@ -9,7 +9,7 @@
 struct btDefaultMotionState;
 class btDynamicsWorld;
 class btMultiBody;
-class CreatureModel;
+class LimbModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -55,7 +55,7 @@ class FSLimbBt: public LimbPhysics {
 public:
 	FSLimbBt();
 	FSLimbBt(const FSLimbBt& limbBt);
-	FSLimbBt(btDynamicsWorld* const world, CreatureModel* const creatureModel,
+	FSLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
 	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 	const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
@@ -244,7 +244,7 @@ private:
 
 	btMultiBodyLinkCollider* mLink; /**!< The multibody link segment of the limb */
 
-	CreatureModel* mCreatureModel;
+	LimbModel* mLimbModel;
 };
 BOOST_CLASS_VERSION(FSLimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBBT_HPP_ */
