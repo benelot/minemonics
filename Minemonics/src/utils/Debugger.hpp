@@ -37,50 +37,46 @@ public:
 	virtual ~Debugger();
 
 	/**
-	 * Debug method for an error causing the creature vectors to have wrong sizes via the iterators.
-	 * @param populationModel
+	 * Debug method for an error causing the vectors to have wrong sizes via the iterators.
+	 * @param vector Vector to be tested
 	 * @param numberOfRuns
 	 * @param identifier
 	 * @param additionalCounter
 	 * @param showNothingFound
 	 * @return
 	 */
-	static bool detectError(PopulationModel* populationModel, int numberOfRuns,
-			int identifier, int additionalCounter,
-			bool showNothingFound = true) {
+	 template<typename T>
+	static bool detectVectorSizeError(std::string strid, std::vector<T> vector,
+		int numberOfRuns, int identifier, int additionalCounter,
+		bool showNothingFound = true) {
 		bool nothingFound = true;
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		for (int j = 0; j < numberOfRuns; j++) {
 			int i = 0;
-			for (std::vector<CreatureModel*>::const_iterator cit =
-					populationModel->getCreatureModels().begin();
-					cit != populationModel->getCreatureModels().end()
-							&& i <= populationModel->getCreatureModels().size();
-					cit++) {
+			for (typename std::vector<T>::const_iterator cit = vector.begin();
+				cit != vector.end() && i <= vector.size(); cit++) {
 				i++;
 			}
-			if (i != populationModel->getCreatureModels().size()) {
+			if (i != vector.size()) {
 				nothingFound = false;
 				std::cout << "Block " << identifier << "::..."
-						<< additionalCounter << "/" << j
-						<< "CreatureModel vector size check...." << "\nsize: "
-						<< populationModel->getCreatureModels().size() << "\t"
-						<< "size2: >" << i << std::endl;
+					<< additionalCounter << "/" << j << "\n" << strid
+					<< "vector size check...." << "\nsize: " << vector.size()
+					<< "\t" << "size2: >" << i << std::endl;
 				throw std::runtime_error(
-						StringFormatter() << "Block " << identifier << "::..."
-								<< additionalCounter << "/" << j
-								<< "CreatureModel vector size check...."
-								<< "\nsize: "
-								<< populationModel->getCreatureModels().size()
-								<< "\t" << "size2: >" << i >> StringFormatter::to_str);
+					StringFormatter() << "Block " << identifier << "::..."
+						<< additionalCounter << "/" << j << strid
+						<< "vector size check...." << "\nsize: "
+						<< vector.size() << "\t" << "size2: >" << i
+						>> StringFormatter::to_str);
 				return true;
 			}
 		}
 
 		if (showNothingFound && nothingFound) {
 			std::cout << "Block " << identifier << "::..." << additionalCounter;
-			std::cout << "\nCreatureModel vector size check....";
+			std::cout << "\n" << strid << "vector size check....";
 			std::cout << "\nNo errors found\n\n";
 			return false;
 		}
