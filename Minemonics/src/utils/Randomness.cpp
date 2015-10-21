@@ -113,6 +113,15 @@ bool Randomness::nextUnifBoolean() {
 	return (unifIntDistribution(rng)) ? true : false;
 }
 
+int Randomness::nextNormalPosInt(double mean, double variance, double limit) {
+	int integer = nextNormalInt(mean,variance,limit);
+
+	if(integer < 0){
+		integer = 0;
+	}
+	return integer;
+}
+
 int Randomness::nextNormalInt(double mean, double variance, double limit) {
 	//create a uniform integer distribution
 	boost::random::normal_distribution<> normalIntDistribution(mean,

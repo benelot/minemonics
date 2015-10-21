@@ -70,7 +70,15 @@ public:
 	bool nextUnifBoolean();
 
 	/**
-	 * Return a normally distributed integer. The integer however can not be outside of limit* variances to cut off extremely high and low numbers.
+	 * Return a positive normally distributed integer. The integer however can not be outside of limit variances to cut off extremely high and low numbers.
+	 * @param mean The mean of the normal distribution.
+	 * @param variance The variance of the normal distribution.
+	 * @return The normally distributed integer.
+	 */
+	int nextNormalPosInt(double mean, double variance, double limit = 2);
+
+	/**
+	 * Return a normally distributed integer. The integer however can not be outside of limit variances to cut off extremely high and low numbers.
 	 * @param mean The mean of the normal distribution.
 	 * @param variance The variance of the normal distribution.
 	 * @return The normally distributed integer.
@@ -78,7 +86,7 @@ public:
 	int nextNormalInt(double mean, double variance, double limit = 2);
 
 	/**
-	 * Return a normally distributed double. The double however can not be outside of limit* variances to cut off extremely high and low numbers.
+	 * Return a normally distributed double. The double however can not be outside of limit variances to cut off extremely high and low numbers.
 	 * @param mean The mean of the normal distribution.
 	 * @param variance The variance of the normal distribution.
 	 * @return The normally distributed double.
