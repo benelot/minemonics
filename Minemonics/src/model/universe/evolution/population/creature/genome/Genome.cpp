@@ -15,7 +15,7 @@
 //## utils headers
 
 Genome::Genome(GenomeType type) :
-		mLength(0), mGenomeType(type), mBranchiness(0) {
+		mLength(0), mGenomeType(type), mBranchiness(0),mRootIndex(0) {
 }
 
 Genome::~Genome() {

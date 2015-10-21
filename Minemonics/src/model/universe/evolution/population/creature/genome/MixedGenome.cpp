@@ -51,47 +51,63 @@ MixedGenome::~MixedGenome() {
 void MixedGenome::createRandomGenome(double branchiness) {
 	mBranchiness = branchiness;
 
+	// find the number of genes for this genome
 	int geneQty = 2
 		+ abs(
 			Randomness::getSingleton()->nextNormalInt(
 				GeneticsConfiguration::GENES_INITIAL_MEAN,
 				GeneticsConfiguration::GENES_INITIAL_VAR));
-	std::cout << geneQty << std::endl;
+
+	std::cout << " Gene Qty: "<< geneQty << std::endl;
+
+	// add the number of morphogenes
 	for (int i = 0; i < geneQty; i++) {
 		Morphogene* gene = new Morphogene();
 		gene->initialize(branchiness);
 		mGenes.push_back(gene);
 	}
 
+	// initialize the segments depth
 	mSegmentsDepthLimit = abs(
 		Randomness::getSingleton()->nextNormalInt(
 			MorphologyConfiguration::LIMB_DEPTH_INITIAL_MEAN,
 			MorphologyConfiguration::LIMB_DEPTH_INITIAL_VAR));
 
+	// initialize the total segments quantity
 	mTotalSegmentQtyLimit = abs(
 		Randomness::getSingleton()->nextNormalInt(
 			MorphologyConfiguration::LIMB_TOTAL_INITIAL_MEAN,
 			MorphologyConfiguration::LIMB_TOTAL_INITIAL_VAR));
 
-	int branchesQty = 0;
+	// set the root index to 0
+	mRootIndex = 0;
+
+	// Find the gene that has the most active branches
+	int maxActiveBranches = 0;
 	for (int i = 0; i < geneQty; i++) {
 		switch (mGenes[i]->getType()) {
 		case Gene::MorphoGene: {
+
+			// print the number of branches
 			std::cout << "\t   "
 				<< ((Morphogene*) mGenes[i])->getGeneBranches().size() << "\t";
 
+			// count the number of active branches
 			int activeBranches = 0;
 			for (std::vector<MorphogeneBranch*>::iterator branchIt =
 				((Morphogene*) mGenes[i])->getGeneBranches().begin();
 				branchIt != ((Morphogene*) mGenes[i])->getGeneBranches().end();
 				branchIt++) {
 				activeBranches += (*branchIt)->isActive();
+
+				// print if the branch is active
 				std::cout << ((*branchIt)->isActive());
 			}
 			std::cout << std::endl;
 
-			if (activeBranches > branchesQty) {
-				branchesQty = activeBranches;
+			// if the number of active branches is higher than the current max, then overwrite
+			if (activeBranches > maxActiveBranches) {
+				maxActiveBranches = activeBranches;
 				mRootIndex = i;
 			}
 
@@ -102,9 +118,10 @@ void MixedGenome::createRandomGenome(double branchiness) {
 		}
 	}
 
-	std::cout << "\t\t   " << branchesQty << std::endl;
+	std::cout << "\t\t   " << maxActiveBranches << std::endl;
 
 	repairGenes();
+
 	if (mGenes.size() != 0) {
 		int geneSize = mGenes.size() - 1;
 		std::cout << "GenomeSize: " << geneSize << std::endl;
@@ -171,18 +188,6 @@ void MixedGenome::addRandomGeneBranch() {
 }
 
 void MixedGenome::addGeneBranch(const int geneIndex1, const int geneIndex2) {
-	int geneIndex1C = geneIndex1;
-	//TODO: Sometimes I get very high random values here.
-	if (geneIndex1C > mGenes.size() - 1) {
-		geneIndex1C = mGenes.size() - 1;
-	}
-
-	int geneIndex2C = geneIndex2;
-	//TODO: Sometimes I get very high random values here.
-	if (geneIndex2C > mGenes.size() - 1) {
-		geneIndex2C = mGenes.size() - 1;
-	}
-
 	Gene::GeneType type =
 		(Gene::GeneType) Randomness::getSingleton()->nextUnifPosInt(
 			Gene::MorphoGene, Gene::NUM_GENES - 1);
@@ -377,7 +382,7 @@ void MixedGenome::growRandomStubs(double growProbability) {
 		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
 			<= growProbability) {
 			int branchiness = Randomness::getSingleton()->nextUnifDouble(0,
-				EvolutionConfiguration::REAPER_GROW_STUB_QTY);
+				EvolutionConfiguration::REAPER_GROW_STUB_BRANCHINESS);
 			growStub(i, branchiness);
 		}
 	}
@@ -387,7 +392,7 @@ void MixedGenome::growRandomStub() {
 	int geneIndex = Randomness::getSingleton()->nextUnifPosInt(0,
 		mGenes.size() - 1);
 	int branchiness = Randomness::getSingleton()->nextUnifDouble(0,
-		EvolutionConfiguration::REAPER_GROW_STUB_QTY);
+		EvolutionConfiguration::REAPER_GROW_STUB_BRANCHINESS);
 	growStub(geneIndex, branchiness);
 }
 
@@ -516,7 +521,9 @@ void MixedGenome::graftRandomlyFrom(Genome* donator) {
 
 void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 	int geneQty) {
-	//TODO: Make working for controller as well.
+
+	std::map<int, int> classMap;
+
 	if (mGenes[attachmentIndex]->getType() == Gene::MorphoGene) {
 
 		MorphogeneBranch* branch = new MorphogeneBranch();
@@ -534,26 +541,50 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 		std::vector<Morphogene*> visitGenes;
 		visitGenes.push_back(donorGeneCopy);
 
-		Morphogene* currentGene;
+		Morphogene* currentGene = NULL;
 
 		int genesCopied = 0;
 
 		while (!visitGenes.empty()) {
-			currentGene = (*visitGenes.end());
+			currentGene = visitGenes.back();
 			visitGenes.pop_back();
 
-			std::vector<MorphogeneBranch*>::iterator gbit =
+			for (std::vector<MorphogeneBranch*>::iterator gbit =
 				currentGene->getGeneBranches().begin();
-			for (; gbit != currentGene->getGeneBranches().end(); gbit++) {
-				Morphogene* nextGeneCopy =
-					((Morphogene*) donor->getGenes()[(*gbit)->getBranchGeneType()])->clone();
-				if (genesCopied < geneQty) {
-					visitGenes.push_back(nextGeneCopy);
-					genesCopied++;
+				gbit != currentGene->getGeneBranches().end(); gbit++) {
+
+				// if the gene is already grafted, we find its new position in the map.
+				std::map<int, int>::iterator i = classMap.find(
+					(*gbit)->getBranchGeneType());
+
+				// if we found that the gene has been grafted before
+				if (i != classMap.end()) {
+					(*gbit)->setBranchGeneType(i->second);
+
+				// if we did not graft the gene before
+				} else {
+
+					// copy the morphogene
+					Morphogene* nextGeneCopy =
+						((Morphogene*) donor->getGenes()[(*gbit)->getBranchGeneType()])->clone();
+
+					mGenes.push_back(nextGeneCopy);
+
+					//insert the new class mapping
+					classMap.insert(
+						std::pair<int, int>((*gbit)->getBranchGeneType(),
+							mGenes.size() - 1));
+
+					// set the branch to the new class
+					(*gbit)->setBranchGeneType(mGenes.size() - 1);
+
+					//add it to the next ones to be visited if we did not yet reach geneQty
+					if (genesCopied < geneQty) {
+						visitGenes.push_back(nextGeneCopy);
+						genesCopied++;
+					}
 				}
 
-				mGenes.push_back(nextGeneCopy);
-				(*gbit)->setBranchGeneType(mGenes.size() - 1);
 			}
 		}
 
