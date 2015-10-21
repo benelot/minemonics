@@ -64,12 +64,8 @@ public:
 
 	/**
 	 * Initialize the evolution model.
-	 * @param type The evaluation type.
-	 * @param evaluationTime The evaluation time in this evolution model
-	 * @param tournamentSize The size of the tournament for simultaneous evaluation
 	 */
-	void initialize(const EvaluationType type = INDIVIDUAL_EVALUATION,
-		const double evaluationTime = 10, const int tournamentSize = 1);
+	void initialize();
 
 	/**
 	 * Perform embryogenesis on all creatures that are not developed.

@@ -65,7 +65,7 @@ void PlanetModel::initialize() {
 	mEnvironmentModel->getPhysicsController()->setDebugDrawer(
 		&(SimulationManager::getSingleton()->getDebugDrawer()));
 #endif
-
+	mEvolutionModel.initialize();
 }
 
 bool PlanetModel::proceedEvaluation() {

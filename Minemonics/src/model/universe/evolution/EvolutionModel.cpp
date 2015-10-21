@@ -9,6 +9,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EvolutionConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
@@ -32,13 +34,16 @@ EvolutionModel::~EvolutionModel() {
 	mPopulationModels.clear();
 }
 
-void EvolutionModel::initialize(const EvaluationType type,
-	const double evaluationTime, const int tournamentSize) {
-	mType = type;
-	mEvaluationTime = evaluationTime;
-	mTournamentSize = tournamentSize;
+void EvolutionModel::initialize() {
 	//TODO:Get reasonable numbers
-	mReaper.initialize(0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3);
+	mReaper.initialize(EvolutionConfiguration::REAPER_REAP_PERCENTAGE,
+		EvolutionConfiguration::REAPER_CROSSOVER_PERCENTAGE,
+		EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE,
+		EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE,
+		EvolutionConfiguration::REAPER_LINK_MUTATION_PERCENTAGE,
+		EvolutionConfiguration::REAPER_GROW_STUB_PERCENTAGE,
+		EvolutionConfiguration::REAPER_GRAFT_PERCENTAGE,
+		EvolutionConfiguration::REAPER_SOW_FRESH_PERCENTAGE);
 
 	//GENERATION
 }
@@ -135,12 +140,12 @@ void EvolutionModel::performEmbryogenesis() {
 }
 
 bool EvolutionModel::setCurrentCreatureIndex(
-		const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
-		if (currentCreatureIndex
-			< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
-			mCurrentCreatureIndex = currentCreatureIndex;
-			return true;
-		} else {
-			return false;
-		}
+	const std::vector<CreatureModel*>::size_type currentCreatureIndex) {
+	if (currentCreatureIndex
+		< mPopulationModels[mCurrentPopulationIndex]->getCreatureModels().size()) {
+		mCurrentCreatureIndex = currentCreatureIndex;
+		return true;
+	} else {
+		return false;
 	}
+}
