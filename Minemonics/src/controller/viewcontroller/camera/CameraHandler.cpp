@@ -33,11 +33,12 @@ CameraHandler::CameraHandler() :
 }
 
 CameraHandler::~CameraHandler() {
-	delete mCamNode;
-	mCamNode = NULL;
-	delete mCamera;
-
-	mCamera = NULL;
+// Do not kill the node, ogre does
+//	delete mCamNode;
+//	mCamNode = NULL;
+//Do not kill the camera, ogre does
+//	delete mCamera;
+//	mCamera = NULL;
 }
 
 void CameraHandler::reposition(float timeSinceLastFrame) {
