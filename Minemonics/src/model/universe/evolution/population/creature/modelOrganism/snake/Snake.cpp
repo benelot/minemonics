@@ -1,7 +1,4 @@
 //# corresponding headers
-#include <controller/universe/evolution/population/snake/Snake.hpp>
-//# forward declarations
-//# system headers
 #include <stddef.h>
 #include <cmath>
 #include <iterator>
@@ -33,6 +30,7 @@
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/PlanetModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/snake/Snake.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 
