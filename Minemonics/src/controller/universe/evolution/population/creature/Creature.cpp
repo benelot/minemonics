@@ -78,14 +78,14 @@ void Creature::update(double timeSinceLastTick) {
 }
 
 int Creature::addToPhysicsWorld() {
-	int limbQty = 1;
+	int limbQty = 0;
 	// develop creature if it is not developed yet.
 	if (!isDeveloped()) {
-		limbQty = performEmbryogenesis();
+		performEmbryogenesis();
 	}
 
 	// Add phenotype to world
-	mPhenotype.addToPhysicsWorld();
+	limbQty = mPhenotype.addToPhysicsWorld();
 	return limbQty;
 }
 
@@ -98,7 +98,6 @@ int Creature::addToWorld() {
 
 	// Add phenotype to world
 	limbQty = mPhenotype.addToWorld();
-
 	return limbQty;
 }
 

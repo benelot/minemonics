@@ -121,7 +121,7 @@ public:
 	/**
 	 * Add the phenotype to the physics world.
 	 */
-	void addToPhysicsWorld();
+	virtual int addToPhysicsWorld();
 
 	/**
 	 * Add the phenotype to the physical and graphical world.

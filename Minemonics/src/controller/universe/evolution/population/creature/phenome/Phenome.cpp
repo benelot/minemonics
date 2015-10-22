@@ -150,12 +150,15 @@ void Phenome::update(double timeSinceLastTick) {
 	mPhenotypeModel->update(timeSinceLastTick);
 }
 
-void Phenome::addToPhysicsWorld() {
+int Phenome::addToPhysicsWorld() {
+	int limbQty = 0;
+	mPhenotypeModel->addToWorld();
 	if (!isInWorld()) {
 		// Add all limbs
 		for (std::vector<Limb*>::iterator lit = mLimbs.begin();
 			lit != mLimbs.end(); lit++) {
 			(*lit)->addToPhysicsWorld();
+			limbQty++;
 		}
 
 		// Add all constraints
@@ -165,6 +168,7 @@ void Phenome::addToPhysicsWorld() {
 		}
 		setInWorld(true);
 	}
+	return limbQty;
 }
 
 int Phenome::addToWorld() {
