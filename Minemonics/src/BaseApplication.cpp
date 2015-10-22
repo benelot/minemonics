@@ -59,7 +59,6 @@ BaseApplication::~BaseApplication(void) {
 
 	// Remove ourself as a Window listener
 	Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
-	windowClosed(mWindow);
 	delete mRoot;
 }
 
@@ -213,12 +212,6 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 
 	return true;
-}
-
-//---------------------------------------------------------------------------
-// Unattach OIS before window shutdown (very important under Linux)
-void BaseApplication::windowClosed(Ogre::RenderWindow* rw) {
-
 }
 
 Ogre::RenderWindow*& BaseApplication::getWindow() {

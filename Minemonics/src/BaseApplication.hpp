@@ -87,8 +87,6 @@ protected:
 	// Ogre::WindowEventListener
 	//Adjust mouse clipping area
 	virtual void windowResized(Ogre::RenderWindow* rw) = 0;
-	//Unattach OIS before window shutdown (very important under Linux)
-	virtual void windowClosed(Ogre::RenderWindow* rw);
 
 	Ogre::Root* mRoot;
 //	Ogre::Camera* mCamera;
