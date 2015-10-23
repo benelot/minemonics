@@ -264,10 +264,12 @@ void Reaper::mutateGenes(PopulationModel* const population, int startIndex,
 	const int mutatedGeneHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < mutatedGeneHeads; i++) {
-			population->getCreatureModels()[i]->getGenotype().mutateRandomGenes(
-				EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
-			population->getCreatureModels()[startIndex + i]->setNew(true);
-			population->getCreatureModels()[startIndex + i]->initialize();
+			if (population->getCreatureModels().size() > startIndex + i) {
+				population->getCreatureModels()[startIndex + i]->getGenotype().mutateRandomGenes(
+					EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
+				population->getCreatureModels()[startIndex + i]->setNew(true);
+				population->getCreatureModels()[startIndex + i]->initialize();
+			}
 		}
 	}
 }
@@ -276,10 +278,12 @@ void Reaper::splitGenes(PopulationModel* const population, const int startIndex,
 	const int splitGeneHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < splitGeneHeads; i++) {
-			population->getCreatureModels()[i]->getGenotype().splitRandomGenes(
-				EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY);
-			population->getCreatureModels()[startIndex + i]->setNew(true);
-			population->getCreatureModels()[startIndex + i]->initialize();
+			if (population->getCreatureModels().size() > startIndex + i) {
+				population->getCreatureModels()[startIndex + i]->getGenotype().splitRandomGenes(
+					EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY);
+				population->getCreatureModels()[startIndex + i]->setNew(true);
+				population->getCreatureModels()[startIndex + i]->initialize();
+			}
 		}
 	}
 }
@@ -288,10 +292,12 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 	const int startIndex, const int mutatedGeneBranchHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < mutatedGeneBranchHeads; i++) {
-			population->getCreatureModels()[i]->getGenotype().mutateRandomBranches(
-				EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY);
-			population->getCreatureModels()[startIndex + i]->setNew(true);
-			population->getCreatureModels()[startIndex + i]->initialize();
+			if (population->getCreatureModels().size() > startIndex + i) {
+				population->getCreatureModels()[startIndex + i]->getGenotype().mutateRandomBranches(
+					EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY);
+				population->getCreatureModels()[startIndex + i]->setNew(true);
+				population->getCreatureModels()[startIndex + i]->initialize();
+			}
 		}
 	}
 }
@@ -300,10 +306,12 @@ void Reaper::growStubs(PopulationModel* const population, const int startIndex,
 	const int growStubHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < growStubHeads; i++) {
-			population->getCreatureModels()[i]->getGenotype().growRandomStubs(
-				EvolutionConfiguration::REAPER_GROW_STUB_PROBABILITY);
-			population->getCreatureModels()[startIndex + i]->setNew(true);
-			population->getCreatureModels()[startIndex + i]->initialize();
+			if (population->getCreatureModels().size() > startIndex + i) {
+				population->getCreatureModels()[startIndex + i]->getGenotype().growRandomStubs(
+					EvolutionConfiguration::REAPER_GROW_STUB_PROBABILITY);
+				population->getCreatureModels()[startIndex + i]->setNew(true);
+				population->getCreatureModels()[startIndex + i]->initialize();
+			}
 		}
 	}
 }
@@ -312,31 +320,34 @@ void Reaper::graftFeatures(PopulationModel* const population,
 	const int startIndex, const int graftedHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < graftedHeads; i++) {
-			/**
-			 * Whenever a parent is needed, we choose a number of individuals at random from
-			 * the previous generation. These individuals constitute a tournament.
-			 * The creature with the highest fitness wins and becomes the selected parent.
-			 */
-			std::vector<CreatureModel*> tournament;
-			int bestCreatureIndex = 0;
-			int bestFitness = 0;
+			if (population->getCreatureModels().size() > startIndex + i) {
+				/**
+				 * Whenever a parent is needed, we choose a number of individuals at random from
+				 * the previous generation. These individuals constitute a tournament.
+				 * The creature with the highest fitness wins and becomes the selected parent.
+				 */
+				std::vector<CreatureModel*> tournament;
+				int bestCreatureIndex = 0;
+				int bestFitness = 0;
 
-			for (int j = 0;
-				j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE; j++) {
-				CreatureModel* model = population->getCreatureModels().at(
-					Randomness::getSingleton()->nextNormalPosInt(0,
-						population->getCreatureModels().size() - 1, 1.0f));
-				if (bestFitness < model->getFitnessScore()) {
-					bestFitness = model->getFitnessScore();
-					bestCreatureIndex = j;
+				for (int j = 0;
+					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+					j++) {
+					CreatureModel* model = population->getCreatureModels().at(
+						Randomness::getSingleton()->nextNormalPosInt(0,
+							population->getCreatureModels().size() - 1, 1.0f));
+					if (bestFitness < model->getFitnessScore()) {
+						bestFitness = model->getFitnessScore();
+						bestCreatureIndex = j;
+					}
+					tournament.push_back(model);
 				}
-				tournament.push_back(model);
-			}
 
-			population->getCreatureModels()[i]->getGenotype().graftRandomlyFrom(
-				&tournament[bestCreatureIndex]->getGenotype());
-			population->getCreatureModels()[startIndex + i]->setNew(true);
-			population->getCreatureModels()[startIndex + i]->initialize();
+				population->getCreatureModels()[startIndex + i]->getGenotype().graftRandomlyFrom(
+					&tournament[bestCreatureIndex]->getGenotype());
+				population->getCreatureModels()[startIndex + i]->setNew(true);
+				population->getCreatureModels()[startIndex + i]->initialize();
+			}
 		}
 	}
 }
