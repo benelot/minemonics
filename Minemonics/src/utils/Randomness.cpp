@@ -87,14 +87,14 @@ double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
 	}
 
 	boost::random::uniform_real_distribution<> unifDoubleDistribution(
-		pow(10, lowerLimit), pow(10, upperLimit));
+		pow(1.1f, lowerLimit), pow(1.1f, upperLimit));
 
 	//draw m and n
 	double tenpowm = unifDoubleDistribution(rng);
 	double tenpown = unifDoubleDistribution(rng);
 
 	//return m or n whichever is higher
-	return (tenpowm > tenpown) ? log10(tenpowm) : log10(tenpown);
+	return (tenpowm > tenpown) ? log10(tenpowm)/log10(1.1f) : log10(tenpown)/log10(1.1f);
 }
 
 bool Randomness::nextUnifBoolean() {

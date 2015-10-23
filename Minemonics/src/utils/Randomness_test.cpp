@@ -69,10 +69,16 @@ TEST_F(RandomnessTest,distributionsStayWithinBounds) {
 
 		// normally distributed integer
 		double normalInt = randomness->nextNormalInt(404.404f, 30);
-		std::cout << normalInt << std::endl;
+		std::cout << normalInt << "\t";
 		ASSERT_TRUE(340 <= normalInt);
 		ASSERT_TRUE(normalInt <= 470);
 		ASSERT_TRUE(normalInt == floor(normalInt));
+
+		//biased double
+		double biasedDouble =  randomness->nextBiasedLogDouble(123,456);
+		std::cout << biasedDouble << std::endl;
+		ASSERT_TRUE(123 <= biasedDouble);
+		ASSERT_TRUE(biasedDouble <= 456);
 	}
 }
 
