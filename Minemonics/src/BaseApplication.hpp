@@ -75,21 +75,19 @@ protected:
 	virtual bool setup();
 	virtual bool configure(void);
 	virtual void chooseSceneManager(void);
-	virtual void setupView(void) = 0;
-	virtual void createFrameListener(void);
+	virtual void setupView(void) = 0; // Override me!
+	virtual void createFrameListener(void) = 0; // Override me!
 	virtual void createScene(void) = 0; // Override me!
 	virtual void destroyScene(void);
 	virtual void setupResources(void);
 	virtual void createResourceListener(void);
 	virtual void loadResources(void);
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt) = 0; // Override me!
 
 	// Ogre::WindowEventListener
-	//Adjust mouse clipping area
-	virtual void windowResized(Ogre::RenderWindow* rw) = 0;
+	virtual void windowResized(Ogre::RenderWindow* rw) = 0; /**!< Adjust mouse clipping area */
 
 	Ogre::Root* mRoot;
-//	Ogre::Camera* mCamera;
 	Ogre::SceneManager* mSceneMgr;
 	Ogre::RenderWindow* mWindow;
 	Ogre::String mResourcesCfg;
@@ -97,11 +95,10 @@ protected:
 
 	Ogre::OverlaySystem* mOverlaySystem;
 
-	bool mCursorWasVisible;	// Was cursor visible before dialog appeared?
+	bool mCursorWasVisible;	/**!< Was cursor visible before dialog appeared? */
 	bool mShutDown;
 
-	// Added for Mac compatibility
-	Ogre::String m_ResourcePath;
+	Ogre::String m_ResourcePath; /**!< Added for Mac compatibility */
 
 #ifdef OGRE_STATIC_LIB
 	Ogre::StaticPluginLoader m_StaticPluginLoader;

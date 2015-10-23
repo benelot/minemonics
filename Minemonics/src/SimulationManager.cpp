@@ -87,33 +87,28 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-	mStateHandler(), mInputHandler(), mSdlWindow(NULL), mSimulationSpeed(
+	mStateHandler(), mInputHandler(), mSdlWindow(NULL), mCurrentSimulationSpeed(
 		PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(
 		&mViewController), mSun(NULL) {
-	// Initialize the singleton
-	mSimulationManager = this;
+	mSimulationManager = this; /**!< Initialize the singleton*/
 
-	//initialize the singleton
-	mRandomness = new Randomness();
+	mRandomness = new Randomness(); /**!< Initialize the singleton*/
 
-	//set the contact processor callback
-	gContactProcessedCallback = processContactCallback;
+	gContactProcessedCallback = processContactCallback; /**!< set the contact processor callback */
 
 	// main frame timer initialization
-	mStart = time.getMilliseconds();
-	mApplicationClock = mStart;
-	mPrevious = mStart;
-	mNow = mStart;
-	mRuntime = mNow - mStart;
+	mApplicationStart = mOgreTimer.getMilliseconds(); /**!< Initialize when the application started running */
+	mInputClock = mApplicationStart; /**!< Initialize the last time the input was updated */
+	mPreviousModelIteration = mApplicationStart;
+	mThisModelIteration = mApplicationStart;
+	mApplicationRuntime = mThisModelIteration - mApplicationStart; /**!< Initialize the application runtime */
 
-	mGraphicsStart = mStart;
+	mGraphicsStart = mApplicationStart; /** !< Initialize the last graphics start */
+	mModelStart = mApplicationStart; /** !< Initialize the last model start */
+	mInputStart = mApplicationStart; /** !< Initialize the last input start */
 
-	mModelStart = mStart;
-
-	mInputStart = mStart;
-
-	mPhysicsStepStart = mStart;
-	mPhysicsStepEnd = mStart;
+	mPhysicsStepStart = mApplicationStart;
+	mPhysicsStepEnd = mApplicationStart;
 
 	//durations
 	mLastGraphicsTick = 0;
@@ -121,27 +116,25 @@ SimulationManager::SimulationManager(void) :
 	mLastInputTick = 0;
 	mPhysicsTick = 0;
 
-	mApplicationDt = 0;
-	mAccumulator = 0;
+	mInputDt = 0;
+	mModelAccumulator = 0;
 	mFrameTime = 0;
 }
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
 
-	// tear down the scene
-	destroyScene();
+	destroyScene(); /**!< tear down the scene */
 
 	// destroy the ogre renderer system
 	CEGUI::OgreRenderer::destroySystem();
 
-	//delete static randomness
+	mSimulationManager = NULL;
 	delete mRandomness;
+	mRandomness = NULL;
 }
 
 void SimulationManager::setupView(void) {
-
-	// Create the camera
-	Ogre::Camera* camera = mSceneMgr->createCamera("PlayerCam");
+	Ogre::Camera* camera = mSceneMgr->createCamera("ObserverCamera"); /**!< Create the camera */
 	mViewController.getCameraHandler().setCamera(camera);
 
 	// Create one viewport, entire window
@@ -159,23 +152,18 @@ void SimulationManager::setupView(void) {
  */
 void SimulationManager::createScene(void) {
 
-	// Initialize the logger
-	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL);
+	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
 	Logger::initTermSink();
 
-	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW);
+	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 
 	// Set render target with the current application name
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
 		ApplicationConfiguration::APPLICATION_TITLE);
 
-	// initialize GUI and views
-	mViewController.initialize(renderTarget, &mStateHandler);
+	mViewController.initialize(renderTarget, &mStateHandler); /**!< initialize GUI and views */
 
-	// request a state change saying that the GUI is shown
-	mStateHandler.requestStateChange(StateHandler::GUI);
-
-	//################################################################
+	mStateHandler.requestStateChange(StateHandler::GUI); /**!< request a state change saying that the GUI is shown */
 
 	// initialize the simulation's debug drawer
 	mDebugDrawer.initialize(mSceneMgr, false);
@@ -186,10 +174,8 @@ void SimulationManager::createScene(void) {
 	mDebugDrawer.setDrawContactPoints(false);
 	mDebugDrawer.setDrawNormals(false);
 
-	// ###################
-	// We create the evaluation scene defined by the planet to be evaluated
-	// ###################
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...";
+	// Create the universe
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...";
 
 	// Set default ambient light
 	mSceneMgr->setAmbientLight(
@@ -197,39 +183,20 @@ void SimulationManager::createScene(void) {
 			EnvironmentConfiguration::AMBIENT_G,
 			EnvironmentConfiguration::AMBIENT_B));
 
-	// either create a skydome or a skyplane
-//	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8, 4000, true);
-//	mSceneMgr->setSkyDome(true, "Examples/SpaceSkyDome1", 10, 1, 15000, true);
-
+	// choose a random skybox
 	int skyindex = Randomness::getSingleton()->nextUnifPosInt(1, 30);
 	std::string skyboxstring;
 	skyboxstring = std::string("Examples/SpaceSkyBox")
 		+ std::string(1 - (skyindex > 10), '0')
 		+ std::string(boost::lexical_cast<std::string>(skyindex));
-
 	mSceneMgr->setSkyBox(true, skyboxstring, 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/StormSkyBox", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/CloudyNoonSkyBox", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/SceneSkyBox1", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/SceneSkyBox2", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/TrippySkyBox", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/EarlyMorningSkyBox", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/MorningSkyBox", 4000, true);
-//	mSceneMgr->setSkyBox(true, "Examples/EveningSkyBox", 4000, true);
 
-	//  Create skyplane
-	//	Ogre::Plane plane;
-	//	plane.d = 100;
-	//	plane.normal = Ogre::Vector3::NEGATIVE_UNIT_Y;
-	//	mSceneMgr->setSkyPlane(true, plane, "Examples/CloudySky", 500, 20, true,
-	//			0.5, 150, 150);
-//	Examples/SpaceSkyPlane
-
+	// setup the shadows
 	mSceneMgr->setShadowTechnique(
 		(mViewController.doesShowShadows()) ?
 			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
 
-	//add some filtering to reduce the moire effect
+	//add some filtering to reduce the moiree effect
 	Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(
 		Ogre::TFO_ANISOTROPIC);
 	Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(8);
@@ -237,13 +204,10 @@ void SimulationManager::createScene(void) {
 	//Set fog color and fading function
 	Ogre::ColourValue fadeColour(0, 0, 0);
 	mWindow->getViewport(0)->setBackgroundColour(fadeColour);
-	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 17000, 30000);
+	mSceneMgr->setFog(Ogre::FOG_LINEAR, fadeColour, 0, 8000, 30000);
 //	mSceneMgr->setFog(Ogre::FOG_EXP, fadeColour, 0.002);
 //	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
-	// ###################
-	// We initialize the universe
-	// ###################
 	mSun = mSceneMgr->createLight();
 	mSun->setType(Ogre::Light::LT_DIRECTIONAL);
 	mSun->setDiffuseColour(Ogre::ColourValue(1, 1, 0.2));
@@ -256,20 +220,16 @@ void SimulationManager::createScene(void) {
 	mSerializationPath = FilesystemManipulator::createFolder(".",
 		SerializationConfiguration::TOP_FOLDER);
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup evaluation environment...done.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...done.";
 
-	// request a state change saying that the simulation is running
-	mStateHandler.requestStateChange(StateHandler::SIMULATION);
+	mStateHandler.requestStateChange(StateHandler::SIMULATION); /**!< request a state change saying that the simulation is running */
 }
 
 //-------------------------------------------------------------------------------------
 void SimulationManager::createFrameListener(void) {
+	windowResized(mWindow); /**!< Set initial mouse clipping size */
 
-	// Set initial mouse clipping size
-	windowResized(mWindow);
-
-	// Register as a Window and Frame listener
-	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
+	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this); /**!< Register as a Window and Frame listener */
 	mRoot->addFrameListener(this);
 }
 
@@ -296,12 +256,10 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// structure according to the canonical game loop
 	// http://www.bulletphysics.org/mediawiki-1.5.8/index.php/Canonical_Game_Loop
 
-	// shutdown the application if the application has initiated shutdown
 	if (mWindow->isClosed()
-		|| mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) {
+		|| mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) { /**!< shutdown the application if the application has initiated shutdown */
 
-		//shutdown the video writer if it is still running
-		if (mVideoWriter.isInitialized()) {
+		if (mVideoWriter.isInitialized()) { /**!< shutdown the video writer if it is still running */
 			mVideoWriter.close();
 		}
 		return false;
@@ -314,97 +272,88 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	//#############
 	// Physics handling part
-	//#############
 	/* This, like the rendering, ticks every time around.
 	 Bullet does the interpolation for us. */
 	do {
 		// update timers
-		mNow = time.getMilliseconds();
-		mFrameTime = mNow - mPrevious;
-		mPrevious = mNow;
+		mThisModelIteration = mOgreTimer.getMilliseconds();
+		mFrameTime = mThisModelIteration - mPreviousModelIteration; /**!< Calculate the frame time */
+		mPreviousModelIteration = mThisModelIteration;
 
-		// update main frame timer
-		mRuntime = mNow - mStart;
+		mApplicationRuntime = mThisModelIteration - mApplicationStart; /**!< Update main frame timer */
 
-		mModelStart = time.getMilliseconds();
+		mModelStart = mOgreTimer.getMilliseconds();
 		mLastGraphicsTick = mModelStart - mGraphicsStart;
 
-		// step the physics forward
-		mUniverse.setSimulationSpeed(mSimulationSpeed);
+		mUniverse.setSimulationSpeed(mCurrentSimulationSpeed); /**!< Set the current simulation speed of the simulation */
 
-		if (mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09
-			|| mSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_10) {
-			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK
-				- mLastGraphicsTick - mLastInputTick;
+		/** If we are in speed 9 or 10*/
+		if (mCurrentSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09
+			|| mCurrentSimulationSpeed
+				== PhysicsConfiguration::SIMULATION_SPEED_10) {
+			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK /**!< calculate the remaining time for physics */
+			- mLastGraphicsTick - mLastInputTick;
 
-			mPhysicsStepStart = time.getMilliseconds();
+			mPhysicsStepStart = mOgreTimer.getMilliseconds(); /**!< The physics updates start */
 
-			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) {
-				// update the universe
+			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) { /**!< Update the physics until we run out of time */
 				mUniverse.update(
-					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
-				mPhysicsStepEnd = time.getMilliseconds();
+					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC); /**!< update the universe */
+				mPhysicsStepEnd = mOgreTimer.getMilliseconds(); /**!< Update the last physics step end to stop updating in time */
 			}
 		} else {
-			//cap frametime to make the application lose time, not the physics
+			/** cap frametime to make the application lose time, not the physics */
 			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) {
 				mFrameTime = ApplicationConfiguration::APPLICATION_TICK;
 			}
 
-			mAccumulator += mFrameTime;
+			mModelAccumulator += mFrameTime; /**!< Update physics update time that we are going to use */
 
-			while (mAccumulator
+			while (mModelAccumulator /**!< Update the physics until we run out of time */
 				>= PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI) {
 				// update the universe
 				mUniverse.update(
 					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
-				mAccumulator -=
+				mModelAccumulator -=
 					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI;
 			}
 		}
 
-		mInputStart = time.getMilliseconds();
-		mLastModelTick = mInputStart - mModelStart;
+		mInputStart = mOgreTimer.getMilliseconds(); /**!< Start the input update */
+		mLastModelTick = mInputStart - mModelStart; /**!< Calculate the time the model update took */
 
 		//#############
 		// Input part
-		//#############
 		// Game Clock part of the loop
-		/*  This ticks once every APPLICATION_TICK milliseconds on average */
-		mApplicationDt = mNow - mApplicationClock;
-		if (mApplicationDt >= ApplicationConfiguration::APPLICATION_TICK) {
-			mApplicationClock = mNow;
-			// Inject input into handlers
-			mInputHandler.injectInput();
-
-			//update elements that work on the current input state
-			mInputHandler.update(mApplicationClock);
+		/** This ticks once every APPLICATION_TICK milliseconds on average */
+		mInputDt = mThisModelIteration - mInputClock;
+		if (mInputDt >= ApplicationConfiguration::APPLICATION_TICK) {
+			mInputClock = mThisModelIteration;
+			mInputHandler.injectInput(); /**!< Inject input into handlers */
+			mInputHandler.update(mInputClock); /**!< update elements that work on the current input state */
 
 		}
-		mGraphicsStart = time.getMilliseconds();
-		mLastInputTick = mGraphicsStart - mInputStart;
+
+		mGraphicsStart = mOgreTimer.getMilliseconds(); /**!< Start the graphics update */
+		mLastInputTick = mGraphicsStart - mInputStart; /**!< Calculate the time the input injection took */
 
 	} while (mStateHandler.getCurrentState()
-		== StateHandler::HEADLESS_SIMULATION);
+		== StateHandler::HEADLESS_SIMULATION); /**!< In headless simulation we never update the graphics */
 
 	//#############
 	// Graphics part
-	//#############
+	updatePanels(evt.timeSinceLastFrame); 	/**!< Update the information in the panels on screen */
 
-	// update the information in the panels on screen
-	updatePanels(evt.timeSinceLastFrame);
+	mViewController.update(evt.timeSinceLastFrame); /**!< Update view */
 
-	// update view
-	mViewController.update(evt.timeSinceLastFrame);
-
-	// draw the debug output if enabled
-	mUniverse.drawDebugWorld();
+	mUniverse.drawDebugWorld(); /**!< draw the debug output if enabled */
 
 	return true;
 }
 
 void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
+	/** Update all movable panels in view */
 	std::vector<MovablePanel*>::iterator it =
 		mViewController.getMovablePanels().begin();
 	for (; it != mViewController.getMovablePanels().end(); it++) {
@@ -420,6 +369,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
 	}
 
+	/** Update the fps panel */
 	if (mViewController.getFpsPanel() != NULL) {
 		if (mViewController.getFpsPanel()->isVisible()) // if fps panel is visible, then update its contents
 		{
@@ -428,7 +378,7 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 					Ogre::StringConverter::toString(mWindow->getLastFPS()),
 					true);
 				mViewController.getFpsPanel()->setParamValue(1,
-					Ogre::StringConverter::toString(mRuntime), true);
+					Ogre::StringConverter::toString(mApplicationRuntime), true);
 
 //				if (mTerrain->mEnvironmentType == Environment::HILLS) {
 //					if (((HillsO3D*) mTerrain)->mTerrainGroup->isDerivedDataUpdateInProgress()) {
@@ -465,8 +415,10 @@ void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 			}
 		}
 	}
+
+	/** Update the details panel if visible */
 	if (mViewController.getDetailsPanel() != NULL) {
-		if (mViewController.getDetailsPanel()->isVisible()) // if details panel is visible, then update its contents
+		if (mViewController.getDetailsPanel()->isVisible()) /**!< if details panel is visible, then update its contents */
 		{
 			mViewController.getDetailsPanel()->setParamValue(0,
 				Ogre::StringConverter::toString(
@@ -510,8 +462,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	int left, top;
 	rw->getMetrics(width, height, depth, left, top);
 
-	// Align CEGUI mouse with SDL2 mouse
-	mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
+	mViewController.updateMousePosition(mInputHandler.getMousePositionX(), /**!< Align CEGUI mouse with SDL2 mouse */
 		mInputHandler.getMousePositionY());
 
 	int wwidth, wheight;
@@ -522,8 +473,7 @@ void SimulationManager::windowResized(Ogre::RenderWindow* rw) {
 	mWindow->windowMovedOrResized();
 #endif
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-	<< "Notifying CEGUI of resize....";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace) << "Notifying CEGUI of resize....";
 	mViewController.notifyDisplaySizeChanged(width, height);
 }
 
@@ -535,12 +485,10 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
 	if (rw->isVisible()) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)<< "Window has gained focus...";
 
-		// Align CEGUI mouse with SDL mouse
-		mViewController.updateMousePosition(mInputHandler.getMousePositionX(),
+		mViewController.updateMousePosition(mInputHandler.getMousePositionX(), /**!< Align CEGUI mouse with SDL mouse */
 			mInputHandler.getMousePositionY());
 	} else {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Window has lost focus...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace) << "Window has lost focus...";
 	}
 }
 //-------------------------------------------------------------------------------------
@@ -731,6 +679,10 @@ int main(int argc, char *argv[])
 #ifdef __cplusplus
 }
 
+/**
+ * Create a timestamp anything that needs one.
+ * @return
+ */
 std::string SimulationManager::getTimeStamp() {
 	namespace pt = boost::posix_time;
 	pt::ptime now = pt::microsec_clock::local_time();

@@ -67,7 +67,7 @@ public:
 	 */
 	virtual void windowResized(Ogre::RenderWindow* rw);
 
-	// Accessor methods
+	// Accessor methods ##########################
 
 	static SimulationManager* getSingleton() {
 		return mSimulationManager;
@@ -94,11 +94,11 @@ public:
 	}
 
 	unsigned long int getRuntime() {
-		return mRuntime;
+		return mApplicationRuntime;
 	}
 
 	unsigned long int getNow() {
-		return mNow;
+		return mThisModelIteration;
 	}
 
 	std::string getTimeStamp();
@@ -115,12 +115,12 @@ public:
 		return mViewController;
 	}
 
-	double getSimulationSpeed() const {
-		return mSimulationSpeed;
+	double getCurrentSimulationSpeed() const {
+		return mCurrentSimulationSpeed;
 	}
 
-	void setSimulationSpeed(double simulationSpeed) {
-		mSimulationSpeed = simulationSpeed;
+	void setCurrentSimulationSpeed(double currentSimulationSpeed) {
+		mCurrentSimulationSpeed = currentSimulationSpeed;
 	}
 
 	const Debugger& getDebugger() const {
@@ -203,44 +203,38 @@ protected:
 	virtual void windowFocusChange(Ogre::RenderWindow* rw);
 
 private:
-	//## controller components
+	//## controller components ##################
 	static SimulationManager* mSimulationManager; /**!< The simulation manager singleton handle */
-
 	StateHandler mStateHandler; /**!< The application state handler */
-
 	SDL2InputHandler mInputHandler; /**!< The input handler of the simulation */
-
 	Universe mUniverse; /**!< The universe and everything */
-
 	Ogre::Light* mSun; /**!< The sun of the universe */
 
-	//## model components
-	int mSimulationSpeed; /**!< The speed of the currently runnig simulations */
+	//## model components #######################
+	int mCurrentSimulationSpeed; /**!< The speed of the currently runnig simulations */
 
-	//## view components
-
+	//## view components ########################
 	Ogre::TerrainGlobalOptions mTerrainGlobals; /**!< This must be a singleton it seems */
-
 	SDL_Window* mSdlWindow; /**!< The window of the simulator */
-
 	ViewController mViewController; /**!< The view controller of the simulation */
-
 	MousePicker mMousePicker; /**!< The mouse picker to move 3D elements with the mouse */
-
 	Ogre3DFFMPEGVideoWriter mVideoWriter; /**!< The video writer to produce videos from the scene */
-
 	Randomness* mRandomness; /**!< The randomness generator singleton to be used in the simulator */
 
-	// timing component
-	Ogre::Timer time;
-	unsigned long int mStart;
-	unsigned long int mFrameTime;
-	unsigned long int mPrevious;
-	unsigned long int mNow;
-	unsigned long int mRuntime;
-	long int mAccumulator;
-	long int mApplicationDt;
-	unsigned long int mApplicationClock;
+	// loop timing components ###################
+	//# loop timestamps
+	Ogre::Timer mOgreTimer; /**!< The ogre built-in timer to time the loop correctly */
+	unsigned long int mApplicationStart; /**!< The time the application was started */
+	unsigned long int mPreviousModelIteration; /**!< The previous model iteration timestamp */
+	unsigned long int mThisModelIteration; /**!< This model iteration timestamp */
+
+	//# loop durations
+	long int mModelAccumulator; /**!< The time to forward the model in this loop iteration */
+	unsigned long int mFrameTime; /**!< The time to render a frame */
+	unsigned long int mApplicationRuntime; /**!< The total application runtime */
+
+	long int mInputDt; /**!< The time difference of input that has to be fed in */
+	unsigned long int mInputClock;
 
 	long int mLastGraphicsTick; /*!< The time it took the graphics rendering last time */
 	unsigned long int mGraphicsStart;
@@ -252,19 +246,15 @@ private:
 	 This includes the bullet physics update */
 	long int mModelStart;
 
-	long int mPhysicsTick;
-	long int mPhysicsStepStart;
-	long int mPhysicsStepEnd;
+	long int mPhysicsTick; /**!< The time remaining in the loop to update the physics */
+	long int mPhysicsStepStart; /**!< The physics start timestamp */
+	long int mPhysicsStepEnd; /**!< The last physics step end */
 
-	//## Debug components
-
+	//## Debug components #######################
 	OgreBtDebugDrawer mDebugDrawer; /**!< The debug drawer used by bullet physics to show debug information */
-
 	Debugger mDebugger; /**!< Common simulator debug routines */
-
 	static BoostLogger mBoostLogger; /**!< The logger instance of the simulation manager */
-
-	std::string mSerializationPath;
+	std::string mSerializationPath; /**!< The serialization path of the simulator's components */
 
 	static class _Init {
 	public:

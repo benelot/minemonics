@@ -42,9 +42,9 @@
 
 //---------------------------------------------------------------------------
 BaseApplication::BaseApplication(void) :
-		mRoot(0), mSceneMgr(0), mWindow(0), mResourcesCfg(
-				Ogre::StringUtil::BLANK), mPluginsCfg(Ogre::StringUtil::BLANK), mCursorWasVisible(
-				false), mShutDown(false), mOverlaySystem(0) {
+	mRoot(0), mSceneMgr(0), mWindow(0), mResourcesCfg(Ogre::StringUtil::BLANK), mPluginsCfg(
+		Ogre::StringUtil::BLANK), mCursorWasVisible(false), mShutDown(false), mOverlaySystem(
+		0) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 	m_ResourcePath = Ogre::macBundlePath() + "/Contents/Resources/";
 #else
@@ -88,23 +88,6 @@ void BaseApplication::chooseSceneManager(void) {
 }
 
 //---------------------------------------------------------------------------
-void BaseApplication::createFrameListener(void) {
-	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-	size_t windowHnd = 0;
-	std::ostringstream windowHndStr;
-
-	mWindow->getCustomAttribute("WINDOW", &windowHnd);
-	windowHndStr << windowHnd;
-
-	mWindow->getCustomAttribute("WINDOW", &windowHnd);
-	windowHndStr << windowHnd;
-
-	// Set initial mouse clipping size
-	windowResized(mWindow);
-
-	mRoot->addFrameListener(this);
-}
-//---------------------------------------------------------------------------
 void BaseApplication::destroyScene(void) {
 }
 //---------------------------------------------------------------------------
@@ -134,7 +117,7 @@ void BaseApplication::setupResources(void) {
 #endif
 
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
-					archName, typeName, secName);
+				archName, typeName, secName);
 		}
 	}
 }
@@ -171,45 +154,31 @@ void BaseApplication::go(void) {
 
 	mRoot->startRendering();
 
-	// Clean up
-	destroyScene();
+	destroyScene(); /**!< Clean up */
 }
 //---------------------------------------------------------------------------
 bool BaseApplication::setup(void) {
 	mRoot = new Ogre::Root(mPluginsCfg);
 
-	setupResources();
+	setupResources(); /**!< Setup the ressources the application uses */
 
 	bool carryOn = configure();
 	if (!carryOn)
 		return false;
 
-	chooseSceneManager();
-	setupView();
+	chooseSceneManager(); /**!< Choose the scene manager */
 
-	// Set default mipmap level (NB some APIs ignore this)
-	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+	setupView(); /**!< Setup the viewport */
 
-	// Create any resource listeners (for loading screens)
-	createResourceListener();
-	// Load resources
-	loadResources();
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5); /**!< Set default mipmap level (NB some APIs ignore this) */
 
-	// Create the scene
-	createScene();
+	createResourceListener(); /**!< Create any resource listeners (for loading screens) */
 
-	createFrameListener();
+	loadResources(); /**!< Load resources */
 
-	return true;
-}
-;
-//---------------------------------------------------------------------------
-bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt) {
-	if (mWindow->isClosed())
-		return false;
+	createScene(); /**!< Create the scene*/
 
-	if (mShutDown)
-		return false;
+	createFrameListener(); /**!< Create the framelistener */
 
 	return true;
 }
