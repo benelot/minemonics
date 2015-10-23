@@ -110,7 +110,7 @@ FSPhenomeModel::~FSPhenomeModel() {
 
 void FSPhenomeModel::initialize() {
 
-	performEmbryogenesis();
+	performEmbryogenesis(); /**!< Perform embryogenesis to build a body plan*/
 
 	//initialize the limb models if it did not already happen in embryogenesis
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
@@ -125,9 +125,9 @@ void FSPhenomeModel::initialize() {
 		(*jit)->initialize();
 	}
 
-	generateBody();
+	generateBody(); /**!< Build the body from the body plan */
 
-	addJointConstraints();
+	addJointConstraints(); /**!< Add the joint constraints */
 
 }
 
@@ -161,27 +161,6 @@ void FSPhenomeModel::addToWorld() {
 	}
 	PhenomeModel::addToWorld();
 }
-
-//LimbModel* FSPhenomeModel::addLimb(btDynamicsWorld* const world,
-//	CreatureModel* const creatureModel, const LimbPhysics::PrimitiveType type,
-//	const Ogre::Vector3 position, const Ogre::Quaternion orientation,
-//	const Ogre::Vector3 initialRelativePosition,
-//	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
-//	const double mass, const double restitution, const double friction,
-//	const Ogre::ColourValue color, bool isIntraBodyColliding,
-//	const std::vector<ComponentModel*>::size_type ownIndex) {
-//}
-//
-//JointModel* FSPhenomeModel::addJoint(btDynamicsWorld* const world,
-//	btRigidBody* const limbA, btRigidBody* const limbB,
-//	const btTransform localA, const btTransform localB,
-//	const std::vector<FSLimbModel*>::size_type indexA,
-//	const std::vector<FSLimbModel*>::size_type indexB,
-//	const std::vector<FSJointModel*>::size_type ownIndex,
-//	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
-//	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
-//	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
-//}
 
 void FSPhenomeModel::removeFromWorld() {
 	if (isInWorld()) {
@@ -218,8 +197,7 @@ int FSPhenomeModel::performEmbryogenesis() {
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
 
-		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
-		while (!generatorList.empty()) {
+		while (!generatorList.empty()) { // this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
 
@@ -229,8 +207,7 @@ int FSPhenomeModel::performEmbryogenesis() {
 			FSEmbryogenesis::transcribeGene(generatorList, totalSegmentCounter,
 				this, generator);
 
-			// delete the generator of this gene
-			delete generator;
+			delete generator; // delete the generator of this gene
 		}
 
 		mDeveloped = true;
@@ -261,7 +238,7 @@ void FSPhenomeModel::generateBody() {
 	}
 
 	if (mJointModels.size() != 0) {
-		bool selfCollision = mLimbModels[0]->isIntraBodyColliding();
+		bool selfCollision = true; /**!< The collision is handled on a per-limb basis*/
 
 		int linkQty = 0;
 		for (int i = 0; i < mJointModels.size(); i++) {
@@ -388,6 +365,11 @@ void FSPhenomeModel::generateBody() {
 }
 
 void FSPhenomeModel::addJointConstraints() {
+	for(std::vector<btMultiBodyConstraint*>::iterator lit = mLimitConstraints.begin(); lit != mLimitConstraints.end();){
+		delete *lit;
+		lit = mLimitConstraints.erase(lit);
+	}
+
 	for (int i = 0; i < mJointModels.size(); i++) {
 		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
 		// Link joint limits

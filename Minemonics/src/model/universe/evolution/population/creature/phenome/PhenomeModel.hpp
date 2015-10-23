@@ -54,28 +54,6 @@ public:
 
 	virtual void initialize() = 0;
 
-//	virtual LimbModel* addLimb(btDynamicsWorld* const world,
-//		CreatureModel* const creatureModel,
-//		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-//		const Ogre::Quaternion orientation,
-//		const Ogre::Vector3 initialRelativePosition,
-//		const Ogre::Quaternion initialOrientation,
-//		const Ogre::Vector3 dimensions, const double mass,
-//		const double restitution, const double friction,
-//		const Ogre::ColourValue color, bool isIntraBodyColliding,
-//		const std::vector<ComponentModel*>::size_type ownIndex);
-//
-//	virtual JointModel* addJoint(btDynamicsWorld* const world,
-//		btRigidBody* const limbA, btRigidBody* const limbB,
-//		const btTransform localA, const btTransform localB,
-//		const std::vector<FSLimbModel*>::size_type indexA,
-//		const std::vector<FSLimbModel*>::size_type indexB,
-//		const std::vector<FSJointModel*>::size_type ownIndex,
-//		JointPhysics::JointType type, bool jointPitchEnabled,
-//		bool jointYawEnabled, bool jointRollEnabled,
-//		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointMinAngle,
-//		Ogre::Vector3 jointMaxAngle) = 0;
-
 	/**
 	 * @brief Perform the generation of the creature embryo.
 	 * @details Details
@@ -102,7 +80,7 @@ public:
 	 * Update the phenome model.
 	 * @param timeSinceLastTick
 	 */
-	virtual void update(const double timeSinceLastTick);
+	virtual void update(const double timeSinceLastTick) = 0;
 
 	/**
 	 * Compare the phenome model to another phenome model.
@@ -277,43 +255,25 @@ private:
 	} _initializer;
 
 protected:
-	/**
-	 * Is the phenotype developed?
-	 */
-	bool mDeveloped;
+	bool mDeveloped; /**!< Is the phenotype developed? */
 
-	CreatureModel* mCreatureModel;
+	CreatureModel* mCreatureModel; /**!< The creature model the phenome belongs to */
 
-	/**
-	 * Whether the phenome is in the world or not.
-	 */
-	bool mInWorld;
+	bool mInWorld; /**!< Whether the phenome is in the world or not. */
 
-	/**
-	 * The vector of phenotype component models.
-	 */
-	std::vector<ComponentModel*> mComponentModels;
+	std::vector<ComponentModel*> mComponentModels; /**!< The vector of phenotype component models. */
 
-	/**
-	 * The vector of phenotype limb models.
-	 */
-	std::vector<LimbModel*> mLimbModels;
+	std::vector<LimbModel*> mLimbModels; /**!< The vector of phenotype limb models. */
 
-	/**
-	 * The vector of phenotype joint models.
-	 */
-	std::vector<JointModel*> mJointModels;
+	std::vector<JointModel*> mJointModels; /**!< The vector of phenotype joint models. */
 
 	//std::vector<Sensor*> mSensors;
 
-	/**
-	 * The vector of phenotype joint controller models.
-	 */
-	std::vector<Controller*> mControllers;
+	std::vector<Controller*> mControllers; /**!< The vector of phenotype joint controller models. */
 
-	bool mHasInterpenetrations;
+	bool mHasInterpenetrations; /**!< If the phenome model has interpenetrations */
 
-	bool mBodyGenerated;
+	bool mBodyGenerated; /**!< If the body is generated */
 };
 BOOST_CLASS_VERSION(PhenomeModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */

@@ -47,8 +47,8 @@ public:
 	 */
 	static bool compareCreatureFitnessScoreAsc(CreatureModel* const creature1,
 			CreatureModel* const creature2) {
-		// lesser means ascending/ greater means descending
-		return (creature1->getFitnessScore() < creature2->getFitnessScore());
+		// lesser means descending/ greater means ascending
+		return (creature1->getFitnessScore() > creature2->getFitnessScore());
 	}
 
 	/**
@@ -58,7 +58,7 @@ public:
 	 */
 	static bool compareCreatureFitnessScoreDsc(CreatureModel* const creature1,
 			CreatureModel* const creature2) {
-		// lesser means ascending/ greater means descending
+		// lesser means descending/ greater means ascending
 		return !compareCreatureFitnessScoreAsc(creature1, creature2);
 	}
 

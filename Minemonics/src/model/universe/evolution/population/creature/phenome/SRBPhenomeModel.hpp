@@ -92,6 +92,16 @@ public:
 	virtual bool equals(const SRBPhenomeModel& phenomeModel) const;
 
 	/**
+	 * Add the phenotype to the physical and graphical world.
+	 */
+	virtual void addToWorld();
+
+	/**
+	 * Remove the phenotype from the physical and graphical world.
+	 */
+	virtual void removeFromWorld();
+
+	/**
 	 * Clone the phenome model.
 	 */
 	SRBPhenomeModel* clone();

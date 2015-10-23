@@ -107,7 +107,7 @@ void FSLimbModel::update(double timeSinceLastTick) {
 //	}
 //	std::cout << std::endl;
 
-// reset the sensors when they are processed
+	// reset the sensors when they are processed
 	resetSensors();
 }
 

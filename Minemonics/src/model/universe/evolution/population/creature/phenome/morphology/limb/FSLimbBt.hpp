@@ -244,7 +244,7 @@ private:
 
 	btMultiBodyLinkCollider* mLink; /**!< The multibody link segment of the limb */
 
-	LimbModel* mLimbModel;
+	LimbModel* mLimbModel; /**!< The limb model the physics model belongs to */
 };
 BOOST_CLASS_VERSION(FSLimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBBT_HPP_ */

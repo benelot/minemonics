@@ -121,7 +121,7 @@ public:
 
 	JuryType getJuryType();
 
-	double isHigherBetter() const {
+	bool isHigherBetter() const {
 		return mHigherIsBetter;
 	}
 
@@ -147,7 +147,7 @@ protected:
 	/**
 	 * If a higher score is better or not.
 	 */
-	double mHigherIsBetter;
+	bool mHigherIsBetter;
 
 	/**
 	 * The fitness evaluated by this jury.

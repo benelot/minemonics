@@ -76,8 +76,9 @@ FSLimbBt::FSLimbBt(btDynamicsWorld* const world, LimbModel* const limbModel,
 
 FSLimbBt::FSLimbBt(const FSLimbBt& limbBt) {
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
-	FSLimbBt(limbBt.mWorld, (LimbModel*)limbBt.mCollisionShape->getUserPointer(),
-		limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
+	FSLimbBt(limbBt.mWorld,
+		(LimbModel*) limbBt.mCollisionShape->getUserPointer(), limbBt.mType,
+		OgreBulletUtils::convert(startTransform.getOrigin()),
 		OgreBulletUtils::convert(startTransform.getRotation()),
 		Ogre::Vector3(limbBt.mInitialRelativeXPosition,
 			limbBt.mInitialRelativeYPosition, limbBt.mInitialRelativeZPosition),
@@ -137,8 +138,7 @@ void FSLimbBt::initialize() {
 		// position the limb in the world
 		btTransform startTransform;
 		startTransform.setIdentity();
-		startTransform.setOrigin(
-			OgreBulletUtils::convert(mPosition));
+		startTransform.setOrigin(OgreBulletUtils::convert(mPosition));
 		startTransform.setRotation(
 			btQuaternion(mInitialXOrientation, mInitialYOrientation,
 				mInitialZOrientation, mInitialWOrientation));
@@ -167,12 +167,8 @@ void FSLimbBt::initialize() {
 			mCollisionShape->getAnisotropicRollingFrictionDirection(),
 			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
-//		calm();
-
-		//Set user pointer for proper return of creature/limb information etc..
-		mBody->setUserPointer(mLimbModel);
-		//add the creature model pointer to the collision shape to get it back if we raycast for this object.
-		mCollisionShape->setUserPointer(mLimbModel);
+		mBody->setUserPointer(mLimbModel); //Set user pointer for proper return of creature/limb information etc..
+		mCollisionShape->setUserPointer(mLimbModel); //add the limb model pointer to the collision shape to get it back if we raycast for this object.
 	}
 }
 
@@ -182,11 +178,8 @@ btTransform FSLimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 
 btTransform FSLimbBt::getPreciseIntersection(const btVector3 origin,
 	const btVector3 direction) {
-	// the ray caster currently only finds the intersection
-	// when hitting the forward face of a triangle therefore,
-	//the ray has to come from the outside of the shape
-	btVector3 rayStart = origin + direction.normalized() * 100.0f;
-	btVector3 rayEnd = origin;
+	btVector3 rayStart = origin + direction.normalized() * 100.0f;// the ray caster currently only finds the intersection
+	btVector3 rayEnd = origin;// when hitting the forward face of a triangle therefore, the ray has to come from the outside of the shape
 
 #ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
@@ -355,10 +348,9 @@ void FSLimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
 	mLink->setAnisotropicFriction(
 		mCollisionShape->getAnisotropicRollingFrictionDirection(),
 		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
-	//Set user pointer for proper return of creature/limb information etc..
-	mLink->setUserPointer(limbModel);
-	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
-	mCollisionShape->setUserPointer(limbModel);
+
+	mLink->setUserPointer(limbModel); //Set user pointer for proper return of creature/limb information etc..
+	mCollisionShape->setUserPointer(limbModel); 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
 }
 
 bool FSLimbBt::equals(const FSLimbBt& limbBt) const {

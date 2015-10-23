@@ -97,12 +97,10 @@ void Reaper::reap(PopulationModel* const population) {
 		population->getCreatureModels().end(),
 		scoreComparator.compareCreatureFitnessScore);
 
-	//TODO: Check if this kills the right ones
 	for (; headsToReap != 0; headsToReap--) {
 		population->getCreatureModels().back()->setCulled(true);
 		population->getCreatureModels().pop_back();
 	}
-
 }
 
 void Reaper::sow(PopulationModel* const population) {

@@ -15,19 +15,18 @@
 //## utils headers
 
 ComponentModel::ComponentModel() :
-mComponentType(UnknownComponent), mOwnIndex(-1) {
+	mComponentType(UnknownComponent), mOwnIndex(-1) {
 }
 
 ComponentModel::ComponentModel(const ComponentType type,
-const std::vector<ComponentModel*>::size_type ownIndex):
-	mComponentType(type), mOwnIndex(ownIndex)
-{
+	const std::vector<ComponentModel*>::size_type ownIndex) :
+	mComponentType(type), mOwnIndex(ownIndex) {
 }
 ComponentModel::~ComponentModel() {
 }
 
 void ComponentModel::initialize(const ComponentType type,
-const std::vector<ComponentModel*>::size_type ownIndex) {
+	const std::vector<ComponentModel*>::size_type ownIndex) {
 	mComponentType = type;
 	mOwnIndex = ownIndex;
 }

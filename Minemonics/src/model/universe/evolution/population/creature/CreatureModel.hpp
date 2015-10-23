@@ -168,6 +168,7 @@ public:
 	}
 
 	void clearJuries() {
+		mFitnessScoreCalculated = false;
 		for (std::vector<Jury*>::iterator jit = mJuries.begin();
 			jit != mJuries.end(); jit++) {
 			delete *jit;
@@ -334,62 +335,31 @@ public:
 	}
 private:
 
-	/**
-	 * The name of the creature.
-	 */
-	std::string mFirstName;
+	std::string mFirstName; /**!< The name of the creature. */
 
-	/**
-	 * The genotype (genomic individual) of the creature.
-	 */
-	MixedGenome mGenotype;
+	MixedGenome mGenotype; /**!< The genotype (genomic individual) of the creature. */
 
-	/**
-	 * The phenotype (morphological individual) of the creature.
-	 */
-	PhenomeModel* mPhenotypeModel;
+	PhenomeModel* mPhenotypeModel; /**!< The phenotype (morphological individual) of the creature. */
 
-	/**
-	 * The juries that rate the creature according to their fitness function.
-	 */
-	std::vector<Jury*> mJuries;
+	std::vector<Jury*> mJuries; /**!< The juries that rate the creature according to their fitness function. */
 
-	/**
-	 * The position of the creature.
-	 */
-	Ogre::Vector3 mPosition;
+	Ogre::Vector3 mPosition; /**!< The position of the creature. */
 
-	/**
-	 * The initial position of the creature.
-	 */
-	Ogre::Vector3 mInitialPosition;
+	Ogre::Vector3 mInitialPosition; /**!< The initial position of the creature. */
 
-	/**
-	 * If the creature was culled or not.
-	 */
-	bool mCulled;
+	bool mCulled; /**!< If the creature was culled or not. */
 
-	/**
-	 * If the creature is new and does not have a controller element yet.
-	 */
-	bool mNew;
+	bool mNew; /**!< If the creature is new and does not have a controller element yet. */
 
-	/**
-	 * Physics model type
-	 */
-	PhysicsController::PhysicsModelType mPhysicsModelType;
+	PhysicsController::PhysicsModelType mPhysicsModelType; /**!< Physics model type */
 
-	/**
-	 * The population the creature lives in.
-	 */
-	PopulationModel* mPopulationModel;
+	PopulationModel* mPopulationModel; /**!< The population the creature lives in. */
 
-	/**
-	 * The fitness score competitively eruated by the juries.
-	 */
-	double mFitnessScore;
+	double mFitnessScore; /**!< The fitness score competitively eruated by the juries. */
 
 	btDynamicsWorld* mWorld;
+
+	bool mFitnessScoreCalculated;
 
 };
 BOOST_CLASS_VERSION(CreatureModel, 1)

@@ -95,35 +95,10 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
-void PhenomeModel::update(const double timeSinceLastTick) {
-	// let the controller perform
-	for (std::vector<Controller*>::iterator cit = mControllers.begin();
-		cit != mControllers.end(); cit++) {
-		(*cit)->perform(timeSinceLastTick);
-	}
+void PhenomeModel::addToWorld() {
+}
 
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->update(timeSinceLastTick);
-//	}
-
-// Update all limb models
-	mHasInterpenetrations = false;
-	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
-		lit != mLimbModels.end(); lit++) {
-
-		//detect interpenetrations
-		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
-
-//			std::cout << "Limb interpenetration depth: "
-//					<< (*lit)->getInterpenetrationDepth()
-//					<< std::endl;
-			mHasInterpenetrations = true;
-			break;
-		}
-		(*lit)->setInterpenetrationDepth(0);
-	}
-
+void PhenomeModel::removeFromWorld() {
 }
 
 void PhenomeModel::calm() {
@@ -194,10 +169,4 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 		}
 	}
 	return true;
-}
-
-void PhenomeModel::addToWorld() {
-}
-
-void PhenomeModel::removeFromWorld() {
 }

@@ -24,7 +24,7 @@
 
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
-	NULL), mPhenotypeModel(NULL), mPhysicsModelType(
+	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
 		PhysicsController::RigidbodyModel) {
 }
 
@@ -32,21 +32,18 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	const PhysicsController::PhysicsModelType physicsModelType,
 	const Ogre::Vector3 position, const double branchiness) :
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
-		-1), mPhenotypeModel(
-	NULL), mPhysicsModelType(physicsModelType), mInitialPosition(position), mPosition(
-		position) {
+		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
+		position), mFitnessScoreCalculated(false), mPosition(position) {
 #ifndef EXCLUDE_FROM_TEST
-	mWorld = populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+	mWorld =
+		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
 #endif
-	//set first name of creature
-	NameGenerator nameGenerator;
+	NameGenerator nameGenerator; //set first name of creature
 	mFirstName = nameGenerator.generateFirstName();
 
-	//generate random genome for the creature
-	mGenotype.createRandomGenome(branchiness);
+	mGenotype.createRandomGenome(branchiness); //generate random genome for the creature
 
-	// add the phenome model depending on physics model type
-	switch (mPhysicsModelType) {
+	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
 	case PhysicsController::FeatherstoneModel:
 		mPhenotypeModel = new FSPhenomeModel(this);
 		break;
@@ -72,6 +69,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mWorld = creatureModel.mWorld;
 	mPhenotypeModel = creatureModel.mPhenotypeModel;
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
+	mFitnessScoreCalculated = creatureModel.mFitnessScoreCalculated;
 
 	mJuries.clear();
 	for (std::vector<Jury*>::const_iterator jit = creatureModel.mJuries.begin();
@@ -81,8 +79,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 }
 
 void CreatureModel::initialize() {
-	//initialize the phenome model
-	mPhenotypeModel->initialize();
+	mPhenotypeModel->initialize(); 	//initialize the phenome model
 }
 
 CreatureModel::~CreatureModel() {
@@ -109,7 +106,7 @@ void CreatureModel::reposition(const Ogre::Vector3 position) {
 
 double CreatureModel::getFitnessScore() {
 
-	if (mFitnessScore != -1) {
+	if (mFitnessScoreCalculated) {
 		return mFitnessScore;
 	}
 
@@ -127,6 +124,7 @@ double CreatureModel::getFitnessScore() {
 	} else {
 		mFitnessScore = 0;
 	}
+	mFitnessScoreCalculated = true;
 	return mFitnessScore;
 }
 

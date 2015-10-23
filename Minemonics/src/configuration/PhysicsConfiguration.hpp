@@ -169,6 +169,8 @@ public:
 	static const double DISCARDING_STARTS = 1.0f;
 
 	static const double BULLET_PICKER_FORCE = 100000;
+
+	static const double WEIGHT_SCALE_SHRINK_LOGBASE = 2.0f;
 };
 
 #endif /* CONFIGURATION_PHYSICSCONFIGURATION_H_ */

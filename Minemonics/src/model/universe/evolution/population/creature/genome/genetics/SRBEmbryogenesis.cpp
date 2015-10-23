@@ -336,8 +336,9 @@ SRBLimbModel* SRBEmbryogenesis::createLimb(PhenotypeGenerator* generator,
 		/*size*/
 		Ogre::Vector3(sizeX, sizeY, sizeZ),
 		/*mass*/
-		sizeX * sizeY * sizeZ, childMorphogene->getRestitution(),
-		childMorphogene->getFriction(),
+		sizeX * sizeY * sizeZ,
+		//log2(sizeX * sizeY * sizeZ)/log2(PhysicsConfiguration::WEIGHT_SCALE_SHRINK_LOGBASE),
+		childMorphogene->getRestitution(), childMorphogene->getFriction(),
 		Ogre::ColourValue(childMorphogene->getColorR(),
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
 		childMorphogene->isIntraBodyColliding(),

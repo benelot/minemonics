@@ -35,7 +35,7 @@ LimbModel::~LimbModel() {
 
 	mCreatureModel = NULL;
 
-	while(!mSensors.empty()){
+	while (!mSensors.empty()) {
 		delete mSensors.back();
 		mSensors.pop_back();
 	}

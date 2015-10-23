@@ -33,8 +33,8 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 
 PopulationModel::PopulationModel(PlanetModel* const planetModel,
 	const int creatureQty, const Ogre::Vector3 initialPosition) :
-	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(
-		planetModel), mOutOfSync(false), mCurrentGeneration(0) {
+	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(planetModel), mOutOfSync(
+		false), mCurrentGeneration(0) {
 	// add creatures up to the creature quantity.
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
@@ -60,8 +60,7 @@ PopulationModel::PopulationModel(const PopulationModel& populationModel) :
 }
 
 PopulationModel::~PopulationModel() {
-	// models only delete their own things
-	mCreatureModels.clear();
+	mCreatureModels.clear(); 	// models only delete their own things
 
 	mPlanetModel = NULL;
 }
@@ -148,7 +147,8 @@ bool PopulationModel::hasInterpenetrations() {
 
 void PopulationModel::save() {
 	SaveController<PopulationModel> populationSaveController;
-	populationSaveController.save(*this, std::string(mSerializationPath + "/population.po").c_str());
+	populationSaveController.save(*this,
+		std::string(mSerializationPath + "/population.po").c_str());
 //	if (SerializationConfiguration::POPULATION_EXPANDED) {
 //		saveCreatures();
 //	}
@@ -156,7 +156,8 @@ void PopulationModel::save() {
 
 void PopulationModel::load() {
 	SaveController<PopulationModel> populationSaveController;
-	populationSaveController.restore(*this, std::string(mSerializationPath + "/population.po").c_str());
+	populationSaveController.restore(*this,
+		std::string(mSerializationPath + "/population.po").c_str());
 	if (SerializationConfiguration::POPULATION_EXPANDED) {
 		loadCreatures();
 	}

@@ -96,11 +96,6 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 		(*cit)->perform(timeSinceLastTick);
 	}
 
-//	std::vector<JointModel*>::iterator jit = mJointModels.begin();
-//	for (; jit != mJointModels.end(); jit++) {
-//		(*jit)->update(timeSinceLastTick);
-//	}
-
 // Update all limb models
 	mHasInterpenetrations = false;
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
@@ -109,9 +104,6 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 		//detect interpenetrations
 		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
 
-//			std::cout << "Limb interpenetration depth: "
-//					<< (*lit)->getInterpenetrationDepth()
-//					<< std::endl;
 			mHasInterpenetrations = true;
 			break;
 		}
@@ -302,6 +294,20 @@ bool SRBPhenomeModel::equals(const SRBPhenomeModel& SRBPhenomeModel) const {
 		}
 	}
 	return true;
+}
+
+void SRBPhenomeModel::addToWorld() {
+	if (!isInWorld()) {
+
+	}
+	PhenomeModel::addToWorld();
+}
+
+void SRBPhenomeModel::removeFromWorld() {
+	if (isInWorld()) {
+
+	}
+	PhenomeModel::removeFromWorld();
 }
 
 SRBPhenomeModel* SRBPhenomeModel::clone() {
