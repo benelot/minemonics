@@ -3,7 +3,7 @@
 
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
 
 //# forward declarations
 //# system headers

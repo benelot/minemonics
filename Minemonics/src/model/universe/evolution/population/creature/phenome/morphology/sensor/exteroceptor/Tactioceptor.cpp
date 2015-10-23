@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 
 //# forward declarations
 //# system headers

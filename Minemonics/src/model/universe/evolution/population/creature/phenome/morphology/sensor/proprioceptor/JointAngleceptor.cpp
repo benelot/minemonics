@@ -1,6 +1,6 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
 
 //## view headers
 //## utils headers

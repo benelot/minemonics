@@ -10,7 +10,7 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //## view headers
