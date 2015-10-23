@@ -27,8 +27,7 @@ void Gene::initialize(const GeneType geneType) {
 
 bool Gene::equals(const Gene& gene) const {
 
-	/**Compare the type of gene*/
-	if (mType != gene.mType) {
+	if (mType != gene.mType) { 	/**Compare the type of gene*/
 		return false;
 	}
 

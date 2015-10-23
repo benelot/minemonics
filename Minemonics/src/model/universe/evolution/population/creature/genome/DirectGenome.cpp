@@ -24,5 +24,8 @@ DirectGenome::~DirectGenome() {
 }
 
 bool DirectGenome::equals(const DirectGenome& genome) const {
-	Genome::equals(genome);
+	if (Genome::equals(genome)) { /**!< Is the same as comparing a genome directly. */
+		return false;
+	}
+	return true;
 }

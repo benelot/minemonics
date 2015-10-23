@@ -15,11 +15,12 @@
 //## utils headers
 
 Genome::Genome(GenomeType type) :
-		mLength(0), mGenomeType(type), mBranchiness(0),mRootIndex(0) {
+	mLength(0), mGenomeType(type), mBranchiness(0), mRootIndex(0) {
 }
 
 Genome::~Genome() {
-	for(std::vector<Gene*>::iterator git = mGenes.begin();git != mGenes.end();git++){
+	for (std::vector<Gene*>::iterator git = mGenes.begin(); git != mGenes.end();
+		git++) {
 		delete *git;
 	}
 
@@ -32,20 +33,18 @@ void Genome::addGene(Gene* gene) {
 
 bool Genome::equals(const Genome& genome) const {
 
-	/**Compare the type of genome*/
-	if (mGenomeType != genome.mGenomeType) {
+	if (mGenomeType != genome.mGenomeType) { /**!< Compare the type of genome*/
 		return false;
 	}
 
-	/**The length of the genome*/
-	if (mLength != genome.mLength) {
+	if (mLength != genome.mLength) { /**!< The length of the genome*/
 		return false;
 	}
 
-	/**Compare the vector of genes.*/
-	if (mGenes.size() != genome.getGenes().size()) {
+	if (mGenes.size() != genome.getGenes().size()) { /**!< Compare the vector of genes.*/
 		return false;
 	}
+
 	std::vector<Gene*>::const_iterator it = mGenes.begin();
 	std::vector<Gene*>::const_iterator it2 = genome.getGenes().begin();
 	for (; it != mGenes.end(), it2 != genome.getGenes().end(); it++, it2++) {

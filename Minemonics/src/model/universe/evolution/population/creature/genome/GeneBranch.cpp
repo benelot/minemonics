@@ -33,13 +33,11 @@ void GeneBranch::initialize(const GeneBranchType geneBranchType) {
 
 bool GeneBranch::equals(const GeneBranch& geneBranch) const {
 
-	/**Compare the gene branch is active or not*/
-	if (mActive != geneBranch.mActive) {
+	if (mActive != geneBranch.mActive) { 	/**!< Compare the gene branch is active or not*/
 		return false;
 	}
 
-	/**Compare the type of gene branch*/
-	if (mType != geneBranch.mType) {
+	if (mType != geneBranch.mType) { 	/**!< Compare the type of gene branch*/
 		return false;
 	}
 

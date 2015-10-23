@@ -58,7 +58,7 @@ void MixedGenome::createRandomGenome(double branchiness) {
 				GeneticsConfiguration::GENES_INITIAL_MEAN,
 				GeneticsConfiguration::GENES_INITIAL_VAR));
 
-	std::cout << " Genomesize: " << geneQty << std::endl;
+	std::cout << " Genome size: " << geneQty << std::endl;
 
 	// add the number of morphogenes
 	for (int i = 0; i < geneQty; i++) {
@@ -136,13 +136,11 @@ bool MixedGenome::equals(const MixedGenome & genome) const {
 		return false;
 	}
 
-	/**Compare the total segment quantity limit*/
-	if (mTotalSegmentQtyLimit != genome.mTotalSegmentQtyLimit) {
+	if (mTotalSegmentQtyLimit != genome.mTotalSegmentQtyLimit) { /**!< Compare the total segment quantity limit*/
 		return false;
 	}
 
-	/**Compare the segments depth limit*/
-	if (mSegmentsDepthLimit != genome.mSegmentsDepthLimit) {
+	if (mSegmentsDepthLimit != genome.mSegmentsDepthLimit) { /**!< Compare the segments depth limit*/
 		return false;
 	}
 
@@ -213,6 +211,7 @@ void MixedGenome::addGeneBranch(const int geneIndex1, const int geneIndex2) {
 }
 
 void MixedGenome::repairGenes() {
+	//TODO: What is to do to repair genes?
 	integrateRandomGenes(1);
 }
 
@@ -512,7 +511,7 @@ void MixedGenome::graftRandomlyFrom(Genome* donator) {
 		!= mGenes[attachmentIndex]->getType());
 
 	//TODO: Add reasonable numbers
-	maxLinkDepth = Randomness::getSingleton()->nextNormalInt(10, 10);
+	maxLinkDepth = Randomness::getSingleton()->nextNormalInt(5, 10);
 
 	graftFrom(donator, attachmentIndex, geneIndex, maxLinkDepth);
 	repairGenes();
@@ -521,7 +520,7 @@ void MixedGenome::graftRandomlyFrom(Genome* donator) {
 void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 	int geneQty) {
 
-	std::map<int, int> classMap;
+	std::map<int, int> classMap; /**!< Class mapping from the old class index to the new class index */
 
 	if (mGenes[attachmentIndex]->getType() == Gene::MorphoGene) {
 
@@ -535,7 +534,6 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 		Morphogene* donorGeneCopy = donorGene->clone();
 		mGenes.push_back(donorGeneCopy);
 		branch->setBranchGeneType(mGenes.size() - 1);
-		//int newGeneIndex = mGenes.size() - 1;
 
 		std::vector<Morphogene*> visitGenes;
 		visitGenes.push_back(donorGeneCopy);
@@ -556,29 +554,24 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 				std::map<int, int>::iterator i = classMap.find(
 					(*gbit)->getBranchGeneType());
 
-				// if we found that the gene has been grafted before
-				if (i != classMap.end()) {
+				if (i != classMap.end()) { /**!< if we found that the gene has been grafted before */
 					(*gbit)->setBranchGeneType(i->second);
 
-					// if we did not graft the gene before
-				} else {
-
-					// copy the morphogene
+				} else { /**!< if we did not graft the gene before */
 					Morphogene* nextGeneCopy =
+						/**!< copy the morphogene */
 						((Morphogene*) donor->getGenes()[(*gbit)->getBranchGeneType()])->clone();
 
 					mGenes.push_back(nextGeneCopy);
 
-					//insert the new class mapping
 					classMap.insert(
+						/**!< insert the new class mapping */
 						std::pair<int, int>((*gbit)->getBranchGeneType(),
 							mGenes.size() - 1));
 
-					// set the branch to the new class
-					(*gbit)->setBranchGeneType(mGenes.size() - 1);
+					(*gbit)->setBranchGeneType(mGenes.size() - 1); /**!< set the branch to the new class */
 
-					//add it to the next ones to be visited if we did not yet reach geneQty
-					if (genesCopied < geneQty) {
+					if (genesCopied < geneQty) { /**!<add it to the next ones to be visited if we did not yet reach geneQty */
 						visitGenes.push_back(nextGeneCopy);
 						genesCopied++;
 					}
