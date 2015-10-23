@@ -6,9 +6,11 @@
 
 //# forward declarations
 class btTransform;
+class SRBLimbBt;
 class SRBLimbModel;
 class SRBPhenomeModel;
 class Morphogene;
+class MorphogeneBranch;
 
 //# system headers
 #include <list>
@@ -57,6 +59,8 @@ public:
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		SRBPhenomeModel* phenomeModel, PhenotypeGenerator* generator);
 
+	static SRBLimbModel* createLimb(PhenotypeGenerator* generator,Morphogene* childMorphogene,SRBPhenomeModel* phenomeModel);
+
 	static void appendToParentLimb(SRBPhenomeModel* phenomeModel,
 		SRBLimbModel* childLimb, PhenotypeGenerator* generator,
 		Ogre::Vector3& localParentJointInRefParent,
@@ -68,6 +72,15 @@ public:
 		PhenotypeGenerator* generator,
 		std::list<PhenotypeGenerator*>& generatorList,
 		int& totalSegmentCounter);
+
+	static btTransform getParentIntersection(PhenotypeGenerator* generator,
+		SRBLimbBt* parentLimb, MorphogeneBranch* parentMorphogeneBranch,
+		Ogre::Vector3 parentLimbCOM,
+		Ogre::Vector3 localParentAnchorDirInRefParent);
+
+	static btTransform getOwnIntersection(SRBPhenomeModel* phenomeModel,
+		Morphogene* childMorphogene, PhenotypeGenerator* generator,
+		Ogre::Vector3 localChildAnchorDirInRefChild);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_SRBEMBRYOGENESIS_HPP_ */

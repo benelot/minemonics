@@ -124,28 +124,25 @@ void FSEmbryogenesis::transcribeMorphogene(
 
 		//get the parent limb's center of mass position
 		Ogre::Vector3 parentLimbCOM =
-			((FSLimbModel*) generator->getParentComponentModel())->getPosition();
+			((LimbModel*) generator->getParentComponentModel())->getPosition();
 
-		// ##
-		// PARENT ANCHOR DIRECTION
-		// ##
-		//get anchor direction of the parent limb in reference frame of itself
-		Ogre::Vector3 localParentAnchorDirInRefParent;
+		Ogre::Vector3 localParentAnchorDirInRefParent = Ogre::Vector3(
+			parentMorphogeneBranch->getJointAnchorX(),
+			parentMorphogeneBranch->getJointAnchorY(),
+			parentMorphogeneBranch->getJointAnchorZ());
 
 		//if the generator is the mirrored version of another generator
 		//mirrored is: -O  -> O- | \O -> O\   mirroring = sign inversion  //
 		if (generator->isMirrored()) {
 
 			//get mirrored direction
-			localParentAnchorDirInRefParent =
-				(-((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), -((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), -((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+			localParentAnchorDirInRefParent = -localParentAnchorDirInRefParent;
 			//if the generator is the flipped version of another generator
 			//flipped is: \O -> O/ and the flipping axis is the parent limb direction
-		} else if (generator->isFlipped()) {
+		}
 
-			// get flipped direction
-			localParentAnchorDirInRefParent =
-				(((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorX(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorY(), ((MorphogeneBranch*) generator->getGeneBranch())->getJointAnchorZ());
+		if (generator->isFlipped()) {
+
 			//	get direction vector of parent limb
 			Ogre::Vector3 parentLimbDir(1, 0, 0);
 			parentLimbDir = OgreBulletUtils::convert(
@@ -156,32 +153,19 @@ void FSEmbryogenesis::transcribeMorphogene(
 				- 2
 					* ((-localParentAnchorDirInRefParent).dotProduct(
 						parentLimbDir)) * parentLimbDir;
-		} else {
-
-			//get normal direction
-			localParentAnchorDirInRefParent = Ogre::Vector3(
-				parentMorphogeneBranch->getJointAnchorX(),
-				parentMorphogeneBranch->getJointAnchorY(),
-				parentMorphogeneBranch->getJointAnchorZ());
 		}
 
-		//##
-		// PARENT LIMB ANCHOR POINT
-		//##
+		// ##
+		// PARENT ANCHOR DIRECTION
+		// ##
+		//get anchor direction of the parent limb in reference frame of itself
+		parentHitTransform = getParentIntersection(generator, parentLimb,
+			parentMorphogeneBranch, parentLimbCOM,
+			localParentAnchorDirInRefParent);
 
-		// add parent limb to world
-		parentLimb->addToWorld();
-		parentHitTransform = parentLimb->getLocalIntersection(
-		/*origin of limb parent*/
-		OgreBulletUtils::convert(parentLimbCOM),
-		/*direction of anchor of limb parent*/
-		OgreBulletUtils::convert(localParentAnchorDirInRefParent));
 		//get surface point of the parent limb in reference frame itself
 		Ogre::Vector3 localParentAnchorInRefParent(
 			OgreBulletUtils::convert(parentHitTransform.getOrigin()));
-
-		// remove parent limb from world
-		parentLimb->removeFromWorld();
 
 		//##
 		// PARENT JOINT POSITION
@@ -211,62 +195,22 @@ void FSEmbryogenesis::transcribeMorphogene(
 		Ogre::Vector3 localChildAnchorInRefParent(
 			localParentJointInRefParent - childJointDir.normalisedCopy());
 
-		//##
-		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
-		//##
-		// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
-		FSLimbBt* childLimbBt = new FSLimbBt(
-			phenomeModel->getCreatureModel()->getWorld(),
-			NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
-			Ogre::Quaternion(childMorphogene->getOrientationW(),
-				childMorphogene->getOrientationX(),
-				childMorphogene->getOrientationY(),
-				childMorphogene->getOrientationZ()), Ogre::Vector3(),
-			Ogre::Quaternion(childMorphogene->getOrientationW(),
-				childMorphogene->getOrientationX(),
-				childMorphogene->getOrientationY(),
-				childMorphogene->getOrientationZ()),
-			/*dimensions*/
-			Ogre::Vector3(
-				generator->getCurrentShrinkageFactor()
-					* childMorphogene->getX(),
-				generator->getCurrentShrinkageFactor()
-					* childMorphogene->getY(),
-				generator->getCurrentShrinkageFactor()
-					* childMorphogene->getZ()),
-			/*mass*/
-			generator->getCurrentShrinkageFactor() * childMorphogene->getX()
-				* generator->getCurrentShrinkageFactor()
-				* childMorphogene->getY()
-				* generator->getCurrentShrinkageFactor()
-				* childMorphogene->getZ(), childMorphogene->getRestitution(),
-			childMorphogene->getFriction(), Ogre::ColourValue(0, 0, 0), false);
-
-		childLimbBt->initialize();
-
 		// get anchor direction of limb child in the local reference frame of child
 		Ogre::Vector3 localChildAnchorDirInRefChild(
 			childMorphogene->getJointAnchorX(),
 			childMorphogene->getJointAnchorY(),
 			childMorphogene->getJointAnchorZ());
 
-		// add child limb to world
-		childLimbBt->addToWorld();
+		//##
+		// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
+		//##
+		// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
+		childHitTransform = getOwnIntersection(phenomeModel, childMorphogene,
+			generator, localChildAnchorDirInRefChild);
 
-		childHitTransform = childLimbBt->getLocalIntersection(
-		/*origin of child limb*/
-		OgreBulletUtils::convert(generator->getPosition()),
-		/*direction of anchor of child limb*/
-		OgreBulletUtils::convert(localChildAnchorDirInRefChild));
 		//get the surface point of child limb in the local reference frame of itself
 		Ogre::Vector3 localChildAnchorInRefChild(
 			OgreBulletUtils::convert(childHitTransform.getOrigin()));
-
-		// remove child limb from world
-		childLimbBt->removeFromWorld();
-
-		delete childLimbBt;
-		childLimbBt = NULL;
 
 		localChildJointInRefChild = localChildAnchorInRefChild
 			+ childJointDir.normalisedCopy();
@@ -275,6 +219,7 @@ void FSEmbryogenesis::transcribeMorphogene(
 		Ogre::Vector3 childLimbCOM(
 			parentLimbCOM + localChildAnchorInRefParent
 				- localChildAnchorInRefChild);
+
 #ifndef EXCLUDE_FROM_TEST
 		// draw line from limb A to surface anchor point of A (GREEN LINE)
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
@@ -340,6 +285,24 @@ void FSEmbryogenesis::transcribeMorphogene(
 					childMorphogene->getOrientationZ()));
 	}
 
+	//CREATE NEW LIMB
+	FSLimbModel* childLimb = createLimb(generator, childMorphogene,
+		phenomeModel);
+
+	// if there is a parent limb, we connect them with a joint
+	if (generator->getParentComponentModel() != NULL) {
+		appendToParentLimb(phenomeModel, childLimb, generator,
+			localParentJointInRefParent, localChildJointInRefChild,
+			parentHitTransform, childHitTransform);
+	}
+
+	//Create new generators from the morphogene branches
+	createNewGenerators(phenomeModel, childMorphogene, childLimb, generator,
+		generatorList, totalSegmentCounter);
+}
+
+FSLimbModel* FSEmbryogenesis::createLimb(PhenotypeGenerator* generator,
+	Morphogene* childMorphogene, FSPhenomeModel* phenomeModel) {
 	double sizeX =
 		(generator->getCurrentShrinkageFactor() * childMorphogene->getX()
 			< MorphologyConfiguration::LIMB_MIN_SIZE) ?
@@ -392,16 +355,7 @@ void FSEmbryogenesis::transcribeMorphogene(
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
 
-	// if there is a parent limb, we connect them with a joint
-	if (generator->getParentComponentModel() != NULL) {
-		appendToParentLimb(phenomeModel, childLimb, generator,
-			localParentJointInRefParent, localChildJointInRefChild,
-			parentHitTransform, childHitTransform);
-	}
-
-	//Create new generators from the morphogene branches
-	createNewGenerators(phenomeModel, childMorphogene, childLimb, generator,
-		generatorList, totalSegmentCounter);
+	return childLimb;
 }
 
 void FSEmbryogenesis::appendToParentLimb(FSPhenomeModel* phenomeModel,
@@ -660,4 +614,71 @@ void FSEmbryogenesis::createNewGenerators(FSPhenomeModel* phenomeModel,
 		}
 	}
 
+}
+
+btTransform FSEmbryogenesis::getParentIntersection(
+	PhenotypeGenerator* generator, FSLimbBt* parentLimb,
+	MorphogeneBranch* parentMorphogeneBranch, Ogre::Vector3 parentLimbCOM,
+	Ogre::Vector3 localParentAnchorDirInRefParent) {
+	//##
+	// PARENT LIMB ANCHOR POINT
+	//##
+
+	// add parent limb to world
+	parentLimb->addToWorld();
+	btTransform parentHitTransform = parentLimb->getLocalIntersection(
+	/*origin of limb parent*/
+	OgreBulletUtils::convert(parentLimbCOM),
+	/*direction of anchor of limb parent*/
+	OgreBulletUtils::convert(localParentAnchorDirInRefParent));
+
+	// remove parent limb from world
+	parentLimb->removeFromWorld();
+
+	return parentHitTransform;
+}
+
+btTransform FSEmbryogenesis::getOwnIntersection(FSPhenomeModel* phenomeModel,
+	Morphogene* childMorphogene, PhenotypeGenerator* generator,
+	Ogre::Vector3 localChildAnchorDirInRefChild) {
+	FSLimbBt* childLimbBt = new FSLimbBt(
+		phenomeModel->getCreatureModel()->getWorld(),
+		NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
+		Ogre::Quaternion(childMorphogene->getOrientationW(),
+			childMorphogene->getOrientationX(),
+			childMorphogene->getOrientationY(),
+			childMorphogene->getOrientationZ()), Ogre::Vector3(),
+		Ogre::Quaternion(childMorphogene->getOrientationW(),
+			childMorphogene->getOrientationX(),
+			childMorphogene->getOrientationY(),
+			childMorphogene->getOrientationZ()),
+		/*dimensions*/
+		Ogre::Vector3(
+			generator->getCurrentShrinkageFactor() * childMorphogene->getX(),
+			generator->getCurrentShrinkageFactor() * childMorphogene->getY(),
+			generator->getCurrentShrinkageFactor() * childMorphogene->getZ()),
+		/*mass*/
+		generator->getCurrentShrinkageFactor() * childMorphogene->getX()
+			* generator->getCurrentShrinkageFactor() * childMorphogene->getY()
+			* generator->getCurrentShrinkageFactor() * childMorphogene->getZ(),
+		childMorphogene->getRestitution(), childMorphogene->getFriction(),
+		Ogre::ColourValue(0, 0, 0), false);
+
+	childLimbBt->initialize();
+
+	// add child limb to world
+	childLimbBt->addToWorld();
+
+	btTransform childHitTransform = childLimbBt->getLocalIntersection(
+	/*origin of child limb*/
+	OgreBulletUtils::convert(generator->getPosition()),
+	/*direction of anchor of child limb*/
+	OgreBulletUtils::convert(localChildAnchorDirInRefChild));
+
+	// remove child limb from world
+	childLimbBt->removeFromWorld();
+
+	delete childLimbBt;
+	childLimbBt = NULL;
+	return childHitTransform;
 }
