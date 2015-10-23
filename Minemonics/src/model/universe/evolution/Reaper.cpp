@@ -123,8 +123,7 @@ void Reaper::sow(PopulationModel* const population) {
 		crossover(population, crossOverHeads);
 	}
 
-	int untouched = (population->getCreatureModels().size()
-		* mCrossOverPercentage);
+	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
 
 	int start = untouched;
 
