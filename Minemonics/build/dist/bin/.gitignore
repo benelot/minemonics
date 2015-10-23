@@ -1,4 +1,4 @@
-
+/core
 /CEGUI.log
 /Ogre.log
 /*.test
@@ -7,3 +7,5 @@
 /images
 /Minemonics_d
 /.fuse_*
+/runUnitTests
+/minemonics.log
