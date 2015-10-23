@@ -59,6 +59,12 @@ public:
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 		SRBPhenomeModel* phenomeModel, PhenotypeGenerator* generator);
 
+	static void calculateChildPositionRelativeToParent(PhenotypeGenerator* generator,
+		btTransform& parentHitTransform, btTransform& childHitTransform,
+		Morphogene* childMorphogene, SRBPhenomeModel* phenomeModel,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild);
+
 	static SRBLimbModel* createLimb(PhenotypeGenerator* generator,Morphogene* childMorphogene,SRBPhenomeModel* phenomeModel);
 
 	static void appendToParentLimb(SRBPhenomeModel* phenomeModel,
