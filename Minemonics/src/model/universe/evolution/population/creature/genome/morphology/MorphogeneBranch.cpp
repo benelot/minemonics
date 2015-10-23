@@ -168,7 +168,7 @@ void MorphogeneBranch::initialize() {
 
 	mActive = Randomness::getSingleton()->nextUnifBoolean();
 
-	mBranchGeneType = -1;
+	mBranchGeneType = 0;
 
 	/**
 	 * The spring damping coefficient

@@ -2,7 +2,7 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_SENSORS_PROPRIOCEPTOR_H_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.hpp>
 
 //# forward declarations

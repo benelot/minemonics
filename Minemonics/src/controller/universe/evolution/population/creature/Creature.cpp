@@ -46,7 +46,7 @@ Creature::Creature(CreatureModel* const creatureModel) :
 }
 
 Creature::~Creature() {
-	delete mCreatureModel;
+//	delete mCreatureModel;
 	mCreatureModel = NULL;
 //	mPhenotype
 }

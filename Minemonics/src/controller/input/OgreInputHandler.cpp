@@ -70,7 +70,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_1: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_01);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -81,7 +81,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_2: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_02);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -92,7 +92,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_3: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_03);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -103,7 +103,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_4: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_04);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -114,7 +114,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_5: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_05);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -125,7 +125,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_6: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_06);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -136,7 +136,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_7: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_07);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -147,7 +147,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_8: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_08);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to "
@@ -158,7 +158,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_9: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_09);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to as fast as possible";
@@ -167,7 +167,7 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_0: {
 		SimulationManager::getSingleton()->getStateHandler().requestStateChange(
 			StateHandler::HEADLESS_SIMULATION);
-		SimulationManager::getSingleton()->setSimulationSpeed(
+		SimulationManager::getSingleton()->setCurrentSimulationSpeed(
 			PhysicsConfiguration::SIMULATION_SPEED_10);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
 			<< "Changed simulation speed to as fast as possible";

@@ -5,5 +5,5 @@
  *      Author: leviathan
  */
 
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
 

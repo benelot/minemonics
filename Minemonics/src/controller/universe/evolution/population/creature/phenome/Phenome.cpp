@@ -30,13 +30,11 @@
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-
-//## view headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
@@ -79,9 +77,7 @@ Phenome::~Phenome() {
 	mLimbs.clear();
 	mJoints.clear();
 
-	//TODO: Fix the phenotype model memory leak (if any)
-//	delete mPhenotypeModel;
-//	mPhenotypeModel = NULL;
+	mPhenotypeModel = NULL;
 
 	mCreature = NULL;
 }

@@ -30,10 +30,10 @@ class access;
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
 
 //## view headers
 //## utils headers

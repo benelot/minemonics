@@ -112,7 +112,7 @@ void Evaluation::teardown() {
 	SimulationManager::getSingleton()->getViewController().setSelectedPlanet(
 	NULL);
 
-	if (!mHasFailed) {
+	if (!mHasFailed && 	SimulationManager::getSingleton()->getViewController().getEvaluationInView() != NULL) {
 		std::string generationSerializationPath =
 			mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
 
@@ -148,12 +148,14 @@ void Evaluation::teardown() {
 	mEvaluationModel.setEvaluating(false);
 	mEvaluationModel.setTornDown(true);
 
+	SimulationManager::getSingleton()->getViewController().setEvaluationInView(NULL);
+
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mEvaluationModel.getTimePassed() << " seconds simulated in "
 	<< ((float) (SimulationManager::getSingleton()->getRuntime() - mStart))
 	/ 1000.0f << " seconds/ Speedup = "
 	<< mEvaluationModel.getTimePassed()
 	/ (((float) (SimulationManager::getSingleton()->getRuntime()
-				- mStart)) / 1000.0f) << std::endl;
+				- mStart)) / 1000.0f);
 }
 
 void Evaluation::update(const double timeSinceLastTick) {

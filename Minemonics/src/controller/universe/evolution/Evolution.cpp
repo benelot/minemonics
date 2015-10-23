@@ -114,8 +114,10 @@ bool Evolution::proceedEvaluation() {
 					creature->addJury(
 						JuryFactory::buildJury(epoch->getJuryTypes()[i],
 							epoch->getSortOrders()[i], epoch->getWeights()[i]));
+					std::cout << "Add juries" << std::endl;
 				}
 
+				std::cout << creature->getCreatureModel()->getFirstName() << " in evaluation..." << std::endl;
 				population->addMember(creature);
 				evaluation->addPopulation(population);
 

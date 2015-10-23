@@ -1,5 +1,5 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //# forward declarations

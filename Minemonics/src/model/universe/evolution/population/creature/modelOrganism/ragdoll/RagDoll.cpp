@@ -24,9 +24,9 @@
 //## controller headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDoll.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 //## view headers
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>

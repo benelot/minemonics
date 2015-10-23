@@ -43,8 +43,8 @@ class access;
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 
 //## view headers
 //## utils headers
@@ -318,19 +318,19 @@ public:
 
 		/**The position of the creature model*/
 		& BOOST_SERIALIZATION_NVP(mPosition.x)
-			& BOOST_SERIALIZATION_NVP(mPosition.y)
-			& BOOST_SERIALIZATION_NVP(mPosition.z)
+		& BOOST_SERIALIZATION_NVP(mPosition.y)
+		& BOOST_SERIALIZATION_NVP(mPosition.z)
 
-			/**The initial position of the creature model*/
-			& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
-			& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
-			& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
+		/**The initial position of the creature model*/
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.x)
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.y)
+		& BOOST_SERIALIZATION_NVP(mInitialPosition.z)
 
-			/**If the creature was culled or not*/
-			& BOOST_SERIALIZATION_NVP(mCulled)
+		/**If the creature was culled or not*/
+		& BOOST_SERIALIZATION_NVP(mCulled)
 
-			/**If the creature is new*/
-			& BOOST_SERIALIZATION_NVP(mNew);
+		/**If the creature is new*/
+		& BOOST_SERIALIZATION_NVP(mNew);
 	}
 private:
 

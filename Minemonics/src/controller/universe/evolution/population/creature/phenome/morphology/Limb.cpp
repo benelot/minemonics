@@ -28,13 +28,11 @@
 #include <model/universe/PlanetModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
-
-//## view headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
@@ -72,7 +70,6 @@ Limb::~Limb() {
 	delete mLimbGraphics;
 	mLimbGraphics = NULL;
 
-	delete mLimbModel;
 	mLimbModel = NULL;
 
 	mCreature = NULL;

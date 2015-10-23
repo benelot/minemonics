@@ -24,8 +24,8 @@
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
@@ -77,6 +77,12 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 }
 
 PhenomeModel::~PhenomeModel() {
+
+	for (std::vector<ComponentModel*>::const_iterator cit = mComponentModels.begin();
+		cit != mComponentModels.end(); cit++) {
+		delete (*cit);
+	}
+
 	mComponentModels.clear();
 	mLimbModels.clear();
 	mJointModels.clear();

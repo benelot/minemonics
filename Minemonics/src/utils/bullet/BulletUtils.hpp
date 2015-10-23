@@ -62,7 +62,7 @@ public:
 	 */
 	static btScalar getERP(btScalar timeStep, btScalar kSpring,
 		btScalar kDamper) {
-		return kSpring / (timeStep * kSpring + kDamper);
+		return timeStep * kSpring / (timeStep * kSpring + kDamper);
 	}
 
 	/**

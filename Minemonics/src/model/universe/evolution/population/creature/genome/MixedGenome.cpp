@@ -58,13 +58,18 @@ void MixedGenome::createRandomGenome(double branchiness) {
 				GeneticsConfiguration::GENES_INITIAL_MEAN,
 				GeneticsConfiguration::GENES_INITIAL_VAR));
 
-	std::cout << " Gene Qty: "<< geneQty << std::endl;
+	std::cout << " Genomesize: " << geneQty << std::endl;
 
 	// add the number of morphogenes
 	for (int i = 0; i < geneQty; i++) {
 		Morphogene* gene = new Morphogene();
 		gene->initialize(branchiness);
 		mGenes.push_back(gene);
+	}
+
+	// wire all genes to link to other genes
+	for (int i = 0; i < geneQty; i++) {
+		integrateGene(i);
 	}
 
 	// initialize the segments depth
@@ -120,13 +125,9 @@ void MixedGenome::createRandomGenome(double branchiness) {
 
 	std::cout << "\t\t   " << maxActiveBranches << std::endl;
 
-	repairGenes();
-
 	if (mGenes.size() != 0) {
-		int geneSize = mGenes.size() - 1;
-		std::cout << "GenomeSize: " << geneSize << std::endl;
 		addGeneBranch(mRootIndex,
-			Randomness::getSingleton()->nextUnifPosInt(0, geneSize));
+			Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
 	}
 }
 
@@ -230,40 +231,38 @@ void MixedGenome::integrateRandomGene() {
 }
 
 void MixedGenome::integrateGene(int geneIndex) {
-	//TODO:: Only links morphology and not controller, might break with a controller
-	switch (mGenes[geneIndex]->getType()) {
-	case Gene::MorphoGene: {
-		// randomly choose a follow up gene until you get one different from its own type
-		do {
-			((Morphogene*) mGenes[geneIndex])->setFollowUpGene(
-				Randomness::getSingleton()->nextUnifPosInt(0,
-					mGenes.size() - 1));
-		} while (((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
-			== geneIndex && mGenes.size() > 1);
-
-		for (std::vector<MorphogeneBranch*>::iterator branchIt =
-			((Morphogene*) mGenes[geneIndex])->getGeneBranches().begin();
-			branchIt
-				!= ((Morphogene*) mGenes[geneIndex])->getGeneBranches().end();
-			branchIt++) {
-
-//			//raise the probability of morphogene branches to be active
-//			(*branchIt)->setActive(true);
-
-//randomly choose a branch gene type until you get one distinct from the follow up gene
+	if (mGenes.size() != 0) {
+		switch (mGenes[geneIndex]->getType()) {
+		case Gene::MorphoGene: {
+			// randomly choose a follow up gene until you get one different from its own type
 			do {
-				(*branchIt)->setBranchGeneType(
+				((Morphogene*) mGenes[geneIndex])->setFollowUpGene(
 					Randomness::getSingleton()->nextUnifPosInt(0,
 						mGenes.size() - 1));
-			} while (mGenes.size() > 1
-				&& (*branchIt)->getBranchGeneType()
-					== ((Morphogene*) mGenes[geneIndex])->getFollowUpGene());
+			} while (((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
+				== geneIndex && mGenes.size() > 1);
 
+			for (std::vector<MorphogeneBranch*>::iterator branchIt =
+				((Morphogene*) mGenes[geneIndex])->getGeneBranches().begin();
+				branchIt
+					!= ((Morphogene*) mGenes[geneIndex])->getGeneBranches().end();
+				branchIt++) {
+
+				//randomly choose a branch gene type until you get one distinct from the follow up gene
+				do {
+					(*branchIt)->setBranchGeneType(
+						Randomness::getSingleton()->nextUnifPosInt(0,
+							mGenes.size() - 1));
+				} while (mGenes.size() > 1
+					&& (*branchIt)->getBranchGeneType()
+						== ((Morphogene*) mGenes[geneIndex])->getFollowUpGene());
+
+			}
+			break;
 		}
-		break;
-	}
-	default:
-		break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -561,7 +560,7 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 				if (i != classMap.end()) {
 					(*gbit)->setBranchGeneType(i->second);
 
-				// if we did not graft the gene before
+					// if we did not graft the gene before
 				} else {
 
 					// copy the morphogene
@@ -594,6 +593,6 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 
 }
 
-MixedGenome* MixedGenome::clone() {
+MixedGenome * MixedGenome::clone() {
 	return new MixedGenome(*this);
 }

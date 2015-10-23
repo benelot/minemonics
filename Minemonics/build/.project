@@ -286,22 +286,22 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSEmbryogenesis.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/FSEmbryogenesis.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBEmbryogenesis.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/SRBEmbryogenesis.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/BaseGenerator.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/PhenotypeGenerator.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Gene.cpp</name>
@@ -341,12 +341,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSPhenomeModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/FSPhenomeModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBPhenomeModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/SRBPhenomeModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/ComponentModel.cpp</name>
@@ -361,12 +361,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSLimbModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBLimbModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/LimbPhysics.cpp</name>
@@ -376,12 +376,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSLimbBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBLimbBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/JointModel.cpp</name>
@@ -391,12 +391,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSJointModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBJointModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/JointPhysics.cpp</name>
@@ -406,12 +406,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSJointBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBJointBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Motor.cpp</name>
@@ -426,47 +426,47 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/FSServoMotor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/SRBServoMotor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Sensor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Tactioceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Proprioceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/Proprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/JointProprioceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/JointAngleceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/JointForceceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/JointLimitceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Controller.cpp</name>
@@ -1081,22 +1081,22 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FSEmbryogenesis.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/FSEmbryogenesis.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBEmbryogenesis.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/SRBEmbryogenesis.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/BaseGenerator.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/PhenotypeGenerator.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Gene.hpp</name>
@@ -1136,7 +1136,7 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBPhenomeModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/ComponentModel.hpp</name>
@@ -1151,12 +1151,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FSLimbModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBLimbModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/LimbPhysics.hpp</name>
@@ -1166,12 +1166,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FSLimbBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBLimbBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/JointModel.hpp</name>
@@ -1181,12 +1181,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FSJointModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBJointModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/JointPhysics.hpp</name>
@@ -1196,12 +1196,12 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FSJointBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBJointBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Motor.hpp</name>
@@ -1216,47 +1216,47 @@
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/FSServoMotor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/SRBServoMotor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Sensor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Tactioceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Proprioceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/JointProprioceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/JointAngleceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/JointForceceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/JointLimitceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Controller.hpp</name>
@@ -2016,22 +2016,22 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSEmbryogenesis.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/FSEmbryogenesis.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBEmbryogenesis.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/SRBEmbryogenesis.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/BaseGenerator.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/PhenotypeGenerator.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Gene.cpp</name>
@@ -2071,12 +2071,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSPhenomeModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/FSPhenomeModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBPhenomeModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/SRBPhenomeModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/ComponentModel.cpp</name>
@@ -2091,12 +2091,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSLimbModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBLimbModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/LimbPhysics.cpp</name>
@@ -2106,12 +2106,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSLimbBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBLimbBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointModel.cpp</name>
@@ -2121,12 +2121,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSJointModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBJointModel.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointPhysics.cpp</name>
@@ -2136,12 +2136,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSJointBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBJointBt.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Motor.cpp</name>
@@ -2156,47 +2156,47 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSServoMotor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBServoMotor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Sensor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Tactioceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Proprioceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/Proprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointProprioceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointAngleceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointForceceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/JointLimitceptor.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Controller.cpp</name>
@@ -2331,12 +2331,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBPhenomeModel_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/SRBPhenomeModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSPhenomeModel_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/FSPhenomeModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SineController_test.cpp</name>
@@ -2346,52 +2346,52 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBLimbBt_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBLimbModel_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBJointBt_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBJointModel_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/SRBServoMotor_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSLimbBt_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSLimbModel_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSJointBt_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSJointModel_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/FSServoMotor_test.cpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor_test.cpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor_test.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/NameGenerator_test.cpp</name>
@@ -2561,22 +2561,22 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/FSEmbryogenesis.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/genome/genetics/embryogenesis/FSEmbryogenesis.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/FSEmbryogenesis.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBEmbryogenesis.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/genome/genetics/embryogenesis/SRBEmbryogenesis.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/SRBEmbryogenesis.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/BaseGenerator.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/BaseGenerator.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/PhenotypeGenerator.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/embryogenesis/PhenotypeGenerator.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Gene.hpp</name>
@@ -2616,7 +2616,7 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBPhenomeModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/ComponentModel.hpp</name>
@@ -2631,12 +2631,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/FSLimbModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBLimbModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/LimbPhysics.hpp</name>
@@ -2646,12 +2646,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/FSLimbBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBLimbBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointModel.hpp</name>
@@ -2661,12 +2661,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/FSJointModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBJointModel.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointPhysics.hpp</name>
@@ -2676,12 +2676,12 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/FSJointBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBJointBt.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointBt.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Motor.hpp</name>
@@ -2696,47 +2696,47 @@
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/FSServoMotor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/FScreature/phenome/morphology/effector/motor/FSServoMotor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/SRBServoMotor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/effector/motor/SRBServoMotor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Sensor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/Sensor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Tactioceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Proprioceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointProprioceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointAngleceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointForceceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/JointLimitceptor.hpp</name>
 			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp</location>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Controller.hpp</name>

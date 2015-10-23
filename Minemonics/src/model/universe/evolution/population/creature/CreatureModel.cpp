@@ -16,12 +16,9 @@
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/juries/IntegralAverageVelocity.hpp>
+#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
 #include <model/universe/PlanetModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/FSPhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/SRBPhenomeModel.hpp>
-
-//## view headers
-//## utils headers
 #include <utils/NameGenerator.hpp>
 #include <utils/Randomness.hpp>
 
@@ -85,15 +82,18 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 void CreatureModel::initialize() {
 	//initialize the phenome model
 	mPhenotypeModel->initialize();
-
 }
 
 CreatureModel::~CreatureModel() {
+	mWorld = NULL;
+	mPopulationModel = NULL;
 	while (!mJuries.empty()) {
 		Jury* f = mJuries.back();
 		mJuries.pop_back();
 		delete f;
 	}
+	delete mPhenotypeModel;
+	mPhenotypeModel = NULL;
 }
 
 void CreatureModel::reset(const Ogre::Vector3 position) {

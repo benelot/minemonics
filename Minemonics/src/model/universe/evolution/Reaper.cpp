@@ -56,19 +56,21 @@ void Reaper::initialize(const double reapPercentage,
 }
 
 void Reaper::reap(PopulationModel* const population) {
-	int headsToReap = ceil(
-		population->getCreatureModels().size() * mReapPercentage);
 
 	//cull all preselected ones
 	for (std::vector<CreatureModel*>::iterator cit =
 		population->getCreatureModels().begin();
 		cit != population->getCreatureModels().end();) {
+
 		if ((*cit)->isCulled()) {
 			cit = population->getCreatureModels().erase(cit);
 		} else {
 			cit++;
 		}
 	}
+
+	int headsToReap = ceil(
+		population->getCreatureModels().size() * mReapPercentage);
 
 	//for each jury type
 	for (int i = 0; i < population->getCreatureModels()[0]->getJuries().size();
@@ -95,12 +97,10 @@ void Reaper::reap(PopulationModel* const population) {
 		population->getCreatureModels().end(),
 		scoreComparator.compareCreatureFitnessScore);
 
-	for (std::vector<CreatureModel*>::iterator cit =
-		population->getCreatureModels().begin();
-		cit != population->getCreatureModels().end() && headsToReap != 0;
-		headsToReap--) {
-		(*cit)->setCulled(true);
-		cit = population->getCreatureModels().erase(cit);
+	//TODO: Check if this kills the right ones
+	for (; headsToReap != 0; headsToReap--) {
+		population->getCreatureModels().back()->setCulled(true);
+		population->getCreatureModels().pop_back();
 	}
 
 }
@@ -117,10 +117,13 @@ void Reaper::sow(PopulationModel* const population) {
 	// crossover
 	// #############
 
-	// calculate the number of offsprings for each ancestor
-	int crossOverHeads = round(((double) headsToSow) * mCrossOverPercentage);
+	{
+		// calculate the number of offsprings for each ancestor
+		int crossOverHeads = round(
+			((double) headsToSow) * mCrossOverPercentage);
 
-	crossover(population, headsToSow);
+		crossover(population, crossOverHeads);
+	}
 
 	int untouched = (population->getCreatureModels().size()
 		* mCrossOverPercentage);
@@ -204,7 +207,7 @@ void Reaper::crossover(PopulationModel* const population,
 
 	int crossOverSown = 0;
 
-//crossover the best creature with those in the ranking downwards according to the cross over percentage
+	//crossover the best creature with those in the ranking downwards according to the cross over percentage
 	for (int i = 0;
 		cit != population->getCreatureModels().begin() && i < crossoverHeads;
 		i++) {

@@ -32,14 +32,15 @@
 
 BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
 Population::_Init Population::_initializer;
-Population::Population():
-		mPlanet(NULL){
+Population::Population() :
+	mPlanet(NULL) {
 	mPopulationModel = new PopulationModel();
 
 }
 Population::Population(Planet* const planet, const int creatureQty) :
 	mPlanet(planet) {
-	mPopulationModel = new PopulationModel(planet->getPlanetModel(), creatureQty);
+	mPopulationModel = new PopulationModel(planet->getPlanetModel(),
+		creatureQty);
 
 	initialize();
 }
@@ -47,7 +48,8 @@ Population::Population(Planet* const planet, const int creatureQty) :
 Population::Population(Planet* const planet, const int creatureQty,
 	const Ogre::Vector3 initialPosition) :
 	mPlanet(planet) {
-	mPopulationModel = new PopulationModel(planet->getPlanetModel(), creatureQty,initialPosition);
+	mPopulationModel = new PopulationModel(planet->getPlanetModel(),
+		creatureQty, initialPosition);
 
 	initialize();
 }
@@ -140,8 +142,9 @@ void Population::resyncWithModel() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 		cit != mCreatures.end();) {
 		if ((*cit)->isCulled()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature culled.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature culled.";
 			Creature* creature = *cit;
+			delete creature->getCreatureModel();
 			delete creature;
 			cit = mCreatures.erase(cit);
 		} else {
@@ -153,8 +156,7 @@ void Population::resyncWithModel() {
 		mPopulationModel->getCreatureModels().begin();
 		cit != mPopulationModel->getCreatureModels().end(); cit++) {
 		if ((*cit)->isNew()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-			<< "Creature added.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature added.";
 			Creature* creature = new Creature(*cit);
 			mCreatures.push_back(creature);
 			(*cit)->setNew(false);

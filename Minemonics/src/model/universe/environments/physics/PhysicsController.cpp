@@ -27,6 +27,8 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/bullet/BulletUtils.hpp>
+
 PhysicsController::PhysicsController():mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
 	NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
 	pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)), mPhysicsModelType(
@@ -96,19 +98,17 @@ void PhysicsController::initialize() {
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);
 
-//		if (useMCLPSolver) {
-//			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
-//		} else {
-//			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
-//		}
+		if (useMCLPSolver) {
+			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
+		} else {
+			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
+		}
 
 		//mDynamicsWorld->getSolverInfo().m_erp = 0.00001f;
-		//mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEPS_PER_SEC,1,10);
-		//PhysicsConfiguration::SIMULATOR_PHYSICS_SRB_ERP;
+		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,10);
 
 		//mDynamicsWorld->getSolverInfo().m_globalCfm = 0.9f;
-		//mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEPS_PER_SEC,1,1);
-		//PhysicsConfiguration::SIMULATOR_PHYSICS_SRB_CFM;
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,1);
 		break;
 	}
 	default:
@@ -117,14 +117,13 @@ void PhysicsController::initialize() {
 
 	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
 	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
-	mDynamicsWorld->getSolverInfo().m_erp2 =
-		PhysicsConfiguration::SIMULATOR_PHYSICS_FS_ERP;
-	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp =
-		PhysicsConfiguration::SIMULATOR_PHYSICS_FS_ERP;
+	mDynamicsWorld->getSolverInfo().m_erp2 = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,10);
+	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,10);
 	//TODO: Not sure if helps
 	//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
 	//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
 
+	//TODO: Try to remove the scaling factor
 	mDynamicsWorld->setGravity(
 		btVector3(0,
 			-PhysicsConfiguration::EARTH_GRAVITY

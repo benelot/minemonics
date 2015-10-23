@@ -21,7 +21,7 @@
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
 
 //## view headers
 //## utils headers

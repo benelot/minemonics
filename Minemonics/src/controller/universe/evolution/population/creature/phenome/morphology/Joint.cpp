@@ -19,12 +19,12 @@
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/PlanetModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/joint/SRBJointModel.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/joint/FSJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 
 //##view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
@@ -94,7 +94,6 @@ Joint::~Joint() {
 	delete mJointGraphics;
 	mJointGraphics = NULL;
 
-	delete mJointModel;
 	mJointModel = NULL;
 }
 

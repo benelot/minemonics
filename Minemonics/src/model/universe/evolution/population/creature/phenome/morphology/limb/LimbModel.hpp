@@ -37,8 +37,8 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-#include <model/universe/evolution/population/creature/FScreature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 
 //## view headers

@@ -35,11 +35,8 @@
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbBt.hpp>
-
-//## controller headers
-//## model headers
-#include <model/universe/evolution/population/creature/SRBcreature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 #include <view/visualization/procedural/ProceduralCapsuleGenerator.h>
 #include <view/visualization/procedural/ProceduralMeshGenerator.h>
