@@ -14,7 +14,8 @@
 //## view headers
 //## utils headers
 
-ControllerGene::ControllerGene():mControllerGeneType(GenericControllerGene) {
+ControllerGene::ControllerGene() :
+	mControllerGeneType(GenericControllerGene) {
 
 }
 

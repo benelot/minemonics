@@ -92,7 +92,7 @@ public:
 	}
 
 protected:
-	ControllerGeneType mControllerGeneType;
+	ControllerGeneType mControllerGeneType; /**!< The type of the controller gene */
 };
 BOOST_CLASS_VERSION(ControllerGene, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControllerGene)

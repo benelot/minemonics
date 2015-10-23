@@ -102,28 +102,20 @@ MorphogeneBranch::~MorphogeneBranch() {
 
 void MorphogeneBranch::initialize() {
 	GeneBranch::initialize(GeneBranch::MORPHOGENE_BRANCH);
-	/** Set joint anchor X, Y and Z, where the anchor lies in the center of mass
-	 and the X, Y and Z form a vector, pointing to the point on the surface where
-	 the joint will be attached.*/
-	do {
-		mJointAnchorX = Randomness::getSingleton()->nextUnifDouble(-1.0f, 1.0f);
-		mJointAnchorY = Randomness::getSingleton()->nextUnifDouble(-1.0f, 1.0f);
-		mJointAnchorZ = Randomness::getSingleton()->nextUnifDouble(-1.0f, 1.0f);
-	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
+
+	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector();
+	mJointAnchorX = anchorVector.x; // Set joint anchor X, Y and Z, where the anchor lies in the center of mass
+	mJointAnchorY = anchorVector.y; // and the X, Y and Z form a vector, pointing to the point on the surface where
+	mJointAnchorZ = anchorVector.z; // the joint will be attached.
 
 	mJointPitchEnabled = Randomness::getSingleton()->nextUnifBoolean();
 	mJointYawEnabled = Randomness::getSingleton()->nextUnifBoolean();
 	mJointRollEnabled = Randomness::getSingleton()->nextUnifBoolean();
 
-	do {
-		mJointPitchAxisX = Randomness::getSingleton()->nextUnifDouble(-1.0f,
-			1.0f);
-		mJointPitchAxisY = Randomness::getSingleton()->nextUnifDouble(-1.0f,
-			1.0f);
-		mJointPitchAxisZ = Randomness::getSingleton()->nextUnifDouble(-1.0f,
-			1.0f);
-	} while (mJointPitchAxisX == 0 && mJointPitchAxisY == 0
-		&& mJointPitchAxisZ == 0);
+	Ogre::Vector3 pitchAxisVector = Randomness::getSingleton()->nextVector();
+	mJointPitchAxisX = pitchAxisVector.x;
+	mJointPitchAxisY = pitchAxisVector.y;
+	mJointPitchAxisZ = pitchAxisVector.z;
 
 	//TODO: Change if other joint control becomes available
 	mJointType = JointPhysics::HINGE_JOINT;
@@ -163,9 +155,7 @@ void MorphogeneBranch::initialize() {
 	 * Set whether the branch should be mirrored or flipped to the other side.
 	 */
 	mMirrored = Randomness::getSingleton()->nextUnifBoolean();
-
 	mFlipped = Randomness::getSingleton()->nextUnifBoolean();
-
 	mActive = Randomness::getSingleton()->nextUnifBoolean();
 
 	mBranchGeneType = 0;

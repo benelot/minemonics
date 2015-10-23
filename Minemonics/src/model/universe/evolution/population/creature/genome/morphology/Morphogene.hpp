@@ -362,37 +362,37 @@ public:
 
 		& BOOST_SERIALIZATION_NVP(mOrientationX) /**!< The orientation of the morphogene*/
 		& BOOST_SERIALIZATION_NVP(mOrientationY)
-			& BOOST_SERIALIZATION_NVP(mOrientationZ)
-			& BOOST_SERIALIZATION_NVP(mOrientationW)
+		& BOOST_SERIALIZATION_NVP(mOrientationZ)
+		& BOOST_SERIALIZATION_NVP(mOrientationW)
 
-			& BOOST_SERIALIZATION_NVP(mIntraBodyColliding) /**!< If the limb will be colliding with others */
-			& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor) /** !< The shrink factor propagated along the branches of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mIntraBodyColliding) /**!< If the limb will be colliding with others */
+		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor) /** !< The shrink factor propagated along the branches of the morphogene*/
 
-			& BOOST_SERIALIZATION_NVP(mRepetitionLimit) /** !< The number of repetitions of this gene one after another.*/
+		& BOOST_SERIALIZATION_NVP(mRepetitionLimit) /** !< The number of repetitions of this gene one after another.*/
 
-			& BOOST_SERIALIZATION_NVP(mFollowUpGene) /** !< The gene that follows this one after the repetitions.*/
+		& BOOST_SERIALIZATION_NVP(mFollowUpGene) /** !< The gene that follows this one after the repetitions.*/
 
-			& BOOST_SERIALIZATION_NVP(mColorR) /**!< The color of this morphogene.*/
-			& BOOST_SERIALIZATION_NVP(mColorG)
-			& BOOST_SERIALIZATION_NVP(mColorB)
+		& BOOST_SERIALIZATION_NVP(mColorR) /**!< The color of this morphogene.*/
+		& BOOST_SERIALIZATION_NVP(mColorG)
+		& BOOST_SERIALIZATION_NVP(mColorB)
 
-			& BOOST_SERIALIZATION_NVP(mPrimitiveType) /**!< The 3D primitive type of this morphogene.*/
+		& BOOST_SERIALIZATION_NVP(mPrimitiveType) /**!< The 3D primitive type of this morphogene.*/
 
-			& BOOST_SERIALIZATION_NVP(mControllerGene) /**!< The controller gene of this morphogene's joint.*/
+		& BOOST_SERIALIZATION_NVP(mControllerGene) /**!< The controller gene of this morphogene's joint.*/
 
-			& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**!< The position of the joint anchor.*/
-			& BOOST_SERIALIZATION_NVP(mJointAnchorY)
-			& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**!< The position of the joint anchor.*/
+		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
 
-			& BOOST_SERIALIZATION_NVP(mJointPitch) /**!< The orientation of the joint anchor.*/
-			& BOOST_SERIALIZATION_NVP(mJointYaw)
-			& BOOST_SERIALIZATION_NVP(mJointRoll)
+		& BOOST_SERIALIZATION_NVP(mJointPitch) /**!< The orientation of the joint anchor.*/
+		& BOOST_SERIALIZATION_NVP(mJointYaw)
+		& BOOST_SERIALIZATION_NVP(mJointRoll)
 
-			& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the morphogene*/
 
-			& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the morphogene*/
 
-			& BOOST_SERIALIZATION_NVP(mGeneBranches); /**!< The gene branches of this gene*/
+		& BOOST_SERIALIZATION_NVP(mGeneBranches); /**!< The gene branches of this gene*/
 	}
 
 private:

@@ -23,7 +23,7 @@
 
 Morphogene::Morphogene() :
 	mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(LimbPhysics::UNKNOWN), mControllerGene(
-		NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
+	NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 		0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
 		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
 		0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(1), mIntraBodyColliding(
@@ -83,20 +83,13 @@ void Morphogene::initialize(const double branchiness) {
 	mType = Gene::MorphoGene;
 
 	//Choose the dimensions of the segment with a bias toward larger dimensions
-	//TODO: Fix biased log
-//	mX = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
-//			MorphologyConfiguration::LIMB_MAX_SIZE);
-//	mY = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
-//			MorphologyConfiguration::LIMB_MAX_SIZE);
-//	mZ = Randomness::getSingleton()->nextBiasedLog(MorphologyConfiguration::LIMB_MIN_SIZE,
-//			MorphologyConfiguration::LIMB_MAX_SIZE);
-	mX = Randomness::getSingleton()->nextUnifDouble(
+	mX = Randomness::getSingleton()->nextBiasedLogDouble(
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
-	mY = Randomness::getSingleton()->nextUnifDouble(
+	mY = Randomness::getSingleton()->nextBiasedLogDouble(
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
-	mZ = Randomness::getSingleton()->nextUnifDouble(
+	mZ = Randomness::getSingleton()->nextBiasedLogDouble(
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
 
@@ -105,19 +98,13 @@ void Morphogene::initialize(const double branchiness) {
 			MorphologyConfiguration::LIMB_SCALE_MIN,
 			MorphologyConfiguration::LIMB_SCALE_MAX);
 
-	//set restitution and friction
-	mRestitution = MorphologyConfiguration::LIMB_INITIAL_RESTITUTION;
-	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION;
+	mRestitution = MorphologyConfiguration::LIMB_INITIAL_RESTITUTION; /**!< Set the restitution */
+	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION; /**!< Set the friction */
 
-	/* Set joint anchor X, Y and Z, where the anchor lies in the center of mass
-	 and the X, Y and Z form a vector, pointing to the point on the surface where
-	 the joint will be attached. The vector contains three values between -1 and 1.
-	 */
-	do {
-		mJointAnchorX = Randomness::getSingleton()->nextUnifDouble(-1, 1);
-		mJointAnchorY = Randomness::getSingleton()->nextUnifDouble(-1, 1);
-		mJointAnchorZ = Randomness::getSingleton()->nextUnifDouble(-1, 1);
-	} while (mJointAnchorX == 0 && mJointAnchorY == 0 && mJointAnchorZ == 0);
+	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector();
+	mJointAnchorX = anchorVector.x;// Set joint anchor X, Y and Z, where the anchor lies in the center of mass
+	mJointAnchorY = anchorVector.y;// and the X, Y and Z form a vector, pointing to the point on the surface where
+	mJointAnchorZ = anchorVector.z;// the joint will be attached. The vector contains three values between -1 and 1.
 
 	//The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	mJointYaw = Randomness::getSingleton()->nextUnifDouble(
@@ -144,11 +131,9 @@ void Morphogene::initialize(const double branchiness) {
 	mRepetitionLimit = Randomness::getSingleton()->nextUnifPosInt(0,
 		MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
-	//The follow up gene follows instead if this gene's repetition limit is reached.
-	mFollowUpGene = -1;
+	mFollowUpGene = 0; /**!< The follow up gene follows instead if this gene's repetition limit is reached. */
 
-	int branchQty = Randomness::getSingleton()->nextUnifPosInt(0, branchiness);
-
+	int branchQty = Randomness::getSingleton()->nextUnifPosInt(0, branchiness); /**!< The number of branches to be added */
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();
 		branch->initialize();
@@ -321,8 +306,7 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	/**Compare morphogene branches */
-	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) {
+	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) { 	/**!< Compare morphogene branches */
 		return false;
 	}
 

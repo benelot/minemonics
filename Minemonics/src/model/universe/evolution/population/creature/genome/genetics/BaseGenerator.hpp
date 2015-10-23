@@ -44,10 +44,7 @@ public:
 	}
 
 protected:
-	/**
-	 * The gene the generator transcribes.
-	 */
-	Gene* mGene;
+	Gene* mGene; /**!< The gene the generator transcribes. */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_BASEGENERATOR_HPP_ */

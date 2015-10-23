@@ -67,12 +67,12 @@ public:
 	/**
 	 * The limb scale min constant determines how much the subtree of this body segment should be scaled at least.
 	 */
-	static const double LIMB_SCALE_MIN = -0.5;
+	static const double LIMB_SCALE_MIN = -0.66;
 
 	/**
 	 * The limb scale max constant determines how much the subtree of this body segment should be scaled at most.
 	 */
-	static const double LIMB_SCALE_MAX = 1.0;
+	static const double LIMB_SCALE_MAX = 2.0;
 
 	/**
 	 * The initial maximum limb type repeats
