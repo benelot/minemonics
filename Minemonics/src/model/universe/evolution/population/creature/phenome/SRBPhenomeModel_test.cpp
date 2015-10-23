@@ -23,7 +23,6 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		phenomeModel = new SRBPhenomeModel();
-		phenomeModel->initialize();
 	}
 
 	virtual void TearDown() {
@@ -43,7 +42,6 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		phenomeModel = new SRBPhenomeModel();
-		phenomeModel->initialize();
 
 		phenomeModel2 = new SRBPhenomeModel();
 

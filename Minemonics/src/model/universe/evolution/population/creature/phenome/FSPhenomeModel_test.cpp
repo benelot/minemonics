@@ -23,7 +23,6 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		phenomeModel = new FSPhenomeModel();
-		phenomeModel->initialize();
 	}
 
 	virtual void TearDown() {
@@ -43,7 +42,6 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		phenomeModel = new FSPhenomeModel();
-		phenomeModel->initialize();
 
 		phenomeModel2 = new FSPhenomeModel();
 

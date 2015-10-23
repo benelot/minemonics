@@ -24,46 +24,43 @@
 class FSJointBtTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		randomness = new Randomness();
+		new Randomness();
 		// Set up an object of the class you want to test
 		jointBt = new FSJointBt(NULL, NULL, NULL, btTransform(), btTransform(),
 			JointPhysics::HINGE_JOINT, true, true, true,
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
 		jointBt->initialize();
 
 		jointBt->generateMotors(
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
 	}
 
 	virtual void TearDown() {
 		// delete and set the pointer to zero
 		delete jointBt;
 		jointBt = NULL;
-		delete randomness;
-		randomness = NULL;
 	}
 	FSJointBt* jointBt;
-	Randomness* randomness;
 };
 
 class FSJointBtSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		randomness = new Randomness();
+		new Randomness();
 		// Set up an object of the class you want to test
 		jointBt = new FSJointBt(NULL, NULL, NULL, btTransform(), btTransform(),
 			JointPhysics::HINGE_JOINT, true, true, true,
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
 		jointBt->generateMotors(
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
 		jointBt->initialize();
 
 		jointBt2 = new FSJointBt();
@@ -81,12 +78,9 @@ protected:
 		jointBt = NULL;
 		delete jointBt2;
 		jointBt2 = NULL;
-		delete randomness;
-		randomness = NULL;
 	}
 	FSJointBt* jointBt;
 	FSJointBt* jointBt2;
-	Randomness* randomness;
 };
 
 TEST_F(FSJointBtTest,hasNormalGenes) {

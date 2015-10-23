@@ -110,20 +110,21 @@ bool PopulationModel::equals(const PopulationModel& population) const {
 		return false;
 	}
 
-	/**Comparison of creature models*/
-	if (mCreatureModels.size() != population.mCreatureModels.size()) {
-		return false;
-	}
-	std::vector<CreatureModel*>::const_iterator it = mCreatureModels.begin();
-	std::vector<CreatureModel*>::const_iterator it2 =
-		population.getCreatureModels().begin();
-	for (;
-		it != mCreatureModels.end(), it2 != population.getCreatureModels().end();
-		it++, it2++) {
-		if (!(*it)->equals(**it2)) {
-			return false;
-		}
-	}
+	//This is usually loaded separately
+//	/**Comparison of creature models*/
+//	if (mCreatureModels.size() != population.mCreatureModels.size()) {
+//		return false;
+//	}
+//	std::vector<CreatureModel*>::const_iterator it = mCreatureModels.begin();
+//	std::vector<CreatureModel*>::const_iterator it2 =
+//		population.getCreatureModels().begin();
+//	for (;
+//		it != mCreatureModels.end(), it2 != population.getCreatureModels().end();
+//		it++, it2++) {
+//		if (!(*it)->equals(**it2)) {
+//			return false;
+//		}
+//	}
 
 	return true;
 

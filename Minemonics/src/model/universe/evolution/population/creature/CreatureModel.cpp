@@ -32,11 +32,12 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	const PhysicsController::PhysicsModelType physicsModelType,
 	const Ogre::Vector3 position, const double branchiness) :
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
-		-1), mWorld(
-		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()), mPhenotypeModel(
+		-1), mPhenotypeModel(
 	NULL), mPhysicsModelType(physicsModelType), mInitialPosition(position), mPosition(
 		position) {
-
+#ifndef EXCLUDE_FROM_TEST
+	mWorld = populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
+#endif
 	//set first name of creature
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();
