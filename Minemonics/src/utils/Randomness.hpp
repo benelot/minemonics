@@ -23,9 +23,6 @@ class Vector3;
 //## view headers
 //## utils headers
 
-
-
-
 /**
  * @brief		The randomness class abstracts the randomness used in this program, making it easier to change it if necessary.
  * @details		Details
@@ -101,9 +98,19 @@ public:
 	 */
 	bool nextNormalBoolean(double mean, double variance);
 
+	/**
+	 * Return a random vector.
+	 * @return The random vector.
+	 */
 	Ogre::Vector3 nextVector();
 
+	/**
+	 * Return a random quaternion.
+	 * @return The random quaternion.
+	 */
 	Ogre::Quaternion nextQuaternion();
+
+	// Accessor methods
 
 	static Randomness* getSingleton(){
 		return mRandomness;
@@ -111,13 +118,9 @@ public:
 
 private:
 
-	// A mersenne twister in a very good configuration
-	boost::random::mt19937 rng;
+	boost::random::mt19937 rng; 	/**!< A mersenne twister in a configuration that has a very long limitcycle */
 
-	/**
-	 * Singleton instance.
-	 */
-	static Randomness* mRandomness;
+	static Randomness* mRandomness; /**!< Singleton instance. */
 };
 
 #endif /* UTILS_RANDOMNESS_H_ */

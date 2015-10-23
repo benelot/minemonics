@@ -20,6 +20,7 @@
 //## model headers
 //## view headers
 //## utils headers
+
 Randomness* Randomness::mRandomness;
 Randomness::Randomness() {
 	mRandomness = this;
@@ -65,21 +66,12 @@ int Randomness::nextUnifPosInt(int lowerLimit, int upperLimit) {
 		return lowerLimit;
 	}
 
-//	std::cout <<" Limits: " << lowerLimit << "," << upperLimit;
-
 	//create a uniform integer distribution
 	boost::random::uniform_int_distribution<> unifIntDistribution(lowerLimit,
 		upperLimit);
 
 	//draw from it via the mersenne twister
-	int i = unifIntDistribution(rng);
-	//TODO: It seems that the distribution sometimes returns very high values
-	if(i > upperLimit){
-		i = upperLimit;
-	}else if(i < lowerLimit){
-		i = lowerLimit;
-	}
-	return i;
+	return unifIntDistribution(rng);
 }
 /**
  * Is a function which generates two values,
@@ -106,17 +98,15 @@ double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
 }
 
 bool Randomness::nextUnifBoolean() {
-	//create a uniform integer distribution
-	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1);
+	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1); //create a uniform integer distribution
 
-	// return true if 1 else false
-	return (unifIntDistribution(rng)) ? true : false;
+	return (unifIntDistribution(rng)) ? true : false; // return true if 1 else false
 }
 
 int Randomness::nextNormalPosInt(double mean, double variance, double limit) {
-	int integer = nextNormalInt(mean,variance,limit);
+	int integer = nextNormalInt(mean, variance, limit);
 
-	if(integer < 0){
+	if (integer < 0) {
 		integer = 0;
 	}
 	return integer;
@@ -184,17 +174,14 @@ Ogre::Vector3 Randomness::nextVector() {
 		2 * boost::math::constants::pi<double>());
 
 	double rawX = sin(theta);
-
 	double rawY = cos(theta);
 
 	double z = nextUnifDouble(-1.0, 1.0);
 
 	double phi = asin(z);
-
 	double scalar = cos(phi);
 
 	double x = rawX * scalar;
-
 	double y = rawY * scalar;
 
 	return Ogre::Vector3(x, y, z);
@@ -204,16 +191,13 @@ Ogre::Quaternion Randomness::nextQuaternion() {
 	Ogre::Vector3 v = nextVector();
 
 	double x = v.x;
-
 	double y = v.y;
-
 	double z = v.z;
 
 	double theta = nextUnifDouble(0.0,
 		2 * boost::math::constants::pi<double>());
 
 	double cosTheta = cos(theta);
-
 	double sinTheta = sin(theta);
 
 	return Ogre::Quaternion(cosTheta, x * sinTheta, y * sinTheta, z * sinTheta);
