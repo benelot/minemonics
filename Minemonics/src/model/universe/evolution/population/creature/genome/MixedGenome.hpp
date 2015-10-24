@@ -58,6 +58,7 @@ public:
 
 	MixedGenome();
 	MixedGenome(const MixedGenome& mixedGenome);
+	MixedGenome(const MixedGenome* mixedGenome);
 
 	virtual ~MixedGenome();
 

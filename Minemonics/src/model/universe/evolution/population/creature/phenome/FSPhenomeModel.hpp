@@ -92,7 +92,7 @@ public:
 	/**
 	 * Clone the phenome model.
 	 */
-	FSPhenomeModel* clone();
+	virtual PhenomeModel* clone();
 
 	virtual void calm();
 

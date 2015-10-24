@@ -104,7 +104,7 @@ public:
 	/**
 	 * Clone the phenome model.
 	 */
-	SRBPhenomeModel* clone();
+	virtual PhenomeModel* clone();
 
 	virtual void calm();
 

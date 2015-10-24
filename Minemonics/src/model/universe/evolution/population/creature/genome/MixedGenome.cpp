@@ -44,6 +44,19 @@ MixedGenome::MixedGenome(const MixedGenome& mixedGenome) {
 	}
 }
 
+MixedGenome::MixedGenome(const MixedGenome* mixedGenome) {
+	mBranchiness = mixedGenome->mBranchiness;
+	mGenomeType = mixedGenome->mGenomeType;
+	mLength = mixedGenome->mLength;
+	mSegmentsDepthLimit = mixedGenome->mSegmentsDepthLimit;
+	mTotalSegmentQtyLimit = mixedGenome->mTotalSegmentQtyLimit;
+
+	std::vector<Gene*>::const_iterator git = mixedGenome->mGenes.begin();
+	for (; git != mixedGenome->mGenes.end(); git++) {
+		mGenes.push_back((*git)->clone());
+	}
+}
+
 MixedGenome::~MixedGenome() {
 
 }

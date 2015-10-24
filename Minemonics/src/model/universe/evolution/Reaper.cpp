@@ -61,7 +61,6 @@ void Reaper::reap(PopulationModel* const population) {
 	for (std::vector<CreatureModel*>::iterator cit =
 		population->getCreatureModels().begin();
 		cit != population->getCreatureModels().end();) {
-
 		if ((*cit)->isCulled()) {
 			cit = population->getCreatureModels().erase(cit);
 		} else {

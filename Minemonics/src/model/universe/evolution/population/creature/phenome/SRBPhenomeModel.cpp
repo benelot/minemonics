@@ -310,7 +310,7 @@ void SRBPhenomeModel::removeFromWorld() {
 	PhenomeModel::removeFromWorld();
 }
 
-SRBPhenomeModel* SRBPhenomeModel::clone() {
+PhenomeModel* SRBPhenomeModel::clone() {
 	return new SRBPhenomeModel(*this);
 }
 

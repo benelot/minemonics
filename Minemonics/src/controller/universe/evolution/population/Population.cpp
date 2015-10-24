@@ -138,6 +138,7 @@ void Population::removeFromWorld() {
 }
 
 void Population::resyncWithModel() {
+
 	//remove the creatures that were culled
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 		cit != mCreatures.end();) {
@@ -152,6 +153,7 @@ void Population::resyncWithModel() {
 		}
 	}
 
+	//add new creatures that were newly born.
 	for (std::vector<CreatureModel*>::const_iterator cit =
 		mPopulationModel->getCreatureModels().begin();
 		cit != mPopulationModel->getCreatureModels().end(); cit++) {

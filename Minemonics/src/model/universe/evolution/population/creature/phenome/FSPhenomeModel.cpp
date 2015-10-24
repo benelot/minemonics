@@ -470,7 +470,7 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 	return true;
 }
 
-FSPhenomeModel* FSPhenomeModel::clone() {
+PhenomeModel* FSPhenomeModel::clone() {
 	return new FSPhenomeModel(*this);
 }
 

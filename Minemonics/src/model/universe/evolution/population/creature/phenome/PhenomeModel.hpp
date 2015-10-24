@@ -164,6 +164,8 @@ public:
 		mCreatureModel = creatureModel;
 	}
 
+	virtual PhenomeModel* clone() = 0;
+
 	/**
 	 * Give access to boost serialization
 	 */

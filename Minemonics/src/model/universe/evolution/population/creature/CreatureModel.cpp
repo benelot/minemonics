@@ -56,8 +56,7 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-	mGenotype(creatureModel.mGenotype), mPhenotypeModel(
-		creatureModel.mPhenotypeModel) {
+	mGenotype(&creatureModel.mGenotype) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -67,7 +66,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mPosition = creatureModel.mPosition;
 	mFitnessScore = creatureModel.mFitnessScore;
 	mWorld = creatureModel.mWorld;
-	mPhenotypeModel = creatureModel.mPhenotypeModel;
+	mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
 	mFitnessScoreCalculated = creatureModel.mFitnessScoreCalculated;
 
