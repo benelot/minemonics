@@ -90,21 +90,21 @@ void EvaluationController::scheduleEvaluations() {
 
 void EvaluationController::update(const double timeSinceLastTick) {
 
-	//breaks when there are no creatures on the planets to evaluate
-	while (mEvaluations.size() < mParallelEvaluationsQty
-		&& mUniverse->getTotalCreatureQty() != 0) {
-		if (!mUniverse->proceedEvaluation()) {
-			break;
-		}
-	}
-
-	if (!mPaused) {
-		std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-		for (; eit != mEvaluations.end(); eit++) {
-			if ((*eit)->isEvaluating()) {
-				(*eit)->update(timeSinceLastTick);
+	if (!mPaused) { // if the simulator is not paused, we update all evaluations that are in the loop
+		for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
+			eit != mEvaluations.end(); eit++) {
+			if ((*eit)->isEvaluating()) { // if the evaluation is running
+				(*eit)->update(timeSinceLastTick); // update the evaluation
 			}
 		}
 	}
-	scheduleEvaluations();
+
+	scheduleEvaluations(); //setup new evaluations and tear down the old ones
+
+	while (mEvaluations.size() < mParallelEvaluationsQty // if there are not enough evaluations evaluating
+	&& mUniverse->getTotalCreatureQty() != 0) { // if the universe has creatures in it
+		if (!mUniverse->proceedEvaluation()) { // we proceed the evaluation until it says it can not continue anymore
+			break;
+		}
+	}
 }

@@ -72,15 +72,15 @@ bool EvolutionModel::proceedEvaluation() {
 
 			mPopulationModels[mCurrentPopulationIndex]->setOutOfSync(true);
 
-		}
+			if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
+				mCurrentPopulationIndex++;
+				mCurrentCreatureIndex = 0;
+			} else {
+				mCurrentPopulationIndex = 0;
+				mCurrentCreatureIndex = 0;
+				return false;
+			}
 
-		if (mCurrentPopulationIndex + 1 < mPopulationModels.size()) {
-			mCurrentPopulationIndex++;
-			mCurrentCreatureIndex = 0;
-		} else {
-			mCurrentPopulationIndex = 0;
-			mCurrentCreatureIndex = 0;
-			return false;
 		}
 	} else {
 		return false;

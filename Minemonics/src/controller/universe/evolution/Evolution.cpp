@@ -82,8 +82,7 @@ bool Evolution::proceedEvaluation() {
 
 				// create generation folder
 				if (mEvolutionModel->getCurrentCreatureIndex() == 0) {
-					// save population
-					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->save();
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->save(); // save population
 
 					//create folder for the generation
 					std::string generationName =
@@ -91,20 +90,21 @@ bool Evolution::proceedEvaluation() {
 							+ boost::lexical_cast<std::string>(
 								mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCurrentGeneration());
 					FilesystemManipulator::createFolder(
-						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
+ 						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
 						generationName);
 				}
 
-				Evaluation* evaluation = new Evaluation();
-				evaluation->initialize(mPlanet,
-					mEvolutionModel->getEvaluationTime());
+				Evaluation* evaluation = new Evaluation(mPlanet,
+					mEvolutionModel->getEvaluationTime()); // create new evaluation
+				evaluation->initialize();
 
 				// create population with single creature for evaluation
 				Population* population = new Population(mPlanet, 0);
 
 				Creature* creature =
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()];
-				//add juries
+
+				//add juries to creature
 				creature->clearJuries();
 				for (int i = 0;
 					i
@@ -114,24 +114,24 @@ bool Evolution::proceedEvaluation() {
 					creature->addJury(
 						JuryFactory::buildJury(epoch->getJuryTypes()[i],
 							epoch->getSortOrders()[i], epoch->getWeights()[i]));
-					std::cout << "Add juries" << std::endl;
 				}
 
-				std::cout << creature->getCreatureModel()->getFirstName() << " in evaluation..." << std::endl;
+				std::cout << creature->getCreatureModel()->getFirstName()
+					<< " in evaluation..." << std::endl;
 				population->addMember(creature);
 				evaluation->addPopulation(population);
 
 				mEvaluationController->addEvaluation(evaluation);
+				mEvolutionModel->evaluate();
 			}
 
-			mEvolutionModel->evaluate();
 			return mEvolutionModel->proceedEvaluation();
 			break;
 		}
 		case EvolutionModel::N_INDIVIDUALS_TOURNAMENT_EVALUATION: {
-			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,
+			Evaluation* evaluation = new Evaluation(mPlanet,
 				mEvolutionModel->getEvaluationTime());
+			evaluation->initialize();
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getTournamentSize(); i++) {
@@ -154,9 +154,9 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 		case EvolutionModel::POPULATION_EVALUATION: {
-			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,
+			Evaluation* evaluation = new Evaluation(mPlanet,
 				mEvolutionModel->getEvaluationTime());
+			evaluation->initialize();
 
 			Population* population;
 			for (int i = 0;
@@ -181,9 +181,9 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 		case EvolutionModel::N_POPULATIONS_TOURNAMENT_EVALUATION: {
-			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,
+			Evaluation* evaluation = new Evaluation(mPlanet,
 				mEvolutionModel->getEvaluationTime());
+			evaluation->initialize();
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getTournamentSize(); i++) {
@@ -209,9 +209,9 @@ bool Evolution::proceedEvaluation() {
 			break;
 		}
 		case EvolutionModel::POPULATIONS_EVALUATION: {
-			Evaluation* evaluation = new Evaluation();
-			evaluation->initialize(mPlanet,
+			Evaluation* evaluation = new Evaluation(mPlanet,
 				mEvolutionModel->getEvaluationTime());
+			evaluation->initialize();
 
 			Population* population;
 			for (int i = 0; i < mEvolutionModel->getPopulationModels().size();
@@ -246,7 +246,7 @@ bool Evolution::proceedEvaluation() {
 		}
 	} else {
 
-//update lasting generations
+		//update how many generations this epoch lasts already
 		mPlanet->getPlanetModel()->getCurrentEpoch()->setLastingGenerations(
 			mPlanet->getPlanetModel()->getCurrentEpoch()->getLastingGenerations()
 				+ 1);

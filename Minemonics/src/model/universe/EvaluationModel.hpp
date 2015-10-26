@@ -30,10 +30,11 @@
 class EvaluationModel {
 public:
 	EvaluationModel();
+	EvaluationModel(PlanetModel* const planetModel, const double evaluationTime =
+		EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
 	virtual ~EvaluationModel();
 
-	void initialize(PlanetModel* const planetModel, const double evaluationTime =
-			EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
+	void initialize();
 
 	void addPopulationModel(PopulationModel* const populationModel);
 

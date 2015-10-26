@@ -19,15 +19,18 @@ EvaluationModel::EvaluationModel() :
 				false), mTornDown(false), mSimulationSpeed(1) {
 }
 
+EvaluationModel::EvaluationModel(PlanetModel* const planetModel,
+	const double evaluationTime) :
+		mPlanetModel(planetModel), mEvaluationTime(evaluationTime), mTimePassed(0), mEvaluating(
+				false), mTornDown(false), mSimulationSpeed(1) {
+}
+
 EvaluationModel::~EvaluationModel() {
 	mPlanetModel = NULL;
 	mPopulationModels.clear();
 }
 
-void EvaluationModel::initialize(PlanetModel* const planetModel,
-		const double evaluationTime) {
-	mPlanetModel = planetModel;
-	mEvaluationTime = evaluationTime;
+void EvaluationModel::initialize() {
 }
 
 void EvaluationModel::addPopulationModel(

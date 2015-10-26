@@ -34,20 +34,26 @@ Evaluation::Evaluation() :
 	mPlanet(NULL), mStart(0), mHasFailed(false), mOnce(true) {
 }
 
+Evaluation::Evaluation(Planet* const planet, const double evaluationTime) :
+	mPlanet(planet), mStart(0), mHasFailed(false), mOnce(true),mEvaluationModel(planet->getPlanetModel(), evaluationTime) {
+}
+
 Evaluation::~Evaluation() {
 	mPlanet = NULL;
 
 	//remove populations but do not delete the creatures
-	for(std::vector<Population*>::iterator pit = mPopulations.begin(); pit != mPopulations.end();){
+	for (std::vector<Population*>::iterator pit = mPopulations.begin();
+		pit != mPopulations.end();) {
 		(*pit)->getCreatures().clear();
 		delete *pit;
 		pit = mPopulations.erase(pit);
 	}
 }
 
-void Evaluation::initialize(Planet* const planet, const double evaluationTime) {
-	mPlanet = planet;
-	mEvaluationModel.initialize(planet->getPlanetModel(), evaluationTime);
+void Evaluation::initialize() {
+	mGenerationSerializationPath =
+			mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
+	mEvaluationModel.initialize();
 }
 
 void Evaluation::addPopulation(Population* const population) {
@@ -112,7 +118,8 @@ void Evaluation::process() {
 }
 
 void Evaluation::teardown() {
-	SimulationManager::getSingleton()->getViewController().setEvaluationInView(NULL);
+	SimulationManager::getSingleton()->getViewController().setEvaluationInView(
+		NULL);
 
 	SimulationManager::getSingleton()->getViewController().removePlanetFromView(
 		mPlanet);
@@ -120,16 +127,13 @@ void Evaluation::teardown() {
 	NULL);
 
 	if (!mHasFailed) {
-		std::string generationSerializationPath =
-			mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
-
 		// save creatures of evaluated populations
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 			pit != mPopulations.end(); pit++) {
 			for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
 				cit != (*pit)->getCreatures().end(); cit++) {
-				(*cit)->save(generationSerializationPath);
+				(*cit)->save(mGenerationSerializationPath);
 			}
 		}
 

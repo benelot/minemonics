@@ -36,6 +36,7 @@ class Planet;
 class Evaluation {
 public:
 	Evaluation();
+	Evaluation(Planet* const planet, const double evaluationTime);
 	virtual ~Evaluation();
 
 	/**
@@ -43,7 +44,7 @@ public:
 	 * @param planet The planet on which the evaluation takes place.
 	 * @param evaluationTime The evaluation time in this evaluation
 	 */
-	void initialize(Planet* const planet, const double evaluationTime);
+	void initialize();
 
 	/**
 	 * Add a population to the evaluation
@@ -127,6 +128,9 @@ private:
 	bool mHasFailed;
 
 	bool mOnce;
+
+	std::string mGenerationSerializationPath;
+
 };
 
 #endif /* CONTROLLER_EVALUATION_HPP_ */
