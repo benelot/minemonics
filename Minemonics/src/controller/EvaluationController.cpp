@@ -68,6 +68,7 @@ void EvaluationController::scheduleEvaluations() {
 			}
 
 			mCurrentlyRunningEvaluationsQty--;
+			delete *eit;
 			eit = mEvaluations.erase(eit);
 		} else {
 			eit++;
@@ -88,6 +89,15 @@ void EvaluationController::scheduleEvaluations() {
 }
 
 void EvaluationController::update(const double timeSinceLastTick) {
+
+	//breaks when there are no creatures on the planets to evaluate
+	while (mEvaluations.size() < mParallelEvaluationsQty
+		&& mUniverse->getTotalCreatureQty() != 0) {
+		if (!mUniverse->proceedEvaluation()) {
+			break;
+		}
+	}
+
 	if (!mPaused) {
 		std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 		for (; eit != mEvaluations.end(); eit++) {
@@ -97,12 +107,4 @@ void EvaluationController::update(const double timeSinceLastTick) {
 		}
 	}
 	scheduleEvaluations();
-
-	//breaks when there are no creatures on the planets to evaluate
-	while (mEvaluations.size() < mParallelEvaluationsQty
-		&& mUniverse->getTotalCreatureQty() != 0) {
-		if (!mUniverse->proceedEvaluation()) {
-			break;
-		}
-	}
 }
