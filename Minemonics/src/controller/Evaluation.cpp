@@ -36,7 +36,13 @@ Evaluation::Evaluation() :
 
 Evaluation::~Evaluation() {
 	mPlanet = NULL;
-	mPopulations.clear();
+
+	//remove populations but do not delete the creatures
+	for(std::vector<Population*>::iterator pit = mPopulations.begin(); pit != mPopulations.end();){
+		(*pit)->getCreatures().clear();
+		delete *pit;
+		pit = mPopulations.erase(pit);
+	}
 }
 
 void Evaluation::initialize(Planet* const planet, const double evaluationTime) {
@@ -87,6 +93,7 @@ void Evaluation::setup() {
 		break;
 	}
 	}
+	mStart = SimulationManager::getSingleton()->getRuntime();
 
 	if (limbQty == 0 || limbQty == 1) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because it had no body or just one limb.";
@@ -95,8 +102,6 @@ void Evaluation::setup() {
 	} else {
 		mEvaluationModel.setEvaluating(true);
 	}
-
-	mStart = SimulationManager::getSingleton()->getRuntime();
 }
 
 void Evaluation::process() {
@@ -107,16 +112,18 @@ void Evaluation::process() {
 }
 
 void Evaluation::teardown() {
+	SimulationManager::getSingleton()->getViewController().setEvaluationInView(NULL);
+
 	SimulationManager::getSingleton()->getViewController().removePlanetFromView(
 		mPlanet);
 	SimulationManager::getSingleton()->getViewController().setSelectedPlanet(
 	NULL);
 
-	if (!mHasFailed && 	SimulationManager::getSingleton()->getViewController().getEvaluationInView() != NULL) {
+	if (!mHasFailed) {
 		std::string generationSerializationPath =
 			mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
 
-		// save creatures
+		// save creatures of evaluated populations
 		for (std::vector<Population*>::iterator pit = mPopulations.begin();
 			pit != mPopulations.end(); pit++) {
 			for (std::vector<Creature*>::iterator cit =
@@ -147,8 +154,6 @@ void Evaluation::teardown() {
 
 	mEvaluationModel.setEvaluating(false);
 	mEvaluationModel.setTornDown(true);
-
-	SimulationManager::getSingleton()->getViewController().setEvaluationInView(NULL);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mEvaluationModel.getTimePassed() << " seconds simulated in "
 	<< ((float) (SimulationManager::getSingleton()->getRuntime() - mStart))
