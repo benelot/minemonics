@@ -35,7 +35,7 @@ Universe::Universe() :
 Universe::~Universe() {
 //	~mEvaluationController()
 
-//delete the planets
+	//delete the planets
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
 	for (; pit != mPlanets.end();pit++) {
 		delete (*pit);
@@ -58,9 +58,9 @@ void Universe::addPlanet(Planet* const planet) {
 bool Universe::proceedEvaluation() {
 	// if there are planets in the universe
 	if (mPlanets.size() != 0) {
-		// if the evaluation of the certain planet goes into the next generation, we go to the next planet.
+		// if the evaluation of a planet continues to the next generation, we go to the next planet.
 		if (!mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->proceedEvaluation()) {
-			mUniverseModel.setCurrentEvaluationPlanetIndex(
+			mUniverseModel.setCurrentEvaluationPlanetIndex( // we go to the next planet in line or go back to the first
 				(mUniverseModel.getCurrentEvaluationPlanetIndex() + 1
 					< mPlanets.size()) ?
 					mUniverseModel.getCurrentEvaluationPlanetIndex() + 1 : 0);
@@ -100,7 +100,7 @@ void Universe::update(const double timeStep) {
 	int subSteps = ceil(
 		pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
 			* timeStep
-			/ PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+			/ PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 
 	for (int i = 0; i < subSteps; i++) {
 		stepPhysics(

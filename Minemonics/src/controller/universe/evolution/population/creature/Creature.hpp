@@ -113,8 +113,6 @@ public:
 
 	void clearJuries();
 
-
-
 	void hasInterpenetrations();
 
 protected:

@@ -265,7 +265,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 	}
 
-	//turn on or off the shadows.
+	// turn on or off the shadows.
 	mSceneMgr->setShadowTechnique(
 		(mViewController.doesShowShadows()) ?
 			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
@@ -287,8 +287,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 		mUniverse.setSimulationSpeed(mCurrentSimulationSpeed); /**!< Set the current simulation speed of the simulation */
 
-		/** If we are in speed 9 or 10*/
-		if (mCurrentSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09
+		if (mCurrentSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09 /** If we are in speed 9 or 10*/
 			|| mCurrentSimulationSpeed
 				== PhysicsConfiguration::SIMULATION_SPEED_10) {
 			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK /**!< calculate the remaining time for physics */
@@ -297,25 +296,21 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 			mPhysicsStepStart = mOgreTimer.getMilliseconds(); /**!< The physics updates start */
 
 			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) { /**!< Update the physics until we run out of time */
-				mUniverse.update(
-					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC); /**!< update the universe */
+				mUniverse.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
 				mPhysicsStepEnd = mOgreTimer.getMilliseconds(); /**!< Update the last physics step end to stop updating in time */
 			}
 		} else {
-			/** cap frametime to make the application lose time, not the physics */
-			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) {
+			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) { /** cap frametime to make the application lose time, not the physics */
 				mFrameTime = ApplicationConfiguration::APPLICATION_TICK;
 			}
 
 			mModelAccumulator += mFrameTime; /**!< Update physics update time that we are going to use */
 
-			while (mModelAccumulator /**!< Update the physics until we run out of time */
-				>= PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI) {
-				// update the universe
-				mUniverse.update(
-					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+			while (mModelAccumulator
+				>= PhysicsConfiguration::FIXED_STEP_SIZE_MILLI) { /**!< Update the physics until we run out of time */
+				mUniverse.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
 				mModelAccumulator -=
-					PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_MILLI;
+					PhysicsConfiguration::FIXED_STEP_SIZE_MILLI;
 			}
 		}
 
@@ -323,9 +318,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		mLastModelTick = mInputStart - mModelStart; /**!< Calculate the time the model update took */
 
 		//#############
-		// Input part
-		// Game Clock part of the loop
-		/** This ticks once every APPLICATION_TICK milliseconds on average */
+		// Input part - Game Clock part of the loop
+		/** This runs once every APPLICATION_TICK milliseconds on average */
 		mInputDt = mThisModelIteration - mInputClock;
 		if (mInputDt >= ApplicationConfiguration::APPLICATION_TICK) {
 			mInputClock = mThisModelIteration;
@@ -342,7 +336,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	//#############
 	// Graphics part
-	updatePanels(evt.timeSinceLastFrame); 	/**!< Update the information in the panels on screen */
+	updatePanels(evt.timeSinceLastFrame); /**!< Update the information in the panels on screen */
 
 	mViewController.update(evt.timeSinceLastFrame); /**!< Update view */
 

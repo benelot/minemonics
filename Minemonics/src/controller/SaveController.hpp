@@ -37,28 +37,27 @@ template<class T> class SaveController {
 public:
 	SaveController() {
 		mBoostLogger.add_attribute("ClassName",
-			boost::log::attributes::constant < std::string
-				> ("SaveController"));
+			boost::log::attributes::constant<std::string>("SaveController"));
 	}
 	virtual ~SaveController() {
 
 	}
 
 	void save(const T & object, const char* filename) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Saving "
-			<< filename << "...";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Saving "
+		<< filename << "...";
 		// make an archive from the object
 		std::ofstream ofs(filename);
 		assert(ofs.good());
 		boost::archive::xml_oarchive oa(ofs);
 		oa << BOOST_SERIALIZATION_NVP(object);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Saved "
-			<< filename << ".";
+		<< filename << ".";
 	}
 
 	void restore(T &object, const char* filename) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Restoring "
-			<< filename << "...";
+		<< filename << "...";
 		// open the archive
 		std::ifstream ifs(filename);
 		assert(ifs.good());
@@ -67,7 +66,7 @@ public:
 		// restore the object from the archive
 		ia >> BOOST_SERIALIZATION_NVP(object);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Restored "
-			<< filename << ".";
+		<< filename << ".";
 	}
 
 private:

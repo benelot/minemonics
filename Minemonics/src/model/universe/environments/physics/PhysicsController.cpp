@@ -29,17 +29,18 @@
 //## utils headers
 #include <utils/bullet/BulletUtils.hpp>
 
-PhysicsController::PhysicsController():mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
+PhysicsController::PhysicsController() :
+	mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
 	NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
-	pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)), mPhysicsModelType(
-	FeatherstoneModel), mEnvironmentType(GroundController) {
+		pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)), mPhysicsModelType(
+		FeatherstoneModel), mEnvironmentType(GroundController) {
 
 }
 
 PhysicsController::PhysicsController(PhysicsModelType physicsModelType,
 	EnvironmentType environmentType) :
 	mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
-		NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
+	NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
 		pow(2, PhysicsConfiguration::SIMULATION_SPEED_01)), mPhysicsModelType(
 		physicsModelType), mEnvironmentType(environmentType) {
 
@@ -105,10 +106,12 @@ void PhysicsController::initialize() {
 		}
 
 		//mDynamicsWorld->getSolverInfo().m_erp = 0.00001f;
-		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,10);
+		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 10);
 
 		//mDynamicsWorld->getSolverInfo().m_globalCfm = 0.9f;
-		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,1);
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
 		break;
 	}
 	default:
@@ -117,11 +120,13 @@ void PhysicsController::initialize() {
 
 	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
 	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
-	mDynamicsWorld->getSolverInfo().m_erp2 = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,10);
-	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC,1,10);
+	mDynamicsWorld->getSolverInfo().m_erp2 = BulletUtils::getERP(
+		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 10);
+	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(
+		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 10);
 	//TODO: Not sure if helps
-	//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
-	//	mDynamicsWorld->getSolverInfo().m_numIterations = 100;
+	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
+	mDynamicsWorld->getSolverInfo().m_numIterations = 50;
 
 	//TODO: Try to remove the scaling factor
 	mDynamicsWorld->setGravity(
@@ -173,7 +178,7 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 			int subSteps = 1;
 
 			mDynamicsWorld->stepSimulation(timeStep, subSteps,
-				PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEP_SIZE_SEC);
+				PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 		}
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
