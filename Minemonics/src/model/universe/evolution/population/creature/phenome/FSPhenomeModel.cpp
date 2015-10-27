@@ -182,6 +182,7 @@ int FSPhenomeModel::performEmbryogenesis() {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
 		cleanup();
+		mBodyGenerated = false;
 		std::list<PhenotypeGenerator*> generatorList;
 
 		// get the first gene from the genome
