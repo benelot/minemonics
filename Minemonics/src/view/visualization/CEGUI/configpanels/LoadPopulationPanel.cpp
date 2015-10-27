@@ -37,6 +37,9 @@ void LoadPopulationPanel::openFile(std::string filePath) {
 	population->setSerializationPath(boost::filesystem::path(filePath).parent_path().c_str());
 	population->getPopulationModel()->setPlanetModel(SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getPlanetModel());
 	population->load();
+
+	// after loading we increase the generation by one and start evolving
+	population->getPopulationModel()->setCurrentGeneration(population->getPopulationModel()->getCurrentGeneration()+1);
 	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->addPopulation(population);
 	this->hide();
 }
