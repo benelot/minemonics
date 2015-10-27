@@ -389,8 +389,7 @@ void FSPhenomeModel::addJointConstraints() {
 
 void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	//TODO: Reset position of the FSCreature
-	//mMultiBody->setBasePos(OgreBulletUtils::convert(position));
+	mMultiBody->setBasePos(OgreBulletUtils::convert(position));
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
