@@ -94,7 +94,7 @@ void Phenome::initialize(Creature* const creature) {
 int Phenome::performEmbryogenesis() {
 	cleanup();
 	//perform the embryogenesis in the model
-	mPhenotypeModel->performEmbryogenesis();
+	mPhenotypeModel->initialize();
 	int limbQty = mPhenotypeModel->getLimbModels().size();
 
 	if (limbQty == 0) {
