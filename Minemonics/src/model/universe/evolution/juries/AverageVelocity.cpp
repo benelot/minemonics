@@ -23,71 +23,63 @@
 
 AverageVelocity::AverageVelocity() :
 	Jury(Jury::AVG_VELOCITY, true, 1), mIsFirstTime(true), mAvgVelocity(0), mTimestamp(
-		0), mSampleQty(0), mCreatureLimbQty(0), mTotalMovement(0, 0, 0) {
+		0), mTotalMovement(0, 0, 0) {
 }
 
 AverageVelocity::AverageVelocity(const bool higherIsBetter, double weight) :
 	Jury(Jury::AVG_VELOCITY, higherIsBetter, weight), mIsFirstTime(true), mAvgVelocity(
-		0), mTimestamp(0), mSampleQty(0), mCreatureLimbQty(0), mTotalMovement(0,
-		0, 0) {
+		0), mTimestamp(0), mTotalMovement(0, 0, 0) {
 }
 
 AverageVelocity::~AverageVelocity() {
 //	mAvgVelocity
 //	mFitness
 //	mJuryType
-//	mSampleQty
 //	mTimestamp
 //	mWeight
-	mLastCoords.clear();
+	mInitialCoords.clear();
 }
 
 void AverageVelocity::calculateFitness(CreatureModel* creature,
 	double timeSinceLastTick) {
 
-	if (!mIsFirstTime) {
-
+	if (mIsFirstTime) { // if the fitness is calculated the first time, we store all the positions of the limbs
 		int i = 0;
-		Ogre::Vector3 totalMovement = Ogre::Vector3::ZERO;
-		double totalVolume = 0;
-		int segmentQty = 0;
 		for (std::vector<LimbModel*>::iterator lit =
 			creature->getPhenotypeModel()->getLimbModels().begin();
 			lit != creature->getPhenotypeModel()->getLimbModels().end();
 			lit++, i++) {
-			totalMovement += (*lit)->getVolume()
-				* ((*lit)->getPosition() - mLastCoords[0]);
-			totalVolume += (*lit)->getVolume();
-			segmentQty++;
+			mInitialCoords.push_back((*lit)->getPosition());
 		}
-		if (totalVolume == 0 || segmentQty == 1) {
-
-			mTotalMovement =
-				(mHigherIsBetter) ?
-					Ogre::Vector3::ZERO :
-					Ogre::Vector3(std::numeric_limits<double>::max(),
-						std::numeric_limits<double>::max(),
-						std::numeric_limits<double>::max());
-		} else {
-			mTotalMovement = totalMovement / totalVolume;
-		}
-
+		mIsFirstTime = false;
 	}
 
 	int i = 0;
-	for (std::vector<LimbModel*>::iterator lit =
+	Ogre::Vector3 totalMovement = Ogre::Vector3::ZERO;
+	double totalVolume = 0;
+	int segmentQty = 0;
+	for (std::vector<LimbModel*>::iterator lit = // we calculate the difference between the limb's position and its initial position
 		creature->getPhenotypeModel()->getLimbModels().begin();
 		lit != creature->getPhenotypeModel()->getLimbModels().end();
 		lit++, i++) {
-		if (mIsFirstTime) {
-			mLastCoords.push_back((*lit)->getPosition());
-		} else {
-			mLastCoords[i] = (*lit)->getPosition();
-		}
+		totalMovement += (*lit)->getPosition() - mInitialCoords[i];
+		totalVolume += (*lit)->getVolume(); // we take the volume into account when we calculate the travelled distance
+		segmentQty++;
 	}
+
+	if (totalVolume == 0 || segmentQty == 1) {
+
+		mTotalMovement =
+			(mHigherIsBetter) ?
+				Ogre::Vector3::ZERO :
+				Ogre::Vector3(std::numeric_limits<double>::max(),
+					std::numeric_limits<double>::max(),
+					std::numeric_limits<double>::max());
+	} else {
+		mTotalMovement = totalMovement / totalVolume;
+	}
+
 	mTimestamp += timeSinceLastTick;
-	mIsFirstTime = false;
-	mSampleQty++;
 }
 
 Ogre::Vector3 AverageVelocity::getDistanceVector(const double x1,

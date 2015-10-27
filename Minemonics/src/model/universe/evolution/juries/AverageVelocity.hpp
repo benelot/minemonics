@@ -92,15 +92,11 @@ private:
 
 	double mAvgVelocity; /**!< The average velocity */
 
-	int mCreatureLimbQty; /**!< The number of limbs of the creature */
-
 	double mTimestamp; /**!< The timestamp of the last invocation */
-
-	int mSampleQty; /**!< THe number of samples of this average */
 
 	bool mIsFirstTime; /** Is this the first time this jury is run */
 
-	std::vector<Ogre::Vector3> mLastCoords; /**!< The last coordinates of each limb */
+	std::vector<Ogre::Vector3> mInitialCoords; /**!< The initial coordinates of each limb */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_ */
