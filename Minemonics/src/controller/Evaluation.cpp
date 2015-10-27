@@ -45,6 +45,7 @@ Evaluation::~Evaluation() {
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
 		pit != mPopulations.end();) {
 		(*pit)->getCreatures().clear();
+		(*pit)->getPopulationModel()->getCreatureModels().clear();
 		delete *pit;
 		pit = mPopulations.erase(pit);
 	}
