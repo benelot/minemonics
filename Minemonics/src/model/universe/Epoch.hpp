@@ -8,6 +8,10 @@
 
 //## controller headers
 //## model headers
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -145,7 +149,7 @@ public:
 	}
 
 	/**
-	 * Serializes the planet to an xml file.
+	 * Serializes the epoch to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
@@ -154,6 +158,15 @@ public:
 		ar
 		/**!< If the epoch is related to fitness */
 		& BOOST_SERIALIZATION_NVP(mFitnessEnabled)
+
+		/**!< The jury types of the epoch */
+		& BOOST_SERIALIZATION_NVP(mJuryTypes)
+
+		/**!< The weighting of the juries */
+		& BOOST_SERIALIZATION_NVP(mWeights)
+
+		/**!< If way the jury fitness is sorted */
+		& BOOST_SERIALIZATION_NVP(mSortOrders)
 
 		/**!< The current fitness */
 		& BOOST_SERIALIZATION_NVP(mCurrentFitness)
@@ -172,13 +185,10 @@ public:
 	}
 
 private:
-	std::vector<Jury::JuryType> mJuryTypes;
-
-	std::vector<double> mWeights;
-
-	std::vector<bool> mSortOrders;
-
 	//Epoch criteria
+	std::vector<Jury::JuryType> mJuryTypes;
+	std::vector<double> mWeights;
+	std::vector<bool> mSortOrders;
 
 	//Number of generations
 	bool mGenerationsEnabled;
@@ -190,5 +200,5 @@ private:
 	double mCurrentFitness;
 	double mEndingAtFitness;
 };
-
+BOOST_CLASS_VERSION(Epoch, 1)
 #endif /* MODEL_UNIVERSE_EPOCH_HPP_ */
