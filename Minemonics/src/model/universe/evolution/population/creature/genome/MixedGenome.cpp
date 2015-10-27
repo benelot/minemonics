@@ -246,13 +246,19 @@ void MixedGenome::integrateGene(int geneIndex) {
 	if (mGenes.size() != 0) {
 		switch (mGenes[geneIndex]->getType()) {
 		case Gene::MorphoGene: {
-			// randomly choose a follow up gene until you get one different from its own type
-			do {
-				((Morphogene*) mGenes[geneIndex])->setFollowUpGene(
-					Randomness::getSingleton()->nextUnifPosInt(0,
-						mGenes.size() - 1));
-			} while (((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
-				== geneIndex && mGenes.size() > 1);
+
+			// if the gene has no valid follow up gene
+			if (((Morphogene*) mGenes[geneIndex])->getFollowUpGene() >= 0
+				&& ((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
+					< mGenes.size()) {
+
+				do { // randomly choose a follow up gene until you get one different from its own type
+					((Morphogene*) mGenes[geneIndex])->setFollowUpGene(
+						Randomness::getSingleton()->nextUnifPosInt(0,
+							mGenes.size() - 1));
+				} while (((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
+					== geneIndex && mGenes.size() > 1);
+			}
 
 			for (std::vector<MorphogeneBranch*>::iterator branchIt =
 				((Morphogene*) mGenes[geneIndex])->getGeneBranches().begin();
@@ -260,14 +266,19 @@ void MixedGenome::integrateGene(int geneIndex) {
 					!= ((Morphogene*) mGenes[geneIndex])->getGeneBranches().end();
 				branchIt++) {
 
-				//randomly choose a branch gene type until you get one distinct from the follow up gene
-				do {
-					(*branchIt)->setBranchGeneType(
-						Randomness::getSingleton()->nextUnifPosInt(0,
-							mGenes.size() - 1));
-				} while (mGenes.size() > 1
-					&& (*branchIt)->getBranchGeneType()
-						== ((Morphogene*) mGenes[geneIndex])->getFollowUpGene());
+				// if the branch has an invalid branching gene type
+				if ((*branchIt)->getBranchGeneType() >= 0
+					&& (*branchIt)->getBranchGeneType() < mGenes.size()) {
+
+					//randomly choose a branch gene type until you get one distinct from the follow up gene
+					do {
+						(*branchIt)->setBranchGeneType(
+							Randomness::getSingleton()->nextUnifPosInt(0,
+								mGenes.size() - 1));
+					} while (mGenes.size() > 1
+						&& (*branchIt)->getBranchGeneType()
+							== ((Morphogene*) mGenes[geneIndex])->getFollowUpGene());
+				}
 
 			}
 			break;
@@ -449,9 +460,12 @@ void MixedGenome::mutateRandomBranch() {
 			mGenes.size() - 1);
 	} while (mGenes[geneIndex]->getType() != Gene::MorphoGene);
 
-	mutateBranch(geneIndex,
-		Randomness::getSingleton()->nextUnifPosInt(0,
-			((Morphogene*) mGenes[geneIndex])->getGeneBranches().size() - 1));
+	if (((Morphogene*) mGenes[geneIndex])->getGeneBranches().size() != 0) {
+		mutateBranch(geneIndex,
+			Randomness::getSingleton()->nextUnifPosInt(0,
+				((Morphogene*) mGenes[geneIndex])->getGeneBranches().size()
+					- 1));
+	}
 }
 
 void MixedGenome::mutateRandomBranchOfGene(int geneIndex) {
@@ -484,6 +498,9 @@ void MixedGenome::crossoverRandomly(Genome* genome) {
 
 	crossover(genome, motherStartSegmentIndex, motherEndSegmentIndex,
 		fatherStartSegmentIndex, fatherEndSegmentIndex);
+	for (int i = 0; i < 10; i++) {
+		mutateRandomBranch();
+	}
 	repairGenes();
 }
 
