@@ -66,8 +66,19 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mPosition = creatureModel.mPosition;
 	mFitnessScore = creatureModel.mFitnessScore;
 	mWorld = creatureModel.mWorld;
-	mPhenotypeModel = creatureModel.mPhenotypeModel->clone();
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
+	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
+		case PhysicsController::FeatherstoneModel:
+			mPhenotypeModel = new FSPhenomeModel(this);
+			break;
+		case PhysicsController::RigidbodyModel:
+			mPhenotypeModel = new SRBPhenomeModel(this);
+			break;
+		default:
+			break;
+		}
+
+
 	mFitnessScoreCalculated = creatureModel.mFitnessScoreCalculated;
 
 	mJuries.clear();
