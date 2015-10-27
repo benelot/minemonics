@@ -56,8 +56,8 @@ void EvaluationController::addEvaluation(Evaluation* const evaluation) {
 }
 
 void EvaluationController::scheduleEvaluations() {
-	std::vector<Evaluation*>::iterator eit;
-	for (eit = mEvaluations.begin(); eit != mEvaluations.end();) {
+	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
+		eit != mEvaluations.end();) {
 
 		// erase torn down evaluations
 		if ((*eit)->isTornDown()) {
@@ -75,7 +75,8 @@ void EvaluationController::scheduleEvaluations() {
 		}
 	}
 
-	for (eit = mEvaluations.begin(); eit != mEvaluations.end(); eit++) {
+	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
+		eit != mEvaluations.end(); eit++) {
 
 		//if the evaluation is newly scheduled, then set it up for evaluation
 		if (!(*eit)->isEvaluating()
