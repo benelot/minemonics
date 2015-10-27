@@ -69,7 +69,7 @@ public:
 	/**
 	 * Cleanup phenome model for a new embryogenesis.
 	 */
-	virtual void cleanup();
+	virtual void cleanup() = 0;
 
 	/**
 	 * Reposition the creature without resetting it.

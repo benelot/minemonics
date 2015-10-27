@@ -102,16 +102,6 @@ void PhenomeModel::calm() {
 	}
 }
 
-void PhenomeModel::cleanup() {
-	for (std::vector<ComponentModel*>::iterator cit = mComponentModels.begin();
-		cit != mComponentModels.end();) {
-		delete *cit;
-		cit = mComponentModels.erase(cit);
-	}
-	mLimbModels.clear();
-	mJointModels.clear();
-}
-
 bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	if (mInWorld != phenomeModel.mInWorld) {
 		return false;
