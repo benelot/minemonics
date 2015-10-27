@@ -28,6 +28,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/Debugger.hpp>
 
 BoostLogger Evolution::mBoostLogger; /*<! initialize the boost logger*/
 Evolution::_Init Evolution::_initializer;
@@ -90,7 +91,7 @@ bool Evolution::proceedEvaluation() {
 							+ boost::lexical_cast<std::string>(
 								mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCurrentGeneration());
 					FilesystemManipulator::createFolder(
- 						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
+						mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getSerializationPath(),
 						generationName);
 				}
 
@@ -99,7 +100,7 @@ bool Evolution::proceedEvaluation() {
 				evaluation->initialize();
 
 				// create population with single creature for evaluation
-				Population* population = new Population(mPlanet, 0);
+				Population* population = new Population(mPlanet, 1);
 
 				Creature* creature =
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()];
@@ -116,7 +117,11 @@ bool Evolution::proceedEvaluation() {
 							epoch->getSortOrders()[i], epoch->getWeights()[i]));
 				}
 
-				std::cout << creature->getCreatureModel()->getFirstName()
+				Debugger::writeJuries(
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]);
+
+				std::cout << std::endl
+					<< creature->getCreatureModel()->getFirstName()
 					<< " in evaluation..." << std::endl;
 				population->addMember(creature);
 				evaluation->addPopulation(population);
@@ -138,7 +143,6 @@ bool Evolution::proceedEvaluation() {
 				population = new Population(mPlanet, 0);
 				population->addMember(
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->getCreatures()[mEvolutionModel->getCurrentCreatureIndex()]);
-				;
 
 				evaluation->addPopulation(population);
 
