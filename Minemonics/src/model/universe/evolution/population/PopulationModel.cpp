@@ -33,8 +33,8 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 
 PopulationModel::PopulationModel(PlanetModel* const planetModel,
 	const int creatureQty, const Ogre::Vector3 initialPosition) :
-	mCreatureQty(creatureQty), mCurrentCreatureIndex(0), mPlanetModel(planetModel), mOutOfSync(
-		false), mCurrentGeneration(0) {
+	mCreatureQty(creatureQty), mCurrentCreatureIndex(0), mPlanetModel(
+		planetModel), mOutOfSync(false), mCurrentGeneration(0) {
 	// add creatures up to the creature quantity.
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
@@ -192,3 +192,9 @@ void PopulationModel::loadCreatures() {
 	}
 }
 
+void PopulationModel::clearJuries() {
+	for (std::vector<CreatureModel*>::iterator it =
+		mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+		(*it)->clearJuries();
+	}
+}

@@ -61,10 +61,18 @@ void Creature::reset(const Ogre::Vector3 position) {
 }
 
 void Creature::reset() {
+	// develop creature if it is not developed yet.
+	if (!isDeveloped()) {
+		performEmbryogenesis();
+	}
 	reset(mCreatureModel->getInitialPosition());
 }
 
 void Creature::reposition(const Ogre::Vector3 position) {
+	// develop creature if it is not developed yet.
+	if (!isDeveloped()) {
+		performEmbryogenesis();
+	}
 	mCreatureModel->reposition(position);
 	mPhenotype.reposition(position);
 }

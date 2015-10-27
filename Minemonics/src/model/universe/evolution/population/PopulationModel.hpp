@@ -67,12 +67,6 @@ public:
 	void initialize();
 
 	/**
-	 * Initialize the population model
-	 * @param planetModel The planet the population lives on.
-	 */
-	void initialize(PlanetModel* const planetModel);
-
-	/**
 	 * Adds a new creature to the population.
 	 */
 	void addNewMember(const double branchiness,
@@ -96,6 +90,8 @@ public:
 	PopulationModel* clone();
 
 	bool hasInterpenetrations();
+
+	void clearJuries();
 
 	//Accessor methods
 

@@ -89,9 +89,9 @@ public:
 	 */
 	bool equals(const PhenomeModel& phenomeModel) const;
 
-	virtual void addToWorld();
+	virtual void addToWorld() = 0;
 
-	virtual void removeFromWorld();
+	virtual void removeFromWorld() = 0;
 
 	//Accessor methods
 	/**

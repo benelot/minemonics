@@ -95,12 +95,6 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
-void PhenomeModel::addToWorld() {
-}
-
-void PhenomeModel::removeFromWorld() {
-}
-
 void PhenomeModel::calm() {
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {

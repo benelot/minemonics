@@ -61,17 +61,6 @@ public:
 	 */
 	void initialize();
 
-
-	void initialize(Planet* const planet, const int creatureQty,
-		const Ogre::Vector3 initialPosition);
-
-	/**
-	 * Initializes the population without adding creatures up to the creatureQty.
-	 * @param planet The planet the population lives on.
-	 * @param creatureQty The number of creatures that the population will consist of in every generation.
-	 */
-	void initialize(Planet* const planet, const int creatureQty);
-
 	/**
 	 * Adds a new creature to the population with the branchiness as a input.
 	 * @param branchiness The branchiness determines the number of gene branches a gene has in this creature's genome.
@@ -134,6 +123,8 @@ public:
 	 * Calm the population.
 	 */
 	void calm();
+
+	void clearJuries();
 
 	//Accessor methods
 

@@ -79,7 +79,6 @@ void IntegralAverageVelocity::calculateFitness(CreatureModel* creature,
 		lit != creature->getPhenotypeModel()->getLimbModels().end();
 		lit++, i++) {
 		if (mIsFirstTime) {
-
 			mLastCoords.push_back((*lit)->getPosition());
 		} else {
 			mLastCoords[i] = (*lit)->getPosition();

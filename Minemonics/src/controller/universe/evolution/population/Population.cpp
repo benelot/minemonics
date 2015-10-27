@@ -226,3 +226,7 @@ void Population::load() {
 const std::string Population::getGenerationSerializationPath() {
 	return mPopulationModel->getGenerationSerializationPath();
 }
+
+void Population::clearJuries() {
+	mPopulationModel->clearJuries();
+}

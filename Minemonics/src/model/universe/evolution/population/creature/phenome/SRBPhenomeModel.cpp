@@ -300,14 +300,12 @@ void SRBPhenomeModel::addToWorld() {
 	if (!isInWorld()) {
 
 	}
-	PhenomeModel::addToWorld();
 }
 
 void SRBPhenomeModel::removeFromWorld() {
 	if (isInWorld()) {
 
 	}
-	PhenomeModel::removeFromWorld();
 }
 
 PhenomeModel* SRBPhenomeModel::clone() {

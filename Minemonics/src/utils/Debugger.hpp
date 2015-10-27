@@ -107,16 +107,29 @@ public:
 		return i;
 	}
 
-	static void writeJuries(Population* population) {
+	static void writeJuries(Population* population, bool shortNotationEnabled) {
 		for (std::vector<Creature*>::iterator cit =
 			population->getCreatures().begin();
 			cit != population->getCreatures().end(); cit++) {
-			std::cout << (*cit)->getCreatureModel()->getFirstName()
-				<< ": Number of juries: "
-				<< (*cit)->getCreatureModel()->getJuries().size() << std::endl;
+			if (shortNotationEnabled) {
+				std::cout << (*cit)->getCreatureModel()->getJuries().size();
+			} else {
+				std::cout << (*cit)->getCreatureModel()->getFirstName()
+					<< ": Number of juries: "
+					<< (*cit)->getCreatureModel()->getJuries().size()
+					<< std::endl;
+			}
 		}
-		std::cout << "Creatures size: " << population->getCreatures().size()<< std::endl;
-		std::cout << "Creature models size: " << population->getPopulationModel()->getCreatureModels().size()<< std::endl;
+
+		if (shortNotationEnabled) {
+			std::cout << std::endl;
+		} else {
+			std::cout << "Creatures size: " << population->getCreatures().size()
+				<< std::endl;
+			std::cout << "Creature models size: "
+				<< population->getPopulationModel()->getCreatureModels().size()
+				<< std::endl;
+		}
 
 	}
 };

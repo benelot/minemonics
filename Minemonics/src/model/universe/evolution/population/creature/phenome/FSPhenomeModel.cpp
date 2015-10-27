@@ -159,7 +159,6 @@ void FSPhenomeModel::addToWorld() {
 			getWorld()->addMultiBody(mMultiBody);
 		}
 	}
-	PhenomeModel::addToWorld();
 }
 
 void FSPhenomeModel::removeFromWorld() {
@@ -168,7 +167,6 @@ void FSPhenomeModel::removeFromWorld() {
 			getWorld()->removeMultiBody(mMultiBody);
 		}
 	}
-	PhenomeModel::removeFromWorld();
 }
 
 void FSPhenomeModel::calm() {
@@ -366,7 +364,8 @@ void FSPhenomeModel::generateBody() {
 }
 
 void FSPhenomeModel::addJointConstraints() {
-	for(std::vector<btMultiBodyConstraint*>::iterator lit = mLimitConstraints.begin(); lit != mLimitConstraints.end();){
+	for (std::vector<btMultiBodyConstraint*>::iterator lit =
+		mLimitConstraints.begin(); lit != mLimitConstraints.end();) {
 		delete *lit;
 		lit = mLimitConstraints.erase(lit);
 	}
@@ -389,8 +388,10 @@ void FSPhenomeModel::addJointConstraints() {
 
 void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	//TODO: Reset position of the FSCreature
-	//mMultiBody->setBasePos(OgreBulletUtils::convert(position));
+	//TODO: Some creatures just do not have a multibody. Why?
+	if (mMultiBody) {
+		mMultiBody->setBasePos(OgreBulletUtils::convert(position));
+	}
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
@@ -405,12 +406,17 @@ void FSPhenomeModel::cleanup() {
 	}
 	mLimbModels.clear();
 	mJointModels.clear();
-	delete mMultiBody;
-	mMultiBody = NULL;
+	if (mMultiBody) {
+		delete mMultiBody;
+		mMultiBody = NULL;
+	}
 }
 
 void FSPhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
+	if (mMultiBody) {
+		mMultiBody->setBasePos(OgreBulletUtils::convert(position));
+	}
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reposition(position);
@@ -478,8 +484,7 @@ PhenomeModel* FSPhenomeModel::clone() {
 btMultiBodyDynamicsWorld* FSPhenomeModel::getWorld() {
 	if (!mWorld) {
 #ifndef EXCLUDE_FROM_TEST
-		mWorld =
-			(btMultiBodyDynamicsWorld*) mCreatureModel->getWorld();
+		mWorld = (btMultiBodyDynamicsWorld*) mCreatureModel->getWorld();
 #endif
 	}
 	return mWorld;
