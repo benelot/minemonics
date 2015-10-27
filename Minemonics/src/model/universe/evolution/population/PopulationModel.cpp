@@ -186,6 +186,7 @@ void PopulationModel::loadCreatures() {
 
 		creature->setSerializationPath(creaturePath);
 		creature->load();
+		creature->getGenotype().repairGenes();
 		creature->setNew(true);
 		creature->setPopulationModel(this);
 		mCreatureModels.push_back(creature);
