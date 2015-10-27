@@ -83,6 +83,7 @@ bool Evolution::proceedEvaluation() {
 
 				// create generation folder
 				if (mEvolutionModel->getCurrentCreatureIndex() == 0) {
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->clearJuries();
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]->save(); // save population
 
 					//create folder for the generation
@@ -118,7 +119,8 @@ bool Evolution::proceedEvaluation() {
 				}
 
 				Debugger::writeJuries(
-					mPopulations[mEvolutionModel->getCurrentPopulationIndex()]);
+					mPopulations[mEvolutionModel->getCurrentPopulationIndex()],
+					true);
 
 				std::cout << std::endl
 					<< creature->getCreatureModel()->getFirstName()
