@@ -68,6 +68,9 @@ public:
 	 */
 	void createRandomGenome(const double branchiness);
 
+
+	void recalculateRootIndex();
+
 	/**
 	 * @brief Compare this mixed genome to another mixed genome.
 	 * @param genome another mixed genome.

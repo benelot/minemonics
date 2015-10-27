@@ -110,13 +110,13 @@ void Reaper::sow(PopulationModel* const population) {
 		return;
 	}
 
-//	{
-//		// calculate the number of offsprings for each ancestor
-//		int crossOverHeads = round(
-//			((double) headsToSow) * mCrossOverPercentage);
-//
-//		crossover(population, crossOverHeads);
-//	}
+	{
+		// calculate the number of offsprings for each ancestor
+		int crossOverHeads = round(
+			((double) headsToSow) * mCrossOverPercentage);
+
+		crossover(population, crossOverHeads);
+	}
 
 	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
 
@@ -180,7 +180,7 @@ void Reaper::sow(PopulationModel* const population) {
 	{
 		// calculate the number of freshly sown heads
 		int freshlySownHeads = round(
-			((double) headsToSow));// * mSowFreshPercentage);
+			((double) headsToSow) * mSowFreshPercentage);
 		std::cout << "Sow " << freshlySownHeads << " random creatures"
 			<< std::endl;
 
@@ -236,6 +236,7 @@ void Reaper::crossover(PopulationModel* const population,
 		offspring->setNew(true);
 		offspring->setDeveloped(false);
 		offspring->getGenotype().crossoverRandomly(&(partner->getGenotype()));
+		offspring->getGenotype().recalculateRootIndex();
 		offspring->giveRebirth();
 		population->getCreatureModels().push_back(offspring);
 		crossOverSown++;

@@ -100,9 +100,18 @@ void MixedGenome::createRandomGenome(double branchiness) {
 	// set the root index to 0
 	mRootIndex = 0;
 
+	recalculateRootIndex();
+
+	if (mGenes.size() != 0) {
+		addGeneBranch(mRootIndex,
+			Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
+	}
+}
+
+void MixedGenome::recalculateRootIndex(){
 	// Find the gene that has the most active branches
 	int maxActiveBranches = 0;
-	for (int i = 0; i < geneQty; i++) {
+	for (int i = 0; i < mGenes.size(); i++) {
 		switch (mGenes[i]->getType()) {
 		case Gene::MorphoGene: {
 
@@ -137,11 +146,6 @@ void MixedGenome::createRandomGenome(double branchiness) {
 	}
 
 	std::cout << "\t\t   " << maxActiveBranches << std::endl;
-
-	if (mGenes.size() != 0) {
-		addGeneBranch(mRootIndex,
-			Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
-	}
 }
 
 bool MixedGenome::equals(const MixedGenome & genome) const {
