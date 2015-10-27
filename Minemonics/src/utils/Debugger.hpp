@@ -17,6 +17,9 @@
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
@@ -45,7 +48,7 @@ public:
 	 * @param showNothingFound
 	 * @return
 	 */
-	 template<typename T>
+	template<typename T>
 	static bool detectVectorSizeError(std::string strid, std::vector<T> vector,
 		int numberOfRuns, int identifier, int additionalCounter,
 		bool showNothingFound = true) {
@@ -102,6 +105,19 @@ public:
 		std::cout << "\nRoot children: " << i << "\n";
 
 		return i;
+	}
+
+	static void writeJuries(Population* population) {
+		for (std::vector<Creature*>::iterator cit =
+			population->getCreatures().begin();
+			cit != population->getCreatures().end(); cit++) {
+			std::cout << (*cit)->getCreatureModel()->getFirstName()
+				<< ": Number of juries: "
+				<< (*cit)->getCreatureModel()->getJuries().size() << std::endl;
+		}
+		std::cout << "Creatures size: " << population->getCreatures().size()<< std::endl;
+		std::cout << "Creature models size: " << population->getPopulationModel()->getCreatureModels().size()<< std::endl;
+
 	}
 };
 
