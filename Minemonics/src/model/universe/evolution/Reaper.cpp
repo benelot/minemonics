@@ -117,7 +117,7 @@ void Reaper::sow(PopulationModel* const population) {
 //
 //		crossover(population, crossOverHeads);
 //	}
-//
+
 	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
 
 	int start = untouched;
@@ -179,8 +179,10 @@ void Reaper::sow(PopulationModel* const population) {
 
 	{
 		// calculate the number of freshly sown heads
-		int freshlySownHeads = round(((double) headsToSow)); // * mSowFreshPercentage);
-		std::cout << "Sow " << freshlySownHeads << " random creatures" << std::endl;
+		int freshlySownHeads = round(
+			((double) headsToSow));// * mSowFreshPercentage);
+		std::cout << "Sow " << freshlySownHeads << " random creatures"
+			<< std::endl;
 
 		sowFreshly(population, freshlySownHeads);
 	}
@@ -190,9 +192,6 @@ void Reaper::sow(PopulationModel* const population) {
 void Reaper::crossover(PopulationModel* const population,
 	const int crossoverHeads) {
 
-	std::vector<CreatureModel*>::iterator cit =
-		population->getCreatureModels().end();
-
 	//how many offspring do we get per parent?
 	int offspringPerParent = ceil(
 		crossoverHeads
@@ -201,60 +200,49 @@ void Reaper::crossover(PopulationModel* const population,
 	int crossOverSown = 0;
 
 	//crossover the best creature with those in the ranking downwards according to the cross over percentage
+	std::vector<CreatureModel*>::iterator cit =
+		population->getCreatureModels().begin();
 	for (int i = 0;
-		cit != population->getCreatureModels().begin() && i < crossoverHeads;
+		cit != population->getCreatureModels().end() && i < crossoverHeads;
 		i++) {
+		CreatureModel* offspring = NULL;
+		CreatureModel* partner = NULL;
 
-		if (Randomness::getSingleton()->nextUnifBoolean()) {
+		// find a partner for the creature
+		if (Randomness::getSingleton()->nextUnifBoolean()) { // flip a coin; tournament of random creature
 			for (int k = 0; k < offspringPerParent; k++) {
-
-				/**
-				 * Whenever a parent is needed, we choose a number of individuals at random from
-				 * the previous generation. These individuals constitute a tournament.
-				 * The creature with the highest fitness wins and becomes the selected parent.
-				 */
-				std::vector<CreatureModel*> tournament;
 				int bestCreatureIndex = 0;
 				int bestFitness = 0;
 
 				for (int j = 0;
 					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
 					j++) {
-					CreatureModel* model = population->getCreatureModels().at(
-						Randomness::getSingleton()->nextNormalPosInt(0,
-							population->getCreatureModels().size() - 1, 1.0f));
+					CreatureModel* model = population->getCreatureModels().at( // Whenever a parent is needed, we choose a number of individuals at random from
+						Randomness::getSingleton()->nextNormalPosInt(0, // the previous generation. These individuals constitute a tournament.
+							population->getCreatureModels().size() - 1, 1.0f)); // The creature with the highest fitness wins and becomes the selected parent.
 					if (bestFitness < model->getFitnessScore()) {
 						bestFitness = model->getFitnessScore();
-						bestCreatureIndex = j;
+						partner = model;
 					}
-					tournament.push_back(model);
 				}
-
-				CreatureModel* offspring = (*cit)->clone();
-				offspring->setNew(true);
-				offspring->setDeveloped(false);
-				offspring->getGenotype().crossoverRandomly(
-					&(tournament.at(bestCreatureIndex)->getGenotype()));
-				offspring->giveRebirth();
-				population->getCreatureModels().push_back(offspring);
 			}
-		} else {
-			//Cross over with one random creature
-			CreatureModel* offspring = (*cit)->clone();
-			offspring->setNew(true);
-			offspring->setDeveloped(false);
-			offspring->getGenotype().crossoverRandomly(
-				&(population->getCreatureModels().at(
-					Randomness::getSingleton()->nextUnifPosInt(0,
-						population->getCreatureModels().size() - 1))->getGenotype()));
-			offspring->giveRebirth();
-			population->getCreatureModels().push_back(offspring);
+		} else { //Cross over with one random creature
+			partner = population->getCreatureModels().at(
+				Randomness::getSingleton()->nextUnifPosInt(0,
+					population->getCreatureModels().size() - 1));
 		}
+
+		offspring = (*cit)->clone();
+		offspring->setNew(true);
+		offspring->setDeveloped(false);
+		offspring->getGenotype().crossoverRandomly(&(partner->getGenotype()));
+		offspring->giveRebirth();
+		population->getCreatureModels().push_back(offspring);
 		crossOverSown++;
 		if (crossOverSown == crossoverHeads) {
 			break;
 		}
-		cit--;
+		cit++;
 	}
 }
 
