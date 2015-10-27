@@ -252,9 +252,9 @@ void MixedGenome::integrateGene(int geneIndex) {
 		case Gene::MorphoGene: {
 
 			// if the gene has no valid follow up gene
-			if (((Morphogene*) mGenes[geneIndex])->getFollowUpGene() >= 0
-				&& ((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
-					< mGenes.size()) {
+			if (((Morphogene*) mGenes[geneIndex])->getFollowUpGene() < 0
+				|| ((Morphogene*) mGenes[geneIndex])->getFollowUpGene()
+					>= mGenes.size()) {
 
 				do { // randomly choose a follow up gene until you get one different from its own type
 					((Morphogene*) mGenes[geneIndex])->setFollowUpGene(
@@ -271,8 +271,8 @@ void MixedGenome::integrateGene(int geneIndex) {
 				branchIt++) {
 
 				// if the branch has an invalid branching gene type
-				if ((*branchIt)->getBranchGeneType() >= 0
-					&& (*branchIt)->getBranchGeneType() < mGenes.size()) {
+				if ((*branchIt)->getBranchGeneType() < 0
+					|| (*branchIt)->getBranchGeneType() >= mGenes.size()) {
 
 					//randomly choose a branch gene type until you get one distinct from the follow up gene
 					do {
