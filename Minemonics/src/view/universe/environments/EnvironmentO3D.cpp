@@ -49,9 +49,7 @@ EnvironmentO3D::~EnvironmentO3D() {
 		OGRE_DELETE mPageManager;
 	}
 
-	if (mTerrainGlobals) {
-		OGRE_DELETE mTerrainGlobals;
-	}
+	mTerrainGlobals = NULL;
 
 	if (mTerrainGroup) {
 		OGRE_DELETE mTerrainGroup;
