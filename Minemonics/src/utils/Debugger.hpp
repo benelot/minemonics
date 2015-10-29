@@ -11,6 +11,7 @@
 //## model headers
 #include <OgreIteratorWrapper.h>
 #include <OgreSceneNode.h>
+#include <boost/lexical_cast.hpp>
 
 //## view headers
 //# custom headers
@@ -27,6 +28,7 @@
 //## view headers
 //## utils headers
 #include <utils/StringFormatter.hpp>
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The debugger collects debug methods to be used in different contexts do quickly get debug information.
@@ -63,10 +65,10 @@ public:
 			}
 			if (i != vector.size()) {
 				nothingFound = false;
-				std::cout << "Block " << identifier << "::..."
-					<< additionalCounter << "/" << j << "\n" << strid
-					<< "vector size check...." << "\nsize: " << vector.size()
-					<< "\t" << "size2: >" << i << std::endl;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Block " << identifier << "::..."
+				<< additionalCounter << "/" << j << "\n" << strid
+				<< "vector size check...." << "\nsize: " << vector.size()
+				<< "\t" << "size2: >" << i;
 				throw std::runtime_error(
 					StringFormatter() << "Block " << identifier << "::..."
 						<< additionalCounter << "/" << j << strid
@@ -78,9 +80,9 @@ public:
 		}
 
 		if (showNothingFound && nothingFound) {
-			std::cout << "Block " << identifier << "::..." << additionalCounter;
-			std::cout << "\n" << strid << "vector size check....";
-			std::cout << "\nNo errors found\n\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Block " << identifier << "::..." << additionalCounter;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\n" << strid << "vector size check....";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\nNo errors found\n\n";
 			return false;
 		}
 		return false;
@@ -102,36 +104,53 @@ public:
 			m.getNext();
 		}
 
-		std::cout << "\nRoot children: " << i << "\n";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\nRoot children: " << i << "\n";
 
 		return i;
 	}
 
 	static void writeJuries(Population* population, bool shortNotationEnabled) {
+		std::string juriesString;
 		for (std::vector<Creature*>::iterator cit =
 			population->getCreatures().begin();
 			cit != population->getCreatures().end(); cit++) {
 			if (shortNotationEnabled) {
-				std::cout << (*cit)->getCreatureModel()->getJuries().size();
+				juriesString.append(boost::lexical_cast<std::string>((*cit)->getCreatureModel()->getJuries().size()));
 			} else {
-				std::cout << (*cit)->getCreatureModel()->getFirstName()
-					<< ": Number of juries: "
-					<< (*cit)->getCreatureModel()->getJuries().size()
-					<< std::endl;
+				juriesString.append((*cit)->getCreatureModel()->getFirstName());
+				juriesString.append(": Number of juries: ");
+				juriesString.append(boost::lexical_cast<std::string>((*cit)->getCreatureModel()->getJuries().size()));
 			}
 		}
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << juriesString;
 
 		if (shortNotationEnabled) {
-			std::cout << std::endl;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "";
 		} else {
-			std::cout << "Creatures size: " << population->getCreatures().size()
-				<< std::endl;
-			std::cout << "Creature models size: "
-				<< population->getPopulationModel()->getCreatureModels().size()
-				<< std::endl;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creatures size: " << population->getCreatures().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature models size: "
+			<< population->getPopulationModel()->getCreatureModels().size();
 		}
 
 	}
+
+private:
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string
+				> ("Debugger"));
+		}
+	}_initializer;
 };
 
 #endif /* UTILS_DEBUGGER_HPP_ */

@@ -27,6 +27,8 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+BoostLogger MixedGenome::mBoostLogger; /*<! initialize the boost logger*/
+MixedGenome::_Init MixedGenome::_initializer;
 MixedGenome::MixedGenome() :
 	mSegmentsDepthLimit(0), mTotalSegmentQtyLimit(0) {
 }
@@ -71,7 +73,7 @@ void MixedGenome::createRandomGenome(double branchiness) {
 				GeneticsConfiguration::GENES_INITIAL_MEAN,
 				GeneticsConfiguration::GENES_INITIAL_VAR));
 
-	std::cout << " Genome size: " << geneQty << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << " Genome size: " << geneQty;
 
 	// add the number of morphogenes
 	for (int i = 0; i < geneQty; i++) {
@@ -116,7 +118,7 @@ void MixedGenome::recalculateRootIndex(){
 		case Gene::MorphoGene: {
 
 			// print the number of branches
-			std::cout << "\t   "
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\t   "
 				<< ((Morphogene*) mGenes[i])->getGeneBranches().size() << "\t";
 
 			// count the number of active branches
@@ -128,9 +130,9 @@ void MixedGenome::recalculateRootIndex(){
 				activeBranches += (*branchIt)->isActive();
 
 				// print if the branch is active
-				std::cout << ((*branchIt)->isActive());
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << ((*branchIt)->isActive());
 			}
-			std::cout << std::endl;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "";
 
 			// if the number of active branches is higher than the current max, then overwrite
 			if (activeBranches > maxActiveBranches) {
@@ -145,7 +147,7 @@ void MixedGenome::recalculateRootIndex(){
 		}
 	}
 
-	std::cout << "\t\t   " << maxActiveBranches << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\t\t   " << maxActiveBranches;
 }
 
 bool MixedGenome::equals(const MixedGenome & genome) const {

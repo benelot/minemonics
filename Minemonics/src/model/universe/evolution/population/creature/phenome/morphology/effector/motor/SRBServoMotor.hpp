@@ -28,6 +28,7 @@ class JointBt;
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 //comment this out to compare with original spring constraint
 //#define CONSTRAINT_TYPE btConeTwistConstraint
@@ -112,6 +113,19 @@ public:
 	}
 
 private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("SRBServoMotor"));
+		}
+	} _initializer;
+
 	MOTOR_TYPE* mMotorBt;
 };
 

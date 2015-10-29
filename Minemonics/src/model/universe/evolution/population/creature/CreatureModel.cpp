@@ -22,6 +22,8 @@
 #include <utils/NameGenerator.hpp>
 #include <utils/Randomness.hpp>
 
+BoostLogger CreatureModel::mBoostLogger; /*<! initialize the boost logger*/
+CreatureModel::_Init CreatureModel::_initializer;
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
 	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
@@ -67,17 +69,17 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mFitnessScore = creatureModel.mFitnessScore;
 	mWorld = creatureModel.mWorld;
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
-	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
-		case PhysicsController::FeatherstoneModel:
-			mPhenotypeModel = new FSPhenomeModel(this);
-			break;
-		case PhysicsController::RigidbodyModel:
-			mPhenotypeModel = new SRBPhenomeModel(this);
-			break;
-		default:
-			break;
-		}
 
+	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
+	case PhysicsController::FeatherstoneModel:
+		mPhenotypeModel = new FSPhenomeModel(this);
+		break;
+	case PhysicsController::RigidbodyModel:
+		mPhenotypeModel = new SRBPhenomeModel(this);
+		break;
+	default:
+		break;
+	}
 
 	mFitnessScoreCalculated = creatureModel.mFitnessScoreCalculated;
 
@@ -89,6 +91,8 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 }
 
 void CreatureModel::initialize() {
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Initialize " << mFirstName;
 	mPhenotypeModel->initialize(); 	//initialize the phenome model
 }
 

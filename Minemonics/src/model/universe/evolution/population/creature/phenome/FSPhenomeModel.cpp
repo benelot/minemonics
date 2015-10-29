@@ -179,6 +179,7 @@ void FSPhenomeModel::calm() {
 int FSPhenomeModel::performEmbryogenesis() {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Perform an embryogenesis";
 		cleanup();
 		mBodyGenerated = false;
 		std::list<PhenotypeGenerator*> generatorList;
@@ -235,6 +236,8 @@ void FSPhenomeModel::generateBody() {
 	if (mBodyGenerated) {
 		return;
 	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Generate the body";
 
 	if (mJointModels.size() != 0) {
 		bool selfCollision = true; /**!< The collision is handled on a per-limb basis*/
@@ -369,6 +372,8 @@ void FSPhenomeModel::addJointConstraints() {
 		delete *lit;
 		lit = mLimitConstraints.erase(lit);
 	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Add joint constraints";
 
 	for (int i = 0; i < mJointModels.size(); i++) {
 		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint

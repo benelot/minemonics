@@ -141,7 +141,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 		while (!generatorList.empty()) {
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Phenome generator qty:" << generatorList.size();
 
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
@@ -187,7 +187,6 @@ void SRBPhenomeModel::generateBody() {
 			((SRBJointModel*) mJointModels[i])->setBodyA(
 				((SRBLimbModel*) mLimbModels[((long) mJointModels[i]->getParentIndex())])->getRigidBody());
 
-
 			((SRBJointModel*) mJointModels[i])->setFrameInA(
 				mJointModels[i]->getParentComToPivot());
 
@@ -197,10 +196,8 @@ void SRBPhenomeModel::generateBody() {
 			((SRBJointModel*) mJointModels[i])->setFrameInB(
 				mJointModels[i]->getPivotToChildCom());
 
-			std::cout << "Joint: Parent: " << mJointModels[i]->getParentIndex() << " /Child: "
-				<< mJointModels[i]->getChildIndex() << std::endl;
-
-
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Joint: Parent: " << mJointModels[i]->getParentIndex() << " /Child: "
+			<< mJointModels[i]->getChildIndex();
 
 			((SRBJointModel*) mJointModels[i])->setWorld(getWorld());
 

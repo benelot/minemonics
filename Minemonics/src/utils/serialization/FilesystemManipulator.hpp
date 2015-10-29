@@ -48,10 +48,6 @@ public:
 			}
 		}
 
-//		std::cout << "Number of files: " << files.size() << std::endl;
-//		std::copy(files.begin(), files.end(),
-//			std::ostream_iterator < std::string > (std::cout, "\n"));
-
 		return files;
 	}
 

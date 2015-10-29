@@ -122,9 +122,9 @@ bool Evolution::proceedEvaluation() {
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()],
 					true);
 
-				std::cout << std::endl
-					<< creature->getCreatureModel()->getFirstName()
-					<< " in evaluation..." << std::endl;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << creature->getCreatureModel()->getFirstName()
+				<< " in evaluation...";
+
 				population->addMember(creature);
 				evaluation->addPopulation(population);
 

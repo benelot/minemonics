@@ -17,6 +17,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger JointModel::mBoostLogger; /*<! initialize the boost logger*/
+JointModel::_Init JointModel::_initializer;
 JointModel::JointModel() :
 	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1) {
 

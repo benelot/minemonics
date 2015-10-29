@@ -21,6 +21,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger AverageVelocity::mBoostLogger; /*<! initialize the boost logger*/
+AverageVelocity::_Init AverageVelocity::_initializer;
 AverageVelocity::AverageVelocity() :
 	Jury(Jury::AVG_VELOCITY, true, 1), mIsFirstTime(true), mAvgVelocity(0), mTimestamp(
 		0), mTotalMovement(0, 0, 0) {
@@ -104,7 +106,7 @@ void AverageVelocity::evaluateFitness() {
 	} else {
 		mAvgVelocity = 0;
 	}
-	std::cout << "Average Velocity Fitness: " << mAvgVelocity << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Average Velocity Fitness: " << mAvgVelocity;
 	mFitness = mAvgVelocity;
 }
 

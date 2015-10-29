@@ -120,9 +120,7 @@ int Phenome::performEmbryogenesis() {
 		}
 		case ComponentModel::UnknownComponent:
 		default:
-			std::cout << "######################################\n";
-			std::cout << "Unknown component found.\n";
-			std::cout << "######################################\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "Unknown component found.\n";;
 			exit(-1);
 		}
 	}

@@ -19,6 +19,8 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger LimbModel::mBoostLogger; /*<! initialize the boost logger*/
+LimbModel::_Init LimbModel::_initializer;
 LimbModel::LimbModel() :
 	mLimbPhysics(NULL), mCreatureModel(NULL), mParentJointIndex(0) {
 }

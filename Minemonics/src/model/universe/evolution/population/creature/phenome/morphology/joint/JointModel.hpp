@@ -47,6 +47,7 @@ class access;
 //## view headers
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The joint model holds all the state information of the joint.
@@ -308,6 +309,20 @@ protected:
 	 * The limitceptors of the joint.
 	 */
 	std::vector<JointLimitceptor*> mLimitceptors;
+
+private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("JointModel"));
+		}
+	} _initializer;
 
 };
 

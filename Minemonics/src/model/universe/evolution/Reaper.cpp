@@ -31,6 +31,8 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+BoostLogger Reaper::mBoostLogger; /*<! initialize the boost logger*/
+Reaper::_Init Reaper::_initializer;
 Reaper::Reaper() :
 	mGeneSplitPercentage(0), mGrowStubPercentage(0), mGraftPercentage(0), mBranchMutationPercentage(
 		0), mCrossOverPercentage(0), mGeneMutationPercentage(0), mReapPercentage(
@@ -116,23 +118,25 @@ void Reaper::sow(PopulationModel* const population) {
 			((double) headsToSow) * mCrossOverPercentage);
 
 		crossover(population, crossOverHeads);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) <<"Crossover" << crossOverHeads << " creatures";
 	}
 
 	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
 
 	int start = untouched;
 
-//	{
-//		// calculate the number of gene mutated heads
-//		int geneMutationHeads = round(
-//			((double) population->getCreatureModels().size() - untouched)
-//				* mGeneMutationPercentage);
-//
-//		mutateGenes(population, start, geneMutationHeads);
-//
-//		start += geneMutationHeads;
-//	}
-//
+	{
+		// calculate the number of gene mutated heads
+		int geneMutationHeads = round(
+			((double) population->getCreatureModels().size() - untouched)
+				* mGeneMutationPercentage);
+
+		mutateGenes(population, start, geneMutationHeads);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Mutate " << geneMutationHeads << " creatures";
+
+		start += geneMutationHeads;
+	}
+
 //	{
 //		// calculate the number of gene split heads
 //		int geneSplitHeads = round(
@@ -181,8 +185,7 @@ void Reaper::sow(PopulationModel* const population) {
 		// calculate the number of freshly sown heads
 		int freshlySownHeads = round(
 			((double) headsToSow) * mSowFreshPercentage);
-		std::cout << "Sow " << freshlySownHeads << " random creatures"
-			<< std::endl;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Sow " << freshlySownHeads << " random creatures";
 
 		sowFreshly(population, freshlySownHeads);
 	}
@@ -256,6 +259,7 @@ void Reaper::mutateGenes(PopulationModel* const population, int startIndex,
 					EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
 				population->getCreatureModels()[startIndex + i]->setDeveloped(
 					false);
+				population->getCreatureModels()[startIndex + i]->getGenotype().recalculateRootIndex();
 			}
 		}
 	}

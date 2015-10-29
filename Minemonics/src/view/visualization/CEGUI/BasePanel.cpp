@@ -45,8 +45,6 @@ BasePanel::~BasePanel(void) {
 
 void BasePanel::initialize(const int left, const int top, const int width,
 	const int height, bool withTitleBar) {
-//	std::cout << mName << ":" << left << "," << left - ((float) width) / 2.0f
-//		<< "," << top << "," << top - ((float) height) / 2.0f << std::endl;
 	mWidth = width;
 	mHeight = height;
 	// set widget position

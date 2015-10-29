@@ -44,6 +44,7 @@ class access;
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The physical model of the limb implemented in the Bullet Physics Engine.
@@ -55,13 +56,14 @@ class FSLimbBt: public LimbPhysics {
 public:
 	FSLimbBt();
 	FSLimbBt(const FSLimbBt& limbBt);
-	FSLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
-	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
-	const Ogre::Quaternion orientation,
-	const Ogre::Vector3 initialRelativePosition,
-	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
-	const double mass, const double restitution, const double friction,
-	const Ogre::ColourValue color, bool isIntraBodyColliding);
+	FSLimbBt(btDynamicsWorld* const world, LimbModel* const limbModel,
+		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
+		const Ogre::Quaternion orientation,
+		const Ogre::Vector3 initialRelativePosition,
+		const Ogre::Quaternion initialOrientation,
+		const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction,
+		const Ogre::ColourValue color, bool isIntraBodyColliding);
 
 	virtual ~FSLimbBt();
 
@@ -232,6 +234,24 @@ public:
 	}
 
 private:
+
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string
+					> ("FSLimbBt"));
+		}
+	} _initializer;
+
 	btDynamicsWorld* mWorld; /**!< The world the limb is in */
 
 	btCollisionShape* mCollisionShape; /**!< The collision shape of the limb */

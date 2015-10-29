@@ -27,6 +27,7 @@ class MorphogeneBranch;
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The SRBEmbryogenesis builds a phenotype according to the specification in the genotype.
@@ -87,6 +88,20 @@ public:
 	static btTransform getOwnIntersection(SRBPhenomeModel* phenomeModel,
 		Morphogene* childMorphogene, PhenotypeGenerator* generator,
 		Ogre::Vector3 localChildAnchorDirInRefChild);
+
+private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("SRBEmbryogenesis"));
+		}
+	} _initializer;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_SRBEMBRYOGENESIS_HPP_ */

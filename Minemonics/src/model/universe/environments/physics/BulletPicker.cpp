@@ -67,8 +67,6 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	btCollisionWorld::ClosestRayResultCallback rayCallback(rayFromWorld,
 		rayToWorld);
 
-//	btCollisionWorld::AllHitsRayResultCallback rayCallback(rayStart, rayEnd);
-//	allResults.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	//kF_UseGjkConvexRaytest flag is now enabled by default, use the faster but more approximate algorithm
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
@@ -77,7 +75,6 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	rayCallback.m_collisionFilterMask =
 		PhysicsConfiguration::CREATURE_TESTRAY_COLLIDES_WITH;
 
-//	std::cout << "Worldhandle:" << mWorld << std::endl;
 	world->rayTest(rayFromWorld, rayToWorld, rayCallback);
 
 	if (rayCallback.hasHit()) {

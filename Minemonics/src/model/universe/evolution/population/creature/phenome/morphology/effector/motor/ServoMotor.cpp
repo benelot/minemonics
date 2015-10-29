@@ -23,9 +23,11 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
 
+BoostLogger ServoMotor::mBoostLogger; /*<! initialize the boost logger*/
+ServoMotor::_Init ServoMotor::_initializer;
 ServoMotor::ServoMotor() :
 	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mMotorBt(
-		NULL), mLowerLimit(0), mUpperLimit(0) {
+	NULL), mLowerLimit(0), mUpperLimit(0), mJointIndex(0) {
 }
 
 ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
@@ -39,6 +41,7 @@ ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
 	mLowerLimit = servoMotor.mLowerLimit;
 	mUpperLimit = servoMotor.mUpperLimit;
 	mMotorBt = servoMotor.mMotorBt;
+	mJointIndex = servoMotor.mJointIndex;
 }
 
 ServoMotor::~ServoMotor() {
@@ -101,15 +104,11 @@ void ServoMotor::apply(double timeSinceLastTick) {
 		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
 		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
 #endif
-//TODO: Print to logger only
-//		std::cout << std::setw(10) << std::right << mMotorBt << "("
-//				<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-//				<< "\t/MotorPosition(error):  " << std::setw(10) << std::right
-//				<< mMotorBt->m_currentPosition << "/" << std::setw(10)
-//				<< std::right << targetAngle << "/" << std::setw(10)
-//				<< std::right << angleError << "\t/targetVelocity: "
-//				<< mMotorBt->m_targetVelocity << std::endl;
-//}
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << mMotorBt << "("
+	<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
+	<< "\t/MotorPosition(error):  "
+	<< mMotorBt->m_currentPosition << "/" << targetAngle << "/" << angleError << "\t/targetVelocity: "
+	<< mMotorBt->m_targetVelocity;
 }
 
 ServoMotor* ServoMotor::clone() {

@@ -186,11 +186,6 @@ void Morphogene::grow(const int branchiness) {
 	}
 }
 
-void Morphogene::print() {
-	// print the gene to the standard output
-	std::cout << this;
-}
-
 bool Morphogene::equals(const Morphogene& morphoGene) const {
 
 	if (!Gene::equals(morphoGene)) {

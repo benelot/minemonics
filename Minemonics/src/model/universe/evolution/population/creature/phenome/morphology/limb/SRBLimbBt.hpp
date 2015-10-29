@@ -41,6 +41,7 @@ class access;
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The physical model of the limb implemented in the Bullet Physics Engine.
@@ -214,6 +215,19 @@ public:
 	}
 
 private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("SRBLimbBt"));
+		}
+	} _initializer;
+
 	btDynamicsWorld* mWorld; /**!< The world the limb is in */
 
 	btCollisionShape* mCollisionShape; /**!< The collision shape of the limb */
