@@ -141,7 +141,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 		while (!generatorList.empty()) {
 
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Phenome generator qty:" << generatorList.size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
 
 			PhenotypeGenerator* generator = generatorList.front();
 			generatorList.pop_front();
