@@ -592,7 +592,6 @@ void FileDialog::changeDirectory(std::string path) {
 
 	mCurrentPath =
 		boost::filesystem::absolute(boost::filesystem::path(path)).c_str();
-//	std::cout << mCurrentPath << std::endl;
 
 	mNames.clear();
 
@@ -692,7 +691,6 @@ void FileDialog::fillListbox(void) {
 
 	for (std::vector<std::string>::iterator pos = mNames.begin();
 		pos != mNames.end(); pos++) {
-//		std::cout << *pos << std::endl;
 		mFilesLb->addItem(new CEGUI::ListboxTextItem(*pos));
 	}
 }

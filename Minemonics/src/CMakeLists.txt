@@ -488,6 +488,7 @@ set(MISCSRCS
     ./configuration/PhysicsConfiguration.cpp
     ./configuration/CEGUIConfiguration.cpp
     ./configuration/SerializationConfiguration.cpp
+    ./configuration/LoggerConfiguration.cpp
     
 	# logger
 	./utils/logging/Logger.cpp

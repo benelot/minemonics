@@ -40,6 +40,7 @@ class access;
 //## view headers
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The joint model holds all the state information of the joint.
@@ -254,6 +255,20 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointModel); /**!< Serialize the base object */
 	}
+
+private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("SRBJointModel"));
+		}
+	} _initializer;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_SRBJOINTMODEL_HPP_ */

@@ -36,6 +36,8 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger SRBLimbBt::mBoostLogger; /*<! initialize the boost logger*/
+SRBLimbBt::_Init SRBLimbBt::_initializer;
 SRBLimbBt::SRBLimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
 		NULL), mInertia(0, 0, 0),mLimbModel(NULL) {

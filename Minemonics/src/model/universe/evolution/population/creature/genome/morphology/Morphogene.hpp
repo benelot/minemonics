@@ -84,11 +84,6 @@ public:
 	 */
 	bool equals(const Morphogene& morphogene) const;
 
-	/**
-	 * Print the morphogene to the standard output.
-	 */
-	virtual void print();
-
 	//Accessor methods
 
 	double getColorB() const {

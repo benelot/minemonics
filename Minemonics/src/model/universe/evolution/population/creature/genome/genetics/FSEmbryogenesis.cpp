@@ -51,6 +51,8 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger FSEmbryogenesis::mBoostLogger; /*<! initialize the boost logger*/
+FSEmbryogenesis::_Init FSEmbryogenesis::_initializer;
 void FSEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	FSPhenomeModel* phenomeModel, BaseGenerator* generator) {
@@ -347,7 +349,7 @@ FSLimbModel* FSEmbryogenesis::createLimb(PhenotypeGenerator* generator,
 
 	childLimb->initialize();
 
-	std::cout << "Limb: " << phenomeModel->getLimbModels().size() << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Limb: " << phenomeModel->getLimbModels().size();
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
 
@@ -422,8 +424,8 @@ void FSEmbryogenesis::appendToParentLimb(FSPhenomeModel* phenomeModel,
 
 	joint->initialize();
 
-	std::cout << "Joint: Parent: " << joint->getParentIndex() << " /Child: "
-		<< joint->getChildIndex() << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Joint: Parent: " << joint->getParentIndex() << " /Child: "
+		<< joint->getChildIndex();
 
 	parentLimb->addChildJointIndex(joint->getIndex());
 	childLimb->setParentJointIndex(joint->getIndex());

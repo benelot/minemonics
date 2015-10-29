@@ -14,6 +14,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger FSJointModel::mBoostLogger; /*<! initialize the boost logger*/
+FSJointModel::_Init FSJointModel::_initializer;
 FSJointModel::FSJointModel() {
 
 }

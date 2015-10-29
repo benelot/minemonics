@@ -16,6 +16,8 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
 
+BoostLogger SRBServoMotor::mBoostLogger; /*<! initialize the boost logger*/
+SRBServoMotor::_Init SRBServoMotor::_initializer;
 SRBServoMotor::SRBServoMotor() :
 	mMotorBt(NULL) {
 }
@@ -96,7 +98,7 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
 		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
 #endif
-	//std::cout << mMotorBt->m_currentPosition << "," << targetAngle << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << mMotorBt->m_currentPosition << "," << targetAngle;
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

@@ -28,6 +28,7 @@ class JointBt;
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 //comment this out to compare with original spring constraint
 //#define CONSTRAINT_TYPE btConeTwistConstraint
@@ -123,6 +124,20 @@ protected:
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 
 	int mJointIndex; /**!< The index of the joint in the whole creature. */
+
+private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("ServoMotor"));
+		}
+	} _initializer;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

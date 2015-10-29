@@ -17,6 +17,8 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger SRBLimbModel::mBoostLogger; /*<! initialize the boost logger*/
+SRBLimbModel::_Init SRBLimbModel::_initializer;
 SRBLimbModel::SRBLimbModel() {
 }
 

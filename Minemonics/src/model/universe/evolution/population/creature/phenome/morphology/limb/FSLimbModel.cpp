@@ -17,6 +17,8 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger FSLimbModel::mBoostLogger; /*<! initialize the boost logger*/
+FSLimbModel::_Init FSLimbModel::_initializer;
 FSLimbModel::FSLimbModel() {
 }
 

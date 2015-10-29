@@ -32,6 +32,7 @@ class access;
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The mixed genome is an genome type that encodes the morphology and the neural network in a compact/indirect encoding.
@@ -400,6 +401,20 @@ public:
 	}
 
 private:
+
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string > ("MixedGenome"));
+		}
+	} _initializer;
+
 	int mTotalSegmentQtyLimit; /**!< A hard limit on the total number of body segments allowed.*/
 
 	int mSegmentsDepthLimit; /**!< A bound on the depth of the body's tree structure (the number of segments along any root-to-leaf path).*/

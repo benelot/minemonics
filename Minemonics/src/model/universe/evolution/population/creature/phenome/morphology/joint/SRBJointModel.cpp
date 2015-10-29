@@ -8,6 +8,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger SRBJointModel::mBoostLogger; /*<! initialize the boost logger*/
+SRBJointModel::_Init SRBJointModel::_initializer;
 SRBJointModel::SRBJointModel() {
 
 }

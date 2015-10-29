@@ -197,8 +197,8 @@ void SRBPhenomeModel::generateBody() {
 			((SRBJointModel*) mJointModels[i])->setFrameInB(
 				mJointModels[i]->getPivotToChildCom());
 
-			std::cout << "Joint: Parent: " << mJointModels[i]->getParentIndex() << " /Child: "
-				<< mJointModels[i]->getChildIndex() << std::endl;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Joint: Parent: " << mJointModels[i]->getParentIndex() << " /Child: "
+				<< mJointModels[i]->getChildIndex();
 
 
 

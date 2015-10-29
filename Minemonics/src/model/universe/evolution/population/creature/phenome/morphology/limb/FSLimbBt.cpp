@@ -38,6 +38,8 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger FSLimbBt::mBoostLogger; /*<! initialize the boost logger*/
+FSLimbBt::_Init FSLimbBt::_initializer;
 FSLimbBt::FSLimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
 	NULL), mInertia(0, 0, 0), mLink(NULL), mLimbModel(NULL) {
@@ -127,9 +129,7 @@ void FSLimbBt::initialize() {
 				btScalar(mDimensions.y));
 			break;
 		case LimbPhysics::UNKNOWN:
-			std::cout << "##########################################\n"
-				<< " LimbBt received 'Unknown' as a limb type.\n"
-				<< "##########################################\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << " LimbBt received 'Unknown' as a limb type.\n";
 			exit(-1);
 		}
 

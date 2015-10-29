@@ -5,6 +5,7 @@
 //# forward declarations
 //# system headers
 #include <string>
+#include <vector>
 
 //## controller headers
 //## model headers
@@ -43,6 +44,8 @@ public:
 			boost::log::trivial::fatal;
 
 	static const boost::log::trivial::severity_level LOGGING_LEVEL = info;
+
+	static const std::string loggedClasses;
 };
 
 #endif /* CONFIGURATION_LOGGERCONFIGURATION_HPP_ */

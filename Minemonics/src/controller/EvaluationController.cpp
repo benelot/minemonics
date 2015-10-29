@@ -64,7 +64,7 @@ void EvaluationController::scheduleEvaluations() {
 
 			if ((*eit)->hasFailed()) {
 				mFails += (*eit)->hasFailed();
-				std::cout << "Fails: " << mFails << std::endl;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Fails: " << mFails;
 			}
 
 			mCurrentlyRunningEvaluationsQty--;

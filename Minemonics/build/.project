@@ -894,6 +894,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/SerializationConfiguration.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/LoggerConfiguration.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/LoggerConfiguration.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Logger.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/logging/Logger.cpp</location>
@@ -2242,6 +2247,11 @@
 			<name>[Targets]/[exe] runUnitTests/Source Files/SerializationConfiguration.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/SerializationConfiguration.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/LoggerConfiguration.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/LoggerConfiguration.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Logger.cpp</name>

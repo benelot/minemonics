@@ -50,6 +50,8 @@
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
+BoostLogger SRBEmbryogenesis::mBoostLogger; /*<! initialize the boost logger*/
+SRBEmbryogenesis::_Init SRBEmbryogenesis::_initializer;
 void SRBEmbryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	SRBPhenomeModel* phenomeModel, BaseGenerator* generator) {
@@ -346,7 +348,7 @@ SRBLimbModel* SRBEmbryogenesis::createLimb(PhenotypeGenerator* generator,
 
 	childLimb->initialize();
 
-	std::cout << "Limb: " << phenomeModel->getLimbModels().size() << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Limb: " << phenomeModel->getLimbModels().size();
 	phenomeModel->getLimbModels().push_back(childLimb);
 	phenomeModel->getComponentModels().push_back(childLimb);
 
@@ -419,10 +421,8 @@ void SRBEmbryogenesis::appendToParentLimb(SRBPhenomeModel* phenomeModel,
 			parentMorphogeneBranch->getJointYawMaxAngle(),
 			parentMorphogeneBranch->getJointRollMaxAngle()));
 
-	//joint->initialize();
-
-	std::cout << "Joint: Parent: " << joint->getParentIndex() << " /Child: "
-		<< joint->getChildIndex() << std::endl;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Joint: Parent: " << joint->getParentIndex() << " /Child: "
+		<< joint->getChildIndex();
 
 	parentLimb->addChildJointIndex(joint->getIndex());
 	childLimb->setParentJointIndex(joint->getIndex());
