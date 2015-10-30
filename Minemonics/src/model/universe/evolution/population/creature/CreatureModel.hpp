@@ -181,6 +181,10 @@ public:
 
 	double getFitnessScore();
 
+	double getLastFitnessScore(){
+		return mFitnessScore;
+	}
+
 	const std::string& getFirstName() const {
 		return mFirstName;
 	}
@@ -295,6 +299,14 @@ public:
 		mPopulationModel = populationModel;
 	}
 
+	unsigned long int getDynasty() const {
+		return mDynasty;
+	}
+
+	void setDynasty(unsigned long int dynasty) {
+		mDynasty = dynasty;
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -332,7 +344,10 @@ public:
 		& BOOST_SERIALIZATION_NVP(mCulled)
 
 		/**If the creature is new*/
-		& BOOST_SERIALIZATION_NVP(mNew);
+		& BOOST_SERIALIZATION_NVP(mNew)
+
+		/**!< The dynasty this creature belongs to */
+		& BOOST_SERIALIZATION_NVP(mDynasty); // TODO: Add this to the creatures
 	}
 private:
 
@@ -373,6 +388,8 @@ private:
 	PopulationModel* mPopulationModel; /**!< The population the creature lives in. */
 
 	double mFitnessScore; /**!< The fitness score competitively eruated by the juries. */
+
+	unsigned long int mDynasty; /**!<  The dynasty that creature belongs to. */
 
 	btDynamicsWorld* mWorld;
 

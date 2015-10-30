@@ -52,10 +52,8 @@ class access;
 class PopulationModel: public Serializable {
 public:
 	PopulationModel();
-	PopulationModel(PlanetModel* const planetModel,
-		const int creatureQty);
-	PopulationModel(PlanetModel* const planetModel,
-		const int creatureQty,
+	PopulationModel(PlanetModel* const planetModel, const int creatureQty);
+	PopulationModel(PlanetModel* const planetModel, const int creatureQty,
 		const Ogre::Vector3 initialPosition);
 	PopulationModel(const PopulationModel& populationModel);
 
@@ -174,7 +172,8 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
 			& BOOST_SERIALIZATION_NVP(
-				mCreatureQty) & BOOST_SERIALIZATION_NVP(mCurrentGeneration);
+				mCreatureQty) & BOOST_SERIALIZATION_NVP(mCurrentGeneration)
+				& BOOST_SERIALIZATION_NVP(mDynastyQty); //TODO: Add this to the creatures
 		if (!SerializationConfiguration::POPULATION_EXPANDED) {
 			ar & BOOST_SERIALIZATION_NVP(mCreatureModels);
 		}
@@ -186,6 +185,14 @@ public:
 
 	void setCurrentGeneration(int currentGeneration) {
 		mCurrentGeneration = currentGeneration;
+	}
+
+	int getDynastyQty() const {
+		return mDynastyQty;
+	}
+
+	void setDynastyQty(int dynastyQty) {
+		mDynastyQty = dynastyQty;
 	}
 
 private:
@@ -207,6 +214,8 @@ private:
 	PlanetModel* mPlanetModel; /**!< The planet the population lives on. */
 
 	std::vector<Epoch*> mEpochs; /**!< The epochs of the population. */
+
+	int mDynastyQty; /**!< The number of dynasties that have been in the population */
 };
 BOOST_CLASS_VERSION(PopulationModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_POPULATIONMODEL_HPP_ */

@@ -118,7 +118,7 @@ void Reaper::sow(PopulationModel* const population) {
 			((double) headsToSow) * mCrossOverPercentage);
 
 		crossover(population, crossOverHeads);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) <<"Crossover" << crossOverHeads << " creatures";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Crossover" << crossOverHeads << " creatures";
 	}
 
 	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
