@@ -37,7 +37,7 @@ public:
 	 * The type of controller that is running
 	 */
 	enum ControllerType {
-		SINE_CONTROLLER, NEURAL_NETWORK_CONTROLLER, UNKNOWN_CONTROLLER
+		SINE_CONTROLLER,CHAOTIC_CONTROLLER, NEURAL_NETWORK_CONTROLLER, UNKNOWN_CONTROLLER
 	};
 
 	Controller(ControllerType controllerType);

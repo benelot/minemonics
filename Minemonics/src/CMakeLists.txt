@@ -104,6 +104,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp
 	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp
 	./model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp
+	./model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp
 )
 set(MODELSRCS
     # model
@@ -194,6 +195,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/phenome/controller/ControlInput.cpp
 	./model/universe/evolution/population/creature/phenome/controller/ControlOutput.cpp
 	./model/universe/evolution/population/creature/phenome/controller/sine/SineController.cpp
+	./model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.cpp
 )
 set(CONTROLLERHDRS
 	# controller
@@ -551,6 +553,7 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/phenome/FSPhenomeModel_test.cpp
     ## controllers
     ./model/universe/evolution/population/creature/phenome/controller/sine/SineController_test.cpp
+    ./model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController_test.cpp
     
     ## morphology
     ./model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt_test.cpp

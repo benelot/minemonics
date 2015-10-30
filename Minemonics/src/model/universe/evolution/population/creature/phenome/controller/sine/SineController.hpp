@@ -58,7 +58,7 @@ public:
 	 */
 	SineController* clone();
 
-	void perform(const double timeSinceLastFrame);
+	void perform(const double timeSinceLastTick);
 
 	void collectInputs();
 
@@ -68,7 +68,7 @@ public:
 	/**
 	 * Serializes the sine controller model to a string.
 	 * @param os The ostream.
-	 * @param creature The sine controller we want to serialize.
+	 * @param sineController The sine controller we want to serialize.
 	 * @return A string containing all information about the sine controller.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
