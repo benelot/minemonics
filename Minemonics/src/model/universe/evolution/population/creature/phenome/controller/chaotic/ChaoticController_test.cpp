@@ -54,7 +54,10 @@ protected:
 	ChaoticController* chaoticController2;
 };
 
-TEST_F(ChaoticControllerTest,DummyTest) {
+TEST_F(ChaoticControllerTest,TestRun) {
+	for(int i = 0; i < 50000; i++){
+		chaoticController->calcChuaCircuit();
+	}
 	//TODO: Add all tests
 	//ASSERT_TRUE(chaoticConstroller->)
 }

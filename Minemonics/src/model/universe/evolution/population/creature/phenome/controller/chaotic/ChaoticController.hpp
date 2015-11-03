@@ -47,6 +47,8 @@ public:
 	 */
 	void initialize();
 
+	void calcChuaCircuit();
+
 	/**
 	 * Clone the sine controller.
 	 * @return The clone of the sine controller.
@@ -104,6 +106,8 @@ private:
 	 * The timer of of sine wave.
 	 */
 	double mTime;
+
+	double u[3];
 };
 
 BOOST_CLASS_VERSION(ChaoticController, 1)

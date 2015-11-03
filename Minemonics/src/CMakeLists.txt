@@ -464,6 +464,9 @@ set(MISCHDRS
 	# randomness
 	./utils/Randomness.hpp
 	
+	# NumericUtils
+	./utils/NumericUtils.hpp
+	
 	# name generator
 	./utils/NameGenerator.hpp
 	
@@ -500,6 +503,9 @@ set(MISCSRCS
 	
 	# randomness
 	./utils/Randomness.cpp
+	
+	# numeric utils
+	./utils/NumericUtils.cpp
 	
 	# name generator
 	./utils/NameGenerator.cpp
