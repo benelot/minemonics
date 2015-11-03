@@ -19,6 +19,8 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+#define UNIV_EPS 0.01f
+
 MorphogeneBranch::MorphogeneBranch() :
 	mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 		0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mJointPitchMinAngle(0), mJointPitchMaxAngle(
@@ -137,19 +139,34 @@ void MorphogeneBranch::initialize() {
 
 	/**
 	 * The joint limits in each direction (pitch=1=Y,yaw=2=Z, roll=0=X)
+	 *   6DOF constraint uses Euler angles and to define limits
+	 * it is assumed that rotational order is :
+	 * Z - first, allowed limits are (-PI+epsilon,PI-epsilon);
+	 * new position of Y - second (allowed limits are
+	 * (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	 * used to prevent constraint from instability on poles;
+	 * new position of X, allowed limits are (-PI+epsilon,PI-epsilon);
+	 * So to simulate ODE Universal joint we should use parent
+	 * axis as Z, child axis as Y and limit all other DOFs
 	 */
-	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() * 2.0f);
-	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() * 2.0f);
-	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() * 2.0f);
-	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() * 2.0f);
-	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() * 2.0f);
-	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(0,
-		boost::math::constants::pi<double>() * 2.0f);
+	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
 
 	/**
 	 * Set whether the branch should be mirrored or flipped to the other side.

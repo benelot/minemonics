@@ -414,12 +414,12 @@ void SRBEmbryogenesis::appendToParentLimb(SRBPhenomeModel* phenomeModel,
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
 			parentMorphogeneBranch->getJointPitchAxisY(),
 			parentMorphogeneBranch->getJointPitchAxisZ()),
-		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
-			parentMorphogeneBranch->getJointYawMinAngle(),
-			parentMorphogeneBranch->getJointRollMinAngle()),
-		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
-			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()));
+		Ogre::Vector3(parentMorphogeneBranch->getJointRollMinAngle(),
+			parentMorphogeneBranch->getJointPitchMinAngle(),
+			parentMorphogeneBranch->getJointYawMinAngle()),
+		Ogre::Vector3(parentMorphogeneBranch->getJointRollMaxAngle(),
+			parentMorphogeneBranch->getJointPitchMaxAngle(),
+			parentMorphogeneBranch->getJointYawMaxAngle()));
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Joint: Parent: " << joint->getParentIndex() << " /Child: "
 		<< joint->getChildIndex();
