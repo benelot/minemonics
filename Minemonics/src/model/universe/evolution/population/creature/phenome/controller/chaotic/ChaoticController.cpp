@@ -95,15 +95,11 @@ double* chuaCircuit(double t, int dimensions, double u[]) {
 	double k = 7;
 	double g = m0 * u[0] + (m1 - m0) / 2.0f * (abs(u[0] + b) - abs(u[0] - b));
 
-	//lim[x_] = Piecewise[ { { 0, x > limval }, { 1, x <= limval } }];
-	double lim2 = (1 / 2.3) * (tanh(k * (limval - u[0])) + 1.3);
-	double lim3 = (1 / 2.1) * (tanh(k * (limval - u[0])) + 1.1);
-
 	double* uout = new double[dimensions];
 	uout[0] = c1 * (u[1] - u[0] - g);
 
 	uout[1] = c2 * (u[0] - u[1] + u[2]);
-	uout[2] = -c3 * u[1]; //* lim3;
+	uout[2] = -c3 * u[1];
 
 	return uout;
 }
@@ -116,6 +112,7 @@ void ChaoticController::calcChuaCircuit() {
 	 f(x)=m1*x+(m0-m1)/2*(|x+1|-|x-1|)
 	 */
 	std::cout << u[0] << "\t" << u[1] << "\t" << u[2] << std::endl;
+
 	NumericUtils::calcRK4(0, 3, u, 0.001f, &chuaCircuit);
 }
 
