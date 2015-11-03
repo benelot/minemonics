@@ -125,17 +125,17 @@ void Reaper::sow(PopulationModel* const population) {
 
 	int start = untouched;
 
-	{
-		// calculate the number of gene mutated heads
-		int geneMutationHeads = round(
-			((double) population->getCreatureModels().size() - untouched)
-				* mGeneMutationPercentage);
-
-		mutateGenes(population, start, geneMutationHeads);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Mutate " << geneMutationHeads << " creatures";
-
-		start += geneMutationHeads;
-	}
+//	{
+//		// calculate the number of gene mutated heads
+//		int geneMutationHeads = round(
+//			((double) population->getCreatureModels().size() - untouched)
+//				* mGeneMutationPercentage);
+//
+//		mutateGenes(population, start, geneMutationHeads);
+//		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Mutate " << geneMutationHeads << " creatures";
+//
+//		start += geneMutationHeads;
+//	}
 
 //	{
 //		// calculate the number of gene split heads
