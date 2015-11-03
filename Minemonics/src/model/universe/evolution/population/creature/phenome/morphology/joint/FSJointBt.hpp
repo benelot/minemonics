@@ -9,6 +9,7 @@
 class btDynamicsWorld;
 class btRigidBody;
 class btTransform;
+class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -103,11 +104,11 @@ public:
 	 */
 	void removeFromWorld();
 
-//	/**
-//	 * Returns if the joint is under tension.
-//	 * @return If the joint is under tension.
-//	 */
-//	bool isStrained();
+	virtual void applyJointTorque(int jointIndex,double torque);
+
+	virtual double getJointPos(int jointIndex,int jointAxisIndex);
+
+	virtual double getJointVel(int jointIndex,int jointAxisIndex);
 
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.
@@ -190,6 +191,10 @@ public:
 		return os;
 	}
 
+	void setMultiBody(btMultiBody* multiBody) {
+		mMultiBody = multiBody;
+	}
+
 	/**
 	 * Serializes the joint bullet physics model to an xml file.
 	 * @param ar The archive.
@@ -207,6 +212,8 @@ private:
 	 * The bullet dynamics world of the bullet physics engine. Reference only.
 	 */
 	btDynamicsWorld* mWorld;
+
+	btMultiBody* mMultiBody;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

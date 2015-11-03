@@ -7,9 +7,6 @@
 
 //## controller headers
 //## model headers
-#include <BulletDynamics/Featherstone/btMultiBody.h>
-#include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
-
 //## view headers
 //# custom headers
 //## base headers
@@ -23,7 +20,8 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
 
-FSServoMotor::FSServoMotor() : mMultiBody(NULL) {
+FSServoMotor::FSServoMotor() :
+	mJoint(NULL) {
 }
 
 FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {
@@ -36,11 +34,11 @@ FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {
 	mPositionControlled = servoMotor.mPositionControlled;
 	mLowerLimit = servoMotor.mLowerLimit;
 	mUpperLimit = servoMotor.mUpperLimit;
-	mMultiBody = servoMotor.mMultiBody;
+	mJoint = servoMotor.mJoint;
 }
 
 FSServoMotor::~FSServoMotor() {
-	mMultiBody = NULL;
+	mJoint = NULL;
 }
 
 void FSServoMotor::initialize(
@@ -53,8 +51,9 @@ void FSServoMotor::initialize(
 	mUpperLimit = upperLimit;
 }
 
-void FSServoMotor::instantiate(btMultiBody* multiBody, const int jointIndex) {
-	mMultiBody = multiBody;
+void FSServoMotor::instantiate(JointPhysics* jointPhysics,
+	const int jointIndex) {
+	mJoint = jointPhysics;
 	mJointIndex = jointIndex;
 }
 
@@ -70,15 +69,15 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 		+ clampedInputValue * (mUpperLimit - mLowerLimit);
 
 	//calculate the angle error
-	btScalar angleError = targetAngle - mMultiBody->getJointPos(mJointIndex);
-	btScalar velocityError = 0 - mMultiBody->getJointVel(mJointIndex);
+	btScalar angleError = targetAngle - mJoint->getJointPos(mJointIndex, 0);
+	btScalar velocityError = 0 - mJoint->getJointVel(mJointIndex, 0);
 
 	//simple p(roportional) controller
 	//calculate the target force and clamp it with the maximum force
 	float kP = 200000000;
 	float kD = 2000;
 	double correction = kP * angleError + kD * velocityError;
-	mMultiBody->addJointTorque(mJointIndex,
+	mJoint->applyJointTorque(mJointIndex,
 		btScalar(
 			(correction > mMaxForce) ? mMaxForce :
 			(correction < -mMaxForce) ? -mMaxForce : correction));

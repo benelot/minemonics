@@ -75,6 +75,12 @@ public:
 	 */
 	void initialize();
 
+	virtual void applyJointTorque(int jointIndex,double torque);
+
+	virtual double getJointPos(int jointIndex,int jointAxisIndex);
+
+	virtual double getJointVel(int jointIndex,int jointAxisIndex);
+
 	/**
 	 * Initialize the rotational limit motors.
 	 * @param maxForces The maximum forces of the joint.

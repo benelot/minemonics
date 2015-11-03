@@ -1,7 +1,7 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-
+#include <BulletDynamics/Featherstone/btMultiBody.h>
 //## view headers
 //# custom headers
 //## base headers
@@ -16,7 +16,7 @@
 //## utils headers
 
 FSJointBt::FSJointBt() :
-	mWorld(NULL) {
+	mWorld(NULL),mMultiBody(NULL) {
 }
 
 FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
@@ -24,7 +24,7 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits) {
+	btVector3 jointUpperLimits):mMultiBody(NULL) {
 	mWorld = world;
 	mType = type;
 	mJointPitchEnabled = jointPitchEnabled;
@@ -41,6 +41,7 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 FSJointBt::FSJointBt(const FSJointBt& jointBt) {
 	mWorld = jointBt.mWorld;
 	mInWorld = jointBt.mInWorld;
+	mMultiBody = jointBt.mMultiBody;
 
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
 		mit != jointBt.mMotors.end(); mit++) {
@@ -151,3 +152,16 @@ void FSJointBt::removeFromWorld() {
 FSJointBt* FSJointBt::clone() {
 	return new FSJointBt(*this);
 }
+
+void FSJointBt::applyJointTorque(int jointIndex, double torque) {
+	mMultiBody->addJointTorque(jointIndex,torque);
+}
+
+double FSJointBt::getJointPos(int jointIndex, int jointAxisIndex) {
+	return mMultiBody->getJointPos(jointIndex);
+}
+
+double FSJointBt::getJointVel(int jointIndex, int jointAxisIndex) {
+	return mMultiBody->getJointVel(jointIndex);
+}
+

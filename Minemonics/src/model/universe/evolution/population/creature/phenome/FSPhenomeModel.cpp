@@ -179,14 +179,14 @@ void FSPhenomeModel::calm() {
 int FSPhenomeModel::performEmbryogenesis() {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Perform an embryogenesis";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "--Perform an embryogenesis";
 		cleanup();
 		mBodyGenerated = false;
 		std::list<PhenotypeGenerator*> generatorList;
 
 		// get the first gene from the genome
 		Gene* gene =
-			mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
+		mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
@@ -207,7 +207,7 @@ int FSPhenomeModel::performEmbryogenesis() {
 			FSEmbryogenesis::transcribeGene(generatorList, totalSegmentCounter,
 				this, generator);
 
-			delete generator; // delete the generator of this gene
+			delete generator;// delete the generator of this gene
 		}
 
 		mDeveloped = true;
@@ -237,7 +237,7 @@ void FSPhenomeModel::generateBody() {
 		return;
 	}
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Generate the body";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "--Generate the body";
 
 	if (mJointModels.size() != 0) {
 		bool selfCollision = true; /**!< The collision is handled on a per-limb basis*/
@@ -298,10 +298,12 @@ void FSPhenomeModel::generateBody() {
 				break;
 			}
 
+			((FSJointBt*)mJointModels[i]->getJointPhysics())->setMultiBody(mMultiBody);
 			for (std::vector<Motor*>::iterator mit =
 				mJointModels[i]->getMotors().begin();
 				mit != mJointModels[i]->getMotors().end(); mit++) {
-				((FSServoMotor*) (*mit))->instantiate(mMultiBody,
+				((FSServoMotor*) (*mit))->instantiate(
+					mJointModels[i]->getJointPhysics(),
 					mJointModels[i]->getIndex());
 			}
 		}
@@ -373,7 +375,7 @@ void FSPhenomeModel::addJointConstraints() {
 		lit = mLimitConstraints.erase(lit);
 	}
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Add joint constraints";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "--Add joint constraints";
 
 	for (int i = 0; i < mJointModels.size(); i++) {
 		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint

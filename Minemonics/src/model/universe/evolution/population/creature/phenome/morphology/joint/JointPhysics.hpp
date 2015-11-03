@@ -113,11 +113,11 @@ public:
 		mInWorld = false;
 	}
 
-//	/**
-//	 * Returns if the joint is under tension.
-//	 * @return If the joint is under tension.
-//	 */
-//	virtual bool isStrained() = 0;
+	virtual void applyJointTorque(int jointIndex,double torque) = 0;
+
+	virtual double getJointPos(int jointIndex,int jointAxisIndex) = 0;
+
+	virtual double getJointVel(int jointIndex,int jointAxisIndex) = 0;
 
 	/**
 	 * Compare the joint physics model to another joint physics model.

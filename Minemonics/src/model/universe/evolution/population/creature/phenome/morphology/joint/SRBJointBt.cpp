@@ -84,6 +84,19 @@ void SRBJointBt::initialize() {
 //debug drawing
 	mJoint->setDbgDrawSize(btScalar(5.f));
 
+	  // 6DOF constraint uses Euler angles and to define limits
+	  // it is assumed that rotational order is :
+	  // Z - first, allowed limits are (-PI,PI);
+	  // new position of Y - second (allowed limits are
+	  // (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	  // used to prevent constraint from instability on poles;
+	  // new position of X, allowed limits are (-PI,PI);
+	  // So to simulate ODE Universal joint we should use parent
+	  // axis as Z, child axis as Y and limit all other DOFs
+	  // Build the frame in world coordinate system first
+	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointMinAngle));
+	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointMaxAngle));
+
 	//	add pitch servo motor
 	((SRBServoMotor*)mMotors[0])->initialize(
 		mJoint->getRotationalLimitMotor(RDOF_PITCH));
@@ -218,4 +231,17 @@ void SRBJointBt::removeFromWorld() {
 
 SRBJointBt* SRBJointBt::clone() {
 	return new SRBJointBt(*this);
+}
+
+void SRBJointBt::applyJointTorque(int jointIndex, double torque) {
+}
+
+double SRBJointBt::getJointPos(int jointIndex, int jointAxisIndex) {
+	return mJoint->getAngle(jointAxisIndex);
+}
+
+double SRBJointBt::getJointVel(int jointIndex, int jointAxisIndex) {
+	//TODO: Find a way to get joint velocity in SRB
+	return 0;
+//	mJoint->get
 }

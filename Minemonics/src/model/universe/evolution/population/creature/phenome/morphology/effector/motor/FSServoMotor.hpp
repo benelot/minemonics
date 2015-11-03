@@ -6,9 +6,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //# forward declarations
-class btMultiBody;
-class btMultiBodyJointMotor;
-
 //# system headers
 //## controller headers
 //## model headers
@@ -45,7 +42,7 @@ public:
 		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 		const double maxForce, double lowerLimit, double upperLimit);
 
-	void instantiate(btMultiBody* multiBody, const int jointIndex);
+	void instantiate(JointPhysics* jointPhysics, const int jointIndex);
 	/**
 	 * Clone the servomotor.
 	 * @return The clone of the servo motor.
@@ -91,8 +88,7 @@ public:
 	}
 
 private:
-
-	btMultiBody* mMultiBody;
+	JointPhysics* mJoint;
 
 };
 
