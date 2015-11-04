@@ -84,29 +84,29 @@ void SRBJointBt::initialize() {
 //debug drawing
 	mJoint->setDbgDrawSize(btScalar(5.f));
 
-	  // 6DOF constraint uses Euler angles and to define limits
-	  // it is assumed that rotational order is :
-	  // Z - first, allowed limits are (-PI,PI);
-	  // new position of Y - second (allowed limits are
-	  // (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
-	  // used to prevent constraint from instability on poles;
-	  // new position of X, allowed limits are (-PI,PI);
-	  // So to simulate ODE Universal joint we should use parent
-	  // axis as Z, child axis as Y and limit all other DOFs
-	  // Build the frame in world coordinate system first
+	// 6DOF constraint uses Euler angles and to define limits
+	// it is assumed that rotational order is :
+	// Z - first, allowed limits are (-PI,PI);
+	// new position of Y - second (allowed limits are
+	// (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	// used to prevent constraint from instability on poles;
+	// new position of X, allowed limits are (-PI,PI);
+	// So to simulate ODE Universal joint we should use parent
+	// axis as Z, child axis as Y and limit all other DOFs
+	// Build the frame in world coordinate system first
 	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointMinAngle));
 	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointMaxAngle));
 
 	//	add pitch servo motor
-	((SRBServoMotor*)mMotors[0])->initialize(
+	((SRBServoMotor*) mMotors[0])->initialize(
 		mJoint->getRotationalLimitMotor(RDOF_PITCH));
 
 	// add yaw servo motor
-	((SRBServoMotor*)mMotors[1])->initialize(
+	((SRBServoMotor*) mMotors[1])->initialize(
 		mJoint->getRotationalLimitMotor(RDOF_YAW));
 
 	//add roll servo motor
-	((SRBServoMotor*)mMotors[2])->initialize(
+	((SRBServoMotor*) mMotors[2])->initialize(
 		mJoint->getRotationalLimitMotor(RDOF_ROLL));
 #endif
 
@@ -151,8 +151,8 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	mJointMinAngle = OgreBulletUtils::convert(lowerLimits);
 
 //	add pitch servo motor
-	SRBServoMotor* servoMotor = new SRBServoMotor(JointPhysics::RDOF_PITCH, maxForces.getX(),
-		lowerLimits.x(), upperLimits.x());
+	SRBServoMotor* servoMotor = new SRBServoMotor(JointPhysics::RDOF_PITCH,
+		maxForces.getX(), lowerLimits.x(), upperLimits.x());
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -233,7 +233,46 @@ SRBJointBt* SRBJointBt::clone() {
 	return new SRBJointBt(*this);
 }
 
-void SRBJointBt::applyJointTorque(int jointIndex, double torque) {
+void SRBJointBt::applyJointTorque(int jointIndex, int jointAxisIndex,
+	double torque) {
+
+	if (mJoint) {
+		int col;
+		switch (jointAxisIndex) {
+		case 0:
+			col = 2;
+			break;
+		case 1:
+			col = 1;
+			break;
+		case 2:
+			col = 0;
+			break;
+		default:
+			return;
+		}
+
+		// z-axis of constraint frame
+		btVector3 hingeAxisLocalA =
+			mJoint->getFrameOffsetA().getBasis().getColumn(col);
+
+		btVector3 hingeAxisLocalB =
+			mJoint->getFrameOffsetB().getBasis().getColumn(col);
+
+		btVector3 hingeAxisWorldA =
+			mJoint->getRigidBodyA().getWorldTransform().getBasis()
+				* hingeAxisLocalA;
+
+		btVector3 hingeAxisWorldB =
+			mJoint->getRigidBodyB().getWorldTransform().getBasis()
+				* hingeAxisLocalB;
+
+		btVector3 hingeTorqueA = torque * hingeAxisWorldA;
+		btVector3 hingeTorqueB = torque * hingeAxisWorldB;
+
+		mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
+		mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
+	}
 }
 
 double SRBJointBt::getJointPos(int jointIndex, int jointAxisIndex) {

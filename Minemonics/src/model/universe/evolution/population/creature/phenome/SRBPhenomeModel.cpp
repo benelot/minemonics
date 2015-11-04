@@ -77,7 +77,7 @@ SRBPhenomeModel::~SRBPhenomeModel() {
 
 void SRBPhenomeModel::initialize() {
 
-	performEmbryogenesis();
+	performEmbryogenesis(); /**!< Perform embryogenesis to build a body plan*/
 
 	//initialize the limb models if it did not already happen in embryogenesis
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
@@ -122,12 +122,14 @@ void SRBPhenomeModel::calm() {
 int SRBPhenomeModel::performEmbryogenesis() {
 	int totalSegmentCounter = 0;
 	if (!mDeveloped) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "--Perform an embryogenesis";
 		cleanup();
+		mBodyGenerated = false;
 		std::list<PhenotypeGenerator*> generatorList;
 
 		// get the first gene from the genome
 		Gene* gene =
-			mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
+		mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
 		//create a phenotype generator and initialize it with the starting point of the creation of the creature
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
@@ -138,8 +140,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
 
-		// this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
-		while (!generatorList.empty()) {
+		while (!generatorList.empty()) { // this loop creates the creature up to the point at which we reach the correct root-to-leaf path length
 
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
 
@@ -149,8 +150,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 			SRBEmbryogenesis::transcribeGene(generatorList, totalSegmentCounter,
 				this, generator);
 
-			// delete the generator of this gene
-			delete generator;
+			delete generator;// delete the generator of this gene
 		}
 
 		mDeveloped = true;
@@ -180,6 +180,8 @@ void SRBPhenomeModel::generateBody() {
 		return;
 	}
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "--Generate the body";
+
 	if (mJointModels.size() != 0) {
 
 		for (int i = 0; i < mJointModels.size(); i++) {
@@ -203,12 +205,13 @@ void SRBPhenomeModel::generateBody() {
 
 			mJointModels[i]->initialize();
 
-//			for (std::vector<Motor*>::iterator mit =
-//				mJointModels[i]->getMotors().begin();
-//				mit != mJointModels[i]->getMotors().end(); mit++) {
-//				((FSServoMotor*) (*mit))->instantiate(mMultiBody,
-//					mJointModels[i]->getIndex());
-//			}
+			for (std::vector<Motor*>::iterator mit =
+				mJointModels[i]->getMotors().begin();
+				mit != mJointModels[i]->getMotors().end(); mit++) {
+				((SRBServoMotor*) (*mit))->instantiate(
+					mJointModels[i]->getJointPhysics(),
+					mJointModels[i]->getIndex());
+			}
 		}
 	}
 }

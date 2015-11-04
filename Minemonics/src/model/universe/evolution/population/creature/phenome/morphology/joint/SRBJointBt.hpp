@@ -75,7 +75,7 @@ public:
 	 */
 	void initialize();
 
-	virtual void applyJointTorque(int jointIndex,double torque);
+	virtual void applyJointTorque(int jointIndex,int jointAxisIndex, double torque);
 
 	virtual double getJointPos(int jointIndex,int jointAxisIndex);
 

@@ -64,10 +64,16 @@ void SRBServoMotor::initialize(MOTOR_TYPE* const motorBt) {
 	constraint->setServo(mJointMotorIndex, true);
 #else
 	mMotorBt->m_enableMotor = true;
-	mMotorBt->m_maxMotorForce = mMaxForce;
+	mMotorBt->m_maxMotorForce = 0;
 	//servo motor is not implemented in 6dofspring constraint
 #endif
 
+}
+
+void SRBServoMotor::instantiate(JointPhysics* jointPhysics,
+	const int jointIndex) {
+	mJoint = jointPhysics;
+	mJointIndex = jointIndex;
 }
 
 void SRBServoMotor::apply(double timeSinceLastTick) {
@@ -90,15 +96,17 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	float kP = 500.0f;
 	float mMaxSpeed = 10000.0f;
 	//simple p(roportional) controller
-//	mMotorBt->m_targetVelocity = kP * angleError;
-//	mMotorBt->m_maxMotorForce = 1000;
 
-//calculate the target velocity and clamp it with the maximum speed
-	mMotorBt->m_targetVelocity =
+	//calculate the torque and clamp it with the maximum speed
+	double torque =
 		(kP * angleError > mMaxSpeed) ? mMaxSpeed :
 		(kP * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
+
+	// apply the torque
+	mJoint->applyJointTorque(mJointIndex, mJointMotorIndex, torque);
+
 #endif
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << mMotorBt->m_currentPosition << "," << targetAngle;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mMotorBt->m_currentPosition << "," << targetAngle;
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

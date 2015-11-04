@@ -70,6 +70,8 @@ public:
 	 */
 	void initialize(MOTOR_TYPE* const motorBt);
 
+	void instantiate(JointPhysics* jointPhysics, const int jointIndex);
+
 	/**
 	 * Clone the SRBServoMotor.
 	 * @return The clone of the servo motor.
@@ -122,7 +124,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("SRBServoMotor"));
+				boost::log::attributes::constant<std::string>("SRBServoMotor"));
 		}
 	} _initializer;
 
