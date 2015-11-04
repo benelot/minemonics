@@ -16,7 +16,7 @@
 //## utils headers
 
 FSJointBt::FSJointBt() :
-	mWorld(NULL),mMultiBody(NULL) {
+	mWorld(NULL), mMultiBody(NULL) {
 }
 
 FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
@@ -24,7 +24,8 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits):mMultiBody(NULL) {
+	btVector3 jointUpperLimits) :
+	mMultiBody(NULL) {
 	mWorld = world;
 	mType = type;
 	mJointPitchEnabled = jointPitchEnabled;
@@ -153,8 +154,9 @@ FSJointBt* FSJointBt::clone() {
 	return new FSJointBt(*this);
 }
 
-void FSJointBt::applyJointTorque(int jointIndex, double torque) {
-	mMultiBody->addJointTorque(jointIndex,torque);
+void FSJointBt::applyJointTorque(int jointIndex, int jointAxisIndex,
+	double torque) {
+	mMultiBody->addJointTorque(jointIndex, torque);
 }
 
 double FSJointBt::getJointPos(int jointIndex, int jointAxisIndex) {

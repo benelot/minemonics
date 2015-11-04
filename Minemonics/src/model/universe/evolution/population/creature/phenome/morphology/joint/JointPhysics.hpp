@@ -113,11 +113,12 @@ public:
 		mInWorld = false;
 	}
 
-	virtual void applyJointTorque(int jointIndex,double torque) = 0;
+	virtual void applyJointTorque(int jointIndex, int jointAxisIndex,
+		double torque) = 0;
 
-	virtual double getJointPos(int jointIndex,int jointAxisIndex) = 0;
+	virtual double getJointPos(int jointIndex, int jointAxisIndex) = 0;
 
-	virtual double getJointVel(int jointIndex,int jointAxisIndex) = 0;
+	virtual double getJointVel(int jointIndex, int jointAxisIndex) = 0;
 
 	/**
 	 * Compare the joint physics model to another joint physics model.
@@ -225,33 +226,33 @@ public:
 		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of joint */
 		& BOOST_SERIALIZATION_NVP(mJointPitchEnabled) /**!< If Joint Dof are enabled */
 		& BOOST_SERIALIZATION_NVP(mJointYawEnabled)
-			& BOOST_SERIALIZATION_NVP(mJointRollEnabled)
+		& BOOST_SERIALIZATION_NVP(mJointRollEnabled)
 
-			& BOOST_SERIALIZATION_NVP(mJointMaxForces.x) /**!< The max forces of the joint axes */
-			& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
-			& BOOST_SERIALIZATION_NVP(mJointMaxForces.z)
+		& BOOST_SERIALIZATION_NVP(mJointMaxForces.x) /**!< The max forces of the joint axes */
+		& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
+		& BOOST_SERIALIZATION_NVP(mJointMaxForces.z)
 
-			& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.x) /**!< The max speeds of the joint axes */
-			& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.y)
-			& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.z)
+		& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.x) /**!< The max speeds of the joint axes */
+		& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.y)
+		& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.z)
 
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
+		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
+		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
+		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
 
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
-			& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
+		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
+		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
+		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
 
-			& BOOST_SERIALIZATION_NVP(mJointMinAngle.x) /**!< Joint Pitch limit */
-			& BOOST_SERIALIZATION_NVP(mJointMaxAngle.x)
+		& BOOST_SERIALIZATION_NVP(mJointMinAngle.x) /**!< Joint Pitch limit */
+		& BOOST_SERIALIZATION_NVP(mJointMaxAngle.x)
 
-			& BOOST_SERIALIZATION_NVP(mJointMinAngle.y) /**!< Joint Yaw limit */
-			& BOOST_SERIALIZATION_NVP(mJointMaxAngle.y)
+		& BOOST_SERIALIZATION_NVP(mJointMinAngle.y) /**!< Joint Yaw limit */
+		& BOOST_SERIALIZATION_NVP(mJointMaxAngle.y)
 
-			& BOOST_SERIALIZATION_NVP(mJointMinAngle.z) /**!< Joint Roll limit */
-			& BOOST_SERIALIZATION_NVP(mJointMaxAngle.z)
-			& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
+		& BOOST_SERIALIZATION_NVP(mJointMinAngle.z) /**!< Joint Roll limit */
+		& BOOST_SERIALIZATION_NVP(mJointMaxAngle.z)
+		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
 	}
 protected:
 

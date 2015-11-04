@@ -138,6 +138,9 @@ private:
 				boost::log::attributes::constant < std::string > ("ServoMotor"));
 		}
 	} _initializer;
+
+private:
+	JointPhysics* mJoint;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

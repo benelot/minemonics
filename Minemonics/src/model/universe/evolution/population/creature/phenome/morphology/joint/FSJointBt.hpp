@@ -104,11 +104,12 @@ public:
 	 */
 	void removeFromWorld();
 
-	virtual void applyJointTorque(int jointIndex,double torque);
+	virtual void applyJointTorque(int jointIndex, int jointAxisIndex,
+		double torque);
 
-	virtual double getJointPos(int jointIndex,int jointAxisIndex);
+	virtual double getJointPos(int jointIndex, int jointAxisIndex);
 
-	virtual double getJointVel(int jointIndex,int jointAxisIndex);
+	virtual double getJointVel(int jointIndex, int jointAxisIndex);
 
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.

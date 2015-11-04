@@ -86,10 +86,6 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ServoMotor); /**!< Serialize the base object */
 	}
-
-private:
-	JointPhysics* mJoint;
-
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_FSSERVOMOTOR_H_ */
