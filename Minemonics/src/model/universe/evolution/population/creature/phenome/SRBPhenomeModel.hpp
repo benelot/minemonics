@@ -5,6 +5,7 @@
 
 //# forward declarations
 class CreatureModel;
+class PhenotypeGenerator;
 namespace boost {
 namespace serialization {
 class access;
@@ -60,6 +61,30 @@ public:
 	 * @param creatureModel The creatureModel handle we want to get back from the physics engine when we pick the creature.
 	 */
 	virtual int performEmbryogenesis();
+
+	virtual void calculateChildPositionRelativeToParent(PhenotypeGenerator* generator,
+			btTransform& parentHitTransform, btTransform& childHitTransform,
+			Morphogene* childMorphogene, PhenomeModel* phenomeModel,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild);
+
+	virtual LimbModel* createLimb(PhenotypeGenerator* generator,
+		Morphogene* childMorphogene, PhenomeModel* phenomeModel);
+
+	virtual void appendToParentLimb(PhenomeModel* phenomeModel,
+		LimbModel* childLimb, PhenotypeGenerator* generator,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild,
+		btTransform& parentHitTransform, btTransform& childHitTransform);
+
+	virtual btTransform getParentIntersection(PhenotypeGenerator* generator,
+		LimbPhysics* parentLimb, MorphogeneBranch* parentMorphogeneBranch,
+		Ogre::Vector3 parentLimbCOM,
+		Ogre::Vector3 localParentAnchorDirInRefParent);
+
+	virtual btTransform getOwnIntersection(PhenomeModel* phenomeModel,
+		Morphogene* childMorphogene, PhenotypeGenerator* generator,
+		Ogre::Vector3 localChildAnchorDirInRefChild);
 
 	void generateBody();
 

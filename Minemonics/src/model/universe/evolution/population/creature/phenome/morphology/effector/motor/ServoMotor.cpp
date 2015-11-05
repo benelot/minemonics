@@ -27,7 +27,7 @@ BoostLogger ServoMotor::mBoostLogger; /*<! initialize the boost logger*/
 ServoMotor::_Init ServoMotor::_initializer;
 ServoMotor::ServoMotor() :
 	Motor(SERVO_MOTOR), mJointMotorIndex(JointPhysics::RDOF_PITCH), mMotorBt(
-	NULL), mLowerLimit(0), mUpperLimit(0), mJointIndex(0) {
+	NULL), mLowerLimit(0), mUpperLimit(0), mJointIndex(0), mJoint(NULL) {
 }
 
 ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
@@ -42,6 +42,7 @@ ServoMotor::ServoMotor(const ServoMotor& servoMotor) :
 	mUpperLimit = servoMotor.mUpperLimit;
 	mMotorBt = servoMotor.mMotorBt;
 	mJointIndex = servoMotor.mJointIndex;
+	mJoint = servoMotor.mJoint;
 }
 
 ServoMotor::~ServoMotor() {
@@ -74,43 +75,4 @@ void ServoMotor::initialize(
 #endif
 #endif
 
-}
-
-void ServoMotor::apply(double timeSinceLastTick) {
-
-	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
-	btScalar clampedInputValue =
-		(getInputValue() > 1.0f) ? 1.0f :
-		(getInputValue() < 0.0f) ? 0.0f : getInputValue();
-
-	//calculate the target angle of the motor
-	btScalar targetAngle = mLowerLimit
-		+ clampedInputValue * (mUpperLimit - mLowerLimit);
-	//calculate the angle error
-	btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
-
-#ifdef USE_6DOF2
-//		mMotorBt->m_targetVelocity =
-//		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-//		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : 500.f * angleError;
-	mConstraint->setServoTarget(mJointMotorIndex, targetAngle);
-#else
-
-	float kP = 500.0f;
-	float mMaxSpeed = 10000.0f;
-	//simple p(roportional) controller
-	//calculate the target velocity and clamp it with the maximum speed
-	mMotorBt->m_targetVelocity =
-		(500.f * angleError > mMaxSpeed) ? mMaxSpeed :
-		(500.f * angleError < -mMaxSpeed) ? -mMaxSpeed : kP * angleError;
-#endif
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << mMotorBt << "("
-	<< timeSinceLastTick << ")::Input Value:   " << getInputValue()
-	<< "\t/MotorPosition(error):  "
-	<< mMotorBt->m_currentPosition << "/" << targetAngle << "/" << angleError << "\t/targetVelocity: "
-	<< mMotorBt->m_targetVelocity;
-}
-
-ServoMotor* ServoMotor::clone() {
-	return new ServoMotor(*this);
 }

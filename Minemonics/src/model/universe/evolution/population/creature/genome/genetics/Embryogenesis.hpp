@@ -6,9 +6,9 @@
 
 //# forward declarations
 class btTransform;
-class FSLimbBt;
-class FSLimbModel;
-class FSPhenomeModel;
+class LimbPhysics;
+class LimbModel;
+class PhenomeModel;
 class Morphogene;
 class MorphogeneBranch;
 
@@ -35,7 +35,7 @@ class MorphogeneBranch;
  * @date		2015-05-20
  * @author		Benjamin Ellenberger
  */
-class FSEmbryogenesis {
+class Embryogenesis {
 public:
 	/**
 	 * Transcribe a gene into the component it represents.
@@ -45,7 +45,7 @@ public:
 	 * @param generator The generator of that should be transcribed.
 	 */
 	static void transcribeGene(std::list<PhenotypeGenerator*>& generatorList,
-		int& totalSegmentCounter, FSPhenomeModel* phenomeModel,
+		int& totalSegmentCounter, PhenomeModel* phenomeModel,
 		BaseGenerator* generator);
 
 	/**
@@ -57,36 +57,13 @@ public:
 	 */
 	static void transcribeMorphogene(
 		std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
-		FSPhenomeModel* phenomeModel, PhenotypeGenerator* generator);
+		PhenomeModel* phenomeModel, PhenotypeGenerator* generator);
 
-	static void calculateChildPositionRelativeToParent(PhenotypeGenerator* generator,
-		btTransform& parentHitTransform, btTransform& childHitTransform,
-		Morphogene* childMorphogene, FSPhenomeModel* phenomeModel,
-		Ogre::Vector3& localParentJointInRefParent,
-		Ogre::Vector3& localChildJointInRefChild);
-
-	static FSLimbModel* createLimb(PhenotypeGenerator* generator,Morphogene* childMorphogene,FSPhenomeModel* phenomeModel);
-
-	static void appendToParentLimb(FSPhenomeModel* phenomeModel,
-		FSLimbModel* childLimb, PhenotypeGenerator* generator,
-		Ogre::Vector3& localParentJointInRefParent,
-		Ogre::Vector3& localChildJointInRefChild,
-		btTransform& parentHitTransform, btTransform& childHitTransform);
-
-	static void createNewGenerators(FSPhenomeModel* phenomeModel,
-		Morphogene * childMorphogene, FSLimbModel* childLimb,
+	static void createNewGenerators(PhenomeModel* phenomeModel,
+		Morphogene* childMorphogene, LimbModel* childLimb,
 		PhenotypeGenerator* generator,
 		std::list<PhenotypeGenerator*>& generatorList,
 		int& totalSegmentCounter);
-
-	static btTransform getParentIntersection(PhenotypeGenerator* generator,
-		FSLimbBt* parentLimb, MorphogeneBranch* parentMorphogeneBranch,
-		Ogre::Vector3 parentLimbCOM,
-		Ogre::Vector3 localParentAnchorDirInRefParent);
-
-	static btTransform getOwnIntersection(FSPhenomeModel* phenomeModel,
-		Morphogene* childMorphogene, PhenotypeGenerator* generator,
-		Ogre::Vector3 localChildAnchorDirInRefChild);
 
 private:
 	/**
@@ -102,7 +79,7 @@ private:
 			_Init() {
 				mBoostLogger.add_attribute("ClassName",
 					boost::log::attributes::constant < std::string
-						> ("FSEmbryogenesis"));
+						> ("Embryogenesis"));
 			}
 		} _initializer;
 };

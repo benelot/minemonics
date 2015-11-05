@@ -9,6 +9,7 @@
 class btMultiBody;
 class btMultiBodyDynamicsWorld;
 class CreatureModel;
+class PhenotypeGenerator;
 namespace boost {
 namespace serialization {
 class access;
@@ -57,10 +58,34 @@ public:
 	 */
 	virtual int performEmbryogenesis();
 
+	virtual void calculateChildPositionRelativeToParent(PhenotypeGenerator* generator,
+			btTransform& parentHitTransform, btTransform& childHitTransform,
+			Morphogene* childMorphogene, PhenomeModel* phenomeModel,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild);
+
+	virtual LimbModel* createLimb(PhenotypeGenerator* generator,
+		Morphogene* childMorphogene, PhenomeModel* phenomeModel);
+
+	virtual void appendToParentLimb(PhenomeModel* phenomeModel,
+		LimbModel* childLimb, PhenotypeGenerator* generator,
+		Ogre::Vector3& localParentJointInRefParent,
+		Ogre::Vector3& localChildJointInRefChild,
+		btTransform& parentHitTransform, btTransform& childHitTransform);
+
+	virtual btTransform getParentIntersection(PhenotypeGenerator* generator,
+		LimbPhysics* parentLimb, MorphogeneBranch* parentMorphogeneBranch,
+		Ogre::Vector3 parentLimbCOM,
+		Ogre::Vector3 localParentAnchorDirInRefParent);
+
+	virtual btTransform getOwnIntersection(PhenomeModel* phenomeModel,
+		Morphogene* childMorphogene, PhenotypeGenerator* generator,
+		Ogre::Vector3 localChildAnchorDirInRefChild);
+
 	void generateBody();
 
 	void addJointConstraints();
-	
+
 	/**
 	 * Reset the creature to the way it was born.
 	 */
@@ -190,8 +215,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string
-					> ("PhenomeModel"));
+				boost::log::attributes::constant<std::string>("PhenomeModel"));
 		}
 	} _initializer;
 

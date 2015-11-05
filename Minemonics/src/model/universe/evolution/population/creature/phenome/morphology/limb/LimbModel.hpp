@@ -103,6 +103,8 @@ public:
 
 	virtual void calm();
 
+	virtual void setWorld(btDynamicsWorld* world) = 0;
+
 	//Accessor methods
 	/**
 	 * The the limb physics model of the limb.
