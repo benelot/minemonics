@@ -31,19 +31,29 @@ class JointBt;
 #include <utils/logging/Logger.hpp>
 
 //comment this out to compare with original spring constraint
+
+/** bullet physics cone twist constraint*/
 //#define CONSTRAINT_TYPE btConeTwistConstraint
 //#define EXTRAPARAMS
+
+/** bullet physics point 2 point constraint*/
 //#define MOTOR_TYPE btRotationalLimitMotor
 //#define CONSTRAINT_TYPE btPoint2PointConstraint
 //#define EXTRAPARAMS
 //#define MOTOR_TYPE btRotationalLimitMotor
+
+/** bullet physics 6 degrees of freedom constraint*/
 #define CONSTRAINT_TYPE btGeneric6DofConstraint
 #define EXTRAPARAMS ,true
 #define MOTOR_TYPE btRotationalLimitMotor
+
+/** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
 //#define USE_6DOF2
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
 //#define EXTRAPARAMS
 //#define MOTOR_TYPE btRotationalLimitMotor2
+
+/** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
 //#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
 //#define EXTRAPARAMS ,true
 //#define MOTOR_TYPE btRotationalLimitMotor
@@ -129,6 +139,7 @@ private:
 	} _initializer;
 
 	MOTOR_TYPE* mMotorBt;
+	double mLastPosition;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SRBSERVOMOTOR_H_ */

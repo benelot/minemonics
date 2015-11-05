@@ -124,8 +124,8 @@ void SRBJointModel::setAngularStiffness(const double jointPitchStiffness,
 void SRBJointModel::setAngularDamping(
 	const double springPitchDampingCoefficient,
 	double springYawDampingCoefficient, double springRollDampingCoefficient) {
-//	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-//			springYawDampingCoefficient, springRollDampingCoefficient);
+	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
+			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 bool SRBJointModel::equals(const SRBJointModel& SRBJointModel) const {

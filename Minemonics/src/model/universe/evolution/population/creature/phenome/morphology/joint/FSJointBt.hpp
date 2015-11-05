@@ -79,6 +79,8 @@ public:
 //		const btVector3 maxForces, const btVector3 lowerLimits,
 //		const btVector3 upperLimits);
 
+	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping);
+
 	/**
 	 * Reset the joint to the place when the creature was born.
 	 */

@@ -127,6 +127,11 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
 
+void FSJointBt::setAngularDamping(double jointPitchDamping,
+	double jointYawDamping, double jointRollDamping) {
+	// Not implemented in FS Joint bt
+}
+
 void FSJointBt::setRotationalLimitMotorEnabled(
 	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
 	std::vector<Motor*>::iterator motorIterator = mMotors.begin();

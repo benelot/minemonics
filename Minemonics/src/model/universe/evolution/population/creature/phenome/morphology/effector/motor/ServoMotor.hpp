@@ -70,17 +70,14 @@ public:
 		MOTOR_TYPE* const motorBt, const double maxForce, double lowerLimit,
 		double upperLimit);
 
-	/**
-	 * Clone the servomotor.
-	 * @return The clone of the servo motor.
-	 */
-	ServoMotor* clone();
+	virtual void instantiate(JointPhysics* jointPhysics,
+		const int jointIndex) = 0;
 
 	/**
 	 * Apply the movement of the servomotor on the joint it controls.
 	 * @param timeSinceLastTick
 	 */
-	virtual void apply(double timeSinceLastTick);
+	virtual void apply(double timeSinceLastTick) = 0;
 
 	//Accessor methods
 
@@ -124,7 +121,7 @@ protected:
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 
 	int mJointIndex; /**!< The index of the joint in the whole creature. */
-
+	JointPhysics* mJoint;
 private:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
@@ -138,9 +135,6 @@ private:
 				boost::log::attributes::constant < std::string > ("ServoMotor"));
 		}
 	} _initializer;
-
-private:
-	JointPhysics* mJoint;
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_ */

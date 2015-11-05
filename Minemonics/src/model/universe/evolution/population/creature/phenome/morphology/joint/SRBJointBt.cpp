@@ -73,8 +73,8 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 
 void SRBJointBt::initialize() {
 #ifndef EXCLUDE_FROM_TEST
-	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB
-	EXTRAPARAMS);
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA,
+		mFrameInB EXTRAPARAMS);
 
 //	mJoint->setDamping(10000);
 
@@ -83,6 +83,56 @@ void SRBJointBt::initialize() {
 
 //debug drawing
 	mJoint->setDbgDrawSize(btScalar(5.f));
+
+//#if CONSTRAINT_TYPE == btGeneric6DofConstraint
+//	// 6DOF constraint uses Euler angles and to define limits
+//	// it is assumed that rotational order is :
+//	// Z - first, allowed limits are (-PI,PI);
+//	// new position of Y - second (allowed limits are
+//	// (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+//	// used to prevent constraint from instability on poles;
+//	// new position of X, allowed limits are (-PI,PI);
+//	// So to simulate ODE Universal joint we should use parent
+//	// axis as Z, child axis as Y and limit all other DOFs
+//	// Build the frame in world coordinate system first
+//	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointMinAngle));
+//	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointMaxAngle));
+//
+//	//	add pitch servo motor
+//	((SRBServoMotor*) mMotors[0])->initialize(
+//		mJoint->getRotationalLimitMotor(RDOF_PITCH));
+//
+//	// add yaw servo motor
+//	((SRBServoMotor*) mMotors[1])->initialize(
+//		mJoint->getRotationalLimitMotor(RDOF_YAW));
+//
+//	//add roll servo motor
+//	((SRBServoMotor*) mMotors[2])->initialize(
+//		mJoint->getRotationalLimitMotor(RDOF_ROLL));
+//#elif CONSTRAINT_TYPE == btGeneric6DofSpring2Constraint
+//	mJoint->setDamping(0,jointPitchDamping);
+//	mJoint->setDamping(1,jointYawDamping);
+//	mJoint->setDamping(2,jointRollDamping);
+//#elif CONSTRAINT_TYPE == btGeneric6DofSpringConstraint
+//	mJoint->setDamping(0,jointPitchDamping);
+//	mJoint->setDamping(1,jointYawDamping);
+//	mJoint->setDamping(2,jointRollDamping);
+//#elif CONSTRAINT_TYPE == btPoint2PointConstraint
+//	// no damping available
+//#elif CONSTRAINT_TYPE == btConeTwistConstraint
+//	mJoint->setLimit(mJointMaxAngle.x - mJointMinAngle.x,
+//		mJointMaxAngle.y - mJointMinAngle.y,
+//		mJointMaxAngle.z - mJointMinAngle.z);
+//
+//	//	add pitch servo motor
+//	((SRBServoMotor*) mMotors[0])->initialize(NULL);
+//
+//	// add yaw servo motor
+//	((SRBServoMotor*) mMotors[1])->initialize(NULL);
+//
+//	//add roll servo motor
+//	((SRBServoMotor*) mMotors[2])->initialize(NULL);
+//#endif
 
 	// 6DOF constraint uses Euler angles and to define limits
 	// it is assumed that rotational order is :
@@ -137,7 +187,6 @@ void SRBJointBt::update(double timeSinceLastTick) {
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			//TODO:Reenable motors when interpenetration problems are fixed.
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
@@ -199,6 +248,25 @@ void SRBJointBt::reset(const Ogre::Vector3 position) {
 
 void SRBJointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
+}
+
+void SRBJointBt::setAngularDamping(double jointPitchDamping,
+	double jointYawDamping, double jointRollDamping) {
+#if CONSTRAINT_TYPE == btGeneric6DofConstraint
+	// no damping available
+#elif CONSTRAINT_TYPE == btGeneric6DofSpring2Constraint
+	mJoint->setDamping(0,jointPitchDamping);
+	mJoint->setDamping(1,jointYawDamping);
+	mJoint->setDamping(2,jointRollDamping);
+#elif CONSTRAINT_TYPE == btGeneric6DofSpringConstraint
+	mJoint->setDamping(0,jointPitchDamping);
+	mJoint->setDamping(1,jointYawDamping);
+	mJoint->setDamping(2,jointRollDamping);
+#elif CONSTRAINT_TYPE == btPoint2PointConstraint
+	// no damping available
+#elif CONSTRAINT_TYPE == btConeTwistConstraint
+	mJoint->setDamping(jointPitchDamping);
+#endif
 }
 
 void SRBJointBt::setRotationalLimitMotorEnabled(

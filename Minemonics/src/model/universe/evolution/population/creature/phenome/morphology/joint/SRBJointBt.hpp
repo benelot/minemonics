@@ -35,14 +35,24 @@ class Motor;
 //## utils headers
 
 //comment this out to compare with original spring constraint
+
+/** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
 //#define CONSTRAINT_TYPE btConeTwistConstraint
 //#define EXTRAPARAMS
+
+/** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
 //#define CONSTRAINT_TYPE btPoint2PointConstraint
-////#define EXTRAPARAMS
+//#define EXTRAPARAMS
+
+/** bullet physics 6 degrees of freedom constraint - A 6 Dof joint with generic limits*/
 #define CONSTRAINT_TYPE btGeneric6DofConstraint
 #define EXTRAPARAMS ,true
+
+/** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
 //#define EXTRAPARAMS
+
+/** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
 //#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
 //#define EXTRAPARAMS ,true
 
@@ -80,6 +90,8 @@ public:
 	virtual double getJointPos(int jointIndex,int jointAxisIndex);
 
 	virtual double getJointVel(int jointIndex,int jointAxisIndex);
+
+	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping);
 
 	/**
 	 * Initialize the rotational limit motors.

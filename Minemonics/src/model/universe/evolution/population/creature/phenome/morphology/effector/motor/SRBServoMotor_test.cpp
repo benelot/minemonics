@@ -18,7 +18,7 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		servoMotor = new ServoMotor();
+		servoMotor = new SRBServoMotor();
 		servoMotor->initialize(JointPhysics::RDOF_PITCH, NULL,
 			randomness->nextUnifDouble(1, 10),
 			randomness->nextUnifDouble(0, 10),
@@ -41,13 +41,13 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		servoMotor = new ServoMotor();
+		servoMotor = new SRBServoMotor();
 		servoMotor->initialize(JointPhysics::RDOF_PITCH, NULL,
 			randomness->nextUnifDouble(1, 10),
 			randomness->nextUnifDouble(0, 10),
 			randomness->nextUnifDouble(0, 10));
 
-		servoMotor2 = new ServoMotor();
+		servoMotor2 = new SRBServoMotor();
 
 		SaveController < ServoMotor > saveController;
 

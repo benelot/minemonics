@@ -87,8 +87,8 @@ void JointModel::setAngularStiffness(const double jointPitchStiffness,
 
 void JointModel::setAngularDamping(const double springPitchDampingCoefficient,
 	double springYawDampingCoefficient, double springRollDampingCoefficient) {
-//	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-//			springYawDampingCoefficient, springRollDampingCoefficient);
+	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
+			springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 bool JointModel::equals(const JointModel& jointModel) const {

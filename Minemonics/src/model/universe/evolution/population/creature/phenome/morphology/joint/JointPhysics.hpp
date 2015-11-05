@@ -113,6 +113,8 @@ public:
 		mInWorld = false;
 	}
 
+	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping) = 0;
+
 	virtual void applyJointTorque(int jointIndex, int jointAxisIndex,
 		double torque) = 0;
 
