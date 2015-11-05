@@ -1,5 +1,5 @@
-#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_
-#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_
+#ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_
+#define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_
 
 //# corresponding header
 #include <configuration/Definitions.hpp>
@@ -30,7 +30,7 @@ class MorphogeneBranch;
 #include <utils/logging/Logger.hpp>
 
 /**
- * @brief		The FSEmbryogenesis builds a phenotype according to the specification in the genotype.
+ * @brief		The Embryogenesis builds a phenotype according to the specification in the genotype.
  * @details		Details
  * @date		2015-05-20
  * @author		Benjamin Ellenberger
@@ -84,4 +84,4 @@ private:
 		} _initializer;
 };
 
-#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_FSEMBRYOGENESIS_HPP_ */
+#endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_GENETICS_EMBRYOGENESIS_EMBRYOGENESIS_HPP_ */
