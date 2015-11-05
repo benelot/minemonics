@@ -21,6 +21,23 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+Morphogene::Morphogene(Ogre::Vector3 position, Ogre::Quaternion orientation,
+	Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
+	LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
+	double friction, double restitution, bool intraBodyColliding) :
+	mColorR(color.r), mColorG(color.g), mColorB(color.b), mPrimitiveType(
+		primitiveType), mControllerGene(
+	NULL), mFollowUpGene(-1), mJointAnchorX(anchorDirection.x), mJointAnchorY(
+		anchorDirection.y), mJointAnchorZ(anchorDirection.z), mJointPitch(
+		anchorOrientation.pitch().valueRadians()), mJointYaw(anchorOrientation.yaw().valueRadians()), mJointRoll(
+		anchorOrientation.roll().valueRadians()), mSegmentShrinkFactor(1), mRepetitionLimit(0), mX(
+		position.x), mY(position.y), mZ(position.z), mOrientationW(
+		orientation.w), mOrientationX(orientation.x), mOrientationY(
+		orientation.y), mOrientationZ(orientation.z), mRestitution(restitution), mFriction(
+		friction), mIntraBodyColliding(intraBodyColliding) {
+
+}
+
 Morphogene::Morphogene() :
 	mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(LimbPhysics::UNKNOWN), mControllerGene(
 	NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
@@ -102,9 +119,9 @@ void Morphogene::initialize(const double branchiness) {
 	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION; /**!< Set the friction */
 
 	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector();
-	mJointAnchorX = anchorVector.x;// Set joint anchor X, Y and Z, where the anchor lies in the center of mass
-	mJointAnchorY = anchorVector.y;// and the X, Y and Z form a vector, pointing to the point on the surface where
-	mJointAnchorZ = anchorVector.z;// the joint will be attached. The vector contains three values between -1 and 1.
+	mJointAnchorX = anchorVector.x; // Set joint anchor X, Y and Z, where the anchor lies in the center of mass
+	mJointAnchorY = anchorVector.y; // and the X, Y and Z form a vector, pointing to the point on the surface where
+	mJointAnchorZ = anchorVector.z; // the joint will be attached. The vector contains three values between -1 and 1.
 
 	//The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
 	mJointYaw = Randomness::getSingleton()->nextUnifDouble(
@@ -140,6 +157,7 @@ void Morphogene::initialize(const double branchiness) {
 		mGeneBranches.push_back(branch);
 	}
 
+	//TODO: How to change from one controller gene to another? Also make it react differently depending on the type of gene
 	// create an instance of the sine controller gene for the morphogene.
 	mControllerGene = new SineControllerGene();
 	mControllerGene->initialize();
@@ -301,7 +319,7 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) { 	/**!< Compare morphogene branches */
+	if (mGeneBranches.size() != morphoGene.mGeneBranches.size()) { /**!< Compare morphogene branches */
 		return false;
 	}
 

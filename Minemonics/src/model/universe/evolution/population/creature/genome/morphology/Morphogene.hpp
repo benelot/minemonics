@@ -20,6 +20,7 @@ class access;
 
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
@@ -37,6 +38,7 @@ class access;
 
 //## view headers
 //## utils headers
+#include <utils/ogre3D/Euler.hpp>
 
 /**
  * @brief A gene is part of the complete genome of a creature. It encodes for a certain
@@ -48,6 +50,10 @@ class access;
  */
 class Morphogene: public Gene {
 public:
+	Morphogene(Ogre::Vector3 position, Ogre::Quaternion orientation,
+		Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
+		LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
+		double friction, double restitution, bool intraBodyColliding);
 	Morphogene();
 	Morphogene(const Morphogene& morphoGene);
 

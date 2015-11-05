@@ -61,7 +61,7 @@ public:
 	CreatureModel();
 	CreatureModel(PopulationModel* const populationModel,
 		const PhysicsController::PhysicsModelType physicsModelType,
-		const Ogre::Vector3 position, const double branchiness);
+		const Ogre::Vector3 position);
 	CreatureModel(const CreatureModel& creatureModel);
 
 	virtual ~CreatureModel();
@@ -129,6 +129,10 @@ public:
 	}
 
 	void calm();
+
+	void createRandomGenome(const double branchiness){
+		mGenotype.createRandomGenome(branchiness); //generate random genome for the creature
+	};
 
 	/**
 	 * Compare the creature model to another creature model.

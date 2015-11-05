@@ -264,6 +264,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/ModelLegBuilder.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/Genome.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/Genome.cpp</location>
@@ -1067,6 +1072,11 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/CreatureModel.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/ModelLegBuilder.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/Genome.hpp</name>
@@ -2009,6 +2019,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/ModelLegBuilder.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/Genome.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/genome/Genome.cpp</location>
@@ -2567,6 +2582,11 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/CreatureModel.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/ModelLegBuilder.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/Genome.hpp</name>

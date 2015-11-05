@@ -32,7 +32,7 @@ CreatureModel::CreatureModel() :
 
 CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	const PhysicsController::PhysicsModelType physicsModelType,
-	const Ogre::Vector3 position, const double branchiness) :
+	const Ogre::Vector3 position) :
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
 		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
 		position), mFitnessScoreCalculated(false), mPosition(position),mDynasty(0) {
@@ -42,8 +42,6 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 #endif
 	NameGenerator nameGenerator; //set first name of creature
 	mFirstName = nameGenerator.generateFirstName();
-
-	mGenotype.createRandomGenome(branchiness); //generate random genome for the creature
 
 	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
 	case PhysicsController::FeatherstoneModel:

@@ -30,7 +30,8 @@ protected:
 			PhysicsController::FeatherstoneModel);
 		physicsController->initialize();
 		creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
-			Ogre::Vector3(0, 0, 0), 30);
+			Ogre::Vector3(0, 0, 0));
+		creature->createRandomGenome(30);
 		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize();
 		creature->performEmbryogenesis();
@@ -59,7 +60,8 @@ protected:
 			PhysicsController::FeatherstoneModel);
 		physicsController->initialize();
 		creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
-			Ogre::Vector3(0, 0, 0), 30);
+			Ogre::Vector3(0, 0, 0));
+		creature->createRandomGenome(30);
 		creature->setWorld(physicsController->getDynamicsWorld());
 		creature->initialize();
 		creature->performEmbryogenesis();

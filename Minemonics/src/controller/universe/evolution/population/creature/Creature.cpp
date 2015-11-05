@@ -28,7 +28,8 @@ Creature::Creature(Population* const population,
 	const Ogre::Vector3 position, const double branchiness) {
 	// set up the creature model
 	mCreatureModel = new CreatureModel(population->getPopulationModel(),
-		physicsModelType, position, branchiness);
+		physicsModelType, position);
+	mCreatureModel->createRandomGenome(branchiness);
 	mCreatureModel->initialize();
 
 	// set up the phenotype

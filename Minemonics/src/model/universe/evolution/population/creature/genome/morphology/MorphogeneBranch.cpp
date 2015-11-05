@@ -21,6 +21,30 @@
 
 #define UNIV_EPS 0.01f
 
+MorphogeneBranch::MorphogeneBranch(Ogre::Vector3 anchorPosition,
+	Ogre::Euler anchorOrientation, Ogre::Vector3 jointMinAngle,
+	Ogre::Vector3 jointMaxAngle) :
+	mBranchGeneType(-1), mFlipped(false), mJointAnchorX(anchorPosition.x), mJointAnchorY(
+		anchorPosition.y), mJointAnchorZ(anchorPosition.z), mJointPitch(
+		anchorOrientation.pitch().valueRadians()), mJointYaw(
+		anchorOrientation.yaw().valueRadians()), mJointRoll(
+		anchorOrientation.roll().valueRadians()), mJointPitchMinAngle(
+		jointMinAngle.x), mJointPitchMaxAngle(jointMaxAngle.x), mJointYawMinAngle(
+		jointMinAngle.y), mJointYawMaxAngle(jointMaxAngle.y), mJointRollMinAngle(
+		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(0), mSpringPitchDampingCoefficient(
+		0), mJointPitchStiffness(0), mSpringYawDampingCoefficient(0), mJointYawStiffness(
+		0), mSpringRollDampingCoefficient(0), mJointRollStiffness(0), mJointPitchMotorEnabled(
+		false), mJointYawMotorEnabled(false), mJointRollMotorEnabled(false), mJointMaxPitchForce(
+		0), mJointMaxPitchSpeed(0), mJointMaxYawForce(0), mJointMaxYawSpeed(0), mJointMaxRollForce(
+		0), mJointMaxRollSpeed(0), mJointPitchXOffset(0), mJointPitchYOffset(0), mJointPitchAmplitude(
+		0), mJointPitchFrequency(0), mJointYawXOffset(0), mJointYawYOffset(0), mJointYawAmplitude(
+		0), mJointYawFrequency(0), mJointRollXOffset(0), mJointRollYOffset(0), mJointRollAmplitude(
+		0), mJointRollFrequency(0), mJointPitchEnabled(true), mJointYawEnabled(
+		true), mJointRollEnabled(true), mJointType(JointPhysics::HINGE_JOINT), mJointPitchAxisX(
+		1), mJointPitchAxisY(1), mJointPitchAxisZ(1) {
+
+}
+
 MorphogeneBranch::MorphogeneBranch() :
 	mBranchGeneType(-1), mFlipped(false), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 		0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mJointPitchMinAngle(0), mJointPitchMaxAngle(

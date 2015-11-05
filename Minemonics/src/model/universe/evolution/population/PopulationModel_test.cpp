@@ -32,7 +32,8 @@ protected:
 		population->initialize();
 		for (int i = 0; i < 30; ++i) {
 			CreatureModel* creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
-				Ogre::Vector3(0, 0, 0), 30);
+				Ogre::Vector3(0, 0, 0));
+			creature->createRandomGenome(30);
 			creature->setWorld(physicsController->getDynamicsWorld());
 			creature->initialize();
 			creature->performEmbryogenesis();
@@ -66,7 +67,8 @@ protected:
 		population->initialize();
 		for (int i = 0; i < 30; ++i) {
 			CreatureModel* creature = new CreatureModel(NULL, PhysicsController::FeatherstoneModel,
-				Ogre::Vector3(0, 0, 0), 30);
+				Ogre::Vector3(0, 0, 0));
+			creature->createRandomGenome(30);
 			creature->setWorld(physicsController->getDynamicsWorld());
 			creature->initialize();
 			creature->performEmbryogenesis();

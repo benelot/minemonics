@@ -14,6 +14,7 @@ class access;
 
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
@@ -29,6 +30,7 @@ class access;
 
 //## view headers
 //## utils headers
+#include <utils/ogre3D/Euler.hpp>
 
 /**
  * @brief		The morphogene branch defines how a certain morphogene class branches into another class.
@@ -38,6 +40,9 @@ class access;
  */
 class MorphogeneBranch: public GeneBranch {
 public:
+	MorphogeneBranch(Ogre::Vector3 anchorPosition,
+		Ogre::Euler anchorOrientation, Ogre::Vector3 jointMinAngle,
+		Ogre::Vector3 jointMaxAngle);
 	MorphogeneBranch();
 	MorphogeneBranch(const MorphogeneBranch& morphogeneBranch);
 

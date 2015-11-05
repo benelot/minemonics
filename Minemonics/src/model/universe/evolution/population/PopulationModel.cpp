@@ -14,6 +14,7 @@
 //## controller headers
 //## model headers
 #include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp>
 
 //## view headers
 //## utils headers
@@ -21,14 +22,14 @@
 
 PopulationModel::PopulationModel() :
 	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(
-	NULL), mOutOfSync(false), mCurrentGeneration(0) {
+	NULL), mOutOfSync(false), mCurrentGeneration(0),mDynastyQty(0) {
 
 }
 
 PopulationModel::PopulationModel(PlanetModel* const planetModel,
 	const int creatureQty) :
 	mCreatureQty(creatureQty), mCurrentCreatureIndex(0), mPlanetModel(
-		planetModel), mOutOfSync(false), mCurrentGeneration(0) {
+		planetModel), mOutOfSync(false), mCurrentGeneration(0),mDynastyQty(0) {
 }
 
 PopulationModel::PopulationModel(PlanetModel* const planetModel,
@@ -51,6 +52,7 @@ PopulationModel::PopulationModel(const PopulationModel& populationModel) :
 	mCreatureQty = populationModel.mCreatureQty;
 	mCurrentCreatureIndex = populationModel.mCurrentCreatureIndex;
 	mCurrentGeneration = populationModel.mCurrentGeneration;
+	mDynastyQty = populationModel.mDynastyQty;
 
 	for (std::vector<CreatureModel*>::const_iterator cit =
 		populationModel.getCreatureModels().begin();
@@ -85,7 +87,10 @@ void PopulationModel::addNewMember(const double branchiness,
 //	Creature* creature = new Snake(this,15,OgreBulletUtils::convert(rootPosition));
 //	Creature* creature = new RagDoll(this,10,OgreBulletUtils::convert(rootPosition));
 	CreatureModel* creatureModel = new CreatureModel(this,
-		mPlanetModel->getPhysicsModelType(), rootPosition, branchiness);
+		mPlanetModel->getPhysicsModelType(), rootPosition);
+
+//	ModelLegBuilder::build(&creatureModel->getGenotype());
+	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
 	creatureModel->setDynasty(mDynastyQty);
 	mDynastyQty++;

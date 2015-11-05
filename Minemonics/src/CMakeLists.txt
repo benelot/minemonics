@@ -53,6 +53,9 @@ set(MODELHDRS
 	./model/universe/evolution/population/PopulationModel.hpp
 	./model/universe/evolution/population/creature/CreatureModel.hpp
 	
+	## model organism builders
+	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp
+	
 	## genome
 	./model/universe/evolution/population/creature/genome/Genome.hpp
 	./model/universe/evolution/population/creature/genome/DirectGenome.hpp
@@ -141,6 +144,9 @@ set(MODELSRCS
 	./model/universe/evolution/CreatureFitnessScoreComparator.cpp
 	./model/universe/evolution/population/PopulationModel.cpp
 	./model/universe/evolution/population/creature/CreatureModel.cpp
+	
+	## model organism builders
+	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp
 	
 	## genome
 	./model/universe/evolution/population/creature/genome/Genome.cpp
