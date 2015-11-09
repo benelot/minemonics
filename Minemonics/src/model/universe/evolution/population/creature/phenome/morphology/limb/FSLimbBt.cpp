@@ -129,7 +129,7 @@ void FSLimbBt::initialize() {
 				btScalar(mDimensions.y));
 			break;
 		case LimbPhysics::UNKNOWN:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << " LimbBt received 'Unknown' as a limb type.\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " LimbBt received 'Unknown' as a limb type.\n";
 			exit(-1);
 		}
 
@@ -178,8 +178,8 @@ btTransform FSLimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 
 btTransform FSLimbBt::getPreciseIntersection(const btVector3 origin,
 	const btVector3 direction) {
-	btVector3 rayStart = origin + direction.normalized() * 100.0f;// the ray caster currently only finds the intersection
-	btVector3 rayEnd = origin;// when hitting the forward face of a triangle therefore, the ray has to come from the outside of the shape
+	btVector3 rayStart = origin + direction.normalized() * 100.0f; // the ray caster currently only finds the intersection
+	btVector3 rayEnd = origin; // when hitting the forward face of a triangle therefore, the ray has to come from the outside of the shape
 
 #ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
@@ -219,13 +219,14 @@ btTransform FSLimbBt::getPreciseIntersection(const btVector3 origin,
 #endif
 	}
 
-	btTransform hitTransform;
-	hitTransform.setIdentity();
-	hitTransform.setOrigin(hitPosition);
+	btTransform hitLocation;
+	hitLocation.setIdentity();
+	hitLocation.setOrigin(hitPosition); // set the hit position
+
 	Ogre::Euler euler(0, 0, 0);
 	euler.direction(OgreBulletUtils::convert(hitNormal));
-	hitTransform.setRotation(OgreBulletUtils::convert(euler.toQuaternion()));
-	return hitTransform;
+	hitLocation.setRotation(OgreBulletUtils::convert(euler.toQuaternion())); // set the hit direction to the surface normal
+	return hitLocation;
 }
 
 btVector3 FSLimbBt::getLocalFakeIntersection(const btVector3 origin,
@@ -235,9 +236,10 @@ btVector3 FSLimbBt::getLocalFakeIntersection(const btVector3 origin,
 
 btTransform FSLimbBt::getLocalIntersection(const btVector3 origin,
 	const btVector3 direction) {
-	btTransform intersection = getLocalPreciseIntersection(origin, direction);
-	if (intersection.getOrigin().isZero()) {
-		intersection.setOrigin(getLocalFakeIntersection(origin, direction));
+	btTransform intersection = getLocalPreciseIntersection(origin, direction); // find local precise intersection
+
+	if (intersection.getOrigin().isZero()) { // if the local precise intersection can not be found
+		intersection.setOrigin(getLocalFakeIntersection(origin, direction)); // we use a local maximum distance to surface estimate
 	}
 	return intersection;
 }
@@ -350,7 +352,7 @@ void FSLimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
 		btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
 	mLink->setUserPointer(limbModel); //Set user pointer for proper return of creature/limb information etc..
-	mCollisionShape->setUserPointer(limbModel); 	//add the limbModel pointer to the collision shape to get it back if we raycast for this object.
+	mCollisionShape->setUserPointer(limbModel); //add the limbModel pointer to the collision shape to get it back if we raycast for this object.
 }
 
 bool FSLimbBt::equals(const FSLimbBt& limbBt) const {

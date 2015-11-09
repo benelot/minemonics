@@ -19,7 +19,9 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
+#ifndef UNIV_EPS
 #define UNIV_EPS 0.01f
+#endif
 
 MorphogeneBranch::MorphogeneBranch(Ogre::Vector3 anchorPosition,
 	Ogre::Euler anchorOrientation, Ogre::Vector3 jointMinAngle,

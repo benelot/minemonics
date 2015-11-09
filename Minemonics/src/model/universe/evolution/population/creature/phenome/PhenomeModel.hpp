@@ -64,28 +64,27 @@ public:
 	 */
 	virtual int performEmbryogenesis() = 0;
 
-	virtual void calculateChildPositionRelativeToParent(PhenotypeGenerator* generator,
-			btTransform& parentHitTransform, btTransform& childHitTransform,
-			Morphogene* childMorphogene, PhenomeModel* phenomeModel,
+	virtual void calculateChildPositionRelativeToParent(
+		PhenotypeGenerator* generator, btTransform& parentJointAnchor,
+		btTransform& childJointAnchor, Morphogene* childMorphogene,
 		Ogre::Vector3& localParentJointInRefParent,
 		Ogre::Vector3& localChildJointInRefChild) = 0;
 
 	virtual LimbModel* createLimb(PhenotypeGenerator* generator,
-		Morphogene* childMorphogene, PhenomeModel* phenomeModel) = 0;
+		Morphogene* childMorphogene) = 0;
 
-	virtual void appendToParentLimb(PhenomeModel* phenomeModel,
-		LimbModel* childLimb, PhenotypeGenerator* generator,
+	virtual void appendToParentLimb(LimbModel* childLimb,
+		PhenotypeGenerator* generator,
 		Ogre::Vector3& localParentJointInRefParent,
 		Ogre::Vector3& localChildJointInRefChild,
 		btTransform& parentHitTransform, btTransform& childHitTransform) = 0;
 
-	virtual btTransform getParentIntersection(PhenotypeGenerator* generator,
-		LimbPhysics* parentLimb, MorphogeneBranch* parentMorphogeneBranch,
-		Ogre::Vector3 parentLimbCOM,
+	virtual btTransform getParentIntersection(LimbPhysics* parentLimb,
+		MorphogeneBranch* parentMorphogeneBranch, Ogre::Vector3 parentLimbCOM,
 		Ogre::Vector3 localParentAnchorDirInRefParent) = 0;
 
-	virtual btTransform getOwnIntersection(PhenomeModel* phenomeModel,
-		Morphogene* childMorphogene, PhenotypeGenerator* generator,
+	virtual btTransform getOwnIntersection(Morphogene* childMorphogene,
+		PhenotypeGenerator* generator,
 		Ogre::Vector3 localChildAnchorDirInRefChild) = 0;
 
 	/**

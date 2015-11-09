@@ -3,7 +3,7 @@
 
 //# corresponding headers
 //# forward declarations
-class Genome;
+class MixedGenome;
 
 //# system headers
 //## controller headers
@@ -28,7 +28,7 @@ public:
 	ModelLegBuilder();
 	virtual ~ModelLegBuilder();
 
-	static void build(Genome* genome);
+	static void build(MixedGenome* genome);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_MODELORGANISM_MODELLEG_MODELLEGBUILDER_HPP_ */

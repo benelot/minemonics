@@ -43,7 +43,7 @@ PhenomeModel::PhenomeModel() :
 
 PhenomeModel::PhenomeModel(CreatureModel* const creatureModel) :
 	mCreatureModel(creatureModel), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
-		false),mBodyGenerated(false) {
+		false), mBodyGenerated(false) {
 }
 
 PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
@@ -78,8 +78,8 @@ PhenomeModel::PhenomeModel(const PhenomeModel& phenomeModel) {
 
 PhenomeModel::~PhenomeModel() {
 
-	for (std::vector<ComponentModel*>::const_iterator cit = mComponentModels.begin();
-		cit != mComponentModels.end(); cit++) {
+	for (std::vector<ComponentModel*>::const_iterator cit =
+		mComponentModels.begin(); cit != mComponentModels.end(); cit++) {
 		delete (*cit);
 	}
 
