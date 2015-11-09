@@ -50,7 +50,7 @@ class access;
  */
 class Morphogene: public Gene {
 public:
-	Morphogene(Ogre::Vector3 position, Ogre::Quaternion orientation,
+	Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
 		Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
 		LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
 		double friction, double restitution, bool intraBodyColliding);

@@ -14,6 +14,10 @@
 //## view headers
 //## utils headers
 
+Gene::Gene(GeneType geneType) :
+		mType(geneType) {
+}
+
 Gene::Gene() :
 		mType(NUM_GENES) {
 }

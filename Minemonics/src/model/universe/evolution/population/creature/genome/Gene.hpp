@@ -35,13 +35,14 @@ class access;
  */
 class Gene {
 public:
-	Gene();
-	virtual ~Gene();
-
 	enum GeneType { /**!< The type of the gene */
 		MorphoGene,  //!< MorphoGene
 		NUM_GENES
 	};
+
+	Gene();
+	Gene(GeneType geneType);
+	virtual ~Gene();
 
 	/**
 	 * Initializes the gene with a gene type.

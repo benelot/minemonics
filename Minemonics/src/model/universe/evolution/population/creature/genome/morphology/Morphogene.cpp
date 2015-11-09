@@ -21,17 +21,18 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-Morphogene::Morphogene(Ogre::Vector3 position, Ogre::Quaternion orientation,
+Morphogene::Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
 	Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
 	LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
 	double friction, double restitution, bool intraBodyColliding) :
-	mColorR(color.r), mColorG(color.g), mColorB(color.b), mPrimitiveType(
-		primitiveType), mControllerGene(
+	Gene(Gene::MorphoGene), mColorR(color.r), mColorG(color.g), mColorB(
+		color.b), mPrimitiveType(primitiveType), mControllerGene(
 	NULL), mFollowUpGene(-1), mJointAnchorX(anchorDirection.x), mJointAnchorY(
 		anchorDirection.y), mJointAnchorZ(anchorDirection.z), mJointPitch(
-		anchorOrientation.pitch().valueRadians()), mJointYaw(anchorOrientation.yaw().valueRadians()), mJointRoll(
-		anchorOrientation.roll().valueRadians()), mSegmentShrinkFactor(1), mRepetitionLimit(0), mX(
-		position.x), mY(position.y), mZ(position.z), mOrientationW(
+		anchorOrientation.pitch().valueRadians()), mJointYaw(
+		anchorOrientation.yaw().valueRadians()), mJointRoll(
+		anchorOrientation.roll().valueRadians()), mSegmentShrinkFactor(1), mRepetitionLimit(
+		0), mX(dimensions.x), mY(dimensions.y), mZ(dimensions.z), mOrientationW(
 		orientation.w), mOrientationX(orientation.x), mOrientationY(
 		orientation.y), mOrientationZ(orientation.z), mRestitution(restitution), mFriction(
 		friction), mIntraBodyColliding(intraBodyColliding) {
@@ -39,7 +40,8 @@ Morphogene::Morphogene(Ogre::Vector3 position, Ogre::Quaternion orientation,
 }
 
 Morphogene::Morphogene() :
-	mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(LimbPhysics::UNKNOWN), mControllerGene(
+	Gene(Gene::MorphoGene), mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
+		LimbPhysics::UNKNOWN), mControllerGene(
 	NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
 		0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
 		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
@@ -48,12 +50,15 @@ Morphogene::Morphogene() :
 
 }
 
-Morphogene::Morphogene(const Morphogene& morphoGene) {
+Morphogene::Morphogene(const Morphogene& morphoGene) :
+	Gene(Gene::MorphoGene) {
 	mColorB = morphoGene.mColorB;
 	mColorG = morphoGene.mColorG;
 	mColorR = morphoGene.mColorR;
 
-	mControllerGene = morphoGene.mControllerGene->clone();
+	if (morphoGene.mControllerGene) {
+		mControllerGene = morphoGene.mControllerGene->clone();
+	}
 	mFollowUpGene = morphoGene.mFollowUpGene;
 	mType = morphoGene.mType;
 	mJointAnchorX = morphoGene.mJointAnchorX;
