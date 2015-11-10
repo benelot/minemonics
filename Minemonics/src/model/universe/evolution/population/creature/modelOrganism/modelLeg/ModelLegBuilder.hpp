@@ -25,9 +25,6 @@ class MixedGenome;
  */
 class ModelLegBuilder {
 public:
-	ModelLegBuilder();
-	virtual ~ModelLegBuilder();
-
 	static void build(MixedGenome* genome);
 };
 

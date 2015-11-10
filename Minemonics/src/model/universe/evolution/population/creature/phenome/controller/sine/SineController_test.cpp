@@ -19,8 +19,8 @@ class SineControllerTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
 		// Set up an object of the class you want to test
-		sineController = new SineController();
-		sineController->initialize(AMPLITUDE, FREQUENCY, 0, 0);
+		sineController = new SineController(AMPLITUDE, FREQUENCY, 0, 0);
+		sineController->initialize();
 	}
 
 	virtual void TearDown() {
@@ -34,8 +34,8 @@ protected:
 class SineControllerSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		sineController = new SineController();
-		sineController->initialize(AMPLITUDE, FREQUENCY, 0, 0);
+		sineController = new SineController(AMPLITUDE, FREQUENCY, 0, 0);
+		sineController->initialize();
 
 		sineController2 = new SineController();
 

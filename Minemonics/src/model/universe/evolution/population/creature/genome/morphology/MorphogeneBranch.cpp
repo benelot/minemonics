@@ -25,7 +25,7 @@
 
 MorphogeneBranch::MorphogeneBranch(Ogre::Vector3 anchorPosition,
 	Ogre::Euler anchorOrientation, Ogre::Vector3 jointMinAngle,
-	Ogre::Vector3 jointMaxAngle) :
+	Ogre::Vector3 jointMaxAngle, Ogre::Vector3 pitchAxis) :
 	mBranchGeneType(-1), mFlipped(false), mJointAnchorX(anchorPosition.x), mJointAnchorY(
 		anchorPosition.y), mJointAnchorZ(anchorPosition.z), mJointPitch(
 		anchorOrientation.pitch().valueRadians()), mJointYaw(
@@ -33,17 +33,12 @@ MorphogeneBranch::MorphogeneBranch(Ogre::Vector3 anchorPosition,
 		anchorOrientation.roll().valueRadians()), mJointPitchMinAngle(
 		jointMinAngle.x), mJointPitchMaxAngle(jointMaxAngle.x), mJointYawMinAngle(
 		jointMinAngle.y), mJointYawMaxAngle(jointMaxAngle.y), mJointRollMinAngle(
-		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(0), mSpringPitchDampingCoefficient(
+		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(0), mJointPitchEnabled(
+		true), mJointYawEnabled(true), mJointRollEnabled(true), mSpringPitchDampingCoefficient(
 		0), mJointPitchStiffness(0), mSpringYawDampingCoefficient(0), mJointYawStiffness(
-		0), mSpringRollDampingCoefficient(0), mJointRollStiffness(0), mJointPitchMotorEnabled(
-		false), mJointYawMotorEnabled(false), mJointRollMotorEnabled(false), mJointMaxPitchForce(
-		0), mJointMaxPitchSpeed(0), mJointMaxYawForce(0), mJointMaxYawSpeed(0), mJointMaxRollForce(
-		0), mJointMaxRollSpeed(0), mJointPitchXOffset(0), mJointPitchYOffset(0), mJointPitchAmplitude(
-		0), mJointPitchFrequency(0), mJointYawXOffset(0), mJointYawYOffset(0), mJointYawAmplitude(
-		0), mJointYawFrequency(0), mJointRollXOffset(0), mJointRollYOffset(0), mJointRollAmplitude(
-		0), mJointRollFrequency(0), mJointPitchEnabled(true), mJointYawEnabled(
-		true), mJointRollEnabled(true), mJointType(JointPhysics::HINGE_JOINT), mJointPitchAxisX(
-		1), mJointPitchAxisY(1), mJointPitchAxisZ(1) {
+		0), mSpringRollDampingCoefficient(0), mJointRollStiffness(0), mJointType(
+		JointPhysics::HINGE_JOINT), mJointPitchAxisX(pitchAxis.x), mJointPitchAxisY(
+		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z) {
 
 }
 
@@ -53,19 +48,20 @@ MorphogeneBranch::MorphogeneBranch() :
 		0), mJointYawMinAngle(0), mJointYawMaxAngle(0), mJointRollMinAngle(0), mJointRollMaxAngle(
 		0), mMirrored(0), mSpringPitchDampingCoefficient(0), mJointPitchStiffness(
 		0), mSpringYawDampingCoefficient(0), mJointYawStiffness(0), mSpringRollDampingCoefficient(
-		0), mJointRollStiffness(0), mJointPitchMotorEnabled(false), mJointYawMotorEnabled(
-		false), mJointRollMotorEnabled(false), mJointMaxPitchForce(0), mJointMaxPitchSpeed(
-		0), mJointMaxYawForce(0), mJointMaxYawSpeed(0), mJointMaxRollForce(0), mJointMaxRollSpeed(
-		0), mJointPitchXOffset(0), mJointPitchYOffset(0), mJointPitchAmplitude(
-		0), mJointPitchFrequency(0), mJointYawXOffset(0), mJointYawYOffset(0), mJointYawAmplitude(
-		0), mJointYawFrequency(0), mJointRollXOffset(0), mJointRollYOffset(0), mJointRollAmplitude(
-		0), mJointRollFrequency(0), mJointPitchEnabled(true), mJointYawEnabled(
-		true), mJointRollEnabled(true), mJointType(JointPhysics::HINGE_JOINT), mJointPitchAxisX(
-		1), mJointPitchAxisY(1), mJointPitchAxisZ(1) {
+		0), mJointRollStiffness(0), mJointType(JointPhysics::HINGE_JOINT), mJointPitchAxisX(
+		1), mJointPitchAxisY(1), mJointPitchAxisZ(1), mJointPitchEnabled(true), mJointYawEnabled(
+		true), mJointRollEnabled(true) {
 
 }
 
 MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
+
+	for (std::vector<ControllerGene*>::const_iterator mgbit =
+		morphogeneBranch.mControllerGenes.begin();
+		mgbit != morphogeneBranch.mControllerGenes.end(); mgbit++) {
+		mControllerGenes.push_back((*mgbit)->clone());
+	}
+
 	mActive = morphogeneBranch.mActive;
 	mBranchGeneType = morphogeneBranch.mBranchGeneType;
 	mFlipped = morphogeneBranch.mFlipped;
@@ -73,27 +69,22 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 	mJointAnchorX = morphogeneBranch.mJointAnchorX;
 	mJointAnchorY = morphogeneBranch.mJointAnchorY;
 	mJointAnchorZ = morphogeneBranch.mJointAnchorZ;
-	mJointMaxPitchForce = morphogeneBranch.mJointMaxPitchForce;
-	mJointMaxPitchSpeed = morphogeneBranch.mJointMaxPitchSpeed;
-	mJointMaxRollForce = morphogeneBranch.mJointMaxRollForce;
-	mJointMaxRollSpeed = morphogeneBranch.mJointMaxRollSpeed;
-	mJointMaxYawForce = morphogeneBranch.mJointMaxYawForce;
-	mJointMaxYawSpeed = morphogeneBranch.mJointMaxYawSpeed;
+
+	mJointPitchEnabled = morphogeneBranch.mJointPitchEnabled;
+	mJointYawEnabled = morphogeneBranch.mJointYawEnabled;
+	mJointRollEnabled = morphogeneBranch.mJointRollEnabled;
 
 	mJointPitch = morphogeneBranch.mJointPitch;
 	mJointPitchMaxAngle = morphogeneBranch.mJointPitchMaxAngle;
 	mJointPitchMinAngle = morphogeneBranch.mJointPitchMinAngle;
-	mJointPitchMotorEnabled = morphogeneBranch.mJointPitchMotorEnabled;
 	mJointPitchStiffness = morphogeneBranch.mJointPitchStiffness;
 	mJointYaw = morphogeneBranch.mJointYaw;
 	mJointYawMaxAngle = morphogeneBranch.mJointYawMaxAngle;
 	mJointYawMinAngle = morphogeneBranch.mJointYawMinAngle;
-	mJointYawMotorEnabled = morphogeneBranch.mJointYawMotorEnabled;
 	mJointYawStiffness = morphogeneBranch.mJointYawStiffness;
 	mJointRoll = morphogeneBranch.mJointRoll;
 	mJointRollMaxAngle = morphogeneBranch.mJointRollMaxAngle;
 	mJointRollMinAngle = morphogeneBranch.mJointRollMinAngle;
-	mJointRollMotorEnabled = morphogeneBranch.mJointRollMotorEnabled;
 	mJointRollStiffness = morphogeneBranch.mJointRollStiffness;
 	mMirrored = morphogeneBranch.mMirrored;
 	mSpringPitchDampingCoefficient =
@@ -103,29 +94,19 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 	mSpringRollDampingCoefficient =
 		morphogeneBranch.mSpringRollDampingCoefficient;
 
-	mJointPitchEnabled = morphogeneBranch.mJointPitchEnabled;
-	mJointYawEnabled = morphogeneBranch.mJointYawEnabled;
-	mJointRollEnabled = morphogeneBranch.mJointRollEnabled;
 	mJointPitchAxisX = morphogeneBranch.mJointPitchAxisX;
 	mJointPitchAxisY = morphogeneBranch.mJointPitchAxisY;
 	mJointPitchAxisZ = morphogeneBranch.mJointPitchAxisZ;
 	mJointType = morphogeneBranch.mJointType;
-
-	mJointPitchXOffset = morphogeneBranch.mJointPitchXOffset;
-	mJointPitchYOffset = morphogeneBranch.mJointPitchYOffset;
-	mJointPitchAmplitude = morphogeneBranch.mJointPitchAmplitude;
-	mJointPitchFrequency = morphogeneBranch.mJointPitchFrequency;
-	mJointYawXOffset = morphogeneBranch.mJointYawXOffset;
-	mJointYawYOffset = morphogeneBranch.mJointYawYOffset;
-	mJointYawAmplitude = morphogeneBranch.mJointYawAmplitude;
-	mJointYawFrequency = morphogeneBranch.mJointYawFrequency;
-	mJointRollXOffset = morphogeneBranch.mJointRollXOffset;
-	mJointRollYOffset = morphogeneBranch.mJointRollYOffset;
-	mJointRollAmplitude = morphogeneBranch.mJointRollAmplitude;
-	mJointRollFrequency = morphogeneBranch.mJointRollFrequency;
 }
 
 MorphogeneBranch::~MorphogeneBranch() {
+	//clean up necessary
+	while (!mControllerGenes.empty()) {
+		ControllerGene* f = mControllerGenes.back();
+		mControllerGenes.pop_back();
+		delete f;
+	}
 }
 
 void MorphogeneBranch::initialize() {
@@ -175,6 +156,7 @@ void MorphogeneBranch::initialize() {
 	 * So to simulate ODE Universal joint we should use parent
 	 * axis as Z, child axis as Y and limit all other DOFs
 	 */
+	//TODO: Revise this again
 	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(
 		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
 		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
@@ -229,77 +211,12 @@ void MorphogeneBranch::initialize() {
 		MorphologyConfiguration::JOINT_MIN_STIFFNESS,
 		MorphologyConfiguration::JOINT_MAX_STIFFNESS);
 
-	/**
-	 * Whether the joint motors are enabled or not.
-	 */
-	mJointPitchMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
-	mJointYawMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
-	mJointRollMotorEnabled = Randomness::getSingleton()->nextUnifBoolean();
-
-	/**
-	 * The maximum joint speed
-	 */
-	mJointMaxPitchSpeed = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_SPEED,
-		MorphologyConfiguration::JOINT_MAX_SPEED);
-	mJointMaxYawSpeed = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_SPEED,
-		MorphologyConfiguration::JOINT_MAX_SPEED);
-	mJointMaxRollSpeed = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_SPEED,
-		MorphologyConfiguration::JOINT_MAX_SPEED);
-
-	/**
-	 * The joint frequency
-	 */
-	mJointPitchFrequency = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_FREQUENCY,
-		MorphologyConfiguration::JOINT_MAX_FREQUENCY);
-	mJointYawFrequency = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_FREQUENCY,
-		MorphologyConfiguration::JOINT_MAX_FREQUENCY);
-	mJointRollFrequency = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_FREQUENCY,
-		MorphologyConfiguration::JOINT_MAX_FREQUENCY);
-
-	/**
-	 * The joint amplitude
-	 */
-	mJointPitchAmplitude = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_AMPLITUDE,
-		MorphologyConfiguration::JOINT_MAX_AMPLITUDE);
-	mJointYawAmplitude = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_AMPLITUDE,
-		MorphologyConfiguration::JOINT_MAX_AMPLITUDE);
-	mJointRollAmplitude = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_AMPLITUDE,
-		MorphologyConfiguration::JOINT_MAX_AMPLITUDE);
-
-	/**
-	 * The joint x offset
-	 */
-	mJointPitchXOffset = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_X_OFFSET,
-		MorphologyConfiguration::JOINT_MAX_X_OFFSET);
-	mJointYawXOffset = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_X_OFFSET,
-		MorphologyConfiguration::JOINT_MAX_X_OFFSET);
-	mJointRollXOffset = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_X_OFFSET,
-		MorphologyConfiguration::JOINT_MAX_X_OFFSET);
-
-	/**
-	 * The joint y offset
-	 */
-	mJointPitchYOffset = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_Y_OFFSET,
-		MorphologyConfiguration::JOINT_MAX_Y_OFFSET);
-	mJointYawYOffset = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_Y_OFFSET,
-		MorphologyConfiguration::JOINT_MAX_Y_OFFSET);
-	mJointRollYOffset = Randomness::getSingleton()->nextUnifDouble(
-		MorphologyConfiguration::JOINT_MIN_Y_OFFSET,
-		MorphologyConfiguration::JOINT_MAX_Y_OFFSET);
+	// create instances of the sine controller gene for the morphogene.
+	for (int i = 0; i < 3; i++) {
+		SineControllerGene* sineController = new SineControllerGene();
+		sineController->initialize();
+		mControllerGenes.push_back(sineController);
+	}
 }
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
@@ -329,18 +246,6 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 	}
 
 	if (mJointAnchorZ != geneBranch.mJointAnchorZ) {
-		return false;
-	}
-
-	if (mJointPitchEnabled != geneBranch.mJointPitchEnabled) {
-		return false;
-	}
-
-	if (mJointYawEnabled != geneBranch.mJointYawEnabled) {
-		return false;
-	}
-
-	if (mJointRollEnabled != geneBranch.mJointRollEnabled) {
 		return false;
 	}
 
@@ -419,92 +324,30 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		return false;
 	}
 
-	if (mJointPitchMotorEnabled != geneBranch.mJointPitchMotorEnabled) {
-		return false;
-	}
-
-	if (mJointYawMotorEnabled != geneBranch.mJointYawMotorEnabled) {
-		return false;
-	}
-
-	if (mJointRollMotorEnabled != geneBranch.mJointRollMotorEnabled) {
-		return false;
-	}
-
-	if (mJointMaxPitchForce != geneBranch.mJointMaxPitchForce) {
-		return false;
-	}
-
-	if (mJointMaxYawForce != geneBranch.mJointMaxYawForce) {
-		return false;
-	}
-
-	if (mJointMaxRollForce != geneBranch.mJointMaxRollForce) {
-		return false;
-	}
-
-	if (mJointMaxPitchSpeed != geneBranch.mJointMaxPitchSpeed) {
-		return false;
-	}
-
-	if (mJointMaxYawSpeed != geneBranch.mJointMaxYawSpeed) {
-		return false;
-	}
-
-	if (mJointMaxRollSpeed != geneBranch.mJointMaxRollSpeed) {
-		return false;
-	}
-
-	if (mJointPitchFrequency != geneBranch.mJointPitchFrequency) {
-		return false;
-	}
-
-	if (mJointYawFrequency != geneBranch.mJointYawFrequency) {
-		return false;
-	}
-
-	if (mJointRollFrequency != geneBranch.mJointRollFrequency) {
-		return false;
-	}
-
-	if (mJointPitchAmplitude != geneBranch.mJointPitchAmplitude) {
-		return false;
-	}
-
-	if (mJointYawAmplitude != geneBranch.mJointYawAmplitude) {
-		return false;
-	}
-
-	if (mJointRollAmplitude != geneBranch.mJointRollAmplitude) {
-		return false;
-	}
-
-	if (mJointPitchXOffset != geneBranch.mJointPitchXOffset) {
-		return false;
-	}
-
-	if (mJointYawXOffset != geneBranch.mJointYawXOffset) {
-		return false;
-	}
-
-	if (mJointRollXOffset != geneBranch.mJointRollXOffset) {
-		return false;
-	}
-
-	if (mJointPitchYOffset != geneBranch.mJointPitchYOffset) {
-		return false;
-	}
-
-	if (mJointYawYOffset != geneBranch.mJointYawYOffset) {
-		return false;
-	}
-
-	if (mJointRollYOffset != geneBranch.mJointRollYOffset) {
-		return false;
-	}
-
 	if (mBranchGeneType != geneBranch.mBranchGeneType) {
 		return false;
+	}
+
+	std::vector<ControllerGene*>::const_iterator it1 = mControllerGenes.begin();
+	std::vector<ControllerGene*>::const_iterator it2 =
+		geneBranch.mControllerGenes.begin();
+	for (;
+		it1 != mControllerGenes.end(), it2 != geneBranch.mControllerGenes.end();
+		it1++, it2++) {
+		if (!(*it1)->equals(**it2)) {
+			return false;
+		} else {
+			switch ((*it1)->getControllerGeneType()) {
+			case ControllerGene::SineControllerGene:
+				if (!((SineControllerGene*) (*it1))->equals(
+					((SineControllerGene&) (**it2)))) {
+					return false;
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	return true;
@@ -516,7 +359,12 @@ MorphogeneBranch* MorphogeneBranch::clone() {
 
 void MorphogeneBranch::mutate() {
 
-	//no clean up necessary
+	//clean up necessary
+	while (!mControllerGenes.empty()) {
+		ControllerGene* f = mControllerGenes.back();
+		mControllerGenes.pop_back();
+		delete f;
+	}
 
 	initialize();
 }

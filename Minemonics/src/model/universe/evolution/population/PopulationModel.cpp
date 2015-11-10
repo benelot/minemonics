@@ -89,8 +89,9 @@ void PopulationModel::addNewMember(const double branchiness,
 	CreatureModel* creatureModel = new CreatureModel(this,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
-//	ModelLegBuilder::build(&creatureModel->getGenotype());
-	creatureModel->createRandomGenome(branchiness);
+	ModelLegBuilder::build(&creatureModel->getGenotype());
+
+//	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
 	creatureModel->setDynasty(mDynastyQty);
 	mDynastyQty++;

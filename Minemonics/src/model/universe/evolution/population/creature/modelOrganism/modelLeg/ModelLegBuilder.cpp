@@ -22,42 +22,41 @@
 #define UNIV_EPS 0.01f
 #endif
 
-ModelLegBuilder::ModelLegBuilder() {
-	// TODO Auto-generated constructor stub
-
-}
-
-ModelLegBuilder::~ModelLegBuilder() {
-	// TODO Auto-generated destructor stub
-}
-
 void ModelLegBuilder::build(MixedGenome* genome) {
 	genome->setTotalSegmentQtyLimit(2);
 	genome->setSegmentsDepthLimit(2);
 
 	// create first limb
-	Morphogene* morphogene = new Morphogene(Ogre::Vector3(10, 2, 2),
-		Ogre::Quaternion(0, 0, 0, 1), Ogre::Vector3(1, 0, 0),
-		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
-		0, true);
-	morphogene->initialize(0);
+	Morphogene* morphogene = new Morphogene(Ogre::Vector3(20, 6, 6),
+		Ogre::Vector3(1, 0, 0), Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK,
+		Ogre::ColourValue(1, 0, 0), 1, 0, true);
+
 	genome->addGene(morphogene);
 
 	// creature second limb
-	Morphogene* morphogene2 = new Morphogene(Ogre::Vector3(10, 2, 2),
-		Ogre::Quaternion(0, 0, 0, 1), Ogre::Vector3(-1, 0, 0),
-		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
-		0, true);
-	morphogene2->initialize(0);
+	Morphogene* morphogene2 = new Morphogene(Ogre::Vector3(6, 20, 6),
+		Ogre::Vector3(0, 1, 0), Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK,
+		Ogre::ColourValue(1, 0, 0), 1, 0, true);
+
 	genome->addGene(morphogene2);
 
 	// create joint between the two limbs
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
-		Ogre::Vector3(-1, 0, 0), Ogre::Euler(0, 0, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(-1, 0, 0), Ogre::Euler(0, 0, 0),
+		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+			-boost::math::constants::pi<double>() + UNIV_EPS,
+			-boost::math::constants::pi<double>() + UNIV_EPS),
 		Ogre::Vector3(boost::math::constants::pi<double>() / 2.0f - UNIV_EPS,
 			boost::math::constants::pi<double>() - UNIV_EPS,
-			boost::math::constants::pi<double>() - UNIV_EPS));
-	morphogeneBranch->initialize();
+			boost::math::constants::pi<double>() - UNIV_EPS),
+		Ogre::Vector3(0, 0, 1));
+	// create instances of the sine controller gene for the morphogene.
+	for (int i = 0; i < 3; i++) {
+		SineControllerGene* sineController = new SineControllerGene();
+		sineController->initialize();
+		morphogeneBranch->getControllerGenes().push_back(sineController);
+	}
+
 	morphogeneBranch->setActive(true);
 	morphogeneBranch->setBranchGeneType(1);
 

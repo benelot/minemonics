@@ -21,32 +21,42 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-Morphogene::Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
+Morphogene::Morphogene(Ogre::Vector3 dimensions,
 	Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
 	LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
 	double friction, double restitution, bool intraBodyColliding) :
 	Gene(Gene::MorphoGene), mColorR(color.r), mColorG(color.g), mColorB(
-		color.b), mPrimitiveType(primitiveType), mControllerGene(
-	NULL), mFollowUpGene(-1), mJointAnchorX(anchorDirection.x), mJointAnchorY(
+		color.b), mPrimitiveType(primitiveType), mFollowUpGene(-1), mJointAnchorX(anchorDirection.x), mJointAnchorY(
 		anchorDirection.y), mJointAnchorZ(anchorDirection.z), mJointPitch(
 		anchorOrientation.pitch().valueRadians()), mJointYaw(
 		anchorOrientation.yaw().valueRadians()), mJointRoll(
 		anchorOrientation.roll().valueRadians()), mSegmentShrinkFactor(1), mRepetitionLimit(
-		0), mX(dimensions.x), mY(dimensions.y), mZ(dimensions.z), mOrientationW(
-		orientation.w), mOrientationX(orientation.x), mOrientationY(
-		orientation.y), mOrientationZ(orientation.z), mRestitution(restitution), mFriction(
+		0), mX(dimensions.x), mY(dimensions.y), mZ(dimensions.z), mRestitution(restitution), mFriction(
 		friction), mIntraBodyColliding(intraBodyColliding) {
+
+	// limit min size
+	if (dimensions.x < MorphologyConfiguration::LIMB_MIN_SIZE) {
+		mX = MorphologyConfiguration::LIMB_MIN_SIZE;
+	}
+
+	// limit min size
+	if (dimensions.y < MorphologyConfiguration::LIMB_MIN_SIZE) {
+		mY = MorphologyConfiguration::LIMB_MIN_SIZE;
+	}
+
+	// limit min size
+	if (dimensions.z < MorphologyConfiguration::LIMB_MIN_SIZE) {
+		mZ = MorphologyConfiguration::LIMB_MIN_SIZE;
+	}
 
 }
 
 Morphogene::Morphogene() :
 	Gene(Gene::MorphoGene), mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
-		LimbPhysics::UNKNOWN), mControllerGene(
-	NULL), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(0), mJointAnchorZ(
-		0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
-		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
-		0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(1), mIntraBodyColliding(
-		true) {
+		LimbPhysics::UNKNOWN), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(
+		0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
+		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mRestitution(0), mFriction(
+		1), mIntraBodyColliding(true) {
 
 }
 
@@ -56,9 +66,6 @@ Morphogene::Morphogene(const Morphogene& morphoGene) :
 	mColorG = morphoGene.mColorG;
 	mColorR = morphoGene.mColorR;
 
-	if (morphoGene.mControllerGene) {
-		mControllerGene = morphoGene.mControllerGene->clone();
-	}
 	mFollowUpGene = morphoGene.mFollowUpGene;
 	mType = morphoGene.mType;
 	mJointAnchorX = morphoGene.mJointAnchorX;
@@ -67,10 +74,6 @@ Morphogene::Morphogene(const Morphogene& morphoGene) :
 	mJointPitch = morphoGene.mJointPitch;
 	mJointRoll = morphoGene.mJointRoll;
 	mJointYaw = morphoGene.mJointYaw;
-	mOrientationW = morphoGene.mOrientationW;
-	mOrientationX = morphoGene.mOrientationX;
-	mOrientationY = morphoGene.mOrientationY;
-	mOrientationZ = morphoGene.mOrientationZ;
 	mPrimitiveType = morphoGene.mPrimitiveType;
 	mRepetitionLimit = morphoGene.mRepetitionLimit;
 	mSegmentShrinkFactor = morphoGene.mSegmentShrinkFactor;
@@ -81,19 +84,14 @@ Morphogene::Morphogene(const Morphogene& morphoGene) :
 	mRestitution = morphoGene.mRestitution;
 	mIntraBodyColliding = morphoGene.mIntraBodyColliding;
 
-	std::vector<MorphogeneBranch*>::const_iterator mgbit =
+	for (std::vector<MorphogeneBranch*>::const_iterator mgbit =
 		morphoGene.mGeneBranches.begin();
-	for (; mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
+		mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
 		mGeneBranches.push_back((*mgbit)->clone());
 	}
 }
 
 Morphogene::~Morphogene() {
-	if (mControllerGene != NULL) {
-		delete mControllerGene;
-		mControllerGene = NULL;
-	}
-
 	while (!mGeneBranches.empty()) {
 		MorphogeneBranch* f = mGeneBranches.back();
 		mGeneBranches.pop_back();
@@ -162,17 +160,6 @@ void Morphogene::initialize(const double branchiness) {
 		mGeneBranches.push_back(branch);
 	}
 
-	//TODO: How to change from one controller gene to another? Also make it react differently depending on the type of gene
-	// create an instance of the sine controller gene for the morphogene.
-	mControllerGene = new SineControllerGene();
-	mControllerGene->initialize();
-
-	Ogre::Quaternion q = Randomness::getSingleton()->nextQuaternion();
-	mOrientationW = q.w;
-	mOrientationX = q.x;
-	mOrientationY = q.y;
-	mOrientationZ = q.z;
-
 	mIntraBodyColliding = Randomness::getSingleton()->nextUnifBoolean();
 }
 
@@ -181,12 +168,6 @@ Morphogene* Morphogene::clone() {
 }
 
 void Morphogene::mutate() {
-	//clean up necessary
-	if (mControllerGene != NULL) {
-		delete mControllerGene;
-		mControllerGene = NULL;
-	}
-
 	while (!mGeneBranches.empty()) {
 		MorphogeneBranch* f = mGeneBranches.back();
 		mGeneBranches.pop_back();
@@ -227,22 +208,6 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	if (mOrientationW != morphoGene.mOrientationW) {
-		return false;
-	}
-
-	if (mOrientationX != morphoGene.mOrientationX) {
-		return false;
-	}
-
-	if (mOrientationY != morphoGene.mOrientationY) {
-		return false;
-	}
-
-	if (mOrientationZ != morphoGene.mOrientationZ) {
-		return false;
-	}
-
 	if (mIntraBodyColliding != morphoGene.mIntraBodyColliding) {
 		return false;
 	}
@@ -273,23 +238,6 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 
 	if (mPrimitiveType != morphoGene.mPrimitiveType) {
 		return false;
-	}
-
-	if ((mControllerGene == NULL && morphoGene.mControllerGene != NULL)
-		|| (mControllerGene != NULL && morphoGene.mControllerGene == NULL)) {
-		return false;
-	} else if (mControllerGene != NULL && morphoGene.mControllerGene != NULL
-		&& mControllerGene->equals(*morphoGene.mControllerGene)) {
-		switch (mControllerGene->getControllerGeneType()) {
-		case ControllerGene::SineControllerGene:
-			if (!((SineControllerGene*) mControllerGene)->equals(
-				((SineControllerGene&) (*morphoGene.mControllerGene)))) {
-				return false;
-			}
-			break;
-		default:
-			break;
-		}
 	}
 
 	if (mJointAnchorX != morphoGene.mJointAnchorX) {
@@ -328,12 +276,12 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	std::vector<MorphogeneBranch*>::const_iterator it = mGeneBranches.begin();
-	std::vector<MorphogeneBranch*>::const_iterator it2 =
+	std::vector<MorphogeneBranch*>::const_iterator it3 = mGeneBranches.begin();
+	std::vector<MorphogeneBranch*>::const_iterator it4 =
 		morphoGene.mGeneBranches.begin();
-	for (; it != mGeneBranches.end(), it2 != morphoGene.mGeneBranches.end();
-		it++, it2++) {
-		if (!(*it)->equals(**it2)) {
+	for (; it3 != mGeneBranches.end(), it4 != morphoGene.mGeneBranches.end();
+		it3++, it4++) {
+		if (!(*it3)->equals(**it4)) {
 			return false;
 		}
 	}

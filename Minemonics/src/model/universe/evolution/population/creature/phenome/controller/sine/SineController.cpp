@@ -20,6 +20,12 @@
 
 BoostLogger SineController::mBoostLogger; /*<! initialize the boost logger*/
 SineController::_Init SineController::_initializer;
+SineController::SineController(const double amplitude, const double frequency,
+	const double xShift, const double yShift) :
+	Controller(SINE_CONTROLLER), mAmplitude(amplitude), mFrequency(frequency), mXShift(
+		xShift), mYShift(yShift), mTime(0) {
+}
+
 SineController::SineController() :
 	Controller(SINE_CONTROLLER), mAmplitude(1), mFrequency(1), mXShift(0), mYShift(
 		1), mTime(0) {
@@ -28,18 +34,13 @@ SineController::SineController() :
 SineController::~SineController() {
 }
 
-void SineController::initialize(const double amplitude, const double frequency,
-	const double xShift, const double yShift) {
-	mAmplitude = amplitude;
-	mFrequency = frequency;
-	mXShift = xShift;
-	mYShift = yShift;
+void SineController::initialize() {
 }
 
 void SineController::perform(const double timeSinceLastTick) {
 	double input = 0;
 	if (mControlInputs.size() != 0) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "Why is there sine control input?";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< "Why is there sine control input?";
 	}
 	//time might not be the same as real-time, but it is close. On the other hand it is a very accurate simulation.
 	mTime += timeSinceLastTick;

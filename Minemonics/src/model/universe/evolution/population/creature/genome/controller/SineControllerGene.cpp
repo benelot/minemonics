@@ -20,7 +20,7 @@
 #include <utils/Randomness.hpp>
 
 SineControllerGene::SineControllerGene() :
-		mXOffset(0), mYOffset(0), mAmplitude(0), mFrequency(0) {
+	mXOffset(0), mYOffset(0), mAmplitude(0), mFrequency(0) {
 	mControllerGeneType = ControllerGene::SineControllerGene;
 
 }
@@ -30,20 +30,25 @@ SineControllerGene::~SineControllerGene() {
 
 void SineControllerGene::initialize() {
 
-	mXOffset = Randomness::getSingleton()->nextUnifDouble(0,
-			2 * boost::math::constants::pi<double>());
+	mXOffset = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::JOINT_MIN_X_OFFSET,
+		ControlConfiguration::JOINT_MAX_X_OFFSET);
 
-	mYOffset = Randomness::getSingleton()->nextUnifDouble(-1, 1);
-	mAmplitude = Randomness::getSingleton()->nextUnifDouble(0,
-			ControlConfiguration::CPG_SINE_INITIAL_MAX_AMPLITUDE);
-	mFrequency = Randomness::getSingleton()->nextUnifDouble(0,
-			ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
+	mYOffset = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::JOINT_MIN_Y_OFFSET,
+		ControlConfiguration::JOINT_MAX_Y_OFFSET);
+	mAmplitude = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::JOINT_MIN_AMPLITUDE,
+		ControlConfiguration::JOINT_MAX_AMPLITUDE);
+	mFrequency = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::JOINT_MIN_FREQUENCY,
+		ControlConfiguration::JOINT_MAX_FREQUENCY);
 }
 
 bool SineControllerGene::equals(
-		const SineControllerGene& sineControllerGene) const {
+	const SineControllerGene& sineControllerGene) const {
 
-	if(!ControllerGene::equals((ControllerGene&) sineControllerGene)){
+	if (!ControllerGene::equals((ControllerGene&) sineControllerGene)) {
 		return false;
 	}
 

@@ -477,8 +477,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			* (mass1 + mass2)
 			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
 				* pow(mass1 + mass2, 2));
-	//		double maxTorque = (15.0f * (mass1 + mass2)
-	//			+ 0.01f * pow(mass1 + mass2, 2));
 
 	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
@@ -489,30 +487,15 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointYawMaxAngle(),
 			parentMorphogeneBranch->getJointRollMaxAngle()));
 
-	//TODO: Quick controller hack
-	SineController* controller = new SineController();
-	controller->initialize(parentMorphogeneBranch->getJointPitchAmplitude(),
-		parentMorphogeneBranch->getJointPitchFrequency(),
-		parentMorphogeneBranch->getJointPitchXOffset(),
-		parentMorphogeneBranch->getJointPitchYOffset());
-	controller->addControlOutput(joint->getMotors()[0]);
-	getControllers().push_back(controller);
-
-	if (joint->getType() == JointPhysics::SPHERICAL_JOINT) {
-		controller = new SineController();
-		controller->initialize(parentMorphogeneBranch->getJointYawAmplitude(),
-			parentMorphogeneBranch->getJointYawFrequency(),
-			parentMorphogeneBranch->getJointYawXOffset(),
-			parentMorphogeneBranch->getJointYawYOffset());
-		controller->addControlOutput(joint->getMotors()[1]);
-		getControllers().push_back(controller);
-
-		controller = new SineController();
-		controller->initialize(parentMorphogeneBranch->getJointRollAmplitude(),
-			parentMorphogeneBranch->getJointRollFrequency(),
-			parentMorphogeneBranch->getJointRollXOffset(),
-			parentMorphogeneBranch->getJointRollYOffset());
-		controller->addControlOutput(joint->getMotors()[2]);
+	//TODO: Only supports sine controller gene
+	for (int i = 0; i < joint->getMotors().size(); i++) {
+		SineController* controller = new SineController(
+			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
+			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
+			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
+			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
+		controller->initialize();
+		controller->addControlOutput(joint->getMotors()[i]);
 		getControllers().push_back(controller);
 	}
 }

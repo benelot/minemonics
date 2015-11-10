@@ -37,11 +37,6 @@ class access;
  */
 class SineController: public Controller {
 public:
-	SineController();
-	SineController(const SineController& sineController);
-
-	virtual ~SineController();
-
 	/**
 	 * Initialize the sine controller with a certain amplitude and frequency for the sine wave and the motor it controls.
 	 * @param amplitude The amplitude of the sine wave.
@@ -49,8 +44,14 @@ public:
 	 * @param xShift shift in x direction.
 	 * @param yShift shift in y direction.
 	 */
-	void initialize(const double amplitude, const double frequency,
+	SineController(const double amplitude, const double frequency,
 		const double xShift, const double yShift);
+	SineController();
+	SineController(const SineController& sineController);
+
+	virtual ~SineController();
+
+	void initialize();
 
 	/**
 	 * Clone the sine controller.

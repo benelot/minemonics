@@ -23,15 +23,21 @@
  */
 class ControlConfiguration {
 public:
-	/**
-	 * The initial maximum amplitude of the sine wave controller
-	 */
-	static const double CPG_SINE_INITIAL_MAX_AMPLITUDE = 1;
+	static const double JOINT_MIN_FREQUENCY = 0.1;
 
-	/**
-	 * The initial maximum frequency of the sine wave controller
-	 */
-	static const double CPG_SINE_INITIAL_MAX_FREQUENCY = 1; // Hz
+	static const double JOINT_MAX_FREQUENCY = 4;
+
+	static const double JOINT_MIN_AMPLITUDE = 0;
+
+	static const double JOINT_MAX_AMPLITUDE = 0.5;
+
+	static const double JOINT_MIN_X_OFFSET = 0;
+
+	static const double JOINT_MAX_X_OFFSET = 2 * M_PI;
+
+	static const double JOINT_MIN_Y_OFFSET = 0;
+
+	static const double JOINT_MAX_Y_OFFSET = 1;
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */
