@@ -264,6 +264,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/SnakeBuilder.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/ModelLegBuilder.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp</location>
@@ -1072,6 +1077,11 @@
 			<name>[Targets]/[exe] Minemonics/Header Files/CreatureModel.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/SnakeBuilder.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/ModelLegBuilder.hpp</name>
@@ -2019,6 +2029,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/SnakeBuilder.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/ModelLegBuilder.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp</location>
@@ -2582,6 +2597,11 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/CreatureModel.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/CreatureModel.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/SnakeBuilder.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/ModelLegBuilder.hpp</name>

@@ -14,6 +14,7 @@
 //## controller headers
 //## model headers
 #include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp>
 
 //## view headers
@@ -89,7 +90,8 @@ void PopulationModel::addNewMember(const double branchiness,
 	CreatureModel* creatureModel = new CreatureModel(this,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
-	ModelLegBuilder::build(&creatureModel->getGenotype());
+	SnakeBuilder::build(&creatureModel->getGenotype());
+//	ModelLegBuilder::build(&creatureModel->getGenotype());
 
 //	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);

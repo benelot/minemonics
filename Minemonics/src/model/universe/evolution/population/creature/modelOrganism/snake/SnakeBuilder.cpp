@@ -1,5 +1,5 @@
 //# corresponding headers
-#include <model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp>
 
 //# forward declarations
 //# system headers
@@ -22,34 +22,38 @@
 #define UNIV_EPS 0.01f
 #endif
 
-void ModelLegBuilder::build(MixedGenome* genome) {
-	genome->setTotalSegmentQtyLimit(2);
-	genome->setSegmentsDepthLimit(2);
+SnakeBuilder::SnakeBuilder() {
+	// TODO Auto-generated constructor stub
 
-	// create first limb
-	Morphogene* morphogene = new Morphogene(Ogre::Vector3(20, 6, 6),
-		Ogre::Vector3(1, 0, 0), Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK,
+}
+
+SnakeBuilder::~SnakeBuilder() {
+	// TODO Auto-generated destructor stub
+}
+
+void SnakeBuilder::build(MixedGenome* genome) {
+	int snakeLength = 10;
+	genome->setTotalSegmentQtyLimit(snakeLength);
+	genome->setSegmentsDepthLimit(snakeLength);
+
+	// create limb
+	Morphogene* morphogene = new Morphogene(Ogre::Vector3(6, 6, 20),
+		Ogre::Vector3(0, 0, 1), Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK,
 		Ogre::ColourValue(1, 0, 0), 1, 0, true);
+	morphogene->setRepetitionLimit(snakeLength);
 
 	genome->addGene(morphogene);
 
-	// creature second limb
-	Morphogene* morphogene2 = new Morphogene(Ogre::Vector3(6, 20, 6),
-		Ogre::Vector3(0, 1, 0), Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK,
-		Ogre::ColourValue(1, 0, 0), 1, 0, true);
-
-	genome->addGene(morphogene2);
-
 	// create joint between the two limbs
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
-		Ogre::Vector3(-1, 0, 0), Ogre::Euler(0, 0, 0),
+		Ogre::Vector3(0, 0, -1), Ogre::Euler(0, 0, 0),
 		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-			-boost::math::constants::pi<double>()*2.0f + UNIV_EPS,
-			-boost::math::constants::pi<double>()*2.0f + UNIV_EPS),
+			-boost::math::constants::pi<double>() * 1.5f + UNIV_EPS,
+			-boost::math::constants::pi<double>() * 1.5f + UNIV_EPS),
 		Ogre::Vector3(boost::math::constants::pi<double>() / 2.0f - UNIV_EPS,
-			boost::math::constants::pi<double>()*2.0f - UNIV_EPS,
-			boost::math::constants::pi<double>()*2.0f - UNIV_EPS),
-		Ogre::Vector3(0, 0, 1));
+			boost::math::constants::pi<double>() * 1.5f - UNIV_EPS,
+			boost::math::constants::pi<double>() * 1.5f - UNIV_EPS),
+		Ogre::Vector3(1, 0, 0));
 	// create instances of the sine controller gene for the morphogene.
 	for (int i = 0; i < 3; i++) {
 		SineControllerGene* sineController = new SineControllerGene();
@@ -58,8 +62,9 @@ void ModelLegBuilder::build(MixedGenome* genome) {
 	}
 
 	morphogeneBranch->setActive(true);
-	morphogeneBranch->setBranchGeneType(1);
+	morphogeneBranch->setBranchGeneType(0);
 
 	// add joint to the first limb branching to the second limb
 	morphogene->getGeneBranches().push_back(morphogeneBranch);
+
 }

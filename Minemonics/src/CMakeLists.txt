@@ -54,6 +54,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/CreatureModel.hpp
 	
 	## model organism builders
+	./model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp
 	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp
 	
 	## genome
@@ -146,6 +147,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/CreatureModel.cpp
 	
 	## model organism builders
+	./model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.cpp
 	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp
 	
 	## genome
