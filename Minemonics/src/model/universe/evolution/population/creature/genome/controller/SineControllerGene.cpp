@@ -20,9 +20,15 @@
 #include <utils/Randomness.hpp>
 
 SineControllerGene::SineControllerGene() :
-	mXOffset(0), mYOffset(0), mAmplitude(0), mFrequency(0) {
-	mControllerGeneType = ControllerGene::SineControllerGene;
+	mXOffset(0), mYOffset(0), mAmplitude(0), mFrequency(0), ControllerGene(
+		ControllerGene::SineControllerGene) {
+}
 
+SineControllerGene::SineControllerGene(const SineControllerGene& gene){
+	mXOffset = gene.mXOffset;
+	mYOffset = gene.mYOffset;
+	mAmplitude = gene.mAmplitude;
+	mFrequency = gene.mFrequency;
 }
 
 SineControllerGene::~SineControllerGene() {
@@ -68,12 +74,5 @@ bool SineControllerGene::equals(
 }
 
 SineControllerGene* SineControllerGene::clone() {
-	SineControllerGene* sineControllerGene = new SineControllerGene();
-	sineControllerGene->setControllerGeneType(mControllerGeneType);
-	sineControllerGene->setFrequency(mFrequency);
-	sineControllerGene->setAmplitude(mAmplitude);
-	sineControllerGene->setXOffset(mXOffset);
-	sineControllerGene->setYOffset(mYOffset);
-
-	return sineControllerGene;
+	return new SineControllerGene(this);
 }

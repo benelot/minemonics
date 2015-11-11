@@ -28,7 +28,12 @@
  */
 class ControllerGene {
 public:
+	enum ControllerGeneType {
+		SineControllerGene, ChaoticControllerGene, GenericControllerGene
+	};
+
 	ControllerGene();
+	ControllerGene(ControllerGeneType type);
 	virtual ~ControllerGene();
 
 	/**
@@ -49,9 +54,6 @@ public:
 	 */
 	bool equals(const ControllerGene& controllerGene) const;
 
-	enum ControllerGeneType {
-		SineControllerGene, GenericControllerGene
-	};
 
 	//Accessor methods
 	ControllerGeneType getControllerGeneType() const {
@@ -61,7 +63,6 @@ public:
 	void setControllerGeneType(const ControllerGeneType controllerGeneType) {
 		mControllerGeneType = controllerGeneType;
 	}
-
 
 	//Serialization
 	/**
@@ -76,7 +77,7 @@ public:
 	 * @return A string containing all information about the controller gene.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-			const ControllerGene &controllerGene) {
+		const ControllerGene &controllerGene) {
 		return os << "ControllerGene:" << controllerGene.mControllerGeneType;
 
 	}

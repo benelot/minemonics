@@ -26,7 +26,16 @@
 class ChaoticControllerGene: public ControllerGene {
 public:
 	ChaoticControllerGene();
+	ChaoticControllerGene(const ChaoticControllerGene& gene);
 	virtual ~ChaoticControllerGene();
+
+	virtual void initialize();
+
+	/**
+	 * Clone the chaotic controller gene.
+	 * @return The cloned chaotic controller.
+	 */
+	virtual ChaoticControllerGene* clone();
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_CHAOTICCONTROLLERGENE_HPP_ */

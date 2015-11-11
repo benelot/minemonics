@@ -19,6 +19,11 @@ ControllerGene::ControllerGene() :
 
 }
 
+ControllerGene::ControllerGene(ControllerGeneType type) :
+	mControllerGeneType(type) {
+
+}
+
 ControllerGene::~ControllerGene() {
 }
 

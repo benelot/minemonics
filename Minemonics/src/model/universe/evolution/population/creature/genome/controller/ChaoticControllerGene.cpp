@@ -14,12 +14,25 @@
 //## view headers
 //## utils headers
 
-ChaoticControllerGene::ChaoticControllerGene() {
-	// TODO Auto-generated constructor stub
+ChaoticControllerGene::ChaoticControllerGene() :
+	ControllerGene(ControllerGene::ChaoticControllerGene) {
+
+}
+
+ChaoticControllerGene::ChaoticControllerGene(
+	const ChaoticControllerGene& gene) {
 
 }
 
 ChaoticControllerGene::~ChaoticControllerGene() {
-	// TODO Auto-generated destructor stub
+
 }
 
+void ChaoticControllerGene::initialize() {
+}
+
+
+
+ChaoticControllerGene* ChaoticControllerGene::clone() {
+	return new ChaoticControllerGene(this);
+}

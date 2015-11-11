@@ -38,6 +38,7 @@ class access;
 class SineControllerGene: public ControllerGene {
 public:
 	SineControllerGene();
+	SineControllerGene(const SineControllerGene& gene);
 	virtual ~SineControllerGene();
 
 	/**
