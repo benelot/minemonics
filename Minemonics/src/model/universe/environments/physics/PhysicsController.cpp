@@ -1,5 +1,4 @@
 //# corresponding header
-#include <configuration/Definitions.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 
 //# forward declarations
@@ -29,6 +28,8 @@
 //## utils headers
 #include <utils/bullet/BulletUtils.hpp>
 
+BoostLogger PhysicsController::mBoostLogger; /*<! initialize the boost logger*/
+PhysicsController::_Init PhysicsController::_initializer;
 PhysicsController::PhysicsController() :
 	mBroadphase(NULL), mCollisionConfiguration(NULL), mDispatcher(NULL), mDynamicsWorld(
 	NULL), mPhysicsPaused(false), mPhysicsStepped(false), mSolver(NULL), mSimulationSpeed(
@@ -78,21 +79,29 @@ void PhysicsController::initialize() {
 		mDynamicsWorld = new btMultiBodyDynamicsWorld(mDispatcher, mBroadphase,
 			(btMultiBodyConstraintSolver*) mSolver, mCollisionConfiguration);
 
-		mDynamicsWorld->getSolverInfo().m_erp =
-			PhysicsConfiguration::SIMULATOR_PHYSICS_FS_ERP;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Multibody Contraint Solver=";
 
-		mDynamicsWorld->getSolverInfo().m_globalCfm =
-			PhysicsConfiguration::SIMULATOR_PHYSICS_FS_CFM;
+		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
+
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(10,
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 		break;
 	}
 	case PhysicsController::RigidbodyModel: {
 		bool useMCLPSolver = false;
 		if (useMCLPSolver) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Danzig Solver=";
 			btDantzigSolver* mlcp = new btDantzigSolver();
 //			btSolveProjectedGaussSeidel* mlcp = new btSolveProjectedGaussSeidel();
 			btMLCPSolver* sol = new btMLCPSolver(mlcp);
 			mSolver = sol;
 		} else {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Sequential Impulse Constraint Solver=";
 			mSolver = new btSequentialImpulseConstraintSolver();
 		}
 
@@ -105,13 +114,14 @@ void PhysicsController::initialize() {
 			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
 		}
 
-		//mDynamicsWorld->getSolverInfo().m_erp = 0.00001f;
 		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 10);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 
-		//mDynamicsWorld->getSolverInfo().m_globalCfm = 0.9f;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
+
 		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 		break;
 	}
 	default:
@@ -121,9 +131,10 @@ void PhysicsController::initialize() {
 	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
 	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
 	mDynamicsWorld->getSolverInfo().m_erp2 = BulletUtils::getERP(
-		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 10);
+		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
 	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(
-		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 10);
+		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";
 	//TODO: Not sure if helps
 	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
 	mDynamicsWorld->getSolverInfo().m_numIterations = 50;

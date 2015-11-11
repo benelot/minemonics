@@ -111,10 +111,10 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				}
 
 				mPickedConstraint = p2p;
-				btScalar mousePickClamping = 30.f;
-				p2p->m_setting.m_impulseClamp = mousePickClamping;
+//				btScalar mousePickClamping = 3000000000.f;
+//				p2p->m_setting.m_impulseClamp = mousePickClamping;
 				//very weak constraint for picking
-				p2p->m_setting.m_tau = 0.001f;
+//				p2p->m_setting.m_tau = 0.1f;
 			}
 		} else {
 			btMultiBodyLinkCollider* multiCol =
@@ -135,8 +135,8 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				//see also http://www.bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=4&t=949
 				//so we try to avoid it by clamping the maximum impulse (force) that the mouse pick can apply
 				//it is not satisfying, hopefully we find a better solution (higher order integrator, using joint friction using a zero-velocity target motor with limited force etc?)
-				btScalar scaling = PhysicsConfiguration::BULLET_PICKER_FORCE;
-				p2p->setMaxAppliedImpulse(scaling);
+//				btScalar scaling = PhysicsConfiguration::BULLET_PICKER_FORCE;
+//				p2p->setMaxAppliedImpulse(scaling);
 
 				btMultiBodyDynamicsWorld* multibodyworld =
 					(btMultiBodyDynamicsWorld*) world;

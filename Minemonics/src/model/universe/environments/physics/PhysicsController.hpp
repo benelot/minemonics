@@ -32,6 +32,7 @@ class btMultiBodyConstraintSolver;
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The physics controller holds the bullet physics resources of a certain planet.
@@ -207,6 +208,22 @@ protected:
 	PhysicsModelType mPhysicsModelType; /**!< The physics model type of the controller */
 
 	EnvironmentType mEnvironmentType; /**!< The environment type the physics controller simulates */
+
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant<std::string>("PhysicsController"));
+		}
+	} _initializer;
 };
 BOOST_CLASS_VERSION(PhysicsController, 1)
 #endif /* MODEL_UNIVERSE_ENVIRONMENTS_PHYSICS_PHYSICSCONTROLLER_H_ */
