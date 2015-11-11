@@ -21,17 +21,20 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-Morphogene::Morphogene(Ogre::Vector3 dimensions,
+Morphogene::Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
 	Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
 	LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
 	double friction, double restitution, bool intraBodyColliding) :
 	Gene(Gene::MorphoGene), mColorR(color.r), mColorG(color.g), mColorB(
-		color.b), mPrimitiveType(primitiveType), mFollowUpGene(-1), mJointAnchorX(anchorDirection.x), mJointAnchorY(
-		anchorDirection.y), mJointAnchorZ(anchorDirection.z), mJointPitch(
+		color.b), mPrimitiveType(primitiveType), mFollowUpGene(-1), mJointAnchorX(
+		anchorDirection.x), mJointAnchorY(anchorDirection.y), mJointAnchorZ(
+		anchorDirection.z), mJointPitch(
 		anchorOrientation.pitch().valueRadians()), mJointYaw(
 		anchorOrientation.yaw().valueRadians()), mJointRoll(
 		anchorOrientation.roll().valueRadians()), mSegmentShrinkFactor(1), mRepetitionLimit(
-		0), mX(dimensions.x), mY(dimensions.y), mZ(dimensions.z), mRestitution(restitution), mFriction(
+		0), mX(dimensions.x), mY(dimensions.y), mZ(dimensions.z), mOrientationW(
+		orientation.w), mOrientationX(orientation.x), mOrientationY(
+		orientation.y), mOrientationZ(orientation.z), mRestitution(restitution), mFriction(
 		friction), mIntraBodyColliding(intraBodyColliding) {
 
 	// limit min size
@@ -55,8 +58,9 @@ Morphogene::Morphogene() :
 	Gene(Gene::MorphoGene), mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
 		LimbPhysics::UNKNOWN), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(
 		0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
-		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mRestitution(0), mFriction(
-		1), mIntraBodyColliding(true) {
+		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
+		0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(1), mIntraBodyColliding(
+		true) {
 
 }
 
@@ -74,6 +78,10 @@ Morphogene::Morphogene(const Morphogene& morphoGene) :
 	mJointPitch = morphoGene.mJointPitch;
 	mJointRoll = morphoGene.mJointRoll;
 	mJointYaw = morphoGene.mJointYaw;
+	mOrientationW = morphoGene.mOrientationW;
+	mOrientationX = morphoGene.mOrientationX;
+	mOrientationY = morphoGene.mOrientationY;
+	mOrientationZ = morphoGene.mOrientationZ;
 	mPrimitiveType = morphoGene.mPrimitiveType;
 	mRepetitionLimit = morphoGene.mRepetitionLimit;
 	mSegmentShrinkFactor = morphoGene.mSegmentShrinkFactor;
@@ -160,6 +168,12 @@ void Morphogene::initialize(const double branchiness) {
 		mGeneBranches.push_back(branch);
 	}
 
+	Ogre::Quaternion q = Randomness::getSingleton()->nextQuaternion();
+	mOrientationW = q.w;
+	mOrientationX = q.x;
+	mOrientationY = q.y;
+	mOrientationZ = q.z;
+
 	mIntraBodyColliding = Randomness::getSingleton()->nextUnifBoolean();
 }
 
@@ -205,6 +219,22 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 	}
 
 	if (mZ != morphoGene.mZ) {
+		return false;
+	}
+
+	if (mOrientationW != morphoGene.mOrientationW) {
+		return false;
+	}
+
+	if (mOrientationX != morphoGene.mOrientationX) {
+		return false;
+	}
+
+	if (mOrientationY != morphoGene.mOrientationY) {
+		return false;
+	}
+
+	if (mOrientationZ != morphoGene.mOrientationZ) {
 		return false;
 	}
 

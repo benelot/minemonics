@@ -22,24 +22,16 @@
 #define UNIV_EPS 0.01f
 #endif
 
-SnakeBuilder::SnakeBuilder() {
-	// TODO Auto-generated constructor stub
-
-}
-
-SnakeBuilder::~SnakeBuilder() {
-	// TODO Auto-generated destructor stub
-}
-
 void SnakeBuilder::build(MixedGenome* genome) {
-	int snakeLength = 10;
+	int snakeLength = 15;
 	genome->setTotalSegmentQtyLimit(snakeLength);
 	genome->setSegmentsDepthLimit(snakeLength);
 
 	// create limb
-	Morphogene* morphogene = new Morphogene(Ogre::Vector3(6, 6, 20),
-		Ogre::Vector3(0, 0, 1), Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK,
-		Ogre::ColourValue(1, 0, 0), 1, 0, true);
+	Morphogene* morphogene = new Morphogene(Ogre::Vector3(6, 6, 10),
+		Ogre::Quaternion(1, 0, 0, 0), Ogre::Vector3(0, 0, 1),
+		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
+		0, true);
 	morphogene->setRepetitionLimit(snakeLength);
 
 	genome->addGene(morphogene);

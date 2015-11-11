@@ -230,20 +230,19 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Vector3& localParentJointInRefParent,/**!< The joint location in the parent limb ref.*/
 	Ogre::Vector3& localChildJointInRefChild /**!< The joint location in the child limb ref. */) {
 
-	//PARENT
-	//get the morphogene branch that defines the joint connecting the limbs
+	//prepare parent side
 	MorphogeneBranch* parentMorphogeneBranch =
-		((MorphogeneBranch*) generator->getGeneBranch());
+		((MorphogeneBranch*) generator->getGeneBranch()); //get the morphogene branch that defines the joint connecting the limbs
+
 	FSLimbModel* parentLimbModel =
-		((FSLimbModel*) generator->getParentComponentModel());
+		((FSLimbModel*) generator->getParentComponentModel()); // get the parent limb model
 
-	// get parent limb
-	FSLimbBt* parentLimb = ((FSLimbBt*) parentLimbModel->getLimbPhysics());
+	FSLimbBt* parentLimb = ((FSLimbBt*) parentLimbModel->getLimbPhysics()); // get parent limb
 
-	//get the parent limb's center of mass position
-	Ogre::Vector3 parentLimbCOM = parentLimbModel->getPosition();
+	Ogre::Vector3 parentLimbCOM = parentLimbModel->getPosition(); // get the parent limb's center of mass position
 
 	Ogre::Vector3 localParentAnchorDirInRefParent = Ogre::Vector3(
+		// get parent joint's anchor direction
 		parentMorphogeneBranch->getJointAnchorX(),
 		parentMorphogeneBranch->getJointAnchorY(),
 		parentMorphogeneBranch->getJointAnchorZ());
@@ -261,70 +260,64 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 		parentLimbDir = OgreBulletUtils::convert(parentLimb->getOrientation())
 			* parentLimbDir;
 
-		//reflect on the direction vector
-		localParentAnchorDirInRefParent = -localParentAnchorDirInRefParent
+		localParentAnchorDirInRefParent = -localParentAnchorDirInRefParent //reflect on the direction vector
 			- 2 * ((-localParentAnchorDirInRefParent).dotProduct(parentLimbDir))
 				* parentLimbDir;
 	}
 
-	// ##
-	// PARENT ANCHOR DIRECTION
-	//get anchor direction of the parent limb in reference frame of itself
-	parentJointAnchor = getParentIntersection(parentLimb,
+	//PARENT JOINT ANCHOR
+	parentJointAnchor = getParentIntersection(parentLimb, // get anchor direction of the parent limb in reference frame of itself
 		parentMorphogeneBranch, parentLimbCOM, localParentAnchorDirInRefParent);
 
-	//get surface point of the parent limb in reference frame of itself
-	Ogre::Vector3 localParentAnchorInRefParent(
+	Ogre::Vector3 localParentAnchorInRefParent( // get surface point of the parent limb in reference frame of itself
 		OgreBulletUtils::convert(parentJointAnchor.getOrigin()));
 
-	//##
 	// PARENT JOINT POSITION
-	// joint direction of joint part of parent
-	Ogre::Euler parentEulerJointDir(parentMorphogeneBranch->getJointYaw(),
+	Ogre::Euler parentEulerJointDir(
+		parentMorphogeneBranch->getJointYaw(), // joint direction of joint part of parent
 		parentMorphogeneBranch->getJointPitch(),
 		parentMorphogeneBranch->getJointRoll());
 
-	generator->setOrientation(
-		OgreBulletUtils::convert(parentJointAnchor.getRotation()) /**!< The parent surface direction */
-			* parentEulerJointDir.toQuaternion() /**!< The parent joint direction change */);
+	generator->setOrientation( // update the generator orientation using
+		generator->getOrientation() /**!< The current orientation */
+		* OgreBulletUtils::convert(parentJointAnchor.getRotation()) /**!< The parent surface direction */
+		* parentEulerJointDir.toQuaternion()); /**!< The parent joint direction change */
 
-	//get local joint rotation point in reference frame parent
-	localParentJointInRefParent = localParentAnchorInRefParent; /**!< The direction of the surface*/
+	localParentJointInRefParent = localParentAnchorInRefParent; //get local joint rotation point in reference frame parent
 
-	//##
 	// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
-	// get local joint direction in the local reference frame of child
-	Ogre::Euler childEulerJointDir(childMorphogene->getJointYaw(),
+	Ogre::Euler childEulerJointDir(childMorphogene->getJointYaw(), // get joint anchor direction in the local reference frame of child
 		childMorphogene->getJointPitch(), childMorphogene->getJointRoll());
 
 	generator->setOrientation(
-		generator->getOrientation()
-			* childEulerJointDir.toQuaternion() /**!< The child joint direction change */);
+		generator->getOrientation() * childEulerJointDir.toQuaternion()); /**!< The child joint direction change */
 
-	//get local surface anchor point of child in reference frame parent
-	Ogre::Vector3 localChildAnchorInRefParent(localParentJointInRefParent);
+	Ogre::Vector3 localChildAnchorInRefParent(localParentJointInRefParent); //get local surface anchor point of child in reference frame parent
 
-	// get anchor direction of limb child in the local reference frame of child
 	Ogre::Vector3 localChildAnchorDirInRefChild(
+		// get anchor direction of limb child in the local reference frame of child
 		childMorphogene->getJointAnchorX(), childMorphogene->getJointAnchorY(),
 		childMorphogene->getJointAnchorZ());
 
-	//##
-	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
-	// find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
-	childJointAnchor = getOwnIntersection(childMorphogene, generator,
-		localChildAnchorDirInRefChild);
+	// get the child limb rotation
+	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
+		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
+		childMorphogene->getOrientationZ());
 
-	generator->setOrientation(
+	generator->setOrientation( // update the generator orientation using
 		generator->getOrientation()
-			* OgreBulletUtils::convert(
-				childJointAnchor.getRotation()) /**!< The child joint surface direction */);
+			* OgreBulletUtils::convert(childJointAnchor.getRotation()) /**!< The child joint surface direction */
+			* childLimbRotation); /**!< The child element rotation */
 
-	//get the surface point of child limb in the local reference frame of itself
+	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
+	childJointAnchor = getOwnIntersection(childMorphogene, generator,
+		localChildAnchorDirInRefChild); // find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
+
+	//get the surface point of child limb in the global reference frame
 	Ogre::Vector3 localChildAnchorInRefChild(
 		OgreBulletUtils::convert(childJointAnchor.getOrigin()));
 
-	localChildJointInRefChild = localChildAnchorInRefChild;
+	localChildJointInRefChild = localChildAnchorInRefChild; //get local joint rotation point in reference frame child
 
 	// global center of mass of child limb
 	Ogre::Vector3 childLimbCOM(
@@ -387,7 +380,6 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 
 	// set global center of mass of child limb as the new generation point for generation
 	generator->setPosition(childLimbCOM);
-//	generator->setOrientation(); Orientation has been prepared already
 }
 
 LimbModel* FSPhenomeModel::createLimb(PhenotypeGenerator* generator,
@@ -467,24 +459,15 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	// define the position and direction of the joint in the reference frame of the parent
 	localParentJointTransform.setOrigin(
 		OgreBulletUtils::convert(localParentJointInRefParent));
-	localParentJointTransform.getBasis().setRotation(
-		parentHitTransform.getRotation());
-	//		localParentJointTransform.getBasis().setEulerYPR(
-	//				parentMorphogeneBranch->getJointYaw(),
-	//				parentMorphogeneBranch->getJointPitch(),
-	//				parentMorphogeneBranch->getJointRoll());
+//	localParentJointTransform.getBasis().setRotation(
+//		parentHitTransform.getRotation());
 
 	// define the position and direction of the joint in the reference frame of child
 	localChildJointTransform.setOrigin(
 		OgreBulletUtils::convert(localChildJointInRefChild));
 	//set the direction of the joint normals
-	localChildJointTransform.getBasis().setRotation(
-		childHitTransform.getRotation());
-	//correct the direction of the joint by some random rotation
-	//		localChildJointTransform.getBasis().setEulerYPR(
-	//				childMorphogene->getJointYaw(),
-	//				childMorphogene->getJointPitch(),
-	//				childMorphogene->getJointRoll());
+//	localChildJointTransform.getBasis().setRotation(
+//		childHitTransform.getRotation());
 
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	FSJointModel* joint = new FSJointModel(getCreatureModel()->getWorld(),
@@ -541,11 +524,12 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 
 	//TODO: Only supports sine controller gene
 	for (int i = 0; i < joint->getMotors().size(); i++) {
-		SineController* controller = new SineController(
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
+		SineController* controller =
+			new SineController(
+				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
+				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
+				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
+				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
 		controller->initialize();
 		controller->addControlOutput(joint->getMotors()[i]);
 		getControllers().push_back(controller);
@@ -613,7 +597,7 @@ void FSPhenomeModel::generateBody() {
 	bool isFixedBase = false;
 	bool isMultiDof = true;
 	bool setDamping = true;
-	bool gyro = true;
+	bool gyro = false;
 	bool canSleep = true;
 
 	if (mBodyGenerated) {

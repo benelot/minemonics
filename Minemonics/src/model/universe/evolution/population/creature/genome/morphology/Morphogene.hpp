@@ -50,10 +50,10 @@ class access;
  */
 class Morphogene: public Gene {
 public:
-	Morphogene(Ogre::Vector3 dimensions, Ogre::Vector3 anchorDirection,
-		Ogre::Euler anchorOrientation, LimbPhysics::PrimitiveType primitiveType,
-		Ogre::ColourValue color, double friction, double restitution,
-		bool intraBodyColliding);
+	Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
+		Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
+		LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
+		double friction, double restitution, bool intraBodyColliding);
 	Morphogene();
 	Morphogene(const Morphogene& morphoGene);
 
@@ -228,6 +228,38 @@ public:
 		mPrimitiveType = primitiveType;
 	}
 
+	double getOrientationW() const {
+		return mOrientationW;
+	}
+
+	void setOrientationW(const double orientationW) {
+		mOrientationW = orientationW;
+	}
+
+	double getOrientationX() const {
+		return mOrientationX;
+	}
+
+	void setOrientationX(double orientationX) {
+		mOrientationX = orientationX;
+	}
+
+	double getOrientationY() const {
+		return mOrientationY;
+	}
+
+	void setOrientationY(const double orientationY) {
+		mOrientationY = orientationY;
+	}
+
+	double getOrientationZ() const {
+		return mOrientationZ;
+	}
+
+	void setOrientationZ(const double orientationZ) {
+		mOrientationZ = orientationZ;
+	}
+
 	double getRestitution() const {
 		return mRestitution;
 	}
@@ -258,23 +290,28 @@ public:
 		os << "Morphogene: " << "Size(" /**!< The size of the morphogene*/
 		<< morphogene.mX << "," << morphogene.mY << "," << morphogene.mZ << ")"
 
-		<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor /**!< The shrink factor propagated along the branches of the morphogene*/
+		<< "/Orientation=(" /**!< The orientation of the morphogene*/
+		<< morphogene.mOrientationX << "," << morphogene.mOrientationY << ","
+			<< morphogene.mOrientationZ << "," << morphogene.mOrientationW
+			<< ")"
 
-		<< "/RepetitionLimit" << morphogene.mRepetitionLimit /**!< The number of repetitions of this gene one after another.*/
+			<< "/ShrinkFactor=" << morphogene.mSegmentShrinkFactor /**!< The shrink factor propagated along the branches of the morphogene*/
 
-		<< "/FollowUpGene=" << morphogene.mFollowUpGene /**!< The gene that follows this one after the repetitions.*/
+			<< "/RepetitionLimit" << morphogene.mRepetitionLimit /**!< The number of repetitions of this gene one after another.*/
 
-		<< "/Color(" /**!< The color of this morphogene.*/
-		<< morphogene.mColorR << "," << morphogene.mColorG << ","
+			<< "/FollowUpGene=" << morphogene.mFollowUpGene /**!< The gene that follows this one after the repetitions.*/
+
+			<< "/Color(" /**!< The color of this morphogene.*/
+			<< morphogene.mColorR << "," << morphogene.mColorG << ","
 			<< morphogene.mColorB
 
-			<< "/PrimitiveType" << morphogene.mPrimitiveType /**!< The 3D primitive type of this morphogene.*/
+			<< "/PrimitiveType" << morphogene.mPrimitiveType
+			/**!< The 3D primitive type of this morphogene.*/
 
 //			<< "/ControllerGenes=" << morphogene.mControllerGenes /**!< The controller gene of this morphogene's joint.*/
-
-		<< "/Joint Anchor:(" /**!< The position of the joint anchor.*/
-		<< morphogene.mJointAnchorX << "," << morphogene.mJointAnchorY << ","
-			<< morphogene.mJointAnchorZ << ")"
+			<< "/Joint Anchor:(" /**!< The position of the joint anchor.*/
+			<< morphogene.mJointAnchorX << "," << morphogene.mJointAnchorY
+			<< "," << morphogene.mJointAnchorZ << ")"
 
 			<< "/Joint Rotation:(" /**!< The orientation of the joint anchor.*/
 			<< morphogene.mJointPitch << "," << morphogene.mJointYaw << ","
@@ -313,6 +350,11 @@ public:
 		& BOOST_SERIALIZATION_NVP(mX) /**!< The size of the morphogene*/
 		& BOOST_SERIALIZATION_NVP(mY) & BOOST_SERIALIZATION_NVP(mZ)
 
+		& BOOST_SERIALIZATION_NVP(mOrientationX) /**!< The orientation of the morphogene*/
+		& BOOST_SERIALIZATION_NVP(mOrientationY)
+		& BOOST_SERIALIZATION_NVP(mOrientationZ)
+		& BOOST_SERIALIZATION_NVP(mOrientationW)
+
 		& BOOST_SERIALIZATION_NVP(mIntraBodyColliding) /**!< If the limb will be colliding with others */
 		& BOOST_SERIALIZATION_NVP(mSegmentShrinkFactor) /** !< The shrink factor propagated along the branches of the morphogene*/
 
@@ -343,6 +385,8 @@ public:
 
 private:
 	double mX, mY, mZ; /**!< Dimensions of the segment.*/
+
+	double mOrientationX, mOrientationY, mOrientationZ, mOrientationW; /**!< Orientation of the segment. */
 
 	double mSegmentShrinkFactor; /**!< Segment shrink factor */
 

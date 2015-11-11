@@ -417,24 +417,17 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	// define the position and direction of the joint in the reference frame of the parent
 	localParentJointTransform.setOrigin(
 		OgreBulletUtils::convert(localParentJointInRefParent));
-	localParentJointTransform.getBasis().setRotation(
-		parentHitTransform.getRotation());
-	//		localParentJointTransform.getBasis().setEulerYPR(
-	//				parentMorphogeneBranch->getJointYaw(),
-	//				parentMorphogeneBranch->getJointPitch(),
-	//				parentMorphogeneBranch->getJointRoll());
+	//TODO: Fix rotation
+//	localParentJointTransform.getBasis().setRotation(
+//		parentHitTransform.getRotation());
 
 	// define the position and direction of the joint in the reference frame of child
 	localChildJointTransform.setOrigin(
-		OgreBulletUtils::convert(localChildJointInRefChild));
+		OgreBulletUtils::convert(-localChildJointInRefChild));
+	//TODO: Fix rotation
 	//set the direction of the joint normals
-	localChildJointTransform.getBasis().setRotation(
-		childHitTransform.getRotation());
-	//correct the direction of the joint by some random rotation
-	//		localChildJointTransform.getBasis().setEulerYPR(
-	//				childMorphogene->getJointYaw(),
-	//				childMorphogene->getJointPitch(),
-	//				childMorphogene->getJointRoll());
+//	localChildJointTransform.getBasis().setRotation(
+//		childHitTransform.getRotation());
 
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	SRBJointModel* joint = new SRBJointModel(getCreatureModel()->getWorld(),
@@ -473,9 +466,9 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
 	double maxTorque =
-		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+		(0.01f
 			* (mass1 + mass2)
-			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+			+ 0
 				* pow(mass1 + mass2, 2));
 
 	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;

@@ -25,9 +25,6 @@ class MixedGenome;
  */
 class SnakeBuilder {
 public:
-	SnakeBuilder();
-	virtual ~SnakeBuilder();
-
 	static void build(MixedGenome* genome);
 };
 
