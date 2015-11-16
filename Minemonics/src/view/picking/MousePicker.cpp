@@ -52,9 +52,9 @@ void MousePicker::pickBody(btDynamicsWorld* world) {
 void MousePicker::pickBody() {
 	//Implement OgreMeshRay
 	Ogre::Ray ray = getMouseRay();
-	if (mViewController->getSelectedPlanet()) {
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()) {
 		mBulletPicker.pickBody(
-			mViewController->getSelectedPlanet()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+			SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			OgreBulletUtils::convert(ray.getOrigin()),
 			OgreBulletUtils::convert(
 				ray.getOrigin() + ray.getDirection() * 10000.0f));
