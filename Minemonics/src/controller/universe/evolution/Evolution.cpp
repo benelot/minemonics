@@ -42,7 +42,7 @@ Evolution::Evolution(EvolutionModel* const evolutionModel) :
 }
 
 Evolution::~Evolution() {
-	delete mEvolutionModel;
+	//evolution model belongs to the planetmodel, therefore it is deleted with it
 	mEvolutionModel = NULL;
 
 	mEvaluationController = NULL;
