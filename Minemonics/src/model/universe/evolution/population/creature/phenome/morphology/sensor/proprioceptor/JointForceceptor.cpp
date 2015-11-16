@@ -1,23 +1,29 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
+
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //## view headers
 //## utils headers
 
-JointForceceptor::JointForceceptor(
-	std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+JointForceceptor::JointForceceptor() :
+	mForce(0) {
+}
+
+JointForceceptor::JointForceceptor(JointModel* jointModel,
 	JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-	JointProprioceptor(jointIndex, rotationalDOF), mForce(0) {
+	JointProprioceptor(jointModel, rotationalDOF), mForce(0) {
 
 }
 
 JointForceceptor::~JointForceceptor() {
 }
 
+void JointForceceptor::initialize() {
+	JointProprioceptor::initialize();
+}
+
 void JointForceceptor::update(double timeSinceLastTick) {
-//	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
-	//TODO: This is not the correct force, but only the maximum force
-	//http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=9&t=10759
-//	setForce(motor->m_maxMotorForce);
+	//TODO: Add getForce
+//	setForce(mJoint->getForce(mMotorIndex));
 }
