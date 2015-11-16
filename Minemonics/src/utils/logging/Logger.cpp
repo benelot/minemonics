@@ -45,14 +45,6 @@
 //## view headers
 //## utils headers
 
-Logger::Logger() {
-
-}
-
-Logger::~Logger() {
-
-}
-
 void Logger::init(std::string fileName,
 	boost::log::trivial::severity_level severity) {
 	namespace logging = boost::log;
@@ -73,8 +65,10 @@ void Logger::init(std::string fileName,
 			<< expr::attr<std::string>("ClassName") << "] <"
 			<< logging::trivial::severity << "> " << expr::smessage));
 
+	// add common attributes to the logger output
 	logging::add_common_attributes();
 
+	// set a filter to only log information coming from specified classes
 	logging::core::get()->set_filter(
 		logging::trivial::severity >= severity
 			&& (expr::has_attr("ClassName")
@@ -87,15 +81,14 @@ void Logger::initTermSink() {
 	namespace sinks = boost::log::sinks;
 	namespace expr = boost::log::expressions;
 	namespace keywords = boost::log::keywords;
+
+	//setup a synchronous shared sink
 	typedef logging::sinks::synchronous_sink<
 		logging::sinks::text_ostream_backend> text_sink;
-
 	boost::shared_ptr<text_sink> sink = boost::make_shared<text_sink>();
 	sink->locked_backend()->add_stream(
 		boost::shared_ptr<std::ostream>(&std::cout, logging::empty_deleter()));
-
 	sink->locked_backend()->auto_flush(true);
-
 	sink->set_formatter(
 		logging::expressions::stream << logging::expressions::message);
 

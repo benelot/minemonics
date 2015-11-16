@@ -30,8 +30,6 @@ typedef boost::log::sources::severity_logger<boost::log::trivial::severity_level
  */
 class Logger {
 public:
-	Logger();
-	~Logger();
 	static void init(std::string fileName,boost::log::trivial::severity_level severity);
 	static void initTermSink();
 
