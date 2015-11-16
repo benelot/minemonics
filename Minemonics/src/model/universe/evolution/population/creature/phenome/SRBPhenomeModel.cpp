@@ -464,7 +464,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	getComponentModels().push_back(joint);
 
 	//initialize rotational limit motors
-	//TODO: Remove max speed if not necessary
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
 	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));

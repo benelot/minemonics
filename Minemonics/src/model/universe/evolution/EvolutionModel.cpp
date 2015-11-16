@@ -35,7 +35,6 @@ EvolutionModel::~EvolutionModel() {
 }
 
 void EvolutionModel::initialize() {
-	//TODO:Get reasonable numbers
 	mReaper.initialize(EvolutionConfiguration::REAPER_REAP_PERCENTAGE,
 		EvolutionConfiguration::REAPER_CROSSOVER_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE,

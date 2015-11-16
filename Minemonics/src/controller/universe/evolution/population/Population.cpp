@@ -145,7 +145,6 @@ void Population::resyncWithModel() {
 		if ((*cit)->isCulled()) {
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature culled.";
 			Creature* creature = *cit;
-			//TODO: Some creatures are deleted before this, some not, fix it!
 			delete creature->getCreatureModel();
 			delete creature;
 			cit = mCreatures.erase(cit);
