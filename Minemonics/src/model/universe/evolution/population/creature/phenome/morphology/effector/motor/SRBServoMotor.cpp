@@ -106,7 +106,7 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 	float kP = 200000000;
 	float kD = 2000;
 	double correction = kP * angleError + kD * velocityError;
-	mJoint->applyJointTorque(mJointIndex, 0,
+	mJoint->applyJointTorque(0,
 		btScalar(
 			(correction > mMaxForce) ? mMaxForce :
 			(correction < -mMaxForce) ? -mMaxForce : correction));

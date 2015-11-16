@@ -55,7 +55,7 @@ public:
 		const btTransform& tframeInB, JointPhysics::JointType type,
 		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-		btVector3 jointUpperLimits);
+		btVector3 jointUpperLimits,int ownIndex);
 
 	/**
 	 * Initialize the joint bullet physics model.
@@ -75,43 +75,24 @@ public:
 	 */
 	void generateMotors(const btVector3 maxForces, const btVector3 lowerLimits,
 		const btVector3 upperLimits);
-//	void generateMotors(btMultiBody* multiBody, const int ownIndex,
-//		const btVector3 maxForces, const btVector3 lowerLimits,
-//		const btVector3 upperLimits);
 
 	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping);
 
-	/**
-	 * Reset the joint to the place when the creature was born.
-	 */
-	virtual void reset(const Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position); 	/** Reset the joint to the place when the creature was born. */
 
-	/**
-	 * Reposition the joint without resetting it.
-	 */
-	virtual void reposition(const Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position); 	/** Reposition the joint without resetting it. */
 
-	/**
-	 * Update the joint bullet physics model.
-	 */
-	void update(double timeSinceLastTick);
+	void update(double timeSinceLastTick); 	/** Update the joint bullet physics model. */
 
-	/**
-	 * Add the joint bullet physics model to the world.
-	 */
-	void addToWorld();
+	void addToWorld(); 	/** Add the joint bullet physics model to the world. */
 
-	/**
-	 * Remove the joint bullet physics models from the world.
-	 */
-	void removeFromWorld();
+	void removeFromWorld(); /** Remove the joint bullet physics models from the world. */
 
-	virtual void applyJointTorque(int jointIndex, int jointAxisIndex,
-		double torque);
+	virtual void applyJointTorque(int jointAxisIndex, double torque); /**!< Apply a torque to a joint axis*/
 
-	virtual double getJointPos(int jointIndex, int jointAxisIndex);
+	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
-	virtual double getJointVel(int jointIndex, int jointAxisIndex);
+	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
 
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.

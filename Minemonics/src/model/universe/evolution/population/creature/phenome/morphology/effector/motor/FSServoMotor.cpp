@@ -68,15 +68,15 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 		+ clampedInputValue * (mUpperLimit - mLowerLimit);
 
 	//calculate the angle error
-	btScalar angleError = targetAngle - mJoint->getJointPos(mJointIndex, 0);
-	btScalar velocityError = 0 - mJoint->getJointVel(mJointIndex, 0);
+	btScalar angleError = targetAngle - mJoint->getJointPos(0);
+	btScalar velocityError = 0 - mJoint->getJointVel(0);
 
 	//simple p(roportional) controller
 	//calculate the target force and clamp it with the maximum force
 	float kP = 200000000;
 	float kD = 2000;
 	double correction = kP * angleError + kD * velocityError;
-	mJoint->applyJointTorque(mJointIndex, 0,
+	mJoint->applyJointTorque(0,
 		btScalar(
 			(correction > mMaxForce) ? mMaxForce :
 			(correction < -mMaxForce) ? -mMaxForce : correction));

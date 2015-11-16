@@ -72,6 +72,8 @@ public:
 
 	virtual void initialize();
 
+	void addSensors();
+
 	/**
 	 * Update the joint model.
 	 * @param timeSinceLastTick
@@ -87,12 +89,6 @@ public:
 	 * Reposition the joint without resetting it.
 	 */
 	void reposition(const Ogre::Vector3 position);
-
-//	/**
-//	 * Returns if the joint is under tension.
-//	 * @return If the joint is under tension.
-//	 */
-//	bool isStrained();
 
 	/**
 	 * Compare the joint model to another joint model.
@@ -261,5 +257,5 @@ private:
 		}
 	} _initializer;
 };
-
+BOOST_CLASS_VERSION(FSJointModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_FSJOINTMODEL_HPP_ */

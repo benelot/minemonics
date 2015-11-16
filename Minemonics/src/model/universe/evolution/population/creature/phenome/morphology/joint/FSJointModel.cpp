@@ -2,6 +2,8 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 
 #include <LinearMath/btTransform.h>
+#include <LinearMath/btVector3.h>
+#include <OgreQuaternion.h>
 
 //## view headers
 //# custom headers
@@ -10,9 +12,19 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //## view headers
 //## utils headers
+
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BoostLogger FSJointModel::mBoostLogger; /*<! initialize the boost logger*/
 FSJointModel::_Init FSJointModel::_initializer;
@@ -32,7 +44,7 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	const btTransform localA, const btTransform localB,
 	const std::vector<FSLimbModel*>::size_type indexA,
 	const std::vector<FSLimbModel*>::size_type indexB,
-	const std::vector<FSLimbModel*>::size_type ownIndex,
+	const std::vector<FSJointModel*>::size_type ownIndex,
 	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
 	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
 	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
@@ -48,31 +60,11 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	mLocalAOrientation = OgreBulletUtils::convert(localB.getRotation());
 	mLocalBOrientation = OgreBulletUtils::convert(localB.getRotation());
 
-	mJointPhysics = new FSJointBt(world, limbA, limbB, localA,
-		localB, type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
+	mJointPhysics = new FSJointBt(world, limbA, limbB, localA, localB, type,
+		jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointMinAngle),
-		OgreBulletUtils::convert(jointMaxAngle));
-
-	//TODO: proof of concept, make better.
-//	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
-//			((JointBt*) mJointPhysics)->getG6DofJoint(),
-//			JointPhysics::RDOF_PITCH);
-//	mSensors.push_back(angleceptor);
-//	mAngleceptors.push_back(angleceptor);
-//
-//	JointForceProprioceptor* forceceptor = new JointForceProprioceptor(
-//			((JointBt*) mJointPhysics)->getG6DofJoint(),
-//			JointPhysics::RDOF_PITCH);
-//	mSensors.push_back(forceceptor);
-//	mForceceptors.push_back(forceceptor);
-//
-//	JointLimitProprioceptor* limitceptor = new JointLimitProprioceptor(
-//			((JointBt*) mJointPhysics)->getG6DofJoint(),
-//			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
-//	mSensors.push_back(limitceptor);
-//	mLimitceptors.push_back(limitceptor);
-
+		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
 }
 
 FSJointModel::~FSJointModel() {
@@ -86,24 +78,63 @@ void FSJointModel::initialize() {
 
 	mJointPhysics->initialize();
 
-	//TODO: proof of concept, make better.
-//	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
-//			((JointBt*) mJointPhysics)->getG6DofJoint(),
-//			JointPhysics::RDOF_PITCH);
-//	mSensors.push_back(angleceptor);
-//	mAngleceptors.push_back(angleceptor);
-//
-//	JointForceProprioceptor* forceceptor = new JointForceProprioceptor(
-//			((JointBt*) mJointPhysics)->getG6DofJoint(),
-//			JointPhysics::RDOF_PITCH);
-//	mSensors.push_back(forceceptor);
-//	mForceceptors.push_back(forceceptor);
-//
-//	JointLimitProprioceptor* limitceptor = new JointLimitProprioceptor(
-//			((JointBt*) mJointPhysics)->getG6DofJoint(),
-//			JointPhysics::RDOF_PITCH, JointLimitProprioceptor::BOTH_LIMITS);
-//	mSensors.push_back(limitceptor);
-//	mLimitceptors.push_back(limitceptor);
+	addSensors();
+}
+
+void FSJointModel::addSensors() {
+	JointAngleceptor* angleceptor = new JointAngleceptor(this,
+		JointPhysics::RDOF_PITCH);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
+
+	angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_YAW);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
+
+	angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_ROLL);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
+
+	JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
+		JointPhysics::RDOF_PITCH);
+	mSensors.push_back(velocityceptor);
+	mVelocityceptors.push_back(velocityceptor);
+
+	velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_YAW);
+	mSensors.push_back(velocityceptor);
+	mVelocityceptors.push_back(velocityceptor);
+
+	velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_ROLL);
+	mSensors.push_back(velocityceptor);
+	mVelocityceptors.push_back(velocityceptor);
+
+	JointForceceptor* forceceptor = new JointForceceptor(this,
+		JointPhysics::RDOF_PITCH);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
+
+	forceceptor = new JointForceceptor(this, JointPhysics::RDOF_YAW);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
+
+	forceceptor = new JointForceceptor(this, JointPhysics::RDOF_ROLL);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
+
+	JointLimitceptor* limitceptor = new JointLimitceptor(this,
+		JointPhysics::RDOF_PITCH, JointLimitceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
+
+	limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_YAW,
+		JointLimitceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
+
+	limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_ROLL,
+		JointLimitceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
 }
 
 void FSJointModel::update(double timeSinceLastTick) {
@@ -193,10 +224,6 @@ void FSJointModel::reposition(const Ogre::Vector3 position) {
 FSJointModel* FSJointModel::clone() {
 	return new FSJointModel(*this);
 }
-
-//bool JointModel::isStrained() {
-//	return mJointPhysics->isStrained();
-//}
 
 void FSJointModel::generateMotors(const Ogre::Vector3 maxForces,
 	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {

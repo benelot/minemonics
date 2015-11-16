@@ -20,7 +20,7 @@ JointPhysics::JointPhysics() :
 	mInWorld(false), mType(JointPhysics::UNKNOWN_JOINT), mJointPitchEnabled(
 		true), mJointRollEnabled(true), mJointYawEnabled(true), mJointMaxAngle(
 		0, 0, 0), mJointMaxForces(0, 0, 0), mJointMaxSpeeds(0, 0, 0), mJointMinAngle(
-		0, 0, 0), mJointPitchAxis(1, 0, 0) {
+		0, 0, 0), mJointPitchAxis(1, 0, 0),mJointIndex(0) {
 }
 
 JointPhysics::~JointPhysics() {

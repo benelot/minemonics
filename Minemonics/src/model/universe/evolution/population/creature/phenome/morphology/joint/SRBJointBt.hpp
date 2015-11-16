@@ -71,7 +71,7 @@ public:
 		const btTransform& tframeInB, JointPhysics::JointType type,
 		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-		btVector3 jointUpperLimits);
+		btVector3 jointUpperLimits,int ownIndex);
 
 	virtual ~SRBJointBt();
 
@@ -85,11 +85,11 @@ public:
 	 */
 	void initialize();
 
-	virtual void applyJointTorque(int jointIndex,int jointAxisIndex, double torque);
+	virtual void applyJointTorque(int jointAxisIndex, double torque);
 
-	virtual double getJointPos(int jointIndex,int jointAxisIndex);
+	virtual double getJointPos(int jointAxisIndex);
 
-	virtual double getJointVel(int jointIndex,int jointAxisIndex);
+	virtual double getJointVel(int jointAxisIndex);
 
 	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping);
 

@@ -41,6 +41,7 @@ class access;
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
 
@@ -60,9 +61,9 @@ public:
 	JointModel();
 	JointModel(const JointModel& jointModel);
 	JointModel(JointModel* const jointModel);
-	JointModel(btDynamicsWorld* const world,
-		btRigidBody* const limbA, btRigidBody* const limbB,
-		const btTransform localA, const btTransform localB,
+	JointModel(btDynamicsWorld* const world, btRigidBody* const limbA,
+		btRigidBody* const limbB, const btTransform localA,
+		const btTransform localB,
 		const std::vector<LimbModel*>::size_type indexA,
 		const std::vector<LimbModel*>::size_type indexB,
 		const std::vector<JointModel*>::size_type ownIndex,
@@ -81,21 +82,13 @@ public:
 	 */
 	virtual void update(double timeSinceLastTick);
 
-	/**
-	 * Reset the joint to the place when the creature was born.
-	 */
-	virtual void reset(const Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position); /** Reset the joint to the place when the creature was born. */
 
-	/**
-	 * Reposition the joint without resetting it.
-	 */
-	virtual void reposition(const Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position); /** Reposition the joint without resetting it. */
 
-//	/**
-//	 * Returns if the joint is under tension.
-//	 * @return If the joint is under tension.
-//	 */
-//	bool isStrained();
+	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
+
+	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
 
 	/**
 	 * Compare the joint model to another joint model.
@@ -217,6 +210,39 @@ public:
 		return OgreBulletUtils::convert(mJointPhysics->getJointPitchAxis());
 	}
 
+	const std::vector<JointAngleceptor*>& getAngleceptors() const {
+		return mAngleceptors;
+	}
+
+	std::vector<JointAngleceptor*>& getAngleceptors() {
+		return mAngleceptors;
+	}
+
+	const std::vector<JointForceceptor*>& getForceceptors() const {
+		return mForceceptors;
+	}
+
+	std::vector<JointForceceptor*>& getForceceptors() {
+		return mForceceptors;
+	}
+
+
+	const std::vector<JointLimitceptor*>& getLimitceptors() const {
+		return mLimitceptors;
+	}
+
+	std::vector<JointLimitceptor*>& getLimitceptors() {
+		return mLimitceptors;
+	}
+
+	const std::vector<JointVelocityceptor*>& getVelocityceptors() const {
+		return mVelocityceptors;
+	}
+
+	std::vector<JointVelocityceptor*>& getVelocityceptors() {
+		return mVelocityceptors;
+	}
+
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization .*/
 
@@ -260,10 +286,11 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointPhysics) /**!< The physics component of the joint model*/
 		& BOOST_SERIALIZATION_NVP(mOwnIndex) /**!< The joint's own index */
 		& BOOST_SERIALIZATION_NVP(mParentIndex) /**!< The joint's parent limb index */
-		& BOOST_SERIALIZATION_NVP(mChildIndex); /**!< The joint's child limb index */
-//		& BOOST_SERIALIZATION_NVP(mAngleceptors) /**!< The angle measuring sensors of the joint */
-//		& BOOST_SERIALIZATION_NVP(mForceceptors) /**!< The force measuring sensors of the joint */
-//		& BOOST_SERIALIZATION_NVP(mLimitceptors); /**!< The limit measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mChildIndex) /**!< The joint's child limb index */
+		& BOOST_SERIALIZATION_NVP(mAngleceptors) /**!< The angle measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mVelocityceptors) /**!< The velocity measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mForceceptors) /**!< The force measuring sensors of the joint */
+		& BOOST_SERIALIZATION_NVP(mLimitceptors); /**!< The limit measuring sensors of the joint */
 	}
 
 protected:
@@ -301,6 +328,11 @@ protected:
 	std::vector<JointAngleceptor*> mAngleceptors;
 
 	/**
+	 * The velocityceptors of the joint.
+	 */
+	std::vector<JointVelocityceptor*> mVelocityceptors;
+
+	/**
 	 * The forceceptors of the joint.
 	 */
 	std::vector<JointForceceptor*> mForceceptors;
@@ -320,7 +352,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("JointModel"));
+				boost::log::attributes::constant<std::string>("JointModel"));
 		}
 	} _initializer;
 

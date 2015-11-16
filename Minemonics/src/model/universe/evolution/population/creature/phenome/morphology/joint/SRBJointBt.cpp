@@ -54,7 +54,7 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits) :
+	btVector3 jointUpperLimits,int ownIndex) :
 	mJoint(NULL) {
 	mWorld = world;
 	mBodyA = bodyA;
@@ -69,6 +69,7 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	mJointPitchAxis = OgreBulletUtils::convert(jointPitchAxis);
 	mJointMinAngle = OgreBulletUtils::convert(jointLowerLimits);
 	mJointMaxAngle = OgreBulletUtils::convert(jointUpperLimits);
+	mJointIndex = ownIndex;
 }
 
 void SRBJointBt::initialize() {
@@ -301,7 +302,7 @@ SRBJointBt* SRBJointBt::clone() {
 	return new SRBJointBt(*this);
 }
 
-void SRBJointBt::applyJointTorque(int jointIndex, int jointAxisIndex,
+void SRBJointBt::applyJointTorque(int jointAxisIndex,
 	double torque) {
 
 	if (mJoint) {
@@ -343,11 +344,11 @@ void SRBJointBt::applyJointTorque(int jointIndex, int jointAxisIndex,
 	}
 }
 
-double SRBJointBt::getJointPos(int jointIndex, int jointAxisIndex) {
+double SRBJointBt::getJointPos(int jointAxisIndex) {
 	return mJoint->getAngle(jointAxisIndex);
 }
 
-double SRBJointBt::getJointVel(int jointIndex, int jointAxisIndex) {
+double SRBJointBt::getJointVel(int jointAxisIndex) {
 	//TODO: Find a way to get joint velocity in SRB
 	return 0;
 //	mJoint->get

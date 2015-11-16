@@ -127,10 +127,6 @@ void JointModel::reposition(const Ogre::Vector3 position) {
 	mJointPhysics->reposition(position);
 }
 
-//bool JointModel::isStrained() {
-//	return mJointPhysics->isStrained();
-//}
-
 void JointModel::generateMotors(const Ogre::Vector3 maxForces,
 	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {
 	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
@@ -146,5 +142,13 @@ void JointModel::enableAngularMotor(const bool pitchEnable,
 		yawEnable);
 	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
 		rollEnable);
+}
+
+double JointModel::getJointPos(int jointAxisIndex) {
+	return mJointPhysics->getJointPos(jointAxisIndex);
+}
+
+double JointModel::getJointVel(int jointAxisIndex) {
+	return mJointPhysics->getJointVel(jointAxisIndex);
 }
 

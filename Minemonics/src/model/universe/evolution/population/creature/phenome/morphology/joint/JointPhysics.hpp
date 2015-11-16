@@ -115,12 +115,12 @@ public:
 
 	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping) = 0;
 
-	virtual void applyJointTorque(int jointIndex, int jointAxisIndex,
+	virtual void applyJointTorque(int jointAxisIndex,
 		double torque) = 0;
 
-	virtual double getJointPos(int jointIndex, int jointAxisIndex) = 0;
+	virtual double getJointPos(int jointAxisIndex) = 0;
 
-	virtual double getJointVel(int jointIndex, int jointAxisIndex) = 0;
+	virtual double getJointVel(int jointAxisIndex) = 0;
 
 	/**
 	 * Compare the joint physics model to another joint physics model.
@@ -257,6 +257,8 @@ public:
 		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
 	}
 protected:
+
+	int mJointIndex;
 
 	bool mJointPitchEnabled, mJointYawEnabled, mJointRollEnabled; /**!< If Joint Dof are enabled. */
 

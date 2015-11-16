@@ -24,7 +24,7 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits) :
+	btVector3 jointUpperLimits, int ownIndex) :
 	mMultiBody(NULL) {
 	mWorld = world;
 	mType = type;
@@ -37,6 +37,8 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	mJointMaxAngle = OgreBulletUtils::convert(jointUpperLimits);
 
 	mMotors.clear();
+
+	mJointIndex = ownIndex;
 }
 
 FSJointBt::FSJointBt(const FSJointBt& jointBt) {
@@ -159,16 +161,16 @@ FSJointBt* FSJointBt::clone() {
 	return new FSJointBt(*this);
 }
 
-void FSJointBt::applyJointTorque(int jointIndex, int jointAxisIndex,
+void FSJointBt::applyJointTorque(int jointAxisIndex,
 	double torque) {
-	mMultiBody->addJointTorque(jointIndex, torque);
+	mMultiBody->addJointTorque(mJointIndex, torque);
 }
 
-double FSJointBt::getJointPos(int jointIndex, int jointAxisIndex) {
-	return mMultiBody->getJointPos(jointIndex);
+double FSJointBt::getJointPos(int jointAxisIndex) {
+	return mMultiBody->getJointPos(mJointIndex);
 }
 
-double FSJointBt::getJointVel(int jointIndex, int jointAxisIndex) {
-	return mMultiBody->getJointVel(jointIndex);
+double FSJointBt::getJointVel(int jointAxisIndex) {
+	return mMultiBody->getJointVel(mJointIndex);
 }
 

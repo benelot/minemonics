@@ -39,11 +39,11 @@ SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 	mLocalAOrientation = OgreBulletUtils::convert(localB.getRotation());
 	mLocalBOrientation = OgreBulletUtils::convert(localB.getRotation());
 
-	mJointPhysics = new SRBJointBt(world, limbA, limbB, localA,
-		localB, type, jointPitchEnabled, jointYawEnabled, jointRollEnabled,
+	mJointPhysics = new SRBJointBt(world, limbA, limbB, localA, localB, type,
+		jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointMinAngle),
-		OgreBulletUtils::convert(jointMaxAngle));
+		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
 
 	//TODO: proof of concept, make better.
 //	JointAngleProprioceptor* angleceptor = new JointAngleProprioceptor(
@@ -69,14 +69,14 @@ SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 SRBJointModel::~SRBJointModel() {
 }
 
-void SRBJointModel::initialize(){
+void SRBJointModel::initialize() {
 	mLocalA.setOrigin(OgreBulletUtils::convert(mLocalAPosition));
 	mLocalA.setRotation(OgreBulletUtils::convert(mLocalAOrientation));
 	mLocalB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
 	mLocalB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
 
-	((SRBJointBt*)mJointPhysics)->setFrameInA(mLocalA);
-	((SRBJointBt*)mJointPhysics)->setFrameInB(mLocalB);
+	((SRBJointBt*) mJointPhysics)->setFrameInA(mLocalA);
+	((SRBJointBt*) mJointPhysics)->setFrameInB(mLocalB);
 	mJointPhysics->initialize();
 }
 
@@ -125,7 +125,7 @@ void SRBJointModel::setAngularDamping(
 	const double springPitchDampingCoefficient,
 	double springYawDampingCoefficient, double springRollDampingCoefficient) {
 	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-			springYawDampingCoefficient, springRollDampingCoefficient);
+		springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 bool SRBJointModel::equals(const SRBJointModel& SRBJointModel) const {

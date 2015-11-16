@@ -30,7 +30,8 @@ protected:
 			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
-			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			0);
 		jointBt->initialize();
 
 		jointBt->generateMotors(
@@ -56,7 +57,8 @@ protected:
 			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
-			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			0);
 		jointBt->generateMotors(
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
@@ -65,7 +67,7 @@ protected:
 
 		jointBt2 = new FSJointBt();
 
-		SaveController < FSJointBt > saveController;
+		SaveController<FSJointBt> saveController;
 
 		saveController.save(*jointBt, "test/FSJointBt.test");
 

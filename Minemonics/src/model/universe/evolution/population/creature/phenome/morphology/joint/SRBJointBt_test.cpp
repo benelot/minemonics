@@ -30,7 +30,7 @@ protected:
 			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+			OgreBulletUtils::convert(randomness->nextVector()), 0);
 		jointBt->initialize();
 
 //		jointBt->generateMotors(
@@ -59,7 +59,7 @@ protected:
 			JointPhysics::HINGE_JOINT, true, true, true,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()));
+			OgreBulletUtils::convert(randomness->nextVector()), 0);
 		jointBt->initialize();
 //		jointBt->generateMotors(
 //			OgreBulletUtils::convert(randomness->nextVector()),
@@ -68,7 +68,7 @@ protected:
 
 		jointBt2 = new SRBJointBt();
 
-		SaveController < SRBJointBt > saveController;
+		SaveController<SRBJointBt> saveController;
 
 		saveController.save(*jointBt, "test/SRBJointBt.test");
 
