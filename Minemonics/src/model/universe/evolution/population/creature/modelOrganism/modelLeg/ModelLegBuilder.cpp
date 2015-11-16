@@ -14,6 +14,8 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
 
 //## view headers
 //## utils headers
@@ -23,7 +25,7 @@
 #endif
 
 void ModelLegBuilder::build(MixedGenome* genome,
-	ControllerGene::ControllerGeneType controllerType) {
+	ControllerGene::ControllerType controllerType) {
 	genome->setTotalSegmentQtyLimit(2);
 	genome->setSegmentsDepthLimit(2);
 
@@ -64,7 +66,7 @@ void ModelLegBuilder::build(MixedGenome* genome,
 		}
 		break;
 	case ControllerGene::ChaoticControllerGene:
-		// create instances of the sine controller gene for the morphogene.
+		// create instances of the chaotic controller gene for the morphogene.
 			for (int i = 0; i < 3; i++) {
 				ChaoticControllerGene* chaoticController = new ChaoticControllerGene();
 				chaoticController->initialize();

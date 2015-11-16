@@ -27,7 +27,7 @@ class MixedGenome;
  */
 class ModelLegBuilder {
 public:
-	static void build(MixedGenome* genome,ControllerGene::ControllerGeneType controllerType);
+	static void build(MixedGenome* genome,ControllerGene::ControllerType controllerType);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_MODELORGANISM_MODELLEG_MODELLEGBUILDER_HPP_ */

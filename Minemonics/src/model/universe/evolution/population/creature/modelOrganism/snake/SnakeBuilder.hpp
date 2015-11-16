@@ -8,6 +8,8 @@ class MixedGenome;
 //# system headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -25,7 +27,8 @@ class MixedGenome;
  */
 class SnakeBuilder {
 public:
-	static void build(MixedGenome* genome);
+	static void build(MixedGenome* genome,
+		ControllerGene::ControllerType controllerType);
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_MODELORGANISM_MODELLEG_SnakeBuilder_HPP_ */

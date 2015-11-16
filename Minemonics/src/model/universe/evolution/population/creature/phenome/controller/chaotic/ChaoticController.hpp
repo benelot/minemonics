@@ -25,6 +25,8 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>
@@ -38,6 +40,7 @@ class access;
 class ChaoticController: public Controller {
 public:
 	ChaoticController();
+	ChaoticController(ChaoticControllerGene::ChaoticSystemType systemType);
 	ChaoticController(const ChaoticController& chaoticController);
 	virtual ~ChaoticController();
 
@@ -75,6 +78,14 @@ public:
 		return os;
 	}
 
+	ChaoticControllerGene::ChaoticSystemType getSystemType() const {
+		return mSystemType;
+	}
+
+	void setSystemType(ChaoticControllerGene::ChaoticSystemType systemType) {
+		mSystemType = systemType;
+	}
+
 	/**
 	 * Serializes the sine controller to an xml file.
 	 * @param ar The archive.
@@ -108,6 +119,8 @@ private:
 	double mTime;
 
 	double u[3];
+
+	ChaoticControllerGene::ChaoticSystemType mSystemType;
 };
 
 BOOST_CLASS_VERSION(ChaoticController, 1)

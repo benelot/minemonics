@@ -17,8 +17,14 @@
 
 BoostLogger ChaoticController::mBoostLogger; /*<! initialize the boost logger*/
 ChaoticController::_Init ChaoticController::_initializer;
+
 ChaoticController::ChaoticController() :
-	Controller(CHAOTIC_CONTROLLER), mTime(0) {
+	Controller(CHAOTIC_CONTROLLER), mTime(0),mSystemType(ChaoticControllerGene::CHUA_CIRCUIT) {
+	// Nothing to do for now
+
+}
+ChaoticController::ChaoticController(ChaoticControllerGene::ChaoticSystemType systemType) :
+	Controller(CHAOTIC_CONTROLLER), mTime(0),mSystemType(systemType) {
 	// Nothing to do for now
 
 }
@@ -39,6 +45,8 @@ ChaoticController::ChaoticController(const ChaoticController& chaoticController)
 		cit != chaoticController.mControlInputs.end(); cit++) {
 		mControlInputs.push_back(*cit);
 	}
+
+	mSystemType = chaoticController.mSystemType;
 }
 
 ChaoticController::~ChaoticController() {
@@ -53,7 +61,7 @@ void ChaoticController::initialize() {
 }
 
 ChaoticController* ChaoticController::clone() {
-	return new ChaoticController();
+	return new ChaoticController(*this);
 }
 
 void ChaoticController::perform(const double timeSinceLastTick) {
@@ -64,8 +72,7 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 		u[1] = mControlInputs[1]->getOutputValue();
 	}
 
-//time might not be the same as real-time, but it is close. On the other hand it is a very accurate simulation.
-	mTime += timeSinceLastTick;
+	mTime += timeSinceLastTick; // time might not be the same as real-time, but it is close. On the other hand it is a very accurate simulation.
 
 	calcChuaCircuit(); // calculate the circuit change
 
@@ -80,19 +87,14 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 }
 
 double* chuaCircuit(double t, int dimensions, double u[]) {
-	/*
-	 m0: slope in outer region
-	 m1: slope in inner region
-	 b: Breakpoints
-	 */
-	double c1 = 13.7;
+	double c1 = 15.6;
 	double c2 = 1;
-	double c3 = 29;
-	double m0 = -0.714;
-	double m1 = -1.143;
-	double b = 1;
-	double limval = -0.5;
-	double k = 7;
+	double c3 = 28;
+	double m0 = -0.714; /**!< slope in outer region */
+	double m1 = -1.143; /**!< slope in inner region */
+	double b = 1; /**!< Breakpoints */
+	double limitValue = -0.5;
+	double limitSoftness = 7;
 	double g = m0 * u[0] + (m1 - m0) / 2.0f * (abs(u[0] + b) - abs(u[0] - b));
 
 	double* uout = new double[dimensions];

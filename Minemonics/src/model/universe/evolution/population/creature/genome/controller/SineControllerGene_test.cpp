@@ -79,11 +79,11 @@ TEST_F(SineControllerGeneTest,DummyTest) {
 
 	ASSERT_TRUE(-1 <= sineControllerGene->getYOffset() <= 1);
 	ASSERT_TRUE(
-		0 <= sineControllerGene->getAmplitude()
-		<= ControlConfiguration::CPG_SINE_INITIAL_MAX_AMPLITUDE);
+		ControlConfiguration::JOINT_MIN_AMPLITUDE <= sineControllerGene->getAmplitude()
+		<= ControlConfiguration::JOINT_MAX_AMPLITUDE);
 	ASSERT_TRUE(
-		0 <= sineControllerGene->getFrequency()
-		<= ControlConfiguration::CPG_SINE_INITIAL_MAX_FREQUENCY);
+		ControlConfiguration::JOINT_MIN_FREQUENCY <= sineControllerGene->getFrequency()
+		<= ControlConfiguration::JOINT_MAX_FREQUENCY);
 }
 
 TEST_F(SineControllerGeneSerializationTest,isEqualAfterSerialization) {

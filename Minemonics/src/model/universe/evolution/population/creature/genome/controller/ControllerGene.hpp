@@ -28,12 +28,12 @@
  */
 class ControllerGene {
 public:
-	enum ControllerGeneType {
+	enum ControllerType {
 		SineControllerGene, ChaoticControllerGene, GenericControllerGene
 	};
 
 	ControllerGene();
-	ControllerGene(ControllerGeneType type);
+	ControllerGene(ControllerType type);
 	virtual ~ControllerGene();
 
 	/**
@@ -56,12 +56,12 @@ public:
 
 
 	//Accessor methods
-	ControllerGeneType getControllerGeneType() const {
-		return mControllerGeneType;
+	ControllerType getControllerType() const {
+		return mControllerType;
 	}
 
-	void setControllerGeneType(const ControllerGeneType controllerGeneType) {
-		mControllerGeneType = controllerGeneType;
+	void setControllerType(const ControllerType controllerType) {
+		mControllerType = controllerType;
 	}
 
 	//Serialization
@@ -78,7 +78,7 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 		const ControllerGene &controllerGene) {
-		return os << "ControllerGene:" << controllerGene.mControllerGeneType;
+		return os << "ControllerGene:" << controllerGene.mControllerType;
 
 	}
 
@@ -89,11 +89,11 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mControllerGeneType);
+		ar & BOOST_SERIALIZATION_NVP(mControllerType);
 	}
 
 protected:
-	ControllerGeneType mControllerGeneType; /**!< The type of the controller gene */
+	ControllerType mControllerType; /**!< The type of the controller gene */
 };
 BOOST_CLASS_VERSION(ControllerGene, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(ControllerGene)

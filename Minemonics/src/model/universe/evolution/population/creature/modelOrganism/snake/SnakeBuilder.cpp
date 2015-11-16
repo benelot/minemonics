@@ -14,6 +14,8 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
 
 //## view headers
 //## utils headers
@@ -22,7 +24,8 @@
 #define UNIV_EPS 0.01f
 #endif
 
-void SnakeBuilder::build(MixedGenome* genome) {
+void SnakeBuilder::build(MixedGenome* genome,
+	ControllerGene::ControllerType controllerType) {
 	int snakeLength = 15;
 	genome->setTotalSegmentQtyLimit(snakeLength);
 	genome->setSegmentsDepthLimit(snakeLength);
@@ -46,11 +49,24 @@ void SnakeBuilder::build(MixedGenome* genome) {
 			boost::math::constants::pi<double>() * 1.5f - UNIV_EPS,
 			boost::math::constants::pi<double>() * 1.5f - UNIV_EPS),
 		Ogre::Vector3(1, 0, 0));
-	// create instances of the sine controller gene for the morphogene.
-	for (int i = 0; i < 3; i++) {
-		SineControllerGene* sineController = new SineControllerGene();
-		sineController->initialize();
-		morphogeneBranch->getControllerGenes().push_back(sineController);
+
+	switch (controllerType) {
+	case ControllerGene::SineControllerGene:
+		// create instances of the sine controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			SineControllerGene* sineController = new SineControllerGene();
+			sineController->initialize();
+			morphogeneBranch->getControllerGenes().push_back(sineController);
+		}
+		break;
+	case ControllerGene::ChaoticControllerGene:
+		// create instances of the chaotic controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			ChaoticControllerGene* chaoticController =
+				new ChaoticControllerGene();
+			chaoticController->initialize();
+			morphogeneBranch->getControllerGenes().push_back(chaoticController);
+		}
 	}
 
 	morphogeneBranch->setActive(true);

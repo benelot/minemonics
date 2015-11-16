@@ -110,7 +110,7 @@ public:
 		return os
 		/**The type of controller*/
 		<< "SineControllerGene: Controllertype="
-				<< sineControllerGene.mControllerGeneType
+				<< sineControllerGene.mControllerType
 
 				/**The x offset of the sine wave of the controller*/
 				<< "/XOffset=" << sineControllerGene.mXOffset

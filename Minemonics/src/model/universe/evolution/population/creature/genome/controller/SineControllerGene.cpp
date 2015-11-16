@@ -74,5 +74,5 @@ bool SineControllerGene::equals(
 }
 
 SineControllerGene* SineControllerGene::clone() {
-	return new SineControllerGene(this);
+	return new SineControllerGene(*this);
 }

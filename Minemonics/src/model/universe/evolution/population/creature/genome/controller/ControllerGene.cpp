@@ -15,12 +15,12 @@
 //## utils headers
 
 ControllerGene::ControllerGene() :
-	mControllerGeneType(GenericControllerGene) {
+	mControllerType(GenericControllerGene) {
 
 }
 
-ControllerGene::ControllerGene(ControllerGeneType type) :
-	mControllerGeneType(type) {
+ControllerGene::ControllerGene(ControllerType type) :
+	mControllerType(type) {
 
 }
 
@@ -29,7 +29,7 @@ ControllerGene::~ControllerGene() {
 
 bool ControllerGene::equals(const ControllerGene& controllerGene) const {
 
-	if (mControllerGeneType != controllerGene.mControllerGeneType) {
+	if (mControllerType != controllerGene.mControllerType) {
 		return false;
 	}
 
