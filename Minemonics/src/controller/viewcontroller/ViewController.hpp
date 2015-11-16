@@ -133,14 +133,6 @@ public:
 		mShowShadows = showShadows;
 	}
 
-	Planet* getSelectedPlanet() const {
-		return mSelectedPlanet;
-	}
-
-	void setSelectedPlanet(Planet* selectedPlanet) {
-		mSelectedPlanet = selectedPlanet;
-	}
-
 	std::vector<MovablePanel*>& getMovablePanels() {
 		return mMovablePanels;
 	}
@@ -244,7 +236,6 @@ private:
 	InfoOverlay mInfoOverlay;
 
 	std::vector<Planet*> mPlanetsInView;
-	Planet* mSelectedPlanet;
 	Evaluation* mEvaluationInView;
 	bool mShowShadows;
 };

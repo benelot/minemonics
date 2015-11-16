@@ -65,8 +65,7 @@ void Evaluation::addPopulation(Population* const population) {
 void Evaluation::setup() {
 	SimulationManager::getSingleton()->getViewController().addPlanetToView(
 		mPlanet);
-	SimulationManager::getSingleton()->getViewController().setSelectedPlanet(
-		mPlanet);
+	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(mPlanet);
 	//add environment to the world
 	//TODO: Must be a separate copy for parallel evaluations(you can not use the same reference for multiple worlds), but must update (possibly in parallel)
 	// the main environment to stay the same for all evaluations
@@ -124,8 +123,7 @@ void Evaluation::teardown() {
 
 	SimulationManager::getSingleton()->getViewController().removePlanetFromView(
 		mPlanet);
-	SimulationManager::getSingleton()->getViewController().setSelectedPlanet(
-	NULL);
+	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(NULL);
 
 	if (!mHasFailed) {
 		// save creatures of evaluated populations
