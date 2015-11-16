@@ -128,7 +128,8 @@ SimulationManager::~SimulationManager(void) {
 	// destroy the ogre renderer system
 	CEGUI::OgreRenderer::destroySystem();
 
-	mSimulationManager = NULL;
+	//This is used past this line because the destructors are called on it
+//	mSimulationManager = NULL;
 	delete mRandomness;
 	mRandomness = NULL;
 }
