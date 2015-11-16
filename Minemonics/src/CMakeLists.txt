@@ -70,6 +70,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp
     ./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp
     ./model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp
+    ./model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp
 	./model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp
 	
 	## phenome
@@ -99,6 +100,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp
 		
@@ -163,6 +165,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/genome/morphology/Morphogene.cpp
 	./model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.cpp
 	./model/universe/evolution/population/creature/genome/controller/ControllerGene.cpp
+	./model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.cpp
 	./model/universe/evolution/population/creature/genome/controller/SineControllerGene.cpp
 	
 	## phenome
@@ -193,6 +196,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.cpp
+	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.cpp
 	./model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.cpp
 	
@@ -557,6 +561,7 @@ set(TESTSRCS
     ./model/universe/evolution/population/creature/genome/morphology/Morphogene_test.cpp
     
     ## controllers
+    ./model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene_test.cpp
     ./model/universe/evolution/population/creature/genome/controller/SineControllerGene_test.cpp
     
     # phenome
