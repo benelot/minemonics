@@ -29,7 +29,7 @@
  * @date		2015-03-24
  * @author		Benjamin Ellenberger
  */
-class RagDoll: public Creature {
+class RagDoll: public CreatureModel {
 	enum {
 		BODYPART_ABDOMENPELVIS = 0, BODYPART_THORAX, BODYPART_HEAD,
 
@@ -68,7 +68,7 @@ class RagDoll: public Creature {
 	static const double RAGDOLL_FOREARM = 2.52;
 
 public:
-	RagDoll(Population* const population, double size,
+	RagDoll(PopulationModel* const population, double size,
 		const btVector3& positionOffset);
 
 	virtual ~RagDoll();
