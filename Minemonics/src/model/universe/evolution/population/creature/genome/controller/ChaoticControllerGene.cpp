@@ -15,13 +15,20 @@
 //## utils headers
 
 ChaoticControllerGene::ChaoticControllerGene() :
-	ControllerGene(ControllerGene::ChaoticControllerGene) {
+	ControllerGene(ControllerGene::ChaoticControllerGene), mSystemType(
+		ChaoticControllerGene::CHUA_CIRCUIT) {
+
+}
+
+ChaoticControllerGene::ChaoticControllerGene(ChaoticSystemType systemType) :
+	ControllerGene(ControllerGene::ChaoticControllerGene), mSystemType(
+		systemType) {
 
 }
 
 ChaoticControllerGene::ChaoticControllerGene(
 	const ChaoticControllerGene& gene) {
-
+	mSystemType = gene.mSystemType;
 }
 
 ChaoticControllerGene::~ChaoticControllerGene() {
@@ -31,8 +38,6 @@ ChaoticControllerGene::~ChaoticControllerGene() {
 void ChaoticControllerGene::initialize() {
 }
 
-
-
 ChaoticControllerGene* ChaoticControllerGene::clone() {
-	return new ChaoticControllerGene(this);
+	return new ChaoticControllerGene(*this);
 }
