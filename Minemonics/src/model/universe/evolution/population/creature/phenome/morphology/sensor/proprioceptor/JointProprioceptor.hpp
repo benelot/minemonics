@@ -2,19 +2,27 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_SENSORS_JOINTPROPRIOCEPTOR_H_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp>
 
 //# forward declarations
+class PhenomeModel;
+class JointModel;
+
 //# system headers
+#include <iostream>
 //## controller headers
 //## model headers
+#include <boost/serialization/assume_abstract.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/version.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //## view headers
 //## utils headers
@@ -27,9 +35,12 @@
  */
 class JointProprioceptor: public Proprioceptor {
 public:
-	JointProprioceptor(std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+	JointProprioceptor();
+	JointProprioceptor(JointModel* jointModel,
 		JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
 	~JointProprioceptor();
+
+	virtual void initialize();
 
 	/**
 	 * Update the joint proprioceptor input.
@@ -53,7 +64,7 @@ public:
 		const JointProprioceptor &jointProprioceptor) {
 		return os
 		/**The joint index*/
-		<< "JointProprioceptor: Joint index=" << jointProprioceptor.mJointIndex
+//		<< "JointProprioceptor: Joint index=" << jointProprioceptor.mJointIndex
 		/** The motor index*/
 		<< "/Motor index=" << jointProprioceptor.mMotorIndex;
 	}
@@ -67,26 +78,15 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
 		/**The joint index*/
-		& BOOST_SERIALIZATION_NVP(mJointIndex)
+//		& BOOST_SERIALIZATION_NVP(mJointIndex)
 		/** The motor index*/
 		& BOOST_SERIALIZATION_NVP(mMotorIndex);
 	}
 
 protected:
-	/**
-	 * The motor index the proprioceptor is working on.
-	 */
-	JointPhysics::RotationalDegreeOfFreedom mMotorIndex;
+	JointPhysics::RotationalDegreeOfFreedom mMotorIndex; /** The motor index the proprioceptor is working on. */
 
-	/**
-	 * The joint index the proprioceptor is working on.
-	 */
-	std::vector<CONSTRAINT_TYPE*>::size_type mJointIndex;
-
-	/**
-	 * A pointer for the joint the proprioceptor is working on.
-	 */
-	CONSTRAINT_TYPE* mJoint;
+	JointModel* mJoint; /**!< A pointer for the joint the proprioceptor is working on. */
 };
 BOOST_CLASS_VERSION(JointProprioceptor, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointProprioceptor)

@@ -1,14 +1,17 @@
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
 
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 //## view headers
 //## utils headers
 
-JointAngleceptor::JointAngleceptor(
-	std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+JointAngleceptor::JointAngleceptor() :
+	mAngle(0) {
+}
+
+JointAngleceptor::JointAngleceptor(JointModel* jointModel,
 	JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-	JointProprioceptor(jointIndex, rotationalDOF), mAngle(0) {
+	JointProprioceptor(jointModel, rotationalDOF), mAngle(0) {
 
 }
 
@@ -16,9 +19,10 @@ JointAngleceptor::~JointAngleceptor() {
 
 }
 
+void JointAngleceptor::initialize() {
+	JointProprioceptor::initialize();
+}
+
 void JointAngleceptor::update(double timeSinceLastTick) {
-//	MOTOR_TYPE* motor = mG6DofJoint->getRotationalLimitMotor(mMotorIndex);
-//	setAngle(
-//			(motor->m_currentPosition
-//					/ (motor->m_hiLimit - motor->m_loLimit)) * M_PI);
+	setAngle(mJoint->getJointPos(mMotorIndex));
 }

@@ -5,6 +5,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -14,11 +16,18 @@
 //## view headers
 //## utils headers
 
-JointProprioceptor::JointProprioceptor(
-	std::vector<CONSTRAINT_TYPE*>::size_type jointIndex,
+JointProprioceptor::JointProprioceptor() :
+	mJoint(NULL), mMotorIndex(JointPhysics::RDOF_PITCH) {
+}
+
+JointProprioceptor::JointProprioceptor(JointModel* jointModel,
 	JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-	mJointIndex(jointIndex), mMotorIndex(rotationalDOF), mJoint(NULL) {
+	mMotorIndex(rotationalDOF), mJoint(jointModel) {
 }
 
 JointProprioceptor::~JointProprioceptor() {
+}
+
+void JointProprioceptor::initialize() {
+
 }
