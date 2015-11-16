@@ -337,10 +337,16 @@ bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
 		if (!(*it1)->equals(**it2)) {
 			return false;
 		} else {
-			switch ((*it1)->getControllerGeneType()) {
+			switch ((*it1)->getControllerType()) {
 			case ControllerGene::SineControllerGene:
 				if (!((SineControllerGene*) (*it1))->equals(
 					((SineControllerGene&) (**it2)))) {
+					return false;
+				}
+				break;
+			case ControllerGene::ChaoticControllerGene:
+				if (!((ChaoticControllerGene*) (*it1))->equals(
+					((ChaoticControllerGene&) (**it2)))) {
 					return false;
 				}
 				break;

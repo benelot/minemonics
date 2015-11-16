@@ -36,6 +36,8 @@
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
@@ -459,15 +461,17 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	// define the position and direction of the joint in the reference frame of the parent
 	localParentJointTransform.setOrigin(
 		OgreBulletUtils::convert(localParentJointInRefParent));
-//	localParentJointTransform.getBasis().setRotation(
-//		parentHitTransform.getRotation());
+	//TODO: Fix rotations
+	localParentJointTransform.getBasis().setRotation(
+		parentHitTransform.getRotation());
 
 	// define the position and direction of the joint in the reference frame of child
 	localChildJointTransform.setOrigin(
 		OgreBulletUtils::convert(localChildJointInRefChild));
 	//set the direction of the joint normals
-//	localChildJointTransform.getBasis().setRotation(
-//		childHitTransform.getRotation());
+	//TODO: Fix rotations
+	localChildJointTransform.getBasis().setRotation(
+		childHitTransform.getRotation());
 
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	FSJointModel* joint = new FSJointModel(getCreatureModel()->getWorld(),
@@ -507,11 +511,11 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//TODO: Remove max speed if not necessary
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-	double maxTorque =
-		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
-			* (mass1 + mass2)
-			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
-				* pow(mass1 + mass2, 2));
+	double maxTorque = 10000 * (mass1 + mass2);
+//		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+//			* (mass1 + mass2)
+//			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+//				* pow(mass1 + mass2, 2));
 
 	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
@@ -522,17 +526,35 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointYawMaxAngle(),
 			parentMorphogeneBranch->getJointRollMaxAngle()));
 
-	//TODO: Only supports sine controller gene
+	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
-		SineController* controller =
-			new SineController(
-				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
-				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
-				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
-				((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
-		controller->initialize();
-		controller->addControlOutput(joint->getMotors()[i]);
-		getControllers().push_back(controller);
+		switch (parentMorphogeneBranch->getControllerGenes()[i]->getControllerType()) {
+		case ControllerGene::SineControllerGene: {
+			SineController* controller =
+				new SineController(
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
+			controller->initialize();
+			controller->addControlOutput(joint->getMotors()[i]);
+			getControllers().push_back(controller);
+			break;
+		}
+		case ControllerGene::ChaoticControllerGene: {
+			ChaoticController* controller =
+				new ChaoticController(
+					((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getSystemType());
+
+			controller->addControlInput(joint->getAngleceptors()[0]); // Add the first angleceptor as input
+			controller->addControlInput(joint->getVelocityceptors()[0]); // add the first velocityceptor as input
+
+			controller->initialize();
+			controller->addControlOutput(joint->getMotors()[i]);
+			getControllers().push_back(controller);
+		}
+		}
+
 	}
 }
 

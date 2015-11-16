@@ -27,6 +27,8 @@
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
 
 //## view headers
 //## utils headers
@@ -465,11 +467,7 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//TODO: Remove max speed if not necessary
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-	double maxTorque =
-		(0.01f
-			* (mass1 + mass2)
-			+ 0
-				* pow(mass1 + mass2, 2));
+	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));
 
 	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
@@ -480,16 +478,29 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointYawMaxAngle(),
 			parentMorphogeneBranch->getJointRollMaxAngle()));
 
-	//TODO: Only supports sine controller gene
+	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
-		SineController* controller = new SineController(
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
-			((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
-		controller->initialize();
-		controller->addControlOutput(joint->getMotors()[i]);
-		getControllers().push_back(controller);
+		switch (parentMorphogeneBranch->getControllerGenes()[i]->getControllerType()) {
+		case ControllerGene::SineControllerGene: {
+			SineController* controller =
+				new SineController(
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getAmplitude(),
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
+					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
+			controller->initialize();
+			controller->addControlOutput(joint->getMotors()[i]);
+			getControllers().push_back(controller);
+			break;
+		}
+		case ControllerGene::ChaoticControllerGene: {
+			ChaoticController* controller = new ChaoticController();
+			controller->initialize();
+			controller->addControlOutput(joint->getMotors()[i]);
+			getControllers().push_back(controller);
+		}
+		}
+
 	}
 }
 

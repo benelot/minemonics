@@ -33,6 +33,7 @@ class access;
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
@@ -253,6 +254,8 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<SineController*>(NULL));
+		ar.register_type(static_cast<ChaoticController*>(NULL));
+
 		ar.register_type(static_cast<FSLimbModel*>(NULL));
 		ar.register_type(static_cast<SRBLimbModel*>(NULL));
 		ar.register_type(static_cast<FSJointModel*>(NULL));

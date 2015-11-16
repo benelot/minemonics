@@ -126,9 +126,6 @@ TEST_F(MorphoGeneTest,testMisc) {
 		<= MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
 
 	// follow up gene can not be valid at this time
-
-	//test if controller is there
-	ASSERT_TRUE(gene->getControllerGene() != NULL);
 }
 
 TEST_F(MorphoGeneSerializationTest,isEqualAfterSerialization) {

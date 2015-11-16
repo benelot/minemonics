@@ -18,6 +18,7 @@ class access;
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <boost/serialization/vector.hpp>
 
 //## view headers
 //# custom headers
@@ -27,6 +28,7 @@ class access;
 //## model headers
 #include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
@@ -378,6 +380,7 @@ public:
 		//in order to detect a derived class type from a base type for serialization,
 		//you have to register the derived class type in beforehand.
 		ar.register_type(static_cast<SineControllerGene*>(NULL));
+		ar.register_type(static_cast<ChaoticControllerGene*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeneBranch) /**!< Serialize the base object */
 
 		& BOOST_SERIALIZATION_NVP(mFlipped) /**!< If the morphogene branch is flipped on the morphogene to the other side.*/
