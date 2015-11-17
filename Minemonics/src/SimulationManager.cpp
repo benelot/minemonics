@@ -126,7 +126,7 @@ SimulationManager::~SimulationManager(void) {
 	destroyScene(); /**!< tear down the scene */
 
 	// destroy the ogre renderer system
-	CEGUI::OgreRenderer::destroySystem();
+//	CEGUI::OgreRenderer::destroySystem();
 
 	//This is used past this line because the destructors are called on it
 //	mSimulationManager = NULL;
@@ -273,8 +273,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 
 	//#############
 	// Physics handling part
-	/* This, like the rendering, ticks every time around.
-	 Bullet does the interpolation for us. */
+	/* This, like the rendering, ticks every time around. */
 	do {
 		// update timers
 		mThisModelIteration = mOgreTimer.getMilliseconds();
@@ -300,19 +299,26 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 				mUniverse.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
 				mPhysicsStepEnd = mOgreTimer.getMilliseconds(); /**!< Update the last physics step end to stop updating in time */
 			}
-		} else {
+		} else { /**!< This mode tries to progress as much time as it is expected from the game loop*/
 			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) { /** cap frametime to make the application lose time, not the physics */
 				mFrameTime = ApplicationConfiguration::APPLICATION_TICK;
 			}
 
 			mModelAccumulator += mFrameTime; /**!< Update physics update time that we are going to use */
+			double speed = pow(2, /**!< calculate the speed of the simulation */
+			PhysicsConfiguration::SIMULATION_SPEEDS[mCurrentSimulationSpeed]);
 
-			while (mModelAccumulator
-				>= PhysicsConfiguration::FIXED_STEP_SIZE_MILLI) { /**!< Update the physics until we run out of time */
-				mUniverse.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
-				mModelAccumulator -=
-					PhysicsConfiguration::FIXED_STEP_SIZE_MILLI;
+			int steps = floor(
+				/**!< Calculate the number of full steps we can take */
+				speed * mModelAccumulator
+					/ PhysicsConfiguration::FIXED_STEP_SIZE_MILLI);
+
+			mUniverse.update(steps * PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
+			if (steps > 0) {
+				mModelAccumulator -= steps
+					* PhysicsConfiguration::FIXED_STEP_SIZE_MILLI;
 			}
+
 		}
 
 		mInputStart = mOgreTimer.getMilliseconds(); /**!< Start the input update */
@@ -335,8 +341,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	} while (mStateHandler.getCurrentState()
 		== StateHandler::HEADLESS_SIMULATION); /**!< In headless simulation we never update the graphics */
 
-	//#############
-	// Graphics part
+//#############
+// Graphics part
 	updatePanels(evt.timeSinceLastFrame); /**!< Update the information in the panels on screen */
 
 	mViewController.update(evt.timeSinceLastFrame); /**!< Update view */
@@ -492,6 +498,7 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
  * Destroy the scene if the application is quit.
  */
 void SimulationManager::destroyScene(void) {
+	mUniverse.teardown();
 }
 //-------------------------------------------------------------------------------------
 

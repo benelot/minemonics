@@ -39,6 +39,8 @@ public:
 	Universe();
 	virtual ~Universe();
 
+	void teardown();
+
 	/**
 	 * Initializes the universe.
 	 */

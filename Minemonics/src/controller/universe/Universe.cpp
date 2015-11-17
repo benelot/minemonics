@@ -35,15 +35,19 @@ Universe::Universe() :
 Universe::~Universe() {
 //	~mEvaluationController()
 
+	teardown();
+
+//	~mUniverseModel()
+}
+
+void Universe::teardown() {
 	//delete the planets
 	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end();pit++) {
+	for (; pit != mPlanets.end(); pit++) {
 		delete (*pit);
 	}
 
 	mPlanets.clear();
-
-//	~mUniverseModel()
 }
 
 void Universe::initialize(const int parallelEvaluationsQty) {
@@ -96,19 +100,15 @@ void Universe::drawDebugWorld() {
 }
 
 void Universe::update(const double timeStep) {
-	//calculate the number of substeps the simulator needs to take
-	int subSteps = ceil(
-		pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-			* timeStep
-			/ PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+	double speed = pow(2, /**!< calculate the speed of the simulation */
+	PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed]);
+
+	int subSteps = floor( /**!< Increase the time step we take by the speed we want the simulation to run.*/
+	speed * timeStep / PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 
 	for (int i = 0; i < subSteps; i++) {
-		stepPhysics(
-			pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-				* timeStep / ((float) subSteps));
-		mEvaluationController.update(
-			pow(2, PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed])
-				* timeStep / ((float) subSteps));
+		stepPhysics(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+		mEvaluationController.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 	}
 }
 

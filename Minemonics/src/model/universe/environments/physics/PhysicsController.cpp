@@ -150,8 +150,7 @@ void PhysicsController::initialize() {
 void PhysicsController::exitBulletPhysics() {
 	//cleanup in the reverse order of creation/initialization
 
-	for (int i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) //remove the rigidbodies from the dynamics world and delete them
-		{
+	for (int i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) { //remove the rigidbodies from the dynamics world and delete them
 		btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[i];
 		btRigidBody* body = btRigidBody::upcast(obj);
 		if (body && body->getMotionState())
@@ -161,8 +160,7 @@ void PhysicsController::exitBulletPhysics() {
 		delete obj;
 	}
 
-	for (int j = 0; j < mCollisionShapes.size(); j++) //delete collision shapes
-		{
+	for (int j = 0; j < mCollisionShapes.size(); j++) { //delete collision shapes
 		btCollisionShape* shape = mCollisionShapes[j];
 		delete shape;
 	}
