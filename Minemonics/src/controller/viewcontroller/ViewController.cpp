@@ -54,10 +54,10 @@ BoostLogger ViewController::mBoostLogger; /*<! initialize the boost logger*/
 ViewController::_Init ViewController::_initializer;
 ViewController::ViewController() :
 	mRenderer(NULL), mLayout(NULL), mSystem(NULL), mDragContainer(NULL), mEvaluationInView(
-		NULL), mShowShadows(false), mMenuBar(NULL), mFpsPanel(
-		NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
-		NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
-		NULL), mLoadPopulationWindow(NULL) {
+	NULL), mShowShadows(false), mMenuBar(NULL), mFpsPanel(
+	NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
+	NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
+	NULL), mLoadPopulationWindow(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -227,11 +227,9 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 
 void ViewController::update(const double timeSinceLastFrame) {
 
-	// update the information overlay
-	mInfoOverlay.update();
+	mInfoOverlay.update(); /**!< update the information overlay */
 
-	// reposition the camera
-	mCameraHandler.reposition(timeSinceLastFrame);
+	mCameraHandler.reposition(timeSinceLastFrame); /**!< reposition the camera */
 
 }
 

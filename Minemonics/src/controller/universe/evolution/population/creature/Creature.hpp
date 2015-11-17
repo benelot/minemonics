@@ -86,7 +86,7 @@ public:
 
 	void save(std::string folderPath);
 
-	// Facade accessor methods
+	// Facade accessor methods ##########################
 	CreatureModel* getCreatureModel() {
 		return mCreatureModel;
 	}

@@ -73,9 +73,8 @@ public:
 		Ogre::Vector3& localChildJointInRefChild,
 		btTransform& parentHitTransform, btTransform& childHitTransform);
 
-	virtual btTransform getParentIntersection(
-		LimbPhysics* parentLimb, MorphogeneBranch* parentMorphogeneBranch,
-		Ogre::Vector3 parentLimbCOM,
+	virtual btTransform getParentIntersection(LimbPhysics* parentLimb,
+		MorphogeneBranch* parentMorphogeneBranch, Ogre::Vector3 parentLimbCOM,
 		Ogre::Vector3 localParentAnchorDirInRefParent);
 
 	virtual btTransform getOwnIntersection(Morphogene* childMorphogene,
@@ -131,7 +130,7 @@ public:
 	 */
 	void removeFromWorld();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	btMultiBody* getMultiBody() {
 		return mMultiBody;
@@ -203,10 +202,7 @@ private:
 
 	btMultiBodyDynamicsWorld* getWorld();
 
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -219,11 +215,11 @@ private:
 		}
 	} _initializer;
 
-	btMultiBody* mMultiBody;
+	btMultiBody* mMultiBody; /**!< The multibody of this phenotype */
 
-	btMultiBodyDynamicsWorld* mWorld;
+	btMultiBodyDynamicsWorld* mWorld; /**!< The multibody world of this phenotype */
 
-	std::vector<btMultiBodyConstraint*> mLimitConstraints;
+	std::vector<btMultiBodyConstraint*> mLimitConstraints; /**!< The limit constraints of this phenotype */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_ */

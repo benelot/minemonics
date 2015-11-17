@@ -90,7 +90,7 @@ public:
 	 */
 	bool equals(const Morphogene& morphogene) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	double getColorB() const {
 		return mColorB;

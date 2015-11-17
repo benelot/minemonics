@@ -34,13 +34,10 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 
-MousePicker::MousePicker(ViewController* viewController) {
-	mViewController = viewController;
-
+MousePicker::MousePicker() {
 }
 
 MousePicker::~MousePicker() {
-	mViewController = NULL;
 }
 
 void MousePicker::pickBody(btDynamicsWorld* world) {
@@ -75,7 +72,7 @@ Ogre::Ray MousePicker::getMouseRay() {
 	CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
 
 	//return the mouse ray
-	return mViewController->getCameraHandler().getCamera()->getCameraToViewportRay(
+	return SimulationManager::getSingleton()->getViewController().getCameraHandler().getCamera()->getCameraToViewportRay(
 		mousePos.d_x
 			/ ((double) SimulationManager::getSingleton()->getWindowWidth()),
 		mousePos.d_y

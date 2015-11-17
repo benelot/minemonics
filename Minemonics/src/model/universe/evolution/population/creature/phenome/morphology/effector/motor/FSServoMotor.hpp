@@ -57,7 +57,7 @@ public:
 	 */
 	void apply(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 //	int getJointMotorIndex() const {
 //		return mJointMotorIndex;

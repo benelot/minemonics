@@ -134,7 +134,7 @@ public:
 
 	btDynamicsWorld* getWorld();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	/**
 	 * Give access to boost serialization
@@ -199,10 +199,7 @@ public:
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(PhenomeModel); /**!< Serialize the base object */
 	}
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -215,7 +212,7 @@ private:
 		}
 	} _initializer;
 
-	btDynamicsWorld* mWorld;
+	btDynamicsWorld* mWorld; /**!< The world the phenotype is in. */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_ */

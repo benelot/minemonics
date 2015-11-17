@@ -30,13 +30,13 @@ public:
 	MenuBar();
 	virtual ~MenuBar();
 
-	//Accessor methods
+	// Accessor methods ##########################
 	CEGUI::Window*& getWindow() {
 		return mMenuBar;
 	}
 
 private:
-	CEGUI::Window* mMenuBar;
+	CEGUI::Window* mMenuBar; /**!< The menu bar widget */
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_MENUBAR_HPP_ */

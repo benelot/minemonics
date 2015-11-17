@@ -39,7 +39,7 @@ public:
 
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	double getAngle() const {
 		return mAngle;
 	}
@@ -82,7 +82,7 @@ public:
 	}
 
 private:
-	double mAngle;
+	double mAngle; /**!< The measured angle */
 };
 BOOST_CLASS_VERSION(JointAngleceptor, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSOR_PROPRIOCEPTOR_JOINTANGLECEPTOR_HPP_ */

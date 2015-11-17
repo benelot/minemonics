@@ -138,7 +138,7 @@ public:
 	void draw();
 	void clear();
 
-	//accessor methods
+	// Accessor methods ##########################
 	void setDrawAabb(bool enable);
 	void setDrawWireframe(bool enable);
 	void setDrawConstraints(bool enable);
@@ -188,6 +188,8 @@ protected:
 	bool frameStarted(const Ogre::FrameEvent& evt);
 	bool frameEnded(const Ogre::FrameEvent& evt);
 private:
+
+	// A struct to hold a contact point
 	struct ContactPoint {
 		Ogre::Vector3 from;
 		Ogre::Vector3 to;
@@ -195,6 +197,7 @@ private:
 		size_t dieTime;
 	};
 
+	// A struct to hold a line
 	struct Line {
 		Ogre::Vector3 from;
 		Ogre::Vector3 to;
@@ -202,6 +205,7 @@ private:
 		bool drawn;
 	};
 
+	// A struct to hold a triangle
 	struct Triangle {
 		Ogre::Vector3 v0;
 		Ogre::Vector3 v1;
@@ -210,26 +214,33 @@ private:
 		bool drawn;
 	};
 
+	// lines added from outside the debug drawer
 	std::vector<Line> mExtLines;
 	std::vector<Triangle> mExtTriangles;
 	std::vector<ContactPoint> mExtContactPoints;
 
-	int mDebugMode;
+	int mDebugMode; /**!< The current debug mode */
+
+	// the currently drawn lines
 	Ogre::ManualObject *mLines;
 	Ogre::ManualObject *mLines2;
 	Ogre::ManualObject *mLinesSwap;
+
+	// the currently drawn triangles
 	Ogre::ManualObject *mTriangles;
 	Ogre::ManualObject *mTriangles2;
 	Ogre::ManualObject *mTrianglesSwap;
+
+	// the currently drawn contact points
 	std::vector<ContactPoint>* mContactPoints;
 	std::vector<ContactPoint> mContactPoints1;
 	std::vector<ContactPoint> mContactPoints2;
 
-	bool mDrawTrajectory;
-	bool mClear;
-	bool mDrawable;
+	bool mDrawTrajectory; /**!< Draw trajectory */
+	bool mClear; /**!< Clear the drawn objects */
+	bool mDrawable; /**!< Can you draw just now */
 
-	bool mDebugDrawingEnabled;
+	bool mDebugDrawingEnabled; /**!< Is debug drawing enabled */
 
 	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
 //    Ogre::OverlayManager *olm;

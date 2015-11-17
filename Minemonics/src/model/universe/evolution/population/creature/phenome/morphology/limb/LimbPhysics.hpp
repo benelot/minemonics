@@ -135,7 +135,7 @@ public:
 	 */
 	bool equals(const LimbPhysics & limbPhysics) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	/**
 	 * Get the inertia of the limb.
@@ -356,7 +356,7 @@ protected:
 
 	Ogre::ColourValue mColor; /**!< The color of the limb. */
 
-	Ogre::Vector3 mPosition;
+	Ogre::Vector3 mPosition; /**!< The current limb position */
 	double mInitialRelativeXPosition, /**!< Initial position at birth relative to the root node*/
 	mInitialRelativeYPosition, mInitialRelativeZPosition;
 

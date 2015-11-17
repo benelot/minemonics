@@ -107,8 +107,8 @@ SimulationManager::SimulationManager(void) :
 	mModelStart = mApplicationStart; /** !< Initialize the last model start */
 	mInputStart = mApplicationStart; /** !< Initialize the last input start */
 
-	mPhysicsStepStart = mApplicationStart;
-	mPhysicsStepEnd = mApplicationStart;
+	mPhysicsStepStart = mApplicationStart; /**!< Initialize the physics step start */
+	mPhysicsStepEnd = mApplicationStart; /**!< Initialize the physics step end */
 
 	//durations
 	mLastGraphicsTick = 0;
@@ -139,13 +139,11 @@ void SimulationManager::setupView(void) {
 	Ogre::Camera* camera = mSceneMgr->createCamera("ObserverCamera"); /**!< Create the camera */
 	mViewController.getCameraHandler().setCamera(camera);
 
-	// Create one viewport, entire window
-	Ogre::Viewport* vp = mWindow->addViewport(camera);
+	Ogre::Viewport* vp = mWindow->addViewport(camera); /**!< Create one viewport, entire window */
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-	// Alter the camera aspect ratio to match the viewport
-	camera->setAspectRatio(
-		Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+	camera->setAspectRatio( /**!< Alter the camera aspect ratio to match the viewport */
+	Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 }
 
 //-------------------------------------------------------------------------------------
@@ -158,9 +156,8 @@ void SimulationManager::createScene(void) {
 
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 
-	// Set render target with the current application name
-	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget(
-		ApplicationConfiguration::APPLICATION_TITLE);
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget( /**!< Set render target with the current application name */
+	ApplicationConfiguration::APPLICATION_TITLE);
 
 	mViewController.initialize(renderTarget, &mStateHandler); /**!< initialize GUI and views */
 
@@ -175,11 +172,9 @@ void SimulationManager::createScene(void) {
 	mDebugDrawer.setDrawContactPoints(false);
 	mDebugDrawer.setDrawNormals(false);
 
-	// Create the universe
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...";
 
-	// Set default ambient light
-	mSceneMgr->setAmbientLight(
+	mSceneMgr->setAmbientLight( // Set default ambient light
 		Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
 			EnvironmentConfiguration::AMBIENT_G,
 			EnvironmentConfiguration::AMBIENT_B));
@@ -209,17 +204,20 @@ void SimulationManager::createScene(void) {
 //	mSceneMgr->setFog(Ogre::FOG_EXP, fadeColour, 0.002);
 //	mSceneMgr->setFog(Ogre::FOG_EXP2, fadeColour, 0.002);
 
+	// set up the sun
 	mSun = mSceneMgr->createLight();
 	mSun->setType(Ogre::Light::LT_DIRECTIONAL);
 	mSun->setDiffuseColour(Ogre::ColourValue(1, 1, 0.2));
 	mSun->setSpecularColour(Ogre::ColourValue(1, 1, 0.2));
 	mSun->setDirection(0, -1, -1);
 
-	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION);
+	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION); /**!< Initialize the universe */
 
-	// create the serialization top folder if necessary
-	mSerializationPath = FilesystemManipulator::createFolder(".",
-		SerializationConfiguration::TOP_FOLDER);
+	mSerializationPath = FilesystemManipulator::createFolder(".", /**!< Create the serialization top folder if necessary */
+	SerializationConfiguration::TOP_FOLDER);
+
+	FilesystemManipulator::createFolder(".", /**!< Create the loggin top folder if necessary */
+	LoggerConfiguration::TOP_FOLDER);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...done.";
 
@@ -266,10 +264,9 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		return false;
 	}
 
-	// turn on or off the shadows.
 	mSceneMgr->setShadowTechnique(
 		(mViewController.doesShowShadows()) ?
-			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE);
+			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE); /**!< turn on or off the shadows. */
 
 	//#############
 	// Physics handling part
@@ -283,7 +280,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		mApplicationRuntime = mThisModelIteration - mApplicationStart; /**!< Update main frame timer */
 
 		mModelStart = mOgreTimer.getMilliseconds();
-		mLastGraphicsTick = mModelStart - mGraphicsStart;
+		mLastGraphicsTick = mModelStart - mGraphicsStart; /**!< Update graphics timer */
 
 		mUniverse.setSimulationSpeed(mCurrentSimulationSpeed); /**!< Set the current simulation speed of the simulation */
 
@@ -309,16 +306,14 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 			PhysicsConfiguration::SIMULATION_SPEEDS[mCurrentSimulationSpeed]);
 
 			int steps = floor(
-				/**!< Calculate the number of full steps we can take */
 				speed * mModelAccumulator
-					/ PhysicsConfiguration::FIXED_STEP_SIZE_MILLI);
+					/ PhysicsConfiguration::FIXED_STEP_SIZE_MILLI); /**!< Calculate the number of full steps we can take */
 
 			mUniverse.update(steps * PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
-			if (steps > 0) {
+			if (steps > 0) { /**!< Substract the number of fixed steps */
 				mModelAccumulator -= steps
 					* PhysicsConfiguration::FIXED_STEP_SIZE_MILLI;
 			}
-
 		}
 
 		mInputStart = mOgreTimer.getMilliseconds(); /**!< Start the input update */
@@ -332,7 +327,6 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 			mInputClock = mThisModelIteration;
 			mInputHandler.injectInput(); /**!< Inject input into handlers */
 			mInputHandler.update(mInputClock); /**!< update elements that work on the current input state */
-
 		}
 
 		mGraphicsStart = mOgreTimer.getMilliseconds(); /**!< Start the graphics update */
@@ -341,8 +335,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	} while (mStateHandler.getCurrentState()
 		== StateHandler::HEADLESS_SIMULATION); /**!< In headless simulation we never update the graphics */
 
-//#############
-// Graphics part
+	//#############
+	// Graphics part
 	updatePanels(evt.timeSinceLastFrame); /**!< Update the information in the panels on screen */
 
 	mViewController.update(evt.timeSinceLastFrame); /**!< Update view */

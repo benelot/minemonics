@@ -86,7 +86,7 @@ void CameraHandler::initialize() {
 
 	if (SimulationManager::getSingleton()->getRoot()->getRenderSystem()->getCapabilities()->hasCapability(
 		Ogre::RSC_INFINITE_FAR_PLANE)) {
-		mCamera->setFarClipDistance(0); // enable infinite far clip distance if we can
+		mCamera->setFarClipDistance(0); /**!< enable infinite far clip distance if we can */
 	}
 }
 

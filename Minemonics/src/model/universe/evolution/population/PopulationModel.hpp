@@ -91,7 +91,7 @@ public:
 
 	void clearJuries();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	int getCreatureQty() const {
 		return mCreatureQty;
@@ -127,6 +127,22 @@ public:
 
 	void setOutOfSync(bool outOfSync) {
 		mOutOfSync = outOfSync;
+	}
+
+	int getCurrentGeneration() const {
+		return mCurrentGeneration;
+	}
+
+	void setCurrentGeneration(int currentGeneration) {
+		mCurrentGeneration = currentGeneration;
+	}
+
+	int getDynastyQty() const {
+		return mDynastyQty;
+	}
+
+	void setDynastyQty(int dynastyQty) {
+		mDynastyQty = dynastyQty;
 	}
 
 	const std::string getGenerationSerializationPath() {
@@ -177,22 +193,6 @@ public:
 		if (!SerializationConfiguration::POPULATION_EXPANDED) {
 			ar & BOOST_SERIALIZATION_NVP(mCreatureModels);
 		}
-	}
-
-	int getCurrentGeneration() const {
-		return mCurrentGeneration;
-	}
-
-	void setCurrentGeneration(int currentGeneration) {
-		mCurrentGeneration = currentGeneration;
-	}
-
-	int getDynastyQty() const {
-		return mDynastyQty;
-	}
-
-	void setDynastyQty(int dynastyQty) {
-		mDynastyQty = dynastyQty;
 	}
 
 private:

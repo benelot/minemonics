@@ -42,7 +42,8 @@ public:
 	 */
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	PlaneBt* const getPlaneBt() const {
 		return (PlaneBt*) mEnvironmentPhysics;
 	}

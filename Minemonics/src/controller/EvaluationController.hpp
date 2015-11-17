@@ -57,7 +57,7 @@ public:
 	void update(const double timeSinceLastFrame);
 
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	void setPaused(const bool paused) {
 		mPaused = paused;

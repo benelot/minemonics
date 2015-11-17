@@ -51,9 +51,9 @@ public:
 	size_t size();
 
 protected:
-	CEGUI::Window* mTextBoxLabel;
-	CEGUI::Window* mTextBoxValues;
-	VectorString mParams;
+	CEGUI::Window* mTextBoxLabel; /**!< The text box label */
+	CEGUI::Window* mTextBoxValues; /**!< The values to be shown*/
+	VectorString mParams; /**!< The params */
 };
 
 #endif /* VIEW_VISUALIZATION_PANELS_PARAMSPANEL_H_ */

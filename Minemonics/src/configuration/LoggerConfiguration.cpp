@@ -15,3 +15,5 @@
 //## utils headers
 
 const std::string LoggerConfiguration::loggedClasses = "AverageVelocity|CreatureModel|Debugger|SimulationManager|PhysicsController";
+
+const std::string LoggerConfiguration::TOP_FOLDER = "logs";

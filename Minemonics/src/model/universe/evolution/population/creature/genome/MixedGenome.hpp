@@ -340,7 +340,7 @@ public:
 	virtual void graftFrom(Genome* const donor, const int attachmentIndex,
 	const int geneIndex, const int geneQty);
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	int getSegmentsDepthLimit() const {
 		return mSegmentsDepthLimit;

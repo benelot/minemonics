@@ -361,7 +361,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mGenes); /**!< The vector of genes.*/
 	}
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	std::vector<Gene*>& getGenes() {
 		return mGenes;

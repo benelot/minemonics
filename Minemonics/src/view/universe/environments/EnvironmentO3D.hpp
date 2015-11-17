@@ -85,7 +85,7 @@ public:
 		}
 	}
 
-	//Accessor methods
+	// Accessor methods ##########################
 	Ogre::TerrainGroup*& getTerrainGroup() {
 		return mTerrainGroup;
 	}

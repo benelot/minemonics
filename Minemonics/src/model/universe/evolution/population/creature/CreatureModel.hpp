@@ -130,9 +130,10 @@ public:
 
 	void calm();
 
-	void createRandomGenome(const double branchiness){
+	void createRandomGenome(const double branchiness) {
 		mGenotype.createRandomGenome(branchiness); //generate random genome for the creature
-	};
+	}
+	;
 
 	/**
 	 * Compare the creature model to another creature model.
@@ -185,7 +186,7 @@ public:
 
 	double getFitnessScore();
 
-	double getLastFitnessScore(){
+	double getLastFitnessScore() {
 		return mFitnessScore;
 	}
 
@@ -354,11 +355,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mDynasty); // TODO: Add this to the creatures
 	}
 private:
-
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger;/**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -395,9 +392,9 @@ private:
 
 	unsigned long int mDynasty; /**!<  The dynasty that creature belongs to. */
 
-	btDynamicsWorld* mWorld;
+	btDynamicsWorld* mWorld; /**!< The world the creature is living in */
 
-	bool mFitnessScoreCalculated;
+	bool mFitnessScoreCalculated; /**!< The last fitness score */
 
 };
 BOOST_CLASS_VERSION(CreatureModel, 1)

@@ -105,7 +105,7 @@ public:
 
 	void calm();
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * The the limb physics model of the limb.
 	 * @return The limb physics model of the limb.
@@ -184,8 +184,8 @@ public:
 		return mLimbPhysics->isIntraBodyColliding();
 	}
 
-	void setWorld(btDynamicsWorld* world){
-		((FSLimbBt*)mLimbPhysics)->setWorld(world);
+	void setWorld(btDynamicsWorld* world) {
+		((FSLimbBt*) mLimbPhysics)->setWorld(world);
 	}
 
 // Serialization
@@ -215,22 +215,19 @@ public:
 	}
 
 private:
-	/**
-		 * The boost logger.
-		 */
-		static BoostLogger mBoostLogger;
 
-		/**
-		 * Initializer of the boost logger to include the class name into the logging messages.
-		 */
-		static class _Init {
-		public:
-			_Init() {
-				mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant < std::string
-						> ("FSLimbModel"));
-			}
-		} _initializer;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant<std::string>("FSLimbModel"));
+		}
+	} _initializer;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBMODEL_HPP_ */

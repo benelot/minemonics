@@ -78,7 +78,7 @@ public:
 	 */
 	void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	EvolutionModel* getEvolutionModel() {
 		return mEvolutionModel;

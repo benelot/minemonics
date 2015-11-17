@@ -65,7 +65,8 @@ public:
 	 */
 	void removeFromWorld();
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	EnvironmentO3D* getEnvironmentO3D() const {
 		return (EnvironmentO3D*) mEnvironmentGraphics;
 	}

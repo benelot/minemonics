@@ -41,7 +41,7 @@ public:
 	bool movePickedBody(const btVector3& rayFromWorld,
 		const btVector3& rayToWorld);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	bool isPicking() const {
 		return mPicking;
 	}

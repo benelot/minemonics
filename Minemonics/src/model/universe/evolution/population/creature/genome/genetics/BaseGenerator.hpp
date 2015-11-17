@@ -34,7 +34,7 @@ public:
 	 */
 	virtual BaseGenerator* clone() = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 	Gene* getGene() const {
 		return mGene;
 	}

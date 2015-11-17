@@ -146,7 +146,7 @@ public:
 	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
 		const bool rollEnable);
 
-	// Accessor methods
+	// Accessor methods ##########################
 
 	JointGraphics* const getJointGraphics() const {
 		return mJointGraphics;

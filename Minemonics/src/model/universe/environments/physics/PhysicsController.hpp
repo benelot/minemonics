@@ -91,7 +91,8 @@ public:
 	 */
 	void removeBody(btRigidBody* const body);
 
-	// Accessor methods
+	// Accessor methods ##########################
+
 	btDynamicsWorld*& getDynamicsWorld() {
 		return mDynamicsWorld;
 	}

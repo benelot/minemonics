@@ -62,7 +62,7 @@ public:
 
 	virtual AverageVelocity* clone();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization */

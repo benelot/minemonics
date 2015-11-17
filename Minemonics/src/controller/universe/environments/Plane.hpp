@@ -54,7 +54,8 @@ public:
 	 */
 	virtual void update(double timeSinceLastTick);
 
-	// Accessor methods
+	// Accessor methods ##########################
+
 	PlaneO3D* getPlaneView() const {
 		return (PlaneO3D*) mEnvironmentGraphics;
 	}

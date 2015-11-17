@@ -55,7 +55,7 @@ public:
 	bool equals(const ControllerGene& controllerGene) const;
 
 
-	//Accessor methods
+	// Accessor methods ##########################
 	ControllerType getControllerType() const {
 		return mControllerType;
 	}

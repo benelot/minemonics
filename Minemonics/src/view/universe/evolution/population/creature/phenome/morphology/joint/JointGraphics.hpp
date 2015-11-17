@@ -36,7 +36,7 @@ public:
 	/**
 	 * Check if the joint graphics is in the world.
 	 */
-	virtual bool isInWorld(){
+	virtual bool isInWorld() {
 		return mInWorld;
 	}
 
@@ -56,12 +56,10 @@ public:
 	virtual void update(double timeSinceLastTick) = 0;
 
 protected:
-	/**
-	 * A const handle to the joint model to render.
-	 */
-	const JointModel* mJointModel;
 
-	bool mInWorld;
+	const JointModel* mJointModel; /**!< The joint model to render. */
+
+	bool mInWorld; /**!< If the joint is in the world */
 };
 
 #endif /* VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTGRAPHICS_HPP_ */

@@ -40,8 +40,8 @@ public:
 		return boost::lexical_cast<int>(mEditBox->getText());
 	}
 private:
-	CEGUI::Slider* mSlider;
-	CEGUI::Editbox* mEditBox;
+	CEGUI::Slider* mSlider; /**!< The slider of the box slider */
+	CEGUI::Editbox* mEditBox; /**!< The box of the box slider */
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_BOXSLIDER_HPP_ */

@@ -30,8 +30,7 @@ UniverseModel::~UniverseModel() {
 	}
 	mEvaluationModels.clear();
 
-	// planetmodels are deleted in the planet controllers
-	mPlanetModels.clear();
+	mPlanetModels.clear(); // planetmodels are deleted in the planet controllers
 }
 
 void UniverseModel::initialize() {

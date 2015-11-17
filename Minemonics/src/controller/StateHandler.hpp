@@ -33,7 +33,6 @@ public:
 	/**
 	 * Application states
 	 */
-	//TODO: Redefine application states according to the needs
 	enum ApplicationState {
 		STARTUP, //!< The application is starting up
 		GUI, //!< The GUI is shown
@@ -68,7 +67,8 @@ public:
 	 */
 	bool unlockState();
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	ApplicationState getCurrentState();
 
 	void setFrameTime(const float ms);
@@ -86,25 +86,13 @@ public:
 	}
 
 protected:
-	/**
-	 * The state of the application.
-	 */
-	ApplicationState mState;
+	ApplicationState mState; /**!< The state of the application. */
 
-	/**
-	 * If the state is locked or not.
-	 */
-	bool mLocked;
+	bool mLocked; /**!< If the state is locked or not. */
 
-	/**
-	 * The frame time of the application.
-	 */
-	float mFrameTime;
+	float mFrameTime; /**!< The frame time of the application. */
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -113,11 +101,10 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"StateHandler"));
+				boost::log::attributes::constant<std::string>("StateHandler"));
 		}
 	} _initializer;
 
-	Planet* mCurrentlySelectedPlanet;
+	Planet* mCurrentlySelectedPlanet; /**!< The currently selected planet */
 };
 

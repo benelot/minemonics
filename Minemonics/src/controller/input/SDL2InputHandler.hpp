@@ -51,7 +51,7 @@ public:
 
 	void update(double timeSinceLastTick);
 
-	// Accessor methods
+	// Accessor methods ##########################
 
 	/**
 	 * Get the mouse X position.

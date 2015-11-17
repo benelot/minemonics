@@ -76,7 +76,7 @@ public:
 	 */
 	virtual void grow(const int branchiness) = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	GeneType getType() const {
 		return mType;

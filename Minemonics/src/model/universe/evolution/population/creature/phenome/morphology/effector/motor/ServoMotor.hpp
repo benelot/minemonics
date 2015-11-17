@@ -79,7 +79,7 @@ public:
 	 */
 	virtual void apply(double timeSinceLastTick) = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	int getJointMotorIndex() const {
 		return mJointMotorIndex;

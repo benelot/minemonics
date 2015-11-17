@@ -17,10 +17,11 @@
 //## view headers
 //## utils headers
 
-BoostLogger StateHandler::mBoostLogger; /*<! initialize the boost logger*/
+BoostLogger StateHandler::mBoostLogger; /**<! initialize the boost logger*/
 StateHandler::_Init StateHandler::_initializer;
 StateHandler::StateHandler() :
-	mFrameTime(0), mLocked(false), mState(STARTUP),mCurrentlySelectedPlanet(NULL) {
+	mFrameTime(0), mLocked(false), mState(STARTUP), mCurrentlySelectedPlanet(
+	NULL) {
 
 }
 
@@ -34,9 +35,6 @@ StateHandler::ApplicationState StateHandler::getCurrentState() {
 	return mState;
 }
 
-// for the sake of clarity, I am not using actual thread synchronization 
-// objects to serialize access to this resource. You would want to protect
-// this block with a mutex or critical section, etc.
 bool StateHandler::lockState() {
 	if (mLocked == false) {
 
@@ -62,7 +60,7 @@ bool StateHandler::requestStateChange(const ApplicationState newState) {
 		return true;
 	}
 
-	// this state cannot be changed once initiated
+	/** this state cannot be changed once initiated */
 	if (mState == SHUTDOWN) {
 		return false;
 	}
@@ -73,40 +71,45 @@ bool StateHandler::requestStateChange(const ApplicationState newState) {
 		mState = newState;
 
 		switch (newState) {
-		case StateHandler::GUI:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to GUI";
-			break;
-		case StateHandler::STARTUP:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to STARTUP";
-			break;
-		case StateHandler::SIMULATION:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to SIMULATION";
-			break;
-		case StateHandler::HEADLESS_SIMULATION:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to HEADLESS_SIMULATION";
-			break;
-		case StateHandler::SHUTDOWN:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to SHUTDOWN";
-			break;
-		case StateHandler::LOADING:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to LOADING";
-			break;
-		case StateHandler::CANCEL_LOADING:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "State changed to CANCEL_LOADING";
+		case StateHandler::GUI: {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "State changed to GUI";
 			break;
 		}
-
+		case StateHandler::STARTUP: {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "State changed to STARTUP";
+			break;
+		}
+		case StateHandler::SIMULATION:
+		{
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "State changed to SIMULATION";
+			break;
+		}
+		case StateHandler::HEADLESS_SIMULATION: {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "State changed to HEADLESS_SIMULATION";
+			break;
+		}
+		case StateHandler::SHUTDOWN: {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "State changed to SHUTDOWN";
+			break;
+		}
+		case StateHandler::LOADING: {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "State changed to LOADING";
+			break;
+		}
+		case StateHandler::CANCEL_LOADING: {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+			<< "State changed to CANCEL_LOADING";
+		}
+		break;
+	}
 		return true;
 	} else {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-			<< "No state change.";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "No state change.";
 	}
 	return false;
 }

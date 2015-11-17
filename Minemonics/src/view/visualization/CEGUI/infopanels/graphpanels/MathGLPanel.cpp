@@ -39,6 +39,8 @@
 
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
 
@@ -50,20 +52,21 @@
 //## utils headers
 
 MathGLPanel::MathGLPanel(const int left, const int top, const int width,
-	const int height, ViewController* const viewController,
-	Ogre::Root* const root, const int textureWidth, const int textureHeight) :
-	MovablePanel("MathGLWindow", MovablePanel::GRAPHPANEL), mViewController(
-		viewController), mTime(0), mMakePrint(false) {
+	const int height, Ogre::Root* const root, const int textureWidth,
+	const int textureHeight) :
+	MovablePanel("MathGLWindow", MovablePanel::GRAPHPANEL), mTime(0), mMakePrint(
+		false) {
 
 	CEGUI::Sizef size(static_cast<float>(textureWidth),
 		static_cast<float>(textureHeight));
 
 	// We create a CEGUI texture target and create a GUIContext that will use it.
 	mRenderTextureTarget =
-		mViewController->getRenderer()->createTextureTarget();
+		SimulationManager::getSingleton()->getViewController().getRenderer()->createTextureTarget();
 	mRenderTextureTarget->declareRenderSize(size);
-	mRenderGuiContext = &mViewController->getSystem()->createGUIContext(
-		static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
+	mRenderGuiContext =
+		&SimulationManager::getSingleton()->getViewController().getSystem()->createGUIContext(
+			static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
 
 	mTexture = root->getTextureManager()->createManual("RTT",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -73,8 +76,9 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 	Ogre::RenderTexture *rtex = mTexture->getBuffer()->getRenderTarget();
 
 	// We create a CEGUI Texture using the renderer you use:
-	CEGUI::Texture& texture = mViewController->getRenderer()->createTexture(
-		"MathGLTexture", mTexture);
+	CEGUI::Texture& texture =
+		SimulationManager::getSingleton()->getViewController().getRenderer()->createTexture(
+			"MathGLTexture", mTexture);
 
 	// Now we need to cast it to the CEGUI::Texture superclass which matches your Renderer. This can be CEGUI::OgreTexture or CEGUI::OpenGLTexture, depending on the renderer you use in your application
 	// We will use Ogre here as an example
@@ -135,8 +139,6 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 }
 
 MathGLPanel::~MathGLPanel() {
-	mViewController = NULL;
-
 	delete mRenderGuiContext;
 	mRenderGuiContext = NULL;
 
@@ -174,13 +176,14 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	if (mMakePrint) {
 		std::string fileName;
 		fileName.append("Graph");
-		fileName.append(boost::lexical_cast < std::string > (mTime));
+		fileName.append(boost::lexical_cast<std::string>(mTime));
 		fileName.append(".png");
 		graph.WritePNG(fileName.c_str());
 		mMakePrint = false;
 	}
 
-	CEGUI::Renderer* guiRenderer(mViewController->getRenderer());
+	CEGUI::Renderer* guiRenderer(
+		SimulationManager::getSingleton()->getViewController().getRenderer());
 	guiRenderer->beginRendering();
 
 	mRenderTextureTarget->clear();

@@ -120,7 +120,7 @@ public:
 
 	virtual void removeFromWorld() = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * Is the phenotype in the world?
 	 * @return
@@ -297,8 +297,6 @@ protected:
 	std::vector<LimbModel*> mLimbModels; /**!< The vector of phenotype limb models. */
 
 	std::vector<JointModel*> mJointModels; /**!< The vector of phenotype joint models. */
-
-	//std::vector<Sensor*> mSensors;
 
 	std::vector<Controller*> mControllers; /**!< The vector of phenotype joint controller models. */
 

@@ -47,7 +47,7 @@ public:
 	 */
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	btRigidBody*& getBody() {
 		return mGroundBody;
 	}

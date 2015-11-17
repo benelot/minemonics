@@ -88,7 +88,8 @@ public:
 
 	void removePlanetFromView(Planet* const planet);
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	DetailsPanel* const getDetailsPanel() const {
 		return mDetailsPanel;
 	}

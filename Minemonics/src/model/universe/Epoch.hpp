@@ -34,8 +34,9 @@ public:
 	Epoch();
 	virtual ~Epoch();
 
+	// Accessor methods ##########################
+
 	bool isEndOfEpoch();
-	//Accessor methods
 
 	double getEndingAtFitness() const {
 		return mEndingAtFitness;

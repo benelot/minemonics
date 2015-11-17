@@ -47,8 +47,7 @@ PlanetModel::PlanetModel(const EvolutionModel::EvaluationType type,
 }
 
 PlanetModel::~PlanetModel() {
-	// environment model is deleted in the environment controller
-	mEnvironmentModel = NULL;
+	mEnvironmentModel = NULL; // environment model is deleted in the environment controller
 
 	for (std::vector<Epoch*>::iterator eit = mEpochs.begin();
 		eit != mEpochs.end(); eit++) {

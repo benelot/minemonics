@@ -103,7 +103,7 @@ public:
 	 */
 	FSJointModel* clone();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	JointPhysics* const getJointPhysics() const {
 		return mJointPhysics;

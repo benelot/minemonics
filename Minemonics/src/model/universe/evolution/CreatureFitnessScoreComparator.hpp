@@ -34,8 +34,9 @@ public:
 	 * @param creature2 Second creature.
 	 */
 	static bool compareCreatureFitnessScore(CreatureModel* const creature1,
-			CreatureModel* const creature2) {
-		return (mHigherIsBetter) ?
+		CreatureModel* const creature2) {
+		return
+			(mHigherIsBetter) ?
 				compareCreatureFitnessScoreAsc(creature1, creature2) :
 				compareCreatureFitnessScoreDsc(creature1, creature2);
 	}
@@ -46,7 +47,7 @@ public:
 	 * @param creature2 Second creature.
 	 */
 	static bool compareCreatureFitnessScoreAsc(CreatureModel* const creature1,
-			CreatureModel* const creature2) {
+		CreatureModel* const creature2) {
 		// lesser means descending/ greater means ascending
 		return (creature1->getFitnessScore() > creature2->getFitnessScore());
 	}
@@ -57,13 +58,13 @@ public:
 	 * @param creature2 Second creature.
 	 */
 	static bool compareCreatureFitnessScoreDsc(CreatureModel* const creature1,
-			CreatureModel* const creature2) {
+		CreatureModel* const creature2) {
 		// lesser means descending/ greater means ascending
 		return !compareCreatureFitnessScoreAsc(creature1, creature2);
 	}
 
 private:
-	static bool mHigherIsBetter;
+	static bool mHigherIsBetter; /**!< If a higher score is better or not */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_CREATUREFITNESSSCORECOMPARATOR_HPP_ */

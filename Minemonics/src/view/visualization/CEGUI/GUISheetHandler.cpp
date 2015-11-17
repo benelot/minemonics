@@ -40,7 +40,7 @@
 //## utils headers
 
 GUISheetHandler::GUISheetHandler() :
-	mSystem(NULL), mStateHandler(NULL), mWindow(NULL) {
+	mSystem(NULL), mWindow(NULL) {
 
 }
 
@@ -48,11 +48,10 @@ GUISheetHandler::~GUISheetHandler() {
 }
 
 void GUISheetHandler::initialize(CEGUI::System* const system,
-	CEGUI::Window* const sheet, StateHandler* const stateHandler) {
+	CEGUI::Window* const sheet) {
 
 	mSystem = system;
 	mWindow = sheet;
-	mStateHandler = stateHandler;
 
 	// hook up the event handlers to the window elements
 	{
@@ -723,7 +722,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 //File->Quit
 bool GUISheetHandler::quitButtonClicked(const CEGUI::EventArgs &args) {
-	mStateHandler->requestStateChange(StateHandler::SHUTDOWN);
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(StateHandler::SHUTDOWN);
 	return true;
 }
 

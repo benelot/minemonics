@@ -69,11 +69,9 @@ bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
 				limbModel2->getInterpenetrationDepth()
 					+ cp.getDistance() / limbModel2->getDimensions().length());
 		}
-//		}
 	}
 
-//ignore according to the documentation.
-	return false;
+	return false; //ignore according to the documentation.
 }
 
 #endif /* MODEL_UNIVERSE_COLLISIONHANDLER_HPP_ */

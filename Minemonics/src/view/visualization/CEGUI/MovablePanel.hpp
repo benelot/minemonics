@@ -59,18 +59,19 @@ public:
 
 	virtual void close(); /**!< Closes the window. */
 
+	// Accessor methods ##########################
+
 	MovablePanelType getType() const {
 		return mType;
 	}
 
-	//Accessor methods
 protected:
-	CEGUI::Window* mBaseWidget;
+	CEGUI::Window* mBaseWidget; /**!< The base widget of the movable widget */
 
 private:
-	CEGUI::USize mSizeWithToolbar;
-	CEGUI::USize mSizeWithoutToolbar;
-	MovablePanelType mType;
+	CEGUI::USize mSizeWithToolbar; /**!< The size of the movable panel with its toolbar */
+	CEGUI::USize mSizeWithoutToolbar; /**!< The size of the movable panel without its toolbar */
+	MovablePanelType mType; /**!< The type of movable panel */
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_MOVABLEPANEL_HPP_ */

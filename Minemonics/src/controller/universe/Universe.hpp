@@ -62,8 +62,6 @@ public:
 	 */
 	void drawDebugWorld();
 
-	void setSimulationSpeed(double simulationSpeed);
-
 	/**
 	 * Step the universe physics forward.
 	 * @param timeSinceLastTick The size of the time step.
@@ -75,7 +73,10 @@ public:
 	 */
 	void update(const double timeSinceLastFrame);
 
-	//Accessor methods
+	// Accessor methods ##########################
+
+	void setSimulationSpeed(double simulationSpeed);
+
 	/**
 	 * Get the planets of the universe.
 	 * @return The planets of the universe.
@@ -103,10 +104,7 @@ public:
 	int getTotalCreatureQty();
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -115,26 +113,17 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>("Universe"));
+				boost::log::attributes::constant<std::string>("Universe"));
 		}
 	} _initializer;
 
-	/**
-	 * The evaluation controller of this universe.
-	 */
-	EvaluationController mEvaluationController;
+	EvaluationController mEvaluationController; /**!< The evaluation controller of this universe. */
 
-	/**
-	 * The model representation of the universe.
-	 */
-	UniverseModel mUniverseModel;
+	UniverseModel mUniverseModel; /**!< The model of the universe */
 
-	/**
-	 * The planets of the universe.
-	 */
-	std::vector<Planet*> mPlanets;
+	std::vector<Planet*> mPlanets; /**!< The planets of the universe. */
 
-	int mSimulationSpeed;
+	int mSimulationSpeed; /**!< The universe simulation speed */
 };
 
 #endif /* CONTROLLER_UNIVERSE_UNIVERSE_HPP_ */

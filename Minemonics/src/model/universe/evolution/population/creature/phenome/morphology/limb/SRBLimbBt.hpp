@@ -52,12 +52,13 @@ class access;
 class SRBLimbBt: public LimbPhysics {
 public:
 	SRBLimbBt();
-	SRBLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
+	SRBLimbBt(btDynamicsWorld* const world, LimbModel* const limbModel,
 		const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 		const Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
-		const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
-		const double mass, const double restitution, const double friction,
+		const Ogre::Quaternion initialOrientation,
+		const Ogre::Vector3 dimensions, const double mass,
+		const double restitution, const double friction,
 		const Ogre::ColourValue color, bool isIntraBodyColliding);
 	SRBLimbBt(const SRBLimbBt& SRBLimbBt);
 
@@ -157,7 +158,7 @@ public:
 	 */
 	bool equals(const SRBLimbBt & SRBLimbBt) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	btVector3 getPosition() const {
 		return mBody->getCenterOfMassPosition();
@@ -224,7 +225,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("SRBLimbBt"));
+				boost::log::attributes::constant<std::string>("SRBLimbBt"));
 		}
 	} _initializer;
 
@@ -238,7 +239,7 @@ private:
 
 	btVector3 mInertia; /**!< The inertia of the limb */
 
-	LimbModel* mLimbModel;
+	LimbModel* mLimbModel; /**!< The limb model of the limb bullet physics model */
 };
 BOOST_CLASS_VERSION(SRBLimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_SRBLIMBBT_HPP_ */

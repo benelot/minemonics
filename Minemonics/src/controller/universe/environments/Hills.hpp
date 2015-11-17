@@ -33,7 +33,7 @@ public:
 	 */
 	void initialize(SimulationManager* simulationMgr, Ogre::Light* l);
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 //	EnvironmentModel* getEnvironmentModel();
 };

@@ -108,7 +108,7 @@ public:
 	 */
 	bool variate();
 
-	//Accessor methods
+	// Accessor methods ##########################
 	Reaper& getReaper() {
 		return mReaper;
 	}

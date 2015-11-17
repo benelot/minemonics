@@ -30,15 +30,16 @@
 class EvaluationModel {
 public:
 	EvaluationModel();
-	EvaluationModel(PlanetModel* const planetModel, const double evaluationTime =
-		EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
+	EvaluationModel(PlanetModel* const planetModel,
+		const double evaluationTime =
+			EvaluationConfiguration::DEFAULT_EVALUATION_TIME);
 	virtual ~EvaluationModel();
 
 	void initialize();
 
 	void addPopulationModel(PopulationModel* const populationModel);
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	PlanetModel* getPlanetModel() const {
 		return mPlanetModel;
@@ -89,40 +90,19 @@ public:
 
 private:
 
-	/**
-	 * The model of the planet.
-	 */
-	PlanetModel* mPlanetModel;
+	PlanetModel* mPlanetModel; /**!< The model of the planet. */
 
-	/**
-	 * The models of the populations.
-	 */
-	std::vector<PopulationModel*> mPopulationModels;
+	std::vector<PopulationModel*> mPopulationModels; /**!< The models of the populations. */
 
-	/**
-	 * If the evaluation is running or not.
-	 */
-	bool mEvaluating;
+	bool mEvaluating; /**!< If the evaluation is running or not. */
 
-	/**
-	 * If the evaluation is torn down or not.
-	 */
-	bool mTornDown;
+	bool mTornDown; /**!< If the evaluation is torn down or not. */
 
-	/**
-	 * The time the evaluation runs.
-	 */
-	double mEvaluationTime;
+	double mEvaluationTime; /**!< The time the evaluation runs. */
 
-	/**
-	 * The time that has already passed.
-	 */
-	double mTimePassed;
+	double mTimePassed; /**!< The time that has already passed. */
 
-	/**
-	 * The speed of the simulation.
-	 */
-	double mSimulationSpeed;
+	double mSimulationSpeed; /**!< The speed of the simulation. */
 };
 
 #endif /* MODEL_UNIVERSE_EVALUATIONMODEL_HPP_ */

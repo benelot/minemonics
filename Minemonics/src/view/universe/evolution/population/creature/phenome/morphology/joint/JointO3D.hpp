@@ -64,13 +64,13 @@ public:
 	void removeFromWorld();
 
 private:
-	Limb* mLimbA;
+	Limb* mLimbA; /**!< The limb A */
 
-	Limb* mLimbB;
+	Limb* mLimbB; /**!< The limb B */
 
-	btTransform mLocalA;
+	btTransform mLocalA; /**!< The transform to A */
 
-	btTransform mLocalB;
+	btTransform mLocalB; /**!< The transform to B */
 };
 
 #endif /* VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTO3D_HPP_ */

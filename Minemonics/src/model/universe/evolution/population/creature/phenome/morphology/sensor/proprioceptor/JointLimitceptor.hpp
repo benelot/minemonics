@@ -43,7 +43,7 @@ public:
 
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	double getLimitError() const {
 		return mLimitError;
 	}
@@ -86,8 +86,8 @@ public:
 	}
 
 private:
-	double mLimitError;
-	Limit mLimit;
+	double mLimitError; /**!<  The measured limit error (overshoot) */
+	Limit mLimit; /**!< Which limits are considered? */
 };
 BOOST_CLASS_VERSION(JointLimitceptor, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSOR_PROPRIOCEPTOR_JOINTLIMITCEPTOR_HPP_ */

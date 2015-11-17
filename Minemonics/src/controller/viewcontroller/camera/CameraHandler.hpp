@@ -79,7 +79,8 @@ public:
 	 */
 	void moveZ(double z);
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	Ogre::SceneNode* getCamNode() {
 		return mCamNode;
 	}
@@ -101,10 +102,7 @@ public:
 	}
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -113,22 +111,15 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"CameraHandler"));
+				boost::log::attributes::constant<std::string>("CameraHandler"));
 		}
 	} _initializer;
 
-	/**
-	 * The SceneNode the camera is currently attached to
-	 */
-	Ogre::SceneNode *mCamNode;
+	Ogre::SceneNode *mCamNode; /** The SceneNode the camera is currently attached to */
 
-	Ogre::Camera* mCamera;
+	Ogre::Camera* mCamera; /**!< The scene observer camera of the simulator */
 
-	/**
-	 *  Value to move in the correct direction
-	 */
-	Ogre::Vector3 mDirection;
+	Ogre::Vector3 mDirection; /**!<  Value to move in the correct direction */
 };
 
 #endif /* CONTROLLER_VIEWCONTROLLER_CAMERAHANDLER_H_ */

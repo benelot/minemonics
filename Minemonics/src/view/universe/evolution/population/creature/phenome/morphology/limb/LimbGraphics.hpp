@@ -52,7 +52,7 @@ public:
 	 */
 	virtual LimbGraphics* clone() = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	bool isInWorld() const {
 		return mInWorld;
@@ -66,15 +66,9 @@ protected:
 
 protected:
 
-	/**
-	 * A const handle of the limb model to get the information to render.
-	 */
-	const LimbModel* mLimbModel;
+	const LimbModel* mLimbModel; /**!< The limb model to get the information to render. */
 
-	/**
-	 * Whether the limb is in the world or not.
-	 */
-	bool mInWorld;
+	bool mInWorld; /**!< Whether the limb is in the world or not. */
 };
 
 #endif /* VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBGRAPHICS_HPP_ */

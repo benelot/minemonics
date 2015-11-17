@@ -39,7 +39,7 @@ public:
 
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	double getForce() const {
 		return mForce;
 	}
@@ -82,7 +82,7 @@ public:
 	}
 
 private:
-	double mForce;
+	double mForce; /**!< The measured force */
 };
 BOOST_CLASS_VERSION(JointForceceptor, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSOR_PROPRIOCEPTOR_JOINTFORCECEPTOR_HPP_ */

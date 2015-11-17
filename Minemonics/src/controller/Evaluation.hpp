@@ -73,7 +73,8 @@ public:
 	 */
 	void update(const double timeSinceLastFrame);
 
-	// Facade accessor methods
+	// Facade accessor methods ##########################
+
 	bool isEvaluating() const {
 		return mEvaluationModel.isEvaluating();
 	}
@@ -91,10 +92,8 @@ public:
 	}
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -103,34 +102,21 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"Evaluation"));
+				boost::log::attributes::constant<std::string>("Evaluation"));
 		}
 	} _initializer;
 
-	/**
-	 * The model representation of the evaluation.
-	 */
-	EvaluationModel mEvaluationModel;
+	EvaluationModel mEvaluationModel; /**!< The model representation of the evaluation. */
 
-	/**
-	 * The planet the evaluation takes place on.
-	 */
-	Planet* mPlanet;
+	Planet* mPlanet; /**!< The planet the evaluation takes place on. */
 
-	/**
-	 * The populations taking part in the evaluation.
-	 */
-	std::vector<Population*> mPopulations;
+	std::vector<Population*> mPopulations; /**!< The populations taking part in the evaluation. */
 
-	unsigned long int mStart;
+	unsigned long int mStart; /**!< The timestamp of the evaluation start */
 
-	bool mHasFailed;
+	bool mHasFailed; /**!< If the evaluation has failed */
 
-	bool mOnce;
-
-	std::string mGenerationSerializationPath;
-
+	std::string mGenerationSerializationPath; /**!< The serialization path for the current generation */
 };
 
 #endif /* CONTROLLER_EVALUATION_HPP_ */

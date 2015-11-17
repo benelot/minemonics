@@ -108,7 +108,7 @@ public:
 
 	void calm();
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * The the limb physics model of the limb.
 	 * @return The limb physics model of the limb.

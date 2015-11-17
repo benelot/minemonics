@@ -62,7 +62,7 @@ public:
 	 */
 	virtual void apply(double timeSinceLastTick) = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	double getMaxForce() const {
 		return mMaxForce;

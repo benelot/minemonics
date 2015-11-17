@@ -65,7 +65,7 @@ public:
 	 */
 	GeneBranch* clone();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	GeneBranchType getType() const {
 		return mType;

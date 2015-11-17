@@ -34,8 +34,9 @@ public:
 	 * @param creature2 Second creature.
 	 */
 	static bool compareCreatureFitness(CreatureModel* const creature1,
-			CreatureModel* const creature2) {
-		return (creature1->getJuries()[mCriterium]->isHigherBetter()) ?
+		CreatureModel* const creature2) {
+		return
+			(creature1->getJuries()[mCriterium]->isHigherBetter()) ?
 				compareCreatureFitnessAsc(creature1, creature2) :
 				compareCreatureFitnessDsc(creature1, creature2);
 	}
@@ -46,10 +47,10 @@ public:
 	 * @param creature2 Second creature.
 	 */
 	static bool compareCreatureFitnessAsc(CreatureModel* const creature1,
-			CreatureModel* const creature2) {
+		CreatureModel* const creature2) {
 		// lesser means descending/ greater means ascending
 		return (creature1->getJuries()[mCriterium]->getFitness()
-				> creature2->getJuries()[mCriterium]->getFitness());
+			> creature2->getJuries()[mCriterium]->getFitness());
 	}
 
 	/**
@@ -58,10 +59,10 @@ public:
 	 * @param creature2 Second creature.
 	 */
 	static bool compareCreatureFitnessDsc(CreatureModel* const creature1,
-			CreatureModel* const creature2) {
+		CreatureModel* const creature2) {
 		// lesser means descending/ greater means ascending
 		return (creature1->getJuries()[mCriterium]->getFitness()
-				< creature2->getJuries()[mCriterium]->getFitness());
+			< creature2->getJuries()[mCriterium]->getFitness());
 	}
 
 	int getCriterium() const {
@@ -73,7 +74,7 @@ public:
 	}
 
 private:
-	static int mCriterium;
+	static int mCriterium; /**!< The criterium index */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_CREATUREFITNESSCOMPARATOR_HPP_ */

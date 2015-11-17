@@ -45,7 +45,7 @@ public:
 	 */
 	bool equals(const ControlInput &controlInput) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	double getInputValue() {
 		mReceivedInput = false;

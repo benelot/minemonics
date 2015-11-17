@@ -164,12 +164,8 @@ void SRBLimbBt::initialize() {
 			mCollisionShape->getAnisotropicRollingFrictionDirection(),
 			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
-//		calm();
-
-		//Set user pointer for proper return of creature/limb information etc..
-		mBody->setUserPointer(mLimbModel);
-		//add the creature model pointer to the collision shape to get it back if we raycast for this object.
-		mCollisionShape->setUserPointer(mLimbModel);
+		mBody->setUserPointer(mLimbModel); //Set user pointer for proper return of creature/limb information etc..
+		mCollisionShape->setUserPointer(mLimbModel); 	//add the creature model pointer to the collision shape to get it back if we raycast for this object.
 	}
 }
 

@@ -33,8 +33,8 @@ class TextureTarget;
 class MathGLPanel: public MovablePanel {
 public:
 	MathGLPanel(const int left, const int top, const int width,
-	const int height, ViewController* const viewController,
-	Ogre::Root* const root, const int textureWidth, const int textureHeight);
+		const int height, Ogre::Root* const root, const int textureWidth,
+		const int textureHeight);
 	virtual ~MathGLPanel();
 
 	void update(const double timeSinceLastFrame);
@@ -44,17 +44,15 @@ public:
 	}
 
 private:
-	ViewController* mViewController;
+	Ogre::TexturePtr mTexture; /**!< The texture to drawn the math gl on*/
 
-	Ogre::TexturePtr mTexture;
+	double mTime; /**!< The indication of time math */
 
-	double mTime;
+	CEGUI::GUIContext* mRenderGuiContext; /**!< The render GUI context */
 
-	CEGUI::GUIContext* mRenderGuiContext;
+	CEGUI::TextureTarget* mRenderTextureTarget; /**!< The render texture target */
 
-	CEGUI::TextureTarget* mRenderTextureTarget;
-
-	bool mMakePrint;
+	bool mMakePrint; /**!< Make a print screen */
 };
 
 #endif /* MATHGLPANEL_H_ */

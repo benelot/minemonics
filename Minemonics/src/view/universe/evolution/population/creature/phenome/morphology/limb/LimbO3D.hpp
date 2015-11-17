@@ -52,7 +52,7 @@ public:
 	 */
 	void removeFromWorld();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	Ogre::Entity*& getEntity() {
 		return mLimbEntity;
@@ -64,15 +64,9 @@ public:
 
 private:
 
-	/**
-	 * The limb object in the graphical world.
-	 */
-	Ogre::Entity* mLimbEntity;
+	Ogre::Entity* mLimbEntity; /**!< The limb object in the graphical world. */
 
-	/**
-	 * The entity node of the limb to perform rotations and translations with.
-	 */
-	Ogre::SceneNode* mLimbEntityNode;
+	Ogre::SceneNode* mLimbEntityNode; /**!< The entity node of the limb to perform rotations and translations with. */
 
 };
 

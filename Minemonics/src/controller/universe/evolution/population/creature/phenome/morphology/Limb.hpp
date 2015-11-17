@@ -118,7 +118,8 @@ public:
 	 */
 	void removeFromWorld();
 
-	// Accessor methods
+	// Accessor methods ##########################
+
 	const Ogre::Vector3 getPosition() const;
 
 	const Ogre::Quaternion getOrientation() const;

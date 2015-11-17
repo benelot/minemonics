@@ -59,7 +59,7 @@ public:
 	 */
 	bool equals(const SineControllerGene& sineControllerGene) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	double getAmplitude() const {
 		return mAmplitude;

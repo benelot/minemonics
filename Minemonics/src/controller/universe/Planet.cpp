@@ -38,10 +38,9 @@ Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 	int tournamentSize) :
 	mEnvironment(NULL) {
 	mPlanetModel = new PlanetModel(evaluationType, evaluationTime,
-		tournamentSize,physicsModelType, environmentType);
+		tournamentSize, physicsModelType, environmentType);
 
-	//the planet specification is complete, we can initialize it
-	initialize();
+	initialize(); /**!< the planet specification is complete, we can initialize it */
 }
 
 Planet::Planet(PlanetModel* const planetModel) :
@@ -110,8 +109,7 @@ bool Planet::proceedEvaluation() {
 }
 
 void Planet::drawDebugWorld() {
-	//draws the debug world if it is enabled
-	mPlanetModel->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld();
+	mPlanetModel->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld(); /**!<draws the debug world if it is enabled*/
 
 }
 

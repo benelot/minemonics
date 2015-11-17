@@ -64,7 +64,7 @@ void EvaluationController::scheduleEvaluations() {
 
 			if ((*eit)->hasFailed()) {
 				mFails += (*eit)->hasFailed();
-				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Fails: " << mFails;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Fails: " << mFails;
 			}
 
 			mCurrentlyRunningEvaluationsQty--;
@@ -78,7 +78,7 @@ void EvaluationController::scheduleEvaluations() {
 	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 		eit != mEvaluations.end(); eit++) {
 
-		//if the evaluation is newly scheduled, then set it up for evaluation
+		/** If the evaluation is newly scheduled, then set it up for evaluation */
 		if (!(*eit)->isEvaluating()
 			&& mCurrentlyRunningEvaluationsQty < mParallelEvaluationsQty) {
 			mCurrentlyRunningEvaluationsQty++;
@@ -91,20 +91,20 @@ void EvaluationController::scheduleEvaluations() {
 
 void EvaluationController::update(const double timeSinceLastTick) {
 
-	if (!mPaused) { // if the simulator is not paused, we update all evaluations that are in the loop
+	if (!mPaused) { /**!< if the simulator is not paused, we update all evaluations that are in the loop */
 		for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 			eit != mEvaluations.end(); eit++) {
-			if ((*eit)->isEvaluating()) { // if the evaluation is running
-				(*eit)->update(timeSinceLastTick); // update the evaluation
+			if ((*eit)->isEvaluating()) { /**!< if the evaluation is running */
+				(*eit)->update(timeSinceLastTick); /**!< update the evaluation */
 			}
 		}
 	}
 
-	scheduleEvaluations(); //setup new evaluations and tear down the old ones
+	scheduleEvaluations(); /**!< setup new evaluations and tear down the old ones */
 
-	while (mEvaluations.size() < mParallelEvaluationsQty // if there are not enough evaluations evaluating
-	&& mUniverse->getTotalCreatureQty() != 0) { // if the universe has creatures in it
-		if (!mUniverse->proceedEvaluation()) { // we proceed the evaluation until it says it can not continue anymore
+	while (mEvaluations.size() < mParallelEvaluationsQty /**!< if there are not enough evaluations evaluating */
+	&& mUniverse->getTotalCreatureQty() != 0) { /**!< if the universe has creatures in it */
+		if (!mUniverse->proceedEvaluation()) { /**!< we proceed the evaluation until it says it can not continue anymore */
 			break;
 		}
 	}

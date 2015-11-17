@@ -106,7 +106,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mHigherIsBetter);
 	}
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * Returns the weight associated with this jury component.
 	 * @return the weight

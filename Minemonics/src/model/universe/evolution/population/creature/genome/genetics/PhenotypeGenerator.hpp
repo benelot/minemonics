@@ -51,7 +51,7 @@ public:
 	 */
 	virtual PhenotypeGenerator* clone();
 
-	//Accessor methods
+	// Accessor methods ##########################
 	int getRoot2LeafPath() const {
 		return mRoot2LeafPath;
 	}

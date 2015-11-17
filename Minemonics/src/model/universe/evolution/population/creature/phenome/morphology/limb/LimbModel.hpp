@@ -105,7 +105,7 @@ public:
 
 	virtual void setWorld(btDynamicsWorld* world) = 0;
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * The the limb physics model of the limb.
 	 * @return The limb physics model of the limb.

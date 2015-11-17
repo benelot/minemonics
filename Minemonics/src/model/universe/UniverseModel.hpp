@@ -47,7 +47,8 @@ public:
 	 */
 	void proceedEvaluation();
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	const std::vector<PlanetModel*>::size_type getCurrentEvaluationPlanetIndex() const {
 		return mCurrentEvaluationPlanetIndex;
 	}

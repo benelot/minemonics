@@ -45,7 +45,7 @@ public:
 	 */
 	bool equals(const ControlOutput &controlOutput) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	double getOutputValue() const {
 		return mOutputValue;

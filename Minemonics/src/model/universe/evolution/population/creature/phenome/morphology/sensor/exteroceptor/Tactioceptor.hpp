@@ -30,7 +30,8 @@ public:
 
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	bool isTouched() const {
 		return mTouched;
 	}
@@ -41,7 +42,7 @@ public:
 	}
 
 private:
-	bool mTouched;
+	bool mTouched; /**!< If the ground is touched */
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSORS_EXTEROCEPTOR_ */

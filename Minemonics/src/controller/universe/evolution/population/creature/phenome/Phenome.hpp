@@ -133,7 +133,7 @@ public:
 	 */
 	void removeFromWorld();
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * Get the components the phenotype is built of.
 	 * @return The components the phenotype is built of.

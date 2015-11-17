@@ -39,7 +39,7 @@ public:
 
 	virtual void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	double getVelocity() const {
 		return mVelocity;
 	}
@@ -82,7 +82,7 @@ public:
 	}
 
 private:
-	double mVelocity;
+	double mVelocity; /**!< The measured velocity */
 };
 BOOST_CLASS_VERSION(JointVelocityceptor, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSOR_PROPRIOCEPTOR_JointVelocityceptor_HPP_ */

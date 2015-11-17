@@ -63,7 +63,7 @@ public:
 	 */
 	void removeFromWorld();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	EnvironmentPhysics* getEnvironmentPhysics() {
 		return mEnvironmentPhysics;

@@ -126,7 +126,7 @@ public:
 
 	void clearJuries();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	std::vector<Creature*>& getCreatures() {
 		return mCreatures;

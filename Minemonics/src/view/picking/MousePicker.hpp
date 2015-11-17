@@ -4,7 +4,6 @@
 //# corresponding headers
 //# forward declarations
 class btDynamicsWorld;
-class ViewController;
 namespace Ogre {
 class Ray;
 } /* namespace Ogre */
@@ -32,7 +31,7 @@ class Ray;
 class MousePicker {
 public:
 
-	MousePicker(ViewController* viewController);
+	MousePicker();
 	virtual ~MousePicker();
 
 	void pickBody(btDynamicsWorld* world);
@@ -51,8 +50,7 @@ public:
 	Ogre::Ray getMouseRay();
 
 private:
-	ViewController* mViewController;
-	BulletPicker mBulletPicker;
+	BulletPicker mBulletPicker; /**!< The bullet picker */
 };
 
 #endif /* VIEW_PICKING_MOUSEPICKER_HPP_ */

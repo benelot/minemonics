@@ -46,6 +46,8 @@ public:
 	static const boost::log::trivial::severity_level LOGGING_LEVEL = info;
 
 	static const std::string loggedClasses;
+
+	static const std::string TOP_FOLDER;
 };
 
 #endif /* CONFIGURATION_LOGGERCONFIGURATION_HPP_ */

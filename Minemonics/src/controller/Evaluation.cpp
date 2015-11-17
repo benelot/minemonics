@@ -31,11 +31,11 @@
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
-	mPlanet(NULL), mStart(0), mHasFailed(false), mOnce(true) {
+	mPlanet(NULL), mStart(0), mHasFailed(false) {
 }
 
 Evaluation::Evaluation(Planet* const planet, const double evaluationTime) :
-	mPlanet(planet), mStart(0), mHasFailed(false), mOnce(true),mEvaluationModel(planet->getPlanetModel(), evaluationTime) {
+	mPlanet(planet), mStart(0), mHasFailed(false),mEvaluationModel(planet->getPlanetModel(), evaluationTime) {
 }
 
 Evaluation::~Evaluation() {

@@ -42,7 +42,8 @@ public:
 
 	void hide(); /**!< Hides the immovable panel. */
 
-	//Accessor methods
+	// Accessor methods ##########################
+
 	void setPosition(const int left, const int top);
 
 	int getWidth() {
@@ -63,9 +64,8 @@ public:
 
 protected:
 	CEGUI::FrameWindow* mFrameWindow; /** The framed window of the panel. */
-	std::string mName;
-	int mWidth;
-	int mHeight;
+	std::string mName; /**!< The name of the base panel */
+	int mWidth, mHeight; /**!< The dimensions of the base panel */
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_BASEPANEL_HPP_ */

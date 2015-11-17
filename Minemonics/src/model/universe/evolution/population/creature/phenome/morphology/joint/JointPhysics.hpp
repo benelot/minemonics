@@ -129,7 +129,7 @@ public:
 	 */
 	bool equals(const JointPhysics & jointPhysics) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 	virtual const std::vector<Motor*>& getMotors() const = 0;
 
 	virtual std::vector<Motor*>& getMotors() = 0;

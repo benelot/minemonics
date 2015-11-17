@@ -97,7 +97,7 @@ public:
 	 */
 	virtual bool equals(const JointModel & jointModel) const;
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	JointPhysics* const getJointPhysics() const {
 		return mJointPhysics;

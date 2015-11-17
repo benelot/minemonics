@@ -103,7 +103,7 @@ public:
 
 	void load();
 
-	// Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * Get the environment of the planet.
 	 * @return The environment of the planet.

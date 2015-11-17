@@ -69,7 +69,7 @@ public:
 	 */
 	void update(double timeSinceLastTick);
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	EnvironmentModel* const getEnvironmentModel() const {
 		return mEnvironmentModel;
@@ -94,10 +94,7 @@ public:
 
 	virtual void load();
 
-	/**
-	 * Give access to boost serialization
-	 */
-	friend class boost::serialization::access;
+	friend class boost::serialization::access; 	/**!< Give access to boost serialization */
 
 	/**
 	 * Serializes the planet model to a string.

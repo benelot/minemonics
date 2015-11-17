@@ -62,7 +62,7 @@ public:
 		const float maxH, const Ogre::Vector3& pos, const float scale,
 		const float heightScale);
 
-	//Accessor methods
+	// Accessor methods ##########################
 	/**
 	 * Get the rigid body of the environment.
 	 * @return The rigid body of the environment.

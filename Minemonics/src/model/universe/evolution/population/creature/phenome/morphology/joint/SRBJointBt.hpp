@@ -145,7 +145,7 @@ public:
 	 */
 	virtual SRBJointBt* clone();
 
-	//Accessor methods
+	// Accessor methods ##########################
 
 	void setLimits(const Ogre::Vector3 limits) {
 		setLimits(OgreBulletUtils::convert(limits));
