@@ -126,6 +126,7 @@ SimulationManager::~SimulationManager(void) {
 	destroyScene(); /**!< tear down the scene */
 
 	// destroy the ogre renderer system
+	//TODO: Cleanup the universe graphics properly or let it be done by Ogre
 //	CEGUI::OgreRenderer::destroySystem();
 
 	//This is used past this line because the destructors are called on it
