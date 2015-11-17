@@ -51,13 +51,15 @@ EnvironmentO3D::~EnvironmentO3D() {
 
 	mTerrainGlobals = NULL;
 
-	if (mTerrainGroup) {
-		OGRE_DELETE mTerrainGroup;
-	}
+	mTerrainGroup = NULL; // deleted in terrain paging
+//	if (mTerrainGroup) {
+//		OGRE_DELETE mTerrainGroup;
+//	}
 
-	if (mTerrainPagedWorldSection) {
-		OGRE_DELETE mTerrainPagedWorldSection;
-	}
+	mTerrainPagedWorldSection = NULL; // deleted somewhere
+//	if (mTerrainPagedWorldSection) {
+//		OGRE_DELETE mTerrainPagedWorldSection;
+//	}
 }
 
 void EnvironmentO3D::initialize(const std::string fileName,
