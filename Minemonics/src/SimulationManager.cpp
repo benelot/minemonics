@@ -154,8 +154,7 @@ void SimulationManager::setupView(void) {
  */
 void SimulationManager::createScene(void) {
 
-	Logger::init("minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
-	Logger::initTermSink();
+	Logger::init("logs/minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
 
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 

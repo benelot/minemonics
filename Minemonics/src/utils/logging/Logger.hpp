@@ -30,21 +30,26 @@ typedef boost::log::sources::severity_logger<boost::log::trivial::severity_level
  */
 class Logger {
 public:
-	static void init(std::string fileName,boost::log::trivial::severity_level severity);
-	static void initTermSink();
+	static void init(std::string fileName,
+		boost::log::trivial::severity_level severity);
+	static void initFileSink(std::string fileName,
+		boost::log::trivial::severity_level severity);
+	static void initTermSink(
+		boost::log::trivial::severity_level severity);
+	static void initSpecialLoggers();
 
 	static const boost::log::trivial::severity_level trace =
-			boost::log::trivial::trace;
+		boost::log::trivial::trace;
 	static const boost::log::trivial::severity_level debug =
-			boost::log::trivial::debug;
+		boost::log::trivial::debug;
 	static const boost::log::trivial::severity_level info =
-			boost::log::trivial::info;
+		boost::log::trivial::info;
 	static const boost::log::trivial::severity_level warning =
-			boost::log::trivial::warning;
+		boost::log::trivial::warning;
 	static const boost::log::trivial::severity_level error =
-			boost::log::trivial::error;
+		boost::log::trivial::error;
 	static const boost::log::trivial::severity_level fatal =
-			boost::log::trivial::fatal;
+		boost::log::trivial::fatal;
 };
 
 #endif /* UTILS_LOGGING_LOGGER_H_ */

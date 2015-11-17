@@ -3,14 +3,23 @@
 
 //# forward declarations
 //# system headers
+#include <cstdlib>
+#include <vector>
+#include <string>
+
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
+#include <boost/log/attributes/scoped_attribute.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/NumericUtils.hpp>
@@ -19,18 +28,22 @@ BoostLogger ChaoticController::mBoostLogger; /*<! initialize the boost logger*/
 ChaoticController::_Init ChaoticController::_initializer;
 
 ChaoticController::ChaoticController() :
-	Controller(CHAOTIC_CONTROLLER), mTime(0),mSystemType(ChaoticControllerGene::CHUA_CIRCUIT) {
-	// Nothing to do for now
+	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(
+		ChaoticControllerGene::CHUA_CIRCUIT) {
+	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 
 }
-ChaoticController::ChaoticController(ChaoticControllerGene::ChaoticSystemType systemType) :
-	Controller(CHAOTIC_CONTROLLER), mTime(0),mSystemType(systemType) {
-	// Nothing to do for now
+ChaoticController::ChaoticController(
+	ChaoticControllerGene::ChaoticSystemType systemType) :
+	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType) {
+	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 
 }
 
 ChaoticController::ChaoticController(const ChaoticController& chaoticController) :
 	Controller(CHAOTIC_CONTROLLER) {
+	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
+
 	mTime = chaoticController.mTime;
 	mType = chaoticController.mType;
 
@@ -78,7 +91,7 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 	double output = u[2]; //output the new value to the motor
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
+//	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
 
 	setOutputValue(output);
 
@@ -113,7 +126,8 @@ void ChaoticController::calcChuaCircuit() {
 	 dz/dt=-c3*y
 	 f(x)=m1*x+(m0-m1)/2*(|x+1|-|x-1|)
 	 */
-	std::cout << u[0] << "\t" << u[1] << "\t" << u[2] << std::endl;
+	BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", loggerName);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
 
 	NumericUtils::calcRK4(0, 3, u, 0.001f, &chuaCircuit);
 }

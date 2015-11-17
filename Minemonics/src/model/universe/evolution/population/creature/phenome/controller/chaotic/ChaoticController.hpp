@@ -13,6 +13,7 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <string>
 
 //## controller headers
 //## model headers
@@ -121,6 +122,8 @@ private:
 	double u[3];
 
 	ChaoticControllerGene::ChaoticSystemType mSystemType;
+
+	std::string loggerName;
 };
 
 BOOST_CLASS_VERSION(ChaoticController, 1)
