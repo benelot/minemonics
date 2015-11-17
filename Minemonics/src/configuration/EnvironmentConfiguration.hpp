@@ -25,7 +25,7 @@
  */
 class EnvironmentConfiguration {
 public:
-	static const float AMBIENT_R = 0.6;
+	static const float AMBIENT_R = 0.6; /**!< Ambient light color */
 	static const float AMBIENT_G = 0.6;
 	static const float AMBIENT_B = 0.55;
 };

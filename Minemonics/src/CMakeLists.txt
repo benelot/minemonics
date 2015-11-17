@@ -457,7 +457,6 @@ set(MISCHDRS
 	./configuration/EnvironmentConfiguration.hpp
 	./configuration/EvaluationConfiguration.hpp
 	./configuration/EvolutionConfiguration.hpp
-	./configuration/PopulationConfiguration.hpp
 	./configuration/OgreSystemConfigStrings.hpp
 	./configuration/CEGUIConfiguration.hpp
 	./configuration/GUIConfiguration.hpp

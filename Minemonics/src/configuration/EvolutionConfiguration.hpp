@@ -86,9 +86,7 @@ public:
 	static const int REAPER_GROW_STUB_BRANCHINESS = 2;
 	static const double REAPER_GRAFT_PROPABILITY = 0.6f;
 
-
-
-	static const Ogre::Vector3 ROOT_POSITION;
+	static const Ogre::Vector3 ROOT_POSITION; /**!< The position where creatures are dropped */
 
 };
 

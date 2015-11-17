@@ -1804,11 +1804,6 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/EvolutionConfiguration.hpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] Minemonics/Header Files/PopulationConfiguration.hpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/PopulationConfiguration.hpp</location>
-		</link>
-		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/OgreSystemConfigStrings.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/OgreSystemConfigStrings.hpp</location>
@@ -2917,11 +2912,6 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/EvolutionConfiguration.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/EvolutionConfiguration.hpp</location>
-		</link>
-		<link>
-			<name>[Targets]/[exe] runUnitTests/Header Files/PopulationConfiguration.hpp</name>
-			<type>1</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/configuration/PopulationConfiguration.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Header Files/OgreSystemConfigStrings.hpp</name>

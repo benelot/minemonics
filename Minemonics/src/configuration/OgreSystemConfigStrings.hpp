@@ -26,12 +26,13 @@
  */
 class OgreConf {
 public:
-	static const Ogre::UTFString VIDEO_MODE;
-	static const Ogre::UTFString FULL_SCREEN;
-	static const Ogre::UTFString GAMMA_CONV;
+	/** Ogre config strings */
+	static const Ogre::UTFString VIDEO_MODE; /**!< Video mode string*/
+	static const Ogre::UTFString FULL_SCREEN; /**!< Full screen string */
+	static const Ogre::UTFString GAMMA_CONV; /**!< Gamma conversion string */
 
-	static const std::string YES;
-	static const std::string NO;
+	static const std::string YES; /**!< Yes string */
+	static const std::string NO; /**!< No string */
 };
 
 const Ogre::UTFString OgreConf::VIDEO_MODE("Video Mode");
