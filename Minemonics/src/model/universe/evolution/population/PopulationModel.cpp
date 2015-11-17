@@ -85,15 +85,13 @@ void PopulationModel::initialize() {
 void PopulationModel::addNewMember(const double branchiness,
 	const Ogre::Vector3 rootPosition) {
 	//add new creature
-//	Creature* creature = new Snake(this,15,OgreBulletUtils::convert(rootPosition));
-//	Creature* creature = new RagDoll(this,10,OgreBulletUtils::convert(rootPosition));
 	CreatureModel* creatureModel = new CreatureModel(this,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
-	SnakeBuilder::build(&creatureModel->getGenotype());
-//	ModelLegBuilder::build(&creatureModel->getGenotype());
+//	SnakeBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
+//	ModelLegBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
 
-//	creatureModel->createRandomGenome(branchiness);
+	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
 	creatureModel->setDynasty(mDynastyQty);
 	mDynastyQty++;

@@ -12,6 +12,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
+
 //## view headers
 //## utils headers
 
@@ -38,6 +40,8 @@ public:
 	static const double JOINT_MIN_Y_OFFSET = 0;
 
 	static const double JOINT_MAX_Y_OFFSET = 1;
+
+	static const ControllerGene::ControllerType CONTROLLER_TYPE = ControllerGene::ChaoticControllerGene;
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */

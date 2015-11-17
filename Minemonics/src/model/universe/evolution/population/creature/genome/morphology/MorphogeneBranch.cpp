@@ -12,6 +12,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/ControlConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -212,10 +213,23 @@ void MorphogeneBranch::initialize() {
 		MorphologyConfiguration::JOINT_MAX_STIFFNESS);
 
 	// create instances of the sine controller gene for the morphogene.
-	for (int i = 0; i < 3; i++) {
-		SineControllerGene* sineController = new SineControllerGene();
-		sineController->initialize();
-		mControllerGenes.push_back(sineController);
+	switch (ControlConfiguration::CONTROLLER_TYPE) {
+	case ControllerGene::SineControllerGene:
+		// create instances of the sine controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			SineControllerGene* sineController = new SineControllerGene();
+			sineController->initialize();
+			mControllerGenes.push_back(sineController);
+		}
+		break;
+	case ControllerGene::ChaoticControllerGene:
+		// create instances of the chaotic controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			ChaoticControllerGene* chaoticController =
+				new ChaoticControllerGene();
+			chaoticController->initialize();
+			mControllerGenes.push_back(chaoticController);
+		}
 	}
 }
 

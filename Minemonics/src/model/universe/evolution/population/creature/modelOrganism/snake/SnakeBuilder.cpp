@@ -31,7 +31,7 @@ void SnakeBuilder::build(MixedGenome* genome,
 	genome->setSegmentsDepthLimit(snakeLength);
 
 	// create limb
-	Morphogene* morphogene = new Morphogene(Ogre::Vector3(6, 6, 10),
+	Morphogene* morphogene = new Morphogene(Ogre::Vector3(6, 6, 20),
 		Ogre::Quaternion(1, 0, 0, 0), Ogre::Vector3(0, 0, 1),
 		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
 		0, true);
