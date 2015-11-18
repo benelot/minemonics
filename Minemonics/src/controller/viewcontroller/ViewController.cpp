@@ -102,8 +102,7 @@ ViewController::~ViewController() {
 	mLoadPopulationWindow = NULL;
 }
 
-void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
-	StateHandler* const stateHandler) {
+void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 
 	mCameraHandler.initialize();
 
@@ -209,7 +208,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget,
 	mSystem->getDefaultGUIContext().setRootWindow(mLayout);
 
 	// make an instance of our GUI sheet handler class
-	mGUISheetHandler.initialize(mSystem, mLayout, stateHandler);
+	mGUISheetHandler.initialize(mSystem, mLayout);
 
 	mInfoOverlay.initialize(mCameraHandler.getCamera());
 

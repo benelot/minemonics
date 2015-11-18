@@ -54,8 +54,7 @@ public:
 	 * @param renderTarget The render target.
 	 * @param stateHandler The state handler of the simulation.
 	 */
-	void initialize(Ogre::RenderTarget* const renderTarget,
-		StateHandler* const stateHandler);
+	void initialize(Ogre::RenderTarget* const renderTarget);
 
 	/**
 	 * Update the view controller.

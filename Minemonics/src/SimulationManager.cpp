@@ -88,8 +88,7 @@ SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
 	mStateHandler(), mInputHandler(), mSdlWindow(NULL), mCurrentSimulationSpeed(
-		PhysicsConfiguration::SIMULATION_SPEED_01), mMousePicker(
-		&mViewController), mSun(NULL) {
+		PhysicsConfiguration::SIMULATION_SPEED_01), mSun(NULL) {
 	mSimulationManager = this; /**!< Initialize the singleton*/
 
 	mRandomness = new Randomness(); /**!< Initialize the singleton*/
@@ -159,7 +158,7 @@ void SimulationManager::createScene(void) {
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget( /**!< Set render target with the current application name */
 	ApplicationConfiguration::APPLICATION_TITLE);
 
-	mViewController.initialize(renderTarget, &mStateHandler); /**!< initialize GUI and views */
+	mViewController.initialize(renderTarget); /**!< initialize GUI and views */
 
 	mStateHandler.requestStateChange(StateHandler::GUI); /**!< request a state change saying that the GUI is shown */
 
