@@ -15,7 +15,7 @@
 //## view headers
 //## utils headers
 
-#define CONST_EARTH_GRAVITY 9.81
+#define CONST_EARTH_GRAVITY 9.81f
 
 /**
  * @brief		The configuration of the physics environment used in the simulator.
@@ -26,28 +26,25 @@
 class PhysicsConfiguration {
 public:
 
-	//TODO: Try to remove the gravity scaling factor
-	static const double REALITY_BULLET_GRAVITY_SCALING_FACTOR = 50; /**!< Gravity scaling factor */
-
 	static const double NO_GRAVITY = 0; /**!< No gravity */
 
-	static const double PLUTO_GRAVITY = 0.059 * CONST_EARTH_GRAVITY; /**!< Pluto gravity 0.059 */
+	static const double PLUTO_GRAVITY = 0.059f * CONST_EARTH_GRAVITY; /**!< Pluto gravity 0.059 */
 
 	static const double MOON_GRAVITY = 0.166 * CONST_EARTH_GRAVITY; /**!< Moon gravity 0.166 */
 
-	static const double MARS_GRAVITY = 0.377 * CONST_EARTH_GRAVITY; /**!< Mars/Mercury gravity 0.377/0.378 */
+	static const double MARS_GRAVITY = 0.377f * CONST_EARTH_GRAVITY; /**!< Mars/Mercury gravity 0.377/0.378 */
 
-	static const double URANUS_GRAVITY = 0.889 * CONST_EARTH_GRAVITY; /**!< Uranus gravity 0.889 */
+	static const double URANUS_GRAVITY = 0.889f * CONST_EARTH_GRAVITY; /**!< Uranus gravity 0.889 */
 
-	static const double VENUS_GRAVITY = 0.907 * CONST_EARTH_GRAVITY; /**!< Venus/Saturn gravity 0.907/0.916 */
+	static const double VENUS_GRAVITY = 0.907f * CONST_EARTH_GRAVITY; /**!< Venus/Saturn gravity 0.907/0.916 */
 
 	static const double EARTH_GRAVITY = CONST_EARTH_GRAVITY; /**!< Earth gravity 1 */
 
-	static const double NEPTUNE_GRAVITY = 1.12 * CONST_EARTH_GRAVITY;/**!< Neptune gravity 1.12 */
+	static const double NEPTUNE_GRAVITY = 1.12f * CONST_EARTH_GRAVITY;/**!< Neptune gravity 1.12 */
 
-	static const double JUPITER_GRAVITY = 2.36 * CONST_EARTH_GRAVITY; /**!< Jupiter gravity 2.36 */
+	static const double JUPITER_GRAVITY = 2.36f * CONST_EARTH_GRAVITY; /**!< Jupiter gravity 2.36 */
 
-	static const double SUN_GRAVITY = 27.030682877 * CONST_EARTH_GRAVITY; /**!< Sun gravity 27.930682977 */
+	static const double SUN_GRAVITY = 27.030682877f * CONST_EARTH_GRAVITY; /**!< Sun gravity 27.930682977 */
 
 	/**
 	 * Step size of the bullet physics simulator (solverAccuracy). Accuracy versus speed.
@@ -62,8 +59,6 @@ public:
 	static const double FIXED_STEP_SIZE_SEC = 1.0f / FIXED_STEPS_PER_SEC;
 	static const double FIXED_STEP_SIZE_MILLI = 1.0f / FIXED_STEPS_PER_SEC
 		* 1000.0f;
-
-	static const int SIMULATOR_SECURITY_MARGIN = 2;
 
 	static const bool BODY_SEGMENT_INTERPENETRATION_FLAG = false; /**!< Are the body boxes allowed to interpenetrate each other? */
 
@@ -111,8 +106,6 @@ public:
 	static const double DISCARDING_STARTS = 1.0f;
 
 	static const double BULLET_PICKER_FORCE = 100000;
-
-	static const double WEIGHT_SCALE_SHRINK_LOGBASE = 2.0f;
 };
 
 #endif /* CONFIGURATION_PHYSICSCONFIGURATION_H_ */
