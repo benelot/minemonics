@@ -617,7 +617,7 @@ btTransform FSPhenomeModel::getOwnIntersection(Morphogene* childMorphogene,
 
 void FSPhenomeModel::generateBody() {
 	bool isFixedBase = false;
-	bool setDamping = true;
+	bool setDamping = false;
 	bool gyro = false;
 	bool canSleep = true;
 
@@ -704,7 +704,7 @@ void FSPhenomeModel::generateBody() {
 		mMultiBody->setHasSelfCollision(selfCollision);
 		mMultiBody->setUseGyroTerm(gyro);
 
-		if (!setDamping) {
+		if (!setDamping) { /**<! Pay attention, damping affects the whole motion of a body */
 			mMultiBody->setLinearDamping(0.f);
 			mMultiBody->setAngularDamping(0.f);
 		} else {
