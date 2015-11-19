@@ -16,6 +16,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/LoggerConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
@@ -126,8 +128,10 @@ void ChaoticController::calcChuaCircuit() {
 	 dz/dt=-c3*y
 	 f(x)=m1*x+(m0-m1)/2*(|x+1|-|x-1|)
 	 */
-	BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", loggerName);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
+	if (LoggerConfiguration::LOG_SPECIAL) {
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", loggerName);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
+	}
 
 	NumericUtils::calcRK4(0, 3, u, 0.001f, &chuaCircuit);
 }

@@ -48,6 +48,8 @@ public:
 	static const std::string loggedClasses;
 
 	static const std::string TOP_FOLDER;
+
+	static const bool LOG_SPECIAL = false;
 };
 
 #endif /* CONFIGURATION_LOGGERCONFIGURATION_HPP_ */
