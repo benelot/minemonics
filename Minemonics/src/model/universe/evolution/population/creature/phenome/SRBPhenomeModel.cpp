@@ -382,7 +382,6 @@ LimbModel* SRBPhenomeModel::createLimb(PhenotypeGenerator* generator,
 		Ogre::Vector3(sizeX, sizeY, sizeZ),
 		/*mass*/
 		sizeX * sizeY * sizeZ,
-		//log2(sizeX * sizeY * sizeZ)/log2(PhysicsConfiguration::WEIGHT_SCALE_SHRINK_LOGBASE),
 		childMorphogene->getRestitution(), childMorphogene->getFriction(),
 		Ogre::ColourValue(childMorphogene->getColorR(),
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
@@ -420,16 +419,16 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	localParentJointTransform.setOrigin(
 		OgreBulletUtils::convert(localParentJointInRefParent));
 	//TODO: Fix rotation
-//	localParentJointTransform.getBasis().setRotation(
-//		parentHitTransform.getRotation());
+	localParentJointTransform.getBasis().setRotation(
+		parentHitTransform.getRotation());
 
 	// define the position and direction of the joint in the reference frame of child
 	localChildJointTransform.setOrigin(
 		OgreBulletUtils::convert(-localChildJointInRefChild));
 	//TODO: Fix rotation
 	//set the direction of the joint normals
-//	localChildJointTransform.getBasis().setRotation(
-//		childHitTransform.getRotation());
+	localChildJointTransform.getBasis().setRotation(
+		childHitTransform.getRotation());
 
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	SRBJointModel* joint = new SRBJointModel(getCreatureModel()->getWorld(),
@@ -466,16 +465,17 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//initialize rotational limit motors
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
+	//TODO: Fix force curve
 	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));
 
-	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
+	//TODO: Make position controlled defined in the settings
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
 			parentMorphogeneBranch->getJointYawMinAngle(),
 			parentMorphogeneBranch->getJointRollMinAngle()),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()));
+			parentMorphogeneBranch->getJointRollMaxAngle()),false);
 
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {

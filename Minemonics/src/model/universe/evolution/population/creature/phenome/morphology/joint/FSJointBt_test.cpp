@@ -37,7 +37,8 @@ protected:
 		jointBt->generateMotors(
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
-			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			true);
 	}
 
 	virtual void TearDown() {
@@ -62,7 +63,8 @@ protected:
 		jointBt->generateMotors(
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
-			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()));
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
+			true);
 		jointBt->initialize();
 
 		jointBt2 = new FSJointBt();

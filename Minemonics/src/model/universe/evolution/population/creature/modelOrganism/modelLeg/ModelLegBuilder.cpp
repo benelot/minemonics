@@ -34,7 +34,7 @@ void ModelLegBuilder::build(MixedGenome* genome,
 		Ogre::Quaternion(1, 0, 0, 0), Ogre::Vector3(1, 0, 0),
 		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
 		0, true);
-
+	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// creature second limb
@@ -43,6 +43,7 @@ void ModelLegBuilder::build(MixedGenome* genome,
 		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
 		0, true);
 
+	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
 
 	// create joint between the two limbs
@@ -55,6 +56,7 @@ void ModelLegBuilder::build(MixedGenome* genome,
 			boost::math::constants::pi<double>() * 2.0f - UNIV_EPS,
 			boost::math::constants::pi<double>() * 2.0f - UNIV_EPS),
 		Ogre::Vector3(0, 0, 1));
+	morphogeneBranch->initialize();
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:

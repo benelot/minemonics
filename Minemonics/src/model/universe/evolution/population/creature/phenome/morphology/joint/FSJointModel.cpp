@@ -226,10 +226,10 @@ FSJointModel* FSJointModel::clone() {
 }
 
 void FSJointModel::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {
+	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,bool positionControlled) {
 	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
 		OgreBulletUtils::convert(lowerLimits),
-		OgreBulletUtils::convert(upperLimits));
+		OgreBulletUtils::convert(upperLimits),positionControlled);
 }
 
 void FSJointModel::enableAngularMotor(const bool pitchEnable,

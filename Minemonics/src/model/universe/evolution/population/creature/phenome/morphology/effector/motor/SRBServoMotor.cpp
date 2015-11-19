@@ -24,12 +24,13 @@ SRBServoMotor::SRBServoMotor() :
 
 SRBServoMotor::SRBServoMotor(
 	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-	const double maxForce, double lowerLimit, double upperLimit) :
+	const double maxForce, double lowerLimit, double upperLimit,bool positionControlled) :
 	mMotorBt(NULL), mLastPosition(0) {
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
 	mLowerLimit = lowerLimit;
 	mUpperLimit = upperLimit;
+	mPositionControlled = positionControlled;
 }
 
 SRBServoMotor::SRBServoMotor(const SRBServoMotor& SRBServoMotor) {
@@ -84,6 +85,7 @@ void SRBServoMotor::instantiate(JointPhysics* jointPhysics,
 
 void SRBServoMotor::apply(double timeSinceLastTick) {
 
+	if(mPositionControlled){
 	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 	btScalar clampedInputValue =
 		(getInputValue() > 1.0f) ? 1.0f :
@@ -113,6 +115,15 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 
 #endif
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mMotorBt->m_currentPosition << "," << targetAngle;
+	}
+	else{
+		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
+		btScalar clampedInputValue =
+			(getInputValue() > 1.0f) ? 1.0f :
+			(getInputValue() < 0.0f) ? 0.0f : getInputValue();
+		mJoint->applyJointTorque(0,
+			btScalar(getInputValue()));
+	}
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

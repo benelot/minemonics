@@ -68,7 +68,7 @@ class SRBServoMotor: public ServoMotor {
 public:
 	SRBServoMotor();
 	SRBServoMotor(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		const double maxForce, double lowerLimit, double upperLimit);
+		const double maxForce, double lowerLimit, double upperLimit,bool positionControlled);
 	SRBServoMotor(const SRBServoMotor& SRBServoMotor);
 
 	virtual ~SRBServoMotor();

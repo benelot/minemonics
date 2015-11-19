@@ -56,6 +56,8 @@ class JointBt;
 class ServoMotor: public Motor {
 public:
 	ServoMotor();
+	ServoMotor(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex, const double maxForce, double lowerLimit,
+		double upperLimit);
 	ServoMotor(const ServoMotor& servoMotor);
 
 	virtual ~ServoMotor();
@@ -65,10 +67,7 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(
-		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		MOTOR_TYPE* const motorBt, const double maxForce, double lowerLimit,
-		double upperLimit);
+	void initialize();
 
 	virtual void instantiate(JointPhysics* jointPhysics,
 		const int jointIndex) = 0;
@@ -110,7 +109,8 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointMotorIndex) /**!< The joint motor index */
 		& BOOST_SERIALIZATION_NVP(mJointIndex) /**!< The index of the joint in the whole creature. */
 		& BOOST_SERIALIZATION_NVP(mLowerLimit) /**!< The lower limit of the DoF the servo is driving */
-		& BOOST_SERIALIZATION_NVP(mUpperLimit); /**!< The upper limit of the DoF the servo is driving */
+		& BOOST_SERIALIZATION_NVP(mUpperLimit) /**!< The upper limit of the DoF the servo is driving */
+		& BOOST_SERIALIZATION_NVP(mPositionControlled);
 	}
 
 protected:
@@ -122,6 +122,8 @@ protected:
 
 	int mJointIndex; /**!< The index of the joint in the whole creature. */
 	JointPhysics* mJoint;
+
+	bool mPositionControlled;
 private:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
@@ -132,7 +134,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("ServoMotor"));
+				boost::log::attributes::constant<std::string>("ServoMotor"));
 		}
 	} _initializer;
 };

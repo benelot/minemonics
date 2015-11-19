@@ -113,10 +113,10 @@ public:
 		mInWorld = false;
 	}
 
-	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping) = 0;
+	virtual void setAngularDamping(double jointPitchDamping,
+		double jointYawDamping, double jointRollDamping) = 0;
 
-	virtual void applyJointTorque(int jointAxisIndex,
-		double torque) = 0;
+	virtual void applyJointTorque(int jointAxisIndex, double torque) = 0;
 
 	virtual double getJointPos(int jointAxisIndex) = 0;
 
@@ -135,7 +135,8 @@ public:
 	virtual std::vector<Motor*>& getMotors() = 0;
 
 	virtual void generateMotors(const btVector3 maxForces,
-		const btVector3 lowerLimits, const btVector3 upperLimits) = 0;
+		const btVector3 lowerLimits, const btVector3 upperLimits,
+		bool positionControlled) = 0;
 
 	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 		const Ogre::Vector3 angularUpperLimit) {

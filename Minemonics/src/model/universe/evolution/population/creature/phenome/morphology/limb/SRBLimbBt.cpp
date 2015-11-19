@@ -1,6 +1,8 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 
+#include <stddef.h>
+#include <iostream>
 #include <cstdlib>
 
 //## controller headers
@@ -25,7 +27,6 @@
 
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
-
 
 //## controller headers
 //## model headers
@@ -88,13 +89,13 @@ SRBLimbBt::SRBLimbBt(const SRBLimbBt& limbBt) {
 			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,
 			limbBt.mColor, limbBt.mIntraBodyColliding);
 
+	mWorld = limbBt.mWorld;
 	mInWorld = limbBt.mInWorld;
 	mInertia = limbBt.mInertia;
-	mWorld = limbBt.mWorld;
-	mBody = limbBt.mBody;
-	mCollisionShape = limbBt.mCollisionShape;
 	mLimbModel = limbBt.mLimbModel;
+	mBody = limbBt.mBody;
 	mMotionState = limbBt.mMotionState;
+	mCollisionShape = limbBt.mCollisionShape;
 }
 
 SRBLimbBt::~SRBLimbBt() {
@@ -123,9 +124,7 @@ void SRBLimbBt::initialize() {
 				btScalar(mDimensions.y));
 			break;
 		case LimbPhysics::UNKNOWN:
-			std::cout << "##########################################\n"
-				<< " LimbBt received 'Unknown' as a limb type.\n"
-				<< "##########################################\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " LimbBt received 'Unknown' as a limb type.\n";
 			exit(-1);
 		}
 
@@ -134,8 +133,7 @@ void SRBLimbBt::initialize() {
 		// position the limb in the world
 		btTransform startTransform;
 		startTransform.setIdentity();
-		startTransform.setOrigin(
-			OgreBulletUtils::convert(mPosition));
+		startTransform.setOrigin(OgreBulletUtils::convert(mPosition));
 		startTransform.setRotation(
 			btQuaternion(mInitialXOrientation, mInitialYOrientation,
 				mInitialZOrientation, mInitialWOrientation));
@@ -165,7 +163,7 @@ void SRBLimbBt::initialize() {
 			btCollisionObject::CF_ANISOTROPIC_ROLLING_FRICTION);
 
 		mBody->setUserPointer(mLimbModel); //Set user pointer for proper return of creature/limb information etc..
-		mCollisionShape->setUserPointer(mLimbModel); 	//add the creature model pointer to the collision shape to get it back if we raycast for this object.
+		mCollisionShape->setUserPointer(mLimbModel); //add the limb model pointer to the collision shape to get it back if we raycast for this object.
 	}
 }
 
@@ -175,11 +173,8 @@ btTransform SRBLimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 
 btTransform SRBLimbBt::getPreciseIntersection(const btVector3 origin,
 	const btVector3 direction) {
-	// the ray caster currently only finds the intersection
-	// when hitting the forward face of a triangle therefore,
-	//the ray has to come from the outside of the shape
-	btVector3 rayStart = origin + direction.normalized() * 100.0f;
-	btVector3 rayEnd = origin;
+	btVector3 rayStart = origin + direction.normalized() * 100.0f; // the ray caster currently only finds the intersection
+	btVector3 rayEnd = origin; // when hitting the forward face of a triangle therefore, the ray has to come from the outside of the shape
 
 #ifndef EXCLUDE_FROM_TEST
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
@@ -219,13 +214,14 @@ btTransform SRBLimbBt::getPreciseIntersection(const btVector3 origin,
 #endif
 	}
 
-	btTransform hitTransform;
-	hitTransform.setIdentity();
-	hitTransform.setOrigin(hitPosition);
+	btTransform hitLocation;
+	hitLocation.setIdentity();
+	hitLocation.setOrigin(hitPosition); // set the hit position
+
 	Ogre::Euler euler(0, 0, 0);
 	euler.direction(OgreBulletUtils::convert(hitNormal));
-	hitTransform.setRotation(OgreBulletUtils::convert(euler.toQuaternion()));
-	return hitTransform;
+	hitLocation.setRotation(OgreBulletUtils::convert(euler.toQuaternion())); // set the hit direction to the surface normal
+	return hitLocation;
 }
 
 btVector3 SRBLimbBt::getLocalFakeIntersection(const btVector3 origin,
@@ -235,9 +231,10 @@ btVector3 SRBLimbBt::getLocalFakeIntersection(const btVector3 origin,
 
 btTransform SRBLimbBt::getLocalIntersection(const btVector3 origin,
 	const btVector3 direction) {
-	btTransform intersection = getLocalPreciseIntersection(origin, direction);
-	if (intersection.getOrigin().isZero()) {
-		intersection.setOrigin(getLocalFakeIntersection(origin, direction));
+	btTransform intersection = getLocalPreciseIntersection(origin, direction); // find local precise intersection
+
+	if (intersection.getOrigin().isZero()) { // if the local precise intersection can not be found
+		intersection.setOrigin(getLocalFakeIntersection(origin, direction)); // we use a local maximum distance to surface estimate
 	}
 	return intersection;
 }

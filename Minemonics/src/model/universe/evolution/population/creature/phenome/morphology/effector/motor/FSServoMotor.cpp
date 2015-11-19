@@ -23,6 +23,17 @@
 FSServoMotor::FSServoMotor() {
 }
 
+FSServoMotor::FSServoMotor(
+	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+	const double maxForce, double lowerLimit, double upperLimit,
+	bool positionControlled) {
+	mJointMotorIndex = jointMotorIndex;
+	mMaxForce = maxForce;
+	mLowerLimit = lowerLimit;
+	mUpperLimit = upperLimit;
+	mPositionControlled = positionControlled;
+}
+
 FSServoMotor::FSServoMotor(const FSServoMotor& servoMotor) {
 	mEnabled = servoMotor.mEnabled;
 	mIndex = servoMotor.mIndex;
@@ -40,14 +51,8 @@ FSServoMotor::~FSServoMotor() {
 	mJoint = NULL;
 }
 
-void FSServoMotor::initialize(
-	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-	const double maxForce, double lowerLimit, double upperLimit) {
+void FSServoMotor::initialize() {
 
-	mJointMotorIndex = jointMotorIndex;
-	mMaxForce = maxForce;
-	mLowerLimit = lowerLimit;
-	mUpperLimit = upperLimit;
 }
 
 void FSServoMotor::instantiate(JointPhysics* jointPhysics,
@@ -58,28 +63,36 @@ void FSServoMotor::instantiate(JointPhysics* jointPhysics,
 
 void FSServoMotor::apply(double timeSinceLastTick) {
 
-	//clamp the input value to [0;1] because otherwise the motor does not work anymore.
-	btScalar clampedInputValue =
-		(getInputValue() > 1.0f) ? 1.0f :
-		(getInputValue() < 0.0f) ? 0.0f : getInputValue();
+	if (mPositionControlled) {
+		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
+		btScalar clampedInputValue =
+			(getInputValue() > 1.0f) ? 1.0f :
+			(getInputValue() < 0.0f) ? 0.0f : getInputValue();
 
-	//calculate the target angle of the motor
-	btScalar targetAngle = mLowerLimit
-		+ clampedInputValue * (mUpperLimit - mLowerLimit);
+		//calculate the target angle of the motor
+		btScalar targetAngle = mLowerLimit
+			+ clampedInputValue * (mUpperLimit - mLowerLimit);
 
-	//calculate the angle error
-	btScalar angleError = targetAngle - mJoint->getJointPos(0);
-	btScalar velocityError = 0 - mJoint->getJointVel(0);
+		//calculate the angle error
+		btScalar angleError = targetAngle - mJoint->getJointPos(0);
+		btScalar velocityError = 0 - mJoint->getJointVel(0);
 
-	//simple p(roportional) controller
-	//calculate the target force and clamp it with the maximum force
-	float kP = 200000000;
-	float kD = 2000;
-	double correction = kP * angleError + kD * velocityError;
-	mJoint->applyJointTorque(0,
-		btScalar(
-			(correction > mMaxForce) ? mMaxForce :
-			(correction < -mMaxForce) ? -mMaxForce : correction));
+		//simple p(roportional) controller
+		//calculate the target force and clamp it with the maximum force
+		float kP = 200000000;
+		float kD = 2000;
+		double correction = kP * angleError + kD * velocityError;
+		mJoint->applyJointTorque(0,
+			btScalar(
+				(correction > mMaxForce) ? mMaxForce :
+				(correction < -mMaxForce) ? -mMaxForce : correction));
+	} else {
+		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
+		btScalar clampedInputValue =
+			(getInputValue() > 1.0f) ? 1.0f :
+			(getInputValue() < -1.0f) ? -1.0f : getInputValue();
+		mJoint->applyJointTorque(0, btScalar(clampedInputValue*mMaxForce));
+	}
 }
 
 FSServoMotor* FSServoMotor::clone() {

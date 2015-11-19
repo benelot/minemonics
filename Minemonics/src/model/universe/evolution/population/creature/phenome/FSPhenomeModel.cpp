@@ -510,20 +510,21 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//initialize rotational limit motors
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-	double maxTorque = //10000 * (mass1 + mass2);
-		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
-			* (mass1 + mass2)
-			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
-				* pow(mass1 + mass2, 2));
+	//TODO: Fix the force curve
+//	double maxTorque = 5000 * (mass1 + mass2);
+	double maxTorque = 0.7f * (mass1 * mass2);
+//		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+//			* (mass1 + mass2)
+//			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+//				* pow(mass1 + mass2, 2));
 
-	//		std::cout << mass1 << "," << mass2 << "," << maxTorque << std::endl;
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
 			parentMorphogeneBranch->getJointYawMinAngle(),
 			parentMorphogeneBranch->getJointRollMinAngle()),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()));
+			parentMorphogeneBranch->getJointRollMaxAngle()),false);
 
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
@@ -616,7 +617,6 @@ btTransform FSPhenomeModel::getOwnIntersection(Morphogene* childMorphogene,
 
 void FSPhenomeModel::generateBody() {
 	bool isFixedBase = false;
-	bool isMultiDof = true;
 	bool setDamping = true;
 	bool gyro = false;
 	bool canSleep = true;
@@ -644,7 +644,7 @@ void FSPhenomeModel::generateBody() {
 		}
 		mMultiBody = new btMultiBody(linkQty,
 			btScalar(mLimbModels[0]->getMass()), mLimbModels[0]->getInertia(),
-			isFixedBase, canSleep, isMultiDof);
+			isFixedBase, canSleep);
 
 		mMultiBody->setBasePos(
 			OgreBulletUtils::convert(mLimbModels[0]->getPosition()));

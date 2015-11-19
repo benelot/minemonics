@@ -114,7 +114,7 @@ public:
 	}
 
 	void generateMotors(const Ogre::Vector3 maxForces,
-		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits);
+		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,bool positionControlled);
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.

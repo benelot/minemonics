@@ -54,7 +54,7 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
 	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-	btVector3 jointUpperLimits,int ownIndex) :
+	btVector3 jointUpperLimits, int ownIndex) :
 	mJoint(NULL) {
 	mWorld = world;
 	mBodyA = bodyA;
@@ -74,8 +74,8 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 
 void SRBJointBt::initialize() {
 #ifndef EXCLUDE_FROM_TEST
-	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA,
-		mFrameInB EXTRAPARAMS);
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB
+		EXTRAPARAMS);
 
 //	mJoint->setDamping(10000);
 
@@ -135,16 +135,16 @@ void SRBJointBt::initialize() {
 //	((SRBServoMotor*) mMotors[2])->initialize(NULL);
 //#endif
 
-	// 6DOF constraint uses Euler angles and to define limits
-	// it is assumed that rotational order is :
-	// Z - first, allowed limits are (-PI,PI);
-	// new position of Y - second (allowed limits are
-	// (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
-	// used to prevent constraint from instability on poles;
-	// new position of X, allowed limits are (-PI,PI);
-	// So to simulate ODE Universal joint we should use parent
-	// axis as Z, child axis as Y and limit all other DOFs
-	// Build the frame in world coordinate system first
+// 6DOF constraint uses Euler angles and to define limits
+// it is assumed that rotational order is :
+// Z - first, allowed limits are (-PI,PI);
+// new position of Y - second (allowed limits are
+// (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+// used to prevent constraint from instability on poles;
+// new position of X, allowed limits are (-PI,PI);
+// So to simulate ODE Universal joint we should use parent
+// axis as Z, child axis as Y and limit all other DOFs
+// Build the frame in world coordinate system first
 	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointMinAngle));
 	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointMaxAngle));
 
@@ -194,7 +194,8 @@ void SRBJointBt::update(double timeSinceLastTick) {
 }
 
 void SRBJointBt::generateMotors(const btVector3 maxForces,
-	const btVector3 lowerLimits, const btVector3 upperLimits) {
+	const btVector3 lowerLimits, const btVector3 upperLimits,
+	bool positionControlled) {
 
 	mJointMaxForces = OgreBulletUtils::convert(maxForces);
 	mJointMaxAngle = OgreBulletUtils::convert(upperLimits);
@@ -202,21 +203,21 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 
 //	add pitch servo motor
 	SRBServoMotor* servoMotor = new SRBServoMotor(JointPhysics::RDOF_PITCH,
-		maxForces.getX(), lowerLimits.x(), upperLimits.x());
+		maxForces.getX(), lowerLimits.x(), upperLimits.x(),positionControlled);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
 	servoMotor = new SRBServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
-		lowerLimits.y(), upperLimits.y());
+		lowerLimits.y(), upperLimits.y(),positionControlled);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
 	servoMotor = new SRBServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
-		lowerLimits.z(), upperLimits.z());
+		lowerLimits.z(), upperLimits.z(),positionControlled);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -302,8 +303,7 @@ SRBJointBt* SRBJointBt::clone() {
 	return new SRBJointBt(*this);
 }
 
-void SRBJointBt::applyJointTorque(int jointAxisIndex,
-	double torque) {
+void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 
 	if (mJoint) {
 		int col;

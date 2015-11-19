@@ -74,27 +74,28 @@ void FSJointBt::update(double timeSinceLastTick) {
 }
 
 void FSJointBt::generateMotors(const btVector3 maxForces,
-	const btVector3 lowerLimits, const btVector3 upperLimits) {
+	const btVector3 lowerLimits, const btVector3 upperLimits,
+	bool positionControlled) {
 //	add pitch servo motor
-	FSServoMotor* servoMotor = new FSServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_PITCH, maxForces.getX(),
-		lowerLimits.x(), upperLimits.x());
+	FSServoMotor* servoMotor = new FSServoMotor(JointPhysics::RDOF_PITCH,
+		maxForces.getX(), lowerLimits.x(), upperLimits.x(), positionControlled);
+	servoMotor->initialize();
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
-	servoMotor = new FSServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_YAW, maxForces.getY(),
-		lowerLimits.y(), upperLimits.y());
+	servoMotor = new FSServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
+		lowerLimits.y(), upperLimits.y(), positionControlled);
+	servoMotor->initialize();
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
-	servoMotor = new FSServoMotor();
-	servoMotor->initialize(JointPhysics::RDOF_ROLL, maxForces.getZ(),
-		lowerLimits.z(), upperLimits.z());
+	servoMotor = new FSServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
+		lowerLimits.z(), upperLimits.z(), positionControlled);
+	servoMotor->initialize();
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -161,8 +162,7 @@ FSJointBt* FSJointBt::clone() {
 	return new FSJointBt(*this);
 }
 
-void FSJointBt::applyJointTorque(int jointAxisIndex,
-	double torque) {
+void FSJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 	mMultiBody->addJointTorque(mJointIndex, torque);
 }
 

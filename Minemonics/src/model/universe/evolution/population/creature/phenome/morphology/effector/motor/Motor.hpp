@@ -42,7 +42,6 @@ public:
 	enum MotorType {
 		MUSCLE, SERVO_MOTOR
 	};
-
 	Motor(const MotorType motorType);
 	~Motor();
 

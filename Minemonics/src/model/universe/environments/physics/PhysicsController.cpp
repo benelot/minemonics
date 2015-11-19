@@ -82,12 +82,12 @@ void PhysicsController::initialize() {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Multibody Contraint Solver=";
 
 		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
 
 		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(10,
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 		break;
@@ -108,18 +108,18 @@ void PhysicsController::initialize() {
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,
 			mSolver, mCollisionConfiguration);
 
-		if (useMCLPSolver) {
-			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
-		} else {
-			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
-		}
+//		if (useMCLPSolver) {
+//			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
+//		} else {
+//			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
+//		}
 
 		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(
 			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
 
-		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(10,
 			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 		break;
@@ -128,23 +128,19 @@ void PhysicsController::initialize() {
 		break;
 	}
 
-	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
-	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
-	mDynamicsWorld->getSolverInfo().m_erp2 = BulletUtils::getERP(
-		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
-	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(
-		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";
-	//TODO: Not sure if helps
-	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
-	mDynamicsWorld->getSolverInfo().m_numIterations = 50;
+//	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
+//	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
+//	mDynamicsWorld->getSolverInfo().m_erp2 = BulletUtils::getERP(
+//		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
+//	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(
+//		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
+//	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";
+//	//TODO: Not sure if helps
+//	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
+//	mDynamicsWorld->getSolverInfo().m_numIterations = 50;
 
-	//TODO: Try to remove the scaling factor
 	mDynamicsWorld->setGravity(
-		btVector3(0,
-			-PhysicsConfiguration::EARTH_GRAVITY
-				* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
-			0));
+		btVector3(0, -PhysicsConfiguration::EARTH_GRAVITY * 4.0f, 0));
 }
 
 void PhysicsController::exitBulletPhysics() {

@@ -88,7 +88,7 @@ public:
 	 * @param maxForces The maximum forces along the axes.
 	 */
 	void generateMotors(const Ogre::Vector3 maxForces,
-		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits);
+		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,bool positionControlled);
 
 	/**
 	 * Updates the joint position and orientation.

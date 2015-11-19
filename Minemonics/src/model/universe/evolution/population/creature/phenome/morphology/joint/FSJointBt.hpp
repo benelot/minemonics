@@ -55,7 +55,7 @@ public:
 		const btTransform& tframeInB, JointPhysics::JointType type,
 		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-		btVector3 jointUpperLimits,int ownIndex);
+		btVector3 jointUpperLimits, int ownIndex);
 
 	/**
 	 * Initialize the joint bullet physics model.
@@ -74,17 +74,18 @@ public:
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
 	void generateMotors(const btVector3 maxForces, const btVector3 lowerLimits,
-		const btVector3 upperLimits);
+		const btVector3 upperLimits, bool positionControlled);
 
-	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping);
+	virtual void setAngularDamping(double jointPitchDamping,
+		double jointYawDamping, double jointRollDamping);
 
-	virtual void reset(const Ogre::Vector3 position); 	/** Reset the joint to the place when the creature was born. */
+	virtual void reset(const Ogre::Vector3 position); /** Reset the joint to the place when the creature was born. */
 
-	virtual void reposition(const Ogre::Vector3 position); 	/** Reposition the joint without resetting it. */
+	virtual void reposition(const Ogre::Vector3 position); /** Reposition the joint without resetting it. */
 
-	void update(double timeSinceLastTick); 	/** Update the joint bullet physics model. */
+	void update(double timeSinceLastTick); /** Update the joint bullet physics model. */
 
-	void addToWorld(); 	/** Add the joint bullet physics model to the world. */
+	void addToWorld(); /** Add the joint bullet physics model to the world. */
 
 	void removeFromWorld(); /** Remove the joint bullet physics models from the world. */
 

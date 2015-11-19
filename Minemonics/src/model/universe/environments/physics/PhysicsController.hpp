@@ -102,11 +102,7 @@ public:
 	 * @param gravity The gravity used in the physics simulator.
 	 */
 	void setGravity(const double gravity) const {
-		mDynamicsWorld->setGravity(
-			btVector3(0,
-				-gravity
-					* PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR,
-				0));
+		mDynamicsWorld->setGravity(btVector3(0, -gravity, 0));
 	}
 
 	/**
@@ -114,8 +110,7 @@ public:
 	 * @return The gravitational force of the physics engine.
 	 */
 	double getGravity() {
-		return -mDynamicsWorld->getGravity().getY()
-			/ PhysicsConfiguration::REALITY_BULLET_GRAVITY_SCALING_FACTOR;
+		return -mDynamicsWorld->getGravity().getY();
 	}
 
 	bool isPhysicsPaused() const {
@@ -222,7 +217,8 @@ protected:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant<std::string>("PhysicsController"));
+				boost::log::attributes::constant<std::string>(
+					"PhysicsController"));
 		}
 	} _initializer;
 };

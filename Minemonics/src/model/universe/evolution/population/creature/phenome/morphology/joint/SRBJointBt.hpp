@@ -39,11 +39,9 @@ class Motor;
 /** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
 //#define CONSTRAINT_TYPE btConeTwistConstraint
 //#define EXTRAPARAMS
-
 /** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
 //#define CONSTRAINT_TYPE btPoint2PointConstraint
 //#define EXTRAPARAMS
-
 /** bullet physics 6 degrees of freedom constraint - A 6 Dof joint with generic limits*/
 #define CONSTRAINT_TYPE btGeneric6DofConstraint
 #define EXTRAPARAMS ,true
@@ -51,11 +49,9 @@ class Motor;
 /** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
 //#define EXTRAPARAMS
-
 /** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
 //#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
 //#define EXTRAPARAMS ,true
-
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
  * @details		Details
@@ -71,7 +67,7 @@ public:
 		const btTransform& tframeInB, JointPhysics::JointType type,
 		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-		btVector3 jointUpperLimits,int ownIndex);
+		btVector3 jointUpperLimits, int ownIndex);
 
 	virtual ~SRBJointBt();
 
@@ -91,7 +87,8 @@ public:
 
 	virtual double getJointVel(int jointAxisIndex);
 
-	virtual void setAngularDamping(double jointPitchDamping,double jointYawDamping, double jointRollDamping);
+	virtual void setAngularDamping(double jointPitchDamping,
+		double jointYawDamping, double jointRollDamping);
 
 	/**
 	 * Initialize the rotational limit motors.
@@ -99,7 +96,8 @@ public:
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
 	virtual void generateMotors(const btVector3 maxForces,
-		const btVector3 lowerLimits, const btVector3 upperLimits);
+		const btVector3 lowerLimits, const btVector3 upperLimits,
+		bool positionControlled);
 
 	/**
 	 * Reset the joint to the place when the creature was born.

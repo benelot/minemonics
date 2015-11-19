@@ -33,10 +33,10 @@ protected:
 			OgreBulletUtils::convert(randomness->nextVector()), 0);
 		jointBt->initialize();
 
-//		jointBt->generateMotors(
-//			OgreBulletUtils::convert(randomness->nextVector()),
-//			OgreBulletUtils::convert(randomness->nextVector()),
-//			OgreBulletUtils::convert(randomness->nextVector()));
+		jointBt->generateMotors(
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()), true);
 	}
 
 	virtual void TearDown() {
@@ -61,10 +61,10 @@ protected:
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()), 0);
 		jointBt->initialize();
-//		jointBt->generateMotors(
-//			OgreBulletUtils::convert(randomness->nextVector()),
-//			OgreBulletUtils::convert(randomness->nextVector()),
-//			OgreBulletUtils::convert(randomness->nextVector()));
+		jointBt->generateMotors(
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()),
+			OgreBulletUtils::convert(randomness->nextVector()),true);
 
 		jointBt2 = new SRBJointBt();
 

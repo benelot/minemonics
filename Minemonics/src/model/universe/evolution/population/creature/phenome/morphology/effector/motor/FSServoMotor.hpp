@@ -29,6 +29,9 @@
 class FSServoMotor: public ServoMotor {
 public:
 	FSServoMotor();
+	FSServoMotor(const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
+		const double maxForce, double lowerLimit, double upperLimit,
+		bool positionControlled);
 	FSServoMotor(const FSServoMotor& servoMotor);
 
 	virtual ~FSServoMotor();
@@ -38,9 +41,7 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	virtual void initialize(
-		const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
-		const double maxForce, double lowerLimit, double upperLimit);
+	virtual void initialize();
 
 	void instantiate(JointPhysics* jointPhysics, const int jointIndex);
 	/**

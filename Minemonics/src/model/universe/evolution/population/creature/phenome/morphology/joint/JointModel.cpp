@@ -128,10 +128,10 @@ void JointModel::reposition(const Ogre::Vector3 position) {
 }
 
 void JointModel::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits) {
+	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits, bool positionControlled) {
 	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
 		OgreBulletUtils::convert(lowerLimits),
-		OgreBulletUtils::convert(upperLimits));
+		OgreBulletUtils::convert(upperLimits),positionControlled);
 }
 
 void JointModel::enableAngularMotor(const bool pitchEnable,
