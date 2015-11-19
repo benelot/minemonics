@@ -60,42 +60,42 @@ void Universe::addPlanet(Planet* const planet) {
 }
 
 bool Universe::proceedEvaluation() {
-	// if there are planets in the universe
-	if (mPlanets.size() != 0) {
-		// if the evaluation of a planet continues to the next generation, we go to the next planet.
-		if (!mPlanets[mUniverseModel.getCurrentEvaluationPlanetIndex()]->proceedEvaluation()) {
-			mUniverseModel.setCurrentEvaluationPlanetIndex( // we go to the next planet in line or go back to the first
-				(mUniverseModel.getCurrentEvaluationPlanetIndex() + 1
-					< mPlanets.size()) ?
-					mUniverseModel.getCurrentEvaluationPlanetIndex() + 1 : 0);
+	if (mPlanets.size() != 0) {	/**!< if there are planets in the universe */
+
+		/**!< if the evaluation of a planet continues to the next generation, we go to the next planet. */
+		if (!mPlanets[mUniverseModel.getEvaluatingPlanetIndex()]->proceedEvaluation()) {
+			mUniverseModel.setEvaluatingPlanetIndex(
+				/**!< we go to the next planet in line or go back to the first */
+				(mUniverseModel.getEvaluatingPlanetIndex() + 1 < mPlanets.size()) ?
+					mUniverseModel.getEvaluatingPlanetIndex() + 1 : 0);
 		}
+		mUniverseModel.proceedEvaluation(); /**!< Proceed the evaluation */
+		return true;
 	} else {
 		return false;
 	}
-	mUniverseModel.proceedEvaluation();
-	return true;
 }
 
 void Universe::setSimulationSpeed(double simulationSpeed) {
 	mSimulationSpeed = simulationSpeed;
-	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
+	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
+		pit != mPlanets.end(); pit++) { /**!< For all planets */
 		(*pit)->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->setSimulationSpeed(
-			simulationSpeed);
+			simulationSpeed); /**!< Set the simulation speed */
 	}
 }
 
 void Universe::stepPhysics(const double timeSinceLastFrame) {
-	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
-		(*pit)->stepPhysics(timeSinceLastFrame);
+	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
+		pit != mPlanets.end(); pit++) { /**!< For all planets */
+		(*pit)->stepPhysics(timeSinceLastFrame); /**!< The physics forward */
 	}
 }
 
 void Universe::drawDebugWorld() {
-	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
-		(*pit)->drawDebugWorld();
+	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
+		pit != mPlanets.end(); pit++) { /**!< For all planets */
+		(*pit)->drawDebugWorld(); /**!< Draw the debug worlds */
 	}
 }
 
@@ -106,7 +106,7 @@ void Universe::update(const double timeStep) {
 	int subSteps = floor( /**!< Increase the time step we take by the speed we want the simulation to run.*/
 	speed * timeStep / PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 
-	for (int i = 0; i < subSteps; i++) {
+	for (int i = 0; i < subSteps; i++) { /**!< Perform the number of substeps */
 		stepPhysics(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 		mEvaluationController.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 	}
@@ -114,9 +114,9 @@ void Universe::update(const double timeStep) {
 
 int Universe::getTotalCreatureQty() {
 	int totalCreatureQty = 0;
-	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
-		totalCreatureQty += (*pit)->getTotalCreatureQty();
+	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
+		pit != mPlanets.end(); pit++) { /**!< For all planets*/
+		totalCreatureQty += (*pit)->getTotalCreatureQty(); /**!< Sum the creature quantities */
 	}
 	return totalCreatureQty;
 }

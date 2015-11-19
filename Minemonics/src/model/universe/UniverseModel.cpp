@@ -18,7 +18,7 @@
 //## utils headers
 
 UniverseModel::UniverseModel() :
-	mCurrentEvaluationPlanetIndex(0) {
+	mEvaluatingPlanetIndex(0) {
 }
 
 UniverseModel::~UniverseModel() {

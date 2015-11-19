@@ -49,13 +49,13 @@ public:
 
 	// Accessor methods ##########################
 
-	const std::vector<PlanetModel*>::size_type getCurrentEvaluationPlanetIndex() const {
-		return mCurrentEvaluationPlanetIndex;
+	const std::vector<PlanetModel*>::size_type getEvaluatingPlanetIndex() const {
+		return mEvaluatingPlanetIndex;
 	}
 
-	void setCurrentEvaluationPlanetIndex(
-			const std::vector<PlanetModel*>::size_type currentEvaluationPlanetIndex) {
-		mCurrentEvaluationPlanetIndex = currentEvaluationPlanetIndex;
+	void setEvaluatingPlanetIndex(
+			const std::vector<PlanetModel*>::size_type evaluatingPlanetIndex) {
+		mEvaluatingPlanetIndex = evaluatingPlanetIndex;
 	}
 
 	const std::vector<EvaluationModel*>& getEvaluationModels() const {
@@ -72,7 +72,7 @@ private:
 
 	std::vector<PlanetModel*> mPlanetModels; /**!< The models of the planets in this universe. */
 
-	std::vector<PlanetModel*>::size_type mCurrentEvaluationPlanetIndex; /**!< Planet being currently evaluated. */
+	std::vector<PlanetModel*>::size_type mEvaluatingPlanetIndex; /**!< Planet being currently evaluated. */
 };
 
 #endif /* MODEL_UNIVERSE_UNIVERSEMODEL_HPP_ */

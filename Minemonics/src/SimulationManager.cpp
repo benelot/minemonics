@@ -89,10 +89,9 @@ SimulationManager::_Init SimulationManager::_initializer;
 SimulationManager::SimulationManager(void) :
 	mStateHandler(), mInputHandler(), mSdlWindow(NULL), mCurrentSimulationSpeed(
 		PhysicsConfiguration::SIMULATION_SPEED_01), mSun(NULL) {
+
 	mSimulationManager = this; /**!< Initialize the singleton*/
-
 	mRandomness = new Randomness(); /**!< Initialize the singleton*/
-
 	gContactProcessedCallback = processContactCallback; /**!< set the contact processor callback */
 
 	// main frame timer initialization
@@ -102,6 +101,7 @@ SimulationManager::SimulationManager(void) :
 	mThisModelIteration = mApplicationStart;
 	mApplicationRuntime = mThisModelIteration - mApplicationStart; /**!< Initialize the application runtime */
 
+	// sub frame time initializations
 	mGraphicsStart = mApplicationStart; /** !< Initialize the last graphics start */
 	mModelStart = mApplicationStart; /** !< Initialize the last model start */
 	mInputStart = mApplicationStart; /** !< Initialize the last input start */
@@ -152,12 +152,10 @@ void SimulationManager::setupView(void) {
 void SimulationManager::createScene(void) {
 
 	Logger::init("logs/minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
-
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget( /**!< Set render target with the current application name */
 	ApplicationConfiguration::APPLICATION_TITLE);
-
 	mViewController.initialize(renderTarget); /**!< initialize GUI and views */
 
 	mStateHandler.requestStateChange(StateHandler::GUI); /**!< request a state change saying that the GUI is shown */
@@ -173,7 +171,7 @@ void SimulationManager::createScene(void) {
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...";
 
-	mSceneMgr->setAmbientLight( // Set default ambient light
+	mSceneMgr->setAmbientLight( /**!< Set default ambient light */
 		Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
 			EnvironmentConfiguration::AMBIENT_G,
 			EnvironmentConfiguration::AMBIENT_B));
@@ -212,9 +210,9 @@ void SimulationManager::createScene(void) {
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION); /**!< Initialize the universe */
 
+	// file folders
 	mSerializationPath = FilesystemManipulator::createFolder(".", /**!< Create the serialization top folder if necessary */
 	SerializationConfiguration::TOP_FOLDER);
-
 	FilesystemManipulator::createFolder(".", /**!< Create the loggin top folder if necessary */
 	LoggerConfiguration::TOP_FOLDER);
 
@@ -254,6 +252,8 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	// structure according to the canonical game loop
 	// http://www.bulletphysics.org/mediawiki-1.5.8/index.php/Canonical_Game_Loop
 
+	//##############
+	// breaking conditions
 	if (mWindow->isClosed()
 		|| mStateHandler.getCurrentState() == StateHandler::SHUTDOWN) { /**!< shutdown the application if the application has initiated shutdown */
 
@@ -268,8 +268,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 			Ogre::SHADOWTYPE_STENCIL_MODULATIVE : Ogre::SHADOWTYPE_NONE); /**!< turn on or off the shadows. */
 
 	//#############
-	// Physics handling part
-	/* This, like the rendering, ticks every time around. */
+	// model update
 	do {
 		// update timers
 		mThisModelIteration = mOgreTimer.getMilliseconds();
@@ -319,7 +318,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		mLastModelTick = mInputStart - mModelStart; /**!< Calculate the time the model update took */
 
 		//#############
-		// Input part - Game Clock part of the loop
+		// Input update - Game Clock part of the loop
 		/** This runs once every APPLICATION_TICK milliseconds on average */
 		mInputDt = mThisModelIteration - mInputClock;
 		if (mInputDt >= ApplicationConfiguration::APPLICATION_TICK) {
@@ -335,7 +334,7 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 		== StateHandler::HEADLESS_SIMULATION); /**!< In headless simulation we never update the graphics */
 
 	//#############
-	// Graphics part
+	// Graphics update
 	updatePanels(evt.timeSinceLastFrame); /**!< Update the information in the panels on screen */
 
 	mViewController.update(evt.timeSinceLastFrame); /**!< Update view */
