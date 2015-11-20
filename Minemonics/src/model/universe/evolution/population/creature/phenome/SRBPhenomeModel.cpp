@@ -101,19 +101,19 @@ void SRBPhenomeModel::update(const double timeSinceLastTick) {
 		(*cit)->perform(timeSinceLastTick);
 	}
 
-	// Update all limb models
-	mHasInterpenetrations = false;
-	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
-		lit != mLimbModels.end(); lit++) {
-
-		//detect interpenetrations
-		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
-
-			mHasInterpenetrations = true;
-			break;
-		}
-		(*lit)->setInterpenetrationDepth(0);
-	}
+//	// Update all limb models
+//	mHasInterpenetrations = false;
+//	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+//		lit != mLimbModels.end(); lit++) {
+//
+//		//detect interpenetrations
+//		if ((*lit)->getInterpenetrationDepth() < 0 && !mHasInterpenetrations) {
+//
+//			mHasInterpenetrations = true;
+//			break;
+//		}
+//		(*lit)->setInterpenetrationDepth(0);
+//	}
 
 }
 
