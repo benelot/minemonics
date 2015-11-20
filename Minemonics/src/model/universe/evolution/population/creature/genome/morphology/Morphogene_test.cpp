@@ -85,19 +85,6 @@ TEST_F(MorphoGeneTest,hasValidJointAnchor) {
 		&& gene->getJointAnchorZ() != 0);
 }
 
-TEST_F(MorphoGeneTest,hasValidJointRotation) {
-	//test valid joint rotation
-	ASSERT_TRUE(
-		0 <= gene->getJointPitch()
-		<= 2 * boost::math::constants::pi<double>());
-	ASSERT_TRUE(
-		0 <= gene->getJointYaw()
-		<= 2 * boost::math::constants::pi<double>());
-	ASSERT_TRUE(
-		0 <= gene->getJointRoll()
-		<= 2 * boost::math::constants::pi<double>());
-}
-
 TEST_F(MorphoGeneTest,hasValidColor) {
 	//test valid color
 	ASSERT_TRUE(0 <= gene->getColorR() <= 255);

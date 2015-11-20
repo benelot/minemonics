@@ -288,12 +288,6 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	localParentJointInRefParent = localParentAnchorInRefParent; //get local joint rotation point in reference frame parent
 
 	// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
-	Ogre::Euler childEulerJointDir(childMorphogene->getJointYaw(), // get joint anchor direction in the local reference frame of child
-		childMorphogene->getJointPitch(), childMorphogene->getJointRoll());
-
-	generator->setOrientation(
-		generator->getOrientation() * childEulerJointDir.toQuaternion()); /**!< The child joint direction change */
-
 	Ogre::Vector3 localChildAnchorInRefParent(localParentJointInRefParent); //get local surface anchor point of child in reference frame parent
 
 	Ogre::Vector3 localChildAnchorDirInRefChild(

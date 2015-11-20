@@ -21,18 +21,15 @@
 //## utils headers
 #include <utils/Randomness.hpp>
 
-Morphogene::Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
-	Ogre::Vector3 anchorDirection, Ogre::Euler anchorOrientation,
-	LimbPhysics::PrimitiveType primitiveType, Ogre::ColourValue color,
-	double friction, double restitution, bool intraBodyColliding) :
+Morphogene::Morphogene(LimbPhysics::PrimitiveType primitiveType,
+	Ogre::Vector3 dimensions, Ogre::Quaternion orientation, double restitution,
+	double friction, bool intraBodyColliding, Ogre::ColourValue color,
+	Ogre::Vector3 anchorDirection) :
 	Gene(Gene::MorphoGene), mColorR(color.r), mColorG(color.g), mColorB(
 		color.b), mPrimitiveType(primitiveType), mFollowUpGene(-1), mJointAnchorX(
 		anchorDirection.x), mJointAnchorY(anchorDirection.y), mJointAnchorZ(
-		anchorDirection.z), mJointPitch(
-		anchorOrientation.pitch().valueRadians()), mJointYaw(
-		anchorOrientation.yaw().valueRadians()), mJointRoll(
-		anchorOrientation.roll().valueRadians()), mSegmentShrinkFactor(1), mRepetitionLimit(
-		0), mX(dimensions.x), mY(dimensions.y), mZ(dimensions.z), mOrientationW(
+		anchorDirection.z), mSegmentShrinkFactor(1), mRepetitionLimit(0), mX(
+		dimensions.x), mY(dimensions.y), mZ(dimensions.z), mOrientationW(
 		orientation.w), mOrientationX(orientation.x), mOrientationY(
 		orientation.y), mOrientationZ(orientation.z), mRestitution(restitution), mFriction(
 		friction), mIntraBodyColliding(intraBodyColliding) {
@@ -57,40 +54,36 @@ Morphogene::Morphogene(Ogre::Vector3 dimensions, Ogre::Quaternion orientation,
 Morphogene::Morphogene() :
 	Gene(Gene::MorphoGene), mColorR(0), mColorG(0), mColorB(0), mPrimitiveType(
 		LimbPhysics::UNKNOWN), mFollowUpGene(-1), mJointAnchorX(0), mJointAnchorY(
-		0), mJointAnchorZ(0), mJointPitch(0), mJointYaw(0), mJointRoll(0), mSegmentShrinkFactor(
-		0), mRepetitionLimit(0), mX(0), mY(0), mZ(0), mOrientationW(1), mOrientationX(
-		0), mOrientationY(0), mOrientationZ(0), mRestitution(0), mFriction(1), mIntraBodyColliding(
-		true) {
+		0), mJointAnchorZ(0), mSegmentShrinkFactor(0), mRepetitionLimit(0), mX(
+		0), mY(0), mZ(0), mOrientationW(1), mOrientationX(0), mOrientationY(0), mOrientationZ(
+		0), mRestitution(0), mFriction(1), mIntraBodyColliding(true) {
 
 }
 
 Morphogene::Morphogene(const Morphogene& morphoGene) :
 	Gene(Gene::MorphoGene) {
-	mColorB = morphoGene.mColorB;
-	mColorG = morphoGene.mColorG;
-	mColorR = morphoGene.mColorR;
-
-	mFollowUpGene = morphoGene.mFollowUpGene;
-	mType = morphoGene.mType;
-	mJointAnchorX = morphoGene.mJointAnchorX;
-	mJointAnchorY = morphoGene.mJointAnchorY;
-	mJointAnchorZ = morphoGene.mJointAnchorZ;
-	mJointPitch = morphoGene.mJointPitch;
-	mJointRoll = morphoGene.mJointRoll;
-	mJointYaw = morphoGene.mJointYaw;
+	mPrimitiveType = morphoGene.mPrimitiveType;
+	mX = morphoGene.mX;
+	mY = morphoGene.mY;
+	mZ = morphoGene.mZ;
 	mOrientationW = morphoGene.mOrientationW;
 	mOrientationX = morphoGene.mOrientationX;
 	mOrientationY = morphoGene.mOrientationY;
 	mOrientationZ = morphoGene.mOrientationZ;
-	mPrimitiveType = morphoGene.mPrimitiveType;
+	mRestitution = morphoGene.mRestitution;
+	mFriction = morphoGene.mFriction;
+	mIntraBodyColliding = morphoGene.mIntraBodyColliding;
+	mColorB = morphoGene.mColorB;
+	mColorG = morphoGene.mColorG;
+	mColorR = morphoGene.mColorR;
+
+	mJointAnchorX = morphoGene.mJointAnchorX;
+	mJointAnchorY = morphoGene.mJointAnchorY;
+	mJointAnchorZ = morphoGene.mJointAnchorZ;
+
 	mRepetitionLimit = morphoGene.mRepetitionLimit;
 	mSegmentShrinkFactor = morphoGene.mSegmentShrinkFactor;
-	mX = morphoGene.mX;
-	mY = morphoGene.mY;
-	mZ = morphoGene.mZ;
-	mFriction = morphoGene.mFriction;
-	mRestitution = morphoGene.mRestitution;
-	mIntraBodyColliding = morphoGene.mIntraBodyColliding;
+	mFollowUpGene = morphoGene.mFollowUpGene;
 
 	for (std::vector<MorphogeneBranch*>::const_iterator mgbit =
 		morphoGene.mGeneBranches.begin();
@@ -108,7 +101,11 @@ Morphogene::~Morphogene() {
 }
 
 void Morphogene::initialize(const double branchiness) {
-	mType = Gene::MorphoGene;
+
+	// A random primitive from the available primitives
+	mPrimitiveType =
+		(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
+			1, LimbPhysics::NUM_PRIMITIVES);
 
 	//Choose the dimensions of the segment with a bias toward larger dimensions
 	mX = Randomness::getSingleton()->nextBiasedLogDouble(
@@ -121,39 +118,32 @@ void Morphogene::initialize(const double branchiness) {
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
 
-	mSegmentShrinkFactor = 1.0
-		+ Randomness::getSingleton()->nextUnifDouble(
-			MorphologyConfiguration::LIMB_SCALE_MIN,
-			MorphologyConfiguration::LIMB_SCALE_MAX);
+	// Choose the orientation of the limb
+	Ogre::Quaternion q = Randomness::getSingleton()->nextQuaternion();
+	mOrientationW = q.w;
+	mOrientationX = q.x;
+	mOrientationY = q.y;
+	mOrientationZ = q.z;
 
 	mRestitution = MorphologyConfiguration::LIMB_INITIAL_RESTITUTION; /**!< Set the restitution */
 	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION; /**!< Set the friction */
 
-	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector();
-	mJointAnchorX = anchorVector.x; // Set joint anchor X, Y and Z, where the anchor lies in the center of mass
-	mJointAnchorY = anchorVector.y; // and the X, Y and Z form a vector, pointing to the point on the surface where
-	mJointAnchorZ = anchorVector.z; // the joint will be attached. The vector contains three values between -1 and 1.
-
-	//The yaw, pitch and roll values representing a correction in angle of the joint anchor on the surface.
-	mJointYaw = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0,
-		boost::math::constants::pi<double>() / 2.0);
-	mJointPitch = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0,
-		boost::math::constants::pi<double>() / 2.0);
-	mJointRoll = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0,
-		boost::math::constants::pi<double>() / 2.0);
+	mIntraBodyColliding = Randomness::getSingleton()->nextUnifBoolean();
 
 	// A random color RGB values between 0 and 1
 	mColorR = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 	mColorG = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
-	// A random primitive from the available primitives
-	mPrimitiveType =
-		(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
-			1, LimbPhysics::NUM_PRIMITIVES);
+	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector();
+	mJointAnchorX = anchorVector.x; // Set joint anchor X, Y and Z, where the anchor lies in the center of mass
+	mJointAnchorY = anchorVector.y; // and the X, Y and Z form a vector, pointing to the point on the surface where
+	mJointAnchorZ = anchorVector.z; // the joint will be attached. The vector contains three values between -1 and 1.
+
+	mSegmentShrinkFactor = 1.0
+		+ Randomness::getSingleton()->nextUnifDouble(
+			MorphologyConfiguration::LIMB_SCALE_MIN,
+			MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
 	mRepetitionLimit = Randomness::getSingleton()->nextUnifPosInt(0,
@@ -167,14 +157,6 @@ void Morphogene::initialize(const double branchiness) {
 		branch->initialize();
 		mGeneBranches.push_back(branch);
 	}
-
-	Ogre::Quaternion q = Randomness::getSingleton()->nextQuaternion();
-	mOrientationW = q.w;
-	mOrientationX = q.x;
-	mOrientationY = q.y;
-	mOrientationZ = q.z;
-
-	mIntraBodyColliding = Randomness::getSingleton()->nextUnifBoolean();
 }
 
 Morphogene* Morphogene::clone() {
@@ -182,20 +164,11 @@ Morphogene* Morphogene::clone() {
 }
 
 void Morphogene::mutate() {
-	while (!mGeneBranches.empty()) {
-		MorphogeneBranch* f = mGeneBranches.back();
-		mGeneBranches.pop_back();
-		delete f;
-	}
-
-	//TODO: Add reasonable numbers
-	initialize(Randomness::getSingleton()->nextUnifDouble(10, 30));
+	initialize(0); // Reinitialize all the values with new ones.
 }
 
 void Morphogene::grow(const int branchiness) {
-	int branchQty =
-		(branchiness != 0) ?
-			Randomness::getSingleton()->nextUnifPosInt(0, branchiness) : 0;
+	int branchQty = Randomness::getSingleton()->nextUnifPosInt(0, branchiness);
 
 	for (int i = 0; i < branchQty; i++) {
 		MorphogeneBranch* branch = new MorphogeneBranch();
@@ -210,35 +183,41 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 		return false;
 	}
 
-	if (mX != morphoGene.mX) {
+	if (mPrimitiveType != morphoGene.mPrimitiveType) {
 		return false;
 	}
 
-	if (mY != morphoGene.mY) {
+	if (mX != morphoGene.mX || mY != morphoGene.mY || mZ != morphoGene.mZ) {
 		return false;
 	}
 
-	if (mZ != morphoGene.mZ) {
+	if (mOrientationW != morphoGene.mOrientationW
+		|| mOrientationX != morphoGene.mOrientationX
+		|| mOrientationY != morphoGene.mOrientationY
+		|| mOrientationZ != morphoGene.mOrientationZ) {
 		return false;
 	}
 
-	if (mOrientationW != morphoGene.mOrientationW) {
+	if (mRestitution != morphoGene.mRestitution) {
 		return false;
 	}
 
-	if (mOrientationX != morphoGene.mOrientationX) {
-		return false;
-	}
-
-	if (mOrientationY != morphoGene.mOrientationY) {
-		return false;
-	}
-
-	if (mOrientationZ != morphoGene.mOrientationZ) {
+	if (mFriction != morphoGene.mFriction) {
 		return false;
 	}
 
 	if (mIntraBodyColliding != morphoGene.mIntraBodyColliding) {
+		return false;
+	}
+
+	if (mColorR != morphoGene.mColorR || mColorG != morphoGene.mColorG
+		|| mColorB != morphoGene.mColorB) {
+		return false;
+	}
+
+	if (mJointAnchorX != morphoGene.mJointAnchorX
+		|| mJointAnchorY != morphoGene.mJointAnchorY
+		|| mJointAnchorZ != morphoGene.mJointAnchorZ) {
 		return false;
 	}
 
@@ -251,54 +230,6 @@ bool Morphogene::equals(const Morphogene& morphoGene) const {
 	}
 
 	if (mFollowUpGene != morphoGene.mFollowUpGene) {
-		return false;
-	}
-
-	if (mColorR != morphoGene.mColorR) {
-		return false;
-	}
-
-	if (mColorG != morphoGene.mColorG) {
-		return false;
-	}
-
-	if (mColorB != morphoGene.mColorB) {
-		return false;
-	}
-
-	if (mPrimitiveType != morphoGene.mPrimitiveType) {
-		return false;
-	}
-
-	if (mJointAnchorX != morphoGene.mJointAnchorX) {
-		return false;
-	}
-
-	if (mJointAnchorY != morphoGene.mJointAnchorY) {
-		return false;
-	}
-
-	if (mJointAnchorZ != morphoGene.mJointAnchorZ) {
-		return false;
-	}
-
-	if (mJointPitch != morphoGene.mJointPitch) {
-		return false;
-	}
-
-	if (mJointYaw != morphoGene.mJointYaw) {
-		return false;
-	}
-
-	if (mJointRoll != morphoGene.mJointRoll) {
-		return false;
-	}
-
-	if (mRestitution != morphoGene.mRestitution) {
-		return false;
-	}
-
-	if (mFriction != morphoGene.mFriction) {
 		return false;
 	}
 

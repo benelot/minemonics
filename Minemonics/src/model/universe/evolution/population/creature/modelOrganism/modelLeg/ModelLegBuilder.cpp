@@ -30,20 +30,17 @@ void ModelLegBuilder::build(MixedGenome* genome,
 	genome->setSegmentsDepthLimit(2);
 
 	// create first limb
-	Morphogene* morphogene = new Morphogene(Ogre::Vector3(20, 6, 6),
-		Ogre::Quaternion(1, 0, 0, 0), Ogre::Vector3(1, 0, 0),
-		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
-		0, true);
-	morphogene->initialize(0);
+	Morphogene* morphogene = new Morphogene(LimbPhysics::BLOCK,
+		Ogre::Vector3(20, 6, 6), Ogre::Quaternion(1, 0, 0, 0), 1, 0, true,
+		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
+//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// creature second limb
-	Morphogene* morphogene2 = new Morphogene(Ogre::Vector3(6, 20, 6),
-		Ogre::Quaternion(1, 0, 0, 0), Ogre::Vector3(0, 1, 0),
-		Ogre::Euler(0, 0, 0), LimbPhysics::BLOCK, Ogre::ColourValue(1, 0, 0), 1,
-		0, true);
-
-	morphogene2->initialize(0);
+	Morphogene* morphogene2 = new Morphogene(LimbPhysics::BLOCK,
+		Ogre::Vector3(6, 20, 6), Ogre::Quaternion(1, 0, 0, 0), 1, 0, true,
+		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(0, 1, 0));
+//	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
 
 	// create joint between the two limbs
@@ -69,11 +66,12 @@ void ModelLegBuilder::build(MixedGenome* genome,
 		break;
 	case ControllerGene::ChaoticControllerGene:
 		// create instances of the chaotic controller gene for the morphogene.
-			for (int i = 0; i < 3; i++) {
-				ChaoticControllerGene* chaoticController = new ChaoticControllerGene();
-				chaoticController->initialize();
-				morphogeneBranch->getControllerGenes().push_back(chaoticController);
-			}
+		for (int i = 0; i < 3; i++) {
+			ChaoticControllerGene* chaoticController =
+				new ChaoticControllerGene();
+			chaoticController->initialize();
+			morphogeneBranch->getControllerGenes().push_back(chaoticController);
+		}
 	}
 
 	morphogeneBranch->setActive(true);
