@@ -369,10 +369,6 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 		branch->setJointAnchorY(0);
 		branch->setJointAnchorZ(0);
 
-		// let the joint point straight outward from the original joint anchor
-		branch->setJointPitch(0);
-		branch->setJointYaw(0);
-		branch->setJointRoll(0);
 		branch->setBranchGeneType(mGenes.size() - 1);
 
 		double limbMinSize = MorphologyConfiguration::LIMB_MIN_SIZE;

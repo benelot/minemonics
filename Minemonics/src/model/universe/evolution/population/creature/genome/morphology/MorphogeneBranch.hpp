@@ -44,9 +44,9 @@ class access;
  */
 class MorphogeneBranch: public GeneBranch {
 public:
-	MorphogeneBranch(Ogre::Vector3 anchorPosition,
-		Ogre::Euler anchorOrientation, Ogre::Vector3 jointMinAngle,
-		Ogre::Vector3 jointMaxAngle, Ogre::Vector3 pitchAxis);
+	MorphogeneBranch(JointPhysics::JointType jointType, bool flipped,
+		bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 jointMinAngle,
+		Ogre::Vector3 jointMaxAngle, Ogre::Vector3 anchorDirection);
 	MorphogeneBranch();
 	MorphogeneBranch(const MorphogeneBranch& morphogeneBranch);
 
@@ -118,30 +118,6 @@ public:
 		mJointAnchorZ = jointAnchorZ;
 	}
 
-	double getJointPitch() const {
-		return mJointPitch;
-	}
-
-	void setJointPitch(const double jointPitch) {
-		mJointPitch = jointPitch;
-	}
-
-	double getJointRoll() const {
-		return mJointRoll;
-	}
-
-	void setJointRoll(const double jointRoll) {
-		mJointRoll = jointRoll;
-	}
-
-	double getJointYaw() const {
-		return mJointYaw;
-	}
-
-	void setJointYaw(const double jointYaw) {
-		mJointYaw = jointYaw;
-	}
-
 	bool isMirrored() const {
 		return mMirrored;
 	}
@@ -198,87 +174,12 @@ public:
 		mJointYawMinAngle = jointYawMinAngle;
 	}
 
-	double getJointPitchStiffness() const {
-		return mJointPitchStiffness;
-	}
-
-	void setJointPitchStiffness(double jointPitchStiffness) {
-		mJointPitchStiffness = jointPitchStiffness;
-	}
-
-	double getJointRollStiffness() const {
-		return mJointRollStiffness;
-	}
-
-	void setJointRollStiffness(const double jointRollStiffness) {
-		mJointRollStiffness = jointRollStiffness;
-	}
-
-	double getJointYawStiffness() const {
-		return mJointYawStiffness;
-	}
-
-	void setJointYawStiffness(const double jointYawStiffness) {
-		mJointYawStiffness = jointYawStiffness;
-	}
-
-	double getSpringPitchDampingCoefficient() const {
-		return mSpringPitchDampingCoefficient;
-	}
-
-	void setSpringPitchDampingCoefficient(
-		const double springPitchDampingCoefficient) {
-		mSpringPitchDampingCoefficient = springPitchDampingCoefficient;
-	}
-
-	double getSpringRollDampingCoefficient() const {
-		return mSpringRollDampingCoefficient;
-	}
-
-	void setSpringRollDampingCoefficient(
-		const double springRollDampingCoefficient) {
-		mSpringRollDampingCoefficient = springRollDampingCoefficient;
-	}
-
-	double getSpringYawDampingCoefficient() const {
-		return mSpringYawDampingCoefficient;
-	}
-
-	void setSpringYawDampingCoefficient(
-		const double springYawDampingCoefficient) {
-		mSpringYawDampingCoefficient = springYawDampingCoefficient;
-	}
-
-	bool isJointPitchEnabled() const {
-		return mJointPitchEnabled;
-	}
-
-	void setJointPitchEnabled(bool jointPitchEnabled) {
-		mJointPitchEnabled = jointPitchEnabled;
-	}
-
-	bool isJointRollEnabled() const {
-		return mJointRollEnabled;
-	}
-
-	void setJointRollEnabled(bool jointRollEnabled) {
-		mJointRollEnabled = jointRollEnabled;
-	}
-
 	JointPhysics::JointType getJointType() const {
 		return mJointType;
 	}
 
 	void setJointType(JointPhysics::JointType jointType) {
 		mJointType = jointType;
-	}
-
-	bool isJointYawEnabled() const {
-		return mJointYawEnabled;
-	}
-
-	void setJointYawEnabled(bool jointYawEnabled) {
-		mJointYawEnabled = jointYawEnabled;
 	}
 
 	double getJointPitchAxisY() const {
@@ -320,54 +221,56 @@ public:
 	friend class boost::serialization::access;
 
 	/**
-	 * Serializes the gene branch to a string.
+	 * Serializes the morphogene branch to a string.
 	 * @param os The ostream.
 	 * @param morphoGeneBranch The morphogene branch we want to serialize.
 	 * @return A string containing all information about the morphogene branch.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 		const MorphogeneBranch &morphogeneBranch) {
-		return os
-
-		<< "MorphogeneBranch: isActive=" << morphogeneBranch.mActive /**If the morphogene branch is active or not*/
-
-		<< "/GeneType=" << morphogeneBranch.mBranchGeneType /**The type of gene the branch leads to*/
-
-		<< "/isFlipped=" << morphogeneBranch.mFlipped /**If the morphogene branch is flipped on the morphogene to the other side.*/
-
-		<< "/isMirrored=" << morphogeneBranch.mMirrored /**If the morphogene branch is mirrored on the morphogene.*/
-
+		os << "MorphogeneBranch:" /** The name of the class */
+		<< static_cast<const GeneBranch &>(morphogeneBranch) /** Base class*/
 		<< "/Joint Type=" << morphogeneBranch.mJointType /**< The joint type */
-		<< "/Joint Anchor:(" /**The joint anchor position on the morphogene branching into.*/
-		<< morphogeneBranch.mJointAnchorX << ","
-			<< morphogeneBranch.mJointAnchorY << ","
-			<< morphogeneBranch.mJointAnchorZ << ")"
+		<< "/isFlipped=" << morphogeneBranch.mFlipped /**If the morphogene branch is flipped on the morphogene to the other side.*/
+		<< "/isMirrored=" << morphogeneBranch.mMirrored /**If the morphogene branch is mirrored on the morphogene.*/
+		<< "/Joint Pitch Axis:(" /**The joint pitch axis.*/
+		<< morphogeneBranch.mJointPitchAxisX << "," /**The joint pitch axis.*/
+		<< morphogeneBranch.mJointPitchAxisY << "," /**The joint pitch axis.*/
+		<< morphogeneBranch.mJointPitchAxisZ << ")" /**The joint pitch axis.*/
 
-			<< "/Joint Rotation:(" << morphogeneBranch.mJointPitch << "," /**The joint anchor orientation on the morphogene branching into*/
-			<< morphogeneBranch.mJointYaw << "," << morphogeneBranch.mJointRoll
-			<< ")"
+		<< "/Joint Limits (Min/Max)[Pitch:" /**The joint limits in all directions*/
+		<< morphogeneBranch.mJointPitchMinAngle << "/" /**The joint limits in pitch direction*/
+		<< morphogeneBranch.mJointPitchMaxAngle << "][Yaw:" /**The joint limits in pitch direction*/
+		<< morphogeneBranch.mJointYawMinAngle << "/" /**The joint limits in yaw direction*/
+		<< morphogeneBranch.mJointYawMaxAngle << "][Roll:" /**The joint limits in yaw direction*/
+		<< morphogeneBranch.mJointRollMinAngle << "/" /**The joint limits in roll direction*/
+		<< morphogeneBranch.mJointRollMaxAngle; /**The joint limits in roll direction*/
 
-			<< "/Joint Enabled:(" << morphogeneBranch.mJointPitchEnabled << "," /** If the joint Dof is enabled*/
-			<< morphogeneBranch.mJointYawEnabled << ","
-			<< morphogeneBranch.mJointRollEnabled << ")"
+		for (std::vector<ControllerGene*>::const_iterator it1 =
+			morphogeneBranch.mControllerGenes.begin();
+			it1 != morphogeneBranch.mControllerGenes.end(); it1++) {
 
-			<< "/Joint Limits (Min/Max)[Pitch:" /**The joint limits in all directions*/
-			<< morphogeneBranch.mJointPitchMinAngle << "/"
-			<< morphogeneBranch.mJointPitchMaxAngle << "][Yaw:"
-			<< morphogeneBranch.mJointYawMinAngle << "/"
-			<< morphogeneBranch.mJointYawMaxAngle << "][Roll:"
-			<< morphogeneBranch.mJointRollMinAngle << "/"
-			<< morphogeneBranch.mJointRollMaxAngle
+			switch ((*it1)->getControllerType()) {
+			case ControllerGene::SineControllerGene:
+				os << ((SineControllerGene*) (*it1));
+				break;
+			case ControllerGene::ChaoticControllerGene:
+				os << ((ChaoticControllerGene*) (*it1));
+				break;
+			default:
+				break;
+			}
 
-			<< "/SpringDamping: [Pitch:" /**The spring damping coefficients of the joint*/
-			<< morphogeneBranch.mSpringPitchDampingCoefficient << "][Yaw:"
-			<< morphogeneBranch.mSpringYawDampingCoefficient << "][Roll:"
-			<< morphogeneBranch.mSpringRollDampingCoefficient
+		}
 
-			<< "/JointStiffness: [Pitch:" /**The joint stiffness*/
-			<< morphogeneBranch.mJointPitchStiffness << "][Yaw:"
-			<< morphogeneBranch.mJointYawStiffness << "][Roll:"
-			<< morphogeneBranch.mJointRollStiffness;
+		os << "/Joint Anchor:(" /**The joint anchor position on the morphogene branching into.*/
+		<< morphogeneBranch.mJointAnchorX << "," /**The joint anchor position on the morphogene branching into.*/
+		<< morphogeneBranch.mJointAnchorY << "," /**The joint anchor position on the morphogene branching into.*/
+		<< morphogeneBranch.mJointAnchorZ << ")"
+
+		<< "/GeneType=" << morphogeneBranch.mBranchGeneType; /**The type of gene the branch leads to*/
+
+		return os;
 	}
 
 	/**
@@ -383,72 +286,41 @@ public:
 		ar.register_type(static_cast<ChaoticControllerGene*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(GeneBranch) /**!< Serialize the base object */
 
-		& BOOST_SERIALIZATION_NVP(mFlipped) /**!< If the morphogene branch is flipped on the morphogene to the other side.*/
-
-		& BOOST_SERIALIZATION_NVP(mMirrored) /**If the morphogene branch is mirrored on the morphogene.*/
-
 		& BOOST_SERIALIZATION_NVP(mJointType) /**The joint type */
-		& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**The joint anchor position on the morphogene branching into.*/
-		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
-		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
-		& BOOST_SERIALIZATION_NVP(mControllerGenes) /**!< The controller genes of this morphogene's joint.*/
-
-		& BOOST_SERIALIZATION_NVP(mJointPitch) /**!< Direction of joint anchoring on the surface of the segment */
-		& BOOST_SERIALIZATION_NVP(mJointYaw)
-		& BOOST_SERIALIZATION_NVP(mJointRoll)
-
+		& BOOST_SERIALIZATION_NVP(mFlipped) /**!< If the morphogene branch is flipped on the morphogene to the other side.*/
+		& BOOST_SERIALIZATION_NVP(mMirrored) /**If the morphogene branch is mirrored on the morphogene.*/
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxisX) /**!< Direction of the joint pitch axis */
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxisY)
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxisZ)
-
 		& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< The joint limits in pitch direction*/
 		& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
-
 		& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< The joint limits in yaw direction*/
 		& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
-
 		& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< The joint limits in roll direction*/
 		& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle)
+		& BOOST_SERIALIZATION_NVP(mControllerGenes) /**!< The controller genes of this morphogene's joint.*/
 
-		& BOOST_SERIALIZATION_NVP(mSpringPitchDampingCoefficient) /**!< The spring damping coefficients of the joint*/
-		& BOOST_SERIALIZATION_NVP(mSpringYawDampingCoefficient)
-		& BOOST_SERIALIZATION_NVP(mSpringRollDampingCoefficient)
-
-		& BOOST_SERIALIZATION_NVP(mJointPitchStiffness) /**!< The joint stiffness*/
-		& BOOST_SERIALIZATION_NVP(mJointYawStiffness)
-		& BOOST_SERIALIZATION_NVP(mJointRollStiffness)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**The joint anchor position on the morphogene branching into.*/
+		& BOOST_SERIALIZATION_NVP(mJointAnchorY)
+		& BOOST_SERIALIZATION_NVP(mJointAnchorZ)
 
 		& BOOST_SERIALIZATION_NVP(mBranchGeneType); /**!< The type of gene the branch leads to*/
-
 	}
 
 private:
-	bool mMirrored; /**!< Determines if this branch is mirrored through the center of mass of its segment. */
-
-	bool mFlipped; /**!< Determines if this branch is mirrored along the axis defined by the parent gene branch of this branch. */
-
-	double mJointAnchorX, mJointAnchorY, mJointAnchorZ; /**!< Spherical coordinates around the origin of the segment at the center of mass. */
-
-	double mJointPitch, mJointYaw, mJointRoll; /**!< Direction of joint anchoring on the surface of the segment */
-
-	bool mJointPitchEnabled, mJointYawEnabled, mJointRollEnabled; /**!< If the DoF is enabled or not. */
-
+	/** Joint physical properties */
 	JointPhysics::JointType mJointType; /**!< The type of joint */
-
+	bool mMirrored; /**!< Determines if this branch is mirrored through the center of mass of its segment. */
+	bool mFlipped; /**!< Determines if this branch is mirrored along the axis defined by the parent gene branch of this branch. */
 	double mJointPitchAxisX, mJointPitchAxisY, mJointPitchAxisZ; /**!< The direction of the joint pitch axis */
-
 	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 
-	double mSpringPitchDampingCoefficient, mSpringYawDampingCoefficient, /** !< The spring damping coefficient of the joint springs. */
-	mSpringRollDampingCoefficient;
-
-	double mJointPitchStiffness, mJointYawStiffness, mJointRollStiffness; /**!< The stiffness of the joint. */
-
-	int mBranchGeneType; /**!< The gene type it branches into. */
-
 	std::vector<ControllerGene*> mControllerGenes; /**!< The controller of this gene */
 
+	double mJointAnchorX, mJointAnchorY, mJointAnchorZ; /**!< Spherical coordinates around the origin of the segment at the center of mass. */
+
+	unsigned int mBranchGeneType; /**!< The gene type it branches into. */
 };
 BOOST_CLASS_VERSION(MorphogeneBranch, 1)
 

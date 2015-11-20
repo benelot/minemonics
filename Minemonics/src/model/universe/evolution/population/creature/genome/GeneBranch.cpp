@@ -12,6 +12,7 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
 GeneBranch::GeneBranch() :
 	mType(UNKNOWN_GENE_BRANCH), mActive(false) {
@@ -28,6 +29,7 @@ GeneBranch::~GeneBranch() {
 
 void GeneBranch::initialize(const GeneBranchType geneBranchType) {
 	mType = geneBranchType;
+	mActive = Randomness::getSingleton()->nextUnifBoolean();
 
 }
 

@@ -275,15 +275,10 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 		OgreBulletUtils::convert(parentJointAnchor.getOrigin()));
 
 	// PARENT JOINT POSITION
-	Ogre::Euler parentEulerJointDir(
-		parentMorphogeneBranch->getJointYaw(), // joint direction of joint part of parent
-		parentMorphogeneBranch->getJointPitch(),
-		parentMorphogeneBranch->getJointRoll());
-
 	generator->setOrientation( // update the generator orientation using
 		generator->getOrientation() /**!< The current orientation */
-		* OgreBulletUtils::convert(parentJointAnchor.getRotation()) /**!< The parent surface direction */
-		* parentEulerJointDir.toQuaternion()); /**!< The parent joint direction change */
+			* OgreBulletUtils::convert(
+				parentJointAnchor.getRotation()) /**!< The parent surface direction */);
 
 	localParentJointInRefParent = localParentAnchorInRefParent; //get local joint rotation point in reference frame parent
 
@@ -476,9 +471,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 		localParentJointTransform, localChildJointTransform,
 		parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
 		getJointModels().size(), parentMorphogeneBranch->getJointType(),
-		parentMorphogeneBranch->isJointPitchEnabled(),
-		parentMorphogeneBranch->isJointYawEnabled(),
-		parentMorphogeneBranch->isJointRollEnabled(),
+		false,false,false,
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
 			parentMorphogeneBranch->getJointPitchAxisY(),
 			parentMorphogeneBranch->getJointPitchAxisZ()),
@@ -518,7 +511,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointRollMinAngle()),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()),false);
+			parentMorphogeneBranch->getJointRollMaxAngle()), false);
 
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {

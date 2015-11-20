@@ -69,19 +69,6 @@ TEST_F(MorphoGeneBranchTest,hasValidJointAnchor) {
 		&& geneBranch->getJointAnchorZ() != 0);
 }
 
-TEST_F(MorphoGeneBranchTest,hasValidJointRotation) {
-	//test valid joint rotation
-	ASSERT_TRUE(
-		0 <= geneBranch->getJointPitch()
-		<= 2 * boost::math::constants::pi<double>());
-	ASSERT_TRUE(
-		0 <= geneBranch->getJointYaw()
-		<= 2 * boost::math::constants::pi<double>());
-	ASSERT_TRUE(
-		0 <= geneBranch->getJointRoll()
-		<= 2 * boost::math::constants::pi<double>());
-}
-
 // everything else can not be tested (booleans and a pointer pointing to NULL or non-NULL)
 
 TEST_F(MorphoGeneBranchSerializationTest,isEqualAfterSerialization) {

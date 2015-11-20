@@ -232,13 +232,10 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 	//##
 	// PARENT JOINT POSITION
 	// joint direction of joint part of parent
-	Ogre::Euler parentEulerJointDir(parentMorphogeneBranch->getJointYaw(),
-		parentMorphogeneBranch->getJointPitch(),
-		parentMorphogeneBranch->getJointRoll());
-
 	generator->setOrientation(
-		OgreBulletUtils::convert(parentJointAnchor.getRotation()) /**!< The parent surface direction */
-			* parentEulerJointDir.toQuaternion() /**!< The parent joint direction change */);
+		generator->getOrientation() /**!< The current orientation */
+			* OgreBulletUtils::convert(
+				parentJointAnchor.getRotation()) /**!< The parent surface direction */);
 
 	//get local joint rotation point in reference frame parent
 	localParentJointInRefParent = localParentAnchorInRefParent; /**!< The direction of the surface*/
@@ -260,7 +257,7 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 		localChildAnchorDirInRefChild);
 
 	generator->setOrientation(
-		generator->getOrientation()
+		generator->getOrientation() /**!< The current orientation */
 			* OgreBulletUtils::convert(
 				childJointAnchor.getRotation()) /**!< The child joint surface direction */);
 
@@ -373,8 +370,8 @@ LimbModel* SRBPhenomeModel::createLimb(PhenotypeGenerator* generator,
 		/*size*/
 		Ogre::Vector3(sizeX, sizeY, sizeZ),
 		/*mass*/
-		sizeX * sizeY * sizeZ,
-		childMorphogene->getRestitution(), childMorphogene->getFriction(),
+		sizeX * sizeY * sizeZ, childMorphogene->getRestitution(),
+		childMorphogene->getFriction(),
 		Ogre::ColourValue(childMorphogene->getColorR(),
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
 		childMorphogene->isIntraBodyColliding(), getLimbModels().size());
@@ -430,10 +427,8 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	((FSLimbBt*) childLimb->getLimbPhysics())->getRigidBody(),
 		localParentJointTransform, localChildJointTransform,
 		parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
-		getJointModels().size(), parentMorphogeneBranch->getJointType(),
-		parentMorphogeneBranch->isJointPitchEnabled(),
-		parentMorphogeneBranch->isJointYawEnabled(),
-		parentMorphogeneBranch->isJointRollEnabled(),
+		getJointModels().size(), parentMorphogeneBranch->getJointType(), false,
+		false, false,
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
 			parentMorphogeneBranch->getJointPitchAxisY(),
 			parentMorphogeneBranch->getJointPitchAxisZ()),
@@ -467,7 +462,7 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointRollMinAngle()),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()),false);
+			parentMorphogeneBranch->getJointRollMaxAngle()), false);
 
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
