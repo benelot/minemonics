@@ -270,6 +270,7 @@ public:
 	friend std::ostream & operator<<(std::ostream &os,
 		const Morphogene &morphogene) {
 		os << "Morphogene: " /**!< Name of the class*/
+			<< static_cast<const Gene &>(morphogene)
 		<< "/PrimitiveType" << morphogene.mPrimitiveType /**!< The 3D primitive type of this morphogene.*/
 		<< "Size(" /**!< The size of the morphogene*/
 		<< morphogene.mX << "," /**!< The size of the morphogene*/
