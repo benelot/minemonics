@@ -52,7 +52,7 @@ public:
 		return mGroundBody;
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

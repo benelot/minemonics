@@ -48,7 +48,7 @@ public:
 		return (PlaneBt*) mEnvironmentPhysics;
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

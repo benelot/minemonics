@@ -49,7 +49,7 @@ public:
 		setOutputValue(force);
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

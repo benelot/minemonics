@@ -64,7 +64,7 @@ public:
 		mControllerType = controllerType;
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

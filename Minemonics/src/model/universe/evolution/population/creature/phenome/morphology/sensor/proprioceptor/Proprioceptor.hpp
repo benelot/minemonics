@@ -38,7 +38,7 @@ public:
 
 	// Accessor methods
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

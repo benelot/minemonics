@@ -57,7 +57,7 @@ public:
 	 */
 	IndirectGenome* clone() = 0;
 
-	//Serialization
+	// Serialization ##########################
 	friend class boost::serialization::access; /**!< Give access to boost serialization.*/
 
 	/**

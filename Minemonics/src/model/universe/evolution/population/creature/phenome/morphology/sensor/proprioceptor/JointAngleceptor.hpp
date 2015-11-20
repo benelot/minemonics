@@ -49,7 +49,7 @@ public:
 		setOutputValue(angle);
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

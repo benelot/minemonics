@@ -63,7 +63,7 @@ public:
 
 	void collectInputs();
 
-	//Serialization
+	// Serialization ##########################
 	friend class boost::serialization::access; /**!< Give access to boost serialization*/
 
 	/**

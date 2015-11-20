@@ -53,7 +53,7 @@ public:
 		setOutputValue(limitError);
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

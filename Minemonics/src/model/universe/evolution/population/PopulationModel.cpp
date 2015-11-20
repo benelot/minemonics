@@ -89,9 +89,9 @@ void PopulationModel::addNewMember(const double branchiness,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
 //	SnakeBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
-//	ModelLegBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
+	ModelLegBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
 
-	creatureModel->createRandomGenome(branchiness);
+//	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
 	creatureModel->setDynasty(mDynastyQty);
 	mDynastyQty++;

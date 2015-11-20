@@ -49,7 +49,7 @@ public:
 		setOutputValue(velocity);
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

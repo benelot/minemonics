@@ -149,7 +149,7 @@ public:
 		return mTournamentSize;
 	}
 
-	//Serialization
+	// Serialization ##########################
 
 	/**
 	 * Give access to boost serialization

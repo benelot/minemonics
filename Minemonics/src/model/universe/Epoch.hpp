@@ -112,7 +112,7 @@ public:
 		return mSortOrders;
 	}
 
-	//Serialization
+	// Serialization ##########################
 
 	/**
 	 * Give access to boost serialization

@@ -81,7 +81,7 @@ public:
 	 */
 	bool equals(const Controller & controller) const;
 
-	//Serialization
+	// Serialization ##########################
 	friend class boost::serialization::access; /**!< Give access to boost serialization*/
 
 	/**

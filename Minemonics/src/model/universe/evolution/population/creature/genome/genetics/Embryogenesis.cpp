@@ -84,24 +84,24 @@ void Embryogenesis::transcribeMorphogene(
 	}
 
 	//PARENT
-	Ogre::Vector3 localParentJointInRefParent(0, 0, 0); /**!< joint position in local reference frame of the parent */
-	btTransform parentLimbSurfaceTransform; /**!< The position on the surface of the parent limb*/
-	parentLimbSurfaceTransform.setIdentity();
+	Ogre::Vector3 jointPivotInParent(0, 0, 0); /**!< joint position in local reference frame of the parent */
+	btTransform parentLimbSurfaceAnchor; /**!< The position on the surface of the parent limb*/
+	parentLimbSurfaceAnchor.setIdentity();
 
 	//CHILD
 	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
-	btTransform childLimbSurfaceTransform; /**!< get the morphogene and start creating the limb and its joint to its parent */
-	childLimbSurfaceTransform.setIdentity();
+	btTransform childLimbSurfaceAnchor; /**!< get the morphogene and start creating the limb and its joint to its parent */
+	childLimbSurfaceAnchor.setIdentity();
 
-	Ogre::Vector3 localChildJointInRefChild(0, 0, 0); /**!< joint position in local reference frame of the child */
+	Ogre::Vector3 jointPivotInChild(0, 0, 0); /**!< joint position in local reference frame of the child */
 
 	// APPEND TO PARENT?
 	if (generator->getParentComponentModel() != NULL) { // if there exists a parent component
 		// then we calculate the position of the new limb according to the parent component
 		phenomeModel->calculateChildPositionRelativeToParent(generator,
-			parentLimbSurfaceTransform, childLimbSurfaceTransform,
-			childMorphogene, localParentJointInRefParent,
-			localChildJointInRefChild);
+			parentLimbSurfaceAnchor, childLimbSurfaceAnchor,
+			childMorphogene, jointPivotInParent,
+			jointPivotInChild);
 	}
 
 	LimbModel* childLimb = phenomeModel->createLimb(generator, childMorphogene); // create new child limb
@@ -109,8 +109,8 @@ void Embryogenesis::transcribeMorphogene(
 	if (generator->getParentComponentModel() != NULL) { // if there exists a parent component
 		// we connect it to the child limb with a joint
 		phenomeModel->appendToParentLimb(childLimb, generator,
-			localParentJointInRefParent, localChildJointInRefChild,
-			parentLimbSurfaceTransform, childLimbSurfaceTransform);
+			jointPivotInParent, jointPivotInChild,
+			parentLimbSurfaceAnchor, childLimbSurfaceAnchor);
 	}
 
 	// create new generators from the morphogene branches

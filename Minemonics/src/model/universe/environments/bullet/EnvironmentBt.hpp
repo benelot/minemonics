@@ -69,7 +69,7 @@ public:
 	 */
 	virtual btRigidBody*& getBody() = 0;
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

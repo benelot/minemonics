@@ -93,7 +93,7 @@ public:
 		mYOffset = yOffset;
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

@@ -48,7 +48,7 @@ public:
 	 */
 	virtual void update(double timeSinceLastTick) = 0;
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

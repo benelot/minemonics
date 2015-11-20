@@ -62,7 +62,7 @@ public:
 			const float* const data, const float minH, const float maxH, const Ogre::Vector3& pos,
 			const float scale, const float heightScale) = 0;
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

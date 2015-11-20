@@ -56,7 +56,7 @@ public:
 		return mSystemType;
 	}
 
-	//Serialization
+	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
 	 */

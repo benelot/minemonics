@@ -68,8 +68,8 @@ public:
 	virtual void calculateChildPositionRelativeToParent(
 		PhenotypeGenerator* generator, btTransform& parentJointAnchor,
 		btTransform& childJointAnchor, Morphogene* childMorphogene,
-		Ogre::Vector3& localParentJointInRefParent,
-		Ogre::Vector3& localChildJointInRefChild) = 0;
+		Ogre::Vector3& jointPivotInParent,
+		Ogre::Vector3& jointPivotInChild) = 0;
 
 	virtual LimbModel* createLimb(PhenotypeGenerator* generator,
 		Morphogene* childMorphogene) = 0;
