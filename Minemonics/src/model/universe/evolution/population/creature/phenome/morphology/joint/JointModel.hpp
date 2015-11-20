@@ -191,18 +191,6 @@ public:
 		return mJointPhysics->getJointMaxAngle();
 	}
 
-	const bool getJointPitchEnabled() const {
-		return mJointPhysics->isJointPitchEnabled();
-	}
-
-	const bool getJointYawEnabled() const {
-		return mJointPhysics->isJointYawEnabled();
-	}
-
-	const bool getJointRollEnabled() const {
-		return mJointPhysics->isJointRollEnabled();
-	}
-
 	const JointPhysics::JointType getType() const {
 		return mJointPhysics->getType();
 	}

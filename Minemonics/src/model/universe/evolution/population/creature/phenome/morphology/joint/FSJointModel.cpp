@@ -45,8 +45,7 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	const std::vector<FSLimbModel*>::size_type indexA,
 	const std::vector<FSLimbModel*>::size_type indexB,
 	const std::vector<FSJointModel*>::size_type ownIndex,
-	JointPhysics::JointType type, bool jointPitchEnabled, bool jointYawEnabled,
-	bool jointRollEnabled, Ogre::Vector3 jointPitchAxis,
+	JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,
 	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mParentIndex = indexA;
@@ -61,7 +60,6 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	mLocalBOrientation = OgreBulletUtils::convert(localB.getRotation());
 
 	mJointPhysics = new FSJointBt(world, limbA, limbB, localA, localB, type,
-		jointPitchEnabled, jointYawEnabled, jointRollEnabled,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointMinAngle),
 		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);

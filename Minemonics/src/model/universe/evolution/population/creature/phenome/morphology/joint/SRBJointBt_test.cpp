@@ -27,7 +27,7 @@ protected:
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
 		jointBt = new SRBJointBt(NULL, NULL, NULL, btTransform(), btTransform(),
-			JointPhysics::HINGE_JOINT, true, true, true,
+			JointPhysics::HINGE_JOINT,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()), 0);
@@ -56,7 +56,7 @@ protected:
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
 		jointBt = new SRBJointBt(NULL, NULL, NULL, btTransform(), btTransform(),
-			JointPhysics::HINGE_JOINT, true, true, true,
+			JointPhysics::HINGE_JOINT,
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()), 0);
@@ -64,7 +64,7 @@ protected:
 		jointBt->generateMotors(
 			OgreBulletUtils::convert(randomness->nextVector()),
 			OgreBulletUtils::convert(randomness->nextVector()),
-			OgreBulletUtils::convert(randomness->nextVector()),true);
+			OgreBulletUtils::convert(randomness->nextVector()), true);
 
 		jointBt2 = new SRBJointBt();
 

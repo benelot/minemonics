@@ -151,30 +151,6 @@ public:
 	virtual void setRotationalLimitMotorEnabled(
 		const RotationalDegreeOfFreedom index, const bool enable) = 0;
 
-	bool isJointPitchEnabled() const {
-		return mJointPitchEnabled;
-	}
-
-	void setJointPitchEnabled(bool jointPitchEnabled) {
-		mJointPitchEnabled = jointPitchEnabled;
-	}
-
-	bool isJointRollEnabled() const {
-		return mJointRollEnabled;
-	}
-
-	void setJointRollEnabled(bool jointRollEnabled) {
-		mJointRollEnabled = jointRollEnabled;
-	}
-
-	bool isJointYawEnabled() const {
-		return mJointYawEnabled;
-	}
-
-	void setJointYawEnabled(bool jointYawEnabled) {
-		mJointYawEnabled = jointYawEnabled;
-	}
-
 	JointType getType() const {
 		return mType;
 	}
@@ -227,9 +203,6 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of joint */
-		& BOOST_SERIALIZATION_NVP(mJointPitchEnabled) /**!< If Joint Dof are enabled */
-		& BOOST_SERIALIZATION_NVP(mJointYawEnabled)
-		& BOOST_SERIALIZATION_NVP(mJointRollEnabled)
 
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.x) /**!< The max forces of the joint axes */
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
@@ -260,8 +233,6 @@ public:
 protected:
 
 	int mJointIndex;
-
-	bool mJointPitchEnabled, mJointYawEnabled, mJointRollEnabled; /**!< If Joint Dof are enabled. */
 
 	JointType mType; /**!< The type of joint */
 

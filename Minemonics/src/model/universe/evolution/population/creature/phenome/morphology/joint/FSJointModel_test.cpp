@@ -26,8 +26,8 @@ protected:
 		jointModel = new FSJointModel(NULL, NULL, NULL, btTransform(),
 			btTransform(), randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
-			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
-			true, true, randomness->nextVector(), randomness->nextVector(),
+			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT,
+			randomness->nextVector(), randomness->nextVector(),
 			randomness->nextVector());
 		jointModel->initialize();
 	}
@@ -51,8 +51,8 @@ protected:
 		jointModel = new FSJointModel(NULL, NULL, NULL, btTransform(),
 			btTransform(), randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
-			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT, true,
-			true, true, randomness->nextVector(), randomness->nextVector(),
+			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT,
+			randomness->nextVector(), randomness->nextVector(),
 			randomness->nextVector());
 		jointModel->initialize();
 

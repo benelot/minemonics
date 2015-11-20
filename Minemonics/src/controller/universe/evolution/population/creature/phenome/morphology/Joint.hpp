@@ -47,7 +47,6 @@ public:
 	Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 		const btTransform localA, const btTransform localB, const int indexA,
 		const int indexB, const int ownIndex, JointPhysics::JointType jointType,
-		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
 		Ogre::Vector3 jointUpperLimits);
 	Joint(const Joint& joint);

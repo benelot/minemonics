@@ -37,7 +37,6 @@ Joint::_Init Joint::_initializer;
 Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	const btTransform localA, const btTransform localB, const int indexA,
 	const int indexB, const int ownIndex, JointPhysics::JointType jointType,
-	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
 	Ogre::Vector3 jointUpperLimits) {
 	// initialize the model of the joint
@@ -47,8 +46,7 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
 			((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
-			indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
-			jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+			indexA, indexB, ownIndex, jointType, jointPitchAxis, jointLowerLimits, jointUpperLimits);
 
 		break;
 	case PhysicsController::FeatherstoneModel:
@@ -56,8 +54,7 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
 			((FSLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
 			((FSLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
-			indexA, indexB, ownIndex, jointType, jointPitchEnabled, jointYawEnabled,
-			jointRollEnabled, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+			indexA, indexB, ownIndex, jointType, jointPitchAxis, jointLowerLimits, jointUpperLimits);
 		break;
 	default:
 		break;

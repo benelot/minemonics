@@ -22,15 +22,11 @@ FSJointBt::FSJointBt() :
 FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	btRigidBody* const bodyB, const btTransform& tframeInA,
 	const btTransform& tframeInB, JointPhysics::JointType type,
-	bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits, int ownIndex) :
 	mMultiBody(NULL) {
 	mWorld = world;
 	mType = type;
-	mJointPitchEnabled = jointPitchEnabled;
-	mJointYawEnabled = jointYawEnabled;
-	mJointRollEnabled = jointRollEnabled;
 
 	mJointPitchAxis = OgreBulletUtils::convert(jointPitchAxis);
 	mJointMinAngle = OgreBulletUtils::convert(jointLowerLimits);

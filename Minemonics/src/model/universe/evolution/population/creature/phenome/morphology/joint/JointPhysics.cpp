@@ -17,8 +17,7 @@
 //## utils headers
 
 JointPhysics::JointPhysics() :
-	mInWorld(false), mType(JointPhysics::UNKNOWN_JOINT), mJointPitchEnabled(
-		true), mJointRollEnabled(true), mJointYawEnabled(true), mJointMaxAngle(
+	mInWorld(false), mType(JointPhysics::UNKNOWN_JOINT), mJointMaxAngle(
 		0, 0, 0), mJointMaxForces(0, 0, 0), mJointMaxSpeeds(0, 0, 0), mJointMinAngle(
 		0, 0, 0), mJointPitchAxis(1, 0, 0),mJointIndex(0) {
 }
@@ -47,9 +46,6 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 
-	if (mJointPitchEnabled != jointPhysics.mJointPitchEnabled) {
-		return false;
-	}
 	//Double comparison
 	if (mJointMinAngle != jointPhysics.mJointMinAngle) {
 		return false;
@@ -64,14 +60,6 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 	}
 
 	if (mJointMaxSpeeds != jointPhysics.mJointMaxSpeeds) {
-		return false;
-	}
-
-	if (mJointRollEnabled != jointPhysics.mJointRollEnabled) {
-		return false;
-	}
-
-	if (mJointYawEnabled != jointPhysics.mJointYawEnabled) {
 		return false;
 	}
 

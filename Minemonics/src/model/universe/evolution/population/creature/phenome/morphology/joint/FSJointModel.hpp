@@ -63,10 +63,8 @@ public:
 		const std::vector<FSLimbModel*>::size_type indexA,
 		const std::vector<FSLimbModel*>::size_type indexB,
 		const std::vector<FSJointModel*>::size_type ownIndex,
-		JointPhysics::JointType type, bool jointPitchEnabled,
-		bool jointYawEnabled, bool jointRollEnabled,
-		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointMinAngle,
-		Ogre::Vector3 jointMaxAngle);
+		JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,
+		Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle);
 
 	virtual ~FSJointModel();
 
@@ -114,7 +112,8 @@ public:
 	}
 
 	void generateMotors(const Ogre::Vector3 maxForces,
-		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,bool positionControlled);
+		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,
+		bool positionControlled);
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.
@@ -194,18 +193,6 @@ public:
 
 	Ogre::Vector3 getUpperLimits() {
 		return mJointPhysics->getJointMaxAngle();
-	}
-
-	const bool getJointPitchEnabled() const {
-		return mJointPhysics->isJointPitchEnabled();
-	}
-
-	const bool getJointYawEnabled() const {
-		return mJointPhysics->isJointYawEnabled();
-	}
-
-	const bool getJointRollEnabled() const {
-		return mJointPhysics->isJointRollEnabled();
 	}
 
 	const JointPhysics::JointType getType() const {

@@ -65,7 +65,6 @@ public:
 	SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		btRigidBody* const bodyB, const btTransform& tframeInA,
 		const btTransform& tframeInB, JointPhysics::JointType type,
-		bool jointPitchEnabled, bool jointYawEnabled, bool jointRollEnabled,
 		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits, int ownIndex);
 
