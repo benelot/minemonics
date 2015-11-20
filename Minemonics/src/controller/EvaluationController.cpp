@@ -59,12 +59,11 @@ void EvaluationController::scheduleEvaluations() {
 	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 		eit != mEvaluations.end();) {
 
-		// erase torn down evaluations
-		if ((*eit)->isTornDown()) {
+		if ((*eit)->isTornDown()) { /**!< erase torn down evaluations */
 
 			if ((*eit)->hasFailed()) {
 				mFails += (*eit)->hasFailed();
-				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Fails: " << mFails;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Fails: " << mFails;
 			}
 
 			mCurrentlyRunningEvaluationsQty--;

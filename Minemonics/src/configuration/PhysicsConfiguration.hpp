@@ -62,7 +62,7 @@ public:
 
 	static const bool BODY_SEGMENT_INTERPENETRATION_FLAG = false; /**!< Are the body boxes allowed to interpenetrate each other? */
 
-	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.01; /**!< A box of unit size in ogre has the size of 96.9 in bullet */
+	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.01; /**!< A box of unit size in ogre has the size of 100 in bullet */
 
 	static const double BULLET_DEACTIVATION_TIME = 5; /**!< The deactivation time of a bullet object */
 	static const double BULLET_LINEAR_SLEEPING_TIME = 1.6; /**!< The time to sleep with linear movement */
