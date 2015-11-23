@@ -196,6 +196,7 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	//	add pitch servo motor
 	SRBServoMotor* servoMotor = new SRBServoMotor(JointPhysics::RDOF_PITCH,
 		maxForces.getX(), lowerLimits.x(), upperLimits.x(), positionControlled);
+	servoMotor->initialize(NULL);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -203,6 +204,7 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	// add yaw servo motor
 	servoMotor = new SRBServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
 		lowerLimits.y(), upperLimits.y(), positionControlled);
+	servoMotor->initialize(NULL);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
@@ -210,24 +212,25 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	//add roll servo motor
 	servoMotor = new SRBServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
 		lowerLimits.z(), upperLimits.z(), positionControlled);
+	servoMotor->initialize(NULL);
 	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 }
 
-bool SRBJointBt::equals(const SRBJointBt& SRBJointBt) const {
+bool SRBJointBt::equals(const SRBJointBt& jointBt) const {
 
-	if (!JointPhysics::equals(SRBJointBt)) {
+	if (!JointPhysics::equals(jointBt)) {
 		return false;
 	}
 
 	/**Comparison of motors*/
-	if (mMotors.size() != SRBJointBt.mMotors.size()) {
+	if (mMotors.size() != jointBt.mMotors.size()) {
 		return false;
 	}
 	std::vector<Motor*>::const_iterator it = mMotors.begin();
-	std::vector<Motor*>::const_iterator it2 = SRBJointBt.mMotors.begin();
-	for (; it != mMotors.end(), it2 != SRBJointBt.mMotors.end(); it++, it2++) {
+	std::vector<Motor*>::const_iterator it2 = jointBt.mMotors.begin();
+	for (; it != mMotors.end(), it2 != jointBt.mMotors.end(); it++, it2++) {
 		if (!(*it)->equals(**(it2))) {
 			return false;
 		}
@@ -237,11 +240,11 @@ bool SRBJointBt::equals(const SRBJointBt& SRBJointBt) const {
 }
 
 void SRBJointBt::reset(const Ogre::Vector3 position) {
-//nothing to be reset
+	//nothing to be reset
 }
 
 void SRBJointBt::reposition(const Ogre::Vector3 position) {
-//nothing to be repositioned
+	//nothing to be repositioned
 }
 
 void SRBJointBt::setAngularDamping(double jointPitchDamping,
@@ -295,7 +298,8 @@ SRBJointBt* SRBJointBt::clone() {
 void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 
 	if (mJoint) {
-		//TODO: Revise the axis choice
+		// this is consistent with pitch = z, yaw = y, roll = x
+		// Check constructor if that is still the way it is defined
 		int col;
 		switch (jointAxisIndex) {
 		case 0:

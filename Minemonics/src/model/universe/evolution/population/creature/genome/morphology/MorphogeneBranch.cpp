@@ -25,7 +25,7 @@
 #endif
 
 MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
-	bool flipped, bool mirrored, Ogre::Vector3 pitchAxis,
+	bool flipped, bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 yawAxis,
 	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle,
 	Ogre::Vector3 anchorDirection) :
 	mBranchGeneType(-1), mFlipped(flipped), mJointAnchorX(anchorDirection.x), mJointAnchorY(
@@ -34,7 +34,8 @@ MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
 		jointMinAngle.y), mJointYawMaxAngle(jointMaxAngle.y), mJointRollMinAngle(
 		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(
 		mirrored), mJointType(jointType), mJointPitchAxisX(pitchAxis.x), mJointPitchAxisY(
-		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z) {
+		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z),mJointYawAxisX(yawAxis.x), mJointYawAxisY(
+			yawAxis.y), mJointYawAxisZ(yawAxis.z) {
 
 }
 
@@ -43,7 +44,8 @@ MorphogeneBranch::MorphogeneBranch() :
 		0), mJointPitchMinAngle(0), mJointPitchMaxAngle(0), mJointYawMinAngle(
 		0), mJointYawMaxAngle(0), mJointRollMinAngle(0), mJointRollMaxAngle(0), mMirrored(
 		false), mJointType(JointPhysics::HINGE_JOINT), mJointPitchAxisX(1), mJointPitchAxisY(
-		1), mJointPitchAxisZ(1) {
+		0), mJointPitchAxisZ(0),mJointYawAxisX(0), mJointYawAxisY(
+			1), mJointYawAxisZ(0) {
 
 }
 
@@ -77,6 +79,10 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 	mJointPitchAxisX = morphogeneBranch.mJointPitchAxisX;
 	mJointPitchAxisY = morphogeneBranch.mJointPitchAxisY;
 	mJointPitchAxisZ = morphogeneBranch.mJointPitchAxisZ;
+
+	mJointYawAxisX = morphogeneBranch.mJointYawAxisX;
+	mJointYawAxisY = morphogeneBranch.mJointYawAxisY;
+	mJointYawAxisZ = morphogeneBranch.mJointYawAxisZ;
 	mJointType = morphogeneBranch.mJointType;
 }
 
@@ -110,7 +116,8 @@ void MorphogeneBranch::initialize() {
 	mJointPitchAxisZ = pitchAxisVector.z;
 
 	Ogre::Vector3 randomAxisVector = Randomness::getSingleton()->nextVector();
-	Ogre::Vector3 yawAxisVector = pitchAxisVector.crossProduct(randomAxisVector);
+	Ogre::Vector3 yawAxisVector = pitchAxisVector.crossProduct(
+		randomAxisVector);
 	mJointYawAxisX = yawAxisVector.x;
 	mJointYawAxisY = yawAxisVector.y;
 	mJointYawAxisZ = yawAxisVector.z;

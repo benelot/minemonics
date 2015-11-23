@@ -83,16 +83,14 @@ void Embryogenesis::transcribeMorphogene(
 		totalSegmentCounter++; // increase total segment counter
 	}
 
-	Ogre::Vector3 jointPivotInW(0, 0, 0);
-
 	//PARENT
-//	Ogre::Vector3 jointPivotInParent(0, 0, 0); /**!< joint position in local reference frame of the parent */
-	btTransform parentLimbSurfaceAnchor; /**!< The position on the surface of the parent limb*/
+	btTransform parentLimbSurfaceAnchor; /**!< The position on the surface of the parent limb */
 	parentLimbSurfaceAnchor.setIdentity();
+
+	Ogre::Vector3 jointPivotInW(0, 0, 0); /**!< The joint pivot in world coordinates */
 
 	//CHILD
 	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
-//	Ogre::Vector3 jointPivotInChild(0, 0, 0); /**!< joint position in local reference frame of the child */
 	btTransform childLimbSurfaceAnchor; /**!< get the morphogene and start creating the limb and its joint to its parent */
 	childLimbSurfaceAnchor.setIdentity();
 
@@ -103,6 +101,15 @@ void Embryogenesis::transcribeMorphogene(
 			parentLimbSurfaceAnchor, childLimbSurfaceAnchor, childMorphogene,
 			jointPivotInW);
 	}
+
+	// get the child limb rotation
+	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
+		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
+		childMorphogene->getOrientationZ());
+
+	generator->setOrientation( // update the generator orientation using
+		generator->getOrientation()
+			* childLimbRotation); /**!< The child element rotation */
 
 	LimbModel* childLimb = phenomeModel->createLimb(generator, childMorphogene); // create new child limb
 

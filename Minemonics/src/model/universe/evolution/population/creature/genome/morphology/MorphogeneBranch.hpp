@@ -45,8 +45,9 @@ class access;
 class MorphogeneBranch: public GeneBranch {
 public:
 	MorphogeneBranch(JointPhysics::JointType jointType, bool flipped,
-		bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 jointMinAngle,
-		Ogre::Vector3 jointMaxAngle, Ogre::Vector3 anchorDirection);
+		bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 yawAxis,
+		Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle,
+		Ogre::Vector3 anchorDirection);
 	MorphogeneBranch();
 	MorphogeneBranch(const MorphogeneBranch& morphogeneBranch);
 

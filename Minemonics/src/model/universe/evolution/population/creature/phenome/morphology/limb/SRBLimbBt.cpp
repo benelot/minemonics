@@ -182,7 +182,7 @@ btTransform SRBLimbBt::getPreciseIntersection(const btVector3 origin,
 #endif
 
 	btVector3 hitPosition = origin;
-	btVector3 hitNormal = btVector3(1, 0, 0);
+	btVector3 hitNormal(1, 0, 0);
 
 	btCollisionWorld::ClosestRayResultCallback rayCallback(rayStart, rayEnd);
 

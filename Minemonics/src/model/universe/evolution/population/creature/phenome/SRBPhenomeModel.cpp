@@ -140,7 +140,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		PhenotypeGenerator* rootGenerator = new PhenotypeGenerator();
 		std::map<int, int> repList;
 		rootGenerator->initialize(repList, mCreatureModel->getInitialPosition(),
-			Ogre::Quaternion().IDENTITY, NULL, NULL, 1);
+			Ogre::Quaternion::IDENTITY, NULL, NULL, 1);
 		rootGenerator->setGene(gene);
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
@@ -192,10 +192,9 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 		parentLimb->getPosition()); // get the parent limb's center of mass position
 
 	Ogre::Vector3 parentAnchorDirInParent = Ogre::Vector3(
-		// get parent joint's anchor direction
 		parentMorphogeneBranch->getJointAnchorX(),
 		parentMorphogeneBranch->getJointAnchorY(),
-		parentMorphogeneBranch->getJointAnchorZ());
+		parentMorphogeneBranch->getJointAnchorZ()); // get parent joint's anchor direction
 
 	//if the generator is the mirrored version of another generator
 	//mirrored is: -O  -> O- | \O -> O\   mirroring = sign inversion
@@ -230,11 +229,6 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 		OgreBulletUtils::convert(parentJointAnchor.getOrigin()));
 
 	// PARENT JOINT POSITION
-	generator->setOrientation( // update the generator orientation using
-		generator->getOrientation() /**!< The current orientation */
-			* OgreBulletUtils::convert(
-				parentJointAnchor.getRotation()) /**!< The parent surface direction */);
-
 	Ogre::Vector3 parentJointPivotInParent = parentAnchorInParent; //get local joint rotation point in reference frame parent
 
 	// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
@@ -244,16 +238,6 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 		// get anchor direction of limb child in the local reference frame of child
 		childMorphogene->getJointAnchorX(), childMorphogene->getJointAnchorY(),
 		childMorphogene->getJointAnchorZ());
-
-	// get the child limb rotation
-	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
-		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
-		childMorphogene->getOrientationZ());
-
-	generator->setOrientation( // update the generator orientation using
-		generator->getOrientation()
-			* OgreBulletUtils::convert(childJointAnchor.getRotation()) /**!< The child joint surface direction */
-			* childLimbRotation); /**!< The child element rotation */
 
 	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 	childJointAnchor = getOwnIntersection(childMorphogene, generator,
@@ -266,41 +250,39 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Vector3 childJointPivotInChild = childAnchorInChild; //get local joint rotation point in reference frame child
 
 	// global center of mass of child limb
-	Ogre::Vector3 childLimbCOM(
-		parentLimbCOM + childAnchorInParent - childAnchorInChild);
+	Ogre::Vector3 childLimbCOM(jointPivotInW - childAnchorInChild);
 
 #ifndef EXCLUDE_FROM_TEST
 	// draw line from limb A to surface anchor point of A (GREEN LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(parentLimbCOM,
-		parentLimbCOM + parentAnchorInParent, Ogre::ColourValue(0, 1, 0));
+		jointPivotInW, Ogre::ColourValue(0, 1, 0));
 
 	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
 		parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
 
 	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		parentLimbCOM + parentAnchorInParent, 0.1, Ogre::ColourValue(0, 1, 0));
+		jointPivotInW, 0.1, Ogre::ColourValue(0, 1, 0));
 
 	// draw line from anchor point of A to joint rotation point (BLUE LINE)
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-		parentLimbCOM + parentAnchorInParent,
-		parentLimbCOM + parentJointPivotInParent, Ogre::ColourValue(0, 0, 1));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawLine(
+//		parentLimbCOM + parentAnchorInParent,
+//		parentLimbCOM + parentJointPivotInParent, Ogre::ColourValue(0, 0, 1));
 
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		parentLimbCOM + parentAnchorInParent, 0.1, Ogre::ColourValue(0, 0, 1));
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		parentLimbCOM + parentJointPivotInParent, 0.1,
-		Ogre::ColourValue(0, 0, 1));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//		parentLimbCOM + parentAnchorInParent, 0.1, Ogre::ColourValue(0, 0, 1));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//		parentLimbCOM + parentJointPivotInParent, 0.1,
+//		Ogre::ColourValue(0, 0, 1));
 
-	// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-		parentLimbCOM + parentJointPivotInParent,
+//	// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
+	SimulationManager::getSingleton()->getDebugDrawer().drawLine(jointPivotInW,
 		parentLimbCOM + childAnchorInParent, Ogre::ColourValue(0, 0, 1));
 
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		parentLimbCOM + parentJointPivotInParent, 0.1,
-		Ogre::ColourValue(0, 0, 1));
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		parentLimbCOM + childAnchorInParent, 0.1, Ogre::ColourValue(0, 0, 1));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//		parentLimbCOM + parentJointPivotInParent, 0.1,
+//		Ogre::ColourValue(0, 0, 1));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//		parentLimbCOM + childAnchorInParent, 0.1, Ogre::ColourValue(0, 0, 1));
 
 	// draw line from limb B to anchor point of B (GREEN LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(childLimbCOM,
@@ -308,8 +290,8 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 
 	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(childLimbCOM,
 		0.1, Ogre::ColourValue(0, 1, 0));
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		childLimbCOM + childAnchorInChild, 0.1, Ogre::ColourValue(0, 1, 0));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//		childLimbCOM + childAnchorInChild, 0.1, Ogre::ColourValue(0, 1, 0));
 
 	// draw line from limb A to limb B (WHITE LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(childLimbCOM,
@@ -386,26 +368,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	// get parent limb
 	SRBLimbModel* parentLimb =
 		(SRBLimbModel*) generator->getParentComponentModel();
-
-//	// transformation from the parent limb and child limb center of mass to the joint in the respective reference frames
-//	btTransform localParentJointTransform, localChildJointTransform;
-//	localParentJointTransform.setIdentity();
-//	localChildJointTransform.setIdentity();
-//
-//	// define the position and direction of the joint in the reference frame of the parent
-//	localParentJointTransform.setOrigin(
-//		OgreBulletUtils::convert(localParentJointInRefParent));
-//	//TODO: Fix rotation
-//	localParentJointTransform.getBasis().setRotation(
-//		parentHitTransform.getRotation());
-//
-//	// define the position and direction of the joint in the reference frame of child
-//	localChildJointTransform.setOrigin(
-//		OgreBulletUtils::convert(-localChildJointInRefChild));
-//	//TODO: Fix rotation
-//	//set the direction of the joint normals
-//	localChildJointTransform.getBasis().setRotation(
-//		childHitTransform.getRotation());
 
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	SRBJointModel* joint = new SRBJointModel(getCreatureModel()->getWorld(),
@@ -509,10 +471,15 @@ btTransform SRBPhenomeModel::getParentIntersectionInW(LimbPhysics* parentLimb,
 btTransform SRBPhenomeModel::getOwnIntersection(Morphogene* childMorphogene,
 	PhenotypeGenerator* generator,
 	Ogre::Vector3 localChildAnchorDirInRefChild) {
-	SRBLimbBt* childLimbBt = new SRBLimbBt(getCreatureModel()->getWorld(),
+
+	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
+		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
+		childMorphogene->getOrientationZ());
+
+	FSLimbBt* childLimbBt = new FSLimbBt(getCreatureModel()->getWorld(),
 	NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
-		generator->getOrientation(), Ogre::Vector3(),
-		generator->getOrientation(),
+		generator->getOrientation()*childLimbRotation, Ogre::Vector3(),
+		Ogre::Quaternion(),
 		/*dimensions*/
 		Ogre::Vector3(
 			generator->getCurrentShrinkageFactor() * childMorphogene->getX(),

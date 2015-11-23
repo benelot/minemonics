@@ -36,7 +36,8 @@ SRBJointModel::SRBJointModel(const SRBJointModel& SRBJointModel) :
 
 SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 	btRigidBody* const limbA, btRigidBody* const limbB,
-	const Ogre::Vector3& pivotInW, const std::vector<LimbModel*>::size_type indexA,
+	const Ogre::Vector3& pivotInW,
+	const std::vector<LimbModel*>::size_type indexA,
 	const std::vector<LimbModel*>::size_type indexB,
 	const std::vector<LimbModel*>::size_type ownIndex,
 	JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,

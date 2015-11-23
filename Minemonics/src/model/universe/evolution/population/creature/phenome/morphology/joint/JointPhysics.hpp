@@ -63,7 +63,7 @@ public:
 	};
 
 	enum RotationalDegreeOfFreedom {
-		RDOF_ROLL, RDOF_PITCH, RDOF_YAW
+		RDOF_ROLL = 0, RDOF_PITCH = 1, RDOF_YAW = 2
 	};
 
 	enum JointType {
