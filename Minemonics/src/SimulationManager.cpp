@@ -154,6 +154,10 @@ void SimulationManager::createScene(void) {
 	Logger::init("logs/minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 
+	// drop introducing application line
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\n"<< "########################################################";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< ApplicationConfiguration::APPLICATION_TITLE << " #####\n";
+
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget( /**!< Set render target with the current application name */
 	ApplicationConfiguration::APPLICATION_TITLE);
 	mViewController.initialize(renderTarget); /**!< initialize GUI and views */

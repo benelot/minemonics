@@ -160,6 +160,8 @@ void BaseApplication::go(void) {
 bool BaseApplication::setup(void) {
 	mRoot = new Ogre::Root(mPluginsCfg);
 
+	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
+
 	setupResources(); /**!< Setup the ressources the application uses */
 
 	bool carryOn = configure();
