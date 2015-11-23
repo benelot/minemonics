@@ -51,9 +51,9 @@ public:
 	FSJointBt();
 	FSJointBt(const FSJointBt& jointBt);
 	FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB, JointPhysics::JointType type,
-		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+		btRigidBody* const bodyB, const btVector3& pivotInW,
+		JointPhysics::JointType type, btVector3 jointPitchAxis,
+		btVector3 jointYawAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits, int ownIndex);
 
 	/**

@@ -1,4 +1,4 @@
-//# corresponding header
+//# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 
 #include <LinearMath/btTransform.h>
@@ -41,26 +41,22 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 
 FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	btRigidBody* const limbA, btRigidBody* const limbB,
-	const btTransform localA, const btTransform localB,
+	const Ogre::Vector3 pivotInW,
 	const std::vector<FSLimbModel*>::size_type indexA,
 	const std::vector<FSLimbModel*>::size_type indexB,
 	const std::vector<FSJointModel*>::size_type ownIndex,
 	JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,
-	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle) {
+	Ogre::Vector3 jointYawAxis, Ogre::Vector3 jointMinAngle,
+	Ogre::Vector3 jointMaxAngle) {
 	ComponentModel::initialize(ComponentModel::JointComponent, ownIndex);
 	mParentIndex = indexA;
 	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
-	mLocalA = localA;
-	mLocalB = localB;
-	mLocalAPosition = OgreBulletUtils::convert(localA.getOrigin());
-	mLocalBPosition = OgreBulletUtils::convert(localB.getOrigin());
 
-	mLocalAOrientation = OgreBulletUtils::convert(localB.getRotation());
-	mLocalBOrientation = OgreBulletUtils::convert(localB.getRotation());
-
-	mJointPhysics = new FSJointBt(world, limbA, limbB, localA, localB, type,
+	mJointPhysics = new FSJointBt(world, limbA, limbB,
+		OgreBulletUtils::convert(pivotInW), type,
 		OgreBulletUtils::convert(jointPitchAxis),
+		OgreBulletUtils::convert(jointYawAxis),
 		OgreBulletUtils::convert(jointMinAngle),
 		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
 }
@@ -69,10 +65,6 @@ FSJointModel::~FSJointModel() {
 }
 
 void FSJointModel::initialize() {
-	mLocalA.setOrigin(OgreBulletUtils::convert(mLocalAPosition));
-	mLocalA.setRotation(OgreBulletUtils::convert(mLocalAOrientation));
-	mLocalB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
-	mLocalB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
 
 	mJointPhysics->initialize();
 
@@ -224,10 +216,11 @@ FSJointModel* FSJointModel::clone() {
 }
 
 void FSJointModel::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,bool positionControlled) {
+	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,
+	bool positionControlled) {
 	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
 		OgreBulletUtils::convert(lowerLimits),
-		OgreBulletUtils::convert(upperLimits),positionControlled);
+		OgreBulletUtils::convert(upperLimits), positionControlled);
 }
 
 void FSJointModel::enableAngularMotor(const bool pitchEnable,

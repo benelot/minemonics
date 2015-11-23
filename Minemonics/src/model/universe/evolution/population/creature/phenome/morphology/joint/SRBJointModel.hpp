@@ -53,19 +53,20 @@ public:
 	SRBJointModel();
 	SRBJointModel(const SRBJointModel& SRBJointModel);
 	SRBJointModel(const SRBJointModel* SRBJointModel);
-	SRBJointModel(btDynamicsWorld* const world, btRigidBody* const limbA,
-		btRigidBody* const limbB, const btTransform localA,
-		const btTransform localB,
-		const std::vector<LimbModel*>::size_type indexA,
+	SRBJointModel(btDynamicsWorld* const world,
+		btRigidBody* const limbA, btRigidBody* const limbB,
+		const Ogre::Vector3& pivotInW, const std::vector<LimbModel*>::size_type indexA,
 		const std::vector<LimbModel*>::size_type indexB,
-		const std::vector<SRBJointModel*>::size_type ownIndex,
-		JointPhysics::JointType type,
-		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointMinAngle,
+		const std::vector<LimbModel*>::size_type ownIndex,
+		JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,
+		Ogre::Vector3 jointYawAxis, Ogre::Vector3 jointMinAngle,
 		Ogre::Vector3 jointMaxAngle);
 
 	virtual ~SRBJointModel();
 
 	virtual void initialize();
+
+	void addSensors();
 
 	/**
 	 * Update the joint model.
@@ -163,22 +164,6 @@ public:
 
 	const std::vector<LimbModel*>::size_type getChildIndex() const {
 		return mChildIndex;
-	}
-
-	const btTransform& getParentComToPivot() const {
-		return mLocalA;
-	}
-
-	void setLocalA(const btTransform& localA) {
-		mLocalA = localA;
-	}
-
-	const btTransform& getPivotToChildCom() const {
-		return mLocalB;
-	}
-
-	void setLocalB(const btTransform& localB) {
-		mLocalB = localB;
 	}
 
 	Ogre::Vector3 getLowerLimits() {

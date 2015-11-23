@@ -22,6 +22,7 @@ class access;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
+#include <LinearMath/btTransform.h>
 
 //## view headers
 //# custom headers
@@ -138,14 +139,14 @@ public:
 		const btVector3 lowerLimits, const btVector3 upperLimits,
 		bool positionControlled) = 0;
 
-	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-		const Ogre::Vector3 angularUpperLimit) {
-		mJointMinAngle.x = angularLowerLimit[RDOF_PITCH];
-		mJointMaxAngle.x = angularUpperLimit[RDOF_PITCH];
-		mJointMinAngle.z = angularLowerLimit[RDOF_ROLL];
-		mJointMaxAngle.z = angularUpperLimit[RDOF_ROLL];
-		mJointMinAngle.y = angularLowerLimit[RDOF_YAW];
-		mJointMaxAngle.y = angularUpperLimit[RDOF_YAW];
+	void setAngularLimits(const Ogre::Vector3 angularLowerLimits,
+		const Ogre::Vector3 angularUpperLimits) {
+		mJointLowerLimits.x = angularLowerLimits[RDOF_PITCH];
+		mJointUpperLimits.x = angularUpperLimits[RDOF_PITCH];
+		mJointLowerLimits.z = angularLowerLimits[RDOF_ROLL];
+		mJointUpperLimits.z = angularUpperLimits[RDOF_ROLL];
+		mJointLowerLimits.y = angularLowerLimits[RDOF_YAW];
+		mJointUpperLimits.y = angularUpperLimits[RDOF_YAW];
 	}
 
 	virtual void setRotationalLimitMotorEnabled(
@@ -164,11 +165,19 @@ public:
 	}
 
 	const Ogre::Vector3& getJointMaxAngle() const {
-		return mJointMaxAngle;
+		return mJointUpperLimits;
 	}
 
 	const Ogre::Vector3& getJointMinAngle() const {
-		return mJointMinAngle;
+		return mJointLowerLimits;
+	}
+
+	const btTransform& getParentComToPivot() const {
+		return mFrameInA;
+	}
+
+	const btTransform& getPivotToChildCom() const {
+		return mFrameInB;
 	}
 
 	// Serialization ##########################
@@ -184,13 +193,13 @@ public:
 		const JointPhysics &jointPhysics) {
 		os << "JointPhysics: inWorld=" << jointPhysics.mInWorld /**!< If the joint is in the world*/
 		<< "JointPitchLimit=[" /**!< Joint Pitch limit */
-		<< jointPhysics.mJointMinAngle.x << "," << jointPhysics.mJointMaxAngle.x
+		<< jointPhysics.mJointLowerLimits.x << "," << jointPhysics.mJointUpperLimits.x
 
 		<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
-		<< jointPhysics.mJointMinAngle.y << "," << jointPhysics.mJointMaxAngle.y
+		<< jointPhysics.mJointLowerLimits.y << "," << jointPhysics.mJointUpperLimits.y
 
 		<< "]/JointRollLimit=[" /**!< Joint Roll limit */
-		<< jointPhysics.mJointMinAngle.z << "," << jointPhysics.mJointMaxAngle.z
+		<< jointPhysics.mJointLowerLimits.z << "," << jointPhysics.mJointUpperLimits.z
 			<< "]";
 		return os;
 	}
@@ -204,30 +213,41 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of joint */
 
+		& BOOST_SERIALIZATION_NVP(mLocalAPosition.x)
+		& BOOST_SERIALIZATION_NVP(mLocalAPosition.y)
+		& BOOST_SERIALIZATION_NVP(mLocalAPosition.z)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.w)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.x)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.y)
+		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.z)
+		& BOOST_SERIALIZATION_NVP(mLocalBPosition.x)
+		& BOOST_SERIALIZATION_NVP(mLocalBPosition.y)
+		& BOOST_SERIALIZATION_NVP(mLocalBPosition.z)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.w)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.x)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.y)
+		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.z)
+
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.x) /**!< The max forces of the joint axes */
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.z)
 
-		& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.x) /**!< The max speeds of the joint axes */
-		& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.y)
-		& BOOST_SERIALIZATION_NVP(mJointMaxSpeeds.z)
-
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
 
-		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
-		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
-		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
+		& BOOST_SERIALIZATION_NVP(mJointYawAxis.x) /**!< The direction of the joint yaw axis */
+		& BOOST_SERIALIZATION_NVP(mJointYawAxis.y)
+		& BOOST_SERIALIZATION_NVP(mJointYawAxis.z)
 
-		& BOOST_SERIALIZATION_NVP(mJointMinAngle.x) /**!< Joint Pitch limit */
-		& BOOST_SERIALIZATION_NVP(mJointMaxAngle.x)
+		& BOOST_SERIALIZATION_NVP(mJointLowerLimits.x) /**!< Joint Pitch limit */
+		& BOOST_SERIALIZATION_NVP(mJointUpperLimits.x)
 
-		& BOOST_SERIALIZATION_NVP(mJointMinAngle.y) /**!< Joint Yaw limit */
-		& BOOST_SERIALIZATION_NVP(mJointMaxAngle.y)
+		& BOOST_SERIALIZATION_NVP(mJointLowerLimits.y) /**!< Joint Yaw limit */
+		& BOOST_SERIALIZATION_NVP(mJointUpperLimits.y)
 
-		& BOOST_SERIALIZATION_NVP(mJointMinAngle.z) /**!< Joint Roll limit */
-		& BOOST_SERIALIZATION_NVP(mJointMaxAngle.z)
+		& BOOST_SERIALIZATION_NVP(mJointLowerLimits.z) /**!< Joint Roll limit */
+		& BOOST_SERIALIZATION_NVP(mJointUpperLimits.z)
 		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
 	}
 protected:
@@ -236,11 +256,18 @@ protected:
 
 	JointType mType; /**!< The type of joint */
 
+	btTransform mFrameInA, mFrameInB;
+
+	Ogre::Vector3 mLocalAPosition;
+	Ogre::Quaternion mLocalAOrientation;
+	Ogre::Vector3 mLocalBPosition;
+	Ogre::Quaternion mLocalBOrientation;
+
 	Ogre::Vector3 mJointPitchAxis;/**!< The direction of the joint pitch axis*/
-	Ogre::Vector3 mJointMaxAngle; /**!< Joint limits for each degree of freedom */
-	Ogre::Vector3 mJointMinAngle;
+	Ogre::Vector3 mJointYawAxis;/**!< The direction of the joint pitch axis*/
+	Ogre::Vector3 mJointUpperLimits; /**!< Joint limits for each degree of freedom */
+	Ogre::Vector3 mJointLowerLimits;
 	Ogre::Vector3 mJointMaxForces;
-	Ogre::Vector3 mJointMaxSpeeds;
 
 	// should not be serialized
 	bool mInWorld; /**!< If the joint physics is in the world or not. */

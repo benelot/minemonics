@@ -23,12 +23,12 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		jointModel = new FSJointModel(NULL, NULL, NULL, btTransform(),
-			btTransform(), randomness->nextUnifPosInt(0, 10),
+		jointModel = new FSJointModel(NULL, NULL, NULL,
+			randomness->nextVector(), randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT,
 			randomness->nextVector(), randomness->nextVector(),
-			randomness->nextVector());
+			randomness->nextVector(), randomness->nextVector());
 		jointModel->initialize();
 	}
 
@@ -48,12 +48,12 @@ protected:
 	virtual void SetUp() {
 		randomness = new Randomness();
 		// Set up an object of the class you want to test
-		jointModel = new FSJointModel(NULL, NULL, NULL, btTransform(),
-			btTransform(), randomness->nextUnifPosInt(0, 10),
+		jointModel = new FSJointModel(NULL, NULL, NULL,
+			randomness->nextVector(), randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10),
 			randomness->nextUnifPosInt(0, 10), JointPhysics::HINGE_JOINT,
 			randomness->nextVector(), randomness->nextVector(),
-			randomness->nextVector());
+			randomness->nextVector(), randomness->nextVector());
 		jointModel->initialize();
 
 		jointModel2 = new FSJointModel();

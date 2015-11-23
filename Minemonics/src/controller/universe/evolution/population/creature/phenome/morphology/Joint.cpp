@@ -35,26 +35,30 @@
 BoostLogger Joint::mBoostLogger; /*<! initialize the boost logger*/
 Joint::_Init Joint::_initializer;
 Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
-	const btTransform localA, const btTransform localB, const int indexA,
-	const int indexB, const int ownIndex, JointPhysics::JointType jointType,
-	Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
-	Ogre::Vector3 jointUpperLimits) {
+	const Ogre::Vector3 pivotInW, const int indexA, const int indexB,
+	const int ownIndex, JointPhysics::JointType jointType,
+	Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointYawAxis,
+	Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits) {
 	// initialize the model of the joint
 	switch (creature->getPhysicsModelType()) {
 	case PhysicsController::RigidbodyModel:
-		mJointModel = new SRBJointModel(
-			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
-			((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
-			indexA, indexB, ownIndex, jointType, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+		mJointModel =
+			new SRBJointModel(
+				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+				((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
+				((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(),
+				pivotInW, indexA, indexB, ownIndex, jointType, jointPitchAxis,
+				jointYawAxis, jointLowerLimits, jointUpperLimits);
 
 		break;
 	case PhysicsController::FeatherstoneModel:
-		mJointModel = new FSJointModel(
-			creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-			((FSLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
-			((FSLimbBt*) limbB->getLimbPhysics())->getRigidBody(), localA, localB,
-			indexA, indexB, ownIndex, jointType, jointPitchAxis, jointLowerLimits, jointUpperLimits);
+		mJointModel =
+			new FSJointModel(
+				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
+				((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
+				((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(),
+				pivotInW, indexA, indexB, ownIndex, jointType, jointPitchAxis,
+				jointYawAxis, jointLowerLimits, jointUpperLimits);
 		break;
 	default:
 		break;
@@ -62,7 +66,7 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 	mJointModel->initialize();
 
 	// Define the new component as a limb
-	Component::initialize (mJointModel);
+	Component::initialize(mJointModel);
 
 	// initialize the graphics part of the joint
 	mJointGraphics = new JointO3D(mJointModel);
@@ -101,8 +105,10 @@ void Joint::initialize(Creature* const creature, Limb* const limbA,
 }
 
 void Joint::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits, bool positionControlled) {
-	mJointModel->generateMotors(maxForces, lowerLimits, upperLimits,positionControlled);
+	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,
+	bool positionControlled) {
+	mJointModel->generateMotors(maxForces, lowerLimits, upperLimits,
+		positionControlled);
 }
 
 void Joint::update(double timeSinceLastTick) {

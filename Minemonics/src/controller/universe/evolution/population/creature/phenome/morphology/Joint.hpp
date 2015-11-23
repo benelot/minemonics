@@ -45,10 +45,10 @@ class JointModel;
 class Joint: public Component {
 public:
 	Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
-		const btTransform localA, const btTransform localB, const int indexA,
-		const int indexB, const int ownIndex, JointPhysics::JointType jointType,
-		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointLowerLimits,
-		Ogre::Vector3 jointUpperLimits);
+		const Ogre::Vector3 pivotInW, const int indexA, const int indexB,
+		const int ownIndex, JointPhysics::JointType jointType,
+		Ogre::Vector3 jointPitchAxis, Ogre::Vector3 jointYawAxis,
+		Ogre::Vector3 jointLowerLimits, Ogre::Vector3 jointUpperLimits);
 	Joint(const Joint& joint);
 	Joint(const JointModel& jointModel);
 	Joint(JointModel* const jointModel);

@@ -83,33 +83,32 @@ void Embryogenesis::transcribeMorphogene(
 		totalSegmentCounter++; // increase total segment counter
 	}
 
+	Ogre::Vector3 jointPivotInW(0, 0, 0);
+
 	//PARENT
-	Ogre::Vector3 jointPivotInParent(0, 0, 0); /**!< joint position in local reference frame of the parent */
+//	Ogre::Vector3 jointPivotInParent(0, 0, 0); /**!< joint position in local reference frame of the parent */
 	btTransform parentLimbSurfaceAnchor; /**!< The position on the surface of the parent limb*/
 	parentLimbSurfaceAnchor.setIdentity();
 
 	//CHILD
 	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
+//	Ogre::Vector3 jointPivotInChild(0, 0, 0); /**!< joint position in local reference frame of the child */
 	btTransform childLimbSurfaceAnchor; /**!< get the morphogene and start creating the limb and its joint to its parent */
 	childLimbSurfaceAnchor.setIdentity();
-
-	Ogre::Vector3 jointPivotInChild(0, 0, 0); /**!< joint position in local reference frame of the child */
 
 	// APPEND TO PARENT?
 	if (generator->getParentComponentModel() != NULL) { // if there exists a parent component
 		// then we calculate the position of the new limb according to the parent component
 		phenomeModel->calculateChildPositionRelativeToParent(generator,
-			parentLimbSurfaceAnchor, childLimbSurfaceAnchor,
-			childMorphogene, jointPivotInParent,
-			jointPivotInChild);
+			parentLimbSurfaceAnchor, childLimbSurfaceAnchor, childMorphogene,
+			jointPivotInW);
 	}
 
 	LimbModel* childLimb = phenomeModel->createLimb(generator, childMorphogene); // create new child limb
 
 	if (generator->getParentComponentModel() != NULL) { // if there exists a parent component
 		// we connect it to the child limb with a joint
-		phenomeModel->appendToParentLimb(childLimb, generator,
-			jointPivotInParent, jointPivotInChild,
+		phenomeModel->appendToParentLimb(childLimb, generator, jointPivotInW,
 			parentLimbSurfaceAnchor, childLimbSurfaceAnchor);
 	}
 

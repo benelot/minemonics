@@ -2,6 +2,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <BulletDynamics/Featherstone/btMultiBody.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 //## view headers
 //# custom headers
 //## base headers
@@ -20,20 +21,47 @@ FSJointBt::FSJointBt() :
 }
 
 FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-	btRigidBody* const bodyB, const btTransform& tframeInA,
-	const btTransform& tframeInB, JointPhysics::JointType type,
-	btVector3 jointPitchAxis, btVector3 jointLowerLimits,
+	btRigidBody* const bodyB, const btVector3& pivotInW,
+	JointPhysics::JointType type, btVector3 jointPitchAxis,
+	btVector3 jointYawAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits, int ownIndex) :
 	mMultiBody(NULL) {
 	mWorld = world;
 	mType = type;
 
+	// build frame basis
+	// 6DOF constraint uses Euler angles and to define limits
+	// it is assumed that rotational order is :
+	// Z - first, allowed limits are (-PI,PI);
+	// new position of Y - second (allowed limits are (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	// used to prevent constraint from instability on poles;
+	// new position of X, allowed limits are (-PI,PI);
+	// So to simulate ODE Universal joint we should use parent axis as Z, child axis as Y and limit all other DOFs
+	// Build the frame in world coordinate system first
+	btVector3 zAxis = jointPitchAxis.normalize();
+	btVector3 yAxis = jointYawAxis.normalize();
+	btVector3 xAxis = yAxis.cross(zAxis); // we want right coordinate system
+	btTransform frameInW;
+	frameInW.setIdentity();
+	frameInW.getBasis().setValue(xAxis[0], yAxis[0], zAxis[0], xAxis[1],
+		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
+	frameInW.setOrigin(pivotInW);
+	// now get constraint frame in local coordinate systems
+	mFrameInA = bodyA->getCenterOfMassTransform().inverse() * frameInW;
+	mFrameInB = bodyB->getCenterOfMassTransform().inverse() * frameInW;
+
+	mLocalAPosition = OgreBulletUtils::convert(mFrameInA.getOrigin());
+	mLocalBPosition = OgreBulletUtils::convert(mFrameInB.getOrigin());
+
+	mLocalAOrientation = OgreBulletUtils::convert(mFrameInA.getRotation());
+	mLocalBOrientation = OgreBulletUtils::convert(mFrameInB.getRotation());
+
+	mType = type;
+
 	mJointPitchAxis = OgreBulletUtils::convert(jointPitchAxis);
-	mJointMinAngle = OgreBulletUtils::convert(jointLowerLimits);
-	mJointMaxAngle = OgreBulletUtils::convert(jointUpperLimits);
-
-	mMotors.clear();
-
+	mJointYawAxis = OgreBulletUtils::convert(jointYawAxis);
+	mJointLowerLimits = OgreBulletUtils::convert(jointLowerLimits);
+	mJointUpperLimits = OgreBulletUtils::convert(jointUpperLimits);
 	mJointIndex = ownIndex;
 }
 
@@ -49,6 +77,10 @@ FSJointBt::FSJointBt(const FSJointBt& jointBt) {
 }
 
 void FSJointBt::initialize() {
+	mFrameInA.setOrigin(OgreBulletUtils::convert(mLocalAPosition));
+	mFrameInA.setRotation(OgreBulletUtils::convert(mLocalAOrientation));
+	mFrameInB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
+	mFrameInB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
 }
 
 FSJointBt::~FSJointBt() {

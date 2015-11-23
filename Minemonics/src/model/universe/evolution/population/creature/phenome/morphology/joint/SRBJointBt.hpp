@@ -18,7 +18,11 @@ class Motor;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreVector3.h>
+#include <BulletDynamics/ConstraintSolver/btHingeConstraint.h>
 #include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
+#include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
 
 //## view headers
 //# custom headers
@@ -35,23 +39,36 @@ class Motor;
 //## utils headers
 
 //comment this out to compare with original spring constraint
+#define HINGECONSTRAINT 0
+#define GENERIC6DOFCONSTRAINT 1
+#define CONETWISTCONSTRAINT 2
+#define POINT2POINTCONSTRAINT 3
+#define GENERIC6DOFSPRINGCONSTRAINT 4
+#define GENERIC6DOFSPRING2CONSTRAINT 5
+/** bullet physics hinge constraint - A 1Dof angular joint with with limits */
+#define CONSTRAINT_INDEX HINGECONSTRAINT
+#define CONSTRAINT_TYPE btHingeConstraint
 
 /** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
+//#define CONSTRAINT_INDEX CONETWISTCONSTRAINT
 //#define CONSTRAINT_TYPE btConeTwistConstraint
-//#define EXTRAPARAMS
+
 /** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
+//#define CONSTRAINT_INDEX POINT2POINTCONSTRAINT
 //#define CONSTRAINT_TYPE btPoint2PointConstraint
-//#define EXTRAPARAMS
+
 /** bullet physics 6 degrees of freedom constraint - A 6 Dof joint with generic limits*/
-#define CONSTRAINT_TYPE btGeneric6DofConstraint
-#define EXTRAPARAMS ,true
+//#define CONSTRAINT_INDEX GENERIC6DOFCONSTRAINT
+//#define CONSTRAINT_TYPE btGeneric6DofConstraint
 
 /** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
+//#define CONSTRAINT_INDEX GENERIC6DOFSPRING2CONSTRAINT
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
-//#define EXTRAPARAMS
+
 /** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
+//#define CONSTRAINT_INDEX GENERIC6DOFSPRINGCONSTRAINT
 //#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-//#define EXTRAPARAMS ,true
+
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
  * @details		Details
@@ -63,10 +80,9 @@ public:
 	SRBJointBt();
 	SRBJointBt(const SRBJointBt& SRBJointBt);
 	SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btTransform& tframeInA,
-		const btTransform& tframeInB, JointPhysics::JointType type,
-		btVector3 jointPitchAxis, btVector3 jointLowerLimits,
-		btVector3 jointUpperLimits, int ownIndex);
+		btRigidBody* const bodyB, const btVector3& pivotInW, JointPhysics::JointType type,
+		btVector3 jointPitchAxis, btVector3 jointYawAxis,
+		btVector3 jointLowerLimits, btVector3 jointUpperLimits, int ownIndex);
 
 	virtual ~SRBJointBt();
 
@@ -237,10 +253,6 @@ public:
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics); /**!< Serialize the base object */
 	}
 
-	void setMotorTarget(const btQuaternion motorTarget) {
-		mMotorTarget = motorTarget;
-	}
-
 	void setBodyA(btRigidBody* bodyA) {
 		mBodyA = bodyA;
 	}
@@ -273,12 +285,8 @@ private:
 	 */
 	btDynamicsWorld* mWorld;
 
-	btQuaternion mMotorTarget;
-
 	btRigidBody* mBodyA;
 	btRigidBody* mBodyB;
-	btTransform mFrameInA;
-	btTransform mFrameInB;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_SRBJOINTBT_HPP_ */

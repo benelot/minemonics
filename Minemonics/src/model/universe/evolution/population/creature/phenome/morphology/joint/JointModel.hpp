@@ -168,19 +168,11 @@ public:
 	}
 
 	const btTransform& getParentComToPivot() const {
-		return mLocalA;
-	}
-
-	void setLocalA(const btTransform& localA) {
-		mLocalA = localA;
+		return mJointPhysics->getParentComToPivot();
 	}
 
 	const btTransform& getPivotToChildCom() const {
-		return mLocalB;
-	}
-
-	void setLocalB(const btTransform& localB) {
-		mLocalB = localB;
+		return mJointPhysics->getPivotToChildCom();
 	}
 
 	Ogre::Vector3 getLowerLimits() {
@@ -257,20 +249,6 @@ public:
 		ar.register_type(static_cast<FSJointBt*>(NULL));
 		ar.register_type(static_cast<SRBJointBt*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ComponentModel) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mLocalAPosition.x)
-		& BOOST_SERIALIZATION_NVP(mLocalAPosition.y)
-		& BOOST_SERIALIZATION_NVP(mLocalAPosition.z)
-		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.w)
-		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.x)
-		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.y)
-		& BOOST_SERIALIZATION_NVP(mLocalAOrientation.z)
-		& BOOST_SERIALIZATION_NVP(mLocalBPosition.x)
-		& BOOST_SERIALIZATION_NVP(mLocalBPosition.y)
-		& BOOST_SERIALIZATION_NVP(mLocalBPosition.z)
-		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.w)
-		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.x)
-		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.y)
-		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.z)
 		& BOOST_SERIALIZATION_NVP(mJointPhysics) /**!< The physics component of the joint model*/
 		& BOOST_SERIALIZATION_NVP(mOwnIndex) /**!< The joint's own index */
 		& BOOST_SERIALIZATION_NVP(mParentIndex) /**!< The joint's parent limb index */
@@ -287,13 +265,6 @@ protected:
 	 * The indices of limbA and limbB.
 	 */
 	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex;
-
-	btTransform mLocalA, mLocalB;
-
-	Ogre::Vector3 mLocalAPosition;
-	Ogre::Quaternion mLocalAOrientation;
-	Ogre::Vector3 mLocalBPosition;
-	Ogre::Quaternion mLocalBOrientation;
 
 	/**
 	 * The joint's own index.

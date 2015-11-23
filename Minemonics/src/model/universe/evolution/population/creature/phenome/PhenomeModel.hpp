@@ -68,19 +68,17 @@ public:
 	virtual void calculateChildPositionRelativeToParent(
 		PhenotypeGenerator* generator, btTransform& parentJointAnchor,
 		btTransform& childJointAnchor, Morphogene* childMorphogene,
-		Ogre::Vector3& jointPivotInParent,
-		Ogre::Vector3& jointPivotInChild) = 0;
+		Ogre::Vector3& jointPivotInW) = 0;
 
 	virtual LimbModel* createLimb(PhenotypeGenerator* generator,
 		Morphogene* childMorphogene) = 0;
 
 	virtual void appendToParentLimb(LimbModel* childLimb,
 		PhenotypeGenerator* generator,
-		Ogre::Vector3& localParentJointInRefParent,
-		Ogre::Vector3& localChildJointInRefChild,
+		Ogre::Vector3& parentJointInW,
 		btTransform& parentHitTransform, btTransform& childHitTransform) = 0;
 
-	virtual btTransform getParentIntersection(LimbPhysics* parentLimb,
+	virtual btTransform getParentIntersectionInW(LimbPhysics* parentLimb,
 		MorphogeneBranch* parentMorphogeneBranch, Ogre::Vector3 parentLimbCOM,
 		Ogre::Vector3 localParentAnchorDirInRefParent) = 0;
 

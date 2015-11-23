@@ -109,6 +109,12 @@ void MorphogeneBranch::initialize() {
 	mJointPitchAxisY = pitchAxisVector.y;
 	mJointPitchAxisZ = pitchAxisVector.z;
 
+	Ogre::Vector3 randomAxisVector = Randomness::getSingleton()->nextVector();
+	Ogre::Vector3 yawAxisVector = pitchAxisVector.crossProduct(randomAxisVector);
+	mJointYawAxisX = yawAxisVector.x;
+	mJointYawAxisY = yawAxisVector.y;
+	mJointYawAxisZ = yawAxisVector.z;
+
 	/**
 	 * The joint limits in each direction (pitch=1=Y,yaw=2=Z, roll=0=X)
 	 *   6DOF constraint uses Euler angles and to define limits

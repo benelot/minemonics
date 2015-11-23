@@ -206,6 +206,30 @@ public:
 		mJointPitchAxisZ = jointPitchAxisZ;
 	}
 
+	double getJointYawAxisX() const {
+		return mJointYawAxisX;
+	}
+
+	void setJointYawAxisX(double jointYawAxisX) {
+		mJointYawAxisX = jointYawAxisX;
+	}
+
+	double getJointYawAxisY() const {
+		return mJointYawAxisY;
+	}
+
+	void setJointYawAxisY(double jointYawAxisY) {
+		mJointYawAxisY = jointYawAxisY;
+	}
+
+	double getJointYawAxisZ() const {
+		return mJointYawAxisZ;
+	}
+
+	void setJointYawAxisZ(double jointYawAxisZ) {
+		mJointYawAxisZ = jointYawAxisZ;
+	}
+
 	std::vector<ControllerGene*> const getControllerGenes() const {
 		return mControllerGenes;
 	}
@@ -237,6 +261,10 @@ public:
 		<< morphogeneBranch.mJointPitchAxisX << "," /**The joint pitch axis.*/
 		<< morphogeneBranch.mJointPitchAxisY << "," /**The joint pitch axis.*/
 		<< morphogeneBranch.mJointPitchAxisZ << ")" /**The joint pitch axis.*/
+		<< "/Joint Yaw Axis:(" /**The joint yaw axis.*/
+		<< morphogeneBranch.mJointYawAxisX << "," /**The joint yaw axis.*/
+		<< morphogeneBranch.mJointYawAxisY << "," /**The joint yaw axis.*/
+		<< morphogeneBranch.mJointYawAxisZ << ")" /**The joint yaw axis.*/
 
 		<< "/Joint Limits (Min/Max)[Pitch:" /**The joint limits in all directions*/
 		<< morphogeneBranch.mJointPitchMinAngle << "/" /**The joint limits in pitch direction*/
@@ -292,6 +320,9 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxisX) /**!< Direction of the joint pitch axis */
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxisY)
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxisZ)
+		& BOOST_SERIALIZATION_NVP(mJointYawAxisX) /**!< Direction of the joint yaw axis */
+		& BOOST_SERIALIZATION_NVP(mJointYawAxisY)
+		& BOOST_SERIALIZATION_NVP(mJointYawAxisZ)
 		& BOOST_SERIALIZATION_NVP(mJointPitchMinAngle) /**!< The joint limits in pitch direction*/
 		& BOOST_SERIALIZATION_NVP(mJointPitchMaxAngle)
 		& BOOST_SERIALIZATION_NVP(mJointYawMinAngle) /**!< The joint limits in yaw direction*/
@@ -313,6 +344,7 @@ private:
 	bool mMirrored; /**!< Determines if this branch is mirrored through the center of mass of its segment. */
 	bool mFlipped; /**!< Determines if this branch is mirrored along the axis defined by the parent gene branch of this branch. */
 	double mJointPitchAxisX, mJointPitchAxisY, mJointPitchAxisZ; /**!< The direction of the joint pitch axis */
+	double mJointYawAxisX, mJointYawAxisY, mJointYawAxisZ; /**!< The direction of the joint pitch axis */
 	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 

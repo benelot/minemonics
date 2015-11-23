@@ -26,8 +26,9 @@ protected:
 	virtual void SetUp() {
 		new Randomness();
 		// Set up an object of the class you want to test
-		jointBt = new FSJointBt(NULL, NULL, NULL, btTransform(), btTransform(),
+		jointBt = new FSJointBt(NULL, NULL, NULL, btVector3(),
 			JointPhysics::HINGE_JOINT,
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
@@ -54,8 +55,9 @@ protected:
 	virtual void SetUp() {
 		new Randomness();
 		// Set up an object of the class you want to test
-		jointBt = new FSJointBt(NULL, NULL, NULL, btTransform(), btTransform(),
+		jointBt = new FSJointBt(NULL, NULL, NULL, btVector3(),
 			JointPhysics::HINGE_JOINT,
+			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
 			OgreBulletUtils::convert(Randomness::getSingleton()->nextVector()),
