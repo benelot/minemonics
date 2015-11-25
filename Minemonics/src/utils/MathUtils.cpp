@@ -64,27 +64,27 @@ bool MathUtils::isInf(btTransform t) {
 }
 
 bool MathUtils::isFinite(double d) {
-	return !(isInf(d) && isNaN(d));
+	return !(isInf(d) || isNaN(d));
 }
 
 bool MathUtils::isFinite(Ogre::Vector3 v) {
-	return !(isInf(v) && isNaN(v));
+	return !(isInf(v) || isNaN(v));
 }
 
 bool MathUtils::isFinite(Ogre::Quaternion q) {
-	return !(isInf(q) && isNaN(q));
+	return !(isInf(q) || isNaN(q));
 }
 
 bool MathUtils::isFinite(btVector3 v) {
-	return !(isInf(v) && isNaN(v));
+	return !(isInf(v) || isNaN(v));
 }
 
 bool MathUtils::isFinite(btQuaternion q) {
-	return !(isInf(q)&& isNaN(q));
+	return !(isInf(q) || isNaN(q));
 }
 
 bool MathUtils::isFinite(btTransform t) {
-	return !(isInf(t) && isNaN(t));
+	return !(isInf(t) || isNaN(t));
 }
 
 
