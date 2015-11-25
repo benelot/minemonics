@@ -166,25 +166,9 @@ public:
 
 	// Accessor methods ##########################
 
-	btVector3 getPosition() const {
-		if (mLink) {
-			return mLink->getWorldTransform().getOrigin();
-		} else {
-			return mBody->getCenterOfMassPosition();
-		}
-	}
+	btVector3 getPosition() const;
 
-	btQuaternion getOrientation() const {
-		btTransform transform;
-		if (mLink) {
-			transform = mLink->getWorldTransform();
-		} else {
-			transform = mBody->getWorldTransform();
-		}
-
-		//if there are NaNs, this removes them it seems.
-		return transform.getRotation().normalized();
-	}
+	btQuaternion getOrientation() const;
 
 	btRigidBody* getRigidBody() const {
 		return mBody;
@@ -234,7 +218,6 @@ public:
 	}
 
 private:
-
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**

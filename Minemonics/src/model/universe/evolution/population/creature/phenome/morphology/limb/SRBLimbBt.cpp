@@ -36,21 +36,22 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/Debugger.hpp>
 
 BoostLogger SRBLimbBt::mBoostLogger; /*<! initialize the boost logger*/
 SRBLimbBt::_Init SRBLimbBt::_initializer;
 SRBLimbBt::SRBLimbBt() :
 	LimbPhysics(), mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(
-		NULL), mInertia(0, 0, 0),mLimbModel(NULL) {
+	NULL), mInertia(0, 0, 0), mLimbModel(NULL) {
 }
 
-SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
+SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world, LimbModel* const limbModel,
 	const LimbPhysics::PrimitiveType type, const Ogre::Vector3 position,
 	const Ogre::Quaternion orientation,
 	const Ogre::Vector3 initialRelativePosition,
 	const Ogre::Quaternion initialOrientation, const Ogre::Vector3 dimensions,
 	const double mass, const double restitution, const double friction,
-	const Ogre::ColourValue color, bool isIntraBodyColliding):
+	const Ogre::ColourValue color, bool isIntraBodyColliding) :
 	mBody(NULL), mCollisionShape(NULL), mMotionState(NULL), mWorld(world), mInertia(
 		0, 0, 0) {
 
@@ -77,17 +78,17 @@ SRBLimbBt::SRBLimbBt(btDynamicsWorld* const world,  LimbModel* const limbModel,
 
 SRBLimbBt::SRBLimbBt(const SRBLimbBt& limbBt) {
 	btTransform startTransform = limbBt.mBody->getWorldTransform();
-	SRBLimbBt(limbBt.mWorld, (LimbModel*)limbBt.mCollisionShape->getUserPointer(),
-		limbBt.mType, OgreBulletUtils::convert(startTransform.getOrigin()),
+	SRBLimbBt(limbBt.mWorld,
+		(LimbModel*) limbBt.mCollisionShape->getUserPointer(), limbBt.mType,
+		OgreBulletUtils::convert(startTransform.getOrigin()),
 		OgreBulletUtils::convert(startTransform.getRotation()),
 		Ogre::Vector3(limbBt.mInitialRelativeXPosition,
-			limbBt.mInitialRelativeYPosition,
-			limbBt.mInitialRelativeZPosition),
+			limbBt.mInitialRelativeYPosition, limbBt.mInitialRelativeZPosition),
 		Ogre::Quaternion(limbBt.mInitialWOrientation,
 			limbBt.mInitialXOrientation, limbBt.mInitialYOrientation,
-			limbBt.mInitialZOrientation), limbBt.mDimensions,
-			limbBt.mMass, limbBt.mRestitution, limbBt.mFriction,
-			limbBt.mColor, limbBt.mIntraBodyColliding);
+			limbBt.mInitialZOrientation), limbBt.mDimensions, limbBt.mMass,
+		limbBt.mRestitution, limbBt.mFriction, limbBt.mColor,
+		limbBt.mIntraBodyColliding);
 
 	mWorld = limbBt.mWorld;
 	mInWorld = limbBt.mInWorld;
@@ -325,4 +326,25 @@ bool SRBLimbBt::equals(const SRBLimbBt& SRBLimbBt) const {
 
 const Ogre::Vector3 SRBLimbBt::getVelocities() const {
 	return OgreBulletUtils::convert(mBody->getLinearVelocity());
+}
+
+btVector3 SRBLimbBt::getPosition() const {
+	btTransform transform = mBody->getWorldTransform();
+
+	if (!Debugger::isFinite(transform)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb location";
+	}
+
+	return transform.getOrigin();
+}
+
+btQuaternion SRBLimbBt::getOrientation() const {
+	btTransform transform = mBody->getWorldTransform();
+
+	if (!Debugger::isFinite(transform)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb location";
+	}
+
+	//if there are NaNs, this removes them it seems.
+	return transform.getRotation().normalized();
 }

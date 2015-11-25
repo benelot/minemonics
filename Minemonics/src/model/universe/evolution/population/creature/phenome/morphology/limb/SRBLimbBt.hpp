@@ -160,15 +160,12 @@ public:
 
 	// Accessor methods ##########################
 
-	btVector3 getPosition() const {
-		return mBody->getCenterOfMassPosition();
-	}
+	btVector3 getPosition() const;
 
-	btQuaternion getOrientation() const {
-		btTransform transform = mBody->getWorldTransform();
+	btQuaternion getOrientation() const;
 
-		//if there are NaNs, this removes them it seems.
-		return transform.getRotation().normalized();
+	btRigidBody* getRigidBody() const {
+		return mBody;
 	}
 
 	virtual btCollisionShape* getCollisionShape() {
@@ -181,10 +178,6 @@ public:
 
 	void setInertia(const btVector3& inertia) {
 		mInertia = inertia;
-	}
-
-	btRigidBody* getRigidBody() const {
-		return mBody;
 	}
 
 	// Serialization

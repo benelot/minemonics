@@ -17,6 +17,7 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The graphical representation of the limb in Ogre3D.
@@ -63,11 +64,22 @@ public:
 	}
 
 private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant<std::string>("LimbO3D"));
+		}
+	} _initializer;
 
 	Ogre::Entity* mLimbEntity; /**!< The limb object in the graphical world. */
 
 	Ogre::SceneNode* mLimbEntityNode; /**!< The entity node of the limb to perform rotations and translations with. */
 
 };
-
 #endif /* LIMBO3D_H_ */

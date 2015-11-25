@@ -42,7 +42,10 @@
 #include <view/visualization/procedural/ProceduralMeshGenerator.h>
 
 //## utils headers
+#include <utils/Debugger.hpp>
 
+BoostLogger LimbO3D::mBoostLogger; /*<! initialize the boost logger*/
+LimbO3D::_Init LimbO3D::_initializer;
 LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	LimbGraphics(limbModel) {
 
@@ -127,21 +130,24 @@ LimbO3D::~LimbO3D() {
 void LimbO3D::update(double timeSinceLastTick) {
 
 	// update the position of the limb graphics
-	Ogre::Vector3 point = mLimbModel->getPosition();
-	if (!(std::isnan(point.x) || std::isnan(point.y) || std::isnan(point.z))) {
-		mLimbEntityNode->setPosition(point);
+	Ogre::Vector3 limbPosition = mLimbModel->getPosition();
+	if (Debugger::isFinite(limbPosition)) {
+		mLimbEntityNode->setPosition(limbPosition);
+	} else {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "NaN detected in limb position:" << limbPosition;
 	}
 
 	// Get the Orientation of the rigid body as a bullet Quaternion
 	// Convert it to an Ogre quaternion
-	Ogre::Quaternion btq = mLimbModel->getOrientation();
-	if (!(std::isnan(btq.x) || std::isnan(btq.y) || std::isnan(btq.z)
-		|| std::isnan(btq.w))) {
+	Ogre::Quaternion limbOrientation = mLimbModel->getOrientation();
+	if (Debugger::isFinite(limbOrientation)) {
 		// update the orientation of the limb graphics
-		mLimbEntityNode->setOrientation(btq);
+		mLimbEntityNode->setOrientation(limbOrientation);
 
 		mLimbEntity->setCastShadows(
 			SimulationManager::getSingleton()->getViewController().doesShowShadows());
+	} else {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "NaN detected in limb orientation:" << limbOrientation;
 	}
 }
 

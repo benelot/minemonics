@@ -39,6 +39,7 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/Debugger.hpp>
 
 BoostLogger FSLimbBt::mBoostLogger; /*<! initialize the boost logger*/
 FSLimbBt::_Init FSLimbBt::_initializer;
@@ -366,4 +367,35 @@ bool FSLimbBt::equals(const FSLimbBt& limbBt) const {
 
 const Ogre::Vector3 FSLimbBt::getVelocities() const {
 	return OgreBulletUtils::convert(mLink->getInterpolationLinearVelocity());
+}
+
+btVector3 FSLimbBt::getPosition() const {
+	btTransform transform;
+	if (mLink) {
+		transform = mLink->getWorldTransform();
+	} else {
+		transform = mBody->getWorldTransform();
+	}
+
+	if (Debugger::isNaN(transform)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
+	}
+
+	return transform.getOrigin();
+}
+
+btQuaternion FSLimbBt::getOrientation() const {
+	btTransform transform;
+	if (mLink) {
+		transform = mLink->getWorldTransform();
+	} else {
+		transform = mBody->getWorldTransform();
+	}
+
+	if (Debugger::isNaN(transform)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
+	}
+
+	//if there are NaNs, this removes them it seems.
+	return transform.getRotation().normalized();
 }
