@@ -493,6 +493,9 @@ set(MISCHDRS
     
     # serialization
     ./utils/serialization/FilesystemManipulator.hpp
+    
+    # mathutils
+    ./utils/MathUtils.hpp
 )
 set(MISCSRCS
 
@@ -521,6 +524,9 @@ set(MISCSRCS
 	
 	# StringFormatter
 	./utils/StringFormatter.cpp
+	
+	# Math Utils
+    ./utils/MathUtils.cpp
 )
 
 set(TESTHDRS

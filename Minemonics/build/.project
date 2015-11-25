@@ -949,6 +949,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/StringFormatter.cpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Source Files/MathUtils.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/MathUtils.cpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Source Files/BaseApplication.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/BaseApplication.cpp</location>
@@ -1884,6 +1889,11 @@
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/serialization/FilesystemManipulator.hpp</location>
 		</link>
 		<link>
+			<name>[Targets]/[exe] Minemonics/Header Files/MathUtils.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/MathUtils.hpp</location>
+		</link>
+		<link>
 			<name>[Targets]/[exe] Minemonics/Header Files/BaseApplication.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/BaseApplication.hpp</location>
@@ -2347,6 +2357,11 @@
 			<name>[Targets]/[exe] runUnitTests/Source Files/StringFormatter.cpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/StringFormatter.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Source Files/MathUtils.cpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/MathUtils.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/Source Files/UniverseModel_test.cpp</name>
@@ -2992,6 +3007,11 @@
 			<name>[Targets]/[exe] runUnitTests/Header Files/FilesystemManipulator.hpp</name>
 			<type>1</type>
 			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/serialization/FilesystemManipulator.hpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] runUnitTests/Header Files/MathUtils.hpp</name>
+			<type>1</type>
+			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src/utils/MathUtils.hpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] runUnitTests/CMake Rules</name>

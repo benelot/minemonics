@@ -42,7 +42,7 @@
 #include <view/visualization/procedural/ProceduralMeshGenerator.h>
 
 //## utils headers
-#include <utils/Debugger.hpp>
+#include <utils/MathUtils.hpp>
 
 BoostLogger LimbO3D::mBoostLogger; /*<! initialize the boost logger*/
 LimbO3D::_Init LimbO3D::_initializer;
@@ -131,7 +131,7 @@ void LimbO3D::update(double timeSinceLastTick) {
 
 	// update the position of the limb graphics
 	Ogre::Vector3 limbPosition = mLimbModel->getPosition();
-	if (Debugger::isFinite(limbPosition)) {
+	if (MathUtils::isFinite(limbPosition)) {
 		mLimbEntityNode->setPosition(limbPosition);
 	} else {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "NaN detected in limb position:" << limbPosition;
@@ -140,7 +140,7 @@ void LimbO3D::update(double timeSinceLastTick) {
 	// Get the Orientation of the rigid body as a bullet Quaternion
 	// Convert it to an Ogre quaternion
 	Ogre::Quaternion limbOrientation = mLimbModel->getOrientation();
-	if (Debugger::isFinite(limbOrientation)) {
+	if (MathUtils::isFinite(limbOrientation)) {
 		// update the orientation of the limb graphics
 		mLimbEntityNode->setOrientation(limbOrientation);
 

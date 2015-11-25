@@ -36,7 +36,7 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/Debugger.hpp>
+#include <utils/MathUtils.hpp>
 
 BoostLogger SRBLimbBt::mBoostLogger; /*<! initialize the boost logger*/
 SRBLimbBt::_Init SRBLimbBt::_initializer;
@@ -331,8 +331,8 @@ const Ogre::Vector3 SRBLimbBt::getVelocities() const {
 btVector3 SRBLimbBt::getPosition() const {
 	btTransform transform = mBody->getWorldTransform();
 
-	if (!Debugger::isFinite(transform)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb location";
+	if (!MathUtils::isFinite(transform)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
 	}
 
 	return transform.getOrigin();
@@ -341,8 +341,8 @@ btVector3 SRBLimbBt::getPosition() const {
 btQuaternion SRBLimbBt::getOrientation() const {
 	btTransform transform = mBody->getWorldTransform();
 
-	if (!Debugger::isFinite(transform)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb location";
+	if (!MathUtils::isFinite(transform)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
 	}
 
 	//if there are NaNs, this removes them it seems.

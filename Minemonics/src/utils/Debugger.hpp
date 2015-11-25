@@ -2,14 +2,8 @@
 #define UTILS_DEBUGGER_HPP_
 
 //# corresponding header
-#include <configuration/Definitions.hpp>
-
 //# forward declarations
 class Population;
-class btTransform;
-class btVector3;
-class btQuaternion;
-class btTransform;
 
 //# system headers
 #include <vector>
@@ -21,13 +15,18 @@ class btTransform;
 #include <OgreSceneNode.h>
 #include <boost/lexical_cast.hpp>
 
-
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/Population.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+
 //## model headers
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/StringFormatter.hpp>
@@ -99,45 +98,47 @@ public:
 	 * @param node
 	 * @return
 	 */
-	static bool detectChildren(Ogre::SceneNode* node);
+	static bool detectChildren(Ogre::SceneNode* node) {
+		int i = 0;
+		Ogre::SceneNode::ChildNodeIterator m = node->getChildIterator();
+		while (m.hasMoreElements()) {
+			i++;
+			m.getNext();
+		}
 
-	static void writeJuries(Population* population, bool shortNotationEnabled);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\nRoot children: " << i << "\n";
 
-	static bool isNaN(double d);
+		return i;
+	}
 
-	static bool isNaN(Ogre::Vector3 v);
+	static void writeJuries(Population* population, bool shortNotationEnabled) {
+		std::string juriesString;
+		for (std::vector<Creature*>::iterator cit =
+			population->getCreatures().begin();
+			cit != population->getCreatures().end(); cit++) {
+			if (shortNotationEnabled) {
+				juriesString.append(
+					boost::lexical_cast<std::string>(
+						(*cit)->getCreatureModel()->getJuries().size()));
+			} else {
+				juriesString.append((*cit)->getCreatureModel()->getFirstName());
+				juriesString.append(": Number of juries: ");
+				juriesString.append(
+					boost::lexical_cast<std::string>(
+						(*cit)->getCreatureModel()->getJuries().size()));
+			}
+		}
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< juriesString;
 
-	static bool isNaN(Ogre::Quaternion q);
+		if (shortNotationEnabled) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "";
+		} else {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creatures size: " << population->getCreatures().size();
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature models size: "
+			<< population->getPopulationModel()->getCreatureModels().size();
+		}
 
-	static bool isNaN(btVector3 v);
-
-	static bool isNaN(btQuaternion q);
-
-	static bool isNaN(btTransform t);
-
-	static bool isInf(double d);
-
-	static bool isInf(Ogre::Vector3 v);
-
-	static bool isInf(Ogre::Quaternion q);
-
-	static bool isInf(btVector3 v);
-
-	static bool isInf(btQuaternion q);
-
-	static bool isInf(btTransform t);
-
-	static bool isFinite(double d);
-
-	static bool isFinite(Ogre::Vector3 v);
-
-	static bool isFinite(Ogre::Quaternion q);
-
-	static bool isFinite(btVector3 v);
-
-	static bool isFinite(btQuaternion q);
-
-	static bool isFinite(btTransform t);
+	}
 
 private:
 	/**

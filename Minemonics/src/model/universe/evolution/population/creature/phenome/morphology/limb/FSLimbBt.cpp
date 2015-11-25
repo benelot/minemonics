@@ -39,7 +39,7 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/Debugger.hpp>
+#include <utils/MathUtils.hpp>
 
 BoostLogger FSLimbBt::mBoostLogger; /*<! initialize the boost logger*/
 FSLimbBt::_Init FSLimbBt::_initializer;
@@ -377,7 +377,7 @@ btVector3 FSLimbBt::getPosition() const {
 		transform = mBody->getWorldTransform();
 	}
 
-	if (Debugger::isNaN(transform)) {
+	if (!MathUtils::isFinite(transform)) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
 	}
 
@@ -392,7 +392,7 @@ btQuaternion FSLimbBt::getOrientation() const {
 		transform = mBody->getWorldTransform();
 	}
 
-	if (Debugger::isNaN(transform)) {
+	if (!MathUtils::isFinite(transform)) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
 	}
 
