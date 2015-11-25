@@ -34,7 +34,7 @@ ServoMotor::ServoMotor() :
 ServoMotor::ServoMotor(
 	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 	const double maxForce, double lowerLimit, double upperLimit) :
-	Motor(Motor::SERVO_MOTOR), mPositionControlled(true) {
+	Motor(Motor::SERVO_MOTOR), mPositionControlled(true),mJoint(NULL),mJointIndex(0),mMotorBt(NULL) {
 
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
