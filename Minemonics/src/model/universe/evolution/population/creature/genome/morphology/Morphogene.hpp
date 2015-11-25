@@ -297,12 +297,15 @@ public:
 		<< "/RepetitionLimit" << morphogene.mRepetitionLimit /**!< The number of repetitions of this gene one after another.*/
 		<< "/FollowUpGene=" << morphogene.mFollowUpGene /**!< The gene that follows this one after the repetitions.*/
 
-		<< "/Gene Branches="; /**The gene branches of this gene*/
+		<< "/Gene Branches=["; /**The gene branches of this gene*/
 		for (std::vector<MorphogeneBranch*>::const_iterator it =
 			morphogene.mGeneBranches.begin();
 			it != morphogene.mGeneBranches.end(); it++) {
+			os << "\n";
 			os << (**it);
 		}
+
+		os << "\n]";
 
 		return os;
 	}

@@ -42,6 +42,7 @@ public:
 	};
 
 	GeneBranch();
+	GeneBranch(const GeneBranchType geneBranchType,bool active);
 	GeneBranch(const GeneBranch& geneBranch);
 
 	virtual ~GeneBranch();
@@ -94,10 +95,10 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 	const GeneBranch &geneBranch) {
-		return os << "GeneBranch: Active:" /**!< If the gene branch is active or not*/
+		return os << "GeneBranch: Active=" /**!< If the gene branch is active or not*/
 		<< geneBranch.mActive
 
-		<< "/Type" /**!< The type of gene branch*/
+		<< "/Type=" /**!< The type of gene branch*/
 		<< geneBranch.mType;
 	}
 
@@ -112,7 +113,6 @@ public:
 		& BOOST_SERIALIZATION_NVP(mType); /**!< The type of gene branch*/
 	}
 protected:
-
 	bool mActive; /**!< Determines if this branch is active. */
 
 	GeneBranchType mType; /**!< The type of gene branch. */

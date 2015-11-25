@@ -69,7 +69,6 @@ public:
 	 */
 	void createRandomGenome(const double branchiness);
 
-
 	void recalculateRootIndex();
 
 	/**
@@ -113,7 +112,7 @@ public:
 
 	virtual void addRandomGeneBranch();
 
-	virtual void addGeneBranch(const int geneIndex1,const int geneIndex2);
+	virtual void addGeneBranch(const int geneIndex1, const int geneIndex2);
 
 	/**
 	 * Repair the genes by checking their integrity.
@@ -145,7 +144,7 @@ public:
 	 * 							The probability of replacing genes.
 	 */
 	virtual void replaceRandomGenesWithRandomGenes(
-	const double replacementProbability);
+		const double replacementProbability);
 
 	/**
 	 * Replaces a random gene with another random gene.
@@ -159,7 +158,7 @@ public:
 	 * A self-loop arises when branch specifications dictate that segments of a particular type should have child segments of the same type. The segment copying mutation preserves this direct recursion in the tree structure when copying a segment specification from one index in the segment specification vector to another.
 	 */
 	virtual void replaceGeneWith(const int geneIndex,
-	const int replacementIndex);
+		const int replacementIndex);
 
 	/**
 	 * Duplicate random genes with probability.
@@ -312,8 +311,8 @@ public:
 	 * 							The segment index in the father genome where the copying ends.
 	 */
 	virtual void crossover(Genome* const fathergenome,
-	const int motherSegmentStartIndex, const int motherSegmentEndIndex,
-	const int fatherSegmentStartIndex, const int fatherSegmentEndIndex);
+		const int motherSegmentStartIndex, const int motherSegmentEndIndex,
+		const int fatherSegmentStartIndex, const int fatherSegmentEndIndex);
 
 	/**
 	 * @brief Grafts a random feature from the donor over to this genome.
@@ -338,7 +337,7 @@ public:
 	 *            Number of genes to copy
 	 */
 	virtual void graftFrom(Genome* const donor, const int attachmentIndex,
-	const int geneIndex, const int geneQty);
+		const int geneIndex, const int geneQty);
 
 	// Accessor methods ##########################
 
@@ -371,23 +370,25 @@ public:
 	 */
 
 	friend std::ostream & operator<<(std::ostream &os,
-	const MixedGenome &genome) {
+		const MixedGenome &genome) {
 		os << "MixedGenome: Type=" << genome.mGenomeType /**!< The type of genome*/
 
 		<< "/length=" << genome.mLength /**!< The length of the genome*/
+		<< "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit /**!< The total segment quantity limit*/
 
+		<< "/SegmentsDepthLimit=" << genome.mTotalSegmentQtyLimit /**!< The segments depth limit*/
 		<< "/Genes=["; /**!< The vector of genes.*/
 		for (std::vector<Gene*>::const_iterator it = genome.mGenes.begin();
-		it != genome.mGenes.end(); it++) {
-			os << (**it);
-			os << "||";
+			it != genome.mGenes.end(); it++) {
+			os << "\n";
+			switch ((*it)->getType()) {
+			case Gene::MorphoGene: {
+				os << ((Morphogene&) **it);
+			}
+			}
 		}
 
-		os << "]";
-
-		os << "/TotalSegmentQtyLimit=" << genome.mTotalSegmentQtyLimit /**!< The total segment quantity limit*/
-
-		<< "/SegmentsDepthLimit=" << genome.mTotalSegmentQtyLimit; /**!< The segments depth limit*/
+		os << "\n]";
 		return os;
 	}
 
@@ -411,7 +412,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("MixedGenome"));
+				boost::log::attributes::constant<std::string>("MixedGenome"));
 		}
 	} _initializer;
 

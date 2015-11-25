@@ -108,6 +108,8 @@ void MixedGenome::createRandomGenome(double branchiness) {
 		addGeneBranch(mRootIndex,
 			Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
 	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << this;
 }
 
 void MixedGenome::recalculateRootIndex(){

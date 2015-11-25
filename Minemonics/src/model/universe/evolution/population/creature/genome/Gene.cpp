@@ -25,8 +25,7 @@ Gene::Gene() :
 Gene::~Gene() {
 }
 
-void Gene::initialize(const GeneType geneType) {
-	mType = geneType;
+void Gene::initialize() {
 }
 
 bool Gene::equals(const Gene& gene) const {

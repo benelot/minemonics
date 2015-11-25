@@ -45,11 +45,9 @@ public:
 	virtual ~Gene();
 
 	/**
-	 * Initializes the gene with a gene type.
-	 * @param geneType
-	 *				A gene type.
+	 * Initializes the gene.
 	 */
-	void initialize(const GeneType geneType);
+	void initialize();
 
 	/**
 	 * Compare gene with another gene.
@@ -77,7 +75,6 @@ public:
 	virtual void grow(const int branchiness) = 0;
 
 	// Accessor methods ##########################
-
 	GeneType getType() const {
 		return mType;
 	}
