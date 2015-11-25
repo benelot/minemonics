@@ -239,6 +239,54 @@ public:
 		return mControllerGenes;
 	}
 
+	double getPitchDampingCoefficient() const {
+		return mPitchDampingCoefficient;
+	}
+
+	void setPitchDampingCoefficient(double pitchDampingCoefficient) {
+		mPitchDampingCoefficient = pitchDampingCoefficient;
+	}
+
+	double getPitchStiffnessCoefficient() const {
+		return mPitchStiffnessCoefficient;
+	}
+
+	void setPitchStiffnessCoefficient(double pitchStiffnessCoefficient) {
+		mPitchStiffnessCoefficient = pitchStiffnessCoefficient;
+	}
+
+	double getRollDampingCoefficient() const {
+		return mRollDampingCoefficient;
+	}
+
+	void setRollDampingCoefficient(double rollDampingCoefficient) {
+		mRollDampingCoefficient = rollDampingCoefficient;
+	}
+
+	double getRollStiffnessCoefficient() const {
+		return mRollStiffnessCoefficient;
+	}
+
+	void setRollStiffnessCoefficient(double rollStiffnessCoefficient) {
+		mRollStiffnessCoefficient = rollStiffnessCoefficient;
+	}
+
+	double getYawDampingCoefficient() const {
+		return mYawDampingCoefficient;
+	}
+
+	void setYawDampingCoefficient(double yawDampingCoefficient) {
+		mYawDampingCoefficient = yawDampingCoefficient;
+	}
+
+	double getYawStiffnessCoefficient() const {
+		return mYawStiffnessCoefficient;
+	}
+
+	void setYawStiffnessCoefficient(double yawStiffnessCoefficient) {
+		mYawStiffnessCoefficient = yawStiffnessCoefficient;
+	}
+
 	// Serialization ##########################
 	/**
 	 * Give access to boost serialization
@@ -255,6 +303,7 @@ public:
 		const MorphogeneBranch &morphogeneBranch) {
 		os << "MorphogeneBranch:" /** The name of the class */
 		<< static_cast<const GeneBranch &>(morphogeneBranch) /** Base class*/
+		<< "/GeneType=" << morphogeneBranch.mBranchGeneType /**The type of gene the branch leads to*/
 		<< "/Joint Type=" << morphogeneBranch.mJointType /**< The joint type */
 		<< "/isFlipped=" << morphogeneBranch.mFlipped /**If the morphogene branch is flipped on the morphogene to the other side.*/
 		<< "/isMirrored=" << morphogeneBranch.mMirrored /**If the morphogene branch is mirrored on the morphogene.*/
@@ -273,7 +322,17 @@ public:
 		<< morphogeneBranch.mJointYawMinAngle << "/" /**The joint limits in yaw direction*/
 		<< morphogeneBranch.mJointYawMaxAngle << "][Roll:" /**The joint limits in yaw direction*/
 		<< morphogeneBranch.mJointRollMinAngle << "/" /**The joint limits in roll direction*/
-		<< morphogeneBranch.mJointRollMaxAngle; /**The joint limits in roll direction*/
+		<< morphogeneBranch.mJointRollMaxAngle /**The joint limits in roll direction*/
+
+		<< "/Damping Coefficients: [Pitch:" /**The joint damping coefficients*/
+		<< morphogeneBranch.mPitchDampingCoefficient << "][Yaw:" /**The joint damping coefficients*/
+		<< morphogeneBranch.mYawDampingCoefficient << "][Roll:" /**The joint damping coefficients*/
+		<< morphogeneBranch.mRollDampingCoefficient /**The joint damping coefficients*/
+
+		<< "/Stiffness Coefficients: [Pitch:" /**The joint stiffness coefficients*/
+		<< morphogeneBranch.mPitchStiffnessCoefficient << "][Yaw:" /**The joint stiffness coefficients*/
+		<< morphogeneBranch.mYawStiffnessCoefficient << "][Roll:" /**The joint stiffness coefficients*/
+		<< morphogeneBranch.mRollStiffnessCoefficient; /**The joint stiffness coefficients*/
 
 		for (std::vector<ControllerGene*>::const_iterator it1 =
 			morphogeneBranch.mControllerGenes.begin();
@@ -295,9 +354,7 @@ public:
 		os << "/Joint Anchor:(" /**The joint anchor position on the morphogene branching into.*/
 		<< morphogeneBranch.mJointAnchorX << "," /**The joint anchor position on the morphogene branching into.*/
 		<< morphogeneBranch.mJointAnchorY << "," /**The joint anchor position on the morphogene branching into.*/
-		<< morphogeneBranch.mJointAnchorZ << ")"
-
-		<< "/GeneType=" << morphogeneBranch.mBranchGeneType; /**The type of gene the branch leads to*/
+		<< morphogeneBranch.mJointAnchorZ << ")";
 
 		return os;
 	}
@@ -330,6 +387,15 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointYawMaxAngle)
 		& BOOST_SERIALIZATION_NVP(mJointRollMinAngle) /**!< The joint limits in roll direction*/
 		& BOOST_SERIALIZATION_NVP(mJointRollMaxAngle)
+
+		& BOOST_SERIALIZATION_NVP(mPitchDampingCoefficient) /**The joint damping coefficients */
+		& BOOST_SERIALIZATION_NVP(mYawDampingCoefficient)
+		& BOOST_SERIALIZATION_NVP(mRollDampingCoefficient)
+
+		& BOOST_SERIALIZATION_NVP(mPitchStiffnessCoefficient) /**The joint stiffness*/
+		& BOOST_SERIALIZATION_NVP(mYawStiffnessCoefficient)
+		& BOOST_SERIALIZATION_NVP(mRollStiffnessCoefficient)
+
 		& BOOST_SERIALIZATION_NVP(mControllerGenes) /**!< The controller genes of this morphogene's joint.*/
 
 		& BOOST_SERIALIZATION_NVP(mJointAnchorX) /**The joint anchor position on the morphogene branching into.*/
@@ -348,6 +414,12 @@ private:
 	double mJointYawAxisX, mJointYawAxisY, mJointYawAxisZ; /**!< The direction of the joint pitch axis */
 	double mJointPitchMaxAngle, mJointYawMaxAngle, mJointRollMaxAngle; /**!< Joint limits for each degree of freedom */
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
+
+	double mPitchDampingCoefficient, mYawDampingCoefficient,
+		mRollDampingCoefficient; /**!< The spring damping coefficient of the joint springs. */
+
+	double mPitchStiffnessCoefficient, mYawStiffnessCoefficient,
+		mRollStiffnessCoefficient; /**!< The stiffness of the joint. */
 
 	std::vector<ControllerGene*> mControllerGenes; /**!< The controller of this gene */
 
