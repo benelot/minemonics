@@ -29,7 +29,6 @@
 #include <boost/regex.hpp>
 #include <boost/log/expressions/predicates/matches.hpp>
 #include <boost/preprocessor/seq/enum.hpp>
-#include <boost/preprocessor/seq/size.hpp>
 
 // Supporting headers
 #include <boost/log/support/regex.hpp>
