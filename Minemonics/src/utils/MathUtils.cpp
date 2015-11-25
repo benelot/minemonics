@@ -12,7 +12,6 @@
 //## view headers
 //## utils headers
 #include <utils/MathUtils.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 bool MathUtils::isNaN(double d) {
 	// Only NaN is not itself
@@ -20,11 +19,11 @@ bool MathUtils::isNaN(double d) {
 }
 
 bool MathUtils::isNaN(Ogre::Vector3 v) {
-	return isNaN(OgreBulletUtils::convert(v));
+	return isNaN(v.x) || isNaN(v.y) || isNaN(v.z);
 }
 
 bool MathUtils::isNaN(Ogre::Quaternion q) {
-	return isNaN(OgreBulletUtils::convert(q));
+	return isNaN(q.w) || isNaN(q.x) || isNaN(q.y) || isNaN(q.z);
 }
 
 bool MathUtils::isNaN(btVector3 v) {
@@ -45,11 +44,11 @@ bool MathUtils::isInf(double d) {
 }
 
 bool MathUtils::isInf(Ogre::Vector3 v) {
-	return isInf(OgreBulletUtils::convert(v));
+	return isInf(v.x) || isInf(v.y) || isInf(v.z);
 }
 
 bool MathUtils::isInf(Ogre::Quaternion q) {
-	return isInf(OgreBulletUtils::convert(q));
+	return isInf(q.w) || isInf(q.x) || isInf(q.y) || isInf(q.z);
 }
 
 bool MathUtils::isInf(btVector3 v) {
@@ -69,11 +68,11 @@ bool MathUtils::isFinite(double d) {
 }
 
 bool MathUtils::isFinite(Ogre::Vector3 v) {
-	return !(isInf(OgreBulletUtils::convert(v)) && isNaN(OgreBulletUtils::convert(v)));
+	return !(isInf(v) && isNaN(v));
 }
 
 bool MathUtils::isFinite(Ogre::Quaternion q) {
-	return !(isInf(OgreBulletUtils::convert(q)) && isNaN(OgreBulletUtils::convert(q)));
+	return !(isInf(q) && isNaN(q));
 }
 
 bool MathUtils::isFinite(btVector3 v) {
