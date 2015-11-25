@@ -215,6 +215,9 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 				* parentLimbDir;
 	}
 
+	parentAnchorDirInParent = generator->getOrientation()
+		* parentAnchorDirInParent; // Rotate the parent anchor in the direction of the current orientation
+
 	//PARENT JOINT ANCHOR
 	//TODO: What to do with the surface normal?
 	jointPivotInW =
@@ -223,10 +226,10 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 				parentMorphogeneBranch, parentLimbCOM, parentAnchorDirInParent).getOrigin());
 
 	parentJointAnchor.setOrigin(
-		OgreBulletUtils::convert(jointPivotInW - parentLimbCOM));
+		OgreBulletUtils::convert(jointPivotInW - parentLimbCOM)); // Set the joint anchor in the parent reference frame
 
-	Ogre::Vector3 parentAnchorInParent( // get surface point of the parent limb in reference frame of itself
-		OgreBulletUtils::convert(parentJointAnchor.getOrigin()));
+	Ogre::Vector3 parentAnchorInParent(
+		OgreBulletUtils::convert(parentJointAnchor.getOrigin())); // get surface point of the parent limb in reference frame of itself
 
 	// PARENT JOINT POSITION
 	Ogre::Vector3 parentJointPivotInParent = parentAnchorInParent; //get local joint rotation point in reference frame parent
@@ -234,23 +237,24 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 	// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
 	Ogre::Vector3 childAnchorInParent(parentJointPivotInParent); //get local surface anchor point of child in reference frame parent
 
-	Ogre::Vector3 childAnchorDirInChild(
-		// get anchor direction of limb child in the local reference frame of child
-		childMorphogene->getJointAnchorX(), childMorphogene->getJointAnchorY(),
-		childMorphogene->getJointAnchorZ());
+	Ogre::Vector3 childAnchorDirInChild(childMorphogene->getJointAnchorX(),
+		childMorphogene->getJointAnchorY(), childMorphogene->getJointAnchorZ()); // get anchor direction of limb child in the local reference frame of child
+
+	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
+		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
+		childMorphogene->getOrientationZ());
+	childAnchorDirInChild = childLimbRotation* childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
 
 	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 	childJointAnchor = getOwnIntersection(childMorphogene, generator,
 		childAnchorDirInChild); // find the joint anchor position of the limb by positioning the limb at an arbitrary position to cast a ray
 
-	//get the surface point of child limb in the global reference frame
 	Ogre::Vector3 childAnchorInChild(
-		OgreBulletUtils::convert(childJointAnchor.getOrigin()));
+		OgreBulletUtils::convert(childJointAnchor.getOrigin())); // get the surface point of child limb in the global reference frame
 
-	Ogre::Vector3 childJointPivotInChild = childAnchorInChild; //get local joint rotation point in reference frame child
+	Ogre::Vector3 childJointPivotInChild = childAnchorInChild; // get local joint rotation point in reference frame child
 
-	// global center of mass of child limb
-	Ogre::Vector3 childLimbCOM(jointPivotInW - childAnchorInChild);
+	Ogre::Vector3 childLimbCOM(jointPivotInW - childAnchorInChild); // global center of mass of child limb
 
 #ifndef EXCLUDE_FROM_TEST
 	// draw line from limb A to surface anchor point of A (GREEN LINE)
@@ -593,23 +597,23 @@ void SRBPhenomeModel::reposition(const Ogre::Vector3 position) {
 	}
 }
 
-bool SRBPhenomeModel::equals(const SRBPhenomeModel& SRBPhenomeModel) const {
-	if (mInWorld != SRBPhenomeModel.mInWorld) {
+bool SRBPhenomeModel::equals(const SRBPhenomeModel& phenomeModel) const {
+	if (mInWorld != phenomeModel.mInWorld) {
 		return false;
 	}
 
-	if (mDeveloped != SRBPhenomeModel.mDeveloped) {
+	if (mDeveloped != phenomeModel.mDeveloped) {
 		return false;
 	}
 
 	/**The vector of limb models.*/
-	if (mLimbModels.size() != SRBPhenomeModel.mLimbModels.size()) {
+	if (mLimbModels.size() != phenomeModel.mLimbModels.size()) {
 		return false;
 	}
 	std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 	std::vector<LimbModel*>::const_iterator it2 =
-		SRBPhenomeModel.mLimbModels.begin();
-	for (; it != mLimbModels.end(), it2 != SRBPhenomeModel.mLimbModels.end();
+		phenomeModel.mLimbModels.begin();
+	for (; it != mLimbModels.end(), it2 != phenomeModel.mLimbModels.end();
 		it++, it2++) {
 		if (!(*it)->equals(**(it2))) {
 			return false;
@@ -617,13 +621,13 @@ bool SRBPhenomeModel::equals(const SRBPhenomeModel& SRBPhenomeModel) const {
 	}
 
 	/**The vector of joint models.*/
-	if (mJointModels.size() != SRBPhenomeModel.mJointModels.size()) {
+	if (mJointModels.size() != phenomeModel.mJointModels.size()) {
 		return false;
 	}
 	std::vector<JointModel*>::const_iterator it3 = mJointModels.begin();
 	std::vector<JointModel*>::const_iterator it4 =
-		SRBPhenomeModel.mJointModels.begin();
-	for (; it3 != mJointModels.end(), it4 != SRBPhenomeModel.mJointModels.end();
+		phenomeModel.mJointModels.begin();
+	for (; it3 != mJointModels.end(), it4 != phenomeModel.mJointModels.end();
 		it3++, it4++) {
 		if (!(*it3)->equals(**(it4))) {
 			return false;
@@ -631,13 +635,13 @@ bool SRBPhenomeModel::equals(const SRBPhenomeModel& SRBPhenomeModel) const {
 	}
 
 	/**The vector of controllers.*/
-	if (mControllers.size() != SRBPhenomeModel.mControllers.size()) {
+	if (mControllers.size() != phenomeModel.mControllers.size()) {
 		return false;
 	}
 	std::vector<Controller*>::const_iterator it5 = mControllers.begin();
 	std::vector<Controller*>::const_iterator it6 =
-		SRBPhenomeModel.mControllers.begin();
-	for (; it5 != mControllers.end(), it6 != SRBPhenomeModel.mControllers.end();
+		phenomeModel.mControllers.begin();
+	for (; it5 != mControllers.end(), it6 != phenomeModel.mControllers.end();
 		it5++, it6++) {
 		if (!(*it5)->equals(**(it6))) {
 			return false;
