@@ -45,12 +45,13 @@
 //## view headers
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/MathUtils.hpp>
 
 OgreBtDebugDrawer::OgreBtDebugDrawer() :
 	mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(false), mClear(
 		false), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
-		NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
-		NULL)
+	NULL), mLines2(NULL), mContactPoints(NULL), mTriangles(NULL), mTriangles2(
+	NULL)
 //, textArea(NULL), olm(NULL), overlay(NULL), panel(NULL)
 {
 }
@@ -130,35 +131,41 @@ OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 
 void OgreBtDebugDrawer::drawLine(const btVector3 &from, const btVector3 &to,
 	const btVector3 &color) {
-	if (color == btVector3(0, 0, 0)) {
-		drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
-			Ogre::ColourValue(1, 1, 1));
-	} else {
-		drawLine(OgreBulletUtils::convert(from), OgreBulletUtils::convert(to),
-			Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
+
+	if (MathUtils::isFinite(from) && MathUtils::isFinite(to)) {
+		if (color == btVector3(0, 0, 0)) {
+			drawLine(OgreBulletUtils::convert(from),
+				OgreBulletUtils::convert(to), Ogre::ColourValue(1, 1, 1));
+		} else {
+			drawLine(OgreBulletUtils::convert(from),
+				OgreBulletUtils::convert(to),
+				Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
+		}
 	}
 }
 
 void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 	const Ogre::Vector3& to, Ogre::ColourValue color) {
-	if (mDebugMode > 0 && mDebugDrawingEnabled) {
-		if (mDrawable) {
+	if (MathUtils::isFinite(from) && MathUtils::isFinite(to)) {
+		if (mDebugMode > 0 && mDebugDrawingEnabled) {
+			if (mDrawable) {
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
 //			color.saturate();
-			mLines->position(from);
-			mLines->colour(color);
-			mLines->position(to);
-			mLines->colour(color);
-			draw();
-		} else {
-			Line line;
+				mLines->position(from);
+				mLines->colour(color);
+				mLines->position(to);
+				mLines->colour(color);
+				draw();
+			} else {
+				Line line;
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
 //			color.saturate();
-			line.color = color;
-			line.from = from;
-			line.to = to;
-			line.drawn = false;
-			mExtLines.push_back(line);
+				line.color = color;
+				line.from = from;
+				line.to = to;
+				line.drawn = false;
+				mExtLines.push_back(line);
+			}
 		}
 	}
 }
@@ -174,27 +181,29 @@ void OgreBtDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
 void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 	const Ogre::Vector3& v1, const Ogre::Vector3& v2,
 	const Ogre::ColourValue color, const Ogre::Real alpha) {
-	if (mDebugMode > 0 && mDebugDrawingEnabled) {
-		if (mDrawable) {
+	if (MathUtils::isFinite(v0) && MathUtils::isFinite(v1) && MathUtils::isFinite(v2)) {
+		if (mDebugMode > 0 && mDebugDrawingEnabled) {
+			if (mDrawable) {
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
 //			color.saturate();
-			mTriangles->position(v0);
-			mTriangles->colour(color);
-			mTriangles->position(v1);
-			mTriangles->colour(color);
-			mTriangles->position(v2);
-			mTriangles->colour(color);
-			draw();
-		} else {
-			Triangle triangle;
+				mTriangles->position(v0);
+				mTriangles->colour(color);
+				mTriangles->position(v1);
+				mTriangles->colour(color);
+				mTriangles->position(v2);
+				mTriangles->colour(color);
+				draw();
+			} else {
+				Triangle triangle;
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
 //			color.saturate();
-			triangle.color = color;
-			triangle.v0 = v0;
-			triangle.v1 = v1;
-			triangle.v2 = v2;
-			triangle.drawn = false;
-			mExtTriangles.push_back(triangle);
+				triangle.color = color;
+				triangle.v0 = v0;
+				triangle.v1 = v1;
+				triangle.v2 = v2;
+				triangle.drawn = false;
+				mExtTriangles.push_back(triangle);
+			}
 		}
 	}
 }
@@ -207,20 +216,22 @@ void OgreBtDebugDrawer::drawContactPoint(const btVector3 &PointOnB,
 		Ogre::ColourValue(color.getX(), color.getY(), color.getZ()));
 }
 
-void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& PointOnB,
+void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& pointOnB,
 	const Ogre::Vector3& normalOnB, const Ogre::Real distance,
 	const int lifeTime, const Ogre::ColourValue& color) {
+	if (MathUtils::isFinite(pointOnB) && MathUtils::isFinite(normalOnB)) {
 	if ((mDebugMode & btIDebugDraw::DBG_DrawContactPoints)
 		&& mDebugDrawingEnabled) {
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
 //		color.saturate();
 		ContactPoint p;
-		p.from = PointOnB;
+		p.from = pointOnB;
 		p.to = p.from + normalOnB * distance;
 		p.dieTime = Ogre::Root::getSingleton().getTimer()->getMilliseconds()
 			+ lifeTime;
 		p.color = color;
 		mContactPoints->push_back(p);
+	}
 	}
 }
 
@@ -237,11 +248,11 @@ void OgreBtDebugDrawer::drawRigidBodyInformation(btDynamicsWorld* btDWorld) {
 
 			std::string text;
 			text.append("O: ");
-			text.append(boost::lexical_cast < std::string > ((int) Point[0]));
+			text.append(boost::lexical_cast<std::string>((int) Point[0]));
 			text.append(",");
-			text.append(boost::lexical_cast < std::string > ((int) Point[1]));
+			text.append(boost::lexical_cast<std::string>((int) Point[1]));
 			text.append(",");
-			text.append(boost::lexical_cast < std::string > ((int) Point[2]));
+			text.append(boost::lexical_cast<std::string>((int) Point[2]));
 			text.append(",\n");
 			text.append("------");
 //			InfoOverlayData* data = new InfoOverlayData(
@@ -323,7 +334,7 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	mTriangles->colour(Ogre::ColourValue::Blue);
 
 	size_t now = Ogre::Root::getSingleton().getTimer()->getMilliseconds();
-	std::vector < ContactPoint > *newCP =
+	std::vector<ContactPoint> *newCP =
 		mContactPoints == &mContactPoints1 ?
 			&mContactPoints2 : &mContactPoints1;
 	for (std::vector<ContactPoint>::iterator cit = mContactPoints->begin();
@@ -347,18 +358,22 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	return true;
 }
 
-void OgreBtDebugDrawer::drawSphere(const Ogre::Vector3& p, const double size,
+void OgreBtDebugDrawer::drawSphere(const Ogre::Vector3& position, const double size,
 	const Ogre::ColourValue& colour) {
+	if (MathUtils::isFinite(position)) {
 	if (mDebugDrawingEnabled) {
-		drawSphere(OgreBulletUtils::convert(p), size,
+		drawSphere(OgreBulletUtils::convert(position), size,
 			OgreBulletUtils::convert(colour));
+	}
 	}
 }
 
-void OgreBtDebugDrawer::drawSphere(const btVector3 constBtVector3,
+void OgreBtDebugDrawer::drawSphere(const btVector3 position,
 	const btScalar size, const btVector3 colour) {
+	if (MathUtils::isFinite(position)) {
 	if (mDebugDrawingEnabled) {
-		btIDebugDraw::drawSphere(constBtVector3, size, colour);
+		btIDebugDraw::drawSphere(position, size, colour);
+	}
 	}
 }
 

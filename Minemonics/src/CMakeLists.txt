@@ -593,6 +593,7 @@ set(TESTSRCS
     # misc
     ./utils/NameGenerator_test.cpp
     ./utils/Randomness_test.cpp
+    ./utils/MathUtils_test.cpp
     
     #test runner
     ./test/TestRunner.cpp

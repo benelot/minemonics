@@ -376,12 +376,13 @@ btVector3 FSLimbBt::getPosition() const {
 	} else {
 		transform = mBody->getWorldTransform();
 	}
-
-	if (!MathUtils::isFinite(transform)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
+	
+	btVector3 position = transform.getOrigin();
+	if (!MathUtils::isFinite(position)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position";
 	}
 
-	return transform.getOrigin();
+	return position;
 }
 
 btQuaternion FSLimbBt::getOrientation() const {
@@ -392,10 +393,10 @@ btQuaternion FSLimbBt::getOrientation() const {
 		transform = mBody->getWorldTransform();
 	}
 
-	if (!MathUtils::isFinite(transform)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
+	btQuaternion orientation = transform.getRotation().normalized();
+	if (!MathUtils::isFinite(orientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation";
 	}
 
-	//if there are NaNs, this removes them it seems.
-	return transform.getRotation().normalized();
+	return orientation;
 }

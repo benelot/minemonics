@@ -293,7 +293,7 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
-	childAnchorDirInChild = childLimbRotation* childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
+	childAnchorDirInChild = childLimbRotation * childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
 
 	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 	childJointAnchor = getOwnIntersection(childMorphogene, generator,
@@ -504,7 +504,6 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			getControllers().push_back(controller);
 		}
 		}
-
 	}
 }
 

@@ -329,22 +329,23 @@ const Ogre::Vector3 SRBLimbBt::getVelocities() const {
 }
 
 btVector3 SRBLimbBt::getPosition() const {
-	btTransform transform = mBody->getWorldTransform();
+//	btTransform transform = mMotionState->m_graphicsWorldTrans;
 
-	if (!MathUtils::isFinite(transform)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
+	btVector3 position = mMotionState->m_graphicsWorldTrans.getOrigin();
+	if (!MathUtils::isFinite(position)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position";
 	}
 
-	return transform.getOrigin();
+	return position;
 }
 
 btQuaternion SRBLimbBt::getOrientation() const {
-	btTransform transform = mBody->getWorldTransform();
+//	btTransform transform = mBody->getWorldTransform();
 
-	if (!MathUtils::isFinite(transform)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN detected in limb location";
+	btQuaternion orientation = mMotionState->m_graphicsWorldTrans.getRotation().normalized();
+	if (!MathUtils::isFinite(orientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation";
 	}
 
-	//if there are NaNs, this removes them it seems.
-	return transform.getRotation().normalized();
+	return orientation;
 }

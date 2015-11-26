@@ -44,8 +44,6 @@
 //## utils headers
 #include <utils/MathUtils.hpp>
 
-BoostLogger LimbO3D::mBoostLogger; /*<! initialize the boost logger*/
-LimbO3D::_Init LimbO3D::_initializer;
 LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	LimbGraphics(limbModel) {
 
@@ -130,25 +128,26 @@ LimbO3D::~LimbO3D() {
 void LimbO3D::update(double timeSinceLastTick) {
 
 	// update the position of the limb graphics
-	Ogre::Vector3 limbPosition = mLimbModel->getPosition();
-	if (MathUtils::isFinite(limbPosition)) {
-		mLimbEntityNode->setPosition(limbPosition);
-	} else {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "NaN detected in limb position:" << limbPosition;
+	Ogre::Vector3 point = mLimbModel->getPosition();
+	if (MathUtils::isFinite(point)) {
+		mLimbEntityNode->setPosition(point);
+	}
+	else{
+		std::cout << "Invalid found.";
 	}
 
 	// Get the Orientation of the rigid body as a bullet Quaternion
 	// Convert it to an Ogre quaternion
-	Ogre::Quaternion limbOrientation = mLimbModel->getOrientation();
-	if (MathUtils::isFinite(limbOrientation)) {
+	Ogre::Quaternion btq = mLimbModel->getOrientation();
+	if (MathUtils::isFinite(btq)) {
 		// update the orientation of the limb graphics
-		mLimbEntityNode->setOrientation(limbOrientation);
-
-		mLimbEntity->setCastShadows(
-			SimulationManager::getSingleton()->getViewController().doesShowShadows());
-	} else {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "NaN detected in limb orientation:" << limbOrientation;
+		mLimbEntityNode->setOrientation(btq);
 	}
+	else{
+		std::cout << "Invalid found.";
+	}
+	mLimbEntity->setCastShadows(
+		SimulationManager::getSingleton()->getViewController().doesShowShadows());
 }
 
 void LimbO3D::addToWorld() {
