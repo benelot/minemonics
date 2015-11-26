@@ -34,8 +34,10 @@ MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
 		jointMinAngle.y), mJointYawMaxAngle(jointMaxAngle.y), mJointRollMinAngle(
 		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(
 		mirrored), mJointType(jointType), mJointPitchAxisX(pitchAxis.x), mJointPitchAxisY(
-		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z),mJointYawAxisX(yawAxis.x), mJointYawAxisY(
-			yawAxis.y), mJointYawAxisZ(yawAxis.z) {
+		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z), mJointYawAxisX(yawAxis.x), mJointYawAxisY(
+		yawAxis.y), mJointYawAxisZ(yawAxis.z), mPitchStiffnessCoefficient(0), mYawStiffnessCoefficient(
+		0), mRollStiffnessCoefficient(0), mPitchDampingCoefficient(0), mYawDampingCoefficient(
+		0), mRollDampingCoefficient(0) {
 
 }
 
@@ -44,8 +46,10 @@ MorphogeneBranch::MorphogeneBranch() :
 		0), mJointPitchMinAngle(0), mJointPitchMaxAngle(0), mJointYawMinAngle(
 		0), mJointYawMaxAngle(0), mJointRollMinAngle(0), mJointRollMaxAngle(0), mMirrored(
 		false), mJointType(JointPhysics::HINGE_JOINT), mJointPitchAxisX(1), mJointPitchAxisY(
-		0), mJointPitchAxisZ(0),mJointYawAxisX(0), mJointYawAxisY(
-			1), mJointYawAxisZ(0) {
+		0), mJointPitchAxisZ(0), mJointYawAxisX(0), mJointYawAxisY(1), mJointYawAxisZ(
+		0), mPitchStiffnessCoefficient(0), mYawStiffnessCoefficient(0), mRollStiffnessCoefficient(
+		0), mPitchDampingCoefficient(0), mYawDampingCoefficient(0), mRollDampingCoefficient(
+		0) {
 
 }
 
@@ -84,6 +88,14 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 	mJointYawAxisY = morphogeneBranch.mJointYawAxisY;
 	mJointYawAxisZ = morphogeneBranch.mJointYawAxisZ;
 	mJointType = morphogeneBranch.mJointType;
+
+	mPitchStiffnessCoefficient = morphogeneBranch.mPitchStiffnessCoefficient;
+	mYawStiffnessCoefficient = morphogeneBranch.mYawStiffnessCoefficient;
+	mRollStiffnessCoefficient = morphogeneBranch.mRollStiffnessCoefficient;
+
+	mPitchDampingCoefficient = morphogeneBranch.mPitchDampingCoefficient;
+	mYawDampingCoefficient = morphogeneBranch.mYawDampingCoefficient;
+	mRollDampingCoefficient = morphogeneBranch.mRollDampingCoefficient;
 }
 
 MorphogeneBranch::~MorphogeneBranch() {
