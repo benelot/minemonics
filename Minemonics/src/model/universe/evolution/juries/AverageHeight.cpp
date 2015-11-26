@@ -21,6 +21,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/MathUtils.hpp>
 
 AverageHeight::AverageHeight() :
 	Jury(Jury::AVG_HEIGHT, true, 1), mIsFirstTime(true), mAvgHeight(0), mSampleQty(
@@ -49,9 +50,12 @@ void AverageHeight::calculateFitness(CreatureModel* creature,
 			creature->getPhenotypeModel()->getLimbModels().begin();
 			lit != creature->getPhenotypeModel()->getLimbModels().end();
 			lit++, i++) {
-			currentAvgHeight += (*lit)->getVolume() * ((*lit)->getPosition().y);
-			totalVolume += (*lit)->getVolume();
-			segmentQty++;
+			if (MathUtils::isFinite((*lit)->getPosition())) {
+				currentAvgHeight += (*lit)->getVolume()
+					* ((*lit)->getPosition().y);
+				totalVolume += (*lit)->getVolume();
+				segmentQty++;
+			}
 		}
 		if (totalVolume == 0 || segmentQty == 1) {
 

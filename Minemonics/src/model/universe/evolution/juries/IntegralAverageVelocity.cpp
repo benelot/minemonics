@@ -18,6 +18,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/MathUtils.hpp>
 
 IntegralAverageVelocity::IntegralAverageVelocity() :
 	Jury(Jury::AVG_VELOCITY, true, 1), mIsFirstTime(true), mAvgVelocity(0), mTimestamp(
@@ -54,10 +55,12 @@ void IntegralAverageVelocity::calculateFitness(CreatureModel* creature,
 			creature->getPhenotypeModel()->getLimbModels().begin();
 			lit != creature->getPhenotypeModel()->getLimbModels().end();
 			lit++, i++) {
-			totalMovement += (*lit)->getVolume()
-				* ((*lit)->getPosition() - mLastCoords[i]);
-			totalVolume += (*lit)->getVolume();
-			segmentQty++;
+			if (MathUtils::isFinite((*lit)->getPosition())) {
+				totalMovement += (*lit)->getVolume()
+					* ((*lit)->getPosition() - mLastCoords[i]);
+				totalVolume += (*lit)->getVolume();
+				segmentQty++;
+			}
 		}
 		if (totalVolume == 0 || segmentQty == 1) {
 

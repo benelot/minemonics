@@ -20,6 +20,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/MathUtils.hpp>
 
 BoostLogger AverageVelocity::mBoostLogger; /*<! initialize the boost logger*/
 AverageVelocity::_Init AverageVelocity::_initializer;
@@ -64,9 +65,11 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 		creature->getPhenotypeModel()->getLimbModels().begin();
 		lit != creature->getPhenotypeModel()->getLimbModels().end();
 		lit++, i++) {
-		totalMovement += (*lit)->getPosition() - mInitialCoords[i];
-		totalVolume += (*lit)->getVolume(); // we take the volume into account when we calculate the travelled distance
-		segmentQty++;
+		if (MathUtils::isFinite((*lit)->getPosition())) {
+			totalMovement += (*lit)->getPosition() - mInitialCoords[i];
+			totalVolume += (*lit)->getVolume(); // we take the volume into account when we calculate the travelled distance
+			segmentQty++;
+		}
 	}
 
 	if (totalVolume == 0 || segmentQty == 1) {
@@ -106,7 +109,7 @@ void AverageVelocity::evaluateFitness() {
 	} else {
 		mAvgVelocity = 0;
 	}
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Average Velocity Fitness: " << mAvgVelocity;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Average Velocity Fitness: " << mAvgVelocity;
 	mFitness = mAvgVelocity;
 }
 
