@@ -44,10 +44,12 @@
 //## utils headers
 #include <utils/MathUtils.hpp>
 
+BoostLogger LimbO3D::mBoostLogger; /*<! initialize the boost logger*/
+LimbO3D::_Init LimbO3D::_initializer;
 LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	LimbGraphics(limbModel) {
 
-// add the true as the last parameter to make it a manual material
+	// add the true as the last parameter to make it a manual material
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
 		"", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, false);
 
@@ -128,23 +130,21 @@ LimbO3D::~LimbO3D() {
 void LimbO3D::update(double timeSinceLastTick) {
 
 	// update the position of the limb graphics
-	Ogre::Vector3 point = mLimbModel->getPosition();
-	if (MathUtils::isFinite(point)) {
-		mLimbEntityNode->setPosition(point);
-	}
-	else{
-		std::cout << "Invalid found.";
+	Ogre::Vector3 position = mLimbModel->getPosition();
+	if (MathUtils::isFinite(position)) {
+		mLimbEntityNode->setPosition(position);
+	} else {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position: " << position;
 	}
 
 	// Get the Orientation of the rigid body as a bullet Quaternion
 	// Convert it to an Ogre quaternion
-	Ogre::Quaternion btq = mLimbModel->getOrientation();
-	if (MathUtils::isFinite(btq)) {
+	Ogre::Quaternion orientation = mLimbModel->getOrientation();
+	if (MathUtils::isFinite(orientation)) {
 		// update the orientation of the limb graphics
-		mLimbEntityNode->setOrientation(btq);
-	}
-	else{
-		std::cout << "Invalid found.";
+		mLimbEntityNode->setOrientation(orientation);
+	} else {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation: "<< orientation;
 	}
 	mLimbEntity->setCastShadows(
 		SimulationManager::getSingleton()->getViewController().doesShowShadows());
