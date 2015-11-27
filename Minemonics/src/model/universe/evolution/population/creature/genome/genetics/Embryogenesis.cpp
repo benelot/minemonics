@@ -1,56 +1,35 @@
-//# corresponding headers
+//# corresponding header
 #include <model/universe/evolution/population/creature/genome/genetics/Embryogenesis.hpp>
 
-#include <cmath>
-#include <iostream>
-#include <iterator>
+//# forward declarations
+//# system headers
 #include <map>
 #include <vector>
-#include <stddef.h>
 
 //## controller headers
 //## model headers
-#include <LinearMath/btMatrix3x3.h>
-#include <LinearMath/btQuaternion.h>
-#include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
-#include <LinearMath/btVector3.h>
-#include <OgreColourValue.h>
 #include <OgreQuaternion.h>
 #include <OgreVector3.h>
 
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
-
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/genome/GeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
-#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
-#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
+//## view headers
 //## utils headers
-#include <utils/ogre3D/Euler.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/MathUtils.hpp>
+
+
 
 BoostLogger Embryogenesis::mBoostLogger; /*<! initialize the boost logger*/
 Embryogenesis::_Init Embryogenesis::_initializer;

@@ -6,9 +6,9 @@
 
 //# forward declarations
 class GeneBranch;
-class ComponentModel;
 
 //# system headers
+#include <list>
 #include <map>
 
 //## controller headers
@@ -22,7 +22,7 @@ class ComponentModel;
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //## view headers
 //## utils headers

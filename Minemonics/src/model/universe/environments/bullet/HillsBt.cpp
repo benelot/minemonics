@@ -1,5 +1,4 @@
 //# corresponding header
-#include <configuration/Definitions.hpp>
 #include <model/universe/environments/bullet/HillsBt.hpp>
 
 //# forward declarations

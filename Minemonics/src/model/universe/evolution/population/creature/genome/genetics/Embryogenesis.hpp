@@ -5,13 +5,6 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btTransform;
-class LimbPhysics;
-class LimbModel;
-class PhenomeModel;
-class Morphogene;
-class MorphogeneBranch;
-
 //# system headers
 #include <list>
 
@@ -23,7 +16,10 @@ class MorphogeneBranch;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 
 //## view headers
 //## utils headers

@@ -6,8 +6,8 @@
  */
 
 //# corresponding header
-#include <gtest/gtest.h>
 #include <utils/MathUtils.hpp>
+#include <gtest/gtest.h>
 
 //## controller headers
 //## model headers

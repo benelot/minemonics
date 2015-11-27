@@ -2,6 +2,8 @@
 #define VIEW_PICKING_MOUSEPICKER_HPP_
 
 //# corresponding headers
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 class btDynamicsWorld;
 namespace Ogre {
