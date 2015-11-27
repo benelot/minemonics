@@ -11,6 +11,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/ControlConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/PlanetModel.hpp>
@@ -23,14 +25,14 @@
 
 PopulationModel::PopulationModel() :
 	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(
-	NULL), mOutOfSync(false), mCurrentGeneration(0),mDynastyQty(0) {
+	NULL), mOutOfSync(false), mCurrentGeneration(0), mDynastyQty(0) {
 
 }
 
 PopulationModel::PopulationModel(PlanetModel* const planetModel,
 	const int creatureQty) :
 	mCreatureQty(creatureQty), mCurrentCreatureIndex(0), mPlanetModel(
-		planetModel), mOutOfSync(false), mCurrentGeneration(0),mDynastyQty(0) {
+		planetModel), mOutOfSync(false), mCurrentGeneration(0), mDynastyQty(0) {
 }
 
 PopulationModel::PopulationModel(PlanetModel* const planetModel,
@@ -88,8 +90,9 @@ void PopulationModel::addNewMember(const double branchiness,
 	CreatureModel* creatureModel = new CreatureModel(this,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
-//	SnakeBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
-	ModelLegBuilder::build(&creatureModel->getGenotype(),ControllerGene::ChaoticControllerGene);
+//	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
+	ModelLegBuilder::build(&creatureModel->getGenotype(),
+		ControlConfiguration::CONTROLLER_TYPE);
 
 //	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
@@ -202,8 +205,8 @@ void PopulationModel::loadCreatures() {
 }
 
 void PopulationModel::clearJuries() {
-	for (std::vector<CreatureModel*>::iterator it =
-		mCreatureModels.begin(); it != mCreatureModels.end(); it++) {
+	for (std::vector<CreatureModel*>::iterator it = mCreatureModels.begin();
+		it != mCreatureModels.end(); it++) {
 		(*it)->clearJuries();
 	}
 }
