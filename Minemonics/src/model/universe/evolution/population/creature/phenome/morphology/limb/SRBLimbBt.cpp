@@ -125,7 +125,7 @@ void SRBLimbBt::initialize() {
 				btScalar(mDimensions.y));
 			break;
 		case LimbPhysics::UNKNOWN:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " LimbBt received 'Unknown' as a limb type.\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << " LimbBt received 'Unknown' as a limb type.\n";
 			exit(-1);
 		}
 
@@ -336,6 +336,9 @@ btVector3 SRBLimbBt::getPosition() const {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position: " << MathUtils::print(position);
 	}
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< " Limb position: " << MathUtils::print(position);
+
+
 	return position;
 }
 
@@ -346,6 +349,8 @@ btQuaternion SRBLimbBt::getOrientation() const {
 	if (!MathUtils::isFinite(orientation)) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation: " << MathUtils::print(orientation);
 	}
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< " Limb orientation: " << MathUtils::print(orientation);
+
 
 	return orientation;
 }

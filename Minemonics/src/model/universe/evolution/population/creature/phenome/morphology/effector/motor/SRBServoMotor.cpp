@@ -83,7 +83,7 @@ void SRBServoMotor::instantiate(JointPhysics* jointPhysics,
 }
 
 void SRBServoMotor::apply(double timeSinceLastTick) {
-
+#ifdef CONSTRAINT_INDEX
 	if (mPositionControlled) {
 		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 		btScalar clampedInputValue =
@@ -93,15 +93,14 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 		//calculate the target angle of the motor
 		btScalar targetAngle = mLowerLimit
 			+ clampedInputValue * (mUpperLimit - mLowerLimit);
-		//calculate the angle error
-		btScalar angleError = targetAngle - mMotorBt->m_currentPosition;
-		btScalar velocityError = 0 - mLastPosition
-			+ mMotorBt->m_currentPosition;
-		mLastPosition = mMotorBt->m_currentPosition;
 
-#ifdef USE_6DOF2
-		mConstraint->setServoTarget(mJointMotorIndex, targetAngle);
-#else
+		//calculate the angle error
+		btScalar angleError = targetAngle - mJoint->getJointPos(mJointMotorIndex);
+		btScalar velocityError = 0 - mLastPosition
+			+ mJoint->getJointPos(mJointMotorIndex);
+		mLastPosition = mJoint->getJointPos(mJointMotorIndex);
+
+
 
 		//simple p(roportional) controller
 		//calculate the target force and clamp it with the maximum force
@@ -112,11 +111,10 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 			btScalar(
 				(correction > mMaxForce) ? mMaxForce :
 				(correction < -mMaxForce) ? -mMaxForce : correction));
-
-#endif
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mMotorBt->m_currentPosition << "," << targetAngle;
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mJoint->getJointPos(mJointMotorIndex) << "," << targetAngle;
 	}
 	else {
+
 		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 		btScalar clampedInputValue =
 		(getInputValue() > 1.0f) ? 1.0f :
@@ -124,6 +122,7 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 		mJoint->applyJointTorque(0,
 			btScalar(getInputValue()));
 	}
+#endif
 }
 
 SRBServoMotor* SRBServoMotor::clone() {

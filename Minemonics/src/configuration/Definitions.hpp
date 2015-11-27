@@ -23,7 +23,6 @@
  */
 
 // Go to CMakeLists.txt and change from Debug to Release to turn off debug information
-
 // Uncomment this if you are using a double precision build of bullet
 #ifndef BT_USE_DOUBLE_PRECISION
 #define BT_USE_DOUBLE_PRECISION 1

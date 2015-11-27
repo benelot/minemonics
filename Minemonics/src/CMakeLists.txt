@@ -462,6 +462,7 @@ set(MISCHDRS
 	./configuration/GUIConfiguration.hpp
 	./configuration/LoggerConfiguration.hpp
 	./configuration/Definitions.hpp
+	./configuration/SRBJointDefinitions.hpp
 	./configuration/SerializationConfiguration.hpp
 	
 	# logger

@@ -164,11 +164,11 @@ void SRBJointBt::initialize() {
 		mJointUpperLimits.z - mJointLowerLimits.z);
 #endif
 
-	mJoint->enableFeedback(true);
-	mJoint->setJointFeedback(new btJointFeedback());
-
-	//debug drawing
-	mJoint->setDbgDrawSize(btScalar(5.f));
+//	mJoint->enableFeedback(true);
+//	mJoint->setJointFeedback(new btJointFeedback());
+//
+//	//debug drawing
+//	mJoint->setDbgDrawSize(btScalar(5.f));
 }
 
 SRBJointBt::~SRBJointBt() {
@@ -184,9 +184,10 @@ SRBJointBt::~SRBJointBt() {
 	}
 
 	mMotors.clear();
-
+#ifdef CONSTRAINT_INDEX
 	delete mJoint;
 	mJoint = NULL;
+#endif
 }
 
 void SRBJointBt::update(double timeSinceLastTick) {
@@ -294,14 +295,18 @@ void SRBJointBt::setRotationalLimitMotorEnabled(
 
 void SRBJointBt::addToWorld() {
 	if (!isInWorld()) {
+#ifdef CONSTRAINT_INDEX
 		mWorld->addConstraint((btTypedConstraint*) mJoint, true);
+#endif
 		JointPhysics::addToWorld();
 	}
 }
 
 void SRBJointBt::removeFromWorld() {
 	if (isInWorld()) {
+#ifdef CONSTRAINT_INDEX
 		mWorld->removeConstraint((btTypedConstraint*) mJoint);
+#endif
 		JointPhysics::removeFromWorld();
 	}
 }
@@ -312,7 +317,7 @@ SRBJointBt* SRBJointBt::clone() {
 
 void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 
-	if (mJoint) {
+#ifdef CONSTRAINT_INDEX
 		// this is consistent with pitch = z, yaw = y, roll = x
 		// Check constructor if that is still the way it is defined
 		int col;
@@ -351,14 +356,25 @@ void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 		mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
 		mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
 	}
+#endif
 }
 
 double SRBJointBt::getJointPos(int jointAxisIndex) {
 
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
 	return mJoint->getHingeAngle();
-#else
+#elif CONSTRAINT_TYPE == GENERIC6DOFCONSTRAINT
 	return mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
+	return mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
+	return mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
+	return mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
+	return mJoint->getAngle(jointAxisIndex);
+#else
+	return 0;
 #endif
 }
 

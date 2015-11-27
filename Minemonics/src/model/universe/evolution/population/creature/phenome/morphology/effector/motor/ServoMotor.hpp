@@ -3,6 +3,7 @@
 
 //# corresponding header
 #include <configuration/Definitions.hpp>
+#include <configuration/SRBJointDefinitions.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
@@ -37,40 +38,6 @@ class access;
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>
-
-//comment this out to compare with original spring constraint
-#define HINGECONSTRAINT 0
-#define GENERIC6DOFCONSTRAINT 1
-#define CONETWISTCONSTRAINT 2
-#define POINT2POINTCONSTRAINT 3
-#define GENERIC6DOFSPRINGCONSTRAINT 4
-#define GENERIC6DOFSPRING2CONSTRAINT 5
-
-/** bullet physics hinge constraint - A 1Dof angular joint with with limits */
-#define CONSTRAINT_INDEX HINGECONSTRAINT
-#define CONSTRAINT_TYPE btHingeConstraint
-
-/** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
-//#define CONSTRAINT_INDEX CONETWISTCONSTRAINT
-//#define CONSTRAINT_TYPE btConeTwistConstraint
-
-/** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
-//#define CONSTRAINT_INDEX POINT2POINTCONSTRAINT
-//#define CONSTRAINT_TYPE btPoint2PointConstraint
-
-/** bullet physics 6 degrees of freedom constraint - A 6 Dof joint with generic limits*/
-//#define CONSTRAINT_INDEX GENERIC6DOFCONSTRAINT
-//#define CONSTRAINT_TYPE btGeneric6DofConstraint
-
-/** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
-//#define CONSTRAINT_INDEX GENERIC6DOFSPRING2CONSTRAINT
-//#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
-
-/** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
-//#define CONSTRAINT_INDEX GENERIC6DOFSPRINGCONSTRAINT
-//#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-
-#define MOTOR_TYPE btRotationalLimitMotor
 
 /**
  * @brief		The servo motor acts directly on the DoF of a joint and thereby moves the creature.
