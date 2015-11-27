@@ -5,22 +5,21 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/juries/Jury.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/juries/IntegralAverageVelocity.hpp>
-#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
+
+//## view headers
+//## utils headers
 #include <utils/NameGenerator.hpp>
-#include <utils/Randomness.hpp>
 
 BoostLogger CreatureModel::mBoostLogger; /*<! initialize the boost logger*/
 CreatureModel::_Init CreatureModel::_initializer;

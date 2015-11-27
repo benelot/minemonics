@@ -5,8 +5,6 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-
 //## view headers
 //# custom headers
 //## base headers
@@ -14,14 +12,12 @@
 
 //## configuration headers
 //## controller headers
-#include <controller/universe/Universe.hpp>
-#include <controller/universe/evolution/Evolution.hpp>
 #include <controller/universe/environments/Plane.hpp>
+#include <controller/universe/Planet.hpp>
+#include <controller/universe/Universe.hpp>
 
 //## model headers
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/PlanetModel.hpp>
+#include <model/Serializable.hpp>
 
 //## view headers
 //## utils headers
@@ -109,7 +105,7 @@ bool Planet::proceedEvaluation() {
 }
 
 void Planet::drawDebugWorld() {
-	mPlanetModel->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld()->debugDrawWorld(); /**!<draws the debug world if it is enabled*/
+	mPlanetModel->drawDebugWorld();
 
 }
 

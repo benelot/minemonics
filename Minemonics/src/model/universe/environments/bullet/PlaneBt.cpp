@@ -5,6 +5,14 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
+#include <BulletCollision/CollisionShapes/btStaticPlaneShape.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <LinearMath/btDefaultMotionState.h>
+#include <LinearMath/btScalar.h>
+#include <LinearMath/btTransform.h>
+#include <LinearMath/btVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers

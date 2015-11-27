@@ -11,7 +11,7 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/bullet/PlaneBt.hpp>
+#include <model/universe/environments/physics/GroundController.hpp>
 
 //## view headers
 //## utils headers

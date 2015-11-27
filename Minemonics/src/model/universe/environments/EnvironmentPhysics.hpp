@@ -3,12 +3,15 @@
 
 //# corresponding header
 //# forward declarations
-namespace Ogre {
-class SceneNode;
-class Vector3;
-} /* namespace Ogre */
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 #include <boost/serialization/assume_abstract.hpp>
@@ -17,6 +20,9 @@ class Vector3;
 #include <boost/serialization/version.hpp>
 
 //## view headers
+#include <OgreSceneNode.h>
+#include <OgreVector3.h>
+
 //# custom headers
 //## base headers
 //## configuration headers

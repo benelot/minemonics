@@ -3,21 +3,19 @@
 
 //# forward declarations
 //# system headers
-//## controller headers
-#include <controller/universe/Planet.hpp>
+#include <cmath>
 
+//## controller headers
 //## model headers
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 #include <configuration/ControlConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
-#include <model/universe/UniverseModel.hpp>
-#include <model/universe/PlanetModel.hpp>
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <controller/universe/Universe.hpp>
 
 //## model headers
 //## view headers

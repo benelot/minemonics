@@ -6,18 +6,16 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/ServoMotor.hpp>
 
 //# forward declarations
-class btGeneric6DofSpring2Constraint;
-class btGeneric6DofSpringConstraint;
-class btGeneric6DofConstraint;
-class btRotationalLimitMotor2;
-class btRotationalLimitMotor;
-class btPoint2PointConstraint;
-class btConeTwistConstraint;
-class JointBt;
-
 //# system headers
 //## controller headers
 //## model headers
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
+#include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btHingeConstraint.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -143,7 +141,6 @@ private:
 		}
 	} _initializer;
 
-	MOTOR_TYPE* mMotorBt;
 	double mLastPosition;
 };
 

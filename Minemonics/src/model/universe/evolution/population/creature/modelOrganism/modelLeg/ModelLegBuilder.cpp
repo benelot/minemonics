@@ -13,13 +13,11 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
 
 //## view headers
 //## utils headers
-#include <utils/ogre3D/Euler.hpp>
 
 #ifndef UNIV_EPS
 #define UNIV_EPS 0.01f

@@ -1,15 +1,19 @@
 //# corresponding headers
+#include <controller/viewcontroller/camera/CameraHandler.hpp>
+
 //# forward declarations
 //# system headers
-#include <stddef.h>
-
 //## controller headers
 //## model headers
 //## view headers
+#include <OgreCamera.h>
 #include <OgreMath.h>
 #include <OgreNode.h>
+#include <OgreRenderSystem.h>
+#include <OgreRenderSystemCapabilities.h>
+#include <OgreRoot.h>
+#include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
-#include <OgreVector3.h>
 
 //# custom headers
 //## base headers
@@ -20,8 +24,6 @@
 #include <configuration/EvolutionConfiguration.hpp>
 
 //## controller headers
-#include <controller/viewcontroller/camera/CameraHandler.hpp>
-
 //## model headers
 //## view headers
 //## utils headers

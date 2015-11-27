@@ -1,6 +1,5 @@
 #ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_CREATUREM_H_
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_CREATUREM_H_
-
 //# corresponding header
 #include <configuration/Definitions.hpp>
 #include <model/Serializable.hpp>
@@ -15,6 +14,7 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <iterator>
 #include <string>
 #include <vector>
 
@@ -25,6 +25,8 @@ class access;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/math/special_functions/cbrt.hpp>
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -37,13 +39,13 @@ class access;
 //## model headers
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
+#include <model/universe/evolution/population/creature/genome/Gene.hpp>
+#include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <model/universe/evolution/juries/AverageHeight.hpp>
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 

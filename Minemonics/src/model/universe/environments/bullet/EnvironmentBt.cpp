@@ -8,22 +8,19 @@
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletCollision/CollisionShapes/btConcaveShape.h>
 #include <BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuaternion.h>
+#include <LinearMath/btScalar.h>
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
-
-//## view headers
 #include <OgreQuaternion.h>
 
+//## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/bullet/EnvironmentBt.hpp>
-
 //## view headers
 //## utils headers
 

@@ -3,15 +3,13 @@
 
 //# corresponding headers
 //# forward declarations
-class EnvironmentModel;
-class OgreBtDebugDrawer;
-class PlaneO3D;
-class PlaneModel;
 namespace Ogre {
 class Light;
 } /* namespace Ogre */
 
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 #include <boost/log/attributes/constant.hpp>
@@ -24,10 +22,14 @@ class Light;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/environments/Environment.hpp>
+
 //## model headers
-#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/environments/PlaneModel.hpp>
 
 //## view headers
+#include <view/universe/environments/PlaneO3D.hpp>
+
 //## utils headers
 #include <utils/logging/Logger.hpp>
 

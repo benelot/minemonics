@@ -6,8 +6,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp>
 
 //# forward declarations
-class PhenomeModel;
-
 //# system headers
 //## controller headers
 //## model headers

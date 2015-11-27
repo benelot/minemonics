@@ -5,7 +5,15 @@
 #include <model/Serializable.hpp>
 
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 #include <boost/serialization/vector.hpp>
@@ -18,11 +26,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/physics/GroundController.hpp>
-#include <model/universe/environments/EnvironmentPhysics.hpp>
-#include <model/universe/environments/bullet/EnvironmentBt.hpp>
 #include <model/universe/environments/bullet/PlaneBt.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/environments/physics/GroundController.hpp>
 
 //## view headers
 //## utils headers

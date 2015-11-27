@@ -6,9 +6,6 @@
 
 //# forward declarations
 class CreatureModel;
-class PhenotypeGenerator;
-class Morphogene;
-class MorphogeneBranch;
 namespace boost {
 namespace serialization {
 class access;
@@ -17,6 +14,8 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -31,9 +30,14 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
+#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>

@@ -1,14 +1,17 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <BulletDynamics/Featherstone/btMultiBody.h>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+#include <LinearMath/btMatrix3x3.h>
+#include <OgreQuaternion.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/PhysicsConfiguration.hpp>
-
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>

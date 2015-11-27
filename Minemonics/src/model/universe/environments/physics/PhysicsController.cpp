@@ -8,13 +8,13 @@
 //## controller headers
 //## model headers
 #include <BulletCollision/BroadphaseCollision/btDbvtBroadphase.h>
+#include <BulletCollision/BroadphaseCollision/btDispatcher.h>
 #include <BulletCollision/CollisionDispatch/btCollisionDispatcher.h>
-#include <BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h>
+#include <BulletDynamics/ConstraintSolver/btContactSolverInfo.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyConstraintSolver.h>
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <BulletDynamics/MLCPSolvers/btDantzigSolver.h>
-#include <BulletDynamics/MLCPSolvers/btSolveProjectedGaussSeidel.h>
 #include <BulletDynamics/MLCPSolvers/btMLCPSolver.h>
 #include <LinearMath/btMotionState.h>
 
@@ -24,6 +24,8 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/bullet/BulletUtils.hpp>

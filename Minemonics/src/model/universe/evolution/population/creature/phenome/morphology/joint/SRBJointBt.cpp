@@ -8,12 +8,11 @@
 
 //## controller headers
 //## model headers
+#include <OgreQuaternion.h>
+#include <LinearMath/btMatrix3x3.h>
 #include <LinearMath/btScalar.h>
-#include <LinearMath/btVector3.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
+#include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/ConstraintSolver/btTypedConstraint.h>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
 
 //## view headers
 //# custom headers
@@ -23,9 +22,6 @@
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
-
 //## view headers
 //## utils headers
 #include <utils/MathUtils.hpp>

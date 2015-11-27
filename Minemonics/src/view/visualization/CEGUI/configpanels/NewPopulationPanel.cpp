@@ -37,6 +37,7 @@
 #include <view/visualization/CEGUI/elements/BoxSlider.hpp>
 
 //## utils headers
+#include <utils/serialization/FilesystemManipulator.hpp>
 
 NewPopulationPanel::NewPopulationPanel(const int left, const int top,
 	const std::string name) :

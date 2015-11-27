@@ -7,9 +7,6 @@
 
 //# forward declarations
 class FSLimbModel;
-class btDynamicsWorld;
-class btRigidBody;
-class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -18,15 +15,23 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+#include <boost/serialization/base_object.hpp>
+#include <LinearMath/btVector3.h>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <LinearMath/btTransform.h>
 #include <OgreVector3.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletDynamics/Featherstone/btMultiBody.h>
 
 //## view headers
 //# custom headers
@@ -35,16 +40,13 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
 
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  * @brief		The joint model holds all the state information of the joint.

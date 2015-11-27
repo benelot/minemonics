@@ -1,10 +1,3 @@
-/*
- * DeepSeaController.cpp
- *
- *  Created on: Nov 17, 2014
- *      Author: leviathan
- */
-
 //# corresponding header
 #include <model/universe/environments/physics/DeepSeaController.hpp>
 

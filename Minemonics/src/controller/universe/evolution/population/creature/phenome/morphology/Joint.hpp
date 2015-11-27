@@ -2,15 +2,12 @@
 #define CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //# forward declarations
-class btTransform;
 class Creature;
-class JointGraphics;
 class Limb;
-class Motor;
-class JointModel;
 
 //# system headers
 #include <string>
@@ -18,6 +15,7 @@ class JointModel;
 
 //## controller headers
 //## model headers
+#include <LinearMath/btTransform.h>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 
@@ -29,9 +27,12 @@ class JointModel;
 #include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //## view headers
+#include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //## utils headers
 #include <utils/logging/Logger.hpp>

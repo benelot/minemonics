@@ -3,31 +3,15 @@
 
 //# forward declarations
 //# system headers
-#include <list>
-#include <map>
-
 //## controller headers
 //## model headers
-#include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
-#include <OgreQuaternion.h>
-
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/PlanetModel.hpp>
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/evolution/population/creature/genome/Genome.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //## view headers

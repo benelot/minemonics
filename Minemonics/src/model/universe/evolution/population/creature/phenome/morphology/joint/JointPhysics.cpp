@@ -5,8 +5,6 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <LinearMath/btVector3.h>
-
 //## view headers
 //# custom headers
 //## base headers

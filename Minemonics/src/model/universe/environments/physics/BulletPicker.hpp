@@ -5,17 +5,16 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btDynamicsWorld;
-class btMultiBodyPoint2Point;
-class btMultiBodyDynamicsWorld;
-class btRigidBody;
-class btTypedConstraint;
-
 //# system headers
 //## controller headers
 //## model headers
 #include <LinearMath/btScalar.h>
 #include <LinearMath/btVector3.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletDynamics/ConstraintSolver/btTypedConstraint.h>
+#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
+#include <BulletDynamics/Featherstone/btMultiBodyPoint2Point.h>
 
 //## view headers
 //# custom headers

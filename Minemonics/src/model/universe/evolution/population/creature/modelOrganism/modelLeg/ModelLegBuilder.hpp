@@ -10,6 +10,7 @@ class MixedGenome;
 //# system headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
 
 //## view headers

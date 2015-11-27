@@ -3,17 +3,15 @@
 
 //# corresponding header
 //# forward declarations
-class Population;
-
 //# system headers
+#include <stdexcept>
+#include <string>
 #include <vector>
-#include <iostream>
 
 //## controller headers
 //## model headers
 #include <OgreIteratorWrapper.h>
 #include <OgreSceneNode.h>
-#include <boost/lexical_cast.hpp>
 
 //## view headers
 //# custom headers
@@ -24,13 +22,13 @@ class Population;
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 
 //## view headers
 //## utils headers
 #include <utils/StringFormatter.hpp>
 #include <utils/logging/Logger.hpp>
+
 
 /**
  * @brief		The debugger collects debug methods to be used in different contexts do quickly get debug information.

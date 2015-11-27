@@ -3,6 +3,8 @@
 
 //# forward declarations
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -16,6 +18,8 @@
 
 //## model headers
 #include <model/universe/environments/bullet/EnvironmentBt.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers
 //## utils headers

@@ -3,8 +3,6 @@
 
 //# forward declarations
 //# system headers
-#include <stddef.h>
-
 //## controller headers
 //## model headers
 //## view headers
@@ -13,11 +11,7 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/bullet/EnvironmentBt.hpp>
-
 //## view headers
-#include <view/universe/environments/EnvironmentGraphics.hpp>
-
 //## utils headers
 
 Environment::Environment() : mEnvironmentGraphics(NULL), mEnvironmentModel(

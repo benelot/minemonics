@@ -3,7 +3,7 @@
 
 //# forward declarations
 //# system headers
-#include <stddef.h>
+#include <OgreVector3.h>
 
 //## controller headers
 //## model headers
@@ -12,16 +12,20 @@
 //## base headers
 //## configuration headers
 #include <configuration/ControlConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
 //## model headers
-#include <model/universe/PlanetModel.hpp>
-#include <model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp>
+#include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp>
+#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
+#include <utils/serialization/FilesystemManipulator.hpp>
 
 PopulationModel::PopulationModel() :
 	mCreatureQty(0), mCurrentCreatureIndex(0), mPlanetModel(

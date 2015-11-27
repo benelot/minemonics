@@ -3,28 +3,15 @@
 
 //# forward declarations
 //# system headers
-#include <stddef.h>
-
 //## controller headers
 //## model headers
 //## view headers
 //# custom headers
 //## base headers
-#include <SimulationManager.hpp>
-
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/PlaneModel.hpp>
-#include <model/universe/environments/bullet/PlaneBt.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/environments/physics/GroundController.hpp>
-
 //## view headers
-#include <view/universe/environments/PlaneO3D.hpp>
-#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
-
 //## utils headers
 
 BoostLogger Plane::mBoostLogger; /*<! initialize the boost logger*/

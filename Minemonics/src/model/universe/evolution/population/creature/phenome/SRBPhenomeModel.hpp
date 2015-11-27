@@ -1,11 +1,11 @@
 #ifndef MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_SRBPHENOMEMODEL_HPP_
+
 //# corresponding headers
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
 class CreatureModel;
-class PhenotypeGenerator;
 namespace boost {
 namespace serialization {
 class access;
@@ -14,8 +14,6 @@ class access;
 
 //# system headers
 #include <iostream>
-#include <iterator>
-#include <string>
 #include <vector>
 
 //## controller headers
@@ -31,6 +29,7 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>

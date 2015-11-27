@@ -1,10 +1,11 @@
-#pragma once
+#ifndef CONTROLLER_STATEHANDLER_HPP_
+#define CONTROLLER_STATEHANDLER_HPP_
 
 //# corresponding header
 //# forward declarations
-class Planet;
-
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 #include <boost/log/attributes/constant.hpp>
@@ -15,6 +16,8 @@ class Planet;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/Planet.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -108,3 +111,4 @@ private:
 	Planet* mCurrentlySelectedPlanet; /**!< The currently selected planet */
 };
 
+#endif /* CONTROLLER_STATEHANDLER_HPP_ */

@@ -5,7 +5,6 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btVector3;
 namespace boost {
 namespace serialization {
 class access;

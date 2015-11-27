@@ -20,11 +20,10 @@ class access;
 
 //## controller headers
 //## model headers
-#include <boost/filesystem/path.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <boost/serialization/vector.hpp>
 
 //## view headers
 //# custom headers
@@ -36,12 +35,11 @@ class access;
 #include <controller/SaveController.hpp>
 
 //## model headers
-#include <model/universe/Epoch.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/Epoch.hpp>
 
 //## view headers
 //## utils headers
-#include <utils/serialization/FilesystemManipulator.hpp>
 
 /**
  * @brief		The population model holds the information about a population of creatures.

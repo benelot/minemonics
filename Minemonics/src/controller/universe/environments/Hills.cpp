@@ -1,9 +1,20 @@
 //# corresponding header
 #include <controller/universe/environments/Hills.hpp>
-#include <model/universe/environments/bullet/HillsBt.hpp>
+
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+//## view headers
 #include <view/universe/environments/HillsO3D.hpp>
 
-//## view headers
+//## utils headers
 
 Hills::Hills() {
 }

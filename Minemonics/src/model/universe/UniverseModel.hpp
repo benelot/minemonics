@@ -3,9 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class PlanetModel;
-class EvaluationModel;
-
 //# system headers
 #include <vector>
 
@@ -17,6 +14,9 @@ class EvaluationModel;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/PlanetModel.hpp>
+#include <model/universe/EvaluationModel.hpp>
+
 //## view headers
 //## utils headers
 

@@ -1,24 +1,20 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.hpp>
 
-#include <iostream>
-#include <iomanip>
-#include <string>
-
 //## controller headers
 //## model headers
+#include <LinearMath/btScalar.h>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 
 //## view headers
 //## utils headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/ogre3D/Euler.hpp>
 
 FSServoMotor::FSServoMotor() {
 }

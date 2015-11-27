@@ -2,7 +2,6 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_MOTOR_H_
 
 //# corresponding header
-#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 
 //# forward declarations

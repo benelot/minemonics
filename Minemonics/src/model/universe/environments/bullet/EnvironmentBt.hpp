@@ -6,24 +6,19 @@
 #include <model/universe/environments/EnvironmentPhysics.hpp>
 
 //# forward declarations
-class btCollisionShape;
-struct btDefaultMotionState;
-class btRigidBody;
-namespace Ogre {
-class SceneNode;
-class Vector3;
-} /* namespace Ogre */
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
-#include <boost/serialization/assume_abstract.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/version.hpp>
-#include <boost/log/attributes/constant.hpp>
-#include <boost/log/sources/basic_logger.hpp>
-
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletCollision/CollisionShapes/btCollisionShape.h>
 //## view headers
 //# custom headers
 //## base headers

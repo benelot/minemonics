@@ -1,4 +1,5 @@
 //# corresponding header
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
 #include <gtest/gtest.h>
 
 //## controller headers
@@ -13,7 +14,6 @@
 //## configuration headers
 //## controller headers
 #include <controller/SaveController.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
 
 //## model headers
 //## view headers

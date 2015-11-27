@@ -3,9 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class PopulationModel;
-class CreatureModel;
-
 //# system headers
 //## controller headers
 //## model headers
@@ -15,6 +12,9 @@ class CreatureModel;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>

@@ -7,10 +7,7 @@
 
 //# forward declarations
 class Creature;
-class LimbGraphics;
 class SimulationManager;
-class LimbO3D;
-class LimbModel;
 
 //# system headers
 #include <string>
@@ -24,16 +21,21 @@ class LimbModel;
 
 //## view headers
 #include <OgreColourValue.h>
+#include <OgreQuaternion.h>
 
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
 
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //## view headers
+#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
+
 //## utils headers
 #include <utils/logging/Logger.hpp>
 
@@ -144,10 +146,7 @@ public:
 
 private:
 
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -156,24 +155,15 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("Limb"));
+				boost::log::attributes::constant<std::string>("Limb"));
 		}
 	} _initializer;
 
-	/**
-	 * Graphical representation of the limb.
-	 */
-	LimbGraphics* mLimbGraphics;
+	LimbGraphics* mLimbGraphics; /**!< Graphical representation of the limb. */
 
-	/**
-	 * The model representation of the limb.
-	 */
-	LimbModel* mLimbModel;
+	LimbModel* mLimbModel; /**!< The model representation of the limb. */
 
-	/**
-	 * The creature the limb belongs to.
-	 */
-	Creature* mCreature;
+	Creature* mCreature; /**!< The creature the limb belongs to. */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_HPP_ */

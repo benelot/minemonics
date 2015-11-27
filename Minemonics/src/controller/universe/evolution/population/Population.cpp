@@ -1,34 +1,23 @@
 //# corresponding headers
+#include <model/Serializable.hpp>
 #include <controller/universe/evolution/population/Population.hpp>
 
 //# forward declarations
 //# system headers
-#include <stddef.h>
-#include <iterator>
-#include <vector>
-
 //## controller headers
 //## model headers
 //## view headers
-#include <OgreVector3.h>
-
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/MorphologyConfiguration.hpp>
-
 //## controller headers
 #include <controller/universe/Planet.hpp>
-#include <controller/universe/evolution/population/creature/Creature.hpp>
-//#include <controller/universe/evolution/population/ragdoll/RagDoll.hpp>
-//#include <controller/universe/evolution/population/snake/Snake.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/PopulationModel.hpp>
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
 //## utils headers
-#include <utils/Randomness.hpp>
 
 BoostLogger Population::mBoostLogger; /*<! initialize the boost logger*/
 Population::_Init Population::_initializer;

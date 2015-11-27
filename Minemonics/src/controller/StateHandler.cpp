@@ -5,14 +5,11 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <OgreStringConverter.h>
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
-#include <controller/universe/Planet.hpp>
-
 //## model headers
 //## view headers
 //## utils headers

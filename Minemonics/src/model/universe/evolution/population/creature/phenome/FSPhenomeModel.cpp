@@ -1,21 +1,24 @@
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 
+//# forward declarations
+//# system headers
 #include <list>
 #include <map>
 
 //## controller headers
 //## model headers
-#include <BulletDynamics/Featherstone/btMultiBody.h>
-#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLink.h>
 #include <LinearMath/btAlignedObjectArray.h>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btScalar.h>
-#include <LinearMath/btVector3.h>
+#include <LinearMath/btTransform.h>
+#include <OgreColourValue.h>
 #include <OgreQuaternion.h>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -30,27 +33,33 @@
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/Embryogenesis.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
-#include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
-#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/FSServoMotor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
 
 //## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/ogre3D/Euler.hpp>
 #include <utils/MathUtils.hpp>
 
 BoostLogger FSPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
@@ -458,8 +467,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
-	//TODO: Check if correct
-	joint->initialize();
+	//TODO: Optimize this for loading
+	joint->initialize(); // Done in generate body as well
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Joint: Parent: " << joint->getParentIndex() << " /Child: "
 	<< joint->getChildIndex();

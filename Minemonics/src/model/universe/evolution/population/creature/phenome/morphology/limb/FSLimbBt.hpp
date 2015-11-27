@@ -6,9 +6,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations
-struct btDefaultMotionState;
-class btDynamicsWorld;
-class btMultiBody;
 class LimbModel;
 namespace boost {
 namespace serialization {
@@ -17,19 +14,22 @@ class access;
 } /* namespace boost */
 
 //# system headers
-#include <cmath>
 #include <iostream>
 
 //## controller headers
 //## model headers
+#include <LinearMath/btVector3.h>
 #include <OgreQuaternion.h>
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/serialization/base_object.hpp>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Featherstone/btMultiBody.h>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
+#include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuaternion.h>
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>

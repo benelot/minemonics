@@ -81,6 +81,7 @@
 
 //## utils headers
 #include <utils/Randomness.hpp>
+#include <utils/serialization/FilesystemManipulator.hpp>
 
 SimulationManager* SimulationManager::mSimulationManager;
 BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables

@@ -3,16 +3,16 @@
 
 //# corresponding header
 //# forward declarations
-class SimulationManager;
 class Population;
-class PlanetModel;
-class PopulationModel;
-class CreatureModel;
-class Jury;
 
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -21,6 +21,9 @@ class Jury;
 #include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
+#include <model/universe/PlanetModel.hpp>
+#include <model/universe/evolution/juries/Jury.hpp>
+#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
 
 //## view headers

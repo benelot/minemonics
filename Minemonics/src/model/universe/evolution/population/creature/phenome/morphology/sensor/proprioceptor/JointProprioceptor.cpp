@@ -5,8 +5,6 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-
 //## view headers
 //# custom headers
 //## base headers

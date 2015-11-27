@@ -5,6 +5,9 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
+#include <OgreVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -13,10 +16,11 @@
 //## configuration headers
 //## controller headers
 #include <controller/universe/evolution/population/Population.hpp>
+#include <controller/SaveController.hpp>
+
 
 //## model headers
 #include <model/universe/evolution/population/PopulationModel.hpp>
-#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 
 //## view headers
 //## utils headers

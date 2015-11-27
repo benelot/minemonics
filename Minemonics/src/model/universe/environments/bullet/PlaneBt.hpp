@@ -2,19 +2,27 @@
 #define MODEL_ENVIRONMENT_PLANEBT_H_
 
 //# corresponding header
-#include <model/universe/environments/bullet/EnvironmentBt.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/environments/bullet/EnvironmentBt.hpp>
 
 //# forward declarations
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
+
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
-#include <btBulletDynamicsCommon.h>
 
 //## view headers
 //# custom headers

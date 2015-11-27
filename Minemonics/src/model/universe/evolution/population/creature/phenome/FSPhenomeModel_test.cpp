@@ -1,5 +1,6 @@
 //# corresponding headers
 #include <gtest/gtest.h>
+#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 
 //# forward declarations
 //# system headers
@@ -15,7 +16,6 @@
 
 //## controller headers
 #include <controller/SaveController.hpp>
-#include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 #include <utils/Randomness.hpp>
 
 class FSPhenomeModelTest: public ::testing::Test {

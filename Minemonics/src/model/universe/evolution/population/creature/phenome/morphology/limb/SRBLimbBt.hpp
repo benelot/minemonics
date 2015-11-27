@@ -6,8 +6,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>
 
 //# forward declarations
-struct btDefaultMotionState;
-class btDynamicsWorld;
 class LimbModel;
 namespace boost {
 namespace serialization {
@@ -24,6 +22,8 @@ class access;
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <LinearMath/btDefaultMotionState.h>
 #include <BulletCollision/CollisionDispatch/btCollisionObject.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btQuaternion.h>

@@ -10,6 +10,8 @@
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <boost/preprocessor/seq/size.hpp>
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
 
 //## view headers
 //# custom headers

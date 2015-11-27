@@ -1,6 +1,13 @@
+
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
-#include <LinearMath/btScalar.h>
+
+//# forward declarations
+//# system headers
+#include <iterator>
+
+//## controller headers
+//## model headers
 #include <OgreColourValue.h>
 #include <OgreVector3.h>
 
@@ -10,8 +17,11 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
 
 //## view headers
 //## utils headers

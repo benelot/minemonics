@@ -5,17 +5,29 @@
 #include <model/universe/environments/EnvironmentModel.hpp>
 
 //# forward declarations
-class PlaneBt;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/environments/bullet/PlaneBt.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
+
 //## view headers
 //## utils headers
 

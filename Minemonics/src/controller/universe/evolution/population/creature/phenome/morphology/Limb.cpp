@@ -5,39 +5,26 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <boost/lexical_cast.hpp>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
-#include <LinearMath/btQuadWord.h>
-#include <LinearMath/btQuaternion.h>
-#include <LinearMath/btScalar.h>
-#include <LinearMath/btVector3.h>
-
 //## view headers
 //# custom headers
 //## base headers
 #include <SimulationManager.hpp>
 
 //## configuration headers
-#include <configuration/PhysicsConfiguration.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
-
 //## controller headers
 #include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
 #include <model/universe/PlanetModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
-#include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbGraphics.hpp>
+
+//## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BoostLogger Limb::mBoostLogger; /*<! initialize the boost logger*/
 Limb::_Init Limb::_initializer;

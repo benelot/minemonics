@@ -2,12 +2,10 @@
 #define MODEL_UNIVERSE_PLANETMODEL_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/Serializable.hpp>
 
 //# forward declarations
-class EnvironmentModel;
-class EvolutionModel;
-
 //# system headers
 #include <vector>
 
@@ -16,6 +14,7 @@ class EvolutionModel;
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 
 //## view headers
 //# custom headers
@@ -27,6 +26,7 @@ class EvolutionModel;
 #include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/environments/PlaneModel.hpp>
 #include <model/universe/evolution/EvolutionModel.hpp>
+#include <model/universe/environments/EnvironmentModel.hpp>
 
 //## view headers
 //## utils headers
@@ -40,8 +40,8 @@ class EvolutionModel;
 class PlanetModel: public Serializable {
 public:
 	PlanetModel();
-	PlanetModel(const EvolutionModel::EvaluationType type, const double evaluationTime,
-		const int tournamentSize,
+	PlanetModel(const EvolutionModel::EvaluationType type,
+		const double evaluationTime, const int tournamentSize,
 		const PhysicsController::PhysicsModelType physicsModelType,
 		const EnvironmentModel::EnvironmentType environmentType);
 	virtual ~PlanetModel();
@@ -69,6 +69,10 @@ public:
 	 */
 	void update(double timeSinceLastTick);
 
+	void drawDebugWorld() {
+		mEnvironmentModel->getPhysicsController()->drawDebugWorld();
+	}
+
 	// Accessor methods ##########################
 
 	EnvironmentModel* const getEnvironmentModel() const {
@@ -94,7 +98,7 @@ public:
 
 	virtual void load();
 
-	friend class boost::serialization::access; 	/**!< Give access to boost serialization */
+	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
 	/**
 	 * Serializes the planet model to a string.

@@ -5,7 +5,6 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <LinearMath/btTransform.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -19,15 +18,12 @@
 //## model headers
 #include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
-#include <model/universe/PlanetModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //##view headers
-#include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 #include <view/universe/evolution/population/creature/phenome/morphology/joint/JointO3D.hpp>
 
 //## utils headers

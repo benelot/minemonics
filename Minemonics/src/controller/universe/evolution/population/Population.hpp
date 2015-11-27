@@ -4,10 +4,9 @@
 //# corresponding headers
 //# forward declarations
 class Planet;
-class Creature;
-class PopulationModel;
 
 //# system headers
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -21,9 +20,11 @@ class PopulationModel;
 //## base headers
 //## configuration headers
 //## controller headers
-
+#include <controller/universe/evolution/population/creature/Creature.hpp>
 
 //## model headers
+#include <model/universe/evolution/population/PopulationModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>

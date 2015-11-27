@@ -1,8 +1,8 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 
-#include <stddef.h>
-#include <iostream>
+//# forward declarations
+//# system headers
 #include <cstdlib>
 
 //## controller headers
@@ -12,13 +12,11 @@
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuadWord.h>
 #include <LinearMath/btScalar.h>
-
 #include <OgreQuaternion.h>
 #include <OgreVector3.h>
+#include <OgreColourValue.h>
 
 //## view headers
 //# custom headers
@@ -30,13 +28,15 @@
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
 //## view headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
 //## utils headers
+#include <utils/MathUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/MathUtils.hpp>
 
 BoostLogger SRBLimbBt::mBoostLogger; /*<! initialize the boost logger*/
 SRBLimbBt::_Init SRBLimbBt::_initializer;

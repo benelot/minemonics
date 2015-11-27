@@ -1,12 +1,20 @@
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
 
+//# forward declarations
+//# system headers
+#include <cmath>
 #include <list>
 #include <map>
 
 //## controller headers
 //## model headers
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <LinearMath/btTransform.h>
+#include <OgreColourValue.h>
 #include <OgreQuaternion.h>
+#include <OgreVector3.h>
 
 //## view headers
 //# custom headers
@@ -14,26 +22,35 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 //## model headers
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
 #include <model/universe/evolution/population/creature/CreatureModel.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/ControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/BaseGenerator.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
 #include <model/universe/evolution/population/creature/genome/genetics/Embryogenesis.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
 #include <model/universe/evolution/population/creature/genome/Genome.hpp>
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
-#include <model/universe/PlanetModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
 
 //## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
-#include <utils/ogre3D/Euler.hpp>
 #include <utils/MathUtils.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BoostLogger SRBPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 SRBPhenomeModel::_Init SRBPhenomeModel::_initializer;
@@ -400,8 +417,8 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
-	//TODO: Check if correct
-	joint->initialize();
+	//TODO: Optimize this for loading
+	joint->initialize(); // Is done in generate body as well
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Joint: Parent: " << joint->getParentIndex() << " /Child: "
 	<< joint->getChildIndex();

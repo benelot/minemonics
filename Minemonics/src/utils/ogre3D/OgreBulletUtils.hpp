@@ -1,13 +1,9 @@
-/*
- * OgreBulletUtils.h
- *
- *  Created on: Mar 19, 2015
- *      Author: leviathan
- */
-
 #ifndef MODEL_BULLET_OGREBULLETUTILS_H_
 #define MODEL_BULLET_OGREBULLETUTILS_H_
+
 //# corresponding headers
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -28,6 +24,12 @@
 //## view headers
 //## utils headers
 
+/**
+ * @brief		OgreBulletUtils provide conversion capabilities between Ogre3D and Bullet.
+ * @details		Details
+ * @date		2015-03-19
+ * @author		Benjamin Ellenberger
+ */
 class OgreBulletUtils {
 public:
 	static btVector3 convert(const Ogre::Vector3& V) {

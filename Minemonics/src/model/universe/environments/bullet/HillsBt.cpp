@@ -14,13 +14,13 @@
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <LinearMath/btDefaultMotionState.h>
 #include <LinearMath/btQuaternion.h>
+#include <LinearMath/btScalar.h>
+#include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
-
-//## view headers
 #include <OgreQuaternion.h>
-#include <OgreTerrain.h>
 #include <OgreVector3.h>
 
+//## view headers
 //# custom headers
 //## base headers
 //## configuration headers

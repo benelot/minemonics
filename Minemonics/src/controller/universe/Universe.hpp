@@ -3,10 +3,8 @@
 
 //# corresponding header
 //# forward declarations
-class Planet;
-class Evaluation;
-
 //# system headers
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -20,12 +18,14 @@ class Evaluation;
 //## configuration headers
 //## controller headers
 #include <controller/EvaluationController.hpp>
+#include <controller/universe/Planet.hpp>
 
 //## model headers
 #include <model/universe/UniverseModel.hpp>
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The universe is the class that contains everything: Creatures in populations under evolutionary rules and in environments on different planets.
@@ -33,7 +33,6 @@ class Evaluation;
  * @date		2015-04-06
  * @author		Benjamin Ellenberger
  */
-
 class Universe {
 public:
 	Universe();

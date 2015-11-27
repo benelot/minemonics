@@ -1,5 +1,4 @@
 //# corresponding headers
-#include <configuration/Definitions.hpp>
 #include <model/universe/environments/physics/BulletPicker.hpp>
 
 //# forward declarations
@@ -10,13 +9,8 @@
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
 #include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Featherstone/btMultiBody.h>
-#include <BulletDynamics/Featherstone/btMultiBodyConstraint.h>
-#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <BulletDynamics/Featherstone/btMultiBodyLinkCollider.h>
-#include <BulletDynamics/Featherstone/btMultiBodyPoint2Point.h>
 #include <LinearMath/btTransform.h>
 
 //## view headers

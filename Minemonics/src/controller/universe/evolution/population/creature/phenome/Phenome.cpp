@@ -3,8 +3,7 @@
 
 //# forward declarations
 //# system headers
-#include <vector>
-#include <map>
+#include <cstdlib>
 
 //## controller headers
 //## model headers
@@ -21,25 +20,17 @@
 #include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
-#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
-#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
-#include <controller/universe/evolution/population/creature/phenome/Component.hpp>
+#include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/evolution/population/creature/phenome/Phenome.hpp>
 
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
-#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
-#include <model/universe/evolution/population/creature/genome/Gene.hpp>
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
-#include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
+//## view headers
 #include <view/universe/evolution/population/creature/phenome/morphology/limb/LimbO3D.hpp>
 
 //## utils headers
-#include <utils/ogre3D/Euler.hpp>
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BoostLogger Phenome::mBoostLogger; /*<! initialize the boost logger*/
 Phenome::_Init Phenome::_initializer;

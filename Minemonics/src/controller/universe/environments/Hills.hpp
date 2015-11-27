@@ -2,6 +2,8 @@
 #define CONTROLLER_UNIVERSE_ENVIRONMENTS_HILLS_HPP_
 
 //# corresponding header
+#include <controller/universe/environments/Environment.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers

@@ -13,19 +13,18 @@
 //## configuration headers
 //## controller headers
 #include <controller/StateHandler.hpp>
-#include <controller/universe/Planet.hpp>
 #include <controller/universe/environments/Environment.hpp>
-#include <controller/universe/evolution/population/Population.hpp>
 #include <controller/universe/evolution/population/creature/Creature.hpp>
+#include <controller/universe/Planet.hpp>
+#include <controller/viewcontroller/ViewController.hpp>
 
 //## model headers
-#include <model/universe/PlanetModel.hpp>
 #include <model/universe/evolution/EvolutionModel.hpp>
-#include <model/universe/evolution/population/PopulationModel.hpp>
-#include <model/universe/environments/EnvironmentModel.hpp>
-#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
+#include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
+
 //## utils headers
 
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/

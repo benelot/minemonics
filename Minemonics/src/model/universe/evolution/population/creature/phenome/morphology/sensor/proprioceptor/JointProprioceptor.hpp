@@ -6,11 +6,11 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/Proprioceptor.hpp>
 
 //# forward declarations
-class PhenomeModel;
 class JointModel;
 
 //# system headers
 #include <iostream>
+
 //## controller headers
 //## model headers
 #include <boost/serialization/assume_abstract.hpp>

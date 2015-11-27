@@ -6,18 +6,26 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
-class btGeneric6DofSpring2Constraint;
-class btGeneric6DofSpringConstraint;
-class btGeneric6DofConstraint;
-class btRotationalLimitMotor2;
-class btRotationalLimitMotor;
-class btPoint2PointConstraint;
-class btConeTwistConstraint;
-class JointBt;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
+#include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btHingeConstraint.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -37,6 +45,7 @@ class JointBt;
 #define POINT2POINTCONSTRAINT 3
 #define GENERIC6DOFSPRINGCONSTRAINT 4
 #define GENERIC6DOFSPRING2CONSTRAINT 5
+
 /** bullet physics hinge constraint - A 1Dof angular joint with with limits */
 #define CONSTRAINT_INDEX HINGECONSTRAINT
 #define CONSTRAINT_TYPE btHingeConstraint
@@ -130,16 +139,17 @@ public:
 	}
 
 protected:
-	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex;
+	JointPhysics::RotationalDegreeOfFreedom mJointMotorIndex; /**!< The motor index of the joint that is controlled*/
 
-	MOTOR_TYPE* mMotorBt;
+	//TODO: Check if still not used at the moment
+	MOTOR_TYPE* mMotorBt; /**!< The motor to control the joint*/
 	double mLowerLimit; /**!< The lower limit of the DoF the servo is driving */
 	double mUpperLimit; /**!< The upper limit of the DoF the servo is driving */
 
 	int mJointIndex; /**!< The index of the joint in the whole creature. */
-	JointPhysics* mJoint;
+	JointPhysics* mJoint; /**!< The joint the servomotor is controlling */
 
-	bool mPositionControlled;
+	bool mPositionControlled; /**!< Is the servomotor position controlled via PID?*/
 private:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
 

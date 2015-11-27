@@ -3,17 +3,15 @@
 
 //# corresponding header
 //# forward declarations
-class SimulationManager;
-
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
 
 //## view headers
-#include <OgreRoot.h>
-#include <OgrePrerequisites.h>
 #include <OgreVector3.h>
 
 //# custom headers

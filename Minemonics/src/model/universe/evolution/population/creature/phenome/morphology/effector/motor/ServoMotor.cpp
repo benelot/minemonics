@@ -3,25 +3,16 @@
 
 //# forward declarations
 //# system headers
-#include <iostream>
-#include <iomanip>
-#include <string>
-
 //## controller headers
 //## model headers
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h>
-#include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
-#include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
-
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/ogre3D/Euler.hpp>
+//## view headers
+//## utils headers
 
 BoostLogger ServoMotor::mBoostLogger; /*<! initialize the boost logger*/
 ServoMotor::_Init ServoMotor::_initializer;

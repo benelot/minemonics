@@ -39,6 +39,7 @@
 #include <view/visualization/CEGUI/elements/BoxSlider.hpp>
 
 //## utils headers
+#include <utils/serialization/FilesystemManipulator.hpp>
 
 NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 	const std::string name) :

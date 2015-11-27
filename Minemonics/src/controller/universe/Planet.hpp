@@ -5,8 +5,6 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class PlanetModel;
-
 //# system headers
 #include <string>
 
@@ -24,7 +22,10 @@ class PlanetModel;
 #include <controller/universe/environments/Environment.hpp>
 
 //## model headers
+#include <model/universe/environments/EnvironmentModel.hpp>
 #include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/evolution/EvolutionModel.hpp>
+#include <model/universe/PlanetModel.hpp>
 
 //## view headers
 //## utils headers

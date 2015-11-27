@@ -2,8 +2,6 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_COMPONENTMODEL_HPP_
 
 //# corresponding headers
-#include <configuration/Definitions.hpp>
-
 //# forward declarations
 namespace boost {
 namespace serialization {

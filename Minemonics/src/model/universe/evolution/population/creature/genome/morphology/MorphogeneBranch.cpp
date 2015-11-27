@@ -192,6 +192,8 @@ void MorphogeneBranch::initialize() {
 	mJointAnchorZ = anchorVector.z; // the joint will be attached.
 
 	mBranchGeneType = 0;
+
+	// TODO: Add joint stiffness and damping
 }
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {

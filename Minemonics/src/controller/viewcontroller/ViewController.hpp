@@ -3,14 +3,12 @@
 
 //# corresponding header
 //# forward declarations
-class MovablePanel;
-class Planet;
-class Evaluation;
 namespace CEGUI {
 class OgreRenderer;
 } /* namespace CEGUI */
 
 //# system headers
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -25,11 +23,14 @@ class OgreRenderer;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/Evaluation.hpp>
+#include <controller/universe/Planet.hpp>
 #include <controller/viewcontroller/camera/CameraHandler.hpp>
 
 //## model headers
 //## view headers
 #include <view/visualization/CEGUI/GUISheetHandler.hpp>
+#include <view/visualization/CEGUI/MovablePanel.hpp>
 #include <view/visualization/overlay/InfoOverlay.hpp>
 #include <view/visualization/CEGUI/MenuBar.hpp>
 #include <view/visualization/CEGUI/infopanels/FPSPanel.hpp>

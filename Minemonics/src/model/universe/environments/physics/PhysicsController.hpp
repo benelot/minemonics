@@ -5,18 +5,24 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class btDefaultCollisionConfiguration;
-class btMultiBodyConstraintSolver;
+namespace boost {
+namespace serialization {
+class access;
+} /* namespace serialization */
+} /* namespace boost */
 
 //# system headers
+#include <iostream>
+
 //## controller headers
 //## model headers
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
-#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
+#include <BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <LinearMath/btAlignedObjectArray.h>
 #include <LinearMath/btVector3.h>
 
@@ -135,6 +141,10 @@ public:
 
 	PhysicsModelType getPhysicsModelType() const {
 		return mPhysicsModelType;
+	}
+
+	void drawDebugWorld(){
+		mDynamicsWorld->debugDrawWorld(); /**!< draws the debug world if it is enabled*/
 	}
 
 	// Serialization ##########################

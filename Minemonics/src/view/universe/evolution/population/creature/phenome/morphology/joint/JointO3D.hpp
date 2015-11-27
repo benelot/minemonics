@@ -2,8 +2,8 @@
 #define VIEW_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTO3D_HPP_
 
 //# corresponding header
-#include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 #include <configuration/Definitions.hpp>
+#include <view/universe/evolution/population/creature/phenome/morphology/joint/JointGraphics.hpp>
 
 //# forward declarations
 class SimulationManager;

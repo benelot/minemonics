@@ -6,8 +6,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 
 //# forward declarations
-class btDynamicsWorld;
-class btRigidBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -26,6 +24,8 @@ class access;
 #include <LinearMath/btTransform.h>
 #include <LinearMath/btVector3.h>
 #include <OgreVector3.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 
 //## view headers
 //# custom headers

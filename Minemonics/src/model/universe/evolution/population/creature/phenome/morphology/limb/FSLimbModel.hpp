@@ -6,7 +6,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
 //# forward declarations
-class btDynamicsWorld;
+class FSJointModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -15,15 +15,20 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <OgreQuaternion.h>
 #include <LinearMath/btVector3.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 
 //## view headers
 //# custom headers
@@ -33,7 +38,6 @@ class access;
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbPhysics.hpp>

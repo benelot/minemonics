@@ -5,16 +5,10 @@
 #include <configuration/Definitions.hpp>
 
 //# forward declarations
-class SimulationManager;
-class MixedGenome;
 class Creature;
-class CreatureModel;
-class Limb;
-class Joint;
-class Component;
-class PhenomeModel;
 
 //# system headers
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -28,9 +22,13 @@ class PhenomeModel;
 //## base headers
 //## configuration headers
 //## controller headers
-#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Joint.hpp>
+#include <controller/universe/evolution/population/creature/phenome/morphology/Limb.hpp>
 
 //## model headers
+#include <model/universe/environments/physics/PhysicsController.hpp>
+#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/logging/Logger.hpp>

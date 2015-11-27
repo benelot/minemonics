@@ -6,10 +6,6 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //# forward declarations
-class btDynamicsWorld;
-class btRigidBody;
-class btTransform;
-class btMultiBody;
 namespace boost {
 namespace serialization {
 class access;
@@ -26,6 +22,10 @@ class access;
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
 #include <LinearMath/btVector3.h>
+#include <LinearMath/btTransform.h>
+#include <BulletDynamics/Featherstone/btMultiBody.h>
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -38,8 +38,8 @@ class access;
 
 //## view headers
 //## utils headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/logging/Logger.hpp>
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
@@ -206,12 +206,9 @@ private:
 		}
 	} _initializer;
 
-	/**
-	 * The bullet dynamics world of the bullet physics engine. Reference only.
-	 */
-	btDynamicsWorld* mWorld;
+	btDynamicsWorld* mWorld;	/**!< The bullet dynamics world of the bullet physics engine. Reference only. */
 
-	btMultiBody* mMultiBody;
+	btMultiBody* mMultiBody; /**!< The multibody the joint belongs to */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTBT_HPP_ */

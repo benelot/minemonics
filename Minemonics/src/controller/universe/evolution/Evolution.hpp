@@ -3,11 +3,10 @@
 
 //# corresponding headers
 //# forward declarations
-class EvaluationController;
-class Population;
 class Planet;
 
 //# system headers
+#include <string>
 #include <vector>
 
 //## controller headers
@@ -19,14 +18,16 @@ class Planet;
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/EvaluationConfiguration.hpp>
-
 //## controller headers
+#include <controller/EvaluationController.hpp>
+#include <controller/universe/evolution/population/Population.hpp>
+
 //## model headers
 #include <model/universe/evolution/EvolutionModel.hpp>
 
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The evolution runs evaluations depending on type.

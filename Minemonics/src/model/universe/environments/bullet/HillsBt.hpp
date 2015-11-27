@@ -2,19 +2,14 @@
 #define MODEL_ENVIRONMENT_HILLSBT_H_
 
 //# corresponding header
-#include <model/universe/environments/bullet/EnvironmentBt.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/environments/bullet/EnvironmentBt.hpp>
 
 //# forward declarations
-namespace Ogre {
-class Terrain;
-} /* namespace Ogre */
-
 //# system headers
 //## controller headers
 //## model headers
-#include <boost/log/attributes/constant.hpp>
-#include <boost/log/sources/basic_logger.hpp>
+#include <OgreTerrain.h>
 
 //## view headers
 //# custom headers

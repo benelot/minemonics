@@ -6,10 +6,7 @@
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 
 //# forward declarations
-class btMultiBody;
-class btMultiBodyDynamicsWorld;
 class CreatureModel;
-class PhenotypeGenerator;
 namespace boost {
 namespace serialization {
 class access;
@@ -18,11 +15,17 @@ class access;
 
 //# system headers
 #include <iostream>
+#include <iterator>
+#include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <BulletDynamics/Featherstone/btMultiBodyConstraint.h>
+#include <BulletDynamics/Featherstone/btMultiBody.h>
+#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 
 //## view headers
 //# custom headers
@@ -30,6 +33,8 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/genome/genetics/PhenotypeGenerator.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/Controller.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/sine/SineController.hpp>
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 

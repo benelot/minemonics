@@ -4,18 +4,23 @@
 //# corresponding headers
 //# forward declarations
 class Universe;
-class Evaluation;
 
 //# system headers
+#include <string>
 #include <vector>
 
 //## controller headers
 //## model headers
+#include <boost/log/attributes/constant.hpp>
+#include <boost/log/sources/basic_logger.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/Evaluation.hpp>
+
 //## model headers
 //## view headers
 //## utils headers
@@ -37,7 +42,7 @@ public:
 	 * @param universe The universe the controller belongs to.
 	 * @param parallelEvaluationsQty The number of parallel evaluations running in the simulator.
 	 */
-	void initialize(Universe* const universe,const int parallelEvaluationsQty);
+	void initialize(Universe* const universe, const int parallelEvaluationsQty);
 
 	/**
 	 * Add a new evaluation.
@@ -56,7 +61,6 @@ public:
 	 */
 	void update(const double timeSinceLastFrame);
 
-
 	// Accessor methods ##########################
 
 	void setPaused(const bool paused) {
@@ -72,10 +76,7 @@ public:
 	}
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -84,34 +85,22 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"EvaluationController"));
+				boost::log::attributes::constant<std::string>(
+					"EvaluationController"));
 		}
 	} _initializer;
 
 	std::vector<Evaluation*> mEvaluations;
 
-	/**
-	 * The currently running evaluations.
-	 */
-	int mCurrentlyRunningEvaluationsQty;
+	int mCurrentlyRunningEvaluationsQty; /**!M<The currently running evaluations. */
 
-	/**
-	 * Parallel evaluations.
-	 */
-	int mParallelEvaluationsQty;
+	int mParallelEvaluationsQty; /**!< Number of parallel evaluations. */
 
-	/**
-	 * If the evaluation is paused or not.
-	 */
-	bool mPaused;
+	bool mPaused; /**!< If the evaluation is paused or not. */
 
-	/**
-	 * The universe of the evaluations controller.
-	 */
-	Universe* mUniverse;
+	Universe* mUniverse; /**!< The universe of the evaluations controller. */
 
-	int mFails;
+	int mFails; /**!< The number of failed evaluations */
 };
 
 #endif /* CONTROLLER_EVALUATIONCONTROLLER_HPP_ */

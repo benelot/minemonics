@@ -19,11 +19,12 @@ class TextAreaOverlayElement;
 
 //## controller headers
 //## model headers
+#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <LinearMath/btIDebugDraw.h>
 #include <LinearMath/btScalar.h>
+#include <bullet/LinearMath/btIDebugDraw.h>
 
 //## view headers
-#include <bullet/LinearMath/btIDebugDraw.h>
 #include <OgreColourValue.h>
 #include <OgreFrameListener.h>
 #include <OgrePrerequisites.h>

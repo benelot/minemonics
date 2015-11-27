@@ -3,7 +3,6 @@
 
 //# corresponding headers
 //# forward declarations
-class Population;
 class Planet;
 
 //# system headers
@@ -20,6 +19,8 @@ class Planet;
 //## base headers
 //## configuration headers
 //## controller headers
+#include <controller/universe/evolution/population/Population.hpp>
+
 //## model headers
 #include <model/universe/EvaluationModel.hpp>
 

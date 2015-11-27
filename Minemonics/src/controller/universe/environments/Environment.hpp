@@ -3,12 +3,6 @@
 
 //# corresponding header
 //# forward declarations
-class SimulationManager;
-class EnvironmentGraphics;
-class EnvironmentPhysics;
-class PhysicsController;
-class EnvironmentO3D;
-
 //# system headers
 //## controller headers
 //## model headers
@@ -21,6 +15,9 @@ class EnvironmentO3D;
 #include <model/universe/environments/EnvironmentModel.hpp>
 
 //## view headers
+#include <view/universe/environments/EnvironmentGraphics.hpp>
+#include <view/universe/environments/EnvironmentO3D.hpp>
+
 //## utils headers
 
 /**

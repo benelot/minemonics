@@ -15,9 +15,6 @@
 #include <controller/SaveController.hpp>
 
 //## model headers
-#include <model/universe/Epoch.hpp>
-#include <model/universe/environments/EnvironmentModel.hpp>
-
 //## view headers
 //## utils headers
 #include <utils/serialization/FilesystemManipulator.hpp>

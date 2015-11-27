@@ -20,9 +20,9 @@
 #include <CEGUI/String.h>
 #include <CEGUI/System.h>
 #include <CEGUI/Vector.h>
-#include <CEGUI/widgets/FrameWindow.h>
+#include <CEGUI/Window.h>
 #include <CEGUI/WindowManager.h>
-#include <OgreRenderTarget.h>
+#include <OgreRenderWindow.h>
 #include <Renderer.h>
 
 //# custom headers
@@ -34,19 +34,17 @@
 #include <configuration/GUIConfiguration.hpp>
 
 //## controller headers
-#include <controller/universe/Planet.hpp>
-#include <controller/Evaluation.hpp>
-
 //## model headers
 //## view headers
-#include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>
-#include <view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp>
 #include <view/visualization/CEGUI/configpanels/EditPlanetPanel.hpp>
 #include <view/visualization/CEGUI/configpanels/EditPopulationPanel.hpp>
 #include <view/visualization/CEGUI/configpanels/LoadPlanetPanel.hpp>
 #include <view/visualization/CEGUI/configpanels/LoadPopulationPanel.hpp>
-#include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
-#include <view/visualization/CEGUI/ShowCasePanel.hpp>
+#include <view/visualization/CEGUI/configpanels/NewPlanetPanel.hpp>
+#include <view/visualization/CEGUI/configpanels/NewPopulationPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/DetailsPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/FPSPanel.hpp>
+#include <view/visualization/CEGUI/MenuBar.hpp>
 
 //## utils headers
 

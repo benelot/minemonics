@@ -1,30 +1,25 @@
 //# corresponding headers
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
 
-#include <LinearMath/btTransform.h>
-#include <LinearMath/btVector3.h>
-#include <OgreQuaternion.h>
-
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
-#include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.hpp>
-#include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
 
 //## view headers
 //## utils headers
-
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BoostLogger FSJointModel::mBoostLogger; /*<! initialize the boost logger*/
 FSJointModel::_Init FSJointModel::_initializer;

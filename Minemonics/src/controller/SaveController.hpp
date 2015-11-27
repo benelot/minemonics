@@ -4,18 +4,23 @@
 //# corresponding header
 //# forward declarations
 //# system headers
+#include <cassert>
+#include <iostream>
+#include <string>
 #include <fstream>
 
 //## controller headers
 //## model headers
 #include <boost/log/attributes/constant.hpp>
 #include <boost/log/sources/basic_logger.hpp>
+#include <boost/log/trivial.hpp>
 // include headers that implement a archive in xml format
 #include <boost/archive/tmpdir.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/version.hpp>
 #include <boost/serialization/base_object.hpp>
+#include <boost/serialization/nvp.hpp>
 
 //## view headers
 //# custom headers

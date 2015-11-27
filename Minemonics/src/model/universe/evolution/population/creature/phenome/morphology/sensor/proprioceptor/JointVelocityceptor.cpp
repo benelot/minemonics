@@ -1,7 +1,18 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.hpp>
 
-#include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
+
 //## view headers
 //## utils headers
 

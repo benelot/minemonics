@@ -7,7 +7,6 @@
 //# forward declarations
 class Randomness;
 struct SDL_Window;
-class RagDoll;
 
 //# system headers
 //## controller headers

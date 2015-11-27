@@ -11,9 +11,6 @@
 //## configuration headers
 //## controller headers
 //## model headers
-#include <model/universe/EvaluationModel.hpp>
-#include <model/universe/PlanetModel.hpp>
-
 //## view headers
 //## utils headers
 

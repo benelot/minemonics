@@ -1,23 +1,20 @@
 //# corresponding header
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
 
-#include <stddef.h>
-#include <iostream>
+//# forward declarations
 #include <cstdlib>
 
+//# system headers
 //## controller headers
 //## model headers
+#include <LinearMath/btQuadWord.h>
+#include <LinearMath/btScalar.h>
 #include <BulletCollision/CollisionDispatch/btCollisionWorld.h>
 #include <BulletCollision/CollisionShapes/btBoxShape.h>
 #include <BulletCollision/CollisionShapes/btCapsuleShape.h>
 #include <BulletCollision/CollisionShapes/btCollisionShape.h>
 #include <BulletCollision/NarrowPhaseCollision/btRaycastCallback.h>
-#include <BulletDynamics/Dynamics/btDynamicsWorld.h>
-#include <LinearMath/btDefaultMotionState.h>
-#include <LinearMath/btQuadWord.h>
-#include <LinearMath/btScalar.h>
-
-#include <OgreQuaternion.h>
+#include <OgreColourValue.h>
 #include <OgreVector3.h>
 
 //## view headers
@@ -30,16 +27,15 @@
 
 //## controller headers
 //## model headers
-#include <model/universe/evolution/population/creature/CreatureModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
+
 
 //## view headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
-
 //## utils headers
+#include <utils/MathUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
-#include <utils/MathUtils.hpp>
 
 BoostLogger FSLimbBt::mBoostLogger; /*<! initialize the boost logger*/
 FSLimbBt::_Init FSLimbBt::_initializer;

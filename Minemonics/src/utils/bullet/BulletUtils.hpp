@@ -1,10 +1,3 @@
-/*
- * BulletUtils.hpp
- *
- *  Created on: Sep 20, 2015
- *      Author: leviathan
- */
-
 #ifndef UTILS_BULLET_BULLETUTILS_HPP_
 #define UTILS_BULLET_BULLETUTILS_HPP_
 
@@ -26,6 +19,12 @@
 //## view headers
 //## utils headers
 
+/**
+ * @brief		Bullet utils are to provide bullet specific helper functions.
+ * @details		Details
+ * @date		2015-09-20
+ * @author		Benjamin Ellenberger
+ */
 class BulletUtils {
 public:
 
