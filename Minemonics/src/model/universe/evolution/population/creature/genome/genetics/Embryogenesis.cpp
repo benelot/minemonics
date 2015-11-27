@@ -50,6 +50,7 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 #include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/MathUtils.hpp>
 
 BoostLogger Embryogenesis::mBoostLogger; /*<! initialize the boost logger*/
 Embryogenesis::_Init Embryogenesis::_initializer;
@@ -107,9 +108,16 @@ void Embryogenesis::transcribeMorphogene(
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
 
+	if (!MathUtils::isFinite(generator->getOrientation())) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator orientation: " << generator->getOrientation();
+	}
+
+	if (!MathUtils::isFinite(childLimbRotation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
+	}
+
 	generator->setOrientation( // update the generator orientation using
-		generator->getOrientation()
-			* childLimbRotation); /**!< The child element rotation */
+		generator->getOrientation() * childLimbRotation); /**!< The child element rotation */
 
 	LimbModel* childLimb = phenomeModel->createLimb(generator, childMorphogene); // create new child limb
 

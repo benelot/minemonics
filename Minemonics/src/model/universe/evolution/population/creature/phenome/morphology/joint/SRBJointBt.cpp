@@ -28,7 +28,10 @@
 
 //## view headers
 //## utils headers
+#include <utils/MathUtils.hpp>
 
+BoostLogger SRBJointBt::mBoostLogger; /*<! initialize the boost logger*/
+SRBJointBt::_Init SRBJointBt::_initializer;
 SRBJointBt::SRBJointBt() :
 	mWorld(NULL), mJoint(NULL), mBodyA(NULL), mBodyB(
 	NULL) {
@@ -85,6 +88,22 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 
 	mLocalAOrientation = OgreBulletUtils::convert(mFrameInA.getRotation());
 	mLocalBOrientation = OgreBulletUtils::convert(mFrameInB.getRotation());
+
+	if (!MathUtils::isFinite(mLocalAPosition)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb A position: " << mLocalAPosition;
+	}
+
+	if (!MathUtils::isFinite(mLocalAPosition)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb B position: " << mLocalBPosition;
+	}
+
+	if (!MathUtils::isFinite(mLocalAOrientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb A orientation: " << mLocalAOrientation;
+	}
+
+	if (!MathUtils::isFinite(mLocalAOrientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb B orientation: " << mLocalBOrientation;
+	}
 
 	mType = type;
 

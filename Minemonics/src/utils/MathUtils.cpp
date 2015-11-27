@@ -1,4 +1,6 @@
 //# corresponding headers
+#include <utils/MathUtils.hpp>
+
 //# forward declarations
 //# system headers
 //## controller headers
@@ -11,12 +13,11 @@
 //## model headers
 //## view headers
 //## utils headers
-#include <utils/MathUtils.hpp>
 
 bool MathUtils::isNaN(double d) {
 	// Only NaN is not itself
-	return d != d;
-//	return std::isnan(d);
+//	return d != d;
+	return std::isnan(d);
 }
 
 bool MathUtils::isNaN(const Ogre::Vector3& v) {
@@ -28,7 +29,7 @@ bool MathUtils::isNaN(const Ogre::Quaternion& q) {
 }
 
 bool MathUtils::isNaN(const btVector3& v) {
-	return isNaN(v.w()) || isNaN(v.x()) || isNaN(v.y()) || isNaN(v.z());
+	return isNaN(v.x()) || isNaN(v.y()) || isNaN(v.z());
 }
 
 bool MathUtils::isNaN(const btQuaternion& q) {
@@ -43,8 +44,8 @@ bool MathUtils::isNaN(const btTransform& t) {
 
 bool MathUtils::isInf(double d) {
 	// Only Inf does pass this
-	return (d/0.0f == d);
-//	return std::isinf(d);
+//	return (d/0.0f == d);
+	return std::isinf(d);
 }
 
 bool MathUtils::isInf(const Ogre::Vector3& v) {
@@ -56,7 +57,7 @@ bool MathUtils::isInf(const Ogre::Quaternion& q) {
 }
 
 bool MathUtils::isInf(const btVector3& v) {
-	return isInf(v.w()) || isInf(v.x()) || isInf(v.y()) || isInf(v.z());
+	return isInf(v.x()) || isInf(v.y()) || isInf(v.z());
 }
 
 bool MathUtils::isInf(const btQuaternion& q) {
@@ -97,4 +98,16 @@ bool MathUtils::isFinite(const btTransform& t) {
 	return !(isInf(t) || isNaN(t));
 }
 
+std::string MathUtils::print(btVector3 v) {
+	std::stringstream out;
+	out << "btVector(" << v.x() << "," << v.y() << "," << v.z() << ")";
+	return out.str();
+}
+
+std::string MathUtils::print(btQuaternion q) {
+	std::stringstream out;
+	out << "btQuaternion(" << q.w() << "," << q.x() << "," << q.y() << "," << q.z()
+		<< ")";
+	return out.str();
+}
 

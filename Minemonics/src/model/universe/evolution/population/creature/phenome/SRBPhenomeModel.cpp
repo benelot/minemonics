@@ -243,7 +243,12 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
-	childAnchorDirInChild = childLimbRotation* childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
+		
+	if (!MathUtils::isFinite(childLimbRotation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
+	}
+
+	childAnchorDirInChild = childLimbRotation * childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
 
 	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 	childJointAnchor = getOwnIntersection(childMorphogene, generator,
@@ -450,7 +455,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			getControllers().push_back(controller);
 		}
 		}
-
 	}
 }
 

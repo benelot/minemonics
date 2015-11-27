@@ -51,6 +51,7 @@
 //## utils headers
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/ogre3D/Euler.hpp>
+#include <utils/MathUtils.hpp>
 
 BoostLogger FSPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 FSPhenomeModel::_Init FSPhenomeModel::_initializer;
@@ -293,6 +294,11 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
+		
+	if (!MathUtils::isFinite(childLimbRotation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
+	}
+
 	childAnchorDirInChild = childLimbRotation * childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
 
 	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
@@ -384,6 +390,14 @@ LimbModel* FSPhenomeModel::createLimb(PhenotypeGenerator* generator,
 			> MorphologyConfiguration::LIMB_MAX_SIZE) ?
 			MorphologyConfiguration::LIMB_MAX_SIZE :
 			generator->getCurrentShrinkageFactor() * childMorphogene->getZ();
+
+	if (!MathUtils::isFinite(generator->getOrientation())) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator orientation: " << generator->getOrientation();
+	}
+
+	if (!MathUtils::isFinite(generator->getPosition())) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator position: " << generator->getPosition();
+	}
 
 	//build the limb out of the morphogene
 	FSLimbModel* childLimb = new FSLimbModel(getCreatureModel()->getWorld(),

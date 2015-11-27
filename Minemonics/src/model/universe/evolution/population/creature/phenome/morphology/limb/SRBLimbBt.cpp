@@ -329,22 +329,22 @@ const Ogre::Vector3 SRBLimbBt::getVelocities() const {
 }
 
 btVector3 SRBLimbBt::getPosition() const {
-//	btTransform transform = mMotionState->m_graphicsWorldTrans;
+	btTransform transform = mBody->getWorldTransform();
 
-	btVector3 position = mMotionState->m_graphicsWorldTrans.getOrigin();
+	btVector3 position = transform.getOrigin();
 	if (!MathUtils::isFinite(position)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position: " << MathUtils::print(position);
 	}
 
 	return position;
 }
 
 btQuaternion SRBLimbBt::getOrientation() const {
-//	btTransform transform = mBody->getWorldTransform();
+	btTransform transform = mBody->getWorldTransform();
 
-	btQuaternion orientation = mMotionState->m_graphicsWorldTrans.getRotation().normalized();
+	btQuaternion orientation = transform.getRotation().normalized();
 	if (!MathUtils::isFinite(orientation)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation: " << MathUtils::print(orientation);
 	}
 
 	return orientation;

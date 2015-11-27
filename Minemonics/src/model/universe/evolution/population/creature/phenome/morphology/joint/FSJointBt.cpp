@@ -15,7 +15,10 @@
 
 //## view headers
 //## utils headers
+#include <utils/MathUtils.hpp>
 
+BoostLogger FSJointBt::mBoostLogger; /*<! initialize the boost logger*/
+FSJointBt::_Init FSJointBt::_initializer;
 FSJointBt::FSJointBt() :
 	mWorld(NULL), mMultiBody(NULL) {
 }
@@ -46,6 +49,7 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	frameInW.getBasis().setValue(xAxis[0], yAxis[0], zAxis[0], xAxis[1],
 		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
 	frameInW.setOrigin(pivotInW);
+
 	// now get constraint frame in local coordinate systems
 	mFrameInA = bodyA->getCenterOfMassTransform().inverse() * frameInW;
 	mFrameInB = bodyB->getCenterOfMassTransform().inverse() * frameInW;
@@ -55,6 +59,22 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 
 	mLocalAOrientation = OgreBulletUtils::convert(mFrameInA.getRotation());
 	mLocalBOrientation = OgreBulletUtils::convert(mFrameInB.getRotation());
+
+	if (!MathUtils::isFinite(mLocalAPosition)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb A position: " << mLocalAPosition;
+	}
+
+	if (!MathUtils::isFinite(mLocalAPosition)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb B position: " << mLocalBPosition;
+	}
+
+	if (!MathUtils::isFinite(mLocalAOrientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb A orientation: " << mLocalAOrientation;
+	}
+
+	if (!MathUtils::isFinite(mLocalAOrientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb B orientation: " << mLocalBOrientation;
+	}
 
 	mType = type;
 

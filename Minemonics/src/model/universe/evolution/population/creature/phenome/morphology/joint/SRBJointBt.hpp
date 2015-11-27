@@ -34,9 +34,9 @@ class Motor;
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/SRBServoMotor.hpp>
 
 //## view headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
-
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
+#include <utils/logging/Logger.hpp>
 
 //comment this out to compare with original spring constraint
 #define HINGECONSTRAINT 0
@@ -52,23 +52,18 @@ class Motor;
 /** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
 //#define CONSTRAINT_INDEX CONETWISTCONSTRAINT
 //#define CONSTRAINT_TYPE btConeTwistConstraint
-
 /** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
 //#define CONSTRAINT_INDEX POINT2POINTCONSTRAINT
 //#define CONSTRAINT_TYPE btPoint2PointConstraint
-
 /** bullet physics 6 degrees of freedom constraint - A 6 Dof joint with generic limits*/
 //#define CONSTRAINT_INDEX GENERIC6DOFCONSTRAINT
 //#define CONSTRAINT_TYPE btGeneric6DofConstraint
-
 /** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
 //#define CONSTRAINT_INDEX GENERIC6DOFSPRING2CONSTRAINT
 //#define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
-
 /** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
 //#define CONSTRAINT_INDEX GENERIC6DOFSPRINGCONSTRAINT
 //#define CONSTRAINT_TYPE btGeneric6DofSpringConstraint
-
 /**
  * @brief		The Joint Bullet model holds the definition of the joint for the Bullet Physics engine.
  * @details		Details
@@ -80,9 +75,10 @@ public:
 	SRBJointBt();
 	SRBJointBt(const SRBJointBt& SRBJointBt);
 	SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btVector3& pivotInW, JointPhysics::JointType type,
-		btVector3 jointPitchAxis, btVector3 jointYawAxis,
-		btVector3 jointLowerLimits, btVector3 jointUpperLimits, int ownIndex);
+		btRigidBody* const bodyB, const btVector3& pivotInW,
+		JointPhysics::JointType type, btVector3 jointPitchAxis,
+		btVector3 jointYawAxis, btVector3 jointLowerLimits,
+		btVector3 jointUpperLimits, int ownIndex);
 
 	virtual ~SRBJointBt();
 
@@ -274,6 +270,19 @@ public:
 	}
 
 private:
+
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant<std::string>("SRBJointBt"));
+		}
+	} _initializer;
 
 	/**
 	 * The 6 Degrees of freedom joint that is used as a physical model.

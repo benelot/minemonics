@@ -2,8 +2,12 @@
 #define UTILS_MATHUTILS_HPP_
 
 //# corresponding headers
+#include <configuration/Definitions.hpp>
+
 //# forward declarations
 //# system headers
+#include <string.h>
+
 //## controller headers
 //## model headers
 #include <OgreVector3.h>
@@ -64,6 +68,10 @@ public:
 	static bool isFinite(const btQuaternion& q);
 
 	static bool isFinite(const btTransform& t);
+
+	static std::string print(btVector3 v);     //output
+
+	static std::string print(btQuaternion q);     //output
 };
 
 #endif /* UTILS_MATHUTILS_HPP_ */
