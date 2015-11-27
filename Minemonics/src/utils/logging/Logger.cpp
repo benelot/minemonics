@@ -51,7 +51,9 @@ void Logger::init(std::string fileName,
 	boost::log::trivial::severity_level severity) {
 	initFileSink(fileName, severity);
 	initTermSink(severity);
-	initSpecialLoggers();
+	if (LoggerConfiguration::LOG_SPECIAL) {
+		initSpecialLoggers();
+	}
 }
 
 void Logger::initFileSink(std::string fileName,
@@ -83,7 +85,7 @@ void Logger::initFileSink(std::string fileName,
 		logging::trivial::severity >= severity && expr::has_attr("ClassName")
 //			&& expr::matches(expr::attr<std::string>("ClassName"),
 //				boost::regex(LoggerConfiguration::loggedClasses))
-	);
+			);
 
 	core->add_sink(sink);
 }
@@ -108,7 +110,11 @@ void Logger::initTermSink(boost::log::trivial::severity_level severity) {
 				&& expr::matches(expr::attr<std::string>("ClassName"),
 					boost::regex(LoggerConfiguration::loggedClasses))));
 
-	sink->set_formatter(expr::stream << expr::message);
+	sink->set_formatter(
+		expr::format("%1%: [%2%] <%3%> %4%")
+			% expr::format_date_time<boost::posix_time::ptime>("TimeStamp",
+				"%Y-%m-%d %H:%M:%S") % expr::attr<std::string>("ClassName")
+			% logging::trivial::severity % expr::smessage);
 
 	logging::core::get()->add_sink(sink);
 	logging::add_common_attributes();
