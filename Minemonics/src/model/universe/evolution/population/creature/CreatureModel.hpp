@@ -2,6 +2,7 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_CREATUREM_H_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/Serializable.hpp>
 
 //# forward declarations

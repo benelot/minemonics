@@ -2,6 +2,7 @@
 #define MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSOR_PROPRIOCEPTOR_JOINTFORCECEPTOR_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointProprioceptor.hpp>
 
 //# forward declarations

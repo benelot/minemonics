@@ -2,8 +2,8 @@
 #define MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_EFFECTOR_SERVOMOTOR_H_
 
 //# corresponding header
-#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <configuration/Definitions.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //# forward declarations
 class btGeneric6DofSpring2Constraint;

@@ -60,10 +60,6 @@ public:
 
 	// Accessor methods ##########################
 
-//	int getJointMotorIndex() const {
-//		return mJointMotorIndex;
-//	}
-
 // Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization */
 

@@ -2,6 +2,7 @@
 #define MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEHEIGHT_HPP_
 
 //# corresponding header
+#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 
 //# forward declarations
@@ -35,7 +36,7 @@ public:
 	virtual ~AverageHeight();
 
 	virtual void calculateFitness(CreatureModel* creature,
-	double timeSinceLastTick);
+		double timeSinceLastTick);
 
 	/**
 	 * Evaluate the fitness.
@@ -56,7 +57,7 @@ public:
 	 * @return A string containing all information about the average height jury.
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
-	const AverageHeight &avgHeightJury) {
+		const AverageHeight &avgHeightJury) {
 		return os;
 	}
 

@@ -44,7 +44,7 @@ public:
 	virtual ~Jury();
 
 	virtual void calculateFitness(CreatureModel* creature,
-			double timeSinceLastTick) = 0;
+		double timeSinceLastTick) = 0;
 
 	/**
 	 * Calculates the fitness value at the end of the evaluation.
@@ -134,30 +134,16 @@ public:
 	}
 
 protected:
-	/**
-	 * The type of jury.
-	 */
-	JuryType mJuryType;
 
-	/**
-	 * The summation weight of this jury.
-	 */
-	double mWeight;
+	JuryType mJuryType; /**!< The type of jury. */
 
-	/**
-	 * If a higher score is better or not.
-	 */
-	bool mHigherIsBetter;
+	double mWeight; /**!< The summation weight of this jury. */
 
-	/**
-	 * The fitness evaluated by this jury.
-	 */
-	double mFitness;
+	bool mHigherIsBetter; /**!< If a higher score is better or not. */
 
-	/**
-	 * The score it received in the comparative rating.
-	 */
-	double mScore;
+	double mFitness; /**!< The fitness evaluated by this jury. */
+
+	double mScore; /**!< The score it received in the comparative rating. */
 };
 BOOST_CLASS_VERSION(Jury, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Jury)

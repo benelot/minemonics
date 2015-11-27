@@ -17,11 +17,11 @@
 //## utils headers
 
 Jury::Jury(JuryType juryType, bool higherIsBetter, int weight) :
-		mJuryType(juryType), mFitness(
-				(higherIsBetter) ?
-						std::numeric_limits<double>::min() :
-						std::numeric_limits<double>::max()), mWeight(weight), mHigherIsBetter(
-				higherIsBetter), mScore(0) {
+	mJuryType(juryType), mFitness(
+		(higherIsBetter) ?
+			std::numeric_limits<double>::min() :
+			std::numeric_limits<double>::max()), mWeight(weight), mHigherIsBetter(
+		higherIsBetter), mScore(0) {
 }
 
 Jury::~Jury() {

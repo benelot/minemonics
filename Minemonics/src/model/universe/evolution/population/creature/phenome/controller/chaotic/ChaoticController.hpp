@@ -121,6 +121,8 @@ private:
 
 	double u[3];
 
+	bool mFirstTime;
+
 	ChaoticControllerGene::ChaoticSystemType mSystemType;
 
 	std::string loggerName;

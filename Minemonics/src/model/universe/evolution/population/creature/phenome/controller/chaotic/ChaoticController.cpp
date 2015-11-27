@@ -31,13 +31,14 @@ ChaoticController::_Init ChaoticController::_initializer;
 
 ChaoticController::ChaoticController() :
 	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(
-		ChaoticControllerGene::CHUA_CIRCUIT) {
+		ChaoticControllerGene::CHUA_CIRCUIT), mFirstTime(true) {
 	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 
 }
 ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType) :
-	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType) {
+	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType), mFirstTime(
+		0) {
 	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 
 }
@@ -62,6 +63,8 @@ ChaoticController::ChaoticController(const ChaoticController& chaoticController)
 	}
 
 	mSystemType = chaoticController.mSystemType;
+
+	mFirstTime = chaoticController.mFirstTime;
 }
 
 ChaoticController::~ChaoticController() {
@@ -81,11 +84,13 @@ ChaoticController* ChaoticController::clone() {
 
 void ChaoticController::perform(const double timeSinceLastTick) {
 
-	if (mControlInputs.size() >= 2) {
+	if (mControlInputs.size() >= 2 && !mFirstTime) {
 		// set the inputs to the chaotic controller
 		u[0] = mControlInputs[0]->getOutputValue();
 		u[1] = mControlInputs[1]->getOutputValue();
 	}
+
+	mFirstTime = false;
 
 	mTime += timeSinceLastTick; // time might not be the same as real-time, but it is close. On the other hand it is a very accurate simulation.
 

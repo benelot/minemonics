@@ -2,6 +2,7 @@
 #define MODEL_UNIVERSE_EVOLUTION_JURIES_AVERAGEVELOCITY_H_
 
 //# corresponding headers
+#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 
 //# forward declarations

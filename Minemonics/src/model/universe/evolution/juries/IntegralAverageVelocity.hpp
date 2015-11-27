@@ -2,6 +2,7 @@
 #define MODEL_UNIVERSE_EVOLUTION_JURIES_INTEGRALAVERAGEVELOCITY_H_
 
 //# corresponding headers
+#include <configuration/Definitions.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 
 //# forward declarations
@@ -88,7 +89,7 @@ public:
 	}
 
 private:
-	Ogre::Vector3 mTotalMovement;
+	Ogre::Vector3 mTotalMovement; /**!< The total movement of the creature */
 
 	double mAvgVelocity; /**!< The average velocity */
 
@@ -96,7 +97,7 @@ private:
 
 	double mTimestamp; /**!< The timestamp of the last invocation */
 
-	int mSampleQty; /**!< THe number of samples of this average */
+	int mSampleQty; /**!< The number of samples of this average */
 
 	bool mIsFirstTime; /** Is this the first time this jury is run */
 

@@ -284,15 +284,9 @@ private:
 		}
 	} _initializer;
 
-	/**
-	 * The 6 Degrees of freedom joint that is used as a physical model.
-	 */
-	CONSTRAINT_TYPE* mJoint;
+	CONSTRAINT_TYPE* mJoint; /** The joint constraint that is used as a physical model. */
 
-	/**
-	 * The bullet dynamics world of the bullet physics engine. Reference only.
-	 */
-	btDynamicsWorld* mWorld;
+	btDynamicsWorld* mWorld; /**!< The bullet dynamics world of the bullet physics engine. Reference only. */
 
 	btRigidBody* mBodyA;
 	btRigidBody* mBodyB;
