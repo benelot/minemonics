@@ -33,6 +33,7 @@
 //## view headers
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
+#include <utils/MathUtils.hpp>
 
 BoostLogger SRBPhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 SRBPhenomeModel::_Init SRBPhenomeModel::_initializer;
