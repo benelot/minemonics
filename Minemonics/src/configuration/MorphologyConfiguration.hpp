@@ -121,6 +121,8 @@ public:
 	static const double BODY_BRANCH_INITIAL_MEAN = 3; 	/**!< The initial branch number mean */
 
 	static const double BODY_BRANCH_INITIAL_VAR = 1.0f; /**!< The initial branch number variance */
+
+	static const bool BODY_INTRACOLLISION = false;
 };
 
 #endif /* CONFIGURATION_MORPHOLOGYCONFIGURATION_H_ */

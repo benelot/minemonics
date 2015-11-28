@@ -118,7 +118,8 @@ void SRBJointBt::initialize() {
 
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
 	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, true);
-//	mJoint->setAxis(OgreBulletUtils::convert(mJointPitchAxis));
+	btVector3 jointPitchAxis = OgreBulletUtils::convert(mJointPitchAxis);
+	mJoint->setAxis(jointPitchAxis);
 	mJoint->setLimit(mJointLowerLimits.z, mJointUpperLimits.z);
 
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
@@ -164,11 +165,14 @@ void SRBJointBt::initialize() {
 		mJointUpperLimits.z - mJointLowerLimits.z);
 #endif
 
-//	mJoint->enableFeedback(true);
-//	mJoint->setJointFeedback(new btJointFeedback());
-//
-//	//debug drawing
-//	mJoint->setDbgDrawSize(btScalar(5.f));
+#ifdef CONSTRAINT_INDEX
+	mJoint->enableFeedback(true);
+	mJoint->setJointFeedback(new btJointFeedback());
+
+	//debug drawing
+	mJoint->setDbgDrawSize(btScalar(5.f));
+#endif
+
 }
 
 SRBJointBt::~SRBJointBt() {
@@ -196,7 +200,7 @@ void SRBJointBt::update(double timeSinceLastTick) {
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()) {
-			(*motorIterator)->apply(timeSinceLastTick);
+//			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 }
@@ -318,44 +322,43 @@ SRBJointBt* SRBJointBt::clone() {
 void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 
 #ifdef CONSTRAINT_INDEX
-		// this is consistent with pitch = z, yaw = y, roll = x
-		// Check constructor if that is still the way it is defined
-		int col;
-		switch (jointAxisIndex) {
-		case 0:
-			col = 2;
-			break;
-		case 1:
-			col = 1;
-			break;
-		case 2:
-			col = 0;
-			break;
-		default:
-			return;
-		}
-
-		// z-axis of constraint frame
-		btVector3 hingeAxisLocalA =
-			mJoint->getFrameOffsetA().getBasis().getColumn(col);
-
-		btVector3 hingeAxisLocalB =
-			mJoint->getFrameOffsetB().getBasis().getColumn(col);
-
-		btVector3 hingeAxisWorldA =
-			mJoint->getRigidBodyA().getWorldTransform().getBasis()
-				* hingeAxisLocalA;
-
-		btVector3 hingeAxisWorldB =
-			mJoint->getRigidBodyB().getWorldTransform().getBasis()
-				* hingeAxisLocalB;
-
-		btVector3 hingeTorqueA = torque * hingeAxisWorldA;
-		btVector3 hingeTorqueB = torque * hingeAxisWorldB;
-
-		mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
-		mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
+	// this is consistent with pitch = z, yaw = y, roll = x
+	// Check constructor if that is still the way it is defined
+	int col;
+	switch (jointAxisIndex) {
+	case 0:
+		col = 2;
+		break;
+	case 1:
+		col = 1;
+		break;
+	case 2:
+		col = 0;
+		break;
+	default:
+		return;
 	}
+
+	// z-axis of constraint frame
+	btVector3 hingeAxisLocalA = mJoint->getFrameOffsetA().getBasis().getColumn(
+		col);
+
+	btVector3 hingeAxisLocalB = mJoint->getFrameOffsetB().getBasis().getColumn(
+		col);
+
+	btVector3 hingeAxisWorldA =
+		mJoint->getRigidBodyA().getWorldTransform().getBasis()
+			* hingeAxisLocalA;
+
+	btVector3 hingeAxisWorldB =
+		mJoint->getRigidBodyB().getWorldTransform().getBasis()
+			* hingeAxisLocalB;
+
+	btVector3 hingeTorqueA = torque * hingeAxisWorldA;
+	btVector3 hingeTorqueB = torque * hingeAxisWorldB;
+
+	mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
+	mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
 #endif
 }
 

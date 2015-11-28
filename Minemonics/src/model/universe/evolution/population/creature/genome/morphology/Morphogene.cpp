@@ -128,7 +128,10 @@ void Morphogene::initialize(const double branchiness) {
 	mRestitution = MorphologyConfiguration::LIMB_INITIAL_RESTITUTION; /**!< Set the restitution */
 	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION; /**!< Set the friction */
 
-	mIntraBodyColliding = Randomness::getSingleton()->nextUnifBoolean();
+	mIntraBodyColliding =
+		MorphologyConfiguration::BODY_INTRACOLLISION ?
+			Randomness::getSingleton()->nextUnifBoolean() :
+			MorphologyConfiguration::BODY_INTRACOLLISION;
 
 	// A random color RGB values between 0 and 1
 	mColorR = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
