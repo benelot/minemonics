@@ -129,35 +129,32 @@ void SRBJointBt::initialize() {
 	// linear limits in our case are allowed offset of origin of frameInB in frameInA, so set them to zero
 	mJoint->setLinearLowerLimit(btVector3(0., 0., 0.));
 	mJoint->setLinearUpperLimit(btVector3(0., 0., 0.));
+
 	// set limits for parent (axis z) and child (axis Y)
 	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointLowerLimits));
 	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointUpperLimits));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
 	// now create the constraint
 	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB);
+
 	// linear limits in our case are allowed offset of origin of frameInB in frameInA, so set them to zero
 	mJoint->setLinearLowerLimit(btVector3(0., 0., 0.));
 	mJoint->setLinearUpperLimit(btVector3(0., 0., 0.));
+
 	// set limits for parent (axis z) and child (axis Y)
 	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointLowerLimits));
 	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointUpperLimits));
-//	mJoint->setDamping(0, jointPitchDamping);
-//	mJoint->setDamping(1, jointYawDamping);
-//	mJoint->setDamping(2, jointRollDamping);
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
-	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB);
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, true);
 	// linear limits in our case are allowed offset of origin of frameInB in frameInA, so set them to zero
 	mJoint->setLinearLowerLimit(btVector3(0., 0., 0.));
 	mJoint->setLinearUpperLimit(btVector3(0., 0., 0.));
+
 	// set limits for parent (axis z) and child (axis Y)
 	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointLowerLimits));
 	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointUpperLimits));
-//	mJoint->setDamping(0,jointPitchDamping);
-//	mJoint->setDamping(1,jointYawDamping);
-//	mJoint->setDamping(2,jointRollDamping);
 #elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
 	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA.getOrigin(), mFrameInB.getOrigin());
-	// no damping available
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
 	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB);
 	mJoint->setLimit(mJointUpperLimits.x - mJointLowerLimits.x,
@@ -269,7 +266,7 @@ void SRBJointBt::reposition(const Ogre::Vector3 position) {
 
 void SRBJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
-#if CONSTRAINT_TYPE == GENERIC6DOFCONSTRAINT
+#if CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no damping available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
 	mJoint->setDamping(0,jointPitchDamping);
@@ -280,7 +277,7 @@ void SRBJointBt::setAngularDamping(double jointPitchDamping,
 	mJoint->setDamping(1,jointYawDamping);
 	mJoint->setDamping(2,jointRollDamping);
 #elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
-// no damping available
+	// no damping available
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
 	mJoint->setDamping(jointPitchDamping);
 #endif
@@ -357,8 +354,8 @@ void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 	btVector3 hingeTorqueA = torque * hingeAxisWorldA;
 	btVector3 hingeTorqueB = torque * hingeAxisWorldB;
 
-	mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
-	mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
+	mBodyA->applyTorque(-hingeTorqueA);
+	mBodyB->applyTorque(hingeTorqueB);
 #endif
 }
 
@@ -366,16 +363,17 @@ double SRBJointBt::getJointPos(int jointAxisIndex) {
 
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
 	return mJoint->getHingeAngle();
-#elif CONSTRAINT_TYPE == GENERIC6DOFCONSTRAINT
+#elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 	return mJoint->getAngle(jointAxisIndex);
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
 	return mJoint->getAngle(jointAxisIndex);
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
 	return mJoint->getAngle(jointAxisIndex);
 #elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
-	return mJoint->getAngle(jointAxisIndex);
+	return 0; //TODO: It seems this joint does not even have getAngle mJoint->getAngle(jointAxisIndex);
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
-	return mJoint->getAngle(jointAxisIndex);
+	//TODO There must be more angles than only that
+	return mJoint->getTwistAngle();
 #else
 	return 0;
 #endif

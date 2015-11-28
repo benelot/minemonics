@@ -1,12 +1,12 @@
-/*
- * SRBJointDefinitions.hpp
- *
- *  Created on: Nov 27, 2015
- *      Author: leviathan
- */
-
 #ifndef CONFIGURATION_SRBJOINTDEFINITIONS_HPP_
 #define CONFIGURATION_SRBJOINTDEFINITIONS_HPP_
+
+/**
+ * @brief		The definitions for the used SRB joint.
+ * @details		Details
+ * @date		2015-11-27
+ * @author		Benjamin Ellenberger
+ */
 
 //comment this out to compare with original spring constraint
 #define HINGECONSTRAINT 1
@@ -16,7 +16,7 @@
 #define GENERIC6DOFSPRINGCONSTRAINT 5
 #define GENERIC6DOFSPRING2CONSTRAINT 6
 /** bullet physics hinge constraint - A 1Dof angular joint with with limits */
-//#define CONSTRAINT_INDEX HINGECONSTRAINT
+#define CONSTRAINT_INDEX HINGECONSTRAINT
 /** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
 //#define CONSTRAINT_INDEX CONETWISTCONSTRAINT
 /** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
@@ -32,7 +32,7 @@
 
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
 #define CONSTRAINT_TYPE btHingeConstraint
-#elif CONSTRAINT_TYPE == GENERIC6DOFCONSTRAINT
+#elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 #define CONSTRAINT_TYPE btGeneric6DofConstraint
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
 #define CONSTRAINT_TYPE btGeneric6DofSpring2Constraint
@@ -45,8 +45,5 @@
 #else
 #define CONSTRAINT_TYPE btHingeConstraint
 #endif
-
-
-
 
 #endif /* CONFIGURATION_SRBJOINTDEFINITIONS_HPP_ */
