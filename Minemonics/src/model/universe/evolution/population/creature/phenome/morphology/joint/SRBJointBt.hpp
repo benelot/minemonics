@@ -80,11 +80,14 @@ public:
 	 */
 	void initialize();
 
-	virtual void applyJointTorque(int jointAxisIndex, double torque);
+	virtual void applyJointTorque(int jointAxisIndex, double torque); /**!< Apply a torque to a joint axis*/
 
-	virtual double getJointPos(int jointAxisIndex);
+	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
-	virtual double getJointVel(int jointAxisIndex);
+	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
+
+	virtual void setAngularStiffness(double jointPitchStiffness,
+		double jointYawStiffness, double jointRollStiffness);
 
 	virtual void setAngularDamping(double jointPitchDamping,
 		double jointYawDamping, double jointRollDamping);
@@ -94,40 +97,18 @@ public:
 	 * @param maxForces The maximum forces of the joint.
 	 * @param maxSpeeds The maximum speeds of the joint.
 	 */
-	virtual void generateMotors(const btVector3 maxForces,
-		const btVector3 lowerLimits, const btVector3 upperLimits,
-		bool positionControlled);
+	void generateMotors(const btVector3 maxForces, const btVector3 lowerLimits,
+		const btVector3 upperLimits, bool positionControlled);
 
-	/**
-	 * Reset the joint to the place when the creature was born.
-	 */
-	virtual void reset(const Ogre::Vector3 position);
+	virtual void reset(const Ogre::Vector3 position); /** Reset the joint to the place when the creature was born. */
 
-	/**
-	 * Reposition the joint without resetting it.
-	 */
-	virtual void reposition(const Ogre::Vector3 position);
+	virtual void reposition(const Ogre::Vector3 position); /** Reposition the joint without resetting it. */
 
-	/**
-	 * Update the joint bullet physics model.
-	 */
-	void update(double timeSinceLastTick);
+	void update(double timeSinceLastTick); /** Update the joint bullet physics model. */
 
-	/**
-	 * Add the joint bullet physics model to the world.
-	 */
-	void addToWorld();
+	void addToWorld(); /** Add the joint bullet physics model to the world. */
 
-	/**
-	 * Remove the joint bullet physics models from the world.
-	 */
-	void removeFromWorld();
-
-//	/**
-//	 * Returns if the joint is under tension.
-//	 * @return If the joint is under tension.
-//	 */
-//	bool isStrained();
+	void removeFromWorld(); /** Remove the joint bullet physics models from the world. */
 
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.
@@ -170,30 +151,6 @@ public:
 //		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
 	}
 
-	void setTargetRotationalVelocity(
-		JointPhysics::RotationalDegreeOfFreedom index, double targetVelocity) {
-//		mJoint->getRotationalLimitMotor(index)->m_targetVelocity = targetVelocity;
-	}
-
-	double getTargetRotationalVelocity(
-		const JointPhysics::RotationalDegreeOfFreedom index) {
-		return 0;
-//		return mJoint->getRotationalLimitMotor(index)->m_targetVelocity;
-	}
-
-	void setMaxRotationalForce(
-		const JointPhysics::RotationalDegreeOfFreedom index,
-		const double maxMotorForce) {
-//		mJoint->setMaxMotorImpulse(maxMotorForce);
-
-	}
-
-	double getMaxRotationalForce(
-		const JointPhysics::RotationalDegreeOfFreedom index) {
-		return 0;
-//		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
-	}
-
 	CONSTRAINT_TYPE* getJoint() {
 		return mJoint;
 	}
@@ -204,6 +161,26 @@ public:
 
 	virtual std::vector<Motor*>& getMotors() {
 		return mMotors;
+	}
+	
+		void setBodyA(btRigidBody* bodyA) {
+		mBodyA = bodyA;
+	}
+
+	void setBodyB(btRigidBody* bodyB) {
+		mBodyB = bodyB;
+	}
+
+	void setFrameInA(const btTransform& frameInA) {
+		mFrameInA = frameInA;
+	}
+
+	void setFrameInB(const btTransform& frameInB) {
+		mFrameInB = frameInB;
+	}
+
+	void setWorld(btDynamicsWorld* world) {
+		mWorld = world;
 	}
 
 	// Serialization ##########################
@@ -235,26 +212,6 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<SRBServoMotor*>(NULL));
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(JointPhysics); /**!< Serialize the base object */
-	}
-
-	void setBodyA(btRigidBody* bodyA) {
-		mBodyA = bodyA;
-	}
-
-	void setBodyB(btRigidBody* bodyB) {
-		mBodyB = bodyB;
-	}
-
-	void setFrameInA(const btTransform& frameInA) {
-		mFrameInA = frameInA;
-	}
-
-	void setFrameInB(const btTransform& frameInB) {
-		mFrameInB = frameInB;
-	}
-
-	void setWorld(btDynamicsWorld* world) {
-		mWorld = world;
 	}
 
 private:

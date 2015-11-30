@@ -156,8 +156,8 @@ void SRBJointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 
 void SRBJointModel::setAngularStiffness(const double jointPitchStiffness,
 	const double jointYawStiffness, const double jointRollStiffness) {
-//	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-//			jointRollStiffness);
+	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
+			jointRollStiffness);
 }
 
 void SRBJointModel::setAngularDamping(

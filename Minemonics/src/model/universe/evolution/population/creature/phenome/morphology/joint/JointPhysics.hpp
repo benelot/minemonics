@@ -113,6 +113,9 @@ public:
 		mInWorld = false;
 	}
 
+	virtual void setAngularStiffness(double jointPitchStiffness,
+		double jointYawStiffness, double jointRollStiffness) = 0;
+
 	virtual void setAngularDamping(double jointPitchDamping,
 		double jointYawDamping, double jointRollDamping) = 0;
 

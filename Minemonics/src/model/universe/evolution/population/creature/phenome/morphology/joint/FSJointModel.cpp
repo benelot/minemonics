@@ -159,14 +159,14 @@ void FSJointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 
 void FSJointModel::setAngularStiffness(const double jointPitchStiffness,
 	const double jointYawStiffness, const double jointRollStiffness) {
-//	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-//			jointRollStiffness);
+	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
+			jointRollStiffness);
 }
 
 void FSJointModel::setAngularDamping(const double springPitchDampingCoefficient,
 	double springYawDampingCoefficient, double springRollDampingCoefficient) {
-//	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-//			springYawDampingCoefficient, springRollDampingCoefficient);
+	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
+		springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
 bool FSJointModel::equals(const FSJointModel& jointModel) const {

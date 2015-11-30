@@ -261,7 +261,7 @@ void SRBPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
-		
+
 	if (!MathUtils::isFinite(childLimbRotation)) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
 	}
@@ -420,6 +420,16 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//TODO: Optimize this for loading
 	joint->initialize(); // Is done in generate body as well
 
+	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
+		parentMorphogeneBranch->getPitchStiffnessCoefficient(),
+		parentMorphogeneBranch->getYawStiffnessCoefficient(),
+		parentMorphogeneBranch->getRollStiffnessCoefficient());
+
+	joint->setAngularDamping( /**!< Set the damping coefficients for the joint */
+		parentMorphogeneBranch->getPitchDampingCoefficient(),
+		parentMorphogeneBranch->getYawDampingCoefficient(),
+		parentMorphogeneBranch->getRollDampingCoefficient());
+
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Joint: Parent: " << joint->getParentIndex() << " /Child: "
 	<< joint->getChildIndex();
 
@@ -504,7 +514,7 @@ btTransform SRBPhenomeModel::getOwnIntersection(Morphogene* childMorphogene,
 
 	FSLimbBt* childLimbBt = new FSLimbBt(getCreatureModel()->getWorld(),
 	NULL, childMorphogene->getPrimitiveType(), generator->getPosition(),
-		generator->getOrientation()*childLimbRotation, Ogre::Vector3(),
+		generator->getOrientation() * childLimbRotation, Ogre::Vector3(),
 		Ogre::Quaternion(),
 		/*dimensions*/
 		Ogre::Vector3(

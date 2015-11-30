@@ -264,22 +264,45 @@ void SRBJointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
 
+void SRBJointBt::setAngularStiffness(double jointPitchStiffness,
+	double jointYawStiffness, double jointRollStiffness) {
+#if CONSTRAINT_INDEX == HINGECONSTRAINT
+	// no stiffness available
+#elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
+// no stiffness available
+#elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
+	mJoint->setStiffness(0,btScalar(jointPitchStiffness));
+	mJoint->setStiffness(1,btScalar(jointYawStiffness));
+	mJoint->setStiffness(2,btScalar(jointRollStiffness));
+#elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
+	mJoint->setStiffness(0,btScalar(jointPitchStiffness));
+	mJoint->setStiffness(1,btScalar(jointYawStiffness));
+	mJoint->setStiffness(2,btScalar(jointRollStiffness));
+#elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
+	// no stiffness available
+#elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
+//	mJoint->setStiffness(btScalar(jointPitchStiffness));
+#endif
+}
+
 void SRBJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
-#if CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
+#if CONSTRAINT_INDEX == HINGECONSTRAINT
+
+#elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no damping available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
-	mJoint->setDamping(0,jointPitchDamping);
-	mJoint->setDamping(1,jointYawDamping);
-	mJoint->setDamping(2,jointRollDamping);
+	mJoint->setDamping(0,btScalar(jointPitchDamping));
+	mJoint->setDamping(1,btScalar(jointYawDamping));
+	mJoint->setDamping(2,btScalar(jointRollDamping));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
-	mJoint->setDamping(0,jointPitchDamping);
-	mJoint->setDamping(1,jointYawDamping);
-	mJoint->setDamping(2,jointRollDamping);
+	mJoint->setDamping(0,btScalar(jointPitchDamping));
+	mJoint->setDamping(1,btScalar(jointYawDamping));
+	mJoint->setDamping(2,btScalar(jointRollDamping));
 #elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
 	// no damping available
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
-	mJoint->setDamping(jointPitchDamping);
+	mJoint->setDamping(btScalar(jointPitchDamping));
 #endif
 }
 

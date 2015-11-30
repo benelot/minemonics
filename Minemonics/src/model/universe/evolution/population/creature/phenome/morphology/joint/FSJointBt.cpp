@@ -181,6 +181,11 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 	//nothing to be repositioned
 }
 
+void FSJointBt::setAngularStiffness(double jointPitchStiffness,
+	double jointYawStiffness, double jointRollStiffness){
+	// Not implementedt in FS Joint Bt
+}
+
 void FSJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
 	// Not implemented in FS Joint bt

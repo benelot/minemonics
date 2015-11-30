@@ -57,6 +57,8 @@ public:
 		btVector3 jointYawAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits, int ownIndex);
 
+	virtual ~FSJointBt();
+	
 	/**
 	 * Initialize the joint bullet physics model.
 	 * @param world A handle to the bullet dynamics world.
@@ -66,7 +68,18 @@ public:
 	 * @param tframeInB The joint position in reference frame B.
 	 */
 	void initialize();
-	virtual ~FSJointBt();
+
+	virtual void applyJointTorque(int jointAxisIndex, double torque); /**!< Apply a torque to a joint axis*/
+
+	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
+
+	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
+
+	virtual void setAngularStiffness(double jointPitchStiffness,
+		double jointYawStiffness, double jointRollStiffness);
+
+	virtual void setAngularDamping(double jointPitchDamping,
+		double jointYawDamping, double jointRollDamping);
 
 	/**
 	 * Initialize the rotational limit motors.
@@ -75,9 +88,6 @@ public:
 	 */
 	void generateMotors(const btVector3 maxForces, const btVector3 lowerLimits,
 		const btVector3 upperLimits, bool positionControlled);
-
-	virtual void setAngularDamping(double jointPitchDamping,
-		double jointYawDamping, double jointRollDamping);
 
 	virtual void reset(const Ogre::Vector3 position); /** Reset the joint to the place when the creature was born. */
 
@@ -88,12 +98,6 @@ public:
 	void addToWorld(); /** Add the joint bullet physics model to the world. */
 
 	void removeFromWorld(); /** Remove the joint bullet physics models from the world. */
-
-	virtual void applyJointTorque(int jointAxisIndex, double torque); /**!< Apply a torque to a joint axis*/
-
-	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
-
-	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
 
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.

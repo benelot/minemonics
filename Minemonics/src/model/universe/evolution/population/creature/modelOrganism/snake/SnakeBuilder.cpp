@@ -39,7 +39,9 @@ void SnakeBuilder::build(MixedGenome* genome,
 
 	// create joint between the two limbs
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
-		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),Ogre::Vector3(0, 1, 0),
+		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
+		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(0.5f, 0.5f, 0.5f),
 		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
 			-boost::math::constants::pi<double>() * 1.5f + UNIV_EPS,
 			-boost::math::constants::pi<double>() * 1.5f + UNIV_EPS),

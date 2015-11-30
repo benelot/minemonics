@@ -26,6 +26,7 @@
 
 MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
 	bool flipped, bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 yawAxis,
+	Ogre::Vector3 jointStiffness, Ogre::Vector3 jointDamping,
 	Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle,
 	Ogre::Vector3 anchorDirection) :
 	mBranchGeneType(-1), mFlipped(flipped), mJointAnchorX(anchorDirection.x), mJointAnchorY(
@@ -35,9 +36,9 @@ MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
 		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(
 		mirrored), mJointType(jointType), mJointPitchAxisX(pitchAxis.x), mJointPitchAxisY(
 		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z), mJointYawAxisX(yawAxis.x), mJointYawAxisY(
-		yawAxis.y), mJointYawAxisZ(yawAxis.z), mPitchStiffnessCoefficient(0), mYawStiffnessCoefficient(
-		0), mRollStiffnessCoefficient(0), mPitchDampingCoefficient(0), mYawDampingCoefficient(
-		0), mRollDampingCoefficient(0) {
+		yawAxis.y), mJointYawAxisZ(yawAxis.z), mPitchStiffnessCoefficient(jointStiffness.x), mYawStiffnessCoefficient(
+		jointStiffness.y), mRollStiffnessCoefficient(jointStiffness.z), mPitchDampingCoefficient(jointDamping.x), mYawDampingCoefficient(
+		jointDamping.y), mRollDampingCoefficient(jointDamping.z) {
 
 }
 

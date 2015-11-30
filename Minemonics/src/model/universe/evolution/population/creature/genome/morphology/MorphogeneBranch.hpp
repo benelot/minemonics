@@ -34,7 +34,6 @@ class access;
 
 //## view headers
 //## utils headers
-#include <utils/ogre3D/Euler.hpp>
 
 /**
  * @brief		The morphogene branch defines how a certain morphogene class branches into another class.
@@ -46,6 +45,7 @@ class MorphogeneBranch: public GeneBranch {
 public:
 	MorphogeneBranch(JointPhysics::JointType jointType, bool flipped,
 		bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 yawAxis,
+		Ogre::Vector3 jointStiffness, Ogre::Vector3 jointDamping,
 		Ogre::Vector3 jointMinAngle, Ogre::Vector3 jointMaxAngle,
 		Ogre::Vector3 anchorDirection);
 	MorphogeneBranch();
