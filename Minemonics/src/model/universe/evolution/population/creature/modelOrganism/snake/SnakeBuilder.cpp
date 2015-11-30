@@ -31,7 +31,7 @@ void SnakeBuilder::build(MixedGenome* genome,
 
 	// create limb
 	Morphogene* morphogene = new Morphogene(LimbPhysics::BLOCK,
-		Ogre::Vector3(20, 6, 6), Ogre::Quaternion(1, 0, 0, 0), 1, 0, true,
+		Ogre::Vector3(20, 6, 6), Ogre::Quaternion(1, 0, 0, 0), 1, 10, true,
 		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
 	morphogene->setRepetitionLimit(snakeLength);
 

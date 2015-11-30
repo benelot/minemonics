@@ -30,14 +30,14 @@ void ModelLegBuilder::build(MixedGenome* genome,
 
 	// create first limb
 	Morphogene* morphogene = new Morphogene(LimbPhysics::BLOCK,
-		Ogre::Vector3(20, 6, 6), Ogre::Quaternion::IDENTITY, 1, 0, true,
+		Ogre::Vector3(20, 6, 6), Ogre::Quaternion::IDENTITY, 1, 10, true,
 		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
 //	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// creature second limb
 	Morphogene* morphogene2 = new Morphogene(LimbPhysics::BLOCK,
-		Ogre::Vector3(6, 20, 6), Ogre::Quaternion::IDENTITY, 1, 0, true,
+		Ogre::Vector3(6, 20, 6), Ogre::Quaternion::IDENTITY, 1, 10, true,
 		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(0, 1, 0));
 //	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
