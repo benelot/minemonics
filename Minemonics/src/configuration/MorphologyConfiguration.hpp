@@ -100,29 +100,24 @@ public:
 	 * are the masses of the two limbs connected by the joint. This formula allows joints between
 	 *  larger segments to sustain correspondingly larger torques.
 	 */
+	//TODO: Not used yet in this simulator
 	static const double JOINT_MAX_TORQUE_CONSTANT = 1;
 
-	static const double LINK_LENGTH = 1; 	/**!< The length of an object between the parent joint and the child joint, 1 meaning its correct length. This is basically how much the creature is rayman. */
+	static const double LINK_LENGTH = 1; /**!< The length of an object between the parent joint and the child joint, 1 meaning its correct length. This is basically how much the creature is rayman. */
 
-	static const double JOINT_MIN_STIFFNESS = 0; /**!< The minimum stiffness of the joint */
+	static const double JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The minimum spring stiffness of the joint */
 
-	static const double JOINT_MAX_STIFFNESS = 10; /**!< The maximum stiffness of the joint */
+	static const double JOINT_MAX_SPRING_STIFFNESS = 10; /**!< The maximum spring stiffness of the joint */
 
-	static const double JOINT_MIN_SPRING_COEFFICIENT = 0; /**!< The minimum spring damping coefficient of the joint */
+	static const double JOINT_MIN_DAMPING_COEFFICIENT = 0; /**!< The minimum damping coefficient of the joint */
 
-	static const double JOINT_MAX_SPRING_COEFFICIENT = 10; 	/**!< The maximum spring damping coefficient of the joint */
+	static const double JOINT_MAX_DAMPING_COEFFICIENT = 10; /**!< The maximum damping coefficient of the joint */
 
-	static const double JOINT_MIN_FORCE = 1; 	/**!< The smallest max strength of a joint motor */
-
-	static const double JOINT_MIN_SPEED = 10; 	/**!< The smallest max speed of a joint motor */
-
-	static const double JOINT_MAX_SPEED = 100; 	/**!< The highest max speed of a joint motor */
-
-	static const double BODY_BRANCH_INITIAL_MEAN = 3; 	/**!< The initial branch number mean */
+	static const double BODY_BRANCH_INITIAL_MEAN = 3; /**!< The initial branch number mean */
 
 	static const double BODY_BRANCH_INITIAL_VAR = 1.0f; /**!< The initial branch number variance */
 
-	static const bool BODY_INTRACOLLISION = false;
+	static const bool BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 };
 
 #endif /* CONFIGURATION_MORPHOLOGYCONFIGURATION_H_ */

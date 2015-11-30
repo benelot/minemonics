@@ -60,8 +60,6 @@ public:
 	static const double FIXED_STEP_SIZE_MILLI = 1.0f / FIXED_STEPS_PER_SEC
 		* 1000.0f;
 
-	static const bool BODY_SEGMENT_INTERPENETRATION_FLAG = false; /**!< Are the body boxes allowed to interpenetrate each other? */
-
 	static const double BULLET_OGRE_BOX_SCALING_FACTOR = 0.01; /**!< A box of unit size in ogre has the size of 100 in bullet */
 
 	static const double BULLET_DEACTIVATION_TIME = 5; /**!< The deactivation time of a bullet object */

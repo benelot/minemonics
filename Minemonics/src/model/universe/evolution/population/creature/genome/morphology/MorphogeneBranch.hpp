@@ -416,10 +416,10 @@ private:
 	double mJointPitchMinAngle, mJointYawMinAngle, mJointRollMinAngle;
 
 	double mPitchDampingCoefficient, mYawDampingCoefficient,
-		mRollDampingCoefficient; /**!< The spring damping coefficient of the joint springs. */
+		mRollDampingCoefficient; /**!< The damping coefficient of the joint springs. */
 
 	double mPitchStiffnessCoefficient, mYawStiffnessCoefficient,
-		mRollStiffnessCoefficient; /**!< The stiffness of the joint. */
+		mRollStiffnessCoefficient; /**!< The spring stiffness of the joint. */
 
 	std::vector<ControllerGene*> mControllerGenes; /**!< The controller of this gene */
 
