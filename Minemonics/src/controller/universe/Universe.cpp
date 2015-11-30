@@ -86,7 +86,7 @@ void Universe::setSimulationSpeed(double simulationSpeed) {
 void Universe::stepPhysics(const double timeSinceLastFrame) {
 	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
 		pit != mPlanets.end(); pit++) { /**!< For all planets */
-		(*pit)->stepPhysics(timeSinceLastFrame); /**!< The physics forward */
+		(*pit)->stepPhysics(timeSinceLastFrame); /**!< perform the physics forward step */
 	}
 }
 
@@ -98,13 +98,11 @@ void Universe::drawDebugWorld() {
 }
 
 void Universe::update(const double timeStep) {
-	double speed = pow(2, /**!< calculate the speed of the simulation */
-	PhysicsConfiguration::SIMULATION_SPEEDS[mSimulationSpeed]);
+	int subSteps = round(
+		timeStep /**!< Calculate the number of full normal time steps we can take */
+			/ PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 
-	int subSteps = floor( /**!< Increase the time step we take by the speed we want the simulation to run.*/
-	speed * timeStep / PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
-
-	for (int i = 0; i < subSteps; i++) { /**!< Perform the number of substeps */
+	for (int i = 0; i < subSteps; i++) { /**!< Perform the number of substeps to reach the timestep*/
 		stepPhysics(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 		mEvaluationController.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
 	}

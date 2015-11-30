@@ -223,31 +223,31 @@ private:
 	// loop timing components ###################
 	//# loop timestamps
 	Ogre::Timer mOgreTimer; /**!< The ogre built-in timer to time the loop correctly */
-	unsigned long int mApplicationStart; /**!< The time the application was started */
-	unsigned long int mPreviousModelIteration; /**!< The previous model iteration timestamp */
-	unsigned long int mThisModelIteration; /**!< This model iteration timestamp */
+	unsigned long int mApplicationStart; /**!< The time the application was started (absolute, in Milliseconds) */
+	unsigned long int mPreviousModelIteration; /**!< The previous model iteration timestamp (absolute, in Milliseconds) */
+	unsigned long int mThisModelIteration; /**!< This model iteration timestamp (absolute, in Milliseconds) */
 
 	//# loop durations
-	long int mModelAccumulator; /**!< The time to forward the model in this loop iteration */
-	unsigned long int mFrameTime; /**!< The time to render a frame */
-	unsigned long int mApplicationRuntime; /**!< The total application runtime */
+	long int mModelAccumulator; /**!< The time to forward the model in this loop iteration (relative, in Milliseconds) */
+	unsigned long int mFrameTime; /**!< The time to render a frame (relative, in Milliseconds) */
+	unsigned long int mApplicationRuntime; /**!< The total application runtime (relative, in Milliseconds) */
 
 	long int mInputDt; /**!< The time difference of input that has to be fed in */
 	unsigned long int mInputClock;
 
-	long int mLastGraphicsTick; /*!< The time it took the graphics rendering last time */
+	long int mLastGraphicsTick; /*!< The time it took the graphics rendering last time (relative, in Milliseconds) */
 	unsigned long int mGraphicsStart;
 
-	long int mLastInputTick; /**!< The time it took the input to process last time */
+	long int mLastInputTick; /**!< The time it took the input to process last time (relative, in Milliseconds) */
 	unsigned long int mInputStart;
 
 	long int mLastModelTick; /**!<  The time it took the model to update last time
 	 This includes the bullet physics update */
-	long int mModelStart;
+	long int mModelStart; /**!< The timestamp the model started updating last (absolute, in Milliseconds)*/
 
-	long int mPhysicsTick; /**!< The time remaining in the loop to update the physics */
-	long int mPhysicsStepStart; /**!< The physics start timestamp */
-	long int mPhysicsStepEnd; /**!< The last physics step end */
+	long int mPhysicsTick; /**!< The time remaining in the loop to update the physics (relative, in Milliseconds)*/
+	long int mPhysicsStepStart; /**!< The physics start timestamp (absolute, in Milliseconds) */
+	long int mPhysicsStepEnd; /**!< The last physics step end (absolute, in Milliseconds) */
 
 	//## Debug components #######################
 	OgreBtDebugDrawer mDebugDrawer; /**!< The debug drawer used by bullet physics to show debug information */

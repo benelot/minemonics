@@ -176,7 +176,8 @@ void SimulationManager::createScene(void) {
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...";
 
-	mSceneMgr->setAmbientLight( /**!< Set default ambient light */
+	mSceneMgr->setAmbientLight(
+		/**!< Set default ambient light */
 		Ogre::ColourValue(EnvironmentConfiguration::AMBIENT_R,
 			EnvironmentConfiguration::AMBIENT_G,
 			EnvironmentConfiguration::AMBIENT_B));
@@ -277,45 +278,46 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 	do {
 		// update timers
 		mThisModelIteration = mOgreTimer.getMilliseconds();
-		mFrameTime = mThisModelIteration - mPreviousModelIteration; /**!< Calculate the frame time */
+		mFrameTime = mThisModelIteration - mPreviousModelIteration; /**!< Calculate the frame time (in Milliseconds) */
 		mPreviousModelIteration = mThisModelIteration;
 
-		mApplicationRuntime = mThisModelIteration - mApplicationStart; /**!< Update main frame timer */
+		mApplicationRuntime = mThisModelIteration - mApplicationStart; /**!< Update main frame timer (in Milliseconds) */
 
-		mModelStart = mOgreTimer.getMilliseconds();
-		mLastGraphicsTick = mModelStart - mGraphicsStart; /**!< Update graphics timer */
+		mModelStart = mOgreTimer.getMilliseconds(); /**!< Begin with the model update (in Milliseconds)*/
+		mLastGraphicsTick = mModelStart - mGraphicsStart; /**!< Update graphics timer (in Milliseconds) */
 
 		mUniverse.setSimulationSpeed(mCurrentSimulationSpeed); /**!< Set the current simulation speed of the simulation */
 
 		if (mCurrentSimulationSpeed == PhysicsConfiguration::SIMULATION_SPEED_09 /** If we are in speed 9 or 10*/
 			|| mCurrentSimulationSpeed
 				== PhysicsConfiguration::SIMULATION_SPEED_10) {
-			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK /**!< calculate the remaining time for physics */
+			mPhysicsTick = ApplicationConfiguration::APPLICATION_TICK /**!< calculate the remaining time for physics (in Milliseconds) */
 			- mLastGraphicsTick - mLastInputTick;
 
-			mPhysicsStepStart = mOgreTimer.getMilliseconds(); /**!< The physics updates start */
+			mPhysicsStepStart = mOgreTimer.getMilliseconds(); /**!< The physics updates start (in Milliseconds)*/
 
-			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) { /**!< Update the physics until we run out of time */
-				mUniverse.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
-				mPhysicsStepEnd = mOgreTimer.getMilliseconds(); /**!< Update the last physics step end to stop updating in time */
+			while (mPhysicsTick > mPhysicsStepEnd - mPhysicsStepStart) { /**!< Update the physics until we run out of time (in Milliseconds) */
+				mUniverse.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe (in Seconds) */
+				mPhysicsStepEnd = mOgreTimer.getMilliseconds(); /**!< Update the last physics step end to stop updating in time (in Milliseconds) */
 			}
 		} else { /**!< This mode tries to progress as much time as it is expected from the game loop*/
-			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) { /** cap frametime to make the application lose time, not the physics */
+			if (mFrameTime > ApplicationConfiguration::APPLICATION_TICK) { /** cap frametime to make the application lose time, not the physics (in Milliseconds) */
 				mFrameTime = ApplicationConfiguration::APPLICATION_TICK;
 			}
 
-			mModelAccumulator += mFrameTime; /**!< Update physics update time that we are going to use */
+			mModelAccumulator += mFrameTime; /**!< Update physics update time that we are going to use (in Milliseconds) */
 			double speed = pow(2, /**!< calculate the speed of the simulation */
 			PhysicsConfiguration::SIMULATION_SPEEDS[mCurrentSimulationSpeed]);
 
 			int steps = floor(
-				speed * mModelAccumulator
-					/ PhysicsConfiguration::FIXED_STEP_SIZE_MILLI); /**!< Calculate the number of full steps we can take */
+				mModelAccumulator
+					/ PhysicsConfiguration::FIXED_STEP_SIZE_MILLI); /**!< Calculate the number of full normal time steps we can take */
 
-			mUniverse.update(steps * PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe */
-			if (steps > 0) { /**!< Substract the number of fixed steps */
+			if (steps > 0) { /**!< Update if we can take at least one step */
+				mUniverse.update(
+					speed * steps * PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< update the universe (in Seconds) */
 				mModelAccumulator -= steps
-					* PhysicsConfiguration::FIXED_STEP_SIZE_MILLI;
+					* PhysicsConfiguration::FIXED_STEP_SIZE_MILLI; /**!< Subtract the number of full normal time steps (in Milliseconds) */
 			}
 		}
 
