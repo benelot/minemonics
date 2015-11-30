@@ -73,23 +73,6 @@ void JointModel::update(double timeSinceLastTick) {
 //	std::cout << std::endl;
 }
 
-void JointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-	const Ogre::Vector3 angularUpperLimit) {
-	mJointPhysics->setAngularLimits(angularLowerLimit, angularUpperLimit);
-}
-
-void JointModel::setAngularStiffness(const double jointPitchStiffness,
-	const double jointYawStiffness, const double jointRollStiffness) {
-//	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-//			jointRollStiffness);
-}
-
-void JointModel::setAngularDamping(const double springPitchDampingCoefficient,
-	double springYawDampingCoefficient, double springRollDampingCoefficient) {
-	mJointPhysics->setAngularDamping(springPitchDampingCoefficient,
-			springYawDampingCoefficient, springRollDampingCoefficient);
-}
-
 bool JointModel::equals(const JointModel& jointModel) const {
 	if (!ComponentModel::equals(jointModel)) {
 		return false;
@@ -126,28 +109,11 @@ void JointModel::reposition(const Ogre::Vector3 position) {
 	mJointPhysics->reposition(position);
 }
 
-void JointModel::generateMotors(const Ogre::Vector3 maxForces,
-	const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits, bool positionControlled) {
-	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
-		OgreBulletUtils::convert(lowerLimits),
-		OgreBulletUtils::convert(upperLimits),positionControlled);
-}
-
-void JointModel::enableAngularMotor(const bool pitchEnable,
-	const bool yawEnable, const bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
-		pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
-		yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
-		rollEnable);
-}
-
 double JointModel::getJointPos(int jointAxisIndex) {
 	return mJointPhysics->getJointPos(jointAxisIndex);
 }
 
-double JointModel::getJointVel(int jointAxisIndex) {
-	return mJointPhysics->getJointVel(jointAxisIndex);
+double JointModel::getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition) {
+	return mJointPhysics->getJointVel(jointAxisIndex,timeSinceLastTick,lastJointPosition);
 }
 

@@ -18,7 +18,7 @@
 //# custom headers
 //## base headers
 //## configuration headers
-#include <configuration/PhysicsConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -196,8 +196,8 @@ void SRBJointBt::update(double timeSinceLastTick) {
 	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->isEnabled()) {
-//			(*motorIterator)->apply(timeSinceLastTick);
+		if ((*motorIterator)->isEnabled() && MorphologyConfiguration::BODY_MOTORS_ENABLED) {
+			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
 }
@@ -271,10 +271,16 @@ void SRBJointBt::setAngularStiffness(double jointPitchStiffness,
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no stiffness available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
+	mJoint->enableSpring(0,true);
+	mJoint->enableSpring(1,true);
+	mJoint->enableSpring(2,true);
 	mJoint->setStiffness(0,btScalar(jointPitchStiffness));
 	mJoint->setStiffness(1,btScalar(jointYawStiffness));
 	mJoint->setStiffness(2,btScalar(jointRollStiffness));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
+	mJoint->enableSpring(0,true);
+	mJoint->enableSpring(1,true);
+	mJoint->enableSpring(2,true);
 	mJoint->setStiffness(0,btScalar(jointPitchStiffness));
 	mJoint->setStiffness(1,btScalar(jointYawStiffness));
 	mJoint->setStiffness(2,btScalar(jointRollStiffness));
@@ -292,10 +298,16 @@ void SRBJointBt::setAngularDamping(double jointPitchDamping,
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no damping available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
+	mJoint->enableSpring(0,true);
+	mJoint->enableSpring(1,true);
+	mJoint->enableSpring(2,true);
 	mJoint->setDamping(0,btScalar(jointPitchDamping));
 	mJoint->setDamping(1,btScalar(jointYawDamping));
 	mJoint->setDamping(2,btScalar(jointRollDamping));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
+	mJoint->enableSpring(0,true);
+	mJoint->enableSpring(1,true);
+	mJoint->enableSpring(2,true);
 	mJoint->setDamping(0,btScalar(jointPitchDamping));
 	mJoint->setDamping(1,btScalar(jointYawDamping));
 	mJoint->setDamping(2,btScalar(jointRollDamping));
@@ -402,8 +414,24 @@ double SRBJointBt::getJointPos(int jointAxisIndex) {
 #endif
 }
 
-double SRBJointBt::getJointVel(int jointAxisIndex) {
-//TODO: Find a way to get joint velocity in SRB
-	return 0;
-//	mJoint->get
+double SRBJointBt::getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition) {
+
+	btScalar newPosition;
+#if CONSTRAINT_INDEX == HINGECONSTRAINT
+	newPosition =  mJoint->getHingeAngle();
+#elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
+	newPosition = mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
+	newPosition = mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
+	newPosition = mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
+	newPosition = 0; //TODO: It seems this joint does not even have getAngle mJoint->getAngle(jointAxisIndex);
+#elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
+	//TODO There must be more angles than only that
+	newPosition = mJoint->getTwistAngle();
+#else
+	newPosition = 0;
+#endif
+	return ((newPosition-lastJointPosition)/timeSinceLastTick);
 }

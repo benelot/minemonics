@@ -12,6 +12,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
@@ -118,7 +120,8 @@ void FSJointBt::update(double timeSinceLastTick) {
 	//apply motor forces
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->isEnabled()) {
+		if ((*motorIterator)->isEnabled()
+			&& MorphologyConfiguration::BODY_MOTORS_ENABLED) {
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
@@ -182,7 +185,7 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 }
 
 void FSJointBt::setAngularStiffness(double jointPitchStiffness,
-	double jointYawStiffness, double jointRollStiffness){
+	double jointYawStiffness, double jointRollStiffness) {
 	// Not implementedt in FS Joint Bt
 }
 
@@ -226,7 +229,8 @@ double FSJointBt::getJointPos(int jointAxisIndex) {
 	return mMultiBody->getJointPos(mJointIndex);
 }
 
-double FSJointBt::getJointVel(int jointAxisIndex) {
+double FSJointBt::getJointVel(int jointAxisIndex, double timeSinceLastTick,
+	double lastJointPosition) {
 	return mMultiBody->getJointVel(mJointIndex);
 }
 

@@ -470,6 +470,16 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//TODO: Optimize this for loading
 	joint->initialize(); // Done in generate body as well
 
+	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
+		parentMorphogeneBranch->getPitchStiffnessCoefficient(),
+		parentMorphogeneBranch->getYawStiffnessCoefficient(),
+		parentMorphogeneBranch->getRollStiffnessCoefficient());
+
+	joint->setAngularDamping( /**!< Set the damping coefficients for the joint */
+		parentMorphogeneBranch->getPitchDampingCoefficient(),
+		parentMorphogeneBranch->getYawDampingCoefficient(),
+		parentMorphogeneBranch->getRollDampingCoefficient());
+
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Joint: Parent: " << joint->getParentIndex() << " /Child: "
 	<< joint->getChildIndex();
 

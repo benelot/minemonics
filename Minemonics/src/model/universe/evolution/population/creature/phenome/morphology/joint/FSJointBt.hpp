@@ -73,7 +73,7 @@ public:
 
 	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
-	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
+	virtual double getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition); /**!< Get the joint velocity of a joint axis */
 
 	virtual void setAngularStiffness(double jointPitchStiffness,
 		double jointYawStiffness, double jointRollStiffness);

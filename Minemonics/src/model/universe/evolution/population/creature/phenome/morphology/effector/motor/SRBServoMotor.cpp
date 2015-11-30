@@ -27,7 +27,8 @@ SRBServoMotor::SRBServoMotor() :
 SRBServoMotor::SRBServoMotor(
 	const JointPhysics::RotationalDegreeOfFreedom jointMotorIndex,
 	const double maxForce, double lowerLimit, double upperLimit,
-	bool positionControlled) : mLastPosition(0) {
+	bool positionControlled) :
+	mLastPosition(0) {
 	mJointMotorIndex = jointMotorIndex;
 	mMaxForce = maxForce;
 	mLowerLimit = lowerLimit;
@@ -95,12 +96,12 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 			+ clampedInputValue * (mUpperLimit - mLowerLimit);
 
 		//calculate the angle error
-		btScalar angleError = targetAngle - mJoint->getJointPos(mJointMotorIndex);
-		btScalar velocityError = 0 - mLastPosition
-			+ mJoint->getJointPos(mJointMotorIndex);
+		btScalar angleError = targetAngle
+			- mJoint->getJointPos(mJointMotorIndex);
+		btScalar velocityError = 0
+			- mJoint->getJointVel(mJointMotorIndex, timeSinceLastTick,
+				mLastPosition);
 		mLastPosition = mJoint->getJointPos(mJointMotorIndex);
-
-
 
 		//simple p(roportional) controller
 		//calculate the target force and clamp it with the maximum force

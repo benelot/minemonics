@@ -82,6 +82,7 @@ public:
 
 private:
 	double mVelocity; /**!< The measured velocity */
+	double mLastPosition; /**!< The last position of the joint to calculate the velocity*/
 };
 BOOST_CLASS_VERSION(JointVelocityceptor, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_SENSOR_PROPRIOCEPTOR_JointVelocityceptor_HPP_ */

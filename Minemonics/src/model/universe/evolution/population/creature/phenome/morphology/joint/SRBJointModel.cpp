@@ -216,13 +216,3 @@ void SRBJointModel::generateMotors(const Ogre::Vector3 maxForces,
 		OgreBulletUtils::convert(upperLimits), positionControlled);
 }
 
-void SRBJointModel::enableAngularMotor(const bool pitchEnable,
-	const bool yawEnable, const bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
-		pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
-		yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
-		rollEnable);
-}
-

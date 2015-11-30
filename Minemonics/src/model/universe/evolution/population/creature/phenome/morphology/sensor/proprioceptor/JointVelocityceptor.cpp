@@ -17,12 +17,13 @@
 //## utils headers
 
 JointVelocityceptor::JointVelocityceptor() :
-	mVelocity(0) {
+	mVelocity(0), mLastPosition(0) {
 }
 
 JointVelocityceptor::JointVelocityceptor(JointModel* jointModel,
 	JointPhysics::RotationalDegreeOfFreedom rotationalDOF) :
-	JointProprioceptor(jointModel, rotationalDOF), mVelocity(0) {
+	JointProprioceptor(jointModel, rotationalDOF), mVelocity(0), mLastPosition(
+		0) {
 
 }
 
@@ -35,5 +36,7 @@ void JointVelocityceptor::initialize() {
 }
 
 void JointVelocityceptor::update(double timeSinceLastTick) {
-	setVelocity(mJoint->getJointVel(mMotorIndex));
+	setVelocity(
+		mJoint->getJointVel(mMotorIndex, timeSinceLastTick, mLastPosition));
+	mLastPosition = mJoint->getJointPos(mMotorIndex);
 }

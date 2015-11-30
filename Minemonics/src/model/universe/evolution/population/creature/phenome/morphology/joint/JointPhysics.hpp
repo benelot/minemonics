@@ -123,7 +123,8 @@ public:
 
 	virtual double getJointPos(int jointAxisIndex) = 0;
 
-	virtual double getJointVel(int jointAxisIndex) = 0;
+	virtual double getJointVel(int jointAxisIndex, double timeSinceLastTick,
+		double lastJointPosition) = 0;
 
 	/**
 	 * Compare the joint physics model to another joint physics model.
@@ -195,14 +196,16 @@ public:
 		const JointPhysics &jointPhysics) {
 		os << "JointPhysics: inWorld=" << jointPhysics.mInWorld /**!< If the joint is in the world*/
 		<< "JointPitchLimit=[" /**!< Joint Pitch limit */
-		<< jointPhysics.mJointLowerLimits.x << "," << jointPhysics.mJointUpperLimits.x
+		<< jointPhysics.mJointLowerLimits.x << ","
+			<< jointPhysics.mJointUpperLimits.x
 
-		<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
-		<< jointPhysics.mJointLowerLimits.y << "," << jointPhysics.mJointUpperLimits.y
+			<< "]/JointYawLimit=[" /**!< Joint Yaw limit */
+			<< jointPhysics.mJointLowerLimits.y << ","
+			<< jointPhysics.mJointUpperLimits.y
 
-		<< "]/JointRollLimit=[" /**!< Joint Roll limit */
-		<< jointPhysics.mJointLowerLimits.z << "," << jointPhysics.mJointUpperLimits.z
-			<< "]";
+			<< "]/JointRollLimit=[" /**!< Joint Roll limit */
+			<< jointPhysics.mJointLowerLimits.z << ","
+			<< jointPhysics.mJointUpperLimits.z << "]";
 		return os;
 	}
 

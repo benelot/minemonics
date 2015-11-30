@@ -118,6 +118,8 @@ public:
 	static const double BODY_BRANCH_INITIAL_VAR = 1.0f; /**!< The initial branch number variance */
 
 	static const bool BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
+
+	static const bool BODY_MOTORS_ENABLED = true; /**!< Globally turn motors on or off*/
 };
 
 #endif /* CONFIGURATION_MORPHOLOGYCONFIGURATION_H_ */

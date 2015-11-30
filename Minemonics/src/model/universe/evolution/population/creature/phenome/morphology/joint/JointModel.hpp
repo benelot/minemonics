@@ -88,7 +88,7 @@ public:
 
 	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
-	virtual double getJointVel(int jointAxisIndex); /**!< Get the joint velocity of a joint axis */
+	virtual double getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition); /**!< Get the joint velocity of a joint axis */
 
 	/**
 	 * Compare the joint model to another joint model.
@@ -107,17 +107,17 @@ public:
 		mJointPhysics = jointPhysics;
 	}
 
-	void generateMotors(const Ogre::Vector3 maxForces,
+	virtual void generateMotors(const Ogre::Vector3 maxForces,
 		const Ogre::Vector3 lowerLimits, const Ogre::Vector3 upperLimits,
-		bool positionControlled);
+		bool positionControlled) = 0;
 
 	/**
 	 * Set the angular limits for pitch, yaw and roll.
 	 * @param angularLowerLimit Lower angular limits.
 	 * @param angularUpperLimit Upper angular limits.
 	 */
-	void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
-		const Ogre::Vector3 angularUpperLimit);
+	virtual void setAngularLimits(const Ogre::Vector3 angularLowerLimit,
+		const Ogre::Vector3 angularUpperLimit) = 0;
 
 	/**
 	 * Set angular joint stiffness.
@@ -125,8 +125,8 @@ public:
 	 * @param jointYawStiffness Joint stiffness in yaw direction.
 	 * @param jointRollStiffness Joint stiffness in roll direction.
 	 */
-	void setAngularStiffness(const double jointPitchStiffness,
-		const double jointYawStiffness, const double jointRollStiffness);
+	virtual void setAngularStiffness(const double jointPitchStiffness,
+		const double jointYawStiffness, const double jointRollStiffness) = 0;
 
 	/**
 	 * Set the spring damping coefficients.
@@ -134,18 +134,9 @@ public:
 	 * @param springYawDampingCoefficient Damping coefficient of the spring in yaw direction.
 	 * @param springRollDampingCoefficient Damping coefficient of the spring in roll direction.
 	 */
-	void setAngularDamping(const double springPitchDampingCoefficient,
+	virtual void setAngularDamping(const double springPitchDampingCoefficient,
 		const double springYawDampingCoefficient,
-		const double springRollDampingCoefficient);
-
-	/**
-	 * Enable angular motors.
-	 * @param pitchEnable Enable pitch motor.
-	 * @param yawEnable Enable yaw motor.
-	 * @param rollEnable Enable roll motor.
-	 */
-	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
-		const bool rollEnable);
+		const double springRollDampingCoefficient) = 0;
 
 	/**
 	 * Get the motors of this joint.

@@ -138,15 +138,6 @@ public:
 		const double springRollDampingCoefficient);
 
 	/**
-	 * Enable angular motors.
-	 * @param pitchEnable Enable pitch motor.
-	 * @param yawEnable Enable yaw motor.
-	 * @param rollEnable Enable roll motor.
-	 */
-	void enableAngularMotor(const bool pitchEnable, const bool yawEnable,
-		const bool rollEnable);
-
-	/**
 	 * Get the motors of this joint.
 	 * @return The motors of this joint.
 	 */
