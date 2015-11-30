@@ -54,13 +54,13 @@ SRBServoMotor::~SRBServoMotor() {
 
 void SRBServoMotor::initialize(MOTOR_TYPE* const motorBt) {
 
-	mMotorBt = motorBt;
-
-	if (mMotorBt) {
-		mMotorBt->m_hiLimit = mUpperLimit;
-		mMotorBt->m_loLimit = mLowerLimit;
-		mLastPosition = mMotorBt->m_currentPosition;
-	}
+//	mMotorBt = motorBt;
+//
+//	if (mMotorBt) {
+//		mMotorBt->m_hiLimit = mUpperLimit;
+//		mMotorBt->m_loLimit = mLowerLimit;
+//		mLastPosition = mMotorBt->m_currentPosition;
+//	}
 
 //#ifdef USE_6DOF2
 //	constraint->enableMotor(mJointMotorIndex, true);
