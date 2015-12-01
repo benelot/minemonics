@@ -120,7 +120,7 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 		btScalar clampedInputValue =
 		(getInputValue() > 1.0f) ? 1.0f :
 		(getInputValue() < 0.0f) ? 0.0f : getInputValue();
-		mJoint->applyJointTorque(0,
+		mJoint->applyJointTorque(mJointMotorIndex,
 			btScalar(getInputValue()));
 	}
 #endif
