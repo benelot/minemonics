@@ -165,16 +165,6 @@ void Joint::setAngularDamping(const double springPitchDampingCoefficient,
 		springYawDampingCoefficient, springRollDampingCoefficient);
 }
 
-void Joint::enableAngularMotor(const bool pitchEnable, const bool yawEnable,
-	const bool rollEnable) {
-	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
-		pitchEnable);
-	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
-		yawEnable);
-	getJointPhysics()->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
-		rollEnable);
-}
-
 void Joint::reset(const Ogre::Vector3 position) {
 	mJointModel->reset(position);
 }

@@ -152,9 +152,6 @@ public:
 		mJointUpperLimits.y = angularUpperLimits[RDOF_YAW];
 	}
 
-	virtual void setRotationalLimitMotorEnabled(
-		const RotationalDegreeOfFreedom index, const bool enable) = 0;
-
 	JointType getType() const {
 		return mType;
 	}
@@ -270,9 +267,11 @@ protected:
 
 	Ogre::Vector3 mJointPitchAxis;/**!< The direction of the joint pitch axis*/
 	Ogre::Vector3 mJointYawAxis;/**!< The direction of the joint pitch axis*/
-	Ogre::Vector3 mJointUpperLimits; /**!< Joint limits for each degree of freedom */
-	Ogre::Vector3 mJointLowerLimits;
+	Ogre::Vector3 mJointUpperLimits; /**!< Joint upper limits for each degree of freedom */
+	Ogre::Vector3 mJointLowerLimits; /**!< Joint lower limits for each degree of freedom */
 	Ogre::Vector3 mJointMaxForces;
+	Ogre::Vector3 mJointStiffness; /**!< The joint spring stiffness coefficient */
+	Ogre::Vector3 mJointDamping; /**!< The joint damping coefficient */
 
 	// should not be serialized
 	bool mInWorld; /**!< If the joint physics is in the world or not. */

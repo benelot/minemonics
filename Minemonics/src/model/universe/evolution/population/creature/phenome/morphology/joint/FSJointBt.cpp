@@ -187,23 +187,27 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 void FSJointBt::setAngularStiffness(double jointPitchStiffness,
 	double jointYawStiffness, double jointRollStiffness) {
 	// Not implementedt in FS Joint Bt
+	if(false)
+	{
+	}else {
+		mJointStiffness.x = jointPitchStiffness;
+		mJointStiffness.y = jointYawStiffness;
+		mJointStiffness.z = jointRollStiffness;
+	}
 }
 
 void FSJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
 	// Not implemented in FS Joint bt
-}
-
-void FSJointBt::setRotationalLimitMotorEnabled(
-	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
-	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-	for (; motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->getIndex() == index) {
-			(*motorIterator)->setEnabled(true);
-			break;
-		}
+	if(false)
+	{
+	}else{
+		mJointDamping.x = jointPitchDamping;
+		mJointDamping.y = jointYawDamping;
+		mJointDamping.z = jointRollDamping;
 	}
 }
+
 
 void FSJointBt::addToWorld() {
 	if (!isInWorld()) {

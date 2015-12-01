@@ -142,15 +142,6 @@ public:
 //		mJoint->setBreakingImpulseThreshold(breakingThreshold);
 	}
 
-	void setRotationalLimitMotorEnabled(
-		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
-
-	bool isRotationalLimitMotorEnabled(
-		const JointPhysics::RotationalDegreeOfFreedom index) {
-		return true;
-//		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
-	}
-
 	CONSTRAINT_TYPE* getJoint() {
 		return mJoint;
 	}

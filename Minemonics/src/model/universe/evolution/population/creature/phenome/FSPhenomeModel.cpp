@@ -303,7 +303,7 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
-		
+
 	if (!MathUtils::isFinite(childLimbRotation)) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
 	}
@@ -467,9 +467,6 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
-	//TODO: Optimize this for loading
-	joint->initialize(); // Done in generate body as well
-
 	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
 		parentMorphogeneBranch->getPitchStiffnessCoefficient(),
 		parentMorphogeneBranch->getYawStiffnessCoefficient(),
@@ -495,7 +492,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass2 = childLimb->getMass();
 	//TODO: Fix the force curve
 //	double maxTorque = 5000 * (mass1 + mass2);
-	double maxTorque = 0.7f * (mass1 * mass2);
+	double maxTorque = 1.0f * (mass1 * mass2);
 //		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
 //			* (mass1 + mass2)
 //			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT

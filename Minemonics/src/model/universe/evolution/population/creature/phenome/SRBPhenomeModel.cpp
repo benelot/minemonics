@@ -358,6 +358,14 @@ LimbModel* SRBPhenomeModel::createLimb(PhenotypeGenerator* generator,
 			MorphologyConfiguration::LIMB_MAX_SIZE :
 			generator->getCurrentShrinkageFactor() * childMorphogene->getZ();
 
+	if (!MathUtils::isFinite(generator->getOrientation())) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator orientation: " << generator->getOrientation();
+	}
+
+	if (!MathUtils::isFinite(generator->getPosition())) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator position: " << generator->getPosition();
+	}
+
 	//build the limb out of the morphogene
 	SRBLimbModel* childLimb = new SRBLimbModel(getCreatureModel()->getWorld(),
 		getCreatureModel(), childMorphogene->getPrimitiveType(),
@@ -418,7 +426,7 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
 	//TODO: Optimize this for loading
-	joint->initialize(); // Is done in generate body as well
+//	joint->initialize(); // Is done in generate body as well
 
 	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
 		parentMorphogeneBranch->getPitchStiffnessCoefficient(),
@@ -444,7 +452,8 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
 	//TODO: Fix force curve
-	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));
+	double maxTorque = 10.0f * (mass1 * mass2);
+//	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));
 
 	//TODO: Make position controlled defined in the settings
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),

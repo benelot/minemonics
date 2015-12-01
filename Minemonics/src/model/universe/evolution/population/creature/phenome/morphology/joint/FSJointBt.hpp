@@ -131,28 +131,6 @@ public:
 //		mJoint->setBreakingImpulseThreshold(breakingThreshold);
 	}
 
-	void setRotationalLimitMotorEnabled(
-		const JointPhysics::RotationalDegreeOfFreedom index, const bool enable);
-
-	bool isRotationalLimitMotorEnabled(
-		const JointPhysics::RotationalDegreeOfFreedom index) {
-		return true;
-//		return mJoint->getRotationalLimitMotor(index)->m_enableMotor;
-	}
-
-	void setMaxRotationalForce(
-		const JointPhysics::RotationalDegreeOfFreedom index,
-		const double maxMotorForce) {
-//		mJoint->setMaxMotorImpulse(maxMotorForce);
-
-	}
-
-	double getMaxRotationalForce(
-		const JointPhysics::RotationalDegreeOfFreedom index) {
-		return 0;
-//		return mJoint->getRotationalLimitMotor(index)->m_maxMotorForce;
-	}
-
 	const std::vector<Motor*>& getMotors() const {
 		return mMotors;
 	}

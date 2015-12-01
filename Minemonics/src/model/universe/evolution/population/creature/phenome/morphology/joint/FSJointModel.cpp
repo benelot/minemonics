@@ -54,6 +54,8 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 		OgreBulletUtils::convert(jointYawAxis),
 		OgreBulletUtils::convert(jointMinAngle),
 		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
+
+	addSensors();
 }
 
 FSJointModel::~FSJointModel() {
@@ -62,8 +64,6 @@ FSJointModel::~FSJointModel() {
 void FSJointModel::initialize() {
 
 	mJointPhysics->initialize();
-
-	addSensors();
 }
 
 void FSJointModel::addSensors() {
@@ -216,15 +216,5 @@ void FSJointModel::generateMotors(const Ogre::Vector3 maxForces,
 	mJointPhysics->generateMotors(OgreBulletUtils::convert(maxForces),
 		OgreBulletUtils::convert(lowerLimits),
 		OgreBulletUtils::convert(upperLimits), positionControlled);
-}
-
-void FSJointModel::enableAngularMotor(const bool pitchEnable,
-	const bool yawEnable, const bool rollEnable) {
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_PITCH,
-		pitchEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_YAW,
-		yawEnable);
-	mJointPhysics->setRotationalLimitMotorEnabled(JointPhysics::RDOF_ROLL,
-		rollEnable);
 }
 

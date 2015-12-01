@@ -75,6 +75,7 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	frameInW.getBasis().setValue(xAxis[0], yAxis[0], zAxis[0], xAxis[1],
 		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
 	frameInW.setOrigin(pivotInW);
+
 	// now get constraint frame in local coordinate systems
 	mFrameInA = bodyA->getCenterOfMassTransform().inverse() * frameInW;
 	mFrameInB = bodyB->getCenterOfMassTransform().inverse() * frameInW;
@@ -170,6 +171,8 @@ void SRBJointBt::initialize() {
 	mJoint->setDbgDrawSize(btScalar(5.f));
 #endif
 
+	setAngularStiffness(mJointStiffness.x,mJointStiffness.y, mJointStiffness.z); // Set the joint stiffness
+	setAngularDamping(mJointDamping.x,mJointDamping.y,mJointDamping.z); // set the joint damping
 }
 
 SRBJointBt::~SRBJointBt() {
@@ -196,7 +199,8 @@ void SRBJointBt::update(double timeSinceLastTick) {
 	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->isEnabled() && MorphologyConfiguration::BODY_MOTORS_ENABLED) {
+		if ((*motorIterator)->isEnabled()
+			&& MorphologyConfiguration::BODY_MOTORS_ENABLED) {
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
 	}
@@ -266,44 +270,51 @@ void SRBJointBt::reposition(const Ogre::Vector3 position) {
 
 void SRBJointBt::setAngularStiffness(double jointPitchStiffness,
 	double jointYawStiffness, double jointRollStiffness) {
+	if (mJoint) {
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
-	// no stiffness available
+		// no stiffness available
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no stiffness available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
-	mJoint->enableSpring(0,true);
-	mJoint->enableSpring(1,true);
-	mJoint->enableSpring(2,true);
-	mJoint->setStiffness(0,btScalar(jointPitchStiffness));
-	mJoint->setStiffness(1,btScalar(jointYawStiffness));
-	mJoint->setStiffness(2,btScalar(jointRollStiffness));
+		mJoint->enableSpring(0, true);
+		mJoint->enableSpring(1, true);
+		mJoint->enableSpring(2, true);
+		mJoint->setStiffness(0, btScalar(jointPitchStiffness));
+		mJoint->setStiffness(1, btScalar(jointYawStiffness));
+		mJoint->setStiffness(2, btScalar(jointRollStiffness));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
-	mJoint->enableSpring(0,true);
-	mJoint->enableSpring(1,true);
-	mJoint->enableSpring(2,true);
-	mJoint->setStiffness(0,btScalar(jointPitchStiffness));
-	mJoint->setStiffness(1,btScalar(jointYawStiffness));
-	mJoint->setStiffness(2,btScalar(jointRollStiffness));
+		mJoint->enableSpring(0,true);
+		mJoint->enableSpring(1,true);
+		mJoint->enableSpring(2,true);
+		mJoint->setStiffness(0,btScalar(jointPitchStiffness));
+		mJoint->setStiffness(1,btScalar(jointYawStiffness));
+		mJoint->setStiffness(2,btScalar(jointRollStiffness));
 #elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
-	// no stiffness available
+		// no stiffness available
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
 //	mJoint->setStiffness(btScalar(jointPitchStiffness));
 #endif
+	} else {
+		mJointStiffness.x = jointPitchStiffness;
+		mJointStiffness.y = jointYawStiffness;
+		mJointStiffness.z = jointRollStiffness;
+	}
 }
 
 void SRBJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
+	if(mJoint){
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
 
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no damping available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
-	mJoint->enableSpring(0,true);
-	mJoint->enableSpring(1,true);
-	mJoint->enableSpring(2,true);
-	mJoint->setDamping(0,btScalar(jointPitchDamping));
-	mJoint->setDamping(1,btScalar(jointYawDamping));
-	mJoint->setDamping(2,btScalar(jointRollDamping));
+	mJoint->enableSpring(0, true);
+	mJoint->enableSpring(1, true);
+	mJoint->enableSpring(2, true);
+	mJoint->setDamping(0, btScalar(jointPitchDamping));
+	mJoint->setDamping(1, btScalar(jointYawDamping));
+	mJoint->setDamping(2, btScalar(jointRollDamping));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
 	mJoint->enableSpring(0,true);
 	mJoint->enableSpring(1,true);
@@ -316,18 +327,13 @@ void SRBJointBt::setAngularDamping(double jointPitchDamping,
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
 	mJoint->setDamping(btScalar(jointPitchDamping));
 #endif
-}
-
-void SRBJointBt::setRotationalLimitMotorEnabled(
-	const JointPhysics::RotationalDegreeOfFreedom index, const bool enable) {
-	std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-	for (; motorIterator != mMotors.end(); motorIterator++) {
-		if ((*motorIterator)->getIndex() == index) {
-			(*motorIterator)->setEnabled(true);
-			break;
-		}
+	}else{
+		mJointDamping.x = jointPitchDamping;
+		mJointDamping.y = jointYawDamping;
+		mJointDamping.z = jointRollDamping;
 	}
 }
+
 
 void SRBJointBt::addToWorld() {
 	if (!isInWorld()) {
@@ -371,7 +377,7 @@ void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 		return;
 	}
 
-	// z-axis of constraint frame
+	// axis of constraint frame
 	btVector3 hingeAxisLocalA = mJoint->getFrameOffsetA().getBasis().getColumn(
 		col);
 
@@ -389,8 +395,8 @@ void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 	btVector3 hingeTorqueA = torque * hingeAxisWorldA;
 	btVector3 hingeTorqueB = torque * hingeAxisWorldB;
 
-	mBodyA->applyTorque(-hingeTorqueA);
-	mBodyB->applyTorque(hingeTorqueB);
+	mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
+	mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
 #endif
 }
 
@@ -414,11 +420,12 @@ double SRBJointBt::getJointPos(int jointAxisIndex) {
 #endif
 }
 
-double SRBJointBt::getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition) {
+double SRBJointBt::getJointVel(int jointAxisIndex, double timeSinceLastTick,
+	double lastJointPosition) {
 
 	btScalar newPosition;
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
-	newPosition =  mJoint->getHingeAngle();
+	newPosition = mJoint->getHingeAngle();
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 	newPosition = mJoint->getAngle(jointAxisIndex);
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
@@ -433,5 +440,5 @@ double SRBJointBt::getJointVel(int jointAxisIndex,double timeSinceLastTick, doub
 #else
 	newPosition = 0;
 #endif
-	return ((newPosition-lastJointPosition)/timeSinceLastTick);
+	return ((newPosition - lastJointPosition) / timeSinceLastTick);
 }

@@ -52,6 +52,8 @@ SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 		OgreBulletUtils::convert(jointYawAxis),
 		OgreBulletUtils::convert(jointMinAngle),
 		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
+
+	addSensors();
 }
 
 SRBJointModel::~SRBJointModel() {
@@ -59,8 +61,6 @@ SRBJointModel::~SRBJointModel() {
 
 void SRBJointModel::initialize() {
 	mJointPhysics->initialize();
-
-	addSensors();
 }
 
 void SRBJointModel::addSensors() {
