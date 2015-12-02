@@ -315,6 +315,14 @@ public:
 		mDynasty = dynasty;
 	}
 
+	bool isMutated() const {
+		return mMutated;
+	}
+
+	void setMutated(bool mutated) {
+		mMutated = mutated;
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -386,6 +394,8 @@ private:
 	bool mCulled; /**!< If the creature was culled or not. */
 
 	bool mNew; /**!< If the creature is new and does not have a controller element yet. */
+
+	bool mMutated; /**!< If the creature is mutated and the controller element has to be rebuilt */
 
 	PhysicsController::PhysicsModelType mPhysicsModelType; /**!< Physics model type */
 

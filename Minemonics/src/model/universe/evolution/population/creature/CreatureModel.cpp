@@ -26,7 +26,7 @@ CreatureModel::_Init CreatureModel::_initializer;
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
 	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
-		PhysicsController::RigidbodyModel),mDynasty(0) {
+		PhysicsController::RigidbodyModel),mDynasty(0),mMutated(false) {
 }
 
 CreatureModel::CreatureModel(PopulationModel* const populationModel,
@@ -34,7 +34,7 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	const Ogre::Vector3 position) :
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
 		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
-		position), mFitnessScoreCalculated(false), mPosition(position),mDynasty(0) {
+		position), mFitnessScoreCalculated(false), mPosition(position),mDynasty(0),mMutated(false) {
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
 		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
@@ -67,6 +67,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mWorld = creatureModel.mWorld;
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
 	mDynasty = creatureModel.mDynasty;
+	mMutated = creatureModel.mMutated;
 
 	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
 	case PhysicsController::FeatherstoneModel:

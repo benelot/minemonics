@@ -110,6 +110,10 @@ public:
 
 	bool isCulled() const;
 
+	bool isMutated() const;
+
+	void setMutated(bool mutated);
+
 	PhysicsController::PhysicsModelType getPhysicsModelType() ;
 
 	void addJury(Jury* jury);

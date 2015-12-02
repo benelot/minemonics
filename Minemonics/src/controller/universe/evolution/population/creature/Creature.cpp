@@ -51,7 +51,6 @@ Creature::Creature(CreatureModel* const creatureModel) :
 }
 
 Creature::~Creature() {
-//	delete mCreatureModel;
 	mCreatureModel = NULL;
 //	mPhenotype
 }
@@ -168,6 +167,10 @@ bool Creature::isCulled() const {
 	return mCreatureModel->isCulled();
 }
 
+bool Creature::isMutated() const {
+	return mCreatureModel->isMutated();
+}
+
 PhysicsController::PhysicsModelType Creature::getPhysicsModelType() {
 	return mCreatureModel->getPhysicsModelType();
 }
@@ -178,6 +181,10 @@ void Creature::addJury(Jury* jury) {
 
 void Creature::clearJuries() {
 	mCreatureModel->clearJuries();
+}
+
+void Creature::setMutated(bool mutated) {
+	mCreatureModel->setMutated(mutated);
 }
 
 void Creature::hasInterpenetrations() {
