@@ -73,8 +73,6 @@ public:
 
 	virtual void initialize();
 
-	void addSensors();
-
 	/**
 	 * Update the joint model.
 	 * @param timeSinceLastTick
