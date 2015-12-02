@@ -258,6 +258,8 @@ void SRBLimbBt::reset(const Ogre::Vector3 position) {
 
 	mBody->setWorldTransform(initialTransform);
 	mMotionState->setWorldTransform(initialTransform);
+
+	calm();
 }
 
 void SRBLimbBt::reposition(const Ogre::Vector3 position) {

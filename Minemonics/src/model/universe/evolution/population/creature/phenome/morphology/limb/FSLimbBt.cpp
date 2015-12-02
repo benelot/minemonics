@@ -29,7 +29,6 @@
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
 
-
 //## view headers
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 //## utils headers
@@ -245,6 +244,7 @@ btTransform FSLimbBt::getLocalIntersection(const btVector3 origin,
 
 void FSLimbBt::reset(const Ogre::Vector3 position) {
 	btTransform initialTransform;
+	initialTransform.setIdentity();
 
 	btVector3 initialRelativePosition;
 	initialRelativePosition.setValue(getInitialRelativeXPosition(),
@@ -260,7 +260,11 @@ void FSLimbBt::reset(const Ogre::Vector3 position) {
 	initialTransform.setRotation(initialOrientation);
 
 	mBody->setWorldTransform(initialTransform);
+	if (mLink) {
+		mLink->setWorldTransform(initialTransform);
+	}
 	mMotionState->setWorldTransform(initialTransform);
+	calm();
 }
 
 void FSLimbBt::reposition(const Ogre::Vector3 position) {
@@ -328,10 +332,12 @@ FSLimbBt* FSLimbBt::clone() {
 }
 
 void FSLimbBt::calm() {
-	mBody->clearForces();
-	btVector3 zeroVector(0, 0, 0);
-	mBody->setLinearVelocity(zeroVector);
-	mBody->setAngularVelocity(zeroVector);
+	if (mBody) {
+		mBody->clearForces();
+		btVector3 zeroVector(0, 0, 0);
+		mBody->setLinearVelocity(zeroVector);
+		mBody->setAngularVelocity(zeroVector);
+	}
 }
 
 void FSLimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
@@ -372,7 +378,7 @@ btVector3 FSLimbBt::getPosition() const {
 	} else {
 		transform = mBody->getWorldTransform();
 	}
-	
+
 	btVector3 position = transform.getOrigin();
 	if (!MathUtils::isFinite(position)) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb position: " << MathUtils::print(position);

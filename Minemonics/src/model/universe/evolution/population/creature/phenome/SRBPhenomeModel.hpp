@@ -205,7 +205,7 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant<std::string>("PhenomeModel"));
+				boost::log::attributes::constant<std::string>("SRBPhenomeModel"));
 		}
 	} _initializer;
 

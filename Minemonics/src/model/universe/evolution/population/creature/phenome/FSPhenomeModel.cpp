@@ -178,6 +178,13 @@ void FSPhenomeModel::removeFromWorld() {
 }
 
 void FSPhenomeModel::calm() {
+
+	if (mMultiBody) {
+		mMultiBody->clearConstraintForces();
+		mMultiBody->clearForcesAndTorques();
+		mMultiBody->clearVelocities();
+	}
+
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
 		(*lit)->calm();
@@ -468,12 +475,12 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
 	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
-		parentMorphogeneBranch->getPitchStiffnessCoefficient(),
+	parentMorphogeneBranch->getPitchStiffnessCoefficient(),
 		parentMorphogeneBranch->getYawStiffnessCoefficient(),
 		parentMorphogeneBranch->getRollStiffnessCoefficient());
 
 	joint->setAngularDamping( /**!< Set the damping coefficients for the joint */
-		parentMorphogeneBranch->getPitchDampingCoefficient(),
+	parentMorphogeneBranch->getPitchDampingCoefficient(),
 		parentMorphogeneBranch->getYawDampingCoefficient(),
 		parentMorphogeneBranch->getRollDampingCoefficient());
 
@@ -770,9 +777,32 @@ void FSPhenomeModel::addJointConstraints() {
 void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	//TODO: Some creatures just do not have a multibody. Why?
-	if (mMultiBody) {
-		mMultiBody->setBasePos(OgreBulletUtils::convert(position));
+	if (mMultiBody && mLimbModels.size() > 0) {
+
+		btTransform initialTransform;
+		initialTransform.setIdentity();
+
+		btVector3 initialRelativePosition;
+		initialRelativePosition.setValue(
+			mLimbModels[0]->getLimbPhysics()->getInitialRelativeXPosition(),
+			mLimbModels[0]->getLimbPhysics()->getInitialRelativeYPosition(),
+			mLimbModels[0]->getLimbPhysics()->getInitialRelativeZPosition());
+
+		btQuaternion initialOrientation;
+		initialOrientation.setValue(
+			mLimbModels[0]->getLimbPhysics()->getInitialXOrientation(),
+			mLimbModels[0]->getLimbPhysics()->getInitialYOrientation(),
+			mLimbModels[0]->getLimbPhysics()->getInitialZOrientation(),
+			mLimbModels[0]->getLimbPhysics()->getInitialWOrientation());
+
+		initialTransform.setOrigin(
+			OgreBulletUtils::convert(position) + initialRelativePosition);
+		initialTransform.setRotation(initialOrientation);
+
+		mMultiBody->setBaseWorldTransform(initialTransform);
+		calm();
 	}
+
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
 		(*it)->reset(position);
