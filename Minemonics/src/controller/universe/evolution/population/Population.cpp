@@ -73,8 +73,6 @@ void Population::initialize() {
 void Population::addNewMember(const double branchiness,
 	const Ogre::Vector3 rootPosition) {
 	//add new creature
-//	Creature* creature = new Snake(this,15,OgreBulletUtils::convert(rootPosition));
-//	Creature* creature = new RagDoll(this,10,OgreBulletUtils::convert(rootPosition));
 	Creature* creature = new Creature(this, mPlanet->getPhysicsModelType(),
 		rootPosition, branchiness);
 	addMember(creature);
@@ -134,7 +132,7 @@ void Population::resyncWithModel() {
 		if ((*cit)->isCulled()) {
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature culled.";
 			Creature* creature = *cit;
-			delete creature->getCreatureModel();
+			delete creature->getCreatureModel(); // delete creature model, it is already removed from mPopulationModel->getCreatureModels()
 			delete creature;
 			cit = mCreatures.erase(cit);
 		} else {
@@ -142,7 +140,23 @@ void Population::resyncWithModel() {
 		}
 	}
 
-	//add new creatures that were newly born.
+	// resync mutated creatures
+	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
+		cit != mCreatures.end();) {
+		if ((*cit)->isMutated()) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature mutated.";
+			CreatureModel* creatureModel = (*cit)->getCreatureModel();
+			delete *cit;
+			cit = mCreatures.erase(cit);
+			Creature* creature = new Creature(creatureModel);
+			creature->setMutated(false);
+			mCreatures.push_back(creature);
+		} else {
+			cit++;
+		}
+	}
+
+	// add creatures that were newly born.
 	for (std::vector<CreatureModel*>::const_iterator cit =
 		mPopulationModel->getCreatureModels().begin();
 		cit != mPopulationModel->getCreatureModels().end(); cit++) {

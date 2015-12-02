@@ -91,6 +91,8 @@ int Phenome::performEmbryogenesis() {
 	if (limbQty == 0) {
 		return limbQty;
 	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "--Synchronize the creature from the model to the controller";
 	// iterate over all the component models
 	for (std::vector<ComponentModel*>::const_iterator cmit =
 		mPhenotypeModel->getComponentModels().begin();
@@ -111,7 +113,7 @@ int Phenome::performEmbryogenesis() {
 		}
 		case ComponentModel::UnknownComponent:
 		default:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "Unknown component found.\n";;
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << "Unknown component found";
 			exit(-1);
 		}
 	}
