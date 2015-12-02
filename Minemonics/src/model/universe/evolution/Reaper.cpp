@@ -93,6 +93,7 @@ void Reaper::reap(PopulationModel* const population) {
 		population->getCreatureModels().end(),
 		scoreComparator.compareCreatureFitnessScore);
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Reap " << headsToReap << " creatures";
 	for (; headsToReap != 0; headsToReap--) {
 		population->getCreatureModels().back()->setCulled(true);
 		population->getCreatureModels().pop_back();
@@ -107,84 +108,103 @@ void Reaper::sow(PopulationModel* const population) {
 		return;
 	}
 
+	int crossOverHeads = 0;
 	{
 		// calculate the number of offsprings for each ancestor
-		int crossOverHeads = round(
-			((double) headsToSow) * mCrossOverPercentage);
+		crossOverHeads = round(((double) headsToSow) * mCrossOverPercentage);
 
 		crossover(population, crossOverHeads);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Crossover" << crossOverHeads << " creatures";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Crossover " << crossOverHeads << " creatures";
+	}
+	int start = 0;
+	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Elite transfer " << untouched << " creatures" << "[" << start << ";" << start + untouched << "]";
+	start += untouched;
+
+	{
+		// calculate the number of gene mutated heads
+		int geneMutationHeads = round(
+			((double) population->getCreatureModels().size() - untouched
+				- crossOverHeads) * mGeneMutationPercentage);
+
+		mutateGenes(population, start, geneMutationHeads);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mutate genes of " << geneMutationHeads << " creatures" << "[" << start << ";" << start + geneMutationHeads << "]";
+
+		start += geneMutationHeads;
 	}
 
-	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
+	{
+		// calculate the number of gene split heads
+		int geneSplitHeads = round(
+			((double) population->getCreatureModels().size() - untouched
+				- crossOverHeads) * mGeneSplitPercentage);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Split segments of " << geneSplitHeads << " creatures" << "[" << start << ";" << start + geneSplitHeads << "]";
 
-	int start = untouched;
+		splitGenes(population, start, geneSplitHeads);
 
-//	{
-//		// calculate the number of gene mutated heads
-//		int geneMutationHeads = round(
-//			((double) population->getCreatureModels().size() - untouched)
-//				* mGeneMutationPercentage);
-//
-//		mutateGenes(population, start, geneMutationHeads);
-//		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Mutate " << geneMutationHeads << " creatures";
-//
-//		start += geneMutationHeads;
-//	}
+		start += geneSplitHeads;
+	}
 
-//	{
-//		// calculate the number of gene split heads
-//		int geneSplitHeads = round(
-//			((double) population->getCreatureModels().size() - untouched)
-//				* mGeneSplitPercentage);
-//
-//		splitGenes(population, start, geneSplitHeads);
-//
-//		start += geneSplitHeads;
-//	}
-//
-//	{
-//		// calculate the number of gene branch mutated heads
-//		int branchMutationHeads = round(
-//			((double) population->getCreatureModels().size() - untouched)
-//				* mBranchMutationPercentage);
-//
-//		mutateGeneBranches(population, start, branchMutationHeads);
-//
-//		start += branchMutationHeads;
-//	}
-//
-//	{
-//		// calculate the number of grafted heads
-//		int stubHeads = round(
-//			((double) population->getCreatureModels().size() - untouched)
-//				* mGrowStubPercentage);
-//
-//		growStubs(population, start, stubHeads);
-//
-//		start += stubHeads;
-//	}
-//
-//	{
-//		// calculate the number of grafted heads
-//		int graftedHeads = round(
-//			((double) population->getCreatureModels().size() - untouched)
-//				* mGraftPercentage);
-//
-//		graftFeatures(population, start, graftedHeads);
-//
-//		start += graftedHeads;
-//	}
+	{
+		// calculate the number of gene branch mutated heads
+		int branchMutationHeads = round(
+			((double) population->getCreatureModels().size() - untouched
+				- crossOverHeads) * mBranchMutationPercentage);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Mutate branches of " << branchMutationHeads << " creatures" << "[" << start << ";" << start + branchMutationHeads << "]";
+
+		mutateGeneBranches(population, start, branchMutationHeads);
+
+		start += branchMutationHeads;
+	}
+
+	{
+		// calculate the number of grafted heads
+		int stubHeads = round(
+			((double) population->getCreatureModels().size() - untouched
+				- crossOverHeads) * mGrowStubPercentage);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Grow stubs of " << stubHeads << " creatures" << "[" << start << ";" << start + stubHeads << "]";
+
+		growStubs(population, start, stubHeads);
+
+		start += stubHeads;
+	}
+
+	{
+		// calculate the number of grafted heads
+		int graftedHeads = round(
+			((double) population->getCreatureModels().size() - untouched
+				- crossOverHeads) * mGraftPercentage);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Graft features of " << graftedHeads << " creatures" << "[" << start << ";" << start + graftedHeads << "]";
+
+		graftFeatures(population, start, graftedHeads);
+
+		start += graftedHeads;
+	}
 
 	{
 		// calculate the number of freshly sown heads
 		int freshlySownHeads = round(
 			((double) headsToSow) * mSowFreshPercentage);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Sow " << freshlySownHeads << " random creatures";
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Sow " << freshlySownHeads << " random creatures";
 
 		sowFreshly(population, freshlySownHeads);
 	}
-	population->initialize();
+
+	// erase the old creature models
+	for (std::vector<CreatureModel*>::iterator cit =
+		population->getCreatureModels().begin();
+		cit != population->getCreatureModels().end();) {
+		if ((*cit)->isCulled()) {
+			cit = population->getCreatureModels().erase(cit);
+		} else {
+			cit++;
+		}
+	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Population has now " << population->getCreatureModels().size() << " creatures";
+
+	population->setOutOfSync(true);
+	population->initialize(); // Reinitialize the population
 }
 
 void Reaper::crossover(PopulationModel* const population,
@@ -230,13 +250,16 @@ void Reaper::crossover(PopulationModel* const population,
 					population->getCreatureModels().size() - 1));
 		}
 
-		offspring = (*cit)->clone();
-		offspring->setNew(true);
-		offspring->setDeveloped(false);
-		offspring->getGenotype().crossoverRandomly(&(partner->getGenotype()));
-		offspring->getGenotype().recalculateRootIndex();
-		offspring->giveRebirth();
+		offspring = (*cit)->clone(); // Clone the old creature
+		offspring->setNew(true); // Make the creature a new creature
+		offspring->giveRebirth(); // Give the creature a rebirth from its old clone
+		offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+		offspring->getGenotype().crossoverRandomly(&(partner->getGenotype())); // Crossover randomly with its partner
+		offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
 		population->getCreatureModels().push_back(offspring);
+
+		// Are we done?
 		crossOverSown++;
 		if (crossOverSown == crossoverHeads) {
 			break;
@@ -249,12 +272,18 @@ void Reaper::mutateGenes(PopulationModel* const population, int startIndex,
 	const int mutatedGeneHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < mutatedGeneHeads; i++) {
-			if (population->getCreatureModels().size() > startIndex + i) {
-				population->getCreatureModels()[startIndex + i]->getGenotype().mutateRandomGenes(
-					EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);
-				population->getCreatureModels()[startIndex + i]->setDeveloped(
-					false);
-				population->getCreatureModels()[startIndex + i]->getGenotype().recalculateRootIndex();
+			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+				CreatureModel* offspring =
+					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				population->getCreatureModels()[startIndex + i]->setCulled(
+						true);
+				offspring->setNew(true); // Make the creature a new creature
+				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+				offspring->getGenotype().mutateRandomGenes(
+					EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY); // Mutate random genes
+				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				population->getCreatureModels().push_back(offspring);
 			}
 		}
 	}
@@ -264,11 +293,18 @@ void Reaper::splitGenes(PopulationModel* const population, const int startIndex,
 	const int splitGeneHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < splitGeneHeads; i++) {
-			if (population->getCreatureModels().size() > startIndex + i) {
-				population->getCreatureModels()[startIndex + i]->getGenotype().splitRandomGenes(
+			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+				population->getCreatureModels()[startIndex + i]->setCulled(
+					true);
+				CreatureModel* offspring =
+					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				offspring->setNew(true); // Make the creature a new creature
+				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+				offspring->getGenotype().splitRandomGenes(
 					EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY);
-				population->getCreatureModels()[startIndex + i]->setDeveloped(
-					false);
+				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				population->getCreatureModels().push_back(offspring);
 			}
 		}
 	}
@@ -278,11 +314,18 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 	const int startIndex, const int mutatedGeneBranchHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < mutatedGeneBranchHeads; i++) {
-			if (population->getCreatureModels().size() > startIndex + i) {
-				population->getCreatureModels()[startIndex + i]->getGenotype().mutateRandomBranches(
+			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+				CreatureModel* offspring =
+					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				population->getCreatureModels()[startIndex + i]->setCulled(
+						true);
+				offspring->setNew(true); // Make the creature a new creature
+				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+				offspring->getGenotype().mutateRandomBranches(
 					EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY);
-				population->getCreatureModels()[startIndex + i]->setDeveloped(
-					false);
+				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				population->getCreatureModels().push_back(offspring);
 			}
 		}
 	}
@@ -292,11 +335,18 @@ void Reaper::growStubs(PopulationModel* const population, const int startIndex,
 	const int growStubHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < growStubHeads; i++) {
-			if (population->getCreatureModels().size() > startIndex + i) {
-				population->getCreatureModels()[startIndex + i]->getGenotype().growRandomStubs(
+			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+				CreatureModel* offspring =
+					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				population->getCreatureModels()[startIndex + i]->setCulled(
+						true);
+				offspring->setNew(true); // Make the creature a new creature
+				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+				offspring->getGenotype().growRandomStubs(
 					EvolutionConfiguration::REAPER_GROW_STUB_PROBABILITY);
-				population->getCreatureModels()[startIndex + i]->setDeveloped(
-					false);
+				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				population->getCreatureModels().push_back(offspring);
 			}
 		}
 	}
@@ -306,12 +356,12 @@ void Reaper::graftFeatures(PopulationModel* const population,
 	const int startIndex, const int graftedHeads) {
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < graftedHeads; i++) {
-			if (population->getCreatureModels().size() > startIndex + i) {
-				/**
-				 * Whenever a parent is needed, we choose a number of individuals at random from
-				 * the previous generation. These individuals constitute a tournament.
-				 * The creature with the highest fitness wins and becomes the selected parent.
-				 */
+			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+			/**
+			 * Whenever a parent is needed, we choose a number of individuals at random from
+			 * the previous generation. These individuals constitute a tournament.
+			 * The creature with the highest fitness wins and becomes the selected parent.
+			 */
 				std::vector<CreatureModel*> tournament;
 				int bestCreatureIndex = 0;
 				int bestFitness = 0;
@@ -329,10 +379,17 @@ void Reaper::graftFeatures(PopulationModel* const population,
 					tournament.push_back(model);
 				}
 
-				population->getCreatureModels()[startIndex + i]->getGenotype().graftRandomlyFrom(
+				CreatureModel* offspring =
+					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				population->getCreatureModels()[startIndex + i]->setCulled(
+						true);
+				offspring->setNew(true); // Make the creature a new creature
+				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+				offspring->getGenotype().graftRandomlyFrom(
 					&tournament[bestCreatureIndex]->getGenotype());
-				population->getCreatureModels()[startIndex + i]->setDeveloped(
-					false);
+				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				population->getCreatureModels().push_back(offspring);
 			}
 		}
 	}
