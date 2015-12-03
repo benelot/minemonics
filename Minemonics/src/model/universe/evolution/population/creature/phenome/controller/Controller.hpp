@@ -120,12 +120,12 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mType); /**!< The type of controller*/
+		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of controller*/
 
-		//TODO: Store control inputs and outputs properly
-//		& BOOST_SERIALIZATION_NVP(mControlInputs) /**!< The vector of control inputs*/
+		//Properly serialize the control inputs graph
+		& BOOST_SERIALIZATION_NVP(mControlInputs) /**!< The vector of control inputs*/
 
-//		& BOOST_SERIALIZATION_NVP(mControlOutputs); /**!< The vector of control outputs*/
+		& BOOST_SERIALIZATION_NVP(mControlOutputs); /**!< The vector of control outputs*/
 	}
 
 protected:

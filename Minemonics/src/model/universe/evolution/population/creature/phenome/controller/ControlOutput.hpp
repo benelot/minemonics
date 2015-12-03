@@ -36,6 +36,7 @@ class access;
 class ControlOutput {
 public:
 	ControlOutput();
+	ControlOutput(int outputIndex);
 	virtual ~ControlOutput();
 
 	/**
@@ -76,10 +77,14 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mOutputValue); /**!< The input value*/
+		ar
+		& BOOST_SERIALIZATION_NVP(mOutputIndex) /**!< The index of the output in the output array*/
+		& BOOST_SERIALIZATION_NVP(mOutputValue); /**!< The input value*/
 	}
 
 private:
+
+	int mOutputIndex; /**!< The index of the output in the output array */
 	double mOutputValue; /**!< The control output value */
 };
 BOOST_CLASS_VERSION(ControlOutput, 1)

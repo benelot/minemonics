@@ -36,6 +36,7 @@ class access;
 class ControlInput {
 public:
 	ControlInput();
+	ControlInput(int inputIndex);
 	virtual ~ControlInput();
 
 	/**
@@ -85,11 +86,15 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mReceivedInput) /**!< If the control input has new input*/
+		ar
+		& BOOST_SERIALIZATION_NVP(mInputIndex) /**!< The index of the input in the input array */
+		& BOOST_SERIALIZATION_NVP(mReceivedInput) /**!< If the control input has new input*/
 		& BOOST_SERIALIZATION_NVP(mInputValue); /**!< The input that was received. */
 	}
 
 private:
+
+	int mInputIndex; /**!< The index of the input in the input array */
 	bool mReceivedInput; /**!< If it received input. */
 
 	double mInputValue; /**!< The input that was received. */

@@ -15,7 +15,12 @@
 //## utils headers
 
 ControlOutput::ControlOutput() :
-	mOutputValue(0) {
+	mOutputValue(0), mOutputIndex(0) {
+}
+
+ControlOutput::ControlOutput(int outputIndex) :
+	mOutputValue(0), mOutputIndex(outputIndex) {
+
 }
 
 ControlOutput::~ControlOutput() {

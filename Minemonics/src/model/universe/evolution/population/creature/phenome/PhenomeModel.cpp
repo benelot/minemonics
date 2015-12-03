@@ -86,6 +86,38 @@ void PhenomeModel::calm() {
 	}
 }
 
+void PhenomeModel::collectControlInputs() {
+//	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+//		lit != mLimbModels.end(); lit++) {
+//
+//	}
+//
+//	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+//		cit != mControllers.end(); cit++) {
+//
+//	}
+//
+//	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
+//		jit != mJointModels.end(); jit++) {
+//	}
+}
+
+void PhenomeModel::collectControlOutputs() {
+//	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+//		lit != mLimbModels.end(); lit++) {
+//
+//	}
+//
+//	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+//		cit != mControllers.end(); cit++) {
+//
+//	}
+//
+//	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
+//		jit != mJointModels.end(); jit++) {
+//	}
+}
+
 bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	if (mInWorld != phenomeModel.mInWorld) {
 		return false;
