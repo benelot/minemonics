@@ -1,4 +1,4 @@
-# Chua Circuit,modelLeg,0g,100s,JointPosition=>x,JointVelocity=>y,z=>JointTorque
+# Chua Circuit,modelLeg,0g,100s,JointPosition=>x,JointVelocity=>y,z=>JointTorque friction 10,10 force 0.7
 0	0	2.2
 0	0	2.19997
 0.000868726	0.208494	2.19994
