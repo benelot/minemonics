@@ -91,7 +91,13 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 	if (mControlInputs.size() >= 2 && !mFirstTime) {
 		// set the inputs to the chaotic controller
 		u[0] = mControlInputs[0]->getOutputValue();
-		u[1] = mControlInputs[1]->getOutputValue();
+//		u[0] = mControlInputs[1]->getOutputValue();
+
+//		u[1] = mControlInputs[0]->getOutputValue();
+//		u[1] = mControlInputs[1]->getOutputValue();
+
+//		u[2] = mControlInputs[0]->getOutputValue();
+		u[2] = mControlInputs[1]->getOutputValue();
 	}
 
 	mFirstTime = false;
@@ -100,7 +106,8 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 	calcChuaCircuit(); // calculate the circuit change
 
-	double output = u[2]; //output the new value to the motor
+	double output = u[1]; //output the new value to the motor
+//	double output = u[2]; //output the new value to the motor
 
 //	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
 
