@@ -30,8 +30,8 @@
 
 BulletPicker::BulletPicker() :
 	mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
-		NULL), mPickedConstraint(NULL), mPrevCanSleep(false), mMultibodyworld(
-		NULL), mWorld(NULL) {
+	NULL), mPickedConstraint(NULL), mPrevCanSleep(false), mMultibodyworld(
+	NULL), mWorld(NULL) {
 }
 
 BulletPicker::~BulletPicker() {
@@ -64,6 +64,7 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 	//kF_UseGjkConvexRaytest flag is now enabled by default, use the faster but more approximate algorithm
 	rayCallback.m_flags |= btTriangleRaycastCallback::kF_KeepUnflippedNormal;
 	rayCallback.m_flags &= ~btTriangleRaycastCallback::kF_FilterBackfaces;
+
 	rayCallback.m_collisionFilterGroup =
 		PhysicsConfiguration::COL_CREATURE_TESTRAY;
 	rayCallback.m_collisionFilterMask =
@@ -96,7 +97,7 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 					body->getCenterOfMassTransform().inverse() * pickPos;
 				btPoint2PointConstraint* p2p = new btPoint2PointConstraint(
 					*body, localPivot);
-				world->addConstraint(p2p, true);
+				mWorld->addConstraint(p2p, true);
 
 				if (mPickedConstraint) {
 					world->removeConstraint(mPickedConstraint);
@@ -115,7 +116,6 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				(btMultiBodyLinkCollider*) btMultiBodyLinkCollider::upcast(
 					rayCallback.m_collisionObject);
 			if (multiCol && multiCol->m_multiBody) {
-
 				mPrevCanSleep = multiCol->m_multiBody->getCanSleep();
 				multiCol->m_multiBody->setCanSleep(false);
 
@@ -133,7 +133,7 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 //				p2p->setMaxAppliedImpulse(scaling);
 
 				btMultiBodyDynamicsWorld* multibodyworld =
-					(btMultiBodyDynamicsWorld*) world;
+					(btMultiBodyDynamicsWorld*) mWorld;
 				multibodyworld->addMultiBodyConstraint(p2p);
 
 				if (mPickingMultiBodyPoint2Point) {
@@ -142,6 +142,7 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 					delete mPickingMultiBodyPoint2Point;
 					mPickingMultiBodyPoint2Point = NULL;
 				}
+
 				mPickingMultiBodyPoint2Point = p2p;
 				mMultibodyworld = multibodyworld;
 			}
