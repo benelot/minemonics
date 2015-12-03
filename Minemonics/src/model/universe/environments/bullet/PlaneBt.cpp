@@ -17,6 +17,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EnvironmentConfiguration.hpp>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -52,10 +54,9 @@ PlaneBt::PlaneBt() {
 		mGroundBody->getCollisionFlags()
 			| btCollisionObject::CF_DISABLE_VISUALIZE_OBJECT);
 
-	// max friction is clamped to [-10;10]
-	//TODO: maybe make is customizable from outside
+	// friction is calculated as friction1* friction2 and max friction is clamped to [-10;10]
 	// http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?t=6783
-	mGroundBody->setFriction(btScalar(10.0f));
+	mGroundBody->setFriction(btScalar(EnvironmentConfiguration::GROUND_FRICTION));
 }
 
 PlaneBt::~PlaneBt() {

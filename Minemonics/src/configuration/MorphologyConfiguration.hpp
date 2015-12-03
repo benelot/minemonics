@@ -41,7 +41,7 @@ public:
 
 	static const double LIMB_INITIAL_RESTITUTION = 0.2;/**!< The limb initial restitution/elasticity. */
 
-	static const double LIMB_INITIAL_FRICTION = 10.0f; /**!< The limb initial friction */
+	static const double LIMB_INITIAL_FRICTION = 0.0f; /**!< The limb initial friction */
 
 	//TODO: Not used yet in this simulator
 	static const double LIMB_MAX_VELOCITY = 80000; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
