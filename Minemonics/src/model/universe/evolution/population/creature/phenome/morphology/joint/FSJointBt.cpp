@@ -134,7 +134,6 @@ void FSJointBt::generateMotors(const btVector3 maxForces,
 	FSServoMotor* servoMotor = new FSServoMotor(JointPhysics::RDOF_PITCH,
 		maxForces.getX(), lowerLimits.x(), upperLimits.x(), positionControlled);
 	servoMotor->initialize();
-	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
@@ -142,7 +141,6 @@ void FSJointBt::generateMotors(const btVector3 maxForces,
 	servoMotor = new FSServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
 		lowerLimits.y(), upperLimits.y(), positionControlled);
 	servoMotor->initialize();
-	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
@@ -150,7 +148,6 @@ void FSJointBt::generateMotors(const btVector3 maxForces,
 	servoMotor = new FSServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
 		lowerLimits.z(), upperLimits.z(), positionControlled);
 	servoMotor->initialize();
-	//TODO: Hack, make better
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 }
