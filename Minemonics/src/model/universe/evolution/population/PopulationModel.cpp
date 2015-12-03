@@ -95,8 +95,7 @@ void PopulationModel::addNewMember(const double branchiness,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
 //	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-	ModelLegBuilder::build(&creatureModel->getGenotype(),
-		ControlConfiguration::CONTROLLER_TYPE);
+	ModelLegBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 
 //	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
