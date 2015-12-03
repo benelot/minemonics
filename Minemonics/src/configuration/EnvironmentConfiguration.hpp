@@ -29,7 +29,7 @@ public:
 	static const float AMBIENT_G = 0.6;
 	static const float AMBIENT_B = 0.55;
 
-	static const double GROUND_FRICTION = 0.0f;
+	static const double GROUND_FRICTION = 1.0f;
 };
 
 #endif /* CONFIGURATON_ENVIRONMENTCONFIGURATION_H_ */
