@@ -189,6 +189,11 @@ public:
 
 	void calm();
 
+	void collectControlInputs();
+
+	void collectControlOutputs();
+
+
 	void setCreatureModel(CreatureModel* creatureModel) {
 		mCreatureModel = creatureModel;
 	}
@@ -302,9 +307,13 @@ protected:
 
 	std::vector<Controller*> mControllers; /**!< The vector of phenotype joint controller models. */
 
-	bool mHasInterpenetrations; /**!< If the phenome model has interpenetrations */
+	std::vector<ControlInput*> mControlInputs; /**!< The control inputs of the phenome model. */
 
-	bool mBodyGenerated; /**!< If the body is generated */
+	std::vector<ControlOutput*> mControlOutputs; /**!< The control outputs of the phenome model. */
+
+	bool mHasInterpenetrations; /**!< If the phenome model has interpenetrations. */
+
+	bool mBodyGenerated; /**!< If the body is generated. */
 };
 BOOST_CLASS_VERSION(PhenomeModel, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_PHENOMEMODEL_HPP_ */
