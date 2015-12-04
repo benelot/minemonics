@@ -125,6 +125,41 @@ void PhenomeModel::collectControlOutputs() {
 	}
 }
 
+void PhenomeModel::wireController(){
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		for(std::vector<int>::const_iterator iit = (*lit)->getControlInputIndices().begin();iit !=(*lit)->getControlInputIndices().end();iit++){
+			//TODO: Add control inputs when the limb needs them
+		}
+
+		for(std::vector<int>::const_iterator iit = (*lit)->getControlOutputIndices().begin();iit !=(*lit)->getControlOutputIndices().end();iit++){
+			//TODO:: Add control outputs when the limb needs them
+		}
+	}
+
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		for(std::vector<int>::const_iterator iit = (*cit)->getControlInputIndices().begin();iit !=(*cit)->getControlInputIndices().end();iit++){
+			(*cit)->addControlInput(mControlOutputs[*iit]);
+		}
+
+		for(std::vector<int>::const_iterator iit = (*cit)->getControlOutputIndices().begin();iit !=(*cit)->getControlOutputIndices().end();iit++){
+			(*cit)->addControlOutput(mControlInputs[*iit]);
+		}
+	}
+
+	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		for(std::vector<int>::const_iterator iit = (*jit)->getControlInputIndices().begin();iit !=(*jit)->getControlInputIndices().end();iit++){
+			//TODO: Add control inputs when the joint needs them
+		}
+
+		for(std::vector<int>::const_iterator iit = (*jit)->getControlOutputIndices().begin();iit !=(*jit)->getControlOutputIndices().end();iit++){
+			//TODO:: Add control outputs when the joint needs them
+		}
+	}
+}
+
 bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	if (mInWorld != phenomeModel.mInWorld) {
 		return false;

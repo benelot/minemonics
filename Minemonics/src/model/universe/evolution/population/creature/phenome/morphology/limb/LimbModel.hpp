@@ -204,6 +204,23 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os,
 		const LimbModel &limbModel);
+
+	const std::vector<int>& getControlInputIndices() const {
+		return mControlInputIndices;
+	}
+
+	void setControlInputIndices(const std::vector<int>& controlInputIndices) {
+		mControlInputIndices = controlInputIndices;
+	}
+
+	const std::vector<int>& getControlOutputIndices() const {
+		return mControlOutputIndices;
+	}
+
+	void setControlOutputIndices(const std::vector<int>& controlOutputIndices) {
+		mControlOutputIndices = controlOutputIndices;
+	}
+
 	/**
 	 * Serializes the creature to an xml file.
 	 * @param ar The archive.
@@ -243,6 +260,10 @@ protected:
 	std::vector<JointModel*>::size_type mParentJointIndex; /**!< The index of the joint the limb is connected to its parent. */
 
 	std::vector<std::vector<JointModel*>::size_type> mChildJointIndices; /**!< The child joint indices */
+
+	std::vector<int> mControlInputIndices; /**!< The index of the control input the controller reads from. */
+
+	std::vector<int> mControlOutputIndices; /**!< The index of the control output the controller writes to.*/
 
 	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
 

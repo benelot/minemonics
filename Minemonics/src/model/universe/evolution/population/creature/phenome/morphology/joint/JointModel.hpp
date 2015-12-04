@@ -96,7 +96,8 @@ public:
 
 	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
-	virtual double getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition); /**!< Get the joint velocity of a joint axis */
+	virtual double getJointVel(int jointAxisIndex, double timeSinceLastTick,
+		double lastJointPosition); /**!< Get the joint velocity of a joint axis */
 
 	/**
 	 * Compare the joint model to another joint model.
@@ -238,6 +239,22 @@ public:
 //		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
 	}
 
+	const std::vector<int>& getControlInputIndices() const {
+		return mControlInputIndices;
+	}
+
+	void setControlInputIndices(const std::vector<int>& controlInputIndices) {
+		mControlInputIndices = controlInputIndices;
+	}
+
+	const std::vector<int>& getControlOutputIndices() const {
+		return mControlOutputIndices;
+	}
+
+	void setControlOutputIndices(const std::vector<int>& controlOutputIndices) {
+		mControlOutputIndices = controlOutputIndices;
+	}
+
 	/**
 	 * Serializes the joint model to an xml file.
 	 * @param ar The archive.
@@ -260,45 +277,25 @@ public:
 
 protected:
 
-	/**
-	 * The indices of limbA and limbB.
-	 */
-	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex;
+	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex; /**!< The indices of limbA and limbB. */
 
-	/**
-	 * The joint's own index.
-	 */
-	std::vector<JointModel*>::size_type mOwnIndex;
+	std::vector<int> mControlInputIndices; /**!< The index of the control input the controller reads from. */
 
-	/**
-	 * The physical model representation of the joint.
-	 */
-	JointPhysics* mJointPhysics;
+	std::vector<int> mControlOutputIndices; /**!< The index of the control output the controller writes to.*/
 
-	/**
-	 * All the sensors of the joint.
-	 */
-	std::vector<Sensor*> mSensors;
+	std::vector<JointModel*>::size_type mOwnIndex; /**!< The joint's own index. */
 
-	/**
-	 * The angleceptors of the joint.
-	 */
-	std::vector<JointAngleceptor*> mAngleceptors;
+	JointPhysics* mJointPhysics; /**!< The physical model representation of the joint. */
 
-	/**
-	 * The velocityceptors of the joint.
-	 */
-	std::vector<JointVelocityceptor*> mVelocityceptors;
+	std::vector<Sensor*> mSensors; /**!< All the sensors of the joint. */
 
-	/**
-	 * The forceceptors of the joint.
-	 */
-	std::vector<JointForceceptor*> mForceceptors;
+	std::vector<JointAngleceptor*> mAngleceptors; /**!< The angleceptors of the joint. */
 
-	/**
-	 * The limitceptors of the joint.
-	 */
-	std::vector<JointLimitceptor*> mLimitceptors;
+	std::vector<JointVelocityceptor*> mVelocityceptors; /**!< The velocityceptors of the joint. */
+
+	std::vector<JointForceceptor*> mForceceptors; /**!< The forceceptors of the joint. */
+
+	std::vector<JointLimitceptor*> mLimitceptors; /**!< The limitceptors of the joint. */
 
 private:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */

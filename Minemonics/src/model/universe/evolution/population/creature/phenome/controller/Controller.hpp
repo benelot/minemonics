@@ -121,6 +121,14 @@ public:
 		mType = type;
 	}
 
+	const std::vector<int>& getControlInputIndices() const {
+		return mControlInputIndices;
+	}
+
+	const std::vector<int>& getControlOutputIndices() const {
+		return mControlOutputIndices;
+	}
+
 	/**
 	 * Serializes the gene to an xml file.
 	 * @param ar The archive.

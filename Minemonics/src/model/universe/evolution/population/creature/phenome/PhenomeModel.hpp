@@ -193,6 +193,7 @@ public:
 
 	void collectControlOutputs();
 
+	void wireController();
 
 	void setCreatureModel(CreatureModel* creatureModel) {
 		mCreatureModel = creatureModel;

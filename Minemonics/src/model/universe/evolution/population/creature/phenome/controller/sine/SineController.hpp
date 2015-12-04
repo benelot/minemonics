@@ -118,34 +118,20 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("SineController"));
+				boost::log::attributes::constant<std::string>(
+					"SineController"));
 		}
 	} _initializer;
 
-	/**
-	 * The amplitude of the sine wave
-	 */
-	double mAmplitude;
+	double mAmplitude; /**!< The amplitude of the sine wave */
 
-	/**
-	 * The frequency of the sine wave
-	 */
-	double mFrequency;
+	double mFrequency; /**!< The frequency of the sine wave */
 
-	/**
-	 * The shift in the x axis of the sine wave.
-	 */
-	double mXShift;
+	double mXShift; /**!< The shift in the x axis of the sine wave. */
 
-	/**
-	 * The shift in the y axis of the sine wave.
-	 */
-	double mYShift;
+	double mYShift; /**!< The shift in the y axis of the sine wave. */
 
-	/**
-	 * The timer of of sine wave.
-	 */
-	double mTime;
+	double mTime; /**!< The timer of of sine wave. */
 };
 
 BOOST_CLASS_VERSION(SineController, 1)

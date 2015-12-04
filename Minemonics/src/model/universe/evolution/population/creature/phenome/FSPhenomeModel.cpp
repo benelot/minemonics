@@ -138,6 +138,8 @@ void FSPhenomeModel::initialize() {
 
 	collectControlOutputs(); /**!< Collect the control outputs to wire the controller */
 
+	wireController(); /**!< Wire the controller */
+
 	addJointConstraints(); /**!< Add the joint constraints */
 
 }
