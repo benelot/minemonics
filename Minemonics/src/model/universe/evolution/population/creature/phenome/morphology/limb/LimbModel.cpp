@@ -175,3 +175,17 @@ std::ostream & operator<<(std::ostream &os, const LimbModel &limbModel) {
 const Ogre::Vector3 LimbModel::getVelocities() const {
 	return mLimbPhysics->getVelocities();
 }
+
+std::vector<ControlInput*> LimbModel::getControlInputs() {
+	std::vector<ControlInput*> mControlInputs;
+
+	return mControlInputs;
+}
+
+std::vector<ControlOutput*> LimbModel::getControlOutputs() {
+	std::vector<ControlOutput*> mControlOutputs;
+
+	mControlOutputs.insert(mControlOutputs.end(),mSensors.begin(),mSensors.end()); // Insert all sensor
+
+	return mControlOutputs;
+}

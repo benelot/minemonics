@@ -110,6 +110,10 @@ void SRBPhenomeModel::initialize() {
 	}
 
 	generateBody(); /**!< Build the body from the body plan */
+
+	collectControlInputs(); /**!< Collect the control inputs to wire the controller */
+
+	collectControlOutputs(); /**!< Collect the control outputs to wire the controller */
 }
 
 void SRBPhenomeModel::update(const double timeSinceLastTick) {

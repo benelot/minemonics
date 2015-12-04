@@ -40,6 +40,8 @@ class access;
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/exteroceptor/Tactioceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
 
 //## view headers
 //## utils headers
@@ -137,6 +139,10 @@ public:
 	const int getOwnIndex() const {
 		return mOwnIndex;
 	}
+
+	virtual std::vector<ControlInput*> getControlInputs();
+
+	virtual std::vector<ControlOutput*> getControlOutputs();
 
 	void activateTactioceptors();
 

@@ -113,6 +113,14 @@ public:
 		return os;
 	}
 
+	ControllerType getType() const {
+		return mType;
+	}
+
+	void setType(ControllerType type) {
+		mType = type;
+	}
+
 	/**
 	 * Serializes the gene to an xml file.
 	 * @param ar The archive.
@@ -120,17 +128,20 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mType); /**!< The type of controller*/
+		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of controller*/
 
-		//Properly serialize the control inputs graph
-//		& BOOST_SERIALIZATION_NVP(mControlInputs) /**!< The vector of control inputs*/
-//
-//		& BOOST_SERIALIZATION_NVP(mControlOutputs); /**!< The vector of control outputs*/
+		& BOOST_SERIALIZATION_NVP(mControlInputIndices) /**!< The vector of control inputs*/
+
+		& BOOST_SERIALIZATION_NVP(mControlOutputIndices); /**!< The vector of control outputs*/
 	}
 
 protected:
 
 	ControllerType mType; /**!< The type of controller that is running */
+
+	std::vector<int> mControlInputIndices; /**!< The index of the control input the controller reads from. */
+
+	std::vector<int> mControlOutputIndices; /**!< The index of the control output the controller writes to.*/
 
 	std::vector<ControlOutput*> mControlInputs; /**!< The control input the controller reads from. */
 

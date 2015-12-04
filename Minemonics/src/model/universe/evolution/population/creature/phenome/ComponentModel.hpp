@@ -25,6 +25,9 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
+
 //## view headers
 //## utils headers
 
@@ -74,6 +77,10 @@ public:
 	std::vector<ComponentModel*>::size_type getIndex() const {
 		return mOwnIndex;
 	}
+
+	virtual std::vector<ControlInput*> getControlInputs() = 0;
+
+	virtual std::vector<ControlOutput*> getControlOutputs() = 0;
 
 	// Serialization ##########################
 	friend class boost::serialization::access; /**!< Give access to boost serialization */

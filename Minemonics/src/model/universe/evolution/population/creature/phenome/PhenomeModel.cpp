@@ -87,35 +87,42 @@ void PhenomeModel::calm() {
 }
 
 void PhenomeModel::collectControlInputs() {
-//	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
-//		lit != mLimbModels.end(); lit++) {
-//
-//	}
-//
-//	for (std::vector<Controller*>::iterator cit = mControllers.begin();
-//		cit != mControllers.end(); cit++) {
-//
-//	}
-//
-//	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
-//		jit != mJointModels.end(); jit++) {
-//	}
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		std::vector<ControlInput*> mLimbControlInputs = (*lit)->getControlInputs();
+		mControlInputs.insert(mControlInputs.end(),mLimbControlInputs.begin(),mLimbControlInputs.end());
+	}
+
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		mControlInputs.push_back(*cit);
+	}
+
+	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		std::vector<ControlInput*> mJointControlInputs = (*jit)->getControlInputs();
+		mControlInputs.insert(mControlInputs.end(),mJointControlInputs.begin(),mJointControlInputs.end());
+	}
 }
 
 void PhenomeModel::collectControlOutputs() {
-//	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
-//		lit != mLimbModels.end(); lit++) {
-//
-//	}
-//
-//	for (std::vector<Controller*>::iterator cit = mControllers.begin();
-//		cit != mControllers.end(); cit++) {
-//
-//	}
-//
-//	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
-//		jit != mJointModels.end(); jit++) {
-//	}
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		std::vector<ControlOutput*> mLimbControlOutputs = (*lit)->getControlOutputs();
+		mControlOutputs.insert(mControlOutputs.end(),mLimbControlOutputs.begin(),mLimbControlOutputs.end());
+
+	}
+
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		mControlOutputs.push_back(*cit);
+	}
+
+	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		std::vector<ControlOutput*> mJointControlOutputs = (*jit)->getControlOutputs();
+		mControlOutputs.insert(mControlOutputs.end(),mJointControlOutputs.begin(),mJointControlOutputs.end());
+	}
 }
 
 bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {

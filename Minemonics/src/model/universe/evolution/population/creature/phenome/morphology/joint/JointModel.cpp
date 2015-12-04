@@ -129,6 +129,21 @@ void JointModel::update(double timeSinceLastTick) {
 //	std::cout << std::endl;
 }
 
+std::vector<ControlInput*> JointModel::getControlInputs() {
+	std::vector<ControlInput*> mControlInputs;
+
+	mControlInputs.insert(mControlInputs.end(),mJointPhysics->getMotors().begin(),mJointPhysics->getMotors().end());
+	return mControlInputs;
+}
+
+std::vector<ControlOutput*> JointModel::getControlOutputs() {
+	std::vector<ControlOutput*> mControlOutputs;
+
+	mControlOutputs.insert(mControlOutputs.end(),mSensors.begin(),mSensors.end());
+
+	return mControlOutputs;
+}
+
 bool JointModel::equals(const JointModel& jointModel) const {
 	if (!ComponentModel::equals(jointModel)) {
 		return false;

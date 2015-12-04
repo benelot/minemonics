@@ -44,6 +44,8 @@ class access;
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointVelocityceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointLimitceptor.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
 
 //## view headers
 //## utils headers
@@ -77,6 +79,10 @@ public:
 	virtual void initialize() = 0;
 
 	void addSensors();
+
+	virtual std::vector<ControlInput*> getControlInputs();
+
+	virtual std::vector<ControlOutput*> getControlOutputs();
 
 	/**
 	 * Update the joint model.

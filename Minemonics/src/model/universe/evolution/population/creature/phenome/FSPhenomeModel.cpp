@@ -503,7 +503,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass2 = childLimb->getMass();
 	//TODO: Fix the force curve
 //	double maxTorque = 5000 * (mass1 + mass2);
-	double maxTorque = 1.0f * (mass1 * mass2);
+	double maxTorque = 0.7f * (mass1 * mass2);
 //		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
 //			* (mass1 + mass2)
 //			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
