@@ -62,6 +62,14 @@ public:
 		return mReceivedInput;
 	}
 
+	int getOwnControlInputIndex() const {
+		return mOwnInputIndex;
+	}
+
+	void setOwnControlInputIndex(int ownInputIndex) {
+		mOwnInputIndex = ownInputIndex;
+	}
+
 	// Serialization ##########################
 	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
@@ -87,14 +95,14 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
-		& BOOST_SERIALIZATION_NVP(mInputIndex) /**!< The index of the input in the input array */
+		& BOOST_SERIALIZATION_NVP(mOwnInputIndex) /**!< The index of the input in the input array */
 		& BOOST_SERIALIZATION_NVP(mReceivedInput) /**!< If the control input has new input*/
 		& BOOST_SERIALIZATION_NVP(mInputValue); /**!< The input that was received. */
 	}
 
 private:
 
-	int mInputIndex; /**!< The index of the input in the input array */
+	int mOwnInputIndex; /**!< The index of the input in the input array */
 	bool mReceivedInput; /**!< If it received input. */
 
 	double mInputValue; /**!< The input that was received. */

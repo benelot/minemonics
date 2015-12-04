@@ -15,11 +15,11 @@
 //## utils headers
 
 ControlInput::ControlInput() :
-	mReceivedInput(false), mInputValue(0), mInputIndex(0) {
+	mReceivedInput(false), mInputValue(0), mOwnInputIndex(0) {
 }
 
 ControlInput::ControlInput(int inputIndex) :
-	mReceivedInput(false), mInputValue(0), mInputIndex(inputIndex) {
+	mReceivedInput(false), mInputValue(0), mOwnInputIndex(inputIndex) {
 }
 
 ControlInput::~ControlInput() {

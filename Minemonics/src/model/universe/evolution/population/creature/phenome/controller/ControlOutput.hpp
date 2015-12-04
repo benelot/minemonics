@@ -56,6 +56,14 @@ public:
 		mOutputValue = outputValue;
 	}
 
+	int getOwnControlOutputIndex() const {
+		return mOwnOutputIndex;
+	}
+
+	void setOwnControlOutputIndex(int ownOutputIndex) {
+		mOwnOutputIndex = ownOutputIndex;
+	}
+
 	// Serialization ##########################
 	friend class boost::serialization::access; /**!<  Give access to boost serialization*/
 
@@ -78,13 +86,13 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar
-		& BOOST_SERIALIZATION_NVP(mOutputIndex) /**!< The index of the output in the output array*/
+		& BOOST_SERIALIZATION_NVP(mOwnOutputIndex) /**!< The index of the output in the output array*/
 		& BOOST_SERIALIZATION_NVP(mOutputValue); /**!< The input value*/
 	}
 
 private:
 
-	int mOutputIndex; /**!< The index of the output in the output array */
+	int mOwnOutputIndex; /**!< The index of the output in the output array */
 	double mOutputValue; /**!< The control output value */
 };
 BOOST_CLASS_VERSION(ControlOutput, 1)

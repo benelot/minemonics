@@ -189,3 +189,15 @@ std::vector<ControlOutput*> LimbModel::getControlOutputs() {
 
 	return mControlOutputs;
 }
+
+void LimbModel::setControlInputs(std::vector<ControlOutput*> controlInputs) {
+	//TODO: Implement set control inputs as soon as it is needed
+}
+
+void LimbModel::setControlOutputs(std::vector<ControlInput*> controlOutputs) {
+	//TODO: Implement set control inputs as soon as it is needed
+}
+
+void LimbModel::storeControlIndices() {
+	//TODO: Implement store control indices as soon as it is needed
+}

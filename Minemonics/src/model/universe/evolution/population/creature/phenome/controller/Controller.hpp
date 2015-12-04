@@ -74,6 +74,12 @@ public:
 	 */
 	void addControlOutput(ControlInput* const controlInput);
 
+	void setControlInputs(std::vector<ControlOutput*> controlInputs);
+
+	void setControlOutputs(std::vector<ControlInput*> controlOutputs);
+
+	void storeControlIndices();
+
 	/**
 	 * Compare the controller to another controller.
 	 * @param controller Another controller.

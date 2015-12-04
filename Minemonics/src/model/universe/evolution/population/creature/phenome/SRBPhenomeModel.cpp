@@ -116,6 +116,8 @@ void SRBPhenomeModel::initialize() {
 	collectControlOutputs(); /**!< Collect the control outputs to wire the controller */
 
 	wireController(); /**!< Wire the controller */
+
+	storeControlIndices(); /**!< Store the control indices for serialization */
 }
 
 void SRBPhenomeModel::update(const double timeSinceLastTick) {

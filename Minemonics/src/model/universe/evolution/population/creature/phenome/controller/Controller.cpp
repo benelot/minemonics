@@ -38,6 +38,30 @@ void Controller::addControlOutput(ControlInput* const controlInput) {
 	mControlOutputs.push_back(controlInput);
 }
 
+void Controller::setControlInputs(std::vector<ControlOutput*> controlInputs) {
+	for(std::vector<int>::iterator iit = mControlInputIndices.begin();iit != mControlInputIndices.end();iit++){
+		addControlInput(controlInputs[*iit]);
+	}
+}
+
+void Controller::setControlOutputs(std::vector<ControlInput*> controlOutputs) {
+	for(std::vector<int>::iterator iit = mControlOutputIndices.begin();iit != mControlOutputIndices.end();iit++){
+		addControlOutput(controlOutputs[*iit]);
+	}
+}
+
+void Controller::storeControlIndices() {
+	mControlInputIndices.clear();
+	for(std::vector<ControlInput*>::iterator cit = mControlOutputs.begin();cit != mControlOutputs.end();cit++){
+		mControlOutputIndices.push_back((*cit)->getOwnControlInputIndex());
+	}
+
+	mControlOutputIndices.clear();
+	for(std::vector<ControlOutput*>::iterator cit = mControlInputs.begin();cit != mControlInputs.end();cit++){
+		mControlInputIndices.push_back((*cit)->getOwnControlOutputIndex());
+	}
+}
+
 bool Controller::equals(const Controller& controller) const {
 	if (mType != controller.mType) {
 		return false;

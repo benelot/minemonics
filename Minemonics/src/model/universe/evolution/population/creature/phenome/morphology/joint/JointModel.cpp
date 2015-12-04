@@ -188,3 +188,14 @@ double JointModel::getJointVel(int jointAxisIndex,double timeSinceLastTick, doub
 	return mJointPhysics->getJointVel(jointAxisIndex,timeSinceLastTick,lastJointPosition);
 }
 
+void JointModel::setControlInputs(std::vector<ControlOutput*> controlInputs) {
+	mJointPhysics->setControlInputs(controlInputs);
+}
+
+void JointModel::setControlOutputs(std::vector<ControlInput*> controlOutputs) {
+	mJointPhysics->setControlOutputs(controlOutputs);
+}
+
+void JointModel::storeControlIndices() {
+	mJointPhysics->storeControlIndices();
+}

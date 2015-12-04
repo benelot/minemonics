@@ -103,6 +103,10 @@ void PhenomeModel::collectControlInputs() {
 		std::vector<ControlInput*> mJointControlInputs = (*jit)->getControlInputs();
 		mControlInputs.insert(mControlInputs.end(),mJointControlInputs.begin(),mJointControlInputs.end());
 	}
+
+	for(int i = 0; i < mControlInputs.size();i++){
+		mControlInputs[i]->setOwnControlInputIndex(i);
+	}
 }
 
 void PhenomeModel::collectControlOutputs() {
@@ -123,40 +127,46 @@ void PhenomeModel::collectControlOutputs() {
 		std::vector<ControlOutput*> mJointControlOutputs = (*jit)->getControlOutputs();
 		mControlOutputs.insert(mControlOutputs.end(),mJointControlOutputs.begin(),mJointControlOutputs.end());
 	}
+
+	for(int i = 0; i < mControlOutputs.size();i++){
+		mControlOutputs[i]->setOwnControlOutputIndex(i);
+	}
 }
 
 void PhenomeModel::wireController(){
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
-		for(std::vector<int>::const_iterator iit = (*lit)->getControlInputIndices().begin();iit !=(*lit)->getControlInputIndices().end();iit++){
-			//TODO: Add control inputs when the limb needs them
-		}
-
-		for(std::vector<int>::const_iterator iit = (*lit)->getControlOutputIndices().begin();iit !=(*lit)->getControlOutputIndices().end();iit++){
-			//TODO:: Add control outputs when the limb needs them
-		}
+		(*lit)->setControlInputs(mControlOutputs);
+		(*lit)->setControlOutputs(mControlInputs);
 	}
 
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 		cit != mControllers.end(); cit++) {
-		for(std::vector<int>::const_iterator iit = (*cit)->getControlInputIndices().begin();iit !=(*cit)->getControlInputIndices().end();iit++){
-			(*cit)->addControlInput(mControlOutputs[*iit]);
-		}
-
-		for(std::vector<int>::const_iterator iit = (*cit)->getControlOutputIndices().begin();iit !=(*cit)->getControlOutputIndices().end();iit++){
-			(*cit)->addControlOutput(mControlInputs[*iit]);
-		}
+		(*cit)->setControlInputs(mControlOutputs);
+		(*cit)->setControlOutputs(mControlInputs);
 	}
 
 	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
 		jit != mJointModels.end(); jit++) {
-		for(std::vector<int>::const_iterator iit = (*jit)->getControlInputIndices().begin();iit !=(*jit)->getControlInputIndices().end();iit++){
-			//TODO: Add control inputs when the joint needs them
-		}
+		(*jit)->setControlInputs(mControlOutputs);
+		(*jit)->setControlOutputs(mControlInputs);
+	}
+}
 
-		for(std::vector<int>::const_iterator iit = (*jit)->getControlOutputIndices().begin();iit !=(*jit)->getControlOutputIndices().end();iit++){
-			//TODO:: Add control outputs when the joint needs them
-		}
+void PhenomeModel::storeControlIndices(){
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		(*lit)->storeControlIndices();
+	}
+
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		(*cit)->storeControlIndices();
+	}
+
+	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		(*jit)->storeControlIndices();
 	}
 }
 

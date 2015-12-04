@@ -31,6 +31,10 @@ JointPhysics::~JointPhysics() {
 	mMotors.clear();
 }
 
+void JointPhysics::storeControlIndices() {
+	//TODO: Implement when needed
+}
+
 bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 	if (mInWorld != jointPhysics.mInWorld) {
 		return false;
@@ -62,4 +66,13 @@ bool JointPhysics::equals(const JointPhysics& jointPhysics) const {
 		return false;
 	}
 	return true;
+}
+
+void JointPhysics::setControlInputs(std::vector<ControlOutput*> controlInputs) {
+	//TODO: Implement when needed
+}
+
+void JointPhysics::setControlOutputs(
+	std::vector<ControlInput*> controlOutputs) {
+	//TODO: Implement when needed
 }

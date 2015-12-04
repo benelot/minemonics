@@ -106,6 +106,12 @@ public:
 	 */
 	virtual bool equals(const JointModel & jointModel) const;
 
+	void setControlInputs(std::vector<ControlOutput*> controlInputs);
+
+	void setControlOutputs(std::vector<ControlInput*> controlOutputs);
+
+	void storeControlIndices();
+
 	// Accessor methods ##########################
 
 	JointPhysics* const getJointPhysics() const {
@@ -237,22 +243,6 @@ public:
 		return os;
 //		/**The physics component of the joint model*/
 //		<< "JointModel: JointPhysics=(" << *jointModel.mJointPhysics << ")";
-	}
-
-	const std::vector<int>& getControlInputIndices() const {
-		return mControlInputIndices;
-	}
-
-	void setControlInputIndices(const std::vector<int>& controlInputIndices) {
-		mControlInputIndices = controlInputIndices;
-	}
-
-	const std::vector<int>& getControlOutputIndices() const {
-		return mControlOutputIndices;
-	}
-
-	void setControlOutputIndices(const std::vector<int>& controlOutputIndices) {
-		mControlOutputIndices = controlOutputIndices;
 	}
 
 	/**

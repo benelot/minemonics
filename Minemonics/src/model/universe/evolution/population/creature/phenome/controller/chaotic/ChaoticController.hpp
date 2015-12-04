@@ -114,12 +114,9 @@ private:
 		}
 	} _initializer;
 
-	/**
-	 * The timer of of sine wave.
-	 */
-	double mTime;
+	double mTime;	/**!< The timer of of sine wave. */
 
-	double u[3];
+	double u[3]; /**!< 3 dimensions of the chua circuit */
 
 	bool mFirstTime;
 

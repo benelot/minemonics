@@ -195,6 +195,8 @@ public:
 
 	void wireController();
 
+	void storeControlIndices();
+
 	void setCreatureModel(CreatureModel* creatureModel) {
 		mCreatureModel = creatureModel;
 	}

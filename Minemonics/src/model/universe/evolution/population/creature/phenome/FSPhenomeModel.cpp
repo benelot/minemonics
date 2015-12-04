@@ -140,6 +140,8 @@ void FSPhenomeModel::initialize() {
 
 	wireController(); /**!< Wire the controller */
 
+	storeControlIndices(); /**!< Store the control indices for serialization */
+
 	addJointConstraints(); /**!< Add the joint constraints */
 
 }
@@ -539,10 +541,10 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 				new ChaoticController(
 					((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getSystemType());
 
+			controller->initialize();
+
 			controller->addControlInput(joint->getAngleceptors()[0]); // Add the first angleceptor as input
 			controller->addControlInput(joint->getVelocityceptors()[0]); // add the first velocityceptor as input
-
-			controller->initialize();
 			controller->addControlOutput(joint->getMotors()[i]);
 			getControllers().push_back(controller);
 		}

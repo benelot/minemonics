@@ -111,8 +111,7 @@ void FSJointBt::initialize() {
 FSJointBt::~FSJointBt() {
 	removeFromWorld();
 
-	// nullify the world reference
-	mWorld = NULL;
+	mWorld = NULL; 	// nullify the world reference
 }
 
 void FSJointBt::update(double timeSinceLastTick) {

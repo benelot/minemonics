@@ -30,6 +30,8 @@ class access;
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
+#include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
 
 //## view headers
 //## utils headers
@@ -125,6 +127,12 @@ public:
 
 	virtual double getJointVel(int jointAxisIndex, double timeSinceLastTick,
 		double lastJointPosition) = 0;
+
+	void setControlInputs(std::vector<ControlOutput*> controlInputs);
+
+	void setControlOutputs(std::vector<ControlInput*> controlOutputs);
+
+	void storeControlIndices();
 
 	/**
 	 * Compare the joint physics model to another joint physics model.

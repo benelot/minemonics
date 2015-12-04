@@ -140,6 +140,12 @@ public:
 		return mOwnIndex;
 	}
 
+	void setControlInputs(std::vector<ControlOutput*> controlInputs);
+
+	void setControlOutputs(std::vector<ControlInput*> controlOutputs);
+
+	void storeControlIndices();
+
 	virtual std::vector<ControlInput*> getControlInputs();
 
 	virtual std::vector<ControlOutput*> getControlOutputs();
