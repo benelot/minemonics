@@ -25,11 +25,17 @@
 BoostLogger SRBJointModel::mBoostLogger; /*<! initialize the boost logger*/
 SRBJointModel::_Init SRBJointModel::_initializer;
 SRBJointModel::SRBJointModel() {
-
+	addSensors();
 }
 
 SRBJointModel::SRBJointModel(const SRBJointModel& SRBJointModel) :
 	JointModel(SRBJointModel) {
+	mParentIndex = jointModel.mParentIndex;
+	mChildIndex = jointModel.mChildIndex;
+	mOwnIndex = jointModel.mOwnIndex;
+	mJointPhysics = jointModel.mJointPhysics->clone();
+
+	addSensors();
 }
 
 SRBJointModel::SRBJointModel(btDynamicsWorld* const world,

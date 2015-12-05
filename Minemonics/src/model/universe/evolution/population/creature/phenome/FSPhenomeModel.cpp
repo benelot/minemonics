@@ -132,17 +132,19 @@ void FSPhenomeModel::initialize() {
 		(*lit)->initialize();
 	}
 
-	generateBody(); /**!< Build the body from the body plan */
+	if (!mBodyGenerated) {
+		generateBody(); /**!< Build the body from the body plan */
 
-	collectControlInputs(); /**!< Collect the control inputs to wire the controller */
+		collectControlInputs(); /**!< Collect the control inputs to wire the controller */
 
-	collectControlOutputs(); /**!< Collect the control outputs to wire the controller */
+		collectControlOutputs(); /**!< Collect the control outputs to wire the controller */
 
-	wireController(); /**!< Wire the controller */
+		wireController(); /**!< Wire the controller */
 
-	storeControlIndices(); /**!< Store the control indices for serialization */
+		storeControlIndices(); /**!< Store the control indices for serialization */
 
-	addJointConstraints(); /**!< Add the joint constraints */
+		addJointConstraints(); /**!< Add the joint constraints */
+	}
 
 }
 

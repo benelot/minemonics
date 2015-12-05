@@ -91,6 +91,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 
 void CreatureModel::initialize() {
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "#####################################\n";
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Initialize " << mFirstName;
 	mPhenotypeModel->initialize(); 	//initialize the phenome model
 }

@@ -72,14 +72,14 @@ ChaoticController::~ChaoticController() {
 }
 
 void ChaoticController::initialize() {
-//	u[0] = -1.5f; // x
-//	u[1] = 0; // y
-//	u[2] = 0; // z
+	u[0] = -1.5f; // x
+	u[1] = 0; // y
+	u[2] = 0; // z
 
-	// stronger initial force output on z
-	u[0] = -2.0f; // x
-	u[1] = -0.4; // y
-	u[2] = 2.2f; // z
+//	// stronger initial force output on z
+//	u[0] = -2.0f; // x
+//	u[1] = -0.4; // y
+//	u[2] = 2.2f; // z
 }
 
 ChaoticController* ChaoticController::clone() {
@@ -94,10 +94,10 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 //		u[0] = mControlInputs[1]->getOutputValue();
 
 //		u[1] = mControlInputs[0]->getOutputValue();
-//		u[1] = mControlInputs[1]->getOutputValue();
+		u[1] = mControlInputs[1]->getOutputValue();
 
 //		u[2] = mControlInputs[0]->getOutputValue();
-		u[2] = mControlInputs[1]->getOutputValue();
+//		u[2] = mControlInputs[1]->getOutputValue();
 	}
 
 	mFirstTime = false;
@@ -106,15 +106,14 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 	calcChuaCircuit(); // calculate the circuit change
 
-	double output = u[1]; //output the new value to the motor
-//	double output = u[2]; //output the new value to the motor
+//	double output = u[1]; //output the new value to the motor
+	double output = u[2]; //output the new value to the motor
 
 //	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
 
-	setOutputValue(output);
+	setOutputValue(output); // set output value to be used by outputs
 
-	// distribute the output to the adjacent controllers or endpoints
-	distributeOutput(output);
+	distributeOutput(output); 	// distribute the output to the adjacent controllers or endpoints
 }
 
 double* chuaCircuit(double t, int dimensions, double u[]) {
