@@ -279,10 +279,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mControllers); /**!< The vector of controllers.*/
 	}
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; 	/**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.

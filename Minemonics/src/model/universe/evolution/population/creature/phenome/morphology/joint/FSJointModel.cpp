@@ -24,7 +24,7 @@
 BoostLogger FSJointModel::mBoostLogger; /*<! initialize the boost logger*/
 FSJointModel::_Init FSJointModel::_initializer;
 FSJointModel::FSJointModel() {
-
+	addSensors();
 }
 
 FSJointModel::FSJointModel(const FSJointModel& jointModel) {
@@ -32,6 +32,8 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 	mChildIndex = jointModel.mChildIndex;
 	mOwnIndex = jointModel.mOwnIndex;
 	mJointPhysics = jointModel.mJointPhysics->clone();
+
+	addSensors();
 }
 
 FSJointModel::FSJointModel(btDynamicsWorld* const world,

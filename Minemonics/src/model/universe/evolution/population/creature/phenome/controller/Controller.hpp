@@ -144,9 +144,9 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of controller*/
 
-		& BOOST_SERIALIZATION_NVP(mControlInputIndices) /**!< The vector of control inputs*/
+		& BOOST_SERIALIZATION_NVP(mControlInputIndices) /**!< The vector of control input indices */
 
-		& BOOST_SERIALIZATION_NVP(mControlOutputIndices); /**!< The vector of control outputs*/
+		& BOOST_SERIALIZATION_NVP(mControlOutputIndices); /**!< The vector of control outputs indices */
 	}
 
 protected:

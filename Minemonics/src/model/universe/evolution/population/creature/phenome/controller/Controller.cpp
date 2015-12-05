@@ -51,12 +51,18 @@ void Controller::setControlOutputs(std::vector<ControlInput*> controlOutputs) {
 }
 
 void Controller::storeControlIndices() {
-	mControlInputIndices.clear();
+
+	mControlOutputIndices.clear();
+
+	// store the output indices
 	for(std::vector<ControlInput*>::iterator cit = mControlOutputs.begin();cit != mControlOutputs.end();cit++){
 		mControlOutputIndices.push_back((*cit)->getOwnControlInputIndex());
 	}
 
-	mControlOutputIndices.clear();
+
+	mControlInputIndices.clear();
+
+	// store the input indices
 	for(std::vector<ControlOutput*>::iterator cit = mControlInputs.begin();cit != mControlInputs.end();cit++){
 		mControlInputIndices.push_back((*cit)->getOwnControlOutputIndex());
 	}
