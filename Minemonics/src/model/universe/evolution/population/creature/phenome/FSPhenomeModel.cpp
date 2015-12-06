@@ -176,6 +176,10 @@ void FSPhenomeModel::addToWorld() {
 		if (mMultiBody != NULL) {
 			getWorld()->addMultiBody(mMultiBody);
 		}
+
+		for(std::vector<btMultiBodyConstraint*>::iterator lit = mLimitConstraints.begin();lit != mLimitConstraints.end();lit++){
+			getWorld()->addMultiBodyConstraint(*lit);
+		}
 	}
 }
 
@@ -183,6 +187,10 @@ void FSPhenomeModel::removeFromWorld() {
 	if (isInWorld()) {
 		if (mMultiBody != NULL) {
 			getWorld()->removeMultiBody(mMultiBody);
+		}
+
+		for(std::vector<btMultiBodyConstraint*>::iterator lit = mLimitConstraints.begin();lit != mLimitConstraints.end();lit++){
+			getWorld()->removeMultiBodyConstraint(*lit);
 		}
 	}
 }
@@ -633,7 +641,6 @@ void FSPhenomeModel::generateBody() {
 
 		int linkQty = 0;
 		for (int i = 0; i < mJointModels.size(); i++) {
-			mJointModels[i]->initialize();
 			switch (mJointModels[i]->getType()) {
 			case JointPhysics::HINGE_JOINT:
 				linkQty++;
@@ -652,10 +659,15 @@ void FSPhenomeModel::generateBody() {
 		mMultiBody->setWorldToBaseRot(
 			OgreBulletUtils::convert(mLimbModels[0]->getOrientation()));
 
+
 		btScalar linkLength = MorphologyConfiguration::LINK_LENGTH;
 
 		linkQty = 0;
 		for (int i = 0; i < mJointModels.size(); i++) {
+			((FSJointBt*) mJointModels[i]->getJointPhysics())->setMultiBody(
+				mMultiBody);
+			mJointModels[i]->initialize();
+
 			switch (mJointModels[i]->getType()) {
 			case JointPhysics::HINGE_JOINT:
 				mMultiBody->setupRevolute(
@@ -688,8 +700,6 @@ void FSPhenomeModel::generateBody() {
 				break;
 			}
 
-			((FSJointBt*) mJointModels[i]->getJointPhysics())->setMultiBody(
-				mMultiBody);
 			for (std::vector<Motor*>::iterator mit =
 				mJointModels[i]->getMotors().begin();
 				mit != mJointModels[i]->getMotors().end(); mit++) {
