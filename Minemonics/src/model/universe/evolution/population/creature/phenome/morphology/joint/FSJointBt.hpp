@@ -24,6 +24,8 @@ class access;
 #include <LinearMath/btVector3.h>
 #include <LinearMath/btTransform.h>
 #include <BulletDynamics/Featherstone/btMultiBody.h>
+#include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
+#include <BulletDynamics/Featherstone/btMultiBodyJointMotor.h>
 #include <BulletDynamics/Dynamics/btDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <OgreVector3.h>
@@ -188,7 +190,11 @@ private:
 		}
 	} _initializer;
 
-	btDynamicsWorld* mWorld;	/**!< The bullet dynamics world of the bullet physics engine. Reference only. */
+	btMultiBodyJointMotor * mPitchMotor;
+	btMultiBodyJointMotor * mYawMotor;
+	btMultiBodyJointMotor * mRollMotor;
+
+	btMultiBodyDynamicsWorld* mWorld;	/**!< The bullet dynamics world of the bullet physics engine. Reference only. */
 
 	btMultiBody* mMultiBody; /**!< The multibody the joint belongs to */
 };

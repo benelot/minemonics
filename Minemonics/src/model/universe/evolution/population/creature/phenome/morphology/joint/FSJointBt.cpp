@@ -13,6 +13,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -25,7 +26,8 @@
 BoostLogger FSJointBt::mBoostLogger; /*<! initialize the boost logger*/
 FSJointBt::_Init FSJointBt::_initializer;
 FSJointBt::FSJointBt() :
-	mWorld(NULL), mMultiBody(NULL) {
+	mWorld(NULL), mMultiBody(NULL), mPitchMotor(NULL), mYawMotor(NULL), mRollMotor(
+	NULL) {
 }
 
 FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
@@ -33,8 +35,8 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 	JointPhysics::JointType type, btVector3 jointPitchAxis,
 	btVector3 jointYawAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits, int ownIndex) :
-	mMultiBody(NULL) {
-	mWorld = world;
+	mMultiBody(NULL), mPitchMotor(NULL), mYawMotor(NULL), mRollMotor(NULL) {
+	mWorld = ((btMultiBodyDynamicsWorld*) world);
 	mType = type;
 
 	// build frame basis
@@ -95,6 +97,10 @@ FSJointBt::FSJointBt(const FSJointBt& jointBt) {
 	mInWorld = jointBt.mInWorld;
 	mMultiBody = jointBt.mMultiBody;
 
+	mPitchMotor = jointBt.mPitchMotor;
+	mYawMotor = jointBt.mYawMotor;
+	mRollMotor = jointBt.mRollMotor;
+
 	for (std::vector<Motor*>::const_iterator mit = jointBt.mMotors.begin();
 		mit != jointBt.mMotors.end(); mit++) {
 		mMotors.push_back(*mit);
@@ -106,6 +112,11 @@ void FSJointBt::initialize() {
 	mFrameInA.setRotation(OgreBulletUtils::convert(mLocalAOrientation));
 	mFrameInB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
 	mFrameInB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
+
+	if (!mPitchMotor) {
+		mPitchMotor = new btMultiBodyJointMotor(mMultiBody, mJointIndex, 0,
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x);
+	}
 }
 
 FSJointBt::~FSJointBt() {
@@ -183,9 +194,8 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 void FSJointBt::setAngularStiffness(double jointPitchStiffness,
 	double jointYawStiffness, double jointRollStiffness) {
 	// Not implementedt in FS Joint Bt
-	if(false)
-	{
-	}else {
+	if (false) {
+	} else {
 		mJointStiffness.x = jointPitchStiffness;
 		mJointStiffness.y = jointYawStiffness;
 		mJointStiffness.z = jointRollStiffness;
@@ -194,26 +204,43 @@ void FSJointBt::setAngularStiffness(double jointPitchStiffness,
 
 void FSJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
-	// Not implemented in FS Joint bt
-	if(false)
-	{
-	}else{
-		mJointDamping.x = jointPitchDamping;
-		mJointDamping.y = jointYawDamping;
-		mJointDamping.z = jointRollDamping;
-	}
-}
 
+	mJointDamping.x = jointPitchDamping;
+	mJointDamping.y = jointYawDamping;
+	mJointDamping.z = jointRollDamping;
+
+	if (mPitchMotor) {
+		mPitchMotor->setMaxAppliedImpulse(
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * jointPitchDamping);
+	}
+
+	//TODO: Yaw and roll motor are not used anyway
+//	if (!mYawMotor) {
+//
+//	}
+//
+//	if (!mRollMotor) {
+//
+//	}
+}
 
 void FSJointBt::addToWorld() {
 	if (!isInWorld()) {
 		JointPhysics::addToWorld();
+
+		if (!mPitchMotor) {
+			mWorld->addMultiBodyConstraint(mPitchMotor);
+		}
 	}
 }
 
 void FSJointBt::removeFromWorld() {
 	if (isInWorld()) {
 		JointPhysics::removeFromWorld();
+
+		if (!mPitchMotor) {
+			mWorld->removeMultiBodyConstraint(mPitchMotor);
+		}
 	}
 }
 
