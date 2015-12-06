@@ -28,8 +28,8 @@ SRBJointModel::SRBJointModel() {
 	addSensors();
 }
 
-SRBJointModel::SRBJointModel(const SRBJointModel& SRBJointModel) :
-	JointModel(SRBJointModel) {
+SRBJointModel::SRBJointModel(const SRBJointModel& jointModel) :
+	JointModel(jointModel) {
 	mParentIndex = jointModel.mParentIndex;
 	mChildIndex = jointModel.mChildIndex;
 	mOwnIndex = jointModel.mOwnIndex;
