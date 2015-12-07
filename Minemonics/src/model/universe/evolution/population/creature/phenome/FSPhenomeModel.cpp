@@ -177,7 +177,8 @@ void FSPhenomeModel::addToWorld() {
 			getWorld()->addMultiBody(mMultiBody);
 		}
 
-		for(std::vector<btMultiBodyConstraint*>::iterator lit = mLimitConstraints.begin();lit != mLimitConstraints.end();lit++){
+		for (std::vector<btMultiBodyConstraint*>::iterator lit =
+			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
 			getWorld()->addMultiBodyConstraint(*lit);
 		}
 	}
@@ -189,7 +190,8 @@ void FSPhenomeModel::removeFromWorld() {
 			getWorld()->removeMultiBody(mMultiBody);
 		}
 
-		for(std::vector<btMultiBodyConstraint*>::iterator lit = mLimitConstraints.begin();lit != mLimitConstraints.end();lit++){
+		for (std::vector<btMultiBodyConstraint*>::iterator lit =
+			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
 			getWorld()->removeMultiBodyConstraint(*lit);
 		}
 	}
@@ -474,11 +476,11 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	FSJointModel* joint = new FSJointModel(getCreatureModel()->getWorld(),
 	/*parent limb*/
-	((FSLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
+	parentLimb,
 	/*child limb*/
-	((FSLimbBt*) childLimb->getLimbPhysics())->getRigidBody(), jointPivotInW,
-		parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
-		getJointModels().size(), parentMorphogeneBranch->getJointType(),
+	((FSLimbModel*) childLimb), jointPivotInW, parentLimb->getOwnIndex(),
+		childLimb->getOwnIndex(), getJointModels().size(),
+		parentMorphogeneBranch->getJointType(),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
 			parentMorphogeneBranch->getJointPitchAxisY(),
 			parentMorphogeneBranch->getJointPitchAxisZ()),
@@ -658,7 +660,6 @@ void FSPhenomeModel::generateBody() {
 			OgreBulletUtils::convert(mLimbModels[0]->getPosition()));
 		mMultiBody->setWorldToBaseRot(
 			OgreBulletUtils::convert(mLimbModels[0]->getOrientation()));
-
 
 		btScalar linkLength = MorphologyConfiguration::LINK_LENGTH;
 

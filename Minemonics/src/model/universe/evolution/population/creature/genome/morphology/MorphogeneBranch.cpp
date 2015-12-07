@@ -36,8 +36,9 @@ MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
 		jointMinAngle.z), mJointRollMaxAngle(jointMaxAngle.z), mMirrored(
 		mirrored), mJointType(jointType), mJointPitchAxisX(pitchAxis.x), mJointPitchAxisY(
 		pitchAxis.y), mJointPitchAxisZ(pitchAxis.z), mJointYawAxisX(yawAxis.x), mJointYawAxisY(
-		yawAxis.y), mJointYawAxisZ(yawAxis.z), mPitchStiffnessCoefficient(jointStiffness.x), mYawStiffnessCoefficient(
-		jointStiffness.y), mRollStiffnessCoefficient(jointStiffness.z), mPitchDampingCoefficient(jointDamping.x), mYawDampingCoefficient(
+		yawAxis.y), mJointYawAxisZ(yawAxis.z), mPitchStiffnessCoefficient(
+		jointStiffness.x), mYawStiffnessCoefficient(jointStiffness.y), mRollStiffnessCoefficient(
+		jointStiffness.z), mPitchDampingCoefficient(jointDamping.x), mYawDampingCoefficient(
 		jointDamping.y), mRollDampingCoefficient(jointDamping.z) {
 
 }
@@ -195,6 +196,18 @@ void MorphogeneBranch::initialize() {
 	mBranchGeneType = 0;
 
 	// TODO: Add joint stiffness and damping
+	mPitchStiffnessCoefficient = 0;
+	mPitchDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
+		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
+		MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
+	mYawStiffnessCoefficient = 0;
+	mYawDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
+		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
+				MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
+	mRollStiffnessCoefficient = 0;
+	mRollDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
+		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
+				MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
 }
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {

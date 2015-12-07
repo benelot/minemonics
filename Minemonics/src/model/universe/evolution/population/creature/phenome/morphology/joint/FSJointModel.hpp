@@ -60,7 +60,7 @@ public:
 	FSJointModel(const FSJointModel& jointModel);
 	FSJointModel(const FSJointModel* jointModel);
 	FSJointModel(btDynamicsWorld* const world,
-		btRigidBody* const limbA, btRigidBody* const limbB,
+		FSLimbModel* const limbA, FSLimbModel* const limbB,
 		const Ogre::Vector3 pivotInW,
 		const std::vector<FSLimbModel*>::size_type indexA,
 		const std::vector<FSLimbModel*>::size_type indexB,

@@ -6,6 +6,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //# forward declarations
+class FSLimbBt;
 namespace boost {
 namespace serialization {
 class access;
@@ -53,14 +54,14 @@ class FSJointBt: public JointPhysics {
 public:
 	FSJointBt();
 	FSJointBt(const FSJointBt& jointBt);
-	FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btVector3& pivotInW,
+	FSJointBt(btDynamicsWorld* const world, FSLimbBt* const limbA,
+		FSLimbBt* const limbB, const btVector3& pivotInW,
 		JointPhysics::JointType type, btVector3 jointPitchAxis,
 		btVector3 jointYawAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits, int ownIndex);
 
 	virtual ~FSJointBt();
-	
+
 	/**
 	 * Initialize the joint bullet physics model.
 	 * @param world A handle to the bullet dynamics world.
@@ -75,7 +76,8 @@ public:
 
 	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
-	virtual double getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition); /**!< Get the joint velocity of a joint axis */
+	virtual double getJointVel(int jointAxisIndex, double timeSinceLastTick,
+		double lastJointPosition); /**!< Get the joint velocity of a joint axis */
 
 	virtual void setAngularStiffness(double jointPitchStiffness,
 		double jointYawStiffness, double jointRollStiffness);
@@ -194,7 +196,7 @@ private:
 	btMultiBodyJointMotor * mYawMotor;
 	btMultiBodyJointMotor * mRollMotor;
 
-	btMultiBodyDynamicsWorld* mWorld;	/**!< The bullet dynamics world of the bullet physics engine. Reference only. */
+	btMultiBodyDynamicsWorld* mWorld; /**!< The bullet dynamics world of the bullet physics engine. Reference only. */
 
 	btMultiBody* mMultiBody; /**!< The multibody the joint belongs to */
 };

@@ -17,6 +17,7 @@
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 
 //## view headers
@@ -30,8 +31,8 @@ FSJointBt::FSJointBt() :
 	NULL) {
 }
 
-FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-	btRigidBody* const bodyB, const btVector3& pivotInW,
+FSJointBt::FSJointBt(btDynamicsWorld* const world, FSLimbBt* const limbA,
+	FSLimbBt* const limbB, const btVector3& pivotInW,
 	JointPhysics::JointType type, btVector3 jointPitchAxis,
 	btVector3 jointYawAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits, int ownIndex) :
@@ -57,9 +58,11 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
 	frameInW.setOrigin(pivotInW);
 
+	mLimbMassForceScalar = limbA->getVolume() * limbB->getVolume();
+
 	// now get constraint frame in local coordinate systems
-	mFrameInA = bodyA->getCenterOfMassTransform().inverse() * frameInW;
-	mFrameInB = bodyB->getCenterOfMassTransform().inverse() * frameInW;
+	mFrameInA = limbA->getRigidBody()->getCenterOfMassTransform().inverse() * frameInW;
+	mFrameInB = limbB->getRigidBody()->getCenterOfMassTransform().inverse() * frameInW;
 
 	mLocalAPosition = OgreBulletUtils::convert(mFrameInA.getOrigin());
 	mLocalBPosition = OgreBulletUtils::convert(mFrameInB.getOrigin());
@@ -115,7 +118,7 @@ void FSJointBt::initialize() {
 
 	if (!mPitchMotor) {
 		mPitchMotor = new btMultiBodyJointMotor(mMultiBody, mJointIndex, 0,
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar);
 	}
 }
 
@@ -210,8 +213,7 @@ void FSJointBt::setAngularDamping(double jointPitchDamping,
 	mJointDamping.z = jointRollDamping;
 
 	if (mPitchMotor) {
-		mPitchMotor->setMaxAppliedImpulse(
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * jointPitchDamping);
+		mPitchMotor->setMaxAppliedImpulse(jointPitchDamping);
 	}
 
 	//TODO: Yaw and roll motor are not used anyway
@@ -228,7 +230,7 @@ void FSJointBt::addToWorld() {
 	if (!isInWorld()) {
 		JointPhysics::addToWorld();
 
-		if (!mPitchMotor) {
+		if (mPitchMotor) {
 			mWorld->addMultiBodyConstraint(mPitchMotor);
 		}
 	}
@@ -238,7 +240,7 @@ void FSJointBt::removeFromWorld() {
 	if (isInWorld()) {
 		JointPhysics::removeFromWorld();
 
-		if (!mPitchMotor) {
+		if (mPitchMotor) {
 			mWorld->removeMultiBodyConstraint(mPitchMotor);
 		}
 	}

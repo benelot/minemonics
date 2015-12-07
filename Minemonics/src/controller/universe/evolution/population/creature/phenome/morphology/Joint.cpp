@@ -51,10 +51,10 @@ Joint::Joint(Creature* const creature, Limb* const limbA, Limb* const limbB,
 		mJointModel =
 			new FSJointModel(
 				creature->getPlanet()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld(),
-				((SRBLimbBt*) limbA->getLimbPhysics())->getRigidBody(),
-				((SRBLimbBt*) limbB->getLimbPhysics())->getRigidBody(),
-				pivotInW, indexA, indexB, ownIndex, jointType, jointPitchAxis,
-				jointYawAxis, jointLowerLimits, jointUpperLimits);
+				(FSLimbModel*) limbA->getLimbModel(),
+				(FSLimbModel*) limbB->getLimbModel(), pivotInW, indexA, indexB,
+				ownIndex, jointType, jointPitchAxis, jointYawAxis,
+				jointLowerLimits, jointUpperLimits);
 		break;
 	default:
 		break;

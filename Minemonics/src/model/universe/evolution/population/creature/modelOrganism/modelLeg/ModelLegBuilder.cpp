@@ -42,12 +42,13 @@ void ModelLegBuilder::build(MixedGenome* genome,
 //	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
 
+	double damping = 0.05f;//[0.005;0.5] 0.05
 	// create joint between the two limbs
 	// Hingelike
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(0.5f, 0.5f, 0.5f),
+		Ogre::Vector3(damping, 0, 0),
 		Ogre::Vector3(-UNIV_EPS, -UNIV_EPS,
 			-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS),
 		Ogre::Vector3(UNIV_EPS,

@@ -12,6 +12,8 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/FSLimbBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/FSJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointForceceptor.hpp>
@@ -37,7 +39,7 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 }
 
 FSJointModel::FSJointModel(btDynamicsWorld* const world,
-	btRigidBody* const limbA, btRigidBody* const limbB,
+	FSLimbModel* const limbA, FSLimbModel* const limbB,
 	const Ogre::Vector3 pivotInW,
 	const std::vector<FSLimbModel*>::size_type indexA,
 	const std::vector<FSLimbModel*>::size_type indexB,
@@ -50,7 +52,9 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
 
-	mJointPhysics = new FSJointBt(world, limbA, limbB,
+	mJointPhysics = new FSJointBt(world,
+		((FSLimbBt*) limbA->getLimbPhysics()),
+		((FSLimbBt*) limbB->getLimbPhysics()),
 		OgreBulletUtils::convert(pivotInW), type,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointYawAxis),
@@ -106,7 +110,7 @@ void FSJointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 void FSJointModel::setAngularStiffness(const double jointPitchStiffness,
 	const double jointYawStiffness, const double jointRollStiffness) {
 	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-			jointRollStiffness);
+		jointRollStiffness);
 }
 
 void FSJointModel::setAngularDamping(const double springPitchDampingCoefficient,

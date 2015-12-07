@@ -109,9 +109,9 @@ public:
 
 	static const double JOINT_MAX_SPRING_STIFFNESS = 10; /**!< The maximum spring stiffness of the joint */
 
-	static const double JOINT_MIN_DAMPING_COEFFICIENT = 0; /**!< The minimum damping coefficient of the joint */
+	static const double JOINT_MIN_DAMPING_COEFFICIENT = 0.005f; /**!< The minimum damping coefficient of the joint */
 
-	static const double JOINT_MAX_DAMPING_COEFFICIENT = 10; /**!< The maximum damping coefficient of the joint */
+	static const double JOINT_MAX_DAMPING_COEFFICIENT = 0.5f; /**!< The maximum damping coefficient of the joint */
 
 	static const double BODY_BRANCH_INITIAL_MEAN = 3; /**!< The initial branch number mean */
 

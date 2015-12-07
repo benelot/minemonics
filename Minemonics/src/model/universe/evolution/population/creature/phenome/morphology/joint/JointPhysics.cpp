@@ -16,8 +16,8 @@
 
 JointPhysics::JointPhysics() :
 	mInWorld(false), mType(JointPhysics::UNKNOWN_JOINT), mJointUpperLimits(0, 0,
-		0), mJointMaxForces(0, 0, 0), mJointLowerLimits(
-		0, 0, 0), mJointPitchAxis(1, 0, 0), mJointYawAxis(0, 0, 1), mJointIndex(
+		0), mJointMaxForces(0, 0, 0), mJointLowerLimits(0, 0, 0), mJointPitchAxis(
+		1, 0, 0), mJointYawAxis(0, 0, 1), mJointIndex(0), mLimbMassForceScalar(
 		0) {
 }
 

@@ -242,6 +242,8 @@ public:
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
 		& BOOST_SERIALIZATION_NVP(mJointMaxForces.z)
 
+		& BOOST_SERIALIZATION_NVP(mLimbMassForceScalar)
+
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
@@ -280,6 +282,8 @@ protected:
 	Ogre::Vector3 mJointMaxForces;
 	Ogre::Vector3 mJointStiffness; /**!< The joint spring stiffness coefficient */
 	Ogre::Vector3 mJointDamping; /**!< The joint damping coefficient */
+
+	double mLimbMassForceScalar; /**!< The force scalar of the two limb masses multiplied */
 
 	// should not be serialized
 	bool mInWorld; /**!< If the joint physics is in the world or not. */
