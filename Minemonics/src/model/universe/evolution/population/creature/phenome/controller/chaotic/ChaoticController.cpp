@@ -72,14 +72,14 @@ ChaoticController::~ChaoticController() {
 }
 
 void ChaoticController::initialize() {
-	u[0] = -1.5f; // x
-	u[1] = 0; // y
-	u[2] = 0; // z
+//	u[0] = -1.5f; // x
+//	u[1] = 0; // y
+//	u[2] = 0; // z
 
 //	// stronger initial force output on z
-//	u[0] = -2.0f; // x
-//	u[1] = -0.4; // y
-//	u[2] = 2.2f; // z
+	u[0] = -0.0f; // x
+	u[1] = 0.0; // y
+	u[2] = 2.2f; // z
 }
 
 ChaoticController* ChaoticController::clone() {
