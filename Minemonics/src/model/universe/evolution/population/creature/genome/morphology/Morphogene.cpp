@@ -138,7 +138,8 @@ void Morphogene::initialize(const double branchiness) {
 	mColorG = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 	mColorB = Randomness::getSingleton()->nextUnifDouble(0.0f, 1.0f);
 
-	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector().normalise();
+	Ogre::Vector3 anchorVector = Randomness::getSingleton()->nextVector();
+	anchorVector.normalise();
 	mJointAnchorX = anchorVector.x; // Set joint anchor X, Y and Z, where the anchor lies in the center of mass
 	mJointAnchorY = anchorVector.y; // and the X, Y and Z form a vector, pointing to the point on the surface where
 	mJointAnchorZ = anchorVector.z; // the joint will be attached. The vector contains three values between -1 and 1.
