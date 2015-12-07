@@ -203,11 +203,11 @@ void MorphogeneBranch::initialize() {
 	mYawStiffnessCoefficient = 0;
 	mYawDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
-				MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
+		MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
 	mRollStiffnessCoefficient = 0;
 	mRollDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
-				MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
+		MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
 }
 
 bool MorphogeneBranch::equals(const MorphogeneBranch& geneBranch) const {
@@ -324,5 +324,124 @@ void MorphogeneBranch::mutate() {
 		delete f;
 	}
 
-	initialize();
+	//TODO: Change if other joint control becomes available
+	mJointType = JointPhysics::HINGE_JOINT;
+	//	mJointType =
+	//		(JointPhysics::JointType) Randomness::getSingleton()->nextUnifPosInt(1,
+	//			JointPhysics::NUM_JOINTS);
+
+	/**
+	 * Set whether the branch should be mirrored or flipped to the other side.
+	 */
+	mMirrored = Randomness::getSingleton()->nextUnifBoolean();
+	mFlipped = Randomness::getSingleton()->nextUnifBoolean();
+
+	Ogre::Vector3 pitchAxisVector1 = Randomness::getSingleton()->nextVector();
+	Ogre::Vector3 pitchAxisVector2 = Randomness::getSingleton()->nextVector();
+	Ogre::Vector3 pitchAxisVector(
+		(abs(mJointAnchorX - pitchAxisVector1.x)
+			< abs(mJointAnchorX - pitchAxisVector2.x)) ?
+				pitchAxisVector1.x : pitchAxisVector2.x,
+		(abs(mJointAnchorY - pitchAxisVector1.y)
+			< abs(mJointAnchorY - pitchAxisVector2.y)) ?
+				pitchAxisVector1.y : pitchAxisVector2.y,
+		(abs(mJointAnchorZ - pitchAxisVector1.z)
+			< abs(mJointAnchorZ - pitchAxisVector2.z)) ?
+				pitchAxisVector1.z : pitchAxisVector2.z);
+	pitchAxisVector.normalise();
+	mJointPitchAxisX = pitchAxisVector.x;
+	mJointPitchAxisY = pitchAxisVector.y;
+	mJointPitchAxisZ = pitchAxisVector.z;
+
+	Ogre::Vector3 randomAxisVector = Randomness::getSingleton()->nextVector();
+	Ogre::Vector3 yawAxisVector = pitchAxisVector.crossProduct(
+		randomAxisVector);
+	mJointYawAxisX = yawAxisVector.x;
+	mJointYawAxisY = yawAxisVector.y;
+	mJointYawAxisZ = yawAxisVector.z;
+
+	/**
+	 * The joint limits in each direction (pitch=1=Y,yaw=2=Z, roll=0=X)
+	 *   6DOF constraint uses Euler angles and to define limits
+	 * it is assumed that rotational order is :
+	 * Z - first, allowed limits are (-PI+epsilon,PI-epsilon);
+	 * new position of Y - second (allowed limits are
+	 * (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	 * used to prevent constraint from instability on poles;
+	 * new position of X, allowed limits are (-PI+epsilon,PI-epsilon);
+	 * So to simulate ODE Universal joint we should use parent
+	 * axis as Z, child axis as Y and limit all other DOFs
+	 */
+	//TODO: Revise the correct joint limits
+	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(
+		-boost::math::constants::pi<double>() + UNIV_EPS,
+		boost::math::constants::pi<double>() - UNIV_EPS);
+
+	// create instances of the sine controller gene for the morphogene.
+	switch (ControlConfiguration::CONTROLLER_TYPE) {
+	case ControllerGene::SineControllerGene:
+		// create instances of the sine controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			SineControllerGene* sineController = new SineControllerGene();
+			sineController->initialize();
+			mControllerGenes.push_back(sineController);
+		}
+		break;
+	case ControllerGene::ChaoticControllerGene:
+		// create instances of the chaotic controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			ChaoticControllerGene* chaoticController =
+				new ChaoticControllerGene();
+			chaoticController->initialize();
+			mControllerGenes.push_back(chaoticController);
+		}
+	}
+
+	Ogre::Vector3 anchorVector1 = Randomness::getSingleton()->nextVector();
+	Ogre::Vector3 anchorVector2 = Randomness::getSingleton()->nextVector();
+	Ogre::Vector3 anchorVector(
+		(abs(mJointAnchorX - anchorVector1.x)
+			< abs(mJointAnchorX - anchorVector2.x)) ?
+			anchorVector1.x : anchorVector2.x,
+		(abs(mJointAnchorY - anchorVector1.y)
+			< abs(mJointAnchorY - anchorVector2.y)) ?
+			anchorVector1.y : anchorVector2.y,
+		(abs(mJointAnchorZ - anchorVector1.z)
+			< abs(mJointAnchorZ - anchorVector2.z)) ?
+			anchorVector1.z : anchorVector2.z);
+	anchorVector.normalise();
+	mJointAnchorX = anchorVector.x; // Set joint anchor X, Y and Z, where the anchor lies in the center of mass
+	mJointAnchorY = anchorVector.y; // and the X, Y and Z form a vector, pointing to the point on the surface where
+	mJointAnchorZ = anchorVector.z; // the joint will be attached.
+
+	mBranchGeneType = 0;
+
+	// TODO: Add joint stiffness and damping
+	mPitchStiffnessCoefficient = 0;
+	mPitchDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
+		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
+		MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
+	mYawStiffnessCoefficient = 0;
+	mYawDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
+		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
+		MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
+	mRollStiffnessCoefficient = 0;
+	mRollDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
+		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
+		MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT);
 }
