@@ -16,6 +16,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger FSServoMotor::mBoostLogger; /*<! initialize the boost logger*/
+FSServoMotor::_Init FSServoMotor::_initializer;
 FSServoMotor::FSServoMotor() {
 }
 
@@ -82,7 +84,10 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 			btScalar(
 				(correction > mMaxForce) ? mMaxForce :
 				(correction < -mMaxForce) ? -mMaxForce : correction));
-	} else {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mJoint->getJointPos(mJointMotorIndex) << "," << targetAngle;
+	}
+	else {
+
 		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 		btScalar clampedInputValue =
 			(getInputValue() > 1.0f) ? 1.0f :
