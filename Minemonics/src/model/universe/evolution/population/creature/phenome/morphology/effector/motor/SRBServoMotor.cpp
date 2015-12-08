@@ -55,26 +55,6 @@ SRBServoMotor::~SRBServoMotor() {
 
 void SRBServoMotor::initialize() {
 
-//	mMotorBt = motorBt;
-//
-//	if (mMotorBt) {
-//		mMotorBt->m_hiLimit = mUpperLimit;
-//		mMotorBt->m_loLimit = mLowerLimit;
-//		mLastPosition = mMotorBt->m_currentPosition;
-//	}
-
-//#ifdef USE_6DOF2
-//	constraint->enableMotor(mJointMotorIndex, true);
-//	constraint->setTargetVelocity(mJointMotorIndex, 0);
-//	constraint->setMaxMotorForce(mJointMotorIndex, mMaxForce);
-//	constraint->setServo(mJointMotorIndex, true);
-//#else
-//	if (mMotorBt) {
-//	mMotorBt->m_enableMotor = true;
-//	mMotorBt->m_maxMotorForce = 0;
-//	//servo motor is not implemented in 6dofspring constraint
-//#endif
-
 }
 
 void SRBServoMotor::instantiate(JointPhysics* jointPhysics,
@@ -118,10 +98,9 @@ void SRBServoMotor::apply(double timeSinceLastTick) {
 
 		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 		btScalar clampedInputValue =
-		(getInputValue() > 1.0f) ? 1.0f :
-		(getInputValue() < 0.0f) ? 0.0f : getInputValue();
-		mJoint->applyJointTorque(mJointMotorIndex,
-			btScalar(getInputValue()));
+			(getInputValue() > 1.0f) ? 1.0f :
+			(getInputValue() < -1.0f) ? -1.0f : getInputValue();
+		mJoint->applyJointTorque(mJointMotorIndex, btScalar(clampedInputValue*mMaxForce));
 	}
 #endif
 }

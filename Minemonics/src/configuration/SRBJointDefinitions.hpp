@@ -16,13 +16,13 @@
 #define GENERIC6DOFSPRINGCONSTRAINT 5
 #define GENERIC6DOFSPRING2CONSTRAINT 6
 /** bullet physics hinge constraint - A 1Dof angular joint with with limits */
-#define CONSTRAINT_INDEX HINGECONSTRAINT
+//#define CONSTRAINT_INDEX HINGECONSTRAINT
 /** bullet physics cone twist constraint - A 3Dof angular joint with symmetric limits */
 //#define CONSTRAINT_INDEX CONETWISTCONSTRAINT
 /** bullet physics point 2 point constraint - A 3Dof angular joint without limits*/
 //#define CONSTRAINT_INDEX POINT2POINTCONSTRAINT
 /** bullet physics 6 degrees of freedom constraint - A 6 Dof joint with generic limits*/
-//#define CONSTRAINT_INDEX GENERIC6DOFCONSTRAINT
+#define CONSTRAINT_INDEX GENERIC6DOFCONSTRAINT
 /** bullet physics 6 degrees of freedom with spring constraint (more stable impl)*/
 //#define CONSTRAINT_INDEX GENERIC6DOFSPRING2CONSTRAINT
 /** bullet physics 6 degrees of freedom with spring constraint (first impl)*/
