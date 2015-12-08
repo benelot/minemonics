@@ -111,7 +111,7 @@
 		<link>
 			<name>[Source directory]</name>
 			<type>2</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src</location>
+			<locationURI>PARENT-1-PARENT_LOC/src</locationURI>
 		</link>
 		<link>
 			<name>[Subprojects]</name>
