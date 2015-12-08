@@ -5,8 +5,8 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <LinearMath/btMatrix3x3.h>
 #include <OgreQuaternion.h>
+#include <LinearMath/btMatrix3x3.h>
 
 //## view headers
 //# custom headers
@@ -129,8 +129,8 @@ FSJointBt::~FSJointBt() {
 }
 
 void FSJointBt::update(double timeSinceLastTick) {
-
 	//apply motor forces
+	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()

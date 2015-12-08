@@ -41,9 +41,9 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	FSLimbModel* const limbA, FSLimbModel* const limbB,
 	const Ogre::Vector3 pivotInW,
-	const std::vector<FSLimbModel*>::size_type indexA,
-	const std::vector<FSLimbModel*>::size_type indexB,
-	const std::vector<FSJointModel*>::size_type ownIndex,
+	const std::vector<LimbModel*>::size_type indexA,
+	const std::vector<LimbModel*>::size_type indexB,
+	const std::vector<JointModel*>::size_type ownIndex,
 	JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,
 	Ogre::Vector3 jointYawAxis, Ogre::Vector3 jointMinAngle,
 	Ogre::Vector3 jointMaxAngle) {
@@ -68,7 +68,6 @@ FSJointModel::~FSJointModel() {
 }
 
 void FSJointModel::initialize() {
-
 	mJointPhysics->initialize();
 }
 
