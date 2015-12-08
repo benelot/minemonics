@@ -61,8 +61,10 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, FSLimbBt* const limbA,
 	mLimbMassForceScalar = limbA->getVolume() * limbB->getVolume();
 
 	// now get constraint frame in local coordinate systems
-	mFrameInA = limbA->getRigidBody()->getCenterOfMassTransform().inverse() * frameInW;
-	mFrameInB = limbB->getRigidBody()->getCenterOfMassTransform().inverse() * frameInW;
+	mFrameInA = limbA->getRigidBody()->getCenterOfMassTransform().inverse()
+		* frameInW;
+	mFrameInB = limbB->getRigidBody()->getCenterOfMassTransform().inverse()
+		* frameInW;
 
 	mLocalAPosition = OgreBulletUtils::convert(mFrameInA.getOrigin());
 	mLocalBPosition = OgreBulletUtils::convert(mFrameInB.getOrigin());
@@ -118,7 +120,8 @@ void FSJointBt::initialize() {
 
 	if (!mPitchMotor) {
 		mPitchMotor = new btMultiBodyJointMotor(mMultiBody, mJointIndex, 0,
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
+				* mLimbMassForceScalar);
 	}
 }
 
@@ -213,7 +216,9 @@ void FSJointBt::setAngularDamping(double jointPitchDamping,
 	mJointDamping.z = jointRollDamping;
 
 	if (mPitchMotor) {
-		mPitchMotor->setMaxAppliedImpulse(jointPitchDamping);
+		mPitchMotor->setMaxAppliedImpulse(
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
+				* mLimbMassForceScalar);
 	}
 
 	//TODO: Yaw and roll motor are not used anyway
