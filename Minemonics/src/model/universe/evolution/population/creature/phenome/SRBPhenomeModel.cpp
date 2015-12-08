@@ -460,7 +460,7 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
 	//TODO: Fix force curve
-	double maxTorque = 0.7f * (mass1 * mass2);
+	double maxTorque = 0.1f * (mass1 * mass2);
 //	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));
 
 	//TODO: Make position controlled defined in the settings

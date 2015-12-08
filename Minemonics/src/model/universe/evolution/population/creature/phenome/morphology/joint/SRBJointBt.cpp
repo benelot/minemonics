@@ -317,7 +317,12 @@ void SRBJointBt::setAngularDamping(double jointPitchDamping,
 			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
 				* mLimbMassForceScalar);
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
-// no damping available
+		mJoint->getRotationalLimitMotor(0)->m_enableMotor = true;
+		mJoint->getRotationalLimitMotor(1)->m_enableMotor = true;
+		mJoint->getRotationalLimitMotor(2)->m_enableMotor = true;
+		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z * mLimbMassForceScalar;
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
 		mJoint->enableMotor(0, true);
 		mJoint->enableMotor(1, true);
