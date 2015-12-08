@@ -22,6 +22,7 @@ sudo apt-get install libfreetype6-dev libfreeimage-dev libzzip-dev libxrandr-dev
 sudo ln -s /usr/include/freetype2/ /usr/include/freetype # FIX: because cmake can not find freetype2 because it searches for freetype
 
 # required dependencies
+sudo apt-get install liblzma-dev
 sudo apt-get install libsdl2-dev # install sdl2 for the input system
 sudo apt-get install libboost-all-dev # because I need a lot of boost libraries
 mkdir ogre1.9
