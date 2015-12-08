@@ -49,7 +49,7 @@ public:
 	 * @param jointMotorIndex The index of the motor in the 6DoF joint.
 	 * @param motorBt
 	 */
-	void initialize(MOTOR_TYPE* const motorBt);
+	void initialize();
 
 	void instantiate(JointPhysics* jointPhysics, const int jointIndex);
 

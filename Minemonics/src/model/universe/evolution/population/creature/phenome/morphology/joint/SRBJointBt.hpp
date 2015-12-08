@@ -7,6 +7,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 
 //# forward declarations
+class SRBLimbBt;
 namespace boost {
 namespace serialization {
 class access;
@@ -62,8 +63,8 @@ class SRBJointBt: public JointPhysics {
 public:
 	SRBJointBt();
 	SRBJointBt(const SRBJointBt& SRBJointBt);
-	SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-		btRigidBody* const bodyB, const btVector3& pivotInW,
+	SRBJointBt(btDynamicsWorld* const world, SRBLimbBt* const limbA,
+		SRBLimbBt* const limbB, const btVector3& pivotInW,
 		JointPhysics::JointType type, btVector3 jointPitchAxis,
 		btVector3 jointYawAxis, btVector3 jointLowerLimits,
 		btVector3 jointUpperLimits, int ownIndex);

@@ -19,9 +19,12 @@
 //## base headers
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
 //## model headers
+#include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
+
 //## view headers
 //## utils headers
 #include <utils/MathUtils.hpp>
@@ -48,15 +51,15 @@ SRBJointBt::SRBJointBt(const SRBJointBt& SRBJointBt) {
 	}
 }
 
-SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
-	btRigidBody* const bodyB, const btVector3& pivotInW,
+SRBJointBt::SRBJointBt(btDynamicsWorld* const world, SRBLimbBt* const limbA,
+	SRBLimbBt* const limbB, const btVector3& pivotInW,
 	JointPhysics::JointType type, btVector3 jointPitchAxis,
 	btVector3 jointYawAxis, btVector3 jointLowerLimits,
 	btVector3 jointUpperLimits, int ownIndex) :
 	mJoint(NULL) {
 	mWorld = world;
-	mBodyA = bodyA;
-	mBodyB = bodyB;
+	mBodyA = limbA->getRigidBody();
+	mBodyB = limbB->getRigidBody();
 
 	// build frame basis
 	// 6DOF constraint uses Euler angles and to define limits
@@ -76,9 +79,13 @@ SRBJointBt::SRBJointBt(btDynamicsWorld* const world, btRigidBody* const bodyA,
 		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
 	frameInW.setOrigin(pivotInW);
 
+	mLimbMassForceScalar = limbA->getVolume() * limbB->getVolume();
+
 	// now get constraint frame in local coordinate systems
-	mFrameInA = bodyA->getCenterOfMassTransform().inverse() * frameInW;
-	mFrameInB = bodyB->getCenterOfMassTransform().inverse() * frameInW;
+	mFrameInA = limbA->getRigidBody()->getCenterOfMassTransform().inverse()
+		* frameInW;
+	mFrameInB = limbB->getRigidBody()->getCenterOfMassTransform().inverse()
+		* frameInW;
 
 	mLocalAPosition = OgreBulletUtils::convert(mFrameInA.getOrigin());
 	mLocalBPosition = OgreBulletUtils::convert(mFrameInB.getOrigin());
@@ -171,15 +178,15 @@ void SRBJointBt::initialize() {
 	mJoint->setDbgDrawSize(btScalar(5.f));
 #endif
 
-	setAngularStiffness(mJointStiffness.x,mJointStiffness.y, mJointStiffness.z); // Set the joint stiffness
-	setAngularDamping(mJointDamping.x,mJointDamping.y,mJointDamping.z); // set the joint damping
+	setAngularStiffness(mJointStiffness.x, mJointStiffness.y,
+		mJointStiffness.z); // Set the joint stiffness
+	setAngularDamping(mJointDamping.x, mJointDamping.y, mJointDamping.z); // set the joint damping
 }
 
 SRBJointBt::~SRBJointBt() {
 	removeFromWorld();
 
-	// nullify the world reference
-	mWorld = NULL;
+	mWorld = NULL; 	// nullify the world reference
 
 	//delete and clear the motor vector
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
@@ -217,24 +224,21 @@ void SRBJointBt::generateMotors(const btVector3 maxForces,
 	//	add pitch servo motor
 	SRBServoMotor* servoMotor = new SRBServoMotor(JointPhysics::RDOF_PITCH,
 		maxForces.getX(), lowerLimits.x(), upperLimits.x(), positionControlled);
-	servoMotor->initialize(NULL);
-	//TODO: Hack, make better
+	servoMotor->initialize();
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	// add yaw servo motor
 	servoMotor = new SRBServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
 		lowerLimits.y(), upperLimits.y(), positionControlled);
-	servoMotor->initialize(NULL);
-	//TODO: Hack, make better
+	servoMotor->initialize();
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 
 	//add roll servo motor
 	servoMotor = new SRBServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
 		lowerLimits.z(), upperLimits.z(), positionControlled);
-	servoMotor->initialize(NULL);
-	//TODO: Hack, make better
+	servoMotor->initialize();
 	servoMotor->setEnabled(true);
 	mMotors.push_back(servoMotor);
 }
@@ -303,37 +307,61 @@ void SRBJointBt::setAngularStiffness(double jointPitchStiffness,
 
 void SRBJointBt::setAngularDamping(double jointPitchDamping,
 	double jointYawDamping, double jointRollDamping) {
-	if(mJoint){
-#if CONSTRAINT_INDEX == HINGECONSTRAINT
+	mJointDamping.x = jointPitchDamping;
+	mJointDamping.y = jointYawDamping;
+	mJointDamping.z = jointRollDamping;
 
+	if (mJoint) {
+#if CONSTRAINT_INDEX == HINGECONSTRAINT
+		mJoint->enableAngularMotor(true, 0,
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
+				* mLimbMassForceScalar);
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 // no damping available
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
-	mJoint->enableSpring(0, true);
-	mJoint->enableSpring(1, true);
-	mJoint->enableSpring(2, true);
-	mJoint->setDamping(0, btScalar(jointPitchDamping));
-	mJoint->setDamping(1, btScalar(jointYawDamping));
-	mJoint->setDamping(2, btScalar(jointRollDamping));
+		mJoint->enableMotor(0, true);
+		mJoint->enableMotor(1, true);
+		mJoint->enableMotor(2, true);
+		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z * mLimbMassForceScalar;
+//	mJoint->enableSpring(0, true);
+//	mJoint->enableSpring(1, true);
+//	mJoint->enableSpring(2, true);
+//	mJoint->setDamping(0, btScalar(jointPitchDamping));
+//	mJoint->setDamping(1, btScalar(jointYawDamping));
+//	mJoint->setDamping(2, btScalar(jointRollDamping));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
-	mJoint->enableSpring(0,true);
-	mJoint->enableSpring(1,true);
-	mJoint->enableSpring(2,true);
-	mJoint->setDamping(0,btScalar(jointPitchDamping));
-	mJoint->setDamping(1,btScalar(jointYawDamping));
-	mJoint->setDamping(2,btScalar(jointRollDamping));
+		mJoint->enableMotor(0, true);
+		mJoint->enableMotor(1, true);
+		mJoint->enableMotor(2, true);
+		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z * mLimbMassForceScalar;
+//	mJoint->enableSpring(0,true);
+//	mJoint->enableSpring(1,true);
+//	mJoint->enableSpring(2,true);
+//	mJoint->setDamping(0,btScalar(jointPitchDamping));
+//	mJoint->setDamping(1,btScalar(jointYawDamping));
+//	mJoint->setDamping(2,btScalar(jointRollDamping));
 #elif CONSTRAINT_INDEX == POINT2POINTCONSTRAINT
-	// no damping available
+		mJoint->enableMotor(0, true);
+		mJoint->enableMotor(1, true);
+		mJoint->enableMotor(2, true);
+		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z * mLimbMassForceScalar;
 #elif CONSTRAINT_INDEX == CONETWISTCONSTRAINT
-	mJoint->setDamping(btScalar(jointPitchDamping));
+		mJoint->enableMotor(0, true);
+		mJoint->enableMotor(1, true);
+		mJoint->enableMotor(2, true);
+		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z * mLimbMassForceScalar;
+//		mJoint->setDamping(btScalar(jointPitchDamping));
 #endif
-	}else{
-		mJointDamping.x = jointPitchDamping;
-		mJointDamping.y = jointYawDamping;
-		mJointDamping.z = jointRollDamping;
 	}
 }
-
 
 void SRBJointBt::addToWorld() {
 	if (!isInWorld()) {

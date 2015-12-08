@@ -12,6 +12,7 @@
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
+#include <model/universe/evolution/population/creature/phenome/morphology/limb/SRBLimbModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointBt.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/SRBJointModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/proprioceptor/JointAngleceptor.hpp>
@@ -39,11 +40,11 @@ SRBJointModel::SRBJointModel(const SRBJointModel& jointModel) :
 }
 
 SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
-	btRigidBody* const limbA, btRigidBody* const limbB,
-	const Ogre::Vector3& pivotInW,
+	SRBLimbModel* const limbA, SRBLimbModel* const limbB,
+	const Ogre::Vector3 pivotInW,
 	const std::vector<LimbModel*>::size_type indexA,
 	const std::vector<LimbModel*>::size_type indexB,
-	const std::vector<LimbModel*>::size_type ownIndex,
+	const std::vector<JointModel*>::size_type ownIndex,
 	JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,
 	Ogre::Vector3 jointYawAxis, Ogre::Vector3 jointMinAngle,
 	Ogre::Vector3 jointMaxAngle) {
@@ -52,7 +53,8 @@ SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
 
-	mJointPhysics = new SRBJointBt(world, limbA, limbB,
+	mJointPhysics = new SRBJointBt(world, (SRBLimbBt*) limbA->getLimbPhysics(),
+		(SRBLimbBt*) limbB->getLimbPhysics(),
 		OgreBulletUtils::convert(pivotInW), type,
 		OgreBulletUtils::convert(jointPitchAxis),
 		OgreBulletUtils::convert(jointYawAxis),
@@ -107,7 +109,7 @@ void SRBJointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
 void SRBJointModel::setAngularStiffness(const double jointPitchStiffness,
 	const double jointYawStiffness, const double jointRollStiffness) {
 	mJointPhysics->setAngularStiffness(jointPitchStiffness, jointYawStiffness,
-			jointRollStiffness);
+		jointRollStiffness);
 }
 
 void SRBJointModel::setAngularDamping(

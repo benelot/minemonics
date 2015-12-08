@@ -171,32 +171,6 @@ void FSPhenomeModel::update(const double timeSinceLastTick) {
 
 }
 
-void FSPhenomeModel::addToWorld() {
-	if (!isInWorld()) {
-		if (mMultiBody != NULL) {
-			getWorld()->addMultiBody(mMultiBody);
-		}
-
-		for (std::vector<btMultiBodyConstraint*>::iterator lit =
-			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
-			getWorld()->addMultiBodyConstraint(*lit);
-		}
-	}
-}
-
-void FSPhenomeModel::removeFromWorld() {
-	if (isInWorld()) {
-		if (mMultiBody != NULL) {
-			getWorld()->removeMultiBody(mMultiBody);
-		}
-
-		for (std::vector<btMultiBodyConstraint*>::iterator lit =
-			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
-			getWorld()->removeMultiBodyConstraint(*lit);
-		}
-	}
-}
-
 void FSPhenomeModel::calm() {
 
 	if (mMultiBody) {
@@ -478,7 +452,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	/*parent limb*/
 	parentLimb,
 	/*child limb*/
-	((FSLimbModel*) childLimb), jointPivotInW, parentLimb->getOwnIndex(),
+	(FSLimbModel*) childLimb, jointPivotInW, parentLimb->getOwnIndex(),
 		childLimb->getOwnIndex(), getJointModels().size(),
 		parentMorphogeneBranch->getJointType(),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
@@ -519,7 +493,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass2 = childLimb->getMass();
 	//TODO: Fix the force curve
 //	double maxTorque = 5000 * (mass1 + mass2);
-	double maxTorque = 0.7f * (mass1 * mass2);
+	double maxTorque = 4.0f * (mass1 * mass2);
 //		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
 //			* (mass1 + mass2)
 //			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
@@ -908,6 +882,32 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 		}
 	}
 	return true;
+}
+
+void FSPhenomeModel::addToWorld() {
+	if (!isInWorld()) {
+		if (mMultiBody != NULL) {
+			getWorld()->addMultiBody(mMultiBody);
+		}
+
+		for (std::vector<btMultiBodyConstraint*>::iterator lit =
+			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
+			getWorld()->addMultiBodyConstraint(*lit);
+		}
+	}
+}
+
+void FSPhenomeModel::removeFromWorld() {
+	if (isInWorld()) {
+		if (mMultiBody != NULL) {
+			getWorld()->removeMultiBody(mMultiBody);
+		}
+
+		for (std::vector<btMultiBodyConstraint*>::iterator lit =
+			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
+			getWorld()->removeMultiBodyConstraint(*lit);
+		}
+	}
 }
 
 PhenomeModel* FSPhenomeModel::clone() {

@@ -6,6 +6,7 @@
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointModel.hpp>
 
 //# forward declarations
+class SRBLimbModel;
 namespace boost {
 namespace serialization {
 class access;
@@ -54,8 +55,8 @@ public:
 	SRBJointModel(const SRBJointModel& SRBJointModel);
 	SRBJointModel(const SRBJointModel* SRBJointModel);
 	SRBJointModel(btDynamicsWorld* const world,
-		btRigidBody* const limbA, btRigidBody* const limbB,
-		const Ogre::Vector3& pivotInW, const std::vector<LimbModel*>::size_type indexA,
+		SRBLimbModel* const limbA, SRBLimbModel* const limbB,
+		const Ogre::Vector3 pivotInW, const std::vector<LimbModel*>::size_type indexA,
 		const std::vector<LimbModel*>::size_type indexB,
 		const std::vector<LimbModel*>::size_type ownIndex,
 		JointPhysics::JointType type, Ogre::Vector3 jointPitchAxis,

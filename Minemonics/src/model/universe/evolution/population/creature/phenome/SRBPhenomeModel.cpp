@@ -418,11 +418,11 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//create the joint from the two limbs using limb A, limb B and their joint definitions in the respective reference frames
 	SRBJointModel* joint = new SRBJointModel(getCreatureModel()->getWorld(),
 	/*parent limb*/
-	((FSLimbBt*) parentLimb->getLimbPhysics())->getRigidBody(),
+	parentLimb,
 	/*child limb*/
-	((FSLimbBt*) childLimb->getLimbPhysics())->getRigidBody(), jointPivotInW,
-		parentLimb->getOwnIndex(), childLimb->getOwnIndex(),
-		getJointModels().size(), parentMorphogeneBranch->getJointType(),
+	(SRBLimbModel*) childLimb, jointPivotInW, parentLimb->getOwnIndex(),
+		childLimb->getOwnIndex(), getJointModels().size(),
+		parentMorphogeneBranch->getJointType(),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchAxisX(),
 			parentMorphogeneBranch->getJointPitchAxisY(),
 			parentMorphogeneBranch->getJointPitchAxisZ()),
@@ -436,16 +436,13 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
-	//TODO: Optimize this for loading
-//	joint->initialize(); // Is done in generate body as well
-
 	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
-		parentMorphogeneBranch->getPitchStiffnessCoefficient(),
+	parentMorphogeneBranch->getPitchStiffnessCoefficient(),
 		parentMorphogeneBranch->getYawStiffnessCoefficient(),
 		parentMorphogeneBranch->getRollStiffnessCoefficient());
 
 	joint->setAngularDamping( /**!< Set the damping coefficients for the joint */
-		parentMorphogeneBranch->getPitchDampingCoefficient(),
+	parentMorphogeneBranch->getPitchDampingCoefficient(),
 		parentMorphogeneBranch->getYawDampingCoefficient(),
 		parentMorphogeneBranch->getRollDampingCoefficient());
 
@@ -495,10 +492,10 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 				new ChaoticController(
 					((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getSystemType());
 
+			controller->initialize();
+
 			controller->addControlInput(joint->getAngleceptors()[0]); // Add the first angleceptor as input
 			controller->addControlInput(joint->getVelocityceptors()[0]); // add the first velocityceptor as input
-
-			controller->initialize();
 			controller->addControlOutput(joint->getMotors()[i]);
 			getControllers().push_back(controller);
 		}
@@ -601,13 +598,13 @@ void SRBPhenomeModel::generateBody() {
 
 			((SRBJointModel*) mJointModels[i])->setWorld(getWorld());
 
-			if (!setDamping) {
-//				mJointModels[i]->setLinearDamping(0.f,0.f,0.f);
-				mJointModels[i]->setAngularDamping(0.f, 0.f, 0.f);
-			} else {
-//				mJointModels[i]->setLinearDamping(0.1f,0.1f,0.1f);
-				mJointModels[i]->setAngularDamping(0.9f, 0.9f, 0.9f);
-			}
+//			if (!setDamping) {
+////				mJointModels[i]->setLinearDamping(0.f,0.f,0.f);
+//				mJointModels[i]->setAngularDamping(0.f, 0.f, 0.f);
+//			} else {
+////				mJointModels[i]->setLinearDamping(0.1f,0.1f,0.1f);
+//				mJointModels[i]->setAngularDamping(0.9f, 0.9f, 0.9f);
+//			}
 
 			mJointModels[i]->initialize();
 

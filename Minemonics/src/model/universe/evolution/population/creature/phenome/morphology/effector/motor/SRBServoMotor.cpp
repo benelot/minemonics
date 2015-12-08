@@ -53,7 +53,7 @@ SRBServoMotor::~SRBServoMotor() {
 	mJointMotorIndex = JointPhysics::RDOF_PITCH;
 }
 
-void SRBServoMotor::initialize(MOTOR_TYPE* const motorBt) {
+void SRBServoMotor::initialize() {
 
 //	mMotorBt = motorBt;
 //
