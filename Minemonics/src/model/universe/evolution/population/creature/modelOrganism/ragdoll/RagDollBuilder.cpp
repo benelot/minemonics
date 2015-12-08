@@ -28,17 +28,17 @@
 
 void RagDollBuilder::build(MixedGenome* genome,
 	ControllerGene::ControllerType controllerType) {
-	genome->setTotalSegmentQtyLimit(2);
-	genome->setSegmentsDepthLimit(2);
+	genome->setTotalSegmentQtyLimit(11);
+	genome->setSegmentsDepthLimit(11);
 
 	btTransform transform;
 	btTransform localA, localB;
 
-	LimbPhysics::PrimitiveType type = LimbPhysics::CAPSULE;
+	LimbPhysics::PrimitiveType type = LimbPhysics::BLOCK;
 
 	bool attachHead = false;
 	bool enableMotor = true;
-	double ragDollSize = 10.0f;
+	double ragDollSize = 50.0f;
 	double gapSize = ragDollSize * 1.0f;
 
 	double damping = 0.05f; //[0.005;0.5] 0.05
@@ -47,23 +47,24 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// BODYPART_ABDOMENPELVIS
 	Morphogene* morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.3, ragDollSize * 0.2, ragDollSize * 0.3),
-		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(1, 0, 0));
+		Ogre::Vector3(ragDollSize * 0.3f, ragDollSize * 0.2f,
+			ragDollSize * 0.3f), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// ##################################################################
 	// create joint between the two limbs
-
+	Ogre::Euler jointRotation(0, 0, 0);
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
-		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
-		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(damping, 0, 0),
+		JointPhysics::HINGE_JOINT, false, false,
+		jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-0.2 * M_PI, -M_PI_2, -0.1 * M_PI),
 		Ogre::Vector3(0.2 * M_PI, M_PI_2, M_PI_2),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.15),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.15f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -97,12 +98,14 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-M_PI_4, -M_PI_4, 0), Ogre::Vector3(M_PI_4, M_PI_4, 0),
-		Ogre::Vector3(btScalar(gapSize * -0.18), btScalar(gapSize * -0.10),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * -0.18f), btScalar(gapSize * -0.10f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -136,12 +139,33 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-M_PI_4, -M_PI_4, 0), Ogre::Vector3(M_PI_4, M_PI_4, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.18), btScalar(gapSize * -0.10),
-			btScalar(ragDollSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.18f), btScalar(gapSize * -0.10f),
+			btScalar(ragDollSize * 0.f)));
+
+	switch (controllerType) {
+	case ControllerGene::SineControllerGene:
+		// create instances of the sine controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			SineControllerGene* sineController = new SineControllerGene();
+			sineController->initialize();
+			morphogeneBranch->getControllerGenes().push_back(sineController);
+		}
+		break;
+	case ControllerGene::ChaoticControllerGene:
+		// create instances of the chaotic controller gene for the morphogene.
+		for (int i = 0; i < 3; i++) {
+			ChaoticControllerGene* chaoticController =
+				new ChaoticControllerGene();
+			chaoticController->initialize();
+			morphogeneBranch->getControllerGenes().push_back(chaoticController);
+		}
+	}
 
 	//	morphogeneBranch->initialize();
 	morphogeneBranch->setActive(true);
@@ -156,22 +180,25 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// BODYPART_THORAX
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.3, ragDollSize * 0.28, ragDollSize * 0.3),
-		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.15),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(ragDollSize * 0.3f, ragDollSize * 0.28f,
+			ragDollSize * 0.3f), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.15f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
 		Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2),
-		Ogre::Vector3(btScalar(gapSize * 0.2), btScalar(gapSize * 0.15),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.2f), btScalar(gapSize * 0.15f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -205,13 +232,15 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-M_PI_2, -M_PI_2, -M_PI_2),
 		Ogre::Vector3(M_PI_2, M_PI_2, M_PI_2),
-		Ogre::Vector3(btScalar(gapSize * -0.2), btScalar(gapSize * 0.15),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * -0.2f), btScalar(gapSize * 0.15f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -245,13 +274,15 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-M_PI_4, -M_PI_4, -M_PI_2),
 		Ogre::Vector3(M_PI_4, M_PI_4, M_PI_2),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.30),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.30f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -285,31 +316,34 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	//BODYPART_HEAD
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.2, ragDollSize * 0.2, ragDollSize * 0.2),
-		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(ragDollSize * 0.2f, ragDollSize * 0.2f,
+			ragDollSize * 0.2f), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.14f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	//BODYPART_LEFT_THIGH
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.14, ragDollSize * 0.45,
-			ragDollSize * 0.14), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::Vector3(ragDollSize * 0.14f, ragDollSize * 0.45f,
+			ragDollSize * 0.14f), Ogre::Quaternion::IDENTITY, 1, 10, true,
 		Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.225),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.225f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(0, 0, 3 * M_PI_4),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.225),
-			btScalar(gapSize * 0.)));
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(0, 0, 3 * M_PI_4),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.225f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -343,31 +377,34 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	//	BODYPART_LEFTLEG
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.1, ragDollSize * 0.37, ragDollSize * 0.1),
-		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.185),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(ragDollSize * 0.1f, ragDollSize * 0.37f,
+			ragDollSize * 0.1f), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.185f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	//BODYPART_RIGHT_THIGH
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.14, ragDollSize * 0.45,
-			ragDollSize * 0.14), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::Vector3(ragDollSize * 0.14f, ragDollSize * 0.45f,
+			ragDollSize * 0.14f), Ogre::Quaternion::IDENTITY, 1, 10, true,
 		Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.225),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.225f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(0, 0, 3 * M_PI_4),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.225),
-			btScalar(gapSize * 0.)));
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(0, 0, 3 * M_PI_4),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.225f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -401,31 +438,34 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// BODYPART_RIGHT_LEG
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.1, ragDollSize * 0.37, ragDollSize * 0.1),
-		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.185),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(ragDollSize * 0.1f, ragDollSize * 0.37f,
+			ragDollSize * 0.1f), Ogre::Quaternion::IDENTITY, 1, 10, true,
+		Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.185f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// BODYPART_LEFT_UPPER_ARM
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.1, ragDollSize * 0.33, ragDollSize * 0.1),
-		Ogre::Euler(0, 0, M_PI_2).toQuaternion(), 1, 10, true,
-		Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(ragDollSize * 0.1f, ragDollSize * 0.33f,
+			ragDollSize * 0.1f), Ogre::Euler(0, 0, M_PI_2).toQuaternion(), 1,
+		10, true, Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.18f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(3 * M_PI_4, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.18),
-			btScalar(gapSize * 0.)));
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(3 * M_PI_4, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.18f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -459,32 +499,34 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	//BODYPART_LEFT_FOREARM
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.08, ragDollSize * 0.25,
-			ragDollSize * 0.08), Ogre::Euler(0, 0, M_PI_2).toQuaternion(), 1,
+		Ogre::Vector3(ragDollSize * 0.08f, ragDollSize * 0.25f,
+			ragDollSize * 0.08f), Ogre::Euler(0, 0, M_PI_2).toQuaternion(), 1,
 		10, true, Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.14),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.14f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	//BODYPART_RIGHT_UPPER_ARM
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.1, ragDollSize * 0.33, ragDollSize * 0.1),
-		Ogre::Euler(0, 0, -M_PI_2).toQuaternion(), 1, 10, true,
-		Ogre::ColourValue(1, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * -0.18),
-			btScalar(gapSize * 0.)));
+		Ogre::Vector3(ragDollSize * 0.1f, ragDollSize * 0.33f,
+			ragDollSize * 0.1f), Ogre::Euler(0, 0, -M_PI_2).toQuaternion(), 1,
+		10, true, Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.18f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
 	// ##################################################################
 	// create joint between the two limbs
+	jointRotation = Ogre::Euler(0, 0, 0);
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
-		false, Ogre::Vector3(0, 0, 1), Ogre::Vector3(0, 1, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(damping, 0, 0),
-		Ogre::Vector3(0, 0, 0), Ogre::Vector3(3 * M_PI_4, 0, 0),
-		Ogre::Vector3(btScalar(gapSize * 0.), btScalar(gapSize * 0.18),
-			btScalar(gapSize * 0.)));
+		false, jointRotation * Ogre::Vector3(1, 0, 0),
+		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
+		Ogre::Vector3(3 * M_PI_4, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.18f),
+			btScalar(gapSize * 0.f)));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -515,9 +557,11 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	// BODYPART_RIGHT_LOWER_ARM
 	morphogene = new Morphogene(type,
-		Ogre::Vector3(ragDollSize * 0.08, ragDollSize * 0.25,
-			ragDollSize * 0.08), Ogre::Euler(0, 0, -M_PI_2).toQuaternion(), 1,
-		10, true, Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
+		Ogre::Vector3(ragDollSize * 0.08f, ragDollSize * 0.25f,
+			ragDollSize * 0.08f), Ogre::Euler(0, 0, -M_PI_2).toQuaternion(), 1,
+		10, true, Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.14f),
+			btScalar(gapSize * 0.f)));
 	//	morphogene->initialize(0);
 	genome->addGene(morphogene);
 
