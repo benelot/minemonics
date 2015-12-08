@@ -77,7 +77,7 @@ void ChaoticController::initialize() {
 //	u[2] = 0; // z
 
 //	// stronger initial force output on z
-	u[0] = -0.0f; // x
+	u[0] = 0.0f; // x
 	u[1] = 0.0; // y
 	u[2] = 2.2f; // z
 }
@@ -123,8 +123,8 @@ double* chuaCircuit(double t, int dimensions, double u[]) {
 	double m0 = -0.714; /**!< slope in outer region */
 	double m1 = -1.143; /**!< slope in inner region */
 	double b = 1; /**!< Breakpoints */
-	double limitValue = -0.5;
-	double limitSoftness = 7;
+	//double limitValue = -0.5;
+	//double limitSoftness = 7;
 	double g = m0 * u[0] + (m1 - m0) / 2.0f * (abs(u[0] + b) - abs(u[0] - b));
 
 	double* uout = new double[dimensions];
