@@ -54,6 +54,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/CreatureModel.hpp
 	
 	## model organism builders
+	./model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDollBuilder.hpp
 	./model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp
 	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp
 	
@@ -149,6 +150,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/CreatureModel.cpp
 	
 	## model organism builders
+	./model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDollBuilder.cpp
 	./model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.cpp
 	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp
 	
