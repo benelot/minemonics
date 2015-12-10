@@ -186,7 +186,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 	mLoadPopulationWindow->hide();
 	mMovablePanels.push_back(mLoadPopulationWindow);
 
-	mChaosPanel = new MathGLPanel(windowWidth / 3.0f, windowHeight / 4.0f, 500,
+	mChaosPanel = new MathGLPanel(((float)windowWidth) / 1.37f, windowHeight / 2.0f, 500,
 		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
 
 	mMovablePanels.push_back(mChaosPanel);

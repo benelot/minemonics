@@ -192,10 +192,7 @@ public:
 	}
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -204,8 +201,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string
-					> ("ViewController"));
+				boost::log::attributes::constant<std::string>(
+					"ViewController"));
 		}
 	} _initializer;
 

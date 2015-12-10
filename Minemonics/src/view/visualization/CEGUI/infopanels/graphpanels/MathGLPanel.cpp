@@ -203,19 +203,19 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	// Create chart
 	mglGraph graph(0, mTexture->getWidth(), mTexture->getHeight());
 	graph.Title("Controller movement");
-	graph.Label('x', "x", 0);
-	graph.Label('y', "y", 0);
-	graph.Label('z', "z", 0);
 	graph.Rotate(mVerticalRotation, mHorizontalRotation);
-	graph.SetRanges(-20, 20, -20, 20, -20, 20);
+	graph.SetRanges(-30, 30, -30, 30, -30, 30);
 	for (std::vector<const MathGLDataset*>::const_iterator mit =
 		mDatasets.begin(); mit != mDatasets.end(); mit++) {
 		graph.SetColor('o', (*mit)->getPlotColor().r, (*mit)->getPlotColor().g,
 			(*mit)->getPlotColor().b);
 		graph.Plot((*(*mit)->getDatasetX()), (*(*mit)->getDatasetY()),
-			(*(*mit)->getDatasetZ()), "o-");
+			(*(*mit)->getDatasetZ()), "VA-");
 	}
 
+	graph.Label('x', "x", 0);
+	graph.Label('y', "y", 0);
+	graph.Label('z', "z", 0);
 	graph.Box();
 	graph.Axis();
 
