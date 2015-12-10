@@ -201,6 +201,14 @@ public:
 		mCreatureModel = creatureModel;
 	}
 
+	std::vector<const DataSink*> getDataSinks(){
+		std::vector<const DataSink*> datasinks;
+		for(std::vector<Controller*>::iterator cit = mControllers.begin();cit != mControllers.end();cit++){
+			datasinks.push_back(&(*cit)->getDataSink());
+		}
+		return datasinks;
+	}
+
 	virtual PhenomeModel* clone() = 0;
 
 	/**

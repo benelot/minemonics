@@ -19,6 +19,7 @@
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDollBuilder.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
 
@@ -94,6 +95,7 @@ void PopulationModel::addNewMember(const double branchiness,
 	CreatureModel* creatureModel = new CreatureModel(this,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
+//	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 //	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 //	ModelLegBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 

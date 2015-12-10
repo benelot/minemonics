@@ -55,7 +55,7 @@ ViewController::ViewController() :
 	NULL), mShowShadows(false), mMenuBar(NULL), mFpsPanel(
 	NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
 	NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
-	NULL), mLoadPopulationWindow(NULL) {
+	NULL), mLoadPopulationWindow(NULL),mChaosPanel(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -186,10 +186,10 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 	mLoadPopulationWindow->hide();
 	mMovablePanels.push_back(mLoadPopulationWindow);
 
-	// TODO: Add graphwindows again when used
-//	mMovablePanels.push_back(
-//	new MathGLPanel(400, 400, 400, 400, this,
-//	SimulationManager::getSingleton()->getRoot(), 400, 400));
+	mChaosPanel = new MathGLPanel(windowWidth / 3.0f, windowHeight / 4.0f, 500,
+		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
+
+	mMovablePanels.push_back(mChaosPanel);
 //
 //	mMovablePanels.push_back(
 //		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));

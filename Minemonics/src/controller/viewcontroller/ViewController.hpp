@@ -35,6 +35,7 @@ class OgreRenderer;
 #include <view/visualization/CEGUI/MenuBar.hpp>
 #include <view/visualization/CEGUI/infopanels/FPSPanel.hpp>
 #include <view/visualization/CEGUI/infopanels/DetailsPanel.hpp>
+#include <view/visualization/CEGUI/infopanels/graphpanels/MathGLPanel.hpp>
 
 //## utils headers
 #include <utils/logging/Logger.hpp>
@@ -186,6 +187,10 @@ public:
 		}
 	}
 
+	MathGLPanel* getChaosPanel() {
+		return mChaosPanel;
+	}
+
 private:
 	/**
 	 * The boost logger.
@@ -229,6 +234,7 @@ private:
 	MenuBar* mMenuBar;
 	FPSPanel* mFpsPanel;
 	DetailsPanel* mDetailsPanel;
+	MathGLPanel* mChaosPanel;
 	CEGUI::OgreRenderer* mRenderer;
 	CEGUI::Window* mDragContainer;
 

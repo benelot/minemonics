@@ -19,6 +19,7 @@
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/data/DataSink.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
 #include <model/universe/evolution/population/creature/phenome/controller/ControlOutput.hpp>
 
@@ -135,6 +136,10 @@ public:
 		return mControlOutputIndices;
 	}
 
+	const DataSink& getDataSink() const {
+		return mDataSink;
+	}
+
 	/**
 	 * Serializes the gene to an xml file.
 	 * @param ar The archive.
@@ -150,6 +155,8 @@ public:
 	}
 
 protected:
+
+	DataSink mDataSink;
 
 	ControllerType mType; /**!< The type of controller that is running */
 

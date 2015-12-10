@@ -122,7 +122,7 @@ private:
 
 	ChaoticControllerGene::ChaoticSystemType mSystemType;
 
-	std::string loggerName;
+	std::string mLoggerName;
 };
 
 BOOST_CLASS_VERSION(ChaoticController, 1)

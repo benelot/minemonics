@@ -22,6 +22,8 @@ class TextureTarget;
 //## controller headers
 //## model headers
 //## view headers
+#include <model/data/MathGLDataset.hpp>
+
 //## utils headers
 
 /**
@@ -37,13 +39,31 @@ public:
 		const int textureHeight);
 	virtual ~MathGLPanel();
 
+	void onHorizontalSliderValueChanged();
+	void onVerticalSliderValueChanged();
+
 	void update(const double timeSinceLastFrame);
+
+	void addDataset(const MathGLDataset* dataset){
+		mDatasets.push_back(dataset);
+	}
+
+	void clearDatasets(){
+		mDatasets.clear();
+	}
 
 	void makePrint() {
 		mMakePrint = true;
 	}
 
 private:
+
+	CEGUI::Slider* mVerticalSlider; /**!< The slider right to the graph */
+	double mHorizontalRotation;
+	CEGUI::Slider* mHorizontalSlider; /**!< The slider below the graph */
+	double mVerticalRotation;
+
+	std::vector<const MathGLDataset*> mDatasets; /**!< The different data sets to plot*/
 	Ogre::TexturePtr mTexture; /**!< The texture to drawn the math gl on*/
 
 	double mTime; /**!< The indication of time math */

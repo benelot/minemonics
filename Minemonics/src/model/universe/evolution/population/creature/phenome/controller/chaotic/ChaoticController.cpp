@@ -30,22 +30,20 @@ BoostLogger ChaoticController::mBoostLogger; /*<! initialize the boost logger*/
 ChaoticController::_Init ChaoticController::_initializer;
 
 ChaoticController::ChaoticController() :
-	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(
+	Controller(CHAOTIC_CONTROLLER), mLoggerName(
+		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
 		ChaoticControllerGene::CHUA_CIRCUIT), mFirstTime(true) {
-	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
-
 }
 ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType) :
 	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType), mFirstTime(
 		0) {
-	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
-
+	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 }
 
 ChaoticController::ChaoticController(const ChaoticController& chaoticController) :
 	Controller(CHAOTIC_CONTROLLER) {
-	loggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
+	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 
 	mTime = chaoticController.mTime;
 	mType = chaoticController.mType;
@@ -65,6 +63,7 @@ ChaoticController::ChaoticController(const ChaoticController& chaoticController)
 	mSystemType = chaoticController.mSystemType;
 
 	mFirstTime = chaoticController.mFirstTime;
+
 }
 
 ChaoticController::~ChaoticController() {
@@ -72,6 +71,8 @@ ChaoticController::~ChaoticController() {
 }
 
 void ChaoticController::initialize() {
+	mDataSink.initialize(mLoggerName, 3, 20);
+
 //	u[0] = -1.5f; // x
 //	u[1] = 0; // y
 //	u[2] = 0; // z
@@ -111,9 +112,18 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 //	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
 
+	double dataX[1];
+	dataX[0] = u[0];
+	double dataY[1];
+	dataY[0] = u[1];
+	double dataZ[1];
+	dataZ[0] = u[2];
+
+	mDataSink.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
+
 	setOutputValue(output); // set output value to be used by outputs
 
-	distributeOutput(output); 	// distribute the output to the adjacent controllers or endpoints
+	distributeOutput(output); // distribute the output to the adjacent controllers or endpoints
 }
 
 double* chuaCircuit(double t, int dimensions, double u[]) {
@@ -144,7 +154,7 @@ void ChaoticController::calcChuaCircuit() {
 	 f(x)=m1*x+(m0-m1)/2*(|x+1|-|x-1|)
 	 */
 	if (LoggerConfiguration::LOG_SPECIAL) {
-		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", loggerName);
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerName);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
 	}
 

@@ -18,7 +18,6 @@
 #include <controller/universe/evolution/population/Population.hpp>
 #include <controller/SaveController.hpp>
 
-
 //## model headers
 #include <model/universe/evolution/population/PopulationModel.hpp>
 
@@ -108,6 +107,14 @@ int Creature::addToWorld() {
 		performEmbryogenesis();
 	}
 
+	std::vector<const DataSink*> datasinks =
+		mPhenotype.getPhenotypeModel()->getDataSinks();
+	for (std::vector<const DataSink*>::const_iterator dit = datasinks.begin();
+		dit != datasinks.end(); dit++) {
+		SimulationManager::getSingleton()->getViewController().getChaosPanel()->addDataset(
+			&(*dit)->getDataset());
+	}
+
 	// Add phenotype to world
 	limbQty = mPhenotype.addToWorld();
 	return limbQty;
@@ -116,6 +123,8 @@ int Creature::addToWorld() {
 void Creature::removeFromWorld() {
 	// Remove phenotype from world
 	mPhenotype.removeFromWorld();
+
+	SimulationManager::getSingleton()->getViewController().getChaosPanel()->clearDatasets();
 }
 
 void Creature::processJuries() {
@@ -130,7 +139,9 @@ void Creature::save(std::string folderPath) {
 	std::string creatureFilePath;
 	creatureFilePath.append(folderPath);
 	creatureFilePath.append("/Creature-");
-	creatureFilePath.append(boost::lexical_cast<std::string>(mCreatureModel->getLastFitnessScore())); // returns the last score available
+	creatureFilePath.append(
+		boost::lexical_cast<std::string>(
+			mCreatureModel->getLastFitnessScore())); // returns the last score available
 	creatureFilePath.append("-");
 	creatureFilePath.append(SimulationManager::getSingleton()->getTimeStamp());
 	creatureFilePath.append(".cr");

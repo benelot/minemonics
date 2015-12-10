@@ -19,6 +19,10 @@ set(MODELHDRS
 	# model
 	./model/Serializable.hpp
 	
+	# data collection model
+	./model/data/DataSink.hpp
+	./model/data/MathGLDataset.hpp
+	
 	## environment
     ./model/universe/environments/EnvironmentModel.hpp
     ./model/universe/environments/PlaneModel.hpp
@@ -115,6 +119,10 @@ set(MODELHDRS
 set(MODELSRCS
     # model
     ./model/Serializable.cpp
+    
+    # data collection model
+	./model/data/DataSink.cpp
+	./model/data/MathGLDataset.cpp
     
     ## environment
     ./model/universe/environments/EnvironmentModel.cpp

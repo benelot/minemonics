@@ -55,7 +55,9 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 	const int height, Ogre::Root* const root, const int textureWidth,
 	const int textureHeight) :
 	MovablePanel("MathGLWindow", MovablePanel::GRAPHPANEL), mTime(0), mMakePrint(
-		false) {
+		false), mVerticalRotation(60), mHorizontalRotation(50) {
+
+	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
 	CEGUI::Sizef size(static_cast<float>(textureWidth),
 		static_cast<float>(textureHeight));
@@ -109,7 +111,9 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 			CEGUIConfiguration::CEGUI_SCHEME + "/StaticImage",
 			"MathGLRTTWindow");
 	staticImage->setSize(
-		CEGUI::USize(CEGUI::UDim(1.0f, 0), CEGUI::UDim(1.0f, 0)));
+		CEGUI::USize(CEGUI::UDim(0, width - 20), CEGUI::UDim(0, height - 40)));
+	staticImage->setPosition(
+		CEGUI::UVector2(CEGUI::UDim(0, 10), CEGUI::UDim(0, 20)));
 	staticImage->setProperty("Image", "RTTImage");
 
 	MovablePanel::initialize(left, top, width, height, false);
@@ -136,6 +140,44 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 
 	// Unlock the pixel buffer
 	pixelBuffer->unlock();
+
+	mHorizontalSlider = static_cast<CEGUI::Slider*>(wmgr.createWindow(
+		CEGUIConfiguration::CEGUI_SCHEME + "/HorizontalSlider"));
+
+	mHorizontalSlider->setSize(
+		CEGUI::USize(CEGUI::UDim(0, width), CEGUI::UDim(0, 20)));
+
+	mHorizontalSlider->setPosition(
+		CEGUI::UVector2(CEGUI::UDim(0, 0.0f), CEGUI::UDim(0, height - 30)));
+
+	mHorizontalSlider->setMaxValue(360);
+	mHorizontalSlider->setClickStep(1.0f);
+	mHorizontalSlider->setCurrentValue(50);
+
+	mHorizontalSlider->subscribeEvent(CEGUI::Slider::EventValueChanged,
+		CEGUI::Event::Subscriber(&MathGLPanel::onHorizontalSliderValueChanged,
+			this));
+
+	mFrameWindow->addChild(mHorizontalSlider);
+
+	mVerticalSlider = static_cast<CEGUI::Slider*>(wmgr.createWindow(
+		CEGUIConfiguration::CEGUI_SCHEME + "/Slider"));
+
+	mVerticalSlider->setSize(
+		CEGUI::USize(CEGUI::UDim(0, 20), CEGUI::UDim(0, height - 20)));
+
+	mVerticalSlider->setPosition(
+		CEGUI::UVector2(CEGUI::UDim(0, width - 10), CEGUI::UDim(0, 0.0f)));
+
+	mVerticalSlider->setMaxValue(360);
+	mVerticalSlider->setClickStep(1.0f);
+	mVerticalSlider->setCurrentValue(60);
+
+	mVerticalSlider->subscribeEvent(CEGUI::Slider::EventValueChanged,
+		CEGUI::Event::Subscriber(&MathGLPanel::onVerticalSliderValueChanged,
+			this));
+
+	mFrameWindow->addChild(mVerticalSlider);
 }
 
 MathGLPanel::~MathGLPanel() {
@@ -146,17 +188,36 @@ MathGLPanel::~MathGLPanel() {
 	mRenderTextureTarget = NULL;
 }
 
+void MathGLPanel::onHorizontalSliderValueChanged() {
+	mHorizontalRotation = mHorizontalSlider->getCurrentValue();
+}
+
+void MathGLPanel::onVerticalSliderValueChanged() {
+	mVerticalRotation = mVerticalSlider->getCurrentValue();
+}
+
 void MathGLPanel::update(const double timeSinceLastFrame) {
 
 	mTime += timeSinceLastFrame;
 
 	// Create chart
 	mglGraph graph(0, mTexture->getWidth(), mTexture->getHeight());
+	graph.Title("Controller movement");
+	graph.Label('x', "x", 0);
+	graph.Label('y', "y", 0);
+	graph.Label('z', "z", 0);
+	graph.Rotate(mVerticalRotation, mHorizontalRotation);
+	graph.SetRanges(-20, 20, -20, 20, -20, 20);
+	for (std::vector<const MathGLDataset*>::const_iterator mit =
+		mDatasets.begin(); mit != mDatasets.end(); mit++) {
+		graph.SetColor('o', (*mit)->getPlotColor().r, (*mit)->getPlotColor().g,
+			(*mit)->getPlotColor().b);
+		graph.Plot((*(*mit)->getDatasetX()), (*(*mit)->getDatasetY()),
+			(*(*mit)->getDatasetZ()), "o-");
+	}
+
 	graph.Box();
-	char buffer[128];
-	int r = sprintf(buffer, "sin(pi*x+%.2f)", mTime);
-	buffer[r] = 0;
-	graph.FPlot(buffer);
+	graph.Axis();
 
 	// Get the pixel buffer
 	Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer();
