@@ -184,9 +184,8 @@ void SimulationManager::createScene(void) {
 
 	// choose a random skybox
 	int skyindex = Randomness::getSingleton()->nextUnifPosInt(1, 30);
-	std::string skyboxstring;
-	skyboxstring = std::string("Examples/SpaceSkyBox")
-		+ std::string(1 - (skyindex > 10), '0')
+	std::string skyboxstring = std::string("Examples/SpaceSkyBox")
+		+ std::string(1 - (skyindex >= 10), '0')
 		+ std::string(boost::lexical_cast<std::string>(skyindex));
 	mSceneMgr->setSkyBox(true, skyboxstring, 4000, true);
 
