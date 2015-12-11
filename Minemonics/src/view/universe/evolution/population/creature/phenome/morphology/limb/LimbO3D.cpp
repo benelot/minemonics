@@ -57,10 +57,10 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 	pass->setLightingEnabled(true);
 	pass->setAmbient(limbModel->getColor());
 	pass->setDiffuse(limbModel->getColor());
-	//pass->setSpecular(limbModel->getColor());
+//	pass->setSpecular(0.1f,0.1f,0.1f,1);
 	pass->setEmissive(limbModel->getColor());
-	pass->setDepthCheckEnabled(true);
-	pass->setDepthWriteEnabled(false);
+//	pass->setDepthCheckEnabled(true);
+//	pass->setDepthWriteEnabled(false);
 	pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
 
 	Ogre::TextureUnitState *tex = pass->createTextureUnitState("MyCustomState",
@@ -79,8 +79,8 @@ LimbO3D::LimbO3D(const LimbModel* const limbModel) :
 		mLimbEntity =
 			SimulationManager::getSingleton()->getSceneManager()->createEntity(
 				Ogre::SceneManager::PT_CUBE);
-		mLimbEntity->setMaterial(material);
 
+		mLimbEntity->setMaterial(material);
 		mLimbEntityNode->attachObject(mLimbEntity);
 
 		mLimbEntityNode->scale(

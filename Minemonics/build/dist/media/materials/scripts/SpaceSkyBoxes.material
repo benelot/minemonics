@@ -1,0 +1,539 @@
+material Examples/SpaceSkyBox01
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky01_lf.jpg sky01_rt.jpg sky01_ft.jpg sky01_bk.jpg sky01_up.jpg sky01_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox02
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky02_lf.jpg sky02_rt.jpg sky02_ft.jpg sky02_bk.jpg sky02_up.jpg sky02_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox03
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky03_lf.jpg sky03_rt.jpg sky03_ft.jpg sky03_bk.jpg sky03_up.jpg sky03_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox04
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky04_lf.jpg sky04_rt.jpg sky04_ft.jpg sky04_bk.jpg sky04_up.jpg sky04_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox05
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky05_lf.jpg sky05_rt.jpg sky05_ft.jpg sky05_bk.jpg sky05_up.jpg sky05_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox06
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky06_lf.jpg sky06_rt.jpg sky06_ft.jpg sky06_bk.jpg sky06_up.jpg sky06_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox07
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky07_lf.jpg sky07_rt.jpg sky07_ft.jpg sky07_bk.jpg sky07_up.jpg sky07_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox08
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky08_lf.jpg sky08_rt.jpg sky08_ft.jpg sky08_bk.jpg sky08_up.jpg sky08_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox09
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky09_lf.jpg sky09_rt.jpg sky09_ft.jpg sky09_bk.jpg sky09_up.jpg sky09_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox10
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky10_lf.jpg sky10_rt.jpg sky10_ft.jpg sky10_bk.jpg sky10_up.jpg sky10_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox11
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky11_lf.jpg sky11_rt.jpg sky11_ft.jpg sky11_bk.jpg sky11_up.jpg sky11_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox12
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky12_lf.jpg sky12_rt.jpg sky12_ft.jpg sky12_bk.jpg sky12_up.jpg sky12_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox13
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky13_lf.jpg sky13_rt.jpg sky13_ft.jpg sky13_bk.jpg sky13_up.jpg sky13_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox14
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky14_lf.jpg sky14_rt.jpg sky14_ft.jpg sky14_bk.jpg sky14_up.jpg sky14_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox15
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky15_lf.jpg sky15_rt.jpg sky15_ft.jpg sky15_bk.jpg sky15_up.jpg sky15_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox16
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky16_lf.jpg sky16_rt.jpg sky16_ft.jpg sky16_bk.jpg sky16_up.jpg sky16_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+material Examples/SpaceSkyBox17
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky17_lf.jpg sky17_rt.jpg sky17_ft.jpg sky17_bk.jpg sky17_up.jpg sky17_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox18
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky18_lf.jpg sky18_rt.jpg sky18_ft.jpg sky18_bk.jpg sky18_up.jpg sky18_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox19
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky19_lf.jpg sky19_rt.jpg sky19_ft.jpg sky19_bk.jpg sky19_up.jpg sky19_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox20
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky20_lf.jpg sky20_rt.jpg sky20_ft.jpg sky20_bk.jpg sky20_up.jpg sky20_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox21
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky21_lf.jpg sky21_rt.jpg sky21_ft.jpg sky21_bk.jpg sky21_up.jpg sky21_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox22
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky22_lf.jpg sky22_rt.jpg sky22_ft.jpg sky22_bk.jpg sky22_up.jpg sky22_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox23
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky23_lf.jpg sky23_rt.jpg sky23_ft.jpg sky23_bk.jpg sky23_up.jpg sky23_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox24
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky24_lf.jpg sky24_rt.jpg sky24_ft.jpg sky24_bk.jpg sky24_up.jpg sky24_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox25
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky25_lf.jpg sky25_rt.jpg sky25_ft.jpg sky25_bk.jpg sky25_up.jpg sky25_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox26
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky26_lf.jpg sky26_rt.jpg sky26_ft.jpg sky26_bk.jpg sky26_up.jpg sky26_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox27
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky27_lf.jpg sky27_rt.jpg sky27_ft.jpg sky27_bk.jpg sky27_up.jpg sky27_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox28
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky28_lf.jpg sky28_rt.jpg sky28_ft.jpg sky28_bk.jpg sky28_up.jpg sky28_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox29
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky29_lf.jpg sky29_rt.jpg sky29_ft.jpg sky29_bk.jpg sky29_up.jpg sky29_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/SpaceSkyBox30
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture sky30_lf.jpg sky30_rt.jpg sky30_ft.jpg sky30_bk.jpg sky30_up.jpg sky30_dn.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
