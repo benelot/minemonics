@@ -491,13 +491,12 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//initialize rotational limit motors
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-	//TODO: Fix the force curve
-//	double maxTorque = 5000 * (mass1 + mass2);
-	double maxTorque = 4.0f * (mass1 * mass2);
-//		(MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
-//			* (mass1 + mass2)
-//			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
-//				* pow(mass1 + mass2, 2));
+
+	double maxTorque =
+		MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+			* (mass1 * mass2)
+			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+				* pow(mass1 * mass2, 2);
 
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),

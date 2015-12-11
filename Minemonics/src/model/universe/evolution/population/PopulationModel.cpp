@@ -97,9 +97,9 @@ void PopulationModel::addNewMember(const double branchiness,
 
 //	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 //	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-//	ModelLegBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
+	ModelLegBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 
-	creatureModel->createRandomGenome(branchiness);
+//	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
 	creatureModel->setDynasty(mDynastyQty);
 	mDynastyQty++;
