@@ -94,8 +94,8 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 		u[0] = mControlInputs[0]->getOutputValue();
 //		u[0] = mControlInputs[1]->getOutputValue();
 
-//		u[1] = mControlInputs[0]->getOutputValue();
-		u[1] = mControlInputs[1]->getOutputValue();
+		u[1] = mControlInputs[0]->getOutputValue();
+//		u[1] = mControlInputs[1]->getOutputValue();
 
 //		u[2] = mControlInputs[0]->getOutputValue();
 //		u[2] = mControlInputs[1]->getOutputValue();
