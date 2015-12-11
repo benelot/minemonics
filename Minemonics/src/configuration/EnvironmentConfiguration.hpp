@@ -25,11 +25,11 @@
  */
 class EnvironmentConfiguration {
 public:
-	static const float AMBIENT_R = 0.6; /**!< Ambient light color */
-	static const float AMBIENT_G = 0.6;
-	static const float AMBIENT_B = 0.55;
+	static const float AMBIENT_R; /**!< Ambient light color */
+	static const float AMBIENT_G;
+	static const float AMBIENT_B;
 
-	static const double GROUND_FRICTION = 1.0f;
+	static const double GROUND_FRICTION;
 };
 
 #endif /* CONFIGURATON_ENVIRONMENTCONFIGURATION_H_ */

@@ -23,8 +23,8 @@
  */
 class EvaluationConfiguration {
 public:
-	static const unsigned DEFAULT_PARALLEL_EVALUATION = 1; /**!< Number of parallel evaluations */
-	static const double DEFAULT_EVALUATION_TIME = 100; /**!< The default evaluation time */
+	static const unsigned DEFAULT_PARALLEL_EVALUATION; /**!< Number of parallel evaluations */
+	static const double DEFAULT_EVALUATION_TIME; /**!< The default evaluation time */
 };
 
 #endif /* CONFIGURATION_EVALUATIONCONFIGURATION_H_ */

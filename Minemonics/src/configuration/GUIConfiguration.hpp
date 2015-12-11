@@ -390,98 +390,50 @@ public:
 
 	// Ambient light
 	static const std::string ambientLightName;
-//		CEGUI::Window *ambientLightTopItem = wmgr.createWindow(
-//				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem", "ambientLightTopItem");
-//		ambientLightTopItem->setText("Ambient light");
-//		renderingMenu->addChild(ambientLightTopItem);
 
 	// 0 %
 	static const std::string ambientLight0Name;
 	static const std::string ambientLight0Cmd;
-//		CEGUI::Window *ambientLight0Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight0");
-//		ambientLight0Item->setText("0 %");
-//		ambientLightMenu->addChild(ambientLight0Item);
 
 	// 10 %
 	static const std::string ambientLight10Name;
 	static const std::string ambientLight10Cmd;
-//		CEGUI::Window *ambientLight10Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight10");
-//		ambientLight10Item->setText("10 %");
-//		ambientLightMenu->addChild(ambientLight10Item);
 
 	// 20 %
 	static const std::string ambientLight20Name;
 	static const std::string ambientLight20Cmd;
-//		CEGUI::Window *ambientLight20Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight20");
-//		ambientLight20Item->setText("20 %");
-//		ambientLightMenu->addChild(ambientLight20Item);
 
 	// 30 %
 	static const std::string ambientLight30Name;
 	static const std::string ambientLight30Cmd;
-//		CEGUI::Window *ambientLight30Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight30");
-//		ambientLight30Item->setText("30 %");
-//		ambientLightMenu->addChild(ambientLight30Item);
 
 	// 40 %
 	static const std::string ambientLight40Name;
 	static const std::string ambientLight40Cmd;
-//		CEGUI::Window *ambientLight40Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight40");
-//		ambientLight40Item->setText("40 %");
-//		ambientLightMenu->addChild(ambientLight40Item);
 
 	// 50 %
 	static const std::string ambientLight50Name;
 	static const std::string ambientLight50Cmd;
-//		CEGUI::Window *ambientLight50Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight50");
-//		ambientLight50Item->setText("50 %");
-//		ambientLightMenu->addChild(ambientLight50Item);
 
 	// 60 %
 	static const std::string ambientLight60Name;
 	static const std::string ambientLight60Cmd;
-//		CEGUI::Window *ambientLight60Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight60");
-//		ambientLight60Item->setText("60 %");
-//		ambientLightMenu->addChild(ambientLight60Item);
 
 	// 70 %
 	static const std::string ambientLight70Name;
 	static const std::string ambientLight70Cmd;
-//		CEGUI::Window *ambientLight70Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight70");
-//		ambientLight70Item->setText("70 %");
-//		ambientLightMenu->addChild(ambientLight70Item);
 
 	// 80 %
 	static const std::string ambientLight80Name;
 	static const std::string ambientLight80Cmd;
-//		CEGUI::Window *ambientLight80Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight80");
-//		ambientLight80Item->setText("80 %");
-//		ambientLightMenu->addChild(ambientLight80Item);
 
 	// 90 %
 	static const std::string ambientLight90Name;
 	static const std::string ambientLight90Cmd;
-//		CEGUI::Window *ambientLight90Item = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAmbientLight90");
-//		ambientLight90Item->setText("90 %");
-//		ambientLightMenu->addChild(ambientLight90Item);
 
 	// 100 %
 	static const std::string ambientLight100Name;
 	static const std::string ambientLight100Cmd;
-//		CEGUI::Window *ambientLight100Item = wmgr.createWindow(
-//				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem", "cmdAmbientLight100");
-//		ambientLight100Item->setText("100 %");
-//		ambientLightMenu->addChild(ambientLight100Item);
 
 	// Tune for speed
 //		CEGUI::Window *tuneForSpeedItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
@@ -592,104 +544,43 @@ public:
 	// No gravity
 	static const std::string noGravityName;
 	static const std::string noGravityCmd;
-//		CEGUI::Window *noGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdNoGravity");
-//		noGravityItem->setText("No Gravity");
-//		gravityMenu->addChild(noGravityItem);
 
 	// Pluto gravity 0.059
 	static const std::string plutoGravityName;
 	static const std::string plutoGravityCmd;
-//		CEGUI::Window *plutoGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdPlutoGravity");
-//		plutoGravityItem->setText("Pluto Gravity 0.059 g");
-//		gravityMenu->addChild(plutoGravityItem);
 
 	// Moon gravity 0.166
 	static const std::string moonGravityName;
 	static const std::string moonGravityCmd;
-//		CEGUI::Window *moonGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdMoonGravity");
-//		moonGravityItem->setText("Moon Gravity 0.166 g");
-//		gravityMenu->addChild(moonGravityItem);
 
 	// Mars/Mercury gravity 0.377/0.378
 	static const std::string marsMercuryGravityName;
 	static const std::string marsMercuryGravityCmd;
-//		CEGUI::Window *marsMercuryGravityItem = wmgr.createWindow(
-//				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem", "cmdMarsMercuryGravity");
-//		marsMercuryGravityItem->setText("Mars/Mercury Gravity 0.377 g");
-//		gravityMenu->addChild(marsMercuryGravityItem);
 
 	// Uranus gravity 0.889
 	static const std::string uranusGravityName;
 	static const std::string uranusGravityCmd;
-//		CEGUI::Window *uranusGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdUranusGravity");
-//		uranusGravityItem->setText("Uranus Gravity 0.899 g");
-//		gravityMenu->addChild(uranusGravityItem);
 
 	// Venus/Saturn gravity 0.907/0.916
 	static const std::string venusSaturnGravityName;
 	static const std::string venusSaturnGravityCmd;
-//		CEGUI::Window *venusSaturnGravityItem = wmgr.createWindow(
-//				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem", "cmdVenusSaturnGravity");
-//		venusSaturnGravityItem->setText("Venus/Saturn Gravity 0.91 g");
-//		gravityMenu->addChild(venusSaturnGravityItem);
 
 	// Earth gravity 1
 	static const std::string earthGravityName;
 	static const std::string earthGravityCmd;
-//		CEGUI::Window *earthGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdEarthGravity");
-//		earthGravityItem->setText("Earth Gravity 1 g");
-//		gravityMenu->addChild(earthGravityItem);
 
 	// Neptune gravity 1.12
 	static const std::string neptuneGravityName;
 	static const std::string neptuneGravityCmd;
-//		CEGUI::Window *neptuneGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdNeptuneGravity");
-//		neptuneGravityItem->setText("Neptune Gravity 1.12 g");
-//		gravityMenu->addChild(neptuneGravityItem);
 
 	// Jupiter gravity 2.36
 	static const std::string jupiterGravityName;
 	static const std::string jupiterGravityCmd;
-//		CEGUI::Window *jupiterGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdJupiterGravity");
-//		jupiterGravityItem->setText("Jupiter Gravity 2.36 g");
-//		gravityMenu->addChild(jupiterGravityItem);
 
 	// Sun gravity 27.930682977
 	static const std::string sunGravityName;
 	static const std::string sunGravityCmd;
-//		CEGUI::Window *sunGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdSunGravity");
-//		sunGravityItem->setText("Sun Gravity 27.9 g");
-//		gravityMenu->addChild(sunGravityItem);
 
-	// Custom gravity...
-//		CEGUI::Window *customGravityItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdCustomGravity");
-//		customGravityItem->setText("Custom Gravity");
-//		gravityMenu->addChild(customGravityItem);
-
-	//#####################
-	// Help menu
-//		CEGUI::Window *helpTopItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"helpTopItem");
-//		helpTopItem->setText("Help");
-//		menuBar->addChild(helpTopItem);
-//		CEGUI::Window *helpMenu = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/PopupMenu",
-//				"helpMenu");
-//		helpTopItem->addChild(helpMenu);
-
-	// About
-//		CEGUI::Window *aboutItem = wmgr.createWindow(CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-//				"cmdAbout");
-//		aboutItem->setText("About");
-//		helpMenu->addChild(aboutItem);
 };
 
 #endif /* CONFIGURATION_GUICONFIGURATION_HPP_ */

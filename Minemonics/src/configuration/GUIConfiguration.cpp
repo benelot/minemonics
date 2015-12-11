@@ -58,8 +58,10 @@ const std::string GUIConfiguration::editPopulationCmd = "cmdEditPopulation";
 const std::string GUIConfiguration::loadPopulationName = "Load Population...";
 const std::string GUIConfiguration::loadPopulationCmd = "cmdLoadPopulation";
 
-const std::string GUIConfiguration::OpenFileSaveConfirm = "Do you really want to save here?";
-const std::string GUIConfiguration::OpenFileLoadConfirm = "Do you really want to load this?";
+const std::string GUIConfiguration::OpenFileSaveConfirm =
+	"Do you really want to save here?";
+const std::string GUIConfiguration::OpenFileLoadConfirm =
+	"Do you really want to load this?";
 
 //#####################
 //Evolution menu

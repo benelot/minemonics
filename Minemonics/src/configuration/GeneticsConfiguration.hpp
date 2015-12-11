@@ -23,13 +23,13 @@
  */
 class GeneticsConfiguration {
 public:
-	static const unsigned GENE_QTY_INITIAL_MEAN = 20; /**!< Initial mean number of genes in a genome. */
+	static const unsigned GENE_QTY_INITIAL_MEAN; /**!< Initial mean number of genes in a genome. */
 
-	static const unsigned GENE_QTY_INITIAL_VAR = 5; /**!< Initial variance of genes in a genome. */
+	static const unsigned GENE_QTY_INITIAL_VAR; /**!< Initial variance of genes in a genome. */
 
-	static const double GENE_BRANCH_INITIAL_MEAN = 2.5f; /**!< The initial branch number mean */
+	static const double GENE_BRANCH_INITIAL_MEAN; /**!< The initial branch number mean */
 
-	static const double GENE_BRANCH_INITIAL_VAR = 1.0f; /**!< The initial branch number variance */
+	static const double GENE_BRANCH_INITIAL_VAR; /**!< The initial branch number variance */
 
 };
 

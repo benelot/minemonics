@@ -1,5 +1,5 @@
 //# corresponding headers
-#include <configuration/SerializationConfiguration.hpp>
+#include <configuration/EvaluationConfiguration.hpp>
 
 //# forward declarations
 //# system headers
@@ -14,6 +14,6 @@
 //## view headers
 //## utils headers
 
-const bool SerializationConfiguration::POPULATION_EXPANDED = true; /**!< If the population is saved in a folder or in one file */
+const unsigned EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION = 1; /**!< Number of parallel evaluations */
+const double EvaluationConfiguration::DEFAULT_EVALUATION_TIME = 100; /**!< The default evaluation time */
 
-const std::string SerializationConfiguration::TOP_FOLDER = "universe";

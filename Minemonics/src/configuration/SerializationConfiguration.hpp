@@ -25,7 +25,7 @@
  */
 class SerializationConfiguration {
 public:
-	static const bool POPULATION_EXPANDED = true; /**!< If the population is saved in a folder or in one file */
+	static const bool POPULATION_EXPANDED; /**!< If the population is saved in a folder or in one file */
 
 	static const std::string TOP_FOLDER; /**!< The name of the top folder of where we save the universe*/
 };

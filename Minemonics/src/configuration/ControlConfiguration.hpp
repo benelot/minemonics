@@ -25,24 +25,23 @@
  */
 class ControlConfiguration {
 public:
-	static const double JOINT_MIN_FREQUENCY = 0.1; /**!<Hz Lowest frequency of joint movement*/
+	static const double JOINT_MIN_FREQUENCY; /**!<Hz Lowest frequency of joint movement*/
 
-	static const double JOINT_MAX_FREQUENCY = 4; /**!< Hz Highest frequency of joint movement */
+	static const double JOINT_MAX_FREQUENCY; /**!< Hz Highest frequency of joint movement */
 
-	static const double JOINT_MIN_AMPLITUDE = 0; /**!< Lowest amplitude of joint movement */
+	static const double JOINT_MIN_AMPLITUDE; /**!< Lowest amplitude of joint movement */
 
-	static const double JOINT_MAX_AMPLITUDE = 0.5; /**!< Highest amplitude of joint movement */
+	static const double JOINT_MAX_AMPLITUDE; /**!< Highest amplitude of joint movement */
 
-	static const double JOINT_MIN_X_OFFSET = 0; /**!< Lowest X Offset (shift) of the center of joint movement */
+	static const double JOINT_MIN_X_OFFSET; /**!< Lowest X Offset (shift) of the center of joint movement */
 
-	static const double JOINT_MAX_X_OFFSET = 2 * M_PI; /**!< Highest X Offset (shift) of the center of joint movement*/
+	static const double JOINT_MAX_X_OFFSET; /**!< Highest X Offset (shift) of the center of joint movement*/
 
-	static const double JOINT_MIN_Y_OFFSET = 0; /**!< Lowest Y Offset of the center of joint movement */
+	static const double JOINT_MIN_Y_OFFSET; /**!< Lowest Y Offset of the center of joint movement */
 
-	static const double JOINT_MAX_Y_OFFSET = 1; /**!< Highest Y Offset of the center of joint movement */
+	static const double JOINT_MAX_Y_OFFSET; /**!< Highest Y Offset of the center of joint movement */
 
-	static const ControllerGene::ControllerType CONTROLLER_TYPE =
-		ControllerGene::ChaoticControllerGene; /*!< Controller gene type */
+	static const ControllerGene::ControllerType CONTROLLER_TYPE; /*!< Controller gene type */
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */

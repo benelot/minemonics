@@ -4,6 +4,8 @@
 //# corresponding headers
 //# forward declarations
 //# system headers
+#include <string>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -26,10 +28,6 @@ public:
 
 	static const std::string APPLICATION_TITLE; /**!< The title of the application.*/
 
-	static const int APPLICATION_TICK = 1000.0f / 60.0f; //ms
+	static const int APPLICATION_TICK; //ms
 };
-
-const std::string ApplicationConfiguration::APPLICATION_TITLE = /**!< version.features.bugs-fixed.commit */
-"Minemonics - The Origin of Creatures v.0.54.16.670";
-
 #endif /* CONFIGURATION_APPLICATIONCONFIGURATION_H_ */

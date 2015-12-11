@@ -511,12 +511,19 @@ set(MISCHDRS
 set(MISCSRCS
 
     # configuration
-    ./configuration/EvolutionConfiguration.cpp
-    ./configuration/GUIConfiguration.cpp
-    ./configuration/PhysicsConfiguration.cpp
-    ./configuration/CEGUIConfiguration.cpp
-    ./configuration/SerializationConfiguration.cpp
-    ./configuration/LoggerConfiguration.cpp
+	./configuration/ApplicationConfiguration.cpp
+	./configuration/CameraConfiguration.cpp
+	./configuration/ControlConfiguration.cpp
+	./configuration/PhysicsConfiguration.cpp
+	./configuration/MorphologyConfiguration.cpp
+	./configuration/GeneticsConfiguration.cpp
+	./configuration/EnvironmentConfiguration.cpp
+	./configuration/EvaluationConfiguration.cpp
+	./configuration/EvolutionConfiguration.cpp
+	./configuration/CEGUIConfiguration.cpp
+	./configuration/GUIConfiguration.cpp
+	./configuration/LoggerConfiguration.cpp
+	./configuration/SerializationConfiguration.cpp
     
 	# logger
 	./utils/logging/Logger.cpp
