@@ -491,7 +491,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//initialize rotational limit motors
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-
+	//TODO: Fix the force curve
+//	double maxTorque = 5000 * (mass1 + mass2);
 	double maxTorque =
 		MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
 			* (mass1 * mass2)
