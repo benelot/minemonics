@@ -80,7 +80,7 @@ void ChaoticController::initialize() {
 //	// stronger initial force output on z
 	u[0] = 0.0f; // x
 	u[1] = 0.0; // y
-	u[2] = 2.2f; // z
+	u[2] = 0.7f; // z
 }
 
 ChaoticController* ChaoticController::clone() {

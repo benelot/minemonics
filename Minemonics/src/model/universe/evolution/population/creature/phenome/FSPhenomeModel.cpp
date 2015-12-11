@@ -604,7 +604,7 @@ void FSPhenomeModel::generateBody() {
 	bool isFixedBase = false;
 	bool setDamping = false;
 	bool gyro = false;
-	bool canSleep = true;
+	bool canSleep = false;
 
 	if (mBodyGenerated) {
 		return;
