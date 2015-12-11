@@ -1,3 +1,4 @@
+# Chua Circuit,modelLeg,0g,100s,JointPosition=>x,,JointVelocity=>y,z=>JointTorque friction 0 0 force 0.7 damping 0.05
 0	0	0.7
 0	0	0.69999
 0.000411191	0.0986858	0.69998

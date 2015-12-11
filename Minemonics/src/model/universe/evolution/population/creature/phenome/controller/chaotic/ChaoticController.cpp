@@ -73,14 +73,14 @@ ChaoticController::~ChaoticController() {
 void ChaoticController::initialize() {
 	mDataSink.initialize(mLoggerName, 3, 20);
 
-//	u[0] = -1.5f; // x
-//	u[1] = 0; // y
-//	u[2] = 0; // z
+	u[0] = -1.5f; // x
+	u[1] = 0; // y
+	u[2] = 0; // z
 
 //	// stronger initial force output on z
-	u[0] = 0.0f; // x
-	u[1] = 0.0; // y
-	u[2] = 0.7f; // z
+//	u[0] = 0.0f; // x
+//	u[1] = 0.0; // y
+//	u[2] = 0.7f; // z
 }
 
 ChaoticController* ChaoticController::clone() {
@@ -91,10 +91,10 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 	if (mControlInputs.size() >= 2 && !mFirstTime) {
 		// set the inputs to the chaotic controller
-		u[0] = mControlInputs[0]->getOutputValue();
+//		u[0] = mControlInputs[0]->getOutputValue();
 //		u[0] = mControlInputs[1]->getOutputValue();
 
-		u[1] = mControlInputs[0]->getOutputValue();
+//		u[1] = mControlInputs[0]->getOutputValue();
 //		u[1] = mControlInputs[1]->getOutputValue();
 
 //		u[2] = mControlInputs[0]->getOutputValue();
