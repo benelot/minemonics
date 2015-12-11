@@ -73,11 +73,11 @@ protected:
 
 TEST_F(MixedGenomeTest,hasNormalGenes) {
 	ASSERT_TRUE(
-		GeneticsConfiguration::GENES_INITIAL_MEAN
-		- GeneticsConfiguration::GENES_INITIAL_VAR
+		GeneticsConfiguration::GENE_QTY_INITIAL_MEAN
+		- GeneticsConfiguration::GENE_QTY_INITIAL_VAR
 		<= genome->getGenes().size()
-		<= GeneticsConfiguration::GENES_INITIAL_MEAN
-		+ GeneticsConfiguration::GENES_INITIAL_VAR);
+		<= GeneticsConfiguration::GENE_QTY_INITIAL_MEAN
+		+ GeneticsConfiguration::GENE_QTY_INITIAL_VAR);
 }
 
 TEST_F(MixedGenomeTest,areAllBranchesSet) {

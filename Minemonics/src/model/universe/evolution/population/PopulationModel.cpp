@@ -12,7 +12,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/ControlConfiguration.hpp>
-#include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/GeneticsConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -48,8 +48,8 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 	double branchiness = 0;
 	for (int i = 0; i < creatureQty; i++) {
 		branchiness = Randomness::getSingleton()->nextNormalDouble(
-			MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
-			MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
+			GeneticsConfiguration::GENE_BRANCH_INITIAL_MEAN,
+			GeneticsConfiguration::GENE_BRANCH_INITIAL_VAR);
 		addNewMember(branchiness, initialPosition);
 	}
 }

@@ -70,8 +70,8 @@ void MixedGenome::createRandomGenome(double branchiness) {
 	int geneQty = 2
 		+ abs(
 			Randomness::getSingleton()->nextNormalInt(
-				GeneticsConfiguration::GENES_INITIAL_MEAN,
-				GeneticsConfiguration::GENES_INITIAL_VAR));
+				GeneticsConfiguration::GENE_QTY_INITIAL_MEAN,
+				GeneticsConfiguration::GENE_QTY_INITIAL_VAR));
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << " Genome size: " << geneQty;
 

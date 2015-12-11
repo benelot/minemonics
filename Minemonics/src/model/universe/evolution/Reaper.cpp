@@ -15,6 +15,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/EvolutionConfiguration.hpp>
+#include <configuration/GeneticsConfiguration.hpp>
 #include <configuration/MorphologyConfiguration.hpp>
 
 //## model headers
@@ -401,8 +402,8 @@ void Reaper::sowFreshly(PopulationModel* const population,
 	double branchiness = 0;
 	for (int i = 0; i < sowFreshlyHeads; i++) {
 		branchiness = Randomness::getSingleton()->nextNormalDouble(
-			MorphologyConfiguration::BODY_BRANCH_INITIAL_MEAN,
-			MorphologyConfiguration::BODY_BRANCH_INITIAL_VAR);
+			GeneticsConfiguration::GENE_BRANCH_INITIAL_MEAN,
+			GeneticsConfiguration::GENE_BRANCH_INITIAL_VAR);
 		population->addNewMember(branchiness,
 			EvolutionConfiguration::ROOT_POSITION);
 	}
