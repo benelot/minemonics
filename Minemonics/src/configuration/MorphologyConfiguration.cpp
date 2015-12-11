@@ -72,7 +72,7 @@ const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
  * The maximum allowable torque that can be exerted by a servo motor in its effort to
  * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
  */
-const double MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 10.0f;
+const double MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 20.0f;
 
 /**
  * The maximum allowable torque that can be exerted by a servo motor in its effort to

@@ -42,7 +42,7 @@ void ModelLegBuilder::build(MixedGenome* genome,
 //	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
 
-	double damping = 0.05f;//[0.005;0.5] 0.05
+	double damping = 5.0f;//[0.005;0.5] 0.05
 	// create joint between the two limbs
 	// Hingelike
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
