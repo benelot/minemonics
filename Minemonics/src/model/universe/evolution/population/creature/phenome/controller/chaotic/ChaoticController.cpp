@@ -91,7 +91,7 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 	if (mControlInputs.size() >= 2 && !mFirstTime) {
 		// set the inputs to the chaotic controller
-//		u[0] = mControlInputs[0]->getOutputValue();
+		u[0] = mControlInputs[0]->getOutputValue();
 //		u[0] = mControlInputs[1]->getOutputValue();
 
 //		u[1] = mControlInputs[0]->getOutputValue();
