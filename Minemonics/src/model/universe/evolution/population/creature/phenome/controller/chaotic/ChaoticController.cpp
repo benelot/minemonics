@@ -32,8 +32,19 @@ ChaoticController::_Init ChaoticController::_initializer;
 ChaoticController::ChaoticController() :
 	Controller(CHAOTIC_CONTROLLER), mLoggerName(
 		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
-		ChaoticControllerGene::CHUA_CIRCUIT), mFirstTime(true) {
+		ChaoticControllerGene::CHUA_CIRCUIT), mFirstTime(true), mInitialX(0), mInitialY(
+		0), mInitialZ(0), mSpeed(1) {
 }
+
+ChaoticController::ChaoticController(
+	ChaoticControllerGene::ChaoticSystemType systemType, double initialX,
+	double initialY, double initialZ, double speed) :
+	Controller(CHAOTIC_CONTROLLER), mLoggerName(
+		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
+		systemType), mFirstTime(true), mInitialX(initialX), mInitialY(initialY), mInitialZ(
+		initialZ), mSpeed(speed) {
+}
+
 ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType) :
 	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType), mFirstTime(
@@ -73,14 +84,9 @@ ChaoticController::~ChaoticController() {
 void ChaoticController::initialize() {
 	mDataSink.initialize(mLoggerName, 3, 20);
 
-	u[0] = -1.5f; // x
-	u[1] = 0; // y
-	u[2] = 0; // z
-
-//	// stronger initial force output on z
-//	u[0] = 0.0f; // x
-//	u[1] = 0.0f; // y
-//	u[2] = 2.0f; // z
+	u[0] = mInitialX;
+	u[1] = mInitialY;
+	u[2] = mInitialZ;
 }
 
 ChaoticController* ChaoticController::clone() {
@@ -179,7 +185,14 @@ void ChaoticController::calcChuaCircuit() {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
 	}
 
-	NumericUtils::calcRK4(0, 3, u, this, 0.001f, ChaoticController::runChuaCircuit);
+	double h = 0.001f;
+	double i = mSpeed;
+	for(int i = mSpeed; i >= 1;i--) {
+		NumericUtils::calcRK4(0, 3, u, this, h, ChaoticController::runChuaCircuit);
+	}
+
+	h *= i;
+	NumericUtils::calcRK4(0, 3, u, this, h, ChaoticController::runChuaCircuit);
 }
 
 void ChaoticController::collectInputs() {

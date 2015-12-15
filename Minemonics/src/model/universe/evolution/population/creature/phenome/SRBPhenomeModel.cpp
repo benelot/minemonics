@@ -491,9 +491,12 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			break;
 		}
 		case ControllerGene::ChaoticControllerGene: {
-			ChaoticController* controller =
-				new ChaoticController(
-					((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getSystemType());
+			ChaoticControllerGene* chaoticGene =
+				((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i]);
+			ChaoticController* controller = new ChaoticController(
+				chaoticGene->getSystemType(), chaoticGene->getInitialX(),
+				chaoticGene->getInitialY(), chaoticGene->getInitialZ(),
+				chaoticGene->getSpeed());
 
 			controller->initialize();
 

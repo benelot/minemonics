@@ -17,6 +17,10 @@ class access;
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/version.hpp>
+#include <boost/archive/tmpdir.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/version.hpp>
 
 //## view headers
 //# custom headers
@@ -41,6 +45,8 @@ public:
 
 	ChaoticControllerGene();
 	ChaoticControllerGene(ChaoticSystemType systemType);
+	ChaoticControllerGene(ChaoticSystemType systemType, double initialX,
+		double initialY, double initialZ, double speed);
 	ChaoticControllerGene(const ChaoticControllerGene& gene);
 	virtual ~ChaoticControllerGene();
 
@@ -54,6 +60,42 @@ public:
 
 	ChaoticSystemType getSystemType() const {
 		return mSystemType;
+	}
+
+	double getInitialX() const {
+		return mInitialX;
+	}
+
+	double getInitialY() const {
+		return mInitialY;
+	}
+
+	double getInitialZ() const {
+		return mInitialZ;
+	}
+
+	double getSpeed() const {
+		return mSpeed;
+	}
+
+	void setInitialX(double initialX) {
+		mInitialX = initialX;
+	}
+
+	void setInitialY(double initialY) {
+		mInitialY = initialY;
+	}
+
+	void setInitialZ(double initialZ) {
+		mInitialZ = initialZ;
+	}
+
+	void setSpeed(double speed) {
+		mSpeed = speed;
+	}
+
+	void setSystemType(ChaoticSystemType systemType) {
+		mSystemType = systemType;
 	}
 
 	// Serialization ##########################
@@ -81,13 +123,18 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-		/** Serialize the base object */
-		& BOOST_SERIALIZATION_BASE_OBJECT_NVP(ControllerGene);
+		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ControllerGene) /**!< The base class of the chaotic controller */
+		& BOOST_SERIALIZATION_NVP(mSystemType) /**!< The chaotic system type*/
+		& BOOST_SERIALIZATION_NVP(mInitialX) /**!< The initial conditions of the chaotic system */
+		& BOOST_SERIALIZATION_NVP(mInitialY)/**!< The initial conditions of the chaotic system */
+		& BOOST_SERIALIZATION_NVP(mInitialZ) /**!< The initial conditions of the chaotic system */
+		& BOOST_SERIALIZATION_NVP(mSpeed); /**!< The speed of the change in the chaotic controller */
 	}
 
 private:
-	ChaoticSystemType mSystemType;
+	ChaoticSystemType mSystemType; /**!< The chaotic system type*/
+	double mInitialX, mInitialY, mInitialZ; /**!< The initial conditions of the chaotic system */
+	double mSpeed; /**!< The integration speed */
 };
 BOOST_CLASS_VERSION(ChaoticControllerGene, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_GENOME_CONTROLLER_CHAOTICCONTROLLERGENE_HPP_ */

@@ -41,6 +41,8 @@ class access;
 class ChaoticController: public Controller {
 public:
 	ChaoticController();
+	ChaoticController(ChaoticControllerGene::ChaoticSystemType systemType,
+		double initialX, double initialY, double initialZ, double speed);
 	ChaoticController(ChaoticControllerGene::ChaoticSystemType systemType);
 	ChaoticController(const ChaoticController& chaoticController);
 	virtual ~ChaoticController();
@@ -53,7 +55,8 @@ public:
 
 	double* chuaCircuit(double t, int dimensions, double u[]);
 
-	static double* runChuaCircuit(double t, int dimensions, double u[],ChaoticController* controller);
+	static double* runChuaCircuit(double t, int dimensions, double u[],
+		ChaoticController* controller);
 
 	void calcChuaCircuit();
 
@@ -118,7 +121,7 @@ private:
 		}
 	} _initializer;
 
-	double mTime;	/**!< The timer of of sine wave. */
+	double mTime; /**!< The timer of of sine wave. */
 
 	double u[3]; /**!< 3 dimensions of the chua circuit */
 
@@ -127,6 +130,9 @@ private:
 	ChaoticControllerGene::ChaoticSystemType mSystemType;
 
 	std::string mLoggerName;
+
+	double mInitialX, mInitialY, mInitialZ; /**!< The initial conditions of the chaotic system */
+	double mSpeed; /**!< The integration speed */
 };
 
 BOOST_CLASS_VERSION(ChaoticController, 1)

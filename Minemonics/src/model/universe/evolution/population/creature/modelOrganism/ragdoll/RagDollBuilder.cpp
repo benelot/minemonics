@@ -74,11 +74,23 @@ void RagDollBuilder::build(MixedGenome* genome,
 		}
 		break;
 	case ControllerGene::ChaoticControllerGene:
+		double x = -1.5f; // x
+		double y = 0; // y
+		double z = 0; // z
+
+		// stronger initial force output on z
+//		double x = 0.0f; // x
+//		double y = 0.0f; // y
+//		double z = 2.0f; // z
+
+		double speed = 1;
+
 		// create instances of the chaotic controller gene for the morphogene.
 		for (int i = 0; i < 3; i++) {
 			ChaoticControllerGene* chaoticController =
-				new ChaoticControllerGene();
-			chaoticController->initialize();
+				new ChaoticControllerGene(ChaoticControllerGene::CHUA_CIRCUIT,
+					x, y, z, speed);
+//			chaoticController->initialize();
 			morphogeneBranch->getControllerGenes().push_back(chaoticController);
 		}
 	}
