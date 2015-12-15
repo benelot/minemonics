@@ -50,7 +50,21 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 		branchiness = Randomness::getSingleton()->nextNormalDouble(
 			GeneticsConfiguration::GENE_BRANCH_INITIAL_MEAN,
 			GeneticsConfiguration::GENE_BRANCH_INITIAL_VAR);
-		addNewMember(branchiness, initialPosition);
+
+		//add new creature
+		CreatureModel* creatureModel = new CreatureModel(this,
+			mPlanetModel->getPhysicsModelType(), initialPosition);
+
+		//	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
+		//	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
+		ModelLegBuilder::build(&creatureModel->getGenotype(),
+			ControlConfiguration::CONTROLLER_TYPE);
+
+//		creatureModel->createRandomGenome(branchiness);
+		creatureModel->setNew(true);
+		creatureModel->setDynasty(mDynastyQty);
+		addMember(creatureModel);
+		mDynastyQty++;
 	}
 }
 
@@ -95,11 +109,7 @@ void PopulationModel::addNewMember(const double branchiness,
 	CreatureModel* creatureModel = new CreatureModel(this,
 		mPlanetModel->getPhysicsModelType(), rootPosition);
 
-//	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-//	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-	ModelLegBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-
-//	creatureModel->createRandomGenome(branchiness);
+	creatureModel->createRandomGenome(branchiness);
 	creatureModel->setNew(true);
 	creatureModel->setDynasty(mDynastyQty);
 	mDynastyQty++;
