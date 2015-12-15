@@ -49,7 +49,7 @@ public:
 
 	static const std::string TOP_FOLDER;
 
-	static const bool LOG_SPECIAL = true;
+	static const bool LOG_SPECIAL;
 };
 
 #endif /* CONFIGURATION_LOGGERCONFIGURATION_HPP_ */

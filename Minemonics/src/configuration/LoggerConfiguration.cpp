@@ -23,3 +23,5 @@ const std::string LoggerConfiguration::loggedClasses =
 ;
 
 const std::string LoggerConfiguration::TOP_FOLDER = "logs";
+
+const bool LoggerConfiguration::LOG_SPECIAL = false;

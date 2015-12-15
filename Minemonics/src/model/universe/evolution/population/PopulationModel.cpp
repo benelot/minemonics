@@ -56,9 +56,9 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 			mPlanetModel->getPhysicsModelType(), initialPosition);
 
 		//	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-		//	SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-		ModelLegBuilder::build(&creatureModel->getGenotype(),
-			ControlConfiguration::CONTROLLER_TYPE);
+			SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
+//		ModelLegBuilder::build(&creatureModel->getGenotype(),
+//			ControlConfiguration::CONTROLLER_TYPE);
 
 //		creatureModel->createRandomGenome(branchiness);
 		creatureModel->setNew(true);
