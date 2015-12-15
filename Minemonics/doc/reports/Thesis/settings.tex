@@ -1,0 +1,100 @@
+% lslisting style for python
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	commentstyle=\color{green},
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=Python,
+	morekeywords={off},
+	showstringspaces=false,
+	stringstyle=\color{purple},
+	title=\lstname
+}
+
+% lslisting style for matlab
+\lstset{
+	basicstyle=\ttfamily,
+	breaklines=true,
+	commentstyle=\color{green},
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=Matlab,
+	morekeywords={off},
+	showstringspaces=false,
+	stringstyle=\color{purple},
+	title=\lstname
+}
+
+\pdfpagewidth=\paperwidth
+\pdfpageheight=\paperheight
+
+\expandafter\def\expandafter\normalsize\expandafter{%
+    \normalsize
+    \setlength\abovedisplayskip{4pt}
+    \setlength\belowdisplayskip{4pt}
+    \setlength\abovedisplayshortskip{4pt}
+    \setlength\belowdisplayshortskip{4pt}
+}
+
+% define colors for cheatsheet
+%https://en.wikibooks.org/wiki/LaTeX/Colors#Predefined_colors
+\definecolor{sectionColor}{HTML}{FF7F00}
+\definecolor{subsectionColor}{HTML}{EE0000}
+\definecolor{subsubsectionColor}{HTML}{EE6600}
+
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[hyperref=true,
+            url=true,
+            isbn=false,
+            backend=biber,
+            backref=true,
+            bibencoding=utf8,
+            style=custom-numeric-comp,
+            citereset=chapter,
+            maxcitenames=3,
+            maxbibnames=100,
+            block=none]{biblatex}
+
+
+% the followings activate 'custom-english-ordinal-sscript.lbx'
+% in order to print ordinal 'edition' suffixes as superscripts,
+% and adjusts (reduces) spacing between suffix and following "ed."
+\DeclareLanguageMapping{english}{custom-english-ordinal-sscript}
+\DeclareFieldFormat{edition}%
+                   {\ifinteger{#1}%
+                    {\mkbibordedition{#1}\addthinspace{}ed.}%
+                    {#1\isdot}}
+
+
+% back reference text preceding the page number ("see p.")
+\DefineBibliographyStrings{english}{%
+    backrefpage  = {see p.}, % for single page number
+    backrefpages = {see pp.} % for multiple page numbers
+}
+
+% removes period at the very end of bibliographic record
+\renewcommand{\finentrypunct}{}
+
+% removes period after DOI and suppresses capitalization
+% of the word following DOI ("See p. xx" -> "see p. xx")
+\renewcommand{\newunitpunct}{\addspace\midsentence}
+
+\DeclareFieldFormat{journaltitle}{\mkbibemph{#1},} % italic journal title with comma
+\DeclareFieldFormat[inbook,thesis]{title}{\mkbibemph{#1}\addperiod} % italic title with period
+\DeclareFieldFormat[article]{title}{#1} % title of journal article is printed as normal text
+\DeclareFieldFormat[article]{volume}{\textbf{#1}\addcolon\space} % makes volume of journal bold and adds colon
+\DeclareFieldFormat{pages}{#1} % removes pagination (p./pp.) before page numbers
+
+%%%%%%%%%
+% the command \sjcitep defined below prints footnote citation above punctuation
+\newlength{\spc} % declare a variable to save spacing value
+\newcommand{\sjcitep}[2][]{% new command with two arguments: optional (#1) and mandatory (#2)
+        \settowidth{\spc}{#1}% set value of \spc variable to the width of #1 argument
+        \addtolength{\spc}{-1.8\spc}% subtract from \spc about two (1.8) of its values making its magnitude negative
+        #1% print the optional argument
+        \hspace*{\spc}% print an additional negative spacing stored in \spc after #1
+        \supershortnotecite{#2}}% print (cite) the mandatory argument
+%%%%%%%%%

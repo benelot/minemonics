@@ -100,18 +100,18 @@
 \thispagestyle{empty}
 \newpage
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\usepackage{amsmath,amsfonts,amssymb,amscd,amsthm,xspace}
-\theoremstyle{plain}
-\newtheorem{example}{Example}[chapter]
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{axiom}[theorem]{Axiom}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+%\usepackage{amsmath,amsfonts,amssymb,amscd,amsthm,xspace}
+%\theoremstyle{plain}
+%\newtheorem{example}{Example}[chapter]
+%\newtheorem{theorem}{Theorem}[chapter]
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{axiom}[theorem]{Axiom}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+%\theoremstyle{remark}
+%\newtheorem{remark}[theorem]{Remark}
 \usepackage[centerlast,small,sc]{caption}
 \setlength{\captionmargin}{20pt}
 \newcommand{\fref}[1]{Figure~\ref{#1}}
@@ -146,10 +146,11 @@
         keywordstyle=\color{blue},
         commentstyle=\color[rgb]{0.13,0.55,0.13}\em,
         stringstyle=\color[rgb]{0.7,0,0} }
-\usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
-   bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,
-   colorlinks,linkcolor={blue},citecolor={blue},urlcolor={red},
-   pdfstartview={FitV},unicode,breaklinks=true]{hyperref}
+%\usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
+%   bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,
+%   colorlinks,linkcolor={blue},citecolor={blue},urlcolor={red},
+%   pdfstartview={FitV},unicode,breaklinks=true]{hyperref}
+\usepackage[linkcolor=black,colorlinks=true,urlcolor=black,citecolor=black,filecolor=black]{hyperref}
 \usepackage[ngerman,english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -181,13 +182,13 @@
 %	defined as \examname above so you cite it as \examname
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Development of a portable pneumatic system for prosthetic hands} % Your thesis title - this is used in the title and abstract
+\thesistitle{Emergent gait periodicity in evolved creatures on unknown terrains} % Your thesis title - this is used in the title and abstract
 %-------------------------------------------------  
-\supervisor{Msc Konstantinos \textsc{Dermitzakis}, \\ Prof. Dr. Koh \textsc{Hosoda} \\ \& Prof. Dr. Rolf \textsc{Pfeifer}} % You supervisor's name - this is used in the title page
+\supervisor{Prof. Dr. habil. Ruedi \textsc{STOOP}} % You supervisor's name - this is used in the title page
 %-------------------------------------------------   
 \examiner{} % Your examiner's name - this is not currently used anywhere in the template, cite it with \examname if you want it
 %-------------------------------------------------   
-\degree{Bachelor of Science} % Your degree name - this is currently used in the title page and abstract
+\degree{Master of Science} % Your degree name - this is currently used in the title page and abstract
 %-------------------------------------------------   
 \authors{Benjamin \textsc{Ellenberger}} % Your name - this is used in the title page and abstract
 %-------------------------------------------------   
@@ -197,11 +198,16 @@
 %-------------------------------------------------   
 \keywords{} % Keywords for your thesis - this is not currently used anywhere in the template, cite it with \keywordnames if you want it
 %-------------------------------------------------   
-\university{\texorpdfstring{\href{http://www.uzh.ch} % Your university's URL
+\university{\texorpdfstring{\href{http://www.ethz.ch} % Your university's URL
+                {ETH Zürich}} % Your university's name - this is currently used in the title page
+                {ETH Zürich}/\texorpdfstring{\href{http://www.uzh.ch} % Your university's URL
                 {University of Zürich}} % Your university's name - this is currently used in the title page
                 {University of Zürich}}
 %-------------------------------------------------   
-\UNIVERSITY{\texorpdfstring{\href{http://www.uzh.ch} % Your university's URL
+\UNIVERSITY{\texorpdfstring{\href{http://www.ethz.ch} % Your university's URL
+                {ETH ZÜRICH}} % Your university's name - this is currently used in the title page
+                {ETH ZÜRICH}/
+\texorpdfstring{\href{http://www.uzh.ch} % Your university's URL
                 {UNIVERSITY OF ZÜRICH}} % Your university's name in capitals - this is currently used in the abstract page
                 {UNIVERSITY OF ZÜRICH}}
 %-------------------------------------------------                
@@ -213,26 +219,27 @@
                 {DEPARTMENT OF INFORMATICS}} % Your department's name in capitals - this is not currently used anywhere in the template, cite it with \DEPTNAME if you want it
                 {DEPARTMENT OF INFORMATICS}}
 %-------------------------------------------------                
-\group{\texorpdfstring{\href{http://www.ailab.ifi.uzh.ch} % Your research group's URL
-                {Artificial Intelligence Laboratory}} % Your research group's name - this is currently used in the title page 
-                {Artificial Intelligence Laboratory}}
+\group{\texorpdfstring{\href{http://stoop.ini.uzh.ch/} % Your research group's URL
+                {Stoop Group}} % Your research group's name - this is currently used in the title page 
+                {Stoop Group}}
 %-------------------------------------------------                
-\GROUP{\texorpdfstring{\href{http://www.ailab.ifi.uzh.ch} % Your research group's URL
-                {ARTIFICIAL INTELLIGENCE LABORATORY}} % Your research group's name in capitals - this is not currently used anywhere in the template, cite it with \GROUPNAME if you want it
-                {ARTIFICIAL INTELLIGENCE LABORATORY)}}
+\GROUP{\texorpdfstring{\href{http://stoop.ini.uzh.ch/} % Your research group's URL
+                {STOOP GROUP}} % Your research group's name in capitals - this is not currently used anywhere in the template, cite it with \GROUPNAME if you want it
+                {STOOP GROUP)}}
 %-------------------------------------------------                
-\faculty{\texorpdfstring{\href{http://www.ailab.ifi.uzh.ch} % Your faculty's URL
-                {Artificial Intelligence Laboratory}} % Your faculty's name - this is currently used in the abstract page
-                {Artificial Intelligence Laboratory}}
+\faculty{\texorpdfstring{\href{https://www.ini.uzh.ch/} % Your faculty's URL
+                {Institute of Neuroinformatics}} % Your faculty's name - this is currently used in the abstract page
+                {Institute of Neuroinformatics}}
 %-------------------------------------------------                
-\FACULTY{\texorpdfstring{\href{http://www.ailab.ifi.uzh.ch} % Your faculty's URL
-                {ARTIFICIAL INTELLIGENCE LABORATORY}} % Your faculty's name in capitals - this is not currently used anywhere in the template, cite it with \FACNAME if you want it
-                {ARTIFICIAL INTELLIGENCE LABORATORY}}
+\FACULTY{\texorpdfstring{\href{https://www.ini.uzh.ch/} % Your faculty's URL
+                {INSTITUTE OF NEUROINFORMATICS}} % Your faculty's name in capitals - this is not currently used anywhere in the template, cite it with \FACNAME if you want it
+                {INSTITUTE OF NEUROINFORMATICS}}
 %----------------------------------------------------------------------------------------    
 
 % The default title page, this is not used in this www.latextemplates.com version            
 \renewcommand\maketitle{
   \btypeout{Title Page}
+  % PDF meta-data
   \hypersetup{pdftitle={\@title}}
   \hypersetup{pdfsubject=\subjectname}
   \hypersetup{pdfauthor=\authornames}

@@ -24,27 +24,82 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
+
 \documentclass[11pt, a4paper, oneside]{Thesis} % Paper size, default font size and one-sided paper
 
 \graphicspath{{./Pictures/}} % Specifies the directory where pictures are stored
 
-%% Packages
-%% ========
+\hypersetup{linkcolor=black} 
 
-\input{commonpackages} %% many common packages
+\usepackage{subfiles}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{chngpage}
+\usepackage[hypcap=true]{subcaption}
+\usepackage{listings}
 
-\input{extrapackages} %% Some more packages that you may want to use.  Have a look at the
-%% file, and consult the package docs for each.
+%\begin{comment}
+\usepackage[hyperref=true,
+            url=true,
+            isbn=false,
+            backend=biber,
+            backref=true,
+            bibencoding=utf8,
+            style=custom-numeric-comp,
+            citereset=chapter,
+            maxcitenames=3,
+            maxbibnames=100,
+            block=none]{biblatex}
 
-\input{theoremsetup} %% Theorem environments.  You will have to adapt this for a German thesis.
 
-%\input{macrosetup} %% Helpful macros.
+% the followings activate 'custom-english-ordinal-sscript.lbx'
+% in order to print ordinal 'edition' suffixes as superscripts,
+% and adjusts (reduces) spacing between suffix and following "ed."
+\DeclareLanguageMapping{english}{custom-english-ordinal-sscript}
+\DeclareFieldFormat{edition}%
+                   {\ifinteger{#1}%
+                    {\mkbibordedition{#1}\addthinspace{}ed.}%
+                    {#1\isdot}}
 
-\input{settings} %%page layout settings and listing templates etc.
 
+% back reference text preceding the page number ("see p.")
+\DefineBibliographyStrings{english}{%
+    backrefpage  = {see p.}, % for single page number
+    backrefpages = {see pp.} % for multiple page numbers
+}
+
+% removes period at the very end of bibliographic record
+\renewcommand{\finentrypunct}{}
+
+% removes period after DOI and suppresses capitalization
+% of the word following DOI ("See p. xx" -> "see p. xx")
+\renewcommand{\newunitpunct}{\addspace\midsentence}
+
+\DeclareFieldFormat{journaltitle}{\mkbibemph{#1},} % italic journal title with comma
+\DeclareFieldFormat[inbook,thesis]{title}{\mkbibemph{#1}\addperiod} % italic title with period
+\DeclareFieldFormat[article]{title}{#1} % title of journal article is printed as normal text
+\DeclareFieldFormat[article]{volume}{\textbf{#1}\addcolon\space} % makes volume of journal bold and adds colon
+\DeclareFieldFormat{pages}{#1} % removes pagination (p./pp.) before page numbers
+
+%%%%%%%%%
+% the command \sjcitep defined below prints footnote citation above punctuation
+\newlength{\spc} % declare a variable to save spacing value
+\newcommand{\sjcitep}[2][]{% new command with two arguments: optional (#1) and mandatory (#2)
+        \settowidth{\spc}{#1}% set value of \spc variable to the width of #1 argument
+        \addtolength{\spc}{-1.8\spc}% subtract from \spc about two (1.8) of its values making its magnitude negative
+        #1% print the optional argument
+        \hspace*{\spc}% print an additional negative spacing stored in \spc after #1
+        \supershortnotecite{#2}}% print (cite) the mandatory argument
+%%%%%%%%%
 \addbibresource{Bibliography.bib} % The references (bibliography) information are stored in the file named "Bibliography.bib"
+%\end{comment}
 
+%\usepackage[square, numbers, comma, compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers'
+\hypersetup{urlcolor=black, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
 \title{\ttitle} % Defines the thesis title - don't touch this
+
+\usepackage{multirow}
 
 \begin{document}
 
@@ -75,7 +130,7 @@
 \begin{center}
 
 \textsc{\LARGE \univname}\\[1.5cm] % University name
-\textsc{\Large Master's Thesis}\\[0.5cm] % Thesis type
+\textsc{\Large Bachelor Thesis}\\[0.5cm] % Thesis type
 
 \HRule \\[0.4cm] % Horizontal line
 {\huge \bfseries \ttitle}\\[0.4cm] % Thesis title
@@ -84,27 +139,28 @@
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} \large
 \emph{Author:}\\
-\href{http://www.sleepy-robots.org}{\authornames \\ 09--919--622} % Author name - remove the \href bracket to remove the link
+\href{http://www.sleepy-robots.org}{\authornames \\ Arni AG \\ 09--919--622} % Author name - remove the \href bracket to remove the link
 \end{flushleft}
 \end{minipage}
 \begin{minipage}{0.45\textwidth}
 \begin{flushright} \large
 \emph{Supervisor:} \\
-\href{http://stoop.ini.uzh.ch}{\supname\linebreak} % Supervisor name - remove the \href bracket to remove the link
+\href{http://www.ailab.ifi.uzh.ch}{\supname} % Supervisor name - remove the \href bracket to remove the link  
 \end{flushright}
 \end{minipage}\\[3cm]
  
-\large \textit{A thesis submitted in fulfilment of the requirements\\ for the degree of \degreename} % University requirement text
+\large \textit{A thesis submitted in fulfilment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
 \textit{in the}\\[0.4cm]
-\groupname/\facname\\\deptname\\[2cm] % Research group name and department name
+\groupname\\\deptname\\[2cm] % Research group name and department name
  
-{\large Feb 29, 2015}\\[2.5cm] % Date
+{\large Oct 30, 2013}\\[2.5cm] % Date
 %\includegraphics{uzh_logo_e_pos} % University/department logo - uncomment to place it
  
 \vfill
 \end{center}
 
 \end{titlepage}
+
 %----------------------------------------------------------------------------------------
 %	DECLARATION PAGE
 %	Your institution may give you a different text to place here
@@ -297,12 +353,55 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 % Uncomment the lines as you write the chapters
 %Introduction
 % Background
-% Something
+% Anatomical description (intrinsic/ extrinsic muscles/types of muscles)
 % Motivation
 % Approach
 % Outline
-\subfile{./Chapter1}
+%\subfile{./Chapter1}
 
+%Prosthetics - An Overview of the last 50 years
+% Presentation of different types of prostheses
+% Discussion of prosthesis abandonment
+%\subfile{./Chapter2} 
+
+%Prosthetic Requirements & Constraints Definition
+% Dexterity of the hand system
+%  Grip patterns necessary to ADLs
+% Representation of different muscles in the prosthesis
+% Discussion of the constraints(weight, size,noise)
+%\subfile{./Chapter3}
+
+%Hand design
+% Pressure Generation
+%  Determination of the accumulator
+%  Determination of the compressor & tank system
+%  Calculation of the tank size
+% Pressure Distribution
+%  Choice of the valve(comparison of valves)
+%  Valve labor testing(Lee products)
+% Pressure Transformation
+%  Creation of pneumatic actuators
+%  Ratio between inner and outer tube
+%  Muscle diameter decision
+%  Muscle length determination
+%  Muscle strength diagrams
+%  Muscle volume calculation
+% Force Distribution
+%  Formula for the tendon length
+% Control system
+%  Choice of the micro controller
+%  Control using a PID
+%  PID & sensory-motor coupling with neurons
+%\subfile{./Chapter4} 
+
+%Comparison
+% Fingerspeed/strength test
+% Comparison of the system properties with other systems
+% Discussion of energy consumption
+%\subfile{./Chapter5} 
+
+%Conclusion
+%\subfile{./Chapter6}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
@@ -315,11 +414,15 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-% Give the appendix A a meaning
-\subfile{./AppendixA}
+% How to make pneumatic artificial muscles
+%\subfile{./AppendixA}
 
+%Listing of robotic hands and their properties
+%\subfile{./AppendixB}
 
-\subfile{TODO.tex}
+%Listing of human hand muscles
+%\subfile{./AppendixC}
+%\end{comment}
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 
