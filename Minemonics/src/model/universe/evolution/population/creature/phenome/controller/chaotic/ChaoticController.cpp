@@ -79,8 +79,8 @@ void ChaoticController::initialize() {
 
 //	// stronger initial force output on z
 //	u[0] = 0.0f; // x
-//	u[1] = 0.0; // y
-//	u[2] = 0.7f; // z
+//	u[1] = 0.0f; // y
+//	u[2] = 2.0f; // z
 }
 
 ChaoticController* ChaoticController::clone() {
@@ -90,6 +90,7 @@ ChaoticController* ChaoticController::clone() {
 void ChaoticController::perform(const double timeSinceLastTick) {
 
 	if (mControlInputs.size() >= 2 && !mFirstTime) {
+		// LIMIT x
 		// set the inputs to the chaotic controller
 //		u[0] = mControlInputs[0]->getOutputValue();
 //		u[0] = mControlInputs[1]->getOutputValue();
@@ -127,16 +128,15 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 	distributeOutput(output); // distribute the output to the adjacent controllers or endpoints
 }
 
-double* chuaCircuit(double t, int dimensions, double u[]) {
+double* ChaoticController::chuaCircuit(double t, int dimensions, double u[]) {
 	double c1 = 15.6;
 	double c2 = 1;
 	double c3 = 28;
 	double m0 = -0.714; /**!< slope in outer region */
 	double m1 = -1.143; /**!< slope in inner region */
 	double b = 1; /**!< Breakpoints */
-	//double limitValue = -0.5;
-	//double limitSoftness = 7;
-	double g = m0 * u[0] + (m1 - m0) / 2.0f * (abs(u[0] + b) - abs(u[0] - b));
+
+	double g = m0 * u[0] + (m1 - m0) / 2.0f * (abs(u[0] + b) - abs(u[0] - b)); // a 3-segment piecewise-linear equation (Chua diode)
 
 	double* uout = new double[dimensions];
 	uout[0] = c1 * (u[1] - u[0] - g);
@@ -144,7 +144,27 @@ double* chuaCircuit(double t, int dimensions, double u[]) {
 	uout[1] = c2 * (u[0] - u[1] + u[2]);
 	uout[2] = -c3 * u[1];
 
+	// LIMIT dx/dt
+	//prepare limiter
+//	double limiter = mControlInputs[0]->getOutputValue();
+//	double limiter = mControlInputs[1]->getOutputValue();
+
+	//Sample simple limiter
+	//double limitValue = 2;//(* 1.9/Period 1 limit cycle // 2.23/Period 4 limit \cycle // >2.4/Not limited *)
+	//double softness = 7; //(* Softness *)
+	//double limiter = (1.0f/2.0f)*(std::tanh(softness* (limitValue - u[0])) + 1.0f);
+
+	// where do we limit?
+//	uout[0] *= limiter;
+//	uout[1] *= limiter;
+//	uout[2] *= limiter; //	(limiter >= 1.0f) ? 1.0f : limiter;
+
 	return uout;
+}
+
+double* ChaoticController::runChuaCircuit(double t, int dimensions, double u[],
+	ChaoticController* controller) {
+	return controller->chuaCircuit(t, dimensions, u);
 }
 
 void ChaoticController::calcChuaCircuit() {
@@ -159,7 +179,7 @@ void ChaoticController::calcChuaCircuit() {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
 	}
 
-	NumericUtils::calcRK4(0, 3, u, 0.001f, &chuaCircuit);
+	NumericUtils::calcRK4(0, 3, u, this, 0.001f, ChaoticController::runChuaCircuit);
 }
 
 void ChaoticController::collectInputs() {

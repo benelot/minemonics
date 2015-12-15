@@ -1,15 +1,27 @@
-/*
- * NumericUtils.hpp
- *
- *  Created on: Nov 2, 2015
- *      Author: leviathan
- */
-
 #ifndef UTILS_NUMERICUTILS_HPP_
 #define UTILS_NUMERICUTILS_HPP_
 
-/*
- *
+//# corresponding headers
+//# forward declarations
+//# system headers
+//## controller headers
+//## model headers
+//## view headers
+//# custom headers
+//## base headers
+//## configuration headers
+//## controller headers
+//## model headers
+#include <model/universe/evolution/population/creature/phenome/controller/chaotic/ChaoticController.hpp>
+
+//## view headers
+//## utils headers
+
+/**
+ * @brief		The Numeric utils is a helper class to perform numerical methods
+ * @details		Details
+ * @date		2015-11-02
+ * @author		Benjamin Ellenberger
  */
 class NumericUtils {
 public:
@@ -69,23 +81,22 @@ public:
 		double u, u1, u2, u3;
 
 		//  Get four sample values of the derivative.
-		f0 = derivFunction(t0, (*u0) );
+		f0 = derivFunction(t0, (*u0));
 
 		t1 = t0 + dt / 2.0;
-		u1 = (*u0)  + dt * f0 / 2.0;
+		u1 = (*u0) + dt * f0 / 2.0;
 		f1 = derivFunction(t1, u1);
 
 		t2 = t0 + dt / 2.0;
-		u2 = (*u0)  + dt * f1 / 2.0;
+		u2 = (*u0) + dt * f1 / 2.0;
 		f2 = derivFunction(t2, u2);
 
 		t3 = t0 + dt;
-		u3 = (*u0)  + dt * f2;
+		u3 = (*u0) + dt * f2;
 		f3 = derivFunction(t3, u3);
 
 		//  Combine to estimate the solution at time T0 + DT.
 		u = (*u0) + dt * (f0 + 2.0 * f1 + 2.0 * f2 + f3) / 6.0;
-
 
 		(*u0) = u;
 	}
@@ -165,6 +176,60 @@ public:
 			u3[i] = u0[i] + dt * f2[i];
 		}
 		f3 = derivFunction(t3, dimensions, u3);
+
+		u = new double[dimensions];
+		for (i = 0; i < dimensions; i++) { //  Combine them to estimate the solution.
+			u[i] = u0[i]
+				+ dt * (f0[i] + 2.0 * f1[i] + 2.0 * f2[i] + f3[i]) / 6.0;
+		}
+
+		delete[] f0; //  Free memory.
+		delete[] f1; //  Free memory.
+		delete[] f2; //  Free memory.
+		delete[] f3; //  Free memory.
+		delete[] u1; //  Free memory.
+		delete[] u2; //  Free memory.
+		delete[] u3; //  Free memory.
+
+		for (i = 0; i < dimensions; i++) { //  Combine them to estimate the solution.
+			u0[i] = u[i];
+		}
+		delete[] u;
+	}
+
+	//TODO: Can I use the ChaoticController specific derivFunction without specifying ChaoticController explicitly?
+	static void calcRK4(double t0, int dimensions, double* u0,
+		ChaoticController* controller, double dt,
+		double* derivFunction(double t, int dimensions, double u[],
+			ChaoticController* controller)) {
+		double *f0, *f1, *f2, *f3;
+		int i;
+		double t1, t2, t3;
+		double *u, *u1, *u2, *u3;
+
+		//  Get four sample values of the derivative.
+		f0 = derivFunction(t0, dimensions, u0, controller);
+
+		t1 = t0 + dt / 2.0;
+		u1 = new double[dimensions];
+		for (i = 0; i < dimensions; i++) {
+			u1[i] = u0[i] + dt * f0[i] / 2.0;
+		}
+		f1 = derivFunction(t1, dimensions, u1, controller);
+
+		t2 = t0 + dt / 2.0;
+		u2 = new double[dimensions];
+		for (i = 0; i < dimensions; i++) {
+			u2[i] = u0[i] + dt * f1[i] / 2.0;
+		}
+		f2 = derivFunction(t2, dimensions, u2, controller);
+
+		t3 = t0 + dt;
+		u3 = new double[dimensions];
+		for (i = 0; i < dimensions; i++) {
+			u3[i] = u0[i] + dt * f2[i];
+		}
+		f3 = derivFunction(t3, dimensions, u3, controller);
 
 		u = new double[dimensions];
 		for (i = 0; i < dimensions; i++) { //  Combine them to estimate the solution.

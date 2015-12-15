@@ -51,6 +51,10 @@ public:
 	 */
 	void initialize();
 
+	double* chuaCircuit(double t, int dimensions, double u[]);
+
+	static double* runChuaCircuit(double t, int dimensions, double u[],ChaoticController* controller);
+
 	void calcChuaCircuit();
 
 	/**
