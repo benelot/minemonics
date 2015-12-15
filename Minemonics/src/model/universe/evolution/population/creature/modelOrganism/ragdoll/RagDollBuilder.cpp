@@ -11,6 +11,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/MixedGenome.hpp>
@@ -21,10 +23,6 @@
 //## view headers
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
-
-#ifndef UNIV_EPS
-#define UNIV_EPS 0.01f
-#endif
 
 void RagDollBuilder::build(MixedGenome* genome,
 	ControllerGene::ControllerType controllerType) {
@@ -103,7 +101,8 @@ void RagDollBuilder::build(MixedGenome* genome,
 		false, jointRotation * Ogre::Vector3(1, 0, 0),
 		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 		Ogre::Vector3(damping, damping, damping),
-		Ogre::Vector3(-M_PI_4, -M_PI_4, 0), Ogre::Vector3(M_PI_4, M_PI_4, 0),
+		Ogre::Vector3(-M_PI_4, -M_PI_4, -PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(M_PI_4, M_PI_4, PhysicsConfiguration::UNIV_EPS),
 		Ogre::Vector3(btScalar(gapSize * -0.18f), btScalar(gapSize * -0.10f),
 			btScalar(gapSize * 0.f)));
 
@@ -144,7 +143,8 @@ void RagDollBuilder::build(MixedGenome* genome,
 		false, jointRotation * Ogre::Vector3(1, 0, 0),
 		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 		Ogre::Vector3(damping, damping, damping),
-		Ogre::Vector3(-M_PI_4, -M_PI_4, 0), Ogre::Vector3(M_PI_4, M_PI_4, 0),
+		Ogre::Vector3(-M_PI_4, -M_PI_4, -PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(M_PI_4, M_PI_4, PhysicsConfiguration::UNIV_EPS),
 		Ogre::Vector3(btScalar(gapSize * 0.18f), btScalar(gapSize * -0.10f),
 			btScalar(ragDollSize * 0.f)));
 
@@ -340,8 +340,11 @@ void RagDollBuilder::build(MixedGenome* genome,
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
 		false, jointRotation * Ogre::Vector3(1, 0, 0),
 		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(0, 0, 3 * M_PI_4),
+		Ogre::Vector3(damping, damping, damping),
+		Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+			-PhysicsConfiguration::UNIV_EPS, -PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
+			PhysicsConfiguration::UNIV_EPS, 3 * M_PI_4),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.225f),
 			btScalar(gapSize * 0.f)));
 
@@ -401,8 +404,11 @@ void RagDollBuilder::build(MixedGenome* genome,
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
 		false, jointRotation * Ogre::Vector3(1, 0, 0),
 		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(0, 0, 3 * M_PI_4),
+		Ogre::Vector3(damping, damping, damping),
+		Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+			-PhysicsConfiguration::UNIV_EPS, -PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
+			PhysicsConfiguration::UNIV_EPS, 3 * M_PI_4),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.225f),
 			btScalar(gapSize * 0.f)));
 
@@ -462,8 +468,11 @@ void RagDollBuilder::build(MixedGenome* genome,
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
 		false, jointRotation * Ogre::Vector3(1, 0, 0),
 		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(3 * M_PI_4, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
+		Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+			-PhysicsConfiguration::UNIV_EPS, -PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(3 * M_PI_4, PhysicsConfiguration::UNIV_EPS,
+			PhysicsConfiguration::UNIV_EPS),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.18f),
 			btScalar(gapSize * 0.f)));
 
@@ -523,8 +532,11 @@ void RagDollBuilder::build(MixedGenome* genome,
 	morphogeneBranch = new MorphogeneBranch(JointPhysics::HINGE_JOINT, false,
 		false, jointRotation * Ogre::Vector3(1, 0, 0),
 		jointRotation * Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(damping, damping, damping), Ogre::Vector3(0, 0, 0),
-		Ogre::Vector3(3 * M_PI_4, 0, 0),
+		Ogre::Vector3(damping, damping, damping),
+		Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+			-PhysicsConfiguration::UNIV_EPS, -PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(3 * M_PI_4, PhysicsConfiguration::UNIV_EPS,
+			PhysicsConfiguration::UNIV_EPS),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.18f),
 			btScalar(gapSize * 0.f)));
 

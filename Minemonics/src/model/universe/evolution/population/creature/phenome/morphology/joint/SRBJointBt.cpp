@@ -203,7 +203,6 @@ SRBJointBt::~SRBJointBt() {
 
 void SRBJointBt::update(double timeSinceLastTick) {
 	//apply motor forces
-	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()
@@ -315,14 +314,20 @@ void SRBJointBt::setAngularDamping(double jointPitchDamping,
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
 		mJoint->enableAngularMotor(true, 0,
 			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
-				* mLimbMassForceScalar);
+			* mLimbMassForceScalar);
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 		mJoint->getRotationalLimitMotor(0)->m_enableMotor = true;
 		mJoint->getRotationalLimitMotor(1)->m_enableMotor = true;
 		mJoint->getRotationalLimitMotor(2)->m_enableMotor = true;
-		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x * mLimbMassForceScalar;
-		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y * mLimbMassForceScalar;
-		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z * mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(0)->m_maxMotorForce =
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
+				* mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(1)->m_maxMotorForce =
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.y
+				* mLimbMassForceScalar;
+		mJoint->getRotationalLimitMotor(2)->m_maxMotorForce =
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.z
+				* mLimbMassForceScalar;
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRING2CONSTRAINT
 		mJoint->enableMotor(0, true);
 		mJoint->enableMotor(1, true);
@@ -410,26 +415,30 @@ void SRBJointBt::applyJointTorque(int jointAxisIndex, double torque) {
 		return;
 	}
 
-	// axis of constraint frame
-	btVector3 hingeAxisLocalA = mJoint->getFrameOffsetA().getBasis().getColumn(
-		col);
+	if (abs(
+		mJointUpperLimits[col] - mJointLowerLimits[col])
+		> 3.0f * PhysicsConfiguration::UNIV_EPS) {
+		// axis of constraint frame
+		btVector3 hingeAxisLocalA =
+			mJoint->getFrameOffsetA().getBasis().getColumn(col);
 
-	btVector3 hingeAxisLocalB = mJoint->getFrameOffsetB().getBasis().getColumn(
-		col);
+		btVector3 hingeAxisLocalB =
+			mJoint->getFrameOffsetB().getBasis().getColumn(col);
 
-	btVector3 hingeAxisWorldA =
-		mJoint->getRigidBodyA().getWorldTransform().getBasis()
-			* hingeAxisLocalA;
+		btVector3 hingeAxisWorldA =
+			mJoint->getRigidBodyA().getWorldTransform().getBasis()
+				* hingeAxisLocalA;
 
-	btVector3 hingeAxisWorldB =
-		mJoint->getRigidBodyB().getWorldTransform().getBasis()
-			* hingeAxisLocalB;
+		btVector3 hingeAxisWorldB =
+			mJoint->getRigidBodyB().getWorldTransform().getBasis()
+				* hingeAxisLocalB;
 
-	btVector3 hingeTorqueA = torque * hingeAxisWorldA;
-	btVector3 hingeTorqueB = torque * hingeAxisWorldB;
+		btVector3 hingeTorqueA = torque * hingeAxisWorldA;
+		btVector3 hingeTorqueB = torque * hingeAxisWorldB;
 
-	mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
-	mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
+		mJoint->getRigidBodyA().applyTorque(-hingeTorqueA);
+		mJoint->getRigidBodyB().applyTorque(hingeTorqueB);
+	}
 #endif
 }
 

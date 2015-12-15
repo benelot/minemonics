@@ -85,3 +85,5 @@ const double PhysicsConfiguration::DISCARDING_STARTS = 1.0f;
 const double PhysicsConfiguration::BULLET_PICKER_FORCE = 100000;
 
 const PhysicsConfiguration::SolverType PhysicsConfiguration::SOLVER_TYPE = PhysicsConfiguration::SEQUENTIALIMPULSESOLVER;
+
+const double PhysicsConfiguration::UNIV_EPS = 0.01f;

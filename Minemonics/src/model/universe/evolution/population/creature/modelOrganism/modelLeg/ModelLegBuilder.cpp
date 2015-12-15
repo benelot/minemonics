@@ -11,6 +11,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
@@ -18,10 +20,6 @@
 
 //## view headers
 //## utils headers
-
-#ifndef UNIV_EPS
-#define UNIV_EPS 0.01f
-#endif
 
 void ModelLegBuilder::build(MixedGenome* genome,
 	ControllerGene::ControllerType controllerType) {
@@ -42,18 +40,21 @@ void ModelLegBuilder::build(MixedGenome* genome,
 //	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
 
-	double damping = 0.5f;//[0.005;0.5] 0.05
+	double damping = 0.5f; //[0.005;0.5] 0.05
 	// create joint between the two limbs
 	// Hingelike
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 		Ogre::Vector3(damping, damping, damping),
-		Ogre::Vector3(-UNIV_EPS, -UNIV_EPS,
-			-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS),
-		Ogre::Vector3(UNIV_EPS,
-		UNIV_EPS, boost::math::constants::pi<double>() * 2.0f - UNIV_EPS),
-		Ogre::Vector3(1, 0, 0));
+		Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+			-PhysicsConfiguration::UNIV_EPS,
+			-boost::math::constants::pi<double>() * 2.0f
+				+ PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
+			PhysicsConfiguration::UNIV_EPS,
+			boost::math::constants::pi<double>() * 2.0f
+				- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(1, 0, 0));
 
 //	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 //		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),

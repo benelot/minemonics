@@ -11,6 +11,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/PhysicsConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
@@ -18,10 +20,6 @@
 
 //## view headers
 //## utils headers
-
-#ifndef UNIV_EPS
-#define UNIV_EPS 0.01f
-#endif
 
 void SnakeBuilder::build(MixedGenome* genome,
 	ControllerGene::ControllerType controllerType) {
@@ -43,12 +41,12 @@ void SnakeBuilder::build(MixedGenome* genome,
 		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 		Ogre::Vector3(damping, damping, damping),
-		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-			-boost::math::constants::pi<double>() * 1.5f + UNIV_EPS,
-			-boost::math::constants::pi<double>() * 1.5f + UNIV_EPS),
-		Ogre::Vector3(boost::math::constants::pi<double>() / 2.0f - UNIV_EPS,
-			boost::math::constants::pi<double>() * 1.5f - UNIV_EPS,
-			boost::math::constants::pi<double>() * 1.5f - UNIV_EPS),
+		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + PhysicsConfiguration::UNIV_EPS,
+			-boost::math::constants::pi<double>() * 1.5f + PhysicsConfiguration::UNIV_EPS,
+			-boost::math::constants::pi<double>() * 1.5f + PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(boost::math::constants::pi<double>() / 2.0f - PhysicsConfiguration::UNIV_EPS,
+			boost::math::constants::pi<double>() * 1.5f - PhysicsConfiguration::UNIV_EPS,
+			boost::math::constants::pi<double>() * 1.5f - PhysicsConfiguration::UNIV_EPS),
 		Ogre::Vector3(-1, 0, 0));
 
 	switch (controllerType) {
