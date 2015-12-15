@@ -460,8 +460,11 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
 	//TODO: Fix force curve
-	double maxTorque = 0.1f * (mass1 * mass2);
-//	double maxTorque = (0.01f * (mass1 + mass2) + 0 * pow(mass1 + mass2, 2));
+	double maxTorque =
+		MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
+			* (mass1 * mass2)
+			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
+				* pow(mass1 * mass2, 2);
 
 	//TODO: Make position controlled defined in the settings
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
@@ -599,10 +602,10 @@ void SRBPhenomeModel::generateBody() {
 			((SRBJointModel*) mJointModels[i])->setWorld(getWorld());
 
 //			if (!setDamping) {
-////				mJointModels[i]->setLinearDamping(0.f,0.f,0.f);
+//				mJointModels[i]->setLinearDamping(0.f,0.f,0.f);
 //				mJointModels[i]->setAngularDamping(0.f, 0.f, 0.f);
 //			} else {
-////				mJointModels[i]->setLinearDamping(0.1f,0.1f,0.1f);
+//				mJointModels[i]->setLinearDamping(0.1f,0.1f,0.1f);
 //				mJointModels[i]->setAngularDamping(0.9f, 0.9f, 0.9f);
 //			}
 
