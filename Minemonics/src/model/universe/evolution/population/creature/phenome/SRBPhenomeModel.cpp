@@ -491,12 +491,12 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			break;
 		}
 		case ControllerGene::ChaoticControllerGene: {
-			ChaoticControllerGene* chaoticGene =
+			ChaoticControllerGene* chaoticControllerGene =
 				((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i]);
 			ChaoticController* controller = new ChaoticController(
-				chaoticGene->getSystemType(), chaoticGene->getInitialX(),
-				chaoticGene->getInitialY(), chaoticGene->getInitialZ(),
-				chaoticGene->getSpeed());
+				chaoticControllerGene->getSystemType(), chaoticControllerGene->getInitialX(),
+				chaoticControllerGene->getInitialY(), chaoticControllerGene->getInitialZ(),
+				chaoticControllerGene->getSpeed());
 
 			controller->initialize();
 
@@ -575,7 +575,7 @@ void SRBPhenomeModel::generateBody() {
 	bool isFixedBase = false;
 	bool setDamping = false;
 	bool gyro = false;
-	bool canSleep = true;
+	bool canSleep = false;
 
 	if (mBodyGenerated) {
 		return;

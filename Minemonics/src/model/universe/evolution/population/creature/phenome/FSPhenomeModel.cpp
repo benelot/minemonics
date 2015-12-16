@@ -522,9 +522,12 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			break;
 		}
 		case ControllerGene::ChaoticControllerGene: {
-			ChaoticController* controller =
-				new ChaoticController(
-					((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getSystemType());
+			ChaoticControllerGene* chaoticControllerGene =
+				((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i]);
+			ChaoticController* controller = new ChaoticController(
+				chaoticControllerGene->getSystemType(), chaoticControllerGene->getInitialX(),
+				chaoticControllerGene->getInitialY(), chaoticControllerGene->getInitialZ(),
+				chaoticControllerGene->getSpeed());
 
 			controller->initialize();
 
