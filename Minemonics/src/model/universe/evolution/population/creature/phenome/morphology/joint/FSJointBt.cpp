@@ -133,7 +133,6 @@ FSJointBt::~FSJointBt() {
 
 void FSJointBt::update(double timeSinceLastTick) {
 	//apply motor forces
-	//TODO: Turn on when you want to use motors
 	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
 		motorIterator != mMotors.end(); motorIterator++) {
 		if ((*motorIterator)->isEnabled()
