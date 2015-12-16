@@ -204,7 +204,50 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	mglGraph graph(0, mTexture->getWidth(), mTexture->getHeight());
 	graph.Title("Controller movement");
 	graph.Rotate(mVerticalRotation, mHorizontalRotation);
-	graph.SetRanges(-30, 30, -30, 30, -30, 30);
+
+	double minX = 1000000;
+	double minY = 1000000;
+	double minZ = 1000000;
+	double maxX = 0;
+	double maxY = 0;
+	double maxZ = 0;
+	for (std::vector<const MathGLDataset*>::const_iterator mit =
+		mDatasets.begin(); mit != mDatasets.end(); mit++) {
+		// calculate maxima and minima
+		for (int i = 0; i < (*(*mit)->getDatasetX()).nx; i++) {
+
+			minX =
+				(minX > (*(*mit)->getDatasetX()).a[i]) ?
+					(*(*mit)->getDatasetX()).a[i] : minX;
+
+			maxX =
+				(maxX < (*(*mit)->getDatasetX()).a[i]) ?
+					(*(*mit)->getDatasetX()).a[i] : maxX;
+		}
+
+		for (int i = 0; i < (*(*mit)->getDatasetY()).nx; i++) {
+			minY =
+				(minY > (*(*mit)->getDatasetY()).a[i]) ?
+					(*(*mit)->getDatasetY()).a[i] : minY;
+
+			maxY =
+				(maxY < (*(*mit)->getDatasetY()).a[i]) ?
+					(*(*mit)->getDatasetY()).a[i] : maxY;
+		}
+
+		for (int i = 0; i < (*(*mit)->getDatasetZ()).nx; i++) {
+			minZ =
+				(minZ > (*(*mit)->getDatasetZ()).a[i]) ?
+					(*(*mit)->getDatasetZ()).a[i] : minZ;
+
+			maxZ =
+				(maxZ < (*(*mit)->getDatasetZ()).a[i]) ?
+					(*(*mit)->getDatasetZ()).a[i] : maxZ;
+		}
+
+	}
+
+	graph.SetRanges(minX,maxX,minY,maxY,minZ,maxZ);
 	for (std::vector<const MathGLDataset*>::const_iterator mit =
 		mDatasets.begin(); mit != mDatasets.end(); mit++) {
 		graph.SetColor('o', (*mit)->getPlotColor().r, (*mit)->getPlotColor().g,
@@ -219,19 +262,19 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	graph.Box();
 	graph.Axis();
 
-	// Get the pixel buffer
+// Get the pixel buffer
 	Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer();
 
-	// Lock the pixel buffer and get a pixel box
+// Lock the pixel buffer and get a pixel box
 	pixelBuffer->lock(Ogre::HardwareBuffer::HBL_DISCARD);
 	const Ogre::PixelBox& pixelBox = pixelBuffer->getCurrentLock();
 
-	// Copy chart image to the pixel buffer
+// Copy chart image to the pixel buffer
 	Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pixelBox.data);
 	graph.GetBGRN((unsigned char*) pDest,
 		4 * mTexture->getWidth() * mTexture->getHeight());
 
-	// Unlock the pixel buffer
+// Unlock the pixel buffer
 	pixelBuffer->unlock();
 
 	if (mMakePrint) {
@@ -252,7 +295,7 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 
 	guiRenderer->endRendering();
 
-	//notify window of the texture to update
+//notify window of the texture to update
 
 	mFrameWindow->invalidate(true); // CEGUI::Window*
 }
