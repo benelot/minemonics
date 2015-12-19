@@ -17,6 +17,8 @@
 //## model headers
 #include <model/universe/evolution/population/creature/genome/controller/SineControllerGene.hpp>
 #include <model/universe/evolution/population/creature/genome/controller/ChaoticControllerGene.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/Morphogene.hpp>
+#include <model/universe/evolution/population/creature/genome/morphology/MorphogeneBranch.hpp>
 
 //## view headers
 //## utils headers
