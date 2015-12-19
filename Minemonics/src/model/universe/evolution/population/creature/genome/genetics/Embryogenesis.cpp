@@ -29,8 +29,6 @@
 //## utils headers
 #include <utils/MathUtils.hpp>
 
-
-
 BoostLogger Embryogenesis::mBoostLogger; /*<! initialize the boost logger*/
 Embryogenesis::_Init Embryogenesis::_initializer;
 void Embryogenesis::transcribeGene(
@@ -112,7 +110,7 @@ void Embryogenesis::transcribeMorphogene(
 }
 
 void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
-	Morphogene * childMorphogene, LimbModel* childLimb,
+	Morphogene* childMorphogene, LimbModel* childLimb,
 	PhenotypeGenerator* generator,
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter) {
 
@@ -121,8 +119,10 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 		childMorphogene->getGeneBranches().begin();
 		branchIt != childMorphogene->getGeneBranches().end(); branchIt++) {
 
-		// only add a new generator if the branch is active
-		if ((*branchIt)->isActive()) {
+		// only add a new generator if the branch is active and its branching gene is valid
+		if ((*branchIt)->isActive() && (*branchIt)->getBranchGeneType() >= 0
+			&& (*branchIt)->getBranchGeneType()
+				< phenomeModel->getCreatureModel()->getGenotype().getGenes().size()) {
 			// get the branch gene type defined by the branch
 			Morphogene* branchingMorphoGeneType =
 				(Morphogene*) phenomeModel->getCreatureModel()->getGenotype().getGenes()[(*branchIt)->getBranchGeneType()];
@@ -149,16 +149,25 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 			} else {
 
 				//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
-				generatorFromBranch->setGene(
-					phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+				if (branchingMorphoGeneType->getFollowUpGene() >= 0
+					&& phenomeModel->getCreatureModel()->getGenotype().getGenes().size()
+						> branchingMorphoGeneType->getFollowUpGene()) { // if the follow up gene is defined in a valid range
+					generatorFromBranch->setGene(
+						phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+				}
 			}
 
-			// increase root to leaf path length by 1
-			generatorFromBranch->setRoot2LeafPath(
-				generator->getRoot2LeafPath() + 1);
+			if (generatorFromBranch->getGene() != NULL) {
+				// increase root to leaf path length by 1
+				generatorFromBranch->setRoot2LeafPath(
+					generator->getRoot2LeafPath() + 1);
 
-			//add generator to the list
-			generatorList.push_back(generatorFromBranch);
+				//add generator to the list
+				generatorList.push_back(generatorFromBranch);
+			} else {
+				delete generatorFromBranch;
+				generatorFromBranch = NULL;
+			}
 
 			// if the branch also defines a flipped branch
 			if ((*branchIt)->isFlipped()) {
@@ -187,16 +196,25 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 				} else {
 
 					//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
-					flippedGeneratorFromBranch->setGene(
-						phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+					if (branchingMorphoGeneType->getFollowUpGene() >= 0
+						&& phenomeModel->getCreatureModel()->getGenotype().getGenes().size()
+							> branchingMorphoGeneType->getFollowUpGene()) { // if the follow up gene is defined in a valid range
+						flippedGeneratorFromBranch->setGene(
+							phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+					}
 				}
 
-				// increase root to leaf path length by 1
-				flippedGeneratorFromBranch->setRoot2LeafPath(
-					generator->getRoot2LeafPath() + 1);
+				if (flippedGeneratorFromBranch->getGene() != NULL) {
+					// increase root to leaf path length by 1
+					flippedGeneratorFromBranch->setRoot2LeafPath(
+						generator->getRoot2LeafPath() + 1);
 
-				//add generator to the list
-				generatorList.push_back(flippedGeneratorFromBranch);
+					//add generator to the list
+					generatorList.push_back(flippedGeneratorFromBranch);
+				} else {
+					delete flippedGeneratorFromBranch;
+					flippedGeneratorFromBranch = NULL;
+				}
 			}
 
 			// if the branch also defines a mirrored branch
@@ -226,16 +244,25 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 				} else {
 
 					//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
-					mirroredGeneratorFromBranch->setGene(
-						phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+					if (branchingMorphoGeneType->getFollowUpGene() >= 0
+						&& phenomeModel->getCreatureModel()->getGenotype().getGenes().size()
+							> branchingMorphoGeneType->getFollowUpGene()) { // if the follow up gene is defined in a valid range
+						mirroredGeneratorFromBranch->setGene(
+							phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+					}
 				}
 
-				// increase root to leaf path length by 1
-				mirroredGeneratorFromBranch->setRoot2LeafPath(
-					generator->getRoot2LeafPath() + 1);
+				if (mirroredGeneratorFromBranch->getGene() != NULL) {
+					// increase root to leaf path length by 1
+					mirroredGeneratorFromBranch->setRoot2LeafPath(
+						generator->getRoot2LeafPath() + 1);
 
-				//add generator to the list
-				generatorList.push_back(mirroredGeneratorFromBranch);
+					//add generator to the list
+					generatorList.push_back(mirroredGeneratorFromBranch);
+				} else {
+					delete mirroredGeneratorFromBranch;
+					mirroredGeneratorFromBranch = NULL;
+				}
 			}
 		}
 	}
