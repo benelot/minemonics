@@ -61,6 +61,7 @@ set(MODELHDRS
 	./model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDollBuilder.hpp
 	./model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp
 	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp
+	./model/universe/evolution/population/creature/modelOrganism/pod/PodBuilder.hpp
 	
 	## genome
 	./model/universe/evolution/population/creature/genome/Genome.hpp
@@ -161,6 +162,7 @@ set(MODELSRCS
 	./model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDollBuilder.cpp
 	./model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.cpp
 	./model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.cpp
+	./model/universe/evolution/population/creature/modelOrganism/pod/PodBuilder.cpp
 	
 	## genome
 	./model/universe/evolution/population/creature/genome/Genome.cpp

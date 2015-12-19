@@ -20,6 +20,7 @@
 #include <model/universe/evolution/population/creature/modelOrganism/modelLeg/ModelLegBuilder.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/snake/SnakeBuilder.hpp>
 #include <model/universe/evolution/population/creature/modelOrganism/ragdoll/RagDollBuilder.hpp>
+#include <model/universe/evolution/population/creature/modelOrganism/pod/PodBuilder.hpp>
 #include <model/universe/evolution/population/PopulationModel.hpp>
 #include <model/universe/PlanetModel.hpp>
 
@@ -56,9 +57,11 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 			mPlanetModel->getPhysicsModelType(), initialPosition);
 
 		//	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-			SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
+//			SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 //		ModelLegBuilder::build(&creatureModel->getGenotype(),
 //			ControlConfiguration::CONTROLLER_TYPE);
+		PodBuilder::build(&creatureModel->getGenotype(),
+			ControlConfiguration::CONTROLLER_TYPE);
 
 //		creatureModel->createRandomGenome(branchiness);
 		creatureModel->setNew(true);
