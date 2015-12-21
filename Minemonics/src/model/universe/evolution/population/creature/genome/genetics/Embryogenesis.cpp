@@ -119,33 +119,32 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 		childMorphogene->getGeneBranches().begin();
 		branchIt != childMorphogene->getGeneBranches().end(); branchIt++) {
 
-		// only add a new generator if the branch is active and its branching gene is valid
+		// only add a new generator if the branch is active and its branching gene type is valid
 		if ((*branchIt)->isActive() && (*branchIt)->getBranchGeneType() >= 0
 			&& (*branchIt)->getBranchGeneType()
 				< phenomeModel->getCreatureModel()->getGenotype().getGenes().size()) {
-			// get the branch gene type defined by the branch
-			Morphogene* branchingMorphoGeneType =
-				(Morphogene*) phenomeModel->getCreatureModel()->getGenotype().getGenes()[(*branchIt)->getBranchGeneType()];
 
-			// create a new generator from the branch
-			PhenotypeGenerator* generatorFromBranch = new PhenotypeGenerator();
+			Morphogene* branchingMorphoGeneType =
+				(Morphogene*) phenomeModel->getCreatureModel()->getGenotype().getGenes()[(*branchIt)->getBranchGeneType()]; // get the branch gene type defined by the branch
+
+			PhenotypeGenerator* generatorFromBranch = new PhenotypeGenerator(); // create a new generator from the branch
 			generatorFromBranch->initialize(generator->getRepetitionList(),
 				generator->getPosition(), generator->getOrientation(),
 				childLimb, (*branchIt.base()),
 				childMorphogene->getSegmentShrinkFactor()
 					* generator->getCurrentShrinkageFactor());
 
-			// If repetition limit of this component is not exceeded
-			// (if it does not find the key OR if the repetition limit of the key is not exceeded)
+			// If repetition limit of this gene is not exceeded within this path
+			// if the repetition limit is higher than 0 AND (if it does not find the key OR if the repetition limit of the key is not exceeded)
 			if (generatorFromBranch->getRepetitionList().find(
-				(*branchIt)->getBranchGeneType())
-				== generatorFromBranch->getRepetitionList().end()
-				|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-					<= branchingMorphoGeneType->getRepetitionLimit()) {
+					(*branchIt)->getBranchGeneType())
+					== generatorFromBranch->getRepetitionList().end()
+					|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+						< branchingMorphoGeneType->getRepetitionLimit()) {
 
-				//add another of this branching morphogene type
-				generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
-				generatorFromBranch->setGene(branchingMorphoGeneType);
+				generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; //add another of this branching morphogene type
+				generatorFromBranch->setGene(branchingMorphoGeneType); // set the gene
+
 			} else {
 
 				//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
@@ -158,28 +157,28 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 			}
 
 			if (generatorFromBranch->getGene() != NULL) {
-				// increase root to leaf path length by 1
-				generatorFromBranch->setRoot2LeafPath(
-					generator->getRoot2LeafPath() + 1);
 
-				//add generator to the list
-				generatorList.push_back(generatorFromBranch);
+				generatorFromBranch->setRoot2LeafPath(
+					generator->getRoot2LeafPath() + 1); // increase root to leaf path length by 1
+
+				generatorList.push_back(generatorFromBranch); //add generator to the list
 			} else {
-				delete generatorFromBranch;
+				delete generatorFromBranch; // delete the generator because its gene is not set
 				generatorFromBranch = NULL;
 			}
 
 			// if the branch also defines a flipped branch
 			if ((*branchIt)->isFlipped()) {
-				// create a new generator with the flipped flag set
+
 				PhenotypeGenerator* flippedGeneratorFromBranch =
-					new PhenotypeGenerator();
+					new PhenotypeGenerator(); // create a new generator with the flipped flag set
+
 				flippedGeneratorFromBranch->initialize(
 					generator->getRepetitionList(), generator->getPosition(),
 					generator->getOrientation(), childLimb, (*branchIt.base()),
 					childMorphogene->getSegmentShrinkFactor()
 						* generator->getCurrentShrinkageFactor(),
-					true != generator->isFlipped() /*Flipped*/, false);
+					!generator->isFlipped() /*Flipped*/, false);
 
 				// If repetition limit not exceeded
 				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
@@ -187,32 +186,32 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 					(*branchIt)->getBranchGeneType())
 					== flippedGeneratorFromBranch->getRepetitionList().end()
 					|| flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-						<= branchingMorphoGeneType->getRepetitionLimit()) {
+						< branchingMorphoGeneType->getRepetitionLimit()) {
 
-					//add another of this offspring type
-					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
+					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; // add another of this offspring type
 					flippedGeneratorFromBranch->setGene(
 						branchingMorphoGeneType);
 				} else {
 
 					//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
+					// if the follow up gene is defined in a valid range
 					if (branchingMorphoGeneType->getFollowUpGene() >= 0
 						&& phenomeModel->getCreatureModel()->getGenotype().getGenes().size()
-							> branchingMorphoGeneType->getFollowUpGene()) { // if the follow up gene is defined in a valid range
-						flippedGeneratorFromBranch->setGene(
-							phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]);
+							> branchingMorphoGeneType->getFollowUpGene()) {
+
+						Morphogene* followupGene =
+							(Morphogene*) phenomeModel->getCreatureModel()->getGenotype().getGenes()[branchingMorphoGeneType->getFollowUpGene()]; // get the branch follow up gene type defined by the branch
+						flippedGeneratorFromBranch->setGene(followupGene);
 					}
 				}
 
 				if (flippedGeneratorFromBranch->getGene() != NULL) {
-					// increase root to leaf path length by 1
 					flippedGeneratorFromBranch->setRoot2LeafPath(
-						generator->getRoot2LeafPath() + 1);
+						generator->getRoot2LeafPath() + 1); // increase root to leaf path length by 1
 
-					//add generator to the list
-					generatorList.push_back(flippedGeneratorFromBranch);
+					generatorList.push_back(flippedGeneratorFromBranch); //add generator to the list
 				} else {
-					delete flippedGeneratorFromBranch;
+					delete flippedGeneratorFromBranch; // delete the generator because its gene is not set
 					flippedGeneratorFromBranch = NULL;
 				}
 			}
@@ -227,18 +226,17 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 					generator->getOrientation(), childLimb, (*branchIt.base()),
 					childMorphogene->getSegmentShrinkFactor()
 						* generator->getCurrentShrinkageFactor(), false,
-					true != generator->isMirrored()/*Mirrored*/);
+					!generator->isMirrored()/*Mirrored*/);
 
 				// If repetition limit not exceeded
-				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
+				// if the repetition limit is higher than 0 AND (if it does not find the key OR if the repetition limit of the key is not exceeded)
 				if (mirroredGeneratorFromBranch->getRepetitionList().find(
 					(*branchIt)->getBranchGeneType())
 					== mirroredGeneratorFromBranch->getRepetitionList().end()
 					|| mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-						<= branchingMorphoGeneType->getRepetitionLimit()) {
+						< branchingMorphoGeneType->getRepetitionLimit()) {
 
-					//add another of this branching morphogene type
-					mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++;
+					mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; // add another of this branching morphogene type
 					mirroredGeneratorFromBranch->setGene(
 						branchingMorphoGeneType);
 				} else {
@@ -253,14 +251,12 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 				}
 
 				if (mirroredGeneratorFromBranch->getGene() != NULL) {
-					// increase root to leaf path length by 1
 					mirroredGeneratorFromBranch->setRoot2LeafPath(
-						generator->getRoot2LeafPath() + 1);
+						generator->getRoot2LeafPath() + 1); // increase root to leaf path length by 1
 
-					//add generator to the list
-					generatorList.push_back(mirroredGeneratorFromBranch);
+					generatorList.push_back(mirroredGeneratorFromBranch); //add generator to the list
 				} else {
-					delete mirroredGeneratorFromBranch;
+					delete mirroredGeneratorFromBranch; // delete the generator because its gene is not set
 					mirroredGeneratorFromBranch = NULL;
 				}
 			}
