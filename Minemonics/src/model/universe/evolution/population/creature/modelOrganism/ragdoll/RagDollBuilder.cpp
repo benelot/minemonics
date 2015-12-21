@@ -90,7 +90,9 @@ void RagDollBuilder::build(MixedGenome* genome,
 			ChaoticControllerGene* chaoticController =
 				new ChaoticControllerGene(ChaoticControllerGene::CHUA_CIRCUIT,
 					x, y, z, speed);
+
 //			chaoticController->initialize();
+
 			morphogeneBranch->getControllerGenes().push_back(chaoticController);
 		}
 	}

@@ -24,8 +24,8 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 
-#define NUM_BODIES 3
-#define NUM_LEGS 6
+#define NUM_BODIES 1
+#define NUM_LEGS 2
 #define NUM_LEG_SEGMENTS 2
 #define BODYPART_COUNT NUM_LEGS*NUM_LEG_SEGMENTS + NUM_BODIES
 
@@ -106,6 +106,9 @@ void PodBuilder::build(MixedGenome* genome,
 				ChaoticControllerGene* chaoticController =
 					new ChaoticControllerGene(
 						ChaoticControllerGene::CHUA_CIRCUIT, x, y, z, speed);
+
+//				chaoticController->initialize();
+
 				bodyBranch->getControllerGenes().push_back(chaoticController);
 			}
 			break;
@@ -122,9 +125,10 @@ void PodBuilder::build(MixedGenome* genome,
 		Ogre::Vector3 oppositeCenterLegAngleVector(0, 0, -1); // left center of leg distribution
 		int legsPerBody = NUM_LEGS / NUM_BODIES; // number of legs per body segment
 		double angularStep = 2.0f * totalLegsAngle / legsPerBody; // the angular step between each leg on a body
-		double currentAngle = -angularStep * legsPerBody / 4.0f; // the current angular rotation of the leg attachment vector
+		double currentAngle = totalLegsAngle / 2.0f
+			- totalLegsAngle / (legsPerBody / 2.0f + 1.0f); // the current angular rotation of the leg attachment vector
 
-		// attach legs to the abdomen
+			// attach legs to the abdomen
 		for (int i = 0; i < legsPerBody / 2.0f; i++) {
 			Ogre::Vector3 legAngleVector =
 				Ogre::Euler(0, 0, currentAngle).toQuaternion()
@@ -274,6 +278,8 @@ void PodBuilder::build(MixedGenome* genome,
 			leftLegBranch->setBranchGeneType(genome->getGenes().size());
 			bodyMorphogene->getGeneBranches().push_back(leftLegBranch); // add joint to the upper limb branching to the lower limb
 
+			currentAngle -= angularStep; // increase angular step
+
 		}
 
 	}
@@ -289,7 +295,7 @@ void PodBuilder::build(MixedGenome* genome,
 		// create joint between the upper and lower leg
 		// Hingelike
 		MorphogeneBranch* legBranch = new MorphogeneBranch(
-			JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
+			JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(1, 0, 0),
 			Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 			Ogre::Vector3(damping, damping, damping),
 			Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
@@ -299,7 +305,7 @@ void PodBuilder::build(MixedGenome* genome,
 			Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
 				PhysicsConfiguration::UNIV_EPS,
 				boost::math::constants::pi<double>() * 2.0f
-					- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(1, 0, 0));
+					- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(0, 0, 1));
 
 //		MorphogeneBranch* legBranch = new MorphogeneBranch(
 //			JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
