@@ -137,14 +137,17 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 			// If repetition limit of this gene is not exceeded within this path
 			// if the repetition limit is higher than 0 AND (if it does not find the key OR if the repetition limit of the key is not exceeded)
 			if (generatorFromBranch->getRepetitionList().find(
-					(*branchIt)->getBranchGeneType())
-					== generatorFromBranch->getRepetitionList().end()
-					|| generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-						< branchingMorphoGeneType->getRepetitionLimit()) {
+				(*branchIt)->getBranchGeneType())
+				== generatorFromBranch->getRepetitionList().end()) {
+
+				generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()] =
+					0; // set zero repetitions of this branching morphogene type
+				generatorFromBranch->setGene(branchingMorphoGeneType);
+			} else if (generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+				< branchingMorphoGeneType->getRepetitionLimit()) {
 
 				generatorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; //add another of this branching morphogene type
-				generatorFromBranch->setGene(branchingMorphoGeneType); // set the gene
-
+				generatorFromBranch->setGene(branchingMorphoGeneType);
 			} else {
 
 				//add the branching morphogene's follow up gene because the repetition limit of the branching morphogene is exceeded
@@ -184,11 +187,16 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
 				if (flippedGeneratorFromBranch->getRepetitionList().find(
 					(*branchIt)->getBranchGeneType())
-					== flippedGeneratorFromBranch->getRepetitionList().end()
-					|| flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-						< branchingMorphoGeneType->getRepetitionLimit()) {
+					== flippedGeneratorFromBranch->getRepetitionList().end()) {
 
-					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; // add another of this offspring type
+					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()] =
+						0; // set zero repetitions of this branching morphogene type
+					flippedGeneratorFromBranch->setGene(
+						branchingMorphoGeneType);
+				} else if (flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+					< branchingMorphoGeneType->getRepetitionLimit()) {
+
+					flippedGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; //add another of this branching morphogene type
 					flippedGeneratorFromBranch->setGene(
 						branchingMorphoGeneType);
 				} else {
@@ -232,11 +240,16 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 				// if the repetition limit is higher than 0 AND (if it does not find the key OR if the repetition limit of the key is not exceeded)
 				if (mirroredGeneratorFromBranch->getRepetitionList().find(
 					(*branchIt)->getBranchGeneType())
-					== mirroredGeneratorFromBranch->getRepetitionList().end()
-					|| mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
-						< branchingMorphoGeneType->getRepetitionLimit()) {
+					== mirroredGeneratorFromBranch->getRepetitionList().end()) {
 
-					mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; // add another of this branching morphogene type
+					mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()] =
+						0; // set zero repetitions of this branching morphogene type
+					mirroredGeneratorFromBranch->setGene(
+						branchingMorphoGeneType);
+				} else if (mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]
+					< branchingMorphoGeneType->getRepetitionLimit()) {
+
+					mirroredGeneratorFromBranch->getRepetitionList()[(*branchIt)->getBranchGeneType()]++; //add another of this branching morphogene type
 					mirroredGeneratorFromBranch->setGene(
 						branchingMorphoGeneType);
 				} else {

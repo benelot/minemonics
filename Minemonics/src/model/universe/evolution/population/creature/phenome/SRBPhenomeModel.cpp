@@ -170,7 +170,7 @@ int SRBPhenomeModel::performEmbryogenesis() {
 		std::map<int, int> repList;
 		rootGenerator->initialize(repList, mCreatureModel->getInitialPosition(),
 			Ogre::Quaternion::IDENTITY, NULL, NULL, 1);
-		rootGenerator->getRepetitionList()[mCreatureModel->getGenotype().getRootIndex()]++; // add another of this branching morphogene type
+		rootGenerator->getRepetitionList()[mCreatureModel->getGenotype().getRootIndex()] = 0; // add another of this branching morphogene type
 		rootGenerator->setGene(gene);
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
