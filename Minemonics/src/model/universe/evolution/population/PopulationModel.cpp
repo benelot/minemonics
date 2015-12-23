@@ -60,10 +60,10 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 //			SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
 //		ModelLegBuilder::build(&creatureModel->getGenotype(),
 //			ControlConfiguration::CONTROLLER_TYPE);
-		PodBuilder::build(&creatureModel->getGenotype(),
-			ControlConfiguration::CONTROLLER_TYPE);
+//		PodBuilder::build(&creatureModel->getGenotype(),
+//			ControlConfiguration::CONTROLLER_TYPE);
 
-//		creatureModel->createRandomGenome(branchiness);
+		creatureModel->createRandomGenome(branchiness);
 		creatureModel->setNew(true);
 		creatureModel->setDynasty(mDynastyQty);
 		addMember(creatureModel);
