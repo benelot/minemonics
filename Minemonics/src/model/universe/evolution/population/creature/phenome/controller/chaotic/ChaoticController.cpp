@@ -168,6 +168,25 @@ double* ChaoticController::chuaCircuit(double t, int dimensions, double u[]) {
 	return uout;
 }
 
+static double* unlimitedChuaCircuit(double t, int dimensions, double u[]) {
+	double c1 = 15.6;
+	double c2 = 1;
+	double c3 = 28;
+	double m0 = -0.714; /**!< slope in outer region */
+	double m1 = -1.143; /**!< slope in inner region */
+	double b = 1; /**!< Breakpoints */
+
+	double g = m0 * u[0] + (m1 - m0) / 2.0f * (abs(u[0] + b) - abs(u[0] - b)); // a 3-segment piecewise-linear equation (Chua diode)
+
+	double* uout = new double[dimensions];
+	uout[0] = c1 * (u[1] - u[0] - g);
+
+	uout[1] = c2 * (u[0] - u[1] + u[2]);
+	uout[2] = -c3 * u[1];
+
+	return uout;
+}
+
 double* ChaoticController::runChuaCircuit(double t, int dimensions, double u[],
 	ChaoticController* controller) {
 	return controller->chuaCircuit(t, dimensions, u);
@@ -187,12 +206,12 @@ void ChaoticController::calcChuaCircuit() {
 
 	double h = 0.001f;
 	double i = mSpeed;
-	for(int i = mSpeed; i >= 1;i--) {
-		NumericUtils::calcRK4(0, 3, u, this, h, ChaoticController::runChuaCircuit);
+	for(; i >= 1;i--) {
+		NumericUtils::calcRK6(0, 3, u, h, unlimitedChuaCircuit);
 	}
 
 	h *= i;
-	NumericUtils::calcRK4(0, 3, u, this, h, ChaoticController::runChuaCircuit);
+	NumericUtils::calcRK6(0, 3, u, h, unlimitedChuaCircuit);
 }
 
 void ChaoticController::collectInputs() {
