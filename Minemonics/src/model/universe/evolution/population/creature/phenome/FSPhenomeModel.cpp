@@ -193,7 +193,7 @@ int FSPhenomeModel::performEmbryogenesis() {
 		mBodyGenerated = false;
 		std::list<PhenotypeGenerator*> generatorList;
 
-		// get the first gene from the genome
+		// get the root gene from the genome
 		Gene* gene =
 		mCreatureModel->getGenotype().getGenes()[mCreatureModel->getGenotype().getRootIndex()];
 
@@ -211,16 +211,16 @@ int FSPhenomeModel::performEmbryogenesis() {
 
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Phenome generator qty:" << generatorList.size();
 
-			PhenotypeGenerator* generator = generatorList.front();
-			generatorList.pop_front();
+			PhenotypeGenerator* generator = generatorList.front();// get next generator in list
+			generatorList.pop_front();// remove it from the list
 
 			Embryogenesis::transcribeGene(generatorList, totalSegmentCounter,
-				this, generator);
+				this, generator);// transcribe the gene
 
-			delete generator;// delete the generator of this gene
+			delete generator;// delete the generator
 		}
 
-		mDeveloped = true;
+		mDeveloped = true; // set the creature to developed
 	} else {
 		mComponentModels.clear();
 		for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
@@ -258,10 +258,15 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 		parentMorphogeneBranch->getJointAnchorY(),
 		parentMorphogeneBranch->getJointAnchorZ()); // get parent joint's anchor direction
 
+	Ogre::Vector3 childAnchorDirInChild(childMorphogene->getJointAnchorX(),
+		childMorphogene->getJointAnchorY(), childMorphogene->getJointAnchorZ()); // get anchor direction of limb child in the local reference frame of child
+
 	//if the generator is the mirrored version of another generator
 	//mirrored is: -O  -> O- | \O -> O\   mirroring = sign inversion
 	if (generator->isMirrored()) {
 		parentAnchorDirInParent = -parentAnchorDirInParent; //get mirrored direction
+		childAnchorDirInChild = -childAnchorDirInChild; // get mirrored direction
+		generator->setOrientation(generator->getOrientation().Inverse());
 	}
 
 	//if the generator is the flipped version of another generator
@@ -275,6 +280,23 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 		parentAnchorDirInParent = -parentAnchorDirInParent
 			- 2 * ((-parentAnchorDirInParent).dotProduct(parentLimbDir))
 				* parentLimbDir;
+
+		childAnchorDirInChild = -childAnchorDirInChild
+			- 2 * ((-childAnchorDirInChild).dotProduct(parentLimbDir))
+				* parentLimbDir;
+
+		// get rotation axis
+		Ogre::Vector3 rotationAxis(generator->getOrientation().x,
+			generator->getOrientation().y, generator->getOrientation().z);
+
+		// reflect on the direction vector
+		rotationAxis = -rotationAxis
+			- 2 * ((-rotationAxis).dotProduct(parentLimbDir)) * parentLimbDir;
+
+		// set new orientation
+		generator->setOrientation(
+			Ogre::Quaternion(-generator->getOrientation().w, rotationAxis.x,
+				rotationAxis.y, rotationAxis.z));
 	}
 
 	parentAnchorDirInParent = generator->getOrientation()
@@ -299,18 +321,15 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	// CHILD LIMB ANCHOR POINT IN PARENT REFERENCE FRAME
 	Ogre::Vector3 childAnchorInParent(parentJointPivotInParent); //get local surface anchor point of child in reference frame parent
 
-	Ogre::Vector3 childAnchorDirInChild(childMorphogene->getJointAnchorX(),
-		childMorphogene->getJointAnchorY(), childMorphogene->getJointAnchorZ()); // get anchor direction of limb child in the local reference frame of child
-
-	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
+	Ogre::Quaternion childLimbOrientation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
 
-	if (!MathUtils::isFinite(childLimbRotation)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
+	if (!MathUtils::isFinite(childLimbOrientation)) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbOrientation;
 	}
 
-	childAnchorDirInChild = childLimbRotation * childAnchorDirInChild; // Rotate the child anchor in the direction of its own rotation
+	childAnchorDirInChild = childLimbOrientation * childAnchorDirInChild; // Rotate the child anchor in the direction of its own limb's rotation and additionally when it is flipped/mirrored
 
 	// CHILD LIMB ANCHOR POINT IN CHILD REFERENCE FRAME
 	childJointAnchor = getOwnIntersection(childMorphogene, generator,
@@ -324,53 +343,31 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Vector3 childLimbCOM(jointPivotInW - childAnchorInChild); // global center of mass of child limb
 
 #ifndef EXCLUDE_FROM_TEST
-	// draw line from limb A to surface anchor point of A (GREEN LINE)
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(parentLimbCOM,
-		jointPivotInW, Ogre::ColourValue(0, 1, 0));
-
+	// mark the three important points of the joint
 	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
 		parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
 
 	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
 		jointPivotInW, 0.1, Ogre::ColourValue(0, 1, 0));
 
-	// draw line from anchor point of A to joint rotation point (BLUE LINE)
-//	SimulationManager::getSingleton()->getDebugDrawer().drawLine(
-//		parentLimbCOM + parentAnchorInParent,
-//		parentLimbCOM + parentJointPivotInParent, Ogre::ColourValue(0, 0, 1));
+	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(childLimbCOM,
+		0.1, Ogre::ColourValue(0, 1, 0));
 
-//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//		parentLimbCOM + parentAnchorInParent, 0.1, Ogre::ColourValue(0, 0, 1));
-//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//		parentLimbCOM + parentJointPivotInParent, 0.1,
-//		Ogre::ColourValue(0, 0, 1));
+	// draw line from limb A to surface anchor point of A (GREEN LINE)
+	SimulationManager::getSingleton()->getDebugDrawer().drawLine(parentLimbCOM,
+		jointPivotInW, Ogre::ColourValue(0, 1, 0));
 
-//	// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
+	// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(jointPivotInW,
 		parentLimbCOM + childAnchorInParent, Ogre::ColourValue(0, 0, 1));
-
-//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//		parentLimbCOM + parentJointPivotInParent, 0.1,
-//		Ogre::ColourValue(0, 0, 1));
-//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//		parentLimbCOM + childAnchorInParent, 0.1, Ogre::ColourValue(0, 0, 1));
 
 	// draw line from limb B to anchor point of B (GREEN LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(childLimbCOM,
 		childLimbCOM + childAnchorInChild, Ogre::ColourValue(0, 1, 0));
 
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(childLimbCOM,
-		0.1, Ogre::ColourValue(0, 1, 0));
-//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-//		childLimbCOM + childAnchorInChild, 0.1, Ogre::ColourValue(0, 1, 0));
-
-	// draw line from limb A to limb B (WHITE LINE)
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(childLimbCOM,
-		parentLimbCOM, Ogre::ColourValue(1, 1, 1));
 #endif
 
-	// set global center of mass of child limb as the new generation point for generation
-	generator->setPosition(childLimbCOM);
+	generator->setPosition(childLimbCOM); // set global center of mass of child limb as the new generation point for generation
 }
 
 LimbModel* FSPhenomeModel::createLimb(PhenotypeGenerator* generator,
@@ -499,6 +496,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			+ MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT
 				* pow(mass1 * mass2, 2);
 
+	//TODO: Make position controlled defined in the settings
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
 			parentMorphogeneBranch->getJointYawMinAngle(),
@@ -526,8 +524,10 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			ChaoticControllerGene* chaoticControllerGene =
 				((ChaoticControllerGene*) parentMorphogeneBranch->getControllerGenes()[i]);
 			ChaoticController* controller = new ChaoticController(
-				chaoticControllerGene->getSystemType(), chaoticControllerGene->getInitialX(),
-				chaoticControllerGene->getInitialY(), chaoticControllerGene->getInitialZ(),
+				chaoticControllerGene->getSystemType(),
+				chaoticControllerGene->getInitialX(),
+				chaoticControllerGene->getInitialY(),
+				chaoticControllerGene->getInitialZ(),
 				chaoticControllerGene->getSpeed());
 
 			controller->initialize();

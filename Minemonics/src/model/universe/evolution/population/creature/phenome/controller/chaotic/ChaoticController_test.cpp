@@ -11,12 +11,20 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 
 class ChaoticControllerTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
+		randomness = new Randomness();
+
 		// Set up an object of the class you want to test
-		chaoticController = new ChaoticController();
+		chaoticController = new ChaoticController(
+			ChaoticControllerGene::CHUA_CIRCUIT,
+			Randomness::getSingleton()->nextUnifDouble(-10, 10),
+			Randomness::getSingleton()->nextUnifDouble(-10, 10),
+			Randomness::getSingleton()->nextUnifDouble(-10, 10),
+			Randomness::getSingleton()->nextUnifDouble(0.1, 10));
 		chaoticController->initialize();
 	}
 
@@ -24,23 +32,36 @@ protected:
 		// delete and set the pointer to zero
 		delete chaoticController;
 		chaoticController = NULL;
+
+		delete randomness;
+		randomness = NULL;
 	}
 	ChaoticController* chaoticController;
+
+	Randomness* randomness;
 };
 
 class ChaoticControllerSerializationTest: public ::testing::Test {
 protected:
 	virtual void SetUp() {
-		chaoticController = new ChaoticController();
+		randomness = new Randomness();
+
+		chaoticController = new ChaoticController(
+			ChaoticControllerGene::CHUA_CIRCUIT,
+			Randomness::getSingleton()->nextUnifDouble(-10, 10),
+			Randomness::getSingleton()->nextUnifDouble(-10, 10),
+			Randomness::getSingleton()->nextUnifDouble(-10, 10),
+			Randomness::getSingleton()->nextUnifDouble(0.1, 10));
 		chaoticController->initialize();
 
 		chaoticController2 = new ChaoticController();
 
-		SaveController < ChaoticController > saveController;
+		SaveController<ChaoticController> saveController;
 
 		saveController.save(*chaoticController, "test/ChaoticController.test");
 
-		saveController.restore(*chaoticController2, "test/ChaoticController.test");
+		saveController.restore(*chaoticController2,
+			"test/ChaoticController.test");
 	}
 
 	virtual void TearDown() {
@@ -48,14 +69,19 @@ protected:
 		chaoticController = NULL;
 		delete chaoticController2;
 		chaoticController2 = NULL;
+
+		delete randomness;
+		randomness = NULL;
 	}
 	ChaoticController* chaoticController;
 
 	ChaoticController* chaoticController2;
+
+	Randomness* randomness;
 };
 
 TEST_F(ChaoticControllerTest,TestRun) {
-	for(int i = 0; i < 50000; i++){
+	for (int i = 0; i < 50000; i++) {
 		chaoticController->calcChuaCircuit();
 	}
 	//TODO: Add all tests
