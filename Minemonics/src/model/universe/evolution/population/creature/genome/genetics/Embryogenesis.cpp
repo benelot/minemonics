@@ -35,11 +35,10 @@ void Embryogenesis::transcribeGene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	PhenomeModel* phenomeModel, BaseGenerator* generator) {
 
-	// what is the next gene type
-	switch (generator->getGene()->getType()) {
+	switch (generator->getGene()->getType()) { 	// what is the next gene type?
 	case Gene::MorphoGene: {
 		transcribeMorphogene(generatorList, totalSegmentCounter, phenomeModel,
-			(PhenotypeGenerator*) generator);
+			(PhenotypeGenerator*) generator); // transcribe morphogene
 		break;
 	}
 	default: {
@@ -52,13 +51,13 @@ void Embryogenesis::transcribeMorphogene(
 	std::list<PhenotypeGenerator*>& generatorList, int& totalSegmentCounter,
 	PhenomeModel* phenomeModel, PhenotypeGenerator* generator) {
 
-	if (generator->getRoot2LeafPath() // if this creature limb chain is longer than allowed
-	== phenomeModel->getCreatureModel()->getGenotype().getSegmentsDepthLimit()
-		|| totalSegmentCounter // if the creature wants to use more limbs than allowed
-			== phenomeModel->getCreatureModel()->getGenotype().getTotalSegmentQtyLimit()) {
+	MixedGenome* genome = &phenomeModel->getCreatureModel()->getGenotype(); // get the genome of this phenome model
+
+	if (generator->getRoot2LeafPath() == genome->getSegmentsDepthLimit() // return if this creature limb chain is longer than allowed OR
+	|| totalSegmentCounter == genome->getTotalSegmentQtyLimit()) { // if the creature wants to use more limbs than allowed
 		return;
 	} else {
-		totalSegmentCounter++; // increase total segment counter
+		totalSegmentCounter++; // otherwise increase total segment counter
 	}
 
 	//PARENT
@@ -68,7 +67,7 @@ void Embryogenesis::transcribeMorphogene(
 	Ogre::Vector3 jointPivotInW(0, 0, 0); /**!< The joint pivot in world coordinates */
 
 	//CHILD
-	Morphogene * childMorphogene = ((Morphogene*) generator->getGene());
+	Morphogene* childMorphogene = ((Morphogene*) generator->getGene());
 	btTransform childLimbSurfaceAnchor; /**!< get the morphogene and start creating the limb and its joint to its parent */
 	childLimbSurfaceAnchor.setIdentity();
 
@@ -81,7 +80,7 @@ void Embryogenesis::transcribeMorphogene(
 	}
 
 	// get the child limb rotation
-	Ogre::Quaternion childLimbRotation(childMorphogene->getOrientationW(),
+	Ogre::Quaternion childLimbOrientation(childMorphogene->getOrientationW(),
 		childMorphogene->getOrientationX(), childMorphogene->getOrientationY(),
 		childMorphogene->getOrientationZ());
 
@@ -89,12 +88,12 @@ void Embryogenesis::transcribeMorphogene(
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator orientation: " << generator->getOrientation();
 	}
 
-	if (!MathUtils::isFinite(childLimbRotation)) {
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in childLimb orientation: " << childLimbRotation;
+	if (!MathUtils::isFinite(generator->getPosition())) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in generator position: " << generator->getPosition();
 	}
 
-	generator->setOrientation( // update the generator orientation using
-		generator->getOrientation() * childLimbRotation); /**!< The child element rotation */
+	generator->setOrientation(
+		generator->getOrientation() * childLimbOrientation); // update the generator orientation using the child element rotation
 
 	LimbModel* childLimb = phenomeModel->createLimb(generator, childMorphogene); // create new child limb
 
@@ -132,7 +131,8 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 				generator->getPosition(), generator->getOrientation(),
 				childLimb, (*branchIt.base()),
 				childMorphogene->getSegmentShrinkFactor()
-					* generator->getCurrentShrinkageFactor());
+					* generator->getCurrentShrinkageFactor(),
+				generator->isFlipped(), generator->isMirrored()/*Mirrored*/);
 
 			// If repetition limit of this gene is not exceeded within this path
 			// if the repetition limit is higher than 0 AND (if it does not find the key OR if the repetition limit of the key is not exceeded)
@@ -181,7 +181,8 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 					generator->getOrientation(), childLimb, (*branchIt.base()),
 					childMorphogene->getSegmentShrinkFactor()
 						* generator->getCurrentShrinkageFactor(),
-					!generator->isFlipped() /*Flipped*/, false);
+					!generator->isFlipped() /*Flipped*/,
+					generator->isMirrored());
 
 				// If repetition limit not exceeded
 				// (if it does not find the key OR if the repetition limit of the key is not exceeded)
@@ -233,7 +234,8 @@ void Embryogenesis::createNewGenerators(PhenomeModel* phenomeModel,
 					generator->getRepetitionList(), generator->getPosition(),
 					generator->getOrientation(), childLimb, (*branchIt.base()),
 					childMorphogene->getSegmentShrinkFactor()
-						* generator->getCurrentShrinkageFactor(), false,
+						* generator->getCurrentShrinkageFactor(),
+					generator->isFlipped(),
 					!generator->isMirrored()/*Mirrored*/);
 
 				// If repetition limit not exceeded
