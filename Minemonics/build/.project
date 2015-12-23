@@ -114,19 +114,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/src</locationURI>
 		</link>
 		<link>
-			<name>[Subprojects]</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>[Targets]</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>[Subprojects]/Minemonics</name>
-			<type>2</type>
-			<location>/media/leviathan/SPACE/meta/Work.Repositories/git/minemonics/Minemonics/src</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] Minemonics/</name>
