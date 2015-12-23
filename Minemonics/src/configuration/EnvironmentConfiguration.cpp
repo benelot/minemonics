@@ -18,4 +18,4 @@ const float EnvironmentConfiguration::AMBIENT_R = 0.6; /**!< Ambient light color
 const float EnvironmentConfiguration::AMBIENT_G = 0.6;
 const float EnvironmentConfiguration::AMBIENT_B = 0.55;
 
-const double EnvironmentConfiguration::GROUND_FRICTION = 0;
+const double EnvironmentConfiguration::GROUND_FRICTION = 2.0f;
