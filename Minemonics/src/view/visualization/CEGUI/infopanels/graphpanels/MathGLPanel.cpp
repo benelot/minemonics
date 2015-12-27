@@ -262,20 +262,16 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	graph.Box();
 	graph.Axis();
 
-// Get the pixel buffer
-	Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer();
+	Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer(); // Get the pixel buffer
 
-// Lock the pixel buffer and get a pixel box
 	pixelBuffer->lock(Ogre::HardwareBuffer::HBL_DISCARD);
-	const Ogre::PixelBox& pixelBox = pixelBuffer->getCurrentLock();
+	const Ogre::PixelBox& pixelBox = pixelBuffer->getCurrentLock(); // Lock the pixel buffer and get a pixel box
 
-// Copy chart image to the pixel buffer
 	Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pixelBox.data);
 	graph.GetBGRN((unsigned char*) pDest,
-		4 * mTexture->getWidth() * mTexture->getHeight());
+		4 * mTexture->getWidth() * mTexture->getHeight()); // Copy chart image to the pixel buffer
 
-// Unlock the pixel buffer
-	pixelBuffer->unlock();
+	pixelBuffer->unlock(); // Unlock the pixel buffer
 
 	if (mMakePrint) {
 		std::string fileName;
@@ -295,7 +291,5 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 
 	guiRenderer->endRendering();
 
-//notify window of the texture to update
-
-	mFrameWindow->invalidate(true); // CEGUI::Window*
+	mFrameWindow->invalidate(true); //notify window of the texture to update
 }

@@ -30,19 +30,19 @@ MathGLDataset::MathGLDataset() :
 }
 
 MathGLDataset::~MathGLDataset() {
-	if(mDatasetX){
-	delete mDatasetX;
-	mDatasetX = NULL;
+	if (mDatasetX) {
+		delete mDatasetX;
+		mDatasetX = NULL;
 	}
 
-	if(mDatasetY){
-	delete mDatasetY;
-	mDatasetY = NULL;
+	if (mDatasetY) {
+		delete mDatasetY;
+		mDatasetY = NULL;
 	}
 
-	if(mDatasetZ){
-	delete mDatasetZ;
-	mDatasetZ = NULL;
+	if (mDatasetZ) {
+		delete mDatasetZ;
+		mDatasetZ = NULL;
 	}
 
 }
@@ -73,8 +73,9 @@ void MathGLDataset::initialize(std::string datasetID, int dimensions,
 
 }
 
-void MathGLDataset::addData(double* newDataX, double* newDataY,
-	double* newDataZ, int dimensions, int length) {
+void MathGLDataset::addData(const double* const newDataX,
+	const double* const newDataY, const double* const newDataZ,
+	const int dimensions, const int length) {
 	if (mDatasetX && dimensions >= 1) {
 
 		//TODO: Make this more safe, if mLength < length etc.
