@@ -206,6 +206,12 @@ public:
 		for(std::vector<Controller*>::iterator cit = mControllers.begin();cit != mControllers.end();cit++){
 			datasinks.push_back(&(*cit)->getDataSink());
 		}
+
+		for(std::vector<JointModel*>::iterator jit = mJointModels.begin();jit != mJointModels.end();jit++){
+			datasinks.push_back(&(*jit)->getDataSinkPitch());
+			datasinks.push_back(&(*jit)->getDataSinkYaw());
+			datasinks.push_back(&(*jit)->getDataSinkRoll());
+		}
 		return datasinks;
 	}
 

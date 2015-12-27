@@ -35,6 +35,7 @@ class access;
 //## configuration headers
 //## controller headers
 //## model headers
+#include <model/data/DataSink.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/effector/motor/Motor.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/joint/JointPhysics.hpp>
 #include <model/universe/evolution/population/creature/phenome/morphology/limb/LimbModel.hpp>
@@ -229,6 +230,18 @@ public:
 		return mVelocityceptors;
 	}
 
+	const DataSink& getDataSinkPitch() const {
+		return mDataSinkPitch;
+	}
+
+	const DataSink& getDataSinkYaw() const {
+		return mDataSinkYaw;
+	}
+
+	const DataSink& getDataSinkRoll() const {
+		return mDataSinkRoll;
+	}
+
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization .*/
 
@@ -266,6 +279,10 @@ public:
 	}
 
 protected:
+
+	DataSink mDataSinkPitch; /**!< Data sink for the plotting window */
+	DataSink mDataSinkYaw; /**!< Data sink for the plotting window */
+	DataSink mDataSinkRoll; /**!< Data sink for the plotting window */
 
 	std::vector<LimbModel*>::size_type mParentIndex, mChildIndex; /**!< The indices of limbA and limbB. */
 

@@ -156,7 +156,7 @@ public:
 
 protected:
 
-	DataSink mDataSink;
+	DataSink mDataSink; /**!< Data sink for the plotting window */
 
 	ControllerType mType; /**!< The type of controller that is running */
 

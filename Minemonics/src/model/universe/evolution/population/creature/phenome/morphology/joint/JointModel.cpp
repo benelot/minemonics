@@ -107,6 +107,33 @@ void JointModel::update(double timeSinceLastTick) {
 		(*sit)->update(timeSinceLastTick);
 	}
 
+	// create 1 dimensional data sets out of 3 dimensional data
+	double dataX[1];
+	double dataY[1];
+	double dataZ[1];
+
+	dataY[0] = 0;
+	dataX[0] = mAngleceptors[0]->getOutputValue();
+	dataZ[0] = mVelocityceptors[0]->getOutputValue();
+
+	mDataSinkPitch.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
+
+	// create 1 dimensional data sets out of 3 dimensional data
+	dataY[0] = 0;
+	dataX[0] = mAngleceptors[1]->getOutputValue();
+	dataZ[0] = mVelocityceptors[1]->getOutputValue();
+
+	mDataSinkYaw.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
+
+
+	// create 1 dimensional data sets out of 3 dimensional data
+	dataY[0] = 0;
+	dataX[0] = mAngleceptors[2]->getOutputValue();
+	dataZ[0] = mVelocityceptors[2]->getOutputValue();
+
+	mDataSinkRoll.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
+
+
 //	std::cout << std::endl << "AngleSensors:";
 //	for (std::vector<JointAngleProprioceptor*>::iterator tit = mAngleceptors.begin();
 //			tit != mAngleceptors.end(); tit++) {
