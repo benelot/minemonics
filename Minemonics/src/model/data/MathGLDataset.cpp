@@ -30,8 +30,20 @@ MathGLDataset::MathGLDataset() :
 }
 
 MathGLDataset::~MathGLDataset() {
+	if(mDatasetX){
 	delete mDatasetX;
 	mDatasetX = NULL;
+	}
+
+	if(mDatasetY){
+	delete mDatasetY;
+	mDatasetY = NULL;
+	}
+
+	if(mDatasetZ){
+	delete mDatasetZ;
+	mDatasetZ = NULL;
+	}
 
 }
 
