@@ -22,8 +22,10 @@ DataSink::~DataSink() {
 	// TODO Auto-generated destructor stub
 }
 
-void DataSink::addData(double* newDataX,double* newDataY,double* newDataZ, int dimensions, int rows) {
-	mDataset.addData(newDataX,newDataY,newDataZ, dimensions, rows);
+void DataSink::addData(const double const* newDataX,
+	const double const* newDataY, const double const* newDataZ,
+	const int dimensions, const int rows) {
+	mDataset.addData(newDataX, newDataY, newDataZ, dimensions, rows);
 }
 
 void DataSink::initialize(std::string dataSinkID, int dimensions, int length) {

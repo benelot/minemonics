@@ -32,9 +32,10 @@ public:
 	MathGLDataset();
 	virtual ~MathGLDataset();
 
-	void initialize(std::string datasetID,int dimensions, int length);
+	void initialize(std::string datasetID, int dimensions, int length);
 
-	void addData(double* newDataX,double* newDataY,double* newDataZ, int dimensions, int length);
+	void addData(const double const* newDataX, const double const* newDataY,
+		const double const* newDataZ, const int dimensions, const int length);
 
 	std::string getDatasetId() const {
 		return mDatasetID;

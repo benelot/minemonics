@@ -33,7 +33,7 @@ public:
 
 	void initialize(std::string dataSinkID, int dimensions, int length);
 
-	void addData(double* newDataX,double* newDataY,double* newDataZ, int dimensions, int length);
+	void addData(const double const* newDataX,const double const* newDataY,const double const* newDataZ, const int dimensions, const int length);
 
 	const MathGLDataset& getDataset() const {
 		return mDataset;

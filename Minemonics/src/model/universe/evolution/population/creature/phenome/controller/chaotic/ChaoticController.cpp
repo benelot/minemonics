@@ -120,6 +120,7 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 //	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
 
+	// create 1 dimensional data set out of 3 dimensional data
 	double dataX[1];
 	dataX[0] = u[0];
 	double dataY[1];
