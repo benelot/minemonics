@@ -69,36 +69,10 @@ SRBJointModel::~SRBJointModel() {
 
 void SRBJointModel::initialize() {
 	mJointPhysics->initialize();
-}
 
-void SRBJointModel::update(double timeSinceLastTick) {
-	mJointPhysics->update(timeSinceLastTick);
-
-	for (std::vector<Sensor*>::iterator sit = mSensors.begin();
-		sit != mSensors.end(); sit++) {
-		(*sit)->update(timeSinceLastTick);
-	}
-
-//	std::cout << std::endl << "AngleSensors:";
-//	for (std::vector<JointAngleProprioceptor*>::iterator tit = mAngleceptors.begin();
-//			tit != mAngleceptors.end(); tit++) {
-//		std::cout << (*tit)->getAngle() << "|";
-//	}
-//	std::cout << std::endl;
-//
-//	std::cout << std::endl << "ForceSensors:";
-//	for (std::vector<JointForceProprioceptor*>::iterator tit = mForceceptors.begin();
-//			tit != mForceceptors.end(); tit++) {
-//		std::cout << (*tit)->getForce() << "|";
-//	}
-//	std::cout << std::endl;
-//
-//	std::cout << std::endl << "LimitSensors:";
-//	for (std::vector<JointLimitProprioceptor*>::iterator tit = mLimitceptors.begin();
-//			tit != mLimitceptors.end(); tit++) {
-//		std::cout << (*tit)->getLimitError() << "|";
-//	}
-//	std::cout << std::endl;
+	mDataSinkPitch.initialize("", 3, 20);
+	mDataSinkYaw.initialize("", 3, 20);
+	mDataSinkRoll.initialize("", 3, 20);
 }
 
 void SRBJointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,
