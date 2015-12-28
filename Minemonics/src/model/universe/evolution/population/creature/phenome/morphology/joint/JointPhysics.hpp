@@ -238,11 +238,9 @@ public:
 		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.y)
 		& BOOST_SERIALIZATION_NVP(mLocalBOrientation.z)
 
-		& BOOST_SERIALIZATION_NVP(mJointMaxForces.x) /**!< The max forces of the joint axes */
-		& BOOST_SERIALIZATION_NVP(mJointMaxForces.y)
-		& BOOST_SERIALIZATION_NVP(mJointMaxForces.z)
-
 		& BOOST_SERIALIZATION_NVP(mLimbMassForceScalar)
+
+		& BOOST_SERIALIZATION_NVP(mJointIndex)
 
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
@@ -260,6 +258,17 @@ public:
 
 		& BOOST_SERIALIZATION_NVP(mJointLowerLimits.z) /**!< Joint Roll limit */
 		& BOOST_SERIALIZATION_NVP(mJointUpperLimits.z)
+
+		& BOOST_SERIALIZATION_NVP(mJointStiffness.x) /**!< Joint Pitch stiffness */
+		& BOOST_SERIALIZATION_NVP(mJointStiffness.y) /**!< Joint Yaw stiffness */
+		& BOOST_SERIALIZATION_NVP(mJointStiffness.z) /**!< Joint Roll stiffness */
+
+		& BOOST_SERIALIZATION_NVP(mJointDamping.x) /**!< Joint Pitch damping */
+		& BOOST_SERIALIZATION_NVP(mJointDamping.y) /**!< Joint Yaw damping */
+		& BOOST_SERIALIZATION_NVP(mJointDamping.z) /**!< Joint Roll damping */
+
+		& BOOST_SERIALIZATION_NVP(mLimbMassForceScalar) /**!< How much force can be applied for a certain mass. */
+
 		& BOOST_SERIALIZATION_NVP(mMotors); /**!< The motors of the joint bullet physics model*/
 	}
 protected:
@@ -275,15 +284,15 @@ protected:
 	Ogre::Vector3 mLocalBPosition;
 	Ogre::Quaternion mLocalBOrientation;
 
-	Ogre::Vector3 mJointPitchAxis;/**!< The direction of the joint pitch axis*/
-	Ogre::Vector3 mJointYawAxis;/**!< The direction of the joint pitch axis*/
+	Ogre::Vector3 mJointPitchAxis; /**!< The direction of the joint pitch axis*/
+	Ogre::Vector3 mJointYawAxis; /**!< The direction of the joint pitch axis*/
 	Ogre::Vector3 mJointUpperLimits; /**!< Joint upper limits for each degree of freedom */
 	Ogre::Vector3 mJointLowerLimits; /**!< Joint lower limits for each degree of freedom */
 	Ogre::Vector3 mJointMaxForces;
 	Ogre::Vector3 mJointStiffness; /**!< The joint spring stiffness coefficient */
 	Ogre::Vector3 mJointDamping; /**!< The joint damping coefficient */
 
-	double mLimbMassForceScalar; /**!< The force scalar of the two limb masses multiplied */
+	double mLimbMassForceScalar; /**!< How much force can be applied for a certain mass. */
 
 	// should not be serialized
 	bool mInWorld; /**!< If the joint physics is in the world or not. */

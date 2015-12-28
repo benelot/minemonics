@@ -469,6 +469,7 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
 	//TODO: Fix the force curve
+	//TODO: Calculate somewhere within the joint only using the constants
 	double maxTorque =
 		MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT
 			* (mass1 * mass2)

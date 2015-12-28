@@ -94,7 +94,7 @@ public:
 	}
 
 	/**
-	 * Serializes the sine controller to an xml file.
+	 * Serializes the chaotic controller to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */

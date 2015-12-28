@@ -198,7 +198,7 @@ void FSJointBt::reposition(const Ogre::Vector3 position) {
 
 void FSJointBt::setAngularStiffness(double jointPitchStiffness,
 	double jointYawStiffness, double jointRollStiffness) {
-	// Not implementedt in FS Joint Bt
+	// Not implemented in FS Joint Bt
 	if (false) {
 	} else {
 		mJointStiffness.x = jointPitchStiffness;
