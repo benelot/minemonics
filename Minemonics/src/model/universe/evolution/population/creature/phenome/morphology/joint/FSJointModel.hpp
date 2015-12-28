@@ -182,6 +182,10 @@ public:
 		return OgreBulletUtils::convert(mJointPhysics->getJointPitchAxis());
 	}
 
+	void setWorld(btDynamicsWorld* world) {
+		((FSJointBt*) mJointPhysics)->setWorld(world);
+	}
+
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization .*/
 

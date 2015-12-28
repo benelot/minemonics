@@ -34,6 +34,7 @@ ChaoticController::ChaoticController() :
 		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
 		ChaoticControllerGene::CHUA_CIRCUIT), mFirstTime(true), mInitialX(0), mInitialY(
 		0), mInitialZ(0), mSpeed(1) {
+	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 }
 
 ChaoticController::ChaoticController(
@@ -43,6 +44,7 @@ ChaoticController::ChaoticController(
 		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
 		systemType), mFirstTime(true), mInitialX(initialX), mInitialY(initialY), mInitialZ(
 		initialZ), mSpeed(speed) {
+	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 }
 
 ChaoticController::ChaoticController(
@@ -112,8 +114,11 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 	mTime += timeSinceLastTick; // time might not be the same as real-time, but it is close. On the other hand it is a very accurate simulation.
 
-	calcChuaCircuit(); // calculate the circuit change
-
+	switch (mSystemType) {
+	case ChaoticControllerGene::CHUA_CIRCUIT:
+		calcChuaCircuit(); // calculate the chua circuit change
+		break;
+	}
 //	double output = u[0]; //output the new value to the motor
 //	double output = u[1]; //output the new value to the motor
 	double output = u[2]; //output the new value to the motor

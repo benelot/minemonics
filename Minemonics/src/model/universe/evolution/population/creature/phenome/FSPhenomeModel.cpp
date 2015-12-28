@@ -132,6 +132,12 @@ void FSPhenomeModel::initialize() {
 		(*lit)->initialize();
 	}
 
+	//set the world to the joint models if it did not already happen in embryogenesis
+	for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		(*jit)->setWorld(getWorld());
+	}
+
 	if (!mBodyGenerated) {
 		generateBody(); /**!< Build the body from the body plan */
 
@@ -142,6 +148,11 @@ void FSPhenomeModel::initialize() {
 		wireController(); /**!< Wire the controller */
 
 		storeControlIndices(); /**!< Store the control indices for serialization */
+
+		for (std::vector<Controller*>::iterator cit = mControllers.begin();
+			cit != mControllers.end(); cit++) {
+			(*cit)->initialize();
+		}
 
 		addJointConstraints(); /**!< Add the joint constraints */
 	}
@@ -202,7 +213,7 @@ int FSPhenomeModel::performEmbryogenesis() {
 		std::map<int, int> repList;
 		rootGenerator->initialize(repList, mCreatureModel->getInitialPosition(),
 			Ogre::Quaternion::IDENTITY, NULL, NULL, 1);
-		rootGenerator->getRepetitionList()[mCreatureModel->getGenotype().getRootIndex()] = 0; // add another of this branching morphogene type
+		rootGenerator->getRepetitionList()[mCreatureModel->getGenotype().getRootIndex()] = 0;// add another of this branching morphogene type
 		rootGenerator->setGene(gene);
 		rootGenerator->setRoot2LeafPath(0);
 		generatorList.push_back(rootGenerator);
@@ -529,8 +540,6 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 				chaoticControllerGene->getInitialY(),
 				chaoticControllerGene->getInitialZ(),
 				chaoticControllerGene->getSpeed());
-
-			controller->initialize();
 
 			controller->addControlInput(joint->getAngleceptors()[0]); // Add the first angleceptor as input
 			controller->addControlInput(joint->getVelocityceptors()[0]); // add the first velocityceptor as input

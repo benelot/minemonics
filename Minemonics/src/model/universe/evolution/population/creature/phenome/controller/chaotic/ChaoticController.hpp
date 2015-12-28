@@ -48,10 +48,9 @@ public:
 	virtual ~ChaoticController();
 
 	/**
-	 * Initialize the chaotic controller with some initial values
-	 * TODO: Find initial values.
+	 * Initialize the chaotic controller with some initial values.
 	 */
-	void initialize();
+	virtual void initialize();
 
 	double* chuaCircuit(double t, int dimensions, double u[]);
 
@@ -102,7 +101,12 @@ public:
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Controller) /**!< Serialize the base object */
-		& BOOST_SERIALIZATION_NVP(mTime); /**The time of the chaotic controller*/
+		& BOOST_SERIALIZATION_NVP(mTime) /**The time of the chaotic controller*/
+		& BOOST_SERIALIZATION_NVP(mSystemType) /**!< The type of chaotic system */
+		& BOOST_SERIALIZATION_NVP(mInitialX) /**!< Initial conditions for X, Y and Z */
+		& BOOST_SERIALIZATION_NVP(mInitialY)
+		& BOOST_SERIALIZATION_NVP(mInitialZ)
+		& BOOST_SERIALIZATION_NVP(mSpeed);
 	}
 
 private:
@@ -121,17 +125,18 @@ private:
 		}
 	} _initializer;
 
-	double mTime; /**!< The timer of of sine wave. */
+	double mTime; /**!< The timer of the chaotic system. */
 
 	double u[3]; /**!< 3 dimensions of the chua circuit */
 
-	bool mFirstTime;
+	bool mFirstTime; /**!< if the controller is run the first time. */
 
-	ChaoticControllerGene::ChaoticSystemType mSystemType;
+	ChaoticControllerGene::ChaoticSystemType mSystemType; /**!< The chaotic system type */
 
-	std::string mLoggerName;
+	std::string mLoggerName; /**!< Logger name which is always ChaosLogger + &this */
 
 	double mInitialX, mInitialY, mInitialZ; /**!< The initial conditions of the chaotic system */
+
 	double mSpeed; /**!< The integration speed */
 };
 

@@ -192,7 +192,7 @@ public:
 		((FSLimbBt*) mLimbPhysics)->setWorld(world);
 	}
 
-// Serialization
+	// Serialization
 	/**
 	 * Give access to boost serialization
 	 */

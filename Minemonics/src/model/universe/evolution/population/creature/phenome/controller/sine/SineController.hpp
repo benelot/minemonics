@@ -51,7 +51,7 @@ public:
 
 	virtual ~SineController();
 
-	void initialize();
+	virtual void initialize();
 
 	/**
 	 * Clone the sine controller.

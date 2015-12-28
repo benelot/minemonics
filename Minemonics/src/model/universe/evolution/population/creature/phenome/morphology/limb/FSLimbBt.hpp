@@ -190,6 +190,10 @@ public:
 		return mLink;
 	}
 
+	void setWorld(btDynamicsWorld* world) {
+		mWorld = world;
+	}
+
 	// Serialization
 	friend class boost::serialization::access; /**!< Give access to boost serialization */
 
@@ -201,10 +205,6 @@ public:
 	 */
 	friend std::ostream & operator<<(std::ostream &os, const FSLimbBt &limbBt) {
 		return os << "LimbBt: LimbPhysics=" << limbBt; /**!< The limb physics model of the limb bullet model*/
-	}
-
-	void setWorld(btDynamicsWorld* world) {
-		mWorld = world;
 	}
 
 	/**

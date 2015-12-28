@@ -166,6 +166,10 @@ public:
 		mMultiBody = multiBody;
 	}
 
+	void setWorld(btDynamicsWorld* world) {
+		mWorld = (btMultiBodyDynamicsWorld*) world;
+	}
+
 	/**
 	 * Serializes the joint bullet physics model to an xml file.
 	 * @param ar The archive.

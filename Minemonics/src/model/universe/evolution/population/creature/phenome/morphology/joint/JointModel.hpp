@@ -113,6 +113,8 @@ public:
 
 	void storeControlIndices();
 
+	virtual void setWorld(btDynamicsWorld* world) = 0;
+
 	// Accessor methods ##########################
 
 	JointPhysics* const getJointPhysics() const {

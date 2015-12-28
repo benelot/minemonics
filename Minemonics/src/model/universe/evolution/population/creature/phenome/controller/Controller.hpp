@@ -44,6 +44,8 @@ public:
 	Controller(ControllerType controllerType);
 	virtual ~Controller();
 
+	virtual void initialize() = 0;
+
 	virtual Controller* clone() = 0;
 
 	/**
