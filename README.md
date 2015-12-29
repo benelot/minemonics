@@ -81,7 +81,7 @@ Simple limiter control on the other hand is based on an entirely different appro
 
 Chaotic behavior can be seen in different natural phenomena such as weather and climate or neural circuits and computations. Our hypothesis relates to motor-control and states that complex oscillatory gait patterns can arise from only using chaotic control signals that are then either limited in the chaotic system space or the state space of the controlled limb.
 
-Our model chaotic system is the Chua's circuit[[2]](https://en.wikipedia.org/wiki/Chua%27s_circuit). [Online simulation of the Chua's circuit](http://www.chuacircuits.com/sim.php). It show chaotic behavior and can be limited using simple limiters, which stabilize different unstable periodic orbits depending on configuration.
+Our model chaotic system is the Chua's circuit[[2]](https://en.wikipedia.org/wiki/Chua%27s_circuit). [Online simulation of the Chua's circuit](http://www.chuacircuits.com/sim.php). It shows chaotic behavior and can be limited using simple limiters, which stabilize different unstable periodic orbits depending on configuration.
 
 
 <!---
@@ -96,14 +96,6 @@ To be defined. Come back in May.
 
 ## Milestone 7: Sensory Feedback
 To be defined. Come back in June.
-
-
-## Milestone 8: Neural Controllers
-To be defined. Come back in June.
-
-
-## Milestone 9: Reinforcement Learning
-To be defined. Come back in July.
 -->
 
 ## References
