@@ -71,7 +71,7 @@ The fitness function for creature selection is the number of limbs they have. Th
 
 ## Milestone 5: Chaotic Systems and Simple Limiter Control
 
-Chaotic Systems are dynamical systems that are highly sensitive to initial conditions. They show high variability because small differences in the initial conditions yield widely diverging outcomes which make long-term prediction impossible, even though the system is deterministic. 
+Chaotic Systems are dynamical systems that are highly sensitive to initial conditions. They show high variability because small differences in the initial conditions yield widely diverging outcomes which make long-term prediction impossible, even though the system is deterministic. Additionally the system shows topological mixing, which means that the system evolves over time so that any given region or open set of its phase space will eventually overlap with any other given region.
 
 In chaotic control, approaches to control chaotic systems are designed. Their main goal is to stabilize periodic orbits. A strange attractor contains an infinite number of unstable, periodic orbits. Chaotic dynamics consists of a motion of the system state near one of these unstable orbits and stays in its neighborhood for a while, then reaches the neighborhood of a different unstable periodic orbit in which it remains for a limited amount of time and so forth. This results in a complicated and unpredictable wandering over longer periods of time. 
 
