@@ -73,7 +73,11 @@ The fitness function for creature selection is the number of limbs they have. Th
 
 Chaotic Systems are dynamical systems that are highly sensitive to initial conditions. They show high variability because small differences in the initial conditions yield widely diverging outcomes which make long-term prediction impossible, even though the system is deterministic. 
 
-In chaotic control, approaches to control chaotic systems are designed. Many of those approaches exist and generally model parts of the original system to control, thereby reaching sometimes even higher complexity than the chaotic system itself. This leads to a specification of the chaos control system and renders the control system useless when facing another chaotic system. Another difficulty is that for fast dynamics of certain systems, the perfect timing of the control signal is crucial and can generally not be achieved by a computational control system. 
+In chaotic control, approaches to control chaotic systems are designed. Their main goal is to stabilize periodic orbits. A strange attractor contains an infinite number of unstable, periodic orbits. Chaotic dynamics consists of a motion of the system state near one of these unstable orbits and stays in its neighborhood for a while, then reaches the neighborhood of a different unstable periodic orbit in which it remains for a limited amount of time and so forth. This results in a complicated and unpredictable wandering over longer periods of time. 
+
+Many of those chaotic control approaches exist and generally model parts of the original system to control, thereby reaching sometimes even higher complexity than the chaotic system itself. This leads to a specification of the chaos control system and renders the control system useless when facing another chaotic system. Another difficulty is that for fast dynamics of certain systems, the perfect timing of the control signal is crucial and can generally not be achieved by a computational control system.
+
+Simple limiter control on the other hand is based on an entirely different approach which might be more natural and general. 
 
 Chaotic behavior can be seen in different natural phenomena such as weather and climate or neural circuits and computations. Our hypothesis relates to motor-control and states that complex oscillatory gait patterns can arise from only using chaotic control signals that are then either limited in the chaotic system space or the state space of the controlled limb.
 
