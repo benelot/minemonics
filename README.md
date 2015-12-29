@@ -73,7 +73,9 @@ The fitness function for creature selection is the number of limbs they have. Th
 
 Chaotic Systems are dynamical systems that are highly sensitive to initial conditions. They show high variability because small differences in the initial conditions yield widely diverging outcomes which make long-term prediction impossible, even though the system is deterministic. 
 
-Chaotic behavior can be seen in different natural phenomena such as weather and climate or neural circuits and computations. 
+In chaotic control, approaches to control chaotic systems are designed. Many of those approaches exist and generally model parts of the original system to control, thereby reaching sometimes even higher complexity than the chaotic system itself. This leads to a specification of the chaos control system and renders the control system useless when facing another chaotic system. Another difficulty is that for fast dynamics of certain systems, the perfect timing of the control signal is crucial and can generally not be achieved by a computational control system. 
+
+Chaotic behavior can be seen in different natural phenomena such as weather and climate or neural circuits and computations. Our hypothesis relates to motor-control and states that complex oscillatory gait patterns can arise from only using chaotic control signals that are then either limited in the chaotic system space or the state space of the controlled limb.
 
 
 <!---
