@@ -69,6 +69,13 @@ Results from an early run showing the changes of an evolutionary step to another
 A population of 10 creatures were evolved of which 6 were chosen for the visualization to show their details.
 The fitness function for creature selection is the number of limbs they have. The last in the row has obviously only one limb and is therefore rated the lowest by the fitness function. It therefore gets culled and replaced twice until it has more limbs.
 
+## Milestone 5: Chaotic Systems and Simple Limiter Control
+
+Chaotic Systems are dynamical systems that are highly sensitive to initial conditions. They show high variability because small differences in the initial conditions yield widely diverging outcomes which make long-term prediction impossible, even though the system is deterministic. 
+
+Chaotic behavior can be seen in different natural phenomena such as weather and climate or neural circuits and computations. 
+
+
 <!---
 ## Milestone 5: Graphs and Data Logging
 
