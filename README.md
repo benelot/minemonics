@@ -107,6 +107,20 @@ A multistage optimization problem](Minemonics/doc/presentations/[2015] Auditory 
 
 (You need to download the figs folder as well, because otherwise you can not find the videos that are linked in the presentation)
 
+Here are some of the evolved creatures using simple oscillators (in this case sinusoids with different frequencies/amplitudes/offsets):
+
+### Jumper 1:
+[![Jumper 1](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-265490-jumper-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-265490-jumper-.mp4)
+
+### Jumper 2:
+[![Jumper 2](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45474728-jumper-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45474728-jumper-.mp4)
+
+### Walker 1:
+[![Walker 1](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45099537-walker-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45099537-walker-.mp4)
+
+### Walker 2:
+[![Walker 2](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45209411-walker-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45209411-walker-.mp4)
+
 <!--
 ## Milestone 6: Experiments on Gait Periodicity
 -->
