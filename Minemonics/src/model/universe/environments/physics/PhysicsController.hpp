@@ -143,7 +143,7 @@ public:
 		return mPhysicsModelType;
 	}
 
-	void drawDebugWorld(){
+	void drawDebugWorld() {
 		mDynamicsWorld->debugDrawWorld(); /**!< draws the debug world if it is enabled*/
 	}
 
@@ -186,13 +186,12 @@ public:
 	 */
 	template<class Archive>
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar
-			& BOOST_SERIALIZATION_NVP(
-				mPhysicsPaused) & BOOST_SERIALIZATION_NVP(mPhysicsStepped)
-				& BOOST_SERIALIZATION_NVP(mSimulationSpeed)
-				& BOOST_SERIALIZATION_NVP(mPhysicsPaused)
-				& BOOST_SERIALIZATION_NVP(mPhysicsModelType)
-				& BOOST_SERIALIZATION_NVP(mEnvironmentType);
+		ar & BOOST_SERIALIZATION_NVP(mPhysicsPaused) /**!< */
+		& BOOST_SERIALIZATION_NVP(mPhysicsStepped) /**!< */
+		& BOOST_SERIALIZATION_NVP(mSimulationSpeed) /**!< */
+		& BOOST_SERIALIZATION_NVP(mPhysicsPaused) /**!< TODO: Duplicate */
+		& BOOST_SERIALIZATION_NVP(mPhysicsModelType) /**!< */
+		& BOOST_SERIALIZATION_NVP(mEnvironmentType); /**!< */
 	}
 
 protected:
