@@ -127,6 +127,10 @@ public:
 
 	void clearJuries();
 
+	void save();
+
+	void load();
+
 	// Accessor methods ##########################
 
 	std::vector<Creature*>& getCreatures() {
@@ -144,10 +148,6 @@ public:
 	bool isOutOfSync() const;
 
 	void setOutOfSync(const bool outOfSync);
-
-	void save();
-
-	void load();
 
 	void setSerializationPath(std::string path);
 
