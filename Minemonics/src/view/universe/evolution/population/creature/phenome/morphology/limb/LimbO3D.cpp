@@ -121,11 +121,12 @@ LimbO3D::LimbO3D(const LimbO3D& limbO3D) :
 
 LimbO3D::~LimbO3D() {
 	// Ogre likes to cleanup by itself
-//	mLimbEntityNode->removeAndDestroyAllChildren();
-//	SimulationManager::getSingleton()->getSceneManager()->destroySceneNode(
-//		mLimbEntityNode);
-//	mLimbEntityNode = 0;
-//	delete mLimbEntity;
+	mLimbEntityNode->removeAndDestroyAllChildren();
+	SimulationManager::getSingleton()->getSceneManager()->destroySceneNode(
+		mLimbEntityNode);
+	mLimbEntityNode = 0;
+	SimulationManager::getSingleton()->getSceneManager()->destroyEntity(mLimbEntity);
+	mLimbEntity = 0;
 }
 
 void LimbO3D::update(double timeSinceLastTick) {

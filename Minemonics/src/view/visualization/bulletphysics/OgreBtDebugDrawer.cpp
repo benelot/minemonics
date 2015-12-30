@@ -120,9 +120,10 @@ void OgreBtDebugDrawer::initialize(const bool drawTrajectory) {
 
 OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 	Ogre::Root::getSingleton().removeFrameListener(this);
-	// Ogre likes to cleanup by itself
-//	delete mLines;
-//	delete mTriangles;
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mLines);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mTriangles);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mLines2);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mTriangles2);
 	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
 //	szElement = "element_";
 //	olm->destroyOverlayElement(szElement);

@@ -79,7 +79,7 @@ private:
 	} _initializer;
 
 	Ogre::Entity* mLimbEntity; /**!< The limb object in the graphical world. */
-
+	Ogre::MeshPtr mMesh; /**!< In case it uses a custom mesh */
 	Ogre::SceneNode* mLimbEntityNode; /**!< The entity node of the limb to perform rotations and translations with. */
 
 };
