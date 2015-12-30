@@ -61,6 +61,10 @@ public:
 	 */
 	void update(const double timeSinceLastFrame);
 
+	void updateEvaluations(const double timeSinceLastTick);
+
+	void pollNewEvaluations();
+
 	// Accessor methods ##########################
 
 	void setPaused(const bool paused) {
@@ -90,9 +94,9 @@ private:
 		}
 	} _initializer;
 
-	std::vector<Evaluation*> mEvaluations;
+	std::vector<Evaluation*> mEvaluations; /**!< The evaluations in the evaluation controller. */
 
-	int mCurrentlyRunningEvaluationsQty; /**!M<The currently running evaluations. */
+	int mCurrentlyRunningEvaluationsQty; /**!<The currently running evaluations. */
 
 	int mParallelEvaluationsQty; /**!< Number of parallel evaluations. */
 

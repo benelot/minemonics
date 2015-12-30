@@ -38,10 +38,13 @@ public:
 	Universe();
 	virtual ~Universe();
 
+	/**
+	 * Teardown the universe.
+	 */
 	void teardown();
 
 	/**
-	 * Initializes the universe.
+	 * Initialize the universe.
 	 */
 	void initialize(const int parallelEvaluationsQty);
 

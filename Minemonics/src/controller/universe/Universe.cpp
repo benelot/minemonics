@@ -39,9 +39,9 @@ Universe::~Universe() {
 }
 
 void Universe::teardown() {
-	//delete the planets
-	std::vector<Planet*>::iterator pit = mPlanets.begin();
-	for (; pit != mPlanets.end(); pit++) {
+
+	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
+		pit != mPlanets.end(); pit++) { //delete all planets
 		delete (*pit);
 	}
 
@@ -58,14 +58,12 @@ void Universe::addPlanet(Planet* const planet) {
 }
 
 bool Universe::proceedEvaluation() {
-	if (mPlanets.size() != 0) {	/**!< if there are planets in the universe */
+	if (mPlanets.size() != 0) { /**!< if there are planets in the universe */
 
-		/**!< if the evaluation of a planet continues to the next generation, we go to the next planet. */
-		if (!mPlanets[mUniverseModel.getEvaluatingPlanetIndex()]->proceedEvaluation()) {
+		if (!mPlanets[mUniverseModel.getEvaluatingPlanetIndex()]->proceedEvaluation()) { /**!< if the evaluation of a planet continues to the next generation, we go to the next planet. */
 			mUniverseModel.setEvaluatingPlanetIndex(
-				/**!< we go to the next planet in line or go back to the first */
 				(mUniverseModel.getEvaluatingPlanetIndex() + 1 < mPlanets.size()) ?
-					mUniverseModel.getEvaluatingPlanetIndex() + 1 : 0);
+					mUniverseModel.getEvaluatingPlanetIndex() + 1 : 0); /**!< we go to the next planet in line or go back to the first */
 		}
 		mUniverseModel.proceedEvaluation(); /**!< Proceed the evaluation */
 		return true;
@@ -98,13 +96,14 @@ void Universe::drawDebugWorld() {
 }
 
 void Universe::update(const double timeStep) {
-	int subSteps = round(
-		timeStep /**!< Calculate the number of full normal time steps we can take */
-			/ PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+	int subSteps = round(timeStep / PhysicsConfiguration::FIXED_STEP_SIZE_SEC); /**!< Calculate the number of full normal time steps we can take */
 
-	for (int i = 0; i < subSteps; i++) { /**!< Perform the number of substeps to reach the timestep*/
-		stepPhysics(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
-		mEvaluationController.update(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+	if (!mEvaluationController.isPaused()) {
+		for (int i = 0; i < subSteps; i++) { /**!< Perform the number of substeps to reach the timestep*/
+			stepPhysics(PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+			mEvaluationController.update(
+				PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+		}
 	}
 }
 

@@ -20,6 +20,7 @@ class Window;
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		The GUI sheet handler picks up the inputs via the menu.
@@ -272,4 +273,21 @@ public:
 private:
 	CEGUI::System* mSystem; /**!< pointer to the CEGUI System instance */
 	CEGUI::Window* mWindow; /**!< pointer to the layout sheet window */
+
+	/**
+	 * The boost logger.
+	 */
+	static BoostLogger mBoostLogger;
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+					boost::log::attributes::constant<std::string>(
+							"GUISheetHandler"));
+		}
+	} _initializer;
 };

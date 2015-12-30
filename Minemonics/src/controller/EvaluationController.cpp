@@ -28,11 +28,10 @@ EvaluationController::EvaluationController() :
 EvaluationController::~EvaluationController() {
 //	mCurrentlyRunningEvaluationsQty
 	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-		eit != mEvaluations.end();) {
-		Evaluation* evaluation = *eit;
-		eit = mEvaluations.erase(eit);
-		delete evaluation;
+		eit != mEvaluations.end(); eit++) {
+		delete (*eit);
 	}
+	mEvaluations.clear();
 
 	mUniverse = NULL;
 //	mParallelEvaluationsQty
@@ -50,6 +49,23 @@ void EvaluationController::addEvaluation(Evaluation* const evaluation) {
 	mEvaluations.push_back(evaluation);
 }
 
+void EvaluationController::update(const double timeSinceLastTick) {
+	updateEvaluations(timeSinceLastTick); /**!< We update all evaluations that are in the loop */
+
+	scheduleEvaluations(); /**!< Setup new evaluations and tear down the old ones. */
+
+	pollNewEvaluations(); /**!< Add new evaluations from the universe if we run out of evaluations. */
+}
+
+void EvaluationController::updateEvaluations(const double timeSinceLastTick) {
+	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
+		eit != mEvaluations.end(); eit++) { /**!< We update all evaluations that are in the loop */
+		if ((*eit)->isEvaluating()) { /**!< if the evaluation is running */
+			(*eit)->update(timeSinceLastTick); /**!< update the evaluation */
+		}
+	}
+}
+
 void EvaluationController::scheduleEvaluations() {
 	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
 		eit != mEvaluations.end();) {
@@ -58,7 +74,7 @@ void EvaluationController::scheduleEvaluations() {
 
 			if ((*eit)->hasFailed()) {
 				mFails += (*eit)->hasFailed();
-				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Fails: " << mFails;
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Fails: " << mFails;
 			}
 
 			mCurrentlyRunningEvaluationsQty--;
@@ -70,7 +86,7 @@ void EvaluationController::scheduleEvaluations() {
 	}
 
 	for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-		eit != mEvaluations.end(); eit++) {
+		eit != mEvaluations.end(); eit++) { /**!< Setup the new evaluations */
 
 		/** If the evaluation is newly scheduled, then set it up for evaluation */
 		if (!(*eit)->isEvaluating()
@@ -83,19 +99,7 @@ void EvaluationController::scheduleEvaluations() {
 	}
 }
 
-void EvaluationController::update(const double timeSinceLastTick) {
-
-	if (!mPaused) { /**!< if the simulator is not paused, we update all evaluations that are in the loop */
-		for (std::vector<Evaluation*>::iterator eit = mEvaluations.begin();
-			eit != mEvaluations.end(); eit++) {
-			if ((*eit)->isEvaluating()) { /**!< if the evaluation is running */
-				(*eit)->update(timeSinceLastTick); /**!< update the evaluation */
-			}
-		}
-	}
-
-	scheduleEvaluations(); /**!< setup new evaluations and tear down the old ones */
-
+void EvaluationController::pollNewEvaluations() {
 	while (mEvaluations.size() < mParallelEvaluationsQty /**!< if there are not enough evaluations evaluating */
 	&& mUniverse->getTotalCreatureQty() != 0) { /**!< if the universe has creatures in it */
 		if (!mUniverse->proceedEvaluation()) { /**!< we proceed the evaluation until it says it can not continue anymore */

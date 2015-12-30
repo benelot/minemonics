@@ -34,7 +34,8 @@ Evaluation::Evaluation() :
 }
 
 Evaluation::Evaluation(Planet* const planet, const double evaluationTime) :
-	mPlanet(planet), mStart(0), mHasFailed(false),mEvaluationModel(planet->getPlanetModel(), evaluationTime) {
+	mPlanet(planet), mStart(0), mHasFailed(false), mEvaluationModel(
+		planet->getPlanetModel(), evaluationTime) {
 }
 
 Evaluation::~Evaluation() {
@@ -42,17 +43,18 @@ Evaluation::~Evaluation() {
 
 	//remove populations but do not delete the creatures
 	for (std::vector<Population*>::iterator pit = mPopulations.begin();
-		pit != mPopulations.end();) {
+		pit != mPopulations.end(); pit = mPopulations.erase(pit)) {
+
+		// clear the creature vectors to avoid deleting them in case population would try to delete it.
 		(*pit)->getCreatures().clear();
 		(*pit)->getPopulationModel()->getCreatureModels().clear();
 		delete *pit;
-		pit = mPopulations.erase(pit);
 	}
 }
 
 void Evaluation::initialize() {
 	mGenerationSerializationPath =
-			mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
+		mPlanet->getPlanetModel()->getEvolutionModel().getPopulationModels()[mPlanet->getPlanetModel()->getEvolutionModel().getCurrentPopulationIndex()]->getGenerationSerializationPath();
 	mEvaluationModel.initialize();
 }
 
@@ -64,7 +66,8 @@ void Evaluation::addPopulation(Population* const population) {
 void Evaluation::setup() {
 	SimulationManager::getSingleton()->getViewController().addPlanetToView(
 		mPlanet);
-	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(mPlanet);
+	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(
+		mPlanet);
 	//add environment to the world
 	//TODO: Must be a separate copy for parallel evaluations(you can not use the same reference for multiple worlds), but must update (possibly in parallel)
 	// the main environment to stay the same for all evaluations
@@ -118,11 +121,12 @@ void Evaluation::process() {
 
 void Evaluation::teardown() {
 	SimulationManager::getSingleton()->getViewController().setEvaluationInView(
-		NULL);
+	NULL);
 
 	SimulationManager::getSingleton()->getViewController().removePlanetFromView(
 		mPlanet);
-	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(NULL);
+	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(
+		NULL);
 
 	if (!mHasFailed) {
 		// save creatures of evaluated populations

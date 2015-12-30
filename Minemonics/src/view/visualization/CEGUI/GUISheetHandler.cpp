@@ -39,6 +39,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger GUISheetHandler::mBoostLogger; /*<! initialize the boost logger*/
+GUISheetHandler::_Init GUISheetHandler::_initializer;
 GUISheetHandler::GUISheetHandler() :
 	mSystem(NULL), mWindow(NULL) {
 
@@ -722,7 +724,8 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 //File->Quit
 bool GUISheetHandler::quitButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().requestStateChange(StateHandler::SHUTDOWN);
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SHUTDOWN);
 	return true;
 }
 
@@ -877,20 +880,20 @@ bool GUISheetHandler::recordFramesButtonClicked(const CEGUI::EventArgs &args) {
 	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 	case StateHandler::SIMULATION: {
 		if (SimulationManager::getSingleton()->getVideoWriter().isInitialized()) {
-//			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-//				<< "Recording video stopped.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< "Recording video stopped.";
 			SimulationManager::getSingleton()->getVideoWriter().close();
 		} else {
 			// create video file name
 			std::string videoName;
 			videoName.append("Minemonics-");
 			videoName.append(
-				boost::lexical_cast < std::string
-					> (SimulationManager::getSingleton()->getNow()));
+				boost::lexical_cast<std::string>(
+					SimulationManager::getSingleton()->getNow()));
 			videoName.append(".mp4");
 
-//			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-//				<< "Recording video started.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
+				<< "Recording video started.";
 
 			//This even works on if the screen gets resized
 			SimulationManager::getSingleton()->getVideoWriter().setup(
@@ -1088,131 +1091,231 @@ bool GUISheetHandler::tuneForQualityButtonClicked(
 
 //Settings->Movement->Speed 1
 bool GUISheetHandler::speed1ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_01);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_01]);
 	return true;
 }
 
 //Settings->Movement->Speed 2
 bool GUISheetHandler::speed2ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_02);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_02]);
 	return true;
 }
 
 //Settings->Movement->Speed 3
 bool GUISheetHandler::speed3ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_03);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_03]);
 	return true;
 }
 
 //Settings->Movement->Speed 4
 bool GUISheetHandler::speed4ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_04);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_04]);
 	return true;
 }
 
 //Settings->Movement->Speed 5
 bool GUISheetHandler::speed5ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_05);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_05]);
 	return true;
 }
 
 //Settings->Movement->Speed 6
 bool GUISheetHandler::speed6ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_06);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_06]);
 	return true;
 }
 
 //Settings->Movement->Speed 7
 bool GUISheetHandler::speed7ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_07);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_07]);
 	return true;
 }
 
 //Settings->Movement->Speed 8
 bool GUISheetHandler::speed8ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_08);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_08]);
 	return true;
 }
 
 //Settings->Movement->Speed 9
 bool GUISheetHandler::speed9ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_09);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_09]);
 	return true;
 }
 
 //Settings->Movement->Speed 10
 bool GUISheetHandler::speed10ButtonClicked(const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().requestStateChange(
+		StateHandler::SIMULATION);
+	SimulationManager::getSingleton()->setCurrentSimulationSpeed(
+		PhysicsConfiguration::SIMULATION_SPEED_10);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Changed simulation speed to "
+	<< pow(2,
+		PhysicsConfiguration::SIMULATION_SPEEDS[PhysicsConfiguration::SIMULATION_SPEED_10]);
 	return true;
 }
 
 //Settings->Physics->Pause Simulation
 bool GUISheetHandler::pauseSimulationButtonClicked(
 	const CEGUI::EventArgs &args) {
+	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+	case StateHandler::SIMULATION: {
+		SimulationManager::getSingleton()->getUniverse().getEvaluationController().setPaused(
+			!SimulationManager::getSingleton()->getUniverse().getEvaluationController().isPaused());
+		break;
+	}
+	default: {
+		break;
+	}
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->No Gravity
 bool GUISheetHandler::noGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::NO_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::NO_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Pluto Gravity
 bool GUISheetHandler::plutoGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::PLUTO_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::PLUTO_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Moon Gravity
 bool GUISheetHandler::moonGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::MOON_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::MOON_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Mars/Mercury Gravity
 bool GUISheetHandler::marsMercuryGravityButtonClicked(
 	const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::MARS_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::MARS_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Uranus Gravity
 bool GUISheetHandler::uranusGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::URANUS_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::URANUS_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Venus/Saturn Gravity
 bool GUISheetHandler::venusSaturnGravityButtonClicked(
 	const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::VENUS_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::VENUS_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Earth Gravity
 bool GUISheetHandler::earthGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::EARTH_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::EARTH_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Neptune Gravity
 bool GUISheetHandler::neptuneGravityButtonClicked(
 	const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::NEPTUNE_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::NEPTUNE_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Jupiter Gravity
 bool GUISheetHandler::jupiterGravityButtonClicked(
 	const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::JUPITER_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::JUPITER_GRAVITY);
+	}
 	return true;
 }
 
 //Settings->Physics->Gravity->Sun Gravity
 bool GUISheetHandler::sunGravityButtonClicked(const CEGUI::EventArgs &args) {
-	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
-		PhysicsConfiguration::SUN_GRAVITY);
+	if (SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet() != NULL) {
+		SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->getEnvironment()->getEnvironmentModel()->getPhysicsController()->setGravity(
+			PhysicsConfiguration::SUN_GRAVITY);
+	}
 	return true;
 }
 
