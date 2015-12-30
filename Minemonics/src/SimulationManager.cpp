@@ -1,3 +1,11 @@
+// In case you are getting a strange error in OgreMemoryNedPooling when shutting your program down, check this:
+// Main extracts
+// I had the same problem. I used CEGUI library. CEGUI was linked to libOgreMain_d library and my application was linked to libOgreMain library.
+// You can check this by typing:
+// ldd ./your-application
+// Solution is to link your application and all libraries to the same build type of Ogre library.
+// http://ogre3d.org/forums/viewtopic.php?f=2&t=59691
+
 //# corresponding header
 #include <SimulationManager.hpp>
 
@@ -166,7 +174,7 @@ void SimulationManager::createScene(void) {
 	mStateHandler.requestStateChange(StateHandler::GUI); /**!< request a state change saying that the GUI is shown */
 
 	// initialize the simulation's debug drawer
-	mDebugDrawer.initialize(mSceneMgr, false);
+	mDebugDrawer.initialize(false);
 	mDebugDrawer.setDebugDrawingEnabled(false);
 	mDebugDrawer.setDrawWireframe(true);
 	mDebugDrawer.setDrawConstraints(true);
