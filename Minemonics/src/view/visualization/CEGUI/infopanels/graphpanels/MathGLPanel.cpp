@@ -247,7 +247,13 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 
 	}
 
-	graph.SetRanges(minX,maxX,minY,maxY,minZ,maxZ);
+	// in case there are no data sets
+	if (mDatasets.size() == 0) {
+		minX = minY = minZ = 0;
+		maxX = maxY = maxZ = 1;
+	}
+
+	graph.SetRanges(minX, maxX, minY, maxY, minZ, maxZ);
 	for (std::vector<const MathGLDataset*>::const_iterator mit =
 		mDatasets.begin(); mit != mDatasets.end(); mit++) {
 		graph.SetColor('o', (*mit)->getPlotColor().r, (*mit)->getPlotColor().g,
