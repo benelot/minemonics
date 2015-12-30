@@ -66,9 +66,6 @@ void Reaper::reap(PopulationModel* const population) {
 		}
 	}
 
-	int headsToReap = ceil(
-		population->getCreatureModels().size() * mReapPercentage);
-
 	//for each jury type
 	for (int i = 0; i < population->getCreatureModels()[0]->getJuries().size();
 		i++) {
@@ -94,6 +91,9 @@ void Reaper::reap(PopulationModel* const population) {
 		population->getCreatureModels().end(),
 		scoreComparator.compareCreatureFitnessScore);
 
+	int headsToReap = ceil(
+		population->getCreatureModels().size() * mReapPercentage);
+
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Reap " << headsToReap << " creatures";
 	for (; headsToReap != 0; headsToReap--) {
 		population->getCreatureModels().back()->setCulled(true);
@@ -105,6 +105,7 @@ void Reaper::sow(PopulationModel* const population) {
 
 	int headsToSow = population->getCreatureQty()
 		- population->getCreatureModels().size();
+
 	if (headsToSow <= 0) {
 		return;
 	}
