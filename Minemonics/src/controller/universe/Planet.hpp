@@ -39,6 +39,12 @@
  */
 class Planet {
 public:
+
+	/**
+	 * Constructor to load a planet afterwards.
+	 */
+	Planet();
+
 	/**
 	 * Constructor to create a new planet.
 	 * @param physicsModelType The physics model type.
@@ -48,12 +54,9 @@ public:
 	 * @param tournamentSize The tournament size.
 	 */
 	Planet(const PhysicsController::PhysicsModelType physicsModelType,
-		const EnvironmentModel::EnvironmentType environmentType, const int evaluationTime,
-		EvolutionModel::EvaluationType evaluationType, int tournamentSize);
-	/**
-	 * Constructor to load a planet afterwards.
-	 */
-	Planet();
+		const EnvironmentModel::EnvironmentType environmentType,
+		const int evaluationTime, EvolutionModel::EvaluationType evaluationType,
+		int tournamentSize);
 
 	/**
 	 * Copy constructor.
@@ -137,17 +140,15 @@ public:
 
 	int getTotalCreatureQty();
 
-	void addEpoch(Epoch* epoch) ;
+	void addEpoch(Epoch* epoch);
 
 	void setSerializationPath(std::string serializationPath);
 
 	std::string getSerializationPath();
 
 private:
-	/**
-	 * The boost logger.
-	 */
-	static BoostLogger mBoostLogger;
+
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.
@@ -156,24 +157,15 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("Planet"));
+				boost::log::attributes::constant<std::string>("Planet"));
 		}
 	} _initializer;
 
-	/**
-	 * The model representation of this planet.
-	 */
-	PlanetModel* mPlanetModel;
+	PlanetModel* mPlanetModel; /**!< The model representation of this planet. */
 
-	/**
-	 * The evolution on this planet.
-	 */
-	Evolution mEvolution;
+	Evolution mEvolution; /**!< The evolution on this planet. */
 
-	/**
-	 * The environment of this planet.
-	 */
-	Environment* mEnvironment;
+	Environment* mEnvironment; /**!< The environment of this planet. */
 };
 
 #endif /* CONTROLLER_UNIVERSE_PLANET_HPP_ */

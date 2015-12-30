@@ -28,6 +28,7 @@ Planet::Planet() :
 	mEnvironment(NULL), mPlanetModel(NULL) {
 	mPlanetModel = new PlanetModel();
 }
+
 Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 	const EnvironmentModel::EnvironmentType environmentType,
 	const int evaluationTime, EvolutionModel::EvaluationType evaluationType,
@@ -41,6 +42,15 @@ Planet::Planet(const PhysicsController::PhysicsModelType physicsModelType,
 
 Planet::Planet(PlanetModel* const planetModel) :
 	mEnvironment(NULL), mPlanetModel(planetModel) {
+}
+
+Planet::~Planet() {
+//	~mEvolution()
+	delete mPlanetModel;
+	mPlanetModel = NULL;
+
+	delete mEnvironment;
+	mEnvironment = NULL;
 }
 
 void Planet::initialize() {
@@ -68,15 +78,6 @@ void Planet::initialize() {
 	}
 }
 
-Planet::~Planet() {
-//	~mEvolution()
-	delete mPlanetModel;
-	mPlanetModel = NULL;
-
-	delete mEnvironment;
-	mEnvironment = NULL;
-}
-
 void Planet::addPopulation(Population* const population) {
 	mEvolution.addPopulation(population);
 }
@@ -93,15 +94,19 @@ void Planet::update(double timeSinceLastTick) {
 
 bool Planet::proceedEvaluation() {
 
-	//if the evolution can not proceed, then remove the environment model from the world.
-	bool canNotProceed = !mEvolution.proceedEvaluation();
-	if (canNotProceed) {
-		mEnvironment->removeFromWorld();
+	bool canProceed = false;
+	if (mPlanetModel->proceedEvaluation()) {
+
+		canProceed = mEvolution.proceedEvaluation(); //if the evolution can not proceed, then remove the environment model from the world.
+		if (!canProceed) {
+			mEnvironment->removeFromWorld();
+		}
+
+	} else {
+		return false;
 	}
 
-	//TODO: The return value says if we are at the planet's end because it ran out of epochs.
-	mPlanetModel->proceedEvaluation();
-	return canNotProceed;
+	return canProceed;
 }
 
 void Planet::drawDebugWorld() {
