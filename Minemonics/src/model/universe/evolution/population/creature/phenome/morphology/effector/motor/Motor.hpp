@@ -43,7 +43,7 @@ public:
 		MUSCLE, SERVO_MOTOR
 	};
 	Motor(const MotorType motorType);
-	~Motor();
+	virtual ~Motor();
 
 	/**
 	 * Initialize the motor.
