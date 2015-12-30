@@ -51,11 +51,9 @@ public:
 
 	/**
 	 * Initialize the Ogre Bullet Debug Drawer.
-	 * @param sceneManager A handle to the scene manager.
 	 * @param drawTrajectory A possibility to draw a trajectory by not deleting lines.
 	 */
-	void initialize(Ogre::SceneManager* const sceneManager,
-		const bool drawTrajectory);
+	void initialize(const bool drawTrajectory);
 
 	/**
 	 * Draw a line.
@@ -223,14 +221,14 @@ private:
 	int mDebugMode; /**!< The current debug mode */
 
 	// the currently drawn lines
-	Ogre::ManualObject *mLines;
-	Ogre::ManualObject *mLines2;
-	Ogre::ManualObject *mLinesSwap;
+	Ogre::ManualObject* mLines;
+	Ogre::ManualObject* mLines2;
+	Ogre::ManualObject* mLinesSwap;
 
 	// the currently drawn triangles
-	Ogre::ManualObject *mTriangles;
-	Ogre::ManualObject *mTriangles2;
-	Ogre::ManualObject *mTrianglesSwap;
+	Ogre::ManualObject* mTriangles;
+	Ogre::ManualObject* mTriangles2;
+	Ogre::ManualObject* mTrianglesSwap;
 
 	// the currently drawn contact points
 	std::vector<ContactPoint>* mContactPoints;

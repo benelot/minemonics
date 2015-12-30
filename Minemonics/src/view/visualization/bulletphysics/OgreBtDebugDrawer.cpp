@@ -39,6 +39,8 @@
 
 //# custom headers
 //## base headers
+#include <SimulationManager.hpp>
+
 //## configuration headers
 //## controller headers
 //## model headers
@@ -56,8 +58,7 @@ OgreBtDebugDrawer::OgreBtDebugDrawer() :
 {
 }
 
-void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
-	const bool drawTrajectory) {
+void OgreBtDebugDrawer::initialize(const bool drawTrajectory) {
 	mDrawTrajectory = drawTrajectory;
 	mContactPoints = &mContactPoints1;
 	mLines = new Ogre::ManualObject("BulletPhysicsLines1");
@@ -70,22 +71,23 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
 	mLines2->setDynamic(true);
 	mTriangles->setDynamic(true);
 	mTriangles2->setDynamic(true);
-	//mLines->estimateVertexCount( 100000 );
-	//mLines->estimateIndexCount( 0 );
 
-	sceneManager->getRootSceneNode()->attachObject(mLines);
-	sceneManager->getRootSceneNode()->attachObject(mLines2);
-	sceneManager->getRootSceneNode()->attachObject(mTriangles);
-	sceneManager->getRootSceneNode()->attachObject(mTriangles2);
+	SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->attachObject(
+		mLines);
+	SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->attachObject(
+		mLines2);
+	SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->attachObject(
+		mTriangles);
+	SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->attachObject(
+		mTriangles2);
 
-	static const char* matName = "OgreBulletCollisionsDebugDefault";
 	Ogre::MaterialPtr mtl =
 		Ogre::MaterialManager::getSingleton().getDefaultSettings()->clone(
-			matName);
+			getMatName());
 	mtl->setReceiveShadows(false);
 	mtl->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
 	mtl->setDepthBias(0.1, 0);
-	Ogre::TextureUnitState * tu =
+	Ogre::TextureUnitState* tu =
 		mtl->getTechnique(0)->getPass(0)->createTextureUnitState();
 
 	tu->setColourOperationEx(Ogre::LBX_SOURCE1, Ogre::LBS_DIFFUSE);
@@ -118,8 +120,9 @@ void OgreBtDebugDrawer::initialize(Ogre::SceneManager* const sceneManager,
 
 OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 	Ogre::Root::getSingleton().removeFrameListener(this);
-	delete mLines;
-	delete mTriangles;
+	// Ogre likes to cleanup by itself
+//	delete mLines;
+//	delete mTriangles;
 	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
 //	szElement = "element_";
 //	olm->destroyOverlayElement(szElement);
@@ -149,8 +152,8 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 	if (MathUtils::isFinite(from) && MathUtils::isFinite(to)) {
 		if (mDebugMode > 0 && mDebugDrawingEnabled) {
 			if (mDrawable) {
-//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
-//			color.saturate();
+//				Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//				color.saturate();
 				mLines->position(from);
 				mLines->colour(color);
 				mLines->position(to);
@@ -158,8 +161,8 @@ void OgreBtDebugDrawer::drawLine(const Ogre::Vector3& from,
 				draw();
 			} else {
 				Line line;
-//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
-//			color.saturate();
+//				Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//				color.saturate();
 				line.color = color;
 				line.from = from;
 				line.to = to;
@@ -181,11 +184,12 @@ void OgreBtDebugDrawer::drawTriangle(const btVector3 &v0, const btVector3 &v1,
 void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 	const Ogre::Vector3& v1, const Ogre::Vector3& v2,
 	const Ogre::ColourValue color, const Ogre::Real alpha) {
-	if (MathUtils::isFinite(v0) && MathUtils::isFinite(v1) && MathUtils::isFinite(v2)) {
+	if (MathUtils::isFinite(v0) && MathUtils::isFinite(v1)
+		&& MathUtils::isFinite(v2)) {
 		if (mDebugMode > 0 && mDebugDrawingEnabled) {
 			if (mDrawable) {
-//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
-//			color.saturate();
+//				Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//				color.saturate();
 				mTriangles->position(v0);
 				mTriangles->colour(color);
 				mTriangles->position(v1);
@@ -195,8 +199,8 @@ void OgreBtDebugDrawer::drawTriangle(const Ogre::Vector3& v0,
 				draw();
 			} else {
 				Triangle triangle;
-//			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
-//			color.saturate();
+//				Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
+//				color.saturate();
 				triangle.color = color;
 				triangle.v0 = v0;
 				triangle.v1 = v1;
@@ -220,18 +224,18 @@ void OgreBtDebugDrawer::drawContactPoint(const Ogre::Vector3& pointOnB,
 	const Ogre::Vector3& normalOnB, const Ogre::Real distance,
 	const int lifeTime, const Ogre::ColourValue& color) {
 	if (MathUtils::isFinite(pointOnB) && MathUtils::isFinite(normalOnB)) {
-	if ((mDebugMode & btIDebugDraw::DBG_DrawContactPoints)
-		&& mDebugDrawingEnabled) {
+		if ((mDebugMode & btIDebugDraw::DBG_DrawContactPoints)
+			&& mDebugDrawingEnabled) {
 //			Removed color.saturate() because if somebody wants this, s/he can do this outside the drawer.
-//		color.saturate();
-		ContactPoint p;
-		p.from = pointOnB;
-		p.to = p.from + normalOnB * distance;
-		p.dieTime = Ogre::Root::getSingleton().getTimer()->getMilliseconds()
-			+ lifeTime;
-		p.color = color;
-		mContactPoints->push_back(p);
-	}
+//			color.saturate();
+			ContactPoint p;
+			p.from = pointOnB;
+			p.to = p.from + normalOnB * distance;
+			p.dieTime = Ogre::Root::getSingleton().getTimer()->getMilliseconds()
+				+ lifeTime;
+			p.color = color;
+			mContactPoints->push_back(p);
+		}
 	}
 }
 
@@ -317,15 +321,13 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	mTriangles = mTriangles2;
 	mTriangles2 = mTrianglesSwap;
 
-	static const char * matName = "OgreBulletCollisionsDebugDefault";
-
-	mLines->begin(matName, Ogre::RenderOperation::OT_LINE_LIST);
+	mLines->begin(getMatName(), Ogre::RenderOperation::OT_LINE_LIST);
 	mLines->position(Ogre::Vector3::ZERO);
 	mLines->colour(Ogre::ColourValue::Blue);
 	mLines->position(Ogre::Vector3::ZERO);
 	mLines->colour(Ogre::ColourValue::Blue);
 
-	mTriangles->begin(matName, Ogre::RenderOperation::OT_TRIANGLE_LIST);
+	mTriangles->begin(getMatName(), Ogre::RenderOperation::OT_TRIANGLE_LIST);
 	mTriangles->position(Ogre::Vector3::ZERO);
 	mTriangles->colour(Ogre::ColourValue::Blue);
 	mTriangles->position(Ogre::Vector3::ZERO);
@@ -358,22 +360,22 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	return true;
 }
 
-void OgreBtDebugDrawer::drawSphere(const Ogre::Vector3& position, const double size,
-	const Ogre::ColourValue& colour) {
+void OgreBtDebugDrawer::drawSphere(const Ogre::Vector3& position,
+	const double size, const Ogre::ColourValue& colour) {
 	if (MathUtils::isFinite(position)) {
-	if (mDebugDrawingEnabled) {
-		drawSphere(OgreBulletUtils::convert(position), size,
-			OgreBulletUtils::convert(colour));
-	}
+		if (mDebugDrawingEnabled) {
+			drawSphere(OgreBulletUtils::convert(position), size,
+				OgreBulletUtils::convert(colour));
+		}
 	}
 }
 
 void OgreBtDebugDrawer::drawSphere(const btVector3 position,
 	const btScalar size, const btVector3 colour) {
 	if (MathUtils::isFinite(position)) {
-	if (mDebugDrawingEnabled) {
-		btIDebugDraw::drawSphere(position, size, colour);
-	}
+		if (mDebugDrawingEnabled) {
+			btIDebugDraw::drawSphere(position, size, colour);
+		}
 	}
 }
 
