@@ -58,15 +58,27 @@ void MathGLDataset::initialize(std::string datasetID, int dimensions,
 		mDatasetZ = new mglData(length);
 		mDatasetY = new mglData(length);
 		mDatasetX = new mglData(length);
+		for (int i = 0; i < mDatasetZ->nx; i++) {
+			mDatasetZ->a[i] = 0;
+			mDatasetY->a[i] = 0;
+			mDatasetX->a[i] = 0;
+		}
 		break;
 	}
 	case 2: {
 		mDatasetY = new mglData(length);
 		mDatasetX = new mglData(length);
+		for (int i = 0; i < mDatasetZ->nx; i++) {
+			mDatasetY->a[i] = 0;
+			mDatasetX->a[i] = 0;
+		}
 		break;
 	}
 	case 1: {
 		mDatasetX = new mglData(length);
+		for (int i = 0; i < mDatasetZ->nx; i++) {
+			mDatasetX->a[i] = 0;
+		}
 		break;
 	}
 	}

@@ -43,6 +43,7 @@
 
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
+#include <configuration/PlotConfiguration.hpp>
 
 //## controller headers
 #include <controller/viewcontroller/ViewController.hpp>
@@ -211,10 +212,15 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	double maxX = 0;
 	double maxY = 0;
 	double maxZ = 0;
+
 	for (std::vector<const MathGLDataset*>::const_iterator mit =
 		mDatasets.begin(); mit != mDatasets.end(); mit++) {
 		// calculate maxima and minima
-		for (int i = 0; i < (*(*mit)->getDatasetX()).nx; i++) {
+		for (int i = 0; i < (*(*mit)->getDatasetX()).nx; i++)
+		{
+//			int i =
+//				((*mit)->getDatasetZ()->nx - 1 > 0) ?
+//					(*mit)->getDatasetZ()->nx - 1 : 0;
 
 			minX =
 				(minX > (*(*mit)->getDatasetX()).a[i]) ?
@@ -225,7 +231,11 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 					(*(*mit)->getDatasetX()).a[i] : maxX;
 		}
 
-		for (int i = 0; i < (*(*mit)->getDatasetY()).nx; i++) {
+		for (int i = 0; i < (*(*mit)->getDatasetY()).nx; i++)
+		{
+//			int i =
+//				((*mit)->getDatasetZ()->nx - 1 > 0) ?
+//					(*mit)->getDatasetZ()->nx - 1 : 0;
 			minY =
 				(minY > (*(*mit)->getDatasetY()).a[i]) ?
 					(*(*mit)->getDatasetY()).a[i] : minY;
@@ -235,7 +245,11 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 					(*(*mit)->getDatasetY()).a[i] : maxY;
 		}
 
-		for (int i = 0; i < (*(*mit)->getDatasetZ()).nx; i++) {
+		for (int i = 0; i < (*(*mit)->getDatasetZ()).nx; i++)
+		{
+//			int i =
+//				((*mit)->getDatasetZ()->nx - 1 > 0) ?
+//					(*mit)->getDatasetZ()->nx - 1 : 0;
 			minZ =
 				(minZ > (*(*mit)->getDatasetZ()).a[i]) ?
 					(*(*mit)->getDatasetZ()).a[i] : minZ;
@@ -251,6 +265,22 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 	if (mDatasets.size() == 0) {
 		minX = minY = minZ = 0;
 		maxX = maxY = maxZ = 1;
+	}
+
+	// if max and min are not too far away, move them further apart (this messes with mgl it seems)
+	if(maxX-minX < PlotConfiguration::plotMinMaxDistance){
+		maxX += PlotConfiguration::plotMinMaxDistance;
+		minX -= PlotConfiguration::plotMinMaxDistance;
+	}
+
+	if(maxY-minY < PlotConfiguration::plotMinMaxDistance){
+		maxY += PlotConfiguration::plotMinMaxDistance;
+		minY -= PlotConfiguration::plotMinMaxDistance;
+	}
+
+	if(maxZ-minZ < PlotConfiguration::plotMinMaxDistance){
+		maxZ += PlotConfiguration::plotMinMaxDistance;
+		minZ -= PlotConfiguration::plotMinMaxDistance;
 	}
 
 	graph.SetRanges(minX, maxX, minY, maxY, minZ, maxZ);

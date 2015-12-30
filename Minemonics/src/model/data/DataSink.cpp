@@ -19,7 +19,6 @@ DataSink::DataSink() {
 }
 
 DataSink::~DataSink() {
-	// TODO Auto-generated destructor stub
 }
 
 void DataSink::addData(const double* const newDataX,

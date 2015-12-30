@@ -476,6 +476,7 @@ set(MISCHDRS
 	./configuration/Definitions.hpp
 	./configuration/SRBJointDefinitions.hpp
 	./configuration/SerializationConfiguration.hpp
+	./configuration/PlotConfiguration.hpp
 	
 	# logger
 	./utils/logging/Logger.hpp
@@ -526,6 +527,7 @@ set(MISCSRCS
 	./configuration/GUIConfiguration.cpp
 	./configuration/LoggerConfiguration.cpp
 	./configuration/SerializationConfiguration.cpp
+    ./configuration/PlotConfiguration.cpp
     
 	# logger
 	./utils/logging/Logger.cpp
