@@ -163,7 +163,7 @@ break;
 	mDynamicsWorld->getSolverInfo().m_numIterations = 50;
 
 	mDynamicsWorld->setGravity(btVector3(0, -PhysicsConfiguration::EARTH_GRAVITY
-			* 30.0f
+			* 15.0f
 		, 0));
 }
 
@@ -206,8 +206,8 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 			// since we want to see all substeps, we make them by ourselves
 			int subSteps = 1;
 
-			mDynamicsWorld->stepSimulation(timeStep, subSteps,
-				PhysicsConfiguration::FIXED_STEP_SIZE_SEC);
+			mDynamicsWorld->stepSimulation(btScalar(timeStep), btScalar(subSteps),
+				btScalar(PhysicsConfiguration::FIXED_STEP_SIZE_SEC));
 		}
 
 		//if step trigger is pressed, we pause the simulation and it steps forward every time we press the step trigger
