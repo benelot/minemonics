@@ -82,9 +82,9 @@ void Planet::addPopulation(Population* const population) {
 	mEvolution.addPopulation(population);
 }
 
-void Planet::stepPhysics(const double timeSinceLastFrame) {
+void Planet::stepPhysics(const double timeStep) {
 	mPlanetModel->getEnvironmentModel()->getPhysicsController()->stepBulletPhysics(
-		timeSinceLastFrame);
+		timeStep);
 }
 
 void Planet::update(double timeSinceLastTick) {

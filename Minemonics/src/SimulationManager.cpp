@@ -134,7 +134,6 @@ SimulationManager::~SimulationManager(void) {
 	destroyScene(); /**!< tear down the scene */
 
 	// destroy the ogre renderer system
-	//TODO: Cleanup the universe graphics properly or let it be done by Ogre
 //	CEGUI::OgreRenderer::destroySystem();
 
 	//This is used past this line because the destructors are called on it
@@ -226,7 +225,7 @@ void SimulationManager::createScene(void) {
 	// file folders
 	mSerializationPath = FilesystemManipulator::createFolder(".", /**!< Create the serialization top folder if necessary */
 	SerializationConfiguration::TOP_FOLDER);
-	FilesystemManipulator::createFolder(".", /**!< Create the loggin top folder if necessary */
+	FilesystemManipulator::createFolder(".", /**!< Create the logging top folder if necessary */
 	LoggerConfiguration::TOP_FOLDER);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...done.";

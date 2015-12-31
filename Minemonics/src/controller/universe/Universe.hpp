@@ -66,9 +66,9 @@ public:
 
 	/**
 	 * Step the universe physics forward.
-	 * @param timeSinceLastTick The size of the time step.
+	 * @param timeStep The size of the time step.
 	 */
-	void stepPhysics(const double timeSinceLastTick);
+	void stepPhysics(const double timeStep);
 
 	/**
 	 * Update the model of the universe.

@@ -88,9 +88,9 @@ public:
 
 	/**
 	 * Step the universe physics forward.
-	 * @param timeSinceLastFrame The size of the time step.
+	 * @param timeStep The size of the time step.
 	 */
-	void stepPhysics(const double timeSinceLastFrame);
+	void stepPhysics(const double timeStep);
 
 	/**
 	 * Update the model of the planet.

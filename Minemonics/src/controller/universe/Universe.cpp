@@ -83,10 +83,10 @@ void Universe::setSimulationSpeed(double simulationSpeed) {
 	}
 }
 
-void Universe::stepPhysics(const double timeSinceLastFrame) {
+void Universe::stepPhysics(const double timeStep) {
 	for (std::vector<Planet*>::iterator pit = mPlanets.begin();
 		pit != mPlanets.end(); pit++) { /**!< For all planets */
-		(*pit)->stepPhysics(timeSinceLastFrame); /**!< perform the physics forward step */
+		(*pit)->stepPhysics(timeStep); /**!< perform the physics forward step */
 	}
 }
 

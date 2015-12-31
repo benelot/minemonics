@@ -45,8 +45,7 @@ const double PhysicsConfiguration::SUN_GRAVITY = 27.030682877f * CONST_EARTH_GRA
 const double PhysicsConfiguration::SIMULATOR_PHYSICS_FIXED_STEPS_PER_SEC =
 FIXED_STEPS_PER_SEC;
 const double PhysicsConfiguration::FIXED_STEP_SIZE_SEC = 1.0f / FIXED_STEPS_PER_SEC;
-const double PhysicsConfiguration::FIXED_STEP_SIZE_MILLI = 1.0f / FIXED_STEPS_PER_SEC
-	* 1000.0f;
+const double PhysicsConfiguration::FIXED_STEP_SIZE_MILLI = 1000.0f / FIXED_STEPS_PER_SEC;
 
 const double PhysicsConfiguration::BULLET_OGRE_BOX_SCALING_FACTOR = 0.01; /**!< A box of unit size in ogre has the size of 100 in bullet */
 
