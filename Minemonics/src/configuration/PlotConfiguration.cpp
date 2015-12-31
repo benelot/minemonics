@@ -7,4 +7,4 @@
 
 #include <configuration/PlotConfiguration.hpp>
 
-double PlotConfiguration::plotMinMaxDistance = 1e-150;
+double PlotConfiguration::plotMinMaxDistance = 1e-10; //1e-150 was too small for a range.
