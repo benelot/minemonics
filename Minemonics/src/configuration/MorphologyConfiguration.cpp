@@ -96,9 +96,9 @@ const double MorphologyConfiguration::JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 10; /**!< The maximum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.5f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 1.0f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT =  1.5f;//5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 
