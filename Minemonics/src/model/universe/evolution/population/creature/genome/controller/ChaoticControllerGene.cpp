@@ -54,7 +54,7 @@ void ChaoticControllerGene::initialize() {
 	mInitialX = Randomness::getSingleton()->nextUnifDouble(-0.5,0.5);
 	mInitialY = Randomness::getSingleton()->nextUnifDouble(-0.5,0.5);
 	mInitialZ = Randomness::getSingleton()->nextUnifDouble(-0.5,0.5);
-	mSpeed = Randomness::getSingleton()->nextUnifDouble(0.0001,10);
+	mSpeed = Randomness::getSingleton()->nextUnifDouble(0.001f,10.0f);
 }
 
 ChaoticControllerGene* ChaoticControllerGene::clone() {
