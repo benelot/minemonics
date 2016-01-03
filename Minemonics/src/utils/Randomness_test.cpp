@@ -82,3 +82,15 @@ TEST_F(RandomnessTest,distributionsStayWithinBounds) {
 	}
 }
 
+TEST_F(RandomnessTest,distributionTest) {
+	std::cout << "How are unif(0.001,10) distributed?";
+	for (int i = 0; i < 100; i++) {
+		// uniformly distributed double
+		double uniformDouble = randomness->nextUnifDouble(0.001, 10);
+		std::cout << uniformDouble << "\n";
+//		ASSERT_TRUE(10 <= uniformDouble);
+//		ASSERT_TRUE(uniformDouble <= 100);
+
+	}
+}
+

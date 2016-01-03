@@ -771,7 +771,7 @@ void FSPhenomeModel::addJointConstraints() {
 		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
 		// Link joint limits
 		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
-			mMultiBody, i,
+			mMultiBody, ((long) mJointModels[i]->getChildIndex()) - 1,
 			btScalar(
 				mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH]),
 			btScalar(
@@ -785,7 +785,6 @@ void FSPhenomeModel::addJointConstraints() {
 
 void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
-	//TODO: Some creatures just do not have a multibody. Why?
 	if (mMultiBody && mLimbModels.size() > 0) {
 
 		btTransform initialTransform;
@@ -810,6 +809,10 @@ void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 
 		mMultiBody->setBaseWorldTransform(initialTransform);
 		calm();
+	}
+	else{
+		//TODO: Some creatures just do not have a multibody. Why? Check if this is still true.
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::error)<< "A creature had no multibody or no limbs.";
 	}
 
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
