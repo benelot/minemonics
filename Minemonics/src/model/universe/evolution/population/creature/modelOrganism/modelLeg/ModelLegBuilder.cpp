@@ -44,31 +44,39 @@ void ModelLegBuilder::build(MixedGenome* genome,
 
 	double damping = 0.5f; //[0.005;0.5] 0.05
 	// create joint between the two limbs
-	// Hingelike
+	// hinge
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 		Ogre::Vector3(damping, damping, damping),
 		Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
 			-PhysicsConfiguration::UNIV_EPS,
-			-boost::math::constants::pi<double>() * 2.0f
+			-boost::math::constants::pi<double>() * 0.98f
 				+ PhysicsConfiguration::UNIV_EPS),
 		Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
 			PhysicsConfiguration::UNIV_EPS,
-			boost::math::constants::pi<double>() * 2.0f
+			boost::math::constants::pi<double>() * 0.35f
 				- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(1, 0, 0));
 
+	//spherical
 //	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 //		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 //		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
-//		Ogre::Vector3(0.5f, 0.5f, 0.5f),
-//		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-//			-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS,
-//			-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS),
-//		Ogre::Vector3(boost::math::constants::pi<double>() / 2.0f - UNIV_EPS,
-//			boost::math::constants::pi<double>() * 2.0f - UNIV_EPS,
-//			boost::math::constants::pi<double>() * 2.0f - UNIV_EPS),
-//		Ogre::Vector3(1, 0, 0));
+//		Ogre::Vector3(damping, damping, damping),
+//		Ogre::Vector3(
+//			-boost::math::constants::pi<double>() * 0.98f
+//				+ PhysicsConfiguration::UNIV_EPS,
+//			-boost::math::constants::pi<double>() * 0.98f
+//				+ PhysicsConfiguration::UNIV_EPS,
+//			-boost::math::constants::pi<double>() * 0.98f
+//				+ PhysicsConfiguration::UNIV_EPS),
+//		Ogre::Vector3(
+//			-boost::math::constants::pi<double>() * 0.98f
+//				- PhysicsConfiguration::UNIV_EPS,
+//			boost::math::constants::pi<double>() * 0.98f
+//				- PhysicsConfiguration::UNIV_EPS,
+//			boost::math::constants::pi<double>() * 0.35f
+//				- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(1, 0, 0));
 //	morphogeneBranch->initialize();
 
 	switch (controllerType) {

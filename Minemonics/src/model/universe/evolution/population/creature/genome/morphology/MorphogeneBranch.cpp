@@ -13,16 +13,13 @@
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
 #include <configuration/ControlConfiguration.hpp>
+#include <configuration/PhysicsConfiguration.hpp>
 
 //## controller headers
 //## model headers
 //## view headers
 //## utils headers
 #include <utils/Randomness.hpp>
-
-#ifndef UNIV_EPS
-#define UNIV_EPS 0.01f
-#endif
 
 MorphogeneBranch::MorphogeneBranch(JointPhysics::JointType jointType,
 	bool flipped, bool mirrored, Ogre::Vector3 pitchAxis, Ogre::Vector3 yawAxis,
@@ -142,31 +139,33 @@ void MorphogeneBranch::initialize() {
 	 * it is assumed that rotational order is :
 	 * Z - first, allowed limits are (-PI+epsilon,PI-epsilon);
 	 * new position of Y - second (allowed limits are
-	 * (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	 * (-PI + epsilon, PI - epsilon), where epsilon is a small positive number
 	 * used to prevent constraint from instability on poles;
 	 * new position of X, allowed limits are (-PI+epsilon,PI-epsilon);
 	 * So to simulate ODE Universal joint we should use parent
 	 * axis as Z, child axis as Y and limit all other DOFs
+	 * Based on:
+	 *  http://ode-wiki.org/wiki/index.php?title=Manual:_Joint_Types_and_Functions
+	 *  http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=9&t=10938&p=36662&hilit=limits#p36662
 	 */
-	//TODO: Revise the correct joint limits
 	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 
 	// create instances of the sine controller gene for the morphogene.
 	switch (ControlConfiguration::CONTROLLER_TYPE) {
@@ -195,7 +194,6 @@ void MorphogeneBranch::initialize() {
 
 	mBranchGeneType = 0;
 
-	// TODO: Add joint stiffness and damping
 	mPitchStiffnessCoefficient = 0;
 	mPitchDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
@@ -341,13 +339,13 @@ void MorphogeneBranch::mutate() {
 	Ogre::Vector3 pitchAxisVector(
 		(abs(mJointAnchorX - pitchAxisVector1.x)
 			< abs(mJointAnchorX - pitchAxisVector2.x)) ?
-				pitchAxisVector1.x : pitchAxisVector2.x,
+			pitchAxisVector1.x : pitchAxisVector2.x,
 		(abs(mJointAnchorY - pitchAxisVector1.y)
 			< abs(mJointAnchorY - pitchAxisVector2.y)) ?
-				pitchAxisVector1.y : pitchAxisVector2.y,
+			pitchAxisVector1.y : pitchAxisVector2.y,
 		(abs(mJointAnchorZ - pitchAxisVector1.z)
 			< abs(mJointAnchorZ - pitchAxisVector2.z)) ?
-				pitchAxisVector1.z : pitchAxisVector2.z);
+			pitchAxisVector1.z : pitchAxisVector2.z);
 	pitchAxisVector.normalise();
 	mJointPitchAxisX = pitchAxisVector.x;
 	mJointPitchAxisY = pitchAxisVector.y;
@@ -366,31 +364,33 @@ void MorphogeneBranch::mutate() {
 	 * it is assumed that rotational order is :
 	 * Z - first, allowed limits are (-PI+epsilon,PI-epsilon);
 	 * new position of Y - second (allowed limits are
-	 * (-PI/2 + epsilon, PI/2 - epsilon), where epsilon is a small positive number
+	 * (-PI + epsilon, PI - epsilon), where epsilon is a small positive number
 	 * used to prevent constraint from instability on poles;
 	 * new position of X, allowed limits are (-PI+epsilon,PI-epsilon);
 	 * So to simulate ODE Universal joint we should use parent
 	 * axis as Z, child axis as Y and limit all other DOFs
+	 * Based on:
+	 *  http://ode-wiki.org/wiki/index.php?title=Manual:_Joint_Types_and_Functions
+	 *  http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=9&t=10938&p=36662&hilit=limits#p36662
 	 */
-	//TODO: Revise the correct joint limits
 	mJointPitchMinAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointPitchMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
-		boost::math::constants::pi<double>() / 2.0f - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointYawMinAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointYawMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointRollMinAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 	mJointRollMaxAngle = Randomness::getSingleton()->nextUnifDouble(
-		-boost::math::constants::pi<double>() + UNIV_EPS,
-		boost::math::constants::pi<double>() - UNIV_EPS);
+		-boost::math::constants::pi<double>() + PhysicsConfiguration::UNIV_EPS,
+		boost::math::constants::pi<double>() - PhysicsConfiguration::UNIV_EPS);
 
 	// create instances of the sine controller gene for the morphogene.
 	switch (ControlConfiguration::CONTROLLER_TYPE) {
@@ -431,7 +431,6 @@ void MorphogeneBranch::mutate() {
 
 	mBranchGeneType = 0;
 
-	// TODO: Add joint stiffness and damping
 	mPitchStiffnessCoefficient = 0;
 	mPitchDampingCoefficient = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT,
