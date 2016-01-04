@@ -15,7 +15,7 @@
 //## utils headers
 
 const std::string LoggerConfiguration::loggedClasses =
-	"AverageVelocity|CreatureModel|Debugger|SimulationManager|PhysicsController|Reaper|FSPhenomeModel|SRBPhenomeModel|PhenomeModel|Phenome"
+	"AverageVelocity|CreatureModel|Debugger|SimulationManager|PhysicsController|Reaper|FSPhenomeModel|SRBPhenomeModel|PhenomeModel|Phenome|Evaluation"
 // Reaper debugging
 //	+ "|FSPhenomeModel|SRBPhenomeModel|PhenomeModel"
 // Embryogenesis Debugging
