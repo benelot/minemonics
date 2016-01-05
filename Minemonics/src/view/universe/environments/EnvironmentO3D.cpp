@@ -141,7 +141,7 @@ void EnvironmentO3D::configureTerrainDefaults(const Ogre::Light* const l) {
 
 //	 textures
 	defaultimp.layerList.resize(1);
-	defaultimp.layerList[0].worldSize = 100;
+	defaultimp.layerList[0].worldSize = 10;
 	defaultimp.layerList[0].textureNames.push_back("grid5.png");
 //
 //	defaultimp.layerList[0].worldSize = 1000;
