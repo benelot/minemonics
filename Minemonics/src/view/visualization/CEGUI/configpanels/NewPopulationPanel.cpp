@@ -26,7 +26,7 @@
 
 //## configuration headers
 #include <configuration/CEGUIConfiguration.hpp>
-#include <configuration/EvolutionConfiguration.hpp>
+#include <configuration/EvaluationConfiguration.hpp>
 
 //## controller headers
 #include <controller/universe/evolution/population/Population.hpp>
@@ -108,7 +108,7 @@ void NewPopulationPanel::onConfirmClicked() {
 	Population* population =
 		new Population(
 			SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet(),
-			populationSize, EvolutionConfiguration::ROOT_POSITION);
+			populationSize, EvaluationConfiguration::ROOT_POSITION);
 
 	//create folder for the population
 	std::string populationName = std::string("Population-")

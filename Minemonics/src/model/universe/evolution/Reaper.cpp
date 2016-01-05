@@ -14,6 +14,7 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/EvaluationConfiguration.hpp>
 #include <configuration/EvolutionConfiguration.hpp>
 #include <configuration/GeneticsConfiguration.hpp>
 #include <configuration/MorphologyConfiguration.hpp>
@@ -406,6 +407,6 @@ void Reaper::sowFreshly(PopulationModel* const population,
 			GeneticsConfiguration::GENE_BRANCH_INITIAL_MEAN,
 			GeneticsConfiguration::GENE_BRANCH_INITIAL_VAR);
 		population->addNewMember(branchiness,
-			EvolutionConfiguration::ROOT_POSITION);
+			EvaluationConfiguration::ROOT_POSITION);
 	}
 }

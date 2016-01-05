@@ -75,12 +75,12 @@ void CameraHandler::initialize() {
 	mCamNode =
 		SimulationManager::getSingleton()->getSceneManager()->getRootSceneNode()->createChildSceneNode(
 			"ObserverCameraNode",
-			EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 200));
+			EvaluationConfiguration::ROOT_POSITION + CameraConfiguration::CAMERA_ROOT_DISPLACEMENT);
 
 	mCamera->setPosition(
-		EvolutionConfiguration::ROOT_POSITION + Ogre::Vector3(0, 10, 200));
+		EvaluationConfiguration::ROOT_POSITION + CameraConfiguration::CAMERA_ROOT_DISPLACEMENT);
 	mCamNode->attachObject(mCamera);
-	mCamNode->lookAt(EvolutionConfiguration::ROOT_POSITION,
+	mCamNode->lookAt(EvaluationConfiguration::ROOT_POSITION,
 		Ogre::Node::TS_WORLD);
 	mCamera->setNearClipDistance(0.1);
 	mCamera->setFarClipDistance(12000);

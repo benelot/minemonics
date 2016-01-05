@@ -6,6 +6,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <OgreVector3.h>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -25,6 +27,7 @@ class EvaluationConfiguration {
 public:
 	static const unsigned DEFAULT_PARALLEL_EVALUATION; /**!< Number of parallel evaluations */
 	static const double DEFAULT_EVALUATION_TIME; /**!< The default evaluation time */
+	static const Ogre::Vector3 ROOT_POSITION; /**!< The position where creatures are dropped */
 };
 
 #endif /* CONFIGURATION_EVALUATIONCONFIGURATION_H_ */

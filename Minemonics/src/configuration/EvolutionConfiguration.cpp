@@ -74,6 +74,3 @@ const double EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY = 0.1f;
 const double EvolutionConfiguration::REAPER_GROW_STUB_PROBABILITY = 0.6f;
 const int EvolutionConfiguration::REAPER_GROW_STUB_BRANCHINESS = 2;
 const double EvolutionConfiguration::REAPER_GRAFT_PROPABILITY = 0.6f;
-
-const Ogre::Vector3 EvolutionConfiguration::ROOT_POSITION = Ogre::Vector3(0, 50,
-	30); /**!< The position where creatures are dropped */

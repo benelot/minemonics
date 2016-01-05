@@ -6,8 +6,6 @@
 //# system headers
 //## controller headers
 //## model headers
-#include <OgreVector3.h>
-
 //## view headers
 //# custom headers
 //## base headers
@@ -85,9 +83,6 @@ public:
 	static const double REAPER_GROW_STUB_PROBABILITY;
 	static const int REAPER_GROW_STUB_BRANCHINESS;
 	static const double REAPER_GRAFT_PROPABILITY;
-
-	static const Ogre::Vector3 ROOT_POSITION; /**!< The position where creatures are dropped */
-
 };
 
 #endif /* CONFIGURATION_EVOLUTIONCONFIGURATION_H_ */
