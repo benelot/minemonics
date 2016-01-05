@@ -56,12 +56,15 @@ PopulationModel::PopulationModel(PlanetModel* const planetModel,
 		CreatureModel* creatureModel = new CreatureModel(this,
 			mPlanetModel->getPhysicsModelType(), initialPosition);
 
-		//	RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-//			SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE);
-//		ModelLegBuilder::build(&creatureModel->getGenotype(),
-//			ControlConfiguration::CONTROLLER_TYPE);
-//		PodBuilder::build(&creatureModel->getGenotype(),
-//			ControlConfiguration::CONTROLLER_TYPE);
+//		ModelLegBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE); // start with model legs
+		// OR
+//		RagDollBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE); // start with ragdolls
+		// OR
+//		SnakeBuilder::build(&creatureModel->getGenotype(),ControlConfiguration::CONTROLLER_TYPE); // start with snakes
+		// OR
+//		PodBuilder::build(&creatureModel->getGenotype(), ControlConfiguration::CONTROLLER_TYPE); // start with pods (hexapod etc.)
+
+		// interesting effects can also be achieved when starting with one of the above and the create a random genome over it
 
 		creatureModel->createRandomGenome(branchiness);
 		creatureModel->setNew(true);
