@@ -14,9 +14,9 @@
 //## view headers
 //## utils headers
 
-const double MorphologyConfiguration::LIMB_MIN_SIZE = 0.05f; /**!<The limb minimum dimension size*/
+const double MorphologyConfiguration::LIMB_MIN_SIZE = 0.05f; /**!< (in meters) The limb minimum dimension size*/
 
-const double MorphologyConfiguration::LIMB_MAX_SIZE = 10.0f; /**!<The limb maximum dimension size*/
+const double MorphologyConfiguration::LIMB_MAX_SIZE = 1.0f; /**!< (in meters) The limb maximum dimension size*/
 
 const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f/pow(MorphologyConfiguration::LIMB_MIN_SIZE,3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
 
@@ -70,7 +70,7 @@ const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
  * The maximum allowable torque that can be exerted by a servo motor in its effort to
  * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
  */
-const double MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 0.7f;
+const double MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 0.05f;
 
 /**
  * The maximum allowable torque that can be exerted by a servo motor in its effort to
@@ -92,13 +92,13 @@ const double MorphologyConfiguration::LINK_LENGTH = 1; /**!< The length of an ob
 
 const double MorphologyConfiguration::JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The minimum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 10; /**!< The maximum spring stiffness of the joint */
+const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The maximum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 1.0f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT =  1.5f;//5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT =  0.05f;//5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 
-const bool MorphologyConfiguration::BODY_MOTORS_ENABLED = false; /**!< Globally turn motors on or off*/
+const bool MorphologyConfiguration::BODY_MOTORS_ENABLED = true; /**!< Globally turn motors on or off*/
 
