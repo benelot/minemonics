@@ -188,6 +188,7 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 
 	mChaosPanel = new MathGLPanel(((float)windowWidth) / 1.37f, windowHeight / 2.0f, 500,
 		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
+	mChaosPanel->hide(); // hide the panel by default
 
 	mMovablePanels.push_back(mChaosPanel);
 //
