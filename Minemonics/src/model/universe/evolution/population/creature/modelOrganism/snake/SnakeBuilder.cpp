@@ -12,6 +12,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -31,25 +32,35 @@ void SnakeBuilder::build(MixedGenome* genome,
 
 	// create limb
 	Morphogene* morphogene = new Morphogene(LimbPhysics::BLOCK,
-		Ogre::Vector3(20, 6, 6), Ogre::Quaternion(1, 0, 0, 0), 1, 10, true,
-		Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
+		Ogre::Vector3(MorphologyConfiguration::LIMB_MIN_SIZE * 3,
+			MorphologyConfiguration::LIMB_MIN_SIZE ,
+			MorphologyConfiguration::LIMB_MIN_SIZE),
+		Ogre::Quaternion(1, 0, 0, 0), 1, 10, true, Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(1, 0, 0));
 	morphogene->setRepetitionLimit(snakeLength);
 
 	genome->addGene(morphogene);
 
-	double damping = 0.05f;//[0.005;0.5] 0.05
+	double damping = 0.05f; //[0.005;0.5] 0.05
 	// create joint between the two limbs
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 		Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 		Ogre::Vector3(damping, damping, damping),
-		Ogre::Vector3(-boost::math::constants::pi<double>() / 2.0f + PhysicsConfiguration::UNIV_EPS,
-			-boost::math::constants::pi<double>() * 1.5f + PhysicsConfiguration::UNIV_EPS,
-			-boost::math::constants::pi<double>() * 1.5f + PhysicsConfiguration::UNIV_EPS),
-		Ogre::Vector3(boost::math::constants::pi<double>() / 2.0f - PhysicsConfiguration::UNIV_EPS,
-			boost::math::constants::pi<double>() * 1.5f - PhysicsConfiguration::UNIV_EPS,
-			boost::math::constants::pi<double>() * 1.5f - PhysicsConfiguration::UNIV_EPS),
-		Ogre::Vector3(-1, 0, 0));
+		Ogre::Vector3(
+			-boost::math::constants::pi<double>() / 2.0f
+				+ PhysicsConfiguration::UNIV_EPS,
+			-boost::math::constants::pi<double>() * 1.5f
+				+ PhysicsConfiguration::UNIV_EPS,
+			-boost::math::constants::pi<double>() * 1.5f
+				+ PhysicsConfiguration::UNIV_EPS),
+		Ogre::Vector3(
+			boost::math::constants::pi<double>() / 2.0f
+				- PhysicsConfiguration::UNIV_EPS,
+			boost::math::constants::pi<double>() * 1.5f
+				- PhysicsConfiguration::UNIV_EPS,
+			boost::math::constants::pi<double>() * 1.5f
+				- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(-1, 0, 0));
 
 	switch (controllerType) {
 	case ControllerGene::SineControllerGene:
@@ -75,11 +86,11 @@ void SnakeBuilder::build(MixedGenome* genome,
 
 		for (int i = 0; i < 3; i++) {
 			// create instances of the chaotic controller gene for the morphogene.
-				ChaoticControllerGene* chaoticController =
-					new ChaoticControllerGene(ChaoticControllerGene::CHUA_CIRCUIT,
-						x, y, z, speed);
+			ChaoticControllerGene* chaoticController =
+				new ChaoticControllerGene(ChaoticControllerGene::CHUA_CIRCUIT,
+					x, y, z, speed);
 
-				//				chaoticController->initialize();
+			//				chaoticController->initialize();
 
 			morphogeneBranch->getControllerGenes().push_back(chaoticController);
 		}

@@ -12,6 +12,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/PhysicsConfiguration.hpp>
+#include <configuration/MorphologyConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -35,7 +36,7 @@ void PodBuilder::build(MixedGenome* genome,
 	genome->setSegmentsDepthLimit(BODYPART_COUNT);
 
 	LimbPhysics::PrimitiveType primitiveType = LimbPhysics::BLOCK; // the primitive type of the creature
-	double podSize = 100.0f; // size of the hole pod
+	double podSize = MorphologyConfiguration::LIMB_MAX_SIZE; // size of the hole pod
 	double bodySize = podSize * 0.25f; // size of a single body of the whole creature
 	double upperLegLength = podSize * 0.75f; //upper leg length
 	double lowerLegLength = podSize * 0.45f; // upper lower leg length
