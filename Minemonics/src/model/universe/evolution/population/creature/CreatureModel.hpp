@@ -243,6 +243,10 @@ public:
 		mWorld = world;
 	}
 
+	Ogre::Vector3 getLowestRelativePoint(){
+		return mPhenotypeModel->getLowestRelativePoint();
+	}
+
 	// Serialization
 
 	virtual void save() {
@@ -363,7 +367,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mNew)
 
 		/**!< The dynasty this creature belongs to */
-		& BOOST_SERIALIZATION_NVP(mDynasty); // TODO: Add this to the creatures
+		& BOOST_SERIALIZATION_NVP(mDynasty);
 	}
 private:
 	static BoostLogger mBoostLogger;/**!< The boost logger. */
