@@ -322,10 +322,24 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 	case ApplicationKeycode::APPK_n:
 		// return CEGUI::Key::N;
 		break;
-	case ApplicationKeycode::APPK_m:
-		// return CEGUI::Key::M;
-		break;
+	case ApplicationKeycode::APPK_m: {
+		/** hide/show all math panels in view */
+		for (std::vector<MovablePanel*>::iterator it =
+			SimulationManager::getSingleton()->getViewController().getMovablePanels().begin();
+			it != SimulationManager::getSingleton()->getViewController().getMovablePanels().end(); it++) {
+			switch ((*it)->getType()) {
+				case MovablePanel::GRAPHPANEL: {
+					((MathGLPanel*) (*it))->getWindow()->setVisible(!((MathGLPanel*) (*it))->getWindow()->isVisible());
+					break;
+				}
+				default: {
+					break;
+				}
+			}
 
+		}
+	}
+	break;
 	case ApplicationKeycode::APPK_COMMA:
 		// return CEGUI::Key::Comma;
 		break;

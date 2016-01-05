@@ -134,8 +134,8 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 	for (size_t j = 0; j < mTexture->getWidth(); j++)
 		for (size_t i = 0; i < mTexture->getHeight(); i++) {
 			*pDest++ = 255; // B
-			*pDest++ = 0; // G
-			*pDest++ = 0; // R
+			*pDest++ = 255; // G
+			*pDest++ = 255; // R
 			*pDest++ = 127; // A
 		}
 
@@ -199,133 +199,132 @@ void MathGLPanel::onVerticalSliderValueChanged() {
 
 void MathGLPanel::update(const double timeSinceLastFrame) {
 
-	mTime += timeSinceLastFrame;
+	if (mFrameWindow->isVisible()) {
+		mTime += timeSinceLastFrame;
 
-	// Create chart
-	mglGraph graph(0, mTexture->getWidth(), mTexture->getHeight());
-	graph.Title("Controller movement");
-	graph.Rotate(mVerticalRotation, mHorizontalRotation);
+		// Create chart
+		mglGraph graph(0, mTexture->getWidth(), mTexture->getHeight());
+		graph.Title("Controller movement");
+		graph.Rotate(mVerticalRotation, mHorizontalRotation);
 
-	double minX = 1000000;
-	double minY = 1000000;
-	double minZ = 1000000;
-	double maxX = 0;
-	double maxY = 0;
-	double maxZ = 0;
+		double minX = 1000000;
+		double minY = 1000000;
+		double minZ = 1000000;
+		double maxX = 0;
+		double maxY = 0;
+		double maxZ = 0;
 
-	for (std::vector<const MathGLDataset*>::const_iterator mit =
-		mDatasets.begin(); mit != mDatasets.end(); mit++) {
-		// calculate maxima and minima
-		for (int i = 0; i < (*(*mit)->getDatasetX()).nx; i++)
-		{
+		for (std::vector<const MathGLDataset*>::const_iterator mit =
+			mDatasets.begin(); mit != mDatasets.end(); mit++) {
+			// calculate maxima and minima
+			for (int i = 0; i < (*(*mit)->getDatasetX()).nx; i++) {
 //			int i =
 //				((*mit)->getDatasetZ()->nx - 1 > 0) ?
 //					(*mit)->getDatasetZ()->nx - 1 : 0;
 
-			minX =
-				(minX > (*(*mit)->getDatasetX()).a[i]) ?
-					(*(*mit)->getDatasetX()).a[i] : minX;
+				minX =
+					(minX > (*(*mit)->getDatasetX()).a[i]) ?
+						(*(*mit)->getDatasetX()).a[i] : minX;
 
-			maxX =
-				(maxX < (*(*mit)->getDatasetX()).a[i]) ?
-					(*(*mit)->getDatasetX()).a[i] : maxX;
-		}
+				maxX =
+					(maxX < (*(*mit)->getDatasetX()).a[i]) ?
+						(*(*mit)->getDatasetX()).a[i] : maxX;
+			}
 
-		for (int i = 0; i < (*(*mit)->getDatasetY()).nx; i++)
-		{
+			for (int i = 0; i < (*(*mit)->getDatasetY()).nx; i++) {
 //			int i =
 //				((*mit)->getDatasetZ()->nx - 1 > 0) ?
 //					(*mit)->getDatasetZ()->nx - 1 : 0;
-			minY =
-				(minY > (*(*mit)->getDatasetY()).a[i]) ?
-					(*(*mit)->getDatasetY()).a[i] : minY;
+				minY =
+					(minY > (*(*mit)->getDatasetY()).a[i]) ?
+						(*(*mit)->getDatasetY()).a[i] : minY;
 
-			maxY =
-				(maxY < (*(*mit)->getDatasetY()).a[i]) ?
-					(*(*mit)->getDatasetY()).a[i] : maxY;
-		}
+				maxY =
+					(maxY < (*(*mit)->getDatasetY()).a[i]) ?
+						(*(*mit)->getDatasetY()).a[i] : maxY;
+			}
 
-		for (int i = 0; i < (*(*mit)->getDatasetZ()).nx; i++)
-		{
+			for (int i = 0; i < (*(*mit)->getDatasetZ()).nx; i++) {
 //			int i =
 //				((*mit)->getDatasetZ()->nx - 1 > 0) ?
 //					(*mit)->getDatasetZ()->nx - 1 : 0;
-			minZ =
-				(minZ > (*(*mit)->getDatasetZ()).a[i]) ?
-					(*(*mit)->getDatasetZ()).a[i] : minZ;
+				minZ =
+					(minZ > (*(*mit)->getDatasetZ()).a[i]) ?
+						(*(*mit)->getDatasetZ()).a[i] : minZ;
 
-			maxZ =
-				(maxZ < (*(*mit)->getDatasetZ()).a[i]) ?
-					(*(*mit)->getDatasetZ()).a[i] : maxZ;
+				maxZ =
+					(maxZ < (*(*mit)->getDatasetZ()).a[i]) ?
+						(*(*mit)->getDatasetZ()).a[i] : maxZ;
+			}
+
 		}
 
+		// in case there are no data sets
+		if (mDatasets.size() == 0) {
+			minX = minY = minZ = 0;
+			maxX = maxY = maxZ = 1;
+		}
+
+		// if max and min are not too far away, move them further apart (this messes with mgl it seems)
+		if (maxX - minX < PlotConfiguration::plotMinMaxDistance) {
+			maxX += PlotConfiguration::plotMinMaxDistance;
+			minX -= PlotConfiguration::plotMinMaxDistance;
+		}
+
+		if (maxY - minY < PlotConfiguration::plotMinMaxDistance) {
+			maxY += PlotConfiguration::plotMinMaxDistance;
+			minY -= PlotConfiguration::plotMinMaxDistance;
+		}
+
+		if (maxZ - minZ < PlotConfiguration::plotMinMaxDistance) {
+			maxZ += PlotConfiguration::plotMinMaxDistance;
+			minZ -= PlotConfiguration::plotMinMaxDistance;
+		}
+
+		graph.SetRanges(minX, maxX, minY, maxY, minZ, maxZ);
+		for (std::vector<const MathGLDataset*>::const_iterator mit =
+			mDatasets.begin(); mit != mDatasets.end(); mit++) {
+			graph.SetColor('o', (*mit)->getPlotColor().r,
+				(*mit)->getPlotColor().g, (*mit)->getPlotColor().b);
+			graph.Plot((*(*mit)->getDatasetX()), (*(*mit)->getDatasetY()),
+				(*(*mit)->getDatasetZ()), "VA-");
+		}
+
+		graph.Label('x', "x", 0);
+		graph.Label('y', "y", 0);
+		graph.Label('z', "z", 0);
+		graph.Box();
+		graph.Axis();
+
+		Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer(); // Get the pixel buffer
+
+		pixelBuffer->lock(Ogre::HardwareBuffer::HBL_DISCARD);
+		const Ogre::PixelBox& pixelBox = pixelBuffer->getCurrentLock(); // Lock the pixel buffer and get a pixel box
+
+		Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pixelBox.data);
+		graph.GetBGRN((unsigned char*) pDest,
+			4 * mTexture->getWidth() * mTexture->getHeight()); // Copy chart image to the pixel buffer
+
+		pixelBuffer->unlock(); // Unlock the pixel buffer
+
+		if (mMakePrint) {
+			std::string fileName;
+			fileName.append("Graph");
+			fileName.append(boost::lexical_cast<std::string>(mTime));
+			fileName.append(".png");
+			graph.WritePNG(fileName.c_str());
+			mMakePrint = false;
+		}
+
+		CEGUI::Renderer* guiRenderer(
+			SimulationManager::getSingleton()->getViewController().getRenderer());
+		guiRenderer->beginRendering();
+
+		mRenderTextureTarget->clear();
+		mRenderGuiContext->draw();
+
+		guiRenderer->endRendering();
+
+		mFrameWindow->invalidate(true); //notify window of the texture to update
 	}
-
-	// in case there are no data sets
-	if (mDatasets.size() == 0) {
-		minX = minY = minZ = 0;
-		maxX = maxY = maxZ = 1;
-	}
-
-	// if max and min are not too far away, move them further apart (this messes with mgl it seems)
-	if(maxX-minX < PlotConfiguration::plotMinMaxDistance){
-		maxX += PlotConfiguration::plotMinMaxDistance;
-		minX -= PlotConfiguration::plotMinMaxDistance;
-	}
-
-	if(maxY-minY < PlotConfiguration::plotMinMaxDistance){
-		maxY += PlotConfiguration::plotMinMaxDistance;
-		minY -= PlotConfiguration::plotMinMaxDistance;
-	}
-
-	if(maxZ-minZ < PlotConfiguration::plotMinMaxDistance){
-		maxZ += PlotConfiguration::plotMinMaxDistance;
-		minZ -= PlotConfiguration::plotMinMaxDistance;
-	}
-
-	graph.SetRanges(minX, maxX, minY, maxY, minZ, maxZ);
-	for (std::vector<const MathGLDataset*>::const_iterator mit =
-		mDatasets.begin(); mit != mDatasets.end(); mit++) {
-		graph.SetColor('o', (*mit)->getPlotColor().r, (*mit)->getPlotColor().g,
-			(*mit)->getPlotColor().b);
-		graph.Plot((*(*mit)->getDatasetX()), (*(*mit)->getDatasetY()),
-			(*(*mit)->getDatasetZ()), "VA-");
-	}
-
-	graph.Label('x', "x", 0);
-	graph.Label('y', "y", 0);
-	graph.Label('z', "z", 0);
-	graph.Box();
-	graph.Axis();
-
-	Ogre::HardwarePixelBufferSharedPtr pixelBuffer = mTexture->getBuffer(); // Get the pixel buffer
-
-	pixelBuffer->lock(Ogre::HardwareBuffer::HBL_DISCARD);
-	const Ogre::PixelBox& pixelBox = pixelBuffer->getCurrentLock(); // Lock the pixel buffer and get a pixel box
-
-	Ogre::uint8* pDest = static_cast<Ogre::uint8*>(pixelBox.data);
-	graph.GetBGRN((unsigned char*) pDest,
-		4 * mTexture->getWidth() * mTexture->getHeight()); // Copy chart image to the pixel buffer
-
-	pixelBuffer->unlock(); // Unlock the pixel buffer
-
-	if (mMakePrint) {
-		std::string fileName;
-		fileName.append("Graph");
-		fileName.append(boost::lexical_cast<std::string>(mTime));
-		fileName.append(".png");
-		graph.WritePNG(fileName.c_str());
-		mMakePrint = false;
-	}
-
-	CEGUI::Renderer* guiRenderer(
-		SimulationManager::getSingleton()->getViewController().getRenderer());
-	guiRenderer->beginRendering();
-
-	mRenderTextureTarget->clear();
-	mRenderGuiContext->draw();
-
-	guiRenderer->endRendering();
-
-	mFrameWindow->invalidate(true); //notify window of the texture to update
 }
