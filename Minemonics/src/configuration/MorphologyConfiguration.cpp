@@ -14,13 +14,11 @@
 //## view headers
 //## utils headers
 
-const double MorphologyConfiguration::LIMB_MIN_SIZE = 6; /**!<The limb minimum dimension size*/
+const double MorphologyConfiguration::LIMB_MIN_SIZE = 6.0f; /**!<The limb minimum dimension size*/
 
-const double MorphologyConfiguration::LIMB_MAX_SIZE = 30; /**!<The limb maximum dimension size*/
+const double MorphologyConfiguration::LIMB_MAX_SIZE = 30.0f; /**!<The limb maximum dimension size*/
 
-//TODO: Optimize with bullet physics engine
-//TODO: Not used yet in this simulator
-const double MorphologyConfiguration::LIMB_MIN_DENSITY = 0.01; /**!<The limb minimum density*/
+const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f;///pow(MorphologyConfiguration::LIMB_MIN_SIZE,3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
 
 //TODO: Optimize with bullet physics engine
 //TODO: Not used yet in this simulator
@@ -102,5 +100,5 @@ const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT =  1.5f;//5.
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 
-const bool MorphologyConfiguration::BODY_MOTORS_ENABLED = true; /**!< Globally turn motors on or off*/
+const bool MorphologyConfiguration::BODY_MOTORS_ENABLED = false; /**!< Globally turn motors on or off*/
 

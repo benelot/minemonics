@@ -396,8 +396,8 @@ LimbModel* SRBPhenomeModel::createLimb(PhenotypeGenerator* generator,
 		/*size*/
 		Ogre::Vector3(sizeX, sizeY, sizeZ),
 		/*mass*/
-		sizeX * sizeY * sizeZ, childMorphogene->getRestitution(),
-		childMorphogene->getFriction(),
+		sizeX * sizeY * sizeZ * MorphologyConfiguration::LIMB_MIN_DENSITY,
+		childMorphogene->getRestitution(), childMorphogene->getFriction(),
 		Ogre::ColourValue(childMorphogene->getColorR(),
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
 		childMorphogene->isIntraBodyColliding(), getLimbModels().size());
@@ -641,7 +641,7 @@ void SRBPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
-		(*it)->reset(position);
+		(*it)->reset(position+Ogre::Vector3(0,abs(getLowestRelativePoint().y),0));
 	}
 }
 
@@ -659,7 +659,7 @@ void SRBPhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
-		(*it)->reposition(position);
+		(*it)->reposition(position+Ogre::Vector3(0,abs(getLowestRelativePoint().y),0));
 
 	}
 }

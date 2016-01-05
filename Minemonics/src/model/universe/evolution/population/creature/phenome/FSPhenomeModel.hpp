@@ -23,7 +23,7 @@ class access;
 //## model headers
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
-#include <BulletDynamics/Featherstone/btMultiBodyConstraint.h>
+#include <BulletDynamics/Featherstone/btMultiBodyJointLimitConstraint.h>
 #include <BulletDynamics/Featherstone/btMultiBody.h>
 #include <BulletDynamics/Featherstone/btMultiBodyDynamicsWorld.h>
 
@@ -222,7 +222,7 @@ private:
 
 	btMultiBodyDynamicsWorld* mWorld; /**!< The multibody world of this phenotype */
 
-	std::vector<btMultiBodyConstraint*> mLimitConstraints; /**!< The limit constraints of this phenotype */
+	std::vector<btMultiBodyJointLimitConstraint*> mLimitConstraints; /**!< The limit constraints of this phenotype */
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_FSPHENOMEMODEL_HPP_ */

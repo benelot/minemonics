@@ -58,7 +58,7 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, FSLimbBt* const limbA,
 		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
 	frameInW.setOrigin(pivotInW);
 
-	mLimbMassForceScalar = limbA->getVolume() * limbB->getVolume();
+	mLimbMassForceScalar = limbA->getVolume() * MorphologyConfiguration::LIMB_MIN_DENSITY * limbB->getVolume() * MorphologyConfiguration::LIMB_MIN_DENSITY;
 
 	// now get constraint frame in local coordinate systems
 	mFrameInA = limbA->getRigidBody()->getCenterOfMassTransform().inverse()

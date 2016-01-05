@@ -428,8 +428,8 @@ LimbModel* FSPhenomeModel::createLimb(PhenotypeGenerator* generator,
 		/*size*/
 		Ogre::Vector3(sizeX, sizeY, sizeZ),
 		/*mass*/
-		sizeX * sizeY * sizeZ, childMorphogene->getRestitution(),
-		childMorphogene->getFriction(),
+		sizeX * sizeY * sizeZ * MorphologyConfiguration::LIMB_MIN_DENSITY,
+		childMorphogene->getRestitution(), childMorphogene->getFriction(),
 		Ogre::ColourValue(childMorphogene->getColorR(),
 			childMorphogene->getColorB(), childMorphogene->getColorG()),
 		childMorphogene->isIntraBodyColliding(), getLimbModels().size());
@@ -542,8 +542,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 				chaoticControllerGene->getInitialZ(),
 				chaoticControllerGene->getSpeed());
 
-			controller->addControlInput(joint->getAngleceptors()[0]); // Add the first angleceptor as input
-			controller->addControlInput(joint->getVelocityceptors()[0]); // add the first velocityceptor as input
+			controller->addControlInput(joint->getAngleceptors()[i]); // Add the angleceptor as input
+			controller->addControlInput(joint->getVelocityceptors()[i]); // add the velocityceptor as input
 			controller->addControlOutput(joint->getMotors()[i]);
 			getControllers().push_back(controller);
 		}
@@ -703,7 +703,7 @@ void FSPhenomeModel::generateBody() {
 		mMultiBody->setHasSelfCollision(selfCollision);
 		mMultiBody->setUseGyroTerm(gyro);
 
-		if (!setDamping) { /**<! Pay attention, damping affects the whole motion of a body */
+		if (!setDamping) { /**<! TODO: Pay attention, damping affects the whole motion of a body, see if this is fixed. */
 			mMultiBody->setLinearDamping(0.f);
 			mMultiBody->setAngularDamping(0.f);
 		} else {
@@ -759,7 +759,7 @@ void FSPhenomeModel::generateBody() {
 }
 
 void FSPhenomeModel::addJointConstraints() {
-	for (std::vector<btMultiBodyConstraint*>::iterator lit =
+	for (std::vector<btMultiBodyJointLimitConstraint*>::iterator lit =
 		mLimitConstraints.begin(); lit != mLimitConstraints.end();) {
 		delete *lit;
 		lit = mLimitConstraints.erase(lit);
@@ -768,16 +768,15 @@ void FSPhenomeModel::addJointConstraints() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "--Add joint constraints";
 
 	for (int i = 0; i < mJointModels.size(); i++) {
-		//TODO: Limit joints that way, the joint limit constraint does not yet support the limiting of the spherical joint
-		// Link joint limits
-		btMultiBodyConstraint* limitCons = new btMultiBodyJointLimitConstraint(
-			mMultiBody, ((long) mJointModels[i]->getChildIndex()) - 1,
-			btScalar(
-				mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_PITCH]),
-			btScalar(
-				mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_PITCH]));
-		// The default value (100) behaves like a lock on -1.6
-//		limitCons->setMaxAppliedImpulse(40);
+		//TODO:the joint limit constraint does not yet support the limiting of the spherical joint
+		// set joint limits
+		btMultiBodyJointLimitConstraint* limitCons =
+			new btMultiBodyJointLimitConstraint(mMultiBody,
+				((long) mJointModels[i]->getChildIndex()) - 1,
+				btScalar(
+					mJointModels[i]->getLowerLimits()[JointPhysics::RDOF_YAW]),
+				btScalar(
+					mJointModels[i]->getUpperLimits()[JointPhysics::RDOF_YAW]));
 		mLimitConstraints.push_back(limitCons);
 	}
 
@@ -796,6 +795,9 @@ void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 			mLimbModels[0]->getLimbPhysics()->getInitialRelativeYPosition(),
 			mLimbModels[0]->getLimbPhysics()->getInitialRelativeZPosition());
 
+		initialRelativePosition += btVector3(0, abs(getLowestRelativePoint().y),
+			0);
+
 		btQuaternion initialOrientation;
 		initialOrientation.setValue(
 			mLimbModels[0]->getLimbPhysics()->getInitialXOrientation(),
@@ -808,16 +810,17 @@ void FSPhenomeModel::reset(const Ogre::Vector3 position) {
 		initialTransform.setRotation(initialOrientation);
 
 		mMultiBody->setBaseWorldTransform(initialTransform);
+
+		for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
+			it != mLimbModels.end(); it++) {
+			(*it)->reset(
+				OgreBulletUtils::convert(initialTransform.getOrigin()));
+		}
+
 		calm();
-	}
-	else{
+	} else {
 		//TODO: Some creatures just do not have a multibody. Why? Check if this is still true.
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::error)<< "A creature had no multibody or no limbs.";
-	}
-
-	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
-		it != mLimbModels.end(); it++) {
-		(*it)->reset(position);
 	}
 }
 
@@ -842,7 +845,10 @@ void FSPhenomeModel::reposition(const Ogre::Vector3 position) {
 	}
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
-		(*it)->reposition(position);
+		(*it)->reposition(
+			position
+				+ Ogre::Vector3(0,
+					abs(mCreatureModel->getLowestRelativePoint().y), 0));
 
 	}
 }
@@ -903,12 +909,13 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 void FSPhenomeModel::addToWorld() {
 	if (!isInWorld()) {
 		if (mMultiBody != NULL) {
-			getWorld()->addMultiBody(mMultiBody);
-		}
+			for (std::vector<btMultiBodyJointLimitConstraint*>::iterator lit =
+				mLimitConstraints.begin(); lit != mLimitConstraints.end();
+				lit++) {
+				getWorld()->addMultiBodyConstraint(*lit);
+			}
 
-		for (std::vector<btMultiBodyConstraint*>::iterator lit =
-			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
-			getWorld()->addMultiBodyConstraint(*lit);
+			getWorld()->addMultiBody(mMultiBody);
 		}
 	}
 }
@@ -917,11 +924,12 @@ void FSPhenomeModel::removeFromWorld() {
 	if (isInWorld()) {
 		if (mMultiBody != NULL) {
 			getWorld()->removeMultiBody(mMultiBody);
-		}
 
-		for (std::vector<btMultiBodyConstraint*>::iterator lit =
-			mLimitConstraints.begin(); lit != mLimitConstraints.end(); lit++) {
-			getWorld()->removeMultiBodyConstraint(*lit);
+			for (std::vector<btMultiBodyJointLimitConstraint*>::iterator lit =
+				mLimitConstraints.begin(); lit != mLimitConstraints.end();
+				lit++) {
+				getWorld()->removeMultiBodyConstraint(*lit);
+			}
 		}
 	}
 }
