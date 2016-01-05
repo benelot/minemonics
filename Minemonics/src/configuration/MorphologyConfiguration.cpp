@@ -14,11 +14,11 @@
 //## view headers
 //## utils headers
 
-const double MorphologyConfiguration::LIMB_MIN_SIZE = 6.0f; /**!<The limb minimum dimension size*/
+const double MorphologyConfiguration::LIMB_MIN_SIZE = 0.05f; /**!<The limb minimum dimension size*/
 
-const double MorphologyConfiguration::LIMB_MAX_SIZE = 30.0f; /**!<The limb maximum dimension size*/
+const double MorphologyConfiguration::LIMB_MAX_SIZE = 10.0f; /**!<The limb maximum dimension size*/
 
-const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f;///pow(MorphologyConfiguration::LIMB_MIN_SIZE,3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
+const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f/pow(MorphologyConfiguration::LIMB_MIN_SIZE,3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
 
 //TODO: Optimize with bullet physics engine
 //TODO: Not used yet in this simulator

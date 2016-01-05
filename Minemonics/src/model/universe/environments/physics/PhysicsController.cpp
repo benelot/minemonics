@@ -163,7 +163,7 @@ break;
 	mDynamicsWorld->getSolverInfo().m_numIterations = 50;
 
 	mDynamicsWorld->setGravity(btVector3(0, -PhysicsConfiguration::EARTH_GRAVITY
-			* 15.0f
+//			* 15.0f
 		, 0));
 }
 
