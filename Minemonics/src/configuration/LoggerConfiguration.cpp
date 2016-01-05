@@ -15,12 +15,7 @@
 //## utils headers
 
 const std::string LoggerConfiguration::loggedClasses =
-	"AverageVelocity|CreatureModel|Debugger|SimulationManager|PhysicsController|Reaper|FSPhenomeModel|SRBPhenomeModel|PhenomeModel|Phenome|Evaluation"
-// Reaper debugging
-//	+ "|FSPhenomeModel|SRBPhenomeModel|PhenomeModel"
-// Embryogenesis Debugging
-//+"|FSLimbBt|SRBLimbBt|LimbO3D|Embryogenesis|FSJointBt|SRBJointBt"
-;
+	"AverageVelocity|CreatureModel|Debugger|SimulationManager|PhysicsController|Reaper|FSPhenomeModel|SRBPhenomeModel|PhenomeModel|Phenome|Evaluation|ChaoticController";
 
 const std::string LoggerConfiguration::TOP_FOLDER = "logs";
 
