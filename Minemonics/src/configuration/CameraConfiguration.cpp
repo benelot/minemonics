@@ -22,5 +22,5 @@ const double CameraConfiguration::CAMERA_SHIFT_ROTATION_SPEED_FACTOR = 1.5; /**!
 
 const double CameraConfiguration::CAMERA_ROTATION_SPEED = 0.13; /**!< The rotation speed of the camera of the simulator. */
 
-const Ogre::Vector3 CameraConfiguration::CAMERA_ROOT_DISPLACEMENT = Ogre::Vector3(0, 5, 15);
+const Ogre::Vector3 CameraConfiguration::CAMERA_ROOT_DISPLACEMENT = Ogre::Vector3(0, 2, 10);
 
