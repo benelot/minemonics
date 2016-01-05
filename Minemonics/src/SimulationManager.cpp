@@ -360,9 +360,9 @@ bool SimulationManager::frameRenderingQueued(const Ogre::FrameEvent& evt) {
 void SimulationManager::updatePanels(Ogre::Real timeSinceLastFrame) {
 
 	/** Update all movable panels in view */
-	std::vector<MovablePanel*>::iterator it =
+	for (std::vector<MovablePanel*>::iterator it =
 		mViewController.getMovablePanels().begin();
-	for (; it != mViewController.getMovablePanels().end(); it++) {
+		it != mViewController.getMovablePanels().end(); it++) {
 		switch ((*it)->getType()) {
 		case MovablePanel::GRAPHPANEL: {
 			((MathGLPanel*) (*it))->update(timeSinceLastFrame);
