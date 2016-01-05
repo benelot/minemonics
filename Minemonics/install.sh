@@ -44,7 +44,7 @@ mkdir build
 cd build
 # configure make files with cmake
 #for pure installation 
-cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET3=ON .. -DUSE_DOUBLE_PRECISION=ON ..
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET3=ON -DUSE_DOUBLE_PRECISION=ON ..
 #for development
 #mkdir build-single;cd build-single
 #cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DBUILD_BULLET2_DEMOS=ON -DBUILD_CPU_DEMOS=ON -DBUILD_BULLET3=ON -DBUILD_OPENGL3_DEMOS=ON -DBUILD_EXTRAS=ON -DBUILD_SHARED_LIBS=ON  -DINSTALL_EXTRA_LIBS=ON -DUSE_DOUBLE_PRECISION=OFF ..
