@@ -211,13 +211,13 @@
                 {UNIVERSITY OF ZÜRICH}} % Your university's name in capitals - this is currently used in the abstract page
                 {UNIVERSITY OF ZÜRICH}}
 %-------------------------------------------------                
-\department{\texorpdfstring{\href{Department or School Web Site URL Here (include http://www.ifi.uzh.ch)} % Your department's URL
-                {Department of Informatics}} % Your department's name - used in the title page and abstract
-                {Department of Informatics}}
+\department{\texorpdfstring{\href{https://www.ee.ethz.ch/} % Your department's URL
+                {Dept. of Information Technology and Electrical Engineering}} % Your department's name - used in the title page and abstract
+                {Dept. of Information Technology and Electrical Engineering}}
 %-------------------------------------------------                
-\DEPARTMENT{\texorpdfstring{\href{http://www.ifi.uzh.ch} % Your department's URL
-                {DEPARTMENT OF INFORMATICS}} % Your department's name in capitals - this is not currently used anywhere in the template, cite it with \DEPTNAME if you want it
-                {DEPARTMENT OF INFORMATICS}}
+\DEPARTMENT{\texorpdfstring{\href{https://www.ee.ethz.ch/} % Your department's URL
+                {DEPT. OF INFORMATION TECHNOLOGY AND ELECTRICAL ENGINERRING}} % Your department's name in capitals - this is not currently used anywhere in the template, cite it with \DEPTNAME if you want it
+                {DEPT. OF INFORMATION TECHNOLOGY AND ELECTRICAL ENGINERRING}}
 %-------------------------------------------------                
 \group{\texorpdfstring{\href{http://stoop.ini.uzh.ch/} % Your research group's URL
                 {Stoop Group}} % Your research group's name - this is currently used in the title page 

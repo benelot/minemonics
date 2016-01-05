@@ -160,7 +160,11 @@ Leonardo da Vinci
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-The present thesis documents ...
+\paragraph*{Motivation.}
+
+\paragraph*{Methods.}
+
+\paragraph*{Results.} and more.
 
 }
 
@@ -292,16 +296,31 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 
 \pagestyle{fancy} % Return the page headers back to the "fancy" style
 
-%\begin{comment}
-% Include the chapters of the thesis as separate files from the Chapters folder
-% Uncomment the lines as you write the chapters
-%Introduction
-% Background
-% Something
-% Motivation
-% Approach
-% Outline
-\subfile{./Chapter1}
+% Introduction
+%  Background
+%  Simple Limiter 
+%  Approach
+\subfile{./Chapter1-Introduction}
+
+\subfile{./Chapter2-EvolutionaryOptimization}
+
+% Controllers
+%  Uncoupled sinusoidal oscillators
+%  Chaotic systems
+%  Chua Circuit
+%   Simple limiter control in Mathematica
+%   Simple limiter control in the Simulator
+%    Direct limiter control through the sensor feedback
+%     Limiting in Model Leg
+%     Preliminary findings
+%    Indirect limiter control through the morphology
+\subfile{./Chapter3-Controllers}
+
+% Results
+\subfile{./Chapter6-Results}
+
+% Discussion and Outlook
+\subfile{./Chapter7-DiscussionAndOutlook}
 
 
 %----------------------------------------------------------------------------------------
@@ -316,7 +335,7 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 % Uncomment the lines as you write the Appendices
 
 % Give the appendix A a meaning
-\subfile{./AppendixA}
+\subfile{./AppendixA-SimulatorDetails}
 
 
 \subfile{TODO.tex}
