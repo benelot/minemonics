@@ -78,8 +78,7 @@ public:
 		Morphogene* childMorphogene) = 0;
 
 	virtual void appendToParentLimb(LimbModel* childLimb,
-		PhenotypeGenerator* generator,
-		Ogre::Vector3& parentJointInW,
+		PhenotypeGenerator* generator, Ogre::Vector3& parentJointInW,
 		btTransform& parentHitTransform, btTransform& childHitTransform) = 0;
 
 	virtual btTransform getParentIntersectionInW(LimbPhysics* parentLimb,
@@ -187,6 +186,8 @@ public:
 		return mHasInterpenetrations;
 	}
 
+	Ogre::Vector3 getLowestRelativePoint();
+
 	void calm();
 
 	void collectControlInputs();
@@ -201,13 +202,15 @@ public:
 		mCreatureModel = creatureModel;
 	}
 
-	std::vector<const DataSink*> getDataSinks(){
+	std::vector<const DataSink*> getDataSinks() {
 		std::vector<const DataSink*> datasinks;
-		for(std::vector<Controller*>::iterator cit = mControllers.begin();cit != mControllers.end();cit++){
+		for (std::vector<Controller*>::iterator cit = mControllers.begin();
+			cit != mControllers.end(); cit++) {
 			datasinks.push_back(&(*cit)->getDataSink());
 		}
 
-		for(std::vector<JointModel*>::iterator jit = mJointModels.begin();jit != mJointModels.end();jit++){
+		for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
+			jit != mJointModels.end(); jit++) {
 			datasinks.push_back(&(*jit)->getDataSinkPitch());
 			datasinks.push_back(&(*jit)->getDataSinkYaw());
 			datasinks.push_back(&(*jit)->getDataSinkRoll());
@@ -293,7 +296,7 @@ public:
 		& BOOST_SERIALIZATION_NVP(mControllers); /**!< The vector of controllers.*/
 	}
 private:
-	static BoostLogger mBoostLogger; 	/**!< The boost logger. */
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
 	/**
 	 * Initializer of the boost logger to include the class name into the logging messages.

@@ -241,3 +241,16 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 	}
 	return true;
 }
+
+Ogre::Vector3 PhenomeModel::getLowestRelativePoint() {
+	Ogre::Vector3 lowestPoint = (*mLimbModels.begin())->getInitialRelativePosition();
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		// find lowest relative position (COM) and approximate the lowest point by subtracting half dimension length
+		if (lowestPoint.y > (*lit)->getInitialRelativePosition().y - 0.5f * (*lit)->getDimensions().length()) {
+			lowestPoint = (*lit)->getInitialRelativePosition();
+			lowestPoint.y -= 0.5f * (*lit)->getDimensions().length();
+		}
+	}
+	return lowestPoint;
+}

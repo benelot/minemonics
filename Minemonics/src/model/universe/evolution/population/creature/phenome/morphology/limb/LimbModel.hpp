@@ -59,9 +59,9 @@ public:
 
 	LimbModel();
 	LimbModel(const LimbModel& limbModel);
-	LimbModel(btDynamicsWorld* world,
-		CreatureModel* creatureModel, LimbPhysics::PrimitiveType type,
-		Ogre::Vector3 position, Ogre::Quaternion orientation,
+	LimbModel(btDynamicsWorld* world, CreatureModel* creatureModel,
+		LimbPhysics::PrimitiveType type, Ogre::Vector3 position,
+		Ogre::Quaternion orientation,
 		const Ogre::Vector3 initialRelativePosition,
 		const Ogre::Quaternion initialOrientation, Ogre::Vector3 dimensions,
 		double mass, double restitution, double friction,
@@ -196,6 +196,10 @@ public:
 		return mLimbPhysics->isIntraBodyColliding();
 	}
 
+	Ogre::Vector3 getInitialRelativePosition() const {
+		return mLimbPhysics->getInitialRelativePosition();
+	}
+
 // Serialization
 	/**
 	 * Give access to boost serialization
@@ -255,7 +259,7 @@ protected:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("LimbModel"));
+				boost::log::attributes::constant<std::string>("LimbModel"));
 		}
 	} _initializer;
 

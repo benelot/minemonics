@@ -206,6 +206,11 @@ public:
 		return mInitialRelativeZPosition;
 	}
 
+	Ogre::Vector3 getInitialRelativePosition() const {
+		return Ogre::Vector3(mInitialRelativeXPosition,
+			mInitialRelativeYPosition, mInitialRelativeZPosition);
+	}
+
 	double getInitialWOrientation() const {
 		return mInitialWOrientation;
 	}
@@ -321,31 +326,31 @@ public:
 
 		& BOOST_SERIALIZATION_NVP(mDimensions.x) /**!< The dimensions of the limb*/
 		& BOOST_SERIALIZATION_NVP(mDimensions.y)
-			& BOOST_SERIALIZATION_NVP(mDimensions.z)
+		& BOOST_SERIALIZATION_NVP(mDimensions.z)
 
-			& BOOST_SERIALIZATION_NVP(mColor.r) /**!< The color of the limb*/
-			& BOOST_SERIALIZATION_NVP(mColor.g)
-			& BOOST_SERIALIZATION_NVP(mColor.b)
+		& BOOST_SERIALIZATION_NVP(mColor.r) /**!< The color of the limb*/
+		& BOOST_SERIALIZATION_NVP(mColor.g)
+		& BOOST_SERIALIZATION_NVP(mColor.b)
 
-			& BOOST_SERIALIZATION_NVP(mPosition.x)
-			& BOOST_SERIALIZATION_NVP(mPosition.y)
-			& BOOST_SERIALIZATION_NVP(mPosition.z)
+		& BOOST_SERIALIZATION_NVP(mPosition.x)
+		& BOOST_SERIALIZATION_NVP(mPosition.y)
+		& BOOST_SERIALIZATION_NVP(mPosition.z)
 
-			& BOOST_SERIALIZATION_NVP(mInitialRelativeXPosition) /**!< The limb's relative position*/
-			& BOOST_SERIALIZATION_NVP(mInitialRelativeYPosition)
-			& BOOST_SERIALIZATION_NVP(mInitialRelativeZPosition)
+		& BOOST_SERIALIZATION_NVP(mInitialRelativeXPosition) /**!< The limb's relative position*/
+		& BOOST_SERIALIZATION_NVP(mInitialRelativeYPosition)
+		& BOOST_SERIALIZATION_NVP(mInitialRelativeZPosition)
 
-			& BOOST_SERIALIZATION_NVP(mInitialWOrientation) /**!< The limb's orientation*/
-			& BOOST_SERIALIZATION_NVP(mInitialXOrientation)
-			& BOOST_SERIALIZATION_NVP(mInitialYOrientation)
-			& BOOST_SERIALIZATION_NVP(mInitialZOrientation)
+		& BOOST_SERIALIZATION_NVP(mInitialWOrientation) /**!< The limb's orientation*/
+		& BOOST_SERIALIZATION_NVP(mInitialXOrientation)
+		& BOOST_SERIALIZATION_NVP(mInitialYOrientation)
+		& BOOST_SERIALIZATION_NVP(mInitialZOrientation)
 
-			& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mRestitution) /**!< The restitution of the limb physics model*/
 
-			& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mFriction) /**!< The friction of the limb physics model*/
 
-			& BOOST_SERIALIZATION_NVP(mMass) /**!< The mass of the limb physics model*/
-			& BOOST_SERIALIZATION_NVP(mIntraBodyColliding);/**!< If the limb is colliding with the other limbs */
+		& BOOST_SERIALIZATION_NVP(mMass) /**!< The mass of the limb physics model*/
+		& BOOST_SERIALIZATION_NVP(mIntraBodyColliding);/**!< If the limb is colliding with the other limbs */
 	}
 
 protected:
