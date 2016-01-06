@@ -123,7 +123,8 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		mEnvironmentTypeCb->setText(itemCombobox->getText()); // Copy the item's text into the Editbox
 		mEnvironmentTypeCb->setItemSelectState(itemCombobox, true);
-		itemCombobox = new CEGUI::ListboxTextItem("Hills", EnvironmentModel::HILLS);
+		itemCombobox = new CEGUI::ListboxTextItem("Hills",
+			EnvironmentModel::HILLS);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		itemCombobox = new CEGUI::ListboxTextItem("Open Sea",
 			EnvironmentModel::OPENSEA);
@@ -247,11 +248,25 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		//	CEGUI::String valueEditbox = mEditBox->getText(); // Retrieve the text
 //		mEpochNumber->setValidationString(validationString);
 		mEpochNumber->setSize(
-			CEGUI::USize(CEGUI::UDim(0, 20), CEGUI::UDim(0, 20)));
+			CEGUI::USize(CEGUI::UDim(0, 30), CEGUI::UDim(0, 20)));
 		mEpochNumber->setPosition(
-			CEGUI::UVector2(CEGUI::UDim(0.2f, 0.0f),
+			CEGUI::UVector2(CEGUI::UDim(0.1f, 0.0f),
 				CEGUI::UDim(verticalStep * i + verticalOffset, 0.0f)));
 		mBaseWidget->addChild(mEpochNumber);
+	}
+
+	{
+		mJuryWeight = static_cast<CEGUI::Editbox*>(wmgr.createWindow(
+			CEGUIConfiguration::CEGUI_SCHEME + "/Editbox"));
+		mJuryWeight->setText("1");
+		//	CEGUI::String valueEditbox = mEditBox->getText(); // Retrieve the text
+//		mJuryWeight->setValidationString(validationString);
+		mJuryWeight->setSize(
+			CEGUI::USize(CEGUI::UDim(0, 30), CEGUI::UDim(0, 20)));
+		mJuryWeight->setPosition(
+			CEGUI::UVector2(CEGUI::UDim(0.2f, 0.0f),
+				CEGUI::UDim(verticalStep * i + verticalOffset, 0.0f)));
+		mBaseWidget->addChild(mJuryWeight);
 	}
 
 	{
@@ -317,10 +332,11 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 	{
 		/* MultiColumnList */
 		mJuryMcl = static_cast<CEGUI::MultiColumnList*>(wmgr.createWindow(
-			CEGUIConfiguration::CEGUI_SCHEME + "/MultiColumnList"));\
-		mJuryMcl->addColumn("Epoch #", 0, CEGUI::UDim(0.32f, 0));
-		mJuryMcl->addColumn("JuryType", 1, CEGUI::UDim(0.32f, 0));
-		mJuryMcl->addColumn("Asc/Dsc", 2, CEGUI::UDim(0.32f, 0));
+			CEGUIConfiguration::CEGUI_SCHEME + "/MultiColumnList"));
+		mJuryMcl->addColumn("Epoch #", 0, CEGUI::UDim(0.248f, 0));
+		mJuryMcl->addColumn("JuryWeight", 1, CEGUI::UDim(0.248f, 0));
+		mJuryMcl->addColumn("JuryType", 2, CEGUI::UDim(0.248f, 0));
+		mJuryMcl->addColumn("Asc/Dsc", 3, CEGUI::UDim(0.248f, 0));
 		mJuryMcl->setSelectionMode(CEGUI::MultiColumnList::RowSingle); // MultiColumnList::RowMultiple
 
 		mJuryMcl->setSize(
@@ -333,7 +349,7 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 	}
 
 	{
-		/* Button */
+		/* Confirm Button */
 		mConfirmButton = static_cast<CEGUI::PushButton*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Button"));
 		mConfirmButton->setText("Create");
@@ -379,17 +395,21 @@ void NewPlanetPanel::onAddJury() {
 		1);
 	mJuryMcl->setItem(itemMultiColumnList, 0, mJuryMcl->getRowCount() - 1); // ColumnID, RowID
 
+	itemMultiColumnList = new CEGUI::ListboxTextItem(mJuryWeight->getText(), 1);
+	mJuryMcl->setItem(itemMultiColumnList, 1, mJuryMcl->getRowCount() - 1); // ColumnID, RowID
+
 	itemMultiColumnList = new CEGUI::ListboxTextItem(
 		mJuryType->getSelectedItem()->getText(),
 		mJuryType->getSelectedItem()->getID());
-	mJuryMcl->setItem(itemMultiColumnList, 1, mJuryMcl->getRowCount() - 1); // ColumnID, RowID
+	mJuryMcl->setItem(itemMultiColumnList, 2, mJuryMcl->getRowCount() - 1); // ColumnID, RowID
 
 	itemMultiColumnList = new CEGUI::ListboxTextItem(
 		mDirection->getSelectedItem()->getText(),
 		mDirection->getSelectedItem()->getID());
-	mJuryMcl->setItem(itemMultiColumnList, 2, mJuryMcl->getRowCount() - 1); // ColumnID, RowID
+	mJuryMcl->setItem(itemMultiColumnList, 3, mJuryMcl->getRowCount() - 1); // ColumnID, RowID
 
 	mEpochNumber->setText("1");
+	mJuryWeight->setText("1");
 	CEGUI::ListboxItem* itemCombobox = mJuryType->getListboxItemFromIndex(0);
 	mJuryType->setText(itemCombobox->getText()); // Copy the item's text into the Editbox
 	mJuryType->setItemSelectState(itemCombobox, true);
@@ -412,42 +432,38 @@ void NewPlanetPanel::onConfirmClicked() {
 	EvolutionModel::EvaluationType evaluationType =
 		(EvolutionModel::EvaluationType) mEvaluationTypeCb->getSelectedItem()->getID(); // Retrieve the evaluation type
 
-	//TODO: Changing tournament size might not have an effect
+	//TODO: Changing tournament size does not have an effect
 	int tournamentSize = mTournamentSizeBs->getCurrentValue(); // Retrieve the tournament size
 
 	//create the planet and set its serialization path
-	Planet* planet = new Planet(modelType, environmentType, evaluationTime,evaluationType,tournamentSize);
+	Planet* planet = new Planet(modelType, environmentType, evaluationTime,
+		evaluationType, tournamentSize);
 
 	std::vector<Epoch*> mEpochs;
 
 	//TODO: This is not user friendly
 	for (int i = 0; i < mJuryMcl->getRowCount(); i++) {
-		CEGUI::MCLGridRef epochNumberGridRef(i, 0); // Select according to a grid reference; second row
-
 		CEGUI::ListboxItem* listboxItem = mJuryMcl->getItemAtGridReference(
-			epochNumberGridRef);
-		uint valueColumnEpochNumber = boost::lexical_cast<int>(
-			listboxItem->getText()); // Retrieve the value of the item
+			CEGUI::MCLGridRef(i, 0));
+		uint epochNumber = boost::lexical_cast<int>(listboxItem->getText()); // Retrieve the value of the item
 
-		CEGUI::MCLGridRef juryTypeGridRef(i, 1); // Select according to a grid reference
+		listboxItem = mJuryMcl->getItemAtGridReference(CEGUI::MCLGridRef(i, 1));
+		uint juryWeight = boost::lexical_cast<int>(listboxItem->getText()); // Retrieve the value of the item
 
-		listboxItem = mJuryMcl->getItemAtGridReference(juryTypeGridRef);
-		uint valueColumnJuryType = listboxItem->getID(); // Retrieve the value of the item
+		listboxItem = mJuryMcl->getItemAtGridReference(CEGUI::MCLGridRef(i, 2));
+		uint juryType = listboxItem->getID(); // Retrieve the value of the item
 
-		CEGUI::MCLGridRef juryDirectionGridRef(i, 2); // Select according to a grid reference
+		listboxItem = mJuryMcl->getItemAtGridReference(CEGUI::MCLGridRef(i, 3));
+		uint jurySortDirection = listboxItem->getID(); // Retrieve the value of the item
 
-		listboxItem = mJuryMcl->getItemAtGridReference(juryDirectionGridRef);
-		uint valueColumnJuryDirection = listboxItem->getID(); // Retrieve the value of the item
-
-		if (mEpochs.size() < valueColumnEpochNumber) {
-			for (int i = valueColumnEpochNumber - mEpochs.size(); i > 0; i--) {
+		if (mEpochs.size() < epochNumber) {
+			for (int i = epochNumber - mEpochs.size(); i > 0; i--) {
 				Epoch* epoch = new Epoch();
 				mEpochs.push_back(epoch);
 			}
 		}
-		mEpochs[valueColumnEpochNumber - 1]->addJuryType(
-						(Jury::JuryType) valueColumnJuryType, 1,
-						valueColumnJuryDirection);
+		mEpochs[epochNumber - 1]->addJuryType((Jury::JuryType) juryType,
+			juryWeight, jurySortDirection);
 	}
 
 	for (int i = 0; i < mEpochs.size(); i++) {
@@ -459,7 +475,8 @@ void NewPlanetPanel::onConfirmClicked() {
 		+ boost::lexical_cast<std::string>(
 			SimulationManager::getSingleton()->getTimeStamp());
 	std::string folderPath = FilesystemManipulator::createFolder(
-		SimulationManager::getSingleton()->getSerializationPath(), planetFolderName);
+		SimulationManager::getSingleton()->getSerializationPath(),
+		planetFolderName);
 
 	std::string planetFilePath = folderPath + std::string("/planet.pl");
 

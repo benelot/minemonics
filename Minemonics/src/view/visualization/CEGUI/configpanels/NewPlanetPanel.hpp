@@ -57,6 +57,7 @@ protected:
 	CEGUI::PushButton* mConfirmButton;
 
 	CEGUI::Editbox* mEpochNumber;
+	CEGUI::Editbox* mJuryWeight;
 	CEGUI::Combobox* mJuryType;
 	CEGUI::Combobox* mDirection;
 	CEGUI::PushButton* mAddJury;
