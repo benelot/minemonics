@@ -107,11 +107,19 @@ int Creature::addToWorld() {
 		performEmbryogenesis();
 	}
 
-	std::vector<const DataSink*> datasinks =
-		mPhenotype.getPhenotypeModel()->getDataSinks();
-	for (std::vector<const DataSink*>::const_iterator dit = datasinks.begin();
-		dit != datasinks.end(); dit++) {
-		SimulationManager::getSingleton()->getViewController().getChaosPanel()->addDataset(
+	std::vector<const DataSink*> controllerDatasinks =
+		mPhenotype.getPhenotypeModel()->getControllerDataSinks();
+	for (std::vector<const DataSink*>::const_iterator dit = controllerDatasinks.begin();
+		dit != controllerDatasinks.end(); dit++) {
+		SimulationManager::getSingleton()->getViewController().getChaosControllerPanel()->addDataset(
+			&(*dit)->getDataset());
+	}
+
+	std::vector<const DataSink*> jointDatasinks =
+		mPhenotype.getPhenotypeModel()->getJointDataSinks();
+	for (std::vector<const DataSink*>::const_iterator dit = jointDatasinks.begin();
+		dit != jointDatasinks.end(); dit++) {
+		SimulationManager::getSingleton()->getViewController().getJointDynamicsPanel()->addDataset(
 			&(*dit)->getDataset());
 	}
 
@@ -124,7 +132,8 @@ void Creature::removeFromWorld() {
 	// Remove phenotype from world
 	mPhenotype.removeFromWorld();
 
-	SimulationManager::getSingleton()->getViewController().getChaosPanel()->clearDatasets();
+	SimulationManager::getSingleton()->getViewController().getChaosControllerPanel()->clearDatasets();
+	SimulationManager::getSingleton()->getViewController().getJointDynamicsPanel()->clearDatasets();
 }
 
 void Creature::processJuries() {

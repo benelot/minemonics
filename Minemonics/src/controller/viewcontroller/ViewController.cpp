@@ -55,7 +55,7 @@ ViewController::ViewController() :
 	NULL), mShowShadows(false), mMenuBar(NULL), mFpsPanel(
 	NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
 	NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
-	NULL), mLoadPopulationWindow(NULL),mChaosPanel(NULL) {
+	NULL), mLoadPopulationWindow(NULL),mChaosControllerPanel(NULL) {
 }
 
 ViewController::~ViewController() {
@@ -186,11 +186,21 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 	mLoadPopulationWindow->hide();
 	mMovablePanels.push_back(mLoadPopulationWindow);
 
-	mChaosPanel = new MathGLPanel(((float)windowWidth) / 1.37f, windowHeight / 2.0f, 500,
+	mChaosControllerPanel = new MathGLPanel("Chaos controller state",((float)windowWidth) / 1.37f, windowHeight / 100.0f, 500,
 		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
-	mChaosPanel->hide(); // hide the panel by default
+	mChaosControllerPanel->hide(); // hide the panel by default
 
-	mMovablePanels.push_back(mChaosPanel);
+	mMovablePanels.push_back(mChaosControllerPanel);
+
+	mJointDynamicsPanel = new MathGLPanel("Joint dynamics",((float)windowWidth) / 1.37f, windowHeight / 2.0f, 500,
+		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
+	mJointDynamicsPanel->setXLabel("x: joint x[-Pi;Pi]");
+	mJointDynamicsPanel->setYLabel("y:joint dx[1/s]");
+	mJointDynamicsPanel->setHorizontalRotation(0);
+	mJointDynamicsPanel->setVerticalRotation(0);
+	mJointDynamicsPanel->hide(); // hide the panel by default
+
+	mMovablePanels.push_back(mJointDynamicsPanel);
 //
 //	mMovablePanels.push_back(
 //		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));

@@ -52,11 +52,13 @@
 //## view headers
 //## utils headers
 
-MathGLPanel::MathGLPanel(const int left, const int top, const int width,
-	const int height, Ogre::Root* const root, const int textureWidth,
-	const int textureHeight) :
-	MovablePanel("MathGLWindow", MovablePanel::GRAPHPANEL), mTime(0), mMakePrint(
-		false), mVerticalRotation(60), mHorizontalRotation(50) {
+MathGLPanel::MathGLPanel(const std::string name, const int left, const int top,
+	const int width, const int height, Ogre::Root* const root,
+	const int textureWidth, const int textureHeight) :
+	MovablePanel(name, MovablePanel::GRAPHPANEL), mTime(0), mMakePrint(false), mVerticalRotation(
+		60), mHorizontalRotation(50), mXLabel("x"), mYLabel("y"), mZLabel("z") {
+
+	std::string uniqueID = boost::lexical_cast<std::string>(this);
 
 	CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
@@ -81,7 +83,7 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 	// We create a CEGUI Texture using the renderer you use:
 	CEGUI::Texture& texture =
 		SimulationManager::getSingleton()->getViewController().getRenderer()->createTexture(
-			"MathGLTexture", mTexture);
+			"MathGLTexture" + uniqueID, mTexture);
 
 	// Now we need to cast it to the CEGUI::Texture superclass which matches your Renderer. This can be CEGUI::OgreTexture or CEGUI::OpenGLTexture, depending on the renderer you use in your application
 	// We will use Ogre here as an example
@@ -93,7 +95,7 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 	// We create a BasicImage and set the Texture
 	CEGUI::BasicImage* image =
 		static_cast<CEGUI::BasicImage*>(&CEGUI::ImageManager::getSingleton().create(
-			"BasicImage", "RTTImage"));
+			"BasicImage", "RTTImage" + uniqueID));
 	image->setTexture(static_cast<CEGUI::Texture*>(&rendererTexture));
 
 	CEGUI::Rectf imageArea;
@@ -109,13 +111,12 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 
 	CEGUI::Window* staticImage =
 		CEGUI::WindowManager::getSingleton().createWindow(
-			CEGUIConfiguration::CEGUI_SCHEME + "/StaticImage",
-			"MathGLRTTWindow");
+			CEGUIConfiguration::CEGUI_SCHEME + "/StaticImage");
 	staticImage->setSize(
 		CEGUI::USize(CEGUI::UDim(0, width - 20), CEGUI::UDim(0, height - 40)));
 	staticImage->setPosition(
 		CEGUI::UVector2(CEGUI::UDim(0, 10), CEGUI::UDim(0, 20)));
-	staticImage->setProperty("Image", "RTTImage");
+	staticImage->setProperty("Image", "RTTImage" + uniqueID);
 
 	MovablePanel::initialize(left, top, width, height, false);
 	mFrameWindow->addChild(staticImage);
@@ -153,7 +154,7 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 
 	mHorizontalSlider->setMaxValue(360);
 	mHorizontalSlider->setClickStep(1.0f);
-	mHorizontalSlider->setCurrentValue(50);
+	mHorizontalSlider->setCurrentValue(mHorizontalRotation);
 
 	mHorizontalSlider->subscribeEvent(CEGUI::Slider::EventValueChanged,
 		CEGUI::Event::Subscriber(&MathGLPanel::onHorizontalSliderValueChanged,
@@ -172,7 +173,7 @@ MathGLPanel::MathGLPanel(const int left, const int top, const int width,
 
 	mVerticalSlider->setMaxValue(360);
 	mVerticalSlider->setClickStep(1.0f);
-	mVerticalSlider->setCurrentValue(60);
+	mVerticalSlider->setCurrentValue(mVerticalRotation);
 
 	mVerticalSlider->subscribeEvent(CEGUI::Slider::EventValueChanged,
 		CEGUI::Event::Subscriber(&MathGLPanel::onVerticalSliderValueChanged,
@@ -204,7 +205,7 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 
 		// Create chart
 		mglGraph graph(0, mTexture->getWidth(), mTexture->getHeight());
-		graph.Title("Controller movement");
+		graph.Title(mName.c_str());
 		graph.Rotate(mVerticalRotation, mHorizontalRotation);
 
 		double minX = 1000000;
@@ -218,10 +219,6 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 			mDatasets.begin(); mit != mDatasets.end(); mit++) {
 			// calculate maxima and minima
 			for (int i = 0; i < (*(*mit)->getDatasetX()).nx; i++) {
-//			int i =
-//				((*mit)->getDatasetZ()->nx - 1 > 0) ?
-//					(*mit)->getDatasetZ()->nx - 1 : 0;
-
 				minX =
 					(minX > (*(*mit)->getDatasetX()).a[i]) ?
 						(*(*mit)->getDatasetX()).a[i] : minX;
@@ -232,9 +229,6 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 			}
 
 			for (int i = 0; i < (*(*mit)->getDatasetY()).nx; i++) {
-//			int i =
-//				((*mit)->getDatasetZ()->nx - 1 > 0) ?
-//					(*mit)->getDatasetZ()->nx - 1 : 0;
 				minY =
 					(minY > (*(*mit)->getDatasetY()).a[i]) ?
 						(*(*mit)->getDatasetY()).a[i] : minY;
@@ -245,9 +239,6 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 			}
 
 			for (int i = 0; i < (*(*mit)->getDatasetZ()).nx; i++) {
-//			int i =
-//				((*mit)->getDatasetZ()->nx - 1 > 0) ?
-//					(*mit)->getDatasetZ()->nx - 1 : 0;
 				minZ =
 					(minZ > (*(*mit)->getDatasetZ()).a[i]) ?
 						(*(*mit)->getDatasetZ()).a[i] : minZ;
@@ -290,9 +281,9 @@ void MathGLPanel::update(const double timeSinceLastFrame) {
 				(*(*mit)->getDatasetZ()), "VA-");
 		}
 
-		graph.Label('x', "x", 0);
-		graph.Label('y', "y", 0);
-		graph.Label('z', "z", 0);
+		graph.Label('x', mXLabel.c_str(), 0);
+		graph.Label('y', mYLabel.c_str(), 0);
+		graph.Label('z', mZLabel.c_str(), 0);
 		graph.Box();
 		graph.Axis();
 

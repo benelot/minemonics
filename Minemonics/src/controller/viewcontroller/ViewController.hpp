@@ -187,8 +187,12 @@ public:
 		}
 	}
 
-	MathGLPanel* getChaosPanel() {
-		return mChaosPanel;
+	MathGLPanel* getChaosControllerPanel() {
+		return mChaosControllerPanel;
+	}
+
+	MathGLPanel* getJointDynamicsPanel() {
+		return mJointDynamicsPanel;
 	}
 
 private:
@@ -231,7 +235,8 @@ private:
 	MenuBar* mMenuBar;
 	FPSPanel* mFpsPanel;
 	DetailsPanel* mDetailsPanel;
-	MathGLPanel* mChaosPanel;
+	MathGLPanel* mChaosControllerPanel;
+	MathGLPanel* mJointDynamicsPanel;
 	CEGUI::OgreRenderer* mRenderer;
 	CEGUI::Window* mDragContainer;
 

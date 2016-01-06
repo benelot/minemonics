@@ -202,21 +202,11 @@ public:
 		mCreatureModel = creatureModel;
 	}
 
-	std::vector<const DataSink*> getDataSinks() {
-		std::vector<const DataSink*> datasinks;
-		for (std::vector<Controller*>::iterator cit = mControllers.begin();
-			cit != mControllers.end(); cit++) {
-			datasinks.push_back(&(*cit)->getDataSink());
-		}
+	std::vector<const DataSink*> getDataSinks();
 
-		for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
-			jit != mJointModels.end(); jit++) {
-			datasinks.push_back(&(*jit)->getDataSinkPitch());
-			datasinks.push_back(&(*jit)->getDataSinkYaw());
-			datasinks.push_back(&(*jit)->getDataSinkRoll());
-		}
-		return datasinks;
-	}
+	std::vector<const DataSink*> getControllerDataSinks();
+
+	std::vector<const DataSink*> getJointDataSinks();
 
 	virtual PhenomeModel* clone() = 0;
 

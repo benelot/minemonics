@@ -92,8 +92,10 @@ void PhenomeModel::collectControlInputs() {
 	// collect control inputs from the limbs
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
-		std::vector<ControlInput*> mLimbControlInputs = (*lit)->getControlInputs();
-		mControlInputs.insert(mControlInputs.end(),mLimbControlInputs.begin(),mLimbControlInputs.end());
+		std::vector<ControlInput*> mLimbControlInputs =
+			(*lit)->getControlInputs();
+		mControlInputs.insert(mControlInputs.end(), mLimbControlInputs.begin(),
+			mLimbControlInputs.end());
 	}
 
 	// collect the control inputs from the controllers
@@ -105,12 +107,14 @@ void PhenomeModel::collectControlInputs() {
 	// collect the control inputs from the joints
 	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
 		jit != mJointModels.end(); jit++) {
-		std::vector<ControlInput*> mJointControlInputs = (*jit)->getControlInputs();
-		mControlInputs.insert(mControlInputs.end(),mJointControlInputs.begin(),mJointControlInputs.end());
+		std::vector<ControlInput*> mJointControlInputs =
+			(*jit)->getControlInputs();
+		mControlInputs.insert(mControlInputs.end(), mJointControlInputs.begin(),
+			mJointControlInputs.end());
 	}
 
 	// set the vector index to be the control input
-	for(int i = 0; i < mControlInputs.size();i++){
+	for (int i = 0; i < mControlInputs.size(); i++) {
 		mControlInputs[i]->setOwnControlInputIndex(i);
 	}
 }
@@ -121,8 +125,10 @@ void PhenomeModel::collectControlOutputs() {
 	// collect the control outputs from the limbs
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
-		std::vector<ControlOutput*> mLimbControlOutputs = (*lit)->getControlOutputs();
-		mControlOutputs.insert(mControlOutputs.end(),mLimbControlOutputs.begin(),mLimbControlOutputs.end());
+		std::vector<ControlOutput*> mLimbControlOutputs =
+			(*lit)->getControlOutputs();
+		mControlOutputs.insert(mControlOutputs.end(),
+			mLimbControlOutputs.begin(), mLimbControlOutputs.end());
 
 	}
 
@@ -135,16 +141,18 @@ void PhenomeModel::collectControlOutputs() {
 	// collect the control outputs from the joints
 	for (std::vector<JointModel*>::const_iterator jit = mJointModels.begin();
 		jit != mJointModels.end(); jit++) {
-		std::vector<ControlOutput*> mJointControlOutputs = (*jit)->getControlOutputs();
-		mControlOutputs.insert(mControlOutputs.end(),mJointControlOutputs.begin(),mJointControlOutputs.end());
+		std::vector<ControlOutput*> mJointControlOutputs =
+			(*jit)->getControlOutputs();
+		mControlOutputs.insert(mControlOutputs.end(),
+			mJointControlOutputs.begin(), mJointControlOutputs.end());
 	}
 
-	for(int i = 0; i < mControlOutputs.size();i++){
+	for (int i = 0; i < mControlOutputs.size(); i++) {
 		mControlOutputs[i]->setOwnControlOutputIndex(i);
 	}
 }
 
-void PhenomeModel::wireController(){
+void PhenomeModel::wireController() {
 
 	// wire the limbs
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
@@ -168,7 +176,7 @@ void PhenomeModel::wireController(){
 	}
 }
 
-void PhenomeModel::storeControlIndices(){
+void PhenomeModel::storeControlIndices() {
 
 	// store the control indices of the limbs
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
@@ -243,14 +251,50 @@ bool PhenomeModel::equals(const PhenomeModel& phenomeModel) const {
 }
 
 Ogre::Vector3 PhenomeModel::getLowestRelativePoint() {
-	Ogre::Vector3 lowestPoint = (*mLimbModels.begin())->getInitialRelativePosition();
+	Ogre::Vector3 lowestPoint =
+		(*mLimbModels.begin())->getInitialRelativePosition();
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {
 		// find lowest relative position (COM) and approximate the lowest point by subtracting half dimension length
-		if (lowestPoint.y > (*lit)->getInitialRelativePosition().y - 0.5f * (*lit)->getDimensions().length()) {
+		if (lowestPoint.y
+			> (*lit)->getInitialRelativePosition().y
+				- 0.5f * (*lit)->getDimensions().length()) {
 			lowestPoint = (*lit)->getInitialRelativePosition();
 			lowestPoint.y -= 0.5f * (*lit)->getDimensions().length();
 		}
 	}
 	return lowestPoint;
+}
+
+std::vector<const DataSink*> PhenomeModel::getControllerDataSinks() {
+	std::vector<const DataSink*> datasinks;
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		datasinks.push_back(&(*cit)->getDataSink());
+	}
+
+	return datasinks;
+}
+
+std::vector<const DataSink*> PhenomeModel::getJointDataSinks() {
+	std::vector<const DataSink*> datasinks;
+
+	for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		datasinks.push_back(&(*jit)->getDataSinkPitch());
+		datasinks.push_back(&(*jit)->getDataSinkYaw());
+		datasinks.push_back(&(*jit)->getDataSinkRoll());
+	}
+	return datasinks;
+}
+
+std::vector<const DataSink*> PhenomeModel::getDataSinks() {
+	std::vector<const DataSink*> datasinks;
+	std::vector<const DataSink*> controllerDatasinks = getControllerDataSinks();
+	datasinks.insert(datasinks.begin(),controllerDatasinks.begin(),controllerDatasinks.end());
+
+	std::vector<const DataSink*> jointDatasinks = getJointDataSinks();
+	datasinks.insert(datasinks.begin(),jointDatasinks.begin(),jointDatasinks.end());
+
+	return datasinks;
 }

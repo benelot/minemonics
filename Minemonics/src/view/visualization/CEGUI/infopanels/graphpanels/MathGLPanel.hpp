@@ -34,7 +34,7 @@ class TextureTarget;
  */
 class MathGLPanel: public MovablePanel {
 public:
-	MathGLPanel(const int left, const int top, const int width,
+	MathGLPanel(const std::string name, const int left, const int top, const int width,
 		const int height, Ogre::Root* const root, const int textureWidth,
 		const int textureHeight);
 	virtual ~MathGLPanel();
@@ -56,12 +56,56 @@ public:
 		mMakePrint = true;
 	}
 
+	double getHorizontalRotation() const {
+		return mHorizontalRotation;
+	}
+
+	void setHorizontalRotation(double horizontalRotation) {
+		mHorizontalRotation = horizontalRotation;
+	}
+
+	double getVerticalRotation() const {
+		return mVerticalRotation;
+	}
+
+	void setVerticalRotation(double verticalRotation) {
+		mVerticalRotation = verticalRotation;
+	}
+
+	const std::string& getXLabel() const {
+		return mXLabel;
+	}
+
+	void setXLabel(const std::string& xLabel) {
+		mXLabel = xLabel;
+	}
+
+	const std::string& getYLabel() const {
+		return mYLabel;
+	}
+
+	void setYLabel(const std::string& yLabel) {
+		mYLabel = yLabel;
+	}
+
+	const std::string& getZLabel() const {
+		return mZLabel;
+	}
+
+	void setZLabel(const std::string& zLabel) {
+		mZLabel = zLabel;
+	}
+
 private:
 
 	CEGUI::Slider* mVerticalSlider; /**!< The slider right to the graph */
 	double mHorizontalRotation;
 	CEGUI::Slider* mHorizontalSlider; /**!< The slider below the graph */
 	double mVerticalRotation;
+
+	std::string mXLabel;
+	std::string mYLabel;
+	std::string mZLabel;
 
 	std::vector<const MathGLDataset*> mDatasets; /**!< The different data sets to plot*/
 	Ogre::TexturePtr mTexture; /**!< The texture to drawn the math gl on*/
