@@ -18,7 +18,8 @@ const double MorphologyConfiguration::LIMB_MIN_SIZE = 0.05f; /**!< (in meters) T
 
 const double MorphologyConfiguration::LIMB_MAX_SIZE = 1.0f; /**!< (in meters) The limb maximum dimension size*/
 
-const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f/pow(MorphologyConfiguration::LIMB_MIN_SIZE,3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
+const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f
+	/ pow(MorphologyConfiguration::LIMB_MIN_SIZE, 3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
 
 //TODO: Optimize with bullet physics engine
 //TODO: Not used yet in this simulator
@@ -67,16 +68,18 @@ const double MorphologyConfiguration::MUSCLE_DENSITY = 1060; // kg/m^3
 const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
 
 /**
- * The maximum allowable torque that can be exerted by a servo motor in its effort to
- * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
+ * The maximum allowable torque that can be exerted by a motor is computed as
+ * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
-const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT = 0.03f;
+const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT =
+	0.03f;
 
-const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT = 0.03f;
+const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
+	0.03f;
 
 /**
- * The maximum allowable torque that can be exerted by a servo motor in its effort to
- * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
+ * The maximum allowable torque that can be exerted by a motor is computed as
+ * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
 const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
@@ -100,7 +103,7 @@ const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT =  0.05f;//5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.05f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 
