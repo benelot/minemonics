@@ -82,16 +82,18 @@ public:
 	static const double MUSCLE_STRENGTH_PER_CSA; // N/m^2
 
 	/**
-	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
+	 * The maximum allowable torque that can be exerted by a motor in its effort to
 	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_LINEAR_CONSTANT;
+	static const double MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT;
+	static const double MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT;
 
 	/**
-	 * The maximum allowable torque that can be exerted by a servo motor in its effort to
+	 * The maximum allowable torque that can be exerted by a motor in its effort to
 	 * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
 	 */
-	static const double MUSCLE_MAX_TORQUE_SQUARE_CONSTANT;
+	static const double MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT;
+	static const double MOTOR_SRB_MAX_TORQUE_SQUARE_CONSTANT;
 
 	/**
 	 * The joints between body segments are set to break if they experience torques beyond

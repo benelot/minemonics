@@ -70,13 +70,17 @@ const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
  * The maximum allowable torque that can be exerted by a servo motor in its effort to
  * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
  */
-const double MorphologyConfiguration::MUSCLE_MAX_TORQUE_LINEAR_CONSTANT = 0.05f;
+const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT = 0.03f;
+
+const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT = 0.03f;
 
 /**
  * The maximum allowable torque that can be exerted by a servo motor in its effort to
  * reach its desired angle is computed as [BODY_MUSCLE_MAX_TORQUE_LINEAR_CONSTANT*(mass1 +mass2)+BODY_MUSCLE_MAX_TORQUE_SQUARE_CONSTANT * (mass1 + mass2)^2]
  */
-const double MorphologyConfiguration::MUSCLE_MAX_TORQUE_SQUARE_CONSTANT = 0;
+const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0;
+
+const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
 /**
  * The joints between body segments are set to break if they experience torques beyond
