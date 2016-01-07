@@ -107,5 +107,7 @@ const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.05f; //5
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 
+const bool MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION = false; /**!< Are the limbs directly connected allowed to interpenetrate each other? */
+
 const bool MorphologyConfiguration::BODY_MOTORS_ENABLED = true; /**!< Globally turn motors on or off*/
 

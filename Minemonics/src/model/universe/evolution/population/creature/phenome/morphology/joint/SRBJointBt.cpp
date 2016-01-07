@@ -125,7 +125,7 @@ void SRBJointBt::initialize() {
 	mFrameInB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
 
 #if CONSTRAINT_INDEX == HINGECONSTRAINT
-	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, true);
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 	btVector3 jointPitchAxis = OgreBulletUtils::convert(mJointPitchAxis);
 	mJoint->setAxis(jointPitchAxis);
 	mJoint->setLimit(mJointLowerLimits.z, mJointUpperLimits.z);
@@ -133,7 +133,7 @@ void SRBJointBt::initialize() {
 #elif CONSTRAINT_INDEX == GENERIC6DOFCONSTRAINT
 
 	// now create the constraint
-	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, true);
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 	// linear limits in our case are allowed offset of origin of frameInB in frameInA, so set them to zero
 	mJoint->setLinearLowerLimit(btVector3(0., 0., 0.));
 	mJoint->setLinearUpperLimit(btVector3(0., 0., 0.));
@@ -153,7 +153,7 @@ void SRBJointBt::initialize() {
 	mJoint->setAngularLowerLimit(OgreBulletUtils::convert(mJointLowerLimits));
 	mJoint->setAngularUpperLimit(OgreBulletUtils::convert(mJointUpperLimits));
 #elif CONSTRAINT_INDEX == GENERIC6DOFSPRINGCONSTRAINT
-	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, true);
+	mJoint = new CONSTRAINT_TYPE(*mBodyA, *mBodyB, mFrameInA, mFrameInB, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 	// linear limits in our case are allowed offset of origin of frameInB in frameInA, so set them to zero
 	mJoint->setLinearLowerLimit(btVector3(0., 0., 0.));
 	mJoint->setLinearUpperLimit(btVector3(0., 0., 0.));

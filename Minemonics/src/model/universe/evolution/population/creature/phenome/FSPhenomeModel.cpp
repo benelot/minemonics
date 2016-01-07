@@ -669,7 +669,7 @@ void FSPhenomeModel::generateBody() {
 					mJointModels[i]->getParentComToPivot().getOrigin()
 						* linkLength,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-						* linkLength, true);
+						* linkLength, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 				break;
 			case JointPhysics::SPHERICAL_JOINT:
 				mMultiBody->setupSpherical(
@@ -682,7 +682,7 @@ void FSPhenomeModel::generateBody() {
 					mJointModels[i]->getParentComToPivot().getOrigin()
 						* linkLength,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-						* linkLength, true);
+						* linkLength, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 				break;
 			default:
 				break;

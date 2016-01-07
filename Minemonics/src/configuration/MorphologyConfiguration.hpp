@@ -117,6 +117,8 @@ public:
 
 	static const bool BODY_INTRACOLLISION; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
 
+	static const bool BODY_CONNECTED_LIMB_COLLISION; /**!< Are the limbs directly connected allowed to interpenetrate each other?*/
+
 	static const bool BODY_MOTORS_ENABLED; /**!< Globally turn motors on or off*/
 };
 
