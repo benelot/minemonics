@@ -832,6 +832,12 @@ void FSPhenomeModel::cleanup() {
 	}
 	mLimbModels.clear();
 	mJointModels.clear();
+
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end();) {
+		delete *cit;
+		cit = mControllers.erase(cit);
+	}
 	if (mMultiBody) {
 		delete mMultiBody;
 		mMultiBody = NULL;

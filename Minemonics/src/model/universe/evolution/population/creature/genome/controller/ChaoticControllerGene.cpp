@@ -18,27 +18,26 @@
 ChaoticControllerGene::ChaoticControllerGene() :
 	ControllerGene(ControllerGene::ChaoticControllerGene), mSystemType(
 		ChaoticControllerGene::CHUA_CIRCUIT), mInitialX(0), mInitialY(0), mInitialZ(
-		0),mSpeed(1) {
+		0), mSpeed(1) {
 
 }
 
 ChaoticControllerGene::ChaoticControllerGene(ChaoticSystemType systemType) :
 	ControllerGene(ControllerGene::ChaoticControllerGene), mSystemType(
-		systemType),mInitialX(0), mInitialY(0), mInitialZ(
-			0),mSpeed(1) {
+		systemType), mInitialX(0), mInitialY(0), mInitialZ(0), mSpeed(1) {
 
 }
 
-ChaoticControllerGene::ChaoticControllerGene(ChaoticSystemType systemType, double initialX,
-	double initialY, double initialZ, double speed) :
+ChaoticControllerGene::ChaoticControllerGene(ChaoticSystemType systemType,
+	double initialX, double initialY, double initialZ, double speed) :
 	ControllerGene(ControllerGene::ChaoticControllerGene), mSystemType(
-		systemType),mInitialX(initialX), mInitialY(initialY), mInitialZ(
-			initialZ),mSpeed(speed) {
+		systemType), mInitialX(initialX), mInitialY(initialY), mInitialZ(
+		initialZ), mSpeed(speed) {
 
 }
 
-ChaoticControllerGene::ChaoticControllerGene(
-	const ChaoticControllerGene& gene) {
+ChaoticControllerGene::ChaoticControllerGene(const ChaoticControllerGene& gene) :
+	ControllerGene(ControllerGene::ChaoticControllerGene) {
 	mSystemType = gene.mSystemType;
 	mInitialX = gene.mInitialX;
 	mInitialY = gene.mInitialY;
@@ -51,10 +50,10 @@ ChaoticControllerGene::~ChaoticControllerGene() {
 }
 
 void ChaoticControllerGene::initialize() {
-	mInitialX = Randomness::getSingleton()->nextUnifDouble(-0.5,0.5);
-	mInitialY = Randomness::getSingleton()->nextUnifDouble(-0.5,0.5);
-	mInitialZ = Randomness::getSingleton()->nextUnifDouble(-0.5,0.5);
-	mSpeed = Randomness::getSingleton()->nextUnifDouble(0.001f,10.0f);
+	mInitialX = Randomness::getSingleton()->nextUnifDouble(-0.5, 0.5);
+	mInitialY = Randomness::getSingleton()->nextUnifDouble(-0.5, 0.5);
+	mInitialZ = Randomness::getSingleton()->nextUnifDouble(-0.5, 0.5);
+	mSpeed = Randomness::getSingleton()->nextUnifDouble(0.001f, 10.0f);
 }
 
 ChaoticControllerGene* ChaoticControllerGene::clone() {

@@ -24,7 +24,8 @@ SineControllerGene::SineControllerGene() :
 		ControllerGene::SineControllerGene) {
 }
 
-SineControllerGene::SineControllerGene(const SineControllerGene& gene){
+SineControllerGene::SineControllerGene(const SineControllerGene& gene) :
+	ControllerGene(ControllerGene::SineControllerGene) {
 	mXOffset = gene.mXOffset;
 	mYOffset = gene.mYOffset;
 	mAmplitude = gene.mAmplitude;

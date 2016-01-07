@@ -273,6 +273,8 @@ std::vector<const DataSink*> PhenomeModel::getControllerDataSinks() {
 		datasinks.push_back(&(*cit)->getDataSink());
 	}
 
+	std::cout << "Number of controllers: " << mControllers.size() << std::endl;
+
 	return datasinks;
 }
 
@@ -285,6 +287,8 @@ std::vector<const DataSink*> PhenomeModel::getJointDataSinks() {
 		datasinks.push_back(&(*jit)->getDataSinkYaw());
 		datasinks.push_back(&(*jit)->getDataSinkRoll());
 	}
+
+	std::cout << "Number of sensors: " << mJointModels.size()*3 << std::endl;
 	return datasinks;
 }
 

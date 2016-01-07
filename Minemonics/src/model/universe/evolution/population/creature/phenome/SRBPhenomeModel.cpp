@@ -641,7 +641,8 @@ void SRBPhenomeModel::reset(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
-		(*it)->reset(position+Ogre::Vector3(0,abs(getLowestRelativePoint().y),0));
+		(*it)->reset(
+			position + Ogre::Vector3(0, abs(getLowestRelativePoint().y), 0));
 	}
 }
 
@@ -653,13 +654,20 @@ void SRBPhenomeModel::cleanup() {
 	}
 	mLimbModels.clear();
 	mJointModels.clear();
+
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end();) {
+		delete *cit;
+		cit = mControllers.erase(cit);
+	}
 }
 
 void SRBPhenomeModel::reposition(const Ogre::Vector3 position) {
 	/**The vector of limb models.*/
 	for (std::vector<LimbModel*>::const_iterator it = mLimbModels.begin();
 		it != mLimbModels.end(); it++) {
-		(*it)->reposition(position+Ogre::Vector3(0,abs(getLowestRelativePoint().y),0));
+		(*it)->reposition(
+			position + Ogre::Vector3(0, abs(getLowestRelativePoint().y), 0));
 
 	}
 }
