@@ -49,6 +49,8 @@ public:
 
 	static const std::string TOP_FOLDER;
 
+	static const int LOG_DATA_QTY;
+
 	static const bool LOG_SPECIAL;
 };
 

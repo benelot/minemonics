@@ -297,19 +297,19 @@ btTransform FSLimbBt::getLocalPreciseIntersection(const btVector3 origin,
 void FSLimbBt::addToWorld() {
 	if (!isInWorld()) {
 		if (mLink != NULL) {
-			if (!mIntraBodyColliding) {
+			if (mIntraBodyColliding) {
+				mWorld->addCollisionObject(mLink);
+			} else {
 				mWorld->addCollisionObject(mLink,
 					PhysicsConfiguration::COL_CREATURE,
 					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-			} else {
-				mWorld->addCollisionObject(mLink);
 			}
 		} else {
-			if (!mIntraBodyColliding) {
+			if (mIntraBodyColliding) {
+				mWorld->addRigidBody(mBody);
+			} else {
 				mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
 					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-			} else {
-				mWorld->addRigidBody(mBody);
 			}
 		}
 		LimbPhysics::addToWorld();

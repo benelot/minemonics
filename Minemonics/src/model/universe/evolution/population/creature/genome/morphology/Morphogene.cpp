@@ -129,7 +129,7 @@ void Morphogene::initialize(const double branchiness) {
 	mFriction = MorphologyConfiguration::LIMB_INITIAL_FRICTION; /**!< Set the friction */
 
 	mIntraBodyColliding =
-		MorphologyConfiguration::BODY_INTRACOLLISION ?
+		MorphologyConfiguration::BODY_INTRACOLLISION_EVOLUTION ?
 			Randomness::getSingleton()->nextUnifBoolean() :
 			MorphologyConfiguration::BODY_INTRACOLLISION;
 

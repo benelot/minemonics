@@ -9,6 +9,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/LoggerConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
@@ -52,8 +54,7 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 	mChildIndex = indexB;
 	mOwnIndex = ownIndex;
 
-	mJointPhysics = new FSJointBt(world,
-		((FSLimbBt*) limbA->getLimbPhysics()),
+	mJointPhysics = new FSJointBt(world, ((FSLimbBt*) limbA->getLimbPhysics()),
 		((FSLimbBt*) limbB->getLimbPhysics()),
 		OgreBulletUtils::convert(pivotInW), type,
 		OgreBulletUtils::convert(jointPitchAxis),
@@ -70,9 +71,9 @@ FSJointModel::~FSJointModel() {
 void FSJointModel::initialize() {
 	mJointPhysics->initialize();
 
-	mDataSinkPitch.initialize("", 3, 20);
-	mDataSinkYaw.initialize("", 3, 20);
-	mDataSinkRoll.initialize("", 3, 20);
+	mDataSinkPitch.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
+	mDataSinkYaw.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
+	mDataSinkRoll.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
 
 }
 

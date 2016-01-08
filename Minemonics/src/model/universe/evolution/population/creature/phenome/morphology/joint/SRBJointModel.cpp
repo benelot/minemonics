@@ -9,6 +9,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/LoggerConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/ComponentModel.hpp>
@@ -70,9 +72,9 @@ SRBJointModel::~SRBJointModel() {
 void SRBJointModel::initialize() {
 	mJointPhysics->initialize();
 
-	mDataSinkPitch.initialize("", 3, 20);
-	mDataSinkYaw.initialize("", 3, 20);
-	mDataSinkRoll.initialize("", 3, 20);
+	mDataSinkPitch.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
+	mDataSinkYaw.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
+	mDataSinkRoll.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
 }
 
 void SRBJointModel::setAngularLimits(const Ogre::Vector3 angularLowerLimit,

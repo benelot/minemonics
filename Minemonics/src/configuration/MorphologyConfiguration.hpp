@@ -115,9 +115,11 @@ public:
 
 	static const double JOINT_MAX_DAMPING_COEFFICIENT; /**!< The maximum damping coefficient of the joint */
 
-	static const bool BODY_INTRACOLLISION; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
+	static const bool BODY_INTRACOLLISION_EVOLUTION; /**!< Is evolution allowed to change the intracollision for a limb? False means no, true means yes. */
 
-	static const bool BODY_CONNECTED_LIMB_COLLISION; /**!< Are the limbs directly connected allowed to interpenetrate each other?*/
+	static const bool BODY_INTRACOLLISION; /**!< Are the body segments allowed to collide with each other?*/
+
+	static const bool BODY_CONNECTED_LIMB_COLLISION; /**!< Are the limbs directly connected allowed to collide with each other? */
 
 	static const bool BODY_MOTORS_ENABLED; /**!< Globally turn motors on or off*/
 };

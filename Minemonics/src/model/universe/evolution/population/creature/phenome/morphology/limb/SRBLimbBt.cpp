@@ -125,7 +125,7 @@ void SRBLimbBt::initialize() {
 				btScalar(mDimensions.y));
 			break;
 		case LimbPhysics::UNKNOWN:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal) << " LimbBt received 'Unknown' as a limb type.\n";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " LimbBt received 'Unknown' as a limb type.\n";
 			exit(-1);
 		}
 
@@ -291,11 +291,11 @@ btTransform SRBLimbBt::getLocalPreciseIntersection(const btVector3 origin,
 
 void SRBLimbBt::addToWorld() {
 	if (!isInWorld()) {
-		if (!mIntraBodyColliding) {
+		if (mIntraBodyColliding) {
+			mWorld->addRigidBody(mBody);
+		} else {
 			mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
 				PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-		} else {
-			mWorld->addRigidBody(mBody);
 		}
 		LimbPhysics::addToWorld();
 	}
@@ -340,7 +340,6 @@ btVector3 SRBLimbBt::getPosition() const {
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< " Limb position: " << MathUtils::print(position);
 
-
 	return position;
 }
 
@@ -352,7 +351,6 @@ btQuaternion SRBLimbBt::getOrientation() const {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " NaN/Inf detected in limb orientation: " << MathUtils::print(orientation);
 	}
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< " Limb orientation: " << MathUtils::print(orientation);
-
 
 	return orientation;
 }

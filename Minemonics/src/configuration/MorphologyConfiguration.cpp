@@ -101,13 +101,15 @@ const double MorphologyConfiguration::JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The maximum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0;//0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.05f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0;//0.05f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
-const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to interpenetrate each other? False means never, True means it can decide by itself*/
+const bool MorphologyConfiguration::BODY_INTRACOLLISION_EVOLUTION = false; /**!< Is evolution allowed to change the intracollision for a limb? False means no, true means yes. */
 
-const bool MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION = false; /**!< Are the limbs directly connected allowed to interpenetrate each other? */
+const bool MorphologyConfiguration::BODY_INTRACOLLISION = true; /**!< Are the body segments allowed to collide with each other?*/
+
+const bool MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION = false; /**!< Are the limbs directly connected allowed to collide with each other? */
 
 const bool MorphologyConfiguration::BODY_MOTORS_ENABLED = true; /**!< Globally turn motors on or off*/
 

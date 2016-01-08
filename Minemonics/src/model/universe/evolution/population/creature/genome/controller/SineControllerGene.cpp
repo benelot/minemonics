@@ -38,18 +38,18 @@ SineControllerGene::~SineControllerGene() {
 void SineControllerGene::initialize() {
 
 	mXOffset = Randomness::getSingleton()->nextUnifDouble(
-		ControlConfiguration::JOINT_MIN_X_OFFSET,
-		ControlConfiguration::JOINT_MAX_X_OFFSET);
+		ControlConfiguration::SINE_MIN_X_OFFSET,
+		ControlConfiguration::SINE_MAX_X_OFFSET);
 
 	mYOffset = Randomness::getSingleton()->nextUnifDouble(
-		ControlConfiguration::JOINT_MIN_Y_OFFSET,
-		ControlConfiguration::JOINT_MAX_Y_OFFSET);
+		ControlConfiguration::SINE_MIN_Y_OFFSET,
+		ControlConfiguration::SINE_MAX_Y_OFFSET);
 	mAmplitude = Randomness::getSingleton()->nextUnifDouble(
-		ControlConfiguration::JOINT_MIN_AMPLITUDE,
-		ControlConfiguration::JOINT_MAX_AMPLITUDE);
+		ControlConfiguration::SINE_MIN_AMPLITUDE,
+		ControlConfiguration::SINE_MAX_AMPLITUDE);
 	mFrequency = Randomness::getSingleton()->nextUnifDouble(
-		ControlConfiguration::JOINT_MIN_FREQUENCY,
-		ControlConfiguration::JOINT_MAX_FREQUENCY);
+		ControlConfiguration::SINE_MIN_FREQUENCY,
+		ControlConfiguration::SINE_MAX_FREQUENCY);
 }
 
 bool SineControllerGene::equals(
