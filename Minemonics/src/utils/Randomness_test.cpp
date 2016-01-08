@@ -83,10 +83,20 @@ TEST_F(RandomnessTest,distributionsStayWithinBounds) {
 }
 
 TEST_F(RandomnessTest,distributionTest) {
-	std::cout << "How are unif(0.001,10) distributed?";
+//	std::cout << "How are unif(0.001,10) distributed?\n";
+//	for (int i = 0; i < 100; i++) {
+//		// uniformly distributed double
+//		double uniformDouble = randomness->nextUnifDouble(0.001, 10);
+//		std::cout << uniformDouble << "\n";
+////		ASSERT_TRUE(10 <= uniformDouble);
+////		ASSERT_TRUE(uniformDouble <= 100);
+//
+//	}
+
+	std::cout << "How are log10(0.001,10) distributed?\n";
 	for (int i = 0; i < 100; i++) {
-		// uniformly distributed double
-		double uniformDouble = randomness->nextUnifDouble(0.001, 10);
+		// log10 uniformly distributed double
+		double uniformDouble = randomness->nextLog10Double(0.01, 10);
 		std::cout << uniformDouble << "\n";
 //		ASSERT_TRUE(10 <= uniformDouble);
 //		ASSERT_TRUE(uniformDouble <= 100);

@@ -9,6 +9,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/ControlConfiguration.hpp>
+
 //## controller headers
 //## model headers
 //## view headers
@@ -50,10 +52,18 @@ ChaoticControllerGene::~ChaoticControllerGene() {
 }
 
 void ChaoticControllerGene::initialize() {
-	mInitialX = Randomness::getSingleton()->nextUnifDouble(-0.5, 0.5);
-	mInitialY = Randomness::getSingleton()->nextUnifDouble(-0.5, 0.5);
-	mInitialZ = Randomness::getSingleton()->nextUnifDouble(-0.5, 0.5);
-	mSpeed = Randomness::getSingleton()->nextUnifDouble(0.001f, 10.0f);
+	mInitialX = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::CHAOS_MIN_INIT_CONDITION,
+		ControlConfiguration::CHAOS_MAX_INIT_CONDITION);
+	mInitialY = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::CHAOS_MIN_INIT_CONDITION,
+		ControlConfiguration::CHAOS_MAX_INIT_CONDITION);
+	mInitialZ = Randomness::getSingleton()->nextUnifDouble(
+		ControlConfiguration::CHAOS_MIN_INIT_CONDITION,
+		ControlConfiguration::CHAOS_MAX_INIT_CONDITION);
+	mSpeed = Randomness::getSingleton()->nextLog10UnifDouble(
+		ControlConfiguration::CHAOS_MIN_INTEGRATION_SPEED,
+		ControlConfiguration::CHAOS_MAX_INTEGRATION_SPEED);
 }
 
 ChaoticControllerGene* ChaoticControllerGene::clone() {

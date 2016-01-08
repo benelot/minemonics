@@ -97,6 +97,24 @@ double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
 	return (tenpowm > tenpown) ? log10(tenpowm)/log10(1.1f) : log10(tenpown)/log10(1.1f);
 }
 
+/**
+ * Get a in log-space uniformly distributed random double which is limited by a lower and an upper limit.
+ *
+ * @param lowerLimit The lower limit we want to draw from.
+ * @param upperLimit The upper limit we want to draw from.
+ * @return A random double which is limited by a lower and an upper limit.
+ */
+double Randomness::nextLog10UnifDouble(double lowerLimit, double upperLimit) {
+	if (lowerLimit == upperLimit) {
+		return lowerLimit;
+	}
+
+	boost::random::uniform_real_distribution<> unifDoubleDistribution(
+		log10(lowerLimit), log10(upperLimit));
+
+	return pow(10,unifDoubleDistribution(rng));
+}
+
 bool Randomness::nextUnifBoolean() {
 	boost::random::uniform_int_distribution<> unifIntDistribution(0, 1); //create a uniform integer distribution
 
