@@ -1,44 +1,114 @@
 \documentclass[main]{subfiles}
 
 \begin{document}
-
 % Chapter Template
+\setcounter{chapter}{1}
 
-\chapter{Chapter Title Here} % Main chapter title
+% Evolutionary Optimization
+% Basic components
+%  Universe, Planets and Environments
+%   Planet Physics
+%  Epochs
+%   Fitness functions
+%  Populations
+%  Creatures
+%   Genotypes
+%   Phenotypes
+%    Constrained Rigid body model
+%    Featherstone Multi-rigidbody model
+%  Model organisms
+% Reaper
+%  Crossover
+%  Mutations
+% Evaluation Step
+% Variation Step
+\chapter{Evolutionary Optimization} % Main chapter title
 
-\label{ChapterX} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+\label{Chapter\thechapter} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-\lhead{Chapter X. \emph{Chapter Title Here}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+\lhead{Chapter \thechapter. \emph{Evolutionary Optimization}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-%	SECTION 1
-%----------------------------------------------------------------------------------------
+The following chapter describes the Evolutionary optimization algorithm as it is implemented in the Minemonics simulator. The Minemonics simulator is a project that was developed from scratch for this Thesis, mainly because most other simulators for evolving virtual creatures are unpublished by the research group, outdated or implement a different type of simulation than is needed for the model of this thesis.
 
-\section{Main Section 1}
+\section{Basic components}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+First, the basic components of the simulator are listed and its features are described. We describe the component tree in a top-down manner and reveal the subcomponents one-by-one. 
 
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-\subsection{Subsection 1}
+\subsection{Universe, Planets and Environments}
 
-Nunc posuere quam at lectus tristique eu ultrices augue venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam erat volutpat. Vivamus sodales tortor eget quam adipiscing in vulputate ante ullamcorper. Sed eros ante, lacinia et sollicitudin et, aliquam sit amet augue. In hac habitasse platea dictumst.
+The simulator models its own universe. A universe contains a set of different planets, each defining a certain setting of evolutionary run. A certain planet consists of an environment, a evolution type, a number of epochs and a number of populations. 
 
-%-----------------------------------
-%	SUBSECTION 2
-%-----------------------------------
+The environment simulates a flat plane or a hill environment. It approximates the appropriate newtonian mechanical physics for the environment and the creatures that are evaluated within it. For the experiments in this thesis, the plane environment was mainly used.
 
-\subsection{Subsection 2}
-Morbi rutrum odio eget arcu adipiscing sodales. Aenean et purus a est pulvinar pellentesque. Cras in elit neque, quis varius elit. Phasellus fringilla, nibh eu tempus venenatis, dolor elit posuere quam, quis adipiscing urna leo nec orci. Sed nec nulla auctor odio aliquet consequat. Ut nec nulla in ante ullamcorper aliquam at sed dolor. Phasellus fermentum magna in augue gravida cursus. Cras sed pretium lorem. Pellentesque eget ornare odio. Proin accumsan, massa viverra cursus pharetra, ipsum nisi lobortis velit, a malesuada dolor lorem eu neque.
+\paragraph{The evolution type} defines how many creatures of the planet are evaluated at the same time and how creatures are culled, variated and sown. In the bounds of this thesis, only single creature evaluation was performed. 
 
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
+\subsubsection{Planet physics}
 
-\section{Main Section 2}
+Each environment defines the planet's physics simulation. The simulator uses the Bullet Physics engine\cite{bulletphysics} to run the physical simulation of the creatures. Bullet Physics is a numerical Classial Mechanics simulation engine, featuring rigid body as well as softbody physics. Bodies can be constrained using various types of constraints with constraint limits and motors. The constraints can be numerically solved using multiple types of solvers with different convergence speeds and accuracy of result. The most accurate results were achieved using the Featherstone Multibody solver. To date it only supports single degree of freedom joints, however this does not affect the evolutionary optimization much. A three degrees of freedom joint can easily be approximated by three one degree of freedom joints.
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+\subsection{Epochs}
+
+An epoch of a certain planet models the changes of environmental factors, which induce modification of the fitness landscape on the planet. What is considered good in one epoch might not hold in another. The change of the fitness landscape usually leads to avalanches of extinctions. A certain epoch consists of a set of fitness functions and a transition condition, which when met ends the epoch and starts the next epoch.
+
+\subsubsection{Fitness Functions}
+
+An e
+
+\subsection{Populations}
+
+\lipsum[6]
+
+\subsection{Creatures}
+
+\lipsum[7]
+
+\subsubsection{Genotype}
+
+\lipsum[8]
+
+\subsubsection{Phenotype}
+
+\lipsum[9]
+In the simulator, two different rigid body constraint models are used. The 
+
+\subsubsection{Constrained Rigidbody Phenotype}
+
+\lipsum[10]
+
+\subsubsection{Featherstone Multibody Phenotype}
+
+\lipsum[11]
+
+\subsubsection{Model organisms}
+
+\lipsum[12]
+
+\subsection{Reaper}
+
+\lipsum[13]
+
+\subsubsection{Crossover}
+
+\lipsum[14]
+
+\subsubsection{Mutations}
+
+\lipsum[15]
+
+\section{Evolutionary cycle}
+
+\lipsum[16]
+
+\subsection{Evaluation step}
+
+\lipsum[17]
+
+\subsection{Variation step}
+
+\lipsum[18]
 
 \todo[inline]{Give the Chapter 2 some meaningful content.}
 
