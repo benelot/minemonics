@@ -51,15 +51,15 @@ Each environment defines the planet's physics simulation. The simulator uses the
 
 \subsection{Epochs}
 
-An epoch of a certain planet models the changes of environmental factors, which induce modification of the fitness landscape on the planet. What is considered good in one epoch might not hold in another. The change of the fitness landscape usually leads to avalanches of extinctions. A certain epoch consists of a set of fitness functions and a transition condition, which when met ends the epoch and starts the next epoch.
+An epoch of a certain planet models the changes of environmental factors, which induce modification of the fitness landscape on the planet. What is considered good in one epoch might not hold in another. The change of the fitness landscape usually leads to avalanches of extinctions. A certain epoch consists of a set of juries(fitness functions) and a transition condition, which when met ends the epoch and starts the next epoch.
 
-\subsubsection{Fitness Functions}
+\subsubsection{Juries}
 
-An e
+An epoch consists of a set of juries or fitness functions. A jury collects data on a certain performance during the evaluation of a creature and finally has to rate the performance of an individual. Commonly used juries of the simulatorvare the distance travelled during the evaluation or the average height of all limbs during the evaluation. A jury additionally has a weight, which indicates the weight in the total performance of the creature, and a sorting direction, which indicates whether a higher rating is considered better or worse than a lower rating. Multiple types of juries are combined in a competitive manner among the creatures of a population. This procedure will be described in the section \ref{subsubsection:Culling} Culling of the Reaper component.
 
 \subsection{Populations}
 
-\lipsum[6]
+A population of creatures lives on a certain planet. Depending on the evolution settings, one creature, multiple creatures from a population, multiple creatures from multiple populations or multiple whole populations are evaluated at a time.
 
 \subsection{Creatures}
 
@@ -87,8 +87,14 @@ In the simulator, two different rigid body constraint models are used. The
 \lipsum[12]
 
 \subsection{Reaper}
+\label{subsection:Reaper}
 
 \lipsum[13]
+
+\subsubsection{Culling}
+\label{subsubsection:Culling}
+
+\lipsum[14]
 
 \subsubsection{Crossover}
 
