@@ -59,20 +59,19 @@ An epoch consists of a set of juries or fitness functions. A jury collects data 
 
 \subsection{Populations}
 
-A population of creatures lives on a certain planet. Depending on the evolution settings, one creature, multiple creatures from a population, multiple creatures from multiple populations or multiple whole populations are evaluated at a time.
+A population of creatures lives on a certain planet. Depending on the evolution settings of the planet, one creature, multiple creatures from one population, multiple creatures from multiple populations or multiple whole populations are evaluated at a time.
 
 \subsection{Creatures}
 
-\lipsum[7]
+A creature or individual is part of a population and is subject to evaluation. The creature is based on two main components. Its genotype and its phenotype. The genotype is the compact blueprint of the creature. Developed from it is the phenotype, which is the explicit form of the creature representing the body of the creature in the Physics engine and the controller in its fully wired form.
 
-\subsubsection{Genotype}
+\subsubsection{Genome}
 
 \lipsum[8]
 
-\subsubsection{Phenotype}
+\subsubsection{Phenome}
 
-\lipsum[9]
-In the simulator, two different rigid body constraint models are used. The 
+In the Minemonics simulator, two different rigid body constraint models are used. 
 
 \subsubsection{Constrained Rigidbody Phenotype}
 
@@ -84,7 +83,55 @@ In the simulator, two different rigid body constraint models are used. The
 
 \subsubsection{Model organisms}
 
-\lipsum[12]
+The model organisms are genotypes to be developed into a creature that have specific properties. They are mainly used for testing and experimentation purposes, because they feature a non-redundant, simple genomic description and well defined limb and joint descriptors.
+
+\paragraph{Model Leg}
+
+The model leg is a simple creature built from two equal limbs and one joint. The joint can be either set to be a one DoF hinge joint or a three DoF spherical joint. Its main purpose is to run experiments on chaotic controllers on a simple creature to observe the controller's behavior when controlling a single degree of freedom of a physical system.
+
+\begin{figure}[!h]
+\centering
+\missingfigure[figwidth=0.3\textwidth]{M}
+\caption{The model leg}
+\label{figure:model-leg}
+\end{figure}
+
+\paragraph{Snake}
+
+The snake is a creature built from a chain of equal limbs connected with one or three DoF joints as in the case of the model leg. In fact, the snake is just a chain of model legs with a higher number of limb-joint repetitions.
+
+\begin{figure}[!h]
+\centering
+\missingfigure[figwidth=0.3\textwidth]{S}
+\caption{The snake}
+\label{figure:snake}
+\end{figure}
+
+\paragraph{Pod}
+
+The Pod is a creature that can be configured to have a certain number of legs and a certain number of body elements. The body is a limb on which the legs are attached in a circular manner. The number of legs is divided by the number of bodies so that the same number of legs is attached to each body. Which the same definition, its is possible to build insect-like creatures such as bugs, spiders, caterpillars and centipedes. It is mainly used to debug the Genotype-to-Phenotype transcription (Embryogenesis).
+
+\begin{figure}[!h]
+\centering
+\missingfigure[figwidth=0.3\textwidth]{P}
+\caption{The pod}
+\label{figure:pod}
+\end{figure}
+
+\paragraph{Ragdoll}
+
+The ragdoll blueprint produces a human-like form. It consists of differently configured joints and is mainly used to debug the Genotype-to-Phenotype transcription (Embryogenesis).
+
+\begin{figure}[!h]
+\centering
+\missingfigure[figwidth=0.3\textwidth]{R}
+\caption{The ragdoll}
+\label{figure:ragdoll}
+\end{figure}
+
+\subsection{Embryogenesis}
+
+\lipsum[13]
 
 \subsection{Reaper}
 \label{subsection:Reaper}
