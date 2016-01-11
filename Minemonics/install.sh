@@ -10,7 +10,7 @@
 #http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Building+Ogre
 
 
-sudo apt-get install git mercurial
+sudo apt-get install git mercurial cmake
 
 mkdir dependencies
 cd dependencies
@@ -144,32 +144,32 @@ cd ../..
 #OpenBLAS
 ## According to https://github.com/xianyi/OpenBLAS/wiki/Installation-Guide
 # Download the development version of OpenBLAS
-git clone git://github.com/xianyi/OpenBLAS
-cd OpenBLAS
-make FC=gfortran
-sudo make PREFIX=/usr/local/OPENBLAS install
+#git clone git://github.com/xianyi/OpenBLAS
+#cd OpenBLAS
+#make FC=gfortran
+#sudo make PREFIX=/usr/local/OPENBLAS install
 
-cd ..
+#cd ..
 
 # OpenCV
 ## According to http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation
-sudo apt-get install build-essential
-sudo apt-get install cmake git libgtk2.0-dev pkg-config # We use FFmpeg libavcodec-dev libavformat-dev libswscale-dev
-sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
-git clone https://github.com/Itseez/opencv.git
-cd opencv
-mkdir build
-cd build
-cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
-make -j8
-sudo make install
+#sudo apt-get install build-essential
+#sudo apt-get install cmake git libgtk2.0-dev pkg-config # We use FFmpeg libavcodec-dev libavformat-dev libswscale-dev
+#sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+#git clone https://github.com/Itseez/opencv.git
+#cd opencv
+#mkdir build
+#cd build
+#cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+#make -j8
+#sudo make install
 
-cd ../..
+#cd ../..
 
 
 # Caffe
 ## According to http://caffe.berkeleyvision.org/installation.html
-sudo apt-get install protobuf, glog, gflags
-sudo apt-get install hdf5, leveldb, snappy, lmdb # IO libraries
-git clone https://github.com/BVLC/caffe.git
+#sudo apt-get install protobuf, glog, gflags
+#sudo apt-get install hdf5, leveldb, snappy, lmdb # IO libraries
+#git clone https://github.com/BVLC/caffe.git
 
