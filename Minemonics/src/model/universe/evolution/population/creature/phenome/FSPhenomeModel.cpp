@@ -669,7 +669,8 @@ void FSPhenomeModel::generateBody() {
 					mJointModels[i]->getParentComToPivot().getOrigin()
 						* linkLength,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-						* linkLength, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
+						* linkLength,
+					!MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 				break;
 			case JointPhysics::SPHERICAL_JOINT:
 				mMultiBody->setupSpherical(
@@ -682,7 +683,8 @@ void FSPhenomeModel::generateBody() {
 					mJointModels[i]->getParentComToPivot().getOrigin()
 						* linkLength,
 					-mJointModels[i]->getPivotToChildCom().getOrigin()
-						* linkLength, !MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
+						* linkLength,
+					!MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION);
 				break;
 			default:
 				break;
@@ -704,8 +706,8 @@ void FSPhenomeModel::generateBody() {
 		mMultiBody->setUseGyroTerm(gyro);
 
 		if (!setDamping) { /**<! TODO: Pay attention, damping affects the whole motion of a body, see if this is fixed. */
-			mMultiBody->setLinearDamping(0.f);
-			mMultiBody->setAngularDamping(0.f);
+			mMultiBody->setLinearDamping(0.0f);
+			mMultiBody->setAngularDamping(0.0f);
 		} else {
 			mMultiBody->setLinearDamping(0.1f);
 			mMultiBody->setAngularDamping(0.9f);
@@ -915,13 +917,20 @@ bool FSPhenomeModel::equals(const FSPhenomeModel& phenomeModel) const {
 void FSPhenomeModel::addToWorld() {
 	if (!isInWorld()) {
 		if (mMultiBody != NULL) {
+
+			if (mLimbModels[0]->getLimbPhysics()->isIntraBodyColliding()) {
+				getWorld()->addMultiBody(mMultiBody);
+			} else {
+				getWorld()->addMultiBody(mMultiBody,
+					PhysicsConfiguration::COL_CREATURE,
+					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
+			}
+
 			for (std::vector<btMultiBodyJointLimitConstraint*>::iterator lit =
 				mLimitConstraints.begin(); lit != mLimitConstraints.end();
 				lit++) {
 				getWorld()->addMultiBodyConstraint(*lit);
 			}
-
-			getWorld()->addMultiBody(mMultiBody);
 		}
 	}
 }
@@ -929,6 +938,7 @@ void FSPhenomeModel::addToWorld() {
 void FSPhenomeModel::removeFromWorld() {
 	if (isInWorld()) {
 		if (mMultiBody != NULL) {
+
 			getWorld()->removeMultiBody(mMultiBody);
 
 			for (std::vector<btMultiBodyJointLimitConstraint*>::iterator lit =
