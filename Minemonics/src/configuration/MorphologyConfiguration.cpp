@@ -36,13 +36,13 @@ const double MorphologyConfiguration::LIMB_SCALE_MIN = -0.66; /**!< The limb sca
 
 const double MorphologyConfiguration::LIMB_SCALE_MAX = 2.0; /**!< The limb scale max constant determines how much the subtree of this body segment should be scaled at most.*/
 
-const double MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS = 12; /**!< The initial maximum limb type repeats*/
+const double MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS = 3; /**!< The initial maximum limb type repeats*/
 
-const double MorphologyConfiguration::LIMB_DEPTH_INITIAL_MEAN = 5; /**!< Initial limbs depth mean*/
+const double MorphologyConfiguration::LIMB_DEPTH_INITIAL_MEAN = 3; /**!< Initial limbs depth mean*/
 
 const double MorphologyConfiguration::LIMB_DEPTH_INITIAL_VAR = 2; /**!< Initial segments depth variance */
 
-const double MorphologyConfiguration::LIMB_TOTAL_INITIAL_MEAN = 20; /**!< Initial total segments mean*/
+const double MorphologyConfiguration::LIMB_TOTAL_INITIAL_MEAN = 10; /**!< Initial total segments mean*/
 
 const double MorphologyConfiguration::LIMB_TOTAL_INITIAL_VAR = 5; /**!< Initial total segments variance*/
 
@@ -72,7 +72,7 @@ const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
  * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
 const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT =
-	0.05f;
+	0.04f;
 
 const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
 	0.05f;
@@ -101,13 +101,13 @@ const double MorphologyConfiguration::JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The maximum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0;//0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0;//0.05f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.02f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION_EVOLUTION = false; /**!< Is evolution allowed to change the intracollision for a limb? False means no, true means yes. */
 
-const bool MorphologyConfiguration::BODY_INTRACOLLISION = true; /**!< Are the body segments allowed to collide with each other?*/
+const bool MorphologyConfiguration::BODY_INTRACOLLISION = false; /**!< Are the body segments allowed to collide with each other?*/
 
 const bool MorphologyConfiguration::BODY_CONNECTED_LIMB_COLLISION = false; /**!< Are the limbs directly connected allowed to collide with each other? */
 
