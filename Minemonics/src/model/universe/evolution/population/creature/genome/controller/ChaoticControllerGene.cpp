@@ -61,8 +61,8 @@ void ChaoticControllerGene::initialize() {
 	mInitialZ = Randomness::getSingleton()->nextUnifDouble(
 		ControlConfiguration::CHAOS_MIN_INIT_CONDITION,
 		ControlConfiguration::CHAOS_MAX_INIT_CONDITION);
-	mSpeed = Randomness::getSingleton()->nextLog10UnifDouble(
-		ControlConfiguration::CHAOS_MIN_INTEGRATION_SPEED,
+	mSpeed = Randomness::getSingleton()->nextTwoDistDouble(
+		ControlConfiguration::CHAOS_MIN_INTEGRATION_SPEED, 1, 1,
 		ControlConfiguration::CHAOS_MAX_INTEGRATION_SPEED);
 }
 

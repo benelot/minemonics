@@ -94,25 +94,32 @@ double Randomness::nextBiasedLogDouble(double lowerLimit, double upperLimit) {
 	double tenpown = unifDoubleDistribution(rng);
 
 	//return m or n whichever is higher
-	return (tenpowm > tenpown) ? log10(tenpowm)/log10(1.1f) : log10(tenpown)/log10(1.1f);
+	return
+		(tenpowm > tenpown) ?
+			log10(tenpowm) / log10(1.1f) : log10(tenpown) / log10(1.1f);
 }
 
-/**
- * Get a in log-space uniformly distributed random double which is limited by a lower and an upper limit.
- *
- * @param lowerLimit The lower limit we want to draw from.
- * @param upperLimit The upper limit we want to draw from.
- * @return A random double which is limited by a lower and an upper limit.
- */
-double Randomness::nextLog10UnifDouble(double lowerLimit, double upperLimit) {
-	if (lowerLimit == upperLimit) {
-		return lowerLimit;
+double Randomness::nextTwoDistDouble(double lowerLimit1, double upperLimit1,
+	double lowerLimit2, double upperLimit2) {
+	double value = 0;
+	if (nextUnifBoolean()) {
+		if (lowerLimit1 == upperLimit1) {
+			return lowerLimit1;
+		}
+		boost::random::uniform_real_distribution<> unifDoubleDistribution(
+			lowerLimit1, upperLimit1);
+		value = unifDoubleDistribution(rng);
+
+	} else {
+		if (lowerLimit2 == upperLimit2) {
+			return lowerLimit2;
+		}
+		boost::random::uniform_real_distribution<> unifDoubleDistribution(
+			lowerLimit2, upperLimit2);
+		value = unifDoubleDistribution(rng);
 	}
 
-	boost::random::uniform_real_distribution<> unifDoubleDistribution(
-		log10(lowerLimit), log10(upperLimit));
-
-	return pow(10,unifDoubleDistribution(rng));
+	return value;
 }
 
 bool Randomness::nextUnifBoolean() {
@@ -131,7 +138,7 @@ int Randomness::nextNormalPosInt(double mean, double variance, double limit) {
 }
 
 int Randomness::nextNormalInt(double mean, double variance, double limit) {
-	//create a uniform integer distribution
+//create a uniform integer distribution
 	boost::random::normal_distribution<> normalIntDistribution(mean,
 		(variance));
 
@@ -151,7 +158,7 @@ int Randomness::nextNormalInt(double mean, double variance, double limit) {
 
 double Randomness::nextNormalDouble(double mean, double variance,
 	double limit) {
-	//create a uniform integer distribution
+//create a uniform integer distribution
 	boost::random::normal_distribution<> normalDoubleDistribution(mean,
 		variance);
 
@@ -170,7 +177,7 @@ double Randomness::nextNormalDouble(double mean, double variance,
 }
 
 bool Randomness::nextNormalBoolean(double mean, double variance) {
-	//create a uniform integer distribution
+//create a uniform integer distribution
 	boost::random::normal_distribution<> normalBooleanDistribution(mean,
 		variance);
 

@@ -60,14 +60,7 @@ public:
 	 */
 	double nextBiasedLogDouble(double lowerLimit, double upperLimit);
 
-	/**
-	 * Get a in log-space uniformly distributed random double which is limited by a lower and an upper limit.
-	 *
-	 * @param lowerLimit The lower limit we want to draw from.
-	 * @param upperLimit The upper limit we want to draw from.
-	 * @return A random double which is limited by a lower and an upper limit.
-	 */
-	double nextLog10UnifDouble(double lowerLimit, double upperLimit);
+	double nextTwoDistDouble(double lowerLimit1, double upperLimit1, double lowerLimit2,double upperLimit2);
 
 	/**
 	 * Return a random boolean.

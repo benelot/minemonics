@@ -93,10 +93,10 @@ TEST_F(RandomnessTest,distributionTest) {
 //
 //	}
 
-	std::cout << "How are log10(0.001,10) distributed?\n";
+	std::cout << "How are TwoDist(0.01,10) distributed?\n";
 	for (int i = 0; i < 100; i++) {
 		// log10 uniformly distributed double
-		double uniformDouble = randomness->nextLog10UnifDouble(0.01, 10);
+		double uniformDouble = randomness->nextTwoDistDouble(0.01,1,1, 10);
 		std::cout << uniformDouble << "\n";
 //		ASSERT_TRUE(10 <= uniformDouble);
 //		ASSERT_TRUE(uniformDouble <= 100);
