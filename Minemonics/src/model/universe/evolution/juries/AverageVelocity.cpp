@@ -59,7 +59,7 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 
 	int i = 0;
 	Ogre::Vector3 totalMovement = Ogre::Vector3::ZERO;
-	double totalVolume = 0;
+	double creatureVolumentCubeLength = creature->getCreatureSize();
 	int segmentQty = 0;
 	for (std::vector<LimbModel*>::iterator lit = // we calculate the difference between the limb's position and its initial position
 		creature->getPhenotypeModel()->getLimbModels().begin();
@@ -67,12 +67,11 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 		lit++, i++) {
 		if (MathUtils::isFinite((*lit)->getPosition())) {
 			totalMovement += (*lit)->getPosition() - mInitialCoords[i];
-			totalVolume += (*lit)->getVolume(); // we take the volume into account when we calculate the travelled distance
 			segmentQty++;
 		}
 	}
 
-	if (totalVolume == 0 || segmentQty == 1) {
+	if (creatureVolumentCubeLength == 0 || segmentQty == 1) {
 
 		mTotalMovement =
 			(mHigherIsBetter) ?
@@ -81,7 +80,7 @@ void AverageVelocity::calculateFitness(CreatureModel* creature,
 					std::numeric_limits<double>::max(),
 					std::numeric_limits<double>::max());
 	} else {
-		mTotalMovement = totalMovement / totalVolume;
+		mTotalMovement = totalMovement / creatureVolumentCubeLength; // we take the total volume cube side length into account when we calculate the travelled distance
 	}
 
 	mTimestamp += timeSinceLastTick;
