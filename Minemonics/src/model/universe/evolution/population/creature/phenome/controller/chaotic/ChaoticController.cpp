@@ -17,6 +17,7 @@
 //## base headers
 //## configuration headers
 #include <configuration/LoggerConfiguration.hpp>
+#include <configuration/ControlConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -210,7 +211,7 @@ void ChaoticController::calcChuaCircuit() {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
 	}
 
-	double h = 0.001f;
+	double h = ControlConfiguration::CHAOS_BASE_INTEGRATION_SPEED;
 	double i = mSpeed;
 	for(; i >= 1;i--) {
 		NumericUtils::calcRK6(0, 3, u, h, unlimitedChuaCircuit);

@@ -50,6 +50,8 @@ public:
 	static const double CHAOS_MIN_INTEGRATION_SPEED;
 
 	static const double CHAOS_MAX_INTEGRATION_SPEED;
+
+	static const double CHAOS_BASE_INTEGRATION_SPEED;
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */
