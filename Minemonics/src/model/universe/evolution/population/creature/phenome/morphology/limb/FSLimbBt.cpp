@@ -304,13 +304,6 @@ void FSLimbBt::addToWorld() {
 					PhysicsConfiguration::COL_CREATURE,
 					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
 			}
-		} else {
-			if (mIntraBodyColliding) {
-				mWorld->addRigidBody(mBody);
-			} else {
-				mWorld->addRigidBody(mBody, PhysicsConfiguration::COL_CREATURE,
-					PhysicsConfiguration::CREATURE_COLLIDES_WITH);
-			}
 		}
 		LimbPhysics::addToWorld();
 	}
@@ -320,8 +313,6 @@ void FSLimbBt::removeFromWorld() {
 	if (isInWorld()) {
 		if (mLink != NULL) {
 			mWorld->removeCollisionObject(mLink);
-		} else {
-			mWorld->removeRigidBody(mBody);
 		}
 	}
 	LimbPhysics::removeFromWorld();
