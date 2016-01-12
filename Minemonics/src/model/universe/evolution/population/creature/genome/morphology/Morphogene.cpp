@@ -255,8 +255,7 @@ void Morphogene::mutate() {
 			MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
-	mRepetitionLimit = Randomness::getSingleton()->nextUnifPosInt(0,
-		MorphologyConfiguration::LIMB_INITIAL_TYPE_REPEATS);
+	mRepetitionLimit += Randomness::getSingleton()->nextNormalInt(0,1,2);
 
 	mFollowUpGene = 0; /**!< The follow up gene follows instead if this gene's repetition limit is reached. */
 }
