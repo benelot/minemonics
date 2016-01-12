@@ -26,7 +26,7 @@ CreatureModel::_Init CreatureModel::_initializer;
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
 	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
-		PhysicsController::RigidbodyModel),mDynasty(0),mMutated(false) {
+		PhysicsController::RigidbodyModel), mDynasty(0), mMutated(false) {
 }
 
 CreatureModel::CreatureModel(PopulationModel* const populationModel,
@@ -34,7 +34,8 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	const Ogre::Vector3 position) :
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
 		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
-		position), mFitnessScoreCalculated(false), mPosition(position),mDynasty(0),mMutated(false) {
+		position), mFitnessScoreCalculated(false), mPosition(position), mDynasty(
+		0), mMutated(false) {
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
 		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
@@ -68,6 +69,7 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
 	mDynasty = creatureModel.mDynasty;
 	mMutated = creatureModel.mMutated;
+	mLastCreatureLength = creatureModel.mLastCreatureLength;
 
 	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
 	case PhysicsController::FeatherstoneModel:
@@ -91,9 +93,10 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 
 void CreatureModel::initialize() {
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "#####################################\n";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "#####################################\n";
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Initialize " << mFirstName;
 	mPhenotypeModel->initialize(); 	//initialize the phenome model
+	mLastCreatureLength = -1;
 }
 
 CreatureModel::~CreatureModel() {
@@ -233,4 +236,36 @@ btDynamicsWorld*& CreatureModel::getWorld() {
 	}
 	return mWorld;
 
+}
+
+/**
+ * Provides a creature size to scale certain values in compensation for the overall size
+ * of a creature's body. We do this by summing all creature volumes of all cuboids and
+ * then we take the cube square of it (size(C) = sqrt^3{\sum\limits^{N(C)}_{i=1} v(c_i)}).
+ * @return The size of a creature.
+ */
+double CreatureModel::getCreatureSize() {
+	if (mLastCreatureLength < 0) {
+		mLastCreatureLength = boost::math::cbrt(getCreatureVolume());
+	}
+
+	return mLastCreatureLength;
+
+}
+
+/**
+ * Provides the total volume of the whole creature body.
+ * @return The total volume of the whole creature body.
+ */
+double CreatureModel::getCreatureVolume() const {
+	double totalVolume = 0;
+	for (std::vector<Gene*>::const_iterator it =
+		mGenotype.getGenes().begin(); it != mGenotype.getGenes().end();
+		it++) {
+		if ((*it)->getType() == Gene::MorphoGene) {
+			totalVolume += ((Morphogene*) *it)->getX()
+				* ((Morphogene*) *it)->getY() * ((Morphogene*) *it)->getZ();
+		}
+	}
+	return totalVolume;
 }

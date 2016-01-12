@@ -110,26 +110,13 @@ public:
 	 * then we take the cube square of it (size(C) = sqrt^3{\sum\limits^{N(C)}_{i=1} v(c_i)}).
 	 * @return The size of a creature.
 	 */
-	double getCreatureSize() {
-		return boost::math::cbrt(getCreatureVolume());
-	}
+	double getCreatureSize();
 
 	/**
 	 * Provides the total volume of the whole creature body.
 	 * @return The total volume of the whole creature body.
 	 */
-	double getCreatureVolume() const {
-		double totalVolume = 0;
-		for (std::vector<Gene*>::const_iterator it =
-			mGenotype.getGenes().begin(); it != mGenotype.getGenes().end();
-			it++) {
-			if ((*it)->getType() == Gene::MorphoGene) {
-				totalVolume += ((Morphogene*) *it)->getX()
-					* ((Morphogene*) *it)->getY() * ((Morphogene*) *it)->getZ();
-			}
-		}
-		return totalVolume;
-	}
+	double getCreatureVolume() const;
 
 	void calm();
 
@@ -243,7 +230,7 @@ public:
 		mWorld = world;
 	}
 
-	Ogre::Vector3 getLowestRelativePoint(){
+	Ogre::Vector3 getLowestRelativePoint() {
 		return mPhenotypeModel->getLowestRelativePoint();
 	}
 
@@ -412,6 +399,8 @@ private:
 	btDynamicsWorld* mWorld; /**!< The world the creature is living in */
 
 	bool mFitnessScoreCalculated; /**!< The last fitness score */
+
+	double mLastCreatureLength; /**!< The last creature volume cube length */
 
 };
 BOOST_CLASS_VERSION(CreatureModel, 1)
