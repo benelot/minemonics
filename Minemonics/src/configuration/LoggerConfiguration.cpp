@@ -21,4 +21,4 @@ const std::string LoggerConfiguration::TOP_FOLDER = "logs";
 
 const int LoggerConfiguration::LOG_DATA_QTY = 20;
 
-const bool LoggerConfiguration::LOG_SPECIAL = false;
+bool LoggerConfiguration::LOG_SPECIAL = false;

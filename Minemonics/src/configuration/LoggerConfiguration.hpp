@@ -51,7 +51,7 @@ public:
 
 	static const int LOG_DATA_QTY;
 
-	static const bool LOG_SPECIAL;
+	static bool LOG_SPECIAL;
 };
 
 #endif /* CONFIGURATION_LOGGERCONFIGURATION_HPP_ */

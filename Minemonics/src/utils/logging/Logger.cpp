@@ -51,9 +51,7 @@ void Logger::init(std::string fileName,
 	boost::log::trivial::severity_level severity) {
 	initFileSink(fileName, severity);
 	initTermSink(severity);
-	if (LoggerConfiguration::LOG_SPECIAL) {
-		initSpecialLoggers();
-	}
+	initSpecialLoggers();
 }
 
 void Logger::initFileSink(std::string fileName,
