@@ -29,8 +29,7 @@ const double MorphologyConfiguration::LIMB_INITIAL_RESTITUTION = 0.2;/**!< The l
 
 const double MorphologyConfiguration::LIMB_INITIAL_FRICTION = 2; /**!< The limb initial friction */
 
-//TODO: Not used yet in this simulator
-const double MorphologyConfiguration::LIMB_MAX_VELOCITY = 80000; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
+const double MorphologyConfiguration::JOINT_MAX_VELOCITY = 80; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
 
 const double MorphologyConfiguration::LIMB_SCALE_MIN = -0.66; /**!< The limb scale min constant determines how much the subtree of this body segment should be scaled at least.*/
 
@@ -81,7 +80,7 @@ const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
  * The maximum allowable torque that can be exerted by a motor is computed as
  * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
-const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0;
+const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0.000000001;
 
 const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
@@ -101,9 +100,9 @@ const double MorphologyConfiguration::JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The maximum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.005f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.0001f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.02f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.01f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION_EVOLUTION = false; /**!< Is evolution allowed to change the intracollision for a limb? False means no, true means yes. */
 

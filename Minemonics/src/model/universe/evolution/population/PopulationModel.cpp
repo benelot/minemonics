@@ -176,6 +176,19 @@ bool PopulationModel::hasInterpenetrations() {
 	return hasInterpenetrations;
 }
 
+double PopulationModel::getMaxJointVelocity() {
+	double maxJointVelocity = 0;
+	for (std::vector<CreatureModel*>::const_iterator cit =
+		mCreatureModels.begin(); cit != mCreatureModels.end(); cit++) {
+		double newMaxJointVelocity = (*cit)->getMaxJointVelocity();
+		if (newMaxJointVelocity > maxJointVelocity) {
+			maxJointVelocity = newMaxJointVelocity;
+			break;
+		}
+	}
+	return maxJointVelocity;
+}
+
 void PopulationModel::save() {
 	SaveController<PopulationModel> populationSaveController;
 	populationSaveController.save(*this,

@@ -44,7 +44,7 @@ public:
 	static const double LIMB_INITIAL_FRICTION; /**!< The limb initial friction */
 
 	//TODO: Not used yet in this simulator
-	static const double LIMB_MAX_VELOCITY; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
+	static const double JOINT_MAX_VELOCITY; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
 
 	static const double LIMB_SCALE_MIN; /**!< The limb scale min constant determines how much the subtree of this body segment should be scaled at least.*/
 

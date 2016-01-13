@@ -182,6 +182,10 @@ bool Population::hasInterpenetrations() {
 	return mPopulationModel->hasInterpenetrations();
 }
 
+double Population::maxJointVelocity() {
+	return mPopulationModel->getMaxJointVelocity();
+}
+
 void Population::markCull() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 		cit != mCreatures.end(); cit++) {

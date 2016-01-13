@@ -288,17 +288,32 @@ std::vector<const DataSink*> PhenomeModel::getJointDataSinks() {
 		datasinks.push_back(&(*jit)->getDataSinkRoll());
 	}
 
-	std::cout << "Number of sensors: " << mJointModels.size()*3 << std::endl;
+	std::cout << "Number of sensors: " << mJointModels.size() * 3 << std::endl;
 	return datasinks;
 }
 
 std::vector<const DataSink*> PhenomeModel::getDataSinks() {
 	std::vector<const DataSink*> datasinks;
 	std::vector<const DataSink*> controllerDatasinks = getControllerDataSinks();
-	datasinks.insert(datasinks.begin(),controllerDatasinks.begin(),controllerDatasinks.end());
+	datasinks.insert(datasinks.begin(), controllerDatasinks.begin(),
+		controllerDatasinks.end());
 
 	std::vector<const DataSink*> jointDatasinks = getJointDataSinks();
-	datasinks.insert(datasinks.begin(),jointDatasinks.begin(),jointDatasinks.end());
+	datasinks.insert(datasinks.begin(), jointDatasinks.begin(),
+		jointDatasinks.end());
 
 	return datasinks;
+}
+
+double PhenomeModel::getMaxJointVelocity() {
+	double maxJointVelocity = 0;
+	for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
+		jit != mJointModels.end(); jit++) {
+		//TODO: time 0 only works for FS model
+		double jointVelocity = (*jit)->getJointVel((*jit)->getIndex(), 0, 0);
+		if (jointVelocity > maxJointVelocity) {
+			maxJointVelocity = jointVelocity;
+		}
+	}
+	return maxJointVelocity;
 }

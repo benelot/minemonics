@@ -87,6 +87,8 @@ public:
 
 	bool hasInterpenetrations();
 
+	double getMaxJointVelocity();
+
 	void clearJuries();
 
 	// Accessor methods ##########################

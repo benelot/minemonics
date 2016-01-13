@@ -186,6 +186,8 @@ public:
 		return mHasInterpenetrations;
 	}
 
+	double getMaxJointVelocity();
+
 	Ogre::Vector3 getLowestRelativePoint();
 
 	void calm();

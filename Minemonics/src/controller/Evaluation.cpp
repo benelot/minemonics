@@ -11,6 +11,8 @@
 #include <SimulationManager.hpp>
 
 //## configuration headers
+#include <configuration/MorphologyConfiguration.hpp>
+
 //## controller headers
 #include <controller/StateHandler.hpp>
 #include <controller/universe/environments/Environment.hpp>
@@ -194,6 +196,21 @@ void Evaluation::update(const double timeSinceLastTick) {
 //			}
 //		}
 //	}
+
+		if (mEvaluationModel.getTimePassed()
+			> PhysicsConfiguration::DISCARDING_STARTS) {
+			for (std::vector<Population*>::iterator pit = mPopulations.begin();
+				pit != mPopulations.end(); pit++) {
+
+				if ((*pit)->maxJointVelocity() > MorphologyConfiguration::JOINT_MAX_VELOCITY) {
+					//TODO: Review this decision again in the case of a whole population
+					BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because of too high speeds.";
+					mHasFailed = true;
+					teardown();
+					break;
+				}
+			}
+		}
 
 	//update the time passed
 	mEvaluationModel.addTimePassed(timeSinceLastTick);

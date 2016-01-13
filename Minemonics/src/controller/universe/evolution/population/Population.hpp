@@ -115,6 +115,8 @@ public:
 	 */
 	bool hasInterpenetrations();
 
+	double maxJointVelocity();
+
 	/**
 	 * Mark the whole population to be culled.
 	 */

@@ -143,6 +143,9 @@ public:
 		return mPhenotypeModel->hasInterpenetrations();
 	}
 
+	double getMaxJointVelocity() {
+		return mPhenotypeModel->getMaxJointVelocity();
+	}
 	MixedGenome& getGenotype() {
 		return mGenotype;
 	}
