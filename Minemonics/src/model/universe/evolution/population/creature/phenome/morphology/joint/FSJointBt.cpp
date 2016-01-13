@@ -58,7 +58,9 @@ FSJointBt::FSJointBt(btDynamicsWorld* const world, FSLimbBt* const limbA,
 		yAxis[1], zAxis[1], xAxis[2], yAxis[2], zAxis[2]);
 	frameInW.setOrigin(pivotInW);
 
-	mLimbMassForceScalar = limbA->getVolume() * MorphologyConfiguration::LIMB_MIN_DENSITY * limbB->getVolume() * MorphologyConfiguration::LIMB_MIN_DENSITY;
+	mLimbMassForceScalar = limbA->getVolume()
+		* MorphologyConfiguration::LIMB_MIN_DENSITY * limbB->getVolume()
+		* MorphologyConfiguration::LIMB_MIN_DENSITY;
 
 	// now get constraint frame in local coordinate systems
 	mFrameInA = limbA->getRigidBody()->getCenterOfMassTransform().inverse()
@@ -118,11 +120,11 @@ void FSJointBt::initialize() {
 	mFrameInB.setOrigin(OgreBulletUtils::convert(mLocalBPosition));
 	mFrameInB.setRotation(OgreBulletUtils::convert(mLocalBOrientation));
 
-	if (!mPitchMotor) {
-		mPitchMotor = new btMultiBodyJointMotor(mMultiBody, mJointIndex, 0,
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
-				* mLimbMassForceScalar);
-	}
+//	if (!mPitchMotor) {
+//		mPitchMotor = new btMultiBodyJointMotor(mMultiBody, mJointIndex, 0,
+//			PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
+//				* mLimbMassForceScalar);
+//	}
 }
 
 FSJointBt::~FSJointBt() {
@@ -139,6 +141,17 @@ void FSJointBt::update(double timeSinceLastTick) {
 			&& MorphologyConfiguration::BODY_MOTORS_ENABLED) {
 			(*motorIterator)->apply(timeSinceLastTick);
 		}
+	}
+
+	//enable manual damping if the motor damping is not enabled
+	if (!mPitchMotor) {
+		double c = PhysicsConfiguration::FIXED_STEP_SIZE_SEC * mJointDamping.x
+			* mLimbMassForceScalar; // c
+
+		double velocity = mMultiBody->getJointVel(mJointIndex); // dx
+
+		double dampingTorque = c * velocity; // damping = c * dx
+		mMultiBody->addJointTorque(mJointIndex, -dampingTorque);
 	}
 }
 
