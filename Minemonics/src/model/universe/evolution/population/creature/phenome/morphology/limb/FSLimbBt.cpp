@@ -177,7 +177,7 @@ btTransform FSLimbBt::getIntersection(btVector3 origin, btVector3 direction) {
 btTransform FSLimbBt::getPreciseIntersection(const btVector3 origin,
 	const btVector3 direction) {
 	btVector3 rayStart = origin
-		+ direction.normalized() * mDimensions.length() * 2; // the ray caster currently only finds the intersection
+		+ direction.normalized() * mDimensions.length() * 1.1f; // the ray caster currently only finds the intersection
 	btVector3 rayEnd = origin; // when hitting the forward face of a triangle therefore, the ray has to come from the outside of the shape
 
 #ifndef EXCLUDE_FROM_TEST
@@ -205,7 +205,7 @@ btTransform FSLimbBt::getPreciseIntersection(const btVector3 origin,
 		hitNormal = rayCallback.m_hitNormalWorld;
 #ifndef EXCLUDE_FROM_TEST
 		SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-			hitPosition, 1, btVector3(1, 0, 0));
+			hitPosition, 0.1, btVector3(1, 0, 0));
 		SimulationManager::getSingleton()->getDebugDrawer().drawLine(
 			hitPosition, hitPosition + rayCallback.m_hitNormalWorld,
 			btVector3(1, 0, 0));
