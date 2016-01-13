@@ -37,7 +37,7 @@ const double ControlConfiguration::CHAOS_MIN_INIT_CONDITION = -0.5f;
 
 const double ControlConfiguration::CHAOS_MAX_INIT_CONDITION = 0.5f;
 
-const double ControlConfiguration::CHAOS_MIN_INTEGRATION_SPEED = 0.01f; /**!< Must be below one*/
+const double ControlConfiguration::CHAOS_MIN_INTEGRATION_SPEED = 0.001f; /**!< Must be below one*/
 
 const double ControlConfiguration::CHAOS_MAX_INTEGRATION_SPEED = 10; /**!< Must be higher than one*/
 
