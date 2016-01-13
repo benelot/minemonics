@@ -71,7 +71,7 @@ const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
  * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
 const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT =
-	0.04f;
+	0.02f;
 
 const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
 	0.05f;
@@ -80,7 +80,7 @@ const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
  * The maximum allowable torque that can be exerted by a motor is computed as
  * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
-const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0.000000001;
+const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0.0000000003f;
 
 const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
@@ -100,9 +100,9 @@ const double MorphologyConfiguration::JOINT_MIN_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The maximum spring stiffness of the joint */
 
-const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.0001f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.001f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.01f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 1.0f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION_EVOLUTION = false; /**!< Is evolution allowed to change the intracollision for a limb? False means no, true means yes. */
 
