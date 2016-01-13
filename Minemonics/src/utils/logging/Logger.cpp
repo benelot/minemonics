@@ -134,7 +134,7 @@ void Logger::initSpecialLoggers() {
 	sink->locked_backend()->set_file_name_composer(
 		sinks::file::as_file_name_composer(
 			expr::stream << "logs/log" << expr::attr<std::string>("LoggerName")
-				<< ".log"));
+				<< ".tsv"));
 
 	// Set the formatter
 	sink->set_formatter(expr::stream << expr::smessage);

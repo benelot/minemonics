@@ -5,10 +5,15 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
+#include <boost/log/attributes/scoped_attribute.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/LoggerConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/morphology/sensor/Sensor.hpp>
@@ -19,7 +24,10 @@
 BoostLogger JointModel::mBoostLogger; /*<! initialize the boost logger*/
 JointModel::_Init JointModel::_initializer;
 JointModel::JointModel() :
-	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1) {
+	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1),mLoggerNamePitch(
+		"JointModel" + boost::lexical_cast<std::string>(this)+ "Pitch"),mLoggerNameYaw(
+			"JointModel" + boost::lexical_cast<std::string>(this)+ "Yaw"),mLoggerNameRoll(
+				"JointModel" + boost::lexical_cast<std::string>(this)+ "Roll") {
 
 }
 
@@ -124,6 +132,11 @@ void JointModel::update(double timeSinceLastTick) {
 	dataY[0] = mVelocityceptors[1]->getOutputValue();
 	dataZ[0] = 0;
 
+	if (LoggerConfiguration::LOG_SPECIAL) {
+			BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+	}
+
 	mDataSinkYaw.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
 
 
@@ -132,7 +145,17 @@ void JointModel::update(double timeSinceLastTick) {
 	dataY[0] = mVelocityceptors[2]->getOutputValue();
 	dataZ[0] = 0;
 
+	if (LoggerConfiguration::LOG_SPECIAL) {
+			BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+	}
+
 	mDataSinkRoll.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
+
+	if (LoggerConfiguration::LOG_SPECIAL) {
+			BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+	}
 
 
 //	std::cout << std::endl << "AngleSensors:";

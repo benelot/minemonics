@@ -320,6 +320,10 @@ private:
 		}
 	} _initializer;
 
+	std::string mLoggerNamePitch; /**!< Logger name which is always Joint + &this */
+	std::string mLoggerNameYaw; /**!< Logger name which is always Joint + &this */
+	std::string mLoggerNameRoll; /**!< Logger name which is always Joint + &this */
+
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_ */
