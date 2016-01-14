@@ -27,7 +27,6 @@
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
 //## utils headers
-#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BulletPicker::BulletPicker() :
 	mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
