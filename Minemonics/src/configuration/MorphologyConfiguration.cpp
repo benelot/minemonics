@@ -27,7 +27,7 @@ const double MorphologyConfiguration::LIMB_MAX_DENSITY = 1; /**!<The limb maximu
 
 const double MorphologyConfiguration::LIMB_INITIAL_RESTITUTION = 0.2;/**!< The limb initial restitution/elasticity. */
 
-const double MorphologyConfiguration::LIMB_INITIAL_FRICTION = 2; /**!< The limb initial friction */
+const double MorphologyConfiguration::LIMB_INITIAL_FRICTION = 10; /**!< The limb initial friction */
 
 const double MorphologyConfiguration::JOINT_MAX_VELOCITY = 80; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
 
