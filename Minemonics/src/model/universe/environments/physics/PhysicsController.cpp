@@ -74,6 +74,7 @@ PhysicsController::~PhysicsController() {
 void PhysicsController::initialize() {
 
 	mCollisionConfiguration = new btDefaultCollisionConfiguration(); //collision configuration contains default setup for memory, collision setup
+	//mCollisionConfiguration->setConvexConvexMultipointIterations();
 	mDispatcher = new btCollisionDispatcher(mCollisionConfiguration); //use the default collision dispatcher
 	mBroadphase = new btDbvtBroadphase();
 
@@ -96,60 +97,65 @@ void PhysicsController::initialize() {
 			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
-		break;
+
 	}
+	break;
 	case PhysicsController::RigidbodyModel: {
 		switch (PhysicsConfiguration::SOLVER_TYPE) {
-		case PhysicsConfiguration::SEQUENTIALIMPULSESOLVER: {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Sequential Impulse Constraint Solver=";
-			mSolver = new btSequentialImpulseConstraintSolver();
+			case PhysicsConfiguration::SEQUENTIALIMPULSESOLVER: {
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Sequential Impulse Constraint Solver=";
+				mSolver = new btSequentialImpulseConstraintSolver();
+				break;
+			}
+			case PhysicsConfiguration::NNCGSOLVER: {
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet NNCG Constraint Solver=";
+				mSolver = new btNNCGConstraintSolver();
+				break;
+			}
+			case PhysicsConfiguration::DANZIGSOLVER: {
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Danzig Solver=";
+				btDantzigSolver* mlcp = new btDantzigSolver();
+				mSolver = new btMLCPSolver(mlcp);
+				break;
+			}
+			case PhysicsConfiguration::GAUSSSEIDELSOLVER: {
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Projected Gauss Seidel Solver=";
+				btSolveProjectedGaussSeidel* mlcp = new btSolveProjectedGaussSeidel();
+				mSolver = new btMLCPSolver(mlcp);
+				break;
+			}
+			case PhysicsConfiguration::LEMKESOLVER: {
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Lemke Solver=";
+				btLemkeSolver* mlcp = new btLemkeSolver();
+				mSolver = new btMLCPSolver(mlcp);
+				break;
+			}
+			default:
 			break;
 		}
-		case PhysicsConfiguration::NNCGSOLVER: {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet NNCG Constraint Solver=";
-			mSolver = new btNNCGConstraintSolver();
-			break;
+
+		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,mSolver, mCollisionConfiguration);
+
+		if (PhysicsConfiguration::SOLVER_TYPE == PhysicsConfiguration::DANZIGSOLVER || PhysicsConfiguration::SOLVER_TYPE == PhysicsConfiguration::GAUSSSEIDELSOLVER) {
+			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
+		} else {
+			mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
 		}
-		case PhysicsConfiguration::DANZIGSOLVER: {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Danzig Solver=";
-			btDantzigSolver* mlcp = new btDantzigSolver();
-			mSolver = new btMLCPSolver(mlcp);
-			break;
-		}
-		case PhysicsConfiguration::GAUSSSEIDELSOLVER: {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Projected Gauss Seidel Solver=";
-			btSolveProjectedGaussSeidel* mlcp = new btSolveProjectedGaussSeidel();
-			mSolver = new btMLCPSolver(mlcp);
-			break;
-		}
-		case PhysicsConfiguration::LEMKESOLVER: {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Lemke Solver=";
-			btLemkeSolver* mlcp = new btLemkeSolver();
-			mSolver = new btMLCPSolver(mlcp);
-			break;
-		}
-		default:
-		break;
+
+		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
+
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
+
+
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";
+
+		mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
 	}
-
-	mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,mSolver, mCollisionConfiguration);
-
-	if (PhysicsConfiguration::SOLVER_TYPE == PhysicsConfiguration::DANZIGSOLVER || PhysicsConfiguration::SOLVER_TYPE == PhysicsConfiguration::GAUSSSEIDELSOLVER) {
-		mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 1; //for mlcp solver it is better to have a small A matrix
-	} else {
-		mDynamicsWorld->getSolverInfo().m_minimumSolverBatchSize = 128; //for direct solver, it is better to solve multiple objects together, small batches have high overhead
-	}
-
-	mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
-
-	mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 	break;
-}
-default:
-break;
-}
+	default:
+	break;
 
 	mDynamicsWorld->getSolverInfo().m_splitImpulse = 1; //enable split impulse feature
 	mDynamicsWorld->getSolverInfo().m_splitImpulsePenetrationThreshold = -0.02;
@@ -157,14 +163,11 @@ break;
 		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
 	mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp = BulletUtils::getERP(
 		PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 10, 1);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";
 
-	mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
 	mDynamicsWorld->getSolverInfo().m_numIterations = 50;
-
-	mDynamicsWorld->setGravity(btVector3(0, -PhysicsConfiguration::EARTH_GRAVITY
-//			* 15.0f
-		, 0));
+}
+	mDynamicsWorld->setGravity(
+		btVector3(0, -PhysicsConfiguration::EARTH_GRAVITY, 0));
 }
 
 void PhysicsController::exitBulletPhysics() {
@@ -206,7 +209,8 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 			// since we want to see all substeps, we make them by ourselves
 			int subSteps = 1;
 
-			mDynamicsWorld->stepSimulation(btScalar(timeStep), btScalar(subSteps),
+			mDynamicsWorld->stepSimulation(btScalar(timeStep),
+				btScalar(subSteps),
 				btScalar(PhysicsConfiguration::FIXED_STEP_SIZE_SEC));
 		}
 
