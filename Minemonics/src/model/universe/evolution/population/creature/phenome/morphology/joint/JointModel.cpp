@@ -126,33 +126,33 @@ void JointModel::update(double timeSinceLastTick) {
 
 	mDataSinkPitch.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
 
+	if (LoggerConfiguration::LOG_SPECIAL) {
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+	}
+
 	// create 1 dimensional data sets out of 3 dimensional data
 	dataX[0] = mAngleceptors[1]->getOutputValue();
 	dataY[0] = mVelocityceptors[1]->getOutputValue();
 	dataZ[0] = 0;
 
-	if (LoggerConfiguration::LOG_SPECIAL) {
-		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
-	}
-
 	mDataSinkYaw.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
+
+	if (LoggerConfiguration::LOG_SPECIAL) {
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNameYaw);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+	}
 
 	// create 1 dimensional data sets out of 3 dimensional data
 	dataX[0] = mAngleceptors[2]->getOutputValue();
 	dataY[0] = mVelocityceptors[2]->getOutputValue();
 	dataZ[0] = 0;
 
-	if (LoggerConfiguration::LOG_SPECIAL) {
-		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
-	}
-
 	mDataSinkRoll.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
-		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNameRoll);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
 
 //	std::cout << std::endl << "AngleSensors:";
