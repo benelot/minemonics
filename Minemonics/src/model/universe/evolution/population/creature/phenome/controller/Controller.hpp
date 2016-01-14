@@ -83,6 +83,34 @@ public:
 
 	void storeControlIndices();
 
+	ControllerType getType() const {
+		return mType;
+	}
+
+	void setType(ControllerType type) {
+		mType = type;
+	}
+
+	const std::vector<int>& getControlInputIndices() const {
+		return mControlInputIndices;
+	}
+
+	const std::vector<int>& getControlOutputIndices() const {
+		return mControlOutputIndices;
+	}
+
+	const DataSink& getDataSink() const {
+		return mDataSink;
+	}
+
+	const std::string& getLoggingID() const {
+		return mLoggingID;
+	}
+
+	void setLoggingID(const std::string& loggingId) {
+		mLoggingID = loggingId;
+	}
+
 	/**
 	 * Compare the controller to another controller.
 	 * @param controller Another controller.
@@ -122,26 +150,6 @@ public:
 		return os;
 	}
 
-	ControllerType getType() const {
-		return mType;
-	}
-
-	void setType(ControllerType type) {
-		mType = type;
-	}
-
-	const std::vector<int>& getControlInputIndices() const {
-		return mControlInputIndices;
-	}
-
-	const std::vector<int>& getControlOutputIndices() const {
-		return mControlOutputIndices;
-	}
-
-	const DataSink& getDataSink() const {
-		return mDataSink;
-	}
-
 	/**
 	 * Serializes the gene to an xml file.
 	 * @param ar The archive.
@@ -169,6 +177,8 @@ protected:
 	std::vector<ControlOutput*> mControlInputs; /**!< The control input the controller reads from. */
 
 	std::vector<ControlInput*> mControlOutputs; /**!< The control output the controller writes to.*/
+
+	std::string mLoggingID;
 };
 BOOST_CLASS_VERSION(Controller, 1)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Controller)

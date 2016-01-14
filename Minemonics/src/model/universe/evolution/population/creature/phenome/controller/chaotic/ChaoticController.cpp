@@ -42,22 +42,21 @@ ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType, double initialX,
 	double initialY, double initialZ, double speed) :
 	Controller(CHAOTIC_CONTROLLER), mLoggerName(
-		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
+		boost::lexical_cast<std::string>(this) + "ChaoticController"), mTime(0), mSystemType(
 		systemType), mFirstTime(true), mInitialX(initialX), mInitialY(initialY), mInitialZ(
 		initialZ), mSpeed(speed) {
-	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
 }
 
 ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType) :
 	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType), mFirstTime(
-		0) {
-	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
+		0), mLoggerName(
+		boost::lexical_cast<std::string>(this) + "ChaoticController") {
 }
 
 ChaoticController::ChaoticController(const ChaoticController& chaoticController) :
-	Controller(CHAOTIC_CONTROLLER) {
-	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
+	Controller(CHAOTIC_CONTROLLER),mLoggerName(
+		boost::lexical_cast<std::string>(this) + "ChaoticController") {
 
 	mTime = chaoticController.mTime;
 	mType = chaoticController.mType;
@@ -81,11 +80,13 @@ ChaoticController::ChaoticController(const ChaoticController& chaoticController)
 }
 
 ChaoticController::~ChaoticController() {
-	// Nothing to do for now
+// Nothing to do for now
 }
 
 void ChaoticController::initialize() {
 	mDataSink.initialize(mLoggerName, 3, 20);
+
+	mLoggerName = mLoggingID + "ChaoticController";
 
 	u[0] = mInitialX;
 	u[1] = mInitialY;
@@ -126,7 +127,7 @@ void ChaoticController::perform(const double timeSinceLastTick) {
 
 //	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this << "(ChaoticController)::" << timeSinceLastTick << "/Output:" << output;
 
-	// create 1 dimensional data set out of 3 dimensional data
+// create 1 dimensional data set out of 3 dimensional data
 	double dataX[1];
 	dataX[0] = u[0];
 	double dataY[1];
@@ -157,17 +158,17 @@ double* ChaoticController::chuaCircuit(double t, int dimensions, double u[]) {
 	uout[1] = c2 * (u[0] - u[1] + u[2]);
 	uout[2] = -c3 * u[1];
 
-	// LIMIT dx/dt
-	//prepare limiter
+// LIMIT dx/dt
+//prepare limiter
 //	double limiter = mControlInputs[0]->getOutputValue();
 //	double limiter = mControlInputs[1]->getOutputValue();
 
-	//Sample simple limiter
-	//double limitValue = 2;//(* 1.9/Period 1 limit cycle // 2.23/Period 4 limit \cycle // >2.4/Not limited *)
-	//double softness = 7; //(* Softness *)
-	//double limiter = (1.0f/2.0f)*(std::tanh(softness* (limitValue - u[0])) + 1.0f);
+//Sample simple limiter
+//double limitValue = 2;//(* 1.9/Period 1 limit cycle // 2.23/Period 4 limit \cycle // >2.4/Not limited *)
+//double softness = 7; //(* Softness *)
+//double limiter = (1.0f/2.0f)*(std::tanh(softness* (limitValue - u[0])) + 1.0f);
 
-	// where do we limit?
+// where do we limit?
 //	uout[0] *= limiter;
 //	uout[1] *= limiter;
 //	uout[2] *= limiter; //	(limiter >= 1.0f) ? 1.0f : limiter;

@@ -24,10 +24,10 @@
 BoostLogger JointModel::mBoostLogger; /*<! initialize the boost logger*/
 JointModel::_Init JointModel::_initializer;
 JointModel::JointModel() :
-	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1),mLoggerNamePitch(
-		"JointModel" + boost::lexical_cast<std::string>(this)+ "Pitch"),mLoggerNameYaw(
-			"JointModel" + boost::lexical_cast<std::string>(this)+ "Yaw"),mLoggerNameRoll(
-				"JointModel" + boost::lexical_cast<std::string>(this)+ "Roll") {
+	mJointPhysics(NULL), mParentIndex(-1), mChildIndex(-1), mOwnIndex(-1), mLoggerNamePitch(
+		boost::lexical_cast<std::string>(this) + "PitchJointModel"), mLoggerNameYaw(
+		boost::lexical_cast<std::string>(this) + "YawJointModel"), mLoggerNameRoll(
+		boost::lexical_cast<std::string>(this) + "RollJointModel") {
 
 }
 
@@ -41,7 +41,7 @@ JointModel::~JointModel() {
 	delete mJointPhysics;
 	mJointPhysics = NULL;
 
-	while(!mSensors.empty()){
+	while (!mSensors.empty()) {
 		delete mSensors.back();
 		mSensors.pop_back();
 	}
@@ -51,60 +51,60 @@ JointModel::~JointModel() {
 	mLimitceptors.clear();
 }
 
-void JointModel::addSensors(){
+void JointModel::addSensors() {
 	JointAngleceptor* angleceptor = new JointAngleceptor(this,
-			JointPhysics::RDOF_PITCH);
-		mSensors.push_back(angleceptor);
-		mAngleceptors.push_back(angleceptor);
+		JointPhysics::RDOF_PITCH);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
 
-		angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_YAW);
-		mSensors.push_back(angleceptor);
-		mAngleceptors.push_back(angleceptor);
+	angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_YAW);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
 
-		angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_ROLL);
-		mSensors.push_back(angleceptor);
-		mAngleceptors.push_back(angleceptor);
+	angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_ROLL);
+	mSensors.push_back(angleceptor);
+	mAngleceptors.push_back(angleceptor);
 
-		JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
-			JointPhysics::RDOF_PITCH);
-		mSensors.push_back(velocityceptor);
-		mVelocityceptors.push_back(velocityceptor);
+	JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
+		JointPhysics::RDOF_PITCH);
+	mSensors.push_back(velocityceptor);
+	mVelocityceptors.push_back(velocityceptor);
 
-		velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_YAW);
-		mSensors.push_back(velocityceptor);
-		mVelocityceptors.push_back(velocityceptor);
+	velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_YAW);
+	mSensors.push_back(velocityceptor);
+	mVelocityceptors.push_back(velocityceptor);
 
-		velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_ROLL);
-		mSensors.push_back(velocityceptor);
-		mVelocityceptors.push_back(velocityceptor);
+	velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_ROLL);
+	mSensors.push_back(velocityceptor);
+	mVelocityceptors.push_back(velocityceptor);
 
-		JointForceceptor* forceceptor = new JointForceceptor(this,
-			JointPhysics::RDOF_PITCH);
-		mSensors.push_back(forceceptor);
-		mForceceptors.push_back(forceceptor);
+	JointForceceptor* forceceptor = new JointForceceptor(this,
+		JointPhysics::RDOF_PITCH);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
 
-		forceceptor = new JointForceceptor(this, JointPhysics::RDOF_YAW);
-		mSensors.push_back(forceceptor);
-		mForceceptors.push_back(forceceptor);
+	forceceptor = new JointForceceptor(this, JointPhysics::RDOF_YAW);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
 
-		forceceptor = new JointForceceptor(this, JointPhysics::RDOF_ROLL);
-		mSensors.push_back(forceceptor);
-		mForceceptors.push_back(forceceptor);
+	forceceptor = new JointForceceptor(this, JointPhysics::RDOF_ROLL);
+	mSensors.push_back(forceceptor);
+	mForceceptors.push_back(forceceptor);
 
-		JointLimitceptor* limitceptor = new JointLimitceptor(this,
-			JointPhysics::RDOF_PITCH, JointLimitceptor::BOTH_LIMITS);
-		mSensors.push_back(limitceptor);
-		mLimitceptors.push_back(limitceptor);
+	JointLimitceptor* limitceptor = new JointLimitceptor(this,
+		JointPhysics::RDOF_PITCH, JointLimitceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
 
-		limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_YAW,
-			JointLimitceptor::BOTH_LIMITS);
-		mSensors.push_back(limitceptor);
-		mLimitceptors.push_back(limitceptor);
+	limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_YAW,
+		JointLimitceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
 
-		limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_ROLL,
-			JointLimitceptor::BOTH_LIMITS);
-		mSensors.push_back(limitceptor);
-		mLimitceptors.push_back(limitceptor);
+	limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_ROLL,
+		JointLimitceptor::BOTH_LIMITS);
+	mSensors.push_back(limitceptor);
+	mLimitceptors.push_back(limitceptor);
 }
 
 void JointModel::update(double timeSinceLastTick) {
@@ -120,7 +120,6 @@ void JointModel::update(double timeSinceLastTick) {
 	double dataY[1];
 	double dataZ[1];
 
-
 	dataX[0] = mAngleceptors[0]->getOutputValue();
 	dataY[0] = mVelocityceptors[0]->getOutputValue();
 	dataZ[0] = 0;
@@ -133,12 +132,11 @@ void JointModel::update(double timeSinceLastTick) {
 	dataZ[0] = 0;
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
-			BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
 
 	mDataSinkYaw.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
-
 
 	// create 1 dimensional data sets out of 3 dimensional data
 	dataX[0] = mAngleceptors[2]->getOutputValue();
@@ -146,17 +144,16 @@ void JointModel::update(double timeSinceLastTick) {
 	dataZ[0] = 0;
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
-			BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
 
 	mDataSinkRoll.addData(dataX, dataY, dataZ, 3, 1); // Send data point to the data sink
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
-			BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
-
 
 //	std::cout << std::endl << "AngleSensors:";
 //	for (std::vector<JointAngleProprioceptor*>::iterator tit = mAngleceptors.begin();
@@ -183,14 +180,16 @@ void JointModel::update(double timeSinceLastTick) {
 std::vector<ControlInput*> JointModel::getControlInputs() {
 	std::vector<ControlInput*> mControlInputs;
 
-	mControlInputs.insert(mControlInputs.end(),mJointPhysics->getMotors().begin(),mJointPhysics->getMotors().end());
+	mControlInputs.insert(mControlInputs.end(),
+		mJointPhysics->getMotors().begin(), mJointPhysics->getMotors().end());
 	return mControlInputs;
 }
 
 std::vector<ControlOutput*> JointModel::getControlOutputs() {
 	std::vector<ControlOutput*> mControlOutputs;
 
-	mControlOutputs.insert(mControlOutputs.end(),mSensors.begin(),mSensors.end());
+	mControlOutputs.insert(mControlOutputs.end(), mSensors.begin(),
+		mSensors.end());
 
 	return mControlOutputs;
 }
@@ -235,8 +234,10 @@ double JointModel::getJointPos(int jointAxisIndex) {
 	return mJointPhysics->getJointPos(jointAxisIndex);
 }
 
-double JointModel::getJointVel(int jointAxisIndex,double timeSinceLastTick, double lastJointPosition) {
-	return mJointPhysics->getJointVel(jointAxisIndex,timeSinceLastTick,lastJointPosition);
+double JointModel::getJointVel(int jointAxisIndex, double timeSinceLastTick,
+	double lastJointPosition) {
+	return mJointPhysics->getJointVel(jointAxisIndex, timeSinceLastTick,
+		lastJointPosition);
 }
 
 void JointModel::setControlInputs(std::vector<ControlOutput*> controlInputs) {
