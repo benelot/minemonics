@@ -19,7 +19,6 @@
 
 BoostLogger PhenomeModel::mBoostLogger; /*<! initialize the boost logger*/
 PhenomeModel::_Init PhenomeModel::_initializer;
-
 PhenomeModel::PhenomeModel() :
 	mCreatureModel(NULL), mInWorld(false), mDeveloped(false), mHasInterpenetrations(
 		false), mBodyGenerated(false) {
@@ -270,7 +269,7 @@ std::vector<const DataSink*> PhenomeModel::getControllerDataSinks() {
 	std::vector<const DataSink*> datasinks;
 	for (std::vector<Controller*>::iterator cit = mControllers.begin();
 		cit != mControllers.end(); cit++) {
-		datasinks.push_back(&(*cit)->getDataSink());
+		datasinks.push_back((*cit)->getDataSink());
 	}
 
 	std::cout << "Number of controllers: " << mControllers.size() << std::endl;
@@ -283,9 +282,9 @@ std::vector<const DataSink*> PhenomeModel::getJointDataSinks() {
 
 	for (std::vector<JointModel*>::iterator jit = mJointModels.begin();
 		jit != mJointModels.end(); jit++) {
-		datasinks.push_back(&(*jit)->getDataSinkPitch());
-		datasinks.push_back(&(*jit)->getDataSinkYaw());
-		datasinks.push_back(&(*jit)->getDataSinkRoll());
+		datasinks.push_back((*jit)->getDataSinkPitch());
+		datasinks.push_back((*jit)->getDataSinkYaw());
+		datasinks.push_back((*jit)->getDataSinkRoll());
 	}
 
 	std::cout << "Number of sensors: " << mJointModels.size() * 3 << std::endl;

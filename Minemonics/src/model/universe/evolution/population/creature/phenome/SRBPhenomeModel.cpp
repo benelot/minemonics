@@ -469,7 +469,7 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//initialize rotational limit motors
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-	//TODO: Fix the force curve
+
 	//TODO: Calculate somewhere within the joint only using the constants
 	double maxTorque =
 		MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT

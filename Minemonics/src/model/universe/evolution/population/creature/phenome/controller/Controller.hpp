@@ -99,8 +99,8 @@ public:
 		return mControlOutputIndices;
 	}
 
-	const DataSink& getDataSink() const {
-		return mDataSink;
+	const DataSink* getDataSink() const {
+		return &mDataSink;
 	}
 
 	const std::string& getLoggingID() const {

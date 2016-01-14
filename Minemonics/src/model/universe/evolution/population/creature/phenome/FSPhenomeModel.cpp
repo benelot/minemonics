@@ -501,7 +501,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	//initialize rotational limit motors
 	double mass1 = parentLimb->getMass();
 	double mass2 = childLimb->getMass();
-	//TODO: Fix the force curve
+
 	//TODO: Calculate somewhere within the joint only using the constants
 	double maxTorque =
 		MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT
@@ -522,7 +522,7 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	for (int i = 0; i < joint->getMotors().size(); i++) {
 
 		std::string jointMotorName = "";
-		switch(((ServoMotor*)joint->getMotors()[i])->getJointMotorIndex()){
+		switch (((ServoMotor*) joint->getMotors()[i])->getJointMotorIndex()) {
 		case JointPhysics::RDOF_PITCH:
 			jointMotorName = "Pitch";
 			break;
@@ -541,7 +541,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
 					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
 					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
-			controller->setLoggingID(boost::lexical_cast<std::string>(joint) + jointMotorName);
+			controller->setLoggingID(
+				boost::lexical_cast<std::string>(joint) + jointMotorName);
 
 			controller->initialize();
 			controller->addControlOutput(joint->getMotors()[i]);
@@ -557,7 +558,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 				chaoticControllerGene->getInitialY(),
 				chaoticControllerGene->getInitialZ(),
 				chaoticControllerGene->getSpeed());
-			controller->setLoggingID(boost::lexical_cast<std::string>(joint) + jointMotorName);
+			controller->setLoggingID(
+				boost::lexical_cast<std::string>(joint) + jointMotorName);
 
 			controller->addControlInput(joint->getAngleceptors()[i]); // Add the angleceptor as input
 			controller->addControlInput(joint->getVelocityceptors()[i]); // add the velocityceptor as input
@@ -671,6 +673,28 @@ void FSPhenomeModel::generateBody() {
 		for (int i = 0; i < mJointModels.size(); i++) {
 			((FSJointBt*) mJointModels[i]->getJointPhysics())->setMultiBody(
 				mMultiBody);
+
+			// add controllers
+			for (int j = 0; j < mJointModels[i]->getMotors().size(); j++) {
+
+				std::string jointMotorName = "";
+				switch (((ServoMotor*) mJointModels[i]->getMotors()[j])->getJointMotorIndex()) {
+				case JointPhysics::RDOF_PITCH:
+					jointMotorName = "Pitch";
+					break;
+				case JointPhysics::RDOF_ROLL:
+					jointMotorName = "Roll";
+					break;
+				case JointPhysics::RDOF_YAW:
+					jointMotorName = "Yaw";
+					break;
+				}
+
+				getControllers()[i * 3 + j]->setLoggingID(
+					boost::lexical_cast<std::string>(mJointModels[i]) + jointMotorName);
+
+			}
+
 			mJointModels[i]->initialize();
 
 			switch (mJointModels[i]->getType()) {
@@ -967,11 +991,11 @@ void FSPhenomeModel::removeFromWorld() {
 	}
 }
 
-PhenomeModel* FSPhenomeModel::clone() {
+PhenomeModel * FSPhenomeModel::clone() {
 	return new FSPhenomeModel(*this);
 }
 
-btMultiBodyDynamicsWorld* FSPhenomeModel::getWorld() {
+btMultiBodyDynamicsWorld * FSPhenomeModel::getWorld() {
 	if (!mWorld) {
 #ifndef EXCLUDE_FROM_TEST
 		mWorld = (btMultiBodyDynamicsWorld*) mCreatureModel->getWorld();

@@ -232,16 +232,16 @@ public:
 		return mVelocityceptors;
 	}
 
-	const DataSink& getDataSinkPitch() const {
-		return mDataSinkPitch;
+	const DataSink* getDataSinkPitch() const {
+		return &mDataSinkPitch;
 	}
 
-	const DataSink& getDataSinkYaw() const {
-		return mDataSinkYaw;
+	const DataSink* getDataSinkYaw() const {
+		return &mDataSinkYaw;
 	}
 
-	const DataSink& getDataSinkRoll() const {
-		return mDataSinkRoll;
+	const DataSink* getDataSinkRoll() const {
+		return &mDataSinkRoll;
 	}
 
 	// Serialization
