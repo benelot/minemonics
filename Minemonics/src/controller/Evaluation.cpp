@@ -129,6 +129,7 @@ void Evaluation::teardown() {
 		mPlanet);
 	SimulationManager::getSingleton()->getStateHandler().setCurrentlySelectedPlanet(
 		NULL);
+	SimulationManager::getSingleton()->getMousePicker().setPicking(false);
 
 	if (!mHasFailed) {
 		// save creatures of evaluated populations

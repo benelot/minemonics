@@ -27,6 +27,7 @@
 #include <view/visualization/bulletphysics/OgreBtDebugDrawer.hpp>
 
 //## utils headers
+#include <utils/ogre3D/OgreBulletUtils.hpp>
 
 BulletPicker::BulletPicker() :
 	mHitPos(), mOldPickingDist(), mPickedBody(NULL), mPicking(false), mPickingMultiBodyPoint2Point(
@@ -106,10 +107,9 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				}
 
 				mPickedConstraint = p2p;
-//				btScalar mousePickClamping = 3000000000.f;
-//				p2p->m_setting.m_impulseClamp = mousePickClamping;
-				//very weak constraint for picking
-//				p2p->m_setting.m_tau = 0.1f;
+				p2p->m_setting.m_impulseClamp = btScalar(
+					PhysicsConfiguration::BULLET_PICKER_FORCE);
+				p2p->m_setting.m_tau = 1.0f;
 			}
 		} else {
 			btMultiBodyLinkCollider* multiCol =
@@ -129,8 +129,8 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 				//see also http://www.bulletphysics.org/Bullet/phpBB3/viewtopic.php?f=4&t=949
 				//so we try to avoid it by clamping the maximum impulse (force) that the mouse pick can apply
 				//it is not satisfying, hopefully we find a better solution (higher order integrator, using joint friction using a zero-velocity target motor with limited force etc?)
-//				btScalar scaling = PhysicsConfiguration::BULLET_PICKER_FORCE;
-//				p2p->setMaxAppliedImpulse(scaling);
+				p2p->setMaxAppliedImpulse(
+					btScalar(PhysicsConfiguration::BULLET_PICKER_FORCE));
 
 				btMultiBodyDynamicsWorld* multibodyworld =
 					(btMultiBodyDynamicsWorld*) mWorld;
@@ -163,31 +163,30 @@ btVector3 BulletPicker::pickBody(btDynamicsWorld* world,
 
 bool BulletPicker::movePickedBody(const btVector3& rayFromWorld,
 	const btVector3& rayToWorld) {
+	//keep it at the same picking distance
+
+	btVector3 dir = rayToWorld - rayFromWorld;
+	dir.normalize();
+	dir *= mOldPickingDist;
+
+	btVector3 newPivotB = rayFromWorld + dir;
+
+#ifndef EXCLUDE_FROM_TEST
+	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+		newPivotB, 1.0, btVector3(0, 1, 0));
+#endif
 
 	if (mPickedBody && mPickedConstraint) {
+
 		btPoint2PointConstraint* pickCon =
 			static_cast<btPoint2PointConstraint*>(mPickedConstraint);
+
 		if (pickCon) {
-			//keep it at the same picking distance
-
-			btVector3 dir = rayToWorld - rayFromWorld;
-			dir.normalize();
-			dir *= mOldPickingDist;
-
-			btVector3 newPivotB = rayFromWorld + dir;
 			pickCon->setPivotB(newPivotB);
 		}
 	}
 
 	if (mPickingMultiBodyPoint2Point) {
-		//keep it at the same picking distance
-
-		btVector3 dir = rayToWorld - rayFromWorld;
-		dir.normalize();
-		dir *= mOldPickingDist;
-
-		btVector3 newPivotB = rayFromWorld + dir;
-
 		mPickingMultiBodyPoint2Point->setPivotInB(newPivotB);
 	}
 

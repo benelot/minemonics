@@ -62,7 +62,7 @@ void MousePicker::moveBody() {
 	Ogre::Ray ray = getMouseRay();
 	mBulletPicker.movePickedBody(OgreBulletUtils::convert(ray.getOrigin()),
 		OgreBulletUtils::convert(
-			ray.getOrigin() + ray.getDirection() * 10000.0f));
+			ray.getOrigin() + ray.getDirection()));
 }
 
 Ogre::Ray MousePicker::getMouseRay() {
