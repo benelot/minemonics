@@ -55,7 +55,7 @@ ViewController::ViewController() :
 	NULL), mShowShadows(false), mMenuBar(NULL), mFpsPanel(
 	NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
 	NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
-	NULL), mLoadPopulationWindow(NULL),mChaosControllerPanel(NULL) {
+	NULL), mLoadPopulationWindow(NULL),mChaosControllerPanel(NULL),mJointDynamicsPanel(NULL) {
 }
 
 ViewController::~ViewController() {

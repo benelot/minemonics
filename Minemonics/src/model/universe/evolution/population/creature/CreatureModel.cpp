@@ -26,7 +26,7 @@ CreatureModel::_Init CreatureModel::_initializer;
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
 	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
-		PhysicsController::RigidbodyModel), mDynasty(0), mMutated(false) {
+		PhysicsController::RigidbodyModel), mDynasty(0), mMutated(false),mLastCreatureLength(-1) {
 }
 
 CreatureModel::CreatureModel(PopulationModel* const populationModel,
@@ -35,7 +35,7 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
 		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
 		position), mFitnessScoreCalculated(false), mPosition(position), mDynasty(
-		0), mMutated(false) {
+		0), mMutated(false),mLastCreatureLength(-1) {
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
 		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
@@ -56,7 +56,7 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-	mGenotype(&creatureModel.mGenotype) {
+	mGenotype(&creatureModel.mGenotype),mLastCreatureLength(-1) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -69,7 +69,6 @@ CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
 	mPhysicsModelType = creatureModel.mPhysicsModelType;
 	mDynasty = creatureModel.mDynasty;
 	mMutated = creatureModel.mMutated;
-	mLastCreatureLength = creatureModel.mLastCreatureLength;
 
 	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
 	case PhysicsController::FeatherstoneModel:
