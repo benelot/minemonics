@@ -8,6 +8,7 @@
 
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -114,4 +115,12 @@ void AverageVelocity::evaluateFitness() {
 
 AverageVelocity * AverageVelocity::clone() {
 	return new AverageVelocity(*this);
+}
+
+std::string AverageVelocity::getScoreString() {
+	std::string scoreString = "Average Velocity Fitness : "
+		+ boost::lexical_cast<std::string>(getFitness())
+		+ ((isHigherBetter()) ?
+			" (where higher is better)" : " (where lower is better)");
+	return scoreString;
 }

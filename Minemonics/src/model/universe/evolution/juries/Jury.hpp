@@ -133,6 +133,8 @@ public:
 		mScore = score;
 	}
 
+	virtual std::string getScoreString() = 0;
+
 protected:
 
 	JuryType mJuryType; /**!< The type of jury. */

@@ -45,6 +45,8 @@ public:
 
 	virtual AverageHeight* clone();
 
+	virtual std::string getScoreString();
+
 	// Accessor methods ##########################
 
 	// Serialization

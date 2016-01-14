@@ -63,6 +63,8 @@ public:
 
 	virtual AverageVelocity* clone();
 
+	virtual std::string getScoreString();
+
 	// Accessor methods ##########################
 
 	// Serialization

@@ -9,6 +9,7 @@
 
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
 #include <OgreVector3.h>
 
 //## view headers
@@ -81,4 +82,12 @@ void AverageHeight::evaluateFitness() {
 
 AverageHeight* AverageHeight::clone() {
 	return new AverageHeight(*this);
+}
+
+std::string AverageHeight::getScoreString() {
+	std::string scoreString = "Average Height Fitness : "
+		+ boost::lexical_cast<std::string>(getFitness())
+		+ ((isHigherBetter()) ?
+			" (where higher is better)" : " (where lower is better)");
+	return scoreString;
 }

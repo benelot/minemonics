@@ -92,6 +92,14 @@ void Reaper::reap(PopulationModel* const population) {
 		population->getCreatureModels().end(),
 		scoreComparator.compareCreatureFitnessScore);
 
+	if (population->getCreatureModels().size() != 0) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\nBest creature scores:";
+		for(std::vector<Jury*>::const_iterator jit = population->getCreatureModels()[0]->getJuries().begin();jit != population->getCreatureModels()[0]->getJuries().end();jit++) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< (*jit)->getScoreString();
+		}
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << ""; // another newline
+	}
+
 	int headsToReap = ceil(
 		population->getCreatureModels().size() * mReapPercentage);
 
@@ -279,7 +287,7 @@ void Reaper::mutateGenes(PopulationModel* const population, int startIndex,
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
-						true);
+					true);
 				offspring->setNew(true); // Make the creature a new creature
 				offspring->setDeveloped(false); // Set the creature for an embryogenesis
 
@@ -321,7 +329,7 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
-						true);
+					true);
 				offspring->setNew(true); // Make the creature a new creature
 				offspring->setDeveloped(false); // Set the creature for an embryogenesis
 
@@ -342,7 +350,7 @@ void Reaper::growStubs(PopulationModel* const population, const int startIndex,
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
-						true);
+					true);
 				offspring->setNew(true); // Make the creature a new creature
 				offspring->setDeveloped(false); // Set the creature for an embryogenesis
 
@@ -385,7 +393,7 @@ void Reaper::graftFeatures(PopulationModel* const population,
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
-						true);
+					true);
 				offspring->setNew(true); // Make the creature a new creature
 				offspring->setDeveloped(false); // Set the creature for an embryogenesis
 

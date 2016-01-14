@@ -62,6 +62,8 @@ public:
 
 	virtual IntegralAverageVelocity* clone();
 
+	virtual std::string getScoreString();
+
 	// Accessor methods ##########################
 
 	// Serialization
