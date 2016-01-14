@@ -85,6 +85,8 @@ public:
 
 	virtual std::vector<ControlOutput*> getControlOutputs();
 
+	void collectSensors();
+
 	/**
 	 * Update the joint model.
 	 * @param timeSinceLastTick

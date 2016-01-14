@@ -478,6 +478,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle()));
 
+	joint->addSensors();
+
 	joint->setAngularStiffness(/**!< Set spring stiffness for the joint*/
 	parentMorphogeneBranch->getPitchStiffnessCoefficient(),
 		parentMorphogeneBranch->getYawStiffnessCoefficient(),

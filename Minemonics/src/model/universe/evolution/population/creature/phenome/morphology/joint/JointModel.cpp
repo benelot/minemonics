@@ -107,6 +107,20 @@ void JointModel::addSensors() {
 	mLimitceptors.push_back(limitceptor);
 }
 
+void JointModel::collectSensors() {
+	mSensors.clear();
+	mSensors.insert(mSensors.end(), mAngleceptors.begin(), mAngleceptors.end());
+	mSensors.insert(mSensors.end(), mVelocityceptors.begin(),
+		mVelocityceptors.end());
+	mSensors.insert(mSensors.end(), mForceceptors.begin(), mForceceptors.end());
+	mSensors.insert(mSensors.end(), mLimitceptors.begin(), mLimitceptors.end());
+
+	for (std::vector<Sensor*>::iterator pit = mSensors.begin();
+		pit != mSensors.end(); pit++) {
+		((JointProprioceptor*) (*pit))->setJoint(this);
+	}
+}
+
 void JointModel::update(double timeSinceLastTick) {
 	mJointPhysics->update(timeSinceLastTick);
 

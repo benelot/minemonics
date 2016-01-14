@@ -70,6 +70,10 @@ public:
 		<< "/Motor index=" << jointProprioceptor.mMotorIndex;
 	}
 
+	void setJoint(JointModel* joint) {
+		mJoint = joint;
+	}
+
 	/**
 	 * Serializes the joint proprioceptor to an xml file.
 	 * @param ar The archive.

@@ -28,7 +28,6 @@
 BoostLogger FSJointModel::mBoostLogger; /*<! initialize the boost logger*/
 FSJointModel::_Init FSJointModel::_initializer;
 FSJointModel::FSJointModel() {
-	addSensors();
 }
 
 FSJointModel::FSJointModel(const FSJointModel& jointModel) {
@@ -36,8 +35,6 @@ FSJointModel::FSJointModel(const FSJointModel& jointModel) {
 	mChildIndex = jointModel.mChildIndex;
 	mOwnIndex = jointModel.mOwnIndex;
 	mJointPhysics = jointModel.mJointPhysics->clone();
-
-	addSensors();
 }
 
 FSJointModel::FSJointModel(btDynamicsWorld* const world,
@@ -61,14 +58,14 @@ FSJointModel::FSJointModel(btDynamicsWorld* const world,
 		OgreBulletUtils::convert(jointYawAxis),
 		OgreBulletUtils::convert(jointMinAngle),
 		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
-
-	addSensors();
 }
 
 FSJointModel::~FSJointModel() {
 }
 
 void FSJointModel::initialize() {
+	collectSensors();
+
 	mJointPhysics->initialize();
 
 	mDataSinkPitch.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);

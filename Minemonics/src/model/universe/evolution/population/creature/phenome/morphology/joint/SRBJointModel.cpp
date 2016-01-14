@@ -28,7 +28,6 @@
 BoostLogger SRBJointModel::mBoostLogger; /*<! initialize the boost logger*/
 SRBJointModel::_Init SRBJointModel::_initializer;
 SRBJointModel::SRBJointModel() {
-	addSensors();
 }
 
 SRBJointModel::SRBJointModel(const SRBJointModel& jointModel) :
@@ -37,8 +36,6 @@ SRBJointModel::SRBJointModel(const SRBJointModel& jointModel) :
 	mChildIndex = jointModel.mChildIndex;
 	mOwnIndex = jointModel.mOwnIndex;
 	mJointPhysics = jointModel.mJointPhysics->clone();
-
-	addSensors();
 }
 
 SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
@@ -62,14 +59,14 @@ SRBJointModel::SRBJointModel(btDynamicsWorld* const world,
 		OgreBulletUtils::convert(jointYawAxis),
 		OgreBulletUtils::convert(jointMinAngle),
 		OgreBulletUtils::convert(jointMaxAngle), mOwnIndex);
-
-	addSensors();
 }
 
 SRBJointModel::~SRBJointModel() {
 }
 
 void SRBJointModel::initialize() {
+	collectSensors();
+
 	mJointPhysics->initialize();
 
 	mDataSinkPitch.initialize("", 3, LoggerConfiguration::LOG_DATA_QTY);
