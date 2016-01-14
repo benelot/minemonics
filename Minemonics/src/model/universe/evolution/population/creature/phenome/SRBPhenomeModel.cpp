@@ -489,18 +489,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
 
-		std::string jointMotorName = "";
-		switch(((ServoMotor*)joint->getMotors()[i])->getJointMotorIndex()){
-		case JointPhysics::RDOF_PITCH:
-			jointMotorName = "Pitch";
-			break;
-		case JointPhysics::RDOF_ROLL:
-			jointMotorName = "Roll";
-			break;
-		case JointPhysics::RDOF_YAW:
-			jointMotorName = "Yaw";
-			break;
-		}
 		switch (parentMorphogeneBranch->getControllerGenes()[i]->getControllerType()) {
 		case ControllerGene::SineControllerGene: {
 			SineController* controller =
@@ -509,7 +497,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getFrequency(),
 					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getXOffset(),
 					((SineControllerGene*) parentMorphogeneBranch->getControllerGenes()[i])->getYOffset());
-			controller->setLoggingID(boost::lexical_cast<std::string>(joint) + jointMotorName);
 
 			controller->initialize();
 			controller->addControlOutput(joint->getMotors()[i]);
@@ -525,7 +512,6 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 				chaoticControllerGene->getInitialY(),
 				chaoticControllerGene->getInitialZ(),
 				chaoticControllerGene->getSpeed());
-			controller->setLoggingID(boost::lexical_cast<std::string>(joint) + jointMotorName);
 
 			controller->addControlInput(joint->getAngleceptors()[i]); // Add the angleceptor as input
 			controller->addControlInput(joint->getVelocityceptors()[i]); // add the velocityceptor as input
@@ -638,6 +624,28 @@ void SRBPhenomeModel::generateBody() {
 //				mJointModels[i]->setLinearDamping(0.1f,0.1f,0.1f);
 //				mJointModels[i]->setAngularDamping(0.9f, 0.9f, 0.9f);
 //			}
+
+			// add controllers
+			for (int j = 0; j < mJointModels[i]->getMotors().size(); j++) {
+
+				std::string jointMotorName = "";
+				switch (((ServoMotor*) mJointModels[i]->getMotors()[j])->getJointMotorIndex()) {
+				case JointPhysics::RDOF_PITCH:
+					jointMotorName = "Pitch";
+					break;
+				case JointPhysics::RDOF_ROLL:
+					jointMotorName = "Roll";
+					break;
+				case JointPhysics::RDOF_YAW:
+					jointMotorName = "Yaw";
+					break;
+				}
+
+				getControllers()[i * 3 + j]->setLoggingID(
+					boost::lexical_cast<std::string>(mJointModels[i])
+						+ jointMotorName);
+
+			}
 
 			mJointModels[i]->initialize();
 
