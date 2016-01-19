@@ -1,0 +1,264 @@
+\documentclass{beamer}
+% use this instead for 16:9 aspect ratio:
+%\documentclass[aspectratio=169]{beamer}
+\usepackage{etex}
+\usepackage{verbatim}
+\reserveinserts{28}
+\usetheme{ETHbeamer}
+
+\colorlet{ETHcolor1}{ETHc}
+\colorlet{ETHcolor2}{ETHc}
+
+\author{Benjamin Ellenberger}
+\institute{INI:  Institute of Neuroinformatics}
+
+\title{Multiple chaotic central pattern generators with learning for legged locomotion and malfunction compensation}
+
+\date{2016-01-27}
+
+%%TODO: Optimize with presentation tips
+
+% uncomment if you do not want to use a department logo
+%\deplogofalse
+
+\usepackage{color}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{todonotes}
+
+\DeclareCaptionLabelFormat{algocaption}{Algorithm} % defines a new caption label as Algorithm x.y
+
+\lstnewenvironment{algorithm}[1][] %defines the algorithm listing environment
+{   
+    \lstset{ %this is the stype
+        numbers=left, 
+        numberstyle=\tiny,
+        basicstyle=\tiny, 
+        keywordstyle=\color{black}\bfseries\em,
+        keywords={, initialize, if, then, else, foreach, do, while, begin, end, repeat, until, } %add the keywords you want, or load a language as Rubens explains in his comment above.
+        numbers=left,
+        xleftmargin=.04\textwidth,
+        #1 % this is to add specific settings to an usage of this environment (for instnce, the caption and referable label)
+    }
+}
+{}
+
+\begin{document}
+
+\titleframe
+
+\section{}
+
+\section{Introduction to the basic mechanism}
+
+\begin{comment}
+-Many researchers have proved that CPG-based control is an effective method for locomotion control of bio-inspired walking robots.
+
+-A chaotic system can be controlled into showing periodic dynamics, so as to be implemented as a CPG to accomplish the locomotion control of a bio-inspired hexapod robot.
+
+-So far, the chaotic CPG system contains only one oscillator, which has difficulties dealing with leg malfunction.
+
+-We extend the single chaotic CPG system to multiple coupled CPG systems. Therefore each leg can perform identical patterns for normal walking or independent patterns to cope with malfunction.
+
+
+
+-In the end, we show the real robot experiments to verify the performance of our methods.
+
+Methods
+-The single chaotic CPG is extended to multiple CPGs, specifically to six for a hexapod robot and to four for a quadruped robot.
+-We choose a master CPG arbitrarily which dominates the pattern when synchronized, while the other CPGs are clients which can oscillate independently when desynchronized.
+-When some legs are malfunctioning, they lose synchronization and can show different patterns such that the robot can maintain its forward walking in a straight line.
+-An annealing-based learning algorithm is applied to automatically find the best matching oscillation frequencies to compensate for the malfunction.
+
+Results
+-The proposed algorithm was evaluated first in a physics simulation of a quadruped as well as a hexapod robot.
+-It was also tested on the real hexapod robot AMOSII with three scenarios where one, two and three legs were disabled.
+-In these three experiments, the robot deviated from its original trajectories and failed to pass the tunnel when the remaining legs with identical periods.
+-The robot can walk in a straight line and successfully pass the tunnel when the learned combination of leg periods was employed.
+
+Conclusions
+-We demonstrate that multiple coupled chaotic CPGs with learning can be used for legged locomotion and malfunction compensation.
+-When all legs are function, al the CPG units stay synchronized to show identical movement; if some legs are malfunctioning, the CPGs can desynchronize and learn a proper combination of leg periods to compensate for the malfunctioning legs.
+\end{comment}
+
+
+% Are we alone in the universe?
+\begin{minimalframe}
+    \hspace*{-1.1cm}
+    \vspace*{3cm}
+    \includegraphics[width=1.2\textwidth,clip]{figs/creatures/Minemonics-05112015_190947481.jpg}
+    
+\end{minimalframe}
+
+\begin{frame}
+\frametitle{Normal Frame}
+\(x_i(t+1) = \sigma\left(\theta_i + \sum\limits^2_{j=1}w_{ij} x_j(t) + c_i^{(p)(t)}\right) \, for~i \in \{1,2\}\)
+\todo[inline]{Give the Chapter 7 some meaningful content.}
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Frame}
+\(c_i^{(p)} = \mu^{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\)
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Frame}
+\(\Delta_j(t) = x_j(t) = x_j(t-p)\)
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Frame}
+\(\mu^{(p)} = \mu^{(p)}(t) + \lambda\frac{\Delta^2_1(t) + \Delta^2_2(t)}{p} \, with~\lambda=0.05\)
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Normal Frame}
+\begin{algorithm}[mathescape]
+initialize $C(1)= [1/4 1/24; 4; 4; 4; 4; 4]; \Delta\phi= 0.0; E_1 = 0.0$
+repeat:
+    At trials n
+    do
+        randomly pick a leg l, $l \in [R1; R2; R3; L1; L2; L3]$
+        change the period of leg l to a random value, $P(l) \in [4; 5; 6; 8; 9]$
+        compare this combination of leg period, $C'(n)$, to the walking records
+    until $C'(n)$ is a new combination of leg periods
+    
+    run the robot
+    // calculate the evaluation function and its variation
+    $E_n = \Delta\phi$
+    $\Delta E = E_n - E_{n-1}$
+    
+    decide the combination of leg periods
+    
+    if $\Delta E < 0$ then
+        $C(n) = C'(n)$
+    else
+        if  $x \geq e^{\beta \Delta E}$ then
+            $C(n) = C'(n)$
+        else
+            $C(n) = C(n - 1)$
+        end if
+    end if
+until: The evaluation function $E_n$ is less than a required value $E_{req}$
+\end{algorithm}
+\end{frame}
+
+\begin{frame}
+\newcommand{\quadrat}{(0,0mm)--(0mm,5mm)--(5mm,5mm)--(5mm,0mm)--(0mm,0mm);}
+\begin{center}
+    \hspace{-8mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHa,fill=ETHa] \quadrat}\label{ETH1}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHb,fill=ETHb]\quadrat}\label{ETH2}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHc,fill=ETHc]\quadrat}\label{ETH3}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHd,fill=ETHd] \quadrat}\label{ETH4}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHe,fill=ETHe] \quadrat}\label{ETH5}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHf,fill=ETHf] \quadrat}\label{ETH6}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHg,fill=ETHg] \quadrat}\label{ETH7}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHh,fill=ETHh] \quadrat}\label{ETH8}
+    \end{tikzpicture}
+    \hspace{10mm}
+    \begin{tikzpicture}[overlay]
+        {\draw[ETHi,fill=ETHi] \quadrat}\label{ETH9}
+    \end{tikzpicture}\\
+    \vspace*{1em}
+    {\Huge \textbf{Discussion!}}
+\end{center}
+\vspace*{1.5em}
+
+\begin{itemize}
+\item Any questions?
+\item What experiments do you have in mind?
+\item What else would you change, extend, enhance, improve etc.?
+\item If you have any ideas later, email me: be.ellenberger@gmail.com
+\item You can look at my progress: https://github.com/benelot/minemonics
+\end{itemize}
+
+\end{frame}
+
+
+\frame{
+
+  \frametitle{References}
+  \begin{itemize}
+  \item Sims K. - Evolving Virtual Creatures (1994)
+  \item Sims K. - Evolving 3D Morphology and Behavior by Competition (1994)
+  \item Krcah P. - Evolving Virtual Creatures Revisited (2007)
+  \item Corron N. et al. - Controlling Chaos with Simple Limiters (2000)
+  \item Schmidt N. - Bootstrapping perception using information theory: case studies in a quadruped running robot running on different grounds (2013)
+  \item Stoop R. - Theory and Simulation of Neural Networks (2014)
+  \end{itemize}
+}
+\note{}
+
+\begin{comment}
+
+% Example slides
+\begin{frame}
+\textbf{Some mathematical specialities}
+
+\ETHbox{0.8\textwidth}{% define the ETHbox
+  \begin{theorem}[Murphy (1949)]\label{murphy}
+    Anything that can go wrong, will go wrong.
+  \end{theorem}
+}
+
+\begin{proof}
+  A special case of Theorem \ref{murphy} is proven in %\citet{matthews1995}.
+\end{proof}
+\end{frame}
+
+\begin{titlestyleframe}
+\frametitle{Title Page}
+
+\color{white} The title page is created using the \texttt{\textbackslash titleframe} command.
+
+The title page background can also be used on other frames (or for a customised title frame) using the \texttt{titlestyleframe} environment.
+\end{titlestyleframe}
+
+\begin{frame}
+\frametitle{Normal Frame}
+The normal frame looks like this. It is created using the \texttt{frame} environment.
+\end{frame}
+\begin{inverseframe}
+  \frametitle{Inverse Slides}
+  %\color{white}
+The inverted frame looks like this. It is created using the \texttt{inverseframe} environment.
+
+ 
+\end{inverseframe}
+
+\begin{minimalframe}
+  \frametitle{Minimal Frame}
+The minimal frame looks like this. It is created using the \texttt{minimalframe} environment.
+  
+\end{minimalframe}
+
+\begin{minimalframe} 
+\end{minimalframe}
+
+\end{comment}
+
+\end{document}

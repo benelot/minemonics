@@ -1,0 +1,261 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8673,        252]
+NotebookOptionsPosition[      8396,        238]
+NotebookOutlinePosition[      8732,        253]
+CellTagsIndexPosition[      8689,        250]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  StyleBox[
+   RowBox[{
+   "Presentation", " ", "of", " ", "the", " ", "2", " ", "Neuron", " ", 
+    "circuit"}], "Title"], 
+  StyleBox[" ", "Title"], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       StyleBox["\[Equal]",
+        FontSize->18], 
+       StyleBox[
+        RowBox[{"2", " ", "Neuron", " ", "circuit"}],
+        FontSize->18], 
+       StyleBox["\[Equal]",
+        FontSize->18], "\[IndentingNewLine]", 
+       RowBox[{
+        StyleBox[
+         RowBox[{"the", " ", "double"}], "Text"], 
+        StyleBox["-", "Text"], 
+        StyleBox[
+         RowBox[{"scroll", " ", "attractor", " ", 
+          RowBox[{"(", 
+           RowBox[{"sometimes", " ", "known", " ", "as", " ", 
+            RowBox[{"Chua", "'"}], "s", " ", "attractor"}], ")"}], " ", "is", 
+          " ", "a", " ", "strange", " ", "attractor", " ", "observed", " ", 
+          "from", " ", "a", " ", "physical", " ", "electronic", " ", 
+          "chaotic", " ", "circuit", " ", 
+          RowBox[{"(", 
+           RowBox[{"generally", ",", 
+            RowBox[{
+             RowBox[{"Chua", "'"}], "s", " ", "circuit"}]}], ")"}], " ", 
+          "with", " ", "a", " ", "single", " ", "nonlinear", " ", "resistor", 
+          " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"see", " ", 
+             RowBox[{"Chua", "'"}], "s", " ", "Diode"}], ")"}], ".", "The"}], 
+          " ", "double"}], "Text"], 
+        StyleBox["-", "Text"], 
+        StyleBox[
+         RowBox[{
+         "scroll", " ", "system", " ", "is", " ", "often", " ", "described", 
+          " ", "by", " ", "a", " ", "system", " ", "of", " ", "three", " ", 
+          "nonlinear", " ", "ordinary", " ", "differential", " ", "equations",
+           " ", "and", " ", "a", " ", "3"}], "Text"], 
+        StyleBox["-", "Text"], 
+        StyleBox[
+         RowBox[{"segment", " ", "piecewise"}], "Text"], 
+        StyleBox["-", "Text"], 
+        StyleBox[
+         RowBox[{"linear", " ", "equation", " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"see", " ", 
+             RowBox[{"Chua", "'"}], "s", " ", "equations"}], ")"}], ".", 
+           "This"}], " ", "makes", " ", "the", " ", "system", " ", "easily", 
+          " ", "simulated", " ", "numerically", " ", "and", " ", "easily", 
+          " ", "manifested", " ", "physically", " ", "due", " ", "to", " ", 
+          RowBox[{"Chua", "'"}], "s", " ", 
+          RowBox[{"circuits", "'"}], " ", "simple", " ", 
+          RowBox[{"design", "."}]}], "Text"], "\[IndentingNewLine]", "-", 
+        RowBox[{"http", ":"}]}]}], "//", 
+      RowBox[{
+       RowBox[{"www", ".", "chuacircuits", ".", "com"}], "/", 
+       "\[IndentingNewLine]", 
+       RowBox[{"-", 
+        StyleBox[
+         RowBox[{"https", ":"}],
+         FontSize->14]}]}]}], 
+     StyleBox["//",
+      FontSize->14], 
+     RowBox[{
+      StyleBox[
+       RowBox[{
+        RowBox[{
+         RowBox[{"en", ".", "wikipedia", ".", "org"}], "/", "wiki"}], "/", 
+        "Multiscroll_attractor"}],
+       FontSize->14], 
+      StyleBox["\[IndentingNewLine]",
+       FontSize->14], 
+      StyleBox[
+       RowBox[{"dx", "/", "dt"}], "Code"]}]}], 
+    StyleBox["=", "Code"], 
+    StyleBox[
+     RowBox[{
+      RowBox[{
+       RowBox[{"c1", "*", 
+        RowBox[{"(", 
+         RowBox[{"y", "-", "x", "-", 
+          RowBox[{"f", 
+           RowBox[{"(", "x", ")"}]}]}], ")"}]}], " ", "//", " ", 
+       RowBox[{"m0", ":", " ", 
+        RowBox[{"slope", " ", "in", " ", "outer", " ", "region"}]}]}], "\n", 
+      "   ", 
+      RowBox[{
+       RowBox[{"dy", "/", "dt"}], "=", 
+       RowBox[{
+        RowBox[{"c2", "*", 
+         RowBox[{"(", 
+          RowBox[{"x", "-", "y", "+", "z"}], ")"}]}], "    ", "//", " ", 
+        RowBox[{"m1", ":", " ", 
+         RowBox[{"slope", " ", "in", " ", "inner", " ", "region"}]}]}]}], 
+      "\n", "   ", 
+      RowBox[{
+       RowBox[{"dz", "/", "dt"}], "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "c3"}], "*", "y"}], "         ", "//", " ", 
+        RowBox[{"b", ":", " ", "Breakpoints"}]}]}], "\n", "   ", 
+      RowBox[{
+       RowBox[{"f", 
+        RowBox[{"(", "x", ")"}]}], "=", 
+       RowBox[{
+        RowBox[{"m1", "*", "x"}], "+", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"m0", "-", "m1"}], ")"}], "/", "2"}], "*", 
+         RowBox[{"(", 
+          RowBox[{"|", 
+           RowBox[{"x", "+", "1"}], "|", 
+           RowBox[{"-", 
+            RowBox[{"|", 
+             RowBox[{"x", "-", "1"}], "|"}]}]}], ")"}]}]}]}]}], "Code"]}], 
+   "\[IndentingNewLine]", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6615983897242317`*^9, 3.6615985635652437`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"theta", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Neuron", " ", "biases"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"w", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0", ",", "1"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "0"}], "}"}]}], "}"}]}], ";", " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Neuron", " ", "weights"}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"x", "  ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}]}], ";", " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"neuron", " ", "activity", " ", "states", " ", "x_i", 
+      RowBox[{"(", "t", ")"}]}], " ", "=", " ", 
+     RowBox[{"[", 
+      RowBox[{"0", ",", "1"}], "]"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"c", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0"}], "}"}]}], ";", " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "control", " ", "signals", " ", "depending", " ", "on", " ", "the", " ", 
+     "desired", " ", "period", " ", 
+     RowBox[{"(", 
+      RowBox[{"c_i", " ", "=", " ", 
+       RowBox[{"0", " ", "is", " ", "uncontrolled"}]}], " "}]}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sigma", "[", 
+     RowBox[{"{", "x_", "}"}], "]"}], " ", ":=", " ", 
+    RowBox[{"{", 
+     RowBox[{"1", "/", 
+      RowBox[{"(", 
+       RowBox[{"1", "+", " ", 
+        RowBox[{"Exp", "[", 
+         RowBox[{"-", "x"}], "]"}]}], ")"}]}], "}"}]}], ";", " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Sigmoid", " ", "function"}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"neuronStep", " ", ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"w", ",", "x", ",", "c"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"x", " ", "=", " ", 
+        RowBox[{"sigma", "[", 
+         RowBox[{"theta", " ", "+", " ", 
+          RowBox[{"Total", "[", 
+           RowBox[{"w", "*", "x"}], "]"}], " ", "+", " ", "c"}], "]"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"Return", " ", "[", "x", "]"}], ";"}]}], "\[IndentingNewLine]",
+      "]"}]}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n", " ", "=", " ", "10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"neuronPlot", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{"neuronStep", ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"neuronPlot", ",", 
+     RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<x_1\>\"", ",", "\"\<x_2\>\""}], "}"}]}]}], "]"}], 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6615985200832872`*^9, 3.6616006222013283`*^9}}]
+},
+WindowSize->{2880, 1527},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 4784, 130, 323, "Input"],
+Cell[5344, 152, 3048, 84, 363, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
