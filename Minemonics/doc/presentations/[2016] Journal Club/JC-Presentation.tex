@@ -35,7 +35,7 @@
         numberstyle=\tiny,
         basicstyle=\tiny, 
         keywordstyle=\color{black}\bfseries\em,
-        keywords={, initialize, if, then, else, foreach, do, while, begin, end, repeat, until, } %add the keywords you want, or load a language as Rubens explains in his comment above.
+        keywords={, initialize, if, then, else, foreach, do, while, begin, end, repeat, until, run, } %add the keywords you want, or load a language as Rubens explains in his comment above.
         numbers=left,
         xleftmargin=.04\textwidth,
         #1 % this is to add specific settings to an usage of this environment (for instnce, the caption and referable label)
@@ -81,47 +81,154 @@ Conclusions
 -When all legs are function, al the CPG units stay synchronized to show identical movement; if some legs are malfunctioning, the CPGs can desynchronize and learn a proper combination of leg periods to compensate for the malfunctioning legs.
 \end{comment}
 
+\begin{frame}
+\frametitle{Meet AMOS II}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/AMOSII-cockroach.pdf}
+\end{figure}
+\end{frame}
 
-% Are we alone in the universe?
 \begin{minimalframe}
-    \hspace*{-1.1cm}
-    \vspace*{3cm}
-    \includegraphics[width=1.2\textwidth,clip]{figs/creatures/Minemonics-05112015_190947481.jpg}
-    
+    \vspace*{0.5cm}
+    \begin{columns}
+   	\column{0.55\textwidth}
+   	\hspace*{-0.1cm}
+ 		\includegraphics[height=0.9\textheight]{figs/Processing-network-overview.pdf}
+     
+  	\column{0.6\textwidth}
+  	\hspace*{-2cm}
+    		\visible<1->{
+      		\begin{itemize}
+    				\item A Preprocessing
+    					\begin{itemize}
+    					\scriptsize
+    					\item Denoising
+    					\item Shaping
+    					\item Orientation signal preparation
+    					\end{itemize}
+    				\item B Adaptive neural chaos control (CPG)
+    					\begin{itemize}
+    					\scriptsize
+    					\item Discrete time dynamics
+    					\item Sigmoid activation function
+    					\item Additional control signal $c$ based on period p appplied every p+1 time step
+    					\end{itemize}
+    				\item C CPG post-processing
+    						\begin{itemize}
+    						\scriptsize
+    						\item time window
+    						\item hysteresis
+    						\item signal integration
+    						\end{itemize}
+    				\item D Neural motor control
+    						\begin{itemize}
+    						\scriptsize
+    						\item Phase switching network (PSN)
+    						\item Velocity regulation network (VRN)
+    						\end{itemize}
+    				\item E Delay lines
+    			\end{itemize}
+      	}	
+  \end{columns}    
 \end{minimalframe}
 
 \begin{frame}
-\frametitle{Normal Frame}
-\(x_i(t+1) = \sigma\left(\theta_i + \sum\limits^2_{j=1}w_{ij} x_j(t) + c_i^{(p)(t)}\right) \, for~i \in \{1,2\}\)
-\todo[inline]{Give the Chapter 7 some meaningful content.}
+\frametitle{Chaotic CPG overview}
+\begin{figure}
+\hspace*{-1cm}
+\includegraphics[width=0.72\textwidth]{figs/CPG-overview.pdf}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{Normal Frame}
-\(c_i^{(p)} = \mu^{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\)
+\frametitle{CPG activity (discrete time dynamics)}
+\begin{align*}
+\text{\textbf{Neuron state}}&\\
+x_i(t+1) &= \sigma\left(\theta_i + \sum\limits^2_{j=1}w_{ij} x_j(t) + c_i^{(p)(t)}\right) \, for~i \in \{1,2\}\\
+\text{\textbf{Control signal}}&\\
+c_i^{(p)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
+\Delta_j(t) &= x_j(t) = x_j(t-p)\\
+\mu_{(p)} &= \mu_{(p)}(t) + \lambda\frac{\Delta^2_1(t) + \Delta^2_2(t)}{p} \, with~\lambda=0.05
+\end{align*}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Postprocessing motor neuron signals}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/Postprocessing-signals.pdf}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{Normal Frame}
-\(\Delta_j(t) = x_j(t) = x_j(t-p)\)
+\frametitle{Different hexapod gaits}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/different-hexapod-gaits.pdf}
+\end{figure}
 \end{frame}
 
 \begin{frame}
-\frametitle{Normal Frame}
-\(\mu^{(p)} = \mu^{(p)}(t) + \lambda\frac{\Delta^2_1(t) + \Delta^2_2(t)}{p} \, with~\lambda=0.05\)
+\frametitle{Sketched walking patterns}
+\begin{figure}
+\center
+\includegraphics[width=0.8\textwidth]{figs/walking-pattern-sketch.pdf}
+\end{figure}
 \end{frame}
 
+\begin{frame}
+\frametitle{Motor pattern learning neuron}
+\begin{figure}
+\center
+\includegraphics[width=0.8\textwidth]{figs/motor-pattern-learning.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Multi CPG extension}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/multi-CPG-extension.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Client CPG}
+\begin{figure}
+\center
+\includegraphics[width=0.8\textwidth]{figs/client-CPG.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Synchronous and asynchronous CPGs}
+    \vspace*{-0.5cm}
+\begin{figure}
+\center
+\includegraphics[width=0.55\textwidth]{figs/synchrony-asynchrony.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Trajectory deviation measure}
+\begin{figure}
+\center
+\includegraphics[width=0.8\textwidth]{figs/deviation-measure.pdf}
+\end{figure}
+\end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Normal Frame}
+\frametitle{Simulated annealing for leg period learning}
 \begin{algorithm}[mathescape]
 initialize $C(1)= [1/4 1/24; 4; 4; 4; 4; 4]; \Delta\phi= 0.0; E_1 = 0.0$
 repeat:
-    At trials n
+    At repetition n
     do
         randomly pick a leg l, $l \in [R1; R2; R3; L1; L2; L3]$
         change the period of leg l to a random value, $P(l) \in [4; 5; 6; 8; 9]$
-        compare this combination of leg period, $C'(n)$, to the walking records
+        compare this combination of leg periods, $C'(n)$, to the leg periods of $C(n-1)$
     until $C'(n)$ is a new combination of leg periods
     
     run the robot
@@ -129,12 +236,11 @@ repeat:
     $E_n = \Delta\phi$
     $\Delta E = E_n - E_{n-1}$
     
-    decide the combination of leg periods
-    
+    // choose the combination of leg periods
     if $\Delta E < 0$ then
         $C(n) = C'(n)$
     else
-        if  $x \geq e^{\beta \Delta E}$ then
+        if  $X \geq e^{-\beta \Delta E}$ then // $X \in [0;1], learning~rate~\beta$ 
             $C(n) = C'(n)$
         else
             $C(n) = C(n - 1)$
@@ -142,6 +248,39 @@ repeat:
     end if
 until: The evaluation function $E_n$ is less than a required value $E_{req}$
 \end{algorithm}
+\end{frame}
+
+\begin{frame}
+\frametitle{Learning process}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/learning-process.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Different leg disabilities}
+\vspace*{-0.6cm}
+\begin{figure}
+\hspace*{-1cm}
+\includegraphics[width=0.58\textwidth]{figs/disable-legs-list-1.pdf}
+\includegraphics[width=0.58\textwidth]{figs/disable-legs-list-2.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Leg periods after R1 compensation}
+\vspace*{-0.35cm}
+\begin{figure}
+\hspace*{-1.3cm}
+\includegraphics[width=0.8\textwidth]{figs/periods-after-learning.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+    \vspace*{1cm}
+    \hspace*{1.1cm}
+    \includegraphics[width=0.8\textwidth]{figs/real-experiments.pdf}
 \end{frame}
 
 \begin{frame}
@@ -190,10 +329,6 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 
 \begin{itemize}
 \item Any questions?
-\item What experiments do you have in mind?
-\item What else would you change, extend, enhance, improve etc.?
-\item If you have any ideas later, email me: be.ellenberger@gmail.com
-\item You can look at my progress: https://github.com/benelot/minemonics
 \end{itemize}
 
 \end{frame}

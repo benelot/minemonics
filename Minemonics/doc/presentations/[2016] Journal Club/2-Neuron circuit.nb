@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     29960,        613]
-NotebookOptionsPosition[     29510,        594]
-NotebookOutlinePosition[     29846,        609]
-CellTagsIndexPosition[     29803,        606]
+NotebookDataLength[     30352,        627]
+NotebookOptionsPosition[     29902,        608]
+NotebookOutlinePosition[     30238,        623]
+CellTagsIndexPosition[     30195,        620]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -183,25 +183,31 @@ Cell[BoxData[{
       RowBox[{"0", ",", "1"}], "]"}]}], " ", "*)"}], "\[IndentingNewLine]", 
    RowBox[{"c", " ", "=", " ", 
     RowBox[{"{", 
-     RowBox[{"0", ",", "0"}], "}"}]}], ";", " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "control", " ", "signals", " ", "depending", " ", "on", " ", "the", " ", 
-     "desired", " ", "period", " ", 
-     RowBox[{"(", 
-      RowBox[{"c_i", " ", "=", " ", 
-       RowBox[{"0", " ", "is", " ", "uncontrolled"}]}], " "}]}], "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"0", ",", "0"}], "}"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "control", " ", "signals", " ", "depending", " ", "on", " ", "the", " ", 
+    "desired", " ", "period", " ", 
+    RowBox[{"(", 
+     RowBox[{"c_i", " ", "=", " ", 
+      RowBox[{"0", " ", "is", " ", "uncontrolled"}]}], " "}]}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{
     RowBox[{"Sigma", "[", "x_", "]"}], " ", ":=", " ", 
     RowBox[{"1", "/", 
      RowBox[{"(", 
       RowBox[{"1", "+", " ", 
        RowBox[{"Exp", "[", 
-        RowBox[{"-", "x"}], "]"}]}], ")"}]}]}], ";", " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{"Sigmoid", " ", "function"}], "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
+        RowBox[{"-", "x"}], "]"}]}], ")"}]}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Sigmoid", " ", "function"}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
    RowBox[{"neuronStep", " ", ":=", " ", 
     RowBox[{"Module", "[", 
      RowBox[{
@@ -215,6 +221,14 @@ Cell[BoxData[{
        RowBox[{"x", " ", "=", " ", "y"}], ";", "\[IndentingNewLine]", 
        RowBox[{"Return", " ", "[", "x", "]"}]}]}], "]"}]}], ";"}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"limitedNeuronStep", " ", ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", 
+      RowBox[{"Return", "[", "x", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"n", " ", "=", " ", "1000"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -233,7 +247,7 @@ Cell[BoxData[{
      RowBox[{"\"\<x_1\>\"", ",", "\"\<x_2\>\""}], "}"}]}], ",", 
    RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]}], "Input",
  CellChangeTimes->{{3.6615985200832872`*^9, 3.6616006222013283`*^9}, {
-  3.66220111000203*^9, 3.662203391913476*^9}}],
+  3.66220111000203*^9, 3.662203978791916*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{{}, 
@@ -583,7 +597,7 @@ CkHUVgf8XTnw8imKUzhQZd2y4ckgwv8AGkFqCg==
   PlotRangeClipping->True,
   PlotRangePadding->{{0.01680583456624745, 0.01680583456624745}, {
    0.019562374581277388`, 0.019562374581277388`}}]], "Output",
- CellChangeTimes->{{3.66220315554848*^9, 3.66220339276478*^9}}]
+ CellChangeTimes->{{3.66220315554848*^9, 3.662203985842588*^9}}]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -610,11 +624,11 @@ CellTagsIndex->{}
 Notebook[{
 Cell[557, 20, 4784, 130, 323, "Input"],
 Cell[CellGroupData[{
-Cell[5366, 154, 3060, 81, 363, "Input"],
-Cell[8429, 237, 20871, 348, 412, "Output"]
+Cell[5366, 154, 3451, 95, 451, "Input"],
+Cell[8820, 251, 20872, 348, 412, "Output"]
 }, Open  ]],
-Cell[29315, 588, 94, 1, 32, InheritFromParent],
-Cell[29412, 591, 94, 1, 32, InheritFromParent]
+Cell[29707, 602, 94, 1, 32, InheritFromParent],
+Cell[29804, 605, 94, 1, 32, InheritFromParent]
 }
 ]
 *)
