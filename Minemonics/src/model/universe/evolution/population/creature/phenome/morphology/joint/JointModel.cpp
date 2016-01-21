@@ -52,59 +52,89 @@ JointModel::~JointModel() {
 }
 
 void JointModel::addSensors() {
-	JointAngleceptor* angleceptor = new JointAngleceptor(this,
-		JointPhysics::RDOF_PITCH);
-	mSensors.push_back(angleceptor);
-	mAngleceptors.push_back(angleceptor);
+	{
+		JointAngleceptor* angleceptor = new JointAngleceptor(this,
+			JointPhysics::RDOF_PITCH);
+		mSensors.push_back(angleceptor);
+		mAngleceptors.push_back(angleceptor);
+	}
 
-	angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_YAW);
-	mSensors.push_back(angleceptor);
-	mAngleceptors.push_back(angleceptor);
+	{
+		JointAngleceptor* angleceptor = new JointAngleceptor(this,
+			JointPhysics::RDOF_YAW);
+		mSensors.push_back(angleceptor);
+		mAngleceptors.push_back(angleceptor);
+	}
+	{
 
-	angleceptor = new JointAngleceptor(this, JointPhysics::RDOF_ROLL);
-	mSensors.push_back(angleceptor);
-	mAngleceptors.push_back(angleceptor);
+		JointAngleceptor* angleceptor = new JointAngleceptor(this,
+			JointPhysics::RDOF_ROLL);
+		mSensors.push_back(angleceptor);
+		mAngleceptors.push_back(angleceptor);
+	}
 
-	JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
-		JointPhysics::RDOF_PITCH);
-	mSensors.push_back(velocityceptor);
-	mVelocityceptors.push_back(velocityceptor);
+	{
+		JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
+			JointPhysics::RDOF_PITCH);
+		mSensors.push_back(velocityceptor);
+		mVelocityceptors.push_back(velocityceptor);
+	}
 
-	velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_YAW);
-	mSensors.push_back(velocityceptor);
-	mVelocityceptors.push_back(velocityceptor);
+	{
+		JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
+			JointPhysics::RDOF_YAW);
+		mSensors.push_back(velocityceptor);
+		mVelocityceptors.push_back(velocityceptor);
+	}
 
-	velocityceptor = new JointVelocityceptor(this, JointPhysics::RDOF_ROLL);
-	mSensors.push_back(velocityceptor);
-	mVelocityceptors.push_back(velocityceptor);
+	{
+		JointVelocityceptor* velocityceptor = new JointVelocityceptor(this,
+			JointPhysics::RDOF_ROLL);
+		mSensors.push_back(velocityceptor);
+		mVelocityceptors.push_back(velocityceptor);
+	}
 
-	JointForceceptor* forceceptor = new JointForceceptor(this,
-		JointPhysics::RDOF_PITCH);
-	mSensors.push_back(forceceptor);
-	mForceceptors.push_back(forceceptor);
+	{
+		JointForceceptor* forceceptor = new JointForceceptor(this,
+			JointPhysics::RDOF_PITCH);
+		mSensors.push_back(forceceptor);
+		mForceceptors.push_back(forceceptor);
+	}
 
-	forceceptor = new JointForceceptor(this, JointPhysics::RDOF_YAW);
-	mSensors.push_back(forceceptor);
-	mForceceptors.push_back(forceceptor);
+	{
+		JointForceceptor* forceceptor = new JointForceceptor(this,
+			JointPhysics::RDOF_YAW);
+		mSensors.push_back(forceceptor);
+		mForceceptors.push_back(forceceptor);
+	}
 
-	forceceptor = new JointForceceptor(this, JointPhysics::RDOF_ROLL);
-	mSensors.push_back(forceceptor);
-	mForceceptors.push_back(forceceptor);
+	{
+		JointForceceptor* forceceptor = new JointForceceptor(this,
+			JointPhysics::RDOF_ROLL);
+		mSensors.push_back(forceceptor);
+		mForceceptors.push_back(forceceptor);
+	}
 
-	JointLimitceptor* limitceptor = new JointLimitceptor(this,
-		JointPhysics::RDOF_PITCH, JointLimitceptor::BOTH_LIMITS);
-	mSensors.push_back(limitceptor);
-	mLimitceptors.push_back(limitceptor);
+	{
+		JointLimitceptor* limitceptor = new JointLimitceptor(this,
+			JointPhysics::RDOF_PITCH, JointLimitceptor::BOTH_LIMITS);
+		mSensors.push_back(limitceptor);
+		mLimitceptors.push_back(limitceptor);
+	}
 
-	limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_YAW,
-		JointLimitceptor::BOTH_LIMITS);
-	mSensors.push_back(limitceptor);
-	mLimitceptors.push_back(limitceptor);
+	{
+		JointLimitceptor* limitceptor = new JointLimitceptor(this,
+			JointPhysics::RDOF_YAW, JointLimitceptor::BOTH_LIMITS);
+		mSensors.push_back(limitceptor);
+		mLimitceptors.push_back(limitceptor);
+	}
 
-	limitceptor = new JointLimitceptor(this, JointPhysics::RDOF_ROLL,
-		JointLimitceptor::BOTH_LIMITS);
-	mSensors.push_back(limitceptor);
-	mLimitceptors.push_back(limitceptor);
+	{
+		JointLimitceptor* limitceptor = new JointLimitceptor(this,
+			JointPhysics::RDOF_ROLL, JointLimitceptor::BOTH_LIMITS);
+		mSensors.push_back(limitceptor);
+		mLimitceptors.push_back(limitceptor);
+	}
 }
 
 void JointModel::collectSensors() {

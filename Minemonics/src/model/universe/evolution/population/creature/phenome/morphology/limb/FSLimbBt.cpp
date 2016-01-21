@@ -118,17 +118,19 @@ void FSLimbBt::initialize() {
 	if (!mCollisionShape) {
 		btVector3 halfExtents(mDimensions.x * 0.5f, mDimensions.y * 0.5f,
 			mDimensions.z * 0.5f);
-		switch (mType) {
-		case LimbPhysics::BLOCK:
-			mCollisionShape = new btBoxShape(halfExtents);
-			break;
-		case LimbPhysics::CAPSULE:
-			mCollisionShape = new btCapsuleShape(btScalar(mDimensions.x * 0.5f),
-				btScalar(mDimensions.y));
-			break;
-		case LimbPhysics::UNKNOWN:
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " LimbBt received 'Unknown' as a limb type.\n";
-			exit(-1);
+		if (!mCollisionShape) {
+			switch (mType) {
+			case LimbPhysics::BLOCK:
+				mCollisionShape = new btBoxShape(halfExtents);
+				break;
+			case LimbPhysics::CAPSULE:
+				mCollisionShape = new btCapsuleShape(
+					btScalar(mDimensions.x * 0.5f), btScalar(mDimensions.y));
+				break;
+			case LimbPhysics::UNKNOWN:
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::fatal)<< " LimbBt received 'Unknown' as a limb type.\n";
+				exit(-1);
+			}
 		}
 
 		mCollisionShape->calculateLocalInertia(btScalar(mMass), mInertia);
@@ -141,10 +143,16 @@ void FSLimbBt::initialize() {
 			btQuaternion(mInitialXOrientation, mInitialYOrientation,
 				mInitialZOrientation, mInitialWOrientation));
 
-		mMotionState = new btDefaultMotionState(startTransform);
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(mMass),
-			mMotionState, mCollisionShape, mInertia);
-		mBody = new btRigidBody(rbInfo);
+		if (!mMotionState) {
+			mMotionState = new btDefaultMotionState(startTransform);
+
+		}
+
+		if (!mBody) {
+			btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(mMass),
+				mMotionState, mCollisionShape, mInertia);
+			mBody = new btRigidBody(rbInfo);
+		}
 		mBody->setDeactivationTime(
 			PhysicsConfiguration::BULLET_DEACTIVATION_TIME);
 		mBody->setSleepingThresholds(
@@ -345,7 +353,9 @@ void FSLimbBt::calm() {
 
 void FSLimbBt::generateLink(btMultiBody* multiBody, void* const limbModel,
 	btVector3 origin, btQuaternion rotation, int index) {
-	mLink = new btMultiBodyLinkCollider(multiBody, index);
+	if (!mLink) {
+		mLink = new btMultiBodyLinkCollider(multiBody, index);
+	}
 	mLink->setCollisionShape(mCollisionShape);
 
 	btTransform tr;

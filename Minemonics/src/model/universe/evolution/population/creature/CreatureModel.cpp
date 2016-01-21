@@ -26,7 +26,8 @@ CreatureModel::_Init CreatureModel::_initializer;
 CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
 	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
-		PhysicsController::RigidbodyModel), mDynasty(0), mMutated(false),mLastCreatureLength(-1) {
+		PhysicsController::RigidbodyModel), mDynasty(0), mMutated(false), mLastCreatureLength(
+		-1) {
 }
 
 CreatureModel::CreatureModel(PopulationModel* const populationModel,
@@ -35,7 +36,7 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
 		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
 		position), mFitnessScoreCalculated(false), mPosition(position), mDynasty(
-		0), mMutated(false),mLastCreatureLength(-1) {
+		0), mMutated(false), mLastCreatureLength(-1) {
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
 		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
@@ -43,20 +44,22 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	NameGenerator nameGenerator; //set first name of creature
 	mFirstName = nameGenerator.generateFirstName();
 
-	switch (mPhysicsModelType) { // add the phenome model depending on physics model type
-	case PhysicsController::FeatherstoneModel:
-		mPhenotypeModel = new FSPhenomeModel(this);
-		break;
-	case PhysicsController::RigidbodyModel:
-		mPhenotypeModel = new SRBPhenomeModel(this);
-		break;
-	default:
-		break;
+	if (!mPhenotypeModel) {
+		switch (mPhysicsModelType) { // add the phenome model depending on physics model type
+		case PhysicsController::FeatherstoneModel:
+			mPhenotypeModel = new FSPhenomeModel(this);
+			break;
+		case PhysicsController::RigidbodyModel:
+			mPhenotypeModel = new SRBPhenomeModel(this);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
 CreatureModel::CreatureModel(const CreatureModel& creatureModel) :
-	mGenotype(&creatureModel.mGenotype),mLastCreatureLength(-1) {
+	mGenotype(&creatureModel.mGenotype), mLastCreatureLength(-1) {
 
 	mFirstName = creatureModel.mFirstName;
 	mCulled = creatureModel.mCulled;
@@ -258,9 +261,8 @@ double CreatureModel::getCreatureSize() {
  */
 double CreatureModel::getCreatureVolume() const {
 	double totalVolume = 0;
-	for (std::vector<Gene*>::const_iterator it =
-		mGenotype.getGenes().begin(); it != mGenotype.getGenes().end();
-		it++) {
+	for (std::vector<Gene*>::const_iterator it = mGenotype.getGenes().begin();
+		it != mGenotype.getGenes().end(); it++) {
 		if ((*it)->getType() == Gene::MorphoGene) {
 			totalVolume += ((Morphogene*) *it)->getX()
 				* ((Morphogene*) *it)->getY() * ((Morphogene*) *it)->getZ();
