@@ -18,8 +18,22 @@ const double MorphologyConfiguration::LIMB_MIN_SIZE = 0.05f; /**!< (in meters) T
 
 const double MorphologyConfiguration::LIMB_MAX_SIZE = 1.0f; /**!< (in meters) The limb maximum dimension size*/
 
-const double MorphologyConfiguration::LIMB_MIN_DENSITY = 1.0f
-	/ pow(MorphologyConfiguration::LIMB_MIN_SIZE, 3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
+/**
+ * The density of fat in kg per cubic meter
+ *  https://en.wikipedia.org/wiki/Muscle#cite_ref-Urbancheka_2001_6-0
+ */
+//TODO: Not used yet in this simulator
+const double MorphologyConfiguration::FAT_DENSITY = 900; // kg/m^3
+
+/**
+ * The density of muscle in kg per cubic meter
+ * https://en.wikipedia.org/wiki/Muscle#cite_ref-Urbancheka_2001_6-0
+ */
+#define CONST_MUSCLE_DENSITY 1060.0f
+const double MorphologyConfiguration::MUSCLE_DENSITY = CONST_MUSCLE_DENSITY; // kg/m^3
+
+const double MorphologyConfiguration::LIMB_MIN_DENSITY = CONST_MUSCLE_DENSITY;
+	//1.0f/ pow(MorphologyConfiguration::LIMB_MIN_SIZE, 3); /**!<The limb minimum density is defined as the smallest dimension cubed to be unit weight */
 
 //TODO: Optimize with bullet physics engine
 //TODO: Not used yet in this simulator
@@ -27,7 +41,7 @@ const double MorphologyConfiguration::LIMB_MAX_DENSITY = 1; /**!<The limb maximu
 
 const double MorphologyConfiguration::LIMB_INITIAL_RESTITUTION = 0.2;/**!< The limb initial restitution/elasticity. */
 
-const double MorphologyConfiguration::LIMB_INITIAL_FRICTION = 10; /**!< The limb initial friction */
+const double MorphologyConfiguration::LIMB_INITIAL_FRICTION = 5; /**!< The limb initial friction */
 
 const double MorphologyConfiguration::JOINT_MAX_VELOCITY = 80; /**!<This limit is intended to help the system avoid the numerical explosions that can arise from time to time during creature evolution. This is done to discourage the evolution of undesirable creatures that exploit the weaknesses in the physics engine.*/
 
@@ -46,20 +60,6 @@ const double MorphologyConfiguration::LIMB_TOTAL_INITIAL_MEAN = 10; /**!< Initia
 const double MorphologyConfiguration::LIMB_TOTAL_INITIAL_VAR = 5; /**!< Initial total segments variance*/
 
 /**
- * The density of fat in kg per cubic meter
- *  https://en.wikipedia.org/wiki/Muscle#cite_ref-Urbancheka_2001_6-0
- */
-//TODO: Not used yet in this simulator
-const double MorphologyConfiguration::FAT_DENSITY = 900; // kg/m^3
-
-/**
- * The density of muscle in kg per cubic meter
- * https://en.wikipedia.org/wiki/Muscle#cite_ref-Urbancheka_2001_6-0
- */
-//TODO: Not used yet in this simulator
-const double MorphologyConfiguration::MUSCLE_DENSITY = 1060; // kg/m^3
-
-/**
  * For every 1 square centimeter of cross sectional area, muscle fibres can exert a maximum force of approximately 30–40 newtons (the weight of a 3–4 kg mass).
  * http://sciencelearn.org.nz/Contexts/Sporting-Edge/Science-Ideas-and-Concepts/Muscle-performance
  */
@@ -71,7 +71,7 @@ const double MorphologyConfiguration::MUSCLE_STRENGTH_PER_CSA = 400000; // N/m^2
  * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
 const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_LINEAR_CONSTANT =
-	0.02f;
+	0.3f;
 
 const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
 	0.05f;
@@ -80,7 +80,7 @@ const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_LINEAR_CONSTANT =
  * The maximum allowable torque that can be exerted by a motor is computed as
  * [MOTOR_MAX_TORQUE_LINEAR_CONSTANT * (mass1 * mass2) + MOTOR_MAX_TORQUE_SQUARE_CONSTANT * (mass1 * mass2)^2]
  */
-const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0.0000000003f;
+const double MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT = 0.00000005f;
 
 const double MorphologyConfiguration::MOTOR_SRB_MAX_TORQUE_SQUARE_CONSTANT = 0;
 
@@ -102,7 +102,7 @@ const double MorphologyConfiguration::JOINT_MAX_SPRING_STIFFNESS = 0; /**!< The 
 
 const double MorphologyConfiguration::JOINT_MIN_DAMPING_COEFFICIENT = 0.001f; //0.05f;//0.005f; /**!< The minimum damping coefficient of the joint */
 
-const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 1.0f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
+const double MorphologyConfiguration::JOINT_MAX_DAMPING_COEFFICIENT = 0.5f; //5.0f; //0.5f; /**!< The maximum damping coefficient of the joint */
 
 const bool MorphologyConfiguration::BODY_INTRACOLLISION_EVOLUTION = false; /**!< Is evolution allowed to change the intracollision for a limb? False means no, true means yes. */
 
