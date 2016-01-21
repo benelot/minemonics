@@ -54,6 +54,7 @@ Planet::~Planet() {
 }
 
 void Planet::initialize() {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup planet...";
 	mPlanetModel->initialize();
 
 	//create earth evolution
@@ -76,6 +77,7 @@ void Planet::initialize() {
 		break;
 	}
 	}
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup planet...done.";
 }
 
 void Planet::addPopulation(Population* const population) {

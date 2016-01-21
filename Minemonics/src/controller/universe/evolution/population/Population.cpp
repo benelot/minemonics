@@ -61,9 +61,11 @@ Population::~Population() {
 }
 
 void Population::initialize() {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup population...";
 	//initialize the population model with zero creatures.
 	mPopulationModel->initialize();
 	resyncWithModel();
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup population...done.";
 }
 
 /**
