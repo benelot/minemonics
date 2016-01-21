@@ -90,8 +90,8 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 
 		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
 		btScalar clampedInputValue =
-			(getInputValue() > 1.0f) ? 1.0f :
-			(getInputValue() < -1.0f) ? -1.0f : getInputValue();
+			(getInputValue() > 0) ? 1.0f :
+			(getInputValue() < 0) ? -1.0f : getInputValue();
 		mJoint->applyJointTorque(mJointMotorIndex, btScalar(clampedInputValue*mMaxForce));
 	}
 }
