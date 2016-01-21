@@ -107,14 +107,14 @@ void Morphogene::initialize(const double branchiness) {
 		(LimbPhysics::PrimitiveType) Randomness::getSingleton()->nextUnifPosInt(
 			1, LimbPhysics::NUM_PRIMITIVES);
 
-	//Choose the dimensions of the segment with a bias toward larger dimensions
-	mX = Randomness::getSingleton()->nextBiasedLogDouble(
+	//Choose the dimensions of the segment
+	mX = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
-	mY = Randomness::getSingleton()->nextBiasedLogDouble(
+	mY = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
-	mZ = Randomness::getSingleton()->nextBiasedLogDouble(
+	mZ = Randomness::getSingleton()->nextUnifDouble(
 		MorphologyConfiguration::LIMB_MIN_SIZE,
 		MorphologyConfiguration::LIMB_MAX_SIZE);
 
