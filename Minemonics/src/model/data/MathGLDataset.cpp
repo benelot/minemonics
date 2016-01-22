@@ -55,9 +55,19 @@ void MathGLDataset::initialize(std::string datasetID, int dimensions,
 
 	switch (dimensions) {
 	case 3: {
-		mDatasetZ = new mglData(length);
-		mDatasetY = new mglData(length);
-		mDatasetX = new mglData(length);
+
+		if (!mDatasetZ) {
+			mDatasetZ = new mglData(length);
+		}
+
+		if (!mDatasetY) {
+			mDatasetY = new mglData(length);
+		}
+
+		if (!mDatasetX) {
+			mDatasetX = new mglData(length);
+		}
+
 		for (int i = 0; i < mDatasetZ->nx; i++) {
 			mDatasetZ->a[i] = 0;
 			mDatasetY->a[i] = 0;
@@ -66,8 +76,14 @@ void MathGLDataset::initialize(std::string datasetID, int dimensions,
 		break;
 	}
 	case 2: {
-		mDatasetY = new mglData(length);
-		mDatasetX = new mglData(length);
+		if (!mDatasetY) {
+			mDatasetY = new mglData(length);
+		}
+
+		if (!mDatasetX) {
+			mDatasetX = new mglData(length);
+		}
+
 		for (int i = 0; i < mDatasetZ->nx; i++) {
 			mDatasetY->a[i] = 0;
 			mDatasetX->a[i] = 0;
@@ -75,7 +91,10 @@ void MathGLDataset::initialize(std::string datasetID, int dimensions,
 		break;
 	}
 	case 1: {
-		mDatasetX = new mglData(length);
+		if (!mDatasetX) {
+			mDatasetX = new mglData(length);
+		}
+
 		for (int i = 0; i < mDatasetZ->nx; i++) {
 			mDatasetX->a[i] = 0;
 		}
