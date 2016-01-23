@@ -86,10 +86,17 @@ The genomic model is one of the base models of the simulator. It encodes both mo
 \label{figure:genotype}
 \end{figure}
 
+The genome defines a directed, possibly cyclic graph, where the nodes are called morphogenes, defining the classes of limbs, and where the edges are called morphogene branches, defining the joint relations inbetween the limbs. A morphogene definition consists of the primitive type of the limb (a cube or capsule), the limb's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. The joint anchor is a position on the surface of the primitive type which denotes, where the parent limb will be attached through a joint in the final phenotype. Furthermore, the morphogene contains a number of morphogene branches and definitions related to how the branches are influenced by the limb. A morphogene branch consists of joint properties such as the pitch and yaw axis, the joint rotational limits for the pitch, yaw and roll degree of freedom, joint damping coefficients for all degrees of freedom and a controller gene.
+The branch influence factors are a segment shrink factor, which shrinks all limb dimensions of the outgoing morphogene branches.
+
+\todo[inline]{Describe morphogene.}
+\todo[inline]{Describe morphogene branch.}
+\todo[inline]{Describe the controller gene.}
+
 
 \begin{figure}[!h]
 \centering
-\missingfigure[figwidth=1\textwidth]{Figure showing a breakdown of the genome structure as the picture in Graham Lee Thesis S.266}
+\missingfigure[figwidth=1\textwidth]{Figure showing a breakdown of the genome structure same as the picture in Graham Lee Thesis S.266}
 \caption{The pod}
 \label{figure:pod}
 \end{figure}
@@ -103,10 +110,13 @@ In the Minemonics simulator, two different rigid body constraint models are used
 \subsubsection{Constrained Rigidbody Phenotype}
 
 \lipsum[10]
+\todo[inline]{Describe constrained rigidbody phenotype.}
 
 \subsubsection{Featherstone Multibody Phenotype}
 
 \lipsum[11]
+
+\todo[inline]{Describe featherstone multibody phenotype.}
 
 \subsubsection{Model organisms}
 
@@ -134,6 +144,8 @@ The snake is a creature built from a chain of equal limbs connected with one or 
 \label{figure:snake}
 \end{figure}
 
+\todo[inline]{Describe the snake model organism.}
+
 \paragraph{Pod}
 
 The Pod is a creature that can be configured to have a certain number of legs and a certain number of body elements. The body is a limb on which the legs are attached in a circular manner. The number of legs is divided by the number of bodies so that the same number of legs is attached to each body. Which the same definition, its is possible to build insect-like creatures such as bugs, spiders, caterpillars and centipedes. It is mainly used to debug the Genotype-to-Phenotype transcription (Embryogenesis).
@@ -144,6 +156,8 @@ The Pod is a creature that can be configured to have a certain number of legs an
 \caption{The pod}
 \label{figure:pod}
 \end{figure}
+
+\todo[inline]{Describe the pod model organism.}
 
 \paragraph{Ragdoll}
 
@@ -156,40 +170,51 @@ The ragdoll blueprint produces a human-like form. It consists of differently con
 \label{figure:ragdoll}
 \end{figure}
 
+\todo[inline]{Describe the ragdoll model organism.}
+
 \subsection{Embryogenesis}
 
 \lipsum[13]
+
+\todo[inline]{Describe how a creature is transcribed using the embryogenesis.}
 
 \subsection{Reaper}
 \label{subsection:Reaper}
 
 \lipsum[13]
+\todo[inline]{Describe the reaper general purpose.}
 
 \subsubsection{Culling}
 \label{subsubsection:Culling}
 
 \lipsum[14]
 
+\todo[inline]{Describe how the reaper culls creatures.}
+
 \subsubsection{Crossover}
 
 \lipsum[14]
 
+\todo[inline]{Describe how the reaper crosses creatures.}
+
 \subsubsection{Mutations}
 
 \lipsum[15]
+\todo[inline]{Describe how the reaper mutates creatures.}
 
 \section{Evolutionary cycle}
 
 \lipsum[16]
+\todo[inline]{Describe a evolutionary cycle in general.}
 
 \subsection{Evaluation step}
 
 \lipsum[17]
+\todo[inline]{Describe a generic evaluation step.}
 
 \subsection{Variation step}
 
 \lipsum[18]
-
-\todo[inline]{Give the Chapter 2 some meaningful content.}
+\todo[inline]{Describe the variation step.}
 
 \end{document}
