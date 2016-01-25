@@ -269,6 +269,14 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 \end{frame}
 
 \begin{frame}
+\frametitle{$\beta$ Tuning (Changing the acceptance rate)}
+\begin{figure}
+\center
+\includegraphics[width=0.7\textwidth]{figs/beta-tuning.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 \frametitle{Learning process}
 \begin{figure}
 \center
@@ -302,6 +310,14 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 \end{frame}
 
 \begin{frame}
+\frametitle{Real performance video}
+\begin{figure}
+\center
+\movie[autostart,showcontrols]{\includegraphics[width=0.6\textwidth]{figs/AMOS.jpg}}{figs/videos/supple_video.wmv}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 \frametitle{Comparison to other approaches}
     \hspace*{-0.7cm}
   \centering
@@ -310,12 +326,14 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
      \hline
     \textbf{Model} & Chaotic CPG & Gaussian Process \\
     \hline
-    \textbf{Prior} & None & Search space \newline premodelling \& \newline  prior performance\\
+    \textbf{Additional Prior} & None & Search space \newline premodelling \& \newline  prior performance values\\
     \hline
     \textbf{Optimization} & Simulated Annealing (GD) & Intelligent Trial \& Error \newline (Bayesian Optimization) \\
     \hline
     \textbf{Trials} & Few (1-10) & Few (1-10)
   \end{tabular}
+  \\[1cm]
+  \textbf{How can the performances be so similar?}
 \end{frame}
 
 \begin{frame}
@@ -373,12 +391,10 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 
   \frametitle{References}
   \begin{itemize}
-  \item Sims K. - Evolving Virtual Creatures (1994)
-  \item Sims K. - Evolving 3D Morphology and Behavior by Competition (1994)
-  \item Krcah P. - Evolving Virtual Creatures Revisited (2007)
-  \item Corron N. et al. - Controlling Chaos with Simple Limiters (2000)
-  \item Schmidt N. - Bootstrapping perception using information theory: case studies in a quadruped running robot running on different grounds (2013)
-  \item Stoop R. - Theory and Simulation of Neural Networks (2014)
+  \item G. Ren, W. Chen. et al., "Multiple chaotic central pattern generators with learning for legged locomotion and malfunction compensation", Information Sciences 294 (2015)
+  \item S.Steingrube, M. Timme et al., "Self-organized adaptation of a simple neural
+circuit enables complex robot behaviour", Nature Physics 6 (2010)
+  \item A. Cully, J. Clune et al. "Robots that can adapt like animals", Nature 521 (2015)
   \end{itemize}
 }
 \note{}
