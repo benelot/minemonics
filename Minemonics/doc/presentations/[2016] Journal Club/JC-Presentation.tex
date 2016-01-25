@@ -56,9 +56,7 @@
 -Many researchers have proved that CPG-based control is an effective method for locomotion control of bio-inspired walking robots.
 
 -A chaotic system can be controlled into showing periodic dynamics, so as to be implemented as a CPG to accomplish the locomotion control of a bio-inspired hexapod robot.
-
 -So far, the chaotic CPG system contains only one oscillator, which has difficulties dealing with leg malfunction.
-
 -We extend the single chaotic CPG system to multiple coupled CPG systems. Therefore each leg can perform identical patterns for normal walking or independent patterns to cope with malfunction.
 
 
@@ -79,7 +77,7 @@ Results
 
 Conclusions
 -We demonstrate that multiple coupled chaotic CPGs with learning can be used for legged locomotion and malfunction compensation.
--When all legs are function, al the CPG units stay synchronized to show identical movement; if some legs are malfunctioning, the CPGs can desynchronize and learn a proper combination of leg periods to compensate for the malfunctioning legs.
+-When all legs are functional, the CPG units stay synchronized to show identical movement; if some legs are malfunctioning, the CPGs can desynchronize and learn a proper combination of leg periods to compensate for the malfunctioning legs.
 \end{comment}
 
 \begin{frame}
@@ -334,6 +332,26 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
   \end{tabular}
   \\[1cm]
   \textbf{How can the performances be so similar?}
+\end{frame}
+
+\begin{frame}
+\frametitle{Keypoints}
+\begin{itemize}
+\item A chaotic system can be controlled into showing periodic dynamics, so as to be implemented as a CPG to accomplish the locomotion control of a bio-inspired hexapod robot
+\item Multiple coupled chaotic CPGs with learning can be used for legged locomotion and malfunction compensation
+\item A simulated annealing optimization is sufficient if the basic locomotion mechanism aids the optimization
+\item Chaotic ground state can improve the overall performance of a robot and make it easier to search for matching periodicities
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Flaws}
+\begin{itemize}
+\item The system does not use any additional sensors to detect malfunction.
+\item The PSN/VRN networks and the delay lines make it a beautiful walking machine, but unfortunately make it unable to do anything else.
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
