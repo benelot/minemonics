@@ -3,6 +3,7 @@
 %\documentclass[aspectratio=169]{beamer}
 \usepackage{etex}
 \usepackage{verbatim}
+\usepackage{multimedia}
 \reserveinserts{28}
 \usetheme{ETHbeamer}
 
@@ -80,6 +81,23 @@ Conclusions
 -We demonstrate that multiple coupled chaotic CPGs with learning can be used for legged locomotion and malfunction compensation.
 -When all legs are function, al the CPG units stay synchronized to show identical movement; if some legs are malfunctioning, the CPGs can desynchronize and learn a proper combination of leg periods to compensate for the malfunctioning legs.
 \end{comment}
+
+\begin{frame}
+\frametitle{Abstract}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/abstract-a.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Problem}
+\begin{figure}
+\center
+\movie[autostart,showcontrols]{\includegraphics[width=0.6\textwidth]{figs/AMOS_3.jpg}}{figs/videos/nphys1508-s3.mpg}
+\end{figure}
+\end{frame}
 
 \begin{frame}
 \frametitle{Meet AMOS II}
@@ -281,6 +299,23 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
     \vspace*{1cm}
     \hspace*{1.1cm}
     \includegraphics[width=0.8\textwidth]{figs/real-experiments.pdf}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparison to other approaches}
+    \hspace*{-0.7cm}
+  \centering
+  \begin{tabular}{p{2cm}p{4.2cm}p{4.2cm}}
+     & \textbf{Ren \& Chen} & \textbf{Cully \& Clune} \\
+     \hline
+    \textbf{Model} & Chaotic CPG & Gaussian Process \\
+    \hline
+    \textbf{Prior} & None & Search space \newline premodelling \& \newline  prior performance\\
+    \hline
+    \textbf{Optimization} & Simulated Annealing (GD) & Intelligent Trial \& Error \newline (Bayesian Optimization) \\
+    \hline
+    \textbf{Trials} & Few (1-10) & Few (1-10)
+  \end{tabular}
 \end{frame}
 
 \begin{frame}
