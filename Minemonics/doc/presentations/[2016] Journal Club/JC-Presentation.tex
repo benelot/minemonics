@@ -10,14 +10,12 @@
 \colorlet{ETHcolor1}{ETHc}
 \colorlet{ETHcolor2}{ETHc}
 
-\author{Benjamin Ellenberger}
 \institute{INI:  Institute of Neuroinformatics}
 
-\title{Multiple chaotic central pattern generators with learning for legged locomotion and malfunction compensation}
+\title{Multiple chaotic central pattern generators with learning for legged locomotion and malfunction compensation\\
+{\footnotesize G.~Ren,~W.~Chen,~S.~Dasgupta,~Ch.~Kolodziejski,~F.~W\"org\"otter,~P.~Manoonpong}}
 
 \date{2016-01-27}
-
-%%TODO: Optimize with presentation tips
 
 % uncomment if you do not want to use a department logo
 %\deplogofalse
@@ -47,6 +45,8 @@
 \begin{document}
 
 \titleframe
+
+\author{Benjamin Ellenberger}
 
 \section{}
 
@@ -81,21 +81,19 @@ Conclusions
 \end{comment}
 
 \begin{frame}
-\begin{figure}
-\center
-\includegraphics[width=1\textwidth]{figs/abstract-a.pdf}
-\end{figure}
-\footnote{From [1]}
-\end{frame}
-
-\begin{frame}
-
-\frametitle{Problem}
-\begin{figure}
-\center
-\movie[autostart,showcontrols]{\includegraphics[width=0.6\textwidth]{figs/AMOS_3.jpg}}{figs/videos/nphys1508-s3.mpg}
-\end{figure}
-\footnote{From [2]}
+\frametitle{Overview}
+\begin{itemize}
+\item A chaotic system is implemented to drive legged robot's locomotion as a central pattern generator (CPG).
+\item From this setting, sophisticated gait patterns arise so that the robot can perform various walking behaviors.
+\item A single chaotic CPG controller has difficulties dealing with leg malfunction.
+\item They extended the single chaotic CPG to multiple CPGs with learning based on a simulated annealing algorithm.
+\item The multiple CPGs are synchronized to show identical dynamics, but with malfunction, desynchronization leads to independent leg dynamics.
+\item The learning mechanism automatically adjusts the remaining leg periodicities so that the robot can deal with the malfunction.
+\end{itemize}
+%\begin{figure}
+%\center
+%\includegraphics[width=1\textwidth]{figs/abstract-a.pdf}
+%\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -104,52 +102,43 @@ Conclusions
 \center
 \includegraphics[width=0.9\textwidth]{figs/AMOSII-cockroach.pdf}
 \end{figure}
-\footnote{From [2]}
+\footnotetext[1]{{\tiny From [2] S.Steingrube, M. Timme et al., Nature Physics 6 (2010)}}
 \end{frame}
 
 \begin{minimalframe}
     \vspace*{0.5cm}
     \begin{columns}
    	\column{0.55\textwidth}
-   	\hspace*{-0.1cm}
- 		\includegraphics[height=0.9\textheight]{figs/Processing-network-overview.pdf}
+   	\hspace*{0.5cm}
+ 		\includegraphics[height=0.8\textheight]{figs/Processing-network-overview-simple2.pdf}
      
   	\column{0.6\textwidth}
-  	\hspace*{-2cm}
     		\visible<1->{
       		\begin{itemize}
-    				\item A Preprocessing
-    					\begin{itemize}
-    					\scriptsize
-    					\item Denoising
-    					\item Shaping
-    					\item Orientation signal preparation
-    					\end{itemize}
-    				\item B Adaptive neural chaos control (CPG)
+    				\item Adaptive neural chaos control (CPG)
     					\begin{itemize}
     					\scriptsize
     					\item Discrete time dynamics
     					\item Sigmoid activation function
-    					\item Additional control signal $c$ based on period p appplied every p+1 time step
+    					\item Additional control signal $c$ based on period p applied every $p + 1$ time step
     					\end{itemize}
-    				\item C CPG post-processing
+    				\item CPG post-processing
     						\begin{itemize}
     						\scriptsize
     						\item time window
     						\item hysteresis
     						\item signal integration
     						\end{itemize}
-    				\item D Neural motor control
+    				\item Neural motor control
     						\begin{itemize}
     						\scriptsize
     						\item Phase switching network (PSN)
     						\item Velocity regulation network (VRN)
     						\end{itemize}
-    				\item E Delay lines
+    				\item Delay lines
     			\end{itemize}
       	}	
   \end{columns}  
-  \footnote{From [1]}  
 \end{minimalframe}
 
 \begin{frame}
@@ -158,57 +147,45 @@ Conclusions
 \hspace*{-1cm}
 \includegraphics[width=0.6\textwidth]{figs/CPG-overview.pdf}
 \end{figure}
-\footnote{From [2]}
+\footnotetext[2]{{\tiny From [2] S.Steingrube, M. Timme et al., Nature Physics 6 (2010)}}
 \end{frame}
 
 \begin{frame}
 \frametitle{CPG activity (discrete time dynamics)}
+
+\begin{columns}
+\column{0.8\textwidth}
 \begin{align*}
 \text{\textbf{Neuron state}}&\\
 x_i(t+1) &= \sigma\left(\theta_i + \sum\limits^2_{j=1}w_{ij} x_j(t) + c_i^{(p)(t)}\right) \, for~i \in \{1,2\}\\
 \text{\textbf{Control signal}}&\\
-c_i^{(p)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
-\Delta_j(t) &= x_j(t) = x_j(t-p)\\
-\mu_{(p)} &= \mu_{(p)}(t) + \lambda\frac{\Delta^2_1(t) + \Delta^2_2(t)}{p} \, with~\lambda=0.05
+c_i^{(p)(t)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
+\Delta_j(t) &= x_j(t) - x_j(t-p)\\
+\mu_{(p)}(t) &= \mu_{(p)}(t) + \lambda\frac{\Delta^2_1(t) + \Delta^2_2(t)}{p} \, with~\lambda=0.05
 \end{align*}
-\footnote{From [1]}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Postprocessing motor neuron signals}
-\begin{figure}
-\center
-\includegraphics[width=1\textwidth]{figs/Postprocessing-signals.pdf}
-\end{figure}
-\footnote{From [2]}
+\column{0.2\textwidth}
+\vspace*{-1.2cm}
+\hspace*{-1.5cm}
+\includegraphics[width=1.5\textwidth]{figs/CPG-overview.pdf}
+\end{columns}
 \end{frame}
 
 \begin{frame}
 \frametitle{Different hexapod gaits}
 \begin{figure}
 \center
-\includegraphics[width=1\textwidth]{figs/different-hexapod-gaits.pdf}
+\includegraphics[width=1\textwidth]{figs/different-hexapod-gaits-c.pdf}
 \end{figure}
-\footnote{From [2]}
+\footnotetext[3]{{\tiny From [2] S.Steingrube, M. Timme et al., Nature Physics 6 (2010)}}
 \end{frame}
 
 \begin{frame}
-\frametitle{Sketched walking patterns}
+\frametitle{Different gaits}
 \begin{figure}
 \center
-\includegraphics[width=0.8\textwidth]{figs/walking-pattern-sketch.pdf}
+\href{run:figs/videos/nphys1508-s3.mpg}{\includegraphics[width=0.6\textwidth]{figs/AMOS_3.jpg}}
 \end{figure}
-\footnote{From [2]}
-\end{frame}
-
-\begin{frame}
-\frametitle{Motor pattern learning neuron}
-\begin{figure}
-\center
-\includegraphics[width=0.75\textwidth]{figs/motor-pattern-learning.pdf}
-\end{figure}
-\footnote{From [2]}
+\footnotetext[4]{{\tiny From [2] S.Steingrube, M. Timme et al., Nature Physics 6 (2010)}}
 \end{frame}
 
 \begin{frame}
@@ -217,7 +194,6 @@ c_i^{(p)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
 \center
 \includegraphics[width=1\textwidth]{figs/multi-CPG-extension.pdf}
 \end{figure}
-\footnote{From [1]}
 \end{frame}
 
 \begin{frame}
@@ -226,7 +202,6 @@ c_i^{(p)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
 \center
 \includegraphics[width=0.8\textwidth]{figs/client-CPG.pdf}
 \end{figure}
-\footnote{From [1]}
 \end{frame}
 
 \begin{frame}
@@ -236,7 +211,12 @@ c_i^{(p)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
 \center
 \includegraphics[width=0.55\textwidth]{figs/synchrony-asynchrony.pdf}
 \end{figure}
-\footnote{From [1]}
+\end{frame}
+
+\begin{frame}
+\frametitle{Experiment setup}
+\hspace*{-0.4cm}
+\includegraphics[width=1.1\textwidth]{figs/real-experiments-cropped.pdf}
 \end{frame}
 
 \begin{frame}
@@ -245,20 +225,19 @@ c_i^{(p)} &= \mu_{(p)}(t)\sum\limits^{2}_{j=1}w_{ij}\Delta_j(t)\\
 \center
 \includegraphics[width=0.8\textwidth]{figs/deviation-measure.pdf}
 \end{figure}
-\footnote{From [1]}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Simulated annealing for leg period learning}
 \begin{algorithm}[mathescape]
-initialize $C(1)= [1/4 1/24; 4; 4; 4; 4; 4]; \Delta\phi= 0.0; E_1 = 0.0$
+initialize $C(1)= [4; 4; 4; 4; 4; 4]; \Delta\phi= 0.0; E_1 = 0.0$
 repeat:
     At repetition n
     do
         randomly pick a leg l, $l \in [R1; R2; R3; L1; L2; L3]$
         change the period of leg l to a random value, $P(l) \in [4; 5; 6; 8; 9]$
-        compare this combination of leg periods, $C'(n)$, to the leg periods of $C(n-1)$
-    until $C'(n)$ is a new combination of leg periods
+        compare this combination of leg periods, $C_{new}(n)$, to the leg periods of $C(n-1)$
+    until $C_{new}(n)$ is a new combination of leg periods
     
     run the robot
     // calculate the evaluation function and its variation
@@ -267,10 +246,10 @@ repeat:
     
     // choose the combination of leg periods
     if $\Delta E < 0$ then
-        $C(n) = C'(n)$
+        $C(n) = C_{new}(n)$
     else
-        if  $X \geq e^{-\beta \Delta E}$ then // $X \in [0;1], learning~rate~\beta$ 
-            $C(n) = C'(n)$
+        if  $X \geq e^{-\beta \Delta E}$ then // $X \in [0;1], rejection~rate~\beta$ 
+            $C(n) = C_{new}(n)$
         else
             $C(n) = C(n - 1)$
         end if
@@ -280,21 +259,19 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 \end{frame}
 
 \begin{frame}
-\frametitle{$\beta$ Tuning (Changing the acceptance rate)}
-\begin{figure}
-\center
-\includegraphics[width=0.7\textwidth]{figs/beta-tuning.pdf}
-\end{figure}
-\footnote{From [1]}
-\end{frame}
-
-\begin{frame}
 \frametitle{Learning process}
 \begin{figure}
 \center
 \includegraphics[width=1\textwidth]{figs/learning-process.pdf}
 \end{figure}
-\footnote{From [1]}
+\end{frame}
+
+\begin{frame}
+\frametitle{$\beta$ Tuning (Changing the rejection rate)}
+\begin{figure}
+\center
+\includegraphics[width=0.7\textwidth]{figs/beta-tuning.pdf}
+\end{figure}
 \end{frame}
 
 \begin{frame}
@@ -302,46 +279,27 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 \vspace*{-0.6cm}
 \begin{figure}
 \hspace*{-1cm}
-\includegraphics[width=0.56\textwidth]{figs/disable-legs-list-1.pdf}
-\includegraphics[width=0.56\textwidth]{figs/disable-legs-list-2.pdf}
+\includegraphics[width=0.56\textwidth]{figs/disable-legs-list-1-a.pdf}
+\includegraphics[width=0.56\textwidth]{figs/disable-legs-list-2-a.pdf}
 \end{figure}
-\footnote{From [1]}
-\end{frame}
-
-\begin{frame}
-\frametitle{Leg periods after R1 compensation}
-\vspace*{-0.35cm}
-\begin{figure}
-\hspace*{-1.3cm}
-\includegraphics[width=0.8\textwidth]{figs/periods-after-learning.pdf}
-\end{figure}
-\textbf{\footnote{From [1]}}
-\end{frame}
-
-\begin{frame}
-    \vspace*{1cm}
-    \hspace*{1.1cm}
-    \includegraphics[width=0.8\textwidth]{figs/real-experiments.pdf}
-    \footnote{From [1]}
 \end{frame}
 
 \begin{frame}
 \frametitle{Real performance video}
 \begin{figure}
 \center
-\movie[autostart,showcontrols]{\includegraphics[width=0.6\textwidth]{figs/AMOS.jpg}}{figs/videos/supple_video.wmv}
+\href{run:figs/videos/supple_video.wmv}{\includegraphics[width=0.6\textwidth]{figs/AMOS.jpg}}
 \end{figure}
-\footnote{From [1]}
 \end{frame}
 
 \begin{frame}
 \frametitle{Comparison to other approaches}
     \hspace*{-0.7cm}
   \centering
-  \begin{tabular}{p{2cm}p{4.2cm}p{4.2cm}}
+  \begin{tabular}{p{2.3cm}p{4.2cm}p{4.2cm}}
      & \textbf{Ren \& Chen} & \textbf{Cully \& Clune} \\
      \hline
-    \textbf{Model} & Chaotic CPG & Gaussian Process \\
+    \textbf{Performance Assessment Model} & None & Gaussian Process \\
     \hline
     \textbf{Additional Prior} & None & Search space \newline premodelling \& \newline  prior performance values\\
     \hline
@@ -351,7 +309,7 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
   \end{tabular}
   \\[1cm]
   \textbf{How can the performances be so similar?}
-  \footnote{From [1] and [3]}
+  \footnotetext[5]{From [3] A. Cully, J. Clune et al., Nature 521 (2015)}
 \end{frame}
 
 \begin{frame}
@@ -362,7 +320,6 @@ until: The evaluation function $E_n$ is less than a required value $E_{req}$
 \item A simulated annealing optimization is sufficient if the basic locomotion mechanism aids the optimization
 \item Chaotic ground state can improve the overall performance of a robot and make it easier to search for matching periodicities
 \end{itemize}
-
 \end{frame}
 
 \begin{frame}
@@ -437,6 +394,15 @@ circuit enables complex robot behaviour", Nature Physics 6 (2010)
   \end{itemize}
 }
 \note{}
+
+\begin{frame}
+\frametitle{Postprocessing motor neuron signals}
+\begin{figure}
+\center
+\includegraphics[width=1\textwidth]{figs/Postprocessing-signals.pdf}
+\end{figure}
+\footnotetext[6]{{\tiny From [2] S.Steingrube, M. Timme et al., Nature Physics 6 (2010)}}
+\end{frame}
 
 \begin{comment}
 
