@@ -225,3 +225,8 @@ void Evaluation::update(const double timeSinceLastTick) {
 		teardown();
 	}
 }
+
+void Evaluation::setFailed(bool hasFailed) {
+	mHasFailed = hasFailed;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded on user request.";
+}

@@ -92,6 +92,8 @@ public:
 		return mHasFailed;
 	}
 
+	void setFailed(bool hasFailed);
+
 private:
 
 	static BoostLogger mBoostLogger; /**!< The boost logger. */

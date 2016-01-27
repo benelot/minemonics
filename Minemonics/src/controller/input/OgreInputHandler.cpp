@@ -454,8 +454,21 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 			}
 		}
 		break;
-		case ApplicationKeycode::APPK_BACKSPACE:
-		// return CEGUI::Key::Backspace;
+		case ApplicationKeycode::APPK_BACKSPACE: // user ability to drop a certain creature out of the evaluation as a failed evaluation
+			switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+						case StateHandler::SIMULATION: {
+							if (SimulationManager::getSingleton()->getViewController().getEvaluationInView()
+								!= NULL) {
+								SimulationManager::getSingleton()->getViewController().getEvaluationInView()->setFailed(true);
+								SimulationManager::getSingleton()->getViewController().getEvaluationInView()->teardown();
+							}
+							SimulationManager::getSingleton()->getUniverse().proceedEvaluation();
+							break;
+						}
+						default: {
+							break;
+						}
+					}
 		break;
 		case ApplicationKeycode::APPK_TAB:
 // return CEGUI::Key::Tab;
