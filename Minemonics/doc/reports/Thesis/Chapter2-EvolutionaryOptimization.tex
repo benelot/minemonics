@@ -79,7 +79,7 @@ The genomic model is one of the base models of the simulator. It encodes both mo
 \center
 
 \begin{tikzpicture}
-\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!20, rounded corners, rectangle]
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
 \tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=blue!80]
 
 \node[align=left](1){
@@ -141,26 +141,28 @@ Morphogene branch vector:\\
 \node[above=12,xshift=0cm,yshift=-22cm,align=left](13){
 \underline{Morphogene branch specification}\\
 Flipped, Mirrored \\
-Joint specification:
-	Joint Anchor: X, Y, Z\\
-	Pitch Axis: X, Y, Z\\
-	Yaw Axis: X, Y, Z\\
-	Pitch Limits: Min, Max\\
-	Pitch damping coefficient\\
-	Yaw Limits: Min, Max\\
-	Yaw damping coefficient\\
-	Roll Limits: Min, Max\\
-	Roll damping coefficient\\
-	ControllerType
+Joint specification:\\
+~~Joint Anchor: X, Y, Z\\
+~~Pitch Axis: X, Y, Z\\
+~~Yaw Axis: X, Y, Z\\
+~~Pitch Limits: Min, Max\\
+~~Pitch damping coefficient\\
+~~Yaw Limits: Min, Max\\	
+~~Yaw damping coefficient\\
+~~Roll Limits: Min, Max\\
+~~Roll damping coefficient\\
+~~Controller Type
 };
 
 \begin{pgfonlayer}{background}
+  %\node[draw=black!80, thick, fill=white!100,rounded corners, rectangle] [fit = (1) (10) (13)] {};
   \node[bigbox] [fit = (1) (5)] {};
   \node[bigbox] [fit = (9) (10)] {};
   \node[bigbox] [fit= (13)] {};
 \end{pgfonlayer}
 %
 \end{tikzpicture}
+\caption{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of limb and a morphogene branch defines a certain class of joint to connect two limbs.}
 \end{figure}
 
 
