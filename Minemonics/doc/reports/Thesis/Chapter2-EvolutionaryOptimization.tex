@@ -28,48 +28,141 @@
 
 \lhead{Chapter \thechapter. \emph{Evolutionary Optimization}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-The following chapter describes the Evolutionary optimization algorithm as it is implemented in the Minemonics simulator. The Minemonics simulator is a project that was developed from scratch for this Thesis, mainly because most other simulators for evolving virtual creatures are unpublished by the research group, outdated or implement a different type of simulation than is needed for the model of this thesis.
+The following chapter describes the evolutionary optimization algorithm as it is implemented in the Minemonics simulator. The Minemonics simulator is the simulator that was used throughout this Thesis and is a project that was developed from scratch, mainly because other simulators for evolving virtual creatures are unpublished by the research group, are outdated or implement a different type of simulation than is needed for the model of this Thesis. Apart from the research interests, the simulator was made to be extensible for other research experiments to be implemented. It is available open-source from its git repository on github [?].
 
 \section{Basic components}
 
-First, the basic components of the simulator are listed and its features are described. We describe the component tree in a top-down manner and reveal the subcomponents one-by-one. 
+To understand the purpose of the simulation, it is important to first understand the different basic components of it. Therefore, we first discuss the basic components of the simulator and their respective features. The tree of components is described in a top-down manner and the subcomponents are revealed one-by-one to start out simple and slowly reveal complexity. 
 
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Universe, Planets and Environments}
 
-The simulator models its own universe. A universe contains a set of different planets, each being a certain setting of evolutionary run. A certain planet consists of an environment, a evolution type, a number of epochs and a number of populations. 
+The main model of the simulation is its own universe. The simulator's universe is a set of different planets, each being a certain setting of evolutionary run. A certain planet consists of an environment, an instance of evolutionary process and a number of epochs. 
 
-The environment simulates a flat plane or a hill environment. It approximates the appropriate newtonian mechanical physics for the environment and the creatures that are evaluated within it. For the experiments in this thesis, mainly the plane environment was used.
+The environment is a representation of a flat plane or a hill environment. For the experiments in this thesis, mainly the plane environment was used.
 
-The evolution type defines how many creatures of the planet are evaluated at the same time and how creatures are culled, variated and sown. In the bounds of this thesis, only single creature evaluation was performed. 
+The type of evolutionary process instance defines how many creatures of the planet are evaluated simultaneously in the same environment and the percentage of creatures that are culled, variated and sown. within the bounds of this thesis, only single creature evaluation was performed. 
 
 \subsubsection{Planet physics}
 
-Each environment defines the planet's physics simulation. The simulator uses the Bullet Physics engine\cite{bulletphysics} to run the physical simulation of the creatures. Bullet Physics is a numerical classial mechanics simulation engine, featuring rigid body as well as softbody physics. Bodies can be constrained using various types of constraints with constraint limits and motors. The constraints are numerically solved using one of the many types of solvers with different convergence speeds and accuracy of result. The most accurate results were achieved using the Featherstone Multibody solver. To date it only supports single degree of freedom joints, however this does not affect the evolutionary optimization much. A three degrees of freedom joint can easily be approximated by three one degree of freedom joints.
+Each environment defines the type of planet physics simulation. The two types of environments currently available, flat plane and hill environment, both simulate the environment and the creatures using newtonian mechanical physics. To do that, the simulator uses the Bullet Physics engine\cite{bulletphysics} to build a terrain for the creatures to move upon and builds the creatures using different rigid body primitive types which are held together by differently configured joint constraints. Bullet Physics is a numerical classical mechanics simulation engine, featuring rigid body as well as soft body physics. Bodies can be constrained using various types of constraints with constraint limits and motors. The constraints are numerically solved using one of the many types of available solvers with different convergence speeds and accuracy of result. The most robust results were achieved using the Featherstone Multibody solver. To date it only supports single degree of freedom joints, however this does not affect the evolutionary optimization much. A three degrees of freedom joint can easily be approximated by three one degree of freedom joints.
 
 \subsection{Epochs}
 
-An epoch of a certain planet models the changes of environmental factors, which induce modification of the fitness landscape on the planet. What is considered good in one epoch might not be good in another. The change of the fitness landscape usually leads to avalanches of extinction[?]. A certain epoch in the simulation consists of a set of juries(fitness functions) and a transition condition, which, when met, ends the epoch and starts the next epoch.
+An epoch of a certain planet models the changes of environmental factors, which induce modification to the fitness landscape on the planet. What is considered good in one epoch might not be good in another. The change of the fitness landscape usually leads to avalanches of extinction[?], because the changing fitness only leaves little chance for the highly adapted creature to adapt to the new conditions. In the simulation, an epoch  is represented by a set of juries(fitness functions) and a transition condition, which, when met, ends the epoch and starts the next epoch.
 
 \subsubsection{Juries}
 
-Juries or fitness functions are part of an epoch in which they are relevant. A jury collects data on a certain performance during the evaluation of a creature and finally has to rate the performance of an individual. Commonly used juries of the simulator are the distance travelled during the evaluation time or the average height of all limbs during the evaluation. A jury additionally has a weight, which indicates the weight in the total performance of the creature, and a sorting direction, which indicates whether a higher rating is considered better or worse than a lower rating. Multiple types of juries are combined in a competitive manner among the creatures of a population. This procedure will be described in the section \ref{subsubsection:Culling} Culling of the Reaper component.
+Juries or fitness functions are part of an epoch in which they are relevant. A jury collects data on a certain performance during the evaluation of a creature and finally has to rate the performance of an individual. Commonly used juries of the simulator are the distance travelled during the evaluation time or the average height above ground of all limbs during the evaluation. A jury additionally has a combination weight, which indicates the weight in the total performance of the creature, and a sorting direction, which indicates whether a higher rating is considered better or worse than a lower rating. Fitness values of different types of juries are combined based on the type-specific competitive ranking among the creatures of a population. This procedure will be described in the section \ref{subsubsection:Culling} Culling of the Reaper component.
 
 \subsection{Populations}
 
-A population of creatures on the simulator lives on a certain planet. Depending on the evolution settings of the planet, one creature, multiple creatures of one population, multiple creatures of multiple populations or multiple whole populations are evaluated within one evaluation time. When a population is initialized, it it has a certain initial number of individuals. These can be completely randomly generated creatures or model organisms, the being common primitives for testing. During the evaluation of a population, the number of individuals falls generally below the original population size, because several individuals are culled during the evaluation. This happens when creatures surpass boundaries of physical realism (generally high forces that lead to very fast limb velocity, leading to imaginary forces that lift creatures off the ground and make them fly) which causes the simulation to cull them early and set their fitness to the lowest value. 
+A population of creatures in the simulator lives on a certain planet. Depending on the evolution settings of the planet, one creature, multiple creatures of one population, multiple creatures of multiple populations or multiple whole populations are evaluated at the same time within one evaluation slot. When a population is initialized, it has a certain initial number of individuals. The individuals can be completely randomly generated creatures or model organisms, the latter being common primitives for testing. During the evaluation of a population, the number of individuals falls generally below the original population size, because several individuals are culled during the evaluation. This happens when creatures surpass boundaries of physical realism (generally high forces that lead to very fast limb velocity, leading to imaginary forces that lift creatures off the ground and make them fly), therefore the simulation culls them early and sets their fitness values to the respective lowest values. 
 
 \subsection{Creatures}
 
-A creature or individual is part of a population and is subject to evaluation. The creature is based on two main components. Its genotype and its phenotype. The genotype is the compact blueprint of the creature. Developed from it is the phenotype, which is the explicit form of the creature representing the body of the creature in the Physics engine and the controller in its fully wired form. Furthermore we define to important measures for creatures which are its total body volume and its size. The total body volume is just the volume of all limbs summed up. The size of a creature is measured as being the third root of the total volume, denoting the edge length of the total volume cube. The size measure is most important because it is used to scale the fitness functions involving distances. Thereby it is possible to make a distance travelled independent of the creature size, meaning that a larger creature gets the same fitness as a smaller creature for travelling a larger distance, if the ratio between creature size and respective travelled distance are the same for both creatures.
+A creature or individual is part of a population and is subject to evaluation. The creature is based on two main components, its genotype and its phenotype. The genotype is the compact blueprint of the creature. Developed from it is the phenotype, which is the explicit form of the creature representing the body of the creature in the Physics engine and the controller in its fully wired form. Furthermore we define to important measures for creatures which are its total body volume and its size. The total body volume is just the volume of all limb primitives summed up. The size of a creature \(C\) with number of limb primitives \(N(C)\) is measured as being the third root of the total volume, denoting the edge length of the total volume cube. 
+
+\[size(C) = \sqrt[3]{\sum\limits^{N(C)}_{i=1} V(p_i)}\]
+
+The size measure is most important because it is used to scale the fitness functions involving distances. Thereby it is possible to make a distance travelled independent of the creature size, meaning that a larger creature gets the same fitness as a smaller creature for travelling a larger distance, if the ratios between creature size and respective travelled distance are the same for both creatures.
 
 \subsubsection{Genome}
 
-In the traditional approach on genomes, a fixed length string of bits is used to encode higher order data types such as integers or doubles or into data structures such as trees or matrices. However, many state-of-the-art genomes deviate from this original representation by directly using higher order representations and thereby avoiding the usually hard to solve representation problem ('What representation should be chosen so that every change in the bit string leads to a new valid representation?'). This more modern approach was also chosen in the Minemonics simulator.\\
+In the traditional approach on genomes, a fixed length string of bits is used to encode higher order data types such as integers or doubles or into data structures such as trees or matrices. However, many state-of-the-art genomes deviate from this original representation by directly using higher order representations and thereby avoid the usually hard to solve representation problem ('What representation should be chosen so that every change in the bit string leads to a new valid representation?'). This more modern approach was also chosen in the Minemonics simulator.\\
 
 The genomic model is one of the base models of the simulator. It encodes both morphology and the controller of the creature. Inspired by biological DNA, the genome of the simulator uses an indirect encoding. An indirect encoding, different from a direct encoding, does not encode every element of the phenotype explicitly, but uses element classes and branches between them to encode their relations. 
+
+\begin{figure}[H]
+\center
+
+\begin{tikzpicture}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!20, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=blue!80]
+
+\node[align=left](1){
+\underline{Genoype specification}\\
+Total segment quantity limit\\
+Segment tree depth limit\\
+Morphogene specification vector:\\
+};
+\matrix(5)[below=1, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node[box]{};\\
+};
+
+% brace to segment specification vector
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(3.5,-2.3) -- (3.5,-0.8) node (6) [black,midway,xshift=0.8cm] {};
+%
+% segment specification vector
+\matrix(7)[right=6, xshift=-1.7cm,yshift=-1.5cm, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(8)[box]{}; & \node[box]{}; & \node[box]{};\\
+};
+%
+%
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(5,-2) -- (6.5,-2) node (8) [black,midway,yshift=-0.8cm] {};
+%
+%
+\node(9)[below=8,align=left,xshift=7cm,yshift=4.7cm]{
+\underline{Morphogene specification}\\
+Primitive type\\
+Dimensions: X,Y,Z\\
+Orientation: W,X,Y,Z \\
+Restitution\\
+Friction\\
+Color: R,G,B \\
+Joint Anchor: X,Y,Z\\
+Segment Shrink Factor\\
+Repetition Limit\\
+Follow-up gene\\
+Morphogene branch vector:\\
+};
+\matrix(10)[below=9,xshift=7.5cm,yshift=-1.4cm, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node[box]{};\\
+};
+%
+%
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(4,-10.5) -- (4,-12.1) node (11) [black,midway,yshift=-0.8cm] {};
+%
+%
+\matrix(12)[left=11, xshift=14cm,yshift=-11.3cm, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(8)[box]{}; & \node[box]{}; & \node[box]{};\\
+};
+%
+%
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(1.5,-10.8) -- (0,-10.8) node (12) [black,midway,yshift=-0.8cm] {};
+%
+%
+\node[above=12,xshift=0cm,yshift=-22cm,align=left](13){
+\underline{Morphogene branch specification}\\
+Flipped, Mirrored \\
+Joint specification:
+	Joint Anchor: X, Y, Z\\
+	Pitch Axis: X, Y, Z\\
+	Yaw Axis: X, Y, Z\\
+	Pitch Limits: Min, Max\\
+	Pitch damping coefficient\\
+	Yaw Limits: Min, Max\\
+	Yaw damping coefficient\\
+	Roll Limits: Min, Max\\
+	Roll damping coefficient\\
+	ControllerType
+};
+
+\begin{pgfonlayer}{background}
+  \node[bigbox] [fit = (1) (5)] {};
+  \node[bigbox] [fit = (9) (10)] {};
+  \node[bigbox] [fit= (13)] {};
+\end{pgfonlayer}
+%
+\end{tikzpicture}
+\end{figure}
+
 
 \begin{figure}[H]
 \center
