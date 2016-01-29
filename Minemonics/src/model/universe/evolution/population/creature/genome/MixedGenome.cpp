@@ -353,7 +353,7 @@ void MixedGenome::splitRandomGenes(double splitProbability) {
 
 void MixedGenome::splitRandomGene() {
 	splitGene(Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1),
-		(SplitAxis) Randomness::getSingleton()->nextUnifPosInt(1, 3));
+		(SplitAxis) Randomness::getSingleton()->nextUnifPosInt(0, 2));
 }
 
 void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
