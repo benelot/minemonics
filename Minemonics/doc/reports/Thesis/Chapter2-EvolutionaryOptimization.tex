@@ -73,7 +73,16 @@ The size measure is most important because it is used to scale the fitness funct
 
 In the traditional approach on genomes, a fixed length string of bits is used to encode higher order data types such as integers or doubles or into data structures such as trees or matrices. However, many state-of-the-art genomes deviate from this original representation by directly using higher order representations and thereby avoid the usually hard to solve representation problem ('What representation should be chosen so that every change in the bit string leads to a new valid representation?'). This more modern approach was also chosen in the Minemonics simulator.\\
 
-The genomic model is one of the base models of the simulator. It encodes both morphology and the controller of the creature. Inspired by biological DNA, the genome of the simulator uses an indirect encoding. An indirect encoding, different from a direct encoding, does not encode every element of the phenotype explicitly, but uses element classes and branches between them to encode their relations. 
+The genomic model is one of the base models of the simulator. It encodes both morphology and the controller of the creature. Inspired by biological DNA, the genome of the simulator uses an indirect encoding. An indirect encoding, different from a direct encoding, does not encode every element of the phenotype explicitly, but uses element classes and branches between them to encode their relations. The advantage of indirect encodings is ...
+
+\todo[inline]{Describe the advantage of indirect encodings over direct encodings.}
+
+The genome defines a directed, possibly cyclic graph, where the nodes are called morphogenes, defining the classes of limbs, and where the edges are called morphogene branches, defining the joint relations inbetween the limbs. A morphogene definition (Fig. \ref{figure:genome-structure}) consists of the primitive type of the limb (a cube or capsule), the limb's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. The joint anchor is a position on the surface of the primitive type which denotes, where the parent limb will be attached through a joint in the final phenotype. Furthermore, the morphogene contains a number of morphogene branches and definitions related to how the branches are influenced by the limb. \\
+
+A morphogene branch (Fig. \ref{figure:genome-structure}) consists of joint properties such as the pitch and yaw axis, the joint rotational limits for the pitch, yaw and roll degree of freedom, joint damping coefficients for all degrees of freedom and a controller gene.
+The branch influence factors are a segment shrink factor, which shrinks all limb dimensions of the morphogene the branch points to and propagates along further branches of that morphogene.
+
+\todo[inline]{Describe the controller gene.}
 
 \begin{figure}[H]
 \center
@@ -83,38 +92,39 @@ The genomic model is one of the base models of the simulator. It encodes both mo
 \tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=blue!80]
 
 \node[align=left](1){
-\underline{Genoype specification}\\
+\underline{Genotype specification}\\
 Total segment quantity limit\\
 Segment tree depth limit\\
-Morphogene specification vector:\\
+Morphogene classes vector:\\
 };
 \matrix(5)[below=1, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node[box]{};\\
 };
 
-% brace to segment specification vector
+% brace to morphogene specification vector
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
-(3.5,-2.3) -- (3.5,-0.8) node (6) [black,midway,xshift=0.8cm] {};
+(3.5,-2.3) -- (3.5,-0.8) node (6) [black,midway,xshift=-7cm,yshift=3.5cm] {};
 %
 % segment specification vector
 \matrix(7)[right=6, xshift=-1.7cm,yshift=-1.5cm, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(8)[box]{}; & \node[box]{}; & \node[box]{};\\
 };
 %
-%
+% brach to morphogene class
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
-(5,-2) -- (6.5,-2) node (8) [black,midway,yshift=-0.8cm] {};
+(5,-2.1) -- (6.5,-2.1) node (8) [black,midway,xshift=5cm] {};
 %
 %
-\node(9)[below=8,align=left,xshift=7cm,yshift=4.7cm]{
-\underline{Morphogene specification}\\
+\node(9)[below=8,align=left,xshift=7cm,yshift=5.2cm]{
+\underline{Morphogene class}\\
 Primitive type\\
-Dimensions: X,Y,Z\\
-Orientation: W,X,Y,Z \\
-Restitution\\
-Friction\\
-Color: R,G,B \\
-Joint Anchor: X,Y,Z\\
+Dimensions: X, Y, Z\\
+Orientation: W, X, Y, Z \\
+Material properties:\\
+~~Restitution\\
+~~Friction\\
+~~Color: R, G, B \\
+Joint Anchor: X, Y, Z\\
 Segment Shrink Factor\\
 Repetition Limit\\
 Follow-up gene\\
@@ -126,19 +136,19 @@ Morphogene branch vector:\\
 %
 %
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
-(4,-10.5) -- (4,-12.1) node (11) [black,midway,yshift=-0.8cm] {};
+(4,-10.5) -- (4,-12.1) node (11) [black,midway,xshift=7cm,yshift=-0.8cm] {};
 %
 %
 \matrix(12)[left=11, xshift=14cm,yshift=-11.3cm, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(8)[box]{}; & \node[box]{}; & \node[box]{};\\
 };
 %
-%
+% brace to morphogene branch specification
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
-(1.5,-10.8) -- (0,-10.8) node (12) [black,midway,yshift=-0.8cm] {};
+(1.5,-10.7) -- (0,-10.7) node (13) [black,midway,xshift=-4cm] {};
 %
 %
-\node[above=12,xshift=0cm,yshift=-22cm,align=left](13){
+\node[above=12,xshift=0cm,yshift=-22cm,align=left](14){
 \underline{Morphogene branch specification}\\
 Flipped, Mirrored \\
 Joint specification:\\
@@ -155,22 +165,28 @@ Joint specification:\\
 };
 
 \begin{pgfonlayer}{background}
-  %\node[draw=black!80, thick, fill=white!100,rounded corners, rectangle] [fit = (1) (10) (13)] {};
-  \node[bigbox] [fit = (1) (5)] {};
-  \node[bigbox] [fit = (9) (10)] {};
-  \node[bigbox] [fit= (13)] {};
+  \node(22)[draw=black!80, thick, fill=white!100,rounded corners, rectangle] [fit = (6) (11)] {};
+  \node(15)[bigbox] [fit = (1) (5)] {};
+  \node(16)[bigbox][fit = (5)]{};
+  \node(17)[bigbox][fit = (7)]{};
+  \node(18)[bigbox] [fit = (9) (10)] {};
+  \node(19)[bigbox][fit = (10)]{};
+  \node(20)[bigbox][fit = (12)]{};
+  \node(21)[bigbox] [fit= (14)] {};
 \end{pgfonlayer}
 %
 \end{tikzpicture}
 \caption{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of limb and a morphogene branch defines a certain class of joint to connect two limbs.}
+\label{figure:genome-structure}
 \end{figure}
 
 
+\todo[inline]{Improve the figure to show a possible genome.}
 \begin{figure}[H]
 \center
 \begin{tikzpicture}
    \foreach \c/\i/\t [count=\n] in  
-        {blue!20/RootLimb class/1.5,green!20/Limb1 class/1,orange!20/Limb2 class/0.8,red!20/Limb3 class/0.5} 
+        {blue!20/Root Morphogene class/1.5,green!20/Morphogene 1 class/1,orange!20/Morphogene 2 class/0.8,red!20/Morphogene3 class/0.5} 
            \node[draw,fill=\c,minimum height=\t * 2cm,minimum width = \t * 1cm,xshift=\n* 2.5cm](N\n){\i} ;
 \draw[dashed,->,line width=0.5mm] (N1.south) to [out=-50,in=-150] node[below] {Branch/2} (N2.south);
 \draw[dashed,->,line width=0.5mm] (N2.north) to [out=50,in=150] node[above] {Branch/2} (N3.north);
@@ -181,41 +197,34 @@ Joint specification:\\
 \label{figure:genotype}
 \end{figure}
 
-The genome defines a directed, possibly cyclic graph, where the nodes are called morphogenes, defining the classes of limbs, and where the edges are called morphogene branches, defining the joint relations inbetween the limbs. A morphogene definition consists of the primitive type of the limb (a cube or capsule), the limb's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. The joint anchor is a position on the surface of the primitive type which denotes, where the parent limb will be attached through a joint in the final phenotype. Furthermore, the morphogene contains a number of morphogene branches and definitions related to how the branches are influenced by the limb. A morphogene branch consists of joint properties such as the pitch and yaw axis, the joint rotational limits for the pitch, yaw and roll degree of freedom, joint damping coefficients for all degrees of freedom and a controller gene.
-The branch influence factors are a segment shrink factor, which shrinks all limb dimensions of the outgoing morphogene branches.
-
-\todo[inline]{Describe morphogene.}
-\todo[inline]{Describe morphogene branch.}
-\todo[inline]{Describe the controller gene.}
-
-
 \begin{figure}[!h]
 \centering
-\missingfigure[figwidth=1\textwidth]{Figure showing a breakdown of the genome structure same as the picture in Graham Lee Thesis S.266}
-\caption{The pod}
-\label{figure:pod}
+\missingfigure[figwidth=1\textwidth]{Figure of the direct encoding of the genome.}
+\caption{The model leg}
+\label{figure:direct-encoding}
 \end{figure}
-
-
 
 \subsubsection{Phenome}
 
-In the Minemonics simulator, two different rigid body constraint models are used. 
+The Phenomes are the fully developed versions of the genomes. In traditional genetic algorithms, genotypes usually do not have a development stage to transcribe the Phenotype from it and are ready to be evaluated. In modern approaches however, it is often impossible to evaluate the individual directly based on the genotype, especially when the genome structure uses indirect incoding as it is the case in this simulation.
+In the Minemonics simulator, two different rigid body constraint models were used to evaluate their stability when used within an evolutionary process. Both phenome models are based on the same representation, but the important difference is the physics simulation model that is used. One of them uses a constrained rigidbody representation reducing the degrees of freedom with constraints, the other uses a Featherstone Multibody representation increasing the degrees of freedom with mobilizers. The main issue which had to be resolved was that the ranges of parameters in the physics engine where not completely clear and some lead to invalid definitions of one or multiple joints, leading to very instable individuals. Instability here means either that a single invalid joint definition leads to instabilities in the solver or that an individual is strained by tensions because the numerical solver is unable to solve multiple contradicting constraints and therefore applies high forces and torques to resolve the constraints even though they can never be resolved. This could be fixed by using the Featherstone Multibody representation as described below. 
 
 \subsubsection{Constrained Rigidbody Phenotype}
 
-\lipsum[10]
-\todo[inline]{Describe constrained rigidbody phenotype.}
+The constrained rigidbody phenotype is build from rigid or softbody primitives and typed joint constraints. Many different joint constraints with different features exist, mainly because some constraints are easier for the solver to handle than others. Generally it is a good strategy to use the most-lightweight constraints over the the computation intensive constrains in order to get a fluid simulation. For the constrained rigidbody phenotype exist many different constraint solvers, among others the sequential impulse solver, the projected Gauss-Seidel solver, and Mixed Linear
+Complementarity Problem (MLCP) such as the Dantzig Solver or Lemke Solver[?] ..., which results in very stable simulations of complex, hand-made phenotypes. However, problems arise when evolution comes into play, because it evolves and evaluates the whole search space, which results in very diverse individuals and therefore often builds very invalid or strongly contradicting constraint groups. Since in iterative constraint solvers the constraint rows are not solved all at the same time but one after another, the contradicting constraints then apply high forces and torques to the single rigid bodies to resolve the invalid constraint or contradicting constraints, leading to pseudoforces that produces unrealistic physics movement. Therefore the Constraint Rigidbody Phenotype was abandoned and the Featherstone Multibody Phenotype was developed. It might be that using a more constraining genotype representation would lead to only valid and non-contradicting constraints, but such a representation could not be found during the time of this thesis.
+
+\todo[inline]{Add more detail from the Erwin Coumans Presentation \newline "ErwinCoumans\_ExploringMLCPSolversAndFeatherstone.pdf"}
 
 \subsubsection{Featherstone Multibody Phenotype}
 
-\lipsum[11]
+The Featherstone Multibody Phenotype is based on the totally different concept of reduced coordinates or generalized coordinates. The reduced coordinates, express only the degrees of freedom, starting from the situation where each joint connecting two rigid bodies does not have any. A simple hinge joint is then expressed as a 1-DoF revolute joint angle. Instead of constraints as in the Constrained Rigidbody Phenotype, we call such a multibody joint a mobilizer. In this representation, it is not necessary to resolve constraints and therefore we do not experience resolving forces and torques because no gaps exist in between the rigidbodies [Erwin Coumans presentation]. This phenotype is very robust when it comes to hand-made as well as evolved phenotypes and therefore is much more suitable for evolving virtual creatures.
 
 \todo[inline]{Describe featherstone multibody phenotype.}
 
 \subsubsection{Model organisms}
 
-The model organisms are genotypes to be developed into a creature that have specific properties. They are mainly used for testing and experimentation purposes, because they feature a non-redundant, simple genomic description and well defined limb and joint descriptors.
+The model organisms are hand-coded genotypes to be developed into creatures that have specific properties. They are mainly used for testing and experimentation purposes, because they feature a non-redundant, simple genomic description and well defined limb and joint descriptors.
 
 \paragraph{Model Leg}
 
