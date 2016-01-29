@@ -228,7 +228,7 @@ The model organisms are hand-coded genotypes to be developed into creatures that
 
 \paragraph{Model Leg}
 
-The model leg is a simple creature built from two equal limbs and one joint. The joint can be either set to be a one DoF hinge joint or a three DoF spherical joint. Its main purpose is to run experiments on chaotic controllers on a simple creature to observe the controller's behavior when controlling a single degree of freedom of a physical system.
+The model leg is a simple creature built from two equal limbs and one joint. The joint can be either set to be a one DoF hinge joint or a three DoF spherical joint. Its main purpose is to run experiments on chaotic controllers on a simple creature to observe the controller's behavior when controlling a single degree of freedom of a physical system in gravity-less space and on flat-terrain to see the effect of gravity, restitution and friction applied.
 
 \begin{figure}[!h]
 \centering
@@ -278,14 +278,41 @@ The ragdoll blueprint produces a human-like form. It consists of differently con
 
 \subsection{Embryogenesis}
 
-\lipsum[13]
+\begin{figure}[!h]
+\centering
+\missingfigure[figwidth=1\textwidth]{Add a figure of the embryogenesis processing}
+\caption{The ragdoll}
+\label{figure:ragdoll}
+\end{figure}
+
+The embryogenesis of a creature is a straight-forward process transcribing a genotype into a phenotype. Starting from the root morphogene, the genome is expanded in a breath-first-search manner. This means that it starts at the root node and expands its child nodes first, before moving on to the higher degree children. The embryogenesis is performed using phenotype generators. Phenotype generators help to keep some intermediate results in the generation process, namely the morphogene branch of the parent morphogene and the parent limb element, the position and orientation of this generator, the current shrinkage factor of the generated limbs, if this is a flipped or mirrored path, the length of the current root to leaf path and a list of the number of repetitions of different morphogene classes along this path.  To setup the embryogenesis so that the same processing can be done for every morphogene, the root morphogene is assigned to a Phenotype generator and inserted into an empty list of generators. The phenotype generator's base orientation is initialized to the quaternion identity, set the segments depth limit and the total segments quantity to 0 and empty the repetition lists. Then the processing of a morphogene and its morphogene branches works as follows: we take the first generator out of the list, then we check if we reached the total segment limit or the segments depth limit defined by the individual. If it is reached, the phenotype is finished, else we continue. Now we create the new limb according to the morphogene specifications. Then we check if this limb has to be appended to a existing parent limb (for the root morphogene no, for all others yes), if yes, we position the child limb so that their joint anchoring points on the surface of both limbs overlap, the we connect them by defining the joint as defined in their connecting morphogene branch. Finally we produce the new generators and insert them into our generator list, one for each morphogene branch of the morphogene we just processed. 
 
 \todo[inline]{Describe how a creature is transcribed using the embryogenesis.}
 
 \subsection{Reaper}
 \label{subsection:Reaper}
 
-\lipsum[13]
+At the end of all evaluations for a certain generation of a population, the simulation arrived at the evolution step.  In the evolution step, the following operations are performed by the reaper: Culling a percentage of the worst performing creatures according to the total fitness ranking, variation of the remaining creatures with different variance operators according to the respective percentages and sowing of new creatures partly from crossover and random generation. In the Minemonics simulator, the following percentages were chosen:
+
+\begin{itemize}
+\item Reap percentage: \unit[15]{\%}
+\item Variation on the rest of the population (considered \unit[100]{\%})
+\begin{itemize}
+\item Elitism (no variation): \unit[7]{\%}
+\item Gene specification mutation percentage: \unit[18.6]{\%}
+\item Gene split percentage: \unit[18.6]{\%}
+\item Branch mutation percentage: \unit[18.6]{\%}
+\item Grow stub gene percentage: \unit[18.6]{\%}
+\item Graft feature percentage: \unit[18.6]{\%}
+\end{itemize}
+\item Sow percentage: \unit[15]{\%}
+\begin{itemize}
+\item Crossover: \unit[50]{\%}
+\item Random generation: \unit[50]{\%}
+\end{itemize}
+\end{itemize}
+
+In the following sections, the different operations are described in detail.
 \todo[inline]{Describe the reaper general purpose.}
 
 \subsubsection{Culling}
@@ -303,8 +330,27 @@ The ragdoll blueprint produces a human-like form. It consists of differently con
 
 \subsubsection{Mutations}
 
-\lipsum[15]
-\todo[inline]{Describe how the reaper mutates creatures.}
+\todo[inline]{Improve how the reaper mutates creatures.}
+
+\paragraph{Gene specification mutation}
+
+This mutation applied to a genome iterates over all morphogene classes. For each class, with probability $0.2$ the morphogene is reinitialized with random values. This affects all values except for the morphogene branches which stay unchanged.
+
+\paragraph{Gene split mutation}
+
+This mutation applied to a genome iterates over all morphogene classes. For each class, with probability $0.2$ the morphogene is split along the X, Y or Z axis into two morphogenes occupying the same total volume as the original limb.
+
+\paragraph{Branch specification mutation}
+
+This mutation applied to a genome iterates over all morphogene classes. For each class, with probability $0.2$ a random morphogene branch is chosen and is reinitialized with random values. 
+
+\paragraph{Grow stub gene mutation}
+
+This mutation applied to a genome iterates over all morphogene classes. For each class, with probability $0.6$, $x$ new branches are added to the morphogene, where $x \in [0,2]$
+
+\paragraph{Graft feature mutation}
+
+This mutation is similar to crossover, but instead of just cutting both genomes at a random position and recombining them, it picks a random morphogene in the donor genome and copies this morphogene and its children over to the receiver genome until copying depth $x$ is reached, where $x \in [5,10]$.
 
 \section{Evolutionary cycle}
 
