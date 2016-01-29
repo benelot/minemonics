@@ -318,7 +318,11 @@ In the following sections, the different operations are described in detail.
 \subsubsection{Culling}
 \label{subsubsection:Culling}
 
-\lipsum[14]
+In order to cull individuals from the population, the individuals first have to be sorted according to their fitness. For a single fitness function, the sorting is straight forward. But in many cases, it is necessary to have individuals adapt to multiple fitness functions to represent the desired fitness landscape. Furthermore it might be, that one of the fitness functions should have a higher weight than the others. To combine the different fitness functions is hard, usually because it is not possible to adjust them to the same scaling, especially when one of them is the lower the better. Therefore, competitive ranking was chosen to combine the fitness functions. This means that for each fitness function, we sort the individuals according to their respective fitness value and assign a number of points to each rank (in the simulator, the number of points for a rank is the number of individuals that performed worse). Then we sum for each individual $c_n$ for $m$ fitness functions, the ranking points $r_i$ multiplied by the respective fitness function weight $w_i$. 
+
+\[\text{fitness score}_{c_n} = \sum\limits^m_{i=1} r_i \cdot w_i \]
+
+Finally, we sort the individuals by their fitness score, which gives us their total ranking according to their fitness. Unfortunately, by this procedure, the score loses the information whether the best individual of the creature increased its fitness.
 
 \todo[inline]{Describe how the reaper culls creatures.}
 
@@ -346,7 +350,7 @@ This mutation applied to a genome iterates over all morphogene classes. For each
 
 \paragraph{Grow stub gene mutation}
 
-This mutation applied to a genome iterates over all morphogene classes. For each class, with probability $0.6$, $x$ new branches are added to the morphogene, where $x \in [0,2]$
+This mutation applied to a genome iterates over all morphogene classes. For each class, with probability $0.6$, $x$ new branches are added to the morphogene, where $x \in [0,2]$.
 
 \paragraph{Graft feature mutation}
 
