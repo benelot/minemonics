@@ -176,7 +176,7 @@ Joint specification:\\
 \end{pgfonlayer}
 %
 \end{tikzpicture}
-\caption{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of limb and a morphogene branch defines a certain class of joint to connect two limbs.}
+\caption[Indirectly encoded genome structure]{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of limb and a morphogene branch defines a certain class of joint to connect two limbs.}
 \label{figure:genome-structure}
 \end{figure}
 
@@ -193,14 +193,14 @@ Joint specification:\\
 \draw[dashed,->,line width=0.5mm] (N2.south) to [out=-50,in=-150] node[below] {Branch/2} (N4.south);
 
 \end{tikzpicture}
-\caption{The general structure of the genotype (strongly simplified). The number at the branch denotes the number of child limbs of the following type are attached to the respective parent limb.}
+\caption[Indirectly encoded genome]{The general structure of the genome (strongly simplified). The number at the branch denotes the number of child limbs of the following type are attached to the respective parent limb.}
 \label{figure:genotype}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \missingfigure[figwidth=1\textwidth]{Figure of the direct encoding of the genome.}
-\caption{The model leg}
+\caption[Directly encoded genome]{A figure of the direct encoding of the genome.}
 \label{figure:direct-encoding}
 \end{figure}
 
@@ -233,7 +233,7 @@ The model leg is a simple creature built from two equal limbs and one joint. The
 \begin{figure}[!h]
 \centering
 \missingfigure[figwidth=1\textwidth]{Figure of the model leg.}
-\caption{The model leg}
+\caption[The model leg]{The model leg}
 \label{figure:model-leg}
 \end{figure}
 
@@ -244,7 +244,7 @@ The snake is a creature built from a chain of equal limbs connected with one or 
 \begin{figure}[!h]
 \centering
 \missingfigure[figwidth=1\textwidth]{Figure of the snake model organism.}
-\caption{The snake}
+\caption[The snake]{The snake}
 \label{figure:snake}
 \end{figure}
 
@@ -257,7 +257,7 @@ The Pod is a creature that can be configured to have a certain number of legs an
 \begin{figure}[!h]
 \centering
 \missingfigure[figwidth=1\textwidth]{Figure of the pod model organism.}
-\caption{The pod}
+\caption[The pod]{The pod}
 \label{figure:pod}
 \end{figure}
 
@@ -270,7 +270,7 @@ The ragdoll blueprint produces a human-like form. It consists of differently con
 \begin{figure}[!h]
 \centering
 \missingfigure[figwidth=1\textwidth]{Figure of the ragdoll model organism.}
-\caption{The ragdoll}
+\caption[The ragdoll]{The ragdoll}
 \label{figure:ragdoll}
 \end{figure}
 
@@ -281,8 +281,8 @@ The ragdoll blueprint produces a human-like form. It consists of differently con
 \begin{figure}[!h]
 \centering
 \missingfigure[figwidth=1\textwidth]{Add a figure of the embryogenesis processing}
-\caption{The ragdoll}
-\label{figure:ragdoll}
+\caption[Structure of the embryogenesis]{Structure of the embryogenesis}
+\label{figure:embryogenesis}
 \end{figure}
 
 The embryogenesis of a creature is a straight-forward process transcribing a genotype into a phenotype. Starting from the root morphogene, the genome is expanded in a breath-first-search manner. This means that it starts at the root node and expands its child nodes first, before moving on to the higher degree children. The embryogenesis is performed using phenotype generators. Phenotype generators help to keep some intermediate results in the generation process, namely the morphogene branch of the parent morphogene and the parent limb element, the position and orientation of this generator, the current shrinkage factor of the generated limbs, if this is a flipped or mirrored path, the length of the current root to leaf path and a list of the number of repetitions of different morphogene classes along this path.  To setup the embryogenesis so that the same processing can be done for every morphogene, the root morphogene is assigned to a Phenotype generator and inserted into an empty list of generators. The phenotype generator's base orientation is initialized to the quaternion identity, set the segments depth limit and the total segments quantity to 0 and empty the repetition lists. Then the processing of a morphogene and its morphogene branches works as follows: we take the first generator out of the list, then we check if we reached the total segment limit or the segments depth limit defined by the individual. If it is reached, the phenotype is finished, else we continue. Now we create the new limb according to the morphogene specifications. Then we check if this limb has to be appended to a existing parent limb (for the root morphogene no, for all others yes), if yes, we position the child limb so that their joint anchoring points on the surface of both limbs overlap, the we connect them by defining the joint as defined in their connecting morphogene branch. Finally we produce the new generators and insert them into our generator list, one for each morphogene branch of the morphogene we just processed. 
@@ -358,12 +358,14 @@ This mutation is similar to crossover, but instead of just cutting both genomes 
 
 \section{Evolutionary cycle}
 
-\lipsum[16]
+To describe how the different components play together, an evolutionary cycle of one planet with a flat plane environment and a population of 10 individuals is outlined. One evolutionary cycle can be separated into 2 substeps, the evaluation step and the variation step. Before the cycle can begin, the planet and its environment is set up, the (infinite) flat plane is positioned at the origin of the coordinate system, and each randomly generated individual's genome is transcribed into a phenotype by the embryogenesis. The population is not yet visible anywhere and awaits evaluation.
+
 \todo[inline]{Describe a evolutionary cycle in general.}
 
 \subsection{Evaluation step}
 
-\lipsum[17]
+During the evaluation step, each individual is dropped into the simulation slightly above the ground for the selected evaluation period of usually 20 seconds. Every creature is evaluated separately and the controller starts to move the limbs. If a creature consists of 0 or only 1 limb, the creature is discarded, since it is
+
 \todo[inline]{Describe a generic evaluation step.}
 
 \subsection{Variation step}
