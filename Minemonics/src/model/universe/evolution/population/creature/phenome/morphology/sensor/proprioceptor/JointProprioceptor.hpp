@@ -39,7 +39,7 @@ public:
 	JointProprioceptor();
 	JointProprioceptor(JointModel* jointModel,
 		JointPhysics::RotationalDegreeOfFreedom rotationalDOF);
-	~JointProprioceptor();
+	virtual ~JointProprioceptor();
 
 	virtual void initialize();
 

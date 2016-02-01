@@ -27,7 +27,7 @@
 class Proprioceptor: public Sensor {
 public:
 	Proprioceptor();
-	~Proprioceptor();
+	virtual ~Proprioceptor();
 
 	/**
 	 * Update the proprioceptor input.

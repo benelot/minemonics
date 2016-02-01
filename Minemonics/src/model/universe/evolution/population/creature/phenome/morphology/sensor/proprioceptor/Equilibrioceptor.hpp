@@ -25,7 +25,7 @@
  */
 class Equilibrioceptor: public Proprioceptor {
 	Equilibrioceptor();
-	~Equilibrioceptor();
+	virtual ~Equilibrioceptor();
 };
 
 #endif /* MODEL_EVOLUTION_POPULATION_CREATURE_GENOME_SENSORS_EQUILIBRIOCEPTOR_H_ */

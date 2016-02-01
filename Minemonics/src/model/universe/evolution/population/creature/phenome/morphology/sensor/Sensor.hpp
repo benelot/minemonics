@@ -26,7 +26,7 @@
 class Sensor: public ControlOutput {
 public:
 	Sensor();
-	~Sensor();
+	virtual ~Sensor();
 
 	/**
 	 * Update the sensor values.
