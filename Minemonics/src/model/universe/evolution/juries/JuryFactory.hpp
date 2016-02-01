@@ -29,7 +29,7 @@ class JuryFactory {
 public:
 	static Jury* buildJury(Jury::JuryType type, bool higherIsBetter,
 		double weight) {
-		Jury* jury;
+		Jury* jury = NULL;
 
 		switch (type) {
 		case Jury::AVG_VELOCITY:

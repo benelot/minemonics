@@ -212,7 +212,7 @@ void MixedGenome::addGeneBranch(const int geneIndex1, const int geneIndex2) {
 		(Gene::GeneType) Randomness::getSingleton()->nextUnifPosInt(
 			Gene::MorphoGene, Gene::NUM_GENES - 1);
 
-	GeneBranch* geneBranch;
+	GeneBranch* geneBranch = NULL;
 	switch (type) {
 	case Gene::MorphoGene: {
 		geneBranch = new MorphogeneBranch();

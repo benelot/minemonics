@@ -27,7 +27,7 @@ CreatureModel::CreatureModel() :
 	mPopulationModel(NULL), mCulled(false), mNew(false), mFitnessScore(-1), mWorld(
 	NULL), mPhenotypeModel(NULL), mFitnessScoreCalculated(false), mPhysicsModelType(
 		PhysicsController::RigidbodyModel), mDynasty(0), mMutated(false), mLastCreatureLength(
-		-1) {
+		-1),mFirstName("") {
 }
 
 CreatureModel::CreatureModel(PopulationModel* const populationModel,
@@ -36,7 +36,7 @@ CreatureModel::CreatureModel(PopulationModel* const populationModel,
 	mPopulationModel(populationModel), mCulled(false), mNew(false), mFitnessScore(
 		-1), mPhenotypeModel(NULL), mPhysicsModelType(physicsModelType), mInitialPosition(
 		position), mFitnessScoreCalculated(false), mPosition(position), mDynasty(
-		0), mMutated(false), mLastCreatureLength(-1) {
+		0), mMutated(false), mLastCreatureLength(-1),mFirstName("") {
 #ifndef EXCLUDE_FROM_TEST
 	mWorld =
 		populationModel->getPlanetModel()->getEnvironmentModel()->getPhysicsController()->getDynamicsWorld();
