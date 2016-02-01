@@ -54,21 +54,8 @@ PhysicsController::PhysicsController(PhysicsModelType physicsModelType,
 }
 
 PhysicsController::~PhysicsController() {
-	delete mDynamicsWorld;
-	mDynamicsWorld = NULL;
 
-	delete mSolver;
-	mSolver = NULL;
-
-	delete mBroadphase;
-	mBroadphase = NULL;
-
-	delete mDispatcher;
-	mDispatcher = NULL;
-
-	delete mCollisionConfiguration;
-	mCollisionConfiguration = NULL;
-
+	exitBulletPhysics();
 }
 
 void PhysicsController::initialize() {
@@ -148,7 +135,6 @@ void PhysicsController::initialize() {
 		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 
-
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";
 
 		mDynamicsWorld->getDispatchInfo().m_useContinuous = true;
@@ -183,22 +169,20 @@ void PhysicsController::exitBulletPhysics() {
 		delete obj;
 	}
 
-	for (int j = 0; j < mCollisionShapes.size(); j++) { //delete collision shapes
-		btCollisionShape* shape = mCollisionShapes[j];
-		delete shape;
-	}
-
-	mCollisionShapes.clear();
 	delete mDynamicsWorld;
-	mDynamicsWorld = 0;
+	mDynamicsWorld = NULL;
+
 	delete mSolver;
-	mSolver = 0;
+	mSolver = NULL;
+
 	delete mBroadphase;
-	mBroadphase = 0;
+	mBroadphase = NULL;
+
 	delete mDispatcher;
-	mDispatcher = 0;
+	mDispatcher = NULL;
+
 	delete mCollisionConfiguration;
-	mCollisionConfiguration = 0;
+	mCollisionConfiguration = NULL;
 }
 
 void PhysicsController::stepBulletPhysics(const double timeStep) {
@@ -223,17 +207,14 @@ void PhysicsController::stepBulletPhysics(const double timeStep) {
 }
 
 void PhysicsController::addBody(btRigidBody* const body) {
-	mCollisionShapes.push_back(body->getCollisionShape());
 	mDynamicsWorld->addRigidBody(body); //add the body to the dynamics world
 }
 
 void PhysicsController::addBody(btRigidBody* const body, int collisionGroup,
 	int collidesWith) {
-	mCollisionShapes.push_back(body->getCollisionShape());
 	mDynamicsWorld->addRigidBody(body, collisionGroup, collidesWith); //add the body to the dynamics world
 }
 
 void PhysicsController::removeBody(btRigidBody* body) {
-	mCollisionShapes.remove(body->getCollisionShape());
 	mDynamicsWorld->removeRigidBody(body); //remove the body to the dynamics world
 }

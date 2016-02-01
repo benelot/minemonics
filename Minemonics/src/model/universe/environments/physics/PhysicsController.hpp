@@ -196,7 +196,6 @@ public:
 
 protected:
 	//variables for to bullet physics API
-	btAlignedObjectArray<btCollisionShape*> mCollisionShapes; /**!< keep the collision shapes, for deletion/cleanup */
 	btBroadphaseInterface* mBroadphase; /**!< The broadphase interface */
 	btCollisionDispatcher* mDispatcher; /**!< The Collision dispatcher */
 	btDefaultCollisionConfiguration* mCollisionConfiguration;
