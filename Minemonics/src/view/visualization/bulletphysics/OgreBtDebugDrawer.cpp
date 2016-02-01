@@ -49,6 +49,7 @@
 #include <utils/ogre3D/OgreBulletUtils.hpp>
 #include <utils/MathUtils.hpp>
 
+const char* OgreBtDebugDrawer::matName = "OgreBulletCollisionsDebugDefault";
 OgreBtDebugDrawer::OgreBtDebugDrawer() :
 	mLinesSwap(NULL), mTrianglesSwap(NULL), mDrawTrajectory(false), mClear(
 		false), mDebugMode(0), mDrawable(false), mDebugDrawingEnabled(true), mLines(
@@ -83,7 +84,7 @@ void OgreBtDebugDrawer::initialize(const bool drawTrajectory) {
 
 	Ogre::MaterialPtr mtl =
 		Ogre::MaterialManager::getSingleton().getDefaultSettings()->clone(
-			getMatName());
+			matName);
 	mtl->setReceiveShadows(false);
 	mtl->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
 	mtl->setDepthBias(0.1, 0);
@@ -120,10 +121,20 @@ void OgreBtDebugDrawer::initialize(const bool drawTrajectory) {
 
 OgreBtDebugDrawer::~OgreBtDebugDrawer() {
 	Ogre::Root::getSingleton().removeFrameListener(this);
-	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mLines);
-	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mTriangles);
-	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mLines2);
-	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(mTriangles2);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(
+		mLines);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(
+		mTriangles);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(
+		mLines2);
+	SimulationManager::getSingleton()->getSceneManager()->destroyManualObject(
+		mTriangles2);
+
+	delete mLines;
+	delete mLines2;
+	delete mTriangles;
+	delete mTriangles2;
+
 	//TODO: Add 3D text writing capability to ogreBtdebugdrawer #133.
 //	szElement = "element_";
 //	olm->destroyOverlayElement(szElement);
@@ -322,13 +333,13 @@ bool OgreBtDebugDrawer::frameStarted(const Ogre::FrameEvent& evt) {
 	mTriangles = mTriangles2;
 	mTriangles2 = mTrianglesSwap;
 
-	mLines->begin(getMatName(), Ogre::RenderOperation::OT_LINE_LIST);
+	mLines->begin(matName, Ogre::RenderOperation::OT_LINE_LIST);
 	mLines->position(Ogre::Vector3::ZERO);
 	mLines->colour(Ogre::ColourValue::Blue);
 	mLines->position(Ogre::Vector3::ZERO);
 	mLines->colour(Ogre::ColourValue::Blue);
 
-	mTriangles->begin(getMatName(), Ogre::RenderOperation::OT_TRIANGLE_LIST);
+	mTriangles->begin(matName, Ogre::RenderOperation::OT_TRIANGLE_LIST);
 	mTriangles->position(Ogre::Vector3::ZERO);
 	mTriangles->colour(Ogre::ColourValue::Blue);
 	mTriangles->position(Ogre::Vector3::ZERO);

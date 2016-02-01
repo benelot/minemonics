@@ -248,9 +248,8 @@ private:
 //    Ogre::TextAreaOverlayElement *textArea;
 //    Ogre::String szElement;
 
-	const char* getMatName() {
-		return "OgreBulletCollisionsDebugDefault";
-	}
+public:
+	static const char* matName;
 };
 
 #endif /* VIEW_VISUALIZATION_BULLETPHYSICS_OGREDEBUGDRAWER_H_ */
