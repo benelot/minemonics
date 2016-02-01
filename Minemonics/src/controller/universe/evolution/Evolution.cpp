@@ -29,12 +29,10 @@
 #include <utils/Debugger.hpp>
 #include <utils/serialization/FilesystemManipulator.hpp>
 
-
 BoostLogger Evolution::mBoostLogger; /*<! initialize the boost logger*/
 Evolution::_Init Evolution::_initializer;
 Evolution::Evolution() :
-	mEvaluationController(NULL), mPlanet(NULL) {
-	mEvolutionModel = new EvolutionModel();
+	mEvaluationController(NULL), mPlanet(NULL), mEvolutionModel(NULL) {
 }
 
 Evolution::Evolution(EvolutionModel* const evolutionModel) :
@@ -122,7 +120,7 @@ bool Evolution::proceedEvaluation() {
 					mPopulations[mEvolutionModel->getCurrentPopulationIndex()],
 					true);
 
-				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << creature->getCreatureModel()->getFirstName()
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< creature->getCreatureModel()->getFirstName()
 				<< " in evaluation...";
 
 				population->addMember(creature);
