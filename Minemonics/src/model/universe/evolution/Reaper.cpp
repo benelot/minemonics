@@ -284,6 +284,7 @@ void Reaper::mutateGenes(PopulationModel* const population, int startIndex,
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < mutatedGeneHeads; i++) {
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
@@ -305,6 +306,7 @@ void Reaper::splitGenes(PopulationModel* const population, const int startIndex,
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < splitGeneHeads; i++) {
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				population->getCreatureModels()[startIndex + i]->setCulled(
 					true);
 				CreatureModel* offspring =
@@ -326,6 +328,7 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < mutatedGeneBranchHeads; i++) {
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
@@ -347,6 +350,7 @@ void Reaper::growStubs(PopulationModel* const population, const int startIndex,
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < growStubHeads; i++) {
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
@@ -368,11 +372,12 @@ void Reaper::graftFeatures(PopulationModel* const population,
 	if (population->getCreatureModels().size() != 0) {
 		for (int i = 0; i < graftedHeads; i++) {
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
-			/**
-			 * Whenever a parent is needed, we choose a number of individuals at random from
-			 * the previous generation. These individuals constitute a tournament.
-			 * The creature with the highest fitness wins and becomes the selected parent.
-			 */
+			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
+				/**
+				 * Whenever a parent is needed, we choose a number of individuals at random from
+				 * the previous generation. These individuals constitute a tournament.
+				 * The creature with the highest fitness wins and becomes the selected parent.
+				 */
 				std::vector<CreatureModel*> tournament;
 				int bestCreatureIndex = 0;
 				int bestFitness = 0;
