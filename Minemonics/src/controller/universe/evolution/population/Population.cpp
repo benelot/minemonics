@@ -133,9 +133,8 @@ void Population::resyncWithModel() {
 		cit != mCreatures.end();) {
 		if ((*cit)->isCulled()) {
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature culled.";
-			Creature* creature = *cit;
-			delete creature->getCreatureModel(); // delete creature model, it is already removed from mPopulationModel->getCreatureModels()
-			delete creature;
+
+			delete *cit; // deletes creature model, it is already removed from mPopulationModel->getCreatureModels()
 			cit = mCreatures.erase(cit);
 		} else {
 			cit++;
@@ -147,10 +146,13 @@ void Population::resyncWithModel() {
 		cit != mCreatures.end();) {
 		if ((*cit)->isMutated()) {
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "Creature mutated.";
-			CreatureModel* creatureModel = (*cit)->getCreatureModel();
+
+			CreatureModel* creatureModel = (*cit)->getCreatureModel(); // keep the creature model to be put into a new controller
+			(*cit)->unlinkCreatureModel(); // unlink and delete the old controller
 			delete *cit;
 			cit = mCreatures.erase(cit);
-			Creature* creature = new Creature(creatureModel);
+
+			Creature* creature = new Creature(creatureModel); // generate a new controller for the mutated creature
 			creature->setMutated(false);
 			mCreatures.push_back(creature);
 		} else {

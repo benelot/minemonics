@@ -50,6 +50,9 @@ Creature::Creature(CreatureModel* const creatureModel) :
 }
 
 Creature::~Creature() {
+	if (mCreatureModel) {
+		delete mCreatureModel;
+	}
 	mCreatureModel = NULL;
 //	mPhenotype
 }
@@ -109,16 +112,16 @@ int Creature::addToWorld() {
 
 	std::vector<const DataSink*> controllerDatasinks =
 		mPhenotype.getPhenotypeModel()->getControllerDataSinks();
-	for (std::vector<const DataSink*>::const_iterator dit = controllerDatasinks.begin();
-		dit != controllerDatasinks.end(); dit++) {
+	for (std::vector<const DataSink*>::const_iterator dit =
+		controllerDatasinks.begin(); dit != controllerDatasinks.end(); dit++) {
 		SimulationManager::getSingleton()->getViewController().getChaosControllerPanel()->addDataset(
 			&(*dit)->getDataset());
 	}
 
 	std::vector<const DataSink*> jointDatasinks =
 		mPhenotype.getPhenotypeModel()->getJointDataSinks();
-	for (std::vector<const DataSink*>::const_iterator dit = jointDatasinks.begin();
-		dit != jointDatasinks.end(); dit++) {
+	for (std::vector<const DataSink*>::const_iterator dit =
+		jointDatasinks.begin(); dit != jointDatasinks.end(); dit++) {
 		SimulationManager::getSingleton()->getViewController().getJointDynamicsPanel()->addDataset(
 			&(*dit)->getDataset());
 	}
@@ -142,6 +145,14 @@ void Creature::processJuries() {
 
 void Creature::calm() {
 	mCreatureModel->calm();
+}
+
+CreatureModel* Creature::getCreatureModel() {
+	return mCreatureModel;
+}
+
+void Creature::unlinkCreatureModel() {
+	mCreatureModel = NULL;
 }
 
 void Creature::save(std::string folderPath) {

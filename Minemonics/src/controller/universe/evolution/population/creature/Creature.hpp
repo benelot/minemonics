@@ -90,9 +90,9 @@ public:
 	void save(std::string folderPath);
 
 	// Facade accessor methods ##########################
-	CreatureModel* getCreatureModel() {
-		return mCreatureModel;
-	}
+	CreatureModel* getCreatureModel();
+
+	void unlinkCreatureModel();
 
 	void processJuries();
 
