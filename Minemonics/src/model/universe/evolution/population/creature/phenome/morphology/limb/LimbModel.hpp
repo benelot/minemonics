@@ -249,20 +249,7 @@ public:
 	}
 
 protected:
-
-	static BoostLogger mBoostLogger; /**!< The boost logger. */
-
-	/**
-	 * Initializer of the boost logger to include the class name into the logging messages.
-	 */
-	static class _Init {
-	public:
-		_Init() {
-			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant<std::string>("LimbModel"));
-		}
-	} _initializer;
-
+	//PARENT
 	CreatureModel* mCreatureModel; /**!< The creature model this limb belongs to. */
 
 	LimbPhysics* mLimbPhysics; /**!< The physics model of the limb. */
@@ -279,6 +266,20 @@ protected:
 
 	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
 
+private:
+
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant<std::string>("LimbModel"));
+		}
+	} _initializer;
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_LIMBMODEL_HPP_ */

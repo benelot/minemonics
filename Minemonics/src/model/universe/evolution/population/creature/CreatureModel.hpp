@@ -237,6 +237,30 @@ public:
 		return mPhenotypeModel->getLowestRelativePoint();
 	}
 
+	PhysicsController::PhysicsModelType getPhysicsModelType() const {
+		return mPhysicsModelType;
+	}
+
+	void setPopulationModel(PopulationModel* populationModel) {
+		mPopulationModel = populationModel;
+	}
+
+	unsigned long int getDynasty() const {
+		return mDynasty;
+	}
+
+	void setDynasty(unsigned long int dynasty) {
+		mDynasty = dynasty;
+	}
+
+	bool isMutated() const {
+		return mMutated;
+	}
+
+	void setMutated(bool mutated) {
+		mMutated = mutated;
+	}
+
 	// Serialization
 
 	virtual void save() {
@@ -291,30 +315,6 @@ public:
 		os << "/isCulled=" << creature.mCulled;
 		os << "/isNew=" << creature.mNew;
 		return os;
-	}
-
-	PhysicsController::PhysicsModelType getPhysicsModelType() const {
-		return mPhysicsModelType;
-	}
-
-	void setPopulationModel(PopulationModel* populationModel) {
-		mPopulationModel = populationModel;
-	}
-
-	unsigned long int getDynasty() const {
-		return mDynasty;
-	}
-
-	void setDynasty(unsigned long int dynasty) {
-		mDynasty = dynasty;
-	}
-
-	bool isMutated() const {
-		return mMutated;
-	}
-
-	void setMutated(bool mutated) {
-		mMutated = mutated;
 	}
 
 	/**
@@ -373,6 +373,9 @@ private:
 		}
 	} _initializer;
 
+	//PARENT
+	PopulationModel* mPopulationModel; /**!< The population the creature lives in. */
+
 	std::string mFirstName; /**!< The name of the creature. */
 
 	MixedGenome mGenotype; /**!< The genotype (genomic individual) of the creature. */
@@ -392,8 +395,6 @@ private:
 	bool mMutated; /**!< If the creature is mutated and the controller element has to be rebuilt */
 
 	PhysicsController::PhysicsModelType mPhysicsModelType; /**!< Physics model type */
-
-	PopulationModel* mPopulationModel; /**!< The population the creature lives in. */
 
 	double mFitnessScore; /**!< The fitness score competitively eruated by the juries. */
 

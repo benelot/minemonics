@@ -159,11 +159,13 @@ private:
 		}
 	} _initializer;
 
+	//PARENT
+	Creature* mCreature; /**!< The creature the limb belongs to. */
+
 	LimbGraphics* mLimbGraphics; /**!< Graphical representation of the limb. */
 
 	LimbModel* mLimbModel; /**!< The model representation of the limb. */
 
-	Creature* mCreature; /**!< The creature the limb belongs to. */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_HPP_ */

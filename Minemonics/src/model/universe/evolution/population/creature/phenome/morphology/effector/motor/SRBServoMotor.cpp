@@ -50,7 +50,6 @@ SRBServoMotor::SRBServoMotor(const SRBServoMotor& SRBServoMotor) {
 }
 
 SRBServoMotor::~SRBServoMotor() {
-	mJointMotorIndex = JointPhysics::RDOF_PITCH;
 }
 
 void SRBServoMotor::initialize() {

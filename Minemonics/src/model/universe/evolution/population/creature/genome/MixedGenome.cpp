@@ -53,8 +53,8 @@ MixedGenome::MixedGenome(const MixedGenome* mixedGenome) {
 	mSegmentsDepthLimit = mixedGenome->mSegmentsDepthLimit;
 	mTotalSegmentQtyLimit = mixedGenome->mTotalSegmentQtyLimit;
 
-	std::vector<Gene*>::const_iterator git = mixedGenome->mGenes.begin();
-	for (; git != mixedGenome->mGenes.end(); git++) {
+	for (std::vector<Gene*>::const_iterator git = mixedGenome->mGenes.begin();
+		git != mixedGenome->mGenes.end(); git++) {
 		mGenes.push_back((*git)->clone());
 	}
 }
@@ -73,7 +73,7 @@ void MixedGenome::createRandomGenome(double branchiness) {
 				GeneticsConfiguration::GENE_QTY_INITIAL_MEAN,
 				GeneticsConfiguration::GENE_QTY_INITIAL_VAR));
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << " Genome size: " << geneQty;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< " Genome size: " << geneQty;
 
 	// add the number of morphogenes
 	for (int i = 0; i < geneQty; i++) {
@@ -109,10 +109,10 @@ void MixedGenome::createRandomGenome(double branchiness) {
 			Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
 	}
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << this;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< this;
 }
 
-void MixedGenome::recalculateRootIndex(){
+void MixedGenome::recalculateRootIndex() {
 	// Find the gene that has the most active branches
 	int maxActiveBranches = 0;
 	for (int i = 0; i < mGenes.size(); i++) {
@@ -120,8 +120,8 @@ void MixedGenome::recalculateRootIndex(){
 		case Gene::MorphoGene: {
 
 			// print the number of branches
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\t   "
-				<< ((Morphogene*) mGenes[i])->getGeneBranches().size() << "\t";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\t   "
+			<< ((Morphogene*) mGenes[i])->getGeneBranches().size() << "\t";
 
 			// count the number of active branches
 			int activeBranches = 0;
@@ -143,13 +143,13 @@ void MixedGenome::recalculateRootIndex(){
 			}
 
 		}
-			break;
+		break;
 		default:
-			break;
-		}
+		break;
 	}
+}
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info) << "\t\t   " << maxActiveBranches;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\t\t   " << maxActiveBranches;
 }
 
 bool MixedGenome::equals(const MixedGenome & genome) const {
@@ -428,8 +428,7 @@ void MixedGenome::growStub(int geneIndex, int branchiness) {
 
 void MixedGenome::mutateRandomGenes(double percentage) {
 	for (int i = 0; i < mGenes.size(); i++) {
-		if (Randomness::getSingleton()->nextUnifDouble(0, 1)
-			<= percentage) {
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1) <= percentage) {
 			mutateGene(i);
 		}
 	}

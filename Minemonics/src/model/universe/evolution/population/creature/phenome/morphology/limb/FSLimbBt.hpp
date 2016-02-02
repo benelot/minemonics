@@ -231,6 +231,9 @@ private:
 		}
 	} _initializer;
 
+	//PARENT
+	LimbModel* mLimbModel; /**!< The limb model the physics model belongs to */
+
 	btDynamicsWorld* mWorld; /**!< The world the limb is in */
 
 	btCollisionShape* mCollisionShape; /**!< The collision shape of the limb */
@@ -242,8 +245,6 @@ private:
 	btVector3 mInertia; /**!< The inertia of the limb */
 
 	btMultiBodyLinkCollider* mLink; /**!< The multibody link segment of the limb */
-
-	LimbModel* mLimbModel; /**!< The limb model the physics model belongs to */
 };
 BOOST_CLASS_VERSION(FSLimbBt, 1)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_LIMB_FSLIMBBT_HPP_ */
