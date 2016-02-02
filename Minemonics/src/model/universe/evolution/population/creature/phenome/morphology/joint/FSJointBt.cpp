@@ -130,6 +130,21 @@ void FSJointBt::initialize() {
 FSJointBt::~FSJointBt() {
 	removeFromWorld();
 
+	if(mPitchMotor){
+		delete mPitchMotor;
+	}
+	mPitchMotor = NULL;
+
+	if(mYawMotor){
+		delete mYawMotor;
+	}
+	mYawMotor = NULL;
+
+	if(mRollMotor){
+		delete mRollMotor;
+	}
+	mRollMotor = NULL;
+
 	mWorld = NULL; 	// nullify the world reference
 }
 

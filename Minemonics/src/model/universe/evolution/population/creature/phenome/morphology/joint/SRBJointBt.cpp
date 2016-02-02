@@ -188,17 +188,12 @@ SRBJointBt::~SRBJointBt() {
 
 	mWorld = NULL; 	// nullify the world reference
 
-	//delete and clear the motor vector
-	for (std::vector<Motor*>::iterator motorIterator = mMotors.begin();
-		motorIterator != mMotors.end(); motorIterator++) {
-		delete (*motorIterator);
-	}
-
-	mMotors.clear();
 #ifdef CONSTRAINT_INDEX
 	delete mJoint;
 	mJoint = NULL;
 #endif
+	mBodyA = NULL;
+	mBodyB = NULL;
 }
 
 void SRBJointBt::update(double timeSinceLastTick) {
