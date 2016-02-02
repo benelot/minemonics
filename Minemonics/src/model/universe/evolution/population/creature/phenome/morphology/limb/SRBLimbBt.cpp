@@ -100,13 +100,19 @@ SRBLimbBt::SRBLimbBt(const SRBLimbBt& limbBt) {
 }
 
 SRBLimbBt::~SRBLimbBt() {
-	delete mBody;
+	if (mBody) {
+		delete mBody;
+	}
 	mBody = NULL;
 
-	delete mCollisionShape;
+	if (mCollisionShape) {
+		delete mCollisionShape;
+	}
 	mCollisionShape = NULL;
 
-	delete mMotionState;
+	if (mMotionState) {
+		delete mMotionState;
+	}
 	mMotionState = NULL;
 
 	mWorld = NULL;

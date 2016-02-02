@@ -99,16 +99,25 @@ FSLimbBt::FSLimbBt(const FSLimbBt& limbBt) {
 }
 
 FSLimbBt::~FSLimbBt() {
-	delete mBody;
+	if (mBody) {
+		delete mBody;
+	}
 	mBody = NULL;
 
-	delete mCollisionShape;
+	if (mCollisionShape) {
+		delete mCollisionShape;
+	}
 	mCollisionShape = NULL;
 
-	delete mMotionState;
+	if (mMotionState) {
+		delete mMotionState;
+	}
 	mMotionState = NULL;
 
-	delete mLink;
+	if (mLink) {
+		delete mLink;
+	}
+
 	mLink = NULL;
 
 	mWorld = NULL;
