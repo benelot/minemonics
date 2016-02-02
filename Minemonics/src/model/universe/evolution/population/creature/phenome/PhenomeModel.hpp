@@ -304,9 +304,10 @@ private:
 protected:
 	bool mDeveloped; /**!< Is the phenotype developed? */
 
-	CreatureModel* mCreatureModel; /**!< The creature model the phenome belongs to */
-
 	bool mInWorld; /**!< Whether the phenome is in the world or not. */
+
+	//PARENT
+	CreatureModel* mCreatureModel; /**!< The creature model the phenome belongs to */
 
 	std::vector<ComponentModel*> mComponentModels; /**!< The vector of phenotype component models. */
 

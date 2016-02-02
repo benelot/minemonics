@@ -172,11 +172,12 @@ private:
 		}
 	} _initializer; /**!< Initializer of the boost logger to include the class name into the logging messages. */
 
+	//PARENT
 	Planet* mPlanet; /**!< The planet the population lives on. */
+	PopulationModel* mPopulationModel; /**!< The state model of the population */
 
 	std::vector<Creature*> mCreatures; /**!< The creatures living in this population. All creatures in one population can mate together. */
 
-	PopulationModel* mPopulationModel; /**!< The state model of the population */
 };
 
 #endif /* CONTROLLER_UNIVERSE_EVOLUTION_POPULATION_POPULATION_HPP_ */
