@@ -55,7 +55,8 @@ ViewController::ViewController() :
 	NULL), mShowShadows(false), mMenuBar(NULL), mFpsPanel(
 	NULL), mDetailsPanel(NULL), mNewPlanetWindow(NULL), mNewPopulationWindow(
 	NULL), mEditPlanetWindow(), mEditPopulationWindow(NULL), mLoadPlanetWindow(
-	NULL), mLoadPopulationWindow(NULL),mChaosControllerPanel(NULL),mJointDynamicsPanel(NULL) {
+	NULL), mLoadPopulationWindow(NULL), mChaosControllerPanel(NULL), mJointDynamicsPanel(
+		NULL) {
 }
 
 ViewController::~ViewController() {
@@ -75,11 +76,6 @@ ViewController::~ViewController() {
 	delete mMenuBar;
 	mMenuBar = NULL;
 
-//	delete mFpsPanel;
-//	mFpsPanel = NULL;
-
-//	delete mDetailsPanel;
-//	mDetailsPanel = NULL;
 
 	delete mNewPlanetWindow;
 	mNewPlanetWindow = NULL;
@@ -98,6 +94,20 @@ ViewController::~ViewController() {
 
 	delete mLoadPopulationWindow;
 	mLoadPopulationWindow = NULL;
+
+	//TODO: Find out why the panels can not be deleted
+
+	//	delete mFpsPanel;
+	//	mFpsPanel = NULL;
+
+	//	delete mDetailsPanel;
+	//	mDetailsPanel = NULL;
+	//TODO: Find out why the panels can not be deleted
+//	for (std::vector<MovablePanel*>::iterator it = mMovablePanels.begin();
+//		it != mMovablePanels.end();) {
+//		delete (*it);
+//		it = mMovablePanels.erase(it);
+//	}
 }
 
 void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
@@ -186,16 +196,18 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 	mLoadPopulationWindow->hide();
 	mMovablePanels.push_back(mLoadPopulationWindow);
 
-	mChaosControllerPanel = new MathGLPanel("Chaos controller state",((float)windowWidth) / 1.37f, windowHeight / 100.0f, 500,
-		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
+	mChaosControllerPanel = new MathGLPanel("Chaos controller state",
+		((float) windowWidth) / 1.37f, windowHeight / 100.0f, 500, 500,
+		SimulationManager::getSingleton()->getRoot(), 500, 500);
 	mChaosControllerPanel->hide(); // hide the panel by default
 
 	mMovablePanels.push_back(mChaosControllerPanel);
 
-	mJointDynamicsPanel = new MathGLPanel("Joint dynamics",((float)windowWidth) / 1.37f, windowHeight / 2.0f, 500,
-		500, SimulationManager::getSingleton()->getRoot(), 500, 500);
-	mJointDynamicsPanel->setXLabel("x: joint x[-Pi;Pi]");
-	mJointDynamicsPanel->setYLabel("y:joint dx[1/s]");
+	mJointDynamicsPanel = new MathGLPanel("Joint dynamics",
+		((float) windowWidth) / 1.37f, windowHeight / 2.0f, 500, 500,
+		SimulationManager::getSingleton()->getRoot(), 500, 500);
+	mJointDynamicsPanel->setXLabel("Joint x[-Pi;Pi]");
+	mJointDynamicsPanel->setYLabel("Joint dx[1/s]");
 	mJointDynamicsPanel->setHorizontalRotation(0);
 	mJointDynamicsPanel->setVerticalRotation(0);
 	mJointDynamicsPanel->hide(); // hide the panel by default
@@ -206,8 +218,8 @@ void ViewController::initialize(Ogre::RenderTarget* const renderTarget) {
 //		new ShowCasePanel(0, 30, "ShowcasePanel", 1800, 1000));
 
 	// add all movable panels to the layout
-	std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();
-	for (; it != mMovablePanels.end(); it++) {
+	for (std::vector<MovablePanel*>::const_iterator it = mMovablePanels.begin();
+		it != mMovablePanels.end(); it++) {
 		mLayout->addChild((*it)->getWindow());
 	}
 

@@ -159,15 +159,16 @@ void PhysicsController::initialize() {
 void PhysicsController::exitBulletPhysics() {
 	//cleanup in the reverse order of creation/initialization
 
-	for (int i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) { //remove the rigidbodies from the dynamics world and delete them
-		btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[i];
-		btRigidBody* body = btRigidBody::upcast(obj);
-		if (body && body->getMotionState())
-			delete body->getMotionState();
-
-		mDynamicsWorld->removeCollisionObject(obj);
-		delete obj;
-	}
+	//TODO: Find out why you get a segfault at obj
+//	for (int i = mDynamicsWorld->getNumCollisionObjects() - 1; i >= 0; i--) { //remove the rigidbodies from the dynamics world and delete them
+//		btCollisionObject* obj = mDynamicsWorld->getCollisionObjectArray()[i];
+//		btRigidBody* body = btRigidBody::upcast(obj);
+//		if (body && body->getMotionState())
+//			delete body->getMotionState();
+//
+//		mDynamicsWorld->removeCollisionObject(obj);
+//		delete obj;
+//	}
 
 	delete mDynamicsWorld;
 	mDynamicsWorld = NULL;
