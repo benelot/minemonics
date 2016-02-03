@@ -35,7 +35,7 @@
 EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 	const std::string name) :
 	MovablePanel(name, MovablePanel::EDIT_PLANET_PANEL), mEnvironmentTypeLabel(
-		NULL) {
+	NULL) {
 	int width = 600;
 	int height = 600;
 
@@ -73,7 +73,8 @@ EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		mEnvironmentTypeCb->setText(itemCombobox->getText()); // Copy the item's text into the Editbox
 		mEnvironmentTypeCb->setItemSelectState(itemCombobox, true);
-		itemCombobox = new CEGUI::ListboxTextItem("Hills", EnvironmentModel::HILLS);
+		itemCombobox = new CEGUI::ListboxTextItem("Hills",
+			EnvironmentModel::HILLS);
 		mEnvironmentTypeCb->addItem(itemCombobox);
 		itemCombobox = new CEGUI::ListboxTextItem("Open Sea",
 			EnvironmentModel::OPENSEA);
@@ -204,6 +205,53 @@ EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 }
 
 EditPlanetPanel::~EditPlanetPanel(void) {
+	// According to:
+	//http://cegui.org.uk/forum/viewtopic.php?t=1535
+	// All chilrden of base widget are deleted as well
+//	if (mEnvironmentTypeLabel) {
+//		delete mEnvironmentTypeLabel;
+//	}
+//	mEnvironmentTypeLabel = NULL;
+//
+//	if (mEvaluationTimeLabel) {
+//		delete mEvaluationTimeLabel;
+//	}
+//	mEvaluationTimeLabel = NULL;
+//
+//	if (mEvaluationTypeLabel) {
+//		delete mEvaluationTypeLabel;
+//	}
+//	mEvaluationTypeLabel = NULL;
+//
+//	if (mTournamentSizeLabel) {
+//		delete mTournamentSizeLabel;
+//	}
+//	mTournamentSizeLabel = NULL;
+//
+//	if (mEnvironmentTypeCb) {
+//		delete mEnvironmentTypeCb;
+//	}
+//	mEnvironmentTypeCb = NULL;
+//
+//	if (mEvaluationTimeBs) {
+//		delete mEvaluationTimeBs;
+//	}
+//	mEvaluationTimeBs = NULL;
+//
+//	if (mEvaluationTypeCb) {
+//		delete mEvaluationTypeCb;
+//	}
+//	mEvaluationTypeCb = NULL;
+//
+//	if (mTournamentSizeBs) {
+//		delete mTournamentSizeBs;
+//	}
+//	mTournamentSizeBs = NULL;
+//
+//	if (mConfirmButton) {
+//		delete mConfirmButton;
+//	}
+//	mConfirmButton = NULL;
 }
 
 void EditPlanetPanel::onValueChanged() {

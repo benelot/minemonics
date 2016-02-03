@@ -99,6 +99,24 @@ NewPopulationPanel::NewPopulationPanel(const int left, const int top,
 }
 
 NewPopulationPanel::~NewPopulationPanel(void) {
+
+	// According to:
+	//http://cegui.org.uk/forum/viewtopic.php?t=1535
+	// All chilrden of base widget are deleted as well
+//	if (mPopulationSizeLabel) {
+//		delete mPopulationSizeLabel;
+//	}
+//	mPopulationSizeLabel = NULL;
+//
+//	if (mPopulationSizeBs) {
+//		delete mPopulationSizeBs;
+//	}
+//	mPopulationSizeBs = NULL;
+//
+//	if (mConfirmButton) {
+//		delete mConfirmButton;
+//	}
+//	mConfirmButton = NULL;
 }
 
 void NewPopulationPanel::onConfirmClicked() {

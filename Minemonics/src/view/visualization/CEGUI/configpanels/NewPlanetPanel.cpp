@@ -367,6 +367,94 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 }
 
 NewPlanetPanel::~NewPlanetPanel(void) {
+
+	// According to:
+	//http://cegui.org.uk/forum/viewtopic.php?t=1535
+	// All chilrden of base widget are deleted as well
+//	if (mPhysicsControllerTypeLabel) {
+//		delete mPhysicsControllerTypeLabel;
+//	}
+//	mPhysicsControllerTypeLabel = NULL;
+//
+//	if (mEnvironmentTypeLabel) {
+//		delete mEnvironmentTypeLabel;
+//	}
+//	mEnvironmentTypeLabel = NULL;
+//
+//	if (mEvaluationTimeLabel) {
+//		delete mEvaluationTimeLabel;
+//	}
+//	mEvaluationTimeLabel = NULL;
+//
+//	if (mEvaluationTypeLabel) {
+//		delete mEvaluationTypeLabel;
+//	}
+//	mEvaluationTypeLabel = NULL;
+//
+//	if (mTournamentSizeLabel) {
+//		delete mTournamentSizeLabel;
+//	}
+//	mTournamentSizeLabel = NULL;
+//
+//	if (mPhysicsControllerTypeCb) {
+//		delete mPhysicsControllerTypeCb;
+//	}
+//	mPhysicsControllerTypeCb = NULL;
+//
+//	if (mEnvironmentTypeCb) {
+//		delete mEnvironmentTypeCb;
+//	}
+//	mEnvironmentTypeCb = NULL;
+//
+//	if (mEvaluationTimeBs) {
+//		delete mEvaluationTimeBs;
+//	}
+//	mEvaluationTimeBs = NULL;
+//
+//	if (mEnvironmentTypeCb) {
+//		delete mEnvironmentTypeCb;
+//	}
+//	mEnvironmentTypeCb = NULL;
+//
+//	if (mTournamentSizeBs) {
+//		delete mTournamentSizeBs;
+//	}
+//	mTournamentSizeBs = NULL;
+//
+//	if (mConfirmButton) {
+//		delete mConfirmButton;
+//	}
+//	mConfirmButton = NULL;
+//
+//	if (mEpochNumber) {
+//		delete mEpochNumber;
+//	}
+//	mEpochNumber = NULL;
+//
+//	if (mJuryWeight) {
+//		delete mJuryWeight;
+//	}
+//	mJuryWeight = NULL;
+//
+//	if (mJuryType) {
+//		delete mJuryType;
+//	}
+//	mJuryType = NULL;
+//
+//	if (mDirection) {
+//		delete mDirection;
+//	}
+//	mDirection = NULL;
+//
+//	if (mAddJury) {
+//		delete mAddJury;
+//	}
+//	mAddJury = NULL;
+//
+//	if (mJuryMcl) {
+//		delete mJuryMcl;
+//	}
+//	mJuryMcl = NULL;
 }
 
 void NewPlanetPanel::onValueChanged() {

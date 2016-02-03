@@ -134,12 +134,22 @@ SimulationManager::~SimulationManager(void) {
 	destroyScene(); /**!< tear down the scene */
 
 	// destroy the ogre renderer system
+	//TODO: Properly cleanup CEGUI system
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	//http://cegui.org.uk/forum/viewtopic.php?t=6166
 //	CEGUI::OgreRenderer::destroySystem();
+
+
+	//TODO: Check if this is done correctly
+	SDL_DestroyWindow(mSdlWindow);
+	mSdlWindow = NULL;
 
 	//This is used past this line because the destructors are called on it
 //	mSimulationManager = NULL;
 	delete mRandomness;
 	mRandomness = NULL;
+
+	 SDL_Quit();
 }
 
 void SimulationManager::setupView(void) {
@@ -504,6 +514,8 @@ void SimulationManager::windowFocusChange(Ogre::RenderWindow* rw) {
  */
 void SimulationManager::destroyScene(void) {
 	mUniverse.teardown();
+//	delete mSun;
+//	mSun = NULL;
 }
 //-------------------------------------------------------------------------------------
 

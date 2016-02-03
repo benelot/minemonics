@@ -38,8 +38,8 @@
 //## view headers
 //## utils headers
 
-FileDialog::FileDialog(const int left, const int top,
-	const std::string name, MovablePanel::MovablePanelType type) :
+FileDialog::FileDialog(const int left, const int top, const std::string name,
+	MovablePanel::MovablePanelType type) :
 	MovablePanel(name, type), mDialogShown(false) {
 
 	mType = type;
@@ -268,8 +268,7 @@ FileDialog::FileDialog(const int left, const int top,
 	if (mExtensionsCb) {
 		mExtensionsCb->subscribeEvent(
 			CEGUI::Combobox::EventListSelectionAccepted,
-			CEGUI::Event::Subscriber(&FileDialog::handleFilterSelect,
-				this));
+			CEGUI::Event::Subscriber(&FileDialog::handleFilterSelect, this));
 		CEGUI::ListboxTextItem* itemCombobox = new CEGUI::ListboxTextItem(
 			" All (*)", 0);
 		mExtensionsCb->addItem(itemCombobox);
@@ -296,7 +295,8 @@ FileDialog::FileDialog(const int left, const int top,
 	if (mWindowPromptLoad) {
 		mBaseWidget->getParent()->addChild(mWindowPromptLoad);
 		mWindowPromptLoad->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked,
-			CEGUI::Event::Subscriber(&FileDialog::handlePromptLoadCancel, this));
+			CEGUI::Event::Subscriber(&FileDialog::handlePromptLoadCancel,
+				this));
 		mWindowPromptLoad->disable();
 		mWindowPromptLoad->hide();
 	}
@@ -315,7 +315,8 @@ FileDialog::FileDialog(const int left, const int top,
 	if (mWindowPromptSave) {
 		mBaseWidget->getParent()->addChild(mWindowPromptSave);
 		mWindowPromptSave->subscribeEvent(CEGUI::FrameWindow::EventCloseClicked,
-			CEGUI::Event::Subscriber(&FileDialog::handlePromptSaveCancel, this));
+			CEGUI::Event::Subscriber(&FileDialog::handlePromptSaveCancel,
+				this));
 		mWindowPromptSave->disable();
 		mWindowPromptSave->hide();
 	}
@@ -338,7 +339,89 @@ FileDialog::FileDialog(const int left, const int top,
 }
 
 FileDialog::~FileDialog() {
-	// TODO Auto-generated destructor stub
+
+	// According to:
+	//http://cegui.org.uk/forum/viewtopic.php?t=1535
+	// All chilrden of base widget are deleted as well
+//	if (mBackButton) {
+//		delete mBackButton;
+//	}
+//	mBackButton = NULL;
+//
+//	if (mOkButton) {
+//		delete mOkButton;
+//	}
+//	mOkButton = NULL;
+//
+//	if (mCancelButton) {
+//		delete mCancelButton;
+//	}
+//	mCancelButton = NULL;
+//
+//	if (mFileLabel) {
+//		delete mFileLabel;
+//	}
+//	mFileLabel = NULL;
+//
+//	if (mFileCb) {
+//		delete mFileCb;
+//	}
+//	mFileCb = NULL;
+//
+//	if (mDrivesCb) {
+//		delete mDrivesCb;
+//	}
+//	mDrivesCb = NULL;
+//
+//	if (mExtensionsLabel) {
+//		delete mExtensionsLabel;
+//	}
+//	mExtensionsLabel = NULL;
+//
+//	if (mFilesLb) {
+//		delete mFilesLb;
+//	}
+//	mFilesLb = NULL;
+//
+//	if (mWindowPromptLoad) {
+//		delete mWindowPromptLoad;
+//	}
+//	mWindowPromptLoad = NULL;
+//
+//	if (mStPromptLoad) {
+//		delete mStPromptLoad;
+//	}
+//	mStPromptLoad = NULL;
+//
+//	if (mPromptLoadOkButton) {
+//		delete mPromptLoadOkButton;
+//	}
+//	mPromptLoadOkButton = NULL;
+//
+//	if (mPromptLoadCancelButton) {
+//		delete mPromptLoadCancelButton;
+//	}
+//	mPromptLoadCancelButton = NULL;
+//
+//	if (mWindowPromptSave) {
+//		delete mWindowPromptSave;
+//	}
+//	mWindowPromptSave = NULL;
+//
+//	if (mStPromptSave) {
+//		delete mStPromptSave;
+//	}
+//	mStPromptSave = NULL;
+//
+//	if (mPromptSaveOkButton) {
+//		delete mPromptSaveOkButton;
+//	}
+//	mPromptSaveOkButton = NULL;
+//
+//	if (mPromptSaveCancelButton) {
+//		delete mPromptSaveCancelButton;
+//	}
+//	mPromptSaveCancelButton = NULL;
 }
 
 void FileDialog::disableDialog(void) {

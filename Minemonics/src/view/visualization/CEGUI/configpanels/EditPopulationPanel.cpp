@@ -78,4 +78,16 @@ EditPopulationPanel::EditPopulationPanel(const int left, const int top,
 }
 
 EditPopulationPanel::~EditPopulationPanel(void) {
+	// According to:
+	//http://cegui.org.uk/forum/viewtopic.php?t=1535
+	// All chilrden of base widget are deleted as well
+//	if(mTextBoxLabel){
+//		delete mTextBoxLabel;
+//	}
+//	mTextBoxLabel = NULL;
+//
+//	if(mTextBoxValues){
+//		delete mTextBoxValues;
+//	}
+//	mTextBoxValues = NULL;
 }

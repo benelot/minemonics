@@ -71,9 +71,6 @@ void MovablePanel::initialize(const int left, const int top, const int width,
 }
 
 MovablePanel::~MovablePanel(void) {
-	//TODO: Find out why this is already deleted
-	//delete ((CEGUI::FrameWindow*)mFrameWindow);
-	mFrameWindow = NULL;
 }
 
 void MovablePanel::update() {

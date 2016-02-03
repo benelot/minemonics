@@ -39,7 +39,13 @@ BasePanel::BasePanel(const std::string name) :
 }
 
 BasePanel::~BasePanel(void) {
-	delete mFrameWindow;
+
+//	delete mFrameWindow;
+	//TODO: Properly cleanup CEGUI system
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	if (mFrameWindow) {
+		CEGUI::WindowManager::getSingleton().destroyWindow(mFrameWindow); // this destroys all children of framewindow as well
+	}
 	mFrameWindow = NULL;
 }
 
