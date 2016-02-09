@@ -120,10 +120,10 @@ The limiter is added to the equations as shown below:
 f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + 1 | -| x - 1 |)}
 \end{align*}
 
-Intially a hard limiter defined as a piecewise function was chosen, however a soft limiter is a better model for physical limiters, because in physics, no hard limiters exist. Using the $softness$ parameter of the limiter, the softness of the limiter can be tuned where a \(softness = 10\) means very soft and a \(softness = 0.1\) means a very hard limiter. The $limitValue$ parameter defines the threshold value at which the limiter starts to be applied. We set the softness to a value of \(softness=0.13\) to approximate a rather hard limiter. With the above mentioned initial conditions, the trajectory in state space stays within the bounding box of \(x \in [-2.8717,2.2417],~y \in [-0.380467,0.386978],~z \in [-3.59156,3.62959]\).\\
+Initially a hard limiter defined as a piecewise function was chosen, however a soft limiter is a better model for physical limiters, because in physics, no hard limiters exist. Using the $softness$ parameter of the limiter, the softness of the limiter can be tuned where a \(softness = 10\) means very soft and a \(softness = 0.1\) means a very hard limiter. The $limitValue$ parameter defines the threshold value at which the limiter starts to be applied. We set the softness to a value of \(softness=0.13\) to approximate a rather hard limiter. With the above mentioned initial conditions, the trajectory in state space stays within the bounding box of \(x \in [-2.8717,2.2417],~y \in [-0.380467,0.386978],~z \in [-3.59156,3.62959]\).\\
 If we now change the $limitValue$ parameter from \(>3.19\) which corresponds to no limiter influence to the trajectory to a value within \(limitValue \in [2.4,3.19[\), we can observe different chaotic trajectories. The limiter influences the circuit by limiting the change of current flow \(\frac{dz}{dt}\) when \(x\) approaches the limiter.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-2-5.png}
 \caption[Figure of chaotic behaviors in range 2.4-3.19]{Figure of chaotic behaviors in range 2.4-3.19}
@@ -132,14 +132,14 @@ If we now change the $limitValue$ parameter from \(>3.19\) which corresponds to 
 
 When choosing a \(limitValue \in [2.28,2.4[\) one can observe that the limiter more and more suppresses chaotic behavior and reduces the number of times the trajectory switches back into the uppermost scroll of the multiscroll.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-2-28.png}
 \caption[Figure of behaviors in range 2.28-2.4]{Figure of behaviors in range 2.28-2.4}
 \label{figure:chaotictrajectories}
 \end{figure}
 
-With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the lowermost scroll and shows periodic behavior. With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the lowermost scroll and shows periodic behavior. The table \ref{table:periodicities} shows different limit values for different periodicities.
+With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the lowermost scroll and shows periodic behavior. The control behavior can be explained by looking at figure \ref{figure:chaoticchuacircuit} again. The trajectories that lead from the lower-most scroll to the upper-most scroll pass by at the outer orbits of the lower-most scroll and therefore have the highest x(t) values. The limiter is applied when a certain x(t) value is surpassed, therefore the limiter limits z(t) which then leads to a repelling influence from the limiter. The trajectory thereby is pulled back onto a former orbit, which stabilizes the state onto that orbit. The table \ref{table:periodicities} shows different limit values for different periodicities.
 
 \begin{comment}
 \begin{table}
@@ -155,6 +155,8 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \label{table:periodicities}
 \end{table}
 \end{comment}
+
+The plots below show the periodic trajectories for various limit values and a close-up look to make the period visible.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -180,12 +182,18 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \label{table:periodicities}
 \end{table}
 
+{%
+\setlength{\fboxsep}{0pt}
+\setlength{\fboxrule}{1pt}
+
 \hspace*{-0.2\textwidth}
 \begin{minipage}{1.3\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-215.png}
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-215-closeup.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-215.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-215-closeup.png}
+}
 \caption[Figure of period 24 limit cycle]{Figure of period 24 limit cycle}
 \label{figure:chaotictrajectories}
 \end{figure}
@@ -195,8 +203,10 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \begin{minipage}{1.3\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-21.png}
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-21-closeup.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-21.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-21-closeup.png}
+}
 \caption[Figure of period 10 limit cycle]{Figure of period 10 limit cycle}
 \label{figure:chaotictrajectories}
 \end{figure}
@@ -206,8 +216,10 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \begin{minipage}{1.3\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-207.png}
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-207-closeup.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-207.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-207-closeup.png}
+}
 \caption[Figure of period 7 limit cycle]{Figure of period 7 limit cycle}
 \label{figure:chaotictrajectories}
 \end{figure}
@@ -217,8 +229,10 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \begin{minipage}{1.3\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-205.png}
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-205-closeup.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-205.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-205-closeup.png}
+}
 \caption[Figure of period 5 limit cycle]{Figure of period 5 limit cycle}
 \label{figure:chaotictrajectories}
 \end{figure}
@@ -228,8 +242,10 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \begin{minipage}{1.3\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-1995.png}
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-1995-closeup.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-1995.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-1995-closeup.png}
+}
 \caption[Figure of period 3 limit cycle]{Figure of period 3 limit cycle}
 \label{figure:chaotictrajectories}
 \end{figure}
@@ -239,8 +255,10 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 \begin{minipage}{1.3\textwidth}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-183.png}
-\includegraphics[width=0.49\textwidth]{chua-circuit/Limited-chua-circuit-2-183-closeup.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-183.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-183-closeup.png}
+}
 \caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
 \label{figure:chaotictrajectories}
 \end{figure}
@@ -248,6 +266,32 @@ With a value of \(limitValue \in [2,183, 2.28]\) the state only stays in the low
 
 From the table \ref{table:periodicities} it gets visible how densely packed the different periodicities are in the limiter space. The system is highly sensitive to the exact position of the limiter. But it gets more interesting as we move the limiter even further towards 0. Instead of showing a period 1 as one might expect, the periodicity becomes higher again for \(limitValue \in [2.183,2.15]\) and lowers again for \(limitValue \in [2.15,1.83]\). A self-similar pattern of increasing and decreasing periodicities can be observed.
 
-\todo[inline]{Improve simple limiter control in Mathematica}
+\hspace*{-0.2\textwidth}
+\begin{minipage}{1.3\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-15.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-15-closeup.png}
+}
+\caption[Figure of period 3 limit cycle]{Figure of very high period limit cycle}
+\label{figure:chaotictrajectories}
+\end{figure}
+\end{minipage}
+
+\hspace*{-0.2\textwidth}
+\begin{minipage}{1.3\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-1-83.png}
+\fbox{
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-1-83-closeup.png}
+}
+\caption[Figure of period 3 limit cycle]{Figure of period 1 limit cycle. The trajectory in the upper left half is the entry point to the periodic orbit before it gets limiter controlled.}
+\label{figure:chaotictrajectories}
+\end{figure}
+\end{minipage}
+
+}%
 
 \end{document}
