@@ -22,15 +22,7 @@ Starting in the industrial revolution, people have started to automatize product
 
 \section{Uncoupled sinusoidal oscillators}
 
-First the non-adaptive controller was used to check if the evolutionary optimization is able to come up with solutions of a high enough variety in order to find valuable creature controller solutions to make a creature locomote on a flat terrain. The controller is fully distributed within the body of the creature and runs completely uncoordinated. It consists of many subcontrollers, whereas one subcontroller controls one degree of freedom in a certain joint. The controller's output is a simple sinusoidal signal defined by the parameters of amplitude and frequency and the X and Y offset in signal space. The parameter ranges are $\text{amplitude} \in [0,0.5]$, $\text{frequency} \in [0.1,4]$, $\text{offset}_X \in [0,2\Pi]$ and $\text{offset}_Y \in [0,1]$. Every time a Morphogene branch defining a joint is mutated, the sinusoidal subcontroller gets randomly initialized as well. The sinusoidal signal was then fed into a PID position controller to make the limb precisely follow the sinusoidal signal. Thereby the controller's solution is basically a set of sinusoids, that when applied to the co-evolved morphology results in a locomotion behavior that moves the creature forward. The controller type was tested in an experiment on the simulator and successful solutions were evolved that can be seen below in figure \ref{figure:successfulcreatures}.
-
-\begin{figure}[!h]
-\centering
-\missingfigure[figwidth=1\textwidth]{Figure of the successful sinusoid controller creatures.}
-\caption[Figure of the successful sinusoid controller creatures.]{Figure of the successful sinusoid controller creatures.}
-\label{figure:successfulcreatures}
-\end{figure}
-
+First the non-adaptive controller was used to check if the evolutionary optimization is able to come up with solutions of a high enough variety in order to find valuable creature controller solutions to make a creature locomote on a flat terrain. The controller is fully distributed within the body of the creature and runs completely uncoordinated. It consists of many subcontrollers, whereas one subcontroller controls one degree of freedom in a certain joint. The controller's output is a simple sinusoidal signal defined by the parameters of amplitude and frequency and the X and Y offset in signal space. The parameter ranges are $\text{amplitude} \in [0,0.5]$, $\text{frequency} \in [0.1,4]$, $\text{offset}_X \in [0,2\Pi]$ and $\text{offset}_Y \in [0,1]$. Every time a Morphogene branch defining a joint is mutated, the sinusoidal subcontroller gets randomly initialized as well. The sinusoidal signal was then fed into a PID position controller to make the limb precisely follow the sinusoidal signal. Thereby the controller's solution is basically a set of sinusoids, that when applied to the co-evolved morphology results in a locomotion behavior that moves the creature forward. 
 
 \section{Chaotic systems}
 
@@ -38,22 +30,7 @@ First the non-adaptive controller was used to check if the evolutionary optimiza
 
 \subsection{Chua Circuit}
 
-According to [<ref name="Kennedy1993">{{cite journal
-  | last = Kennedy
-  | first = Michael Peter
-  | title = Three steps to chaos - Part 1:Evolution
-  | journal = IEEE Trans. on Circuits and Systems
-  | volume = 40
-  | issue = 10
-  | pages = 640
-  | publisher = Institute of Electrical and Electronic Engineers 
-  | location = 
-  | date = October 1993
-  | url = http://www.eecs.berkeley.edu/~chua/papers/Kennedy93.pdf
-  | issn = 
-  | doi = 10.1109/81.246140
-  | id = 
-  | accessdate = February 6, 2014}}</ref>], for a circuit with time-varying output and no time-varying input that is built from electronic components such as resistors, capacitor and inductors, three criteria must hold in order to display chaotic behavior. It must contain:
+According to \ref{bib:Kennedy1993}, for a circuit with time-varying output and no time-varying input that is built from electronic components such as resistors, capacitor and inductors, three criteria must hold in order to display chaotic behavior. It must contain:
   \begin{enumerate}
   \item at least one nonlinear element (where piecewise linear is sufficient)
   \item at least one locally active resistor
