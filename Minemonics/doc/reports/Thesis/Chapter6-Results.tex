@@ -19,20 +19,27 @@
 
 \section{Creatures with uncoupled sinusoidal oscillators}
 
-The controller type was tested in an experiment on the simulator and successful solutions were evolved that can be seen below in figure \ref{figure:successfulcreatures}.
+In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-oscillators} was used to evolve creatures. A population of 100 creatures was set up with an average velocity fitness function and a minimal height fitness function. The latter was chosen because the simulator had issues in the physical model setup that led to creatures that could fly due to imaginary forces (as described in \ref{subsec:population}). The minimal height fitness function punished those creatures that reached a high average height of all limbs, which was the case for creatures that were flying. The simulation was run for approximately a day and took 181 generations for locomotion behavior to occur. Every creature was evaluated for 20 seconds. 181 generations of 100 creatures evaluated for 20 seconds are \(\approx\unit[4.2]{days}\), however, since the simulator can evaluate faster than real-time if the simulation permits it, it could simulate the creatures with approximately \(4.2\) times real-time. The successful solutions evolved can be seen below in figure \ref{figure:successfulcreatures}.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \missingfigure[figwidth=1\textwidth]{Figure of the successful sinusoid controller creatures.}
 \caption[Figure of the successful sinusoid controller creatures.]{Figure of the successful sinusoid controller creatures.}
 \label{figure:successfulcreatures}
 \end{figure}
 
-\section{Simple limiter control in the simulator}
+Creatures that exhibit successful locomotion seem to share a common ancestor that was the first who evolved a successful walking pattern, since all of them share a similar magenta skin coloring. Since the skin color is randomly set for one limb, the common ancestor could only have had all the same color and must have been replicated using crossover. In crossover (as described in \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. Since this process involves no mutations, the crossover must have happened mainly among creatures sharing the same magenta skin coloring. Due to the elitism mechanism of the evolutionary process, the first successful creature generated an onset of an avalanche of successful creatures flooding the population with very similar solutions. 
 
-\lipsum{1}
+However, the major drawback of the sinusoidal oscillator controller is that they do not show any adaption during the evaluation depending on the environment. The only way for the controller to adapt is on the evolutionary time-scale, which does not result in any advantage for the individual.
+\todo[inline]{Show reason why the creatures can not adapt.}
+\section{Simple limiter control in the simulator}
+% rev. 1
+
+Further experiments were run on the chaotic controller as described in \ref{subsec:chua-circuit}. Simple limiters can come in various ways, since they only must be natural to the system at hand \cite{bib:Corron2000}. Therefore the first experiments were run using chaotic controllers without direct limiters implemented to the controllers. Unfortunately, this approach was not successful as no periodic movement could be observed at any time of the evolution, meaning that no limiter was applied to control the chaos at any point. The next idea was to implement limiters based on the sensory feedback of the respective joint the controller is controlling. 
 
 \subsection{Indirect limiter control through the morphology}
+
+
 
 \lipsum{1}
 
@@ -42,7 +49,10 @@ The controller type was tested in an experiment on the simulator and successful 
 
 \subsubsection{Limiting the model leg in the simulator}
 
-\lipsum{1}
+To test the approach on a simple model organism, the model leg with different control torques, friction and damping coefficients were tested to observe the resulting change in controller dynamics. 
+
+
+\todo[inline]{Finish section on model leg experiments.}
 
 \subsubsection{Evolving creatures with direct limiter control}
 

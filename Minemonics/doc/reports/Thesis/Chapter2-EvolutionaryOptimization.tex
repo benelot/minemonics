@@ -58,6 +58,7 @@ An epoch of a certain planet models the changes of environmental factors, which 
 Juries or fitness functions are part of an epoch in which they are relevant. A jury collects data on a certain performance during the evaluation of a creature and finally has to rate the performance of an individual. Commonly used juries of the simulator are the distance travelled during the evaluation time or the average height above ground of all limbs during the evaluation. A jury additionally has a combination weight, which indicates the weight in the total performance of the creature, and a sorting direction, which indicates whether a higher rating is considered better or worse than a lower rating. Fitness values of different types of juries are combined based on the type-specific competitive ranking among the creatures of a population. This procedure will be described in the section \ref{subsubsection:Culling} Culling of the Reaper component.
 
 \subsection{Populations}
+\label{subsec:populations}
 
 A population of creatures in the simulator lives on a certain planet. Depending on the evolution settings of the planet, one creature, multiple creatures of one population, multiple creatures of multiple populations or multiple whole populations are evaluated at the same time within one evaluation slot. When a population is initialized, it has a certain initial number of individuals. The individuals can be completely randomly generated creatures or model organisms, the latter being common primitives for testing. During the evaluation of a population, the number of individuals falls generally below the original population size, because several individuals are culled during the evaluation. This happens when creatures surpass boundaries of physical realism (generally high forces that lead to very fast limb velocity, leading to imaginary forces that lift creatures off the ground and make them fly), therefore the simulation culls them early and sets their fitness values to the respective lowest values. 
 
@@ -327,6 +328,7 @@ Finally, we sort the individuals by their fitness score, which gives us their to
 \todo[inline]{Describe how the reaper culls creatures.}
 
 \subsubsection{Crossover}
+\label{subsec:crossover}
 
 \lipsum[14]
 
