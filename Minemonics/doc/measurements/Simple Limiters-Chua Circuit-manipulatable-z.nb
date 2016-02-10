@@ -1,0 +1,451 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     17530,        442]
+NotebookOptionsPosition[     17039,        422]
+NotebookOutlinePosition[     17375,        437]
+CellTagsIndexPosition[     17332,        434]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"For", " ", "softness", " ", "0.13"}], ":", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"1.82", " ", 
+       RowBox[{"1.83", "/", "Period"}], " ", "1", " ", "limit", " ", "cycle", 
+       " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", " ", "to", " ", "converge"}], ")"}], " ", "/", 
+         "\[IndentingNewLine]", "2.15"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"high", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.183"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"2", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.1995"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"3", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.2"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"4", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.205"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"5", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.206"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"6", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.207"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.208"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"8", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.209"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"9", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.21"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"10", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "2.211"}], "/", "Period"}], " ", "1", " ", 
+       "limit", " ", "cycle", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"11", " ", "to", " ", "converge"}], ")"}], "/", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", "2.215"}], "/", 
+        "Period"}], " ", "24", " ", "limit", " ", 
+       RowBox[{"cycle", "/", "\[IndentingNewLine]", "2.28"}]}], "-", 
+      RowBox[{"2.4", " ", "High", " ", "period", " ", "limit", " ", 
+       RowBox[{
+        RowBox[{"cycle", "/", "Chaos"}], "/", "\[IndentingNewLine]", 
+        "2.4"}]}], "-", 
+      RowBox[{
+       RowBox[{"3.19", "/", "Chaos"}], "/"}]}], "\[IndentingNewLine]", ">", 
+     RowBox[{
+      RowBox[{"3.19", "/", "not"}], " ", 
+      RowBox[{"limited", "/"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"For", " ", "softness", " ", "0.5"}], ":", "\[IndentingNewLine]", 
+    "   ", 
+    RowBox[{
+     RowBox[{"2.12", "/", " ", "Period"}], " ", "1", " ", "limit", " ", 
+     RowBox[{
+      RowBox[{"cycle", "/", "\[IndentingNewLine]", "2.25"}], "/", " ", 
+      "Period"}], " ", "2", " ", "limit", " ", 
+     RowBox[{
+      RowBox[{"cycle", "/", "\[IndentingNewLine]", "2.285"}], "/", " ", 
+      "Period"}], " ", "4", " ", "limit", " ", 
+     RowBox[{
+      RowBox[{"cycle", "/", "\[IndentingNewLine]", "2.292"}], "/", " ", 
+      "Period"}], " ", "8", " ", "limit", " ", 
+     RowBox[{"cycle", "/"}]}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"c1", "=", "15.6"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"c2", " ", "=", "1"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"c3", " ", "=", " ", "28"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"m0", "=", 
+         RowBox[{"-", "0.714"}]}], ",", " ", 
+        RowBox[{"(*", 
+         RowBox[{"slope", " ", "in", " ", "outer", " ", "region", " ", 
+          RowBox[{"default", ":", 
+           RowBox[{"-", "0.714"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"m1", " ", "=", " ", 
+         RowBox[{"-", "1.143"}]}], " ", ",", 
+        RowBox[{"(*", 
+         RowBox[{"slope", " ", "in", " ", "inner", " ", 
+          RowBox[{"region", " ", "/", 
+           RowBox[{"default", ":", " ", 
+            RowBox[{"-", "1.143"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+        
+        RowBox[{"b", " ", "=", "1"}]}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"pfun", "=", 
+       RowBox[{"ParametricNDSolveValue", "[", 
+        RowBox[{
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"x", "'"}], "[", "t", "]"}], "\[Equal]", 
+            RowBox[{"c1", " ", "*", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "-", 
+               RowBox[{"x", "[", "t", "]"}], "-", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"m0", " ", "*", " ", 
+                  RowBox[{"x", "[", "t", "]"}]}], " ", "+", " ", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"m1", "-", "m0"}], ")"}], "/", "2"}], " ", "*", 
+                  " ", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"Abs", "[", 
+                    RowBox[{
+                    RowBox[{"x", "[", "t", "]"}], "+", "b"}], "]"}], "-", 
+                    RowBox[{"Abs", "[", 
+                    RowBox[{
+                    RowBox[{"x", "[", "t", "]"}], "-", "b"}], "]"}]}], 
+                   ")"}]}]}], ")"}]}], ")"}]}]}], ",", "\[IndentingNewLine]", 
+           
+           RowBox[{
+            RowBox[{
+             RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+            RowBox[{"c2", "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"x", "[", "t", "]"}], "-", 
+               RowBox[{"y", "[", "t", "]"}], "+", 
+               RowBox[{"z", "[", "t", "]"}]}], ")"}]}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"z", "'"}], "[", "t", "]"}], "\[Equal]", 
+            RowBox[{
+             RowBox[{"-", "c3"}], "*", 
+             RowBox[{"y", "[", "t", "]"}], "*", 
+             RowBox[{"(", 
+              RowBox[{"1", "/", "2"}], ")"}], "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"Tanh", "[", " ", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"limitValue", "-", 
+                   RowBox[{"x", "[", "t", "]"}]}], ")"}], "/", "softness"}], 
+                "]"}], "+", "1"}], ")"}]}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"x", "[", "0", "]"}], "\[Equal]", 
+            RowBox[{"-", "1.5"}]}], ",", 
+           RowBox[{
+            RowBox[{"y", "[", "0", "]"}], "\[Equal]", "0"}], ",", 
+           RowBox[{
+            RowBox[{"z", "[", "0", "]"}], "\[Equal]", "0"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"x", "[", "t", "]"}], ",", 
+           RowBox[{"y", "[", "t", "]"}], ",", 
+           RowBox[{"z", "[", "t", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "T"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"softness", ",", "limitValue", ",", "T"}], "}"}], ",", 
+         RowBox[{"MaxSteps", "\[Rule]", "\[Infinity]"}]}], "]"}]}]}], "]"}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"ParametricPlot3D", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"pfun", "[", 
+         RowBox[{"softness", ",", "limitValue", ",", "T"}], "]"}], "/.", 
+        RowBox[{"t", "\[Rule]", "u"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"u", ",", "n", ",", "T"}], "}"}], ",", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"5", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], ","}], 
+        "*)"}], 
+       RowBox[{"ColorFunction", "->", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y", ",", "z", ",", "u"}], "}"}], ",", 
+          RowBox[{
+           RowBox[{"ColorData", "[", 
+            RowBox[{"{", 
+             RowBox[{"\"\<TemperatureMap\>\"", ",", "\"\<Reverse\>\""}], 
+             "}"}], "]"}], "[", 
+           RowBox[{"(", 
+            RowBox[{"Tanh", "[", " ", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"limitValue", "-", "x"}], ")"}], "/", "softness"}], 
+             "]"}], ")"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "1000"}], ",", 
+       RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}], 
+       ",", 
+       RowBox[{"BoxRatios", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", 
+          RowBox[{"1", "/", "GoldenRatio"}]}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"softness", ",", "0.13"}], "}"}], ",", "0.1", ",", "10", ",", 
+       "0.01"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"limitValue", ",", "2.2"}], "}"}], ",", "0", ",", "4", ",", 
+       "0.01"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"T", ",", "30"}], "}"}], ",", "1", ",", "300"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"n", ",", "0"}], "}"}], ",", "0", ",", 
+       RowBox[{"T", "-", "1"}]}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.664101399794956*^9, 3.664110813429249*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`limitValue$$ = 2.292, $CellContext`n$$ = 
+    29.892999999999997`, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 
+    84.5, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`softness$$], 0.13}, 0.1, 10, 0.01}, {{
+       Hold[$CellContext`limitValue$$], 2.2}, 0, 4, 0.01}, {{
+       Hold[$CellContext`T$$], 30}, 1, 300}, {{
+       Hold[$CellContext`n$$], 0}, 0, 
+      Dynamic[$CellContext`T$$ - 1]}}, Typeset`size$$ = {1000., {440., 444.}},
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`softness$74042$$ = 0, $CellContext`limitValue$74043$$ =
+     0, $CellContext`T$74044$$ = 0, $CellContext`n$74045$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`limitValue$$ = 2.2, $CellContext`n$$ = 
+        0, $CellContext`softness$$ = 0.13, $CellContext`T$$ = 30}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`softness$$, $CellContext`softness$74042$$, 0], 
+        Hold[$CellContext`limitValue$$, $CellContext`limitValue$74043$$, 0], 
+        Hold[$CellContext`T$$, $CellContext`T$74044$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$74045$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ParametricPlot3D[
+        ReplaceAll[
+         $CellContext`pfun[$CellContext`softness$$, \
+$CellContext`limitValue$$, $CellContext`T$$], $CellContext`t -> \
+$CellContext`u], {$CellContext`u, $CellContext`n$$, $CellContext`T$$}, 
+        ColorFunction -> 
+        Function[{$CellContext`x$, $CellContext`y$, $CellContext`z$, \
+$CellContext`u$}, 
+          ColorData[{"TemperatureMap", "Reverse"}][
+           
+           Tanh[($CellContext`limitValue$$ - \
+$CellContext`x$)/$CellContext`softness$$]]], ColorFunctionScaling -> False, 
+        ImageSize -> 1000, Axes -> True, AxesLabel -> {"x", "y", "z"}, 
+        BoxRatios -> {1, 1, 1/GoldenRatio}], 
+      "Specifications" :> {{{$CellContext`softness$$, 0.13}, 0.1, 10, 
+         0.01}, {{$CellContext`limitValue$$, 2.2}, 0, 4, 
+         0.01}, {{$CellContext`T$$, 30}, 1, 300}, {{$CellContext`n$$, 0}, 0, 
+         Dynamic[$CellContext`T$$ - 1]}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{1047., {543., 550.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Input",
+ CellChangeTimes->{3.664110046830401*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"InterpolatingFunction", "::", "dmval"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Input value \[NoBreak]\\!\\({11.500353822857143`}\\)\
+\[NoBreak] lies outside the range of data in the interpolating function. \
+Extrapolation will be used. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/InterpolatingFunction/dmval\\\", \
+ButtonNote -> \\\"InterpolatingFunction::dmval\\\"]\\)\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.6641102702041683`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"InterpolatingFunction", "::", "dmval"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Input value \[NoBreak]\\!\\({11.500353822857143`}\\)\
+\[NoBreak] lies outside the range of data in the interpolating function. \
+Extrapolation will be used. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/InterpolatingFunction/dmval\\\", \
+ButtonNote -> \\\"InterpolatingFunction::dmval\\\"]\\)\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.664110270223445*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"InterpolatingFunction", "::", "dmval"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Input value \[NoBreak]\\!\\({11.500353822857143`}\\)\
+\[NoBreak] lies outside the range of data in the interpolating function. \
+Extrapolation will be used. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/InterpolatingFunction/dmval\\\", \
+ButtonNote -> \\\"InterpolatingFunction::dmval\\\"]\\)\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.66411027024848*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\(InterpolatingFunction :: dmval\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.664110270249236*^9}]
+}, Open  ]]
+},
+WindowSize->{2880, 1527},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 11080, 282, 913, "Input"],
+Cell[CellGroupData[{
+Cell[11662, 306, 3054, 58, 1110, InheritFromParent],
+Cell[14719, 366, 585, 12, 24, "Message"],
+Cell[15307, 380, 583, 12, 24, "Message"],
+Cell[15893, 394, 582, 12, 24, "Message"],
+Cell[16478, 408, 545, 11, 24, "Message"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
