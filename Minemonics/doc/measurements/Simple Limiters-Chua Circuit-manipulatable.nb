@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     11397,        287]
-NotebookOptionsPosition[     11085,        271]
-NotebookOutlinePosition[     11421,        286]
-CellTagsIndexPosition[     11378,        283]
+NotebookDataLength[     11743,        295]
+NotebookOptionsPosition[     11431,        279]
+NotebookOutlinePosition[     11767,        294]
+CellTagsIndexPosition[     11724,        291]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -152,7 +152,7 @@ Cell[BoxData[
          RowBox[{"{", 
           RowBox[{"softness", ",", "limitValue", ",", "T"}], "}"}], ",", 
          RowBox[{"MaxSteps", "\[Rule]", "\[Infinity]"}]}], "]"}]}]}], "]"}], 
-    ";"}], "\n", "\[IndentingNewLine]", 
+    ";"}], "\[IndentingNewLine]", "\n", 
    RowBox[{"Manipulate", "[", 
     RowBox[{
      RowBox[{"ParametricPlot3D", "[", 
@@ -162,7 +162,7 @@ Cell[BoxData[
          RowBox[{"softness", ",", "limitValue", ",", "T"}], "]"}], "/.", 
         RowBox[{"t", "\[Rule]", "u"}]}], ",", 
        RowBox[{"{", 
-        RowBox[{"u", ",", "0", ",", "T"}], "}"}], ",", 
+        RowBox[{"u", ",", "n", ",", "T"}], "}"}], ",", 
        RowBox[{"PlotRange", "\[Rule]", 
         RowBox[{"5", " ", 
          RowBox[{"{", 
@@ -186,18 +186,14 @@ Cell[BoxData[
             RowBox[{"{", 
              RowBox[{"\"\<TemperatureMap\>\"", ",", "\"\<Reverse\>\""}], 
              "}"}], "]"}], "[", 
-           RowBox[{
-            RowBox[{"(", 
-             RowBox[{"1", "/", "2"}], ")"}], "*", 
-            RowBox[{"(", 
+           RowBox[{"(", 
+            RowBox[{"Tanh", "[", " ", 
              RowBox[{
-              RowBox[{"Tanh", "[", " ", 
-               RowBox[{
-                RowBox[{"(", 
-                 RowBox[{"limitValue", "-", "x"}], ")"}], "/", "softness"}], 
-               "]"}], "+", "1"}], ")"}]}], "]"}]}], "]"}]}], ",", 
+              RowBox[{"(", 
+               RowBox[{"limitValue", "-", "x"}], ")"}], "/", "softness"}], 
+             "]"}], ")"}], "]"}]}], "]"}]}], ",", 
        RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}], ",", 
-       RowBox[{"ImageSize", "\[Rule]", "1400"}]}], "]"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "1000"}]}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{
        RowBox[{"{", 
@@ -209,31 +205,43 @@ Cell[BoxData[
         RowBox[{"limitValue", ",", "2"}], "}"}], ",", "0", ",", "4", ",", 
        "0.01"}], "}"}], ",", 
      RowBox[{"{", 
-      RowBox[{"T", ",", "1", ",", "300"}], "}"}]}], "]"}]}]}]], "Input",
- CellChangeTimes->{{3.664101399794956*^9, 3.6641050624685307`*^9}}],
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"T", ",", "30"}], "}"}], ",", "1", ",", "300"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"n", ",", "0"}], "}"}], ",", "0", ",", 
+       RowBox[{"T", "-", "1"}]}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.664101399794956*^9, 3.6641058790673018`*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`limitValue$$ = 
-    1.79, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 10., 
-    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+   DynamicModuleBox[{$CellContext`limitValue$$ = 2, $CellContext`n$$ = 
+    0, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 30, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`softness$$], 0.5}, 0.1, 10, 0.01}, {{
-       Hold[$CellContext`limitValue$$], 2}, 0, 4, 0.01}, {
-      Hold[$CellContext`T$$], 1, 300}}, Typeset`size$$ = {
-    1400., {775., 780.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = True, $CellContext`softness$152453$$ = 
-    0, $CellContext`limitValue$152454$$ = 0, $CellContext`T$152455$$ = 0}, 
+       Hold[$CellContext`limitValue$$], 2}, 0, 4, 0.01}, {{
+       Hold[$CellContext`T$$], 30}, 1, 300}, {{
+       Hold[$CellContext`n$$], 0}, 0, 
+      Dynamic[$CellContext`T$$ - 1]}}, Typeset`size$$ = {1000., {556., 561.}},
+     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`softness$188497$$ = 
+    0, $CellContext`limitValue$188498$$ = 0, $CellContext`T$188499$$ = 
+    0, $CellContext`n$188500$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
-      "Variables" :> {$CellContext`limitValue$$ = 2, $CellContext`softness$$ = 
-        0.5, $CellContext`T$$ = 1}, "ControllerVariables" :> {
-        Hold[$CellContext`softness$$, $CellContext`softness$152453$$, 0], 
-        Hold[$CellContext`limitValue$$, $CellContext`limitValue$152454$$, 0], 
+      "Variables" :> {$CellContext`limitValue$$ = 2, $CellContext`n$$ = 
+        0, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 30}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`softness$$, $CellContext`softness$188497$$, 0], 
+        Hold[$CellContext`limitValue$$, $CellContext`limitValue$188498$$, 0], 
         
-        Hold[$CellContext`T$$, $CellContext`T$152455$$, 0]}, 
+        Hold[$CellContext`T$$, $CellContext`T$188499$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$188500$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -242,21 +250,21 @@ Cell[BoxData[
         ReplaceAll[
          $CellContext`pfun[$CellContext`softness$$, \
 $CellContext`limitValue$$, $CellContext`T$$], $CellContext`t -> \
-$CellContext`u], {$CellContext`u, 0, $CellContext`T$$}, PlotRange -> 
-        5 {{-1, 1}, {-1, 1}, {-1, 1}}, ColorFunction -> 
+$CellContext`u], {$CellContext`u, $CellContext`n$$, $CellContext`T$$}, 
+        PlotRange -> 5 {{-1, 1}, {-1, 1}, {-1, 1}}, ColorFunction -> 
         Function[{$CellContext`x$, $CellContext`y$, $CellContext`z$, \
 $CellContext`u$}, 
-          
-          ColorData[{
-           "TemperatureMap", "Reverse"}][(1/2) (
-            Tanh[($CellContext`limitValue$$ - \
-$CellContext`x$)/$CellContext`softness$$] + 1)]], ColorFunctionScaling -> 
-        False, ImageSize -> 1400], 
+          ColorData[{"TemperatureMap", "Reverse"}][
+           
+           Tanh[($CellContext`limitValue$$ - \
+$CellContext`x$)/$CellContext`softness$$]]], ColorFunctionScaling -> False, 
+        ImageSize -> 1000], 
       "Specifications" :> {{{$CellContext`softness$$, 0.5}, 0.1, 10, 
          0.01}, {{$CellContext`limitValue$$, 2}, 0, 4, 
-         0.01}, {$CellContext`T$$, 1, 300}}, "Options" :> {}, 
+         0.01}, {{$CellContext`T$$, 30}, 1, 300}, {{$CellContext`n$$, 0}, 0, 
+         Dynamic[$CellContext`T$$ - 1]}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{1447., {844., 851.}},
+     ImageSizeCache->{1047., {638., 645.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -266,7 +274,7 @@ $CellContext`x$)/$CellContext`softness$$] + 1)]], ColorFunctionScaling ->
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{{3.664104307388307*^9, 3.664105063511855*^9}}]
+ CellChangeTimes->{3.6641068766038427`*^9}]
 }, Open  ]]
 },
 WindowSize->{2880, 1527},
@@ -286,8 +294,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 7760, 190, 627, "Input"],
-Cell[8342, 214, 2727, 54, 1712, "Output"]
+Cell[579, 22, 7832, 193, 627, "Input"],
+Cell[8414, 217, 3001, 59, 1300, "Output"]
 }, Open  ]]
 }
 ]
