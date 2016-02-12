@@ -236,9 +236,65 @@ f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)}
 
 If we now change the $limitValue$ parameter from \(>4.6692\), which corresponds to no limiter influence to the trajectory, to a value within \(limitValue \in [1.99545,4.6692[\), we can observe different chaotic trajectories. The limiter influences the circuit by limiting the voltage across the capacitor \(C_1\) when \(x\) approaches the limiter.
 
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.2}
+\center
+\begin{tabular}{@{}ll@{}}
+	\toprule
+   \(limitValue\) & Limit Cycle\\
+   \midrule
+   1.932 & Period 8 \\ 
+   1.93 & Period 4 \\
+   1.91  & Period 2 \\
+   1.89 & Period 1 \\
+   \bottomrule
+\end{tabular}
+\caption{Different limit values resulting in trajectories of different periodicity}
+\label{table:x-0.13-periodicities}
+\end{table}
+
+Within the window [1.89,1.99545], we can find the small parameter window which controls motion of high periodicity down to period 1.
+
+\todo[inline]{Figure of period 1, period 2, period 4 and period 8.}
+
+The hard limiter however leads to a very slow convergence and therefore it is hard to determine the final periodicity because every evaluation takes a lot of time to find the final convergence. All tested limit values lead to a controlled period one in the end.
+
+However, with the self-limitation, we now can set the limit value of the system all down 0 and beyond. At the 1.61, where we can observe perfect convergence to period 1, we can surpass this point after which the convergence time increases again because the trajectory converges to the limit cycle from outside. The controlled limit cycle shrinks until the trajectory directly converges onto one single fix point (1.4). 
+
+Going even further leads to a rotation of the plane in which the original trajectories took place, and we get an outward spiral starting at the initial conditions and progressing away from it, being pushed away by the limiter (1.3). The spiraling behavior continues until (0.269), the trajectory get directly pushed into the uppermost scroll of the multiscroll attractor.
+
+-0.2 is a period 2 limit cycle in the uppermost scroll.
+
+
+Using \(softness=0.5\), the limiter starts to influence the multiscroll attractor at \(11.507\), and we can again observe how the chaotic behavior is limited within the window \([2.176,11.507]\). Within the window \([,2.176[\), we can stabilize the periodic orbits down to period 1.
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.2}
+\center
+\begin{tabular}{@{}ll@{}}
+	\toprule
+   \(limitValue\) & Limit Cycle\\
+   \midrule
+   2.0502 & Period 16 \\
+   2.05 & Period 8 \\ 
+   2.04 & Period 4 \\
+   2  & Period 2 \\
+   1.8 & Period 1 \\
+   \bottomrule
+\end{tabular}
+\caption{Different limit values resulting in trajectories of different periodicity}
+\label{table:x-0.5-periodicities}
+\end{table}
+
+ We can again set the limit value beyond 0. The same rotation spiraling behaviour can be seen
+
+-0.2 is a period 2 limit cycle in the uppermost scroll.
+
+-0.5 is a period 1 limit cycle in the uppermost scroll.
+
+-4 reaches the maximum precision of mathematica.
+
 \subsection{Chaotic chua circuit controller}
-
-
 
 
 \end{document}
