@@ -16,22 +16,24 @@
 \lhead{Chapter \thechapter. \emph{Controllers}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 \section{Adaptive controllers for locomotion}
-%% rev. 1
+%% rev. 2
 
-Starting in the industrial revolution, people have started to automate production and thereby lowered the costs of production of almost any good. Today, production robots can perform very sophisticated manipulation as is required for large-scale products such as cars of smaller scale products such as electronic chips. However automation robots, belonging to the most efficient robots to date, are robots specifically built and programmed for the task at hand. Many of them work in cages without interaction with humans and totally lack autonomy or adaptability, even though their morphology could theoretically be reused for another task. But since automation tasks do not require any learning, adaption or autonomous behavior, the robots are not programmed to do so. As more recent developments strive for more autonomy and adaptivity in robots, more adaptable controllers need to be developed. Tasks requiring autonomy and adaptivity are rescue, detection or exploration outdoor scenarios of robots, with a direct contact or in cooperation with humans. Such a task is generally very versatile and it is generally unknown what situation has to be expected and what problems will have to be solved. This means that problems have to be solved in a much more robust manner than it has to be done in a supervised environment, because the situations could change. Also the importance of low latency control arises because the system has to be reactive to its environment and is only in rare cases able to plan its movements far ahead. The requirements for such a controller therefore are to be highly adaptive and learning on one hand and to control with very low latency on the other hand. Many different approaches to control exist, [?], however most of them are engineered approaches, meaning that they usually suffer from high computational power requirements and high latency because traditional problem solving generally includes complete planning and the usage of a complete, complex model. When compared to nature, these approaches are far from competitive. An ant for example can leave its nest, go out into the unknown, find food and communicate with other ants to collaboratively bring it back to the nest. This highly complex task requires a variety of skills, from perception and and classification to locomotion and manipulation of objects. Given that the ant has about 250'000 neurons [], the control output is highly complex, adaptive and comes with low latency. A subset of these neurons is responsible for the locomotion of the animal. But how can complex locomotion arise from a very simple controller? Could it be that multiple uncoupled controllers for different limbs can generate complex, robust locomotion patterns just by featuring periodic, adaptive control signals? This would be a counterexample to the hypothesis that only very complex controllers can generate complex gaits. Let us examine two different types of controllers, one non-adaptive sinusoidally oscillating controller and one adaptive chaotic controller.
+Starting in the industrial revolution, people have started to automate production and thereby lowered the costs of production of almost any good. Today, production robots can perform very sophisticated manipulation as is required for large-scale products such as cars of smaller scale products such as electronic chips. However automation robots, belonging to the most efficient robots to date, are robots specifically built and programmed for the task at hand. Many of them work in cages without interaction with humans and totally lack autonomy or adaptability, even though their morphology could theoretically be reused for another task. But since automation tasks do not require any learning, adaption or autonomous behavior, the robots are not programmed to do so. As more recent developments strive for more autonomy and adaptivity in robots, more adaptable controllers need to be developed. Tasks requiring autonomy and adaptivity are rescue, detection or exploration outdoor scenarios of robots, with a direct contact or in cooperation with humans. Such a task is generally very versatile and it is generally unknown what situation has to be expected and what problems will have to be solved. This means that problems have to be solved in a much more robust manner than it has to be done in a supervised environment, because the situations could change. Also the importance of low latency control arises because the system has to be reactive to its environment and is only able to plan its movements far ahead in rare cases. The requirements for such a controller therefore are to be problem solving and planning on one hand and highly adaptive and learning with very low latency on the other hand. Many different control approaches exist, [?], however most of them are engineered approaches, meaning that they usually suffer from high computational power requirements and high latency because traditional problem solving generally includes complete planning and the usage of a complete, complex model. When compared to nature, these approaches are far from competitive. An ant for example can leave its nest, go out into the unknown, find food and communicate with other ants to collaboratively bring it back to the nest. This highly complex task requires a variety of skills, from perception and and classification, communication to locomotion and manipulation of objects. Given that the ant only has about 250'000 neurons [], the control output is highly complex, follows an objective at hand, is adaptive and reacts to the environment with low latency. A subset of these neurons is responsible for the locomotion of the animal. But how can complex locomotion arise from a very simple controller? Could it be that multiple uncoupled or nearly uncoordinated controllers controlling different limbs can generate complex, robust and versatile locomotion patterns just by featuring periodic, adaptive control signals? This would be a counterexample to the hypothesis that only very complex controllers can generate complex gaits. This thesis examines two different types of controllers, one non-adaptive sinusoidally oscillating controller and one adaptive chaotic controller to reveal, if this hypothesis could be supported by examples of controller behavior that feature the above requested properties.
 
 \section{Uncoupled sinusoidal oscillators}
 \label{sec:sinusoidal-oscillators}
+% rev. 1
 
-The first type of controller is a very simple controller. Its output is a simple sinusoidal signal defined by the parameters of amplitude and frequency and the X and Y offset in signal space. The parameter ranges are $\text{amplitude} \in [0,0.5]$, $\text{frequency} \in [0.1,4]$, $\text{offset}_X \in [0,2\Pi]$ and $\text{offset}_Y \in [0,1]$. The controller is then replicated over the body and each controller controls one degree of freedom (DoF) of a certain joint. All controllers are therefore fully distributed within the body of the creature and run completely uncoordinated. The sinusoidal signal is then fed into a PID position controller to make the joint DoF precisely follow the sinusoidal signal. A locomotion pattern solution is therefore a set of sinusoids, that when applied to the co-evolved morphology results in a locomotion behavior that moves the creature forward. The controllers are mutated if a Morphogene branch defining a joint is mutated, then the sinusoidal controller parameters get a randomized initialization as well. The controller however is non-adaptive in an individual evaluation, therefore the locomotion pattern is non-adaptive as well. A solution is therefore only adapted to the task it was trained for and might not be suitable for a similar task.
+The first type of controller is a very simple input-less controller. Its output is a simple sinusoidal signal defined by the parameters of amplitude and frequency and the X and Y offset in signal space. The parameter ranges are $\text{amplitude} \in [0,0.5]$, $\text{frequency} \in [0.1,4]$, $\text{offset}_X \in [0,2\Pi]$ and $\text{offset}_Y \in [0,1]$. The controller is then replicated over the body and each controller controls one degree of freedom (DoF) of a certain joint. All controllers are therefore fully distributed within the body of the creature and run completely uncoordinated. The sinusoidal signal is then fed into a PID position controller to make the joint DoF precisely follow the sinusoidal signal. A locomotion pattern solution is therefore a set of sinusoids, that when applied to the co-evolved morphology, results in a locomotion behavior that moves the creature forward. The controllers are mutated if a Morphogene branch defining a joint is mutated, then the sinusoidal controller parameters get a randomized initialization as well. The controller however is non-adaptive within an individual evaluation, therefore the locomotion pattern is non-adaptive as well. A solution is therefore only adapted by evolution to the task it was trained for and might not be suitable for a similar task.
 
 \section{Chaotic controllers}
 \label{sec:chaotic-controllers}
+% rev. 1
 
-The second type of controller is based on a chaotic, complex, non-linear system. The controller has its own internal dynamics and is either completely uninfluenced from outside or is influenced with sensory input from the morphology of the creature, which adapts the controller's dynamics. The controller's output is a trajectory of the underlying chaotic system that is then directly applied as a torque on the respective controlled degree of freedom of the joint the controller belongs to. The output is only scaled by a force scaling factor, which considers the appropriate torque needed to move the joint DoF in to be controlled. The controller's output varies between chaotic and periodic output trajectories depending on how it is influenced. In an uninfluenced state, the controller only exhibits the original chaotic system's chaotic trajectory. The trajectory will however be influenced through the morphology itself, since different limits such as joint DoFs have rotational limits or limb inertia influence the movement provided by the trajectory.
+The second type of controller is based on a chaotic, complex, non-linear system. The controller has its own internal dynamics and is either completely uninfluenced from outside or is influenced with sensory input from the morphology of the creature, which adapts the controller's dynamics. The controller's output is a trajectory of the underlying chaotic system that is then directly applied as a torque on the respective controlled degree of freedom of the joint the controller belongs to. The output is only scaled by a force scaling factor, which considers the appropriate torque needed to move the joint DoF to be controlled. The controller's output varies between chaotic and periodic output trajectories depending on how it is influenced. In an uninfluenced state, the controller only exhibits the original chaotic system's chaotic trajectory. The trajectory will however be influenced through the morphology itself, since different limits such as joint DoFs have rotational limits or limb inertia influence the movement provided by the trajectory.
 
 \subsection{Chaotic systems}
-% rev. 1
+% rev. 2
 
 A chaotic system is a dynamical system exhibiting chaotic dynamics. Chaos means that even though a system is deterministic, therefore also the future behavior is fully determined by the initial state of the system, the future of the system can not be predicted if the initial state is slightly varied. This property is one of the following three properties originally described by Robert L. Devaney to describe chaotic dynamics:
 
@@ -44,23 +46,24 @@ The chaotic system must...
 
 \paragraph{Sensitivity to the initial conditions}, commonly known as the butterfly effect, means that small differences in the intitial conditions lead to widely (usually exponentially) diverging behavior. As Edward Lorenz has put it, the present determines the future, but the approximate present does not approximately determine the same future.
 
-\paragraph{Topological mixing} can be intuitively seen as in the example of the mixing of dyes, meaning that when the system evolves over time, this leads to the property that all regions of the phase space of the system are mapped onto each other by the dynamical system. Given any two open sets A and B out of the phase space of the dynamical system defined by the recurrence relation \[s_{n+1} = f(s_n)\] topological mixing means that there is some integer N, such that \[f^N(A) \cap B \neq 0\] That means that no matter where the dynamical system starts, eventually the system state will wind up arbitrarily close to the other open set.
+\paragraph{Topological mixing} can be intuitively seen as in the example of the mixing of dyes, meaning that when the system evolves over time, this leads to the property that all regions of the phase space of the system are mapped onto each other by the dynamical system. Given any two open sets A and B out of the phase space of the dynamical system defined by the recurrence relation \[s_{n+1} = f(s_n)\] topological mixing means that there is some integer N, such that \[f^N(A) \cap B \neq 0\] That means that no matter where the dynamical system starts, eventually the system state will wind up arbitrarily close to any open set.
 
-\paragraph{Periodic orbits are densely packed} in a chaotic system. This means for a certain point in the phase space that it there is always a periodic orbit within any distance \(> 0\). Together with the topological mixing, this results in a high degree of unpredictability. Since the periodic orbits are unstable, this means that a trajectory might stay on one periodic orbit for a while, then leaves it again and dives through the phase space and suddenly follows another periodic orbit.
+\paragraph{Periodic orbits are densely packed} in a chaotic system. This means for a certain point in the phase space that it there is always a periodic orbit within any distance \(> 0\). Together with the topological mixing, this results in a high degree of unpredictability. Since the infinitely many periodic orbits are unstable, this means that a trajectory might stay on one periodic orbit for a while, then leaves it again and dives through the phase space and suddenly follows another periodic orbit.
 
-Chaotic systems can be defined in a continuous or discrete manner. Continuous systems must be at least 3 dimensional according to the Poincaré-Bendixson theorem in order to be able to show chaotic behavior. Intuitively this makes sense as no trajectory can pass itself again without touching, which then would lead to a periodic motion because of the deterministic nature of the system. Continuous systems are described in differential equations which in general can only be solved numerically. Discrete chaotic systems can show chaotic behavior also in one or two dimensions, because their respresentation in difference equations lead to hops in the state space, therefore the trajectory does no longer have to explicitly cross another and does therefore not result in a conflict with determinism. In the following, we will look at a particular continuous chaotic system called the Chua circuit, which is a classical example of chaos giving rise to the multiscroll attractor.
+Chaotic systems can be defined in a continuous or discrete manner. Continuous systems must be at least 3 dimensional according to the Poincaré-Bendixson theorem in order to be able to show chaotic behavior. Intuitively this makes sense as no trajectory can pass itself in 2D again without touching, which then would lead to a periodic motion because of the deterministic nature of the system. Continuous systems are described using differential equations which in general can only be solved numerically. Discrete systems can show chaotic behavior also less than three dimensions, because their representation in difference equations leads to hops in the state space, therefore the trajectory does no longer have to explicitly cross another and does therefore not result in a conflict with determinism. In the following, we will look at a particular continuous chaotic system called the Chua circuit, which is a classical example of chaos giving rise to the multiscroll attractor.
 
 \subsection{Chua Circuit}
 \label{subsec:chua-circuit}
+% rev. 2
 
 According to \ref{bib:Kennedy1993}, for a circuit with time-varying output and no time-varying input that is built from electronic components such as resistors, capacitor and inductors, three criteria must hold in order to display chaotic behavior. It must contain:
-  \begin{enumerate}
+\begin{enumerate}
   \item at least one nonlinear element (where piecewise linear is sufficient)
   \item at least one locally active resistor
   \item at least three energy-storage elements
-  \end{enumerate}
+\end{enumerate}
   
-The simplest electronic circuit that satisfies these criteria is the Chua Circuit. Chua's circuit is chaotic system that can be built in the form of a simple electronic circuit. It was invented by Leon O. Chua when he visited the Waseda University in Japan in 1983. The circuit can be seen as a nonperiodic oscillator, that differently from an ordinary electronic oscillator never repeats its waveform. The circuit, remarkable because of its simplicity and rich variety of bifurcations and the presence of chaotic behavior, is one of the few physical systems for which the presence of chaos has been proven mathematically \ref{bib:Kennedy1993}.
+The simplest electronic circuit that satisfies these criteria is the Chua Circuit. Chua's circuit is chaotic system that can be built in the form of a simple electronic circuit. The chua circuit was invented by Leon O. Chua when he visited the Waseda University in Japan in 1983. The circuit can be seen as a nonperiodic oscillator, that differently from an ordinary electronic oscillator never repeats its waveform. The circuit, remarkable because of its simplicity and rich variety of bifurcations and the presence of chaotic behavior, is one of the few physical systems for which the presence of chaos has been proven mathematically \ref{bib:Kennedy1993}.
 
 \begin{figure}[H]
 \centering
@@ -80,17 +83,18 @@ RC_2\frac{dy}{dt}&= (x-y+Rz) &\frac{dy}{dt}\text{ is the voltage across the capa
 f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)} &f(x)\text{ describes the response of the piecewise linear resistor}
 \end{align*}
 
-The chua circuit was chosen as a model system of a chaotic controller because of its simple definition through the equations as well as its prior usage in simple limiter control in [Corron]. Corron et al. showed in two different chaotic circuits, namely the driven chaotic pendulum and the chua circuit, how appropriate simple limiters can be applied to each system so that the chaotic behavior of each unbounded system could be controlled into behavior of different periodicities. Important to mention is that the Chua Circuit is not meant to be a model for appropriate leg movement, but the goal is to show that using simple limiters to control an arbitrary chaotic system. The different periodicities generated by the system leading to periodic leg movement could form different gait. The change of the terrain representing a change of the simple limiters can lead to a change in periodic movement, thereby adaption to different environments occurs. 
+The chua circuit was chosen as a model system of a chaotic controller because of its simple definition through the equations as well as its prior usage in simple limiter control in \cite{bib:Corron2000}. Corron et al. showed in two different chaotic circuits, namely the driven chaotic pendulum and the chua circuit, how appropriate simple limiters can be applied to each system so that the chaotic behavior of each unbounded system could be controlled into behavior of different periodicities. Important to mention is that the Chua Circuit is not meant to be a model for appropriate leg movement, but the goal is to show that using simple limiters to control an arbitrary chaotic system, the different periodicities generated by the system leading to periodic leg movement could form different gaits. The change of the terrain representing a change of the simple limiters can lead to a change in periodic movement, thereby adaption to different environments occurs. 
 
 \subsubsection{Simple limiter control in Mathematica}
 \label{subsubsec:simple-limiter-mathematica}
+%rev. 1
 
-Before the circuit is used as a chaotic controller, the Chua circuit was modelled in Mathematica to observe its original chaotic behavior and influence it by simple limiters to exhibit different periodicities. Two experiments were conducted to look at two different limiter configurations in detail to explore the features of a self-limiting dimension and a dimension limiting another dimension and to reveal the influence of softness of the limiter on the control behavior in both of them. The differential equations were integrated using a Runge-Kutta integration scheme of order 6 and an integration step of \(h=0.001\). The constants were set as \(\alpha = 15.6\), \(\beta = 1\), \(\gamma = 28\), \(m_0 = -0.714\), \(m_1 = -1.143\) and \(E = 1\). The figure \ref{figure:chaoticchuacircuit} shows the Chua circuit's multiscroll attractor using initial conditions \((x(0),y(0),z(0)) = (-1.5,0,0)\) without any limiter.
+Before the circuit is used as a chaotic controller, the Chua circuit was modelled in Mathematica to observe its original chaotic behavior and influence it by simple limiters to exhibit different periodicities. Two experiments were conducted to look at two different limiter configurations in detail to explore the features of a self-limiting dimension and a dimension limiting another dimension and to reveal the influence of softness of the limiter on the control behavior in both of them. The differential equations were integrated using a Runge-Kutta integration scheme of order 6 with an integration step of \(h=0.001\). The constants were set as \(\alpha = 15.6\), \(\beta = 1\), \(\gamma = 28\), \(m_0 = -0.714\), \(m_1 = -1.143\) and \(E = 1\). The figure \ref{figure:chaoticchuacircuit} shows the Chua circuit's multiscroll attractor using initial conditions \((x(0),y(0),z(0)) = (-1.5,0,0)\) without any limiter. These initial conditions are used during the following experiments unless otherwise stated.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{chua-circuit/Unlimited-chua-circuit.png}
-\caption[The multiscroll attractor]{The multiscroll attractor generated by the Chua's circuit without any simple limiter applied.}
+\caption[The multiscroll attractor in the Chua circuit]{The multiscroll attractor generated by the Chua's circuit without any simple limiter applied.}
 \label{figure:chaoticchuacircuit}
 \end{figure}
 
@@ -103,7 +107,7 @@ Then we introduce a simple tunable soft limiter \[\text{softLim}(x) = \frac{1}{2
 \label{figure:softlimiterresponse}
 \end{figure}
 
-Initially a hard limiter defined as a piecewise function was chosen, however a soft limiter is a better model for physical limiters, because in reality no hard limiters exist. Using the $softness$ parameter of the limiter, the softness can be tuned, where a \(softness = 10\) means very soft and a \(softness = 0.1\) means a very hard limiter. The $limitValue$ parameter defines the threshold value, at which the limiter is applied exactly half when surpassed. With the above mentioned initial conditions, the trajectory in state space stays within the bounding box of 
+Initially a hard limiter defined as a piecewise function was chosen, however a soft limiter is a better model for physical limiters, because in reality no totally hard limiters exist. Using the $softness$ parameter of the limiter, the softness can be tuned, where a \(softness = 10\) means very soft and a \(softness = 0.1\) means a very hard limiter. The $limitValue$ parameter defines the threshold value, at which the limiter is applied exactly half when surpassed. With the above mentioned initial conditions, the trajectory in state space stays within the bounding box of 
 
 \begin{align*}
 x &\in [-2.8717,2.2417]\\
@@ -126,54 +130,54 @@ If we now change the $limitValue$ parameter from \(>3.19\), which corresponds to
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-3.png}
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-8.png}
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-6.png}
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-4.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-3.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-8.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-6.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-4.png}
 \caption[Figure of chaotic behaviors in range 2.4-3.19]{Figure of chaotic behaviors in range 2.4-3.19. The limit values of the shown figures are \(3\), \(2.8\), \(2.6\) and \(2.4\).}
-\label{figure:chaotictrajectories}
+\label{figure:z-2.4-3.19-chaotictrajectories}
 \end{figure}
 
 When choosing a \(limitValue \in [2.28,2.4[\) one can observe that the limiter more and more suppresses chaotic behavior and reduces the number of times the trajectory switches back into the uppermost scroll of the multiscroll.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-375.png}
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-35125.png}
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-30375.png}
-\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-2-28.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-375.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-35125.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-30375.png}
+\includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-28.png}
 \caption[Figure of behaviors in range 2.28-2.4]{Figure of behaviors in range 2.28-2.4. The limit values of the shown figures are \(2.375\), \(2.35125\), \(2.30375\) and \(2.28\). In the lower right plot, the slightly white coloring of the curve indicates the strength of the limiter influence.}
-\label{figure:chaotictrajectories}
+\label{figure:z-2.28-2.4-chaotictrajectories}
 \end{figure}
 
 With a value of \(limitValue \in [1.81, 2.28]\) the state only stays in the lowermost scroll and shows periodic behavior. The control behavior can be explained by looking at figure \ref{figure:chaoticchuacircuit} again. The trajectories that lead from the lower-most scroll to the upper-most scroll pass by at the outer orbits of the lower-most scroll and therefore have the highest x(t) values. The limiter is applied when a certain x(t) value is surpassed, therefore the limiter limits z(t) which then leads to a repelling influence from the limiter. The trajectory thereby is pulled back onto a former orbit, which stabilizes the state onto that orbit. However, since the limiter is a very hard limiter, the period of the trajectory shows higher periods only in a very small limitValue parameter window \([2.212,2.215]\) and then very quickly turns into period 1 within the parameter window \([1.83,2.212]\) with quicker convergence the nearer the limiter was placed to zero. The system is highly sensitive to the exact position of the limiter because of the dense periodic orbits in the system, which the state quickly switches when the limiter is sighly moved. We can see the convergence to the limit cycle vary, getting slower again with \(limitValue \in [2.183,2.15]\) increasing again for \(limitValue \in [2.15,1.83]\). A self-similar pattern of increasing and decreasing convergence speeds can be observed.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-183-convergence.png}
-\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-183.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-183-convergence.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-183.png}
 
-\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-15-convergence.png}
-\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-2-15.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-15-convergence.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-2-15.png}
 \caption[Figure of period 1 limit cycle]{Figures of period 1 limit cycle with one with a fast and one with a slow convergence to the limit cycle. The limit values are \(2.183\) for the upper and \(2.15\) for the lower plots. The plots to the right do not show the convergence trajectory, but instead a point on the periodic orbit was chosen to show the proper limit cycle.}
-\label{figure:chaotictrajectories}
+\label{figure:z-1-limit-cycle-ctrajectories}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-1-83-convergence.png}
-\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-1-83.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-1-83-convergence.png}
+\includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-1-83.png}
 \caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle with again a fast convergence to the limit cycle using a limit value of \(1.83\). The plot to the right does not show the convergence trajectory, but instead a point on the periodic orbit was chosen to show the proper limit cycle.}
-\label{figure:chaotictrajectories}
+\label{figure:z-fast-1-limit-cycle-trajectory}
 \end{figure}
 
 Below 1.81, the limiter is applied instantly, the trajectory drops in z direction to \(-2.68343\) and then heads towards \([\infty,\infty,-2.68343]\) and therefore can never escape the limiter again.
 
 \todo[inline]{Identify some periodic trajectories, possibly with the help of the group.}
 
-The limiter control gets more interesting when we now set \(softness=0.5\), which corresponds to a softer limiter (Fig. \ref{figure:softlimiterresponse}). The softer limiter is applied earlier than the hard limiter because of its long tails, however its influence is rather minimal yet gradually increasing when the limiter is approached. We can find an extended parameter window for \(limitValue \in [2.3887,11.5065]\) where the limiter suppresses chaotic behavior and again reduces the number of times the trajectory switches back into the uppermost scroll.
+The limiter control gets more interesting when we now set \(softness=0.5\), which corresponds to a softer limiter (Fig. \ref{figure:softlimiterresponse}). The softer limiter is applied earlier than the hard limiter because of its long tails from the \(\tanh()\) function, however its influence is rather minimal yet gradually increasing when the limiter is approached. We can find an extended parameter window for \(limitValue \in [2.3887,11.5065]\) where the limiter suppresses chaotic behavior and again reduces the number of times the trajectory switches back into the uppermost scroll.
 
-Within the parameter window \(limitValue \in [2.05888,2.387[\), the influence of the limiter keeps the trajectory in the lowermost scroll. With the softer limiter, it is now much easier to find the parameter window to see the period doubling. 
+Within the parameter window \(limitValue \in [2.05888,2.387[\), the influence of the limiter keeps the trajectory in the lowermost scroll. With the softer limiter, it is now much easier to find the parameter window to see the period doubling, because the parameter window for the different peridicities. 
 
 The table \ref{table:periodicities} shows different limit values that stabilize different periodicities.
 
@@ -190,8 +194,8 @@ The table \ref{table:periodicities} shows different limit values that stabilize 
    2.12 & Period 1 \\
    \bottomrule
 \end{tabular}
-\caption{Different limit values resulting in trajectories of different periodicity}
-\label{table:periodicities}
+\caption[Periodicity control limit values (x(t) limiting z(t) with softness 0.5)]{Different limit values resulting in trajectories of different periodicity where x(t) limits z(t) using a 0.5 soft limiter.}
+\label{table:z-0.5-periodicities}
 \end{table}
 
 The plots below show the periodic trajectories for various limit values. The convergence trajectory is omitted in the following plots.
@@ -200,30 +204,30 @@ The plots below show the periodic trajectories for various limit values. The con
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.45\textheight]{chua-circuit/Chua-circuit-softness-0-5-limiter-2-292.png}
-\caption[Figure of period 8 limit cycle]{Figure of period 8 limit cycle.}
-\label{figure:chaotictrajectories}
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-292.png}
+\caption[Figure of period 8 limit cycle.]{Figure of period 8 limit cycle.}
+\label{figure:z-0.5-8-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.45\textheight]{chua-circuit/Chua-circuit-softness-0-5-limiter-2-285.png}
-\caption[Figure of period 4 limit cycle]{Figure of period 4 limit cycle}
-\label{figure:chaotictrajectories}
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-285.png}
+\caption[Figure of period 4 limit cycle.]{Figure of period 4 limit cycle.}
+\label{figure:z-0.5-4-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.45\textheight]{chua-circuit/Chua-circuit-softness-0-5-limiter-2-25.png}
-\caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
-\label{figure:chaotictrajectories}
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-25.png}
+\caption[Figure of period 3 limit cycle.]{Figure of period 2 limit cycle.}
+\label{figure:z-0.5-2-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=0.45\textheight]{chua-circuit/Chua-circuit-softness-0-5-limit-2-12.png}
-\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle}
-\label{figure:chaotictrajectories}
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-12.png}
+\caption[Figure of period 1 limit cycle.]{Figure of period 1 limit cycle.}
+\label{figure:z-0.5-1-limit-cycle-trajectory}
 \end{figure}
 
 \paragraph{One dimension limiting itself} In the second experiment, we start again with \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
@@ -237,9 +241,9 @@ f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)}
 
 If we now change the $limitValue$ parameter from \(>4.6692\), which corresponds to no limiter influence to the trajectory, to a value within \(limitValue \in [1.99545,4.6692[\), we can observe different chaotic trajectories. The limiter influences the circuit by limiting the voltage across the capacitor \(C_1\) when \(x\) approaches the limiter.
 
-Within the window [1.89,1.99545], we can find the small parameter window which controls motion of high periodicity down to period 1.
+Within the window [1.89,1.99545], we can find the small parameter window which controls motion of high periodicity down to differrent lower periods.
 
-Period doubling behavior could be found when limiter controlling the chua circuit appropriately as described in the table \ref{table:x-0.13-periodicities}.
+Period doubling behavior can be found when limiter controlling the chua circuit appropriately with limit values as described in the table \ref{table:x-0.13-periodicities}.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -254,7 +258,7 @@ Period doubling behavior could be found when limiter controlling the chua circui
    1.89 & Period 1 \\
    \bottomrule
 \end{tabular}
-\caption[Limiter values for periodic trajectories for for an x self-limiting limiter with softness 0.13]{Different limit values resulting in trajectories of different periodicity.}
+\caption[Limiter values for periodic trajectories for for an x self-limiting limiter with softness 0.13]{Different limit values resulting in trajectories of different periodicity, where x(t) limits itself using a 0.13 soft limiter.}
 \label{table:x-0.13-periodicities}
 \end{table}
 
@@ -262,31 +266,31 @@ Period doubling behavior could be found when limiter controlling the chua circui
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-932.png}
 \caption[Figure of period 8 limit cycle]{Figure of period 8 limit cycle.}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-8-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-93.png}
 \caption[Figure of period 4 limit cycle]{Figure of period 4 limit cycle}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-4-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-91.png}
 \caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-2-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-89.png}
 \caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-1-limit-cycle-trajectory}
 \end{figure}
 
-The hard limiter however leads to a very slow convergence and therefore it is hard to determine the final periodicity because every evaluation takes a lot of time.
+The hard limiter leads to a very slow convergence and therefore it is hard to determine the final periodicity because every evaluation takes a lot of time.
 
 However, with x limiting itself, we now can set the limit value of the system far beyond the fixed point of the lowermost scroll. At \(limitValue=1.61\), we can observe perfect convergence to period 1.
 
@@ -294,12 +298,17 @@ However, with x limiting itself, we now can set the limit value of the system fa
 \centering
 \includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-61-convergence.png}
 \caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle at 1.61}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-fast-1-limit-cycle-trajectory}
 \end{figure}
 
 We can surpass this point after which the convergence time increases again because the trajectory converges to the limit cycle from outside.
 
-\todo[inline]{Plot 1.53}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-57-convergence.png}
+\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle at 1.57}
+\label{figure:x-0.13-fast-1-limit-cycle-trajectory}
+\end{figure}
 
 The controlled limit cycle shrinks until the trajectory directly converges onto one single fix point (1.4). 
 
@@ -308,7 +317,7 @@ The controlled limit cycle shrinks until the trajectory directly converges onto 
 \includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-5-convergence.png}
 \includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-4-convergence.png}
 \caption[Figure of period 1 limit cycle]{Figure of trajectories with limit values 1.5 and 1.4}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-convergence-trajectories}
 \end{figure}
 
 Going even further leads to a rotation of the plane in which the original trajectories took place, and we get an inward spiral starting at the initial conditions and progressing towards the limiter(1.3). The state spiralling into the limiter tries to pass the limiter from the uppermost the gateway scroll to the lowermost scroll.
@@ -318,18 +327,16 @@ Going even further leads to a rotation of the plane in which the original trajec
 \includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-3-convergence.png}
 \includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-0-5-convergence.png}
 \caption[Figure of period 1 limit cycle]{Figures of trajectories with limit values 1.3 and 0.5.}
-\label{figure:chaotictrajectories}
+\label{figure:x-0.13-spiral-trajectories}
 \end{figure}
 
 The spiralling behavior continues until \(limitValue=0.26991\), where the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter.
 
-\todo[inline]{Simulate a longer trajectory of 0.26991 to see where it leads}
-
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-0-269-convergence.png}
-\caption[Figure the trajectory with limit value 0.269.]{Figure the trajectory with limit value 0.269. The state stays in the uppermost scroll before it spirals into the limiter.}
-\label{figure:chaotictrajectories}
+\includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-0-26991-convergence.png}
+\caption[Figure of trajectory with limit value 0.26991.]{Figure the trajectory with limit value 0.26991. The state stays in the uppermost scroll before it spirals into the limiter.}
+\label{figure:x-0.13-upper-scroll-trajectory}
 \end{figure}
 
 In the uppermost scroll, starting at \(limitValue=0.25304\), we can observe high periodic behavior which we can control to different periodicities by moving the limiter even more. 
@@ -341,7 +348,8 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), we can observe high
 	\toprule
    \(limitValue\) & Limit Cycle\\
    \midrule
-   -0.1316 & Period 16 \\
+   -0.126 & Period 32 \\
+   -0.127 & Period 16 \\
    -0.1327 & Period 8 \\ 
    -0.15 & Period 4 \\
    -0.2  & Period 2 \\
@@ -352,7 +360,47 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), we can observe high
 \label{table:x-0.13-periodicities}
 \end{table}
 
-\todo[inline]{Include periodicity plots.}
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13--0-126.png}
+\caption[Figure of period 32 limit cycle]{Figure of period 32 limit cycle.}
+\label{figure:x-0.13-32-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13--0-127.png}
+\caption[Figure of period 16 limit cycle]{Figure of period 16 limit cycle.}
+\label{figure:x-0.13-16-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13--0-1327.png}
+\caption[Figure of period 8 limit cycle]{Figure of period 8 limit cycle.}
+\label{figure:x-0.13-8-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13--0-15.png}
+\caption[Figure of period 4 limit cycle]{Figure of period 4 limit cycle}
+\label{figure:x-0.13-4-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13--0-2.png}
+\caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
+\label{figure:x-0.13-2-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13--0-34.png}
+\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle}
+\label{figure:x-0.13-1-limit-cycle-upperscroll-trajectory}
+\end{figure}
 
 Using \(softness=0.5\), the limiter starts to influence the multiscroll attractor at \(11.507\), and we can again observe how the chaotic behavior is controlled using the limiter within the limiter value window \([2.176,11.507]\). Within the window \([,2.176[\), we can stabilize the periodic orbits down to period 1.
 
@@ -371,8 +419,43 @@ Using \(softness=0.5\), the limiter starts to influence the multiscroll attracto
    \bottomrule
 \end{tabular}
 \caption{Different limit values resulting in trajectories of different periodicity}
-\label{table:x-0.5-periodicities}
+\label{table:x-0.5-lowermost-periodicities}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5-2-0502.png}
+\caption[Figure of period 16 limit cycle]{Figure of period 16 limit cycle.}
+\label{figure:x-0.5-16-limit-cycle-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5-2-05.png}
+\caption[Figure of period 8 limit cycle]{Figure of period 8 limit cycle.}
+\label{figure:x-0.5-8-limit-cycle-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5-2-04.png}
+\caption[Figure of period 4 limit cycle]{Figure of period 4 limit cycle}
+\label{figure:x-0.5-4-limit-cycle-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5-2.png}
+\caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
+\label{figure:x-0.5-2-limit-cycle-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5-1-8.png}
+\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle}
+\label{figure:x-0.5-1-limit-cycle-trajectory}
+\end{figure}
 
 We can again set the limit value beyond 0. The same plane rotation and spiraling behaviour can be seen, until it stays in the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter. Then we again can limit control the trajectory in the uppermost scroll into different periodicities.
 
@@ -384,15 +467,50 @@ We can again set the limit value beyond 0. The same plane rotation and spiraling
    \(limitValue\) & Limit Cycle\\
    \midrule
    -0.109 & Period 16 \\
-   -0.11 & Period 8 \\ 
+   -0.115 & Period 8 \\ 
    -0.15 & Period 4 \\
    -0.2  & Period 2 \\
    -0.37 & Period 1 \\
    \bottomrule
 \end{tabular}
 \caption[Limiter values for periodic trajectories for for an x self-limiting limiter with softness 0.13]{Different limit values resulting in trajectories of different periodicity in the uppermost scroll.}
-\label{table:x-0.5-periodicities}
+\label{table:x-0.5-upperscroll-periodicities}
 \end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5--0-109.png}
+\caption[Figure of period 16 limit cycle]{Figure of period 16 limit cycle.}
+\label{figure:x-0.5-16-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5--0-115.png}
+\caption[Figure of period 8 limit cycle]{Figure of period 8 limit cycle.}
+\label{figure:x-0.5-8-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5--0-15.png}
+\caption[Figure of period 4 limit cycle]{Figure of period 4 limit cycle}
+\label{figure:x-0.5-4-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5--0-2.png}
+\caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
+\label{figure:x-0.5-2-limit-cycle-upperscroll-trajectory}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-5--0-37.png}
+\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle}
+\label{figure:x-0.5-1-limit-cycle-upperscroll-trajectory}
+\end{figure}
 
 Pushing the limiter further into the negative limit values, we again observe the plane rotation, then we can see the spiralling towards the uppermost scroll. Then we can suppress the movement entirely. The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4[\), but the radius of the spiral gets so small that we reach the maximum precision of mathematica with limiter values \(<-4\).
 
