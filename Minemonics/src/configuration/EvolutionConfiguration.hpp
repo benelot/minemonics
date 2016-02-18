@@ -70,6 +70,7 @@ public:
 	static const double REAPER_SOW_FRESH_PERCENTAGE; /** !< How many creatures should be sown randomly. */
 
 	/** The percentage of the population to be affected. The following sum up to 1.0*/
+	static const double REAPER_ELITIST_PERCENTAGE;
 	static const double REAPER_GENE_MUTATION_PERCENTAGE;
 	static const double REAPER_GENE_SPLIT_PERCENTAGE;
 	static const double REAPER_LINK_MUTATION_PERCENTAGE;

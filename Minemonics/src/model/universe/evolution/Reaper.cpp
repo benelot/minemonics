@@ -31,19 +31,20 @@
 BoostLogger Reaper::mBoostLogger; /*<! initialize the boost logger*/
 Reaper::_Init Reaper::_initializer;
 Reaper::Reaper() :
-	mGeneSplitPercentage(0), mGrowStubPercentage(0), mGraftPercentage(0), mBranchMutationPercentage(
-		0), mCrossOverPercentage(0), mGeneMutationPercentage(0), mReapPercentage(
-		0), mSowFreshPercentage(0) {
+	mElitistPercentage(0), mGeneSplitPercentage(0), mGrowStubPercentage(0), mGraftPercentage(
+		0), mBranchMutationPercentage(0), mCrossOverPercentage(0), mGeneMutationPercentage(
+		0), mReapPercentage(0), mSowFreshPercentage(0) {
 }
 
 Reaper::~Reaper() {
 }
 
 void Reaper::initialize(const double reapPercentage,
-	const double crossOverPercentage, const double geneMutationPercentage,
-	const double geneSplitPercentage, const double branchMutationPercentage,
-	const double growStubPercentage, const double graftPercentage,
-	const double sowFreshPercentage) {
+	const double elitistPercentage, const double crossOverPercentage,
+	const double geneMutationPercentage, const double geneSplitPercentage,
+	const double branchMutationPercentage, const double growStubPercentage,
+	const double graftPercentage, const double sowFreshPercentage) {
+	mElitistPercentage = elitistPercentage;
 	mReapPercentage = reapPercentage;
 	mCrossOverPercentage = crossOverPercentage;
 	mGeneMutationPercentage = geneMutationPercentage;
@@ -128,7 +129,7 @@ void Reaper::sow(PopulationModel* const population) {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Crossover " << crossOverHeads << " creatures";
 	}
 	int start = 0;
-	int untouched = round(((double) headsToSow) * mCrossOverPercentage);
+	int untouched = round(((double) headsToSow) * mElitistPercentage);
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Elite transfer " << untouched << " creatures" << "[" << start << ";" << start + untouched << "]";
 	start += untouched;
 
@@ -224,7 +225,7 @@ void Reaper::crossover(PopulationModel* const population,
 	//how many offspring do we get per parent?
 	int offspringPerParent = ceil(
 		crossoverHeads
-			/ (population->getCreatureModels().size() * mCrossOverPercentage));
+			/ (population->getCreatureModels().size() * mElitistPercentage));
 
 	int crossOverSown = 0;
 

@@ -36,6 +36,7 @@ EvolutionModel::~EvolutionModel() {
 
 void EvolutionModel::initialize() {
 	mReaper.initialize(EvolutionConfiguration::REAPER_REAP_PERCENTAGE,
+		EvolutionConfiguration::REAPER_ELITIST_PERCENTAGE,
 		EvolutionConfiguration::REAPER_CROSSOVER_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE,

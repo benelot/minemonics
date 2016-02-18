@@ -61,11 +61,12 @@ const double EvolutionConfiguration::REAPER_CROSSOVER_PERCENTAGE = 0.5f; /**!< C
 const double EvolutionConfiguration::REAPER_SOW_FRESH_PERCENTAGE = 0.5f; /** !< How many creatures should be sown randomly. */
 
 /** The percentage of the population to be affected. The following sum up to 1.0*/
-const double EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE = 0.2f;
-const double EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE = 0.2f;
-const double EvolutionConfiguration::REAPER_LINK_MUTATION_PERCENTAGE = 0.2f;
-const double EvolutionConfiguration::REAPER_GROW_STUB_PERCENTAGE = 0.2f;
-const double EvolutionConfiguration::REAPER_GRAFT_PERCENTAGE = 0.2f;
+const double EvolutionConfiguration::REAPER_ELITIST_PERCENTAGE = 0.16f;
+const double EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE = 0.166f;
+const double EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE = 0.166f;
+const double EvolutionConfiguration::REAPER_LINK_MUTATION_PERCENTAGE = 0.166f;
+const double EvolutionConfiguration::REAPER_GROW_STUB_PERCENTAGE = 0.166f;
+const double EvolutionConfiguration::REAPER_GRAFT_PERCENTAGE = 0.166f;
 
 /** The probability of genome to be affected. The following DO NOT sum up to 1.0*/
 const double EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY = 0.2f;

@@ -49,7 +49,7 @@ public:
 	 * @param branchAttributeMutationPercentage The percentage of the population whose branch attributes are mutated.
 	 * @param sowFreshPercentage The percentage of the population who is sown freshly.
 	 */
-	void initialize(const double reapPercentage,
+	void initialize(const double reapPercentage, const double elitistPercentage,
 		const double crossOverPercentage, const double geneMutationPercentage,
 		const double geneSplitPercentage, const double branchMutationPercentage,
 		const double growStubPercentage, const double graftPercentage,
@@ -95,8 +95,8 @@ public:
 	 * @param population The population to mutate.
 	 * @param mutatedGeneHeads Number of mutatedGeneHeads to add.
 	 */
-	void mutateGeneBranches(PopulationModel* const population, const int startIndex,
-		const int mutatedGeneBranchHeads);
+	void mutateGeneBranches(PopulationModel* const population,
+		const int startIndex, const int mutatedGeneBranchHeads);
 
 	/**
 	 * Mutate creatures in the population and add n mutateGeneHeads.
@@ -113,7 +113,6 @@ public:
 	 */
 	void graftFeatures(PopulationModel* const population, const int startIndex,
 		const int graftedHeads);
-
 
 	/**
 	 * Sow fresh heads in the population.
@@ -133,12 +132,13 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-				boost::log::attributes::constant < std::string > ("Reaper"));
+				boost::log::attributes::constant<std::string>("Reaper"));
 		}
 	} _initializer;
 
 	double mReapPercentage;
 	double mCrossOverPercentage;
+	double mElitistPercentage;
 	double mGeneMutationPercentage;
 	double mGeneSplitPercentage;
 	double mBranchMutationPercentage;
