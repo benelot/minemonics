@@ -37,7 +37,7 @@ void RagDollBuilder::build(MixedGenome* genome,
 
 	bool attachHead = false;
 	bool enableMotor = true;
-	double ragDollSize = MorphologyConfiguration::LIMB_MAX_SIZE;
+	double ragDollSize = 2* MorphologyConfiguration::LIMB_MAX_SIZE;
 	double gapSize = ragDollSize * 1.0f;
 
 	double damping = 0.05f; //[0.005;0.5] 0.05

@@ -32,16 +32,16 @@ void SnakeBuilder::build(MixedGenome* genome,
 
 	// create limb
 	Morphogene* morphogene = new Morphogene(LimbPhysics::BLOCK,
-		Ogre::Vector3(MorphologyConfiguration::LIMB_MIN_SIZE * 3,
-			MorphologyConfiguration::LIMB_MIN_SIZE ,
-			MorphologyConfiguration::LIMB_MIN_SIZE),
+		Ogre::Vector3(MorphologyConfiguration::LIMB_MIN_SIZE * 8,
+			MorphologyConfiguration::LIMB_MIN_SIZE*3,
+			MorphologyConfiguration::LIMB_MIN_SIZE*3),
 		Ogre::Quaternion(1, 0, 0, 0), 1, 10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(1, 0, 0));
 	morphogene->setRepetitionLimit(snakeLength);
 
 	genome->addGene(morphogene);
 
-	double damping = 0.05f; //[0.005;0.5] 0.05
+	double damping = 0.0005f; //[0.005;0.5] 0.05
 	// create joint between the two limbs
 	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(
 		JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
