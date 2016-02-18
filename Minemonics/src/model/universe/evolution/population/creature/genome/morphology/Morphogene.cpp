@@ -88,16 +88,17 @@ Morphogene::Morphogene(const Morphogene& morphoGene) :
 	for (std::vector<MorphogeneBranch*>::const_iterator mgbit =
 		morphoGene.mGeneBranches.begin();
 		mgbit != morphoGene.mGeneBranches.end(); mgbit++) {
-		mGeneBranches.push_back((*mgbit)->clone());
+		MorphogeneBranch* clone = (*mgbit)->clone();
+		mGeneBranches.push_back(clone);
 	}
 }
 
 Morphogene::~Morphogene() {
-	while (!mGeneBranches.empty()) {
-		MorphogeneBranch* f = mGeneBranches.back();
-		mGeneBranches.pop_back();
-		delete f;
+	for (std::vector<MorphogeneBranch*>::iterator mgbit = mGeneBranches.begin();
+		mgbit != mGeneBranches.end(); mgbit++) {
+		delete *mgbit;
 	}
+	mGeneBranches.clear();
 }
 
 void Morphogene::initialize(const double branchiness) {
@@ -255,7 +256,7 @@ void Morphogene::mutate() {
 			MorphologyConfiguration::LIMB_SCALE_MAX);
 
 	// The maximum repetition of this gene in a root-to-leaf path. This can change later to a higher number than the initial type repeats.
-	mRepetitionLimit += Randomness::getSingleton()->nextNormalInt(0,1,2);
+	mRepetitionLimit += Randomness::getSingleton()->nextNormalInt(0, 1, 2);
 
 	mFollowUpGene = 0; /**!< The follow up gene follows instead if this gene's repetition limit is reached. */
 }

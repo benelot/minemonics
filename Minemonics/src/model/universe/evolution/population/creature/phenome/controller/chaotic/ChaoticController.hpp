@@ -133,8 +133,6 @@ private:
 
 	ChaoticControllerGene::ChaoticSystemType mSystemType; /**!< The chaotic system type */
 
-	std::string mLoggerName; /**!< Logger name which is always ChaosLogger + &this */
-
 	double mInitialX, mInitialY, mInitialZ; /**!< The initial conditions of the chaotic system */
 
 	double mSpeed; /**!< The integration speed */

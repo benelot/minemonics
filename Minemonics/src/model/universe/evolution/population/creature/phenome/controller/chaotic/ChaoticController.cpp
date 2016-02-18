@@ -31,32 +31,31 @@ BoostLogger ChaoticController::mBoostLogger; /*<! initialize the boost logger*/
 ChaoticController::_Init ChaoticController::_initializer;
 
 ChaoticController::ChaoticController() :
-	Controller(CHAOTIC_CONTROLLER), mLoggerName(
-		"ChaosLogger" + boost::lexical_cast<std::string>(this)), mTime(0), mSystemType(
+	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(
 		ChaoticControllerGene::CHUA_CIRCUIT), mFirstTime(true), mInitialX(0), mInitialY(
 		0), mInitialZ(0), mSpeed(1) {
-	mLoggerName = "ChaosLogger" + boost::lexical_cast<std::string>(this);
+	mLoggerName = boost::lexical_cast<std::string>(this) + "ChaoticController";
 }
 
 ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType, double initialX,
 	double initialY, double initialZ, double speed) :
-	Controller(CHAOTIC_CONTROLLER), mLoggerName(
-		boost::lexical_cast<std::string>(this) + "ChaoticController"), mTime(0), mSystemType(
-		systemType), mFirstTime(true), mInitialX(initialX), mInitialY(initialY), mInitialZ(
-		initialZ), mSpeed(speed) {
+	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType), mFirstTime(
+		true), mInitialX(initialX), mInitialY(initialY), mInitialZ(initialZ), mSpeed(
+		speed) {
+	mLoggerName = boost::lexical_cast<std::string>(this) + "ChaoticController";
 }
 
 ChaoticController::ChaoticController(
 	ChaoticControllerGene::ChaoticSystemType systemType) :
 	Controller(CHAOTIC_CONTROLLER), mTime(0), mSystemType(systemType), mFirstTime(
-		0), mLoggerName(
-		boost::lexical_cast<std::string>(this) + "ChaoticController") {
+		0) {
+	mLoggerName = boost::lexical_cast<std::string>(this) + "ChaoticController";
 }
 
 ChaoticController::ChaoticController(const ChaoticController& chaoticController) :
-	Controller(CHAOTIC_CONTROLLER),mLoggerName(
-		boost::lexical_cast<std::string>(this) + "ChaoticController") {
+	Controller(CHAOTIC_CONTROLLER) {
+	mLoggerName = boost::lexical_cast<std::string>(this) + "ChaoticController";
 
 	mTime = chaoticController.mTime;
 	mType = chaoticController.mType;
@@ -84,9 +83,10 @@ ChaoticController::~ChaoticController() {
 }
 
 void ChaoticController::initialize() {
-	mDataSink.initialize(mLoggerName, 3, 20);
 
 	mLoggerName = mLoggingID + "ChaoticController";
+	mDataSink.initialize(mLoggerName, 3, 20);
+
 
 	u[0] = mInitialX;
 	u[1] = mInitialY;

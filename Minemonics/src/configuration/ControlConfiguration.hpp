@@ -43,6 +43,8 @@ public:
 
 	static const ControllerGene::ControllerType CONTROLLER_TYPE; /*!< Controller gene type */
 
+	static const bool IS_POSITION_CONTROLLED;
+
 	static const double CHAOS_MIN_INIT_CONDITION;
 
 	static const double CHAOS_MAX_INIT_CONDITION;

@@ -57,7 +57,8 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 	for (std::vector<ControllerGene*>::const_iterator mgbit =
 		morphogeneBranch.mControllerGenes.begin();
 		mgbit != morphogeneBranch.mControllerGenes.end(); mgbit++) {
-		mControllerGenes.push_back((*mgbit)->clone());
+		ControllerGene* clone = (*mgbit)->clone();
+		mControllerGenes.push_back(clone);
 	}
 
 	mActive = morphogeneBranch.mActive;
@@ -99,11 +100,10 @@ MorphogeneBranch::MorphogeneBranch(const MorphogeneBranch& morphogeneBranch) {
 
 MorphogeneBranch::~MorphogeneBranch() {
 	//clean up necessary
-	while (!mControllerGenes.empty()) {
-		ControllerGene* f = mControllerGenes.back();
-		mControllerGenes.pop_back();
-		delete f;
+	for(std::vector<ControllerGene*>::iterator git = mControllerGenes.begin();git != mControllerGenes.end();git++){
+		delete *git;
 	}
+	mControllerGenes.clear();
 }
 
 void MorphogeneBranch::initialize() {

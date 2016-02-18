@@ -55,7 +55,8 @@ MixedGenome::MixedGenome(const MixedGenome* mixedGenome) {
 
 	for (std::vector<Gene*>::const_iterator git = mixedGenome->mGenes.begin();
 		git != mixedGenome->mGenes.end(); git++) {
-		mGenes.push_back((*git)->clone());
+		Gene * clone = (*git)->clone();
+		mGenes.push_back(clone);
 	}
 }
 
@@ -397,6 +398,14 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 			branch->setJointAnchorZ(1);
 			break;
 		}
+
+		//delete old morphogene branches because they were cloned above
+		for (std::vector<MorphogeneBranch*>::const_iterator mgbit =
+			originalGene->getGeneBranches().begin();
+			mgbit != originalGene->getGeneBranches().end(); mgbit++) {
+			delete *mgbit;
+		}
+
 		originalGene->getGeneBranches().clear();
 
 		originalGene->getGeneBranches().push_back(branch);
@@ -523,7 +532,8 @@ void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
 	}
 
 	for (int i = fatherSegmentStartIndex; i < fatherSegmentEndIndex; i++) {
-		mGenes.push_back(fathergenome->getGenes()[i]->clone());
+		Gene* clone = fathergenome->getGenes()[i]->clone();
+		mGenes.push_back(clone);
 	}
 }
 

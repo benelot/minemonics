@@ -62,10 +62,10 @@ void FSServoMotor::instantiate(JointPhysics* jointPhysics,
 void FSServoMotor::apply(double timeSinceLastTick) {
 
 	if (mPositionControlled) {
-		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
+		//clamp the input value to [-1;1] because otherwise the motor does not work anymore.
 		btScalar clampedInputValue =
-			(getInputValue() > 1.0f) ? 1.0f :
-			(getInputValue() < 0.0f) ? 0.0f : getInputValue();
+			(getInputValue() > 1) ? 1.0f :
+			(getInputValue() < -1) ? -1.0f : getInputValue();
 
 		//calculate the target angle of the motor
 		btScalar targetAngle = mLowerLimit
@@ -80,11 +80,12 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 		float kP = 200000000;
 		float kD = 2000;
 		double correction = kP * angleError + kD * velocityError;
-		mJoint->applyJointTorque(mJointMotorIndex,
-			btScalar(
-				(correction > mMaxForce) ? mMaxForce :
-				(correction < -mMaxForce) ? -mMaxForce : correction));
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mJoint->getJointPos(mJointMotorIndex) << "," << targetAngle;
+//		mJoint->applyJointTorque(mJointMotorIndex,
+//			btScalar(
+//				(correction > 2*mMaxForce) ? 2*mMaxForce :
+//				(correction < -2*mMaxForce) ? -2*mMaxForce : correction));
+		mJoint->applyJointTorque(mJointMotorIndex,correction);
+//		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< mJoint->getJointPos(mJointMotorIndex) << "," << targetAngle;
 	}
 	else {
 

@@ -168,6 +168,8 @@ protected:
 
 	DataSink mDataSink; /**!< Data sink for the plotting window */
 
+	std::string mLoggerName; /**!< Logger name*/
+
 	ControllerType mType; /**!< The type of controller that is running */
 
 	std::vector<int> mControlInputIndices; /**!< The index of the control input the controller reads from. */

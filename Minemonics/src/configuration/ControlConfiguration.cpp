@@ -14,7 +14,7 @@
 //## view headers
 //## utils headers
 
-const double ControlConfiguration::SINE_MIN_FREQUENCY = 0.1; /**!<Hz Lowest frequency of joint movement*/
+const double ControlConfiguration::SINE_MIN_FREQUENCY = 0.5; /**!<Hz Lowest frequency of joint movement*/
 
 const double ControlConfiguration::SINE_MAX_FREQUENCY = 4; /**!< Hz Highest frequency of joint movement */
 
@@ -32,6 +32,8 @@ const double ControlConfiguration::SINE_MAX_Y_OFFSET = 1; /**!< Highest Y Offset
 
 const ControllerGene::ControllerType ControlConfiguration::CONTROLLER_TYPE =
 	ControllerGene::ChaoticControllerGene; /*!< Controller gene type */
+
+const bool ControlConfiguration::IS_POSITION_CONTROLLED = false;
 
 const double ControlConfiguration::CHAOS_MIN_INIT_CONDITION = -0.5f;
 

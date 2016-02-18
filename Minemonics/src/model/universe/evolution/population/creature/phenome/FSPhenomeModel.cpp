@@ -28,6 +28,7 @@
 
 //## configuration headers
 #include <configuration/MorphologyConfiguration.hpp>
+#include <configuration/ControlConfiguration.hpp>
 
 //## controller headers
 //## model headers
@@ -511,14 +512,13 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			+ MorphologyConfiguration::MOTOR_FS_MAX_TORQUE_SQUARE_CONSTANT
 				* pow(mass1 * mass2, 2);
 
-	//TODO: Make position controlled defined in the settings
 	joint->generateMotors(Ogre::Vector3(maxTorque, maxTorque, maxTorque),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMinAngle(),
 			parentMorphogeneBranch->getJointYawMinAngle(),
 			parentMorphogeneBranch->getJointRollMinAngle()),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()), false);
+			parentMorphogeneBranch->getJointRollMaxAngle()), ControlConfiguration::IS_POSITION_CONTROLLED);
 
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
