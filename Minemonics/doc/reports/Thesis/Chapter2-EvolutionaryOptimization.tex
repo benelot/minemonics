@@ -84,8 +84,6 @@ In the traditional approach on genomes, a fixed length string of bits is used to
 
 The genomic model is one of the base models of the simulator. It encodes both morphology and the controller of the creature. Inspired by biological DNA, the genome of the simulator uses an indirect encoding. An indirect encoding, different from a direct encoding, does not encode every element of the phenotype explicitly, but uses element classes and branches between them to encode their relations. The advantage of indirect encodings is that an indirect coding evolves element classes instead of element instances, which leads to a higher abstraction within the genome. An element class can then be repeated several times in different scalings and symmetries, building creatures where symmetrical limbs can be evolved simultaneously.
 
-\todo[inline]{Describe the advantage of indirect encodings over direct encodings.}
-
 The genome defines a directed, possibly cyclic graph, where the nodes are called morphogenes, defining the classes of limbs, and where the edges are called morphogene branches, defining the joint relations inbetween the limbs. A morphogene definition (Fig. \ref{figure:genome-structure}) consists of the primitive type of the limb (a cube or capsule), the limb's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. The joint anchor is a position on the surface of the primitive type which denotes where the parent limb will be attached through a joint in the final phenotype. Furthermore, the morphogene contains a number of morphogene branches and definitions related to how the branches are influenced by the limb. \\
 
 A morphogene branch (Fig. \ref{figure:genome-structure}) consists of joint properties such as the pitch and yaw axis, the joint rotational limits for the pitch, yaw and roll degree of freedom, joint damping coefficients for all degrees of freedom and a controller gene.
@@ -169,8 +167,6 @@ The snake is a creature built from a chain of equal limbs connected with one or 
 \caption[The snake]{The snake}
 \label{figure:snake}
 \end{figure}
-
-\todo[inline]{Describe the snake model organism.}
 
 \paragraph{Pod}
 
