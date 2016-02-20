@@ -44,3 +44,5 @@ const double ControlConfiguration::CHAOS_MIN_INTEGRATION_SPEED = 0.001f; /**!< M
 const double ControlConfiguration::CHAOS_MAX_INTEGRATION_SPEED = 10; /**!< Must be higher than one*/
 
 const double ControlConfiguration::CHAOS_BASE_INTEGRATION_SPEED = 0.0005f;
+
+const double ControlConfiguration::SIGN_DEPENDENT_OUTPUT = false;

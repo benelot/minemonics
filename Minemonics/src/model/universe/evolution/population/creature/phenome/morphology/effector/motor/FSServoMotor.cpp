@@ -9,6 +9,8 @@
 //# custom headers
 //## base headers
 //## configuration headers
+#include <configuration/ControlConfiguration.hpp>
+
 //## controller headers
 //## model headers
 #include <model/universe/evolution/population/creature/phenome/controller/ControlInput.hpp>
@@ -89,10 +91,18 @@ void FSServoMotor::apply(double timeSinceLastTick) {
 	}
 	else {
 
+		btScalar clampedInputValue = 0;
+		if(ControlConfiguration::SIGN_DEPENDENT_OUTPUT){
 		//clamp the input value to [0;1] because otherwise the motor does not work anymore.
-		btScalar clampedInputValue =
+		clampedInputValue =
 			(getInputValue() > 0) ? 1.0f :
 			(getInputValue() < 0) ? -1.0f : getInputValue();
+		}
+		else{
+			clampedInputValue =
+				(getInputValue() > 1) ? 1.0f :
+				(getInputValue() < -1) ? -1.0f : getInputValue();
+		}
 		mJoint->applyJointTorque(mJointMotorIndex, btScalar(clampedInputValue*mMaxForce));
 	}
 }

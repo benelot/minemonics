@@ -54,6 +54,8 @@ public:
 	static const double CHAOS_MAX_INTEGRATION_SPEED;
 
 	static const double CHAOS_BASE_INTEGRATION_SPEED;
+
+	static const double SIGN_DEPENDENT_OUTPUT;
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */
