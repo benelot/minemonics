@@ -101,26 +101,18 @@ A controller gene is either a sinusoidal controller gene or a chaotic controller
 \label{figure:genome-structure}
 \end{figure}
 
-
-\todo[inline]{Improve the figure to show a possible genome.}
 \begin{figure}[H]
 \center
-\begin{tikzpicture}
-   \foreach \c/\i/\t [count=\n] in  
-        {blue!20/Root Morphogene class/1.5,green!20/Morphogene 1 class/1,orange!20/Morphogene 2 class/0.8,red!20/Morphogene3 class/0.5} 
-           \node[draw,fill=\c,minimum height=\t * 2cm,minimum width = \t * 1cm,xshift=\n* 2.5cm](N\n){\i} ;
-\draw[dashed,->,line width=0.5mm] (N1.south) to [out=-50,in=-150] node[below] {Branch/2} (N2.south);
-\draw[dashed,->,line width=0.5mm] (N2.north) to [out=50,in=150] node[above] {Branch/2} (N3.north);
-\draw[dashed,->,line width=0.5mm] (N2.south) to [out=-50,in=-150] node[below] {Branch/2} (N4.south);
+\input{Pictures/evolutionary-optimization/indirect-encoding.tikz}
 
-\end{tikzpicture}
 \caption[Possible indirectly encoded genome]{The general structure of the genome (using a subset of the configuration possibilities). The number at the branch denotes the number of child limbs of the following type attached to the respective parent limb.}
-\label{figure:genotype}
+\label{figure:indirect-genotype}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
-\missingfigure[figwidth=1\textwidth]{Figure of the direct encoding of the genome.}
+\input{Pictures/evolutionary-optimization/direct-encoding.tikz}
+
 \caption[Directly encoded genome]{A figure of the direct encoding of the genome.}
 \label{figure:direct-encoding}
 \end{figure}
@@ -130,6 +122,14 @@ A controller gene is either a sinusoidal controller gene or a chaotic controller
 
 The Phenomes are the fully developed versions of the genomes. In traditional genetic algorithms, genotypes usually do not have a development stage to transcribe the phenotype from it and be directly evaluated. In modern approaches however, it is often impossible to evaluate the individual directly based on the genotype, especially when the genome structure uses indirect encoding as it is the case in this simulation.
 In the Minemonics simulator, two different rigid body constraint models were used to evaluate their stability when used within an evolutionary process. Both phenome models are based on the same representation, but the important difference is the physics simulation model that is used. One of them uses a constrained rigidbody representation reducing the degrees of freedom with constraints, the other uses a Featherstone Multibody representation increasing the degrees of freedom with mobilizers. The main issue which had to be resolved was that the ranges of parameters in the physics engine were not completely clear and some lead to invalid definitions of one or multiple joints, leading to very instable individuals. Instability here means either that a single invalid joint definition leads to instabilities in the solver or that an individual is strained by tensions because the numerical solver is unable to solve multiple contradicting constraints and therefore applies high forces and torques to resolve the constraints even though they can never be resolved. This could be fixed by using the Featherstone Multibody representation as described below. 
+
+\begin{figure}[H]
+\centering
+\input{Pictures/evolutionary-optimization/phenotype.tikz}
+
+\caption[A figure of the phenotype]{A figure of the phenotype.}
+\label{figure:direct-encoding}
+\end{figure}
 
 \subsubsection{Constrained Rigidbody Phenotype}
 % rev. 1

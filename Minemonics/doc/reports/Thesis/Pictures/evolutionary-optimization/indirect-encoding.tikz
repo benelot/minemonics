@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+% classes
+\tikzstyle{root} = [draw=black!80, thick,minimum width=1.5cm,minimum height=1cm, circle, fill=black!20]
+\tikzstyle{class1} = [minimum width=3cm, minimum height=2cm,draw=black!80, thick, fill=blue!5, rounded corners, rectangle]
+\tikzstyle{class2} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=orange!80]
+\tikzstyle{class3} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=red!80]
+
+%###############################################
+% head
+%###############################################
+\node(root-morphogene)[root,align=center]{Root\\ Morphogene};
+
+%###############################################
+% torso
+%###############################################
+\node(class1-morphogene)[class1,right= 1cm of root-morphogene]{Class 1 Morphogene};
+
+%###############################################
+% arm
+%###############################################
+\node(class2-morphogene)[class2, above= 2cm of class1-morphogene,rotate around={45:(0,0)}]{Class 2 Morphogene};
+
+%###############################################
+% leg
+%###############################################
+\node(class3-morphogene)[class3, below right= -0.4cm and 1cm of class1-morphogene]{Class 3 Morphogene};
+
+%###############################################
+% torso branch
+%###############################################
+\draw[dashed,->,line width=0.5mm] (root-morphogene.east) to [out=0,in=180] node[below] {} (class1-morphogene.west);
+
+%###############################################
+% arm branches
+%###############################################
+\draw[dashed,->,line width=0.5mm] (class1-morphogene.north west) to [out=90,in=-135] node[right] {mirror} (class2-morphogene.west);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (class2-morphogene.east) to [out=0,in=90] node[above right] {1} (class2-morphogene.east);
+
+%###############################################
+% leg branches
+%###############################################
+\draw[dashed,->,line width=0.5mm] (class1-morphogene.south east) to [out=0,in=180] node[below] {mirror} (class3-morphogene.west);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (class3-morphogene.east) to [out=-45,in=45] node[right] {1} (class3-morphogene.east);
+\end{tikzpicture}

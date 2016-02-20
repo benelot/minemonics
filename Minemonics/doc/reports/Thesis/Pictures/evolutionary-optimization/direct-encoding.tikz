@@ -1,0 +1,52 @@
+\begin{tikzpicture}
+% classes
+\tikzstyle{root} = [draw=black!80, thick,minimum width=1.5cm,minimum height=1cm, circle, fill=black!20]
+\tikzstyle{class1} = [minimum width=3cm, minimum height=2cm,draw=black!80, thick, fill=blue!5, rounded corners, rectangle]
+\tikzstyle{class2} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=orange!80]
+\tikzstyle{class3} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=red!80]
+
+%###############################################
+% head
+%###############################################
+\node(root-morphogene)[root,align=center]{Root\\ Morphogene};
+
+%###############################################
+% torso
+%###############################################
+\node(morphogene-1)[class1,right= 1cm of root-morphogene]{Morphogene};
+
+%###############################################
+% arm
+%###############################################
+\node(morphogene-2)[class2, above= 2cm of morphogene-1,rotate around={45:(0,0)}]{Morphogene};
+\node(morphogene-3)[class2, below= 2cm of morphogene-1,rotate around={-45:(0,0)}]{Morphogene};
+
+%###############################################
+% leg
+%###############################################
+\node(morphogene-4)[class3, above right= -0.4cm and 1cm of morphogene-1]{Morphogene};
+\node(morphogene-5)[class3, below right= -0.4cm and 1cm of morphogene-1]{Morphogene};
+
+%###############################################
+% torso branch
+%###############################################
+\draw[dashed,->,line width=0.5mm] (root-morphogene.east) to [out=0,in=180] node[below] {} (morphogene-1.west);
+
+%###############################################
+% arm branches
+%###############################################
+\draw[dashed,->,line width=0.5mm] (morphogene-1.north west) to [out=90,in=-135] node[right] {} (morphogene-2.west);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (morphogene-2.east) to [out=0,in=90] node[above right] {1} (morphogene-2.east);
+\draw[dashed,->,line width=0.5mm] (morphogene-1.south west) to [out=-90,in=120] node[right] {} (morphogene-3.west);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (morphogene-3.east) to [out=0,in=-100] node[below right] {1} (morphogene-3.east);
+
+%###############################################
+% leg branches
+%###############################################
+\draw[dashed,->,line width=0.5mm] (morphogene-1.north east) to [out=0,in=180] node[below] {} (morphogene-4.west);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (morphogene-4.east) to [out=-45,in=45] node[right] {1}
+(morphogene-4.east);
+
+\draw[dashed,->,line width=0.5mm] (morphogene-1.south east) to [out=0,in=180] node[below] {} (morphogene-5.west);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (morphogene-5.east) to [out=-45,in=45] node[right] {1} (morphogene-5.east);
+\end{tikzpicture}

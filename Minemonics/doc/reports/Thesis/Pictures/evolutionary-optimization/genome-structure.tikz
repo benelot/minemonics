@@ -11,9 +11,9 @@
 %###############################################
 \node[align=left](genome-spec){
 \underline{Genotype specification}\\
-Total segment quantity limit\\
-Segment tree depth limit\\
-Morphogene classes vector:\\
+Total Segment Quantity Limit [integer]\\
+Segment Tree Depth Limit [integer]\\
+Morphogene Classes Vector:\\
 };
 
 
@@ -23,10 +23,8 @@ Morphogene classes vector:\\
 \matrix[anchor=east](morphogene-classes)[below=0cm of genome-spec, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(brace-node)[box]{};\\
 };
-\node(above-brace-node)[above=0.1cm of brace-node]{};
-\node(above-right-brace-node)[right=0.3cm of above-brace-node]{};
-\node(below-brace-node)[below=0.1cm of brace-node]{};
-\node(below-right-brace-node)[right=0.3cm of below-brace-node]{};
+\node(above-right-brace-node)[above right=0.1cm and 0.2cm of brace-node]{};
+\node(below-right-brace-node)[below right=0.1cm and 0.2cm of brace-node]{};
 
 
 %###############################################
@@ -34,7 +32,6 @@ Morphogene classes vector:\\
 %###############################################
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
 (below-right-brace-node.south east) -- (above-right-brace-node.north east)
-%(3.3,-2.5) -- (3.3,-1.1) 
 node[anchor=west](morphogene-spec-brace) [left=-0.2cm of brace-node,black,midway] {};
 
 
@@ -45,15 +42,14 @@ node[anchor=west](morphogene-spec-brace) [left=-0.2cm of brace-node,black,midway
 \node(left-to-selected-morphogene)[box]{}; & \node(selected-morphogene)[box]{}; & \node(right-to-selected-morphogene)[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(most-right-morphogene)[box]{};\\
 };
 \node(below-left-of-selected-morphogene)[below= 0cm of left-to-selected-morphogene]{};
-\node(below-right-of-selected-morphogene)[below=0cm of right-to-selected-morphogene]{};
+\node(below-right-of-selected-morphogene)[below= 0cm of right-to-selected-morphogene]{};
 
 
 %###############################################
 % Brace to morphogene class
 %###############################################
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt}]
-(below-left-of-selected-morphogene.south) -- (below-right-of-selected-morphogene.south)
-%(5,-2.4) -- (6.5,-2.4)
+(below-left-of-selected-morphogene.south east) -- (below-right-of-selected-morphogene.south west)
 node[anchor=south] (morphogene-class-brace) [below=of morphogene-vector,black,midway] {};
 
 
@@ -62,18 +58,18 @@ node[anchor=south] (morphogene-class-brace) [below=of morphogene-vector,black,mi
 %###############################################
 \node(morphogene-class)[below right=1.0cm and -0.3cm of selected-morphogene,align=left]{
 \underline{Morphogene class}\\
-Primitive type\\
-Dimensions: X, Y, Z\\
-Orientation: W, X, Y, Z \\
-Material properties:\\
-~~Restitution\\
-~~Friction\\
-~~Color: R, G, B \\
-Joint Anchor: X, Y, Z\\
-Segment Shrink Factor\\
-Repetition Limit\\
-Follow-up gene\\
-Morphogene branch vector:\\
+Primitive Type [type]\\
+Dimensions: [X, Y, Z]\\
+Orientation: [W, X, Y, Z] \\
+Material Properties:\\
+~~Restitution [real]\\
+~~Friction [real]\\
+~~Color: [R, G, B] \\
+Joint Anchor: [X, Y, Z]\\
+Segment Shrink Factor [real]\\
+Repetition Limit [integer]\\
+Follow-up Gene [index]\\
+Morphogene Branch Vector:\\
 };
 
 
@@ -83,10 +79,8 @@ Morphogene branch vector:\\
 \matrix(morphogene-branches)[below=0cm of morphogene-class, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node(brace-node2)[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node[box]{};\\
 };
-\node(above-brace-node)[above=0.1cm of brace-node2]{};
-\node(above-left-brace-node)[left=0.3cm of above-brace-node]{};
-\node(below-brace-node)[below=0.1cm of brace-node2]{};
-\node(below-left-brace-node)[left=0.3cm of below-brace-node]{};
+\node(above-left-brace-node)[above left=0.1cm and 0.2cm of brace-node2]{};
+\node(below-left-brace-node)[below left=0.1cm and 0.2cm of brace-node2]{};
 
 
 %###############################################
@@ -98,7 +92,7 @@ node (morphogene-branch-brace) [black,midway] {};
 
 
 %###############################################
-% Morphogene braches vector
+% Morphogene branches vector
 %###############################################
 \matrix(morphogene-branch-vector)[left=1.0cm of morphogene-branches, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(left-to-selected-morphogene-branch)[box]{}; & \node(selected-morphogene-branch)[box]{}; & \node(right-to-selected-morphogene-branch)[box]{};\\
@@ -111,7 +105,7 @@ node (morphogene-branch-brace) [black,midway] {};
 % Brace to morphogene branch specification
 %###############################################
 \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
-(above-right-of-selected-morphogene-branch.north east) -- (above-left-of-selected-morphogene-branch.north west)
+(above-right-of-selected-morphogene-branch.north west) -- (above-left-of-selected-morphogene-branch.north east)
 node (morphogene-branch-spec-brace) [black,midway] {};
 
 
@@ -120,18 +114,18 @@ node (morphogene-branch-spec-brace) [black,midway] {};
 %###############################################
 \node[above left=1.1cm and -0.9cm of selected-morphogene-branch,align=left] (morphogene-branch-spec){
 \underline{Morphogene branch specification}\\
-Flipped, Mirrored \\
+Flipped, Mirrored [boolean]\\
 Joint specification:\\
-~~Joint Anchor: X, Y, Z\\
-~~Pitch Axis: X, Y, Z\\
-~~Yaw Axis: X, Y, Z\\
-~~Pitch Limits: Min, Max\\
-~~Pitch damping coefficient\\
-~~Yaw Limits: Min, Max\\	
-~~Yaw damping coefficient\\
-~~Roll Limits: Min, Max\\
-~~Roll damping coefficient\\
-~~Controller Type
+~~Joint Anchor: [X, Y, Z]\\
+~~Pitch Axis: [X, Y, Z]\\
+~~Yaw Axis: [X, Y, Z]\\
+~~Pitch Limits: [Min, Max]\\
+~~Pitch Damping Coefficient [real]\\
+~~Yaw Limits: [Min, Max]\\	
+~~Yaw Damping Coefficient [real]\\
+~~Roll Limits: [Min, Max]\\
+~~Roll Damping Coefficient [real]\\
+~~Controller Type [type]
 };
 
 %###############################################
