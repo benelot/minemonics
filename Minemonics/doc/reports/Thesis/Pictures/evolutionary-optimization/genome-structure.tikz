@@ -1,0 +1,153 @@
+\begin{tikzpicture}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!80]
+
+
+%###############################################
+% Genome specification box
+%###############################################
+\node[align=left](genome-spec){
+\underline{Genotype specification}\\
+Total segment quantity limit\\
+Segment tree depth limit\\
+Morphogene classes vector:\\
+};
+
+
+%###############################################
+% Morphogene classes vector below genome specification box
+%###############################################
+\matrix[anchor=east](morphogene-classes)[below=0cm of genome-spec, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(brace-node)[box]{};\\
+};
+\node(above-brace-node)[above=0.1cm of brace-node]{};
+\node(above-right-brace-node)[right=0.3cm of above-brace-node]{};
+\node(below-brace-node)[below=0.1cm of brace-node]{};
+\node(below-right-brace-node)[right=0.3cm of below-brace-node]{};
+
+
+%###############################################
+% Brace to second morphogene class vector
+%###############################################
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(below-right-brace-node.south east) -- (above-right-brace-node.north east)
+%(3.3,-2.5) -- (3.3,-1.1) 
+node[anchor=west](morphogene-spec-brace) [left=-0.2cm of brace-node,black,midway] {};
+
+
+%###############################################
+% Morphogene classes vector
+%###############################################
+\matrix[anchor=south](morphogene-vector)[right=of morphogene-classes, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(left-to-selected-morphogene)[box]{}; & \node(selected-morphogene)[box]{}; & \node(right-to-selected-morphogene)[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(most-right-morphogene)[box]{};\\
+};
+\node(below-left-of-selected-morphogene)[below= 0cm of left-to-selected-morphogene]{};
+\node(below-right-of-selected-morphogene)[below=0cm of right-to-selected-morphogene]{};
+
+
+%###############################################
+% Brace to morphogene class
+%###############################################
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt}]
+(below-left-of-selected-morphogene.south) -- (below-right-of-selected-morphogene.south)
+%(5,-2.4) -- (6.5,-2.4)
+node[anchor=south] (morphogene-class-brace) [below=of morphogene-vector,black,midway] {};
+
+
+%###############################################
+% Morphogene class box
+%###############################################
+\node(morphogene-class)[below right=1.0cm and -0.3cm of selected-morphogene,align=left]{
+\underline{Morphogene class}\\
+Primitive type\\
+Dimensions: X, Y, Z\\
+Orientation: W, X, Y, Z \\
+Material properties:\\
+~~Restitution\\
+~~Friction\\
+~~Color: R, G, B \\
+Joint Anchor: X, Y, Z\\
+Segment Shrink Factor\\
+Repetition Limit\\
+Follow-up gene\\
+Morphogene branch vector:\\
+};
+
+
+%###############################################
+% Morphogene branches vector below morphogene class box
+%###############################################
+\matrix(morphogene-branches)[below=0cm of morphogene-class, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(brace-node2)[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node[box]{};\\
+};
+\node(above-brace-node)[above=0.1cm of brace-node2]{};
+\node(above-left-brace-node)[left=0.3cm of above-brace-node]{};
+\node(below-brace-node)[below=0.1cm of brace-node2]{};
+\node(below-left-brace-node)[left=0.3cm of below-brace-node]{};
+
+
+%###############################################
+% Brace to second morphogene branches vector
+%###############################################
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(above-left-brace-node.north west) -- (below-left-brace-node.south west) 
+node (morphogene-branch-brace) [black,midway] {};
+
+
+%###############################################
+% Morphogene braches vector
+%###############################################
+\matrix(morphogene-branch-vector)[left=1.0cm of morphogene-branches, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(left-to-selected-morphogene-branch)[box]{}; & \node(selected-morphogene-branch)[box]{}; & \node(right-to-selected-morphogene-branch)[box]{};\\
+};
+\node(above-left-of-selected-morphogene-branch)[above= 0cm of left-to-selected-morphogene-branch]{};
+\node(above-right-of-selected-morphogene-branch)[above=0cm of right-to-selected-morphogene-branch]{};
+
+
+%###############################################
+% Brace to morphogene branch specification
+%###############################################
+\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+(above-right-of-selected-morphogene-branch.north east) -- (above-left-of-selected-morphogene-branch.north west)
+node (morphogene-branch-spec-brace) [black,midway] {};
+
+
+%###############################################
+% Morphogene branch specification box
+%###############################################
+\node[above left=1.1cm and -0.9cm of selected-morphogene-branch,align=left] (morphogene-branch-spec){
+\underline{Morphogene branch specification}\\
+Flipped, Mirrored \\
+Joint specification:\\
+~~Joint Anchor: X, Y, Z\\
+~~Pitch Axis: X, Y, Z\\
+~~Yaw Axis: X, Y, Z\\
+~~Pitch Limits: Min, Max\\
+~~Pitch damping coefficient\\
+~~Yaw Limits: Min, Max\\	
+~~Yaw damping coefficient\\
+~~Roll Limits: Min, Max\\
+~~Roll damping coefficient\\
+~~Controller Type
+};
+
+%###############################################
+% Boxes in background around information
+%###############################################
+\begin{pgfonlayer}{background}
+  \node(diagram-box)[draw=black!80, thick, fill=white!100,rounded corners, rectangle] [fit = (genome-spec) (morphogene-classes) (morphogene-branch-vector) (morphogene-branches)] {};
+  \node(morphogene-classes-box)[bigbox] [fit = (genome-spec) (morphogene-classes)] {};
+  \node(morphogene-classes-box)[bigbox][fit = (morphogene-classes)]{};
+  \node(morphogene-vector-box)[bigbox][fit = (morphogene-vector)]{};
+  \node(morphogene-classes-box)[bigbox][fit = (selected-morphogene)]{};
+  \node(morphogene-spec-box)[bigbox] [fit = (morphogene-class) (morphogene-branches)] {};
+  \node(morphogene-branches-box)[bigbox][fit = (morphogene-branches)]{};
+  \node(morphogene-branch-vector-box)[bigbox][fit = (morphogene-branch-vector)]{};
+    \node(morphogene-classes-box)[bigbox][fit = (selected-morphogene-branch)]{};
+  \node(morphogene-branch-spec-box)[bigbox][fit = (morphogene-branch-spec)]{};
+\end{pgfonlayer}
+%
+\end{tikzpicture}

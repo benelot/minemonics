@@ -199,7 +199,7 @@ With this limitation, the following strange limit cycle can be observed.
 
 We choose the configuration where we limit the x dimension with the position sensor and the y dimension with the velocity sensor. Based on this configuration, the model leg with different control torques, friction and damping coefficients was tested to observe the resulting change in controller and joint dynamics. In the following plots, we show different influencing factors on the limit cycle:
 
-\paragraph{Interaction with ground:} The ground imposes a very hard limiter onto the creature. The movement of the creature gets instantly stopped, whereas the ground has infinite mass and therefore is not influenced by the creature. In some cases, the ground should therefore directly act as a very hard limiter onto the chaotic circuit, controlling the chaotic movement into low periods and orbits of smaller diameter as in the experiments performed in the section \ref{subsubsec:simple-limiter-mathematica}. 
+\paragraph{Interaction with ground} The ground imposes a very hard limiter onto the creature. The movement of the creature gets instantly stopped, whereas the ground has infinite mass and therefore is not influenced by the creature. In some cases, the ground should therefore directly act as a very hard limiter onto the chaotic circuit, controlling the chaotic movement into low periods and orbits of smaller diameter as in the experiments performed in the section \ref{subsubsec:simple-limiter-mathematica}. 
 
 \begin{figure}[H]
 	\centering
@@ -243,7 +243,7 @@ We choose the configuration where we limit the x dimension with the position sen
 
 The collisions with the ground are visible in both the controller state space and the joint sensor space as smaller or larger jumps. The collision causes first a drop in velocity and at the same time stops the displacement in position. In the plot \ref{figure:limited-damped-model-leg-collision1}, the collisions only cause a light displacement since the ground is frictionless, therefore the controller can converge onto the outer limit cycle. In the plot \ref{figure:limited-damped-model-leg-collision2}, where we add friction to the creature and ground, the controller can no longer converge to the outer limit cycle, but it stays on several smaller limit cycles until the morphology finally gets trapped and can not move anymore. Both plots show how the controller can be robust or sensitive to limiters imposed by the environment.
 
-\paragraph{Influence of damping:} Damping is an indirect soft limiter applied to the physical joint system of the simple form: \(F_{damping} = c \cdot \dot{x} = c \cdot v\). However, since the joint space is coupled to the chaotic controller space through the sensors, we can also observe the influence of the damper onto the controller.
+\paragraph{Influence of damping} Damping is an indirect soft limiter applied to the physical joint system of the simple form: \(F_{damping} = c \cdot \dot{x} = c \cdot v\). However, since the joint space is coupled to the chaotic controller space through the sensors, we can also observe the influence of the damper onto the controller.
 
 \begin{figure}[H]
 	\centering
@@ -327,7 +327,7 @@ The collisions with the ground are visible in both the controller state space an
 
 The damping of the system leads to sub-manifolds of the system, the trajectory and its limit cycle get softer, even when we apply more force and more damping.
 
-\textbf{Influence of the x dimension limiter:} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), we know that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. We can now observe the influence of the x dimension limiter when we remove it from the system.
+\paragraph{Influence of the x dimension limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), we know that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. We can now observe the influence of the x dimension limiter when we remove it from the system.
 
 \begin{figure}[H]
 	\centering
