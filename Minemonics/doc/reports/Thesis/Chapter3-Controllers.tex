@@ -56,7 +56,7 @@ Chaotic systems can be defined in a continuous or discrete manner. Continuous sy
 \label{subsec:chua-circuit}
 % rev. 2
 
-According to \ref{bib:Kennedy1993}, for a circuit with time-varying output and no time-varying input that is built from electronic components such as resistors, capacitor and inductors, three criteria must hold in order to display chaotic behavior. It must contain:
+According to \cite{bib:Kennedy1993}, for a circuit with time-varying output and no time-varying input that is built from electronic components such as resistors, capacitor and inductors, three criteria must hold in order to display chaotic behavior. It must contain:
 \begin{enumerate}
   \item at least one nonlinear element (where piecewise linear is sufficient)
   \item at least one locally active resistor
@@ -179,7 +179,7 @@ The limiter control gets more interesting when we now set \(softness=0.5\), whic
 
 Within the parameter window \(limitValue \in [2.05888,2.387[\), the influence of the limiter keeps the trajectory in the lowermost scroll. With the softer limiter, it is now much easier to find the parameter window to see the period doubling, because the parameter window for the different peridicities. 
 
-The table \ref{table:periodicities} shows different limit values that stabilize different periodicities.
+The table \ref{table:z-0-5-periodicities} shows different limit values that stabilize different periodicities.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -241,7 +241,7 @@ f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)}
 
 If we now change the $limitValue$ parameter from \(>4.6692\), which corresponds to no limiter influence to the trajectory, to a value within \(limitValue \in [1.99545,4.6692[\), we can observe different chaotic trajectories. The limiter influences the circuit by limiting the voltage across the capacitor \(C_1\) when \(x\) approaches the limiter.
 
-Within the window [1.89,1.99545], we can find the small parameter window which controls motion of high periodicity down to differrent lower periods.
+Within the window [1.89,1.99545], we can find the small parameter window which controls motion of high periodicity down to different lower periods.
 
 Period doubling behavior can be found when limiter controlling the chua circuit appropriately with limit values as described in the table \ref{table:x-0.13-periodicities}.
 
@@ -402,7 +402,7 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), we can observe high
 \label{figure:x-0.13-1-limit-cycle-upperscroll-trajectory}
 \end{figure}
 
-Using \(softness=0.5\), the limiter starts to influence the multiscroll attractor at \(11.507\), and we can again observe how the chaotic behavior is controlled using the limiter within the limiter value window \([2.176,11.507]\). Within the window \([,2.176[\), we can stabilize the periodic orbits down to period 1.
+Using \(softness=0.5\), the limiter starts to influence the multiscroll attractor at \(11.507\), and we can again observe how the chaotic behavior is controlled using the limiter within the limiter value window \([2.176,11.507]\). Within the window \([1.8,2.176[\), we can stabilize the periodic orbits down to period 1.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -457,7 +457,7 @@ Using \(softness=0.5\), the limiter starts to influence the multiscroll attracto
 \label{figure:x-0.5-1-limit-cycle-trajectory}
 \end{figure}
 
-We can again set the limit value beyond 0. The same plane rotation and spiraling behaviour can be seen, until it stays in the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter. Then we again can limit control the trajectory in the uppermost scroll into different periodicities.
+We can again set the limit value beyond 0. The same plane rotation and spiraling behaviour can be seen, until it stays in the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter. Then we again can limit control the trajectory in the uppermost scroll into different periodicities (see table \ref{table:x-0.5-upperscroll-periodicities}.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -516,6 +516,6 @@ Pushing the limiter further into the negative limit values, we again observe the
 
 \subsection{Chaotic chua circuit controller}
 
-The chua circuit controller to control a single DoF in a joint of an evolved creature is based in the chua circuit that was extensively examined in the last section \ref{subsubsec:simple-limiter-mathematica}. However in the creature controller, two different options were tested as described in the section \ref{sec:chaotic-controllers}. The chua circuit's parameters were kept constant to keep the parameter search for evolution small, because there exists many parameter conditions that do not lead to a chaotic ground state. Instead, the initial conditions were chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step was chosen randomly within \(\text{integration step} \in [0.001,10]\). The real integration step however is always kept constant at \(\text{\textit{integration base}} = 0.0005\). The integration step is then performed by calculating smaller sub-steps of size \textit{integration base} until a residual integration step is left to calculate. Thereby, we perform variable integration speeds, but keep that integration base step constant. The numerical integration is again performed using a Runge-Kutta order 6 integration scheme run in real-time.
+The chua circuit controller to control a single DoF in a joint of an evolved creature is based in the chua circuit that was extensively examined in the last section \ref{subsubsec:simple-limiter-mathematica}. However in the creature controller, two different options were tested as described in the section \ref{sec:chaotic-controllers}. The chua circuit's parameters were kept constant to keep the parameter search for evolution small, because there exists many parameter conditions that do not lead to a chaotic ground state. Instead, the initial conditions were chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step was chosen randomly within \(\text{\textit{integration step}} \in [0.001,10]\). The real integration step however is always kept constant at \(\text{\textit{integration base}} = 0.0005\). The integration step is then performed by calculating smaller sub-steps of size \textit{integration base} until a residual integration step is left to calculate. Thereby, we perform variable integration speeds, but keep that integration base step constant. The numerical integration is again performed using a Runge-Kutta order 6 integration scheme run in real-time.
 
 \end{document}
