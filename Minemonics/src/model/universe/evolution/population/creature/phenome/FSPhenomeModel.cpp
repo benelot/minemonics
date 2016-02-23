@@ -551,6 +551,8 @@ void FSPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			controller->addControlInput(joint->getVelocityceptors()[i]); // add the velocityceptor as input
 			controller->addControlOutput(joint->getMotors()[i]);
 			getControllers().push_back(controller);
+			joint->setJointPos(0,chaoticControllerGene->getInitialX());
+			joint->setJointVelocity(0,chaoticControllerGene->getInitialY());
 		}
 		}
 	}
@@ -727,6 +729,10 @@ void FSPhenomeModel::generateBody() {
 		}
 
 		mMultiBody->finalizeMultiDof();
+
+		for (int i = 0; i < mJointModels.size(); i++) {
+			((FSJointBt*) mJointModels[i]->getJointPhysics())->setPosAndVel();
+		}
 
 		mMultiBody->setCanSleep(canSleep);
 		mMultiBody->setHasSelfCollision(selfCollision);

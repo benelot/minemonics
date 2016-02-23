@@ -214,13 +214,21 @@ public:
 		return os;
 	}
 
+	void setInitialPosition(double initialPosition) {
+		mInitialPosition = initialPosition;
+	}
+
+	void setInitialVelocity(double initialVelocity) {
+		mInitialVelocity = initialVelocity;
+	}
+
 	/**
 	 * Serializes the joint physics model to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
 	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
+	void serialize(Archive & ar, const unsigned int version /* file_version */) {
 		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of joint */
 
 		& BOOST_SERIALIZATION_NVP(mLocalAPosition.x)
@@ -240,9 +248,16 @@ public:
 
 		& BOOST_SERIALIZATION_NVP(mLimbMassForceScalar)
 
-		& BOOST_SERIALIZATION_NVP(mJointIndex)
+		& BOOST_SERIALIZATION_NVP(mJointIndex);
 
-		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
+
+		if(version == 2){
+		ar & BOOST_SERIALIZATION_NVP(mInitialPosition)
+		& BOOST_SERIALIZATION_NVP(mInitialVelocity);
+		}
+
+
+		ar & BOOST_SERIALIZATION_NVP(mJointPitchAxis.x) /**!< The direction of the joint pitch axis */
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.y)
 		& BOOST_SERIALIZATION_NVP(mJointPitchAxis.z)
 
@@ -284,6 +299,8 @@ protected:
 	Ogre::Vector3 mLocalBPosition;
 	Ogre::Quaternion mLocalBOrientation;
 
+	double mInitialPosition, mInitialVelocity;
+
 	Ogre::Vector3 mJointPitchAxis; /**!< The direction of the joint pitch axis*/
 	Ogre::Vector3 mJointYawAxis; /**!< The direction of the joint pitch axis*/
 	Ogre::Vector3 mJointUpperLimits; /**!< Joint upper limits for each degree of freedom */
@@ -303,6 +320,6 @@ protected:
 	 */
 	std::vector<Motor*> mMotors;
 };
-BOOST_CLASS_VERSION(JointPhysics, 1)
+BOOST_CLASS_VERSION(JointPhysics, 2)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(JointPhysics)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTPHYSICS_HPP_ */

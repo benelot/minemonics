@@ -103,6 +103,8 @@ public:
 
 	void removeFromWorld(); /** Remove the joint bullet physics models from the world. */
 
+	void setPosAndVel();
+
 	/**
 	 * Compare the joint bullet physics to another joint bullet physics.
 	 * @param jointBt Another joint bullet physics model.

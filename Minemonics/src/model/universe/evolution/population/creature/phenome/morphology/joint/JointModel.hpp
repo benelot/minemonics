@@ -99,6 +99,10 @@ public:
 
 	virtual double getJointPos(int jointAxisIndex); /**!< Get the joint position of a joint axis */
 
+	virtual void setJointPos(int jointAxisIndex, double jointPosition);
+
+	virtual void setJointVelocity(int jointAxisIndex, double jointVelocity);
+
 	virtual double getJointVel(int jointAxisIndex, double timeSinceLastTick,
 		double lastJointPosition); /**!< Get the joint velocity of a joint axis */
 

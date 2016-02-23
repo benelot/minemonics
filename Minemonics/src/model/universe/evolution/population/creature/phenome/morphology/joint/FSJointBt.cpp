@@ -130,22 +130,29 @@ void FSJointBt::initialize() {
 FSJointBt::~FSJointBt() {
 	removeFromWorld();
 
-	if(mPitchMotor){
+	if (mPitchMotor) {
 		delete mPitchMotor;
 	}
 	mPitchMotor = NULL;
 
-	if(mYawMotor){
+	if (mYawMotor) {
 		delete mYawMotor;
 	}
 	mYawMotor = NULL;
 
-	if(mRollMotor){
+	if (mRollMotor) {
 		delete mRollMotor;
 	}
 	mRollMotor = NULL;
 
 	mWorld = NULL; 	// nullify the world reference
+}
+
+void FSJointBt::setPosAndVel(){
+	if (mMultiBody) {
+		mMultiBody->setJointPos(mJointIndex, mInitialPosition);
+		mMultiBody->setJointVel(mJointIndex, mInitialVelocity);
+	}
 }
 
 void FSJointBt::update(double timeSinceLastTick) {
@@ -185,8 +192,9 @@ void FSJointBt::generateMotors(const btVector3 maxForces,
 
 	{
 		// add yaw servo motor
-		FSServoMotor* servoMotor = new FSServoMotor(JointPhysics::RDOF_YAW, maxForces.getY(),
-			lowerLimits.y(), upperLimits.y(), positionControlled);
+		FSServoMotor* servoMotor = new FSServoMotor(JointPhysics::RDOF_YAW,
+			maxForces.getY(), lowerLimits.y(), upperLimits.y(),
+			positionControlled);
 		servoMotor->initialize();
 		servoMotor->setEnabled(true);
 		mMotors.push_back(servoMotor);
@@ -194,8 +202,9 @@ void FSJointBt::generateMotors(const btVector3 maxForces,
 
 	{
 		//add roll servo motor
-		FSServoMotor* servoMotor = new FSServoMotor(JointPhysics::RDOF_ROLL, maxForces.getZ(),
-			lowerLimits.z(), upperLimits.z(), positionControlled);
+		FSServoMotor* servoMotor = new FSServoMotor(JointPhysics::RDOF_ROLL,
+			maxForces.getZ(), lowerLimits.z(), upperLimits.z(),
+			positionControlled);
 		servoMotor->initialize();
 		servoMotor->setEnabled(true);
 		mMotors.push_back(servoMotor);

@@ -284,6 +284,14 @@ double JointModel::getJointVel(int jointAxisIndex, double timeSinceLastTick,
 		lastJointPosition);
 }
 
+void JointModel::setJointPos(int jointAxisIndex, double jointPosition) {
+	mJointPhysics->setInitialPosition(jointPosition);
+}
+
+void JointModel::setJointVelocity(int jointAxisIndex, double jointVelocity) {
+	mJointPhysics->setInitialVelocity(jointVelocity);
+}
+
 void JointModel::setControlInputs(std::vector<ControlOutput*> controlInputs) {
 	mJointPhysics->setControlInputs(controlInputs);
 }
