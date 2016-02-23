@@ -25,8 +25,8 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 
-#define NUM_BODIES 4
-#define NUM_LEGS 8
+#define NUM_BODIES 10
+#define NUM_LEGS NUM_BODIES * 2
 #define NUM_LEG_SEGMENTS 2
 #define BODYPART_COUNT NUM_LEGS*NUM_LEG_SEGMENTS + NUM_BODIES
 
@@ -37,11 +37,12 @@ void PodBuilder::build(MixedGenome* genome,
 
 	LimbPhysics::PrimitiveType primitiveType = LimbPhysics::BLOCK; // the primitive type of the creature
 	double podSize = MorphologyConfiguration::LIMB_MAX_SIZE; // size of the hole pod
-	double bodySize = podSize * 0.25f; // size of a single body of the whole creature
+	double bodySize = podSize * 0.33f; // size of a single body of the whole creature
 	double upperLegLength = podSize * 0.75f; //upper leg length
-	double lowerLegLength = podSize * 0.45f; // upper lower leg length
+	double legThickness = podSize*0.1f;
+	double lowerLegLength = podSize * 0.3f; // upper lower leg length
 	double totalLegsAngle = boost::math::constants::pi<double>() / 2.0f; // the angle over which all legs are symmetrically distributed centered around the middle
-	double damping = 0.05f; //[0.005;0.5] 0.05 // damping coefficient for the joints
+	double damping = 0.0f; //[0.005;0.5] 0.05 // damping coefficient for the joints
 
 	{
 		// define body segments
@@ -49,6 +50,7 @@ void PodBuilder::build(MixedGenome* genome,
 			Ogre::Vector3(bodySize * 2.0f, bodySize / 2.0f, bodySize),
 			Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
 			Ogre::Vector3(1, 0, 0));
+		bodyMorphogene->setSegmentShrinkFactor(1.01);
 		bodyMorphogene->setRepetitionLimit(NUM_BODIES - 1); // number of repetitions of the body element and its branches
 		genome->addGene(bodyMorphogene);
 
@@ -289,7 +291,7 @@ void PodBuilder::build(MixedGenome* genome,
 	{
 		// create upper leg limb
 		Morphogene* upperLegMorphogene = new Morphogene(primitiveType,
-			Ogre::Vector3(podSize * 0.1f, podSize * 0.1f, upperLegLength),
+			Ogre::Vector3(legThickness, legThickness, upperLegLength),
 			Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
 			Ogre::Vector3(1, 0, 0));
 //		upperLegMorphogene->initialize(0);
@@ -367,7 +369,7 @@ void PodBuilder::build(MixedGenome* genome,
 	{
 		// create upper leg limb
 		Morphogene* upperLegMorphogene = new Morphogene(primitiveType,
-			Ogre::Vector3(podSize * 0.1f, podSize * 0.1f, upperLegLength),
+			Ogre::Vector3(legThickness, legThickness, upperLegLength),
 			Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
 			Ogre::Vector3(-1, 0, 0));
 //		upperLegMorphogene->initialize(0);
@@ -444,7 +446,7 @@ void PodBuilder::build(MixedGenome* genome,
 
 	// creature lower leg limb
 	Morphogene* lowerLegMorphogene = new Morphogene(primitiveType,
-		Ogre::Vector3(podSize * 0.1f, lowerLegLength, podSize * 0.1f),
+		Ogre::Vector3(legThickness, lowerLegLength, legThickness),
 		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(0, 1, 0));
 //	lowerLegMorphogene->initialize(0);
