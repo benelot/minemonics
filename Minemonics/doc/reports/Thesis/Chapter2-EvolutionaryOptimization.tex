@@ -28,7 +28,7 @@
 
 \lhead{Chapter \thechapter. \emph{Evolutionary Optimization}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-The following chapter describes the evolutionary optimization algorithm as it is implemented in the Minemonics simulator. The Minemonics simulator is the experimentation platform used throughout this Thesis and is a project that was developed from scratch, mainly because other simulators for evolving virtual creatures are unpublished by the respective research groups, are outdated or implement a different type of simulation than is needed for the model of this Thesis. Apart from the research interests, the simulator was made to be extensible for other research experiments to be implemented. It is available open-source from its git repository on github [?].
+The following chapter describes the evolutionary optimization algorithm as it is implemented in the Minemonics simulator. The Minemonics simulator is the experimentation platform used throughout this Thesis and is a project that was developed from scratch, mainly because other simulators for evolving virtual creatures are unpublished by the respective research groups, are outdated or implement a different type of simulation than is needed for the model of this Thesis. Apart from the research interests, the simulator was made to be extensible for other research experiments to be implemented. It is available open-source from its git repository on github \cite{bib:Minemonics2016}.
 
 \section{Basic components}
 % rev. 1
@@ -146,7 +146,7 @@ The model organisms are hand-coded genotypes to be developed into creatures that
 
 The model leg is a simple creature built from two equal limbs and one joint. The joint can be either set to be a one DoF hinge joint or a three DoF spherical joint. Its main purpose is to run experiments on chaotic controllers on a simple creature to observe the controller's behavior when controlling a single degree of freedom of a physical system in gravity-less space and on flat-terrain to see the effect of gravity, restitution and friction applied.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-leg1.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-leg2.png}
@@ -159,7 +159,7 @@ The model leg is a simple creature built from two equal limbs and one joint. The
 
 The snake is a creature built from a chain of equal limbs connected with one or three DoF joints as in the case of the model leg. In fact, the snake is just a chain of model legs with a higher number of limb-joint repetitions.
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-snake1.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-snake2.png}
@@ -172,27 +172,27 @@ The snake is a creature built from a chain of equal limbs connected with one or 
 
 The Pod is a creature that can be configured to have a certain number of legs and a certain number of body elements. The body is a limb on which the legs are attached in a circular manner. The number of legs is divided by the number of bodies so that the same number of legs is attached to each body. Which the same definition, its is possible to build insect-like creatures such as bugs, spiders, caterpillars and centipedes. It is mainly used to debug the Genotype-to-Phenotype transcription (Embryogenesis).
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
-\missingfigure[figwidth=1\textwidth]{Figure of the pod model organism.}
+\includegraphics[width=0.32\textwidth]{model-organisms/Model-pod1.png}
+\includegraphics[width=0.32\textwidth]{model-organisms/Model-pod2.png}
+\includegraphics[width=0.32\textwidth]{model-organisms/Model-pod3.png}
 \caption[The pod]{The pod}
 \label{figure:pod}
 \end{figure}
-
-\todo[inline]{Describe the pod model organism.}
 
 \paragraph{Ragdoll}
 
 The ragdoll blueprint produces a human-like form. It consists of differently configured joints and is mainly used to debug the Genotype-to-Phenotype transcription (Embryogenesis).
 
-\begin{figure}[!h]
+\begin{figure}[H]
 \centering
-\missingfigure[figwidth=1\textwidth]{Figure of the ragdoll model organism.}
+\includegraphics[width=0.32\textwidth]{model-organisms/Model-ragdoll3.png}
+\includegraphics[width=0.32\textwidth]{model-organisms/Model-ragdoll2.png}
+\includegraphics[width=0.32\textwidth]{model-organisms/Model-ragdoll1.png}
 \caption[The ragdoll]{The ragdoll}
 \label{figure:ragdoll}
 \end{figure}
-
-\todo[inline]{Describe the ragdoll model organism.}
 
 \subsection{Embryogenesis}
 
