@@ -470,7 +470,7 @@ void RagDollBuilder::build(MixedGenome* genome,
 	// BODYPART_LEFT_UPPER_ARM
 	morphogene = new Morphogene(type,
 		Ogre::Vector3(ragDollSize * 0.1f, ragDollSize * 0.33f,
-			ragDollSize * 0.1f), Ogre::Euler(0, 0, M_PI_2).toQuaternion(), 1,
+			ragDollSize * 0.1f), Ogre::Euler(0, M_PI_2, 0).toQuaternion(), 1,
 		10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.18f),
 			btScalar(gapSize * 0.f)));
@@ -524,7 +524,7 @@ void RagDollBuilder::build(MixedGenome* genome,
 	//BODYPART_LEFT_FOREARM
 	morphogene = new Morphogene(type,
 		Ogre::Vector3(ragDollSize * 0.08f, ragDollSize * 0.25f,
-			ragDollSize * 0.08f), Ogre::Euler(0, 0, M_PI_2).toQuaternion(), 1,
+			ragDollSize * 0.08f), Ogre::Euler(0, M_PI_2, 0).toQuaternion(), 1,
 		10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.14f),
 			btScalar(gapSize * 0.f)));
@@ -534,7 +534,7 @@ void RagDollBuilder::build(MixedGenome* genome,
 	//BODYPART_RIGHT_UPPER_ARM
 	morphogene = new Morphogene(type,
 		Ogre::Vector3(ragDollSize * 0.1f, ragDollSize * 0.33f,
-			ragDollSize * 0.1f), Ogre::Euler(0, 0, -M_PI_2).toQuaternion(), 1,
+			ragDollSize * 0.1f), Ogre::Euler(0, -M_PI_2, 0).toQuaternion(), 1,
 		10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * -0.18f),
 			btScalar(gapSize * 0.f)));
@@ -585,7 +585,7 @@ void RagDollBuilder::build(MixedGenome* genome,
 	// BODYPART_RIGHT_LOWER_ARM
 	morphogene = new Morphogene(type,
 		Ogre::Vector3(ragDollSize * 0.08f, ragDollSize * 0.25f,
-			ragDollSize * 0.08f), Ogre::Euler(0, 0, -M_PI_2).toQuaternion(), 1,
+			ragDollSize * 0.08f), Ogre::Euler(0, -M_PI_2, 0).toQuaternion(), 1,
 		10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(btScalar(gapSize * 0.f), btScalar(gapSize * 0.14f),
 			btScalar(gapSize * 0.f)));
