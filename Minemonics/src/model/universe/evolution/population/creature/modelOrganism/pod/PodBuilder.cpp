@@ -25,8 +25,8 @@
 //## utils headers
 #include <utils/ogre3D/Euler.hpp>
 
-#define NUM_BODIES 16
-#define NUM_LEGS 16
+#define NUM_BODIES 4
+#define NUM_LEGS 8
 #define NUM_LEG_SEGMENTS 2
 #define BODYPART_COUNT NUM_LEGS*NUM_LEG_SEGMENTS + NUM_BODIES
 
@@ -46,9 +46,9 @@ void PodBuilder::build(MixedGenome* genome,
 	{
 		// define body segments
 		Morphogene* bodyMorphogene = new Morphogene(primitiveType,
-			Ogre::Vector3(bodySize*2.0f, bodySize/2.0f, bodySize),
-			Ogre::Quaternion(1, 0, 0, 0), 1, 10, true,
-			Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
+			Ogre::Vector3(bodySize * 2.0f, bodySize / 2.0f, bodySize),
+			Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
+			Ogre::Vector3(1, 0, 0));
 		bodyMorphogene->setRepetitionLimit(NUM_BODIES - 1); // number of repetitions of the body element and its branches
 		genome->addGene(bodyMorphogene);
 
@@ -129,7 +129,7 @@ void PodBuilder::build(MixedGenome* genome,
 			// define the joint between the upper and the lower legs
 			// Hingelike
 			MorphogeneBranch* rightLegBranch = new MorphogeneBranch(
-				JointPhysics::HINGE_JOINT, true, false, Ogre::Vector3(0, 0, 1),
+				JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
 				Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 				Ogre::Vector3(damping, damping, damping),
 				Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
@@ -142,7 +142,7 @@ void PodBuilder::build(MixedGenome* genome,
 						- PhysicsConfiguration::UNIV_EPS), legAngleVector);
 
 //			MorphogeneBranch* rightLegBranch = new MorphogeneBranch(
-//				JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
+//				JointPhysics::HINGE_JOINT, false, true, Ogre::Vector3(0, 0, 1),
 //				Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
 //				Ogre::Vector3(damping, damping, damping),
 //				Ogre::Vector3(
@@ -200,13 +200,98 @@ void PodBuilder::build(MixedGenome* genome,
 
 		}
 
+		legsPerBody = NUM_LEGS / NUM_BODIES; // number of legs per body segment
+		angularStep = 2.0f * totalLegsAngle / legsPerBody; // the angular step between each leg on a body
+		currentAngle = totalLegsAngle / 2.0f
+			- totalLegsAngle / (legsPerBody / 2.0f + 1.0f); // the current angular rotation of the leg attachment vector
+		// attach legs to the abdomen
+		for (int i = 0; i < legsPerBody / 2.0f; i++) {
+			Ogre::Vector3 legAngleVector =
+				Ogre::Euler(currentAngle, 0, 0).toQuaternion()
+					* centerLegAngleVector; // rotate the right vector appropriately
+
+			// define the joint between the upper and the lower legs
+			// Hingelike
+			MorphogeneBranch* leftLegBranch = new MorphogeneBranch(
+				JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
+				Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+				Ogre::Vector3(damping, damping, damping),
+				Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+					-PhysicsConfiguration::UNIV_EPS,
+					-boost::math::constants::pi<double>() * 2.0f
+						+ PhysicsConfiguration::UNIV_EPS),
+				Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
+					PhysicsConfiguration::UNIV_EPS,
+					boost::math::constants::pi<double>() * 2.0f
+						- PhysicsConfiguration::UNIV_EPS), -legAngleVector);
+
+			//			MorphogeneBranch* leftLegBranch = new MorphogeneBranch(
+			//				JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
+			//				Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+			//				Ogre::Vector3(damping, damping, damping),
+			//				Ogre::Vector3(
+			//					-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+			//					-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS,
+			//					-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS),
+			//				Ogre::Vector3(
+			//					boost::math::constants::pi<double>() / 2.0f - UNIV_EPS,
+			//					boost::math::constants::pi<double>() * 2.0f - UNIV_EPS,
+			//					boost::math::constants::pi<double>() * 2.0f - UNIV_EPS),
+			//				legAngleVector);
+			//			rightLegBranch->initialize();
+
+			switch (controllerType) { // add controllers to the joint
+			case ControllerGene::SineControllerGene:
+				// create instances of the sine controller gene for the morphogene.
+				for (int i = 0; i < 3; i++) {
+					SineControllerGene* sineController =
+						new SineControllerGene();
+					sineController->initialize();
+					leftLegBranch->getControllerGenes().push_back(
+						sineController);
+				}
+				break;
+			case ControllerGene::ChaoticControllerGene:
+				// create instances of the chaotic controller gene for the morphogene.
+				double x = -1.5f; // x
+				double y = 0; // y
+				double z = 0; // z
+
+				// stronger initial force output on z
+				//				double x = 0.0f; // x
+				//				double y = 0.0f; // y
+				//				double z = 2.0f; // z
+
+				double speed = 1;
+
+				for (int i = 0; i < 3; i++) {
+					ChaoticControllerGene* chaoticController =
+						new ChaoticControllerGene(
+							ChaoticControllerGene::CHUA_CIRCUIT, x, y, z,
+							speed);
+
+					chaoticController->initialize();
+					leftLegBranch->getControllerGenes().push_back(
+						chaoticController);
+				}
+			}
+
+			leftLegBranch->setActive(true);
+			leftLegBranch->setBranchGeneType(genome->getGenes().size()+1);
+			bodyMorphogene->getGeneBranches().push_back(leftLegBranch); // add joint to the upper limb branching to the lower limb
+
+			currentAngle -= angularStep; // increase angular step
+
+		}
+
 	}
 
 	{
 		// create upper leg limb
 		Morphogene* upperLegMorphogene = new Morphogene(primitiveType,
-			Ogre::Vector3(6, 6, upperLegLength), Ogre::Quaternion::IDENTITY, 1,
-			10, true, Ogre::ColourValue(1, 0, 0), Ogre::Vector3(1, 0, 0));
+			Ogre::Vector3(podSize * 0.1f, podSize * 0.1f, upperLegLength),
+			Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
+			Ogre::Vector3(1, 0, 0));
 //		upperLegMorphogene->initialize(0);
 		genome->addGene(upperLegMorphogene);
 
@@ -273,6 +358,84 @@ void PodBuilder::build(MixedGenome* genome,
 		}
 
 		legBranch->setActive(true);
+		legBranch->setBranchGeneType(genome->getGenes().size()+1);
+
+		// add joint to the first limb branching to the second limb
+		upperLegMorphogene->getGeneBranches().push_back(legBranch);
+	}
+
+	{
+		// create upper leg limb
+		Morphogene* upperLegMorphogene = new Morphogene(primitiveType,
+			Ogre::Vector3(podSize * 0.1f, podSize * 0.1f, upperLegLength),
+			Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
+			Ogre::Vector3(-1, 0, 0));
+//		upperLegMorphogene->initialize(0);
+		genome->addGene(upperLegMorphogene);
+
+		// create joint between the upper and lower leg
+		// Hingelike
+		MorphogeneBranch* legBranch = new MorphogeneBranch(
+			JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(1, 0, 0),
+			Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+			Ogre::Vector3(damping, damping, damping),
+			Ogre::Vector3(-PhysicsConfiguration::UNIV_EPS,
+				-PhysicsConfiguration::UNIV_EPS,
+				-boost::math::constants::pi<double>() * 2.0f
+					+ PhysicsConfiguration::UNIV_EPS),
+			Ogre::Vector3(PhysicsConfiguration::UNIV_EPS,
+				PhysicsConfiguration::UNIV_EPS,
+				boost::math::constants::pi<double>() * 2.0f
+					- PhysicsConfiguration::UNIV_EPS), Ogre::Vector3(0, 0, -1));
+
+//		MorphogeneBranch* legBranch = new MorphogeneBranch(
+//			JointPhysics::HINGE_JOINT, false, false, Ogre::Vector3(0, 0, 1),
+//			Ogre::Vector3(0, 1, 0), Ogre::Vector3(0, 0, 0),
+//			Ogre::Vector3(0.5f, 0.5f, 0.5f),
+//			Ogre::Vector3(
+//				-boost::math::constants::pi<double>() / 2.0f + UNIV_EPS,
+//				-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS,
+//				-boost::math::constants::pi<double>() * 2.0f + UNIV_EPS),
+//			Ogre::Vector3(
+//				boost::math::constants::pi<double>() / 2.0f - UNIV_EPS,
+//				boost::math::constants::pi<double>() * 2.0f - UNIV_EPS,
+//				boost::math::constants::pi<double>() * 2.0f - UNIV_EPS),
+//			Ogre::Vector3(1, 0, 0));
+//		legBranch->initialize();
+
+		switch (controllerType) {
+		case ControllerGene::SineControllerGene:
+			// create instances of the sine controller gene for the morphogene.
+			for (int i = 0; i < 3; i++) {
+				SineControllerGene* sineController = new SineControllerGene();
+				sineController->initialize();
+				legBranch->getControllerGenes().push_back(sineController);
+			}
+			break;
+		case ControllerGene::ChaoticControllerGene:
+			// create instances of the chaotic controller gene for the morphogene.
+			double x = -1.5f; // x
+			double y = 0; // y
+			double z = 0; // z
+
+			// stronger initial force output on z
+//			double x = 0.0f; // x
+//			double y = 0.0f; // y
+//			double z = 2.0f; // z
+
+			double speed = 1;
+
+			for (int i = 0; i < 3; i++) {
+				ChaoticControllerGene* chaoticController =
+					new ChaoticControllerGene(
+						ChaoticControllerGene::CHUA_CIRCUIT, x, y, z, speed);
+
+//			chaoticController->initialize();
+				legBranch->getControllerGenes().push_back(chaoticController);
+			}
+		}
+
+		legBranch->setActive(true);
 		legBranch->setBranchGeneType(genome->getGenes().size());
 
 		// add joint to the first limb branching to the second limb
@@ -281,8 +444,9 @@ void PodBuilder::build(MixedGenome* genome,
 
 	// creature lower leg limb
 	Morphogene* lowerLegMorphogene = new Morphogene(primitiveType,
-		Ogre::Vector3(6, lowerLegLength, 6), Ogre::Quaternion::IDENTITY, 1, 10,
-		true, Ogre::ColourValue(1, 0, 0), Ogre::Vector3(0, 1, 0));
+		Ogre::Vector3(podSize * 0.1f, lowerLegLength, podSize * 0.1f),
+		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
+		Ogre::Vector3(0, 1, 0));
 //	lowerLegMorphogene->initialize(0);
 	genome->addGene(lowerLegMorphogene);
 }
