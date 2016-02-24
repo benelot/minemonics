@@ -46,6 +46,8 @@ class access;
 #include <model/universe/evolution/population/creature/phenome/PhenomeModel.hpp>
 #include <model/universe/evolution/juries/AverageHeight.hpp>
 #include <model/universe/evolution/juries/AverageVelocity.hpp>
+#include <model/universe/evolution/juries/GroundContactRatio.hpp>
+#include <model/universe/evolution/juries/GroundContactQty.hpp>
 #include <model/universe/evolution/population/creature/phenome/SRBPhenomeModel.hpp>
 #include <model/universe/evolution/population/creature/phenome/FSPhenomeModel.hpp>
 
@@ -326,6 +328,8 @@ public:
 	void serialize(Archive & ar, const unsigned int /* file_version */) {
 		ar.register_type(static_cast<AverageVelocity*>(NULL));
 		ar.register_type(static_cast<AverageHeight*>(NULL));
+		ar.register_type(static_cast<GroundContactRatio*>(NULL));
+		ar.register_type(static_cast<GroundContactQty*>(NULL));
 		ar.register_type(static_cast<FSPhenomeModel*>(NULL));
 		ar.register_type(static_cast<SRBPhenomeModel*>(NULL));
 		ar

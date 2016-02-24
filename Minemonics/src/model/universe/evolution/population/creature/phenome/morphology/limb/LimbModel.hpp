@@ -200,6 +200,10 @@ public:
 		return mLimbPhysics->getInitialRelativePosition();
 	}
 
+	bool hadGroundContact(){
+		return mHadGroundContact;
+	}
+
 // Serialization
 	/**
 	 * Give access to boost serialization
@@ -265,6 +269,8 @@ protected:
 	std::vector<Sensor*> mSensors; /**!< The sensors of the limb. */
 
 	std::vector<Tactioceptor*> mTactioceptors; /**!< The tactioceptors of the limb */
+
+	bool mHadGroundContact;
 
 private:
 

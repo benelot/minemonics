@@ -8,6 +8,8 @@
 //## model headers
 #include <model/universe/evolution/juries/AverageHeight.hpp>
 #include <model/universe/evolution/juries/IntegralAverageVelocity.hpp>
+#include <model/universe/evolution/juries/GroundContactRatio.hpp>
+#include <model/universe/evolution/juries/GroundContactQty.hpp>
 #include <model/universe/evolution/juries/Jury.hpp>
 
 //## view headers
@@ -37,6 +39,12 @@ public:
 			break;
 		case Jury::AVG_HEIGHT:
 			jury = new AverageHeight(higherIsBetter, weight);
+			break;
+		case Jury::GROUND_CONTACT_RATIO:
+			jury = new GroundContactRatio(higherIsBetter,weight);
+			break;
+		case Jury::GROUND_CONTACT_QTY:
+			jury = new GroundContactQty(higherIsBetter,weight);
 		}
 
 		return jury;

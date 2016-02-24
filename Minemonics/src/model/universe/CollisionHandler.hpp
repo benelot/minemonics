@@ -38,14 +38,14 @@ bool processContactCallback(btManifoldPoint& cp, void* body0, void* body1) {
 	btCollisionObject* o1 = static_cast<btCollisionObject*>(body0);
 	btCollisionObject* o2 = static_cast<btCollisionObject*>(body1);
 
-	//check if the collision partners are limbs
-	if (o1->getUserPointer() != NULL) {
+	//check if one is a limb and the other not (ground)
+	if (o1->getUserPointer() != NULL && o2->getUserPointer() == NULL) {
 		limbModel1 = static_cast<LimbModel*>(o1->getUserPointer());
 		limbModel1->activateTactioceptors();
 	}
 
-	//check if the collision partners are limbs
-	if (o2->getUserPointer() != NULL) {
+	//check if one is a limb and the other not (ground)
+	if (o2->getUserPointer() != NULL && o1->getUserPointer() == NULL) {
 		limbModel2 = static_cast<LimbModel*>(o2->getUserPointer());
 		limbModel2->activateTactioceptors();
 	}

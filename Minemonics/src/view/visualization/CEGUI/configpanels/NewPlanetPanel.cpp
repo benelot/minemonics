@@ -274,6 +274,9 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mJuryType = static_cast<CEGUI::Combobox*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Combobox"));
 		mJuryType->setReadOnly(true);
+
+		// Add new juries here
+
 		CEGUI::ListboxTextItem* itemCombobox = new CEGUI::ListboxTextItem(
 			"Velocity", Jury::AVG_VELOCITY);
 		mJuryType->addItem(itemCombobox);
@@ -281,6 +284,12 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mJuryType->setItemSelectState(itemCombobox, true);
 
 		itemCombobox = new CEGUI::ListboxTextItem("Height", Jury::AVG_HEIGHT);
+		mJuryType->addItem(itemCombobox);
+
+		itemCombobox = new CEGUI::ListboxTextItem("GroundContactRatio",Jury::GROUND_CONTACT_RATIO);
+		mJuryType->addItem(itemCombobox);
+
+		itemCombobox = new CEGUI::ListboxTextItem("GroundContactQty",Jury::GROUND_CONTACT_QTY);
 		mJuryType->addItem(itemCombobox);
 
 		mJuryType->setSize(

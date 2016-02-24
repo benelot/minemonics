@@ -41,6 +41,8 @@ set(MODELHDRS
 	./model/universe/evolution/juries/AverageVelocity.hpp
 	./model/universe/evolution/juries/IntegralAverageVelocity.hpp
 	./model/universe/evolution/juries/AverageHeight.hpp
+	./model/universe/evolution/juries/GroundContactRatio.hpp
+	./model/universe/evolution/juries/GroundContactQty.hpp
 	
 	## universe
 	./model/universe/EvaluationModel.hpp
@@ -143,6 +145,8 @@ set(MODELSRCS
 	./model/universe/evolution/juries/AverageVelocity.cpp
 	./model/universe/evolution/juries/IntegralAverageVelocity.cpp
 	./model/universe/evolution/juries/AverageHeight.cpp
+	./model/universe/evolution/juries/GroundContactRatio.cpp
+    ./model/universe/evolution/juries/GroundContactQty.cpp
 	
 	## universe
 	./model/universe/EvaluationModel.cpp
@@ -575,6 +579,8 @@ set(TESTSRCS
     ./model/universe/evolution/juries/AverageVelocity_test.cpp
     ./model/universe/evolution/juries/IntegralAverageVelocity_test.cpp
     ./model/universe/evolution/juries/AverageHeight_test.cpp
+    ./model/universe/evolution/juries/GroundContactRatio_test.cpp
+    ./model/universe/evolution/juries/GroundContactQty_test.cpp
     
     ## creatures
    ./model/universe/evolution/population/creature/CreatureModel_test.cpp

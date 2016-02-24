@@ -22,13 +22,14 @@
 BoostLogger LimbModel::mBoostLogger; /*<! initialize the boost logger*/
 LimbModel::_Init LimbModel::_initializer;
 LimbModel::LimbModel() :
-	mLimbPhysics(NULL), mCreatureModel(NULL), mParentJointIndex(0) {
+	mLimbPhysics(NULL), mCreatureModel(NULL), mParentJointIndex(0),mHadGroundContact(false) {
 }
 
 LimbModel::LimbModel(const LimbModel& limbModel) {
 	mLimbPhysics = limbModel.mLimbPhysics->clone();
 	mCreatureModel = limbModel.mCreatureModel;
 	mParentJointIndex = limbModel.mParentJointIndex;
+	mHadGroundContact = limbModel.mHadGroundContact;
 }
 
 LimbModel::~LimbModel() {
@@ -47,10 +48,12 @@ LimbModel::~LimbModel() {
 
 void LimbModel::reset(Ogre::Vector3 position) {
 	mLimbPhysics->reset(position);
+	mHadGroundContact = false;
 }
 
 void LimbModel::reposition(Ogre::Vector3 position) {
 	mLimbPhysics->reposition(position);
+	mHadGroundContact = false;
 }
 
 bool LimbModel::equals(const LimbModel& limbModel) const {
@@ -70,6 +73,7 @@ void LimbModel::activateTactioceptors() {
 		tit != mTactioceptors.end(); tit++) {
 		(*tit)->setTouched(true);
 	}
+	mHadGroundContact = true;
 }
 
 void LimbModel::resetSensors() {

@@ -37,7 +37,7 @@ class access;
 class Jury {
 public:
 	enum JuryType {
-		AVG_VELOCITY, AVG_HEIGHT
+		AVG_VELOCITY, AVG_HEIGHT, GROUND_CONTACT_RATIO, GROUND_CONTACT_QTY
 	};
 
 	Jury(JuryType juryType, bool higherIsBetter, int weight);
