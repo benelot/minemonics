@@ -69,6 +69,8 @@ public:
 	 */
 	virtual int performEmbryogenesis() = 0;
 
+	void perturbControllers();
+
 	virtual void calculateChildPositionRelativeToParent(
 		PhenotypeGenerator* generator, btTransform& parentJointAnchor,
 		btTransform& childJointAnchor, Morphogene* childMorphogene,

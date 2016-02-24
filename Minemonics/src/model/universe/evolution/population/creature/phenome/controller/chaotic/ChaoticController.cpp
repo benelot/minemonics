@@ -225,3 +225,9 @@ void ChaoticController::calcChuaCircuit() {
 void ChaoticController::collectInputs() {
 //Keep the inputs as they are
 }
+
+void ChaoticController::perturb(){
+	u[0] = mInitialX += ControlConfiguration::PERTURBATION_RANGE_X;
+	u[1] = mInitialY += ControlConfiguration::PERTURBATION_RANGE_Y;
+	u[2] = mInitialZ += ControlConfiguration::PERTURBATION_RANGE_Z;
+}

@@ -199,6 +199,11 @@ void CreatureModel::performEmbryogenesis() {
 	mPhenotypeModel->performEmbryogenesis();
 }
 
+void CreatureModel::perturbControllers(){
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Perturbed controllers of " << mFirstName << ".";
+	mPhenotypeModel->perturbControllers();
+}
+
 void CreatureModel::giveRebirth() {
 	NameGenerator nameGenerator;
 	mFirstName = nameGenerator.generateFirstName();

@@ -52,6 +52,8 @@ public:
 	 */
 	virtual void initialize();
 
+	virtual void perturb();
+
 	double* chuaCircuit(double t, int dimensions, double u[]);
 
 	static double* runChuaCircuit(double t, int dimensions, double u[],

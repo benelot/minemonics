@@ -69,6 +69,10 @@ void SineController::initialize() {
 	mDataSink.initialize(mLoggerName, 3, 20);
 }
 
+void SineController::perturb(){
+	//Sine controllers can not be perturbed
+}
+
 void SineController::perform(const double timeSinceLastTick) {
 	double input = 0;
 	if (mControlInputs.size() != 0) {

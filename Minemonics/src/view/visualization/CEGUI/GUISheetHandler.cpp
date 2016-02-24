@@ -261,29 +261,48 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 //					this));
 
 	{
-		//Population->New Population
-		CEGUI::PushButton* newPopulationButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
-				GUIConfiguration::newPopulationCmd);
-		newPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(
-				&GUISheetHandler::newPopulationButtonClicked, this));
+		{
+			//Population->New Population
+			CEGUI::PushButton* newPopulationButton =
+				(CEGUI::PushButton*) mWindow->getChildRecursive(
+					GUIConfiguration::newPopulationCmd);
+			newPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
+				CEGUI::Event::Subscriber(
+					&GUISheetHandler::newPopulationButtonClicked, this));
+		}
 
-		//Population->Edit Population
-		CEGUI::PushButton* editPopulationButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
-				GUIConfiguration::editPopulationCmd);
-		editPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(
-				&GUISheetHandler::editPopulationButtonClicked, this));
+		{
+			//Population->Edit Population
+			CEGUI::PushButton* editPopulationButton =
+				(CEGUI::PushButton*) mWindow->getChildRecursive(
+					GUIConfiguration::editPopulationCmd);
+			editPopulationButton->subscribeEvent(
+				CEGUI::PushButton::EventClicked,
+				CEGUI::Event::Subscriber(
+					&GUISheetHandler::editPopulationButtonClicked, this));
+		}
 
-		//Population->Load Population
-		CEGUI::PushButton* loadPopulationButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
-				GUIConfiguration::loadPopulationCmd);
-		loadPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
-			CEGUI::Event::Subscriber(
-				&GUISheetHandler::loadPopulationButtonClicked, this));
+		{
+			//Population->Load Population
+			CEGUI::PushButton* loadPopulationButton =
+				(CEGUI::PushButton*) mWindow->getChildRecursive(
+					GUIConfiguration::loadPopulationCmd);
+			loadPopulationButton->subscribeEvent(
+				CEGUI::PushButton::EventClicked,
+				CEGUI::Event::Subscriber(
+					&GUISheetHandler::loadPopulationButtonClicked, this));
+		}
+
+		{
+			//Population->Perturb Population
+			CEGUI::PushButton* perturbPopulationButton =
+				(CEGUI::PushButton*) mWindow->getChildRecursive(
+					GUIConfiguration::perturbPopulationCmd);
+			perturbPopulationButton->subscribeEvent(
+				CEGUI::PushButton::EventClicked,
+				CEGUI::Event::Subscriber(
+					&GUISheetHandler::perturbPopulationButtonClicked, this));
+		}
 	}
 
 //Population->Save Population as...
@@ -842,6 +861,13 @@ bool GUISheetHandler::loadPopulationButtonClicked(
 	return true;
 }
 
+//Population->perturb Population
+bool GUISheetHandler::perturbPopulationButtonClicked(
+	const CEGUI::EventArgs &args) {
+	SimulationManager::getSingleton()->getStateHandler().getCurrentlySelectedPlanet()->perturbPopulations();
+	return true;
+}
+
 //Population->Save Population as...
 bool GUISheetHandler::savePopulationAsButtonClicked(
 	const CEGUI::EventArgs &args) {
@@ -880,8 +906,7 @@ bool GUISheetHandler::recordFramesButtonClicked(const CEGUI::EventArgs &args) {
 	switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
 	case StateHandler::SIMULATION: {
 		if (SimulationManager::getSingleton()->getVideoWriter().isInitialized()) {
-			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Recording video stopped.";
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Recording video stopped.";
 			SimulationManager::getSingleton()->getVideoWriter().close();
 		} else {
 			// create video file name
@@ -893,7 +918,7 @@ bool GUISheetHandler::recordFramesButtonClicked(const CEGUI::EventArgs &args) {
 			videoName.append(".mp4");
 
 			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)
-				<< "Recording video started.";
+			<< "Recording video started.";
 
 			//This even works on if the screen gets resized
 			SimulationManager::getSingleton()->getVideoWriter().setup(
@@ -906,8 +931,8 @@ bool GUISheetHandler::recordFramesButtonClicked(const CEGUI::EventArgs &args) {
 	default: {
 		break;
 	}
-	}
-	return true;
+}
+return true;
 }
 
 //Spawn->Box

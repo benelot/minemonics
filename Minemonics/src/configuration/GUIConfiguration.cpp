@@ -58,6 +58,10 @@ const std::string GUIConfiguration::editPopulationCmd = "cmdEditPopulation";
 const std::string GUIConfiguration::loadPopulationName = "Load Population...";
 const std::string GUIConfiguration::loadPopulationCmd = "cmdLoadPopulation";
 
+//perturb population
+const std::string GUIConfiguration::perturbPopulationName = "Perturb Population";
+const std::string GUIConfiguration::perturbPopulationCmd = "cmdPerturbPopulation";
+
 const std::string GUIConfiguration::OpenFileSaveConfirm =
 	"Do you really want to save here?";
 const std::string GUIConfiguration::OpenFileLoadConfirm =

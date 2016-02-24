@@ -84,6 +84,8 @@ public:
 	 */
 	bool proceedEvaluation();
 
+	void perturbPopulations();
+
 	/**
 	 * Evaluate the evolution.
 	 * @return If the evolution could be evaluated.

@@ -77,6 +77,10 @@ void PlanetModel::performEmbryogenesis() {
 	mEvolutionModel.performEmbryogenesis();
 }
 
+void PlanetModel::perturbPopulations(){
+	mEvolutionModel.perturbPopulations();
+}
+
 void PlanetModel::update(double timeSinceLastTick) {
 	mEnvironmentModel->update(timeSinceLastTick);
 }

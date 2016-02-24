@@ -212,6 +212,7 @@ MenuBar::MenuBar() {
 //#####################
 //Population menu
 	{
+
 		CEGUI::Window *populationTopItem = wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
 			"populationTopItem");
@@ -221,26 +222,42 @@ MenuBar::MenuBar() {
 			CEGUIConfiguration::CEGUI_SCHEME + "/PopupMenu", "populationMenu");
 		populationTopItem->addChild(populationMenu);
 
-		// New Population
-		CEGUI::Window *newPopulationItem = wmgr.createWindow(
-			CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-			GUIConfiguration::newPopulationCmd);
-		newPopulationItem->setText(GUIConfiguration::newPopulationName);
-		populationMenu->addChild(newPopulationItem);
+		{
+			// New Population
+			CEGUI::Window *newPopulationItem = wmgr.createWindow(
+				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
+				GUIConfiguration::newPopulationCmd);
+			newPopulationItem->setText(GUIConfiguration::newPopulationName);
+			populationMenu->addChild(newPopulationItem);
+		}
 
-		// Edit Population
-		CEGUI::Window *editPopulationItem = wmgr.createWindow(
-			CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-			GUIConfiguration::editPopulationCmd);
-		editPopulationItem->setText(GUIConfiguration::editPopulationName);
-		populationMenu->addChild(editPopulationItem);
+		{
+			// Edit Population
+			CEGUI::Window *editPopulationItem = wmgr.createWindow(
+				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
+				GUIConfiguration::editPopulationCmd);
+			editPopulationItem->setText(GUIConfiguration::editPopulationName);
+			populationMenu->addChild(editPopulationItem);
+		}
 
-		// Load Population
-		CEGUI::Window *loadPopulationItem = wmgr.createWindow(
-			CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
-			GUIConfiguration::loadPopulationCmd);
-		loadPopulationItem->setText(GUIConfiguration::loadPopulationName);
-		populationMenu->addChild(loadPopulationItem);
+		{
+			// Load Population
+			CEGUI::Window *loadPopulationItem = wmgr.createWindow(
+				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
+				GUIConfiguration::loadPopulationCmd);
+			loadPopulationItem->setText(GUIConfiguration::loadPopulationName);
+			populationMenu->addChild(loadPopulationItem);
+		}
+
+		{
+			// Perturb Population
+			CEGUI::Window *perturbPopulationItem = wmgr.createWindow(
+				CEGUIConfiguration::CEGUI_SCHEME + "/MenuItem",
+				GUIConfiguration::perturbPopulationCmd);
+			perturbPopulationItem->setText(
+				GUIConfiguration::perturbPopulationName);
+			populationMenu->addChild(perturbPopulationItem);
+		}
 
 //		// Open Population...
 //		CEGUI::Window *openPopulationItem = wmgr.createWindow(

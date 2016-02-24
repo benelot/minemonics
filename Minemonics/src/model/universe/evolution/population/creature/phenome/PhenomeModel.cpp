@@ -78,6 +78,14 @@ PhenomeModel::~PhenomeModel() {
 	mControllers.clear();
 }
 
+void PhenomeModel::perturbControllers(){
+	// store the control indices of the controllers
+	for (std::vector<Controller*>::iterator cit = mControllers.begin();
+		cit != mControllers.end(); cit++) {
+		(*cit)->perturb();
+	}
+}
+
 void PhenomeModel::calm() {
 	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
 		lit != mLimbModels.end(); lit++) {

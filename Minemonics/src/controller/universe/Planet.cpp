@@ -124,6 +124,10 @@ int Planet::getTotalCreatureQty() {
 	return mEvolution.getTotalCreatureQty();
 }
 
+void Planet::perturbPopulations(){
+	mPlanetModel->perturbPopulations();
+}
+
 PhysicsController::PhysicsModelType Planet::getPhysicsModelType() {
 	return mPlanetModel->getPhysicsModelType();
 }

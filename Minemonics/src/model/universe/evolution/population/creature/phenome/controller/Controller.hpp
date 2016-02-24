@@ -46,6 +46,8 @@ public:
 
 	virtual void initialize() = 0;
 
+	virtual void perturb() = 0;
+
 	virtual Controller* clone() = 0;
 
 	/**

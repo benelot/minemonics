@@ -86,6 +86,8 @@ public:
 	 */
 	void performEmbryogenesis();
 
+	void perturbControllers();
+
 	/**
 	 * Give rebirth to the creature.
 	 */

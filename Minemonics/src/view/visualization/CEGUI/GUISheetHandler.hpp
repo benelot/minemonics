@@ -102,6 +102,10 @@ public:
 	//Population->Load Population
 	bool loadPopulationButtonClicked(const CEGUI::EventArgs &args);
 
+	//Planets->Perturb Population
+	bool perturbPopulationButtonClicked(
+		const CEGUI::EventArgs &args);
+
 	//Population->Save Population as...
 	bool savePopulationAsButtonClicked(const CEGUI::EventArgs &args);
 
@@ -286,8 +290,8 @@ private:
 	public:
 		_Init() {
 			mBoostLogger.add_attribute("ClassName",
-					boost::log::attributes::constant<std::string>(
-							"GUISheetHandler"));
+				boost::log::attributes::constant<std::string>(
+					"GUISheetHandler"));
 		}
 	} _initializer;
 };

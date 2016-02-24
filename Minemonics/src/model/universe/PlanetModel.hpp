@@ -58,6 +58,8 @@ public:
 	 */
 	void performEmbryogenesis();
 
+	void perturbPopulations();
+
 	/**
 	 * Proceed with the evaluation.
 	 * @return If the evaluation could proceed.

@@ -89,6 +89,17 @@ bool EvolutionModel::proceedEvaluation() {
 	return true;
 }
 
+void EvolutionModel::perturbPopulations(){
+	for (std::vector<PopulationModel*>::iterator pit =
+			mPopulationModels.begin(); pit != mPopulationModels.end(); pit++) {
+			for (std::vector<CreatureModel*>::iterator cit =
+				(*pit)->getCreatureModels().begin();
+				cit != (*pit)->getCreatureModels().end(); cit++) {
+				(*cit)->perturbControllers();
+			}
+		}
+}
+
 bool EvolutionModel::evaluate() {
 	//EVALUATION
 	mPhase = EVALUATION_PHASE;

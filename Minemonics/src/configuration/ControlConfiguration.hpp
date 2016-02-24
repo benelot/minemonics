@@ -56,6 +56,12 @@ public:
 	static const double CHAOS_BASE_INTEGRATION_SPEED;
 
 	static const double SIGN_DEPENDENT_OUTPUT;
+
+	static const double PERTURBATION_RANGE_X;
+
+	static const double PERTURBATION_RANGE_Y;
+
+	static const double PERTURBATION_RANGE_Z;
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */

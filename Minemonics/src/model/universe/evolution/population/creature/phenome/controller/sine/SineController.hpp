@@ -53,6 +53,8 @@ public:
 
 	virtual void initialize();
 
+	virtual void perturb();
+
 	/**
 	 * Clone the sine controller.
 	 * @return The clone of the sine controller.

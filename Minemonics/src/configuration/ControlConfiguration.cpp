@@ -46,3 +46,9 @@ const double ControlConfiguration::CHAOS_MAX_INTEGRATION_SPEED = 10; /**!< Must 
 const double ControlConfiguration::CHAOS_BASE_INTEGRATION_SPEED = 0.0005f;
 
 const double ControlConfiguration::SIGN_DEPENDENT_OUTPUT = false;
+
+const double ControlConfiguration::PERTURBATION_RANGE_X = 1e-8f;
+
+const double ControlConfiguration::PERTURBATION_RANGE_Y = 1e-8f;
+
+const double ControlConfiguration::PERTURBATION_RANGE_Z = 1e-8f;

@@ -70,6 +70,10 @@ public:
 	static const std::string loadPopulationName;
 	static const std::string loadPopulationCmd;
 
+	//perturb population
+	static const std::string perturbPopulationName;
+	static const std::string perturbPopulationCmd;
+
 	static const std::string OpenFileSaveConfirm;
 	static const std::string OpenFileLoadConfirm;
 //#####################
