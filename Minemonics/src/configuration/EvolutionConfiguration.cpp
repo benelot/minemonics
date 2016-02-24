@@ -40,11 +40,13 @@ const unsigned EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE = 10;
  * This is the probability that a new creature, in any generation other than the first, will
  be produced by the crossing of two parents from the previous generation.
  */
+//NOT USED
 const double EvolutionConfiguration::EVOLUTION_CREATURE_CROSSOVER_RATE = 0.1;
 
 /**
  * This is the mutation rate used in mutation operators affecting the genome.
  */
+//NOT USED
 const double EvolutionConfiguration::EVOLUTION_CREATURE_MUTATION_RATE = 0.1;
 
 // Generation variables
@@ -55,23 +57,25 @@ const double EvolutionConfiguration::EVOLUTION_CREATURE_MUTATION_RATE = 0.1;
 const double EvolutionConfiguration::REAPER_SOW_OFFSPRING[] = { 0.5, 0.25,
 		0.125, 0.075, 0.075 }; // Initialization in EvolutionConfiguration.cpp
 
-const double EvolutionConfiguration::REAPER_REAP_PERCENTAGE = 0.15f; /**!< First the reaper reaps off a percentage */
+const double EvolutionConfiguration::REAPER_REAP_PERCENTAGE = 0.3f; /**!< First the reaper reaps off a percentage */
 
 const double EvolutionConfiguration::REAPER_CROSSOVER_PERCENTAGE = 0.5f; /**!< Cross over percentage and sow fresh sum up to 1.0*/
 const double EvolutionConfiguration::REAPER_SOW_FRESH_PERCENTAGE = 0.5f; /** !< How many creatures should be sown randomly. */
 
 /** The percentage of the population to be affected. The following sum up to 1.0*/
-const double EvolutionConfiguration::REAPER_ELITIST_PERCENTAGE = 0.16f;
-const double EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE = 0.166f;
-const double EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE = 0.166f;
-const double EvolutionConfiguration::REAPER_LINK_MUTATION_PERCENTAGE = 0.166f;
-const double EvolutionConfiguration::REAPER_GROW_STUB_PERCENTAGE = 0.166f;
-const double EvolutionConfiguration::REAPER_GRAFT_PERCENTAGE = 0.166f;
+const double EvolutionConfiguration::REAPER_ELITIST_PERCENTAGE = 0.1428f;
+const double EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE = 0.1428f;
+const double EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE = 0.1428f;
+const double EvolutionConfiguration::REAPER_GENE_PURGE_PERCENTAGE = 0.1428f;
+const double EvolutionConfiguration::REAPER_LINK_MUTATION_PERCENTAGE = 0.1428f;
+const double EvolutionConfiguration::REAPER_GROW_STUB_PERCENTAGE = 0.1428f;
+const double EvolutionConfiguration::REAPER_GRAFT_PERCENTAGE = 0.1428f;
 
 /** The probability of genome to be affected. The following DO NOT sum up to 1.0*/
-const double EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY = 0.2f;
-const double EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY = 0.2f;
+const double EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY = 0.3f;
+const double EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY = 0.3f;
 const double EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY = 0.1f;
+const double EvolutionConfiguration::REAPER_GENE_PURGE_PROBABILITY = 0.2f;
 const double EvolutionConfiguration::REAPER_GROW_STUB_PROBABILITY = 0.6f;
 const int EvolutionConfiguration::REAPER_GROW_STUB_BRANCHINESS = 2;
 const double EvolutionConfiguration::REAPER_GRAFT_PROPABILITY = 0.6f;

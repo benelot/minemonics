@@ -74,6 +74,7 @@ public:
 	static const double REAPER_GENE_MUTATION_PERCENTAGE;
 	static const double REAPER_GENE_SPLIT_PERCENTAGE;
 	static const double REAPER_LINK_MUTATION_PERCENTAGE;
+	static const double REAPER_GENE_PURGE_PERCENTAGE;
 	static const double REAPER_GROW_STUB_PERCENTAGE;
 	static const double REAPER_GRAFT_PERCENTAGE;
 
@@ -81,6 +82,7 @@ public:
 	static const double REAPER_GENE_MUTATION_PROBABILITY;
 	static const double REAPER_LINK_MUTATION_PROBABILITY;
 	static const double REAPER_GENE_SPLIT_PROBABILITY;
+	static const double REAPER_GENE_PURGE_PROBABILITY;
 	static const double REAPER_GROW_STUB_PROBABILITY;
 	static const int REAPER_GROW_STUB_BRANCHINESS;
 	static const double REAPER_GRAFT_PROPABILITY;

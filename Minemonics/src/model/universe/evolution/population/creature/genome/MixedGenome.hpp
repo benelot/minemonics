@@ -114,6 +114,11 @@ public:
 
 	virtual void addGeneBranch(const int geneIndex1, const int geneIndex2);
 
+	virtual void purgeRandomGenes(double percentage);
+
+	virtual void purgeRandomGene();
+
+	virtual void purgeGene(int geneIndex);
 	/**
 	 * Repair the genes by checking their integrity.
 	 */

@@ -40,6 +40,7 @@ void EvolutionModel::initialize() {
 		EvolutionConfiguration::REAPER_CROSSOVER_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GENE_MUTATION_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GENE_SPLIT_PERCENTAGE,
+		EvolutionConfiguration::REAPER_GENE_PURGE_PERCENTAGE,
 		EvolutionConfiguration::REAPER_LINK_MUTATION_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GROW_STUB_PERCENTAGE,
 		EvolutionConfiguration::REAPER_GRAFT_PERCENTAGE,

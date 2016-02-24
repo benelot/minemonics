@@ -412,6 +412,36 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 	}
 }
 
+void MixedGenome::purgeRandomGenes(double percentage) {
+	for (int i = 0; i < mGenes.size(); i++) {
+		if (Randomness::getSingleton()->nextUnifDouble(0, 1) <= percentage) {
+			purgeGene(i);
+		}
+	}
+}
+
+void MixedGenome::purgeRandomGene() {
+	purgeGene(
+		Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
+}
+
+void MixedGenome::purgeGene(int geneIndex) {
+	mGenes[geneIndex]->mutate();
+
+	for (int i = 0; i < mGenes.size(); i++) {
+		for (int j = 0; j < ((Morphogene*) mGenes[i])->getGeneBranches().size();
+			j++) {
+			if (((Morphogene*) mGenes[i])->getGeneBranches()[j]->getBranchGeneType()
+				== geneIndex) {
+				((Morphogene*) mGenes[i])->getGeneBranches()[j]->setActive(
+					false);
+			}
+
+		}
+
+	}
+}
+
 void MixedGenome::growRandomStubs(double growProbability) {
 	for (int i = 0; i < mGenes.size(); i++) {
 		if (Randomness::getSingleton()->nextUnifDouble(0, 1)

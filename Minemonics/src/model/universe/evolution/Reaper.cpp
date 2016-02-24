@@ -33,7 +33,7 @@ Reaper::_Init Reaper::_initializer;
 Reaper::Reaper() :
 	mElitistPercentage(0), mGeneSplitPercentage(0), mGrowStubPercentage(0), mGraftPercentage(
 		0), mBranchMutationPercentage(0), mCrossOverPercentage(0), mGeneMutationPercentage(
-		0), mReapPercentage(0), mSowFreshPercentage(0) {
+		0), mReapPercentage(0), mSowFreshPercentage(0),mGenePurgePercentage(0) {
 }
 
 Reaper::~Reaper() {
@@ -42,13 +42,15 @@ Reaper::~Reaper() {
 void Reaper::initialize(const double reapPercentage,
 	const double elitistPercentage, const double crossOverPercentage,
 	const double geneMutationPercentage, const double geneSplitPercentage,
-	const double branchMutationPercentage, const double growStubPercentage,
-	const double graftPercentage, const double sowFreshPercentage) {
+	const double genePurgePercentage, const double branchMutationPercentage,
+	const double growStubPercentage, const double graftPercentage,
+	const double sowFreshPercentage) {
 	mElitistPercentage = elitistPercentage;
 	mReapPercentage = reapPercentage;
 	mCrossOverPercentage = crossOverPercentage;
 	mGeneMutationPercentage = geneMutationPercentage;
 	mGeneSplitPercentage = geneSplitPercentage;
+	mGenePurgePercentage = genePurgePercentage;
 	mBranchMutationPercentage = branchMutationPercentage;
 	mGrowStubPercentage = growStubPercentage;
 	mGraftPercentage = graftPercentage;
@@ -167,6 +169,19 @@ void Reaper::sow(PopulationModel* const population) {
 		mutateGeneBranches(population, start, branchMutationHeads);
 
 		start += branchMutationHeads;
+	}
+
+	{
+		// calculate the number of gene purge heads
+		int genePurgeHeads = round(
+			((double) population->getCreatureModels().size() - untouched
+				- crossOverHeads) * mGeneMutationPercentage);
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Purge genes of " << genePurgeHeads << " creatures" << "[" << start << ";" << start + genePurgeHeads << "]";
+
+		purgeGenes(population, start, genePurgeHeads);
+
+		start += genePurgeHeads;
+
 	}
 
 	{
@@ -317,6 +332,28 @@ void Reaper::splitGenes(PopulationModel* const population, const int startIndex,
 
 				offspring->getGenotype().splitRandomGenes(
 					EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY);
+				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				population->getCreatureModels().push_back(offspring);
+			}
+		}
+	}
+}
+
+void Reaper::purgeGenes(PopulationModel* const population, int startIndex,
+	const int purgeGeneHeads) {
+	if (population->getCreatureModels().size() != 0) {
+		for (int i = 0; i < purgeGeneHeads; i++) {
+			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
+			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
+				CreatureModel* offspring =
+					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				population->getCreatureModels()[startIndex + i]->setCulled(
+					true);
+				offspring->setNew(true); // Make the creature a new creature
+				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+				offspring->getGenotype().purgeRandomGenes(
+					EvolutionConfiguration::REAPER_GENE_PURGE_PROBABILITY); // Mutate random genes
 				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
 				population->getCreatureModels().push_back(offspring);
 			}

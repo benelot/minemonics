@@ -95,6 +95,12 @@ public:
 	 */
 	virtual void addRandomGene() = 0;
 
+	virtual void purgeRandomGenes(double percentage) = 0;
+
+	virtual void purgeRandomGene() = 0;
+
+	virtual void purgeGene(int geneIndex) = 0;
+
 	/**
 	 * Repair the genes by checking their integrity.
 	 */

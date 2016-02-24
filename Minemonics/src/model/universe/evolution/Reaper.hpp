@@ -51,9 +51,9 @@ public:
 	 */
 	void initialize(const double reapPercentage, const double elitistPercentage,
 		const double crossOverPercentage, const double geneMutationPercentage,
-		const double geneSplitPercentage, const double branchMutationPercentage,
-		const double growStubPercentage, const double graftPercentage,
-		const double sowFreshPercentage);
+		const double geneSplitPercentage, const double genePurgePercentage,
+		const double branchMutationPercentage, const double growStubPercentage,
+		const double graftPercentage, const double sowFreshPercentage);
 
 	/**
 	 * Reap the less fit creatures from the population.
@@ -81,6 +81,14 @@ public:
 	 */
 	void mutateGenes(PopulationModel* const population, const int startIndex,
 		const int mutatedGeneHeads);
+
+	/**
+	 * Purge genes in creatures in the population and add n purgeGeneHeads.
+	 * @param population The population to mutate.
+	 * @param purgeGeneHeads Number of purgeGeneHeads to add.
+	 */
+	void purgeGenes(PopulationModel* const population, const int startIndex,
+		const int purgeGeneHeads);
 
 	/**
 	 * Mutate creatures in the population and add n mutateGeneHeads.
@@ -141,6 +149,7 @@ private:
 	double mElitistPercentage;
 	double mGeneMutationPercentage;
 	double mGeneSplitPercentage;
+	double mGenePurgePercentage;
 	double mBranchMutationPercentage;
 	double mGrowStubPercentage;
 	double mGraftPercentage;
