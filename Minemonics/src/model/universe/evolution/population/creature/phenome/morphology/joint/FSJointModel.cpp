@@ -5,6 +5,8 @@
 //# system headers
 //## controller headers
 //## model headers
+#include <boost/lexical_cast.hpp>
+
 //## view headers
 //# custom headers
 //## base headers
@@ -65,6 +67,13 @@ FSJointModel::~FSJointModel() {
 
 void FSJointModel::initialize() {
 	collectSensors();
+
+	mLoggerNamePitch = "[" + boost::lexical_cast<std::string>(mOwnIndex) + "]"
+		+ boost::lexical_cast<std::string>(this) + "PitchJointModel";
+	mLoggerNameYaw = "[" + boost::lexical_cast<std::string>(mOwnIndex) + "]"
+		+ boost::lexical_cast<std::string>(this) + "YawJointModel";
+	mLoggerNameRoll = "[" + boost::lexical_cast<std::string>(mOwnIndex) + "]"
+		+ boost::lexical_cast<std::string>(this) + "RollJointModel";
 
 	mJointPhysics->initialize();
 

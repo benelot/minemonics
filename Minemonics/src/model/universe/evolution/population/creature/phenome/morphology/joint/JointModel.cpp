@@ -172,7 +172,7 @@ void JointModel::update(double timeSinceLastTick) {
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
 		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNamePitch);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< std::setprecision(16) << dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
 
 	// create 1 dimensional data sets out of 3 dimensional data
@@ -184,7 +184,7 @@ void JointModel::update(double timeSinceLastTick) {
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
 		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNameYaw);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< std::setprecision(16) << dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
 
 	// create 1 dimensional data sets out of 3 dimensional data
@@ -196,7 +196,7 @@ void JointModel::update(double timeSinceLastTick) {
 
 	if (LoggerConfiguration::LOG_SPECIAL) {
 		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerNameRoll);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< std::setprecision(16) << dataX[0] << "\t" << dataY[0] << "\t" << dataZ[0];
 	}
 
 //	std::cout << std::endl << "AngleSensors:";

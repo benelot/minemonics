@@ -15,7 +15,7 @@
 //## utils headers
 
 Controller::Controller(ControllerType controllerType) :
-	mType(controllerType) {
+	mType(controllerType),mOwnIndex(0) {
 
 }
 

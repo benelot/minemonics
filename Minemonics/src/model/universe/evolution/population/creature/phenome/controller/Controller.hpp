@@ -152,16 +152,28 @@ public:
 		return os;
 	}
 
+	int getOwnIndex() const {
+		return mOwnIndex;
+	}
+
+	void setOwnIndex(int ownIndex) {
+		mOwnIndex = ownIndex;
+	}
+
 	/**
 	 * Serializes the gene to an xml file.
 	 * @param ar The archive.
 	 * @param The file version.
 	 */
 	template<class Archive>
-	void serialize(Archive & ar, const unsigned int /* file_version */) {
-		ar & BOOST_SERIALIZATION_NVP(mType) /**!< The type of controller*/
+	void serialize(Archive & ar, const unsigned int version/* file_version */) {
+		ar & BOOST_SERIALIZATION_NVP(mType); /**!< The type of controller*/
 
-		& BOOST_SERIALIZATION_NVP(mControlInputIndices) /**!< The vector of control input indices */
+		if(version >= 2){
+			ar & BOOST_SERIALIZATION_NVP(mOwnIndex); /**!< The controller index */
+		}
+
+		ar & BOOST_SERIALIZATION_NVP(mControlInputIndices) /**!< The vector of control input indices */
 
 		& BOOST_SERIALIZATION_NVP(mControlOutputIndices); /**!< The vector of control outputs indices */
 	}
@@ -182,8 +194,10 @@ protected:
 
 	std::vector<ControlInput*> mControlOutputs; /**!< The control output the controller writes to.*/
 
+	int mOwnIndex;
+
 	std::string mLoggingID;
 };
-BOOST_CLASS_VERSION(Controller, 1)
+BOOST_CLASS_VERSION(Controller, 2)
 BOOST_SERIALIZATION_ASSUME_ABSTRACT(Controller)
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_CONTROLLER_CONTROLLER_HPP_ */

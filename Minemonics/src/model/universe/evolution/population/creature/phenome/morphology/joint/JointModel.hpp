@@ -312,6 +312,10 @@ protected:
 
 	std::vector<JointLimitceptor*> mLimitceptors; /**!< The limitceptors of the joint. */
 
+	std::string mLoggerNamePitch; /**!< Logger name which is always Joint + &this */
+	std::string mLoggerNameYaw; /**!< Logger name which is always Joint + &this */
+	std::string mLoggerNameRoll; /**!< Logger name which is always Joint + &this */
+
 private:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
@@ -325,11 +329,6 @@ private:
 				boost::log::attributes::constant<std::string>("JointModel"));
 		}
 	} _initializer;
-
-	std::string mLoggerNamePitch; /**!< Logger name which is always Joint + &this */
-	std::string mLoggerNameYaw; /**!< Logger name which is always Joint + &this */
-	std::string mLoggerNameRoll; /**!< Logger name which is always Joint + &this */
-
 };
 
 #endif /* MODEL_UNIVERSE_EVOLUTION_POPULATION_CREATURE_PHENOME_MORPHOLOGY_JOINT_JOINTMODEL_HPP_ */

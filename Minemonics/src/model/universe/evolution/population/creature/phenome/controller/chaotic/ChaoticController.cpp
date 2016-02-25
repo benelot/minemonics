@@ -25,6 +25,7 @@
 
 //## view headers
 //## utils headers
+#include <utils/Randomness.hpp>
 #include <utils/NumericUtils.hpp>
 
 BoostLogger ChaoticController::mBoostLogger; /*<! initialize the boost logger*/
@@ -84,7 +85,7 @@ ChaoticController::~ChaoticController() {
 
 void ChaoticController::initialize() {
 
-	mLoggerName = mLoggingID + "ChaoticController";
+	mLoggerName = "[" + boost::lexical_cast<std::string>(mOwnIndex) + "]" + mLoggingID + "ChaoticController";
 	mDataSink.initialize(mLoggerName, 3, 20);
 
 
@@ -209,7 +210,7 @@ void ChaoticController::calcChuaCircuit() {
 	 */
 	if (LoggerConfiguration::LOG_SPECIAL) {
 		BOOST_LOG_SCOPED_THREAD_TAG("LoggerName", mLoggerName);
-		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< u[0] << "\t" << u[1] << "\t" << u[2];
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::debug)<< std::setprecision(16) << u[0] << "\t" << u[1] << "\t" << u[2];
 	}
 
 	double h = ControlConfiguration::CHAOS_BASE_INTEGRATION_SPEED;
@@ -227,7 +228,9 @@ void ChaoticController::collectInputs() {
 }
 
 void ChaoticController::perturb(){
-	u[0] = mInitialX += ControlConfiguration::PERTURBATION_RANGE_X;
-	u[1] = mInitialY += ControlConfiguration::PERTURBATION_RANGE_Y;
-	u[2] = mInitialZ += ControlConfiguration::PERTURBATION_RANGE_Z;
+	//std::cout << "Orig. conditions:" << std::setprecision(16) << mInitialX << "," << mInitialY << "," << mInitialZ << std::endl;
+	u[0] = mInitialX += Randomness::getSingleton()->nextUnifDouble(-ControlConfiguration::PERTURBATION_RANGE_X,ControlConfiguration::PERTURBATION_RANGE_X);
+	u[1] = mInitialY += Randomness::getSingleton()->nextUnifDouble(-ControlConfiguration::PERTURBATION_RANGE_Y,ControlConfiguration::PERTURBATION_RANGE_Y);
+	u[2] = mInitialZ += Randomness::getSingleton()->nextUnifDouble(-ControlConfiguration::PERTURBATION_RANGE_Z,ControlConfiguration::PERTURBATION_RANGE_Z);
+	//std::cout << "New conditions  :" << std::setprecision(16) << u[0] << "," << u[1] << "," << u[2] << std::endl;
 }

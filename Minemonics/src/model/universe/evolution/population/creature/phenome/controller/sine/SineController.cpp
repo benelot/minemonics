@@ -65,7 +65,7 @@ SineController::~SineController() {
 }
 
 void SineController::initialize() {
-	mLoggerName = mLoggingID + "SineLogger";
+	mLoggerName = "[" + boost::lexical_cast<std::string>(mOwnIndex) + "]" + mLoggingID + "SineLogger";
 	mDataSink.initialize(mLoggerName, 3, 20);
 }
 

@@ -52,3 +52,5 @@ const double ControlConfiguration::PERTURBATION_RANGE_X = 1e-8f;
 const double ControlConfiguration::PERTURBATION_RANGE_Y = 1e-8f;
 
 const double ControlConfiguration::PERTURBATION_RANGE_Z = 1e-8f;
+
+const bool ControlConfiguration::RANDOM_PERTURBATION = true;

@@ -62,6 +62,8 @@ public:
 	static const double PERTURBATION_RANGE_Y;
 
 	static const double PERTURBATION_RANGE_Z;
+
+	static const bool RANDOM_PERTURBATION;
 };
 
 #endif /* CONFIGURATION_CONTROLCONFIGURATION_H_ */

@@ -128,9 +128,12 @@ void SRBPhenomeModel::initialize() {
 
 		storeControlIndices(); /**!< Store the control indices for serialization */
 
+		int i = 0;
 		for (std::vector<Controller*>::iterator cit = mControllers.begin();
 			cit != mControllers.end(); cit++) {
+			(*cit)->setOwnIndex(i);
 			(*cit)->initialize();
+			i++;
 		}
 	}
 
@@ -486,7 +489,8 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			parentMorphogeneBranch->getJointRollMinAngle()),
 		Ogre::Vector3(parentMorphogeneBranch->getJointPitchMaxAngle(),
 			parentMorphogeneBranch->getJointYawMaxAngle(),
-			parentMorphogeneBranch->getJointRollMaxAngle()), ControlConfiguration::IS_POSITION_CONTROLLED);
+			parentMorphogeneBranch->getJointRollMaxAngle()),
+		ControlConfiguration::IS_POSITION_CONTROLLED);
 
 	// add controllers
 	for (int i = 0; i < joint->getMotors().size(); i++) {
@@ -519,6 +523,9 @@ void SRBPhenomeModel::appendToParentLimb(LimbModel* childLimb,
 			controller->addControlInput(joint->getVelocityceptors()[i]); // add the velocityceptor as input
 			controller->addControlOutput(joint->getMotors()[i]);
 			getControllers().push_back(controller);
+			controller->setOwnIndex(getControllers().size() - 1);
+
+			//TODO: Set joint position and velocity to joint here
 		}
 		}
 	}
