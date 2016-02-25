@@ -95,6 +95,13 @@ PopulationModel::~PopulationModel() {
 	mPlanetModel = NULL;
 }
 
+void PopulationModel::perturbCreatureControllers(){
+	for (std::vector<CreatureModel*>::const_iterator cit =
+		mCreatureModels.begin(); cit != mCreatureModels.end(); cit++) {
+		(*cit)->perturbControllers();
+	}
+}
+
 /**
  * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
  */

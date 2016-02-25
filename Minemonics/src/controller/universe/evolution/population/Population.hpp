@@ -57,6 +57,8 @@ public:
 	Population(PopulationModel* const populationModel);
 	virtual ~Population();
 
+	void perturbCreatureControllers();
+
 	/**
 	 * Initializes the population and adds creatures up to the creatureQty. Each creature gets a bushiness value around an predefined mean with a predefined variance.
 	 */

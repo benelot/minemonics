@@ -57,6 +57,8 @@ public:
 
 	virtual ~PopulationModel();
 
+	void perturbCreatureControllers();
+
 	/**
 	 * Initialize the population model
 	 */

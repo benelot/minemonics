@@ -60,6 +60,10 @@ Population::~Population() {
 	mPlanet = NULL;
 }
 
+void Population::perturbCreatureControllers() {
+	mPopulationModel->perturbCreatureControllers();
+}
+
 void Population::initialize() {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup population...";
 	//initialize the population model with zero creatures.
