@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="10">
+<object class_id="0" tracking_level="1" version="1" object_id="_0">
+	<mCreatureQty>4</mCreatureQty>
+	<mCurrentGeneration>31</mCurrentGeneration>
+	<mDynastyQty>1306</mDynastyQty>
+</object>
+</boost_serialization>
+
