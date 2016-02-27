@@ -152,7 +152,7 @@ When choosing a \(limitValue \in [2.28,2.4[\) one can observe that the limiter m
 \label{figure:z-2.28-2.4-chaotictrajectories}
 \end{figure}
 
-With a value of \(limitValue \in [1.81, 2.28]\) the state only stays in the lowermost scroll and shows periodic behavior. The control behavior can be explained by looking at figure \ref{figure:chaoticchuacircuit} again. The trajectories that lead from the lower-most scroll to the upper-most scroll pass by at the outer orbits of the lower-most scroll and therefore have the highest x(t) values. The limiter is applied when a certain x(t) value is surpassed, therefore the limiter limits z(t) which then leads to a repelling influence from the limiter. The trajectory thereby is pulled back onto a former orbit, which stabilizes the state onto that orbit. However, since the limiter is a very hard limiter, the period of the trajectory shows higher periods only in a very small limitValue parameter window \([2.212,2.215]\) and then very quickly turns into period 1 within the parameter window \([1.83,2.212]\) with quicker convergence the nearer the limiter was placed to zero. The system is highly sensitive to the exact position of the limiter because of the dense periodic orbits in the system, which the state quickly switches when the limiter is slighly moved. We can see the convergence to the limit cycle vary, getting slower again with \(limitValue \in [2.183,2.15]\) increasing again for \(limitValue \in [2.15,1.83]\). A self-similar pattern of increasing and decreasing convergence speeds can be observed.
+With a value of \(limitValue \in [1.81, 2.28]\) the state only stays in the lowermost scroll and shows periodic behavior. The control behavior can be explained by looking at figure \ref{figure:chaoticchuacircuit} again. The trajectories that lead from the lower-most scroll to the upper-most scroll pass by at the outer orbits of the lower-most scroll and therefore have the highest x(t) values. The limiter is applied when a certain x(t) value is surpassed, therefore the limiter limits z(t) which then leads to a repelling influence from the limiter. The trajectory thereby is pulled back onto a former orbit, which stabilizes the state onto that orbit. However, since the limiter is a very hard limiter, the period of the trajectory shows higher periods only in a very small limit value parameter window \([2.212,2.215]\) and then very quickly turns into period 1 within the parameter window \([1.83,2.212]\) with quicker convergence the nearer the limiter was placed to zero. The system is highly sensitive to the exact position of the limiter because of the dense periodic orbits in the system, between which the state quickly switches when the limiter is slightly moved. We can see the convergence to the limit cycle vary, getting slower again with \(limitValue \in [2.183,2.15]\) increasing again for \(limitValue \in [2.15,1.83]\). A self-similar pattern of increasing and decreasing convergence speeds can be observed.
 
 \begin{figure}[H]
 \centering
@@ -169,7 +169,7 @@ With a value of \(limitValue \in [1.81, 2.28]\) the state only stays in the lowe
 \centering
 \includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-1-83-convergence.png}
 \includegraphics[width=0.48\textwidth]{chua-circuit/Limited-chua-circuit-z-softness-0-13-1-83.png}
-\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle with again a fast convergence to the limit cycle using a limit value of \(1.83\). The plot to the right does not show the convergence trajectory, but instead a point on the periodic orbit was chosen to show the proper limit cycle.}
+\caption[Figure of another period 1 limit cycle]{Figure of period 1 limit cycle with again a fast convergence to the limit cycle using a limit value of \(1.83\). The plot to the right does not show the convergence trajectory, but instead a point on the periodic orbit was chosen to show the proper limit cycle.}
 \label{figure:z-fast-1-limit-cycle-trajectory}
 \end{figure}
 
@@ -179,7 +179,7 @@ Below 1.81, the limiter is applied instantly, the trajectory drops in z directio
 
 The limiter control gets more interesting when we now set \(softness=0.5\), which corresponds to a softer limiter (Fig. \ref{figure:softlimiterresponse}). The softer limiter is applied earlier than the hard limiter because of its long tails from the \(\tanh()\) function, however its influence is rather minimal yet gradually increasing when the limiter is approached. We can find an extended parameter window for \(limitValue \in [2.3887,11.5065]\) where the limiter suppresses chaotic behavior and again reduces the number of times the trajectory switches back into the uppermost scroll.
 
-Within the parameter window \(limitValue \in [2.05888,2.387[\), the influence of the limiter keeps the trajectory in the lowermost scroll. With the softer limiter, it is now much easier to find the parameter window to see the period doubling, because the parameter window for the different peridicities. 
+Within the parameter window \(limitValue \in [2.05888,2.387[\), the influence of the limiter keeps the trajectory in the lowermost scroll. With the softer limiter, it is now much easier to find the parameter window to see the period doubling, because the parameter windows for the different periodicities are now much larger. 
 
 The table \ref{table:z-0.5-periodicities} shows different limit values that stabilize different periodicities.
 
@@ -207,28 +207,28 @@ The plots below show the periodic trajectories for various limit values. The con
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-292.png}
-\caption[Figure of period 8 limit cycle.]{Figure of period 8 limit cycle.}
+\caption[Figure of period 8 limit cycle using a 0.5 soft limiter.]{Figure of period 8 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-8-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-285.png}
-\caption[Figure of period 4 limit cycle.]{Figure of period 4 limit cycle.}
+\caption[Figure of period 4 limit cycle using a 0.5 soft limiter.]{Figure of period 4 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-4-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-25.png}
-\caption[Figure of period 3 limit cycle.]{Figure of period 2 limit cycle.}
+\caption[Figure of period 3 limit cycle using a 0.5 soft limiter.]{Figure of period 2 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-2-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-z-softness-0-5-2-12.png}
-\caption[Figure of period 1 limit cycle.]{Figure of period 1 limit cycle.}
+\caption[Figure of period 1 limit cycle using a 0.5 soft limiter.]{Figure of period 1 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-1-limit-cycle-trajectory}
 \end{figure}
 
@@ -243,9 +243,9 @@ f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)}
 
 If we now change the $limitValue$ parameter from \(>4.6692\), which corresponds to no limiter influence to the trajectory, to a value within \(limitValue \in [1.99545,4.6692[\), we can observe different chaotic trajectories. The limiter influences the circuit by limiting the voltage across the capacitor \(C_1\) when \(x\) approaches the limiter.
 
-Within the window [1.89,1.99545], we can find the small parameter window which controls motion of high periodicity down to different lower periods.
+Within the window \([1.89,1.99545]\), we can find the small parameter window which controls motion of high periodicity down to different lower periods.
 
-Period doubling behavior can be found when limiter controlling the chua circuit appropriately with limit values as described in the table \ref{table:x-0.13-periodicities}.
+Period doubling behavior can be found when limiter controlling the Chua circuit appropriately with limit values as described in the table \ref{table:x-0.13-periodicities}.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -267,28 +267,28 @@ Period doubling behavior can be found when limiter controlling the chua circuit 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-932.png}
-\caption[Figure of period 8 limit cycle]{Figure of period 8 limit cycle.}
+\caption[Figure of period 8 limit cycle using self limiting 0.13 soft limiter.]{Figure of period 8 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-8-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-93.png}
-\caption[Figure of period 4 limit cycle]{Figure of period 4 limit cycle}
+\caption[Figure of period 4 limit cycle using self limiter 0.13 soft limiter..]{Figure of period 4 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-4-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-91.png}
-\caption[Figure of period 3 limit cycle]{Figure of period 2 limit cycle}
+\caption[Figure of period 3 limit cycle using self limiter 0.13 soft limiter.]{Figure of period 2 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-2-limit-cycle-trajectory}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-89.png}
-\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle}
+\caption[Figure of period 1 limit cycle using self limiter 0.13 soft limiter.]{Figure of period 1 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-1-limit-cycle-trajectory}
 \end{figure}
 
@@ -299,8 +299,8 @@ However, with x limiting itself, we now can set the limit value of the system fa
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-61-convergence.png}
-\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle at 1.61}
-\label{figure:x-0.13-fast-1-limit-cycle-trajectory}
+\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle at 1.61.}
+\label{figure:x-0.13-fast-1-limit-cycle-trajectory-1-61}
 \end{figure}
 
 We can surpass this point after which the convergence time increases again because the trajectory converges to the limit cycle from outside.
@@ -308,17 +308,17 @@ We can surpass this point after which the convergence time increases again becau
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-57-convergence.png}
-\caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle at 1.57}
-\label{figure:x-0.13-fast-1-limit-cycle-trajectory}
+\caption[Figure of period another 1 limit cycle]{Figure of period 1 limit cycle at 1.57.}
+\label{figure:x-0.13-fast-1-limit-cycle-trajectory-1-57}
 \end{figure}
 
-The controlled limit cycle shrinks until the trajectory directly converges onto one single fix point (1.4). 
+The controlled limit cycle shrinks until the trajectory directly converges onto one single fix point at \(limitValue=1.4\). 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-5-convergence.png}
 \includegraphics[width=0.45\textwidth]{chua-circuit/Limited-chua-circuit-x-softness-0-13-1-4-convergence.png}
-\caption[Figure of period 1 limit cycle]{Figure of trajectories with limit values 1.5 and 1.4}
+\caption[Figure of fix point convergence]{Figure of trajectories with limit values 1.5 and 1.4.}
 \label{figure:x-0.13-convergence-trajectories}
 \end{figure}
 
@@ -459,7 +459,7 @@ Using \(softness=0.5\), the limiter starts to influence the multiscroll attracto
 \label{figure:x-0.5-1-limit-cycle-trajectory}
 \end{figure}
 
-We can again set the limit value beyond 0. The same plane rotation and spiraling behaviour can be seen, until it stays in the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter. Then we again can limit control the trajectory in the uppermost scroll into different periodicities (see table \ref{table:x-0.5-upperscroll-periodicities}).
+We can again set the limit value beyond 0. The same plane rotation and spiralling behaviour can be seen, until it stays in the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter. Then we again can limit control the trajectory in the uppermost scroll into different periodicities (see table \ref{table:x-0.5-upperscroll-periodicities}).
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}

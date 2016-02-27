@@ -160,13 +160,40 @@ Charles Darwin
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-\todo[inline]{Write abstract.}
+% rev. 1
 
-\paragraph*{Motivation.}
+\textbf{Motivation.} The evolution of locomotion was of central importance for the spread of the first complex life in the ocean and the transition from the ocean to the land. %
+%
+Locomotion is omnipresent in simple and complex organisms of micro and macroscopic level, thus it must have an underlying natural process that simplifies its emergence. %
+%
+When observing a variety of locomotion gait patterns in nature, it gets obvious how robust animal gaits are to perturbations. The underlying system therefore has to be adaptive to the quickly changing environment locomotion takes place in.%
+%
+Unfortunately, our understanding of the fundamental process of adaptive gaits is still limited.%
+%
+In robotic applications, locomotion implemented using computationally expensive planning methods from engineering often fails to copy the delicate behavior of animals, especially when it comes to keep locomotion robust and adaptive in unpredictable situations. %
+%
+The difference might be that robot locomotion often relies on a large sensory interface to sense the environment and an internal model to plan the next actuation of the limbs based on the current state of movement.%
+%
+Natural walking however relies on central pattern generators (CPG), which emit oscillatory signals to control and coordinate limb movement. %
+%
+It has been shown that the pyloric central pattern generators of the spiny lobster are closed neural systems that undergo chaotic oscillations \cite{bib:Rabinovich1997}. %
+%
+We hypothesize that the underlying natural process to simplify the emergence of the adaptive, oscillatory movement in locomotion patterns is a chaotic system, which is adapts its oscillation frequency based on feedback from the environment. %
+%
+The adaptive system though is not only the central pattern generator, but the whole generator-actuator-limb complex, that self-adapts to the external constraints. %
+%
 
-\paragraph*{Methods.}
+\textbf{Methods.} This work focusses on finding examples of locomoting, simulated creatures that use chaotic systems to control the periodic leg movement.%
+%
+Therefore an example chaotic system was chosen, the Chua circuit, to be controlled by a chaos control method called simple limiter control. %
+%
+The limiting component, the simple limiter, can be set appropriately so that the chaotic system shows chaotic and periodic trajectories. %
+%
+Furthermore a simulator was implemented to evolve simple creatures in a rigid-body physics engine using an evolutionary process and a genome and phenotype structure to encode a morphology out of 3D primitives such as boxes and capsules connected by joints. %
+%
 
-\paragraph*{Results.} and more.
+
+\textbf{Results.} and more.
 
 }
 
@@ -214,7 +241,7 @@ Luckily, I had many companions on my way, who at this point I would like to than
 \lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
 \listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
 {
-\textbf{i.e.} & \textbf{I}n \textbf{E}xplicit \\
+\textbf{CPG} & \textbf{C}entral \textbf{P}attern \textbf{G}enerators \\ \\
 
 & \\
 
@@ -261,7 +288,7 @@ Chaos Theory: \\
 %$\omega$ & angular frequency & rads$^{-1}$ \\
 % Symbol & Name & Unit \\
 }
-\end{comment}
+
 %----------------------------------------------------------------------------------------
 %	DEDICATION
 %----------------------------------------------------------------------------------------
@@ -273,7 +300,7 @@ Chaos Theory: \\
 \dedicatory{Dedicated to science and great minds helping to lead this world to a better tomorrow.} % Dedication text
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
-
+\end{comment}
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
 %----------------------------------------------------------------------------------------
