@@ -178,22 +178,48 @@ Natural walking however relies on central pattern generators (CPG), which emit o
 %
 It has been shown that the pyloric central pattern generators of the spiny lobster are closed neural systems that undergo chaotic oscillations \cite{bib:Rabinovich1997}. %
 %
-We hypothesize that the underlying natural process to simplify the emergence of the adaptive, oscillatory movement in locomotion patterns is a chaotic system, which is adapts its oscillation frequency based on feedback from the environment. %
+We hypothesize that the underlying natural process to simplify the emergence of adaptive, oscillatory movement in locomotion patterns are chaotic systems, which are controlled into different periodicities and adapt their oscillation frequency based on feedback from the environment. %
 %
-The adaptive system though is not only the central pattern generator, but the whole generator-actuator-limb complex, that self-adapts to the external constraints. %
+The adaptive system though is not only the central pattern generator, but the whole complex of pattern generator, the limbs and the connecting joints, that self-adapts to the external constraints. %
 %
-
+%
+%
 \textbf{Methods.} This work focusses on finding examples of locomoting, simulated creatures that use chaotic systems to control the periodic leg movement.%
 %
-Therefore an example chaotic system was chosen, the Chua circuit, to be controlled by a chaos control method called simple limiter control. %
+Therefore an example chaotic system was chosen, the Chua circuit, to be controlled by a chaos control method called simple limiter control\cite{bib:Corron2000}. %
 %
 The limiting component, the simple limiter, can be set appropriately so that the chaotic system shows chaotic and periodic trajectories. %
 %
-Furthermore a simulator was implemented to evolve simple creatures in a rigid-body physics engine using an evolutionary process and a genome and phenotype structure to encode a morphology out of 3D primitives such as boxes and capsules connected by joints. %
+Furthermore a simulator was implemented to evolve simple creatures in a rigid-body physics engine using an evolutionary process, a terrestrial flat plane environment and a genome and phenotype structure to encode a morphology out of 3D primitives such as boxes and capsules connected by joints and a controller structure using the chaotic system. %
 %
+The evolution simulator was run to evolve locomoting creatures on land using a sinusoidal controller to evolve reference creatures to be compared to the ones using chaotic controllers.%
+%
+Some preliminary experiments were performed to replicate the simple limiter control method and explore the influence of soft limiters and different limiter configurations on the behavior of the Chua circuit. %
+%
+Then a chaotic controller was configured with different limiters by the movement of the joint of a simple model leg. %
+%
+The model leg was set up in different settings: gravity-less space and interacting with ground, additionally with different joint torques and damping settings. %
+%
+Finally, the evolution simulator was run to evolve locomoting creatures on land using the chaotic controller.%
+%
+%
+%
+\textbf{Results.} The simple limiter control method benefits from soft limiters in the sense that the simple limiter parameter ranges of different stabilized limit cycles are increased. %
+%
+Furthermore, under which conditions the simple limiter is applied to which part of the system plays an important role in the success of the control method and must be chosen wisely. %
+%
+In the simulation of the model leg, only limit cycles of periodicity 1 could be found. In the absence of gravitation, the model leg always converged to the limit cycle. %
+%
+In the interaction with ground, smaller limit cycles were stabilized, but the system tried to converge back to the uninfluenced larger limit cycle. %
+%
+It was found that damping leads to sub-manifolds of the original manifold described by the limit cycle. %
+%
+The increased joint torque leads to a larger limit cycle, however does not make the system switch to a higher periodicity in either the controller or joint phase space as it was expected. %
+%
+The evolution simulator could successfully evolved creatures using the sinusoidal and the chaotic controllers. %
+%
+In the case of the creatures using the chaotic controllers, a more in-depth analysis of the trajectories showed that higher periodicity can be observed both in the controller and joint phase space. %
 
-
-\textbf{Results.} and more.
 
 }
 
