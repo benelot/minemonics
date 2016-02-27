@@ -137,7 +137,7 @@ Date:\\
 %----------------------------------------------------------------------------------------
 %	QUOTATION PAGE
 %----------------------------------------------------------------------------------------
-
+\begin{comment}
 \pagestyle{empty} % No headers or footers for the following pages
 
 \null\vfill % Add some space to move the quote down the page a bit
@@ -151,7 +151,7 @@ Charles Darwin
 \vfill\vfill\vfill\vfill\vfill\vfill\null % Add some space at the bottom to position the quote just right
 
 \clearpage % Start a new page
-
+\end{comment}
 %----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
@@ -162,17 +162,17 @@ Charles Darwin
 
 % rev. 1
 
-\textbf{Motivation.} The evolution of locomotion was of central importance for the spread of the first complex life in the ocean and the transition from the ocean to the land. %
+\textbf{Motivation.} The evolution of locomotion was of central importance for the spread of the first complex life in the ocean and the transition from the ocean to land. %
 %
 Locomotion is omnipresent in simple and complex organisms of micro and macroscopic level, thus it must have an underlying natural process that simplifies its emergence. %
 %
-When observing a variety of locomotion gait patterns in nature, it gets obvious how robust animal gaits are to perturbations. The underlying system therefore has to be adaptive to the quickly changing environment locomotion takes place in.%
+When observing a variety of locomotion gait patterns in nature, it gets obvious how robust animal gaits are to perturbations. The underlying system therefore has to be adaptive to the quickly changing environment locomotion takes place in. %
 %
-Unfortunately, our understanding of the fundamental process of adaptive gaits is still limited.%
+Unfortunately, our understanding of the fundamental process of adaptive gaits is still limited. %
 %
 In robotic applications, locomotion implemented using computationally expensive planning methods from engineering often fails to copy the delicate behavior of animals, especially when it comes to keep locomotion robust and adaptive in unpredictable situations. %
 %
-The difference might be that robot locomotion often relies on a large sensory interface to sense the environment and an internal model to plan the next actuation of the limbs based on the current state of movement.%
+The difference might be that robot locomotion often relies on a large sensory interface to sense the environment and an internal model to plan the next actuation of the limbs based on the current state of movement. %
 %
 Natural walking however relies on central pattern generators (CPG), which emit oscillatory signals to control and coordinate limb movement. %
 %
@@ -180,19 +180,19 @@ It has been shown that the pyloric central pattern generators of the spiny lobst
 %
 We hypothesize that the underlying natural process to simplify the emergence of adaptive, oscillatory movement in locomotion patterns are chaotic systems, which are controlled into different periodicities and adapt their oscillation frequency based on feedback from the environment. %
 %
-The adaptive system though is not only the central pattern generator, but the whole complex of pattern generator, the limbs and the connecting joints, that self-adapts to the external constraints. %
+The adaptive system though is not only the central pattern generator, but the whole complex of pattern generator, the limbs and the connecting joints, that self-adapts to the external constraints. \\
 %
 %
 %
-\textbf{Methods.} This work focusses on finding examples of locomoting, simulated creatures that use chaotic systems to control the periodic leg movement.%
+\textbf{Methods.} This work focusses on finding examples of locomoting, simulated creatures that use chaotic systems to control the periodic leg movement. %
 %
-Therefore an example chaotic system was chosen, the Chua circuit, to be controlled by a chaos control method called simple limiter control\cite{bib:Corron2000}. %
+Therefore an example chaotic system was chosen, the Chua circuit, to be controlled by a chaos control method called simple limiter control \cite{bib:Corron2000}. %
 %
 The limiting component, the simple limiter, can be set appropriately so that the chaotic system shows chaotic and periodic trajectories. %
 %
 Furthermore a simulator was implemented to evolve simple creatures in a rigid-body physics engine using an evolutionary process, a terrestrial flat plane environment and a genome and phenotype structure to encode a morphology out of 3D primitives such as boxes and capsules connected by joints and a controller structure using the chaotic system. %
 %
-The evolution simulator was run to evolve locomoting creatures on land using a sinusoidal controller to evolve reference creatures to be compared to the ones using chaotic controllers.%
+The evolution simulator was run to evolve locomoting creatures on land using a sinusoidal controller to evolve reference creatures to be compared to the ones using chaotic controllers. %
 %
 Some preliminary experiments were performed to replicate the simple limiter control method and explore the influence of soft limiters and different limiter configurations on the behavior of the Chua circuit. %
 %
@@ -200,7 +200,7 @@ Then a chaotic controller was configured with different limiters by the movement
 %
 The model leg was set up in different settings: gravity-less space and interacting with ground, additionally with different joint torques and damping settings. %
 %
-Finally, the evolution simulator was run to evolve locomoting creatures on land using the chaotic controller.%
+Finally, the evolution simulator was run to evolve locomoting creatures on land using the chaotic controller. \\
 %
 %
 %

@@ -16,48 +16,19 @@
 \lhead{Chapter \thechapter. \emph{Controllers}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 \section{Adaptive controllers for locomotion}
-%% rev. 3
+%% rev. 4
 
-Starting in the industrial revolution, people have started to automate production and thereby lowered the costs of production of almost any good. %
+In this chapter, two different types of controllers, one non-adaptive sinusoidally oscillating controller and one adaptive chaotic controller are examined. %
 %
-Today, production robots can perform very sophisticated manipulation as is required for large-scale products such as cars of smaller scale products such as electronic chips. %
+The non-adaptive sinusoidal controller is taken to evolve creatures for to compare them to the creatures that use the adaptive controller. %
 %
-Automation robots, belonging to the most efficient robots to date, are robots specifically built and programmed for the task at hand. %
+Before we examine the chaotic controller, a short introduction to chaotic systems will be given, then several preliminary experiments on simple limiter control will be conducted to understand the reaction of the controller under different influences. %
 %
-Many of them work in cages without interaction with humans and totally lack autonomy or adaptability, even though their morphology could theoretically be reused for another task. %
-%
-But since automation tasks do not require any learning, adaption or autonomous behavior, the robots are not programmed to do so. %
-%
-As more recent developments strive for more autonomy and adaptivity in robots, more adaptable controllers need to be developed. %
-%
-Tasks requiring autonomy and adaptivity are rescue, detection or exploration outdoor scenarios of robots, with a direct contact or in cooperation with humans. %
-%
-Such a task is generally very versatile and it is generally unknown what situation has to be expected and what problems will have to be solved. %
-%
-This means that problems have to be solved in a much more robust manner than it has to be done in a supervised environment, because the situations could change. %
-%
-Also the importance of low latency control arises because the system has to be reactive to its environment and is only able to plan its movements far ahead in rare cases. %
-%
-The requirements for such a controller therefore are to be problem solving and planning on one hand and highly adaptive and learning with very low latency on the other hand. %
-%
-Many different control approaches exist as described in the introduction chapter, however most of them are engineered approaches, meaning that they usually suffer from high computational power requirements and high latency because traditional problem solving generally includes complete planning and the usage of a complete, complex model. When compared to nature, these approaches are far from competitive. %
-%
-An ant for example can leave its nest, go out into the unknown, find food and communicate with other ants to collaboratively bring it back to the nest. %
-%
-This highly complex task requires a variety of skills, from perception and and classification, communication to locomotion and manipulation of objects. %
-%
-Given that the ant is a very simple animal, the control output is highly complex, follows an objective at hand, is adaptive and reacts to the environment with low latency. %
-%
-One of the most complex behavior in an ant is probably its locomotion behavior. %
-%
-But how can complex locomotion arise from a very simple controller? %
-%
-Could it be that multiple uncoupled or nearly uncoordinated controllers controlling different limbs can generate complex, robust and versatile locomotion patterns just by featuring periodic, adaptive control signals? %
-%
-This would be a counterexample to the hypothesis that only very complex controllers can generate complex gaits. %
-%
-This thesis examines two different types of controllers, one non-adaptive sinusoidally oscillating controller and one adaptive chaotic controller to find out if this hypothesis could be supported by examples of controller behavior that feature the above requested properties.
+Finally the purpose of the chaotic controller will be described
 
+%The hypothesis already mentioned in the introduction is that multiple uncoupled or nearly uncoordinated controllers of different limbs can generate complex, robust and versatile locomotion patterns just by featuring periodic, adaptive control signals if they are constrained and coupled through the interaction with the ground. %
+%
+%This would be a counterexample to the hypothesis that only very complex controllers can generate complex gaits. %
 \section{Uncoupled sinusoidal oscillators}
 \label{sec:sinusoidal-oscillators}
 % rev. 1
@@ -86,7 +57,7 @@ A solution is therefore only adapted by evolution to the task it was trained for
 \label{sec:chaotic-controllers}
 % rev. 2
 
-The second type of controller is based on a chaotic, complex, non-linear system. %
+The chaotic controller is based on a chaotic, complex, non-linear system. %
 %
 The controller has its own internal dynamics and is either completely uninfluenced from outside or is influenced with sensory input from the morphology of the creature, which adapts the controller's dynamics. %
 %
@@ -100,12 +71,13 @@ In an uninfluenced state, the controller only exhibits the original chaotic syst
 %
 The trajectory can however be influenced using a chaos control method called simple limiters, which turns the controller from chaotic to periodic behavior. %
 %
-We will therefore first introduce chaotic systems and then experiment with simple limiter control on a chaotic system called the chua circuit.
+We will therefore first introduce chaotic systems and then experiment with simple limiter control on a chaotic system called the Chua circuit.
 
 \subsection{Chaotic systems}
+\label{subsec:chaotic-systems}
 % rev. 3
 
-A chaotic system is a dynamical system exhibiting chaotic dynamics. %
+A chaotic system is a non-linear, dynamical system exhibiting chaotic dynamics. %
 %
 Chaos means that even though a system is deterministic, therefore also the future behavior is fully determined by the initial state of the system, the future of the system can not be predicted if the initial state is slightly varied. %
 %
@@ -682,20 +654,22 @@ The trajectory tries to spiral back into the uppermost scroll within limiter win
 
 \subsection{Chaotic chua circuit controller}
 
-The chua circuit controller to control a single DoF in a joint of an evolved creature is based in the chua circuit that was extensively examined in the last section \ref{subsubsec:simple-limiter-mathematica}. %
+The Chaotic controller that will be used control a single DoF in a joint of a creature is driven internally by the Chua circuit examined above. %
 %
-However in the creature controller, two different options were tested as described in the section \ref{sec:chaotic-controllers}. %
+The chua circuit's parameters will be kept constant to keep the parameter search for evolution small, because there exist many parameter conditions that do not lead to a chaotic ground state. %
 %
-The chua circuit's parameters were kept constant to keep the parameter search for evolution small, because there exists many parameter conditions that do not lead to a chaotic ground state. %
+Instead, the initial conditions will be chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step will be chosen randomly within \(\text{\textit{integration step}} \in [0.001,10]\). %
 %
-Instead, the initial conditions were chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step was chosen randomly within \(\text{\textit{integration step}} \in [0.001,10]\). %
+The real integration step however will always be kept constant at \(\text{\textit{integration base}} = 0.0005\). %
 %
-The real integration step however is always kept constant at \(\text{\textit{integration base}} = 0.0005\). %
-%
-The integration step is then performed by calculating smaller sub-steps of size \textit{integration base} until a residual integration step is left to calculate. %
+The integration step is then performed by calculating smaller sub-steps of size \textit{integration base} until a small, residual integration step is left to calculate. %
 %
 Thereby, we perform variable integration speeds, but keep that integration base step constant. %
 %
-The numerical integration is again performed using a Runge-Kutta order 6 integration scheme run in real-time.
+The numerical integration is again performed using a Runge-Kutta order 6 integration scheme run in real-time. %
+%
+However in the creature's controller, The simple limiter is not directly applied as in the experiment above, but it will be tested if the controller output can be limited by evolution on the basis of the joint, so that periodic motion can arise. %
+%
+If this does not prove to be successful, a feedback to the chaotic system has to be implemented which limits it according to the current state of the controlled joint. %
 
 \end{document}
