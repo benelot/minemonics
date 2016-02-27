@@ -19,7 +19,21 @@
 
 \section{Creatures with uncoupled sinusoidal oscillators}
 
-In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-oscillators} was used to evolve creatures. A population of 100 creatures was set up with an average velocity fitness function and a minimal height fitness function. The latter was chosen because the simulator had issues in the physical model setup that led to creatures that could fly due to imaginary forces (as described in \ref{subsec:populations}). The minimal height fitness function punished those creatures that reached a high average height of all limbs, which was the case for creatures that were flying. The simulation was run for approximately a day and took 181 generations for locomotion behavior to occur. Every creature was evaluated for 20 seconds. 181 generations of 100 creatures evaluated for 20 seconds are \(\approx\unit[4.2]{days}\), however, since the simulator can evaluate faster than real-time if the simulation permits it, it could simulate the creatures with approximately \(4.2\) times real-time. The successful solutions evolved can be seen below in figures \ref{figure:successfulcreatures-jumper1}, \ref{figure:successfulcreatures-jumper2}, \ref{figure:successfulcreatures-walker1} and \ref{figure:successfulcreatures-walker2}.
+In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-oscillators} was used to evolve creatures. %
+%
+A population of 100 creatures was set up with an average velocity fitness function and a minimal height fitness function. %
+%
+The latter was chosen because the simulator had issues in the physical model setup that led to creatures that could fly due to imaginary forces (as described in \ref{subsec:populations}). %
+%
+The minimal height fitness function punished those creatures that reached a high average height of all limbs, which was the case for creatures that were flying. %
+%
+The simulation was run for approximately a day and took 181 generations for locomotion behavior to occur. %
+%
+Every creature was evaluated for 20 seconds. %
+%
+181 generations of 100 creatures evaluated for 20 seconds are \(\approx\unit[4.2]{days}\), however, since the simulator can evaluate faster than real-time if the simulation permits it, it could simulate the creatures with approximately \(4.2\) times real-time. %
+%
+The successful solutions evolved can be seen below in figures \ref{figure:successfulcreatures-jumper1}, \ref{figure:successfulcreatures-jumper2}, \ref{figure:successfulcreatures-walker1} and \ref{figure:successfulcreatures-walker2}.
 
 \begin{figure}[tb]
 \centering
@@ -61,30 +75,96 @@ In the first experimental setting, the sinusoidal controller as described in \re
 \label{figure:successfulcreatures-walker2}
 \end{figure}
 
-Creatures that exhibit successful locomotion seem to share a common ancestor that was the first who evolved a successful walking pattern, since all of them share a similar magenta skin coloring. Since the skin color is randomly set for one limb, the common ancestor could only have had all the same color and must have been replicated using crossover. In crossover (as described in \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. Since this process involves no mutations, the crossover must have happened mainly among creatures sharing the same magenta skin coloring. Due to the elitism mechanism of the evolutionary process, the first successful creature generated an onset of an avalanche of successful creatures flooding the population with very similar solutions. 
+Creatures that exhibit successful locomotion seem to share a common ancestor that was the first who evolved a successful walking pattern, since all of them share a similar magenta skin coloring. %
+%
+Since the skin color is randomly set for one limb, the common ancestor could only have had all the same color and must have been replicated using crossover. %
+%
+In crossover (as described in \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. %
+%
+Since this process involves no mutations, the crossover must have happened mainly among creatures sharing the same magenta skin coloring. %
+%
+Due to the elitism mechanism of the evolutionary process, the first successful creature generated an onset of an avalanche of successful creatures flooding the population with very similar solutions. 
 
-However, the major drawback of the sinusoidal oscillator controller is that they do not show any adaption during the evaluation depending on the environment. The only way for the controller to adapt is on the evolutionary time-scale through mutation, which does not result in an advantage for the individual in its evaluation, but only helps a future generation of the individual to eventually converge to a new, applicable solution.
+However, the major drawback of the sinusoidal oscillator controller is that they do not show any adaption during the evaluation depending on the environment. %
+%
+The only way for the controller to adapt is on the evolutionary time-scale through mutation, which does not result in an advantage for the individual in its evaluation, but only helps a future generation of the individual to eventually converge to a new, applicable solution.
 
 \section{Simple limiter control in the simulator}
 % rev. 2
 
-The second type of controller is a reaction to the fixed oscillatory motion scheme of the sinusoidal controller, which in reality is highly improbable to be existing in a natural animal. Furthermore it could fix the inability to adapt to environmental disturbances. The controller using an underlying chaotic system could be a marvellous source of periodic patterns of motion due to its infinite number of unstable periodic orbits. If a creature could use simple limiter control to stabilize UPOs and exploit the periodic orbits for locomotion patterns, this could lead to a more robust and adaptive way of motion. Experimentally, this would mean that if the creatures exhibit periodic locomotion patterns that it could be shown that the successful creatures controlled the amount of chaotic movement of the controller or the chaotic movement of the limb and stabilized unstable periodic orbits to exploit it for limb motion. Showing that the controller or limb motion is less chaotic can be shown by calculating the largest Lyapunov exponent, which accounts for the amount of divergence of two slightly different initial conditions of the controller or the limb motion.
+The second type of controller is a reaction to the fixed oscillatory motion scheme of the sinusoidal controller, which in reality is highly improbable to be existing in a natural animal. %
+%
+Furthermore it could fix the inability to adapt to environmental disturbances. %
+%
+The controller using an underlying chaotic system could be a marvellous source of periodic patterns of motion due to its infinite number of unstable periodic orbits. %
+%
+If a creature could use simple limiter control to stabilize UPOs and exploit the periodic orbits for locomotion patterns, this could lead to a more robust and adaptive way of motion. %
+%
+Experimentally, this would mean that if the creatures exhibit periodic locomotion patterns that it could be shown that the successful creatures controlled the amount of chaotic movement of the controller or the chaotic movement of the limb and stabilized unstable periodic orbits to exploit it for limb motion. %
+%
+Showing that the controller or limb motion is less chaotic can be shown by calculating the largest Lyapunov exponent, which accounts for the amount of divergence of two slightly different initial conditions of the controller or the limb motion.
 
-The experiments were run on the chaotic controller as described in \ref{subsec:chua-circuit}. Simple limiters can come in various ways, since they only must be natural to the system at hand \cite{bib:Corron2000}. Therefore the first experiments were run using chaotic controllers without direct limiters implemented to the controllers. Unfortunately, this approach was not successful as no periodic limb motion could be observed at any time of the evolution, meaning that the morphology can not act as a limiter to control the chaos at any point if the chaotic system does not get any feedback from the morphology. The second idea was to implement limiters based on the sensory feedback of the respective joint the controller is controlling.
+The experiments were run on the chaotic controller as described in \ref{subsec:chua-circuit}. %
+%
+Simple limiters can come in various ways, since they only must be natural to the system at hand \cite{bib:Corron2000}. %
+%
+Therefore the first experiments were run using chaotic controllers without direct limiters implemented to the controllers. %
+%
+Unfortunately, this approach was not successful as no periodic limb motion could be observed at any time of the evolution, meaning that the morphology can not act as a limiter to control the chaos at any point if the chaotic system does not get any feedback from the morphology. %
+%
+The second idea was to implement limiters based on the sensory feedback of the respective joint the controller is controlling.
 
 \subsection{Indirect limiter control through the morphology}
 % rev. 1
 
-The first experiments were run using chaotic controllers without direct limiters. The controllers start with different initial conditions and different integration speeds, but are not limited using sensory input. Therefore the chaotic trajectories emitted from the controllers are only limited through the morphology. The experiment conducted was run using 4 different settings in terms of evaluation time and number of creatures in the population. However, the desired limiter control exhibiting periodic or quasi-periodic motion could not be observed in any of the creatures. This could be explained due to the lacking feedback from the limb to the chaotic system itself. Therefore the chaotic system runs completely uninfluenced and is independent of the limb being limited in its movement. Therefore the next experiment takes the sensor feedback into account to perform implicit limiter control as described in the next section.
+The first experiments were run using chaotic controllers without direct limiters. %
+%
+The controllers start with different initial conditions and different integration speeds, but are not limited using sensory input. %
+%
+Therefore the chaotic trajectories emitted from the controllers are only limited through the morphology. %
+%
+The experiment conducted was run using 4 different settings in terms of evaluation time and number of creatures in the population. %
+%
+However, the desired limiter control exhibiting periodic or quasi-periodic motion could not be observed in any of the creatures. %
+%
+This could be explained due to the lacking feedback from the limb to the chaotic system itself. %
+%
+Therefore the chaotic system runs completely uninfluenced and is independent of the limb being limited in its movement. %
+%
+Therefore the next experiment takes the sensor feedback into account to perform implicit limiter control as described in the next section.
 
 \subsection{Direct limiter control through sensory feedback}
 % rev. 1
 
-For the second experiment uses a locally influenced chaotic controller. The chaotic controller output is ruled by the three differential equations defining \(\frac{dx}{dt},\frac{dy}{dt} \text{ and } \frac{dz}{dt}\) of which, after integration, it holds the current state of the system in \(x(t),y(t) \text{ and } z(t)\).  In this experiment, the controller is limited using the position sensor and the velocity sensor of the joint degree of freedom the controller controls. As outlined below, the following limiter configuration was found experimentally: The controller state \(x(t)\) is replaced by the position sensor output and the controller state \(y(t)\) is replaced by the velocity sensor output. The limiter system imposes limiters on two of the three dimensions in the situation where the limb motion itself is limited due to collision with ground or other limbs, then the joint velocity of the DoF drops and the position comes to a halt. This limits the chaotic controller in two different ways, and it is in question what trajectories will be generated by the system. The limiter setup is then used to observe the influence of gravity, friction and damping on the chaotic system. If it is found to be experimentally successful and the trajectories exhibit periodic or quasi-periodic movement or interleaving periodic-chaotic sequences different from the usual intrinsic chaotic motion of the underlying chaotic system, it will be used in evolutionary settings to evolve creatures controlled with it.
+For the second experiment uses a locally influenced chaotic controller. %
+%
+The chaotic controller output is ruled by the three differential equations defining \(\frac{dx}{dt},\frac{dy}{dt} \text{ and } \frac{dz}{dt}\) of which, after integration, it holds the current state of the system in \(x(t),y(t) \text{ and } z(t)\). %
+%
+In this experiment, the controller is limited using the position sensor and the velocity sensor of the joint degree of freedom the controller controls. %
+%
+As outlined below, the following limiter configuration was found experimentally: The controller state \(x(t)\) is replaced by the position sensor output and the controller state \(y(t)\) is replaced by the velocity sensor output. %
+%
+The limiter system imposes limiters on two of the three dimensions in the situation where the limb motion itself is limited due to collision with ground or other limbs, then the joint velocity of the DoF drops and the position comes to a halt. %
+%
+This limits the chaotic controller in two different ways, and it is in question what trajectories will be generated by the system. %
+%
+The limiter setup is then used to observe the influence of gravity, friction and damping on the chaotic system. %
+%
+If it is found to be experimentally successful and the trajectories exhibit periodic or quasi-periodic movement or interleaving periodic-chaotic sequences different from the usual intrinsic chaotic motion of the underlying chaotic system, it will be used in evolutionary settings to evolve creatures controlled with it.
 
 \subsubsection{Limiting the model leg in the simulator}
 
-To test the approach on a simple model organism, we first test the different limiter configurations that use z(t) as a torque output. The model leg is positioned slightly above the ground, so that if starting with 0 gravity, the limb floats and moves freely without touching the ground. Therefore, the friction values are omitted when there is 0 gravity. The initial conditions for the chaotic controller controlling the single DoF of the system is set to \((-1.5,0,2)\) unless stated otherwise. In the following experiments, when stated that the sensor X limits the x dimension, this means that the value x(t) of the dimension x is replaced with the sensor value in every cycle. The following plots always show the phase space of the chaotic controller on the left side and the sensor space of the controlled joint DoF on the right side.
+To test the approach on a simple model organism, we first test the different limiter configurations that use z(t) as a torque output. %
+%
+The model leg is positioned slightly above the ground, so that if starting with 0 gravity, the limb floats and moves freely without touching the ground. %
+%
+Therefore, the friction values are omitted when there is 0 gravity. %
+%
+The initial conditions for the chaotic controller controlling the single DoF of the system is set to \((-1.5,0,2)\) unless stated otherwise. %
+%
+In the following experiments, when stated that the sensor X limits the x dimension, this means that the value x(t) of the dimension x is replaced with the sensor value in every cycle. %
+%
+The following plots always show the phase space of the chaotic controller on the left side and the sensor space of the controlled joint DoF on the right side.
 
 \todo[inline]{Repeat plots without sign dependent output}
 
@@ -230,9 +310,17 @@ With this limitation, the following strange limit cycle can be observed.
 	\label{figure:limited-model-leg6}
 \end{figure}
 
-We choose the configuration where we limit the x dimension with the position sensor and the y dimension with the velocity sensor. Based on this configuration, the model leg with different control torques, friction and damping coefficients was tested to observe the resulting change in controller and joint dynamics. In the following plots, we show different influencing factors on the limit cycle:
+We choose the configuration where we limit the x dimension with the position sensor and the y dimension with the velocity sensor. %
+%
+Based on this configuration, the model leg with different control torques, friction and damping coefficients was tested to observe the resulting change in controller and joint dynamics. %
+%
+In the following plots, we show different influencing factors on the limit cycle:
 
-\paragraph{Interaction with ground} The ground imposes a very hard limiter onto the creature. The movement of the creature gets instantly stopped, whereas the ground has infinite mass and therefore is not influenced by the creature. In some cases, the ground should therefore directly act as a very hard limiter onto the chaotic circuit, controlling the chaotic movement into low periods and orbits of smaller diameter as in the experiments performed in the section \ref{subsubsec:simple-limiter-mathematica}. 
+\paragraph{Interaction with ground} The ground imposes a very hard limiter onto the creature. %
+%
+The movement of the creature gets instantly stopped, whereas the ground has infinite mass and therefore is not influenced by the creature. %
+%
+In some cases, the ground should therefore directly act as a very hard limiter onto the chaotic circuit, controlling the chaotic movement into low periods and orbits of smaller diameter as in the experiments performed in the section \ref{subsubsec:simple-limiter-mathematica}. 
 
 \begin{figure}[H]
 	\centering
@@ -274,9 +362,19 @@ We choose the configuration where we limit the x dimension with the position sen
 	\label{figure:limited-damped-model-leg-collision2}
 \end{figure}
 
-The collisions with the ground are visible in both the controller state space and the joint sensor space as smaller or larger jumps. The collision causes first a drop in velocity and at the same time stops the displacement in position. In the plot \ref{figure:limited-damped-model-leg-collision1}, the collisions only cause a light displacement since the ground is frictionless, therefore the controller can converge onto the outer limit cycle. In the plot \ref{figure:limited-damped-model-leg-collision2}, where we add friction to the creature and ground, the controller can no longer converge to the outer limit cycle, but it stays on several smaller limit cycles until the morphology finally gets trapped and can not move anymore. Both plots show how the controller can be robust or sensitive to limiters imposed by the environment.
+The collisions with the ground are visible in both the controller state space and the joint sensor space as smaller or larger jumps. %
+%
+The collision causes first a drop in velocity and at the same time stops the displacement in position. %
+%
+In the plot \ref{figure:limited-damped-model-leg-collision1}, the collisions only cause a light displacement since the ground is frictionless, therefore the controller can converge onto the outer limit cycle. %
+%
+In the plot \ref{figure:limited-damped-model-leg-collision2}, where we add friction to the creature and ground, the controller can no longer converge to the outer limit cycle, but it stays on several smaller limit cycles until the morphology finally gets trapped and can not move anymore. %
+%
+Both plots show how the controller can be robust or sensitive to limiters imposed by the environment.
 
-\paragraph{Influence of damping} Damping is an indirect soft limiter applied to the physical joint system of the simple form: \(F_{damping} = c \cdot \dot{x} = c \cdot v\). However, since the joint space is coupled to the chaotic controller space through the sensors, we can also observe the influence of the damper onto the controller.
+\paragraph{Influence of damping} Damping is an indirect soft limiter applied to the physical joint system of the simple form: \(F_{damping} = c \cdot \dot{x} = c \cdot v\). %
+%
+However, since the joint space is coupled to the chaotic controller space through the sensors, we can also observe the influence of the damper onto the controller.
 
 \begin{figure}[H]
 	\centering
@@ -360,7 +458,9 @@ The collisions with the ground are visible in both the controller state space an
 
 The damping of the system leads to sub-manifolds of the system, the trajectory and its limit cycle get softer, even when we apply more force and more damping.
 
-\paragraph{Influence of the x dimension limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), we know that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. We can now observe the influence of the x dimension limiter when we remove it from the system.
+\paragraph{Influence of the x dimension limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), we know that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. %
+%
+We can now observe the influence of the x dimension limiter when we remove it from the system.
 
 \begin{figure}[H]
 	\centering
@@ -410,9 +510,49 @@ We can observe how the system gets one of its degrees of freedom back, showing s
 
 \todo[inline]{Write about evolving creatures with direct limiter control}
 
-The setup to evolve creatures integrating the chaotic controllers was intended to be an exploratory one. In order to observe examples of creatures that locomote using chaotic controllers, three simulators with each a separate evolutionary setting were started. Each setting has 100 individuals in one population, each with the same average velocity fitness function. This setup was chosen that way so that the different settings could evolve their own dynamics, because so many locomotion solutions are possible to be evolved. The simulators were run one a quad-core processor system, so the multiple simulators were exploiting the multiple cores much better than a single simulator could. The experiment using the direct limiter controller chaotic controller sounded much more promising, since the controller stayed in a quasi periodic motion for all the time for almost all the model leg setups. Its output seemingly could be easily compared to the sinusoidal controllers. This turned out to be quite wrong in practice, because when integrated into random constellations by the evolutionary algorithm, the controller exhibited periodic motion, but switched to a different periodic orbit when influenced by the environment. 
+The setup to evolve creatures integrating the chaotic controllers was intended to be an exploratory one. %
+%
+In order to observe examples of creatures that locomote using chaotic controllers, three simulators with each a separate evolutionary setting were started. %
+%
+Each setting has 100 individuals in one population, each with the same average velocity fitness function. %
+%
+This setup was chosen that way so that the different settings could evolve their own dynamics, because so many locomotion solutions are possible to be evolved. %
+%
+The simulators were run one a quad-core processor system, so the multiple simulators were exploiting the multiple cores much better than a single simulator could. %
+%
+The experiment using the direct limiter controller chaotic controller sounded much more promising, since the controller stayed in a quasi periodic motion for all the time for almost all the model leg setups. %
+%
+Its output seemingly could be easily compared to the sinusoidal controllers. %
+%
+This turned out to be quite wrong in practice, because when integrated into random constellations by the evolutionary algorithm, the controller exhibited periodic motion, but switched to a different periodic orbit when influenced by the environment. 
 
 \todo[inline]{Show the switch of periodic movements in a plot.}
 
-The simple limiters of the environment apparently stabilize a certain periodic orbit, but change, when the environment changes. The controller therefore satisfies the idea of being adaptive to the environment, however it stayed in question if multiple controllers could be combined with a co-evolved morphology so that a satisfactory locomotion pattern would arise. The fitness function of average velocity totally left it to the individual how the movement would be achieved. As already described in [??], evolutionary algorithms are very exploitive, meaning that the evolved solutions easily exploit everything they can find to satisfy the fitness functions. The strength of the evolutionary algorithm, its versatility[?] to find solutions, turns into a very messy task for the experimenter. For higher order tasks such as locomotion, this means that one has to come up with a simple but precise description of the solution space using fitness functions. The definition must be general enough to accept a variety of solutions, but must be precise enough to accept only the desired solutions. What sounds easy for simple tasks, is not very easy for more complex tasks. The question of what locomotion actually is arises. After 500 generations of simulated evolution, the simulators were stopped and the evolved creatures were examined. The definition was not at all sufficient to evolve locomoting creatures. Some of them even just exploited the fact that growing tall and falling over. [??] Because the results were not desirable, the experiment was redesigned to cope with the definition problem. The simulator was stopped and the evolved creatures were examined. As long as the creatures showed hints to converge onto the desired behavior, the simulation was continued without changes, otherwise, the definition had to be changed. 
+The simple limiters of the environment apparently stabilize a certain periodic orbit, but change, when the environment changes. %
+%
+The controller therefore satisfies the idea of being adaptive to the environment, however it stayed in question if multiple controllers could be combined with a co-evolved morphology so that a satisfactory locomotion pattern would arise. %
+%
+The fitness function of average velocity totally left it to the individual how the movement would be achieved. %
+%
+As already described in [??], evolutionary algorithms are very exploitive, meaning that the evolved solutions easily exploit everything they can find to satisfy the fitness functions. %
+%
+The strength of the evolutionary algorithm, its versatility[?] to find solutions, turns into a very messy task for the experimenter. %
+%
+For higher order tasks such as locomotion, this means that one has to come up with a simple but precise description of the solution space using fitness functions. %
+%
+The definition must be general enough to accept a variety of solutions, but must be precise enough to accept only the desired solutions. %
+%
+What sounds easy for simple tasks, is not very easy for more complex tasks. The question of what locomotion actually is arises. %
+%
+After 500 generations of simulated evolution, the simulators were stopped and the evolved creatures were examined. %
+%
+The definition was not at all sufficient to evolve locomoting creatures. %
+%
+Some of them even just exploited the fact that growing tall and falling over. %
+%
+[??] Because the results were not desirable, the experiment was redesigned to cope with the definition problem. %
+%
+The simulator was stopped and the evolved creatures were examined. %
+%
+As long as the creatures showed hints to converge onto the desired behavior, the simulation was continued without changes, otherwise, the definition had to be changed. 
 \end{document}

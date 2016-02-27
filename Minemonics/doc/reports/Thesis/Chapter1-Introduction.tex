@@ -16,17 +16,23 @@
 \lhead{Chapter \thechapter. \emph{Introduction}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 \section{Locomotion to conquer the world}
-% rev. 3
+% rev. 4
 
 Motion is a central aspect of life for organisms on earth. %
 %
-With the exception of some primary producers that have found a way to spread completely without self-generated motion by exploiting environmental forces such as wind or water to distribute seeds, organisms of higher complexity such as vertebrates, depend on locomotion, usually the most complex motor behavior the organism performs \cite{bib:Grillner2000}. %
+When the first life evolved in oceans and other open water, most organism motion was due to environmental forces such as wind or water streams. %
 %
-In order to survive and be competitive in the endless development of evolution, an organism has to be highly adaptive on all levels, from the microscopic level of the DNA to the macroscopic level of the morphology. %
+However, with the development of more complex, multicellular organisms, self-induced motion rapidly gained importance. %
 %
-The adaptability of an organism permits it to find a niche, live in it and adapt to it, in order to simplify the exploitation of the niche's environment. %
+Different species evolved a variety of ways of locomotion such as swimming or crawling, which permitted the spread of all faunal species across oceans. %
 %
-The ability to locomote enables an organism to extend the size of its current niche or to move to another niche if the attractivity of its current niche is reduced due a strong competitor or due to environmental changes. Locomotion is therefore a macroscopic key component to adaptive organisms. %
+With the evolution of lungs and more resistive skin, the first animals escaped water and populated the coastal regions, which surely was one of the key events of life on earth. %
+%
+This was however impossible with the same gaits as in water, therefore the way animals locomote had to be adapted again. %
+%
+Today, anthropods, recognizable by their segmented body, make up \(\unit[80]{\%}\) of all described species and have conquered every environment on earth. %
+%
+With the exception of some primary producers, that have found a way to spread completely without self-generated motion by exploiting environmental forces to distribute seeds, organisms of higher complexity such as vertebrates, depend on locomotion, usually the most complex motor behavior the organism performs \cite{bib:Grillner2000}. %
 %
 Locomotion is performed in different environments (e.g. air, water, ground), each with advantages and drawbacks to keep it stable. %
 %
@@ -34,21 +40,25 @@ In water, fluid streams can prevent an organism from moving into one direction s
 %
 On land, an organism faces problems with different obstacles and appropriate foot placement or switching between different gait patterns. %
 %
-How nature solves these problems is largely unknown, recent papers mainly focus on computationally expensive engineering solutions into which we will look in the next section.
+Regardless of these problems, it seems that even very simple organisms could master the task of stable locomotion.%
+%
+The fundamental process of how stable locomotion can so easily arise in many biological organisms is unfortunately largely unknown. %
+%
+Studies of the spinal cord suggest that a key aspect of biological, rhythmic motion is related to central pattern generators (CPG) \cite{bib:Hultborn2007}. %
+%
+The central pattern generator exhibits periodic and chaotic oscillations \cite{bib:Rabinovich1997} and are influenced through the aid of neuromodulation \cite{bib:Hooper2001}. %
+%
+In early studies by Brown et al., it was recognized that a CPG can control simple locomotion tasks even without the need of descending motor commands from the cortex \cite{bib:Brown1911}. %
+%
+Additionally, in the model of the Lamprey spinal cord, stimulation of the neurons can produce fictive swimming motion, indicative of a CPG neural circuit. %
+%
+It was proposed that there even was a basal CPG responsible for different kinds of swimming, crawling on a surface and burrowing in the mud \cite{bib:Ayers1983}, which could be altered using neuromodulators \cite{bib:Harris-Warrick1985}. %
+%
+A similar CPG based mechanism was evolved to control a robotic lamprey \cite{bib:Ijspeert1999}, an extensive review of robotic CPG applications can be found by the same author \cite{bib:Ijspeert2008}. %
+%
 
-\section{The engineering approach on locomotion}
-
-\todo[inline]{Describe some engineering approaches on how to build robots that locomote.}
-
-Gait engineering
-Product optimization
-Motion planning
-Motion capture may be performed on humans, insects and other organisms.
-
-Recent work shows experimental evidence that fishes for instance exploit fluidal vortices to reduce locomotory costs ( Müller \cite{bib:Muller2003}, Liao et al. \cite{bib:Liao2003a,bib:Liao2003b}).
-
-\section{A more natural approach}
-% rev. 1
+\section{A natural approach}
+% rev. 2
 
 Nature seems to have solved the locomotion problem of getting from point A to point B extremely easily and elegantly. %
 %
@@ -68,9 +78,9 @@ The interaction of the body and the controller with the environment automaticall
 %
 An example of periodicity generating controller is a chaotic, dynamical system controlled using simple limiters. %
 %
-The sensors from the joints as well as the weight, shape and inertia of the limbs can act as limiters. %
+The sensors from the joints as well as the weight, shape and inertia of the limbs in this system act as limiters to the feasible gait motions. %
 %
-The goal of the thesis is to use evolutionary algorithms and an example of genotype to phenotype transcription to let creatures evolve in a rigid-body engine to show examples of evolved creatures that use the above mentioned controlled, chaotic system to move on different kinds of ground and adapt its movement depending on the ground.
+The goal of the thesis is to use evolutionary algorithms, an example of genotype to phenotype transcription to let creatures evolve in a rigid-body engine to show examples of evolved creatures that use the above mentioned, controlled, chaotic system to show basic locomotion abilities that arise in the interaction with the ground. %
 
 \subsection{Evolutionary Algorithms}
 % rev. 2
@@ -95,10 +105,9 @@ This is due to the features of the variation operators, crossover leading to mix
 %
 The evolutionary algorithm therefore follows the scheme of a general gradient descent algorithm. %
 %
-It must be noted that the process per se does not aim to generate better individuals and that variational operations do not necessarily lead to a better fitness of an individual, but the population under the evolutionary process will adapt to the fitness landscape meaning that invidual solutions will converge to global minima. %
+It must be noted that the process per se does not aim to generate better individuals and that variational operations do not necessarily lead to a better fitness of an individual, but the population under the evolutionary process will adapt to the fitness landscape meaning that individual solutions will converge to global minima. %
 %
 Very fit individuals will arise from it, not necessarily showing the same or even similar solution depending on the complexity of the fitness landscape (defining the number of peaks in the fitness landscape). 
-
 
 
 The locomotion task could be a challenging optimization task for evolution due to the very non-continuous the fitness landscape. %
