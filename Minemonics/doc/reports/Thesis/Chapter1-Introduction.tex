@@ -15,7 +15,7 @@
 
 \lhead{Chapter \thechapter. \emph{Introduction}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-\section{Locomotion to conquer the world}
+\section{Locomotion to Conquer the World}
 % rev. 4
 
 Motion is a central aspect of life for organisms on earth. %
@@ -30,9 +30,9 @@ With the evolution of lungs and more resistive skin, the first animals escaped w
 %
 This was however impossible with the same gaits as in water, therefore the way animals locomote had to be adapted again. %
 %
-Today, anthropods, recognizable by their segmented body, make up \(\unit[80]{\%}\) of all described species and have conquered every environment on earth. %
+Today, anthropods (including insects and spiders), recognizable by their segmented body, make up \(\unit[80]{\%}\) of all described species and have conquered every environment on earth. %
 %
-With the exception of some primary producers, that have found a way to spread completely without self-generated motion by exploiting environmental forces to distribute seeds, organisms of higher complexity such as vertebrates, depend on locomotion, usually the most complex motor behavior the organism performs \cite{bib:Grillner2000}. %
+With the exception of some primary producers that have found a way to spread completely without self-generated motion by exploiting environmental forces to distribute seeds, organisms of higher complexity such as vertebrates depend on locomotion, usually the most complex motor behavior the organism performs \cite{bib:Grillner2000}. %
 %
 Locomotion is performed in different environments (e.g. air, water, ground), each with advantages and drawbacks to keep it stable. %
 %
@@ -48,7 +48,7 @@ Studies of the spinal cord suggest that a key aspect of biological, rhythmic mot
 %
 The central pattern generator exhibits periodic and chaotic oscillations \cite{bib:Rabinovich1997} and is influenced through the aid of neuromodulation \cite{bib:Hooper2001}. %
 %
-They serve different rhythmic oscillations, like a function generator, for many functions in vertebrate animals, from movement, breathing, peristaltic and gastric movements or other oscillatory functions. %
+They serve different rhythmic oscillations, like a function generator, for many functions in vertebrate animals, such as locomotion, breathing, peristaltic and gastric movements or other oscillatory functions. %
 %
 In early studies by Brown et al., it was recognized that a CPG can control simple locomotion tasks even without the need of descending motor commands from the cortex \cite{bib:Brown1911}. %
 %
@@ -61,26 +61,28 @@ A similar CPG based mechanism was evolved to control a robotic lamprey \cite{bib
 An extensive review of robotic CPG applications can be found by the same author \cite{bib:Ijspeert2008}. %
 %
 
-\section{A natural approach}
+\section{A Natural Approach}
 % rev. 3
 
 Nature seems to have solved the locomotion problem of getting from point A to point B extremely easily and elegantly. %
 %
-Even under constraints of rough terrain and obstacles interfering with the goal, a solution is nearly always found and does generally not include a long path and limb trajectory planning time. %
+Even under constraints of rough terrain and obstacles interfering with the path, a solution is nearly always found and generally does not require long path and limb trajectory planning times. %
 %
-It seems as if the locomotion movements arose naturally from the interaction of the legs and the ground, because we rarely see an animal look at its feet while it runs. %
+It seems as if the locomotion movements arose naturally from the interaction between the legs and the ground, because we rarely see an animal look at its feet while it runs. %
 %
 For such gaits to be stable, the locomotion must be very robust to disturbances. %
 %
-On the other hand, engineering solutions usually rely on longer planning times and still do not reach competitive solutions in terms of robustness and adaptability to the environment. %
+Yet, engineering solutions usually rely on longer planning times and still do not reach competitive solutions in terms of robustness and adaptability to the environment. %
 %
-Conventionally, the need for adaption has to be detected and then a new limb trajectory has to be computed according to the chosen gait. %
+Conventionally, the need for gait adaption has to be detected , before then computing a new limb trajectory according to the chosen gait. %
 %
-If a self-adaptive system could be found that produces a variety of periodic movements and adapts the output trajectory through the interaction with the ground, the computation intensive controller could be replaced by the periodic controller. %
+A new approach is to design a self-adaptive system that produces a variety of periodic movements and adapts the output trajectory through the interaction with the ground. %
+%
+Such a system would be computationally more efficient and the produced gait more robust than conventional methods. %
 %
 The interaction of the body and the controller with the environment automatically constrains the motion space of the legs in order to move the leg appropriately and make the creature move forward. %
 %
-The sensors from the joints as well as the weight, shape and inertia of the limbs in this system act as limiters to the feasible gait motions.
+The sensors from the joints as well as the weight, shape, and inertia of the limbs in this system act as limiters to the feasible gait motions.
 
 \subsection{Evolutionary Algorithms}
 % rev. 2
@@ -95,82 +97,88 @@ The fitness functions, which model the environmental constraints that define wha
 %
 If an individual is competitive with respect to the fitness functions, it has a higher chance to reproduce than a non-competitive individual. %
 %
-The genotypes of individuals with high fitness values then are crossed, which forms a new individual with a genotype which is a mixture of the parent's genotypes. %
+The genotypes of individuals with high fitness values are then crossed, which forms a new individual with a genotype that is a mixture of its parents' genotypes. %
 %
 All individuals are subject to one or multiple types of mutations, which lead to slight changes in the genotype, thereby also leading to changes in the fitness of that individual. %
 %
-In order to keep the size of the population constant, some of the worst performing individuals are culled. Using this process, approximately optimal solutions to NP-complete problems can be found such as the travelling salesman problem. %
+In order to keep the size of the population constant, some of the worst performing individuals are culled. %
 %
-This is due to the features of the variation operators, crossover leading to mixtures of different solutions which possibly are better solutions than the crossed solutions, and mutation helping to produce variation and to avoid getting stuck in local minima. %
+Using this process, approximately optimal solutions to NP-complete problems can be found, such as the travelling salesman problem. %
+%
+This is due to the features of the variation operators, crossover leading to mixtures of different solutions which are possibly better solutions than the crossed solutions, and mutation helping to produce variation and to avoid getting stuck in local minima. %
 %
 The evolutionary algorithm therefore follows the scheme of a general gradient descent algorithm. %
 %
 It must be noted that the process per se does not aim to generate better individuals and that variational operations do not necessarily lead to a better fitness of an individual. %
 %
-However the population under the evolutionary process will adapt to the fitness landscape meaning that individual solutions will converge to global minima. %
+However, the population under the evolutionary process will adapt to the fitness landscape, meaning that individual solutions will converge to global minima. %
 %
-Very fit individuals will arise from it, not necessarily showing the same or even similar solution depending on the complexity of the fitness landscape (defining the number of peaks in the fitness landscape). 
+Very fit individuals will arise from it, not necessarily showing the same or even similar solutions, depending on the complexity of the fitness landscape. 
 
 
-The locomotion task could be a challenging optimization task for evolution due to the very non-continuous the fitness landscape. %
+The locomotion task could be a challenging optimization task for evolution due to the very non-continuous nature the fitness landscape. %
 %
-The lack of symmetry for instance, constituting a simple change in some genome structures, can instantly make the locomotion performance drop, as the creature loses a symmetric limb, making it much harder to walk properly due to the imbalance. %
+A lack of symmetry for instance, constituting a simple change in some genome structures, can instantly make the locomotion performance drop. %
+For example, a loss of one of two symmetric limbs would make it much harder to walk properly due to imbalance. %
 %
-Therefore the gradient on the fitness landscape might be of little help in some areas, degrading the algorithm to random sampling. %
+Therefore, the gradient on the fitness landscape might be of little help in some areas, degrading the algorithm to random sampling. %
 %
-Additionally, the representation of a locomotion solution might require a large parameter space, which slows down the search for good solutions. Given these problems, the experiments will show if the evolutionary algorithm can still work.
+Additionally, the representation of a locomotion solution might require a large parameter space, which slows down the search for good solutions. %
+%
+Despite these restrictions, experiments show that the evolutionary algorithm is still applicable and finds valid solutions (see sections \ref{sec:evolved-sin-creatures} and \ref{subsec:Evolved-lim-creatures}).
 
-\subsection{Chaotic systems as a source of high variability}
+\subsection{Chaotic Systems as a Source of High Variability}
 % rev. 2
 
 Chaotic systems (introduced more thoroughly in section \ref{subsec:chaotic-systems}) are the underlying model of many different physical processes such as the three-body problem in astronomy studied by Poincaré \cite{bib:Poincare1892}, population models in biology studied by Verhulst \cite{bib:Verhulst1838}, weather models in meteorology studied by Lorenz \cite{bib:Lorenz1963} and many other models from different fields. %
 %
-Before the beginning of chaos theory dated back to the 19th century, it was thought that approximate knowledge about the initial state of a deterministic system was sufficient to approximate the knowledge about the future. In natural sciences, the exact knowledge of a real-world state of a system is impossible, as the real-valued nature of the natural, continuous system state has infinite precision. %
+Before the beginning of chaos theory dated back to the 19th century, it was thought that approximate knowledge about the initial state of a deterministic system was sufficient to approximate knowledge about the future. %
 %
-However an experiment can only reveal a limited-precision state of the system. %
+In natural sciences, the exact knowledge of a real-world state of a system is impossible, as the real-valued nature of a natural, continuous system state has infinite precision. %
 %
-Chaos theory showed that a small variation of the initial conditions can cause a large variation in the future prediction, as already Poincaré put it when studying the three-body problem. %
+However, an experiment can only reveal a limited-precision state of the system. %
 %
-The former belief that all deterministic systems can be perfectly predicted using approximate knowledge turned out wrong for most systems \cite{bib:Motter2013}. %
+Chaos theory showed that a small variation of the initial conditions can cause a large variation in the future state, as already Poincaré put it when studying the three-body problem. %
 %
-Instead it was found that such unpredictable systems had to be studied much more in-depth to understand, when different initial conditions converge to the same solutions and what conditions lead to a variety of different outcomes. %
+The former belief that all deterministic systems can be perfectly predicted using approximate knowledge turned out false for most systems \cite{bib:Motter2013}. %
+%
+Instead it was found that such unpredictable systems had to be studied much more in-depth to understand; when different initial conditions converge to the same solutions, and what conditions lead to a variety of different outcomes. %
 %
 It is the property leading to the unpredictability, namely the sensitivity to the initial conditions, that can be used to produce a high variability of trajectories. %
 %
-In a chaotic system, the trajectories are guided by an infinite amount of unstable periodic orbits(UPOs), that in interaction with each other lead to the variability of trajectories. %
+In a chaotic system, the trajectories are guided by an infinite amount of unstable periodic orbits (UPOs), that, in interaction with each other, lead to the variability of trajectories. %
 %
-If it could be achieved through a chaotic system, different initial conditions and a third component to control the system, that the system would exhibit different periodic and chaotic trajectories, we could tune the system's output through evolutionary algorithms to show a desired solution trajectory to simplify the emergence of locomotion. %
+Using a chaotic system and a chaos control method together with an evolutionary algorithm, the evolutionary algorithm could tune the system's output to show a desired solution trajectory to simplify the emergence of robust locomotion. %
 %
 As it turns out, simple limiters, introduced in the next section, are a very natural way of influencing chaotic systems. %
 %
 Through their innate coupling with the chaotic system, because they express limitations in the state space in the same 'language' as the system and are hence elegant by simplicity, simple limiters could be the key to control the system into different trajectories for periodic and chaotic movement. %
 
-\subsection{Simple limiter control}
+\subsection{Simple Limiter Control}
 % rev. 1
 
-Simple limiter control, first introduced in the paper by Ned J. Corron et al. in 2000 \cite{bib:Corron2000}, is much different from other preceding chaos control strategies. %
+Simple limiter control, first introduced in the paper by Ned J. Corron et al. in 2000 \cite{bib:Corron2000}, is different from other preceding chaos control strategies. %
 %
 The OGY method described by Ott, Grebogi and Yorke \cite{bib:Ott1990}, one of the first chaos control methods at hand, states that small, wisely chosen perturbations applied to the system can stabilize a particular UPO. %
 %
-The perturbation much be applied once per cycle, but the chaotic system must be intensively studied through an appropriate Poincaré section, to understand what the precise perturbation must be. %
+The perturbation must be applied once per cycle, but the chaotic system must be intensively studied through an appropriate Poincaré section to understand what the precise perturbation must be. %
 %
-The time to measure, generate and apply a control signal called the latency of the OGY method is another limitation that allows only for a certain range of frequency control. %
+The time to measure, generate and apply a control signal, called the latency of the OGY method, is another limitation that allows only for a certain range of frequency control. %
 %
 The simple limiter control method is much more simple. A limiter expresses a limitation in the state space of the chaotic system and thereby suppresses certain periodic orbits. %
 %
-These periodic orbits can not be reached any more by the state, the trajectories can never contain it. %
 %
-However, interesting is that through the limiter we can in fact stabilize the remaining, reachable periodic orbits. %
+Interestingly, however, the remaining reachable periodic orbits are being stabilized. %
 %
 The seemingly unpredictable trajectory always deterministically switches at the same point to the same periodic orbits in the phase space. %
 %
-Using the simple limiter, we prevent the switching at some specified point and leave the system state no other choice than to stay on its current orbit, and to repeat its trajectory, and hence is stabilized on a trajectory of a certain periodicity. %
+Using the simple limiter, the switching can be prevented at some specified point and leave the system state no other choice than to stay on its current orbit and to repeat its trajectory, and hence the state is stabilized on a trajectory of a certain periodicity. %
 %
 In 2001, Wagner and Stoop showed that the optimal simple limiter control ranges for different limit cycles can be found using the derivative of the system \cite{bib:Wagner2001}. %
 %
 In a natural system such as the actuated leg joint, this limiter can be much more subliminal, be it the weight or dimensions of the limbs or the limits, damping or friction of the joints, or even the fact that two physical objects can not interpenetrate each other. %
 %
-The goal of the thesis is to use evolutionary algorithms and the above mentioned, chaotic control system to evolve creatures in a rigid-body engine and find examples showing basic locomotion abilities that emerge in the interaction with the ground.
+The goal of this thesis is to use evolutionary algorithms and the above mentioned, chaotic control system to evolve creatures in a rigid-body engine and find examples showing basic locomotion abilities that emerge in the interaction with the ground.
 
 
 \end{document}

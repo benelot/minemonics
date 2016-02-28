@@ -15,7 +15,7 @@
 
 \lhead{Chapter \thechapter. \emph{Controllers}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-\section{Adaptive controllers for locomotion}
+\section{Adaptive Controllers for Locomotion}
 %% rev. 4
 
 In this chapter, two different types of controllers, one non-adaptive sinusoidally oscillating controller and one adaptive chaotic controller are examined. %
@@ -29,7 +29,7 @@ Finally the purpose of the chaotic controller will be described
 %The hypothesis already mentioned in the introduction is that multiple uncoupled or nearly uncoordinated controllers of different limbs can generate complex, robust and versatile locomotion patterns just by featuring periodic, adaptive control signals if they are constrained and coupled through the interaction with the ground. %
 %
 %This would be a counterexample to the hypothesis that only very complex controllers can generate complex gaits. %
-\section{Uncoupled sinusoidal oscillators}
+\section{Uncoupled Sinusoidal Oscillators}
 \label{sec:sinusoidal-oscillators}
 % rev. 1
 
@@ -53,7 +53,7 @@ The controller however is non-adaptive within an individual evaluation, therefor
 %
 A solution is therefore only adapted by evolution to the task it was trained for and might not be suitable for a similar task.
 
-\section{Chaotic controllers}
+\section{Chaotic Controllers}
 \label{sec:chaotic-controllers}
 % rev. 2
 
@@ -73,7 +73,7 @@ The trajectory can however be influenced using a chaos control method called sim
 %
 We will therefore first introduce chaotic systems and then experiment with simple limiter control on a chaotic system called the Chua circuit.
 
-\subsection{Chaotic systems}
+\subsection{Chaotic Systems}
 \label{subsec:chaotic-systems}
 % rev. 3
 
@@ -171,7 +171,7 @@ The goal is to show that using simple limiters to control an arbitrary chaotic s
 %
 The change of the terrain representing a change of the simple limiters can lead to a change in periodic movement, thereby adaption to different environments occurs. 
 
-\subsubsection{Simple limiter control in Mathematica}
+\subsubsection{Simple Limiter Control in Mathematica}
 \label{subsubsec:simple-limiter-mathematica}
 %rev. 1
 
@@ -217,7 +217,7 @@ y &\in [-0.380467,0.386978]\\
 z &\in [-3.59156,3.62959]
 \end{align*}
 
-\paragraph{One dimension limiting another}
+\paragraph{One Dimension Limiting Another}
 
 In the first experiment, we start with \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
 
@@ -356,7 +356,7 @@ The plots below show the periodic trajectories for various limit values. The con
 \label{figure:z-0.5-1-limit-cycle-trajectory}
 \end{figure}
 
-\paragraph{One dimension limiting itself} In the second experiment, we start again with \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
+\paragraph{One Dimension Limiting Itself} In the second experiment, we start again with \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
 
 \begin{align*}
 \frac{dx}{dt}&=\alpha (y-x-f(x)) ~ \text{softLim}(x)\\
@@ -652,24 +652,25 @@ Then we can suppress the movement entirely. %
 %
 The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4[\), but the radius of the spiral gets so small that we reach the maximum precision of mathematica with limiter values \(<-4\).
 
-\subsection{Chaotic chua circuit controller}
+\subsection{Chaotic Chua Circuit Controller}
+% rev. 3
 
-The Chaotic controller that will be used control a single DoF in a joint of a creature is driven internally by the Chua circuit examined above. %
+The chaotic controller used control a single DoF in a joint of a creature is driven internally by the Chua circuit examined above. %
 %
-The chua circuit's parameters will be kept constant to keep the parameter search for evolution small, because there exist many parameter conditions that do not lead to a chaotic ground state. %
+The Chua circuit's parameters are kept constant to keep the parameter search for evolution small, because there exist many parameter conditions that do not lead to a chaotic ground state. %
 %
-Instead, the initial conditions will be chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step will be chosen randomly within \(\text{\textit{integration step}} \in [0.001,10]\). %
+Only the initial conditions are chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step is chosen randomly within \(\text{\textit{integration step}} \in [0.001,10]\). %
 %
-The real integration step however will always be kept constant at \(\text{\textit{integration base}} = 0.0005\). %
+The base integration step however is kept constant at \(\text{\textit{integration base}} = 0.0005\). %
 %
-The integration step is then performed by calculating smaller sub-steps of size \textit{integration base} until a small, residual integration step is left to calculate. %
+The integration step is then performed by calculating small sub-steps of size of the \textit{base integration step} until a smaller, residual integration step is left to calculate. %
 %
-Thereby, we perform variable integration speeds, but keep that integration base step constant. %
+Thereby, we perform variable size integration speeds, but keep the actual base integration step constant. %
 %
 The numerical integration is again performed using a Runge-Kutta order 6 integration scheme run in real-time. %
 %
-However in the creature's controller, The simple limiter is not directly applied as in the experiment above, but it will be tested if the controller output can be limited by evolution on the basis of the joint, so that periodic motion can arise. %
+However in the creature's controller, the simple limiter is not directly applied as in the experiment above, but it will be tested if the controller output can be limited by the joint morphology, so that periodic motion emerges not in the controller, but in the joint. %
 %
-If this does not prove to be successful, a feedback to the chaotic system has to be implemented which limits it according to the current state of the controlled joint. %
+If this does not prove to be successful, a feedback to the chaotic system will be implemented which limits it according to the current state of the controlled joint. %
 
 \end{document}

@@ -12,11 +12,42 @@
 
 \lhead{Chapter \thechapter. \emph{Discussion and Outlook}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-\begin{enumerate}
-\item Evolutionary limiting of the controller
-\item Extinctions due to a change of the fitness landscape with epochs
-\end{enumerate}
+An artificial evolution simulator is developed to evolve virtual three dimensional creatures built from rigid-body primitives. %
+%
+Creatures were evolved using two different, distributed controller structures, a non-adaptive sinusoidal controller and a newly introduced adaptive chaotic system controller. %
+%
+The chaotic controller internally controls an underlying chaotic model system into chaotic and periodic trajectories using a variation of the simple limiter chaos control method. %
+%
+The simple limiter hereby is applied through a coupling with the controlled joint DoF by feeding the joint position and velocity output back into the chaotic controller, replacing the original state with the sensor values. %
+%
+Therefore, the chaotic controller faces a limiter if the joint faces an external limiter imposed through the environment. %
+%
+Limited by this external load, the chaotic system changes its internal dynamics to cope with the new load. %
+%
+The evolutionary algorithm in this context composes different creatures to find a morphology and appropriate internal control parameters which exploit the internal chaotic dynamics of the controller in such a way that together they show basic locomotion behavior. %
+%
+For both controllers, successful creatures could be evolved showing various ways to locomote. %
+%
+Most importantly, it could be shown that using an arbitrarily chosen chaotic system and a simple limiter varying its limitation of the state space depending on the external constraints from the environment, different adaptive locomotion patterns can arise, which are robust to external disturbances. %
+%
+For the adaptive chaotic controller, it could be shown that different leg dynamics are emerging depending on the external load of the environment. %
+%
+This could be shown in a hand-crafted model organism as well as in several evolved creatures, that showed different leg dynamics when lifted off the ground than when left on ground to locomote. %
+%
+However, no fitness function used in the experiments accounted for efficiency, therefore, some solutions considered fit do not perform an efficient locomotion gait. %
+%
+The simulation additionally has a general tendency to come up with very messy creature morphologies exploiting oscillations of large amplitude, which would require large amounts of energy to keep up the resulting locomotion. %
+%
+An improvement to address this issue would be that a creature had an amount of energy to spend proportional to its size or weight, so that a creature could not waste an excessive amount of energy on inefficient movements. 
 
-\todo[inline]{Give the Chapter 5 some meaningful content.}
+Another issue to address in the future would be the configuration of the limiter. %
+%
+The current simple limiter was evaluated experimentally to stabilize a periodic orbit, which is an indication that the limiter is applied to the system. %
+%
+This could be addressed by a less restricting application of the sensory feedback, such as that a higher limb velocity would reduce the size of the phase space of the chaotic system, so that dynamics of lower periodicity would arise. %
+%
+However, it is in question how to design the limiter because as soon as a certain intention is behind a certain configuration of the limiter, one builds a limiter into the chaotic system such that it shows the desired result. %
+%
+Therefore the choice of an appropriate limiter configuration is a particularly hard task.%
 
 \end{document}

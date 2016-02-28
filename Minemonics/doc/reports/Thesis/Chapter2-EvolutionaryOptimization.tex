@@ -36,7 +36,7 @@ Apart from the research interests, the simulator was made to be extensible for o
 %
 It is available open-source from its git repository on github \cite{bib:Minemonics2016}.
 
-\section{Basic components}
+\section{Basic Components}
 % rev. 1
 
 To understand the purpose of the simulation, it is important to first understand the different basic components of it. %
@@ -62,7 +62,7 @@ The type of evolutionary process instance defines how many creatures of the plan
 %
 Within the bounds of this Thesis, only single creature evaluation was performed. 
 
-\subsubsection{Planet physics}
+\subsubsection{Planet Physics}
 % rev. 3
 
 Each environment defines the type of planet physics simulation. %
@@ -330,7 +330,7 @@ The featherstone representation can not deal with circular structures \cite{bib:
 %
 This phenotype is very robust when it comes to hand-made as well as evolved phenotypes and therefore is much more suitable for evolving virtual creatures. 
 
-\subsubsection{Model organisms}
+\subsubsection{Model Organisms}
 
 The model organisms are hand-coded genotypes to be developed into creatures that have specific properties. %
 %
@@ -551,7 +551,7 @@ All other variational operators work on single elements of a single genome. %
 %
 The mutations modify specific aspects of the genome and are specifically made for the genomic structure.
 
-\paragraph{Gene specification mutation}
+\paragraph{Gene Specification Mutation}
 
 The gene specification mutation applied to a genome iterates over all its morphogene classes. %
 %
@@ -559,7 +559,7 @@ For each class, with probability $0.2$, the morphogene is reinitialized with ran
 %
 This affects all values except for the morphogene branches which stay unchanged.
 
-\paragraph{Gene split mutation}
+\paragraph{Gene Split Mutation}
 
 The gene split mutation applied to a genome iterates over all morphogene classes. %
 %
@@ -567,7 +567,7 @@ For each class, with probability $0.2$, the morphogene is split along the X, Y o
 %
 The morphogenes are then connected with a single branch representing a completely limited joint.
 
-\paragraph{Gene purge mutation}
+\paragraph{Gene Purge Mutation}
 
 The gene purge mutation applied to a genome purges a gene by mutating it. %
 %
@@ -575,13 +575,13 @@ Then it iterates over all other morphogenes and diactivates all morphogene branc
 %
 Thereby the gene belongs to the non-expressing part of the genome.
 
-\paragraph{Branch specification mutation}
+\paragraph{Branch Specification Mutation}
 
 The branch specification mutation applied to a genome iterates over all morphogene classes. %
 %
 For each class, with probability $0.2$, a random morphogene branch is chosen and is reinitialized with random values. 
 
-\paragraph{Grow stub gene mutation}
+\paragraph{Grow Stub Gene Mutation}
 
 The grow stub gene mutation applied to a genome iterates over all morphogene classes. %
 %
@@ -589,7 +589,7 @@ For each class, with probability $0.6$, $x$ new branches are added to the morpho
 %
 The branches reconnect the stub gene to others and therefore increase the interconnectivity of unconnected morphogene classes.
 
-\section{Evolutionary cycle}
+\section{Evolutionary Cycle}
 % rev. 1
 
 To describe how the different components play together, an evolutionary cycle of one planet with a flat plane environment and a population of 10 individuals is outlined. %
@@ -600,7 +600,7 @@ Before the cycle can begin, the planet and its environment is set up, the (infin
 %
 The population is not yet visible anywhere and awaits evaluation.
 
-\subsection{Evaluation step}
+\subsection{Evaluation Step}
 % rev. 2
 
 During the evaluation step, each individual is dropped into the simulation slightly above the ground for the selected evaluation period of usually 20 seconds. %
@@ -615,7 +615,7 @@ During the evaluation of the other creatures, the juries evaluate the performanc
 %
 If all evaluations are over, the evolution switches to the variation step.
 
-\subsection{Variation step}
+\subsection{Variation Step}
 % rev. 2
 
 During the variation step, the reaper picks up the population and culls the worst performing creatures. %
