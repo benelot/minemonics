@@ -60,7 +60,7 @@ Applying higher or lower amounts of joint torque increases or decreases the orbi
 %
 However, in all cases the joint converges to a proper periodic orbit.
 
-An issue confronted with during the simulation run was, that no fitness function used in the experiments accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
+An issue confronted with during the simulation run was that no fitness function used in the experiments accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
 %
 The simulation additionally has a general tendency to come up with very messy creature morphologies exploiting oscillations of large amplitude, which would require large amounts of energy to keep up the resulting locomotion. %
 %
@@ -72,8 +72,51 @@ The current simple limiter was evaluated experimentally to stabilize a periodic 
 %
 This could be addressed by a less restricting application of the sensory feedback, such as that a higher limb velocity would reduce the size of the phase space of the chaotic system, so that dynamics of lower periodicity would arise. %
 %
-However, it is in question how to design the limiter because as soon as a certain intention is behind a certain configuration of the limiter, one builds a limiter into the chaotic system such that it shows the desired result. %
+However, it is in question how to design the limiter, because as soon as a certain intention of desired outcome is behind a certain configuration of the limiter, one builds a limiter into the chaotic system such that it shows a specific, desired result. %
 %
-Therefore the choice of an appropriate limiter configuration is a particularly hard task.%
+Therefore the choice of an appropriate limiter configuration is a particularly hard task.
+
+A future experiment could be to actually measure the chaoticity of the controller and joint dynamics. %
+%
+Preliminary results suggest that the controller could be an intermittent system switching back and forth between chaotic and periodic phases. %
+%
+An experiment to measure the chaoticity would involve a successfully locomoting creature's controllers to be perturbed using a small perturbation. %
+%
+If the controller is stabilized on a periodic orbit, the trajectory then would be moved away by the perturbation, but finally converge back onto the limit cycle. %
+%
+However, if the controller is not stabilized, the trajectory would diverge exponentially from the original, unperturbed trajectory and never return. %
+%
+The divergence of convergence behavior could be measured using the Largest Lyapunov exponent, the mean rate of separation of trajectories, calculated with the following form adapted from \cite{bib:Rosenstein1993}:
+
+\begin{align*}
+x(t) = f^t(x_0)\\
+x(t) + \delta x(t) = f^t(x_0 + \delta x_0)\\
+\end{align*}
+
+To measure the sensitivity to the initial conditions, we can now calculate the evolution of the perturbance \(\delta x_0\) through the system:
+
+\[||\delta x(t)|| = \||\delta x_0|| e^{\mu t}\]
+
+The \(\mu\) in that case is also called the largest Lyapunov exponent (LLE).%
+%
+If \(\mu > 0\), then the trajectory diverges exponentially. %
+%
+A \(\mu = 0\) means, that the system is in a critical state, because its trajectories neither diverge nor converge. %
+%
+However, if \(\mu < 0\), it expresses the convergence of a trajectory to a stable point or orbit. %
+%
+The quantification would be done by plotting the Log divergence distance ratio:
+
+\[\log\left(\frac{||\delta x(t)||}{||\delta x_0||}\right) = \mu t\]
+%
+The LLE can then be found by fitting segments of the time evolution log plot of the of the trajectory differences. 
+
+The perturbation can be automatically performed using the simulator by enabling automatic perturbance. %
+%
+The preliminary results, suggesting that the chaotic controller is an intermittent system, raise the question at which point during the evaluation the perturbation should be applied. %
+%
+Given that the creature starts above ground and falls onto it first, the best guess would be to perturb the creature after it has stabilized on ground and begun to perform its locomotion gait. %
+%
+A perturbation before the collision with the ground might be swallowed by the larger perturbation of the collision, obfuscating the actual results. %
 
 \end{document}

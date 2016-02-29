@@ -25,9 +25,25 @@
     {\printfield{issn}}%
     {}%
   \newunit\newblock%
+  \addperiod
+  \mbox{\usebibmacro{pageref}}
+  \scriptsize
+  \usebibmacro{doi+eprint+url}
+  \usebibmacro{finentry}}
+  
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\labelnamepunct}\newblock%
+  \usebibmacro{title}%
   \addperiod%
-  \usebibmacro{doi+eprint+url}%
-  \usebibmacro{pageref}%
+  \newunit\newblock%
+  \usebibmacro{date}%
+  \addperiod
+  \mbox{\usebibmacro{pageref}}
+  \scriptsize
+  \usebibmacro{doi+eprint+url}
   \usebibmacro{finentry}}
   
 \DeclareBibliographyDriver{book}{%
@@ -226,7 +242,8 @@
   \printlist{organization}%
   \newunit%
   \usebibmacro{publisher+location+date}%
-  \addperiod%
+  \addperiod 
+  \mbox{\usebibmacro{pageref}}
   \newunit\newblock%
   \usebibmacro{chapter+pages}%
   \newunit\newblock%
@@ -234,11 +251,11 @@
     {\printfield{isbn}}%
     {}%
   \newunit\newblock%
+  \scriptsize
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
   \newunit\newblock%
-  \usebibmacro{pageref}%
   \usebibmacro{finentry}}
   
 \DeclareBibliographyDriver{manual}{%
