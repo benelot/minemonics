@@ -41,7 +41,7 @@
   \newunit\newblock%
   \usebibmacro{date}%
   \addperiod
-  \mbox{\usebibmacro{pageref}}
+  \mbox{ \usebibmacro{pageref}}
   \scriptsize
   \usebibmacro{doi+eprint+url}
   \usebibmacro{finentry}}
@@ -75,7 +75,8 @@
   \printfield{note}%
   \newunit\newblock%
   \usebibmacro{publisher+location+date}%
-  \addperiod%
+  \addperiod
+  \mbox{ \usebibmacro{pageref}}
   \newunit\newblock%
   \usebibmacro{chapter+pages}%
   \newunit%
@@ -85,11 +86,11 @@
     {\printfield{isbn}}%
     {}%
   \newunit\newblock%
+  \scriptsize
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
   \newunit\newblock%
-  \usebibmacro{pageref}%
   \usebibmacro{finentry}}
   
 \DeclareBibliographyDriver{booklet}{%
@@ -148,17 +149,18 @@
   \addperiod%
   \newunit%
   \usebibmacro{publisher+location+date}%
-  \addperiod%
+  \addperiod
+  \mbox{ \usebibmacro{pageref}}
   \newunit\newblock%
   \iftoggle{bbx:isbn}%
     {\printfield{isbn}}%
     {}%
   \newunit\newblock%
+  \scriptsize
   \usebibmacro{doi+eprint+url}%
   \newunit\newblock%
   \usebibmacro{addendum+pubstate}%
   \newunit\newblock%
-  \usebibmacro{pageref}%
   \usebibmacro{finentry}}
   
 \DeclareBibliographyDriver{incollection}{%
@@ -243,7 +245,7 @@
   \newunit%
   \usebibmacro{publisher+location+date}%
   \addperiod 
-  \mbox{\usebibmacro{pageref}}
+  \mbox{ \usebibmacro{pageref}}
   \newunit\newblock%
   \usebibmacro{chapter+pages}%
   \newunit\newblock%
@@ -327,6 +329,9 @@
   \addperiod%
   \newunit%
   \usebibmacro{pageref}%
+  \newunit%
+  \scriptsize
+  \usebibmacro{doi+eprint+url}%
   \usebibmacro{finentry}}
   
 % =========================== Redefined macroses ==============================
