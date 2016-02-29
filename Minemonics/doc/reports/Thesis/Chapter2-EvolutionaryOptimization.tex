@@ -402,7 +402,7 @@ It consists of differently configured joints and is mainly used to debug the Gen
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-ragdoll1.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-ragdoll2.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-ragdoll3.png}
-\caption[The ragdoll]{The ragdoll}
+\caption[The ragdoll]{The ragdoll model organism. Its joints are differently configured so that errors during debug time of the Embryogenesis are revealed.}
 \label{figure:ragdoll}
 \end{figure}
 
@@ -623,5 +623,28 @@ During the variation step, the reaper picks up the population and culls the wors
 Leaving a top percentage of creatures without variation (Elitism), it produces offspring by crossover based on them and an additional partner, then applies the mutations to the rest of the population according to list \ref{item:ReaperPerc}. %
 %
 Finally it replaces the remaining number of missing creatures with new, randomly generated creatures.
+
+\subsection{Simulator Specification}
+
+The simulator was developed in C++ using a Graphics Engine called Ogre3D \cite{bib:Ogre3D}, a GUI engine called CeGUI \cite{bib:CEGUI} and a Physics engine called Bullet Physics. %
+%
+Additionally, the boost library \cite{bib:Boost} was used to speed up the development of logging data and the creature serialization to disk. %
+%
+The simulator features a rich interface which can be manipulated using the mouse and the keyboard. Using the graphical interface's menu, a new planet can be configured and instantiated, then a population can be configured and added to it. %
+%
+Furthermore, the gravity of the current planet can be changed to different predefined values. %
+%
+During the evaluation, the evaluation speed can be changed and the simulator can be run in headless mode, meaning that the graphical output is omitted to speed up the simulation. %
+%
+Moreover, the user can move within the simulated space to look at the creature from different angles and can manipulate the creature using the mouse. %
+%
+To observe the current controller and joint dynamics, a window with two graphs can be opened, plotting 50 time steps of the internal states in real-time.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{simulator2.png}
+\caption[The simulator interface]{The figure shows the interface of the simulator featuring a creature in evaluation. On the right-hand side, the window showing the internal graph state can be seen.}
+\label{figure:simulator}
+\end{figure}
 
 \end{document}

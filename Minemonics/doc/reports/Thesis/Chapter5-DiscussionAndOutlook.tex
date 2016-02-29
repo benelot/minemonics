@@ -11,10 +11,28 @@
 \label{Chapter\thechapter} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 \lhead{Chapter \thechapter. \emph{Discussion and Outlook}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
-
+%
 An artificial evolution simulator is developed to evolve virtual three dimensional creatures built from rigid-body primitives. %
 %
+The simulator features the evaluation of one or multiple populations in different environmental and evolutional settings. %
+%
+Different fitness functions can be combined with weights and the fitness landscape can be changed during the evolutionary run. %
+%
+The simulations can be stopped and continued later with little effort. %
+%
+The creatures can be manipulated during their evaluation and their internal controller and joint dynamics can be observed in real-time. %
+%
+The interface features various possibilities to log the data to file, so that further processing of the data is simplified. 
+
 Creatures were evolved using two different, distributed controller structures, a non-adaptive sinusoidal controller and a newly introduced adaptive chaotic system controller. %
+%
+In order to develop the chaotic controller, it was necessary to understand the dynamics to be expected when limiting a chaotic system with the limiter chaos control method. %
+%
+Therefore, the findings of the simple limiter chaos control method introduced in \cite{bib:Corron2000} with the example model of the Chua circuit \cite{bib:Matsumoto1985} were confirmed and extended by the use of a tunable soft-limiter. %
+%
+Additionally, two different limiter configurations and their range of different periodic orbits were analyzed. %
+%
+It was found that a soft-limiter expands the size of each range of periodic orbit and therefore makes it easier to achieve a stable orbit. %
 %
 The chaotic controller internally controls an underlying chaotic model system into chaotic and periodic trajectories using a variation of the simple limiter chaos control method. %
 %
@@ -32,9 +50,17 @@ Most importantly, it could be shown that using an arbitrarily chosen chaotic sys
 %
 For the adaptive chaotic controller, it could be shown that different leg dynamics are emerging depending on the external load of the environment. %
 %
-This could be shown in a hand-crafted model organism as well as in several evolved creatures, that showed different leg dynamics when lifted off the ground than when left on ground to locomote. %
+This could be shown in a hand-made model organism as well as in several evolved creatures, that showed different leg dynamics when lifted off the ground than when left on ground to locomote. %
 %
-However, no fitness function used in the experiments accounted for efficiency, therefore, some solutions considered fit do not perform an efficient locomotion gait. %
+In experiments with the hand-made model leg, featuring one single joint connecting two limbs, different periodic orbits could be stabilized. %
+%
+The influence of different morphological parameters could be observed. %
+%
+Applying higher or lower amounts of joint torque increases or decreases the orbit diameter respectively, damping leads to a sub-manifold of the orbit. %
+%
+However, in all cases the joint converges to a proper periodic orbit.
+
+An issue confronted with during the simulation run was, that no fitness function used in the experiments accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
 %
 The simulation additionally has a general tendency to come up with very messy creature morphologies exploiting oscillations of large amplitude, which would require large amounts of energy to keep up the resulting locomotion. %
 %
