@@ -24,7 +24,7 @@ In the first experimental setting, the sinusoidal controller as described in \re
 %
 A population of 100 creatures was set up with an average velocity fitness function and a minimal height fitness function. %
 %
-The latter was chosen because the simulator had issues in the physical model setup that led to creatures able to fly due to imaginary forces (as described in \ref{subsec:populations}). %
+The latter was chosen because the simulator had issues in the physical model setup that led to creatures with the ability to fly due to imaginary forces (as described in \ref{subsec:populations}). %
 %
 The minimal height fitness function punished those creatures that reached a high average height, which is the case for creatures that are flying. %
 %
@@ -76,7 +76,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 \label{figure:successfulcreatures-walker2}
 \end{figure}
 
-Creatures that exhibit successful locomotion seem to share a common ancestor, that was the first who evolved a successful walking pattern, since all of them share a similar magenta skin coloring. %
+Creatures that exhibit successful locomotion seem to share a common ancestor, which might have been the first creature to evolve a successful walking pattern, since all of its offspring share a similar magenta skin coloring. %
 %
 Since the skin color is randomly set for one limb, the common ancestor could only have had all the same color and must have been replicated using crossover. %
 %
@@ -86,18 +86,14 @@ This process involves no mutations, therefore the crossover must have happened m
 %
 The elitism mechanism of the evolutionary process, passing the most successful creatures directly to the next generation, kept the first successful creature, that then generated an onset of an avalanche of successful creatures, flooding the population with very similar solutions. 
 
-The major drawback of the sinusoidal oscillator controller is that they do not show any adaption during the evaluation depending on the environment as it was expected. %
+The major drawback of the sinusoidal oscillator controller is that they do not show any adaption during the evaluation depending on the environment. %
 %
 The only way for the controller to adapt is on the evolutionary time-scale through mutation, which does not result in an advantage for the individual in its current evaluation, but only helps a future generation of the individual to eventually converge to a new, applicable solution. 
 
 \section{Simple Limiter Control in the Simulator}
 % rev. 3
 
-The second type of controller is the counter-part to the fixed oscillatory motion scheme of the sinusoidal controller. %
-%
-It could fix the inability to adapt to environmental disturbances. %
-%
-The controller using an underlying chaotic system is a marvellous source of periodic patterns of motion due to its infinite number of unstable periodic orbits. %
+The chaotic controller, introduced in the previous chapter, which uses an underlying chaotic system, is a marvellous source of periodic patterns of motion due to its infinite number of unstable periodic orbits. %
 %
 If a creature could use simple limiter control to stabilize UPOs and exploit the periodic orbits for locomotion patterns, this could lead to a more robust and adaptive way of motion. %
 %
@@ -114,7 +110,7 @@ Therefore the first experiments were run using chaotic controllers without direc
 The second experiments then used sensory feedback to impose limiters on the chaotic controller. 
 
 \subsection{Indirect Limiter Control through the Morphology}
-% rev. 2
+% rev. 3
 
 The first experiments uses chaotic controllers without direct limiters. %
 %
@@ -122,7 +118,7 @@ The controllers start with different initial conditions and different integratio
 %
 Therefore the chaotic trajectories emitted from the controllers are only limited through the morphology. %
 %
-The experiment conducted was run using 4 different settings in terms of evaluation time and number of creatures in the population. %
+The conducted experiment was run using 4 different evolutionary settings in terms of evaluation time and number of creatures in the population. %
 %
 However, the desired limiter control exhibiting periodic or quasi-periodic motion could not be observed in any of the creatures. %
 %
@@ -130,7 +126,7 @@ This could be explained due to the lacking feedback from the limb to the chaotic
 %
 That is why the chaotic system runs completely uninfluenced and is independent of the limb being limited in its movement. %
 %
-Therefore it was necessary to implement sensory feedback of the respective controlled joint so that the limits of the morphology would impose limiters on the chaotic controller. as described in the next section.
+Therefore it was necessary to implement sensory feedback of the respective, controlled joint so that the limits of the morphology would impose limiters on the chaotic controller.
 
 \subsection{Direct Limiter Control through Sensory Feedback}
 % rev. 2
@@ -143,20 +139,20 @@ In this experiment, the controller is limited using the position sensor and the 
 %
 As outlined below, the following limiter configuration was found experimentally: Before every integration step, the controller state \(x(t)\) is replaced by the position sensor output and the controller state \(y(t)\) is replaced by the velocity sensor output. %
 %
-The limiter system imposes limiters on two of the three dimensions in the situation where the limb motion itself is limited due to collision with ground or other limbs. %
+The limiter system imposes limiters on two of the three dimensions in the situation where the limb motion itself is limited due to a collision with ground or other limbs. %
 %
 In case of a collision, the joint velocity of the DoF drops and the position comes to a halt. %
 %
 This limits the chaotic controller in two different ways, and it is in question what trajectories will be generated by the system. %
 %
-The limiter setup is then used to observe the influence of gravity, friction and damping on the chaotic system. %
+The limiter setup used in a model organism is then used to observe the influence of gravity, friction and damping on the chaotic system. %
 %
 If it is found to be experimentally successful and the trajectories exhibit periodic or quasi-periodic movement or interleaving periodic-chaotic sequences different from the usual intrinsic chaotic motion of the underlying chaotic system, it will be used in evolutionary settings to evolve creatures controlled with it.
 
 \subsubsection{Limiting the Model Leg in the Simulator}
 \label{subsubsec:limiting-the-model-leg}
 
-First, the different limiter configurations were tested on the model leg running all configurations with z(t) as a torque output. %
+First, the different limiter configurations with z(t) as a torque output were tested on the model leg. %
 %
 The model leg is positioned slightly above the ground, so that if starting with zero gravity, the limb floats and moves freely without touching the ground. %
 %
@@ -188,7 +184,7 @@ The following plots always show the phase space of the chaotic controller on the
 	\label{figure:unlimited-model-leg}
 \end{figure}
 
-For the next plot, we limit the dimension x with the position sensor, while leaving the dimension y without limitation.
+For the next plot, the dimension x is limited with the position sensor, while leaving the dimension y without limitation.
 
 \begin{figure}[H]
 	\centering
@@ -219,7 +215,7 @@ When switching the limited dimension from x to y, the following strange trajecto
 	\begin{subfigure}[c]{0.45\textwidth}
 	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-(x)pyz-0g-force-0-00007-damping-0-joint.png}
 		\end{subfigure}
-	\caption[Joint position \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{In the chaotic controller, we can observe an outward spiral, which indicates that the joint position limiting the y dimension turns the original attractor into a repeller.}
+	\caption[Joint position \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{In the chaotic controller, one can observe an outward spiral, which indicates that the joint position limiting the y dimension turns the original attractor into a repeller.}
 	\begin{tabular}{l|ll}
 	\hline 
 	Gravity: 0g  & Sensors: & Joint position \(\rightarrow\) y(t)\\
@@ -231,7 +227,7 @@ When switching the limited dimension from x to y, the following strange trajecto
 	\label{figure:limited-model-leg2}
 \end{figure}
 
-If the same dimensions are limited by the velocity sensor instead of the position sensor, we get the following behavior.
+If the same dimensions are limited by the velocity sensor instead of the position sensor, a behavior as shown in figure \ref{figure:limited-model-leg3} can be observed.
 
 \begin{figure}[H]
 	\centering
@@ -252,6 +248,8 @@ If the same dimensions are limited by the velocity sensor instead of the positio
 	\label{figure:limited-model-leg3}
 \end{figure}
 
+If the joint velocity limits y(t) instead of x(t), the trajectory shows convergence to a limit cycle.
+
 \begin{figure}[H]
 	\centering
 \begin{subfigure}[c]{0.45\textwidth}
@@ -260,7 +258,7 @@ If the same dimensions are limited by the velocity sensor instead of the positio
 	\begin{subfigure}[c]{0.45\textwidth}
 	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-(x)vyz-0g-force-0-00007-damping-0-joint.png}
 		\end{subfigure}
-	\caption[Joint Velocity \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{The behavior changes abruptly to a very symmetrical outward spiral which approaches a limit cycle of periodicity 1 at the outer bounds. This behavior can be explained by the fact that in the Chua equations, a simple negative feedback cycle is constructed. If the velocity increases into the positive direction, z(t) gets driven into the negative direction, therefore a torque pointing into the opposite direction is applied. Additionally a descent down into the plane of the periodic orbit can be observed.}
+	\caption[Joint Velocity \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{The trajectory performs symmetrical outward spiral which approaches a limit cycle of periodicity 1 at the outer bounds. This behavior can be explained by the fact that in the Chua equations, a simple negative feedback cycle is constructed. If the velocity increases into the positive direction, z(t) gets driven into the negative direction, therefore a torque pointing into the opposite direction is applied. Additionally a descent down into the plane of the periodic orbit can be observed.}
 	\begin{tabular}{l|ll}
 	\hline 
 	Gravity: 0g  & Sensors: & Joint Velocity \(\rightarrow\) y(t)\\
@@ -272,7 +270,7 @@ If the same dimensions are limited by the velocity sensor instead of the positio
 	\label{figure:limited-model-leg4}
 \end{figure}
 
-If two successful limiters get combined, namely the Joint position \(\rightarrow\) x(t) resulting in a strange limit cycle and Joint Velocity \(\rightarrow\) y(t) resulting in a smoother limit cycle,  the resulting limit cycle looks as follows.
+If two successful limiters get combined, namely the Joint position \(\rightarrow\) x(t) resulting in a strange limit cycle and Joint Velocity \(\rightarrow\) y(t) resulting in a smoother limit cycle, the resulting limit cycle looks as follows.
 
 \begin{figure}[H]
 	\centering
@@ -316,11 +314,11 @@ However the combination of non-stabilizing limiters does not stabilize any unsta
 	\label{figure:limited-model-leg6}
 \end{figure}
 
-We choose the configuration where we limit the x dimension with the position sensor and the y dimension with the velocity sensor. %
+The configuration where the x dimension is limited with the position sensor and the y dimension is limited with the velocity sensor is chosen for further examination. %
 %
-Based on this configuration, the model leg with different joint torques, friction and damping coefficients was tested to observe the resulting change in controller and joint dynamics. %
+Based on this configuration, the model leg with different joint torques, friction and damping coefficients was simulated to observe the resulting change in controller and joint dynamics. %
 %
-In the following plots, we show different influencing factors on the limit cycle:
+In the following plots, different influencing factors on the limit cycle are shown:
 
 \paragraph{Interaction with Ground} The ground imposes a very hard limiter onto the creature. %
 %
@@ -328,7 +326,7 @@ The movement of the creature gets instantly stopped, whereas the ground has infi
 %
 In some cases, the ground should therefore directly act as a very hard limiter onto the chaotic circuit, controlling the chaotic movement into low periods and orbits of smaller diameter as in the experiments performed in the section \ref{subsubsec:simple-limiter-mathematica}. 
 %
-The model leg is dropped onto a frictionless ground. 
+In the first setting, the model leg is dropped onto a frictionless ground. 
 \begin{figure}[H]
 	\centering
 		\begin{subfigure}[c]{0.45\textwidth}
@@ -377,13 +375,13 @@ The collision causes first a drop in velocity and at the same time stops the dis
 %
 In the plot \ref{figure:limited-damped-model-leg-collision1}, the collisions only cause a light displacement since the ground is frictionless, therefore the controller can converge onto the outer limit cycle. %
 %
-In the plot \ref{figure:limited-damped-model-leg-collision2}, where we add friction to the creature and ground, the controller can no longer converge to the outer limit cycle, but it stays on several smaller limit cycles until the morphology finally gets trapped and can not move anymore. %
+In the plot \ref{figure:limited-damped-model-leg-collision2}, where  friction to the creature and ground is added, the controller can no longer converge to the outer limit cycle, but it stays on several smaller limit cycles until the morphology finally gets trapped and can not move any more. %
 %
 Both plots show how the controller can be robust or sensitive to limiters imposed by the environment.
 
 \paragraph{Influence of Damping} Damping is an indirect soft limiter applied to the physical joint system of the simple form: \(F_{damping} = c \cdot \dot{x} = c \cdot v\). %
 %
-However, since the joint space is coupled to the chaotic controller space through the sensors, we can also observe the influence of the damper onto the controller.
+However, since the joint space is coupled to the chaotic controller space through the sensors, one can also observe the influence of the damper onto the controller.
 
 \begin{figure}[H]
 	\centering
@@ -469,11 +467,11 @@ If more torque and more damping is applied, a higher convergence speed can be ob
 	\label{figure:limited-damped-model-leg-damping4}
 \end{figure}
 
-Conclusively, the damping of the system leads to sub-manifolds of the original system's manifold, the trajectory however still converges to a limit cycle get, even when we apply more force and more damping.
+Conclusively, the damping of the system leads to sub-manifolds of the original system's manifold, the trajectory, however, still converges to a limit cycle, even if more force and more damping is applied.
 
-\paragraph{Influence of the X Dimension Limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), we know that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. %
+\paragraph{Influence of the X Dimension Limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), it is known that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. %
 %
-We can now observe the influence of the x dimension limiter when we remove it from the system. In this case, the initial conditions were set to \([0,0,0]\) to observe the complete trajectory.
+One can now observe the influence of the x dimension limiter when it is removed from the system. In this case, the initial conditions were set to \([0,0,0]\) to observe the complete trajectory.
 
 \begin{figure}[H]
 	\centering
@@ -495,9 +493,9 @@ We can now observe the influence of the x dimension limiter when we remove it fr
 	\label{figure:limited-damped-model-leg8}
 \end{figure}
 
-We can observe how the system gets one of its degrees of freedom back, showing some of its internal dynamics. However, the original convergence behavior still occurs.
+If the system gets one of its degrees of freedom back, it shows some of its internal dynamics. However, the original convergence behavior still occurs.
 
-In conclusion it can be said that the stronger a chaotic system is limited through output from another dynamical system, the more it exhibits similar patterns as the dynamical system it is limited by. Since in these experiments the Chua circuit is under a constant limiter from the joint dynamics, it can only emit a limited range of mostly periodic trajectories.
+In conclusion it can be said that the stronger a chaotic system is limited through the output from another dynamical system, the more it exhibits similar patterns as the dynamical system it is limited by. Since in these experiments the Chua circuit is under a constant limiter from the joint dynamics, it can only emit a limited range of mostly periodic trajectories.
 
 \subsubsection{Evolved Creatures with Direct Limiter Control}
 \label{subsec:Evolved-lim-creatures}
@@ -510,13 +508,13 @@ Each setting has 100 individuals in one population, each with the same average v
 %
 This setup was chosen through the single fitness function in a very liberal way, so that different creatures could evolve their own dynamics, because so many locomotion solutions are possible to be evolved. %
 %
-The simulators were run on a quad-core processor system, so the multiple simulators were exploiting the multiple cores much better than a single simulator could. %
+The simulators were run on a quad-core processor system, so the multiple simulators exploited the multiple cores much better than a single simulator could. %
 %
 The experiment using the direct limiter controller chaotic controller sounded much more promising, since the controller stayed in a quasi-periodic motion for all the time for almost all the model leg setups. %
 %
 Its output seemingly could be easily compared to the sinusoidal controllers. %
 %
-This assumption turned out to be quite false in practice, because when integrated into random morphologies by the evolutionary algorithm, the controller exhibits periodic motion at some point when limited appropriately. %
+This assumption turns out to be quite false in practice, because when integrated into random morphologies by the evolutionary algorithm, the controller exhibits periodic motion at some point when limited appropriately. %
 %
 But in other cases, the controllers switches to a different periodic or non-periodic trajectory when influenced by the environment. %
 % 
@@ -525,7 +523,7 @@ Thus, a controller might sometimes stabilize a periodic orbit at one point, but 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{results/evolved-creatures/chaotic/chaotic-periodic-switching.png}
-\caption[Chaotic-periodic phase switching]{The plot of the controller phase space showing a trajectory containing interweaving chaotic and periodic phases.}
+\caption[Chaotic-periodic phase switching]{A plot of the controller phase space showing a trajectory containing interweaving chaotic and periodic phases.}
 \label{figure:z-2.4-3.19-chaotictrajectories}
 \end{figure}
 
@@ -537,33 +535,45 @@ The fitness function of average velocity totally leaves it up to the individual,
 %
 Evolutionary algorithms are very exploitive, meaning that the evolved solutions easily exploit everything they can find to satisfy the fitness functions. %
 %
-The strength of the evolutionary algorithm, its versatility to find solutions, turns into a very messy task for the experimenter. %
+However, the strength of the evolutionary algorithm, its versatility to find solutions, turns in this case into a very messy task for the experimenter. %
 %
-For higher order tasks such as locomotion, this means that one has to come up with a simple but precise description of the solution space using fitness functions. %
+For higher order tasks such as locomotion, it means that one has to come up with a simple but precise description of the solution space using fitness functions. %
 %
 The definition must be general enough to accept a variety of solutions, but must be precise enough to accept only the desired solutions. %
 %
-What sounds easy for simple tasks, is not very easy for more complex tasks. The question of what locomotion actually is arises. %
+What sounds easy for simple tasks, is not very easy for more complex tasks. %
+%
+One might argue here that the question here is really what locomotion actually is. %
+%
+When defined as being an action causing directed movement, then nearly everything is allowed to be evolved. %
+%
+On the other end, restricting locomotion to limbs being moved in coordination to form complex oscillatory gaits, then only very few solutions fit the description. %
+%
+In this thesis, the definition was kept very loose, so that most solutions involving oscillatory actions causing directed movement can be considered locomotion. %
+%
+Therefore, the first simulations were started with the average velocity fitness function only. %
 %
 After 500 generations of simulated evolution, the simulators were stopped and the evolved creatures were examined. %
 %
 The definition was not at all sufficient to evolve locomoting creatures. %
 %
-Some of them were moving, however evolved into larger balls with many legs, so that the oscillatory movement caused the structure to roll. %
+Some of them were moving, but evolved into larger balls with many legs, so that the oscillatory movement caused the structure to roll. %
 %
-Some of them even just exploited the fact that growing tall and falling over. %
+Some of them even just exploited the fact that growing tall and falling over causes them to slide a certain distance, resulting in a substantial average velocity. %
 %
 Because the results were not desirable, the experiment was redesigned to cope with the definition problem. %
 %
-The simulator was stopped and the evolved creatures were examined. %
+The definition was changed multiple times after examining the evolved creatures. %
 %
-As long as the creatures showed hints to converge onto the desired behavior, the simulation was continued without changes, otherwise, the definition had to be changed. %
+As long as the creatures showed hints to converge onto the desired behavior, the simulation was continued without changes, otherwise, the definition was changed again. %
 %
 The best results were achieved using a stronger restriction on the solutions, which was a combination of the average velocity fitness function and a minimal contact point quantity fitness function. %
 %
 The minimal contact point quantity fitness function reduced the the number of feet a creature develops, therefore a clearer locomotion pattern had to emerge. %
 %
-In the following figure, one of these evolved creatures is shown.
+In the following figures, three of these evolved creatures are shown.
+
+The first creature is a walker. It has two large feet, of which it always moves one forward while using the other as a stabilization. 
 
 \begin{figure}[H]
 \centering
@@ -573,28 +583,18 @@ In the following figure, one of these evolved creatures is shown.
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/069.png}
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/116.png}
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/120.png}
-\caption[Figure of a walker using chaotic controllers.]{Figure of a walker using the chaotic controllers. It has two large feet it stands on, which push the body forward. In the front of the creature there is a stabilizing block that in certain cases touches the ground if the creature tips during its gait.}
+\caption[Figure of a walker using chaotic controllers.]{A figure of a walker featuring 4 chaotic controllers and 4 joints. It has two large feet it stands on, which push the body forward. In the front of the creature there is a stabilizing block that in certain cases touches the ground if the creature tips during its gait.}
 \label{figure:successfulcreatures-chaotic-walker1}
 \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/140.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/143.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/149.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/163.png}
-\caption[Figure of a crawler using chaotic controllers.]{Figure of a crawler using the chaotic controllers. The crawler has a tail and two arms looking to the left and right from the head, and moves forward using a snake-like locomotion gait.}
-\label{figure:successfulcreatures-chaotic-crawler1}
-\end{figure}
-
-The creature features quasi-periodic orbits if the limbs are not limited by the ground. %
+The first creature features quasi-periodic orbits if the limbs are not limited by the ground. %
 %
 The quasi periodicity can be explained by the interdynamics generated by the different limbs moving simultaneously, therefore no single limb can follow a proper limit cycle. %
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/limitless-dynamics.png}
-\caption[Off ground controller dynamics]{Dynamics of a chaotic controller if the creature is off ground.}
+\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/walker1/limitless-dynamics.png}
+\caption[Off ground controller dynamics of the walker]{Dynamics of a chaotic controller if the walker is off ground.}
 \label{figure:walker1-off-ground-controller-dynamics}
 \end{figure}
 
@@ -602,8 +602,8 @@ The same controller features chaotic and quasi-periodic dynamics if limited by t
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/limited-dynamics.png}
-\caption[On ground controller dynamics]{Dynamics of a chaotic controller if the creature is on ground.}
+\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/walker1/limited-dynamics.png}
+\caption[On ground controller dynamics of the walker]{Dynamics of a chaotic controller if the walker is on ground.}
 \label{figure:walker1-on-ground-controller-dynamics}
 \end{figure}
 
@@ -611,4 +611,69 @@ This behavior can be explained because the gait of the creature always traps one
 %
 This leads to a chaotic trajectory in the controller when the leg is completely trapped, and to a periodic trajectory when untrapped. %
 
+The second creature is a crawler. It moves on ground using a gait similar to a snake by oscillating its tail.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/140.png}
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/143.png}
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/149.png}
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/163.png}
+\caption[Figure of a crawler using chaotic controllers.]{Figure of a crawler featuring 10 chaotic controllers and 10 joints. The crawler has a tail and two arms looking to the left and right from the head, and moves forward using a snake-like locomotion gait.}
+\label{figure:successfulcreatures-chaotic-crawler1}
+\end{figure}
+
+When off ground, the controllers of the creature show a chaotic oscillation behavior. %
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/crawler1/limitless-dynamics-2.png}
+\caption[Off ground controller dynamics of the crawler]{Dynamics of a chaotic controller if the crawler is off ground.}
+\label{figure:crawler1-off-ground-controller-dynamics}
+\end{figure}
+
+The same controller features a different kind of chaotic behavior when on ground. %
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/crawler1/limited-dynamics-2.png}
+\caption[On ground controller dynamics of the crawler]{Dynamics of a chaotic controller if the crawler is on ground.}
+\label{figure:crawler1-on-ground-controller-dynamics}
+\end{figure}
+
+The third creature is a jumper. It moves on ground by moving its limb so that its body moves slightly forward.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/457.png}
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/542.png}
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/645.png}
+\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/685.png}
+\caption[Figure of a jumper using chaotic controllers.]{Figure of a crawler featuring 10 chaotic controllers and 10 joints. The jumper has several legs it uses to accumulate momentum in order to jump forward.}
+\label{figure:successfulcreatures-chaotic-crawler1}
+\end{figure} 
+
+When off ground, the controllers of the creature show a chaotic oscillation behavior. %
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/jumper1/c4-off-ground.png}
+\caption[Off ground controller dynamics of the crawler]{Dynamics of a chaotic controller if the jumper is off ground.}
+\label{figure:crawler1-off-ground-controller-dynamics}
+\end{figure}
+
+The same controller features a limit cycle which seems to be limited in the lower right corner of the plot when on ground. %
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{results/evolved-creatures/chaotic/jumper1/c4-on-ground.png}
+\caption[On ground controller dynamics of the crawler]{Dynamics of a chaotic controller if the jumper is on ground.}
+\label{figure:crawler1-on-ground-controller-dynamics}
+\end{figure}
+
+All three creatures show adaptive behavior depending on whether they are on ground or off ground. %
+%
+The ground influences the behavior of the controller, however, it does not stabilize a chaotic trajectory as in the simple limiter model. %
+%
+But the ground seems not to act like a simple limiter in all creatures. %
 \end{document}

@@ -22,9 +22,9 @@ The simulations can be stopped and continued later with little effort. %
 %
 The creatures can be manipulated during their evaluation and their internal controller and joint dynamics can be observed in real-time. %
 %
-The interface features various possibilities to log the data to file, so that further processing of the data is simplified. 
+The interface features various possibilities to log simulation data to file, so that further processing of the data is simplified. 
 
-Creatures were evolved using two different, distributed controller structures, a non-adaptive sinusoidal controller and a newly introduced adaptive chaotic system controller. %
+Creatures were evolved using two different, distributed controller structures, a non-adaptive, sinusoidal controller and a newly introduced, adaptive chaotic system controller. %
 %
 In order to develop the chaotic controller, it was necessary to understand the dynamics to be expected when limiting a chaotic system with the limiter chaos control method. %
 %
@@ -32,7 +32,7 @@ Therefore, the findings of the simple limiter chaos control method introduced in
 %
 Additionally, two different limiter configurations and their range of different periodic orbits were analyzed. %
 %
-It was found that a soft-limiter expands the size of each range of periodic orbit and therefore makes it easier to achieve a stable orbit. %
+It was found that a soft-limiter expands the size of each limiter parameter range of periodic orbit and therefore makes it easier to achieve stable orbits. %
 %
 The chaotic controller internally controls an underlying chaotic model system into chaotic and periodic trajectories using a variation of the simple limiter chaos control method. %
 %
@@ -59,8 +59,14 @@ The influence of different morphological parameters could be observed. %
 Applying higher or lower amounts of joint torque increases or decreases the orbit diameter respectively, damping leads to a sub-manifold of the orbit. %
 %
 However, in all cases the joint converges to a proper periodic orbit.
+%
+Unfortunately, only some creatures feature simple limiter control behavior, while others do not. %
+%
+So it is not the case that locomotion can only arise if the joint dynamics perform stable periodic trajectories. %
+%
+Still, given that it works in some creatures shows that it is a valid hypothesis to be pursued further.
 
-An issue confronted with during the simulation run was that no fitness function used in the experiments accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
+An issue confronted with during the simulation run was, that no fitness function accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
 %
 The simulation additionally has a general tendency to come up with very messy creature morphologies exploiting oscillations of large amplitude, which would require large amounts of energy to keep up the resulting locomotion. %
 %
@@ -82,7 +88,7 @@ Preliminary results suggest that the controller could be an intermittent system 
 %
 An experiment to measure the chaoticity would involve a successfully locomoting creature's controllers to be perturbed using a small perturbation. %
 %
-If the controller is stabilized on a periodic orbit, the trajectory then would be moved away by the perturbation, but finally converge back onto the limit cycle. %
+If the controller is stabilized on a periodic orbit, the trajectory then would be moved away from the orbit by the perturbation, but finally converge back onto the limit cycle. %
 %
 However, if the controller is not stabilized, the trajectory would diverge exponentially from the original, unperturbed trajectory and never return. %
 %
@@ -93,11 +99,11 @@ x(t) = f^t(x_0)\\
 x(t) + \delta x(t) = f^t(x_0 + \delta x_0)\\
 \end{align*}
 
-To measure the sensitivity to the initial conditions, we can now calculate the evolution of the perturbance \(\delta x_0\) through the system:
+To measure the sensitivity to the initial conditions, the evolution of the perturbance \(\delta x_0\) through the system can be calculated:
 
 \[||\delta x(t)|| = \||\delta x_0|| e^{\mu t}\]
 
-The \(\mu\) in that case is also called the largest Lyapunov exponent (LLE).%
+The \(\mu\) in that case is also called the Largest Lyapunov exponent (LLE).%
 %
 If \(\mu > 0\), then the trajectory diverges exponentially. %
 %
@@ -111,12 +117,12 @@ The quantification would be done by plotting the Log divergence distance ratio:
 %
 The LLE can then be found by fitting segments of the time evolution log plot of the of the trajectory differences. 
 
-The perturbation can be automatically performed using the simulator by enabling automatic perturbance. %
+The perturbation can be automatically performed using the simulator by enabling automatic perturbation. %
 %
 The preliminary results, suggesting that the chaotic controller is an intermittent system, raise the question at which point during the evaluation the perturbation should be applied. %
 %
-Given that the creature starts above ground and falls onto it first, the best guess would be to perturb the creature after it has stabilized on ground and begun to perform its locomotion gait. %
-%
 A perturbation before the collision with the ground might be swallowed by the larger perturbation of the collision, obfuscating the actual results. %
+%
+Given that the creature starts above ground and falls onto it first, the best guess would be to perturb the creature after it has stabilized on ground and begun to perform its locomotion gait. 
 
 \end{document}
