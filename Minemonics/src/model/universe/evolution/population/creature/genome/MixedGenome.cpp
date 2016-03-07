@@ -550,15 +550,13 @@ void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
 	int motherSegmentEndIndex, int fatherSegmentStartIndex,
 	int fatherSegmentEndIndex) {
 	for (int i = mGenes.size() - 1; i > motherSegmentEndIndex; i--) {
-		Gene* gene = mGenes[i];
-		mGenes.erase(mGenes.begin() + i);
-		delete gene;
+		delete mGenes.back();
+		mGenes.erase(mGenes.end()-1);
 	}
 
 	for (int i = 0; i < motherSegmentStartIndex; i++) {
-		Gene* gene = mGenes[0];
+		delete mGenes.front();
 		mGenes.erase(mGenes.begin());
-		delete gene;
 	}
 
 	for (int i = fatherSegmentStartIndex; i < fatherSegmentEndIndex; i++) {

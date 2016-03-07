@@ -323,10 +323,10 @@ void Reaper::splitGenes(PopulationModel* const population, const int startIndex,
 		for (int i = 0; i < splitGeneHeads; i++) {
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
 			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
-				population->getCreatureModels()[startIndex + i]->setCulled(
-					true);
 				CreatureModel* offspring =
 					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+				population->getCreatureModels()[startIndex + i]->setCulled(
+					true);
 				offspring->setNew(true); // Make the creature a new creature
 				offspring->setDeveloped(false); // Set the creature for an embryogenesis
 
