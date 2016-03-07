@@ -34,7 +34,7 @@ class PushButton;
 class NewPlanetPanel: public MovablePanel {
 public:
 	NewPlanetPanel(const int left, const int top, const std::string name);
-	~NewPlanetPanel(void);
+	virtual ~NewPlanetPanel(void);
 
 	void onValueChanged();
 	void onAddJury();

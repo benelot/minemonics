@@ -169,6 +169,12 @@ void SimulationManager::setupView(void) {
  */
 void SimulationManager::createScene(void) {
 
+	// file folders
+	mSerializationPath = FilesystemManipulator::createFolder(".", /**!< Create the serialization top folder if necessary */
+	SerializationConfiguration::TOP_FOLDER);
+	FilesystemManipulator::createFolder(".", /**!< Create the logging top folder if necessary */
+	LoggerConfiguration::TOP_FOLDER);
+
 	Logger::init("logs/minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 
@@ -178,11 +184,17 @@ void SimulationManager::createScene(void) {
 
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget( /**!< Set render target with the current application name */
 	ApplicationConfiguration::APPLICATION_TITLE);
-	mViewController.initialize(renderTarget); /**!< initialize GUI and views */
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize ViewController...";
+	mViewController.initialize(renderTarget); /**!< initialize GUI and views */
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize ViewController...done.";
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Switch state to GUI...";
 	mStateHandler.requestStateChange(StateHandler::GUI); /**!< request a state change saying that the GUI is shown */
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Switch state to GUI...done.";
 
 	// initialize the simulation's debug drawer
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize DebugDrawer...";
 	mDebugDrawer.initialize(false);
 	mDebugDrawer.setDebugDrawingEnabled(false);
 	mDebugDrawer.setDrawWireframe(true);
@@ -190,6 +202,7 @@ void SimulationManager::createScene(void) {
 	mDebugDrawer.setDrawConstraintLimits(true);
 	mDebugDrawer.setDrawContactPoints(false);
 	mDebugDrawer.setDrawNormals(false);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize DebugDrawer...done.";
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...";
 
@@ -231,12 +244,6 @@ void SimulationManager::createScene(void) {
 	mSun->setDirection(0, -1, -1);
 
 	mUniverse.initialize(EvaluationConfiguration::DEFAULT_PARALLEL_EVALUATION); /**!< Initialize the universe */
-
-	// file folders
-	mSerializationPath = FilesystemManipulator::createFolder(".", /**!< Create the serialization top folder if necessary */
-	SerializationConfiguration::TOP_FOLDER);
-	FilesystemManipulator::createFolder(".", /**!< Create the logging top folder if necessary */
-	LoggerConfiguration::TOP_FOLDER);
 
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Setup universe...done.";
 

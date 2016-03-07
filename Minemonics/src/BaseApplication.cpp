@@ -57,6 +57,7 @@ BaseApplication::~BaseApplication(void) {
 	if (mOverlaySystem) {
 		delete mOverlaySystem;
 	}
+	mOverlaySystem = NULL;
 
 	// Remove ourself as a Window listener
 	Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);

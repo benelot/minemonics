@@ -23,6 +23,7 @@
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 /**
  * @brief		An file dialog to select a file on the file system.
@@ -143,6 +144,21 @@ protected:
 	MovablePanelType mType;
 
 	bool mDialogShown;
+
+private:
+	static BoostLogger mBoostLogger; /**!< The boost logger. */
+
+	/**
+	 * Initializer of the boost logger to include the class name into the logging messages.
+	 */
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant<std::string>(
+					"FileDialog"));
+		}
+	} _initializer;
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_CONFIGPANELS_FILEDIALOG_HPP_ */

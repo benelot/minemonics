@@ -103,20 +103,26 @@ NewPopulationPanel::~NewPopulationPanel(void) {
 	// According to:
 	//http://cegui.org.uk/forum/viewtopic.php?t=1535
 	// All chilrden of base widget are deleted as well
-//	if (mPopulationSizeLabel) {
+	if (mPopulationSizeLabel) {
+		mBaseWidget->removeChild(mPopulationSizeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mPopulationSizeLabel);
 //		delete mPopulationSizeLabel;
-//	}
-//	mPopulationSizeLabel = NULL;
-//
-//	if (mPopulationSizeBs) {
+	}
+	mPopulationSizeLabel = NULL;
+
+	if (mPopulationSizeBs) {
+		mBaseWidget->removeChild(mPopulationSizeBs);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mPopulationSizeBs);
 //		delete mPopulationSizeBs;
-//	}
-//	mPopulationSizeBs = NULL;
-//
-//	if (mConfirmButton) {
+	}
+	mPopulationSizeBs = NULL;
+
+	if (mConfirmButton) {
+		mBaseWidget->removeChild(mConfirmButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mConfirmButton);
 //		delete mConfirmButton;
-//	}
-//	mConfirmButton = NULL;
+	}
+	mConfirmButton = NULL;
 }
 
 void NewPopulationPanel::onConfirmClicked() {

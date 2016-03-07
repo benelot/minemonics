@@ -362,4 +362,6 @@ ShowCasePanel::ShowCasePanel(const int left, const int top,
 }
 
 ShowCasePanel::~ShowCasePanel(void) {
+	//TODO: Delete whatever is necessary
+//	CEGUI::WindowManager::getSingleton().destroyWindow(mFrameWindow);
 }

@@ -42,18 +42,19 @@
 BoostLogger GUISheetHandler::mBoostLogger; /*<! initialize the boost logger*/
 GUISheetHandler::_Init GUISheetHandler::_initializer;
 GUISheetHandler::GUISheetHandler() :
-	mSystem(NULL), mWindow(NULL) {
+	mLayout(NULL) {
 
 }
 
 GUISheetHandler::~GUISheetHandler() {
+	if (mLayout) {
+		CEGUI::WindowManager::getSingleton().destroyWindow(mLayout);
+	}
+	mLayout = NULL;
 }
 
-void GUISheetHandler::initialize(CEGUI::System* const system,
-	CEGUI::Window* const sheet) {
-
-	mSystem = system;
-	mWindow = sheet;
+void GUISheetHandler::initialize(CEGUI::Window* const layout) {
+	mLayout = layout;
 
 	// hook up the event handlers to the window elements
 	{
@@ -61,7 +62,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		//File menu
 		//File->Quit
 		CEGUI::PushButton* quitButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mLayout->getChildRecursive(
 				GUIConfiguration::quitApplicationCmd);
 		quitButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::quitButtonClicked,
@@ -73,7 +74,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		//Evaluation menu
 		//Evaluation->Evolution Track
 		CEGUI::PushButton* evolutionTrackButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mLayout->getChildRecursive(
 				GUIConfiguration::setEvolutionTrackCmd);
 		evolutionTrackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
@@ -81,7 +82,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 		//Evaluation->Learning Track
 		CEGUI::PushButton* learningTrackButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mLayout->getChildRecursive(
 				GUIConfiguration::setLearningTrackCmd);
 		learningTrackButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(
@@ -93,7 +94,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		//Planet menu
 		//Planets->New Planet
 		CEGUI::PushButton* newPlanetButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mLayout->getChildRecursive(
 				GUIConfiguration::newPlanetCmd);
 		newPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::newPlanetButtonClicked,
@@ -101,7 +102,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 		//Planets->Edit Planet
 		CEGUI::PushButton* editPlanetButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mLayout->getChildRecursive(
 				GUIConfiguration::editPlanetCmd);
 		editPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::editPlanetButtonClicked,
@@ -109,7 +110,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 		//Planets->Load Planet
 		CEGUI::PushButton* loadPlanetButton =
-			(CEGUI::PushButton*) mWindow->getChildRecursive(
+			(CEGUI::PushButton*) mLayout->getChildRecursive(
 				GUIConfiguration::loadPlanetCmd);
 		loadPlanetButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 			CEGUI::Event::Subscriber(&GUISheetHandler::loadPlanetButtonClicked,
@@ -264,7 +265,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		{
 			//Population->New Population
 			CEGUI::PushButton* newPopulationButton =
-				(CEGUI::PushButton*) mWindow->getChildRecursive(
+				(CEGUI::PushButton*) mLayout->getChildRecursive(
 					GUIConfiguration::newPopulationCmd);
 			newPopulationButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 				CEGUI::Event::Subscriber(
@@ -274,7 +275,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		{
 			//Population->Edit Population
 			CEGUI::PushButton* editPopulationButton =
-				(CEGUI::PushButton*) mWindow->getChildRecursive(
+				(CEGUI::PushButton*) mLayout->getChildRecursive(
 					GUIConfiguration::editPopulationCmd);
 			editPopulationButton->subscribeEvent(
 				CEGUI::PushButton::EventClicked,
@@ -285,7 +286,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		{
 			//Population->Load Population
 			CEGUI::PushButton* loadPopulationButton =
-				(CEGUI::PushButton*) mWindow->getChildRecursive(
+				(CEGUI::PushButton*) mLayout->getChildRecursive(
 					GUIConfiguration::loadPopulationCmd);
 			loadPopulationButton->subscribeEvent(
 				CEGUI::PushButton::EventClicked,
@@ -296,7 +297,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 		{
 			//Population->Perturb Population
 			CEGUI::PushButton* perturbPopulationButton =
-				(CEGUI::PushButton*) mWindow->getChildRecursive(
+				(CEGUI::PushButton*) mLayout->getChildRecursive(
 					GUIConfiguration::perturbPopulationCmd);
 			perturbPopulationButton->subscribeEvent(
 				CEGUI::PushButton::EventClicked,
@@ -467,7 +468,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 //Settings->Rendering->Ambient light->0 %
 	CEGUI::PushButton* pAmbientLight0Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight0Cmd);
 	pAmbientLight0Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight0ButtonClicked,
@@ -475,7 +476,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->10 %
 	CEGUI::PushButton* pAmbientLight10Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight10Cmd);
 	pAmbientLight10Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight10ButtonClicked,
@@ -483,7 +484,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->20 %
 	CEGUI::PushButton* pAmbientLight20Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight20Cmd);
 	pAmbientLight20Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight20ButtonClicked,
@@ -491,7 +492,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->30 %
 	CEGUI::PushButton* pAmbientLight30Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight30Cmd);
 	pAmbientLight30Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight30ButtonClicked,
@@ -499,7 +500,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->40 %
 	CEGUI::PushButton* pAmbientLight40Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight40Cmd);
 	pAmbientLight40Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight40ButtonClicked,
@@ -507,7 +508,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->50 %
 	CEGUI::PushButton* pAmbientLight50Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight50Cmd);
 	pAmbientLight50Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight50ButtonClicked,
@@ -515,7 +516,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->60 %
 	CEGUI::PushButton* pAmbientLight60Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight60Cmd);
 	pAmbientLight60Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight60ButtonClicked,
@@ -523,7 +524,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->70 %
 	CEGUI::PushButton* pAmbientLight70Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight70Cmd);
 	pAmbientLight70Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight70ButtonClicked,
@@ -531,7 +532,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->80 %
 	CEGUI::PushButton* pAmbientLight80Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight80Cmd);
 	pAmbientLight80Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight80ButtonClicked,
@@ -539,7 +540,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->90 %
 	CEGUI::PushButton* pAmbientLight90Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight90Cmd);
 	pAmbientLight90Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight90ButtonClicked,
@@ -547,7 +548,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Rendering->Ambient light->100 %
 	CEGUI::PushButton* pAmbientLight100Button =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::ambientLight100Cmd);
 	pAmbientLight100Button->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::ambientlight100ButtonClicked,
@@ -659,7 +660,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 //Settings->Physics->Gravity->No Gravity
 	CEGUI::PushButton* pNoGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::noGravityCmd);
 	pNoGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::noGravityButtonClicked,
@@ -667,14 +668,14 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Pluto Gravity
 	CEGUI::PushButton* pPlutoGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive("cmdPlutoGravity");
+		(CEGUI::PushButton *) mLayout->getChildRecursive("cmdPlutoGravity");
 	pPlutoGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::plutoGravityButtonClicked,
 			this));
 
 	//Settings->Physics->Gravity->Moon Gravity
 	CEGUI::PushButton* pMoonGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::moonGravityCmd);
 	pMoonGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::moonGravityButtonClicked,
@@ -682,7 +683,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Mars Gravity
 	CEGUI::PushButton* pMarsMercuryGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::marsMercuryGravityCmd);
 	pMarsMercuryGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(
@@ -690,7 +691,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Uranus Gravity
 	CEGUI::PushButton* pUranusGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::uranusGravityCmd);
 	pUranusGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::uranusGravityButtonClicked,
@@ -698,7 +699,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Venus/Saturn Gravity
 	CEGUI::PushButton* pVenusSaturnGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::venusSaturnGravityCmd);
 	pVenusSaturnGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(
@@ -706,7 +707,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Earth Gravity
 	CEGUI::PushButton* pEarthGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::earthGravityCmd);
 	pEarthGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::earthGravityButtonClicked,
@@ -714,7 +715,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Neptune Gravity
 	CEGUI::PushButton* pNeptuneGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::neptuneGravityCmd);
 	pNeptuneGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::neptuneGravityButtonClicked,
@@ -722,7 +723,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Jupiter Gravity
 	CEGUI::PushButton* pJupiterGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::jupiterGravityCmd);
 	pJupiterGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::jupiterGravityButtonClicked,
@@ -730,7 +731,7 @@ void GUISheetHandler::initialize(CEGUI::System* const system,
 
 	//Settings->Physics->Gravity->Sun Gravity
 	CEGUI::PushButton* pSunGravityButton =
-		(CEGUI::PushButton *) mWindow->getChildRecursive(
+		(CEGUI::PushButton *) mLayout->getChildRecursive(
 			GUIConfiguration::sunGravityCmd);
 	pSunGravityButton->subscribeEvent(CEGUI::PushButton::EventClicked,
 		CEGUI::Event::Subscriber(&GUISheetHandler::sunGravityButtonClicked,

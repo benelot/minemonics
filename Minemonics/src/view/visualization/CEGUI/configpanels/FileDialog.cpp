@@ -7,6 +7,7 @@
 //## controller headers
 //## model headers
 #include <boost/iterator/iterator_facade.hpp>
+#include <boost/lexical_cast.hpp>
 
 //## view headers
 #include <CEGUI/Element.h>
@@ -38,6 +39,8 @@
 //## view headers
 //## utils headers
 
+BoostLogger FileDialog::mBoostLogger; /*<! initialize the boost logger*/
+FileDialog::_Init FileDialog::_initializer;
 FileDialog::FileDialog(const int left, const int top, const std::string name,
 	MovablePanel::MovablePanelType type) :
 	MovablePanel(name, type), mDialogShown(false) {
@@ -343,85 +346,119 @@ FileDialog::~FileDialog() {
 	// According to:
 	//http://cegui.org.uk/forum/viewtopic.php?t=1535
 	// All chilrden of base widget are deleted as well
-//	if (mBackButton) {
+	if (mBackButton) {
+		mBaseWidget->removeChild(mBackButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mBackButton);
 //		delete mBackButton;
-//	}
-//	mBackButton = NULL;
-//
-//	if (mOkButton) {
+	}
+	mBackButton = NULL;
+
+	if (mOkButton) {
+		mBaseWidget->removeChild(mOkButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mOkButton);
 //		delete mOkButton;
-//	}
-//	mOkButton = NULL;
-//
-//	if (mCancelButton) {
+	}
+	mOkButton = NULL;
+
+	if (mCancelButton) {
+		mBaseWidget->removeChild(mCancelButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mCancelButton);
 //		delete mCancelButton;
-//	}
-//	mCancelButton = NULL;
-//
-//	if (mFileLabel) {
+	}
+	mCancelButton = NULL;
+
+	if (mFileLabel) {
+		mBaseWidget->removeChild(mFileLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mFileLabel);
 //		delete mFileLabel;
-//	}
-//	mFileLabel = NULL;
-//
-//	if (mFileCb) {
-//		delete mFileCb;
-//	}
-//	mFileCb = NULL;
-//
-//	if (mDrivesCb) {
+	}
+	mFileLabel = NULL;
+
+	if (mFileCb) {
+		mBaseWidget->removeChild(mFileCb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mFileCb);
+		delete mFileCb;
+	}
+	mFileCb = NULL;
+
+	if (mDrivesCb) {
+		mBaseWidget->removeChild(mDrivesCb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mDrivesCb);
 //		delete mDrivesCb;
-//	}
-//	mDrivesCb = NULL;
-//
-//	if (mExtensionsLabel) {
+	}
+	mDrivesCb = NULL;
+
+	if (mExtensionsLabel) {
+		mBaseWidget->removeChild(mExtensionsLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mExtensionsLabel);
 //		delete mExtensionsLabel;
-//	}
-//	mExtensionsLabel = NULL;
-//
-//	if (mFilesLb) {
+	}
+	mExtensionsLabel = NULL;
+
+	if (mFilesLb) {
+		mBaseWidget->removeChild(mFilesLb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mFilesLb);
 //		delete mFilesLb;
-//	}
-//	mFilesLb = NULL;
-//
-//	if (mWindowPromptLoad) {
-//		delete mWindowPromptLoad;
-//	}
-//	mWindowPromptLoad = NULL;
-//
-//	if (mStPromptLoad) {
+	}
+	mFilesLb = NULL;
+
+	if (mStPromptLoad) {
+		mWindowPromptLoad->removeChild(mStPromptLoad);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mStPromptLoad);
 //		delete mStPromptLoad;
-//	}
-//	mStPromptLoad = NULL;
-//
-//	if (mPromptLoadOkButton) {
+	}
+	mStPromptLoad = NULL;
+
+	if (mPromptLoadOkButton) {
+		mWindowPromptLoad->removeChild(mPromptLoadOkButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mPromptLoadOkButton);
 //		delete mPromptLoadOkButton;
-//	}
-//	mPromptLoadOkButton = NULL;
-//
-//	if (mPromptLoadCancelButton) {
+	}
+	mPromptLoadOkButton = NULL;
+
+	if (mPromptLoadCancelButton) {
+		mWindowPromptLoad->removeChild(mPromptLoadCancelButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(
+			mPromptLoadCancelButton);
 //		delete mPromptLoadCancelButton;
-//	}
-//	mPromptLoadCancelButton = NULL;
-//
-//	if (mWindowPromptSave) {
-//		delete mWindowPromptSave;
-//	}
-//	mWindowPromptSave = NULL;
-//
-//	if (mStPromptSave) {
+	}
+	mPromptLoadCancelButton = NULL;
+
+	if (mWindowPromptLoad) {
+		mBaseWidget->removeChild(mWindowPromptLoad);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mWindowPromptLoad);
+//		delete mWindowPromptLoad;
+	}
+	mWindowPromptLoad = NULL;
+
+	if (mStPromptSave) {
+		mWindowPromptSave->removeChild(mStPromptSave);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mStPromptSave);
 //		delete mStPromptSave;
-//	}
-//	mStPromptSave = NULL;
-//
-//	if (mPromptSaveOkButton) {
+	}
+	mStPromptSave = NULL;
+
+	if (mPromptSaveOkButton) {
+		mWindowPromptSave->removeChild(mPromptSaveOkButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mPromptSaveOkButton);
 //		delete mPromptSaveOkButton;
-//	}
-//	mPromptSaveOkButton = NULL;
-//
-//	if (mPromptSaveCancelButton) {
+	}
+	mPromptSaveOkButton = NULL;
+
+	if (mPromptSaveCancelButton) {
+		mWindowPromptSave->removeChild(mPromptSaveCancelButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(
+			mPromptSaveCancelButton);
 //		delete mPromptSaveCancelButton;
-//	}
-//	mPromptSaveCancelButton = NULL;
+	}
+	mPromptSaveCancelButton = NULL;
+
+	if (mWindowPromptSave) {
+		mBaseWidget->removeChild(mWindowPromptSave);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mWindowPromptSave);
+//		delete mWindowPromptSave;
+	}
+	mWindowPromptSave = NULL;
 }
 
 void FileDialog::disableDialog(void) {
@@ -644,53 +681,69 @@ void FileDialog::prefillOutputAndClearInput(void) {
 void FileDialog::determineDrives() {
 	mDrives.clear();
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Determine Drives...";
+
 //Linux
 // root directory
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "The following drives are checked for existence: ";
 	std::string linuxRoot = "/";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< linuxRoot;
 	if (boost::filesystem::exists(boost::filesystem::path(linuxRoot))) {
 		mDrives.push_back(linuxRoot);
 	}
 
 	// home directory
 	std::string linuxHome = "/home";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< linuxHome;
 	if (boost::filesystem::exists(boost::filesystem::path(linuxHome))) {
 		mDrives.push_back(linuxHome);
 	}
 
 // media directory
 	std::string linuxMedia = "/media";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< linuxMedia;
 	if (boost::filesystem::exists(boost::filesystem::path(linuxMedia))) {
 		mDrives.push_back(linuxMedia);
 	}
 
 //Windows
 	for (char letter = 'A'; letter != 'Z'; letter++) {
-		std::string path = std::string("" + letter) + ':';
+		std::string path = boost::lexical_cast<std::string>(letter) + ':';
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< path;
 		if (boost::filesystem::exists(boost::filesystem::path(path))) {
 			mDrives.push_back(linuxMedia);
 		}
 	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "The following drives were found:";
+	for (std::vector<std::string>::iterator dit = mDrives.begin();
+		dit != mDrives.end(); dit++) {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< *dit;
+	}
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Determine Drives...done.";
 }
 void FileDialog::changeDirectory(std::string path) {
 
 	mCurrentPath =
 		boost::filesystem::absolute(boost::filesystem::path(path)).c_str();
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "FileDialog is looking at this path:\n" << mCurrentPath;
 
 	mNames.clear();
-
-//	mNames.push_back("\[..]");
 
 	std::vector<std::string> tempPaths;
 
 	try {
+		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "The contents of this folder are the following:";
 		for (boost::filesystem::directory_iterator it(mCurrentPath);
 			it != boost::filesystem::directory_iterator(); ++it) {
+			BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< it->path().c_str() << std::endl;
 			tempPaths.push_back(it->path().c_str());
 		}
 	} catch (const boost::filesystem::filesystem_error& ex) {
 		// the user probably backed up too far. Jackass.
 		mCurrentPath =
-			boost::filesystem::path(mCurrentPath).parent_path().c_str();
+		boost::filesystem::path(mCurrentPath).parent_path().c_str();
 		for (boost::filesystem::directory_iterator it(mCurrentPath);
 			it != boost::filesystem::directory_iterator(); ++it) {
 			tempPaths.push_back(it->path().c_str());

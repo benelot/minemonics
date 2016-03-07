@@ -93,10 +93,22 @@ void ParamsPanel::initialize(const int left, const int top, const int width,
 }
 
 ParamsPanel::~ParamsPanel(void) {
-	delete mTextBoxValues;
+	//Cleanup according to
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	// http://cegui.org.uk/forum/viewtopic.php?t=1535
+
+	if (mTextBoxValues) {
+		mBaseWidget->removeChild(mTextBoxValues);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxValues);
+//	delete mTextBoxValues;
+	}
 	mTextBoxValues = NULL;
 
-	delete mTextBoxLabel;
+	if (mTextBoxLabel) {
+		mBaseWidget->removeChild(mTextBoxLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxLabel);
+//	delete mTextBoxLabel;
+	}
 	mTextBoxLabel = NULL;
 }
 

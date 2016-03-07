@@ -27,7 +27,7 @@ class ShowCasePanel: public MovablePanel {
 public:
 	ShowCasePanel(const int left, const int top, const std::string name,
 		const int width, const int height);
-	~ShowCasePanel(void);
+	virtual ~ShowCasePanel(void);
 };
 
 #endif /* VIEW_VISUALIZATION_CEGUI_ELEMENTS_CONFIGPANELS_ShowCasePanel_HPP_ */

@@ -71,6 +71,11 @@ void MovablePanel::initialize(const int left, const int top, const int width,
 }
 
 MovablePanel::~MovablePanel(void) {
+	if (mBaseWidget) {
+		CEGUI::WindowManager::getSingleton().destroyWindow(mBaseWidget);
+//	delete mBaseWidget;
+	}
+	mBaseWidget = NULL;
 }
 
 void MovablePanel::update() {

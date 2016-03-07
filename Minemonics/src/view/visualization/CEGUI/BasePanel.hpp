@@ -31,7 +31,7 @@ class BasePanel {
 public:
 	BasePanel(const std::string name);
 
-	~BasePanel(void);
+	virtual ~BasePanel(void);
 
 	void initialize(const int left, const int top, const int width,
 		const int height, bool withTitleBar);

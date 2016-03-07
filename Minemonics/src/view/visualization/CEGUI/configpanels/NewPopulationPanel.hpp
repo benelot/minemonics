@@ -34,7 +34,7 @@ class PushButton;
 class NewPopulationPanel: public MovablePanel {
 public:
 	NewPopulationPanel(const int left, const int top, const std::string name);
-	~NewPopulationPanel(void);
+	virtual ~NewPopulationPanel(void);
 
 	void onConfirmClicked();
 

@@ -26,7 +26,7 @@
 class LoadPlanetPanel: public FileDialog {
 public:
 	LoadPlanetPanel(const int left, const int top, const std::string name);
-	~LoadPlanetPanel(void);
+	virtual ~LoadPlanetPanel(void);
 	virtual void openFile(std::string filePath);
 };
 

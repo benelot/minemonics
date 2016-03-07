@@ -28,7 +28,7 @@
 EditPopulationPanel::EditPopulationPanel(const int left, const int top,
 	const std::string name) :
 	MovablePanel(name, MovablePanel::NEW_POPULATION_PANEL), mTextBoxLabel(NULL), mTextBoxValues(
-		NULL) {
+	NULL) {
 	int width = 600;
 	int height = 600;
 
@@ -78,16 +78,20 @@ EditPopulationPanel::EditPopulationPanel(const int left, const int top,
 }
 
 EditPopulationPanel::~EditPopulationPanel(void) {
-	// According to:
-	//http://cegui.org.uk/forum/viewtopic.php?t=1535
-	// All chilrden of base widget are deleted as well
-//	if(mTextBoxLabel){
+	//Cleanup according to
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	// http://cegui.org.uk/forum/viewtopic.php?t=1535
+	if (mTextBoxLabel) {
+		mBaseWidget->removeChild(mTextBoxLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxLabel);
 //		delete mTextBoxLabel;
-//	}
-//	mTextBoxLabel = NULL;
-//
-//	if(mTextBoxValues){
+	}
+	mTextBoxLabel = NULL;
+
+	if (mTextBoxValues) {
+		mBaseWidget->removeChild(mTextBoxValues);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxValues);
 //		delete mTextBoxValues;
-//	}
-//	mTextBoxValues = NULL;
+	}
+	mTextBoxValues = NULL;
 }

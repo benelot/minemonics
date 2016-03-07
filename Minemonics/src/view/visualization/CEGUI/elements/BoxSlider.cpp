@@ -53,30 +53,44 @@ BoxSlider::BoxSlider(const std::string name, const int width,
 	mSlider->subscribeEvent(CEGUI::Slider::EventValueChanged,
 		CEGUI::Event::Subscriber(&BoxSlider::onSliderValueChanged, this));
 
-	addChild (mSlider);
+	addChild(mSlider);
 
 	mEditBox = static_cast<CEGUI::Editbox*>(wmgr.createWindow(
 		CEGUIConfiguration::CEGUI_SCHEME + "/Editbox"));
 	mEditBox->setText(
-		boost::lexical_cast < std::string
-			> (floor(mSlider->getCurrentValue())));
+		boost::lexical_cast<std::string>(floor(mSlider->getCurrentValue())));
 //	CEGUI::String valueEditbox = mEditBox->getText(); // Retrieve the text
 	mEditBox->setValidationString(validationString);
 	mEditBox->setSize(
 		CEGUI::USize(CEGUI::UDim(0, editBoxWidth), CEGUI::UDim(0, 20)));
 	mEditBox->setPosition(
 		CEGUI::UVector2(CEGUI::UDim(0.6f, 0.0f), CEGUI::UDim(0.0, 0.0f)));
-	addChild (mEditBox);
+	addChild(mEditBox);
 
 }
 
 BoxSlider::~BoxSlider() {
 
+	//Cleanup according to
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	// http://cegui.org.uk/forum/viewtopic.php?t=1535
+
+	if (mEditBox) {
+		removeChild(mEditBox);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEditBox);
+	}
+	mEditBox = NULL;
+
+	if (mSlider) {
+		removeChild(mSlider);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mSlider);
+	}
+	mSlider = NULL;
+
 }
 
 void BoxSlider::onSliderValueChanged() {
 	mEditBox->setText(
-		boost::lexical_cast < std::string
-			> (floor(mSlider->getCurrentValue())));
+		boost::lexical_cast<std::string>(floor(mSlider->getCurrentValue())));
 }
 

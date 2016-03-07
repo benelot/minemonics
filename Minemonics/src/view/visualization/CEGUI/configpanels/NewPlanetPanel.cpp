@@ -245,8 +245,6 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mEpochNumber = static_cast<CEGUI::Editbox*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Editbox"));
 		mEpochNumber->setText("1");
-		//	CEGUI::String valueEditbox = mEditBox->getText(); // Retrieve the text
-//		mEpochNumber->setValidationString(validationString);
 		mEpochNumber->setSize(
 			CEGUI::USize(CEGUI::UDim(0, 30), CEGUI::UDim(0, 20)));
 		mEpochNumber->setPosition(
@@ -259,8 +257,6 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 		mJuryWeight = static_cast<CEGUI::Editbox*>(wmgr.createWindow(
 			CEGUIConfiguration::CEGUI_SCHEME + "/Editbox"));
 		mJuryWeight->setText("1");
-		//	CEGUI::String valueEditbox = mEditBox->getText(); // Retrieve the text
-//		mJuryWeight->setValidationString(validationString);
 		mJuryWeight->setSize(
 			CEGUI::USize(CEGUI::UDim(0, 30), CEGUI::UDim(0, 20)));
 		mJuryWeight->setPosition(
@@ -377,93 +373,120 @@ NewPlanetPanel::NewPlanetPanel(const int left, const int top,
 
 NewPlanetPanel::~NewPlanetPanel(void) {
 
-	// According to:
-	//http://cegui.org.uk/forum/viewtopic.php?t=1535
-	// All chilrden of base widget are deleted as well
-//	if (mPhysicsControllerTypeLabel) {
+	//Cleanup according to
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	// http://cegui.org.uk/forum/viewtopic.php?t=1535
+	if (mPhysicsControllerTypeLabel) {
+		mBaseWidget->removeChild(mPhysicsControllerTypeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mPhysicsControllerTypeLabel);
 //		delete mPhysicsControllerTypeLabel;
-//	}
-//	mPhysicsControllerTypeLabel = NULL;
-//
-//	if (mEnvironmentTypeLabel) {
+	}
+	mPhysicsControllerTypeLabel = NULL;
+
+	if (mEnvironmentTypeLabel) {
+		mBaseWidget->removeChild(mEnvironmentTypeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeLabel);
 //		delete mEnvironmentTypeLabel;
-//	}
-//	mEnvironmentTypeLabel = NULL;
-//
-//	if (mEvaluationTimeLabel) {
+	}
+	mEnvironmentTypeLabel = NULL;
+
+	if (mEvaluationTimeLabel) {
+		mBaseWidget->removeChild(mEvaluationTimeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeLabel);
 //		delete mEvaluationTimeLabel;
-//	}
-//	mEvaluationTimeLabel = NULL;
-//
-//	if (mEvaluationTypeLabel) {
+	}
+	mEvaluationTimeLabel = NULL;
+
+	if (mEvaluationTypeLabel) {
+		mBaseWidget->removeChild(mEvaluationTypeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeLabel);
 //		delete mEvaluationTypeLabel;
-//	}
-//	mEvaluationTypeLabel = NULL;
-//
-//	if (mTournamentSizeLabel) {
+	}
+	mEvaluationTypeLabel = NULL;
+
+	if (mTournamentSizeLabel) {
+		mBaseWidget->removeChild(mTournamentSizeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeLabel);
 //		delete mTournamentSizeLabel;
-//	}
-//	mTournamentSizeLabel = NULL;
-//
-//	if (mPhysicsControllerTypeCb) {
-//		delete mPhysicsControllerTypeCb;
-//	}
-//	mPhysicsControllerTypeCb = NULL;
-//
-//	if (mEnvironmentTypeCb) {
+	}
+	mTournamentSizeLabel = NULL;
+
+	if (mEnvironmentTypeCb) {
+		mBaseWidget->removeChild(mEnvironmentTypeCb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeCb);
 //		delete mEnvironmentTypeCb;
-//	}
-//	mEnvironmentTypeCb = NULL;
-//
-//	if (mEvaluationTimeBs) {
+	}
+	mEnvironmentTypeCb = NULL;
+
+	if (mEvaluationTimeBs) {
+		mBaseWidget->removeChild(mEvaluationTimeBs);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeBs);
 //		delete mEvaluationTimeBs;
-//	}
-//	mEvaluationTimeBs = NULL;
-//
-//	if (mEnvironmentTypeCb) {
-//		delete mEnvironmentTypeCb;
-//	}
-//	mEnvironmentTypeCb = NULL;
-//
-//	if (mTournamentSizeBs) {
+	}
+	mEvaluationTimeBs = NULL;
+
+	if (mEvaluationTypeCb) {
+		mBaseWidget->removeChild(mEvaluationTypeCb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeCb);
+//		delete mEvaluationTypeCb;
+	}
+	mEvaluationTypeCb = NULL;
+
+	if (mTournamentSizeBs) {
+		mBaseWidget->removeChild(mTournamentSizeBs);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeBs);
 //		delete mTournamentSizeBs;
-//	}
-//	mTournamentSizeBs = NULL;
-//
-//	if (mConfirmButton) {
+	}
+	mTournamentSizeBs = NULL;
+
+	if (mConfirmButton) {
+		mBaseWidget->removeChild(mConfirmButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mConfirmButton);
 //		delete mConfirmButton;
-//	}
-//	mConfirmButton = NULL;
-//
-//	if (mEpochNumber) {
+	}
+	mConfirmButton = NULL;
+
+	if (mEpochNumber) {
+		mBaseWidget->removeChild(mEpochNumber);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEpochNumber);
 //		delete mEpochNumber;
-//	}
-//	mEpochNumber = NULL;
-//
-//	if (mJuryWeight) {
+	}
+	mEpochNumber = NULL;
+
+	if (mJuryWeight) {
+		mBaseWidget->removeChild(mJuryWeight);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryWeight);
 //		delete mJuryWeight;
-//	}
-//	mJuryWeight = NULL;
-//
-//	if (mJuryType) {
+	}
+	mJuryWeight = NULL;
+
+	if (mJuryType) {
+		mBaseWidget->removeChild(mJuryType);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryType);
 //		delete mJuryType;
-//	}
-//	mJuryType = NULL;
-//
-//	if (mDirection) {
+	}
+	mJuryType = NULL;
+
+	if (mDirection) {
+		mBaseWidget->removeChild(mDirection);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mDirection);
 //		delete mDirection;
-//	}
-//	mDirection = NULL;
-//
-//	if (mAddJury) {
+	}
+	mDirection = NULL;
+
+	if (mAddJury) {
+		mBaseWidget->removeChild(mAddJury);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mAddJury);
 //		delete mAddJury;
-//	}
-//	mAddJury = NULL;
-//
-//	if (mJuryMcl) {
+	}
+	mAddJury = NULL;
+
+	if (mJuryMcl) {
+		mBaseWidget->removeChild(mJuryMcl);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryMcl);
 //		delete mJuryMcl;
-//	}
-//	mJuryMcl = NULL;
+	}
+	mJuryMcl = NULL;
 }
 
 void NewPlanetPanel::onValueChanged() {
@@ -538,7 +561,7 @@ void NewPlanetPanel::onConfirmClicked() {
 
 	std::vector<Epoch*> mEpochs;
 
-	//TODO: This is not user friendly
+	//TODO: Make adding epochs more userfriendly
 	for (int i = 0; i < mJuryMcl->getRowCount(); i++) {
 		CEGUI::ListboxItem* listboxItem = mJuryMcl->getItemAtGridReference(
 			CEGUI::MCLGridRef(i, 0));

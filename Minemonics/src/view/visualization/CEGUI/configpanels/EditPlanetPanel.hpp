@@ -34,7 +34,7 @@ class PushButton;
 class EditPlanetPanel: public MovablePanel {
 public:
 	EditPlanetPanel(const int left, const int top, const std::string name);
-	~EditPlanetPanel(void);
+	virtual ~EditPlanetPanel(void);
 
 	void onValueChanged();
 	void onConfirmClicked();

@@ -107,10 +107,6 @@ public:
 		return mRenderer;
 	}
 
-	CEGUI::System* const getSystem() const {
-		return mSystem;
-	}
-
 	Evaluation* const getEvaluationInView() const {
 		return mEvaluationInView;
 	}
@@ -209,10 +205,6 @@ private:
 					"ViewController"));
 		}
 	} _initializer;
-
-	// CEGUI components
-	CEGUI::System* mSystem;
-	CEGUI::Window* mLayout;
 
 	//CEGUI windows
 	//# planet windows

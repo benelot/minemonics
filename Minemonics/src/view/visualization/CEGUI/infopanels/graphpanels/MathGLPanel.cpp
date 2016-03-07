@@ -69,9 +69,8 @@ MathGLPanel::MathGLPanel(const std::string name, const int left, const int top,
 	mRenderTextureTarget =
 		SimulationManager::getSingleton()->getViewController().getRenderer()->createTextureTarget();
 	mRenderTextureTarget->declareRenderSize(size);
-	mRenderGuiContext =
-		&SimulationManager::getSingleton()->getViewController().getSystem()->createGUIContext(
-			static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
+	mRenderGuiContext = &CEGUI::System::getSingleton().createGUIContext(
+		static_cast<CEGUI::RenderTarget&>(*mRenderTextureTarget));
 
 	mTexture = root->getTextureManager()->createManual("RTT",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -183,11 +182,28 @@ MathGLPanel::MathGLPanel(const std::string name, const int left, const int top,
 }
 
 MathGLPanel::~MathGLPanel() {
-	delete mRenderGuiContext;
-	mRenderGuiContext = NULL;
+	//Cleanup according to
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	// http://cegui.org.uk/forum/viewtopic.php?t=1535
 
-	delete mRenderTextureTarget;
-	mRenderTextureTarget = NULL;
+	if (mVerticalSlider) {
+		mFrameWindow->removeChild(mVerticalSlider);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mVerticalSlider);
+	}
+	mVerticalSlider = NULL;
+
+	if (mHorizontalSlider) {
+		mFrameWindow->removeChild(mHorizontalSlider);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mHorizontalSlider);
+	}
+	mHorizontalSlider = NULL;
+
+	mRenderTextureTarget = NULL; // render texture target is deleted in render gui context
+	if (mRenderGuiContext) {
+		CEGUI::System::getSingleton().destroyGUIContext(*mRenderGuiContext);
+//	delete mRenderGuiContext;
+	}
+	mRenderGuiContext = NULL;
 }
 
 void MathGLPanel::onHorizontalSliderValueChanged() {

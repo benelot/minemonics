@@ -11,6 +11,10 @@ cmake_minimum_required(VERSION 2.6)
  
 project(Minemonics)
 
+#Set if it should be built in debug or release mode
+set(CMAKE_BUILD_TYPE "Debug")
+#set(CMAKE_BUILD_TYPE "Release")
+
 #DEVELOPMENT INPUT
 # Append header files here
 
@@ -674,10 +678,6 @@ if(UNIX)
 	endif(EXISTS "/usr/local/lib/OGRE/cmake")
 	set(PROJECT_HOME .)
 endif(UNIX)
-
-#Set if it should be built in debug or release mode
-set(CMAKE_BUILD_TYPE "Debug")
-#set(CMAKE_BUILD_TYPE "Release")
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up

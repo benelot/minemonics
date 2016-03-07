@@ -40,7 +40,7 @@ public:
 
 public:
 	ParamsPanel(const std::string name, MovablePanelType type);
-	~ParamsPanel(void);
+	virtual ~ParamsPanel(void);
 
 	void initialize(const int left, const int top, const int width,
 		const bool hasTitleBar, VectorStringPairs items);

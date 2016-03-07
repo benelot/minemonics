@@ -31,9 +31,9 @@ class Window;
 class GUISheetHandler {
 public:
 	GUISheetHandler();
-	~GUISheetHandler();
+	virtual ~GUISheetHandler();
 
-	void initialize(CEGUI::System* const system, CEGUI::Window* const sheet);
+	void initialize(CEGUI::Window* const sheet);
 
 	// CEGUI event handlers. You can name these whatever you like, as long as they have the proper
 	// signature: bool <method name>(const CEGUI::EventArgs &args)
@@ -275,8 +275,7 @@ public:
 	bool helpButtonClicked(const CEGUI::EventArgs &args);
 
 private:
-	CEGUI::System* mSystem; /**!< pointer to the CEGUI System instance */
-	CEGUI::Window* mWindow; /**!< pointer to the layout sheet window */
+	CEGUI::Window* mLayout; /**!< pointer to the layout sheet window */
 
 	/**
 	 * The boost logger.

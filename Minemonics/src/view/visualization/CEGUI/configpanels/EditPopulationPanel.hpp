@@ -31,7 +31,7 @@ class Window;
 class EditPopulationPanel: public MovablePanel {
 public:
 	EditPopulationPanel(const int left, const int top, const std::string name);
-	~EditPopulationPanel(void);
+	virtual ~EditPopulationPanel(void);
 
 protected:
 	CEGUI::Window* mTextBoxLabel;

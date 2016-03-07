@@ -205,53 +205,71 @@ EditPlanetPanel::EditPlanetPanel(const int left, const int top,
 }
 
 EditPlanetPanel::~EditPlanetPanel(void) {
-	// According to:
-	//http://cegui.org.uk/forum/viewtopic.php?t=1535
-	// All chilrden of base widget are deleted as well
-//	if (mEnvironmentTypeLabel) {
+	//Cleanup according to
+	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
+	// http://cegui.org.uk/forum/viewtopic.php?t=1535
+	if (mEnvironmentTypeLabel) {
+		mBaseWidget->removeChild(mEnvironmentTypeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeLabel);
 //		delete mEnvironmentTypeLabel;
-//	}
-//	mEnvironmentTypeLabel = NULL;
-//
-//	if (mEvaluationTimeLabel) {
+	}
+	mEnvironmentTypeLabel = NULL;
+
+	if (mEvaluationTimeLabel) {
+		mBaseWidget->removeChild(mEvaluationTimeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeLabel);
 //		delete mEvaluationTimeLabel;
-//	}
-//	mEvaluationTimeLabel = NULL;
-//
-//	if (mEvaluationTypeLabel) {
+	}
+	mEvaluationTimeLabel = NULL;
+
+	if (mEvaluationTypeLabel) {
+		mBaseWidget->removeChild(mEvaluationTypeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeLabel);
 //		delete mEvaluationTypeLabel;
-//	}
-//	mEvaluationTypeLabel = NULL;
-//
-//	if (mTournamentSizeLabel) {
+	}
+	mEvaluationTypeLabel = NULL;
+
+	if (mTournamentSizeLabel) {
+		mBaseWidget->removeChild(mTournamentSizeLabel);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeLabel);
 //		delete mTournamentSizeLabel;
-//	}
-//	mTournamentSizeLabel = NULL;
-//
-//	if (mEnvironmentTypeCb) {
+	}
+	mTournamentSizeLabel = NULL;
+
+	if (mEnvironmentTypeCb) {
+		mBaseWidget->removeChild(mEnvironmentTypeCb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeCb);
 //		delete mEnvironmentTypeCb;
-//	}
-//	mEnvironmentTypeCb = NULL;
-//
-//	if (mEvaluationTimeBs) {
+	}
+	mEnvironmentTypeCb = NULL;
+
+	if (mEvaluationTimeBs) {
+		mBaseWidget->removeChild(mEvaluationTimeBs);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeBs);
 //		delete mEvaluationTimeBs;
-//	}
-//	mEvaluationTimeBs = NULL;
-//
-//	if (mEvaluationTypeCb) {
+	}
+	mEvaluationTimeBs = NULL;
+
+	if (mEvaluationTypeCb) {
+		mBaseWidget->removeChild(mEvaluationTypeCb);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeCb);
 //		delete mEvaluationTypeCb;
-//	}
-//	mEvaluationTypeCb = NULL;
-//
-//	if (mTournamentSizeBs) {
+	}
+	mEvaluationTypeCb = NULL;
+
+	if (mTournamentSizeBs) {
+		mBaseWidget->removeChild(mTournamentSizeBs);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeBs);
 //		delete mTournamentSizeBs;
-//	}
-//	mTournamentSizeBs = NULL;
-//
-//	if (mConfirmButton) {
+	}
+	mTournamentSizeBs = NULL;
+
+	if (mConfirmButton) {
+		mBaseWidget->removeChild(mConfirmButton);
+		CEGUI::WindowManager::getSingleton().destroyWindow(mConfirmButton);
 //		delete mConfirmButton;
-//	}
-//	mConfirmButton = NULL;
+	}
+	mConfirmButton = NULL;
 }
 
 void EditPlanetPanel::onValueChanged() {
