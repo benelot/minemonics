@@ -76,12 +76,12 @@ void PhysicsController::initialize() {
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "=Bullet Multibody Contraint Solver=";
 
 		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 0.01);
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
 
-		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(10,
-			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1);
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(0,
+			PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 1, 1); // approx 0, higher causes the the creature to fall through ground
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 
@@ -121,6 +121,8 @@ void PhysicsController::initialize() {
 			break;
 		}
 
+		//TODO: Fix parameters for other solvers than multibody
+
 		mDynamicsWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase,mSolver, mCollisionConfiguration);
 
 		if (PhysicsConfiguration::SOLVER_TYPE == PhysicsConfiguration::DANZIGSOLVER || PhysicsConfiguration::SOLVER_TYPE == PhysicsConfiguration::GAUSSSEIDELSOLVER) {
@@ -132,7 +134,7 @@ void PhysicsController::initialize() {
 		mDynamicsWorld->getSolverInfo().m_erp = BulletUtils::getERP(PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld ERP: " << mDynamicsWorld->getSolverInfo().m_erp;
 
-		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(1,PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
+		mDynamicsWorld->getSolverInfo().m_globalCfm = BulletUtils::getCFM(0,PhysicsConfiguration::FIXED_STEP_SIZE_SEC, 100, 1);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Bullet DynamicsWorld CFM: " << mDynamicsWorld->getSolverInfo().m_globalCfm;
 
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Using split impulse feature with ERP/TurnERP: (" << mDynamicsWorld->getSolverInfo().m_erp2 << "," << mDynamicsWorld->getSolverInfo().m_splitImpulseTurnErp << ")";

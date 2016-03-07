@@ -86,6 +86,8 @@ public:
 
 	void generateBody();
 
+	void setPosAndVel();
+
 	void addJointConstraints();
 
 	/**

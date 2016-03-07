@@ -148,10 +148,15 @@ FSJointBt::~FSJointBt() {
 	mWorld = NULL; 	// nullify the world reference
 }
 
-void FSJointBt::setPosAndVel(){
+void FSJointBt::setPosAndVel() {
+	// the initial position is expressed in radians (45 degree example below)
+//	btScalar initialPosition = 45.f * SIMD_PI / 180.f;
+
+	btScalar initialVelocity = mInitialVelocity;
+	btScalar initialPosition = mInitialPosition;
 	if (mMultiBody) {
-		mMultiBody->setJointPos(mJointIndex, mInitialPosition);
-		mMultiBody->setJointVel(mJointIndex, mInitialVelocity);
+		mMultiBody->setJointPosMultiDof(mJointIndex, &initialPosition);
+		mMultiBody->setJointVelMultiDof(mJointIndex, &initialVelocity);
 	}
 }
 

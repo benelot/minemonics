@@ -143,6 +143,8 @@ void FSPhenomeModel::initialize() {
 	if (!mBodyGenerated) {
 		generateBody(); /**!< Build the body from the body plan */
 
+		setPosAndVel();
+
 		collectControlInputs(); /**!< Collect the control inputs to wire the controller */
 
 		collectControlOutputs(); /**!< Collect the control outputs to wire the controller */
@@ -735,10 +737,6 @@ void FSPhenomeModel::generateBody() {
 
 		mMultiBody->finalizeMultiDof();
 
-		for (int i = 0; i < mJointModels.size(); i++) {
-			((FSJointBt*) mJointModels[i]->getJointPhysics())->setPosAndVel();
-		}
-
 		mMultiBody->setCanSleep(canSleep);
 		mMultiBody->setHasSelfCollision(selfCollision);
 		mMultiBody->setUseGyroTerm(gyro);
@@ -796,6 +794,12 @@ void FSPhenomeModel::generateBody() {
 	}
 
 	mBodyGenerated = true;
+}
+
+void FSPhenomeModel::setPosAndVel(){
+	for (int i = 0; i < mJointModels.size(); i++) {
+		((FSJointBt*) mJointModels[i]->getJointPhysics())->setPosAndVel();
+	}
 }
 
 void FSPhenomeModel::addJointConstraints() {
