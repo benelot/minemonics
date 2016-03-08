@@ -186,24 +186,24 @@ MathGLPanel::~MathGLPanel() {
 	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
 	// http://cegui.org.uk/forum/viewtopic.php?t=1535
 
-	if (mVerticalSlider) {
-		mFrameWindow->removeChild(mVerticalSlider);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mVerticalSlider);
-	}
-	mVerticalSlider = NULL;
-
-	if (mHorizontalSlider) {
-		mFrameWindow->removeChild(mHorizontalSlider);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mHorizontalSlider);
-	}
-	mHorizontalSlider = NULL;
-
-	mRenderTextureTarget = NULL; // render texture target is deleted in render gui context
-	if (mRenderGuiContext) {
-		CEGUI::System::getSingleton().destroyGUIContext(*mRenderGuiContext);
-//	delete mRenderGuiContext;
-	}
-	mRenderGuiContext = NULL;
+//	if (mVerticalSlider) {
+//		mFrameWindow->removeChild(mVerticalSlider);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mVerticalSlider);
+//	}
+//	mVerticalSlider = NULL;
+//
+//	if (mHorizontalSlider) {
+//		mFrameWindow->removeChild(mHorizontalSlider);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mHorizontalSlider);
+//	}
+//	mHorizontalSlider = NULL;
+//
+//	mRenderTextureTarget = NULL; // render texture target is deleted in render gui context
+//	if (mRenderGuiContext) {
+//		CEGUI::System::getSingleton().destroyGUIContext(*mRenderGuiContext);
+////	delete mRenderGuiContext;
+//	}
+//	mRenderGuiContext = NULL;
 }
 
 void MathGLPanel::onHorizontalSliderValueChanged() {

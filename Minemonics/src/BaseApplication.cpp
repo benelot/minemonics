@@ -9,6 +9,12 @@
 #include <utility>
 
 //## controller headers
+#include <SDL.h>
+#include <SDL_mouse.h>
+#include <SDL_stdinc.h>
+#include <SDL_syswm.h>
+#include <SDL_video.h>
+
 //## model headers
 //## view headers
 #include <OgreCamera.h>
@@ -41,10 +47,12 @@
 #endif
 
 //---------------------------------------------------------------------------
+BoostLogger BaseApplication::mBoostLogger;  // initialize the static variables
+BaseApplication::_Init BaseApplication::_initializer;
 BaseApplication::BaseApplication(void) :
 	mRoot(0), mSceneMgr(0), mWindow(0), mResourcesCfg(Ogre::StringUtil::BLANK), mPluginsCfg(
 		Ogre::StringUtil::BLANK), mCursorWasVisible(false), mShutDown(false), mOverlaySystem(
-		0) {
+		0), mSdlWindow(NULL) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
 	m_ResourcePath = Ogre::macBundlePath() + "/Contents/Resources/";
 #else
@@ -54,14 +62,28 @@ BaseApplication::BaseApplication(void) :
 
 //---------------------------------------------------------------------------
 BaseApplication::~BaseApplication(void) {
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown Information overlay...";
 	if (mOverlaySystem) {
 		delete mOverlaySystem;
 	}
 	mOverlaySystem = NULL;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown Information overlay...done.";
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown GUI listeners...";
 	// Remove ourself as a Window listener
 	Ogre::WindowEventUtilities::removeWindowEventListener(mWindow, this);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown GUI listeners...done.";
+
+	// Shut down ogre
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown Ogre3D...";
+	mSceneMgr->clearScene();
+	mRoot->destroySceneManager(mSceneMgr);
 	delete mRoot;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown Ogre3D...done.";
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown SDL...";
+	SDL_Quit();
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown SDL...done.";
 }
 
 //---------------------------------------------------------------------------

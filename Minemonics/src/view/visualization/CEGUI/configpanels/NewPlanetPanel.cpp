@@ -376,117 +376,117 @@ NewPlanetPanel::~NewPlanetPanel(void) {
 	//Cleanup according to
 	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
 	// http://cegui.org.uk/forum/viewtopic.php?t=1535
-	if (mPhysicsControllerTypeLabel) {
-		mBaseWidget->removeChild(mPhysicsControllerTypeLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mPhysicsControllerTypeLabel);
-//		delete mPhysicsControllerTypeLabel;
-	}
-	mPhysicsControllerTypeLabel = NULL;
-
-	if (mEnvironmentTypeLabel) {
-		mBaseWidget->removeChild(mEnvironmentTypeLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeLabel);
-//		delete mEnvironmentTypeLabel;
-	}
-	mEnvironmentTypeLabel = NULL;
-
-	if (mEvaluationTimeLabel) {
-		mBaseWidget->removeChild(mEvaluationTimeLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeLabel);
-//		delete mEvaluationTimeLabel;
-	}
-	mEvaluationTimeLabel = NULL;
-
-	if (mEvaluationTypeLabel) {
-		mBaseWidget->removeChild(mEvaluationTypeLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeLabel);
-//		delete mEvaluationTypeLabel;
-	}
-	mEvaluationTypeLabel = NULL;
-
-	if (mTournamentSizeLabel) {
-		mBaseWidget->removeChild(mTournamentSizeLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeLabel);
-//		delete mTournamentSizeLabel;
-	}
-	mTournamentSizeLabel = NULL;
-
-	if (mEnvironmentTypeCb) {
-		mBaseWidget->removeChild(mEnvironmentTypeCb);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeCb);
-//		delete mEnvironmentTypeCb;
-	}
-	mEnvironmentTypeCb = NULL;
-
-	if (mEvaluationTimeBs) {
-		mBaseWidget->removeChild(mEvaluationTimeBs);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeBs);
-//		delete mEvaluationTimeBs;
-	}
-	mEvaluationTimeBs = NULL;
-
-	if (mEvaluationTypeCb) {
-		mBaseWidget->removeChild(mEvaluationTypeCb);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeCb);
-//		delete mEvaluationTypeCb;
-	}
-	mEvaluationTypeCb = NULL;
-
-	if (mTournamentSizeBs) {
-		mBaseWidget->removeChild(mTournamentSizeBs);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeBs);
-//		delete mTournamentSizeBs;
-	}
-	mTournamentSizeBs = NULL;
-
-	if (mConfirmButton) {
-		mBaseWidget->removeChild(mConfirmButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mConfirmButton);
-//		delete mConfirmButton;
-	}
-	mConfirmButton = NULL;
-
-	if (mEpochNumber) {
-		mBaseWidget->removeChild(mEpochNumber);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mEpochNumber);
-//		delete mEpochNumber;
-	}
-	mEpochNumber = NULL;
-
-	if (mJuryWeight) {
-		mBaseWidget->removeChild(mJuryWeight);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryWeight);
-//		delete mJuryWeight;
-	}
-	mJuryWeight = NULL;
-
-	if (mJuryType) {
-		mBaseWidget->removeChild(mJuryType);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryType);
-//		delete mJuryType;
-	}
-	mJuryType = NULL;
-
-	if (mDirection) {
-		mBaseWidget->removeChild(mDirection);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mDirection);
-//		delete mDirection;
-	}
-	mDirection = NULL;
-
-	if (mAddJury) {
-		mBaseWidget->removeChild(mAddJury);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mAddJury);
-//		delete mAddJury;
-	}
-	mAddJury = NULL;
-
-	if (mJuryMcl) {
-		mBaseWidget->removeChild(mJuryMcl);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryMcl);
-//		delete mJuryMcl;
-	}
-	mJuryMcl = NULL;
+//	if (mPhysicsControllerTypeLabel) {
+//		mBaseWidget->removeChild(mPhysicsControllerTypeLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mPhysicsControllerTypeLabel);
+////		delete mPhysicsControllerTypeLabel;
+//	}
+//	mPhysicsControllerTypeLabel = NULL;
+//
+//	if (mEnvironmentTypeLabel) {
+//		mBaseWidget->removeChild(mEnvironmentTypeLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeLabel);
+////		delete mEnvironmentTypeLabel;
+//	}
+//	mEnvironmentTypeLabel = NULL;
+//
+//	if (mEvaluationTimeLabel) {
+//		mBaseWidget->removeChild(mEvaluationTimeLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeLabel);
+////		delete mEvaluationTimeLabel;
+//	}
+//	mEvaluationTimeLabel = NULL;
+//
+//	if (mEvaluationTypeLabel) {
+//		mBaseWidget->removeChild(mEvaluationTypeLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeLabel);
+////		delete mEvaluationTypeLabel;
+//	}
+//	mEvaluationTypeLabel = NULL;
+//
+//	if (mTournamentSizeLabel) {
+//		mBaseWidget->removeChild(mTournamentSizeLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeLabel);
+////		delete mTournamentSizeLabel;
+//	}
+//	mTournamentSizeLabel = NULL;
+//
+//	if (mEnvironmentTypeCb) {
+//		mBaseWidget->removeChild(mEnvironmentTypeCb);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEnvironmentTypeCb);
+////		delete mEnvironmentTypeCb;
+//	}
+//	mEnvironmentTypeCb = NULL;
+//
+//	if (mEvaluationTimeBs) {
+//		mBaseWidget->removeChild(mEvaluationTimeBs);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTimeBs);
+////		delete mEvaluationTimeBs;
+//	}
+//	mEvaluationTimeBs = NULL;
+//
+//	if (mEvaluationTypeCb) {
+//		mBaseWidget->removeChild(mEvaluationTypeCb);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEvaluationTypeCb);
+////		delete mEvaluationTypeCb;
+//	}
+//	mEvaluationTypeCb = NULL;
+//
+//	if (mTournamentSizeBs) {
+//		mBaseWidget->removeChild(mTournamentSizeBs);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mTournamentSizeBs);
+////		delete mTournamentSizeBs;
+//	}
+//	mTournamentSizeBs = NULL;
+//
+//	if (mConfirmButton) {
+//		mBaseWidget->removeChild(mConfirmButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mConfirmButton);
+////		delete mConfirmButton;
+//	}
+//	mConfirmButton = NULL;
+//
+//	if (mEpochNumber) {
+//		mBaseWidget->removeChild(mEpochNumber);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mEpochNumber);
+////		delete mEpochNumber;
+//	}
+//	mEpochNumber = NULL;
+//
+//	if (mJuryWeight) {
+//		mBaseWidget->removeChild(mJuryWeight);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryWeight);
+////		delete mJuryWeight;
+//	}
+//	mJuryWeight = NULL;
+//
+//	if (mJuryType) {
+//		mBaseWidget->removeChild(mJuryType);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryType);
+////		delete mJuryType;
+//	}
+//	mJuryType = NULL;
+//
+//	if (mDirection) {
+//		mBaseWidget->removeChild(mDirection);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mDirection);
+////		delete mDirection;
+//	}
+//	mDirection = NULL;
+//
+//	if (mAddJury) {
+//		mBaseWidget->removeChild(mAddJury);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mAddJury);
+////		delete mAddJury;
+//	}
+//	mAddJury = NULL;
+//
+//	if (mJuryMcl) {
+//		mBaseWidget->removeChild(mJuryMcl);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mJuryMcl);
+////		delete mJuryMcl;
+//	}
+//	mJuryMcl = NULL;
 }
 
 void NewPlanetPanel::onValueChanged() {

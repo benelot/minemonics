@@ -214,7 +214,6 @@ private:
 
 	//## view components ########################
 	Ogre::TerrainGlobalOptions mTerrainGlobals; /**!< This must be a singleton it seems */
-	SDL_Window* mSdlWindow; /**!< The window of the simulator */
 	ViewController mViewController; /**!< The view controller of the simulation */
 	MousePicker mMousePicker; /**!< The mouse picker to move 3D elements with the mouse */
 	Ogre3DFFMPEGVideoWriter mVideoWriter; /**!< The video writer to produce videos from the scene */

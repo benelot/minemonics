@@ -6,6 +6,7 @@
 namespace Ogre {
 class OverlaySystem;
 } /* namespace Ogre */
+struct SDL_Window;
 
 
 //# system headers
@@ -23,6 +24,7 @@ class OverlaySystem;
 //## model headers
 //## view headers
 //## utils headers
+#include <utils/logging/Logger.hpp>
 
 #ifdef OGRE_STATIC_LIB
 #  define OGRE_STATIC_GL
@@ -88,6 +90,7 @@ protected:
 	virtual void windowResized(Ogre::RenderWindow* rw) = 0; /**!< Adjust mouse clipping area */
 
 	Ogre::Root* mRoot;
+	SDL_Window* mSdlWindow; /**!< The window of the simulator */
 	Ogre::SceneManager* mSceneMgr;
 	Ogre::RenderWindow* mWindow;
 	Ogre::String mResourcesCfg;
@@ -103,6 +106,18 @@ protected:
 #ifdef OGRE_STATIC_LIB
 	Ogre::StaticPluginLoader m_StaticPluginLoader;
 #endif
+
+private:
+	static BoostLogger mBoostLogger; /**!< The logger instance of the simulation manager */
+
+	static class _Init {
+	public:
+		_Init() {
+			mBoostLogger.add_attribute("ClassName",
+				boost::log::attributes::constant < std::string
+					> ("SimulationManager"));
+		}
+	} _initializer;
 };
 
 #endif // #ifndef __BaseApplication_h_

@@ -81,17 +81,17 @@ EditPopulationPanel::~EditPopulationPanel(void) {
 	//Cleanup according to
 	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
 	// http://cegui.org.uk/forum/viewtopic.php?t=1535
-	if (mTextBoxLabel) {
-		mBaseWidget->removeChild(mTextBoxLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxLabel);
-//		delete mTextBoxLabel;
-	}
-	mTextBoxLabel = NULL;
-
-	if (mTextBoxValues) {
-		mBaseWidget->removeChild(mTextBoxValues);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxValues);
-//		delete mTextBoxValues;
-	}
-	mTextBoxValues = NULL;
+//	if (mTextBoxLabel) {
+//		mBaseWidget->removeChild(mTextBoxLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxLabel);
+////		delete mTextBoxLabel;
+//	}
+//	mTextBoxLabel = NULL;
+//
+//	if (mTextBoxValues) {
+//		mBaseWidget->removeChild(mTextBoxValues);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mTextBoxValues);
+////		delete mTextBoxValues;
+//	}
+//	mTextBoxValues = NULL;
 }

@@ -96,7 +96,7 @@ BoostLogger SimulationManager::mBoostLogger;  // initialize the static variables
 SimulationManager::_Init SimulationManager::_initializer;
 //-------------------------------------------------------------------------------------
 SimulationManager::SimulationManager(void) :
-	mStateHandler(), mInputHandler(), mSdlWindow(NULL), mCurrentSimulationSpeed(
+	mStateHandler(), mInputHandler(), mCurrentSimulationSpeed(
 		PhysicsConfiguration::SIMULATION_SPEED_01), mSun(NULL) {
 
 	mSimulationManager = this; /**!< Initialize the singleton*/
@@ -131,25 +131,22 @@ SimulationManager::SimulationManager(void) :
 //-------------------------------------------------------------------------------------
 SimulationManager::~SimulationManager(void) {
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Destroy Scene...";
 	destroyScene(); /**!< tear down the scene */
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Destroy Scene...done.";
 
 	// destroy the ogre renderer system
-	//TODO: Properly cleanup CEGUI system
 	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
 	//http://cegui.org.uk/forum/viewtopic.php?t=6166
-//	CEGUI::OgreRenderer::destroySystem();
-
-
-	//TODO: Check if this is done correctly
-	SDL_DestroyWindow(mSdlWindow);
-	mSdlWindow = NULL;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown CEGUI...";
+	CEGUI::OgreRenderer::destroySystem();
+	CEGUI::System::destroy();
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Shutdown CEGUI...done.";
 
 	//This is used past this line because the destructors are called on it
 //	mSimulationManager = NULL;
 	delete mRandomness;
 	mRandomness = NULL;
-
-	 SDL_Quit();
 }
 
 void SimulationManager::setupView(void) {
@@ -254,8 +251,10 @@ void SimulationManager::createScene(void) {
 void SimulationManager::createFrameListener(void) {
 	windowResized(mWindow); /**!< Set initial mouse clipping size */
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize GUI listeners...";
 	Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this); /**!< Register as a Window and Frame listener */
 	mRoot->addFrameListener(this);
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize GUI listeners...done.";
 }
 
 /**
@@ -541,16 +540,21 @@ bool SimulationManager::quit() {
  */
 bool SimulationManager::configure(void) {
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize InputHandler...";
 	mInputHandler.initialize();
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize InputHandler...done.";
 
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize SDL...";
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
 			"Cannot initialize SDL2!", "GraphicsSystem::initialize");
 	}
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize SDL...done.";
 
 	// Show the configuration dialog and initialize the system
 	// You can skip this and use root.restoreConfig() to load configuration
 	// settings if you were sure there are valid ones saved in ogre.cfg
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize Ogre3D...";
 	if (!mRoot->restoreConfig()) {
 		if (!mRoot->showConfigDialog()) {
 			mStateHandler.requestStateChange(StateHandler::SHUTDOWN);
@@ -595,7 +599,6 @@ bool SimulationManager::configure(void) {
 		posX = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 		posY = SDL_WINDOWPOS_CENTERED_DISPLAY(screen);
 	}
-
 	// create the SDL window
 	mSdlWindow = SDL_CreateWindow(
 		ApplicationConfiguration::APPLICATION_TITLE.c_str(), // window title
@@ -663,6 +666,9 @@ bool SimulationManager::configure(void) {
 	mWindow = Ogre::Root::getSingleton().createRenderWindow(
 		ApplicationConfiguration::APPLICATION_TITLE, width, height, fullscreen,
 		&params);
+
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize Ogre3D...done.";
+
 	return true;
 }
 

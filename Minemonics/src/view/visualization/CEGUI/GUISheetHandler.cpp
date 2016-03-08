@@ -47,10 +47,10 @@ GUISheetHandler::GUISheetHandler() :
 }
 
 GUISheetHandler::~GUISheetHandler() {
-	if (mLayout) {
-		CEGUI::WindowManager::getSingleton().destroyWindow(mLayout);
-	}
-	mLayout = NULL;
+//	if (mLayout) {
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mLayout);
+//	}
+//	mLayout = NULL;
 }
 
 void GUISheetHandler::initialize(CEGUI::Window* const layout) {

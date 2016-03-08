@@ -788,10 +788,10 @@ MenuBar::~MenuBar() {
 	// http://cegui.org.uk/wiki/CEGUI_In_Practice_-_Introduction
 	// http://cegui.org.uk/forum/viewtopic.php?t=1535
 
-	if (mMenuBar) {
-		CEGUI::WindowManager::getSingleton().destroyWindow(mMenuBar);
-//	delete mMenuBar;
-	}
-	mMenuBar = NULL;
+//	if (mMenuBar) {
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mMenuBar);
+////	delete mMenuBar;
+//	}
+//	mMenuBar = NULL;
 }
 

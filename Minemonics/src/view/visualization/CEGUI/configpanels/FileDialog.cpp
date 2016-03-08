@@ -346,119 +346,119 @@ FileDialog::~FileDialog() {
 	// According to:
 	//http://cegui.org.uk/forum/viewtopic.php?t=1535
 	// All chilrden of base widget are deleted as well
-	if (mBackButton) {
-		mBaseWidget->removeChild(mBackButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mBackButton);
-//		delete mBackButton;
-	}
-	mBackButton = NULL;
-
-	if (mOkButton) {
-		mBaseWidget->removeChild(mOkButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mOkButton);
-//		delete mOkButton;
-	}
-	mOkButton = NULL;
-
-	if (mCancelButton) {
-		mBaseWidget->removeChild(mCancelButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mCancelButton);
-//		delete mCancelButton;
-	}
-	mCancelButton = NULL;
-
-	if (mFileLabel) {
-		mBaseWidget->removeChild(mFileLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mFileLabel);
-//		delete mFileLabel;
-	}
-	mFileLabel = NULL;
-
-	if (mFileCb) {
-		mBaseWidget->removeChild(mFileCb);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mFileCb);
-		delete mFileCb;
-	}
-	mFileCb = NULL;
-
-	if (mDrivesCb) {
-		mBaseWidget->removeChild(mDrivesCb);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mDrivesCb);
-//		delete mDrivesCb;
-	}
-	mDrivesCb = NULL;
-
-	if (mExtensionsLabel) {
-		mBaseWidget->removeChild(mExtensionsLabel);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mExtensionsLabel);
-//		delete mExtensionsLabel;
-	}
-	mExtensionsLabel = NULL;
-
-	if (mFilesLb) {
-		mBaseWidget->removeChild(mFilesLb);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mFilesLb);
-//		delete mFilesLb;
-	}
-	mFilesLb = NULL;
-
-	if (mStPromptLoad) {
-		mWindowPromptLoad->removeChild(mStPromptLoad);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mStPromptLoad);
-//		delete mStPromptLoad;
-	}
-	mStPromptLoad = NULL;
-
-	if (mPromptLoadOkButton) {
-		mWindowPromptLoad->removeChild(mPromptLoadOkButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mPromptLoadOkButton);
-//		delete mPromptLoadOkButton;
-	}
-	mPromptLoadOkButton = NULL;
-
-	if (mPromptLoadCancelButton) {
-		mWindowPromptLoad->removeChild(mPromptLoadCancelButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(
-			mPromptLoadCancelButton);
-//		delete mPromptLoadCancelButton;
-	}
-	mPromptLoadCancelButton = NULL;
-
-	if (mWindowPromptLoad) {
-		mBaseWidget->removeChild(mWindowPromptLoad);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mWindowPromptLoad);
-//		delete mWindowPromptLoad;
-	}
-	mWindowPromptLoad = NULL;
-
-	if (mStPromptSave) {
-		mWindowPromptSave->removeChild(mStPromptSave);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mStPromptSave);
-//		delete mStPromptSave;
-	}
-	mStPromptSave = NULL;
-
-	if (mPromptSaveOkButton) {
-		mWindowPromptSave->removeChild(mPromptSaveOkButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mPromptSaveOkButton);
-//		delete mPromptSaveOkButton;
-	}
-	mPromptSaveOkButton = NULL;
-
-	if (mPromptSaveCancelButton) {
-		mWindowPromptSave->removeChild(mPromptSaveCancelButton);
-		CEGUI::WindowManager::getSingleton().destroyWindow(
-			mPromptSaveCancelButton);
-//		delete mPromptSaveCancelButton;
-	}
-	mPromptSaveCancelButton = NULL;
-
-	if (mWindowPromptSave) {
-		mBaseWidget->removeChild(mWindowPromptSave);
-		CEGUI::WindowManager::getSingleton().destroyWindow(mWindowPromptSave);
-//		delete mWindowPromptSave;
-	}
-	mWindowPromptSave = NULL;
+//	if (mBackButton) {
+//		mBaseWidget->removeChild(mBackButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mBackButton);
+////		delete mBackButton;
+//	}
+//	mBackButton = NULL;
+//
+//	if (mOkButton) {
+//		mBaseWidget->removeChild(mOkButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mOkButton);
+////		delete mOkButton;
+//	}
+//	mOkButton = NULL;
+//
+//	if (mCancelButton) {
+//		mBaseWidget->removeChild(mCancelButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mCancelButton);
+////		delete mCancelButton;
+//	}
+//	mCancelButton = NULL;
+//
+//	if (mFileLabel) {
+//		mBaseWidget->removeChild(mFileLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mFileLabel);
+////		delete mFileLabel;
+//	}
+//	mFileLabel = NULL;
+//
+//	if (mFileCb) {
+//		mBaseWidget->removeChild(mFileCb);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mFileCb);
+//		delete mFileCb;
+//	}
+//	mFileCb = NULL;
+//
+//	if (mDrivesCb) {
+//		mBaseWidget->removeChild(mDrivesCb);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mDrivesCb);
+////		delete mDrivesCb;
+//	}
+//	mDrivesCb = NULL;
+//
+//	if (mExtensionsLabel) {
+//		mBaseWidget->removeChild(mExtensionsLabel);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mExtensionsLabel);
+////		delete mExtensionsLabel;
+//	}
+//	mExtensionsLabel = NULL;
+//
+//	if (mFilesLb) {
+//		mBaseWidget->removeChild(mFilesLb);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mFilesLb);
+////		delete mFilesLb;
+//	}
+//	mFilesLb = NULL;
+//
+//	if (mStPromptLoad) {
+//		mWindowPromptLoad->removeChild(mStPromptLoad);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mStPromptLoad);
+////		delete mStPromptLoad;
+//	}
+//	mStPromptLoad = NULL;
+//
+//	if (mPromptLoadOkButton) {
+//		mWindowPromptLoad->removeChild(mPromptLoadOkButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mPromptLoadOkButton);
+////		delete mPromptLoadOkButton;
+//	}
+//	mPromptLoadOkButton = NULL;
+//
+//	if (mPromptLoadCancelButton) {
+//		mWindowPromptLoad->removeChild(mPromptLoadCancelButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(
+//			mPromptLoadCancelButton);
+////		delete mPromptLoadCancelButton;
+//	}
+//	mPromptLoadCancelButton = NULL;
+//
+//	if (mWindowPromptLoad) {
+//		mBaseWidget->removeChild(mWindowPromptLoad);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mWindowPromptLoad);
+////		delete mWindowPromptLoad;
+//	}
+//	mWindowPromptLoad = NULL;
+//
+//	if (mStPromptSave) {
+//		mWindowPromptSave->removeChild(mStPromptSave);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mStPromptSave);
+////		delete mStPromptSave;
+//	}
+//	mStPromptSave = NULL;
+//
+//	if (mPromptSaveOkButton) {
+//		mWindowPromptSave->removeChild(mPromptSaveOkButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mPromptSaveOkButton);
+////		delete mPromptSaveOkButton;
+//	}
+//	mPromptSaveOkButton = NULL;
+//
+//	if (mPromptSaveCancelButton) {
+//		mWindowPromptSave->removeChild(mPromptSaveCancelButton);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(
+//			mPromptSaveCancelButton);
+////		delete mPromptSaveCancelButton;
+//	}
+//	mPromptSaveCancelButton = NULL;
+//
+//	if (mWindowPromptSave) {
+//		mBaseWidget->removeChild(mWindowPromptSave);
+//		CEGUI::WindowManager::getSingleton().destroyWindow(mWindowPromptSave);
+////		delete mWindowPromptSave;
+//	}
+//	mWindowPromptSave = NULL;
 }
 
 void FileDialog::disableDialog(void) {
