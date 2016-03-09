@@ -281,7 +281,7 @@ public:
 	 * @param fatherGenome
 	 * 					The genome of the father.
 	 */
-	virtual void crossoverRandomly(Genome* const fatherGenome) = 0;
+	virtual void crossoverRandomly(const Genome* const fatherGenome) = 0;
 
 	/**
 	 * @brief Crossover with other genome where we keep all genes between motherSegmentStartIndex and motherSegmentEndIndex
@@ -296,7 +296,7 @@ public:
 	 * @param fatherSegmentEndIndex
 	 * 							The segment index in the father genome where the copying ends.
 	 */
-	virtual void crossover(Genome* const fathergenome,
+	virtual void crossover(const Genome* const fathergenome,
 	const int motherSegmentStartIndex, const int motherSegmentEndIndex,
 	const int fatherSegmentStartIndex, const int fatherSegmentEndIndex) = 0;
 

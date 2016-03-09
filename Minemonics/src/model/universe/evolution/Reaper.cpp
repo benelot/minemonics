@@ -33,7 +33,7 @@ Reaper::_Init Reaper::_initializer;
 Reaper::Reaper() :
 	mElitistPercentage(0), mGeneSplitPercentage(0), mGrowStubPercentage(0), mGraftPercentage(
 		0), mBranchMutationPercentage(0), mCrossOverPercentage(0), mGeneMutationPercentage(
-		0), mReapPercentage(0), mSowFreshPercentage(0),mGenePurgePercentage(0) {
+		0), mReapPercentage(0), mSowFreshPercentage(0), mGenePurgePercentage(0) {
 }
 
 Reaper::~Reaper() {
@@ -235,63 +235,69 @@ void Reaper::sow(PopulationModel* const population) {
 }
 
 void Reaper::crossover(PopulationModel* const population,
-	const int crossoverHeads) {
+	const int totalCrossoverHeads) {
 
 	//how many offspring do we get per parent?
 	int offspringPerParent = ceil(
-		crossoverHeads
+		totalCrossoverHeads
 			/ (population->getCreatureModels().size() * mElitistPercentage));
 
 	int crossOverSown = 0;
 
 	//crossover the best creature with those in the ranking downwards according to the cross over percentage
-	std::vector<CreatureModel*>::iterator cit =
+	for (std::vector<CreatureModel*>::iterator cit =
 		population->getCreatureModels().begin();
-	for (int i = 0;
-		cit != population->getCreatureModels().end() && i < crossoverHeads;
-		i++) {
-		CreatureModel* offspring = NULL;
-		CreatureModel* partner = NULL;
+		cit != population->getCreatureModels().end(); cit++) {
 
-		// find a partner for the creature
-		if (Randomness::getSingleton()->nextUnifBoolean()) { // flip a coin; tournament of random creature
-			for (int k = 0; k < offspringPerParent; k++) {
+		for (int k = 0; k < offspringPerParent && crossOverSown < totalCrossoverHeads; k++) {
+
+			CreatureModel* partner = NULL;
+			CreatureModel* offspring = NULL;
+
+			// find a partner for the creature
+			if (Randomness::getSingleton()->nextUnifBoolean()) { // flip a coin; tournament of random creature
+
 				int bestCreatureIndex = 0;
 				int bestFitness = 0;
 
-				for (int j = 0;
-					j < EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
-					j++) {
-					CreatureModel* model = population->getCreatureModels().at( // Whenever a parent is needed, we choose a number of individuals at random from
-						Randomness::getSingleton()->nextNormalPosInt(0, // the previous generation. These individuals constitute a tournament.
-							population->getCreatureModels().size() - 1, 1.0f)); // The creature with the highest fitness wins and becomes the selected parent.
-					if (bestFitness < model->getFitnessScore()) {
+				for (int tournamentPosition = 0;
+					tournamentPosition
+						< EvolutionConfiguration::EVOLUTION_TOURNAMENT_SIZE;
+					tournamentPosition++) {
+					int creatureIndex =
+						Randomness::getSingleton()->nextNormalPosInt(0, // normal distribution with
+							population->getCreatureModels().size() - 1, 1.0f); // highest chance for index 0 and lowest at size-1
+
+					// Whenever a parent is needed, we choose a number of individuals at random from
+					// the previous generation. These individuals constitute a tournament.
+					// The creature with the highest fitness wins and becomes the selected parent.
+					CreatureModel* model = population->getCreatureModels().at(
+						creatureIndex);
+
+					if (bestFitness < model->getFitnessScore()) { // if model is better than the previously stored, we keep the better one
 						bestFitness = model->getFitnessScore();
 						partner = model;
 					}
 				}
+			} else { //Cross over with one random creature
+				int creatureIndex = Randomness::getSingleton()->nextUnifPosInt(
+					0, population->getCreatureModels().size() - 1);
+
+				partner = population->getCreatureModels().at(creatureIndex);
 			}
-		} else { //Cross over with one random creature
-			partner = population->getCreatureModels().at(
-				Randomness::getSingleton()->nextUnifPosInt(0,
-					population->getCreatureModels().size() - 1));
+
+			offspring = (*cit)->clone(); // Clone the old creature
+			offspring->setNew(true); // Make the creature a new creature
+			offspring->giveRebirth(); // Give the creature a rebirth from its old clone
+			offspring->setDeveloped(false); // Set the creature for an embryogenesis
+
+			offspring->getGenotype().crossoverRandomly(
+				&(partner->getGenotype())); // Crossover randomly with its partner
+			offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+			population->getCreatureModels().push_back(offspring);
+
+			crossOverSown++;
 		}
-
-		offspring = (*cit)->clone(); // Clone the old creature
-		offspring->setNew(true); // Make the creature a new creature
-		offspring->giveRebirth(); // Give the creature a rebirth from its old clone
-		offspring->setDeveloped(false); // Set the creature for an embryogenesis
-
-		offspring->getGenotype().crossoverRandomly(&(partner->getGenotype())); // Crossover randomly with its partner
-		offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
-		population->getCreatureModels().push_back(offspring);
-
-		// Are we done?
-		crossOverSown++;
-		if (crossOverSown == crossoverHeads) {
-			break;
-		}
-		cit++;
 	}
 }
 
@@ -302,15 +308,15 @@ void Reaper::mutateGenes(PopulationModel* const population, int startIndex,
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
 			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
-					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+					population->getCreatureModels()[startIndex + i]->clone();// Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
 					true);
-				offspring->setNew(true); // Make the creature a new creature
-				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+				offspring->setNew(true);	// Make the creature a new creature
+				offspring->setDeveloped(false);	// Set the creature for an embryogenesis
 
 				offspring->getGenotype().mutateRandomGenes(
-					EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY); // Mutate random genes
-				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+					EvolutionConfiguration::REAPER_GENE_MUTATION_PROBABILITY);// Mutate random genes
+				offspring->getGenotype().recalculateRootIndex();// Reposition the root index
 				population->getCreatureModels().push_back(offspring);
 			}
 		}
@@ -324,15 +330,15 @@ void Reaper::splitGenes(PopulationModel* const population, const int startIndex,
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
 			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
-					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+					population->getCreatureModels()[startIndex + i]->clone();// Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
 					true);
-				offspring->setNew(true); // Make the creature a new creature
-				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+				offspring->setNew(true);	// Make the creature a new creature
+				offspring->setDeveloped(false);	// Set the creature for an embryogenesis
 
 				offspring->getGenotype().splitRandomGenes(
 					EvolutionConfiguration::REAPER_GENE_SPLIT_PROBABILITY);
-				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				offspring->getGenotype().recalculateRootIndex();// Reposition the root index
 				population->getCreatureModels().push_back(offspring);
 			}
 		}
@@ -346,15 +352,15 @@ void Reaper::purgeGenes(PopulationModel* const population, int startIndex,
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
 			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
-					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+					population->getCreatureModels()[startIndex + i]->clone();// Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
 					true);
-				offspring->setNew(true); // Make the creature a new creature
-				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+				offspring->setNew(true);	// Make the creature a new creature
+				offspring->setDeveloped(false);	// Set the creature for an embryogenesis
 
 				offspring->getGenotype().purgeRandomGenes(
-					EvolutionConfiguration::REAPER_GENE_PURGE_PROBABILITY); // Mutate random genes
-				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+					EvolutionConfiguration::REAPER_GENE_PURGE_PROBABILITY);	// Mutate random genes
+				offspring->getGenotype().recalculateRootIndex();// Reposition the root index
 				population->getCreatureModels().push_back(offspring);
 			}
 		}
@@ -368,15 +374,15 @@ void Reaper::mutateGeneBranches(PopulationModel* const population,
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
 			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
-					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+					population->getCreatureModels()[startIndex + i]->clone();// Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
 					true);
-				offspring->setNew(true); // Make the creature a new creature
-				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+				offspring->setNew(true);	// Make the creature a new creature
+				offspring->setDeveloped(false);	// Set the creature for an embryogenesis
 
 				offspring->getGenotype().mutateRandomBranches(
 					EvolutionConfiguration::REAPER_LINK_MUTATION_PROBABILITY);
-				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				offspring->getGenotype().recalculateRootIndex();// Reposition the root index
 				population->getCreatureModels().push_back(offspring);
 			}
 		}
@@ -390,15 +396,15 @@ void Reaper::growStubs(PopulationModel* const population, const int startIndex,
 			if (population->getCreatureModels().size() > startIndex + i) { // Size must be bigger than the current index
 			// TODO: We currently do not properly mutate, but clone and then mutate the new and cull the old creature. Fix this.
 				CreatureModel* offspring =
-					population->getCreatureModels()[startIndex + i]->clone(); // Clone the old creature
+					population->getCreatureModels()[startIndex + i]->clone();// Clone the old creature
 				population->getCreatureModels()[startIndex + i]->setCulled(
 					true);
-				offspring->setNew(true); // Make the creature a new creature
-				offspring->setDeveloped(false); // Set the creature for an embryogenesis
+				offspring->setNew(true);	// Make the creature a new creature
+				offspring->setDeveloped(false);	// Set the creature for an embryogenesis
 
 				offspring->getGenotype().growRandomStubs(
 					EvolutionConfiguration::REAPER_GROW_STUB_PROBABILITY);
-				offspring->getGenotype().recalculateRootIndex(); // Reposition the root index
+				offspring->getGenotype().recalculateRootIndex();// Reposition the root index
 				population->getCreatureModels().push_back(offspring);
 			}
 		}

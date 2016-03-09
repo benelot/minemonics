@@ -530,7 +530,7 @@ void MixedGenome::mutateBranch(int geneIndex, int branchIndex) {
 	}
 }
 
-void MixedGenome::crossoverRandomly(Genome* genome) {
+void MixedGenome::crossoverRandomly(const Genome* const genome) {
 	int motherStartSegmentIndex = Randomness::getSingleton()->nextUnifPosInt(0,
 		mGenes.size() - 1);
 	int motherEndSegmentIndex = Randomness::getSingleton()->nextUnifPosInt(
@@ -543,22 +543,26 @@ void MixedGenome::crossoverRandomly(Genome* genome) {
 
 	crossover(genome, motherStartSegmentIndex, motherEndSegmentIndex,
 		fatherStartSegmentIndex, fatherEndSegmentIndex);
-	for (int i = 0; i < 10; i++) {
+
+	int mutationBranches = mGenes.size() * 0.3f;
+	for (int i = 0; i < mutationBranches; i++) {
 		mutateRandomBranch();
 	}
 	repairGenes();
 }
 
-void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
-	int motherSegmentEndIndex, int fatherSegmentStartIndex,
-	int fatherSegmentEndIndex) {
+void MixedGenome::crossover(const Genome* const fathergenome, const int motherSegmentStartIndex,
+	const int motherSegmentEndIndex, const int fatherSegmentStartIndex,
+	const int fatherSegmentEndIndex) {
 	for (int i = mGenes.size() - 1; i > motherSegmentEndIndex; i--) {
-		delete mGenes.back();
-		mGenes.erase(mGenes.end() - 1);
+		Gene* gene = mGenes.back();
+		delete gene;
+		mGenes.pop_back();
 	}
 
 	for (int i = 0; i < motherSegmentStartIndex; i++) {
-		delete mGenes.front();
+		Gene* gene = mGenes.front();
+		delete gene;
 		mGenes.erase(mGenes.begin());
 	}
 
