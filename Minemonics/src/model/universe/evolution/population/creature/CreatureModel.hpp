@@ -127,7 +127,6 @@ public:
 	void createRandomGenome(const double branchiness) {
 		mGenotype.createRandomGenome(branchiness); //generate random genome for the creature
 	}
-	;
 
 	/**
 	 * Compare the creature model to another creature model.

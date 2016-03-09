@@ -31,7 +31,7 @@ void ModelLegBuilder::build(MixedGenome* genome,
 
 	// create first limb
 	Morphogene* morphogene = new Morphogene(LimbPhysics::BLOCK,
-		Ogre::Vector3(MorphologyConfiguration::LIMB_MIN_SIZE * 30,
+		Ogre::Vector3(MorphologyConfiguration::LIMB_MIN_SIZE * 20,
 			MorphologyConfiguration::LIMB_MIN_SIZE * 6,
 			MorphologyConfiguration::LIMB_MIN_SIZE * 6),
 		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
@@ -42,14 +42,14 @@ void ModelLegBuilder::build(MixedGenome* genome,
 	// creature second limb
 	Morphogene* morphogene2 = new Morphogene(LimbPhysics::BLOCK,
 		Ogre::Vector3(MorphologyConfiguration::LIMB_MIN_SIZE * 6,
-			MorphologyConfiguration::LIMB_MIN_SIZE * 30,
+			MorphologyConfiguration::LIMB_MIN_SIZE * 20,
 			MorphologyConfiguration::LIMB_MIN_SIZE * 6),
 		Ogre::Quaternion::IDENTITY, 1, 10, true, Ogre::ColourValue(1, 0, 0),
 		Ogre::Vector3(0, 1, 0));
 //	morphogene2->initialize(0);
 	genome->addGene(morphogene2);
 
-	double damping = 0.005f; //[0.005;0.5] 0.05
+	double damping = 0;//0.005f; //[0.005;0.5] 0.05
 	// create joint between the two limbs
 	// hinge
 //	MorphogeneBranch* morphogeneBranch = new MorphogeneBranch(

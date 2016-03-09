@@ -40,9 +40,10 @@ MixedGenome::MixedGenome(const MixedGenome& mixedGenome) {
 	mSegmentsDepthLimit = mixedGenome.mSegmentsDepthLimit;
 	mTotalSegmentQtyLimit = mixedGenome.mTotalSegmentQtyLimit;
 
-	std::vector<Gene*>::const_iterator git = mixedGenome.mGenes.begin();
-	for (; git != mixedGenome.mGenes.end(); git++) {
-		mGenes.push_back((*git)->clone());
+	for (std::vector<Gene*>::const_iterator git = mixedGenome.mGenes.begin();
+		git != mixedGenome.mGenes.end(); git++) {
+		Gene* gene = (*git)->clone();
+		mGenes.push_back(gene);
 	}
 }
 
@@ -182,7 +183,7 @@ void MixedGenome::addRandomGene() {
 	Gene::GeneType type =
 		(Gene::GeneType) Randomness::getSingleton()->nextUnifPosInt(0,
 			Gene::NUM_GENES);
-	Gene* gene;
+	Gene* gene = NULL;
 	switch (type) {
 	case Gene::MorphoGene: {
 		gene = new Morphogene();
@@ -191,6 +192,9 @@ void MixedGenome::addRandomGene() {
 		break;
 	default:
 		break;
+	}
+	if (gene != NULL) {
+		mGenes.push_back(gene);
 	}
 }
 
@@ -400,7 +404,7 @@ void MixedGenome::splitGene(int geneIndex, SplitAxis axis) {
 		}
 
 		//delete old morphogene branches because they were cloned above
-		for (std::vector<MorphogeneBranch*>::const_iterator mgbit =
+		for (std::vector<MorphogeneBranch*>::iterator mgbit =
 			originalGene->getGeneBranches().begin();
 			mgbit != originalGene->getGeneBranches().end(); mgbit++) {
 			delete *mgbit;
@@ -421,8 +425,7 @@ void MixedGenome::purgeRandomGenes(double percentage) {
 }
 
 void MixedGenome::purgeRandomGene() {
-	purgeGene(
-		Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
+	purgeGene(Randomness::getSingleton()->nextUnifPosInt(0, mGenes.size() - 1));
 }
 
 void MixedGenome::purgeGene(int geneIndex) {
@@ -551,7 +554,7 @@ void MixedGenome::crossover(Genome* fathergenome, int motherSegmentStartIndex,
 	int fatherSegmentEndIndex) {
 	for (int i = mGenes.size() - 1; i > motherSegmentEndIndex; i--) {
 		delete mGenes.back();
-		mGenes.erase(mGenes.end()-1);
+		mGenes.erase(mGenes.end() - 1);
 	}
 
 	for (int i = 0; i < motherSegmentStartIndex; i++) {
@@ -648,6 +651,9 @@ void MixedGenome::graftFrom(Genome* donor, int attachmentIndex, int geneIndex,
 					}
 				}
 
+			}
+			if (genesCopied >= geneQty) { /**!<If we copied enough genes, we finish */
+				return;
 			}
 		}
 
