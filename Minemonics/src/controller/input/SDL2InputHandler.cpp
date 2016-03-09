@@ -44,12 +44,10 @@ SDL2InputHandler::~SDL2InputHandler() {
 void SDL2InputHandler::initialize() {
 	CEGUIInputHandler::initialize();
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Initializing SDL2 input handler...";
+		<< "--SDL2 input handler...";
 
 	SDL_ShowCursor (SDL_DISABLE);
 	SDL_SetRelativeMouseMode (SDL_FALSE);
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::trace)
-		<< "Initializing SDL2 input handler...done";
 }
 
 void SDL2InputHandler::injectInput() {

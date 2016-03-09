@@ -175,10 +175,6 @@ void SimulationManager::createScene(void) {
 	Logger::init("logs/minemonics.log", LoggerConfiguration::LOGGING_LEVEL); /**!< Initialize the logger */
 	Ogre::LogManager::getSingleton().setLogDetail(Ogre::LL_LOW); /**!< Reduce the ogre log detail */
 
-	// drop introducing application line
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\n"<< "########################################################";
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< ApplicationConfiguration::APPLICATION_TITLE << " #####\n";
-
 	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget( /**!< Set render target with the current application name */
 	ApplicationConfiguration::APPLICATION_TITLE);
 
@@ -540,16 +536,21 @@ bool SimulationManager::quit() {
  */
 bool SimulationManager::configure(void) {
 
+	// drop introducing application line
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "\n"<< "#############################################################################################################\n"
+	<< ApplicationConfiguration::APPLICATION_TITLE << " #####\n" <<
+	"#############################################################################################################\n";
+
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize InputHandler...";
 	mInputHandler.initialize();
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize InputHandler...done.";
 
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize SDL...";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize SDL2...";
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
 			"Cannot initialize SDL2!", "GraphicsSystem::initialize");
 	}
-	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize SDL...done.";
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Initialize SDL2...done.";
 
 	// Show the configuration dialog and initialize the system
 	// You can skip this and use root.restoreConfig() to load configuration
@@ -562,7 +563,7 @@ bool SimulationManager::configure(void) {
 	}
 
 	Ogre::ConfigOptionMap& cfgOpts =
-		mRoot->getRenderSystem()->getConfigOptions();
+	mRoot->getRenderSystem()->getConfigOptions();
 
 	mRoot->getRenderSystem()->setConfigOption("sRGB Gamma Conversion", "Yes");
 	mRoot->initialise(false);
@@ -601,13 +602,13 @@ bool SimulationManager::configure(void) {
 	}
 	// create the SDL window
 	mSdlWindow = SDL_CreateWindow(
-		ApplicationConfiguration::APPLICATION_TITLE.c_str(), // window title
-		posX,               // initial x position
-		posY,               // initial y position
-		width,              // width, in pixels
-		height,             // height, in pixels
+		ApplicationConfiguration::APPLICATION_TITLE.c_str(),// window title
+		posX,// initial x position
+		posY,// initial y position
+		width,// width, in pixels
+		height,// height, in pixels
 		SDL_WINDOW_SHOWN | (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)
-			| SDL_WINDOW_RESIZABLE);
+		| SDL_WINDOW_RESIZABLE);
 
 	//Get the native window handle
 	SDL_SysWMinfo wmInfo;
@@ -623,26 +624,26 @@ bool SimulationManager::configure(void) {
 
 	switch (wmInfo.subsystem) {
 #ifdef WIN32
-	case SDL_SYSWM_WINDOWS:
-	// required to make OGRE work on Windows
-	winHandle = Ogre::StringConverter::toString( (unsigned long)wmInfo.info.win.window );
-	break;
+		case SDL_SYSWM_WINDOWS:
+		// required to make OGRE work on Windows
+		winHandle = Ogre::StringConverter::toString( (unsigned long)wmInfo.info.win.window );
+		break;
 #elif __MACOSX__
-	case SDL_SYSWM_COCOA:
-	//required to make OGRE work on MAC OSX
-	params.insert( std::make_pair("macAPI", "cocoa") );
-	params.insert( std::make_pair("macAPICocoaUseNSView", "true") );
+		case SDL_SYSWM_COCOA:
+		//required to make OGRE work on MAC OSX
+		params.insert( std::make_pair("macAPI", "cocoa") );
+		params.insert( std::make_pair("macAPICocoaUseNSView", "true") );
 
-	winHandle = Ogre::StringConverter::toString(WindowContentViewHandle(wmInfo));
-	break;
+		winHandle = Ogre::StringConverter::toString(WindowContentViewHandle(wmInfo));
+		break;
 #else
-	case SDL_SYSWM_X11:
+		case SDL_SYSWM_X11:
 		//required to make OGRE work on Linux
 		winHandle = Ogre::StringConverter::toString(
 			(unsigned long) wmInfo.info.x11.window);
 		break;
 #endif
-	default:
+		default:
 		// in case it can not recognize the windowing system
 		OGRE_EXCEPT(Ogre::Exception::ERR_NOT_IMPLEMENTED,
 			"Unexpected WM! (SDL2)", "GraphicsSystem::initialize");
