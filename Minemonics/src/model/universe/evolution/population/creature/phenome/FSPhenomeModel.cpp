@@ -361,23 +361,23 @@ void FSPhenomeModel::calculateChildPositionRelativeToParent(
 	Ogre::Vector3 childLimbCOM(jointPivotInW - childAnchorInChild); // global center of mass of child limb
 
 #ifndef EXCLUDE_FROM_TEST
-	// mark the three important points of the joint
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
-		parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
+//	// mark the three important points of the joint
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
+//		parentLimbCOM, 0.1, Ogre::ColourValue(0, 1, 0));
 
 	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(
 		jointPivotInW, 0.1, Ogre::ColourValue(0, 1, 0));
 
-	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(childLimbCOM,
-		0.1, Ogre::ColourValue(0, 1, 0));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawSphere(childLimbCOM,
+//		0.1, Ogre::ColourValue(0, 1, 0));
 
 	// draw line from limb A to surface anchor point of A (GREEN LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(parentLimbCOM,
 		jointPivotInW, Ogre::ColourValue(0, 1, 0));
 
 	// draw line from joint rotation point to surface anchor point of B (BLUE LINE)
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(jointPivotInW,
-		parentLimbCOM + childAnchorInParent, Ogre::ColourValue(0, 0, 1));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawLine(jointPivotInW,
+//		parentLimbCOM + childAnchorInParent, Ogre::ColourValue(0, 0, 1));
 
 	// draw line from limb B to anchor point of B (GREEN LINE)
 	SimulationManager::getSingleton()->getDebugDrawer().drawLine(childLimbCOM,

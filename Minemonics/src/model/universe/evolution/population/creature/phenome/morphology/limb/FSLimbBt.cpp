@@ -198,8 +198,8 @@ btTransform FSLimbBt::getPreciseIntersection(const btVector3 origin,
 	btVector3 rayEnd = origin; // when hitting the forward face of a triangle therefore, the ray has to come from the outside of the shape
 
 #ifndef EXCLUDE_FROM_TEST
-	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
-		rayEnd, btVector3(1, 1, 0));
+//	SimulationManager::getSingleton()->getDebugDrawer().drawLine(rayStart,
+//		rayEnd, btVector3(1, 1, 0));
 #endif
 
 	btVector3 hitPosition = origin;
