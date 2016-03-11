@@ -7,7 +7,11 @@
 <storageModule buildSystemId="org.eclipse.cdt.core.defaultConfigDataProvider" id="org.eclipse.cdt.core.default.config.1" moduleId="org.eclipse.cdt.core.settings" name="Configuration">
 <externalSettings/>
 <extensions>
-<error_toolchain_type/>
+<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser">
+<attribute key="addr2line" value="addr2line"/>
+<attribute key="c++filt" value="c++filt"/>
+</extension>
 </extensions>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.language.mapping">
@@ -23,8 +27,8 @@
 <pathentry kind="mac" name="__STDC_HOSTED__" path="" value="1"/>
 <pathentry kind="mac" name="__GNUC__" path="" value="4"/>
 <pathentry kind="mac" name="__GNUC_MINOR__" path="" value="9"/>
-<pathentry kind="mac" name="__GNUC_PATCHLEVEL__" path="" value="2"/>
-<pathentry kind="mac" name="__VERSION__" path="" value="&quot;4.9.2&quot;"/>
+<pathentry kind="mac" name="__GNUC_PATCHLEVEL__" path="" value="3"/>
+<pathentry kind="mac" name="__VERSION__" path="" value="&quot;4.9.3&quot;"/>
 <pathentry kind="mac" name="__ATOMIC_RELAXED" path="" value=" "/>
 <pathentry kind="mac" name="__ATOMIC_SEQ_CST" path="" value="5"/>
 <pathentry kind="mac" name="__ATOMIC_ACQUIRE" path="" value="2"/>
@@ -329,6 +333,13 @@
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j8</buildArguments>
 <buildTarget>install/local</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": install/strip" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j8</buildArguments>
+<buildTarget>install/strip</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>

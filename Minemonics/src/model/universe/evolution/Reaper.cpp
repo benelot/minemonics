@@ -127,6 +127,7 @@ void Reaper::sow(PopulationModel* const population) {
 		// calculate the number of offsprings for each ancestor
 		crossOverHeads = round(((double) headsToSow) * mCrossOverPercentage);
 
+		//TODO: Crossover leaks somehow, can even be replaced with sow() and still leaks
 		crossover(population, crossOverHeads);
 		BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Crossover " << crossOverHeads << " creatures";
 	}
@@ -237,19 +238,20 @@ void Reaper::sow(PopulationModel* const population) {
 void Reaper::crossover(PopulationModel* const population,
 	const int totalCrossoverHeads) {
 
+	int eliteQty = ceil(population->getCreatureModels().size() * mElitistPercentage);
 	//how many offspring do we get per parent?
 	int offspringPerParent = ceil(
 		totalCrossoverHeads
-			/ (population->getCreatureModels().size() * mElitistPercentage));
+			/ ((double)eliteQty));
 
 	int crossOverSown = 0;
 
 	//crossover the best creature with those in the ranking downwards according to the cross over percentage
-	for (std::vector<CreatureModel*>::iterator cit =
-		population->getCreatureModels().begin();
-		cit != population->getCreatureModels().end(); cit++) {
+	for (int t = 0; t < eliteQty; t++) {
 
-		for (int k = 0; k < offspringPerParent && crossOverSown < totalCrossoverHeads; k++) {
+		for (int k = 0;
+			k < offspringPerParent && crossOverSown < totalCrossoverHeads;
+			k++) {
 
 			CreatureModel* partner = NULL;
 			CreatureModel* offspring = NULL;
@@ -286,7 +288,7 @@ void Reaper::crossover(PopulationModel* const population,
 				partner = population->getCreatureModels().at(creatureIndex);
 			}
 
-			offspring = (*cit)->clone(); // Clone the old creature
+			offspring = population->getCreatureModels()[t]->clone(); // Clone the old creature
 			offspring->setNew(true); // Make the creature a new creature
 			offspring->giveRebirth(); // Give the creature a rebirth from its old clone
 			offspring->setDeveloped(false); // Set the creature for an embryogenesis
