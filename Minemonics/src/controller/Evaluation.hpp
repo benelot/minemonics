@@ -94,6 +94,12 @@ public:
 
 	void setFailed(bool hasFailed);
 
+	bool isMarked() const {
+		return mMarked;
+	}
+
+	void setMarked(bool marked);
+
 private:
 
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
@@ -118,6 +124,8 @@ private:
 	unsigned long int mStart; /**!< The timestamp of the evaluation start */
 
 	bool mHasFailed; /**!< If the evaluation has failed */
+
+	bool mMarked; /**!> Set the evaluation marked so that all creatures of it are marked. */
 
 	std::string mGenerationSerializationPath; /**!< The serialization path for the current generation */
 };

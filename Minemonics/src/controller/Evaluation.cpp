@@ -33,12 +33,12 @@
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
-	mPlanet(NULL), mStart(0), mHasFailed(false) {
+	mPlanet(NULL), mStart(0), mHasFailed(false),mMarked(false) {
 }
 
 Evaluation::Evaluation(Planet* const planet, const double evaluationTime) :
 	mPlanet(planet), mStart(0), mHasFailed(false), mEvaluationModel(
-		planet->getPlanetModel(), evaluationTime) {
+		planet->getPlanetModel(), evaluationTime),mMarked(false) {
 }
 
 Evaluation::~Evaluation() {
@@ -143,6 +143,9 @@ void Evaluation::teardown() {
 			for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
 				cit != (*pit)->getCreatures().end(); cit++) {
+				if(mMarked){
+					(*cit)->setMarked(true);
+				}
 				(*cit)->save(mGenerationSerializationPath);
 			}
 		}
@@ -235,4 +238,9 @@ void Evaluation::update(const double timeSinceLastTick) {
 void Evaluation::setFailed(bool hasFailed) {
 	mHasFailed = hasFailed;
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded on user request.";
+}
+
+void Evaluation::setMarked(bool marked){
+	mMarked = marked;
+	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature marked on user request.";
 }

@@ -122,6 +122,14 @@ public:
 
 	void hasInterpenetrations();
 
+	bool isMarked() const {
+		return mMarked;
+	}
+
+	void setMarked(bool marked) {
+		mMarked = marked;
+	}
+
 protected:
 	static BoostLogger mBoostLogger; /**!< The boost logger. */
 
@@ -137,6 +145,8 @@ protected:
 	} _initializer;
 
 	CreatureModel* mCreatureModel; /**!< The model representation of the creature */
+
+	bool mMarked;/**!< Mark creature to find it again later.*/
 
 	//CHILD
 	Phenome mPhenotype; /**!< The phenotype of the creature. */

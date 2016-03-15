@@ -28,7 +28,8 @@ BoostLogger Creature::mBoostLogger; /*<! initialize the boost logger*/
 Creature::_Init Creature::_initializer;
 Creature::Creature(Population* const population,
 	const PhysicsController::PhysicsModelType physicsModelType,
-	const Ogre::Vector3 position, const double branchiness) {
+	const Ogre::Vector3 position, const double branchiness) :
+	mMarked(false) {
 	// set up the creature model
 	mCreatureModel = new CreatureModel(population->getPopulationModel(),
 		physicsModelType, position);
@@ -42,7 +43,7 @@ Creature::Creature(Population* const population,
 }
 
 Creature::Creature(CreatureModel* const creatureModel) :
-	mCreatureModel(creatureModel) {
+	mCreatureModel(creatureModel), mMarked(false) {
 	mPhenotype.setPhenotypeModel(mCreatureModel->getPhenotypeModel());
 
 	// set up the phenotype
@@ -164,6 +165,9 @@ void Creature::save(std::string folderPath) {
 			mCreatureModel->getLastFitnessScore())); // returns the last score available
 	creatureFilePath.append("-");
 	creatureFilePath.append(SimulationManager::getSingleton()->getTimeStamp());
+	if (mMarked) {
+		creatureFilePath.append("-marked");
+	}
 	creatureFilePath.append(".cr");
 
 	SaveController<CreatureModel> creatureSaver;

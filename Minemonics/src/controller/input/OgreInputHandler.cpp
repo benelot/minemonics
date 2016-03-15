@@ -437,7 +437,19 @@ bool OgreInputHandler::keyPressed(const ApplicationKeycode::Keycode key) {
 		break;
 
 		case ApplicationKeycode::APPK_RETURN:
-// return CEGUI::Key::Return;
+		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
+			case StateHandler::SIMULATION: {
+				if (SimulationManager::getSingleton()->getViewController().getEvaluationInView()
+					!= NULL) {
+					SimulationManager::getSingleton()->getViewController().getEvaluationInView()->setMarked(true);
+				}
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+		break;
 		break;
 		case ApplicationKeycode::APPK_SPACE:
 		switch (SimulationManager::getSingleton()->getStateHandler().getCurrentState()) {
