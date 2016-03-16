@@ -1,0 +1,222 @@
+\begin{tikzpicture}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm,draw=black!80, thick,rounded corners, rectangle, fill=black!20]
+
+%###############################################
+% Universe and anchors
+%###############################################
+\node[align=center,box](universe-node){
+Universe
+};
+\node(universe-left-zoom-node)[below left=-0.1cm and -0.3cm of universe-node]{};
+\node(universe-right-zoom-node)[below right=-0.1cm and -0.3cm of universe-node]{};
+
+
+%###############################################
+% Planets and anchors
+%###############################################
+\matrix[anchor=east](planets)[below=1cm of universe-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(left-planet-node)[box]{Planet}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(planet-node)[box]{Planet}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(right-planet-node)[box]{Planet};\\
+};
+\node(planet-left-row-node)[above left=-0.1cm and -0.3cm of left-planet-node]{};
+\node(planet-right-row-node)[above right=-0.1cm and -0.3cm of right-planet-node]{};
+
+%###############################################
+% Lines between universe and planets
+%###############################################
+\draw (universe-left-zoom-node) -- (planet-left-row-node);
+\draw (universe-right-zoom-node) -- (planet-right-row-node);
+
+\fill [path fading=south,black!10] (universe-left-zoom-node.center) to (universe-right-zoom-node.center) to (planet-right-row-node.center) to (planet-left-row-node.center) to (universe-left-zoom-node.center);
+
+
+
+%###############################################
+% Planet anchors
+%###############################################
+\node(planet-left-zoom-node)[below left=-0.1cm and -0.3cm of planet-node]{};
+\node(planet-right-zoom-node)[below right=-0.1cm and -0.3cm of planet-node]{};
+
+
+%###############################################
+% Planet components and anchors
+%###############################################
+\matrix[anchor=east](planet-components)[below=1cm of planet-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(environment-node)[box]{Environment}; & \node(evolutionary-process-node)[box]{Evolution};\\
+};
+\node(planet-components-left-row-node)[above left=-0.1cm and -0.3cm of environment-node]{};
+\node(planet-components-right-row-node)[above right=-0.1cm and -0.3cm of evolutionary-process-node]{};
+
+%###############################################
+% Lines between planet and planet components
+%###############################################
+\draw (planet-left-zoom-node) -- (planet-components-left-row-node);
+\draw (planet-right-zoom-node) -- (planet-components-right-row-node);
+
+\fill [path fading=south,black!10] (planet-left-zoom-node.center) to (planet-right-zoom-node.center) to (planet-components-right-row-node.center) to (planet-components-left-row-node.center) to (planet-left-zoom-node.center);
+
+%###############################################
+% Evolutionary Process anchors
+%###############################################
+\node(evolutionary-process-left-zoom-node)[below left=-0.1cm and -0.3cm of evolutionary-process-node]{};
+\node(evolutionary-process-right-zoom-node)[below right=-0.1cm and -0.3cm of evolutionary-process-node]{};
+
+%###############################################
+% Evolutionary Process Components and Anchors
+%###############################################
+\matrix[anchor=east](evolutionary-process-components)[below left=1cm and -2cm of evolutionary-process-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(reaper-node)[box]{Reaper}; & \node(populations-node)[box]{Populations};\\
+};
+\node(evolutionary-process-components-left-row-node)[above left=-0.1cm and -0.3cm of reaper-node]{};
+\node(evolutionary-process-components-right-row-node)[above right=-0.1cm and -0.3cm of populations-node]{};
+
+%###############################################
+% Lines between evolutionary process and evolutionary process components
+%###############################################
+\draw (evolutionary-process-left-zoom-node) -- (evolutionary-process-components-left-row-node);
+\draw (evolutionary-process-right-zoom-node) -- (evolutionary-process-components-right-row-node);
+
+\fill [path fading=south,black!10] (evolutionary-process-left-zoom-node.center) to (evolutionary-process-right-zoom-node.center) to (evolutionary-process-components-right-row-node.center) to (evolutionary-process-components-left-row-node.center) to (evolutionary-process-left-zoom-node.center);
+
+%###############################################
+% Evolutionary Process components anchors
+%###############################################
+\node(populations-left-zoom-node)[below left=-0.1cm and -0.3cm of populations-node]{};
+\node(populations-right-zoom-node)[below right=-0.1cm and -0.3cm of populations-node]{};
+
+%###############################################
+% Populations and anchors
+%###############################################
+\matrix[anchor=east](populations)[below=1cm of populations-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(left-population-node)[box]{Population}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(population-node)[box]{Population}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(right-population-node)[box]{Population};\\
+};
+\node(population-left-row-node)[above left=-0.1cm and -0.3cm of left-population-node]{};
+\node(population-right-row-node)[above right=-0.1cm and -0.3cm of right-population-node]{};
+
+%###############################################
+% Lines between Populations and Population
+%###############################################
+\draw (populations-left-zoom-node) -- (population-left-row-node);
+\draw (populations-right-zoom-node) -- (population-right-row-node);
+
+\fill [path fading=south,black!10] (populations-left-zoom-node.center) to (populations-right-zoom-node.center) to (population-right-row-node.center) to (population-left-row-node.center) to (populations-left-zoom-node.center);
+
+%###############################################
+% Population anchors
+%###############################################
+\node(population-left-zoom-node)[below left=-0.1cm and -0.3cm of population-node]{};
+\node(population-right-zoom-node)[below right=-0.1cm and -0.3cm of population-node]{};
+
+%###############################################
+% Creatures and anchors
+%###############################################
+\matrix[anchor=east](creatures)[below=1cm of population-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(left-creature-node)[box]{Creature}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(creature-node)[box]{Creature}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(right-creature-node)[box]{Creature};\\
+};
+\node(creature-left-row-node)[above left=-0.1cm and -0.3cm of left-creature-node]{};
+\node(creature-right-row-node)[above right=-0.1cm and -0.3cm of right-creature-node]{};
+
+%###############################################
+% Lines between Population and Creatures
+%###############################################
+\draw (population-left-zoom-node) -- (creature-left-row-node);
+\draw (population-right-zoom-node) -- (creature-right-row-node);
+
+\fill [path fading=south,black!10] (population-left-zoom-node.center) to (population-right-zoom-node.center) to (creature-right-row-node.center) to (creature-left-row-node.center) to (population-left-zoom-node.center);
+
+%###############################################
+% Creature anchors
+%###############################################
+\node(creature-left-zoom-node)[below left=-0.1cm and -0.3cm of creature-node]{};
+\node(creature-right-zoom-node)[below right=-0.1cm and -0.3cm of creature-node]{};
+
+%###############################################
+% Creature components and anchors
+%###############################################
+\matrix[anchor=east](creature-components)[below=1cm of creature-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(genotype-node)[box]{Genotype}; & \node(phenotype-node)[box]{Phenotype};\\
+};
+\node(creature-components-left-row-node)[above left=-0.1cm and -0.3cm of genotype-node]{};
+\node(creature-components-right-row-node)[above right=-0.1cm and -0.3cm of phenotype-node]{};
+
+%###############################################
+% Lines between Population and Creatures
+%###############################################
+\draw (creature-left-zoom-node) -- (creature-components-left-row-node);
+\draw (creature-right-zoom-node) -- (creature-components-right-row-node);
+
+\fill [path fading=south,black!10] (creature-left-zoom-node.center) to (creature-right-zoom-node.center) to (creature-components-right-row-node.center) to (creature-components-left-row-node.center) to (creature-left-zoom-node.center);
+
+%###############################################
+% Genotype anchors
+%###############################################
+\node(genotype-left-zoom-node)[below left=-0.1cm and -0.3cm of genotype-node]{};
+\node(genotype-right-zoom-node)[below right=-0.1cm and -0.3cm of genotype-node]{};
+
+%###############################################
+% Phenotype anchors
+%###############################################
+\node(phenotype-left-zoom-node)[below left=-0.1cm and -0.3cm of phenotype-node]{};
+\node(phenotype-right-zoom-node)[below right=-0.1cm and -0.3cm of phenotype-node]{};
+
+%###############################################
+% Morphogenes and anchors
+%###############################################
+\matrix[anchor=east](morphogenes)[below left=1cm and -2cm of genotype-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(left-morphogene-node)[box]{Morphogene}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(right-morphogene-node)[box]{Morphogene};\\
+};
+\node(morphogene-left-row-node)[above left=-0.1cm and -0.3cm of left-morphogene-node]{};
+\node(morphogene-right-row-node)[above right=-0.1cm and -0.3cm of right-morphogene-node]{};
+
+%###############################################
+% Lines between Genotype and Morphogene
+%###############################################
+\draw (genotype-left-zoom-node) -- (morphogene-left-row-node);
+\draw (genotype-right-zoom-node) -- (morphogene-right-row-node);
+
+\fill [path fading=south,black!10] (genotype-left-zoom-node.center) to (genotype-right-zoom-node.center) to (morphogene-right-row-node.center) to (morphogene-left-row-node.center) to (genotype-left-zoom-node.center);
+
+%###############################################
+% Morphogene anchors
+%###############################################
+%\node(morphogene-left-zoom-node)[below left=-0.1cm and 0cm of morphogene-node]{};
+%\node(morphogene-right-zoom-node)[below right=-0.1cm and 0cm of morphogene-node]{};
+
+%###############################################
+% Morphogene branches and anchors
+%###############################################
+%\matrix[anchor=east](morphogene-branches)[below=1cm of morphogene-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+%\node(left-morphogene-branch-node)[box]{Morphogene Branch}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(morphogene-branch-node)[box]{Morphogene Branch}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(right-morphogene-branch-node)[box]{Morphogene Branch};\\
+%};
+%\node(morphogene-branch-left-row-node)[above left=-0.1cm and -0.3cm of left-morphogene-branch-node]{};
+%\node(morphogene-branch-right-row-node)[above right=-0.1cm and -0.3cm of right-morphogene-branch-node]{};
+
+%###############################################
+% Lines between Morphogene and Morphogene Branch
+%###############################################
+%\draw (morphogene-left-zoom-node) -- (morphogene-branch-left-row-node);
+%\draw (morphogene-right-zoom-node) -- (morphogene-branch-right-row-node);
+
+
+
+%###############################################
+% BodyParts and anchors
+%###############################################
+\matrix[anchor=east](body-parts)[below right=1cm and -2cm of phenotype-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\node(left-body-part-node)[box]{Body Part}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(right-body-part-node)[box]{Body Part};\\
+};
+\node(body-parts-left-row-node)[above left=-0.1cm and -0.3cm of left-body-part-node]{};
+\node(body-parts-right-row-node)[above right=-0.1cm and -0.3cm of right-body-part-node]{};
+
+%###############################################
+% Lines between Phenotype and body parts
+%###############################################
+\draw (phenotype-left-zoom-node) -- (body-parts-left-row-node);
+\draw (phenotype-right-zoom-node) -- (body-parts-right-row-node);
+
+\fill [path fading=south,black!10] (phenotype-left-zoom-node.center) to (phenotype-right-zoom-node.center) to (body-parts-right-row-node.center) to (body-parts-left-row-node.center) to (phenotype-left-zoom-node.center);
+
+\end{tikzpicture}
