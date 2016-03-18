@@ -3,7 +3,7 @@
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
 \tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
-\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!80]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
 
 
 %###############################################
@@ -12,7 +12,7 @@
 \node[align=left](genome-spec){
 \underline{Genotype specification}\\
 Total Segment Quantity Limit [integer]\\
-Segment Tree Depth Limit [integer]\\
+Segment Tree Depth Limit [integer]\\\\
 Morphogene Classes Vector:\\
 };
 
@@ -20,7 +20,7 @@ Morphogene Classes Vector:\\
 %###############################################
 % Morphogene classes vector below genome specification box
 %###############################################
-\matrix[anchor=east](morphogene-classes)[below=0cm of genome-spec, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\matrix[anchor=east](morphogene-classes)[below=-0.3cm of genome-spec, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(brace-node)[box]{};\\
 };
 \node(above-right-brace-node)[above right=0.1cm and 0.2cm of brace-node]{};
@@ -39,25 +39,25 @@ node[anchor=west](morphogene-spec-brace) [left=-0.2cm of brace-node,black,midway
 % Morphogene classes vector
 %###############################################
 \matrix[anchor=south](morphogene-vector)[right=of morphogene-classes, row sep=2mm, column sep=2mm, inner sep=2mm] {
-\node(left-to-selected-morphogene)[box]{}; & \node(selected-morphogene)[box]{}; & \node(right-to-selected-morphogene)[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node(most-right-morphogene)[box]{};\\
+\node(left-to-selected-morphogene)[box]{M}; & \node[box]{}; & \node(left-to-selected-morphogene)[]{$\dots$}; & \node(selected-morphogene)[box]{M};  & \node(right-to-selected-morphogene)[]{$\dots$}; & \node[box]{}; & \node(most-right-morphogene)[box]{M};\\
 };
-\node(below-left-of-selected-morphogene)[below= 0cm of left-to-selected-morphogene]{};
-\node(below-right-of-selected-morphogene)[below= 0cm of right-to-selected-morphogene]{};
+\node(below-left-of-selected-morphogene)[below left= 0cm and -0.8cm of left-to-selected-morphogene]{};
+\node(below-right-of-selected-morphogene)[below right= 0cm and -0.8cm of right-to-selected-morphogene]{};
 
 
 %###############################################
 % Brace to morphogene class
 %###############################################
-\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt}]
-(below-left-of-selected-morphogene.south east) -- (below-right-of-selected-morphogene.south west)
-node[anchor=south] (morphogene-class-brace) [below=of morphogene-vector,black,midway] {};
+%\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt}]
+%(below-left-of-selected-morphogene.south east) -- (below-right-of-selected-morphogene.south west)
+%node[anchor=south] (morphogene-class-brace) [below=of morphogene-vector,black,midway] {};
 
 
 %###############################################
 % Morphogene class box
 %###############################################
-\node(morphogene-class)[below right=1.0cm and -0.3cm of selected-morphogene,align=left]{
-\underline{Morphogene class}\\
+\node(morphogene-class)[below right=2.0cm and -1cm of selected-morphogene,align=left]{
+\underline{Morphogene specification}\\
 Primitive Type [type]\\
 Dimensions: [X, Y, Z]\\
 Orientation: [W, X, Y, Z] \\
@@ -68,15 +68,27 @@ Material Properties:\\
 Joint Anchor: [X, Y, Z]\\
 Segment Shrink Factor [real]\\
 Repetition Limit [integer]\\
-Follow-up Gene [index]\\
+Follow-up Gene [index]\\\\
 Morphogene Branch Vector:\\
 };
+
+\node(above-left-of-morphogene-class)[above left= 0.05cm and 0.5cm of morphogene-class.north west]{};
+\node(above-right-of-morphogene-class)[above right= 0.05cm and 0.5cm of morphogene-class.north east]{};
+
+
+%###############################################
+% Lines to morphogene class
+%###############################################
+\draw (below-left-of-selected-morphogene.south) -- (above-left-of-morphogene-class);
+\draw (below-right-of-selected-morphogene.south) -- (above-right-of-morphogene-class);
+
+\fill [path fading=south,black!10] (below-left-of-selected-morphogene.south) to (below-right-of-selected-morphogene.south) to (above-right-of-morphogene-class.north) to (above-left-of-morphogene-class.north) to (below-left-of-selected-morphogene.south);
 
 
 %###############################################
 % Morphogene branches vector below morphogene class box
 %###############################################
-\matrix(morphogene-branches)[below=0cm of morphogene-class, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\matrix(morphogene-branches)[below=-0.3cm of morphogene-class, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node(brace-node2)[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node[box]{}; & \node[box]{}; & \node[box]{};\\
 };
 \node(above-left-brace-node)[above left=0.1cm and 0.2cm of brace-node2]{};
@@ -95,24 +107,24 @@ node (morphogene-branch-brace) [black,midway] {};
 % Morphogene branches vector
 %###############################################
 \matrix(morphogene-branch-vector)[left=1.0cm of morphogene-branches, row sep=2mm, column sep=2mm, inner sep=2mm] {
-\node[box]{}; & \node[box]{}; & \node[box]{}; & \node[]{$\dots$}; & \node(left-to-selected-morphogene-branch)[box]{}; & \node(selected-morphogene-branch)[box]{}; & \node(right-to-selected-morphogene-branch)[box]{};\\
+\node[box]{MB}; & \node[box]{}; & \node(left-to-selected-morphogene-branch)[]{$\dots$}; & \node(selected-morphogene-branch)[box]{MB}; &\node(right-to-selected-morphogene-branch)[]{$\dots$}; & \node[box]{MB};\\
 };
-\node(above-left-of-selected-morphogene-branch)[above= 0cm of left-to-selected-morphogene-branch]{};
-\node(above-right-of-selected-morphogene-branch)[above=0cm of right-to-selected-morphogene-branch]{};
+\node(above-left-of-selected-morphogene-branch)[above left= 0cm and -0.8cm of left-to-selected-morphogene-branch]{};
+\node(above-right-of-selected-morphogene-branch)[above right=0cm and -0.8cm of right-to-selected-morphogene-branch]{};
 
 
 %###############################################
 % Brace to morphogene branch specification
 %###############################################
-\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
-(above-right-of-selected-morphogene-branch.north west) -- (above-left-of-selected-morphogene-branch.north east)
-node (morphogene-branch-spec-brace) [black,midway] {};
+%\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt]
+%(above-right-of-selected-morphogene-branch.north west) -- (above-left-of-selected-morphogene-branch.north east)
+%node (morphogene-branch-spec-brace) [black,midway] {};
 
 
 %###############################################
 % Morphogene branch specification box
 %###############################################
-\node[above left=1.1cm and -0.9cm of selected-morphogene-branch,align=left] (morphogene-branch-spec){
+\node[above left=1.4cm and -1.9cm of selected-morphogene-branch,align=left] (morphogene-branch-spec){
 \underline{Morphogene branch specification}\\
 Flipped, Mirrored [boolean]\\
 Joint specification:\\
@@ -127,6 +139,18 @@ Joint specification:\\
 ~~Roll Damping Coefficient [real]\\
 ~~Controller Type [type]
 };
+
+\node(above-left-of-morphogene-branch-class)[below left= 0.02cm and 0.11cm of morphogene-branch-spec.south west]{};
+\node(above-right-of-morphogene-branch-class)[below right= -0.1cm and 0.1cm of morphogene-branch-spec.south east]{};
+
+
+%###############################################
+% Lines to morphogene class
+%###############################################
+\draw (above-left-of-selected-morphogene-branch.north) -- (above-left-of-morphogene-branch-class);
+\draw (above-right-of-selected-morphogene-branch.north) -- (above-right-of-morphogene-branch-class);
+
+\fill [path fading=north,black!10] (above-left-of-selected-morphogene-branch.north) to (above-right-of-selected-morphogene-branch.north) to (above-right-of-morphogene-branch-class.north) to (above-left-of-morphogene-branch-class.north) to (above-left-of-selected-morphogene-branch.north);
 
 %###############################################
 % Boxes in background around information

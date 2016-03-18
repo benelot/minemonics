@@ -34,11 +34,11 @@
 % arm branches
 %###############################################
 \draw[dashed,->,line width=0.5mm] (class1-morphogene.north west) to [out=90,in=-135] node[right] {mirror} (class2-morphogene.west);
-\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (class2-morphogene.east) to [out=0,in=90] node[above right] {1} (class2-morphogene.east);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=5,min distance=5mm] (class2-morphogene.south east) to [out=0,in=90] node[above right] {1} (class2-morphogene.north east);
 
 %###############################################
 % leg branches
 %###############################################
 \draw[dashed,->,line width=0.5mm] (class1-morphogene.south east) to [out=0,in=180] node[below] {mirror} (class3-morphogene.west);
-\draw[dashed,->,line width=0.5mm,loop above,looseness=15,min distance=15mm] (class3-morphogene.east) to [out=-45,in=45] node[right] {1} (class3-morphogene.east);
+\draw[dashed,->,line width=0.5mm,loop above,looseness=5,min distance=5mm] (class3-morphogene.south east) to [out=-45,in=45] node[right] {1} (class3-morphogene.north east);
 \end{tikzpicture}

@@ -8,28 +8,28 @@
 %###############################################
 % head
 %###############################################
-\node(root-morphogene)[root,align=center]{Root\\ Morphogene};
+\node(root-morphogene)[root,align=center]{Root\\ Body Part};
 
 %###############################################
 % torso
 %###############################################
-\node(morphogene-1)[class1,right= 1cm of root-morphogene]{Morphogene};
+\node(morphogene-1)[class1,right= 1cm of root-morphogene]{Body Part};
 
 %###############################################
 % arm
 %###############################################
-\node(morphogene-2)[class2, above= 1.5cm of morphogene-1,rotate around={45:(0,0)}]{Limb};
-\node(morphogene-2-2)[class2, above right= -0.4cm and 0.5cm of morphogene-2]{Limb};
-\node(morphogene-3)[class2, below= 1.5cm of morphogene-1,rotate around={-45:(0,0)}]{Limb};
-\node(morphogene-3-2)[class2, below right= -0.4cm and 0.5cm of morphogene-3]{Limb};
+\node(morphogene-2)[class2, above= 1.5cm of morphogene-1,rotate around={45:(0,0)}]{Body Part};
+\node(morphogene-2-2)[class2, above right= -0.4cm and 0.5cm of morphogene-2]{Body Part};
+\node(morphogene-3)[class2, below= 1.5cm of morphogene-1,rotate around={-45:(0,0)}]{Body Part};
+\node(morphogene-3-2)[class2, below right= -0.4cm and 0.5cm of morphogene-3]{Body Part};
 
 %###############################################
 % leg
 %###############################################
-\node(morphogene-4)[class3, above right= -0.4cm and 1cm of morphogene-1]{Limb};
-\node(morphogene-4-2)[class3, right= 1cm of morphogene-4]{Limb};
-\node(morphogene-5)[class3, below right= -0.4cm and 1cm of morphogene-1]{Limb};
-\node(morphogene-5-2)[class3, right= 1cm of morphogene-5]{Limb};
+\node(morphogene-4)[class3, above right= -0.4cm and 1cm of morphogene-1]{Body Part};
+\node(morphogene-4-2)[class3, right= 1cm of morphogene-4]{Body Part};
+\node(morphogene-5)[class3, below right= -0.4cm and 1cm of morphogene-1]{Body Part};
+\node(morphogene-5-2)[class3, right= 1cm of morphogene-5]{Body Part};
 
 %###############################################
 % torso branch

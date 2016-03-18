@@ -216,11 +216,17 @@ Furthermore, the morphogene contains a number of morphogene branches and influen
 %
 The influence factors in the morphogene are the repetitions limit, which limits the number of repetitions of that morphogene along one top-bottom branch, and the segment-shrink factor, which shrinks all dimensions of the morphogenes branched to from this morphogene.
 
-\todo[inline]{Generally very complicated sentences}
+A morphogene branch (Fig. \ref{figure:genome-structure}) consists of the following joint properties. %
 
-A morphogene branch (Fig. \ref{figure:genome-structure}) consists of joint properties, which are the pitch and yaw axis, the joint rotational limits for the pitch, yaw and roll degree of freedom, joint damping coefficients for all degrees of freedom, a controller gene and some additional influence factors. %
+The pitch and yaw axis define two of the three orthogonal joint rotation axes, the third being implicitly defined by the cross product. %
+
+The joint rotational limits for the pitch, yaw and roll degree of freedom limit the rotation to a certain range. %
+
+The joint damping coefficients for all degrees of freedom cause the joint to be damped, the coefficients representing \(c\) in the damping force equation \(F = -c \cdot \dot x\). %
+
+Furthermore, the morphogene branch contains a controller gene and some additional influence factors. %
 %
-The influence factors in the morphogene branch are the flip and the mirror flag, responsible for two types of symmetry, that are described in the context of the embryogenesis in section \label{subsec:embryogenesis}.
+The influence factors in the morphogene branch are the flip and the mirror flag, responsible for two types of symmetry, that are described in the context of the embryogenesis in section \ref{subsec:embryogenesis}.
 
 A controller gene is either a sinusoidal controller gene or a chaotic controller gene. %
 %
@@ -244,7 +250,7 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \center
 \input{Pictures/evolutionary-optimization/indirect-encoding.tikz}
 
-\caption[Possible indirectly encoded genome]{An example creature using the indirectly encoded genome (using a subset of the configuration possibilities). The number at the branch denotes the number of child limbs of the following type attached to the respective parent limb. Mirror means that the following branch has the mirror flag set, so that it will be mirrored.}
+\caption[Possible indirectly encoded genome]{An example creature using the indirectly encoded genome. The number at the branch denotes the number of repeated child body parts of the type it points to. which are to be attached to the respective parent body part of the phenotype. Mirror means that the following branch will be mirrored along the primary axis of the parent body part.}
 \label{figure:indirect-genotype}
 \end{figure}
 
@@ -252,7 +258,7 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \centering
 \input{Pictures/evolutionary-optimization/direct-encoding.tikz}
 
-\caption[Directly encoded genome]{A figure of the same example creature using a directly encoded genome.}
+\caption[Directly encoded genome]{A figure of the same example creature using a directly encoded genome. The mirror flag and the repetitions do not exist, therefore the genotype is basically a direct representation of the phenotype.}
 \label{figure:direct-encoding}
 \end{figure}
 
@@ -373,8 +379,6 @@ The model organisms are hand-coded genotypes to be developed into creatures that
 %
 They are mainly used for testing and experimentation purposes, because they feature a non-redundant, simple genomic description and well-defined limb and joint descriptors.
 
-\todo[inline]{Remove window frames from the picture to increase the actually important part of the picture}
-
 \paragraph{Model Leg}
 
 The model leg is a simple creature built from two equal limbs and one joint. %
@@ -486,7 +490,7 @@ The first generator is taken out of the list, then and it is checked if the tota
 %
 If so, the phenotype is finished, else the Embryogenesis continues. %
 %
-Now we create the new limb according to the morphogene specifications. %
+Now we create the new body part according to the morphogene specifications. %
 %
 Then it is checked if this limb has to be appended to a existing parent limb (for the root morphogene no, for all others yes), if yes, the child limb is positioned so that their joint anchoring points on the surface of both limbs overlap, then they are connected by the joint prescribed by the morphogene branch. %
 %
@@ -500,29 +504,7 @@ At the end of all evaluations for a certain population's generation, the simulat
 %
 In the evolution step, the following operations are performed by the reaper: Culling a percentage of the worst performing creatures according to the total fitness ranking, variation of the remaining creatures with different variance operators according to the respective percentages and sowing of new creatures partly from crossover and random generation. %
 %
-In the Minemonics simulator, the following parameters were chosen:
-
-\todo[inline]{This table can be represented much easier}
-
-\begin{itemize}
-\item Reap percentage: \unit[30]{\%}
-\item Variation on the rest of the population (considered \unit[100]{\%} in the following list)
-\begin{itemize}
-\item Elitism (no variation): \unit[14.28]{\%}
-\item Gene specification mutation percentage: \unit[14.28]{\%}
-\item Gene split percentage: \unit[14.28]{\%}
-\item Gene purge percentage: \unit[14.28]{\%}
-\item Branch mutation percentage: \unit[14.28]{\%}
-\item Grow stub gene percentage: \unit[14.28]{\%}
-\item Graft feature percentage: \unit[14.28]{\%}
-\end{itemize}
-\item Sow percentage: \unit[30]{\%}
-\begin{itemize}
-\item Crossover: \unit[50]{\%}
-\item Random generation: \unit[50]{\%}
-\end{itemize}
-\label{item:ReaperPerc}
-\end{itemize}
+In the Minemonics simulator, \unit[30]{\%} are culled first. The remaining creatures are equally distributed among the variation operations Gene specification, Gene split, Gene purge, Branch specification, Grow stub gene and graft feature mutation, another equal share from the fittest creatures is left untouched following an elitism strategy. Then the missing \unit[30]{\%} are replaced with equal amounts of creature generated by crossover and randomized instantiation.
 
 In the following sections, the different operations are described in detail.
 
@@ -561,7 +543,7 @@ The typical crossover strategy inspired by biological crossover is commonly know
 %
 This section additionally describes the procedure of how to choose matching parents.
 
-Using the creatures sorted by the fitness ranking, a percentage of those best performing creatures (based on list \ref{item:ReaperPerc}) are chosen to be possible parents. %
+Using the creatures sorted by the fitness ranking, a percentage of those best performing creatures are chosen to be possible parents. %
 %
 To create new offspring, from every possible parent a number of offsprings is generated. %
 %

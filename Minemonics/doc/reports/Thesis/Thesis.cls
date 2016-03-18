@@ -113,7 +113,7 @@
 %\theoremstyle{remark}
 %\newtheorem{remark}[theorem]{Remark}
 \usepackage[centerlast,small,sc]{caption}
-\setlength{\captionmargin}{20pt}
+%\setlength{\captionmargin}{20pt}
 \newcommand{\fref}[1]{Figure~\ref{#1}}
 \newcommand{\tref}[1]{Table~\ref{#1}}
 \newcommand{\eref}[1]{Equation~\ref{#1}}
