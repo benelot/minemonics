@@ -258,7 +258,7 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \centering
 \input{Pictures/evolutionary-optimization/direct-encoding.tikz}
 
-\caption[Directly encoded genome]{A figure of the same example creature using a directly encoded genome. The mirror flag and the repetitions do not exist, therefore the genotype is basically a direct representation of the phenotype.}
+\caption[Directly encoded genome]{A figure of the same example creature using a directly encoded genome. The mirror flag and the repetitions do not exist in this type of encoding, therefore the genotype is basically an explicit representation of the phenotype.}
 \label{figure:direct-encoding}
 \end{figure}
 
@@ -478,23 +478,50 @@ The maximum repetition limits, one per morphogene, permit or deny a further repe
 %
 The total number of limbs causes the Embryogenesis stop when reached by the current limb quantity.
 
-To setup the embryogenesis, so that the same processing can be performed for every morphogene, the root morphogene is assigned to a Phenotype generator and inserted into an empty list of generators. %
-%
-The phenotype generator's base orientation is initialized to the quaternion identity, the segments depth limit, the current limb quantity is set to 0 and the repetition lists are emptied. %
-%
-Then the processing of a morphogene and its morphogene branches is repeated until a halting condition is reached and works as follows:%
-\todo[inline]{Produce a pseudocode segment or a diagram showing the embryogenesis}
+The following pseudo code \ref{code:embryogenesis} describes the procedure of the embryogenesis.
 
-%
-The first generator is taken out of the list, then and it is checked if the total limb limit or the limb depth limit defined by the individual is reached. %
-%
-If so, the phenotype is finished, else the Embryogenesis continues. %
-%
-Now we create the new body part according to the morphogene specifications. %
-%
-Then it is checked if this limb has to be appended to a existing parent limb (for the root morphogene no, for all others yes), if yes, the child limb is positioned so that their joint anchoring points on the surface of both limbs overlap, then they are connected by the joint prescribed by the morphogene branch. %
-%
-Finally, new generators are produced and inserted into our generator list, one for each morphogene branch of the child morphogene that were just processed. 
+\begin{figure}[H]
+\caption{Developing a creature using Embryogenesis}
+\scriptsize
+\textbf{Inputs:} Genotype \textit{genotype} of the individual\\
+\textbf{Result:} Fully developed morphology and controller of the creature
+\begin{PseudoCode}[otherkeywords={create,add,exit,build,append,place,get,each},emph={rootMorphogene,genome,generatorsList, phenotypeGenerator,segmentsDepthLimit,currentBodyPartQty,childBodyPart,generator,morphogeneBranch,phenotypeGenerators,genotype,parentBodyPart,morphogene,.,maxBodyPartQty,morphogeneBranches,branch,joint,controller,orientation,baseOrientation,repetitionsList},emphstyle={\bfseries\textit}]
+get rootMorphogene from genotype
+phenotypeGenerator.morphogene = rootMorphogene
+phenotypeGenerator.segmentsDepthLimit = 0
+currentBodyPartQty = 0
+phenotypeGenerator.baseOrientation = Identity
+phenotypeGenerator.repetitionsList = {}
+add phenotypeGenerator to generatorsList
+
+while generatorsList is not empty
+	get generator from generatorsList
+	
+	exit if generator.segmentsDepthLimit = genotype.segmentsDepthLimit or currentBodyPartQty = genotype.maxBodyPartQty
+	
+	build new childBodyPart according to generator.morphogene, generator.flipped and generator.mirrored
+	
+	if childBodyPart has to be attached to a parentBodyPart
+		append childBodyPart to parentBodyPart
+		build joint & controller according to generator.morphogeneBranch
+
+	rotate generator.baseOrientation with childBodyPart.orientation
+	
+	get morphogeneBranches from generator.morphogene
+	
+	for each branch in morphogeneBranches
+		if branch.morphogene not exhausted in generator.repetitionsList
+			create new phenotypeGenerator or multiple if branch is flipped or mirrored
+			copy phenotypeGenerator settings from generator
+			phenotypeGenerator.segmentsDepthLimit += 1
+			phenotypeGenerator.repetitionsList[branch.morphogene] += 1
+			phenotypeGenerator.morphogeneBranch = branch
+			add phenotypeGenerator to generatorsList
+		
+	currentBodyPartQty +=1
+\end{PseudoCode}
+\label{code:embryogenesis}
+\end{figure}
 
 \subsection{Reaper}
 \label{subsection:Reaper}
@@ -619,12 +646,10 @@ For each class, with probability $0.6$, $x$ new branches are added to the morpho
 %
 The branches reconnect the stub gene to others and therefore increase the interconnectivity of unconnected morphogene classes.
 
-\todo[inline]{Put this segment to the beginning to be not redundant.}
-
 \section{Evolutionary Cycle}
 % rev. 1
 
-To describe how the different components play together, an evolutionary cycle of one planet with a flat plane environment and a population of 10 individuals is outlined. %
+To describe how the different components play together, an example evolutionary cycle of one planet with a flat plane environment and a population of 10 individuals is outlined. %
 %
 One evolutionary cycle can be separated into 2 substeps, the evaluation step and the variation step. %
 %
@@ -652,7 +677,7 @@ If all evaluations are over, the evolution switches to the variation step.
 
 During the variation step, the reaper picks up the population and culls the worst performing creatures. %
 %
-Leaving a top percentage of creatures without variation (Elitism), it produces offspring by crossover based on the elite and an additional partner, then applies the mutations to the rest of the population according to list \ref{item:ReaperPerc}. %
+Leaving a top percentage of creatures without variation (Elitism), it produces offspring by crossover based on the elite and an additional partner, then applies the mutations to the rest of the population. %
 %
 Finally it replaces the remaining number of missing creatures with new, randomly generated creatures.
 

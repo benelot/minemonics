@@ -107,7 +107,7 @@ node (morphogene-branch-brace) [black,midway] {};
 % Morphogene branches vector
 %###############################################
 \matrix(morphogene-branch-vector)[left=1.0cm of morphogene-branches, row sep=2mm, column sep=2mm, inner sep=2mm] {
-\node[box]{MB}; & \node[box]{}; & \node(left-to-selected-morphogene-branch)[]{$\dots$}; & \node(selected-morphogene-branch)[box]{MB}; &\node(right-to-selected-morphogene-branch)[]{$\dots$}; & \node[box]{MB};\\
+\node[box]{MB}; & \node[box]{}; & \node(left-to-selected-morphogene-branch)[]{$\dots$}; & \node(selected-morphogene-branch)[box]{MB}; &\node(right-to-selected-morphogene-branch)[]{$\dots$}; & \node[box]{}; & \node[box]{MB};\\
 };
 \node(above-left-of-selected-morphogene-branch)[above left= 0cm and -0.8cm of left-to-selected-morphogene-branch]{};
 \node(above-right-of-selected-morphogene-branch)[above right=0cm and -0.8cm of right-to-selected-morphogene-branch]{};
