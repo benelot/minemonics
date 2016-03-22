@@ -74,7 +74,7 @@ For such gaits to be stable, the locomotion must be very robust to disturbances.
 %
 Yet, engineering solutions usually rely on longer planning times and still do not reach competitive solutions in terms of robustness and adaptability to the environment. %
 %
-Conventionally, the need for gait adaption has to be detected , before then computing a new limb trajectory according to the chosen gait. %
+Conventionally, the need for gait adaption has to be detected, before then computing a new limb trajectory according to the chosen gait. %
 %
 A new approach is to design a self-adaptive system that produces a variety of periodic movements and adapts the output trajectory through the interaction with the ground. %
 %
@@ -178,7 +178,20 @@ In 2001, Wagner and Stoop showed that the optimal simple limiter control ranges 
 %
 In a natural system such as the actuated leg joint, this limiter can be much more subliminal, be it the weight or dimensions of the limbs or the limits, damping or friction of the joints, or even the fact that two physical objects can not interpenetrate each other. %
 %
-The goal of this thesis is to use evolutionary algorithms and the above mentioned, chaotic control system to evolve creatures in a rigid-body engine and find examples showing basic locomotion abilities that emerge in the interaction with the ground.
 
+\subsection{Experiment Outline}
 
+\todo[inline]{Add a chart depicting all performed experiments}
+
+The goal of this thesis is to use evolutionary algorithms and the above mentioned, chaotic control system to evolve creatures in a rigid-body physics engine to find example creatures showing basic locomotion abilities emerge in the interaction with the ground. %
+
+Therefore, a simulator is developed to evolve artificial creatures using a specially tailored type of genome to co-evolve the individual's controller and morphology. %
+
+In a first evolution, the creature's movement is controlled by an engineered controller emitting sinusoidal leg movement signals, so that each joint degree of freedom moves according to the sinusoid's parameters of amplitude, frequency and offset. %
+
+After successful evolution of locomoting creatures, an example chaotic system is chosen and a simple limiter is applied to it to observe the influence of different simple limiter configurations. %
+
+Then, creatures are evolved being driven by chaotic leg movement controllers using the previously chaotic system to exert joint torques. %
+
+In case the controller does
 \end{document}
