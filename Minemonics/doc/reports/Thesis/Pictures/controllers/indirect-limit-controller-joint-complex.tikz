@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+% classes
+\tikzstyle{root} = [draw=black!80, thick,minimum width=1.5cm,minimum height=1cm, circle, fill=black!20]
+\tikzstyle{class1} = [minimum width=3cm, minimum height=2cm,draw=black!80, thick, fill=blue!5, rounded corners, rectangle]
+\tikzstyle{class2} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=orange!80]
+\tikzstyle{class3} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=red!80]
+
+%###############################################
+% external output
+%###############################################
+
+%###############################################
+% internal controller state
+%###############################################
+
+%###############################################
+% controller symbol
+%###############################################
+
+%###############################################
+%  force control
+%###############################################
+
+%###############################################
+% joint state
+%###############################################
+
+%###############################################
+% joint limits
+%###############################################
+
+%###############################################
+% joint damping
+%###############################################
+
+%###############################################
+% joint symbol
+%###############################################
+
+
+
+\end{tikzpicture}

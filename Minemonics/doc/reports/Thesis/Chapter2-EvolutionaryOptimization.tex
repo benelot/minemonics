@@ -203,8 +203,12 @@ As opposed to direct encoding, indirect encoding does not encode every element o
 The advantage of indirect encodings is that an indirect coding evolves element classes instead of element instances, which leads to a higher abstraction of phenotype building blocks within the genome. %
 %
 A sequence of element classes, forming an abstract, higher order feature such as a type of leg, can thus be repeatedly expressed within a creature morphology in different scalings and symmetries. %
-
+%
 The classes therefore help to evolve similar, repeated, morphological elements such as limbs of different sizes or symmetrical leg pairs, which all use the same leg definition in the genotype. %
+%
+To visualize the difference between an indirect and a direct encoding, an example creature is represented once in indirect encoding (Fig. \ref{figure:indirect-genotype}) and once in direct encoding (Fig. \ref{figure:direct-encoding}). %
+%
+In the phenotype section, the creature's morphology resulting from both encodings is shown (Fig. \ref{figure:phenotype}). %
 
 The genome defines a directed, possibly cyclic graph, whose nodes are called morphogenes, defining the classes of limbs, and whose edges are called morphogene branches, defining the joint relations in between the limbs. %
 %
@@ -236,10 +240,8 @@ The chaotic controller gene defines a chaotic controller, through the type of ch
 %
 The resulting sinusoidal and chaotic controller are described in their respective sections \ref{sec:sinusoidal-oscillators} and \ref{sec:chaotic-controllers}.
 
-\todo[inline]{Make diagrams and description clearer}
-
 \begin{figure}[H]
-\center
+\hspace*{-0.2in}
 \input{Pictures/evolutionary-optimization/genome-structure.tikz}
 
 \caption[Indirectly encoded genome structure]{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of limb and a morphogene branch defines a certain class of joint to connect two limbs.}
@@ -250,7 +252,7 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \center
 \input{Pictures/evolutionary-optimization/indirect-encoding.tikz}
 
-\caption[Possible indirectly encoded genome]{An example creature using the indirectly encoded genome. The number at the branch denotes the number of repeated child body parts of the type it points to. which are to be attached to the respective parent body part of the phenotype. Mirror means that the following branch will be mirrored along the primary axis of the parent body part.}
+\caption[Example creature using an indirectly encoded genome]{An example creature using the indirectly encoded genome. The number at the branch denotes the number of repeated child body parts of the type it points to which are to be attached to the respective parent body part of the phenotype. Mirror means that the following branch will be mirrored along the primary axis of the parent body part.}
 \label{figure:indirect-genotype}
 \end{figure}
 
@@ -258,7 +260,7 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \centering
 \input{Pictures/evolutionary-optimization/direct-encoding.tikz}
 
-\caption[Directly encoded genome]{A figure of the same example creature using a directly encoded genome. The mirror flag and the repetitions do not exist in this type of encoding, therefore the genotype is basically an explicit representation of the phenotype.}
+\caption[Example creature using a directly encoded genome]{A figure of the same example creature using a directly encoded genome. The mirror flag and the repetitions do not exist in this type of encoding, therefore the genotype is basically an explicit representation of the phenotype.}
 \label{figure:direct-encoding}
 \end{figure}
 
@@ -292,7 +294,7 @@ This issue could be fixed by using the Featherstone Multibody representation.
 \input{Pictures/evolutionary-optimization/phenotype.tikz}
 
 \caption[A figure of the phenotype]{A figure of the phenotype of the example creature when transcribed by the Embryogenesis.}
-\label{figure:direct-encoding}
+\label{figure:phenotype}
 \end{figure}
 
 \subsubsection{Constrained Rigid-body Phenotype}
@@ -302,7 +304,7 @@ The Constrained Rigid-body Phenotype model is built from rigidbody primitives an
 %
 Every rigid-body has a full representation of its own position and rotation (Figure \ref{figure:maximal-vs-reduced}), which is then influenced by gravity, other rigid-bodies and the joint constraints. %
 %
-A joint constraint constrains two rigid-bodies by defining the center of rotation (CoR) of the joint in both limb coordinate reference frames, and then tries to keep both CoR definitions overlapping in the world reference frame under the additional constraints of joint limits and other influences.  %
+A joint constraint constrains two rigid-bodies by defining the center of rotation (CoR) of the joint in both body part coordinate reference frames, and then tries to keep both CoR definitions overlapping in the world reference frame under the additional constraints of joint limits and other influences.  %
 %
 Many joint constraint types with different features exist, mainly because some constraints have a simpler constraint row representation than others. %
 %
@@ -314,7 +316,7 @@ The following solvers are implemented in the Bullet Physics engine \cite{bib::Co
 
 
 \begin{itemize}
-\item Sequential Impulse Solver (iterative, very instable when linking limbs of large mass ratios with joints) \\ 
+\item Sequential Impulse Solver (iterative, very instable when linking body parts of large mass ratios with joints) \\ 
 \item Projected Gauss-Seidel Solver (iterative, bad convergence) \\
 \item Mixed Linear Complementarity Problem (MLCP) Solvers
 \begin{itemize}
@@ -357,13 +359,13 @@ A more in-depth discussion of the different solvers can be found in \cite{bib::C
 
 The Featherstone Multibody Phenotype is based on a fundamentally different concept called reduced coordinates or generalized coordinates (Figure \ref{figure:maximal-vs-reduced}). %
 %
-Reduced coordinates express only the degrees of freedom of each rigid-body relative to its parent limb, starting from each joint not having any DoFs. %
+Reduced coordinates express only the degrees of freedom of each rigid-body relative to its parent body part, starting from each joint not having any DoFs. %
 %
 A simple hinge joint is then expressed as a 1-DoF revolute joint angle. Instead of constraint, as in the Constrained Rigidbody Phenotype, we call such a multibody joint a mobilizer. %
 %
-In the case of reduced coordinates, the position, velocity and acceleration are expressed with reference to the parent limb, meaning that we start to apply position and velocity updates at the root element and continue with the child limbs. %
+In the case of reduced coordinates, the position, velocity and acceleration are expressed with reference to the parent body part, meaning that we start to apply position and velocity updates at the root element and continue with the child body part. %
 %
-We also calculate the inertia of the whole hierarchy instead of only the inertias of the interacting limbs when resolving limb-pairs. %
+We also calculate the inertia of the whole hierarchy instead of only the inertias of the interacting body part when resolving body part-pairs. %
 %
 In the Featherstone representation, it is not necessary to resolve constraints, therefore we do not experience resolving forces and torques, thus no gaps exist between the rigid-bodies. %
 %
@@ -377,11 +379,11 @@ That is why it is more suitable for evolving virtual creatures.
 
 The model organisms are hand-coded genotypes to be developed into creatures that have specific properties. %
 %
-They are mainly used for testing and experimentation purposes, because they feature a non-redundant, simple genomic description and well-defined limb and joint descriptors.
+They are mainly used for testing and experimentation purposes, because they feature a non-redundant, simple genomic description and well-defined body part and joint descriptors.
 
 \paragraph{Model Leg}
 
-The model leg is a simple creature built from two equal limbs and one joint. %
+The model leg is a simple creature built from two equal body parts and one joint. %
 %
 The joint can be either set to a one DoF hinge joint or a three DoF spherical joint. %
 %
@@ -392,22 +394,22 @@ The model leg's main purpose is to run experiments on chaotic controllers on a s
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-leg1.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-leg2.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-leg3.png}
-\caption[The model leg]{The model leg, one of the model organisms of the Minemonics simulator. It features one single joint connecting two limbs.}
+\caption[The model leg]{The model leg, one of the model organisms of the Minemonics simulator. It features one single joint connecting two body parts.}
 \label{figure:model-leg}
 \end{figure}
 
 \paragraph{Snake}
 
-The snake is a creature built from a chain of equal limbs connected with one or three DoF joints similar to the model leg. %
+The snake is a creature built from a chain of equal body parts connected with one or three DoF joints similar to the model leg. %
 %
-In fact, the snake is just a chain of model legs with a higher number of limb-joint repetitions. 
+In fact, the snake is just a chain of model legs with a higher number of body part-joint repetitions. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-snake1.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-snake2.png}
 \includegraphics[width=0.32\textwidth]{model-organisms/Model-snake3.png}
-\caption[The snake]{The snake. It features one long chain of limbs connected by either 1 DoF or 3 DoF joints.}
+\caption[The snake]{The snake. It features one long chain of body parts connected by either 1 DoF or 3 DoF joints.}
 \label{figure:snake}
 \end{figure}
 
@@ -415,7 +417,7 @@ In fact, the snake is just a chain of model legs with a higher number of limb-jo
 
 The Pod is a creature that can be configured to have a certain number of legs and a certain number of body elements. %
 %
-The body is a limb on which the legs are attached in a circular manner. %
+The main body is a body part on which the legs are attached in a circular manner. %
 %
 The number of legs is divided by the number of bodies, so that the same number of legs is attached to each body. %
 %
@@ -460,28 +462,27 @@ This means that the process starts at the root node and transcribes the root's c
 %
 To store the intermediate results of the generation process, the Embryogenesis uses phenotype generators. %
 %
-Intermediate results are the morphogene branch of the parent morphogene and the parent limb element, the position and orientation of the current generation process, the current shrinkage factor of the generated limbs, if this is a flipped or mirrored branch, the length of the current root to leaf path and a list of the number of repetitions of different morphogene classes along this branch. %
+Intermediate results are the morphogene branch of the parent morphogene and the parent body part element, the position and orientation of the current generation process, the current shrinkage factor of the generated body parts, if this is a flipped or mirrored branch, the length of the current root to leaf path and a list of the number of repetitions of different morphogene classes along this branch. %
 %
 The Embryogenesis is influenced by so called influence factors, which are propagated along the top-bottom path of the phenotype-tree. %
 %
-The influence factors, as mentioned before, are the flip and mirror flag of the morphogene branch and the current shrink factor, the maximum repetition limits, and the total number of limbs of the morphogene. %
+The influence factors, as mentioned before, are the flip and mirror flag of the morphogene branch and the current shrink factor, the maximum repetition limits, and the total number of body parts of the morphogene. %
 %
 The flip flag causes the embryogenesis to transcribe a top-bottom genome branch twice in the phenotype, once in its original form and once in flipped form. %
 %
-Flipping means that all positional and orientational definitions of the branch and following limbs are negated to create a second flipped version of the original genome branch. %
+Flipping means that all positional and orientational definitions of the branch and following body parts are negated to create a second flipped version of the original genome branch. %
 %
-The mirror flag causes the embryogenesis to transcribe the genome branch twice in the phenotype, once in its original form and once a mirrored form mirrored the primary axis of the limb the branch is attached to. %
+The mirror flag causes the embryogenesis to transcribe the genome branch twice in the phenotype, once in its original form and once a mirrored form mirrored the primary axis of the body part the branch is attached to. %
 %
-The current segment shrink factor shrinks all limb dimensions of the morphogene the branch points to and propagates along further branches of that morphogene. %
+The current segment shrink factor shrinks all body part dimensions of the morphogene the branch points to and propagates along further branches of that morphogene. %
 %
-The maximum repetition limits, one per morphogene, permit or deny a further repetition of a limb along this top-bottom path of the phenotype tree. %
+The maximum repetition limits, one per morphogene, permit or deny a further repetition of a body part along this top-bottom path of the phenotype tree. %
 %
-The total number of limbs causes the Embryogenesis stop when reached by the current limb quantity.
+The total number of body parts causes the Embryogenesis stop when reached by the current body part quantity. %
 
-The following pseudo code \ref{code:embryogenesis} describes the procedure of the embryogenesis.
+The following pseudo code \ref{code:embryogenesis} describes the procedure of the embryogenesis. %
 
 \begin{figure}[H]
-\caption{Developing a creature using Embryogenesis}
 \scriptsize
 \textbf{Inputs:} Genotype \textit{genotype} of the individual\\
 \textbf{Result:} Fully developed morphology and controller of the creature
@@ -520,6 +521,7 @@ while generatorsList is not empty
 		
 	currentBodyPartQty +=1
 \end{PseudoCode}
+\caption{Developing a creature using Embryogenesis}
 \label{code:embryogenesis}
 \end{figure}
 
@@ -620,7 +622,7 @@ This affects all values except for the morphogene branches which stay unchanged.
 
 The gene split mutation applied to a genome iterates over all morphogene classes. %
 %
-For each class, with probability $0.2$, the morphogene is split along the X, Y or Z axis into two morphogenes occupying roughly the same total volume as the original limb. %
+For each class, with probability $0.2$, the morphogene is split along the X, Y or Z axis into two morphogenes occupying roughly the same total volume as the original body part. %
 %
 The morphogenes are then connected with a single branch representing a completely limited joint.
 
@@ -664,7 +666,7 @@ During the evaluation step, each individual is dropped into the simulation sligh
 %
 In single creature mode, which was used for all experiments, every creature is evaluated separately. %
 %
-If a creature consists of 0 or only 1 limb, the creature is discarded, since it is degenerate and can not move at all, therefore is worthless to be evaluated. %
+If a creature consists of zero or only one body part, the creature is discarded, since it is degenerate and can not move at all, therefore is worthless to be evaluated. %
 %
 Furthermore, the evolution discards creatures that produce very high joint velocities, which is usually an indication that the creature might exploit unrealistic physical forces. %
 %

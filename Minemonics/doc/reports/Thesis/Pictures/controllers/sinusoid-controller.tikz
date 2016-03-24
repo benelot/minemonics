@@ -1,0 +1,93 @@
+\begin{tikzpicture}
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node(image-title) at (-1,4.5){\underline{\textbf{Sinusoidal controller specification}}};
+
+%###############################################
+% parameter list above
+%###############################################
+\node[align=left](sinusoid-controller-spec) at (0.7,3){
+\framebox{
+\begin{varwidth}{0.7\linewidth}
+\underline{Parameters:}\\
+\begin{minipage}{0.4\linewidth}
+\begin{itemize}
+\item Amplitude $[0;0.5]$
+\item Frequency $[0.5;4]$
+\end{itemize}
+\end{minipage}
+\begin{minipage}{0.35\linewidth}
+\begin{itemize}
+\item X Offset $[0; 2 \Pi]$
+\item Y Offset $[0;1]$
+\end{itemize}
+\end{minipage}
+\end{varwidth}
+}};
+
+%###############################################
+% internal controller state
+%###############################################
+
+\node(controller-state) at (-2,1.2){\underline{Controller state}};
+\node(internal-signal-box) at (0,-1.2){};
+\node[inner sep=0pt] (internal-signal) at (-4,-1.2)
+{
+\begin{axis}[
+    trig format plots = rad,
+    axis lines = middle,
+    enlargelimits,
+    clip=false,
+	scale=0.6,
+	y=1.5cm,
+    x=0.25cm,
+	xticklabels={,,},
+	yticklabels={,,}
+    ]
+    \addplot[domain=-2*pi:4*pi,samples=200,blue] {sin(x)};
+    %\addplot[domain=-2*pi:2*pi,samples=200,red] {sin(x-2)};
+    %\draw[dotted,blue!40] (axis cs: 0.5*pi,1.1) -- (axis cs: 0.5*pi,0);
+    %\draw[dotted,red!40] (axis cs: 0.5*pi+2,1.1) -- (axis cs: 0.5*pi+2,0);
+    %\draw[dashed,olive,<->] (axis cs: 0.5*pi,1.05) -- node[above,text=black,font=\footnotesize]{$\delta t$}(axis cs: 0.5*pi+2,1.05);
+\end{axis}
+};
+
+%###############################################
+% external sinusoid output
+%###############################################
+\node[align=left] at (4,1.2){\underline{Controller output}};
+\node[inner sep=0pt] (external-signal) at (2,-1.2)
+{
+\begin{axis}[
+    trig format plots = rad,
+    axis lines = middle,
+    enlargelimits,
+    clip=false,
+	scale=0.6,
+	y=1.5cm,
+    x=0.25cm,
+	xticklabels={,,},
+	yticklabels={,,}
+    ]
+    \addplot[domain=-2*pi:4*pi,samples=200,blue] {sin(x)};
+    %\addplot[domain=-2*pi:2*pi,samples=200,red] {sin(x-2)};
+    %\draw[dotted,blue!40] (axis cs: 0.5*pi,1.1) -- (axis cs: 0.5*pi,0);
+    %\draw[dotted,red!40] (axis cs: 0.5*pi+2,1.1) -- (axis cs: 0.5*pi+2,0);
+    %\draw[dashed,olive,<->] (axis cs: 0.5*pi,1.05) -- node[above,text=black,font=\footnotesize]{$\delta t$}(axis cs: 0.5*pi+2,1.05);
+\end{axis}
+};
+
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (1,0) -- (2,0);
+
+
+\begin{pgfonlayer}{background}
+  \node(controller-state-box)[bigbox] [fit = (controller-state) (internal-signal-box)] {};
+\end{pgfonlayer}
+
+\end{tikzpicture}

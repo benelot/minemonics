@@ -20,7 +20,7 @@
 \section{Evolved Creatures with Uncoupled Sinusoidal Oscillators}
 \label{sec:evolved-sin-creatures}
 
-In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-oscillators} was used to evolve creatures. %
+In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-controllers} was used to evolve creatures. %
 %
 A population of 100 creatures was set up with an average velocity fitness function and a minimal height fitness function. %
 %
@@ -36,6 +36,7 @@ Every creature was evaluated for 20 seconds. %
 %
 The successful solutions evolved can be seen below in figures \ref{figure:successfulcreatures-jumper1}, \ref{figure:successfulcreatures-jumper2}, \ref{figure:successfulcreatures-walker1} and \ref{figure:successfulcreatures-walker2}.
 
+\todo[inline]{Recapture the sinusoid evolved creatures and produce an animation from it.}
 \begin{figure}[tb]
 \centering
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/165.png}
@@ -78,7 +79,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 
 Creatures that exhibit successful locomotion seem to share a common ancestor, which might have been the first creature to evolve a successful walking pattern, since all of its offspring share a similar magenta skin coloring. %
 %
-Since the skin color is randomly set for one limb, the common ancestor could only have had all the same color and must have been replicated using crossover. %
+Since the skin color is randomly set for one body part, the common ancestor could only have had all the same color and must have been replicated using crossover. %
 %
 In crossover (as described in \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. %
 %
@@ -97,9 +98,9 @@ The chaotic controller, introduced in the previous chapter, which uses an underl
 %
 If a creature could use simple limiter control to stabilize UPOs and exploit the periodic orbits for locomotion patterns, this could lead to a more robust and adaptive way of motion. %
 %
-Experimentally, this would mean that if the creatures exhibited periodic locomotion patterns, it could be shown that the successful creatures controlled the amount of chaotic movement of the controller or the chaotic movement of the limb and stabilized unstable periodic orbits to exploit it for limb motion. %
+Experimentally, this would mean that if the creatures exhibited periodic locomotion patterns, it could be shown that the successful creatures controlled the amount of chaotic movement of the controller or the chaotic movement of the body part and stabilized unstable periodic orbits to exploit it for body part motion. %
 %
-Showing that the controller or limb motion is less chaotic can be shown by calculating the largest Lyapunov exponent, which accounts for the amount of divergence of two slightly different initial conditions of the controller or the limb motion.
+Showing that the controller or body part motion is less chaotic can be shown by calculating the largest Lyapunov exponent, which accounts for the amount of divergence of two slightly different initial conditions of the controller or the body part motion.
 
 The experiments were run on the chaotic controller as described in \ref{subsec:chua-circuit}. %
 %
@@ -112,6 +113,15 @@ The second experiments then used sensory feedback to impose limiters on the chao
 \subsection{Indirect Limiter Control through the Morphology}
 % rev. 3
 
+\todo[inline]{Draw indirect limit controller joint complex.}
+\begin{figure}[H]
+%\hspace*{-1.2in}
+\input{Pictures/controllers/indirect-limit-controller-joint-complex.tikz}
+
+\caption[The indirectly limited chaotic controller and joint complex]{The indirectly limited chaotic controller and its interaction with the joint. The limiters defined through the environment and the joint properties constrain only the movement of the joint, but do not influence the chaotic controller behavior itself. Therefore the environmental influences and the joint properties can not change the dynamics of the controller.}
+\label{figure:indirect-limit-controller-joint-complex}
+\end{figure}
+
 The first experiments uses chaotic controllers without direct limiters. %
 %
 The controllers start with different initial conditions and different integration speeds, but are not limited using sensory input. %
@@ -122,14 +132,23 @@ The conducted experiment was run using 4 different evolutionary settings in term
 %
 However, the desired limiter control exhibiting periodic or quasi-periodic motion could not be observed in any of the creatures. %
 %
-This could be explained due to the lacking feedback from the limb to the chaotic system itself. %
+This could be explained due to the lacking feedback from the body part to the chaotic system itself. %
 %
-That is why the chaotic system runs completely uninfluenced and is independent of the limb being limited in its movement. %
+That is why the chaotic system runs completely uninfluenced and is independent of the body part being limited in its movement. %
 %
 Therefore it was necessary to implement sensory feedback of the respective, controlled joint so that the limits of the morphology would impose limiters on the chaotic controller.
 
 \subsection{Direct Limiter Control through Sensory Feedback}
 % rev. 2
+
+\todo[inline]{Draw direct limit controller joint complex diagram.}
+\begin{figure}[H]
+%\hspace*{-1.2in}
+\input{Pictures/controllers/direct-limit-controller-joint-complex.tikz}
+
+\caption[The directly limited chaotic controller and joint complex]{The directly limited chaotic controller and its interaction with the joint. The limiters defined through the environment and the joint properties constrain both the movement of the joint and the phase space of the chaotic controller. Through the constraint within the phase space, the controller can not exhibit its full dynamics any more and it stabilizes in certain periodic oscillations defined by the parameters.}
+\label{figure:direct-limit-controller-joint-complex}
+\end{figure}
 
 For the second experiment, a locally influenced chaotic controller was used. %
 %
@@ -139,7 +158,7 @@ In this experiment, the controller is limited using the position sensor and the 
 %
 As outlined below, the following limiter configuration was found experimentally: Before every integration step, the controller state \(x(t)\) is replaced by the position sensor output and the controller state \(y(t)\) is replaced by the velocity sensor output. %
 %
-The limiter system imposes limiters on two of the three dimensions in the situation where the limb motion itself is limited due to a collision with ground or other limbs. %
+The limiter system imposes limiters on two of the three dimensions in the situation where the body part motion itself is limited due to a collision with ground or other body parts. %
 %
 In case of a collision, the joint velocity of the DoF drops and the position comes to a halt. %
 %
@@ -154,7 +173,7 @@ If it is found to be experimentally successful and the trajectories exhibit peri
 
 First, the different limiter configurations with z(t) as a torque output were tested on the model leg. %
 %
-The model leg is positioned slightly above the ground, so that if starting with zero gravity, the limb floats and moves freely without touching the ground. %
+The model leg is positioned slightly above the ground, so that if starting with zero gravity, the body part floats and moves freely without touching the ground. %
 %
 In the tables below, the friction values are therefore omitted when there is zero gravity. %
 %
@@ -194,7 +213,7 @@ For the next plot, the dimension x is limited with the position sensor, while le
 	\begin{subfigure}[c]{0.45\textwidth}
 	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-px(y)z-0g-force-0-00007-damping-0-joint.png}
 		\end{subfigure}
-	\caption[Joint position \(\rightarrow\) x(t) limited chaotic controller controlling model leg.]{A strange quasi-periodic limit cycle can be observed in the chaotic controller phase space and the sensor space. The model limb oscillates strangely.}
+	\caption[Joint position \(\rightarrow\) x(t) limited chaotic controller controlling model leg.]{A strange quasi-periodic limit cycle can be observed in the chaotic controller phase space and the sensor space. The model body part oscillates strangely.}
 	\begin{tabular}{l|ll}
 	\hline 
 	Gravity: 0g  & Sensors: & Joint position \(\rightarrow\) x(t)\\
@@ -547,7 +566,7 @@ One might argue here that the question here is really what locomotion actually i
 %
 When defined as being an action causing directed movement, then nearly everything is allowed to be evolved. %
 %
-On the other end, restricting locomotion to limbs being moved in coordination to form complex oscillatory gaits, then only very few solutions fit the description. %
+On the other end, restricting locomotion to body parts being moved in coordination to form complex oscillatory gaits, then only very few solutions fit the description. %
 %
 In this thesis, the definition was kept very loose, so that most solutions involving oscillatory actions causing directed movement can be considered locomotion. %
 %
@@ -575,6 +594,9 @@ In the following figures, three of these evolved creatures are shown.
 
 The first creature is a walker. It has two large feet, of which it always moves one forward while using the other as a stabilization. 
 
+\todo[inline]{Recapture the chaotic controller evolved creatures and draw an animation from it}
+\todo[inline]{Add links to the creatures gait videos on youtube}
+\todo[inline]{Produce a finger cinema from videos}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/014.png}
@@ -587,9 +609,9 @@ The first creature is a walker. It has two large feet, of which it always moves 
 \label{figure:successfulcreatures-chaotic-walker1}
 \end{figure}
 
-The first creature features quasi-periodic orbits if the limbs are not limited by the ground. %
+The first creature features quasi-periodic orbits if the body parts are not limited by the ground. %
 %
-The quasi periodicity can be explained by the interdynamics generated by the different limbs moving simultaneously, therefore no single limb can follow a proper limit cycle. %
+The quasi periodicity can be explained by the interdynamics generated by the different body parts moving simultaneously, therefore no single body part can follow a proper limit cycle. %
 
 \begin{figure}[H]
 \centering
@@ -641,7 +663,7 @@ The same controller features a different kind of chaotic behavior when on ground
 \label{figure:crawler1-on-ground-controller-dynamics}
 \end{figure}
 
-The third creature is a jumper. It moves on ground by moving its limb so that its body moves slightly forward.
+The third creature is a jumper. It moves on ground by moving its body parts to gain momentum, which makes the main body finally lift off and take a small leap forward.
 
 \begin{figure}[H]
 \centering
@@ -649,7 +671,7 @@ The third creature is a jumper. It moves on ground by moving its limb so that it
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/542.png}
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/645.png}
 \includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/685.png}
-\caption[Figure of a jumper using chaotic controllers.]{Figure of a crawler featuring 10 chaotic controllers and 10 joints. The jumper has several legs it uses to accumulate momentum in order to jump forward.}
+\caption[Figure of a jumper using chaotic controllers.]{Figure of a jumper featuring 10 chaotic controllers and 10 joints. The jumper has several legs it uses to accumulate momentum in order to jump forward.}
 \label{figure:successfulcreatures-chaotic-crawler1}
 \end{figure} 
 
@@ -671,9 +693,10 @@ The same controller features a limit cycle which seems to be limited in the lowe
 \label{figure:crawler1-on-ground-controller-dynamics}
 \end{figure}
 
+\todo[inline]{Rewrite these sentences}
 All three creatures show adaptive behavior depending on whether they are on ground or off ground. %
 %
-The ground influences the behavior of the controller, however, it does not stabilize a chaotic trajectory as in the simple limiter model. %
+The ground influences the behavior of the controller, however, it does not always stabilize a chaotic trajectory as in the simple limiter model. %
 %
 But the ground seems not to act like a simple limiter in all creatures. %
 \end{document}

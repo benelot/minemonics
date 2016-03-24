@@ -26,9 +26,18 @@ Before we examine the chaotic controller, a short introduction to chaotic system
 %
 Finally the basic framework of the chaotic controller will be described as it will be used in the creature simulation. %
 
-\section{Uncoupled Sinusoidal Oscillators}
-\label{sec:sinusoidal-oscillators}
+\section{Uncoupled Sinusoidal Controllers}
+\label{sec:sinusoidal-controllers}
 % rev. 2
+
+\todo[inline]{Draw the sinusoid controller diagram.}
+\begin{figure}[H]
+%\hspace*{-1.2in}
+\input{Pictures/controllers/sinusoid-controller.tikz}
+
+\caption[The sinusoid controller]{The specification of the sinusoid controller, its internal state and output signal. The internal state has the same dimensionality as the output.}
+\label{figure:sinusoid-controller}
+\end{figure}
 
 The sinusoidal controller is a very simple, input-less controller. %
 %
@@ -62,6 +71,8 @@ The chaotic controller is based on a chaotic, complex, non-linear system. %
 %
 The controller has its own internal dynamics and is either completely uninfluenced from outside or is influenced by sensory input from the morphology of the creature, which adapts the controller's dynamics. %
 %
+The internal state of the chaotic controller can be of a higher dimensionality than the output signal.%
+%
 The controller's output is a trajectory of the underlying chaotic system, of which one dimension is then directly applied as a torque on the respective controlled degree of freedom. %
 %
 The output is only scaled by a torque scaling factor, which considers the appropriate torque needed to move the joint DoF to be controlled. %
@@ -86,7 +97,7 @@ This property is one of the following three properties originally described by R
 
 The chaotic system must...
 \begin{enumerate}
-\item be sensitive to the intitial conditions.
+\item be sensitive to the initial conditions.
 \item show topological mixing.
 \item have dense periodic orbits.
 \end{enumerate}
@@ -655,12 +666,21 @@ Pushing the limiter further into the negative limit values, one again observe th
 %
 Further limiting can suppress the progression of the trajectory entirely. %
 %
-The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4[\), but the radius of the spiral gets so small that the maximum precision of mathematica is reached with limiter values \(<-4\).
+The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4[\), but the radius of the spiral gets so small that the maximum precision of Mathematica is reached with limiter values \(<-4\).
 %
 Therefore the resulting trajectory starts to discretized by the limited precision.
 
 \subsection{Chaotic Chua Circuit Controller}
 % rev. 3
+
+\todo[inline]{Draw the chua controller diagram}
+\begin{figure}[H]
+%\hspace*{-1.2in}
+\input{Pictures/controllers/chua-controller.tikz}
+
+\caption[The chaotic chua controller]{A figure of the chaotic chua controller, its internal state and output signal. The internal state of the chaotic chua controller is three dimensional because the Chua circuit is defined using three dimensions. The output signal is chosen to be the z dimension of the internal state and is therefore only one dimensional.}
+\label{figure:chua-controller}
+\end{figure}
 
 The chaotic controller used control a single DoF in a joint of a creature is driven internally by the Chua circuit examined above. %
 %
