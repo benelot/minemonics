@@ -6,25 +6,25 @@
 \tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
 \tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
 
-\node(image-title) at (-1,4.5){\underline{\textbf{Sinusoidal controller specification}}};
+%\node(image-title) at (-1,4.5){\underline{\textbf{Sinusoidal controller specification}}};
 
 %###############################################
 % parameter list above
 %###############################################
-\node[align=left](sinusoid-controller-spec) at (0.7,3){
+\node[align=left](sinusoid-controller-spec) at (1.2,3){
 \framebox{
-\begin{varwidth}{0.7\linewidth}
+\begin{varwidth}{0.8\linewidth}
 \underline{Parameters:}\\
 \begin{minipage}{0.4\linewidth}
 \begin{itemize}
-\item Amplitude $[0;0.5]$
-\item Frequency $[0.5;4]$
+\item Amplitude $\in [0,0.5]$
+\item Frequency $\in [0.5,4]$
 \end{itemize}
 \end{minipage}
 \begin{minipage}{0.35\linewidth}
 \begin{itemize}
-\item X Offset $[0; 2 \Pi]$
-\item Y Offset $[0;1]$
+\item X Offset $\in [0,2 \Pi]$
+\item Y Offset $\in [0,1]$
 \end{itemize}
 \end{minipage}
 \end{varwidth}

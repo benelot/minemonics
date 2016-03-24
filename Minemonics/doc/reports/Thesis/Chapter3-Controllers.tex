@@ -30,12 +30,11 @@ Finally the basic framework of the chaotic controller will be described as it wi
 \label{sec:sinusoidal-controllers}
 % rev. 2
 
-\todo[inline]{Draw the sinusoid controller diagram.}
 \begin{figure}[H]
-%\hspace*{-1.2in}
+\centering
 \input{Pictures/controllers/sinusoid-controller.tikz}
 
-\caption[The sinusoid controller]{The specification of the sinusoid controller, its internal state and output signal. The internal state has the same dimensionality as the output.}
+\caption[The sinusoid controller]{The specification of the sinusoid controller, its internal state and output signal. The internal state has the same dimensionality as the output. If the sinusoidal controller is mutated during the mutation step of the simulator, the parameters are chosen from a uniform distribution over the respective, given intervals.}
 \label{figure:sinusoid-controller}
 \end{figure}
 
@@ -673,16 +672,15 @@ Therefore the resulting trajectory starts to discretized by the limited precisio
 \subsection{Chaotic Chua Circuit Controller}
 % rev. 3
 
-\todo[inline]{Draw the chua controller diagram}
 \begin{figure}[H]
-%\hspace*{-1.2in}
+\centering
 \input{Pictures/controllers/chua-controller.tikz}
 
-\caption[The chaotic chua controller]{A figure of the chaotic chua controller, its internal state and output signal. The internal state of the chaotic chua controller is three dimensional because the Chua circuit is defined using three dimensions. The output signal is chosen to be the z dimension of the internal state and is therefore only one dimensional.}
+\caption[The chaotic chua controller]{The specification of the chaotic chua controller, its internal state and output signal. The internal state of the chaotic chua controller is three dimensional because the Chua circuit's equations are defined using three dimensions. The output signal is chosen to be the z dimension of the internal state and is therefore only one dimensional. If the chaotic chua circuit controller is mutated during the mutation step of the simulator, the parameters are chosen from a uniform distribution over the respective, given intervals.}
 \label{figure:chua-controller}
 \end{figure}
 
-The chaotic controller used control a single DoF in a joint of a creature is driven internally by the Chua circuit examined above. %
+The chaotic controller used to control a single DoF in a joint of a creature is driven internally by the Chua circuit examined above. %
 %
 The Chua circuit's parameters are kept constant to keep the parameter space for the evolution small, also there exist many parameter conditions that do not lead to a chaotic ground state. %
 %
@@ -696,7 +694,7 @@ Thereby, variable size integration speeds can be performed, but the actual base 
 %
 The numerical integration again is performed using a Runge-Kutta order 6 integration scheme run in real-time. %
 %
-However in the creature's controller, the simple limiter is not directly applied as in the experiment above, but it will be tested if the controller output can be limited by the joint morphology, so that periodic motion emerges not in the controller, but in the joint. %
+However, in the creature's controller, the simple limiter is not directly applied as in the experiment above, but it will be tested if the controller output can be limited by the joint morphology, so that periodic motion emerges not in the controller, but in the joint. %
 %
 If this does not prove to be successful, a feedback to the chaotic system will be implemented which limits it according to the current state of the controlled joint. %
 
