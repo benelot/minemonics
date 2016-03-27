@@ -34,7 +34,7 @@ Finally the basic framework of the chaotic controller will be described as it wi
 \centering
 \input{Pictures/controllers/sinusoid-controller.tikz}
 
-\caption[The sinusoid controller]{The specification of the sinusoid controller, its internal state and output signal. The internal state has the same dimensionality as the output. If the sinusoidal controller is mutated during the mutation step of the simulator, the parameters are chosen from a uniform distribution over the respective, given intervals.}
+\caption[The sinusoid controller]{The specification of the sinusoid controller, its internal state and output signal. The internal state has the same dimensionality as the output. If the sinusoidal controller is mutated during the mutation step of the simulator, the parameters are chosen from a uniform distribution over the respective intervals.}
 \label{figure:sinusoid-controller}
 \end{figure}
 
@@ -43,6 +43,8 @@ The sinusoidal controller is a very simple, input-less controller. %
 Its output is a sinusoidal signal defined by the parameters of amplitude, frequency and the X and Y offset in signal space. %
 %
 The parameter ranges are $\text{amplitude} \in [0,0.5]$, $\text{frequency} \in [0.1,4]$, $\text{offset}_X \in [0,2\Pi]$ and $\text{offset}_Y \in [0,1]$. %
+%
+During a mutation of the sinusoidal controller, the amplitude, frequency, X and Y offset are chosen anew from a uniform distribution out of the respective intervals.%
 %
 One creature contains many such controllers, each having its own parameters and each controlling one degree of freedom (DoF) of a certain joint. %
 %
@@ -676,7 +678,7 @@ Therefore the resulting trajectory starts to discretized by the limited precisio
 \centering
 \input{Pictures/controllers/chua-controller.tikz}
 
-\caption[The chaotic chua controller]{The specification of the chaotic chua controller, its internal state and output signal. The internal state of the chaotic chua controller is three dimensional because the Chua circuit's equations are defined using three dimensions. The output signal is chosen to be the z dimension of the internal state and is therefore only one dimensional. If the chaotic chua circuit controller is mutated during the mutation step of the simulator, the parameters are chosen from a uniform distribution over the respective, given intervals.}
+\caption[The chaotic chua controller]{The specification of the chaotic chua controller, its internal state and output signal. The internal state of the chaotic chua controller is three dimensional because the Chua circuit's equations are defined using three dimensions. The output signal is chosen to be the z dimension of the internal state and is therefore only one dimensional. The controller state and output are shown for the unlimited condition and an example of limited condition. The example limitation leads to a period two limit cycle. If the chaotic chua circuit controller is mutated during the mutation step of the simulator, the parameters are chosen from a uniform distribution out of the respective intervals.}
 \label{figure:chua-controller}
 \end{figure}
 
@@ -686,11 +688,13 @@ The Chua circuit's parameters are kept constant to keep the parameter space for 
 %
 Only the initial conditions are chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step is chosen randomly within \(\text{\textit{integration step}} \in [0.001,10]\). %
 %
-The base integration step, however, is kept constant at \(\text{\textit{integration base}} = 0.0005\). %
+During a mutation of the chaotic chua circuit controller, the initial conditions and the integration step are chosen anew from a uniform distribution out of the respective intervals.%
+%
+Even though the integration step can vary from controller to controller, the base integration step, is kept constant at \(\text{\textit{integration base}} = 0.0005\). %
 %
 The integration step then is performed by calculating small sub-steps of size of the \textit{base integration step} until a smaller, residual integration step is left to calculate. %
 %
-Thereby, variable size integration speeds can be performed, but the actual base integration step constant is kept constant. %
+Thereby, variable size integration speeds can be performed, but the actual base integration step is kept constant. %
 %
 The numerical integration again is performed using a Runge-Kutta order 6 integration scheme run in real-time. %
 %

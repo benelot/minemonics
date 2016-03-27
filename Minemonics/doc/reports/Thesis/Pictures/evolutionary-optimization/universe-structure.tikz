@@ -136,19 +136,23 @@ Universe
 %###############################################
 % Creature components and anchors
 %###############################################
-\matrix[anchor=east](creature-components)[below=1cm of creature-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
+\matrix[anchor=east](creature-components)[below=2cm of creature-node, row sep=2mm, column sep=2mm, inner sep=2mm] {
 \node(genotype-node)[box]{Genotype}; & \node(phenotype-node)[box]{Phenotype};\\
 };
 \node(creature-components-left-row-node)[above left=-0.1cm and -0.3cm of genotype-node]{};
 \node(creature-components-right-row-node)[above right=-0.1cm and -0.3cm of phenotype-node]{};
 
 %###############################################
-% Lines between Population and Creatures
+% Lines between Creature and Creature components
 %###############################################
 \draw (creature-left-zoom-node) -- (creature-components-left-row-node);
 \draw (creature-right-zoom-node) -- (creature-components-right-row-node);
 
 \fill [path fading=south,black!10] (creature-left-zoom-node.center) to (creature-right-zoom-node.center) to (creature-components-right-row-node.center) to (creature-components-left-row-node.center) to (creature-left-zoom-node.center);
+
+\node(creature-model-organism)[box,below left=0.1cm and -0.6cm of creature-node.south west]{Model organism};
+\node(creature-evolved-organism)[box,below right=0.1cm and -0.6cm of creature-node.south east]{Random organism};
+
 
 %###############################################
 % Genotype anchors

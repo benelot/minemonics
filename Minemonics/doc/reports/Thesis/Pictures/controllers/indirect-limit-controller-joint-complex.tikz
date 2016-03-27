@@ -1,42 +1,176 @@
-\begin{tikzpicture}
-% classes
-\tikzstyle{root} = [draw=black!80, thick,minimum width=1.5cm,minimum height=1cm, circle, fill=black!20]
-\tikzstyle{class1} = [minimum width=3cm, minimum height=2cm,draw=black!80, thick, fill=blue!5, rounded corners, rectangle]
-\tikzstyle{class2} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=orange!80]
-\tikzstyle{class3} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=red!80]
+% Define a variable as a length
+% Input:
+%   #1 Variable name
+%   #2 Value
+%
+% Example:
+%   \nvar{\varx}{2cm}
+\newcommand{\nvar}[2]{%
+    \newlength{#1}
+    \setlength{#1}{#2}
+}
 
-%###############################################
-% external output
-%###############################################
+% Define a few constants for drawing
+\nvar{\dg}{0.3cm}
+\def\dw{0.25}\def\dh{0.5}
+\nvar{\ddx}{1.2cm}
+
+% Define commands for links, joints and such
+\def\link{\draw [double distance=1.5mm, very thick] (0,0)--}
+\def\joint{%
+    \filldraw [fill=white] (0,0) circle (5pt);
+    \fill[black] circle (2pt);
+}
+\def\grip{%
+    \draw[ultra thick](0cm,\dg)--(0cm,-\dg);
+    \fill (0cm, 0.5\dg)+(0cm,1.5pt) -- +(0.6\dg,0cm) -- +(0pt,-1.5pt);
+    \fill (0cm, -0.5\dg)+(0cm,1.5pt) -- +(0.6\dg,0cm) -- +(0pt,-1.5pt);
+}
+\def\robotbase{%
+    \draw[rounded corners=8pt] (-\dw,-\dh)-- (-\dw, 0) --
+        (0,\dh)--(\dw,0)--(\dw,-\dh);
+    \draw (-0.5,-\dh)-- (0.5,-\dh);
+    \fill[pattern=north east lines] (-0.5,-1) rectangle (0.5,-\dh);
+}
+
+% Draw an angle annotation
+% Input:
+%   #1 Angle
+%   #2 Label
+% Example:
+%   \angann{30}{$\theta_1$}
+\newcommand{\angann}[2]{%
+    \begin{scope}[red]
+    \draw [dashed, red] (0,0) -- (1.2\ddx,0pt);
+    \draw [->, shorten >=3.5pt] (\ddx,0pt) arc (0:#1:\ddx);
+    % Unfortunately automatic node placement on an arc is not supported yet.
+    % We therefore have to compute an appropriate coordinate ourselves.
+    %\node at (#1/2-2:\ddx+8pt) {#2};
+    \end{scope}
+}
+
+\newcommand{\limitann}[3]{%
+	\begin{scope}[rotate=#1]
+    \begin{scope}[red]
+    \draw [dashed, red] (0,0) -- (1.2\ddx,0pt);
+    \draw [->, shorten >=3.5pt] (\ddx,0pt) arc (0:#2:\ddx);
+    % Unfortunately automatic node placement on an arc is not supported yet.
+    % We therefore have to compute an appropriate coordinate ourselves.
+    \node at (#2/2-2:\ddx+8pt) {#3};
+    \begin{scope}[rotate=#2]
+    \draw [dashed, red] (0,0) -- (1.2\ddx,0pt);
+    \end{scope}
+    \end{scope}
+    \end{scope}
+}
+
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white] {#4} (b);
+    \end{scope}
+}
+
+% Define the kinematic parameters of the three link manipulator.
+\def\thetaone{50}
+\def\Lone{1.5}
+\def\limitzero{-30}
+\def\limitone{110}
+\def\Ltwo{1.5}
+\def\thetatwo{70}
+
+\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
 
 %###############################################
 % internal controller state
 %###############################################
 
-%###############################################
-% controller symbol
-%###############################################
+\node(controller-state) at (-2,0.7){\underline{Controller state}};
+\node(internal-signal-box) at (1.4,-3.5){};
+\node[inner sep=0pt] (internal-signal) at (-1,-1.3)
+{
+\includegraphics[scale=0.1]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node[align=left] at (-1.6,-3.1){\scriptsize x};
+\node[align=left] at (1,-2.5){\scriptsize y};
+\node[align=left] at (-3.3,-1.6){\scriptsize z};
 
 %###############################################
-%  force control
+% external chua output
 %###############################################
+\node[align=left] at (4.3,0.7){\underline{Controller output}};
+\node[inner sep=0pt] (external-signal) at (5.3,-1.3)
+{
+\includegraphics[scale=0.1]{Pictures/controllers/Chua-controller-output.png}
+};
+\node[align=left] at (2.8,0.16){\scriptsize z};
+\node[align=left] at (7.9,-1.5){\scriptsize t};
 
-%###############################################
-% joint state
-%###############################################
 
-%###############################################
-% joint limits
-%###############################################
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (1.7,-1.3) -- (2.7,-1.3);
+
+
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (7,-2.8) -- (9.7,-5.3) node [pos=0.35, below] {applied as$~~~~~~~~~$} node [pos=0.5, below] {Torque $T~~~~~~~~~$};
+
 
 %###############################################
 % joint damping
 %###############################################
 
 %###############################################
-% joint symbol
+% joint
+%###############################################
+\begin{scope}[shift=(0:9.3), rotate=0] % x offset
+\begin{scope}[shift=(-90:6.5), rotate=-90] % y offset
+	\begin{scope}[shift=(90:0), rotate=90]
+	
+    \link(\thetaone:\Lone);
+    \begin{scope}[shift=(\thetaone:\Lone), rotate=\thetaone]
+        \link(\thetatwo:\Ltwo);
+        \joint
+        % joint limits
+        \limitann{\limitzero}{\limitone}{Joint Limits}
+    \end{scope}
+    
+    \end{scope}
+\end{scope}
+\end{scope}
+
+%###############################################
+% joint state
 %###############################################
 
+\node[inner sep=0pt] (external-signal) at (11,-1.05)
+{
+\includegraphics[scale=0.1]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint.png}
+};
+\node(joint-state) at (10,0.7){\underline{Joint dynamics}};
 
+\node[align=left] at (8.5, 0.2){\scriptsize $\dot x$};
+\node[align=left] at (13.5,-1.5){\scriptsize $x$};
+
+\begin{pgfonlayer}{background}
+  \node(controller-state-box)[bigbox] [fit = (controller-state) (internal-signal-box)] {};
+\end{pgfonlayer}
 
 \end{tikzpicture}

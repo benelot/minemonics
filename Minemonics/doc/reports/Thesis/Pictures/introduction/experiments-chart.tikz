@@ -1,0 +1,135 @@
+\begin{tikzpicture}
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node(experiments) at (5,0){\underline{Experiments}};
+
+%###############################################
+% Mathematica experiments
+%###############################################
+\node(mathematica-experiments)[below left=1cm and 2cm of experiments]{\underline{Mathematica experiments}};
+\node(mathematica-image)[below=1cm of mathematica-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(mathematica-text)[below=1cm of mathematica-image,align=left]{
+\scriptsize{Simple limiter experiments\\
+ on the Chua circuit}
+ };
+
+%###############################################
+% Sinusoidal controller experiment
+%###############################################
+\node(sinusoidal-controller-experiments)[below= 1cm of experiments]{\underline{Sinusoidal controller experiments}};
+\node(sinusoidal-controller-image)[below=1cm of sinusoidal-controller-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(sinusoidal-controller-text)[below=1cm of sinusoidal-controller-image,align=left]{
+\scriptsize{Evolving creatures using\\
+ the sinusoidal controller}
+ };
+
+%###############################################
+% Chaotic controller experiments
+%###############################################
+\node(chaotic-controller-experiments)[below right=1cm and 2cm of experiments]{\scriptsize\underline{Chaotic controller experiments}};
+\node(chaotic-controller-image)[below=1cm of chaotic-controller-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(chaotic-controller-text)[below=1cm of chaotic-controller-image,align=left]{
+\scriptsize{Experiments related to\\
+ the indirectly limited chaotic controller}
+ };
+
+%###############################################
+% ## Model leg experiments
+%###############################################
+\node(model-leg-experiments)[below left=1cm and 2cm of chaotic-controller-text]{\scriptsize\underline{Model leg experiments}};
+\node(model-leg-image)[below=1cm of model-leg-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(model-leg-text)[below=1cm of model-leg-image,align=left]{
+\scriptsize{Parameter exploration\\
+ on the model leg}
+ };
+
+
+%###############################################
+% ## Indirectly limited chaotic controller experiments
+%###############################################
+\node(indirect-limiter-controller-experiments)[below=1cm of chaotic-controller-text]{\underline{Indirectly limited controller experiments}};
+\node(indirect-limiter-controller-image)[below=1cm of indirect-limiter-controller-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(indirect-limiter-controller-text)[below=1cm of indirect-limiter-controller-image,align=left]{
+\scriptsize{Experiments using the\\
+ indirectly limited chaotic controller}
+ };
+
+%###############################################
+% ### Evolution experiments
+%###############################################
+\node(il-evolution-experiments)[below=1cm of indirect-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
+\node(il-evolution-image)[below=1cm of il-evolution-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(il-evolution-text)[below=1cm of il-evolution-image,align=left]{
+\scriptsize{Evolving creatures using\\
+ indirectly limited chaotic controllers}
+ };
+
+%###############################################
+% ## Directly limited chaotic controller experiments
+%###############################################
+\node(direct-limiter-controller-experiments)[below right=1cm and 2cm of chaotic-controller-text]{\underline{Directly limited controller experiments}};
+\node(direct-limiter-controller-image)[below=1cm of direct-limiter-controller-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(direct-limiter-controller-text)[below=1cm of direct-limiter-controller-image,align=left]{
+\scriptsize{Experiments using the\\
+ directly limiter chaotic controller}
+ };
+
+%###############################################
+%## Evolution experiments
+%###############################################
+\node(dl-evolution-experiments)[below=1cm of direct-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
+\node(dl-evolution-image)[below=1cm of dl-evolution-experiments]{
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.04]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node(dl-evolution-text)[below=1cm of dl-evolution-image,align=left]{
+\scriptsize{Evolving creatures using\\
+ directly limited chaotic controllers}
+ };
+
+\begin{pgfonlayer}{background}
+  \node(main-big-box)[bigbox] [fit = (mathematica-experiments) (mathematica-image)(mathematica-text)
+				     (sinusoidal-controller-experiments) (sinusoidal-controller-image)(sinusoidal-controller-text)
+				     (chaotic-controller-experiments) (chaotic-controller-image)(chaotic-controller-text)
+				     (model-leg-experiments) (model-leg-image)(model-leg-text)
+				     (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(indirect-limiter-controller-text)
+				     (il-evolution-experiments) (il-evolution-image)(il-evolution-text)
+				     (direct-limiter-controller-experiments) (direct-limiter-controller-image)(direct-limiter-controller-text)
+				     (dl-evolution-experiments) (dl-evolution-image)(dl-evolution-text)] {};
+  \node(mathematica-box)[box][fit = (mathematica-experiments) (mathematica-image)(mathematica-text)]{};
+  \node(mathematica-box)[box][fit = (sinusoidal-controller-experiments) (sinusoidal-controller-image)(sinusoidal-controller-text)]{};
+  \node(mathematica-box)[box][fit = (chaotic-controller-experiments) (chaotic-controller-image)(chaotic-controller-text)]{};
+  \node(mathematica-box)[box][fit = (model-leg-experiments) (model-leg-image)(model-leg-text)]{};
+  \node(mathematica-box)[box][fit = (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(indirect-limiter-controller-text)]{};
+  \node(mathematica-box)[box][fit = (il-evolution-experiments) (il-evolution-image)(il-evolution-text)]{};
+  \node(mathematica-box)[box][fit = (direct-limiter-controller-experiments) (direct-limiter-controller-image)(direct-limiter-controller-text)]{};
+  \node(mathematica-box)[box][fit = (dl-evolution-experiments) (dl-evolution-image)(dl-evolution-text)]{};
+\end{pgfonlayer}
+
+\end{tikzpicture}
