@@ -33,6 +33,55 @@
     \fill[pattern=north east lines] (-0.5,-1) rectangle (0.5,-\dh);
 }
 
+\def\dampattach{12pt}
+\def\jointsurf{0.7mm}
+\def\dampdisp{13pt}
+\def\dampattachlen{2pt}
+\def\dampthickness{2pt}
+% Draw an angular damper
+% Input:
+%   #1 Angle1
+%	#2 Angle2
+%   #3 Label
+% Example:
+%   \angdamper{30}{45}{$\theta_1$}
+\newcommand{\angdamper}[3]{%
+	\begin{scope}[rotate=#1]
+	%\draw [black] (0,0) -- (1.2\ddx,0pt);
+	% (point near joint rot point) -- (point perp to joint)
+	\draw [black] (\dampattachlen,\jointsurf+\dampdisp) -- (\dampattach,\jointsurf+\dampdisp); 
+	
+	%(point perp to joint) -- (point on joint)
+	\draw [black] (\dampattach,\jointsurf+\dampdisp) -- (\dampattach,\jointsurf); 
+    \begin{scope}[black]
+    %\draw [black] (0,0) -- (1.2\ddx,0pt);
+    %\draw [-, shorten >=3.5pt] (\ddx,0pt) arc (0:#2/3:\ddx);
+    
+            \draw [-,thick, shorten >=3.5pt] (\dampattachlen,\jointsurf+\dampdisp+\dampthickness) arc (0+90:#2-80:+\jointsurf+\dampdisp+\dampattachlen+1pt+\dampthickness);
+    \draw [-,thick, shorten >=3.5pt] (\dampattachlen,\jointsurf+\dampdisp-\dampthickness) arc (0+90:#2-80:+\jointsurf+\dampdisp+\dampattachlen+1pt-\dampthickness);
+    
+        \draw [-,thick, shorten >=3.5pt] (\dampattachlen,\jointsurf+\dampdisp) arc (0+90:#2-110:+\jointsurf+\dampdisp+\dampattachlen+1pt);
+        
+    \begin{scope}[rotate=-#1-#2-78]
+        \draw [black,thick] (\dampattachlen-0.5pt,-\jointsurf-\dampdisp+\dampthickness) -- (\dampattachlen,-\jointsurf-\dampdisp-\dampthickness);
+	\end{scope}
+    % Unfortunately automatic node placement on an arc is not supported yet.
+    % We therefore have to compute an appropriate coordinate ourselves.
+    \node at (#2/2-2:\ddx+24pt) {#3};
+    \begin{scope}[rotate=#2]
+    %\draw [black] (0,0) -- (1.2\ddx,0pt);    
+    
+    \draw [black,thick] (\dampattachlen,-\jointsurf-\dampdisp+\dampthickness) -- (\dampattachlen,-\jointsurf-\dampdisp-\dampthickness);
+	% (point near joint rot point) -- (point perp to joint)
+	\draw [black] (\dampattachlen,-\jointsurf-\dampdisp) -- (\dampattach,-\jointsurf-\dampdisp); 
+	
+	%(point perp to joint) -- (point on joint)
+	\draw [black] (\dampattach,-\jointsurf-\dampdisp) -- (\dampattach,-\jointsurf); 
+    \end{scope}
+    \end{scope}
+    \end{scope}
+}
+
 % Draw an angle annotation
 % Input:
 %   #1 Angle
@@ -52,13 +101,13 @@
 \newcommand{\limitann}[3]{%
 	\begin{scope}[rotate=#1]
     \begin{scope}[red]
-    \draw [dashed, red] (0,0) -- (1.2\ddx,0pt);
-    \draw [->, shorten >=3.5pt] (\ddx,0pt) arc (0:#2:\ddx);
+    \draw [dashed, red] (0,0) -- (1.8\ddx,0pt);
+    \draw [<->, shorten >=3.5pt] (1.5\ddx,0pt) arc (0:#2:1.5\ddx);
     % Unfortunately automatic node placement on an arc is not supported yet.
     % We therefore have to compute an appropriate coordinate ourselves.
-    \node at (#2/2-2:\ddx+8pt) {#3};
+    \node at (#2/2-2:1.5\ddx+14pt) {#3};
     \begin{scope}[rotate=#2]
-    \draw [dashed, red] (0,0) -- (1.2\ddx,0pt);
+    \draw [dashed, red] (0,0) -- (1.8\ddx,0pt);
     \end{scope}
     \end{scope}
     \end{scope}
@@ -90,6 +139,7 @@
 \def\Ltwo{1.5}
 \def\thetatwo{70}
 
+\hspace*{-0.5in}
 \begin{tikzpicture}
 
 % classes
@@ -130,24 +180,42 @@
 
 
 \draw [decoration={markings,mark=at position 1 with
-    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (7,-2.8) -- (9.7,-5.3) node [pos=0.35, below] {applied as$~~~~~~~~~$} node [pos=0.5, below] {Torque $T~~~~~~~~~$};
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (7,-2.8) -- (10.7,-4.3) node [pos=0.35, below] {applied as$~~~~~~~~~$} node [pos=0.6, below] {Torque $T~~~~~~~~~$};
 
 
 %###############################################
-% joint damping
+% joint state
 %###############################################
+
+\shade[top color=white, bottom color=black!40] (8.4,-3) rectangle (13.6,-1.26);
+\shade[bottom color=white, top color=black!40] (8.4,-1.26) rectangle (13.6,0.7);
+\node[inner sep=0pt] (external-signal) at (11,-1.05)
+{
+\includegraphics[scale=0.11]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint-t.png}
+};
+\node(joint-state) at (10,0.7){\underline{Joint dynamics}};
+
+\node[align=left] at (8.7, 0.2){\scriptsize $\dot x$};
+\node[align=left] at (10,-1.5){\scriptsize $x$};
+
+ \draw [<->,red] (8.4,-2.2) -- (13.6,-2.2);
+ \draw [dashed, red] (8.4,0.5) -- (8.4,-3);
+ \draw[dashed,red] (13.6,0.5) rectangle (13.6,-3);
+ 
 
 %###############################################
 % joint
 %###############################################
-\begin{scope}[shift=(0:9.3), rotate=0] % x offset
-\begin{scope}[shift=(-90:6.5), rotate=-90] % y offset
-	\begin{scope}[shift=(90:0), rotate=90]
+\begin{scope}[shift=(0:10), rotate=0] % x offset
+\begin{scope}[shift=(-90:6), rotate=-90] % y offset
+	\begin{scope}[shift=(90:0), rotate=90,local bounding box=joint-scope]
 	
     \link(\thetaone:\Lone);
     \begin{scope}[shift=(\thetaone:\Lone), rotate=\thetaone]
         \link(\thetatwo:\Ltwo);
         \joint
+        % joint damper
+        \angdamper{-180}{250}{Angular damper}
         % joint limits
         \limitann{\limitzero}{\limitone}{Joint Limits}
     \end{scope}
@@ -156,21 +224,11 @@
 \end{scope}
 \end{scope}
 
-%###############################################
-% joint state
-%###############################################
 
-\node[inner sep=0pt] (external-signal) at (11,-1.05)
-{
-\includegraphics[scale=0.1]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint.png}
-};
-\node(joint-state) at (10,0.7){\underline{Joint dynamics}};
-
-\node[align=left] at (8.5, 0.2){\scriptsize $\dot x$};
-\node[align=left] at (13.5,-1.5){\scriptsize $x$};
-
+ 
 \begin{pgfonlayer}{background}
   \node(controller-state-box)[bigbox] [fit = (controller-state) (internal-signal-box)] {};
+  \node(joint-dynamics-box)[bigbox] [fit=(joint-scope) (external-signal) (joint-state)]{};
 \end{pgfonlayer}
 
 \end{tikzpicture}

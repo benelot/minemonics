@@ -17,7 +17,7 @@
 
 \lhead{Chapter \thechapter. \emph{Results}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-\section{Evolved Creatures with Uncoupled Sinusoidal Oscillators}
+\section{Evolved Creatures with Uncoupled Sinusoidal Controller}
 \label{sec:evolved-sin-creatures}
 
 In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-controllers} was used to evolve creatures. %
@@ -32,58 +32,61 @@ The simulation was run for approximately a day and took 181 generations for loco
 %
 Every creature was evaluated for 20 seconds. %
 %
-181 generations of 100 creatures evaluated for 20 seconds take \(\approx\unit[4.2]{days}\), however, since the simulator can evaluate faster than real-time if the simulation's load permits it, it could simulate the creatures with approximately \(4.2\) times real-time. %
+181 generations of 100 creatures evaluated for 20 seconds take \(\approx\unit[4.2]{days}\), however, since the simulator can evaluate faster than real-time if the simulation's load permits it, it could simulate the creatures \(\approx\unit[4.2]{}\) faster than real-time. %
 %
 The successful solutions evolved can be seen below in figures \ref{figure:successfulcreatures-jumper1}, \ref{figure:successfulcreatures-jumper2}, \ref{figure:successfulcreatures-walker1} and \ref{figure:successfulcreatures-walker2}.
 
-\todo[inline]{Recapture the sinusoid evolved creatures and produce an animation from it.}
 \begin{figure}[tb]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/165.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/179.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/188.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/196.png}
+\includegraphics[width=0.9\textwidth]{results/evolved-creatures/sine/jumper1/jumper1-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/165.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/179.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/188.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/196.png}
 \caption[Figure of a jumper using sinusoidal controllers.]{Figure of a jumper using sinusoidal controllers. Its four legs under the main body let it leap forward.}
 \label{figure:successfulcreatures-jumper1}
 \end{figure}
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/336.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/359.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/373.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/406.png}
+\includegraphics[width=0.95\textwidth]{results/evolved-creatures/sine/jumper2/jumper2-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/336.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/359.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/373.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/406.png}
 \caption[Figure of another jumper using sinusoidal controllers.]{Figure of another jumper using sinusoidal controllers. Its two legs in the back propulse the body forward while the front contact point acts as a stabilization.}
 \label{figure:successfulcreatures-jumper2}
 \end{figure}
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/447.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/460.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/468.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/471.png}
+\includegraphics[width=0.85\textwidth]{results/evolved-creatures/sine/walker1/walker1-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/447.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/460.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/468.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/471.png}
 \caption[Figure of a walker using sinusoidal controllers.]{Figure of a walker using sinusoidal controllers. It has two legs in the back, which push the body forward. The front contact point again stabilizes the movement.}
 \label{figure:successfulcreatures-walker1}
 \end{figure}
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/027.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/048.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/064.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/079.png}
+\includegraphics[width=0.9\textwidth]{results/evolved-creatures/sine/walker2/walker2-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/027.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/048.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/064.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/079.png}
 \caption[Figure of another walker using sinusoidal controllers.]{Figure of another walker using sinusoidal controllers. This creature has many legs on both sides, which synchronously touch the ground and make the body crawl forward. }
 \label{figure:successfulcreatures-walker2}
 \end{figure}
 
-Creatures that exhibit successful locomotion seem to share a common ancestor, which might have been the first creature to evolve a successful walking pattern, since all of its offspring share a similar magenta skin coloring. %
+Creatures that exhibit successful locomotion seem to share a common ancestor, which might have been the first creature to evolve a successful walking pattern, since all of its offspring share a similar skin coloring. %
 %
 Since the skin color is randomly set for one body part, the common ancestor could only have had all the same color and must have been replicated using crossover. %
 %
 In crossover (as described in \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. %
 %
-This process involves no mutations, therefore the crossover must have happened mainly among creatures sharing the same magenta skin coloring. %
+This process involves no mutations, therefore the crossover must have happened mainly among creatures sharing the same skin coloring. %
 %
 The elitism mechanism of the evolutionary process, passing the most successful creatures directly to the next generation, kept the first successful creature, that then generated an onset of an avalanche of successful creatures, flooding the population with very similar solutions. 
 
@@ -183,14 +186,33 @@ When stated that the sensor X limits the x dimension, this means that the value 
 %
 The following plots always show the phase space of the chaotic controller on the left side and the sensor space of the controlled joint DoF on the right side.
 
+
 \begin{figure}[H]
 	\centering
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z.png}
-	\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint.png}
-	\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Unlimited chaotic controller controlling model leg.]{Unlimited chaotic controller controlling model leg. The velocity on the y axis fluctuates in the positive range and therefore, the position increases positively. At the end, the velocity switches from positive to negative, making the position oscillate as well. However, as the chaotic trajectory again switches to another limit cycle, the position increases again only into one direction.}
 	\begin{tabular}{l|ll}
 	\hline 
