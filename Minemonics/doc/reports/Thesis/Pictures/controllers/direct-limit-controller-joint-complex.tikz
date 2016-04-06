@@ -1,46 +1,259 @@
+% Define a variable as a length
+% Input:
+%   #1 Variable name
+%   #2 Value
+%
+% Example:
+%   \nvar{\varx}{2cm}
+\newcommand{\nvar}[2]{%
+    \newlength{#1}
+    \setlength{#1}{#2}
+}
+
+% Define a few constants for drawing
+\let\dg\relax
+\let\ddx\relax
+\nvar{\dg}{0.3cm}
+\def\dw{0.25}\def\dh{0.5}
+\nvar{\ddx}{1.2cm}
+
+% Define commands for links, joints and such
+\def\link{\draw [double distance=1.5mm, very thick] (0,0)--}
+\def\joint{%
+    \filldraw [fill=white] (0,0) circle (5pt);
+    \fill[black] circle (2pt);
+}
+\def\grip{%
+    \draw[ultra thick](0cm,\dg)--(0cm,-\dg);
+    \fill (0cm, 0.5\dg)+(0cm,1.5pt) -- +(0.6\dg,0cm) -- +(0pt,-1.5pt);
+    \fill (0cm, -0.5\dg)+(0cm,1.5pt) -- +(0.6\dg,0cm) -- +(0pt,-1.5pt);
+}
+\def\robotbase{%
+    \draw[rounded corners=8pt] (-\dw,-\dh)-- (-\dw, 0) --
+        (0,\dh)--(\dw,0)--(\dw,-\dh);
+    \draw (-0.5,-\dh)-- (0.5,-\dh);
+    \fill[pattern=north east lines] (-0.5,-1) rectangle (0.5,-\dh);
+}
+
+\def\dampattach{12pt}
+\def\jointsurf{0.7mm}
+\def\dampdisp{13pt}
+\def\dampattachlen{2pt}
+\def\dampthickness{2pt}
+% Draw an angular damper
+% Input:
+%   #1 Angle1
+%	#2 Angle2
+%   #3 Label
+% Example:
+%   \angdamper{30}{45}{$\theta_1$}
+\newcommand{\angdamper}[3]{%
+	\begin{scope}[rotate=#1]
+	%\draw [black] (0,0) -- (1.2\ddx,0pt);
+	% (point near joint rot point) -- (point perp to joint)
+	\draw [black] (\dampattachlen,\jointsurf+\dampdisp) -- (\dampattach,\jointsurf+\dampdisp); 
+	
+	%(point perp to joint) -- (point on joint)
+	\draw [black] (\dampattach,\jointsurf+\dampdisp) -- (\dampattach,\jointsurf); 
+    \begin{scope}[black]
+    %\draw [black] (0,0) -- (1.2\ddx,0pt);
+    %\draw [-, shorten >=3.5pt] (\ddx,0pt) arc (0:#2/3:\ddx);
+    
+            \draw [-,thick, shorten >=3.5pt] (\dampattachlen,\jointsurf+\dampdisp+\dampthickness) arc (0+90:#2-80:+\jointsurf+\dampdisp+\dampattachlen+1pt+\dampthickness);
+    \draw [-,thick, shorten >=3.5pt] (\dampattachlen,\jointsurf+\dampdisp-\dampthickness) arc (0+90:#2-80:+\jointsurf+\dampdisp+\dampattachlen+1pt-\dampthickness);
+    
+        \draw [-,thick, shorten >=3.5pt] (\dampattachlen,\jointsurf+\dampdisp) arc (0+90:#2-110:+\jointsurf+\dampdisp+\dampattachlen+1pt);
+        
+    \begin{scope}[rotate=-#1-#2-78]
+        \draw [black,thick] (\dampattachlen-0.5pt,-\jointsurf-\dampdisp+\dampthickness) -- (\dampattachlen,-\jointsurf-\dampdisp-\dampthickness);
+	\end{scope}
+    % Unfortunately automatic node placement on an arc is not supported yet.
+    % We therefore have to compute an appropriate coordinate ourselves.
+    \node at (#2/2-2-30pt:\ddx+15pt) {#3};
+    \begin{scope}[rotate=#2]
+    %\draw [black] (0,0) -- (1.2\ddx,0pt);    
+    
+    \draw [black,thick] (\dampattachlen,-\jointsurf-\dampdisp+\dampthickness) -- (\dampattachlen,-\jointsurf-\dampdisp-\dampthickness);
+	% (point near joint rot point) -- (point perp to joint)
+	\draw [black] (\dampattachlen,-\jointsurf-\dampdisp) -- (\dampattach,-\jointsurf-\dampdisp); 
+	
+	%(point perp to joint) -- (point on joint)
+	\draw [black] (\dampattach,-\jointsurf-\dampdisp) -- (\dampattach,-\jointsurf); 
+    \end{scope}
+    \end{scope}
+    \end{scope}
+}
+
+% Draw an angle annotation
+% Input:
+%   #1 Angle
+%   #2 Label
+% Example:
+%   \angann{30}{$\theta_1$}
+\newcommand{\angann}[2]{%
+    \begin{scope}[red]
+    \draw [dashed, red] (0,0) -- (1.2\ddx,0pt);
+    \draw [->, shorten >=3.5pt] (\ddx,0pt) arc (0:#1:\ddx);
+    % Unfortunately automatic node placement on an arc is not supported yet.
+    % We therefore have to compute an appropriate coordinate ourselves.
+    %\node at (#1/2-2:\ddx+8pt) {#2};
+    \end{scope}
+}
+
+\newcommand{\limitann}[3]{%
+	\begin{scope}[rotate=#1]
+    \begin{scope}[red]
+    \draw [dashed, red] (0,0) -- (1.8\ddx,0pt);
+    \draw [<->, shorten >=3.5pt] (1.5\ddx,0pt) arc (0:#2:1.5\ddx);
+    % Unfortunately automatic node placement on an arc is not supported yet.
+    % We therefore have to compute an appropriate coordinate ourselves.
+    \node at (#2/2-2:1.5\ddx+14pt) {#3};
+    \begin{scope}[rotate=#2]
+    \draw [dashed, red] (0,0) -- (1.8\ddx,0pt);
+    \end{scope}
+    \end{scope}
+    \end{scope}
+}
+
+% Draw line annotation
+% Input:
+%   #1 Line offset (optional)
+%   #2 Line angle
+%   #3 Line length
+%   #5 Line label
+% Example:
+%   \lineann[1]{30}{2}{$L_1$}
+\newcommand{\lineann}[4][0.5]{%
+    \begin{scope}[rotate=#2, blue,inner sep=2pt]
+        \draw[dashed, blue!40] (0,0) -- +(0,#1)
+            node [coordinate, near end] (a) {};
+        \draw[dashed, blue!40] (#3,0) -- +(0,#1)
+            node [coordinate, near end] (b) {};
+        \draw[|<->|] (a) -- node[fill=white] {#4} (b);
+    \end{scope}
+}
+
+% Define the kinematic parameters of the three link manipulator.
+\def\thetaone{50}
+\def\Lone{1.5}
+\def\limitzero{-30}
+\def\limitone{110}
+\def\Ltwo{1.5}
+\def\thetatwo{70}
+
+\hspace*{-0.5in}
 \begin{tikzpicture}
+
 % classes
-\tikzstyle{root} = [draw=black!80, thick,minimum width=1.5cm,minimum height=1cm, circle, fill=black!20]
-\tikzstyle{class1} = [minimum width=3cm, minimum height=2cm,draw=black!80, thick, fill=blue!5, rounded corners, rectangle]
-\tikzstyle{class2} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=orange!80]
-\tikzstyle{class3} = [minimum width=2.5cm,minimum height=0.2cm, rounded corners,rectangle, fill=red!80]
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
 
 %###############################################
-% external output
+% controller limits through sensory feedback
 %###############################################
+\draw [<->,red] (-2.65,-1.85) -- (0.3,-2.95) node [pos=0.6, below] {Joint limits};
+ \draw [dashed, red,thick] (-0.05,-3.5) -- (1.3,-1.35);
+ \draw[dashed,red,thick] (-3.05,-2.25) -- (-1.38,-0.6);
+ 
+ \fill [path fading=north,black!40,fading angle=-30] (-3.05,-2.25) to (-0.05,-3.5) to (1.25/2,-4.85/2) to (-4.43/2,-2.85/2) to (-3.05,-2.25);
+ 
+\fill [path fading=south,black!40,fading angle=-30] (1.3,-1.35) to (-1.38,-0.6) to (-4.43/2,-2.85/2) to (1.25/2,-4.85/2) to (1.3,-1.35);
+
+%###############################################
+% sensory feedback & force control
+%###############################################
+\node(controller-state) at (4,-4.5){\underline{Sensory feedback}};
+\draw [] (8,-5) -- (-1,-5) node [pos=0.6, below] {Joint position $x$ as controller state value $x$};
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (-1,-5) -- (-1,-4);
+
+\draw [] (8,-6) -- (-2,-6) node [pos=0.6, below] {Joint velocity $\dot x$ as controller state value $y$} ;
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (-2,-6) -- (-2,-4);
 
 %###############################################
 % internal controller state
 %###############################################
 
-%###############################################
-% controller limits through sensory feedback
-%###############################################
+\node(controller-state) at (-2,1){\underline{Controller state}};
+\node(internal-signal-box) at (1.4,-3.5){};
+\node[inner sep=0pt] (internal-signal) at (-1,-1.3)
+{
+\includegraphics[scale=0.1]{Pictures/controllers/Chua-controller-internal-state.png}
+};
+\node[align=left] at (-1.6,-3.1){\scriptsize x};
+\node[align=left] at (1,-2.5){\scriptsize y};
+\node[align=left] at (-3.3,-1.6){\scriptsize z};
 
 %###############################################
-% controller symbol
+% external chua output
 %###############################################
+\node[align=left] at (4.3,1){\underline{Controller output}};
+\node[inner sep=0pt] (external-signal) at (5.3,-1.3)
+{
+\includegraphics[scale=0.1]{Pictures/controllers/Chua-controller-output.png}
+};
+\node[align=left] at (2.8,0.16){\scriptsize z};
+\node[align=left] at (7.9,-1.5){\scriptsize t};
 
-%###############################################
-% sensory feedback & force control
-%###############################################
+
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (1.7,-1.3) -- (2.7,-1.3);
+
+
+\draw [decoration={markings,mark=at position 1 with
+    {\arrow[scale=3,>=stealth]{>}}},postaction={decorate}] (7,-2.8) -- (10.7,-4.8) node [pos=0.35, below] {applied as$~~~~~~~~~$} node [pos=0.6, below] {Torque $T~~~~~~~~~$};
+
 
 %###############################################
 % joint state
 %###############################################
 
-%###############################################
-% joint limits
-%###############################################
+\shade[top color=white, bottom color=black!40] (8.4,-3) rectangle (13.6,-1.26);
+\shade[bottom color=white, top color=black!40] (8.4,-1.26) rectangle (13.6,0.7);
+\node[inner sep=0pt] (external-signal) at (11,-1.05)
+{
+\includegraphics[scale=0.11]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint-t.png}
+};
+\node(joint-state) at (10,1){\underline{Joint dynamics}};
+
+\node[align=left] at (8.6, 0.2){\scriptsize $\dot x$};
+\node[align=left] at (13.75,-1.5){\scriptsize $x$};
+
+ \draw [<->,red] (8.4,-2.2) -- (13.6,-2.2);
+ \draw [dashed, red,thick] (8.4,0.5) -- (8.4,-3);
+ \draw[dashed,red,thick] (13.6,0.5) -- (13.6,-3);
+ 
 
 %###############################################
-% joint damping
+% joint
 %###############################################
+\begin{scope}[shift=(0:10), rotate=0] % x offset
+\begin{scope}[shift=(-90:6), rotate=-90] % y offset
+	\begin{scope}[shift=(90:0), rotate=90,local bounding box=joint-scope]
+	
+    \link(\thetaone:\Lone);
+    \begin{scope}[shift=(\thetaone:\Lone), rotate=\thetaone]
+        \link(\thetatwo:\Ltwo);
+        \joint
+        % joint damper
+        \angdamper{-180}{250}{Angular damper}
+        % joint limits
+        \limitann{\limitzero}{\limitone}{Joint Limits}
+    \end{scope}
+    
+    \end{scope}
+\end{scope}
+\end{scope}
 
-%###############################################
-% joint symbol
-%###############################################
 
-
+ 
+\begin{pgfonlayer}{background}
+  \node(controller-state-box)[bigbox] [fit = (controller-state) (internal-signal-box)] {};
+  \node(joint-dynamics-box)[bigbox] [fit=(joint-scope) (external-signal) (joint-state)]{};
+\end{pgfonlayer}
 
 \end{tikzpicture}
