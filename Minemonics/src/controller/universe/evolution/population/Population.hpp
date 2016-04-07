@@ -119,6 +119,8 @@ public:
 
 	double maxJointVelocity();
 
+	double maxHeight();
+
 	/**
 	 * Mark the whole population to be culled.
 	 */

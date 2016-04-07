@@ -149,6 +149,11 @@ public:
 	double getMaxJointVelocity() {
 		return mPhenotypeModel->getMaxJointVelocity();
 	}
+
+	double getMaxHeight() {
+		return mPhenotypeModel->getMaxHeight();
+	}
+
 	MixedGenome& getGenotype() {
 		return mGenotype;
 	}

@@ -33,12 +33,12 @@
 BoostLogger Evaluation::mBoostLogger; /*<! initialize the boost logger*/
 Evaluation::_Init Evaluation::_initializer;
 Evaluation::Evaluation() :
-	mPlanet(NULL), mStart(0), mHasFailed(false),mMarked(false) {
+	mPlanet(NULL), mStart(0), mHasFailed(false), mMarked(false) {
 }
 
 Evaluation::Evaluation(Planet* const planet, const double evaluationTime) :
 	mPlanet(planet), mStart(0), mHasFailed(false), mEvaluationModel(
-		planet->getPlanetModel(), evaluationTime),mMarked(false) {
+		planet->getPlanetModel(), evaluationTime), mMarked(false) {
 }
 
 Evaluation::~Evaluation() {
@@ -143,7 +143,7 @@ void Evaluation::teardown() {
 			for (std::vector<Creature*>::iterator cit =
 				(*pit)->getCreatures().begin();
 				cit != (*pit)->getCreatures().end(); cit++) {
-				if(mMarked){
+				if (mMarked) {
 					(*cit)->setMarked(true);
 				}
 				(*cit)->save(mGenerationSerializationPath);
@@ -191,11 +191,12 @@ void Evaluation::update(const double timeSinceLastTick) {
 		(*pit)->update(timeSinceLastTick);
 	}
 
-//	if (mEvaluationModel.getTimePassed()
-//		> PhysicsConfiguration::DISCARDING_STARTS) {
-//		for (std::vector<Population*>::iterator pit = mPopulations.begin();
-//			pit != mPopulations.end(); pit++) {
-//
+	if (mEvaluationModel.getTimePassed()
+		> PhysicsConfiguration::DISCARDING_STARTS) {
+		for (std::vector<Population*>::iterator pit = mPopulations.begin();
+			pit != mPopulations.end(); pit++) {
+
+			//TODO: Fix interpenetration discarding
 //			if ((*pit)->hasInterpenetrations()) {
 //				//TODO: Review this decision again in the case of a whole population
 //				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because of unsolvable interpenetrations.";
@@ -203,18 +204,22 @@ void Evaluation::update(const double timeSinceLastTick) {
 //				teardown();
 //				break;
 //			}
-//		}
-//	}
 
-	if (mEvaluationModel.getTimePassed()
-		> PhysicsConfiguration::DISCARDING_STARTS) {
-		for (std::vector<Population*>::iterator pit = mPopulations.begin();
-			pit != mPopulations.end(); pit++) {
-
+			// discard because of max joint velocity
 			if ((*pit)->maxJointVelocity()
 				> MorphologyConfiguration::JOINT_MAX_VELOCITY) {
 				//TODO: Review this decision again in the case of a whole population
 				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because of too high speeds.";
+				mHasFailed = true;
+				teardown();
+				break;
+			}
+
+			//discard because of flying
+			if ((*pit)->maxHeight()
+				> PhysicsConfiguration::MAX_HEIGHT) {
+				//TODO: Review this decision again in the case of a whole population
+				BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded because it lifted off too high.";
 				mHasFailed = true;
 				teardown();
 				break;
@@ -240,7 +245,7 @@ void Evaluation::setFailed(bool hasFailed) {
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature discarded on user request.";
 }
 
-void Evaluation::setMarked(bool marked){
+void Evaluation::setMarked(bool marked) {
 	mMarked = marked;
 	BOOST_LOG_SEV(mBoostLogger, boost::log::trivial::info)<< "Creature marked on user request.";
 }

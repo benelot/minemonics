@@ -194,6 +194,10 @@ double Population::maxJointVelocity() {
 	return mPopulationModel->getMaxJointVelocity();
 }
 
+double Population::maxHeight(){
+	return mPopulationModel->getMaxHeight();
+}
+
 void Population::markCull() {
 	for (std::vector<Creature*>::iterator cit = mCreatures.begin();
 		cit != mCreatures.end(); cit++) {

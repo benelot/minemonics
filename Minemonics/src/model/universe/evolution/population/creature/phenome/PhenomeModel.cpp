@@ -324,3 +324,15 @@ double PhenomeModel::getMaxJointVelocity() {
 	}
 	return maxJointVelocity;
 }
+
+double PhenomeModel::getMaxHeight() {
+	double maxHeight = 0;
+	for (std::vector<LimbModel*>::iterator lit = mLimbModels.begin();
+		lit != mLimbModels.end(); lit++) {
+		double newHeight = (*lit)->getPosition().y;
+		if (newHeight > maxHeight) {
+			maxHeight = newHeight;
+		}
+	}
+	return maxHeight;
+}

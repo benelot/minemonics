@@ -95,6 +95,7 @@ public:
 	static const double FORCE_THRESHOLD;
 	static const double TORQUE_THRESHOLD;
 	static const double DISCARDING_STARTS;
+	static const double MAX_HEIGHT;
 
 	static const double BULLET_PICKER_FORCE;
 

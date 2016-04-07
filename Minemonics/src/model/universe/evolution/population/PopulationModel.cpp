@@ -196,6 +196,19 @@ double PopulationModel::getMaxJointVelocity() {
 	return maxJointVelocity;
 }
 
+double PopulationModel::getMaxHeight() {
+	double maxHeight = 0;
+	for (std::vector<CreatureModel*>::const_iterator cit =
+		mCreatureModels.begin(); cit != mCreatureModels.end(); cit++) {
+		double newMaxHeight = (*cit)->getMaxHeight();
+		if (newMaxHeight > maxHeight) {
+			maxHeight = newMaxHeight;
+			break;
+		}
+	}
+	return maxHeight;
+}
+
 void PopulationModel::save() {
 	SaveController<PopulationModel> populationSaveController;
 	populationSaveController.save(*this,

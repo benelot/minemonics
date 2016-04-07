@@ -190,6 +190,8 @@ public:
 
 	double getMaxJointVelocity();
 
+	double getMaxHeight();
+
 	Ogre::Vector3 getLowestRelativePoint();
 
 	void calm();

@@ -91,6 +91,8 @@ public:
 
 	double getMaxJointVelocity();
 
+	double getMaxHeight();
+
 	void clearJuries();
 
 	// Accessor methods ##########################
