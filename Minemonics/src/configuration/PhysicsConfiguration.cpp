@@ -81,7 +81,7 @@ const double PhysicsConfiguration::FORCE_THRESHOLD = 1e6;
 const double PhysicsConfiguration::TORQUE_THRESHOLD = 1e6;
 const double PhysicsConfiguration::DISCARDING_STARTS = 1.0f;
 
-const double PhysicsConfiguration::MAX_HEIGHT = 1000.0f;
+const double PhysicsConfiguration::MAX_HEIGHT = 50.0f;
 
 const double PhysicsConfiguration::BULLET_PICKER_FORCE = 10000000000000000000.0f;
 

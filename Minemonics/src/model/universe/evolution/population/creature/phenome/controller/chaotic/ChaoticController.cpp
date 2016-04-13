@@ -228,9 +228,9 @@ void ChaoticController::collectInputs() {
 }
 
 void ChaoticController::perturb(){
-	//std::cout << "Orig. conditions:" << std::setprecision(16) << mInitialX << "," << mInitialY << "," << mInitialZ << std::endl;
+	std::cout << "Orig. conditions:" << std::setprecision(16) << mInitialX << "," << mInitialY << "," << mInitialZ << std::endl;
 	u[0] = mInitialX += Randomness::getSingleton()->nextUnifDouble(-ControlConfiguration::PERTURBATION_RANGE_X,ControlConfiguration::PERTURBATION_RANGE_X);
 	u[1] = mInitialY += Randomness::getSingleton()->nextUnifDouble(-ControlConfiguration::PERTURBATION_RANGE_Y,ControlConfiguration::PERTURBATION_RANGE_Y);
 	u[2] = mInitialZ += Randomness::getSingleton()->nextUnifDouble(-ControlConfiguration::PERTURBATION_RANGE_Z,ControlConfiguration::PERTURBATION_RANGE_Z);
-	//std::cout << "New conditions  :" << std::setprecision(16) << u[0] << "," << u[1] << "," << u[2] << std::endl;
+	std::cout << "New conditions  :" << std::setprecision(16) << u[0] << "," << u[1] << "," << u[2] << std::endl;
 }
