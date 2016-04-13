@@ -36,7 +36,7 @@ Additionally, two different limiter configurations and their range of different 
 %
 It was found that a soft-limiter expands the size of each limiter parameter range of periodic orbit and therefore makes it easier to achieve stable orbits. %
 %
-The then developed chaotic controller internally controls an underlying chaotic model system into chaotic and periodic trajectories using a variation of the simple limiter chaos control method. %
+The developed chaotic controller internally controls an underlying chaotic model system into chaotic and periodic trajectories using a variation of the simple limiter chaos control method. %
 %
 In the directly limited case, the simple limiter hereby is applied through a coupling with the controlled joint DoF by feeding the joint position and velocity output back into the chaotic controller, replacing the original state with the sensor values. %
 %
@@ -50,7 +50,7 @@ The evolutionary algorithm in this context composes different creatures to find 
 %
 For the sinusoidal and the directly limited, chaotic controller, creatures could be evolved showing various ways to locomote. %
 %
-Most generally, it could be shown that using an arbitrarily chosen chaotic system and a simple limiter varying its limitation of the state space depending on the external constraints from the environment, different adaptive locomotion patterns can arise, which are robust to external disturbances. %
+More generally, it could be shown that using an arbitrarily chosen chaotic system and a simple limiter varying its limitation of the state space depending on the external constraints from the environment, different adaptive locomotion patterns can arise, which are robust to external disturbances. %
 %
 Using the indirectly limited, chaotic controller, no locomoting creatures could be evolved. %
 %
@@ -62,17 +62,15 @@ This could be shown in a hand-made model organism as well as in several evolved 
 %
 In experiments with the model leg, featuring one single joint connecting two body parts, different periodic orbits could be stabilized. 
 %
-The influence of different morphological parameters on the behavior of the model leg, namely the amount of joint torque and damping, could be observed. %
+The influence of different joint morphological parameters on the behavior of the model leg, namely the amount of joint torque and damping, could be observed. %
 %
 Applying higher or lower amounts of joint torque increases or decreases the orbit diameter respectively, damping leads to a smoother curvature of the orbit. %
 %
 However, in all cases the joint converges to a proper periodic orbit.
 
-In the evolved creature case, only some creatures could be found feature simple limiter control behavior, while others do not. %
+In the evolved creature case, only some creatures could be found to feature simple limiter control behavior, while others do not it very prominently. %
 %
-So it is not the case that locomotion can only arise through simple limiter stabilized orbits. %
-%
-Still, given that it occurs in some creatures makes it is a valid hypothesis to be pursued further.
+Still, given that stabilized orbits can be observed in some creatures makes it a valid hypothesis to be pursued further.
 
 An issue confronted with during the simulation run was, that no fitness function accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
 %
@@ -84,11 +82,11 @@ Another issue to address in the future would be the configuration of the limiter
 %
 The current simple limiter was evaluated experimentally to stabilize a periodic orbit, which is an indication that the limiter is applied to the system. %
 %
-This could be addressed by a less restricting application of the sensory feedback, such as that a higher body part velocity would reduce the size of the phase space of the chaotic system, so that dynamics of lower periodicity would arise. %
+This could be addressed by a less restricting application of the sensory feedback, such as that a higher body part velocity would increase the size of the phase space of the chaotic system, so that dynamics of higher periodicity would arise. %
 %
-However, it is in question how to design the limiter, because as soon as a certain intention of desired outcome is behind a certain configuration of the limiter, one builds a limiter into the chaotic system such that it shows a specific, desired result. %
+However, it is in question how to design the limiter, because as it is important to not directly build in a desired outcome. %
 %
-Therefore the choice of an appropriate limiter configuration is a particularly hard task. 
+Therefore the choice of an appropriate limiter configuration is a particularly hard task.
 
 A future experiment could be to actually measure the chaoticity of the controller and joint dynamics. %
 %
