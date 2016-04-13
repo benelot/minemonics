@@ -32,8 +32,6 @@ Universe
 
 \fill [path fading=south,black!10] (universe-left-zoom-node.center) to (universe-right-zoom-node.center) to (planet-right-row-node.center) to (planet-left-row-node.center) to (universe-left-zoom-node.center);
 
-
-
 %###############################################
 % Planet anchors
 %###############################################

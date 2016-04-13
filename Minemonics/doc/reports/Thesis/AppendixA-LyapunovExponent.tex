@@ -1,0 +1,37 @@
+% Appendix Template
+
+\documentclass[main]{subfiles}
+
+\begin{document}
+\chapter{} % Main appendix title
+
+\label{AppendixA} % Change X to a consecutive letter; for referencing this appendix elsewhere, use \ref{AppendixX}
+
+\lhead{Appendix A. \emph{Using the Largest Lyapunov Exponent as a measure for gait stability}} % Change X to a consecutive letter; this is for the header on each page - perhaps a shortened title
+
+
+\begin{align*}
+x(t) = f^t(x_0)\\
+x(t) + \delta x(t) = f^t(x_0 + \delta x_0)\\
+\end{align*}
+
+To measure the sensitivity to the initial conditions, the evolution of the perturbance \(\delta x_0\) through the system can be calculated:
+
+\[||\delta x(t)|| = \||\delta x_0|| e^{\mu t}\]
+
+The \(\mu\) in that case is also called the Largest Lyapunov exponent (LLE).%
+%
+If \(\mu > 0\), then the trajectory diverges exponentially. %
+%
+A \(\mu = 0\) means, that the system is in a critical state, because its trajectories neither diverge nor converge. %
+%
+However, if \(\mu < 0\), it expresses the convergence of a trajectory to a stable point or orbit. %
+%
+The quantification would be done by plotting the Log divergence distance ratio:
+
+\[\log\left(\frac{||\delta x(t)||}{||\delta x_0||}\right) = \mu t\]
+%
+The LLE can then be found by fitting segments of the time evolution log plot of the trajectory differences. 
+
+
+\end{document}

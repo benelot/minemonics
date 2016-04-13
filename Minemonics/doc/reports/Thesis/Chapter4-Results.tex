@@ -43,7 +43,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/179.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/188.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper1/196.png}
-\caption[Figure of a jumper using sinusoidal controllers.]{Figure of a jumper using sinusoidal controllers. Its four legs under the main body let it leap forward.}
+\caption[Figure of a jumper using sinusoidal controllers.]{Figure of a jumper using sinusoidal controllers. Its four legs under the main body let it leap forward. A video of the jumping creature can be found on YouTube: \url{https://youtu.be/jMHQnsCy8_k}.}
 \label{figure:successfulcreatures-jumper1}
 \end{figure}
 
@@ -54,7 +54,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/359.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/373.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/jumper2/406.png}
-\caption[Figure of another jumper using sinusoidal controllers.]{Figure of another jumper using sinusoidal controllers. Its two legs in the back propulse the body forward while the front contact point acts as a stabilization.}
+\caption[Figure of another jumper using sinusoidal controllers.]{Figure of another jumper using sinusoidal controllers. Its two legs in the back propulse the body forward while the front contact point acts as a stabilization. A video of the jumping creature can be found on YouTube: \url{https://youtu.be/xc9uWrDYRic}.}
 \label{figure:successfulcreatures-jumper2}
 \end{figure}
 
@@ -65,7 +65,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/460.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/468.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/471.png}
-\caption[Figure of a walker using sinusoidal controllers.]{Figure of a walker using sinusoidal controllers. It has two legs in the back, which push the body forward. The front contact point again stabilizes the movement.}
+\caption[Figure of a walker using sinusoidal controllers.]{Figure of a walker using sinusoidal controllers. It has two legs in the back, which push the body forward. The front contact point again stabilizes the movement. A video of the walking creature can be found on YouTube: \url{https://youtu.be/PYMajm8A9eQ}.}
 \label{figure:successfulcreatures-walker1}
 \end{figure}
 
@@ -76,7 +76,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/048.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/064.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/079.png}
-\caption[Figure of another walker using sinusoidal controllers.]{Figure of another walker using sinusoidal controllers. This creature has many legs on both sides, which synchronously touch the ground and make the body crawl forward. }
+\caption[Figure of another walker using sinusoidal controllers.]{Figure of another walker using sinusoidal controllers. This creature has many legs on both sides, which synchronously touch the ground and make the body crawl forward. A video of the walking creature can be found on YouTube: \url{https://youtu.be/OAmdOUpvuPY}.}
 \label{figure:successfulcreatures-walker2}
 \end{figure}
 
@@ -124,13 +124,58 @@ The second experiments then used sensory feedback to impose limiters on the chao
 \label{figure:indirect-limit-controller-joint-complex}
 \end{figure}
 
-The first experiments uses chaotic controllers without direct limiters. %
+The first experiments use chaotic controllers without direct limiters. %
 %
 The controllers start with different initial conditions and different integration speeds, but are not limited using sensory input. %
 %
 Therefore the chaotic trajectories emitted from the controllers are only limited through the morphology. %
 %
-The conducted experiment was run using 4 different evolutionary settings in terms of evaluation time and number of creatures in the population. %
+
+In the following plot (Figure \ref{figure:unlimited-model-leg}), the behavior of the model leg with an unlimited controller can be observed. %
+%
+The model leg continuously rotates into one direction until it hits the joint limit, from which it then moves back and forth in the case the controller signal's sign changes for a short time. %
+%
+However no periodic movement can be observed over the long run. %
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
+	\caption[Unlimited chaotic controller controlling model leg.]{Unlimited chaotic controller controlling model leg. The velocity on the y axis fluctuates in the positive range and therefore, the position increases positively. At the end, the velocity switches from positive to negative, making the position oscillate as well. However, as the chaotic trajectory again switches to another limit cycle, the position increases again only into one direction.}
+	\begin{tabular}{l|ll}
+	\hline 
+	Gravity: 0g  & Sensors: & - \\
+	 Output: z(t) \(\rightarrow\) Joint torque & & - \\
+	  Torque scaling curve: \(0.7~(mass_1~\cdot~mass_2)\) & & - \\
+	  \hline
+	\end{tabular}
+
+	\label{figure:unlimited-model-leg}
+\end{figure}
+
+Since the model leg might be a bad predictor of how higher complexity could influence the resulting creature, 4 different evolutionary settings in terms of evaluation time and number of creatures in the population were run. %
 %
 However, the desired limiter control exhibiting periodic or quasi-periodic motion could not be observed in any of the creatures. %
 %
@@ -184,6 +229,46 @@ When stated that the sensor X limits the x dimension, this means that the value 
 %
 The following plots always show the phase space of the chaotic controller on the left side and the sensor space of the controlled joint DoF on the right side.
 
+In the next plot, the dimension x is limited with the position sensor, while leaving the dimension y without limitation.
+
+\begin{figure}[H]
+	\centering
+		\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-px(y)z-0g-force-0-00007-damping-0.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-px(y)z-0g-force-0-00007-damping-0-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
+	\caption[Joint position \(\rightarrow\) x(t) limited chaotic controller controlling model leg.]{A strange quasi-periodic limit cycle can be observed in the chaotic controller phase space and the sensor space. The model body part oscillates strangely.}
+	\begin{tabular}{l|ll}
+	\hline 
+	Gravity: 0g  & Sensors: & Joint position \(\rightarrow\) x(t)\\
+	 Output: z(t) \(\rightarrow\) Joint torque & & - \\
+	  Torque scaling curve: \(0.7~(mass_1~\cdot~mass_2)\) & & - \\
+	  \hline
+	\end{tabular}
+	\label{figure:limited-model-leg1}
+\end{figure}
+
+When switching the limited dimension from x to y, the following strange trajectory can be observed in the sensor space.
 
 \begin{figure}[H]
 	\centering
@@ -201,59 +286,16 @@ The following plots always show the phase space of the chaotic controller on the
 \node[align=left] at (0,0){\underline{Controller State Space}};
 \node[inner sep=0pt] (controller-state-space) at (0,-3)
 {
-\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z.png}
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-(x)pyz-0g-force-0-00007-damping-0.png}
 };
 
 \node[align=left] at (9,0){\underline{Joint Dynamics}};
 \node[inner sep=0pt] (joint-dynamics) at (9,-3)
 {
-\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint.png}
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-(x)pyz-0g-force-0-00007-damping-0-joint.png}
 };
 	\end{tikzpicture}
 	\end{minipage}
-	\caption[Unlimited chaotic controller controlling model leg.]{Unlimited chaotic controller controlling model leg. The velocity on the y axis fluctuates in the positive range and therefore, the position increases positively. At the end, the velocity switches from positive to negative, making the position oscillate as well. However, as the chaotic trajectory again switches to another limit cycle, the position increases again only into one direction.}
-	\begin{tabular}{l|ll}
-	\hline 
-	Gravity: 0g  & Sensors: & - \\
-	 Output: z(t) \(\rightarrow\) Joint torque & & - \\
-	  Torque scaling curve: \(0.7~(mass_1~\cdot~mass_2)\) & & - \\
-	  \hline
-	\end{tabular}
-
-	\label{figure:unlimited-model-leg}
-\end{figure}
-
-For the next plot, the dimension x is limited with the position sensor, while leaving the dimension y without limitation.
-
-\begin{figure}[H]
-	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-px(y)z-0g-force-0-00007-damping-0.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-px(y)z-0g-force-0-00007-damping-0-joint.png}
-		\end{subfigure}
-	\caption[Joint position \(\rightarrow\) x(t) limited chaotic controller controlling model leg.]{A strange quasi-periodic limit cycle can be observed in the chaotic controller phase space and the sensor space. The model body part oscillates strangely.}
-	\begin{tabular}{l|ll}
-	\hline 
-	Gravity: 0g  & Sensors: & Joint position \(\rightarrow\) x(t)\\
-	 Output: z(t) \(\rightarrow\) Joint torque & & - \\
-	  Torque scaling curve: \(0.7~(mass_1~\cdot~mass_2)\) & & - \\
-	  \hline
-	\end{tabular}
-	\label{figure:limited-model-leg1}
-\end{figure}
-
-When switching the limited dimension from x to y, the following strange trajectory can be observed in the sensor space.
-
-\begin{figure}[H]
-	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-(x)pyz-0g-force-0-00007-damping-0.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-(x)pyz-0g-force-0-00007-damping-0-joint.png}
-		\end{subfigure}
 	\caption[Joint position \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{In the chaotic controller, one can observe an outward spiral, which indicates that the joint position limiting the y dimension turns the original attractor into a repeller.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -270,12 +312,30 @@ If the same dimensions are limited by the velocity sensor instead of the positio
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-vx(y)z-0g-force-0-00007-damping-0.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-vx(y)z-0g-force-0-00007-damping-0-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-vx(y)z-0g-force-0-00007-damping-0.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-vx(y)z-0g-force-0-00007-damping-0-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Joint Velocity \(\rightarrow\) x(t) limited chaotic controller controlling model leg]{A strange quasi-periodic limit cycle can be observed in the controller phase space, but not in the sensor space. The velocity of the joint moves in a strange oscillation around zero, resulting in a net increase of the position.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -291,12 +351,30 @@ If the joint velocity limits y(t) instead of x(t), the trajectory shows converge
 
 \begin{figure}[H]
 	\centering
-\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-(x)vyz-0g-force-0-00007-damping-0.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-(x)vyz-0g-force-0-00007-damping-0-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-(x)vyz-0g-force-0-00007-damping-0.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-(x)vyz-0g-force-0-00007-damping-0-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Joint Velocity \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{The trajectory performs symmetrical outward spiral which approaches a limit cycle of periodicity 1 at the outer bounds. This behavior can be explained by the fact that in the Chua equations, a simple negative feedback cycle is constructed. If the velocity increases into the positive direction, z(t) gets driven into the negative direction, therefore a torque pointing into the opposite direction is applied. Additionally a descent down into the plane of the periodic orbit can be observed.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -313,12 +391,30 @@ If two successful limiters get combined, namely the Joint position \(\rightarrow
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Joint position \(\rightarrow\) x(t) and Joint Velocity \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{The shape of the limit cycle gets distorted.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -335,12 +431,30 @@ However the combination of non-stabilizing limiters does not stabilize any unsta
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-vxpyz-0g-force-0-00007-damping-0.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-vxpyz-0g-force-0-00007-damping-0-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-vxpyz-0g-force-0-00007-damping-0.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-vxpyz-0g-force-0-00007-damping-0-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Joint Velocity \(\rightarrow\) x(t) and Joint Position \(\rightarrow\) y(t) limited chaotic controller controlling model leg]{A strangely oscillating trajectory can be observed.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -368,12 +482,30 @@ In some cases, the ground should therefore directly act as a very hard limiter o
 In the first setting, the model leg is dropped onto a frictionless ground. 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction00-force0-7-damping0-xyz.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction00-force0-7-damping0-xyz-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction00-force0-7-damping0-xyz.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction00-force0-7-damping0-xyz-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Limited chaotic controller controlling model leg on frictionless ground.]{The interaction with ground can be observed both in the controller phase space and the sensor space. Small perturbations causing a drop of the velocity towards zero change the trajectory of the spiral. The frictionless ground limits the controller only quickly, because afterwards the model leg falls to the side, slides on the ground and converges to the original periodic orbit.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -390,12 +522,30 @@ Changing the friction of the ground to a non-zero value increases the limiter im
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction11-force2-damping0-xyz.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction11-force2-damping0-xyz-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction11-force2-damping0-xyz.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-1g-100s-friction11-force2-damping0-xyz-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Limited chaotic controller controlling model leg on ground with friction]{The ground with friction now shows a much more influential limiter. The model leg hits the ground several times while oscillating, which stabilizes several periodic orbits for one to two cycles. Finally the model leg comes to a rest as it blocks the oscillation as it falls to the ground while completely extended.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -424,13 +574,31 @@ However, since the joint space is coupled to the chaotic controller space throug
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force0-7-damping0-05-xyz.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force0-7-damping0-05-xyz-joint.png}
-		\end{subfigure}
-	\caption[Damped, limited chaotic controller controlling model leg]{The damping of the model leg softens the curvature of the periodic orbit and a sub-manifold of the original periodic orbit reveals itself.}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force0-7-damping0-05-xyz.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force0-7-damping0-05-xyz-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
+	\caption[Damped, limited chaotic controller controlling model leg]{The damping of the model leg softens the curvature of the periodic orbit.}
 	\begin{tabular}{l|ll}
 	\hline 
 	Gravity: 0g  & Sensors: & Joint position \(\rightarrow\) x(t),\\
@@ -446,12 +614,30 @@ Gradually increasing the joint torque shows that the convergence to the limit cy
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force4-damping0-05-(x)yz.png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force4-damping0-05-(x)yz-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force4-damping0-05-(x)yz.png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction11-force4-damping0-05-(x)yz-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Damped, torque increased, limited chaotic controller controlling model leg]{The convergence speed of the trajectory to the periodic orbit is increased, additionally the system again convergence to a curvature similar to the one without damping.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -466,12 +652,30 @@ Gradually increasing the joint torque shows that the convergence to the limit cy
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force10-damping0-05-(x)yz(0-7).png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force10-damping0-05-(x)yz(0-7)-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force10-damping0-05-(x)yz(0-7).png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force10-damping0-05-(x)yz(0-7)-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Damped, torque increased, limited chaotic controller controlling model leg]{Increasing the torque again increases the convergence speed again.}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -488,13 +692,31 @@ If more torque and more damping is applied, a higher convergence speed can be ob
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force20-damping5-(x)yz(0-7).png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force20-damping5-(x)yz(0-7)-joint.png}
-		\end{subfigure}
-	\caption[Highly damped, torque strongly increased, limited chaotic controller controlling model leg]{With more torque and more damping, the trajectory converges quickly to the periodic orbit in the sub-manifold.}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force20-damping5-(x)yz(0-7).png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force20-damping5-(x)yz(0-7)-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
+	\caption[Highly damped, torque strongly increased, limited chaotic controller controlling model leg]{With more torque and more damping, the trajectory converges quickly to the periodic orbit.}
 	\begin{tabular}{l|ll}
 	\hline 
 	Gravity: 0g  & Sensors: & Joint position \(\rightarrow\) x(t),\\
@@ -506,7 +728,7 @@ If more torque and more damping is applied, a higher convergence speed can be ob
 	\label{figure:limited-damped-model-leg-damping4}
 \end{figure}
 
-Conclusively, the damping of the system leads to sub-manifolds of the original system's manifold, the trajectory, however, still converges to a limit cycle, even if more force and more damping is applied.
+Conclusively, the damping of the system leads to a smoother limit cycle of the original system's trajectory, however, still converges to a limit cycle, even if more force and more damping is applied.
 
 \paragraph{Influence of the X Dimension Limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), it is known that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. %
 %
@@ -514,12 +736,30 @@ One can now observe the influence of the x dimension limiter when it is removed 
 
 \begin{figure}[H]
 	\centering
-		\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)yz(0-7).png}
-		\end{subfigure}
-	\begin{subfigure}[c]{0.45\textwidth}
-	\includegraphics[width=\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)yz(0-7)-joint.png}
-		\end{subfigure}
+	\begin{minipage}{1.3\textwidth}
+	\hspace*{-5em}
+	\begin{tikzpicture}
+
+% classes
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\tikzstyle{bigbox} = [draw=black!80, thick, fill=black!5, rounded corners, rectangle]
+\tikzstyle{box} = [minimum size=0.6cm, rounded corners,rectangle, fill=black!50]
+
+\node[align=left] at (0,0){\underline{Controller State Space}};
+\node[inner sep=0pt] (controller-state-space) at (0,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)yz(0-7).png}
+};
+
+\node[align=left] at (9,0){\underline{Joint Dynamics}};
+\node[inner sep=0pt] (joint-dynamics) at (9,-3)
+{
+\includegraphics[width=0.45\textwidth]{model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)yz(0-7)-joint.png}
+};
+	\end{tikzpicture}
+	\end{minipage}
 	\caption[Limited chaotic controller controlling model leg]{}
 	\begin{tabular}{l|ll}
 	\hline 
@@ -610,22 +850,22 @@ The best results were achieved using a stronger restriction on the solutions, wh
 %
 The minimal contact point quantity fitness function reduced the the number of feet a creature develops, therefore a clearer locomotion pattern had to emerge. %
 %
-In the following figures, three of these evolved creatures are shown.
+In the following figures, three of these evolved creatures are examined in detail.
+
+\paragraph{Walker}
 
 The first creature is a walker. It has two large feet, of which it always moves one forward while using the other as a stabilization. 
 
-\todo[inline]{Recapture the chaotic controller evolved creatures and draw an animation from it}
-\todo[inline]{Add links to the creatures gait videos on youtube}
-\todo[inline]{Produce a finger cinema from videos}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/014.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/029.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/036.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/069.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/116.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/120.png}
-\caption[Figure of a walker using chaotic controllers.]{A figure of a walker featuring 4 chaotic controllers and 4 joints. It has two large feet it stands on, which push the body forward. In the front of the creature there is a stabilizing block that in certain cases touches the ground if the creature tips during its gait.}
+\includegraphics[width=0.95\textwidth]{results/evolved-creatures/chaotic/walker1/walker1-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/014.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/029.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/036.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/069.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/116.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/walker1/120.png}
+\caption[Figure of a walker using chaotic controllers.]{A figure of a walker featuring 4 chaotic controllers and 4 joints. It has two large feet it stands on, which push the body forward. In the front of the creature there is a stabilizing block that in certain cases touches the ground if the creature tips during its gait. A video of the walking creature can be found on YouTube: \url{https://youtu.be/jwaEXxB7ZB4}.}
 \label{figure:successfulcreatures-chaotic-walker1}
 \end{figure}
 
@@ -653,15 +893,18 @@ This behavior can be explained because the gait of the creature always traps one
 %
 This leads to a chaotic trajectory in the controller when the leg is completely trapped, and to a periodic trajectory when untrapped. %
 
+\paragraph{Crawler}
+
 The second creature is a crawler. It moves on ground using a gait similar to a snake by oscillating its tail.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/140.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/143.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/149.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/163.png}
-\caption[Figure of a crawler using chaotic controllers.]{Figure of a crawler featuring 10 chaotic controllers and 10 joints. The crawler has a tail and two arms looking to the left and right from the head, and moves forward using a snake-like locomotion gait.}
+\includegraphics[width=0.85\textwidth]{results/evolved-creatures/chaotic/crawler1/crawler1-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/140.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/143.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/149.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/crawler1/163.png}
+\caption[Figure of a crawler using chaotic controllers.]{Top-down view of a crawler featuring 10 chaotic controllers and 10 joints. The crawler has a tail and two arms looking to the left and right from the head, and moves forward using a snake-like locomotion gait. A video of the crawling creature can be found on YouTube: \url{https://youtu.be/3qpJOooM4Vc}.}
 \label{figure:successfulcreatures-chaotic-crawler1}
 \end{figure}
 
@@ -683,15 +926,18 @@ The same controller features a different kind of chaotic behavior when on ground
 \label{figure:crawler1-on-ground-controller-dynamics}
 \end{figure}
 
+\paragraph{Jumper}
+
 The third creature is a jumper. It moves on ground by moving its body parts to gain momentum, which makes the main body finally lift off and take a small leap forward.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/457.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/542.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/645.png}
-\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/685.png}
-\caption[Figure of a jumper using chaotic controllers.]{Figure of a jumper featuring 10 chaotic controllers and 10 joints. The jumper has several legs it uses to accumulate momentum in order to jump forward.}
+\includegraphics[width=0.85\textwidth]{results/evolved-creatures/chaotic/jumper1/jumper1-animation.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/457.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/542.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/645.png}
+%\includegraphics[width=0.45\textwidth]{results/evolved-creatures/chaotic/jumper1/685.png}
+\caption[Figure of a jumper using chaotic controllers.]{Figure of a jumper featuring 10 chaotic controllers and 10 joints. The jumper has several legs it uses to accumulate momentum in order to jump forward. A video of the jumping creature can be found on YouTube: \url{https://youtu.be/JyBFdD_wCoQ}.}
 \label{figure:successfulcreatures-chaotic-crawler1}
 \end{figure} 
 
@@ -713,10 +959,11 @@ The same controller features a limit cycle which seems to be limited in the lowe
 \label{figure:crawler1-on-ground-controller-dynamics}
 \end{figure}
 
-\todo[inline]{Rewrite these sentences}
 All three creatures show adaptive behavior depending on whether they are on ground or off ground. %
 %
-The ground influences the behavior of the controller, however, it does not always stabilize a chaotic trajectory as in the simple limiter model. %
+However, the influence of the limiters are not always of the prominent nature of the simple limiter. %
 %
-But the ground seems not to act like a simple limiter in all creatures. %
+To get a qualitative measure of stability, all controllers of the three creatures were perturbed in the beginning of their evaluation using small uniformly distributed zero mean perturbances of amplitude \([0,1 \cot 10^-8]\) to see if the locomotion stays stable. %
+%
+The perturbation experiment was repeated 100 times for each creature, however the locomoted distance varied less than \(\unit[1]{\%}\) for all of the runs. %
 \end{document}

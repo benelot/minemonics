@@ -1,4 +1,4 @@
-for f in walk* 
+for f in $1 
 do
 	cd $f
 	pwd

@@ -182,7 +182,7 @@
 \node(internal-signal-box) at (1.4,-3.5){};
 \node[inner sep=0pt] (internal-signal) at (-1,-1.3)
 {
-\includegraphics[scale=0.1]{Pictures/controllers/Chua-controller-internal-state.png}
+\includegraphics[scale=0.1]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz.png}
 };
 \node[align=left] at (-1.6,-3.1){\scriptsize x};
 \node[align=left] at (1,-2.5){\scriptsize y};
@@ -194,7 +194,7 @@
 \node[align=left] at (4.3,1){\underline{Controller output}};
 \node[inner sep=0pt] (external-signal) at (5.3,-1.3)
 {
-\includegraphics[scale=0.1]{Pictures/controllers/Chua-controller-output.png}
+\includegraphics[scale=0.1]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz-signal.png}
 };
 \node[align=left] at (2.8,0.16){\scriptsize z};
 \node[align=left] at (7.9,-1.5){\scriptsize t};
@@ -216,7 +216,7 @@
 \shade[bottom color=white, top color=black!40] (8.4,-1.26) rectangle (13.6,0.7);
 \node[inner sep=0pt] (external-signal) at (11,-1.05)
 {
-\includegraphics[scale=0.11]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction00-force0-7-damping0-05-(x)(-1-5)(y)z-joint-t.png}
+\includegraphics[scale=0.11]{Pictures/model-organisms/model-leg/Modelleg-0g-100s-friction1010-force0-7-damping0-xyz-joint.png}
 };
 \node(joint-state) at (10,1){\underline{Joint dynamics}};
 

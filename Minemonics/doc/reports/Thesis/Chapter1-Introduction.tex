@@ -181,9 +181,9 @@ In a natural system such as the actuated leg joint, this limiter can be much mor
 
 \subsection{Experiment Outline}
 
-\todo[inline]{Add a chart depicting all performed experiments}
 \begin{figure}[H]
 \centering
+\hspace*{-7em}
 \input{Pictures/introduction/experiments-chart.tikz}
 
 \caption[The experiments chart]{The chart of experiments performed for this thesis.}
@@ -191,14 +191,23 @@ In a natural system such as the actuated leg joint, this limiter can be much mor
 \end{figure}
 
 The goal of this thesis is to use evolutionary algorithms and the above mentioned, chaotic control system to evolve creatures in a rigid-body physics engine to find example creatures showing basic locomotion abilities emerge in the interaction with the ground. %
+%
+Therefore, a simulator is developed to evolve artificial creatures using a specially tailored type of genome to co-evolve the individual's controller and morphology (see Chapter \ref{Chapter2}). %
+%
+In a first evolution, the creature's movement is controlled by an engineered controller emitting sinusoidal leg movement signals, so that each joint degree of freedom moves according to the sinusoid's parameters of amplitude, frequency and offset (see Chapter \ref{Chapter3} and \ref{Chapter4}). %
+%
+After successful evolution of locomoting creatures, an example chaotic system is chosen and a simple limiter is applied to it to observe the influence of different simple limiter configurations (see Chapter \ref{Chapter3}). %
+%
+Subsequently, creatures are evolved being driven by chaotic leg movement controllers using the previously chaotic system to exert joint torques (see Chapter \ref{Chapter4}). %
+%
+In case the controller can not be integrated into a locomoting creature because the evolutionary algorithm is unable to limit the controller using the morphology only, a controller using sensory feedback to represent the limiter in the controller space will be developed (see Chapter \ref{Chapter4}). %
+%
+Using this direct, feedback limited controller, the morphological limits of the creatures can directly influence the controller behavior to adjust its stabilized limit cycle. %
+%
+If a morphology/controllers configuration can be found that imposes the right limits onto the controllers so that they stabilize limit cycles which emerge into a locomotion gait, the stability and adaptivity of the gait could be superior to general control methods. %
+%
+The superiority could be explained through the inherent self-stabilizing nature of the limit cycles and the self-adapting nature of the chaotic system in the presence of simple limiters. %
 
-Therefore, a simulator is developed to evolve artificial creatures using a specially tailored type of genome to co-evolve the individual's controller and morphology. %
+Thus, the control system is robust to small disturbances and gait-adaptive in case of insurmountable obstacles.%
 
-In a first evolution, the creature's movement is controlled by an engineered controller emitting sinusoidal leg movement signals, so that each joint degree of freedom moves according to the sinusoid's parameters of amplitude, frequency and offset. %
-
-After successful evolution of locomoting creatures, an example chaotic system is chosen and a simple limiter is applied to it to observe the influence of different simple limiter configurations. %
-
-Then, creatures are evolved being driven by chaotic leg movement controllers using the previously chaotic system to exert joint torques. %
-
-In case the controller does
 \end{document}
