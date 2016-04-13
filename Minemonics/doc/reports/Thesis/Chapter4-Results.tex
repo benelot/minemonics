@@ -963,7 +963,11 @@ All three creatures show adaptive behavior depending on whether they are on grou
 %
 However, the influence of the limiters are not always of the prominent nature of the simple limiter. %
 %
-To get a qualitative measure of stability, all controllers of the three creatures were perturbed in the beginning of their evaluation using small uniformly distributed zero mean perturbances of amplitude \([0,1 \cot 10^-8]\) to see if the locomotion stays stable. %
+A simple measure of gait stability is the distance travelled by the creature. %
+%
+If the distance drops strongly when the gait is perturbed, the creature must have been strongly influenced by the perturbance (i.e. it has fallen over or has diverged strongly from its initial walk). %
+%
+To get a qualitative measure of stability, all controllers of the three creatures were perturbed in the beginning of their evaluation using small uniformly distributed zero mean perturbances of amplitude \([0,1 \cdot 10^{-8}]\) to see if the travelled distance varies. %
 %
 The perturbation experiment was repeated 100 times for each creature, however the locomoted distance varied less than \(\unit[1]{\%}\) for all of the runs. %
 \end{document}

@@ -1,4 +1,4 @@
-% Appendix Template
+% Appendix A
 
 \documentclass[main]{subfiles}
 
@@ -8,7 +8,9 @@
 \label{AppendixA} % Change X to a consecutive letter; for referencing this appendix elsewhere, use \ref{AppendixX}
 
 \lhead{Appendix A. \emph{Using the Largest Lyapunov Exponent as a measure for gait stability}} % Change X to a consecutive letter; this is for the header on each page - perhaps a shortened title
-
+The divergence of gait performance can be measured using the Largest Lyapunov exponent, the mean rate of separation of trajectories, and calculated with the following form adapted from \cite{bib:Rosenstein1993}. %
+%
+Given the chaotic system in the form below, so that the iterated function applied \(t\) times to \(x_0\) results in \(x(t)\), the same holds for a perturbance \(\delta x_0\) which after t iterations occurs as \(\delta x(t)\).
 
 \begin{align*}
 x(t) = f^t(x_0)\\
@@ -31,7 +33,6 @@ The quantification would be done by plotting the Log divergence distance ratio:
 
 \[\log\left(\frac{||\delta x(t)||}{||\delta x_0||}\right) = \mu t\]
 %
-The LLE can then be found by fitting segments of the time evolution log plot of the trajectory differences. 
-
+The LLE can then be found by line fitting segments of the time evolution log plot of the trajectory differences and then measuring the slope of the lines. %
 
 \end{document}
