@@ -219,12 +219,14 @@ These initial conditions are used during the following experiments unless otherw
 
 Then we introduce a simple tunable soft limiter \[\text{softLim}(x) = \frac{1}{2} \left(\tanh\left(\frac{limitValue - x}{softness}\right) + 1\right)\] with the limiter response shown in figure \ref{figure:softlimiterresponse}. %
 %
+The limiter function is applied to one of the differential equations of the chaotic system and pulls its result to zero as it or one of the other equations surpass the $limitValue$ depending on which equation is defined to be the one triggering the limiter and which is the one to be limited.
+%
 In all of the following plots, the color of a certain state in the plot indicates how strongly the limiter influences that state.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{controllers/chua-circuit/Limiter-softness-plot.png}
-\caption[Soft limiter responses]{Soft limiter responses compared to the hard limiter response. The hard limiter response is shown in red. A trajectory approaching 0 from the negative side runs into the limiter, which applies the limiter instantly to its full extent. The soft limiter responses from orange to yellow show how limiters with increasing softness values (0.13, 0.3, 0.5, 1, 2 and 5) are applied. The curve with softness 0.13 approximates the hard limiter the best, the higher the softness value, the softer the limiter.}
+\caption[Soft limiter responses]{Soft limiter responses compared to the hard limiter response. The limiter function is applied to one of the differential equations of the chaotic system and pulls its result to zero as it or one of the others surpass the $limitValue$ depending on which equation is defined to be the one triggering the limiter and which is the one to be limited. The hard limiter response is shown in red. A trajectory approaching 0 from the negative side runs into the limiter, which applies the limiter instantly to its full extent. The soft limiter responses from orange to yellow show how limiters with increasing softness values (0.13, 0.3, 0.5, 1, 2 and 5) are applied. The curve with softness 0.13 approximates the hard limiter the best, the higher the softness value, the softer the limiter.}
 \label{figure:softlimiterresponse}
 \end{figure}
 

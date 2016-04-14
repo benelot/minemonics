@@ -186,7 +186,7 @@ In a natural system such as the actuated leg joint, this limiter can be much mor
 \hspace*{-7em}
 \input{Pictures/introduction/experiments-chart.tikz}
 
-\caption[The experiments chart]{The chart of experiments performed for this thesis.}
+\caption[The experiments chart]{The chart of experiments performed for this thesis. First, the simple limiter control method was used on a model chaotic system called the Chua circuit to understand the influence of the limiter and the limiter softness. Then, the first experiment on the evolution simulator was run to generate locomoting creatures using sinusoidal controllers for the gait pattern. Subsequently, two chaotic controllers were developed, one without feedback (indirectly limited controller) and one with sensory feedback of the controlled joint (directly limited controller). Both were first tested on a model organism called the model leg, then were used to evolve locomoting creatures. While the indirectly limited controller did not produce any periodic gait patterns due to the inability to limit the internal chaotic system, the directly limited controller could produce periodic gait patterns, hence, locomoting creatures could be evolved.}
 \label{figure:experiments-chart}
 \end{figure}
 
@@ -207,7 +207,7 @@ Using this direct, feedback limited controller, the morphological limits of the 
 If a morphology/controllers configuration can be found that imposes the right limits onto the controllers so that they stabilize limit cycles which emerge into a locomotion gait, the stability and adaptivity of the gait could be superior to general control methods. %
 %
 The superiority could be explained through the inherent self-stabilizing nature of the limit cycles and the self-adapting nature of the chaotic system in the presence of simple limiters. %
-
+%
 Thus, the control system is robust to small disturbances and gait-adaptive in case of insurmountable obstacles.%
 
 \end{document}

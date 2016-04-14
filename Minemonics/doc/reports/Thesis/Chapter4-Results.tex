@@ -17,7 +17,7 @@
 
 \lhead{Chapter \thechapter. \emph{Results}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-\section{Evolved Creatures with Uncoupled Sinusoidal Controller}
+\section{Evolved Creatures with Uncoupled Sinusoidal Controllers}
 \label{sec:evolved-sin-creatures}
 
 In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-controllers} was used to evolve creatures. %
@@ -58,7 +58,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 \label{figure:successfulcreatures-jumper2}
 \end{figure}
 
-\begin{figure}[tb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\textwidth]{results/evolved-creatures/sine/walker1/walker1-animation.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker1/447.png}
@@ -69,7 +69,7 @@ The successful solutions evolved can be seen below in figures \ref{figure:succes
 \label{figure:successfulcreatures-walker1}
 \end{figure}
 
-\begin{figure}[tb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{results/evolved-creatures/sine/walker2/walker2-animation.png}
 %\includegraphics[width=0.45\textwidth]{results/evolved-creatures/sine/walker2/027.png}
@@ -90,9 +90,9 @@ This process involves no mutations, therefore the crossover must have happened m
 %
 The elitism mechanism of the evolutionary process, passing the most successful creatures directly to the next generation, kept the first successful creature, that then generated an onset of an avalanche of successful creatures, flooding the population with very similar solutions. 
 
-The major drawback of the sinusoidal oscillator controller is that they do not show any adaption during the evaluation depending on the environment. %
+The major drawback of the sinusoidal oscillator controller is that they do not show any adaption to the environment during the evaluation. %
 %
-The only way for the controller to adapt is on the evolutionary time-scale through mutation, which does not result in an advantage for the individual in its current evaluation, but only helps a future generation of the individual to eventually converge to a new, applicable solution. 
+The only way for the controller to adapt its control signal is on the evolutionary time-scale through mutation, which does not result in an advantage for the individual in its current evaluation, but only helps a future generation of the individual to eventually converge to a new, applicable solution. 
 
 \section{Simple Limiter Control in the Simulator}
 % rev. 3
@@ -802,7 +802,7 @@ Thus, a controller might sometimes stabilize a periodic orbit at one point, but 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{results/evolved-creatures/chaotic/chaotic-periodic-switching.png}
-\caption[Chaotic-periodic phase switching]{A plot of the controller phase space showing a trajectory containing interweaving chaotic and periodic phases.}
+\caption[Chaotic-periodic phase switching]{A plot of the controller phase space showing a trajectory containing interweaving chaotic and periodic phases. The phase transition of the controller happens when the limiters of the joint change and hence the chaotic system's phase space is increased or decreased. In the more limited case, the controller goes into low periodic oscillations, in the less limited case, it performs a chaotic trajectory.}
 \label{figure:z-2.4-3.19-chaotictrajectories}
 \end{figure}
 
@@ -901,7 +901,7 @@ The joint limits cause the joint dynamics to be periodic. %
 };
 	\end{tikzpicture}
 	\end{minipage}
-\caption[Off ground controller dynamics of the walker]{Dynamics of a chaotic controller and joint if the walker is off ground. The joint limits make joint movement stay periodic even in the absence of the ground limiter.}
+\caption[Off ground controller dynamics of the walker]{Dynamics of a chaotic controller and joint if the walker is off ground. The joint limits make the joint movement stay periodic even in the absence of the ground limiter.}
 \label{figure:walker1-off-ground-controller-dynamics}
 \end{figure}
 
@@ -1127,5 +1127,5 @@ The perturbation experiment was repeated 100 times for each creature. %
 %
 For the three creatures, the locomoted distance varies less than \(\unit[1]{\%}\) over all runs. %
 %
-The controller is therefore stable enough to cope with smaller perturbations and can return to the original gait. %
+The controller is therefore stable enough to cope with smaller perturbations and returns to the original gait. %
 \end{document}
