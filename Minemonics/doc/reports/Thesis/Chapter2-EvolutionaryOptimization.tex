@@ -110,7 +110,7 @@ Juries or fitness functions are part of an epoch in which they are active. %
 %
 A jury collects data on a creature performance during its evaluation and finally rates the performance according to its definition of fitness. %
 %
-Commonly used juries of the simulator are the individual's average escape velocity with respect to the origin \mbox{(\textit{AverageVelocityJury})}, the average height above ground of all limbs \mbox{(\textit{AverageHeightJury})} or the number of ground contacts during the evaluation \mbox{(\textit{ContactsQtyJury})}. %
+Commonly used juries of the simulator are the individual's average escape velocity with respect to the origin \mbox{(\textit{AverageVelocityJury})}, the average height above ground of all body parts \mbox{(\textit{AverageHeightJury})} or the number of ground contacts during the evaluation \mbox{(\textit{ContactsQtyJury})}. %
 %
 Additionally, each jury has a combination weight, which indicates the weight of this performance rating in the total performance evaluation of the creature, and a sorting direction, which indicates whether a higher rating is considered better or worse than a lower rating for this type of fitness value. %
 %
@@ -124,7 +124,7 @@ The following paragraphs describe the four common jury types of the simulator.
 %
 Additionally, the measure is scaled by the edge length of the total volume cube (\eqref{eqn:body-cube-root-length}) of the creature to achieve a scale-invariant measure as described in the section \ref{subsec:creatures}.
 
-\paragraph{Average Height Jury} The average height jury measures the average height for each creature's limbs when performing. %
+\paragraph{Average Height Jury} The average height jury measures the average height for each creature's body parts when performing. %
 %
 This jury inhibits creatures that grow very tall and then only fall over or creatures exploiting unrealistic torques in order to get a high fitness can be inhibited. %
 %
@@ -134,7 +134,7 @@ This measure is scaled by the edge length of the total volume cube (\eqref{eqn:b
 %
 This jury is meant to reduce the number of contact points to enforce the usage of legs and inhibit rolling creatures.
 
-\paragraph{Ground Contact Ratio Jury} The ground contact ratio jury measures the number of limbs that come in contact with ground during the performance divided by the total of limbs of the creature. %
+\paragraph{Ground Contact Ratio Jury} The ground contact ratio jury measures the number of body parts that come in contact with ground during the performance divided by the total of body parts of the creature. %
 %
 This jury, in contrast to the ground contact quantity jury, does not limit the number of ground contact points in absolute terms, but allows more complex creatures to have more contact points.
 
@@ -152,7 +152,7 @@ The individuals can be randomly generated creatures or model organisms, the latt
 %
 During the evaluation of a population, the number of individuals generally falls below the original population size, because several individuals are culled early during the evaluation. %
 %
-This happens when creatures surpass boundaries of physical realism (a main source of this is when creatures generate high joint torques that lead to very fast limb velocity, leading to unrealistic torques that lift creatures off the ground and make them fly). %
+This happens when creatures surpass boundaries of physical realism (a main source of this is when creatures generate high joint torques that lead to very fast body part velocity, leading to unrealistic torques that lift creatures off the ground and make them fly). %
 %
 Therefore, the simulation culls them early to remove them from further consideration early on.
 
@@ -170,9 +170,9 @@ Developed from it is the phenotype, which is the explicit form of the creature, 
 %
 Furthermore, we define two important measures for creatures, which are its total body volume and its size. %
 %
-The total body volume is just the total volume of all limb primitives. %
+The total body volume is just the total volume of all body part primitives. %
 %
-The size of a creature \(C\) with number of limb primitives \(N(C)\) is measured as being the third root of the total volume, denoting the edge length of the total volume cube. 
+The size of a creature \(C\) with number of body part primitives \(N(C)\) is measured as being the third root of the total volume, denoting the edge length of the total volume cube. 
 
 \begin{equation}
 size(C) = \sqrt[3]{\sum\limits^{N(C)}_{i=1} V(p_i)}
@@ -210,13 +210,13 @@ To visualize the difference between an indirect and a direct encoding, an exampl
 %
 In the phenotype section, the creature's morphology resulting from both encodings is shown (Fig. \ref{figure:phenotype}). %
 
-The genome defines a directed, possibly cyclic graph, whose nodes are called morphogenes, defining the classes of limbs, and whose edges are called morphogene branches, defining the joint relations in between the limbs. %
+The genome defines a directed, possibly cyclic graph, whose nodes are called morphogenes, defining the classes of body parts, and whose edges are called morphogene branches, defining the joint relations in between the body parts. %
 %
-A morphogene definition (Fig. \ref{figure:genome-structure}) consists of the primitive type of the limb (a cuboid or capsule), the limb's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. %
+A morphogene definition (Fig. \ref{figure:genome-structure}) consists of the primitive type of the body part (a cuboid or capsule), the body part's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. %
 %
-The joint anchor is a three dimensional vector and represents a position on the surface of the primitive type which denotes, where the limb defined by the morphogene class will be attached to the parent limb through a joint in the final phenotype. %
+The joint anchor is a three dimensional vector and represents a position on the surface of the primitive type which denotes, where the body part defined by the morphogene class will be attached to the parent body part through a joint in the final phenotype. %
 %
-Furthermore, the morphogene contains a number of morphogene branches and influence factors related to how the branches are influenced by the limb. %
+Furthermore, the morphogene contains a number of morphogene branches and influence factors related to how the branches are influenced by the body part. %
 %
 The influence factors in the morphogene are the repetitions limit, which limits the number of repetitions of that morphogene along one top-bottom branch, and the segment-shrink factor, which shrinks all dimensions of the morphogenes branched to from this morphogene.
 
@@ -244,7 +244,7 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \hspace*{-0.2in}
 \input{Pictures/evolutionary-optimization/genome-structure.tikz}
 
-\caption[Indirectly encoded genome structure]{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of limb and a morphogene branch defines a certain class of joint to connect two limbs.}
+\caption[Indirectly encoded genome structure]{The structure of the genome, morphogene and morphogene branch. A morphogene defines a certain class of body part and a morphogene branch defines a certain class of joint to connect two body parts.}
 \label{figure:genome-structure}
 \end{figure}
 
