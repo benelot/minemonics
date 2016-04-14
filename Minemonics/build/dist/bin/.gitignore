@@ -6,6 +6,10 @@
 /Minemonics-build.log
 /images
 /Minemonics_d
+/Minemonics
+/*.txt
+/*.mp4
+/*.log
 /.fuse_*
 /runUnitTests
 /minemonics.log
