@@ -44,7 +44,7 @@ Therefore, the directly limited, chaotic controller faces a limiter if the joint
 %
 Limited by this external load, the chaotic system changes its internal dynamics to cope with the new load. %
 %
-The indirectly limited, chaotic controller does not have this sensory feedback and therefore always exerts a chaotic trajectory, which is then only influenced by the limits of the morphology.%
+The indirectly limited, chaotic controller does not have this sensory feedback and therefore always exerts a chaotic trajectory, which is then only influenced by the limits of the morphology. %
 %
 The evolutionary algorithm in this context composes different creatures to find a morphology and appropriate internal control parameters which exploit the internal chaotic dynamics of the controller in such a way that together they show basic locomotion behavior. %
 %
@@ -98,9 +98,9 @@ If the controller is stabilized on a periodic orbit, the trajectory then would b
 %
 However, if the controller is not stabilized, the trajectory would diverge exponentially from the original, unperturbed trajectory and never return. %
 %
-The divergence of behavior could be measured using the Largest Lyapunov exponent, the mean rate of separation of trajectories, and calculated with the form adapted from \cite{bib:Rosenstein1993} as described in Appendix \ref{Appendix A}.%
+The divergence of behavior could be measured using the Largest Lyapunov exponent, the mean rate of separation of trajectories, and calculated with the form adapted from \cite{bib:Rosenstein1993} as described in Appendix \ref{AppendixA}. %
 %
-The Largest Lyapunov exponent then expresses if the controller returns has an attracting, stable limit cycle to which it returns after having been slightly perturbed with uniformly distributed perturbances around zero.% 
+The Largest Lyapunov exponent then expresses if the controller has an attracting, stable limit cycle to which it returns after having been slightly perturbed with uniformly distributed perturbances around zero. % 
 %
 The perturbation can be automatically performed using the simulator by enabling automatic perturbation. %
 %
