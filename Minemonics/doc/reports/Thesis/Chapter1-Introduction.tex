@@ -20,7 +20,7 @@
 
 Motion is a central aspect of life for organisms on earth. %
 %
-When the first life evolved in oceans and other open water, most organism motion was due to environmental forces such as wind or water streams. %
+When life first evolved in oceans and other open water, most organism's motion was due to environmental forces such as wind or water streams. %
 %
 However, with the development of more complex, multicellular organisms, self-induced motion rapidly gained importance. %
 %
@@ -30,7 +30,7 @@ With the evolution of lungs and more resistive skin, the first animals escaped w
 %
 This was however impossible with the same gaits as in water, therefore the way animals locomote had to be adapted again. %
 %
-Today, anthropods (including insects and spiders), recognizable by their segmented body, make up \(\unit[80]{\%}\) of all described species and have conquered every environment on earth. %
+Today, arthropods (including insects and spiders), recognizable by their segmented body, make up \(\unit[80]{\%}\) of all described species and have conquered every environment on earth. %
 %
 With the exception of some primary producers that have found a way to spread completely without self-generated motion by exploiting environmental forces to distribute seeds, organisms of higher complexity such as vertebrates depend on locomotion, usually the most complex motor behavior the organism performs \cite{bib:Grillner2000}. %
 %
@@ -38,7 +38,7 @@ Locomotion is performed in different environments (e.g. air, water, ground), eac
 %
 In water, fluid streams can prevent an organism from moving into one direction stably. %
 %
-On land, an organism faces problems with different obstacles and appropriate foot placement or switching between different gait patterns. %
+On land, an organism faces different obstacles and has to find an appropriate foot placement and gait pattern. %
 %
 Regardless of these problems, it seems that even very simple organisms could master the task of stable locomotion. %
 %
@@ -48,15 +48,15 @@ Studies of the spinal cord suggest that a key aspect of biological, rhythmic mot
 %
 The central pattern generator exhibits periodic and chaotic oscillations \cite{bib:Rabinovich1997} and is influenced through the aid of neuromodulation \cite{bib:Hooper2001}. %
 %
-They serve different rhythmic oscillations, like a function generator, for many functions in vertebrate animals, such as locomotion, breathing, peristaltic and gastric movements or other oscillatory functions. %
+They generate different rhythmic oscillations, similar to a function generator, for many tasks in vertebrate animals, such as locomotion, breathing, peristaltic and gastric movements or other oscillatory behavior. %
 %
 In early studies by Brown et al., it was recognized that a CPG can control simple locomotion tasks even without the need of descending motor commands from the cortex \cite{bib:Brown1911}. %
 %
 Additionally, in the model of the Lamprey spinal cord, stimulation of the neurons can produce fictive swimming motion, indicative of a CPG neural circuit. %
 %
-It was proposed that there even was a basal CPG responsible for different kinds of swimming, crawling on a surface and burrowing in the mud \cite{bib:Ayers1983}, which could be altered using neuromodulators \cite{bib:Harris-Warrick1985}. %
+It was proposed that there even was a CPG within the basal ganglia responsible for different kinds of swimming, crawling on a surface and burrowing in the mud \cite{bib:Ayers1983}, which could be altered using neuromodulators \cite{bib:Harris-Warrick1985}. %
 %
-A similar CPG based mechanism was evolved to control a robotic lamprey \cite{bib:Ijspeert1999}. %
+A similar CPG based mechanism was artificially evolved to control a robotic lamprey by Ijspeert et al. \cite{bib:Ijspeert1999}. %
 %
 An extensive review of robotic CPG applications can be found by the same author \cite{bib:Ijspeert2008}. %
 %
@@ -89,11 +89,11 @@ The sensors from the joints as well as the weight, shape, and inertia of the bod
 
 Evolutionary algorithms mimic the general way of how evolution as a self-optimizing process finds competitive individuals able to survive on earth. %
 %
-The general approach is based on a population of individuals, each individual based on a genotype, an element defining the characteristics of the individual. %
+The general approach is based on a population of individuals, each individual based on a genotype and a phenotype. %
 %
-The genotype is the blueprint of the animal and is subject to variation through mutation and crossover. %
+The genotype is the compact, non-redundant blueprint of the individual, an element defining its characteristics, and is subject to variation through mutation and crossover. %
 %
-The fitness functions, which model the environmental constraints that define what has to be achieved in order to be called fit, are applied to all individuals of the population to measure their fitness. %
+The fitness functions, which model the environmental constraints and define what has to be achieved in order to be called fit, are applied to all individuals of the population to measure their fitness. %
 %
 If an individual is competitive with respect to the fitness functions, it has a higher chance to reproduce than a non-competitive individual. %
 %
@@ -103,7 +103,7 @@ All individuals are subject to one or multiple types of mutations, which lead to
 %
 In order to keep the size of the population constant, some of the worst performing individuals are culled. %
 %
-Using this process, approximately optimal solutions to NP-complete problems can be found, such as the travelling salesman problem. %
+Using this process, approximately optimal solutions to NP-complete problems such as the travelling salesman problem can be found \cite{bib:Potvin1996}. %
 %
 This is due to the features of the variation operators, crossover leading to mixtures of different solutions which are possibly better solutions than the crossed solutions, and mutation helping to produce variation and to avoid getting stuck in local minima. %
 %
@@ -111,7 +111,7 @@ The evolutionary algorithm therefore follows the scheme of a general gradient de
 %
 It must be noted that the process per se does not aim to generate better individuals and that variational operations do not necessarily lead to a better fitness of an individual. %
 %
-However, the population under the evolutionary process will adapt to the fitness landscape, meaning that individual solutions will converge to global minima. %
+However, the population under the evolutionary process will adapt to the fitness landscape, the multi-dimensional landscape defined by the fitness functions and the parameters of the genome within the genetic algorithm, meaning that individual solutions will converge to global minima. %
 %
 Very fit individuals will arise from it, not necessarily showing the same or even similar solutions, depending on the complexity of the fitness landscape. 
 
@@ -125,7 +125,7 @@ Therefore, the gradient on the fitness landscape might be of little help in some
 %
 Additionally, the representation of a locomotion solution might require a large parameter space, which slows down the search for good solutions. %
 %
-Despite these restrictions, experiments show that the evolutionary algorithm is still applicable and finds valid solutions (see sections \ref{sec:evolved-sin-creatures} and \ref{subsec:Evolved-lim-creatures}).
+Despite these restrictions, the experiments in this thesis will show that the evolutionary algorithm is still applicable and finds valid solutions.
 
 \subsection{Chaotic Systems as a Source of High Variability}
 % rev. 2
@@ -146,13 +146,15 @@ Instead it was found that such unpredictable systems had to be studied much more
 %
 It is the property leading to the unpredictability, namely the sensitivity to the initial conditions, that can be used to produce a high variability of trajectories. %
 %
-In a chaotic system, the trajectories are guided by an infinite amount of unstable periodic orbits (UPOs), that, in interaction with each other, lead to the variability of trajectories. %
+In a chaotic system, the trajectories are guided by an infinite number of unstable periodic orbits (UPOs), that, in interaction with each other, lead to the variability of trajectories. %
 %
 Using a chaotic system and a chaos control method together with an evolutionary algorithm, the evolutionary algorithm could tune the system's output to show a desired solution trajectory to simplify the emergence of robust locomotion. %
 %
 As it turns out, simple limiters, introduced in the next section, are a very natural way of influencing chaotic systems. %
 %
-Through their innate coupling with the chaotic system, because they express limitations in the state space in the same 'language' as the system and are hence elegant by simplicity, simple limiters could be the key to control the system into different trajectories for periodic and chaotic movement. %
+They express limitations in the same 'language' as the chaotic system by reducing the reachable state space through the application of loads, and hence are innately coupled with it. %
+%
+Therefore, simple limiters could be the key to control a chaotic system naturally into different trajectories of periodic and chaotic movement. %
 
 \subsection{Simple Limiter Control}
 % rev. 1
@@ -165,25 +167,28 @@ The perturbation must be applied once per cycle, but the chaotic system must be 
 %
 The time to measure, generate and apply a control signal, called the latency of the OGY method, is another limitation that allows only for a certain range of frequency control. %
 %
-The simple limiter control method is much more simple. A limiter expresses a limitation in the state space of the chaotic system and thereby suppresses certain periodic orbits. %
+The simple limiter control method, compared to the OGY method, is much more natural to the controlled system at hand. %
+%
+A limiter expresses a limitation in the state space of the chaotic system and thereby suppresses certain periodic orbits. %
 %
 %
 Interestingly, however, the remaining reachable periodic orbits are being stabilized. %
 %
-The seemingly unpredictable trajectory always deterministically switches at the same point to the same periodic orbits in the phase space. %
+The seemingly unpredictable trajectory of a chaotic system always deterministically switches at the same point to the same periodic orbits in the phase space. %
 %
 Using the simple limiter, the switching can be prevented at some specified point and leave the system state no other choice than to stay on its current orbit and to repeat its trajectory, and hence the state is stabilized on a trajectory of a certain periodicity. %
 %
 In 2001, Wagner and Stoop showed that the optimal simple limiter control ranges for different limit cycles can be found using the derivative of the system \cite{bib:Wagner2001}. %
 %
-In a natural system such as the actuated leg joint, this limiter can be much more subliminal, be it the weight or dimensions of the body parts or the limits, damping or friction of the joints, or even the fact that two physical objects can not interpenetrate each other. %
+In a natural system such as the actuated leg joint, this limiter can be integrated in a more subtle way than other control methods, be it as a weight or in the dimensions of the body parts or the limits, damping or friction of the joints, or even in the fact that two physical objects can not interpenetrate each other. %
 %
+Therefore, it can be thought of as an embodied computation since it reduces the amount of control computations to be performed and hence simplifies the control task. %
 
-\subsection{Experiment Outline}
+\subsection{Experiments Outline}
 
 \begin{figure}[H]
 \centering
-\hspace*{-7em}
+\hspace*{-8.5em}
 \input{Pictures/introduction/experiments-chart.tikz}
 
 \caption[The experiments chart]{The chart of experiments performed for this thesis. First, the simple limiter control method was used on a model chaotic system called the Chua circuit to understand the influence of the limiter and the limiter softness. Then, the first experiment on the evolution simulator was run to generate locomoting creatures using sinusoidal controllers for the gait pattern. Subsequently, two chaotic controllers were developed, one without feedback (indirectly limited controller) and one with sensory feedback of the controlled joint (directly limited controller). Both were first tested on a model organism called the model leg, then were used to evolve locomoting creatures. While the indirectly limited controller did not produce any periodic gait patterns due to the inability to limit the internal chaotic system, the directly limited controller could produce periodic gait patterns, hence, locomoting creatures could be evolved.}
@@ -192,7 +197,11 @@ In a natural system such as the actuated leg joint, this limiter can be much mor
 
 The goal of this thesis is to use evolutionary algorithms and the above mentioned, chaotic control system to evolve creatures in a rigid-body physics engine to find example creatures showing basic locomotion abilities emerge in the interaction with the ground. %
 %
-Therefore, a simulator is developed to evolve artificial creatures using a specially tailored type of genome to co-evolve the individual's controller and morphology (see Chapter \ref{Chapter2}). %
+In detail, this means that using simple limiters to control an arbitrary chaotic system, the different periodicities generated by the controller leading to periodic leg movement could form different locomotion gaits. %
+%
+To test this hypothesis, experiments were performed as shown in Fig. \ref{figure:experiments-chart}. %
+%
+A simulator is developed to evolve artificial creatures using a specially tailored type of genome to co-evolve the individual's controller and morphology (see Chapter \ref{Chapter2}). %
 %
 In a first evolution, the creature's movement is controlled by an engineered controller emitting sinusoidal leg movement signals, so that each joint degree of freedom moves according to the sinusoid's parameters of amplitude, frequency and offset (see Chapter \ref{Chapter3} and \ref{Chapter4}). %
 %
@@ -200,7 +209,9 @@ After successful evolution of locomoting creatures, an example chaotic system is
 %
 Subsequently, creatures are evolved being driven by chaotic leg movement controllers using the previously chaotic system to exert joint torques (see Chapter \ref{Chapter4}). %
 %
-In case the controller can not be integrated into a locomoting creature because the evolutionary algorithm is unable to limit the controller using the morphology only, a controller using sensory feedback to represent the limiter in the controller space will be developed (see Chapter \ref{Chapter4}). %
+The controller could not be used by evolution to create a locomoting creature because the evolutionary algorithm is unable to limit the controller using the morphology only. %
+%
+Therfore, a controller using sensory feedback to represent the limiter in the controller space is developed (see Chapter \ref{Chapter4}). %
 %
 Using this direct, feedback limited controller, the morphological limits of the creatures can directly influence the controller behavior to adjust its stabilized limit cycle. %
 %

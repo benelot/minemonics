@@ -23,12 +23,12 @@
 %###############################################
 % Chaotic controller experiments
 %###############################################
-\node(chaotic-controller-experiments)[right=0.7cm of mathematica-experiments]{\underline{Chaotic controller experiments}};
+\node(chaotic-controller-experiments)[right=0.8cm of mathematica-experiments]{\underline{Chaotic controller experiments}};
 \node(chaotic-controller-image)[below=0.1cm of chaotic-controller-experiments]{
 \includegraphics[scale=0.1]{Pictures/introduction/chaotic-controller.png}
 };
 \node(chaotic-controller-text)[below=0.1cm of chaotic-controller-image,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Experiments related to the indirectly limited chaotic controller\end{varwidth}}
+\scriptsize{\begin{varwidth}{5cm}Experiments related to the indirectly limited chaotic controller\end{varwidth}}
  };
  
 %###############################################
@@ -44,35 +44,35 @@
 \includegraphics[scale=0.2]{results/evolved-creatures/sine/walker2/walker2-animation.png}
 };
 \node(sinusoidal-controller-text)[below=0.1cm of sinusoidal-controller-image2,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Evolving creatures using the sinusoidal controller\end{varwidth}}
+\scriptsize{\begin{varwidth}{5cm}Evolving creatures using the sinusoidal controller\end{varwidth}}
  };
 
 %###############################################
 % ## Indirectly limited chaotic controller experiments
 %###############################################
 \node(indirect-limiter-controller-experiments)[below=1cm of chaotic-controller-text]{\scriptsize\underline{Indirectly limited controller experiments}};
-\node(indirect-limiter-controller-image)[below=0.1cm of indirect-limiter-controller-experiments]{
-\includegraphics[scale=0.13]{Pictures/introduction/indirectly-limited-controller.png}
+\node(indirect-limiter-controller-image)[below=0.3cm of indirect-limiter-controller-experiments]{
+\includegraphics[scale=0.145]{Pictures/introduction/indirectly-limited-controller.png}
 };
-\node(indirect-limiter-controller-text)[below=0.1cm of indirect-limiter-controller-image,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Experiments using the indirectly limited chaotic controller\end{varwidth}}
- };
+%\node(indirect-limiter-controller-text)[below=0.1cm of indirect-limiter-controller-image,align=left]{
+%\scriptsize{\begin{varwidth}{5cm}Experiments using the indirectly limited chaotic controller\end{varwidth}}
+% };
 
 %###############################################
 % ### Evolution experiments
 %###############################################
-\node(il-evolution-experiments)[below=0.5cm of indirect-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
-\node(il-evolution-image)[below=0.1cm of il-evolution-experiments]{
-\includegraphics[scale=0.1]{Pictures/introduction/indirectly-limited-evolution.png}
+%\node(il-evolution-experiments)[below=0.5cm of indirect-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
+\node(il-evolution-image)[below=0.3cm of indirect-limiter-controller-image]{
+\includegraphics[scale=0.122]{Pictures/introduction/indirectly-limited-evolution.png}
 };
-\node(il-evolution-text)[below=0.1cm of il-evolution-image,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Evolving creatures using indirectly limited, chaotic controllers\end{varwidth}}
+\node(il-evolution-text)[below=0.2cm of il-evolution-image,align=left]{
+\scriptsize{\begin{varwidth}{6cm}Evolving creatures using indirectly limited, chaotic controllers\end{varwidth}}
  };
  
 %###############################################
 % ## Model leg experiments
 %###############################################
-\node(model-leg-experiments)[left=1.7cm of indirect-limiter-controller-experiments]{\scriptsize\underline{Model leg experiments}};
+\node(model-leg-experiments)[left=1.95cm of indirect-limiter-controller-experiments]{\scriptsize\underline{Model leg experiments}};
 \node(model-leg-image)[below=0.1cm of model-leg-experiments]{
 \includegraphics[scale=0.13]{Pictures/model-organisms/Model-leg2.png}
 };
@@ -80,7 +80,7 @@
 \includegraphics[scale=0.1]{Pictures/model-organisms/model-leg/Modelleg-1g-100s-friction11-force2-damping0-xyz.png}
 };
 \node(model-leg-text)[below=0.1cm of model-leg-graph-image,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Parameter exploration on the model leg\end{varwidth}}
+\scriptsize{\begin{varwidth}{5cm}Parameter exploration on the model leg\end{varwidth}}
  };
 
 
@@ -88,27 +88,27 @@
 %###############################################
 % ## Directly limited chaotic controller experiments
 %###############################################
-\node(direct-limiter-controller-experiments)[right=1.2cm of indirect-limiter-controller-experiments]{\scriptsize\underline{Directly limited controller experiments}};
-\node(direct-limiter-controller-image)[below=0.1cm of direct-limiter-controller-experiments]{
-\includegraphics[scale=0.13]{Pictures/introduction/directly-limited-controller.png}
+\node(direct-limiter-controller-experiments)[right=1.8cm of indirect-limiter-controller-experiments]{\scriptsize\underline{Directly limited controller experiments}};
+\node(direct-limiter-controller-image)[below=0.35cm of direct-limiter-controller-experiments]{
+\includegraphics[scale=0.145]{Pictures/introduction/directly-limited-controller.png}
 };
-\node(direct-limiter-controller-text)[below=0.1cm of direct-limiter-controller-image,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Experiments using the directly limited, chaotic controller\end{varwidth}}
- };
+%\node(direct-limiter-controller-text)[below=0.1cm of direct-limiter-controller-image,align=left]{
+%\scriptsize{\begin{varwidth}{5cm}Experiments using the directly limited, chaotic controller\end{varwidth}}
+% };
 
 %###############################################
 %## Evolution experiments
 %###############################################
-\node(dl-evolution-experiments)[below right =0.5cm and -4.1cm of direct-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
-\node(dl-evolution-experiments-image1)[below=0.1cm of dl-evolution-experiments]{
-\includegraphics[scale=0.11]{results/evolved-creatures/chaotic/jumper1/jumper1-animation.png}
-\includegraphics[scale=0.26]{results/evolved-creatures/chaotic/crawler1/crawler1-animation.png}
+%\node(dl-evolution-experiments)[below right =0.5cm and -4.1cm of direct-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
+\node(dl-evolution-experiments-image1)[below=0.8cm of direct-limiter-controller-image]{
+\includegraphics[scale=0.125]{results/evolved-creatures/chaotic/jumper1/jumper1-animation.png}
+\includegraphics[scale=0.28]{results/evolved-creatures/chaotic/crawler1/crawler1-animation.png}
 };
 \node(dl-evolution-experiments-image2)[below=0cm of dl-evolution-experiments-image1]{
-\includegraphics[scale=0.16]{results/evolved-creatures/chaotic/walker1/walker1-animation.png}
+\includegraphics[scale=0.174]{results/evolved-creatures/chaotic/walker1/walker1-animation.png}
 };
-\node(dl-evolution-text)[below=0.1cm of dl-evolution-experiments-image2,align=left]{
-\scriptsize{\begin{varwidth}{4cm}Evolving creatures using directly limited chaotic controllers\end{varwidth}}
+\node(dl-evolution-text)[below=0.55cm of dl-evolution-experiments-image2,align=left]{
+\scriptsize{\begin{varwidth}{6cm}Evolving creatures using directly limited chaotic controllers\end{varwidth}}
  };
 
 \begin{pgfonlayer}{background}
@@ -116,25 +116,19 @@
 				     (sinusoidal-controller-experiments) (sinusoidal-controller-image1) (sinusoidal-controller-image2) (sinusoidal-controller-text)
 				     (chaotic-controller-experiments) (chaotic-controller-image)(chaotic-controller-text)
 				     (model-leg-experiments) (model-leg-image) (model-leg-graph-image) (model-leg-text)
-				     (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(indirect-limiter-controller-text)
-				     (il-evolution-experiments) (il-evolution-image)(il-evolution-text)
-				     (direct-limiter-controller-experiments) (direct-limiter-controller-image) (direct-limiter-controller-text)
-				     (dl-evolution-experiments)  (dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-text),inner sep=15pt,outer sep=15pt] {};
+				     (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(il-evolution-image)(il-evolution-text)
+				     (direct-limiter-controller-experiments) (direct-limiter-controller-image)(dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-text),inner sep=10pt,outer sep=0pt] {};
   
   \node(chaotic-controller-experiments-box)[bigbox][fit = (model-leg-experiments) (model-leg-image) (model-leg-graph-image) (model-leg-text)
-  (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(indirect-limiter-controller-text)
-  (il-evolution-experiments) (il-evolution-image)(il-evolution-text)
-  (direct-limiter-controller-experiments) (dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(direct-limiter-controller-text)
-  (dl-evolution-experiments)  (dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-text),inner sep=10pt]{};
+  (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(il-evolution-image)(il-evolution-text)
+  (direct-limiter-controller-experiments) (dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-text),inner sep=5pt]{};
   
   \node(mathematica-box)[box][fit = (mathematica-experiments) (mathematica-image)(mathematica-text)]{};
   \node(sinusoidal-box)[box][fit = (sinusoidal-controller-experiments) (sinusoidal-controller-image1) (sinusoidal-controller-image2) (sinusoidal-controller-text)]{};
   \node(chaotic-box)[box][fit = (chaotic-controller-experiments) (chaotic-controller-image)(chaotic-controller-text)]{};
   \node(model-leg-box)[box][fit = (model-leg-experiments) (model-leg-image) (model-leg-graph-image) (model-leg-text)]{};
-  \node(indirect-controller-box)[box][fit = (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(indirect-limiter-controller-text)]{};
-  \node(il-evolution-box)[box][fit = (il-evolution-experiments) (il-evolution-image)(il-evolution-text)]{};
-  \node(direct-controller-box)[box][fit = (direct-limiter-controller-experiments)  (direct-limiter-controller-image) (direct-limiter-controller-text)]{};
-  \node(dl-evolution-box)[box][fit = (dl-evolution-experiments)  (dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-text)]{};
+  \node(indirect-controller-box)[box][fit = (indirect-limiter-controller-experiments) (indirect-limiter-controller-image)(il-evolution-image)(il-evolution-text),inner sep=2pt]{};
+  \node(direct-controller-box)[box][fit = (direct-limiter-controller-experiments)(direct-limiter-controller-image)(dl-evolution-experiments-image1) (dl-evolution-experiments-image2)(dl-evolution-text),inner sep=2pt]{};
   
 \end{pgfonlayer}
 

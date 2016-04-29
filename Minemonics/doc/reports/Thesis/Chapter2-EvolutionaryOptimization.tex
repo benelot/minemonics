@@ -30,7 +30,7 @@
 
 The following chapter describes the evolutionary optimization algorithm as it is implemented in the Minemonics simulator. %
 %
-The Minemonics simulator is the experimentation platform used throughout this thesis and is a project that was developed from scratch, mainly because other simulators for evolving virtual creatures are unpublished by the respective research groups, are outdated, or implement a different type of simulation than is needed to simulate the model described in this thesis. %
+The Minemonics simulator is the experimentation platform used throughout this thesis and is an simulation platform that we developed especially for this thesis, mainly because other simulators for evolving virtual creatures are unpublished by the respective research groups, are outdated, or implement a different type of simulation than is needed to simulate the model described in this thesis. %
 %
 Apart from the research interests, the simulator was made to be extensible for other research experiments to be implemented. %
 %
@@ -43,14 +43,17 @@ To understand the purpose of the simulation, it is important to first understand
 %
 Therefore, the basic components of the simulator and their respective features are discussed first. %
 %
-Components are described from coarse to fine grain, starting with the universe and ending with the genomic and phenomic structure of a simulated individual.
+Components are described from coarse to fine grain, starting with the universe and ending with the genomic and phenomic structure of a simulated individual. %
+%
+The relations between the components are shown in Fig. \ref{figure:universe-structure}. %
+
 
 \begin{figure}[H]
 \hspace*{-1.2in}
 \input{Pictures/evolutionary-optimization/universe-structure.tikz}
 
-\caption[A figure of the universe]{A figure of the universe and its components.}
-\label{figure:direct-encoding}
+\caption[A figure of the simulator's universe]{A figure of the simulator's universe and its subcomponents.}
+\label{figure:universe-structure}
 \end{figure}
 
 
@@ -67,6 +70,8 @@ The environment is a representation of a plane environment, but could also be a 
 %
 For the experiments in this thesis, originally an additional hill environment was planned, but was then abandoned and only the plane environment was used. %
 %
+The hill environment was abandoned because disturbances to the creatures can more easily be induced by directly applying uniformly distributed forces to the body of the creature. %
+%
 The type of evolutionary process defines, how many creatures of the planet are evaluated simultaneously in the same environment, and the percentage of creatures that are culled, varied and sown. %
 %
 Within the bounds of this thesis, only single creature evaluation was performed. 
@@ -78,7 +83,7 @@ Each environment defines the type of planetary physics simulation. %
 %
 The one type of environment, flat plane, simulates the terrain and the creatures using newtonian mechanical physics. %
 %
-To do that, the simulator uses the Bullet Physics engine\cite{bib:BulletPhysics2015} to simulate a terrain for the creatures to move on and builds the creatures from different rigid body primitive types (such as boxes or capsules) coupled by joint constraints with different configurations. %
+To do that, the simulator uses the Bullet Physics engine \cite{bib:BulletPhysics2015} to simulate a terrain for the creatures to move on and builds the creatures from different rigid body primitive types (such as boxes or capsules) coupled by joint constraints with different configurations. %
 %
 The Bullet Physics engine is a numerical classical mechanics simulation engine, featuring rigid body as well as soft body physics. %
 %
@@ -90,18 +95,18 @@ The most robust results were achieved using the Featherstone Multibody solver, t
 %
 To date this model only supports single degree of freedom joints, however this does not affect the evolutionary optimization much. %
 %
-Three degrees of freedom joint can easily be approximated by three one degree of freedom joints, as long as the 3 1-DoF joints do not gimbal-lock i.e. two of the degrees of freedom fall together on one.
+Three degrees of freedom joint can easily be approximated by three one degree of freedom joints, as long as the three joints do not gimbal-lock, i.e. two of the degrees of freedom fall together on one.
 
 \subsection{Epochs}
 % rev. 2
 
-An epoch of a certain planet models the changes of environmental factors, which induce a change of the fitness landscape on the planet. %
+The simulator allows epochs for planets to be defined, which model the changes of environmental factors, inducing a change of the fitness landscape on the planet. %
 %
 What is considered fit in one epoch might not be fit in another, therefore creatures have to adapt when the fitness changes. %
 %
-In the simulation, an epoch is represented by a set of juries (fitness functions) and a transition condition, which, when met, ends the epoch and starts the next epoch. %
+In the simulator, an epoch is represented by a set of juries (fitness functions) and a transition condition, which, when met, ends the epoch and starts the next epoch. %
 %
-In the simulator, only one single infinite epoch was used, since there was no need in the experiments to change fitness conditions.
+However, in the experiments of this thesis, only one single infinite epoch was used, since there was no need in the experiments to change fitness conditions.
 
 \subsubsection{Juries}
 % rev. 5
@@ -110,13 +115,13 @@ Juries or fitness functions are part of an epoch in which they are active. %
 %
 A jury collects data on a creature performance during its evaluation and finally rates the performance according to its definition of fitness. %
 %
-Commonly used juries of the simulator are the individual's average escape velocity with respect to the origin \mbox{(\textit{AverageVelocityJury})}, the average height above ground of all body parts \mbox{(\textit{AverageHeightJury})} or the number of ground contacts during the evaluation \mbox{(\textit{ContactsQtyJury})}. %
+For the purpose of the experiments, juries measuring the individual's average escape velocity with respect to the origin \mbox{(\textit{AverageVelocityJury})}, the average height above ground of all body parts \mbox{(\textit{AverageHeightJury})} or the number of ground contacts during the evaluation \mbox{(\textit{ContactsQtyJury})} were developed. %
 %
 Additionally, each jury has a combination weight, which indicates the weight of this performance rating in the total performance evaluation of the creature, and a sorting direction, which indicates whether a higher rating is considered better or worse than a lower rating for this type of fitness value. %
 %
 Fitness values of different types of juries then are combined as a weighted sum of  linear ranking scores, where the scores are gained from competitive performance rankings of all creatures of one population, once for each jury type. %
 %
-The culling procedure will be described in section \ref{subsubsection:Culling}. %
+The culling procedure is described in section \ref{subsubsection:Culling}. %
 %
 The following paragraphs describe the four common jury types of the simulator.
 
@@ -130,7 +135,7 @@ This jury inhibits creatures that grow very tall and then only fall over or crea
 %
 This measure is scaled by the edge length of the total volume cube (\eqref{eqn:body-cube-root-length}) of the creature to achieve a scale-invariant measure as described in the section \ref{subsec:creatures}.
 
-\paragraph{Ground Contact Quantity Jury} The ground contact quantity jury measures the number of limbs that come in contact with ground during the performance. %
+\paragraph{Ground Contact Quantity Jury} The ground contact quantity jury measures the number of body parts that come in contact with ground during the performance. %
 %
 This jury is meant to reduce the number of contact points to enforce the usage of legs and inhibit rolling creatures.
 
@@ -142,9 +147,11 @@ This jury, in contrast to the ground contact quantity jury, does not limit the n
 \label{subsec:populations}
 % rev. 2
 
-A population of creatures in the simulator lives on a certain planet. %
+One or multiple populations of creatures in the simulator can live together on the same planet. %
 %
-Depending on the evolution settings of the planet, one creature, multiple creatures of one population, multiple creatures of multiple populations or multiple whole populations are evaluated at the same time within one evaluation slot. %
+Through the evolution settings of the planet it is possible to define the kind of interaction within a populations and among different populations. %
+%
+Available are the settings to evaluate one creature at a time, multiple creatures of one population together, multiple creatures of multiple populations or multiple whole populations at the same time within one evaluation slot. %
 %
 A population is initialized with a certain initial number of individuals. %
 %
@@ -152,7 +159,7 @@ The individuals can be randomly generated creatures or model organisms, the latt
 %
 During the evaluation of a population, the number of individuals generally falls below the original population size, because several individuals are culled early during the evaluation. %
 %
-This happens when creatures surpass boundaries of physical realism (a main source of this is when creatures generate high joint torques that lead to very fast body part velocity, leading to unrealistic torques that lift creatures off the ground and make them fly). %
+This happens when creatures apply unrealistic torques to their body (a main source of this is when creatures generate high joint torques that lead to very fast body part velocity, leading to unrealistic torques that lift creatures off the ground and make them fly). %
 %
 Therefore, the simulation culls them early to remove them from further consideration early on.
 
@@ -179,9 +186,9 @@ size(C) = \sqrt[3]{\sum\limits^{N(C)}_{i=1} V(p_i)}
 \label{eqn:body-cube-root-length}
 \end{equation}
 
-The size measure is most important, because it is used to scale the fitness functions involving distances. %
+The size measure ensures that the fitness functions involving distances measuring different sizes of creatures are scaled appropriately to make a comparison fair. %
 %
-Thereby it is possible to make a distance travelled independent of the creature size, meaning that a larger creature gets the same fitness for travelling a larger distance as a smaller creature for a smaller distance, if the ratios between creature size and respective travelled distance are the same for both creatures.
+By applying it as a scaling factor, it is possible to make a distance travelled independent of the creature size, meaning that a larger creature gets the same fitness for travelling a larger distance as a smaller creature for a smaller distance, if the ratios between creature size and respective travelled distance are the same for both creatures.
 
 \subsubsection{Genome}
 %rev. 3
@@ -196,20 +203,6 @@ The encoding structure of the genome is one of the base structures of the simula
 %
 It encodes both morphology and the controller of the creature. %
 %
-Inspired by biological DNA, the genome of the creature uses an indirect encoding. %
-%
-As opposed to direct encoding, indirect encoding does not encode every element of the phenotype explicitly, but uses element classes and branches between them to encode their relations. %
-%
-The advantage of indirect encodings is that an indirect coding evolves element classes instead of element instances, which leads to a higher abstraction of phenotype building blocks within the genome. %
-%
-A sequence of element classes, forming an abstract, higher order feature such as a type of leg, can thus be repeatedly expressed within a creature morphology in different scalings and symmetries. %
-%
-The classes therefore help to evolve similar, repeated, morphological elements such as limbs of different sizes or symmetrical leg pairs, which all use the same leg definition in the genotype. %
-%
-To visualize the difference between an indirect and a direct encoding, an example creature is represented once in indirect encoding (Fig. \ref{figure:indirect-genotype}) and once in direct encoding (Fig. \ref{figure:direct-encoding}). %
-%
-In the phenotype section, the creature's morphology resulting from both encodings is shown (Fig. \ref{figure:phenotype}). %
-
 The genome defines a directed, possibly cyclic graph, whose nodes are called morphogenes, defining the classes of body parts, and whose edges are called morphogene branches, defining the joint relations in between the body parts. %
 %
 A morphogene definition (Fig. \ref{figure:genome-structure}) consists of the primitive type of the body part (a cuboid or capsule), the body part's dimensions, its base orientation in space, material properties such as friction, restitution and color, and a direction for the joint anchor. %
@@ -221,13 +214,12 @@ Furthermore, the morphogene contains a number of morphogene branches and influen
 The influence factors in the morphogene are the repetitions limit, which limits the number of repetitions of that morphogene along one top-bottom branch, and the segment-shrink factor, which shrinks all dimensions of the morphogenes branched to from this morphogene.
 
 A morphogene branch (Fig. \ref{figure:genome-structure}) consists of the following joint properties. %
-
+%
 The pitch and yaw axis define two of the three orthogonal joint rotation axes, the third being implicitly defined by the cross product. %
-
 The joint rotational limits for the pitch, yaw and roll degree of freedom limit the rotation to a certain range. %
-
+%
 The joint damping coefficients for all degrees of freedom cause the joint to be damped, the coefficients representing \(c\) in the damping force equation \(F = -c \cdot \dot x\). %
-
+%
 Furthermore, the morphogene branch contains a controller gene and some additional influence factors. %
 %
 The influence factors in the morphogene branch are the flip and the mirror flag, responsible for two types of symmetry, that are described in the context of the embryogenesis in section \ref{subsec:embryogenesis}.
@@ -239,6 +231,20 @@ The sinusoidal controller gene defines a controller emitting a sinusoidal signal
 The chaotic controller gene defines a chaotic controller, through the type of chaotic system, the initial conditions of the system, and the integration step. %
 %
 The resulting sinusoidal and chaotic controller are described in their respective sections \ref{sec:sinusoidal-controllers} and \ref{sec:chaotic-controllers}.
+
+Inspired by biological DNA, the genome of the creature uses an indirect encoding. %
+%
+As opposed to direct encoding, indirect encoding does not encode every element of the phenotype explicitly, but uses element classes and branches between them to encode their relations. %
+%
+The advantage of indirect encodings is that an indirect coding evolves element classes instead of element instances, which leads to a higher abstraction of phenotype building blocks within the genome. %
+%
+A sequence of element classes, forming an abstract, higher order feature such as a type of leg, can thus be repeatedly expressed within a creature morphology in different scalings and symmetries. %
+%
+The classes therefore help to evolve similar, repeated, morphological elements such as body parts of different sizes or symmetrical leg pairs, which all use the same leg definition in the genotype. %
+%
+To visualize the difference between an indirect and a direct encoding, an example creature is represented once in indirect encoding (Fig. \ref{figure:indirect-genotype}) and once in direct encoding (Fig. \ref{figure:direct-encoding}). %
+%
+In the phenotype section, the creature's morphology resulting from both encodings is shown (Fig. \ref{figure:phenotype}). %
 
 \begin{figure}[H]
 \hspace*{-0.2in}
@@ -267,15 +273,91 @@ The resulting sinusoidal and chaotic controller are described in their respectiv
 \subsubsection{Phenome}
 % rev. 3
 
-Phenomes are the fully developed versions of genomes and are represented as a tree. %
+From the class definitions in a genome, a fully developed phenome consisting of morphology and control system can be transcribed. %
+%
+The phenome, unlike the genome, is represented as a tree, because the cycles of the graph were broken during the transcription process. %
 %
 In traditional genetic algorithms, genotypes usually do not have a development stage where the genotype is transcribed into a phenotype because the traditional genome can be directly evaluated. %
 %
 In modern approaches however, it is often impossible to evaluate the individual directly based on the genotype, especially when the genome structure uses indirect encoding as is the case in this simulation. %
 %
-Therefore, the genotype first has to be developed through a process called the Embryogenesis.
+Therefore, the genotype first has to be developed into a phenotype through a transcription process called the Embryogenesis.
 
-In the Minemonics simulator, two different rigid body constraint models were evaluated for their stability when used within an evolutionary process. %
+\paragraph{Embryogenesis}
+\label{subsec:embryogenesis}
+
+The Embryogenesis of a creature is a straight-forward process of transcribing a genotype into a phenotype. %
+%
+Starting from the root morphogene, the genome is expanded in a breath-first-search manner. %
+%
+This means that the process starts at the root node and transcribes the root's child nodes first, before moving on to the higher degree children. %
+%
+To store the intermediate results of the generation process, the Embryogenesis uses phenotype generators. %
+%
+Intermediate results are the morphogene branch of the parent morphogene and the parent body part element, the position and orientation of the current generation process, the current shrinkage factor of the generated body parts, if this is a flipped or mirrored branch, the length of the current root to leaf path and a list of the number of repetitions of different morphogene classes along this branch. %
+%
+The Embryogenesis is influenced by so called influence factors, which are propagated along the top-bottom path of the phenotype-tree. %
+%
+The influence factors, as mentioned before, are the flip and mirror flag of the morphogene branch and the current shrink factor, the maximum repetition limits, and the total number of body parts of the morphogene. %
+%
+The flip flag causes the embryogenesis to transcribe a top-bottom genome branch twice in the phenotype, once in its original form and once in flipped form. %
+%
+Flipping means that all positional and orientational definitions of the branch and following body parts are negated to create a second flipped version of the original genome branch. %
+%
+The mirror flag causes the embryogenesis to transcribe the genome branch twice in the phenotype, once in its original form and once a mirrored form mirrored the primary axis of the body part the branch is attached to. %
+%
+The current segment shrink factor shrinks all body part dimensions of the morphogene the branch points to and propagates along further branches of that morphogene. %
+%
+The maximum repetition limits, one per morphogene, permit or deny a further repetition of a body part along this top-bottom path of the phenotype tree. %
+%
+The total number of body parts causes the Embryogenesis stop when reached by the current body part quantity. %
+
+The following pseudo code \ref{code:embryogenesis} describes the procedure of the embryogenesis. %
+
+\begin{figure}[H]
+\scriptsize
+\textbf{Inputs:} Genotype \textit{genotype} of the individual\\
+\textbf{Result:} Fully developed morphology and controller of the creature
+\begin{PseudoCode}[otherkeywords={create,add,exit,build,append,place,get,each},emph={rootMorphogene,genome,generatorsList, phenotypeGenerator,segmentsDepthLimit,currentBodyPartQty,childBodyPart,generator,morphogeneBranch,phenotypeGenerators,genotype,parentBodyPart,morphogene,.,maxBodyPartQty,morphogeneBranches,branch,joint,controller,orientation,baseOrientation,repetitionsList},emphstyle={\bfseries\textit}]
+get rootMorphogene from genotype
+phenotypeGenerator.morphogene = rootMorphogene
+phenotypeGenerator.segmentsDepthLimit = 0
+currentBodyPartQty = 0
+phenotypeGenerator.baseOrientation = Identity
+phenotypeGenerator.repetitionsList = {}
+add phenotypeGenerator to generatorsList
+
+while generatorsList is not empty
+	get generator from generatorsList
+	
+	exit if generator.segmentsDepthLimit = genotype.segmentsDepthLimit or currentBodyPartQty = genotype.maxBodyPartQty
+	
+	build new childBodyPart according to generator.morphogene, generator.flipped and generator.mirrored
+	
+	if childBodyPart has to be attached to a parentBodyPart
+		append childBodyPart to parentBodyPart
+		build joint & controller according to generator.morphogeneBranch
+
+	rotate generator.baseOrientation with childBodyPart.orientation
+	
+	get morphogeneBranches from generator.morphogene
+	
+	for each branch in morphogeneBranches
+		if branch.morphogene not exhausted in generator.repetitionsList
+			create new phenotypeGenerator or multiple if branch is flipped or mirrored
+			copy phenotypeGenerator settings from generator
+			phenotypeGenerator.segmentsDepthLimit += 1
+			phenotypeGenerator.repetitionsList[branch.morphogene] += 1
+			phenotypeGenerator.morphogeneBranch = branch
+			add phenotypeGenerator to generatorsList
+		
+	currentBodyPartQty +=1
+\end{PseudoCode}
+\caption{Developing a creature using Embryogenesis}
+\label{code:embryogenesis}
+\end{figure}
+
+To ensure a stable simulation of the evolved creature bodies, two different rigid body constraint models were evaluated for their stability when used within an evolutionary process. %
 %
 Both phenome models are based on the same representation, but the important difference is the underlying numerical physics simulation model. %
 %
@@ -287,7 +369,7 @@ Instability here means that a single invalid joint definition leads to convergen
 %
 Secondly, instability can be caused by an individual strained by tensions, because the numerical solver is unable to solve multiple contradicting constraints, and therefore applies high forces and torques to resolve the constraints despite obvious contradictions. %
 %
-This issue could be fixed by using the Featherstone Multibody representation. 
+This issue could be fixed by using the Featherstone Multibody representation and appropriate force scaling. 
 
 \begin{figure}[H]
 \centering
@@ -297,14 +379,30 @@ This issue could be fixed by using the Featherstone Multibody representation.
 \label{figure:phenotype}
 \end{figure}
 
+\subsubsection{Force scaling}
+
+To move the body parts of a creature, an appropriate joint torque has to be applied. %
+%
+The appropriate torque depends on the weight of both body parts \((mass_1, mass_2)\) connected by the joint. %
+%
+To keep the torque tuning as simple as possible, the following formula was used: %
+%
+\[torque(joint_n) = scaling\_factor \cdot mass_1 \cdot mass_2\] %
+% 
+By hand-tuning the \(scaling\_factor\) to a value where creatures could lift themselves, but could not propel themselves forward too easily, the \(scaling\_factor\) was set to \(0.7\), which gives most evolved creatures a good stability. %
+%
+In the case of too much torque applied, some of the creatures begin to hover, however this issue is mostly resolved by discarding creatures that hover higher than a certain threshold above ground. %
+
 \subsubsection{Constrained Rigid-body Phenotype}
 % rev. 2
 
-The Constrained Rigid-body Phenotype model is built from rigidbody primitives and typed joint constraints. %
+The Constrained Rigid-body Phenotype model is built from rigid-body primitives and typed joint constraints. %
 %
 Every rigid-body has a full representation of its own position and rotation (Figure \ref{figure:maximal-vs-reduced}), which is then influenced by gravity, other rigid-bodies and the joint constraints. %
 %
-A joint constraint constrains two rigid-bodies by defining the center of rotation (CoR) of the joint in both body part coordinate reference frames, and then tries to keep both CoR definitions overlapping in the world reference frame under the additional constraints of joint limits and other influences.  %
+A joint constraint constrains two rigid-bodies by defining the center of rotation of the joint in both body part coordinate reference frames. %
+%
+To keep up the joint constraint, the simulation tries to keep both center of rotation definitions overlapping in the world reference frame under the additional constraints of joint limits and other influences.  %
 %
 Many joint constraint types with different features exist, mainly because some constraints have a simpler constraint row representation than others. %
 %
@@ -340,19 +438,11 @@ Therefore, very invalid or strongly contradicting constraint groups are composed
 %
 Since in iterative constraint solvers, the constraint rows are not solved all at the same time but sequentially, the contradicting constraints then apply high forces and torques to the single rigid-bodies to resolve the invalid constraint or contradicting constraints, leading to pseudo-forces, that produce unrealistic physics movement. %
 %
-Therefore, the Constraint Rigidbody Phenotype was abandoned and the Featherstone Multibody Phenotype model was developed. %
+Therefore, the Constraint Rigidbody Phenotype was abandoned and the phenotype was reimplemented using Featherstone Multibody model. %
 %
 It might be, that using a more constrained genotype representation would have lead to only valid and non-contradicting constraints, but such a representation could not be found during the time of this Thesis. %
 %
 A more in-depth discussion of the different solvers can be found in \cite{bib::Coumans2014}.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{Pictures/evolutionary-optimization/maximal-vs-reduced-coordinates.pdf}
-
-\caption[Maximal vs. reduced coordinates]{Maximal vs. reduced coordinates. The text describes how a complex structure, and a hinge and slider constraint are represented in maximal (left) and reduced (right) coordinates. The Constrained Rigidbody Phenotype uses maximal coordinates, the Featherstone Multibody Phenotype uses reduced coordinates. Image from \cite{bib::Coumans2014}.}
-\label{figure:maximal-vs-reduced}
-\end{figure}
 
 \subsubsection{Featherstone Multibody Phenotype}
 \label{subsec:featherstone-multibody}
@@ -374,6 +464,14 @@ The Featherstone representation, however, can not deal with circular structures 
 This phenotype is very robust when it comes to hand-made as well as evolved phenotypes. %
 %
 That is why it is more suitable for evolving virtual creatures. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Pictures/evolutionary-optimization/maximal-vs-reduced-coordinates.pdf}
+
+\caption[Maximal vs. reduced coordinates]{Maximal vs. reduced coordinates. The text describes how a complex structure, and a hinge and slider constraint are represented in maximal (left section of image) and reduced (right section of image) coordinates. The Constrained Rigidbody Phenotype uses maximal coordinates, the Featherstone Multibody Phenotype uses reduced coordinates. Image from \cite{bib::Coumans2014}.}
+\label{figure:maximal-vs-reduced}
+\end{figure}
 
 \subsubsection{Model Organisms}
 
@@ -451,89 +549,21 @@ It consists of differently configured joints and is mainly used to debug the Gen
 \label{figure:ragdoll}
 \end{figure}
 
-\subsection{Embryogenesis}
-\label{subsec:embryogenesis}
-
-The Embryogenesis of a creature is a straight-forward process of transcribing a genotype into a phenotype. %
-%
-Starting from the root morphogene, the genome is expanded in a breath-first-search manner. %
-%
-This means that the process starts at the root node and transcribes the root's child nodes first, before moving on to the higher degree children. %
-%
-To store the intermediate results of the generation process, the Embryogenesis uses phenotype generators. %
-%
-Intermediate results are the morphogene branch of the parent morphogene and the parent body part element, the position and orientation of the current generation process, the current shrinkage factor of the generated body parts, if this is a flipped or mirrored branch, the length of the current root to leaf path and a list of the number of repetitions of different morphogene classes along this branch. %
-%
-The Embryogenesis is influenced by so called influence factors, which are propagated along the top-bottom path of the phenotype-tree. %
-%
-The influence factors, as mentioned before, are the flip and mirror flag of the morphogene branch and the current shrink factor, the maximum repetition limits, and the total number of body parts of the morphogene. %
-%
-The flip flag causes the embryogenesis to transcribe a top-bottom genome branch twice in the phenotype, once in its original form and once in flipped form. %
-%
-Flipping means that all positional and orientational definitions of the branch and following body parts are negated to create a second flipped version of the original genome branch. %
-%
-The mirror flag causes the embryogenesis to transcribe the genome branch twice in the phenotype, once in its original form and once a mirrored form mirrored the primary axis of the body part the branch is attached to. %
-%
-The current segment shrink factor shrinks all body part dimensions of the morphogene the branch points to and propagates along further branches of that morphogene. %
-%
-The maximum repetition limits, one per morphogene, permit or deny a further repetition of a body part along this top-bottom path of the phenotype tree. %
-%
-The total number of body parts causes the Embryogenesis stop when reached by the current body part quantity. %
-
-The following pseudo code \ref{code:embryogenesis} describes the procedure of the embryogenesis. %
-
-\begin{figure}[H]
-\scriptsize
-\textbf{Inputs:} Genotype \textit{genotype} of the individual\\
-\textbf{Result:} Fully developed morphology and controller of the creature
-\begin{PseudoCode}[otherkeywords={create,add,exit,build,append,place,get,each},emph={rootMorphogene,genome,generatorsList, phenotypeGenerator,segmentsDepthLimit,currentBodyPartQty,childBodyPart,generator,morphogeneBranch,phenotypeGenerators,genotype,parentBodyPart,morphogene,.,maxBodyPartQty,morphogeneBranches,branch,joint,controller,orientation,baseOrientation,repetitionsList},emphstyle={\bfseries\textit}]
-get rootMorphogene from genotype
-phenotypeGenerator.morphogene = rootMorphogene
-phenotypeGenerator.segmentsDepthLimit = 0
-currentBodyPartQty = 0
-phenotypeGenerator.baseOrientation = Identity
-phenotypeGenerator.repetitionsList = {}
-add phenotypeGenerator to generatorsList
-
-while generatorsList is not empty
-	get generator from generatorsList
-	
-	exit if generator.segmentsDepthLimit = genotype.segmentsDepthLimit or currentBodyPartQty = genotype.maxBodyPartQty
-	
-	build new childBodyPart according to generator.morphogene, generator.flipped and generator.mirrored
-	
-	if childBodyPart has to be attached to a parentBodyPart
-		append childBodyPart to parentBodyPart
-		build joint & controller according to generator.morphogeneBranch
-
-	rotate generator.baseOrientation with childBodyPart.orientation
-	
-	get morphogeneBranches from generator.morphogene
-	
-	for each branch in morphogeneBranches
-		if branch.morphogene not exhausted in generator.repetitionsList
-			create new phenotypeGenerator or multiple if branch is flipped or mirrored
-			copy phenotypeGenerator settings from generator
-			phenotypeGenerator.segmentsDepthLimit += 1
-			phenotypeGenerator.repetitionsList[branch.morphogene] += 1
-			phenotypeGenerator.morphogeneBranch = branch
-			add phenotypeGenerator to generatorsList
-		
-	currentBodyPartQty +=1
-\end{PseudoCode}
-\caption{Developing a creature using Embryogenesis}
-\label{code:embryogenesis}
-\end{figure}
-
 \subsection{Reaper}
 \label{subsection:Reaper}
 % rev. 2
 
 At the end of all evaluations for a certain population's generation, the simulation arrives at the evolution step. %
 %
-In the evolution step, the following operations are performed by the reaper: Culling a percentage of the worst performing creatures according to the total fitness ranking, variation of the remaining creatures with different variance operators according to the respective percentages and sowing of new creatures partly from crossover and random generation. %
+In the evolution step, the following operations are performed by the reaper: %
 %
-In the Minemonics simulator, \unit[30]{\%} are culled first. The remaining creatures are equally distributed among the variation operations Gene specification, Gene split, Gene purge, Branch specification, Grow stub gene and graft feature mutation, another equal share from the fittest creatures is left untouched following an elitism strategy. Then the missing \unit[30]{\%} are replaced with equal amounts of creature generated by crossover and randomized instantiation.
+Culling a percentage of the worst performing creatures according to the total fitness ranking, variation of the remaining creatures with different variance operators according to the respective percentages and sowing of new creatures partly from crossover and random generation. %
+%
+In the Minemonics simulator, the creatures are sorted according to their fitness, then \unit[30]{\%} are culled. %
+%
+The remaining creatures are equally distributed among the variation operations Gene specification mutation, Gene split mutation, Gene purge mutation, Branch specification mutation, Grow stub gene mutation and graft feature mutation, the topmost equal share, being the fittest creatures, is left untouched following an elitism strategy. %
+%
+Then the missing \unit[30]{\%} are replaced with equal numbers of creatures generated by crossover and randomized instantiation.
 
 In the following sections, the different operations are described in detail.
 
@@ -554,9 +584,9 @@ Therefore, competitive ranking was chosen to combine the fitness functions. %
 %
 This means that for each fitness function, the individuals are sorted according to their respective fitness value and a score is assigned to each rank (in the simulator, the score for a rank is the number of individuals that performed worse). %
 %
-Then, for each individual $c_n$ for $m$ fitness functions, the scores $r_i$ multiplied by the respective fitness function weights $w_i$ are summed. 
+Then, for each creature $c_n$ for $m$ fitness functions, the scores $r_i$ multiplied by the respective fitness function weights $w_i$ are summed:
 
-\[\text{fitness score}_{c_n} = \sum\limits^m_{i=1} r_i \cdot w_i \]
+\[\text{fitness score}_{c_n} = \sum\limits^m_{i=1} r_i \cdot w_i \].
 
 Finally, the individuals are sorted by their fitness score, which results in their total ranking according to their fitness. %
 %
@@ -578,13 +608,14 @@ To create new offspring, from every possible parent a number of offsprings is ge
 %
 The number of offspring per parent is found by diving the total number of new creatures to be created by crossover by the number of parents. %
 %
-Having found one of the parent, the other parent is chosen as follows: With \(\unit[50]{\%}\) chance, the parent is chosen as one from a tournament of 10, where the best creature of that tournament is chosen as the second partner. %
+Having found one of the parent, the other parent is chosen as follows: With each \(\unit[50]{\%}\) chance, the parent is either chosen as one from a tournament of 10, where the best creature of that tournament is chosen as the second partner or the second parent is chosen at random from the population. %
 %
-Each tournament creature is drawn from the population using a normal positive integer distribution such that the index of the first creature has the highest probability to be chosen and the \(\sigma\) is such that the probability decays nearly completely that the index of the last creature is chosen. %
+The tournament entails taking 10 creatures from the population such that the index of the best performing creature of the population has the highest probability to be chosen and the index of the worst performing creature has the lowest chance of being chosen. %
 %
-With the remaining \(\unit[50]{\%}\) chance, the second parent is chosen at random from the population.
+The probabilities for the indices come from a normal distribution with \(\mu\) at index 0 and the two \(\sigma\) distance at the last index. %
+%
 
-The actual crossover process is very similar to the commonly known one. %
+The actual crossover process is very similar to the commonly known one from biology. %
 %
 From the genomes of each parent a subsegment is taken and the second is directly appended to the first one. %
 %
@@ -608,13 +639,23 @@ The functional segments could for instance represent a specific leg or main body
 
 All other variational operators work on single elements of a single genome. %
 %
-The mutations modify specific aspects of the genome and are specifically made for the genomic structure.
+The mutations modify specific aspects of the genome and are specifically made for the genomic structure.%
+%
+The population is partitioned into the same number of equally sized partitions as there are mutations including grafting. %
+%
+Based on the currently implemented mutations, this means that 6 equally size partitions are produced. %
+%
+To each of these partitions, one mutation is applied, the order being the same as they are presented here. %
+%
+The reason for the order is that the worse a creature performs, the stronger it is mutated. %
+%
+The probabilities were chosen by hand based on their success as a trade-off between a too low and a too high effective mutation rate. %
 
 \paragraph{Gene Specification Mutation}
 
 The gene specification mutation applied to a genome iterates over all its morphogene classes. %
 %
-For each class, with probability $0.2$, the morphogene is reinitialized with random values. %
+Each morphogene, with probability $0.2$, is reinitialized with random values. %
 %
 This affects all values except for the morphogene branches which stay unchanged.
 
@@ -622,7 +663,7 @@ This affects all values except for the morphogene branches which stay unchanged.
 
 The gene split mutation applied to a genome iterates over all morphogene classes. %
 %
-For each class, with probability $0.2$, the morphogene is split along the X, Y or Z axis into two morphogenes occupying roughly the same total volume as the original body part. %
+Each morphogene, with probability $0.2$, is split along the X, Y or Z axis into two morphogenes occupying roughly the same total volume as the original body part. %
 %
 The morphogenes are then connected with a single branch representing a completely limited joint.
 
@@ -644,7 +685,7 @@ For each class, with probability $0.2$, a random morphogene branch is chosen and
 
 The grow stub gene mutation applied to a genome iterates over all morphogene classes. %
 %
-For each class, with probability $0.6$, $x$ new branches are added to the morphogene, where $x \in [0,2]$. %
+Each morphogene, with probability $0.6$, $x$ new branches are added to the morphogene, where $x \in [0,2]$. %
 %
 The branches reconnect the stub gene to others and therefore increase the interconnectivity of unconnected morphogene classes.
 
@@ -668,7 +709,7 @@ In single creature mode, which was used for all experiments, every creature is e
 %
 If a creature consists of zero or only one body part, the creature is discarded, since it is degenerate and can not move at all, therefore is worthless to be evaluated. %
 %
-Furthermore, the evolution discards creatures that produce very high joint velocities, which is usually an indication that the creature might exploit unrealistic physical forces. %
+Furthermore, the evolution discards creatures that produce high joint velocities above \(\unit[60]{Hz}\), which is usually an indication that the creature might exploit unrealistic physical forces. %
 %
 During the evaluation of the other creatures, the juries evaluate the performance and calculate the combined fitness value at the end of the evaluation. %
 %

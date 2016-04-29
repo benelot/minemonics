@@ -19,20 +19,20 @@ x(t) + \delta x(t) = f^t(x_0 + \delta x_0)\\
 
 To measure the sensitivity to the initial conditions, the evolution of the perturbance \(\delta x_0\) through the system can be calculated:
 
-\[||\delta x(t)|| = \||\delta x_0|| e^{\mu t}\]
+\[||\delta x(t)|| = \||\delta x_0|| e^{\lambda\ t}\]
 
-The \(\mu\) in that case is also called the Largest Lyapunov exponent (LLE). %
+The \(\lambda\) in that case is also called the Largest Lyapunov exponent (LLE). %
 %
-If \(\mu > 0\), then the trajectory diverges exponentially. %
+If \(\lambda\ > 0\), then the trajectory diverges exponentially. %
 %
-A \(\mu = 0\) means, that the system is in a critical state, because its trajectories neither diverge nor converge. %
+A \(\lambda\ = 0\) means, that the system is in a critical state, because its trajectories neither diverge nor converge. %
 %
-However, if \(\mu < 0\), it expresses the convergence of a trajectory to a stable point or orbit. %
+However, if \(\lambda\ < 0\), it expresses the convergence of a trajectory to a stable point or orbit. %
 %
-The quantification would be done by plotting the Log divergence distance ratio:
+The quantification would be done by plotting the Log ratio of the divergence:
 
-\[\log\left(\frac{||\delta x(t)||}{||\delta x_0||}\right) = \mu t\]
+\[\log\left(\frac{||\delta x(t)||}{||\delta x_0||}\right) = \lambda\ t\]
 %
-The LLE can then be found by line fitting segments of the time evolution log plot of the trajectory differences and then measuring the slope of the lines. %
+The LLE can then be found by line fitting segments of the time evolution log plot of the trajectory differences and by measuring the slope of the lines. %
 
 \end{document}

@@ -20,11 +20,11 @@
 \section{Evolved Creatures with Uncoupled Sinusoidal Controllers}
 \label{sec:evolved-sin-creatures}
 
-In the first experimental setting, the sinusoidal controller as described in \ref{sec:sinusoidal-controllers} was used to evolve creatures. %
+In the first experimental setting, the sinusoidal controller as described in section \ref{sec:sinusoidal-controllers} was used to evolve creatures. %
 %
 A population of 100 creatures was set up with an average velocity fitness function and a minimal height fitness function. %
 %
-The latter was chosen because the simulator had issues in the physical model setup that led to creatures with the ability to fly due to imaginary forces (as described in \ref{subsec:populations}). %
+The latter was chosen because the simulator had issues in the physical model setup that led to creatures with the ability to fly due to imaginary forces (as described in section \ref{subsec:populations}). %
 %
 The minimal height fitness function punished those creatures that reached a high average height, which is the case for creatures that are flying. %
 %
@@ -84,13 +84,13 @@ Creatures that exhibit successful locomotion seem to share a common ancestor, wh
 %
 Since the skin color is randomly set for one body part, the common ancestor could only have had all the same color and must have been replicated using crossover. %
 %
-In crossover (as described in \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. %
+In crossover (as described in section \ref{subsec:crossover}), subsections of the two participating creature genotypes are taken and combined into one new genotype. %
 %
 This process involves no mutations, therefore the crossover must have happened mainly among creatures sharing the same skin coloring. %
 %
 The elitism mechanism of the evolutionary process, passing the most successful creatures directly to the next generation, kept the first successful creature, that then generated an onset of an avalanche of successful creatures, flooding the population with very similar solutions. 
 
-The major drawback of the sinusoidal oscillator controller is that they do not show any adaption to the environment during the evaluation. %
+The major drawback of the sinusoidal oscillator controller is that it does not show any adaption to the environment during the evaluation. %
 %
 The only way for the controller to adapt its control signal is on the evolutionary time-scale through mutation, which does not result in an advantage for the individual in its current evaluation, but only helps a future generation of the individual to eventually converge to a new, applicable solution. 
 
@@ -105,7 +105,7 @@ Experimentally, this would mean that if the creatures exhibited periodic locomot
 %
 Showing that the controller or body part motion is less chaotic can be shown by calculating the largest Lyapunov exponent, which accounts for the amount of divergence of two slightly different initial conditions of the controller or the body part motion.
 
-The experiments were run on the chaotic controller as described in \ref{subsec:chua-circuit}. %
+The experiments were run on the chaotic controller as described in section \ref{subsec:chua-circuit}. %
 %
 Simple limiters can come in various ways, since they only must be natural to the system at hand \cite{bib:Corron2000}. %
 %
@@ -192,7 +192,7 @@ Therefore it was necessary to implement sensory feedback of the respective, cont
 %\hspace*{-1.2in}
 \input{Pictures/controllers/direct-limit-controller-joint-complex.tikz}
 
-\caption[The directly limited chaotic controller and joint complex]{The directly limited chaotic controller and its interaction with the joint. The gradient in the joint dynamics plot represents the damping of the joint, where darker coloring means a stronger damping force. The limiters defined through the environment and the joint properties constrain both the movement of the joint and the phase space of the chaotic controller. Through the constraint within the phase space, the controller can not exhibit its full dynamics any more and it stabilizes in certain periodic oscillations defined by the parameters.}
+\caption[The directly limited chaotic controller and joint complex]{The directly limited chaotic controller and its interaction with the joint. The gradient in the joint dynamics plot represents the damping of the joint, where darker coloring means a stronger damping force. The limiters defined through the environment and the joint properties constrain both the movement of the joint and the phase space of the chaotic controller. Through the constraint within the phase space, the controller can not exhibit its full dynamics anymore and it stabilizes in certain periodic oscillations defined by the parameters.}
 \label{figure:direct-limit-controller-joint-complex}
 \end{figure}
 
@@ -546,7 +546,7 @@ Changing the friction of the ground to a non-zero value increases the limiter im
 };
 	\end{tikzpicture}
 	\end{minipage}
-	\caption[Limited chaotic controller controlling model leg on ground with friction]{The ground with friction now shows a much more influential limiter. The model leg hits the ground several times while oscillating, which stabilizes several periodic orbits for one to two cycles. Finally the model leg comes to a rest as it blocks the oscillation as it falls to the ground while completely extended.}
+	\caption[Limited chaotic controller controlling model leg on ground with friction]{The ground with friction now shows a much more influential limiter. The model leg hits the ground several times while oscillating, which stabilizes several periodic orbits for one to two cycles. Finally, the model leg comes to a rest since the oscillation is blocked as it falls to the ground while completely extended.}
 	\begin{tabular}{l|ll}
 	\hline 
 	Gravity: 1g  & Sensors: & Joint position \(\rightarrow\) x(t),\\
@@ -568,7 +568,7 @@ In the plot \ref{figure:limited-damped-model-leg-collision2}, where  friction to
 %
 Both plots show how the controller can be robust or sensitive to limiters imposed by the environment.
 
-\paragraph{Influence of Damping} Damping is an indirect soft limiter applied to the physical joint system of the simple form: \(F_{damping} = c \cdot \dot{x} = c \cdot v\). %
+\paragraph{Influence of Damping} Damping is an indirect soft limiter applied to the physical joint system of the simple form: % \[F_{damping} = c \cdot \dot{x} = c \cdot v\]
 %
 However, since the joint space is coupled to the chaotic controller space through the sensors, one can also observe the influence of the damper onto the controller.
 
@@ -732,7 +732,7 @@ Conclusively, the damping of the system leads to a smoother limit cycle of the o
 
 \paragraph{Influence of the X Dimension Limiter} From the initial experiments on limiter configuration (\ref{figure:limited-model-leg5}), it is known that the velocity sensor limiting the y dimension could have been sufficient for the limiter control of the chaotic system. %
 %
-One can now observe the influence of the x dimension limiter when it is removed from the system. In this case, the initial conditions were set to \([0,0,0]\) to observe the complete trajectory.
+One can now observe the former influence of the x dimension limiter when it is removed from the system. In this case, the initial conditions were set to \([0,0,0]\) to observe the complete trajectory.
 
 \begin{figure}[H]
 	\centering
@@ -781,7 +781,7 @@ In conclusion it can be said that the stronger a chaotic system is limited throu
 
 The setup to evolve creatures integrating the chaotic controllers was intended to be an exploratory one. %
 %
-In order to observe examples of creatures that locomote using chaotic controllers, three simulators with each a separate evolutionary setting were started. %
+In order to observe examples of creatures that locomote using chaotic controllers, three simulators, each running a separate evolutionary setting, were started. %
 %
 Each setting has 100 individuals in one population, each with the same average velocity fitness function. %
 %
@@ -806,11 +806,11 @@ Thus, a controller might sometimes stabilize a periodic orbit at one point, but 
 \label{figure:z-2.4-3.19-chaotictrajectories}
 \end{figure}
 
-The simple limiters of the environment apparently stabilize a certain periodic orbit, but change, when the environment changes. %
+The simple limiters of the environment apparently stabilize a certain periodic orbit, but as the gait progresses, the limiters change and therefore the controller behavior changes. %
 %
 The controller therefore satisfies the idea of being adaptive to the environment, however it stayed in question if multiple controllers could be combined with a co-evolved morphology so that a satisfactory locomotion pattern would arise. %
 %
-The fitness function of average velocity totally leaves it up to the individual, how the movement would be achieved. %
+The fitness function of average velocity leaves it up to the individual, how the movement would be achieved. %
 %
 Evolutionary algorithms are very exploitive, meaning that the evolved solutions easily exploit everything they can find to satisfy the fitness functions. %
 %
@@ -871,7 +871,7 @@ The first creature is a walker. It has two large feet, of which it always moves 
 
 The walking creature features quasi-periodic orbits if the body parts are not limited by the ground. %
 %
-The quasi periodicity can be explained by the interdynamics generated by the different body parts moving simultaneously, therefore no single body part can follow a proper limit cycle. %
+The quasiperiodicity might be explained by the disturbance generated by the different body parts moving simultaneously, therefore no single body part can follow a proper limit cycle. %
 %
 The joint limits cause the joint dynamics to be periodic. %
 
@@ -1103,7 +1103,7 @@ The ground limiter moved into the phase space of the controller to the extent th
 };
 	\end{tikzpicture}
 	\end{minipage}
-\caption[On ground controller dynamics of the crawler]{Dynamics of a chaotic controller and joint if the jumper is on ground. With the additional limiter of the ground, the dynamics of the controller change dramatically and quasi periodic limit cycle can be observed. The ground limit seems to have moved below 1, which stabilizes the trajectory on a period 1 limit cycle, hence making the creature locomote.}
+\caption[On ground controller dynamics of the crawler]{Dynamics of a chaotic controller and joint if the jumper is on ground. With the additional limiter of the ground, the dynamics of the controller change dramatically and a quasiperiodic orbit can be observed. The ground limit seems to have moved below 1, which stabilizes the trajectory on a period 1 limit cycle, hence making the creature locomote.}
 \label{figure:crawler1-on-ground-controller-dynamics}
 \end{figure}
 

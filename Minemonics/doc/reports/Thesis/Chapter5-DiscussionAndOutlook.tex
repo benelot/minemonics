@@ -68,21 +68,39 @@ Applying higher or lower amounts of joint torque increases or decreases the orbi
 %
 However, in all cases the joint converges to a proper periodic orbit.
 
-In the evolved creature case, only some creatures could be found to feature simple limiter control behavior, while others do not it very prominently. %
+In the evolved creature case, only some creatures could be found to feature simple limiter control behavior, while others do not feature it very prominently. %
 %
 Still, given that stabilized orbits can be observed in some creatures makes it a valid hypothesis to be pursued further.
+%
+A reason for the lack of creatures with said control behavior might be that the torque scaling curves used to improve the robustness of the simulation to unrealistic behavior made it impossible for evolution to put a load on the creatures. %
+%
+The load from the creature's weight applied as a limiter to the chaotic controller might be a missing variable for the evolutionary algorithm so that the simulation struggles to find a solution. %
+%
+The problem could be fixed by keep the original torque scaling, but giving evolution a parameter to increase or decrease the actually applied torque. %
+%
+Another option would be to use a constant torque for all joints, so that the size of the body parts can be varied to apply a load. %
+%
+The second option might generate an unexpected optimum body part size, so that most other sizes are either a too strong or too weak load to be used. %
+%
+Also one has to pay attention when varying the weight ratios, as physics simulations are very sensitive to high weight ratios, hence a change in densities of different limbs could destabilize the simulation. %
+%
+Further studies might be necessary to find appropriate ways for evolution to express and apply simple limiters in order to simplify the emergence of locomotion.%
 
 An issue confronted with during the simulation run was, that no fitness function accounted for gait efficiency, therefore, some creatures considered fit by the fitness functions in use did not perform an efficient locomotion gait. %
 %
 The simulation additionally has a general tendency to come up with very messy creature morphologies exploiting oscillations of large amplitude, which would require large amounts of energy to keep up the resulting locomotion. %
 %
-An improvement to address this issue would be that a creature had an amount of energy to spend proportional to its size or weight, so that a creature could not waste an excessive amount of energy on inefficient movements. 
+An improvement to address this issue would be that a creature had an amount of energy to spend proportional to its size or weight, so that a creature could not waste an excessive amount of energy on inefficient movements. %
 
 Another issue to address in the future would be the configuration of the limiter. %
 %
 The current simple limiter was evaluated experimentally to stabilize a periodic orbit, which is an indication that the limiter is applied to the system. %
 %
-This could be addressed by a less restricting application of the sensory feedback, such as that a higher body part velocity would increase the size of the phase space of the chaotic system, so that dynamics of higher periodicity would arise. %
+This could be addressed by a less restricting limitation through the sensory feedback, for example the simple limiter could be applied by using a similar definition as that used in the example model of the Chua circuit. %
+%
+Making the position of the limit value a parameter could enable evolution to choose proper limiters, even though the experiment would be less agnostic of the simple limiter, but would answer the question if simple limiters can simplify locomotion to emerge. %
+%
+In another example, a higher body part velocity would increase the size of the phase space of the chaotic system, so that dynamics of higher periodicity would arise. %
 %
 However, it is in question how to design the limiter, because as it is important to not directly build in a desired outcome. %
 %

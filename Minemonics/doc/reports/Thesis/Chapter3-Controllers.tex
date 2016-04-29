@@ -50,7 +50,7 @@ One creature contains many such controllers, each having its own parameters and 
 %
 The controllers are therefore fully distributed within the body of the creature and run completely uncoordinated. %
 %
-Each sinusoidal signal emitted from the sinusoidal controller then is fed into a PID position controller to make the joint DoF follow the sinusoidal signal precisely. %
+Each sinusoidal signal emitted from the sinusoidal controller then is fed into a Proportional-Integral-Derivative position controller (PID) to make the joint DoF follow the sinusoidal signal precisely. %
 %
 In other words, the PID regulates the joint to the position instructed by the sinusoidal controller. %
 %
@@ -72,7 +72,7 @@ Consequently, a solution is only adapted by evolution to the task it was trained
 \label{sec:chaotic-controllers}
 % rev. 3
 
-The chaotic controller is based on a chaotic, complex, non-linear system (see \ref{subsec:chaotic-systems}). %
+The chaotic controller is based on a chaotic, complex, non-linear system (see section \ref{subsec:chaotic-systems}). %
 %
 The controller has its own internal dynamics and is either completely uninfluenced from outside or is influenced by sensory input from the morphology of the creature, which adapts the controller's dynamics. %
 %
@@ -96,7 +96,7 @@ We will first introduce chaotic systems which helps to understand the following 
 
 A chaotic system is a non-linear, dynamical system exhibiting chaotic dynamics. %
 %
-Chaos means that even though a system is deterministic, therefore also the future behavior is fully determined by the initial state of the system, the future of the system can not be predicted any more if the initial state is slightly varied. %
+Chaos means that even though a system is deterministic, therefore also the future behavior is fully determined by the initial state of the system, the future of the system can not be predicted anymore if the initial state is slightly varied. %
 %
 This property is one of the following three properties originally described by Robert L. Devaney \cite{bib:Devaney1989} to characterize chaotic dynamics:
 
@@ -113,7 +113,11 @@ As Edward Lorenz has put it, the present determines the future, but the approxim
 
 \textbf{Topological mixing} can be intuitively seen as in the example of the mixing of dyes, meaning that when the system evolves over time, it causes all regions of the phase space to be mapped onto each other by the dynamical system. %
 %
-Given any two open sets A and B out of the phase space of a dynamical system defined by the recurrence relation \[s_{n+1} = f(s_n)\], topological mixing means that there is some integer N, such that \[f^N(A) \cap B \neq 0\] %
+Given any two open sets A and B out of the phase space of a dynamical system defined by the recurrence relation %
+%
+\[s_{n+1} = f(s_n),\]
+%
+topological mixing means that there is some integer N, such that \[f^N(A) \cap B \neq 0\] %
 %
 That means that no matter where the dynamical system starts, eventually the system state will wind up arbitrarily close to any open set.
 
@@ -170,16 +174,21 @@ The circuit, remarkable because of its simplicity and rich variety of bifurcatio
 \label{figure:chuacircuit}
 \end{figure}
 
-Using Kirchhoff's circuit laws to derive the equations of the Chua circuit, we find the following non-linear ordinary differential equations with the variables x(t), y(t) and z(t).
+Using Kirchhoff's circuit laws to derive the equations of the Chua circuit, we find the following non-linear ordinary differential equations with the variables x(t), y(t) and z(t):
 
 \begin{align*}
-\frac{dx}{dt}&=\alpha (y-x-f(x)) &\frac{dx}{dt}\text{ is the voltage across the capacitor }C_1\\
-RC_2\frac{dy}{dt}&= (x-y+Rz) &\frac{dy}{dt}\text{ is the voltage across the capacitor }C_2\\
-\frac{dy}{dt}&=\beta (x-y+Rz) &\text{with } \frac{1}{RC_2} \text{ being }\beta\\
-\frac{dz}{dt}&=-\gamma y &\frac{dz}{dt}\text{ is the current across the inductor }L_1\\
-f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)} &f(x)\text{ describes the response of the piecewise linear resistor}
+\dot{x}&=\alpha (y-x-f(x)),\\
+RC_2\dot{y}&= (x-y+Rz) =\\
+\dot{y}&=\beta (x-y+Rz),\:\text{with } \frac{1}{RC_2} \text{ being }\beta\\
+\dot{z}&=-\gamma y,\\
 \end{align*}
 
+with \(\dot{x}\) being the voltage across the capacitor \(C_1\), \(\dot{y}\) being the voltage across the capacitor \(C_2\) and \(\dot{z}\) being the current across the inductor \(L_1\).
+%
+Furthermore, the piecewise linear resistor \(f(x)\) is defined by:
+%
+\[f (x) = \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)}\].
+%
 The Chua circuit was chosen as a model system of a chaotic controller because of its simple definition through the equations as well as it being a prior example system for simple limiter control in \cite{bib:Corron2000}. %
 %
 Corron et al. showed in two different chaotic systems, namely in the driven chaotic pendulum and the Chua circuit, how appropriate simple limiters can be applied to each system so that the chaotic behavior of each unbounded system could be controlled into behaviors of different periodicities. %
@@ -217,11 +226,13 @@ These initial conditions are used during the following experiments unless otherw
 \label{figure:chaoticchuacircuit}
 \end{figure}
 
-Then we introduce a simple tunable soft limiter \[\text{softLim}(x) = \frac{1}{2} \left(\tanh\left(\frac{limitValue - x}{softness}\right) + 1\right)\] with the limiter response shown in figure \ref{figure:softlimiterresponse}. %
+Then we introduce a simple tunable soft limiter \[\text{softLim}(x) = \frac{1}{2} \left(\tanh\left(\frac{limitValue - x}{softness}\right) + 1\right)\] with the limiter response shown in Figure \ref{figure:softlimiterresponse}. %
 %
 The limiter function is applied to one of the differential equations of the chaotic system and pulls its result to zero as it or one of the other equations surpass the $limitValue$ depending on which equation is defined to be the one triggering the limiter and which is the one to be limited.
 %
-In all of the following plots, the color of a certain state in the plot indicates how strongly the limiter influences that state.
+In all of the following plots, the color of the curve in the plot indicates how strongly the limiter influences that state, where 0 is no influence and 1 is fully limited. %
+%
+The limiter is drawn into the plots as a red line, indicating where the limiter is applied 50 \%. %
 
 \begin{figure}[H]
 \centering
@@ -265,7 +276,8 @@ The limiter influences the circuit by limiting the change of current flow \(\fra
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-8.png}
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-6.png}
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-4.png}
-\caption[Figure of chaotic behaviors in range 2.4-3.19]{Figure of chaotic behaviors in range 2.4-3.19. The limit values of the shown figures are \(3\), \(2.8\), \(2.6\) and \(2.4\).}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
+\caption[Figure of chaotic behaviors for limitValue in 2.4-3.19]{Figure of chaotic behaviors  for \(limitValue \in [2.4-3.19]\). The limit values of the shown figures are \(3\), \(2.8\), \(2.6\) and \(2.4\).}
 \label{figure:z-2.4-3.19-chaotictrajectories}
 \end{figure}
 
@@ -277,7 +289,8 @@ When choosing a \(limitValue \in [2.28,2.4[\), one can observe that the limiter 
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-35125.png}
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-30375.png}
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-28.png}
-\caption[Figure of behaviors in range 2.28-2.4]{Figure of behaviors in range 2.28-2.4. The limit values of the shown figures are \(2.375\), \(2.35125\), \(2.30375\) and \(2.28\). In the lower left and right plot, the slightly white coloring of the curve indicates the strength of the limiter influence.}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
+\caption[Figure of behaviors for limitValue in 2.28-2.4]{Figure of behaviors for \(limitValue \in [2.28,2.4]\). The limit values of the shown figures are \(2.375\), \(2.35125\), \(2.30375\) and \(2.28\). In the lower left and right plot, the white coloring of the curve near the limiter line indicates that the limiter is applied to \(\dot{z}\) by 40 \%.}
 \label{figure:z-2.28-2.4-chaotictrajectories}
 \end{figure}
 
@@ -291,7 +304,7 @@ The limiter is applied when a certain x(t) value is surpassed, therefore the lim
 %
 The trajectory thereby is pulled back onto a former orbit, which stabilizes the state onto that orbit. %
 %
-However, since the limiter is a very hard limiter, the period of the trajectory shows higher periods only in a very small limit value parameter window \([2.212,2.215]\) and then very quickly turns into period 1 within the parameter window \([1.83,2.212]\) with quicker convergence the nearer the limiter was placed to zero. %
+However, since the limiter is a very hard limiter, the period of the trajectory shows higher periods only in a very small limit value parameter window \(limitValue \in [2.212,2.215]\) and then very quickly turns into period 1 within the parameter window \([1.83,2.212]\) with quicker convergence the nearer the limiter was placed to zero. %
 %
 The system is highly sensitive to the exact position of the limiter because of the dense periodic orbits in the system, between which the state quickly switches when the limiter is slightly moved. %
 %
@@ -306,6 +319,7 @@ A self-similar pattern of increasing and decreasing convergence speeds can be ob
 
 \includegraphics[width=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-15-convergence.png}
 %\includegraphics[width=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-2-15.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle]{Figures of period 1 limit cycle with one with a fast and one with a slow convergence to the limit cycle. The limit values are \(2.183\) for the upper and \(2.15\) for the lower plots. The convergence to the limit cycle is grayed out so that the final limit cycle's visibility is enhanced.}
 \label{figure:z-1-limit-cycle-ctrajectories}
 \end{figure}
@@ -314,21 +328,22 @@ A self-similar pattern of increasing and decreasing convergence speeds can be ob
 \centering
 \includegraphics[width=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-1-83-convergence.png}
 %\includegraphics[width=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-13-1-83.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of another period 1 limit cycle]{Figure of period 1 limit cycle with again a fast convergence to the limit cycle using a limit value of \(1.83\). The plot to the right does not show the convergence trajectory, but instead show the periodic orbit after proper convergence.}
 \label{figure:z-fast-1-limit-cycle-trajectory}
 \end{figure}
 
-Below 1.81, the limiter is applied instantly, the trajectory drops in z direction to \(\approx-2.68343\) and then heads towards \([\infty,\infty,-2.68343]\), therefore can never escape the limiter again.
+Below \(limitValue = 1.81\), the limiter is applied instantly, the trajectory drops in z direction to \(\approx-2.68343\) and then heads towards \([\infty,\infty,-2.68343]\), therefore it can never escape the limiter again.
 
 \todo[inline]{Identify some periodic trajectories, possibly with the help of the group.}
 
 The limiter control gets more interesting when the softness is set to \(softness=0.5\), which corresponds to a softer limiter (Fig. \ref{figure:softlimiterresponse}). %
 %
-The softer limiter is applied earlier than the hard limiter because of its long tails from the \(\tanh()\) function, however, its influence is rather minimal yet gradually increasing when the limiter is approached. %
+The softer limiter is applied earlier than the hard limiter because of its long tails from the hyperbolic tangent function, however, its influence is rather minimal yet gradually increasing when the limiter is approached. %
 %
 An extended parameter window for the limiter parameter can now be found, being \(limitValue \in [2.3887,11.5065]\), where the limiter suppresses chaotic behavior and again reduces the number of times the trajectory switches back into the uppermost scroll.
 
-Within the parameter window \(limitValue \in [2.05888,2.387[\), the influence of the limiter keeps the trajectory in the lowermost scroll. %
+Within the parameter window \(limitValue \in [2.05888,2.3869]\), the influence of the limiter keeps the trajectory in the lowermost scroll. %
 %
 With the softer limiter, it is now much easier to find the parameter window to see the period doubling, because the parameter windows for the different periodicities are now much larger. 
 
@@ -358,6 +373,7 @@ The plots below show the periodic trajectories for various limit values. The con
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-5-2-292-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 8 limit cycle using a 0.5 soft limiter.]{Figure of period 8 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-8-limit-cycle-trajectory}
 \end{figure}
@@ -365,6 +381,7 @@ The plots below show the periodic trajectories for various limit values. The con
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-5-2-285-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 4 limit cycle using a 0.5 soft limiter.]{Figure of period 4 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-4-limit-cycle-trajectory}
 \end{figure}
@@ -372,6 +389,7 @@ The plots below show the periodic trajectories for various limit values. The con
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-5-2-25-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 2 limit cycle using a 0.5 soft limiter.]{Figure of period 2 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
 \label{figure:z-0.5-2-limit-cycle-trajectory}
 \end{figure}
@@ -379,11 +397,12 @@ The plots below show the periodic trajectories for various limit values. The con
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-z-softness-0-5-2-12-convergence.png}
-\caption[Figure of period 1 limit cycle using a 0.5 soft limiter.]{Figure of period 1 limit cycle where x(t) limits z(t) using a 0.5 soft limiter.}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
+\caption[Figure of period 1 limit cycle using a 0.5 soft limiter.]{Figure of period 1 limit cycle where x(t) limits z(t) using a 0.5 soft limiter. The coloring of the curve indicates the strength of the limiter influence.}
 \label{figure:z-0.5-1-limit-cycle-trajectory}
 \end{figure}
 
-\paragraph{One Dimension Limiting Itself} In the second experiment, the softnss is again set to \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
+\paragraph{One Dimension Limiting Itself} In the second experiment, the softness is again set to \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
 
 \begin{align*}
 \frac{dx}{dt}&=\alpha (y-x-f(x)) ~ \text{softLim}(x)\\
@@ -392,9 +411,9 @@ The plots below show the periodic trajectories for various limit values. The con
 f (x) &= \frac{m_1 x + (m_0 - m_1)}{2 (| x + E | -| x - E |)}
 \end{align*}
 
-If the $limitValue$ parameter is changed from \(>4.6692\), which corresponds to no limiter influence to the trajectory, to a value within \(limitValue \in [1.99545,4.6692[\), one can observe different chaotic trajectories. The limiter influences the circuit by limiting the voltage across the capacitor \(C_1\) when \(x\) approaches the limiter. %
+If the $limitValue$ parameter is changed from \(>4.6692\), which corresponds to no limiter influence to the trajectory, to a value within \(limitValue \in [1.99545,4.6691]\), one can observe different chaotic trajectories. The limiter influences the circuit by limiting the voltage across the capacitor \(C_1\) when \(x\) approaches the limiter. %
 %
-Within the window \([1.89,1.99545]\) a small limiter parameter window can be found which controls trajectories of high periodicity down to different lower periods. %
+Within the window \(limitValue \in [1.89,1.99545]\) a small limiter parameter window can be found which controls trajectories of high periodicity down to different lower periods. %
 %
 Period doubling behavior can be found when controlling the Chua circuit appropriately with limit values as described in the table \ref{table:x-0.13-periodicities}.
 
@@ -418,6 +437,7 @@ Period doubling behavior can be found when controlling the Chua circuit appropri
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-932-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 8 limit cycle using self limiting 0.13 soft limiter]{Figure of period 8 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-8-limit-cycle-trajectory}
 \end{figure}
@@ -425,6 +445,7 @@ Period doubling behavior can be found when controlling the Chua circuit appropri
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-93-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 4 limit cycle using self limiting 0.13 soft limiter]{Figure of period 4 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-4-limit-cycle-trajectory}
 \end{figure}
@@ -432,6 +453,7 @@ Period doubling behavior can be found when controlling the Chua circuit appropri
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-91-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 2 limit cycle using self limiting 0.13 soft limiter]{Figure of period 2 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-2-limit-cycle-trajectory}
 \end{figure}
@@ -439,6 +461,7 @@ Period doubling behavior can be found when controlling the Chua circuit appropri
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-89-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using self limiting 0.13 soft limiter]{Figure of period 1 limit cycle when using a self limiter with value 0.13.}
 \label{figure:x-0.13-1-limit-cycle-trajectory}
 \end{figure}
@@ -452,6 +475,7 @@ At \(limitValue=1.61\), one can observe perfect convergence to period 1.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-61-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle]{Figure of period 1 limit cycle at 1.61.}
 \label{figure:x-0.13-fast-1-limit-cycle-trajectory-1-61}
 \end{figure}
@@ -461,6 +485,7 @@ Surpassing this point increases the convergence time again because the trajector
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-57-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period another 1 limit cycle using a 0.13 soft limiter.]{Figure of period 1 limit cycle at 1.57.}
 \label{figure:x-0.13-fast-1-limit-cycle-trajectory-1-57}
 \end{figure}
@@ -471,18 +496,20 @@ The controlled limit cycle shrinks, until the trajectory directly converges onto
 \centering
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-5-convergence.png}
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-4-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of fix point convergence]{Figure of trajectories with limit values 1.5 and 1.4.}
 \label{figure:x-0.13-convergence-trajectories}
 \end{figure}
 
 Moving the limiter to 1.3 leads to a rotation of the plane in which the original trajectories took place, and an inward spiral starting at the initial conditions and progressing towards the limiter occurs. %
 %
-The state spiralling into the limiter tries to pass the limiter from the uppermost the gateway scroll to the lowermost scroll.
+The state spiralling into the limiter tries to pass the limiter from the uppermost to the gateway scroll to the lowermost scroll.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-1-3-convergence.png}
 \includegraphics[width=0.45\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-0-5-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using a 0.13 soft limiter.]{Figures of trajectories with limit values 1.3 and 0.5.}
 \label{figure:x-0.13-spiral-trajectories}
 \end{figure}
@@ -492,6 +519,7 @@ The spiralling behavior continues until \(limitValue=0.26991\), where the trajec
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13-0-26991-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of trajectory with limit value 0.26991.]{Figure the trajectory with limit value 0.26991. The state stays in the uppermost scroll before it spirals into the limiter.}
 \label{figure:x-0.13-upper-scroll-trajectory}
 \end{figure}
@@ -520,6 +548,7 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13--0-126-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 32 limit cycle using a 0.13 soft limiter.]{Figure of period 32 limit cycle in the upper scroll using a self limiter with value 0.13.}
 \label{figure:x-0.13-32-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -527,6 +556,7 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13--0-127-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 16 limit cycle using a 0.13 soft limiter]{Figure of period 16 limit cycle in the upper scroll using a self limiter with value 0.13.}
 \label{figure:x-0.13-16-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -534,6 +564,7 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13--0-1327-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 8 limit cycle using a 0.13 soft limiter]{Figure of period 8 limit cycle in the upper scroll using a self limiter with value 0.13.}
 \label{figure:x-0.13-8-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -541,6 +572,7 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13--0-15-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 4 limit cycle using a 0.13 soft limiter]{Figure of period 4 limit cycle in the upper scroll using a self limiter with value 0.13.}
 \label{figure:x-0.13-4-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -548,6 +580,7 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13--0-2-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 3 limit cycle using a 0.13 soft limiter]{Figure of period 2 limit cycle in the upper scroll using a self limiter with value 0.13.}
 \label{figure:x-0.13-2-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -555,13 +588,14 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-13--0-34-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using a 0.13 soft limiter]{Figure of period 1 limit cycle in the uppermost scroll.}
 \label{figure:x-0.13-1-limit-cycle-upperscroll-trajectory}
 \end{figure}
 
 Using \(softness=0.5\), the limiter starts to influence the multiscroll attractor at \(11.507\), and the chaotic behavior can again be controlled using the limiter within the limiter value window \([2.176,11.507]\). %
 %
-Within the window \([1.8,2.176[\), periodic orbits down to period 1 can be stabilized.
+Within the window \([1.8,2.1759]\), periodic orbits down to period 1 can be stabilized.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.2}
@@ -584,6 +618,7 @@ Within the window \([1.8,2.176[\), periodic orbits down to period 1 can be stabi
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5-2-0502-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 16 limit cycle using a 0.5 soft limiter]{Figure of period 16 limit cycle using a self limiter with value 0.5.}
 \label{figure:x-0.5-16-limit-cycle-trajectory}
 \end{figure}
@@ -591,6 +626,7 @@ Within the window \([1.8,2.176[\), periodic orbits down to period 1 can be stabi
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5-2-05-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 8 limit cycle using a 0.5 soft limiter]{Figure of period 8 limit cycle using a self limiter with value 0.5.}
 \label{figure:x-0.5-8-limit-cycle-trajectory}
 \end{figure}
@@ -598,6 +634,7 @@ Within the window \([1.8,2.176[\), periodic orbits down to period 1 can be stabi
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5-2-04-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 4 limit cycle using a 0.5 soft limiter]{Figure of period 4 limit cycle using a self limiter with value 0.5.}
 \label{figure:x-0.5-4-limit-cycle-trajectory}
 \end{figure}
@@ -605,6 +642,7 @@ Within the window \([1.8,2.176[\), periodic orbits down to period 1 can be stabi
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5-2-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 2 limit cycle using a 0.5 soft limiter]{Figure of period 2 limit cycle using a self limiter with value 0.5.}
 \label{figure:x-0.5-2-limit-cycle-trajectory}
 \end{figure}
@@ -612,6 +650,7 @@ Within the window \([1.8,2.176[\), periodic orbits down to period 1 can be stabi
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5-1-8-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using a 0.5 soft limiter]{Figure of period 1 limit cycle using a self limiter with value 0.5.}
 \label{figure:x-0.5-1-limit-cycle-trajectory}
 \end{figure}
@@ -641,6 +680,7 @@ There the trajectory can again be stabilized in the uppermost scroll into differ
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5--0-109-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 16 limit cycle using a 0.5 soft limiter]{Figure of period 16 limit cycle in the upper scroll using a self limiter with value 0.5.}
 \label{figure:x-0.5-16-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -648,6 +688,7 @@ There the trajectory can again be stabilized in the uppermost scroll into differ
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5--0-115-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 8 limit cycle using a 0.5 soft limiter]{Figure of period 8 limit cycle in the upper scroll using a self limiter with value 0.5.}
 \label{figure:x-0.5-8-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -655,6 +696,7 @@ There the trajectory can again be stabilized in the uppermost scroll into differ
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5--0-15-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 4 limit cycle using a 0.5 soft limiter]{Figure of period 4 limit cycle in the upper scroll using a self limiter with value 0.5.}
 \label{figure:x-0.5-4-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -662,6 +704,7 @@ There the trajectory can again be stabilized in the uppermost scroll into differ
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5--0-2-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 2 limit cycle using a 0.5 soft limiter]{Figure of period 2 limit cycle in the upper scroll using a self limiter with value 0.5.}
 \label{figure:x-0.5-2-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -669,6 +712,7 @@ There the trajectory can again be stabilized in the uppermost scroll into differ
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5--0-37-convergence.png}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using a 0.5 soft limiter]{Figure of period 1 limit cycle in the upper scroll using a self limiter with value 0.5.}
 \label{figure:x-0.5-1-limit-cycle-upperscroll-trajectory}
 \end{figure}
@@ -677,14 +721,15 @@ Pushing the limiter further into the negative limit values, one can again observ
 %
 Further limiting can suppress the progression of the trajectory entirely. %
 %
-The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4[\), but the radius of the spiral gets so small that the maximum precision of Mathematica is reached with limiter values \(<-4\).
+The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4]\), but the radius of the spiral gets so small that the maximum precision of Mathematica is reached with limiter values \(<-4\).
 %
 Therefore the resulting trajectory starts to be discretized by the limited precision.
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.45\textheight]{controllers/chua-circuit/Limited-chua-circuit-x-softness-0-5--4-convergence.png}
-\caption[Figure showing discretization artifacts]{Figure of discretization artifacts in the uppermost scroll using a self limiter with value 0.5.}
+\includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
+\caption[Figure showing discretization artifacts]{Figure of discretization artifacts in the uppermost scroll using a self limiter with value 0.5. The limiter line is omitted here for a better visibility of the discretization artifacts.}
 \label{figure:x-0.5-discretization}
 \end{figure}
 
@@ -703,17 +748,17 @@ The chaotic controller used to control a single DoF in a joint of a creature is 
 %
 The Chua circuit's parameters are kept constant to keep the parameter space for the evolution small, also there exist many parameter conditions that do not lead to a chaotic ground state. %
 %
-Only the initial conditions are chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the integration step is chosen randomly so that \(\text{\textit{integration step}} \in [0.001,10]\). %
+When the creature is randomly initialized on creation, only the initial conditions are chosen randomly within the bounding box \((x,y,z) \in ([-2,2],[-2,2],[-2,2])\) and the control step is chosen randomly so that \(\text{\textit{control step}} \in [0.001,10]\). %
 %
-During a mutation of the chaotic chua circuit controller, the initial conditions and the integration step are chosen anew from a uniform distribution out of the respective intervals. %
+During a mutation of the chaotic Chua circuit controller, the initial conditions and the integration step are chosen anew from a uniform distribution out of the respective intervals. %
 %
-Even though the integration step can vary from controller to controller, the base integration step, is kept constant at \(\text{\textit{integration base}} = 0.0005\). %
+Even though the control step can vary among the controllers to change the stepping speed of the control signal, the integration step is kept constant at \(\text{\textit{integration step}} = 0.0005\). %
 %
-The integration step then is performed by calculating small sub-steps of size of the \textit{base integration step} until a smaller, residual integration step is left to calculate. %
+One control step is performed by calculating small sub-steps of size of the \textit{integration step} until a smaller, residual integration step is left to calculate. %
 %
-Thereby, variable size integration speeds can be performed, but the actual base integration step is kept constant. %
+Thereby, variable size control steps of size 10 or more can be performed, but the actual integration step is kept constantly low to ensure an accurate numerical integration. %
 %
-The numerical integration again is performed using a Runge-Kutta order 6 integration scheme run in real-time. %
+The numerical integration is performed using a Runge-Kutta order 6 integration scheme run in real-time. %
 %
 However, in the creature's controller, the simple limiter is not directly applied as in the experiment above, but it will be tested if the controller output can be limited by the joint morphology, so that periodic motion emerges not in the controller, but in the joint. %
 %
