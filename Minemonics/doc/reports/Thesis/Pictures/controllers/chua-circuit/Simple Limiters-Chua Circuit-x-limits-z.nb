@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    209072,       5474]
-NotebookOptionsPosition[    206102,       5378]
-NotebookOutlinePosition[    206438,       5393]
-CellTagsIndexPosition[    206395,       5390]
+NotebookDataLength[    196391,       5165]
+NotebookOptionsPosition[    195297,       5133]
+NotebookOutlinePosition[    195633,       5148]
+CellTagsIndexPosition[    195590,       5145]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -428,8 +428,6 @@ Cell[BoxData[
   3.667810821321199*^9}, {3.668770597543002*^9, 3.668770636153257*^9}, {
   3.668777051490803*^9, 3.6687770697384663`*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -686,19 +684,6 @@ Cell[BoxData[
   3.66877051371386*^9}, {3.6687768750150833`*^9, 3.668777606138592*^9}, {
   3.670855077394741*^9, 3.6708550781946774`*^9}, {3.670921481533996*^9, 
   3.670921496668612*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Unlimited-chua-circuit.png\"\>"], "Output",
- CellChangeTimes->{3.670855215005372*^9, 3.6709228906581573`*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Unlimited-chua-circuit-signal.png\"\>"], "Output",
- CellChangeTimes->{3.670855215005372*^9, 3.670922893094208*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -990,21 +975,6 @@ Cell[BoxData[
   3.670854705122464*^9, 3.6708550752797823`*^9}, {3.670921512929268*^9, 
   3.670921945450068*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-3.png\"\>"], "Output",
- CellChangeTimes->{{3.6708547999561853`*^9, 3.6708552807725286`*^9}, {
-  3.6709216549743633`*^9, 3.670922954956037*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-3-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.6708547999561853`*^9, 3.6708552807725286`*^9}, {
-  3.6709216549743633`*^9, 3.670922958566*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
@@ -1294,21 +1264,6 @@ Cell[BoxData[
  CellChangeTimes->{{3.6687772938847513`*^9, 3.668777597698883*^9}, {
   3.670851301841509*^9, 3.670855084763708*^9}, {3.670921748411634*^9, 
   3.6709220553701267`*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-8.png\"\>"], "Output",
- CellChangeTimes->{{3.670852630668898*^9, 3.670855345760645*^9}, {
-  3.6709219163156967`*^9, 3.670923020600124*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-8-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.670852630668898*^9, 3.670855345760645*^9}, {
-  3.6709219163156967`*^9, 3.6709230230035143`*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -1600,21 +1555,6 @@ Cell[BoxData[
   3.670852989577553*^9, 3.670855087529243*^9}, {3.670921797827794*^9, 
   3.670922088176938*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-6.png\"\>"], "Output",
- CellChangeTimes->{{3.6708530717810707`*^9, 3.6708554108286*^9}, {
-  3.670922320783597*^9, 3.670923084478694*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-6-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.6708530717810707`*^9, 3.6708554108286*^9}, {
-  3.670922320783597*^9, 3.6709230869527893`*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
@@ -1904,21 +1844,6 @@ Cell[BoxData[
  CellChangeTimes->{{3.668777519173645*^9, 3.6687775765532618`*^9}, {
   3.670852998945265*^9, 3.67085509764222*^9}, {3.6709218174742517`*^9, 
   3.670922108737369*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-4.png\"\>"], "Output",
- CellChangeTimes->{{3.6708531737435827`*^9, 3.670855475938154*^9}, {
-  3.670921985066997*^9, 3.6709231512347403`*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-4-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.6708531737435827`*^9, 3.670855475938154*^9}, {
-  3.670921985066997*^9, 3.670923154649063*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -2210,21 +2135,6 @@ Cell[BoxData[
   3.6708530066715937`*^9, 3.670855101022928*^9}, {3.670921871285843*^9, 
   3.670922152323525*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-375.png\"\>"], "Output",
- CellChangeTimes->{{3.670853277065946*^9, 3.670855541546751*^9}, {
-  3.670922455422205*^9, 3.670923220270597*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-375-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.670853277065946*^9, 3.670855541546751*^9}, {
-  3.670922455422205*^9, 3.670923222963068*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -2514,22 +2424,6 @@ Cell[BoxData[
  CellChangeTimes->{{3.668777878207353*^9, 3.6687778952539454`*^9}, {
   3.670853012503778*^9, 3.6708551042480707`*^9}, {3.6709223293331003`*^9, 
   3.670922700700528*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-35125.png\"\>"], "Output",
- CellChangeTimes->{{3.6708533758830347`*^9, 3.670855606534576*^9}, 
-   3.670923292368887*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-35125-signal.png\"\>"], "Output",\
-
- CellChangeTimes->{{3.6708533758830347`*^9, 3.670855606534576*^9}, 
-   3.670923298172616*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
@@ -2821,22 +2715,6 @@ Cell[BoxData[
   3.670853017335237*^9, 3.670855106807185*^9}, {3.670922705930182*^9, 
   3.6709227210684357`*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-30375.png\"\>"], "Output",
- CellChangeTimes->{{3.670853478198835*^9, 3.670855670623019*^9}, 
-   3.67092336430742*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-30375-signal.png\"\>"], "Output",\
-
- CellChangeTimes->{{3.670853478198835*^9, 3.670855670623019*^9}, 
-   3.670923367726487*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -3126,21 +3004,6 @@ Cell[BoxData[
  CellChangeTimes->{{3.668777917910653*^9, 3.6687779326938953`*^9}, {
   3.670853021175215*^9, 3.670855109917017*^9}, {3.670922746011654*^9, 
   3.670922784919977*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-28.png\"\>"], "Output",
- CellChangeTimes->{{3.6708535805366907`*^9, 3.670855735319077*^9}, 
-   3.6709234458550997`*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-28-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.6708535805366907`*^9, 3.670855735319077*^9}, 
-   3.670923448326479*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -3446,25 +3309,11 @@ Cell[BoxData[
   3.670853031393736*^9, 3.6708551124827957`*^9}, {3.6709227501926126`*^9, 
   3.670922788982205*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-183-convergence.png\"\>"], \
-"Output",
- CellChangeTimes->{3.670855806763444*^9, 3.670923521494802*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-183-signal.png\"\>"], "Output",
- CellChangeTimes->{3.670855806763444*^9, 3.6709235238320007`*^9}]
-}, Open  ]],
-
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.670854525952571*^9, 3.6708545260889482`*^9}}],
 
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.6708545325731688`*^9, 3.670854532596241*^9}}],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
@@ -3770,22 +3619,6 @@ Cell[BoxData[
   3.670853078820943*^9, 3.67085511590793*^9}, {3.670922750213397*^9, 
   3.670922791657201*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-15-convergence.png\"\>"], \
-"Output",
- CellChangeTimes->{{3.670853812084442*^9, 3.670855881618634*^9}, 
-   3.670923604396927*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-2-15-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.670853812084442*^9, 3.670855881618634*^9}, 
-   3.6709236067066507`*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
@@ -4090,22 +3923,6 @@ Cell[BoxData[
   3.6708530862328176`*^9, 3.670855118667487*^9}, {3.670922750227475*^9, 
   3.670922795380487*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-1-83-convergence.png\"\>"], \
-"Output",
- CellChangeTimes->{{3.6708539194584293`*^9, 3.670855955178398*^9}, 
-   3.670923677846079*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-13-1-83-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.6708539194584293`*^9, 3.670855955178398*^9}, 
-   3.670923687281266*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -4401,22 +4218,6 @@ Cell[BoxData[
      RowBox[{"Background", "\[Rule]", "None"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.6708626356933813`*^9, 3.670862648866334*^9}, {
   3.6709227502315807`*^9, 3.6709227990214*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-292-convergence.png\"\>"], \
-"Output",
- CellChangeTimes->{
-  3.670862768244643*^9, {3.670921156712112*^9, 3.670923766719699*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-292-signal.png\"\>"], "Output",
- CellChangeTimes->{
-  3.670862768244643*^9, {3.670921156712112*^9, 3.670923774167843*^9}}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
@@ -4722,22 +4523,6 @@ Cell[BoxData[
   3.670853090267815*^9, 3.6708551235140944`*^9}, {3.670922750235065*^9, 
   3.6709228025482264`*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-285-convergence.png\"\>"], \
-"Output",
- CellChangeTimes->{{3.670854088964726*^9, 3.670856029099421*^9}, 
-   3.67092385391317*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-285-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.670854088964726*^9, 3.670856029099421*^9}, 
-   3.670923856937109*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"(*", 
@@ -5042,22 +4827,6 @@ Cell[BoxData[
   3.670853093355955*^9, 3.6708551265519323`*^9}, {3.670922750239485*^9, 
   3.670922806243466*^9}}],
 
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-25-convergence.png\"\>"], "Output",\
-
- CellChangeTimes->{{3.670854220743331*^9, 3.670856103234338*^9}, 
-   3.670923955931035*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-25-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.670854220743331*^9, 3.670856103234338*^9}, 
-   3.670923962720023*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", 
@@ -5360,21 +5129,7 @@ Cell[BoxData[
      RowBox[{"Background", "\[Rule]", "None"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.668841915115535*^9, 3.6688419184780807`*^9}, {
   3.670853096050602*^9, 3.670855130094659*^9}, {3.670922750243724*^9, 
-  3.6709228098980227`*^9}}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-12-convergence.png\"\>"], "Output",\
-
- CellChangeTimes->{{3.6708543620937567`*^9, 3.6708561777197638`*^9}, 
-   3.670924035036944*^9}],
-
-Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
-minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
-build/Limited-chua-circuit-z-softness-0-5-2-12-signal.png\"\>"], "Output",
- CellChangeTimes->{{3.6708543620937567`*^9, 3.6708561777197638`*^9}, 
-   3.670924038449626*^9}]
-}, Open  ]]
+  3.6709228098980227`*^9}}]
 },
 WindowSize->{1434, 1524},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -5394,88 +5149,24 @@ CellTagsIndex->{}
 Notebook[{
 Cell[557, 20, 339, 7, 55, "Input"],
 Cell[899, 29, 15284, 399, 1705, "Input"],
-Cell[CellGroupData[{
-Cell[16208, 432, 9885, 255, 1045, "Input"],
-Cell[26096, 689, 262, 3, 55, "Output"],
-Cell[26361, 694, 267, 3, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[26665, 702, 10942, 288, 1067, "Input"],
-Cell[37610, 992, 333, 4, 55, "Output"],
-Cell[37946, 998, 337, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[38320, 1007, 10946, 288, 1067, "Input"],
-Cell[49269, 1297, 331, 4, 55, "Output"],
-Cell[49603, 1303, 340, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[49980, 1312, 10942, 288, 1067, "Input"],
-Cell[60925, 1602, 329, 4, 55, "Output"],
-Cell[61257, 1608, 338, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[61632, 1617, 10945, 288, 1067, "Input"],
-Cell[72580, 1907, 333, 4, 55, "Output"],
-Cell[72916, 1913, 338, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[73291, 1922, 10948, 288, 1067, "Input"],
-Cell[84242, 2212, 331, 4, 55, "Output"],
-Cell[84576, 2218, 338, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[84951, 2227, 10979, 288, 1089, "Input"],
-Cell[95933, 2517, 312, 4, 55, "Output"],
-Cell[96248, 2523, 321, 5, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[96606, 2533, 10975, 288, 1089, "Input"],
-Cell[107584, 2823, 309, 4, 55, "Output"],
-Cell[107896, 2829, 319, 5, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[108252, 2839, 10969, 288, 1089, "Input"],
-Cell[119224, 3129, 311, 4, 55, "Output"],
-Cell[119538, 3135, 316, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[119891, 3144, 11627, 302, 1067, "Input"],
-Cell[131521, 3448, 294, 4, 55, "Output"],
-Cell[131818, 3454, 289, 3, 55, "Output"]
-}, Open  ]],
-Cell[132122, 3460, 94, 1, 32, InheritFromParent],
-Cell[132219, 3463, 94, 1, 32, InheritFromParent],
-Cell[CellGroupData[{
-Cell[132338, 3468, 11640, 302, 1089, "Input"],
-Cell[143981, 3772, 321, 5, 55, "Output"],
-Cell[144305, 3779, 316, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[144658, 3788, 11622, 302, 1067, "Input"],
-Cell[156283, 4092, 323, 5, 55, "Output"],
-Cell[156609, 4099, 316, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[156962, 4108, 11533, 294, 1089, "Input"],
-Cell[168498, 4404, 320, 5, 55, "Output"],
-Cell[168821, 4411, 313, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[169171, 4420, 11650, 302, 1089, "Input"],
-Cell[180824, 4724, 320, 5, 55, "Output"],
-Cell[181147, 4731, 314, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[181498, 4740, 11644, 302, 1089, "Input"],
-Cell[193145, 5044, 320, 5, 55, "Output"],
-Cell[193468, 5051, 313, 4, 55, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[193818, 5060, 11621, 302, 1067, "Input"],
-Cell[205442, 5364, 324, 5, 55, "Output"],
-Cell[205769, 5371, 317, 4, 112, "Output"]
-}, Open  ]]
+Cell[16186, 430, 9885, 255, 1045, "Input"],
+Cell[26074, 687, 10942, 288, 1067, "Input"],
+Cell[37019, 977, 10946, 288, 1067, "Input"],
+Cell[47968, 1267, 10942, 288, 1067, "Input"],
+Cell[58913, 1557, 10945, 288, 1067, "Input"],
+Cell[69861, 1847, 10948, 288, 1067, "Input"],
+Cell[80812, 2137, 10979, 288, 1089, "Input"],
+Cell[91794, 2427, 10975, 288, 1089, "Input"],
+Cell[102772, 2717, 10969, 288, 1089, "Input"],
+Cell[113744, 3007, 11627, 302, 1067, "Input"],
+Cell[125374, 3311, 94, 1, 32, "Input"],
+Cell[125471, 3314, 94, 1, 32, "Input"],
+Cell[125568, 3317, 11640, 302, 1089, "Input"],
+Cell[137211, 3621, 11622, 302, 1067, "Input"],
+Cell[148836, 3925, 11533, 294, 1089, "Input"],
+Cell[160372, 4221, 11650, 302, 1089, "Input"],
+Cell[172025, 4525, 11644, 302, 1089, "Input"],
+Cell[183672, 4829, 11621, 302, 1067, "Input"]
 }
 ]
 *)

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    371297,       9739]
-NotebookOptionsPosition[    369516,       9692]
-NotebookOutlinePosition[    369876,       9708]
-CellTagsIndexPosition[    369833,       9705]
+NotebookDataLength[    371218,       9716]
+NotebookOptionsPosition[    369437,       9669]
+NotebookOutlinePosition[    369797,       9685]
+CellTagsIndexPosition[    369754,       9682]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -3694,24 +3694,25 @@ Cell[BoxData[
           RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";"}], " ", 
       RowBox[{"(*", 
        RowBox[{"initial", " ", "conditions"}], "*)"}], "+", 
-      "\[IndentingNewLine]", "softness"}], " ", "=", " ", "0.13"}], ";", " ", 
-    
-    RowBox[{"(*", " ", 
+      "\[IndentingNewLine]", "softness"}], " ", "=", " ", "0.13"}], ";"}], 
+   " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{
      RowBox[{
       RowBox[{
        RowBox[{
         RowBox[{
-         RowBox[{
-         "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
-         " ", "//", " ", 
-         RowBox[{
-         "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
+        "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
         " ", "//", " ", 
-        RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
-       RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
-      " ", 
-      RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
-    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{
+        "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
+       " ", "//", " ", 
+       RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
+      RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
+     " ", 
+     RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
     RowBox[{"chuaData", "=", 
      RowBox[{"Table", "[", 
       RowBox[{"RK6", ",", 
@@ -7615,74 +7616,66 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
     "imageName", " ", "=", " ", 
-     "\"\<Limited-chua-circuit-x-softness-0-5--0.115\>\""}], ";"}], 
+     "\"\<Limited-chua-circuit-x-softness-0-5--0-115\>\""}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"n", "=", "200000"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Number", " ", "of", " ", "data", " ", "points"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"limiter", " ", "=", " ", "softLim"}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{"Choose", " ", "the", " ", "softlimiter"}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
+    RowBox[{"n", "=", "200000"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Number", " ", "of", " ", "data", " ", "points"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"limiter", " ", "=", " ", "softLim"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Choose", " ", "the", " ", "softlimiter"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
     RowBox[{"limitValue", " ", "=", 
-     RowBox[{"-", "0.115"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Limit", " ", "of", " ", "the", " ", "limiting", " ", "dimension"}], 
-    "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"limitCycleStable", " ", "=", " ", "20000"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Number", " ", "of", " ", "data", " ", "points", " ", "within", " ", 
-     "the", " ", "stable", " ", "limit", " ", "cycle"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
+     RowBox[{"-", "0.115"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Limit", " ", "of", " ", "the", " ", "limiting", " ", "dimension"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"limitCycleStable", " ", "=", " ", "20000"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Number", " ", "of", " ", "data", " ", "points", " ", "within", " ", 
+      "the", " ", "stable", " ", "limit", " ", "cycle"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
+    "\[IndentingNewLine]", 
     RowBox[{"x", " ", "=", 
      RowBox[{"{", 
       RowBox[{
-       RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"initial", " ", "conditions"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"softness", " ", "=", " ", "0.5"}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
+       RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"initial", " ", "conditions"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"softness", " ", "=", " ", "0.5"}], ";", " ", 
+    RowBox[{"(*", " ", 
      RowBox[{
       RowBox[{
        RowBox[{
         RowBox[{
-        "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
+         RowBox[{
+         "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
+         " ", "//", " ", 
+         RowBox[{
+         "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
         " ", "//", " ", 
-        RowBox[{
-        "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
-       " ", "//", " ", 
-       RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
-      RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
-     " ", 
-     RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{
+        RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
+       RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
+      " ", 
+      RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
     RowBox[{"chuaData", "=", 
      RowBox[{"Table", "[", 
       RowBox[{"RK6", ",", 
        RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Choose", " ", "the", " ", "integration", " ", "method", " ", "RK4", " ", 
-     "or", " ", "RK6"}], " ", "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Choose", " ", "the", " ", "integration", " ", "method", " ", "RK4", " ",
+       "or", " ", "RK6"}], " ", "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
     RowBox[{"ymin", " ", "=", " ", 
      RowBox[{"Min", "[", 
       RowBox[{"chuaData", "[", 
@@ -7908,7 +7901,7 @@ Cell[BoxData[
      RowBox[{"Background", "\[Rule]", "None"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.668843789654986*^9, 3.668843793840938*^9}, {
   3.670855501495883*^9, 3.670857913886675*^9}, {3.670922849589633*^9, 
-  3.670924544500265*^9}}],
+  3.670924544500265*^9}, {3.670932501353821*^9, 3.67093250180639*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -7920,74 +7913,66 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
     "imageName", " ", "=", " ", 
-     "\"\<Limited-chua-circuit-x-softness-0-5--0.15\>\""}], ";"}], 
+     "\"\<Limited-chua-circuit-x-softness-0-5--0-15\>\""}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"n", "=", "200000"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Number", " ", "of", " ", "data", " ", "points"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"limiter", " ", "=", " ", "softLim"}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{"Choose", " ", "the", " ", "softlimiter"}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
+    RowBox[{"n", "=", "200000"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Number", " ", "of", " ", "data", " ", "points"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"limiter", " ", "=", " ", "softLim"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Choose", " ", "the", " ", "softlimiter"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
     RowBox[{"limitValue", " ", "=", 
-     RowBox[{"-", "0.15"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Limit", " ", "of", " ", "the", " ", "limiting", " ", "dimension"}], 
-    "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"limitCycleStable", " ", "=", " ", "20000"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Number", " ", "of", " ", "data", " ", "points", " ", "within", " ", 
-     "the", " ", "stable", " ", "limit", " ", "cycle"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
+     RowBox[{"-", "0.15"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Limit", " ", "of", " ", "the", " ", "limiting", " ", "dimension"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"limitCycleStable", " ", "=", " ", "20000"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Number", " ", "of", " ", "data", " ", "points", " ", "within", " ", 
+      "the", " ", "stable", " ", "limit", " ", "cycle"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
+    "\[IndentingNewLine]", 
     RowBox[{"x", " ", "=", 
      RowBox[{"{", 
       RowBox[{
-       RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"initial", " ", "conditions"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"softness", " ", "=", " ", "0.5"}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
+       RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"initial", " ", "conditions"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"softness", " ", "=", " ", "0.5"}], ";", " ", 
+    RowBox[{"(*", " ", 
      RowBox[{
       RowBox[{
        RowBox[{
         RowBox[{
-        "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
+         RowBox[{
+         "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
+         " ", "//", " ", 
+         RowBox[{
+         "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
         " ", "//", " ", 
-        RowBox[{
-        "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
-       " ", "//", " ", 
-       RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
-      RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
-     " ", 
-     RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{
+        RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
+       RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
+      " ", 
+      RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
     RowBox[{"chuaData", "=", 
      RowBox[{"Table", "[", 
       RowBox[{"RK6", ",", 
        RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Choose", " ", "the", " ", "integration", " ", "method", " ", "RK4", " ", 
-     "or", " ", "RK6"}], " ", "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Choose", " ", "the", " ", "integration", " ", "method", " ", "RK4", " ",
+       "or", " ", "RK6"}], " ", "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
     RowBox[{"ymin", " ", "=", " ", 
      RowBox[{"Min", "[", 
       RowBox[{"chuaData", "[", 
@@ -8213,7 +8198,7 @@ Cell[BoxData[
      RowBox[{"Background", "\[Rule]", "None"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.6688438025932713`*^9, 3.668843828181892*^9}, {
   3.6708555065685663`*^9, 3.67085790998498*^9}, {3.6709228489476748`*^9, 
-  3.6709245472285357`*^9}}],
+  3.6709245472285357`*^9}, {3.670932504041885*^9, 3.670932504188743*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -8530,74 +8515,66 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
     "imageName", " ", "=", " ", 
-     "\"\<Limited-chua-circuit-x-softness-0-5--0.37\>\""}], ";"}], 
+     "\"\<Limited-chua-circuit-x-softness-0-5--0-37\>\""}], ";"}], 
    "\[IndentingNewLine]", 
    RowBox[{
-    RowBox[{"n", "=", "200000"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Number", " ", "of", " ", "data", " ", "points"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"limiter", " ", "=", " ", "softLim"}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{"Choose", " ", "the", " ", "softlimiter"}], " ", "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
+    RowBox[{"n", "=", "200000"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Number", " ", "of", " ", "data", " ", "points"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"limiter", " ", "=", " ", "softLim"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Choose", " ", "the", " ", "softlimiter"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
     RowBox[{"limitValue", " ", "=", 
-     RowBox[{"-", "0.37"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Limit", " ", "of", " ", "the", " ", "limiting", " ", "dimension"}], 
-    "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"limitCycleStable", " ", "=", " ", "20000"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "Number", " ", "of", " ", "data", " ", "points", " ", "within", " ", 
-     "the", " ", "stable", " ", "limit", " ", "cycle"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
+     RowBox[{"-", "0.37"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Limit", " ", "of", " ", "the", " ", "limiting", " ", "dimension"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"limitCycleStable", " ", "=", " ", "20000"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Number", " ", "of", " ", "data", " ", "points", " ", "within", " ", 
+      "the", " ", "stable", " ", "limit", " ", "cycle"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
+    "\[IndentingNewLine]", 
     RowBox[{"x", " ", "=", 
      RowBox[{"{", 
       RowBox[{
-       RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{"initial", " ", "conditions"}], "*)"}], "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"softness", " ", "=", " ", "0.5"}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
+       RowBox[{"-", "1.5"}], ",", "0", ",", "0"}], "}"}]}], ";", " ", 
+    RowBox[{"(*", 
+     RowBox[{"initial", " ", "conditions"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"softness", " ", "=", " ", "0.5"}], ";", " ", 
+    RowBox[{"(*", " ", 
      RowBox[{
       RowBox[{
        RowBox[{
         RowBox[{
-        "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
+         RowBox[{
+         "Softness", " ", "0.1", " ", "very", " ", "hard", " ", "limiter"}], 
+         " ", "//", " ", 
+         RowBox[{
+         "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
         " ", "//", " ", 
-        RowBox[{
-        "0.13", " ", "boundary", " ", "to", " ", "hard", " ", "limiter"}]}], 
-       " ", "//", " ", 
-       RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
-      RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
-     " ", 
-     RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
-   "\[IndentingNewLine]", "\[IndentingNewLine]", 
-   RowBox[{
+        RowBox[{"0.15", " ", "soft", " ", "limiter"}]}], "  ", "//", " ", 
+       RowBox[{"1", " ", "very", " ", "soft", " ", "limiter"}]}], " ", "//", 
+      " ", 
+      RowBox[{"1.88", " ", "soft", " ", "limiter"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
     RowBox[{"chuaData", "=", 
      RowBox[{"Table", "[", 
       RowBox[{"RK6", ",", 
        RowBox[{"{", 
-        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";"}], " ", 
-   RowBox[{"(*", " ", 
-    RowBox[{
-    "Choose", " ", "the", " ", "integration", " ", "method", " ", "RK4", " ", 
-     "or", " ", "RK6"}], " ", "*)"}], "\[IndentingNewLine]", 
-   "\[IndentingNewLine]", 
-   RowBox[{
+        RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Choose", " ", "the", " ", "integration", " ", "method", " ", "RK4", " ",
+       "or", " ", "RK6"}], " ", "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
     RowBox[{"ymin", " ", "=", " ", 
      RowBox[{"Min", "[", 
       RowBox[{"chuaData", "[", 
@@ -8823,7 +8800,7 @@ Cell[BoxData[
      RowBox[{"Background", "\[Rule]", "None"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.668843847163432*^9, 3.668843865005868*^9}, {
   3.670855555778113*^9, 3.6708579007809362`*^9}, {3.670922848957868*^9, 
-  3.6709245531852007`*^9}}],
+  3.6709245531852007`*^9}, {3.670932510326578*^9, 3.670932510667651*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -9721,26 +9698,26 @@ Cell[92806, 2430, 11620, 302, 1067, "Input"],
 Cell[104429, 2734, 11620, 302, 1067, "Input"],
 Cell[116052, 3038, 11621, 302, 1067, "Input"],
 Cell[127676, 3342, 11622, 302, 1067, "Input"],
-Cell[139301, 3646, 11681, 304, 1067, "Input"],
-Cell[150985, 3952, 11651, 303, 1067, "Input"],
-Cell[162639, 4257, 11649, 303, 1067, "Input"],
-Cell[174291, 4562, 11647, 303, 1067, "Input"],
-Cell[185941, 4867, 11643, 303, 1067, "Input"],
-Cell[197587, 5172, 11645, 303, 1067, "Input"],
-Cell[209235, 5477, 11643, 303, 1067, "Input"],
-Cell[220881, 5782, 11625, 302, 1067, "Input"],
-Cell[232509, 6086, 11619, 302, 1067, "Input"],
-Cell[244131, 6390, 11621, 302, 1067, "Input"],
-Cell[255755, 6694, 11614, 302, 1067, "Input"],
-Cell[267372, 6998, 11615, 302, 1067, "Input"],
-Cell[278990, 7302, 11689, 303, 1067, "Input"],
-Cell[290682, 7607, 11641, 303, 1067, "Input"],
-Cell[302326, 7912, 11646, 303, 1067, "Input"],
-Cell[313975, 8217, 11687, 303, 1067, "Input"],
-Cell[325665, 8522, 11643, 303, 1067, "Input"],
-Cell[337311, 8827, 11637, 303, 1067, "Input"],
-Cell[348951, 9132, 15930, 426, 1463, "Input"],
-Cell[364884, 9560, 4628, 130, 297, "Input"]
+Cell[139301, 3646, 11678, 305, 1067, "Input"],
+Cell[150982, 3953, 11651, 303, 1067, "Input"],
+Cell[162636, 4258, 11649, 303, 1067, "Input"],
+Cell[174288, 4563, 11647, 303, 1067, "Input"],
+Cell[185938, 4868, 11643, 303, 1067, "Input"],
+Cell[197584, 5173, 11645, 303, 1067, "Input"],
+Cell[209232, 5478, 11643, 303, 1067, "Input"],
+Cell[220878, 5783, 11625, 302, 1067, "Input"],
+Cell[232506, 6087, 11619, 302, 1067, "Input"],
+Cell[244128, 6391, 11621, 302, 1067, "Input"],
+Cell[255752, 6695, 11614, 302, 1067, "Input"],
+Cell[267369, 6999, 11615, 302, 1067, "Input"],
+Cell[278987, 7303, 11689, 303, 1067, "Input"],
+Cell[290679, 7608, 11615, 295, 1067, "Input"],
+Cell[302297, 7905, 11621, 295, 1067, "Input"],
+Cell[313921, 8202, 11687, 303, 1067, "Input"],
+Cell[325611, 8507, 11618, 295, 1067, "Input"],
+Cell[337232, 8804, 11637, 303, 1067, "Input"],
+Cell[348872, 9109, 15930, 426, 1463, "Input"],
+Cell[364805, 9537, 4628, 130, 297, "Input"]
 }
 ]
 *)
