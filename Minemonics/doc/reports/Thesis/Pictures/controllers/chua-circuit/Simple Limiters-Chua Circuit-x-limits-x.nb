@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    386004,      10099]
-NotebookOptionsPosition[    383858,      10042]
-NotebookOutlinePosition[    384218,      10058]
-CellTagsIndexPosition[    384175,      10055]
+NotebookDataLength[    385644,      10094]
+NotebookOptionsPosition[    383498,      10037]
+NotebookOutlinePosition[    383858,      10053]
+CellTagsIndexPosition[    383815,      10050]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -370,7 +370,7 @@ Cell[BoxData[
      RowBox[{"periodicityParameters013below", "[", 
       RowBox[{"[", 
        RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
-     RowBox[{"Log", "[", 
+     RowBox[{"Log2", "[", 
       RowBox[{"periodicityParameters013below", "[", 
        RowBox[{"[", 
         RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
@@ -403,7 +403,7 @@ Cell[BoxData[
      RowBox[{"periodicityParameters013above", "[", 
       RowBox[{"[", 
        RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
-     RowBox[{"Log", "[", 
+     RowBox[{"Log2", "[", 
       RowBox[{"periodicityParameters013above", "[", 
        RowBox[{"[", 
         RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
@@ -429,7 +429,7 @@ Cell[BoxData[
      RowBox[{"periodicityParameters05below", "[", 
       RowBox[{"[", 
        RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
-     RowBox[{"Log", "[", 
+     RowBox[{"Log2", "[", 
       RowBox[{"periodicityParameters05below", "[", 
        RowBox[{"[", 
         RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
@@ -459,7 +459,7 @@ Cell[BoxData[
      RowBox[{"periodicityParameters05above", "[", 
       RowBox[{"[", 
        RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
-     RowBox[{"Log", "[", 
+     RowBox[{"Log2", "[", 
       RowBox[{"periodicityParameters05above", "[", 
        RowBox[{"[", 
         RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
@@ -552,15 +552,13 @@ Cell[BoxData[
   3.667810821321199*^9}, {3.6687716544183273`*^9, 3.668771914178423*^9}, {
   3.670841960112543*^9, 3.6708419609696693`*^9}, {3.671183088941098*^9, 
   3.67118552388575*^9}, {3.671189787450367*^9, 3.671189882933771*^9}, {
-  3.67119314370317*^9, 3.671193291775642*^9}}],
+  3.67119314370317*^9, 3.671196577666486*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, 
     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
       AbsoluteThickness[1.6], 
-     StyleBox[
-      PointBox[{{1.932, 2.0794415416798357`}, {1.93, 1.3862943611198906`}, {
-       1.91, 0.6931471805599453}, {1.89, 0.}}],
+     StyleBox[PointBox[{{1.932, 3.}, {1.93, 2.}, {1.91, 1.}, {1.89, 0.}}],
       FontSize->Scaled[0.02]]}, {}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
@@ -578,7 +576,7 @@ Cell[BoxData[
     GrayLevel[0.5, 0.4]],
   ImageSize->1400,
   Method->{},
-  PlotRange->{{1.89, 1.932}, {0, 2.0794415416798357`}},
+  PlotRange->{{1.89, 1.932}, {0, 3.}},
   PlotRangeClipping->True,
   PlotRangePadding->{{
      Scaled[0.02], 
@@ -587,22 +585,21 @@ Cell[BoxData[
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.67119331431106*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.6711965834544277`*^9}}],
 
 Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
 minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
 build/x-limits-x-periodicityParameters013below.png\"\>"], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193314697134*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.6711965838409224`*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, 
     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
       AbsoluteThickness[1.6], 
      StyleBox[
-      PointBox[{{-0.126, 3.4657359027997265`}, {-0.127, 
-       2.772588722239781}, {-0.1327, 2.0794415416798357`}, {-0.15, 
-       1.3862943611198906`}, {-0.2, 0.6931471805599453}, {-0.34, 0.}}],
+      PointBox[{{-0.126, 5.}, {-0.127, 4.}, {-0.1327, 3.}, {-0.15, 2.}, {-0.2,
+        1.}, {-0.34, 0.}}],
       FontSize->Scaled[0.02]]}, {}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
@@ -620,7 +617,7 @@ Cell[BoxData[
     GrayLevel[0.5, 0.4]],
   ImageSize->1400,
   Method->{},
-  PlotRange->{{-0.34, -0.126}, {0, 3.4657359027997265`}},
+  PlotRange->{{-0.34, -0.126}, {0, 5.}},
   PlotRangeClipping->True,
   PlotRangePadding->{{
      Scaled[0.02], 
@@ -629,21 +626,20 @@ Cell[BoxData[
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193314729332*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671196583921232*^9}}],
 
 Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
 minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
 build/x-limits-x-periodicityParameters013above.png\"\>"], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315130962*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671196584378351*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, 
     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
       AbsoluteThickness[1.6], 
      StyleBox[
-      PointBox[{{2.0502, 2.772588722239781}, {2.05, 2.0794415416798357`}, {
-       2.04, 1.3862943611198906`}, {2., 0.6931471805599453}, {1.8, 0.}}],
+      PointBox[{{2.0502, 4.}, {2.05, 3.}, {2.04, 2.}, {2., 1.}, {1.8, 0.}}],
       FontSize->Scaled[0.02]]}, {}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
@@ -661,7 +657,7 @@ Cell[BoxData[
     GrayLevel[0.5, 0.4]],
   ImageSize->1400,
   Method->{},
-  PlotRange->{{1.8, 2.0502}, {0, 2.772588722239781}},
+  PlotRange->{{1.8, 2.0502}, {0, 4.}},
   PlotRangeClipping->True,
   PlotRangePadding->{{
      Scaled[0.02], 
@@ -670,22 +666,21 @@ Cell[BoxData[
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315166109*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671196584450821*^9}}],
 
 Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
 minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
 build/x-limits-x-periodicityParameters05below.png\"\>"], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315551511*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.67119658482672*^9}}],
 
 Cell[BoxData[
  GraphicsBox[{{}, {{}, 
     {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
       AbsoluteThickness[1.6], 
      StyleBox[
-      PointBox[{{-0.109, 2.772588722239781}, {-0.115, 
-       2.0794415416798357`}, {-0.15, 1.3862943611198906`}, {-0.2, 
-       0.6931471805599453}, {-0.37, 0.}}],
+      PointBox[{{-0.109, 4.}, {-0.115, 3.}, {-0.15, 2.}, {-0.2, 1.}, {-0.37, 
+       0.}}],
       FontSize->Scaled[0.02]]}, {}}, {}},
   AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
   Axes->{True, True},
@@ -703,7 +698,7 @@ Cell[BoxData[
     GrayLevel[0.5, 0.4]],
   ImageSize->1400,
   Method->{},
-  PlotRange->{{-0.37, -0.109}, {0, 2.772588722239781}},
+  PlotRange->{{-0.37, -0.109}, {0, 4.}},
   PlotRangeClipping->True,
   PlotRangePadding->{{
      Scaled[0.02], 
@@ -712,13 +707,13 @@ Cell[BoxData[
      Scaled[0.05]}},
   Ticks->{Automatic, Automatic}]], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315581807*^9}}],
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671196584903185*^9}}],
 
 Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
 minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
 build/x-limits-x-periodicityParameters05above.png\"\>"], "Output",
  CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
-   3.671189887251897*^9, {3.6711931577369013`*^9, 3.6711933159994917`*^9}}]
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.67119658537606*^9}}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -10059,48 +10054,48 @@ CellTagsIndex->{}
 Notebook[{
 Cell[557, 20, 339, 7, 55, "Input"],
 Cell[CellGroupData[{
-Cell[921, 31, 19959, 523, 1925, "Input"],
-Cell[20883, 556, 1280, 33, 796, "Output"],
-Cell[22166, 591, 354, 4, 32, "Output"],
-Cell[22523, 597, 1357, 34, 859, "Output"],
-Cell[23883, 633, 354, 4, 32, "Output"],
-Cell[24240, 639, 1304, 33, 796, "Output"],
-Cell[25547, 674, 353, 4, 32, "Output"],
-Cell[25903, 680, 1314, 34, 859, "Output"],
-Cell[27220, 716, 355, 4, 32, "Output"]
+Cell[921, 31, 19963, 523, 1925, "Input"],
+Cell[20887, 556, 1201, 31, 796, "Output"],
+Cell[22091, 589, 356, 4, 32, "Output"],
+Cell[22450, 595, 1250, 33, 859, "Output"],
+Cell[23703, 630, 354, 4, 32, "Output"],
+Cell[24060, 636, 1216, 32, 796, "Output"],
+Cell[25279, 670, 352, 4, 32, "Output"],
+Cell[25634, 676, 1226, 33, 859, "Output"],
+Cell[26863, 711, 352, 4, 32, "Output"]
 }, Open  ]],
-Cell[27590, 723, 422, 11, 55, "Input"],
-Cell[28015, 736, 9880, 255, 913, "Input"],
-Cell[37898, 993, 11623, 302, 935, "Input"],
-Cell[49524, 1297, 11665, 302, 1067, "Input"],
-Cell[61192, 1601, 11155, 288, 1001, "Input"],
-Cell[72350, 1891, 11622, 302, 1067, "Input"],
-Cell[83975, 2195, 11626, 302, 1067, "Input"],
-Cell[95604, 2499, 11620, 302, 1067, "Input"],
-Cell[107227, 2803, 11620, 302, 1067, "Input"],
-Cell[118850, 3107, 11620, 302, 1067, "Input"],
-Cell[130473, 3411, 11621, 302, 1067, "Input"],
-Cell[142097, 3715, 11622, 302, 1067, "Input"],
-Cell[153722, 4019, 11678, 305, 1067, "Input"],
-Cell[165403, 4326, 11651, 303, 1067, "Input"],
-Cell[177057, 4631, 11649, 303, 1067, "Input"],
-Cell[188709, 4936, 11647, 303, 1067, "Input"],
-Cell[200359, 5241, 11643, 303, 1067, "Input"],
-Cell[212005, 5546, 11645, 303, 1067, "Input"],
-Cell[223653, 5851, 11643, 303, 1067, "Input"],
-Cell[235299, 6156, 11625, 302, 1067, "Input"],
-Cell[246927, 6460, 11619, 302, 1067, "Input"],
-Cell[258549, 6764, 11621, 302, 1067, "Input"],
-Cell[270173, 7068, 11614, 302, 1067, "Input"],
-Cell[281790, 7372, 11615, 302, 1067, "Input"],
-Cell[293408, 7676, 11689, 303, 1067, "Input"],
-Cell[305100, 7981, 11615, 295, 1067, "Input"],
-Cell[316718, 8278, 11621, 295, 1067, "Input"],
-Cell[328342, 8575, 11687, 303, 1067, "Input"],
-Cell[340032, 8880, 11618, 295, 1067, "Input"],
-Cell[351653, 9177, 11637, 303, 1067, "Input"],
-Cell[363293, 9482, 15930, 426, 1463, "Input"],
-Cell[379226, 9910, 4628, 130, 297, "Input"]
+Cell[27230, 718, 422, 11, 55, "Input"],
+Cell[27655, 731, 9880, 255, 913, "Input"],
+Cell[37538, 988, 11623, 302, 935, "Input"],
+Cell[49164, 1292, 11665, 302, 1067, "Input"],
+Cell[60832, 1596, 11155, 288, 1001, "Input"],
+Cell[71990, 1886, 11622, 302, 1067, "Input"],
+Cell[83615, 2190, 11626, 302, 1067, "Input"],
+Cell[95244, 2494, 11620, 302, 1067, "Input"],
+Cell[106867, 2798, 11620, 302, 1067, "Input"],
+Cell[118490, 3102, 11620, 302, 1067, "Input"],
+Cell[130113, 3406, 11621, 302, 1067, "Input"],
+Cell[141737, 3710, 11622, 302, 1067, "Input"],
+Cell[153362, 4014, 11678, 305, 1067, "Input"],
+Cell[165043, 4321, 11651, 303, 1067, "Input"],
+Cell[176697, 4626, 11649, 303, 1067, "Input"],
+Cell[188349, 4931, 11647, 303, 1067, "Input"],
+Cell[199999, 5236, 11643, 303, 1067, "Input"],
+Cell[211645, 5541, 11645, 303, 1067, "Input"],
+Cell[223293, 5846, 11643, 303, 1067, "Input"],
+Cell[234939, 6151, 11625, 302, 1067, "Input"],
+Cell[246567, 6455, 11619, 302, 1067, "Input"],
+Cell[258189, 6759, 11621, 302, 1067, "Input"],
+Cell[269813, 7063, 11614, 302, 1067, "Input"],
+Cell[281430, 7367, 11615, 302, 1067, "Input"],
+Cell[293048, 7671, 11689, 303, 1067, "Input"],
+Cell[304740, 7976, 11615, 295, 1067, "Input"],
+Cell[316358, 8273, 11621, 295, 1067, "Input"],
+Cell[327982, 8570, 11687, 303, 1067, "Input"],
+Cell[339672, 8875, 11618, 295, 1067, "Input"],
+Cell[351293, 9172, 11637, 303, 1067, "Input"],
+Cell[362933, 9477, 15930, 426, 1463, "Input"],
+Cell[378866, 9905, 4628, 130, 297, "Input"]
 }
 ]
 *)
