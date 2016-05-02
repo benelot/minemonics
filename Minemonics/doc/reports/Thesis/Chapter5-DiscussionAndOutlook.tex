@@ -14,7 +14,7 @@
 %
 An artificial evolution simulator is developed to evolve virtual three dimensional creatures built from rigid-body primitives. %
 %
-The simulator features the evaluation of one or multiple populations in different environmental and evolutional settings. %
+The simulator features the evaluation of one or multiple populations in different environmental and evolutionary settings. %
 %
 Different fitness functions can be combined with weights and the fitness landscape can be changed during the evolutionary run. %
 %
@@ -22,7 +22,7 @@ The simulations can be stopped, saved and continued later with little effort. %
 %
 The creatures can be manipulated during their evaluation and their internal controller and joint dynamics can be observed in real-time. %
 %
-The interface features various possibilities to log simulation data to file, so that further processing of the data is simplified. 
+The interface features various possibilities to log simulation data to file, so that further processing of the data is simplified. %
 
 Creatures were evolved using three different, distributed controller structures, a non-adaptive, sinusoidal controller and two newly introduced, adaptive chaotic system controllers. %
 %
@@ -32,13 +32,17 @@ In order to develop the chaotic controllers, it was necessary to understand the 
 %
 Therefore, the findings of the simple limiter chaos control method introduced in \cite{bib:Corron2000} with the example model of the Chua circuit \cite{bib:Matsumoto1985} were confirmed and extended by the use of a tunable soft-limiter. %
 %
-Additionally, two different limiter configurations and their range of different periodic orbits were analyzed. %
+Additionally, a hard and a soft limiter within two different limiter configurations, one dimension limiting another and one dimension limiting itself, and their range of different periodic orbits were analyzed. %
 %
 It was found that a soft-limiter expands the size of each limiter parameter range of periodic orbit and therefore makes it easier to achieve stable orbits. %
 %
-The developed chaotic controller internally controls an underlying chaotic model system into chaotic and periodic trajectories using a variation of the simple limiter chaos control method. %
+This might be explained by the increased flexibility of the system as the soft limiter does not instantly limit the trajectory to the full extent, but still allows some movement, so that the precise limiter position does matter less than in the hard limiter case. %
 %
-In the directly limited case, the simple limiter hereby is applied through a coupling with the controlled joint DoF by feeding the joint position and velocity output back into the chaotic controller, replacing the original state with the sensor values. %
+Furthermore, the configuration of a self-limiting dimension additionally expands the limiter ranges. %
+%
+The developed chaotic controllers internally control an underlying chaotic model system into chaotic and periodic trajectories using variations of the simple limiter chaos control method. %
+%
+In the directly limited case, the simple limiter hereby is applied through a coupling with the controlled joint degree of freedom by feeding the joint position and velocity output back into the chaotic controller, replacing the original state with the sensor values. %
 %
 Therefore, the directly limited, chaotic controller faces a limiter if the joint faces an external limiter imposed through the environment. %
 %
@@ -56,11 +60,11 @@ Using the indirectly limited, chaotic controller, no locomoting creatures could 
 %
 This can be explained through the fact that the limits of the morphology did not influence the controller behavior, and therefore no periodic movement was exerted from the controller. %
 %
-Furthermore, for the directly limited, chaotic controller, it could be shown that different leg dynamics are emerging depending on the external load of the environment. %
+Furthermore, using the directly limited, chaotic controller, it could be shown that different leg dynamics are emerging depending whether the creature is touching the ground due to gravity or floating in gravity-less space. %
 %
 This could be shown in a hand-made model organism as well as in several evolved creatures, that showed different leg dynamics when lifted off the ground than when left on ground to locomote. %
 %
-In experiments with the model leg, featuring one single joint connecting two body parts, different periodic orbits could be stabilized. 
+In experiments with the model leg, featuring one single joint connecting two body parts, different periodic orbits could be stabilized. %
 %
 The influence of different joint morphological parameters on the behavior of the model leg, namely the amount of joint torque and damping, could be observed. %
 %
@@ -118,7 +122,7 @@ However, if the controller is not stabilized, the trajectory would diverge expon
 %
 The divergence of behavior could be measured using the Largest Lyapunov exponent, the mean rate of separation of trajectories, and calculated with the form adapted from \cite{bib:Rosenstein1993} as described in Appendix \ref{AppendixA}. %
 %
-The Largest Lyapunov exponent then expresses if the controller has an attracting, stable limit cycle to which it returns after having been slightly perturbed with uniformly distributed perturbances around zero. % 
+The Largest Lyapunov exponent then expresses if the controller has an attracting, stable limit cycle to which it returns after having been slightly perturbed with uniformly distributed perturbations around zero. % 
 %
 The perturbation can be automatically performed using the simulator by enabling automatic perturbation. %
 %

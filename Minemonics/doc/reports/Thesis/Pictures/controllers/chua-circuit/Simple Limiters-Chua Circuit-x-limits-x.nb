@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    371218,       9716]
-NotebookOptionsPosition[    369437,       9669]
-NotebookOutlinePosition[    369797,       9685]
-CellTagsIndexPosition[    369754,       9682]
+NotebookDataLength[    386004,      10099]
+NotebookOptionsPosition[    383858,      10042]
+NotebookOutlinePosition[    384218,      10058]
+CellTagsIndexPosition[    384175,      10055]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,6 +26,8 @@ Cell[BoxData[
     "limiter", " ", "where", " ", "the", " ", "x", " ", "dimension", " ", 
     "limits", " ", "itself"}], "*)"}]}]], "Input",
  CellChangeTimes->{{3.66876169527522*^9, 3.6687617495890913`*^9}}],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -342,11 +344,382 @@ Cell[BoxData[
     RowBox[{"baseImagePath", " ", "=", " ", 
      RowBox[{
       RowBox[{"NotebookDirectory", "[", "]"}], " ", "<>", " ", 
-      "\"\<build/\>\""}]}], ";"}]}]}]], "Input",
+      "\"\<build/\>\""}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"imageSize", " ", "=", " ", "1400"}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{"Output", " ", "image", " ", "width"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", "0.13", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"periodicityParameters013below", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1.932", ",", "8"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1.93", ",", "4"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1.91", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1.89", ",", "1"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"periodicityParameters013below", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
+     RowBox[{"Log", "[", 
+      RowBox[{"periodicityParameters013below", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"periodicityParameters013above", " ", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.126"}], ",", "32"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.127"}], ",", "16"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.1327"}], ",", "8"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.15"}], ",", "4"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.34"}], ",", "1"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"periodicityParameters013above", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
+     RowBox[{"Log", "[", 
+      RowBox[{"periodicityParameters013above", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", "0.5", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"periodicityParameters05below", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"2.0502", ",", "16"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2.05", ",", "8"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2.04", ",", "4"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1.8", ",", "1"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"periodicityParameters05below", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
+     RowBox[{"Log", "[", 
+      RowBox[{"periodicityParameters05below", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"periodicityParameters05above", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.109"}], ",", "16"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.115"}], ",", "8"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.15"}], ",", "4"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.37"}], ",", "1"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"periodicityParameters05above", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], " ", "=", 
+     RowBox[{"Log", "[", 
+      RowBox[{"periodicityParameters05above", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", " ", 
+   RowBox[{"periodicity013belowPlot", " ", "=", " ", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"periodicityParameters013below", ",", 
+      RowBox[{"ImageSize", "\[Rule]", "imageSize"}], ",", 
+      RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"FontSize", "\[Rule]", 
+         RowBox[{"Scaled", "[", ".02", "]"}]}], "}"}]}], ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<limitValue\>\"", ",", "\"\<Log(Periodicity)\>\""}], 
+        "}"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+     "baseImagePath", "<>", 
+      "\"\<x-limits-x-periodicityParameters013below.png\>\""}], ",", 
+     "periodicity013belowPlot", ",", 
+     RowBox[{"Background", "\[Rule]", "None"}]}], "]"}], 
+   "\[IndentingNewLine]", " ", 
+   RowBox[{"periodicity013abovePlot", " ", "=", " ", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"periodicityParameters013above", ",", 
+      RowBox[{"ImageSize", "\[Rule]", "imageSize"}], ",", 
+      RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"FontSize", "\[Rule]", 
+         RowBox[{"Scaled", "[", ".02", "]"}]}], "}"}]}], ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<limitValue\>\"", ",", "\"\<Log(Periodicity)\>\""}], 
+        "}"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+     "baseImagePath", "<>", 
+      "\"\<x-limits-x-periodicityParameters013above.png\>\""}], ",", 
+     "periodicity013abovePlot", ",", 
+     RowBox[{"Background", "\[Rule]", "None"}]}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", " ", 
+   RowBox[{"periodicity05belowPlot", " ", "=", " ", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"periodicityParameters05below", ",", 
+      RowBox[{"ImageSize", "\[Rule]", "imageSize"}], ",", 
+      RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"FontSize", "\[Rule]", 
+         RowBox[{"Scaled", "[", ".02", "]"}]}], "}"}]}], ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<limitValue\>\"", ",", "\"\<Log(Periodicity)\>\""}], 
+        "}"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+     "baseImagePath", "<>", 
+      "\"\<x-limits-x-periodicityParameters05below.png\>\""}], ",", 
+     "periodicity05belowPlot", ",", 
+     RowBox[{"Background", "\[Rule]", "None"}]}], "]"}], 
+   "\[IndentingNewLine]", " ", 
+   RowBox[{"perodicity05abovePlot", " ", "=", " ", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"periodicityParameters05above", ",", 
+      RowBox[{"ImageSize", "\[Rule]", "imageSize"}], ",", 
+      RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+      RowBox[{"BaseStyle", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"FontSize", "\[Rule]", 
+         RowBox[{"Scaled", "[", ".02", "]"}]}], "}"}]}], ",", 
+      RowBox[{"AxesLabel", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"\"\<limitValue\>\"", ",", "\"\<Log(Periodicity)\>\""}], 
+        "}"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+     "baseImagePath", "<>", 
+      "\"\<x-limits-x-periodicityParameters05above.png\>\""}], ",", 
+     "perodicity05abovePlot", ",", 
+     RowBox[{"Background", "\[Rule]", "None"}]}], "]"}]}]}]], "Input",
  CellChangeTimes->{{3.664090326775641*^9, 3.664098962822567*^9}, {
   3.667806432377294*^9, 3.66780643492691*^9}, {3.667810797038848*^9, 
   3.667810821321199*^9}, {3.6687716544183273`*^9, 3.668771914178423*^9}, {
-  3.670841960112543*^9, 3.6708419609696693`*^9}}],
+  3.670841960112543*^9, 3.6708419609696693`*^9}, {3.671183088941098*^9, 
+  3.67118552388575*^9}, {3.671189787450367*^9, 3.671189882933771*^9}, {
+  3.67119314370317*^9, 3.671193291775642*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], 
+     StyleBox[
+      PointBox[{{1.932, 2.0794415416798357`}, {1.93, 1.3862943611198906`}, {
+       1.91, 0.6931471805599453}, {1.89, 0.}}],
+      FontSize->Scaled[0.02]]}, {}}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox["\"limitValue\"", TraditionalForm], 
+    FormBox["\"Log(Periodicity)\"", TraditionalForm]},
+  AxesOrigin->{1.8893437499999999`, 0},
+  BaseStyle->{FontSize -> Scaled[0.02]},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->1400,
+  Method->{},
+  PlotRange->{{1.89, 1.932}, {0, 2.0794415416798357`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.67119331431106*^9}}],
+
+Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
+minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
+build/x-limits-x-periodicityParameters013below.png\"\>"], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193314697134*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], 
+     StyleBox[
+      PointBox[{{-0.126, 3.4657359027997265`}, {-0.127, 
+       2.772588722239781}, {-0.1327, 2.0794415416798357`}, {-0.15, 
+       1.3862943611198906`}, {-0.2, 0.6931471805599453}, {-0.34, 0.}}],
+      FontSize->Scaled[0.02]]}, {}}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox["\"limitValue\"", TraditionalForm], 
+    FormBox["\"Log(Periodicity)\"", TraditionalForm]},
+  AxesOrigin->{-0.12265625000000002`, 0},
+  BaseStyle->{FontSize -> Scaled[0.02]},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->1400,
+  Method->{},
+  PlotRange->{{-0.34, -0.126}, {0, 3.4657359027997265`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193314729332*^9}}],
+
+Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
+minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
+build/x-limits-x-periodicityParameters013above.png\"\>"], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315130962*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], 
+     StyleBox[
+      PointBox[{{2.0502, 2.772588722239781}, {2.05, 2.0794415416798357`}, {
+       2.04, 1.3862943611198906`}, {2., 0.6931471805599453}, {1.8, 0.}}],
+      FontSize->Scaled[0.02]]}, {}}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox["\"limitValue\"", TraditionalForm], 
+    FormBox["\"Log(Periodicity)\"", TraditionalForm]},
+  AxesOrigin->{1.7960906250000002`, 0},
+  BaseStyle->{FontSize -> Scaled[0.02]},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->1400,
+  Method->{},
+  PlotRange->{{1.8, 2.0502}, {0, 2.772588722239781}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315166109*^9}}],
+
+Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
+minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
+build/x-limits-x-periodicityParameters05below.png\"\>"], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315551511*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], 
+     StyleBox[
+      PointBox[{{-0.109, 2.772588722239781}, {-0.115, 
+       2.0794415416798357`}, {-0.15, 1.3862943611198906`}, {-0.2, 
+       0.6931471805599453}, {-0.37, 0.}}],
+      FontSize->Scaled[0.02]]}, {}}, {}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{
+    FormBox["\"limitValue\"", TraditionalForm], 
+    FormBox["\"Log(Periodicity)\"", TraditionalForm]},
+  AxesOrigin->{-0.104921875, 0},
+  BaseStyle->{FontSize -> Scaled[0.02]},
+  DisplayFunction->Identity,
+  Frame->{{False, False}, {False, False}},
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImageSize->1400,
+  Method->{},
+  PlotRange->{{-0.37, -0.109}, {0, 2.772588722239781}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.671193315581807*^9}}],
+
+Cell[BoxData["\<\"/media/leviathan/SPACE/meta/Work.Repositories/git/\
+minemonics/Minemonics/doc/reports/Thesis/Pictures/controllers/chua-circuit/\
+build/x-limits-x-periodicityParameters05above.png\"\>"], "Output",
+ CellChangeTimes->{{3.671184872098255*^9, 3.671185541790101*^9}, 
+   3.671189887251897*^9, {3.6711931577369013`*^9, 3.6711933159994917`*^9}}]
+}, Open  ]],
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
@@ -9668,7 +10041,7 @@ Cell[BoxData[{
    3.67092291283453*^9}]
 },
 Evaluator->"Kernel #2",
-WindowSize->{1434, 1524},
+WindowSize->{2880, 1527},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
 StyleDefinitions->"Default.nb"
@@ -9685,39 +10058,49 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[557, 20, 339, 7, 55, "Input"],
-Cell[899, 29, 12267, 319, 1419, "Input"],
-Cell[13169, 350, 422, 11, 55, "Input"],
-Cell[13594, 363, 9880, 255, 1045, "Input"],
-Cell[23477, 620, 11623, 302, 1067, "Input"],
-Cell[35103, 924, 11665, 302, 1067, "Input"],
-Cell[46771, 1228, 11155, 288, 1001, "Input"],
-Cell[57929, 1518, 11622, 302, 1067, "Input"],
-Cell[69554, 1822, 11626, 302, 1067, "Input"],
-Cell[81183, 2126, 11620, 302, 1067, "Input"],
-Cell[92806, 2430, 11620, 302, 1067, "Input"],
-Cell[104429, 2734, 11620, 302, 1067, "Input"],
-Cell[116052, 3038, 11621, 302, 1067, "Input"],
-Cell[127676, 3342, 11622, 302, 1067, "Input"],
-Cell[139301, 3646, 11678, 305, 1067, "Input"],
-Cell[150982, 3953, 11651, 303, 1067, "Input"],
-Cell[162636, 4258, 11649, 303, 1067, "Input"],
-Cell[174288, 4563, 11647, 303, 1067, "Input"],
-Cell[185938, 4868, 11643, 303, 1067, "Input"],
-Cell[197584, 5173, 11645, 303, 1067, "Input"],
-Cell[209232, 5478, 11643, 303, 1067, "Input"],
-Cell[220878, 5783, 11625, 302, 1067, "Input"],
-Cell[232506, 6087, 11619, 302, 1067, "Input"],
-Cell[244128, 6391, 11621, 302, 1067, "Input"],
-Cell[255752, 6695, 11614, 302, 1067, "Input"],
-Cell[267369, 6999, 11615, 302, 1067, "Input"],
-Cell[278987, 7303, 11689, 303, 1067, "Input"],
-Cell[290679, 7608, 11615, 295, 1067, "Input"],
-Cell[302297, 7905, 11621, 295, 1067, "Input"],
-Cell[313921, 8202, 11687, 303, 1067, "Input"],
-Cell[325611, 8507, 11618, 295, 1067, "Input"],
-Cell[337232, 8804, 11637, 303, 1067, "Input"],
-Cell[348872, 9109, 15930, 426, 1463, "Input"],
-Cell[364805, 9537, 4628, 130, 297, "Input"]
+Cell[CellGroupData[{
+Cell[921, 31, 19959, 523, 1925, "Input"],
+Cell[20883, 556, 1280, 33, 796, "Output"],
+Cell[22166, 591, 354, 4, 32, "Output"],
+Cell[22523, 597, 1357, 34, 859, "Output"],
+Cell[23883, 633, 354, 4, 32, "Output"],
+Cell[24240, 639, 1304, 33, 796, "Output"],
+Cell[25547, 674, 353, 4, 32, "Output"],
+Cell[25903, 680, 1314, 34, 859, "Output"],
+Cell[27220, 716, 355, 4, 32, "Output"]
+}, Open  ]],
+Cell[27590, 723, 422, 11, 55, "Input"],
+Cell[28015, 736, 9880, 255, 913, "Input"],
+Cell[37898, 993, 11623, 302, 935, "Input"],
+Cell[49524, 1297, 11665, 302, 1067, "Input"],
+Cell[61192, 1601, 11155, 288, 1001, "Input"],
+Cell[72350, 1891, 11622, 302, 1067, "Input"],
+Cell[83975, 2195, 11626, 302, 1067, "Input"],
+Cell[95604, 2499, 11620, 302, 1067, "Input"],
+Cell[107227, 2803, 11620, 302, 1067, "Input"],
+Cell[118850, 3107, 11620, 302, 1067, "Input"],
+Cell[130473, 3411, 11621, 302, 1067, "Input"],
+Cell[142097, 3715, 11622, 302, 1067, "Input"],
+Cell[153722, 4019, 11678, 305, 1067, "Input"],
+Cell[165403, 4326, 11651, 303, 1067, "Input"],
+Cell[177057, 4631, 11649, 303, 1067, "Input"],
+Cell[188709, 4936, 11647, 303, 1067, "Input"],
+Cell[200359, 5241, 11643, 303, 1067, "Input"],
+Cell[212005, 5546, 11645, 303, 1067, "Input"],
+Cell[223653, 5851, 11643, 303, 1067, "Input"],
+Cell[235299, 6156, 11625, 302, 1067, "Input"],
+Cell[246927, 6460, 11619, 302, 1067, "Input"],
+Cell[258549, 6764, 11621, 302, 1067, "Input"],
+Cell[270173, 7068, 11614, 302, 1067, "Input"],
+Cell[281790, 7372, 11615, 302, 1067, "Input"],
+Cell[293408, 7676, 11689, 303, 1067, "Input"],
+Cell[305100, 7981, 11615, 295, 1067, "Input"],
+Cell[316718, 8278, 11621, 295, 1067, "Input"],
+Cell[328342, 8575, 11687, 303, 1067, "Input"],
+Cell[340032, 8880, 11618, 295, 1067, "Input"],
+Cell[351653, 9177, 11637, 303, 1067, "Input"],
+Cell[363293, 9482, 15930, 426, 1463, "Input"],
+Cell[379226, 9910, 4628, 130, 297, "Input"]
 }
 ]
 *)

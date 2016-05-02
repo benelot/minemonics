@@ -789,7 +789,7 @@ This setup was chosen through the single fitness function in a very liberal way,
 %
 The simulators were run on a quad-core processor system, so the multiple simulators exploited the multiple cores much better than a single simulator could. %
 %
-The experiment using the direct limiter controller chaotic controller sounded much more promising, since the controller stayed in a quasi-periodic motion for all the time for almost all the model leg setups. %
+The experiment using the direct limiter controller chaotic controller sounded much more promising, since the controller stayed in a quasi-periodic motion for all the time for all the model leg setups. %
 %
 Its output seemingly could be easily compared to the sinusoidal controllers. %
 %
@@ -808,7 +808,7 @@ Thus, a controller might sometimes stabilize a periodic orbit at one point, but 
 
 The simple limiters of the environment apparently stabilize a certain periodic orbit, but as the gait progresses, the limiters change and therefore the controller behavior changes. %
 %
-The controller therefore satisfies the idea of being adaptive to the environment, however it stayed in question if multiple controllers could be combined with a co-evolved morphology so that a satisfactory locomotion pattern would arise. %
+The controller therefore satisfies the idea of being adaptive, however it stayed in question if multiple controllers could be combined with a co-evolved morphology so that a satisfactory locomotion pattern would arise. %
 %
 The fitness function of average velocity leaves it up to the individual, how the movement would be achieved. %
 %
@@ -850,7 +850,13 @@ The best results were achieved using a stronger restriction on the solutions, wh
 %
 The minimal contact point quantity fitness function reduced the the number of feet a creature develops, therefore a clearer locomotion pattern had to emerge. %
 %
-In the following figures, three of these evolved creatures are examined in detail.
+In the following paragraphs, three of these evolved creatures are examined in detail. %
+%
+It is important to note that all creatures use the same type of chaotic controller, namely the directly limited version. %
+%
+The only parameters that change among the creatures are the initial conditions of the underlying Chua circuit and the control signal speed. %
+%
+The input to the controller obviously is different from joint to joint as well, but is intended to be different, as it is influenced through the simple limiters. %
 
 \paragraph{Walker}
  

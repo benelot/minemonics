@@ -335,6 +335,14 @@ A self-similar pattern of increasing and decreasing convergence speeds can be ob
 
 Below \(limitValue = 1.81\), the limiter is applied instantly, the trajectory drops in z direction to \(\approx-2.68343\) and then heads towards \([\infty,\infty,-2.68343]\), therefore it can never escape the limiter again.
 
+Figure \ref{figure:x-limits-z-periodicityParameters013} shows all observed periodicities with their limit values using a limiter of softness 0.13. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textheight]{controllers/chua-circuit/x-limits-z-periodicityParameters013.png}
+\caption[Figure of observed periodicities with a x-limiting z 0.13 limiter]{Figure showing the observed periodicities when using a limiter of softness 0.13. In this case, only period 1 could be observed.}
+\label{figure:x-limits-z-periodicityParameters013}
+\end{figure}
+
 \todo[inline]{Identify some periodic trajectories, possibly with the help of the group.}
 
 The limiter control gets more interesting when the softness is set to \(softness=0.5\), which corresponds to a softer limiter (Fig. \ref{figure:softlimiterresponse}). %
@@ -400,6 +408,14 @@ The plots below show the periodic trajectories for various limit values. The con
 \includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using a 0.5 soft limiter.]{Figure of period 1 limit cycle where x(t) limits z(t) using a 0.5 soft limiter. The coloring of the curve indicates the strength of the limiter influence.}
 \label{figure:z-0.5-1-limit-cycle-trajectory}
+\end{figure}
+
+Figure \ref{figure:x-limits-z-periodicityParameters05} shows all observed periodicities with their limit values using a limiter of softness 0.5. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textheight]{controllers/chua-circuit/x-limits-z-periodicityParameters05.png}
+\caption[Figure of observed periodicities with a x-limiting z 0.5 limiter]{Figure showing the observed periodicities when using a limiter of softness 0.5.}
+\label{figure:x-limits-z-periodicityParameters05}
 \end{figure}
 
 \paragraph{One Dimension Limiting Itself} In the second experiment, the softness is again set to \(softness=0.13\) to approximate a rather hard limiter. The limiter is added to the equations as shown below:
@@ -501,6 +517,14 @@ The controlled limit cycle shrinks, until the trajectory directly converges onto
 \label{figure:x-0.13-convergence-trajectories}
 \end{figure}
 
+Figure \ref{figure:x-limits-x-periodicityParameters013below} shows all observed periodicities with their limit values using a limiter of softness 0.13 in the lowermost scroll. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textheight]{controllers/chua-circuit/x-limits-x-periodicityParameters013below.png}
+\caption[Figure of observed periodicities in the lowermost scroll with a self-limiting 0.13 limiter]{Figure showing the observed periodicities when using a limiter of softness 0.13 in the lowermost scroll.}
+\label{figure:x-limits-x-periodicityParameters013below}
+\end{figure}
+
 Moving the limiter to 1.3 leads to a rotation of the plane in which the original trajectories took place, and an inward spiral starting at the initial conditions and progressing towards the limiter occurs. %
 %
 The state spiralling into the limiter tries to pass the limiter from the uppermost to the gateway scroll to the lowermost scroll.
@@ -593,6 +617,14 @@ In the uppermost scroll, starting at \(limitValue=0.25304\), one can observe hig
 \label{figure:x-0.13-1-limit-cycle-upperscroll-trajectory}
 \end{figure}
 
+Figure \ref{figure:x-limits-x-periodicityParameters013above} shows all observed periodicities with their limit values using a limiter of softness 0.13 in the uppermost scroll. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textheight]{controllers/chua-circuit/x-limits-x-periodicityParameters013below.png}
+\caption[Figure of observed periodicities in the uppermost scroll with a self-limiting 0.13 limiter]{Figure showing the observed periodicities when using a limiter of softness 0.13 in the uppermost scroll.}
+\label{figure:x-limits-x-periodicityParameters013above}
+\end{figure}
+
 Using \(softness=0.5\), the limiter starts to influence the multiscroll attractor at \(11.507\), and the chaotic behavior can again be controlled using the limiter within the limiter value window \([2.176,11.507]\). %
 %
 Within the window \([1.8,2.1759]\), periodic orbits down to period 1 can be stabilized.
@@ -653,6 +685,14 @@ Within the window \([1.8,2.1759]\), periodic orbits down to period 1 can be stab
 \includegraphics[width=0.05\textwidth]{controllers/chua-circuit/BarLegend-limiter-application.png}
 \caption[Figure of period 1 limit cycle using a 0.5 soft limiter]{Figure of period 1 limit cycle using a self limiter with value 0.5.}
 \label{figure:x-0.5-1-limit-cycle-trajectory}
+\end{figure}
+
+Figure \ref{figure:x-limits-x-periodicityParameters05below} shows all observed periodicities with their limit values using a limiter of softness 0.5 in the lowermost scroll. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textheight]{controllers/chua-circuit/x-limits-x-periodicityParameters05below.png}
+\caption[Figure of observed periodicities in the lowermost scroll with a self-limiting 0.5 limiter]{Figure showing the observed periodicities when using a limiter of softness 0.5 in the lowermost scroll.}
+\label{figure:x-limits-x-periodicityParameters05below}
 \end{figure}
 
 The limit parameter can again be set beyond 0. The same plane rotation and spiralling behaviour can be seen, until it stays in the trajectory stays in the uppermost scroll of the multiscroll attractor before it spirals towards the limiter. %
@@ -717,13 +757,21 @@ There the trajectory can again be stabilized in the uppermost scroll into differ
 \label{figure:x-0.5-1-limit-cycle-upperscroll-trajectory}
 \end{figure}
 
+Figure \ref{figure:x-limits-x-periodicityParameters05above} shows all observed periodicities with their limit values using a limiter of softness 0.5 in the uppermost scroll. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textheight]{controllers/chua-circuit/x-limits-x-periodicityParameters05above.png}
+\caption[Figure of observed periodicities in the uppermost scroll with a self-limiting 0.5 limiter]{Figure showing the observed periodicities when using a limiter of softness 0.5 in the uppermost scroll.}
+\label{figure:x-limits-x-periodicityParameters05above}
+\end{figure}
+
 Pushing the limiter further into the negative limit values, one can again observe the plane rotation and the spiralling towards the uppermost scroll. %
 %
 Further limiting can suppress the progression of the trajectory entirely. %
 %
 The trajectory tries to spiral back into the uppermost scroll within limiter window \([-1,-4]\), but the radius of the spiral gets so small that the maximum precision of Mathematica is reached with limiter values \(<-4\).
 %
-Therefore the resulting trajectory starts to be discretized by the limited precision.
+Therefore the resulting trajectory starts to be discretized by the limited precision of Mathematica.
 
 \begin{figure}[H]
 \centering
