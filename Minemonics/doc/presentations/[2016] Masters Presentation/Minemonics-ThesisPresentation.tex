@@ -1,6 +1,53 @@
 \documentclass{beamer}
+\usepackage{pgfpages} % Used for show notes
 % use this instead for 16:9 aspect ratio:
 %\documentclass[aspectratio=169]{beamer}
+
+%General Remarks
+%- Tell a story i.e. build your presentation around a small set of messages you want to communicate. Think about what you want to tell.
+%- Tailor your presentation to your audience. How much do they know - what needs to be explained and what not? What are they interested in?
+%- Make sure that the main messages of your slides can also be understood by a deaf person following your presentation
+%- Don’t put too much text on your slides. Stick with short messages
+
+%Animations
+%- It’s a scientific presentation so only use subtle animations (no motion, no blinking)
+
+%Structure
+%- Make sure that you guide the eye of the viewer to the things you want to communicate
+%- Distribute your content among slides rather than overfilling one
+%- Make the content appear step by step to guide the viewer through it (Animations - Fade In)
+%- Do not use background images or strong background colors
+%- If you have a date on your slides, make sure it is correct
+%- Don’t put logos in the footer of your slides
+
+%Fonts
+%- The fonts have to be big enough be be readable even from far away - min. 20 pt (also for figure captions)
+%- Comic sans is the right font for birthday cards but not for presentations
+
+%Figures
+%- Make sure the axes are labeled correctly and they have to be readable
+
+%Hint: Display your talk on your laptop. Now walk to the other side of the room. Can you still read everything?
+
+%Slide Titles
+%- The title should be short and descriptive: What is the content of the slide?
+%- Substantives have to be upper case in a title
+
+%Headers / Footers
+%- Put numbers on your slides so that people with questions car refer to them
+%- Keep your headers and footers as minimal as possible otherwise they are distractors. At ISSCC for example, all logos, footers etc are BANNED.
+
+%Movies / Live Demos
+%- If you have movies of your work - show them!
+%- If you have demos of your work, you first have to make sure that they run under the given conditions. Do not rely on them to work. Avoid showing demos that do not run robustly. If your demo is not reliably working, take a movie.
+
+\input{commonpackages} %% many common packages
+
+\input{extrapackages} %% Some more packages that you may want to use.  Have a look at the
+%% file, and consult the package docs for each.
+
+%% We use subfiles to separate the file into subfiles which are compilable on their own by copying the preamble from this file.
+\usepackage{subfiles}
 \usepackage{etex}
 \reserveinserts{28}
 \usetheme{ETHbeamer}
@@ -9,27 +56,83 @@
 \colorlet{ETHcolor2}{ETHc}
 
 %\setbeameroption{show notes}
-%\setbeameroption{show notes on second screen=right}
+\setbeameroption{show notes on second screen=right}
+
+%Title Slide
+%- Put the logos of the institutions you are affiliated with on the title slide. Leave them away in the following slides.
+%- Your name and the occasion of the presentation should be mentioned on the title slide
+%- Check that the date is right if mentioned
 
 \author{Benjamin Ellenberger}
 
-\title{ETH \LaTeX\ Beamer Template}
+\title{Emergent Gait Periodicity in Evolved Creatures on Unknown Terrain}
 
-\date{2014-10-16}
+\date{2015-05-18}
 
 % uncomment if you do not want to use a department logo
 %\deplogofalse
-
 
 \begin{document}
 
 \titleframe
 
+%########################
+%Introduction
+%- After a short Welcome, the audience has to be introduced to the question which you are going to answer in the talk or the story you are going to tell. Why is what you you present of relevance?
+%- For longer talks, it is better to start with an overview slide that explains the structure of the talk
+\subfile{sections/01.Introduction/Introduction.tex}
+
+%########################
+%Methods
+%- After the Introduction you explain what you did
+%########################
+%Results
+%- As soon as the audience knows what you did, you show them what you got
+%- Quantify in a understandable way - explain your measures
+\subfile{sections/02.3DVCE-Simulation/3DVCE-Simulation.tex}
+\subfile{sections/03.Chaos/Chaos.tex}
+\subfile{sections/04.Mathematica/Mathematica.tex}
+\subfile{sections/05.ModelLeg/ModelLeg.tex}
+\subfile{sections/06.Simulations/Simulations.tex}
+
+%########################
+%Discussion
+%- Discuss what you got
+\subfile{sections/07.Discussion/Discussion.tex}
+
+%########################
+%Conclusion
+%- Contextualize and summon your findings
+%- Refer back to your introduction
+%- Sell your findings to the audience - everyone should walk out of the room with the good feeling that they learned something
+\subfile{sections/08.Conclusion/Conclusion.tex}
+
+%########################
+%Outlook
+%- Present the next steps
+\subfile{sections/09.Outlook/Outlook.tex}
+
+%########################
+%Acknowledgements
+%- Thank your colleagues 
+%- Thank the funding institutions for the money
+%- Thank the audience for their attention (not necessary for conferences)
+%- If you put pictures of the main contributors of the presented work on the acknowledgement slide, it’s easier for the audience to associate them to the work presented.
+%- It’s also fair and sometimes even mandatory to mention your funding institutions (incl. logo?) on one of the last slides
+\subfile{sections/10.Acknowledgements/Acknowledgements.tex}
+
+%########################
+%Backup Slides
+%- Keep some supplementary material on backup slides to reply on questions on content which you were not capable of presenting (due to the restricted time)
+\subfile{sections/11.Backup-Slides/Backup-Slides.tex}
+
+\begin{comment}
 \begin{frame}
 
   \frametitle{Contents}
   \tableofcontents[currentsection]
 \end{frame}
+\note{Hello world}
 
 
 \section{Something}
@@ -47,7 +150,7 @@
      \end{itemize}
      
      \column{0.6\textwidth}
-      \includegraphics[width=2in, clip] {figs/creatures.jpg} 
+      %\includegraphics[width=2in, clip] {figs/creatures.jpg} 
   \end{columns}
   }
 \note{}
@@ -139,5 +242,7 @@ The inverted frame looks like this. It is created using the \texttt{inverseframe
 The minimal frame looks like this. It is created using the \texttt{minimalframe} environment.
   
 \end{minimalframe}
+
+\end{comment}
 
 \end{document}
