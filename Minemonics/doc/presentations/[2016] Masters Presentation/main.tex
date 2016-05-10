@@ -3,6 +3,15 @@
 % use this instead for 16:9 aspect ratio:
 %\documentclass[aspectratio=169]{beamer}
 
+\providecommand{\main}{.} % relative path to master.tex
+
+\graphicspath{{../../reports/Thesis/Pictures/}} % Specifies the directory where pictures are stored
+
+\makeatletter
+\providecommand*{\input@path}{{..}}
+\g@addto@macro\input@path{{..}}% append % if you cant override it
+\makeatother
+
 %General Remarks
 %- Tell a story i.e. build your presentation around a small set of messages you want to communicate. Think about what you want to tell.
 %- Tailor your presentation to your audience. How much do they know - what needs to be explained and what not? What are they interested in?
