@@ -182,7 +182,7 @@
 %	defined as \examname above so you cite it as \examname
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Emergent gait periodicity in evolved creatures on unknown terrains} % Your thesis title - this is used in the title and abstract
+\thesistitle{Emergent gait periodicity in evolved creatures} % Your thesis title - this is used in the title and abstract
 %-------------------------------------------------  
 \supervisor{Prof. Dr. habil. Ruedi \textsc{STOOP}} % You supervisor's name - this is used in the title page
 %-------------------------------------------------   
