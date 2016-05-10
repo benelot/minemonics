@@ -1,0 +1,2346 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     99695,       2337]
+NotebookOptionsPosition[     93148,       2135]
+NotebookOutlinePosition[     94754,       2186]
+CellTagsIndexPosition[     94426,       2174]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Bifurcation Diagram for a Generalized Logistic Map", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.591401081450765*^9, 3.5914011005655565`*^9}, {
+   3.5914078269899454`*^9, 3.591407831122712*^9}, {3.591553822126099*^9, 
+   3.591553822517849*^9}, {3.5916154983216877`*^9, 3.5916154984083548`*^9}, {
+   3.5998435079884357`*^9, 3.5998435188327446`*^9}, {3.599945081257369*^9, 
+   3.599945081999218*^9}, {3.6000093854228086`*^9, 3.6000093897326765`*^9}, 
+   3.6000095232686253`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BFGdata", " ", "=", "  ", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\[Mu]", ",", " ", "_Real"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"z", ",", " ", "_Real"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"x0", ",", " ", "_Real"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"iter", ",", " ", "_Integer"}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"dropiter", ",", " ", "_Integer"}], "}"}]}], "}"}], ",", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\[Mu]", ",", "#"}], "}"}], "&"}], "/@", 
+      RowBox[{"Drop", "[", 
+       RowBox[{
+        RowBox[{"NestList", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              FractionBox["\[Mu]", "2"], " ", 
+              RowBox[{"(", 
+               RowBox[{"1", " ", "-", " ", 
+                SuperscriptBox[
+                 RowBox[{"Abs", "[", "#", "]"}], "z"]}], ")"}]}], " ", "-", 
+             " ", "1"}], ")"}], "&"}], ",", " ", "x0", ",", " ", "iter"}], 
+         "]"}], ",", " ", "dropiter"}], "]"}]}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.6000012554812245`*^9, 3.60000127445473*^9}},
+ CellID->20492050]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"data1", ",", " ", "data2", ",", " ", "imgsz"}], "}"}], ",", 
+     " ", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"imgsz", " ", "=", " ", "260"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"data1", " ", "=", " ", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"BFGdata", "[", 
+            RowBox[{
+            "\[Mu]", ",", " ", "z", ",", " ", "0", ",", " ", "iter", ",", " ",
+              "dropiter"}], "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{
+            "\[Mu]", ",", " ", "\[Lambda]Left", ",", " ", "4", ",", " ", 
+             FractionBox[
+              RowBox[{"4", " ", "-", " ", "\[Lambda]Left"}], "206"]}], 
+            "}"}]}], "]"}], ",", " ", "1"}], "]"}]}], ";", " ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"data2", " ", "=", " ", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"\[Mu]", ">", "4"}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"{", 
+               RowBox[{"4", ",", " ", "0"}], "}"}], "}"}], ",", " ", 
+             RowBox[{"BFGdata", "[", 
+              RowBox[{
+              "\[Mu]", ",", " ", "z", ",", " ", "0", ",", " ", "iter", ",", 
+               " ", "dropiter"}], "]"}]}], "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"\[Mu]", ",", " ", 
+             RowBox[{
+              RowBox[{"a", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "-", 
+              RowBox[{
+               FractionBox[
+                RowBox[{"(", 
+                 RowBox[{"4", " ", "-", " ", "\[Lambda]Left"}], ")"}], "2"], 
+               "/", "mag"}]}], ",", " ", 
+             RowBox[{
+              RowBox[{"a", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "+", 
+              RowBox[{
+               FractionBox[
+                RowBox[{"(", 
+                 RowBox[{"4", " ", "-", " ", "\[Lambda]Left"}], ")"}], "2"], 
+               "/", "mag"}]}], ",", " ", 
+             FractionBox[
+              RowBox[{"4", "-", "\[Lambda]Left"}], 
+              RowBox[{"206", " ", "mag"}]]}], "}"}]}], "]"}], ",", " ", "1"}],
+         "]"}]}], ";", " ", "\[IndentingNewLine]", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"ListPlot", "[", 
+          RowBox[{"data1", ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"AspectRatio", " ", "\[Rule]", " ", "1"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AxesOrigin", " ", "\[Rule]", " ", "a"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AxesStyle", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Blue", ",", " ", 
+                RowBox[{"Opacity", "[", "0.3", "]"}]}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"Blue", ",", " ", 
+                RowBox[{"Opacity", "[", "0.3", "]"}]}], "}"}]}], "}"}]}], ",",
+            " ", "\[IndentingNewLine]", 
+           RowBox[{"Frame", " ", "\[Rule]", " ", "True"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"FrameLabel", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{"\[Lambda]", ",", " ", "x"}], "}"}]}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"ImagePadding", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"40", ",", "15"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"40", ",", "15"}], "}"}]}], "}"}]}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"ImageSize", " ", "\[Rule]", 
+            RowBox[{"1.1", " ", "imgsz"}]}], ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"PlotRange", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"\[Lambda]Left", ",", " ", "4"}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"-", "1"}], ",", " ", "1"}], "}"}]}], "}"}]}], ",", 
+           " ", "\[IndentingNewLine]", 
+           RowBox[{"PlotStyle", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"PointSize", "[", "0.01", "]"}], ",", " ", 
+              RowBox[{"Opacity", "[", "0.2", "]"}]}], "}"}]}]}], "]"}], ",", 
+         " ", "\[IndentingNewLine]", 
+         RowBox[{"ListPlot", "[", 
+          RowBox[{"data2", ",", " ", "\[IndentingNewLine]", 
+           RowBox[{"AspectRatio", " ", "\[Rule]", " ", "1"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AxesOrigin", " ", "\[Rule]", " ", "a"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AxesStyle", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"Blue", ",", " ", 
+                RowBox[{"Opacity", "[", "0.3", "]"}]}], "}"}], ",", " ", 
+              RowBox[{"{", 
+               RowBox[{"Blue", ",", " ", 
+                RowBox[{"Opacity", "[", "0.3", "]"}]}], "}"}]}], "}"}]}], ",",
+            " ", "\[IndentingNewLine]", 
+           RowBox[{"Frame", " ", "\[Rule]", " ", "True"}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"FrameLabel", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{"\[Lambda]", ",", " ", "x"}], "}"}]}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"ImagePadding", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"40", ",", "15"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"40", ",", "15"}], "}"}]}], "}"}]}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"ImageSize", " ", "\[Rule]", 
+            RowBox[{"1.1", "imgsz"}]}], ",", " ", 
+           RowBox[{"PlotRange", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"a", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "-", 
+                 RowBox[{
+                  FractionBox[
+                   RowBox[{"(", 
+                    RowBox[{"4", " ", "-", " ", "\[Lambda]Left"}], ")"}], 
+                   "2"], "/", "mag"}]}], ",", " ", 
+                RowBox[{
+                 RowBox[{"a", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], "+", 
+                 RowBox[{
+                  FractionBox[
+                   RowBox[{"(", 
+                    RowBox[{"4", " ", "-", " ", "\[Lambda]Left"}], ")"}], 
+                   "2"], "/", "mag"}]}]}], "}"}], ",", "  ", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"a", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], "-", 
+                 RowBox[{"1", "/", "mag"}]}], ",", " ", 
+                RowBox[{
+                 RowBox[{"a", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], "+", 
+                 RowBox[{"1", "/", "mag"}]}]}], "}"}]}], "}"}]}], ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotStyle", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"PointSize", "[", "0.01", "]"}], ",", " ", 
+              RowBox[{"Opacity", "[", "0.2", "]"}]}], "}"}]}]}], "]"}]}], 
+        "}"}], "]"}]}]}], "]"}], ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"3.569945", ",", " ", "0.758"}], "}"}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"\[Lambda]Left", ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", " ", "1"}], "}"}], ",", " ", "Locator", ",", " ", 
+     RowBox[{"Appearance", " ", "\[Rule]", " ", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Blue", ",", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+        " ", 
+        RowBox[{"ImageSize", " ", "\[Rule]", " ", 
+         RowBox[{"Round", "[", 
+          RowBox[{"215", "/", "mag"}], "]"}]}]}], "]"}]}]}], "}"}], ",", " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Control", "@", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "\[Lambda]Left", ",", " ", "2", ",", " ", 
+        "\"\<leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \
+\(left\)]\)\>\""}], "}"}], ",", " ", "2", ",", " ", "3.999", ",", " ", 
+      "0.0001", ",", " ", 
+      RowBox[{"ImageSize", " ", "\[Rule]", " ", "Medium"}], ",", 
+      RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], 
+     "}"}]}], ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"Control", "@", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"z", ",", " ", "2", ",", " ", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{"\"\<unimodality, \>\"", ",", " ", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<z\>\"", ",", " ", "Italic"}], "]"}]}], "}"}], 
+         "]"}]}], "}"}], ",", " ", "1", ",", " ", "8", ",", " ", "0.01", ",", 
+      " ", 
+      RowBox[{"ImageSize", " ", "\[Rule]", " ", "Medium"}], ",", 
+      RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], 
+     "}"}]}], ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"Control", "@", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"iter", ",", " ", "280", ",", " ", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{"\"\<number of iterations, \>\"", ",", " ", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<n\>\"", ",", " ", "Italic"}], "]"}]}], "}"}], 
+         "]"}]}], "}"}], ",", " ", "200", ",", " ", "400", ",", " ", "1", ",",
+       " ", 
+      RowBox[{"ImageSize", " ", "\[Rule]", " ", "Medium"}], ",", 
+      RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], 
+     "}"}]}], ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"Control", "@", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"dropiter", ",", " ", "100", ",", " ", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{"\"\<number of iterations to be dropped, \>\"", ",", " ", 
+           SubscriptBox[
+            RowBox[{"Style", "[", 
+             RowBox[{"\"\<n\>\"", ",", " ", "Italic"}], "]"}], 
+            "\"\<drop\>\""]}], "}"}], "]"}]}], "}"}], ",", " ", "0", ",", " ",
+       "100", ",", " ", "1", ",", " ", 
+      RowBox[{"ImageSize", " ", "\[Rule]", " ", "Medium"}], ",", 
+      RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], 
+     "}"}]}], ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "mag", ",", "3", ",", "\"\<zoom\[Hyphen]in level, \[Zeta]\>\""}], "}"}],
+      ",", "2", ",", "30", ",", ".01", ",", 
+     RowBox[{"ImageSize", " ", "\[Rule]", " ", "Medium"}], ",", " ", 
+     RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], 
+   ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", " ", "\[Rule]", " ", "Top"}], ",", " ", 
+   "\[IndentingNewLine]", 
+   RowBox[{"AutorunSequencing", " ", "\[Rule]", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "8"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "8"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", "8"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", "8"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"5", ",", "8"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"6", ",", "8"}], "}"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", " ", "\[Rule]", " ", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.5914011502387953`*^9, {3.5914016507665663`*^9, 
+   3.5914016574920673`*^9}, {3.5914017717064943`*^9, 3.591401776242529*^9}, {
+   3.591460391333783*^9, 3.5914604011227617`*^9}, {3.591461180547697*^9, 
+   3.59146118417906*^9}, {3.5914612236070023`*^9, 3.591461277958437*^9}, {
+   3.591461513043943*^9, 3.59146152891553*^9}, {3.591552424273262*^9, 
+   3.5915524681037083`*^9}, {3.5915530142199802`*^9, 3.591553029202743*^9}, 
+   3.599844146059024*^9, {3.5998470796092405`*^9, 3.5998470798123755`*^9}, {
+   3.599945181761929*^9, 3.5999451995250483`*^9}, {3.599945587357114*^9, 
+   3.599945606424344*^9}, {3.5999456901272306`*^9, 3.5999457084314203`*^9}, {
+   3.599945742383211*^9, 3.599945742606058*^9}, {3.599945801410252*^9, 
+   3.599945805505568*^9}, {3.599945840055737*^9, 3.5999458750648003`*^9}, {
+   3.6000013164487777`*^9, 3.600001323812961*^9}, {3.600001730609273*^9, 
+   3.6000018026701145`*^9}, {3.6000018365839744`*^9, 
+   3.6000020160672054`*^9}, {3.600002051717106*^9, 3.600002076890746*^9}, {
+   3.6000021203208485`*^9, 3.6000021456264906`*^9}, {3.600002204337977*^9, 
+   3.600002204637984*^9}, {3.6000022361997824`*^9, 3.600002284975026*^9}, {
+   3.6000023338732576`*^9, 3.6000023615229597`*^9}, {3.600002417670388*^9, 
+   3.600002436842868*^9}, {3.6000028666697416`*^9, 3.6000028673537583`*^9}, {
+   3.600002918742061*^9, 3.600003018575592*^9}, 3.600003058073594*^9, 
+   3.600003165439314*^9, {3.6000031970481052`*^9, 3.6000032016892295`*^9}, {
+   3.600003282255308*^9, 3.600003288435463*^9}, {3.600003357547208*^9, 
+   3.600003360963295*^9}, {3.6000033932211094`*^9, 3.6000033960651803`*^9}, {
+   3.600003475932186*^9, 3.600003478392247*^9}, {3.6000269730698423`*^9, 
+   3.6000269855941267`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = {3.569945, 
+    0.758}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+    280, $CellContext`mag$$ = 3, $CellContext`z$$ = 
+    2, $CellContext`\[Lambda]Left$$ = 2, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], {3.569945, 0.758}}, 
+      Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}}, {{
+       Hold[$CellContext`\[Lambda]Left$$], 2, 
+       "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \(left\
+\)]\)"}, 2, 3.999, 0.0001}, {{
+       Hold[$CellContext`z$$], 2, 
+       Row[{"unimodality, ", 
+         Style["z", Italic]}]}, 1, 8, 0.01}, {{
+       Hold[$CellContext`iter$$], 280, 
+       Row[{"number of iterations, ", 
+         Style["n", Italic]}]}, 200, 400, 1}, {{
+       Hold[$CellContext`dropiter$$], 100, 
+       Row[{"number of iterations to be dropped, ", 
+         Subscript[
+          Style["n", Italic], "drop"]}]}, 0, 100, 1}, {{
+       Hold[$CellContext`mag$$], 3, "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 
+      0.01}}, Typeset`size$$ = {572., {141., 145.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`a$13753$$ = 0, $CellContext`\[Lambda]Left$13754$$ = 
+    0, $CellContext`z$13755$$ = 0, $CellContext`iter$13756$$ = 
+    0, $CellContext`dropiter$13757$$ = 0, $CellContext`mag$13758$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = {3.569945, 
+         0.758}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+        280, $CellContext`mag$$ = 3, $CellContext`z$$ = 
+        2, $CellContext`\[Lambda]Left$$ = 2}, "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$13753$$, 0], 
+        Hold[$CellContext`\[Lambda]Left$$, $CellContext`\[Lambda]Left$13754$$,
+          0], 
+        Hold[$CellContext`z$$, $CellContext`z$13755$$, 0], 
+        Hold[$CellContext`iter$$, $CellContext`iter$13756$$, 0], 
+        Hold[$CellContext`dropiter$$, $CellContext`dropiter$13757$$, 0], 
+        Hold[$CellContext`mag$$, $CellContext`mag$13758$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`data1$, $CellContext`data2$, $CellContext`imgsz$}, \
+$CellContext`imgsz$ = 260; $CellContext`data1$ = Flatten[
+           Table[
+            $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+             0, $CellContext`iter$$, $CellContext`dropiter$$], {$CellContext`\
+\[Mu], $CellContext`\[Lambda]Left$$, 4, (4 - $CellContext`\[Lambda]Left$$)/
+             206}], 1]; $CellContext`data2$ = Flatten[
+           Table[
+            If[$CellContext`\[Mu] > 4, {{4, 0}}, 
+             $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+              0, $CellContext`iter$$, $CellContext`dropiter$$]], \
+{$CellContext`\[Mu], 
+             Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+              2)/$CellContext`mag$$, 
+             Part[$CellContext`a$$, 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+               2)/$CellContext`mag$$, (4 - $CellContext`\[Lambda]Left$$)/(
+             206 $CellContext`mag$$)}], 1]; Row[{
+           
+           ListPlot[$CellContext`data1$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{$CellContext`\[Lambda]Left$$, 4}, {-1, 1}}, 
+            PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}], 
+           ListPlot[$CellContext`data2$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{
+              Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+                2)/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 
+                 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+                 2)/$CellContext`mag$$}, {
+              Part[$CellContext`a$$, 2] - 1/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 2] + 1/$CellContext`mag$$}}, PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}]}]], 
+      "Specifications" :> {{{$CellContext`a$$, {3.569945, 0.758}}, 
+         Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}, ControlType -> 
+         Locator, Appearance -> Dynamic[
+           Graphics[{Blue, 
+             Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}]}, ImageSize -> 
+            Round[215/$CellContext`mag$$]]]}, {{$CellContext`\[Lambda]Left$$, 
+          2, "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \
+\(left\)]\)"}, 2, 3.999, 0.0001, ImageSize -> Medium, Appearance -> 
+         "Labeled"}, {{$CellContext`z$$, 2, 
+          Row[{"unimodality, ", 
+            Style["z", Italic]}]}, 1, 8, 0.01, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`iter$$, 280, 
+          Row[{"number of iterations, ", 
+            Style["n", Italic]}]}, 200, 400, 1, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`dropiter$$, 100, 
+          Row[{"number of iterations to be dropped, ", 
+            Subscript[
+             Style["n", Italic], "drop"]}]}, 0, 100, 1, ImageSize -> Medium, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`mag$$, 3, 
+          "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01, ImageSize -> Medium,
+          Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        AutorunSequencing -> {{1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 
+         8}}}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{621., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`BFGdata = CompiledFunction[{8, 9., 5468}, {
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Integer], 
+          Blank[Integer]}, {{3, 0, 0}, {3, 0, 1}, {3, 0, 2}, {2, 0, 0}, {2, 0,
+          1}, {3, 2, 
+         0}}, {{1, {2, 0, 3}}, {2, {2, 0, 2}}, {-1, {2, 0, 4}}, {
+          0., {3, 0, 6}}, {0, {2, 0, 7}}}, {0, 11, 10, 0, 
+         5}, {{13, 2, 6, 5}, {7, 5, 4}, {6, 0, 8}, {6, 7, 5}, {35, 8, 3, 0}, {
+          6, 7, 6}, {3, 14}, {10, 2, 7}, {40, 60, 3, 0, 7, 3, 0, 9}, {16, 0, 
+          9, 7}, {40, 38, 3, 0, 5, 3, 0, 9}, {41, 263, 3, 0, 9, 3, 0, 1, 3, 0,
+           8}, {19, 8, 9}, {10, 3, 8}, {13, 8, 9, 8}, {16, 7, 8, 7}, {10, 4, 
+          8}, {13, 7, 8, 7}, {7, 7, 5}, {36, 5, 5, 3, 0}, {4, 6, 8, -13}, {34,
+           3, 2, 1}, {34, 1, 0, 2}, {
+          42, "Insert", 3, 1, 0, -3, 0, 4, 2, 2, 2, 3, 1, 4}, {
+          42, "Drop", 3, 1, 4, 2, 0, 7, 2, 0, 1, 3, 1, 3}, {33, 3, 8}, {6, 4, 
+          10}, {35, 8, 10, 3, 0}, {6, 7, 9}, {3, 4}, {37, 3, 9, 3, 3}, {34, 0,
+           3, 3, 1}, {36, 10, 1, 0, 0}, {4, 9, 8, -3}, {1}}, 
+         Function[{$CellContext`\[Mu], $CellContext`z, $CellContext`x0, \
+$CellContext`iter, $CellContext`dropiter}, 
+          Map[{$CellContext`\[Mu], #}& , 
+           Drop[
+            
+            NestList[($CellContext`\[Mu]/2) (1 - Abs[#]^$CellContext`z) - 
+             1& , $CellContext`x0, $CellContext`iter], \
+$CellContext`dropiter]]], Evaluate], $CellContext`x0 = 0., 
+       Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[Subscript] = {NHoldRest}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->43929825]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "This Demonstration shows a bifurcation diagram for a generalized logistic \
+map, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"f", "(", 
+     SubscriptBox["x", "n"], ")"}], "=", 
+    RowBox[{
+     SubscriptBox["x", 
+      RowBox[{"n", "+", "1"}]], "=", 
+     RowBox[{
+      RowBox[{
+       FractionBox["\[Lambda]", "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"1", "-"}], "|", 
+         SubscriptBox["x", "n"], 
+         SuperscriptBox["|", "z"]}], ")"}]}], "-", "1"}]}]}], 
+   TraditionalForm]], "InlineMath"],
+ " [1\[Dash]7]. This map is very well-suited for numerical analysis because: "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.591402268239683*^9, 3.59140226881807*^9}, {
+   3.5914023085216255`*^9, 3.591402465972954*^9}, {3.5914025453300557`*^9, 
+   3.5914026966152377`*^9}, {3.591402801314266*^9, 3.591402801763567*^9}, {
+   3.5914030725136633`*^9, 3.5914031486366024`*^9}, 3.591403537836479*^9, {
+   3.5914042062475924`*^9, 3.591404298756476*^9}, {3.591404469296522*^9, 
+   3.59140449517684*^9}, {3.5914045313480234`*^9, 3.5914045376852655`*^9}, {
+   3.591552569618609*^9, 3.5915526027406797`*^9}, {3.59155319456326*^9, 
+   3.591553195956254*^9}, {3.591553841341282*^9, 3.591553845957296*^9}, {
+   3.599846145642412*^9, 3.5998461490800877`*^9}, {3.5998492724216537`*^9, 
+   3.5998492728591776`*^9}, {3.599945231038272*^9, 3.5999452310384083`*^9}, {
+   3.600027010102303*^9, 3.600027011315915*^9}}],
+
+Cell[TextData[{
+ "1. The basin of attraction for an attracting set is strictly confined \
+within ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"|", "x", "|", 
+    RowBox[{"\[LessEqual]", "1"}]}], TraditionalForm]], "InlineMath"],
+ " for any initial value ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "0"], TraditionalForm]], "InlineMath"],
+ " and for any parameter values ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Lambda]", ">", "0"}], TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", ">", "0"}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5914031520618935`*^9, 3.5914033109876833`*^9}, {
+   3.591403734675152*^9, 3.591403781088159*^9}, {3.5914068703951225`*^9, 
+   3.5914068751162815`*^9}, {3.5914069310096846`*^9, 3.591406963106161*^9}, 
+   3.5914090340984917`*^9, {3.6000044815640917`*^9, 3.600004571625597*^9}, {
+   3.600027025963829*^9, 3.600027026098469*^9}},
+ CellID->48722799],
+
+Cell[TextData[{
+ "2. The basin of attraction for an attracting set abruptly vanishes at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Lambda]", "=", "4"}], TraditionalForm]], "InlineMath"],
+ " for any value of ",
+ Cell[BoxData[
+  FormBox["z", TraditionalForm]], "InlineMath"],
+ ", that is, \"all boundary crises occur at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Lambda]", "=", "4"}], TraditionalForm]], "InlineMath"],
+ ".\""
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.591403312451663*^9, 3.591403425722458*^9}, {
+   3.5914037876135273`*^9, 3.5914038654676065`*^9}, {3.591403945955455*^9, 
+   3.5914039829311967`*^9}, {3.5914040344396286`*^9, 
+   3.5914040425750732`*^9}, {3.591404077825652*^9, 3.59140411177437*^9}, {
+   3.5914068821579943`*^9, 3.591406888358143*^9}, {3.5914069744887776`*^9, 
+   3.5914069872503166`*^9}, {3.5914070274332056`*^9, 
+   3.5914070536537647`*^9}, {3.5914090386835594`*^9, 
+   3.5914090683353996`*^9}, {3.591553217174265*^9, 3.5915532184453993`*^9}, {
+   3.591553742743931*^9, 3.5915537728837433`*^9}, {3.6000270293164673`*^9, 
+   3.6000270294848757`*^9}},
+ CellID->202410231],
+
+Cell[TextData[{
+ "3. Since the function ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"f", "(", "x", ")"}], TraditionalForm]], "InlineMath"],
+ " is symmetric around ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "=", "0"}], TraditionalForm]], "InlineMath"],
+ ", this map is particularly convenient for renormalization group analysis. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5914041134855165`*^9, 3.5914041379618993`*^9}, {
+   3.5914045562056503`*^9, 3.59140465668786*^9}, {3.5914046893357067`*^9, 
+   3.5914046918734045`*^9}, {3.600027033051463*^9, 3.600027033321286*^9}},
+ CellID->280812721],
+
+Cell[TextData[{
+ "The blue box on the left is the locator where the image inside the box is \
+rescaled on the right in accordance with the zoom-in level ",
+ Cell[BoxData[
+  FormBox["\[Zeta]", TraditionalForm]], "InlineMath"],
+ ". By dragging the locator, you can change where to zoom in. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998458912068653`*^9, 3.5998459054459925`*^9}, {
+   3.5998459781790757`*^9, 3.5998460611376395`*^9}, {3.5999453086307793`*^9, 
+   3.599945308709887*^9}},
+ CellID->190687481]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = {
+    3.848, -0.05999999999999994}, $CellContext`dropiter$$ = 
+    100, $CellContext`iter$$ = 280, $CellContext`mag$$ = 
+    8.52, $CellContext`z$$ = 2., $CellContext`\[Lambda]Left$$ = 3.396, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], {3.848, -0.05999999999999994}}, 
+      Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}}, {{
+       Hold[$CellContext`\[Lambda]Left$$], 3.396, 
+       "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \(left\
+\)]\)"}, 2, 3.999, 0.0001}, {{
+       Hold[$CellContext`z$$], 2., 
+       Row[{"unimodality, ", 
+         Style["z", Italic]}]}, 1, 8, 0.01}, {{
+       Hold[$CellContext`iter$$], 280, 
+       Row[{"number of iterations, ", 
+         Style["n", Italic]}]}, 200, 400, 1}, {{
+       Hold[$CellContext`dropiter$$], 100, 
+       Row[{"number of iterations to be dropped, ", 
+         Subscript[
+          Style["n", Italic], "drop"]}]}, 0, 100, 1}, {{
+       Hold[$CellContext`mag$$], 8.52, "zoom\[Hyphen]in level, \[Zeta]"}, 2, 
+      30, 0.01}}, Typeset`size$$ = {572., {141., 145.}}, Typeset`update$$ = 0,
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`a$13837$$ = 0, $CellContext`\[Lambda]Left$13838$$ = 
+    0, $CellContext`z$13839$$ = 0, $CellContext`iter$13840$$ = 
+    0, $CellContext`dropiter$13841$$ = 0, $CellContext`mag$13842$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = {
+         3.848, -0.05999999999999994}, $CellContext`dropiter$$ = 
+        100, $CellContext`iter$$ = 280, $CellContext`mag$$ = 
+        8.52, $CellContext`z$$ = 2., $CellContext`\[Lambda]Left$$ = 3.396}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$13837$$, 0], 
+        Hold[$CellContext`\[Lambda]Left$$, $CellContext`\[Lambda]Left$13838$$,
+          0], 
+        Hold[$CellContext`z$$, $CellContext`z$13839$$, 0], 
+        Hold[$CellContext`iter$$, $CellContext`iter$13840$$, 0], 
+        Hold[$CellContext`dropiter$$, $CellContext`dropiter$13841$$, 0], 
+        Hold[$CellContext`mag$$, $CellContext`mag$13842$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`data1$, $CellContext`data2$, $CellContext`imgsz$}, \
+$CellContext`imgsz$ = 260; $CellContext`data1$ = Flatten[
+           Table[
+            $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+             0, $CellContext`iter$$, $CellContext`dropiter$$], {$CellContext`\
+\[Mu], $CellContext`\[Lambda]Left$$, 4, (4 - $CellContext`\[Lambda]Left$$)/
+             206}], 1]; $CellContext`data2$ = Flatten[
+           Table[
+            If[$CellContext`\[Mu] > 4, {{4, 0}}, 
+             $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+              0, $CellContext`iter$$, $CellContext`dropiter$$]], \
+{$CellContext`\[Mu], 
+             Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+              2)/$CellContext`mag$$, 
+             Part[$CellContext`a$$, 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+               2)/$CellContext`mag$$, (4 - $CellContext`\[Lambda]Left$$)/(
+             206 $CellContext`mag$$)}], 1]; Row[{
+           
+           ListPlot[$CellContext`data1$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{$CellContext`\[Lambda]Left$$, 4}, {-1, 1}}, 
+            PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}], 
+           
+           ListPlot[$CellContext`data2$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{
+              Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+                2)/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 
+                 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+                 2)/$CellContext`mag$$}, {
+              Part[$CellContext`a$$, 2] - 1/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 2] + 1/$CellContext`mag$$}}, PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}]}]], 
+      "Specifications" :> {{{$CellContext`a$$, {3.848, -0.05999999999999994}}, 
+         Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}, ControlType -> 
+         Locator, Appearance -> Dynamic[
+           Graphics[{Blue, 
+             Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}]}, ImageSize -> 
+            Round[215/$CellContext`mag$$]]]}, {{$CellContext`\[Lambda]Left$$, 
+          3.396, "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\
+\), \(left\)]\)"}, 2, 3.999, 0.0001, ImageSize -> Medium, Appearance -> 
+         "Labeled"}, {{$CellContext`z$$, 2., 
+          Row[{"unimodality, ", 
+            Style["z", Italic]}]}, 1, 8, 0.01, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`iter$$, 280, 
+          Row[{"number of iterations, ", 
+            Style["n", Italic]}]}, 200, 400, 1, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`dropiter$$, 100, 
+          Row[{"number of iterations to be dropped, ", 
+            Subscript[
+             Style["n", Italic], "drop"]}]}, 0, 100, 1, ImageSize -> Medium, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`mag$$, 8.52, 
+          "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01, ImageSize -> Medium,
+          Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        AutorunSequencing -> {{1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 
+         8}}}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{621., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`BFGdata = CompiledFunction[{8, 9., 5468}, {
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Integer], 
+          Blank[Integer]}, {{3, 0, 0}, {3, 0, 1}, {3, 0, 2}, {2, 0, 0}, {2, 0,
+          1}, {3, 2, 
+         0}}, {{1, {2, 0, 3}}, {2, {2, 0, 2}}, {-1, {2, 0, 4}}, {
+          0., {3, 0, 6}}, {0, {2, 0, 7}}}, {0, 11, 10, 0, 
+         5}, {{13, 2, 6, 5}, {7, 5, 4}, {6, 0, 8}, {6, 7, 5}, {35, 8, 3, 0}, {
+          6, 7, 6}, {3, 14}, {10, 2, 7}, {40, 60, 3, 0, 7, 3, 0, 9}, {16, 0, 
+          9, 7}, {40, 38, 3, 0, 5, 3, 0, 9}, {41, 263, 3, 0, 9, 3, 0, 1, 3, 0,
+           8}, {19, 8, 9}, {10, 3, 8}, {13, 8, 9, 8}, {16, 7, 8, 7}, {10, 4, 
+          8}, {13, 7, 8, 7}, {7, 7, 5}, {36, 5, 5, 3, 0}, {4, 6, 8, -13}, {34,
+           3, 2, 1}, {34, 1, 0, 2}, {
+          42, "Insert", 3, 1, 0, -3, 0, 4, 2, 2, 2, 3, 1, 4}, {
+          42, "Drop", 3, 1, 4, 2, 0, 7, 2, 0, 1, 3, 1, 3}, {33, 3, 8}, {6, 4, 
+          10}, {35, 8, 10, 3, 0}, {6, 7, 9}, {3, 4}, {37, 3, 9, 3, 3}, {34, 0,
+           3, 3, 1}, {36, 10, 1, 0, 0}, {4, 9, 8, -3}, {1}}, 
+         Function[{$CellContext`\[Mu], $CellContext`z, $CellContext`x0, \
+$CellContext`iter, $CellContext`dropiter}, 
+          Map[{$CellContext`\[Mu], #}& , 
+           Drop[
+            
+            NestList[($CellContext`\[Mu]/2) (1 - Abs[#]^$CellContext`z) - 
+             1& , $CellContext`x0, $CellContext`iter], \
+$CellContext`dropiter]]], Evaluate], $CellContext`x0 = 0., 
+       Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[Subscript] = {NHoldRest}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1741677854]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = {2.901, 
+    0.17999999999999994`}, $CellContext`dropiter$$ = 
+    100, $CellContext`iter$$ = 280, $CellContext`mag$$ = 
+    2.74, $CellContext`z$$ = 1.17, $CellContext`\[Lambda]Left$$ = 2.275, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], {2.901, 0.17999999999999994`}}, 
+      Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}}, {{
+       Hold[$CellContext`\[Lambda]Left$$], 2.275, 
+       "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \(left\
+\)]\)"}, 2, 3.999, 0.0001}, {{
+       Hold[$CellContext`z$$], 1.17, 
+       Row[{"unimodality, ", 
+         Style["z", Italic]}]}, 1, 8, 0.01}, {{
+       Hold[$CellContext`iter$$], 280, 
+       Row[{"number of iterations, ", 
+         Style["n", Italic]}]}, 200, 400, 1}, {{
+       Hold[$CellContext`dropiter$$], 100, 
+       Row[{"number of iterations to be dropped, ", 
+         Subscript[
+          Style["n", Italic], "drop"]}]}, 0, 100, 1}, {{
+       Hold[$CellContext`mag$$], 2.74, "zoom\[Hyphen]in level, \[Zeta]"}, 2, 
+      30, 0.01}}, Typeset`size$$ = {572., {141., 145.}}, Typeset`update$$ = 0,
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`a$13921$$ = 0, $CellContext`\[Lambda]Left$13922$$ = 
+    0, $CellContext`z$13923$$ = 0, $CellContext`iter$13924$$ = 
+    0, $CellContext`dropiter$13925$$ = 0, $CellContext`mag$13926$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = {2.901, 
+         0.17999999999999994`}, $CellContext`dropiter$$ = 
+        100, $CellContext`iter$$ = 280, $CellContext`mag$$ = 
+        2.74, $CellContext`z$$ = 1.17, $CellContext`\[Lambda]Left$$ = 2.275}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$13921$$, 0], 
+        Hold[$CellContext`\[Lambda]Left$$, $CellContext`\[Lambda]Left$13922$$,
+          0], 
+        Hold[$CellContext`z$$, $CellContext`z$13923$$, 0], 
+        Hold[$CellContext`iter$$, $CellContext`iter$13924$$, 0], 
+        Hold[$CellContext`dropiter$$, $CellContext`dropiter$13925$$, 0], 
+        Hold[$CellContext`mag$$, $CellContext`mag$13926$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`data1$, $CellContext`data2$, $CellContext`imgsz$}, \
+$CellContext`imgsz$ = 260; $CellContext`data1$ = Flatten[
+           Table[
+            $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+             0, $CellContext`iter$$, $CellContext`dropiter$$], {$CellContext`\
+\[Mu], $CellContext`\[Lambda]Left$$, 4, (4 - $CellContext`\[Lambda]Left$$)/
+             206}], 1]; $CellContext`data2$ = Flatten[
+           Table[
+            If[$CellContext`\[Mu] > 4, {{4, 0}}, 
+             $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+              0, $CellContext`iter$$, $CellContext`dropiter$$]], \
+{$CellContext`\[Mu], 
+             Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+              2)/$CellContext`mag$$, 
+             Part[$CellContext`a$$, 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+               2)/$CellContext`mag$$, (4 - $CellContext`\[Lambda]Left$$)/(
+             206 $CellContext`mag$$)}], 1]; Row[{
+           
+           ListPlot[$CellContext`data1$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{$CellContext`\[Lambda]Left$$, 4}, {-1, 1}}, 
+            PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}], 
+           
+           ListPlot[$CellContext`data2$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{
+              Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+                2)/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 
+                 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+                 2)/$CellContext`mag$$}, {
+              Part[$CellContext`a$$, 2] - 1/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 2] + 1/$CellContext`mag$$}}, PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}]}]], 
+      "Specifications" :> {{{$CellContext`a$$, {2.901, 0.17999999999999994`}}, 
+         Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}, ControlType -> 
+         Locator, Appearance -> Dynamic[
+           Graphics[{Blue, 
+             Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}]}, ImageSize -> 
+            Round[215/$CellContext`mag$$]]]}, {{$CellContext`\[Lambda]Left$$, 
+          2.275, "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\
+\), \(left\)]\)"}, 2, 3.999, 0.0001, ImageSize -> Medium, Appearance -> 
+         "Labeled"}, {{$CellContext`z$$, 1.17, 
+          Row[{"unimodality, ", 
+            Style["z", Italic]}]}, 1, 8, 0.01, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`iter$$, 280, 
+          Row[{"number of iterations, ", 
+            Style["n", Italic]}]}, 200, 400, 1, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`dropiter$$, 100, 
+          Row[{"number of iterations to be dropped, ", 
+            Subscript[
+             Style["n", Italic], "drop"]}]}, 0, 100, 1, ImageSize -> Medium, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`mag$$, 2.74, 
+          "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01, ImageSize -> Medium,
+          Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        AutorunSequencing -> {{1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 
+         8}}}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{621., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`BFGdata = CompiledFunction[{8, 9., 5468}, {
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Integer], 
+          Blank[Integer]}, {{3, 0, 0}, {3, 0, 1}, {3, 0, 2}, {2, 0, 0}, {2, 0,
+          1}, {3, 2, 
+         0}}, {{1, {2, 0, 3}}, {2, {2, 0, 2}}, {-1, {2, 0, 4}}, {
+          0., {3, 0, 6}}, {0, {2, 0, 7}}}, {0, 11, 10, 0, 
+         5}, {{13, 2, 6, 5}, {7, 5, 4}, {6, 0, 8}, {6, 7, 5}, {35, 8, 3, 0}, {
+          6, 7, 6}, {3, 14}, {10, 2, 7}, {40, 60, 3, 0, 7, 3, 0, 9}, {16, 0, 
+          9, 7}, {40, 38, 3, 0, 5, 3, 0, 9}, {41, 263, 3, 0, 9, 3, 0, 1, 3, 0,
+           8}, {19, 8, 9}, {10, 3, 8}, {13, 8, 9, 8}, {16, 7, 8, 7}, {10, 4, 
+          8}, {13, 7, 8, 7}, {7, 7, 5}, {36, 5, 5, 3, 0}, {4, 6, 8, -13}, {34,
+           3, 2, 1}, {34, 1, 0, 2}, {
+          42, "Insert", 3, 1, 0, -3, 0, 4, 2, 2, 2, 3, 1, 4}, {
+          42, "Drop", 3, 1, 4, 2, 0, 7, 2, 0, 1, 3, 1, 3}, {33, 3, 8}, {6, 4, 
+          10}, {35, 8, 10, 3, 0}, {6, 7, 9}, {3, 4}, {37, 3, 9, 3, 3}, {34, 0,
+           3, 3, 1}, {36, 10, 1, 0, 0}, {4, 9, 8, -3}, {1}}, 
+         Function[{$CellContext`\[Mu], $CellContext`z, $CellContext`x0, \
+$CellContext`iter, $CellContext`dropiter}, 
+          Map[{$CellContext`\[Mu], #}& , 
+           Drop[
+            
+            NestList[($CellContext`\[Mu]/2) (1 - Abs[#]^$CellContext`z) - 
+             1& , $CellContext`x0, $CellContext`iter], \
+$CellContext`dropiter]]], Evaluate], $CellContext`x0 = 0., 
+       Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[Subscript] = {NHoldRest}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->30099921],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = {3.569945, 
+    0.758}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+    280, $CellContext`mag$$ = 12.52, $CellContext`z$$ = 
+    2, $CellContext`\[Lambda]Left$$ = 2.857, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], {3.569945, 0.758}}, 
+      Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}}, {{
+       Hold[$CellContext`\[Lambda]Left$$], 2.857, 
+       "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \(left\
+\)]\)"}, 2, 3.999, 0.0001}, {{
+       Hold[$CellContext`z$$], 2, 
+       Row[{"unimodality, ", 
+         Style["z", Italic]}]}, 1, 8, 0.01}, {{
+       Hold[$CellContext`iter$$], 280, 
+       Row[{"number of iterations, ", 
+         Style["n", Italic]}]}, 200, 400, 1}, {{
+       Hold[$CellContext`dropiter$$], 100, 
+       Row[{"number of iterations to be dropped, ", 
+         Subscript[
+          Style["n", Italic], "drop"]}]}, 0, 100, 1}, {{
+       Hold[$CellContext`mag$$], 12.52, "zoom\[Hyphen]in level, \[Zeta]"}, 2, 
+      30, 0.01}}, Typeset`size$$ = {572., {141., 145.}}, Typeset`update$$ = 0,
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`a$14005$$ = 0, $CellContext`\[Lambda]Left$14006$$ = 
+    0, $CellContext`z$14007$$ = 0, $CellContext`iter$14008$$ = 
+    0, $CellContext`dropiter$14009$$ = 0, $CellContext`mag$14010$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = {3.569945, 
+         0.758}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+        280, $CellContext`mag$$ = 12.52, $CellContext`z$$ = 
+        2, $CellContext`\[Lambda]Left$$ = 2.857}, "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$14005$$, 0], 
+        Hold[$CellContext`\[Lambda]Left$$, $CellContext`\[Lambda]Left$14006$$,
+          0], 
+        Hold[$CellContext`z$$, $CellContext`z$14007$$, 0], 
+        Hold[$CellContext`iter$$, $CellContext`iter$14008$$, 0], 
+        Hold[$CellContext`dropiter$$, $CellContext`dropiter$14009$$, 0], 
+        Hold[$CellContext`mag$$, $CellContext`mag$14010$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`data1$, $CellContext`data2$, $CellContext`imgsz$}, \
+$CellContext`imgsz$ = 260; $CellContext`data1$ = Flatten[
+           Table[
+            $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+             0, $CellContext`iter$$, $CellContext`dropiter$$], {$CellContext`\
+\[Mu], $CellContext`\[Lambda]Left$$, 4, (4 - $CellContext`\[Lambda]Left$$)/
+             206}], 1]; $CellContext`data2$ = Flatten[
+           Table[
+            If[$CellContext`\[Mu] > 4, {{4, 0}}, 
+             $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+              0, $CellContext`iter$$, $CellContext`dropiter$$]], \
+{$CellContext`\[Mu], 
+             Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+              2)/$CellContext`mag$$, 
+             Part[$CellContext`a$$, 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+               2)/$CellContext`mag$$, (4 - $CellContext`\[Lambda]Left$$)/(
+             206 $CellContext`mag$$)}], 1]; Row[{
+           
+           ListPlot[$CellContext`data1$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{$CellContext`\[Lambda]Left$$, 4}, {-1, 1}}, 
+            PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}], 
+           
+           ListPlot[$CellContext`data2$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{
+              Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+                2)/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 
+                 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+                 2)/$CellContext`mag$$}, {
+              Part[$CellContext`a$$, 2] - 1/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 2] + 1/$CellContext`mag$$}}, PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}]}]], 
+      "Specifications" :> {{{$CellContext`a$$, {3.569945, 0.758}}, 
+         Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}, ControlType -> 
+         Locator, Appearance -> Dynamic[
+           Graphics[{Blue, 
+             Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}]}, ImageSize -> 
+            Round[215/$CellContext`mag$$]]]}, {{$CellContext`\[Lambda]Left$$, 
+          2.857, "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\
+\), \(left\)]\)"}, 2, 3.999, 0.0001, ImageSize -> Medium, Appearance -> 
+         "Labeled"}, {{$CellContext`z$$, 2, 
+          Row[{"unimodality, ", 
+            Style["z", Italic]}]}, 1, 8, 0.01, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`iter$$, 280, 
+          Row[{"number of iterations, ", 
+            Style["n", Italic]}]}, 200, 400, 1, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`dropiter$$, 100, 
+          Row[{"number of iterations to be dropped, ", 
+            Subscript[
+             Style["n", Italic], "drop"]}]}, 0, 100, 1, ImageSize -> Medium, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`mag$$, 12.52, 
+          "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01, ImageSize -> Medium,
+          Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        AutorunSequencing -> {{1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 
+         8}}}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{621., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`BFGdata = CompiledFunction[{8, 9., 5468}, {
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Integer], 
+          Blank[Integer]}, {{3, 0, 0}, {3, 0, 1}, {3, 0, 2}, {2, 0, 0}, {2, 0,
+          1}, {3, 2, 
+         0}}, {{1, {2, 0, 3}}, {2, {2, 0, 2}}, {-1, {2, 0, 4}}, {
+          0., {3, 0, 6}}, {0, {2, 0, 7}}}, {0, 11, 10, 0, 
+         5}, {{13, 2, 6, 5}, {7, 5, 4}, {6, 0, 8}, {6, 7, 5}, {35, 8, 3, 0}, {
+          6, 7, 6}, {3, 14}, {10, 2, 7}, {40, 60, 3, 0, 7, 3, 0, 9}, {16, 0, 
+          9, 7}, {40, 38, 3, 0, 5, 3, 0, 9}, {41, 263, 3, 0, 9, 3, 0, 1, 3, 0,
+           8}, {19, 8, 9}, {10, 3, 8}, {13, 8, 9, 8}, {16, 7, 8, 7}, {10, 4, 
+          8}, {13, 7, 8, 7}, {7, 7, 5}, {36, 5, 5, 3, 0}, {4, 6, 8, -13}, {34,
+           3, 2, 1}, {34, 1, 0, 2}, {
+          42, "Insert", 3, 1, 0, -3, 0, 4, 2, 2, 2, 3, 1, 4}, {
+          42, "Drop", 3, 1, 4, 2, 0, 7, 2, 0, 1, 3, 1, 3}, {33, 3, 8}, {6, 4, 
+          10}, {35, 8, 10, 3, 0}, {6, 7, 9}, {3, 4}, {37, 3, 9, 3, 3}, {34, 0,
+           3, 3, 1}, {36, 10, 1, 0, 0}, {4, 9, 8, -3}, {1}}, 
+         Function[{$CellContext`\[Mu], $CellContext`z, $CellContext`x0, \
+$CellContext`iter, $CellContext`dropiter}, 
+          Map[{$CellContext`\[Mu], #}& , 
+           Drop[
+            
+            NestList[($CellContext`\[Mu]/2) (1 - Abs[#]^$CellContext`z) - 
+             1& , $CellContext`x0, $CellContext`iter], \
+$CellContext`dropiter]]], Evaluate], $CellContext`x0 = 0., 
+       Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[Subscript] = {NHoldRest}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1230715202],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = {3.873, 
+    0.925}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+    280, $CellContext`mag$$ = 16.810000000000002`, $CellContext`z$$ = 
+    4., $CellContext`\[Lambda]Left$$ = 3.269, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], {3.873, 0.925}}, 
+      Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}}, {{
+       Hold[$CellContext`\[Lambda]Left$$], 3.269, 
+       "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \(left\
+\)]\)"}, 2, 3.999, 0.0001}, {{
+       Hold[$CellContext`z$$], 4., 
+       Row[{"unimodality, ", 
+         Style["z", Italic]}]}, 1, 8, 0.01}, {{
+       Hold[$CellContext`iter$$], 280, 
+       Row[{"number of iterations, ", 
+         Style["n", Italic]}]}, 200, 400, 1}, {{
+       Hold[$CellContext`dropiter$$], 100, 
+       Row[{"number of iterations to be dropped, ", 
+         Subscript[
+          Style["n", Italic], "drop"]}]}, 0, 100, 1}, {{
+       Hold[$CellContext`mag$$], 16.810000000000002`, 
+       "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01}}, Typeset`size$$ = {
+    572., {141., 145.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`a$14089$$ = 
+    0, $CellContext`\[Lambda]Left$14090$$ = 0, $CellContext`z$14091$$ = 
+    0, $CellContext`iter$14092$$ = 0, $CellContext`dropiter$14093$$ = 
+    0, $CellContext`mag$14094$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = {3.873, 
+         0.925}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+        280, $CellContext`mag$$ = 16.810000000000002`, $CellContext`z$$ = 
+        4., $CellContext`\[Lambda]Left$$ = 3.269}, "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$14089$$, 0], 
+        Hold[$CellContext`\[Lambda]Left$$, $CellContext`\[Lambda]Left$14090$$,
+          0], 
+        Hold[$CellContext`z$$, $CellContext`z$14091$$, 0], 
+        Hold[$CellContext`iter$$, $CellContext`iter$14092$$, 0], 
+        Hold[$CellContext`dropiter$$, $CellContext`dropiter$14093$$, 0], 
+        Hold[$CellContext`mag$$, $CellContext`mag$14094$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`data1$, $CellContext`data2$, $CellContext`imgsz$}, \
+$CellContext`imgsz$ = 260; $CellContext`data1$ = Flatten[
+           Table[
+            $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+             0, $CellContext`iter$$, $CellContext`dropiter$$], {$CellContext`\
+\[Mu], $CellContext`\[Lambda]Left$$, 4, (4 - $CellContext`\[Lambda]Left$$)/
+             206}], 1]; $CellContext`data2$ = Flatten[
+           Table[
+            If[$CellContext`\[Mu] > 4, {{4, 0}}, 
+             $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+              0, $CellContext`iter$$, $CellContext`dropiter$$]], \
+{$CellContext`\[Mu], 
+             Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+              2)/$CellContext`mag$$, 
+             Part[$CellContext`a$$, 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+               2)/$CellContext`mag$$, (4 - $CellContext`\[Lambda]Left$$)/(
+             206 $CellContext`mag$$)}], 1]; Row[{
+           
+           ListPlot[$CellContext`data1$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{$CellContext`\[Lambda]Left$$, 4}, {-1, 1}}, 
+            PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}], 
+           
+           ListPlot[$CellContext`data2$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{
+              Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+                2)/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 
+                 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+                 2)/$CellContext`mag$$}, {
+              Part[$CellContext`a$$, 2] - 1/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 2] + 1/$CellContext`mag$$}}, PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}]}]], 
+      "Specifications" :> {{{$CellContext`a$$, {3.873, 0.925}}, 
+         Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}, ControlType -> 
+         Locator, Appearance -> Dynamic[
+           Graphics[{Blue, 
+             Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}]}, ImageSize -> 
+            Round[215/$CellContext`mag$$]]]}, {{$CellContext`\[Lambda]Left$$, 
+          3.269, "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\
+\), \(left\)]\)"}, 2, 3.999, 0.0001, ImageSize -> Medium, Appearance -> 
+         "Labeled"}, {{$CellContext`z$$, 4., 
+          Row[{"unimodality, ", 
+            Style["z", Italic]}]}, 1, 8, 0.01, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`iter$$, 280, 
+          Row[{"number of iterations, ", 
+            Style["n", Italic]}]}, 200, 400, 1, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`dropiter$$, 100, 
+          Row[{"number of iterations to be dropped, ", 
+            Subscript[
+             Style["n", Italic], "drop"]}]}, 0, 100, 1, ImageSize -> Medium, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`mag$$, 16.810000000000002`, 
+          "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01, ImageSize -> Medium,
+          Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        AutorunSequencing -> {{1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 
+         8}}}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{621., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`BFGdata = CompiledFunction[{8, 9., 5468}, {
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Integer], 
+          Blank[Integer]}, {{3, 0, 0}, {3, 0, 1}, {3, 0, 2}, {2, 0, 0}, {2, 0,
+          1}, {3, 2, 
+         0}}, {{1, {2, 0, 3}}, {2, {2, 0, 2}}, {-1, {2, 0, 4}}, {
+          0., {3, 0, 6}}, {0, {2, 0, 7}}}, {0, 11, 10, 0, 
+         5}, {{13, 2, 6, 5}, {7, 5, 4}, {6, 0, 8}, {6, 7, 5}, {35, 8, 3, 0}, {
+          6, 7, 6}, {3, 14}, {10, 2, 7}, {40, 60, 3, 0, 7, 3, 0, 9}, {16, 0, 
+          9, 7}, {40, 38, 3, 0, 5, 3, 0, 9}, {41, 263, 3, 0, 9, 3, 0, 1, 3, 0,
+           8}, {19, 8, 9}, {10, 3, 8}, {13, 8, 9, 8}, {16, 7, 8, 7}, {10, 4, 
+          8}, {13, 7, 8, 7}, {7, 7, 5}, {36, 5, 5, 3, 0}, {4, 6, 8, -13}, {34,
+           3, 2, 1}, {34, 1, 0, 2}, {
+          42, "Insert", 3, 1, 0, -3, 0, 4, 2, 2, 2, 3, 1, 4}, {
+          42, "Drop", 3, 1, 4, 2, 0, 7, 2, 0, 1, 3, 1, 3}, {33, 3, 8}, {6, 4, 
+          10}, {35, 8, 10, 3, 0}, {6, 7, 9}, {3, 4}, {37, 3, 9, 3, 3}, {34, 0,
+           3, 3, 1}, {36, 10, 1, 0, 0}, {4, 9, 8, -3}, {1}}, 
+         Function[{$CellContext`\[Mu], $CellContext`z, $CellContext`x0, \
+$CellContext`iter, $CellContext`dropiter}, 
+          Map[{$CellContext`\[Mu], #}& , 
+           Drop[
+            
+            NestList[($CellContext`\[Mu]/2) (1 - Abs[#]^$CellContext`z) - 
+             1& , $CellContext`x0, $CellContext`iter], \
+$CellContext`dropiter]]], Evaluate], $CellContext`x0 = 0., 
+       Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[Subscript] = {NHoldRest}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->67912110],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = {3.9991277499999995`, 
+    0.2350000000000001}, $CellContext`dropiter$$ = 100, $CellContext`iter$$ = 
+    280, $CellContext`mag$$ = 19.78, $CellContext`z$$ = 
+    8., $CellContext`\[Lambda]Left$$ = 3.999, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], {3.9991277499999995`, 0.2350000000000001}}, 
+      Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}}, {{
+       Hold[$CellContext`\[Lambda]Left$$], 3.999, 
+       "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\), \(left\
+\)]\)"}, 2, 3.999, 0.0001}, {{
+       Hold[$CellContext`z$$], 8., 
+       Row[{"unimodality, ", 
+         Style["z", Italic]}]}, 1, 8, 0.01}, {{
+       Hold[$CellContext`iter$$], 280, 
+       Row[{"number of iterations, ", 
+         Style["n", Italic]}]}, 200, 400, 1}, {{
+       Hold[$CellContext`dropiter$$], 100, 
+       Row[{"number of iterations to be dropped, ", 
+         Subscript[
+          Style["n", Italic], "drop"]}]}, 0, 100, 1}, {{
+       Hold[$CellContext`mag$$], 19.78, "zoom\[Hyphen]in level, \[Zeta]"}, 2, 
+      30, 0.01}}, Typeset`size$$ = {572., {141., 145.}}, Typeset`update$$ = 0,
+     Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`a$14173$$ = 0, $CellContext`\[Lambda]Left$14174$$ = 
+    0, $CellContext`z$14175$$ = 0, $CellContext`iter$14176$$ = 
+    0, $CellContext`dropiter$14177$$ = 0, $CellContext`mag$14178$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = {3.9991277499999995`, 
+         0.2350000000000001}, $CellContext`dropiter$$ = 
+        100, $CellContext`iter$$ = 280, $CellContext`mag$$ = 
+        19.78, $CellContext`z$$ = 8., $CellContext`\[Lambda]Left$$ = 3.999}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$14173$$, 0], 
+        Hold[$CellContext`\[Lambda]Left$$, $CellContext`\[Lambda]Left$14174$$,
+          0], 
+        Hold[$CellContext`z$$, $CellContext`z$14175$$, 0], 
+        Hold[$CellContext`iter$$, $CellContext`iter$14176$$, 0], 
+        Hold[$CellContext`dropiter$$, $CellContext`dropiter$14177$$, 0], 
+        Hold[$CellContext`mag$$, $CellContext`mag$14178$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`data1$, $CellContext`data2$, $CellContext`imgsz$}, \
+$CellContext`imgsz$ = 260; $CellContext`data1$ = Flatten[
+           Table[
+            $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+             0, $CellContext`iter$$, $CellContext`dropiter$$], {$CellContext`\
+\[Mu], $CellContext`\[Lambda]Left$$, 4, (4 - $CellContext`\[Lambda]Left$$)/
+             206}], 1]; $CellContext`data2$ = Flatten[
+           Table[
+            If[$CellContext`\[Mu] > 4, {{4, 0}}, 
+             $CellContext`BFGdata[$CellContext`\[Mu], $CellContext`z$$, 
+              0, $CellContext`iter$$, $CellContext`dropiter$$]], \
+{$CellContext`\[Mu], 
+             Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+              2)/$CellContext`mag$$, 
+             Part[$CellContext`a$$, 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+               2)/$CellContext`mag$$, (4 - $CellContext`\[Lambda]Left$$)/(
+             206 $CellContext`mag$$)}], 1]; Row[{
+           
+           ListPlot[$CellContext`data1$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{$CellContext`\[Lambda]Left$$, 4}, {-1, 1}}, 
+            PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}], 
+           
+           ListPlot[$CellContext`data2$, AspectRatio -> 1, 
+            AxesOrigin -> $CellContext`a$$, AxesStyle -> {{Blue, 
+               Opacity[0.3]}, {Blue, 
+               Opacity[0.3]}}, Frame -> True, 
+            FrameLabel -> {$CellContext`\[Lambda], $CellContext`x}, 
+            ImagePadding -> {{40, 15}, {40, 15}}, ImageSize -> 
+            1.1 $CellContext`imgsz$, 
+            PlotRange -> {{
+              Part[$CellContext`a$$, 1] - ((4 - $CellContext`\[Lambda]Left$$)/
+                2)/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 
+                 1] + ((4 - $CellContext`\[Lambda]Left$$)/
+                 2)/$CellContext`mag$$}, {
+              Part[$CellContext`a$$, 2] - 1/$CellContext`mag$$, 
+               Part[$CellContext`a$$, 2] + 1/$CellContext`mag$$}}, PlotStyle -> {
+              PointSize[0.01], 
+              Opacity[0.2]}]}]], 
+      "Specifications" :> {{{$CellContext`a$$, {3.9991277499999995`, 
+          0.2350000000000001}}, 
+         Dynamic[{$CellContext`\[Lambda]Left$$, -1}], {4, 1}, ControlType -> 
+         Locator, Appearance -> Dynamic[
+           Graphics[{Blue, 
+             Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}]}, ImageSize -> 
+            Round[215/$CellContext`mag$$]]]}, {{$CellContext`\[Lambda]Left$$, 
+          3.999, "leftmost value of \[Lambda], \!\(\*SubscriptBox[\(\[Lambda]\
+\), \(left\)]\)"}, 2, 3.999, 0.0001, ImageSize -> Medium, Appearance -> 
+         "Labeled"}, {{$CellContext`z$$, 8., 
+          Row[{"unimodality, ", 
+            Style["z", Italic]}]}, 1, 8, 0.01, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`iter$$, 280, 
+          Row[{"number of iterations, ", 
+            Style["n", Italic]}]}, 200, 400, 1, ImageSize -> Medium, 
+         Appearance -> "Labeled"}, {{$CellContext`dropiter$$, 100, 
+          Row[{"number of iterations to be dropped, ", 
+            Subscript[
+             Style["n", Italic], "drop"]}]}, 0, 100, 1, ImageSize -> Medium, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`mag$$, 19.78, 
+          "zoom\[Hyphen]in level, \[Zeta]"}, 2, 30, 0.01, ImageSize -> Medium,
+          Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Top, 
+        AutorunSequencing -> {{1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 
+         8}}}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{621., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`BFGdata = CompiledFunction[{8, 9., 5468}, {
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Real], 
+          Blank[Integer], 
+          Blank[Integer]}, {{3, 0, 0}, {3, 0, 1}, {3, 0, 2}, {2, 0, 0}, {2, 0,
+          1}, {3, 2, 
+         0}}, {{1, {2, 0, 3}}, {2, {2, 0, 2}}, {-1, {2, 0, 4}}, {
+          0., {3, 0, 6}}, {0, {2, 0, 7}}}, {0, 11, 10, 0, 
+         5}, {{13, 2, 6, 5}, {7, 5, 4}, {6, 0, 8}, {6, 7, 5}, {35, 8, 3, 0}, {
+          6, 7, 6}, {3, 14}, {10, 2, 7}, {40, 60, 3, 0, 7, 3, 0, 9}, {16, 0, 
+          9, 7}, {40, 38, 3, 0, 5, 3, 0, 9}, {41, 263, 3, 0, 9, 3, 0, 1, 3, 0,
+           8}, {19, 8, 9}, {10, 3, 8}, {13, 8, 9, 8}, {16, 7, 8, 7}, {10, 4, 
+          8}, {13, 7, 8, 7}, {7, 7, 5}, {36, 5, 5, 3, 0}, {4, 6, 8, -13}, {34,
+           3, 2, 1}, {34, 1, 0, 2}, {
+          42, "Insert", 3, 1, 0, -3, 0, 4, 2, 2, 2, 3, 1, 4}, {
+          42, "Drop", 3, 1, 4, 2, 0, 7, 2, 0, 1, 3, 1, 3}, {33, 3, 8}, {6, 4, 
+          10}, {35, 8, 10, 3, 0}, {6, 7, 9}, {3, 4}, {37, 3, 9, 3, 3}, {34, 0,
+           3, 3, 1}, {36, 10, 1, 0, 0}, {4, 9, 8, -3}, {1}}, 
+         Function[{$CellContext`\[Mu], $CellContext`z, $CellContext`x0, \
+$CellContext`iter, $CellContext`dropiter}, 
+          Map[{$CellContext`\[Mu], #}& , 
+           Drop[
+            
+            NestList[($CellContext`\[Mu]/2) (1 - Abs[#]^$CellContext`z) - 
+             1& , $CellContext`x0, $CellContext`iter], \
+$CellContext`dropiter]]], Evaluate], $CellContext`x0 = 0., 
+       Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[Subscript] = {NHoldRest}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1085016213]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["\<\
+\[Bullet] The test map generalizes the well-known logistic map [1\[Dash]5]. \
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599848859602462*^9, 3.59984888193174*^9}, {
+   3.599849070364349*^9, 3.599849073051988*^9}, {3.5998492858600006`*^9, 
+   3.5998492862506475`*^9}, {3.599945482288332*^9, 3.599945485965425*^9}, {
+   3.600027044380086*^9, 3.60002704533598*^9}},
+ CellID->235590895],
+
+Cell[TextData[{
+ "\[Bullet] The initial condition ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["x", "0"], TraditionalForm]], "InlineMath"],
+ " is fixed at ",
+ Cell[BoxData[
+  FormBox["0", TraditionalForm]], "InlineMath"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998457983632526`*^9, 3.5998458552219644`*^9}, {
+   3.5998488343199043`*^9, 3.5998488564773006`*^9}},
+ CellID->795783349],
+
+Cell[TextData[{
+ "\[Bullet] For ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Lambda]", ">", "4"}], TraditionalForm]], "InlineMath"],
+ " or for ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"|", "x", "|", 
+    RowBox[{">", "1"}]}], TraditionalForm]], "InlineMath"],
+ ", the iterates of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["f", "GLM"], "(", "x", ")"}], TraditionalForm]], 
+  "InlineMath"],
+ " rapidly approach ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"-", "\[Infinity]"}], TraditionalForm]], "InlineMath"],
+ " (more rapidly for larger values of ",
+ Cell[BoxData[
+  FormBox["\[Lambda]", TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]], "InlineMath"],
+ ") and therefore, due to the finite length in precision, the numbers are too \
+large to compute [8]. A little trick is used to avoid this problem."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599849001735804*^9, 3.5998490351750307`*^9}, {
+   3.5998492951417313`*^9, 3.599849295751137*^9}},
+ CellID->354910494],
+
+Cell["References", "DetailNotes",
+ CellChangeTimes->{{3.591553314471346*^9, 3.5915533161184053`*^9}},
+ CellID->80743413],
+
+Cell[TextData[{
+ "[1] S. H. Strogatz, ",
+ StyleBox["Nonlinear Dynamics and Chaos",
+  FontSlant->"Italic"],
+ ", New York: Perseus Books Publishing, 1994."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998491981834474`*^9, 3.5998491985897183`*^9}},
+ CellID->71331679],
+
+Cell[TextData[{
+ "[2] K. T. Alligood, T. D. Sauer, and J. A. Yorke, ",
+ StyleBox["Chaos: An Introduction to Dynamical Systems",
+  FontSlant->"Italic"],
+ ", New York: Springer, 1996."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998492007460794`*^9, 3.5998492010273447`*^9}},
+ CellID->830004293],
+
+Cell[TextData[{
+ "[3] H.-O. Peitgen, H. Jurgens, and D. Saupe, ",
+ StyleBox["Chaos and Fractals: New Frontiers of Science",
+  FontSlant->"Italic"],
+ ", 2nd ed., New York: Springer, 2004."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599849203293086*^9, 3.599849203730609*^9}},
+ CellID->610377198],
+
+Cell[TextData[{
+ "[4] M. J. Feigenbaum, \"Quantitative Universality for a Class of Nonlinear \
+Transformations,\" ",
+ StyleBox["Journal of Statistical Physics",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["19",
+  FontWeight->"Bold"],
+ "(1), 1978 pp. 25\[Dash]52. ",
+ ButtonBox["doi:10.1007/BF01020332",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1007/BF01020332"], None},
+  ButtonNote->"http://dx.doi.org/10.1007/BF01020332"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.5998462115840397`*^9, {3.599849205949474*^9, 
+   3.5998492063557425`*^9}},
+ CellID->70951588],
+
+Cell[TextData[{
+ "[5] M. J. Feigenbaum, \"The Universal Metric Properties of Nonlinear \
+Transformations,\" ",
+ StyleBox["Journal of Statistical Physics",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["21",
+  FontWeight->"Bold"],
+ "(6), 1979 pp. 669\[Dash]706. ",
+ ButtonBox["doi:10.1007/BF01107909",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1007/BF01107909"], None},
+  ButtonNote->"http://dx.doi.org/10.1007/BF01107909"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998462140496893`*^9, 3.599846214409083*^9}, {
+   3.5998492087777443`*^9, 3.599849209777796*^9}},
+ CellID->255567241],
+
+Cell[TextData[{
+ "[6] K.-J. Moon and S. D. Choi, \"Reducible Expansions and Related Sharp \
+Crossovers in Feigenbaum's Renormalization Field,\" ",
+ StyleBox["Chaos: An Interdisciplinary Journal of Nonlinear Science",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["18",
+  FontWeight->"Bold"],
+ "(2), 2008 pp. 023104. ",
+ ButtonBox["doi:10.1063/1.2902826",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1063/1.2902826"], None},
+  ButtonNote->"http://dx.doi.org/10.1063/1.2902826"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5914054378438063`*^9, 3.5914054557567625`*^9}, {
+   3.5914061701636415`*^9, 3.5914061805195713`*^9}, 3.591553325368783*^9, 
+   3.5916155851289377`*^9, {3.599846201596502*^9, 3.5998462171279707`*^9}, {
+   3.59984921162164*^9, 3.599849212199796*^9}},
+ CellID->253253490],
+
+Cell[TextData[{
+ "[7] K.-J. Moon, \"Erratum: Reducible Expansions and Related Sharp \
+Crossovers in Feigenbaum's Renormalization Field,\" ",
+ StyleBox["Chaos: An Interdisciplinary Journal of Nonlinear Science",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["20",
+  FontWeight->"Bold"],
+ ", 2010 pp. 049902. ",
+ ButtonBox["doi:10.1063/1.3530128",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1063/1.3530128"], None},
+  ButtonNote->"http://dx.doi.org/10.1063/1.3530128"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5914054569245453`*^9, 3.591405463077633*^9}, {
+   3.591406174698675*^9, 3.5914061781089525`*^9}, 3.59155332607857*^9, 
+   3.5916155922967377`*^9, {3.599846208535872*^9, 3.599846219862488*^9}, {
+   3.5998492141998997`*^9, 3.599849214871809*^9}},
+ CellID->636410103],
+
+Cell[TextData[{
+ "[8] S. Wolfram, ",
+ StyleBox["A New Kind of Science",
+  FontSlant->"Italic"],
+ ", Champaign, IL: Wolfram Media, 2002."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599848818381584*^9, 3.59984881969415*^9}, {
+   3.599849231216403*^9, 3.599849231732054*^9}},
+ CellID->249223224]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\""]], "ControlSuggestions",
+ CellChangeTimes->{3.5914652567602863`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" on Mac) and drag up and down to zoom.\""}]]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}]]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.599844188039498*^9},
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}]]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" to make ever finer adjustments.\""}]]], "ControlSuggestions",
+ CellChangeTimes->{3.5914652603346443`*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\""]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.591553344971527*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}]]], "ControlSuggestions",
+ CellChangeTimes->{3.591553346782886*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}]]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5914059517935915`*^9, 3.591405973753296*^9}},
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["bifurcation diagram", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998464945260353`*^9, 3.5998464977762055`*^9}},
+ CellID->137546430],
+
+Cell["chaos", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599846480599434*^9, 3.599846481146337*^9}},
+ CellID->779078326],
+
+Cell["chaos theory", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.59942108346702*^9, 3.5994210850770626`*^9}},
+ CellID->470893272],
+
+Cell["discrete dynamical system", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998465116054287`*^9, 3.599846516761945*^9}},
+ CellID->177668466],
+
+Cell["dynamical system", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599846501854541*^9, 3.5998465051672115`*^9}},
+ CellID->32835551],
+
+Cell["fractal", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599494944694763*^9, 3.599494947068347*^9}},
+ CellID->174510194],
+
+Cell["logistic map", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998463596879764`*^9, 3.599846361656829*^9}},
+ CellID->511525953],
+
+Cell["generalized logistic map", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994209803913164`*^9, 3.5994209877415075`*^9}},
+ CellID->248920837],
+
+Cell["iterative map", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599494508489825*^9, 3.599494511498831*^9}},
+ CellID->25883143],
+
+Cell["NKS", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994209756801844`*^9, 3.5994209765912175`*^9}},
+ CellID->19915629],
+
+Cell["Stephen Wolfram", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599420966819955*^9, 3.599420973240122*^9}},
+ CellID->388413276],
+
+Cell["tent map", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599846467829144*^9, 3.5998464697042413`*^9}},
+ CellID->27253399],
+
+Cell["unimodal map", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994944468647227`*^9, 3.5994944564261003`*^9}},
+ CellID->3630355],
+
+Cell["unimodality", "SearchTerms",
+ CellID->225776530],
+
+Cell["zoom", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599846777601215*^9, 3.5998467807420025`*^9}},
+ CellID->270749185]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Bifurcation Diagram for the Tent Map",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/BifurcationDiagramForTheTentMap/"], 
+   None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/BifurcationDiagramForTheTentMap/"]], \
+"RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.600007660236577*^9, 3.600007682222067*^9}},
+ CellID->137579649],
+
+Cell[TextData[ButtonBox["Chaos",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Chaos.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/Chaos.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599489642867564*^9, 3.5994896561144*^9}},
+ CellID->218128536],
+
+Cell[TextData[ButtonBox["Classic Logistic Map",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/ClassicLogisticMap/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/ClassicLogisticMap/"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599495121138447*^9, 3.5994951323769436`*^9}},
+ CellID->35101467],
+
+Cell[TextData[ButtonBox["Fractal",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Fractal.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/Fractal.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994942663743396`*^9, 3.5994942743516607`*^9}},
+ CellID->104056598],
+
+Cell[TextData[ButtonBox["Iterates of the Logistic Map",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/IteratesOfTheLogisticMap/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/IteratesOfTheLogisticMap/"]], \
+"RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994920585777884`*^9, 3.5994920720397673`*^9}},
+ CellID->465026939],
+
+Cell[TextData[ButtonBox["Julia Set",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/JuliaSet.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/JuliaSet.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994943849924555`*^9, 3.5994943927506285`*^9}},
+ CellID->193306386],
+
+Cell[TextData[ButtonBox["Logistic Map",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/LogisticMap.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/LogisticMap.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994896179499454`*^9, 3.599489631746146*^9}},
+ CellID->69365128],
+
+Cell[TextData[ButtonBox["A New Kind of Science",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/NewKindofScience.html"], None},
+ ButtonNote->
+  "http://mathworld.wolfram.com/NewKindofScience.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.6000078941191435`*^9, 3.600007907916715*^9}, {
+   3.600007952811469*^9, 3.600007956858162*^9}},
+ CellID->619041715],
+
+Cell[TextData[ButtonBox["Orbit Diagram of the Logistic Map",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/OrbitDiagramOfTheLogisticMap/"], 
+   None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/OrbitDiagramOfTheLogisticMap/"]], \
+"RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5994921868573484`*^9, 3.599492201839341*^9}},
+ CellID->386400527],
+
+Cell[TextData[ButtonBox["Problems with Computer Experiments [in Chaos Theory]",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolframscience.com/nksonline/page-919c-text"], None},
+ ButtonNote->
+  "http://www.wolframscience.com/nksonline/page-919c-text"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599489732406284*^9, 3.5994897590660653`*^9}, {
+   3.5994900475394707`*^9, 3.5994900580705037`*^9}},
+ CellID->72066089],
+
+Cell[TextData[ButtonBox["Unimodal",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Unimodal.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/Unimodal.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.599494460481804*^9, 3.5994944675975504`*^9}},
+ CellID->422363420]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Ki-Jung Moon",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ki-Jung+Moon"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ki-Jung+Moon"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.432333043774981*^9, 3.432333045441087*^9}, {
+   3.5914060566547594`*^9, 3.5914060621204157`*^9}}],
+
+Cell[TextData[{
+ "Based on programs by: ",
+ ButtonBox["Ed Pegg Jr",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ed%20Pegg%20Jr"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ed%20Pegg%20Jr"],
+ ", ",
+ ButtonBox["Enrique Zeleny",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Enrique%\
+20Zeleny"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Enrique%20Zeleny"],
+ ", ",
+ ButtonBox["C. Pellicer-Lostao",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=C.%20Pellicer-\
+Lostao"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=C.%20Pellicer-\
+Lostao"],
+ ", and ",
+ ButtonBox["R. Lopez-Ruiz",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=R.%20Lopez-\
+Ruiz"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=R.%20Lopez-Ruiz"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5998469476168556`*^9, 3.5998469500857325`*^9}},
+ CellID->1679527]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{974, 985},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[79329, 1731, 333, 8, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[79665, 1741, 661, 16, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[80329, 1759, 380, 11, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[80712, 1772, 615, 14, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[81330, 1788, 870, 22, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[82203, 1812, 371, 9, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[82577, 1823, 1483, 31, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[84063, 1856, 978, 22, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 93527, 2147},
+ {"RotateAndZoomIn3D", 93636, 2150},
+ {"DragLocators", 93746, 2153},
+ {"CreateAndDeleteLocators", 93862, 2156},
+ {"SliderZoom", 93976, 2159},
+ {"GamepadControls", 94082, 2162},
+ {"AutomaticAnimation", 94195, 2165},
+ {"BookmarkAnimation", 94312, 2168}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 497, 7, 76, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[1101, 33, 33, 0, 275, "InitializationSection"],
+Cell[1137, 35, 1353, 38, 66, "Input",
+ CellID->20492050]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2527, 78, 29, 0, 243, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[2581, 82, 14196, 326, 767, "Input"],
+Cell[16780, 410, 8455, 160, 503, "Output",
+ CellID->43929825]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25284, 576, 36, 0, 181, "ManipulateCaptionSection"],
+Cell[25323, 578, 1482, 33, 46, "ManipulateCaption"],
+Cell[26808, 613, 988, 27, 42, "ManipulateCaption",
+ CellID->48722799],
+Cell[27799, 642, 1131, 25, 23, "ManipulateCaption",
+ CellID->202410231],
+Cell[28933, 669, 617, 15, 23, "ManipulateCaption",
+ CellID->280812721],
+Cell[29553, 686, 534, 11, 39, "ManipulateCaption",
+ CellID->190687481]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30124, 702, 28, 0, 179, "ThumbnailSection"],
+Cell[30155, 704, 8556, 162, 503, "Output",
+ CellID->1741677854]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38748, 871, 28, 0, 149, "SnapshotsSection"],
+Cell[38779, 873, 8562, 162, 503, "Output",
+ CellID->30099921],
+Cell[47344, 1037, 8501, 161, 503, "Output",
+ CellID->1230715202],
+Cell[55848, 1200, 8553, 162, 503, "Output",
+ CellID->67912110],
+Cell[64404, 1364, 8619, 163, 503, "Output",
+ CellID->1085016213]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73060, 1532, 26, 0, 357, "DetailsSection"],
+Cell[73089, 1534, 415, 8, 23, "DetailNotes",
+ CellID->235590895],
+Cell[73507, 1544, 413, 13, 23, "DetailNotes",
+ CellID->795783349],
+Cell[73923, 1559, 1036, 32, 42, "DetailNotes",
+ CellID->354910494],
+Cell[74962, 1593, 120, 2, 23, "DetailNotes",
+ CellID->80743413],
+Cell[75085, 1597, 285, 8, 23, "DetailNotes",
+ CellID->71331679],
+Cell[75373, 1607, 315, 8, 23, "DetailNotes",
+ CellID->830004293],
+Cell[75691, 1617, 316, 8, 23, "DetailNotes",
+ CellID->610377198],
+Cell[76010, 1627, 615, 19, 39, "DetailNotes",
+ CellID->70951588],
+Cell[76628, 1648, 636, 19, 39, "DetailNotes",
+ CellID->255567241],
+Cell[77267, 1669, 839, 21, 39, "DetailNotes",
+ CellID->253253490],
+Cell[78109, 1692, 826, 21, 39, "DetailNotes",
+ CellID->636410103],
+Cell[78938, 1715, 314, 9, 23, "DetailNotes",
+ CellID->249223224]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[79289, 1729, 37, 0, 131, "ControlSuggestionsSection"],
+Cell[79329, 1731, 333, 8, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[79665, 1741, 661, 16, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[80329, 1759, 380, 11, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[80712, 1772, 615, 14, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[81330, 1788, 870, 22, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[82203, 1812, 371, 9, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[82577, 1823, 1483, 31, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[84063, 1856, 978, 22, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85078, 1883, 30, 0, 165, "SearchTermsSection"],
+Cell[85111, 1885, 156, 3, 23, "SearchTerms",
+ CellID->137546430],
+Cell[85270, 1890, 138, 3, 23, "SearchTerms",
+ CellID->779078326],
+Cell[85411, 1895, 146, 3, 23, "SearchTerms",
+ CellID->470893272],
+Cell[85560, 1900, 160, 3, 23, "SearchTerms",
+ CellID->177668466],
+Cell[85723, 1905, 150, 3, 23, "SearchTerms",
+ CellID->32835551],
+Cell[85876, 1910, 140, 3, 23, "SearchTerms",
+ CellID->174510194],
+Cell[86019, 1915, 147, 3, 23, "SearchTerms",
+ CellID->511525953],
+Cell[86169, 1920, 161, 3, 23, "SearchTerms",
+ CellID->248920837],
+Cell[86333, 1925, 145, 3, 23, "SearchTerms",
+ CellID->25883143],
+Cell[86481, 1930, 139, 3, 23, "SearchTerms",
+ CellID->19915629],
+Cell[86623, 1935, 148, 3, 23, "SearchTerms",
+ CellID->388413276],
+Cell[86774, 1940, 142, 3, 23, "SearchTerms",
+ CellID->27253399],
+Cell[86919, 1945, 147, 3, 23, "SearchTerms",
+ CellID->3630355],
+Cell[87069, 1950, 54, 1, 23, "SearchTerms",
+ CellID->225776530],
+Cell[87126, 1953, 139, 3, 23, "SearchTerms",
+ CellID->270749185]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[87302, 1961, 31, 0, 149, "RelatedLinksSection"],
+Cell[87336, 1963, 408, 10, 23, "RelatedLinks",
+ CellID->137579649],
+Cell[87747, 1975, 312, 7, 23, "RelatedLinks",
+ CellID->218128536],
+Cell[88062, 1984, 361, 8, 23, "RelatedLinks",
+ CellID->35101467],
+Cell[88426, 1994, 324, 7, 23, "RelatedLinks",
+ CellID->104056598],
+Cell[88753, 2003, 386, 9, 23, "RelatedLinks",
+ CellID->465026939],
+Cell[89142, 2014, 328, 7, 23, "RelatedLinks",
+ CellID->193306386],
+Cell[89473, 2023, 334, 7, 23, "RelatedLinks",
+ CellID->69365128],
+Cell[89810, 2032, 407, 9, 23, "RelatedLinks",
+ CellID->619041715],
+Cell[90220, 2043, 401, 10, 23, "RelatedLinks",
+ CellID->386400527],
+Cell[90624, 2055, 449, 9, 23, "RelatedLinks",
+ CellID->72066089],
+Cell[91076, 2066, 325, 7, 23, "RelatedLinks",
+ CellID->422363420]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[91438, 2078, 25, 0, 149, "AuthorSection"],
+Cell[91466, 2080, 440, 12, 23, "Author"],
+Cell[91909, 2094, 1211, 37, 23, "Author",
+ CellID->1679527]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

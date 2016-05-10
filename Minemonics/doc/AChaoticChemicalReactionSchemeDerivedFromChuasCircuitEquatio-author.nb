@@ -1,0 +1,1997 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     88691,       1988]
+NotebookOptionsPosition[     83980,       1845]
+NotebookOutlinePosition[     85591,       1896]
+CellTagsIndexPosition[     85263,       1884]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+A Chaotic Chemical Reaction Scheme Derived from Chua's Circuit Equations\
+\>", "DemoTitle",
+ CellChangeTimes->{{3.574795166873996*^9, 3.574795230071765*^9}, 
+   3.574795357248465*^9, {3.574853877868475*^9, 3.574853878649928*^9}, {
+   3.574853912359827*^9, 3.574853917983481*^9}, {3.5752220472848043`*^9, 
+   3.575222068929775*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"c", "=", 
+        RowBox[{"-", "0.143"}]}], ",", "eqns", ",", "soln", ",", "plt1", ",", 
+       "plt2"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"eqns", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"x", "'"}], "[", "t", "]"}], "\[Equal]", 
+          RowBox[{"\[Alpha]", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "-", "10"}], ")"}], "-", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"x", "[", "t", "]"}], "-", "10"}], ")"}], "^", "3"}], 
+             "-", 
+             RowBox[{"c", " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"x", "[", "t", "]"}], "-", "10"}], ")"}]}]}], 
+            ")"}]}]}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", 
+          RowBox[{"\[Beta]", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"x", "[", "t", "]"}], "-", 
+             RowBox[{"y", "[", "t", "]"}], "+", 
+             RowBox[{"z", "[", "t", "]"}], "-", "10"}], ")"}]}]}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"z", "'"}], "[", "t", "]"}], "\[Equal]", 
+          RowBox[{
+           RowBox[{"-", "\[Gamma]"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"y", "[", "t", "]"}], "-", "10"}], ")"}]}]}], ",", 
+         RowBox[{
+          RowBox[{"x", "[", "0", "]"}], "\[Equal]", "x0"}], ",", 
+         RowBox[{
+          RowBox[{"y", "[", "0", "]"}], "\[Equal]", "y0"}], ",", 
+         RowBox[{
+          RowBox[{"z", "[", "0", "]"}], "\[Equal]", "z0"}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"soln", "=", 
+       RowBox[{"Quiet", "@", 
+        RowBox[{"NDSolve", "[", 
+         RowBox[{"eqns", ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"t", ",", "0", ",", "time"}], "}"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"plt1", "=", 
+       RowBox[{"Plot", "[", 
+        RowBox[{
+         RowBox[{"Evaluate", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x", "[", "t", "]"}], ",", 
+             RowBox[{"y", "[", "t", "]"}], ",", 
+             RowBox[{"z", "[", "t", "]"}]}], "}"}], "/.", "soln"}], "]"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", 
+           RowBox[{"time", "/", "2"}]}], "}"}], ",", 
+         RowBox[{"AxesLabel", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Style", "[", "\"\<time\>\"", "]"}], ",", 
+            RowBox[{"Row", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"x", "[", "t", "]"}], ",", "Blue"}], "]"}], ",", 
+               RowBox[{"Spacer", "[", "5", "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"y", "[", "t", "]"}], ",", "Red"}], "]"}], ",", 
+               RowBox[{"Spacer", "[", "5", "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"z", "[", "t", "]"}], ",", 
+                 RowBox[{"Darker", "@", "Green"}]}], "]"}]}], "}"}], "]"}]}], 
+           "}"}]}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"Blue", ",", "Red", ",", 
+            RowBox[{"Darker", "@", "Green"}]}], "}"}]}], ",", 
+         RowBox[{"AspectRatio", "\[Rule]", 
+          RowBox[{"1", "/", "5"}]}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"350", ",", "80"}], "}"}]}], ",", 
+         RowBox[{"ImagePadding", "\[Rule]", "All"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"plt2", "=", 
+       RowBox[{"ParametricPlot3D", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"x", "[", "t", "]"}], ",", 
+            RowBox[{"y", "[", "t", "]"}], ",", 
+            RowBox[{"z", "[", "t", "]"}]}], "}"}], "/.", "soln"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "time"}], "}"}], ",", 
+         RowBox[{"SphericalRegion", "\[Rule]", "True"}], ",", 
+         RowBox[{"PlotRange", "\[Rule]", "Automatic"}], ",", 
+         RowBox[{"BoxRatios", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ",", 
+         RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+         RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+         RowBox[{"ColorFunction", "\[Rule]", "\"\<Rainbow\>\""}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"1.3", " ", 
+           RowBox[{"{", 
+            RowBox[{"300", ",", "300"}], "}"}]}]}], ",", 
+         RowBox[{"ImagePadding", "\[Rule]", "All"}], ",", 
+         RowBox[{"ViewPoint", "\[Rule]", "Top"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Column", "[", 
+       RowBox[{"{", 
+        RowBox[{"plt1", ",", "plt2"}], "}"}], "]"}]}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"time", ",", "130.", ",", 
+       RowBox[{"Row", "[", 
+        RowBox[{"{", 
+         RowBox[{"\"\<time \>\"", ",", 
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<t\>\"", ",", "Italic"}], "]"}]}], "}"}], "]"}]}], 
+      "}"}], ",", "8", ",", "250", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", "\"\<\>\"", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<parameters\>\"", ",", "Bold"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Alpha]", ",", "10.", ",", "\"\<\[Alpha]\>\""}], "}"}], ",", 
+     "8", ",", "14", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "1.", ",", "\"\<\[Beta]\>\""}], "}"}], ",", 
+     "0.01", ",", "2", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "16.", ",", "\"\<\[Gamma]\>\""}], "}"}], ",", 
+     "1", ",", "25", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<initial values\>\"", ",", "Bold"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x0", ",", "9.893", ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<x\>\"", ",", "Italic"}], "]"}], ",", "\"\<0\>\""}], 
+        "]"}]}], "}"}], ",", "9.7", ",", "10.1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"y0", ",", "9.945", ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<y\>\"", ",", "Italic"}], "]"}], ",", "\"\<0\>\""}], 
+        "]"}]}], "}"}], ",", "9.8", ",", "10.1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"z0", ",", "9.991", ",", 
+       RowBox[{"Subscript", "[", 
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"\"\<z\>\"", ",", "Italic"}], "]"}], ",", "\"\<0\>\""}], 
+        "]"}]}], "}"}], ",", "9.9", ",", "10.1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Spacer", "[", "170", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "3", ",", "5"}], "}"}]}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.5747952580553617`*^9, 3.574795290689123*^9}, {
+   3.574853847297668*^9, 3.574853849880739*^9}, {3.574856617681024*^9, 
+   3.5748566699187937`*^9}, {3.5748973880926247`*^9, 3.574897388539394*^9}, {
+   3.574897428875123*^9, 3.5748974672124653`*^9}, {3.574897584376751*^9, 
+   3.574897606630609*^9}, {3.574897651989601*^9, 3.5748976556670427`*^9}, {
+   3.574897726371416*^9, 3.574897741580255*^9}, 3.574903353973043*^9, {
+   3.574903388156639*^9, 3.5749034127336397`*^9}, {3.575146610974635*^9, 
+   3.5751466667787733`*^9}, {3.5752126914292183`*^9, 3.575212692421521*^9}, {
+   3.5753213380554533`*^9, 3.5753213580745783`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 130., $CellContext`x0$$ = 
+    9.893, $CellContext`y0$$ = 9.945, $CellContext`z0$$ = 
+    9.991, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    1., $CellContext`\[Gamma]$$ = 16., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 130., 
+       Row[{"time ", 
+         Style["t", Italic]}]}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 1., "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 16., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 9.893, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 9.945, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 9.991, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {234.84375, 240.15625}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$422161$$ = 
+    0, $CellContext`\[Alpha]$422162$$ = 0, $CellContext`\[Beta]$422163$$ = 
+    0, $CellContext`\[Gamma]$422164$$ = 0, $CellContext`x0$422165$$ = 
+    0, $CellContext`y0$422166$$ = 0, $CellContext`z0$422167$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 130., $CellContext`x0$$ = 
+        9.893, $CellContext`y0$$ = 9.945, $CellContext`z0$$ = 
+        9.991, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        1., $CellContext`\[Gamma]$$ = 16.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$422161$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$422162$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$422163$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$422164$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$422165$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$422166$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$422167$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 130., 
+          Row[{"time ", 
+            Style["t", Italic]}]}, 8, 250, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 1., "\[Beta]"}, 0.01, 2, Appearance -> 
+         "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 16., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 9.893, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 9.945, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 9.991, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{606., {262., 267.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.575321358853569*^9},
+ CellID->399654986]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This Demonstration plots the solution of Chua's equations describing a \
+chemical reaction scheme analogous to Chua's electrical circuit. Chua's \
+circuit is the simplest electronic circuit that exhibits classic chaotic \
+behavior [1].\
+\>", "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.5751194105240765`*^9}, {3.575221897539521*^9, 
+   3.5752219224919233`*^9}},
+ CellID->2124922656],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", "\[InvisibleSpace]", "X"}], 
+     RowBox[{"d", "\[InvisibleSpace]", "t"}]], "=", 
+    RowBox[{"\[Alpha]", " ", 
+     RowBox[{"(", 
+      RowBox[{"Y", "-", 
+       RowBox[{"G", "(", "X", ")"}]}], ")"}]}]}], TraditionalForm]], 
+  "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.5751194234533696`*^9}, {3.575212774442078*^9, 
+   3.575212808259789*^9}},
+ CellID->1540347625],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", "\[InvisibleSpace]", "X"}], 
+     RowBox[{"d", "\[InvisibleSpace]", "t"}]], "=", 
+    RowBox[{"\[Beta]", " ", 
+     RowBox[{"(", 
+      RowBox[{"X", "-", "Y", "+", "Z"}], ")"}]}]}], TraditionalForm]], 
+  "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.5751194234533696`*^9}, {3.575212774442078*^9, 
+   3.5752127778384323`*^9}, {3.575212816718943*^9, 3.575212830536483*^9}},
+ CellID->707168790],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", "\[InvisibleSpace]", "Z"}], 
+     RowBox[{"d", "\[InvisibleSpace]", "t"}]], "=", 
+    RowBox[{
+     RowBox[{"-", "\[Gamma]"}], " ", "Y"}]}], TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.5751194234533696`*^9}, {3.575212774442078*^9, 
+   3.5752127778384323`*^9}, {3.5752128329977007`*^9, 3.575212844540391*^9}},
+ CellID->1211351032],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox["t", TraditionalForm]], "InlineMath"],
+ " is time; ",
+ Cell[BoxData[
+  FormBox["\[Alpha]", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["\[Beta]", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["\[Gamma]", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]], "InlineMath"],
+ ", and ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]], "InlineMath"],
+ " are parameters; and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"G", "(", "X", ")"}], "=", 
+    RowBox[{
+     RowBox[{"a", 
+      SuperscriptBox["X", "3"]}], "+", 
+     RowBox[{"c", " ", "X"}]}]}], TraditionalForm]], "InlineMath"],
+ Cell[BoxData[
+  FormBox[" ", TraditionalForm]], "InlineMath"],
+ "is a cubic equation with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"a", " ", "c"}], "<", "0"}], TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"a", "\[NotEqual]", "0"}], TraditionalForm]], "InlineMath"],
+ ". The solution to these equations allows both positive and negative values \
+of the variables. A linear transformation of variables can convert this \
+electrical system into a dynamically related chemical scheme that allows only \
+positive state variables [2]."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.5751194680408278`*^9}, {3.575212873406756*^9, 
+   3.575213014529973*^9}, {3.5752831707095003`*^9, 3.5752831770175*^9}},
+ CellID->269519732],
+
+Cell[TextData[{
+ "Thus with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "=", 
+    RowBox[{"X", "+", "\[Delta]"}]}], TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"y", "=", 
+    RowBox[{"Y", "+", "\[Delta]"}]}], TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"z", "=", 
+    RowBox[{"Z", "+", "\[Delta]"}]}], TraditionalForm]], "InlineMath"],
+ ", the system becomes:"
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.5751194316411886`*^9}, {3.575212778715843*^9, 
+   3.5752127820275593`*^9}, {3.575213113236896*^9, 3.57521317200793*^9}},
+ CellID->336115277],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", "\[InvisibleSpace]", "x"}], 
+     RowBox[{"d", "\[InvisibleSpace]", "t"}]], "=", 
+    RowBox[{"\[Alpha]", " ", 
+     RowBox[{"(", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "-", "\[Delta]"}], ")"}], "-", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"x", "-", "\[Delta]"}], ")"}], "3"], "-", 
+        RowBox[{"c", "(", 
+         RowBox[{"x", "-", "\[Delta]"}], ")"}]}], ")"}]}]}]}], 
+   TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.5752130827165947`*^9, 3.57521308541555*^9}},
+ CellID->1031821264],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", "\[InvisibleSpace]", "y"}], 
+     RowBox[{"d", "\[InvisibleSpace]", "t"}]], "=", 
+    RowBox[{"\[Beta]", "(", " ", 
+     RowBox[{"x", "-", "y", "+", "z", "-", "\[Delta]"}], ")"}]}], 
+   TraditionalForm]], "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.575213093976727*^9, 3.575213099590358*^9}},
+ CellID->889534523],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", "\[InvisibleSpace]", "z"}], 
+     RowBox[{"d", "\[InvisibleSpace]", "t"}]], "=", 
+    RowBox[{
+     RowBox[{"-", "\[Gamma]"}], " ", 
+     RowBox[{"(", 
+      RowBox[{"y", "-", "\[Delta]"}], ")"}]}]}], TraditionalForm]], 
+  "InlineMath"],
+ ","
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.57521310334833*^9, 3.57521310756688*^9}},
+ CellID->1358082486],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["y", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["z", TraditionalForm]], "InlineMath"],
+ " represent concentrations of chemical species, with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"c", "=", 
+    RowBox[{"-", "0.143"}]}], TraditionalForm]], "InlineMath",
+  FormatType->"TraditionalForm"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Delta]", "=", "10"}], TraditionalForm]], "InlineMath"],
+ ". The chemical reaction scheme that leads to these equations is detailed in \
+Table 1 of [2]."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.574853931830761*^9, 3.5748539403664303`*^9}, {
+   3.574855409011735*^9, 3.574855657678132*^9}, 3.574855696425098*^9, {
+   3.574855742227907*^9, 3.574855754162998*^9}, 3.574856430953497*^9, {
+   3.5748985533776093`*^9, 3.5748985578125277`*^9}, {3.574898629021285*^9, 
+   3.574898699104005*^9}, {3.574898865121711*^9, 3.574898870942038*^9}, {
+   3.5748989927135763`*^9, 3.5748990054619017`*^9}, {3.574899218163583*^9, 
+   3.574899221160931*^9}, {3.574899278110942*^9, 3.574899402787706*^9}, {
+   3.574899449766961*^9, 3.574899450838928*^9}, {3.574899489885763*^9, 
+   3.574899492877224*^9}, {3.574899522927813*^9, 3.574899578874032*^9}, 
+   3.574901284163105*^9, {3.574902161796577*^9, 3.574902178258519*^9}, {
+   3.574902239190363*^9, 3.574902250809219*^9}, {3.574902281654079*^9, 
+   3.5749023468605127`*^9}, {3.574944511285555*^9, 3.574944512476644*^9}, 
+   3.574944587401717*^9, {3.574944618514814*^9, 3.574944641402117*^9}, {
+   3.57494467290261*^9, 3.574944686566609*^9}, {3.574946581959031*^9, 
+   3.57494668767493*^9}, {3.574946808873987*^9, 3.574946837178948*^9}, {
+   3.5749469010882874`*^9, 3.574946935423538*^9}, 3.574947034701606*^9, {
+   3.574947340339056*^9, 3.574947369124354*^9}, {3.57494744336662*^9, 
+   3.574947452406048*^9}, 3.5749475723585243`*^9, {3.57494760961775*^9, 
+   3.574947613970251*^9}, {3.5749476784109087`*^9, 3.5749477138486958`*^9}, {
+   3.5751194104950743`*^9, 3.575119476991723*^9}, 3.57511954616864*^9, {
+   3.5752131881408873`*^9, 3.575213214414021*^9}, {3.575213572416127*^9, 
+   3.575213604144846*^9}, {3.5757314870719357`*^9, 3.575731488059057*^9}, {
+   3.575731544752037*^9, 3.575731554682014*^9}},
+ CellID->311403066]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 130., $CellContext`x0$$ = 
+    9.893, $CellContext`y0$$ = 9.945, $CellContext`z0$$ = 
+    9.991, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    1., $CellContext`\[Gamma]$$ = 16., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 130., 
+       Row[{"time ", 
+         Style["t", Italic]}]}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 1., "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 16., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 9.893, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 9.945, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 9.991, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {234.84375, 240.15625}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$422161$$ = 
+    0, $CellContext`\[Alpha]$422162$$ = 0, $CellContext`\[Beta]$422163$$ = 
+    0, $CellContext`\[Gamma]$422164$$ = 0, $CellContext`x0$422165$$ = 
+    0, $CellContext`y0$422166$$ = 0, $CellContext`z0$422167$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 130., $CellContext`x0$$ = 
+        9.893, $CellContext`y0$$ = 9.945, $CellContext`z0$$ = 
+        9.991, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        1., $CellContext`\[Gamma]$$ = 16.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$422161$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$422162$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$422163$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$422164$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$422165$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$422166$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$422167$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 130., 
+          Row[{"time ", 
+            Style["t", Italic]}]}, 8, 250, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 1., "\[Beta]"}, 0.01, 2, Appearance -> 
+         "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 16., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 9.893, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 9.945, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 9.991, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{606., {262., 267.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.575321358853569*^9},
+ CellID->1887268910]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 250., $CellContext`x0$$ = 
+    9.7, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+    9.991, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    1., $CellContext`\[Gamma]$$ = 16., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 250., "time t"}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 1., "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 16., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 9.7, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 10.1, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 9.991, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {234.84375, 240.15625}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$37379$$ = 
+    0, $CellContext`\[Alpha]$37380$$ = 0, $CellContext`\[Beta]$37381$$ = 
+    0, $CellContext`\[Gamma]$37382$$ = 0, $CellContext`x0$37383$$ = 
+    0, $CellContext`y0$37384$$ = 0, $CellContext`z0$37385$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 250., $CellContext`x0$$ = 
+        9.7, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+        9.991, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        1., $CellContext`\[Gamma]$$ = 16.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$37379$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$37380$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$37381$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$37382$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$37383$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$37384$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$37385$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 250., "time t"}, 8, 250, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 1., "\[Beta]"}, 0.01, 2, Appearance -> 
+         "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 16., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 9.7, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 10.1, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 9.991, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{606., {262., 267.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->142829533],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 250., $CellContext`x0$$ = 
+    10.1, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+    10.1, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    1., $CellContext`\[Gamma]$$ = 25., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 250., "time t"}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 1., "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 25., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 10.1, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 10.1, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 10.1, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {234.84375, 240.15625}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$37469$$ = 
+    0, $CellContext`\[Alpha]$37470$$ = 0, $CellContext`\[Beta]$37471$$ = 
+    0, $CellContext`\[Gamma]$37472$$ = 0, $CellContext`x0$37473$$ = 
+    0, $CellContext`y0$37474$$ = 0, $CellContext`z0$37475$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 250., $CellContext`x0$$ = 
+        10.1, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+        10.1, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        1., $CellContext`\[Gamma]$$ = 25.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$37469$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$37470$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$37471$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$37472$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$37473$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$37474$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$37475$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 250., "time t"}, 8, 250, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 1., "\[Beta]"}, 0.01, 2, Appearance -> 
+         "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 25., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 10.1, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 10.1, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 10.1, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{606., {262., 267.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1796727432],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 250., $CellContext`x0$$ = 
+    9.770000000000001, $CellContext`y0$$ = 9.884, $CellContext`z0$$ = 
+    9.9, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    0.01, $CellContext`\[Gamma]$$ = 16., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 250., "time t"}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 0.01, "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 16., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 9.770000000000001, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 9.884, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 9.9, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {234.84375, 240.15625}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$37559$$ = 
+    0, $CellContext`\[Alpha]$37560$$ = 0, $CellContext`\[Beta]$37561$$ = 
+    0, $CellContext`\[Gamma]$37562$$ = 0, $CellContext`x0$37563$$ = 
+    0, $CellContext`y0$37564$$ = 0, $CellContext`z0$37565$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 250., $CellContext`x0$$ = 
+        9.770000000000001, $CellContext`y0$$ = 9.884, $CellContext`z0$$ = 
+        9.9, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        0.01, $CellContext`\[Gamma]$$ = 16.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$37559$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$37560$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$37561$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$37562$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$37563$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$37564$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$37565$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 250., "time t"}, 8, 250, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 0.01, "\[Beta]"}, 0.01, 2, 
+         Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 16., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 9.770000000000001, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 9.884, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 9.9, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{606., {262., 267.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1830389157],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 8., $CellContext`x0$$ = 
+    9.770000000000001, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+    10.1, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    1., $CellContext`\[Gamma]$$ = 16., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 8., "time t"}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 1., "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 16., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 9.770000000000001, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 10.1, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 10.1, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {235., 240.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$37649$$ = 
+    0, $CellContext`\[Alpha]$37650$$ = 0, $CellContext`\[Beta]$37651$$ = 
+    0, $CellContext`\[Gamma]$37652$$ = 0, $CellContext`x0$37653$$ = 
+    0, $CellContext`y0$37654$$ = 0, $CellContext`z0$37655$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 8., $CellContext`x0$$ = 
+        9.770000000000001, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+        10.1, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        1., $CellContext`\[Gamma]$$ = 16.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$37649$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$37650$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$37651$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$37652$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$37653$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$37654$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$37655$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 8., "time t"}, 8, 250, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 1., "\[Beta]"}, 0.01, 2, Appearance -> 
+         "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 16., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 9.770000000000001, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 10.1, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 10.1, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{612., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->647318424],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`time$$ = 250., $CellContext`x0$$ = 
+    9.818000000000001, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+    9.903, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+    1., $CellContext`\[Gamma]$$ = 16., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`time$$], 250., "time t"}, 8, 250}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[
+       Style["parameters", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`\[Alpha]$$], 10., "\[Alpha]"}, 8, 14}, {{
+       Hold[$CellContext`\[Beta]$$], 1., "\[Beta]"}, 0.01, 2}, {{
+       Hold[$CellContext`\[Gamma]$$], 16., "\[Gamma]"}, 1, 25}, {
+      Hold[
+       Style["initial values", Bold]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`x0$$], 9.818000000000001, 
+       Subscript[
+        Style["x", Italic], "0"]}, 9.7, 10.1}, {{
+       Hold[$CellContext`y0$$], 10.1, 
+       Subscript[
+        Style["y", Italic], "0"]}, 9.8, 10.1}, {{
+       Hold[$CellContext`z0$$], 9.903, 
+       Subscript[
+        Style["z", Italic], "0"]}, 9.9, 10.1}, {
+      Hold[
+       Spacer[170]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    390., {235., 240.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`time$37739$$ = 
+    0, $CellContext`\[Alpha]$37740$$ = 0, $CellContext`\[Beta]$37741$$ = 
+    0, $CellContext`\[Gamma]$37742$$ = 0, $CellContext`x0$37743$$ = 
+    0, $CellContext`y0$37744$$ = 0, $CellContext`z0$37745$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`time$$ = 250., $CellContext`x0$$ = 
+        9.818000000000001, $CellContext`y0$$ = 10.1, $CellContext`z0$$ = 
+        9.903, $CellContext`\[Alpha]$$ = 10., $CellContext`\[Beta]$$ = 
+        1., $CellContext`\[Gamma]$$ = 16.}, "ControllerVariables" :> {
+        Hold[$CellContext`time$$, $CellContext`time$37739$$, 0], 
+        Hold[$CellContext`\[Alpha]$$, $CellContext`\[Alpha]$37740$$, 0], 
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$37741$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$37742$$, 0], 
+        Hold[$CellContext`x0$$, $CellContext`x0$37743$$, 0], 
+        Hold[$CellContext`y0$$, $CellContext`y0$37744$$, 0], 
+        Hold[$CellContext`z0$$, $CellContext`z0$37745$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`c$ = -0.143, $CellContext`eqns$, \
+$CellContext`soln$, $CellContext`plt1$, $CellContext`plt2$}, \
+$CellContext`eqns$ = {
+          Derivative[
+            1][$CellContext`x][$CellContext`t] == $CellContext`\[Alpha]$$ \
+(($CellContext`y[$CellContext`t] - 10) - ($CellContext`x[$CellContext`t] - 
+              10)^3 - $CellContext`c$ ($CellContext`x[$CellContext`t] - 10)), 
+           Derivative[
+            1][$CellContext`y][$CellContext`t] == $CellContext`\[Beta]$$ \
+($CellContext`x[$CellContext`t] - $CellContext`y[$CellContext`t] + \
+$CellContext`z[$CellContext`t] - 10), 
+           Derivative[
+            1][$CellContext`z][$CellContext`t] == (-$CellContext`\[Gamma]$$) \
+($CellContext`y[$CellContext`t] - 10), $CellContext`x[
+            0] == $CellContext`x0$$, $CellContext`y[
+            0] == $CellContext`y0$$, $CellContext`z[
+            0] == $CellContext`z0$$}; $CellContext`soln$ = Quiet[
+           
+           NDSolve[$CellContext`eqns$, {$CellContext`x, $CellContext`y, \
+$CellContext`z}, {$CellContext`t, 
+             0, $CellContext`time$$}]]; $CellContext`plt1$ = Plot[
+           Evaluate[
+            ReplaceAll[{
+              $CellContext`x[$CellContext`t], 
+              $CellContext`y[$CellContext`t], 
+              $CellContext`z[$CellContext`t]}, $CellContext`soln$]], \
+{$CellContext`t, 0, $CellContext`time$$/2}, AxesLabel -> {
+             Style["time"], 
+             Row[{
+               Style[
+                $CellContext`x[$CellContext`t], Blue], 
+               Spacer[5], 
+               Style[
+                $CellContext`y[$CellContext`t], Red], 
+               Spacer[5], 
+               Style[
+                $CellContext`z[$CellContext`t], 
+                Darker[Green]]}]}, PlotStyle -> {Blue, Red, 
+             Darker[Green]}, AspectRatio -> 1/5, ImageSize -> {350, 80}, 
+           ImagePadding -> All]; $CellContext`plt2$ = ParametricPlot3D[
+           ReplaceAll[{
+             $CellContext`x[$CellContext`t], 
+             $CellContext`y[$CellContext`t], 
+             $CellContext`z[$CellContext`t]}, $CellContext`soln$], \
+{$CellContext`t, 0, $CellContext`time$$}, SphericalRegion -> True, PlotRange -> 
+           Automatic, BoxRatios -> {1, 1, 1}, Boxed -> False, Axes -> False, 
+           ColorFunction -> "Rainbow", ImageSize -> 1.3 {300, 300}, 
+           ImagePadding -> All, ViewPoint -> Top]; 
+        Column[{$CellContext`plt1$, $CellContext`plt2$}]], 
+      "Specifications" :> {{{$CellContext`time$$, 250., "time t"}, 8, 250, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, "", 
+        Style[
+        "parameters", Bold], {{$CellContext`\[Alpha]$$, 10., "\[Alpha]"}, 8, 
+         14, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Beta]$$, 1., "\[Beta]"}, 0.01, 2, Appearance -> 
+         "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`\[Gamma]$$, 16., "\[Gamma]"}, 1, 25, 
+         Appearance -> "Labeled", ImageSize -> Tiny}, Delimiter, 
+        Style["initial values", Bold], {{$CellContext`x0$$, 9.818000000000001, 
+          Subscript[
+           Style["x", Italic], "0"]}, 9.7, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`y0$$, 10.1, 
+          Subscript[
+           Style["y", Italic], "0"]}, 9.8, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`z0$$, 9.903, 
+          Subscript[
+           Style["z", Italic], "0"]}, 9.9, 10.1, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, 
+        Spacer[170]}, 
+      "Options" :> {AutorunSequencing -> {1, 3, 5}, ControlPlacement -> Left},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{612., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->328596466]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["References", "DetailNotes",
+ CellChangeTimes->{{3.5748558119544697`*^9, 3.574855816490263*^9}, {
+   3.574945254023525*^9, 3.5749452540248013`*^9}, 3.574947058634907*^9},
+ CellID->363428430],
+
+Cell[TextData[{
+ "[1] A. Huang, L. Pivka, C. W. Wu, and M. Franz, \"Chua's Equation with \
+Cubic Nonlinearity,\" ",
+ StyleBox["International Journal of Bifurcation and Chaos",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["6",
+  FontWeight->"Bold"],
+ "(12), 1996 pp. 2175\[Dash]2222. doi:",
+ ButtonBox["10.1142/S0218127496001454",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1142/S0218127496001454"], None},
+  ButtonNote->"http://dx.doi.org/10.1142/S0218127496001454"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.5748558119544697`*^9, 3.574855816490263*^9}, {
+   3.574945254023525*^9, 3.574945259367387*^9}, {3.574945293151251*^9, 
+   3.5749453523040543`*^9}, {3.574945418150537*^9, 3.574945582615346*^9}, {
+   3.57494597259943*^9, 3.57494606131656*^9}, 3.5749470537888203`*^9, {
+   3.5751195149615197`*^9, 3.5751195149675198`*^9}, {3.5752136313356533`*^9, 
+   3.575213638796274*^9}, {3.5752832880955*^9, 3.5752833021955*^9}, {
+   3.5753707472068167`*^9, 3.5753707677648726`*^9}},
+ CellID->711564912],
+
+Cell[TextData[{
+ "[2] Q. S. Li and W. Xu, \"A Chemical Model for Chua's Equation,\" ",
+ StyleBox["International Journal of Bifurcation and Chaos",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["12",
+  FontWeight->"Bold"],
+ "(4), 2002 pp. 877\[Dash]882. doi:",
+ ButtonBox["10.1142/S0218127402004760",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.1142/S0218127402004760"], None},
+  ButtonNote->"http://dx.doi.org/10.1142/S0218127402004760"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.5748558119544697`*^9, 3.574855816490263*^9}, {
+   3.574945254023525*^9, 3.574945259367387*^9}, {3.574945293151251*^9, 
+   3.5749453523040543`*^9}, {3.574945418150537*^9, 3.574945582615346*^9}, {
+   3.57494597259943*^9, 3.57494606131656*^9}, 3.5749470537888203`*^9, {
+   3.5751195149615197`*^9, 3.5751195168497086`*^9}, {3.5752136435083714`*^9, 
+   3.575213654296838*^9}, {3.5752833483605003`*^9, 3.5752833598485003`*^9}, {
+   3.5753707762157173`*^9, 3.5753707956376595`*^9}},
+ CellID->108210361]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.574855310116609*^9},
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.574855303642568*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.575213657364501*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.574855306052719*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Chua's circuit", "SearchTerms",
+ CellChangeTimes->{{3.57522197820975*^9, 3.575221991328142*^9}},
+ CellID->301209488],
+
+Cell["chaos", "SearchTerms",
+ CellChangeTimes->{{3.57522197820975*^9, 3.575222001672537*^9}},
+ CellID->808908837],
+
+Cell["chemical kinetics", "SearchTerms",
+ CellChangeTimes->{{3.57522197820975*^9, 3.5752220095991497`*^9}},
+ CellID->1759337949]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Clay Gruesbeck",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Clay+Gruesbeck"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Clay+Gruesbeck"]
+}], "Author",
+ CellChangeTimes->{{3.5747953362540407`*^9, 3.574795345451481*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{928, 899},
+WindowMargins->{{280, Automatic}, {22, Automatic}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "AutomaticAnimation"->{
+  Cell[80631, 1750, 1505, 32, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[82139, 1784, 908, 21, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]},
+ "CreateAndDeleteLocators"->{
+  Cell[78707, 1697, 637, 15, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "DragLocators"->{
+  Cell[78364, 1684, 340, 11, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "GamepadControls"->{
+  Cell[80235, 1738, 393, 10, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "ResizeImages"->{
+  Cell[77327, 1655, 312, 8, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[77642, 1665, 719, 17, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "SliderZoom"->{
+  Cell[79347, 1714, 885, 22, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"AutomaticAnimation", 84369, 1857},
+ {"BookmarkAnimation", 84486, 1860},
+ {"CreateAndDeleteLocators", 84607, 1863},
+ {"DragLocators", 84723, 1866},
+ {"GamepadControls", 84831, 1869},
+ {"ResizeImages", 84939, 1872},
+ {"RotateAndZoomIn3D", 85048, 1875},
+ {"SliderZoom", 85156, 1878}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 341, 6, 104, "DemoTitle"],
+Cell[923, 30, 33, 0, 266, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[981, 34, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[1035, 38, 9081, 225, 324, "Input"],
+Cell[10119, 265, 7004, 139, 541, "Output",
+ CellID->399654986]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17172, 410, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[17211, 412, 1789, 27, 35, "ManipulateCaption",
+ CellID->2124922656],
+Cell[19003, 441, 1876, 35, 30, "ManipulateCaption",
+ CellID->1540347625],
+Cell[20882, 478, 1899, 34, 30, "ManipulateCaption",
+ CellID->707168790],
+Cell[22784, 514, 1858, 32, 30, "ManipulateCaption",
+ CellID->1211351032],
+Cell[24645, 548, 2882, 65, 51, "ManipulateCaption",
+ CellID->269519732],
+Cell[27530, 615, 2015, 39, 22, "ManipulateCaption",
+ CellID->336115277],
+Cell[29548, 656, 685, 22, 30, "ManipulateCaption",
+ CellID->1031821264],
+Cell[30236, 680, 424, 13, 30, "ManipulateCaption",
+ CellID->889534523],
+Cell[30663, 695, 441, 15, 30, "ManipulateCaption",
+ CellID->1358082486],
+Cell[31107, 712, 2342, 46, 37, "ManipulateCaption",
+ CellID->311403066]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33486, 763, 28, 0, 168, "ThumbnailSection"],
+Cell[33517, 765, 7005, 139, 541, "Output",
+ CellID->1887268910]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40559, 909, 28, 0, 138, "SnapshotsSection"],
+Cell[40590, 911, 6842, 134, 541, "Output",
+ CellID->142829533],
+Cell[47435, 1047, 6843, 134, 541, "Output",
+ CellID->1796727432],
+Cell[54281, 1183, 6903, 134, 541, "Output",
+ CellID->1830389157],
+Cell[61187, 1319, 6876, 134, 549, "Output",
+ CellID->647318424],
+Cell[68066, 1455, 6888, 134, 549, "Output",
+ CellID->328596466]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74991, 1594, 26, 0, 332, "DetailsSection"],
+Cell[75020, 1596, 195, 3, 21, "DetailNotes",
+ CellID->363428430],
+Cell[75218, 1601, 1026, 23, 36, "DetailNotes",
+ CellID->711564912],
+Cell[76247, 1626, 1003, 22, 36, "DetailNotes",
+ CellID->108210361]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[77287, 1653, 37, 0, 120, "ControlSuggestionsSection"],
+Cell[77327, 1655, 312, 8, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[77642, 1665, 719, 17, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[78364, 1684, 340, 11, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[78707, 1697, 637, 15, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[79347, 1714, 885, 22, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[80235, 1738, 393, 10, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[80631, 1750, 1505, 32, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[82139, 1784, 908, 21, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[83084, 1810, 30, 0, 152, "SearchTermsSection"],
+Cell[83117, 1812, 122, 2, 21, "SearchTerms",
+ CellID->301209488],
+Cell[83242, 1816, 113, 2, 21, "SearchTerms",
+ CellID->808908837],
+Cell[83358, 1820, 128, 2, 21, "SearchTerms",
+ CellID->1759337949]
+}, Open  ]],
+Cell[83501, 1825, 31, 0, 138, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[83557, 1829, 25, 0, 124, "AuthorSection"],
+Cell[83585, 1831, 367, 10, 21, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

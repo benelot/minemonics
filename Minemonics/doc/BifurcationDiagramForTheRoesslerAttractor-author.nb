@@ -1,0 +1,997 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     39524,        988]
+NotebookOptionsPosition[     35831,        875]
+NotebookOutlinePosition[     37417,        925]
+CellTagsIndexPosition[     37097,        913]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Bifurcation Diagram for the R\[ODoubleDot]ssler Attractor\
+\>", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.485236300890625*^9, 3.454437161422001*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"sol", ",", "iterate", ",", "pts", ",", "fsol"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"sol", "[", "c_", "]"}], ":=", 
+       RowBox[{"NDSolve", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"x", "'"}], "[", "t", "]"}], "\[Equal]", 
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "+", 
+               RowBox[{"z", "[", "t", "]"}]}], ")"}]}]}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", " ", 
+            RowBox[{
+             RowBox[{"x", "[", "t", "]"}], "+", 
+             RowBox[{"a", " ", 
+              RowBox[{"y", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"z", "'"}], "[", "t", "]"}], "\[Equal]", " ", 
+            RowBox[{"b", "+", 
+             RowBox[{
+              RowBox[{"x", "[", "t", "]"}], " ", 
+              RowBox[{"z", "[", "t", "]"}]}], "-", 
+             RowBox[{"c", " ", 
+              RowBox[{"z", "[", "t", "]"}]}]}]}], ",", 
+           RowBox[{
+            RowBox[{"x", "[", "0", "]"}], "\[Equal]", " ", 
+            RowBox[{"-", "1"}]}], ",", 
+           RowBox[{
+            RowBox[{"y", "[", "0", "]"}], "\[Equal]", " ", "0"}], ",", 
+           RowBox[{
+            RowBox[{"z", "[", "0", "]"}], "\[Equal]", " ", "0"}]}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"x", "[", "t", "]"}], ",", 
+           RowBox[{"y", "[", "t", "]"}], ",", 
+           RowBox[{"z", "[", "t", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "310"}], "}"}]}], "]"}]}], ";", 
+      RowBox[{"iterate", "=", 
+       RowBox[{"Compile", "[", 
+        RowBox[{
+         RowBox[{"{", "c", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"fsol", "=", 
+            RowBox[{"sol", "[", "c", "]"}]}], ";", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"c", ",", "#"}], "}"}], "&"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"FindMaxValue", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"z", "[", "t", "]"}], "/.", "fsol"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", "#", ",", 
+                   RowBox[{"#", "+", "10"}]}], "}"}]}], "]"}], "&"}], "/@", 
+              RowBox[{"Table", "[", 
+               RowBox[{"i", ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "200", ",", "300.0", ",", "10"}], "}"}]}], 
+               "]"}]}]}], "]"}]}], "}"}]}], "]"}]}], ";", 
+      RowBox[{"pts", "=", 
+       RowBox[{"Quiet", "[", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"iterate", "[", "c", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"c", ",", "1", ",", "4.8", ",", "0.05"}], "}"}]}], "]"}],
+           ",", "1"}], "]"}], "]"}]}], ";", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"pts", ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"PointSize", "[", "0.01", "]"}], ",", 
+             RowBox[{"RGBColor", "[", 
+              RowBox[{".49", ",", "0", ",", "0"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "pts", "]"}]}], "}"}]}], "]"}]}], ",", 
+        RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", " ", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "350"}], "}"}]}], ",", 
+        RowBox[{"FrameLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<c\>\"", ",", "Italic"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<z\>\"", ",", "Italic"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", " ", 
+         RowBox[{"{", 
+          RowBox[{"500", ",", "500"}], "}"}]}], ",", 
+        RowBox[{"AspectRatio", "\[Rule]", " ", "1"}], ",", 
+        RowBox[{"ImagePadding", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"35", ",", "10"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"35", ",", "10"}], "}"}]}], "}"}]}]}], "]"}]}]}], "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "0.25", ",", "\"\<a\>\""}], "}"}], ",", "0.1", ",", 
+     "0.4", ",", "0.05", ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"b", ",", "0.3", ",", "\"\<b\>\""}], "}"}], ",", "0.1", ",", 
+     "0.3", ",", "0.05", ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "\[Rule]", " ", "Top"}], ",", 
+   RowBox[{"SynchronousUpdating", " ", "\[Rule]", " ", "False"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.485236358859375*^9, 3.4852365374375*^9}, {
+   3.48523658471875*^9, 3.485236585453125*^9}, {3.485236619875*^9, 
+   3.485236661265625*^9}, {3.48523669759375*^9, 3.485236773421875*^9}, {
+   3.485236811109375*^9, 3.485236816609375*^9}, {3.485236957453125*^9, 
+   3.485236962109375*^9}, {3.48523701540625*^9, 3.48523701625*^9}, {
+   3.48523713109375*^9, 3.48523716396875*^9}, {3.485237219859375*^9, 
+   3.485237224234375*^9}, {3.485237281875*^9, 3.48523729321875*^9}, {
+   3.48523734034375*^9, 3.485237419515625*^9}, {3.4852376109375*^9, 
+   3.485237618078125*^9}, {3.485238283609375*^9, 3.4538083457368503`*^9}, {
+   3.453808477340009*^9, 3.453808478119087*^9}, {3.454688579383071*^9, 
+   3.4546886036744995`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0.25, $CellContext`b$$ = 0.3, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], 0.25, "a"}, 0.1, 0.4, 0.05}, {{
+       Hold[$CellContext`b$$], 0.3, "b"}, 0.1, 0.3, 0.05}}, Typeset`size$$ = {
+    400., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`a$61892$$ = 
+    0, $CellContext`b$61893$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 0.3}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$61892$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$61893$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`iterate$, $CellContext`pts$, \
+$CellContext`fsol$}, $CellContext`sol$[
+           Pattern[$CellContext`c$, 
+            Blank[]]] := 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == \
+-($CellContext`y[$CellContext`t] + $CellContext`z[$CellContext`t]), 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == \
+$CellContext`x[$CellContext`t] + $CellContext`a$$ \
+$CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`z][$CellContext`t] == $CellContext`b$$ + \
+$CellContext`x[$CellContext`t] $CellContext`z[$CellContext`t] - \
+$CellContext`c$ $CellContext`z[$CellContext`t], $CellContext`x[
+             0] == -1, $CellContext`y[0] == 0, $CellContext`z[0] == 0}, {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}, {$CellContext`t, 0, 
+            310}]; $CellContext`iterate$ = 
+         Compile[{$CellContext`c$}, {$CellContext`fsol$ = \
+$CellContext`sol$[$CellContext`c$]; Map[{$CellContext`c$, #}& , 
+              Map[FindMaxValue[
+                ReplaceAll[
+                 $CellContext`z[$CellContext`t], $CellContext`fsol$], \
+{$CellContext`t, #, # + 10}]& , 
+               
+               Table[$CellContext`i, {$CellContext`i, 200, 300., 
+                 10}]]]}]; $CellContext`pts$ = Quiet[
+           Flatten[
+            Table[
+             $CellContext`iterate$[$CellContext`c], {$CellContext`c, 1, 4.8, 
+              0.05}], 1]]; ListPlot[$CellContext`pts$, PlotStyle -> Table[{
+             PointSize[0.01], 
+             RGBColor[0.49, 0, 0]}, {$CellContext`i, 1, 
+             Length[$CellContext`pts$]}], Frame -> True, 
+          ImageSize -> {400, 350}, FrameLabel -> {
+            Style["c", Italic], 
+            Style["z", Italic]}, ImageSize -> {500, 500}, AspectRatio -> 1, 
+          ImagePadding -> {{35, 10}, {35, 10}}]], 
+      "Specifications" :> {{{$CellContext`a$$, 0.25, "a"}, 0.1, 0.4, 0.05, 
+         Appearance -> "Labeled"}, {{$CellContext`b$$, 0.3, "b"}, 0.1, 0.3, 
+         0.05, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Top, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {233., 238.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->342113078]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+The R\[ODoubleDot]ssler attractor is represented by the following set of ODEs:\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.48523785878125*^9, 3.454437182566324*^9}}],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", " ", "x"}], 
+     RowBox[{"d", " ", "t"}]], "=", 
+    RowBox[{"-", 
+     RowBox[{"(", 
+      RowBox[{"y", "+", "z"}], ")"}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", " ", "y"}], 
+     RowBox[{"d", " ", "t"}]], "=", 
+    RowBox[{"x", "+", " ", 
+     RowBox[{"a", " ", "y"}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", " ", "z"}], 
+     RowBox[{"d", " ", "t"}]], "=", 
+    RowBox[{"b", "+", " ", 
+     RowBox[{"x", " ", "z"}], " ", "-", 
+     RowBox[{"c", " ", 
+      RowBox[{"z", "."}]}]}]}]}], 
+  TraditionalForm]], "InlineMath"]], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.485237902015625*^9, 3.485237902015625*^9}, {
+   3.485238027484375*^9, 3.4543355339466696`*^9}},
+ CellID->14153072],
+
+Cell[TextData[{
+ "The Demonstration plots the bifurcation diagram, where ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]], "InlineMath"],
+ " is the bifurcation parameter, for values of parameters ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]], "InlineMath"],
+ " and",
+ StyleBox[" ",
+  FontSlant->"Italic"],
+ Cell[BoxData[
+  FormBox["b", TraditionalForm]], "InlineMath"],
+ " set by the user. The bifurcation diagram shows the onset of chaotic \
+behavior, period doubling, and so on."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.48523790290625*^9, 3.485237982875*^9}, {
+   3.485238160546875*^9, 3.4852382096875*^9}, {3.4852466185625*^9, 
+   3.4538083948537617`*^9}, {3.454335554337425*^9, 3.454335560399964*^9}, {
+   3.454437205766724*^9, 3.4544372432305737`*^9}},
+ CellID->77170869]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0.25, $CellContext`b$$ = 0.3, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], 0.25, "a"}, 0.1, 0.4, 0.05}, {{
+       Hold[$CellContext`b$$], 0.3, "b"}, 0.1, 0.3, 0.05}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`a$61947$$ = 
+    0, $CellContext`b$61948$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 0.3}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$61947$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$61948$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`iterate$, $CellContext`pts$, \
+$CellContext`fsol$}, $CellContext`sol$[
+           Pattern[$CellContext`c$, 
+            Blank[]]] := 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == \
+-($CellContext`y[$CellContext`t] + $CellContext`z[$CellContext`t]), 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == \
+$CellContext`x[$CellContext`t] + $CellContext`a$$ \
+$CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`z][$CellContext`t] == $CellContext`b$$ + \
+$CellContext`x[$CellContext`t] $CellContext`z[$CellContext`t] - \
+$CellContext`c$ $CellContext`z[$CellContext`t], $CellContext`x[
+             0] == -1, $CellContext`y[0] == 0, $CellContext`z[0] == 0}, {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}, {$CellContext`t, 0, 
+            310}]; $CellContext`iterate$ = 
+         Compile[{$CellContext`c$}, {$CellContext`fsol$ = \
+$CellContext`sol$[$CellContext`c$]; Map[{$CellContext`c$, #}& , 
+              Map[FindMaxValue[
+                ReplaceAll[
+                 $CellContext`z[$CellContext`t], $CellContext`fsol$], \
+{$CellContext`t, #, # + 10}]& , 
+               
+               Table[$CellContext`i, {$CellContext`i, 200, 300., 
+                 10}]]]}]; $CellContext`pts$ = Quiet[
+           Flatten[
+            Table[
+             $CellContext`iterate$[$CellContext`c], {$CellContext`c, 1, 4.8, 
+              0.05}], 1]]; ListPlot[$CellContext`pts$, PlotStyle -> Table[{
+             PointSize[0.01], 
+             RGBColor[0.49, 0, 0]}, {$CellContext`i, 1, 
+             Length[$CellContext`pts$]}], Frame -> True, 
+          ImageSize -> {400, 350}, FrameLabel -> {
+            Style["c", Italic], 
+            Style["z", Italic]}, ImageSize -> {500, 500}, AspectRatio -> 1, 
+          ImagePadding -> {{35, 10}, {35, 10}}]], 
+      "Specifications" :> {{{$CellContext`a$$, 0.25, "a"}, 0.1, 0.4, 0.05, 
+         Appearance -> "Labeled"}, {{$CellContext`b$$, 0.3, "b"}, 0.1, 0.3, 
+         0.05, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Top, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{303., {70., 75.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->137625579]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+    0.15000000000000002`, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], 0.25, "a"}, 0.1, 0.4, 0.05}, {{
+       Hold[$CellContext`b$$], 0.15000000000000002`, "b"}, 0.1, 0.3, 0.05}}, 
+    Typeset`size$$ = Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`a$62002$$ = 
+    0, $CellContext`b$62003$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 
+        0.15000000000000002`}, "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$62002$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$62003$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`iterate$, $CellContext`pts$, \
+$CellContext`fsol$}, $CellContext`sol$[
+           Pattern[$CellContext`c$, 
+            Blank[]]] := 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == \
+-($CellContext`y[$CellContext`t] + $CellContext`z[$CellContext`t]), 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == \
+$CellContext`x[$CellContext`t] + $CellContext`a$$ \
+$CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`z][$CellContext`t] == $CellContext`b$$ + \
+$CellContext`x[$CellContext`t] $CellContext`z[$CellContext`t] - \
+$CellContext`c$ $CellContext`z[$CellContext`t], $CellContext`x[
+             0] == -1, $CellContext`y[0] == 0, $CellContext`z[0] == 0}, {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}, {$CellContext`t, 0, 
+            310}]; $CellContext`iterate$ = 
+         Compile[{$CellContext`c$}, {$CellContext`fsol$ = \
+$CellContext`sol$[$CellContext`c$]; Map[{$CellContext`c$, #}& , 
+              Map[FindMaxValue[
+                ReplaceAll[
+                 $CellContext`z[$CellContext`t], $CellContext`fsol$], \
+{$CellContext`t, #, # + 10}]& , 
+               
+               Table[$CellContext`i, {$CellContext`i, 200, 300., 
+                 10}]]]}]; $CellContext`pts$ = Quiet[
+           Flatten[
+            Table[
+             $CellContext`iterate$[$CellContext`c], {$CellContext`c, 1, 4.8, 
+              0.05}], 1]]; ListPlot[$CellContext`pts$, PlotStyle -> Table[{
+             PointSize[0.01], 
+             RGBColor[0.49, 0, 0]}, {$CellContext`i, 1, 
+             Length[$CellContext`pts$]}], Frame -> True, 
+          ImageSize -> {400, 350}, FrameLabel -> {
+            Style["c", Italic], 
+            Style["z", Italic]}, ImageSize -> {500, 500}, AspectRatio -> 1, 
+          ImagePadding -> {{35, 10}, {35, 10}}]], 
+      "Specifications" :> {{{$CellContext`a$$, 0.25, "a"}, 0.1, 0.4, 0.05, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`b$$, 0.15000000000000002`, "b"}, 0.1, 0.3,
+          0.05, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Top, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{303., {70., 75.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->878139838],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 
+    0.30000000000000004`, $CellContext`b$$ = 0.15000000000000002`, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], 0.30000000000000004`, "a"}, 0.1, 0.4, 0.05}, {{
+       Hold[$CellContext`b$$], 0.15000000000000002`, "b"}, 0.1, 0.3, 0.05}}, 
+    Typeset`size$$ = Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`a$62057$$ = 
+    0, $CellContext`b$62058$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 
+        0.30000000000000004`, $CellContext`b$$ = 0.15000000000000002`}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$62057$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$62058$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`iterate$, $CellContext`pts$, \
+$CellContext`fsol$}, $CellContext`sol$[
+           Pattern[$CellContext`c$, 
+            Blank[]]] := 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == \
+-($CellContext`y[$CellContext`t] + $CellContext`z[$CellContext`t]), 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == \
+$CellContext`x[$CellContext`t] + $CellContext`a$$ \
+$CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`z][$CellContext`t] == $CellContext`b$$ + \
+$CellContext`x[$CellContext`t] $CellContext`z[$CellContext`t] - \
+$CellContext`c$ $CellContext`z[$CellContext`t], $CellContext`x[
+             0] == -1, $CellContext`y[0] == 0, $CellContext`z[0] == 0}, {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}, {$CellContext`t, 0, 
+            310}]; $CellContext`iterate$ = 
+         Compile[{$CellContext`c$}, {$CellContext`fsol$ = \
+$CellContext`sol$[$CellContext`c$]; Map[{$CellContext`c$, #}& , 
+              Map[FindMaxValue[
+                ReplaceAll[
+                 $CellContext`z[$CellContext`t], $CellContext`fsol$], \
+{$CellContext`t, #, # + 10}]& , 
+               
+               Table[$CellContext`i, {$CellContext`i, 200, 300., 
+                 10}]]]}]; $CellContext`pts$ = Quiet[
+           Flatten[
+            Table[
+             $CellContext`iterate$[$CellContext`c], {$CellContext`c, 1, 4.8, 
+              0.05}], 1]]; ListPlot[$CellContext`pts$, PlotStyle -> Table[{
+             PointSize[0.01], 
+             RGBColor[0.49, 0, 0]}, {$CellContext`i, 1, 
+             Length[$CellContext`pts$]}], Frame -> True, 
+          ImageSize -> {400, 350}, FrameLabel -> {
+            Style["c", Italic], 
+            Style["z", Italic]}, ImageSize -> {500, 500}, AspectRatio -> 1, 
+          ImagePadding -> {{35, 10}, {35, 10}}]], 
+      "Specifications" :> {{{$CellContext`a$$, 0.30000000000000004`, "a"}, 
+         0.1, 0.4, 0.05, Appearance -> 
+         "Labeled"}, {{$CellContext`b$$, 0.15000000000000002`, "b"}, 0.1, 0.3,
+          0.05, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Top, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->630230045],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 
+    0.30000000000000004`, $CellContext`b$$ = 0.3, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], 0.30000000000000004`, "a"}, 0.1, 0.4, 0.05}, {{
+       Hold[$CellContext`b$$], 0.3, "b"}, 0.1, 0.3, 0.05}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`a$62112$$ = 
+    0, $CellContext`b$62113$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 
+        0.30000000000000004`, $CellContext`b$$ = 0.3}, "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$62112$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$62113$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`iterate$, $CellContext`pts$, \
+$CellContext`fsol$}, $CellContext`sol$[
+           Pattern[$CellContext`c$, 
+            Blank[]]] := 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == \
+-($CellContext`y[$CellContext`t] + $CellContext`z[$CellContext`t]), 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == \
+$CellContext`x[$CellContext`t] + $CellContext`a$$ \
+$CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`z][$CellContext`t] == $CellContext`b$$ + \
+$CellContext`x[$CellContext`t] $CellContext`z[$CellContext`t] - \
+$CellContext`c$ $CellContext`z[$CellContext`t], $CellContext`x[
+             0] == -1, $CellContext`y[0] == 0, $CellContext`z[0] == 0}, {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}, {$CellContext`t, 0, 
+            310}]; $CellContext`iterate$ = 
+         Compile[{$CellContext`c$}, {$CellContext`fsol$ = \
+$CellContext`sol$[$CellContext`c$]; Map[{$CellContext`c$, #}& , 
+              Map[FindMaxValue[
+                ReplaceAll[
+                 $CellContext`z[$CellContext`t], $CellContext`fsol$], \
+{$CellContext`t, #, # + 10}]& , 
+               
+               Table[$CellContext`i, {$CellContext`i, 200, 300., 
+                 10}]]]}]; $CellContext`pts$ = Quiet[
+           Flatten[
+            Table[
+             $CellContext`iterate$[$CellContext`c], {$CellContext`c, 1, 4.8, 
+              0.05}], 1]]; ListPlot[$CellContext`pts$, PlotStyle -> Table[{
+             PointSize[0.01], 
+             RGBColor[0.49, 0, 0]}, {$CellContext`i, 1, 
+             Length[$CellContext`pts$]}], Frame -> True, 
+          ImageSize -> {400, 350}, FrameLabel -> {
+            Style["c", Italic], 
+            Style["z", Italic]}, ImageSize -> {500, 500}, AspectRatio -> 1, 
+          ImagePadding -> {{35, 10}, {35, 10}}]], 
+      "Specifications" :> {{{$CellContext`a$$, 0.30000000000000004`, "a"}, 
+         0.1, 0.4, 0.05, Appearance -> 
+         "Labeled"}, {{$CellContext`b$$, 0.3, "b"}, 0.1, 0.3, 0.05, 
+         Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Top, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->10299593]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\""]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.48523780228125*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" on Mac) and drag up and down to zoom.\""}]]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}]]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}]]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" to make ever finer adjustments.\""}]]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.48523780365625*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\""]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}]]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.485237804578125*^9, {3.48523832271875*^9, 
+   3.4543355784313293`*^9}},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}]]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Bifurcation",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Bifurcation.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/Bifurcation.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4538084204463205`*^9, 3.453808461057381*^9}},
+ CellID->474916042],
+
+Cell[TextData[ButtonBox["R\[ODoubleDot]ssler Attractor",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/RoesslerAttractor.html"], None},
+ ButtonNote->
+  "http://mathworld.wolfram.com/RoesslerAttractor.html"]], "RelatedLinks",
+ CellID->250078413]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Housam Binous",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Housam+Binous"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Housam+Binous"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.432333043774981*^9, 3.432333045441087*^9}, {
+   3.485237812015625*^9, 3.485237839578125*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{989, 942},
+WindowMargins->{{10, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[28938, 683, 351, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[29292, 693, 661, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[29956, 711, 318, 10, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[30277, 723, 615, 14, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[30895, 739, 888, 22, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[31786, 763, 347, 8, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[32136, 773, 1558, 33, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[33697, 808, 886, 20, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 36206, 886},
+ {"RotateAndZoomIn3D", 36314, 889},
+ {"DragLocators", 36423, 892},
+ {"CreateAndDeleteLocators", 36538, 895},
+ {"SliderZoom", 36651, 898},
+ {"GamepadControls", 36756, 901},
+ {"AutomaticAnimation", 36868, 904},
+ {"BookmarkAnimation", 36984, 907}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 176, 4, 74, "DemoTitle"],
+Cell[746, 28, 33, 0, 266, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[804, 32, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[858, 36, 6233, 155, 268, "Input"],
+Cell[7094, 193, 3884, 79, 483, "Output",
+ CellID->342113078]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11024, 278, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[11063, 280, 204, 4, 22, "ManipulateCaption"],
+Cell[11270, 286, 885, 28, 93, "ManipulateCaption",
+ CellID->14153072],
+Cell[12158, 316, 814, 20, 38, "ManipulateCaption",
+ CellID->77170869]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13009, 341, 28, 0, 168, "ThumbnailSection"],
+Cell[13040, 343, 3871, 79, 157, "Output",
+ CellID->137625579]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16948, 427, 28, 0, 138, "SnapshotsSection"],
+Cell[16979, 429, 3951, 80, 157, "Output",
+ CellID->878139838],
+Cell[20933, 511, 3986, 81, 37, "Output",
+ CellID->630230045],
+Cell[24922, 594, 3910, 80, 37, "Output",
+ CellID->10299593]
+}, Open  ]],
+Cell[28847, 677, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[28898, 681, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[28938, 683, 351, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[29292, 693, 661, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[29956, 711, 318, 10, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[30277, 723, 615, 14, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[30895, 739, 888, 22, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[31786, 763, 347, 8, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[32136, 773, 1558, 33, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[33697, 808, 886, 20, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[34598, 831, 30, 0, 152, "SearchTermsSection"],
+Cell[CellGroupData[{
+Cell[34653, 835, 31, 0, 126, "RelatedLinksSection"],
+Cell[34687, 837, 334, 7, 22, "RelatedLinks",
+ CellID->474916042],
+Cell[35024, 846, 275, 6, 22, "RelatedLinks",
+ CellID->250078413]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35336, 857, 25, 0, 136, "AuthorSection"],
+Cell[35364, 859, 439, 12, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,580 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     21529,        570]
+NotebookOptionsPosition[     20246,        522]
+NotebookOutlinePosition[     20927,        548]
+CellTagsIndexPosition[     20884,        545]
+WindowTitle->Bifurcation Diagram for the R\366ssler Attractor - Source
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Bifurcation Diagram for the R\[ODoubleDot]ssler Attractor\
+\>", "Section",
+ CellFrame->{{0, 0}, {0, 0}},
+ ShowCellBracket->False,
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell[BoxData[
+ GraphicsBox[RasterBox[CompressedData["
+1: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
+FP/69esnAAAAAAAAAAAAwM74B4thROM=
+   "], {{0, 0}, {1800, 25}}, {0, 255},
+   ColorFunction->RGBColor],
+  ImageSize->{1800, 25},
+  PlotRange->{{0, 1800}, {0, 25}}]], "Section",
+ CellFrame->{{0, 0}, {0, 0}},
+ ShowCellBracket->False],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"sol", ",", "iterate", ",", "pts", ",", "fsol"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"sol", "[", "c_", "]"}], ":=", 
+       RowBox[{"NDSolve", "[", 
+        RowBox[{
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"x", "'"}], "[", "t", "]"}], "\[Equal]", 
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"y", "[", "t", "]"}], "+", 
+               RowBox[{"z", "[", "t", "]"}]}], ")"}]}]}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", " ", 
+            RowBox[{
+             RowBox[{"x", "[", "t", "]"}], "+", 
+             RowBox[{"a", " ", 
+              RowBox[{"y", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+           
+           RowBox[{
+            RowBox[{
+             RowBox[{"z", "'"}], "[", "t", "]"}], "\[Equal]", " ", 
+            RowBox[{"b", "+", 
+             RowBox[{
+              RowBox[{"x", "[", "t", "]"}], " ", 
+              RowBox[{"z", "[", "t", "]"}]}], "-", 
+             RowBox[{"c", " ", 
+              RowBox[{"z", "[", "t", "]"}]}]}]}], ",", 
+           RowBox[{
+            RowBox[{"x", "[", "0", "]"}], "\[Equal]", " ", 
+            RowBox[{"-", "1"}]}], ",", 
+           RowBox[{
+            RowBox[{"y", "[", "0", "]"}], "\[Equal]", " ", "0"}], ",", 
+           RowBox[{
+            RowBox[{"z", "[", "0", "]"}], "\[Equal]", " ", "0"}]}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"x", "[", "t", "]"}], ",", 
+           RowBox[{"y", "[", "t", "]"}], ",", 
+           RowBox[{"z", "[", "t", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "0", ",", "310"}], "}"}]}], "]"}]}], ";", 
+      RowBox[{"iterate", "=", 
+       RowBox[{"Compile", "[", 
+        RowBox[{
+         RowBox[{"{", "c", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"fsol", "=", 
+            RowBox[{"sol", "[", "c", "]"}]}], ";", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"c", ",", "#"}], "}"}], "&"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"FindMaxValue", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"z", "[", "t", "]"}], "/.", "fsol"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", "#", ",", 
+                   RowBox[{"#", "+", "10"}]}], "}"}]}], "]"}], "&"}], "/@", 
+              RowBox[{"Table", "[", 
+               RowBox[{"i", ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "200", ",", "300.0", ",", "10"}], "}"}]}], 
+               "]"}]}]}], "]"}]}], "}"}]}], "]"}]}], ";", 
+      RowBox[{"pts", "=", 
+       RowBox[{"Quiet", "[", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"iterate", "[", "c", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"c", ",", "1", ",", "4.8", ",", "0.05"}], "}"}]}], "]"}],
+           ",", "1"}], "]"}], "]"}]}], ";", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"pts", ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"PointSize", "[", "0.01", "]"}], ",", 
+             RowBox[{"RGBColor", "[", 
+              RowBox[{".49", ",", "0", ",", "0"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "pts", "]"}]}], "}"}]}], "]"}]}], ",", 
+        RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", " ", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "350"}], "}"}]}], ",", 
+        RowBox[{"FrameLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<c\>\"", ",", "Italic"}], "]"}], ",", 
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<z\>\"", ",", "Italic"}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", " ", 
+         RowBox[{"{", 
+          RowBox[{"500", ",", "500"}], "}"}]}], ",", 
+        RowBox[{"AspectRatio", "\[Rule]", " ", "1"}], ",", 
+        RowBox[{"ImagePadding", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"35", ",", "10"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"35", ",", "10"}], "}"}]}], "}"}]}]}], "]"}]}]}], "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "0.25", ",", "\"\<a\>\""}], "}"}], ",", "0.1", ",", 
+     "0.4", ",", "0.05", ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"b", ",", "0.3", ",", "\"\<b\>\""}], "}"}], ",", "0.1", ",", 
+     "0.3", ",", "0.05", ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "\[Rule]", " ", "Top"}], ",", 
+   RowBox[{"SynchronousUpdating", " ", "\[Rule]", " ", "False"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.485236358859375*^9, 3.4852365374375*^9}, {
+   3.48523658471875*^9, 3.485236585453125*^9}, {3.485236619875*^9, 
+   3.485236661265625*^9}, {3.48523669759375*^9, 3.485236773421875*^9}, {
+   3.485236811109375*^9, 3.485236816609375*^9}, {3.485236957453125*^9, 
+   3.485236962109375*^9}, {3.48523701540625*^9, 3.48523701625*^9}, {
+   3.48523713109375*^9, 3.48523716396875*^9}, {3.485237219859375*^9, 
+   3.485237224234375*^9}, {3.485237281875*^9, 3.48523729321875*^9}, {
+   3.48523734034375*^9, 3.485237419515625*^9}, {3.4852376109375*^9, 
+   3.485237618078125*^9}, {3.485238283609375*^9, 3.4538083457368503`*^9}, {
+   3.453808477340009*^9, 3.453808478119087*^9}, {3.454688579383071*^9, 
+   3.4546886036744995`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 0.25, $CellContext`b$$ = 0.3, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`a$$], 0.25, "a"}, 0.1, 0.4, 0.05}, {{
+       Hold[$CellContext`b$$], 0.3, "b"}, 0.1, 0.3, 0.05}}, Typeset`size$$ = {
+    400., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`a$61892$$ = 
+    0, $CellContext`b$61893$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 0.25, $CellContext`b$$ = 0.3}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`a$$, $CellContext`a$61892$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$61893$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`sol$, $CellContext`iterate$, $CellContext`pts$, \
+$CellContext`fsol$}, $CellContext`sol$[
+           Pattern[$CellContext`c$, 
+            Blank[]]] := 
+         NDSolve[{
+           Derivative[
+             1][$CellContext`x][$CellContext`t] == \
+-($CellContext`y[$CellContext`t] + $CellContext`z[$CellContext`t]), 
+            Derivative[
+             1][$CellContext`y][$CellContext`t] == \
+$CellContext`x[$CellContext`t] + $CellContext`a$$ \
+$CellContext`y[$CellContext`t], 
+            Derivative[
+             1][$CellContext`z][$CellContext`t] == $CellContext`b$$ + \
+$CellContext`x[$CellContext`t] $CellContext`z[$CellContext`t] - \
+$CellContext`c$ $CellContext`z[$CellContext`t], $CellContext`x[
+             0] == -1, $CellContext`y[0] == 0, $CellContext`z[0] == 0}, {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}, {$CellContext`t, 0, 
+            310}]; $CellContext`iterate$ = 
+         Compile[{$CellContext`c$}, {$CellContext`fsol$ = \
+$CellContext`sol$[$CellContext`c$]; Map[{$CellContext`c$, #}& , 
+              Map[FindMaxValue[
+                ReplaceAll[
+                 $CellContext`z[$CellContext`t], $CellContext`fsol$], \
+{$CellContext`t, #, # + 10}]& , 
+               
+               Table[$CellContext`i, {$CellContext`i, 200, 300., 
+                 10}]]]}]; $CellContext`pts$ = Quiet[
+           Flatten[
+            Table[
+             $CellContext`iterate$[$CellContext`c], {$CellContext`c, 1, 4.8, 
+              0.05}], 1]]; ListPlot[$CellContext`pts$, PlotStyle -> Table[{
+             PointSize[0.01], 
+             RGBColor[0.49, 0, 0]}, {$CellContext`i, 1, 
+             Length[$CellContext`pts$]}], Frame -> True, 
+          ImageSize -> {400, 350}, FrameLabel -> {
+            Style["c", Italic], 
+            Style["z", Italic]}, ImageSize -> {500, 500}, AspectRatio -> 1, 
+          ImagePadding -> {{35, 10}, {35, 10}}]], 
+      "Specifications" :> {{{$CellContext`a$$, 0.25, "a"}, 0.1, 0.4, 0.05, 
+         Appearance -> "Labeled"}, {{$CellContext`b$$, 0.3, "b"}, 0.1, 0.3, 
+         0.05, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Top, SynchronousUpdating -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{445., {231., 236.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->342113078],
+
+Cell[CellGroupData[{
+
+Cell["CAPTION", "Section",
+ CellFrame->{{0, 0}, {1, 0}},
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ FontFamily->"Helvetica",
+ FontSize->12,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell["\<\
+The R\[ODoubleDot]ssler attractor is represented by the following set of ODEs:\
+\>", "Text"]
+}, Close]]
+}, Open  ]],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  RowBox[{
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", " ", "x"}], 
+     RowBox[{"d", " ", "t"}]], "=", 
+    RowBox[{"-", 
+     RowBox[{"(", 
+      RowBox[{"y", "+", "z"}], ")"}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", " ", "y"}], 
+     RowBox[{"d", " ", "t"}]], "=", 
+    RowBox[{"x", "+", " ", 
+     RowBox[{"a", " ", "y"}]}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"d", " ", "z"}], 
+     RowBox[{"d", " ", "t"}]], "=", 
+    RowBox[{"b", "+", " ", 
+     RowBox[{"x", " ", "z"}], " ", "-", 
+     RowBox[{"c", " ", 
+      RowBox[{"z", "."}]}]}]}]}], TraditionalForm]], "InlineMath"]], "Text"],
+
+Cell[TextData[{
+ "The Demonstration plots the bifurcation diagram, where ",
+ Cell[BoxData[
+  FormBox["c", TraditionalForm]], "InlineMath"],
+ " is the bifurcation parameter, for values of parameters ",
+ Cell[BoxData[
+  FormBox["a", TraditionalForm]], "InlineMath"],
+ " and",
+ StyleBox[" ",
+  FontSlant->"Italic"],
+ Cell[BoxData[
+  FormBox["b", TraditionalForm]], "InlineMath"],
+ " set by the user. The bifurcation diagram shows the onset of chaotic \
+behavior, period doubling, and so on."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["THIS NOTEBOOK IS THE SOURCE CODE FROM", "Text",
+ CellFrame->{{0, 0}, {0, 0}},
+ CellMargins->{{48, 10}, {4, 28}},
+ CellGroupingRules->{"SectionGrouping", 25},
+ CellFrameMargins->{{48, 48}, {6, 5}},
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ FontFamily->"Helvetica",
+ FontSize->10,
+ FontWeight->"Bold",
+ FontColor->RGBColor[0.597406, 0, 0.0527047]],
+
+Cell[TextData[{
+ "\"",
+ ButtonBox["Bifurcation Diagram for the R\[ODoubleDot]ssler Attractor",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/\
+BifurcationDiagramForTheRoesslerAttractor/"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/\
+BifurcationDiagramForTheRoesslerAttractor/"],
+ "\"",
+ " from ",
+ ButtonBox["the Wolfram Demonstrations Project",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+ "\[ParagraphSeparator]\[NonBreakingSpace]",
+ ButtonBox["http://demonstrations.wolfram.com/\
+BifurcationDiagramForTheRoesslerAttractor/",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/\
+BifurcationDiagramForTheRoesslerAttractor/"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/\
+BifurcationDiagramForTheRoesslerAttractor/"]
+}], "Text",
+ CellMargins->{{48, Inherited}, {0, Inherited}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.5]],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Housam Binous",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Housam+Binous"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Housam+Binous"]
+}], "Text",
+ CellDingbat->"\[FilledSmallSquare]",
+ CellMargins->{{66, 48}, {2, 4}},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.6]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "A full-function Wolfram ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " system (Version 6 or higher) is required to edit this notebook.\n",
+ StyleBox[ButtonBox["GET WOLFRAM MATHEMATICA \[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.wolfram.com/products/mathematica/"], None},
+  ButtonNote->"http://www.wolfram.com/products/mathematica/"],
+  FontFamily->"Helvetica",
+  FontWeight->"Bold",
+  FontSlant->"Italic",
+  FontColor->RGBColor[1, 0.42, 0]]
+}], "Text",
+ CellFrame->True,
+ CellMargins->{{48, 68}, {8, 28}},
+ CellFrameMargins->12,
+ CellFrameColor->RGBColor[0.87, 0.87, 0.87],
+ CellChangeTimes->{3.3750111182355957`*^9},
+ ParagraphSpacing->{1., 1.},
+ FontFamily->"Verdana",
+ FontSize->10,
+ FontColor->GrayLevel[0.411765],
+ Background->RGBColor[1, 1, 1]],
+
+Cell[TextData[{
+ "\[Copyright] ",
+ StyleBox[ButtonBox["Wolfram Demonstrations Project & Contributors",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Terms of Use",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/termsofuse.html"], None},
+  ButtonNote->"http://demonstrations.wolfram.com/termsofuse.html"],
+  FontColor->GrayLevel[0.6]],
+ "\[ThickSpace]\[ThickSpace]\[ThickSpace]|\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+ StyleBox[ButtonBox["Make a new version of this Demonstration \
+\[RightGuillemet]",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/participate/upload.jsp?id=\
+BifurcationDiagramForTheRoesslerAttractor"], None},
+  ButtonNote->None],
+  FontColor->GrayLevel[0.6]]
+}], "Text",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellMargins->{{48, 10}, {20, 50}},
+ CellFrameMargins->{{6, 0}, {6, 6}},
+ CellFrameColor->GrayLevel[0.6],
+ FontFamily->"Verdana",
+ FontSize->9,
+ FontColor->GrayLevel[0.6]]
+}, Open  ]]
+}, Open  ]]
+},
+Editable->True,
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+CellInsertionPointCell->None,
+WindowSize->{710, 650},
+WindowMargins->{{Inherited, Inherited}, {Inherited, 0}},
+WindowElements->{
+ "StatusArea", "MemoryMonitor", "MagnificationPopUp", "VerticalScrollBar", 
+  "MenuBar"},
+WindowTitle->"Bifurcation Diagram for the R\[ODoubleDot]ssler Attractor - \
+Source",
+DockedCells->{},
+CellContext->Notebook,
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (November 7, 2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[650, 23, 185, 5, 70, "Section"],
+Cell[838, 30, 3700, 64, 70, "Section"],
+Cell[4541, 96, 6245, 156, 70, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10823, 257, 3884, 79, 70, "Output",
+ CellID->342113078],
+Cell[CellGroupData[{
+Cell[14732, 340, 209, 6, 70, "Section"],
+Cell[14944, 348, 102, 2, 70, "Text"]
+}, Close]]
+}, Open  ]],
+Cell[15072, 354, 708, 23, 70, "Text"],
+Cell[15783, 379, 500, 14, 70, "Text"],
+Cell[CellGroupData[{
+Cell[16308, 397, 355, 9, 70, "Text",
+ CellGroupingRules->{"SectionGrouping", 25}],
+Cell[16666, 408, 1057, 31, 70, "Text"],
+Cell[17726, 441, 436, 14, 70, "Text"],
+Cell[CellGroupData[{
+Cell[18187, 459, 815, 24, 70, "Text"],
+Cell[19005, 485, 1213, 33, 70, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+(* NotebookSignature LTjZ@zLqlxEYvBDySmWFY10i *)
