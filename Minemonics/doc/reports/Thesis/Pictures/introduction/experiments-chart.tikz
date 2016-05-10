@@ -36,12 +36,12 @@
 %###############################################
 \node(sinusoidal-controller-experiments)[right=0.7cm of chaotic-controller-experiments]{\underline{Sinusoidal controller experiments}};
 \node(sinusoidal-controller-image1)[below=0.1cm of sinusoidal-controller-experiments]{
-\includegraphics[scale=0.2]{results/evolved-creatures/sine/jumper1/jumper1-animation.png}
-\includegraphics[scale=0.2]{results/evolved-creatures/sine/jumper2/jumper2-animation.png}
+\includegraphics[scale=0.2]{Pictures/results/evolved-creatures/sine/jumper1/jumper1-animation.png}
+\includegraphics[scale=0.2]{Pictures/results/evolved-creatures/sine/jumper2/jumper2-animation.png}
 };
 \node(sinusoidal-controller-image2)[below=0cm of sinusoidal-controller-image1]{
-\includegraphics[scale=0.2]{results/evolved-creatures/sine/walker1/walker1-animation.png}
-\includegraphics[scale=0.2]{results/evolved-creatures/sine/walker2/walker2-animation.png}
+\includegraphics[scale=0.2]{Pictures/results/evolved-creatures/sine/walker1/walker1-animation.png}
+\includegraphics[scale=0.2]{Pictures/results/evolved-creatures/sine/walker2/walker2-animation.png}
 };
 \node(sinusoidal-controller-text)[below=0.1cm of sinusoidal-controller-image2,align=left]{
 \scriptsize{\begin{varwidth}{5cm}Evolving creatures using the sinusoidal controller\end{varwidth}}
@@ -101,11 +101,11 @@
 %###############################################
 %\node(dl-evolution-experiments)[below right =0.5cm and -4.1cm of direct-limiter-controller-text]{\scriptsize\underline{Evolved organism experiments}};
 \node(dl-evolution-experiments-image1)[below=0.8cm of direct-limiter-controller-image]{
-\includegraphics[scale=0.125]{results/evolved-creatures/chaotic/jumper1/jumper1-animation.png}
-\includegraphics[scale=0.28]{results/evolved-creatures/chaotic/crawler1/crawler1-animation.png}
+\includegraphics[scale=0.125]{Pictures/results/evolved-creatures/chaotic/jumper1/jumper1-animation.png}
+\includegraphics[scale=0.28]{Pictures/results/evolved-creatures/chaotic/crawler1/crawler1-animation.png}
 };
 \node(dl-evolution-experiments-image2)[below=0cm of dl-evolution-experiments-image1]{
-\includegraphics[scale=0.174]{results/evolved-creatures/chaotic/walker1/walker1-animation.png}
+\includegraphics[scale=0.174]{Pictures/results/evolved-creatures/chaotic/walker1/walker1-animation.png}
 };
 \node(dl-evolution-text)[below=0.55cm of dl-evolution-experiments-image2,align=left]{
 \scriptsize{\begin{varwidth}{6cm}Evolving creatures using directly limited chaotic controllers\end{varwidth}}
