@@ -1,25 +1,25 @@
 %% See the TeXed file for more explanations
 
 %% [OPT] Multi-rowed cells in tabulars
-\usepackage{multirow}
+%\usepackage{multirow}
 
 %% [REC] Intelligent cross reference package. This allows for nice
 %% combined references that include the reference and a hint to where
 %% to look for it.
-\usepackage{varioref}
+%\usepackage{varioref}
 
 %% [OPT] Easily changeable quotes with \enquote{Text}
 %\usepackage[german=swiss]{csquotes}
 
 %% [REC] Format dates and time depending on locale
-\usepackage{datetime}
+%\usepackage{datetime}
 
 %% [OPT] Provides a \cancel{} command to stroke through mathematics.
 %\usepackage{cancel}
 
 %% [NEED] This allows for additional typesetting tools in mathmode.
 %% See its excellent documentation.
-\usepackage{mathtools}
+%\usepackage{mathtools}
 
 %% [ADV] Conditional commands
 %\usepackage{ifthen}
@@ -32,7 +32,7 @@
 %\usepackage[h]{esvect}
 
 %% [NEED] Some extensions to tabulars and array environments.
-\usepackage{array}
+%\usepackage{array}
 
 %% [OPT] Postscript support via pstricks graphics package. Very
 %% diverse applications.
@@ -51,55 +51,55 @@
 %% [OPT] Fancy package for source code listings.  The template text
 %% needs it for some LaTeX snippets; remove/adapt the \lstset when you
 %% remove the template content.
-\usepackage{listings}
-\lstset{language=TeX,basicstyle={\normalfont\ttfamily}}
-\usepackage{color}
+%\usepackage{listings}
+%\lstset{language=TeX,basicstyle={\normalfont\ttfamily}}
+%\usepackage{color}
 
-\definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82}
-\definecolor{darkblue}{rgb}{0,0,.75}
+%\definecolor{mygreen}{rgb}{0,0.6,0}
+%\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+%\definecolor{mymauve}{rgb}{0.58,0,0.82}
+%\definecolor{darkblue}{rgb}{0,0,.75}
 
-\lstloadlanguages{Matlab} %use listings with Matlab for Pseudocode
-\lstnewenvironment{PseudoCode}[1][]
-{
-\lstset{ %
-  language=Matlab,
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\scriptsize,        % the size of the fonts that are used for the code
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-  frame=single,	                   % adds a frame around the code
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{darkblue},       % keyword style
-  language=Octave,                 % the language of the code
-  otherkeywords={*,...},           % if you want to add more keywords to the set
-  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-  numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{mymauve},     % string literal style
-  tabsize=2,	                   % sets default tabsize to 2 spaces
-  title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
-  #1
-}
-}
-{}
+%\lstloadlanguages{Matlab} %use listings with Matlab for Pseudocode
+%\lstnewenvironment{PseudoCode}[1][]
+%{
+%\lstset{ %
+%  language=Matlab,
+%  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+%  basicstyle=\scriptsize,        % the size of the fonts that are used for the code
+%  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+%  breaklines=true,                 % sets automatic line breaking
+%  captionpos=b,                    % sets the caption-position to bottom
+%  commentstyle=\color{mygreen},    % comment style
+%  deletekeywords={...},            % if you want to delete keywords from the given language
+%  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+%  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+%  frame=single,	                   % adds a frame around the code
+%  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+%  keywordstyle=\color{darkblue},       % keyword style
+%  language=Octave,                 % the language of the code
+%  otherkeywords={*,...},           % if you want to add more keywords to the set
+%  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+%  numbersep=5pt,                   % how far the line-numbers are from the code
+%  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+%  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+%  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+%  showstringspaces=false,          % underline spaces within strings only
+%  showtabs=false,                  % show tabs within strings adding particular underscores
+%  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+%  stringstyle=\color{mymauve},     % string literal style
+%  tabsize=2,	                   % sets default tabsize to 2 spaces
+%  title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+%  #1
+%}
+%}
+%{}
 
 %% [REC] Fancy character protrusion.  Must be loaded after all fonts.
 %\usepackage[activate]{pdfcprot}
 
 %% [REC] Nicer tables.  Read the excellent documentation.
-\usepackage{booktabs}
+%\usepackage{booktabs}
 
 %% International System measurement units (package texlive-science)
 %\usepackage{siunitx}
@@ -126,8 +126,8 @@
 \usepackage{subcaption}
 
 %%Long tables
-\usepackage{longtable}
-\usepackage{tabu}
+%\usepackage{longtable}
+%\usepackage{tabu}
 
 %% LaTeX' own graphics handling
 \usepackage{graphicx}
@@ -144,7 +144,7 @@
 %\usepackage[amsmath,thmmarks]{ntheorem}
 
 %different enumerations
-\usepackage{enumitem}
+%\usepackage{enumitem}
 
 %% Make document internal hyperlinks wherever possible. (TOC, references)
 %% This MUST be loaded after varioref, which is loaded in 'extrapackages'
@@ -152,20 +152,20 @@
 %\usepackage[linkcolor=black,colorlinks=true,urlcolor=black,citecolor=black,filecolor=black]{hyperref}
 
 
-\input{glyphtounicode}
-  \pdfgentounicode=1
-\usepackage{cmap}
+%\input{glyphtounicode}
+%  \pdfgentounicode=1
+%\usepackage{cmap}
 
-\usepackage{accsupp}
-\usepackage{calc}
-\usepackage{layouts}
-\usepackage{layout}
+%\usepackage{accsupp}
+%\usepackage{calc}
+%\usepackage{layouts}
+%\usepackage{layout}
 
  
-\mathtoolsset{showonlyrefs}
+%\mathtoolsset{showonlyrefs}
 
-\usepackage{xpatch}
-\xpretocmd{\eqref}{Equation ~}{}{}
+%\usepackage{xpatch}
+%\xpretocmd{\eqref}{Equation ~}{}{}
 
 % Lorem ipsum
 %\usepackage[]{blindtext}
@@ -173,18 +173,18 @@
 % include pdfs into the latex document
 \usepackage{pdfpages}
 %for landscape cheatsheet
-\usepackage{pdflscape}
+%\usepackage{pdflscape}
 
 
 % Units
-\usepackage{units}
+%\usepackage{units}
 
 % tables
-\usepackage{array}
-\usepackage{rotating}
-\usepackage{longtable}
+%\usepackage{array}
+%\usepackage{rotating}
+%\usepackage{longtable}
 
 %layout
-\usepackage{multicol}
-\setlength{\columnseprule}{0.4pt}
-\usepackage{chngpage}
+%\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+%\usepackage{chngpage}

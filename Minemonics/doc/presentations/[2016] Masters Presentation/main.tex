@@ -74,7 +74,7 @@
 
 \author{Benjamin Ellenberger}
 
-\title{Emergent Gait Periodicity in Evolved Creatures on Unknown Terrain}
+\title{Emergent Gait Periodicity in Evolved Creatures}
 
 \date{2015-05-18}
 
@@ -89,7 +89,16 @@
 %Introduction
 %- After a short Welcome, the audience has to be introduced to the question which you are going to answer in the talk or the story you are going to tell. Why is what you you present of relevance?
 %- For longer talks, it is better to start with an overview slide that explains the structure of the talk
-\subfile{sections/01.Introduction/Introduction.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%Introduction:
+%-Locomotion
+%-Classical example
+%-Simplifying control through simple limits
+%-Problem statement
+\subfile{sections/Introduction/Introduction.tex}
+
+%Use experiments overview and highlight /focus current experiment
+
 
 %########################
 %Methods
@@ -98,28 +107,68 @@
 %Results
 %- As soon as the audience knows what you did, you show them what you got
 %- Quantify in a understandable way - explain your measures
-\subfile{sections/02.3DVCE-Simulation/3DVCE-Simulation.tex}
-\subfile{sections/03.Chaos/Chaos.tex}
-\subfile{sections/04.Mathematica/Mathematica.tex}
-\subfile{sections/05.ModelLeg/ModelLeg.tex}
-\subfile{sections/06.Simulations/Simulations.tex}
+
+
+%Chaotic Systems:
+%-Introduction
+%-Chua circuit
+%-Simple limiter
+%-Manipulatable example
+\subfile{sections/Chaos/Chaos.tex}
+
+
+%Mathematica experiments:
+%-Overview slide with the plots highlighted one by one
+\subfile{sections/Mathematica/Mathematica.tex}
+
+
+%Minemonics -  3D Virtual Creature Simulator:
+%-Early work (Picture with Ninja, because every picture contains an invisible Ninja)
+%-Genotypes, Phenotypes and Embryogenesis
+%-Evolution, Fitness and the Reaper
+%-Numerical Physics Simulations and Problems
+\subfile{sections/3DVCE-Simulation/3DVCE-Simulation.tex}
+
+
+%Sinusoidal Controller:
+%-Overview
+%-Evolved creatures with videos
+\subfile{sections/Sinusoidal-Controllers/Sinusoidal-Controllers.tex}
+
+%Chaotic Controller:
+%-Overview of indirect and direct versions
+%-Model leg
+%-Overview slides with the controller and dynamics plots highlighted one by one
+%-Simulated Creatures with videos
+\subfile{sections/Chaotic-Controllers/Chaotic-Controllers.tex}
 
 %########################
 %Discussion
 %- Discuss what you got
-\subfile{sections/07.Discussion/Discussion.tex}
+\subfile{sections/Discussion/Discussion.tex}
 
 %########################
 %Conclusion
 %- Contextualize and summon your findings
 %- Refer back to your introduction
 %- Sell your findings to the audience - everyone should walk out of the room with the good feeling that they learned something
-\subfile{sections/08.Conclusion/Conclusion.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Conclusion: (Always add picture to underline the conclusions)
+%-Soft limiters simplify the stabilization of periodic orbits
+%-In the model leg, joint damping, joint driving force and ground limiter were explored
+%-Creature using the sinusoidal and directly limited chaotic controller could be evolved
+%-Controllers based on an arbitrarily chosen chaotic system and varying state space limitation through a simple limiter can cause different adaptive locomotion gait patterns to emerge.
+%-Varying limiters make the leg dynamics vary, an indication of a change of the applied limiters
+\subfile{sections/Conclusion/Conclusion.tex}
 
 %########################
 %Outlook
 %- Present the next steps
-\subfile{sections/09.Outlook/Outlook.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%-Gait efficiency fitness using an energy function
+%-Gait stability to perturbations using the Largest Lyapunov Exponent
+%-Evolutionary variation of joint driving force as another limiter
+\subfile{sections/Outlook/Outlook.tex}
 
 %########################
 %Acknowledgements
@@ -128,12 +177,12 @@
 %- Thank the audience for their attention (not necessary for conferences)
 %- If you put pictures of the main contributors of the presented work on the acknowledgement slide, it’s easier for the audience to associate them to the work presented.
 %- It’s also fair and sometimes even mandatory to mention your funding institutions (incl. logo?) on one of the last slides
-\subfile{sections/10.Acknowledgements/Acknowledgements.tex}
+\subfile{sections/Acknowledgements/Acknowledgements.tex}
 
 %########################
 %Backup Slides
 %- Keep some supplementary material on backup slides to reply on questions on content which you were not capable of presenting (due to the restricted time)
-\subfile{sections/11.Backup-Slides/Backup-Slides.tex}
+\subfile{sections/Backup-Slides/Backup-Slides.tex}
 
 \begin{comment}
 \begin{frame}
