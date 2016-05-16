@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     20576,        511]
-NotebookOptionsPosition[     20018,        488]
-NotebookOutlinePosition[     20354,        503]
-CellTagsIndexPosition[     20311,        500]
+NotebookDataLength[     19518,        494]
+NotebookOptionsPosition[     19203,        478]
+NotebookOutlinePosition[     19539,        493]
+CellTagsIndexPosition[     19496,        490]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -231,264 +231,254 @@ Cell[BoxData[{
         RowBox[{"{", 
          RowBox[{"softness", ",", "limitValue", ",", "T"}], "}"}], ",", 
         RowBox[{"MaxSteps", "\[Rule]", "\[Infinity]"}]}], "]"}]}]}], "]"}], 
-   ";"}], "\n"}], "\[IndentingNewLine]", 
- RowBox[{"Manipulate", "[", 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ymin", " ", "=", " ", 
+   RowBox[{"-", "0.5"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{
-   RowBox[{"ParametricPlot3D", "[", 
-    RowBox[{
+   RowBox[{"ymax", " ", "=", " ", "0.5"}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"softLim", "[", 
+    RowBox[{"x_", ",", "softness_", ",", "limitValue_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "/", "2"}], ")"}], "*", 
+    RowBox[{"(", 
      RowBox[{
-      RowBox[{"pfun", "[", 
-       RowBox[{"softness", ",", "limitValue", ",", "T"}], "]"}], "/.", 
-      RowBox[{"t", "\[Rule]", "u"}]}], ",", 
-     RowBox[{"{", 
-      RowBox[{"u", ",", "n", ",", "T"}], "}"}], ",", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{"PlotRange", "\[Rule]", 
-        RowBox[{"5", " ", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
-           RowBox[{"{", 
-            RowBox[{
-             RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], ","}], 
-      "*)"}], 
-     RowBox[{"ColorFunction", "->", 
-      RowBox[{"Function", "[", 
+      RowBox[{"Tanh", "[", " ", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"x", ",", "y", ",", "z", ",", "u"}], "}"}], ",", 
-        RowBox[{
-         RowBox[{"ColorData", "[", 
+        RowBox[{"(", 
+         RowBox[{"limitValue", "-", "x"}], ")"}], "/", "softness"}], "]"}], 
+      "+", "1"}], ")"}]}]}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "A", " ", "soft", " ", "limiter", " ", "using", " ", "a", " ", "tanh"}], 
+   " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Grid", "[", 
+     RowBox[{
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"ParametricPlot3D", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"pfun", "[", 
+            RowBox[{"softness", ",", "limitValue", ",", "T"}], "]"}], "/.", 
+           RowBox[{"t", "\[Rule]", "u"}]}], ",", 
           RowBox[{"{", 
-           RowBox[{"\"\<TemperatureMap\>\"", ",", "\"\<Reverse\>\""}], "}"}], 
-          "]"}], "[", 
-         RowBox[{"(", 
-          RowBox[{"Tanh", "[", " ", 
+           RowBox[{"u", ",", "n", ",", "T"}], "}"}], ",", 
+          RowBox[{"(*", 
            RowBox[{
-            RowBox[{"(", 
-             RowBox[{"limitValue", "-", "x"}], ")"}], "/", "softness"}], 
-           "]"}], ")"}], "]"}]}], "]"}]}], ",", 
-     RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}], ",", 
-     RowBox[{"ImageSize", "\[Rule]", "1000"}], ",", 
-     RowBox[{"Axes", "\[Rule]", "True"}], ",", 
-     RowBox[{"AxesLabel", "\[Rule]", 
+            RowBox[{"PlotRange", "\[Rule]", 
+             RowBox[{"5", " ", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}]}], ","}], 
+           "*)"}], 
+          RowBox[{"ColorFunction", "->", 
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x", ",", "y", ",", "z", ",", "u"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"ColorData", "[", 
+               RowBox[{"{", 
+                RowBox[{"\"\<TemperatureMap\>\"", ",", "\"\<Reverse\>\""}], 
+                "}"}], "]"}], "[", 
+              RowBox[{"(", 
+               RowBox[{"Tanh", "[", " ", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"limitValue", "-", "x"}], ")"}], "/", "softness"}], 
+                "]"}], ")"}], "]"}]}], "]"}]}], ",", 
+          RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}]}], "]"}], ",", 
+        
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{"{", 
+          RowBox[{"Thick", ",", "Red", ",", 
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"limitValue", ",", "ymin", ",", 
+                RowBox[{"-", "2.4"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"limitValue", ",", "ymax", ",", 
+                RowBox[{"-", "2.4"}]}], "}"}]}], "}"}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"\"\<Softness: \>\"", "<>", 
+              RowBox[{"ToString", "[", "softness", "]"}]}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"limitValue", "+", "0.1"}], ",", "ymax", ",", 
+               RowBox[{"-", "2.4"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"Text", "[", 
+            RowBox[{
+             RowBox[{"\"\<limitValue: \>\"", "<>", 
+              RowBox[{"ToString", "[", "limitValue", "]"}]}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"limitValue", "+", "0.1"}], ",", "ymax", ",", 
+               RowBox[{
+                RowBox[{"-", "2.4"}], "-", "0.7"}]}], "}"}]}], "]"}]}], "}"}],
+          "]"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "1000"}], ",", 
+        RowBox[{"BaseStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"FontSize", "\[Rule]", 
+           RowBox[{"Scaled", "[", ".02", "]"}]}], "}"}]}], ",", 
+        RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+        RowBox[{"AxesLabel", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}], 
+        ",", 
+        RowBox[{"BoxRatios", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", 
+           RowBox[{"1", "/", "GoldenRatio"}]}], "}"}]}], ",", 
+        RowBox[{"ImagePadding", "\[Rule]", "100"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"softLim", "[", 
+         RowBox[{"x", ",", "softness", ",", "limitValue"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{"-", "15"}], ",", "15"}], "}"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"1", ",", "0.8", ",", "0"}], "]"}], ",", 
+            RowBox[{"Thickness", "[", "0.0025", "]"}]}], "}"}], "}"}]}], ",", 
+        
+        RowBox[{"BaseStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"FontSize", "\[Rule]", 
+           RowBox[{"Scaled", "[", ".02", "]"}]}], "}"}]}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "1000"}]}], "]"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
       RowBox[{"{", 
-       RowBox[{"\"\<x\>\"", ",", "\"\<y\>\"", ",", "\"\<z\>\""}], "}"}]}], 
-     ",", 
-     RowBox[{"BoxRatios", "\[Rule]", 
+       RowBox[{"softness", ",", "0.5"}], "}"}], ",", "0.1", ",", "10", ",", 
+      "0.01"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
       RowBox[{"{", 
-       RowBox[{"1", ",", "1", ",", 
-        RowBox[{"1", "/", "GoldenRatio"}]}], "}"}]}]}], "]"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"softness", ",", "0.13"}], "}"}], ",", "0.1", ",", "10", ",", 
-     "0.01"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"limitValue", ",", "2.2"}], "}"}], ",", "0", ",", "4", ",", 
-     "0.01"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"T", ",", "30"}], "}"}], ",", "1", ",", "300"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"n", ",", "0"}], "}"}], ",", "0", ",", 
-     RowBox[{"T", "-", "1"}]}], "}"}]}], "]"}]}], "Input",
+       RowBox[{"limitValue", ",", "2.5"}], "}"}], ",", "0", ",", "4", ",", 
+      "0.01"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"T", ",", "30"}], "}"}], ",", "1", ",", "300"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0"}], "}"}], ",", "0", ",", 
+      RowBox[{"T", "-", "1"}]}], "}"}]}], "]"}]}]}], "Input",
  CellChangeTimes->{{3.664101399794956*^9, 3.664110813429249*^9}, 
-   3.66418963856461*^9}],
+   3.66418963856461*^9, {3.672388391077355*^9, 3.672389998519013*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`limitValue$$ = 2.2, $CellContext`n$$ = 
-    0, $CellContext`softness$$ = 0.13, $CellContext`T$$ = 30, Typeset`show$$ =
-     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+   DynamicModuleBox[{$CellContext`limitValue$$ = 2.5, $CellContext`n$$ = 
+    0, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 30, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{{
-       Hold[$CellContext`softness$$], 0.13}, 0.1, 10, 0.01}, {{
-       Hold[$CellContext`limitValue$$], 2.2}, 0, 4, 0.01}, {{
+       Hold[$CellContext`softness$$], 0.5}, 0.1, 10, 0.01}, {{
+       Hold[$CellContext`limitValue$$], 2.5}, 0, 4, 0.01}, {{
        Hold[$CellContext`T$$], 30}, 1, 300}, {{
        Hold[$CellContext`n$$], 0}, 0, 
-      Dynamic[$CellContext`T$$ - 1]}}, Typeset`size$$ = {1000., {440., 445.}},
+      Dynamic[$CellContext`T$$ - 1]}}, Typeset`size$$ = {2068., {452., 480.}},
      Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`softness$3891$$ = 0, $CellContext`limitValue$3892$$ = 
-    0, $CellContext`T$3893$$ = 0, $CellContext`n$3894$$ = 0}, 
+    True, $CellContext`softness$12648$$ = 0, $CellContext`limitValue$12649$$ =
+     0, $CellContext`T$12650$$ = 0, $CellContext`n$12651$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
-      "Variables" :> {$CellContext`limitValue$$ = 2.2, $CellContext`n$$ = 
-        0, $CellContext`softness$$ = 0.13, $CellContext`T$$ = 30}, 
+      "Variables" :> {$CellContext`limitValue$$ = 2.5, $CellContext`n$$ = 
+        0, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 30}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`softness$$, $CellContext`softness$3891$$, 0], 
-        Hold[$CellContext`limitValue$$, $CellContext`limitValue$3892$$, 0], 
-        Hold[$CellContext`T$$, $CellContext`T$3893$$, 0], 
-        Hold[$CellContext`n$$, $CellContext`n$3894$$, 0]}, 
+        Hold[$CellContext`softness$$, $CellContext`softness$12648$$, 0], 
+        Hold[$CellContext`limitValue$$, $CellContext`limitValue$12649$$, 0], 
+        Hold[$CellContext`T$$, $CellContext`T$12650$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$12651$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
         Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$}, "Body" :> ParametricPlot3D[
-        ReplaceAll[
-         $CellContext`pfun[$CellContext`softness$$, \
+         Typeset`skipInitDone$$}, "Body" :> Grid[
+        Show[
+         ParametricPlot3D[
+          ReplaceAll[
+           $CellContext`pfun[$CellContext`softness$$, \
 $CellContext`limitValue$$, $CellContext`T$$], $CellContext`t -> \
 $CellContext`u], {$CellContext`u, $CellContext`n$$, $CellContext`T$$}, 
-        ColorFunction -> 
-        Function[{$CellContext`x$, $CellContext`y$, $CellContext`z$, \
+          ColorFunction -> 
+          Function[{$CellContext`x$, $CellContext`y$, $CellContext`z$, \
 $CellContext`u$}, 
-          ColorData[{"TemperatureMap", "Reverse"}][
+            ColorData[{"TemperatureMap", "Reverse"}][
+             
+             Tanh[($CellContext`limitValue$$ - \
+$CellContext`x$)/$CellContext`softness$$]]], ColorFunctionScaling -> False], 
+         Graphics3D[{Thick, Red, 
            
-           Tanh[($CellContext`limitValue$$ - \
-$CellContext`x$)/$CellContext`softness$$]]], ColorFunctionScaling -> False, 
-        ImageSize -> 1000, Axes -> True, AxesLabel -> {"x", "y", "z"}, 
-        BoxRatios -> {1, 1, 1/GoldenRatio}], 
-      "Specifications" :> {{{$CellContext`softness$$, 0.13}, 0.1, 10, 
-         0.01}, {{$CellContext`limitValue$$, 2.2}, 0, 4, 
+           Line[{{$CellContext`limitValue$$, $CellContext`ymin, -2.4}, \
+{$CellContext`limitValue$$, $CellContext`ymax, -2.4}}], 
+           Text[
+            StringJoin["Softness: ", 
+             ToString[$CellContext`softness$$]], {$CellContext`limitValue$$ + 
+             0.1, $CellContext`ymax, -2.4}], 
+           Text[
+            StringJoin["limitValue: ", 
+             ToString[$CellContext`limitValue$$]], {$CellContext`limitValue$$ + 
+             0.1, $CellContext`ymax, -2.4 - 0.7}]}], ImageSize -> 1000, 
+         BaseStyle -> {FontSize -> Scaled[0.02]}, Axes -> True, 
+         AxesLabel -> {"x", "y", "z"}, BoxRatios -> {1, 1, 1/GoldenRatio}, 
+         ImagePadding -> 100], 
+        Plot[
+         $CellContext`softLim[$CellContext`x, $CellContext`softness$$, \
+$CellContext`limitValue$$], {$CellContext`x, -15, 15}, PlotStyle -> {{
+            RGBColor[1, 0.8, 0], 
+            Thickness[0.0025]}}, BaseStyle -> {FontSize -> Scaled[0.02]}, 
+         ImageSize -> 1000]], 
+      "Specifications" :> {{{$CellContext`softness$$, 0.5}, 0.1, 10, 
+         0.01}, {{$CellContext`limitValue$$, 2.5}, 0, 4, 
          0.01}, {{$CellContext`T$$, 30}, 1, 300}, {{$CellContext`n$$, 0}, 0, 
          Dynamic[$CellContext`T$$ - 1]}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{1047., {522., 529.}},
+     ImageSizeCache->{2115., {567., 574.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
     SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
     UnsavedVariables:>{Typeset`initDone$$},
     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{3.664189640201159*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- TagBox[
-  StyleBox[
-   DynamicModuleBox[{$CellContext`limitValue$$ = 2.292, $CellContext`n$$ = 
-    29.892999999999997`, $CellContext`softness$$ = 0.5, $CellContext`T$$ = 
-    84.5, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
-    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
-    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
-       Hold[$CellContext`softness$$], 0.13}, 0.1, 10, 0.01}, {{
-       Hold[$CellContext`limitValue$$], 2.2}, 0, 4, 0.01}, {{
-       Hold[$CellContext`T$$], 30}, 1, 300}, {{
-       Hold[$CellContext`n$$], 0}, 0, 
-      Dynamic[$CellContext`T$$ - 1]}}, Typeset`size$$ = {1000., {439., 445.}},
-     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`softness$74042$$ = 0, $CellContext`limitValue$74043$$ =
-     0, $CellContext`T$74044$$ = 0, $CellContext`n$74045$$ = 0}, 
-    DynamicBox[Manipulate`ManipulateBoxes[
-     1, StandardForm, 
-      "Variables" :> {$CellContext`limitValue$$ = 2.2, $CellContext`n$$ = 
-        0, $CellContext`softness$$ = 0.13, $CellContext`T$$ = 30}, 
-      "ControllerVariables" :> {
-        Hold[$CellContext`softness$$, $CellContext`softness$74042$$, 0], 
-        Hold[$CellContext`limitValue$$, $CellContext`limitValue$74043$$, 0], 
-        Hold[$CellContext`T$$, $CellContext`T$74044$$, 0], 
-        Hold[$CellContext`n$$, $CellContext`n$74045$$, 0]}, 
-      "OtherVariables" :> {
-       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
-        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
-        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
-         Typeset`skipInitDone$$}, "Body" :> ParametricPlot3D[
-        ReplaceAll[
-         $CellContext`pfun[$CellContext`softness$$, \
-$CellContext`limitValue$$, $CellContext`T$$], $CellContext`t -> \
-$CellContext`u], {$CellContext`u, $CellContext`n$$, $CellContext`T$$}, 
-        ColorFunction -> 
-        Function[{$CellContext`x$, $CellContext`y$, $CellContext`z$, \
-$CellContext`u$}, 
-          ColorData[{"TemperatureMap", "Reverse"}][
-           
-           Tanh[($CellContext`limitValue$$ - \
-$CellContext`x$)/$CellContext`softness$$]]], ColorFunctionScaling -> False, 
-        ImageSize -> 1000, Axes -> True, AxesLabel -> {"x", "y", "z"}, 
-        BoxRatios -> {1, 1, 1/GoldenRatio}], 
-      "Specifications" :> {{{$CellContext`softness$$, 0.13}, 0.1, 10, 
-         0.01}, {{$CellContext`limitValue$$, 2.2}, 0, 4, 
-         0.01}, {{$CellContext`T$$, 30}, 1, 300}, {{$CellContext`n$$, 0}, 0, 
-         Dynamic[$CellContext`T$$ - 1]}}, "Options" :> {}, 
-      "DefaultOptions" :> {}],
-     ImageSizeCache->{1047., {521., 528.}},
-     SingleEvaluation->True],
-    Deinitialization:>None,
-    DynamicModuleValues:>{},
-    SynchronousInitialization->True,
-    UnsavedVariables:>{Typeset`initDone$$},
-    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
-   Deployed->True,
-   StripOnInput->False],
-  Manipulate`InterpretManipulate[1]]], "Input",
- CellChangeTimes->{3.664110046830401*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"InterpolatingFunction", "::", "dmval"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Input value \[NoBreak]\\!\\({11.500353822857143`}\\)\
-\[NoBreak] lies outside the range of data in the interpolating function. \
-Extrapolation will be used. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/InterpolatingFunction/dmval\\\", \
-ButtonNote -> \\\"InterpolatingFunction::dmval\\\"]\\)\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.6641102702041683`*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"InterpolatingFunction", "::", "dmval"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Input value \[NoBreak]\\!\\({11.500353822857143`}\\)\
-\[NoBreak] lies outside the range of data in the interpolating function. \
-Extrapolation will be used. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/InterpolatingFunction/dmval\\\", \
-ButtonNote -> \\\"InterpolatingFunction::dmval\\\"]\\)\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.664110270223445*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"InterpolatingFunction", "::", "dmval"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Input value \[NoBreak]\\!\\({11.500353822857143`}\\)\
-\[NoBreak] lies outside the range of data in the interpolating function. \
-Extrapolation will be used. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
-ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/InterpolatingFunction/dmval\\\", \
-ButtonNote -> \\\"InterpolatingFunction::dmval\\\"]\\)\"\>"}]], "Message", \
-"MSG",
- CellChangeTimes->{3.66411027024848*^9}],
-
-Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"General", "::", "stop"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Further output of \
-\[NoBreak]\\!\\(\\*StyleBox[\\(InterpolatingFunction :: dmval\\), \
-\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
-\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
-ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
-ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.664110270249236*^9}]
+ CellChangeTimes->{{3.672389824815024*^9, 3.672389999487692*^9}}]
 }, Open  ]]
 },
 WindowSize->{2880, 1527},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+FrontEndVersion->"10.3 for Linux x86 (64-bit) (October 9, 2015)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -503,15 +493,8 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[579, 22, 10996, 285, 935, "Input"],
-Cell[11578, 309, 3026, 58, 1101, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[14641, 372, 3054, 58, 1066, "Input"],
-Cell[17698, 432, 585, 12, 24, "Message"],
-Cell[18286, 446, 583, 12, 24, "Message"],
-Cell[18872, 460, 582, 12, 24, "Message"],
-Cell[19457, 474, 545, 11, 24, "Message"]
+Cell[579, 22, 14519, 371, 1089, "Input"],
+Cell[15101, 395, 4086, 80, 1191, "Output"]
 }, Open  ]]
 }
 ]
