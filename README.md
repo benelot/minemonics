@@ -110,16 +110,16 @@ A multistage optimization problem](Minemonics/doc/presentations/[2015] Auditory 
 Here are some of the evolved creatures using simple oscillators (in this case sinusoids with different frequencies/amplitudes/offsets):
 
 ### Jumper 1:
-[![Jumper 1](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-265490-jumper-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-265490-jumper-.mp4)
+[![Jumper 1](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-265490-jumper-.gif?raw=true)](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-265490-jumper-.mp4)
 
 ### Jumper 2:
-[![Jumper 2](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45474728-jumper-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45474728-jumper-.mp4)
+[![Jumper 2](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-45474728-jumper-.gif?raw=true)](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-45474728-jumper-.mp4)
 
 ### Walker 1:
-[![Walker 1](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45099537-walker-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45099537-walker-.mp4)
+[![Walker 1](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-45099537-walker-.gif?raw=true)](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-45099537-walker-.mp4)
 
 ### Walker 2:
-[![Walker 2](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45209411-walker-.gif?raw=true)](Minemonics/doc/presentations/[2015] Auditory Informatics II/figs/videos/Minemonics-45209411-walker-.mp4)
+[![Walker 2](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-45209411-walker-.gif?raw=true)](Minemonics/doc/presentations/%5B2015%5D%20Auditory%20Informatics%20II/figs/videos/Minemonics-45209411-walker-.mp4)
 
 <!--
 ## Milestone 6: Experiments on Gait Periodicity
